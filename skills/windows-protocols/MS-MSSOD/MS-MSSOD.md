@@ -268,7 +268,7 @@ This document uses the following terms:
 
 [MS-MSB] Microsoft Corporation, "[Media Stream Broadcast (MSB) Protocol](../MS-MSB/MS-MSB.md)".
 
-[MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](#Section_2.3.1)".
+[MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
 [MS-RTSP] Microsoft Corporation, "[Real-Time Streaming Protocol (RTSP) Windows Media Extensions](../MS-RTSP/MS-RTSP.md)".
 
@@ -359,7 +359,7 @@ Components that use the Media Streaming Server (MSS) system external protocols a
 
 The MSS system is used to deliver real-time multimedia data by streaming it. The term [**streaming**](#gt_streaming) means that the data is transmitted at some fixed rate or at some rate that is related to the rate at which the data will be consumed, for example, displayed by the receiver.
 
-The applicability of each member protocol that is supported by the system, as described in section [2.2](#Section_2.2), depends on the use cases in section [2.5](#Section_2.1) and the protocol relevance, as described in section [2.3](#Section_2.3).
+The applicability of each member protocol that is supported by the system, as described in section [2.2](#Section_2.2), depends on the use cases in section [2.5](#Section_2.5) and the protocol relevance, as described in section [2.3](#Section_2.3).
 
 For individual protocol applicability, see the specifications of the protocols that are supported by the MSS system, as listed in section 2.2.
 
@@ -481,7 +481,7 @@ Other optional components include the Digital Rights Management (DRM) license se
 
 The success of the MSS system depends on a number of prerequisite factors for it to be configured and used by server and client computers. There are core networking protocols and services that are required to be open, running, and configured in order to correctly communicate with each other.
 
-The network has to be capable of supporting TCP/IP traffic, such as TCP and UDP. Firewall ports are required to be opened to allow all network traffic to flow between clients, servers, and encoders. For authenticated streaming, the server, encoders, and clients are required to support the NT LAN Manager (NTLM) Authentication Protocol, as described in [MS-NLMP](#Section_2.3.1)or digest.
+The network has to be capable of supporting TCP/IP traffic, such as TCP and UDP. Firewall ports are required to be opened to allow all network traffic to flow between clients, servers, and encoders. For authenticated streaming, the server, encoders, and clients are required to support the NT LAN Manager (NTLM) Authentication Protocol, as described in [MS-NLMP](../MS-NLMP/MS-NLMP.md)or digest.
 
 Finally, in some cases, the protocol does not provide a mechanism for a client to discover the URL to the server. Therefore, the client has to discover this data in another way, either by putting a URL to the server as a hyperlink in a webpage, or by using a [**redirector file**](#gt_redirector-file), such as an .nsc file or .asx file.
 
@@ -515,7 +515,7 @@ The Media Streaming Server (MSS) system can optionally support authentication; h
 
 - If the system uses the Windows Media HTTP Push Distribution Protocol (WMHTTP) or the Real-Time Streaming Protocol (RTSP) Windows Media Extensions (RTSP-WME), then the system has to support HTTP access authentication as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 11.
 - For the Windows Media HTTP Streaming Protocol (WMSP), the authentication system is based on HTTP 1.0, and therefore, to support authentication, the client and servers are required to support access authentication, as specified in HTTP 1.0 [[RFC1945]](https://go.microsoft.com/fwlink/?LinkId=90300) section 11.
-- The Microsoft Media Server (MMS) Protocol (MMSP) supports Basic authentication (as specified in [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373)) and NT LAN Manager (NTLM) authentication (as specified in [MS-NLMP](#Section_2.3.1)).
+- The Microsoft Media Server (MMS) Protocol (MMSP) supports Basic authentication (as specified in [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373)) and NT LAN Manager (NTLM) authentication (as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md)).
 - The Media Stream Broadcast (MSB) Protocol and the Media Stream Broadcast Distribution (MSBD) Protocol do not support authentication natively.
 <a id="Section_2.3.2"></a>
 ### 2.3.2 Media Player Client
@@ -966,7 +966,7 @@ There are no additional considerations.
 <a id="Section_3"></a>
 # 3 Examples
 
-This section contains a set of examples that describe common uses of the Media Streaming Server Protocols. These following examples provide more details of the use cases as described in section [2.5](#Section_2.1).
+This section contains a set of examples that describe common uses of the Media Streaming Server Protocols. These following examples provide more details of the use cases as described in section [2.5](#Section_2.5).
 
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Encoder Push Content to Media Server
@@ -1100,7 +1100,7 @@ The following diagram shows the communication flow between the media player appl
 Figure 17: Unicast playback communication flow using WMSP
 
 - Content request: The trigger for the unicast playback is the media player application providing the content URL to the media player client. The media player client uses the content URL to initiate the discovery. For examples of the exact message content and format, see the individual member protocol TDs. After receiving the request to stream from the media player application, the media player client establishes a TCP connection to the server by using the IP address and port number obtained from the URL that is provided by the media player application. With the IP address known, the client can request to configure the server for streaming. How this is accomplished is protocol-specific. For examples of the exact message content and format, see [MS-WMSP](../MS-WMSP/MS-WMSP.md) section 3.1.4.2.1.
-- As part of the Describe request for [MS-WMSP] section 3.1.4.2.1, the client can request packet-pair bandwidth estimation. See section [3.3](../MS-WMSP/MS-WMSP.md) for more details on packet-pair bandwidth estimation.
+- As part of the Describe request for [MS-WMSP] section 3.1.4.2.1, the client can request packet-pair bandwidth estimation. See section [3.3](#Section_3.3) for more details on packet-pair bandwidth estimation.
 - Content response: The media player client obtains information on the stream itself. With WMSP, this data is included in the Describe response. The Describe response includes stream-specific information. For examples of the exact message content and format for WMSP, see [MS-WMSP] section 3.1.5.5. This Describe response is the same Describe response that is described in section 3.3 step 3.
 - $M and $H packets: After the content response, the media server sends $M and $H packets. These packets include stream-specific information. This information can be used by the higher layer to select a specific stream during the Play request in step 9. For examples of the exact message content and format, see [MS-WMSP] sections 3.1.5.7 and 3.1.5.8.
 - Play request: As part of the Play request, the media player client specifies which stream to play. For examples of the exact message content and format for WMSP, see [MS-WMSP] section 3.1.4.3.1.
@@ -1116,7 +1116,7 @@ The following figure shows the packet-pair bandwidth estimation message sequence
 
 Figure 18: Estimation of packet-pair bandwidth communication flow
 
-1. Packet-pair request: After the successful connection to a server that supports packet-pair bandwidth estimation, the media player client can request a packet-pair bandwidth test from the media server. The requests are different depending on whether the transport negotiated was TCP or UDP. For examples of the exact message content and format for the Real Time Streaming Protocol (RTSP), see [MS-RTSP](../MS-RTSP/MS-RTSP.md) sections 3.1.4.2.1 and 2.2.7.12. For examples of the exact message content and format for WMSP, see [MS-WMSP](../MS-WMSP/MS-WMSP.md) section 3.1.4.2.1, [MS-WMSP] section 2.2.1.4.14, and [MS-WMSP] section 2.2.1.7.3. With WMSP, the Describe request is actually the same Describe request as described in section [3.3](../MS-RTSP/MS-RTSP.md), step 1.
+1. Packet-pair request: After the successful connection to a server that supports packet-pair bandwidth estimation, the media player client can request a packet-pair bandwidth test from the media server. The requests are different depending on whether the transport negotiated was TCP or UDP. For examples of the exact message content and format for the Real Time Streaming Protocol (RTSP), see [MS-RTSP](../MS-RTSP/MS-RTSP.md) sections 3.1.4.2.1 and 2.2.7.12. For examples of the exact message content and format for WMSP, see [MS-WMSP](../MS-WMSP/MS-WMSP.md) section 3.1.4.2.1, [MS-WMSP] section 2.2.1.4.14, and [MS-WMSP] section 2.2.1.7.3. With WMSP, the Describe request is actually the same Describe request as described in section [3.3](#Section_3.3), step 1.
 
 2-4. First, second, and third data packets: Each data packet contains packet-pair data that is sent to the client. For examples of the exact message content and format for RTSP-WME, see [MS-RTSP] section 2.2.3.2. For examples of the exact message content and format for WMSP, see [MS-WMSP] section 2.2.3.7.
 

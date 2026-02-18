@@ -573,7 +573,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.4)".
+[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-MQMR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Management Protocol](../MS-MQMR/MS-MQMR.md)".
 
@@ -645,7 +645,7 @@ None.
 <a id="Section_1.7"></a>
 ## 1.7 Vendor-Extensible Fields
 
-Some structures in this document use **HRESULT** values as defined in [MS-ERREF](#Section_2.4) section 2.1. Vendors can define their own **HRESULT** values, provided that they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
+Some structures in this document use **HRESULT** values as defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1. Vendors can define their own **HRESULT** values, provided that they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
 
 <a id="Section_2"></a>
 # 2 Definitions and Structures
@@ -1323,7 +1323,7 @@ VT_VECTOR = 0x1000,
 
 **VT_BOOL:** (0x000B): The type of the contained field MUST be [VARIANT_BOOL (section 2.2.14)](#Section_2.2.14).
 
-**VT_VARIANT:** (0x000C): The type of the contained field MUST be [CAPROPVARIANT (section 2.2.16.8)](#Section_2.2.13). It MUST appear with the bit flag VT_VECTOR.
+**VT_VARIANT:** (0x000C): The type of the contained field MUST be [CAPROPVARIANT (section 2.2.16.8)](#Section_2.2.16.8). It MUST appear with the bit flag VT_VECTOR.
 
 **VT_I1:** (0x0010): The type of the contained field MUST be a 1-byte integer.
 
@@ -1348,7 +1348,7 @@ VT_VECTOR = 0x1000,
 <a id="Section_2.2.12.1"></a>
 #### 2.2.12.1 VARTYPE
 
-The VARTYPE holds [VARENUM (section 2.2.12)](#Section_2.2.13) enumerated values.
+The VARTYPE holds [VARENUM (section 2.2.12)](#Section_2.2.12) enumerated values.
 
 This type is declared as follows:
 
@@ -1357,7 +1357,7 @@ typedef unsigned short VARTYPE;
 <a id="Section_2.2.13"></a>
 ### 2.2.13 PROPVARIANT
 
-The [PROPVARIANT (section 2.2.13.2)](#Section_2.2.13) is a container for a union that can hold many types of data.
+The [PROPVARIANT (section 2.2.13.2)](#Section_2.2.13.2) is a container for a union that can hold many types of data.
 
 <a id="Section_2.2.13.1"></a>
 #### 2.2.13.1 tag_inner_PROPVARIANT
@@ -1462,7 +1462,7 @@ CAPROPVARIANT capropvar;
 
 } tag_inner_PROPVARIANT;
 
-**vt:** MUST be set to one of the values as specified in section [2.2.12](#Section_2.2.13).
+**vt:** MUST be set to one of the values as specified in section [2.2.12](#Section_2.2.12).
 
 **wReserved1:** MAY be set to 0x00 and MUST be ignored by the recipient.
 
@@ -1641,7 +1641,7 @@ unsigned long cElems;
 <a id="Section_2.2.16.8"></a>
 #### 2.2.16.8 CAPROPVARIANT
 
-The CAPROPVARIANT structure defines a counted array of [PROPVARIANT (section 2.2.13.2)](#Section_2.2.13) values.
+The CAPROPVARIANT structure defines a counted array of [PROPVARIANT (section 2.2.13.2)](#Section_2.2.13.2) values.
 
 typedef struct tagCAPROPVARIANT {
 
@@ -1743,7 +1743,7 @@ packet-beta
 | --- | --- |
 | 0x0001 | **FormatName** contains a [PublicQueueFormatName](#Section_2.2.18.1.7.1) structure. |
 | 0x0002 | **FormatName** contains a [PrivateQueueFormatName](#Section_2.2.18.1.7.2) structure. |
-| 0x0003 | **FormatName** contains an [MQFDirectQueueFormatName](#Section_2.2.18.1.5.2) structure. |
+| 0x0003 | **FormatName** contains an [MQFDirectQueueFormatName](#Section_2.2.18.1.4.1) structure. |
 | 0x0006 | **FormatName** contains an [MQFDistributionQueueFormatName](#Section_2.2.18.1.4.2) structure. |
 
 <a id="Section_2.2.18.1.4.1"></a>
@@ -2224,7 +2224,7 @@ Where the bits are defined as:
 
 If this header appears inside an administration acknowledgment message, as specified in [MS-MQQB] section 3.1.5.8.10, then this field MUST be set to a [MessageIdentifier](#Section_2.2.18.1.3) consisting of **UserMessage.UserHeader.MessageID** and **UserMessage.UserHeader.SourceQueueManager** of the message being acknowledged. See section 2.2.18.1.3 for details of the MessageIdentifier type.
 
-**BodyType (4 bytes):** A 32-bit unsigned integer that specifies the type of data that is contained in the [**message body**](#gt_message-body). This value MUST be set to a [PROPVARIANT](#Section_2.2.13) type constant as specified in section 2.2.12.
+**BodyType (4 bytes):** A 32-bit unsigned integer that specifies the type of data that is contained in the [**message body**](#gt_message-body). This value MUST be set to a [PROPVARIANT](#Section_2.2.12) type constant as specified in section 2.2.12.
 
 **ApplicationTag (4 bytes):** A 32-bit unsigned integer that specifies an application-defined value that can be used to organize messages and the server MUST not process or interpret this field.
 
@@ -3113,7 +3113,7 @@ SEC_CN_GENERIC_ALL = (MQSEC_CN_OPEN_CONNECTOR + MQSEC_SET_CN_PROPERTIES + MQSEC_
 <a id="Section_2.3"></a>
 ## 2.3 PROPID
 
-When making MSMQ-related API function calls, object properties are specified by providing an array of [**property identifiers**](#gt_property-identifier) (a unique PROPID value). The associated property values are specified (or returned) in a related array of [PROPVARIANT](#Section_2.2.13) structures. The values (in decimal), their PROPVARIANT types (as specified in section [2.2.12](#Section_2.2.13)), and their associated symbolic names are listed in the PROPID subsections. Related properties are grouped together within each PROPID subsection.
+When making MSMQ-related API function calls, object properties are specified by providing an array of [**property identifiers**](#gt_property-identifier) (a unique PROPID value). The associated property values are specified (or returned) in a related array of [PROPVARIANT](#Section_2.2.13) structures. The values (in decimal), their PROPVARIANT types (as specified in section [2.2.12](#Section_2.2.12)), and their associated symbolic names are listed in the PROPID subsections. Related properties are grouped together within each PROPID subsection.
 
 A PROPID is an unsigned 32-bit value.
 
@@ -3135,7 +3135,7 @@ Unless otherwise specified, properties are valid for all [**MSMQ**](#gt_microsof
 
 Value: 101
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: [**GUID**](#gt_globally-unique-identifier-guid) for the [**queue**](#gt_queue).
 
@@ -3144,7 +3144,7 @@ Description: [**GUID**](#gt_globally-unique-identifier-guid) for the [**queue**]
 
 Value: 102
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: A user-defined value that indicates the type of service that the [**queue**](#gt_queue) provides. The value is optionally specified at queue creation and can be changed after the queue has been created.
 
@@ -3153,7 +3153,7 @@ Description: A user-defined value that indicates the type of service that the [*
 
 Value: 103
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The path of the [**queue**](#gt_queue). The value is specified at queue creation and is immutable thereafter. The value MUST conform to the ABNF rule QueuePathName, as specified in section [2.1.1](#Section_2.1.1).
 
@@ -3162,7 +3162,7 @@ Description: The path of the [**queue**](#gt_queue). The value is specified at q
 
 Value: 104
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: A value that specifies how [**MSMQ**](#gt_microsoft-message-queuing-msmq) tracks [**messages**](#gt_message) removed from the [**queue**](#gt_queue). This field MUST be one of the following.
 
@@ -3176,7 +3176,7 @@ Description: A value that specifies how [**MSMQ**](#gt_microsoft-message-queuing
 
 Value: 105
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Maximum size (in kilobytes) of a [**queue**](#gt_queue).<24>
 
@@ -3185,7 +3185,7 @@ Description: Maximum size (in kilobytes) of a [**queue**](#gt_queue).<24>
 
 Value: 106
 
-Variant type: [VT_I2](#Section_2.2.13)
+Variant type: [VT_I2](#Section_2.2.12)
 
 Description: Priority level of the [**queue**](#gt_queue). PROPID_Q_BASEPRIORITY applies only to [**public queues**](#gt_public-queue) that can be located through the [**directory service**](#gt_directory-service-ds) (using a public [**format name**](#gt_format-name)). The base priority of [**private queues**](#gt_private-queue), as well as public queues accessed directly, is always 0x0000. Any attempt to create this property and set its value or to set the value of an existing property for a private queue when the queue is being created or after the queue is created will be ignored and will cause no change. The value MUST be set to a valid priority level. Priority levels are integer values between -32768 (0x8000) and +32767 (0x7fff). The default priority level is 0x0000.
 
@@ -3194,7 +3194,7 @@ Description: Priority level of the [**queue**](#gt_queue). PROPID_Q_BASEPRIORITY
 
 Value: 107
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Maximum size (in kilobytes) of the [**queue journal**](#gt_queue-journal). Valid values are in the range 0 to 0xffffffff.<25>
 
@@ -3203,7 +3203,7 @@ Description: Maximum size (in kilobytes) of the [**queue journal**](#gt_queue-jo
 
 Value: 108
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: A descriptive label (maximum 124 characters) for the [**queue**](#gt_queue).
 
@@ -3212,7 +3212,7 @@ Description: A descriptive label (maximum 124 characters) for the [**queue**](#g
 
 Value: 109
 
-Variant type: [VT_I4](#Section_2.2.13)
+Variant type: [VT_I4](#Section_2.2.12)
 
 Description: The time when the [**queue**](#gt_queue) was created. Time is represented as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 UTC.
 
@@ -3221,7 +3221,7 @@ Description: The time when the [**queue**](#gt_queue) was created. Time is repre
 
 Value: 110
 
-Variant type: [VT_I4](#Section_2.2.13)
+Variant type: [VT_I4](#Section_2.2.12)
 
 Description: The time when the [**queue**](#gt_queue) properties were last modified. The time is represented as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 UTC.
 
@@ -3230,7 +3230,7 @@ Description: The time when the [**queue**](#gt_queue) properties were last modif
 
 Value: 111
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Authentication level of the [**queue**](#gt_queue). MUST be one of the following values.
 
@@ -3244,7 +3244,7 @@ Description: Authentication level of the [**queue**](#gt_queue). MUST be one of 
 
 Value: 112
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Privacy level of the [**queue**](#gt_queue). MUST be one of the following values.
 
@@ -3265,7 +3265,7 @@ MQ_PRIV_LEVEL_OPTIONAL: The default. The queue does not enforce privacy. It acce
 
 Value: 113
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Transaction level of the [**queue**](#gt_queue). MUST be one of the following values.
 
@@ -3279,7 +3279,7 @@ Description: Transaction level of the [**queue**](#gt_queue). MUST be one of the
 
 Value: 114
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: A value that specifies the scope of a [**queue**](#gt_queue) object. The value MUST be one of the following.
 
@@ -3293,7 +3293,7 @@ Description: A value that specifies the scope of a [**queue**](#gt_queue) object
 
 Value: 115
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the [**queue manager**](#gt_queue-manager-qm) that hosts the [**queue**](#gt_queue).
 
@@ -3302,7 +3302,7 @@ Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the
 
 Value: 116
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<26> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -3311,7 +3311,7 @@ Description: This property MAY<26> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 117
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the [**queue**](#gt_queue) object.
 
@@ -3320,7 +3320,7 @@ Description: Contains the sequence number of the [**queue**](#gt_queue) object.
 
 Value: 118
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -3329,7 +3329,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 119
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -3338,7 +3338,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 121
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the distinguished name (DN) of the [**queue**](#gt_queue) object in Active Directory (as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md)).
 
@@ -3349,7 +3349,7 @@ Description: Contains the distinguished name (DN) of the [**queue**](#gt_queue) 
 
 Value: 123
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the suffix of the [**queue**](#gt_queue) name if the name exceeds 64 characters (the length of the **Common-Name** attribute in Active Directory).
 
@@ -3360,7 +3360,7 @@ Description: Contains the suffix of the [**queue**](#gt_queue) name if the name 
 
 Value: 124
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) prefixed path of the [**queue**](#gt_queue). The value MUST conform to the ABNF for QueuePathName (as specified in section [2.1.1](#Section_2.1.1)), where the computer name is the FQDN of the hosting computer.
 
@@ -3371,7 +3371,7 @@ Description: Contains the [**fully qualified domain name (FQDN)**](#gt_fully-qua
 
 Value: 125
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: IP multicast address associated with the [**queue**](#gt_queue). The property value MUST contain a string that contains a valid multicast address conforming to the ABNF.
 
@@ -3386,7 +3386,7 @@ The ABNF rules for Address and Port are defined in section [2.1.6](#Section_2.1.
 
 Value: 126
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the Active Directory path to the [**public queue**](#gt_public-queue) object stored in Active Directory. The value MUST conform to the ABNF for ldapurl (as specified in [[RFC4516]](https://go.microsoft.com/fwlink/?LinkId=90720)).
 
@@ -3401,7 +3401,7 @@ LDAP://MyLDAPServer/CN=MyQueue,CN=msmq,CN=MyComp,CN=Computers,DC=MyDomain,DC=MyC
 
 Value: 1101
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the queue object. The BLOB layout is that of SECURITY_DESCRIPTOR, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.<27>
 
@@ -3410,7 +3410,7 @@ Description: Contains the [**security descriptor**](#gt_security-descriptor) of 
 
 Value: 1102
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the queue object. The BLOB layout is that of SECURITY_DESCRIPTOR (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6).
 
@@ -3421,7 +3421,7 @@ Description: Contains the [**security descriptor**](#gt_security-descriptor) of 
 
 Value: 1103
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains options related to setting or retrieving a security descriptor. It contains [SECURITY_INFORMATION (section 2.2.3)](#Section_2.2.3).
 
@@ -3435,7 +3435,7 @@ Machine object [**property identifiers**](#gt_property-identifier) describe a [*
 
 Value: 201
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the site identifier [**GUID**](#gt_globally-unique-identifier-guid) of the site in which the [**queue manager**](#gt_queue-manager-qm) is located.
 
@@ -3444,7 +3444,7 @@ Description: Contains the site identifier [**GUID**](#gt_globally-unique-identif
 
 Value: 202
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: A [**GUID**](#gt_globally-unique-identifier-guid) that uniquely identifies the [**queue manager**](#gt_queue-manager-qm) for the computer.
 
@@ -3453,7 +3453,7 @@ Description: A [**GUID**](#gt_globally-unique-identifier-guid) that uniquely ide
 
 Value: 203
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The name of the computer where the [**queue manager**](#gt_queue-manager-qm) is located.
 
@@ -3462,7 +3462,7 @@ Description: The name of the computer where the [**queue manager**](#gt_queue-ma
 
 Value: 205
 
-Variant type: [VT_UI1](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_UI1](#Section_2.2.12) | VT_VECTOR
 
 Description: The public encryption key of the computer. This property is superseded by [PROPID_QM_ENCRYPTION_PK_BASE](#Section_2.3.2.27) if present.
 
@@ -3471,7 +3471,7 @@ Description: The public encryption key of the computer. This property is superse
 
 Value: 206
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: The network address or addresses of the computer. The blob layout is a packed array of [TA_ADDRESS (section 2.2.4)](#Section_2.2.4) structures.
 
@@ -3480,7 +3480,7 @@ Description: The network address or addresses of the computer. The blob layout i
 
 Value: 207
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains an array of [**Connected Network**](#gt_connected-network) identifiers for the connected networks that the [**queue manager**](#gt_queue-manager-qm) supports.
 
@@ -3489,7 +3489,7 @@ Description: Contains an array of [**Connected Network**](#gt_connected-network)
 
 Value: 208
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: An array of [**GUIDs**](#gt_globally-unique-identifier-guid) of routing servers that act as outgoing interfaces for all [**MSMQ**](#gt_microsoft-message-queuing-msmq) [**messages**](#gt_message) that a given machine sends.
 
@@ -3498,7 +3498,7 @@ Description: An array of [**GUIDs**](#gt_globally-unique-identifier-guid) of rou
 
 Value: 209
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: An array of [**GUIDs**](#gt_globally-unique-identifier-guid) of routing servers that act as incoming interfaces for all [**MSMQ**](#gt_microsoft-message-queuing-msmq) [**messages**](#gt_message) that a given machine receives.
 
@@ -3507,7 +3507,7 @@ Description: An array of [**GUIDs**](#gt_globally-unique-identifier-guid) of rou
 
 Value: 210
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Indicates the type of service that a given machine supports. The possible values are as follows.
 
@@ -3525,7 +3525,7 @@ Description: Indicates the type of service that a given machine supports. The po
 
 Value: 214
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The disk [**quota**](#gt_quota) for all [**queues**](#gt_queue) located at the [**queue manager**](#gt_queue-manager-qm). Valid range: 0 to max unsigned 32-bit (0xffffffff).
 
@@ -3534,7 +3534,7 @@ Description: The disk [**quota**](#gt_quota) for all [**queues**](#gt_queue) loc
 
 Value: 211
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<28> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -3543,7 +3543,7 @@ Description: This property MAY<28> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 212
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -3552,7 +3552,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 213
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the [**queue manager**](#gt_queue-manager-qm) object.
 
@@ -3561,7 +3561,7 @@ Description: Contains the sequence number of the [**queue manager**](#gt_queue-m
 
 Value: 215
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains the systemwide journal storage [**quota**](#gt_quota), in kilobytes. Range restrictions are identical to [PROPID_QM_QUOTA (section 2.3.2.10)](#Section_2.3.2.10).
 
@@ -3570,7 +3570,7 @@ Description: Contains the systemwide journal storage [**quota**](#gt_quota), in 
 
 Value: 216
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: A description of the operating system version and the [**MSMQ**](#gt_microsoft-message-queuing-msmq) version. MAY be an empty string<29> or a version string<30>.
 
@@ -3579,7 +3579,7 @@ Description: A description of the operating system version and the [**MSMQ**](#g
 
 Value: 217
 
-Variant type: [VT_I4](#Section_2.2.13)
+Variant type: [VT_I4](#Section_2.2.12)
 
 Description: The time when the directory object was created. Time is represented as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 UTC.
 
@@ -3588,7 +3588,7 @@ Description: The time when the directory object was created. Time is represented
 
 Value: 218
 
-Variant type: [VT_I4](#Section_2.2.13)
+Variant type: [VT_I4](#Section_2.2.12)
 
 Description: The time when the directory object was last modified. The time is represented as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 UTC.
 
@@ -3597,7 +3597,7 @@ Description: The time when the directory object was last modified. The time is r
 
 Value: 219
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Indicates whether the [**queue manager**](#gt_queue-manager-qm) is a foreign system that services [**foreign queues**](#gt_foreign-queue). The value MUST be one of the following.
 
@@ -3611,7 +3611,7 @@ Description: Indicates whether the [**queue manager**](#gt_queue-manager-qm) is 
 
 Value: 220
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: A value indicating the operating system type of the [**queue manager**](#gt_queue-manager-qm). The value MUST be one of the following.
 
@@ -3629,7 +3629,7 @@ Description: A value indicating the operating system type of the [**queue manage
 
 Value: 221
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The distinguishedName for the [**MSMQ**](#gt_microsoft-message-queuing-msmq) Configuration object. The name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -3640,7 +3640,7 @@ Description: The distinguishedName for the [**MSMQ**](#gt_microsoft-message-queu
 
 Value: 222
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains an array of site identifiers for sites to which the computer belongs.
 
@@ -3651,7 +3651,7 @@ Description: Contains an array of site identifiers for sites to which the comput
 
 Value: 223
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: An array of distinguished names for [**MSMQ routing servers**](#gt_msmq-routing-server) through which all outgoing traffic for this computer will be routed. Each name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -3662,7 +3662,7 @@ Description: An array of distinguished names for [**MSMQ routing servers**](#gt_
 
 Value: 224
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: An array of distinguished names for [**MSMQ routing servers**](#gt_msmq-routing-server) through which all incoming traffic to this computer will be routed. Each name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -3673,7 +3673,7 @@ Description: An array of distinguished names for [**MSMQ routing servers**](#gt_
 
 Value: 227
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Indicates whether the [**queue manager**](#gt_queue-manager-qm) is configured as a routing server. This value SHOULD be settable only by the [**MSMQ**](#gt_microsoft-message-queuing-msmq) installer. The value MUST be one of the following.
 
@@ -3689,7 +3689,7 @@ Description: Indicates whether the [**queue manager**](#gt_queue-manager-qm) is 
 
 Value: 228
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Indicates whether the installed version of [**Microsoft Message Queuing (MSMQ)**](#gt_microsoft-message-queuing-msmq) provides [**MSMQ Directory Service (MQDS)**](#gt_msmq-directory-service) services. This property value is stored in [**Active Directory**](#gt_active-directory) as a Boolean.
 
@@ -3698,7 +3698,7 @@ Description: Indicates whether the installed version of [**Microsoft Message Que
 
 Value: 229
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Indicates whether the installed version of [**Microsoft Message Queuing (MSMQ)**](#gt_microsoft-message-queuing-msmq) acts as an [**MSMQ supporting server**](#gt_msmq-supporting-server). This property value is stored in [**Active Directory**](#gt_active-directory) as a Boolean.
 
@@ -3707,7 +3707,7 @@ Description: Indicates whether the installed version of [**Microsoft Message Que
 
 Value: 231
 
-Variant type: [VT_UI1](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_UI1](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains the public encryption key of the computer.
 
@@ -3718,7 +3718,7 @@ Description: Contains the public encryption key of the computer.
 
 Value: 232
 
-Variant type: [VT_UI1](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_UI1](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains the enhanced (128-bit) public encryption key of the computer.
 
@@ -3729,7 +3729,7 @@ Description: Contains the enhanced (128-bit) public encryption key of the comput
 
 Value: 233
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of the computer.
 
@@ -3740,7 +3740,7 @@ Description: Contains the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of th
 
 Value: 234
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the security descriptor of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) Configuration object. The BLOB layout is that of SECURITY_DESCRIPTOR, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 
@@ -3751,7 +3751,7 @@ Description: Contains the security descriptor of the [**MSMQ**](#gt_microsoft-me
 
 Value: 237
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains options related to setting or retrieving a security descriptor. The value MUST conform to [SECURITY_INFORMATION (section 2.2.3)](#Section_2.2.3).
 
@@ -3760,25 +3760,25 @@ Description: Contains options related to setting or retrieving a security descri
 
 Value: 238
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
-Description: The computer's public key certificates used for signing formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.1) structure.
+Description: The computer's public key certificates used for signing formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.2) structure.
 
 <a id="Section_2.3.2.33"></a>
 #### 2.3.2.33 PROPID_QM_SIGN_PKS
 
 Value: 239
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
-Description: The computer's public key certificates used for signing, formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.1) structure.
+Description: The computer's public key certificates used for signing, formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.2) structure.
 
 <a id="Section_2.3.2.34"></a>
 #### 2.3.2.34 PROPID_QM_OWNER_SID
 
 Value: 241
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**SID**](#gt_security-identifier-sid) of the user who ran the setup program. It is passed from the [**MSMQ**](#gt_microsoft-message-queuing-msmq) service that created the MSMQ Configuration object so that the server can add it with full control to the DACL of the newly created object. The **SID** layout is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.2. The **SubAuthority** field of the **SID** packet is a variable-length array of unsigned 32-bit [**little-endian**](#gt_little-endian) integers.
 
@@ -3789,7 +3789,7 @@ Description: Contains the [**SID**](#gt_security-identifier-sid) of the user who
 
 Value: 242
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Indicates that the [**MSMQ**](#gt_microsoft-message-queuing-msmq) installation is in a group that is part of a cluster.
 
@@ -3807,7 +3807,7 @@ Used when creating the MSMQ Configuration objects. The value MUST be one of the 
 
 Value: 1201
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the machine object. The layout of the **BLOB** is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.<31>
 
@@ -3816,25 +3816,25 @@ Description: Contains the [**security descriptor**](#gt_security-descriptor) of 
 
 Value: 1202
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
-Description: The computer's public key certificates used for signing, formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.1) structure. This property can be specified only at object creation time.
+Description: The computer's public key certificates used for signing, formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.2) structure. This property can be specified only at object creation time.
 
 <a id="Section_2.3.2.38"></a>
 #### 2.3.2.38 PROPID_QM_ENCRYPT_PK
 
 Value: 1203
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
-Description: The computer's public key certificates used for encryption, formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.1) structure. This property can be specified only at object creation time.
+Description: The computer's public key certificates used for encryption, formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.2) structure. This property can be specified only at object creation time.
 
 <a id="Section_2.3.2.39"></a>
 #### 2.3.2.39 PROPID_QM_UPGRADE_DACL
 
 Value: 1205
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: A dummy [PROPID](#Section_2.3). It is used only in a set property operation to request that the [**PEC**](#gt_primary-enterprise-controller-pec) update the DACL of the calling computer. The **BLOB** MAY be empty. The server MUST ignore the value.
 
@@ -3848,7 +3848,7 @@ Site [**property identifiers**](#gt_property-identifier) pertain to the site obj
 
 Value: 301
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the name of the site.
 
@@ -3857,7 +3857,7 @@ Description: Contains the name of the site.
 
 Value: 302
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the identifier of the site.
 
@@ -3866,7 +3866,7 @@ Description: Contains the identifier of the site.
 
 Value: 303
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains the [**GUIDs**](#gt_globally-unique-identifier-guid) of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) Configuration objects of the [**MSMQ queue managers**](#gt_msmq-queue-manager) that are the gates for this site.
 
@@ -3875,7 +3875,7 @@ Description: Contains the [**GUIDs**](#gt_globally-unique-identifier-guid) of th
 
 Value: 304
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the computer name of the [**PSC**](#gt_primary-site-controller-psc) for the site.
 
@@ -3884,7 +3884,7 @@ Description: Contains the computer name of the [**PSC**](#gt_primary-site-contro
 
 Value: 305
 
-Variant type: [VT_UI2](#Section_2.2.13)
+Variant type: [VT_UI2](#Section_2.2.12)
 
 Description: In [**MSMQ mixed-mode**](#gt_msmq-mixed-mode), the default replication time (in seconds) within an [**MSMQ Site**](#gt_msmq-site). The default is 2 seconds.
 
@@ -3893,7 +3893,7 @@ Description: In [**MSMQ mixed-mode**](#gt_msmq-mixed-mode), the default replicat
 
 Value: 306
 
-Variant type: [VT_UI2](#Section_2.2.13)
+Variant type: [VT_UI2](#Section_2.2.12)
 
 Description: In [**MSMQ mixed-mode**](#gt_msmq-mixed-mode), the default replication time (in seconds) between [**MSMQ sites**](#gt_msmq-site). The default is 10 seconds.
 
@@ -3902,7 +3902,7 @@ Description: In [**MSMQ mixed-mode**](#gt_msmq-mixed-mode), the default replicat
 
 Value: 307
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY <32> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -3911,7 +3911,7 @@ Description: This property MAY <32> be used to group [**MSMQ**](#gt_microsoft-me
 
 Value: 308
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the site object.
 
@@ -3920,7 +3920,7 @@ Description: Contains the sequence number of the site object.
 
 Value: 309
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the DN of the site in Active Directory. (The name format is specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md).)
 
@@ -3931,7 +3931,7 @@ Description: Contains the DN of the site in Active Directory. (The name format i
 
 Value: 310
 
-Variant type: [VT_UI2](#Section_2.2.13)
+Variant type: [VT_UI2](#Section_2.2.12)
 
 Description: Specifies whether the site was migrated from an [**MQIS**](#gt_message-queuing-information-store-mqis) database. The value MUST be one of the following.
 
@@ -3947,7 +3947,7 @@ Description: Specifies whether the site was migrated from an [**MQIS**](#gt_mess
 
 Value: 311
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Specifies whether the site is used as a definition of an external messaging system. The value MUST be one of the following.
 
@@ -3963,7 +3963,7 @@ Description: Specifies whether the site is used as a definition of an external m
 
 Value: 312
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: When operating in [**MSMQ mixed-mode**](#gt_msmq-mixed-mode), the [**MSMQ**](#gt_microsoft-message-queuing-msmq) replication service uses this property when replicating objects from [**MQIS**](#gt_message-queuing-information-store-mqis) to [**Active Directory**](#gt_active-directory). Certain properties that are no longer used in MSMQ 2.0 and later are mapped to this property during replication, prior to creating the object in Active Directory. The value stored in this property is not used by MSMQ.
 
@@ -3974,7 +3974,7 @@ Description: When operating in [**MSMQ mixed-mode**](#gt_msmq-mixed-mode), the [
 
 Value: 1301
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the site object. The [BLOB](#Section_2.2.15) layout is that of SECURITY_DESCRIPTOR, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.<33>
 
@@ -3983,16 +3983,16 @@ Description: Contains the [**security descriptor**](#gt_security-descriptor) of 
 
 Value: 1302
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
-Description: Contains the signing key of the [**PSC**](#gt_primary-site-controller-psc) formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.1) structure.
+Description: Contains the signing key of the [**PSC**](#gt_primary-site-controller-psc) formatted as an [MQDSPUBLICKEYS (section 2.2.2)](#Section_2.2.2) structure.
 
 <a id="Section_2.3.3.15"></a>
 #### 2.3.3.15 PROPID_S_SECURITY_INFORMATION
 
 Value: 1303
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The [SECURITY_INFORMATION (section 2.2.3)](#Section_2.2.3) associated with setting or retrieving a security descriptor.
 
@@ -4008,7 +4008,7 @@ Description: The [SECURITY_INFORMATION (section 2.2.3)](#Section_2.2.3) associ
 
 Value: 501
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Indicates what network protocol is used on the [**connected network**](#gt_connected-network). This property MUST have one of the values listed in the following table.
 
@@ -4023,7 +4023,7 @@ Description: Indicates what network protocol is used on the [**connected network
 
 Value: 502
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: User-defined name for the connected network, formatted as a null-terminated [**Unicode**](#gt_unicode) string.
 
@@ -4032,7 +4032,7 @@ Description: User-defined name for the connected network, formatted as a null-te
 
 Value: 503
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: A [**GUID**](#gt_globally-unique-identifier-guid) that uniquely identifies the connected network.
 
@@ -4041,7 +4041,7 @@ Description: A [**GUID**](#gt_globally-unique-identifier-guid) that uniquely ide
 
 Value: 504
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<34> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -4050,7 +4050,7 @@ Description: This property MAY<34> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 505
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the [**connected network**](#gt_connected-network) object.
 
@@ -4059,7 +4059,7 @@ Description: Contains the sequence number of the [**connected network**](#gt_con
 
 Value: 1501
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the connected network object. The [BLOB](#Section_2.2.15) layout is that of SECURITY_DESCRIPTOR, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.<35>
 
@@ -4073,7 +4073,7 @@ Description: Contains the [**security descriptor**](#gt_security-descriptor) of 
 
 Value: 601
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: User-defined name for the enterprise, formatted as a null-terminated [**Unicode**](#gt_unicode) string.
 
@@ -4082,7 +4082,7 @@ Description: User-defined name for the enterprise, formatted as a null-terminate
 
 Value: 602
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: In MSMQ 1.0, this property is not used. In MSMQ 2.0 and up, this property indicates whether weakened security is enabled. Value MUST be one of the following.
 
@@ -4097,7 +4097,7 @@ Description: In MSMQ 1.0, this property is not used. In MSMQ 2.0 and up, this pr
 
 Value: 603
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The type of cryptographic provider used by [**MSMQ**](#gt_microsoft-message-queuing-msmq). The default value is "Microsoft Enhanced RSA and AES Cryptographic Provider".
 
@@ -4106,7 +4106,7 @@ Description: The type of cryptographic provider used by [**MSMQ**](#gt_microsoft
 
 Value: 604
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the machine name of the [**Primary Enterprise Controller**](#gt_primary-enterprise-controller-pec), formatted as a null-terminated [**Unicode**](#gt_unicode) string.
 
@@ -4115,7 +4115,7 @@ Description: Contains the machine name of the [**Primary Enterprise Controller**
 
 Value: 605
 
-Variant type: [VT_UI2](#Section_2.2.13)
+Variant type: [VT_UI2](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4124,7 +4124,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 606
 
-Variant type: [VT_UI2](#Section_2.2.13)
+Variant type: [VT_UI2](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4133,7 +4133,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 607
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<37> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -4142,7 +4142,7 @@ Description: This property MAY<37> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 608
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the [**enterprise**](#gt_enterprise) object.
 
@@ -4151,7 +4151,7 @@ Description: Contains the sequence number of the [**enterprise**](#gt_enterprise
 
 Value: 609
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: The [**GUID**](#gt_globally-unique-identifier-guid) identifier for the directory object instance.
 
@@ -4160,7 +4160,7 @@ Description: The [**GUID**](#gt_globally-unique-identifier-guid) identifier for 
 
 Value: 610
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4169,7 +4169,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 611
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4178,7 +4178,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 612
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4187,7 +4187,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 613
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4196,7 +4196,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 614
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4205,7 +4205,7 @@ Description: Reserved. The property value associated with this property identifi
 
 Value: 616
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The default value for the time, in seconds, that a [**message**](#gt_message) has to reach a [**queue**](#gt_queue) when sending [**MSMQ**](#gt_microsoft-message-queuing-msmq) messages.
 
@@ -4214,7 +4214,7 @@ Description: The default value for the time, in seconds, that a [**message**](#g
 
 Value: 617
 
-Variant type: [VT_UI2](#Section_2.2.13)
+Variant type: [VT_UI2](#Section_2.2.12)
 
 Description: The version number of [**MSMQ Directory Service (MQDS)**](#gt_msmq-directory-service) information.
 
@@ -4223,7 +4223,7 @@ Description: The version number of [**MSMQ Directory Service (MQDS)**](#gt_msmq-
 
 Value: 1601
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the enterprise object. The [BLOB](#Section_2.2.15) layout is that of SECURITY_DESCRIPTOR, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.<38>
 
@@ -4232,7 +4232,7 @@ Description: Contains the [**security descriptor**](#gt_security-descriptor) of 
 
 Value: 615
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Reserved. The property value associated with this property identifier is undefined and MUST NOT be interpreted by any protocol implementation.
 
@@ -4246,7 +4246,7 @@ User object properties are used by [**MSMQ**](#gt_microsoft-message-queuing-msmq
 
 Value: 701
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the user's [**SID**](#gt_security-identifier-sid). The **SID** layout is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.2. The **SubAuthority** field of the **SID** packet is a variable-length array of unsigned 32-bit [**little-endian**](#gt_little-endian) integers.
 
@@ -4255,7 +4255,7 @@ Description: Contains the user's [**SID**](#gt_security-identifier-sid). The **S
 
 Value: 703
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<39> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -4264,7 +4264,7 @@ Description: This property MAY<39> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 704
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the user object.
 
@@ -4273,7 +4273,7 @@ Description: Contains the sequence number of the user object.
 
 Value: 702
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains an [MQUSERSIGNCERTS](#Section_2.2.21) structure that packs multiple X.509 encoded certificates for the user object.
 
@@ -4282,7 +4282,7 @@ Description: Contains an [MQUSERSIGNCERTS](#Section_2.2.21) structure that packs
 
 Value: 705
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains an array of certificate digests. Each digest is computed as the MD5 hash of the encoded certificate. Each array element MUST contain the 16-byte output of the MD5 algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275).
 
@@ -4291,7 +4291,7 @@ Description: Contains an array of certificate digests. Each digest is computed a
 
 Value: 706
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: The [**GUID**](#gt_globally-unique-identifier-guid) identifying the user object.
 
@@ -4305,7 +4305,7 @@ Routinglink properties define the cost of routing a [**message**](#gt_message) f
 
 Value: 801
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of one of the routing sites.
 
@@ -4314,7 +4314,7 @@ Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of one
 
 Value: 802
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the other routing site.
 
@@ -4323,7 +4323,7 @@ Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the
 
 Value: 803
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains the cost of the link. Each routing link is assigned a relative cost, which reflects the speed or the monetary cost of the underlying physical communication link. The default value is 1; and costs can range from 1 to 999999, inclusive.
 
@@ -4332,7 +4332,7 @@ Description: Contains the cost of the link. Each routing link is assigned a rela
 
 Value: 804
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<40> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -4341,7 +4341,7 @@ Description: This property MAY<40> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 805
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the [**routing link**](#gt_routing-link) object.
 
@@ -4350,7 +4350,7 @@ Description: Contains the sequence number of the [**routing link**](#gt_routing-
 
 Value: 806
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the [**routing link**](#gt_routing-link) object.
 
@@ -4359,7 +4359,7 @@ Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the
 
 Value: 807
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains the distinguished names of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) Configuration object of the computers that are site gates on the link. Each name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -4370,7 +4370,7 @@ Description: Contains the distinguished names of the [**MSMQ**](#gt_microsoft-me
 
 Value: 808
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the distinguished name of one site on the link. The name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -4381,7 +4381,7 @@ Description: Contains the distinguished name of one site on the link. The name M
 
 Value: 809
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the distinguished name of the other site on the link. The name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -4392,7 +4392,7 @@ Description: Contains the distinguished name of the other site on the link. The 
 
 Value: 810
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the description of the routing link.
 
@@ -4403,7 +4403,7 @@ Description: Contains the description of the routing link.
 
 Value: 811
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the distinguished name of the routing link object in the Active Directory. The name MUST conform to ABNF: distinguishedName, as described in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -4414,7 +4414,7 @@ Description: Contains the distinguished name of the routing link object in the A
 
 Value: 812
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains the untranslated link cost. The value MUST be in the range from 1 to 999999, inclusive.
 
@@ -4425,7 +4425,7 @@ Description: Contains the untranslated link cost. The value MUST be in the range
 
 Value: 813
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains the [**GUIDs**](#gt_globally-unique-identifier-guid) of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) Configuration objects of the computers that are site gates on the link.
 
@@ -4443,7 +4443,7 @@ Setting objects represent [**MSMQ Routing Servers**](#gt_msmq-routing-server) or
 
 Value: 5101
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the **Common-Name** attribute, which MUST always be set to the string "MSMQ Settings".
 
@@ -4452,7 +4452,7 @@ Description: Contains the **Common-Name** attribute, which MUST always be set to
 
 Value: 5102
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains a value that identifies the type of service. The value MUST be one of the following.
 
@@ -4469,7 +4469,7 @@ Description: Contains a value that identifies the type of service. The value MUS
 
 Value: 5103
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the computer's [**MSMQ**](#gt_microsoft-message-queuing-msmq) Configuration object.
 
@@ -4478,7 +4478,7 @@ Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the
 
 Value: 5105
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the distinguished name of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) Settings object in the Active Directory. The name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -4487,7 +4487,7 @@ Description: Contains the distinguished name of the [**MSMQ**](#gt_microsoft-mes
 
 Value: 5106
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Specifies whether the server is [**MSMQ**](#gt_microsoft-message-queuing-msmq) 1.0.
 
@@ -4503,7 +4503,7 @@ The value MUST be one of the following.
 
 Value: 5107
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<41> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -4512,7 +4512,7 @@ Description: This property MAY<41> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 5108
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the site name.
 
@@ -4521,7 +4521,7 @@ Description: Contains the site name.
 
 Value: 5109
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Specifies whether the server is a routing server. The value MUST be one of the following.
 
@@ -4535,7 +4535,7 @@ Description: Specifies whether the server is a routing server. The value MUST be
 
 Value: 5110
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Specifies whether the [**queue manager**](#gt_queue-manager-qm) provides access to the Active Directory for [**MSMQ**](#gt_microsoft-message-queuing-msmq) 2.0 [**directory service**](#gt_directory-service-ds) clients. The value MUST be set to one of the following.
 
@@ -4549,7 +4549,7 @@ Description: Specifies whether the [**queue manager**](#gt_queue-manager-qm) pro
 
 Value: 5111
 
-Variant type: [VT_UI1](#Section_2.2.13)
+Variant type: [VT_UI1](#Section_2.2.12)
 
 Description: Specifies whether the server can be a supporting server for applications. The value MUST be set to one of the following.
 
@@ -4563,7 +4563,7 @@ Description: Specifies whether the server can be a supporting server for applica
 
 Value: 5112
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains a value that identifies the type of service. The value MUST be set to one of the following.
 
@@ -4587,7 +4587,7 @@ These properties represent attributes of users who migrated to Active Directory 
 
 Value: 5401
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: The migrated user's [**SID**](#gt_security-identifier-sid). The **SID** layout is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.2. The **SubAuthority** field of the **SID** packet is a variable-length array of unsigned 32-bit [**little-endian**](#gt_little-endian) integers.
 
@@ -4596,7 +4596,7 @@ Description: The migrated user's [**SID**](#gt_security-identifier-sid). The **S
 
 Value: 5402
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains an X.509 encoded certificate for the migrated user object as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414).
 
@@ -4605,7 +4605,7 @@ Description: Contains an X.509 encoded certificate for the migrated user object 
 
 Value: 5405
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains an array of certificate digests. Each digest is computed as the MD5 hash of the encoded certificate. Each array element MUST contain the 16-byte output of the MD5 algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275).
 
@@ -4614,7 +4614,7 @@ Description: Contains an array of certificate digests. Each digest is computed a
 
 Value: 5406
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the MQUser object.
 
@@ -4623,7 +4623,7 @@ Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the
 
 Value: 5407
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**security descriptor**](#gt_security-descriptor) of the MQUser object. The [BLOB](#Section_2.2.15) layout is that of **SECURITY_DESCRIPTOR**, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.<42>
 
@@ -4639,7 +4639,7 @@ Computer properties contain attributes of the computer object.
 
 Value: 5201
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the distinguished name of the computer. The name MUST conform to ABNF: distinguishedName, as specified in [[RFC4514]](https://go.microsoft.com/fwlink/?LinkId=90719).
 
@@ -4648,7 +4648,7 @@ Description: Contains the distinguished name of the computer. The name MUST conf
 
 Value: 5202
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Identifies a property that contains the name of the computer account in Active Directory. Contains the name of the computer object. The value is represented as the computer name (truncated to 19 characters) followed by a dollar sign "$" character. For example, the property value for a computer with the name "MyComputer" is "MyComputer$".
 
@@ -4657,7 +4657,7 @@ Description: Identifies a property that contains the name of the computer accoun
 
 Value: 5204
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: Contains user account control attributes, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md). The value MUST be a bitmask computed as a logical OR of a set of UF_FLAG codes, as specified in [MS-SAMR] section 2.2.1.13.
 
@@ -4666,7 +4666,7 @@ Description: Contains user account control attributes, as specified in [MS-SAMR]
 
 Value: 5205
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: Contains the DNS host name attribute of the computer object. The value MUST contain the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of the computer.
 
@@ -4675,7 +4675,7 @@ Description: Contains the DNS host name attribute of the computer object. The va
 
 Value: 5206
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the [**SID**](#gt_security-identifier-sid) of the computer object. This property is read from Active Directory during creation of an [**MSMQ**](#gt_microsoft-message-queuing-msmq) service Configuration object, and is used to add the computer SID to the MSMQ service configuration DACL. The **SID** layout is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.2. The **SubAuthority** field of the **SID** packet is a variable-length array of unsigned 32-bit [**little-endian**](#gt_little-endian) integers.
 
@@ -4684,7 +4684,7 @@ Description: Contains the [**SID**](#gt_security-identifier-sid) of the computer
 
 Value: 5207
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains an X.509 encoded certificate for the computer object. The X.509 encoded certificate is specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414).
 
@@ -4693,7 +4693,7 @@ Description: Contains an X.509 encoded certificate for the computer object. The 
 
 Value: 5208
 
-Variant type: [VT_CLSID](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_CLSID](#Section_2.2.12) | VT_VECTOR
 
 Description: Contains an array of certificate digests. The digest is computed as the MD5 hash of the encoded certificate. Each value MUST contain the 16-byte output of the MD5 algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275).
 
@@ -4702,7 +4702,7 @@ Description: Contains an array of certificate digests. The digest is computed as
 
 Value: 5209
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the GUID (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4) of the computer object.
 
@@ -4716,7 +4716,7 @@ Management machine [**property identifiers**](#gt_property-identifier) provide v
 
 Value: 1
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: A list of all the [**active queue**](#gt_active-queue) names on the computer. Each name MUST conform to the ABNF for a [**format name**](#gt_format-name), as specified in sections [2.1.2](#Section_2.1.2), [2.1.3](#Section_2.1.3), [2.1.4](#Section_2.1.4), and [2.1.6](#Section_2.1.6).
 
@@ -4725,7 +4725,7 @@ Description: A list of all the [**active queue**](#gt_active-queue) names on the
 
 Value: 2
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: A list of the [**path names**](#gt_path-name) of all the [**private queues**](#gt_private-queue) registered on the computer.
 
@@ -4734,7 +4734,7 @@ Description: A list of the [**path names**](#gt_path-name) of all the [**private
 
 Value: 3
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The name of the current [**MSMQ Directory Service server**](#gt_msmq-directory-service-server) for the computer. The pointer to a null-terminated [**Unicode**](#gt_unicode) string that specifies the computer name of the discovered server. The returned computer name is prefixed with "\\".
 
@@ -4771,7 +4771,7 @@ EndList = %x00.00 ; Use null for end of string
 
 Value: 4
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The value that indicates whether the [**queue manager**](#gt_queue-manager-qm) on the computer has been disconnected from the network. The value MUST be one of the following strings.
 
@@ -4785,7 +4785,7 @@ Description: The value that indicates whether the [**queue manager**](#gt_queue-
 
 Value: 5
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The version and build information for the computer operating system and [**MSMQ**](#gt_microsoft-message-queuing-msmq) installation.
 
@@ -4794,7 +4794,7 @@ Description: The version and build information for the computer operating system
 
 Value: 6
 
-Variant type: [VT_I8](#Section_2.2.13)
+Variant type: [VT_I8](#Section_2.2.12)
 
 Description: The number of [**message**](#gt_message) bytes stored in all the [**queues**](#gt_queue) on the computer.
 
@@ -4810,7 +4810,7 @@ Management [**queue property**](#gt_queue-property) identifiers provide values t
 
 Value: 1
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The [**path name**](#gt_path-name) of the [**queue**](#gt_queue). The path name format is specified in section [2.1.1](#Section_2.1.1).
 
@@ -4819,7 +4819,7 @@ Description: The [**path name**](#gt_path-name) of the [**queue**](#gt_queue). T
 
 Value: 2
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The [**format name**](#gt_format-name) of the [**queue**](#gt_queue), as specified in section [2.1](#Section_2.1).
 
@@ -4828,7 +4828,7 @@ Description: The [**format name**](#gt_format-name) of the [**queue**](#gt_queue
 
 Value: 3
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The type of the [**queue**](#gt_queue). The value MUST be one of the following strings.
 
@@ -4845,7 +4845,7 @@ Description: The type of the [**queue**](#gt_queue). The value MUST be one of th
 
 Value: 4
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The value that indicates whether the [**queue**](#gt_queue) is located on the computer. The value MUST be one of the following strings.
 
@@ -4859,7 +4859,7 @@ Description: The value that indicates whether the [**queue**](#gt_queue) is loca
 
 Value: 5
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The value that indicates whether the [**queue**](#gt_queue) is transactional. The value MUST be one of the following strings.
 
@@ -4874,7 +4874,7 @@ Description: The value that indicates whether the [**queue**](#gt_queue) is tran
 
 Value: 6
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The string that indicates whether the [**queue**](#gt_queue) is a [**foreign queue**](#gt_foreign-queue). The value MUST be one of the following strings.
 
@@ -4889,7 +4889,7 @@ Description: The string that indicates whether the [**queue**](#gt_queue) is a [
 
 Value: 7
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of [**messages**](#gt_message) in the [**queue**](#gt_queue).
 
@@ -4898,7 +4898,7 @@ Description: The number of [**messages**](#gt_message) in the [**queue**](#gt_qu
 
 Value: 8
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of [**message**](#gt_message) bytes for all messages in the [**queue**](#gt_queue).
 
@@ -4909,7 +4909,7 @@ Description: The number of [**message**](#gt_message) bytes for all messages in 
 
 Value: 9
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of [**messages**](#gt_message) in the [**queue journal**](#gt_queue-journal).
 
@@ -4918,7 +4918,7 @@ Description: The number of [**messages**](#gt_message) in the [**queue journal**
 
 Value: 10
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of [**message**](#gt_message) bytes for all messages in the [**queue journal**](#gt_queue-journal).
 
@@ -4929,7 +4929,7 @@ Description: The number of [**message**](#gt_message) bytes for all messages in 
 
 Value: 11
 
-Variant type: [VT_LPWSTR](#Section_2.2.13)
+Variant type: [VT_LPWSTR](#Section_2.2.12)
 
 Description: The connection state of the [**outgoing queue**](#gt_outgoing-queue). The value MUST be one of the following strings.
 
@@ -4949,7 +4949,7 @@ Description: The connection state of the [**outgoing queue**](#gt_outgoing-queue
 
 Value: 12
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: The address, or a list of possible addresses, for routing [**messages**](#gt_message) to the destination [**queue**](#gt_queue) in the next hop. If the queue is in the process of being connected, a list of possible addresses is returned. Each element conforms to the following ABNF.
 
@@ -4974,7 +4974,7 @@ ABNF rules IPv4address and IPv6address are defined in [[RFC3986]](https://go.mic
 
 Value: 13
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: The sequence information about the last [**message**](#gt_message) sent from the computer to the [**queue**](#gt_queue) for which an [**order acknowledgment**](#gt_order-acknowledgment) was received. The [BLOB](#Section_2.2.15) layout of the SEQUENCE_INFO structure is specified in section [2.2.5](#Section_2.2.5).
 
@@ -4983,7 +4983,7 @@ Description: The sequence information about the last [**message**](#gt_message) 
 
 Value: 14
 
-Variant type: [VT_I4](#Section_2.2.13)
+Variant type: [VT_I4](#Section_2.2.12)
 
 Description: The date and time when the last [**order acknowledgment**](#gt_order-acknowledgment) for a [**message**](#gt_message) sent from the computer to the [**queue**](#gt_queue) was received. Time is represented as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 UTC.
 
@@ -4992,7 +4992,7 @@ Description: The date and time when the last [**order acknowledgment**](#gt_orde
 
 Value: 15
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of times that the last [**order acknowledgment**](#gt_order-acknowledgment) for a [**message**](#gt_message) sent from the computer to the [**queue**](#gt_queue) was received.
 
@@ -5001,7 +5001,7 @@ Description: The number of times that the last [**order acknowledgment**](#gt_or
 
 Value: 16
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: The sequence information about the first [**message**](#gt_message) sent from the computer to the [**queue**](#gt_queue) for which no [**order acknowledgment**](#gt_order-acknowledgment) was received. The [BLOB](#Section_2.2.15) layout of the SEQUENCE_INFO structure is specified in section [2.2.5](#Section_2.2.5).
 
@@ -5010,7 +5010,7 @@ Description: The sequence information about the first [**message**](#gt_message)
 
 Value: 17
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: The sequence information about the last [**message**](#gt_message) that was sent from the computer to the [**queue**](#gt_queue) for which no [**order acknowledgment**](#gt_order-acknowledgment) was received. The [BLOB](#Section_2.2.15) layout of the SEQUENCE_INFO structure is specified in section [2.2.5](#Section_2.2.5).
 
@@ -5019,7 +5019,7 @@ Description: The sequence information about the last [**message**](#gt_message) 
 
 Value: 18
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: The sequence information about the next [**message**](#gt_message) to be sent from the computer to the [**queue**](#gt_queue). The [BLOB](#Section_2.2.15) layout of the SEQUENCE_INFO structure is specified in section [2.2.5](#Section_2.2.5).
 
@@ -5028,7 +5028,7 @@ Description: The sequence information about the next [**message**](#gt_message) 
 
 Value: 19
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of [**messages**](#gt_message) sent from the computer to the [**queue**](#gt_queue) for which an [**order acknowledgment**](#gt_order-acknowledgment) was received but for which a receive acknowledgment message was not received.
 
@@ -5037,7 +5037,7 @@ Description: The number of [**messages**](#gt_message) sent from the computer to
 
 Value: 20
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of [**messages**](#gt_message) sent from the computer to the [**queue**](#gt_queue) for which no [**order acknowledgment**](#gt_order-acknowledgment) was received.
 
@@ -5046,7 +5046,7 @@ Description: The number of [**messages**](#gt_message) sent from the computer to
 
 Value: 21
 
-Variant type: [VT_I4](#Section_2.2.13)
+Variant type: [VT_I4](#Section_2.2.12)
 
 Description: The time at which [**MSMQ**](#gt_microsoft-message-queuing-msmq) will attempt to send a [**message**](#gt_message) from the computer to the [**queue**](#gt_queue) again. Time is represented as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 UTC.
 
@@ -5055,7 +5055,7 @@ Description: The time at which [**MSMQ**](#gt_microsoft-message-queuing-msmq) wi
 
 Value: 22
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The resend interval (in seconds) for the [**messages**](#gt_message) in the [**outgoing queue**](#gt_outgoing-queue) for which no [**order acknowledgment**](#gt_order-acknowledgment) was received.
 
@@ -5064,7 +5064,7 @@ Description: The resend interval (in seconds) for the [**messages**](#gt_message
 
 Value: 23
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The number of times that the last [**message**](#gt_message) in the corresponding [**outgoing queue**](#gt_outgoing-queue) on the computer was sent.
 
@@ -5073,7 +5073,7 @@ Description: The number of times that the last [**message**](#gt_message) in the
 
 Value: 24
 
-Variant type: [VT_VARIANT](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_VARIANT](#Section_2.2.12) | VT_VECTOR
 
 Description: The array of information about the [**transactional messages**](#gt_transactional-message) sent from all source computers to the [**queue**](#gt_queue) on the target computer.
 
@@ -5114,7 +5114,7 @@ Description: Each entry is the number of times that a message was rejected.
 
 Value: 25
 
-Variant type: 12 | 0x1000 - [VT_VARIANT](#Section_2.2.13) | VT_VECTOR
+Variant type: 12 | 0x1000 - [VT_VARIANT](#Section_2.2.12) | VT_VECTOR
 
 Description: The array representing the [**queue**](#gt_queue) connection state history information. The array consists of the following four items, and each item is an array.
 
@@ -5175,7 +5175,7 @@ AddDigits = 1*3Digit
 
 Value: 26
 
-Variant type: [VT_UI4](#Section_2.2.13)
+Variant type: [VT_UI4](#Section_2.2.12)
 
 Description: The count of the number of [**subqueues**](#gt_subqueue) for a given [**queue**](#gt_queue).
 
@@ -5184,7 +5184,7 @@ Description: The count of the number of [**subqueues**](#gt_subqueue) for a give
 
 Value: 27
 
-Variant type: [VT_LPWSTR](#Section_2.2.13) | VT_VECTOR
+Variant type: [VT_LPWSTR](#Section_2.2.12) | VT_VECTOR
 
 Description: The list of [**subqueue**](#gt_subqueue) names (as specified in section [2.1](#Section_2.1)) for a given [**queue**](#gt_queue).
 
@@ -5198,7 +5198,7 @@ Deletion notification [**property identifiers**](#gt_property-identifier) provid
 
 Value: 1401
 
-Variant type: [VT_BLOB](#Section_2.2.13)
+Variant type: [VT_BLOB](#Section_2.2.12)
 
 Description: Contains the sequence number of the deleted object.
 
@@ -5207,7 +5207,7 @@ Description: Contains the sequence number of the deleted object.
 
 Value: 1402
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: This property MAY<43> be used to group [**MSMQ**](#gt_microsoft-message-queuing-msmq) directory objects.
 
@@ -5216,7 +5216,7 @@ Description: This property MAY<43> be used to group [**MSMQ**](#gt_microsoft-mes
 
 Value: 1403.
 
-Variant type: [VT_UI1](#Section_2.2.13).
+Variant type: [VT_UI1](#Section_2.2.12).
 
 Description: A value that specifies the scope of a deletion notification. The value MUST be one of the following.
 
@@ -5230,7 +5230,7 @@ Description: A value that specifies the scope of a deletion notification. The va
 
 Value: 1404.
 
-Variant type: [VT_UI1](#Section_2.2.13).
+Variant type: [VT_UI1](#Section_2.2.12).
 
 Description: A value that specifies the type of a deleted object. The value MUST be one of the following.
 
@@ -5250,14 +5250,14 @@ Description: A value that specifies the type of a deleted object. The value MUST
 
 Value: 1405
 
-Variant type: [VT_CLSID](#Section_2.2.13)
+Variant type: [VT_CLSID](#Section_2.2.12)
 
 Description: Contains the [**GUID**](#gt_globally-unique-identifier-guid) of the deleted object.
 
 <a id="Section_2.4"></a>
 ## 2.4 Error Codes
 
-The following table specifies [**MSMQ**](#gt_microsoft-message-queuing-msmq)-specific HRESULT values. Not all methods of all protocols return these error codes. Common **HRESULT** values are specified in [MS-ERREF](#Section_2.4) section 2.1.<44>
+The following table specifies [**MSMQ**](#gt_microsoft-message-queuing-msmq)-specific HRESULT values. Not all methods of all protocols return these error codes. Common **HRESULT** values are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.<44>
 
 | Return value/code | Description |
 | --- | --- |

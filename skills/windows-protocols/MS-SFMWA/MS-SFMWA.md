@@ -10239,7 +10239,7 @@ Content-Length: 0
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The Server and File Management Web APIs Protocol requires that all requests except GetCustomizationInfo (see section [3.10.5.1.1](#Section_3.10.5.1.1.2)) from the client be authenticated. The client is expected to submit requests with user credential headers or use an implementation-dependent authentication mechanism to obtain a security token and include that token in the HTTP Canary header. The server will validate the user credential information or security token and use it to authorize the request.
+The Server and File Management Web APIs Protocol requires that all requests except GetCustomizationInfo (see section [3.10.5.1.1](#Section_3.10.5.1.1)) from the client be authenticated. The client is expected to submit requests with user credential headers or use an implementation-dependent authentication mechanism to obtain a security token and include that token in the HTTP Canary header. The server will validate the user credential information or security token and use it to authorize the request.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

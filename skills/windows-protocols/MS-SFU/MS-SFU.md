@@ -278,7 +278,7 @@ The [**S4U2self**](#gt_service-for-user-to-self-s4u2self) extension allows a [**
 
 The [**Service for User to Proxy (S4U2proxy)**](#gt_service-for-user-to-proxy-s4u2proxy) extension provides a [**service**](#gt_service) that obtains a [**service ticket**](#gt_service-ticket) to another service on behalf of a user. This feature is known as [**constrained delegation**](#gt_constrained-delegation). The Kerberos [**ticket-granting service (TGS) exchange**](#gt_ticket-granting-service-tgs-exchange) request and response messages, KRB_TGS_REQ and KRB_TGS_REP, are used along with the new [CNAME-IN-ADDL-TKT](#Section_2.2.3) and [S4U_DELEGATION_INFO](#Section_2.2.4) data structures. The second service is typically a proxy performing some work on behalf of the first service, and the proxy is doing that work under the [**authorization**](#gt_authorization) context of the user.
 
-The S4U2proxy extension requires that the service ticket to the first service has the [**forwardable**](#gt_forwardable) flag set (see Service 1 in the figure specifying Kerberos delegation with forwarded [**TGT**](#gt_ticket-granting-ticket-tgt), section [1.3.3](#Section_1.3)). This [**ticket**](#gt_ticket) can be obtained through an [**S4U2self**](#gt_service-for-user-to-self-s4u2self) protocol exchange.
+The S4U2proxy extension requires that the service ticket to the first service has the [**forwardable**](#gt_forwardable) flag set (see Service 1 in the figure specifying Kerberos delegation with forwarded [**TGT**](#gt_ticket-granting-ticket-tgt), section [1.3.3](#Section_1.3.3)). This [**ticket**](#gt_ticket) can be obtained through an [**S4U2self**](#gt_service-for-user-to-self-s4u2self) protocol exchange.
 
 This feature differs from the Kerberos forwarded-TGT delegation mechanism and the proxy-service-ticket delegation mechanism ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 2.5) in the following ways:
 
@@ -517,7 +517,7 @@ PA-PAC-OPTIONS ::= KerberosFlags
 <a id="Section_3.1"></a>
 ## 3.1 Service Details
 
-This section defines the message processing for an application [**service**](#gt_service) (see Service 1 in the figure specifying entities involved in [**S4U**](#gt_service-for-user-s4u) protocols, section [3.1.5](#Section_1.3)) using the Service for User (S4U) extensions<9>.
+This section defines the message processing for an application [**service**](#gt_service) (see Service 1 in the figure specifying entities involved in [**S4U**](#gt_service-for-user-s4u) protocols, section [3.1.5](#Section_3.1.5)) using the Service for User (S4U) extensions<9>.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -544,7 +544,7 @@ This section contains the following information:
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 S4U2self Triggered Events
 
-A [**service**](#gt_service) (see Service 1 in the figure specifying entities involved in [**S4U**](#gt_service-for-user-s4u) protocols, section [3.1.5](#Section_1.3)) uses a **KRB_TGS_REQ** message with the [**S4U2self**](#gt_service-for-user-to-self-s4u2self) extension when the service is required to make a local access check for a user. This typically occurs when the user has sent some kind of request to the service through a non-Kerberos protocol. The service uses the S4U2self [**TGS exchange**](#gt_ticket-granting-service-tgs-exchange) subprotocol extension to obtain [**authorization data**](#gt_authorization-data) about the user from the [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc).
+A [**service**](#gt_service) (see Service 1 in the figure specifying entities involved in [**S4U**](#gt_service-for-user-s4u) protocols, section [3.1.5](#Section_3.1.5)) uses a **KRB_TGS_REQ** message with the [**S4U2self**](#gt_service-for-user-to-self-s4u2self) extension when the service is required to make a local access check for a user. This typically occurs when the user has sent some kind of request to the service through a non-Kerberos protocol. The service uses the S4U2self [**TGS exchange**](#gt_ticket-granting-service-tgs-exchange) subprotocol extension to obtain [**authorization data**](#gt_authorization-data) about the user from the [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 S4U2proxy Triggered Events
@@ -1004,7 +1004,7 @@ The changes made to this document are listed in the following table. For more in
 | --- | --- | --- |
 | [3.1.1](#Section_3.1.1) Abstract Data Model | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
 | [3.1.5.1.1.1](#Section_3.1.5.1.1.1) When to Use Each padata Type | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
-| [3.1.5.1.2](#Section_1.3.1) Service Receives S4U2self KRB_TGS_REP | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
+| [3.1.5.1.2](#Section_3.1.5.1.2) Service Receives S4U2self KRB_TGS_REP | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
 
 <a id="revision-history"></a>
 

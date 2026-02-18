@@ -355,7 +355,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [RFC1321] Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321, April 1992, [https://www.rfc-editor.org/info/rfc1321](https://go.microsoft.com/fwlink/?LinkId=90275)
 
@@ -368,7 +368,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [LDAP] Microsoft Corporation, "About Lightweight Directory Access Protocol", [http://msdn.microsoft.com/en-us/library/aa366075.aspx](https://go.microsoft.com/fwlink/?LinkId=89932)
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -819,9 +819,9 @@ This algorithm is specified in terms of a set of abstract local events that are 
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this algorithm. The specified organization is provided to facilitate the explanation of how the algorithm behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that specified in this document.
 
-The abstract data model for this algorithm comprises elements that are private to this algorithm and consists of elements that are specified in this algorithm and elements that are specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1. Although the abstract data model for this algorithm contains elements that are specified in [MS-MQDMPR], this algorithm does not share instances of any of these elements or state with any protocol. The relationship between this algorithm, a [**queue manager**](#gt_queue-manager-qm), and MSMQ protocols is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this algorithm comprises elements that are private to this algorithm and consists of elements that are specified in this algorithm and elements that are specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1. Although the abstract data model for this algorithm contains elements that are specified in [MS-MQDMPR], this algorithm does not share instances of any of these elements or state with any protocol. The relationship between this algorithm, a [**queue manager**](#gt_queue-manager-qm), and MSMQ protocols is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
-Section [3.1.1.1](#Section_3.1.1.1) details the elements from the ADM that are specified in [MS-MQDMPR]. Sections [3.1.1.2](#Section_3.1.1.3) and [3.1.1.3](#Section_3.1.1.3) detail the ADM elements that are specific to this algorithm. Section [3.1.1.4](#Section_3.1.1.4) details an extension to an ADM element specified in [MS-MQDMPR].
+Section [3.1.1.1](#Section_3.1.1.1) details the elements from the ADM that are specified in [MS-MQDMPR]. Sections [3.1.1.2](#Section_3.1.1.2) and [3.1.1.3](#Section_3.1.1.3) detail the ADM elements that are specific to this algorithm. Section [3.1.1.4](#Section_3.1.1.4) details an extension to an ADM element specified in [MS-MQDMPR].
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Externally Defined Data Elements
@@ -878,7 +878,7 @@ The Directory Service Schema Mapping algorithm does not use timers.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The algorithm MUST perform these initialization tasks before any directory operation (sections [3.1.6.1](#Section_3.1.6.1) through [3.1.6.9](#Section_5.1.8)) is called:
+The algorithm MUST perform these initialization tasks before any directory operation (sections [3.1.6.1](#Section_3.1.6.1) through [3.1.6.9](#Section_3.1.6.9)) is called:
 
 - Set the **CachedLDAPConnection.Handle** (section [3.1.1.6](#Section_3.1.1.6)) ADM element attribute to NULL and the **CachedLDAPConnection.RefCount** ADM element attribute to zero.
 - Raise a [Prepare an LDAP Connection (section 3.1.6.18)](#Section_3.1.6.18) event. The event takes no arguments. If the *rStatus* returned is not **DirectoryOperationResult.Success**, the **CachedConfigurationNamingContext** ADM element MUST be set to an empty string, and processing MUST end. Otherwise, let *DirectoryServerConnection* be a variable of type **ADCONNECTION_HANDLE** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) initialized to the value returned in *rADConnection*.
@@ -927,10 +927,10 @@ The MQDSSM algorithm MUST perform the following actions to process this event:
 
 - Determine the type of the *iDirectoryObject* argument. If the type is not one of **QueueManager**, **Queue**, **Site**, or **RoutingLink**, *rStatus* MUST be set to the **DirectoryOperationResult.GenericError**, *rObjectGUID* is undefined, and processing MUST end.
 - The create operation logic for the type of ADM element specified by the *iDirectoryObject* argument MUST be performed as specified in the sections listed following. The *rStatus* and *rObjectGUID* values specified in each section MUST be returned.
-- [QueueManager (section 3.1.6.1.1)](#Section_3.1.6.10.1)
-- [Queue (section 3.1.6.1.2)](#Section_3.1.6.1.2.2)
+- [QueueManager (section 3.1.6.1.1)](#Section_3.1.6.1.1)
+- [Queue (section 3.1.6.1.2)](#Section_3.1.6.1.2)
 - [Site (section 3.1.6.1.3)](#Section_3.1.6.1.3)
-- [RoutingLink (section 3.1.6.1.4)](#Section_5.1.5)
+- [RoutingLink (section 3.1.6.1.4)](#Section_3.1.6.1.4)
 <a id="Section_3.1.6.1.1"></a>
 ##### 3.1.6.1.1 QueueManager
 
@@ -952,14 +952,14 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 | mSMQConfiguration attribute | Attribute value computation |
 | --- | --- |
 | mSMQComputerTypeEx ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.549) | [**Directory string**](#gt_directory-string) transformed from *iDirectoryObject*.**QueueManagerVersion**. |
-| mSMQOSType ([MS-ADA2] section 2.572) | Computed from *iDirectoryObject*.**OperatingSystemType**. See section [3.1.6.1.1.4](../MS-ADA2/MS-ADA2.md). |
-| mSMQServiceType ([MS-ADA2] section 2.586) | Computed from *iDirectoryObject*.**DirectoryServer**, *iDirectoryObject*.**DirectoryServerType**, *iDirectoryObject*.**RemoteAccessServer**, and *iDirectoryObject*.**RoutingServer**. See section [3.1.6.1.1.5](../MS-ADA2/MS-ADA2.md). |
+| mSMQOSType ([MS-ADA2] section 2.572) | Computed from *iDirectoryObject*.**OperatingSystemType**. See section [3.1.6.1.1.4](#Section_3.1.6.1.1.4). |
+| mSMQServiceType ([MS-ADA2] section 2.586) | Computed from *iDirectoryObject*.**DirectoryServer**, *iDirectoryObject*.**DirectoryServerType**, *iDirectoryObject*.**RemoteAccessServer**, and *iDirectoryObject*.**RoutingServer**. See section [3.1.6.1.1.5](#Section_3.1.6.1.1.5). |
 | mSMQQuota ([MS-ADA2] section 2.582) | Integer copied from *iDirectoryObject*.**QueueManagerQuota**. |
 | mSMQJournalQuota ([MS-ADA2] section 2.564) | Integer copied from *iDirectoryObject*.**JournalQuota**. |
 | mSMQForeign ([MS-ADA2] section 2.559) | If *iDirectoryObject*.**ForeignSystem** is TRUE, mSMQForeign is 0x01 Else mSMQForeign is 0x00. |
 | mSMQSites ([MS-ADA2] section 2.598) | List of [**GUIDs**](#gt_globally-unique-identifier-guid) copied from *iDirectoryObject*.**SiteIdentifierList**. |
-| mSMQOutRoutingServers ([MS-ADA2] section 2.573) | Computed from *iDirectoryObject*.**OutRoutingServerIdentifierList**. See section [3.1.6.1.1.6](../MS-ADA2/MS-ADA2.md). |
-| mSMQInRoutingServers ([MS-ADA2] section 2.560) | Computed from *iDirectoryObject*.**InRoutingServerIdentifierList**. See section [3.1.6.1.1.7](../MS-ADA2/MS-ADA2.md). |
+| mSMQOutRoutingServers ([MS-ADA2] section 2.573) | Computed from *iDirectoryObject*.**OutRoutingServerIdentifierList**. See section [3.1.6.1.1.6](#Section_3.1.6.1.1.6). |
+| mSMQInRoutingServers ([MS-ADA2] section 2.560) | Computed from *iDirectoryObject*.**InRoutingServerIdentifierList**. See section [3.1.6.1.1.7](#Section_3.1.6.1.1.7). |
 | mSMQRoutingServices ([MS-ADA2] section 2.584) | If *iDirectoryObject*.**RoutingServer** is TRUE, mSMQRoutingServices is 0x01 Else mSMQRoutingServices is 0x00. |
 | mSMQDsServices ([MS-ADA2] section 2.557) | If *iDirectoryObject*.**DirectoryServer** is TRUE, mSMQDsServices is 0x01 Else mSMQDsServices is 0x00. |
 | mSMQDependentClientServices ([MS-ADA2] section 2.553) | If *iDirectoryObject*.**SupportingServer** is TRUE, mSMQDependentClientServices is 0x01 Else mSMQDependentClientServices is 0x00. |
@@ -1131,7 +1131,7 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 | mSMQQueueQuota ([MS-ADA2] section 2.580) | Integer number of kilobytes equal to *iDirectoryObject*.**Quota**. |
 | mSMQQueueJournalQuota ([MS-ADA2] section 2.578) | Integer number of kilobytes equal to *iDirectoryObject*.**JournalQuota**. |
 | mSMQAuthenticate ([MS-ADA2] section 2.546) | If *iDirectoryObject*.**Authentication** is TRUE, mSMQAuthenticate is 1 Else mSMQAuthenticate is 0. |
-| mSMQPrivacyLevel ([MS-ADA2] section 2.576) | Computed from *iDirectoryObject*.**PrivacyLevel**. See section [3.1.6.1.2.4](../MS-ADA2/MS-ADA2.md). |
+| mSMQPrivacyLevel ([MS-ADA2] section 2.576) | Computed from *iDirectoryObject*.**PrivacyLevel**. See section [3.1.6.1.2.4](#Section_3.1.6.1.2.4). |
 | mSMQTransactional ([MS-ADA2] section 2.599) | If *iDirectoryObject*.**Transactional is** TRUE, mSMQTransactional is 1 Else mSMQTransactional is 0. |
 | MSMQ-MulticastAddress ([MS-ADA2] section 2.543) | Directory string transformed from *iDirectoryObject*.**MulticastAddress**. |
 | nTSecurityDescriptor ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.37) | **SECURITY_DESCRIPTOR** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) structure copied from *iDirectoryObject*.**Security**. |
@@ -1195,7 +1195,7 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 | mSMQInterval2 ([MS-ADA2] section 2.562) | Integer copied from *iDirectoryObject*.**InterSiteReplicationInterval**. |
 | mSMQSiteForeign ([MS-ADA2] section 2.592) | If *iDirectoryObject*.**ForeignSite** is TRUE, mSMQSiteForeign is 0x01 Else mSMQSiteForeign is 0x00. |
 | mSMQNt4Stub ([MS-ADA2] section 2.571) | If *iDirectoryObject*.**MigratedFromMsmq10** is TRUE, mSMQNt4Stub is 0x01 Else mSMQNt4Stub is 0x00. |
-| nTSecurityDescriptor ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.37) | See section [3.1.6.1.3.4](../MS-ADA3/MS-ADA3.md). |
+| nTSecurityDescriptor ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.37) | See section [3.1.6.1.3.4](#Section_3.1.6.1.3.4). |
 
 - A [Create Object Using LDAP (section 3.1.6.12)](#Section_3.1.6.12) event MUST be generated with the following arguments:
 - *iParentPath* := "CN=Services, CN=Configuration, <root>", where <root> is as specified in section [2.2.1](#Section_2.2.1).
@@ -1225,7 +1225,7 @@ If *iAttributeList* (either supplied or constructed) includes the ADM attribute 
 - If the user referenced by the SID in the *OwnerSid* structure is not a domain user, the *OwnerSid* structure MUST be set to the well-known SID with string representation S-1-5-7 (relative identifier SECURITY_ANONYMOUS_LOGON_RID combined with identifier authority SECURITY_NT_AUTHORITY).
 - If the **Dacl** field was not copied to the *FinalSecurity* structure in step 4:
 - Let *WorldAccess* and *OwnerAccess* be **MQSITEACCESSMASK** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.23) enumerated values, initialized to zero.
-- If *OwnerSid* is a guest SID (equal to the SID designated by DOMAIN_USER_RID_GUEST, as specified in [MS-SAMR](#Section_5) section 2.2.1.14) or the user referenced by the SID in *OwnerSid* is not a domain user, *WorldAccess* MUST be set to MQSEC_SITE_GENERIC_ALL. Otherwise, *WorldAccess* MUST be set to MQSEC_SITE_GENERIC_READ, and *OwnerAccess* MUST be set to MQSEC_SITE_GENERIC_ALL.
+- If *OwnerSid* is a guest SID (equal to the SID designated by DOMAIN_USER_RID_GUEST, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.14) or the user referenced by the SID in *OwnerSid* is not a domain user, *WorldAccess* MUST be set to MQSEC_SITE_GENERIC_ALL. Otherwise, *WorldAccess* MUST be set to MQSEC_SITE_GENERIC_READ, and *OwnerAccess* MUST be set to MQSEC_SITE_GENERIC_ALL.
 - An **ACCESS_ALLOWED_ACE** ([MS-DTYP] section 2.4.4.2) structure with a **Mask** field set to *WorldAccess* and containing the well-known SID with string representation S-1-1-0 (relative identifier SECURITY_WORLD_RID combined with identifier authority SECURITY_WORLD_SID_AUTHORITY) MUST be added to the **Dacl** field in the *FinalSecurity* structure.
 - If *OwnerAccess* is nonzero, an **ACCESS_ALLOWED_ACE** structure with a **Mask** field set to *OwnerAccess* and containing the SID in *OwnerSid* MUST be added to the **Dacl** field in the *FinalSecurity* structure.
 - The **SECURITY_DESCRIPTOR** structure in *FinalSecurity* MUST be converted to self-relative format (see [MS-DTYP] section 2.4.6).
@@ -1251,9 +1251,9 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 | --- | --- |
 | description ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.153) | [**Directory string**](#gt_directory-string) transformed from *iDirectoryObject*.**Description** |
 | mSMQCost ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.550) | Integer copied from *iDirectoryObject*.**ActualCost** |
-| mSMQSite1 ([MS-ADA2] section 2.590) | Computed from *iDirectoryObject*.**Site1Identifier**. See section [3.1.6.1.4.4](../MS-ADA2/MS-ADA2.md). |
-| mSMQSite2 ([MS-ADA2] section 2.591) | Computed from *iDirectoryObject*.**Site2Identifier**. See section [3.1.6.1.4.5](../MS-ADA2/MS-ADA2.md). |
-| mSMQSiteGates ([MS-ADA2] section 2.593) | Computed from *iDirectoryObject*.**SiteGateIdentifierList**. See section [3.1.6.1.4.6](../MS-ADA2/MS-ADA2.md). |
+| mSMQSite1 ([MS-ADA2] section 2.590) | Computed from *iDirectoryObject*.**Site1Identifier**. See section [3.1.6.1.4.4](#Section_3.1.6.1.4.4). |
+| mSMQSite2 ([MS-ADA2] section 2.591) | Computed from *iDirectoryObject*.**Site2Identifier**. See section [3.1.6.1.4.5](#Section_3.1.6.1.4.5). |
+| mSMQSiteGates ([MS-ADA2] section 2.593) | Computed from *iDirectoryObject*.**SiteGateIdentifierList**. See section [3.1.6.1.4.6](#Section_3.1.6.1.4.6). |
 
 - A [Create Object Using LDAP (section 3.1.6.12)](#Section_3.1.6.12) event MUST be generated with the following arguments:
 - *iParentPath* := "CN=MsmqServices, CN=Services, CN=Configuration, <root>", where <root> is as specified in section [2.2.1](#Section_2.2.1).
@@ -1322,10 +1322,10 @@ The algorithm MUST perform the following actions to process this event:
 
 - Determine the type of *iDirectoryObject*. If the type is not one of **QueueManager**, **Queue**, **Site**, or **RoutingLink**, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, and processing MUST end.
 - Perform the steps of the delete operation for that type of ADM element, as specified in the sections listed following, and return the *rStatus* value specified in that section.
-- [QueueManager (section 3.1.6.2.1)](#Section_3.1.6.10.1)
+- [QueueManager (section 3.1.6.2.1)](#Section_3.1.6.2.1)
 - [Queue (section 3.1.6.2.2)](#Section_3.1.6.2.2)
-- [Site (section 3.1.6.2.3)](#Section_3.1.6.2.3.2)
-- [RoutingLink (section 3.1.6.2.4)](#Section_5.1.5)
+- [Site (section 3.1.6.2.3)](#Section_3.1.6.2.3)
+- [RoutingLink (section 3.1.6.2.4)](#Section_3.1.6.2.4)
 <a id="Section_3.1.6.2.1"></a>
 ##### 3.1.6.2.1 QueueManager
 
@@ -1469,11 +1469,11 @@ The algorithm MUST perform the following operations to process this event:
 - Let *UseGuid* be a GUID variable initialized to be empty. If the single element in *iFilter* is of the form "Identifier" EQUALS *aGuid*, set the value of *UseGuid* to *aGuid*.
 - If *iDirectoryObjectType* has the value **ConnectedNetwork**, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rDirectoryObject* is undefined, and processing MUST end.
 - Perform the steps of the read operation for the type of ADM element indicated by *iDirectoryObjectType*, as specified in the following sections, and return the *rStatus* and *rDirectoryObject* values specified in that section. The directory contents must NOT be modified by this operation.
-- [QueueManager (section 3.1.6.3.2)](#Section_3.1.6.10.1)
-- [Queue (section 3.1.6.3.3)](#Section_3.1.6.3.3.2)
-- [Enterprise (section 3.1.6.3.4)](#Section_3.1.6.4.3)
+- [QueueManager (section 3.1.6.3.2)](#Section_3.1.6.3.2)
+- [Queue (section 3.1.6.3.3)](#Section_3.1.6.3.3)
+- [Enterprise (section 3.1.6.3.4)](#Section_3.1.6.3.4)
 - [Site (section 3.1.6.3.5)](#Section_3.1.6.3.5)
-- [RoutingLink (section 3.1.6.3.6)](#Section_5.1.5)
+- [RoutingLink (section 3.1.6.3.6)](#Section_3.1.6.3.6)
 - [User (section 3.1.6.3.7)](#Section_3.1.6.3.7)
 <a id="Section_3.1.6.3.1"></a>
 ##### 3.1.6.3.1 Search For One Object
@@ -1683,14 +1683,14 @@ An **attribute-sort-order** value consists of the following:
 The algorithm MUST perform the following actions to process this event:
 
 - If *iDirectoryObjectType* has the value "ConnectedNetwork", *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rQueryHandle* is undefined, and processing MUST end.
-- Let *ReadIterator* be a [ReadDirectoryIteratorState (section 3.1.1.2)](#Section_3.1.1.3) ADM element instance, which MUST be created. The **ReadDirectoryIteratorState** ADM element instance referenced by *ReadIterator* MUST be added to the [ReadDirectoryIteratorStateCollection (section 3.1.1.3)](#Section_3.1.1.3) ADM element. *ReadIterator*.**Handle** MUST be set to a value that is unique within the **ReadDirectoryIteratorStateCollection** ADM element. The value of *iDirectoryObjectType* MUST be copied to *ReadIterator*.**DataElementType**.
+- Let *ReadIterator* be a [ReadDirectoryIteratorState (section 3.1.1.2)](#Section_3.1.1.2) ADM element instance, which MUST be created. The **ReadDirectoryIteratorState** ADM element instance referenced by *ReadIterator* MUST be added to the [ReadDirectoryIteratorStateCollection (section 3.1.1.3)](#Section_3.1.1.3) ADM element. *ReadIterator*.**Handle** MUST be set to a value that is unique within the **ReadDirectoryIteratorStateCollection** ADM element. The value of *iDirectoryObjectType* MUST be copied to *ReadIterator*.**DataElementType**.
 - Based on *iDirectoryObjectType*, perform the steps of the read-begin operation for that type of ADM element, as specified in the following sections, and return the *rStatus* value specified in that section. The directory contents must NOT be modified by this operation.
-- [QueueManager (section 3.1.6.4.1)](#Section_3.1.6.10.1)
-- [Queue (section 3.1.6.4.2)](#Section_3.1.6.4.2.2)
+- [QueueManager (section 3.1.6.4.1)](#Section_3.1.6.4.1)
+- [Queue (section 3.1.6.4.2)](#Section_3.1.6.4.2)
 - [Enterprise (section 3.1.6.4.3)](#Section_3.1.6.4.3)
-- [Site (section 3.1.6.4.4)](#Section_3.1.6.4.4.1)
-- [RoutingLink (section 3.1.6.4.5)](#Section_5.1.5)
-- [User (section 3.1.6.4.6)](#Section_3.1.6.4.6.3)
+- [Site (section 3.1.6.4.4)](#Section_3.1.6.4.4)
+- [RoutingLink (section 3.1.6.4.5)](#Section_3.1.6.4.5)
+- [User (section 3.1.6.4.6)](#Section_3.1.6.4.6)
 - If the value of *rStatus* is not **DirectoryOperationResult.Success**, the **ReadDirectoryIteratorState** ADM element instance referenced by *ReadIterator* MUST be removed from the **ReadDirectoryIteratorStateCollection** ADM element and discarded, *rQueryHandle* is undefined, and processing MUST end.
 - If the value of *rStatus* is **DirectoryOperationResult.Success**, *rQueryHandle* MUST be set to the value of *ReadIterator*.**Handle**, and processing MUST end.
 <a id="Section_3.1.6.4.1"></a>
@@ -1725,7 +1725,7 @@ If the **QueueManager** ADM element attribute in the original expression does no
 | --- | --- | --- |
 | **Identifier** | objectGUID ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.44) | Copy |
 | **QueueManagerVersion** | mSMQComputerTypeEx ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.549) | Copy |
-| **OperatingSystemType** | mSMQOSType ([MS-ADA2] section 2.572) | See the table in section [3.1.6.1.1.4](../MS-ADA2/MS-ADA2.md). |
+| **OperatingSystemType** | mSMQOSType ([MS-ADA2] section 2.572) | See the table in section [3.1.6.1.1.4](#Section_3.1.6.1.1.4). |
 | **CreateTime** | whenCreated ([MS-ADA3] section 2.371) | Converts to midnight (00:00:00), January 1, 1970 UTC + **CreateTime** seconds. |
 | **ModifyTime** | whenChanged ([MS-ADA3] section 2.370) | Converts to midnight (00:00:00), January 1, 1970 UTC + **ModifyTime** seconds. |
 | **QueueManagerQuota** | mSMQQuota ([MS-ADA2] section 2.582) | Copy |
@@ -1785,7 +1785,7 @@ If the **Queue** ADM element attribute in the original expression does not appea
 | **Quota** | mSMQQueueQuota ([MS-ADA2] section 2.580) | Copy |
 | **JournalQuota** | mSMQQueueJournalQuota ([MS-ADA2] section 2.564) | Copy |
 | **Authentication** | mSMQAuthenticate ([MS-ADA2] section 2.546) | TRUE converts to 1; FALSE converts to 0. |
-| **PrivacyLevel** | mSMQPrivacyLevel ([MS-ADA2] section 2.576) | See the table in section [3.1.6.1.2.4](../MS-ADA2/MS-ADA2.md). |
+| **PrivacyLevel** | mSMQPrivacyLevel ([MS-ADA2] section 2.576) | See the table in section [3.1.6.1.2.4](#Section_3.1.6.1.2.4). |
 | **Transactional** | mSMQTransactional ([MS-ADA2] section 2.599) | TRUE converts to 1; FALSE converts to 0. |
 | **MulticastAddress** | MSMQ-MulticastAddress ([MS-ADA2] section 2.543) | Copy |
 | **Security** | nTSecurityDescriptor ([MS-ADA3] section 2.37) | Copy |
@@ -1830,8 +1830,8 @@ If the **Enterprise** ADM element attribute in the original expression does not 
 | Enterprise ADM element attribute | mSMQEnterpriseSettings attribute | Value transformation |
 | --- | --- | --- |
 | **Identifier** | objectGUID ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.44) | Copy |
-| **WeakenedSecurity** | mSMQNameStyle ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.569) | See section [3.1.6.4.3.4](../MS-ADA2/MS-ADA2.md). |
-| **NonLDAPCapableQueueManagerNotification** | mSMQCSPName ([MS-ADA2] section 2.551) | See section [3.1.6.4.3.5](../MS-ADA2/MS-ADA2.md). |
+| **WeakenedSecurity** | mSMQNameStyle ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.569) | See section [3.1.6.4.3.4](#Section_3.1.6.4.3.4). |
+| **NonLDAPCapableQueueManagerNotification** | mSMQCSPName ([MS-ADA2] section 2.551) | See section [3.1.6.4.3.5](#Section_3.1.6.4.3.5). |
 | **DefaultTimeToLive** | mSMQLongLived ([MS-ADA2] section 2.567) | Copy |
 | **OldDirectory** | mSMQVersion ([MS-ADA2] section 2.601) | TRUE converts to 3; FALSE converts to 200. |
 | **Security** | nTSecurityDescriptor ([MS-ADA3] section 2.37) | Copy |
@@ -1946,8 +1946,8 @@ If the **RoutingLink** ADM element attribute in the original expression does not
 | **Description** | description ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.153) | Copy |
 | **FullPath** | distinguishedName ([MS-ADA1] section 2.177) | Copy |
 | **ActualCost** | mSMQCost ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.550) | Copy |
-| **Site1Identifier** | mSMQSite1 ([MS-ADA2] section 2.590) | See section [3.1.6.4.5.4](../MS-ADA2/MS-ADA2.md). |
-| **Site2Identifier** | mSMQSite2 ([MS-ADA2] section 2.591) | See section [3.1.6.4.5.5](../MS-ADA2/MS-ADA2.md). |
+| **Site1Identifier** | mSMQSite1 ([MS-ADA2] section 2.590) | See section [3.1.6.4.5.4](#Section_3.1.6.4.5.4). |
+| **Site2Identifier** | mSMQSite2 ([MS-ADA2] section 2.591) | See section [3.1.6.4.5.5](#Section_3.1.6.4.5.5). |
 
 - A [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be generated with the following arguments:
 - *iObjectClass* := mSMQSiteLink
@@ -2082,12 +2082,12 @@ The algorithm MUST perform the following actions to process this event:
 
 - Determine the type of *iDirectoryObject*. If the type is **ConnectedNetwork** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.9), *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, and processing MUST end.
 - Perform the steps of the write operation for that type of ADM element, as specified in the sections listed following, and return the *rStatus* value specified in that section.
-- [QueueManager (section 3.1.6.7.1)](#Section_3.1.6.10.1)
-- [Queue (section 3.1.6.7.2)](#Section_3.1.6.7.2.1)
-- [Enterprise (section 3.1.6.7.3)](#Section_3.1.6.4.3)
-- [Site (section 3.1.6.7.4)](#Section_3.1.6.7.4.3)
-- [RoutingLink (section 3.1.6.7.5)](#Section_5.1.5)
-- [User (section 3.1.6.7.6)](#Section_3.1.6.7.6.3)
+- [QueueManager (section 3.1.6.7.1)](#Section_3.1.6.7.1)
+- [Queue (section 3.1.6.7.2)](#Section_3.1.6.7.2)
+- [Enterprise (section 3.1.6.7.3)](#Section_3.1.6.7.3)
+- [Site (section 3.1.6.7.4)](#Section_3.1.6.7.4)
+- [RoutingLink (section 3.1.6.7.5)](#Section_3.1.6.7.5)
+- [User (section 3.1.6.7.6)](#Section_3.1.6.7.6)
 <a id="Section_3.1.6.7.1"></a>
 ##### 3.1.6.7.1 QueueManager
 
@@ -2108,14 +2108,14 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 | mSMQConfiguration attribute | Attribute value computation |
 | --- | --- |
 | mSMQComputerTypeEx ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.549) | [**Directory string**](#gt_directory-string) transformed from *iDirectoryObject*.**QueueManagerVersion**. |
-| mSMQOSType ([MS-ADA2] section 2.572) | Computed from *iDirectoryObject*.**OperatingSystemType**. See section [3.1.6.7.1.4](../MS-ADA2/MS-ADA2.md). |
-| mSMQServiceType ([MS-ADA2] section 2.586) | Computed from *iDirectoryObject*.**DirectoryServer**, *iDirectoryObject*.**DirectoryServerType**, *iDirectoryObject*.**RemoteAccessServer**, and *iDirectoryObject*.**RoutingServer**. See section [3.1.6.7.1.5](../MS-ADA2/MS-ADA2.md). |
+| mSMQOSType ([MS-ADA2] section 2.572) | Computed from *iDirectoryObject*.**OperatingSystemType**. See section [3.1.6.7.1.4](#Section_3.1.6.7.1.4). |
+| mSMQServiceType ([MS-ADA2] section 2.586) | Computed from *iDirectoryObject*.**DirectoryServer**, *iDirectoryObject*.**DirectoryServerType**, *iDirectoryObject*.**RemoteAccessServer**, and *iDirectoryObject*.**RoutingServer**. See section [3.1.6.7.1.5](#Section_3.1.6.7.1.5). |
 | mSMQQuota ([MS-ADA2] section 2.582) | Integer copied from *iDirectoryObject*.**QueueManagerQuota**. |
 | mSMQJournalQuota ([MS-ADA2] section 2.564) | Integer copied from *iDirectoryObject*.**JournalQuota**. |
 | mSMQForeign ([MS-ADA2] section 2.559) | If *iDirectoryObject*.**ForeignSystem** is TRUE, mSMQForeign is 0x01 Else mSMQForeign is 0x00. |
 | mSMQSites ([MS-ADA2] section 2.598) | List of [**GUIDs**](#gt_globally-unique-identifier-guid) copied from *iDirectoryObject*.**SiteIdentifierList**. |
-| mSMQOutRoutingServers ([MS-ADA2] section 2.573) | Computed from *iDirectoryObject*.**OutRoutingServerIdentifierList**. See section [3.1.6.7.1.6](../MS-ADA2/MS-ADA2.md). |
-| mSMQInRoutingServers ([MS-ADA2] section 2.560) | Computed from *iDirectoryObject*.**InRoutingServerIdentifierList**. See section [3.1.6.7.1.7](../MS-ADA2/MS-ADA2.md). |
+| mSMQOutRoutingServers ([MS-ADA2] section 2.573) | Computed from *iDirectoryObject*.**OutRoutingServerIdentifierList**. See section [3.1.6.7.1.6](#Section_3.1.6.7.1.6). |
+| mSMQInRoutingServers ([MS-ADA2] section 2.560) | Computed from *iDirectoryObject*.**InRoutingServerIdentifierList**. See section [3.1.6.7.1.7](#Section_3.1.6.7.1.7). |
 | mSMQRoutingServices ([MS-ADA2] section 2.584) | If *iDirectoryObject*.**RoutingServer** is TRUE, mSMQRoutingServices is 0x01 Else mSMQRoutingServices is 0x00. |
 | mSMQDsServices ([MS-ADA2] section 2.557) | If *iDirectoryObject*.**DirectoryServer** is TRUE, mSMQDsServices is 0x01 Else mSMQDsServices is 0x00. |
 | mSMQDependentClientServices ([MS-ADA2] section 2.553) | If *iDirectoryObject*.**SupportingServer** is TRUE, mSMQDependentClientServices is 0x01 Else mSMQDependentClientServices is 0x00. |
@@ -2309,7 +2309,7 @@ If this condition is violated, *rStatus* MUST be set to **DirectoryOperationResu
 | mSMQQueueQuota ([MS-ADA2] section 2.580) | Integer copied from *iDirectoryObject*.**Quota**. |
 | mSMQQueueJournalQuota ([MS-ADA2] section 2.564) | Integer copied from *iDirectoryObject*.**JournalQuota**. |
 | mSMQAuthenticate ([MS-ADA2] section 2.546) | If *iDirectoryObject*.**Authentication** is TRUE, mSMQAuthenticate is 1 Else mSMQAuthenticate is 0. |
-| mSMQPrivacyLevel ([MS-ADA2] section 2.576) | Computed from *iDirectoryObject*.**PrivacyLevel**. See section [3.1.6.7.2.4](../MS-ADA2/MS-ADA2.md). |
+| mSMQPrivacyLevel ([MS-ADA2] section 2.576) | Computed from *iDirectoryObject*.**PrivacyLevel**. See section [3.1.6.7.2.4](#Section_3.1.6.7.2.4). |
 | MSMQ-MulticastAddress ([MS-ADA2]] section 2.543) | Directory string transformed from *iDirectoryObject*.**MulticastAddress**. |
 | mSMQBasePriority ([MS-ADA2] section 2.547) | Integer copied from *iDirectoryObject*.**BasePriority**. |
 
@@ -2368,7 +2368,7 @@ There are no preconditions for the [Write Directory (section 3.1.6.7)](#Sectio
 | mSMQEnterpriseSettings attribute | Attribute value computation |
 | --- | --- |
 | mSMQNameStyle ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.569) | If *iDirectoryObject*.**WeakenedSecurity** equals disabled, mSMQNameStyle is 0x00 Else if *iDirectoryObject*.**WeakenedSecurity** equals enabled, mSMQNameStyle is 0x01. |
-| mSMQCSPName ([MS-ADA2] section 2.551) | Computed from *iDirectoryObject*.**NonLDAPCapableQueueManagerNotification**. See section [3.1.6.7.3.4](../MS-ADA2/MS-ADA2.md). |
+| mSMQCSPName ([MS-ADA2] section 2.551) | Computed from *iDirectoryObject*.**NonLDAPCapableQueueManagerNotification**. See section [3.1.6.7.3.4](#Section_3.1.6.7.3.4). |
 | mSMQLongLived ([MS-ADA2] section 2.567) | Integer copied from *iDirectoryObject*.**DefaultTimeToLive**. |
 | mSMQVersion ([MS-ADA2] section 2.601) | If *iDirectoryObject*.**OldDirectory** is TRUE, mSMQVersion is 3 Else mSMQVersion is 200. |
 
@@ -2456,9 +2456,9 @@ If this condition is violated, *rStatus* MUST be set to **DirectoryOperationResu
 | --- | --- |
 | description ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.153) | [**Directory string**](#gt_directory-string) transformed from *iDirectoryObject*.**Description**. |
 | mSMQCost ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.550) | Integer copied from *iDirectoryObject*.**ActualCost**. |
-| mSMQSite1 ([MS-ADA2] section 2.590) | Computed from *iDirectoryObject*.**Site1Identifier**. See section [3.1.6.7.5.4](../MS-ADA2/MS-ADA2.md). |
-| mSMQSite2 ([MS-ADA2] section 2.591) | Computed from *iDirectoryObject*.**Site2Identifier**. See section [3.1.6.7.5.5](../MS-ADA2/MS-ADA2.md). |
-| mSMQSiteGates ([MS-ADA2] section 2.593) | Computed from *iDirectoryObject*.**SiteGateIdentifierList**. See section [3.1.6.7.5.6](../MS-ADA2/MS-ADA2.md). |
+| mSMQSite1 ([MS-ADA2] section 2.590) | Computed from *iDirectoryObject*.**Site1Identifier**. See section [3.1.6.7.5.4](#Section_3.1.6.7.5.4). |
+| mSMQSite2 ([MS-ADA2] section 2.591) | Computed from *iDirectoryObject*.**Site2Identifier**. See section [3.1.6.7.5.5](#Section_3.1.6.7.5.5). |
+| mSMQSiteGates ([MS-ADA2] section 2.593) | Computed from *iDirectoryObject*.**SiteGateIdentifierList**. See section [3.1.6.7.5.6](#Section_3.1.6.7.5.6). |
 
 - Let *WriteGUID* be a [**distinguished name**](#gt_distinguished-name-dn), initialized to be empty. If *iDirectoryObject*.**Identifier** is populated, the value of *iDirectoryObject*.**Identifier** MUST be copied to *WriteGUID*.
 - Let *WriteDN* be a distinguished name, initialized to be empty.
@@ -2633,9 +2633,9 @@ The algorithm MUST perform the following actions to process this event:
 - Based on *iDirectoryObjectType*, perform the conversion steps for that type of ADM element, as specified in the following sections.
 - [QueueManager (section 3.1.6.10.1)](#Section_3.1.6.10.1)
 - [Queue (section 3.1.6.10.2)](#Section_3.1.6.10.2)
-- [Enterprise (section 3.1.6.10.3)](#Section_3.1.6.4.3)
+- [Enterprise (section 3.1.6.10.3)](#Section_3.1.6.10.3)
 - [Site (section 3.1.6.10.4)](#Section_3.1.6.10.4)
-- [RoutingLink (section 3.1.6.10.5)](#Section_5.1.5)
+- [RoutingLink (section 3.1.6.10.5)](#Section_3.1.6.10.5)
 - [User (section 3.1.6.10.6)](#Section_3.1.6.10.6)
 <a id="Section_3.1.6.10.1"></a>
 ##### 3.1.6.10.1 QueueManager
@@ -2771,9 +2771,9 @@ This event MUST be generated with the following arguments:
 | QueueManager ADM element attribute | Attribute value computation | If not set, default value or error? |
 | --- | --- | --- |
 | **Identifier** | GUID copied from objectGUID ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.44). | Error |
-| **ComputerName** | Computed from distinguishedName ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.177); see section [3.1.6.11.1.1](../MS-ADA1/MS-ADA1.md). | Error |
+| **ComputerName** | Computed from distinguishedName ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.177); see section [3.1.6.11.1.1](#Section_3.1.6.11.1.1). | Error |
 | **QueueManagerVersion** | Unicode string transformed from mSMQComputerTypeEx ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.549). | Empty string |
-| **OperatingSystemType** | Computed from mSMQOSType ([MS-ADA2] section 2.572); see section [3.1.6.11.1.2](../MS-ADA2/MS-ADA2.md). | The enumeration value **Unknown**. |
+| **OperatingSystemType** | Computed from mSMQOSType ([MS-ADA2] section 2.572); see section [3.1.6.11.1.2](#Section_3.1.6.11.1.2). | The enumeration value **Unknown**. |
 | **QualifiedComputerName** | Set in a following step. | N/A |
 | **CreateTime** | Integer time value expressed as the number of seconds elapsed from midnight (00:00:00), January 1, 1970 UTC to whenCreated ([MS-ADA3] section 2.371). | Error |
 | **ModifyTime** | Integer time value expressed as the number of seconds elapsed from midnight (00:00:00), January 1, 1970 UTC to whenChanged ([MS-ADA3] section 2.370). | Error |
@@ -2782,11 +2782,11 @@ This event MUST be generated with the following arguments:
 | **ForeignSystem** | If mSMQForeign ([MS-ADA2] section 2.559) equals 0x01, **ForeignSystem** is TRUE Else if mSMQForeign equals 0x00, **ForeignSystem** is FALSE. | FALSE |
 | **FullPath** | [**Distinguished name**](#gt_distinguished-name-dn) copied from distinguishedName ([MS-ADA1] section 2.177). | Error |
 | **SiteIdentifierList** | List of GUIDs copied from mSMQSites ([MS-ADA2] section 2.598). | Empty list |
-| **OutRoutingServerIdentifierList** | Computed from mSMQOutRoutingServers ([MS-ADA2] section 2.573); see section [3.1.6.11.1.3](../MS-ADA2/MS-ADA2.md). | Empty list |
-| **InRoutingServerIdentifierList** | Computed from mSMQInRoutingServers ([MS-ADA2] section 2.560); see section [3.1.6.11.1.4](../MS-ADA2/MS-ADA2.md). | Empty list |
+| **OutRoutingServerIdentifierList** | Computed from mSMQOutRoutingServers ([MS-ADA2] section 2.573); see section [3.1.6.11.1.3](#Section_3.1.6.11.1.3). | Empty list |
+| **InRoutingServerIdentifierList** | Computed from mSMQInRoutingServers ([MS-ADA2] section 2.560); see section [3.1.6.11.1.4](#Section_3.1.6.11.1.4). | Empty list |
 | **RoutingServer** | If mSMQRoutingServices ([MS-ADA2] section 2.584) equals 0x01, **RoutingServer** is TRUE Else if mSMQRoutingServices equals 0x00, **RoutingServer** is FALSE. | FALSE |
 | **DirectoryServer** | If mSMQDsServices ([MS-ADA2] section 2.557) equals 0x01, **DirectoryServer** is TRUE Else if mSMQDsServices equals 0x00, **DirectoryServer** is FALSE. | FALSE |
-| **DirectoryServerType** | Computed from mSMQDsServices ([MS-ADA2] section 2.557) and mSMQServiceType ([MS-ADA2] section 2.586); see section [3.1.6.11.1.5](../MS-ADA2/MS-ADA2.md). | The enumeration value **Standalone** if **DirectoryServer** equals TRUE; undefined if **DirectoryServer** equals FALSE or is unpopulated. |
+| **DirectoryServerType** | Computed from mSMQDsServices ([MS-ADA2] section 2.557) and mSMQServiceType ([MS-ADA2] section 2.586); see section [3.1.6.11.1.5](#Section_3.1.6.11.1.5). | The enumeration value **Standalone** if **DirectoryServer** equals TRUE; undefined if **DirectoryServer** equals FALSE or is unpopulated. |
 | **RemoteAccessServer** | If bit 0x00000010 of mSMQServiceType ([MS-ADA2] section 2.586) is set, **RemoteAccessServer** is TRUE Else if bit 0x00000010 of mSMQServiceType is not set, **RemoteAccessServer** is FALSE. | FALSE |
 | **SupportingServer** | If mSMQDependentClientServices ([MS-ADA2] section 2.553) equals 0x01, **SupportingServer** is TRUE Else if mSMQDependentClientServices equals 0x00, **SupportingServer** is FALSE. | FALSE |
 | **PublicEncryptionKeyList** | **MQDSPUBLICKEYS** structure ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.2) copied from mSMQEncryptKey ([MS-ADA2] section 2.558). | Empty list |
@@ -2803,7 +2803,7 @@ This event MUST be generated with the following arguments:
 | **QualifiedComputerName** | dNSHostName ([MS-ADA1] section 2.185) | [**Unicode**](#gt_unicode) string transformed from dNSHostName. |
 | **PublicSigningKeyList** | mSMQSignCertificates ([MS-ADA2] section 2.587) | **MQUSERSIGNCERTS**([MS-MQMQ] section 2.2.21) structure copied from mSMQSignCertificates. |
 | **OperatingSystemVersion** | operatingSystemVersion ([MS-ADA3] section 2.56) | Unicode string transformed from operatingSystemVersion. |
-| **Clustered** | servicePrincipalName ([MS-ADA3] section 2.253) | See section [3.1.6.11.1.6](../MS-ADA3/MS-ADA3.md). |
+| **Clustered** | servicePrincipalName ([MS-ADA3] section 2.253) | See section [3.1.6.11.1.6](#Section_3.1.6.11.1.6). |
 
 - If the Get Object Properties Using LDAP event returns an *rStatus* that is not **DirectoryOperationResult.Success**, *rStatus* MUST be set to the *rStatus* returned by the Get Object Properties Using LDAP event, *rDirectoryObject* is undefined, and processing MUST end. If dNSHostName or servicePrincipalName is required, but the value returned in *rValues* for that attribute is empty, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rDirectoryObject* is undefined, and processing MUST end. If operatingSystemVersion is required but not set on the computer object, a default value MUST be supplied.<11>
 - For each of the **QueueManager** ADM element attributes **QualifiedComputerName**, **PublicSigningKeyList**, and **Clustered** that appears in the *iADMAttributeList* argument, that attribute must be set on *rDirectoryObject* according to the computation rule specified in the table in step 4. If **PublicSigningKeyList** appears in **ReadIterator.AttributeList**, but **mSMQSignCertificates** is not set on the computer object, a default value MUST be supplied for the **PublicSigningKeyList** ADM attribute.<12>
@@ -2893,13 +2893,13 @@ The value of *rDirectoryObject*.**Clustered** MUST be computed from the serviceP
 | **CreateTime** | Integer time value expressed as the number of seconds elapsed from midnight (00:00:00), January 1, 1970 UTC to whenCreated ([MS-ADA3] section 2.371). | Error. |
 | **ModifyTime** | Integer time value expressed as the number of seconds elapsed from midnight (00:00:00), January 1, 1970 UTC to whenChanged ([MS-ADA3] section 2.370). | Error. |
 | **Type** | GUID copied from mSMQQueueType ([MS-ADA2] section 2.581). | Default value: a GUID with all fields set to zero. |
-| **Pathname** | Computed from distinguishedName ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.177) and mSMQQueueNameExt ([MS-ADA2] section 2.579); see section [3.1.6.11.2.1](../MS-ADA1/MS-ADA1.md). | See section 3.1.6.11.2.1. |
+| **Pathname** | Computed from distinguishedName ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.177) and mSMQQueueNameExt ([MS-ADA2] section 2.579); see section [3.1.6.11.2.1](#Section_3.1.6.11.2.1). | See section 3.1.6.11.2.1. |
 | **QualifiedPathName** | Set in a following step. distinguishedName ([MS-ADA1] section 2.177) and mSMQQueueNameExt ([MS-ADA2] section 2.579) are required. | N/A |
 | **Journaling** | If mSMQJournal ([MS-ADA2] section 2.563) equals 1, **Journaling** is TRUE Else if mSMQJournal equals 0, **Journaling** is FALSE. | Default value: FALSE. |
 | **Quota** | Integer copied from mSMQQueueQuota ([MS-ADA2] section 2.580). | Default value: 0xFFFFFFFF. |
 | **JournalQuota** | Integer copied from mSMQQueueJournalQuota ([MS-ADA2] section 2.578). | Default value: 0xFFFFFFFF. |
 | **Authentication** | If mSMQAuthenticate ([MS-ADA2] section 2.546) equals 1, **Authentication** is TRUE Else if mSMQAuthenticate equals 0, **Authentication** is FALSE. | Default value: FALSE. |
-| **PrivacyLevel** | Computed from mSMQPrivacyLevel ([MS-ADA2] section 2.576); see section [3.1.6.11.2.3](../MS-ADA2/MS-ADA2.md). | Default value: enumeration value **Optional**. |
+| **PrivacyLevel** | Computed from mSMQPrivacyLevel ([MS-ADA2] section 2.576); see section [3.1.6.11.2.3](#Section_3.1.6.11.2.3). | Default value: enumeration value **Optional**. |
 | **Transactional** | If mSMQTransactional ([MS-ADA2] section 2.599) equals 1, **Transactional** is TRUE Else if mSMQTransactional equals 0, **Transactional** is FALSE. | Default value: FALSE. |
 | **MulticastAddress** | Unicode string transformed from MSMQ-MulticastAddress ([MS-ADA2] section 2.543). | Default value: empty Unicode string. |
 | **Security** | **Security descriptor** copied from nTSecurityDescriptor ([MS-ADA3] section 2.37). | Error |
@@ -2963,8 +2963,8 @@ The mSMQPrivacyLevel attribute is an integer that MUST have one of the values li
 | --- | --- | --- |
 | **Identifier** | [**GUID**](#gt_globally-unique-identifier-guid) copied from objectGUID ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.44). | Error |
 | **Name** | See section [3.1.6.11.3.1](#Section_3.1.6.11.3.1). | See section 3.1.6.11.3.1 |
-| **WeakenedSecurity** | Computed from mSMQNameStyle ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.569); see section [3.1.6.11.3.2](../MS-ADA2/MS-ADA2.md). | Default value |
-| **NonLDAPCapableQueueManagerNotification** | Computed from mSMQCSPName ([MS-ADA2] section 2.551); see section [3.1.6.11.3.3](../MS-ADA2/MS-ADA2.md). | Default value |
+| **WeakenedSecurity** | Computed from mSMQNameStyle ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.569); see section [3.1.6.11.3.2](#Section_3.1.6.11.3.2). | Default value |
+| **NonLDAPCapableQueueManagerNotification** | Computed from mSMQCSPName ([MS-ADA2] section 2.551); see section [3.1.6.11.3.3](#Section_3.1.6.11.3.3). | Default value |
 | **DefaultTimeToLive** | Integer copied from mSMQLongLived ([MS-ADA2] section 2.567). | Default value |
 | **OldDirectory** | If mSMQVersion ([MS-ADA2] section 2.601) equals 3, **OldDirectory** is TRUE Else if mSMQVersion equals 200, **OldDirectory** is FALSE. | Default value |
 | **Security** | **Security descriptor** copied from nTSecurityDescriptor ([MS-ADA3] section 2.37). | Error |
@@ -3024,9 +3024,9 @@ The mSMQCSPName attribute is a string that MUST have one of the values listed in
 | **Description** | [**Unicode**](#gt_unicode) string transformed from description ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.153). | Default value |
 | **FullPath** | Distinguished name copied from distinguishedName ([MS-ADA1] section 2.177). | Error |
 | **ActualCost** | Integer copied from mSMQCost ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.550). | Error |
-| **Site1Identifier** | Computed from mSMQSite1 ([MS-ADA2] section 2.590); see section [3.1.6.11.5.1](../MS-ADA2/MS-ADA2.md). | Error |
-| **Site2Identifier** | Computed from mSMQSite2 ([MS-ADA2] section 2.591); see section [3.1.6.11.5.2](../MS-ADA2/MS-ADA2.md). | Error |
-| **SiteGateIdentifierList** | Computed from mSMQSiteGates ([MS-ADA2] section 2.593); see section [3.1.6.11.5.3](../MS-ADA2/MS-ADA2.md). | Default value |
+| **Site1Identifier** | Computed from mSMQSite1 ([MS-ADA2] section 2.590); see section [3.1.6.11.5.1](#Section_3.1.6.11.5.1). | Error |
+| **Site2Identifier** | Computed from mSMQSite2 ([MS-ADA2] section 2.591); see section [3.1.6.11.5.2](#Section_3.1.6.11.5.2). | Error |
+| **SiteGateIdentifierList** | Computed from mSMQSiteGates ([MS-ADA2] section 2.593); see section [3.1.6.11.5.3](#Section_3.1.6.11.5.3). | Default value |
 
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.11.5.1"></a>
@@ -3710,7 +3710,7 @@ The following sections describe, for each combination of object and operation, t
 <a id="Section_5.1.1"></a>
 ### 5.1.1 QueueManager
 
-The directory representation of a **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.1](#Section_3.1.6.10.1), [3.1.6.2.1](#Section_3.1.6.10.1), [3.1.6.3.2](#Section_3.1.6.10.1), [3.1.6.4.1](#Section_3.1.6.10.1), and [3.1.6.7.1](#Section_3.1.6.10.1). These operations always act on an mSMQConfiguration ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.163) [**Active Directory**](#gt_active-directory) object and can also act on computer ([MS-ADSC] section 2.21) and mSMQSettings ([MS-ADSC] section 2.167) objects. The default security is discussed in section [3.1.6.1.1.8](#Section_3.1.6.1.1.8).
+The directory representation of a **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.1](#Section_3.1.6.1.1), [3.1.6.2.1](#Section_3.1.6.2.1), [3.1.6.3.2](#Section_3.1.6.3.2), [3.1.6.4.1](#Section_3.1.6.4.1), and [3.1.6.7.1](#Section_3.1.6.7.1). These operations always act on an mSMQConfiguration ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.163) [**Active Directory**](#gt_active-directory) object and can also act on computer ([MS-ADSC] section 2.21) and mSMQSettings ([MS-ADSC] section 2.167) objects. The default security is discussed in section [3.1.6.1.1.8](#Section_3.1.6.1.1.8).
 
 To create the directory representation of a **QueueManager** ADM element instance requires at least RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent computer object. If the **PublicSigningKeyList** ADM attribute is present, as described in section [3.1.6.1.1.3](#Section_3.1.6.1.1.3), RIGHT_GENERIC_WRITE ([MS-ADTS] section 5.1.3.2) access is also required on the parent object. If one or more associated mSMQSettings objects are required to be created, as described in section 3.1.6.1.1.3, RIGHT_DS_CREATE_CHILD access is required on the parent objects of the mSMQSettings objects, which are of class server ([MS-ADSC] 2.250).
 
@@ -3723,7 +3723,7 @@ To modify the directory representation of a **QueueManager** ADM element instanc
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Queue
 
-The directory representation of a **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.2](#Section_3.1.6.1.2.2), [3.1.6.2.2](#Section_3.1.6.2.2), [3.1.6.3.3](#Section_3.1.6.3.3.2), [3.1.6.4.2](#Section_3.1.6.4.2.2), and [3.1.6.7.2](#Section_3.1.6.7.2.1). These operations act on an mSMQQueue ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.166) [**Active Directory**](#gt_active-directory) object. The default security is discussed in [MS-MQDMPR] section 3.1.7.1.3.1.
+The directory representation of a **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.2](#Section_3.1.6.1.2), [3.1.6.2.2](#Section_3.1.6.2.2), [3.1.6.3.3](#Section_3.1.6.3.3), [3.1.6.4.2](#Section_3.1.6.4.2), and [3.1.6.7.2](#Section_3.1.6.7.2). These operations act on an mSMQQueue ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.166) [**Active Directory**](#gt_active-directory) object. The default security is discussed in [MS-MQDMPR] section 3.1.7.1.3.1.
 
 To create the directory representation of a **Queue** ADM element instance requires RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent mSMQConfiguration ([MS-ADSC] section 2.163) object.
 
@@ -3736,7 +3736,7 @@ To modify the directory representation of a **Queue** ADM element instance requi
 <a id="Section_5.1.3"></a>
 ### 5.1.3 Enterprise
 
-The directory representation of an **Enterprise** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.6) ADM element instance can be read and modified, as described in sections [3.1.6.3.4](#Section_3.1.6.4.3), [3.1.6.4.3](#Section_3.1.6.4.3), and [3.1.6.7.3](#Section_3.1.6.4.3). These operations act on an mSMQEnterpriseSettings ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.164) [**Active Directory**](#gt_active-directory) object.
+The directory representation of an **Enterprise** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.6) ADM element instance can be read and modified, as described in sections [3.1.6.3.4](#Section_3.1.6.3.4), [3.1.6.4.3](#Section_3.1.6.4.3), and [3.1.6.7.3](#Section_3.1.6.7.3). These operations act on an mSMQEnterpriseSettings ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.164) [**Active Directory**](#gt_active-directory) object.
 
 To read the attributes of an **Enterprise** ADM element instance requires RIGHT_GENERIC_READ ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the object.
 
@@ -3745,7 +3745,7 @@ To modify the directory representation of an **Enterprise** ADM element instance
 <a id="Section_5.1.4"></a>
 ### 5.1.4 Site
 
-The directory representation of a **Site** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.7) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.3](#Section_3.1.6.1.3), [3.1.6.2.3](#Section_3.1.6.2.3.2), [3.1.6.3.5](#Section_3.1.6.3.5), [3.1.6.4.4](#Section_3.1.6.4.4.1), and [3.1.6.7.4](#Section_3.1.6.7.4.3). These operations act on a site ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.258) [**Active Directory**](#gt_active-directory) object.
+The directory representation of a **Site** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.7) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.3](#Section_3.1.6.1.3), [3.1.6.2.3](#Section_3.1.6.2.3), [3.1.6.3.5](#Section_3.1.6.3.5), [3.1.6.4.4](#Section_3.1.6.4.4), and [3.1.6.7.4](#Section_3.1.6.7.4). These operations act on a site ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.258) [**Active Directory**](#gt_active-directory) object.
 
 To create the directory representation of a **Site** ADM element instance requires RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent object, which is of class sitesContainer ([MS-ADSC] section 2.261) and has a fixed distinguished name of "CN=Sites,CN=Configuration,<root>".
 
@@ -3758,7 +3758,7 @@ To modify the directory representation of a **Site** ADM element instance requir
 <a id="Section_5.1.5"></a>
 ### 5.1.5 RoutingLink
 
-The directory representation of a **RoutingLink** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.8) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.4](#Section_5.1.5), [3.1.6.2.4](#Section_5.1.5), [3.1.6.3.6](#Section_5.1.5), [3.1.6.4.5](#Section_5.1.5), and [3.1.6.7.5](#Section_5.1.5). These operations act on an mSMQSiteLink ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.168) Active Directory object.
+The directory representation of a **RoutingLink** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.8) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.4](#Section_3.1.6.1.4), [3.1.6.2.4](#Section_3.1.6.2.4), [3.1.6.3.6](#Section_3.1.6.3.6), [3.1.6.4.5](#Section_3.1.6.4.5), and [3.1.6.7.5](#Section_3.1.6.7.5). These operations act on an mSMQSiteLink ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.168) Active Directory object.
 
 To create the directory representation of a **RoutingLink** ADM element instance requires RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent mSMQEnterpriseSettings ([MS-ADSC] section 2.164) object.
 
@@ -3771,7 +3771,7 @@ To modify the directory representation of a **RoutingLink** ADM element instance
 <a id="Section_5.1.6"></a>
 ### 5.1.6 User
 
-The directory representation of a **User** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.15) ADM element instance can be read and modified, as described in sections [3.1.6.3.7](#Section_3.1.6.3.7), [3.1.6.4.6](#Section_3.1.6.4.6.3), and [3.1.6.7.6](#Section_3.1.6.7.6.3). These operations act on a user ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.269) [**Active Directory**](#gt_active-directory) object.
+The directory representation of a **User** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.15) ADM element instance can be read and modified, as described in sections [3.1.6.3.7](#Section_3.1.6.3.7), [3.1.6.4.6](#Section_3.1.6.4.6), and [3.1.6.7.6](#Section_3.1.6.7.6). These operations act on a user ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.269) [**Active Directory**](#gt_active-directory) object.
 
 To read the attributes of a **User** ADM element instance requires RIGHT_GENERIC_READ ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the object.
 
@@ -3785,7 +3785,7 @@ A [queue alias (section 2.3)](#Section_2.3) can be read, as described in secti
 <a id="Section_5.1.8"></a>
 ### 5.1.8 Distribution List
 
-A distribution list can be read, as described in section [3.1.6.9](#Section_5.1.8). This operation acts on a group ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.55) object and requires RIGHT_GENERIC_READ ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the object.
+A distribution list can be read, as described in section [3.1.6.9](#Section_3.1.6.9). This operation acts on a group ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.55) object and requires RIGHT_GENERIC_READ ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the object.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

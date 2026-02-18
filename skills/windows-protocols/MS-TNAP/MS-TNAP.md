@@ -360,7 +360,7 @@ In the context of the Telnet: NTLM Authentication Protocol, the following modifi
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The following sections provide a detailed specification of Telnet: NTLM Authentication Protocol message computation. Sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_3.2.5) specify how the client and server must compute messages and respond to messages, respectively.
+The following sections provide a detailed specification of Telnet: NTLM Authentication Protocol message computation. Sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5) specify how the client and server must compute messages and respond to messages, respectively.
 
 <a id="Section_3.1"></a>
 ## 3.1 Client Details
@@ -375,9 +375,9 @@ Figure 4: Client activity during Telnet: NTLM Authentication Protocol processing
 - **negotiate_data_sent:** This state indicates that the client received a SEND command from the server, and in response, the client sent an [**IS command**](#gt_is-command) with the [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message).
 - **authenticate_data_sent:** This state indicates that the client received an [IS](#Section_2.2.2) [NTLM Command Code = **NTLM_CHALLENGE**] from the server, and in response, the client sent an IS command with [**NTLM AUTHENTICATE_MESSAGE**](#gt_ntlm-authenticate_message).
 - **authentication_complete** (end state): This state indicates the completion of Telnet: NTLM Authentication Protocol message exchanges.
-The actions that the client takes in response to an incoming message from the server are specified in section [3.1.5](#Section_3.2.5).
+The actions that the client takes in response to an incoming message from the server are specified in section [3.1.5](#Section_3.1.5).
 
-This state diagram is included for explanatory purposes only. Implementations are not required to use the same state names as used in the diagram. Section 3.1.5 specifies each transaction in the state diagram in detail. The state machine diagram can be used in conjunction with the content in sections [3.1.1](#Section_3.2.1) through [3.1.7](#Section_3.1.7) to gain a complete understanding of the client role.
+This state diagram is included for explanatory purposes only. Implementations are not required to use the same state names as used in the diagram. Section 3.1.5 specifies each transaction in the state diagram in detail. The state machine diagram can be used in conjunction with the content in sections [3.1.1](#Section_3.1.1) through [3.1.7](#Section_3.1.7) to gain a complete understanding of the client role.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -392,7 +392,7 @@ The following variable is internal to the client implementation and is not sent 
 - negotiate_data_sent
 - authenticate_data_sent
 - authentication_complete
-**send_not_received** indicates the start state, and **authentication_complete** indicates the end state. **Negotiate_data_sent** and **authenticate_data_sent** are intermediate states. Section [3.1.5](#Section_3.2.5) specifies how AUTH_STATE is used in the context of the Telnet: NTLM Authentication Protocol.
+**send_not_received** indicates the start state, and **authentication_complete** indicates the end state. **Negotiate_data_sent** and **authenticate_data_sent** are intermediate states. Section [3.1.5](#Section_3.1.5) specifies how AUTH_STATE is used in the context of the Telnet: NTLM Authentication Protocol.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -529,7 +529,7 @@ Figure 5: Server activity during Telnet: NTLM Authentication Protocol processing
 - **authentication_complete** (end state): This state indicates the completion of Telnet: NTLM Authentication Protocol message exchanges.
 The actions that the server takes in response to an incoming message from the client are specified in section [3.2.5](#Section_3.2.5).
 
-This state diagram is included for explanatory purposes only. Implementations are not required to use the same state names as used in the diagram. Section 3.2.5 specifies each transaction in the state diagram in detail. The state machine diagram can be used in conjunction with content in sections [3.2.1](#Section_3.2.1) through [3.2.7](#Section_3.1.7) to gain a complete understanding of the server role.
+This state diagram is included for explanatory purposes only. Implementations are not required to use the same state names as used in the diagram. Section 3.2.5 specifies each transaction in the state diagram in detail. The state machine diagram can be used in conjunction with content in sections [3.2.1](#Section_3.2.1) through [3.2.7](#Section_3.2.7) to gain a complete understanding of the server role.
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -1001,7 +1001,7 @@ It is recommended that implementers familiarize themselves with the security con
 
 | Security parameter | Section |
 | --- | --- |
-| NTLM | [2](#Section_1.3) and [3](#Section_1.3) |
+| NTLM | [2](#Section_2) and [3](#Section_3) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

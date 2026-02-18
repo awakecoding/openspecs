@@ -570,7 +570,7 @@ The server issues a challenge using an [**HTTP**](#gt_hypertext-transfer-protoco
 
 None.
 
-See section [5.1](#Section_5) for security considerations.
+See section [5.1](#Section_5.1) for security considerations.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Thumbprint based certificate challenge
@@ -603,7 +603,7 @@ The server issues a challenge using an [**HTTP**](#gt_hypertext-transfer-protoco
 
 None.
 
-See section [5.1](#Section_5) for security considerations.
+See section [5.1](#Section_5.1) for security considerations.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Challenge response processing
@@ -623,7 +623,7 @@ After processing the challenge response, the server can determine whether the pr
 <a id="Section_3.2.5.3.3"></a>
 ##### 3.2.5.3.3 Processing Details
 
-When the server receives the challenge response, the server SHOULD perform the same checks that it performed to determine whether to issue an issuer based or thumbprint based certificate challenge (section [3.2.5](#Section_4.1.2)).
+When the server receives the challenge response, the server SHOULD perform the same checks that it performed to determine whether to issue an issuer based or thumbprint based certificate challenge (section [3.2.5](#Section_3.2.5)).
 
 If the request contains an Authorization header that has an AuthToken parameter, the server uses all of the following criteria to verify the client's proof of possession of the appropriate private key.
 

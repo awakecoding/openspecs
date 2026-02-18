@@ -566,7 +566,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [ECMA-321] ECMA International, "Streaming Lossless Data Compression Algorithm - (SLDC)", June 2001, [http://www.ecma-International.org/publications/standards/Ecma-321.htm](https://go.microsoft.com/fwlink/?LinkId=89856)
 
-[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](#Section_3.1.4.1.28)".
+[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](../MS-CSSP/MS-CSSP.md)".
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
@@ -736,7 +736,7 @@ Negotiation of Robust-Connection/full-duplex support between client and server p
 
 It is important to understand that the set of specific resources that are exposed is up to a particular implementation of the Web Services Management Protocol Extensions for Windows Vista service, and the various options that can be passed to those resources as a part of any requested operation are implementation-defined. As such, this section provides a convention by which an implementation can identify particular options that are to be processed by the resource in a specific way, but the extensions in this document do not enforce the use of this convention.
 
-The recommended convention to identify options (included in an <OptionSet> element as specified in section [3.1.4.1.10](#Section_3.1.4.1.10.1)) is to add a resource-specific prefix to the name of the option. As an illustrative example, the prefix "wmi:" can be used to indicate that a particular option can be passed to a [**WMI**](#gt_windows-management-instrumentation-wmi) resource using a specific internal data structure.
+The recommended convention to identify options (included in an <OptionSet> element as specified in section [3.1.4.1.10](#Section_3.1.4.1.10)) is to add a resource-specific prefix to the name of the option. As an illustrative example, the prefix "wmi:" can be used to indicate that a particular option can be passed to a [**WMI**](#gt_windows-management-instrumentation-wmi) resource using a specific internal data structure.
 
 Vendors can define their own prefix values. However, it is up to each implementation to determine which option prefixes it uses, and how those options are processed.
 
@@ -1174,7 +1174,7 @@ minOccurs="0"
 
 **Certificate:** Enables or disables Certificate authentication (as specified in [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324) section 7.4.4). The default value of this element MUST be true.
 
-**CredSSP:** Enables or disables CredSSP authentication (as specified in [MS-CSSP](#Section_3.1.4.1.28)). The default value of this element MUST be false.
+**CredSSP:** Enables or disables CredSSP authentication (as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md)). The default value of this element MUST be false.
 
 <a id="Section_2.2.4.5"></a>
 #### 2.2.4.5 ClientDefaultPortsType
@@ -1296,7 +1296,7 @@ The default value for the <TrustedHosts> element MUST be a blank string.
 <a id="Section_2.2.4.7"></a>
 #### 2.2.4.7 CommandLine
 
-This type describes the structure of the command line and its arguments. It is used as the body element of the Command message (for more information, see section [3.1.4.11](#Section_3.1.4.11.1)).
+This type describes the structure of the command line and its arguments. It is used as the body element of the Command message (for more information, see section [3.1.4.11](#Section_3.1.4.11)).
 
 <xs:complexType name="CommandLine">
 
@@ -1329,7 +1329,7 @@ maxOccurs="unbounded"
 <a id="Section_2.2.4.8"></a>
 #### 2.2.4.8 CommandResponse
 
-This type defines the format the s:Body element of the server response message upon successful processing of the Command message (for more information, see section [3.1.4.11](#Section_3.1.4.11.1)).
+This type defines the format the s:Body element of the server response message upon successful processing of the Command message (for more information, see section [3.1.4.11](#Section_3.1.4.11)).
 
 <xs:complexType name="CommandResponse">
 
@@ -1595,7 +1595,7 @@ use="optional"
 <a id="Section_2.2.4.15"></a>
 #### 2.2.4.15 DisconnectType
 
-DisconnectType describes the body element of the rsp:Disconnect message. For more information, see section [3.1.4.15](#Section_3.1.4.15.1).
+DisconnectType describes the body element of the rsp:Disconnect message. For more information, see section [3.1.4.15](#Section_3.1.4.15).
 
 All implementations for all Disconnect data types MUST use the XML namespace URI "http://schemas.microsoft.com/wbem/wsman/1/windows/shell".
 
@@ -1927,7 +1927,7 @@ default="true" />
 
 **Architecture:** Specifies whether the plug-in is a 32-bit or 64-bit implementation. If present, this attribute MUST be set to either 32 or 64.
 
-**UseSharedProcess:** Specifies whether Remote Shells created by this plug-in are executed within the same process or within different processes. If set to true, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute all Shells within the same process. If set to false, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute each Shell within a separate process. For more details, see section [3.1.4.1.31](#Section_3.1.4.1.31.2).
+**UseSharedProcess:** Specifies whether Remote Shells created by this plug-in are executed within the same process or within different processes. If set to true, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute all Shells within the same process. If set to false, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute each Shell within a separate process. For more details, see section [3.1.4.1.31](#Section_3.1.4.1.31).
 
 **AutoRestart:** Specifies whether this plug-in is automatically loaded when the Web Services Management Protocol Extensions for Windows Vista service is started. If set to true, the Web Services Management Protocol Extensions for Windows Vista service SHOULD create a process and load the plug-in at startup. If set to false, the Web Services Management Protocol Extensions for Windows Vista service SHOULD NOT create a process and load the plug-in until a request message is received that is directed to this plug-in.
 
@@ -1984,7 +1984,7 @@ This type is used under the following XML namespace URI: "http://schemas.microso
 
 **MaxMemoryPerShellMB:** An optional value that limits the maximum total amount of memory that can be allocated cumulatively by any active Remote Shells created by this particular plug-in that are being executed within the same process and all of their child processes. The minimum value MUST be 0. The maximum value MUST be 2147483647. The default value SHOULD be 1024. If this value is equal to 0, it MUST be interpreted to mean that the ability of the remote operations to allocate memory is limited only by the available virtual memory. The remote operation MUST be terminated when a new allocation exceeds the specified quota.
 
-**MaxIdleTimeoutms:** An optional value that specifies the maximum idle time-out for Shells created by this particular plug-in. The value MUST be expressed in milliseconds. The minimum value MUST be 60000. The maximum value MUST be 2147483647. The default value SHOULD be 180000. If the IdleTimeout value specified in a [Create message (section 3.1.4.5)](#Section_3.1.4.5) or [Disconnect message (section 3.1.4.15)](#Section_3.1.4.15.1) is greater than the MaxIdleTimeoutms value for this particular plug-in, then the service SHOULD use the value of MaxIdleTimeoutms as the effective time-out value of the Shell Idle Timeout Timer.
+**MaxIdleTimeoutms:** An optional value that specifies the maximum idle time-out for Shells created by this particular plug-in. The value MUST be expressed in milliseconds. The minimum value MUST be 60000. The maximum value MUST be 2147483647. The default value SHOULD be 180000. If the IdleTimeout value specified in a [Create message (section 3.1.4.5)](#Section_3.1.4.5) or [Disconnect message (section 3.1.4.15)](#Section_3.1.4.15) is greater than the MaxIdleTimeoutms value for this particular plug-in, then the service SHOULD use the value of MaxIdleTimeoutms as the effective time-out value of the Shell Idle Timeout Timer.
 
 **IdleTimeoutms:** An optional value that specifies an idle time-out for Shells created by this particular plug-in. The value MUST be expressed in milliseconds. The minimum value MUST be 60000. The maximum value MUST be 2147483647. The default value SHOULD be 180000. The service SHOULD close and terminate the shell instance if it is idle for this amount of time. If the Shell is reused within this time limit, the countdown timer is reset once the command sequence is completed.
 
@@ -2743,7 +2743,7 @@ In addition to the preceding standardized initialization parameters, the open co
 <a id="Section_2.2.4.38"></a>
 #### 2.2.4.38 Signal
 
-This type describes the signal values that are used to control the execution of the specific commands or of the Shell processor itself. It defines the format of the s:Body element of the Signal message (for more information, see section [3.1.4.12](#Section_3.1.4.12.1)).
+This type describes the signal values that are used to control the execution of the specific commands or of the Shell processor itself. It defines the format of the s:Body element of the Signal message (for more information, see section [3.1.4.12](#Section_3.1.4.12)).
 
 <xs:complexType name="Signal">
 
@@ -4279,7 +4279,7 @@ When using Encryption, there are three options available.<40>
 | --- | --- |
 | Negotiate Encrypted Message | SPNEGO (as specified in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483) section 4.1) is used for setting up a security context between the client and server and message encryption is done by using the GSS-API security context. |
 | Kerberos Encrypted Message | Kerberos (as specified in [RFC4559] section 4) is used for setting up a security context between the client and server and message encryption is done by using the GSS-API security context. |
-| CredSSP Encrypted Message | CredSSP (as specified in [MS-CSSP](#Section_3.1.4.1.28)) is used for setting up a security context between the client and server, and message encryption is done by using the GSS-API security context. |
+| CredSSP Encrypted Message | CredSSP (as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md)) is used for setting up a security context between the client and server, and message encryption is done by using the GSS-API security context. |
 
 <a id="Section_2.2.9.1.1"></a>
 ##### 2.2.9.1.1 NegotiateEncryptedMessage
@@ -4494,7 +4494,7 @@ The initial bytes of the Message MUST be the per-message token portion, whose le
 <a id="Section_2.2.9.1.3"></a>
 ##### 2.2.9.1.3 CredSSPEncryptedMessage
 
-This message is used when CredSSP, as specified in [MS-CSSP](#Section_3.1.4.1.28), is used for setting up a security context between the client and server. The client and server can encrypt the message by using the [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) security context established as part of the CredSSP protocol.<41>
+This message is used when CredSSP, as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md), is used for setting up a security context between the client and server. The client and server can encrypt the message by using the [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) security context established as part of the CredSSP protocol.<41>
 
 The format of the CredSSPEncryptedMessage is dependent on whether or not the message content being encrypted is greater than 16 kilobytes in length.
 
@@ -4511,7 +4511,7 @@ The request includes a number of fields in the HTTP message headers. The fields 
 
 **Content-Length:** Contains the size, in bytes, of the message body. It MUST be present.
 
-**Authorization:** Contains the CredSSP messages as defined according to the CredSSP protocol specified in [MS-CSSP](#Section_3.1.4.1.28) section 2.
+**Authorization:** Contains the CredSSP messages as defined according to the CredSSP protocol specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md) section 2.
 
 Authorization = "Authorization" ":" credentials
 
@@ -4626,7 +4626,7 @@ Content-Type = "Content-Type"":"
 
 **contenttype:** Contains the message content type. It MUST be set to "multipart/x-multi-encrypted".
 
-**protocolvalue:** Contains the authentication mechanism used to establish the encryption context, and it MUST be set to "application/HTTP-CredSSP-session-encrypted", which indicates security context obtained from authentication by using CredSSP over HTTP, as specified in [MS-CSSP](#Section_3.1.4.1.28), is used to encrypt the message.
+**protocolvalue:** Contains the authentication mechanism used to establish the encryption context, and it MUST be set to "application/HTTP-CredSSP-session-encrypted", which indicates security context obtained from authentication by using CredSSP over HTTP, as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md), is used to encrypt the message.
 
 **boundaryvalue:** Contains the boundary used as the delimiter line for the multipart media content. It MUST be set to "Encrypted Boundary".
 
@@ -4708,7 +4708,7 @@ Figure 5: Compressed message layout showing compressed data BLOB and uncompresse
 
 The following table lists the options that influence the behavior of the client and server when the client is initiating CIM operations. The Option Name column contains the string that is used for the "Name" attribute of the wsmanwsman:Option element, while the Option Type column contains the string that is used for the Type attribute of the wsman:Option element.
 
-The processing of these options by the server still follows the rules specified in section [3.1.4.1.10](#Section_3.1.4.1.10.1). Additional processing rules are specified in section [3.1.4.1.26](#Section_3.1.4.1.26).
+The processing of these options by the server still follows the rules specified in section [3.1.4.1.10](#Section_3.1.4.1.10). Additional processing rules are specified in section [3.1.4.1.26](#Section_3.1.4.1.26).
 
 | Option Name | Option Type |
 | --- | --- |
@@ -4791,7 +4791,7 @@ Web Services Management Protocol Extensions for Windows Vista service extends th
 
 - **Envelope:** a SOAP envelope containing a SubscribeMsg message
 - **Version :** a version [**GUID**](#gt_globally-unique-identifier-guid), as specified in section [2.2.4.41](#Section_2.2.4.41)
-**ShellInstances:** a table of remote shell instances operations (see section [3.1.4.1.31](#Section_3.1.4.1.31.2) for details). Each row contains the following elements:
+**ShellInstances:** a table of remote shell instances operations (see section [3.1.4.1.31](#Section_3.1.4.1.31) for details). Each row contains the following elements:
 
 - **ShellId:** a ShellId as specified in section [2.2.4.37](#Section_2.2.4.37)
 - **Instance:** an implementation-specific remote shell instance
@@ -5278,7 +5278,7 @@ For other requests, the following rules apply:
 - http://schemas.xmlsoap.org/ws/2004/09/transfer/Create
 - http://schemas.xmlsoap.org/ws/2004/09/transfer/Delete
 - Requests with any other action URI's are allowed if the user is granted **GX** permission in the SDDL.
-The Web Services Management Protocol Extensions for Windows Vista service SHOULD support the CredSSP security profile,<78> where the authentication is carried out as specified in [MS-CSSP](#Section_3.1.4.1.28). If the CredSSP security profile is used, the authentication sequence MUST be as follows:
+The Web Services Management Protocol Extensions for Windows Vista service SHOULD support the CredSSP security profile,<78> where the authentication is carried out as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md). If the CredSSP security profile is used, the authentication sequence MUST be as follows:
 
 - The Web Services Management Protocol Extensions for Windows Vista client connects with no authorization header.
 - The Web Services Management Protocol Extensions for Windows Vista service responds with a HTTP 401 response, listing CredSSP as an available HTTP authentication mechanism.
@@ -5308,7 +5308,7 @@ The Web Services Management Protocol Extensions for Windows Vista service MUST u
 
 The Web Services Management Protocol Extensions for Windows Vista service MUST use wsman:secprofile/https/mutual as an authentication scheme if and only if the Certificate property in the cfg:ServiceAuthType is true.
 
-When the Web Services Management Protocol Extensions for Windows Vista service receives a Put request containing the CredSSP property, if it does not support CredSSP as an authentication scheme the request MUST fail with a wsman:SchemaValidationError fault. The Web Services Management Protocol Extensions for Windows Vista service MUST NOT<80> use CredSSP as an authentication scheme (as specified in [MS-CSSP](#Section_3.1.4.1.28)) if the CredSSP in the cfg:ServiceAuthType is false.
+When the Web Services Management Protocol Extensions for Windows Vista service receives a Put request containing the CredSSP property, if it does not support CredSSP as an authentication scheme the request MUST fail with a wsman:SchemaValidationError fault. The Web Services Management Protocol Extensions for Windows Vista service MUST NOT<80> use CredSSP as an authentication scheme (as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md)) if the CredSSP in the cfg:ServiceAuthType is false.
 
 When the Web Services Management Protocol Extensions for Windows Vista service receives a Put request containing the CbtHardeningLevel property, if it does not support channel-binding tokens in authentication requests (as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 1.1.6) the request SHOULD fail with a wsman:SchemaValidationError fault. If the service does not support channel-binding tokens in authentication requests, and it does not fail with a wsman:SchemaValidationError fault, it MUST<81> ignore the CbtHardeningLevel property.
 
@@ -5332,7 +5332,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/service/security [**resourc
 | --- | --- |
 | Uri | The resource URI that is being protected using the Sddl attribute in the Security element. |
 
-This selector property is used as a key when selecting a row from **ResourceSecurity** (see Section [3.1.1](#Section_3.2.1) for details). The Uri selector property is compared to the **Uri** element in order to identify the row to retrieve or to modify.
+This selector property is used as a key when selecting a row from **ResourceSecurity** (see Section [3.1.1](#Section_3.1.1) for details). The Uri selector property is compared to the **Uri** element in order to identify the row to retrieve or to modify.
 
 <a id="Section_3.1.4.1.29.5"></a>
 ###### 3.1.4.1.29.5 http://schemas.microsoft.com/wbem/wsman/1/config/listener
@@ -5515,7 +5515,7 @@ There are two types of remote shell scenarios that can be created:
 **Custom Remote Shell**: Unlike the Text-based Command Shell scenario, the Custom Remote Shell scenario allows the user to execute any Shell remotely. However, before the user tries to execute the custom Shell remotely, the administrator has to set up the configuration table at the server to map a specific custom Shell to corresponding resource URIs. This can be done in one of the following ways:
 
 - The administrator configures a new plugin on the server, which exposes a resource with the Shell capability.<86> For more details, see section [2.2.4.22](#Section_2.2.4.22).
-- The administrator can set up **CustomRemoteShells** as specified in section [3.1.1](#Section_3.2.1).<87> In this type of Custom Remote Shell, the "Command" request and response are not sent explicitly. Rather, in this scenario, the "Command", its arguments, and any associated data are sent as a BLOB in the "Send" request. This BLOB is Shell-specific and is transparent to the protocol. In case of Custom Remote Shell, the "Send" is targeted at the Shell itself, which decodes the BLOB.
+- The administrator can set up **CustomRemoteShells** as specified in section [3.1.1](#Section_3.1.1).<87> In this type of Custom Remote Shell, the "Command" request and response are not sent explicitly. Rather, in this scenario, the "Command", its arguments, and any associated data are sent as a BLOB in the "Send" request. This BLOB is Shell-specific and is transparent to the protocol. In case of Custom Remote Shell, the "Send" is targeted at the Shell itself, which decodes the BLOB.
 The user then provides a resource URI that is mapped to a custom Shell and the server executes the Shell remotely on behalf of the user.
 
 The processing sequence for creating and interacting with remote shells is defined in the following figure.
@@ -6049,7 +6049,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/service/security resource U
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD<100>be used to manipulate **CustomRemoteShells**. By default, this table does not exist on the server, and the administrator MUST set this table up for the user to execute the custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Get operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when selecting a row from **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to retrieve.
+The data that is passed as part of the request is used when selecting a row from **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to retrieve.
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6161,7 +6161,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/service/security resource U
 
 The resource URI `http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell` SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Put operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when selecting and modifying a row from CustomRemoteShells (see section [3.1.1](#Section_3.2.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to modify.
+The data that is passed as part of the request is used when selecting and modifying a row from CustomRemoteShells (see section [3.1.1](#Section_3.1.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to modify.
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6200,7 +6200,7 @@ When a Web Services Management Protocol Extensions for Windows Vista server rece
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute a custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Delete operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when deleting a row from CustomRemoteShells (see section [3.1.1](#Section_3.2.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to delete.
+The data that is passed as part of the request is used when deleting a row from CustomRemoteShells (see section [3.1.1](#Section_3.1.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to delete.
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6208,7 +6208,7 @@ The data that is passed as part of the request is used when deleting a row from 
 
 The CIM binding for WS-Management defines which operations can be used on which ResourceURIs when referencing [**CIM object**](#gt_cim-object)s. More information is specified in [[DMTF-DSP0227]](https://go.microsoft.com/fwlink/?LinkId=89851) section 7.
 
-The Web Services Management Protocol Extensions for Windows Vista service SHOULD<107> support WS-Transfer Delete when the class name in the resource URI and the selectors identify an instance of a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.12).
+The Web Services Management Protocol Extensions for Windows Vista service SHOULD<107> support WS-Transfer Delete when the class name in the resource URI and the selectors identify an instance of a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.1).
 
 <a id="Section_3.1.4.4.1"></a>
 ##### 3.1.4.4.1 Remote Shells
@@ -6256,7 +6256,7 @@ When a Web Services Management Protocol Extensions for Windows Vista server rece
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute a custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Create operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when creating a row in **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details).
+The data that is passed as part of the request is used when creating a row in **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details).
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6264,7 +6264,7 @@ The data that is passed as part of the request is used when creating a row in **
 
 The CIM binding for WS-Management defines which operations can be used on which ResourceURIs when referencing [**CIM object**](#gt_cim-object)s. More information is specified in [[DMTF-DSP0227]](https://go.microsoft.com/fwlink/?LinkId=89851) section 7.
 
-The Web Services Management Protocol Extensions for Windows Vista service SHOULD<109> support WS-Transfer Create when the resource URI identifies a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.12).
+The Web Services Management Protocol Extensions for Windows Vista service SHOULD<109> support WS-Transfer Create when the resource URI identifies a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.1).
 
 <a id="Section_3.1.4.5.1"></a>
 ##### 3.1.4.5.1 Messages
@@ -6429,7 +6429,7 @@ The following describes the additional normative constraints on the Shell EPR:
 - **SelectorSet**: This value of the Name attribute of Selector element MUST contain the [**GUID**](#gt_globally-unique-identifier-guid) identifying the new Shell.
 The client extracts this new EPR and uses it in all subsequent messages, as it refers to the Shell instance that was just created.
 
-The client MUST use the same [wsman:Locale (section 3.2.4.1.4)](#Section_3.1.4.1.8), [wsmv:DataLocale (section 3.2.4.1.5)](#Section_3.1.4.1.9) and encoding (as described in [DMTF-DSP0226] section 13.1) in all subsequent messages of the Remote Shell protocol, as those values refer to the Shell instance that was just created. The server behavior is undefined if any of these properties change.
+The client MUST use the same [wsman:Locale (section 3.2.4.1.4)](#Section_3.2.4.1.4), [wsmv:DataLocale (section 3.2.4.1.5)](#Section_3.2.4.1.5) and encoding (as described in [DMTF-DSP0226] section 13.1) in all subsequent messages of the Remote Shell protocol, as those values refer to the Shell instance that was just created. The server behavior is undefined if any of these properties change.
 
 <a id="Section_3.1.4.5.2.1"></a>
 ###### 3.1.4.5.2.1 wsman:QuotaLimit
@@ -6543,7 +6543,7 @@ The set of resource URIs on which Web Services Management Protocol Extensions fo
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute a custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Enumerate operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details).
+This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details).
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6619,7 +6619,7 @@ The set of resource URIs on which Web Services Management Protocol Extensions fo
 
 The resource URI `http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell` SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Pull operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details).
+This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details).
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -7427,7 +7427,7 @@ Web Services Management Protocol Extensions for Windows Vista client extends the
 
 Web Services Management Protocol Extensions for Windows Vista extends the behavior of the WS-Management Protocol, as specified in [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849), by defining one timer.
 
-**Client Operation Timeout timer:** A timer used to trigger cleanup of any state associated with an outstanding operation Request if a corresponding Response message is not received from the server in a timely manner. When any WSDL Request is sent, the client instantiates a new timer and starts it. When a Response is received, the client halts the timer that is associated with the initial Request. For more details see section [3.2.5](#Section_3.2.5). The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.23)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)). The minimum value MUST be 500. The maximum value MUST be 4294967295. The default value MUST be 65000.
+**Client Operation Timeout timer:** A timer used to trigger cleanup of any state associated with an outstanding operation Request if a corresponding Response message is not received from the server in a timely manner. When any WSDL Request is sent, the client instantiates a new timer and starts it. When a Response is received, the client halts the timer that is associated with the initial Request. For more details see section [3.2.5](#Section_3.2.5). The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.2)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)). The minimum value MUST be 500. The maximum value MUST be 4294967295. The default value MUST be 65000.
 
 **Connection KeepAlive Timer:** A timer used to trigger sending of a KeepAlive message. The timer is started after sending any message to the server and is restarted when any message other than a KeepAlive message is sent to the server. The timer interval is implementation-specific but SHOULD be less than the client's HTTP connection time-out value.<130>
 
@@ -7456,7 +7456,7 @@ This section describes changes made by Web Services Management Protocol Extensio
 
 This section describes protocol details that are common across WSDL operations.
 
-When the Web Services Management Protocol Extensions for Windows Vista client sends any request message, the client MUST create a new Client Operation Timeout timer, associate it with the request, and start the timer. The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.23)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)).
+When the Web Services Management Protocol Extensions for Windows Vista client sends any request message, the client MUST create a new Client Operation Timeout timer, associate it with the request, and start the timer. The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.2)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)).
 
 On receipt of a response message, the Client Operation Timeout timer for that related request MUST be canceled.
 
@@ -7506,7 +7506,7 @@ Web Services Management Protocol Extensions for Windows Vista clients MUST NOT s
 
 The WS-Management specification defines the OptionSet element as a set of switches to the service to modify or refine the nature of the request, as specified in [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849) section 6.4.
 
-Web Services Management Protocol Extensions for Windows Vista clients SHOULD use the OptionSet element with one of the supported option values. The options supported vary by ResourceURI and operation. For specific options, see section [3.1.4.1.10](#Section_3.1.4.1.10.1).
+Web Services Management Protocol Extensions for Windows Vista clients SHOULD use the OptionSet element with one of the supported option values. The options supported vary by ResourceURI and operation. For specific options, see section [3.1.4.1.10](#Section_3.1.4.1.10).
 
 <a id="Section_3.2.4.1.7"></a>
 ##### 3.2.4.1.7 wsman:RequestEPR
@@ -7613,7 +7613,7 @@ If this SOAP header is sent<133>, Web Services Management Protocol Extensions fo
 
 The WSMAN_CMDSHELL_OPTION_KEEPALIVE option SHOULD be included as a part of every Receive message.
 
-If it is included as a part of a Receive message, the WSMAN_CMDSHELL_OPTION_KEEPALIVE option MUST be of type xs:Boolean, its value SHOULD be set to "true", the mustComply attribute SHOULD NOT be specified, and it MUST be included in the wsman:OptionSet element (as specified in section [3.1.4.1.10](#Section_3.1.4.1.10.1)).
+If it is included as a part of a Receive message, the WSMAN_CMDSHELL_OPTION_KEEPALIVE option MUST be of type xs:Boolean, its value SHOULD be set to "true", the mustComply attribute SHOULD NOT be specified, and it MUST be included in the wsman:OptionSet element (as specified in section [3.1.4.1.10](#Section_3.1.4.1.10)).
 
 <a id="Section_3.2.4.1.21"></a>
 ##### 3.2.4.1.21 Refusal of Event Delivery
@@ -7643,7 +7643,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/client/auth [**resource URI
 - Web Services Management Protocol Extensions for Windows Vista clients MUST NOT use wsman:secprofile/http/digest or wsman:secprofile/https/digest as an authentication scheme if the Digest property in the cfg:ClientAuthType is false.
 - Web Services Management Protocol Extensions for Windows Vista clients MUST NOT use wsman:secprofile/https/mutual as an authentication scheme if the Certificate property in the cfg:ClientAuthType is false.
 - Web Services Management Protocol Extensions for Windows Vista clients MUST NOT use wsman:secprofile/http/spnego-kerberos or wsman:secprofile/https/spnego-kerberos as an authentication scheme if both the Negotiate property and the Kerberos property in the cfg:ClientAuthType are false.
-- Web Services Management Protocol Extensions for Windows Vista clients MUST NOT use CredSSP as an authentication scheme (as specified in [MS-CSSP](#Section_3.1.4.1.28)) if the CredSSP property in the cfg:ServiceAuthType is false.
+- Web Services Management Protocol Extensions for Windows Vista clients MUST NOT use CredSSP as an authentication scheme (as specified in [MS-CSSP](../MS-CSSP/MS-CSSP.md)) if the CredSSP property in the cfg:ServiceAuthType is false.
 <a id="Section_3.2.4.1.23"></a>
 ##### 3.2.4.1.23 wsmv:SessionId
 
@@ -7652,7 +7652,7 @@ Web Services Management Protocol Extensions for Windows Vista client MAY<136> se
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Multiple Message Operations
 
-Some operations involve multiple messages being sent from the client to the server or from the server to the client. To support such operations, the client and server both MUST<137> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1.3).
+Some operations involve multiple messages being sent from the client to the server or from the server to the client. To support such operations, the client and server both MUST<137> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1).
 
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 Full Duplex
@@ -8136,7 +8136,7 @@ When the i:EventType value of a SOAP response is StreamingOutput, the client SHO
 
 All required sub-elements MUST be present, as specified in section [2.2.4.49](#Section_2.2.4.49). Otherwise, the client MUST delete the entry in the CimOperations table and report an error to the higher layer protocol.
 
-Some operations involve multiple messages being sent from the client to the server. To support such operations, the client SHOULD<141> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1.3).
+Some operations involve multiple messages being sent from the client to the server. To support such operations, the client SHOULD<141> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1).
 
 <a id="Section_3.2.7.9"></a>
 #### 3.2.7.9 Non-InteractiveEvent Response
@@ -14673,7 +14673,7 @@ The Web Services Management Protocol Extensions for Windows Vista uses the WS-Ma
 
 The Web Services Management Protocol Extensions for Windows Vista [**service**](#gt_service) have to authenticate the request by using one of the configured security profiles. See section [2.2.4.34](#Section_2.2.4.34) and section [3.1.4.1.29.2](#Section_3.1.4.1.29.2) for more information on configured profiles.
 
-The Web Services Management Protocol Extensions for Windows Vista service have to authorize the request by using the RootSDDL configuration setting specified in [Server Configuration Data Types (section 2.2.4.2)](#Section_3.1.4.1.29).
+The Web Services Management Protocol Extensions for Windows Vista service have to authorize the request by using the RootSDDL configuration setting specified in [Server Configuration Data Types (section 2.2.4.2)](#Section_2.2.4.2).
 
 The Web Services Management Protocol Extensions for Windows Vista clients are required toimplement the following security profiles:
 
@@ -17005,7 +17005,7 @@ After the value of ListeningOn is set, the list of IP addresses is filtered base
 
 Windows Server 2003 R2 and later and Windows Vista SP1 and later do not send an HTTP cookie unless KB968930 is installed.
 
-<91> Section 3.1.4.1.33: Windows Server 2003 R2, Windows Vista SP1, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support the ShowExtensions option. Windows 8 and later and Windows Server 2012 and later support the ShowExtensions option on WMI classes accessed by using a ResourceURI formatted as specified in section [3.1.4.1.1](#Section_3.1.4.1.12).
+<91> Section 3.1.4.1.33: Windows Server 2003 R2, Windows Vista SP1, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support the ShowExtensions option. Windows 8 and later and Windows Server 2012 and later support the ShowExtensions option on WMI classes accessed by using a ResourceURI formatted as specified in section [3.1.4.1.1](#Section_3.1.4.1.1).
 
 <92> Section 3.1.4.1.34.3: Windows Server 2003 R2 without the KB968930, Windows Vista SP1 without the KB968930, and Windows Server 2008 without the KB968930 do not implement the microsoft.powershell plugin.
 

@@ -335,7 +335,7 @@ The information in the Windows Protocols Documentation Roadmap is grouped into t
 
 - Introduction (section [1](#Section_1)): General information about using the documentation set, including licensing and support.
 - Documentation Contents (section [2](#Section_2)): A description of the different types of documents, including technical areas.
-- Navigating the Documentation Set (section [3](#Section_1.3)): Where to find the various components of documentation set.
+- Navigating the Documentation Set (section [3](#Section_3)): Where to find the various components of documentation set.
 - Appendix A: Cross-Reference Matrices (section [4](#Section_4)): Links to all documents in the documentation set, cross-referenced by technical area and technology collection.
 - Appendix B: Open Specification Site Map (section [5](#Section_5)): A diagram showing the entire node structure of the documentation set.
 It is suggested that the reader become familiar with the classification of the documents and their contents before proceeding to the navigation section, because that knowledge will help clarify the document relationships.
@@ -409,7 +409,7 @@ The Windows protocols documentation set uses the following naming conventions fo
 - All documents are assigned a short name enclosed in square brackets. The short name is used when citing the document or reference. Examples of short names are "[MS-DOCO]", "[MSFT-WSTS]", and "[RFC2119]".
 - All short names for documents in the documentation set have one of the following forms:
 - [MC-XXX] was originally used for documents that specify technology that has never shipped with Windows. However, that restriction has been removed, and there is now no distinction between documents with short names prefaced with "MC" and those with short names prefaced with "MS". An example of this type of short name is "[MC-BUP]", where the suffix "BUP" is an abbreviation for "Background Intelligent Transfer Service (BITS) Upload Protocol".
-- [MS-XXXOD] is used for technology overviews (section [2.1.3](#Section_4.3)). An example of this type of short name is "[MS-AUTHSOD]", where the suffix "AUTHS" is an abbreviation for "Authentication Services Protocols".
+- [MS-XXXOD] is used for technology overviews (section [2.1.3](#Section_2.1.3)). An example of this type of short name is "[MS-AUTHSOD]", where the suffix "AUTHS" is an abbreviation for "Authentication Services Protocols".
 - [MS-XXX] is used for all other overview, technical, and reference documents with short names that do not follow one of the preceding conventions. The suffix "XXX" is an abbreviation that refers to the subject covered by the document. An example of this type of short name is "[MS-WPO]", where "WPO" is an abbreviation for "Windows Protocols Overview". The short name of the current document, "[MS-DOCO]", also falls into this category.
 - Short names for reference documents that describe Microsoft technology conform to the following naming conventions:
 - [MSFT-XXX] is used for information in Microsoft TechNet articles.
@@ -530,7 +530,7 @@ This section describes the overview documents in the Windows protocols documenta
 
 - Windows Protocols Documentation Roadmap (section [2.1.1](#Section_2.1.1))
 - Windows Protocols Overview (section [2.1.2](#Section_2.1.2))
-- Technology Overviews (section [2.1.3](#Section_4.3))
+- Technology Overviews (section [2.1.3](#Section_2.1.3))
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Windows Protocols Documentation Roadmap
 
@@ -539,7 +539,7 @@ This section describes the overview documents in the Windows protocols documenta
 <a id="Section_2.1.2"></a>
 ### 2.1.2 Windows Protocols Overview
 
-[[MS-WPO]: Windows Protocols Overview](http://msdn.microsoft.com/en-us/library/c5f54a77-65be-40a0-bb82-9e4181d8ab67/) provides a conceptual overview of Windows protocols, including their functionality, how they interact, and their relationships to Windows technologies. Each technology is further broken down into subsystems with information about the technology overviews (section [2.1.3](#Section_4.3)) and technical specifications (section [2.2](#Section_3.2.1.2)) that pertain to each subsystem. The Windows technologies are grouped into the technical areas described in [Documentation Contents (section 2)](#Section_2).
+[[MS-WPO]: Windows Protocols Overview](http://msdn.microsoft.com/en-us/library/c5f54a77-65be-40a0-bb82-9e4181d8ab67/) provides a conceptual overview of Windows protocols, including their functionality, how they interact, and their relationships to Windows technologies. Each technology is further broken down into subsystems with information about the technology overviews (section [2.1.3](#Section_2.1.3)) and technical specifications (section [2.2](#Section_2.2)) that pertain to each subsystem. The Windows technologies are grouped into the technical areas described in [Documentation Contents (section 2)](#Section_2).
 
 <a id="Section_2.1.3"></a>
 ### 2.1.3 Technology Overviews
@@ -573,7 +573,7 @@ The technology overviews are listed, grouped according to technical area, in the
 - [[MS-FSMOD]: File Services Management Protocols Overview](http://msdn.microsoft.com/en-us/library/3a373435-adb3-42ad-afa4-ff5cd961a67b/): This document describes the use of the protocols for remote administration and management of file servers that share data within an organization.
 - [[MS-PRSOD]: Print Services Protocols Overview](http://msdn.microsoft.com/en-us/library/97fd9728-f83e-48d0-aa2c-79471fd9e00a/): This document describes the distributed system of print servers that manage printers and make them available to print clients.
 - [[MS-STOROD]: Storage Services Protocols Overview](http://msdn.microsoft.com/en-us/library/313252b5-9146-40cc-9eb2-8372e108597f/): This document describes the interaction of protocols that provide disk and volume management services, data backup and restore, removable media management, file access control, and file encryption in Windows.
-- [[MS-VSOD]: Virtual Storage Protocols Overview](#Section_1.3): This document Provides an overview of the functionality of and relationship among the virtual storage protocols, which provide a means for a client to access, read, and write to virtual storage on a remote server.
+- [[MS-VSOD]: Virtual Storage Protocols Overview](#Section_84250bfd1189428fb577293fcd0e5af9): This document Provides an overview of the functionality of and relationship among the virtual storage protocols, which provide a means for a client to access, read, and write to virtual storage on a remote server.
 **Networking:**
 
 - [[MS-NAPOD]: Network Access Protection Protocols Overview](http://msdn.microsoft.com/en-us/library/a916128b-f9a5-4fa3-80d8-0c8a2bef8b12/): This document describes the functionality to allow client computers to gain access to network resources based on the client's identity and compliance with a corporate governance policy, and how various components work together to promote the health and protection of networked systems.
@@ -1090,7 +1090,7 @@ The following types of files are available for download from this page:
 - DOCX: A .docx file of the technical specification.
 - Errata: A .pdf file that shows exactly what has changed from the last to the current release for the technical specification.
 - Diff: A .pdf file of the technical specification that uses revision marks to show what has changed from the last to the current release for the technical specification.
-The structures of technical specifications are described in section [2.2](#Section_3.2.1.2).
+The structures of technical specifications are described in section [2.2](#Section_2.2).
 
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Reference Documents Landing Page
@@ -1122,7 +1122,7 @@ The following types of files are available for download from this page:
 - DOCX: A .docx file of the reference document.
 - Errata: A .pdf file that shows exactly what has changed from the last to the current release for the reference document.
 - Diff: A .pdf file of the reference document that uses revision marks to show what has changed from the last to the current release for the reference document.
-The structures of reference documents are described in sections [2.2](#Section_3.2.1.2) and [2.3](#Section_3.1.1.3.1).
+The structures of reference documents are described in sections [2.2](#Section_2.2) and [2.3](#Section_2.3).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Windows WordPad Standards Support
@@ -1145,8 +1145,8 @@ The documents on this node are based on the Standards Support template (section 
 This section describes how to find documents in the Windows protocols documentation set according to the following document types:
 
 - Overview documents (section [2.1](#Section_2.1))
-- Technical specifications (section [2.2](#Section_3.2.1.2))
-- Reference documents (section [2.3](#Section_3.1.1.3.1))
+- Technical specifications (section [2.2](#Section_2.2))
+- Reference documents (section [2.3](#Section_2.3))
 The navigation to these document types relative to the Open Specifications node are shown in Document Nodes (section [3.1](#Section_3.1)).
 
 <a id="Section_3.2.1"></a>
@@ -1254,7 +1254,7 @@ Data and File Structure templates:
 
 - 1.7 Vendor -Extensible Fields
 - 2.0 Structures
-For more information about the document templates, see section [2.2](#Section_3.2.1.2).
+For more information about the document templates, see section [2.2](#Section_2.2).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Informative Citations
@@ -1271,8 +1271,8 @@ Citations to external informative content include references to any of the follo
 - Any content that could qualify as an external normative reference (section [3.3.1.1](#Section_3.3.1.1)).
 - [Microsoft Developer](https://go.microsoft.com/fwlink/?linkid=2092989) articles.
 - Windows overview documents (section [2.1](#Section_2.1)).
-- Informative sections in other Windows technical specifications (section [2.2](#Section_3.2.1.2)).
-- Windows reference documents (section [2.3](#Section_3.1.1.3.1)).
+- Informative sections in other Windows technical specifications (section [2.2](#Section_2.2)).
+- Windows reference documents (section [2.3](#Section_2.3)).
 All external informative documents are listed in the informative references section of the referencing technical specification.
 
 <a id="Section_3.3.2.2"></a>
@@ -1280,7 +1280,7 @@ All external informative documents are listed in the informative references sect
 
 Internal citations to informative content are references to informative sections within a technical specification. Any content that is not normative is by definition informative, including Windows product behavior. The sections—including their subsections—that contain informative content in a technical specification vary according to the template type.
 
-For more information about the document templates, see section [2.2](#Section_3.2.1.2).
+For more information about the document templates, see section [2.2](#Section_2.2).
 
 <a id="Section_4"></a>
 # 4 Appendix A: Cross-Reference Matrixes
@@ -1292,7 +1292,7 @@ This section contains a table that provides, for each technical specification in
 
 - Link to the document
 - Document title
-- Template type (section [2.2](#Section_3.2.1.2))
+- Template type (section [2.2](#Section_2.2))
 - Technical area (section [2](#Section_2))
 - Protocols specified
 - Other technical specifications normatively cited
@@ -1740,7 +1740,7 @@ This section contains a table that provides, for each technical specification in
 
 This section contains a table that shows, for each [**technical area**](#gt_technical-area), the following information:
 
-- Technology overviews (section [2.1.3](#Section_4.3)) in the technical area
+- Technology overviews (section [2.1.3](#Section_2.1.3)) in the technical area
 - Technical specifications in the technical area
 **Note** The categorization of a technical specification in a technical area does not guarantee that the specification is cited by one of the technology overviews in that technical area. See the [Technology Collection Cross-Reference Matrix (section 4.3)](#Section_4.3) for listings of such citations.
 
@@ -1749,7 +1749,7 @@ This section contains a table that shows, for each [**technical area**](#gt_tech
 | Application Services | [MS-MQOD](../MS-MQOD/MS-MQOD.md) [MS-NETOD](../MS-NETOD/MS-NETOD.md) [MS-TPSOD](../MS-TPSOD/MS-TPSOD.md) | [MC-COMQC](../MC-COMQC/MC-COMQC.md) [MC-CSDL](../MC-CSDL/MC-CSDL.md) [MC-DTCXA](../MC-DTCXA/MC-DTCXA.md) [MC-EDMX](../MC-EDMX/MC-EDMX.md) [MC-IISA](../MC-IISA/MC-IISA.md) [MC-MQAC](../MC-MQAC/MC-MQAC.md) [MC-MQSRM](../MC-MQSRM/MC-MQSRM.md) [MC-NBFS](../MC-NBFS/MC-NBFS.md) [MC-NBFSE](../MC-NBFSE/MC-NBFSE.md) [MC-NBFX](../MC-NBFX/MC-NBFX.md) [MC-NETCEX](../MC-NETCEX/MC-NETCEX.md) [MC-NMF](../MC-NMF/MC-NMF.md) [MC-NPR](../MC-NPR/MC-NPR.md) [MC-PRCH](../MC-PRCH/MC-PRCH.md) [MC-PRCR](../MC-PRCR/MC-PRCR.md) [MS-ASP](../MS-ASP/MS-ASP.md) [MS-CMOM](../MS-CMOM/MS-CMOM.md) [MS-CMP](../MS-CMP/MS-CMP.md) [MS-CMPO](../MS-CMPO/MS-CMPO.md) [MS-COM](../MS-COM/MS-COM.md) [MS-COMA](../MS-COMA/MS-COMA.md) [MS-COMEV](../MS-COMEV/MS-COMEV.md) [MS-COMT](../MS-COMT/MS-COMT.md) [MS-DSML](../MS-DSML/MS-DSML.md) [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md) [MS-DTCM](../MS-DTCM/MS-DTCM.md) [MS-DTCO](../MS-DTCO/MS-DTCO.md) [MS-IISS](../MS-IISS/MS-IISS.md) [MS-IOI](../MS-IOI/MS-IOI.md) [MS-IMSA](../MS-IMSA/MS-IMSA.md) [MS-IRP](../MS-IRP/MS-IRP.md) [MS-MQBR](../MS-MQBR/MS-MQBR.md) [MS-MQCN](../MS-MQCN/MS-MQCN.md) [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) [MS-MQDS](../MS-MQDS/MS-MQDS.md) [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) [MS-MQMP](../MS-MQMP/MS-MQMP.md) [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) [MS-MQMR](../MS-MQMR/MS-MQMR.md) [MS-MQQB](../MS-MQQB/MS-MQQB.md) [MS-MQQP](../MS-MQQP/MS-MQQP.md) [MS-MQRR](../MS-MQRR/MS-MQRR.md) [MS-MQSD](../MS-MQSD/MS-MQSD.md) [MS-NETTR](../MS-NETTR/MS-NETTR.md) [MS-NMFMB](../MS-NMFMB/MS-NMFMB.md) [MS-NMFTB](../MS-NMFTB/MS-NMFTB.md) [MS-NNS](../MS-NNS/MS-NNS.md) [MS-NRBF](../MS-NRBF/MS-NRBF.md) [MS-NRLS](../MS-NRLS/MS-NRLS.md) [MS-NRTP](../MS-NRTP/MS-NRTP.md) [MS-NTHT](../MS-NTHT/MS-NTHT.md) [MS-ODATA](../MS-ODATA/MS-ODATA.md) [MS-PNRP](../MS-PNRP/MS-PNRP.md) [MS-SWSB](../MS-SWSB/MS-SWSB.md) [MS-THCH](../MS-THCH/MS-THCH.md) [MS-TIPP](../MS-TIPP/MS-TIPP.md) [MS-VAPR](../MS-VAPR/MS-VAPR.md) [MS-WFIM](../MS-WFIM/MS-WFIM.md) [MS-WSPOL](../MS-WSPOL/MS-WSPOL.md) [MS-WSRVCAT](../MS-WSRVCAT/MS-WSRVCAT.md) [MS-WSRVCRM](../MS-WSRVCRM/MS-WSRVCRM.md) [MS-WSRVCRR](../MS-WSRVCRR/MS-WSRVCRR.md) [MS-WSTC](../MS-WSTC/MS-WSTC.md) [MS-XCA](../MS-XCA/MS-XCA.md) |
 | Collaboration and Communication | [MS-MSSOD](../MS-MSSOD/MS-MSSOD.md) | [MS-DCHT](../MS-DCHT/MS-DCHT.md) [MS-DCLB](../MS-DCLB/MS-DCLB.md) [MS-DLNHND](../MS-DLNHND/MS-DLNHND.md) [MS-DRM](../MS-DRM/MS-DRM.md) [MS-DRMCD](../MS-DRMCD/MS-DRMCD.md) [MS-DRMND](../MS-DRMND/MS-DRMND.md) [MS-DRMRI](../MS-DRMRI/MS-DRMRI.md) [MS-H245](../MS-H245/MS-H245.md) [MS-H26XPF](../MS-H26XPF/MS-H26XPF.md) [MS-MMSP](../MS-MMSP/MS-MMSP.md) [MS-MNPR](../MS-MNPR/MS-MNPR.md) [MS-MSB](../MS-MSB/MS-MSB.md) [MS-MSBD](../MS-MSBD/MS-MSBD.md) [MS-NNTP](../MS-NNTP/MS-NNTP.md) [MS-RRSP2](../MS-RRSP2/MS-RRSP2.md) [MS-RTPDT](../MS-RTPDT/MS-RTPDT.md) [MS-RTPME](../MS-RTPME/MS-RTPME.md) [MS-RTPRAD](../MS-RTPRAD/MS-RTPRAD.md) [MS-RTSP](../MS-RTSP/MS-RTSP.md) [MS-SDP](../MS-SDP/MS-SDP.md) [MS-SIP](../MS-SIP/MS-SIP.md) [MS-SMTPNTLM](../MS-SMTPNTLM/MS-SMTPNTLM.md) [MS-SSEAN](../MS-SSEAN/MS-SSEAN.md) [MS-SSTR](../MS-SSTR/MS-SSTR.md) [MS-TAIL](../MS-TAIL/MS-TAIL.md) [MS-TRP](../MS-TRP/MS-TRP.md) [MS-UPMC](../MS-UPMC/MS-UPMC.md) [MS-WFDPE](../MS-WFDPE/MS-WFDPE.md) |
 | Directory Services | [MS-ADFSOD](../MS-ADFSOD/MS-ADFSOD.md) [MS-ADOD](../MS-ADOD/MS-ADOD.md) | [MS-ADA1](../MS-ADA1/MS-ADA1.md) [MS-ADA2](../MS-ADA2/MS-ADA2.md) [MS-ADA3](../MS-ADA3/MS-ADA3.md) [MS-ADCAP](../MS-ADCAP/MS-ADCAP.md) [MS-ADDM](../MS-ADDM/MS-ADDM.md) [MS-ADFSOAL](../MS-ADFSOAL/MS-ADFSOAL.md) [MS-ADFSPIP](../MS-ADFSPIP/MS-ADFSPIP.md) [MS-ADFSPP](../MS-ADFSPP/MS-ADFSPP.md) [MS-ADFSWAP](../MS-ADFSWAP/MS-ADFSWAP.md) [MS-ADLS](../MS-ADLS/MS-ADLS.md) [MS-ADSC](../MS-ADSC/MS-ADSC.md) [MS-ADTS](../MS-ADTS/MS-ADTS.md) [MS-DRSR](../MS-DRSR/MS-DRSR.md) [MS-DSSP](../MS-DSSP/MS-DSSP.md) [MS-DVRD](../MS-DVRD/MS-DVRD.md) [MS-DVRE](../MS-DVRE/MS-DVRE.md) [MS-DVRJ](../MS-DVRJ/MS-DVRJ.md) [MS-KPP](../MS-KPP/MS-KPP.md) [MS-LSAD](../MS-LSAD/MS-LSAD.md) [MS-LSAT](../MS-LSAT/MS-LSAT.md) [MS-MAIL](../MS-MAIL/MS-MAIL.md) [MS-MWBE](../MS-MWBE/MS-MWBE.md) [MS-MWBF](../MS-MWBF/MS-MWBF.md) [MS-NSPI](../MS-NSPI/MS-NSPI.md) [MS-OAPX](../MS-OAPX/MS-OAPX.md) [MS-OAPXBC](../MS-OAPXBC/MS-OAPXBC.md) [MS-PKAP](../MS-PKAP/MS-PKAP.md) [MS-SAMLPR](../MS-SAMLPR/MS-SAMLPR.md) [MS-SAMR](../MS-SAMR/MS-SAMR.md) [MS-SAMS](../MS-SAMS/MS-SAMS.md) [MS-SRPL](../MS-SRPL/MS-SRPL.md) [MS-WSDS](../MS-WSDS/MS-WSDS.md) [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md) [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md) |
-| File, Fax, and Printing Services | [MS-CCROD](../MS-CCROD/MS-CCROD.md) [MS-FASOD](../MS-FASOD/MS-FASOD.md) [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md) [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md) [MS-STOROD](../MS-STOROD/MS-STOROD.md) [MS-VSOD](#Section_1.3) | [MC-BUP](../MC-BUP/MC-BUP.md) [MS-BDSRR](../MS-BDSRR/MS-BDSRR.md) [MS-BKUP](../MS-BKUP/MS-BKUP.md) [MS-BPCR](../MS-BPCR/MS-BPCR.md) [MS-BPDP](../MS-BPDP/MS-BPDP.md) [MS-BRWS](../MS-BRWS/MS-BRWS.md) [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) [MS-CAPR](../MS-CAPR/MS-CAPR.md) [MS-CIFS](../MS-CIFS/MS-CIFS.md) [MS-DFSC](../MS-DFSC/MS-DFSC.md) [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md) [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) [MS-DLTCS](../MS-DLTCS/MS-DLTCS.md) [MS-DLTM](../MS-DLTM/MS-DLTM.md) [MS-DLTW](../MS-DLTW/MS-DLTW.md) [MS-DMRP](../MS-DMRP/MS-DMRP.md) [MS-DPWSRP](../MS-DPWSRP/MS-DPWSRP.md) [MS-EFSR](../MS-EFSR/MS-EFSR.md) [MS-EMF](../MS-EMF/MS-EMF.md) [MS-EMFPLUS](../MS-EMFPLUS/MS-EMFPLUS.md) [MS-EMFSPOOL](../MS-EMFSPOOL/MS-EMFSPOOL.md) [MS-FAX](../MS-FAX/MS-FAX.md) [MS-FCIADS](../MS-FCIADS/MS-FCIADS.md) [MS-FRS1](../MS-FRS1/MS-FRS1.md) [MS-FRS2](../MS-FRS2/MS-FRS2.md) [MS-FSA](../MS-FSA/MS-FSA.md) [MS-FSCC](../MS-FSCC/MS-FSCC.md) [MS-FSRM](../MS-FSRM/MS-FSRM.md) [MS-FSRVP](../MS-FSRVP/MS-FSRVP.md) [MS-FSVCA](../MS-FSVCA/MS-FSVCA.md) [MS-FTPS](../MS-FTPS/MS-FTPS.md) [MS-HGRP](../MS-HGRP/MS-HGRP.md) [MS-HRL](../MS-HRL/MS-HRL.md) [MS-HVRS](../MS-HVRS/MS-HVRS.md) [MS-PAN](../MS-PAN/MS-PAN.md) [MS-PAR](../MS-PAR/MS-PAR.md) [MS-PCCRC](../MS-PCCRC/MS-PCCRC.md) [MS-PCHC](../MS-PCHC/MS-PCHC.md) [MS-RAA](../MS-RAA/MS-RAA.md) [MS-RAP](../MS-RAP/MS-RAP.md) [MS-RDC](../MS-RDC/MS-RDC.md) [MS-RPRN](../MS-RPRN/MS-RPRN.md) [MS-RSMP](../MS-RSMP/MS-RSMP.md) [MS-SCMP](../MS-SCMP/MS-SCMP.md) [MS-SHLLINK](../MS-SHLLINK/MS-SHLLINK.md) [MS-SMB](../MS-SMB/MS-SMB.md) [MS-SMB2](../MS-SMB2/MS-SMB2.md) [MS-SMBD](../MS-SMBD/MS-SMBD.md) [MS-SQOS](../MS-SQOS/MS-SQOS.md) [MS-SRVS](../MS-SRVS/MS-SRVS.md) [MS-SWN](../MS-SWN/MS-SWN.md) [MS-TDS](../MS-TDS/MS-TDS.md) [MS-UNMP](../MS-UNMP/MS-UNMP.md) [MS-VDS](../MS-VDS/MS-VDS.md) [MS-VHDX](../MS-VHDX/MS-VHDX.md) [MS-WDV](../MS-WDV/MS-WDV.md) [MS-WDVSE](../MS-WDVSE/MS-WDVSE.md) [MS-WKST](../MS-WKST/MS-WKST.md) [MS-WMF](../MS-WMF/MS-WMF.md) [MS-WPE376](../MS-WPE376/MS-WPE376.md) [MS-WPODF](../MS-WPODF/MS-WPODF.md) [MS-WPRN](../MS-WPRN/MS-WPRN.md) [MS-WSP](../MS-WSP/MS-WSP.md) |
+| File, Fax, and Printing Services | [MS-CCROD](../MS-CCROD/MS-CCROD.md) [MS-FASOD](../MS-FASOD/MS-FASOD.md) [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md) [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md) [MS-STOROD](../MS-STOROD/MS-STOROD.md) [MS-VSOD](../MS-VSOD/MS-VSOD.md) | [MC-BUP](../MC-BUP/MC-BUP.md) [MS-BDSRR](../MS-BDSRR/MS-BDSRR.md) [MS-BKUP](../MS-BKUP/MS-BKUP.md) [MS-BPCR](../MS-BPCR/MS-BPCR.md) [MS-BPDP](../MS-BPDP/MS-BPDP.md) [MS-BRWS](../MS-BRWS/MS-BRWS.md) [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) [MS-CAPR](../MS-CAPR/MS-CAPR.md) [MS-CIFS](../MS-CIFS/MS-CIFS.md) [MS-DFSC](../MS-DFSC/MS-DFSC.md) [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md) [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) [MS-DLTCS](../MS-DLTCS/MS-DLTCS.md) [MS-DLTM](../MS-DLTM/MS-DLTM.md) [MS-DLTW](../MS-DLTW/MS-DLTW.md) [MS-DMRP](../MS-DMRP/MS-DMRP.md) [MS-DPWSRP](../MS-DPWSRP/MS-DPWSRP.md) [MS-EFSR](../MS-EFSR/MS-EFSR.md) [MS-EMF](../MS-EMF/MS-EMF.md) [MS-EMFPLUS](../MS-EMFPLUS/MS-EMFPLUS.md) [MS-EMFSPOOL](../MS-EMFSPOOL/MS-EMFSPOOL.md) [MS-FAX](../MS-FAX/MS-FAX.md) [MS-FCIADS](../MS-FCIADS/MS-FCIADS.md) [MS-FRS1](../MS-FRS1/MS-FRS1.md) [MS-FRS2](../MS-FRS2/MS-FRS2.md) [MS-FSA](../MS-FSA/MS-FSA.md) [MS-FSCC](../MS-FSCC/MS-FSCC.md) [MS-FSRM](../MS-FSRM/MS-FSRM.md) [MS-FSRVP](../MS-FSRVP/MS-FSRVP.md) [MS-FSVCA](../MS-FSVCA/MS-FSVCA.md) [MS-FTPS](../MS-FTPS/MS-FTPS.md) [MS-HGRP](../MS-HGRP/MS-HGRP.md) [MS-HRL](../MS-HRL/MS-HRL.md) [MS-HVRS](../MS-HVRS/MS-HVRS.md) [MS-PAN](../MS-PAN/MS-PAN.md) [MS-PAR](../MS-PAR/MS-PAR.md) [MS-PCCRC](../MS-PCCRC/MS-PCCRC.md) [MS-PCHC](../MS-PCHC/MS-PCHC.md) [MS-RAA](../MS-RAA/MS-RAA.md) [MS-RAP](../MS-RAP/MS-RAP.md) [MS-RDC](../MS-RDC/MS-RDC.md) [MS-RPRN](../MS-RPRN/MS-RPRN.md) [MS-RSMP](../MS-RSMP/MS-RSMP.md) [MS-SCMP](../MS-SCMP/MS-SCMP.md) [MS-SHLLINK](../MS-SHLLINK/MS-SHLLINK.md) [MS-SMB](../MS-SMB/MS-SMB.md) [MS-SMB2](../MS-SMB2/MS-SMB2.md) [MS-SMBD](../MS-SMBD/MS-SMBD.md) [MS-SQOS](../MS-SQOS/MS-SQOS.md) [MS-SRVS](../MS-SRVS/MS-SRVS.md) [MS-SWN](../MS-SWN/MS-SWN.md) [MS-TDS](../MS-TDS/MS-TDS.md) [MS-UNMP](../MS-UNMP/MS-UNMP.md) [MS-VDS](../MS-VDS/MS-VDS.md) [MS-VHDX](../MS-VHDX/MS-VHDX.md) [MS-WDV](../MS-WDV/MS-WDV.md) [MS-WDVSE](../MS-WDVSE/MS-WDVSE.md) [MS-WKST](../MS-WKST/MS-WKST.md) [MS-WMF](../MS-WMF/MS-WMF.md) [MS-WPE376](../MS-WPE376/MS-WPE376.md) [MS-WPODF](../MS-WPODF/MS-WPODF.md) [MS-WPRN](../MS-WPRN/MS-WPRN.md) [MS-WSP](../MS-WSP/MS-WSP.md) |
 | Home Server | - | [MC-DRT](../MC-DRT/MC-DRT.md) [MC-PRCR](../MC-PRCR/MC-PRCR.md) [MS-HGRP](../MS-HGRP/MS-HGRP.md) [MS-PBSD](../MS-PBSD/MS-PBSD.md) [MS-PNRP](../MS-PNRP/MS-PNRP.md) [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md) [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md) |
 | Multiplayer Games | - | [MC-DPL4CS](../MC-DPL4CS/MC-DPL4CS.md) [MC-DPL4R](../MC-DPL4R/MC-DPL4R.md) [MC-DPL8CS](../MC-DPL8CS/MC-DPL8CS.md) [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md) [MC-DPLHP](../MC-DPLHP/MC-DPLHP.md) [MC-DPLNAT](../MC-DPLNAT/MC-DPLNAT.md) [MC-DPLVP](../MC-DPLVP/MC-DPLVP.md) [MS-DPDX](../MS-DPDX/MS-DPDX.md) |
 | Networking | [MS-NAPOD](../MS-NAPOD/MS-NAPOD.md) | [MS-ADTG](../MS-ADTG/MS-ADTG.md) [MS-CBCP](../MS-CBCP/MS-CBCP.md) [MS-CDP](../MS-CDP/MS-CDP.md) [MS-CFB](../MS-CFB/MS-CFB.md) [MS-CHAP](../MS-CHAP/MS-CHAP.md) [MS-CPSP](../MS-CPSP/MS-CPSP.md) [MS-DHA](../MS-DHA/MS-DHA.md) [MS-DHCPE](../MS-DHCPE/MS-DHCPE.md) [MS-DHCPF](../MS-DHCPF/MS-DHCPF.md) [MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) [MS-DHCPN](../MS-DHCPN/MS-DHCPN.md) [MS-EERR](../MS-EERR/MS-EERR.md) [MS-FASP](../MS-FASP/MS-FASP.md) [MS-HCEP](../MS-HCEP/MS-HCEP.md) [MS-HNDS](../MS-HNDS/MS-HNDS.md) [MS-HTTP2E](../MS-HTTP2E/MS-HTTP2E.md) [MS-IPAMM2](../MS-IPAMM2/MS-IPAMM2.md) [MS-IPHTTPS](../MS-IPHTTPS/MS-IPHTTPS.md) [MS-IRDA](../MS-IRDA/MS-IRDA.md) [MS-L2TPIE](../MS-L2TPIE/MS-L2TPIE.md) [MS-LLMNRP](../MS-LLMNRP/MS-LLMNRP.md) [MS-LLTD](../MS-LLTD/MS-LLTD.md) [MS-LWSSP](../MS-LWSSP/MS-LWSSP.md) [MS-MDE](../MS-MDE/MS-MDE.md) [MS-MDE2](../MS-MDE2/MS-MDE2.md) [MS-MDM](../MS-MDM/MS-MDM.md) [MS-MICE](../MS-MICE/MS-MICE.md) [MS-MSRP](../MS-MSRP/MS-MSRP.md) [MS-NBTE](../MS-NBTE/MS-NBTE.md) [MS-NCNBI](../MS-NCNBI/MS-NCNBI.md) [MS-NCT](../MS-NCT/MS-NCT.md) [MS-NFPB](../MS-NFPB/MS-NFPB.md) [MS-NFPS](../MS-NFPS/MS-NFPS.md) [MS-NKPU](../MS-NKPU/MS-NKPU.md) [MS-OAUT](../MS-OAUT/MS-OAUT.md) [MS-OLEDS](../MS-OLEDS/MS-OLEDS.md) [MS-OLEPS](../MS-OLEPS/MS-OLEPS.md) [MS-PEAP](../MS-PEAP/MS-PEAP.md) [MS-PPPI](../MS-PPPI/MS-PPPI.md) [MS-PSDP](../MS-PSDP/MS-PSDP.md) [MS-PTPT](../MS-PTPT/MS-PTPT.md) [MS-QDP](../MS-QDP/MS-QDP.md) [MS-QLPB](../MS-QLPB/MS-QLPB.md) [MS-RASA](../MS-RASA/MS-RASA.md) [MS-RNAP](../MS-RNAP/MS-RNAP.md) [MS-RPCE](../MS-RPCE/MS-RPCE.md) [MS-RPCH](../MS-RPCH/MS-RPCH.md) [MS-RPCL](../MS-RPCL/MS-RPCL.md) [MS-SNID](../MS-SNID/MS-SNID.md) [MS-SSTP](../MS-SSTP/MS-SSTP.md) [MS-TNAP](../MS-TNAP/MS-TNAP.md) [MS-TSRAP](../MS-TSRAP/MS-TSRAP.md) [MS-V4OF](../MS-V4OF/MS-V4OF.md) [MS-VUVP](../MS-VUVP/MS-VUVP.md) [MS-WDHCE](../MS-WDHCE/MS-WDHCE.md) [MS-WDSC](../MS-WDSC/MS-WDSC.md) [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md) [MS-WDSMSI](../MS-WDSMSI/MS-WDSMSI.md) [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) [MS-WDSOSD](../MS-WDSOSD/MS-WDSOSD.md) [MS-WINSRA](../MS-WINSRA/MS-WINSRA.md) [MS-WSH](../MS-WSH/MS-WSH.md) [MS-WSPE](../MS-WSPE/MS-WSPE.md) [MS-XOPP](../MS-XOPP/MS-XOPP.md) |
@@ -1760,7 +1760,7 @@ This section contains a table that shows, for each [**technical area**](#gt_tech
 <a id="Section_4.3"></a>
 ## 4.3 Technology Collection Cross-Reference Matrix
 
-This section contains a table that shows the [**technology collections**](#gt_technology-collection) in the Windows protocols documentation set. Each technology collection consists of a technology overview (section [2.1.3](#Section_4.3)) in a [**technical area**](#gt_technical-area) (section [2](#Section_2)) and the technical specifications it references.
+This section contains a table that shows the [**technology collections**](#gt_technology-collection) in the Windows protocols documentation set. Each technology collection consists of a technology overview (section [2.1.3](#Section_2.1.3)) in a [**technical area**](#gt_technical-area) (section [2](#Section_2)) and the technical specifications it references.
 
 | Technology overview | Technical area | Technical specifications |
 | --- | --- | --- |

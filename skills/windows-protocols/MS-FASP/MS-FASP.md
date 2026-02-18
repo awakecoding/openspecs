@@ -445,7 +445,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-GPFAS] Microsoft Corporation, "[Group Policy: Firewall and Advanced Security Data Structure](#Section_5)".
+[MS-GPFAS] Microsoft Corporation, "[Group Policy: Firewall and Advanced Security Data Structure](../MS-GPFAS/MS-GPFAS.md)".
 
 [MS-IKEE] Microsoft Corporation, "[Internet Key Exchange Protocol Extensions](../MS-IKEE/MS-IKEE.md)".
 
@@ -524,7 +524,7 @@ The server role is represented by the host firewall, which contains the policy a
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-This protocol is implemented on [**RPC**](#gt_remote-procedure-call-rpc), as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), which uses the [**Transmission Control Protocol (TCP)**](#gt_transmission-control-protocol-tcp) as a transport. Aside from managing the policy for the firewall itself, this protocol is used to remotely manage the security policy database of the Security Architecture for the Internet Protocol [[RFC4301]](https://go.microsoft.com/fwlink/?LinkId=90465), which describes how [**Internet Protocol Security (IPsec)**](#gt_internet-protocol-security-ipsec) should be enforced and what options the [**Internet Key Exchange (IKE)**](#gt_internet-key-exchange-ike) [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349), [**Authenticated IP (AuthIP)**](#gt_authenticated-ip-authip) [MS-AIPS](../MS-AIPS/MS-AIPS.md), and [**Internet Key Exchange (IKEv2)**](#gt_internet-key-exchange-ikev2) [[RFC4306]](https://go.microsoft.com/fwlink/?LinkId=90469) have available to negotiate. This protocol also exposes an abstract interface to configure firewall and advanced security policy for use by other mechanisms such as [**Group Policy**](#gt_group-policy) [MS-GPFAS](#Section_5).
+This protocol is implemented on [**RPC**](#gt_remote-procedure-call-rpc), as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), which uses the [**Transmission Control Protocol (TCP)**](#gt_transmission-control-protocol-tcp) as a transport. Aside from managing the policy for the firewall itself, this protocol is used to remotely manage the security policy database of the Security Architecture for the Internet Protocol [[RFC4301]](https://go.microsoft.com/fwlink/?LinkId=90465), which describes how [**Internet Protocol Security (IPsec)**](#gt_internet-protocol-security-ipsec) should be enforced and what options the [**Internet Key Exchange (IKE)**](#gt_internet-key-exchange-ike) [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349), [**Authenticated IP (AuthIP)**](#gt_authenticated-ip-authip) [MS-AIPS](../MS-AIPS/MS-AIPS.md), and [**Internet Key Exchange (IKEv2)**](#gt_internet-key-exchange-ikev2) [[RFC4306]](https://go.microsoft.com/fwlink/?LinkId=90469) have available to negotiate. This protocol also exposes an abstract interface to configure firewall and advanced security policy for use by other mechanisms such as [**Group Policy**](#gt_group-policy) [MS-GPFAS](../MS-GPFAS/MS-GPFAS.md).
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -546,7 +546,7 @@ This document covers versioning and capability negotiation issues in the followi
 - Supported Transports: This protocol uses a single [**RPC protocol sequence**](#gt_rpc-protocol-sequence), as specified in section [2.1](#Section_2.1).
 - Protocol Versions: This protocol has only one interface version. There are also several policy versions, which can be tied to policies and specific policy objects, as defined in section [2.2](#Section_2.2). Protocol versions can also be translated to both binary and schema versions (also called firewall policy versions), as described in section [2.2.42](#Section_2.2.42).
 - Security and Authentication Methods: This protocol supports both Kerberos Protocol Extensions [MS-KILE](../MS-KILE/MS-KILE.md) and NT LAN Manager (NTLM) Authentication Protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md) authentication methods, section 2.1.
-- Localization: This protocol passes text strings without considering localization. However, some strings can be formatted in such a way that the firewall component knows where to look for localized versions of these strings, as defined in section 2.2. These strings can also be resolved with specific flags and method calls, as defined in section [3.1.4](#Section_3.2.4).
+- Localization: This protocol passes text strings without considering localization. However, some strings can be formatted in such a way that the firewall component knows where to look for localized versions of these strings, as defined in section 2.2. These strings can also be resolved with specific flags and method calls, as defined in section [3.1.4](#Section_3.1.4).
 - Capability Negotiation: The FW_GLOBAL_CONFIG_POLICY_VERSION_SUPPORTED option defined in section 2.2.42 contains the maximum policy version supported by the server. By invoking the RRPC_FWGetGlobalConfig method (section [3.1.4.4](#Section_3.1.4.4)) to retrieve this option, a client can understand what can and cannot be expressed in this protocol and the methods that are supported to do so. The data types in section 2.2 and the existence and behavior of methods in section 3.1.4 are defined in terms of these policy versions when appropriate. No other negotiation capabilities, version-specific or otherwise, are present in this protocol.
 - Byte order: All values defined in this specification are independent of whether the platform uses big-endian or little-endian byte order. For instance, protocol version 0x0200 = 512 decimal, and will be value 512 (0x0200) on both little-endian and big-endian platforms. Marshaling any values defined within this specification is handled by [**RPC**](#gt_remote-procedure-call-rpc) (see [MS-RPCE](../MS-RPCE/MS-RPCE.md)).
 <a id="Section_1.8"></a>
@@ -584,7 +584,7 @@ This protocol MUST use the following interface identifier as specified in [C706]
 | vers_major: | 1 |
 | vers_minor: | 0 |
 
-The server MUST register this interface identifier with the RPC run-time during server initialization as specified in section [3.1.3](#Section_3.2.3). The client MUST use this interface identifier when binding to the RPC server as specified in section [3.2.3](#Section_3.2.3).
+The server MUST register this interface identifier with the RPC run-time during server initialization as specified in section [3.1.3](#Section_3.1.3). The client MUST use this interface identifier when binding to the RPC server as specified in section [3.2.3](#Section_3.2.3).
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -2485,7 +2485,7 @@ FW_RULE_ORIGIN_HOST_MAX = 12
 <a id="Section_2.2.33"></a>
 ### 2.2.33 FW_ENUM_RULES_FLAGS
 
-This enumeration defines flag values that can be used in the enumeration methods that are defined in [RRPC_FWEnumFirewallRules](#Section_3.1.4.81), [RRPC_FWEnumConnectionSecurityRules](#Section_3.1.4.17), [RRPC_FWEnumAuthenticationSets](#Section_3.1.4.55), and [RRPC_FWEnumCryptoSets](#Section_3.1.4.27).
+This enumeration defines flag values that can be used in the enumeration methods that are defined in [RRPC_FWEnumFirewallRules](#Section_3.1.4.10), [RRPC_FWEnumConnectionSecurityRules](#Section_3.1.4.17), [RRPC_FWEnumAuthenticationSets](#Section_3.1.4.22), and [RRPC_FWEnumCryptoSets](#Section_3.1.4.27).
 
 typedef enum _tag_FW_ENUM_RULES_FLAGS
 
@@ -2917,7 +2917,7 @@ WCHAR* wszPackageFamilyName;
 
 **Origin:** The rule origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
-**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.2.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
+**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.1.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
 
 **Reserved:** Not used other than to instruct [**RPC**](#gt_remote-procedure-call-rpc), using the FW_OBJECT_CTRL_FLAG_INCLUDE_METADATA flag, that a pointer to an FW_OBJECT_METADATA structure is present. It has no semantic meaning to the object itself.
 
@@ -3858,7 +3858,7 @@ DWORD FwdPathSALifetime;
 
 **Origin:** This field is the rule origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
-**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.2.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
+**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.1.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
 
 **Status:** The status code of the rule, as specified by the [FW_RULE_STATUS](#Section_2.2.24) enumeration. This field is filled out when the structure is returned as output. On input, this field MUST be set to *FW_RULE_STATUS_OK*.
 
@@ -4276,7 +4276,7 @@ struct {
 
 **wszCAName:** A pointer to a [**Unicode**](#gt_unicode) string. This string represents the name of the [**certificate authority**](#gt_certification-authority-ca) to be used to authenticate when using machine or user certificate methods.
 
-**pCertCriteria:** A pointer to a structure of type [PFW_CERT_CRITERIA](#Section_2.2.59). This field MUST NOT be present unless the **Method** field has the value FW_AUTH_METHOD_MACHINE_CERT or FW_AUTH_METHOD_USER_CERT.
+**pCertCriteria:** A pointer to a structure of type [PFW_CERT_CRITERIA](#Section_8f4e2f51826f43c794055395b824bd41). This field MUST NOT be present unless the **Method** field has the value FW_AUTH_METHOD_MACHINE_CERT or FW_AUTH_METHOD_USER_CERT.
 
 It contains fields which are used when selecting a local certificate and validating a remote peer's certificate during certificate authentication.
 
@@ -4453,7 +4453,7 @@ unsigned long dwAuthSetFlags;
 
 **Origin:** This field is the set origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
-**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.2.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
+**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.1.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
 
 **Status:** The status code of the set which MUST be one of the values defined in the [FW_RULE_STATUS](#Section_2.2.24) enumeration. This field's value is assigned when the structure is returned as output. When first sent, this field MUST be set to FW_RULE_STATUS_OK.
 
@@ -4955,7 +4955,7 @@ unsigned long dwCryptoSetFlags;
 
 **Origin:** This field is the set origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
-**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.2.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
+**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.1.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
 
 **Status:** The status code of the set, as specified by the [FW_RULE_STATUS](#Section_2.2.24) enumeration. This field is filled out when the structure is returned as output. On input, this field MUST be set to FW_RULE_STATUS_OK.
 
@@ -5444,7 +5444,7 @@ FW_OBJECT_METADATA pMetaData;
 
 **Origin:** This field is the rule origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
-**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.2.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
+**wszGPOName:** A pointer to a Unicode string containing the displayName of the [**GPO**](#gt_group-policy-object-gpo) containing this object. When adding a new object, this field is not used. The client SHOULD set the value to NULL, and the server MUST ignore the value. When enumerating an existing object, if the client does not set the FW_ENUM_RULES_FLAG_RESOLVE_GPO_NAME flag, the server MUST set the value to NULL. Otherwise, the server MUST set the value to the displayName of the GPO containing the object or NULL if the object is not contained within a GPO. For details about how the server initializes an object from a GPO, see section [3.1.3](#Section_3.1.3). For details about how the displayName of a GPO is stored, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.3.
 
 **Status:** The status code of the rule, as specified by the [FW_RULE_STATUS](#Section_2.2.24) enumeration. This field is filled out when the structure is returned as output. On input, this field MUST be set to FW_RULE_STATUS_OK.
 
@@ -6791,7 +6791,7 @@ This section describes a conceptual model of possible data organization that an 
 **AuthenticationSet**: This describes an authentication set, which is defined in this protocol by the data type [FW_AUTH_SET (section 2.2.65)](#Section_2.2.65). This object contains two additional properties:
 
 - **IsAuthPrimary**: A Boolean value indicating that this is a primary set. The Phase 1 and Phase 2 primary authentication sets are identified by well-known set IDs as specified in section 2.2.65. Note that the value of this property can always be derived from the set ID; it is described separately solely for convenience.
-Primary authentication sets differ from other authentication sets in that they are guaranteed to exist in the **GroupPolicyRSoPStore** and the **LocalStore**. If the administrator does not explicitly add the primary sets, the server initializes them to default values. See section [3.1.3](#Section_3.2.3) for details.
+Primary authentication sets differ from other authentication sets in that they are guaranteed to exist in the **GroupPolicyRSoPStore** and the **LocalStore**. If the administrator does not explicitly add the primary sets, the server initializes them to default values. See section [3.1.3](#Section_3.1.3) for details.
 
 Although this protocol imposes no limitations on how administrators use the primary authentication sets, the intent is to decouple management of authentication settings from management of connection security and main mode rules. In this model, most rules do not use unique authentication sets, but instead reference the primary sets.
 
@@ -6913,11 +6913,11 @@ Because the server makes access control decisions as part of message processing,
 | [RRPC_FWRestoreDefaults](#Section_3.1.4.3) | This method erases the local policy store and replaces it with the default policy that the server host had out of the box after installation. After the method returns, the local store contains exactly the same policy as it did after installation. Opnum: 2 |
 | [RRPC_FWGetGlobalConfig](#Section_3.1.4.4) | This method retrieves the value of a global policy configuration option. The client specifies to the server from what store this value MUST be retrieved and in what specific configuration option it is interested. Opnum: 3 |
 | [RRPC_FWSetGlobalConfig](#Section_3.1.4.5) | This method modifies the value of a global policy configuration option. The client specifies to the server in what store this value MUST be written and what specific configuration option it is interested in modifying. Opnum: 4 |
-| [RRPC_FWAddFirewallRule](#Section_3.1.4.46) | This method requests the server to add the specified firewall rule in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 5 |
+| [RRPC_FWAddFirewallRule](#Section_3.1.4.6) | This method requests the server to add the specified firewall rule in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 5 |
 | [RRPC_FWSetFirewallRule](#Section_3.1.4.7) | This method requests the server to modify the specified firewall rule in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 6 |
 | [RRPC_FWDeleteFirewallRule](#Section_3.1.4.8) | This method requests the server to delete the specified firewall rule in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 7 |
 | [RRPC_FWDeleteAllFirewallRules](#Section_3.1.4.9) | This method deletes all firewall rules in the firewall linked list of the memory representation of the store being modified. Opnum: 8 |
-| [RRPC_FWEnumFirewallRules](#Section_3.1.4.81) | This method requests the server to return all the firewall rules contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of all the firewall rule objects. Opnum: 9 |
+| [RRPC_FWEnumFirewallRules](#Section_3.1.4.10) | This method requests the server to return all the firewall rules contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of all the firewall rule objects. Opnum: 9 |
 | [RRPC_FWGetConfig](#Section_3.1.4.11) | This method retrieves the value of a profile configuration option. The client specifies to the server from what store and profile this value MUST be retrieved and in what specific configuration option it is interested. Opnum: 10 |
 | [RRPC_FWSetConfig](#Section_3.1.4.12) | This method modifies the value of a profile configuration option. The client specifies to the server in what store and profile this value MUST be written and what specific configuration option it is interested in modifying. Opnum: 11 |
 | [RRPC_FWAddConnectionSecurityRule](#Section_3.1.4.13) | This method requests the server to add the connection security rule in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 12 |
@@ -6929,7 +6929,7 @@ Because the server makes access control decisions as part of message processing,
 | [RRPC_FWSetAuthenticationSet](#Section_3.1.4.19) | This method requests the server to modify the specified authentication set in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 18 |
 | [RRPC_FWDeleteAuthenticationSet](#Section_3.1.4.20) | This method requests the server to delete the specified authentication set in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 19 |
 | [RRPC_FWDeleteAllAuthenticationSets](#Section_3.1.4.21) | This method requests the server to delete all the authentication sets of a specific [**IPsec**](#gt_internet-protocol-security-ipsec) phase in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 20 |
-| [RRPC_FWEnumAuthenticationSets](#Section_3.1.4.55) | This method requests the server to return all the authentication sets of the specified IPsec phase contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of these objects. Opnum: 21 |
+| [RRPC_FWEnumAuthenticationSets](#Section_3.1.4.22) | This method requests the server to return all the authentication sets of the specified IPsec phase contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of these objects. Opnum: 21 |
 | [RRPC_FWAddCryptoSet](#Section_3.1.4.23) | This method adds a cryptographic set in the cryptographic linked list of the memory representation of the store being modified. Opnum: 22 |
 | [RRPC_FWSetCryptoSet](#Section_3.1.4.24) | This method requests the server to modify the specified cryptographic set in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 23 |
 | [RRPC_FWDeleteCryptoSet](#Section_3.1.4.25) | This method requests the server to delete the specified cryptographic set in the policy contained in the policy store that is referenced by the specified opened policy store handle. Opnum: 24 |
@@ -7041,7 +7041,7 @@ FW_POLICY_ACCESS_RIGHT AccessRight,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 RRPC_FWClosePolicyStore (Opnum 1)
@@ -7064,7 +7064,7 @@ unsigned long RRPC_FWClosePolicyStore(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 RRPC_FWRestoreDefaults (Opnum 2)
@@ -7083,7 +7083,7 @@ unsigned long RRPC_FWRestoreDefaults(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST first validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method. Next, the server MUST replace the contents of **LocalStore** with the contents of **DefaultsStore**. The server then MUST merge the new contents of **LocalStore** with the existing contents of the **GroupPolicyRSoPStore** (as described in section [3.1.1](#Section_3.1.1)) and store the result in **DynamicStore**. Finally, the server MUST invoke the abstract interface [SetEffectiveFirewallPolicy (section 3.1.6.6)](#Section_3.1.6.6) with the contents of **DynamicStore**.
+The server MUST first validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method. Next, the server MUST replace the contents of **LocalStore** with the contents of **DefaultsStore**. The server then MUST merge the new contents of **LocalStore** with the existing contents of the **GroupPolicyRSoPStore** (as described in section [3.1.1](#Section_3.1.1)) and store the result in **DynamicStore**. Finally, the server MUST invoke the abstract interface [SetEffectiveFirewallPolicy (section 3.1.6.6)](#Section_3.1.6.6) with the contents of **DynamicStore**.
 
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 RRPC_FWGetGlobalConfig (Opnum 3)
@@ -7146,7 +7146,7 @@ unsigned char* pBuffer,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 RRPC_FWSetGlobalConfig (Opnum 4)
@@ -7195,9 +7195,9 @@ unsigned char* lpBuffer,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-This method performs a merge operation of the resultant configuration values, as defined in section [3.1.3](#Section_3.2.3). It then determines what modifications are necessary on the rule objects to make sure the policy is enforced.
+This method performs a merge operation of the resultant configuration values, as defined in section [3.1.3](#Section_3.1.3). It then determines what modifications are necessary on the rule objects to make sure the policy is enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 RRPC_FWAddFirewallRule (Opnum 5)
@@ -7233,7 +7233,7 @@ ULONG RRPC_FWAddFirewallRule(
 
 This method adds a firewall rule to the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule in disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 RRPC_FWSetFirewallRule (Opnum 6)
@@ -7267,7 +7267,7 @@ ULONG RRPC_FWSetFirewallRule(
 
 **Exceptions Thrown**: No exceptions are thrown except those that are thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.8"></a>
 #### 3.1.4.8 RRPC_FWDeleteFirewallRule (Opnum 7)
@@ -7304,7 +7304,7 @@ This ID can be obtained by enumerating firewall rules using RRPC_FWEnumFirewallR
 
 This method deletes a firewall rule already stored in the firewall linked list of the memory representation of the store being modified. It uses this list to determine if the rule exists or not. It also writes through and deletes the rule from disk. If called on an online store, the removal of the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 RRPC_FWDeleteAllFirewallRules (Opnum 8)
@@ -7332,7 +7332,7 @@ unsigned long RRPC_FWDeleteAllFirewallRules(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 RRPC_FWEnumFirewallRules (Opnum 9)
@@ -7380,7 +7380,7 @@ ULONG RRPC_FWEnumFirewallRules(
 
 **Exceptions Thrown**: No exceptions are thrown except those that are thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 RRPC_FWGetConfig (Opnum 10)
@@ -7443,7 +7443,7 @@ unsigned char* pBuffer,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.12"></a>
 #### 3.1.4.12 RRPC_FWSetConfig (Opnum 11)
@@ -7490,9 +7490,9 @@ FW_PROFILE_CONFIG configID,
 
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE]. If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-This method performs a merge operation of the resultant configuration values, as defined in section [3.1.3](#Section_3.2.3). It then determines what modifications are necessary on the rule objects (for example, remove rule enforcement if firewall is off) to make sure the policy is enforced.
+This method performs a merge operation of the resultant configuration values, as defined in section [3.1.3](#Section_3.1.3). It then determines what modifications are necessary on the rule objects (for example, remove rule enforcement if firewall is off) to make sure the policy is enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.13"></a>
 #### 3.1.4.13 RRPC_FWAddConnectionSecurityRule (Opnum 12)
@@ -7528,7 +7528,7 @@ ULONG RRPC_FWAddConnectionSecurityRule(
 
 This method adds a connection security rule in the connection security link list of the memory representation of the store being modified. It also writes through and saves the rule to disk. If called on an online store, the connection security rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.14"></a>
 #### 3.1.4.14 RRPC_FWSetConnectionSecurityRule (Opnum 13)
@@ -7564,7 +7564,7 @@ ULONG RRPC_FWSetConnectionSecurityRule(
 
 This method modifies a connection security rule already stored in the connection security linked list of the memory representation of the store being modified. It uses this list to determine whether the rule exists. It also writes through and saves the rule in disk. If called on an online store, the connection security rule modifications are also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.15"></a>
 #### 3.1.4.15 RRPC_FWDeleteConnectionSecurityRule (Opnum 14)
@@ -7601,7 +7601,7 @@ This ID can be obtained by enumerating connection security rules using RRPC_FWEn
 
 This method deletes a connection security rule already stored in the connection security linked list of the memory representation of the store being modified. It uses this list to determine if the rule exists or not. It also writes through and deletes the rule from disk. If called on an online store, the removal of the connection security rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.16"></a>
 #### 3.1.4.16 RRPC_FWDeleteAllConnectionSecurityRules (Opnum 15)
@@ -7631,7 +7631,7 @@ unsigned long RRPC_FWDeleteAllConnectionSecurityRules(
 
 This method deletes all connection security rules in the connection security linked list of the memory representation of the store being modified. It also writes through and deletes all rules from the disk representation. If called on an online store, no connection security rules are enforced after the method returns.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.17"></a>
 #### 3.1.4.17 RRPC_FWEnumConnectionSecurityRules (Opnum 16)
@@ -7679,7 +7679,7 @@ ULONG RRPC_FWEnumConnectionSecurityRules(
 
 **Exceptions Thrown**: No exceptions are thrown except those that are thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.18"></a>
 #### 3.1.4.18 RRPC_FWAddAuthenticationSet (Opnum 17)
@@ -7715,7 +7715,7 @@ unsigned long RRPC_FWAddAuthenticationSet(
 
 This method adds an authentication set in the authentication linked list of the memory representation of the store being modified. It also writes through and saves the set in disk. If called on an online store and the set is a primary set, the method enumerates the connection security rule list and reapplies each rule referencing this primary set to complete the enforcement of the policy.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.19"></a>
 #### 3.1.4.19 RRPC_FWSetAuthenticationSet (Opnum 18)
@@ -7751,7 +7751,7 @@ unsigned long RRPC_FWSetAuthenticationSet(
 
 This method modifies an authentication set in the authentication linked list of the memory representation of the store being modified. It also writes through and saves the set in disk. If called on an online store, the method enumerates the connection security rules list and reapplies each rule referencing this primary set to complete the enforcement of the policy.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.20"></a>
 #### 3.1.4.20 RRPC_FWDeleteAuthenticationSet (Opnum 19)
@@ -7794,7 +7794,7 @@ FW_IPSEC_PHASE IpSecPhase,
 
 This method deletes an authentication set in the authentication linked list of the memory representation of the store being modified. It also writes through and saves the set in disk. If called on an online store, and the set is not a primary set, the method does not delete the specified set if any connection rule references this set.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.21"></a>
 #### 3.1.4.21 RRPC_FWDeleteAllAuthenticationSets (Opnum 20)
@@ -7833,7 +7833,7 @@ FW_IPSEC_PHASE IpSecPhase
 
 This method deletes all the authentication sets in the authentication linked list of the memory representation of the store being modified. It also writes through and deletes the sets from disk. If called on an online store, the method does not delete the sets if any nonprimary set is referenced by a connection security rule.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.22"></a>
 #### 3.1.4.22 RRPC_FWEnumAuthenticationSets (Opnum 21)
@@ -7883,7 +7883,7 @@ FW_IPSEC_PHASE IpSecPhase,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 When this method is called, the server looks for the binary version of the client, which was associated with the *hPolicy* handle when the client sent the [RRPC_FWOpenPolicyStore()](#Section_3.1.4.1) call. The server compares this binary version parameter with the schema version it supports. If the server has a schema version of 0x0201 and the client passed a 0x0200 binary version, then the server removes all values that are not valid for a [FW_AUTH_SET (section 2.2.65)](#Section_2.2.65) structure that has a 0x0200 schema version. If the removed value was present on one or more suites of the set, the server removes those suites as a whole, leaving the remaining suites intact. For each set that had a value removed, the server sets a FW_RULE_STATUS_PARTIALLY_IGNORED value on the **Status** field of the set. Then the client receives authentication sets with values that correspond to the correct schema version, but the client recognizes that the information it has about the sets is potentially incomplete.
 
@@ -7892,7 +7892,7 @@ When this method is called, the server looks for the binary version of the clien
 
 The RRPC_FWAddCryptoSet method adds a cryptographic set in the cryptographic linked list of the memory representation of the store being modified. It also writes through and saves the set to the disk. If called on an online store, and the set is a primary set, the method enumerates the connection security rule list and reapplies each rule referencing this primary set to complete the enforcement of the policy.
 
-The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 unsigned long RRPC_FWAddCryptoSet(
 
@@ -7955,7 +7955,7 @@ unsigned long RRPC_FWSetCryptoSet(
 
 This method modifies a cryptographic set in the cryptographic linked list of the memory representation of the store being modified. It also writes through and saves the set to the disk. If called on an online store, the method enumerates the connection security rules list and reapplies each rule referencing this primary set to complete the enforcement of the policy.
 
-The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.25"></a>
 #### 3.1.4.25 RRPC_FWDeleteCryptoSet (Opnum 24)
@@ -8000,7 +8000,7 @@ This ID can be obtained by enumerating cryptographic sets using the RRPC_FWEnumC
 
 This method deletes a cryptographic set in the cryptographic linked list of the memory representation of the store being modified. It also writes through and saves the set to disk. If called on an online store and the set is not a primary set, the method does not delete the specified set if any connection rule references this set.
 
-The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.26"></a>
 #### 3.1.4.26 RRPC_FWDeleteAllCryptoSets (Opnum 25)
@@ -8038,7 +8038,7 @@ FW_IPSEC_PHASE IpSecPhase
 
 This method deletes all the cryptographic sets in the cryptographic linked list of the memory representation of the store being modified. It also writes through and deletes the sets from disk. If called on an online store, the method does not delete the sets if any nonprimary set is referenced by a connection security rule.
 
-The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST determine whether the local computer is operating in [**common criteria mode**](#gt_common-criteria-mode) by invoking the abstract interface [IsComputerInCommonCriteriaMode (section 3.1.6.5)](#Section_3.1.6.5). If the local computer is operating in common criteria mode, the server MUST fail the operation and return an error of ERROR_ACCESS_DENIED (5). Otherwise, the server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.27"></a>
 #### 3.1.4.27 RRPC_FWEnumCryptoSets (Opnum 26)
@@ -8088,7 +8088,7 @@ FW_IPSEC_PHASE IpSecPhase,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 When this method is called, the server looks for the binary version of the client, which was associated with the hPolicy handle when the client sent the [RRPC_FWOpenPolicyStore()](#Section_3.1.4.1) call. The server compares this binary version parameter with the schema version that it supports. If the server has a schema version of 0x0201 and the client passed a 0x0200 binary version, the server removes all values that are not valid for a FW_CRYPTO_SET (section 2.2.74) structure that has a 0x0200 schema version. If the removed value was present on one or more suites of the set, the server removes those suites as a whole, leaving the remaining suites intact. For each set that had a value removed, the server sets a FW_RULE_STATUS_PARTIALLY_IGNORED value on the **Status** field of the set. The client then receives cryptographic sets with values that correspond to the correct schema version, but the client recognizes that the information it has about the sets is potentially incomplete.
 
@@ -8131,7 +8131,7 @@ unsigned long RRPC_FWEnumPhase1SAs(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 When this method is called, the server looks for the binary version of the client, which was associated with the *hPolicy* handle when the client sent the [RRPC_FWOpenPolicyStore](#Section_3.1.4.1) call. The server compares this binary version parameter with the schema version that it supports. If the server’s schema version is greater than the binary version passed by the client, the server removes all FW_PHASE1_SA_DETAILS objects that contain values that are not valid for an [FW_AUTH_SET](#Section_2.2.65) (section 2.2.65) structure that has the schema version value passed by the client.
 
@@ -8174,7 +8174,7 @@ unsigned long RRPC_FWEnumPhase2SAs(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.30"></a>
 #### 3.1.4.30 RRPC_FWDeletePhase1SAs (Opnum 29)
@@ -8207,7 +8207,7 @@ unsigned long RRPC_FWDeletePhase1SAs(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.31"></a>
 #### 3.1.4.31 RRPC_FWDeletePhase2SAs (Opnum 30)
@@ -8240,7 +8240,7 @@ unsigned long RRPC_FWDeletePhase2SAs(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.32"></a>
 #### 3.1.4.32 RRPC_FWEnumProducts (Opnum 31)
@@ -8279,7 +8279,7 @@ PFW_PRODUCT* ppProducts
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.33"></a>
 #### 3.1.4.33 RRPC_FWAddMainModeRule (Opnum 32)
@@ -8316,7 +8316,7 @@ unsigned long RRPC_FWAddMainModeRule(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.34"></a>
 #### 3.1.4.34 RRPC_FWSetMainModeRule (Opnum 33)
@@ -8353,7 +8353,7 @@ unsigned long RRPC_FWSetMainModeRule(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.35"></a>
 #### 3.1.4.35 RRPC_FWDeleteMainModeRule (Opnum 34)
@@ -8388,7 +8388,7 @@ This ID can be obtained by enumerating main mode rules using the RRPC_FWEnumMain
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.36"></a>
 #### 3.1.4.36 RRPC_FWDeleteAllMainModeRules (Opnum 35)
@@ -8416,7 +8416,7 @@ unsigned long RRPC_FWDeleteAllMainModeRules(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.37"></a>
 #### 3.1.4.37 RRPC_FWEnumMainModeRules (Opnum 36)
@@ -8464,7 +8464,7 @@ unsigned long RRPC_FWEnumMainModeRules(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.38"></a>
 #### 3.1.4.38 RRPC_FWQueryFirewallRules (Opnum 37)
@@ -8508,7 +8508,7 @@ unsigned long RRPC_FWQueryFirewallRules(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.39"></a>
 #### 3.1.4.39 RRPC_FWQueryMainModeRules (Opnum 39)
@@ -8552,7 +8552,7 @@ unsigned long RRPC_FWQueryMainModeRules(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.40"></a>
 #### 3.1.4.40 RRPC_FWQueryAuthenticationSets (Opnum 40)
@@ -8602,7 +8602,7 @@ FW_IPSEC_PHASE IPsecPhase,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.41"></a>
 #### 3.1.4.41 RRPC_FWQueryCryptoSets (Opnum 41)
@@ -8652,7 +8652,7 @@ FW_IPSEC_PHASE IPsecPhase,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.42"></a>
 #### 3.1.4.42 RRPC_FWEnumNetworks (Opnum 42)
@@ -8690,7 +8690,7 @@ PFW_NETWORK* ppNetworks
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.43"></a>
 #### 3.1.4.43 RRPC_FWEnumAdapters (Opnum 43)
@@ -8728,7 +8728,7 @@ PFW_ADAPTER* ppAdapters
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.44"></a>
 #### 3.1.4.44 RRPC_FWGetGlobalConfig2_10 (Opnum 44)
@@ -8794,7 +8794,7 @@ BYTE* pBuffer,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.45"></a>
 #### 3.1.4.45 RRPC_FWGetConfig2_10 (Opnum 45)
@@ -8861,7 +8861,7 @@ BYTE* pBuffer,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.46"></a>
 #### 3.1.4.46 RRPC_FWAddFirewallRule2_10 (Opnum 46)
@@ -8901,7 +8901,7 @@ unsigned long RRPC_FWAddFirewallRule2_10(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.47"></a>
 #### 3.1.4.47 RRPC_FWSetFirewallRule2_10 (Opnum 47)
@@ -8939,7 +8939,7 @@ unsigned long RRPC_FWSetFirewallRule2_10(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.48"></a>
 #### 3.1.4.48 RRPC_FWEnumFirewallRules2_10 (Opnum 48)
@@ -8987,7 +8987,7 @@ unsigned long RRPC_FWEnumFirewallRules2_10(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.49"></a>
 #### 3.1.4.49 RRPC_FWAddConnectionSecurityRule2_10 (Opnum 49)
@@ -9027,7 +9027,7 @@ unsigned long RRPC_FWAddConnectionSecurityRule2_10(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.50"></a>
 #### 3.1.4.50 RRPC_FWSetConnectionSecurityRule2_10 (Opnum 50)
@@ -9065,7 +9065,7 @@ unsigned long RRPC_FWSetConnectionSecurityRule2_10(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.51"></a>
 #### 3.1.4.51 RRPC_FWEnumConnectionSecurityRules2_10 (Opnum 51)
@@ -9113,7 +9113,7 @@ unsigned long RRPC_FWEnumConnectionSecurityRules2_10(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.52"></a>
 #### 3.1.4.52 RRPC_FWQueryConnectionSecurityRules2_10 (Opnum 38)
@@ -9157,7 +9157,7 @@ unsigned long RRPC_FWQueryConnectionSecurityRules(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.53"></a>
 #### 3.1.4.53 RRPC_FWAddAuthenticationSet2_10 (Opnum 52)
@@ -9197,7 +9197,7 @@ unsigned long RRPC_FWAddAuthenticationSet2_10(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If the method is called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.54"></a>
 #### 3.1.4.54 RRPC_FWSetAuthenticationSet2_10 (Opnum 53)
@@ -9235,7 +9235,7 @@ unsigned long RRPC_FWSetAuthenticationSet2_10(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.55"></a>
 #### 3.1.4.55 RRPC_FWEnumAuthenticationSets2_10 (Opnum 54)
@@ -9285,7 +9285,7 @@ FW_IPSEC_PHASE IpSecPhase,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.56"></a>
 #### 3.1.4.56 RRPC_FWAddCryptoSet2_10 (Opnum 55)
@@ -9325,7 +9325,7 @@ unsigned long RRPC_FWAddCryptoSet2_10(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.57"></a>
 #### 3.1.4.57 RRPC_FWSetCryptoSet2_10 (Opnum 56)
@@ -9363,7 +9363,7 @@ unsigned long RRPC_FWSetCryptoSet2_10(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.58"></a>
 #### 3.1.4.58 RRPC_FWEnumCryptoSets2_10 (Opnum 57)
@@ -9413,7 +9413,7 @@ FW_IPSEC_PHASE IpSecPhase,
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.59"></a>
 #### 3.1.4.59 RRPC_FWAddConnectionSecurityRule2_20 (Opnum 58)
@@ -9453,7 +9453,7 @@ unsigned long RRPC_FWAddConnectionSecurityRule2_20(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.60"></a>
 #### 3.1.4.60 RRPC_FWSetConnectionSecurityRule2_20 (Opnum 59)
@@ -9491,7 +9491,7 @@ unsigned long RRPC_FWModifyConnectionSecurityRule2_20(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.61"></a>
 #### 3.1.4.61 RRPC_FWEnumConnectionSecurityRules2_20 (Opnum 60)
@@ -9539,7 +9539,7 @@ unsigned long RRPC_FWEnumConnectionSecurityRules2_20(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.62"></a>
 #### 3.1.4.62 RRPC_FWQueryConnectionSecurityRules2_20 (Opnum 61)
@@ -9583,7 +9583,7 @@ unsigned long RRPC_FWQueryConnectionSecurityRules2_20(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.63"></a>
 #### 3.1.4.63 RRPC_FWAddAuthenticationSet2_20 (Opnum 62)
@@ -9799,7 +9799,7 @@ unsigned long RRPC_FWAddFirewallRule2_20(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.68"></a>
 #### 3.1.4.68 RRPC_FWSetFirewallRule2_20 (Opnum 67)
@@ -9837,7 +9837,7 @@ unsigned long RRPC_FWAddConnectionSecurityRule2_20(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.69"></a>
 #### 3.1.4.69 RRPC_FWEnumFirewallRules2_20 (Opnum 68)
@@ -9885,7 +9885,7 @@ unsigned long RRPC_FWEnumFirewallRules2_20(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.70"></a>
 #### 3.1.4.70 RRPC_FWQueryFirewallRules2_20 (Opnum 69)
@@ -9929,7 +9929,7 @@ unsigned long RRPC_FWQueryFirewallRules2_20(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.71"></a>
 #### 3.1.4.71 RRPC_FWAddFirewallRule2_24 (Opnum 70)
@@ -10479,7 +10479,7 @@ DWORD RRPC_FWAddFirewallRule2_27(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.84"></a>
 #### 3.1.4.84 RRPC_FWSetFirewallRule2_27 (Opnum 83)
@@ -10517,7 +10517,7 @@ DWORD RRPC_FWSetFirewallRule2_27(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.85"></a>
 #### 3.1.4.85 RRPC_FWEnumFirewallRules2_27 (Opnum 84)
@@ -10565,7 +10565,7 @@ DWORD RRPC_FWEnumFirewallRules2_27(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.86"></a>
 #### 3.1.4.86 RRPC_FWQueryFirewallRules2_27 (Opnum 85)
@@ -10609,7 +10609,7 @@ DWORD RRPC_FWQueryFirewallRules2_27(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.87"></a>
 #### 3.1.4.87 RRPC_FWAddFirewallRule2_31 (Opnum 86)
@@ -10649,7 +10649,7 @@ DWORD RRPC_FWAddFirewallRule2_31(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.88"></a>
 #### 3.1.4.88 RRPC_FWSetFirewallRule2_31 (Opnum 87)
@@ -10687,7 +10687,7 @@ DWORD RRPC_FWSetFirewallRule2_31(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.89"></a>
 #### 3.1.4.89 RRPC_FWEnumFirewallRules2_31 (Opnum 88)
@@ -10735,7 +10735,7 @@ DWORD RRPC_FWEnumFirewallRules2_31(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.90"></a>
 #### 3.1.4.90 RRPC_FWQueryFirewallRules2_31 (Opnum 89)
@@ -10779,7 +10779,7 @@ DWORD RRPC_FWQueryFirewallRules2_31(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.91"></a>
 #### 3.1.4.91 RRPC_FWAddFirewallRule2_33 (Opnum 91)
@@ -10819,7 +10819,7 @@ DWORD RRPC_FWAddFirewallRule2_31(
 
 This method adds a firewall rule in the firewall linked list of the memory representation of the store being modified. It also writes through and saves the rule on disk. If called on an online store, the firewall rule is also enforced.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.92"></a>
 #### 3.1.4.92 RRPC_FWSetFirewallRule2_33 (Opnum 92)
@@ -10857,7 +10857,7 @@ DWORD RRPC_FWSetFirewallRule2_31(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.93"></a>
 #### 3.1.4.93 RRPC_FWEnumFirewallRules2_33 (Opnum 93)
@@ -10905,7 +10905,7 @@ DWORD RRPC_FWEnumFirewallRules2_31(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.94"></a>
 #### 3.1.4.94 RRPC_FWQueryFirewallRules2_33 (Opnum 94)
@@ -10949,7 +10949,7 @@ DWORD RRPC_FWQueryFirewallRules2_31(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
-The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.2.4)) before executing this method.
+The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Timer Events
@@ -10997,7 +10997,7 @@ void AddDefaultFirewallRule([in] FirewallRule ruleToAdd);
 <a id="Section_3.1.6.4"></a>
 #### 3.1.6.4 SetGroupPolicyRSoPStore
 
-SetGroupPolicyRSoPStore is an abstract interface used to set the state of the **GroupPolicyRSoPStore** object. This interface is typically invoked by an implementation of [MS-GPFAS](#Section_5) in order to notify the server of a policy change. See [MS-GPFAS] section 3.2.5 for details.
+SetGroupPolicyRSoPStore is an abstract interface used to set the state of the **GroupPolicyRSoPStore** object. This interface is typically invoked by an implementation of [MS-GPFAS](../MS-GPFAS/MS-GPFAS.md) in order to notify the server of a policy change. See [MS-GPFAS] section 3.2.5 for details.
 
 The server MUST replace the contents of **GroupPolicyRSoPStore** with the contents of the newSettings object. The server then MUST merge the existing contents of **LocalStore** with the new contents of **GroupPolicyRSoPStore** (as described in section [3.1.1](#Section_3.1.1)) and store the result in **DynamicStore**. The server MUST invoke the abstract interface [SetEffectiveFirewallPolicy (section 3.1.6.6)](#Section_3.1.6.6) with the contents of **DynamicStore**. The interface is defined as follows:
 
@@ -11201,7 +11201,7 @@ PFW_OBJECT_METADATA pMetaData = NULL;
 
 };
 
-Once the FW_RULE structure is filled out, the client can simply invoke the [**RPC**](#gt_remote-procedure-call-rpc) [RRPC_FWAddFirewallRule](#Section_3.1.4.46) method, passing the required parameters as follows.
+Once the FW_RULE structure is filled out, the client can simply invoke the [**RPC**](#gt_remote-procedure-call-rpc) [RRPC_FWAddFirewallRule](#Section_3.1.4.6) method, passing the required parameters as follows.
 
 DWORD
 
@@ -11434,7 +11434,7 @@ However, the client cannot assume that the server is accurate in the actual obje
 | Security Parameter | Section |
 | --- | --- |
 | [**Remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) authentication | [2.1](#Section_2.1) |
-| The required permissions to call each of the methods of the protocol interface | [3.1.4](#Section_3.2.4) |
+| The required permissions to call each of the methods of the protocol interface | [3.1.4](#Section_3.1.4) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL

@@ -371,11 +371,11 @@ The Remote Desktop Protocol: XPS Print Virtual Channel Extension specifies commu
 
 This protocol extension consists of the following [**interfaces**](#gt_interface).
 
-**Printer Ticket Interface:** See section [1.3.2.2](#Section_1.3). This interface is a group of messages that specifies how a particular document is rendered in XPS format. It also supplies a means for translating between older types of document properties.
+**Printer Ticket Interface:** See section [1.3.2.2](#Section_1.3.2.2). This interface is a group of messages that specifies how a particular document is rendered in XPS format. It also supplies a means for translating between older types of document properties.
 
 **Printer Driver Interface:** See section [1.3.2.3](#Section_1.3.2.3). This interface is a group of messages that specifies printer capabilities that are negotiated between the client and the server. It also assists in displaying a printer-specific user interface on the client computer.
 
-To maintain backward compatibility, as well as to extend the lifetime of the two interfaces, the Remote Desktop Protocol: XPS Print Virtual Channel Extension includes helper messages for interface manipulation (as specified in section [1.3.2.1](#Section_1.3)), which are applicable to both interfaces.
+To maintain backward compatibility, as well as to extend the lifetime of the two interfaces, the Remote Desktop Protocol: XPS Print Virtual Channel Extension includes helper messages for interface manipulation (as specified in section [1.3.2.1](#Section_1.3.2.1)), which are applicable to both interfaces.
 
 ![Client and server stack illustrating the relationship of the protocol to the printing subsystem, virtual print driver, and client printer driver](media/image1.png)
 
@@ -392,7 +392,7 @@ The XML Paper Specification describes [**XPS**](#gt_xml-paper-specification-xps)
 <a id="Section_1.3.2.1"></a>
 #### 1.3.2.1 Interface Manipulation
 
-In the context of the Remote Desktop Protocol: XPS Print Virtual Channel Extension, [**interfaces**](#gt_interface) are groups of messages with a common identifier. The Remote Desktop Protocol: XPS Print Virtual Channel Extension includes a common infrastructure for manipulating these interfaces, called Interface Manipulation. This infrastructure consists of [Interface Query](#Section_1.3.2.1.1) and [Interface Release](#Section_1.3.2.1.2) messages. A newer version of an interface can be retrieved by sending an Interface Query message. In addition, to keep the number of active interfaces on the network low, an interface is terminated by means of an Interface Release message.
+In the context of the Remote Desktop Protocol: XPS Print Virtual Channel Extension, [**interfaces**](#gt_interface) are groups of messages with a common identifier. The Remote Desktop Protocol: XPS Print Virtual Channel Extension includes a common infrastructure for manipulating these interfaces, called Interface Manipulation. This infrastructure consists of [Interface Query](#Section_2.2.2.1) and [Interface Release](#Section_1.3.2.1.2) messages. A newer version of an interface can be retrieved by sending an Interface Query message. In addition, to keep the number of active interfaces on the network low, an interface is terminated by means of an Interface Release message.
 
 Interfaces are identified by interface identifiers (**InterfaceIds**, section [3.1.1](#Section_3.1.1)). An **InterfaceId**, together with a function ID (**FunctionId**, section 3.1.1), uniquely identifies the request message. **FunctionIds** are explicitly specified only in request messages. Reply packets contain only message IDs (**MessageId**, section 3.1.1), and hence implicitly contain the **FunctionId** for which they were associated. A further differentiation exists between **InterfaceIds** and **MessageIds** originating from either the client or the server side of the connection. The uniqueness of these IDs is guaranteed only for those **InterfaceIds** that originate from the same side of the connection. This means that a request from server to client with **InterfaceId** 1 and **MessageId** 2 is different than a request with the same IDs from the client side. The same is true for replies.
 
@@ -404,7 +404,7 @@ An Interface Query is a request/reply exchange. It establishes a new [**interfac
 <a id="Section_1.3.2.1.2"></a>
 ##### 1.3.2.1.2 Interface Release
 
-After a particular [**interface**](#gt_interface) is no longer needed, an Interface Release message is sent. From this point forward, the interface ID being released is invalid and cannot participate in any packet exchanges until it is acquired using another [Interface Query](#Section_1.3.2.1.1) message, or a packet exchange that contains an interface ID. An Interface Release message cannot be issued until all replies for any outstanding requests on that interface have been satisfied. An Interface Release message can only be issued from the side that received the interface ID in a reply to an Interface Query request message.
+After a particular [**interface**](#gt_interface) is no longer needed, an Interface Release message is sent. From this point forward, the interface ID being released is invalid and cannot participate in any packet exchanges until it is acquired using another [Interface Query](#Section_2.2.2.1) message, or a packet exchange that contains an interface ID. An Interface Release message cannot be issued until all replies for any outstanding requests on that interface have been satisfied. An Interface Release message can only be issued from the side that received the interface ID in a reply to an Interface Query request message.
 
 <a id="Section_1.3.2.2"></a>
 #### 1.3.2.2 Printer Ticket Interface
@@ -474,7 +474,7 @@ The Remote Desktop Protocol: XPS Print Virtual Channel Extension is embedded in 
 
 This protocol extension works in conjunction with the Remote Desktop Protocol: Print Virtual Channel Extension (as specified in [MS-RDPEPC](../MS-RDPEPC/MS-RDPEPC.md)), which creates [**printer queues**](#gt_printer-queue) for redirected printers (described in sections 3.2.5.1.1 and 3.3.5.1.1), and also carries the printer output from print jobs initiated by the server applications. The Remote Desktop Protocol: XPS Print Virtual Channel Extension helps redirect user [**interface**](#gt_interface) elements and allows users to set printing properties for the printer queues that have been already created by the Remote Desktop Protocol: Print Virtual Channel Extension. This protocol is activated if the printer queue supports XPS Mode as described in section 3.1.1.2 of [MS-RDPEPC]. This protocol will be active only for that printer queue.
 
-If the protocol [MS-RDPERP](../MS-RDPERP/MS-RDPERP.md) is present and active, this protocol uses it to maintain a **WindowHandle** as described in the Abstract Data Model (section [3.1.1](../MS-RDPERP/MS-RDPERP.md)) of this document.
+If the protocol [MS-RDPERP](../MS-RDPERP/MS-RDPERP.md) is present and active, this protocol uses it to maintain a **WindowHandle** as described in the Abstract Data Model (section [3.1.1](#Section_3.1.1)) of this document.
 
 The following diagram illustrates dependencies between the various protocols mentioned here.
 
@@ -497,7 +497,7 @@ The Remote Desktop Protocol: XPS Print Virtual Channel Extension is designed to 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-Versioning is supported through the use of [**interface**](#gt_interface) manipulation messages, as specified in section [1.3.2.1](#Section_1.3).
+Versioning is supported through the use of [**interface**](#gt_interface) manipulation messages, as specified in section [1.3.2.1](#Section_1.3.2.1).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -506,7 +506,7 @@ The Remote Desktop Protocol: XPS Print Virtual Channel Extension uses HRESULTs a
 
 This protocol also uses Win32 error codes. These values are taken from the Windows error number space as specified in [MS-ERREF] section 2.2. Vendors SHOULD reuse those values with their indicated meanings. Choosing any other value runs the risk of a collision in the future.
 
-Vendors MAY define their own [**interfaces**](#gt_interface) and use them through the interface manipulation mechanism, as specified in section [1.3.2.1](#Section_1.3).
+Vendors MAY define their own [**interfaces**](#gt_interface) and use them through the interface manipulation mechanism, as specified in section [1.3.2.1](#Section_1.3.2.1).
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -539,7 +539,7 @@ packet-beta
   96-159: "MessagePayload (variable)"
 ```
 
-**InterfaceId (4 bytes):** A 32-bit unsigned integer that represents the common identifier for the [**interface**](#gt_interface). The default value is 0x00000000, and if the message uses this default interface ID, it is interpreted as the main interface for which this channel has been instantiated. All other values MUST be retrieved either from an Interface Query message response ([QI_RSP](#Section_3.2.5.1.1.2)) or from responses that contain interface IDs. For example, in section [2.2.4.3.1.1](#Section_2.2.4.3.1.1) the **Callback** parameter describes an interface, and it represents an ID suitable for use as an interface ID in another set of request/reply sequences.
+**InterfaceId (4 bytes):** A 32-bit unsigned integer that represents the common identifier for the [**interface**](#gt_interface). The default value is 0x00000000, and if the message uses this default interface ID, it is interpreted as the main interface for which this channel has been instantiated. All other values MUST be retrieved either from an Interface Query message response ([QI_RSP](#Section_2.2.2.1.2)) or from responses that contain interface IDs. For example, in section [2.2.4.3.1.1](#Section_2.2.4.3.1.1) the **Callback** parameter describes an interface, and it represents an ID suitable for use as an interface ID in another set of request/reply sequences.
 
 This ID is valid until an [IFACE_RELEASE](#Section_2.2.2.2) message is sent/received with that ID. After an IFACE_RELEASE message, this ID is considered invalid. A packet with an invalid **InterfaceId** causes channel termination from the packet parser on the receiving end.
 
@@ -623,7 +623,7 @@ packet-beta
 <a id="Section_2.2.2.1.2"></a>
 ##### 2.2.2.1.2 Query Interface Response (QI_RSP)
 
-The QI_RSP message is a response to the [QI_REQ](#Section_3.2.5.1.1.1) request message.
+The QI_RSP message is a response to the [QI_REQ](#Section_2.2.2.1.1) request message.
 
 ```mermaid
 packet-beta
@@ -650,7 +650,7 @@ packet-beta
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Printer Ticket Interface
 
-The Printer Ticket Interface is identified by the default [**interface**](#gt_interface) ID 0x00000000. The default interface does not require [Query Interface Request](#Section_3.2.5.1.1.1) (QI_REQ) or [Query Interface Response](#Section_3.2.5.1.1.2) (QI_RSP) messages to initialize the interface. All requests flow from server to client and all responses flow from client to server.
+The Printer Ticket Interface is identified by the default [**interface**](#gt_interface) ID 0x00000000. The default interface does not require [Query Interface Request](#Section_2.2.2.1.1) (QI_REQ) or [Query Interface Response](#Section_2.2.2.1.2) (QI_RSP) messages to initialize the interface. All requests flow from server to client and all responses flow from client to server.
 
 Certain fields in this interface are payload between the [**client printer driver**](#gt_client-printer-driver) and the [**printing subsystem**](#gt_printing-subsystem). The content and meaning of these fields depends on internal structures for these two systems and is not interpreted in any way by this protocol. Special consideration has to be taken regarding the implementation on both sides when they are based on different operating systems. The implementation has to translate these operating system-specific differences between the client printer driver and the printing subsystem.
 
@@ -991,7 +991,7 @@ packet-beta
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Printer Driver Interface
 
-The Printer Driver Interface is identified by the default [**interface**](#gt_interface) ID 0x00000000. The default interface does not require [Query Interface Request](#Section_3.2.5.1.1.1) (QI_REQ) or [Query Interface Response](#Section_3.2.5.1.1.2) (QI_RSP) messages to initialize the interface. The Printer Driver Interface negotiates parameters for rendering a print job on the client. This interface consists of three message types: initialization, capabilities, and user interface.
+The Printer Driver Interface is identified by the default [**interface**](#gt_interface) ID 0x00000000. The default interface does not require [Query Interface Request](#Section_2.2.2.1.1) (QI_REQ) or [Query Interface Response](#Section_2.2.2.1.2) (QI_RSP) messages to initialize the interface. The Printer Driver Interface negotiates parameters for rendering a print job on the client. This interface consists of three message types: initialization, capabilities, and user interface.
 
 Certain fields in this interface are payload between the [**client printer driver**](#gt_client-printer-driver) and the [**printing subsystem**](#gt_printing-subsystem). The content and the meaning of these fields depend on internal structures for these two systems, and are not interpreted in any way by the Printer Driver Interface. Special consideration has to be taken regarding the implementation on both sides when they are based on different operating systems. The implementation has to translate these operating system-specific differences between the client printer driver and the printing subsystem.
 
@@ -1062,7 +1062,7 @@ packet-beta
 
 **numCaps (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of [TSDEVICE_CAPABILITIES](#Section_2.2.6) structures in the **OutCapArray** field.
 
-**OutCapArray (variable):** An array of TSDEVICE_CAPABILITIES structures, each containing capabilities for a particular device. The content is generated by the [**client printer driver**](#gt_client-printer-driver) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**OutCapArray (variable):** An array of TSDEVICE_CAPABILITIES structures, each containing capabilities for a particular device. The content is generated by the [**client printer driver**](#gt_client-printer-driver) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **Result (4 bytes):** An HRESULT that describes the result of the call.
 
@@ -1092,7 +1092,7 @@ packet-beta
 
 **cbDevmodeOut (4 bytes):** A 32-bit unsigned integer. The number of bytes in the **DevmodeOut** field.
 
-**DevmodeOut (variable):** An array of 8-bit unsigned integers. The content is generated by the [**client printer driver**](#gt_client-printer-driver) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**DevmodeOut (variable):** An array of 8-bit unsigned integers. The content is generated by the [**client printer driver**](#gt_client-printer-driver) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **cbProvided (4 bytes):** A 32-bit unsigned integer. The maximum number of bytes in the **OutputBufferSize** field of the [CONVERT_DEVMODE_RSP](#Section_2.2.4.2.4) response that corresponds to this request.
 
@@ -1149,7 +1149,7 @@ packet-beta
 
 **cbDevmodeIn (4 bytes):** A 32-bit unsigned integer. This field MUST contain the size, in bytes, of the following **DevmodeIn** field.
 
-**DevmodeIn (variable):** An array of 8-bit unsigned integers. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**DevmodeIn (variable):** An array of 8-bit unsigned integers. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **DeviceCap (2 bytes):** A 16-bit unsigned integer. The content is generated by the printing subsystem and is treated as payload in the Printer Driver Interface.
 
@@ -1175,7 +1175,7 @@ packet-beta
 
 **cbOutputBufferSize (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the following **OutputBuffer** field.
 
-**OutputBuffer (variable):** An array of 8-bit unsigned integers. The content is generated by the [**client printer driver**](#gt_client-printer-driver) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**OutputBuffer (variable):** An array of 8-bit unsigned integers. The content is generated by the [**client printer driver**](#gt_client-printer-driver) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **Result (4 bytes):** An HRESULT that describes the result of the call.
 
@@ -1202,9 +1202,9 @@ packet-beta
 
 **cbDevmodeIn (4 bytes):** A 32-bit unsigned integer. The field MUST contain the number of bytes in the **DevmodeIn** field.
 
-**DevmodeIn (variable):** An array of 8-bit unsigned integers. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**DevmodeIn (variable):** An array of 8-bit unsigned integers. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
-**OutputDevModeSizeProvided (4 bytes):** A 32-bit unsigned integer. This field MUST contain the maximum number of bytes in the **DevmodeOut** field of the corresponding [DOC_PROPERTIES_RSP](#Section_2.2.4.3.2.8) response message to this request.
+**OutputDevModeSizeProvided (4 bytes):** A 32-bit unsigned integer. This field MUST contain the maximum number of bytes in the **DevmodeOut** field of the corresponding [DOC_PROPERTIES_RSP](#Section_2.2.4.2.8) response message to this request.
 
 <a id="Section_2.2.4.2.8"></a>
 ##### 2.2.4.2.8 Client Document Properties Response (DOC_PROPERTIES_RSP)
@@ -1244,7 +1244,7 @@ If the **fMode** field of the DOC_PROPERTIES_REQ message was not set to 0, this 
 
 **cbOutDevModeSize (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the **OutDevMode** field.
 
-**OutDevMode (variable):** An array of 8-bit unsigned integers. The content is generated by the client printer driver and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**OutDevMode (variable):** An array of 8-bit unsigned integers. The content is generated by the client printer driver and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **Result (4 bytes):** An HRESULT that describes the result of the call.
 
@@ -1268,7 +1268,7 @@ packet-beta
 
 **cbDevModeIn (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the **pDevmodeIn** field.
 
-**pDevmodeIn (variable):** A [**DEVMODE**](#gt_devmode) structure sent as an array of bytes. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**pDevmodeIn (variable):** A [**DEVMODE**](#gt_devmode) structure sent as an array of bytes. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **cbInBuffer (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the **pInBuffer** field.
 
@@ -1295,7 +1295,7 @@ packet-beta
 
 **numOutProps (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of items in the **pOutProps** field.
 
-**pOutProps (variable):** An array of [TSPRINTER_PROPERTY](#Section_2.2.7) elements. This field is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**pOutProps (variable):** An array of [TSPRINTER_PROPERTY](#Section_2.2.7) elements. This field is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **Result (4 bytes):** An HRESULT that describes the result of the call.
 
@@ -1435,7 +1435,7 @@ packet-beta
 
 **Header (variable):** The common message header (as specified in section [2.2.1](#Section_2.2.1)). The **InterfaceId** field MUST be set to 0x00000000. The **FunctionId** field MUST be set to ASYNC_DOC_PROPS_REQ (0x00000106).
 
-**fMode (4 bytes):** A 32-bit unsigned integer. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**fMode (4 bytes):** A 32-bit unsigned integer. The content is generated by the [**printing subsystem**](#gt_printing-subsystem) and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **hServerWindow (8 bytes):** A 64-bit unsigned integer. When an operating system calls into a server [**virtual printer driver**](#gt_virtual-printer-driver) to display the document properties UI, it also supplies a **WindowHandle** to use as a parent for the UI displayed. The **WindowHandle** is passed to the [**client printer driver**](#gt_client-printer-driver) in this field.
 
@@ -1486,7 +1486,7 @@ packet-beta
 
 **cbDevmode (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the **Devmode** field.
 
-**Devmode (variable):** An array of 8-bit unsigned integers. The content is generated by the client printer driver and is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**Devmode (variable):** An array of 8-bit unsigned integers. The content is generated by the client printer driver and is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 <a id="Section_2.2.4.3.2.4"></a>
 ###### 2.2.4.3.2.4 Server Document Properties Callback Response (DOC_PROPS_CALLBACK_RSP)
@@ -1627,7 +1627,7 @@ packet-beta
 
 **cbPropertyName (4 bytes):** The number of bytes in **pPropertyName**.
 
-**pPropertyName (variable):** An array of [**Unicode**](#gt_unicode) (1) characters identifying the name of the property. This field MUST NOT be null-terminated. The size of the **pPropertyName** field is specified in bytes by the **cbPropertyName** field. This field is treated as payload in the [Printer Driver Interface](#Section_1.3.2.3).
+**pPropertyName (variable):** An array of [**Unicode**](#gt_unicode) (1) characters identifying the name of the property. This field MUST NOT be null-terminated. The size of the **pPropertyName** field is specified in bytes by the **cbPropertyName** field. This field is treated as payload in the [Printer Driver Interface](#Section_2.2.4).
 
 **cbPropertyValue (4 bytes):** A 32-bit unsigned integer. This field contains the number of bytes in the **pPropertyValue** field.
 
@@ -1648,7 +1648,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **InterfaceId:** An **InterfaceId** is a unique ID that identifies groups of messages. The **FunctionId** in the [SHARED_MSG_HEADER](#Section_2.2.1) request has meaning only in the context of a given **InterfaceId**. This means that the **FunctionIds** used in packets with different **InterfaceIds** are not guaranteed to have the same meaning. The default **InterfaceId** is 0x00000000. The group of messages identified by this ID is explicitly known on both sides, until an [Interface Release](#Section_2.2.2.2) message is sent. After an Interface Release message has been sent, that ID MAY be reused for another [**interface**](#gt_interface). New **InterfaceIds** MAY be retrieved in the following two ways:
 
-- As a reply to an [Interface Query](#Section_3.2.5.1.1.1) request.
+- As a reply to an [Interface Query](#Section_2.2.2.1.1) request.
 - As a field in a request or reply packet.
 In either case, the ID is valid until a release request is issued or the channel is closed.
 
@@ -1682,7 +1682,7 @@ No higher-layer triggered events are used.
 When processing the [SHARED_MSG_HEADER](#Section_2.2.1), the following rules apply to both the client and server side:
 
 - An **InterfaceId** MUST be considered valid if the following conditions are true:
-- The **InterfaceId** has been issued through an [Interface Query](#Section_1.3.2.1.1) message or some other packet that contains the **InterfaceId**, or it is the default value 0x00000000.
+- The **InterfaceId** has been issued through an [Interface Query](#Section_2.2.2.1) message or some other packet that contains the **InterfaceId**, or it is the default value 0x00000000.
 - The **InterfaceId** has not been released through an [Interface Release](#Section_2.2.2.2) message.
 If the **InterfaceId** or **MessageId** fields are invalid, the packet MUST be treated as invalid and the connection SHOULD<2> be dropped immediately.
 
@@ -1705,12 +1705,12 @@ This message is not implemented by this protocol. See sections [3.1.5.2.1.1](#Se
 <a id="Section_3.1.5.2.1.1"></a>
 ###### 3.1.5.2.1.1 Sending an Interface Query Message
 
-The server MUST NOT send a [QI_REQ](#Section_3.2.5.1.1.1) request message.
+The server MUST NOT send a [QI_REQ](#Section_2.2.2.1.1) request message.
 
 <a id="Section_3.1.5.2.1.2"></a>
 ###### 3.1.5.2.1.2 Receiving an Interface Query Message
 
-The [Interface Query](#Section_1.3.2.1.1) request message is symmetrical. It MAY originate from the client or from the server side for any valid **InterfaceId**. Processing MUST be handled on any side of the connection. The receiver SHOULD return the failure version of the [QI_RSP](#Section_3.2.5.1.1.2) message. This is a QI_RSP message omitting the optional **NewInterfaceId** field. This version of the message MUST be interpreted by the originating side as if the requested [**interface**](#gt_interface) is not supported. This message MUST be processed as described in [3.2.5.1.1.1](#Section_3.2.5.1.1.1).
+The [Interface Query](#Section_2.2.2.1) request message is symmetrical. It MAY originate from the client or from the server side for any valid **InterfaceId**. Processing MUST be handled on any side of the connection. The receiver SHOULD return the failure version of the [QI_RSP](#Section_2.2.2.1.2) message. This is a QI_RSP message omitting the optional **NewInterfaceId** field. This version of the message MUST be interpreted by the originating side as if the requested [**interface**](#gt_interface) is not supported. This message MUST be processed as described in [3.2.5.1.1.1](#Section_3.2.5.1.1.1).
 
 <a id="Section_3.1.5.2.2"></a>
 ##### 3.1.5.2.2 Interface Release Message
@@ -1816,7 +1816,7 @@ Upon receipt of the [QUERY_DEV_NS_REQ](#Section_2.2.3.2.1) message, the client M
 <a id="Section_3.2.5.2.2.2"></a>
 ###### 3.2.5.2.2.2 Sending a Query Device Namespace Response
 
-The client responds with the [QUERY_DEV_NS_RSP](#Section_2.2.3.2.2) reply message after retrieving the **DefaultNamespace** from the [**printer driver**](#gt_printer-driver). If the driver returns NULL for default namespace, the **is_null_flag** field MUST be set to TRUE (0x01) and the **DefaultNamespace** field MUST be omitted. Otherwise, the **is_null_flag** field MUST be set to FALSE (0x00) and the **DefaultNamespace** field MUST contain the string returned by the driver. The **DefaultNamespace** value has meaning only within the printer driver context and is not interpreted by the [Printer Ticket Interface](#Section_3.3.5.1). The return result of the call MUST be sent in the **Result** field of the response.
+The client responds with the [QUERY_DEV_NS_RSP](#Section_2.2.3.2.2) reply message after retrieving the **DefaultNamespace** from the [**printer driver**](#gt_printer-driver). If the driver returns NULL for default namespace, the **is_null_flag** field MUST be set to TRUE (0x01) and the **DefaultNamespace** field MUST be omitted. Otherwise, the **is_null_flag** field MUST be set to FALSE (0x00) and the **DefaultNamespace** field MUST contain the string returned by the driver. The **DefaultNamespace** value has meaning only within the printer driver context and is not interpreted by the [Printer Ticket Interface](#Section_2.2.3). The return result of the call MUST be sent in the **Result** field of the response.
 
 <a id="Section_3.2.5.2.2.3"></a>
 ###### 3.2.5.2.2.3 Processing a Print Ticket to Devmode Request
@@ -1929,7 +1929,7 @@ When processing the [DOC_PROPERTIES_REQ](#Section_2.2.4.2.7) request, the client
 <a id="Section_3.2.5.3.2.8"></a>
 ###### 3.2.5.3.2.8 Sending a Document Properties Response
 
-The [DOC_PROPERTIES_RSP](#Section_2.2.4.3.2.8) reply MUST contain the [**DEVMODE**](#gt_devmode) BLOB that was acquired from the [**client printer driver**](#gt_client-printer-driver). The BLOB MUST be returned in the **OutDevMode** field of this response.
+The [DOC_PROPERTIES_RSP](#Section_2.2.4.2.8) reply MUST contain the [**DEVMODE**](#gt_devmode) BLOB that was acquired from the [**client printer driver**](#gt_client-printer-driver). The BLOB MUST be returned in the **OutDevMode** field of this response.
 
 If the size of the BLOB data in the **OutDevMode** field is more than was specified in the **OutputDevModeSizeProvided** field of the request and the **fMode** field of the request was set to 0, the value in the **ReturnValue** field MUST indicate the required data size, and the **ErrorCode** field MUST be set to ERROR_INSUFFICIENT_BUFFER (0x0000007A), the **Result** field MUST be set to S_OK (0x00000000), and the **OutDevMode** field size in this case MUST be zero.
 
@@ -2214,7 +2214,7 @@ The server MUST send the [DOC_PROPERTIES_REQ](#Section_2.2.4.2.7) request messag
 <a id="Section_3.3.5.2.2.8"></a>
 ###### 3.3.5.2.2.8 Processing a Document Properties Response
 
-The [DOC_PROPERTIES_RSP](#Section_2.2.4.3.2.8) response message is processed if the **Result** field indicates success. The content of the **OutDevMode** field describes the document property [**DEVMODE**](#gt_devmode) returned by the [**client printer driver**](#gt_client-printer-driver) and, together with the contents of the **Result** and **ErrorCode** fields, MUST be passed to the [**printing subsystem**](#gt_printing-subsystem). If the **Result** field contains a failure, the error MUST be propagated to the caller of the virtual printer driver.
+The [DOC_PROPERTIES_RSP](#Section_2.2.4.2.8) response message is processed if the **Result** field indicates success. The content of the **OutDevMode** field describes the document property [**DEVMODE**](#gt_devmode) returned by the [**client printer driver**](#gt_client-printer-driver) and, together with the contents of the **Result** and **ErrorCode** fields, MUST be passed to the [**printing subsystem**](#gt_printing-subsystem). If the **Result** field contains a failure, the error MUST be propagated to the caller of the virtual printer driver.
 
 <a id="Section_3.3.5.2.2.9"></a>
 ###### 3.3.5.2.2.9 Sending a Get Device Adjustment Request
@@ -2229,7 +2229,7 @@ On receipt of the [MXDC_GETPDEV_ADJUSTMENT_RSP](#Section_2.2.4.2.10) response me
 <a id="Section_3.3.5.2.3"></a>
 ##### 3.3.5.2.3 User Interface Messages
 
-There are two groups of [User Interface messages](#Section_2.2.4.3): [Printer Properties UI](#Section_3.2.5.3.3.1) and [Document Properties UI](#Section_3.3.5.2.3.2). It is common that the request message is always sent by the server. The UI is displayed by the client. Canceling a UI display is handled identically on either side. The two UI types differ in the type of information displayed and returned to the server.
+There are two groups of [User Interface messages](#Section_2.2.4.3): [Printer Properties UI](#Section_2.2.4.3.1) and [Document Properties UI](#Section_2.2.4.3.2). It is common that the request message is always sent by the server. The UI is displayed by the client. Canceling a UI display is handled identically on either side. The two UI types differ in the type of information displayed and returned to the server.
 
 <a id="Section_3.3.5.2.3.1"></a>
 ###### 3.3.5.2.3.1 Printer Properties UI

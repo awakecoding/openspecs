@@ -2590,7 +2590,7 @@ None.
 
 On protocol termination, the following actions are performed.
 
-For each context in rgSCardContextList, [Cancel](#Section_3.1.4.27) is called causing all outstanding messages to be processed. After there are no more outstanding messages, [Release Context](#Section_4.18) is called on each context and the context MUST be removed from rgSCardContextList.
+For each context in rgSCardContextList, [Cancel](#Section_3.1.4.27) is called causing all outstanding messages to be processed. After there are no more outstanding messages, [Release Context](#Section_4.17) is called on each context and the context MUST be removed from rgSCardContextList.
 
 <a id="Section_3.2"></a>
 ## 3.2 Protocol Client Details
@@ -2660,7 +2660,7 @@ The OutputBuffer MUST be decoded as [EstablishContext_Return](#Section_2.2.3.2),
 <a id="Section_3.2.5.3.3"></a>
 ##### 3.2.5.3.3 Sending ReleaseContext Message
 
-[**IoControlCode**](#gt_io-control-ioctl) MUST be set to [SCARD_IOCTL_RELEASECONTEXT](#Section_4.18).
+[**IoControlCode**](#gt_io-control-ioctl) MUST be set to [SCARD_IOCTL_RELEASECONTEXT](#Section_4.17).
 
 [Context_Call](#Section_2.2.2.2) MUST be initialized, as specified in section 2.2.2.2.
 
@@ -3218,7 +3218,7 @@ Figure 4: Protocol flow
 
 This representation of the protocol flow is simplified in that there is only one application sending data over this protocol. In an actual implementation there could be multiple outstanding calls at any time.
 
-All packets are constructed as specified in sections [3.2.5](#Section_3.2.5) and [3.2.5.3](../MS-RDPEFS/MS-RDPEFS.md). The Status field refers to the **IoStatus** field as specified in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 2.2.1.5. The **CompletionId** field is also specified in [MS-RDPEFS] section 2.2.1.5.
+All packets are constructed as specified in sections [3.2.5](#Section_3.2.5) and [3.2.5.3](#Section_3.2.5.3). The Status field refers to the **IoStatus** field as specified in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 2.2.1.5. The **CompletionId** field is also specified in [MS-RDPEFS] section 2.2.1.5.
 
 <a id="Section_4.1"></a>
 ## 4.1 Establish Context Call

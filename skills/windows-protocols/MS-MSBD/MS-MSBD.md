@@ -495,7 +495,7 @@ If a timer is used to schedule the transmission of [MSB_MSG_REQ_PING](#Section_2
 
 The server initializes by listening for incoming TCP connections on the TCP port that is reserved by the server for communication using the MSBD Protocol. The server MUST then wait for an [MSB_MSG_REQ_CONNECT](#Section_2.2.7) packet to be received on a new TCP connection.
 
-For more information about how to process the MSB_MSG_REQ_CONNECT packet, see section [3.1.5.1](#Section_2.2.7).
+For more information about how to process the MSB_MSG_REQ_CONNECT packet, see section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events

@@ -1772,7 +1772,7 @@ The host(s) that form the protocol client or the server have to be part of an [*
 
 This document covers versioning issues in the following areas:
 
-- **Localization:** This protocol includes text strings in various messages. Localization considerations for such strings are specified in section [2.2](#Section_3.3.4.16.1) and section [3](#Section_3).
+- **Localization:** This protocol includes text strings in various messages. Localization considerations for such strings are specified in section [2.2](#Section_2.2) and section [3](#Section_3).
 - **Protocol Versions:** This protocol is not versioned.
 - **Capability Negotiation:** This protocol does not support version negotiation or any other means of negotiating capabilities.
 This document specifies IPAM Management Protocol Version 1. It is not interoperable with IPAM Management Protocol Version 2, specified in [MS-IPAMM2](../MS-IPAMM2/MS-IPAMM2.md).<1>
@@ -1905,34 +1905,34 @@ The following table summarizes the set of common XML Schema complex type definit
 | Complex type | Description |
 | --- | --- |
 | [ActiveServerV4LogicalGroup](#Section_2.2.4.1) | Allows extended attributes on an ipam:LogicalGroup type. It specifically contains the definition of the [**logical group**](#gt_logical-group) on server instances with IPv4-specific details, which are enabled for management in the [**IPAM data store**](#gt_ipam-data-store). |
-| [ActiveServerV4LogicalGroupNode](#Section_2.2.4.139) | Allows extended attributes on an ipam:LogicalGroupNode type. It specifically defines the [**custom field value**](#gt_custom-field-value) at a specific level in the logical group hierarchy. It will define the criteria for categorizing server instances with IPv4-specific details, which are enabled for management. |
-| [ActiveServerV6LogicalGroup](#Section_2.2.4.134) | Allows extended attributes on an ipam:LogicalGroup type. It specifically contains the definition of the logical group on server instances with IPv6-specific details, which are enabled for management in the IPAM data store. |
-| [ActiveServerV6LogicalGroupNode](#Section_2.2.4.139) | Allows extended attributes on an ipam:LogicalGroupNode type. It specifically defines the custom field value at a specific level in the logical group hierarchy. It will define the criteria for categorizing server instances with IPv6-specific details, which are enabled for management. |
-| [ArrayOfCustomFieldPartialValue](#Section_2.2.4.37) | Defines an array of CustomFieldPartialValue complex type. |
-| [ArrayOfCustomFieldValue](#Section_2.2.4.35) | Defines an array of CustomFieldValue complex type. |
+| [ActiveServerV4LogicalGroupNode](#Section_2.2.4.2) | Allows extended attributes on an ipam:LogicalGroupNode type. It specifically defines the [**custom field value**](#gt_custom-field-value) at a specific level in the logical group hierarchy. It will define the criteria for categorizing server instances with IPv4-specific details, which are enabled for management. |
+| [ActiveServerV6LogicalGroup](#Section_2.2.4.3) | Allows extended attributes on an ipam:LogicalGroup type. It specifically contains the definition of the logical group on server instances with IPv6-specific details, which are enabled for management in the IPAM data store. |
+| [ActiveServerV6LogicalGroupNode](#Section_2.2.4.4) | Allows extended attributes on an ipam:LogicalGroupNode type. It specifically defines the custom field value at a specific level in the logical group hierarchy. It will define the criteria for categorizing server instances with IPv6-specific details, which are enabled for management. |
+| [ArrayOfCustomFieldPartialValue](#Section_2.2.4.5) | Defines an array of CustomFieldPartialValue complex type. |
+| [ArrayOfCustomFieldValue](#Section_2.2.4.6) | Defines an array of CustomFieldValue complex type. |
 | [ArrayOfDhcpExclusionRange](#Section_2.2.4.7) | Defines an array of DhcpExclusionRange complex type. The elements in the array MUST be either DhcpExclusionRangeV4 or DhcpExclusionRangeV6. |
 | [ArrayOfDhcpOption](#Section_2.2.4.8) | Defines an array of DhcpOption complex type. The elements in the array MUST be either DhcpOptionV4 or DhcpOptionV6 complex type. |
-| [ArrayOfDhcpOptionDefinition](#Section_2.2.4.45) | Defines an array of DhcpOptionDefinition complex type. The elements in the array MUST be either DhcpOptionDefinitionV4 or DhcpOptionDefinitionV6. |
+| [ArrayOfDhcpOptionDefinition](#Section_2.2.4.9) | Defines an array of DhcpOptionDefinition complex type. The elements in the array MUST be either DhcpOptionDefinitionV4 or DhcpOptionDefinitionV6. |
 | [ArrayOfDhcpServer](#Section_2.2.4.10) | Defines an array of DhcpServer complex type. The elements in the array MUST be either DhcpServerV4 or DhcpServerV6 complex type. |
-| [ArrayOfDhcpServerOperations](#Section_2.2.4.10) | Specifies an array of DhcpServerOperations that specify the type of management operations that need to be performed by the IPAM server as a part of the processing for DBUpdateDhcpServer. |
+| [ArrayOfDhcpServerOperations](#Section_2.2.4.11) | Specifies an array of DhcpServerOperations that specify the type of management operations that need to be performed by the IPAM server as a part of the processing for DBUpdateDhcpServer. |
 | [ArrayOfDhcpUserClass](#Section_2.2.4.12) | Defines an array of DhcpUserClass complex type. The elements in the array MUST be either DhcpUserClassV4 or DhcpUserClassV6. |
-| [ArrayOfDhcpVendorClass](#Section_2.2.4.68) | Defines an array of DhcpVendorClass complex type. The elements in the array MUST be either DhcpVendorClassV4 or DhcpVendorClassV6. |
-| [ArrayOfDiscoveryConfig](#Section_2.2.4.72) | Defines an array of DiscoveryConfig complex type. |
+| [ArrayOfDhcpVendorClass](#Section_2.2.4.13) | Defines an array of DhcpVendorClass complex type. The elements in the array MUST be either DhcpVendorClassV4 or DhcpVendorClassV6. |
+| [ArrayOfDiscoveryConfig](#Section_2.2.4.14) | Defines an array of DiscoveryConfig complex type. |
 | [ArrayOfIpamIPAddress](#Section_2.2.4.15) | Defines an array of IpamIPAddress complex type. The elements in the array MUST be of either IpamIPv4Address or IpamIPv6Address complex type. |
-| [ArrayOfIpamObject](#Section_2.2.4.108) | Defines an array of IpamObject complex type. The elements in the array MUST be of a complex type that either directly or indirectly extends IpamObject. |
+| [ArrayOfIpamObject](#Section_2.2.4.16) | Defines an array of IpamObject complex type. The elements in the array MUST be of a complex type that either directly or indirectly extends IpamObject. |
 | [ArrayOfIPBlock](#Section_2.2.4.17) | Defines an array of IPBlock complex type. The elements in the array MUST be of either IPv4Block or IPv6Block complex type. |
 | [ArrayOfIPRange](#Section_2.2.4.18) | Defines an array of IPRange complex type. The elements in the array MUST be of either IPv4Range or IPv6Range complex type. |
-| [ArrayOfIPUtilization](#Section_2.2.4.123) | Defines an array of IPUtilization complex type. The elements in the array MUST be of either IPv4Utilization or IPv6Utilization complex type. |
-| [ArrayOfLogicalGroupField](#Section_2.2.4.138) | Defines an array of LogicalGroupField complex type. |
+| [ArrayOfIPUtilization](#Section_2.2.4.19) | Defines an array of IPUtilization complex type. The elements in the array MUST be of either IPv4Utilization or IPv6Utilization complex type. |
+| [ArrayOfLogicalGroupField](#Section_2.2.4.20) | Defines an array of LogicalGroupField complex type. |
 | [ArrayOfLogicalGroupNode](#Section_2.2.4.21) | Defines an array of LogicalGroupNode complex type. The elements in the array MUST extend LogicalGroupNode. |
 | [ArrayOfScopeOperations](#Section_2.2.4.22) | Specifies an array of DhcpScopeOperations that specify the type of management operations that have to be performed on the DHCP scope. This is used by the management server as a part of DBCreateOrUpdateDhcpScope to identify the changes that have to be committed to the IPAM data store for the specified DhcpScope value. |
 | [ArrayOfServerInfo](#Section_2.2.4.23) | Defines an array of ServerInfo complex type. |
-| [ArrayOfServerRole](#Section_2.2.4.157) | Defines an array of ServerRole complex type or the complex types that extend ServerRole complex type. |
-| [ArrayOfTaskInfo](#Section_2.2.4.182) | Defines an array of TaskInfo complex type or the complex types that extend TaskInfo complex type. |
+| [ArrayOfServerRole](#Section_2.2.4.24) | Defines an array of ServerRole complex type or the complex types that extend ServerRole complex type. |
+| [ArrayOfTaskInfo](#Section_2.2.4.25) | Defines an array of TaskInfo complex type or the complex types that extend TaskInfo complex type. |
 | [AuditPurgeSettings](#Section_2.2.4.26) | Specifies the configuration to be used for performing the [**audit purge**](#gt_audit-purge) operation. |
-| [BaseDnsServerZone](#Section_2.2.4.81) | Specifies the properties of a zone hosted on a DNS server. This consists of the properties common to both DnsServerZone as well as DnsServerReverseZone complex types that extend the BaseDnsServerZone. |
+| [BaseDnsServerZone](#Section_2.2.4.27) | Specifies the properties of a zone hosted on a DNS server. This consists of the properties common to both DnsServerZone as well as DnsServerReverseZone complex types that extend the BaseDnsServerZone. |
 | [BaseDnsZone](#Section_2.2.4.28) | Specifies the properties of a DNS [**zone**](#gt_zone). This consists of the properties common to both DnsZone as well as DnsReverseZone complex types that extend the BaseDnZone. |
-| [BaseIpamObject](#Section_2.2.4.108) | Composed of the common properties that are applicable to most of the complex types defined in this protocol. This complex type allows extended attributes on the ipam:IpamObject that it extends. |
+| [BaseIpamObject](#Section_2.2.4.29) | Composed of the common properties that are applicable to most of the complex types defined in this protocol. This complex type allows extended attributes on the ipam:IpamObject that it extends. |
 | [ConfigurationAuditEnumerationParameters](#Section_2.2.4.30) | Specifies the enumeration criteria for the configuration audit information. |
 | [ConfigurationAuditRecord](#Section_2.2.4.31) | Specifies a single [**configuration audit event**](#gt_configuration-audit-event) information. The [**configuration audit**](#gt_configuration-audit) record can be used to represent both [**IPAM configuration audit**](#gt_ipam-configuration-audit) as well as [**DHCP configuration audit**](#gt_dhcp-configuration-audit) event. |
 | [ConflictingIPAddressFailureIpamExceptionData](#Section_2.2.4.32) | Specifies the information pertaining to the IP address instance overlap. |
@@ -1957,14 +1957,14 @@ The following table summarizes the set of common XML Schema complex type definit
 | [DhcpScope](#Section_2.2.4.51) | Specifies the details associated with a DHCP scope. |
 | [DhcpScopeAllEnumerationParameters](#Section_2.2.4.52) | Specifies the criteria to be used for enumerating the DHCP scopes. |
 | [DhcpScopeAssociatedWithVendorClassesEnumerationParameters](#Section_2.2.4.53) | Specifies the criteria to be used for enumerating the scopes that are associated with a given set of vendor classes. |
-| [DhcpScopeForIpBlockEnumerationParameters](#Section_3.5.4.7.1.5) | Specifies the criteria to be used for enumerating the scopes belonging to a particular address block. |
+| [DhcpScopeForIpBlockEnumerationParameters](#Section_2.2.4.54) | Specifies the criteria to be used for enumerating the scopes belonging to a particular address block. |
 | [DhcpScopesByDhcpServerIdListEnumerationParameters](#Section_2.2.4.55) | Specifies the criteria for enumerating the scopes that belong to a set of DHCP servers. |
-| [DhcpScopeUnmappedEnumerationParameters](#Section_3.5.4.7.1.7) | Specifies the criteria to be used for enumerating the scopes that are not mapped to any address block. |
+| [DhcpScopeUnmappedEnumerationParameters](#Section_2.2.4.56) | Specifies the criteria to be used for enumerating the scopes that are not mapped to any address block. |
 | [DhcpScopeV4](#Section_2.2.4.57) | Allows the extension of the DhcpScope complex type. This specifies a scope for specifying IPv4 address assignment with DHCP. As this depicts the IPv4 DHCP scope, the StartAddress and EndAddress MUST be valid IPv4 address. The PrefixLength MUST be greater than or equal to 1 and MUST be no greater than 30. |
 | [DhcpScopeV6](#Section_2.2.4.58) | Allows the extension of the DhcpScope complex type. This specifies a scope for specifying IPv6 address assignment with DHCP. As this depicts the IPv6 DHCP scope, the StartAddress and EndAddress MUST be valid IPv6 address. The PrefixLength MUST be greater than or equal to 1 and MUST be no greater than 127. |
 | [DhcpServer](#Section_2.2.4.59) | Specifies the common details of a DHCP server instance. |
-| [DhcpServerAllEnumerationParameters](#Section_3.5.4.7.1.8) | Specifies the parameters used for enumerating the DhcpServer instances. |
-| [DhcpServerByServerInfoIdsEnumerationParameters](#Section_3.5.4.7.1.9) | Specifies the record identifiers of ServerInfo instances for which the DhcpServer instances are to be enumerated. |
+| [DhcpServerAllEnumerationParameters](#Section_2.2.4.60) | Specifies the parameters used for enumerating the DhcpServer instances. |
+| [DhcpServerByServerInfoIdsEnumerationParameters](#Section_2.2.4.61) | Specifies the record identifiers of ServerInfo instances for which the DhcpServer instances are to be enumerated. |
 | [DhcpServerV4](#Section_2.2.4.62) | Extends the DhcpServer complex type to specify the IPv4-specific information of the DHCP server instance. The OptionDefinitions MUST be a collection of DhcpOptionDefinitionV4 elements. The Options MUST be a collection of DhcpOptionV4 elements. The UserClasses MUST be a collection of DhcpUserClassV4. The VendorClasses MUST be a collection of DhcpVendorClassV4 elements. |
 | [DhcpServerV6](#Section_2.2.4.63) | Extends the DhcpServer complex type to specify the IPv6-specific information of the DHCP server instance. The OptionDefinitions MUST be a collection of DhcpOptionDefinitionV6 elements. The Options MUST be a collection of DhcpOptionV6 elements. The UserClasses MUST be a collection of DhcpUserClassV6. A collection of DhcpVendorClassV6 elements. |
 | [DhcpUserClass](#Section_2.2.4.64) | Specifies the common properties of a [**user class**](#gt_user-class). |
@@ -1976,12 +1976,12 @@ The following table summarizes the set of common XML Schema complex type definit
 | [DhcpVendorClassV4](#Section_2.2.4.70) | Allows the extension of the DhcpVendorClass complex type. This specifies the DhcpVendorClass instance associated with the IPv4-specific DhcpServer instance. |
 | [DhcpVendorClassV6](#Section_2.2.4.71) | Allows the extension of the DhcpVendorClass complex type. This specifies the DhcpVendorClass instance associated with the IPv6-specific DhcpServer instance. |
 | [DiscoveryConfig](#Section_2.2.4.72) | Describes the discovery configuration for a specific domain. |
-| [DiscoverySubnetEnumerationParameters](#Section_3.5.4.7.1.10) | Specifies the criteria based on which the subnets for grouping the discovered servers are to be enumerated. |
+| [DiscoverySubnetEnumerationParameters](#Section_2.2.4.73) | Specifies the criteria based on which the subnets for grouping the discovered servers are to be enumerated. |
 | [DnsReverseLookupZone](#Section_2.2.4.74) | Specifies the information pertaining to a single instance of a [**reverse lookup DNS zone**](#gt_reverse-lookup-dns-zone). The DnsReverseLookupZone complex type allows extending the BaseDnsZone complex type. |
-| [DnsReverseLookupZoneEnumerationParameters](#Section_3.5.4.7.1.11) | Specifies the criteria to be used for enumerating the reverse lookup zones. |
+| [DnsReverseLookupZoneEnumerationParameters](#Section_2.2.4.75) | Specifies the criteria to be used for enumerating the reverse lookup zones. |
 | [DnsServer](#Section_2.2.4.76) | Specifies the DNS server instance properties. |
-| [DnsServerByServerInfoIdsEnumerationParameters](#Section_3.5.4.7.1.12) | Specifies the parameters to enumerate the DnsServer instances based on the record identifiers of the ServerInfo instances. |
-| [DnsServerEnumerationParameters](#Section_3.5.4.7.1.13) | Specifies the criteria to be used for enumerating the DNS servers. |
+| [DnsServerByServerInfoIdsEnumerationParameters](#Section_2.2.4.77) | Specifies the parameters to enumerate the DnsServer instances based on the record identifiers of the ServerInfo instances. |
+| [DnsServerEnumerationParameters](#Section_2.2.4.78) | Specifies the criteria to be used for enumerating the DNS servers. |
 | [DnsServerReverseZone](#Section_2.2.4.79) | Specifies the information regarding a specific reverse lookup DNS zone hosted on a particular server. The DnsServerReverseZone complex type allows the extension of attributes for the BaseDnsServerZone complex type. |
 | [DnsServerReverseZoneEnumerationParameters](#Section_2.2.4.80) | Specifies the criteria to be used for enumerating the DNS server hosting of reverse lookup zones. |
 | [DnsServerZone](#Section_2.2.4.81) | Specifies the information regarding the [**forward lookup DNS zone**](#gt_forward-lookup-dns-zone) hosting on a DNS server. The DnsServerZone complex type allows extending the attributes of the BaseDnsServerZone complex type. |
@@ -1989,7 +1989,7 @@ The following table summarizes the set of common XML Schema complex type definit
 | [DnsZone](#Section_2.2.4.83) | Specifies the information pertaining to a forward lookup DNS zone. The DnsZone complex type allows extension of attributes of the BaseDnsZone complex type. |
 | [DnsZoneEnumerationParameters](#Section_2.2.4.84) | Specifies the filter criteria to be used for enumerating the forward lookup zones from the IPAM data store. |
 | [DnsZoneEvent](#Section_2.2.4.85) | Specifies a specific instance of the DNS zone related [**event**](#gt_event). |
-| [DnsZoneEventEnumerationParameters](#Section_3.5.4.7.1.17) | Specifies the criteria to be used for enumerating the DnsZoneEvent rows from the IPAM data store. |
+| [DnsZoneEventEnumerationParameters](#Section_2.2.4.86) | Specifies the criteria to be used for enumerating the DnsZoneEvent rows from the IPAM data store. |
 | [EnumerationParametersBase](#Section_2.2.4.87) | Forms the base element which all other complex types for specifying enumeration parameters extend. |
 | [ipam1:IpamException](#Section_2.2.4.88) | Specifies the base type for providing the fault information from the management server to the management client. |
 | [PropertiesCouldNotBeValidatedIpamExceptionData](#Section_2.2.4.144) | Specifies the list of properties which could not be recognized or not validated by IPAM. |
@@ -1997,13 +1997,13 @@ The following table summarizes the set of common XML Schema complex type definit
 | [IpamIPAddress](#Section_2.2.4.91) | Specifies the common address object information in the IPAM data store. |
 | [IpamIPAddressAllForLogicalGroupEnumerationParameters](#Section_2.2.4.92) | Specifies the parameters for enumerating the IP address instances that map to a specified logical group. |
 | [IpamIPAddressAllForLogicalGroupNodeEnumerationParameters](#Section_2.2.4.93) | Specifies the criteria to be used for enumerating the addresses that map to a [**logical group node**](#gt_logical-group-node). |
-| [IpamIPAddressByBlockIdEnumerationParameters](#Section_3.5.4.7.1.20) | Specifies the criteria to be used for enumerating the address instances that map to a specified address block. |
+| [IpamIPAddressByBlockIdEnumerationParameters](#Section_2.2.4.94) | Specifies the criteria to be used for enumerating the address instances that map to a specified address block. |
 | [IpamIPAddressByManagedByAndManagedByEntityEnumerationParameters](#Section_2.2.4.95) | Specifies the criteria to be used for enumerating the address instances that have a specified value for ManagedBy and ManagedByEntity built-in custom field values. |
-| [IpamIPAddressByRangeIdEnumerationParameters](#Section_3.5.4.7.1.22) | Specifies the filter criteria to be used for enumerating the address instances that map to a specific address range. |
+| [IpamIPAddressByRangeIdEnumerationParameters](#Section_2.2.4.96) | Specifies the filter criteria to be used for enumerating the address instances that map to a specific address range. |
 | [IpamIPAddressForUnmappedRangesEnumerationParameters](#Section_2.2.4.97) | Retrieves the list of addresses in address ranges that are not already mapped to an address block. |
-| [IpamIPAddressGetDuplicateIPAddressesEnumerationParameters](#Section_3.5.4.7.1.24) | Specifies the criteria to be used for enumerating the address instances that have duplicates. |
+| [IpamIPAddressGetDuplicateIPAddressesEnumerationParameters](#Section_2.2.4.98) | Specifies the criteria to be used for enumerating the address instances that have duplicates. |
 | [IpamIPAddressRootAddressesEnumerationParameters](#Section_2.2.4.99) | Specifies the filter criteria for enumerating the address instances belonging to a specified address category. |
-| [IpamIPAddressUnmappedAddressEnumerationParameters](#Section_3.5.4.7.1.26) | Specifies the criteria for enumerating the unmapped address instances. Unmapped address instances are those that are not mapped to any address range instances. |
+| [IpamIPAddressUnmappedAddressEnumerationParameters](#Section_2.2.4.100) | Specifies the criteria for enumerating the unmapped address instances. Unmapped address instances are those that are not mapped to any address range instances. |
 | [IpamIPv4Address](#Section_2.2.4.101) | Enables extension of attributes of the IpamIPAddress complex type. This is used to specify the details pertaining to the IPv4 address instance. The IPAddress, ParentIPRangeEndIP, ParentIPRangeStartIP, DhcpScopeSubnetId MUST be of address family Internet where they are applicable. |
 | [IpamIPv4AddressLogicalGroup](#Section_2.2.4.102) | Allows extensions to the LogicalGroup complex type. This specifies the LogicalGroup which can be used to enumerate IPv4 address instances using the [**logical group hierarchy**](#gt_logical-group-hierarchy). |
 | [IpamIPv4AddressLogicalGroupNode](#Section_2.2.4.103) | Allows extension of the LogicalGroupNode complex type. It defines the custom field value at a specific level in the logical group hierarchy. It will define the criteria for categorizing the IPv4 address instances based on the custom field values defined on them in the form of a logical group hierarchy. |
@@ -2022,9 +2022,9 @@ The following table summarizes the set of common XML Schema complex type definit
 | [IPRange](#Section_2.2.4.116) | Specifies the common information pertaining to the address range. |
 | [IPRangeAllForBlockEnumerationParameter](#Section_2.2.4.117) | Specifies the criteria based on which ranges corresponding to an address block instance can be retrieved. |
 | [IPRangeAllForDhcpServerEnumerationParameters](#Section_2.2.4.118) | Specifies the criteria based on which address ranges corresponding to the DHCP scope instances of a particular DHCP server are enumerated. |
-| [IPRangeByManagedByAndManagedByEntityEnumerationParameters](#Section_3.5.4.7.1.31) | Specifies the criteria required to enumerate the address ranges for which the built-in custom fields ManagedBy and ManagedByEntity have a specific value. |
-| [IPRangeForBlockEnumerationParameters](#Section_3.5.4.7.1.32) | Specifies the criteria for enumerating the address ranges that map directly onto an address block and don’t include the address ranges that map to a child block for the specified address block. |
-| [IPRangeRootEnumerationParameters](#Section_3.5.4.7.1.33) | Specifies the criteria for enumerating all the address ranges that have a specific address category. |
+| [IPRangeByManagedByAndManagedByEntityEnumerationParameters](#Section_2.2.4.119) | Specifies the criteria required to enumerate the address ranges for which the built-in custom fields ManagedBy and ManagedByEntity have a specific value. |
+| [IPRangeForBlockEnumerationParameters](#Section_2.2.4.120) | Specifies the criteria for enumerating the address ranges that map directly onto an address block and don’t include the address ranges that map to a child block for the specified address block. |
+| [IPRangeRootEnumerationParameters](#Section_2.2.4.121) | Specifies the criteria for enumerating all the address ranges that have a specific address category. |
 | [IPRangeUnmappedEnumerationParameters](#Section_2.2.4.122) | Specifies the criteria for enumerating the address ranges that are not mapped to any address block and are unmapped. |
 | [IPUtilization](#Section_2.2.4.123) | Specifies the address utilization data for a specific time range. |
 | [IPv4Block](#Section_2.2.4.124) | Allows extending the attributes IPBlock to specify the IPv4-specific address block. The EndIPAddress, NetworkId, StartIPAddress, and SubnetMask MUST be of address family type being Internet. |
@@ -2039,13 +2039,13 @@ The following table summarizes the set of common XML Schema complex type definit
 | [IPv6Utilization](#Section_2.2.4.133) | Extends the attributes of a IPUtilization complex type to specify the address utilization corresponding to IPv6-specific address space. |
 | [LogicalGroup](#Section_2.2.4.134) | Specifies the definition of a logical group. |
 | [LogicalGroupDataForLogicalGroupNodeEnumerationParameters](#Section_2.2.4.135) | Specifies the logical group node information that will form the criteria for enumerating the data. |
-| [LogicalGroupDataForRootAlternateItemsEnumerationParameters](#Section_3.5.4.7.1.36) | Specifies the criteria for enumerating the data which will map to the specified logical group. |
-| [LogicalGroupDataUnmappedItemsEnumerationParameters](#Section_3.5.4.7.1.37) | Specifies the criteria used to enumerate the data that do not map to a specified logical group. |
+| [LogicalGroupDataForRootAlternateItemsEnumerationParameters](#Section_2.2.4.136) | Specifies the criteria for enumerating the data which will map to the specified logical group. |
+| [LogicalGroupDataUnmappedItemsEnumerationParameters](#Section_2.2.4.137) | Specifies the criteria used to enumerate the data that do not map to a specified logical group. |
 | [LogicalGroupField](#Section_2.2.4.138) | Specifies one level of the multivalued custom field that forms the logical group hierarchy. |
 | [LogicalGroupNode](#Section_2.2.4.139) | Specifies the actual custom field values that form the criteria for the data to be satisfied to match at a particular level in the logical group hierarchy. |
 | [LogicalGroupNodeChildrenEnumerationParameters](#Section_2.2.4.140) | Specifies the criteria to be used for enumerating the logical group nodes that form the next level of logical group nodes in a logical group hierarchy. |
-| [LogicalGroupNodeRootEnumerationParameters](#Section_3.5.4.7.1.39) | Specifies the criteria for enumerating the LogicalGroupNode that form the first level of LogicalGroupHierarchy. |
-| [LogicalGroupsEnumerationParameters](#Section_3.5.4.7.1.40) | Specifies the criteria for enumerating the logical groups from the IPAM data store. |
+| [LogicalGroupNodeRootEnumerationParameters](#Section_2.2.4.141) | Specifies the criteria for enumerating the LogicalGroupNode that form the first level of LogicalGroupHierarchy. |
+| [LogicalGroupsEnumerationParameters](#Section_2.2.4.142) | Specifies the criteria for enumerating the logical groups from the IPAM data store. |
 | [MACAddress](#Section_2.2.4.143) | Specifies the MAC address. |
 | [serarr:ArrayOfanyType](#Section_2.2.4.145) | Specifies an array whose elements can be of any type. |
 | [serarr:ArrayOfKeyValueOfDnsReverseLookupZoneFilterCriteriaanyType2zwQHvQz](#Section_2.2.4.146) | Specifies an array of key value pair where the key of the element has the DnsReverseLookupZoneFilterCriteria and the value of the element can be any value appropriate for the key specified. The keys in the array MUST be unique, i.e. no two elements in the array can have the same key. |
@@ -2085,7 +2085,7 @@ The following table summarizes the set of common XML Schema complex type definit
 | [sysnet:ArrayOfIPAddress](#Section_2.2.4.180) | Specifies an array of IPAddress complex type. |
 | [sysnet:IPAddress](#Section_2.2.4.181) | Specifies an IP address independent of the address family. |
 | [TaskInfo](#Section_2.2.4.182) | Specifies the set of details that provide more information about IPAM tasks. |
-| [UnmappedIpamIPAddressForLogicalGroupEnumerationParameters](#Section_3.5.4.7.1.42) | Specifies the parameters for enumerating the IP address instances that do not map to a specific logical group. |
+| [UnmappedIpamIPAddressForLogicalGroupEnumerationParameters](#Section_2.2.4.183) | Specifies the parameters for enumerating the IP address instances that do not map to a specific logical group. |
 
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 ActiveServerV4LogicalGroup
@@ -15131,7 +15131,7 @@ Upon receiving the IIpamServer_BulkUpdateServers_InputMessage request message, t
 - Initialize BulkUpdateServersResponse.BulkUpdateServersResult to a collection of key value pairs.
 - For each ServerInfo data in the collection of BulkUpdateServers.serversToUpdate:
 - Set the **updatedServer** to the server entry.
-- Perform the server update as specified in section [3.3.4.63](#Section_3.3.4.63.2.1).
+- Perform the server update as specified in section [3.3.4.63](#Section_3.3.4.63).
 - If the above step generates any SOAP fault, add the failure information of the SOAP fault to the **BulkUpdateServersResponse.BulkUpdateServersResult** with the key having the **updatedServer.RecordId** and the value having the IpamException having the fault information.
 <a id="Section_3.3.4.4.1"></a>
 ##### 3.3.4.4.1 Messages
@@ -23529,86 +23529,86 @@ The following table specifies the operations and the authorization requirements.
 
 | Operation | ADM States to be checked |
 | --- | --- |
-| [BulkUpdateBlocks](#Section_3.3.4.1.2.1) | IsIpamAsmAdministrator |
-| [BulkUpdateIPAddresses](#Section_3.3.4.2.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
-| [BulkUpdateRanges](#Section_3.3.4.3.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
+| [BulkUpdateBlocks](#Section_3.3.4.1) | IsIpamAsmAdministrator |
+| [BulkUpdateIPAddresses](#Section_3.3.4.2) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
+| [BulkUpdateRanges](#Section_3.3.4.3) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
 | [BulkUpdateServers](#Section_3.3.4.4) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [CheckIfDnsServerReverseZoneHostedOnServer](#Section_3.3.4.5) | IsIpamUser |
 | [CheckIfDnsServerZoneHostedOnServer](#Section_3.3.4.6) | IsIpamUser |
-| [DBCreateOrUpdateScope](#Section_3.3.4.7.2.1) | IsIpamMsmAdministrator |
+| [DBCreateOrUpdateScope](#Section_3.3.4.7) | IsIpamMsmAdministrator |
 | [DBDeleteScope](#Section_3.3.4.8) | IsIpamMsmAdministrator IsIpamAsmAdministrator |
 | [DBGetDhcpServerFromRecordId](#Section_3.3.4.9) | IsIpamUser |
 | [DBGetDhcpServerFromServerInfoRecordId](#Section_3.3.4.10) | IsIpamUser |
-| [DBGetScopeFromNetworkIDAndServer](#Section_3.3.4.11.2.1) | IsIpamUser |
-| [DBGetScopeFromRecordId](#Section_3.3.4.12.2.1) | IsIpamUser |
+| [DBGetScopeFromNetworkIDAndServer](#Section_3.3.4.11) | IsIpamUser |
+| [DBGetScopeFromRecordId](#Section_3.3.4.12) | IsIpamUser |
 | [DBUpdateDhcpServer](#Section_3.3.4.13) | IsIpamMsmAdministrator |
 | [DeleteBlock](#Section_3.3.4.14) | IsIpamAsmAdministrator |
-| [DeleteCustomField](#Section_3.3.4.15.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [DeleteCustomField](#Section_3.3.4.15) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [DeleteDiscoveryConfig](#Section_3.3.4.16) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [DeleteIpamIPAddress](#Section_3.3.4.17) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
 | [DeleteLogicalGroup](#Section_3.3.4.18) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [DeleteRange](#Section_3.3.4.19.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
-| [DeleteServer](#Section_3.3.4.20.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [FetchDnsServerReverseZoneById](#Section_3.3.4.21.2.1) | IsIpamUser |
-| [FetchDnsServerZoneById](#Section_3.3.4.22.2.1) | IsIpamUser |
+| [DeleteRange](#Section_3.3.4.19) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
+| [DeleteServer](#Section_3.3.4.20) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [FetchDnsServerReverseZoneById](#Section_3.3.4.21) | IsIpamUser |
+| [FetchDnsServerZoneById](#Section_3.3.4.22) | IsIpamUser |
 | [FetchIpamIPAddress](#Section_3.3.4.23) | IsIpamUser |
-| [FetchIpamIPAddressByManagedByAndManagedByEntity](#Section_3.3.4.24.2.1) | IsIpamUser |
-| [FindAvailableDhcpServersForReservation](#Section_3.3.4.25.2.1) | IsIpamUser |
-| [FindAvailableScopeForReservationInDhcpServer](#Section_3.3.4.26.2.1) | IsIpamUser |
-| [GetBlockById](#Section_3.3.4.27.2.1) | IsIpamUser |
-| [GetBlockByIPAddressAndPrefixLength](#Section_3.3.4.28.2.1) | IsIpamUser |
+| [FetchIpamIPAddressByManagedByAndManagedByEntity](#Section_3.3.4.24) | IsIpamUser |
+| [FindAvailableDhcpServersForReservation](#Section_3.3.4.25) | IsIpamUser |
+| [FindAvailableScopeForReservationInDhcpServer](#Section_3.3.4.26) | IsIpamUser |
+| [GetBlockById](#Section_3.3.4.27) | IsIpamUser |
+| [GetBlockByIPAddressAndPrefixLength](#Section_3.3.4.28) | IsIpamUser |
 | [GetBlockHierarchy](#Section_3.3.4.29) | IsIpamUser |
 | [GetBlockHierarchyForRangeId](#Section_3.3.4.30) | IsIpamUser |
-| [GetBlocksByIds](#Section_3.3.4.31.2.1) | IsIpamUser |
-| [GetBlockUtilization](#Section_3.3.4.32.2.1) | IsIpamUser |
-| [GetBuiltInCustomField](#Section_3.3.4.33.2.1) | IsIpamUser |
-| [GetBuiltInLogicalGroup](#Section_3.3.4.34.2.1) | IsIpamUser |
-| [GetCommonPropertyValue](#Section_3.3.4.35.2.1) | IsIpamUser |
+| [GetBlocksByIds](#Section_3.3.4.31) | IsIpamUser |
+| [GetBlockUtilization](#Section_3.3.4.32) | IsIpamUser |
+| [GetBuiltInCustomField](#Section_3.3.4.33) | IsIpamUser |
+| [GetBuiltInLogicalGroup](#Section_3.3.4.34) | IsIpamUser |
+| [GetCommonPropertyValue](#Section_3.3.4.35) | IsIpamUser |
 | [GetCustomFieldById](#Section_3.3.4.36) | IsIpamUser |
 | [GetDiscoveryConfig](#Section_3.3.4.37) | IsIpamUser |
-| [GetFreeIPAddresses](#Section_3.3.4.38.2.1) | IsIpamUser |
+| [GetFreeIPAddresses](#Section_3.3.4.38) | IsIpamUser |
 | [GetIPAddressById](#Section_3.3.4.39) | IsIpamUser |
 | [GetIPAddressesByIds](#Section_3.3.4.40) | IsIpamUser |
-| [GetIpamTasksInfo](#Section_3.3.4.41.2.1) | IsIpamUser |
-| [GetIpamVersion](#Section_3.3.4.42.2.1) | IsIpamUser |
+| [GetIpamTasksInfo](#Section_3.3.4.41) | IsIpamUser |
+| [GetIpamVersion](#Section_3.3.4.42) | IsIpamUser |
 | [GetIPRangeById](#Section_3.3.4.43) | IsIpamUser |
 | [GetIPRangesByIds](#Section_3.3.4.44) | IsIpamUser |
 | [GetLogicalGroupById](#Section_3.3.4.45) | IsIpamUser |
-| [GetLogicalGroupUtilizationByPeriod](#Section_3.3.4.46.2.1) | IsIpamUser |
-| [GetLogicalGroupUtilizationByType](#Section_3.3.4.47.2.1) | IsIpamUser |
+| [GetLogicalGroupUtilizationByPeriod](#Section_3.3.4.46) | IsIpamUser |
+| [GetLogicalGroupUtilizationByType](#Section_3.3.4.47) | IsIpamUser |
 | [GetNumberOfForwardLookupZonesForServers](#Section_3.3.4.48) | IsIpamUser |
-| [GetRangeByIPAddress](#Section_3.3.4.49.2.1) | IsIpamUser |
-| [GetRangeByIPAddressAndManagedByManagedByEntity](#Section_3.3.4.50.2.1) | IsIpamUser |
-| [GetRangeByScopeRecordId](#Section_3.3.4.51.2.1) | IsIpamUser |
+| [GetRangeByIPAddress](#Section_3.3.4.49) | IsIpamUser |
+| [GetRangeByIPAddressAndManagedByManagedByEntity](#Section_3.3.4.50) | IsIpamUser |
+| [GetRangeByScopeRecordId](#Section_3.3.4.51) | IsIpamUser |
 | [GetRangeUtilization](#Section_3.3.4.52) | IsIpamUser |
 | [GetServersForMultipleId](#Section_3.3.4.54) | IsIpamUser |
-| [GetTotalUnmappedRanges](#Section_3.3.4.55.2.1) | IsIpamUser |
+| [GetTotalUnmappedRanges](#Section_3.3.4.55) | IsIpamUser |
 | [IsIPAddressMapped](#Section_3.3.4.56) | IsIpamUser |
-| [IsIpamConfigured](#Section_3.3.4.57.2.1) | IsIpamUser |
+| [IsIpamConfigured](#Section_3.3.4.57) | IsIpamUser |
 | [IsPurgeTaskRunning](#Section_3.3.4.58) | IsIpamUser |
-| [IsSchemaConversionInProgress](#Section_3.3.4.59.2.1) | IsIpamUser |
-| [IsSchemaConversionRequired](#Section_3.3.4.60.2.1) | IsIpamUser |
-| [IsTaskRunning](#Section_3.3.4.61.2.1) | IsIpamUser |
-| [ManuallyAddServer](#Section_3.3.4.62.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [ManuallyUpdateServer](#Section_3.3.4.63.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [PurgeAuditData](#Section_3.3.4.64.2.1) | IsIpamAdministrator |
+| [IsSchemaConversionInProgress](#Section_3.3.4.59) | IsIpamUser |
+| [IsSchemaConversionRequired](#Section_3.3.4.60) | IsIpamUser |
+| [IsTaskRunning](#Section_3.3.4.61) | IsIpamUser |
+| [ManuallyAddServer](#Section_3.3.4.62) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [ManuallyUpdateServer](#Section_3.3.4.63) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [PurgeAuditData](#Section_3.3.4.64) | IsIpamAdministrator |
 | [RemapRange](#Section_3.3.4.65) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
 | [ResetZoneHealth](#Section_3.3.4.66) | IsIpamAdministrator IsIpamMsmAdministrator |
-| [SaveBlock](#Section_3.3.4.67.2.1) | IsIpamAsmAdministrator |
-| [SaveCustomField](#Section_3.3.4.68.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [SaveDiscoveryConfig](#Section_3.3.4.69.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [SaveIpamIPAddress](#Section_3.3.4.70.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
+| [SaveBlock](#Section_3.3.4.67) | IsIpamAsmAdministrator |
+| [SaveCustomField](#Section_3.3.4.68) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [SaveDiscoveryConfig](#Section_3.3.4.69) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [SaveIpamIPAddress](#Section_3.3.4.70) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
 | [SaveLogicalGroup](#Section_3.3.4.71) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [SaveRange](#Section_3.3.4.72.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
+| [SaveRange](#Section_3.3.4.72) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
 | [SetCommonPropertyValue](#Section_3.3.4.73) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [StartTask](#Section_3.3.4.74) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [TaskLastRunResult](#Section_3.3.4.75) | IsIpamUser |
-| [TaskLastRuntime](#Section_3.3.4.76.2.1) | IsIpamUser |
+| [TaskLastRuntime](#Section_3.3.4.76) | IsIpamUser |
 | [TaskNextRuntime](#Section_3.3.4.77) | IsIpamUser |
-| [TaskRecurrenceDuration](#Section_3.3.4.78.2.1) | IsIpamUser |
+| [TaskRecurrenceDuration](#Section_3.3.4.78) | IsIpamUser |
 | [UpdateBlock](#Section_3.3.4.79) | IsIpamAsmAdministrator |
 | [UpdateCustomField](#Section_3.3.4.80) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
-| [UpdateDiscoveryConfig](#Section_3.3.4.81.2.1) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
+| [UpdateDiscoveryConfig](#Section_3.3.4.81) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [UpdateIpamIPAddress](#Section_3.3.4.82) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
 | [UpdateLogicalGroup](#Section_3.3.4.83) | IsIpamAsmAdministrator IsIpamMsmAdministrator IsIpamIPAuditAdministrator IsIpamAdministrator |
 | [UpdateRange](#Section_3.3.4.84) | IsIpamAsmAdministrator IsIpamMsmAdministrator |
@@ -23974,7 +23974,7 @@ This operation is used to trigger the processing of the enumeration. This causes
 
 </wsdl:operation>
 
-Upon receiving the IIpamEnumerator_StartEnumeration_InputMessage, the server MUST invoke NotifyEnumerationStart operation. The enumeration processing logic as described in section [3.5.4.7.1](#Section_3.5.4.7.1.11) has to be triggered as well.
+Upon receiving the IIpamEnumerator_StartEnumeration_InputMessage, the server MUST invoke NotifyEnumerationStart operation. The enumeration processing logic as described in section [3.5.4.7.1](#Section_3.5.4.7.1) has to be triggered as well.
 
 <a id="Section_3.5.4.7.1"></a>
 ##### 3.5.4.7.1 Enumeration Processing Logic
@@ -25131,14 +25131,14 @@ This is similar to the StartEnumeration operation of the IIpamEnumerator port ty
 
 </wsdl:operation>
 
-Upon receiving the IIpamEnumerator_StartEnumeration_InputMessage, the server MUST invoke NotifyEnumerationStart operation. The enumeration processing logic as described in section [3.5.4.7.1](#Section_3.5.4.7.1.11) has to be triggered as well.
+Upon receiving the IIpamEnumerator_StartEnumeration_InputMessage, the server MUST invoke NotifyEnumerationStart operation. The enumeration processing logic as described in section [3.5.4.7.1](#Section_3.5.4.7.1) has to be triggered as well.
 
 <a id="Section_3.9.4.3.1"></a>
 ##### 3.9.4.3.1 Enumeration Processing Logic
 
 The only supported EnumInputParameter type is IPAuditEnumerationParameters having the ObjectType to be EnumerationObjectType.IPAudit. Any other type is not expected and MUST result in an appropriate SOAP fault being returned to the client.
 
-The difference between IIpamIPAuditEnumerator and IIpamEnumerator is only in terms of the data generation logic and the user authorization. The rest of the processing remains the same including the way the generated data is returned back to the management client remains the same. See section [3.5.4.7.1](#Section_3.5.4.7.1.11) for further details.
+The difference between IIpamIPAuditEnumerator and IIpamEnumerator is only in terms of the data generation logic and the user authorization. The rest of the processing remains the same including the way the generated data is returned back to the management client remains the same. See section [3.5.4.7.1](#Section_3.5.4.7.1) for further details.
 
 <a id="Section_3.9.4.3.1.1"></a>
 ###### 3.9.4.3.1.1 IPAuditEnumerationParameters

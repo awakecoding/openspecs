@@ -544,7 +544,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-The Active Directory Web Services: Custom Action Protocol is used for directory access in identity management and topology management. Examples of these operations are managing [**groups**](#gt_group) and passwords (identity management; see section [3.3](#Section_1.3)) and retrieving information about the [**forest**](#gt_forest) and [**domain**](#gt_domain) (topology management; see section [3.4](#Section_1.3)). A portion of the Microsoft implementation of the Active Directory Web Services: Custom Action Protocol is used to communicate between servers; for example the implementation of server-to-server [**FSMO**](#gt_flexible-single-master-operation-fsmo) transfers or the implementation of server-to-server methods for retrieving group memberships from other servers. Those server-to-server communications are not used by Microsoft to communicate with Windows client operating systems and are not included in this specification. Licensees can implement those server-to-server communications using any protocol they choose. This specification describes the client-to-server portions of the Active Directory Web Services: Custom Action Protocol that are used between applicable Windows Server releases and Windows client operating systems to manage [**Active Directory**](#gt_active-directory) identities and topologies. In some cases, the client-to-server communications include status of the success or failure of server-to-server communication, to give administrators the ability to assist in diagnosing or monitoring the server-to-server implementation. However, the specific content of these communications is not understood by Windows client operating systems, and the semantics are not prescribed by this specification. Interoperation with Windows client operating systems does not require an understanding of the status of the server-to-server implementation. Licensees can implement the Active Directory Web Services: Custom Action Protocol to provide and accept any status that is meaningful for diagnosing or monitoring their server-to-server communications, or no data at all, as they choose.
+The Active Directory Web Services: Custom Action Protocol is used for directory access in identity management and topology management. Examples of these operations are managing [**groups**](#gt_group) and passwords (identity management; see section [3.3](#Section_3.3)) and retrieving information about the [**forest**](#gt_forest) and [**domain**](#gt_domain) (topology management; see section [3.4](#Section_3.4)). A portion of the Microsoft implementation of the Active Directory Web Services: Custom Action Protocol is used to communicate between servers; for example the implementation of server-to-server [**FSMO**](#gt_flexible-single-master-operation-fsmo) transfers or the implementation of server-to-server methods for retrieving group memberships from other servers. Those server-to-server communications are not used by Microsoft to communicate with Windows client operating systems and are not included in this specification. Licensees can implement those server-to-server communications using any protocol they choose. This specification describes the client-to-server portions of the Active Directory Web Services: Custom Action Protocol that are used between applicable Windows Server releases and Windows client operating systems to manage [**Active Directory**](#gt_active-directory) identities and topologies. In some cases, the client-to-server communications include status of the success or failure of server-to-server communication, to give administrators the ability to assist in diagnosing or monitoring the server-to-server implementation. However, the specific content of these communications is not understood by Windows client operating systems, and the semantics are not prescribed by this specification. Interoperation with Windows client operating systems does not require an understanding of the status of the server-to-server implementation. Licensees can implement the Active Directory Web Services: Custom Action Protocol to provide and accept any status that is meaningful for diagnosing or monitoring their server-to-server communications, or no data at all, as they choose.
 
 The goal of this specification is to enable the transition of client applications that are currently using non–Web services protocols such as [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap) version 3 [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) for managing information held in [**directory services**](#gt_directory-service-ds) to using Web services protocols.
 
@@ -556,7 +556,7 @@ Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other 
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-directory-domain-services-ad-ds"></a>
 **Active Directory Domain Services (AD DS)**: A [**directory service (DS)**](#gt_directory-service-ds) implemented by a [**domain controller (DC)**](#gt_domain-controller-dc). The [**DS**](#gt_directory-service-ds) provides a data store for objects that is distributed across multiple [**DCs**](#gt_domain-controller-dc). The [**DCs**](#gt_domain-controller-dc) interoperate as peers to ensure that a local change to an object replicates correctly across [**DCs**](#gt_domain-controller-dc). AD DS is a deployment of [**Active Directory**](#gt_active-directory) [MS-ADTS](../MS-ADTS/MS-ADTS.md).
@@ -589,7 +589,7 @@ This document uses the following terms:
 **crossRef object**: An object residing in the partitions container of the [**config NC**](#gt_configuration-naming-context-config-nc) that describes the properties of a [**naming context (NC)**](#gt_naming-context-nc), such as its domain naming service name, operational settings, and so on.
 
 <a id="gt_directory-instance"></a>
-**directory instance**: The [**directory service**](#gt_directory-service-ds) referred to by the [**SOAP header**](#gt_soap-header) in the Active Directory Web Services: Custom Action Protocol custom action [**XML**](#gt_xml) operation, which is the target of the custom action request. This [**directory service**](#gt_directory-service-ds) is assumed to be running locally on the server. This can be an [**Active Directory**](#gt_active-directory) [**directory service**](#gt_directory-service-ds) instance, or an [**Active Directory Lightweight Directory Services**](#gt_active-directory-lightweight-directory-services-ad-lds) instance (one of possibly many). For more detail on the format of the [**SOAP header**](#gt_soap-header), see [MS-ADDM](#Section_3.4.4.5.2) section 2.5.1.
+**directory instance**: The [**directory service**](#gt_directory-service-ds) referred to by the [**SOAP header**](#gt_soap-header) in the Active Directory Web Services: Custom Action Protocol custom action [**XML**](#gt_xml) operation, which is the target of the custom action request. This [**directory service**](#gt_directory-service-ds) is assumed to be running locally on the server. This can be an [**Active Directory**](#gt_active-directory) [**directory service**](#gt_directory-service-ds) instance, or an [**Active Directory Lightweight Directory Services**](#gt_active-directory-lightweight-directory-services-ad-lds) instance (one of possibly many). For more detail on the format of the [**SOAP header**](#gt_soap-header), see [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.5.1.
 
 <a id="gt_directory-object"></a>
 **directory object**: A [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap) object, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325), that is a specialization of an object.
@@ -601,7 +601,7 @@ This document uses the following terms:
 **distinguished name (DN)**: A name that uniquely identifies an object by using the relative distinguished name (RDN) for the object, and the names of container objects and domains that contain the object. The distinguished name (DN) identifies the object and its location in a tree.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS].
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS].
 
 <a id="gt_domain-controller-dc"></a>
 **domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the [**configuration naming context (config NC)**](#gt_configuration-naming-context-config-nc), [**schema naming context (schema NC)**](#gt_schema-naming-context-schema-nc), and one of the [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). If the [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds), only one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) can run on one server. However, several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can coexist with one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) on one server. The [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DC**](#gt_domain-controller-dc) contains full NC replicas of the [**config NC**](#gt_configuration-naming-context-config-nc) and the [**schema NC**](#gt_schema-naming-context-schema-nc) in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
@@ -696,7 +696,7 @@ This document uses the following terms:
 **parent domain**: A [**domain**](#gt_domain) that is part of a [**domain tree**](#gt_domain-tree) and has [**child domains**](#gt_child-domain) is a parent of those [**child domains**](#gt_child-domain).
 
 <a id="gt_primary-group"></a>
-**primary group**: The [**group object**](#gt_group-object) ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.53) identified by the primaryGroupID [**attribute**](#gt_attribute) ([MS-ADA3](#Section_3.4.4.4.5) section 2.120) of a user object ([MS-ADSC] section 2.263). The [**primary group's**](#gt_primary-group) objectSid [**attribute**](#gt_attribute) ([MS-ADA3] section 2.45) equals the user's objectSid, with its [**relative identifier (RID)**](#gt_relative-identifier-rid) portion replaced by the primaryGroupID value. The user is considered a member of its [**primary group**](#gt_primary-group).
+**primary group**: The [**group object**](#gt_group-object) ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.53) identified by the primaryGroupID [**attribute**](#gt_attribute) ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.120) of a user object ([MS-ADSC] section 2.263). The [**primary group's**](#gt_primary-group) objectSid [**attribute**](#gt_attribute) ([MS-ADA3] section 2.45) equals the user's objectSid, with its [**relative identifier (RID)**](#gt_relative-identifier-rid) portion replaced by the primaryGroupID value. The user is considered a member of its [**primary group**](#gt_primary-group).
 
 <a id="gt_principal"></a>
 **principal**: An authenticated entity that initiates a message or channel in a distributed system.
@@ -806,13 +806,13 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](#Section_3.4.4.4.5)".
+[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
-[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](#Section_3.4.4.4.5)".
+[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](../MS-ADA2/MS-ADA2.md)".
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_3.4.4.4.5)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
-[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_3.4.4.5.2)".
+[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](../MS-ADDM/MS-ADDM.md)".
 
 [MS-ADLS] Microsoft Corporation, "[Active Directory Lightweight Directory Services Schema](../MS-ADLS/MS-ADLS.md)".
 
@@ -830,7 +830,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-NNS] Microsoft Corporation, "[.NET NegotiateStream Protocol](../MS-NNS/MS-NNS.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](../MS-SPNG/MS-SPNG.md)".
 
@@ -867,9 +867,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MSFT-RSAT] Microsoft Corporation, "Remote Server Administration Tools (RSAT) for Windows operating systems", [https://support.microsoft.com/en-us/kb/2693643](https://go.microsoft.com/fwlink/?linkid=839006)
 
@@ -896,7 +896,7 @@ To do so, this protocol defines the following [**Web Services Description Langua
 - [TranslateName](#Section_3.3.4.6)
 Requests that make use of the Active Directory Web Services: Custom Action Protocol can be identified by the presence of a protocol-specific [**SOAP header**](#gt_soap-header).
 
-The Active Directory Web Services: Custom Action Protocol specifies a set of [**SOAP faults**](#gt_soap-fault) that a server is permitted to return to the client to indicate that an error occurred while processing the request. The intent is to allow interoperability between clients and servers by providing a standardized set of errors that both sides of the communication session can understand. This protocol specifies SOAP faults for the custom actions as specified in section [3](#Section_1.3).
+The Active Directory Web Services: Custom Action Protocol specifies a set of [**SOAP faults**](#gt_soap-fault) that a server is permitted to return to the client to indicate that an error occurred while processing the request. The intent is to allow interoperability between clients and servers by providing a standardized set of errors that both sides of the communication session can understand. This protocol specifies SOAP faults for the custom actions as specified in section [3](#Section_3).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -907,9 +907,9 @@ The Active Directory Web Services: Custom Action Protocol uses transports that s
 
 Figure 1: Protocol layering diagram
 
-The information in this document is used by the Active Directory Web Services: Custom Action Protocol in the set of [**ADWS**](#gt_active-directory-web-services-adws) protocols. The ADWS protocol documentation set comprises this document and the following documents: [MS-WSDS](../MS-WSDS/MS-WSDS.md), [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md), [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md), and [MS-ADDM](#Section_3.4.4.5.2).
+The information in this document is used by the Active Directory Web Services: Custom Action Protocol in the set of [**ADWS**](#gt_active-directory-web-services-adws) protocols. The ADWS protocol documentation set comprises this document and the following documents: [MS-WSDS](../MS-WSDS/MS-WSDS.md), [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md), [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md), and [MS-ADDM](../MS-ADDM/MS-ADDM.md).
 
-Active Directory Web Services: Custom Action Protocol uses the Microsoft.NET NegotiateStream Protocol Specification [MS-NNS](../MS-NNS/MS-NNS.md) to establish the security context of the operations as described in section [3.1.4.3](../MS-NNS/MS-NNS.md).
+Active Directory Web Services: Custom Action Protocol uses the Microsoft.NET NegotiateStream Protocol Specification [MS-NNS](../MS-NNS/MS-NNS.md) to establish the security context of the operations as described in section [3.1.4.3](#Section_3.1.4.3).
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -932,7 +932,7 @@ This document covers versioning issues in the following areas:
 
 **Capability Negotiation:** This protocol does not support version negotiation.
 
-**Localization:** This protocol includes text strings in various [**SOAP faults**](#gt_soap-fault). Localization considerations for such strings are specified in the SOAP faults section of each operation described in section [3.3.4](#Section_1.3). See, for example, section [3.3.4.1.8](#Section_3.3.4.1.8.2) for the ChangePassword operation.
+**Localization:** This protocol includes text strings in various [**SOAP faults**](#gt_soap-fault). Localization considerations for such strings are specified in the SOAP faults section of each operation described in section [3.3.4](#Section_3.3.4). See, for example, section [3.3.4.1.8](#Section_3.3.4.1.8) for the ChangePassword operation.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1009,7 +1009,7 @@ nillable="true" type="ca:ActiveDirectoryObject" />
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 ActiveDirectoryPrincipal
 
-The ActiveDirectoryPrincipal element represents a [**principal**](#gt_principal) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.1.5). It is an extension of the [ActiveDirectoryObject](#Section_2.2.4.1) (section 2.2.3.1) element to include a SamAccountName (section [2.2.4.2.1](#Section_2.2.4.2.1)) and a [**SID**](#gt_security-identifier-sid) (section [2.2.4.2.2](#Section_2.2.4.2.2)). The ActiveDirectoryPrincipal element MUST NOT be null.
+The ActiveDirectoryPrincipal element represents a [**principal**](#gt_principal) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.1.5). It is an extension of the [ActiveDirectoryObject](#Section_2.2.3.1) (section 2.2.3.1) element to include a SamAccountName (section [2.2.4.2.1](#Section_2.2.4.2.1)) and a [**SID**](#gt_security-identifier-sid) (section [2.2.4.2.2](#Section_2.2.4.2.2)). The ActiveDirectoryPrincipal element MUST NOT be null.
 
 <xs:element
 
@@ -1219,7 +1219,7 @@ The [**SID**](#gt_security-identifier-sid) element specifies the object security
 <a id="Section_2.2.4.3"></a>
 #### 2.2.4.3 ActiveDirectoryGroup
 
-The ActiveDirectoryGroup complex type extends the ActiveDirectoryPrincipal (section [2.2.4.2](#Section_2.2.3.2)) complex type definition, adding the elements GroupScope and GroupType.
+The ActiveDirectoryGroup complex type extends the ActiveDirectoryPrincipal (section [2.2.4.2](#Section_2.2.4.2)) complex type definition, adding the elements GroupScope and GroupType.
 
 <xs:complexType name="ActiveDirectoryGroup">
 
@@ -1244,7 +1244,7 @@ The ActiveDirectoryGroup complex type extends the ActiveDirectoryPrincipal (sect
 <a id="Section_2.2.4.3.1"></a>
 ##### 2.2.4.3.1 ActiveDirectoryGroup/GroupScope
 
-The [GroupScope](#Section_2.2.4.3.1) element contains the Group Scope (Unknown, DomainLocal, Global or Universal; see section 2.2.5.1) of the ActiveDirectoryGroup [**directory object**](#gt_directory-object).
+The [GroupScope](#Section_2.2.5.1) element contains the Group Scope (Unknown, DomainLocal, Global or Universal; see section 2.2.5.1) of the ActiveDirectoryGroup [**directory object**](#gt_directory-object).
 
 <xs:element name="GroupScope" type="ca:ActiveDirectoryGroupScope" />
 
@@ -1258,7 +1258,7 @@ The GroupType element contains the [**group**](#gt_group) type (Unknown, Distrib
 <a id="Section_2.2.4.4"></a>
 #### 2.2.4.4 ArrayOfActiveDirectoryGroup
 
-The ArrayOfActiveDirectoryGroup complex type defines an array of ActiveDirectoryGroup (section [2.2.4.3](#Section_2.2.3.3)) complex types.
+The ArrayOfActiveDirectoryGroup complex type defines an array of ActiveDirectoryGroup (section [2.2.4.3](#Section_2.2.4.3)) complex types.
 
 <xs:complexType name="ArrayOfActiveDirectoryGroup">
 
@@ -1574,7 +1574,7 @@ This enumeration simple type is used to specify the type of the GroupScope eleme
 
 The ActiveDirectoryGroupType simple type defines the three allowable types of [**groups**](#gt_group) (Unknown, Distribution, and Security).
 
-This enumeration simple type is used to specify the type of the [GroupType](#Section_2.2.4.3.2) element. It indicates the type of group that is specified in the [ActiveDirectoryGroup](#Section_2.2.3.3) element.
+This enumeration simple type is used to specify the type of the [GroupType](#Section_2.2.5.2) element. It indicates the type of group that is specified in the [ActiveDirectoryGroup](#Section_2.2.3.3) element.
 
 <xs:simpleType name="ActiveDirectoryGroupType">
 
@@ -1687,7 +1687,7 @@ The protocol accesses the [**directory service**](#gt_directory-service-ds) sche
 
 For the syntactic specifications of the following <Class> or <Class> <Attribute> pairs, refer either to:
 
-[**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) ([MS-ADA1](#Section_3.4.4.4.5), [MS-ADA2](#Section_3.4.4.4.5), [MS-ADA3](#Section_3.4.4.4.5), and [MS-ADSC](../MS-ADSC/MS-ADSC.md)).
+[**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) ([MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), [MS-ADA3](../MS-ADA3/MS-ADA3.md), and [MS-ADSC](../MS-ADSC/MS-ADSC.md)).
 
 Or to:
 
@@ -1716,7 +1716,7 @@ Or to:
 
 The following sections describe the behavior of the Active Directory Web Services: Custom Action Protocol. This protocol follows a client-server model, in which a client sends a [**SOAP message**](#gt_soap-message) containing a request (a [ChangePassword](#Section_3.3.4.1), [GetADGroupMember](#Section_3.3.4.2), [GetADPrincipalAuthorizationGroup](#Section_3.3.4.3), [GetADPrincipalGroupMembership](#Section_3.3.4.4), [SetPassword](#Section_3.3.4.5), [TranslateName](#Section_3.3.4.6), [ChangeOptionalFeature](#Section_3.4.4.1), [GetADDomain](#Section_3.4.4.2), [GetADDomainController](#Section_3.4.4.3), [GetADForest](#Section_3.4.4.4), [GetVersion](#Section_3.4.4.5), or [MoveADOperationMasterRole](#Section_3.4.4.6) operation) to the server, and the server responds with a SOAP message containing the response (or a [**SOAP fault**](#gt_soap-fault), if an error occurred during server processing).<14>
 
-In the following sections, the operations are grouped by the two [**WSDL port types**](#gt_wsdl-port-type) to which they apply, the AccountManagement (section [3.3](#Section_1.3)) port type (on which ChangePassword, GetADGroupMember, GetADPrincipalAuthorizationGroup, GetADPrincipalGroupMembership, SetPassword and TranslateName operations are processed) and the TopologyManagement (section [3.4](#Section_1.3)) port type (on which ChangeOptionalFeature, GetADDomain, GetADDomainController, GetADForest, GetVersion and MoveADOperationMasterRole operations are processed). Prior to discussing the operation-specific behaviors associated with each port type, a common server processing section is included that contains protocol details common to all operations on all port types.
+In the following sections, the operations are grouped by the two [**WSDL port types**](#gt_wsdl-port-type) to which they apply, the AccountManagement (section [3.3](#Section_3.3)) port type (on which ChangePassword, GetADGroupMember, GetADPrincipalAuthorizationGroup, GetADPrincipalGroupMembership, SetPassword and TranslateName operations are processed) and the TopologyManagement (section [3.4](#Section_3.4)) port type (on which ChangeOptionalFeature, GetADDomain, GetADDomainController, GetADForest, GetVersion and MoveADOperationMasterRole operations are processed). Prior to discussing the operation-specific behaviors associated with each port type, a common server processing section is included that contains protocol details common to all operations on all port types.
 
 The client side of this protocol is simply a pass-through. That is, no additional timers or other state is required on the client side of this protocol. Calls made by the higher-layer protocol or application are passed directly to the transport, and the results returned by the transport are passed directly back to the higher-layer protocol or application.
 
@@ -1747,7 +1747,7 @@ When requesting or manipulating [**directory objects**](#gt_directory-object), t
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Attribute List
 
-The following [**attributes**](#gt_attribute) are referenced by this protocol (listed by ldapDisplayName). For a normative description of these attributes, see [MS-ADA1](#Section_3.4.4.4.5), [MS-ADA2](#Section_3.4.4.4.5), and [MS-ADA3](#Section_3.4.4.4.5).
+The following [**attributes**](#gt_attribute) are referenced by this protocol (listed by ldapDisplayName). For a normative description of these attributes, see [MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), and [MS-ADA3](../MS-ADA3/MS-ADA3.md).
 
 - cn
 - distinguishedName
@@ -1832,7 +1832,7 @@ The following classes are referenced by this protocol (listed by ldapDisplayName
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Read and Write Operations
 
-The Active Directory Web Services: Custom Action Protocol consists of 12 [**WSDL operations**](#gt_wsdl-operation), on two ports (AccountManagement, section [3.3](#Section_1.3), and TopologyManagement, section [3.4](#Section_1.3)). Of these 12 WSDL operations, eight consist of reading information, and four consist of writing information. The eight read WSDL operations are listed in section [3.1.1.3.1](#Section_3.1.1.3.1), and the four write operations are listed in section [3.1.1.3.2](#Section_3.1.1.3.2).
+The Active Directory Web Services: Custom Action Protocol consists of 12 [**WSDL operations**](#gt_wsdl-operation), on two ports (AccountManagement, section [3.3](#Section_3.3), and TopologyManagement, section [3.4](#Section_3.4)). Of these 12 WSDL operations, eight consist of reading information, and four consist of writing information. The eight read WSDL operations are listed in section [3.1.1.3.1](#Section_3.1.1.3.1), and the four write operations are listed in section [3.1.1.3.2](#Section_3.1.1.3.2).
 
 <a id="Section_3.1.1.3.1"></a>
 ##### 3.1.1.3.1 Read Operations
@@ -1860,7 +1860,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-When this protocol initializes, it MUST begin listening on [**endpoints**](#gt_endpoint) for the AccountManagement (section [3.3](#Section_1.3)) and TopologyManagement (section [3.4](#Section_1.3)) port types. The endpoints exposed, along with the transports and authentication mechanisms used by this protocol, are specified in [MS-ADDM](#Section_3.4.4.5.2) section 2.1.
+When this protocol initializes, it MUST begin listening on [**endpoints**](#gt_endpoint) for the AccountManagement (section [3.3](#Section_3.3)) and TopologyManagement (section [3.4](#Section_3.4)) port types. The endpoints exposed, along with the transports and authentication mechanisms used by this protocol, are specified in [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.1.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Message Processing Events and Sequencing Rules
@@ -1921,7 +1921,7 @@ The ReferenceServer element is populated as follows:
 
 - If the [**directory instance**](#gt_directory-instance) is [**AD DS**](#gt_active-directory-domain-services-ad-ds) and:
 - The custom actions is not GetADDomain (section 3.4.4.2), then the element is populated by converting from the **rootDSE!defaultNamingContext** attribute ([**fully qualified domain name (FQDN) (1)**](#gt_1769aec9-237e-44ed-9014-1abb3ec6de6e)) to a canonical name following the syntactic transformation described in [MS-ADTS] section 3.1.1.1.7, but with any trailing "/" omitted. If the **rootDSE!defaultNamingContext** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, then the server MUST return a SOAP fault corresponding to the custom action that was requested as described in sections [3.3.4.2.8.5](#Section_3.3.4.2.8.5), 3.3.4.3.8.5, and [3.3.4.4.8.6](#Section_3.3.4.4.8.6).
-- The custom action is GetADDomain, then the element is populated with the value of the [ActiveDirectoryPartition/DNSRoot (section 3.4.4.2.3.2.3)](#Section_3.4.4.2.3.2) element of the response.
+- The custom action is GetADDomain, then the element is populated with the value of the [ActiveDirectoryPartition/DNSRoot (section 3.4.4.2.3.2.3)](#Section_3.4.4.2.3.2.3) element of the response.
 - If the directory instance is [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the element is populated from the server name, concatenated with a colon (:) followed by the base 10 representation of the TCP port number that AD LDS is using. Note that the port number string is equal to the Server element port number that was received in the message header. The server name is populated from the [**Active Directory**](#gt_active-directory) instance's **computer!dNSHostName** attribute, for the computer object representing this [**DC**](#gt_domain-controller-dc). If the **dNSHostName** attribute is not present on the computer object or cannot be read due to the client lacking access rights to read the attribute, then the server MUST return a SOAP fault corresponding to the custom action that was requested as described in sections 3.3.4.2.8.5, 3.3.4.3.8.5, 3.3.4.4.8.6, and [3.4.4.2.8.2](#Section_3.4.4.2.8.2).
 <a id="Section_3.1.4.2.3"></a>
 ##### 3.1.4.2.3 ActiveDirectoryPrincipal
@@ -1964,13 +1964,13 @@ This protocol includes the following port types.
 
 | Namespace | Port type |
 | --- | --- |
-| http://schemas.microsoft.com/2008/1/ActiveDirectory/CustomActions | AccountManagement (section [3.3](#Section_1.3)) |
-| http://schemas.microsoft.com/2008/1/ActiveDirectory/CustomActions | TopologyManagement (section [3.4](#Section_1.3)) |
+| http://schemas.microsoft.com/2008/1/ActiveDirectory/CustomActions | AccountManagement (section [3.3](#Section_3.3)) |
+| http://schemas.microsoft.com/2008/1/ActiveDirectory/CustomActions | TopologyManagement (section [3.4](#Section_3.4)) |
 
 <a id="Section_3.3"></a>
 ## 3.3 AccountManagement Server Details
 
-This section describes the server behaviors of the Active Directory Web Services: Custom Action Protocol as they apply to the protocol's [AccountManagement](#Section_3.3.4.4.1.1) port type. In the Active Directory Web Services: Custom Action Protocol, this port type is used to process six [**WSDL operations**](#gt_wsdl-operation):
+This section describes the server behaviors of the Active Directory Web Services: Custom Action Protocol as they apply to the protocol's [AccountManagement](#Section_4.1) port type. In the Active Directory Web Services: Custom Action Protocol, this port type is used to process six [**WSDL operations**](#gt_wsdl-operation):
 
 - [ChangePassword](#Section_3.3.4.1)
 - [GetADGroupMember](#Section_3.3.4.2)
@@ -1983,7 +1983,7 @@ This protocol defines a [**SOAP message**](#gt_soap-message) for each of these o
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-See the abstract data model in the common processing section [3.1.1](#Section_3.1).
+See the abstract data model in the common processing section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
@@ -1993,7 +1993,7 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-See the initialization in the common processing section [3.1.3](#Section_3.3.3).
+See the initialization in the common processing section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Message Processing Events and Sequencing Rules
@@ -2052,11 +2052,11 @@ message=
 
 </wsdl:operation>
 
-Upon receiving the ChangePassword request, the server changes the password on the [**principal**](#gt_principal) contained in the ChangePasswordRequest/AccountDN element ([3.3.4.1.2.3](#Section_3.3.4.1.2.3)), specified by the [**naming context (NC)**](#gt_naming-context-nc) that is contained in the ChangePasswordRequest/PartitionDN element (section [3.3.4.1.2.6](#Section_3.3.4.1.2.6)). The current password is contained in the ChangePasswordRequest/OldPassword element (section [3.3.4.1.2.5](#Section_3.3.4.1.2.5)), and the new password is contained in the ChangePasswordRequest/NewPassword element (section [3.3.4.1.2.4](#Section_3.3.4.1.2.4)). Upon success, the server MUST return a [ChangePasswordResponse](#Section_3.3.4.1.2.7) message (section 3.3.4.1.1.3) with an empty [ChangePasswordResponse](#Section_3.3.4.1.2.7) element (section 3.3.4.1.2.7).
+Upon receiving the ChangePassword request, the server changes the password on the [**principal**](#gt_principal) contained in the ChangePasswordRequest/AccountDN element ([3.3.4.1.2.3](#Section_3.3.4.1.2.3)), specified by the [**naming context (NC)**](#gt_naming-context-nc) that is contained in the ChangePasswordRequest/PartitionDN element (section [3.3.4.1.2.6](#Section_3.3.4.1.2.6)). The current password is contained in the ChangePasswordRequest/OldPassword element (section [3.3.4.1.2.5](#Section_3.3.4.1.2.5)), and the new password is contained in the ChangePasswordRequest/NewPassword element (section [3.3.4.1.2.4](#Section_3.3.4.1.2.4)). Upon success, the server MUST return a [ChangePasswordResponse](#Section_3.3.4.1.1.3) message (section 3.3.4.1.1.3) with an empty [ChangePasswordResponse](#Section_3.3.4.1.1.3) element (section 3.3.4.1.2.7).
 
-In the case of [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the ChangePassword custom action changes the value of the user!userPassword or the **inetOrgPerson!userPassword** attribute of the given [**security principal**](#gt_security-principal). In the case of [**AD DS**](#gt_active-directory-domain-services-ad-ds), either the user!unicodePwd or the **inetOrgPerson!unicodePw**d attribute is changed. See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.1.5 and [MS-SAMR](#Section_5) section 3.1.1.7.2 for additional processing considerations that apply.
+In the case of [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the ChangePassword custom action changes the value of the user!userPassword or the **inetOrgPerson!userPassword** attribute of the given [**security principal**](#gt_security-principal). In the case of [**AD DS**](#gt_active-directory-domain-services-ad-ds), either the user!unicodePwd or the **inetOrgPerson!unicodePw**d attribute is changed. See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.1.5 and [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.2 for additional processing considerations that apply.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition, as specified in section [3.3.4.1.8](#Section_3.3.4.1.8.2).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition, as specified in section [3.3.4.1.8](#Section_3.3.4.1.8).
 
 <a id="Section_3.3.4.1.1"></a>
 ##### 3.3.4.1.1 Messages
@@ -2072,7 +2072,7 @@ The following table summarizes the set of [**WSDL message**](#gt_wsdl-message) d
 <a id="Section_3.3.4.1.1.1"></a>
 ###### 3.3.4.1.1.1 AccountManagement_ChangePassword_ChangePasswordFault_FaultMessage
 
-The AccountManagement_ChangePassword_ChangePasswordFault_FaultMessage message contains a [ChangePasswordFault](#Section_3.3.4.1.3.1) element.
+The AccountManagement_ChangePassword_ChangePasswordFault_FaultMessage message contains a [ChangePasswordFault](#Section_3.3.4.1.2.1) element.
 
 <wsdl:message name=
 
@@ -2100,7 +2100,7 @@ The ChangePasswordRequest message contains a [ChangePasswordRequest](#Section_3.
 <a id="Section_3.3.4.1.1.3"></a>
 ###### 3.3.4.1.1.3 ChangePasswordResponse
 
-The ChangePasswordResponse message contains a [ChangePasswordResponse](#Section_3.3.4.1.2.7) element with the server response to the ChangePasswordRequest message.
+The ChangePasswordResponse message contains a [ChangePasswordResponse](#Section_3.3.4.1.1.3) element with the server response to the ChangePasswordRequest message.
 
 <wsdl:message name="ChangePasswordResponse">
 
@@ -2222,7 +2222,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.3.4.1.3.1"></a>
 ###### 3.3.4.1.3.1 ChangePasswordFault
 
-The ChangePasswordFault complex type extends a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [ChangePassword](#Section_3.3.4.1) request.
+The ChangePasswordFault complex type extends a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [ChangePassword](#Section_3.3.4.1) request.
 
 <xs:complexType name="ChangePasswordFault">
 
@@ -2304,7 +2304,7 @@ If the client sends a request where any of the following is true:
 - The request contains an empty, not present, or null PartitionDN element.
 - The request contains a null or not present NewPassword element.
 - The request contains a null or not present OldPassword element.
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2325,7 +2325,7 @@ Or where all of the following are true:
 
 - The Server element specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance.
 - The PartitionDN/AccountDN elements specify a nonexistent principal.
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2355,7 +2355,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a ChangePass
 <a id="Section_3.3.4.1.8.4"></a>
 ###### 3.3.4.1.8.4 Bad Password Error
 
-If the client sends a request with the OldPassword element not matching the current password for the [**principal**](#gt_principal) identified by the PartitionDN/AccountDN elements, or a request with the NewPassword element that does not meet the password policy ([MS-SAMR](#Section_5) section 3.1.1.7.1), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a ChangePasswordFault [**fault subcode**](#gt_soap-fault-subcode). The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the OldPassword element not matching the current password for the [**principal**](#gt_principal) identified by the PartitionDN/AccountDN elements, or a request with the NewPassword element that does not meet the password policy ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.1), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a ChangePasswordFault [**fault subcode**](#gt_soap-fault-subcode). The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2368,7 +2368,7 @@ If the client sends a request with the OldPassword element not matching the curr
 <a id="Section_3.3.4.1.8.5"></a>
 ###### 3.3.4.1.8.5 Bad Naming Context Error
 
-If the client sends a request with the PartitionDN element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.3.1) [**fault subcode**](#gt_soap-fault-subcode). The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the PartitionDN element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.2.1) [**fault subcode**](#gt_soap-fault-subcode). The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2384,7 +2384,7 @@ If the client sends a request with the PartitionDN element specifying a [**nonex
 If the server is unable to complete the request because the following is true:
 
 - Implementation-specific errors were encountered while processing the request.
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.3.1) fault subcode. The fault detail SHOULD<18> be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangePasswordFault](#Section_3.3.4.1.2.1) fault subcode. The fault detail SHOULD<18> be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2465,11 +2465,11 @@ message=
 
 The GetADGroupMember custom action retrieves the members of the [**group**](#gt_group) (Local/Global/Universal and Security/Distribution) that is specified by [GetADGroupMemberRequest/GroupDN](#Section_3.3.4.2.2.3) (section 3.3.4.2.2.3) in the [**NC**](#gt_naming-context-nc) specified in [GetADGroupMemberRequest/PartitionDN](#Section_3.3.4.2.2.4) (section 3.3.4.2.2.4).
 
-Members that are returned are [**security principals**](#gt_security-principal) (see [MS-AUTHSOD](#Section_1.3) section 1.1.1.1 and [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.1.5) that meet one of the following criteria:
+Members that are returned are [**security principals**](#gt_security-principal) (see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.1 and [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.1.5) that meet one of the following criteria:
 
 - Security principals identified by the **group!member** attribute of the group.
 - Security principals whose membership is determined via the [**primary group**](#gt_primary-group) (the **user!primaryGroupID** attribute).
-- Foreign security principals (members with the value of user!objectSID, computer!objectSID, or group!objectSID equal to the value of foreignSecurityPrincipal!objectSID of the corresponding foreignSecurityPrincipal object), when the foreignSecurityPrincipal object is a member of a qualifying group. See [MS-SAMR](#Section_5) section 3.1.1.8.9.
+- Foreign security principals (members with the value of user!objectSID, computer!objectSID, or group!objectSID equal to the value of foreignSecurityPrincipal!objectSID of the corresponding foreignSecurityPrincipal object), when the foreignSecurityPrincipal object is a member of a qualifying group. See [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.8.9.
 If the group contains other members that are not security principals, they are ignored.
 
 If the group contains other groups and element [GetADGroupMemberRequest/Recursive](#Section_3.3.4.2.2.5) (section 3.3.4.2.2.5) is set to TRUE, then GetADGroupMember retrieves members of the child groups as well (recursively). The child groups themselves are not included in the returned members.
@@ -2494,7 +2494,7 @@ The following table summarizes the set of [**WSDL message**](#gt_wsdl-message) d
 <a id="Section_3.3.4.2.1.1"></a>
 ###### 3.3.4.2.1.1 AccountManagement_GetADGroupMember_GetADGroupMemberFault_FaultMessage
 
-The AccountManagement_GetADGroupMember_GetADGroupMemberFault_FaultMessage message contains a [GetADGroupMemberFault](#Section_3.3.4.2.3.2) element.
+The AccountManagement_GetADGroupMember_GetADGroupMemberFault_FaultMessage message contains a [GetADGroupMemberFault](#Section_3.3.4.2.2.1) element.
 
 <wsdl:message name=
 
@@ -2517,12 +2517,12 @@ The GetADGroupMemberRequest message is sent by the client to the server to speci
 
 </wsdl:message>
 
-**parameters:** A [GetADGroupMemberRequest](#Section_3.3.4.2.2.2) element, as specified in section 3.3.4.2.2.2.
+**parameters:** A [GetADGroupMemberRequest](#Section_3.3.4.2.1.2) element, as specified in section 3.3.4.2.2.2.
 
 <a id="Section_3.3.4.2.1.3"></a>
 ###### 3.3.4.2.1.3 GetADGroupMemberResponse
 
-The GetADGroupMemberResponse message is returned in response to a successful [GetADGroupMember](#Section_3.3.4.2) operation, and contains a [GetADGroupMemberResponse](#Section_3.3.4.2.2.6) element with the server response to the GetADGroupMember message. The body of the response is a [GetADGroupMemberResponse/Members](#Section_3.3.4.2.2.7) element containing an array of ActiveDirectoryPrincipal elements (section [2.2.4.2](#Section_2.2.3.2)), with the child elements filled in.
+The GetADGroupMemberResponse message is returned in response to a successful [GetADGroupMember](#Section_3.3.4.2) operation, and contains a [GetADGroupMemberResponse](#Section_3.3.4.2.2.6) element with the server response to the GetADGroupMember message. The body of the response is a [GetADGroupMemberResponse/Members](#Section_3.3.4.2.2.7) element containing an array of ActiveDirectoryPrincipal elements (section [2.2.4.2](#Section_2.2.4.2)), with the child elements filled in.
 
 <wsdl:message name="GetADGroupMemberResponse">
 
@@ -2584,14 +2584,14 @@ minOccurs="0" name="Recursive" type="xs:boolean" />
 <a id="Section_3.3.4.2.2.3"></a>
 ###### 3.3.4.2.2.3 GetADGroupMemberRequest/GroupDN
 
-The GroupDN element contains the [**DN**](#gt_distinguished-name-dn) of the [**directory object**](#gt_directory-object) that represents the [**group**](#gt_group) ([MS-AUTHSOD](#Section_1.3) section 1.1.1.4) whose membership should be returned.
+The GroupDN element contains the [**DN**](#gt_distinguished-name-dn) of the [**directory object**](#gt_directory-object) that represents the [**group**](#gt_group) ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.4) whose membership should be returned.
 
 <xs:element minOccurs="0" name="GroupDN" nillable="true" type="xs:string" />
 
 <a id="Section_3.3.4.2.2.4"></a>
 ###### 3.3.4.2.2.4 GetADGroupMemberRequest/PartitionDN
 
-The PartitionDN element contains the [**DN**](#gt_distinguished-name-dn) of the [**NC**](#gt_naming-context-nc) containing the [**group object**](#gt_group-object) ([MS-AUTHSOD](#Section_1.3) section 1.1.1.4) as specified in [GetADGroupMemberRequest/GroupDN (section 3.3.4.2.2.3)](#Section_3.3.4.2.2.3).
+The PartitionDN element contains the [**DN**](#gt_distinguished-name-dn) of the [**NC**](#gt_naming-context-nc) containing the [**group object**](#gt_group-object) ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.4) as specified in [GetADGroupMemberRequest/GroupDN (section 3.3.4.2.2.3)](#Section_3.3.4.2.2.3).
 
 <xs:element minOccurs="0" name="PartitionDN" nillable="true" type="xs:string" />
 
@@ -2609,7 +2609,7 @@ If the GetADGroupMemberRequest/Recursive element is not specified, the server MU
 <a id="Section_3.3.4.2.2.6"></a>
 ###### 3.3.4.2.2.6 GetADGroupMemberResponse
 
-The GetADGroupMemberResponse contains the response to a [GetADGroupMemberRequest](#Section_3.3.4.2.2.2). It contains one child element, GetADGroupMemberResponse/Members (section [3.3.4.2.2.7](#Section_3.3.4.2.2.7)), representing an array of ActiveDirectoryPrincipal elements (section [2.2.3.2](#Section_2.2.3.2)), each representing the members of the [**group**](#gt_group) specified in [GetADGroupMemberRequest/GroupDN](#Section_3.3.4.2.2.3).
+The GetADGroupMemberResponse contains the response to a [GetADGroupMemberRequest](#Section_3.3.4.2.1.2). It contains one child element, GetADGroupMemberResponse/Members (section [3.3.4.2.2.7](#Section_3.3.4.2.2.7)), representing an array of ActiveDirectoryPrincipal elements (section [2.2.3.2](#Section_2.2.3.2)), each representing the members of the [**group**](#gt_group) specified in [GetADGroupMemberRequest/GroupDN](#Section_3.3.4.2.2.3).
 
 The Members element MUST NOT be null.
 
@@ -2657,7 +2657,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.3.4.2.3.1"></a>
 ###### 3.3.4.2.3.1 ArrayOfActiveDirectoryPrincipal
 
-The ArrayOfActiveDirectoryPrincipal complex type defines an array of ActiveDirectoryPrincipal elements. See section [2.2.4.2](#Section_2.2.3.2) for detail on the ActiveDirectoryPrincipal complex type.
+The ArrayOfActiveDirectoryPrincipal complex type defines an array of ActiveDirectoryPrincipal elements. See section [2.2.4.2](#Section_2.2.4.2) for detail on the ActiveDirectoryPrincipal complex type.
 
 <xs:complexType name="ArrayOfActiveDirectoryPrincipal">
 
@@ -2676,7 +2676,7 @@ nillable="true" type="ca:ActiveDirectoryPrincipal" />
 <a id="Section_3.3.4.2.3.2"></a>
 ###### 3.3.4.2.3.2 GetADGroupMemberFault
 
-The GetADGroupMemberFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADGroupMember](#Section_3.3.4.2) request.
+The GetADGroupMemberFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADGroupMember](#Section_3.3.4.2) request.
 
 <xs:complexType name="GetADGroupMemberFault">
 
@@ -2758,7 +2758,7 @@ If the client sends a request where any of the following is true:
 Or if, during the processing of the request by the server, the following is true:
 
 - The server fails to populate the DistinguishedName or the ObjectGuid elements of ActiveDirectoryObject according to the processing rules documented in section [3.1.4.2.2](#Section_3.1.4.2.2).
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.3.2) fault subcode. The fault detail SHOULD be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2771,7 +2771,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGrou
 <a id="Section_3.3.4.2.8.2"></a>
 ###### 3.3.4.2.8.2 Bad Principal Error
 
-If the client sends a request with the PartitionDN/GroupDN elements specifying a [**nonexistent principal**](#gt_nonexistent-principal) or a [**non-group principal**](#gt_non-group-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.3.2) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the PartitionDN/GroupDN elements specifying a [**nonexistent principal**](#gt_nonexistent-principal) or a [**non-group principal**](#gt_non-group-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2784,7 +2784,7 @@ If the client sends a request with the PartitionDN/GroupDN elements specifying a
 <a id="Section_3.3.4.2.8.3"></a>
 ###### 3.3.4.2.8.3 Multiple Matching Principals Error
 
-If the client sends a request with a GroupDN element that matches more than one [**security principal**](#gt_security-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.3.2) fault subcode. The fault detail SHOULD be as specified in the following table.<19>
+If the client sends a request with a GroupDN element that matches more than one [**security principal**](#gt_security-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.<19>
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2797,7 +2797,7 @@ If the client sends a request with a GroupDN element that matches more than one 
 <a id="Section_3.3.4.2.8.4"></a>
 ###### 3.3.4.2.8.4 Bad Naming Context Error
 
-If the client sends a request with the PartitionDN element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.3.2) [**fault subcode**](#gt_soap-fault-subcode). The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the PartitionDN element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.2.1) [**fault subcode**](#gt_soap-fault-subcode). The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2810,7 +2810,7 @@ If the client sends a request with the PartitionDN element specifying a [**nonex
 <a id="Section_3.3.4.2.8.5"></a>
 ###### 3.3.4.2.8.5 Directory Error
 
-If any of the following conditions are true, the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.3.2) fault subcode:
+If any of the following conditions are true, the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADGroupMemberFault](#Section_3.3.4.2.2.1) fault subcode:
 
 - The client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request.
 - During the processing of the request, the server fails to populate the ReferenceServer element of the ActiveDirectoryObject according to the processing rules documented in section [3.1.4.2.2](#Section_3.1.4.2.2).
@@ -2893,15 +2893,15 @@ message=
 
 </wsdl:operation>
 
-The GetADPrincipalAuthorizationGroup custom action retrieves information for all [**security-enabled groups**](#gt_security-enabled-group) that contain, as a member, the [**authenticable principal**](#gt_authenticable-principal) specified in [GetADPrincipalAuthorizationGroupRequest/PrincipalDN (section 3.3.4.3.2.4)](#Section_3.3.4.3.2.4) in the [**NC**](#gt_naming-context-nc) specified in [GetADPrincipalAuthorizationGroupRequest/PartitionDN (section 3.3.4.3.2.3)](#Section_3.3.4.3.2.2).
+The GetADPrincipalAuthorizationGroup custom action retrieves information for all [**security-enabled groups**](#gt_security-enabled-group) that contain, as a member, the [**authenticable principal**](#gt_authenticable-principal) specified in [GetADPrincipalAuthorizationGroupRequest/PrincipalDN (section 3.3.4.3.2.4)](#Section_3.3.4.3.2.4) in the [**NC**](#gt_naming-context-nc) specified in [GetADPrincipalAuthorizationGroupRequest/PartitionDN (section 3.3.4.3.2.3)](#Section_3.3.4.3.2.3).
 
-For each security-enabled group in which the specified authenticable principal is a member, the GetADPrincipalAuthorizationGroup operation constructs an [ActiveDirectoryGroup](#Section_2.2.3.3) object (section 2.2.3.3) with all the elements populated and adds it to the GetADPrincipalAuthorizationGroupResponse/MemberOf (section [3.3.4.3.2.6](#Section_3.3.4.3.2.6)) element. Upon success, the [GetADPrincipalAuthorizationGroupResponse](#Section_3.3.4.3.2.5) element is returned. If an authenticable principal is not a member of any security-enabled groups, then the server returns a GetADPrincipalAuthorizationGroupResponse with an empty MemberOf element.
+For each security-enabled group in which the specified authenticable principal is a member, the GetADPrincipalAuthorizationGroup operation constructs an [ActiveDirectoryGroup](#Section_2.2.3.3) object (section 2.2.3.3) with all the elements populated and adds it to the GetADPrincipalAuthorizationGroupResponse/MemberOf (section [3.3.4.3.2.6](#Section_3.3.4.3.2.6)) element. Upon success, the [GetADPrincipalAuthorizationGroupResponse](#Section_3.3.4.3.1.3) element is returned. If an authenticable principal is not a member of any security-enabled groups, then the server returns a GetADPrincipalAuthorizationGroupResponse with an empty MemberOf element.
 
 [**Groups**](#gt_group) are returned without respect to the context supplied in GetADPrincipalAuthorizationGroupRequest/PartitionDN (section 3.3.4.3.2.3).
 
 **Note** Returned groups include the [**primary group**](#gt_primary-group) of the authenticable principal specified in GetADPrincipalAuthorizationGroupRequest/PrincipalDN.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.3.4.3.8](#Section_3.3.4.3.8.5).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.3.4.3.8](#Section_3.3.4.3.8).
 
 <a id="Section_3.3.4.3.1"></a>
 ##### 3.3.4.3.1 Messages
@@ -2917,7 +2917,7 @@ The following table summarizes the set of [**WSDL message**](#gt_wsdl-message) d
 <a id="Section_3.3.4.3.1.1"></a>
 ###### 3.3.4.3.1.1 AccountManagement_GetADPrincipalAuthorizationGroup_GetADPrincipalAuthorizationGroupFault_FaultMessage
 
-The AccountManagement_GetADPrincipalAuthorizationGroup_GetADPrincipalAuthorizationGroupFault_FaultMessage message contains a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.3.1) element.
+The AccountManagement_GetADPrincipalAuthorizationGroup_GetADPrincipalAuthorizationGroupFault_FaultMessage message contains a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.2.1) element.
 
 <wsdl:message name=
 
@@ -2940,12 +2940,12 @@ The GetADPrincipalAuthorizationGroupRequest message is sent by the client to the
 
 </wsdl:message>
 
-**parameters:** A [GetADPrincipalAuthorizationGroupRequest](#Section_3.3.4.3.2.2) element, as specified in section 3.3.4.3.2.2.
+**parameters:** A [GetADPrincipalAuthorizationGroupRequest](#Section_3.3.4.3.1.2) element, as specified in section 3.3.4.3.2.2.
 
 <a id="Section_3.3.4.3.1.3"></a>
 ###### 3.3.4.3.1.3 GetADPrincipalAuthorizationGroupResponse
 
-The GetADPrincipalAuthorizationGroupResponse message contains a [GetADPrincipalAuthorizationGroupResponse](#Section_3.3.4.3.2.5) element with the server response to the GetADPrincipalAuthorizationGroup message.
+The GetADPrincipalAuthorizationGroupResponse message contains a [GetADPrincipalAuthorizationGroupResponse](#Section_3.3.4.3.1.3) element with the server response to the GetADPrincipalAuthorizationGroup message.
 
 <wsdl:message name="GetADPrincipalAuthorizationGroupResponse">
 
@@ -3027,7 +3027,7 @@ The PrincipalDN element refers to a directory object that is an authenticable pr
 <a id="Section_3.3.4.3.2.5"></a>
 ###### 3.3.4.3.2.5 GetADPrincipalAuthorizationGroupResponse
 
-The GetADPrincipalAuthorizationGroupResponse element contains the response to a [GetADPrincipalAuthorizationGroupRequest](#Section_3.3.4.3.2.2). It contains one child element, GetADPrincipalAuthorizationGroupResponse/MemberOf (section [3.3.4.3.2.6](#Section_3.3.4.3.2.6)) that represents an array of ActiveDirectoryGroup elements (section [2.2.3.3](#Section_2.2.3.3)), each representing a [**group**](#gt_group) that contains the [**authenticable principal**](#gt_authenticable-principal) specified in [GetADAuthorizationGroupRequest/PrincipalDN](#Section_3.3.4.3.2.4). The complex type [ArrayOfActiveDirectoryGroup (section 2.2.4.4)](#Section_2.2.3.3) describes the array of ActiveDirectoryGroup elements returned in GetADPrincipalAuthorizationGroupResponse/MemberOf.
+The GetADPrincipalAuthorizationGroupResponse element contains the response to a [GetADPrincipalAuthorizationGroupRequest](#Section_3.3.4.3.1.2). It contains one child element, GetADPrincipalAuthorizationGroupResponse/MemberOf (section [3.3.4.3.2.6](#Section_3.3.4.3.2.6)) that represents an array of ActiveDirectoryGroup elements (section [2.2.3.3](#Section_2.2.3.3)), each representing a [**group**](#gt_group) that contains the [**authenticable principal**](#gt_authenticable-principal) specified in [GetADAuthorizationGroupRequest/PrincipalDN](#Section_3.3.4.3.2.4). The complex type [ArrayOfActiveDirectoryGroup (section 2.2.4.4)](#Section_2.2.4.4) describes the array of ActiveDirectoryGroup elements returned in GetADPrincipalAuthorizationGroupResponse/MemberOf.
 
 <xs:element name="GetADPrincipalAuthorizationGroupResponse">
 
@@ -3072,7 +3072,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.3.4.3.3.1"></a>
 ###### 3.3.4.3.3.1 GetADPrincipalAuthorizationGroupFault
 
-The GetADPrincipalAuthorizationGroupFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADPrincipalAuthorizationGroup](#Section_3.3.4.3) request.
+The GetADPrincipalAuthorizationGroupFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADPrincipalAuthorizationGroup](#Section_3.3.4.3) request.
 
 <xs:complexType name="GetADPrincipalAuthorizationGroupFault">
 
@@ -3154,7 +3154,7 @@ If the client sends a request where any of the following is true:
 Or if, during the processing of the request by the server, the following is true:
 
 - The server fails to populate the DistinguishedName element of ActiveDirectoryObject according to the processing rules documented in section [3.1.4.2.2](#Section_3.1.4.2.2) .
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -3167,7 +3167,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrin
 <a id="Section_3.3.4.3.8.2"></a>
 ###### 3.3.4.3.8.2 Bad Principal Error
 
-If the client sends a request with the PartitionDN/PrincipalDN elements specifying a [**nonexistent principal**](#gt_nonexistent-principal) or a [**non-authenticable principal**](#gt_non-authenticable-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the PartitionDN/PrincipalDN elements specifying a [**nonexistent principal**](#gt_nonexistent-principal) or a [**non-authenticable principal**](#gt_non-authenticable-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -3180,7 +3180,7 @@ If the client sends a request with the PartitionDN/PrincipalDN elements specifyi
 <a id="Section_3.3.4.3.8.3"></a>
 ###### 3.3.4.3.8.3 Multiple Matching Principals Error
 
-If the client sends a request with a PrincipalDN element that matches more than one [**security principal**](#gt_security-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.<20>
+If the client sends a request with a PrincipalDN element that matches more than one [**security principal**](#gt_security-principal), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.<20>
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -3193,7 +3193,7 @@ If the client sends a request with a PrincipalDN element that matches more than 
 <a id="Section_3.3.4.3.8.4"></a>
 ###### 3.3.4.3.8.4 Bad Naming Context Error
 
-If the client sends a request with the PartitionDN element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the PartitionDN element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -3210,7 +3210,7 @@ If any of the following conditions are true:
 
 - The client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request.
 - During the processing of the request, the server fails to populate any one of the ObjectClass, ObjectTypes, or the ReferenceServer elements of ActiveDirectoryObject according to the processing rules documented in section [3.1.4.2.2](#Section_3.1.4.2.2).
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.3.1) fault subcode. The fault detail SHOULD<21> be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADPrincipalAuthorizationGroupFault](#Section_3.3.4.3.2.1) fault subcode. The fault detail SHOULD<21> be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -3291,7 +3291,7 @@ message=
 
 The GetADPrincipalGroupMembership custom action retrieves a set of [**groups**](#gt_group) associated with the [**principal**](#gt_principal) specified by the GetADPrincipalGroupMembershipRequest/PrincipalDN element (section [3.3.4.4.2.4](#Section_3.3.4.4.2.4)).
 
-The elements [GetADPrincipalGroupMembershipRequest/ResourceContextServer (section 3.3.4.4.2.6)](#Section_3.3.4.4.2.2) and [GetADPrincipalGroupMembershipRequest/ResourceContextPartition (section 3.3.4.4.2.5)](#Section_3.3.4.4.2.5) are optional. If specified, they are specified together. That is, if one is non-null then the other is also non-null; otherwise, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for this particular condition as specified in section [3.3.4.4.8](#Section_3.3.4.4.8.1).
+The elements [GetADPrincipalGroupMembershipRequest/ResourceContextServer (section 3.3.4.4.2.6)](#Section_3.3.4.4.2.6) and [GetADPrincipalGroupMembershipRequest/ResourceContextPartition (section 3.3.4.4.2.5)](#Section_3.3.4.4.2.5) are optional. If specified, they are specified together. That is, if one is non-null then the other is also non-null; otherwise, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for this particular condition as specified in section [3.3.4.4.8](#Section_3.3.4.4.8).
 
 Depending on the parameters of GetADPrincipalGroupMembershipRequest, the group membership of the principal specified by GetADPrincipalGroupMembershipRequest/PrincipalDN is retrieved according to the following rules:
 
@@ -3351,7 +3351,7 @@ The GetADPrincipalGroupMembershipRequest message is sent by the client to the se
 
 </wsdl:message>
 
-**parameters:** A [GetADPrincipalGroupMembershipRequest](#Section_3.3.4.4.2.2) element, as specified in section 3.3.4.4.2.2.
+**parameters:** A [GetADPrincipalGroupMembershipRequest](#Section_3.3.4.4.1.2) element, as specified in section 3.3.4.4.2.2.
 
 <a id="Section_3.3.4.4.1.3"></a>
 ###### 3.3.4.4.1.3 GetADPrincipalGroupMembershipResponse
@@ -3458,7 +3458,7 @@ If non-null, the ResourceContextServer element contains the [**FQDN (1)**](#gt_1
 <a id="Section_3.3.4.4.2.7"></a>
 ###### 3.3.4.4.2.7 GetADPrincipalGroupMembershipResponse
 
-The GetADPrincipalGroupMembershipResponse element contains the response to a [GetADPrincipalGroupMembershipRequest](#Section_3.3.4.4.2.2). It contains one child element, GetADPrincipalGroupMembershipResponse/MemberOf (section [3.3.4.4.2.8](#Section_3.3.4.4.2.8)) that represents an array of ActiveDirectoryGroup elements (section [2.2.3.3](#Section_2.2.3.3)), each representing a [**group**](#gt_group) that contains the [**principal**](#gt_principal) specified in [GetADPrincipalGroupMembershipRequest/PrincipalDN](#Section_3.3.4.4.2.4). The complex type [ArrayOfActiveDirectoryGroup (section 2.2.4.4)](#Section_2.2.3.3) describes the array of ActiveDirectoryGroup elements returned in GetADPrincipalGroupMembershipResponse/MemberOf.
+The GetADPrincipalGroupMembershipResponse element contains the response to a [GetADPrincipalGroupMembershipRequest](#Section_3.3.4.4.1.2). It contains one child element, GetADPrincipalGroupMembershipResponse/MemberOf (section [3.3.4.4.2.8](#Section_3.3.4.4.2.8)) that represents an array of ActiveDirectoryGroup elements (section [2.2.3.3](#Section_2.2.3.3)), each representing a [**group**](#gt_group) that contains the [**principal**](#gt_principal) specified in [GetADPrincipalGroupMembershipRequest/PrincipalDN](#Section_3.3.4.4.2.4). The complex type [ArrayOfActiveDirectoryGroup (section 2.2.4.4)](#Section_2.2.4.4) describes the array of ActiveDirectoryGroup elements returned in GetADPrincipalGroupMembershipResponse/MemberOf.
 
 <xs:element name="GetADPrincipalGroupMembershipResponse">
 
@@ -3507,7 +3507,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.3.4.4.3.1"></a>
 ###### 3.3.4.4.3.1 GetADPrincipalGroupMembershipFault
 
-The GetADPrincipalGroupMembershipFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADPrincipalGroupMembership](#Section_3.3.4.4) request.
+The GetADPrincipalGroupMembershipFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADPrincipalGroupMembership](#Section_3.3.4.4) request.
 
 <xs:complexType name="GetADPrincipalGroupMembershipFault">
 
@@ -3758,9 +3758,9 @@ message=
 
 Upon receiving the SetPassword request, the server sets the password on the [**principal**](#gt_principal) contained in the SetPasswordRequest/AccountDN element (section [3.3.4.5.2.3](#Section_3.3.4.5.2.3)), specified by the [**NC**](#gt_naming-context-nc) contained in the SetPasswordRequest/PartitionDN element (section [3.3.4.5.2.5](#Section_3.3.4.5.2.5)). The new password is contained in the SetPasswordRequest/NewPassword element (section [3.3.4.5.2.4](#Section_3.3.4.5.2.4)). Upon success, the server MUST return a [SetPasswordResponse](#Section_3.3.4.5.1.3) message (section 3.3.4.5.1.3) with an empty [SetPasswordResponse](#Section_3.3.4.5.1.3) element (section 3.3.4.5.2.6).
 
-In the case of [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the SetPassword custom action sets the value of the user!userPassword or the **inetOrgPerson!userPassword** attribute of the given [**security principal**](#gt_security-principal). In the case of [**AD DS**](#gt_active-directory-domain-services-ad-ds), either the user!unicodePwd or the **inetOrgPerson!unicodePwd** attribute is set. See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.1.5 and [MS-SAMR](#Section_5) section 3.1.1.7.2 for additional processing considerations.
+In the case of [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the SetPassword custom action sets the value of the user!userPassword or the **inetOrgPerson!userPassword** attribute of the given [**security principal**](#gt_security-principal). In the case of [**AD DS**](#gt_active-directory-domain-services-ad-ds), either the user!unicodePwd or the **inetOrgPerson!unicodePwd** attribute is set. See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.1.5 and [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.2 for additional processing considerations.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.3.4.5.8](#Section_3.3.4.5.8.1).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.3.4.5.8](#Section_3.3.4.5.8).
 
 <a id="Section_3.3.4.5.1"></a>
 ##### 3.3.4.5.1 Messages
@@ -3915,7 +3915,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.3.4.5.3.1"></a>
 ###### 3.3.4.5.3.1 SetPasswordFault
 
-The SetPasswordFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [SetPassword](#Section_3.3.4.5) request.
+The SetPasswordFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [SetPassword](#Section_3.3.4.5) request.
 
 <xs:complexType name="SetPasswordFault">
 
@@ -4047,7 +4047,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [SetPasswo
 <a id="Section_3.3.4.5.8.4"></a>
 ###### 3.3.4.5.8.4 Bad Password Error
 
-If the client sends a request with the NewPassword element that does not meet the password policy ([MS-SAMR](#Section_5) section 3.1.1.7.1), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a SetPasswordFault [**fault subcode**](#gt_soap-fault-subcode).
+If the client sends a request with the NewPassword element that does not meet the password policy ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.1), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a SetPasswordFault [**fault subcode**](#gt_soap-fault-subcode).
 
 For [**AD DS**](#gt_active-directory-domain-services-ad-ds), the fault detail SHOULD be as specified in the following table.
 
@@ -4167,7 +4167,7 @@ message=
 
 </wsdl:operation>
 
-For every string element found in the [TranslateNameRequest/Names](#Section_3.3.4.6.2.5) (section 3.3.4.6.2.5) element array, TranslateName constructs an ActiveDirectoryNameTranslateResult element (section [3.3.4.6.3.1](#Section_3.3.4.6.3.1)) with all child elements populated, and adds it to the TranslateNameResponse/NameTranslateResult element (section [3.3.4.6.2.7](#Section_3.3.4.6.2.7)). Upon success, the [TranslateNameResponse (section 3.3.4.6.2.6)](#Section_3.3.4.6) element is returned.
+For every string element found in the [TranslateNameRequest/Names](#Section_3.3.4.6.2.5) (section 3.3.4.6.2.5) element array, TranslateName constructs an ActiveDirectoryNameTranslateResult element (section [3.3.4.6.3.1](#Section_3.3.4.6.3.1)) with all child elements populated, and adds it to the TranslateNameResponse/NameTranslateResult element (section [3.3.4.6.2.7](#Section_3.3.4.6.2.7)). Upon success, the [TranslateNameResponse (section 3.3.4.6.2.6)](#Section_3.3.4.6.2.6) element is returned.
 
 The number and order of ActiveDirectoryNameTranslateResult elements in the TranslateNameResponse/NameTranslateResult array MUST match the number and order of TranslateNameRequest/Names array elements specified in the request.
 
@@ -4191,7 +4191,7 @@ The following table summarizes the set of [**WSDL message**](#gt_wsdl-message) d
 <a id="Section_3.3.4.6.1.1"></a>
 ###### 3.3.4.6.1.1 AccountManagement_TranslateName_TranslateNameFault_FaultMessage
 
-The AccountManagement_TranslateName_TranslateNameFault_FaultMessage message contains a [TranslateNameFault](#Section_3.3.4.6.3.3) element.
+The AccountManagement_TranslateName_TranslateNameFault_FaultMessage message contains a [TranslateNameFault](#Section_3.3.4.6.2.1) element.
 
 <wsdl:message name=
 
@@ -4219,7 +4219,7 @@ The TranslateNameRequest message is sent by the client to the server to convert 
 <a id="Section_3.3.4.6.1.3"></a>
 ###### 3.3.4.6.1.3 TranslateNameResponse
 
-The TranslateNameResponse message contains a [TranslateNameResponse](#Section_3.3.4.6) element with the server response to the TranslateName message.
+The TranslateNameResponse message contains a [TranslateNameResponse](#Section_3.3.4.6.1.3) element with the server response to the TranslateName message.
 
 <wsdl:message name="TranslateNameResponse">
 
@@ -4289,13 +4289,13 @@ nillable="true" type="sera:ArrayOfstring" />
 <a id="Section_3.3.4.6.2.3"></a>
 ###### 3.3.4.6.2.3 TranslateNameRequest/FormatDesired
 
-The FormatDesired element contains either DistinguishedName or CanonicalName, per the [ActiveDirectoryNameFormat](#Section_3.3.4.6.4.1) simple type defined in section 3.3.4.6.4.1, indicating the format of the desired resultant [TranslateNameResponse/NameTranslateResult/ActiveDirectoryNameTranslateResult/Name](#Section_3.3.4.6.3.1) elements array.
+The FormatDesired element contains either DistinguishedName or CanonicalName, per the [ActiveDirectoryNameFormat](#Section_3.3.4.6.4.1) simple type defined in section 3.3.4.6.4.1, indicating the format of the desired resultant [TranslateNameResponse/NameTranslateResult/ActiveDirectoryNameTranslateResult/Name](#Section_3.3.4.6.2.7) elements array.
 
 Note that there MUST be one, and only one, FormatDesired element. Each string element in the [TranslateNamesRequest/Names](#Section_3.3.4.6.1.2) array element is converted to that specified type.
 
 <xs:element minOccurs="0" name="FormatDesired" type="ca:ActiveDirectoryNameFormat" />
 
-The FormatDesired element is either DS_FQDN_1779_Name or DS_CANONICAL_NAME, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.4.1.3. See also section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1).
+The FormatDesired element is either DS_FQDN_1779_Name or DS_CANONICAL_NAME, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.4.1.3. See also section [3.3.4.6.3.1.1](../MS-DRSR/MS-DRSR.md).
 
 <a id="Section_3.3.4.6.2.4"></a>
 ###### 3.3.4.6.2.4 TranslateNameRequest/FormatOffered
@@ -4306,7 +4306,7 @@ Note that there MUST be one, and only one, FormatOffered element. All string ele
 
 <xs:element minOccurs="0" name="FormatOffered" type="ca:ActiveDirectoryNameFormat" />
 
-The FormatOffered element is either DS_FQDN_1779_Name or DS_CANONICAL_NAME, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.4.1.3. See also section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1).
+The FormatOffered element is either DS_FQDN_1779_Name or DS_CANONICAL_NAME, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.4.1.3. See also section [3.3.4.6.3.1.1](../MS-DRSR/MS-DRSR.md).
 
 <a id="Section_3.3.4.6.2.5"></a>
 ###### 3.3.4.6.2.5 TranslateNameRequest/Names
@@ -4315,7 +4315,7 @@ The Names element contains the array of string elements representing names to tr
 
 <xs:element minOccurs="0" name="Names" nillable="true" type="sera:ArrayOfstring" />
 
-The string elements that are contained by the Names array are formatted as either DS_FQDN_1779_Name or DS_CANONICAL_NAME, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.4.1.3. See also section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1).
+The string elements that are contained by the Names array are formatted as either DS_FQDN_1779_Name or DS_CANONICAL_NAME, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.4.1.3. See also section [3.3.4.6.3.1.1](../MS-DRSR/MS-DRSR.md).
 
 <a id="Section_3.3.4.6.2.6"></a>
 ###### 3.3.4.6.2.6 TranslateNameResponse
@@ -4371,7 +4371,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.3.4.6.3.1"></a>
 ###### 3.3.4.6.3.1 ActiveDirectoryNameTranslateResult
 
-The ActiveDirectoryNameTranslateResult complex type defines an element containing a Result (section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1)) element and a Name (section [3.3.4.6.3.1.2](#Section_3.3.4.6.3.1)) element.
+The ActiveDirectoryNameTranslateResult complex type defines an element containing a Result (section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1.1)) element and a Name (section [3.3.4.6.3.1.2](#Section_3.3.4.6.3.1.2)) element.
 
 <xs:complexType name="ActiveDirectoryNameTranslateResult">
 
@@ -4440,7 +4440,7 @@ type="ca:ActiveDirectoryNameTranslateResult" />
 <a id="Section_3.3.4.6.3.2.1"></a>
 ArrayOfActiveDirectoryNameTranslateResult/ActiveDirectoryNameTranslateResult
 
-The ActiveDirectoryNameTranslateResult element contains the results of one name translation. It contains two child elements, Result (section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1)) and Name (section [3.3.4.6.3.1.2](#Section_3.3.4.6.3.1)).
+The ActiveDirectoryNameTranslateResult element contains the results of one name translation. It contains two child elements, Result (section [3.3.4.6.3.1.1](#Section_3.3.4.6.3.1.1)) and Name (section [3.3.4.6.3.1.2](#Section_3.3.4.6.3.1.2)).
 
 <xs:element
 
@@ -4453,7 +4453,7 @@ type="ca:ActiveDirectoryNameTranslateResult" />
 <a id="Section_3.3.4.6.3.3"></a>
 ###### 3.3.4.6.3.3 TranslateNameFault
 
-The TranslateNameFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [TranslateName](#Section_3.3.4.6) request.
+The TranslateNameFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [TranslateName](#Section_3.3.4.6) request.
 
 <xs:complexType name="TranslateNameFault">
 
@@ -4592,7 +4592,7 @@ If the client sends a request where any of the following is true:
 - The request contains a Names element containing a null string element.
 - The request contains a null or not present FormatDesired element.
 - The request contains a null or not present FormatOffered element.
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [TranslateNameFault](#Section_3.3.4.6.3.3) fault subcode. The fault detail SHOULD be as specified in the following table.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [TranslateNameFault](#Section_3.3.4.6.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -4605,7 +4605,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [Translate
 <a id="Section_3.3.4.6.8.2"></a>
 ###### 3.3.4.6.8.2 Directory Error
 
-If the client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request, then the server MUST return [**SOAP fault**](#gt_soap-fault) with a [TranslateNameFault](#Section_3.3.4.6.3.3) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request, then the server MUST return [**SOAP fault**](#gt_soap-fault) with a [TranslateNameFault](#Section_3.3.4.6.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -4641,7 +4641,7 @@ None.
 <a id="Section_3.4"></a>
 ## 3.4 TopologyManagement Server Details
 
-This section describes the server behaviors of the Active Directory Web Services: Custom Action Protocol as they apply to the protocol's [TopologyManagement](#Section_3.3.4.4.1.1) port type. In the Active Directory Web Services: Custom Action Protocol, this port type is used to process six [**WSDL operations**](#gt_wsdl-operation):
+This section describes the server behaviors of the Active Directory Web Services: Custom Action Protocol as they apply to the protocol's [TopologyManagement](#Section_4.1) port type. In the Active Directory Web Services: Custom Action Protocol, this port type is used to process six [**WSDL operations**](#gt_wsdl-operation):
 
 - [ChangeOptionalFeature](#Section_3.4.4.1)
 - [GetADDomain](#Section_3.4.4.2)
@@ -4654,7 +4654,7 @@ This protocol defines a [**SOAP message**](#gt_soap-message) for each of these o
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Abstract Data Model
 
-See the abstract data model in the common processing section [3.1.1](#Section_3.1).
+See the abstract data model in the common processing section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Timers
@@ -4664,7 +4664,7 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-See the initialization in the common processing section [3.1.3](#Section_3.3.3).
+See the initialization in the common processing section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Message Processing Events and Sequencing Rules
@@ -4731,7 +4731,7 @@ For more information on optional features, see [MS-ADTS] section 3.1.1.9.
 
 Upon success, the server MUST return a [ChangeOptionalFeatureResponse](#Section_3.4.4.1.1.2) message (section 3.4.4.1.1.2) with an empty ChangeOptionalFeatureResponse element (section [3.4.4.1.2.6](#Section_3.4.4.1.2.6)).
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.1.8](#Section_3.4.4.1.8.1).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.1.8](#Section_3.4.4.1.8).
 
 <a id="Section_3.4.4.1.1"></a>
 ##### 3.4.4.1.1 Messages
@@ -4892,7 +4892,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.4.4.1.3.1"></a>
 ###### 3.4.4.1.3.1 ChangeOptionalFeatureFault
 
-The ChangeOptionalFeatureFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [ChangeOptionalFeature](#Section_3.4.4.1) request.
+The ChangeOptionalFeatureFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [ChangeOptionalFeature](#Section_3.4.4.1) request.
 
 <xs:complexType name="ChangeOptionalFeatureFault">
 
@@ -4983,7 +4983,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangeOpt
 <a id="Section_3.4.4.1.8.2"></a>
 ###### 3.4.4.1.8.2 Bad DistinguishedName Error
 
-If the client sends a request with the DistinguishedName element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangeOptionalFeatureFault (section 3.4.4.1.3.1)](#Section_3.4.4.1.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the DistinguishedName element specifying a [**nonexistent NC**](#gt_nonexistent-naming-context-nonexistent-nc), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangeOptionalFeatureFault (section 3.4.4.1.3.1)](#Section_3.4.4.1.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -4996,7 +4996,7 @@ If the client sends a request with the DistinguishedName element specifying a [*
 <a id="Section_3.4.4.1.8.3"></a>
 ###### 3.4.4.1.8.3 Bad FeatureId Error
 
-If the client sends a request with the FeatureId element specifying a nonexistent feature, then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangeOptionalFeatureFault (section 3.4.4.1.3.1)](#Section_3.4.4.1.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request with the FeatureId element specifying a nonexistent feature, then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [ChangeOptionalFeatureFault (section 3.4.4.1.3.1)](#Section_3.4.4.1.3.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5086,9 +5086,9 @@ message="ca:TopologyManagement_GetADDomain_GetADDomainFault_FaultMessage" />
 
 </wsdl:operation>
 
-The GetADDomain custom action retrieves information for the [**domain**](#gt_domain) that contains the [**directory service**](#gt_directory-service-ds) specified in the [GetADDomainRequest](#Section_3.4.4.2.1.1) SOAP header [Server](#Section_2.2.3.5) element. If the Server element specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance, the server MUST return a fault as specified in section [3.4.4.2.8.1](#Section_3.4.4.2.8.1). Upon success, the server MUST return a [GetADDomainResponse](#Section_3.4.4.2.2.3) with the [GetADDomainResponse/Domain](#Section_3.4.4.2.2.4) element (including child elements) filled in.
+The GetADDomain custom action retrieves information for the [**domain**](#gt_domain) that contains the [**directory service**](#gt_directory-service-ds) specified in the [GetADDomainRequest](#Section_3.4.4.2.1.1) SOAP header [Server](#Section_2.2.3.5) element. If the Server element specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance, the server MUST return a fault as specified in section [3.4.4.2.8.1](#Section_3.4.4.2.8.1). Upon success, the server MUST return a [GetADDomainResponse](#Section_3.4.4.2.1.2) with the [GetADDomainResponse/Domain](#Section_3.4.4.2.2.4) element (including child elements) filled in.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.2.8](#Section_3.4.4.2.8.2).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.2.8](#Section_3.4.4.2.8).
 
 <a id="Section_3.4.4.2.1"></a>
 ##### 3.4.4.2.1 Messages
@@ -5117,7 +5117,7 @@ The GetADDomainRequest message is sent by the client to the server. It MUST cont
 <a id="Section_3.4.4.2.1.2"></a>
 ###### 3.4.4.2.1.2 GetADDomainResponse
 
-The GetADDomainResponse message is returned in response to a successful [GetADDomain](#Section_3.4.4.2) operation and contains a [GetADDomainResponse](#Section_3.4.4.2.2.3) element, with the server response to the GetADDomainRequest message. The body of the response is a filled-in [GetADDomainResponse/Domain](#Section_3.4.4.2.2.4) element containing information about the [**domain**](#gt_domain).
+The GetADDomainResponse message is returned in response to a successful [GetADDomain](#Section_3.4.4.2) operation and contains a [GetADDomainResponse](#Section_3.4.4.2.1.2) element, with the server response to the GetADDomainRequest message. The body of the response is a filled-in [GetADDomainResponse/Domain](#Section_3.4.4.2.2.4) element containing information about the [**domain**](#gt_domain).
 
 <wsdl:message name="GetADDomainResponse">
 
@@ -5130,7 +5130,7 @@ The GetADDomainResponse message is returned in response to a successful [GetADDo
 <a id="Section_3.4.4.2.1.3"></a>
 ###### 3.4.4.2.1.3 TopologyManagement_GetADDomain_GetADDomainFault_FaultMessage
 
-The TopologyManagement_GetADDomain_GetADDomainFault_FaultMessage message contains a [GetADDomainFault](#Section_3.4.4.2.3.3) element.
+The TopologyManagement_GetADDomain_GetADDomainFault_FaultMessage message contains a [GetADDomainFault](#Section_3.4.4.2.2.1) element.
 
 <wsdl:message name=
 
@@ -5207,7 +5207,7 @@ type="ca:ActiveDirectoryDomain" />
 <a id="Section_3.4.4.2.2.4"></a>
 ###### 3.4.4.2.2.4 GetADDomainResponse/Domain
 
-The Domain element contains the body of the response to the [GetADDomainRequest](#Section_3.4.4.2.1.1) message. It contains the child elements specified in sections [3.4.4.2.3.1.1](#Section_3.4.4.2.3.1) through [3.4.4.2.3.1.18](#Section_3.4.4.2.3.1).
+The Domain element contains the body of the response to the [GetADDomainRequest](#Section_3.4.4.2.1.1) message. It contains the child elements specified in sections [3.4.4.2.3.1.1](#Section_3.4.4.2.3.1.1) through [3.4.4.2.3.1.18](#Section_3.4.4.2.3.1.18).
 
 <xs:element minOccurs="0" name="Domain" nillable="true" type="ca:ActiveDirectoryDomain" />
 
@@ -5487,7 +5487,7 @@ The LastLogonReplicationInterval element is populated from the **domainDNS!msDS-
 <a id="Section_3.4.4.2.3.1.12"></a>
 ActiveDirectoryDomain/ManagedBy
 
-The ManagedBy element contains information on who manages this [**domain**](#gt_domain) if the administrator has specified the value of the **managedBy** attribute on the domainDNS object. See [MS-ADA2](#Section_3.4.4.4.5) section 2.8.
+The ManagedBy element contains information on who manages this [**domain**](#gt_domain) if the administrator has specified the value of the **managedBy** attribute on the domainDNS object. See [MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.8.
 
 <xs:element name="ManagedBy" nillable="true" type="xs:string" />
 
@@ -5793,7 +5793,7 @@ If no nTDSDSA objects satisfy the above requirements, the server returns a null 
 <a id="Section_3.4.4.2.3.3"></a>
 ###### 3.4.4.2.3.3 GetADDomainFault
 
-The GetADDomainFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADDomain](#Section_3.4.4.2) request.
+The GetADDomainFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADDomain](#Section_3.4.4.2) request.
 
 <xs:complexType name=" GetADDomainFault">
 
@@ -5868,10 +5868,10 @@ If the client sends a request where any of the following is true:
 
 - The [**SOAP header**](#gt_soap-header) (section [2.2.3.5](#Section_2.2.3.5)) contains an empty, not present, invalid, null, or unknown Server element (section [3.1.4](#Section_3.1.4)).
 - The SOAP header contains a Server element that specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance.
-- The **domainDNS!wellKnownObjects** attribute on the [**domain NC**](#gt_domain-naming-context-domain-nc) root object is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute). See sections [3.4.4.2.3.1.4](#Section_3.4.4.2.3.1), [3.4.4.2.3.1.5](#Section_3.4.4.2.3.1), [3.4.4.2.3.1.8](#Section_5), [3.4.4.2.3.1.17](#Section_3.4.4.2.3.1), [3.4.4.2.3.1.18](#Section_3.4.4.2.3.1), [3.4.4.2.3.2.1](#Section_3.4.4.2.3.2), [3.4.4.2.3.2.4](#Section_3.4.4.2.3.2), and [3.4.4.2.3.2.10](#Section_3.4.4.2.3.2).
-- No [**crossRef objects**](#gt_crossref-object) satisfy the requirements given in sections [3.4.4.2.3.1.9](#Section_3.4.4.2.3.1), [3.4.4.2.3.1.13](#Section_3.4.4.2.3.1), and [3.4.4.2.3.2.3](#Section_3.4.4.2.3.2) for populating the Forest, NetBIOSName, and DNSRoot elements.
-- If, during the processing of the request, the server fails to populate the ObjectClass or ObjectTypes elements of the ActiveDirectoryPartiton as per the processing rules documented in sections [3.4.4.2.3.2.6](#Section_3.4.4.2.3.2) and [3.4.4.2.3.2.8](#Section_3.4.4.2.3.2).
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainFault](#Section_3.4.4.2.3.3) fault subcode. The fault detail SHOULD be as specified in the following table.
+- The **domainDNS!wellKnownObjects** attribute on the [**domain NC**](#gt_domain-naming-context-domain-nc) root object is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute). See sections [3.4.4.2.3.1.4](#Section_3.4.4.2.3.1.4), [3.4.4.2.3.1.5](#Section_3.4.4.2.3.1.5), [3.4.4.2.3.1.8](#Section_3.4.4.2.3.1.8), [3.4.4.2.3.1.17](#Section_3.4.4.2.3.1.17), [3.4.4.2.3.1.18](#Section_3.4.4.2.3.1.18), [3.4.4.2.3.2.1](#Section_3.4.4.2.3.2.1), [3.4.4.2.3.2.4](#Section_3.4.4.2.3.2.4), and [3.4.4.2.3.2.10](#Section_3.4.4.2.3.2.10).
+- No [**crossRef objects**](#gt_crossref-object) satisfy the requirements given in sections [3.4.4.2.3.1.9](#Section_3.4.4.2.3.1.9), [3.4.4.2.3.1.13](#Section_3.4.4.2.3.1.13), and [3.4.4.2.3.2.3](#Section_3.4.4.2.3.2.3) for populating the Forest, NetBIOSName, and DNSRoot elements.
+- If, during the processing of the request, the server fails to populate the ObjectClass or ObjectTypes elements of the ActiveDirectoryPartiton as per the processing rules documented in sections [3.4.4.2.3.2.6](#Section_3.4.4.2.3.2.6) and [3.4.4.2.3.2.8](#Section_3.4.4.2.3.2.8).
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainFault](#Section_3.4.4.2.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5884,7 +5884,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDoma
 <a id="Section_3.4.4.2.8.2"></a>
 ###### 3.4.4.2.8.2 Directory Error
 
-If the client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request, then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainFault](#Section_3.4.4.2.3.3) fault subcode. The fault detail SHOULD<46> be as specified in the following table.
+If the client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request, then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainFault](#Section_3.4.4.2.2.1) fault subcode. The fault detail SHOULD<46> be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5897,7 +5897,7 @@ If the client sends a request that the server is unable to complete because of i
 <a id="Section_3.4.4.2.8.3"></a>
 ###### 3.4.4.2.8.3 Bad Principal Error
 
-If the client sends a request that the server is unable to complete because it cannot populate the ObjectClass or ObjectTypes elements of the ActiveDirectoryObject as per the processing rules documented in [3.1.4.2.2](#Section_3.1.4.2.2), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainFault](#Section_3.4.4.2.3.3) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request that the server is unable to complete because it cannot populate the ObjectClass or ObjectTypes elements of the ActiveDirectoryObject as per the processing rules documented in [3.1.4.2.2](#Section_3.1.4.2.2), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainFault](#Section_3.4.4.2.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5963,15 +5963,15 @@ message=
 
 </wsdl:operation>
 
-The GetADDomainController custom action retrieves information for the [**domain controllers**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) that contain the [**directory service**](#gt_directory-service-ds) specified in the [GetADDomainControllersRequest (section 3.4.4.3.1.1)](#Section_3.4.4.2) SOAP header [Server (section 2.2.3.5)](#Section_2.2.3.5) element. If the Server element specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance, then the server MUST return a fault, as specified in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). Upon success, the server MUST return a [GetADDomainControllerResponse (section 3.4.4.3.2.4)](#Section_3.4.4.2)) element with the [GetADDomainControllerResponse/DomainControllers (section 3.4.4.3.2.5)](#Section_3.4.4.2) element (including child elements) filled in.
+The GetADDomainController custom action retrieves information for the [**domain controllers**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) that contain the [**directory service**](#gt_directory-service-ds) specified in the [GetADDomainControllersRequest (section 3.4.4.3.1.1)](#Section_3.4.4.3.1.1) SOAP header [Server (section 2.2.3.5)](#Section_2.2.3.5) element. If the Server element specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance, then the server MUST return a fault, as specified in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). Upon success, the server MUST return a [GetADDomainControllerResponse (section 3.4.4.3.2.4)](#Section_3.4.4.3.2.4)) element with the [GetADDomainControllerResponse/DomainControllers (section 3.4.4.3.2.5)](#Section_3.4.4.3.2.5) element (including child elements) filled in.
 
-Upon receiving a GetADDomainControllerRequest message, the GetADDomainController custom action retrieves information on all domain controllers in the domain as specified by the input array of [**distinguished names**](#gt_distinguished-name-dn) of [**nTDSDSA objects**](#gt_ntdsdsa-object) (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) in the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) element.
+Upon receiving a GetADDomainControllerRequest message, the GetADDomainController custom action retrieves information on all domain controllers in the domain as specified by the input array of [**distinguished names**](#gt_distinguished-name-dn) of [**nTDSDSA objects**](#gt_ntdsdsa-object) (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) in the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) element.
 
 For every domain controller represented by the GetADDomainControllerRequest/NtdsSettingsDN array, the GetADDomainController custom action constructs an [ActiveDirectoryDomainController (section 3.4.4.3.3.2)](#Section_3.4.4.3.3.2) object (with all its elements populated) and adds it to the GetADDomainControllerResponse/DomainControllers array. When complete, the GetADDomainControllerResponse element MUST be returned.
 
 The number and order of ActiveDirectoryDomainController elements in the GetADDomainControllerResponse/DomainControllers array MUST match the number and order of GetADDomainControllerRequest/NtdsSettingsDN elements specified in the request.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.3.8](#Section_3.4.4.3.8.2).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.3.8](#Section_3.4.4.3.8).
 
 <a id="Section_3.4.4.3.1"></a>
 ##### 3.4.4.3.1 Messages
@@ -5987,7 +5987,7 @@ The following table summarizes the set of [**WSDL message**](#gt_wsdl-message) d
 <a id="Section_3.4.4.3.1.1"></a>
 ###### 3.4.4.3.1.1 GetADDomainControllerRequest
 
-The GetADDomainControllerRequest message is sent by the client to the server to retrieve information about [**domain controllers**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) as specified by the input array [GetADDomainControllerRequest/NtdsSettingsDN](#Section_3.4.4.3.2.2).
+The GetADDomainControllerRequest message is sent by the client to the server to retrieve information about [**domain controllers**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) as specified by the input array [GetADDomainControllerRequest/NtdsSettingsDN](#Section_3.4.4.3.2.3).
 
 <wsdl:message name="GetADDomainControllerRequest">
 
@@ -6008,12 +6008,12 @@ The GetADDomainControllerResponse message contains a GetADDomainControllerRespon
 
 </wsdl:message>
 
-**parameters:** A [GetADDomainControllerResponse](#Section_3.4.4.2) element, as specified in section 3.4.4.3.2.4.
+**parameters:** A [GetADDomainControllerResponse](#Section_3.4.4.3.1.2) element, as specified in section 3.4.4.3.2.4.
 
 <a id="Section_3.4.4.3.1.3"></a>
 ###### 3.4.4.3.1.3 TopologyManagement_GetADDomainController_GetADDomainControllerFault_FaultMessage
 
-The TopologyManagement_GetADDomainController_GetADDomainControllerFault_FaultMessage message contains a [GetADDomainControllerFault](#Section_3.4.4.3.3.5) element.
+The TopologyManagement_GetADDomainController_GetADDomainControllerFault_FaultMessage message contains a [GetADDomainControllerFault](#Section_3.4.4.3.2.1) element.
 
 <wsdl:message name=
 
@@ -6050,7 +6050,7 @@ type="ca:GetADDomainControllerFault" />
 <a id="Section_3.4.4.3.2.2"></a>
 ###### 3.4.4.3.2.2 GetADDomainControllerRequest
 
-The GetADDomainControllerRequest element is the body of the [GetADDomainController](#Section_3.4.4.3) request and contains one child element, the NtdsSettingsDN element (section [3.4.4.3.2.3](#Section_3.4.4.3.2.2)), representing an array of [**distinguished names**](#gt_distinguished-name-dn) of [**nTDSDSA objects**](#gt_ntdsdsa-object) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) of the [**domain controllers**](#gt_domain-controller-dc) on which to retrieve information.
+The GetADDomainControllerRequest element is the body of the [GetADDomainController](#Section_3.4.4.3) request and contains one child element, the NtdsSettingsDN element (section [3.4.4.3.2.3](#Section_3.4.4.3.2.3)), representing an array of [**distinguished names**](#gt_distinguished-name-dn) of [**nTDSDSA objects**](#gt_ntdsdsa-object) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) of the [**domain controllers**](#gt_domain-controller-dc) on which to retrieve information.
 
 <xs:element name="GetADDomainControllerRequest">
 
@@ -6086,9 +6086,9 @@ The NtdsSettingsDN elements refers to domain controller nTDSDSA objects in the [
 <a id="Section_3.4.4.3.2.4"></a>
 ###### 3.4.4.3.2.4 GetADDomainControllerResponse
 
-The <GetADDomainControllerResponse> element contains the response to a [GetADDomainControllerRequest](#Section_3.4.4.3.2.2). It defines one child element, [GetADDomainControllerResponse/DomainControllers (section 3.4.4.3.2.5)](#Section_3.4.4.2), representing an array of [ActiveDirectoryDomainController](#Section_3.4.4.3.3.2) elements, as specified in section 3.4.4.3.3.2.
+The <GetADDomainControllerResponse> element contains the response to a [GetADDomainControllerRequest](#Section_3.4.4.3.2.2). It defines one child element, [GetADDomainControllerResponse/DomainControllers (section 3.4.4.3.2.5)](#Section_3.4.4.3.2.5), representing an array of [ActiveDirectoryDomainController](#Section_3.4.4.3.3.2) elements, as specified in section 3.4.4.3.3.2.
 
-The number and order of ActiveDirectoryDomainController elements in the GetADDomainControllerResponse/DomainControllers array MUST match the number and order of [GetADDomainControllerRequest/NtdsSettingsDN](#Section_3.4.4.3.2.2) elements specified in the request.
+The number and order of ActiveDirectoryDomainController elements in the GetADDomainControllerResponse/DomainControllers array MUST match the number and order of [GetADDomainControllerRequest/NtdsSettingsDN](#Section_3.4.4.3.2.3) elements specified in the request.
 
 <xs:element name="GetADDomainControllerResponse">
 
@@ -6115,7 +6115,7 @@ type="ca:ArrayOfActiveDirectoryDomainController" />
 <a id="Section_3.4.4.3.2.5"></a>
 ###### 3.4.4.3.2.5 GetADDomainControllerResponse/DomainControllers
 
-The DomainControllers element defines an array of ActiveDirectoryDomainController elements (section [3.4.4.3.3.2](#Section_3.4.4.3.3.2)), each representing a result for a [**domain controller**](#gt_domain-controller-dc). The DomainControllers array MUST be of the same size and order as the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input.
+The DomainControllers element defines an array of ActiveDirectoryDomainController elements (section [3.4.4.3.3.2](#Section_3.4.4.3.3.2)), each representing a result for a [**domain controller**](#gt_domain-controller-dc). The DomainControllers array MUST be of the same size and order as the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input.
 
 <xs:element
 
@@ -6184,7 +6184,7 @@ The DefaultPartition element contains the [**distinguished name**](#gt_distingui
 
 <xs:element name="DefaultPartition" nillable="true" type="xs:string" />
 
-The DefaultPartition element is populated from the **nTDSDSA!msDS-hasDomainNCs** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!msDS-hasDomainNCs** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/DefaultPartition element.
+The DefaultPartition element is populated from the **nTDSDSA!msDS-hasDomainNCs** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!msDS-hasDomainNCs** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/DefaultPartition element.
 
 <a id="Section_3.4.4.3.3.1.2"></a>
 ActiveDirectoryDirectoryServer/HostName
@@ -6193,7 +6193,7 @@ The HostName element contains the [**FQDN (1)**](#gt_1769aec9-237e-44ed-9014-1ab
 
 <xs:element name="HostName" nillable="true" type="xs:string" />
 
-The HostName element is populated from the **computer!dnsHostName** attribute on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!dnsHostName** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDirectoryServer/HostName element.
+The HostName element is populated from the **computer!dnsHostName** attribute on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!dnsHostName** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDirectoryServer/HostName element.
 
 <a id="Section_3.4.4.3.3.1.3"></a>
 ActiveDirectoryDirectoryServer/InvocationId
@@ -6202,7 +6202,7 @@ The InvocationId element contains the [**GUID**](#gt_globally-unique-identifier-
 
 <xs:element name="InvocationId" type="ser:guid" />
 
-The InvocationId element is populated from the **nTDSDSA!invocationId** attribute of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!invocationId** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/InvocationId element with a value of 00000000-0000-0000-0000-000000000000.
+The InvocationId element is populated from the **nTDSDSA!invocationId** attribute of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!invocationId** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/InvocationId element with a value of 00000000-0000-0000-0000-000000000000.
 
 <a id="Section_3.4.4.3.3.1.4"></a>
 ActiveDirectoryDirectoryServer/LdapPort
@@ -6211,7 +6211,7 @@ The LdapPort contains the TCP port number, as a base-10 integer, that the [**dir
 
 <xs:element name="LdapPort" type="xs:int" />
 
-The LdapPort element is populated from the **nTDSDSA!msDS-PortLDAP** attribute of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!msDs-PortLDAP** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/LdapPort element with a value of "389".
+The LdapPort element is populated from the **nTDSDSA!msDS-PortLDAP** attribute of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!msDs-PortLDAP** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/LdapPort element with a value of "389".
 
 <a id="Section_3.4.4.3.3.1.5"></a>
 ActiveDirectoryDirectoryServer/Name
@@ -6220,7 +6220,7 @@ The Name element contains the [**NetBIOS name**](#gt_netbios-name) of this [**do
 
 <xs:element name="Name" nillable="true" type="xs:string" />
 
-The Name element is populated from the **computer!sAMAccountName** attribute, with any trailing "$" omitted, on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent object of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!sAMAccountName** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDirectoryServer/Name element.
+The Name element is populated from the **computer!sAMAccountName** attribute, with any trailing "$" omitted, on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent object of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!sAMAccountName** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDirectoryServer/Name element.
 
 <a id="Section_3.4.4.3.3.1.6"></a>
 ActiveDirectoryDirectoryServer/NTDSSettingsObjectDN
@@ -6229,7 +6229,7 @@ The NTDSSettingsObjectDN contains the [**distinguished name**](#gt_distinguished
 
 <xs:element name="NTDSSettingsObjectDN" nillable="true" type="xs:string" />
 
-The NTDSSettingsObjectDN element is populated from the **nTDSDSA!distinguishedName** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server retruns a null ActiveDirectoryDirectoryServer/NTDSSettingsObjectDn element.
+The NTDSSettingsObjectDN element is populated from the **nTDSDSA!distinguishedName** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server retruns a null ActiveDirectoryDirectoryServer/NTDSSettingsObjectDn element.
 
 <a id="Section_3.4.4.3.3.1.7"></a>
 ActiveDirectoryDirectoryServer/OperationMasterRole
@@ -6242,7 +6242,7 @@ name="OperationMasterRole" nillable="true"
 
 type="ca:ArrayOfActiveDirectoryOperationMasterRole" />
 
-The OperationMasterRole element is populated by comparing the **nTDSDSA!distinguishedName** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified in the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element with the FSMO roles held in the [**domain**](#gt_domain). The **fsmoRoleOwner** attribute on each of the following objects contains the [**DN**](#gt_distinguished-name-dn) of the FSMO role holder. If the DN of the FSMO role holder is equal to the **nTDSDSA!distinguishedName** attribute, the OperationMasterRole array contains a corresponding <ActiveDirectoryOperationMasterRole> element. If the **nTDSDSA!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/OperationMasterRole element. If the **nTDSDSA!distinguishedName** attribute is not equal to any of the **fsmoRoleOwner** attributes, either because the **fsmoRoleOwner** attribute has a different value or because the attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns an empty ActiveDirectoryDirectoryServer/OperationMasterRole element.
+The OperationMasterRole element is populated by comparing the **nTDSDSA!distinguishedName** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified in the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element with the FSMO roles held in the [**domain**](#gt_domain). The **fsmoRoleOwner** attribute on each of the following objects contains the [**DN**](#gt_distinguished-name-dn) of the FSMO role holder. If the DN of the FSMO role holder is equal to the **nTDSDSA!distinguishedName** attribute, the OperationMasterRole array contains a corresponding <ActiveDirectoryOperationMasterRole> element. If the **nTDSDSA!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/OperationMasterRole element. If the **nTDSDSA!distinguishedName** attribute is not equal to any of the **fsmoRoleOwner** attributes, either because the **fsmoRoleOwner** attribute has a different value or because the attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns an empty ActiveDirectoryDirectoryServer/OperationMasterRole element.
 
 The **fsmoRoleOwner** attributes, and the corresponding FSMO role, are listed in the following table.
 
@@ -6261,7 +6261,7 @@ The Partitions element contains an array of [**distinguished names**](#gt_distin
 
 <xs:element name="Partitions" nillable="true" type="sera:ArrayOfstring" />
 
-The Partitions element is populated from the union, with all duplicates removed, of the **nTDSDSA!msDS-hasMasterNCs** multivalued attribute, the **nTDSDSA!msDS-hasFullReplicaNCs** multivalued attribute and the **nTDSDSA!hasPartialReplicaNCs** multivalued attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the union of these [**attribute**](#gt_attribute) values is empty because the **nTDSDSA!msDS-hasMasterNCs**, **nTDSDSA!msDS-hasFullReplicaNCs** and **nTDSDSA!hasPartialReplicaNCs** attributes are not present or cannot be read due to the client lacking access rights to read the attributes, the server returns an empty ActiveDirectoryDirectoryServer/Partitions element.
+The Partitions element is populated from the union, with all duplicates removed, of the **nTDSDSA!msDS-hasMasterNCs** multivalued attribute, the **nTDSDSA!msDS-hasFullReplicaNCs** multivalued attribute and the **nTDSDSA!hasPartialReplicaNCs** multivalued attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the union of these [**attribute**](#gt_attribute) values is empty because the **nTDSDSA!msDS-hasMasterNCs**, **nTDSDSA!msDS-hasFullReplicaNCs** and **nTDSDSA!hasPartialReplicaNCs** attributes are not present or cannot be read due to the client lacking access rights to read the attributes, the server returns an empty ActiveDirectoryDirectoryServer/Partitions element.
 
 <a id="Section_3.4.4.3.3.1.9"></a>
 ActiveDirectoryDirectoryServer/ServerObjectDN
@@ -6270,7 +6270,7 @@ The ServerObjectDN contains the [**distinguished name**](#gt_distinguished-name-
 
 <xs:element name="ServerObjectDN" nillable="true" type="xs:string" />
 
-The ServerObjectDN element is populated from the **server!distinguishedName** attribute on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/ServerObjectDN element.
+The ServerObjectDN element is populated from the **server!distinguishedName** attribute on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/ServerObjectDN element.
 
 <a id="Section_3.4.4.3.3.1.10"></a>
 ActiveDirectoryDirectoryServer/ServerObjectGuid
@@ -6279,7 +6279,7 @@ The ServerObjectGuid contains a [**GUID**](#gt_globally-unique-identifier-guid) 
 
 <xs:element name="ServerObjectGuid" type="ser:guid" />
 
-The ServerObjectGuid element is populated from the **server!objectGUID** attribute on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!objectGUID** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/ServerObjectGuid element with a value of 00000000-0000-0000-0000-000000000000.
+The ServerObjectGuid element is populated from the **server!objectGUID** attribute on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!objectGUID** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/ServerObjectGuid element with a value of 00000000-0000-0000-0000-000000000000.
 
 <a id="Section_3.4.4.3.3.1.11"></a>
 ActiveDirectoryDirectoryServer/Site
@@ -6288,7 +6288,7 @@ The Site element contains the [**distinguished name (DN)**](#gt_distinguished-na
 
 <xs:element name="Site" nillable="true" type="xs:string" />
 
-The Site element is populated from the **nTDSDSA!name** attribute on the grandparent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!name** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/Site element. If the server returns a null [ActiveDirectoryDirectoryServer/ServerObjectDN (section 3.4.4.3.3.1.9)](#Section_3.4.4.3.3.1) element, then the server also returns a null ActiveDirectoryDirectoryServer/Site element.
+The Site element is populated from the **nTDSDSA!name** attribute on the grandparent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!name** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDirectoryServer/Site element. If the server returns a null [ActiveDirectoryDirectoryServer/ServerObjectDN (section 3.4.4.3.3.1.9)](#Section_3.4.4.3.3.1.9) element, then the server also returns a null ActiveDirectoryDirectoryServer/Site element.
 
 <a id="Section_3.4.4.3.3.1.12"></a>
 ActiveDirectoryDirectoryServer/SslPort
@@ -6297,7 +6297,7 @@ The SslPort element contains the TCP port number of the [**SSL**](#gt_secure-soc
 
 <xs:element name="SslPort" type="xs:int" />
 
-The SslPort element is populated from the **nTDSDSA!msDs-PortSSL** attribute of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!msDs-PortSSL** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/SslPort element with a value of "636".
+The SslPort element is populated from the **nTDSDSA!msDs-PortSSL** attribute of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!msDs-PortSSL** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDirectoryServer/SslPort element with a value of "636".
 
 <a id="Section_3.4.4.3.3.2"></a>
 ###### 3.4.4.3.3.2 ActiveDirectoryDomainController
@@ -6347,7 +6347,7 @@ The ComputerDN element contains the [**distinguished name**](#gt_distinguished-n
 
 <xs:element name="ComputerDN" nillable="true" type="xs:string" />
 
-The ComputerDN element is populated from the **computer!distinguishedName** attribute on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/ComputerDN element.
+The ComputerDN element is populated from the **computer!distinguishedName** attribute on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!distinguishedName** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/ComputerDN element.
 
 <a id="Section_3.4.4.3.3.2.2"></a>
 ActiveDirectoryDomainController/Domain
@@ -6356,7 +6356,7 @@ The Domain element contains the [**FQDN (2)**](#gt_1769aec9-237e-44ed-9014-1abb3
 
 <xs:element name="Domain" nillable="true" type="xs:string" />
 
-The Domain element is populated from the **nTDSDSA!msDS-hasDomainNCs** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element , converted from a [**DN**](#gt_distinguished-name-dn) to a canonical name following the syntactic transformation described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.1.7, but with any trailing "/" omitted. If the **nTDSDSA!msDS-hasDomainNCs** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDomainController/Domain element.
+The Domain element is populated from the **nTDSDSA!msDS-hasDomainNCs** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element , converted from a [**DN**](#gt_distinguished-name-dn) to a canonical name following the syntactic transformation described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.1.7, but with any trailing "/" omitted. If the **nTDSDSA!msDS-hasDomainNCs** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns a null ActiveDirectoryDomainController/Domain element.
 
 <a id="Section_3.4.4.3.3.2.3"></a>
 ActiveDirectoryDomainController/Enabled
@@ -6365,7 +6365,7 @@ The Enabled element contains a Boolean element indicating that the [**domain con
 
 <xs:element name="Enabled" type="xs:boolean" />
 
-The Enabled element is populated from the ADS_UF_ACCOUNT_DISABLE bit of the **computer!userAccountControl** attribute on the directory server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the ADS_UF_ACCOUNT_DISABLE bit of the **computer!userAccountControl** attribute (see [MS-ADTS] section 2.2.16) is set to 1 and the client has access rights to read the attribute, the server populates the ActiveDirectoryDomainController/Enabled element with a value of FALSE; otherwise, the server populates the element with a value of TRUE.
+The Enabled element is populated from the ADS_UF_ACCOUNT_DISABLE bit of the **computer!userAccountControl** attribute on the directory server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the ADS_UF_ACCOUNT_DISABLE bit of the **computer!userAccountControl** attribute (see [MS-ADTS] section 2.2.16) is set to 1 and the client has access rights to read the attribute, the server populates the ActiveDirectoryDomainController/Enabled element with a value of FALSE; otherwise, the server populates the element with a value of TRUE.
 
 <a id="Section_3.4.4.3.3.2.4"></a>
 ActiveDirectoryDomainController/Forest
@@ -6387,7 +6387,7 @@ The IsGlobalCatalog element contains a Boolean indicating that the [**domain con
 
 <xs:element name="IsGlobalCatalog" type="xs:boolean" />
 
-The IsGlobalCatalog element is populated from the NTDSDSA_OPT_IS_GC bit of the **nTDSDSA!options** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the NTDSDSA_OPT_IS_GC ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) bit of the **nTDSDSA!options** attribute is set to 1 and the client has access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDomainController/IsGlobalCatalog element with a value of TRUE; otherwise, the server populates the element with a value of FALSE.
+The IsGlobalCatalog element is populated from the NTDSDSA_OPT_IS_GC bit of the **nTDSDSA!options** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the NTDSDSA_OPT_IS_GC ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) bit of the **nTDSDSA!options** attribute is set to 1 and the client has access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDomainController/IsGlobalCatalog element with a value of TRUE; otherwise, the server populates the element with a value of FALSE.
 
 <a id="Section_3.4.4.3.3.2.6"></a>
 ActiveDirectoryDomainController/IsReadOnly
@@ -6396,7 +6396,7 @@ The IsReadOnly element contains a Boolean indicating that the [**domain controll
 
 <xs:element name="IsReadOnly" type="xs:boolean" />
 
-The IsReadOnly element is populated from the **nTDSDSA!objectCategory** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **nTDSDSA!objectCategory** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) refers to the classSchema object for the nTDSDSARO class and the client has access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDomainController/IsReadOnly element with a value of TRUE; otherwise, the server populates the element with a value of FALSE.
+The IsReadOnly element is populated from the **nTDSDSA!objectCategory** attribute on the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **nTDSDSA!objectCategory** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) refers to the classSchema object for the nTDSDSARO class and the client has access rights to read the [**attribute**](#gt_attribute), the server populates the ActiveDirectoryDomainController/IsReadOnly element with a value of TRUE; otherwise, the server populates the element with a value of FALSE.
 
 <a id="Section_3.4.4.3.3.2.7"></a>
 ActiveDirectoryDomainController/OSHotFix
@@ -6405,7 +6405,7 @@ The OSHotFix element contains a string representing the hotfixes applied to this
 
 <xs:element name="OSHotFix" nillable="true" type="xs:string" />
 
-The OSHotFix element is populated from the **computer!operatingSystemHotFix** attribute on the directory server's [**computer object**](#gt_computer-object). The directory server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystemHotFix** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSHotFix element.
+The OSHotFix element is populated from the **computer!operatingSystemHotFix** attribute on the directory server's [**computer object**](#gt_computer-object). The directory server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystemHotFix** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSHotFix element.
 
 <a id="Section_3.4.4.3.3.2.8"></a>
 ActiveDirectoryDomainController/OSName
@@ -6414,7 +6414,7 @@ The OSName element contains the name of the operating system running on the [**d
 
 <xs:element name="OSName" nillable="true" type="xs:string" />
 
-The OSName element is populated from the **computer!operatingSystem** attribute on the Directory Server's [**computer object**](#gt_computer-object). The directory server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystem** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSName element.
+The OSName element is populated from the **computer!operatingSystem** attribute on the Directory Server's [**computer object**](#gt_computer-object). The directory server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystem** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSName element.
 
 <a id="Section_3.4.4.3.3.2.9"></a>
 ActiveDirectoryDomainController/OSServicepack
@@ -6423,7 +6423,7 @@ The OSServicepack element contains a string indicating the service pack that has
 
 <xs:element name="OSServicepack" nillable="true" type="xs:string" />
 
-The OSServicepack element is populated from the **computer!operatingSystemServicePack** attribute on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by **the server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystemServicePack** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSServicePack element.
+The OSServicepack element is populated from the **computer!operatingSystemServicePack** attribute on the Directory Server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by **the server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystemServicePack** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSServicePack element.
 
 <a id="Section_3.4.4.3.3.2.10"></a>
 ActiveDirectoryDomainController/OSVersion
@@ -6432,7 +6432,7 @@ The OSVersion element contains the version of the operating system running on th
 
 <xs:element name="OSVersion" nillable="true" type="xs:string" />
 
-The OSVersion element is populated from the **computer!operatingSystemVersion** attribute on the directory server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.2) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystemVersion** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSVersion element.
+The OSVersion element is populated from the **computer!operatingSystemVersion** attribute on the directory server's [**computer object**](#gt_computer-object). The Directory Server's computer object is referenced by the **server!serverReference** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1) on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the [GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3)](#Section_3.4.4.3.2.3) input parameter element. If the **server!serverReference** attribute is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute), the server returns the [**SOAP fault**](#gt_soap-fault) described in section [3.4.4.3.8.1](#Section_3.4.4.3.8.1). If the **computer!operatingSystemVersion** attribute is not present or cannot be read due to the client lacking access rights to read the attribute, the server returns a null ActiveDirectoryDomainController/OSVersion element.
 
 <a id="Section_3.4.4.3.3.3"></a>
 ###### 3.4.4.3.3.3 ArrayOfActiveDirectoryDomainController
@@ -6485,7 +6485,7 @@ type="ca:ActiveDirectoryOperationMasterRole" />
 <a id="Section_3.4.4.3.3.5"></a>
 ###### 3.4.4.3.3.5 GetADDomainControllerFault
 
-The GetADDomainControllerFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADDomainController](#Section_3.4.4.3) request.
+The GetADDomainControllerFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [GetADDomainController](#Section_3.4.4.3) request.
 
 <xs:complexType name=" GetADDomainControllerFault">
 
@@ -6560,11 +6560,11 @@ If the client sends a request where any of the following is true:
 
 - The [**SOAP header**](#gt_soap-header) (section [2.2.3.5](#Section_2.2.3.5)) contains an empty, not present, invalid, null, or unknown Server element (section [3.1.4](#Section_3.1.4)).
 - The SOAP header contains a Server element that specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance.
-- The request contains a null or not present [NtdsSettingsDN](#Section_3.4.4.3.2.2) element.
+- The request contains a null or not present [NtdsSettingsDN](#Section_3.4.4.3.2.3) element.
 - The request contains an NtdsSettingsDN element containing at least one empty or null element.
-- The **server!serverReference** attribute on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3) input parameter element is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute). See sections [3.4.4.3.3.1.2](#Section_3.4.4.3.3.1), [3.4.4.3.3.1.5](#Section_3.4.4.3.3.1), [3.4.4.3.3.2.1](#Section_3.4.4.3.3.2), [3.4.4.3.3.2.3](#Section_3.4.4.3.3.2), [3.4.4.3.3.2.7](#Section_3.4.4.3.3.2), [3.4.4.3.3.2.8](#Section_3.4.4.3.3.2), [3.4.4.3.3.2.9](#Section_3.4.4.3.3.2), and [3.4.4.3.3.2.10](#Section_3.4.4.3.3.2).
-- No [**crossRef objects**](#gt_crossref-object) satisfy the requirements given in section [3.4.4.3.3.2.4](#Section_3.4.4.3.3.2) for populating the Forest element.
-Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainControllerFault](#Section_3.4.4.3.3.5) fault subcode. The fault detail SHOULD be as specified in the following table.
+- The **server!serverReference** attribute on the parent of the [**nTDSDSA object**](#gt_ntdsdsa-object) specified by the GetADDomainControllerRequest/NtdsSettingsDN (section 3.4.4.3.2.3) input parameter element is not present or cannot be read due to the client lacking access rights to read the [**attribute**](#gt_attribute). See sections [3.4.4.3.3.1.2](#Section_3.4.4.3.3.1.2), [3.4.4.3.3.1.5](#Section_3.4.4.3.3.1.5), [3.4.4.3.3.2.1](#Section_3.4.4.3.3.2.1), [3.4.4.3.3.2.3](#Section_3.4.4.3.3.2.3), [3.4.4.3.3.2.7](#Section_3.4.4.3.3.2.7), [3.4.4.3.3.2.8](#Section_3.4.4.3.3.2.8), [3.4.4.3.3.2.9](#Section_3.4.4.3.3.2.9), and [3.4.4.3.3.2.10](#Section_3.4.4.3.3.2.10).
+- No [**crossRef objects**](#gt_crossref-object) satisfy the requirements given in section [3.4.4.3.3.2.4](#Section_3.4.4.3.3.2.4) for populating the Forest element.
+Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainControllerFault](#Section_3.4.4.3.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -6577,7 +6577,7 @@ Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDoma
 <a id="Section_3.4.4.3.8.2"></a>
 ###### 3.4.4.3.8.2 Invalid NtdsSettingsDN Error
 
-If the client sends a request with an invalid NtdsSettingsDN element (contains any values that are not the [**distinguished name**](#gt_distinguished-name-dn) of an [**nTDSDSA object**](#gt_ntdsdsa-object) in the [**config NC**](#gt_configuration-naming-context-config-nc) of the [**directory instance**](#gt_directory-instance) indicated by the server element in the message header), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainControllerFault](#Section_3.4.4.3.3.5) fault subcode. The fault detail SHOULD be as specified in the following table.
+If the client sends a request with an invalid NtdsSettingsDN element (contains any values that are not the [**distinguished name**](#gt_distinguished-name-dn) of an [**nTDSDSA object**](#gt_ntdsdsa-object) in the [**config NC**](#gt_configuration-naming-context-config-nc) of the [**directory instance**](#gt_directory-instance) indicated by the server element in the message header), then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainControllerFault](#Section_3.4.4.3.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -6590,7 +6590,7 @@ If the client sends a request with an invalid NtdsSettingsDN element (contains a
 <a id="Section_3.4.4.3.8.3"></a>
 ###### 3.4.4.3.8.3 Directory Error
 
-If the client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request, then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainControllerFault](#Section_3.4.4.3.3.5) fault subcode. The fault detail SHOULD<48> be as specified in the following table.
+If the client sends a request that the server is unable to complete because of implementation-specific errors encountered while processing the request, then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADDomainControllerFault](#Section_3.4.4.3.2.1) fault subcode. The fault detail SHOULD<48> be as specified in the following table.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -6656,7 +6656,7 @@ message="ca:TopologyManagement_GetADForest_GetADForestFault_FaultMessage" />
 
 The GetADForest custom action retrieves information for the [**forest**](#gt_forest) that contains the [**directory service**](#gt_directory-service-ds) specified in the GetADForestRequest SOAP header Server (section [2.2.3.5](#Section_2.2.3.5)) element. If the Server element specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance, then the server MUST return a fault as specified in section [3.4.4.4.8.1](#Section_3.4.4.4.8.1). Upon success, the server MUST return a GetADForestResponse (section [3.4.4.4.2.3](#Section_3.4.4.4.2.3)) with the GetADForestResponse/Forest (section [3.4.4.4.2.4](#Section_3.4.4.4.2.4)) element (including child elements) filled in.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.4.8](#Section_3.4.4.4.8.2).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.4.8](#Section_3.4.4.4.8).
 
 <a id="Section_3.4.4.4.1"></a>
 ##### 3.4.4.4.1 Messages
@@ -6680,12 +6680,12 @@ The GetADForestRequest message is sent by the client to the server. It MUST cont
 
 </wsdl:message>
 
-**parameters:** A [GetADForestRequest](#Section_3.4.4.4.2.2) element, as specified in section 3.4.4.4.2.2.
+**parameters:** A [GetADForestRequest](#Section_3.4.4.4.1.1) element, as specified in section 3.4.4.4.2.2.
 
 <a id="Section_3.4.4.4.1.2"></a>
 ###### 3.4.4.4.1.2 GetADForestResponse
 
-The GetADForestResponse message is returned in response to a successful [GetADForest](#Section_3.4.4.4) operation and contains a [GetADForestResponse](#Section_3.4.4.4.2.3) element with the server response to the [GetADForestRequest](#Section_3.4.4.4.2.2) message. The body of the response is a filled-in GetADForestResponse/Forest (section [3.4.4.4.2.4](#Section_3.4.4.4.2.4)) element containing information about the [**forest**](#gt_forest).
+The GetADForestResponse message is returned in response to a successful [GetADForest](#Section_3.4.4.4) operation and contains a [GetADForestResponse](#Section_3.4.4.4.2.3) element with the server response to the [GetADForestRequest](#Section_3.4.4.4.1.1) message. The body of the response is a filled-in GetADForestResponse/Forest (section [3.4.4.4.2.4](#Section_3.4.4.4.2.4)) element containing information about the [**forest**](#gt_forest).
 
 <wsdl:message name="GetADForestResponse">
 
@@ -6750,7 +6750,7 @@ The GetADForestRequest element contains the request for a [GetADForest](#Section
 <a id="Section_3.4.4.4.2.3"></a>
 ###### 3.4.4.4.2.3 GetADForestResponse
 
-The GetADForestResponse contains the response to a [GetADForestRequest](#Section_3.4.4.4.2.2). It contains one child element, GetADForestResponse/Forest (section [3.4.4.4.2.4](#Section_3.4.4.4.2.4)), that contains detail about the [**forest**](#gt_forest).
+The GetADForestResponse contains the response to a [GetADForestRequest](#Section_3.4.4.4.1.1). It contains one child element, GetADForestResponse/Forest (section [3.4.4.4.2.4](#Section_3.4.4.4.2.4)), that contains detail about the [**forest**](#gt_forest).
 
 <xs:element name="GetADForestResponse">
 
@@ -6777,7 +6777,7 @@ type="ca:ActiveDirectoryForest" />
 <a id="Section_3.4.4.4.2.4"></a>
 ###### 3.4.4.4.2.4 GetADForestResponse/Forest
 
-The Forest element contains the body of the response to the [GetADForestRequest](#Section_3.4.4.4.2.2) message. It contains the child elements specified in sections [3.4.4.4.3.1.1](#Section_3.4.4.4.3.1) through [3.4.4.4.3.1.12](#Section_3.4.4.4.3.1).
+The Forest element contains the body of the response to the [GetADForestRequest](#Section_3.4.4.4.1.1) message. It contains the child elements specified in sections [3.4.4.4.3.1.1](#Section_3.4.4.4.3.1.1) through [3.4.4.4.3.1.12](#Section_3.4.4.4.3.1.12).
 
 <xs:element minOccurs="0" name="Forest" nillable="true" type="ca:ActiveDirectoryForest" />
 
@@ -6954,7 +6954,7 @@ The RootDomain element contains the [**FQDN (2)**](#gt_1769aec9-237e-44ed-9014-1
 
 <xs:element name="RootDomain" nillable="true" type="xs:string" />
 
-The RootDomain element is populated with the value of the [ActiveDirectoryForest/Name (section 3.4.4.4.3.1.7)](#Section_3.4.4.4.3.1) element of the response.
+The RootDomain element is populated with the value of the [ActiveDirectoryForest/Name (section 3.4.4.4.3.1.7)](#Section_3.4.4.4.3.1.7) element of the response.
 
 <a id="Section_3.4.4.4.3.1.9"></a>
 ActiveDirectoryForest/SchemaMaster
@@ -7072,7 +7072,7 @@ If the client sends a request where any of the following is true:
 
 - The [**SOAP header**](#gt_soap-header) (section [2.2.3.5](#Section_2.2.3.5)) contains an empty, not present, invalid, null, or unknown Server element (section [3.1.4](#Section_3.1.4)).
 - The SOAP header contains a Server element that specifies an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) instance.
-- No [**crossRef objects**](#gt_crossref-object) satisfy the requirements given in sections [3.4.4.4.3.1.4](#Section_3.4.4.4.3.1) and [3.4.4.4.3.1.7](#Section_3.4.4.4.3.1) for populating the **Domains** and **Name** elements.
+- No [**crossRef objects**](#gt_crossref-object) satisfy the requirements given in sections [3.4.4.4.3.1.4](#Section_3.4.4.4.3.1.4) and [3.4.4.4.3.1.7](#Section_3.4.4.4.3.1.7) for populating the **Domains** and **Name** elements.
 Then the server MUST return a [**SOAP fault**](#gt_soap-fault) with a [GetADForestFault](#Section_3.4.4.4.2.1) fault subcode. The fault detail SHOULD be as specified in the following table.
 
 | Bit Range | Field | Description |
@@ -7150,7 +7150,7 @@ message="ca:TopologyManagement_GetVersion_GetVersionFault_FaultMessage" />
 
 </wsdl:operation>
 
-The GetVersion custom action retrieves version information on the Active Directory Web Service: Custom Action Protocol. Upon success, the server MUST return a [GetVersionResponse (section 3.4.4.5.2.3)](#Section_3.4.4.5) with the [GetVersionResponse/VersionMajor (section 3.4.4.5.2.4)](#Section_3.4.4.5.2.4), [GetVersionResponse/VersionMinor (section 3.4.4.5.2.5)](#Section_3.4.4.5.2.5), and [GetVersionResponse/VersionString (section 3.4.4.5.2.6)](#Section_3.4.4.5.2.6) elements filled in.
+The GetVersion custom action retrieves version information on the Active Directory Web Service: Custom Action Protocol. Upon success, the server MUST return a [GetVersionResponse (section 3.4.4.5.2.3)](#Section_3.4.4.5.2.3) with the [GetVersionResponse/VersionMajor (section 3.4.4.5.2.4)](#Section_3.4.4.5.2.4), [GetVersionResponse/VersionMinor (section 3.4.4.5.2.5)](#Section_3.4.4.5.2.5), and [GetVersionResponse/VersionString (section 3.4.4.5.2.6)](#Section_3.4.4.5.2.6) elements filled in.
 
 <a id="Section_3.4.4.5.1"></a>
 ##### 3.4.4.5.1 Messages
@@ -7174,12 +7174,12 @@ The GetVersionRequest message is sent by the client to the server.
 
 </wsdl:message>
 
-**parameters:** A [GetVersionRequest](#Section_3.4.4.5.2.2) element, as specified in section 3.4.4.5.2.2.
+**parameters:** A [GetVersionRequest](#Section_3.4.4.5.1.1) element, as specified in section 3.4.4.5.2.2.
 
 <a id="Section_3.4.4.5.1.2"></a>
 ###### 3.4.4.5.1.2 GetVersionResponse
 
-The GetVersionResponse message is returned in response to a successful [GetVersion](#Section_3.4.4.5) operation and contains a [GetVersionResponse](#Section_3.4.4.5) element with the server response to the [GetVersionRequest](#Section_3.4.4.5.2.2) message.
+The GetVersionResponse message is returned in response to a successful [GetVersion](#Section_3.4.4.5) operation and contains a [GetVersionResponse](#Section_3.4.4.5.1.2) element with the server response to the [GetVersionRequest](#Section_3.4.4.5.1.1) message.
 
 <wsdl:message name="GetVersionResponse">
 
@@ -7192,7 +7192,7 @@ The GetVersionResponse message is returned in response to a successful [GetVersi
 <a id="Section_3.4.4.5.1.3"></a>
 ###### 3.4.4.5.1.3 TopologyManagement_GetVersion_GetVersionFault_FaultMessage
 
-The TopologyManagement_GetVersion_GetVersionFault_FaultMessage message contains a [GetVersionFault](#Section_3.4.4.5.3.1) element.<53>
+The TopologyManagement_GetVersion_GetVersionFault_FaultMessage message contains a [GetVersionFault](#Section_3.4.4.5.2.1) element.<53>
 
 <wsdl:message
 
@@ -7242,7 +7242,7 @@ The GetVersionRequest element contains the request for a [GetVersion](#Section_3
 <a id="Section_3.4.4.5.2.3"></a>
 ###### 3.4.4.5.2.3 GetVersionResponse
 
-The GetVersionResponse contains the response to a [GetVersionRequest](#Section_3.4.4.5.2.2). It contains the child elements specified in sections [3.4.4.5.2.4](#Section_3.4.4.5.2.4), [3.4.4.5.2.5](#Section_3.4.4.5.2.5), and [3.4.4.5.2.6](#Section_3.4.4.5.2.6)
+The GetVersionResponse contains the response to a [GetVersionRequest](#Section_3.4.4.5.1.1). It contains the child elements specified in sections [3.4.4.5.2.4](#Section_3.4.4.5.2.4), [3.4.4.5.2.5](#Section_3.4.4.5.2.5), and [3.4.4.5.2.6](#Section_3.4.4.5.2.6)
 
 <xs:element name="GetVersionResponse">
 
@@ -7313,7 +7313,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.4.4.5.3.1"></a>
 ###### 3.4.4.5.3.1 GetVersionFault
 
-The GetVersionFault complex type is an extension of the [CustomActionFault](#Section_2.2.4.6) complex type defined in section 2.2.4.6. This fault, while defined, is not returned by this protocol.
+The GetVersionFault complex type is an extension of the [CustomActionFault](#Section_2.2.3.4) complex type defined in section 2.2.4.6. This fault, while defined, is not returned by this protocol.
 
 <xs:complexType name="GetVersionFault">
 
@@ -7403,13 +7403,13 @@ The MoveADOperationMasterRole custom action moves the [**FSMO role**](#gt_fsmo-r
 
 If the [MoveADOperationMasterRoleRequest/Seize](#Section_3.4.4.6.2.4) element is set to TRUE, then the MoveADOperationMasterRole custom action seizes (section [3.4.4.6.2.3.2](#Section_3.4.4.6.2.3.2)) the FSMO role only after first attempting a regular transfer (section [3.4.4.6.2.3.1](#Section_3.4.4.6.2.3.1)) which has failed.
 
-On successful completion of the FSMO role transfer (or seizure), the MoveADOperationMasterRole custom action MUST create a [MoveADOperationMasterRoleResponse](#Section_3.4.4.6.2.5) element, set the [MoveADOperationMasterRoleResponse/WasSeized](#Section_3.4.4.6.2.6) element to TRUE or FALSE, and return the MoveADOperationMasterRoleResponse object. The WasSeized element indicates whether the FSMO role was seized (TRUE) or transferred (FALSE).
+On successful completion of the FSMO role transfer (or seizure), the MoveADOperationMasterRole custom action MUST create a [MoveADOperationMasterRoleResponse](#Section_3.4.4.6.1.2) element, set the [MoveADOperationMasterRoleResponse/WasSeized](#Section_3.4.4.6.2.6) element to TRUE or FALSE, and return the MoveADOperationMasterRoleResponse object. The WasSeized element indicates whether the FSMO role was seized (TRUE) or transferred (FALSE).
 
 To transfer a FSMO role, the server writes the appropriate [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) attribute of the [**directory instance**](#gt_directory-instance) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 3.1.1.3.3.1 through 3.1.1.3.3.6). The table under section 3.4.4.6.2.3.1 contains information on the rootDSE attribute to modify to transfer a role.
 
 To seize a FSMO role, the server writes the distinguishedName of the [**nTDSDSA object**](#gt_ntdsdsa-object) of the new role owner [MS-ADTS] sections 3.1.1.5.3.1.2 and 3.1.1.5.3.2.<57> The table under section 3.4.4.6.2.3.2 contains information about which object [**attribute**](#gt_attribute) to write to seize a role.
 
-If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.6.8](#Section_3.4.4.6.8.5).
+If an error occurs while processing this operation, the server MUST return the appropriate [**SOAP fault**](#gt_soap-fault) for the particular error condition as specified in section [3.4.4.6.8](#Section_3.4.4.6.8).
 
 <a id="Section_3.4.4.6.1"></a>
 ##### 3.4.4.6.1 Messages
@@ -7438,7 +7438,7 @@ The MoveADOperationMasterRoleRequest message contains a [MoveADOperationMasterRo
 <a id="Section_3.4.4.6.1.2"></a>
 ###### 3.4.4.6.1.2 MoveADOperationMasterRoleResponse
 
-The MoveADOperationMasterRoleResponse message contains a [MoveADOperationMasterRoleResponse](#Section_3.4.4.6.2.5) element.
+The MoveADOperationMasterRoleResponse message contains a [MoveADOperationMasterRoleResponse](#Section_3.4.4.6.1.2) element.
 
 <wsdl:message name="MoveADOperationMasterRoleResponse">
 
@@ -7618,7 +7618,7 @@ The following table summarizes the [**XML schema**](#gt_xml-schema) complex type
 <a id="Section_3.4.4.6.3.1"></a>
 ###### 3.4.4.6.3.1 MoveADOperationMasterRoleFault
 
-The MoveADOperationMasterRoleFault complex type is an extension of a [CustomActionFault](#Section_2.2.4.6) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [MoveADOperationMasterRole](#Section_3.4.4.6) request.
+The MoveADOperationMasterRoleFault complex type is an extension of a [CustomActionFault](#Section_2.2.3.4) complex type, defined in section 2.2.4.6. The server MUST return this fault when it is unable to process the [MoveADOperationMasterRole](#Section_3.4.4.6) request.
 
 <xs:complexType name="MoveADOperationMasterRoleFault ">
 
@@ -9818,7 +9818,7 @@ None.
 <a id="Section_6"></a>
 # 6 Appendix A: Full WSDL
 
-For ease of implementation, the full [**WSDL**](#gt_web-services-description-language-wsdl) is provided below. Included in this WSDL is a sample binding for using the AccountManagement and Topology [port types](#Section_3.3.4.4.1.1) with SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). This binding is included for illustration purposes only and cannot be construed to restrict servers from implementing this protocol using other versions of [**SOAP**](#gt_soap) or over other transports.
+For ease of implementation, the full [**WSDL**](#gt_web-services-description-language-wsdl) is provided below. Included in this WSDL is a sample binding for using the AccountManagement and Topology [port types](#Section_4.1) with SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). This binding is included for illustration purposes only and cannot be construed to restrict servers from implementing this protocol using other versions of [**SOAP**](#gt_soap) or over other transports.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -11758,9 +11758,9 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | GetADForest | Y | N | N | N |
 | MoveADOperationsMasterRole | Y | N | Y | N |
 
-<2> Section 1.5: Windows implementations use the [**domain**](#gt_domain) locator protocol, described in [MS-ADOD](#Section_1.3) section 2.7.7.3.1 and [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.3.2, to locate a [**DC**](#gt_domain-controller-dc) server running an instance of the Active Directory Web Services: Custom Action Protocol.
+<2> Section 1.5: Windows implementations use the [**domain**](#gt_domain) locator protocol, described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.7.7.3.1 and [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.3.2, to locate a [**DC**](#gt_domain-controller-dc) server running an instance of the Active Directory Web Services: Custom Action Protocol.
 
-<3> Section 2.1: Microsoft implementations of Active Directory Web Services: Custom Action Protocol use SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). The transports used, as well as the authentication mechanisms supported and the [**endpoints**](#gt_endpoint) exposed, are specified in [MS-ADDM](#Section_3.4.4.5.2) section 2.1.
+<3> Section 2.1: Microsoft implementations of Active Directory Web Services: Custom Action Protocol use SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). The transports used, as well as the authentication mechanisms supported and the [**endpoints**](#gt_endpoint) exposed, are specified in [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.1.
 
 <4> Section 2.2.3.5: Microsoft implementations of Active Directory Web Services: Custom Action Protocol provide access to any Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS) directory service that is running on the same computer as [**Active Directory Web Services**](#gt_active-directory-web-services-adws). AD DS can be accessed via "ldap:389". If the machine is also an AD DS global catalog, then the global catalog can be accessed as "ldap:3268". An AD LDS instance can be accessed as "ldap:N", where N is the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) port number that the AD LDS instance has been configured to use.
 
@@ -11961,37 +11961,37 @@ The fault has the details that are specified in the following table.
 
 <29> Section 3.4.4.2.3.1.3: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **dnsRoot** attribute. If the **dnsRoot** attribute has more than a single value, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values.
 
-<30> Section 3.4.4.2.3.1.4: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.4](#Section_3.4.4.2.3.1), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
+<30> Section 3.4.4.2.3.1.4: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.4](#Section_3.4.4.2.3.1.4), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
 
-<31> Section 3.4.4.2.3.1.5: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.5](#Section_3.4.4.2.3.1), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
+<31> Section 3.4.4.2.3.1.5: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.5](#Section_3.4.4.2.3.1.5), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
 
-<32> Section 3.4.4.2.3.1.8: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.8](#Section_5), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
+<32> Section 3.4.4.2.3.1.8: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.8](#Section_3.4.4.2.3.1.8), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
 
-<33> Section 3.4.4.2.3.1.9: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple [**crossRef objects**](#gt_crossref-object) which satisfy the requirements given in section [3.4.4.2.3.1.9](#Section_3.4.4.2.3.1). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
+<33> Section 3.4.4.2.3.1.9: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple [**crossRef objects**](#gt_crossref-object) which satisfy the requirements given in section [3.4.4.2.3.1.9](#Section_3.4.4.2.3.1.9). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
 
-<34> Section 3.4.4.2.3.1.9: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value that satisfies the requirements given in section [3.4.4.2.3.2.1](#Section_3.4.4.2.3.2), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements
+<34> Section 3.4.4.2.3.1.9: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value that satisfies the requirements given in section [3.4.4.2.3.2.1](#Section_3.4.4.2.3.2.1), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements
 
 <35> Section 3.4.4.2.3.1.11: Microsoft implementations of Active Directory Web Services: Custom Action Protocol omit the time items (hours, minutes, seconds) and "T" designator from the response when all are zero as is permitted for xs:duration ([[XMLSCHEMA2]](https://go.microsoft.com/fwlink/?LinkId=90610))
 
-<36> Section 3.4.4.2.3.1.13: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects which satisfy the requirements given in section [3.4.4.2.3.1.13](#Section_3.4.4.2.3.1). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
+<36> Section 3.4.4.2.3.1.13: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects which satisfy the requirements given in section [3.4.4.2.3.1.13](#Section_3.4.4.2.3.1.13). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
 
-<37> Section 3.4.4.2.3.1.14: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects that satisfy the requirements given in section [3.4.4.2.3.1.14](#Section_3.4.4.2.3.1). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
+<37> Section 3.4.4.2.3.1.14: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects that satisfy the requirements given in section [3.4.4.2.3.1.14](#Section_3.4.4.2.3.1.14). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
 
 <38> Section 3.4.4.2.3.1.14: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **dnsRoot** attribute. If the **dnsRoot** attribute has more than a single value, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values.
 
-<39> Section 3.4.4.2.3.1.17: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.17](#Section_3.4.4.2.3.1), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
+<39> Section 3.4.4.2.3.1.17: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.17](#Section_3.4.4.2.3.1.17), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
 
-<40> Section 3.4.4.2.3.1.18: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.18](#Section_3.4.4.2.3.1), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements
+<40> Section 3.4.4.2.3.1.18: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.1.18](#Section_3.4.4.2.3.1.18), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements
 
 <41> Section 3.4.4.2.3.2.1: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section 3.4.4.2.3.2.1, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
 
-<42> Section 3.4.4.2.3.2.3: No Microsoft implementations of the Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects that satisfy the requirements given in section [3.4.4.2.3.2.3](#Section_3.4.4.2.3.2). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of the Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
+<42> Section 3.4.4.2.3.2.3: No Microsoft implementations of the Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects that satisfy the requirements given in section [3.4.4.2.3.2.3](#Section_3.4.4.2.3.2.3). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of the Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
 
 <43> Section 3.4.4.2.3.2.3: No Microsoft implementations of the Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **dnsRoot** attribute. If the **dnsRoot** attribute has more than a single value, the Microsoft implementations of the Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values.
 
-<44> Section 3.4.4.2.3.2.4: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.2.4](#Section_3.4.4.2.3.2), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
+<44> Section 3.4.4.2.3.2.4: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.2.4](#Section_3.4.4.2.3.2.4), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements.
 
-<45> Section 3.4.4.2.3.2.10: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.2.10](#Section_3.4.4.2.3.2), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements
+<45> Section 3.4.4.2.3.2.10: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **wellKnownObjects** attribute. If the **wellKnownObjects** attribute has more than a single value which satisfies the requirements given in section [3.4.4.2.3.2.10](#Section_3.4.4.2.3.2.10), the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values meeting the requirements
 
 <46> Section 3.4.4.2.8.2: In Microsoft implementations of Active Directory Web Services: Custom Action Protocol, if the client sends a request that the server is unable to perform because a directory attribute or attributes needed to complete the request are not present or cannot be read, then the following fault is returned.
 
@@ -12009,7 +12009,7 @@ The fault has the details that are specified in the following table.
 
 <49> Section 3.4.4.4.3.1.4: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **dnsRoot** attribute. If the **dnsRoot** attribute has more than a single value, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values.
 
-<50> Section 3.4.4.4.3.1.7: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects which satisfy the requirements given in section [3.4.4.4.3.1.7](#Section_3.4.4.4.3.1). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
+<50> Section 3.4.4.4.3.1.7: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple crossRef objects which satisfy the requirements given in section [3.4.4.4.3.1.7](#Section_3.4.4.4.3.1.7). If multiple crossRef objects satisfy these requirements, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single object randomly from the set of objects meeting the requirements.
 
 <51> Section 3.4.4.4.3.1.7: No Microsoft implementations of Active Directory Web Services: Custom Action Protocol have any specific logic to choose from multiple values of any **dnsRoot** attribute. If the **dnsRoot** attribute has more than a single value, the Microsoft implementations of Active Directory Web Services: Custom Action Protocol choose a single value randomly from the set of values.
 

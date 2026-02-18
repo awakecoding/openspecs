@@ -499,19 +499,19 @@ The RSM Remote Protocol is applicable for an application to remotely enumerate o
 
 The common interfaces implemented by the RSM server are as follows:
 
-- [INtmsSession1](#Section_3.2.5.2.5.5)
-- [INtmsObjectManagement1](#Section_3.2.5.2.4.1)
-- [INtmsObjectInfo1](#Section_3.2.5.2.3.3)
+- [INtmsSession1](#Section_3.2.5.2.5)
+- [INtmsObjectManagement1](#Section_3.2.5.2.4)
+- [INtmsObjectInfo1](#Section_2.2.4)
 The optional interfaces implemented by the RSM server are as follows:
 
-- [INtmsObjectManagement2](#Section_3.2.5.2.7.5)
+- [INtmsObjectManagement2](#Section_2.2.5)
 - [INtmsObjectManagement3](#Section_3.2.5.2.8) <3>
 <a id="Section_1.7.2"></a>
 ### 1.7.2 Interfaces for Media Library Management
 
 The interface implemented by the RSM server for [**library**](#gt_library) management is as follows:
 
-- [INtmsLibraryControl1](#Section_3.2.5.2.1)
+- [INtmsLibraryControl1](#Section_2.2.2)
 The optional interface implemented by the RSM server for library management is as follows:
 
 - [INtmsLibraryControl2](#Section_3.2.5.2.6) <4>
@@ -520,7 +520,7 @@ The optional interface implemented by the RSM server for library management is a
 
 The interface implemented by the RSM server for managing media is as follows:
 
-- [INtmsMediaServices1](#Section_3.2.5.2.2.6)
+- [INtmsMediaServices1](#Section_2.2.3)
 The optional interface implemented by the RSM server for managing media is as follows:
 
 - [IRobustNtmsMediaServices1](#Section_3.2.5.2.9) <5>
@@ -529,17 +529,17 @@ The optional interface implemented by the RSM server for managing media is as fo
 
 The interface implemented by the RSM client for supporting message distribution and client notifications is as follows:
 
-- [INtmsNotifySink](#Section_3.1.5.2.2.3)
+- [INtmsNotifySink](#Section_3.1.5.2.2)
 There are two optional interfaces implemented by RSM for supporting message distribution and client notifications. They are as follows:
 
-- [IClientSink](#Section_3.1.5.2.1.1): This interface is implemented by the RSM client for supporting message distribution and client notifications.
-- [IMessenger](#Section_3.2.5.2.10): This optional interface is implemented by the RSM server and used locally for supporting message distribution. The IMessenger interface cannot be accessed or instantiated by the client; it is internal to the server.
+- [IClientSink](#Section_3.1.5.2.1): This interface is implemented by the RSM client for supporting message distribution and client notifications.
+- [IMessenger](#Section_2.2.6): This optional interface is implemented by the RSM server and used locally for supporting message distribution. The IMessenger interface cannot be accessed or instantiated by the client; it is internal to the server.
 The client negotiates for a given set of server functionality by specifying the desired RPC interface's [**UUID**](#gt_universally-unique-identifier-uuid) via COM IUnknown::QueryInterface ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8) when binding to the server. Certain interfaces are implemented only by particular objects on the server.<6>
 
 <a id="Section_1.7.5"></a>
 ### 1.7.5 Security and Authentication Methods
 
-This protocol allows anyone to establish a connection to the RSM server, and it relies upon the underlying RPC protocol to obtain the identity of the user making the method call ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3). The server uses this identity to perform method-specific access checks (section [3.2.5.2](../MS-RPCE/MS-RPCE.md)).
+This protocol allows anyone to establish a connection to the RSM server, and it relies upon the underlying RPC protocol to obtain the identity of the user making the method call ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3). The server uses this identity to perform method-specific access checks (section [3.2.5.2](#Section_3.2.5.2)).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1101,11 +1101,11 @@ NTMS_INVENTORY_MAX = 6
 
 **Structures**
 
-The [INtmsMediaServices1](#Section_3.2.5.2.2.6) interface uses the following structures.
+The [INtmsMediaServices1](#Section_2.2.3) interface uses the following structures.
 
 | Structure | Description |
 | --- | --- |
-| [SECURITY_ATTRIBUTES_NTMS](#Section_5) | Contains the security descriptor for an object. |
+| [SECURITY_ATTRIBUTES_NTMS](#Section_2.2.3.5) | Contains the security descriptor for an object. |
 | [NTMS_ALLOCATION_INFORMATION](#Section_2.2.3.6) | Contains information about the source media pool from which a medium was taken. |
 | [NTMS_MOUNT_INFORMATION](#Section_2.2.3.7) | Defines [**mount**](#gt_mount) information for the management of removable storage libraries. |
 
@@ -1365,7 +1365,7 @@ BOOL bOnStateChange;
 
 **Enumerations**
 
-The [INtmsObjectInfo1](#Section_3.2.5.2.3.3) interface uses the following enumerations.
+The [INtmsObjectInfo1](#Section_2.2.4) interface uses the following enumerations.
 
 | Enumeration | Description |
 | --- | --- |
@@ -3311,7 +3311,7 @@ NTMS_GUID MountedPartition;
 
 **Enumerations**
 
-The [INtmsObjectManagement2](#Section_3.2.5.2.7.5) interface uses the following enumerations.
+The [INtmsObjectManagement2](#Section_2.2.5) interface uses the following enumerations.
 
 | Enumeration | Description |
 | --- | --- |
@@ -3377,7 +3377,7 @@ NTMS_UITYPE_MAX = 4
 
 **Structures**
 
-The [IMessenger](#Section_3.2.5.2.10) interface uses the following structure.
+The [IMessenger](#Section_2.2.6) interface uses the following structure.
 
 | Structure | Description |
 | --- | --- |
@@ -3464,11 +3464,11 @@ No timers are required.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The client MUST be initialized by creating an RPC binding handle to the [INtmsSession1](#Section_3.2.5.2.5.5) interface. How to get a client-side RPC binding handle for an INtmsSession1 interface is specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.
+The client MUST be initialized by creating an RPC binding handle to the [INtmsSession1](#Section_3.2.5.2.5) interface. How to get a client-side RPC binding handle for an INtmsSession1 interface is specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.
 
-If a client wants to receive event notifications from a server, the client MUST support the [INtmsNotifySink](#Section_3.1.5.2.2.3) interface to register and deregister a callback method with the server.
+If a client wants to receive event notifications from a server, the client MUST support the [INtmsNotifySink](#Section_3.1.5.2.2) interface to register and deregister a callback method with the server.
 
-A client can implement the [IClientSink](#Section_3.1.5.2.1.1) interface. If a client wants to implement the IClientSink interface, the INtmsNotifySink interface MUST be implemented as a notification forwarder, and IClientSink is implemented as a client sink. To initialize a session with the server, a client MUST do the following:
+A client can implement the [IClientSink](#Section_3.1.5.2.1) interface. If a client wants to implement the IClientSink interface, the INtmsNotifySink interface MUST be implemented as a notification forwarder, and IClientSink is implemented as a client sink. To initialize a session with the server, a client MUST do the following:
 
 - Invoke the [INtmsSession1::OpenNtmsServerSessionW](#Section_3.2.5.2.5.1) method for a UTF-16–encoded session or [INtmsSession1::OpenNtmsServerSessionA](#Section_3.2.5.2.5.2) for an ASCII-encoded session.
 - Create an instance of a class that implements the IClientSink interface (the client-side notification sink that receives change notifications).
@@ -3517,7 +3517,7 @@ The client MUST release any DCOM interfaces returned by the server when the clie
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 Processing Notifications Sent from the Server to the Client
 
-The client can choose to implement the [INtmsNotifySink](#Section_3.1.5.2.2.3) interface and/or the [IClientSink](#Section_3.1.5.2.1.1) interface in order to receive notification from the server whenever there are changes to the storage objects on the server. Notifications are sent to the client for storage object creation, deletion, and modification. The client might choose to take some other action based on these notifications. The client might also choose to ignore notifications from the server.
+The client can choose to implement the [INtmsNotifySink](#Section_3.1.5.2.2) interface and/or the [IClientSink](#Section_3.1.5.2.1) interface in order to receive notification from the server whenever there are changes to the storage objects on the server. Notifications are sent to the client for storage object creation, deletion, and modification. The client might choose to take some other action based on these notifications. The client might also choose to ignore notifications from the server.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Message Processing Details
@@ -3533,7 +3533,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [OnNotify](#Section_8499d5c6a01d4793a0c4fbaf07e7d1e5) | Notifies the sink of an RSM event. Opnum: 3 |
+| [OnNotify](#Section_3.1.5.2.1.1) | Notifies the sink of an RSM event. Opnum: 3 |
 
 All methods MUST NOT throw exceptions.
 
@@ -3672,9 +3672,9 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Server Object
 
-The server object exposes the DCOM interfaces for retrieving and interacting with all storage management objects. The server object implements the [INtmsSession1](#Section_3.2.5.2.5.5), [INtmsLibraryControl1](#Section_3.2.5.2.1), [INtmsMediaServices1](#Section_3.2.5.2.2.6), [INtmsObjectInfo1](#Section_3.2.5.2.3.3), and [INtmsObjectManagement1](#Section_3.2.5.2.4.1) interfaces.
+The server object exposes the DCOM interfaces for retrieving and interacting with all storage management objects. The server object implements the [INtmsSession1](#Section_3.2.5.2.5), [INtmsLibraryControl1](#Section_2.2.2), [INtmsMediaServices1](#Section_2.2.3), [INtmsObjectInfo1](#Section_2.2.4), and [INtmsObjectManagement1](#Section_3.2.5.2.4) interfaces.
 
-The server object can implement the [INtmsLibraryControl2](#Section_3.2.5.2.6), [INtmsObjectManagement2](#Section_3.2.5.2.7.5), [INtmsObjectManagement3](#Section_3.2.5.2.8), [IRobustNtmsMediaServices1](#Section_3.2.5.2.9), and [IMessenger](#Section_3.2.5.2.10) interfaces.
+The server object can implement the [INtmsLibraryControl2](#Section_3.2.5.2.6), [INtmsObjectManagement2](#Section_2.2.5), [INtmsObjectManagement3](#Section_3.2.5.2.8), [IRobustNtmsMediaServices1](#Section_3.2.5.2.9), and [IMessenger](#Section_2.2.6) interfaces.
 
 The server object maintains a value indicating the server-ready state. The server-ready state can be "not ready", "ready", or "failed". On server object creation, this value will be "not ready". When the server has completed initialization, this value is changed to "ready". Once the value is "ready", do not change it.
 
@@ -3720,7 +3720,7 @@ For each storage object, the list contains the following data elements:
 For each client connected to the server, the list contains the following data elements:
 
 - **id:** A unique identifier that remains associated with the storage object for the entire duration of the server session (defined as one instantiation of the server process from initialization to shutdown). The identifier is assigned by the server and is used by the client to refer to the object in the methods of the protocol. The server is not to change the identifier and is not to assign it to another object until the server shuts down. The identifier can persist across server sessions.<19>
-- **notifyInterface:** A pointer to the [INtmsNotifySink](#Section_3.1.5.2.2.3) or [IClientSink](#Section_3.1.5.2.1.1) interface that is implemented by the client to receive notifications from the server.
+- **notifyInterface:** A pointer to the [INtmsNotifySink](#Section_3.1.5.2.2) or [IClientSink](#Section_3.1.5.2.1) interface that is implemented by the client to receive notifications from the server.
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 List of Tasks Currently Executed on the Server
 
@@ -5005,7 +5005,7 @@ HRESULT CreateNtmsMediaPoolA(
 
 **dwOptions:** A value from the [NtmsCreateOptions (section 2.2.3.2)](#Section_2.2.3.2) enumeration that specifies the type of creation to undertake.
 
-**lpSecurityAttributes:** A pointer to an optional [SECURITY_ATTRIBUTES_NTMS](#Section_5) structure that is used to restrict access to the pool.
+**lpSecurityAttributes:** A pointer to an optional [SECURITY_ATTRIBUTES_NTMS](#Section_2.2.3.5) structure that is used to restrict access to the pool.
 
 **lpPoolId:** A pointer to the identifier of the new media pool.
 
@@ -5064,7 +5064,7 @@ HRESULT CreateNtmsMediaPoolW(
 
 **dwOptions:** A value from the [NtmsCreateOptions (section 2.2.3.2)](#Section_2.2.3.2) enumeration specifying the type of creation to undertake.
 
-**lpSecurityAttributes:** A pointer to an optional [SECURITY_ATTRIBUTES_NTMS (section 2.2.3.5)](#Section_5) structure used to restrict access to the pool.
+**lpSecurityAttributes:** A pointer to an optional [SECURITY_ATTRIBUTES_NTMS (section 2.2.3.5)](#Section_2.2.3.5) structure used to restrict access to the pool.
 
 **lpPoolId:** A pointer to the identifier of the new media pool.
 
@@ -6778,7 +6778,7 @@ The server MUST return value returned by client sink.
 <a id="Section_3.2.5.2.6"></a>
 ##### 3.2.5.2.6 INtmsLibraryControl2 Interface
 
-The INtmsLibraryControl2 interface is implemented by the server to support management of media libraries. It inherits all objects and methods from the [INtmsLibraryControl1](#Section_3.2.5.2.1) interface. The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is "DB90832F-6910-4d46-9F5E-9FD6BFA73903". The version for this interface is "1.0".
+The INtmsLibraryControl2 interface is implemented by the server to support management of media libraries. It inherits all objects and methods from the [INtmsLibraryControl1](#Section_2.2.2) interface. The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is "DB90832F-6910-4d46-9F5E-9FD6BFA73903". The version for this interface is "1.0".
 
 This interface is optional and the server MAY implement it.<79>
 
@@ -6828,7 +6828,7 @@ On completion of an asynchronous operation, notification will be sent with the i
 <a id="Section_3.2.5.2.7"></a>
 ##### 3.2.5.2.7 INtmsObjectManagement2 Interface
 
-The INtmsObjectManagement2 interface is implemented by the server to support security, attribute and user interface notification management, and enumeration for objects. It inherits all objects and methods from the [INtmsObjectManagement1](#Section_3.2.5.2.4.1) interface (opnums 0–11).
+The INtmsObjectManagement2 interface is implemented by the server to support security, attribute and user interface notification management, and enumeration for objects. It inherits all objects and methods from the [INtmsObjectManagement1](#Section_3.2.5.2.4) interface (opnums 0–11).
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is "895A2C86-270D-489d-A6C0-DC2A9B35280E". The version for this interface is "1.0".
 
@@ -7130,11 +7130,11 @@ Strings that are sent to this method as parameters MUST be Unicode-encoded.
 <a id="Section_3.2.5.2.8"></a>
 ##### 3.2.5.2.8 INtmsObjectManagement3 Interface
 
-The INtmsObjectManagement3 interface is implemented by the server to support security, attribute and user interface notification management, and enumeration for objects. It inherits all objects and methods from the [INtmsObjectManagement2](#Section_3.2.5.2.7.5) interface (opnums 0–16).
+The INtmsObjectManagement3 interface is implemented by the server to support security, attribute and user interface notification management, and enumeration for objects. It inherits all objects and methods from the [INtmsObjectManagement2](#Section_2.2.5) interface (opnums 0–16).
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is "3BBED8D9-2C9A-4b21-8936-ACB2F995BE6C". The version for this interface is "1.0".
 
-The INtmsObjectManagement3 interface inherits the INtmsObjectManagement2 interface, which is inherited from the [INtmsObjectManagement1](#Section_3.2.5.2.4.1) interface.
+The INtmsObjectManagement3 interface inherits the INtmsObjectManagement2 interface, which is inherited from the [INtmsObjectManagement1](#Section_3.2.5.2.4) interface.
 
 This interface is optional and the server MAY implement it.<81>
 
@@ -7280,11 +7280,11 @@ Strings sent to this method as parameters MUST be [**Unicode**](#gt_unicode) enc
 <a id="Section_3.2.5.2.9"></a>
 ##### 3.2.5.2.9 IRobustNtmsMediaServices1 Interface
 
-The IRobustNtmsMediaServices1 interface is implemented by the server to support management of media. It inherits all objects and methods from the [INtmsMediaServices1](#Section_3.2.5.2.2.6) interface (opnums 0–20).
+The IRobustNtmsMediaServices1 interface is implemented by the server to support management of media. It inherits all objects and methods from the [INtmsMediaServices1](#Section_2.2.3) interface (opnums 0–20).
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is "7D07F313-A53F-459a-BB12-012C15B1846E". The version for this interface is "1.0".
 
-The IRobustNtmsMediaServices1 interface inherits the [INtmsMediaServices1](#Section_3.2.5.2.2.6) interface.
+The IRobustNtmsMediaServices1 interface inherits the [INtmsMediaServices1](#Section_2.2.3) interface.
 
 This interface is optional and the server MAY implement it.<82>
 
@@ -7506,7 +7506,7 @@ When the operating system notifies the server that a problem exists with the tap
 <a id="Section_4.1"></a>
 ## 4.1 Allocation of Media with INtmsMediaServices1
 
-The following example illustrates the allocation of media with the RSM Remote Protocol, using the [INtmsMediaServices1](#Section_3.2.5.2.2.6) interface.
+The following example illustrates the allocation of media with the RSM Remote Protocol, using the [INtmsMediaServices1](#Section_2.2.3) interface.
 
 ![Example of media allocation](media/image1.png)
 
@@ -7529,7 +7529,7 @@ Figure 1: Example of media allocation
 <a id="Section_4.2"></a>
 ## 4.2 Registering for Notifications with INtmsSession1
 
-The following example illustrates how the RSM client uses the [INtmsSession1](#Section_3.2.5.2.5.5) interface to register with an RSM server for receiving notifications of changes in the storage objects.
+The following example illustrates how the RSM client uses the [INtmsSession1](#Section_3.2.5.2.5) interface to register with an RSM server for receiving notifications of changes in the storage objects.
 
 ![Example of notification registration](media/image2.png)
 
@@ -7543,7 +7543,7 @@ Figure 2: Example of notification registration
 <a id="Section_4.3"></a>
 ## 4.3 Storage Object Management with INtmsObjectManagement1
 
-The following example illustrates how the RSM client performs storage object management using the [INtmsObjectManagement1](#Section_3.2.5.2.4.1) interface.
+The following example illustrates how the RSM client performs storage object management using the [INtmsObjectManagement1](#Section_3.2.5.2.4) interface.
 
 ![Example of storage object management (ASCII)](media/image3.png)
 
@@ -7562,7 +7562,7 @@ Figure 3: Example of storage object management (ASCII)
 <a id="Section_4.4"></a>
 ## 4.4 Media Management Using INtmsMediaServices1
 
-The following illustrates the how an RSM client performs media management using the [INtmsMediaServices1](#Section_3.2.5.2.2.6) interface.
+The following illustrates the how an RSM client performs media management using the [INtmsMediaServices1](#Section_2.2.3) interface.
 
 ![Example of media management (ASCII)](media/image4.png)
 
@@ -10001,32 +10001,32 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <3> Section 1.7.1: The following interfaces are implemented by Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, Windows Vista, Windows XP, and Windows 2000.
 
-- [INtmsSession1](#Section_3.2.5.2.5.5)
-- [INtmsObjectManagement1](#Section_3.2.5.2.4.1)
-- [INtmsObjectInfo1](#Section_3.2.5.2.3.3)
+- [INtmsSession1](#Section_3.2.5.2.5)
+- [INtmsObjectManagement1](#Section_3.2.5.2.4)
+- [INtmsObjectInfo1](#Section_2.2.4)
 The following interfaces are implemented by Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, Windows Vista, and Windows XP.
 
-- [INtmsObjectManagement2](#Section_3.2.5.2.7.5)
+- [INtmsObjectManagement2](#Section_2.2.5)
 - [INtmsObjectManagement3](#Section_3.2.5.2.8)
 <4> Section 1.7.2: The following interface is implemented by Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, Windows Vista, Windows XP, and Windows 2000.
 
-- [INtmsLibraryControl1](#Section_3.2.5.2.1)
+- [INtmsLibraryControl1](#Section_2.2.2)
 The following interface is implemented by Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, Windows Vista, and Windows XP.
 
 - [INtmsLibraryControl2](#Section_3.2.5.2.6)
 <5> Section 1.7.3: The following interface is implemented by Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, Windows Vista, Windows XP, and Windows 2000.
 
-- [INtmsMediaServices1](#Section_3.2.5.2.2.6)
+- [INtmsMediaServices1](#Section_2.2.3)
 The following interface is implemented by Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, Windows Vista, and Windows XP.
 
 - [IRobustNtmsMediaServices1](#Section_3.2.5.2.9)
 <6> Section 1.7.4: The following interface is implemented by Windows 2000, Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista, and Windows Server 2008
 
-- [INtmsNotifySink](#Section_3.1.5.2.2.3)
+- [INtmsNotifySink](#Section_3.1.5.2.2)
 The following interfaces are implemented by Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista, and Windows Server 2008.
 
-- [IClientSink](#Section_3.1.5.2.1.1)
-- [IMessenger](#Section_3.2.5.2.10)
+- [IClientSink](#Section_3.1.5.2.1)
+- [IMessenger](#Section_2.2.6)
 <7> Section 2.2.4.16: Windows uses the application name "Removable Storage".
 
 <8> Section 2.2.4.16: Windows sets this value to the name of the user running the client.

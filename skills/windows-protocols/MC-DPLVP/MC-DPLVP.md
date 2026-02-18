@@ -371,13 +371,13 @@ The voice server and voice clients use the [Connection Subprotocol (section 1.
 | Forwarding game session | [Forwarding Voice Session Subprotocol (section 1.3.5)](#Section_1.3.5) |
 | Echo game session | [Echo Voice Session Subprotocol (section 1.3.6)](#Section_1.3.6) |
 
-The DirectPlay Voice Protocol also provides the ability to perform [**host migration**](#gt_host-migration) as described in section [1.3.3.1](#Section_1.3). Enabling host migration allows game sessions running under the peer voice session subprotocol to elect a new voice server if the existing voice server becomes unavailable.
+The DirectPlay Voice Protocol also provides the ability to perform [**host migration**](#gt_host-migration) as described in section [1.3.3.1](#Section_1.3.3.1). Enabling host migration allows game sessions running under the peer voice session subprotocol to elect a new voice server if the existing voice server becomes unavailable.
 
 The upper layer records audio from the user and uses a [**codec**](#gt_codec) to create an [**encoded voice stream**](#gt_encoded-voice-stream). The encoded voice stream is broken into [**voice bursts**](#gt_voice-burst) and then broken further into [**speech messages**](#gt_speech-message). The exact methodology of distributing speech messages varies depending on the type of voice session subprotocol. For more information about voice bursts, see [How DirectPlay Handles Voice Bursts (section 1.3.1)](#Section_1.3.1).
 
 Only a single codec is used for any given game session. When a voice server is started, a codec is chosen to be used by that voice server. In order to connect to the voice server, a voice client is required to support the codec chosen by the voice server.
 
-For a list of codecs required by the DirectPlay Voice Protocol, see [Required Codecs (section 1.3.7)](#Section_1.3.7). For implementation information regarding when the voice client does not support the codec chosen by the voice server, see [Receiving Connect Accept Message (section 3.1.5.1.3)](#Section_2.2.3.2).
+For a list of codecs required by the DirectPlay Voice Protocol, see [Required Codecs (section 1.3.7)](#Section_1.3.7). For implementation information regarding when the voice client does not support the codec chosen by the voice server, see [Receiving Connect Accept Message (section 3.1.5.1.3)](#Section_3.1.5.1.3).
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 How DirectPlay Handles Voice Bursts
@@ -435,7 +435,7 @@ A voice server can become unavailable either because connectivity is lost or bec
 
 Each voice client is assigned a [**host order ID**](#gt_host-order-id), which indicates its priority in determining who creates the new voice server. The voice client that has the lowest host order ID is elected to create the new voice server. The lowest host order ID typically belongs to the oldest voice client in the [**game session**](#gt_game-session), and is therefore most likely to have the most up-to-date list of voice clients. This algorithm enables each voice client to run the algorithm separately. However, all come up with the same answer.
 
-The elected voice client immediately creates the new voice server and initializes it by using the voice client list from the voice client. This new voice server informs everyone that it is ready to accept voice clients. Through the use of host migration, each voice client updates its [Current Voice Server DVID (section 3.1.1)](#Section_3.1.5.2.5) value to equal the [**DVID**](#gt_dvid) of the new voice server.
+The elected voice client immediately creates the new voice server and initializes it by using the voice client list from the voice client. This new voice server informs everyone that it is ready to accept voice clients. Through the use of host migration, each voice client updates its [Current Voice Server DVID (section 3.1.1)](#Section_3.1.1) value to equal the [**DVID**](#gt_dvid) of the new voice server.
 
 The following illustration shows the typical message flow of a successful host migration when the voice server has chosen to shut down.
 
@@ -536,9 +536,9 @@ The following table describes the characteristics of each game session type base
 | Voice session type | Latency (voice traffic) | CPU Usage (voice clients) | CPU usage (voice server) | Bandwidth (voice clients) | Bandwidth (voice server) |
 | --- | --- | --- | --- | --- | --- |
 | [Peer Voice Session Subprotocol](#Section_1.3.3) | Lowest | Scales with the number of people talking to a voice client. | Fixed | Scales with the number of people talking to voice client. Also scales by the number of people the voice client is talking to. | Fixed |
-| [Mixing Voice Session Subprotocol](#Section_1.3.4) | Highest | Fixed | Scales with the number of unique mixes and number of people talking. | Fixed | Scales with the number of people receiving voice. |
-| [Forwarding Voice Session Subprotocol](#Section_1.3.5) | Medium | Fixed | Fixed | Scales with the number of people talking to the voice client. | Scales with the number of people talking. |
-| [Echo Voice Session Subprotocol](#Section_1.3.6) | Medium | Fixed | Fixed | Fixed | Scales with the number of people talking. |
+| [Mixing Voice Session Subprotocol](#Section_1.3) | Highest | Fixed | Scales with the number of unique mixes and number of people talking. | Fixed | Scales with the number of people receiving voice. |
+| [Forwarding Voice Session Subprotocol](#Section_1.3) | Medium | Fixed | Fixed | Scales with the number of people talking to the voice client. | Scales with the number of people talking. |
+| [Echo Voice Session Subprotocol](#Section_1.3) | Medium | Fixed | Fixed | Fixed | Scales with the number of people talking. |
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -597,7 +597,7 @@ The following table indicates which messages are used for each [**game session**
 | [Speech with Target Message (section 2.2.2.6)](#Section_2.2.2.6) | No | No | Yes | Yes | No |
 | [Speech with From Message (section 2.2.5.1)](#Section_2.2.5.1) | No | No | No | Yes | No |
 
-(*) = Only when [**host migration**](#gt_host-migration) is enabled. For additional information, see section [1.3.3.1](#Section_1.3) .
+(*) = Only when [**host migration**](#gt_host-migration) is enabled. For additional information, see section [1.3.3.1](#Section_1.3.3.1) .
 
 (**) = Only when [**server-controlled targeting**](#gt_server-controlled-targeting) is enabled. This is indicated by the value DVSESSION_SERVERCONTROLTARGET (0x00000002) being present in the **SessionFlags** field in the Connect Accept Message (section 2.2.3.2).
 
@@ -705,7 +705,7 @@ packet-beta
 | --- | --- |
 | DVPLAYERCAPS_HALFDUPLEX 0x00000001 | The voice client cannot record audio and will therefore not be transmitting any [**speech messages**](#gt_speech-message). |
 
-**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), this field MUST be set to the host order ID of the voice client to be added. Otherwise, **HostOrderID** SHOULD be set to 0xFFFFFFFF.
+**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), this field MUST be set to the host order ID of the voice client to be added. Otherwise, **HostOrderID** SHOULD be set to 0xFFFFFFFF.
 
 <a id="Section_2.2.2.5"></a>
 #### 2.2.2.5 Set Client Voice Target Message
@@ -793,7 +793,7 @@ packet-beta
 | --- | --- |
 | DVPLAYERCAPS_HALFDUPLEX 0x00000001 | The voice client cannot record audio and will therefore not be transmitting any encoded audio data. |
 
-**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When host migration is enabled as described in section [1.3.3.1](#Section_1.3), and the Client Capability Confirmation Message is used during host migration, the **HostOrderID** field MUST be set to the **Current Host Order ID** of the voice client. Otherwise, **HostOrderID** MUST be set to 0xFFFFFFFF. For more information about the **Current Host Order ID**, see sections [3.1.1](#Section_3.1.5.2.5) and [3.1.3](#Section_3.2.3).
+**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When host migration is enabled as described in section [1.3.3.1](#Section_1.3.3.1), and the Client Capability Confirmation Message is used during host migration, the **HostOrderID** field MUST be set to the **Current Host Order ID** of the voice client. Otherwise, **HostOrderID** MUST be set to 0xFFFFFFFF. For more information about the **Current Host Order ID**, see sections [3.1.1](#Section_3.1.1) and [3.1.3](#Section_3.1.3).
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Connection Subprotocol Messages
@@ -858,7 +858,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| DVSESSION_NOHOSTMIGRATION 0x00000001 | [**Host migration**](#gt_host-migration) (section [1.3.3.1](#Section_1.3)) is not enabled in the current voice session. If the voice server leaves the game session, the game session will end. |
+| DVSESSION_NOHOSTMIGRATION 0x00000001 | [**Host migration**](#gt_host-migration) (section [1.3.3.1](#Section_1.3.3.1)) is not enabled in the current voice session. If the voice server leaves the game session, the game session will end. |
 | DVSESSION_SERVERCONTROLTARGET 0x00000002 | The target of a voice client's voice data is controlled by the voice server instead of the voice client itself. |
 
 **CompressionType (16 bytes):** A 16-byte [**GUID**](#gt_globally-unique-identifier-guid) value indicating the [**compression ID**](#gt_compression-id) for the [**codec**](#gt_codec) that MUST be used for encoding voice data in this voice session. For a full description of the codecs and required parameters, see [Required Codecs (section 1.3.7)](#Section_1.3.7).
@@ -926,7 +926,7 @@ packet-beta
 | --- | --- |
 | DVPLAYERCAPS_HALFDUPLEX 0x00000001 | The voice client cannot record audio and will therefore not be transmitting any encoded audio data. |
 
-**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), this field MUST be set to the host order ID of the voice client that is being described. Otherwise, **HostOrderID** SHOULD be set to 0xFFFFFFFF.
+**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), this field MUST be set to the host order ID of the voice client that is being described. Otherwise, **HostOrderID** SHOULD be set to 0xFFFFFFFF.
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 Voice Client List Message
@@ -943,7 +943,7 @@ packet-beta
 
 **Header (1 byte):** The common message header (as specified in section [2.2.1](#Section_2.2.1)). The **MessageType** field MUST be set to DVMSGID_PLAYERLIST (0x61).
 
-**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), this field MUST be set to the host order ID of the voice client to which the Voice Client List Message is being sent. Otherwise, **HostOrderID** SHOULD be set to 0xFFFFFFFF.
+**HostOrderID (4 bytes):** A 32-bit unsigned integer representing the [**host order ID**](#gt_host-order-id) of the voice client. When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), this field MUST be set to the host order ID of the voice client to which the Voice Client List Message is being sent. Otherwise, **HostOrderID** SHOULD be set to 0xFFFFFFFF.
 
 **NumPlayerListEntries (4 bytes):** A 32-bit unsigned integer. This value MUST indicate the length of the **PlayerList** field in the Voice Client List Message. This field will never be a value greater than 0x00000052. It is possible for this value to be 0.
 
@@ -988,7 +988,7 @@ packet-beta
 <a id="Section_2.2.4.5"></a>
 #### 2.2.4.5 Host Migration Messages
 
-The following are messages that are specific to the [Peer Voice Session Subprotocol (section 1.3.3)](#Section_1.3.3) when [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3).
+The following are messages that are specific to the [Peer Voice Session Subprotocol (section 1.3.3)](#Section_1.3.3) when [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1).
 
 <a id="Section_2.2.4.5.1"></a>
 ##### 2.2.4.5.1 Voice Server Exited with Host Migration Message
@@ -1060,7 +1060,7 @@ The following are abstract data items maintained by [**voice clients**](#gt_voic
 
 When the voice client is operating with the [Forwarding Voice Session Subprotocol (section 1.3.5)](#Section_1.3.5) it maintains a list of other voice clients in the voice session. The **Voice Client List** contains the DVID of each voice client in the voice session. Voice clients are added to the list in response to a [Speech with From Message (section 2.2.5.1)](#Section_2.2.5.1) where the value of the **SourceDVID** field specifies a DVID that is not in the **Voice Client List**. Voice clients are removed from the **Voice Client List** when the voice session ends.
 
-**Current Host Order ID:** When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), the voice client stores the current value of its host order ID.
+**Current Host Order ID:** When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), the voice client stores the current value of its host order ID.
 
 **Current Voice Server DVID:** The DVID of the current voice server. If a host migration occurs, this value can change.
 
@@ -1179,7 +1179,7 @@ When the message is processed the voice client SHOULD replace its **Current Voic
 
 The structure and fields of the [Client Disconnect Request Message](#Section_2.2.2.2) are specified in section 2.2.2.2.
 
-This message is sent by the [**voice client**](#gt_voice-client) to the [**voice server**](#gt_voice-server) when the higher level indicates that the voice client SHOULD disconnect. When this message is sent, the voice client stops any currently transmitting [**voice bursts**](#gt_voice-burst). The voice client then waits for a [Client Disconnect Confirmation Message](#Section_2.2.2.3). If a [Session Lost Message](#Section_2.2.2.1) or a Client Disconnect Confirmation Message is received while waiting, the voice client stops waiting. If a [Host Migration Complete Message](#Section_2.2.4.5.2) is received while waiting, and [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), then the voice client retransmits the Client Disconnect Request Message.
+This message is sent by the [**voice client**](#gt_voice-client) to the [**voice server**](#gt_voice-server) when the higher level indicates that the voice client SHOULD disconnect. When this message is sent, the voice client stops any currently transmitting [**voice bursts**](#gt_voice-burst). The voice client then waits for a [Client Disconnect Confirmation Message](#Section_2.2.2.3). If a [Session Lost Message](#Section_2.2.2.1) or a Client Disconnect Confirmation Message is received while waiting, the voice client stops waiting. If a [Host Migration Complete Message](#Section_2.2.4.5.2) is received while waiting, and [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), then the voice client retransmits the Client Disconnect Request Message.
 
 <a id="Section_3.1.5.2.4"></a>
 ##### 3.1.5.2.4 Receiving a Client Disconnect Confirmation Message
@@ -1243,7 +1243,7 @@ A Speech Message is directly received from other [**voice clients**](#gt_voice-c
 
 The structure and fields of the [Voice Server Exited with Host Migration Message](#Section_2.2.4.5.1) are specified in section 2.2.4.5.1.
 
-This message indicates that the [**voice server**](#gt_voice-server) is exiting the [**game session**](#gt_game-session) and that [**host migration**](#gt_host-migration) is enabled in the [**voice session**](#gt_voice-session). See section [1.3.3.1](#Section_1.3) for information about what the [**voice client**](#gt_voice-client) SHOULD do in response to the message.
+This message indicates that the [**voice server**](#gt_voice-server) is exiting the [**game session**](#gt_game-session) and that [**host migration**](#gt_host-migration) is enabled in the [**voice session**](#gt_voice-session). See section [1.3.3.1](#Section_1.3.3.1) for information about what the [**voice client**](#gt_voice-client) SHOULD do in response to the message.
 
 <a id="Section_3.1.5.3.6.2"></a>
 ###### 3.1.5.3.6.2 Receiving a Host Migration Complete Message
@@ -1331,7 +1331,7 @@ When the **Speech Data Transmission Timer** expires, the voice client checks to 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
 
-When the [**DirectPlay protocol**](#gt_directplay-protocol) indicates that a [**DirectPlay client**](#gt_directplay-client) has left the [**voice session**](#gt_voice-session) for any reason, the [**voice clients**](#gt_voice-client) check to see whether the DirectPlay client that left was the voice session [**host**](#gt_host) ([**voice server**](#gt_voice-server)). If the DirectPlay client that left was the voice server and [**host migration**](#gt_host-migration) is enabled, host migration is performed as specified in section [1.3.3.1](#Section_1.3). If the DirectPlay client that left was the voice server and host migration is not enabled, the DirectPlay Voice Protocol will terminate all sending and receiving.
+When the [**DirectPlay protocol**](#gt_directplay-protocol) indicates that a [**DirectPlay client**](#gt_directplay-client) has left the [**voice session**](#gt_voice-session) for any reason, the [**voice clients**](#gt_voice-client) check to see whether the DirectPlay client that left was the voice session [**host**](#gt_host) ([**voice server**](#gt_voice-server)). If the DirectPlay client that left was the voice server and [**host migration**](#gt_host-migration) is enabled, host migration is performed as specified in section [1.3.3.1](#Section_1.3.3.1). If the DirectPlay client that left was the voice server and host migration is not enabled, the DirectPlay Voice Protocol will terminate all sending and receiving.
 
 When the DirectPlay protocol indicates that connectivity with the [**DirectPlay**](#gt_directplay) voice session has been lost, the DirectPlay Voice Protocol will terminate all sending and receiving.
 
@@ -1343,13 +1343,13 @@ When the DirectPlay protocol indicates that connectivity with the [**DirectPlay*
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This specification does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this specification.
 
-**Note** In a [**peer-to-peer**](#gt_peer-to-peer) [**voice session**](#gt_voice-session), the [**voice client**](#gt_voice-client) maintains the abstract data items identified in section [3.1.1](#Section_3.1.5.2.5). In a [**client/server**](#gt_clientserver-mode) voice session, the [**voice server**](#gt_voice-server) maintains both the abstract data items identified in section 3.1.1, as well as those listed in this topic. Although the abstract data items identified in section 3.1.1 use the same names as those listed in this topic, there is no internal conflict. In a client/server configuration, the voice server maintains the abstract data items identified in this topic from the perspective of a voice server, while the items listed in section 3.1.1 are maintained from the perspective of the voice server as a [**player**](#gt_player) in the voice session, and therefore, as a voice client. Differentiation between the similarly named abstract data items is maintained internally by [**DirectPlay**](#gt_directplay).
+**Note** In a [**peer-to-peer**](#gt_peer-to-peer) [**voice session**](#gt_voice-session), the [**voice client**](#gt_voice-client) maintains the abstract data items identified in section [3.1.1](#Section_3.1.1). In a [**client/server**](#gt_clientserver-mode) voice session, the [**voice server**](#gt_voice-server) maintains both the abstract data items identified in section 3.1.1, as well as those listed in this topic. Although the abstract data items identified in section 3.1.1 use the same names as those listed in this topic, there is no internal conflict. In a client/server configuration, the voice server maintains the abstract data items identified in this topic from the perspective of a voice server, while the items listed in section 3.1.1 are maintained from the perspective of the voice server as a [**player**](#gt_player) in the voice session, and therefore, as a voice client. Differentiation between the similarly named abstract data items is maintained internally by [**DirectPlay**](#gt_directplay).
 
 The following are abstract data items maintained by the voice server:
 
 **Voice Client List:** A list of voice clients in the voice session. The Voice Client List contains the [**DVID**](#gt_dvid) and [**host order ID**](#gt_host-order-id) of each voice client in the voice session.
 
-**Next Host Order ID:** When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), the voice server stores the value of the next host order ID.
+**Next Host Order ID:** When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), the voice server stores the value of the next host order ID.
 
 **Client Voice Target List:** The voice server maintains a [**voice target list**](#gt_voice-target-list) for each voice client in the voice session when [**server-controlled targeting**](#gt_server-controlled-targeting) is enabled. This list is used to target [**speech messages**](#gt_speech-message) sent from the voice client. If the voice target list is empty, then speech messages are discarded rather than sent.
 
@@ -1370,7 +1370,7 @@ When the [**voice server**](#gt_voice-server) is using the [Mixing Voice Session
 The underlying [**game session**](#gt_game-session) MUST be established before the [**voice client**](#gt_voice-client) can begin operation. In addition, the following MUST occur:
 
 - **Voice Client List** is set to empty.
-- **Next Host Order ID** is set to 0 if [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3).
+- **Next Host Order ID** is set to 0 if [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1).
 - **Current Voice Target List** is set to empty for each voice client if [**server-controlled targeting**](#gt_server-controlled-targeting) is enabled.
 - **Jitter Buffers** are initialized if the [**voice session**](#gt_voice-session) is using the [Mixing Voice Session Subprotocol (section 1.3.4)](#Section_1.3.4).
 - **Current Message Number** is set to 0 for all voice clients if the voice session is using the Mixing Voice Session Subprotocol (section 1.3.4).
@@ -1378,14 +1378,14 @@ The underlying [**game session**](#gt_game-session) MUST be established before t
 <a id="Section_3.2.3.1"></a>
 #### 3.2.3.1 Initialization with Host Migration
 
-When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3), a [**voice server**](#gt_voice-server) will be created by a [**voice client**](#gt_voice-client) when host migration occurs. The voice server SHOULD start with the **Voice Client List** containing the list of [**clients**](#gt_client) for the voice client. The voice server SHOULD also initialize the **Next Host Order ID** to the highest [**host order ID**](#gt_host-order-id) in the **Voice Client List** plus 255.
+When [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1), a [**voice server**](#gt_voice-server) will be created by a [**voice client**](#gt_voice-client) when host migration occurs. The voice server SHOULD start with the **Voice Client List** containing the list of [**clients**](#gt_client) for the voice client. The voice server SHOULD also initialize the **Next Host Order ID** to the highest [**host order ID**](#gt_host-order-id) in the **Voice Client List** plus 255.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
 
 The following are events that can be triggered by a higher level:
 
-**Shutdown Request:** The higher level can initiate a shutdown for the [**voice session**](#gt_voice-session). This will cause a [Session Lost Message (section 2.2.2.1)](#Section_2.2.2.1) to be sent to all [**voice clients**](#gt_voice-client) if [**host migration**](#gt_host-migration) is disabled. If host migration is enabled as described in section [1.3.3.1](#Section_1.3), then this will cause a [Voice Server Exited with Host Migration (section 2.2.4.5.1)](#Section_2.2.4.5.1). It is also possible to disable host migration before shutdown to cause a voice session to stop without migrating the [**host**](#gt_host).
+**Shutdown Request:** The higher level can initiate a shutdown for the [**voice session**](#gt_voice-session). This will cause a [Session Lost Message (section 2.2.2.1)](#Section_2.2.2.1) to be sent to all [**voice clients**](#gt_voice-client) if [**host migration**](#gt_host-migration) is disabled. If host migration is enabled as described in section [1.3.3.1](#Section_1.3.3.1), then this will cause a [Voice Server Exited with Host Migration (section 2.2.4.5.1)](#Section_2.2.4.5.1). It is also possible to disable host migration before shutdown to cause a voice session to stop without migrating the [**host**](#gt_host).
 
 **Change Voice Client List:** The higher level can modify the **Current Voice Target List** for a specific voice client if [**Server Controlled Targeting**](#gt_server-controlled-targeting) is enabled. This will trigger a [Set Client Voice Target Message (section 2.2.2.5)](#Section_2.2.2.5) to be sent to the voice client.
 
@@ -1431,7 +1431,7 @@ The structure and fields of the [Client Capability Confirmation Message](#Sectio
 The [**voice client**](#gt_voice-client) will send the [**voice server**](#gt_voice-server) a Client Capability Confirmation Message when it has confirmed that it can support the type of [**voice session subprotocol**](#gt_voice-session-subprotocol) and [**codec**](#gt_codec) that the voice server is using. Once this message is received from a voice client, the voice server can start talking the specific voice session subprotocol with the voice client. The voice server SHOULD also take the following steps:
 
 - Add the specified voice client to the **Voice Client List**.
-- If [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3):
+- If [**host migration**](#gt_host-migration) is enabled as described in section [1.3.3.1](#Section_1.3.3.1):
 - Assign the value of the **Next Host Order ID** to the new voice client.
 - Increment the **Next Host Order ID**.
 - If the voice client presents a [**host order ID**](#gt_host-order-id) that is not equal to 0xFFFFFFFF and exceeds the current value of **Next Host Order ID**, the **Next Host Order ID** is incremented by 255.
@@ -1444,7 +1444,7 @@ The [**voice client**](#gt_voice-client) will send the [**voice server**](#gt_vo
 
 The structure and fields of the [Session Lost Message](#Section_2.2.2.1) are specified in section 2.2.2.1.
 
-The [**voice server**](#gt_voice-server) sends this message to all [**voice clients**](#gt_voice-client) in the [**voice session**](#gt_voice-session) when the voice server is shutting down and [**host migration**](#gt_host-migration) (section [1.3.3.1](#Section_1.3)) is not enabled. Once this message is sent, the voice server SHOULD no longer respond to messages from voice clients.
+The [**voice server**](#gt_voice-server) sends this message to all [**voice clients**](#gt_voice-client) in the [**voice session**](#gt_voice-session) when the voice server is shutting down and [**host migration**](#gt_host-migration) (section [1.3.3.1](#Section_1.3.3.1)) is not enabled. Once this message is sent, the voice server SHOULD no longer respond to messages from voice clients.
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Sending a Set Client Voice Target Message
@@ -1599,7 +1599,7 @@ The structure and fields of the [Speech with Bounce Message](#Section_2.2.2.7) a
 
 When the [**voice server**](#gt_voice-server) is using the [Mixing Voice Session Subprotocol (section 1.3.4)](#Section_1.3.4) a **Speech Data Transmission Timer** is created. It expires on the period indicated by the currently selected [**codec**](#gt_codec) as specified by the frame size (ms of data) column in the list of codecs in section [1.3.7](#Section_1.3.7).
 
-When the **Speech Data Transmission Timer** expires, the next [Speech with Bounce Message (section 2.2.2.7)](#Section_2.2.2.7) is sent to each [**voice client**](#gt_voice-client) in the [**voice session**](#gt_voice-session) (if there is one). For additional information, see [Sending a Speech with Bounce Message (section 3.2.5.4.3)](#Section_2.2.2.7).
+When the **Speech Data Transmission Timer** expires, the next [Speech with Bounce Message (section 2.2.2.7)](#Section_2.2.2.7) is sent to each [**voice client**](#gt_voice-client) in the [**voice session**](#gt_voice-session) (if there is one). For additional information, see [Sending a Speech with Bounce Message (section 3.2.5.4.3)](#Section_3.2.5.4.3).
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events

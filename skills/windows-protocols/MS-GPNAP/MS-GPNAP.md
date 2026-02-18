@@ -223,7 +223,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NAPOD] Microsoft Corporation, "[Network Access Protection Protocols Overview](#Section_1.3)".
+[MS-NAPOD] Microsoft Corporation, "[Network Access Protection Protocols Overview](../MS-NAPOD/MS-NAPOD.md)".
 
 [MSDN-ALG] Microsoft Corporation, "CNG Algorithm Identifiers", [http://msdn.microsoft.com/en-us/library/aa375534(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=187044)
 
@@ -246,7 +246,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-[**Network Access Protection (NAP)**](#gt_network-access-protection-nap) is a platform that controls access to network resources, based on a client computer's identity and compliance with corporate governance policy. NAP allows network administrators to define granular levels of network access, based on who a client is, the groups to which the client belongs, and the degree to which that client is compliant with corporate governance policy. Based on the degree of compliance, NAP can implement different enforcement methods that can restrict or limit client access to the network. If a client is not compliant, NAP provides a mechanism to automatically bring the client back into compliance and then to dynamically increase its level of network access. The NAP architecture is specified in [MS-NAPOD](#Section_1.3).
+[**Network Access Protection (NAP)**](#gt_network-access-protection-nap) is a platform that controls access to network resources, based on a client computer's identity and compliance with corporate governance policy. NAP allows network administrators to define granular levels of network access, based on who a client is, the groups to which the client belongs, and the degree to which that client is compliant with corporate governance policy. Based on the degree of compliance, NAP can implement different enforcement methods that can restrict or limit client access to the network. If a client is not compliant, NAP provides a mechanism to automatically bring the client back into compliance and then to dynamically increase its level of network access. The NAP architecture is specified in [MS-NAPOD](../MS-NAPOD/MS-NAPOD.md).
 
 The behavior of NAP can be controlled through [**Group Policy**](#gt_group-policy) by updating the client [**registry**](#gt_registry), as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) and in [MS-GPREG](../MS-GPREG/MS-GPREG.md). This mechanism can be used by an administrator to enable or disable NAP enforcement, to set [**Health Registration Authorities (HRAs)**](#gt_health-registration-authority-hra) to be used by the client, and to control client user interface and tracing. All NAP group policies are machine-specific, meaning that the same policy is applied to all users on a given machine.
 
@@ -533,7 +533,7 @@ For more information on RDG and NAP, see [[MSFT-RDG]](https://go.microsoft.com/f
 <a id="Section_2.3.5"></a>
 ### 2.3.5 EAP Enforcement
 
-The NAP EAP [**enforcement client**](#gt_enforcement-client) extends the 802.1x supplicant, allows responding to an [**SoH**](#gt_statement-of-health-soh) Request TLV message with an SoH TLV message, as specified in section [2.3](#Section_2.3), and sends the response using an 802.1x supplicant for 802.1x-authenticated connections, as described in [MS-NAPOD](#Section_1.3).<6>
+The NAP EAP [**enforcement client**](#gt_enforcement-client) extends the 802.1x supplicant, allows responding to an [**SoH**](#gt_statement-of-health-soh) Request TLV message with an SoH TLV message, as specified in section [2.3](#Section_2.3), and sends the response using an 802.1x supplicant for 802.1x-authenticated connections, as described in [MS-NAPOD](../MS-NAPOD/MS-NAPOD.md).<6>
 
 While attempting to access a LAN or WLAN using an 802.1x connection, the 802.1x supplicant obtains an SoH as specified in section 2.3 and sends it in **PEAP-Type-Length-Value (TLV)** extension, as specified in [MS-PEAP](../MS-PEAP/MS-PEAP.md) section 2.2.8. The 802.1x server can send the SoH to a policy server (for example NPS) for evaluation. Based on the policy server response, the 802.1x server can enable the client to connect to other computers on the network or can restrict the traffic of the NAP client by specifying a restricted network that limits access to specific resources on the network, as described in [MS-NAPOD]. Alternatively, the 802.1x server can reject supplicant access.
 

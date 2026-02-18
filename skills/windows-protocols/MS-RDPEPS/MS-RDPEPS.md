@@ -164,7 +164,7 @@ This protocol is applicable when there is a need to allow multiple processes to 
 There are two versions of this protocol. For specifications about handling and sending the version information, see sections [2.2.1](#Section_2.2.1), [3.1.5.1](#Section_3.1.5.1), and [3.2.5.1](#Section_3.2.5.1).
 
 - Version 1 is specified by the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1).
-- Version 2 is specified by the [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2).
+- Version 2 is specified by the [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2).
 A listening process that implements this extension expects that the [**PDU**](#gt_protocol-data-unit-pdu) and the client will always send it.
 
 The client and server both use the same version of the preconnection PDU. There is no negotiation for the PDU version in the protocol, so an out-of-band method is used to determine which version to use. For example, a server implementing this protocol can state in its documentation that it always expects version 1 of the preconnection PDU. A client being developed to connect to this server will then be configured to always send version 1 of the PDU. See section 3.2.5.1 for more information.
@@ -197,7 +197,7 @@ The following sections contain the Remote Desktop Protocol: Session Selection Ex
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Server RDP Preconnection PDU
 
-The following sections contain Remote Desktop Protocol: Session Selection Extension message syntax for [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) and [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2). Section [1.7](#Section_1.7) describes when each version is used.
+The following sections contain Remote Desktop Protocol: Session Selection Extension message syntax for [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) and [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2). Section [1.7](#Section_1.7) describes when each version is used.
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Version 1 (RDP_PRECONNECTION_PDU_V1)
@@ -212,7 +212,7 @@ packet-beta
   96-127: "Id"
 ```
 
-**cbSize (4 bytes):** An unsigned 32-bit integer. This field identifies the total size, in bytes, of the RDP_PRECONNECTION_PDU_V1, or for a version 2 packet, the size of an [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2) packet.
+**cbSize (4 bytes):** An unsigned 32-bit integer. This field identifies the total size, in bytes, of the RDP_PRECONNECTION_PDU_V1, or for a version 2 packet, the size of an [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2) packet.
 
 **Flags (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sending and ignored on receipt.
 
@@ -259,7 +259,7 @@ None.
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-This protocol has a 10-second timer. It starts at the successful creation of the TCP connection between the [**client**](#gt_client) and [**server**](#gt_server). The full length of the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2) MUST be sent by the client and received by the server within this window.
+This protocol has a 10-second timer. It starts at the successful creation of the TCP connection between the [**client**](#gt_client) and [**server**](#gt_server). The full length of the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2) MUST be sent by the client and received by the server within this window.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -274,7 +274,7 @@ None.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
 
-The client MUST send either the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2) to the server before sending any of the PDUs described in the [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) specification.
+The client MUST send either the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2) to the server before sending any of the PDUs described in the [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) specification.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Sending the RDP_PRECONNECTION_PDU_V1
@@ -288,7 +288,7 @@ The **Id** field SHOULD<1> be set to the [**RDP source ID**](#gt_rdp-source-id) 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Sending the RDP_PRECONNECTION_PDU_V2
 
-The size that is sent in the **cbSize** field of the [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2) packet is calculated by adding the size of the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) header, **cchPCB** field, and **wszPCB** field. The size, in bytes, of the **wszPCB** field is calculated as the number of characters specified in the **cchPCB** field multiplied by 2. If the **cchPCB** field contains five characters, the **cbSize** will be 18 + (5 * 2) = 28. If the **cchPCB** field is 0, the **wszPCB** field is not present, and the **cbSize** field MUST be initialized with a value of 18.
+The size that is sent in the **cbSize** field of the [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2) packet is calculated by adding the size of the [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) header, **cchPCB** field, and **wszPCB** field. The size, in bytes, of the **wszPCB** field is calculated as the number of characters specified in the **cchPCB** field multiplied by 2. If the **cchPCB** field contains five characters, the **cbSize** will be 18 + (5 * 2) = 28. If the **cchPCB** field is 0, the **wszPCB** field is not present, and the **cbSize** field MUST be initialized with a value of 18.
 
 The client MUST initialize the **Version** field with the RDP_PRECONNECTION_PDU_V2 value.
 
@@ -319,7 +319,7 @@ None.
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-This protocol has a 10-second timer. It starts at the successful creation of the TCP connection between the client and server. The full length of [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2) SHOULD be sent by the client and received by the server within this window.<3>
+This protocol has a 10-second timer. It starts at the successful creation of the TCP connection between the client and server. The full length of [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2) SHOULD be sent by the client and received by the server within this window.<3>
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
@@ -334,12 +334,12 @@ None.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Processing Events and Sequencing Rules
 
-This section includes information about the processing of [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) and [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2).
+This section includes information about the processing of [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) and [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2).
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Processing the RDP_PRECONNECTION PDU V1 and V2
 
-When processing either [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2), the server MUST not make assumptions about the way the [**PDU**](#gt_protocol-data-unit-pdu) is delivered by TCP/IP. The server MUST only read the bytes that are part of this PDU. The server MUST NOT read more than the minimum required size.
+When processing either [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) or [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2), the server MUST not make assumptions about the way the [**PDU**](#gt_protocol-data-unit-pdu) is delivered by TCP/IP. The server MUST only read the bytes that are part of this PDU. The server MUST NOT read more than the minimum required size.
 
 The server SHOULD wait and receive the whole PDU.<4> After the whole PDU is received, the server MUST determine the process for which the connection is intended. The server MUST hand over the connection to the specified process. If the information in the PDU does not map to any process, the server SHOULD disconnect the client.<5>
 
@@ -378,7 +378,7 @@ eb 99 c6 ee -> RDP_PRECONNECTION_PDU_V1::Id = 0xEEC699EB = 4005992939
 
 (random id)
 
-The following is an example of the [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2), where the [**PDU**](#gt_protocol-data-unit-pdu) is an RDP_PRECONNECTION_PDU_V1 that is extended with a variable-size [**Unicode**](#gt_unicode) string.
+The following is an example of the [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2), where the [**PDU**](#gt_protocol-data-unit-pdu) is an RDP_PRECONNECTION_PDU_V1 that is extended with a variable-size [**Unicode**](#gt_unicode) string.
 
 00000000 20 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00 ...............
 
@@ -444,7 +444,7 @@ The following is an example of the RDP_PRECONNECTION_PDU_V2, where the PDU conta
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-In order to avoid denial-of-service attacks, the [**server**](#gt_server) cannot wait indefinitely for the [**PDU**](#gt_protocol-data-unit-pdu) content to arrive. Instead, the server will disconnect the [**client**](#gt_client) if the timer that is specified in sections [3.1.2](#Section_3.1.2) and [3.2.2](#Section_3.1.2) has passed and the entire PDU was not received.
+In order to avoid denial-of-service attacks, the [**server**](#gt_server) cannot wait indefinitely for the [**PDU**](#gt_protocol-data-unit-pdu) content to arrive. Instead, the server will disconnect the [**client**](#gt_client) if the timer that is specified in sections [3.1.2](#Section_3.1.2) and [3.2.2](#Section_3.2.2) has passed and the entire PDU was not received.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -477,13 +477,13 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 3.1.5.1: In Windows Vista, Windows 7, Windows 8, Windows 8.1, and Windows 10, the client initializes the **Version** field with [RDP_PRECONNECTION_PDU_V1](#Section_2.2.1.1) because the **Id** field is sufficient to identify the wanted [**RDP source**](#gt_rdp-source). The **Id** is initialized to a value that identifies the server. This value is obtained by the client through an external mechanism (such as fax, email, or telephone) that is outside this protocol. The external mechanism that is used by the Remote Assistance Initiation Protocol (see [MS-RAI](../MS-RAI/MS-RAI.md)) exchanges the **Id** as described in [MS-RAI] section 2.2.2. (The SID XML attribute in the Remote Assistance Connection String 2 contains the Id value.)
 
-<2> Section 3.1.5.2: In the Windows Server 2008 operating system, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 virtual machine implementation, the client initializes the **Version** field to [RDP_PRECONNECTION_PDU_V2](#Section_3.1.5.2) and sets the **Id** field to zero. The string is used to identify the name of the wanted virtual machine. If the string is not null-terminated, the server will overwrite the last [**Unicode**](#gt_unicode) character with NULL prior to further processing.
+<2> Section 3.1.5.2: In the Windows Server 2008 operating system, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 virtual machine implementation, the client initializes the **Version** field to [RDP_PRECONNECTION_PDU_V2](#Section_2.2.1.2) and sets the **Id** field to zero. The string is used to identify the name of the wanted virtual machine. If the string is not null-terminated, the server will overwrite the last [**Unicode**](#gt_unicode) character with NULL prior to further processing.
 
 The Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 virtual machine sends a GUID instead of a virtual machine name.
 
 GUID formatting is as follows: 00000000-0000-0000-0000-000000000000. The hexadecimal numbers are separated by '-' characters; however, without any braces {} around the GUID. The byte ordering is standard GUID byte ordering (identical for all GUIDs that are represented as strings) and is case-insensitive for the hexadecimal digits. No other form is allowed.
 
-<3> Section 3.2.2: In Windows implementations, the server associates a time stamp for each new connection. The time stamp is used to verify whether all the preconnection PDU data for a connection was received in the specified 10-second interval. (See section [3.2.2](#Section_3.1.2).) If the data was not received, the client is then disconnected. However, the checks are only performed when a new connection is created or when data is received on one of the pending connections. Otherwise, the server does not check the time stamp, and the client is not disconnected.
+<3> Section 3.2.2: In Windows implementations, the server associates a time stamp for each new connection. The time stamp is used to verify whether all the preconnection PDU data for a connection was received in the specified 10-second interval. (See section [3.2.2](#Section_3.2.2).) If the data was not received, the client is then disconnected. However, the checks are only performed when a new connection is created or when data is received on one of the pending connections. Otherwise, the server does not check the time stamp, and the client is not disconnected.
 
 <4> Section 3.2.5.1: In Windows implementations, the server associates a time stamp for each new connection. The time stamp is used to verify whether all the preconnection PDU data for a connection is received in the specified 10-second interval. (See section 3.2.2.) If the data is not received, the client is disconnected. However, these checks are only performed when a new connection is created or when data is received on a pending connection. Otherwise, the server does not check the time stamp, and the client is not disconnected.
 

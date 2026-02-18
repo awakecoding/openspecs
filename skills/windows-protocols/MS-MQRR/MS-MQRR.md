@@ -314,7 +314,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](../MS-MQDSSM/MS-MQDSSM.md)".
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-MMSCH] Microsoft Corporation, "Mixed Mode Serialization of Context Handles", [http://msdn.microsoft.com/en-us/library/aa367098(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=151562)
 
@@ -477,7 +477,7 @@ This specification uses the **HRESULT** ([MS-ERREF](../MS-ERREF/MS-ERREF.md) sec
 <a id="Section_2.2.2"></a>
 ### 2.2.2 GUID
 
-This specification uses a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid). Unless otherwise qualified, instances of **GUID** in sections [2](../MS-DTYP/MS-DTYP.md) and [3](../MS-DTYP/MS-DTYP.md) refer to [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.
+This specification uses a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid). Unless otherwise qualified, instances of **GUID** in sections [2](#Section_2) and [3](#Section_3) refer to [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 QUEUE_FORMAT
@@ -884,7 +884,7 @@ This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A 
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.1.1.1](#Section_3.1.1.1) specifies the abstract data model (ADM) elements from the shared data model that are manipulated by this protocol, and sections [3.1.1.2](#Section_3.1.1.2) through [3.1.1.4](#Section_3.1.1.4) specify the ADM elements that are private to this protocol.
 
@@ -1020,7 +1020,7 @@ Exceptions Thrown:
 
 No exceptions are thrown except those thrown by the underlying RPC protocol, as specified in [MS-RPCE].
 
-As specified in section [3.1.3](#Section_3.2.3), this protocol configures a fixed listening endpoint at an RPC port number that can vary. This method returns the RPC port number determined at server initialization time.
+As specified in section [3.1.3](#Section_3.1.3), this protocol configures a fixed listening endpoint at an RPC port number that can vary. This method returns the RPC port number determined at server initialization time.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 R_OpenQueue (Opnum 2)
@@ -2232,7 +2232,7 @@ The client MUST supply a [**queue**](#gt_queue) name, an access mode, and a shar
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Enlisting in a Transaction
 
-The [**message queuing**](#gt_message-queuing) application MUST generate an Enlisting in a Transaction event before generating a [Receive a Message (section 3.2.4.4)](#Section_3.2.4.4) event, [Move a Message (section 3.2.4.6)](#Section_3.2.4.6) event, or [Receive a Message by Using a Cursor (section 3.2.4.10)](#Section_3.2.4.4) event, if the message is to be received or moved in a transaction context.
+The [**message queuing**](#gt_message-queuing) application MUST generate an Enlisting in a Transaction event before generating a [Receive a Message (section 3.2.4.4)](#Section_3.2.4.4) event, [Move a Message (section 3.2.4.6)](#Section_3.2.4.6) event, or [Receive a Message by Using a Cursor (section 3.2.4.10)](#Section_3.2.4.10) event, if the message is to be received or moved in a transaction context.
 
 The message queuing application MUST specify the transaction identifier, and subsequent invocations of the Receive a Message event, Move a Message event, or Receive a Message by Using a Cursor event MUST be generated with the same transaction identifier.
 

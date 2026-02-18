@@ -238,7 +238,7 @@ The VT-UTF8 and VT100+ protocols are transmitted over a serial port (COM port) c
 <a id="Section_2.2.1"></a>
 ### 2.2.1 VT-UTF8 and VT100+ for Serial/UPS
 
-The VT-UTF8 and VT100+ client console command request or server response consists of a single field that contains the "<ESC>" character followed by one or more characters. The entire sequence MUST be sent within 2 seconds of the initial <ESC>, as specified in sections [3.2.2](#Section_3.1.2) and [3.2.6](#Section_3.2.6).
+The VT-UTF8 and VT100+ client console command request or server response consists of a single field that contains the "<ESC>" character followed by one or more characters. The entire sequence MUST be sent within 2 seconds of the initial <ESC>, as specified in sections [3.2.2](#Section_3.2.2) and [3.2.6](#Section_3.2.6).
 
 **Command_Sequence**: The character sequence containing the entire client request.
 
@@ -503,7 +503,7 @@ None.
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-When the client receives an escape character, it MUST enter an escape state for 2 seconds as it waits for additional characters. For more information, see section [3.2.2](#Section_3.1.2).
+When the client receives an escape character, it MUST enter an escape state for 2 seconds as it waits for additional characters. For more information, see section [3.2.2](#Section_3.2.2).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers

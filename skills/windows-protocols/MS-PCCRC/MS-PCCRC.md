@@ -249,7 +249,7 @@ A requesting peer contacts the content server to obtain the **Content Informatio
 
 This protocol covers versioning issues in the following areas:
 
-- Structure Versions: The **Content Information Data Structure** supports two versions, 1.0 and 2.0. These versions are defined in section [2](#Section_125).
+- Structure Versions: The **Content Information Data Structure** supports two versions, 1.0 and 2.0. These versions are defined in section [2](#Section_2).
 <a id="Section_1.7"></a>
 ## 1.7 Vendor-Extensible Fields
 
@@ -263,7 +263,7 @@ This section describes the **Content Information Data Structure**. Before defini
 <a id="Section_2.1"></a>
 ## 2.1 Content, Segments, and Blocks
 
-For the purposes of the Peer Content Caching and Retrieval Framework, [**content**](#gt_content) is divided into one or more [**segments**](#gt_segment). Each segment is a binary string of a standard size (32 megabytes), except the last segment, which might be smaller if the content size is not a multiple of the standard segment size. In version 2.0 **Content Information**, segments can vary in size. Each segment is identified on the network by its [**segment ID**](#gt_segment-id-hohodk), section [2.2](#Section_125), also known as HoHoDk. Different content items can share the same segment if they happen to contain an identical part that coincides with a complete segment.
+For the purposes of the Peer Content Caching and Retrieval Framework, [**content**](#gt_content) is divided into one or more [**segments**](#gt_segment). Each segment is a binary string of a standard size (32 megabytes), except the last segment, which might be smaller if the content size is not a multiple of the standard segment size. In version 2.0 **Content Information**, segments can vary in size. Each segment is identified on the network by its [**segment ID**](#gt_segment-id-hohodk), section [2.2](#Section_2.2), also known as HoHoDk. Different content items can share the same segment if they happen to contain an identical part that coincides with a complete segment.
 
 In version 1.0 **Content Information**, each segment is divided in turn into [**blocks**](#gt_block). Each block is a binary string of a fixed size (64 kilobytes), except for the last block in the last segment, which again might be shorter. Unlike segments, blocks in different segments are treated as distinct objects, even if identical. Blocks within a segment are identified by their progressive index within the segment (Block 0 is the first block in the segment, Block 1 the second, and so on). Because of the fixed block size, a block's index can also be used to compute its actual byte offset in the segment. Given the standard block size of 64 kilobytes, Block 0 is located at offset 0 in the segment, Block 1 at offset 65536, Block 2 at offset 131072, etc.
 
@@ -275,7 +275,7 @@ Note that given the entire set of blocks for a segment, each identified by index
 Cryptographic hashes are used to identify [**segments**](#gt_segment) and [**blocks**](#gt_block). The following describes the procedures to generate a [**segment secret**](#gt_segment-secret), a [**segment hash of data**](#gt_segment-hash-of-data), and a [**segment identifier (HoHoDk)**](#gt_5cdb8c3b-3a16-4770-8918-db95bf212831). These computations use the following inputs:
 
 - The [**content**](#gt_content).
-- A hashing algorithm (configurable), used either directly or as part of the [**Keyed-Hashing for Message Authentication (HMAC)**](#gt_keyed-hashing-for-message-authentication-hmac) mechanism, see [[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314). The hashing algorithm is assumed to take an arbitrary-length byte string as input, and to output a fixed-length binary string as output. The list of possible hashing algorithms can be found in section [2.3](#Section_125).
+- A hashing algorithm (configurable), used either directly or as part of the [**Keyed-Hashing for Message Authentication (HMAC)**](#gt_keyed-hashing-for-message-authentication-hmac) mechanism, see [[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314). The hashing algorithm is assumed to take an arbitrary-length byte string as input, and to output a fixed-length binary string as output. The list of possible hashing algorithms can be found in section [2.3](#Section_2.3).
 - A server-configured secret, in the form of a binary string.
 The following diagram shows how the set of hashes is calculated:
 
@@ -297,7 +297,7 @@ Notation:
 - [**dataBlock**](#gt_datablock): dataBlock and block are used interchangeably.
 Formulae:
 
-- segment = dataBlock1 + dataBlock2 + … + dataBlockn (where the segment consists of n blocks; see section [2.1](#Section_125) for details.)
+- segment = dataBlock1 + dataBlock2 + … + dataBlockn (where the segment consists of n blocks; see section [2.1](#Section_2.1) for details.)
 - BlockHashi = Hash (dataBlocki) 1<= I <=n
 - BlockHashList = BlockHash1 + BlockHash2 + … + BlockHashN
 - HoD = Hash (BlockHashList)
@@ -358,9 +358,9 @@ If the value of the **dwReadBytesInLastSegment** field is greater than 0, the va
 
 **cSegments (4 bytes):** The number of segments which intersect the content range and hence are contained in the **Content Information data structure**.
 
-**segments (variable):** Segment start offset, length, [**block**](#gt_block) size, **SegmentHashofData** and **SegmentSecret** for each segment. Each segment description is as specified in [2.3.1.1](#Section_125).
+**segments (variable):** Segment start offset, length, [**block**](#gt_block) size, **SegmentHashofData** and **SegmentSecret** for each segment. Each segment description is as specified in [2.3.1.1](#Section_2.3.1.1).
 
-**blocks (variable):** Count of blocks and content [**block hashes**](#gt_block-hash) for each block intersecting the content range for each segment in the **Content Information** data structure. Each set of blocks for a segment is as specified in [2.3.1.2](#Section_125).
+**blocks (variable):** Count of blocks and content [**block hashes**](#gt_block-hash) for each block intersecting the content range for each segment in the **Content Information** data structure. Each set of blocks for a segment is as specified in [2.3.1.2](#Section_2.3.1.2).
 
 <a id="Section_2.3.1"></a>
 ### 2.3.1 Fields
@@ -368,7 +368,7 @@ If the value of the **dwReadBytesInLastSegment** field is greater than 0, the va
 <a id="Section_2.3.1.1"></a>
 #### 2.3.1.1 SegmentDescription
 
-The **segments** field is composed of a number **cSegments** of **SegmentDescription** fields. Each **SegmentDescription** field corresponds to a [**content**](#gt_content) segment in the order in which they appear in the original content. Every segment except for the last segment MUST be exactly 32 megabytes in size. The **Content Information Data Structure**, section [2.3](#Section_125), defines the [**content range**](#gt_content-range) as follows.
+The **segments** field is composed of a number **cSegments** of **SegmentDescription** fields. Each **SegmentDescription** field corresponds to a [**content**](#gt_content) segment in the order in which they appear in the original content. Every segment except for the last segment MUST be exactly 32 megabytes in size. The **Content Information Data Structure**, section [2.3](#Section_2.3), defines the [**content range**](#gt_content-range) as follows.
 
 Content range = {Start offset, Length}
 
@@ -399,12 +399,12 @@ packet-beta
 
 **SegmentHashOfData (variable):** The hash of the content [**block hashes**](#gt_block-hash) of every block in the segment, regardless of how many of those blocks intersect the content range. The hash is of length 32 if **dwHashAlgo** at the start of the **Content Information** was 0x800C = SHA-256, 48 if **dwHashAlgo** = 0x800D = SHA-384, or 64 if **dwHashAlgo** = 0x800E = SHA-512.
 
-**SegmentSecret (variable):** Kp (section [2.2](#Section_125)), computed as Hash (SegmentHashofData + ServerSecret) using the hash algorithm specified at the beginning of the **Content Information Data Structure**. The hash is of length 32 if **dwHashAlgo** at the start of the **Content Information** was 0x800C = SHA-256, 48 if **dwHashAlgo** = 0x800D = SHA-384 or 64 if **dwHashAlgo** = 0x800E = SHA-512.
+**SegmentSecret (variable):** Kp (section [2.2](#Section_2.2)), computed as Hash (SegmentHashofData + ServerSecret) using the hash algorithm specified at the beginning of the **Content Information Data Structure**. The hash is of length 32 if **dwHashAlgo** at the start of the **Content Information** was 0x800C = SHA-256, 48 if **dwHashAlgo** = 0x800D = SHA-384 or 64 if **dwHashAlgo** = 0x800E = SHA-512.
 
 <a id="Section_2.3.1.2"></a>
 #### 2.3.1.2 SegmentContentBlocks
 
-The **blocks** field contains a number **cSegments** of **SegmentContentBlocks** fields. The Nth **SegmentContentBlocks** field corresponds to the Nth [SegmentDescription (section 2.3.1.1)](#Section_125) and hence the Nth [**content**](#gt_content) [**segment**](#gt_segment). The **SegmentContentBlocks** field is formatted as follows.
+The **blocks** field contains a number **cSegments** of **SegmentContentBlocks** fields. The Nth **SegmentContentBlocks** field corresponds to the Nth [SegmentDescription (section 2.3.1.1)](#Section_2.3.1.1) and hence the Nth [**content**](#gt_content) [**segment**](#gt_segment). The **SegmentContentBlocks** field is formatted as follows.
 
 ```mermaid
 packet-beta
@@ -412,7 +412,7 @@ packet-beta
   32-95: "BlockHashes (variable)"
 ```
 
-**cBlocks (4 bytes):** Number of content blocks in the segment which intersect the [**content range**](#gt_content-range) specified at the start of the [Content Information (section 2.3)](#Section_125).
+**cBlocks (4 bytes):** Number of content blocks in the segment which intersect the [**content range**](#gt_content-range) specified at the start of the [Content Information (section 2.3)](#Section_2.3).
 
 **BlockHashes (variable):** SHA-256, SHA-384 or SHA-512 hash of each content block in the order in which the blocks appear in the segment. The size of this field is **cBlocks** * (32, 48 or 64, depending on which hash was used).
 
@@ -453,7 +453,7 @@ packet-beta
 
 **ullLengthOfRange (8 bytes):** The length of the content range or zero if the **Content Information** structure reflects the entire resource.
 
-**chunks (variable):** Chunk type, chunk data length, and chunk data for each chunk of **Content Information**. Each **Content Information** chunk is as specified in [2.4.1.1](#Section_125).
+**chunks (variable):** Chunk type, chunk data length, and chunk data for each chunk of **Content Information**. Each **Content Information** chunk is as specified in [2.4.1.1](#Section_2.4.1.1).
 
 <a id="Section_2.4.1"></a>
 ### 2.4.1 Fields
@@ -474,7 +474,7 @@ packet-beta
 
 **dwChunkDataLength (4 bytes):** Length of the chunk data, in bytes.
 
-**chunkData (variable):** One or more [**segment**](#gt_segment) descriptions. Each segment's description is as specified in [2.4.1.2](#Section_125).
+**chunkData (variable):** One or more [**segment**](#gt_segment) descriptions. Each segment's description is as specified in [2.4.1.2](#Section_2.4.1.2).
 
 <a id="Section_2.4.1.2"></a>
 #### 2.4.1.2 SegmentDescription
@@ -492,9 +492,9 @@ packet-beta
 
 **cbSegment (4 bytes):** Total number of bytes in the segment, regardless of how many of those bytes intersect the [**content range**](#gt_content-range). The value of this field MAY not be zero and MAY not exceed 128 kilobytes.
 
-**SegmentHashOfData (32 bytes):** The [**hash**](#gt_hash) of the segment. The hash is of length 32 bytes if the value of **bHashAlgo** field (section [2.4](#Section_125)) at the start of the **Content Information** was 0x04 = truncated SHA-512. Truncated SHA-512 is the only supported hash algorithm.
+**SegmentHashOfData (32 bytes):** The [**hash**](#gt_hash) of the segment. The hash is of length 32 bytes if the value of **bHashAlgo** field (section [2.4](#Section_2.4)) at the start of the **Content Information** was 0x04 = truncated SHA-512. Truncated SHA-512 is the only supported hash algorithm.
 
-**SegmentSecret (32 bytes):** Kp (section [2.2](#Section_125)), computed as Hash (**SegmentHashofData** + **ServerSecret**) using the hash algorithm specified at the beginning of the **Content Information Data Structure**. The hash is of length 32 bytes if the value of **bHashAlgo** field (section 2.4) at the start of the **Content Information** was 0x04 = truncated SHA-512. Truncated SHA-512 is the only supported hash algorithm.
+**SegmentSecret (32 bytes):** Kp (section [2.2](#Section_2.2)), computed as Hash (**SegmentHashofData** + **ServerSecret**) using the hash algorithm specified at the beginning of the **Content Information Data Structure**. The hash is of length 32 bytes if the value of **bHashAlgo** field (section 2.4) at the start of the **Content Information** was 0x04 = truncated SHA-512. Truncated SHA-512 is the only supported hash algorithm.
 
 <a id="Section_2.5"></a>
 ## 2.5 Server Secret Key
@@ -730,12 +730,12 @@ If the segment secret Kp is not treated with the same degree of security as the 
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Content Block Validation
 
-Peers have to validate that content blocks downloaded from other peers or a hosted cache contain the same data as the original content that was available from the server which supplied the [Content Information (section 2.3)](#Section_125). Peers accomplish this by hashing received content blocks using the [**block hash**](#gt_block-hash) algorithm specified in the **Content Information** and comparing the hash with the content block hash specified for that specific content block in the **Content Information**. If the hashes match, then the peer can be confident that the data matches the content available from the server.
+Peers have to validate that content blocks downloaded from other peers or a hosted cache contain the same data as the original content that was available from the server which supplied the [Content Information (section 2.3)](#Section_2.3). Peers accomplish this by hashing received content blocks using the [**block hash**](#gt_block-hash) algorithm specified in the **Content Information** and comparing the hash with the content block hash specified for that specific content block in the **Content Information**. If the hashes match, then the peer can be confident that the data matches the content available from the server.
 
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Content Chunk Validation
 
-Peers have to validate that content [**chunks**](#gt_chunk) downloaded from other peers or a hosted cache contain the same data as the original content that was available from the server which supplied the [Content Information (section 2.4)](#Section_125). Peers accomplish this by hashing received content using the algorithm specified in the **Content Information** and comparing the hash with the hash specified for that specific content chunk or segment in the [**Content Information**](#Section_125). If the hashes match, then the peer can be confident that the data matches the content available from the server.
+Peers have to validate that content [**chunks**](#gt_chunk) downloaded from other peers or a hosted cache contain the same data as the original content that was available from the server which supplied the [Content Information (section 2.4)](#Section_2.4). Peers accomplish this by hashing received content using the algorithm specified in the **Content Information** and comparing the hash with the hash specified for that specific content chunk or segment in the [**Content Information**](#Section_125). If the hashes match, then the peer can be confident that the data matches the content available from the server.
 
 <a id="Section_4.2"></a>
 ## 4.2 Index of Security Fields

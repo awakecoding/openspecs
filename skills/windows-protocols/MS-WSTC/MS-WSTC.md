@@ -182,7 +182,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -431,7 +431,7 @@ If a valid value for a **DurationTimer** is specified by the application develop
 
 If the value for the **DurationTimer** is specified to be P10675199DT2H48M05.4775807S, then the client MUST NOT add the <Duration> element to the Probe envelope defined by [**WS-Discovery**](#gt_ws-discovery).
 
-If the value for the **DurationTimer** is not specified by the application developer, then the client MUST send the default value for the **DurationTimer**, as specified in section [3.2.2](#Section_3.1.2), as part of the <Duration> element specified in section 2.2.3.2, and set the **DurationTimer** to this value.
+If the value for the **DurationTimer** is not specified by the application developer, then the client MUST send the default value for the **DurationTimer**, as specified in section [3.2.2](#Section_3.2.2), as part of the <Duration> element specified in section 2.2.3.2, and set the **DurationTimer** to this value.
 
 The <Duration> element MUST be inserted into the xs:any blocks of the Probe envelope defined by WS-Discovery.
 
@@ -448,7 +448,7 @@ An example of a Probe message with these elements inserted is provided in sectio
 
 If a value for **DurationTimer** is specified by the application developer for a [**Resolve**](#gt_resolve) operation and the value is less than P10675199DT2H48M05.4775807S, then the [**client**](#gt_client) MUST send this value as part of the <Duration> element specified in section [2.2.3.2](#Section_2.2.3.2).
 
-If the value for the **DurationTimer** is not specified, then the client MUST send the default value for the **DurationTimer**, as specified in section [3.2.2](#Section_3.1.2), as part of the <Duration> element.
+If the value for the **DurationTimer** is not specified, then the client MUST send the default value for the **DurationTimer**, as specified in section [3.2.2](#Section_3.2.2), as part of the <Duration> element.
 
 If the value for the **DurationTimer** is specified by the application developer to be P10675199DT2H48M05.4775807S, then the client MUST NOT add the <Duration> element to the Resolve envelope defined by [**WS-Discovery**](#gt_ws-discovery) and MUST NOT set the **DurationTimer**.
 
@@ -618,7 +618,7 @@ This protocol extension does not have a specific WSDL; rather it uses the WSDL d
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 4.0
 - Microsoft .NET Framework 4.5

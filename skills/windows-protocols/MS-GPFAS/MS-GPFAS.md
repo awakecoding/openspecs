@@ -274,7 +274,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-FASP] Microsoft Corporation, "[Firewall and Advanced Security Protocol](#Section_5)".
+[MS-FASP] Microsoft Corporation, "[Firewall and Advanced Security Protocol](../MS-FASP/MS-FASP.md)".
 
 [MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](../MS-GPOL/MS-GPOL.md)".
 
@@ -331,13 +331,13 @@ The application of Firewall and Advanced Security policies is done as follows:
 - A client computer affected by that GPO is started (or is connected to the network, if this happens after the client starts), and Group Policy: Core Protocol is invoked by the client to retrieve Policy Settings from the Group Policy server. As part of the processing of Group Policy: Core Protocol, the Group Policy: Registry Extension Encoding's [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) is read from this GPO, and this instructs the client to invoke a Group Policy: Registry Extension Encoding client plug-in component for Policy Application.
 - In processing the Policy Application portion of Group Policy: Registry Extension Encoding, the client parses the settings and then saves the settings in the [**registry**](#gt_registry). The Firewall and Advanced Security policies are stored under the Software\Policies\Microsoft\WindowsFirewall\ registry key.
 - After all Client-Side Extensions (including the Group Policy: Registry Extension Encoding client plug-in) have completed processing, Group Policy: Core Protocol signals the Policy Application event, as specified in [MS-GPOL] section 3.2.7.3, to notify the Group Policy: Firewall and Advanced Security Data Structure client.
-- The Group Policy: Firewall and Advanced Security Data Structure client parses the Firewall and Advanced Security settings from the Software\Policies\Microsoft\WindowsFirewall\ registry key. The client then passes these settings to the Group Policy: Firewall and Advanced Security Data Structure server for enforcement by invoking the SetGroupPolicyRSoPStore abstract interface, as specified in [MS-FASP](#Section_5) section 3.1.6.4.
+- The Group Policy: Firewall and Advanced Security Data Structure client parses the Firewall and Advanced Security settings from the Software\Policies\Microsoft\WindowsFirewall\ registry key. The client then passes these settings to the Group Policy: Firewall and Advanced Security Data Structure server for enforcement by invoking the SetGroupPolicyRSoPStore abstract interface, as specified in [MS-FASP](../MS-FASP/MS-FASP.md) section 3.1.6.4.
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
 This protocol depends on the Group Policy: Core Protocol (as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md)) to provide a list of applicable GPOs.
 
-Group Policy: Firewall and Advanced Security Data Structure configures settings that are used by the Firewall and Advanced Security Protocol specified in [MS-FASP](#Section_5). These settings are defined in [MS-FASP] section 3.1.1.
+Group Policy: Firewall and Advanced Security Data Structure configures settings that are used by the Firewall and Advanced Security Protocol specified in [MS-FASP](../MS-FASP/MS-FASP.md). These settings are defined in [MS-FASP] section 3.1.1.
 
 For policy administration, the Group Policy: Firewall and Advanced Security Data Structure depends on the Group Policy: Registry Extension Encoding (specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md)) to store settings from in the [**GPO**](#gt_group-policy-object-gpo). For policy application, the Group Policy: Firewall and Advanced Security Data Structure depends on Group Policy: Registry Extension Encoding to retrieve settings from a GPO and to populate settings in the client registry. Group Policy: Registry Extension Encoding in turn depends on remote file access to read and write these settings from the GPO. Thus the Group Policy: Firewall and Advanced Security Data Structure has an indirect dependency on remote file access.
 
@@ -357,7 +357,7 @@ In addition, a client needs a system/subsystem capable of executing commands at 
 
 Group Policy: Firewall and Advanced Security Data Structure is applicable only while transported under the Group Policy: Registry Extension Encoding and within the Group Policy: Core Protocol framework. Group Policy: Firewall and Advanced Security Data Structure can be used to express the required Firewall and Advanced Security policy of the client.
 
-This protocol is also applicable only when the requirement is for many clients to get the same Firewall and Advanced Security policies. To configure individual clients with custom Firewall and Advanced Security policies, the Firewall and Advanced Security Protocol (as specified in [MS-FASP](#Section_5)) can be used instead.
+This protocol is also applicable only when the requirement is for many clients to get the same Firewall and Advanced Security policies. To configure individual clients with custom Firewall and Advanced Security policies, the Firewall and Advanced Security Protocol (as specified in [MS-FASP](../MS-FASP/MS-FASP.md)) can be used instead.
 
 Do not use the protocol in any other context.
 
@@ -399,7 +399,7 @@ The Group Policy: Firewall and Advanced Security Data Structure's administrative
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Global Policy Configuration Options
 
-The Global Policy Configuration Options are values that represent the enumeration values of the **FW_GLOBAL_CONFIG** enumeration type as defined in [MS-FASP](#Section_5) section 2.2.42. Note that the following global policy configuration options supported by the Firewall and Advanced Security Protocol specified in [MS-FASP] are read-only, and thus cannot be configured through this protocol:
+The Global Policy Configuration Options are values that represent the enumeration values of the **FW_GLOBAL_CONFIG** enumeration type as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42. Note that the following global policy configuration options supported by the Firewall and Advanced Security Protocol specified in [MS-FASP] are read-only, and thus cannot be configured through this protocol:
 
 - FW_GLOBAL_CONFIG_POLICY_VERSION_SUPPORTED
 - FW_GLOBAL_CONFIG_CURRENT_PROFILE
@@ -417,7 +417,7 @@ Size: Equal to the size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_DISABLE_STATEFUL_FTP** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_DISABLE_STATEFUL_FTP** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Disable Stateful PPTP
@@ -432,7 +432,7 @@ Size: Equal to the size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_DISABLE_STATEFUL_PPTP** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_DISABLE_STATEFUL_PPTP** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Security Associations Idle Time
@@ -447,7 +447,7 @@ Size: Equal to size of the **Data** field.
 
 Data: This field is an unsigned 32-bit integer value.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_SA_IDLE_TIME** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_SA_IDLE_TIME** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 Preshared Key Encoding
@@ -464,7 +464,7 @@ Data: This field is a 32-bit value consisting of the following value.
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000001 | This value represents the enumeration value **FW_GLOBAL_CONFIG_PRESHARED_KEY_ENCODING_UTF_8** as defined in [MS-FASP](#Section_5) section 2.2.40. |
+| 0x00000001 | This value represents the enumeration value **FW_GLOBAL_CONFIG_PRESHARED_KEY_ENCODING_UTF_8** as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.40. |
 
 This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_PRESHARED_KEY_ENCODING** enumeration value as defined in [MS-FASP] section 2.2.42.
 
@@ -483,7 +483,7 @@ Data: This field is a 32-bit value consisting of the bitwise OR of zero or more 
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000001 | This value represents the **FW_GLOBAL_CONFIG_IPSEC_EXEMPT_NEIGHBOR_DISC** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.39. |
+| 0x00000001 | This value represents the **FW_GLOBAL_CONFIG_IPSEC_EXEMPT_NEIGHBOR_DISC** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.39. |
 | 0x00000002 | This value represents the **FW_GLOBAL_CONFIG_IPSEC_EXEMPT_ICMP** enumeration value as defined in [MS-FASP] section 2.2.39. |
 | 0x00000004 | This value represents the **FW_GLOBAL_CONFIG_IPSEC_EXEMPT_ROUTER_DISC** enumeration value as defined in [MS-FASP] section 2.2.39. |
 | 0x00000008 | This value represents the **FW_GLOBAL_CONFIG_IPSEC_EXEMPT_DHCP** enumeration value as defined in [MS-FASP] section 2.2.39. |
@@ -503,7 +503,7 @@ Size: Equal to size of the **Data** field.
 
 Data: This field is a 32-bit value.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_CRL_CHECK** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_CRL_CHECK** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.7"></a>
 #### 2.2.1.7 IPsec Through NATs
@@ -516,7 +516,7 @@ Type: REG_DWORD.
 
 Size: Equal to size of the **Data** field.
 
-Data: This field is a 32-bit value consisting of one of the following flags, all defined in [MS-FASP](#Section_5) section 2.2.41.
+Data: This field is a 32-bit value consisting of one of the following flags, all defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.41.
 
 | Value | Meaning |
 | --- | --- |
@@ -539,7 +539,7 @@ Size: Equal to size of the **Data** field.
 
 Data: This field is a 32-bit value.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_POLICY_VERSION** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_POLICY_VERSION** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.9"></a>
 #### 2.2.1.9 Tunnel Remote Machine Authorization List
@@ -554,7 +554,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A variable-length, null-terminated [**Unicode**](#gt_unicode) string.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TUNNEL_REMOTE_MACHINE_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TUNNEL_REMOTE_MACHINE_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.10"></a>
 #### 2.2.1.10 Tunnel Remote User Authorization List
@@ -569,7 +569,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A variable-length, null-terminated [**Unicode**](#gt_unicode) string.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TUNNEL_REMOTE_USER_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TUNNEL_REMOTE_USER_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.11"></a>
 #### 2.2.1.11 Opportunistically Match Authentication Set Per Key Module
@@ -584,7 +584,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_OPPORTUNISTICALLY_MATCH_AUTH_SET_PER_KM** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_OPPORTUNISTICALLY_MATCH_AUTH_SET_PER_KM** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.12"></a>
 #### 2.2.1.12 Transport Remote Machine Authorization List
@@ -599,7 +599,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A variable-length, null-terminated [**Unicode**](#gt_unicode) string.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TRANSPORT_REMOTE_MACHINE_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TRANSPORT_REMOTE_MACHINE_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.13"></a>
 #### 2.2.1.13 Transport Remote User Authorization List
@@ -614,7 +614,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A variable-length, null-terminated [**Unicode**](#gt_unicode) string.
 
-This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TRANSPORT_REMOTE_USER_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the **FW_GLOBAL_CONFIG_IPSEC_TRANSPORT_REMOTE_USER_AUTHORIZATION_LIST** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.1.14"></a>
 #### 2.2.1.14 Packet Queue
@@ -629,7 +629,7 @@ Size: Equal to size of the Data field.
 
 Data: This field is a 32-bit value.
 
-This value represents the contents assigned to the configuration option represented by the FW_GLOBAL_CONFIG_ENABLE_PACKET_QUEUE enumeration value as defined in [MS-FASP](#Section_5) section 2.2.42.
+This value represents the contents assigned to the configuration option represented by the FW_GLOBAL_CONFIG_ENABLE_PACKET_QUEUE enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.42.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Firewall Rule Messages
@@ -643,7 +643,7 @@ This grammar, as specified in [[RFC4234]](https://go.microsoft.com/fwlink/?LinkI
 
 PROFILE-VAL = "Domain" / "Private" / "Public"
 
-**Domain**: This token value represents the **FW_PROFILE_TYPE_DOMAIN** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.2. The remaining token values in this list can be found in the same Protocol specification section.
+**Domain**: This token value represents the **FW_PROFILE_TYPE_DOMAIN** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.2. The remaining token values in this list can be found in the same Protocol specification section.
 
 **Private**: This token value represents the **FW_PROFILE_TYPE_PRIVATE** enumeration value.
 
@@ -668,7 +668,7 @@ PORT = 1*5DIGIT
 
 **PORT:** This rule represents a port number. Hence, its decimal value MUST NOT be greater than 65,535.
 
-**BEGINPORT:** This rule describes a port number that represents the **wBegin** field of a **FW_PORT_RANGE** structure as defined in [MS-FASP](#Section_5) section 2.2.12. The remaining rules in this list can be found in the same Protocol specification section.
+**BEGINPORT:** This rule describes a port number that represents the **wBegin** field of a **FW_PORT_RANGE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.12. The remaining rules in this list can be found in the same Protocol specification section.
 
 **ENDPORT:** This rule describes a port number that represents the **wEnd** field of a **FW_PORT_RANGE** structure.
 
@@ -697,7 +697,7 @@ RPORT-KEYWORD-VAL-2-28 = “CortanaOut”
 
 LPORT-KEYWORD-VAL-2-29 = “TcpCDPSvc”
 
-**RPC:** This token represents the **FW_PORT_KEYWORD_DYNAMIC_RPC_PORTS** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.14. The remaining token values in this list can be found in the same section.
+**RPC:** This token represents the **FW_PORT_KEYWORD_DYNAMIC_RPC_PORTS** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.14. The remaining token values in this list can be found in the same section.
 
 **RPC-EPMap:** This token represents the **FW_PORT_KEYWORD_RPC_EP** enumeration value.
 
@@ -728,7 +728,7 @@ This grammar is used to identify the direction of a network traffic flow.
 
 DIR-VAL = "In" / "Out"
 
-**In:** This token value represents the **FW_DIR_IN** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.19.
+**In:** This token value represents the **FW_DIR_IN** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.19.
 
 **Out:** This token value represents the **FW_DIR_OUT** enumeration value as defined in [MS-FASP] section 2.2.19.
 
@@ -739,7 +739,7 @@ This grammar is used to identify the actions available for firewall rules.
 
 ACTION-VAL = "Allow" / "Block" / "ByPass"
 
-**Allow:** This token value represents the **FW_RULE_ACTION_ALLOW** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.34. The remaining token values in this list can be found in the same Protocol specification section.
+**Allow:** This token value represents the **FW_RULE_ACTION_ALLOW** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.34. The remaining token values in this list can be found in the same Protocol specification section.
 
 **Block:** This token value represents the **FW_RULE_ACTION_BLOCK** enumeration value.
 
@@ -748,7 +748,7 @@ ACTION-VAL = "Allow" / "Block" / "ByPass"
 <a id="Section_2.2.2.6"></a>
 #### 2.2.2.6 IfSecure Tokens
 
-This grammar is used to identify the security flags on firewall rules described in [MS-FASP](#Section_5) section 2.2.35.
+This grammar is used to identify the security flags on firewall rules described in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.35.
 
 IFSECURE-VAL = "Authenticate" / "AuthenticateEncrypt"
 
@@ -767,7 +767,7 @@ IFSECURE2-10-VAL = "AnE-Nego"
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 Interfaces
 
-This grammar is used to identify the interfaces on firewall rules described in [MS-FASP](#Section_5) section 2.2.18.
+This grammar is used to identify the interfaces on firewall rules described in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.18.
 
 IF-VAL = GUID
 
@@ -776,7 +776,7 @@ IF-VAL = GUID
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 Interface Types
 
-This grammar is used to identify the types of network adapters described in [MS-FASP](#Section_5) section 2.2.20.
+This grammar is used to identify the types of network adapters described in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.20.
 
 IFTYPE-VAL = "Lan" / "Wireless" / "RemoteAccess"
 
@@ -803,7 +803,7 @@ ADDRV4 = 1*3DIGIT "."1*3DIGIT "."1*3DIGIT "."1*3DIGIT
 
 **ADDRV4:** This rule represents an IPv4 address.
 
-**BEGINADDRV4:** This rule describes an IPv4 address that represents the **dwBegin** field of a **FW_IPV4_ADDRESS_RANGE** structure as defined in [MS-FASP](#Section_5) section 2.2.8. The remaining rules in this list can be found in the same Protocol specification section.
+**BEGINADDRV4:** This rule describes an IPv4 address that represents the **dwBegin** field of a **FW_IPV4_ADDRESS_RANGE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.8. The remaining rules in this list can be found in the same Protocol specification section.
 
 **ENDADDRV4:** This rule describes an IPv4 address that represents the **dwEnd** field of a **FW_IPV4_ADDRESS_RANGE** structure.
 
@@ -824,9 +824,9 @@ SUBNET-ADDRV4 = ADDRV4
 
 MASK-ADDRV4 = ADDRV4
 
-**ADDRV4:** This rule represents an IPv4 address as defined in section [2.2.2.9](#Section_2.2.2.11).
+**ADDRV4:** This rule represents an IPv4 address as defined in section [2.2.2.9](#Section_2.2.2.9).
 
-**SUBNET-ADDRV4:** This rule describes an IPv4 address that represents the **dwAddress** field of a **FW_IPV4_SUBNET** structure as defined in [MS-FASP](#Section_5) section 2.2.4. The remaining rules in this list can be found in the same Protocol specification section.
+**SUBNET-ADDRV4:** This rule describes an IPv4 address that represents the **dwAddress** field of a **FW_IPV4_SUBNET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.4. The remaining rules in this list can be found in the same Protocol specification section.
 
 **MASK-ADDRV4:** This rule describes an IPv4 address mask that represents the **dwSubNetMask** field of a **FW_IPV4_SUBNET** structure.
 
@@ -851,7 +851,7 @@ ADDRV6 = a string representing an IPv6 address
 
 **ADDRV6:** This rule represents an IPv6 address as defined in [[RFC4291]](https://go.microsoft.com/fwlink/?LinkId=90464).
 
-**BEGINADDRV6:** This rule describes an IPv6 address that represents the **Begin** field of a **FW_IPV6_ADDRESS_RANGE** structure as defined in [MS-FASP](#Section_5) section 2.2.10. The remaining rules in this list can be found in the same Protocol specification section.
+**BEGINADDRV6:** This rule describes an IPv6 address that represents the **Begin** field of a **FW_IPV6_ADDRESS_RANGE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.10. The remaining rules in this list can be found in the same Protocol specification section.
 
 **ENDADDRV6:** This rule describes an IPv6 address that represents the **End** field of a **FW_IPV6_ADDRESS_RANGE** structure.
 
@@ -872,7 +872,7 @@ SUBNET-ADDRV6 = ADDRV6
 
 **ADDRV6:** This rule represents an IPv6 address as defined in section [2.2.2.11](#Section_2.2.2.11).
 
-**SUBNET-ADDRV6:** This rule describes an IPv4 address that represents the **Address** field of a **FW_IPV6_SUBNET** structure as defined in [MS-FASP](#Section_5) section 2.2.6. The remaining rules in this list can be found in the same Protocol specification section.
+**SUBNET-ADDRV6:** This rule describes an IPv4 address that represents the **Address** field of a **FW_IPV6_SUBNET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.6. The remaining rules in this list can be found in the same Protocol specification section.
 
 **V6PREFIX-LENGTH:** This rule describes a decimal number that MUST be less than 128 and that represents the **dwNumPrefixBits** field of a **FW_IPV6_SUBNET** structure.
 
@@ -887,7 +887,7 @@ ADDRESS-KEYWORD-VAL = "LocalSubnet" / "DNS" / "DHCP" / "WINS" / "DefaultGateway"
 
 ADDRESS-KEYWORD-VAL-2-20 = "IntrAnet" / "IntErnet" / "Ply2Renders" / "RmtIntrAnet" / “CaptivePortal”
 
-**LocalSubnet:** This token represents the **FW_ADDRESS_KEYWORD_LOCAL_SUBNET** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.21. The remaining token values in this list can be found in the same Protocol specification section.
+**LocalSubnet:** This token represents the **FW_ADDRESS_KEYWORD_LOCAL_SUBNET** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.21. The remaining token values in this list can be found in the same Protocol specification section.
 
 **DNS:** This token represents the **FW_ADDRESS_KEYWORD_DNS** enumeration value.
 
@@ -925,7 +925,7 @@ This grammar is used to identify Edge defer flags.
 
 DEFER-VAL = "App" / "User"
 
-**App:** This token represents the FW_RULE_FLAGS_ROUTEABLE_ADDRS_TRAVERSE_DEFER_APP flag as defined in [MS-FASP](#Section_5) section 2.2.35. The meaning of the appearance of this token is a Boolean true.
+**App:** This token represents the FW_RULE_FLAGS_ROUTEABLE_ADDRS_TRAVERSE_DEFER_APP flag as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.35. The meaning of the appearance of this token is a Boolean true.
 
 **User:** This token represents the FW_RULE_FLAGS_ROUTEABLE_ADDRS_TRAVERSE_DEFER_USER flag as defined in [MS-FASP] section 2.2.35. The meaning of the appearance of this token is a Boolean true.
 
@@ -940,7 +940,7 @@ TYPE = 1*3DIGIT
 
 CODE = 1*3DIGIT / "*"
 
-**TYPE:** This grammar rule represents the **bType** field of the **FW_ICMP_TYPE_CODE** structure as defined in [MS-FASP](#Section_5) section 2.2.16. The grammar rule encodes a decimal value which MUST be less than or equal to 255.
+**TYPE:** This grammar rule represents the **bType** field of the **FW_ICMP_TYPE_CODE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.16. The grammar rule encodes a decimal value which MUST be less than or equal to 255.
 
 **CODE:** This grammar rule represents the **wCode** field of the **FW_ICMP_TYPE_CODE** structure as defined in [MS-FASP] section 2.2.16. When the grammar rule encodes a decimal value, such value MUST be less than or equal to 255. When the grammar rule encodes a "*" token, then the meaning is the same as a value of 0x100 in the **wCode** field.
 
@@ -959,7 +959,7 @@ OS-MAJOR-VER = 1*3DIGIT
 
 OS-MINOR-VER = 1*3DIGIT
 
-**PLATFORM:** This grammar rule represents the 3 least significant bits of the **bPlatform** field of the **FW_OS_PLATFORM** structure as defined in [MS-FASP](#Section_5) section 2.2.30. The grammar rule encodes a decimal value which MUST be less than or equal to 7.
+**PLATFORM:** This grammar rule represents the 3 least significant bits of the **bPlatform** field of the **FW_OS_PLATFORM** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.30. The grammar rule encodes a decimal value which MUST be less than or equal to 7.
 
 **OS-MAJOR-VER:** This grammar rule represents the **bMajorVersion** field of the **FW_OS_PLATFORM** structure as defined in [MS-FASP] section 2.2.30. The grammar rule encodes a decimal value which MUST be less than or equal to 255.
 
@@ -974,7 +974,7 @@ This grammar is used to identify platform validity objects.
 
 PLATFORM-OP-VAL = "GTEQ"
 
-**GTEQ:** This token represents the **FW_OS_PLATFORM_GTEQ** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.29.
+**GTEQ:** This token represents the **FW_OS_PLATFORM_GTEQ** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.29.
 
 **PLATFORM-OP-VAL:** This rule represents the 5 most significant bits of the **bPlatform** field of the last **FW_OS_PLATFORM** structure entry (as defined in [MS-FASP] section 2.2.30), of the **pPlatforms** field of the **FW_OS_PLATFORM_LIST** structure as defined in [MS-FASP] section 2.2.31.
 
@@ -983,7 +983,7 @@ PLATFORM-OP-VAL = "GTEQ"
 
 Firewall rules are stored under the Software\Policies\Microsoft\WindowsFirewall\FirewallRules key.
 
-Each value under the key is a firewall rule. The type of the value MUST be **REG_SZ**. The data of each value is a string that can be parsed by the following grammar. This grammar represents a firewall rule as defined in [MS-FASP](#Section_5) section 2.2.37, except for the **wszRuleId** field of the **FW_RULE** structure which is instead represented by the name of the [**registry**](#gt_registry) value.
+Each value under the key is a firewall rule. The type of the value MUST be **REG_SZ**. The data of each value is a string that can be parsed by the following grammar. This grammar represents a firewall rule as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.37, except for the **wszRuleId** field of the **FW_RULE** structure which is instead represented by the name of the [**registry**](#gt_registry) value.
 
 RULE = "v" VERSION "|" 1*FIELD
 
@@ -1220,7 +1220,7 @@ TRUST-TUPLE-KEYWORD-VAL2-27 = "WFDKmDriver" / "UPnP"
 
 TRUST-TUPLE-KEYWORD-VAL2-28 = "WFDCDPSvc"
 
-**Proximity:** This token represents the **FW_TRUST_TUPLE_KEYWORD_PROXIMITY** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.97. The remaining token values in this list can be found in the same section.
+**Proximity:** This token represents the **FW_TRUST_TUPLE_KEYWORD_PROXIMITY** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.97. The remaining token values in this list can be found in the same section.
 
 **ProxSharing:** This token represents the **FW_TRUST_TUPLE_KEYWORD_PROXIMITY_SHARING** enumeration value.
 
@@ -1239,7 +1239,7 @@ TRUST-TUPLE-KEYWORD-VAL2-28 = "WFDCDPSvc"
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Per-Profile Policy Configuration Options
 
-The Per-Profile Configuration Options are values that represent the enumeration values of the **FW_PROFILE_CONFIG** enumeration type as defined in [MS-FASP](#Section_5) section 2.2.38. If neither the Software\Policies\Microsoft\WindowsFirewall\PrivateProfile nor the Software\Policies\Microsoft\WindowsFirewall\PublicProfile key exists, then the settings under the Software\Policies\Microsoft\WindowsFirewall\StandardProfile key are applied to both public and private profiles. On the other hand, if either the Software\Policies\Microsoft\WindowsFirewall\PrivateProfile or the Software\Policies\Microsoft\WindowsFirewall\PublicProfile key exists then the settings under the Software\Policies\Microsoft\WindowsFirewall\StandardProfile key are ignored and the settings under the Software\Policies\Microsoft\WindowsFirewall\PrivateProfile key and the Software\Policies\Microsoft\WindowsFirewall\PublicProfile key apply to the networks identified by the corresponding **FW_PROFILE_TYPE_PRIVATE** and the **FW_PROFILE_TYPE_PUBLIC** enumeration values as defined in [MS-FASP] section 2.2.2.
+The Per-Profile Configuration Options are values that represent the enumeration values of the **FW_PROFILE_CONFIG** enumeration type as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38. If neither the Software\Policies\Microsoft\WindowsFirewall\PrivateProfile nor the Software\Policies\Microsoft\WindowsFirewall\PublicProfile key exists, then the settings under the Software\Policies\Microsoft\WindowsFirewall\StandardProfile key are applied to both public and private profiles. On the other hand, if either the Software\Policies\Microsoft\WindowsFirewall\PrivateProfile or the Software\Policies\Microsoft\WindowsFirewall\PublicProfile key exists then the settings under the Software\Policies\Microsoft\WindowsFirewall\StandardProfile key are ignored and the settings under the Software\Policies\Microsoft\WindowsFirewall\PrivateProfile key and the Software\Policies\Microsoft\WindowsFirewall\PublicProfile key apply to the networks identified by the corresponding **FW_PROFILE_TYPE_PRIVATE** and the **FW_PROFILE_TYPE_PUBLIC** enumeration values as defined in [MS-FASP] section 2.2.2.
 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Enable Firewall
@@ -1254,7 +1254,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_ENABLE_FW** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_ENABLE_FW** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 Disable Stealth Mode
@@ -1269,7 +1269,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_STEALTH_MODE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_STEALTH_MODE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.3"></a>
 #### 2.2.3.3 Shield Up Mode
@@ -1284,7 +1284,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_SHIELDED** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_SHIELDED** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 Disable Unicast Responses to Multicast and Broadcast Traffic
@@ -1299,7 +1299,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_UNICAST_RESPONSES_TO_MULTICAST_BROADCAST** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_UNICAST_RESPONSES_TO_MULTICAST_BROADCAST** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 Log Dropped Packets
@@ -1314,7 +1314,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_DROPPED_PACKETS** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_DROPPED_PACKETS** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.6"></a>
 #### 2.2.3.6 Log Successful Connections
@@ -1329,7 +1329,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_SUCCESS_CONNECTIONS** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_SUCCESS_CONNECTIONS** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.7"></a>
 #### 2.2.3.7 Log Ignored Rules
@@ -1344,7 +1344,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_IGNORED_RULES** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_IGNORED_RULES** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.8"></a>
 #### 2.2.3.8 Maximum Log File Size
@@ -1359,7 +1359,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A 32-bit value that represents a number.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_MAX_FILE_SIZE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_MAX_FILE_SIZE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.9"></a>
 #### 2.2.3.9 Log File Path
@@ -1374,7 +1374,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A Unicode string.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_FILE_PATH** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_LOG_FILE_PATH** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.10"></a>
 #### 2.2.3.10 Disable Inbound Notifications
@@ -1389,7 +1389,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_INBOUND_NOTIFICATIONS** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_INBOUND_NOTIFICATIONS** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.11"></a>
 #### 2.2.3.11 Allow Authenticated Applications User Preference Merge
@@ -1404,7 +1404,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_AUTH_APPS_ALLOW_USER_PREF_MERGE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_AUTH_APPS_ALLOW_USER_PREF_MERGE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.12"></a>
 #### 2.2.3.12 Allow Globally Open Ports User Preference Merge
@@ -1419,7 +1419,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_GLOBAL_PORTS_ALLOW_USER_PREF_MERGE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_GLOBAL_PORTS_ALLOW_USER_PREF_MERGE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.13"></a>
 #### 2.2.3.13 Allow Local Firewall Rule Policy Merge
@@ -1434,7 +1434,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_ALLOW_LOCAL_POLICY_MERGE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_ALLOW_LOCAL_POLICY_MERGE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.14"></a>
 #### 2.2.3.14 Allow Local IPsec Policy Merge
@@ -1449,7 +1449,7 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_ALLOW_LOCAL_IPSEC_POLICY_MERGE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_ALLOW_LOCAL_IPSEC_POLICY_MERGE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.15"></a>
 #### 2.2.3.15 Disabled Interfaces
@@ -1472,7 +1472,7 @@ INTF_FIELD_SEQ = "," INTF_FIELD
 
 Where [**GUID**](#gt_globally-unique-identifier-guid) is the string representation of the globally unique identifier, as defined in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) section 3, used to identify the interface on the client.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLED_INTERFACES** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLED_INTERFACES** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.16"></a>
 #### 2.2.3.16 Default Outbound Action
@@ -1487,7 +1487,7 @@ Size: Equal to size of the **Data** field.
 
 Data: 0x00000000 means allow traffic and 0x00000001 means block traffic.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DEFAULT_OUTBOUND_ACTION** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DEFAULT_OUTBOUND_ACTION** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.17"></a>
 #### 2.2.3.17 Default Inbound Action
@@ -1502,7 +1502,7 @@ Size: Equal to size of the **Data** field.
 
 Data: 0x00000000 means allow traffic and 0x00000001 means block traffic.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DEFAULT_INBOUND_ACTION** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DEFAULT_INBOUND_ACTION** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.3.18"></a>
 #### 2.2.3.18 Disable Stealth Mode for IPsec Secured Packets
@@ -1517,12 +1517,12 @@ Size: Equal to size of the **Data** field.
 
 Data: An unsigned, 32-bit integer value for which possible values are 0x00000000 or 0x00000001.
 
-This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_STEALTH_MODE_IPSEC_SECURED_PACKET_EXEMPTION** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.38.
+This value represents the contents assigned to the configuration option represented by the **FW_PROFILE_CONFIG_DISABLE_STEALTH_MODE_IPSEC_SECURED_PACKET_EXEMPTION** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.38.
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Authentication Sets
 
-The Authentication Set represents **FW_AUTH_SET** structures (as defined in [MS-FASP](#Section_5) section 2.2.65). These objects are encoded under the Software\Policies\Microsoft\WindowsFirewall\Phase1AuthenticationSets key or the Software\Policies\Microsoft\WindowsFirewall\Phase2AuthenticationSets key. Authentication sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase1AuthenticationSets key represent those that have a value of FW_IPSEC_PHASE_1 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_AUTH_SET** structure.
+The Authentication Set represents **FW_AUTH_SET** structures (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.65). These objects are encoded under the Software\Policies\Microsoft\WindowsFirewall\Phase1AuthenticationSets key or the Software\Policies\Microsoft\WindowsFirewall\Phase2AuthenticationSets key. Authentication sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase1AuthenticationSets key represent those that have a value of FW_IPSEC_PHASE_1 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_AUTH_SET** structure.
 
 Authentication sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase2AuthenticationSets key represent those that have a value of FW_IPSEC_PHASE_2 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_AUTH_SET** structure. Each key under these two authentication set keys represents a unique authentication set object, and the name of each key represents the value of the **wszSetId** field of the **FW_AUTH_SET** structure. [**Registry**](#gt_registry) keys and values under each of these authentication set keys are described in the following sections. The semantic checks specified in [MS-FASP] section 2.2.65 are also applicable to the authentication sets described in this section after following the mapping of the following registry values and tokens.
 
@@ -1561,7 +1561,7 @@ Size: Equal to size of the **Data** field.
 
 Data: this value encodes a Unicode string using the VERSION grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the values of the **wSchemaVersion** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.65.
+This value represents the values of the **wSchemaVersion** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.65.
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 Name
@@ -1576,7 +1576,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszName** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.65.
+This value represents the **wszName** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.65.
 
 <a id="Section_2.2.4.3"></a>
 #### 2.2.4.3 Description
@@ -1591,7 +1591,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszDescription** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.65.
+This value represents the **wszDescription** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.65.
 
 <a id="Section_2.2.4.4"></a>
 #### 2.2.4.4 EmbeddedContext
@@ -1606,14 +1606,14 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszEmbeddedContext** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.65.
+This value represents the **wszEmbeddedContext** field of the **FW_AUTH_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.65.
 
 <a id="Section_2.2.4.5"></a>
 #### 2.2.4.5 Suite Keys
 
 Each authentication set contains a list of suites corresponding to the authentication proposals that will be negotiated. These suites can be stored in Software\Policies\Microsoft\WindowsFirewall\Phase1AuthenticationSet\<wszSetId>\<SuiteIndex>, or in Software\Policies\Microsoft\WindowsFirewall\Phase2AuthenticationSet\<wszSetId>\<SuiteIndex>, where the SuiteIndex is a 4 digit decimal value encoded as a string.
 
-The suite keys represent the **pSuites** array field of the **FW_AUTH_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.65.
+The suite keys represent the **pSuites** array field of the **FW_AUTH_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.65.
 
 The suites for phase1 authentication sets differ from those of phase 2 authentication sets. The following sections describe how these suites are encoded. The semantic checks described in [MS-FASP] section 2.2.63 are also applicable to the authentication suites described in this section after following the mapping of the following [**registry**](#gt_registry) values and tokens.
 
@@ -1638,7 +1638,7 @@ PHASE2-AUTH-METHOD-VAL = "Anonymous" / "MachineCert" / "UserKerb"
 
 PHASE2-AUTH-METHOD-VAL =/ "UserCert" / "UserNtlm"
 
-**Anonymous** - this token represents the **FW_AUTH_METHOD_ANONYMOUS** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.60. The remaining tokens can be found in the same Protocol specification section.
+**Anonymous** - this token represents the **FW_AUTH_METHOD_ANONYMOUS** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.60. The remaining tokens can be found in the same Protocol specification section.
 
 **MachineKerb** - this token represents the **FW_AUTH_METHOD_MACHINE_KERB** enumeration value.
 
@@ -1669,7 +1669,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszCAName** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.63. If this value appears in the Suite Key, then the SHKey value defined in the next section MUST NOT appear.
+This value represents the **wszCAName** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.63. If this value appears in the Suite Key, then the SHKey value defined in the next section MUST NOT appear.
 
 <a id="Section_2.2.4.8"></a>
 #### 2.2.4.8 Phase 1 Auth Suite Preshared Key
@@ -1684,7 +1684,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszSHKey** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.63.
+This value represents the **wszSHKey** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.63.
 
 <a id="Section_2.2.4.9"></a>
 #### 2.2.4.9 Phase 1 and Phase 2 Auth Suite Certificate Account Mapping
@@ -1699,7 +1699,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string that encodes a Boolean value using the BOOL-VAL grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the FW_AUTH_SUITE_FLAGS_PERFORM_CERT_ACCOUNT_MAPPING flag (as defined in [MS-FASP](#Section_5) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. If this value appears under the suite key, then the SHKey value defined in section 2.2.4.5.3 MUST NOT appear.
+This value represents the FW_AUTH_SUITE_FLAGS_PERFORM_CERT_ACCOUNT_MAPPING flag (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. If this value appears under the suite key, then the SHKey value defined in section 2.2.4.5.3 MUST NOT appear.
 
 <a id="Section_2.2.4.10"></a>
 #### 2.2.4.10 Phase 1 Auth Suite Exclude CA Name
@@ -1714,7 +1714,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string that encodes a Boolean value using the BOOL-VAL grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the FW_AUTH_SUITE_FLAGS_CERT_EXCLUDE_CA_NAME flag (as defined in [MS-FASP](#Section_5) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. If this value appears in the Suite Key, then the SHKey value defined in section 2.2.4.5.3 MUST NOT appear.
+This value represents the FW_AUTH_SUITE_FLAGS_CERT_EXCLUDE_CA_NAME flag (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. If this value appears in the Suite Key, then the SHKey value defined in section 2.2.4.5.3 MUST NOT appear.
 
 <a id="Section_2.2.4.11"></a>
 #### 2.2.4.11 Phase 1 and Phase 2 Auth Suite Health Cert
@@ -1729,7 +1729,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string that encodes a Boolean value using the BOOL-VAL grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the FW_AUTH_SUITE_FLAGS_HEALTH_CERT flag (as defined in [MS-FASP](#Section_5) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. If this value appears in the Suite Key, then the SHKey value defined in section 2.2.4.5.3 MUST NOT appear.
+This value represents the FW_AUTH_SUITE_FLAGS_HEALTH_CERT flag (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. If this value appears in the Suite Key, then the SHKey value defined in section 2.2.4.5.3 MUST NOT appear.
 
 <a id="Section_2.2.4.12"></a>
 #### 2.2.4.12 Phase 1 and Phase 2 Auth Suite Skip Version
@@ -1761,11 +1761,11 @@ Data: this value is a Unicode string that uses the following grammar rules to en
 
 OTHER-CERT-SIGNING-VAL = "ECDSA256" / "ECDSA384"
 
-**ECDSA256**- this token represents the **FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA256** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.61.
+**ECDSA256**- this token represents the **FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA256** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.61.
 
 **ECDSA384**- this token represents the **FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA384** enumeration value as defined in [MS-FASP] section 2.2.61.
 
-This value represents the FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA256 and the FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA384 flags of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. This value MUST be present only if the schema version of the authentication set, as defined in section [2.2.4.1](#Section_2.2.4), contains a version of 0x0201 or higher. Whenever this value is found in the suite key, a SkipVersion value MUST also be present, and MUST contain a version of 0x0200.
+This value represents the FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA256 and the FW_AUTH_SUITE_FLAGS_CERT_SIGNING_ECDSA384 flags of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. This value MUST be present only if the schema version of the authentication set, as defined in section [2.2.4.1](#Section_2.2.4.1), contains a version of 0x0201 or higher. Whenever this value is found in the suite key, a SkipVersion value MUST also be present, and MUST contain a version of 0x0200.
 
 <a id="Section_2.2.4.14"></a>
 #### 2.2.4.14 Phase 1 and Phase 2 Auth Suite Intermediate CA
@@ -1780,7 +1780,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string that encodes a Boolean value using the BOOL-VAL grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the FW_AUTH_SUITE_FLAGS_INTERMEDIATE_CA flag (as defined in [MS-FASP](#Section_5) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. This value MUST be present only if the schema version of the authentication set as defined in section [2.2.4.1](#Section_2.2.4) contains a version of 0x020A or higher. Whenever this value is found in the suite key, a SkipVersion value MUST also be present, and MUST contain a version of 0x0208.
+This value represents the FW_AUTH_SUITE_FLAGS_INTERMEDIATE_CA flag (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP] section 2.2.63. This value MUST be present only if the schema version of the authentication set as defined in section [2.2.4.1](#Section_2.2.4.1) contains a version of 0x020A or higher. Whenever this value is found in the suite key, a SkipVersion value MUST also be present, and MUST contain a version of 0x0208.
 
 <a id="Section_2.2.4.15"></a>
 #### 2.2.4.15 Certificate Criteria Type Tokens
@@ -1789,7 +1789,7 @@ This grammar is used to identify the types of certificate criteria.
 
 CRITERIA-TYPE-VAL = "Both" / "Select" / "Validate"
 
-**Both**: This token value represents the FW_CERT_CRITERIA_TYPE_BOTH enumeration value as defined in [MS-FASP](#Section_5) section 2.2.56. The remaining token values in this list can be found in the same Protocol specification section.
+**Both**: This token value represents the FW_CERT_CRITERIA_TYPE_BOTH enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.56. The remaining token values in this list can be found in the same Protocol specification section.
 
 **Select**: This token value represents the FW_CERT_CRITERIA_TYPE_SELECTION enumeration value.
 
@@ -1802,7 +1802,7 @@ This grammar is used to identify the type of a name used in certificate criteria
 
 CRITERIA-NAME-TYPE-VAL = "DNS" / "UPN" / "RFC822" / "CN" / "OU" / "O" / "DC"
 
-**DNS**: This token value represents the FW_CERT_CRITERIA_NAME_DNS enumeration value as defined in [MS-FASP](#Section_5) section 2.2.57. The remaining token values in this list can be found in the same Protocol specification section.
+**DNS**: This token value represents the FW_CERT_CRITERIA_NAME_DNS enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.57. The remaining token values in this list can be found in the same Protocol specification section.
 
 **UPN**: This token value represents the FW_CERT_CRITERIA_NAME_UPN enumeration value.
 
@@ -1849,7 +1849,7 @@ TYPE_VALUE =/ "Hash=" STR-VAL
 
 TYPE-VALUE =/ "FollowRenewal=" BOOL-VAL
 
-This value represents the criteria for selecting and validating certificates as defined in [MS-FASP](#Section_5) section 2.2.59.
+This value represents the criteria for selecting and validating certificates as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.59.
 
 **MAJOR-VER**: This grammar rule describes a decimal number that represents the 8 high-order bits of the **wSchemaVersion** field of the **FW_CERT_CRITERIA** structure as defined in [MS-FASP] section 2.2.59. Because of this, the decimal value of this number MUST NOT be greater than 255. The following grammar rules can also be found in the previously mentioned [MS-FASP] section 2.2.59.
 
@@ -1882,7 +1882,7 @@ Size: Equal to size of the **Data** field.
 
 Data: A Unicode string that encodes a Boolean value using the BOOL-VAL grammar rule defined in section [2.2.2.14](#Section_2.2.2.14).
 
-This value represents the FW_AUTH_SUITE_FLAGS_ALLOW_PROXY flag (as defined in [MS-FASP](#Section_5) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP]section 2.2.63.
+This value represents the FW_AUTH_SUITE_FLAGS_ALLOW_PROXY flag (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.61) of the **wFlags** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP]section 2.2.63.
 
 <a id="Section_2.2.4.19"></a>
 #### 2.2.4.19 Phase 1 and Phase 2 Auth Suite Kerberos Proxy Server
@@ -1897,12 +1897,12 @@ Size: Equal to size of the **Data** field.
 
 Data: A Unicode string.
 
-This value represents the **wszProxyServer** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.63.
+This value represents the **wszProxyServer** field of the **FW_AUTH_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.63.
 
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Cryptographic Sets
 
-The Cryptographic Sets represents **FW_CRYPTO_SET** structures as defined in [MS-FASP](#Section_5) section 2.2.74. These objects are encoded under the Software\Policies\Microsoft\WindowsFirewall\Phase1CryptoSet or the Software\Policies\Microsoft\WindowsFirewall\Phase2CryptoSets key. Cryptographic sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase1CryptoSet key represent those who have a value of FW_IPSEC_PHASE_1 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74). Cryptographic sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase2CryptoSets key represent those who have a value of FW_IPSEC_PHASE_2 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74). Every key under each of these two cryptographic sets keys represents a unique cryptographic set object, and the name of each key represents the value of the **wszSetId** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74. The semantic checks described in [MS-FASP] section 2.2.74 are also applicable to the cryptographic sets described in this section after the mapping of the [**registry**](#gt_registry) values and tokens.
+The Cryptographic Sets represents **FW_CRYPTO_SET** structures as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74. These objects are encoded under the Software\Policies\Microsoft\WindowsFirewall\Phase1CryptoSet or the Software\Policies\Microsoft\WindowsFirewall\Phase2CryptoSets key. Cryptographic sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase1CryptoSet key represent those who have a value of FW_IPSEC_PHASE_1 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74). Cryptographic sets stored on the Software\Policies\Microsoft\WindowsFirewall\Phase2CryptoSets key represent those who have a value of FW_IPSEC_PHASE_2 (as defined in [MS-FASP] section 2.2.50) in the **IpSecPhase** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74). Every key under each of these two cryptographic sets keys represents a unique cryptographic set object, and the name of each key represents the value of the **wszSetId** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74. The semantic checks described in [MS-FASP] section 2.2.74 are also applicable to the cryptographic sets described in this section after the mapping of the [**registry**](#gt_registry) values and tokens.
 
 The Software\Policies\Microsoft\WindowsFirewall\Phase1CryptoSet\{E5A5D32A-4BCE-4E4D-B07F-4AB1BA7E5FE1} and the Software\Policies\Microsoft\WindowsFirewall\Phase2CryptoSets\{E5A5D32A-4BCE-4E4D-B07F-4AB1BA7E5FE2} keys MUST NOT exist. Hence phase 1 sets with a set Id equal to {E5A5D32A-4BCE-4E4D-B07F-4AB1BA7E5FE1} and phase 2 sets with a set id equal to {E5A5D32A-4BCE-4E4D-B07F-4AB1BA7E5FE2} MUST rename their Ids when encoded through this protocol. The original set id value of this set MUST be written to the following two corresponding registry values, which clients of this protocol will use to rename the sets back:
 
@@ -1939,7 +1939,7 @@ Size: Equal to size of the **Data** field.
 
 Data: this value encodes a Unicode string using the VERSION grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the values of the **wSchemaVersion** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+This value represents the values of the **wSchemaVersion** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 <a id="Section_2.2.5.2"></a>
 #### 2.2.5.2 Name
@@ -1954,7 +1954,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszName** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+This value represents the **wszName** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 <a id="Section_2.2.5.3"></a>
 #### 2.2.5.3 Description
@@ -1969,7 +1969,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszDescription** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+This value represents the **wszDescription** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 <a id="Section_2.2.5.4"></a>
 #### 2.2.5.4 EmbeddedContext
@@ -1984,7 +1984,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string.
 
-This value represents the **wszEmbeddedContext** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+This value represents the **wszEmbeddedContext** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 <a id="Section_2.2.5.5"></a>
 #### 2.2.5.5 Phase 1 - Do Not Skip Deffie Hellman
@@ -1999,7 +1999,7 @@ Size: Equal to size of the **Data** field.
 
 Data: a Unicode string that encodes a Boolean value using the BOOL-VAL grammar rule defined in section [2.2.2.19](#Section_2.2.2.19).
 
-This value represents the **FW_PHASE1_CRYPTO_FLAGS_DO_NOT_SKIP_DH** enumeration flag (as defined in [MS-FASP](#Section_5) section 2.2.72) of the **wFlags** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74.
+This value represents the **FW_PHASE1_CRYPTO_FLAGS_DO_NOT_SKIP_DH** enumeration flag (as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.72) of the **wFlags** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP] section 2.2.74.
 
 <a id="Section_2.2.5.6"></a>
 #### 2.2.5.6 Phase 1 - Time Out in Minutes
@@ -2018,7 +2018,7 @@ TIMEOUT-MIN-VAL = 1*8DIGIT
 
 **TIMEOUT-MIN-VAL =** the decimal value of this grammar rule MUST NOT be bigger than the decimal value of 71582788.
 
-This value represents the **dwTimeoutMinutes** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+This value represents the **dwTimeoutMinutes** field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 <a id="Section_2.2.5.7"></a>
 #### 2.2.5.7 Phase 1 - Time Out in Sessions
@@ -2037,7 +2037,7 @@ TIMEOUT-SESS-VAL = 1*10DIGIT
 
 **TIMEOUT-SESS-VAL:** The decimal value of this grammar rule MUST NOT be bigger than the decimal value of 2147483647.
 
-This value represents the dwTimeoutSessions field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+This value represents the dwTimeoutSessions field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 <a id="Section_2.2.5.8"></a>
 #### 2.2.5.8 Phase 2 - Perfect Forward Secrecy
@@ -2056,7 +2056,7 @@ PFS-VAL = "Disable" / "EnableDHFromPhase1" / "ReKeyDH1" / "ReKeyDH2" / "ReKeyDH2
 
 PFS-VAL =/ "ReKeyECDH256" / "ReKeyECDH384"
 
-**Disable:** This token represents the **FW_PHASE2_CRYPTO_PFS_DISABLE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.73. The remaining token values in this list can be found in the same Protocol specification section.
+**Disable:** This token represents the **FW_PHASE2_CRYPTO_PFS_DISABLE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.73. The remaining token values in this list can be found in the same Protocol specification section.
 
 **EnableDHFromPhase1:** This token represents the **FW_PHASE2_CRYPTO_PFS_PHASE1** enumeration value.
 
@@ -2077,7 +2077,7 @@ This value represents the **Pfs** field of the **FW_CRYPTO_SET** structure as de
 
 Each authentication set can contain a list of suites corresponding to the cryptographic proposals that will be negotiated. These suites are stored in Software\Policies\Microsoft\WindowsFirewall\Phase1CryptoSet\<wszSetId>\<SuiteIndex> where the SuiteIndex is a 4 digit decimal value encoded as a string.
 
-The suite keys represent the pPhase1Suites array field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+The suite keys represent the pPhase1Suites array field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 The suites for phase 1 cryptographic sets differ from those of phase 2 authentication sets. The following sections describe how these phase 1 cryptographic suites are encoded. The semantic checks described in [MS-FASP] section 2.2.70 are also applicable to the cryptographic phase 1 suites described in this section after following the mapping of the [**registry**](#gt_registry) values and tokens.
 
@@ -2096,7 +2096,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 KEY-EXCHANGE-VAL = "DH1" / "DH2" / "DH2048" / "ECDH-256" / "ECDH-384"
 
-**DH1:** This token represents the **FW_CRYPTO_KEY_EXCHANGE_DH1** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.66. The remaining token values in this list can be found in the same Protocol specification section except where noted.
+**DH1:** This token represents the **FW_CRYPTO_KEY_EXCHANGE_DH1** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.66. The remaining token values in this list can be found in the same Protocol specification section except where noted.
 
 **DH2:** This token represents the **FW_CRYPTO_KEY_EXCHANGE_DH2** enumeration value.
 
@@ -2123,7 +2123,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 ENCRYPTION-VAL = "DES" / "3DES" / "AES-128" / "AES-192" / "AES-256"
 
-**DES:** this token represents the **FW_CRYPTO_ENCRYPTION_DES** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.67. The remaining token values in this list can be found in the same Protocol specification section except where noted.
+**DES:** this token represents the **FW_CRYPTO_ENCRYPTION_DES** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.67. The remaining token values in this list can be found in the same Protocol specification section except where noted.
 
 **3DES:** This token represents the **FW_CRYPTO_ENCRYPTION_3DES** enumeration value.
 
@@ -2150,7 +2150,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 HASH-VAL = "MD5" / "SHA1"
 
-**MD5:** This token represents the **FW_CRYPTO_HASH_MD5** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.68.
+**MD5:** This token represents the **FW_CRYPTO_HASH_MD5** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.68.
 
 **SHA1:** This token represents the **FW_CRYPTO_HASH_SHA1** enumeration value as defined in [MS-FASP] section 2.2.68.
 
@@ -2186,7 +2186,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 HASH2-1-VAL = "SHA256" / "SHA384"
 
-**SHA256:** This token represents the **FW_CRYPTO_HASH_SHA256** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.68.
+**SHA256:** This token represents the **FW_CRYPTO_HASH_SHA256** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.68.
 
 **SHA384:** This token represents the **FW_CRYPTO_HASH_SHA384** enumeration value as defined in [MS-FASP] section 2.2.68.
 
@@ -2207,7 +2207,7 @@ Data: This value is a Unicode string encoded using the following grammar rule:
 
 KEY-EXCHANGE-VAL = "DH1" / "DH2" / "DH2048" / "ECDH-256" / "ECDH-384" / "DH24"
 
-**DH1:** This token represents the **FW_CRYPTO_KEY_EXCHANGE_DH1** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.66. The remaining token values in this list can be found in the same Protocol specification section except where noted.
+**DH1:** This token represents the **FW_CRYPTO_KEY_EXCHANGE_DH1** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.66. The remaining token values in this list can be found in the same Protocol specification section except where noted.
 
 **DH2:** This token represents the **FW_CRYPTO_KEY_EXCHANGE_DH2** enumeration value.
 
@@ -2226,7 +2226,7 @@ This value represents the **KeyExchange** field of the **FW_PHASE1_CRYPTO_SUITE*
 
 Each authentication set could contain a list of suites which express cryptographic proposals that will be negotiated. These suites can be stored in Software\Policies\Microsoft\WindowsFirewall\Phase2CryptoSets\<wszSetId>\<SuiteIndex> where the SuiteIndex is a 4 digit decimal value encoded as a string.
 
-The suite keys represent the **pPhase2Suites** array field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](#Section_5) section 2.2.74.
+The suite keys represent the **pPhase2Suites** array field of the **FW_CRYPTO_SET** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.74.
 
 The suites for phase 2 cryptographic sets differ from those of phase 1 authentication sets. The following sections describe how these phase 2 cryptographic suites are encoded. The semantic checks described in [MS-FASP] section 2.2.71 are also applicable to the cryptographic phase 2 suites described in this section after following the mapping of the [**registry**](#gt_registry) values and tokens.
 
@@ -2245,7 +2245,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 PROTOCOL-VAL = "AH" / "ESP" / "AH&ESP"
 
-**AH:** This token represents the **FW_CRYPTO_PROTOCOL_AH** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.69. The remaining token values in this list can be found in the same Protocol specification section.
+**AH:** This token represents the **FW_CRYPTO_PROTOCOL_AH** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.69. The remaining token values in this list can be found in the same Protocol specification section.
 
 **ESP:** This token represents the **FW_CRYPTO_PROTOCOL_ESP** enumeration value.
 
@@ -2266,7 +2266,7 @@ Size: Equal to size of the **Data** field.
 
 Data: this value is a Unicode string encoded using the ENCRYPTION-VAL grammar rule defined in section [2.2.5.11](#Section_2.2.5.11).
 
-This value represents the **Encryption** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.71.
+This value represents the **Encryption** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.71.
 
 <a id="Section_2.2.5.19"></a>
 #### 2.2.5.19 Phase 2 Suite - AH Protocol Hash Algorithm
@@ -2281,7 +2281,7 @@ Size: Equal to size of the **Data** field.
 
 Data: this value is a Unicode string encoded using the HASH-VAL grammar rule defined in section [2.2.5.12](#Section_2.2.5.12).
 
-This value represents the **AhHash** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.71.
+This value represents the **AhHash** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.71.
 
 <a id="Section_2.2.5.20"></a>
 #### 2.2.5.20 Phase 2 Suite - ESP Protocol Hash Algorithm
@@ -2296,7 +2296,7 @@ Size: Equal to size of the **Data** field.
 
 Data: this value is a Unicode string encoded using the HASH-VAL grammar rule defined in section [2.2.5.12](#Section_2.2.5.12).
 
-This value represents the **EspHash** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.71.
+This value represents the **EspHash** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.71.
 
 <a id="Section_2.2.5.21"></a>
 #### 2.2.5.21 Phase 2 Suite - Time Out in Minutes
@@ -2315,7 +2315,7 @@ PHASE2-SUITE-TIMEOUT-MIN-VAL = 1*4DIGIT
 
 **PHASE2-SUITE-TIMEOUT-MIN-VAL** = the decimal value of this grammar rule MUST NOT be bigger than the decimal value of 2880.
 
-This value represents the **dwTimeoutMinutes** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.71.
+This value represents the **dwTimeoutMinutes** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.71.
 
 <a id="Section_2.2.5.22"></a>
 #### 2.2.5.22 Phase 2 Suite - Time Out in Kilobytes
@@ -2334,7 +2334,7 @@ PHASE2-SUITE-TIMEOUT-KBYTES-VAL = 1*10DIGIT
 
 **PHASE2-SUITE-TIMEOUT-MIN-VAL** = the decimal value of this grammar rule MUST NOT be bigger than the decimal value of 2147483647.
 
-This value represents the **dwTimeoutKBytes** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.71.
+This value represents the **dwTimeoutKBytes** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.71.
 
 <a id="Section_2.2.5.23"></a>
 #### 2.2.5.23 Phase 2 Suite - Skip Version
@@ -2366,7 +2366,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 ENCRYPTION2-1-VAL = "AES-GCM128" / "AES-GCM192" / "AES-GCM256"
 
-**AES-GCM128:** This token represents the **FW_CRYPTO_ENCRYPTION_AES_GCM128** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.67.
+**AES-GCM128:** This token represents the **FW_CRYPTO_ENCRYPTION_AES_GCM128** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.67.
 
 **AES-GCM192:** This token represents the **FW_CRYPTO_ENCRYPTION_AES_GCM192** enumeration value as defined in [MS-FASP] section 2.2.67.
 
@@ -2389,7 +2389,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 AH-ESP-HASH2-1-VAL = "SHA256" / "AES-GCM128" / "AES-GCM192" / "AES-GCM256"
 
-**SHA256:** This token represents the **FW_CRYPTO_HASH_SHA256** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.68. The remaining token values in this list can be found in the same Protocol specification section.
+**SHA256:** This token represents the **FW_CRYPTO_HASH_SHA256** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.68. The remaining token values in this list can be found in the same Protocol specification section.
 
 **AES-GCM128:** This token represents the **FW_CRYPTO_HASH_AES_GMAC128** enumeration value.
 
@@ -2412,7 +2412,7 @@ Size: Equal to size of the **Data** field.
 
 Data: this value is a Unicode string encoded using the AH-ESP-HASH2-1-VAL grammar rule defined in section [2.2.5.25](#Section_2.2.5.25).
 
-This value represents the **EspHash** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](#Section_5) section 2.2.71. If this value appears in the suite key, then a SkipVersion value with a version of 0x0200 MUST be present.
+This value represents the **EspHash** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.71. If this value appears in the suite key, then a SkipVersion value with a version of 0x0200 MUST be present.
 
 <a id="Section_2.2.5.27"></a>
 #### 2.2.5.27 Phase 2 Suite - 2.9 Protocol
@@ -2429,7 +2429,7 @@ Data: this value is a Unicode string encoded using the following grammar rule:
 
 PROTOCOL2-9-VAL = "AUTH_NO_ENCAP"
 
-**AUTH_NO_ENCAP:** This token represents the **FW_CRYPTO_PROTOCOL_AUTH_NO_ENCAP** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.69.
+**AUTH_NO_ENCAP:** This token represents the **FW_CRYPTO_PROTOCOL_AUTH_NO_ENCAP** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.69.
 
 This value represents the **Protocol** field of the **FW_PHASE2_CRYPTO_SUITE** structure as defined in [MS-FASP] section 2.2.71. If this value appears in the suite key, then a SkipVersion value with a version of 0x0209 MUST be present.
 
@@ -2450,7 +2450,7 @@ PFS-VAL = "Disable" / "EnableDHFromPhase1" / "ReKeyDH1" / "ReKeyDH2" / "ReKeyDH2
 
 PFS-VAL =/ "ReKeyECDH256" / "ReKeyECDH384" / "ReKeyDH24"
 
-**Disable:** This token represents the **FW_PHASE2_CRYPTO_PFS_DISABLE** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.73. The remaining token values in this list can be found in the same protocol specification section.
+**Disable:** This token represents the **FW_PHASE2_CRYPTO_PFS_DISABLE** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.73. The remaining token values in this list can be found in the same protocol specification section.
 
 **EnableDHFromPhase1:** This token represents the **FW_PHASE2_CRYPTO_PFS_PHASE1** enumeration value.
 
@@ -2480,7 +2480,7 @@ This grammar is used to identify the actions available for firewall rules.
 
 CS-ACTION-VAL = "SecureServer" / "Boundary" / "Secure" / "DoNotSecure"
 
-**SecureServer:** This token value represents the **FW_CS_RULE_ACTION_SECURE_SERVER** enumeration value as defined in [MS-FASP](#Section_5) section 2.2.52. The remaining token values in this list can be found in the same Protocol specification section.
+**SecureServer:** This token value represents the **FW_CS_RULE_ACTION_SECURE_SERVER** enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.52. The remaining token values in this list can be found in the same Protocol specification section.
 
 **Boundary:** This token value represents the **FW_CS_RULE_ACTION_BOUNDARY** enumeration value.
 
@@ -2493,7 +2493,7 @@ CS-ACTION-VAL = "SecureServer" / "Boundary" / "Secure" / "DoNotSecure"
 
 Connection security rules are stored under the Software\Policies\Microsoft\WindowsFirewall\ConSecRules key.
 
-Each value under the key is a connection security rule. The type of the value MUST be REG_SZ. The data of each value is a string that can be parsed by the following grammar. This grammar represents a connection security rule as defined in [MS-FASP](#Section_5) section 2.2.55, except for the **wszRuleId** field of the **FW_CS_RULE** structure which is instead represented by the name of the [**registry**](#gt_registry) value.
+Each value under the key is a connection security rule. The type of the value MUST be REG_SZ. The data of each value is a string that can be parsed by the following grammar. This grammar represents a connection security rule as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.55, except for the **wszRuleId** field of the **FW_CS_RULE** structure which is instead represented by the name of the [**registry**](#gt_registry) value.
 
 CSRULE = "v" VERSION "|" 1*FIELD
 
@@ -2688,7 +2688,7 @@ This grammar is used to identify keying modules.
 
 KEY-MOD-VAL = "KeyModDefault" / "IkeV1" / "AuthIP" / "IkeV2"
 
-**KeyModDefault:** This token represents the FW_KEY_MODULE_DEFAULT enumeration value as defined in [MS-FASP](#Section_5) section 2.2.96. The remaining token values in this list can be found in the same Protocol specification section.
+**KeyModDefault:** This token represents the FW_KEY_MODULE_DEFAULT enumeration value as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.96. The remaining token values in this list can be found in the same Protocol specification section.
 
 **IkeV1:** This token represents the FW_KEY_MODULE_IKEv1 enumeration value.
 
@@ -2706,7 +2706,7 @@ This section defines the grammars used to encode different portions of the Main 
 
 Main mode rules are stored under the Software\Policies\Microsoft\WindowsFirewall\MainModeRules key.
 
-Each value under the key is a main mode rule. The type of the value MUST be REG_SZ. The data of each value is a string that can be parsed by the following grammar. This grammar represents a main mode rule as defined in [MS-FASP](#Section_5) section 2.2.85, except for the **wszRuleId** field of the **FW_MM_RULE** structure, which is instead represented by the name of the [**registry**](#gt_registry) value.
+Each value under the key is a main mode rule. The type of the value MUST be REG_SZ. The data of each value is a string that can be parsed by the following grammar. This grammar represents a main mode rule as defined in [MS-FASP](../MS-FASP/MS-FASP.md) section 2.2.85, except for the **wszRuleId** field of the **FW_MM_RULE** structure, which is instead represented by the name of the [**registry**](#gt_registry) value.
 
 MMRULE = "v" VERSION "|" 1*FIELD
 
@@ -2787,7 +2787,7 @@ The administrative plug-in mediates between the user interface (UI) and a remote
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that specified in this document.
 
-The Firewall and Advanced Security Group Policy administrative plug-in relies on a collection of settings specified in section [2.2](../MS-GPREG/MS-GPREG.md) and stored as a [**Unicode**](#gt_unicode) configuration file ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 2.2) in a [**GPO**](#gt_group-policy-object-gpo) using the Group Policy: Core Protocol specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md). The administrative plug-in parses and encodes these settings as specified in section 2.2 to perform its functions.
+The Firewall and Advanced Security Group Policy administrative plug-in relies on a collection of settings specified in section [2.2](#Section_2.2) and stored as a [**Unicode**](#gt_unicode) configuration file ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 2.2) in a [**GPO**](#gt_group-policy-object-gpo) using the Group Policy: Core Protocol specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md). The administrative plug-in parses and encodes these settings as specified in section 2.2 to perform its functions.
 
 The Firewall and Advanced Security Group Policy administrative plug-in reads in these settings from the remote storage location GPO and displays them to an administrator through a UI.
 
@@ -2814,7 +2814,7 @@ The Firewall and Advanced Security Group Policy administrative plug-in is invoke
 
 | Parameter | Description |
 | --- | --- |
-| GPO DN | The [**distinguished name (DN)**](#gt_distinguished-name-dn) for the GPO that is being updated. This is the **Administered GPO (Public)** ADM element, as specified in section [3.1.1](#Section_3.1). |
+| GPO DN | The [**distinguished name (DN)**](#gt_distinguished-name-dn) for the GPO that is being updated. This is the **Administered GPO (Public)** ADM element, as specified in section [3.1.1](#Section_3.1.1). |
 | Is User Policy | A Boolean value indicating whether this update is for user policy mode. If set to FALSE, this update is for computer policy mode. This parameter is ignored. |
 
 The plug-in displays the current settings to the administrator, and when the administrator requests a change in settings, it updates the stored configuration appropriately as specified in section [2.2](#Section_2.2), after performing additional checks and actions as noted in this section.
@@ -2824,7 +2824,7 @@ The administrative plug-in SHOULD<9> take measures in its UI to ensure that the 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The Firewall and Advanced Security (FASP) Group Policy administrative plug-in reads extension-specific data from the **Administered GPO** (as defined in section [3.1.1](#Section_3.1)) and will then pass that information to a UI to display the current settings to an administrator. The operations that the Firewall and Advanced Security Group Policy administrative plug-in uses to read extension-specific data from a GPO are detailed in [MS-GPREG](../MS-GPREG/MS-GPREG.md) section 3.1.5.3.
+The Firewall and Advanced Security (FASP) Group Policy administrative plug-in reads extension-specific data from the **Administered GPO** (as defined in section [3.1.1](#Section_3.1.1)) and will then pass that information to a UI to display the current settings to an administrator. The operations that the Firewall and Advanced Security Group Policy administrative plug-in uses to read extension-specific data from a GPO are detailed in [MS-GPREG](../MS-GPREG/MS-GPREG.md) section 3.1.5.3.
 
 It will also write the extension-specific configuration data to the **Administered GPO** if the administrator makes any changes to the existing configuration. The operations that the Firewall and Advanced Security Group Policy administrative plug-in uses to create, update, or delete the extension-specific data to a GPO are detailed in section [3.1.5.2](#Section_3.1.5.2).
 
@@ -2874,7 +2874,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The Group Policy: Firewall and Advanced Security Data Structure client initializes when the host machine starts. The client MUST use an implementation-specific<10> method to register for notification of the Policy Application event, as defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.7.3. The client MUST then query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.6) to retrieve the initial policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](#Section_5) section 3.1.6.4) to modify the internal state of the Firewall and Advanced Security component.
+The Group Policy: Firewall and Advanced Security Data Structure client initializes when the host machine starts. The client MUST use an implementation-specific<10> method to register for notification of the Policy Application event, as defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.7.3. The client MUST then query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.7) to retrieve the initial policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](../MS-FASP/MS-FASP.md) section 3.1.6.4) to modify the internal state of the Firewall and Advanced Security component.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -2897,7 +2897,7 @@ None.
 <a id="Section_3.2.7.1"></a>
 #### 3.2.7.1 Policy Application Event
 
-When Group Policy: Core Protocol signals the Policy Application event, the Group Policy: Firewall and Advanced Security Data Structure client MUST query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.6) to retrieve the updated policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](#Section_5) section 3.1.6) to modify the internal state of the Firewall and Advanced Security component.
+When Group Policy: Core Protocol signals the Policy Application event, the Group Policy: Firewall and Advanced Security Data Structure client MUST query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.7) to retrieve the updated policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](../MS-FASP/MS-FASP.md) section 3.1.6) to modify the internal state of the Firewall and Advanced Security component.
 
 <a id="Section_4"></a>
 # 4 Protocol Examples

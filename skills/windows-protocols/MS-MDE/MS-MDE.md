@@ -784,7 +784,7 @@ This section describes the fourth phase in MDE device enrollment: interacting wi
 
 Figure 7: MDE device enrollment: getting the certificate policies
 
-The X.509 Certificate Enrollment Policy Protocol [MS-XCEP] enables a client to request [**certificate enrollment policies**](#gt_b8b89448-1696-4337-aeb3-7f6fbf117915) from a server. The communication is initiated by the [**enrollment client**](#gt_enrollment-client) request to the server for the certificate enrollment policies. The server authenticates the client, validates the request, and returns a response with a collection of certificate enrollment policy objects. As described in section [3.2](../MS-XCEP/MS-XCEP.md), the enrollment client uses the certificate enrollment policies to complete the enrollment process [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md). MDE uses the policies to allow the [**ES**](#gt_enrollment-service-es) to specify the hash algorithm and key length as described in the following section.
+The X.509 Certificate Enrollment Policy Protocol [MS-XCEP] enables a client to request [**certificate enrollment policies**](#gt_b8b89448-1696-4337-aeb3-7f6fbf117915) from a server. The communication is initiated by the [**enrollment client**](#gt_enrollment-client) request to the server for the certificate enrollment policies. The server authenticates the client, validates the request, and returns a response with a collection of certificate enrollment policy objects. As described in section [3.2](#Section_3.2), the enrollment client uses the certificate enrollment policies to complete the enrollment process [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md). MDE uses the policies to allow the [**ES**](#gt_enrollment-service-es) to specify the hash algorithm and key length as described in the following section.
 
 **Authentication**
 
@@ -942,7 +942,7 @@ The WS-Trust X509v3 Enrollment Extensions [MS-WSTEP] are extensions of WS-Trust 
 
 **Authentication**
 
-The WS-Trust X509v3 Enrollment Extensions [MS-WSTEP] use the authentication provisions in WS-Security 2004 [WSS] to enable the X509v3 [**security token**](#gt_security-token) issuer to authenticate the X509v3 security token requestor. This section defines the schema used to express the credential descriptor for each supported credential type. The security token credential is provided in a request message using the <wsse:BinarySecurityToken> element [WSS]. The security token is retrieved as described in section [3.2](../MS-WSTEP/MS-WSTEP.md). The authentication information is as follows:
+The WS-Trust X509v3 Enrollment Extensions [MS-WSTEP] use the authentication provisions in WS-Security 2004 [WSS] to enable the X509v3 [**security token**](#gt_security-token) issuer to authenticate the X509v3 security token requestor. This section defines the schema used to express the credential descriptor for each supported credential type. The security token credential is provided in a request message using the <wsse:BinarySecurityToken> element [WSS]. The security token is retrieved as described in section [3.2](#Section_3.2). The authentication information is as follows:
 
 **wsse:Security:** MDE implements the <wsse:Security> element defined in [WSS] section 5. The <wsse:Security> element MUST be a child of the <s:Header> element (see [MS-XCEP](../MS-XCEP/MS-XCEP.md) section 4).
 
@@ -976,7 +976,7 @@ The following table summarizes the list of WSDL operations as defined by this sp
 
 | Operation | Description |
 | --- | --- |
-| [RequestSecurityToken](../MS-WSTEP/MS-WSTEP.md) | Provides the mechanism for completing the enrollment process. MDE uses the messages defined by this operation as specified in the WS-Trust X.509v3 Token Enrollment Extensions (see [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md) section 3.1.4). |
+| [RequestSecurityToken](#Section_3.4.4.1) | Provides the mechanism for completing the enrollment process. MDE uses the messages defined by this operation as specified in the WS-Trust X.509v3 Token Enrollment Extensions (see [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md) section 3.1.4). |
 
 <a id="Section_3.4.4.1"></a>
 #### 3.4.4.1 RequestSecurityToken Operation
@@ -1198,7 +1198,7 @@ MDE does not modify the RequestSecurityToken operation for the [**certificate**]
 <a id="Section_3.5.4.1.1"></a>
 ##### 3.5.4.1.1 Messages
 
-MDE does not modify the set of messages for the RequestSecurityToken operation for the [**certificate**](#gt_certificate) renewal process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.1).
+MDE does not modify the set of messages for the RequestSecurityToken operation for the [**certificate**](#gt_certificate) renewal process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1).
 
 <a id="Section_3.5.4.1.1.1"></a>
 ###### 3.5.4.1.1.1 RequestSecurityToken

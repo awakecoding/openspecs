@@ -795,13 +795,13 @@ The following table summarizes the set of common [**XML schema**](#gt_xml-schema
 | [dsc:DocumentId](#Section_2.2.3.5) | The Id of a scan document within a collection of scan documents that are part of a PostScan job. |
 | [dsc:Filter](#Section_2.2.3.6) | An element that represents a single filter supported by the [**scan repository**](#gt_scan-repository). |
 | [dsc:FilterCompletedStatuses](#Section_2.2.3.7) | An element that contains the final processing status of all filters in the completed PostScan job. |
-| [dsc:FilterConfig](#Section_2.2.3.6) | The unique configuration [**XML**](#gt_xml) for the filter dialect. |
+| [dsc:FilterConfig](#Section_2.2.3.8) | The unique configuration [**XML**](#gt_xml) for the filter dialect. |
 | [dsc:Filters](#Section_2.2.3.9) | An element that contains a list of the supported filters for this scan repository. |
-| [dsc:FilterState](#Section_2.2.3.9) | An element that represents the current processing state of a filter in the current PostScan job. |
+| [dsc:FilterState](#Section_2.2.3.10) | An element that represents the current processing state of a filter in the current PostScan job. |
 | [dsc:FilterStateReason](#Section_2.2.3.11) | An element that represents additional detailed information regarding the current processing state of a filter in the current PostScan job. |
-| [dsc:FilterStateReasons](#Section_2.2.3.9) | A collection of all of the additional detailed information regarding the current processing state of a filter in the current PostScan job. |
+| [dsc:FilterStateReasons](#Section_2.2.3.12) | A collection of all of the additional detailed information regarding the current processing state of a filter in the current PostScan job. |
 | [dsc:FilterStatus](#Section_2.2.3.13) | An element that contains the current filter dialect and processing state. |
-| [dsc:FilterStatuses](#Section_2.2.3.9) | A collection of all of the statuses for all filters in the current PostScan job. |
+| [dsc:FilterStatuses](#Section_2.2.3.14) | A collection of all of the statuses for all filters in the current PostScan job. |
 | [dsc:Format](#Section_2.2.3.15) | An element that contains the image file format of the scan document. |
 | [dsc:ImagesReceived](#Section_2.2.3.16) | An element that contains the total number of scan documents in the current PostScan job. |
 | [dsc:JobCompletedState](#Section_2.2.3.17) | An element that contains the final state of the PostScan job. |
@@ -811,8 +811,8 @@ The following table summarizes the set of common [**XML schema**](#gt_xml-schema
 | [dsc:JobDescription](#Section_2.2.3.21) | An element that contains descriptive information about the PostScan job. |
 | [dsc:JobOriginatingUserName](#Section_2.2.3.22) | An element that contains the username that initiated the PostScan job. |
 | [dsc:JobState](#Section_2.2.3.23) | An element that contains the current processing state of a PostScan job. |
-| [dsc:JobStateReason](#Section_2.2.5.10) | An element that represents additional detailed information regarding the current processing state of the current PostScan job. |
-| [dsc:JobStateReasons](#Section_2.2.3.24) | A collection of all of the additional detailed information regarding the current processing state of the current PostScan job. |
+| [dsc:JobStateReason](#Section_2.2.3.24) | An element that represents additional detailed information regarding the current processing state of the current PostScan job. |
+| [dsc:JobStateReasons](#Section_2.2.3.25) | A collection of all of the additional detailed information regarding the current processing state of the current PostScan job. |
 | [dsc:JobStatus](#Section_2.2.3.26) | An element that contains all of the information about the status of a PostScan job. |
 | [dsc:JobSummary](#Section_2.2.3.27) | An element that contains a subset of status and descriptive information about a PostScan job. |
 | [dsc:JobToken](#Section_2.2.3.28) | An element that contains a unique identifier for a PostScan job. The identifier is only guaranteed to be unique within the current scan repository. |
@@ -1029,7 +1029,7 @@ The dsc:JobCompletedState element contains the final state of the [**PostScan jo
 <a id="Section_2.2.3.18"></a>
 #### 2.2.3.18 dsc:JobCompletedStateReasons
 
-The dsc:JobCompletedStateReasons element contains a collection of [JobStateReason](#Section_2.2.5.10) elements that represent the final detailed state information for the [**PostScan job**](#gt_postscan-job).
+The dsc:JobCompletedStateReasons element contains a collection of [JobStateReason](#Section_2.2.3.24) elements that represent the final detailed state information for the [**PostScan job**](#gt_postscan-job).
 
 <xs:element name="JobCompletedStateReasons" type="dsc:JobStateReasonsType"/>
 
@@ -1082,7 +1082,7 @@ maxOccurs="unbounded"/>
 <a id="Section_2.2.3.25"></a>
 #### 2.2.3.25 dsc:JobStateReasons
 
-The dsc:JobStateReasons element contains a collection of [dsc:JobStateReason](#Section_2.2.5.10) elements.
+The dsc:JobStateReasons element contains a collection of [dsc:JobStateReason](#Section_2.2.3.24) elements.
 
 <xs:element name="JobStateReasons" type="dsc:JobStateReasonsType"
 
@@ -4584,7 +4584,7 @@ None.
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The protocol client side of this protocol is simply a pass-through. That is, no additional [timers](#Section_3.1.2) or other state is required on the client side of this protocol. Calls that are made by the higher-layer protocol or application are passed directly to the [transport](#Section_2.1) layer and the results returned by the transport layer are passed directly back to the higher-layer protocol or application.
+The protocol client side of this protocol is simply a pass-through. That is, no additional [timers](#Section_3.2.2) or other state is required on the client side of this protocol. Calls that are made by the higher-layer protocol or application are passed directly to the [transport](#Section_2.1) layer and the results returned by the transport layer are passed directly back to the higher-layer protocol or application.
 
 Except where specified, the protocol client SHOULD interpret HTTP status codes returned by the protocol server, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 10, Status Code Definitions.
 
@@ -4784,14 +4784,14 @@ configuration/GetRepositoryElementsResponse"/>
 
 </wsdl:operation>
 
-Upon receiving a [dsc:GetRepositoryElementsRequestMsg](#Section_3.2.4.1.1.1), the server MUST respond with an [dsc:GetRepositoryElementsResponseMsg](#Section_3.2.4.7.2) or a [**SOAP fault**](#gt_soap-fault) as follows:
+Upon receiving a [dsc:GetRepositoryElementsRequestMsg](#Section_3.2.4.1.2.2), the server MUST respond with an [dsc:GetRepositoryElementsResponseMsg](#Section_3.2.4.1.2.3) or a [**SOAP fault**](#gt_soap-fault) as follows:
 
 - If the server cannot validate the arguments of the dsc:GetRepositoryElementsRequestMsg, the server MUST return a [dsc:InvalidArgs](#Section_3.1.4.1.2) SOAP fault.
 - If the server encounters an unexpected error from which it can recover while processing the dsc:GetRepositoryElementsRequestMsg, the server MUST return a [dsc:ServerErrorTemporaryError](#Section_3.1.4.1.4) SOAP fault.
 - If the server encounters an unexpected error from which it cannot recover while processing the dsc:GetRepositoryElementsRequestMsg, the server MUST return a [dsc:ServerErrorInternalError](#Section_3.1.4.1.5) SOAP fault depending on the severity of the unexpected error.
 - If the server can successfully process the dsc:GetRepositoryElementsRequestMsg, the server MUST return a dsc:GetRepositoryElementsResponseMsg with the following requirements:
-- The dsc:GetRepositoryElementsResponseMsg MUST have one [dsc:RepositoryElements](#Section_3.2.4.1.2.5) child, which MUST contain as many [dsc:ElementData](#Section_3.2.4.1.2.1) children as there were [dsc:Name](#Section_3.2.4.1.2.4) children in the request message. The dsc:ElementData children MUST be in the same order as the dsc:Name children in the request message.
-- Each dsc:ElementData child corresponding to an dsc:Name child of the request's [dsc:RequestedElements](#Section_3.2.4.3.2.6) MUST have the following characteristics:
+- The dsc:GetRepositoryElementsResponseMsg MUST have one [dsc:RepositoryElements](#Section_3.2.4.1.2.5) child, which MUST contain as many [dsc:ElementData](#Section_3.2.4.1.2.1) children as there were [dsc:Name](#Section_2.2.6.1) children in the request message. The dsc:ElementData children MUST be in the same order as the dsc:Name children in the request message.
+- Each dsc:ElementData child corresponding to an dsc:Name child of the request's [dsc:RequestedElements](#Section_3.2.4.1.2.6) MUST have the following characteristics:
 - The attributes of the dsc:ElementData child MUST be set as follows:
 - The **Name** attribute MUST be set to the same value as the value of the corresponding dsc:Name element of the request.
 - If the requested element exists on the server, the **Valid** attribute MUST be set to "true", otherwise, if the requested element is not known by the server, the **Valid** attribute MUST be set to "false".<13>
@@ -4855,9 +4855,9 @@ The following [**XML schema**](#gt_xml-schema) element definitions are specific 
 | [dsc:ElementData](#Section_3.2.4.1.2.1) | An element that contains response data for a [GetRepositoryElements](#Section_3.2.4.1) response. |
 | [dsc:GetRepositoryElementsRequest](#Section_3.2.4.1.2.2) | An element that contains the input data for a GetRepositoryElements [**WSDL operation**](#gt_wsdl-operation). |
 | [dsc:GetRepositoryElementsResponse](#Section_3.2.4.1.2.3) | An element that contains the output data for a GetRepositoryElements WSDL operation. |
-| [dsc:Name](#Section_3.2.4.1.2.4) | An element that contains the qualified name for a Repository element. This name is used in the GetRepositoryElements response to specify the data that the client is requesting. |
+| [dsc:Name](#Section_2.2.6.1) | An element that contains the qualified name for a Repository element. This name is used in the GetRepositoryElements response to specify the data that the client is requesting. |
 | [dsc:RepositoryElements](#Section_3.2.4.1.2.5) | A collection of [dsc:ElementData](#Section_3.2.4.1.2.1) elements in a GetRepositoryElements response. |
-| [dsc:RequestedElements](#Section_3.2.4.3.2.6) | A collection of dsc:Name elements that represent what information is to be returned in a GetRepositoryElements. |
+| [dsc:RequestedElements](#Section_3.2.4.1.2.6) | A collection of dsc:Name elements that represent what information is to be returned in a GetRepositoryElements. |
 
 <a id="Section_3.2.4.1.2.1"></a>
 ###### 3.2.4.1.2.1 dsc:ElementData
@@ -4911,7 +4911,7 @@ dsc:RepositoryElements is an element of type [dsc:RepositoryElementsType](#Secti
 <a id="Section_3.2.4.1.2.6"></a>
 ###### 3.2.4.1.2.6 dsc:RequestedElements
 
-The dsc:RequestedElements element contains a collection of [dsc:Name](#Section_3.2.4.1.2.4) elements that represent what information is to be returned for an [dsc:GetRepositoryElements](#Section_3.2.4.1) request.
+The dsc:RequestedElements element contains a collection of [dsc:Name](#Section_2.2.6.1) elements that represent what information is to be returned for an [dsc:GetRepositoryElements](#Section_3.2.4.1) request.
 
 <xs:element name="RequestedElements"
 
@@ -5066,7 +5066,7 @@ configuration/CancelPostScanJobResponse"/>
 
 </wsdl:operation>
 
-Upon receiving a [dsc:CancelPostScanJobRequestMsg](#Section_3.2.4.2), the server MUST respond with an [dsc:CancelPostScanJobResponseMsg](#Section_3.2.4.2.1.2) or a [**SOAP fault**](#gt_soap-fault), as follows:
+Upon receiving a [dsc:CancelPostScanJobRequestMsg](#Section_6.2.1), the server MUST respond with an [dsc:CancelPostScanJobResponseMsg](#Section_6.2.1) or a [**SOAP fault**](#gt_soap-fault), as follows:
 
 - If the server cannot validate the arguments of the dsc:CancelPostScanJobRequestMsg, the server MUST return a [dsc:InvalidArgs](#Section_3.1.4.1.2) SOAP fault.<14>
 - If the server encounters an unexpected error from which it can recover while processing the dsc:CancelPostScanJobRequestMsg, the server MUST return a [dsc:ServerErrorTemporaryError](#Section_3.1.4.1.4) SOAP fault.
@@ -5075,7 +5075,7 @@ Upon receiving a [dsc:CancelPostScanJobRequestMsg](#Section_3.2.4.2), the server
 - If the server does have a currently processing PostScan job that matches the dsc:JobToken element of the dsc:CancelPostScanJobRequest element, the server MUST take following steps:
 - Attempt to stop any [**filters**](#gt_filter) currently processing [**scan documents**](#gt_scan-document).
 - Cancel any filters that have not begun processing.
-- Set the value of [dsc:JobState](#Section_2.2.3.23) to "Canceled" and the value of [dsc:JobStateReason](#Section_2.2.5.10) to "PostScanJobCanceled".
+- Set the value of [dsc:JobState](#Section_2.2.3.23) to "Canceled" and the value of [dsc:JobStateReason](#Section_2.2.3.24) to "PostScanJobCanceled".
 - Respond with an [dsc:CancelPostScanJobResponse](#Section_3.2.4.2.2.2).
 The CancelPostScanJob is a best-effort operation. The [**scan repository**](#gt_scan-repository) will accept or reject the operation, then the client can determine the outcome by checking the information returned in the [dsc:PostScanJobEndStateEvent](#Section_3.2.4.9.2.2) or by using [GetPostScanJobElements](#Section_3.2.4.3) after the job has completed processing.
 
@@ -5207,15 +5207,15 @@ distributedscan/configuration/GetPostScanJobElementsResponse"/>
 
 </wsdl:operation>
 
-Upon receiving a [dsc:GetPostScanJobElementsRequestMsg](#Section_3.2.4.7.2) message, the server MUST respond with an [dsc:GetPostScanJobElementsResponseMsg](#Section_3.2.4.7.2) message or a [**SOAP fault**](#gt_soap-fault), as follows:
+Upon receiving a [dsc:GetPostScanJobElementsRequestMsg](#Section_3.2.4.3.2.2) message, the server MUST respond with an [dsc:GetPostScanJobElementsResponseMsg](#Section_3.2.4.3.2.3) message or a [**SOAP fault**](#gt_soap-fault), as follows:
 
 - If the server cannot validate the arguments of the dsc:GetPostScanJobElementsRequestMsg, the server MUST return a [dsc:InvalidArgs](#Section_3.1.4.1.2) SOAP fault.<15>
 - If the server encounters an unexpected error from which it can recover while processing the dsc:GetPostScanJobElementsRequestMsg, the server MUST return a [dsc:ServerErrorTemporaryError](#Section_3.1.4.1.4) SOAP fault.
 - If the server encounters an unexpected error from which it cannot recover while processing the dsc:GetPostScanJobElementsRequestMsg, the server MUST return a [dsc:ServerErrorInternalError](#Section_3.1.4.1.5) SOAP fault depending on the severity of the unexpected error.
 - If the server does not have a PostScan job whose unique identifier matches the value specified in the [dsc:JobToken](#Section_2.2.3.28) element of the [dsc:GetPostScanJobElementsRequest](#Section_3.2.4.3.2.2) element, the server MUST return an [dsc:ClientErrorJobTokenNotFound](#Section_3.1.4.1.6) fault.
 - If the server does have a PostScan job that matches the dsc:JobToken element of the dsc:GetPostScanJobElementsRequest element, the server MUST respond with an dsc:GetPostScanJobElementsResponseMsg message.
-- The dsc:GetPostScanJobElementsResponseMsg element MUST have one [dsc:JobElements](#Section_3.2.4.3.2.5) child, which MUST contain as many [dsc:ElementData](#Section_3.2.4.1.2.1) children as there were [dsc:Name](#Section_3.2.4.1.2.4) children in the request message, and the dsc:ElementData children MUST be in the same order as the dsc:Name children in the request message.
-- Each dsc:ElementData child corresponding to an dsc:Name child of the request's [dsc:RequestedElements](#Section_3.2.4.3.2.6) element MUST have the following characteristics:
+- The dsc:GetPostScanJobElementsResponseMsg element MUST have one [dsc:JobElements](#Section_3.2.4.3.2.5) child, which MUST contain as many [dsc:ElementData](#Section_3.2.4.1.2.1) children as there were [dsc:Name](#Section_2.2.6.1) children in the request message, and the dsc:ElementData children MUST be in the same order as the dsc:Name children in the request message.
+- Each dsc:ElementData child corresponding to an dsc:Name child of the request's [dsc:RequestedElements](#Section_3.2.4.1.2.6) element MUST have the following characteristics:
 - The attributes of the dsc:ElementData child MUST be set as follows:
 - The **Name** attribute MUST be set to the same value as the value of the corresponding dsc:Name element of the request.
 - If the requested element is known by the server, the **Valid** attribute MUST be set to "true"; otherwise, if the requested element is not known by the server, the **Valid** attribute MUST be set to "false".<16>
@@ -5278,9 +5278,9 @@ The following [**XML schema**](#gt_xml-schema) element definitions are specific 
 | [dsc:ElementData](#Section_3.2.4.1.2.1) | An element that contains response data for a [GetPostScanJobElements](#Section_3.2.4.3) request. |
 | [dsc:GetPostScanJobElementsRequest](#Section_3.2.4.3.2.2) | An element that contains the input data for a GetPostScanJobElements [**WSDL operation**](#gt_wsdl-operation). |
 | [dsc:GetPostScanJobElementsResponse](#Section_3.2.4.3.2.3) | An element that contains the output data for a GetPostScanJobElements WSDL operation. |
-| [dsc:Name](#Section_3.2.4.1.2.4) | An element that contains the qualified name for a [**PostScan job**](#gt_postscan-job) element. This name is used in the GetPostScanJobElements request to specify the data the client is requesting. |
+| [dsc:Name](#Section_2.2.6.1) | An element that contains the qualified name for a [**PostScan job**](#gt_postscan-job) element. This name is used in the GetPostScanJobElements request to specify the data the client is requesting. |
 | [dsc:JobElements](#Section_3.2.4.3.2.5) | A collection of [dsc:ElementData](#Section_3.2.4.1.2.1) elements in an dsc:GetPostScanJobElements response. |
-| [dsc:RequestedElements](#Section_3.2.4.3.2.6) | A collection of [dsc:Name](#Section_3.2.4.1.2.4) elements that represent what information is to be returned in an dsc:GetPostScanJobElements response. |
+| [dsc:RequestedElements](#Section_3.2.4.1.2.6) | A collection of [dsc:Name](#Section_2.2.6.1) elements that represent what information is to be returned in an dsc:GetPostScanJobElements response. |
 
 <a id="Section_3.2.4.3.2.1"></a>
 ###### 3.2.4.3.2.1 dsc:ElementData
@@ -5332,7 +5332,7 @@ The dsc:JobElements element contains job information elements requested by an [d
 <a id="Section_3.2.4.3.2.6"></a>
 ###### 3.2.4.3.2.6 dsc:RequestedElements
 
-The dsc:RequestedElements element contains a collection of [dsc:Name](#Section_3.2.4.1.2.4) elements that represent what information is to be returned for an [dsc:GetPostScanJobElements](#Section_3.2.4.3) request.
+The dsc:RequestedElements element contains a collection of [dsc:Name](#Section_2.2.6.1) elements that represent what information is to be returned for an [dsc:GetPostScanJobElements](#Section_3.2.4.3) request.
 
 <xs:element name="RequestedElements" type="dsc:RequestedJobElementsType"/>
 
@@ -5490,7 +5490,7 @@ distributedscan/configuration/GetActiveJobsResponse"/>
 
 </wsdl:operation>
 
-Upon receiving an [dsc:GetActiveJobsRequestMsg](#Section_3.2.4.4.1.1) message, the server MUST respond with an [dsc:GetActiveJobsResponseMsg](#Section_3.2.4.4.2.3) message or a [**SOAP fault**](#gt_soap-fault), as follows:
+Upon receiving an [dsc:GetActiveJobsRequestMsg](#Section_3.2.4.4.2.2) message, the server MUST respond with an [dsc:GetActiveJobsResponseMsg](#Section_3.2.4.4.2.3) message or a [**SOAP fault**](#gt_soap-fault), as follows:
 
 - If the server encounters an unexpected error from which it can recover while processing the dsc:GetActiveJobsRequestMsg, the server MUST return a [dsc:ServerErrorTemporaryError](#Section_3.1.4.1.4) SOAP fault.
 - If the server encounters an unexpected error from which it cannot recover while processing the dsc:GetActiveJobsRequestMsg, the server MUST return a [dsc:ServerErrorInternalError](#Section_3.1.4.1.5) SOAP fault depending on the severity of the unexpected error.
@@ -6266,7 +6266,7 @@ None.
 <a id="Section_3.3"></a>
 ## 3.3 RepositoryConfigurationServiceType Client Details
 
-The client side of this protocol is simply a pass-through. That is, no additional [timers](#Section_3.1.2) or other state is required on the client side of this protocol. Calls made by the higher-layer protocol or application are passed directly to the [transport](#Section_2.1), and the results returned by the transport are passed directly back to the higher-layer protocol or application.
+The client side of this protocol is simply a pass-through. That is, no additional [timers](#Section_3.2.2) or other state is required on the client side of this protocol. Calls made by the higher-layer protocol or application are passed directly to the [transport](#Section_2.1), and the results returned by the transport are passed directly back to the higher-layer protocol or application.
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -10483,13 +10483,13 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <12> Section 3.1.4.1.6: Windows Server 2008 R2 Scan Server, Windows Server 2012 Scan Server, Windows Server 2012 R2 Scan Server, Windows Server 2016 Scan Server, and Windows Server operating system Scan Server return the [dsc:JobToken](#Section_2.2.3.28) value in the detail element of the [dsc:ClientErrorJobTokenNotFound](#Section_3.1.4.1.6) [**SOAP fault**](#gt_soap-fault).
 
-<13> Section 3.2.4.1: Windows Server 2008 R2 Scan Server ignores the [dsc:GetRepositoryElementsRequestMsg](#Section_3.2.4.1.1.1) if it does not recognize the element requested in the [dsc:Name](#Section_3.2.4.1.2.4) element. Windows Server 2008 R2 Scan Server issues a [dsc:InvalidArgs](#Section_3.1.4.1.2) SOAP fault to the dsc:GetRepositoryElementsRequestMsg if the element requested in the dsc:Name element is part of the current namespace but not [dsc:RepositoryConfiguration](#Section_2.2.3.31) or [dsc:RepositoryStatus](#Section_2.2.3.35).
+<13> Section 3.2.4.1: Windows Server 2008 R2 Scan Server ignores the [dsc:GetRepositoryElementsRequestMsg](#Section_3.2.4.1.2.2) if it does not recognize the element requested in the [dsc:Name](#Section_2.2.6.1) element. Windows Server 2008 R2 Scan Server issues a [dsc:InvalidArgs](#Section_3.1.4.1.2) SOAP fault to the dsc:GetRepositoryElementsRequestMsg if the element requested in the dsc:Name element is part of the current namespace but not [dsc:RepositoryConfiguration](#Section_2.2.3.31) or [dsc:RepositoryStatus](#Section_2.2.3.35).
 
-<14> Section 3.2.4.2: Windows Server 2008 R2 Scan Server issues a wsa:EndpointUnavailable SOAP fault to the [dsc:CancelPostScanJobRequestMsg](#Section_3.2.4.2) if the dsc:JobToken element is not a correctly formatted GUID.
+<14> Section 3.2.4.2: Windows Server 2008 R2 Scan Server issues a wsa:EndpointUnavailable SOAP fault to the [dsc:CancelPostScanJobRequestMsg](#Section_6.2.1) if the dsc:JobToken element is not a correctly formatted GUID.
 
-<15> Section 3.2.4.3: Windows Server 2008 R2 Scan Server issues a wsa:EndpointUnavailable SOAP fault to the [dsc:GetPostScanJobElementsRequestMsg](#Section_3.2.4.7.2) if the dsc:JobToken element is not a correctly formatted GUID.
+<15> Section 3.2.4.3: Windows Server 2008 R2 Scan Server issues a wsa:EndpointUnavailable SOAP fault to the [dsc:GetPostScanJobElementsRequestMsg](#Section_3.2.4.3.2.2) if the dsc:JobToken element is not a correctly formatted GUID.
 
-<16> Section 3.2.4.3: Windows Server 2008 R2 Scan Server ignores the dsc:GetPostScanJobElementsRequestMsg if it does not recognize the element requested in the [dsc:Name](#Section_3.2.4.1.2.4) element.
+<16> Section 3.2.4.3: Windows Server 2008 R2 Scan Server ignores the dsc:GetPostScanJobElementsRequestMsg if it does not recognize the element requested in the [dsc:Name](#Section_2.2.6.1) element.
 
 <17> Section 3.2.4.6: Windows Server 2008 R2, Windows Server 2012 Scan Server, Windows Server 2012 R2, Windows Server 2016, and Windows Server operating system do not generate the [RepositoryElementsChangeEvent](#Section_3.2.4.6) event.
 

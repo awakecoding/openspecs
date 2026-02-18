@@ -164,7 +164,7 @@ This document uses the following terms:
 **access control list (ACL)**: A list of access control entries (ACEs) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_advanced-encryption-standard-aes"></a>
 **Advanced Encryption Standard (AES)**: A block cipher that supersedes the Data Encryption Standard (DES). AES can be used to protect electronic data. The AES algorithm can be used to encrypt (encipher) and decrypt (decipher) information. Encryption converts data to an unintelligible form called ciphertext; decrypting the ciphertext converts the data back into its original form, called [**plaintext**](#gt_plaintext). AES is used in symmetric-key cryptography, meaning that the same [**key**](#gt_key) is used for the encryption and decryption operations. It is also a block cipher, meaning that it operates on fixed-size blocks of plaintext and ciphertext, and requires the size of the plaintext as well as the ciphertext to be an exact multiple of this block size. AES is also known as the Rijndael symmetric encryption algorithm [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870).
@@ -359,7 +359,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [FIPS180-4] FIPS PUBS, "Secure Hash Standards (SHS)", March 2012, [http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf](https://go.microsoft.com/fwlink/?LinkId=298918)
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-SFU] Microsoft Corporation, "[Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol](../MS-SFU/MS-SFU.md)".
 
@@ -413,8 +413,8 @@ Within the preceding model, EFSRPC provides various categories of management rou
 - [EfsRpcQueryUsersOnFile (section 3.1.4.2.7)](#Section_3.1.4.2.7)
 - [EfsRpcQueryRecoveryAgents (section 3.1.4.2.8)](#Section_3.1.4.2.8)
 - [EfsRpcRemoveUsersFromFile (section 3.1.4.2.9)](#Section_3.1.4.2.9)
-- [EfsRpcAddUsersToFile (section 3.1.4.2.10)](#Section_3.1.4.2.14)
-- [EfsRpcFileKeyInfo (section 3.1.4.2.12)](#Section_3.1.4.2.15)
+- [EfsRpcAddUsersToFile (section 3.1.4.2.10)](#Section_3.1.4.2.10)
+- [EfsRpcFileKeyInfo (section 3.1.4.2.12)](#Section_3.1.4.2.12)
 - EfsRpcDuplicateEncryptionInfoFile (section 3.1.4.2.13)
 - [EfsRpcAddUsersToFileEx (section 3.1.4.2.14)](#Section_3.1.4.2.14)
 - [EfsRpcFileKeyInfoEx (section 3.1.4.2.15)](#Section_3.1.4.2.15)
@@ -450,7 +450,7 @@ The Encrypting File System Remote Protocol is built on the Microsoft [**Remote P
 
 Windows also supports the storage of encrypted [**files**](#gt_file) via WebDAV [MS-WDV](../MS-WDV/MS-WDV.md). However, this feature does not use EFSRPC. This feature does not alter the WebDAV Protocol. Windows clients store encrypted files on WebDAV servers in the [**EFSRPC Raw Data Format**](#gt_efsrpc-raw-data-format), but the Windows WebDAV client performs all encryption and decryption operations locally. It also performs the local operations necessary to transform the file to and from the EFSRPC Raw Data Format during upload and download respectively. For more information, see [[MSFT-XPUEFS]](https://go.microsoft.com/fwlink/?LinkId=90713).
 
-This specification provides an interface (see section [3.1.4.1](#Section_3.1.1.1)) for applications to request a user certificate. This interface uses methods outlined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) to enroll for a certificate and key.
+This specification provides an interface (see section [3.1.4.1](#Section_3.1.4.1)) for applications to request a user certificate. This interface uses methods outlined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) to enroll for a certificate and key.
 
 ![Protocol relationships](media/image4.png)
 
@@ -477,7 +477,7 @@ This document covers versioning issues in the following areas.
 
 **Protocol Versions:** The RPC runtime negotiates the version of the EFSRPC interface, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). The only supported version of this protocol is 1.0, as specified in section [3.1.4.2](#Section_3.1.4.2).
 
-**Security and Authentication Methods:** EFSRPC does not specify any methods for authenticating access to the objects it operates on. The underlying data encryption and storage system can implement any authentication mechanism. In Windows, such authentication is provided by [**SMB**](#gt_server-message-block-smb), as specified in [MS-SMB](../MS-SMB/MS-SMB.md) and [MS-SMB2](../MS-SMB2/MS-SMB2.md). An EFSRPC server can register a server principal name/authentication service pair to enable secure RPC communications, and a client can choose to associate this security service with its [**binding**](#gt_binding) when connecting to the server, as specified in section [3](#Section_1.3).
+**Security and Authentication Methods:** EFSRPC does not specify any methods for authenticating access to the objects it operates on. The underlying data encryption and storage system can implement any authentication mechanism. In Windows, such authentication is provided by [**SMB**](#gt_server-message-block-smb), as specified in [MS-SMB](../MS-SMB/MS-SMB.md) and [MS-SMB2](../MS-SMB2/MS-SMB2.md). An EFSRPC server can register a server principal name/authentication service pair to enable secure RPC communications, and a client can choose to associate this security service with its [**binding**](#gt_binding) when connecting to the server, as specified in section [3](#Section_3).
 
 **Capability Negotiation:** Implicit negotiation of RPC security mechanisms can be performed through the security-related APIs specified in [C706] Chapter 13. The security mechanisms negotiated by Windows clients and servers are as specified in section 2.1.
 
@@ -510,7 +510,7 @@ EFSRPC messages to remote servers SHOULD be sent using the [**well-known endpoin
 
 The EFSRPC client MUST use explicit [**binding**](#gt_binding) to create the RPC binding handle used to connect to the server, unless otherwise specified in section [3.1.4.2](#Section_3.1.4.2).
 
-A server SHOULD<5> register one or more server principal name/authentication service pairs that provide a protection level that includes packet integrity. A client SHOULD attempt to associate suitable security information with its binding for the EFSRPC methods. For [EfsRpcOpenFileRaw](#Section_3.1.4.2.1), clients SHOULD set the security options explicitly as noted in section [3](#Section_1.3). For all other EFSRPC methods, clients SHOULD use default values for the binding security information as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.2.3.1.
+A server SHOULD<5> register one or more server principal name/authentication service pairs that provide a protection level that includes packet integrity. A client SHOULD attempt to associate suitable security information with its binding for the EFSRPC methods. For [EfsRpcOpenFileRaw](#Section_3.1.4.2.1), clients SHOULD set the security options explicitly as noted in section [3](#Section_3). For all other EFSRPC methods, clients SHOULD use default values for the binding security information as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.2.3.1.
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -760,7 +760,7 @@ packet-beta
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 EFSRPC Metadata Version 2
 
-This metadata format is specified by an EFS Version of 4 or 5 in the EFSRPC metadata header<12>. This new metadata format is referred to as "Version 2" of the EFSRPC metadata, but do not confuse this with the EFS Version field specified within the metadata header. The format used for Version 2 EFSRPC metadata is significantly different from Version 1 described in section [2.2.2.1](#Section_2.2.2). Servers SHOULD support Version 2 of the EFSRPC Metadata.<13> A server that supports Version 2 of the EFSRPC Metadata MUST also fully support EFSRPC Metadata Version 1.
+This metadata format is specified by an EFS Version of 4 or 5 in the EFSRPC metadata header<12>. This new metadata format is referred to as "Version 2" of the EFSRPC metadata, but do not confuse this with the EFS Version field specified within the metadata header. The format used for Version 2 EFSRPC metadata is significantly different from Version 1 described in section [2.2.2.1](#Section_2.2.2.1). Servers SHOULD support Version 2 of the EFSRPC Metadata.<13> A server that supports Version 2 of the EFSRPC Metadata MUST also fully support EFSRPC Metadata Version 1.
 
 ```mermaid
 packet-beta
@@ -1024,7 +1024,7 @@ packet-beta
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 EFSRPC Metadata Version 3
 
-This metadata format is specified by EFS Version 6 in the EFSRPC Metadata header<18>. This new metadata format is referred to as "Version 3" of the EFSRPC Metadata, but do not confuse this with the EFS Version field specified within the metadata header. The format used for Version 3 EFSRPC metadata is significantly different from Version 1 described in section [2.2.2.1](#Section_2.2.2), or Version 2 described in section [2.2.2.2](#Section_2.2.2.2). Servers SHOULD support Version 3 of the EFSRPC Metadata.<19> A server that supports Version 3 of the EFSRPC Metadata MUST also fully support EFSRPC Metadata Version 1 and EFSRPC Metadata Version 2.
+This metadata format is specified by EFS Version 6 in the EFSRPC Metadata header<18>. This new metadata format is referred to as "Version 3" of the EFSRPC Metadata, but do not confuse this with the EFS Version field specified within the metadata header. The format used for Version 3 EFSRPC metadata is significantly different from Version 1 described in section [2.2.2.1](#Section_2.2.2.1), or Version 2 described in section [2.2.2.2](#Section_2.2.2.2). Servers SHOULD support Version 3 of the EFSRPC Metadata.<19> A server that supports Version 3 of the EFSRPC Metadata MUST also fully support EFSRPC Metadata Version 1 and EFSRPC Metadata Version 2.
 
 ```mermaid
 packet-beta
@@ -1468,7 +1468,7 @@ DWORD EfsVersion;
 
 } EFS_COMPATIBILITY_INFO;
 
-**EfsVersion:** The **EfsVersion** associated with the EFSRPC Metadata. Valid values for the **EfsVersion** field are described in sections [2.2.2.1](#Section_2.2.2), [2.2.2.2](#Section_2.2.2.2), and [2.2.2.3](#Section_2.2.2.3).<29>
+**EfsVersion:** The **EfsVersion** associated with the EFSRPC Metadata. Valid values for the **EfsVersion** field are described in sections [2.2.2.1](#Section_2.2.2.1), [2.2.2.2](#Section_2.2.2.2), and [2.2.2.3](#Section_2.2.2.3).<29>
 
 <a id="Section_2.2.16"></a>
 ### 2.2.16 EFS_ENCRYPTION_STATUS_INFO
@@ -1619,7 +1619,7 @@ In addition, the following are assumed to be accessible to the server:
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 User-Certificate Binding
 
-[Applications requesting a user-certificate binding (section 3.1.4.1)](#Section_3.1.1.1) must supply a [**security context**](#gt_security-context) for the user. The security context is used in two ways: to maintain per-user state based on the unique principal [**security identifier (SID)**](#gt_security-identifier-sid), and to authenticate the user during certificate enrollment.
+[Applications requesting a user-certificate binding (section 3.1.4.1)](#Section_3.1.4.1) must supply a [**security context**](#gt_security-context) for the user. The security context is used in two ways: to maintain per-user state based on the unique principal [**security identifier (SID)**](#gt_security-identifier-sid), and to authenticate the user during certificate enrollment.
 
 The server maintains a persistent per-user collection of zero or more certificates, and corresponding private keys. The format of the certificates within this collection MUST conform to that specified in [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034). In addition, this collection MUST contain only certificates and private keys that are valid for use by the EFS subsystem on the client. This collection is referred to as **EFS User Certificates**, and is used by higher-layer protocols to perform encryption and decryption of EFS objects.
 
@@ -1675,7 +1675,7 @@ An application (including implementations of the EFSRPC protocol) can request a 
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 EFS Certificate Enrollment Algorithm
 
-This algorithm describes the process used to enroll for an EFS certificate, and is triggered by the higher-layer event described in section [3.1.4.1](#Section_3.1.1.1). In order for an EFS server to enroll for a certificate, the server MUST be a member of some [**Active Directory**](#gt_active-directory) domain. The [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap) search and modify operations used by this algorithm are specified in sections 4.5 and 4.6 of [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325). Section 3.1.1.3 of [MS-ADTS](../MS-ADTS/MS-ADTS.md) describes the profile of LDAP as implemented by the Active Directory domain controller (DC). All LDAP operations used in this algorithm are assumed to be performed against a [**DC**](#gt_domain-controller-dc) located as described in [MS-ADOD](#Section_1.3) section 2.7.7.3.1.
+This algorithm describes the process used to enroll for an EFS certificate, and is triggered by the higher-layer event described in section [3.1.4.1](#Section_3.1.4.1). In order for an EFS server to enroll for a certificate, the server MUST be a member of some [**Active Directory**](#gt_active-directory) domain. The [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap) search and modify operations used by this algorithm are specified in sections 4.5 and 4.6 of [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325). Section 3.1.1.3 of [MS-ADTS](../MS-ADTS/MS-ADTS.md) describes the profile of LDAP as implemented by the Active Directory domain controller (DC). All LDAP operations used in this algorithm are assumed to be performed against a [**DC**](#gt_domain-controller-dc) located as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.7.7.3.1.
 
 <a id="Section_3.1.4.1.1.1"></a>
 ###### 3.1.4.1.1.1 Inputs
@@ -1769,10 +1769,10 @@ Methods in RPC Opnum Order
 | [EfsRpcQueryUsersOnFile](#Section_3.1.4.2.7) | Used by the client to query the metadata of an encrypted object for the [**X.509**](#gt_x509) [**certificates**](#gt_certificate) whose associated [**private keys**](#gt_private-key) can be used to decrypt the object. Opnum: 6 |
 | [EfsRpcQueryRecoveryAgents](#Section_3.1.4.2.8) | Used to query the object's metadata for the X.509 certificates of the data recovery agents whose associated private keys can be used to decrypt it. Opnum: 7 |
 | [EfsRpcRemoveUsersFromFile](#Section_28609dad5fa54af9938218d40e3e9dec) | Used to revoke a user's access to an encrypted object. This method revokes the ability of the private key corresponding to a given X.509 certificate to decrypt the object. Opnum: 8 |
-| [EfsRpcAddUsersToFile](#Section_3.1.4.2.14) | Used to grant users the ability to decrypt the object with their X.509 certificates. Opnum: 9 |
+| [EfsRpcAddUsersToFile](#Section_3.1.4.2.10) | Used to grant users the ability to decrypt the object with their X.509 certificates. Opnum: 9 |
 | Opnum10NotUsedOnWire | Reserved for local use. Opnum: 10 |
 | [EfsRpcNotSupported](#Section_3.1.4.2.11) | Deprecated. Used to act in an identical manner to [EfsRpcDuplicateEncryptionInfoFile](#Section_3.1.4.2.13) (3.1.4.2.13). Opnum: 11 |
-| [EfsRpcFileKeyInfo](#Section_3.1.4.2.15) | Used to query and modify information about the [**keys**](#gt_key) used to encrypt a given object. Opnum: 12 |
+| [EfsRpcFileKeyInfo](#Section_3.1.4.2.12) | Used to query and modify information about the [**keys**](#gt_key) used to encrypt a given object. Opnum: 12 |
 | EfsRpcDuplicateEncryptionInfoFile | Used to duplicate the [**EFSRPC Metadata**](#gt_efsrpc-metadata) of one object and attach it to another object. Opnum: 13 |
 | Opnum14NotUsedOnWire | Reserved for local use. Opnum: 14 |
 | [EfsRpcAddUsersToFileEx](#Section_d36df703edc9448287b7d05c7783d65e) | Used to grant users the ability to decrypt an object using an X.509 certificate. Opnum: 15 |
@@ -1959,7 +1959,7 @@ If no object exists on the server with the specified name, the server MUST retur
 
 - If the object is a container for other objects, the server SHOULD return 0 to indicate success.
 - If the object is not a container object, the server SHOULD check to confirm that the calling user has access to a private key that can decrypt the file and, if so, return 0 to indicate success. If the calling user does not have access to a private key that can decrypt the file, the server SHOULD return a nonzero value.
-If the object exists and is not encrypted, the server SHOULD use the algorithm specified in section [3.1.4.1](#Section_3.1.1.1) to locate a user certificate for the calling user, specifying the client identity associated with the RPC call ([MS-RPCE] section 3.3.3.4.3) as input for the security context. If an error is returned by the algorithm specified in section 3.1.4.1, the server MUST return a nonzero value.
+If the object exists and is not encrypted, the server SHOULD use the algorithm specified in section [3.1.4.1](#Section_3.1.4.1) to locate a user certificate for the calling user, specifying the client identity associated with the RPC call ([MS-RPCE] section 3.3.3.4.3) as input for the security context. If an error is returned by the algorithm specified in section 3.1.4.1, the server MUST return a nonzero value.
 
 The server then performs the following actions to convert the object to an encrypted state in its data store:
 
@@ -2337,7 +2337,7 @@ DWORD EfsRpcFileKeyInfoEx(
 
 **FileName:** An EFSRPC identifier, as specified in section [2.2.1](#Section_2.2.1).
 
-**InfoClass:** One of the values specified for the *InfoClass* parameter of the [EfsRpcFileKeyInfo](#Section_3.1.4.2.15) method.
+**InfoClass:** One of the values specified for the *InfoClass* parameter of the [EfsRpcFileKeyInfo](#Section_3.1.4.2.12) method.
 
 **KeyInfo:** The server SHOULD ignore this parameter.<53>
 
@@ -2639,7 +2639,7 @@ First, the User creates a file with the information he wants to share and places
 
 To give the Colleague authorized access to this newly encrypted file, the User accesses the file's properties once more through Windows Explorer, and examines the list of user certificates that are authorized to decrypt the file. This causes Windows Explorer to send an [EfsRpcQueryUsersOnFile](#Section_3.1.4.2.7) message to the server to retrieve the list of authorized user certificates. After this call succeeds, Windows Explorer retrieves the list of authorized [**DRAs**](#gt_data-recovery-agent-dra) for the file by sending an [EfsRpcQueryRecoveryAgents](#Section_3.1.4.2.8) message to the server. The authorized user certificates and DRAs are then displayed in the user interface. The User can now see that he or she is currently the only user authorized to access the file.
 
-The User then accesses the user interface to select the Colleague's user certificate, and chooses to authorize this user certificate to access the file. The Windows Explorer user interface sends an [EfsRpcAddUsersToFile](#Section_3.1.4.2.14) message to the server, which processes the request successfully. The Windows Explorer user interface once again sends an EfsRpcQueryUsersOnFile message and an EfsRpcQueryRecoveryAgents message to the server. The results are displayed to the User. The User can now see that both the Colleague and the User are authorized to access the file.
+The User then accesses the user interface to select the Colleague's user certificate, and chooses to authorize this user certificate to access the file. The Windows Explorer user interface sends an [EfsRpcAddUsersToFile](#Section_3.1.4.2.10) message to the server, which processes the request successfully. The Windows Explorer user interface once again sends an EfsRpcQueryUsersOnFile message and an EfsRpcQueryRecoveryAgents message to the server. The results are displayed to the User. The User can now see that both the Colleague and the User are authorized to access the file.
 
 The User then leaves instructions with the Employee to transfer the file to another server, so that the Colleague can more easily obtain it. (The Employee has backup permissions on Server1 and restore permissions on Server2, but does not have a user or DRA private [**key**](#gt_key) that would allow authorized access to the encrypted file.) The Employee runs the ntbackup.exe utility to create a backup of the file from Server1 on the client machine. The ntbackup.exe utility sends an [EfsRpcOpenFileRaw](#Section_3.1.4.2.1) message to Server1. When Server1 responds successfully, the ntbackup.exe utility sends an [EfsRpcReadFileRaw](#Section_3.1.4.2.2) message to Server1 and writes the data returned over the associated pipe to a file on the Employee's client computer. When Server1 indicates that the end of the file has been reached, the ntbackup.exe utility sends an [EfsRpcCloseRaw](#Section_3.1.4.2.4) message to the Server1. At this point, the Employee has a file on the client computer that contains the encrypted file from Server1 in the [EFSRPC Raw Data Format](#Section_2.2.3).
 
@@ -3363,7 +3363,7 @@ Note that the \pipe\lsarpc endpoint is not available in Windows 11 v22H2 and lat
 
 For files using version 2 of the EFSRPC Metadata, Windows 7 and later and Windows Server 2008 R2 and later servers will always generate a new file IV for the *DestFileName* parameter, and will generate a new FEK/FMK for the *DestFileName* parameter if no legacy RSA user protectors exist on the *SrcFileName* parameter. Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 do not do this.
 
-<52> Section 3.1.4.2.15: Windows Vista and Windows Server 2008 implement this method identically to the implementation of [EfsRpcFileKeyInfo](#Section_3.1.4.2.15), ignoring the *dwFileKeyInfoFlags* and *Reserved* parameters.
+<52> Section 3.1.4.2.15: Windows Vista and Windows Server 2008 implement this method identically to the implementation of [EfsRpcFileKeyInfo](#Section_3.1.4.2.12), ignoring the *dwFileKeyInfoFlags* and *Reserved* parameters.
 
 <53> Section 3.1.4.2.15: Windows Vista and Windows Server 2008 use this parameter in the manner identical to how it is used in the implementation of EfsRpcFileKeyInfo.
 

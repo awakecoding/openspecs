@@ -565,7 +565,7 @@ The Print System Asynchronous Remote Protocol is applicable only for printing op
 This specification covers versioning issues in the following areas:
 
 - **Supported Transports**: The Print System Asynchronous Remote Protocol uses [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) over [**TCP**](#gt_transmission-control-protocol-tcp)/IP only (section [2.1](#Section_2.1)).
-- **Protocol Versions**: This protocol has only one interface version (section [3.1.4](#Section_3.2.4)).
+- **Protocol Versions**: This protocol has only one interface version (section [3.1.4](#Section_3.1.4)).
 Versioning of data structures is controlled through the use of information levels specified in container structures ([MS-RPRN](../MS-RPRN/MS-RPRN.md) section 2.2.1). Data in a container that is identified by a given information level is typically a superset of the data identified by a lower level. This mechanism is also used in capability negotiation, as described below.
 
 - **Security and Authentication Methods**: This protocol uses [**Simple and Protected GSS-API Negotiation Mechanism (SPNEGO)**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) [MS-SPNG](../MS-SPNG/MS-SPNG.md) and RPC packet [**authentication levels**](#gt_authentication-level) for security and authentication (section 2.1). The parameters that are sent from client to server include a "token" ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.2.12) that defines user credentials. The [**print server**](#gt_print-server) processes that token to verify access permissions.
@@ -962,7 +962,7 @@ Methods in RPC opnum order:
 | Method | Description |
 | --- | --- |
 | [RpcAsyncOpenPrinter](#Section_3.1.4.1.1) | **RpcAsyncOpenPrinter** retrieves a handle to a specified printer, port, print job or [**print server**](#gt_print-server). A client uses this method to obtain a print handle to an existing printer on a remote computer. The counterpart of this method in the Print System Remote Protocol is **RpcOpenPrinterEx**. All parameters not defined below are specified in [MS-RPRN] section 3.1.4.2.14. Opnum: 0 |
-| [RpcAsyncAddPrinter](#Section_3.1.4.1.20) | **RpcAsyncAddPrinter** installs a printer on the print server. The counterpart of this method in the Print System Remote Protocol is **RpcAddPrinterEx**. All parameters not defined below are specified in [MS-RPRN] section 3.1.4.2.15. Opnum: 1 |
+| [RpcAsyncAddPrinter](#Section_3.1.4.1.2) | **RpcAsyncAddPrinter** installs a printer on the print server. The counterpart of this method in the Print System Remote Protocol is **RpcAddPrinterEx**. All parameters not defined below are specified in [MS-RPRN] section 3.1.4.2.15. Opnum: 1 |
 | [RpcAsyncSetJob](#Section_3.1.4.7.1) | RpcAsyncSetJ**ob** pauses, resumes, cancels, or restarts a print job on a specified printer. This method also can set print job parameters, including the job priority and document name. Opnum: 2 |
 | [RpcAsyncGetJob](#Section_3.1.4.7.2) | RpcAsyncGet**Job** retrieves information about a specified print job on a specified printer. Opnum: 3 |
 | [RpcAsyncEnumJobs](#Section_3.1.4.7.3) | **RpcAsyncEnumJobs** retrieves information about a specified set of print jobs on a specified printer. Opnum: 4 |
@@ -987,7 +987,7 @@ Methods in RPC opnum order:
 | [RpcAsyncGetForm](#Section_3.1.4.6.3) | **RpcAsyncGetForm** retrieves information about a specified form. Opnum: 23 |
 | [RpcAsyncSetForm](#Section_3.1.4.6.4) | **RpcAsyncSetForm** sets the form information for the specified printer. Opnum: 24 |
 | [RpcAsyncEnumForms](#Section_3.1.4.6.5) | **RpcAsyncEnumForms** enumerates the forms that the specified printer supports. Opnum: 25 |
-| [RpcAsyncGetPrinterDriver](#Section_3.1.4.2.10) | **RpcAsyncGetPrinterDriver** retrieves data about a specified printer driver on a specified printer. Opnum: 26 |
+| [RpcAsyncGetPrinterDriver](#Section_3.1.4.2.1) | **RpcAsyncGetPrinterDriver** retrieves data about a specified printer driver on a specified printer. Opnum: 26 |
 | [RpcAsyncEnumPrinterData](#Section_3.1.4.1.11) | **RpcAsyncEnumPrinterData** enumerates configuration data for a specified printer. Opnum: 27 |
 | [RpcAsyncEnumPrinterDataEx](#Section_3.1.4.1.12) | **RpcAsyncEnumPrinterDataEx** enumerates all value names and data for a specified printer and key. This method extends **RpcAsyncEnumPrinterData** (section 3.1.4.1.11) by retrieving several values in a single call. Opnum: 28 |
 | [RpcAsyncEnumPrinterKey](#Section_3.1.4.1.13) | **RpcAsyncEnumPrinterKey** enumerates the subkeys of a specified key for a specified printer. Opnum: 29 |
@@ -1060,7 +1060,7 @@ Parameter descriptions, parameter validation, and processing and response requir
 | [MS-PAR] method | Description | Corresponding [MS-RPRN] method |
 | --- | --- | --- |
 | [RpcAsyncOpenPrinter](#Section_3.1.4.1.1) | Retrieves a handle to a specified printer or print server. A client uses this method to obtain a print handle to an existing printer on a remote machine. Opnum 0 | RpcOpenPrinterEx |
-| [RpcAsyncAddPrinter](#Section_3.1.4.1.20) | Installs a printer on the print server. Opnum 1 | RpcAddPrinterEx |
+| [RpcAsyncAddPrinter](#Section_3.1.4.1.2) | Installs a printer on the print server. Opnum 1 | RpcAddPrinterEx |
 | [RpcAsyncDeletePrinter](#Section_3.1.4.1.3) | Deletes the specified printer object. The client MUST call **RpcAsyncClosePrinter** (section [3.1.4.1.10](#Section_3.1.4.1.10)) with the same printer handle after calling this method. Opnum 7 | RpcDeletePrinter |
 | [RpcAsyncSetPrinter](#Section_3.1.4.1.4) | Sets the state of a specified printer, optionally by performing an action to change the state. Opnum 8 | RpcSetPrinter |
 | [RpcAsyncGetPrinter](#Section_3.1.4.1.5) | Retrieves information about a specified printer. Opnum 9 | RpcGetPrinter |
@@ -1166,7 +1166,7 @@ DWORD RpcAsyncDeletePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2)](#Section_3.1.4.1.20).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2)](#Section_3.1.4.1.2).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1195,7 +1195,7 @@ DWORD RpcAsyncSetPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1226,9 +1226,9 @@ unsigned char* pPrinter,
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1257,9 +1257,9 @@ DWORD RpcAsyncGetPrinterData(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1290,9 +1290,9 @@ DWORD RpcAsyncGetPrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1319,7 +1319,7 @@ DWORD RpcAsyncSetPrinterData(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1350,7 +1350,7 @@ DWORD RpcAsyncSetPrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1361,7 +1361,7 @@ This method MUST adhere to the parameter validation, processing, and response re
 <a id="Section_3.1.4.1.10"></a>
 ##### 3.1.4.1.10 RpcAsyncClosePrinter (Opnum 20)
 
-**RpcAsyncClosePrinter** closes a handle to a printer, server, job, or [**port**](#gt_port) object that was previously opened by either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**RpcAsyncClosePrinter** closes a handle to a printer, server, job, or [**port**](#gt_port) object that was previously opened by either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 The counterpart of this method in the Print System Remote Protocol is **RpcClosePrinter**. All parameters not defined below are specified in [MS-RPRN](../MS-RPRN/MS-RPRN.md) section 3.1.4.2.9.
 
@@ -1410,9 +1410,9 @@ wchar_t* pValueName,
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1441,9 +1441,9 @@ DWORD RpcAsyncEnumPrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1472,9 +1472,9 @@ wchar_t* pSubkey,
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)**)**.
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)**)**.
 
-**Return V**a**lues:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return V**a**lues:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1495,7 +1495,7 @@ DWORD RpcAsyncDeletePrinterData(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1520,7 +1520,7 @@ DWORD RpcAsyncDeletePrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1543,7 +1543,7 @@ DWORD RpcAsyncDeletePrinterKey(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1570,7 +1570,7 @@ DWORD RpcAsyncSendRecvBidiData(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1595,7 +1595,7 @@ DWORD RpcAsyncCreatePrinterIC(
 
 );
 
-**hPrinter:** A handle to a printer object ([MS-RPRN] section 2.2.1.1.4) that has been opened using **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object ([MS-RPRN] section 2.2.1.1.4) that has been opened using **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1686,7 +1686,7 @@ unsigned char* pPrinterEnum,
 
 **hRemoteBinding:** An RPC explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1773,7 +1773,7 @@ unsigned char* pPrinterEnum,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1796,7 +1796,7 @@ DWORD RpcAsyncResetPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -1813,7 +1813,7 @@ Parameter descriptions, parameter validation, and processing and response requir
 
 | [MS-PAR] method | Description | [MS-RPRN] method |
 | --- | --- | --- |
-| [RpcAsyncGetPrinterDriver](#Section_3.1.4.2.10) | Retrieves data about a specified printer driver on a specified printer. Opnum 26 | RpcGetPrinterDriver2 |
+| [RpcAsyncGetPrinterDriver](#Section_3.1.4.2.1) | Retrieves data about a specified printer driver on a specified printer. Opnum 26 | RpcGetPrinterDriver2 |
 | [RpcAsyncAddPrinterDriver](#Section_3.1.4.2.2) | Installs a specified local or a remote printer driver on a specified [**print server**](#gt_print-server), and it links the configuration, data, and driver files. Opnum 39 | RpcAddPrinterDriverEx |
 | [RpcAsyncEnumPrinterDrivers](#Section_3.1.4.2.3) | Enumerates the printer drivers installed on a specified print server. Opnum 40 | RpcEnumPrinterDrivers |
 | [RpcAsyncGetPrinterDriverDirectory](#Section_3.1.4.2.4) | Retrieves the path of the printer-driver directory on a specified print server. Opnum 41 | RpcGetPrinterDriverDirectory |
@@ -1859,9 +1859,9 @@ unsigned char* pDriver,
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1925,7 +1925,7 @@ unsigned char* pDrivers,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1960,7 +1960,7 @@ unsigned char* pDriverDirectory,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2223,7 +2223,7 @@ CORE_PRINTER_DRIVER* pCorePrinterDrivers
 
 A [**print client**](#gt_print-client) SHOULD obtain this list of IDs as follows:
 
-- Call **RpcAsyncGetPrinterDriver** (section [3.1.4.2.1](#Section_3.1.4.2.10)) with a *Level* parameter value of 0x00000008.
+- Call **RpcAsyncGetPrinterDriver** (section [3.1.4.2.1](#Section_3.1.4.2.1)) with a *Level* parameter value of 0x00000008.
 - A **_DRIVER_INFO_8** custom-marshaled structure ([MS-RPRN] section 2.2.2.4.8) is returned in the *pDriver* parameter.
 - In the **_DRIVER_INFO_8**, the **szzCoreDependenciesOffset** field contains an offset to a multisz that contains the list of IDs.
 **cCorePrinterDrivers:** The count of **CORE_PRINTER_DRIVER** structures (section [2.2.8](#Section_2.2.8)) that are contained in the buffer that is pointed to by the *pCorePrinterDrivers* parameter. It equals the number of IDs that are specified in the multisz that is pointed to by the *pszzCoreDriverDependencies* parameter.
@@ -2444,7 +2444,7 @@ DWORD RpcAsyncXcvData(
 
 **hXcv:** A handle to a [**port**](#gt_port) object that has been opened by using **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2479,7 +2479,7 @@ unsigned char* pPort,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2616,7 +2616,7 @@ unsigned char* pPrintProcessorInfo,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2651,7 +2651,7 @@ unsigned char* pPrintProcessorDirectory,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2715,7 +2715,7 @@ unsigned char* pDatatypes,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2763,7 +2763,7 @@ unsigned char* pMonitor,
 
 **hRemoteBinding:** An [**RPC**](#gt_remote-procedure-call-rpc) explicit binding handle.
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2851,7 +2851,7 @@ DWORD RpcAsyncAddForm(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -2874,7 +2874,7 @@ DWORD RpcAsyncDeleteForm(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -2907,9 +2907,9 @@ unsigned char* pForm,
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -2932,7 +2932,7 @@ DWORD RpcAsyncSetForm(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -2965,9 +2965,9 @@ unsigned char* pForm,
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -3007,7 +3007,7 @@ DWORD RpcAsyncSetJob(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3040,9 +3040,9 @@ unsigned char* pJob,
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -3077,9 +3077,9 @@ unsigned char* pJob,
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section 3.1.4.1.1) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section 3.1.4.1.1) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
-**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.2.4), the client MUST treat any nonzero return value as a fatal error.
+**Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. Aside from the specific nonzero return values documented in section [3.1.4](#Section_3.1.4), the client MUST treat any nonzero return value as a fatal error.
 
 **Exceptions Thrown**: This method MUST NOT throw any exceptions other than those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -3108,7 +3108,7 @@ unsigned char* pAddJob,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that was opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method MUST return **ERROR_INVALID_PARAMETER** ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2).
 
@@ -3129,7 +3129,7 @@ DWORD RpcAsyncScheduleJob(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that was opened using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method MUST return **ERROR_SPL_NO_ADDJOB** ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2).
 
@@ -3169,7 +3169,7 @@ DWORD RpcAsyncStartDocPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3190,7 +3190,7 @@ DWORD RpcAsyncStartPagePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3217,7 +3217,7 @@ DWORD RpcAsyncWritePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3238,7 +3238,7 @@ DWORD RpcAsyncEndPagePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that was opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3259,7 +3259,7 @@ DWORD RpcAsyncEndDocPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3280,7 +3280,7 @@ DWORD RpcAsyncAbortPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3307,7 +3307,7 @@ DWORD RpcAsyncReadPrinter(
 
 );
 
-**hPrinter:** A handle to a job object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a job object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3342,7 +3342,7 @@ HRESULT RpcSyncRegisterForRemoteNotifications(
 
 );
 
-**hPrinter:** A handle to a printer object or print server object opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or print server object opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **pNotifyFilter:** A pointer to an **RpcPrintPropertiesCollection** (section [2.2.4](#Section_2.2.4)) instance that contains the caller-specified notification filter settings.
 
@@ -3499,7 +3499,7 @@ DWORD RpcAsyncGetJobNamedPropertyValue(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3524,7 +3524,7 @@ DWORD RpcAsyncSetJobNamedProperty(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3549,7 +3549,7 @@ DWORD RpcAsyncDeleteJobNamedProperty(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3578,7 +3578,7 @@ RPC_PrintNamedProperty** ppProperties
 
 );
 
-**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object or server object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3610,7 +3610,7 @@ DWORD RpcAsyncLogJobInfoForBranchOffice(
 
 );
 
-**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.20)).
+**hPrinter:** A handle to a printer object that has been opened by using either **RpcAsyncOpenPrinter** (section [3.1.4.1.1](#Section_3.1.4.1.1)) or **RpcAsyncAddPrinter** (section [3.1.4.1.2](#Section_3.1.4.1.2)).
 
 **Return Values:** This method returns zero to indicate successful completion or a nonzero Win32 error code ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to indicate failure. The client MUST treat any nonzero return value as a fatal error.
 
@@ -3858,7 +3858,7 @@ A Print System Asynchronous Remote Protocol client can [**failover**](#gt_failov
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation the full [**IDL**](#gt_interface-definition-language-idl) for the **IRemoteWinspool interface** (section [3.1.4](#Section_3.2.4)) is provided below. The syntax uses IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md). Some of the data types and structures used by this interface are defined in other specifications, including [MS-DTYP](../MS-DTYP/MS-DTYP.md) and [MS-RPRN](../MS-RPRN/MS-RPRN.md).
+For ease of implementation the full [**IDL**](#gt_interface-definition-language-idl) for the **IRemoteWinspool interface** (section [3.1.4](#Section_3.1.4)) is provided below. The syntax uses IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md). Some of the data types and structures used by this interface are defined in other specifications, including [MS-DTYP](../MS-DTYP/MS-DTYP.md) and [MS-RPRN](../MS-RPRN/MS-RPRN.md).
 
 // [MS-PAR] interface
 

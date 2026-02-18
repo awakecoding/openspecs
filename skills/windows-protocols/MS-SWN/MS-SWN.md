@@ -183,7 +183,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** Registration is required to download the document.
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -262,14 +262,14 @@ This protocol uses Win32 error codes as defined in [MS-ERREF](../MS-ERREF/MS-ERR
 
 This protocol MUST use the [**UUID**](#gt_universally-unique-identifier-uuid) as specified in section [1.9](#Section_1.9). The RPC version number is 1.0.
 
-This protocol allows any user to establish a connection to the [**RPC server**](#gt_rpc-server). The protocol uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.2.4).
+This protocol allows any user to establish a connection to the [**RPC server**](#gt_rpc-server). The protocol uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
 
 In addition to RPC base types defined in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-RPCE](../MS-RPCE/MS-RPCE.md), the data types that follow are defined in the [**Microsoft Interface Definition Language (MIDL)**](#gt_microsoft-interface-definition-language-midl) specification for this RPC interface.
 
-The following data types are specified in [MS-DTYP](#Section_2.2.1):
+The following data types are specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md):
 
 | DataType name | Section |
 | --- | --- |
@@ -316,7 +316,7 @@ typedef [context_handle] PCONTEXT_HANDLE PCONTEXT_HANDLE_SHARED;
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Structures
 
-Unless otherwise specified, multiple-byte fields (16-bit, 32-bit, and 64-bit fields) MUST be transmitted in little-endian order (least-significant byte first) for the structures specified in section [2.2.2.1](#Section_2.2.2.1) (IPADDR_INFO), [2.2.2.2](#Section_2.2.2.1) (IPADDR_INFO_LIST), and [2.2.2.3](#Section_2.2.2.3) (RESOURCE_CHANGE). Other structures defined in this section use RPC encoding.
+Unless otherwise specified, multiple-byte fields (16-bit, 32-bit, and 64-bit fields) MUST be transmitted in little-endian order (least-significant byte first) for the structures specified in section [2.2.2.1](#Section_2.2.2.1) (IPADDR_INFO), [2.2.2.2](#Section_2.2.2.2) (IPADDR_INFO_LIST), and [2.2.2.3](#Section_2.2.2.3) (RESOURCE_CHANGE). Other structures defined in this section use RPC encoding.
 
 | Structure name | Section | Description |
 | --- | --- | --- |
@@ -1201,7 +1201,7 @@ If the server returns an error, the client MUST return the same error code to th
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Timer Events
 
-Upon the expiration of RPC Call Timeout Timer, as specified in section [3.2.2](#Section_3.1.2), the client MUST close the RPC connection to the server and release the binding handle.
+Upon the expiration of RPC Call Timeout Timer, as specified in section [3.2.2](#Section_3.2.2), the client MUST close the RPC connection to the server and release the binding handle.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Other Local Events
@@ -1444,9 +1444,9 @@ This protocol allows any user to establish a connection to the RPC server as spe
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation the full IDL is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](#Section_2.2.1) Appendix A. The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
+For ease of implementation the full IDL is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A. The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
 
-The **MessageBuffer** field in the RESP_ASYNC_NOTIFY structure contains either a RESOURCE_CHANGE or an IPADDR_INFO_LIST structure. See sections [2.2.2.3](#Section_2.2.2.3) and [2.2.2.2](#Section_2.2.2.1) for details.
+The **MessageBuffer** field in the RESP_ASYNC_NOTIFY structure contains either a RESOURCE_CHANGE or an IPADDR_INFO_LIST structure. See sections [2.2.2.3](#Section_2.2.2.3) and [2.2.2.2](#Section_2.2.2.2) for details.
 
 import "ms-dtyp.idl";
 

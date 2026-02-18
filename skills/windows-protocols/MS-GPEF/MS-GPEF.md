@@ -226,9 +226,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_1.3)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -271,7 +271,7 @@ This document specifies the behavior of the administrative plug-in mentioned in 
 
 Group Policy: Encrypting File System Extension is invoked as an extension of the Group Policy: Core Protocol. Group Policy: Encrypting File System Extension is only initiated as part of the Group Policy: Core Protocol. The invocation of this (and of all Group Policy protocol extensions) is specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3. Group Policy: Encrypting File System Extension explicitly depends on all the protocols upon which the Group Policy: Core Protocol depends.
 
-Group Policy: Encrypting File System Extension also depends on Group Policy: Registry Extension Encoding specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md) to retrieve settings from a GPO and to populate settings in the client [**registry**](#gt_registry). Group Policy: Encrypting File System Extension uses file access protocols described in [MS-FASOD](#Section_1.3) as its underlying transport.
+Group Policy: Encrypting File System Extension also depends on Group Policy: Registry Extension Encoding specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md) to retrieve settings from a GPO and to populate settings in the client [**registry**](#gt_registry). Group Policy: Encrypting File System Extension uses file access protocols described in [MS-FASOD](../MS-FASOD/MS-FASOD.md) as its underlying transport.
 
 Group Policy: Encrypting File System Extension configures settings that are used by the [**EFSR**](#gt_efsr). These settings are defined in [MS-EFSR](../MS-EFSR/MS-EFSR.md) section 3.1.1.1.
 
@@ -324,7 +324,7 @@ This protocol defines [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) an
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The [**EFS**](#gt_encrypting-file-system-efs) Group Policy administrative plug-in uses the transport specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) to read and modify settings in the central policy store. Specifically, it uses the file access services protocols described in [MS-FASOD](#Section_1.3) as the underlying transport for reading, updating, creating, and deleting EFS Group Policy settings. Information is retrieved from the policy store and written to the client's registry by the Group Policy: Registry Extension Encoding ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 3.2) using file access protocols as the underlying transport. The file access version, capabilities, and authentication used for this connection are negotiated between the client and the server when the connection is established.
+The [**EFS**](#gt_encrypting-file-system-efs) Group Policy administrative plug-in uses the transport specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) to read and modify settings in the central policy store. Specifically, it uses the file access services protocols described in [MS-FASOD](../MS-FASOD/MS-FASOD.md) as the underlying transport for reading, updating, creating, and deleting EFS Group Policy settings. Information is retrieved from the policy store and written to the client's registry by the Group Policy: Registry Extension Encoding ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 3.2) using file access protocols as the underlying transport. The file access version, capabilities, and authentication used for this connection are negotiated between the client and the server when the connection is established.
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -347,7 +347,7 @@ This option MUST be supported by all implementations of the Group Policy: Encryp
 
 When writing the [**EFS**](#gt_encrypting-file-system-efs) recovery policy, the administrative plug-in MUST configure the machine-specific Registry Policy file to create a [**registry**](#gt_registry) key named Software\Policies\Microsoft\SystemCertificates\EFS. This key MUST contain three subkeys, named Certificates, CRLs, and CTLs, respectively. The Certificates subkey MUST in turn contain zero or more subkeys, each of which represents the [**X.509**](#gt_x509) certificate (as specified in [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034)) of an EFS recovery agent. The format of these entries is specified in section [2.2.1.1](#Section_2.2.1.1). The CRLs and CTLs subkeys MUST be empty.
 
-In addition to the previous information, the administrative plug-in MUST create an additional entry in the machine-specific Registry Policy file, which contains all the applicable EFS recovery agent [**certificates**](#gt_certificate) marshaled into a single value, as specified in section [2.2.1.2](#Section_2.2.1.2.1).
+In addition to the previous information, the administrative plug-in MUST create an additional entry in the machine-specific Registry Policy file, which contains all the applicable EFS recovery agent [**certificates**](#gt_certificate) marshaled into a single value, as specified in section [2.2.1.2](#Section_2.2.1.2).
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Recovery Agent Certificate
@@ -668,7 +668,7 @@ The administrative plug-in mediates between the user interface (UI) and a remote
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The [**EFS**](#gt_encrypting-file-system-efs) Group Policy administrative plug-in relies on a collection of settings specified in section [2.2](../MS-GPREG/MS-GPREG.md) and stored as a [**Unicode**](#gt_unicode) configuration file ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 2.2) at a remote storage location using the Group Policy: Core Protocol. The administrative plug-in treats these settings merely as a collection of name-value pairs.
+The [**EFS**](#gt_encrypting-file-system-efs) Group Policy administrative plug-in relies on a collection of settings specified in section [2.2](#Section_2.2) and stored as a [**Unicode**](#gt_unicode) configuration file ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 2.2) at a remote storage location using the Group Policy: Core Protocol. The administrative plug-in treats these settings merely as a collection of name-value pairs.
 
 The EFS Group Policy administrative plug-in reads in these settings from the remote storage location and displays them to an administrator through a UI.
 
@@ -741,14 +741,14 @@ The administrative plug-in MAY<13> use other events to populate the [**EFS**](#g
 <a id="Section_3.2"></a>
 ## 3.2 Client Details
 
-Clients of this protocol consume the settings specified using the [administrative plug-in (section 3.1)](#Section_1.3). These settings specify behavior for [**EFS**](#gt_encrypting-file-system-efs) on the client. The client also provides a facility for higher-layer applications to bind a user to a certificate suitable for EFS.
+Clients of this protocol consume the settings specified using the [administrative plug-in (section 3.1)](#Section_3.1). These settings specify behavior for [**EFS**](#gt_encrypting-file-system-efs) on the client. The client also provides a facility for higher-layer applications to bind a user to a certificate suitable for EFS.
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-This protocol uses the model outlined in section 3.2.1.1 of [MS-GPREG](../MS-GPREG/MS-GPREG.md) to store and retrieve settings on the client. Settings defined by the administrative plug-in [3.1](#Section_1.3) are populated to a persistent generic database on the client by methods described in [MS-GPREG]. The client then queries the database using the key and value names outlined in sections [2.2.1](#Section_2.2.1) - [2.2.7](#Section_2.2.7) to retrieve the settings. Based on the data retrieved for these settings, the client modifies the internal state of [**EFS**](#gt_encrypting-file-system-efs) to conform to the specified settings.
+This protocol uses the model outlined in section 3.2.1.1 of [MS-GPREG](../MS-GPREG/MS-GPREG.md) to store and retrieve settings on the client. Settings defined by the administrative plug-in [3.1](#Section_3.1) are populated to a persistent generic database on the client by methods described in [MS-GPREG]. The client then queries the database using the key and value names outlined in sections [2.2.1](#Section_2.2.1) - [2.2.7](#Section_2.2.7) to retrieve the settings. Based on the data retrieved for these settings, the client modifies the internal state of [**EFS**](#gt_encrypting-file-system-efs) to conform to the specified settings.
 
 In addition to the collection of settings described above, public elements of the User-Certificate Binding ADM (exposed by [MS-EFSR](../MS-EFSR/MS-EFSR.md) section 3.1.1.1) are directly accessed. The following public ADM elements are configured by the clients of the Group Policy: Encrypting File System Extension:
 
@@ -905,9 +905,9 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <9> Section 2.2.7: This field is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista, and Windows Server 2008.
 
-<10> Section 3.1.1: The EFS configuration data is stored in registry keys of the managed computer as described in section [2.2.1](#Section_2.2.1) and its subsections. Windows 2000, Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista, and Windows Server 2008 used code within LSA to handle this configuration data, and that code left a copy of the configuration data in the LSA policy database from which it is available to be accessed using LSAD [MS-LSAD](#Section_5). Windows does not use LSAD over the wire to access this data. Specifically, in these Windows releases the following behavior applies:
+<10> Section 3.1.1: The EFS configuration data is stored in registry keys of the managed computer as described in section [2.2.1](#Section_2.2.1) and its subsections. Windows 2000, Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista, and Windows Server 2008 used code within LSA to handle this configuration data, and that code left a copy of the configuration data in the LSA policy database from which it is available to be accessed using LSAD [MS-LSAD](../MS-LSAD/MS-LSAD.md). Windows does not use LSAD over the wire to access this data. Specifically, in these Windows releases the following behavior applies:
 
-- The "Encrypting File System (EFS) Policy Information" specified in [MS-LSAD] section 3.1.1.1 is updated to match the [EfsBlob](#Section_2.2.1.2.1) value (specified in section 2.2.1.2).
+- The "Encrypting File System (EFS) Policy Information" specified in [MS-LSAD] section 3.1.1.1 is updated to match the [EfsBlob](#Section_2.2.1.2) value (specified in section 2.2.1.2).
 - The Windows EFS reads the "Encrypting File System (EFS) Policy Information" from the Local Security Authority store (as specified in [MS-LSAD]) on the local machine.
 This use of LSA was never necessary and is only available in Windows 2000, Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista, and Windows Server 2008.
 

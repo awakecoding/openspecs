@@ -538,7 +538,7 @@ packet-beta
 | WBT_FRAME_BEGIN 0xCCC4 | A TS_RFX_FRAME_BEGIN (section [2.2.2.3.1](#Section_2.2.2.3.1)) structure. |
 | WBT_FRAME_END 0xCCC5 | A TS_RFX_FRAME_END (section [2.2.2.3.2](#Section_2.2.2.3.2)) structure. |
 | WBT_REGION 0xCCC6 | A TS_RFX_REGION (section [2.2.2.3.3](#Section_2.2.2.3.3)) structure. |
-| WBT_EXTENSION 0xCCC7 | A TS_RFX_TILESET (section [2.2.2.3.4](#Section_2.2.2.3.4.1)) structure. |
+| WBT_EXTENSION 0xCCC7 | A TS_RFX_TILESET (section [2.2.2.3.4](#Section_2.2.2.3.4)) structure. |
 
 **blockLen (4 bytes):** A 32-bit, unsigned integer. Specifies the size, in bytes, of the data block. This size includes the size of the **blockType**, **blockLen**, **codecId**, and **channelId** fields, as well as all trailing data.
 
@@ -746,7 +746,7 @@ When operating in image mode, the Encode Headers messages (section [2.2.2.2](#Se
 | CLW_ENTROPY_RLGR1 0x01 | RLGR algorithm as detailed in [3.1.8.1.7.1](#Section_3.1.8.1.7.1). |
 | CLW_ENTROPY_RLGR3 0x04 | RLGR algorithm as detailed in [3.1.8.1.7.2](#Section_3.1.8.1.7.2). |
 
-The decoder SHOULD ignore this value and use the value defined in the properties field of TS_RFX_TILESET (section [2.2.2.3.4)](#Section_2.2.2.3.4.1).
+The decoder SHOULD ignore this value and use the value defined in the properties field of TS_RFX_TILESET (section [2.2.2.3.4)](#Section_2.2.2.3.4).
 
 **qt (2 bits):** A 2-bit unsigned integer. Specifies the [**quantization**](#gt_quantization) type. This field MUST be set to SCALAR_QUANTIZATION (0x1). The decoder SHOULD ignore this field.
 
@@ -788,7 +788,7 @@ packet-beta
 <a id="Section_2.2.2.3.3"></a>
 ##### 2.2.2.3.3 TS_RFX_REGION
 
-The TS_RFX_REGION message contains information about the list of change rectangles on the screen for a specific channel. It also specifies the number of trailing [TS_RFX_TILESET (section 2.2.2.3.4)](#Section_2.2.2.3.4.1) messages.
+The TS_RFX_REGION message contains information about the list of change rectangles on the screen for a specific channel. It also specifies the number of trailing [TS_RFX_TILESET (section 2.2.2.3.4)](#Section_2.2.2.3.4) messages.
 
 ```mermaid
 packet-beta
@@ -919,7 +919,7 @@ packet-beta
 
 **quantIdxCb (1 byte):** An 8-bit, unsigned integer. Specifies an index into the TS_RFX_CODEC_QUANT array provided in the TS_RFX_TILESET message. The specified **TS_RFX_CODEC_QUANT** element MUST be used for de-quantization of the sub-bands for the Cb-component.
 
-**quantIdxCr (1 byte):** An 8-bit, unsigned integer. Specifies an index into the [TS_RFX_CODEC_QUANT](#Section_2.2.2.1.5) array provided in the [TS_RFX_TILESET](#Section_2.2.2.3.4.1) message. The specified **TS_RFX_CODEC_QUANT** element MUST be used for de-quantization of the sub-bands for the Cr-component.
+**quantIdxCr (1 byte):** An 8-bit, unsigned integer. Specifies an index into the [TS_RFX_CODEC_QUANT](#Section_2.2.2.1.5) array provided in the [TS_RFX_TILESET](#Section_2.2.2.3.4) message. The specified **TS_RFX_CODEC_QUANT** element MUST be used for de-quantization of the sub-bands for the Cr-component.
 
 **xIdx (2 bytes):** A 16-bit, unsigned integer. The X-index of the encoded tile in the screen tile grid.
 
@@ -1014,7 +1014,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The Bitmap Codecs Capability Set message ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.2.10) MUST be processed by the server, as specified in section [3.1.5.1](../MS-RDPBCGR/MS-RDPBCGR.md), before RemoteFX encoding begins. This establishes the encoding properties that will be used by the server when sending the encoded data stream.
+The Bitmap Codecs Capability Set message ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.2.10) MUST be processed by the server, as specified in section [3.1.5.1](#Section_3.1.5.1), before RemoteFX encoding begins. This establishes the encoding properties that will be used by the server when sending the encoded data stream.
 
 The Bitmap Codecs Capability Set is sent by the client, encapsulating the [TS_RFX_CLNT_CAPS_CONTAINER (section 2.2.1.1)](#Section_2.2.1.1). The server ultimately processes the encapsulated TS_RFX_CLNT_CAPS_CONTAINER (section 2.2.1.1) message as specified in section 3.1.5.1, picking a [TS_RFX_ICAP (section 2.2.1.1.1.1.1)](#Section_2.2.1.1.1.1.1) element. From that point on, the server uses the capability properties listed in that element to encode RemoteFX data streams.
 
@@ -1132,7 +1132,7 @@ Figure 7: Three-level DWT decomposition
 <a id="Section_3.1.8.1.5"></a>
 ##### 3.1.8.1.5 Quantization
 
-The encoder determines a scale value for each sub-band and uses it to [**quantize**](#gt_quantization) all the coefficients in that sub-band, which is done by dividing each coefficient by the scale value and rounding it. These scale values are represented as quantization factors in a [TS_RFX_CODEC_QUANT](#Section_2.2.2.1.5) structure, which is embedded in a [TS_RFX_TILESET](#Section_2.2.2.3.4.1) message. The conversion between a scale value and a quantization factor is given by the following figure.
+The encoder determines a scale value for each sub-band and uses it to [**quantize**](#gt_quantization) all the coefficients in that sub-band, which is done by dividing each coefficient by the scale value and rounding it. These scale values are represented as quantization factors in a [TS_RFX_CODEC_QUANT](#Section_2.2.2.1.5) structure, which is embedded in a [TS_RFX_TILESET](#Section_2.2.2.3.4) message. The conversion between a scale value and a quantization factor is given by the following figure.
 
 ![Quantization factor to scale value conversion](media/image8.png)
 
@@ -1933,7 +1933,7 @@ Figure 13: RemoteFX decoding stages
 <a id="Section_3.1.8.2.1"></a>
 ##### 3.1.8.2.1 RLGR Entropy Decoding
 
-The three encoded tile components (Y, Cb, and Cr) are entropy decoded independently. The algorithm used is either inverse RLGR1 or RLGR3, depending on which one was used for encoding. For details of the decoding process, refer to [[ARLGR]](https://go.microsoft.com/fwlink/?LinkId=187365) (the encoding process is described in section [3.1.8.1.7](#Section_3.1.8.1.7.3)).
+The three encoded tile components (Y, Cb, and Cr) are entropy decoded independently. The algorithm used is either inverse RLGR1 or RLGR3, depending on which one was used for encoding. For details of the decoding process, refer to [[ARLGR]](https://go.microsoft.com/fwlink/?LinkId=187365) (the encoding process is described in section [3.1.8.1.7](#Section_3.1.8.1.7)).
 
 <a id="Section_3.1.8.2.2"></a>
 ##### 3.1.8.2.2 Sub-Band Reconstruction
@@ -1968,7 +1968,7 @@ Figure 15: The YCbCr to RGB conversion matrix
 <a id="Section_3.1.8.2.6"></a>
 ##### 3.1.8.2.6 Reconstructed Frame
 
-Each decoded RGB tile is intersected and clipped against the set of rectangles from the **rects** field of the [TS_RFX_REGION (section 2.2.2.3.3)](#Section_2.2.2.3.3) message. This gives a set of clipped rectangles, which are blitted to the appropriate location on the screen. Doing this for all the tiles present in the [TS_RFX_TILESET (section 2.2.2.3.4)](#Section_2.2.2.3.4.1) message will result in the reconstructed frame.
+Each decoded RGB tile is intersected and clipped against the set of rectangles from the **rects** field of the [TS_RFX_REGION (section 2.2.2.3.3)](#Section_2.2.2.3.3) message. This gives a set of clipped rectangles, which are blitted to the appropriate location on the screen. Doing this for all the tiles present in the [TS_RFX_TILESET (section 2.2.2.3.4)](#Section_2.2.2.3.4) message will result in the reconstructed frame.
 
 There are two reasons for doing this tile-region intersection. One is that the changed region on the screen, which comprises a set of arbitrary-sized rectangles, is converted to 64x64 tiles (section [3.1.8.1.1](#Section_3.1.8.1.1)) and these tiles can extend beyond the boundary of the rectangles of the change region. The second reason is that the differencing operation (section [3.1.8.1.2](#Section_3.1.8.1.2)) could cull some of these tiles and the decoder will not receive these tiles within the TS_RFX_TILESET message.
 
@@ -1984,7 +1984,7 @@ An encoded RemoteFX stream is composed of a sequence of encode messages that are
 
 All encode messages start with a TS_RFX_BLOCKT (section [2.2.2.1.1](#Section_2.2.2.1.1)) structure. When parsing the message blocks, the **blockLen** field of a TS_RFX_BLOCKT MUST be used to obtain the length of the data block. This length MUST NOT be less than the length based on the **blockType** field of the TS_RFX_BLOCKT.
 
-The RemoteFX stream is structured as a set of header messages followed by encoded data messages. The header messages contain global information necessary to decompress the data messages. The header messages are described in section [2.2.2.2](#Section_2.2.2.2), and the data messages are described in section [2.2.2.3](#Section_2). The stream MUST start with the header messages and any of these headers can appear in the stream at a later stage. The header messages can be repeated.
+The RemoteFX stream is structured as a set of header messages followed by encoded data messages. The header messages contain global information necessary to decompress the data messages. The header messages are described in section [2.2.2.2](#Section_2.2.2.2), and the data messages are described in section [2.2.2.3](#Section_2.2.2.3). The stream MUST start with the header messages and any of these headers can appear in the stream at a later stage. The header messages can be repeated.
 
 ![Message sequencing in the RemoteFX stream](media/image16.png)
 
@@ -1998,7 +1998,7 @@ Figure 17: Generation of RemoteFX encode header messages
 
 The TS_RFX_CHANNELS message MUST contain a single channel, and the frame dimensions of this channel are given by the **width** and **height** fields of the corresponding [TS_RFX_CHANNELT](#Section_2.2.2.1.3) structure (section 2.2.2.1.3). The decoder MUST check the TS_RFX_CODEC_VERSIONS and TS_RFX_CONTEXT messages to determine whether it is compatible with the RemoteFX codec version and the encoding properties listed in these messages. If the decoder cannot support the codec version, the channel frame dimensions, or any of the listed encoding properties, it MUST reject the encoded stream.
 
-The data associated with each encoded frame or image is always bracketed by the TS_RFX_FRAME_BEGIN (section [2.2.2.3.1](#Section_2.2.2.3.1)) and TS_RFX_FRAME_END (section [2.2.2.3.2](#Section_2.2.2.3.2)) messages. The sequence of blocks that comprise a frame are described in the figure that follows. There MUST only be one TS_RFX_REGION (section [2.2.2.3.3](#Section_2.2.2.3.3)) message per frame and one TS_RFX_TILESET (section [2.2.2.3.4](#Section_2.2.2.3.4.1)) message per TS_RFX_REGION. All of the messages corresponding to a frame associated with a given channel MUST occur consecutively within the codec byte-stream. The messages corresponding to frames from two different channels MUST NOT be interleaved.
+The data associated with each encoded frame or image is always bracketed by the TS_RFX_FRAME_BEGIN (section [2.2.2.3.1](#Section_2.2.2.3.1)) and TS_RFX_FRAME_END (section [2.2.2.3.2](#Section_2.2.2.3.2)) messages. The sequence of blocks that comprise a frame are described in the figure that follows. There MUST only be one TS_RFX_REGION (section [2.2.2.3.3](#Section_2.2.2.3.3)) message per frame and one TS_RFX_TILESET (section [2.2.2.3.4](#Section_2.2.2.3.4)) message per TS_RFX_REGION. All of the messages corresponding to a frame associated with a given channel MUST occur consecutively within the codec byte-stream. The messages corresponding to frames from two different channels MUST NOT be interleaved.
 
 ![Generation of RemoteFX encode data messages](media/image18.png)
 
@@ -2018,7 +2018,7 @@ The encoder examines the update regions and determines the set of tiles that cor
 
 Figure 19: Update region to tile grid mapping
 
-The single monitor configuration results in a TS_RFX_CHANNELS (section [2.2.2.2.3](#Section_2.2.2.2.3)) header message that specifies one channel set to 1280 x 1024. For every frame that is encoded due to region updates, the message sequence that results is described in the encode messages diagram in section [3.1.8.3.1](#Section_3.1.8.3.1). The TS_RFX_REGION (section [2.2.2.3.3](#Section_2.2.2.3.3)) message contains the list of updated rectangles, and the accompanying TS_RFX_TILESET (section [2.2.2.3.4](#Section_2.2.2.3.4.1)) message contains the corresponding set of tiles. The TS_RFX_TILE (section [2.2.2.3.4.1](#Section_2.2.2.3.4.1)) structure contains the location of the tile in the frame. Conceptually, the decoder can decode each tile, [**blit**](#gt_blit) it to the proper location in a temporary frame buffer, and then blit all of the updated rectangles to an output frame buffer.
+The single monitor configuration results in a TS_RFX_CHANNELS (section [2.2.2.2.3](#Section_2.2.2.2.3)) header message that specifies one channel set to 1280 x 1024. For every frame that is encoded due to region updates, the message sequence that results is described in the encode messages diagram in section [3.1.8.3.1](#Section_3.1.8.3.1). The TS_RFX_REGION (section [2.2.2.3.3](#Section_2.2.2.3.3)) message contains the list of updated rectangles, and the accompanying TS_RFX_TILESET (section [2.2.2.3.4](#Section_2.2.2.3.4)) message contains the corresponding set of tiles. The TS_RFX_TILE (section [2.2.2.3.4.1](#Section_2.2.2.3.4.1)) structure contains the location of the tile in the frame. Conceptually, the decoder can decode each tile, [**blit**](#gt_blit) it to the proper location in a temporary frame buffer, and then blit all of the updated rectangles to an output frame buffer.
 
 <a id="Section_4.2"></a>
 ## 4.2 Annotated RemoteFX Messages
@@ -2178,7 +2178,7 @@ The server has chosen to encode using RLGR3 (TS_RFX_CONTEXT) and specified one c
 <a id="Section_4.2.3"></a>
 ### 4.2.3 Encode Data Messages
 
-The following is an annotated network capture of the [Encode Data Messages (section 2.2.2.3)](#Section_2).
+The following is an annotated network capture of the [Encode Data Messages (section 2.2.2.3)](#Section_2.2.2.3).
 
 00000000 c4 cc 0e 00 00 00 01 00 00 00 00 00 01 00 c6 cc
 
@@ -2352,7 +2352,7 @@ c1 ca –> TS_RFX_REGION::regionType = CBT_REGION
 
 01 00 –> TS_RFX_REGION::numTilesets = 1
 
-[TS_RFX_TILESET](#Section_2.2.2.3.4.1) message (section 2.2.2.3.4):
+[TS_RFX_TILESET](#Section_2.2.2.3.4) message (section 2.2.2.3.4):
 
 c7 cc -> TS_RFX_TILESET::CodecChannelT::blockType = WBT_EXTENSION
 

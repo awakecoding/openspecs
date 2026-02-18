@@ -706,7 +706,7 @@ If the buffer is empty, no upper-layer payload is present and the following mess
 - **DataOffset** MUST be set to 0x00000000.
 - **DataLength** MUST be set to 0x00000000.
 - **Padding** and **Buffer** are not present.
-The empty message is sent as specified in section [3.1.5.1](#Section_3.1.5).
+The empty message is sent as specified in section [3.1.5.1](#Section_3.1.5.1).
 
 Otherwise, the buffer MUST be sent in one or more segments.
 
@@ -766,7 +766,7 @@ The receiver MUST:
 - Set the **Connection.ReceiveCreditTarget** to the value of the received **CreditsRequested** field.
 - Set **Connection.MaxSendSize** to the smaller of **Connection.MaxSendSize** and the value of the received **MaxReceiveSize** field.
 - Set **Connection.MaxFragmentedSendSize** to **MaxFragmentedSize.**
-The receive operations and credits MUST be initialized as specified in section [3.1.5.9](../MS-ERREF/MS-ERREF.md). If the resulting **Connection.ReceiveCredits** is zero, the receiver MUST generate a Negotiate Response failure message by invoking the processing specified in section 3.1.5.3 and passing a Status argument set to any of those defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3 with a Severity of STATUS_SEVERITY_ERROR.
+The receive operations and credits MUST be initialized as specified in section [3.1.5.9](#Section_3.1.5.9). If the resulting **Connection.ReceiveCredits** is zero, the receiver MUST generate a Negotiate Response failure message by invoking the processing specified in section 3.1.5.3 and passing a Status argument set to any of those defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3 with a Severity of STATUS_SEVERITY_ERROR.
 
 Otherwise, a Negotiate Response MUST be sent as specified in section 3.1.5.3, passing a Status of 0x0000, and the new **Connection** MUST be indicated to the upper layer as specified in section [3.1.7.2](#Section_3.1.7.2), after which the Negotiation Timer MUST be canceled.
 
@@ -820,7 +820,7 @@ If any of the preceding conditions are not satisfied, the receiver MUST terminat
 
 The value of **Connection.ReceiveCredits** MUST be decremented by one.
 
-If **Connection.SendQueue** is empty, the credit processing specified in section [3.1.5.9](#Section_3.1.5.9) MUST be performed. If the number of new credits returned is greater than zero, the receiver MUST promptly send a newly constructed Data Transfer message with its **CreditsGranted** field set to the number of new credits on the **Connection**, as specified in section [3.1.5.1](#Section_3.1.5).
+If **Connection.SendQueue** is empty, the credit processing specified in section [3.1.5.9](#Section_3.1.5.9) MUST be performed. If the number of new credits returned is greater than zero, the receiver MUST promptly send a newly constructed Data Transfer message with its **CreditsGranted** field set to the number of new credits on the **Connection**, as specified in section [3.1.5.1](#Section_3.1.5.1).
 
 The value of **Connection.ReceiveCreditTarget** MUST be set to the value of the received **CreditsRequested** field.
 

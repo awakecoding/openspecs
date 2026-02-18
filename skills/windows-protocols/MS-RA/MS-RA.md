@@ -358,7 +358,7 @@ The Remote Assistance Protocol is used after a [**Remote Assistance connection**
 
 After a basic Remote Assistance connection is made as specified in sections [3.1](#Section_3.1) and [3.2](#Section_3.2), the Remote Assistance Protocol uses [**virtual channels**](#gt_virtual-channel) as its underlying transport to accomplish these capabilities. There are four virtual channels used by the Remote Assistance Protocol:
 
-- As specified in sections [3.3](#Section_3.3), [3.4](#Section_3.4), [3.5](#Section_1.3), [3.6](#Section_3.6), [3.7](#Section_3.7), and [3.8](#Section_3.8), the session initialization virtual channel is created after the Remote Assistance connection is made, and it persists through the duration of the Remote Assistance connection. This channel is used to do initial setup and configuration of the Remote Assistance connection and establish a [**Remote Assistance session**](#gt_remote-assistance-session).
+- As specified in sections [3.3](#Section_3.3), [3.4](#Section_3.4), [3.5](#Section_3.5), [3.6](#Section_3.6), [3.7](#Section_3.7), and [3.8](#Section_3.8), the session initialization virtual channel is created after the Remote Assistance connection is made, and it persists through the duration of the Remote Assistance connection. This channel is used to do initial setup and configuration of the Remote Assistance connection and establish a [**Remote Assistance session**](#gt_remote-assistance-session).
 - The file transfer virtual channel is created on demand to transfer file data.
 - The chat virtual channel is created when the Remote Assistance connection is first established, and it persists through the duration of the Remote Assistance connection.
 - The last virtual channel is used for share control and to initialize VoIP and file transfer.
@@ -429,7 +429,7 @@ Version 2: The second version of the Remote Assistance protocol was introduced t
 
 Version 3: The third version of the Remote Assistance protocol was introduced to include the capability to initiate the Remote Assistance connection using the Remote Assistance Initiation over PNRP protocol.
 
-Implementations support either version 1, version 1 and version 2, or version 1, version 2, and version 3. The negotiation of the protocol between the expert and the novice is described in section [3](#Section_1.3) of this document.
+Implementations support either version 1, version 1 and version 2, or version 1, version 2, and version 3. The negotiation of the protocol between the expert and the novice is described in section [3](#Section_3) of this document.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -876,7 +876,7 @@ Here ABCDEF is the password, and the token is being created to validate the novi
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Remote Assistance Contact Information
 
-Remote Assistance Contact Information is used only in version 3. After the [**Remote Assistance session**](#gt_remote-assistance-session) is established, the [**expert**](#gt_expert) and the [**novice**](#gt_novice) can exchange information with each other to allow for a secure connection to be established in the future without the user having to provide a password. This information is sent as an internal data file (as specified in File Transfer sections [3.9](#Section_1.3.2) and [3.10](#Section_1.3)). This information is transmitted as an XML file when being sent as a data file.
+Remote Assistance Contact Information is used only in version 3. After the [**Remote Assistance session**](#gt_remote-assistance-session) is established, the [**expert**](#gt_expert) and the [**novice**](#gt_novice) can exchange information with each other to allow for a secure connection to be established in the future without the user having to provide a password. This information is sent as an internal data file (as specified in File Transfer sections [3.9](#Section_3.9) and [3.10](#Section_3.10)). This information is transmitted as an XML file when being sent as a data file.
 
 The following is an example of a contact file. (The attribute AVATAR has been truncated for brevity.)
 
@@ -1082,7 +1082,7 @@ The [**expert**](#gt_expert) MUST extract Port and IP Address information from t
 
 After a TCP connection is established, a Remote Desktop connection (described in Sections 3.2 of [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md)) MUST be initiated using Extensions to the Remote Desktop Protocol as defined in section [2.2.7](#Section_2.2.7).
 
-Upon completion of the Remote Desktop Connection, depending on the negotiated Remote Assistance protocol version, the Remote Assistance session MUST be established as described in sections [3.3](#Section_3.3), [3.5](#Section_1.3), and [3.7](#Section_3.7).
+Upon completion of the Remote Desktop Connection, depending on the negotiated Remote Assistance protocol version, the Remote Assistance session MUST be established as described in sections [3.3](#Section_3.3), [3.5](#Section_3.5), and [3.7](#Section_3.7).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -1490,7 +1490,7 @@ This section describes the sequence of the control packets that the expert recei
 
 Figure 8: Remote Assistance session initialization sequence diagram for version 3
 
-If the Remote Assistance Initiation Protocol is used to transfer Remote Assistance Connection String, the expert MUST use either the version 1 or 2 protocol (as specified in section [3.5](#Section_1.3)). If the Remote Assistance Initiation over PNRP Protocol was used to transfer Remote Assistance Connection String, the expert MUST use the version 3 protocol (as specified below) for session initialization.
+If the Remote Assistance Initiation Protocol is used to transfer Remote Assistance Connection String, the expert MUST use either the version 1 or 2 protocol (as specified in section [3.5](#Section_3.5)). If the Remote Assistance Initiation over PNRP Protocol was used to transfer Remote Assistance Connection String, the expert MUST use the version 3 protocol (as specified below) for session initialization.
 
 After the Remote Assistance connection is established, the expert MUST receive a REMOTEDESKTOP_CTL_TOKEN_PACKET containing a novice session authorization token as specified in section [2.2.4](#Section_2.2.4).
 
@@ -1610,7 +1610,7 @@ Sending a file requires the sender to break the file into blocks and send them s
 
 If, while the file is being sent, the sending user wants to cancel the transfer, this user sends the FILEXFERREJECT message to the receiver on the file transfer channel. If the receiver wants to cancel the file transfer, it sends the FILEXFERREJECT message to the sender on the file transfer channel. In either case, the sender stops sending data blocks. No other messages are expected or sent on the file transfer channel after sending or receiving the FILEXFERREJECT message.
 
-For the file sender, several messages can arrive during the entire process. (See section 2.2.3.) When a message arrives, a string comparison to detect the type of message arriving is all that is needed. The state machine shown in section [3.9](#Section_1.3.2) illustrates the expected sequence of messages; any message that arrives out of sequence SHOULD cause the receiver to generate a FILEXFERREJECT message to signal the error in processing messages. If errors in the sequence are ignored, it is possible that file corruption can occur on the file receiving side.
+For the file sender, several messages can arrive during the entire process. (See section 2.2.3.) When a message arrives, a string comparison to detect the type of message arriving is all that is needed. The state machine shown in section [3.9](#Section_3.9) illustrates the expected sequence of messages; any message that arrives out of sequence SHOULD cause the receiver to generate a FILEXFERREJECT message to signal the error in processing messages. If errors in the sequence are ignored, it is possible that file corruption can occur on the file receiving side.
 
 A sample follows of the messages exchanged over time between the file sender and receiver.
 
@@ -1660,7 +1660,7 @@ No higher-layer triggered events are addressed by this portion of the Remote Ass
 <a id="Section_3.10.5"></a>
 ### 3.10.5 Message Processing Events and Sequencing Rules
 
-For the file receiver, several messages can arrive during the entire process. (See section [2.2.3](#Section_4.2).) When a message arrives, a string comparison can be used to determine the type of message that has arrived. The state machine shown in section [3.10](#Section_1.3) shows the expected sequence of messages; any messages that arrive out of sequence MUST cause the receiver of the message to generate a FILEXFERREJECT message to signal the error in processing the messages. If errors in the sequence are ignored, it is possible that file corruption can occur on the file receiving side.
+For the file receiver, several messages can arrive during the entire process. (See section [2.2.3](#Section_2.2.3).) When a message arrives, a string comparison can be used to determine the type of message that has arrived. The state machine shown in section [3.10](#Section_3.10) shows the expected sequence of messages; any messages that arrive out of sequence MUST cause the receiver of the message to generate a FILEXFERREJECT message to signal the error in processing the messages. If errors in the sequence are ignored, it is possible that file corruption can occur on the file receiving side.
 
 The first message that is received is an <[RCCOMMAND](#Section_2.2.2)> message on the virtual channel 71 with the **NAME** attribute set to FILEXFER. The message MUST also include the attributes **FILENAME**, **FILESIZE**, and **CHANNELID**. The **FILENAME** attribute MUST be set to the original name of the file, as seen by the sender of the file. The **FILESIZE** attribute MUST be set to the size in bytes of the file about to be sent. The **CHANNELID** MUST be set to the name of the virtual channel that the file data will be sent on. Also, the **CHANNELID** will be the channel through which the file sender expects to get a response from the file receiver. In version 3, if the sender intended this file to be considered as internal data, it MUST be marked by setting the **INTERNALDATA** attribute corresponding to the type of internal data sent.
 
@@ -1819,7 +1819,7 @@ None.
 
 After the [**Remote Assistance session**](#gt_remote-assistance-session) has begun, settings concerning the Remote Assistance session can be exchanged with the remote computer. The [**expert**](#gt_expert) SHOULD initiate an exchange of settings by sending out the local value for a setting that is considered relevant to the Remote Assistance session that has begun. The [**novice**](#gt_novice) SHOULD send the local value of a setting in response to receiving a setting announcement.
 
-Based on the setting that was changed, the expert and the novice MAY send additional messages or update their internal state. If a session was initiated using PNRP (as specified in [MS-RAIOP](../MS-RAIOP/MS-RAIOP.md) sections 3.1, 3.2, 3.3, and 3.4), in version 3, the expert MUST announce their Contact Exchange setting. After the expert receives the novice's Contact Exchange setting, the expert MUST compare the local and remote values for this setting. If they are both set to "1", the expert MUST initiate an internal data transfer (see [file transfer (section 3.9)](#Section_1.3.2)) of their contact information (as specified in section [2.2.5](#Section_2.2.5)). After the novice has received the expert's contact information, the novice MUST send their contact information to the expert as an internal data transfer.
+Based on the setting that was changed, the expert and the novice MAY send additional messages or update their internal state. If a session was initiated using PNRP (as specified in [MS-RAIOP](../MS-RAIOP/MS-RAIOP.md) sections 3.1, 3.2, 3.3, and 3.4), in version 3, the expert MUST announce their Contact Exchange setting. After the expert receives the novice's Contact Exchange setting, the expert MUST compare the local and remote values for this setting. If they are both set to "1", the expert MUST initiate an internal data transfer (see [file transfer (section 3.9)](#Section_3.9)) of their contact information (as specified in section [2.2.5](#Section_2.2.5)). After the novice has received the expert's contact information, the novice MUST send their contact information to the expert as an internal data transfer.
 
 When generating contact information, version 3 creates a [**peer identity**](#gt_peer-identity), a public/private key pair, as specified in [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409). Then, the peer identity is converted into a [**peer name**](#gt_peer-name) as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 1.3.1.1. "RAContact" is used as the classifier. The peer name is used to populate the ADDRESS attribute of the RAINVITATIONITEM node. The image used for the contact and the public key from peer identity are converted from binary into base64 strings and used to populate **AVATAR** and **PUBLICKEY** respectively.
 
@@ -1890,7 +1890,7 @@ This section of the Remote Assistance Protocol does not depend on higher-layer t
 <a id="Section_3.15.5"></a>
 ### 3.15.5 Message Processing Events and Sequencing Rules
 
-For the [**expert**](#gt_expert), there are several messages that are sent or that can arrive during the entire process of requesting control (see section [2.2.2](#Section_2.2.2)). When a message arrives, a string comparison can be used to determine the type of message that has arrived. The state machine shown in section [3.15](#Section_1.3) illustrates the expected sequence of messages; any messages that arrive out of sequence SHOULD be ignored by the receiving side. All messages sent and received in this portion of the Remote Assistance Protocol are sent on the virtual channel named 71.
+For the [**expert**](#gt_expert), there are several messages that are sent or that can arrive during the entire process of requesting control (see section [2.2.2](#Section_2.2.2)). When a message arrives, a string comparison can be used to determine the type of message that has arrived. The state machine shown in section [3.15](#Section_3.15) illustrates the expected sequence of messages; any messages that arrive out of sequence SHOULD be ignored by the receiving side. All messages sent and received in this portion of the Remote Assistance Protocol are sent on the virtual channel named 71.
 
 To assume control of the [**novice's**](#gt_novice) mouse and keyboard, the expert does the following:
 
@@ -1999,7 +1999,7 @@ Figure 19: Remote Assistance request (novice)
 <a id="Section_3.17.1"></a>
 ### 3.17.1 Abstract Data Model
 
-An implementation of this portion of the Remote Assistance Protocol SHOULD maintain the [**VoIP**](#gt_voice-over-ip-voip) connection status as it transitions from inactive to active, and then back to inactive again. The states can be represented by an enumeration and follow the states shown in the diagrams in section [3.17](#Section_1.3).
+An implementation of this portion of the Remote Assistance Protocol SHOULD maintain the [**VoIP**](#gt_voice-over-ip-voip) connection status as it transitions from inactive to active, and then back to inactive again. The states can be represented by an enumeration and follow the states shown in the diagrams in section [3.17](#Section_3.17).
 
 <a id="Section_3.17.2"></a>
 ### 3.17.2 Timers
@@ -2025,7 +2025,7 @@ The Remote Assistance Protocol allows for an application to signal a request to 
 
 The Remote Assistance Protocol allows for an application to signal that the RTC wizard failed or succeeded when it checked for the hardware and drivers needed to do VoIP communications on the local computer. If the WIZARDBAD message is received, the receiving side SHOULD NOT attempt to initiate VoIP communication with the remote computer. If the WIZARDGOOD message is received, the receiver MAY attempt to initiate VoIP communications.
 
-The second category of messages deals with the initialization of VoIP using real-time communications (RTC) (for more information, see [[MSDN-RTC]](https://go.microsoft.com/fwlink/?LinkId=90115)). The [**novice**](#gt_novice) MUST act as the RTC server. The messages exchanged validate that the request for voice communication is wanted by the other user, can be utilized by the remote system, and can provide the encryption key and IP address of the RTC server to the client. This message exchange is detailed in the diagrams shown in section [3.17](#Section_1.3).
+The second category of messages deals with the initialization of VoIP using real-time communications (RTC) (for more information, see [[MSDN-RTC]](https://go.microsoft.com/fwlink/?LinkId=90115)). The [**novice**](#gt_novice) MUST act as the RTC server. The messages exchanged validate that the request for voice communication is wanted by the other user, can be utilized by the remote system, and can provide the encryption key and IP address of the RTC server to the client. This message exchange is detailed in the diagrams shown in section [3.17](#Section_3.17).
 
 The first message sent (if the [**expert**](#gt_expert) initiated the request for VoIP) or received (if the novice initiated the request) is the PRESTART message. This message signals the expectation for voice communications. If VoIP is not wanted, the response to this message is VOIPQNO, and the exchange is considered complete. If VoIP is wanted by the receiver, the message PRESTARTYES is sent.
 
@@ -2067,7 +2067,7 @@ Figure 22: Remote Assistance session diagram (initiated by novice/server)
 <a id="Section_3.18.1"></a>
 ### 3.18.1 Abstract Data Model
 
-An implementation of this portion of the Remote Assistance Protocol SHOULD maintain the [**VoIP**](#gt_voice-over-ip-voip) connection status as it transitions from inactive to active, and then back to inactive again. The states can be represented by an enumeration and follow the states shown in the diagram in section [3.18](#Section_1.3).
+An implementation of this portion of the Remote Assistance Protocol SHOULD maintain the [**VoIP**](#gt_voice-over-ip-voip) connection status as it transitions from inactive to active, and then back to inactive again. The states can be represented by an enumeration and follow the states shown in the diagram in section [3.18](#Section_3.18).
 
 <a id="Section_3.18.2"></a>
 ### 3.18.2 Timers
@@ -2093,7 +2093,7 @@ The Remote Assistance Protocol allows for an application to signal a request to 
 
 The Remote Assistance Protocol allows for an application to signal that the RTC wizard failed or succeeded when it checked for the hardware and drivers needed to do VoIP communications on the local computer. If the WIZARDBAD message is received, the receiving side SHOULD NOT attempt to initiate VoIP communication with the remote computer. If the WIZARDGOOD message is received, the receiver MAY attempt to initiate VoIP communications.
 
-The second category of messages deals with the initialization of VoIP using RTC. The [**novice**](#gt_novice) MUST act as the RTC server. The messages exchanged validate that the request for voice communication is wanted by the other user, can be utilized by the remote system, and can provide the encryption key and IP address of the RTC server to the client. This message exchange is detailed in the diagrams shown in section [3.18](#Section_1.3).
+The second category of messages deals with the initialization of VoIP using RTC. The [**novice**](#gt_novice) MUST act as the RTC server. The messages exchanged validate that the request for voice communication is wanted by the other user, can be utilized by the remote system, and can provide the encryption key and IP address of the RTC server to the client. This message exchange is detailed in the diagrams shown in section [3.18](#Section_3.18).
 
 The first message sent (if the [**expert**](#gt_expert) initiated the request for VoIP) or received (if the novice initiated the request) is the PRESTART message. This message signals the expectation for voice communications. If VoIP is not wanted, the response to this message is VOIPQNO, and the exchange is considered complete. If VoIP is wanted by the receiver, the message PRESTARTYES is sent.
 
@@ -2239,7 +2239,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3](#Section_1.3) Protocol Details | Added a Product Behavior Note for protocol version 1 deprecation and updated Behavior Notes 2, 3, and 4. | Major |
+| [3](#Section_3) Protocol Details | Added a Product Behavior Note for protocol version 1 deprecation and updated Behavior Notes 2, 3, and 4. | Major |
 | [3.3.5](#Section_3.3.5) Message Processing Events and Sequencing Rules | Updated Product Behavior Note 5 to specify the E_FAIL error behavior for Version 1. | Major |
 | [3.4.5](#Section_3.4.5) Message Processing Events and Sequencing Rules | Updated Product Behavior Note 6 to specify the E_FAIL error behavior for Version 1. | Major |
 

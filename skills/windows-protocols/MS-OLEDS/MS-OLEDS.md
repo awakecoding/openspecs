@@ -291,9 +291,9 @@ Linked Object Presentation Data
 <a id="Section_1.3.3"></a>
 ### 1.3.3 OLE1.0 and OLE2.0 Formats
 
-There are two different formats for representing [linked objects](#Section_1.3.2) and [embedded objects](#Section_1.3.1) within [**container documents**](#gt_container-document). The first format is the OLE1.0 Format. This format predates the OLE Compound File technology (as specified in [MS-CFB](../MS-CFB/MS-CFB.md)). When using the OLE1.0 Format, the [**linked object**](#gt_linked-object) and [**embedded object**](#gt_embedded-object) data is laid out as a sequence of bytes within the container document. The data structures in section [2.2](../MS-CFB/MS-CFB.md) specify the format of the data within the byte sequence.
+There are two different formats for representing [linked objects](#Section_1.3.2) and [embedded objects](#Section_1.3.1) within [**container documents**](#gt_container-document). The first format is the OLE1.0 Format. This format predates the OLE Compound File technology (as specified in [MS-CFB](../MS-CFB/MS-CFB.md)). When using the OLE1.0 Format, the [**linked object**](#gt_linked-object) and [**embedded object**](#gt_embedded-object) data is laid out as a sequence of bytes within the container document. The data structures in section [2.2](#Section_2.2) specify the format of the data within the byte sequence.
 
-The second format is the OLE2.0 Format. This format uses the OLE Compound File technology (as specified in [MS-CFB]). When using the OLE2.0 Format, the [**container application**](#gt_container-application) creates an OLE Compound File Storage object ([MS-CFB] section 1.3) for each linked object or embedded object. The linked object or embedded object data is contained in this storage in the form of OLE Compound File Stream objects ([MS-CFB] section 1.3). The data structures in section [2.3](../MS-CFB/MS-CFB.md) specify the format of the data contained in the stream objects.
+The second format is the OLE2.0 Format. This format uses the OLE Compound File technology (as specified in [MS-CFB]). When using the OLE2.0 Format, the [**container application**](#gt_container-application) creates an OLE Compound File Storage object ([MS-CFB] section 1.3) for each linked object or embedded object. The linked object or embedded object data is contained in this storage in the form of OLE Compound File Stream objects ([MS-CFB] section 1.3). The data structures in section [2.3](#Section_2.3) specify the format of the data contained in the stream objects.
 
 It is required that an application differentiate in advance whether it is processing a file that uses the OLE1.0 Format or the OLE2.0 Format. This information is local to the application and is not specified in this document.
 
@@ -309,12 +309,12 @@ In addition to the OLE2.0 streams mentioned in sections [1.3.1](#Section_1.3.1) 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Clipboard Formats
 
-The users of [**container applications**](#gt_container-application) and [**creating applications**](#gt_creating-application) can use the system [**clipboard**](#gt_clipboard) to transfer data between applications. All data copied to a system clipboard has to conform to a format specification, known as a [Clipboard Format](#Section_2.1.1). Each Clipboard Format is identified by a unique numeric format ID.
+The users of [**container applications**](#gt_container-application) and [**creating applications**](#gt_creating-application) can use the system [**clipboard**](#gt_clipboard) to transfer data between applications. All data copied to a system clipboard has to conform to a format specification, known as a [Clipboard Format](#Section_1.3.5). Each Clipboard Format is identified by a unique numeric format ID.
 
 <a id="Section_1.3.5.1"></a>
 #### 1.3.5.1 Standard Clipboard Formats
 
-This specification uses a number of [Clipboard Formats](#Section_2.1.1) called the Standard Clipboard Formats. These are specified in section 2.1.1. A standard Clipboard Format is identified by a numeric ID as specified in section 2.1.1.
+This specification uses a number of [Clipboard Formats](#Section_1.3.5) called the Standard Clipboard Formats. These are specified in section 2.1.1. A standard Clipboard Format is identified by a numeric ID as specified in section 2.1.1.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Protocols and Other Structures
@@ -341,7 +341,7 @@ The Object Linking and Embedding Data Structures use HRESULT error codes. These 
 <a id="Section_1.7.1"></a>
 ### 1.7.1 Registered Clipboard Formats
 
-Vendors can create their own [Clipboard Formats](#Section_2.1.1), called Registered Clipboard Formats. A Registered Clipboard Format is identified by a string that contains the name of the Clipboard Format (as specified in section 2.1.1). Vendors can define their own Registered Clipboard Formats provided that the string that identifies the Registered Clipboard Format is prefixed with the "OleExternal" string literal.
+Vendors can create their own [Clipboard Formats](#Section_1.3.5), called Registered Clipboard Formats. A Registered Clipboard Format is identified by a string that contains the name of the Clipboard Format (as specified in section 2.1.1). Vendors can define their own Registered Clipboard Formats provided that the string that identifies the Registered Clipboard Format is prefixed with the "OleExternal" string literal.
 
 <a id="Section_2"></a>
 # 2 Structures
@@ -777,7 +777,7 @@ packet-beta
 
 **PresentationDataSize (4 bytes):** This MUST be an unsigned long integer set to the size, in bytes, of the **PresentationData** field.
 
-**PresentationData (variable):** This MUST be an array of bytes that contains the presentation data. The format of the data is identified by the [Clipboard Format](#Section_2.1.1) contained in the **Header** field.
+**PresentationData (variable):** This MUST be an array of bytes that contains the presentation data. The format of the data is identified by the [Clipboard Format](#Section_1.3.5) contained in the **Header** field.
 
 If the Clipboard Format contains CF_DIB (section 2.1.1), the **Data** field MUST contain a DeviceIndependentBitmap Object structure (as specified in [MS-WMF](../MS-WMF/MS-WMF.md) section 2.2.2.9).
 
@@ -788,7 +788,7 @@ If the Clipboard Format contains CF_ENHMETAFILE (section 2.1.1), the **Data** fi
 <a id="Section_2.2.3.3"></a>
 #### 2.2.3.3 RegisteredClipboardFormatPresentationObject
 
-The RegisteredClipboardFormatPresentationObject structure specifies a [**presentation data**](#gt_presentation-data) type that is used to display [**linked objects**](#gt_linked-object) or [**embedded objects**](#gt_embedded-object) in [**container applications**](#gt_container-application). The presentation data is identified using a registered [Clipboard Format](#Section_2.1.1) (section [1.7.1](#Section_1.7.1)).
+The RegisteredClipboardFormatPresentationObject structure specifies a [**presentation data**](#gt_presentation-data) type that is used to display [**linked objects**](#gt_linked-object) or [**embedded objects**](#gt_embedded-object) in [**container applications**](#gt_container-application). The presentation data is identified using a registered [Clipboard Format](#Section_1.3.5) (section [1.7.1](#Section_1.7.1)).
 
 ```mermaid
 packet-beta
@@ -949,7 +949,7 @@ Otherwise, the **FormatOrUnicodeString** field MUST be set to a Unicode string c
 <a id="Section_2.3.3"></a>
 ### 2.3.3 OLEStream
 
-The OLEStream structure is contained inside an **OLE Compound File Stream** object ([MS-CFB](../MS-CFB/MS-CFB.md) section 1.3). The name of this Compound File Stream object is "\1Ole". The stream object is contained within the **OLE Compound File Storage** object ([MS-CFB] section 1.3) corresponding to the linked object or embedded object (see section [1.3.3](../MS-CFB/MS-CFB.md)). The OLEStream structure specifies whether the storage object is for a linked object or an embedded object. When this structure specifies a storage object for a linked object, it also specifies the reference to the linked object.
+The OLEStream structure is contained inside an **OLE Compound File Stream** object ([MS-CFB](../MS-CFB/MS-CFB.md) section 1.3). The name of this Compound File Stream object is "\1Ole". The stream object is contained within the **OLE Compound File Storage** object ([MS-CFB] section 1.3) corresponding to the linked object or embedded object (see section [1.3.3](#Section_1.3.3)). The OLEStream structure specifies whether the storage object is for a linked object or an embedded object. When this structure specifies a storage object for a linked object, it also specifies the reference to the linked object.
 
 ```mermaid
 packet-beta
@@ -1034,7 +1034,7 @@ packet-beta
 <a id="Section_2.3.4"></a>
 ### 2.3.4 OLEPresentationStream
 
-The OLEPresentationStream structure is contained inside an OLE Compound File Stream object ([MS-CFB](../MS-CFB/MS-CFB.md) section 1.3) within the OLE Compound File Storage object ([MS-CFB] section 1.3) that corresponds to the linked object or embedded object (see section [1.3.3](../MS-CFB/MS-CFB.md)). There MUST be no more than 999 presentation streams in the storage object. The name of the stream is a concatenation of the prefix "\2OlePres" followed by three numeric characters, each of which is in the range of numbers from '0'-'9'. Some examples of stream names are "\2OlePres000", "\2OlePres123", and "\2OlePres999". The OLEPresentationStream structure specifies the [**presentation data**](#gt_presentation-data) for linked and [**embedded objects**](#gt_embedded-object).
+The OLEPresentationStream structure is contained inside an OLE Compound File Stream object ([MS-CFB](../MS-CFB/MS-CFB.md) section 1.3) within the OLE Compound File Storage object ([MS-CFB] section 1.3) that corresponds to the linked object or embedded object (see section [1.3.3](#Section_1.3.3)). There MUST be no more than 999 presentation streams in the storage object. The name of the stream is a concatenation of the prefix "\2OlePres" followed by three numeric characters, each of which is in the range of numbers from '0'-'9'. Some examples of stream names are "\2OlePres000", "\2OlePres123", and "\2OlePres999". The OLEPresentationStream structure specifies the [**presentation data**](#gt_presentation-data) for linked and [**embedded objects**](#gt_embedded-object).
 
 ```mermaid
 packet-beta
@@ -1055,7 +1055,7 @@ packet-beta
   624-687: "TocEntry (variable)"
 ```
 
-**AnsiClipboardFormat (variable):** This MUST be a [ClipboardFormatOrAnsiString](#Section_2.3.1) structure (section 2.3.1) that contains the [Clipboard Format](#Section_2.1.1) of the presentation data. If the **MarkerOrLength** field of the ClipboardFormatOrAnsiString structure contains 0x0000000, the OLEPresentationStream structure is invalid.<15>
+**AnsiClipboardFormat (variable):** This MUST be a [ClipboardFormatOrAnsiString](#Section_2.3.1) structure (section 2.3.1) that contains the [Clipboard Format](#Section_1.3.5) of the presentation data. If the **MarkerOrLength** field of the ClipboardFormatOrAnsiString structure contains 0x0000000, the OLEPresentationStream structure is invalid.<15>
 
 If the **MarkerOrLength** field contains a value other than 0xFFFFFFFF or 0xFFFFFFFE, the value MUST NOT be greater than 0x00000201. Otherwise, the OLEPresentationStream structure is invalid.<16>
 
@@ -1119,7 +1119,7 @@ If the **FormatOrAnsiString** field of **AnsiClipboardFormat** contains the name
 
 The TOCENTRY structure is used to specify the additional values of the attributes of the [OLEPresentationStream](#Section_2.3.4) structure.
 
-An OLEPresentationStream structure, if present, MUST have one or more values for attributes such as the [Clipboard Format](#Section_2.1.1) and the target device.
+An OLEPresentationStream structure, if present, MUST have one or more values for attributes such as the [Clipboard Format](#Section_1.3.5) and the target device.
 
 ```mermaid
 packet-beta
@@ -1155,7 +1155,7 @@ packet-beta
 <a id="Section_2.3.6"></a>
 ### 2.3.6 OLENativeStream
 
-The OLENativeStream structure is contained inside an **OLE Compound File Stream** object ([MS-CFB](../MS-CFB/MS-CFB.md) section 1.3). The **OLE Compound File Stream** object is named "\1Ole10Native". The stream object is contained within the OLE Compound File Storage object ([MS-CFB] section 1.3) that corresponds to the linked object or embedded object (see section [1.3.3](../MS-CFB/MS-CFB.md)). This stream is present when [**native data**](#gt_native-data) from a [**container document**](#gt_container-document) in the OLE1.0 format is converted to the OLE2.0 format. The [OLENativeStream](#Section_2.3.5) structure specifies the native data for OLE1.0 [**embedded objects**](#gt_embedded-object).
+The OLENativeStream structure is contained inside an **OLE Compound File Stream** object ([MS-CFB](../MS-CFB/MS-CFB.md) section 1.3). The **OLE Compound File Stream** object is named "\1Ole10Native". The stream object is contained within the OLE Compound File Storage object ([MS-CFB] section 1.3) that corresponds to the linked object or embedded object (see section [1.3.3](#Section_1.3.3)). This stream is present when [**native data**](#gt_native-data) from a [**container document**](#gt_container-document) in the OLE1.0 format is converted to the OLE2.0 format. The [OLENativeStream](#Section_2.3.5) structure specifies the native data for OLE1.0 [**embedded objects**](#gt_embedded-object).
 
 ```mermaid
 packet-beta
@@ -1188,7 +1188,7 @@ packet-beta
 <a id="Section_2.3.8"></a>
 ### 2.3.8 CompObjStream
 
-The CompObjStream structure is contained inside of an **OLE Compound File Stream** (as specified in [MS-CFB](../MS-CFB/MS-CFB.md)). The **OLE Compound File Stream** has the name "\1CompObj". The CompObjStream structure specifies the [Clipboard Format](#Section_2.1.1) and the display name of the linked object or embedded object.
+The CompObjStream structure is contained inside of an **OLE Compound File Stream** (as specified in [MS-CFB](../MS-CFB/MS-CFB.md)). The **OLE Compound File Stream** has the name "\1CompObj". The CompObjStream structure specifies the [Clipboard Format](#Section_1.3.5) and the display name of the linked object or embedded object.
 
 ```mermaid
 packet-beta

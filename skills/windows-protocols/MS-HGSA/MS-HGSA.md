@@ -1359,7 +1359,7 @@ The **VsmReportValidationErrorReply** structure represents an error in validatin
 <a id="Section_2.2.2.25"></a>
 #### 2.2.2.25 Context
 
-The main header remote TPM **Context** structure followed by a variable number of **Data Blobs** defined in section [2.2.2.27](#Section_2.2.2.27.3).
+The main header remote TPM **Context** structure followed by a variable number of **Data Blobs** defined in section [2.2.2.27](#Section_2.2.2.27).
 
 ```mermaid
 packet-beta

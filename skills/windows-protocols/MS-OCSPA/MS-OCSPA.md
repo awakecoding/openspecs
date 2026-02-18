@@ -537,8 +537,8 @@ Methods in RPC Opnum Order
 | [SetOCSPProperty](#Section_3.2.4.1.2) | Opnum: 4 |
 | [GetCAConfigInformation](#Section_3.2.4.1.3) | Opnum: 5 |
 | [SetCAConfigInformation](#Section_3.2.4.1.4) | Opnum: 6 |
-| [GetSecurity](#Section_5) | Opnum: 7 |
-| [SetSecurity](#Section_5) | Opnum: 8 |
+| [GetSecurity](#Section_3.2.4.1.5) | Opnum: 7 |
+| [SetSecurity](#Section_3.2.4.1.6) | Opnum: 8 |
 | [GetSigningCertificates](#Section_3.2.4.1.7) | Opnum: 9 |
 | [GetHashAlgorithms](#Section_3.2.4.1.8) | Opnum: 10 |
 | [GetMyRoles](#Section_3.2.4.1.9) | Opnum: 11 |
@@ -1052,8 +1052,8 @@ The responder can enforce Online Responder security for each of the following me
 | [SetOCSPProperty](#Section_3.2.4.1.2) | Administrator |
 | [GetCAConfigInformation](#Section_3.2.4.1.3) | Read |
 | [SetCAConfigInformation](#Section_3.2.4.1.4) | Administrator |
-| [GetSecurity](#Section_5) | Read |
-| [SetSecurity](#Section_5) | Administrator |
+| [GetSecurity](#Section_3.2.4.1.5) | Read |
+| [SetSecurity](#Section_3.2.4.1.6) | Administrator |
 
 The [**security descriptor**](#gt_security-descriptor) on the responder controls which security principal can manage or read configuration information or request [**certificate**](#gt_certificate) status from the responder. Whenever a Read method on the responder is invoked, the responder checks this security descriptor to ensure that the calling entity has read access; if the entity doesn't have read access, the responder returns 0x80070005 as the error code. Whenever any Write method is invoked, the responder checks this security descriptor to ensure that the calling entity has manage access on the responder; if it does not, 0x80070005 is returned by the responder.
 

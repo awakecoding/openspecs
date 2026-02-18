@@ -1058,7 +1058,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-MSRP] Microsoft Corporation, "[Messenger Service Remote Protocol](../MS-MSRP/MS-MSRP.md)".
 
@@ -1135,7 +1135,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDFS] Microsoft Corporation, "How DFS Works", March 2003, [http://technet.microsoft.com/en-us/library/cc782417%28WS.10%29.aspx](https://go.microsoft.com/fwlink/?LinkId=89945)
 
@@ -1452,9 +1452,9 @@ For sequenced commands, the server requires that the sequence numbers are nonzer
 
 If the **CID** value is incorrect, the server MUST fail the request with ERRSRV/ERRinvsess. If the server is currently processing a command that matches either the sequence number (for sequenced commands) or the **MID** (for unsequenced commands) of a new request, the server MUST respond with ERRSRV/ERRworking. The values of ERRinvsess (0x0010) and ERRworking (0x0011) are defined only for the **Direct IPX Transport**.
 
-The server waits to receive commands from the client periodically; if no commands are received, the server treats the client as no longer running and closes the [**SMB session**](#gt_smb-session). This includes closing file handles and releasing any resources allocated on behalf of the client. Clients SHOULD, at minimum, send an SMB_COM_ECHO (section [2.2.4.39](#Section_2.2.4.39.2)) to the server every few minutes. The server MUST NOT disconnect clients that have been inactive less than 5 minutes.<6>
+The server waits to receive commands from the client periodically; if no commands are received, the server treats the client as no longer running and closes the [**SMB session**](#gt_smb-session). This includes closing file handles and releasing any resources allocated on behalf of the client. Clients SHOULD, at minimum, send an SMB_COM_ECHO (section [2.2.4.39](#Section_2.2.4.39)) to the server every few minutes. The server MUST NOT disconnect clients that have been inactive less than 5 minutes.<6>
 
-**Direct IPX Transport** can be used in situations in which multiple low-bandwidth connections are multiplexed together (for example, by using multiple telephone modems in parallel). CIFS provides special SMB commands, such as SMB_COM_READ_MPX (section [2.2.4.23](#Section_2.2.4.23.2)), for these environments. These commands, and the **Direct IPX Transport** itself, are obsolescent.
+**Direct IPX Transport** can be used in situations in which multiple low-bandwidth connections are multiplexed together (for example, by using multiple telephone modems in parallel). CIFS provides special SMB commands, such as SMB_COM_READ_MPX (section [2.2.4.23](#Section_2.2.4.23)), for these environments. These commands, and the **Direct IPX Transport** itself, are obsolescent.
 
 See [[MSFT-IPXWAN]](https://go.microsoft.com/fwlink/?LinkId=162041) for more information on **Direct IPX Transport**.
 
@@ -1494,7 +1494,7 @@ CIFS has evolved over time. As a result, some commands have become obsolete and 
 | --- | --- |
 | SMB_COM_COPY SMB_COM_MOVE SMB_COM_READ_MPX_SECONDARY SMB_COM_SECURITY_PACKAGE_ANDX SMB_COM_WRITE_MPX_SECONDARY SMB_COM_GET_PRINT_QUEUE | SMB_COM_CLOSE_AND_TREE_DISC SMB_COM_FIND_NOTIFY_CLOSE SMB_COM_IOCTL_SECONDARY SMB_COM_NEW_FILE_SIZE SMB_COM_QUERY_SERVER SMB_COM_READ_BULK SMB_COM_WRITE_BULK SMB_COM_WRITE_BULK_DATA |
 
-Specifications for the commands listed in the preceding tables are located in section [2.2.3](#Section_1.3).
+Specifications for the commands listed in the preceding tables are located in section [2.2.3](#Section_2.2.3).
 
 An SMB message is the payload packet encapsulated in a transport packet. SMB messages are divided into three blocks: a fixed-length SMB Header (section [2.2.3.1](#Section_2.2.3.1)), and two variable-length blocks called SMB Parameters (section [2.2.3.2](#Section_2.2.3.2)) and SMB Data (section [2.2.3.3](#Section_2.2.3.3)).
 
@@ -1504,7 +1504,7 @@ In dialects prior to [**NT LAN Manager**](#gt_nt-lan-manager-ntlm), data alignme
 
 Unless otherwise noted, fields marked as "reserved" SHOULD be set to zero when sent and MUST be ignored on receipt. These fields are reserved for future protocol expansion and MUST NOT be used for implementation-specific functionality. When it is necessary to insert padding bytes into a buffer for data alignment purposes, such bytes SHOULD be set to 0x00 when sent and MUST be ignored on receipt.
 
-CIFS defines a set of data types and data structures that are commonly used across multiple commands in the protocol. These are specified in section [2.2.1](#Section_2.2.1). Some data structures exist that are used only in one or two commands. Those are specified in their respective command's subsection of section [2.2.4](../MS-DTYP/MS-DTYP.md). All data types encountered in sections [2](../MS-DTYP/MS-DTYP.md) and [3](../MS-DTYP/MS-DTYP.md) that are not defined in section 2.2 are found in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
+CIFS defines a set of data types and data structures that are commonly used across multiple commands in the protocol. These are specified in section [2.2.1](#Section_2.2.1). Some data structures exist that are used only in one or two commands. Those are specified in their respective command's subsection of section [2.2.4](#Section_2.2.4). All data types encountered in sections [2](#Section_2) and [3](#Section_3) that are not defined in section 2.2 are found in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
 Unless otherwise noted, when an error occurs the server MUST return a response SMB message with a proper status code in the header (see section 2.2.3.1). Error responses SHOULD be sent with empty SMB Parameters and SMB Data blocks (**WordCount** and **ByteCount** fields set to zero; see sections 2.2.3.2 and 2.2.3.3 respectively).
 
@@ -1535,8 +1535,8 @@ In [**CIFS**](#gt_common-internet-file-system-cifs), character sequences are tra
 
 String fields that restrict character encoding to OEM characters only, even if Unicode support has been negotiated, are labeled as **OEM_STRING**. Some examples of strings that are never passed in Unicode are:
 
-- The dialect strings in the SMB_COM_NEGOTIATE (section [2.2.4.52](#Section_2.2.4.52.1)) command.
-- The service name string in the SMB_COM_TREE_CONNECT_ANDX (section [2.2.4.55](#Section_2.2.4.55.2)) command.
+- The dialect strings in the SMB_COM_NEGOTIATE (section [2.2.4.52](#Section_2.2.4.52)) command.
+- The service name string in the SMB_COM_TREE_CONNECT_ANDX (section [2.2.4.55](#Section_2.2.4.55)) command.
 <a id="Section_2.2.1.1.1"></a>
 ##### 2.2.1.1.1 File and Directory names
 
@@ -1575,7 +1575,7 @@ If the negotiated dialect is [**NT LAN Manager**](#gt_nt-lan-manager-ntlm) or la
 
 CIFS makes use of three distinct methods for encoding file attributes:
 
-- Extended Attributes (SMB_GEA (section [2.2.1.2.1](#Section_2.2.1.2.1.1)) and SMB_FEA (section [2.2.1.2.2](#Section_2.2.1.2.2)))
+- Extended Attributes (SMB_GEA (section [2.2.1.2.1](#Section_2.2.1.2.1)) and SMB_FEA (section [2.2.1.2.2](#Section_2.2.1.2.2)))
 - Extended File Attributes (SMB_EXT_FILE_ATTR (section [2.2.1.2.3)](#Section_2.2.1.2.3))
 - File Attributes (SMB_FILE_ATTRIBUTES (section [2.2.1.2.4)](#Section_2.2.1.2.4))
 <a id="Section_2.2.1.2.1"></a>
@@ -1606,7 +1606,7 @@ packet-beta
 <a id="Section_2.2.1.2.1.1"></a>
 ###### 2.2.1.2.1.1 SMB_GEA_LIST
 
-The SMB_GEA_LIST data structure is used to send a concatenated list of SMB_GEA (section [2.2.1.2.1](#Section_2.2.1.2.1.1)) structures.
+The SMB_GEA_LIST data structure is used to send a concatenated list of SMB_GEA (section [2.2.1.2.1](#Section_2.2.1.2.1)) structures.
 
 SMB_GEA_LIST
 
@@ -1961,12 +1961,12 @@ Following is a listing of all [**SMB**](#gt_server-message-block-smb) commands u
 | SMB_COM_CREATE_DIRECTORY (section [2.2.4.1](#Section_2.2.4.1)) SMBmkdir | 0x00 | Create a new directory. | D | CORE |
 | SMB_COM_DELETE_DIRECTORY (section [2.2.4.2](#Section_2.2.4.2)) SMBrmdir | 0x01 | Delete an empty directory. | C | CORE |
 | SMB_COM_OPEN (section [2.2.4.3](#Section_2.2.4.3)) SMBopen | 0x02 | Open a file. | D | CORE |
-| SMB_COM_CREATE (section [2.2.4.4](#Section_2.2.4.15)) SMBcreate | 0x03 | Create or open a file. | D | CORE |
+| SMB_COM_CREATE (section [2.2.4.4](#Section_2.2.4.4)) SMBcreate | 0x03 | Create or open a file. | D | CORE |
 | SMB_COM_CLOSE (section [2.2.4.5](#Section_2.2.4.5)) SMBclose | 0x04 | Close a file. | C | CORE |
 | SMB_COM_FLUSH (section [2.2.4.6](#Section_2.2.4.6)) SMBflush | 0x05 | Flush data for a file, or all files associated with a client, PID pair. | C | CORE |
 | SMB_COM_DELETE (section [2.2.4.7](#Section_2.2.4.7)) SMBunlink | 0x06 | Delete a file. | C | CORE |
 | SMB_COM_RENAME (section [2.2.4.8](#Section_2.2.4.8)) SMBmv | 0x07 | Rename a file or set of files. | C | CORE |
-| SMB_COM_QUERY_INFORMATION (section [2.2.4.9](#Section_3.2.5.20)) SMBgetattr | 0x08 | Get file attributes. | D | CORE |
+| SMB_COM_QUERY_INFORMATION (section [2.2.4.9](#Section_2.2.4.9)) SMBgetattr | 0x08 | Get file attributes. | D | CORE |
 | SMB_COM_SET_INFORMATION (section [2.2.4.10](#Section_2.2.4.10)) SMBsetattr | 0x09 | Set file attributes. | D | CORE |
 | SMB_COM_READ (section [2.2.4.11](#Section_2.2.4.11)) SMBread | 0x0A | Read from a file. | D | CORE |
 | SMB_COM_WRITE (section [2.2.4.12](#Section_2.2.4.12)) SMBwrite | 0x0B | Write to a file. | D | CORE |
@@ -1980,8 +1980,8 @@ Following is a listing of all [**SMB**](#gt_server-message-block-smb) commands u
 | SMB_COM_LOCK_AND_READ (section [2.2.4.20](#Section_2.2.4.20)) SMBlockread | 0x13 | Lock and read a byte-range within a file. | D | CorePlus |
 | SMB_COM_WRITE_AND_UNLOCK (section [2.2.4.21](#Section_2.2.4.21)) SMBwriteunlock | 0x14 | Write and unlock a byte-range within a file. | D | CorePlus |
 | **Unused** | 0x15 ... 0x19 | - | - | - |
-| SMB_COM_READ_RAW (section [2.2.4.22](#Section_2.2.4.22.2)) SMBreadBraw | 0x1A | Read a block in raw mode. | D | CorePlus |
-| SMB_COM_READ_MPX (section [2.2.4.23](#Section_2.2.4.23.2)) SMBreadBmpx | 0x1B | Multiplexed block read. Listed as SMBreadmpx in some documentation. | O | LANMAN1.0 |
+| SMB_COM_READ_RAW (section [2.2.4.22](#Section_2.2.4.22)) SMBreadBraw | 0x1A | Read a block in raw mode. | D | CorePlus |
+| SMB_COM_READ_MPX (section [2.2.4.23](#Section_2.2.4.23)) SMBreadBmpx | 0x1B | Multiplexed block read. Listed as SMBreadmpx in some documentation. | O | LANMAN1.0 |
 | SMB_COM_READ_MPX_SECONDARY (section [2.2.4.24](#Section_2.2.4.24)) SMBreadBs | 0x1C | Multiplexed block read, secondary request. | X | LANMAN1.0 |
 | SMB_COM_WRITE_RAW (section [2.2.4.25](#Section_2.2.4.25)) SMBwriteBraw | 0x1D | Write a block in raw mode. | D | CorePlus |
 | SMB_COM_WRITE_MPX (section [2.2.4.26](#Section_2.2.4.26)) SMBwriteBmpx | 0x1E | Multiplexed block write. | O | LANMAN1.0 |
@@ -1989,15 +1989,15 @@ Following is a listing of all [**SMB**](#gt_server-message-block-smb) commands u
 | SMB_COM_WRITE_COMPLETE (section [2.2.4.28](#Section_2.2.4.28)) SMBwriteC | 0x20 | Raw block write, final response. | D | LANMAN1.0 |
 | SMB_COM_QUERY_SERVER (section [2.2.4.29](#Section_2.2.4.29)) | 0x21 | Reserved, but not implemented. Also known as SMB_COM_QUERY_INFORMATION_SRV. | N | - |
 | SMB_COM_SET_INFORMATION2 (section [2.2.4.30](#Section_2.2.4.30)) SMBsetattrE | 0x22 | Set an extended set of file attributes. | D | LANMAN1.0 |
-| SMB_COM_QUERY_INFORMATION2 (section [2.2.4.31](#Section_3.2.5.20)) SMBgetattrE | 0x23 | Get an extended set of file attributes. | D | LANMAN1.0 |
+| SMB_COM_QUERY_INFORMATION2 (section [2.2.4.31](#Section_2.2.4.31)) SMBgetattrE | 0x23 | Get an extended set of file attributes. | D | LANMAN1.0 |
 | SMB_COM_LOCKING_ANDX (section [2.2.4.32](#Section_2.2.4.32)) SMBlockingX | 0x24 | Lock multiple byte ranges; AndX chaining. | C | LANMAN1.0 |
-| SMB_COM_TRANSACTION (section [2.2.4.33](#Section_3.3.5.31)) SMBtrans | 0x25 | Transaction. | C | LANMAN1.0 |
+| SMB_COM_TRANSACTION (section [2.2.4.33](#Section_2.2.4.33)) SMBtrans | 0x25 | Transaction. | C | LANMAN1.0 |
 | SMB_COM_TRANSACTION_SECONDARY (section [2.2.4.34](#Section_2.2.4.34)) SMBtranss | 0x26 | Transaction secondary request. | C | LANMAN1.0 |
 | SMB_COM_IOCTL (section [2.2.4.35](#Section_2.2.4.35)) SMBioctl | 0x27 | Pass an I/O Control function request to the server. | O | LANMAN1.0 |
 | SMB_COM_IOCTL_SECONDARY (section [2.2.4.36](#Section_2.2.4.36)) SMBioctls | 0x28 | IOCTL secondary request. | N | LANMAN1.0 |
 | SMB_COM_COPY (section [2.2.4.37](#Section_2.2.4.37)) SMBcopy | 0x29 | Copy a file or directory. | X | LANMAN1.0 |
 | SMB_COM_MOVE (section [2.2.4.38](#Section_2.2.4.38)) SMBmove | 0x2A | Move a file or directory. | X | LANMAN1.0 |
-| SMB_COM_ECHO (section [2.2.4.39](#Section_2.2.4.39.2)) SMBecho | 0x2B | Echo request (ping). | C | LANMAN1.0 |
+| SMB_COM_ECHO (section [2.2.4.39](#Section_2.2.4.39)) SMBecho | 0x2B | Echo request (ping). | C | LANMAN1.0 |
 | SMB_COM_WRITE_AND_CLOSE (section [2.2.4.40](#Section_2.2.4.40)) SMBwriteclose | 0x2C | Write to and close a file. | D | LANMAN1.0 |
 | SMB_COM_OPEN_ANDX (section [2.2.4.41](#Section_2.2.4.41)) SMBopenX | 0x2D | Extended file open with AndX chaining. | D | LANMAN1.0 |
 | SMB_COM_READ_ANDX (section [2.2.4.42](#Section_2.2.4.42)) SMBreadX | 0x2E | Extended file read with AndX chaining. | C | LANMAN1.0 |
@@ -2011,11 +2011,11 @@ Following is a listing of all [**SMB**](#gt_server-message-block-smb) commands u
 | **Unused** | 0x36 ... 0x5F | - | - | - |
 | **Reserved** | 0x60 ... 0x6F | This range of codes was reserved for use by the "xenix1.1" dialect of SMB. See [[MSFT-XEXTNP]](https://go.microsoft.com/fwlink/?LinkId=162042). [[XOPEN-SMB]](https://go.microsoft.com/fwlink/?linkid=2297696) page 41 lists this range as "Reserved for proprietary dialects." | X | XENIX |
 | [SMB_COM_TREE_CONNECT (section 2.2.4.50)](#Section_2.2.4.50) SMBtcon | 0x70 | Tree connect. | D | CORE |
-| [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51.2) SMBtdis | 0x71 | Tree disconnect. | C | CORE |
-| [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52.1) SMBnegprot | 0x72 | Negotiate protocol dialect. | C | CORE |
+| [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51) SMBtdis | 0x71 | Tree disconnect. | C | CORE |
+| [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52) SMBnegprot | 0x72 | Negotiate protocol dialect. | C | CORE |
 | [SMB_COM_SESSION_SETUP_ANDX (section 2.2.4.53)](#Section_2.2.4.53) SMBsesssetupX | 0x73 | Session Setup with AndX chaining. | C | LANMAN1.0 |
 | [SMB_COM_LOGOFF_ANDX (section 2.2.4.54)](#Section_2.2.4.54) SMBulogoffX | 0x74 | User logoff with AndX chaining. | C | LANMAN1.2 |
-| [SMB_COM_TREE_CONNECT_ANDX (section 2.2.4.55)](#Section_2.2.4.55.2) SMBtconX | 0x75 | Tree connect with AndX chaining. | C | LANMAN1.0 |
+| [SMB_COM_TREE_CONNECT_ANDX (section 2.2.4.55)](#Section_2.2.4.55) SMBtconX | 0x75 | Tree connect with AndX chaining. | C | LANMAN1.0 |
 | **Unused** | 0x76 ... 0x7D | - | - | - |
 | [SMB_COM_SECURITY_PACKAGE_ANDX (section 2.2.4.56)](#Section_2.2.4.56) SMBsecpkgX | 0x7E | Negotiate security packages with AndX chaining. | X | LANMAN1.0 |
 | **Unused** | 0x7F | - | - | - |
@@ -2027,10 +2027,10 @@ Following is a listing of all [**SMB**](#gt_server-message-block-smb) commands u
 | **Unused** | 0x85 ... 0x9F | - | - | - |
 | [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section_2.2.4.62) | 0xA0 | NT format transaction request/response. | C | NT LANMAN |
 | [SMB_COM_NT_TRANSACT_SECONDARY (section 2.2.4.63)](#Section_2.2.4.63) | 0xA1 | NT format transaction secondary request. | C | NT LANMAN |
-| [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64.2) | 0xA2 | Create or open a file or a directory. | C | NT LANMAN |
+| [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64) | 0xA2 | Create or open a file or a directory. | C | NT LANMAN |
 | **Unused** | 0xA3 | - | - | - |
 | [SMB_COM_NT_CANCEL (section 2.2.4.65)](#Section_2.2.4.65) | 0xA4 | Cancel a request currently pending at the server. | C | NT LANMAN |
-| [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_3.3.5.53) | 0xA5 | File rename with extended semantics. | O | NT LANMAN |
+| [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_2.2.4.66) | 0xA5 | File rename with extended semantics. | O | NT LANMAN |
 | **Unused** | 0xA6 ... 0xBF | - | - | - |
 | [SMB_COM_OPEN_PRINT_FILE (section 2.2.4.67)](#Section_2.2.4.67) SMBsplopen | 0xC0 | Create a print queue spool file. | C | CORE |
 | [SMB_COM_WRITE_PRINT_FILE (section 2.2.4.68)](#Section_2.2.4.68) SMBsplwr | 0xC1 | Write to a print queue spool file. | D | CORE |
@@ -2053,17 +2053,17 @@ Transaction Codes used with [SMB_COM_TRANSACTION (section 2.2.4.46)](#Section_
 | Name | Code | Description | Status | Earliest dialect |
 | --- | --- | --- | --- | --- |
 | [TRANS_MAILSLOT_WRITE (section 2.2.5.12)](#Section_2.2.5.12) | 0x0001 | Allows a client to write data to a specific mailslot on the server. | C | LANMAN1.0 |
-| [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_3.3.5.57.2) | 0x0001 | Used to set the read mode and [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe) of a specified named pipe. | C | LANMAN1.0 |
+| [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_2.2.5.1) | 0x0001 | Used to set the read mode and [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe) of a specified named pipe. | C | LANMAN1.0 |
 | [TRANS_RAW_READ_NMPIPE (section 2.2.5.2)](#Section_2.2.5.2) | 0x0011 | Allows for a raw read of data from a named pipe. This method of reading data from a [**named pipe**](#gt_named-pipe) ignores message boundaries even if the pipe was set up as a [**message mode**](#gt_message-mode) pipe. | D | LANMAN1.0 |
-| [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_3.2.5.38.3) | 0x0021 | Allows for a client to retrieve information about a specified named pipe. | C | LANMAN1.0 |
-| [TRANS_QUERY_NMPIPE_INFO (section 2.2.5.4)](#Section_3.3.5.57.5) | 0x0022 | Used to retrieve pipe information about a named pipe. | C | LANMAN1.0 |
+| [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_2.2.5.3) | 0x0021 | Allows for a client to retrieve information about a specified named pipe. | C | LANMAN1.0 |
+| [TRANS_QUERY_NMPIPE_INFO (section 2.2.5.4)](#Section_2.2.5.4) | 0x0022 | Used to retrieve pipe information about a named pipe. | C | LANMAN1.0 |
 | [TRANS_PEEK_NMPIPE (section 2.2.5.5)](#Section_2.2.5.5) | 0x0023 | Used to copy data out of a named pipe without removing it from the named pipe. | C | LANMAN1.0 |
 | [TRANS_TRANSACT_NMPIPE (section 2.2.5.6)](#Section_2.2.5.6) | 0x0026 | Used to execute a transacted exchange against a named pipe. This transaction has a constraint that it can be used only on a duplex, message-type pipe. | C | LANMAN1.0 |
 | [TRANS_RAW_WRITE_NMPIPE (section 2.2.5.7)](#Section_2.2.5.7) | 0x0031 | Allows for a raw write of data to a named pipe. Raw writes to named pipes put bytes directly into a pipe, regardless of whether it is a message mode pipe or [**byte mode**](#gt_byte-mode) pipe. | D | LANMAN1.0 |
-| [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_3.2.5.38.8) | 0x0036 | Allows a client to read data from a named pipe. | C | NT LANMAN |
+| [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_2.2.5.8) | 0x0036 | Allows a client to read data from a named pipe. | C | NT LANMAN |
 | [TRANS_WRITE_NMPIPE (section 2.2.5.9)](#Section_2.2.5.9) | 0x0037 | Allows a client to write data to a named pipe. | C | NT LANMAN |
 | [TRANS_WAIT_NMPIPE (section 2.2.5.10)](#Section_2.2.5.10) | 0x0053 | Allows a client to be notified when the specified named pipe is available to be connected to. | C | LANMAN1.0 |
-| [TRANS_CALL_NMPIPE (section 2.2.5.11)](#Section_3.2.5.38.10) | 0x0054 | Connect to a named pipe, issue a write to the named pipe, issue a read from the named pipe, and close the named pipe. | C | LANMAN1.0 |
+| [TRANS_CALL_NMPIPE (section 2.2.5.11)](#Section_2.2.5.11) | 0x0054 | Connect to a named pipe, issue a write to the named pipe, issue a read from the named pipe, and close the named pipe. | C | LANMAN1.0 |
 
 The meaning of the SMB_COM_TRANSACTION subcommand codes is defined by the resource being accessed. For example, the 0x0001 subcommand code is interpreted as TRANS_MAILSLOT_WRITE if the operation is being performed on a mailslot. The same code is interpreted as a TRANS_SET_NMPIPE_STATE (section 2.2.5.1) if the operation is performed on a named pipe.
 
@@ -2086,7 +2086,7 @@ Transaction Codes used with SMB_COM_TRANSACTION2 (section 2.2.4.46):
 | [TRANS2_FIND_NOTIFY_NEXT (section 2.2.6.13)](#Section_2.2.6.13) | 0x000c | - | X | LANMAN2.0 |
 | [TRANS2_CREATE_DIRECTORY (section 2.2.6.14)](#Section_2.2.6.14) | 0x000d | Create a new directory and optionally set the extended attribute information. | C | LANMAN2.0 |
 | [TRANS2_SESSION_SETUP (section 2.2.6.15)](#Section_2.2.6.15) | 0x000e | - | N | NT LANMAN |
-| [TRANS2_GET_DFS_REFERRAL (section 2.2.6.16)](#Section_2.2.6.16) | 0x0010 | Request a [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) for a file or directory. See [MS-DFSC](../MS-DFSC/MS-DFSC.md) section [2.2.2](../MS-DFSC/MS-DFSC.md) for details. | C | NT LANMAN |
+| [TRANS2_GET_DFS_REFERRAL (section 2.2.6.16)](#Section_2.2.6.16) | 0x0010 | Request a [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) for a file or directory. See [MS-DFSC](../MS-DFSC/MS-DFSC.md) section [2.2.2](#Section_2.2.2) for details. | C | NT LANMAN |
 | [TRANS2_REPORT_DFS_INCONSISTENCY (section 2.2.6.17)](#Section_2.2.6.17) | 0x0011 | - | N | NT LANMAN |
 
 Transaction codes used with [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section_2.2.4.62):
@@ -2095,10 +2095,10 @@ Transaction codes used with [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section_
 | --- | --- | --- | --- | --- |
 | [NT_TRANSACT_CREATE (section 2.2.7.1)](#Section_2.2.7.1) | 0x0001 | Used to create or open a file or directory when extended attributes (EAs) or a [**security descriptor (SD)**](#gt_security-descriptor) are to be applied. | C | NT LANMAN |
 | [NT_TRANSACT_IOCTL (section 2.2.7.2)](#Section_2.2.7.2) | 0x0002 | Allows device and file system control functions to be transferred transparently from client to server. | C | NT LANMAN |
-| [NT_TRANSACT_SET_SECURITY_DESC (section 2.2.7.3)](#Section_5) | 0x0003 | Allows a client to change the security descriptor for a file. | C | NT LANMAN |
+| [NT_TRANSACT_SET_SECURITY_DESC (section 2.2.7.3)](#Section_2.2.7.3) | 0x0003 | Allows a client to change the security descriptor for a file. | C | NT LANMAN |
 | [NT_TRANSACT_NOTIFY_CHANGE (section 2.2.7.4)](#Section_2.2.7.4) | 0x0004 | Notifies the client when the directory specified by **FID** is modified. It also returns the names of any files that changed. | C | NT LANMAN |
 | [NT_TRANSACT_RENAME (section 2.2.7.5)](#Section_2.2.7.5) | 0x0005 | - | N | - |
-| [NT_TRANSACT_QUERY_SECURITY_DESC (section 2.2.7.6)](#Section_5) | 0x0006 | Allows a client to retrieve the security descriptor for a file. | C | NT LANMAN |
+| [NT_TRANSACT_QUERY_SECURITY_DESC (section 2.2.7.6)](#Section_2.2.7.6) | 0x0006 | Allows a client to retrieve the security descriptor for a file. | C | NT LANMAN |
 
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Information Level Codes
@@ -2322,7 +2322,7 @@ UCHAR Data[Length];
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | A two-byte USHORT value indicating the length of the data buffer. The data buffer follows immediately after the length field. | 0x01 | Data Buffer |
-| Variable | 0x02 | Dialect String A null-terminated **OEM_STRING**. This format code is used only in the [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52.1) command to identify SMB dialect strings. |
+| Variable | 0x02 | Dialect String A null-terminated **OEM_STRING**. This format code is used only in the [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52) command to identify SMB dialect strings. |
 | A null-terminated string representing a file system path. In the [**NT LAN Manager**](#gt_nt-lan-manager-ntlm) dialect, the string is of type **SMB_STRING** unless otherwise specified. | 0x03 | Pathname |
 | Variable | 0x04 | SMB String A null-terminated string. In the NT LAN Manager dialect, the string is of type **SMB_STRING** unless otherwise specified. |
 | A two-byte **USHORT** value indicating the length of the variable block. The variable block follows immediately after the length field. | 0x05 | Variable Block |
@@ -2407,7 +2407,7 @@ packet-beta
 | Variable | Reserved 0x04 | This flag MUST be set to zero by the client and MUST be ignored by the server. LANMAN1.0 |
 | Obsolete If this bit is set then all pathnames in the SMB SHOULD be treated as case-insensitive.<26> | SMB_FLAGS_CASE_INSENSITIVE 0x08 | LANMAN1.0 |
 | [**Obsolescent**](#gt_obsolescent) When set in session setup, this bit indicates that all paths sent to the server are already in canonical format. That is, all file and directory names are composed of valid file name characters in all upper-case, and that the path segments are separated by backslash characters ('\'). | SMB_FLAGS_CANONICALIZED_PATHS 0x10 | LANMAN1.0 |
-| Obsolescent This bit has meaning only in the [**deprecated**](#gt_deprecated) [SMB_COM_OPEN (0x02) Request (section 2.2.4.3.1)](#Section_3.3.5.5), [SMB_COM_CREATE (0x03) Request (section 2.2.4.4.1)](#Section_2.2.4.4.1), and [SMB_COM_CREATE_NEW (0x0F) Request (section 2.2.4.16.1)](#Section_2.2.4.16.1) messages, where it is used to indicate that the client is requesting an Exclusive OpLock. It SHOULD be set to zero by the client, and ignored by the server, in all other SMB requests. If the server grants this OpLock request, then this bit SHOULD remain set in the corresponding response SMB to indicate to the client that the OpLock request was granted. | SMB_FLAGS_OPLOCK 0x20 | LANMAN1.0 |
+| Obsolescent This bit has meaning only in the [**deprecated**](#gt_deprecated) [SMB_COM_OPEN (0x02) Request (section 2.2.4.3.1)](#Section_2.2.4.3.1), [SMB_COM_CREATE (0x03) Request (section 2.2.4.4.1)](#Section_2.2.4.4.1), and [SMB_COM_CREATE_NEW (0x0F) Request (section 2.2.4.16.1)](#Section_2.2.4.16.1) messages, where it is used to indicate that the client is requesting an Exclusive OpLock. It SHOULD be set to zero by the client, and ignored by the server, in all other SMB requests. If the server grants this OpLock request, then this bit SHOULD remain set in the corresponding response SMB to indicate to the client that the OpLock request was granted. | SMB_FLAGS_OPLOCK 0x20 | LANMAN1.0 |
 | Obsolescent This bit has meaning only in the deprecated SMB_COM_OPEN (0x02) Request (section 2.2.4.3.1), SMB_COM_CREATE (0x03) Request (section 2.2.4.4.1), and SMB_COM_CREATE_NEW (0x0F) Request (section 2.2.4.16.1) messages, where it is used to indicate that the client is requesting a Batch OpLock. It SHOULD be set to zero by the client, and ignored by the server, in all other SMB requests. If the server grants this OpLock request, then this bit SHOULD remain set in the corresponding response SMB to indicate to the client that the OpLock request was granted. If the SMB_FLAGS_OPLOCK bit is clear (0), then the SMB_FLAGS_OPBATCH bit is ignored. | SMB_FLAGS_OPBATCH 0x40 | LANMAN1.0 |
 | When on, this message is being sent from the server in response to a client request. The **Command** field usually contains the same value in a protocol request from the client to the server as in the matching response from the server to the client. This bit unambiguously distinguishes the message as a server response. | SMB_FLAGS_REPLY 0x80 | LANMAN1.0 |
 
@@ -2428,7 +2428,7 @@ packet-beta
 
 **SecurityFeatures (8 bytes):** This 8-byte field has three possible interpretations.
 
-In the case that security signatures are negotiated (see [SMB_COM_NEGOTIATE (0x72) (section 2.2.4.52)](#Section_2.2.4.52.1), the following format MUST be observed.
+In the case that security signatures are negotiated (see [SMB_COM_NEGOTIATE (0x72) (section 2.2.4.52)](#Section_2.2.4.52), the following format MUST be observed.
 
 SecurityFeatures
 
@@ -5870,7 +5870,7 @@ This command was introduced in the **CorePlus** dialect, but is often listed as 
 
 The write and unlock command has the effect of writing to a range of bytes and then unlocking them. This command is usually associated with an earlier usage of [SMB_COM_LOCK_AND_READ (section 2.2.4.20)](#Section_2.2.4.20) on the same range of bytes. The server's response field **CountOfBytesWritten** indicates the number of bytes actually written.
 
-Aside from the lack of special handling of zero-length writes, this request behaves in an identical fashion to the [SMB_COM_WRITE (section 2.2.4.12)](#Section_2.2.4.12) command followed by a core protocol [SMB_COM_UNLOCK_BYTE_RANGE](#Section_2.2.4.14) command. Support for this SMB command is optional. A server SHOULD set bit 0 in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) **Flags** field of the [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52.1) response to indicate to the client that the command is supported. If the command sends a message of length greater than the **MaxBufferSize** for the **TID** specified, the server MAY abort the connection to the client. If an error occurs on the write, the bytes remain locked.
+Aside from the lack of special handling of zero-length writes, this request behaves in an identical fashion to the [SMB_COM_WRITE (section 2.2.4.12)](#Section_2.2.4.12) command followed by a core protocol [SMB_COM_UNLOCK_BYTE_RANGE](#Section_2.2.4.14) command. Support for this SMB command is optional. A server SHOULD set bit 0 in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) **Flags** field of the [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52) response to indicate to the client that the command is supported. If the command sends a message of length greater than the **MaxBufferSize** for the **TID** specified, the server MAY abort the connection to the client. If an error occurs on the write, the bytes remain locked.
 
 This command supports only 32-bit offsets and is inappropriate for files having 64-bit offsets. The client SHOULD use [SMB_COM_WRITE_ANDX (section 2.2.4.43)](#Section_2.2.4.43) to write to files requiring 64-bit file offsets.
 
@@ -6172,7 +6172,7 @@ packet-beta
 
 The server MUST not return the typical response data when responding to this request. The server MUST respond with one message containing the raw data being read from the file or named pipe. The server relies on the transport layer to provide the client with the length, in bytes, of the received message. This enables the client to request up to 65,535 bytes of data and receive it directly into an arbitrary buffer space. The amount of data requested is expected to be larger than the negotiated buffer size for this session. If the client request is to read more bytes than the file or named pipe contains, the size of the returned server message MUST be the number of bytes actually read from the file or named pipe. When the number of bytes returned to the client in the unformatted raw message is less than the bytes requested, this outcome indicates to the client that the end of file (EOF) has been reached.
 
-Because the server does not return the typical response data, the SMB Protocol cannot guarantee that the client can associate the server response data (message) with the correct corresponding client request. Therefore, the client MUST guarantee that there are and will be no other requests from the client to the server for the duration of the [SMB_COM_READ_RAW (section 2.2.4.22)](#Section_2.2.4.22.2) command's processing.
+Because the server does not return the typical response data, the SMB Protocol cannot guarantee that the client can associate the server response data (message) with the correct corresponding client request. Therefore, the client MUST guarantee that there are and will be no other requests from the client to the server for the duration of the [SMB_COM_READ_RAW (section 2.2.4.22)](#Section_2.2.4.22) command's processing.
 
 Because the server does not provide the typical response data, it cannot provide error information when an error occurs. In the event of an error, the server MUST return zero bytes to the client. The client is then responsible for issuing an alternative file I/O command request that provides the typical server response data. The client SHOULD send [SMB_COM_READ_ANDX (section 2.2.4.42)](#Section_2.2.4.42) to determine the cause of the error. The server MUST then respond with the appropriate status and error information. It is up to the client to take appropriate action to recover from the error. Care needs to be taken when interpreting the server returning 0 bytes to the client, because this condition is also used to indicate that the EOF has been reached.
 
@@ -6790,7 +6790,7 @@ UCHAR Buffer[DataLength];
 
 [SMB_Header](#Section_2.2.3.1)**:**
 
-**SequenceNumber (2 bytes):** This field MUST be zero (0x0000) unless the request is the last request in the multiplexed write sequence, in which case it MUST be a nonzero value. The nonzero value indicates to the server that this is the last request of the sequence and the server MUST respond by sending an [SMB_COM_WRITE_MPX Response (section 3.2.5.19)](#Section_2.2.4.12.2).
+**SequenceNumber (2 bytes):** This field MUST be zero (0x0000) unless the request is the last request in the multiplexed write sequence, in which case it MUST be a nonzero value. The nonzero value indicates to the server that this is the last request of the sequence and the server MUST respond by sending an [SMB_COM_WRITE_MPX Response (section 3.2.5.19)](#Section_3.2.5.19).
 
 ```mermaid
 packet-beta
@@ -7713,7 +7713,7 @@ packet-beta
 
 **SMB_Parameters (variable):**
 
-The SMB_Parameters section of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) request contains the information to manage the transaction along with flags and setup information that provide the context for the execution of the operation on the server.
+The SMB_Parameters section of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) request contains the information to manage the transaction along with flags and setup information that provide the context for the execution of the operation on the server.
 
 ```mermaid
 packet-beta
@@ -8062,7 +8062,7 @@ UCHAR Trans_Data[DataCount];
 
 **SMB_Header:**
 
-This command MUST be sent following a successful [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) Intermediate Response from the server. The **PID**, **MID**, **TID**, and **UID** MUST be the same for all requests and responses that are part of the same transaction.
+This command MUST be sent following a successful [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) Intermediate Response from the server. The **PID**, **MID**, **TID**, and **UID** MUST be the same for all requests and responses that are part of the same transaction.
 
 ```mermaid
 packet-beta
@@ -9447,7 +9447,7 @@ packet-beta
 
 **DataOffset (2 bytes):** The offset in bytes from the header of the read data.
 
-**Reserved2 (10 bytes):** Reserved. All entries MUST be 0x0000. The last 5 words are reserved in order to make the SMB_COM_READ_ANDX Response (section 2.2.4.42.2) the same size as the [SMB_COM_WRITE_ANDX Response (section 2.2.4.43.2)](#Section_2.2.4.12.2).
+**Reserved2 (10 bytes):** Reserved. All entries MUST be 0x0000. The last 5 words are reserved in order to make the SMB_COM_READ_ANDX Response (section 2.2.4.42.2) the same size as the [SMB_COM_WRITE_ANDX Response (section 2.2.4.43.2)](#Section_2.2.4.43.2).
 
 **SMB_Data (variable):**
 
@@ -10868,7 +10868,7 @@ The server's response is dependent upon the dialect, if any, that the server has
 - If the server has selected the **Core Protocol** dialect, or if none of the offered protocols is supported by the server, then **WordCount** MUST be 0x01 and the dialect index (the selected dialect) MUST be returned as the only parameter.
 - If the server has selected any dialect from **LAN Manager 1.0** through **LAN Manager 2.1**, **WordCount** MUST be 0x0D. See [[XOPEN-SMB]](https://go.microsoft.com/fwlink/?linkid=2297696) for a specification of the LAN Manager dialects other than **LAN Manager 2.1**. [[SMB-LM21]](https://go.microsoft.com/fwlink/?LinkId=163216) provides documentation on the extensions to the **LAN Manager 2.0** dialect that define the **LAN Manager 2.1** dialect.
 - If the server has selected the **NT LAN Manager** dialect, then **WordCount** MUST be 0x11.
-Other dialects can return an [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52.1) response using different formats. The value of **WordCount** MUST, therefore, be considered variable until the dialect has been determined. All dialects MUST return the **DialectIndex** as the first entry in the **SMB_Parameters.Words** array. That is, the structure returned by the Core Protocol is the common minimum. That structure is as follows.
+Other dialects can return an [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52) response using different formats. The value of **WordCount** MUST, therefore, be considered variable until the dialect has been determined. All dialects MUST return the **DialectIndex** as the first entry in the **SMB_Parameters.Words** array. That is, the structure returned by the Core Protocol is the common minimum. That structure is as follows.
 
 SMB_Parameters
 
@@ -11043,7 +11043,7 @@ packet-beta
 
 **MaxBufferSize (4 bytes):** The maximum size, in bytes, of the largest SMB message that the server can receive. This is the size of the largest SMB message that the client can send to the server. SMB message size includes the size of the SMB header, parameter, and data blocks. This size does not include any transport-layer framing or other transport-layer data. The server SHOULD<81> provide a **MaxBufferSize** of 4356 bytes, and MUST be a multiple of 4 bytes. If CAP_RAW_MODE is negotiated, the SMB_COM_WRITE_RAW command can bypass the **MaxBufferSize** limit. Otherwise, SMB messages sent to the server MUST have a total size less than or equal to the **MaxBufferSize** value. This includes AndX chained messages.
 
-**MaxRawSize (4 bytes):** This value specifies the maximum message size when the client sends an [SMB_COM_WRITE_RAW Request (section 2.2.4.25.1)](#Section_2.2.4.25.1), and the maximum message size that the server MUST NOT exceed when sending an [SMB_COM_READ_RAW Response (section 2.2.4.22.2)](#Section_2.2.4.12.2). This value is significant only if CAP_RAW_MODE is negotiated.<82>
+**MaxRawSize (4 bytes):** This value specifies the maximum message size when the client sends an [SMB_COM_WRITE_RAW Request (section 2.2.4.25.1)](#Section_2.2.4.25.1), and the maximum message size that the server MUST NOT exceed when sending an [SMB_COM_READ_RAW Response (section 2.2.4.22.2)](#Section_2.2.4.22.2). This value is significant only if CAP_RAW_MODE is negotiated.<82>
 
 **SessionKey (4 bytes):** The server SHOULD set the value to a token generated for the connection, as specified in [SessionKey Generation (section 2.2.1.6.6)](#Section_2.2.1.6.6) .
 
@@ -11063,7 +11063,7 @@ packet-beta
 | The server supports the TRANS2_FIND_FIRST2, TRANS2_FIND_NEXT2, and FIND_CLOSE2 command requests. This bit SHOULD be set if CAP_NT_SMBS is set.<83> | CAP_NT_FIND 0x00000200 | - |
 | Variable | CAP_BULK_TRANSFER 0x00000400 | This value was reserved but not implemented and MUST be zero.<84> |
 | Variable | CAP_COMPRESSED_DATA 0x00000800 | This value was reserved but not implemented and MUST be zero.<85> |
-| Variable | CAP_DFS 0x00001000 | The server is aware of the DFS Referral Protocol, as specified in [MS-DFSC](../MS-DFSC/MS-DFSC.md), and can respond to Microsoft DFS referral requests. For more information, see sections [2.2.6.16.1](#Section_3.3.5.58.11) and [2.2.6.16.2](#Section_2.2.4.12.2). |
+| Variable | CAP_DFS 0x00001000 | The server is aware of the DFS Referral Protocol, as specified in [MS-DFSC](../MS-DFSC/MS-DFSC.md), and can respond to Microsoft DFS referral requests. For more information, see sections [2.2.6.16.1](#Section_2.2.6.16.1) and [2.2.6.16.2](#Section_2.2.6.16.2). |
 | Variable | CAP_QUADWORD_ALIGNED 0x00002000 | This value was reserved but not implemented and MUST be zero.<86> |
 | Variable | CAP_LARGE_READX 0x00004000 | The server supports large read operations.This capability affects the maximum size, in bytes, of the server buffer for sending an SMB_COM_READ_ANDX response to the client. When this capability is set by the server (and set by the client in the SMB_COM_SESSION_SETUP_ANDX request), the maximum server buffer size for sending data can be up to 65,535 bytes rather than the MaxBufferSize field. Therefore, the server can send a single SMB_COM_READ_ANDX response to the client up to this size. |
 
@@ -11112,11 +11112,11 @@ In [**CIFS**](#gt_common-internet-file-system-cifs), it is a protocol violation 
 
 Multiple SMB_COM_SESSION_SETUP_ANDX commands are permitted within an [**SMB connection**](#gt_smb-connection), either to establish additional UIDs or to create additional virtual circuits.
 
-The following are the commands that can follow an SMB_COM_SESSION_SETUP_ANDX with an SMB_COM_TREE_CONNECT_ANDX (section [2.2.4.55](#Section_2.2.4.55.2)) in an AndX chain:
+The following are the commands that can follow an SMB_COM_SESSION_SETUP_ANDX with an SMB_COM_TREE_CONNECT_ANDX (section [2.2.4.55](#Section_2.2.4.55)) in an AndX chain:
 
 - [SMB_COM_OPEN (section 2.2.4.3)](#Section_2.2.4.3)
 - [SMB_COM_OPEN_ANDX (section 2.2.4.41)](#Section_2.2.4.41)
-- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.15)
+- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.4)
 - [SMB_COM_CREATE_NEW (section 2.2.4.16)](#Section_2.2.4.16)
 - [SMB_COM_CREATE_DIRECTORY (section 2.2.4.1)](#Section_2.2.4.1)
 - [SMB_COM_DELETE (section 2.2.4.7)](#Section_2.2.4.7)
@@ -11124,12 +11124,12 @@ The following are the commands that can follow an SMB_COM_SESSION_SETUP_ANDX wit
 - [SMB_COM_FIND (section 2.2.4.59)](#Section_2.2.4.59)
 - [SMB_COM_FIND_UNIQUE (section 2.2.4.60)](#Section_2.2.4.60)
 - [SMB_COM_RENAME (section 2.2.4.8)](#Section_2.2.4.8)
-- [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_3.3.5.53)
+- [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_2.2.4.66)
 - [SMB_COM_CHECK_DIRECTORY (section 2.2.4.17)](#Section_2.2.4.17)
-- [SMB_COM_QUERY_INFORMATION (section 2.2.4.9)](#Section_3.2.5.20)
+- [SMB_COM_QUERY_INFORMATION (section 2.2.4.9)](#Section_2.2.4.9)
 - [SMB_COM_SET_INFORMATION (section 2.2.4.10)](#Section_2.2.4.10)
 - [SMB_COM_OPEN_PRINT_FILE (section 2.2.4.67)](#Section_2.2.4.67)
-- [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31)
+- [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33)
 <a id="Section_2.2.4.53.1"></a>
 ##### 2.2.4.53.1 Request
 
@@ -11627,7 +11627,7 @@ The following are the commands that can follow an SMB_COM_TREE_CONNECT_ANDX in a
 
 - [SMB_COM_OPEN (section 2.2.4.3)](#Section_2.2.4.3)
 - [SMB_COM_OPEN_ANDX (section 2.2.4.41)](#Section_2.2.4.41)
-- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.15)
+- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.4)
 - [SMB_COM_CREATE_NEW (section 2.2.4.16)](#Section_2.2.4.16)
 - [SMB_COM_CREATE_DIRECTORY (section 2.2.4.1)](#Section_2.2.4.1)
 - [SMB_COM_DELETE (section 2.2.4.7)](#Section_2.2.4.7)
@@ -11636,12 +11636,12 @@ The following are the commands that can follow an SMB_COM_TREE_CONNECT_ANDX in a
 - [SMB_COM_FIND (section 2.2.4.59)](#Section_2.2.4.59)
 - [SMB_COM_FIND_UNIQUE (section 2.2.4.60)](#Section_2.2.4.60)
 - [SMB_COM_RENAME (section 2.2.4.8)](#Section_2.2.4.8)
-- [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_3.3.5.53)
+- [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_2.2.4.66)
 - [SMB_COM_CHECK_DIRECTORY (section 2.2.4.17)](#Section_2.2.4.17)
-- [SMB_COM_QUERY_INFORMATION (section 2.2.4.9)](#Section_3.2.5.20)
+- [SMB_COM_QUERY_INFORMATION (section 2.2.4.9)](#Section_2.2.4.9)
 - [SMB_COM_SET_INFORMATION (section 2.2.4.10)](#Section_2.2.4.10)
 - [SMB_COM_OPEN_PRINT_FILE (section 2.2.4.67)](#Section_2.2.4.67)
-- [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31)
+- [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33)
 <a id="Section_2.2.4.55.1"></a>
 ##### 2.2.4.55.1 Request
 
@@ -11695,7 +11695,7 @@ OEM_STRING Service;
 
 **TID (2 bytes):** This field MAY contain a valid TID. If the **SMB_Header.TID** is valid and the lowest-order bit of the **SMB_Parameters.Words.Flags** field is set, the **SMB_Header.TID** MUST be disconnected.
 
-**UID (2 bytes):** This field MUST contain a UID returned in a previously successful [SMB_COM_SESSION_SETUP_ANDX Response (section 2.2.4.53.2)](#Section_2.2.4.12.2). If the server is operating in share level access control mode, then the UID represents anonymous, or "null session" authentication. If the server is operating in user level access control mode, then the server MUST validate the UID.
+**UID (2 bytes):** This field MUST contain a UID returned in a previously successful [SMB_COM_SESSION_SETUP_ANDX Response (section 2.2.4.53.2)](#Section_2.2.4.53.2). If the server is operating in share level access control mode, then the UID represents anonymous, or "null session" authentication. If the server is operating in user level access control mode, then the server MUST validate the UID.
 
 ```mermaid
 packet-beta
@@ -13849,7 +13849,7 @@ packet-beta
 
 **ImpersonationLevel (4 bytes):** This field specifies the impersonation level requested by the application that is issuing the create request, and MUST contain one of the following values.
 
-Impersonation is described in [MS-WPO](#Section_1.3) section 8.5.1; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
+Impersonation is described in [MS-WPO](../MS-WPO/MS-WPO.md) section 8.5.1; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
 
 | Name and value | Meaning |
 | --- | --- |
@@ -14792,7 +14792,7 @@ Transaction subcommands are used to communicate with [**mailslots**](#gt_mailslo
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect.<131>
 
-The TRANS_SET_NMPIPE_STATE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows a client to set the read mode and the [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe) of a specified named pipe.
+The TRANS_SET_NMPIPE_STATE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows a client to set the read mode and the [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe) of a specified named pipe.
 
 This section covers the specific details of the TRANS_SET_NMPIPE_STATE subcommand ONLY. Request and response fields with values specific to this transaction are covered in this section. For general information see SMB_COM_TRANSACTION.
 
@@ -14900,7 +14900,7 @@ The SMB_Parameters section contains the relevant fields for the TRANS_QUERY_NMPI
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect. This subcommand is [**deprecated**](#gt_deprecated) in favor of TRANS_READ_NMPIPE.
 
-The TRANS_RAW_READ_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows for a raw read of data from a name pipe. This method of reading data from a named pipe ignores message boundaries even if the pipe was set up as a [**message mode**](#gt_message-mode) pipe. When the named pipe is not set to [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe), and there is no data in the named pipe, the read operation on the server MUST wait indefinitely for data to become available. This section covers the specific details of using the TRANS_RAW_READ_NMPIPE subcommand. For general information see SMB_COM_TRANSACTION.<132>
+The TRANS_RAW_READ_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows for a raw read of data from a name pipe. This method of reading data from a named pipe ignores message boundaries even if the pipe was set up as a [**message mode**](#gt_message-mode) pipe. When the named pipe is not set to [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe), and there is no data in the named pipe, the read operation on the server MUST wait indefinitely for data to become available. This section covers the specific details of using the TRANS_RAW_READ_NMPIPE subcommand. For general information see SMB_COM_TRANSACTION.<132>
 
 <a id="Section_2.2.5.2.1"></a>
 ##### 2.2.5.2.1 Request
@@ -14952,7 +14952,7 @@ UCHAR BytesRead[TotalDataCount] (variable);
 
 }
 
-**SMB_Parameters:** The SMB_Parameters section contains the relevant fields for the [TRANS_RAW_READ_NMPIPE (section 2.2.5.2)](#Section_2.2.5.2) subcommand of the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).
+**SMB_Parameters:** The SMB_Parameters section contains the relevant fields for the [TRANS_RAW_READ_NMPIPE (section 2.2.5.2)](#Section_2.2.5.2) subcommand of the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).
 
 **WordCount (1 byte):** The count of 16-bit words in the response structure. For this response, this MUST be 0x0A, which is 0x0A plus the **SetupCount** of 0x00.
 
@@ -15003,7 +15003,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect.<133>
 
-The TRANS_QUERY_NMPIPE_STATE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows a client to retrieve information about a specified named pipe. This section covers the specific details of using the TRANS_QUERY_NMPIPE_STATE subcommand. For general information see SMB_COM_TRANSACTION.
+The TRANS_QUERY_NMPIPE_STATE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows a client to retrieve information about a specified named pipe. This section covers the specific details of using the TRANS_QUERY_NMPIPE_STATE subcommand. For general information see SMB_COM_TRANSACTION.
 
 <a id="Section_2.2.5.3.1"></a>
 ##### 2.2.5.3.1 Request
@@ -15100,7 +15100,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect.<134>
 
-The TRANS_QUERY_NMPIPE_INFO subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows for a client to retrieve information about a specified named pipe.
+The TRANS_QUERY_NMPIPE_INFO subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows for a client to retrieve information about a specified named pipe.
 
 <a id="Section_2.2.5.4.1"></a>
 ##### 2.2.5.4.1 Request
@@ -15247,7 +15247,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect.<135>
 
-The TRANS_PEEK_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) is used to copy data out of a named pipe without removing it and to retrieve information about data in a named pipe. This section covers the specific details of using the TRANS_PEEK_NMPIPE subcommand. For general information see SMB_COM_TRANSACTION.<136>
+The TRANS_PEEK_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) is used to copy data out of a named pipe without removing it and to retrieve information about data in a named pipe. This section covers the specific details of using the TRANS_PEEK_NMPIPE subcommand. For general information see SMB_COM_TRANSACTION.<136>
 
 <a id="Section_2.2.5.5.1"></a>
 ##### 2.2.5.5.1 Request
@@ -15378,7 +15378,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect.<137>
 
-The TRANS_TRANSACT_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) is used to execute a transacted exchange against a named pipe. This transaction MUST only be used for named pipes of the duplex message type. This section covers the specific details of using the TRANS_TRANSACT_NMPIPE subcommand. For general information see SMB_COM_TRANSACTION.
+The TRANS_TRANSACT_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) is used to execute a transacted exchange against a named pipe. This transaction MUST only be used for named pipes of the duplex message type. This section covers the specific details of using the TRANS_TRANSACT_NMPIPE subcommand. For general information see SMB_COM_TRANSACTION.
 
 <a id="Section_2.2.5.6.1"></a>
 ##### 2.2.5.6.1 Request
@@ -15450,7 +15450,7 @@ UCHAR ReadData[TotalDataCount];
 
 }
 
-**SMB_Parameters:** The SMB_Parameters section contains the relevant fields for the [TRANS_TRANSACT_NMPIPE (section 2.2.5.6)](#Section_2.2.5.6) subcommand of the [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) response.
+**SMB_Parameters:** The SMB_Parameters section contains the relevant fields for the [TRANS_TRANSACT_NMPIPE (section 2.2.5.6)](#Section_2.2.5.6) subcommand of the [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) response.
 
 **WordCount (1 byte):** This field MUST be set to 0x0A.
 
@@ -15497,7 +15497,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect. This subcommand is [**deprecated**](#gt_deprecated). Clients can use either TRANS_WRITE_NMPIPE or TRANS_TRANSACT_NMPIPE.
 
-The TRANS_RAW_WRITE_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows for a raw write of data to a named pipe. Raw writes to named pipes put bytes directly into a pipe in [**byte mode**](#gt_byte-mode), regardless of whether it is a [**message mode**](#gt_message-mode) pipe or byte mode pipe.
+The TRANS_RAW_WRITE_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows for a raw write of data to a named pipe. Raw writes to named pipes put bytes directly into a pipe in [**byte mode**](#gt_byte-mode), regardless of whether it is a [**message mode**](#gt_message-mode) pipe or byte mode pipe.
 
 This method of writing data into a named pipe assumes that the data itself contains the message boundaries if the pipe is a message mode pipe. The operation can allow a single write to insert multiple messages.
 
@@ -15615,7 +15615,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the [**NT LAN Manager**](#gt_nt-lan-manager-ntlm) dialect.
 
-The TRANS_READ_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows a client to read data from a named pipe. This section covers the specific details of using the TRANS_READ_NMPIPE subcommand. For general information, see SMB_COM_TRANSACTION.
+The TRANS_READ_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows a client to read data from a named pipe. This section covers the specific details of using the TRANS_READ_NMPIPE subcommand. For general information, see SMB_COM_TRANSACTION.
 
 <a id="Section_2.2.5.8.1"></a>
 ##### 2.2.5.8.1 Request
@@ -15826,7 +15826,7 @@ packet-beta
 
 This Transaction subcommand was introduced in the **LAN Manager 1.0** dialect.<140>
 
-The TRANS_WAIT_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_3.3.5.31) allows a client to be notified when the specified named pipe is available to be connected to. This section covers the specific details of using the TRANS_WAIT_NMPIPE subcommand. For general information, see SMB_COM_TRANSACTION.
+The TRANS_WAIT_NMPIPE subcommand of the [SMB_COM_TRANSACTION](#Section_2.2.4.33) allows a client to be notified when the specified named pipe is available to be connected to. This section covers the specific details of using the TRANS_WAIT_NMPIPE subcommand. For general information, see SMB_COM_TRANSACTION.
 
 <a id="Section_2.2.5.10.1"></a>
 ##### 2.2.5.10.1 Request
@@ -15970,7 +15970,7 @@ UCHAR ReadData[TotalDataCount];
 
 **SMB_Parameters:**
 
-The SMB_Parameters section contains the relevant fields for the [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_3.2.5.38.8) subcommand of the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).
+The SMB_Parameters section contains the relevant fields for the [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_2.2.5.8) subcommand of the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).
 
 **WordCount (1 byte):** This field MUST be set to 0x0A.
 
@@ -16417,7 +16417,7 @@ The **Trans2_Data** block carries the structure of the **information level** spe
 | ERRDOS (0x01) | ERRnoaccess (0x0005) | STATUS_ACCESS_DENIED (0xC0000022) | EPERM | Access denied. |
 | ERRDOS (0x01) | ERRbadaccess (0x000C) | STATUS_ACCESS_DENIED (0xC0000022) | - | Invalid open mode. |
 | ERRDOS (0x01) | ERRbadshare (0x0020) | STATUS_SHARING_VIOLATION (0xC0000043) | ETXTBSY | Sharing violation. |
-| ERRDOS (0x01) | ERRgeneral (0x001F) | STATUS_UNSUCCESSFUL (0xC0000001) | - | The size of the extended attribute list is not correct. Check the EaErrorOffset field for address of the [SMB_GEA](#Section_2.2.1.2.1.1) structure at which the error was detected. |
+| ERRDOS (0x01) | ERRgeneral (0x001F) | STATUS_UNSUCCESSFUL (0xC0000001) | - | The size of the extended attribute list is not correct. Check the EaErrorOffset field for address of the [SMB_GEA](#Section_2.2.1.2.1) structure at which the error was detected. |
 | ERRDOS (0x01) | ERRinvalidparam (0x0057) | STATUS_INVALID_PARAMETER (0xC000000D) | - | One of the extended attributes had an invalid Flag bit value. |
 | ERRDOS (0x01) | ERRunknownlevel (0x007C) | STATUS_OS2_INVALID_LEVEL (0x007C0001) | - | The InformationLevel supplied is invalid. |
 | ERRDOS (0x01) | ERRbadealist (0x00FF) | STATUS_OS2_EA_LIST_INCONSISTENT (0x00FF0001) STATUS_EA_LIST_INCONSISTENT (0x80000014) | - | Inconsistent extended attribute list. |
@@ -16557,7 +16557,7 @@ packet-beta
 
 **EndOfSearch (2 bytes):** This field MUST be zero (0x0000) if the search can be continued using the [TRANS2_FIND_NEXT2 (section 2.2.6.3)](#Section_2.2.6.3) transaction. This field MUST be nonzero if this response is the last and the find has reached the end of the search results.
 
-**EaErrorOffset (2 bytes):** If the **Request.Trans2_Parameters.InformationLevel** field is not SMB_INFO_QUERY_EAS_FROM_LIST, this field MUST be zero (0x0000). If the **InformationLevel** field is SMB_INFO_QUERY_EAS_FROM_LIST, this field marks the offset to an extended attribute name, the retrieval of which caused an error. This field MUST contain the offset in bytes to the [SMB_GEA (section 2.2.1.2.1)](#Section_2.2.1.2.1.1) entry in the **Trans2_Data.GetExtendedAttributesList** field that identifies the extended attribute that caused the error, or zero (0x0000) if no error was encountered.
+**EaErrorOffset (2 bytes):** If the **Request.Trans2_Parameters.InformationLevel** field is not SMB_INFO_QUERY_EAS_FROM_LIST, this field MUST be zero (0x0000). If the **InformationLevel** field is SMB_INFO_QUERY_EAS_FROM_LIST, this field marks the offset to an extended attribute name, the retrieval of which caused an error. This field MUST contain the offset in bytes to the [SMB_GEA (section 2.2.1.2.1)](#Section_2.2.1.2.1) entry in the **Trans2_Data.GetExtendedAttributesList** field that identifies the extended attribute that caused the error, or zero (0x0000) if no error was encountered.
 
 **LastNameOffset (2 bytes):** If the server cannot resume the search, this field MUST be zero (0x0000). If the server can resume the search, this field contains the offset in bytes into the **Trans2_Data** structure at which the file name of the last entry returned by the server is located. This value can be used in the **Trans2_Parameters** structure of the request to continue a search.
 
@@ -16736,7 +16736,7 @@ The **Trans2_Data** block carries the structure of the information level specifi
 | ERRDOS (0x01) | ERRnoaccess (0x0005) | STATUS_ACCESS_DENIED (0xC0000022) | EPERM | Access denied. |
 | ERRDOS (0x01) | ERRnomem (0x0008) | STATUS_INSUFF_SERVER_RESOURCES (0xC0000205) | ENOMEM | The server is out of resources. |
 | ERRDOS (0x01) | ERRbadlength (0x0018) | STATUS_INFO_LENGTH_MISMATCH (0xC0000004) | - | The client's **MaxDataCount** is too small to accommodate the results. |
-| ERRDOS (0x01) | ERRgeneral (0x001F) | STATUS_UNSUCCESSFUL (0xC0000001) | - | The size of the extended attribute list is not correct. Check the **EaErrorOffset** field for the address of [SMB_GEA](#Section_2.2.1.2.1.1) structure at which the error was detected. |
+| ERRDOS (0x01) | ERRgeneral (0x001F) | STATUS_UNSUCCESSFUL (0xC0000001) | - | The size of the extended attribute list is not correct. Check the **EaErrorOffset** field for the address of [SMB_GEA](#Section_2.2.1.2.1) structure at which the error was detected. |
 | ERRDOS (0x01) | ERRunknownlevel (0x007C) | STATUS_OS2_INVALID_LEVEL (0x007C0001) | - | The **InformationLevel** supplied is invalid. |
 | ERRDOS (0x01) | ERRbadealist (0x00FF) | STATUS_OS2_EA_LIST_INCONSISTENT (0x00FF0001) STATUS_EA_LIST_INCONSISTENT (0x80000014) | - | Inconsistent extended attribute list. |
 | ERRSRV (0x02) | ERRerror (0x0001) | STATUS_INVALID_SMB (0x00010002) | - | Invalid SMB. Not enough parameter bytes were sent. |
@@ -16913,7 +16913,7 @@ USHORT EaErrorOffset;
 
 }
 
-**EaErrorOffset (2 bytes):** If **Request.Trans2_Parameters.InformationLevel** is not SMB_INFO_QUERY_EAS_FROM_LIST, this field MUST be zero (0x0000). If **InformationLevel** is SMB_INFO_QUERY_EAS_FROM_LIST, this field marks the offset to an extended attribute, the retrieval of which caused an error. This field MUST contain the offset, in bytes, to the [SMB_GEA (section 2.2.1.2.1)](#Section_2.2.1.2.1.1) entry in **Trans2_Data.ExtendedAttributesList** that caused the error, or zero (0x0000) if no error was encountered.
+**EaErrorOffset (2 bytes):** If **Request.Trans2_Parameters.InformationLevel** is not SMB_INFO_QUERY_EAS_FROM_LIST, this field MUST be zero (0x0000). If **InformationLevel** is SMB_INFO_QUERY_EAS_FROM_LIST, this field marks the offset to an extended attribute, the retrieval of which caused an error. This field MUST contain the offset, in bytes, to the [SMB_GEA (section 2.2.1.2.1)](#Section_2.2.1.2.1) entry in **Trans2_Data.ExtendedAttributesList** that caused the error, or zero (0x0000) if no error was encountered.
 
 **Trans2_Data:**
 
@@ -17390,7 +17390,7 @@ packet-beta
 | Indicates the right to change the [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl) in the security descriptor of the file. | WRITE_DAC 0x00040000 | - |
 | Variable | WRITE_OWNER 0x00080000 | Indicates the right to change the owner in the security descriptor of the file. |
 | Variable | SYNCHRONIZE 0x00100000 | SHOULD NOT be used by the sender and MUST be ignored by the receiver. |
-| Indicates the right to read or change the [**system access control list (SACL)**](#gt_system-access-control-list-sacl) in the security descriptor for the file. If the SE_SECURITY_NAME privilege ([MS-LSAD](#Section_5) section 3.1.1.2.1) is not set in the access token, the server MUST fail the open request and return STATUS_PRIVILEGE_NOT_HELD. | ACCESS_SYSTEM_SECURITY 0x01000000 | - |
+| Indicates the right to read or change the [**system access control list (SACL)**](#gt_system-access-control-list-sacl) in the security descriptor for the file. If the SE_SECURITY_NAME privilege ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1) is not set in the access token, the server MUST fail the open request and return STATUS_PRIVILEGE_NOT_HELD. | ACCESS_SYSTEM_SECURITY 0x01000000 | - |
 | Variable | MAXIMUM_ALLOWED 0x02000000 | Indicates that the client requests an open to the file with the highest level of access that the client has on this file. If no access is granted for the client on this file, the server MUST fail the open and return a STATUS_ACCESS_DENIED. |
 | Variable | GENERIC_ALL 0x10000000 | Indicates a request for all of the access flags that are previously listed, except MAXIMUM_ALLOWED and ACCESS_SYSTEM_SECURITY. |
 | Variable | GENERIC_EXECUTE 0x20000000 | Indicates a request for the following combination of access flags listed previously in this table: FILE_READ_ATTRIBUTES, FILE_EXECUTE, SYNCHRONIZE, and READ_CONTROL. |
@@ -17453,7 +17453,7 @@ packet-beta
 
 **ImpersonationLevel (4 bytes):** ULONG This field specifies the impersonation level requested by the application that is issuing the create request, and MUST contain one of the following values.
 
-Impersonation is described in [MS-WPO](#Section_1.3) section 8.5.1; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
+Impersonation is described in [MS-WPO](../MS-WPO/MS-WPO.md) section 8.5.1; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
 
 | Name and value | Meaning |
 | --- | --- |
@@ -18076,7 +18076,7 @@ The client does not provide any data in the request.
 <a id="Section_2.2.7.6.2"></a>
 ##### 2.2.7.6.2 Response
 
-The [NT_TRANSACT_QUERY_SECURITY_DESC (section 2.2.7.6)](#Section_5) response format is a special case of [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section_2.2.4.62) [**SMB**](#gt_server-message-block-smb). Only the NT_TRANSACT_QUERY_SECURITY_DESC response format specifics are described here.
+The [NT_TRANSACT_QUERY_SECURITY_DESC (section 2.2.7.6)](#Section_2.2.7.6) response format is a special case of [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section_2.2.4.62) [**SMB**](#gt_server-message-block-smb). Only the NT_TRANSACT_QUERY_SECURITY_DESC response format specifics are described here.
 
 NT_Trans_Parameters
 
@@ -18591,7 +18591,7 @@ UCHAR FileName[];
 <a id="Section_2.2.8.2.1"></a>
 ##### 2.2.8.2.1 SMB_INFO_ALLOCATION
 
-This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.4.12.2) to return allocation and size information of the object store underlying the share specified in the request.
+This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.6.4.2) to return allocation and size information of the object store underlying the share specified in the request.
 
 SMB_INFO_ALLOCATION
 
@@ -18622,7 +18622,7 @@ USHORT cbSector;
 <a id="Section_2.2.8.2.2"></a>
 ##### 2.2.8.2.2 SMB_INFO_VOLUME
 
-This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.4.12.2) to return volume information of the object store underlying the share specified in the request.
+This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.6.4.2) to return volume information of the object store underlying the share specified in the request.
 
 SMB_INFO_VOLUME
 
@@ -18645,7 +18645,7 @@ SMB_STRING VolumeLabel;
 <a id="Section_2.2.8.2.3"></a>
 ##### 2.2.8.2.3 SMB_QUERY_FS_VOLUME_INFO
 
-This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.4.12.2) to return extended volume information of the object store underlying the share specified in the request.<171>
+This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.6.4.2) to return extended volume information of the object store underlying the share specified in the request.<171>
 
 SMB_QUERY_FS_VOLUME_INFO
 
@@ -18674,7 +18674,7 @@ WCHAR VolumeLabel[VolumeLabelSize/2];
 <a id="Section_2.2.8.2.4"></a>
 ##### 2.2.8.2.4 SMB_QUERY_FS_SIZE_INFO
 
-This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.4.12.2) to return extended allocation and size information of the object store underlying the share specified in the request.<172>
+This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.6.4.2) to return extended allocation and size information of the object store underlying the share specified in the request.<172>
 
 SMB_QUERY_FS_SIZE_INFO
 
@@ -18701,7 +18701,7 @@ ULONG BytesPerSector;
 <a id="Section_2.2.8.2.5"></a>
 ##### 2.2.8.2.5 SMB_QUERY_FS_DEVICE_INFO
 
-This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.4.12.2) to return device information of the object store underlying the share specified in the request.<173>
+This information level structure is used in [TRANS2_QUERY_FS_INFORMATION Responses (section 2.2.6.4.2)](#Section_2.2.6.4.2) to return device information of the object store underlying the share specified in the request.<173>
 
 SMB_QUERY_FS_DEVICE_INFO
 
@@ -18852,7 +18852,7 @@ SMB_FILE_ATTRIBUTES Attributes;
 <a id="Section_2.2.8.3.2"></a>
 ##### 2.2.8.3.2 SMB_INFO_QUERY_EA_SIZE
 
-This information level structure is used in [TRANS2_QUERY_PATH_INFORMATION (section 2.2.6.6)](#Section_2.2.6.6) and [TRANS2_QUERY_FILE_INFORMATION (section 2.2.6.8)](#Section_2.2.6.8) responses to return the [SMB_INFO_STANDARD (section 2.2.8.3.1)](#Section_2.2.8.1.1) data along with the size of a file's extended attributes (EAs) list for the file specified in the request.
+This information level structure is used in [TRANS2_QUERY_PATH_INFORMATION (section 2.2.6.6)](#Section_2.2.6.6) and [TRANS2_QUERY_FILE_INFORMATION (section 2.2.6.8)](#Section_2.2.6.8) responses to return the [SMB_INFO_STANDARD (section 2.2.8.3.1)](#Section_2.2.8.3.1) data along with the size of a file's extended attributes (EAs) list for the file specified in the request.
 
 SMB_INFO_QUERY_EA_SIZE
 
@@ -19416,7 +19416,7 @@ The resulting 8-byte signature MUST be copied into the **SecuritySignature** fie
 An [**SMB connection**](#gt_smb-connection), a Protocol Negotiation, and an [**SMB session**](#gt_smb-session) MUST be established before a message can be sent. That is:
 
 - An SMB connection MUST be established before any messages can be sent.
-- Following SMB connection establishment, an [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52.1) command MUST be used to establish the [**SMB**](#gt_server-message-block-smb) dialect to be used before any other SMB command can be sent. Once a dialect has been negotiated, further SMB_COM_NEGOTIATE commands MUST NOT be executed on the connection. Any subsequent [SMB_COM_NEGOTIATE Request (section 2.2.4.52.1)](#Section_2.2.4.52.1) sent to the server on the same connection MUST be failed with an error code of STATUS_INVALID_SMB (ERRSRV/ERRerror).
+- Following SMB connection establishment, an [SMB_COM_NEGOTIATE (section 2.2.4.52)](#Section_2.2.4.52) command MUST be used to establish the [**SMB**](#gt_server-message-block-smb) dialect to be used before any other SMB command can be sent. Once a dialect has been negotiated, further SMB_COM_NEGOTIATE commands MUST NOT be executed on the connection. Any subsequent [SMB_COM_NEGOTIATE Request (section 2.2.4.52.1)](#Section_2.2.4.52.1) sent to the server on the same connection MUST be failed with an error code of STATUS_INVALID_SMB (ERRSRV/ERRerror).
 - Unless otherwise noted, following a successful Protocol Negotiation an [SMB_COM_SESSION_SETUP_ANDX (section 2.2.4.53)](#Section_2.2.4.53) command MUST be used to establish an SMB session before any other SMB commands are sent. Multiple SMB sessions can be set up per SMB connection.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -19499,7 +19499,7 @@ The following ADM elements are globally maintained for an individual client:
 
 **Client.SupportDialects:** A list of client-supported dialect identifiers in order of preference from least to most preferred.
 
-**Client.ConnectionTable:** A list of SMB [**connections**](#gt_connection) to servers, as defined in section [3.2.1.2](#Section_3.3.6.2). The list MUST allow lookups based on **Client.Connection.ServerName**.
+**Client.ConnectionTable:** A list of SMB [**connections**](#gt_connection) to servers, as defined in section [3.2.1.2](#Section_3.2.1.2). The list MUST allow lookups based on **Client.Connection.ServerName**.
 
 **Client.LMAuthenticationPolicy:** A state that determines the LAN Manager challenge/response authentication mechanism to be used. The following options are available:
 
@@ -19569,7 +19569,7 @@ If the server does not support challenge/response authentication, the client MUS
 
 The maximum number of entries in the **Client.Connection.PIDMIDList** is limited to the **Client.Connection.MaxMpxCount** value. More than **Client.Connection.MaxMpxCount** commands MUST NOT be outstanding at any given time.
 
-**Client.Connection.SearchOpenTable:** A list of **SearchOpen**s, as specified in section [3.2.1.6](#Section_3.3.2.3), representing currently open file searches on the server associated with the SMB connection.
+**Client.Connection.SearchOpenTable:** A list of **SearchOpen**s, as specified in section [3.2.1.6](#Section_3.2.1.6), representing currently open file searches on the server associated with the SMB connection.
 
 **Client.Connection.SelectedDialect:** A variable that stores the SMB Protocol dialect selected for use on this connection. Details of dialects prior to [**NT LAN Manager (NTLM)**](#gt_nt-lan-manager-ntlm) ("NT LM 0.12") are described in other documents. See the table in section [1.7](#Section_1.7) for a list of dialects and implementation references.
 
@@ -19627,7 +19627,7 @@ If SMB signing is activated on the connection (**Client.Connection.IsSigningActi
 
 **Client.TreeConnect.ShareName**: The share name corresponding to this tree connect.
 
-**Client.TreeConnect.TreeID**: The TreeID (**TID**) that identifies this tree connect as returned by the server in the header of the [SMB_COM_TREE_CONNECT Response (section 2.2.4.50.2)](#Section_2.2.4.12.2) or the [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.12.2).
+**Client.TreeConnect.TreeID**: The TreeID (**TID**) that identifies this tree connect as returned by the server in the header of the [SMB_COM_TREE_CONNECT Response (section 2.2.4.50.2)](#Section_2.2.4.50.2) or the [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.55.2).
 
 **Client.TreeConnect.Session**: A reference to the session on which this tree connect was established.
 
@@ -19719,7 +19719,7 @@ When a new tree connect is established, the following values MUST be initialized
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Sending Any Message
 
-Messages sent by the client MUST conform to the rules specified in section [3.1.4.1](#Section_3.2.4.1), with the following additional requirements:
+Messages sent by the client MUST conform to the rules specified in section [3.1.4.1](#Section_3.1.4.1), with the following additional requirements:
 
 - The **SMB_Header.Status** field MUST be set to zero (0x00000000).
 - The SMB_FLAGS_REPLY bit in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) MUST be clear.
@@ -19761,7 +19761,7 @@ The client keeps track of which optional processing features (Unicode, DFS, and 
 <a id="Section_3.2.4.1.3"></a>
 ##### 3.2.4.1.3 Message Signing
 
-If signing is active for the connection on which a message is sent, the message MUST be signed, as specified in section [3.1.4.1](#Section_3.2.4.1), by providing the sequence number that is stored in **Client.Connection.ClientNextSendSequenceNumber**. The client MUST maintain the appropriate sequence number for a response. It does so by inserting the number into the **Client.Connection.ClientResponseSequenceNumber** table with the **PID**/**MID** pair that identifies the request/response pair. (**PID** and **MID** are specified in section [2.2.3.1](#Section_2.2.3.1). **PID** is the result of combining the **PIDLow** and **PIDHigh** fields of the SMB Header (section 2.2.3.1).)
+If signing is active for the connection on which a message is sent, the message MUST be signed, as specified in section [3.1.4.1](#Section_3.1.4.1), by providing the sequence number that is stored in **Client.Connection.ClientNextSendSequenceNumber**. The client MUST maintain the appropriate sequence number for a response. It does so by inserting the number into the **Client.Connection.ClientResponseSequenceNumber** table with the **PID**/**MID** pair that identifies the request/response pair. (**PID** and **MID** are specified in section [2.2.3.1](#Section_2.2.3.1). **PID** is the result of combining the **PIDLow** and **PIDHigh** fields of the SMB Header (section 2.2.3.1).)
 
 After signing the message with **Client.Connection.ClientNextSendSequenceNumber**, the following steps MUST be taken:
 
@@ -19811,7 +19811,7 @@ If signing is active for the connection on which a message is sent, the AndX mes
 
 The Transaction SMB Commands are generic operations. They provide transport for extended sets of subcommands which, in turn, allow the CIFS client to access advanced features on the server. CIFS supports three different transaction messages, which differ only slightly in their construction:
 
-- [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31)
+- [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33)
 - [SMB_COM_TRANSACTION2 (section 2.2.4.46)](#Section_2.2.4.46)
 - [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section_2.2.4.62)
 Transactions messages MAY exceed the maximum size of a single SMB message (as determined by the value of the **Client.Connection.ServerMaxBufferSize** parameter). Transaction messages that do not fit within a single SMB message MUST be split across multiple transaction SMBs. Each SMB transaction request has an associated secondary request message for this purpose:
@@ -19868,9 +19868,9 @@ All messages that are part of the same transaction MUST have the same **UID**, *
 
 If:
 
-- The server has negotiated the [**NT LAN Manager**](#gt_nt-lan-manager-ntlm) dialect or later (SMB_COM_NEGOTIATE section [2.2.4.51](#Section_2.2.4.51.2)),
+- The server has negotiated the [**NT LAN Manager**](#gt_nt-lan-manager-ntlm) dialect or later (SMB_COM_NEGOTIATE section [2.2.4.51](#Section_2.2.4.51)),
 - The server has negotiated [**DFS**](#gt_distributed-file-system-dfs) capabilities via the CAP_DFS flag (SMB_COM_NEGOTIATE section 2.2.4.51),
-- The server has set the SMB_SHARE_IS_IN_DFS flag in the [SMB_COM_TREE_CONNECT_ANDX response (section 2.2.4.55.2)](#Section_2.2.4.12.2) for the share,
+- The server has set the SMB_SHARE_IS_IN_DFS flag in the [SMB_COM_TREE_CONNECT_ANDX response (section 2.2.4.55.2)](#Section_2.2.4.55.2) for the share,
 Then the share is in the DFS namespace (a "DFS share") and the client MUST set **Client.TreeConnect.IsDfsShare** to TRUE. The client MUST set the SMB_FLAGS2_DFS flag in the header of any message that contains a pathname to an object within the share (a [**DFS path**](#gt_151c87db-05a4-40c3-99bd-4b682530d210)). The pathname MUST have the full file name, including the server name and share name.
 
 <a id="Section_3.2.4.2"></a>
@@ -19883,7 +19883,7 @@ The application provides the following:
 - **UserCredentials**: An opaque implementation-specific entity that identifies the credentials to be used when authenticating to the remote server.
 - **IsDFSShare:** A Boolean indicating whether this is a **DFS** share.
 - **TransportIdentifier:** An optional implementation-specific identifier for the transport on which the connection is to be established.
-Upon successful completion, the client MUST return an existing or newly constructed [Session (section 3.2.1.3)](#Section_3.2.1.3), an existing or newly constructed [TreeConnect (section 3.2.1.4)](#Section_4.1), and the share type to the caller.
+Upon successful completion, the client MUST return an existing or newly constructed [Session (section 3.2.1.3)](#Section_3.2.1.3), an existing or newly constructed [TreeConnect (section 3.2.1.4)](#Section_3.2.1.4), and the share type to the caller.
 
 The client MUST follow the steps as described in the following flowchart. The request to connect to a server can be either explicit (for example, the application requests an SMB connection to \\server\share) or implicit (for example, the application requests to open the file \\server\share\file.txt, which implies that an SMB connection to \\server\share is being established). In either case, the following steps are followed. The only difference is that for the implicit case, the error returned in the failure case MUST be returned as the error of the operation that caused the implicit connect attempt.
 
@@ -19900,16 +19900,16 @@ The client SHOULD search the **Client.ConnectionTable** and attempt to find an S
 
 If there is no existing SMB connection, a new SMB connection MUST be established.
 
-The **ServerName** and the optional **TransportIdentifier** provided by the caller are used to establish the connection. The client SHOULD resolve the **ServerName** as described in [MS-WPO](#Section_1.3) section 6.1.3 and SHOULD attempt connections to one or more of the returned addresses. The client MAY attempt to initiate the SMB connection on all [**SMB transports**](#gt_smb-transport) that it supports, most commonly NetBIOS over TCP (NBT, as described in section [2.1.1.2](../MS-WPO/MS-WPO.md)) and the other transports described in section [2.1](#Section_2.1). The client MAY choose to prioritize the SMB transport order and try each SMB transport sequentially or try to connect on all SMB transports and select one using any implementation-specific heuristic. The client MAY accept the **TransportIdentifier** parameter from the calling application, which specifies what SMB transport to use, and then attempt to use the transport specified.<198>
+The **ServerName** and the optional **TransportIdentifier** provided by the caller are used to establish the connection. The client SHOULD resolve the **ServerName** as described in [MS-WPO](../MS-WPO/MS-WPO.md) section 6.1.3 and SHOULD attempt connections to one or more of the returned addresses. The client MAY attempt to initiate the SMB connection on all [**SMB transports**](#gt_smb-transport) that it supports, most commonly NetBIOS over TCP (NBT, as described in section [2.1.1.2](#Section_2.1.1.2)) and the other transports described in section [2.1](#Section_2.1). The client MAY choose to prioritize the SMB transport order and try each SMB transport sequentially or try to connect on all SMB transports and select one using any implementation-specific heuristic. The client MAY accept the **TransportIdentifier** parameter from the calling application, which specifies what SMB transport to use, and then attempt to use the transport specified.<198>
 
 If all connection attempts fail, the connection establishment is failed and an appropriate error is returned, which is passed back to the calling application, as described earlier.
 
-If the connect attempt succeeds, the client MUST create a new SMB connection as described in [3.2.1.2](#Section_3.3.6.2) and insert it into the global **Client.ConnectionTable**. **Client.Connection.ServerName** MUST be set to the caller-supplied **ServerName**.
+If the connect attempt succeeds, the client MUST create a new SMB connection as described in [3.2.1.2](#Section_3.2.1.2) and insert it into the global **Client.ConnectionTable**. **Client.Connection.ServerName** MUST be set to the caller-supplied **ServerName**.
 
 <a id="Section_3.2.4.2.2"></a>
 ##### 3.2.4.2.2 Dialect Negotiation
 
-If **Client.Connection.NegotiateSent** is FALSE, the client MUST set **SMB_Dialect.DialectString** to **Client.SupportDialects** and negotiate a protocol dialect using the [SMB_COM_NEGOTIATE](#Section_2.2.4.52.1) command, as specified in section 2.2.4.52. This step MUST be completed before progressing to any other operations on the connection.
+If **Client.Connection.NegotiateSent** is FALSE, the client MUST set **SMB_Dialect.DialectString** to **Client.SupportDialects** and negotiate a protocol dialect using the [SMB_COM_NEGOTIATE](#Section_2.2.4.52) command, as specified in section 2.2.4.52. This step MUST be completed before progressing to any other operations on the connection.
 
 Upon receipt of the server response the client MUST complete the following steps:
 
@@ -19970,7 +19970,7 @@ If authentication fails, and the local configuration permits, the client MAY att
 Guest access occurs in one of two ways:
 
 - The client logs on as a guest using the normal authentication process.
-- The client attempts to log on as some other user, but authentication fails. In this case, the server MAY choose to permit access via the guest user account. The Session Setup succeeds, but the SMB_SETUP_GUEST flag of the **Action** field in the [SMB_COM_SESSION_SETUP_ANDX Response](#Section_2.2.4.12.2) MUST be set to indicate guest access (see Session Setup in sections 2.2.4.53.2 and [3.3.5.43](#Section_3.3.5.43)).
+- The client attempts to log on as some other user, but authentication fails. In this case, the server MAY choose to permit access via the guest user account. The Session Setup succeeds, but the SMB_SETUP_GUEST flag of the **Action** field in the [SMB_COM_SESSION_SETUP_ANDX Response](#Section_3.2.5.3) MUST be set to indicate guest access (see Session Setup in sections 2.2.4.53.2 and [3.3.5.43](#Section_3.3.5.43)).
 - **Signing:**
 If **Client.Connection.IsSigningActive** is FALSE and:
 
@@ -19993,7 +19993,7 @@ If authentication succeeds, the newly created **Client.Session** MUST be inserte
 
 In the LAN Manager 1.0 dialect and above, it is a protocol violation to send a tree connect request without completing an [SMB_COM_SESSION_SETUP_ANDX (section 2.2.4.53)](#Section_2.2.4.53) exchange. When using share level access control, the client MUST perform anonymous authentication (empty username and password) in the Session Setup.
 
-If a tree connect is already established to the target share in Client.Connection.TreeConnectTable, it SHOULD be reused. If not, the client creates an [SMB_COM_TREE_CONNECT_ANDX Request (section 2.2.4.55.1)](#Section_2.2.4.55.1), as specified in section [2.2.4.55](#Section_2.2.4.55.2). Alternately, the client MAY use the deprecated [SMB_COM_TREE_CONNECT Request (section 2.2.4.50.1)](#Section_2.2.4.50.1).
+If a tree connect is already established to the target share in Client.Connection.TreeConnectTable, it SHOULD be reused. If not, the client creates an [SMB_COM_TREE_CONNECT_ANDX Request (section 2.2.4.55.1)](#Section_2.2.4.55.1), as specified in section [2.2.4.55](#Section_2.2.4.55). Alternately, the client MAY use the deprecated [SMB_COM_TREE_CONNECT Request (section 2.2.4.50.1)](#Section_2.2.4.50.1).
 
 If **Client.Connection ShareLevelAccessControl** is TRUE and a null session has been established (see section [3.2.4.2.4](#Section_3.2.4.2.4)), the plaintext password or authentication response MUST be passed in the **Password** field of the SMB_COM_TREE_CONNECT_ANDX.Request or SMB_COM_TREE_CONNECT Request. There is only one **Password** field in the tree connect message, so only one response value can be sent. The client MUST determine the authentication type that it uses based upon **Client.Connection.ServerChallengeResponse** and the local configuration (the **Client.PlaintextAuthenticationPolicy**, **Client.LMAuthenticationPolicy**, and **Client.NTLMAuthenticationPolicy** values), as specified in section 3.2.4.2.4.
 
@@ -20009,7 +20009,7 @@ The application provides:
 - A valid Client.Session.
 - An optional list of extended attributes for [TRANS2_CREATE_DIRECTORY (section 2.2.6.14)](#Section_2.2.6.14).
 - An optional timeout value for the [SMB_COM_TRANSACTION2 Request](#Section_3.3.5.38) command.
-The client SHOULD construct a TRANS2_CREATE_DIRECTORY subcommand request message as specified in section 2.2.6.14. Alternately, the client MAY construct an SMB_COM_CREATE_DIRECTORY request message as specified in section [2.2.4.1](#Section_2.2.4.1) or an SMB_COM_NT_CREATE_ANDX request message as specified in section [2.2.4.64](#Section_2.2.4.64.2). The SMB_COM_CREATE_DIRECTORY (section 2.2.4.1) command is deprecated in favor of TRANS2_CREATE_DIRECTORY (section 2.2.6.14).
+The client SHOULD construct a TRANS2_CREATE_DIRECTORY subcommand request message as specified in section 2.2.6.14. Alternately, the client MAY construct an SMB_COM_CREATE_DIRECTORY request message as specified in section [2.2.4.1](#Section_2.2.4.1) or an SMB_COM_NT_CREATE_ANDX request message as specified in section [2.2.4.64](#Section_2.2.4.64). The SMB_COM_CREATE_DIRECTORY (section 2.2.4.1) command is deprecated in favor of TRANS2_CREATE_DIRECTORY (section 2.2.6.14).
 
 The following additional rules MUST be followed for message construction:
 
@@ -20057,7 +20057,7 @@ To open a file on a remote share, the application provides the following:
 To open the file, the client can issue one of the following command requests:
 
 - [SMB_COM_OPEN (section 2.2.4.3)](#Section_2.2.4.3) (deprecated)
-The client MUST construct an [SMB_COM_OPEN Request (section 2.2.4.3.1)](#Section_3.3.5.5) message. This command provides basic Open semantics.
+The client MUST construct an [SMB_COM_OPEN Request (section 2.2.4.3.1)](#Section_2.2.4.3.1) message. This command provides basic Open semantics.
 
 - [SMB_COM_OPEN_ANDX (section 2.2.4.41)](#Section_2.2.4.41) (deprecated)
 The client MUST construct an [SMB_COM_OPEN_ANDX Request (section 2.2.4.41.1)](#Section_2.2.4.41.1) message. In addition to basic Open semantics, SMB_COM_OPEN_ANDX provides:
@@ -20080,7 +20080,7 @@ The client MUST construct an [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section
 - The ability to specify a [**path**](#gt_path) relative to a subdirectory within the share indicated by the **TID**.
 - The ability to specify an initial allocation for newly opened or overwritten files.
 - The disposition action to take based on the existence of the target file.
-- [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64.2)
+- [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64)
 The client MUST construct an [SMB_COM_NT_CREATE_ANDX Request (section 2.2.4.64.1)](#Section_2.2.4.64.1) message. In addition to basic Open semantics, SMB_COM_NT_CREATE_ANDX provides:
 
 - AndX chaining.
@@ -20159,7 +20159,7 @@ To create or overwrite a file on a remote share, the application provides the fo
 - The print file mode Boolean.
 To create the file, the client MUST issue one of the following command requests:
 
-- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.15) (deprecated)
+- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.4) (deprecated)
 The client MUST construct an [SMB_COM_CREATE Request (section 2.2.4.4.1)](#Section_2.2.4.4.1) message as defined in section 2.2.4.4. This command provides basic Create semantics.
 
 - [SMB_COM_CREATE_TEMPORARY (section 2.2.4.15)](#Section_2.2.4.15) (obsolescent)
@@ -20191,7 +20191,7 @@ The client MUST construct an [SMB_COM_NT_TRANSACT (section 2.2.4.62)](#Section
 - The ability to specify a path relative to a subdirectory within the share indicated by the **TID**.
 - The ability to specify an initial allocation for newly opened or overwritten files.
 - The disposition action to take based on the existence of the target file.
-- [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64.2)
+- [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64)
 The client MUST construct an [SMB_COM_NT_CREATE_ANDX Request (section 2.2.4.64.1)](#Section_2.2.4.64.1) message as defined in section 2.2.4.64. In addition to basic Open semantics, SMB_COM_NT_CREATE_ANDX provides:
 
 - AndX chaining.
@@ -20298,7 +20298,7 @@ The client MUST construct an [SMB_COM_NT_RENAME Request (section 2.2.4.66.1)](
 - The **SMB_Data.Bytes.OldFileName** field MUST contain the source pathname supplied by the application.
 - The **SMB_Data.Bytes.NewFileName** field MUST contain the destination pathname supplied by the application.
 - The **SMB_Parameters.Words.InformationLevel** field MUST contain an information level value of SMB_NT_RENAME_SET_LINK_INFO.
-[SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_3.3.5.53) does not support wildcards and does not support creating hard links for multiple files.
+[SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_2.2.4.66) does not support wildcards and does not support creating hard links for multiple files.
 
 The request MUST be sent to the server as specified in section [3.2.4.1](#Section_3.2.4.1).
 
@@ -20312,7 +20312,7 @@ The application provides:
 - If the file is not already open, the full pathname relative to the **TID**. Otherwise, attributes SHOULD be queried using a valid [**FID**](#gt_fid) representing the opened file.
 - The [**Information Level**](#gt_information-level) that defines the format of the data to query, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.
 - If the Information Level provided is **SMB_INFO_QUERY_EAS_FROM_LIST**, the application provides a list of extended attributes.
-The client can use any of the following commands to query [**file attributes**](#gt_file-attribute). The [SMB_COM_QUERY_INFORMATION](#Section_3.2.5.20) and [SMB_COM_QUERY_INFORMATION2](#Section_3.2.5.20) commands are deprecated; the client SHOULD use the TRANS2_QUERY_PATH_INFORMATION or the TRANS2_QUERY_FILE_INFORMATION transaction subcommand instead. The transaction subcommands can also be used to query named pipe attributes. The client MUST map the application-provided Information Level to the Query Information Levels, as specified in section [2.2.8](#Section_1.3).
+The client can use any of the following commands to query [**file attributes**](#gt_file-attribute). The [SMB_COM_QUERY_INFORMATION](#Section_2.2.4.9) and [SMB_COM_QUERY_INFORMATION2](#Section_2.2.4.31) commands are deprecated; the client SHOULD use the TRANS2_QUERY_PATH_INFORMATION or the TRANS2_QUERY_FILE_INFORMATION transaction subcommand instead. The transaction subcommands can also be used to query named pipe attributes. The client MUST map the application-provided Information Level to the Query Information Levels, as specified in section [2.2.8](#Section_2.2.8).
 
 - SMB_COM_QUERY_INFORMATION (deprecated)
 The client MUST construct the SMB_COM_QUERY_INFORMATION request as defined in section 2.2.4.9. This command retrieves the following file attributes:
@@ -20368,7 +20368,7 @@ The application provides:
 - When the Information Level is **SMB_SET_FILE_DISPOSITION_INFO**, the application provides a Boolean to indicate if the file is marked for deletion.
 - When the Information Level is **SMB_SET_FILE_ALLOCATION_INFO**, the application provides the file allocation size in bytes.
 - When the Information Level is **SMB_SET_FILE_END_OF_FILE_INFO**, the application provides the offset from the beginning of the file to the byte following the last byte in the file.
-The client can use any of the following commands to set file attributes. The [SMB_COM_SET_INFORMATION (section 2.2.4.10)](#Section_2.2.4.10) and [SMB_COM_SET_INFORMATION2 (section 2.2.4.30)](#Section_2.2.4.30) commands are deprecated; the client SHOULD use the [TRANS2_SET_PATH_INFORMATION (section 2.2.6.7)](#Section_2.2.6.7) or the [TRANS2_SET_FILE_INFORMATION (section 2.2.6.9)](#Section_2.2.6.9) transaction subcommand. The transaction subcommands can also be used to set named pipe attributes. The client MUST map the application-provided **Information Level** to the **Set Information Levels**, as specified in section [2.2.8](#Section_1.3).
+The client can use any of the following commands to set file attributes. The [SMB_COM_SET_INFORMATION (section 2.2.4.10)](#Section_2.2.4.10) and [SMB_COM_SET_INFORMATION2 (section 2.2.4.30)](#Section_2.2.4.30) commands are deprecated; the client SHOULD use the [TRANS2_SET_PATH_INFORMATION (section 2.2.6.7)](#Section_2.2.6.7) or the [TRANS2_SET_FILE_INFORMATION (section 2.2.6.9)](#Section_2.2.6.9) transaction subcommand. The transaction subcommands can also be used to set named pipe attributes. The client MUST map the application-provided **Information Level** to the **Set Information Levels**, as specified in section [2.2.8](#Section_2.2.8).
 
 - SMB_COM_SET_INFORMATION (deprecated)
 The client MUST construct the [SMB_COM_SET_INFORMATION Request (section 2.2.4.10.1)](#Section_2.2.4.10.1) as defined in section 2.2.4.10. This command can be used to set basic SMB_FILE_ATTRIBUTES (section [2.2.1.2.4](#Section_2.2.1.2.4)), and to set the last write time attribute of the file. The file to be modified MUST be identified by a full pathname, relative to the **TID**.
@@ -20459,7 +20459,7 @@ In addition, if CAP_LARGE_READX was set by the server in the negotiate protocol 
 The client MUST construct the TRANS_RAW_READ_NMPIPE subcommand as defined in section [2.2.5.2](#Section_2.2.5.2). The request MUST be transported to the server using the Transaction subprotocol. TRANS_RAW_READ_NMPIPE allows for a raw read of data from a named pipe. This method of reading data from a named pipe ignores message boundaries even if the pipe is set up as a [**message mode**](#gt_message-mode) pipe.
 
 - TRANS_READ_NMPIPE
-The client MUST construct the TRANS_READ_NMPIPE subcommand as defined in section [2.2.5.8](#Section_3.2.5.38.8). The request MUST be transported to the server using the Transaction subprotocol. TRANS_READ_NMPIPE allows data to be read from a named pipe in the mode set on the named pipe. If the named pipe is in message mode, this subcommand MUST read a message from the pipe.
+The client MUST construct the TRANS_READ_NMPIPE subcommand as defined in section [2.2.5.8](#Section_2.2.5.8). The request MUST be transported to the server using the Transaction subprotocol. TRANS_READ_NMPIPE allows data to be read from a named pipe in the mode set on the named pipe. If the named pipe is in message mode, this subcommand MUST read a message from the pipe.
 
 The request MUST be sent to the server as described in section [3.2.4.1](#Section_3.2.4.1).
 
@@ -20468,7 +20468,7 @@ The request MUST be sent to the server as described in section [3.2.4.1](#Sectio
 
 SMB_COM_READ_RAW is a specialized read command intended to maximize the performance of reading large blocks of data from an open regular file, named pipe, or device. The command permits a server to send a large unformatted data (raw byte stream) message over the [**SMB transport**](#gt_smb-transport) without requiring the usual SMB response format. It also permits a server to send messages in excess of the maximum buffer size established during protocol negotiation and session setup. To accomplish this, the client and the server enter into a [**dialog**](#gt_dialog). For the dialog to begin, the client MUST perform the following steps:
 
-- The client MUST compose the SMB_COM_READ_RAW request as described in section [2.2.4.22](#Section_2.2.4.22.2). This request advises the server of the total number of bytes that the client attempts to receive in response to the request. The request MUST be sent to the server as described in section [3.2.4.1](#Section_3.2.4.1), with the exception that SMB_COM_READ_RAW and message signing are mutually exclusive. Message signing MUST be disabled in order to perform a raw read.
+- The client MUST compose the SMB_COM_READ_RAW request as described in section [2.2.4.22](#Section_2.2.4.22). This request advises the server of the total number of bytes that the client attempts to receive in response to the request. The request MUST be sent to the server as described in section [3.2.4.1](#Section_3.2.4.1), with the exception that SMB_COM_READ_RAW and message signing are mutually exclusive. Message signing MUST be disabled in order to perform a raw read.
 - After sending the SMB_COM_READ_RAW request, the client MUST NOT send any other request to the server until the Read Raw response has been completely received. In addition, the client MUST NOT have any outstanding requests pending on the server. Because the server sends a raw data message that does not include the typical [SMB Header (section 2.2.3.1)](#Section_2.2.3.1), the SMB Protocol cannot guarantee that the client can associate the server's raw data message with the correct corresponding SMB_COM_READ_RAW command request. Therefore, the client MUST guarantee that there are no other SMB requests from the client to the server for the duration of the SMB_COM_READ_RAW command's dialog processing. It might not be possible for the client to distinguish between the raw data and another message if the response to another operation is sent by the server while the client is waiting for the raw data.
 - The client MUST begin waiting for the unformatted data to arrive.
 - The server MUST send the unformatted data message to the client. Because the message contains unformatted raw bytes, the client MUST rely on the SMB transport to determine whether the message was received successfully and to determine the size of the message.
@@ -20520,7 +20520,7 @@ This command is used to write to a locked byte range in the file and then unlock
 - [SMB_COM_WRITE_RAW (section 2.2.4.25)](#Section_2.2.4.25) (deprecated)
 The client MUST construct an [SMB_COM_WRITE_RAW Request (section 2.2.4.25.1)](#Section_2.2.4.25.1). The behavior of the SMB_COM_WRITE_RAW Request (section 2.2.4.25.1) is described in section [3.2.4.15.1](#Section_3.2.4.15.1).
 
-- [SMB_COM_WRITE_MPX (section 2.2.4.23)](#Section_2.2.4.23.2) (obsolescent)
+- [SMB_COM_WRITE_MPX (section 2.2.4.23)](#Section_2.2.4.23) (obsolescent)
 The client MUST construct an [SMB_COM_WRITE_MPX Request (section 2.2.4.23.1)](#Section_2.2.4.23.1) as defined in section [2.2.4.26.1](#Section_2.2.4.26.1). The behavior of the SMB_COM_WRITE_MPX Request (section 2.2.4.23.1) is described in section [3.2.4.15.2](#Section_3.2.4.15.2).
 
 - [SMB_COM_WRITE_AND_CLOSE (section 2.2.4.40)](#Section_2.2.4.40) (deprecated)
@@ -20663,10 +20663,10 @@ The request MUST be sent to the server as described in section [3.2.4.1](#Sectio
 The application requests an OpLock when opening or creating a file. See sections [3.2.4.5](#Section_3.2.4.5) and [3.2.4.6](#Section_3.2.4.6) for information on opening and creating files. The following SMB commands can be used to obtain an OpLock:
 
 - [SMB_COM_OPEN (section 2.2.4.3)](#Section_2.2.4.3)
-- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.15)
+- [SMB_COM_CREATE (section 2.2.4.4)](#Section_2.2.4.4)
 - [SMB_COM_CREATE_NEW (section 2.2.4.16)](#Section_2.2.4.16)
 - [SMB_COM_OPEN_ANDX (section 2.2.4.41)](#Section_2.2.4.41)
-- [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64.2)
+- [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64)
 - [TRANS2_OPEN2 (section 2.2.6.1)](#Section_2.2.6.1)
 - [NT_TRANSACT_CREATE (section 2.2.7.1)](#Section_2.2.7.1)
 The application can request either an exclusive OpLock or a batch exclusive OpLock on a file. The server indicates the type of OpLock granted in the response. The server MUST grant the requested OpLock, a read-only (Level II) OpLock, or no OpLock. If an exclusive OpLock is not available, Level II OpLocks are granted only in response to SMB_COM_NT_CREATE_ANDX (section 2.2.4.64) or [NT_TRANSACT_CREATE Requests (section 2.2.7.1.1)](#Section_2.2.7.1.1).
@@ -20767,7 +20767,7 @@ The application provides:
 
 - A **Client.TreeConnect.TreeID** (**TID**) of the share to be queried.
 - The [**information level**](#gt_information-level) that describes the format of the information being queried, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.5.
-The client requests the retrieval of attributes from a file system using either of the two following commands. The client MUST map the application-provided information level to the **QUERY_FS Information Levels**, as specified in section [2.2.8](#Section_1.3).
+The client requests the retrieval of attributes from a file system using either of the two following commands. The client MUST map the application-provided information level to the **QUERY_FS Information Levels**, as specified in section [2.2.8](#Section_2.2.8).
 
 - [SMB_COM_QUERY_INFORMATION_DISK (section 2.2.4.57)](#Section_2.2.4.57) (deprecated)
 This command MUST be sent by a client to obtain the capacity and remaining free space on the volume hosting the subtree indicated by the **TID** in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1). It MUST be constructed as defined in section [2.2.4.57.1](#Section_2.2.4.57.1).
@@ -20856,9 +20856,9 @@ A client queries named pipe state by issuing an SMB_COM_TRANSACTION request (sec
 
 The client MUST construct the TRANS_QUERY_NMPIPE_STATE request message. The request MUST be sent to the server as specified in section [3.2.4.1](#Section_3.2.4.1).
 
-A client queries [**named pipe**](#gt_named-pipe) state by issuing an SMB_COM_TRANSACTION Request (section 2.2.4.33.1) with the subcommand [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_3.2.5.38.3). The application MUST provide a **Client.Open** identifying the [**open**](#gt_open) to the named pipe.
+A client queries [**named pipe**](#gt_named-pipe) state by issuing an SMB_COM_TRANSACTION Request (section 2.2.4.33.1) with the subcommand [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_2.2.5.3). The application MUST provide a **Client.Open** identifying the [**open**](#gt_open) to the named pipe.
 
-The client MUST construct the [TRANS_QUERY_NMPIPE_STATE Request](#Section_3.3.5.57.4) message, using the **Client.Open.FID** from the supplied open. The request MUST be sent to the server as specified in section 3.2.4.1. The [TRANS_QUERY_NMPIPE_STATE Response (section 2.2.5.3.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.38.3](#Section_3.2.5.38.3). If the **ReadMode** bits (see section [2.2.1.3](#Section_2.2.1.3)) of the **NMPipeStatus** field in the TRANS_QUERY_NMPIPE_STATE Response are zero, the client MUST set **Client.Open.NamedPipeMessageMode** to FALSE; otherwise, the client MUST set **Client.Open.NamedPipeMessageMode** to TRUE.
+The client MUST construct the [TRANS_QUERY_NMPIPE_STATE Request](#Section_3.3.5.57.4) message, using the **Client.Open.FID** from the supplied open. The request MUST be sent to the server as specified in section 3.2.4.1. The [TRANS_QUERY_NMPIPE_STATE Response (section 2.2.5.3.2)](#Section_2.2.5.3.2) MUST be processed as specified in section [3.2.5.38.3](#Section_3.2.5.38.3). If the **ReadMode** bits (see section [2.2.1.3](#Section_2.2.1.3)) of the **NMPipeStatus** field in the TRANS_QUERY_NMPIPE_STATE Response are zero, the client MUST set **Client.Open.NamedPipeMessageMode** to FALSE; otherwise, the client MUST set **Client.Open.NamedPipeMessageMode** to TRUE.
 
 <a id="Section_3.2.4.32"></a>
 #### 3.2.4.32 Application Requests Querying Named Pipe Information
@@ -20916,7 +20916,7 @@ The client MUST construct the TRANS_CALL_NMPIPE request message as specified in 
 
 A client can request to read from a [**named pipe**](#gt_named-pipe) by issuing an SMB_COM_TRANSACTION Request with the subcommand TRANS_READ_NMPIPE. The application MUST provide a **Client.Open** indicating the open named pipe from which data is to be read. The application provides the maximum number of bytes that the client attempts to read from the named pipe.
 
-Named pipes can be in raw mode or [**message mode**](#gt_message-mode) (see [TRANS_SET_NMPIPE_STATE](#Section_3.3.5.57.2)). If the named pipe is in raw mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of FALSE, it can be read by any of several Read operations (see section [3.2.4.14](#Section_3.2.4.14)). If the pipe is in message mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of TRUE, [TRANS_READ_NMPIPE](#Section_3.2.5.38.8) MUST be used to read discrete messages.
+Named pipes can be in raw mode or [**message mode**](#gt_message-mode) (see [TRANS_SET_NMPIPE_STATE](#Section_2.2.5.1)). If the named pipe is in raw mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of FALSE, it can be read by any of several Read operations (see section [3.2.4.14](#Section_3.2.4.14)). If the pipe is in message mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of TRUE, [TRANS_READ_NMPIPE](#Section_2.2.5.8) MUST be used to read discrete messages.
 
 The client MUST construct the TRANS_READ_NMPIPE Request message and MUST send it to the server as specified in section [3.2.4.1](#Section_3.2.4.1).
 
@@ -20925,7 +20925,7 @@ The client MUST construct the TRANS_READ_NMPIPE Request message and MUST send it
 
 A client can write to a [**named pipe**](#gt_named-pipe) by issuing an SMB_COM_TRANSACTION request with the subcommand TRANS_WRITE_NMPIPE. The application MUST provide a **Client.Open** indicating the open named pipe to which data is to be written.
 
-Named pipes can be in raw mode or [**message mode**](#gt_message-mode) (see [TRANS_SET_NMPIPE_STATE](#Section_3.3.5.57.2)). If the named pipe is in raw mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of FALSE, it can be written to using any of several Write operations (see section [3.2.4.15](#Section_3.2.4.15)). If the pipe is in message mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of TRUE, TRANS_WRITE_NMPIPE MUST be used to write discrete messages.
+Named pipes can be in raw mode or [**message mode**](#gt_message-mode) (see [TRANS_SET_NMPIPE_STATE](#Section_2.2.5.1)). If the named pipe is in raw mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of FALSE, it can be written to using any of several Write operations (see section [3.2.4.15](#Section_3.2.4.15)). If the pipe is in message mode, as indicated by a **Client.Open.NamedPipeMessageMode** value of TRUE, TRANS_WRITE_NMPIPE MUST be used to write discrete messages.
 
 The client MUST construct the TRANS_WRITE_NMPIPE request message and MUST send it to the server as specified in section [3.2.4.1](#Section_3.2.4.1).
 
@@ -20985,7 +20985,7 @@ The client MUST search for an existing **Session** and **TreeConnect** to any sh
 
 The client MUST construct a [TRANS2_GET_DFS_REFERRAL Request](#Section_3.3.5.58.11) and MUST set ReferralRequest to the application-provided input buffer.
 
-The client MUST construct a TRANS2_GET_DFS_REFERRAL Request (section 2.2.6.16.1) and MUST set ReferralRequest to the application-provided input buffer. The **MaxDataCount** field of the [SMB_COM_TRANSACTION2 Request (section 2.2.4.46.1)](#Section_3.3.5.38) MUST be set to the maximum response size supplied by the caller. The client MUST issue the TRANS2_GET_DFS_REFERRAL Request using the **Client.TreeConnect.TreeID** of the IPC$ share.
+The client MUST construct a TRANS2_GET_DFS_REFERRAL Request (section 2.2.6.16.1) and MUST set ReferralRequest to the application-provided input buffer. The **MaxDataCount** field of the [SMB_COM_TRANSACTION2 Request (section 2.2.4.46.1)](#Section_2.2.4.46.1) MUST be set to the maximum response size supplied by the caller. The client MUST issue the TRANS2_GET_DFS_REFERRAL Request using the **Client.TreeConnect.TreeID** of the IPC$ share.
 
 <a id="Section_3.2.4.45"></a>
 #### 3.2.4.45 Application Requests Querying Cryptographic Session Key
@@ -21029,19 +21029,19 @@ For the response messages of the following commands, there are no other processi
 - [SMB_COM_PROCESS_EXIT (section 2.2.4.18)](#Section_2.2.4.18)
 - [SMB_COM_SET_INFORMATION2 (section 2.2.4.30)](#Section_2.2.4.30)
 - [SMB_COM_LOCKING_ANDX (section 2.2.4.32)](#Section_2.2.4.32)
-- [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51.2)
+- [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51)
 - [SMB_COM_FIND_CLOSE (section 2.2.4.61)](#Section_2.2.4.61)
-- [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_3.3.5.53)
+- [SMB_COM_NT_RENAME (section 2.2.4.66)](#Section_2.2.4.66)
 - [SMB_COM_WRITE_PRINT_FILE (section 2.2.4.68)](#Section_2.2.4.68)
 - [SMB_COM_CLOSE_PRINT_FILE (section 2.2.4.69)](#Section_2.2.4.69)
 - [Transaction Subcommands (section 2.2.5)](#Section_2.2.5)
-- [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_3.3.5.57.2)
+- [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_2.2.5.1)
 - [TRANS_WAIT_NMPIPE (section 2.2.5.10)](#Section_2.2.5.10)
 - [Transaction2 Subcommands (section 2.2.6)](#Section_2.2.6)
 - [TRANS2_SET_PATH_INFORMATION (section 2.2.6.7)](#Section_2.2.6.7)
 - [TRANS2_SET_FILE_INFORMATION (section 2.2.6.9)](#Section_2.2.6.9)
 - [NT Transact Subcommands (section 2.2.7)](#Section_2.2.7)
-- [NT_TRANSACT_SET_SECURITY_DESC (section 2.2.7.3)](#Section_5)
+- [NT_TRANSACT_SET_SECURITY_DESC (section 2.2.7.3)](#Section_2.2.7.3)
 A client that has outstanding OpLocks can receive an OpLock Break Notification at any time from the server. This is the only unsolicited message that the server is permitted to send.
 
 <a id="Section_3.2.5.1.1"></a>
@@ -21052,7 +21052,7 @@ Upon receiving a message, the client MUST determine whether the message is the f
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Message Signing
 
-If a message is received and **Client.Connection.IsSigningActive** is TRUE for the connection, the signature MUST be verified, as specified in section [3.1.5.1](#Section_3.2.5.1), unless the message is an OpLock Break Notification. OpLock Break Notification messages are exempt from signing.
+If a message is received and **Client.Connection.IsSigningActive** is TRUE for the connection, the signature MUST be verified, as specified in section [3.1.5.1](#Section_3.1.5.1), unless the message is an OpLock Break Notification. OpLock Break Notification messages are exempt from signing.
 
 The client is responsible for providing the expected sequence number for signature verification. The sequence number for the incoming response is determined by what was stored in the **Client.Connection.ClientResponseSequenceNumber** table. The client MUST look up the expected sequence number in that table based on the PID and MID of the response. The client uses **Client.Connection.ClientResponseSequenceNumber** [PID, MID] as the sequence number in signature verification, as specified in section 3.1.5.1. If signature verification fails, the message MUST be discarded and not processed. The client SHOULD choose to disconnect the underlying connection and tear down all state associated with this connection.<209>
 
@@ -21111,7 +21111,7 @@ The client MUST set **Client.Connection.ServerMaxBufferSize** to the value recei
 
 The client MUST assign the minimum of **Client.Connection.MaxMpxCount** and the **MaxMpxCount** field to **Client.Connection.MaxMpxCount**.
 
-If the SMB_COM_NEGOTIATE Response is being processed as part of a connect attempt, the client continues to user authentication, as specified in section 3.2.4.2.4. The only other options are [SMB_COM_ECHO (section 2.2.4.39)](#Section_2.2.4.39.2) or termination of the connection.
+If the SMB_COM_NEGOTIATE Response is being processed as part of a connect attempt, the client continues to user authentication, as specified in section 3.2.4.2.4. The only other options are [SMB_COM_ECHO (section 2.2.4.39)](#Section_2.2.4.39) or termination of the connection.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving an SMB_COM_SESSION_SETUP_ANDX Response
@@ -21130,7 +21130,7 @@ If authentication has just completed successfully, **Client.Connection.IsSigning
 - If the user authenticated as a regular user, the client MUST activate signing. If **Client.Connection.SigningSessionKey** is **Empty**:
 - The client MUST copy the entire cryptographic session key obtained from authentication subsystem, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md), and store it as **Client.Connection.SigningSessionKey**. If the length of **Client.Connection.SigningSessionKey** is less than 16, the client SHOULD pad it with zeros up to 16 bytes.
 - The value of **Client.Connection.SigningChallengeResponse** MUST be set based upon the SMB_SETUP_USE_LANMAN_KEY (0x02) bit of the **Action** field in the SMB_COM_SESSION_SETUP_ANDX response sent from the server to the client. If the bit is set, the server indicates that the LM or LMv2 challenge/response succeeded and the challenge response sent in the **OEMPassword** field MUST be used. Otherwise, the challenge response sent in the **UnicodePassword** field MUST be used.
-Once these steps are done, the client MUST verify the signature of this response. The client follows the steps specified in section [3.1.5.1](#Section_3.2.5.1), passing in a sequence number of 1 because this is the first signed packet.
+Once these steps are done, the client MUST verify the signature of this response. The client follows the steps specified in section [3.1.5.1](#Section_3.1.5.1), passing in a sequence number of 1 because this is the first signed packet.
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Receiving an SMB_COM_TREE_CONNECT or SMB_COM_TREE_CONNECT_ANDX Response
@@ -21159,9 +21159,9 @@ The **FID** returned in the SMB_COM_OPEN response MUST be returned to the applic
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Receiving an SMB_COM_CREATE Response
 
-The [SMB_COM_CREATE Response (section 2.2.4.4.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_CREATE Response (section 2.2.4.4.2)](#Section_2.2.4.4.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
-If the [SMB_COM_CREATE](#Section_2.2.4.15) was successful, a new **Client.Open** MUST be entered into the **Client.Connection.OpenTable**. **Client.Open.FID** is set to the returned **FID**, and **Client.Open.OpLock** is set based on the **SMB_Header.Flags** SMB_FLAGS_OPLOCK and SMB_FLAGS_OPBATCH flags. **Client.Open.TreeConnect** MUST be set to a **Client.TreeConnect** where **Client.TreeConnect.TreeID** matches the **TID** sent by the server in the [SMB Header](#Section_2.2.3.1) of the SMB_COM_CREATE Response. **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_CREATE Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
+If the [SMB_COM_CREATE](#Section_2.2.4.4) was successful, a new **Client.Open** MUST be entered into the **Client.Connection.OpenTable**. **Client.Open.FID** is set to the returned **FID**, and **Client.Open.OpLock** is set based on the **SMB_Header.Flags** SMB_FLAGS_OPLOCK and SMB_FLAGS_OPBATCH flags. **Client.Open.TreeConnect** MUST be set to a **Client.TreeConnect** where **Client.TreeConnect.TreeID** matches the **TID** sent by the server in the [SMB Header](#Section_2.2.3.1) of the SMB_COM_CREATE Response. **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_CREATE Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
 
 The **Client.Open** matching the **FID** provided in the response MUST be returned to the application.
 
@@ -21198,7 +21198,7 @@ If the request is successful, the number of bytes written to the file is returne
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Receiving an SMB_COM_CREATE_TEMPORARY Response
 
-The [SMB_COM_CREATE_TEMPORARY Response (section 2.2.4.15.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_CREATE_TEMPORARY Response (section 2.2.4.15.2)](#Section_2.2.4.15.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 If the [SMB_COM_CREATE_TEMPORARY](#Section_2.2.4.15) was successful, a new **Client.Open** must be entered into the **Client.Connection.OpenTable**. **Client.Open.FID** is set to the returned **FID**, and **Client.Open.OpLock** is set based on the **SMB_Header.Flags** SMB_FLAGS_OPLOCK and SMB_FLAGS_OPBATCH flags. **Client.Open.TreeConnect** MUST be set to a **Client.TreeConnect** where **Client.TreeConnect.TreeID** matches the **TID** sent by the server in the [SMB Header](#Section_2.2.3.1) of the SMB_COM_CREATE_TEMPORARY Response. **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_CREATE_TEMPORARY Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
 
@@ -21323,14 +21323,14 @@ Multiple responses can be received, each of which MUST be made available to the 
 <a id="Section_3.2.5.24"></a>
 #### 3.2.5.24 Receiving an SMB_COM_WRITE_AND_CLOSE Response
 
-The [SMB_COM_WRITE_AND_CLOSE Response (section 2.2.4.40.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_WRITE_AND_CLOSE Response (section 2.2.4.40.2)](#Section_2.2.4.40.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 If the request succeeds, the [**FID**](#gt_fid) sent in the request is no longer valid, and the client MUST discard the FID. The matching **Client.Open** entry in the **Client.Connection.OpenTable** MUST be removed and discarded.
 
 <a id="Section_3.2.5.25"></a>
 #### 3.2.5.25 Receiving an SMB_COM_OPEN_ANDX Response
 
-The [SMB_COM_OPEN_ANDX Response (section 2.2.4.41.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_OPEN_ANDX Response (section 2.2.4.41.2)](#Section_2.2.4.41.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 If the command fails, the error status MUST be passed to the application.
 
@@ -21391,7 +21391,7 @@ The **Client** MUST traverse the **Client.Connection.OpenTable** and remove all 
 <a id="Section_3.2.5.31"></a>
 #### 3.2.5.31 Receiving an SMB_COM_LOGOFF_ANDX Response
 
-The [SMB_COM_LOGOFF_ANDX Response (section 2.2.4.54.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_LOGOFF_ANDX Response (section 2.2.4.54.2)](#Section_2.2.4.54.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 If the [SMB_COM_LOGOFF_ANDX (section 2.2.4.54)](#Section_2.2.4.54) succeeds, the **UID** that was indicated in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) of the initial request is no longer valid and MUST be discarded. The **Client.Session** entry for the **UID** in the **Client.Connection.SessionTable** MUST be removed.
 
@@ -21424,7 +21424,7 @@ The SMB_COM_NT_TRANSACT response MUST be processed as specified in section [3.2.
 <a id="Section_3.2.5.36"></a>
 #### 3.2.5.36 Receiving an SMB_COM_NT_CREATE_ANDX Response
 
-The [SMB_COM_NT_CREATE_ANDX Response (section 2.2.4.64.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_NT_CREATE_ANDX Response (section 2.2.4.64.2)](#Section_2.2.4.64.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 If the command fails, the error status MUST be passed to the application.
 
@@ -21439,7 +21439,7 @@ If the open is to a [**named pipe**](#gt_named-pipe), **Client.Open.NamedPipeMes
 <a id="Section_3.2.5.37"></a>
 #### 3.2.5.37 Receiving an SMB_COM_OPEN_PRINT_FILE Response
 
-The [SMB_COM_OPEN_PRINT_FILE Response (section 2.2.4.62.2)](#Section_2.2.4.12.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
+The [SMB_COM_OPEN_PRINT_FILE Response (section 2.2.4.62.2)](#Section_2.2.4.62.2) MUST be processed as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 If the [SMB_COM_OPEN_PRINT_FILE (section 2.2.4.67)](#Section_2.2.4.67) command fails, the error status MUST be passed to the application.
 
@@ -21524,7 +21524,7 @@ If the Open portion of the request succeeds, the **FID** returned in the TRANS2_
 
 Other attributes returned in the command can be passed to the application, if requested.
 
-In addition, the **FID** MUST be used to create new **Open** entry in the **Client.Connection.OpenTable**. If an OpLock was requested, the value of **Client.Open.OpLock** MUST be set to indicate the type of OpLock that was granted, if any. The newly-created **Client.Open** MUST be returned to the application. **Client.Open.TreeConnect** MUST be set to **Client.Connection.TreeConnectTable[TID]**, where the **TID** matches the **TID** field sent by the server in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) of the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.12.2). **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_TRANSACTION2 Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
+In addition, the **FID** MUST be used to create new **Open** entry in the **Client.Connection.OpenTable**. If an OpLock was requested, the value of **Client.Open.OpLock** MUST be set to indicate the type of OpLock that was granted, if any. The newly-created **Client.Open** MUST be returned to the application. **Client.Open.TreeConnect** MUST be set to **Client.Connection.TreeConnectTable[TID]**, where the **TID** matches the **TID** field sent by the server in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) of the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.46.2). **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_TRANSACTION2 Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
 
 <a id="Section_3.2.5.39.2"></a>
 ##### 3.2.5.39.2 Receiving a TRANS2_FIND_FIRST2 or TRANS2_FIND_NEXT2 Response
@@ -21575,7 +21575,7 @@ If the request succeeds, the **FID** returned in the NT_TRANSACT_CREATE subcomma
 
 Other attributes returned in the command can be passed to the application, if requested.
 
-In addition, the **FID** MUST be used to create new **Open** entry in the **Client.Connection.OpenTable**. If an OpLock was requested, the value of **Client.Open.OpLock** MUST be set to indicate the type of OpLock that was granted, if any. The newly-created **Client.Open** MUST be returned to the application. **Client.Open.TreeConnect** MUST be set to **Client.Connection.TreeConnectTable[TID]**, where the **TID** matches the **TID** field sent by the server in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) of the [SMB_COM_NT_TRANSACT Response (section 2.2.4.62.2)](#Section_2.2.4.12.2). **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_NT_TRANSACT Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
+In addition, the **FID** MUST be used to create new **Open** entry in the **Client.Connection.OpenTable**. If an OpLock was requested, the value of **Client.Open.OpLock** MUST be set to indicate the type of OpLock that was granted, if any. The newly-created **Client.Open** MUST be returned to the application. **Client.Open.TreeConnect** MUST be set to **Client.Connection.TreeConnectTable[TID]**, where the **TID** matches the **TID** field sent by the server in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) of the [SMB_COM_NT_TRANSACT Response (section 2.2.4.62.2)](#Section_2.2.4.62.2). **Client.Open.Session** MUST be set to a **Client.Session** where **Client.Session.SessionUID** matches the **UID** sent by the server in the SMB Header of the SMB_COM_NT_TRANSACT Response. **Client.Open.Connection** MUST be set to **Client.Open.Session.Connection**.
 
 <a id="Section_3.2.5.40.2"></a>
 ##### 3.2.5.40.2 Receiving an NT_TRANSACT_IOCTL Response
@@ -21636,7 +21636,7 @@ If no DFS subsystem is present, the client MUST report the error to the calling 
 <a id="Section_3.2.6.1"></a>
 #### 3.2.6.1 Request Expiration Timer Event
 
-When the [Request Expiration Timer (section 3.2.2.1)](#Section_3.2.2.1) expires, the client MUST walk the outstanding commands in **Client.Connection.PIDMIDList** for any pending commands that have exceeded **Client.SessionTimeoutValue**. If a command has exceeded **Client.SessionTimeoutValue**,<211> the client SHOULD<212> close the connection to the server, and all resources associated with the connection MUST be freed, as specified in section [3.2.7.1](#Section_2.1).
+When the [Request Expiration Timer (section 3.2.2.1)](#Section_3.2.2.1) expires, the client MUST walk the outstanding commands in **Client.Connection.PIDMIDList** for any pending commands that have exceeded **Client.SessionTimeoutValue**. If a command has exceeded **Client.SessionTimeoutValue**,<211> the client SHOULD<212> close the connection to the server, and all resources associated with the connection MUST be freed, as specified in section [3.2.7.1](#Section_3.2.7.1).
 
 The [NT_TRANSACT_NOTIFY_CHANGE (section 2.2.7.4)](#Section_2.2.7.4) subcommand MUST be exempt.
 
@@ -21649,12 +21649,12 @@ The following commands are exempt from the Request Expiration Timer:
 - [SMB_COM_READ_ANDX (section 2.2.4.42)](#Section_2.2.4.42)
 - [SMB_COM_WRITE_ANDX (section 2.2.4.43)](#Section_2.2.4.43)
 - [SMB_COM_WRITE_AND_CLOSE (section 2.2.4.40)](#Section_2.2.4.40)
-- [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_3.2.5.38.8) subcommand
+- [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_2.2.5.8) subcommand
 - [TRANS_WRITE_NMPIPE (section 2.2.5.9)](#Section_2.2.5.9) subcommand
 - [TRANS_RAW_READ_NMPIPE (section 2.2.5.2)](#Section_2.2.5.2) subcommand
 - [TRANS_TRANSACT_NMPIPE (section 2.2.5.6)](#Section_2.2.5.6) subcommand
 - [TRANS_RAW_WRITE_NMPIPE (section 2.2.5.7)](#Section_2.2.5.7) subcommand
-- [TRANS_CALL_NMPIPE (section 2.2.5.11)](#Section_3.2.5.38.10) subcommand
+- [TRANS_CALL_NMPIPE (section 2.2.5.11)](#Section_2.2.5.11) subcommand
 - [TRANS_WAIT_NMPIPE (section 2.2.5.10)](#Section_2.2.5.10) subcommand
 - [SMB_COM_LOCKING_ANDX Request (section 2.2.4.32.1)](#Section_2.2.4.32.1) with the **Timeout** field set to a nonzero value
 <a id="Section_3.2.7"></a>
@@ -21692,7 +21692,7 @@ The following ADM elements are globally maintained for an individual server:
 
 **Server.Capabilities**: The set of Capabilities (as described in section [1.7](#Section_1.7) and defined in section [2.2.4.52.2](#Section_2.2.4.52.2)) supported by the server.
 
-**Server.ConnectionTable**: A list of SMB connections, as defined in section [3.3.1.3](#Section_3.3.6.2). The list MUST allow lookups based upon **Server.Connection.ClientName**.
+**Server.ConnectionTable**: A list of SMB connections, as defined in section [3.3.1.3](#Section_3.3.1.3). The list MUST allow lookups based upon **Server.Connection.ClientName**.
 
 **Server.EnableOplock**: A Boolean value that indicates whether a server supports [**OpLocks**](#gt_opportunistic-lock-oplock).
 
@@ -21774,7 +21774,7 @@ The server does not support challenge/response authentication. The server MUST i
 
 **Server.Share.LocalPath**: A path that describes the local resource that is being shared. This MUST be a store that either provides named pipe functionality, or a device or a volume that offers storage and/or retrieval of files. In the case of the latter, it can be a device that accepts a file and then processes it in some format, such as a printer.<214>
 
-**Server.Share.OptionalSupport**: The optional support bits for the share. See the description of the **OptionalSupport** field in the [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.12.2) for information on the defined bit flags.
+**Server.Share.OptionalSupport**: The optional support bits for the share. See the description of the **OptionalSupport** field in the [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.55.2) for information on the defined bit flags.
 
 **Server.Share.ServerName**: A local server name to which a shared resource attaches.
 
@@ -21860,7 +21860,7 @@ If SMB signing is activated on the connection (**Server.Connection.IsSigningActi
 - **Empty** -- If **Server.Connection.IsSigningActive** is FALSE, no connection signing session key is used.
 - **LM Session Key** -- The LM hash, generated from the user's password using the LMOWFv1() function defined in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1.
 - NT Session Key -- The NTLM hash, generated from the user's password using the NTOWFv1() function defined in [MS-NLMP] section 3.3.1.
-**Server.Connection.TreeConnectTable**: A list of the tree connects over this SMB connection established to shares on the server, containing the **TID** for the tree connect and the **UID** of the user that established the Tree Connect, as well as the share service type returned in the [SMB_COM_TREE_CONNECT Response (section 2.2.4.50.2)](#Section_2.2.4.12.2) or the [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.12.2).See the description of the **Service** field in the SMB_COM_TREE_CONNECT_ANDX Response for information on the permitted values. It MUST be possible to look up entries by either the **TID** or the **UID**.
+**Server.Connection.TreeConnectTable**: A list of the tree connects over this SMB connection established to shares on the server, containing the **TID** for the tree connect and the **UID** of the user that established the Tree Connect, as well as the share service type returned in the [SMB_COM_TREE_CONNECT Response (section 2.2.4.50.2)](#Section_2.2.4.50.2) or the [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.55.2).See the description of the **Service** field in the SMB_COM_TREE_CONNECT_ANDX Response for information on the permitted values. It MUST be possible to look up entries by either the **TID** or the **UID**.
 
 **Server.Connection.TransportName**: An implementation-specific name of the transport used by this connection.
 
@@ -22044,9 +22044,9 @@ Unless otherwise specified, the server MUST return both the client-supplied [**P
 
 The SMB_FLAGS_REPLY bit in the SMB Header MUST be set, unless the message is an OpLock Break Notification request initiated by the server.
 
-If the server sends a message to the client, and signing is active for the SMB connection, the message MUST be signed, as specified in section [3.1.4.1](#Section_3.2.4.1), by providing the sequence number in **Server.Connection.ServerSendSequenceNumber[PID,MID]**. The sequence number is calculated and populated into the table **Server.Connection.ServerSendSequenceNumber**, as specified in section [3.3.5.2](#Section_3.3.5.2). OpLock Break Notification messages are exempt from signing.
+If the server sends a message to the client, and signing is active for the SMB connection, the message MUST be signed, as specified in section [3.1.4.1](#Section_3.1.4.1), by providing the sequence number in **Server.Connection.ServerSendSequenceNumber[PID,MID]**. The sequence number is calculated and populated into the table **Server.Connection.ServerSendSequenceNumber**, as specified in section [3.3.5.2](#Section_3.3.5.2). OpLock Break Notification messages are exempt from signing.
 
-If signing is not active, the **SecuritySignature** field of the SMB Header for all messages sent, except the [SMB_COM_SESSION_SETUP_ANDX Response (section 2.2.4.53.2)](#Section_2.2.4.12.2), MUST be set to 0x0000000000000000. For the SMB_COM_SESSION_SETUP_ANDX Response, the **SecuritySignature** field of the SMB Header SHOULD<227> be set to the **SecuritySignature** received in the [SMB_COM_SESSION_SETUP_ANDX Request (section 2.2.4.53.1)](#Section_2.2.4.53.1).
+If signing is not active, the **SecuritySignature** field of the SMB Header for all messages sent, except the [SMB_COM_SESSION_SETUP_ANDX Response (section 2.2.4.53.2)](#Section_2.2.4.53.2), MUST be set to 0x0000000000000000. For the SMB_COM_SESSION_SETUP_ANDX Response, the **SecuritySignature** field of the SMB Header SHOULD<227> be set to the **SecuritySignature** received in the [SMB_COM_SESSION_SETUP_ANDX Request (section 2.2.4.53.1)](#Section_2.2.4.53.1).
 
 For every outgoing message, the server MUST calculate the total number of bytes in the message and MUST update the values of **Server.Statistics.sts0_bytessent_low** and **Server.Statistics.sts0_bytessent_high**.
 
@@ -22433,7 +22433,7 @@ If the message received is a command request that initiates processing of a comm
 <a id="Section_3.3.5.2.3"></a>
 ##### 3.3.5.2.3 Message Signing
 
-If a message is received and **Connection.IsSigningActive** is TRUE for the SMB connection, the signature MUST be verified as specified in section [3.1.5.1](#Section_3.2.5.1).
+If a message is received and **Connection.IsSigningActive** is TRUE for the SMB connection, the signature MUST be verified as specified in section [3.1.5.1](#Section_3.1.5.1).
 
 The server is responsible for providing the expected sequence number for signature validation. The sequence number for the next incoming request is stored in **Server.Connection.ServerNextReceiveSequenceNumber**. The server MUST remember the appropriate sequence number for the response to this request and does so by inserting it into the **Server.Connection.ServerSendSequenceNumber** table with the [**PID**](#gt_process-identifier-pid) and **MID** that identify the request/response pair.
 
@@ -22466,13 +22466,13 @@ Once the AndX Response chain is terminated, an AndX Response message MUST be con
 
 - The server MUST construct the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) using the header information as it was at the termination of the AndX Request chain.
 - The AndX Response chain of Parameter and Data block pairs MUST be sequentially appended to the response message.
-- If **Connection.IsSigningActive** is TRUE, the entire batched message is signed as specified in section [3.1.4.1](#Section_3.2.4.1).
+- If **Connection.IsSigningActive** is TRUE, the entire batched message is signed as specified in section [3.1.4.1](#Section_3.1.4.1).
 The server MUST send the completed batch response to the client.
 
 <a id="Section_3.3.5.2.5"></a>
 ##### 3.3.5.2.5 Receiving Any Transaction Request
 
-Upon receipt of an [SMB_COM_TRANSACTION Request (section 2.2.4.33.1)](#Section_2.2.4.33.1), [SMB_COM_TRANSACTION2 Request (section 2.2.4.46.1)](#Section_3.3.5.38), or [SMB_COM_NT_TRANSACT Request (section 2.2.4.62.1)](#Section_2.2.4.62.1), the server MUST verify that it can process the transaction. In particular, the server MUST allocate sufficient space to accept the transaction subcommand parameters and data. The server MUST also be able to allocate **MaxParameterCount** plus **MaxDataCount** bytes for the results of the transaction. If the server is unable to allocate these resources, it SHOULD<240> return STATUS_INSUFF_SERVER_RESOURCES (ERRDOS/ERRnomem).
+Upon receipt of an [SMB_COM_TRANSACTION Request (section 2.2.4.33.1)](#Section_2.2.4.33.1), [SMB_COM_TRANSACTION2 Request (section 2.2.4.46.1)](#Section_2.2.4.46.1), or [SMB_COM_NT_TRANSACT Request (section 2.2.4.62.1)](#Section_2.2.4.62.1), the server MUST verify that it can process the transaction. In particular, the server MUST allocate sufficient space to accept the transaction subcommand parameters and data. The server MUST also be able to allocate **MaxParameterCount** plus **MaxDataCount** bytes for the results of the transaction. If the server is unable to allocate these resources, it SHOULD<240> return STATUS_INSUFF_SERVER_RESOURCES (ERRDOS/ERRnomem).
 
 The server SHOULD perform initial validation of the transaction itself and return an error response if an error is detected. An error response terminates the transaction.
 
@@ -22580,7 +22580,7 @@ Upon receipt of an [SMB_COM_CREATE Request (section 2.2.4.4.1)](#Section_2.2.4
 - The user indicated by the **UID** MUST have write permission on the file's parent directory in order to create a new file; otherwise, the server MUST increase **Server.Statistics.sts0_permerrors** by 1, fail the request, and return an error response with STATUS_ACCESS_DENIED (ERRDOS/ERRnoaccess).
 - The user indicated by the **UID** MUST have write permission on the file itself in order to truncate it; otherwise, the server MUST increase **Server.Statistics.sts0_permerrors** by 1, fail the request, and return an error response with STATUS_ACCESS_DENIED (ERRDOS/ERRnoaccess).
 - The server MUST grant read/write permission for the creator if the file is created. Access permissions for truncated files are not modified. The newly created or truncated file is opened for read/write in Compatibility Mode (see section [3.2.4.5.1](#Section_3.2.4.5.1)).
-If the Create operation fails, the server MUST return an error response with a **Status** code from the list provided in section [2.2.4.4.2](#Section_2.2.4.12.2). Otherwise, the server MUST allocate a new [**FID**](#gt_fid), format an SMB_COM_CREATE response message as defined in section 2.2.4.4.2, and set **SMB_Header.Status** to indicate success. **Server.Statistics.sts0_fopens** MUST be increased by 1, and an **Open** containing the new FID MUST be created, initialized, and entered into the **Server.Connection.FileOpenTable**.<247> If **Server.EnableOplock** is TRUE and a requested OpLock was granted, the type of OpLock MUST be set in **Server.Open.OpLock** and **Server.Open.OplockState** MUST be set to **Held**; otherwise, **Server.Open.OpLock** MUST be set to **None** and **Server.Open.OplockState** MUST be set to **None**. **Server.Open.TreeConnect** MUST be set to the **TreeConnect** on which the request was performed, and **Server.Open.TreeConnect.OpenCount** MUST be increased by 1. **.Server.Open.Session** MUST be set to the **Server.Open.TreeConnect.Session**. **Server.Open.Connection** MUST be set to the **Server.Open.Session.Connection**. **Server.Open.Locks** MUST be set to an empty list. **Server.Open.PID** MUST be set to the **PID** provided in the request. **Server.Open.PathName** MUST be set to the **FileName** field of the request. **Server.Open.GrantedAccess** MUST be set to (GENERIC_READ | GENERIC_WRITE).<248>
+If the Create operation fails, the server MUST return an error response with a **Status** code from the list provided in section [2.2.4.4.2](#Section_2.2.4.4.2). Otherwise, the server MUST allocate a new [**FID**](#gt_fid), format an SMB_COM_CREATE response message as defined in section 2.2.4.4.2, and set **SMB_Header.Status** to indicate success. **Server.Statistics.sts0_fopens** MUST be increased by 1, and an **Open** containing the new FID MUST be created, initialized, and entered into the **Server.Connection.FileOpenTable**.<247> If **Server.EnableOplock** is TRUE and a requested OpLock was granted, the type of OpLock MUST be set in **Server.Open.OpLock** and **Server.Open.OplockState** MUST be set to **Held**; otherwise, **Server.Open.OpLock** MUST be set to **None** and **Server.Open.OplockState** MUST be set to **None**. **Server.Open.TreeConnect** MUST be set to the **TreeConnect** on which the request was performed, and **Server.Open.TreeConnect.OpenCount** MUST be increased by 1. **.Server.Open.Session** MUST be set to the **Server.Open.TreeConnect.Session**. **Server.Open.Connection** MUST be set to the **Server.Open.Session.Connection**. **Server.Open.Locks** MUST be set to an empty list. **Server.Open.PID** MUST be set to the **PID** provided in the request. **Server.Open.PathName** MUST be set to the **FileName** field of the request. **Server.Open.GrantedAccess** MUST be set to (GENERIC_READ | GENERIC_WRITE).<248>
 
 The server MUST register the **Open** by invoking the Server Registers a New Open event ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.4), and it MUST assign the return value to **Server.Open.FileGlobalId**.
 
@@ -22615,7 +22615,7 @@ Upon receipt of an [SMB_COM_DELETE Request (section 2.2.4.7.1)](#Section_2.2.4
 
 The precise effect of the SMB_COM_DELETE command is server implementation-dependent. The following criteria SHOULD be observed:
 
-- If **Server.Connection.OpLockSupport** is TRUE, and another client has been granted a batch OpLock on the file, then the server MUST send an OpLock break notification request via [SMB_COM_LOCKING_ANDX Request (section 2.2.4.32.1)](#Section_2.2.4.32.1) to the client that owns the batch OpLock, as specified in section [3.3.4.2](#Section_3.3.2.1). The server MUST have the OPLOCK_RELEASE flag set on the TypeOfLock. The server MUST set the **NewOpLockLevel** field to 0x00. The SMB_COM_DELETE command request being processed MUST block until the OpLock is either acknowledged by the client or the OpLock Break Acknowledgement Timer has expired.<253>
+- If **Server.Connection.OpLockSupport** is TRUE, and another client has been granted a batch OpLock on the file, then the server MUST send an OpLock break notification request via [SMB_COM_LOCKING_ANDX Request (section 2.2.4.32.1)](#Section_2.2.4.32.1) to the client that owns the batch OpLock, as specified in section [3.3.4.2](#Section_3.3.4.2). The server MUST have the OPLOCK_RELEASE flag set on the TypeOfLock. The server MUST set the **NewOpLockLevel** field to 0x00. The SMB_COM_DELETE command request being processed MUST block until the OpLock is either acknowledged by the client or the OpLock Break Acknowledgement Timer has expired.<253>
 - The user initiating the request MUST have write permission in the target file's parent directory for the operation to succeed.
 If a wildcard pathname matches more than one file, the server SHOULD search for and delete all files matching the search criteria. The server SHOULD delete matching files sequentially and, if an error occurs, immediately return an error response with the **Status** field set to indicate the error. In this case, some files that match the search criteria and can be deleted will not be deleted.<254>
 
@@ -22654,7 +22654,7 @@ Other considerations:
 - This command MUST NOT rename volume labels.
 A file to be renamed might currently be open. If it is opened by the requesting process, it MUST be open in compatibility mode (see section [3.2.4.5.1](#Section_3.2.4.5.1)). If it is not open in compatibility mode, the rename MUST fail with STATUS_ACCESS_DENIED (ERRDOS/ERRnoaccess) and **Server.Statistics.sts0_permerrors** MUST be increased by 1.<258>
 
-- If another process has the file open, and that process has an OpLock on the file, and the process has asked for extended notification (Batch OpLock), the rename request MUST block until the server has sent an OpLock break request to the owner of the OpLock, as specified in section [3.3.4.2](#Section_3.3.2.1), and either received a response or the OpLock break time-out has expired.<259> The server MUST have the OPLOCK_RELEASE flag set in the **TypeOfLock** field of the request. The server MUST set the **NewOpLockLevel** field of the request to 0x00. If the process holding the OpLock closes the file (thus freeing the OpLock) the rename takes place. If not, the rename MUST fail with STATUS_SHARING_VIOLATION.
+- If another process has the file open, and that process has an OpLock on the file, and the process has asked for extended notification (Batch OpLock), the rename request MUST block until the server has sent an OpLock break request to the owner of the OpLock, as specified in section [3.3.4.2](#Section_3.3.4.2), and either received a response or the OpLock break time-out has expired.<259> The server MUST have the OPLOCK_RELEASE flag set in the **TypeOfLock** field of the request. The server MUST set the **NewOpLockLevel** field of the request to 0x00. If the process holding the OpLock closes the file (thus freeing the OpLock) the rename takes place. If not, the rename MUST fail with STATUS_SHARING_VIOLATION.
 - If there is an existing file with the new name, the rename MUST fail with STATUS_OBJECT_NAME_COLLISION. If wildcards are used in a rename operation, and only some of the renames fail for any reason, the request MUST fail silently; that is, an error MUST NOT be returned if at least one of the rename operations was successful.
 A server can be processing multiple requests on the same resource concurrently. As a result, there can be interactions between the execution of the Rename operation and other operations such as ongoing searches (SMB_COM_SEARCH, SMB_COM_FIND, TRANS2_FIND_FIRST2, and so on). Although renaming a directory or files within a directory that is actively being searched is not prohibited, the interaction can disrupt the search, causing it to complete before all directory entries have been returned.
 
@@ -22662,12 +22662,12 @@ Renaming files using wildcards is supported. Only the final path element of each
 
 If a directory is renamed, it MUST NOT have a destination located within itself or any subdirectory within the source directory. The source and destination MUST be at or below the current **TID** within the file system namespace. If these conditions are not met, the server MUST return STATUS_OBJECT_PATH_SYNTAX_BAD (ERRDOS/ERRbadpath).
 
-If the operation is successful, the server MUST construct an [SMB_COM_RENAME Response (section 2.2.4.8.2)](#Section_2.2.4.12.2) message. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
+If the operation is successful, the server MUST construct an [SMB_COM_RENAME Response (section 2.2.4.8.2)](#Section_2.2.4.8.2) message. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
 <a id="Section_3.3.5.11"></a>
 #### 3.3.5.11 Receiving an SMB_COM_QUERY_INFORMATION Request
 
-When the server receives an [SMB_COM_QUERY_INFORMATION Request (section 2.2.4.9.1)](../MS-FSCC/MS-FSCC.md), it MUST query the file system metadata of the file identified in the **FileName** field of the request. The **FileName** field MUST be the full path, relative to the supplied **TID**, of the file being queried. The server MUST query the file information through the FILE_NETWORK_OPEN_INFORMATION **OutputBuffer** from the underlying [**object store**](#gt_object-store) with information level FileNetworkOpenInformation ([MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.34).<260>
+When the server receives an [SMB_COM_QUERY_INFORMATION Request (section 2.2.4.9.1)](#Section_2.2.4.9.1), it MUST query the file system metadata of the file identified in the **FileName** field of the request. The **FileName** field MUST be the full path, relative to the supplied **TID**, of the file being queried. The server MUST query the file information through the FILE_NETWORK_OPEN_INFORMATION **OutputBuffer** from the underlying [**object store**](#gt_object-store) with information level FileNetworkOpenInformation ([MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.34).<260>
 
 If the file exists and the operation is successful, the server MUST construct an SMB_COM_QUERY_INFORMATION response message as specified in section [2.2.4.9.2](#Section_2.2.4.9.2). The server MUST return the following information:
 
@@ -22703,7 +22703,7 @@ When the server receives an SMB_COM_READ request, it MUST perform the following 
 - If the **EstimateOfRemainingBytesToBeRead** field is nonzero, the server MAY use the **EstimateOfRemainingBytesToBeRead** field as a hint for read ahead.
 If the request is to read from a named pipe in [**message mode**](#gt_message-mode), the message is larger than **CountOfBytesToRead** bytes, and the underlying object store returned STATUS_BUFFER_OVERFLOW (ERRDOS/ERRmoredata), the server MUST respond with a complete SMB_COM_READ response not an error response. Any other error MUST generate an error response message 2.
 
-Otherwise, the server MUST construct an [SMB_COM_READ Response (section 2.2.4.22.2)](#Section_2.2.4.12.2) message.
+Otherwise, the server MUST construct an [SMB_COM_READ Response (section 2.2.4.22.2)](#Section_2.2.4.22.2) message.
 
 The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
@@ -22745,7 +22745,7 @@ See [[FSBO]](https://go.microsoft.com/fwlink/?LinkId=140636) section 3 for detai
 
 If the server cannot immediately grant the lock, the server SHOULD<265> reattempt the lock request for a brief interval. In the event of an error, including failure to grant the lock on the byte range, the server MUST send an error response message. If the underlying object store returns STATUS_CANCELLED, the server MUST set **SMB_Header.Status** field of the response to STATUS_FILE_LOCK_CONFLICT (ERRDOS/ERRlock). For any other error, status returned MUST be copied into **SMB_Header.Status** field of the response. The server MUST set **Server.Open.LastFailedLockOffset** to **LockOffsetInBytes** field of the request.
 
-If the lock is successful, the server MUST construct an [SMB_COM_LOCK_BYTE_RANGE Response (section 2.2.4.13.2)](#Section_2.2.4.12.2) message. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1). An entry for the newly-granted byte-range lock MUST be added to **Server.Open.Locks**. The type of the lock MUST be exclusive, and the entry MUST be formatted with a 32-bit offset (LOCKING_ANDX_RANGE32). The server MUST set **Server.Open.LastFailedLockOffset** to -1.
+If the lock is successful, the server MUST construct an [SMB_COM_LOCK_BYTE_RANGE Response (section 2.2.4.13.2)](#Section_2.2.4.13.2) message. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1). An entry for the newly-granted byte-range lock MUST be added to **Server.Open.Locks**. The type of the lock MUST be exclusive, and the entry MUST be formatted with a 32-bit offset (LOCKING_ANDX_RANGE32). The server MUST set **Server.Open.LastFailedLockOffset** to -1.
 
 <a id="Section_3.3.5.16"></a>
 #### 3.3.5.16 Receiving an SMB_COM_UNLOCK_BYTE_RANGE Request
@@ -22769,7 +22769,7 @@ If the command is successful, the server MUST increase **Server.Statistics.sts0_
 - A new **FID** MUST be created to uniquely identify this **Open** in **Server.Connection.FileOpenTable**.
 - If **Server.EnableOplock** is TRUE and a requested OpLock was granted, the type of OpLock MUST be set in **Server.Open.OpLock** and **Server.Open.OplockState** MUST be set to **Held**; otherwise, **Server.Open.OpLock** MUST be set to **None** and **Server.Open.OplockState** MUST be set to **None**.<267>
 - **Server.Open.TreeConnect** MUST be set to the **TreeConnect** on which the open request was performed, and **Server.Open.TreeConnect.OpenCount** MUST be increased by 1.
-- The server MUST construct an [SMB_COM_CREATE_TEMPORARY Response (section 2.2.4.15.2)](#Section_2.2.4.12.2) message.
+- The server MUST construct an [SMB_COM_CREATE_TEMPORARY Response (section 2.2.4.15.2)](#Section_2.2.4.15.2) message.
 - **Server.Open.Session** MUST be set to **Server.Open.TreeConnect.Session**.
 - **Server.Open.Connection** MUST be set to the **Server.Open.Session.Connection**.
 - **Server.Open.Locks** MUST be set to an empty list.
@@ -22802,7 +22802,7 @@ If the command is successful, the server MUST increase **Server.Statistics.sts0_
 - **Server.Open.GrantedAccess** MUST be set to (GENERIC_READ | GENERIC_WRITE).
 The server MUST register the **Open** by invoking the event Server Registers a New Open ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.4) and MUST assign the return value to **Server.Open.FileGlobalId**.
 
-The server MUST construct an [SMB_COM_CREATE_NEW Response (section 2.2.4.16.2)](#Section_2.2.4.12.2) message and return the newly-created **FID**.<268>
+The server MUST construct an [SMB_COM_CREATE_NEW Response (section 2.2.4.16.2)](#Section_2.2.4.16.2) message and return the newly-created **FID**.<268>
 
 If an error occurred, the server MUST send an error response message.
 
@@ -22813,7 +22813,7 @@ The response MUST be sent to the client as specified in section [3.3.4.1](#Secti
 
 When a server receives an [SMB_COM_CHECK_DIRECTORY Request (section 2.2.4.17.1)](#Section_2.2.4.17.1), it MUST verify that **DirectoryName** points to a valid directory. The user indicated by the **UID** MUST have read access to the directory path. If the user does not have read access to the directory path, the server MUST return an error response with status of STATUS_ACCESS_DENIED (ERRDOS/ERRnoaccess) and MUST increase **Server.Statistics.sts0_permerrors** by 1.
 
-If **DirectoryName** points to a valid directory, the server MUST construct an [SMB_COM_CHECK_DIRECTORY Response (section 2.2.4.17.2)](#Section_2.2.4.12.2) message with a **Status** indicating success. Otherwise, the server MUST send an error response with a **Status** of STATUS_OBJECT_PATH_NOT_FOUND (ERRDOS/ERRbadpath). See the error code list in section 2.2.4.17.2 for additional error conditions.<269>
+If **DirectoryName** points to a valid directory, the server MUST construct an [SMB_COM_CHECK_DIRECTORY Response (section 2.2.4.17.2)](#Section_2.2.4.17.2) message with a **Status** indicating success. Otherwise, the server MUST send an error response with a **Status** of STATUS_OBJECT_PATH_NOT_FOUND (ERRDOS/ERRbadpath). See the error code list in section 2.2.4.17.2 for additional error conditions.<269>
 
 The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
@@ -22853,8 +22853,8 @@ When the server receives an [SMB_COM_LOCK_AND_READ Request (section 2.2.4.20.1
 - Their triggering requests will be the SMB_COM_LOCK_AND_READ Request of this event.
 - If processing results in an error during the process specified in section 3.3.5.15, the server MUST construct an SMB_COM_LOCK_AND_READ (section 2.2.4.20.1) error response and MUST NOT continue to the process indicated in section 3.3.5.13.
 - If processing results in an error during the process specified in section 3.3.5.13, the server MUST construct an SMB_COM_LOCK_AND_READ Request error response.
-- The server MUST construct an [SMB_COM_LOCK_AND_READ Response (section 2.2.4.20.2)](#Section_2.2.4.12.2) instead of the messages indicated in 3.3.5.15 and 3.3.5.13.
-- The response fields MUST be populated with the data that would go in the corresponding fields of both SMB_COM_LOCK_BYTE_RANGE Request (section 2.2.4.13.1) and [SMB_COM_READ Response (section 2.2.4.11.2)](#Section_2.2.4.12.2) messages.
+- The server MUST construct an [SMB_COM_LOCK_AND_READ Response (section 2.2.4.20.2)](#Section_2.2.4.20.2) instead of the messages indicated in 3.3.5.15 and 3.3.5.13.
+- The response fields MUST be populated with the data that would go in the corresponding fields of both SMB_COM_LOCK_BYTE_RANGE Request (section 2.2.4.13.1) and [SMB_COM_READ Response (section 2.2.4.11.2)](#Section_2.2.4.11.2) messages.
 An entry for the newly-granted byte-range lock MUST be added to **Server.Open.Locks**. The type of the lock MUST be exclusive, and the entry MUST be formatted with a 32-bit offset (LOCKING_ANDX_RANGE32).<273>
 
 The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
@@ -22898,7 +22898,7 @@ The server MUST NOT respond as specified in section [3.3.4.1](#Section_3.3.4.1).
 <a id="Section_3.3.5.25"></a>
 #### 3.3.5.25 Receiving an SMB_COM_READ_MPX Request
 
-CIFS permits the use of the [SMB_COM_READ_MPX (section 2.2.4.23)](#Section_2.2.4.23.2) command over connectionless transports only. SMB message signing is not supported over connectionless transports.
+CIFS permits the use of the [SMB_COM_READ_MPX (section 2.2.4.23)](#Section_2.2.4.23) command over connectionless transports only. SMB message signing is not supported over connectionless transports.
 
 Upon receiving an [SMB_COM_READ_MPX Request (section 2.2.4.23.1)](#Section_2.2.4.23.1), the server MUST validate the **FID** and **UID** to ensure that the client has sufficient privilege to read the file. If no errors occur, the server MUST then attempt to read from the underlying object store for the file indicated by the **FID** of the request.<277>
 
@@ -22976,7 +22976,7 @@ For each request received as part of the SMB_COM_WRITE_MPX operation, the server
 
 When the server receives an SMB_COM_WRITE_MPX request that has a nonzero **SequenceNumber** in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1), the server takes one of two actions:
 
-- If **WritethroughMode** is set, the server writes all of the accumulated data and ensures (if possible) that the data is flushed to disk. **ResponseMask** MUST be set to **Server.Open.MpxMask**. The server then returns the [SMB_COM_WRITE_MPX Response (section 2.2.4.26.2)](#Section_2.2.4.12.2). The **ResponseMask** indicates the set of SMB_COM_WRITE_MPX messages in this exchange that were received by the server.
+- If **WritethroughMode** is set, the server writes all of the accumulated data and ensures (if possible) that the data is flushed to disk. **ResponseMask** MUST be set to **Server.Open.MpxMask**. The server then returns the [SMB_COM_WRITE_MPX Response (section 2.2.4.26.2)](#Section_2.2.4.26.2). The **ResponseMask** indicates the set of SMB_COM_WRITE_MPX messages in this exchange that were received by the server.
 - If **WritethroughMode** is clear, the server responds immediately and sets **ResponseMask** as **Server.Open.MpxMask**; write operations that are in-progress complete asynchronously.
 The client MUST resend any SMB_COM_WRITE_MPX requests that were not indicated as having been received in the **ResponseMask**. The last message resent MUST have the same nonzero **SequenceNumber** in the SMB Header as was previously used in this exchange. The server, once again, responds with an SMB_COM_WRITE_MPX Response containing the cumulative **ResponseMask**. This process continues until all request messages in the exchange have been acknowledged.
 
@@ -23013,7 +23013,7 @@ The release or creation of a byte-range lock MUST follow these rules:
 The release of an OpLock follows these rules:
 
 - If there are no outstanding OpLock breaks, or if the [**FID**](#gt_fid) in the request does not match the FID of an outstanding OpLock Break Notification, then no OpLock is released. This does not generate an error.
-- If **NumberOfRequestedUnlocks** and **NumberOfRequestedLocks** are both zero (0x0000) in the SMB_COM_LOCKING_ANDX Request, the server MUST NOT send an [SMB_COM_LOCKING_ANDX Response (section 2.2.4.32.2)](#Section_2.2.4.12.2).
+- If **NumberOfRequestedUnlocks** and **NumberOfRequestedLocks** are both zero (0x0000) in the SMB_COM_LOCKING_ANDX Request, the server MUST NOT send an [SMB_COM_LOCKING_ANDX Response (section 2.2.4.32.2)](#Section_2.2.4.32.2).
 - Note that **NumberOfRequestedUnlocks** SHOULD always be zero (0x0000) in an OpLock Break Request, because an OpLock is an exclusive file lock. A client holding an OpLock on a file has no need to request byte-range locks from the server. There SHOULD, therefore, be no existing byte-range locks to be unlocked by the OpLock Break Request message. No error is generated by a nonzero **NumberOfRequestedUnlocks** value in an OpLock Break Request.<289><290>
 Locking a range of bytes SHOULD<291> fail with STATUS_LOCK_NOT_GRANTED(ERRDOS/ERRlock) if any subranges or overlapping ranges are locked, even if they are currently locked by the **PID** requesting the new lock.
 
@@ -23028,7 +23028,7 @@ For each byte-range lock that is released, the corresponding entry in **Server.O
 <a id="Section_3.3.5.31"></a>
 #### 3.3.5.31 Receiving an SMB_COM_TRANSACTION Request
 
-The SMB_COM_TRANSACTION is processed as specified in sections [3.3.5.2.5](#Section_3.3.5.2.5) and [3.3.5.57](#Section_3.3.5.57.10). Additionally, the server MUST validate the contents of the **SMB_DATA.Bytes.Name** field. The subcommand transported by the transaction is interpreted based upon the object receiving the message.
+The SMB_COM_TRANSACTION is processed as specified in sections [3.3.5.2.5](#Section_3.3.5.2.5) and [3.3.5.57](#Section_3.3.5.57). Additionally, the server MUST validate the contents of the **SMB_DATA.Bytes.Name** field. The subcommand transported by the transaction is interpreted based upon the object receiving the message.
 
 <a id="Section_3.3.5.32"></a>
 #### 3.3.5.32 Receiving an SMB_COM_IOCTL Request
@@ -23046,7 +23046,7 @@ The value of the **TID** field MUST be either a valid **TID** (see section [3.3.
 
 If **EchoCount** is zero, a response MUST NOT be sent. If **EchoCount** is nonzero, the server SHOULD reply with the requested number of responses. The server MAY enforce any nonzero limit in the number of responses that it returns.
 
-The server MUST construct an SMB_COM_ECHO response message as specified in section [2.2.4.39](#Section_2.2.4.39.2) and initialize it as follows:
+The server MUST construct an SMB_COM_ECHO response message as specified in section [2.2.4.39](#Section_2.2.4.39) and initialize it as follows:
 
 - The **SMB_Parameters.Words.SequenceNumber** field MUST be set to 1.
 - The **SMB_Data.Bytes.Data** field MUST be the same as that received in the request.
@@ -23071,7 +23071,7 @@ Upon receipt of an [SMB_COM_WRITE_AND_CLOSE Request (section 2.2.4.40.1)](#Sec
 - If the **LastWriteTime** field is nonzero in the request, the server SHOULD set the last write time of the file to this value.
 In the event of an error, the server MUST send an error response message. Otherwise, the server MUST close the file indicated by the **FID**. The server MUST release every lock in **Open.Locks**. The **FID** MUST be invalidated by removing the **Open** entry from **Server.Connection.FileOpenTable**. **Open.TreeConnect.OpenCount** and **Server.Statistics.sts0_fopens** MUST be decreased by 1.<294> The server MUST provide **Open.FileGlobalId** as an input parameter and MUST deregister the **Open** by invoking the event Server Deregisters an Open ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.5).
 
-Again, an error MUST result in an error response message being sent to the client. Otherwise, the server MUST construct an [SMB_COM_WRITE_AND_CLOSE Response (section 2.2.4.40.2)](#Section_2.2.4.12.2) message. The **CountOfBytesWritten** field MUST contain the number of bytes written to the file. This value SHOULD be the equal to **CountOfBytesToWrite**. If the number of bytes written differs from the number of bytes requested to be written, and no error is indicated, the server has no resources available with which to satisfy the complete write. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
+Again, an error MUST result in an error response message being sent to the client. Otherwise, the server MUST construct an [SMB_COM_WRITE_AND_CLOSE Response (section 2.2.4.40.2)](#Section_2.2.4.40.2) message. The **CountOfBytesWritten** field MUST contain the number of bytes written to the file. This value SHOULD be the equal to **CountOfBytesToWrite**. If the number of bytes written differs from the number of bytes requested to be written, and no error is indicated, the server has no resources available with which to satisfy the complete write. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
 <a id="Section_3.3.5.35"></a>
 #### 3.3.5.35 Receiving an SMB_COM_OPEN_ANDX Request
@@ -23114,7 +23114,7 @@ If the command is successful, the server MUST increase **Server.Statistics.sts0_
 - **Server.Open.GrantedAccess** MUST be set to the **AccessMode** field of the request.
 The server MUST register the **Open** by invoking the event Server Registers a New Open ([MS-SRVS] section 3.1.6.4) and MUST assign the return value to **Server.Open.FileGlobalId**.
 
-The server MUST instantiate an [SMB_COM_OPEN_ANDX Response (section 2.2.4.41.2)](#Section_2.2.4.12.2) message and MUST set **SMB_Header.Status** to indicate success.<298>
+The server MUST instantiate an [SMB_COM_OPEN_ANDX Response (section 2.2.4.41.2)](#Section_2.2.4.41.2) message and MUST set **SMB_Header.Status** to indicate success.<298>
 
 If the REQ_ATTRIB flag is set in the **SMB_Parameters.Words.Flags** field of the request, the values of the following response fields MUST be filled in by the server; otherwise, they SHOULD be set to zero and MUST be ignored by the client:
 
@@ -23153,7 +23153,7 @@ If the read request was made to a named pipe or I/O device, the following additi
 - If **Timeout** is greater than zero, the server SHOULD<300> wait to send the response until either **MinCountOfBytesToReturn** are read or the **Timeout** (in milliseconds) elapses. If **Timeout** is greater than zero and it elapses before **MinCountOfBytesToReturn** bytes are read, the server SHOULD send a response with an error status indicating that the time-out occurred and SHOULD also respond with any bytes already read. If **Timeout** is zero and no data is currently available, the server SHOULD send a successful response with the **DataLength** field set to zero.
 - If the **Timeout** value is -1 (0xFFFFFFFF, "wait forever") then the server MUST wait until there are at least **MinCountOfBytesToReturn** bytes of data read from the device before returning a response to the client.
 - If the **Timeout** value is -2 (0xFFFFFFFE, "default") the server MUST wait for the default time-out associated with the named pipe or I/O device.
-If the operation is successful, the server MUST construct an [SMB_COM_READ_ANDX Response (section 2.2.4.42.2)](#Section_2.2.4.12.2) message with the following additional requirements:
+If the operation is successful, the server MUST construct an [SMB_COM_READ_ANDX Response (section 2.2.4.42.2)](#Section_2.2.4.42.2) message with the following additional requirements:
 
 - If the request was to a named pipe, **Available** MUST be set to the number of bytes remaining to be read from the named pipe, which can be zero. Otherwise, the server MUST set the **Available** field to -1(0xFFFF).
 - The **DataLength** field MUST be set to the length, in bytes, of the data read by the server.
@@ -23189,7 +23189,7 @@ If the write request is made to a named pipe or I/O device, the following additi
 - If the **Timeout** value is -1 (0xFFFF, "wait forever"), the server SHOULD wait until the number of **DataLength** bytes have been written to the device before returning a response to the client.
 - If the **Timeout** value is -2 (0xFFFE, "default"), the server SHOULD wait for the default time-out associated with the [**name pipes**](#gt_named-pipe) or I/O device.
 - If the **Remaining** field is nonzero, and the pipe is a [**message mode**](#gt_message-mode) pipe, it indicates that the pipe write spans over multiple requests. The **Remaining** field SHOULD contain the number of bytes remaining to be written.<304>
-If the operation is successful, the server MUST construct an SMB_COM_WRITE_ANDX Response message as specified in section [2.2.4.43.2](#Section_2.2.4.12.2), with the following additional requirements:
+If the operation is successful, the server MUST construct an SMB_COM_WRITE_ANDX Response message as specified in section [2.2.4.43.2](#Section_2.2.4.43.2), with the following additional requirements:
 
 - If the request is to a named pipe or an I/O device and **ReadBytesAvailable** is set in the **WriteMode** field, **Available** MUST be set to the number of bytes available to be read from the named pipe or device, which MAY be zero.
 - The **Count** field MUST be set to the count, in bytes, of data written.<305>
@@ -23198,7 +23198,7 @@ The response MUST be sent to the client as specified in section [3.3.4.1](#Secti
 <a id="Section_3.3.5.38"></a>
 #### 3.3.5.38 Receiving an SMB_COM_TRANSACTION2 Request
 
-The SMB_COM_TRANSACTION2 is processed as specified in sections [3.3.5.2.5](#Section_3.3.5.2.5) and [3.3.5.58](#Section_3.3.5.58.3).
+The SMB_COM_TRANSACTION2 is processed as specified in sections [3.3.5.2.5](#Section_3.3.5.2.5) and [3.3.5.58](#Section_3.3.5.58).
 
 The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
@@ -23212,7 +23212,7 @@ The response MUST be sent to the client as specified in section [3.3.4.1](#Secti
 <a id="Section_3.3.5.40"></a>
 #### 3.3.5.40 Receiving an SMB_COM_TREE_CONNECT Request
 
-When the server receives an [SMB_COM_TREE_CONNECT Request (section 2.2.4.50.1)](../MS-SRVS/MS-SRVS.md), it MUST attempt to connect to the share indicated in the **Path** field. To get the updated server name, the server MUST provide <server name, share name> parsed from the **Path** field and MUST invoke the Server Normalizes a ServerName event ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.8). The server MUST use <updated server name, share name> to look up the **Share** in **Server.ShareTable**. If the share is not found, the server MUST send an error response with a status of STATUS_OBJECT_PATH_NOT_FOUND (ERRDOS/ERRbadpath).
+When the server receives an [SMB_COM_TREE_CONNECT Request (section 2.2.4.50.1)](#Section_2.2.4.50.1), it MUST attempt to connect to the share indicated in the **Path** field. To get the updated server name, the server MUST provide <server name, share name> parsed from the **Path** field and MUST invoke the Server Normalizes a ServerName event ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.8). The server MUST use <updated server name, share name> to look up the **Share** in **Server.ShareTable**. If the share is not found, the server MUST send an error response with a status of STATUS_OBJECT_PATH_NOT_FOUND (ERRDOS/ERRbadpath).
 
 **Server.Paused** with a value of TRUE indicates that all shares can only be accessed by an administrator. Under these conditions, if a SMB_COM_TREE_CONNECT Request (section 2.2.4.50.1) is received from a user that is not an administrator, the server MUST send an error response with a status of STATUS_SHARING_PAUSED (ERRDOS/ERRpaused).<306>
 
@@ -23236,7 +23236,7 @@ The server MUST register **TreeConnect** by invoking the event Server Registers 
 
 The **TID** MUST be returned in both the **SMB Header.TID** field and the **SMB_Parameter.Words.TID** field of the response. The default **Server.MaxBufferSize** of the server MUST be returned in the **MaxBufferSize** field.
 
-The [SMB_COM_TREE_CONNECT Response (section 2.2.4.50.2)](#Section_2.2.4.12.2) provides no field for indicating share characteristics such as [**DFS**](#gt_distributed-file-system-dfs) support or access rights.
+The [SMB_COM_TREE_CONNECT Response (section 2.2.4.50.2)](#Section_2.2.4.50.2) provides no field for indicating share characteristics such as [**DFS**](#gt_distributed-file-system-dfs) support or access rights.
 
 If the Tree Connect is successful, a complete SMB_COM_TREE_CONNECT Response is sent. Otherwise, an error response message MUST be sent.
 
@@ -23323,7 +23323,7 @@ If the **VcNumber** field in the session setup request is 0, the server MUST per
 
 - Close all sessions in **Server.Connection.SessionTable** in which **UserName** matches **Server.Session.UserName** as specified in section [3.3.4.8](#Section_3.3.4.8).
 - Disconnect each **Connection** in **Server.ConnectionTable**, except the current **Server.Connection**, in which **ClientName** matches the **Server.Connection.ClientName** as specified in section [3.3.7.2](#Section_3.3.7.2).
-If authentication was successful or **Server.GuestOkay** is TRUE, a new **UID** and **GlobalSessionId** MUST be generated and entered into **Server.Connection.SessionTable**. If the size of **Server.Connection.SessionTable** has reached **Server.SrvMaxSessionTableSize**, the server MUST reply to the client with STATUS_TOO_MANY_SESSIONS (ERRSRV/ERRtoomanyuids) in an error response; otherwise, **Server.Statistics.sts0_sopens** MUST be increased by 1. The server MUST register the session by invoking the event Server Registers a New Session ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.2) and MUST assign the return value to **Session.SessionGlobalId**. The server MUST fill in the additional response fields as specified in section [2.2.4.53.2](#Section_2.2.4.12.2).
+If authentication was successful or **Server.GuestOkay** is TRUE, a new **UID** and **GlobalSessionId** MUST be generated and entered into **Server.Connection.SessionTable**. If the size of **Server.Connection.SessionTable** has reached **Server.SrvMaxSessionTableSize**, the server MUST reply to the client with STATUS_TOO_MANY_SESSIONS (ERRSRV/ERRtoomanyuids) in an error response; otherwise, **Server.Statistics.sts0_sopens** MUST be increased by 1. The server MUST register the session by invoking the event Server Registers a New Session ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.2) and MUST assign the return value to **Session.SessionGlobalId**. The server MUST fill in the additional response fields as specified in section [2.2.4.53.2](#Section_2.2.4.53.2).
 
 If authentication was successful, the server MUST query the session key from the authentication package, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md). If the session key is equal to or longer than 16 bytes, only the least significant 16 bytes MUST be stored in **Server.Session.SessionKey**. Otherwise, the session key MUST be stored in **Server.Session.SessionKey** and MUST be padded with zeros up to 16 bytes.
 
@@ -23349,7 +23349,7 @@ Resources opened by the specified **UID** MUST be closed, and the resource entry
 <a id="Section_3.3.5.45"></a>
 #### 3.3.5.45 Receiving an SMB_COM_TREE_CONNECT_ANDX Request
 
-When the server receives an [SMB_COM_TREE_CONNECT_ANDX Request (section 2.2.4.55.1)](../MS-SRVS/MS-SRVS.md), it MUST attempt to connect to the share indicated in the **Path** field. The server MUST provide <server name, share name> parsed from the **Path** field to invoke the event Server Normalizes a ServerName ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.8) and to get the updated server name. The server MUST use <updated server name, share name> to look up the **Share** in **Server.ShareTable**. If the share is not found, the server MUST send an error response with a status of STATUS_BAD_NETWORK_NAME (ERRSRV/ERRinvnetname).
+When the server receives an [SMB_COM_TREE_CONNECT_ANDX Request (section 2.2.4.55.1)](#Section_2.2.4.55.1), it MUST attempt to connect to the share indicated in the **Path** field. The server MUST provide <server name, share name> parsed from the **Path** field to invoke the event Server Normalizes a ServerName ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.8) and to get the updated server name. The server MUST use <updated server name, share name> to look up the **Share** in **Server.ShareTable**. If the share is not found, the server MUST send an error response with a status of STATUS_BAD_NETWORK_NAME (ERRSRV/ERRinvnetname).
 
 **Server.Paused** with a value of TRUE indicates that all shares can only be accessed by an administrator. Under these conditions, if an [SMB_COM_TREE_CONNECT Request (section 2.2.4.50.1)](#Section_2.2.4.50.1) is received from a user that is not an administrator, the server MUST send an error response with a status of STATUS_SHARING_PAUSED (ERRDOS/ERRpaused).<307>
 
@@ -23379,14 +23379,14 @@ The **SMB_Data.Bytes.Service** field of the response MUST be set from **Server.S
 
 If the TREE_CONNECT_ANDX_DISCONNECT_TID flag is set in the **SMB_Parameter.Words.Flags** field, continue the processing for the **Opens** and open searches, as specified in section [3.3.5.41](#Section_3.3.5.41). If this operation fails, no error is sent to the client.
 
-If the Tree Connect is successful, a complete [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.12.2) is sent. Otherwise, an error response message MUST be sent.
+If the Tree Connect is successful, a complete [SMB_COM_TREE_CONNECT_ANDX Response (section 2.2.4.55.2)](#Section_2.2.4.55.2) is sent. Otherwise, an error response message MUST be sent.
 
 The response is sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
 <a id="Section_3.3.5.46"></a>
 #### 3.3.5.46 Receiving an SMB_COM_QUERY_INFORMATION_DISK Request
 
-When the server receives an [SMB_COM_QUERY_INFORMATION_DISK Request (section 2.2.4.57.2)](#Section_2.2.4.12.2), it MUST look up the **Server.TreeConnect.Share** to find the **Server.Share.LocalPath**. The **Server.Share.Type** MUST be **Disk**; otherwise, the server MUST return STATUS_SMB_BAD_TID (ERRSRV/ERRinvtid).
+When the server receives an [SMB_COM_QUERY_INFORMATION_DISK Request (section 2.2.4.57.2)](#Section_2.2.4.57.2), it MUST look up the **Server.TreeConnect.Share** to find the **Server.Share.LocalPath**. The **Server.Share.Type** MUST be **Disk**; otherwise, the server MUST return STATUS_SMB_BAD_TID (ERRSRV/ERRinvtid).
 
 The server MUST determine the following:
 
@@ -23446,7 +23446,7 @@ If this is the continuation of a previous search:
 
 - Using the **UID**, **TID**, [**PID**](#gt_process-identifier-pid), and **MID**, the **Server.Connection.SearchOpenTable** ADM element is scanned for a matching search context. If no matching search context is found, the server returns an error response with a **Status** value of STATUS_NO_MORE_FILES (ERRDOS/ERRnofiles). This indicates that the end of the search has been reached.
 - If the search context is found, then a new response is created containing the next set of entries to be sent to the client. The search is resumed based upon search location indicated by the **ResumeKey** field in the request. The response MUST be sent to the client as specified in section 3.3.4.1.
-Unlike the SMB_COM_FIND command, the SMB_COM_SEARCH command has no matching Close operation to allow the client to explicitly close an incomplete search. Search contexts created by the SMB_COM_SEARCH command MUST be closed and removed from the **Server.Connection.SearchOpenTable** ADM element when the end of the search is reached (no more matching files are found), and whenever the PID that created the context is closed. A PID is closed with an [SMB_COM_PROCESS_EXIT (section 2.2.4.18)](#Section_2.2.4.18). If the **TID** in which the search is being performed is closed (with an [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51.2) or a similar command), the search context MUST also be closed. The server SHOULD also periodically purge unused search contexts by using the [Unused Open Search Timer (section 3.3.2.3)](#Section_3.3.2.3), if implemented, or close the least recently used search context when a new search is received and the server is out of resources to process it.<311>
+Unlike the SMB_COM_FIND command, the SMB_COM_SEARCH command has no matching Close operation to allow the client to explicitly close an incomplete search. Search contexts created by the SMB_COM_SEARCH command MUST be closed and removed from the **Server.Connection.SearchOpenTable** ADM element when the end of the search is reached (no more matching files are found), and whenever the PID that created the context is closed. A PID is closed with an [SMB_COM_PROCESS_EXIT (section 2.2.4.18)](#Section_2.2.4.18). If the **TID** in which the search is being performed is closed (with an [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51) or a similar command), the search context MUST also be closed. The server SHOULD also periodically purge unused search contexts by using the [Unused Open Search Timer (section 3.3.2.3)](#Section_3.3.2.3), if implemented, or close the least recently used search context when a new search is received and the server is out of resources to process it.<311>
 
 If a search continuation request arrives after the search context has been purged, the client receives an error response with a **Status** of STATUS_NO_MORE_FILES (ERRDOS/ERRnofiles), which is the same as the value returned if the end of search has been reached.<312>
 
@@ -23467,7 +23467,7 @@ The response is formatted as specified in [2.2.4.61.2](#Section_2.2.4.61.2). The
 <a id="Section_3.3.5.50"></a>
 #### 3.3.5.50 Receiving an SMB_COM_NT_TRANSACT Request
 
-The SMB_COM_NT_TRANSACT (section 3.3.5.50) is processed as specified in Receiving any Transaction Request (section [3.3.5.2.5](#Section_3.3.5.2.5)). The processing of NT_Trans subcommands is specified in section [3.3.5.59](#Section_3.3.5.59.1). In addition, the **Function** field of the request MUST be validated.
+The SMB_COM_NT_TRANSACT (section 3.3.5.50) is processed as specified in Receiving any Transaction Request (section [3.3.5.2.5](#Section_3.3.5.2.5)). The processing of NT_Trans subcommands is specified in section [3.3.5.59](#Section_3.3.5.59). In addition, the **Function** field of the request MUST be validated.
 
 If the **Function** code is not defined, the server MUST return STATUS_INVALID_SMB (ERRSRV/ERRerror). If the **Function** code is defined but not implemented, the server MUST return STATUS_SMB_BAD_COMMAND (ERRSRV/ERRbadcmd).
 
@@ -23528,7 +23528,7 @@ If the command is successful, the server MUST increase **Server.Statistics.sts0_
 - **Server.Open.GrantedAccess** MUST be set to the **DesiredAccess** field of the request.
 The server MUST register the **Open** by invoking the event Server Registers a New Open ([MS-SRVS] section 3.1.6.4) and MUST assign the return value to **Server.Open.FileGlobalId**.
 
-The **FID** MUST be placed into an [SMB_COM_NT_CREATE_ANDX Response (section 2.2.4.64.2)](#Section_2.2.4.12.2) message. If an error is generated, an error response MUST be used instead.
+The **FID** MUST be placed into an [SMB_COM_NT_CREATE_ANDX Response (section 2.2.4.64.2)](#Section_2.2.4.64.2) message. If an error is generated, an error response MUST be used instead.
 
 If the SMB_COM_NT_CREATE_ANDX is successful, this information, along with the **FID** generated by the command, MUST be placed into an SMB_COM_NT_CREATE_ANDX Response message. The **PID** and **TID** from the request header and new **FID** MUST be entered into the **Server.Connection.FileOpenTable**. If an error is generated, an error response MUST be used instead.
 
@@ -23565,7 +23565,7 @@ Other considerations:
 - If the file is opened by the requesting process, it MUST be open in compatibility mode (see section [3.2.4.5.1](#Section_3.2.4.5.1)). If it is not open in compatibility mode, the hard linking MUST fail with STATUS_ACCESS_DENIED (ERRDOS/ERRnoaccess) and **Server.Statistics.sts0_permerrors** MUST be increased by 1.<321>
 - If another process has the file open, and that process has an [**opportunistic lock (OpLock)**](#gt_opportunistic-lock-oplock) on the file, and the process has asked for extended notification (Batch OpLock), the hard link request MUST block until the server has sent an [**OpLock break**](#gt_oplock-break) request to the owner of the OpLock and either received a response or the OpLock break time-out has expired. If the process holding the OpLock closes the file (thus freeing the OpLock), the hard linking takes place. If not, the request MUST fail with STATUS_SHARING_VIOLATION (ERRDOS/ERRbadshare).
 - It is possible for a server to be processing multiple requests on the same resource concurrently. As a result, there can be interactions between the execution of the hard link operation and other operations, such as ongoing searches ([SMB_COM_SEARCH (section 2.2.4.58)](#Section_2.2.4.58), [SMB_COM_FIND (section 2.2.4.59)](#Section_2.2.4.59), [TRANS2_FIND_FIRST2 (section 2.2.6.2)](#Section_2.2.6.2), and so on). Although creating a hard link within a directory that is actively being searched is not prohibited, the interaction can disrupt the search, causing it to complete before all directory entries have been returned.<322>
-If the operation is successful, the server MUST construct an [SMB_COM_NT_RENAME Response (section 2.2.4.66.2)](#Section_2.2.4.12.2) message. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
+If the operation is successful, the server MUST construct an [SMB_COM_NT_RENAME Response (section 2.2.4.66.2)](#Section_2.2.4.66.2) message. The response MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
 <a id="Section_3.3.5.54"></a>
 #### 3.3.5.54 Receiving an SMB_COM_OPEN_PRINT_FILE Request
@@ -23647,18 +23647,18 @@ The CIFS server MUST pass the following information to the RAP subsystem (see [M
 - The transaction data block (**Trans_Data**).
 - The **MaxParameterCount** field from the request, indicating the maximum size, in bytes, of the transaction parameter block permitted in the transaction response.
 - The **MaxDataCount** field from the request, indicating the maximum size, in bytes, of the transaction data block permitted in the transaction response.
-The response parameter buffer filled in by the RAP subsystem MUST be returned to the client via the parameter block of the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2). The **TotalParameterCount** of the transaction response MUST be set to the number of bytes in the response parameter buffer.
+The response parameter buffer filled in by the RAP subsystem MUST be returned to the client via the parameter block of the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2). The **TotalParameterCount** of the transaction response MUST be set to the number of bytes in the response parameter buffer.
 
 The response data buffer filled in by the RAP server MUST be returned to the client via the data block of the SMB_COM_TRANSACTION response. The **TotalDataCount** of the transaction response MUST be set to the number of bytes in the response data buffer.
 
 <a id="Section_3.3.5.57.2"></a>
 ##### 3.3.5.57.2 Receiving a TRANS_SET_NMPIPE_STATE Request
 
-Upon receipt of a [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_3.3.5.57.2) subcommand request, the SMB Trans subsystem MUST attempt to apply the state indicated by the **Trans_Parameters.PipeState** field to the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request.<326>
+Upon receipt of a [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_2.2.5.1) subcommand request, the SMB Trans subsystem MUST attempt to apply the state indicated by the **Trans_Parameters.PipeState** field to the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request.<326>
 
-If the request fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) error response message. If successful, the server MUST construct a [TRANS_SET_NMPIPE_STATE Response (section 2.2.5.1.2)](#Section_2.2.4.12.2).
+If the request fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) error response message. If successful, the server MUST construct a [TRANS_SET_NMPIPE_STATE Response (section 2.2.5.1.2)](#Section_2.2.5.1.2).
 
-The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).
+The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).
 
 <a id="Section_3.3.5.57.3"></a>
 ##### 3.3.5.57.3 Receiving a TRANS_RAW_READ_NMPIPE Request
@@ -23676,25 +23676,25 @@ The CIFS server passes the results to the client in the SMB_COM_TRANSACTION resp
 
 Upon receipt of a TRANS_QUERY_NMPIPE_STATE subcommand request, the SMB Trans subsystem MUST attempt to query the pipe state of the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request.<328>
 
-If the request fails, the status code indicating the error is returned in an SMB_COM_TRANSACTION error response message. If successful, the server MUST construct a TRANS_QUERY_NMPIPE_STATE response, as specified in section [2.2.5.3.2](#Section_2.2.4.12.2).
+If the request fails, the status code indicating the error is returned in an SMB_COM_TRANSACTION error response message. If successful, the server MUST construct a TRANS_QUERY_NMPIPE_STATE response, as specified in section [2.2.5.3.2](#Section_2.2.5.3.2).
 
 The CIFS server passes the results to the client in the SMB_COM_TRANSACTION response.
 
 <a id="Section_3.3.5.57.5"></a>
 ##### 3.3.5.57.5 Receiving a TRANS_QUERY_NMPIPE_INFO Request
 
-Upon receipt of a [TRANS_QUERY_NMPIPE_INFO (section 2.2.5.4)](#Section_3.3.5.57.5) subcommand request, the SMB Trans subsystem MUST attempt to query state information for the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request.<329>
+Upon receipt of a [TRANS_QUERY_NMPIPE_INFO (section 2.2.5.4)](#Section_2.2.5.4) subcommand request, the SMB Trans subsystem MUST attempt to query state information for the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request.<329>
 
-If the request fails, the status code indicating the error is returned in an SMB_COM_TRANSACTION error response message. The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).
+If the request fails, the status code indicating the error is returned in an SMB_COM_TRANSACTION error response message. The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).
 
 <a id="Section_3.3.5.57.6"></a>
 ##### 3.3.5.57.6 Receiving a TRANS_PEEK_NMPIPE Request
 
 Upon receipt of a [TRANS_PEEK_NMPIPE (section 2.2.5.5)](#Section_2.2.5.5) subcommand request, the SMB Trans subsystem MUST attempt to peek at information from the [**named pipe**](#gt_named-pipe) indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request. Data MUST be read from the named pipe without removing the data from the pipe queue. The maximum amount of data to be read is specified by the **SMB_Parameters.Words.MaxDataCount** field of the request.<330>
 
-If the request fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) error response message. If successful, the server MUST construct a [TRANS_PEEK_NMPIPE Response (section 2.2.5.5.2)](#Section_2.2.4.12.2).
+If the request fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) error response message. If successful, the server MUST construct a [TRANS_PEEK_NMPIPE Response (section 2.2.5.5.2)](#Section_2.2.5.5.2).
 
-The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).
+The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).
 
 <a id="Section_3.3.5.57.7"></a>
 ##### 3.3.5.57.7 Receiving a TRANS_TRANSACT_NMPIPE Request
@@ -23705,9 +23705,9 @@ The maximum number of bytes to be read is specified by the **SMB_Parameters.Word
 
 If the pipe is not a message mode pipe, the Trans subsystem MUST fail the request with STATUS_INVALID_PARAMETER (ERRDOS/ERRinvalidparam).<331>
 
-If the operation fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) error response message. If the operation returns either STATUS_BUFFER_OVERFLOW (ERRDOS/ERRmoredata) or success, the server MUST construct a [TRANS_TRANSACT_NMPIPE Response (section 2.2.5.6.2)](#Section_2.2.4.12.2).
+If the operation fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) error response message. If the operation returns either STATUS_BUFFER_OVERFLOW (ERRDOS/ERRmoredata) or success, the server MUST construct a [TRANS_TRANSACT_NMPIPE Response (section 2.2.5.6.2)](#Section_2.2.5.6.2).
 
-The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.46.2)](#Section_2.2.4.12.2).
+The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.46.2)](#Section_2.2.4.46.2).
 
 <a id="Section_3.3.5.57.8"></a>
 ##### 3.3.5.57.8 Receiving a TRANS_RAW_WRITE_NMPIPE Request
@@ -23721,34 +23721,34 @@ If the request fails, the status code indicating the error is returned in an SMB
 <a id="Section_3.3.5.57.9"></a>
 ##### 3.3.5.57.9 Receiving a TRANS_READ_NMPIPE Request
 
-Upon receipt of a [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_3.2.5.38.8) subcommand request, the SMB Trans subsystem MUST attempt to read data from the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request. The amount of data to be read is specified by the **SMB_Parameters.Words.MaxDataCount** field of the request. The data MUST be read with respect to the current I/O state of the pipe (see [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_3.3.5.57.2) and [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_3.2.5.38.3)). If the named pipe is not set to [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe), and there is no data in the named pipe, the read operation on the server MUST wait indefinitely for data to become available (or until it is canceled).<334>
+Upon receipt of a [TRANS_READ_NMPIPE (section 2.2.5.8)](#Section_2.2.5.8) subcommand request, the SMB Trans subsystem MUST attempt to read data from the named pipe indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request. The amount of data to be read is specified by the **SMB_Parameters.Words.MaxDataCount** field of the request. The data MUST be read with respect to the current I/O state of the pipe (see [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_2.2.5.1) and [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_2.2.5.3)). If the named pipe is not set to [**non-blocking mode**](#gt_non-blocking-mode-of-a-named-pipe), and there is no data in the named pipe, the read operation on the server MUST wait indefinitely for data to become available (or until it is canceled).<334>
 
-If the operation fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2) error message. If the operation returns either STATUS_BUFFER_OVERFLOW (ERRDOS/ERRmoredata) or success, the server MUST construct a [TRANS_READ_NMPIPE Response (section 2.2.5.8.2)](#Section_2.2.4.12.2).
+If the operation fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2) error message. If the operation returns either STATUS_BUFFER_OVERFLOW (ERRDOS/ERRmoredata) or success, the server MUST construct a [TRANS_READ_NMPIPE Response (section 2.2.5.8.2)](#Section_2.2.5.8.2).
 
 The CIFS server passes the results to the client in the SMB_COM_TRANSACTION Response.
 
 <a id="Section_3.3.5.57.10"></a>
 ##### 3.3.5.57.10 Receiving a TRANS_WRITE_NMPIPE Request
 
-Upon receipt of a [TRANS_WRITE_NMPIPE (section 2.2.5.9)](#Section_2.2.5.9) subcommand request, the SMB Trans subsystem MUST attempt to write data to the underlying [**object store**](#gt_object-store) for the open [**named pipe**](#gt_named-pipe) identified by the **SMB_Parameters.Words.Setup.FID** field of the request. The data to be written is contained in the **Trans_Data.WriteData** field of the request. The write MUST be performed with respect to the current I/O state of the pipe (see [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_3.3.5.57.2) and [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_3.2.5.38.3)).<335>
+Upon receipt of a [TRANS_WRITE_NMPIPE (section 2.2.5.9)](#Section_2.2.5.9) subcommand request, the SMB Trans subsystem MUST attempt to write data to the underlying [**object store**](#gt_object-store) for the open [**named pipe**](#gt_named-pipe) identified by the **SMB_Parameters.Words.Setup.FID** field of the request. The data to be written is contained in the **Trans_Data.WriteData** field of the request. The write MUST be performed with respect to the current I/O state of the pipe (see [TRANS_SET_NMPIPE_STATE (section 2.2.5.1)](#Section_2.2.5.1) and [TRANS_QUERY_NMPIPE_STATE (section 2.2.5.3)](#Section_2.2.5.3)).<335>
 
-If the operation fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) error response message. If the operation is successful, the server MUST construct a [TRANS_WRITE_NMPIPE Response (section 2.2.5.9.2)](#Section_2.2.4.12.2).
+If the operation fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) error response message. If the operation is successful, the server MUST construct a [TRANS_WRITE_NMPIPE Response (section 2.2.5.9.2)](#Section_2.2.5.9.2).
 
-The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).
+The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).
 
 <a id="Section_3.3.5.57.11"></a>
 ##### 3.3.5.57.11 Receiving a TRANS_WAIT_NMPIPE Request
 
 Upon receipt of a [TRANS_WAIT_NMPIPE (section 2.2.5.10)](#Section_2.2.5.10) subcommand request, the SMB Trans subsystem MUST test the underlying object store for availability of the named pipe identified in the **SMB_Data.Bytes.Name** field of the request. If the named pipe cannot be opened, the SMB Trans subsystem MUST NOT respond to the TRANS_WAIT_NMPIPE subcommand request. Instead, it MUST enter an implementation-dependent<336> wait until the named pipe becomes available or **SMB_Parameters.Words.Timeout** milliseconds have passed.
 
-If the request fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_3.3.5.31) error response message. If successful, the server MUST construct a [TRANS_WAIT_NMPIPE Response (section 2.2.5.10.2)](#Section_2.2.4.12.2).
+If the request fails, the status code indicating the error is returned in an [SMB_COM_TRANSACTION (section 2.2.4.33)](#Section_2.2.4.33) error response message. If successful, the server MUST construct a [TRANS_WAIT_NMPIPE Response (section 2.2.5.10.2)](#Section_2.2.5.10.2).
 
-The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.12.2).<337>
+The CIFS server passes the results to the client in the [SMB_COM_TRANSACTION Response (section 2.2.4.33.2)](#Section_2.2.4.33.2).<337>
 
 <a id="Section_3.3.5.57.12"></a>
 ##### 3.3.5.57.12 Receiving a TRANS_CALL_NMPIPE Request
 
-Upon receipt of a [TRANS_CALL_NMPIPE (section 2.2.5.11)](#Section_3.2.5.38.10) subcommand request, the SMB Trans subsystem MUST attempt to obtain an Open on the named pipe specified by the **SMB_Data.Bytes.Name** field in the request from the underlying object store. If successful, the Trans subsystem MUST attempt to write data to and then read data from the underlying object store as specified in section [3.3.5.57.7](#Section_3.3.5.57.7), with the following exceptions:
+Upon receipt of a [TRANS_CALL_NMPIPE (section 2.2.5.11)](#Section_2.2.5.11) subcommand request, the SMB Trans subsystem MUST attempt to obtain an Open on the named pipe specified by the **SMB_Data.Bytes.Name** field in the request from the underlying object store. If successful, the Trans subsystem MUST attempt to write data to and then read data from the underlying object store as specified in section [3.3.5.57.7](#Section_3.3.5.57.7), with the following exceptions:
 
 - The Trans subsystem MUST use the FID of the returned Open to the named pipe.
 - The Trans subsystem MUST use the **Trans_Data.WriteData** of the request (using **SMB_Parameters.Words.TotalDataCount** as its length) as the data to be written.
@@ -23789,7 +23789,7 @@ The **Trans2_Parameters.Flags** field MAY be used by the client to request an ex
 
 The **Trans2_Parameters.Flags** field MAY also be used by the client to request additional information from the server. If the client requests additional information, the server MUST include the requested values, as specified in section 2.2.6.1.1; otherwise, the server SHOULD zero-fill the additional information fields.
 
-If the file is successfully opened, and a set of extended attributes is included in the request, the server MUST attempt to apply the extended attributes to the file. If an error is generated when the extended attributes are applied, the offset in bytes from the start of the extended attribute list of the attribute that caused the error MUST be returned in the **ExtendedAttributeErrorOffset** field. A full [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.12.2) (not an error response) MUST be sent to the client. The error code is returned in the **Status** field of the final SMB_COM_TRANSACTION2 Response.<339>
+If the file is successfully opened, and a set of extended attributes is included in the request, the server MUST attempt to apply the extended attributes to the file. If an error is generated when the extended attributes are applied, the offset in bytes from the start of the extended attribute list of the attribute that caused the error MUST be returned in the **ExtendedAttributeErrorOffset** field. A full [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.46.2) (not an error response) MUST be sent to the client. The error code is returned in the **Status** field of the final SMB_COM_TRANSACTION2 Response.<339>
 
 If the TRANS2_OPEN2 successfully opens the file, **Server.Statistics.sts0_fopens** MUST be increased by 1, and the **FID** MUST be returned to the client. A new **Server.Open** object with the **PID**, **UID**, **TID** from the request header, and the new **FID** MUST be entered into the **Server.Connection.FileOpenTable**. **Server.Open.TreeConnect** MUST be set to the **TreeConnect** on which the request was performed, and **Server.Open.TreeConnect.OpenCount** MUST be increased by 1. **Server.Open.Session** MUST be set to **Server.Open.TreeConnect.Session**. **Server.Open.Connection** MUST be set to the **Server.Open.Session.Connection**. **Server.Open.Locks** MUST be set to an empty list. **Server.Open.PathName** MUST be set to the **FileName** field of the request. **Server.Open.GrantedAccess** MUST be set to the **AccessMode** field of the request.
 
@@ -23810,7 +23810,7 @@ The response format is dependent upon the **InformationLevel** requested, as spe
 
 - The number of entries found.
 - The value of the **SearchCount** field in the request.
-- The number of entries that can fit into the response without exceeding the **MaxDataCount** field limit sent in the client's [SMB_COM_TRANSACTION2 Request (section 2.2.4.46.1)](#Section_3.3.5.38).
+- The number of entries that can fit into the response without exceeding the **MaxDataCount** field limit sent in the client's [SMB_COM_TRANSACTION2 Request (section 2.2.4.46.1)](#Section_2.2.4.46.1).
 If no matching entries are found, the server SHOULD<340> fail the request with STATUS_NO_SUCH_FILE.
 
 If the entire list of file system objects found by the search fit within a single response and SMB_FIND_CLOSE_AT_EOS is set in the **Flags** field, or if SMB_FIND_CLOSE_AFTER_REQUEST is set in the request, the server SHOULD<341> return a **SID** field value of zero. This indicates that the search has been closed and is no longer active on the server.<342>
@@ -23825,7 +23825,7 @@ If the search is to remain open, the server MUST allocate a **SearchOpen** objec
 - **Server.SearchOpen.UID**: The value of the **UID** from the SMB Header of the client request.
 - **Server.SearchOpen.FindSID**: A newly generated [Search ID (SID)](#Section_2.2.1.6.5) value, as specified in section 2.2.1.6.5.
 - **Server.SearchOpen.PathName**: The **FileName** in the client request, with its final component removed.
-The search results MUST be returned to the client in a [TRANS2_FIND_FIRST2 Response (section 2.2.6.2.2)](#Section_2.2.4.12.2), which MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
+The search results MUST be returned to the client in a [TRANS2_FIND_FIRST2 Response (section 2.2.6.2.2)](#Section_2.2.6.2.2), which MUST be sent to the client as specified in section [3.3.4.1](#Section_3.3.4.1).
 
 <a id="Section_3.3.5.58.4"></a>
 ##### 3.3.5.58.4 Receiving a TRANS2_FIND_NEXT2 Request
@@ -23845,14 +23845,14 @@ Otherwise, the search remains open and can be continued with another TRANS2_FIND
 
 Upon receipt of a TRANS2_QUERY_FS_INFORMATION subcommand request, the SMB Trans2 subsystem MUST query the object store underlying the share identified by the **TID** in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) of the request. The Trans2 subsystem MUST use the value in the request's **Trans2_Parameters.InformationLevel** field to determine the type and format of the information that the client requests. Valid information levels are specified in section [2.2.8.2](#Section_2.2.8.2).
 
-The [**CIFS**](#gt_common-internet-file-system-cifs) server passes the results to the client in the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.12.2).
+The [**CIFS**](#gt_common-internet-file-system-cifs) server passes the results to the client in the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.46.2).
 
 <a id="Section_3.3.5.58.6"></a>
 ##### 3.3.5.58.6 Receiving a TRANS2_QUERY_PATH_INFORMATION Request
 
 Upon receipt of a [TRANS2_QUERY_PATH_INFORMATION (section 2.2.6.6)](#Section_2.2.6.6) subcommand request, the SMB Trans2 subsystem MUST query the file or directory identified by the **Trans2_Parameters.FileName** field in the request. The Trans2 subsystem MUST use the value in the request's **Trans2_Parameters.InformationLevel** field to determine the type and format of the information that the client requests. Valid information levels are specified in section [2.2.8.3](#Section_2.2.8.3).
 
-The [**CIFS**](#gt_common-internet-file-system-cifs) server passes the results to the client in the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.12.2).<344>
+The [**CIFS**](#gt_common-internet-file-system-cifs) server passes the results to the client in the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.46.2).<344>
 
 <a id="Section_3.3.5.58.7"></a>
 ##### 3.3.5.58.7 Receiving a TRANS2_SET_PATH_INFORMATION Request
@@ -23868,7 +23868,7 @@ The setting of attribute information for the root directory of the share MUST NO
 
 Upon receipt of a [TRANS2_QUERY_FILE_INFORMATION (section 2.2.6.6)](#Section_2.2.6.6) subcommand request, the SMB Trans2 subsystem MUST query the file or directory identified by the **Trans2_Parameters.FID** field in the request. The Trans2 subsystem MUST use the value in the request's **Trans2_Parameters.InformationLevel** field to determine the type and format of information that the client requests, which are specified in section [2.2.8.3](#Section_2.2.8.3).
 
-The [**CIFS**](#gt_common-internet-file-system-cifs) server passes the results to the client in the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.12.2).<345>
+The [**CIFS**](#gt_common-internet-file-system-cifs) server passes the results to the client in the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.46.2).<345>
 
 <a id="Section_3.3.5.58.9"></a>
 ##### 3.3.5.58.9 Receiving a TRANS2_SET_FILE_INFORMATION Request
@@ -23895,7 +23895,7 @@ If the command is successful, **Server.Statistics.sts0_fopens** MUST be increase
 
 If the DFS subsystem has not indicated that it is active, the request MUST be failed with a STATUS_NO_SUCH_DEVICE error. If the **TID** in the [SMB Header (section 2.2.3.1)](#Section_2.2.3.1) does not match with the **TID** of an active connection to the IPC$ share, the server MUST fail the request with STATUS_ACCESS_DENIED and MUST increase **Server.Statistics.sts0_permerrors** by 1. Otherwise, the CIFS server MUST pass the contents of the Trans2_Parameters data block to the DFS subsystem, as specified in [MS-DFSC](../MS-DFSC/MS-DFSC.md) section 3.2.5.1.
 
-The response returned by the DFS subsystem after it processes the request (a **RESP_GET_DFS_REFERRAL** data structure) MUST be copied into the **Trans2_Data** data block of the [TRANS2_GET_DFS_REFERRAL Response (section 2.2.6.16.2)](#Section_2.2.4.12.2) and returned to the client. The **TotalDataCount** field of the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.12.2) MUST be set to the size in bytes of the response data block.
+The response returned by the DFS subsystem after it processes the request (a **RESP_GET_DFS_REFERRAL** data structure) MUST be copied into the **Trans2_Data** data block of the [TRANS2_GET_DFS_REFERRAL Response (section 2.2.6.16.2)](#Section_2.2.6.16.2) and returned to the client. The **TotalDataCount** field of the [SMB_COM_TRANSACTION2 Response (section 2.2.4.46.2)](#Section_2.2.4.46.2) MUST be set to the size in bytes of the response data block.
 
 <a id="Section_3.3.5.59"></a>
 #### 3.3.5.59 Receiving any SMB_COM_NT_TRANSACT Subcommand Request
@@ -23907,9 +23907,9 @@ The specific NT Trans subcommand to be executed is identified by the code in the
 <a id="Section_3.3.5.59.1"></a>
 ##### 3.3.5.59.1 Receiving an NT_TRANSACT_CREATE Request
 
-This subcommand can be used by the client to create a new file, to open or truncate an existing file, or to create a directory. The semantics of this subcommand are similar to those of the [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64.2) SMB command, with the exception that [NT_TRANSACT_CREATE (section 2.2.7.1)](#Section_2.2.7.1) can be used to set [**security descriptors**](#gt_security-descriptor) and/or extended attribute name/value pairs on the file.
+This subcommand can be used by the client to create a new file, to open or truncate an existing file, or to create a directory. The semantics of this subcommand are similar to those of the [SMB_COM_NT_CREATE_ANDX (section 2.2.4.64)](#Section_2.2.4.64) SMB command, with the exception that [NT_TRANSACT_CREATE (section 2.2.7.1)](#Section_2.2.7.1) can be used to set [**security descriptors**](#gt_security-descriptor) and/or extended attribute name/value pairs on the file.
 
-If the **MaxParameterCount** field of the SMB_COM_NT_TRANSACT request contains a value that is less than the size of the NT_TRANSACT_CREATE Response as specified in section [2.2.7.1.2](#Section_3.2.5.40.1), the server MUST fail the request with STATUS_INVALID_SMB (ERRSRV/ERRerror).
+If the **MaxParameterCount** field of the SMB_COM_NT_TRANSACT request contains a value that is less than the size of the NT_TRANSACT_CREATE Response as specified in section [2.2.7.1.2](#Section_2.2.7.1.2), the server MUST fail the request with STATUS_INVALID_SMB (ERRSRV/ERRerror).
 
 Upon receipt of an NT_TRANSACT_CREATE subcommand request, the NT Trans subsystem MUST determine the pathname of the file or directory to open or create. This involves the interaction of three fields:
 
@@ -23953,12 +23953,12 @@ If an error is generated, other than an Extended Attribute error as specified pr
 <a id="Section_3.3.5.59.2"></a>
 ##### 3.3.5.59.2 Receiving an NT_TRANSACT_IOCTL Request
 
-The **FunctionCode** and [**FID**](#gt_fid) are taken from the [NT_TRANSACT_IOCTL (section 2.2.7.2)](#Section_2.2.7.2) subcommand request. The input to the IOCTL is contained in the **NT_Trans_Data.Data** buffer of the request. The server MUST pass the IOCTL or FSCTL request to the underlying file system. If an error is returned from the underlying file system, the server MUST NOT send an error response message. Instead, the server MUST return a complete NT_TRANSACT_IOCTL response and MUST include the error in the **Status** field of the [SMB_COM_NT_TRANSACT Response (section 2.2.4.62.2)](#Section_2.2.4.12.2). The server MUST return the output buffer in the **NT_Trans_Data.Data** buffer of the NT_TRANSACT_IOCTL response.<349>
+The **FunctionCode** and [**FID**](#gt_fid) are taken from the [NT_TRANSACT_IOCTL (section 2.2.7.2)](#Section_2.2.7.2) subcommand request. The input to the IOCTL is contained in the **NT_Trans_Data.Data** buffer of the request. The server MUST pass the IOCTL or FSCTL request to the underlying file system. If an error is returned from the underlying file system, the server MUST NOT send an error response message. Instead, the server MUST return a complete NT_TRANSACT_IOCTL response and MUST include the error in the **Status** field of the [SMB_COM_NT_TRANSACT Response (section 2.2.4.62.2)](#Section_2.2.4.62.2). The server MUST return the output buffer in the **NT_Trans_Data.Data** buffer of the NT_TRANSACT_IOCTL response.<349>
 
 <a id="Section_3.3.5.59.3"></a>
 ##### 3.3.5.59.3 Receiving an NT_TRANSACT_SET_SECURITY_DESC Request
 
-Upon receipt of an [NT_TRANSACT_SET_SECURITY_DESC (section 2.2.7.3)](#Section_5) subcommand request, the NT Trans subsystem MUST attempt to set the [**security descriptors**](#gt_security-descriptor) provided in the request to the file specified by the **FID**. The **SecurityDescriptor** field indicates which security descriptors are to be set.
+Upon receipt of an [NT_TRANSACT_SET_SECURITY_DESC (section 2.2.7.3)](#Section_2.2.7.3) subcommand request, the NT Trans subsystem MUST attempt to set the [**security descriptors**](#gt_security-descriptor) provided in the request to the file specified by the **FID**. The **SecurityDescriptor** field indicates which security descriptors are to be set.
 
 The **FID** and **SecurityInformation** fields are passed in the **NT_Trans_Parameters** block of the request. The security descriptors are passed in the **SecurityDescriptor** array in the **NT_Trans_Data** section of the request.<350>
 
@@ -23977,8 +23977,8 @@ The NT_TRANSACT_NOTIFY_CHANGE Request is entered into the **Server.Connection.Pe
 
 - A modification matching the **CompletionFilter** occurs within the directory or directories indicated by **FID**. This is the expected completion of the request.
 - The request is canceled by an [SMB_COM_NT_CANCEL Request (section 2.2.4.65.1)](#Section_2.2.4.65.1).
-- The **FID** is closed, either by an explicit Close operation or another cause, such as an [SMB_COM_PROCESS_EXIT (section 2.2.4.18)](#Section_2.2.4.18) or [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51.2) of the **TID** in which the directory indicated by **FID** exists.
-Once the request has completed, it is removed from the **Server.Connection.PendingRequestTable**, and an [NT_TRANSACT_NOTIFY_CHANGE Response (section 2.2.7.4.2)](#Section_2.2.4.12.2) is composed. The response MUST contain the names of the files that changed, as well as an indication of the type of change that occurred. All changed files within the directory or directories indicated by the **FID** are returned, not just those matching **CompletionFilter**. If the operation completed because the **FID** was closed, or due to an [SMB_COM_NT_CANCEL (section 2.2.4.65)](#Section_2.2.4.65), there might be no changes listed.
+- The **FID** is closed, either by an explicit Close operation or another cause, such as an [SMB_COM_PROCESS_EXIT (section 2.2.4.18)](#Section_2.2.4.18) or [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51) of the **TID** in which the directory indicated by **FID** exists.
+Once the request has completed, it is removed from the **Server.Connection.PendingRequestTable**, and an [NT_TRANSACT_NOTIFY_CHANGE Response (section 2.2.7.4.2)](#Section_2.2.7.4.2) is composed. The response MUST contain the names of the files that changed, as well as an indication of the type of change that occurred. All changed files within the directory or directories indicated by the **FID** are returned, not just those matching **CompletionFilter**. If the operation completed because the **FID** was closed, or due to an [SMB_COM_NT_CANCEL (section 2.2.4.65)](#Section_2.2.4.65), there might be no changes listed.
 
 Any changes that occur within the directory or directories indicated by **FID** following the completion of the NT_TRANSACT_NOTIFY_CHANGE Request are recorded in the change notification buffer on the server. This is done on the assumption that the client will reissue the NT_TRANSACT_NOTIFY_CHANGE Request upon receipt of the response. In the event that the number of changes exceeds the size of the change notify buffer, or the maximum size of the **NT_Trans_Parameter** block in the response (as indicated by the **MaxParameterCount** field in the most recent request), the NT Trans subsystem MUST return an error response with a **Status** value of STATUS_NOTIFY_ENUM_DIR (ERRDOS/ERR_NOTIFY_ENUM_DIR). This indicates to the client that more changes have occurred on the server than the transaction has the capacity to report.
 
@@ -24003,7 +24003,7 @@ Otherwise, the **NT_Trans_Parameters.LengthNeeded** field MUST be set to the len
 <a id="Section_3.3.6.1"></a>
 #### 3.3.6.1 OpLock Break Acknowledgment Timer Event
 
-When the Oplock Break Acknowledgment timer expires, the server MUST enumerate all connections in **Server.ConnectionTable** and MUST find all **Server.Opens** in each **Server.Connection** where **Server.Open.OplockState** is **Breaking** and **Server.Open.OplockTimeout** is earlier than the current time. For each matching **Server.Open**, the server MUST acknowledge the [**OpLock break**](#gt_oplock-break) to the underlying object store. The server MUST set **Server.Open.Oplock** to the type of Oplock that was granted during the Oplock Break Notification, as specified in section [3.3.4.2](#Section_3.3.2.1), and MUST set **Server.Open.OplockState** to **None**.
+When the Oplock Break Acknowledgment timer expires, the server MUST enumerate all connections in **Server.ConnectionTable** and MUST find all **Server.Opens** in each **Server.Connection** where **Server.Open.OplockState** is **Breaking** and **Server.Open.OplockTimeout** is earlier than the current time. For each matching **Server.Open**, the server MUST acknowledge the [**OpLock break**](#gt_oplock-break) to the underlying object store. The server MUST set **Server.Open.Oplock** to the type of Oplock that was granted during the Oplock Break Notification, as specified in section [3.3.4.2](#Section_3.3.4.2), and MUST set **Server.Open.OplockState** to **None**.
 
 If at least one **Server.Open** has a **Server.Open.OplockState** equal to **Breaking**, the [Oplock Break Acknowledgment Timer (section 3.3.2.1)](#Section_3.3.2.1) MUST be restarted to expire again at the time of the next Oplock timeout; otherwise, the Oplock Break Acknowledgment Timer MUST NOT be restarted.
 
@@ -24020,7 +24020,7 @@ The [Unused Open Search Timer (section 3.3.2.3)](#Section_3.3.2.3), if impleme
 <a id="Section_3.3.6.4"></a>
 #### 3.3.6.4 Unused Connection Timer Event
 
-When the [Unused Connection Timer (section 3.3.2.4)](#Section_3.3.2.4) expires, the server MUST look up all connections in global **Server.ConnectionTable**, where **Server.Connection.SessionTable** is empty and current time minus **Server.Connection.CreationTime** is more than an implementation-specific timeout, and SHOULD <353>disconnect them, as specified in section [3.3.7.1](#Section_3.2.7.1).
+When the [Unused Connection Timer (section 3.3.2.4)](#Section_3.3.2.4) expires, the server MUST look up all connections in global **Server.ConnectionTable**, where **Server.Connection.SessionTable** is empty and current time minus **Server.Connection.CreationTime** is more than an implementation-specific timeout, and SHOULD <353>disconnect them, as specified in section [3.3.7.1](#Section_3.3.7.1).
 
 <a id="Section_3.3.7"></a>
 ### 3.3.7 Other Local Events
@@ -24056,7 +24056,7 @@ To simplify this interface, a composite structure **ClientGenericContext** is de
 
 **ClientGenericContext.ProtocolDialect:** The protocol dialect associated with an open.
 
-**ClientGenericContext.ProtocolSpecificOpen:** Either the protocol-specific Client.Open, as specified in section [3.2.1.5](../MS-SMB2/MS-SMB2.md) and in [MS-SMB2] section 3.2.1.6, or the protocol-specific Client.Session, as specified in section [3.2.1.3](../MS-SMB2/MS-SMB2.md) and in [MS-SMB2] secton 3.2.1.3.
+**ClientGenericContext.ProtocolSpecificOpen:** Either the protocol-specific Client.Open, as specified in section [3.2.1.5](#Section_3.2.1.5) and in [MS-SMB2] section 3.2.1.6, or the protocol-specific Client.Session, as specified in section [3.2.1.3](#Section_3.2.1.3) and in [MS-SMB2] secton 3.2.1.3.
 
 This structure MUST be considered opaque to the caller.
 
@@ -24252,7 +24252,7 @@ If **ClientGenericContext.ProtocolSpecificOpen.Connection.ServerCapabilities** d
 
 If **ClientGenericContext.ProtocolDialect** indicates the CIFS or the SMB protocol, the client MUST invoke the [Application Requests Querying DFS Referrals (section 3.2.4.44)](#Section_3.2.4.44) event, providing **ServerName**, **UserCredentials**, **MaxOutputSize**, and the input buffer as the parameters.
 
-If the Application Requests Querying DFS Referrals event returns success, the client MUST return the **RESP_GET_DFS_REFERRAL** structure from the **Trans2_Data** block of the [TRANS2_GET_DFS_REFERRAL Response (section 2.2.6.16.2)](#Section_2.2.4.12.2) and MUST return success to the calling application; otherwise, the client MUST return the status code received from the event.
+If the Application Requests Querying DFS Referrals event returns success, the client MUST return the **RESP_GET_DFS_REFERRAL** structure from the **Trans2_Data** block of the [TRANS2_GET_DFS_REFERRAL Response (section 2.2.6.16.2)](#Section_2.2.6.16.2) and MUST return success to the calling application; otherwise, the client MUST return the status code received from the event.
 
 If **ClientGenericContext.ProtocolDialect** indicates the SMB2 protocol, the client MUST invoke the Application Requests DFS Referral Information ([MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.20.3) event, providing **ServerName**, **UserCredentials**, **MaxOutputSize**, input buffer, and an FSCTL code as the parameters.
 
@@ -24280,7 +24280,7 @@ Upon successful completion, a new **ClientGenericContext** structure and **Share
 
 The **ClientGenericContext.ProtocolDialect** field MUST be set to an implementation-specific identifier indicating the protocol (either that specified by [MS-CIFS] or that specified by [MS-SMB2]).
 
-The **ClientGenericContext.ProtocolSpecificOpen** field MUST be set to the protocol-specific **Client.TreeConnect** obtained by the processing logic specified in section [3.2.5.4](#Section_2.2.4.12.2) or in [MS-SMB] section 3.2.4.2.4.
+The **ClientGenericContext.ProtocolSpecificOpen** field MUST be set to the protocol-specific **Client.TreeConnect** obtained by the processing logic specified in section [3.2.5.4](#Section_3.2.5.4) or in [MS-SMB] section 3.2.4.2.4.
 
 **ShareType** MUST be set to the share type obtained by the processing logic specified in section 3.2.5.4 or in [MS-SMB2] section 3.2.4.2.4.
 
@@ -24332,7 +24332,7 @@ To simplify this interface, a composite structure **RPCServerGenericNamedPipeOpe
 
 **RPCServerGenericNamedPipeOpen.ProtocolDialect:** The protocol dialect associated with the open.
 
-**RPCServerGenericNamedPipeOpen.ProtocolSpecificOpen:** The protocol-specific Server.Open, as specified in section [3.3.1.7](../MS-SMB2/MS-SMB2.md) and in [MS-SMB2] section 3.3.1.10.
+**RPCServerGenericNamedPipeOpen.ProtocolSpecificOpen:** The protocol-specific Server.Open, as specified in section [3.3.1.7](#Section_3.3.1.7) and in [MS-SMB2] section 3.3.1.10.
 
 This structure MUST be considered opaque to the caller.
 
@@ -24362,7 +24362,7 @@ The RPC application provides:
 - The name of the pipe.
 The server MUST wait on the underlying [**named pipe**](#gt_named-pipe) [**object store**](#gt_object-store) for clients to open the specified named pipe. When a client opens the pipe as specified in sections [3.3.5.5](#Section_3.3.5.5), [3.3.5.35](#Section_3.3.5.35) or [3.3.5.51](#Section_3.3.5.51), or in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.5.9, the server MUST initialize a new **RPCServerGenericNamedPipeOpen** structure as follows:
 
-The **RPCServerGenericNamedPipeOpen.ProtocolDialect** field MUST be set to an implementation-specific identifier indicating the protocol (either that specified by [MS-CIFS] or by [MS-SMB2]) on which the client opened the pipe. The value derived from **Connection.NegotiateDialect** specified in [MS-SMB2] section 3.3.1.7 or from **Server.Connection.SelectedDialect** specified in section [3.3.1.3](#Section_3.3.6.2) can be used as a protocol identifier.
+The **RPCServerGenericNamedPipeOpen.ProtocolDialect** field MUST be set to an implementation-specific identifier indicating the protocol (either that specified by [MS-CIFS] or by [MS-SMB2]) on which the client opened the pipe. The value derived from **Connection.NegotiateDialect** specified in [MS-SMB2] section 3.3.1.7 or from **Server.Connection.SelectedDialect** specified in section [3.3.1.3](#Section_3.3.1.3) can be used as a protocol identifier.
 
 The **RPCServerGenericNamedPipeOpen.ProtocolSpecificOpen** field MUST be set to the protocol-specific **Server.Open** constructed as specified in sections [3.3.5.6](#Section_3.3.5.6) or 3.3.5.51, or in [MS-SMB2] section 3.3.5.9.
 
@@ -24380,14 +24380,14 @@ The server MUST call into the underlying [**object store**](#gt_object-store) to
 
 The caller supplies the **RPCServerGenericNamedPipeOpen** structure returned by the interface specified in section [3.5.4.1](#Section_3.5.4.1).
 
-Based on the value of the **RPCServerGenericNamedPipeOpen.ProtocolDialect** field, the request MUST be handled as specified in section [3.3.4.7](#Section_5) or in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.4.10.
+Based on the value of the **RPCServerGenericNamedPipeOpen.ProtocolDialect** field, the request MUST be handled as specified in section [3.3.4.7](#Section_3.3.4.7) or in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.4.10.
 
 <a id="Section_3.5.4.4"></a>
 #### 3.5.4.4 An RPC Server Application Requests the Session Key of a Client
 
 The caller supplies the **RPCServerGenericNamedPipeOpen** structure returned by the interface specified in section [3.5.4.1](#Section_3.5.4.1).
 
-Based on the value of the **RPCServerGenericNamedPipeOpen.ProtocolDialect** field, the request MUST be handled as specified in section [3.3.4.6](#Section_3.2.4.45) or in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.4.5.
+Based on the value of the **RPCServerGenericNamedPipeOpen.ProtocolDialect** field, the request MUST be handled as specified in section [3.3.4.6](#Section_3.3.4.6) or in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.4.5.
 
 <a id="Section_3.5.5"></a>
 ### 3.5.5 Message Processing Events and Sequencing Rules
@@ -24547,7 +24547,7 @@ The protocol does not encrypt the data that is exchanged. To provide stricter da
 | Share versus user access control | [3.2.4.2.4](#Section_3.2.4.2.4) |
 | Plain Text Authentication | 3.2.4.2.3 |
 | Challenge Response | [3.2.4.2.2](#Section_3.2.4.2.2) |
-| Message Signing | [3.1.4.1](#Section_3.2.4.1) |
+| Message Signing | [3.1.4.1](#Section_3.1.4.1) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior
@@ -24750,7 +24750,7 @@ The **Timeout** field is not supported.
 
 <63> Section 2.2.4.44: Windows NT Server returns STATUS_SMB_BAD_COMMAND (ERRSRV/ERRbadcmd) if the **WordCount** field in the request is set to 3; otherwise, Windows NT Server returns STATUS_INVALID_SMB (ERRSRV/ERRerror).
 
-<64> Section 2.2.4.45: Windows NT Server has a partial implementation that treats this SMB command as though it were an [SMB_COM_CLOSE (section 2.2.4.5)](#Section_2.2.4.5) followed by an [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51.2); however, the SMB_COM_TREE_DISCONNECT is never called. The format of the command is identical to that of SMB_COM_CLOSE. This command was never documented and is not called by Windows clients.
+<64> Section 2.2.4.45: Windows NT Server has a partial implementation that treats this SMB command as though it were an [SMB_COM_CLOSE (section 2.2.4.5)](#Section_2.2.4.5) followed by an [SMB_COM_TREE_DISCONNECT (section 2.2.4.51)](#Section_2.2.4.51); however, the SMB_COM_TREE_DISCONNECT is never called. The format of the command is identical to that of SMB_COM_CLOSE. This command was never documented and is not called by Windows clients.
 
 <65> Section 2.2.4.46.1: One way transactions are used only when communicating with Mailslots, which means that they never occur within CIFS sessions.
 
@@ -24770,7 +24770,7 @@ The **Timeout** field is not supported.
 
 <73> Section 2.2.4.47.1: Windows always sets **DataCount** to a value of **ParameterOffset** + **ParameterCount**. This action restricts the **Trans_Data** field to follow after the **Trans_Parameters** field, although this is not strictly a protocol requirement.
 
-<74> Section 2.2.4.50.1: Windows NT servers do not test to determine whether the strings in this request are 16-bit Unicode or 8-bit extended ASCII. It assumes that they are 8-bit strings. Clients that support Unicode use the [SMB_COM_TREE_CONNECT_ANDX (section 2.2.4.55)](#Section_2.2.4.55.2) command.
+<74> Section 2.2.4.50.1: Windows NT servers do not test to determine whether the strings in this request are 16-bit Unicode or 8-bit extended ASCII. It assumes that they are 8-bit strings. Clients that support Unicode use the [SMB_COM_TREE_CONNECT_ANDX (section 2.2.4.55)](#Section_2.2.4.55) command.
 
 <75> Section 2.2.4.52.1: Windows 98 and Windows NT clients typically send a **TID** value of zero (0x0000) in the SMB_COM_NEGOTIATE request. This value has no particular significance.
 
@@ -24936,7 +24936,7 @@ This 11-byte representation of the 8.3 format name is known as the "packed" form
 
 <120> Section 2.2.4.65: Upon receipt of this command, the Windows NT server attempts to complete outstanding commands such as those that are waiting for a thread context or waiting to access a busy resource. If the outstanding command cannot be completed successfully, the server returns an implementation-specific error.
 
-<121> Section 2.2.4.66: Windows NT client and server both support the [SMB_COM_NT_RENAME](#Section_3.3.5.53) command. However, the design and implementation of this command was never completed. The SMB_COM_NT_RENAME command is not documented in [CIFS]; the only prior documentation covering this command is [[SNIA]](https://go.microsoft.com/fwlink/?LinkId=90519).
+<121> Section 2.2.4.66: Windows NT client and server both support the [SMB_COM_NT_RENAME](#Section_2.2.4.66) command. However, the design and implementation of this command was never completed. The SMB_COM_NT_RENAME command is not documented in [CIFS]; the only prior documentation covering this command is [[SNIA]](https://go.microsoft.com/fwlink/?LinkId=90519).
 
 The request structure for this command includes a **Reserved** field that was originally intended to access a proposed server feature that was never implemented. The SMB_DATA portion of the message also includes **Buffer Format** fields, making this the only non-Core Protocol command to make use of **Buffer Format** fields.
 
@@ -24960,13 +24960,13 @@ This command is superseded by newer commands in updated versions of the protocol
 
 <130> Section 2.2.4.73: Windows NT servers return STATUS_SMB_BAD_COMMAND (ERRSRV/ERRbadcmd) instead of STATUS_NOT_IMPLEMENTED (ERRDOS/ERRbadfunc).
 
-<131> Section 2.2.5.1: The [TRANS_SET_NMPIPE_STATE](#Section_3.3.5.57.2) subcommand was introduced to provide support for the **SetNamedPipeHandleState()** system call in OS/2 and Win32. For more information, see [[MSDN-SetNmdPipeHndState]](https://go.microsoft.com/fwlink/?LinkId=182918). Windows NT servers use the FilePipeInformation Information Class to implement this named pipe transaction subcommand. For more information, see [MS-FSCC] section 2.4.37.
+<131> Section 2.2.5.1: The [TRANS_SET_NMPIPE_STATE](#Section_2.2.5.1) subcommand was introduced to provide support for the **SetNamedPipeHandleState()** system call in OS/2 and Win32. For more information, see [[MSDN-SetNmdPipeHndState]](https://go.microsoft.com/fwlink/?LinkId=182918). Windows NT servers use the FilePipeInformation Information Class to implement this named pipe transaction subcommand. For more information, see [MS-FSCC] section 2.4.37.
 
 <132> Section 2.2.5.2: Windows NT Server does not support this transaction subcommand. It returns a status of STATUS_INVALID_PARAMETER (ERRDOS/ERRinvalidparam).
 
-<133> Section 2.2.5.3: The [TRANS_QUERY_NMPIPE_STATE](#Section_3.2.5.38.3) subcommand was introduced to provide support for the GetNamedPipeHandleState() system call in OS/2 and Win32. For more information, see [[MSDN-GetNmdPipeHndState]](https://go.microsoft.com/fwlink/?LinkId=182699). Windows NT servers use the FilePipeInformation Information Class to implement this named pipe transaction subcommand. For more information, see [MS-FSCC] section 2.4.37.
+<133> Section 2.2.5.3: The [TRANS_QUERY_NMPIPE_STATE](#Section_2.2.5.3) subcommand was introduced to provide support for the GetNamedPipeHandleState() system call in OS/2 and Win32. For more information, see [[MSDN-GetNmdPipeHndState]](https://go.microsoft.com/fwlink/?LinkId=182699). Windows NT servers use the FilePipeInformation Information Class to implement this named pipe transaction subcommand. For more information, see [MS-FSCC] section 2.4.37.
 
-<134> Section 2.2.5.4: The [TRANS_QUERY_NMPIPE_INFO](#Section_3.3.5.57.5) subcommand was introduced to provide support for the **GetNamedPipeInfo()** system call in OS/2 and Win32. For more information, see [[MSDN-GetNmdPipeInfo]](https://go.microsoft.com/fwlink/?LinkId=182705).Windows NT servers use the FilePipeLocalInformation Information Class to implement this named pipe transaction subcommand. For more information, see [MS-FSCC] section 2.4.38.
+<134> Section 2.2.5.4: The [TRANS_QUERY_NMPIPE_INFO](#Section_2.2.5.4) subcommand was introduced to provide support for the **GetNamedPipeInfo()** system call in OS/2 and Win32. For more information, see [[MSDN-GetNmdPipeInfo]](https://go.microsoft.com/fwlink/?LinkId=182705).Windows NT servers use the FilePipeLocalInformation Information Class to implement this named pipe transaction subcommand. For more information, see [MS-FSCC] section 2.4.38.
 
 <135> Section 2.2.5.5: The [TRANS_PEEK_NMPIPE](#Section_2.2.5.5) subcommand was introduced to provide support for the **PeekNamedPipe()** system call in OS/2 and Win32. For more information, see [[MSDN-PkNmdPipe]](https://go.microsoft.com/fwlink/?LinkId=121801). Windows NT servers use FSCTL_PIPE_PEEK to implement this subcommand. For more information, see [MS-FSCC] sections 2.3.45 and 2.3.46.
 
@@ -24984,7 +24984,7 @@ This command is superseded by newer commands in updated versions of the protocol
 
 <142> Section 2.2.5.10.1: Windows NT servers ignore the **Priority** value in the [TRANS_WAIT_NMPIPE Request (section 2.2.5.10.1)](#Section_2.2.5.10.1), and do not provide a default priority.
 
-<143> Section 2.2.5.11: The [TRANS_CALL_NMPIPE](#Section_3.2.5.38.10) subcommand was introduced to provide support for the CallNamedPipe() system call in OS/2 and Win32. For more information, see [[MSDN-CallNmdPipe]](https://go.microsoft.com/fwlink/?LinkId=182715). Windows NT servers use FSCTL_PIPE_TRANSCEIVE to implement this subcommand. For more information, see [MS-FSCC] sections 2.3.47 and 2.3.48.
+<143> Section 2.2.5.11: The [TRANS_CALL_NMPIPE](#Section_2.2.5.11) subcommand was introduced to provide support for the CallNamedPipe() system call in OS/2 and Win32. For more information, see [[MSDN-CallNmdPipe]](https://go.microsoft.com/fwlink/?LinkId=182715). Windows NT servers use FSCTL_PIPE_TRANSCEIVE to implement this subcommand. For more information, see [MS-FSCC] sections 2.3.47 and 2.3.48.
 
 <144> Section 2.2.5.11.2: Windows 98 clients misread the number of data bytes returned. For more information, see [[MSKB-235717]](https://go.microsoft.com/fwlink/?LinkId=182630).
 
@@ -25178,7 +25178,7 @@ If the server has indicated support for Raw Mode by setting CAP_RAW_MODE in the 
 
 <211> Section 3.2.6.1: Windows NT clients use a default **Client.SessionTimeoutValue** value of 45 seconds. Additional time will be added depending upon the size of the message. See [KB102067] for more information.
 
-<212> Section 3.2.6.1: Windows NT and Windows 98 CIFS clients periodically scan for any commands that have not completed. If there are outstanding commands that have exceeded the **Client.SessionTimeoutValue**, an [SMB_COM_ECHO (section 2.2.4.39)](#Section_2.2.4.39.2) is sent to determine whether or not the connection has been lost. Regardless of whether the client receives an [SMB_COM_ECHO Response (section 2.2.4.39.2)](#Section_2.2.4.12.2), it closes the connection if there is no response to the outstanding commands that have exceeded the **Client.SessionTimeoutValue**.
+<212> Section 3.2.6.1: Windows NT and Windows 98 CIFS clients periodically scan for any commands that have not completed. If there are outstanding commands that have exceeded the **Client.SessionTimeoutValue**, an [SMB_COM_ECHO (section 2.2.4.39)](#Section_2.2.4.39) is sent to determine whether or not the connection has been lost. Regardless of whether the client receives an [SMB_COM_ECHO Response (section 2.2.4.39.2)](#Section_2.2.4.39.2), it closes the connection if there is no response to the outstanding commands that have exceeded the **Client.SessionTimeoutValue**.
 
 <213> Section 3.3.1.1: Windows NT Server 4.0 added support for the ability to enable and require signing in Service Pack 3 (SP3). See [ENSIGN].
 
@@ -25222,7 +25222,7 @@ HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\SizReqBuf
 
 <227> Section 3.3.4.1: When signing is neither enabled nor required:
 
-- Windows-based servers do not initialize the **SecuritySignature** field in the header of the [SMB_COM_SESSION_SETUP_ANDX Response (section 2.2.4.53.2)](#Section_2.2.4.12.2). The value of this field is arbitrary.
+- Windows-based servers do not initialize the **SecuritySignature** field in the header of the [SMB_COM_SESSION_SETUP_ANDX Response (section 2.2.4.53.2)](#Section_2.2.4.53.2). The value of this field is arbitrary.
 - Windows clients ignore the **SecuritySignature** field.
 <228> Section 3.3.4.1.1: Windows-based servers set the **SMB_Header.Reserved** field of the response to the **SMB_Header.Reserved** value received in the request.
 
@@ -25297,7 +25297,7 @@ If the Set File Information operation fails, the **Status** is returned in an Er
 - **PathName** is the **SMB_Data.Bytes.FileName** field from the request.
 - **SecurityContext** is found by using the **SMB_Header.UID** to look up the matching **Session** entry in the **Server.Connection.SessionTable**. The **Server.Session.UserSecurityContext** is passed as **SecurityContext**.
 - **DesiredAccess** is set as follows:
-- The **AccessMode** subfield of the **AccessMode** field in the request is used to set the value of **DesiredAccess**. The **AccessMode** subfield represents the lowest order four bits of the **AccessMode** field (0x0007), as shown in the table in section [2.2.4.3.1](#Section_3.3.5.5). The mapping of values is as follows.
+- The **AccessMode** subfield of the **AccessMode** field in the request is used to set the value of **DesiredAccess**. The **AccessMode** subfield represents the lowest order four bits of the **AccessMode** field (0x0007), as shown in the table in section [2.2.4.3.1](#Section_2.2.4.3.1). The mapping of values is as follows.
 | AccessMode.AccessMode | DesiredAccess |
 | --- | --- |
 | 0 | GENERIC_READ (0x80000000) |
@@ -25344,7 +25344,7 @@ If the Set File Information operation fails, the **Status** is returned in an Er
 - **SMB_Parameters.Words.FileSize** is set to the lowest-order 32 bits of OutputBuffer.EndOfFile.
 - If the query fails, the **Status** is returned in an Error Response and processing is complete.
 - A new **FID** is generated for the **Open** returned. All of the other results of the **Open** operation are ignored. The **FID** is copied into the **SMB_Parameters.Words.FID** field of the response.
-While opening an existing file, the underlying object store checks for the necessity of an Oplock break, as described in [MS-FSA] section 2.1.4.12, and if necessary, notifies the server, as described in section [3.3.4.2](#Section_3.3.2.1) and defers the opening of the file until the server acknowledges the Oplock break, as described in section [3.3.5.30](#Section_3.3.5.30).
+While opening an existing file, the underlying object store checks for the necessity of an Oplock break, as described in [MS-FSA] section 2.1.4.12, and if necessary, notifies the server, as described in section [3.3.4.2](#Section_3.3.4.2) and defers the opening of the file until the server acknowledges the Oplock break, as described in section [3.3.5.30](#Section_3.3.5.30).
 
 <246> Section 3.3.5.6: Windows-based servers ignore the **CreationTime** field in the [SMB_COM_CREATE Request (section 2.2.4.4.1)](#Section_2.2.4.4.1).
 
@@ -25854,7 +25854,7 @@ The returned **Status** is copied into the **SMB_Header.Status** field of the re
 - **FsInformationClass is set to FileFsSizeInformation.**
 The returned **Status** is copied into the **SMB_Header.Status** field of the response. If the operation fails, the **Status** is returned in an Error Response, and processing is complete. If the operation is successful, the information returned in **OutputBuffer** is adjusted to fit within the data structure provided by SMB.
 
-All of the fields in the [SMB_COM_QUERY_INFORMATION_DISK Response (section 2.2.4.57.2)](#Section_2.2.4.12.2) are 16-bit, but the **FileFsSizeInformation** InformationLevel provides 32- and 64-bit values. The goal is to adjust the values so that the total bytes on disk and the total number of available (free) bytes can be calculated reasonably correctly from the numbers returned.
+All of the fields in the [SMB_COM_QUERY_INFORMATION_DISK Response (section 2.2.4.57.2)](#Section_2.2.4.57.2) are 16-bit, but the **FileFsSizeInformation** InformationLevel provides 32- and 64-bit values. The goal is to adjust the values so that the total bytes on disk and the total number of available (free) bytes can be calculated reasonably correctly from the numbers returned.
 
 - The value of **Output.TotalAllocationUnits** is divided by two (bitshifted) until the result fits within a USHORT (16 bits, unsigned); that is, until the result is less than 0x00010000. The number of bit shifts is counted and stored as **HighBits** and also as **ExtraBits**. If the value of **HighBits** is greater than zero, the value of **Output.SectorsPerAllocationUnit** is multiplied by two, and **HighBits** is decremented. This is repeated until **HighBits** is zero or the result of the multiplication is greater than or equal to 0x8000. The result is copied into **SMB_Parameters.Words.BlocksPerUnit**.
 - If the value of **HighBits** is still greater than zero, the value of **Output.BytesPerSector** is multiplied by two and **HighBits** is decremented. This is repeated until **HighBits** is zero or the result of the multiplication is greater than or equal to 0x8000. The result is copied into **SMB_Parameters.Words.BlockSize**.
@@ -26124,7 +26124,7 @@ The returned **Status** is copied into the **SMB_Header.Status** field of the re
 
 <337> Section 3.3.5.57.11: Windows NT Server honors the **Timeout** field for this transaction.
 
-<338> Section 3.3.5.58.1: Windows-based servers pass information level requests to the underlying object store using the information level's corresponding information class. Each information level's corresponding mapping to one or more information classes is given in the information level's corresponding subsection of section [2.2.8](#Section_1.3). Information classes are defined in [MS-FSCC] sections 2.4 and 2.5, and their corresponding behaviors are described in [MS-FSA] sections 2.1.5.12 and 2.1.5.13, with the following additional considerations:
+<338> Section 3.3.5.58.1: Windows-based servers pass information level requests to the underlying object store using the information level's corresponding information class. Each information level's corresponding mapping to one or more information classes is given in the information level's corresponding subsection of section [2.2.8](#Section_2.2.8). Information classes are defined in [MS-FSCC] sections 2.4 and 2.5, and their corresponding behaviors are described in [MS-FSA] sections 2.1.5.12 and 2.1.5.13, with the following additional considerations:
 
 - The **Open** input element required for each information class's processing algorithm is either the **Server.Open** that matches the **FID** of the request or created by opening the file indicated by the pathname in the request. If the open operation fails, the **Status** is returned in an Error Response, and processing is complete.
 - If the preceding open operation succeeds, once processing completes, the **Open** is closed.
@@ -26234,7 +26234,7 @@ If the query fails, the **Status** is returned in an Error Response, and process
 If the query fails, the **Status** is returned in an Error Response, and processing is complete.
 
 - A new **FID** is generated for the **Open** returned. All of the other results of the Open operation are ignored. The **FID** is copied into the **SMB_Parameters.Words.FID** field of the response.
-<340> Section 3.3.5.58.3: If no matching entries are found, Windows NT servers fail the [TRANS2_FIND_FIRST2 Request (section 2.2.6.2.1)](#Section_2.2.6.2.1) and return a full [TRANS2_FIND_FIRST2 Response (section 2.2.6.2.2)](#Section_2.2.4.12.2), setting all the fields to zero.
+<340> Section 3.3.5.58.3: If no matching entries are found, Windows NT servers fail the [TRANS2_FIND_FIRST2 Request (section 2.2.6.2.1)](#Section_2.2.6.2.1) and return a full [TRANS2_FIND_FIRST2 Response (section 2.2.6.2.2)](#Section_2.2.6.2.2), setting all the fields to zero.
 
 <341> Section 3.3.5.58.3: Windows-based servers close the search and return a nonzero **SID** field value.
 
@@ -26288,7 +26288,7 @@ The returned **Status** is copied into the **SMB_Header.Status** field of the re
 - **DesiredFileAttributes** is the **NT_Trans_Parameters.ExtFileAttributes** field of the request.
 - **IsCaseSensitive** is set to FALSE if the SMB_FLAGS_CASE_INSENSITIVE bit is set in the **SMB_Header.Flags** field of the request; otherwise, **IsCaseSensitive** is set depending upon system defaults. For more information, see the description of the OBJ_CASE_INSENSITIVE flag of the **OBJECT_ATTRIBUTES** structure [MSDOCS-OBJ_ATTRIBS].
 - **OpLockKey** is empty.
-Windows-based servers complete the [NT_TRANSACT_CREATE Request (section 2.2.7.1.1)](../MS-FSA/MS-FSA.md) by calling the Win32 **IoCreateFile()** function, which allows both security descriptors (SDs) and extended attributes (EAs) to be set directly rather than having to set them in separate steps. See [[MSDN-IoCreateFile]](https://go.microsoft.com/fwlink/?LinkId=182725). With respect to the algorithm presented in [MS-FSA] section 2.1.5.1:
+Windows-based servers complete the [NT_TRANSACT_CREATE Request (section 2.2.7.1.1)](#Section_2.2.7.1.1) by calling the Win32 **IoCreateFile()** function, which allows both security descriptors (SDs) and extended attributes (EAs) to be set directly rather than having to set them in separate steps. See [[MSDN-IoCreateFile]](https://go.microsoft.com/fwlink/?LinkId=182725). With respect to the algorithm presented in [MS-FSA] section 2.1.5.1:
 
 - If the request's **NT_Trans_Parameters.SecurityDescriptorLength** value is greater than zero, Windows-based servers set **Open.File.SecurityDescriptor** to the security descriptor passed in the **NT_Trans_Data.SecurityDescriptor** field in the request. (The SD is passed to the object store in the *ObjectAttributes* parameter of **IoCreateFile()**.)
 - If the request's **NT_Trans_Parameters.EALength** value is greater than zero, Windows-based servers set **Open.File.ExtendedAttributes** and **Open.File.ExtendedAttributesLength** from **NT_Trans_Data.ExtendedAttributes** and **NT_Trans_Parameters.EALength**, respectively. (These values are passed to the object store via the *EaBuffer* and *EaLength* parameters of **IoCreateFile()**.)

@@ -506,7 +506,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [http://www.rfc-editor.org/rfc/rfc2119.txt](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -727,11 +727,11 @@ date-and-time = date " " time-and-secfraq
 
 date-T-time = date "T" time
 
-**date-colon-time** values are specified in [Machine](#Section_3.2.4.6) XML elements (section 2.2.5.17). See the [Machine](#Section_4.2.14) example (section 4.2.14).<3>
+**date-colon-time** values are specified in [Machine](#Section_4.2.15) XML elements (section 2.2.5.17). See the [Machine](#Section_4.2.14) example (section 4.2.14).<3>
 
 **date-and-time** values are specified in parameters to some [IWRMAccounting](#Section_3.2.4.3) interface (section 3.2.4.3) methods. See the [ExecuteAccountingQuery](#Section_3.2.4.3.3) method (section 3.2.4.3.3).
 
-**date-T-time** values are specified in [Events](#Section_4.2.12) XML elements (section 2.2.5.15). See the [Events](#Section_4.2.12) example (section 4.2.12).
+**date-T-time** values are specified in [Events](#Section_2.2.5.15) XML elements (section 2.2.5.15). See the [Events](#Section_4.2.12) example (section 4.2.12).
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 Timestamp
@@ -859,10 +859,10 @@ This section defines literal constants for object types, which specify types of 
 
 | Constant/value | Description |
 | --- | --- |
-| OBJECT_SELECTION_CRITERIA "PMC" | The object is a [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc) object (section [2.2.5.24](#Section_4.2.20)). |
+| OBJECT_SELECTION_CRITERIA "PMC" | The object is a [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc) object (section [2.2.5.24](#Section_2.2.5.24)). |
 | OBJECT_POLICY "Policy" | The object is a policy object (section [2.2.5.21](#Section_2.2.5.21)). |
 | OBJECT_SCHEDULE "Schedule" | The object is a schedule object (section [2.2.5.26](#Section_2.2.5.26)). |
-| OBJECT_CALENDAR "Calendar" | The object is a [**calendar**](#gt_calendar) object (section [2.2.5.7](#Section_4.2.6)). |
+| OBJECT_CALENDAR "Calendar" | The object is a [**calendar**](#gt_calendar) object (section [2.2.5.7](#Section_2.2.5.7)). |
 
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 Resource Allocation Options
@@ -1152,30 +1152,30 @@ The following table lists the XML data formats that are defined in this section.
 
 | Name | Description |
 | --- | --- |
-| [AccountingClientList (section 2.2.5.1)](#Section_4.2.1) | Specifies a list of [**accounting clients**](#gt_accounting-client). |
+| [AccountingClientList (section 2.2.5.1)](#Section_2.2.5.1) | Specifies a list of [**accounting clients**](#gt_accounting-client). |
 | [AccountingConfigInfo (section 2.2.5.2)](#Section_2.2.5.2) | Specifies configuration information concerning the [**accounting**](#gt_accounting) database. |
 | AccountingMetaData (section 2.2.5.1) | Specifies accounting metadata, including database properties. |
 | [AccountingProcessList (section 2.2.5.4)](#Section_2.2.5.4) | Specifies a list of [**accounting processes**](#gt_accounting-process) and their properties. |
 | [AccountingQueryCondition (section 2.2.5.5)](#Section_2.2.5.5) | Specifies a query on the accounting database. |
 | [AppPoolList (section 2.2.5.6)](#Section_2.2.5.6) | Specifies an [**IIS**](#gt_internet-information-services-iis) [**application pool**](#gt_application-pool) list structure. |
-| [Calendar (section 2.2.5.7)](#Section_4.2.6) | Controls the scheduling of [**resource allocation**](#gt_resource-allocation). |
+| [Calendar (section 2.2.5.7)](#Section_2.2.5.7) | Controls the scheduling of [**resource allocation**](#gt_resource-allocation). |
 | [CalendarEvent (section 2.2.5.8)](#Section_2.2.5.8) | Specifies the scheduling parameters for a [**calendar**](#gt_calendar) event. |
 | [CalendarRule (section 2.2.5.9)](#Section_2.2.5.9) | Specifies the calendar parameters for a single calendar event |
-| [Calendars (section 2.2.5.10)](#Section_2.2.5.11) | Specifies one or more calendar objects. |
+| [Calendars (section 2.2.5.10)](#Section_2.2.5.10) | Specifies one or more calendar objects. |
 | [CalendarsCollection (section 2.2.5.11)](#Section_2.2.5.11) | Specifies a collection of calendar and schedule objects. |
 | [ConditionalPolicy (section 2.2.5.12)](#Section_2.2.5.12) | Controls the selection of [**resource allocation policies (RAPs)**](#gt_resource-allocation-policy-rap). |
-| [ConfigurationFiles (section 2.2.5.13)](#Section_4.2.10) | Specifies configurations used for the import and export of user information. |
+| [ConfigurationFiles (section 2.2.5.13)](#Section_2.2.5.13) | Specifies configurations used for the import and export of user information. |
 | [DependencyList (section 2.2.5.14)](#Section_2.2.5.14) | Specifies dependent policies and calendar events. |
 | [Events (section 2.2.5.15)](#Section_2.2.5.15) | Specifies a list of scheduled calendar events. |
 | [ExclusionList (section 2.2.5.16)](#Section_2.2.5.16) | Specifies processes to exclude from management. |
-| [Machine (section 2.2.5.17)](#Section_3.2.4.6) | Specifies parameters for managing machines within [**machine groups**](#gt_machine-group) . |
-| [MachineGroup (section 2.2.5.18)](#Section_3.2.4.6) | Specifies parameters for managing machine groups. |
-| [NotificationConfigInfo (section 2.2.5.19)](#Section_4.2.16) | Specifies the notification configuration. |
+| [Machine (section 2.2.5.17)](#Section_2.2.5.17) | Specifies parameters for managing machines within [**machine groups**](#gt_machine-group) . |
+| [MachineGroup (section 2.2.5.18)](#Section_2.2.5.18) | Specifies parameters for managing machine groups. |
+| [NotificationConfigInfo (section 2.2.5.19)](#Section_2.2.5.19) | Specifies the notification configuration. |
 | [ObjectIds (section 2.2.5.20)](#Section_2.2.5.20) | Specifies objects on the server. |
 | [Policy (section 2.2.5.21)](#Section_2.2.5.21) | Specifies parameters for managing resource allocation. |
 | [PolicyCollection (section 2.2.5.22)](#Section_2.2.5.22) | Specifies a collection of policy objects. |
-| [ProcessList (section 2.2.5.23)](#Section_2.2.5.4) | Specifies a list of processes and their properties for a [**resource allocation policy (RAP)**](#gt_resource-allocation-policy-rap). |
-| [ProcessMatchingCriteria (section 2.2.5.24)](#Section_4.2.20) | Specifies parameters for [**resource management**](#gt_resource-management). |
+| [ProcessList (section 2.2.5.23)](#Section_2.2.5.23) | Specifies a list of processes and their properties for a [**resource allocation policy (RAP)**](#gt_resource-allocation-policy-rap). |
+| [ProcessMatchingCriteria (section 2.2.5.24)](#Section_2.2.5.24) | Specifies parameters for [**resource management**](#gt_resource-management). |
 | [ProcessMatchingCriteriaCollection (section 2.2.5.25)](#Section_2.2.5.25) | Specifies a collection of [**process matching criteria**](#gt_process-matching-criteria-pmc) objects. |
 | [Schedule (section 2.2.5.26)](#Section_2.2.5.26) | Specifies a schedule for a calendar event. |
 | [Schedules (section 2.2.5.27)](#Section_2.2.5.27) | Specifies one or more schedule objects |
@@ -1250,7 +1250,7 @@ Attributes
 
 | Name | Type | Description |
 | --- | --- | --- |
-| Enabled | xs:string | A string that specifies whether the accounting functionality of the accounting client is currently enabled, in Boolean format (section [2.2.1.2](#Section_2.2.2.1)). |
+| Enabled | xs:string | A string that specifies whether the accounting functionality of the accounting client is currently enabled, in Boolean format (section [2.2.1.2](#Section_2.2.1.2)). |
 
 <a id="Section_2.2.5.2"></a>
 #### 2.2.5.2 AccountingConfigInfo Element
@@ -1323,7 +1323,7 @@ Child Elements
 
 | Element | Type | Description |
 | --- | --- | --- |
-| AccountingEnabled | xsd:string | Whether the accounting database is currently enabled for data collection, in Boolean format (section [2.2.1.2](#Section_2.2.2.1)). |
+| AccountingEnabled | xsd:string | Whether the accounting database is currently enabled for data collection, in Boolean format (section [2.2.1.2](#Section_2.2.1.2)). |
 | RecordWriteInterval | xsd:double | The time interval for data collection in minutes. |
 | DatabaseLocation | xsd:string | The file system path where the accounting database is located. |
 | DatabaseServer | xsd:string | The name of the server on which the accounting database is located. Its value "." denotes the name of the WSRM server the client is connected to. |
@@ -2134,7 +2134,7 @@ Child Elements
 | Element | Type | Description |
 | --- | --- | --- |
 | CalendarName | xsd:string | A string that specifies the name associated with the calendar object. |
-| CalendarDate | xsd:string | A string that specifies the calendar date, in [date](#Section_edaf1cfc12b240938ff8227c21f9bff5) format (section 2.2.1.3). |
+| CalendarDate | xsd:string | A string that specifies the calendar date, in [date](#Section_2.2.1.3) format (section 2.2.1.3). |
 | CalendarRule | CalendarRule | A specification of the calendar rule, in the form of a [CalendarRule](#Section_2.2.5.9) element (section 2.2.5.9). |
 | CalendarEvent | CalendarEvent | A specification of a calendar event, in the form of a [CalendarEvent](#Section_2.2.5.8) element (section 2.2.5.8). |
 | ScheduleName | xsd:string | A string that specifies the name of the event schedule associated with the calendar object. |
@@ -2147,7 +2147,7 @@ Additional XML data formats are specified in section [2.2.5](#Section_2.2.5).
 <a id="Section_2.2.5.8"></a>
 #### 2.2.5.8 CalendarEvent Element
 
-The CalendarEvent [**XML**](#gt_xml) element specifies the scheduling parameters for a calendar event that is associated with a [**resource allocation policy (RAP)**](#gt_resource-allocation-policy-rap). It is used in the definition of [Calendar](#Section_4.2.6) and [Schedule](#Section_2.2.5.26) elements (section 2.2.5.7 and 2.2.5.26).
+The CalendarEvent [**XML**](#gt_xml) element specifies the scheduling parameters for a calendar event that is associated with a [**resource allocation policy (RAP)**](#gt_resource-allocation-policy-rap). It is used in the definition of [Calendar](#Section_4.2.6) and [Schedule](#Section_4.2.22) elements (section 2.2.5.7 and 2.2.5.26).
 
 <xs:element name="CalendarEvent"
 
@@ -2228,7 +2228,7 @@ Child Elements
 | Element | Type | Description |
 | --- | --- | --- |
 | PolicyName | xs:string | A string that specifies the name of the policy associated with the event. |
-| TmStart | xs:string | A string that specifies the start time of the event, in [time](#Section_edaf1cfc12b240938ff8227c21f9bff5) format (section 2.2.1.3). |
+| TmStart | xs:string | A string that specifies the start time of the event, in [time](#Section_3.1.2) format (section 2.2.1.3). |
 | DurationDays | xs:unsignedByte | An 8-bit unsigned integer that specifies the duration in days of the event. |
 | DurationHours | xs:unsignedByte | An 8-bit unsigned integer that specifies the duration in hours of the event. |
 | DurationMinutes | xs:unsignedByte | An 8-bit unsigned integer that specifies the duration in minutes of the event. |
@@ -2482,9 +2482,9 @@ Child Elements
 
 | Element | Type | Description |
 | --- | --- | --- |
-| DtStart | xsd:string | A string that specifies the calendar start date, in [date](#Section_edaf1cfc12b240938ff8227c21f9bff5) format (section 2.2.1.3). |
+| DtStart | xsd:string | A string that specifies the calendar start date, in [date](#Section_2.2.1.3) format (section 2.2.1.3). |
 | DtEnd | xsd:string | A string that specifies the calendar end date, in date format. |
-| Freq | xsd:string | A string that specifies the calendar frequency, expressed as a [frequency](#Section_0ba1a077439b4667ac2d7477ebf274e5) option (section 2.2.2.5). |
+| Freq | xsd:string | A string that specifies the calendar frequency, expressed as a [frequency](#Section_2.2.2.5) option (section 2.2.2.5). |
 | Interval | xsd:double | A floating-point value that specifies the interval of the frequency. For example, if the <Freq> value is "weekly" and the <Interval> is "2.0", the frequency is biweekly. |
 | ByDay | ByDay | A specification of calendar occurrence by day of the week. |
 | Day | xsd:string | A string that specifies the day of the week, expressed as a [day option](#Section_2.2.2.4) (section 2.2.2.4). <Day> is used in weekly recurring calendars to specify that on a particular day of the week, a calendar event SHOULD be fired. |
@@ -2497,7 +2497,7 @@ Child Elements
 | ByMonth | ByMonth | A specification of calendar occurrence by month of the year. |
 | Month | xsd:double | A floating-point value that specifies the month of the year, expressed as a value from 1 to 12. <Month> is used in annually recurring calendars to specify that in a particular month of the year, a calendar event SHOULD be fired. |
 | BySetPos | BySetPos | A specification of calendar occurrence by monthly instance of a day of the week. |
-| SetPos | xsd:double | A floating-point value that specifies the monthly instance of a day of the week, expressed as a [day modifier](#Section_b68280d5e50e4783adc355bdf7d42306) (section 2.2.2.3). <BySetPos> is used with <Day> and <Month> elements in annually recurring calendars to specify that on a particular monthly instance of a day of the week, a calendar event SHOULD be fired. For example, the following elements specify the second Sunday in January: <ByDay><Day>Su</Day></ByDay> <ByMonth><Month>1</Month></ByMonth> <BySetPos><SetPos>2</SetPos></BySetPos> For another example, the following elements specify the last Monday in March: <ByDay><Day>Mo</Day></ByDay> <ByMonth><Month>3</Month></ByMonth> <BySetPos><SetPos>-1</SetPos></BySetPos> |
+| SetPos | xsd:double | A floating-point value that specifies the monthly instance of a day of the week, expressed as a [day modifier](#Section_2.2.2.3) (section 2.2.2.3). <BySetPos> is used with <Day> and <Month> elements in annually recurring calendars to specify that on a particular monthly instance of a day of the week, a calendar event SHOULD be fired. For example, the following elements specify the second Sunday in January: <ByDay><Day>Su</Day></ByDay> <ByMonth><Month>1</Month></ByMonth> <BySetPos><SetPos>2</SetPos></BySetPos> For another example, the following elements specify the last Monday in March: <ByDay><Day>Mo</Day></ByDay> <ByMonth><Month>3</Month></ByMonth> <BySetPos><SetPos>-1</SetPos></BySetPos> |
 
 A calendar event can be triggered by a schedule, such as whenever a specified scheduled event occurs. In such cases, the policy defined by the schedule is assigned the **PROFILING** value from the [MANAGEMENT_TYPE](#Section_2.2.3.5) enumeration (section 2.2.3.5).
 
@@ -2582,7 +2582,7 @@ Child Elements
 | Element | Type | Description |
 | --- | --- | --- |
 | CalendarEvent | CalendarEvent | A specification of a calendar event, in the form of a [CalendarEvent](#Section_2.2.5.8) element (section 2.2.5.8). |
-| Calendars | Calendars | A specification of a [Calendars](#Section_2.2.5.11) element (section 2.2.5.10) that defines one or more calendar objects. |
+| Calendars | Calendars | A specification of a [Calendars](#Section_4.2.7) element (section 2.2.5.10) that defines one or more calendar objects. |
 | Schedules | Schedules | A specification of a [Schedules](#Section_2.2.5.27) element (section 2.2.5.27) that defines one or more schedule objects. |
 
 Additional XML data formats are specified in section [2.2.5](#Section_2.2.5).
@@ -2869,7 +2869,7 @@ Child Elements
 | Element | Type | Description |
 | --- | --- | --- |
 | ConfigurationFile | ConfigurationFile | The data file for the object being imported or exported. |
-| Users | Users | The categories of remote session users, in the form of a [Users](#Section_4.2.25) element (section 2.2.5.30). |
+| Users | Users | The categories of remote session users, in the form of a [Users](#Section_2.2.5.30) element (section 2.2.5.30). |
 
 Attributes
 
@@ -3200,7 +3200,7 @@ Additional XML data formats are specified in section [2.2.5](#Section_2.2.5).
 <a id="Section_2.2.5.18"></a>
 #### 2.2.5.18 MachineGroup Element
 
-The [MachineGroup](#Section_3.2.4.6) [**XML**](#gt_xml) element is used to specify parameters for managing [**machine groups**](#gt_machine-group). It is the root element of XML documents that are used in WSRM method parameters.
+The [MachineGroup](#Section_4.2.15) [**XML**](#gt_xml) element is used to specify parameters for managing [**machine groups**](#gt_machine-group). It is the root element of XML documents that are used in WSRM method parameters.
 
 <xs:element name="MachineGroup">
 
@@ -3315,7 +3315,7 @@ Child Elements
 
 | Element | Type | Description |
 | --- | --- | --- |
-| NotificationEnabled | xs:string | A string that specifies whether the notification configuration is currently enabled, in Boolean format (section [2.2.1.2](#Section_2.2.2.1)). |
+| NotificationEnabled | xs:string | A string that specifies whether the notification configuration is currently enabled, in Boolean format (section [2.2.1.2](#Section_2.2.1.2)). |
 | SMTPServer | xs:string | A string that specifies the [**NetBIOS**](#gt_netbios) name or [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of the [**Simple Mail Transfer Protocol (SMTP)**](#gt_simple-mail-transfer-protocol-smtp) server. |
 | EmailIds | xs:string | A string that specifies one or more email identifiers to be notified, separated by semicolons. |
 | EventList | xs:string | A string that specifies a list of numeric [**event identifiers**](#gt_event-identifier), separated by commas. |
@@ -4007,7 +4007,7 @@ Child Elements
 
 | Element | Type | Description |
 | --- | --- | --- |
-| Schedule | Schedule | A specification of a [Schedule](#Section_2.2.5.26) element (section 2.2.5.26) that defines an individual schedule object. |
+| Schedule | Schedule | A specification of a [Schedule](#Section_4.2.22) element (section 2.2.5.26) that defines an individual schedule object. |
 
 Additional XML data formats are specified in section [2.2.5](#Section_2.2.5).
 
@@ -4267,7 +4267,7 @@ After instantiating the ResourceManager object and acquiring pointers to its int
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Higher-Layer Triggered Events
 
-All method invocations are triggered by higher-layer events, including commands issued within administrative and diagnostic applications. Method invocations are specified in [Message Processing Events and Sequencing Rules (section 3.2.4)](#Section_3.1.4) for the WSRM Protocol server.
+All method invocations are triggered by higher-layer events, including commands issued within administrative and diagnostic applications. Method invocations are specified in [Message Processing Events and Sequencing Rules (section 3.2.4)](#Section_3.2.4) for the WSRM Protocol server.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Opening and Closing a Session
@@ -4334,7 +4334,7 @@ The WSRM Protocol maintains types of information as described by the following d
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 Accounting Database
 
-The WSRM Protocol maintains information for each process it manages in an [**accounting**](#gt_accounting) database. It SHOULD<18> contain the following information. The "Name" column specifies the name of the [AccountingProcessList](#Section_2.2.5.4) element (section 2.2.5.4) to which the data corresponds.
+The WSRM Protocol maintains information for each process it manages in an [**accounting**](#gt_accounting) database. It SHOULD<18> contain the following information. The "Name" column specifies the name of the [AccountingProcessList](#Section_4.2.4) element (section 2.2.5.4) to which the data corresponds.
 
 | Name | Description |
 | --- | --- |
@@ -4427,7 +4427,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [RetrieveEventList](#Section_3.2.4.1.1) | Is not implemented and always returns an error. Opnum: 7 |
-| [GetSystemAffinity](#Section_2.2.1.1) | Get the [**processor affinity**](#gt_processor-affinity) of the system. Opnum: 8 |
+| [GetSystemAffinity](#Section_3.2.4.1.2) | Get the [**processor affinity**](#gt_processor-affinity) of the system. Opnum: 8 |
 | [ImportXMLFiles](#Section_3.2.4.1.3) | Loads a specified [**WSRM configuration**](#gt_wsrm-configuration). Opnum: 9 |
 | [ExportXMLFiles](#Section_3.2.4.1.4) | Saves the current WSRM configuration. Opnum: 10 |
 | [RestoreXMLFiles](#Section_3.2.4.1.5) | Restores the WSRM configuration to a specified state. Opnum: 11 |
@@ -4500,7 +4500,7 @@ The **ImportXMLFiles** method loads a specified [**WSRM configuration**](#gt_wsr
 
 **bstrPolicyXml:** A string that specifies [**resource policies**](#gt_current-resource-policy) to be loaded by the server, in the form of a [PolicyCollection element (section 2.2.5.22)](#Section_2.2.5.22). This parameter is ignored if it is NULL.
 
-**bstrCalendarXml:** A string that specifies [**calendars**](#gt_calendar) to be loaded by the server, in the form of a [CalendarsCollection element (section 2.2.5.11)](#Section_2.2.5.11). For an example, see [CalendarsCollection](#Section_2.2.5.11) example (section 4.2.8). This parameter is ignored if it is NULL.
+**bstrCalendarXml:** A string that specifies [**calendars**](#gt_calendar) to be loaded by the server, in the form of a [CalendarsCollection element (section 2.2.5.11)](#Section_2.2.5.11). For an example, see [CalendarsCollection](#Section_4.2.8) example (section 4.2.8). This parameter is ignored if it is NULL.
 
 **bstrConditionalXml:** A string that specifies conditions to be loaded by the server, in the form of a [ConditionalPolicy element (section 2.2.5.12)](#Section_2.2.5.12). For an example, see section [4.2.9](#Section_4.2.9). This parameter is ignored if it is NULL.
 
@@ -4537,7 +4537,7 @@ The ExportXMLFiles method saves the current [**WSRM configuration**](#gt_wsrm-co
 
 **pbstrPolicyXml:** A pointer to a string that returns a [**resource policy**](#gt_resource-policy) in the form of a [PolicyCollection element (section 2.2.5.22)](#Section_2.2.5.22).
 
-**pbstrCalendarXml:** A pointer to a string that returns a [**calendar**](#gt_calendar) in the form of a [CalendarsCollection element (section 2.2.5.11)](#Section_2.2.5.11). For an example, see [CalendarsCollection Example (section 4.2.8)](#Section_2.2.5.11).
+**pbstrCalendarXml:** A pointer to a string that returns a [**calendar**](#gt_calendar) in the form of a [CalendarsCollection element (section 2.2.5.11)](#Section_2.2.5.11). For an example, see [CalendarsCollection Example (section 4.2.8)](#Section_4.2.8).
 
 **pbstrConditionalXml:** A pointer to a string that returns a [**condition**](#gt_condition) in the form of a [ConditionalPolicy element (section 2.2.5.12)](#Section_2.2.5.12). For an example, see section [4.2.9](#Section_4.2.9).
 
@@ -4736,15 +4736,15 @@ The ExportObjects method creates [**XML**](#gt_xml) for exporting objects.
 
 );
 
-**bstrObjectIds:** A string that identifies the objects to be exported, in the format of an [ObjectIds](#Section_2.2.5.20) element (section 2.2.5.20).
+**bstrObjectIds:** A string that identifies the objects to be exported, in the format of an [ObjectIds](#Section_4.2.17) element (section 2.2.5.20).
 
 **enumObjectType:** An [OBJECT_TYPE](#Section_2.2.3.6) enumeration value (section 2.2.3.6) that specifies the type of the objects to be exported. This determines the format of XML object returned in the *pbstrObjectXml* parameter, as follows.
 
 | Object type | XML object |
 | --- | --- |
-| OBJECT_SELECTION_CRITERIA | [ProcessMatchingCriteria element (section 2.2.5.24)](#Section_4.2.20) |
+| OBJECT_SELECTION_CRITERIA | [ProcessMatchingCriteria element (section 2.2.5.24)](#Section_2.2.5.24) |
 | OBJECT_POLICY | [Policy element (section 2.2.5.21)](#Section_2.2.5.21) |
-| OBJECT_SCHEDULE | [Calendar element (section 2.2.5.7)](#Section_4.2.6) or [Schedule element (section 2.2.5.26)](#Section_2.2.5.26) |
+| OBJECT_SCHEDULE | [Calendar element (section 2.2.5.7)](#Section_2.2.5.7) or [Schedule element (section 2.2.5.26)](#Section_2.2.5.26) |
 
 **pbstrObjectXml:** A pointer to a string that returns the XML for the objects to be exported. The format of the XML depends on the type of exported objects specified by the *enumObjectType* parameter.<35>
 
@@ -4787,19 +4787,19 @@ The GetImportConflicts method finds conflicts between import objects and existin
 
 );
 
-**bstrPMCXml:** An optional string that specifies [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc), in the form of a [ProcessMatchingCriteriaCollection](#Section_2.2.5.25) element (section 2.2.5.25).
+**bstrPMCXml:** An optional string that specifies [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc), in the form of a [ProcessMatchingCriteriaCollection](#Section_4.2.21) element (section 2.2.5.25).
 
 **bstrPolicyXml:** An optional string that specifies [**resource policies**](#gt_current-resource-policy), in the form of a [PolicyCollection element (section 2.2.5.22)](#Section_2.2.5.22).
 
-**bstrCalendarXml:** An optional string that specifies [**calendar**](#gt_calendar) elements, in the form of a [CalendarsCollection](#Section_2.2.5.11) element (section 2.2.5.11).
+**bstrCalendarXml:** An optional string that specifies [**calendar**](#gt_calendar) elements, in the form of a [CalendarsCollection](#Section_4.2.8) element (section 2.2.5.11).
 
-**bstrConditionalXml:** An optional string that specifies a conditional policy, in the form of a [ConditionalPolicy](#Section_2.2.5.12) element (section 2.2.5.12).
+**bstrConditionalXml:** An optional string that specifies a conditional policy, in the form of a [ConditionalPolicy](#Section_4.2.9) element (section 2.2.5.12).
 
-**bstrMachineGroupXml:** An optional string that specifies a [**machine group**](#gt_machine-group), in the form of a [MachineGroup](#Section_3.2.4.6) element (section 2.2.5.18).
+**bstrMachineGroupXml:** An optional string that specifies a [**machine group**](#gt_machine-group), in the form of a [MachineGroup](#Section_4.2.15) element (section 2.2.5.18).
 
 **bstrConfigurationXmls:** Not used.
 
-**pbstrConflictingObjects:** A pointer to a string that SHOULD identify the [**conflicting objects**](#gt_conflicting-objects), in the form of an [ObjectIds](#Section_2.2.5.20) element (section 2.2.5.20).
+**pbstrConflictingObjects:** A pointer to a string that SHOULD identify the [**conflicting objects**](#gt_conflicting-objects), in the form of an [ObjectIds](#Section_4.2.17) element (section 2.2.5.20).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -4834,15 +4834,15 @@ The ImportXml method imports objects into the configuration.
 
 );
 
-**bstrPMCXml:** A string that specifies [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc), in the form of a [ProcessMatchingCriteriaCollection](#Section_2.2.5.25) element (section 2.2.5.25). For an example, see [ProcessMatchingCriteriaCollection](#Section_4.2.21) example (section 4.2.21).
+**bstrPMCXml:** A string that specifies [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc), in the form of a [ProcessMatchingCriteriaCollection](#Section_4.2.21) element (section 2.2.5.25). For an example, see [ProcessMatchingCriteriaCollection](#Section_4.2.21) example (section 4.2.21).
 
 **bstrPolicyXml:** A string that specifies a [**resource policy**](#gt_resource-policy), in the form of a [PolicyCollection element (section 2.2.5.22)](#Section_2.2.5.22).
 
-**bstrCalendarXml:** A string that specifies a calendar, in the form of a [CalendarsCollection](#Section_2.2.5.11) element (section 2.2.5.11). For an example, see [CalendarsCollection](#Section_2.2.5.11) example (section 4.2.8).<37>
+**bstrCalendarXml:** A string that specifies a calendar, in the form of a [CalendarsCollection](#Section_4.2.8) element (section 2.2.5.11). For an example, see [CalendarsCollection](#Section_4.2.8) example (section 4.2.8).<37>
 
-**bstrConditionalXml:** A string that specifies a conditional policy, in the form of a [ConditionalPolicy](#Section_2.2.5.12) element (section 2.2.5.12).
+**bstrConditionalXml:** A string that specifies a conditional policy, in the form of a [ConditionalPolicy](#Section_4.2.9) element (section 2.2.5.12).
 
-**bstrMachineGroupXml:** A string that specifies a [**machine group**](#gt_machine-group), in the form of a [MachineGroup](#Section_3.2.4.6) element (section 2.2.5.17).
+**bstrMachineGroupXml:** A string that specifies a [**machine group**](#gt_machine-group), in the form of a [MachineGroup](#Section_4.2.15) element (section 2.2.5.17).
 
 **bstrConfigurationXmls:** A string that specifies a configuration to be loaded by the WSRM server, in the form of a [ConfigurationFiles](#Section_4.2.10) element (section 2.2.5.13).
 
@@ -4880,15 +4880,15 @@ The ExportXml method exports objects from the configuration.
 
 );
 
-**pbstrPMCXml:** A pointer to a string that returns [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc), in the form of a [ProcessMatchingCriteriaCollection](#Section_2.2.5.25) element (section 2.2.5.25). For an example, see [ProcessMatchingCriteriaCollection](#Section_4.2.21) example (section 4.2.21).
+**pbstrPMCXml:** A pointer to a string that returns [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc), in the form of a [ProcessMatchingCriteriaCollection](#Section_4.2.21) element (section 2.2.5.25). For an example, see [ProcessMatchingCriteriaCollection](#Section_4.2.21) example (section 4.2.21).
 
 **pbstrPolicyXml:** A pointer to a string that returns a [**resource policy**](#gt_resource-policy), in the form of a [PolicyCollection element (section 2.2.5.22)](#Section_2.2.5.22).
 
-**pbstrCalendarXml:** A pointer to a string that returns a [**calendar**](#gt_calendar), in the form of a [CalendarsCollection](#Section_2.2.5.11) element (section 2.2.5.11). For an example, see [CalendarsCollection](#Section_2.2.5.11) example (section 4.2.8).
+**pbstrCalendarXml:** A pointer to a string that returns a [**calendar**](#gt_calendar), in the form of a [CalendarsCollection](#Section_4.2.8) element (section 2.2.5.11). For an example, see [CalendarsCollection](#Section_4.2.8) example (section 4.2.8).
 
-**pbstrConditionalXml:** A pointer to a string that SHOULD return a conditional policy, in the format of a [ConditionalPolicy](#Section_2.2.5.12) element (section 2.2.5.12).
+**pbstrConditionalXml:** A pointer to a string that SHOULD return a conditional policy, in the format of a [ConditionalPolicy](#Section_4.2.9) element (section 2.2.5.12).
 
-**pbstrMachineGroupXml:** A pointer to a string that SHOULD return a [**machine group**](#gt_machine-group), in the format of a [MachineGroup](#Section_3.2.4.6) element (section 2.2.5.17).
+**pbstrMachineGroupXml:** A pointer to a string that SHOULD return a [**machine group**](#gt_machine-group), in the format of a [MachineGroup](#Section_4.2.15) element (section 2.2.5.17).
 
 **pbstrConfigurationXmls:** A pointer to a string that SHOULD return a configuration, in the format of a [ConfigurationFiles](#Section_4.2.10) element (section 2.2.5.13).
 
@@ -4979,7 +4979,7 @@ The GetAccountingMetadata method retrieves [**accounting**](#gt_accounting) meta
 
 );
 
-**pbstrMetaData:** A pointer to a string that returns accounting metadata in the form of an [AccountingMetaData](#Section_3.2.4.3.2) [**XML**](#gt_xml) element (section 2.2.5.3).
+**pbstrMetaData:** A pointer to a string that returns accounting metadata in the form of an [AccountingMetaData](#Section_4.2.3) [**XML**](#gt_xml) element (section 2.2.5.3).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (int the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -5300,7 +5300,7 @@ The DumpAccountingData method dumps [**accounting**](#gt_accounting) data from a
 
 );
 
-**bstrAccountingData:** A string that specifies the accounting data to be dumped, in the form of an [AccountingProcessList](#Section_2.2.5.4) element (section 2.2.5.4).
+**bstrAccountingData:** A string that specifies the accounting data to be dumped, in the form of an [AccountingProcessList](#Section_4.2.4) element (section 2.2.5.4).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -5405,7 +5405,7 @@ Additional [IWRMAccounting](#Section_3.2.4.3) interface methods are specified in
 <a id="Section_3.2.4.3.14"></a>
 ##### 3.2.4.3.14 SetClientPermissions (Opnum 20)
 
-The SetClientPermissions method adds or removes a specified client for remote [**accounting**](#gt_accounting) on a server and makes the required changes for [**DCOM**](#gt_distributed-component-object-model-dcom) permissions; that is, it adds the machine account of the [**accounting client**](#gt_accounting-client) to the Distributed COM Users group (see [MS-SAMR](#Section_5) section 3.1.4.2) of the accounting server.
+The SetClientPermissions method adds or removes a specified client for remote [**accounting**](#gt_accounting) on a server and makes the required changes for [**DCOM**](#gt_distributed-component-object-model-dcom) permissions; that is, it adds the machine account of the [**accounting client**](#gt_accounting-client) to the Distributed COM Users group (see [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.4.2) of the accounting server.
 
 [id(14), helpstring("method SetClientPermissions")] HRESULT SetClientPermissions(
 
@@ -5474,7 +5474,7 @@ The GetCalendarInfo method gets information about one or all calendar events.
 
 **pbstrCalendarXML:** A pointer to a string that returns the specified calendar information, in the form of a [Calendar](#Section_4.2.6) element (section 2.2.5.7). For an example, see the [Calendar](#Section_4.2.6) example (section 4.2.6).
 
-If **bstrCalendarName** is "\", all calendar events MUST be returned, in the form of a [Calendars](#Section_2.2.5.11) element (section 2.2.5.10). For an example, see the [Calendars](#Section_2.2.5.11) example (section 4.2.7).
+If **bstrCalendarName** is "\", all calendar events MUST be returned, in the form of a [Calendars](#Section_4.2.7) element (section 2.2.5.10). For an example, see the [Calendars](#Section_4.2.7) example (section 4.2.7).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -5498,7 +5498,7 @@ The CreateCalendar method creates a new calendar event.
 
 );
 
-**bstrCalendarXML:** A string that specifies the new calendar event, in the form of a [Calendar](#Section_4.2.6) element (section 2.2.5.7). For an example, see [Calendar Example](#Section_4.2.6) (section [4.2.8](#Section_2.2.5.11)).
+**bstrCalendarXML:** A string that specifies the new calendar event, in the form of a [Calendar](#Section_4.2.6) element (section 2.2.5.7). For an example, see [Calendar Example](#Section_4.2.6) (section [4.2.8](#Section_4.2.8)).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -5661,7 +5661,7 @@ The ComputeEvents method computes the calendar events in a specified time interv
 
 );
 
-**szStartTime:** A string that specifies the start time to compute calendar events, in [time](#Section_edaf1cfc12b240938ff8227c21f9bff5) format (section 2.2.1.3).
+**szStartTime:** A string that specifies the start time to compute calendar events, in [time](#Section_3.1.2) format (section 2.2.1.3).
 
 **szEndTime:** A string that specifies the end time to compute calendar events, in time format.
 
@@ -5672,7 +5672,7 @@ The ComputeEvents method computes the calendar events in a specified time interv
 | FALSE 0x00000000 | The server SHOULD NOT merge calendar events. |
 | TRUE 0x00000001 | The server SHOULD merge calendar events. |
 
-**pbstrEvents:** A pointer to a string that returns a list of events that are computed during execution, in the form of an [Events](#Section_4.2.12) element (section 2.2.5.15). For an example, see [Events Example](#Section_4.2.12) (section 4.2.12).
+**pbstrEvents:** A pointer to a string that returns a list of events that are computed during execution, in the form of an [Events](#Section_2.2.5.15) element (section 2.2.5.15). For an example, see [Events Example](#Section_4.2.12) (section 4.2.12).
 
 **pbstrConflicts:** A pointer to a string that returns a list of conflicting events during the specified time interval, in the form of an Events element (section 2.2.5.15). For an example, see Events Example (section 4.2.12).
 
@@ -5702,7 +5702,7 @@ The GetScheduleInfo method gets information about a specified schedule object.
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**pbstrScheduleXML:** A pointer to a string that returns the specified schedule object information structure, in the form of a [Schedule](#Section_2.2.5.26) element (section 2.2.5.26). Sample [**XML**](#gt_xml) is provided in [Schedule XML Example](#Section_4.2.22) (section 4.2.22).
+**pbstrScheduleXML:** A pointer to a string that returns the specified schedule object information structure, in the form of a [Schedule](#Section_4.2.22) element (section 2.2.5.26). Sample [**XML**](#gt_xml) is provided in [Schedule XML Example](#Section_4.2.22) (section 4.2.22).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -5725,7 +5725,7 @@ The CreateSchedule method creates a new schedule object.
 
 );
 
-**bstrScheduleXML:** A string that specifies the new schedule, in the form of a [Schedule](#Section_2.2.5.26) element (section 2.2.5.26). Sample [**XML**](#gt_xml) is provided in [Schedule Example](#Section_4.2.22) (section 4.2.22).
+**bstrScheduleXML:** A string that specifies the new schedule, in the form of a [Schedule](#Section_4.2.22) element (section 2.2.5.26). Sample [**XML**](#gt_xml) is provided in [Schedule Example](#Section_4.2.22) (section 4.2.22).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -5756,7 +5756,7 @@ The ModifySchedule method modifies the specified schedule of the calendar.
 
 );
 
-**bstrScheduleXML:** A string that specifies the modified schedule, in the form of a [Schedule](#Section_2.2.5.26) element (section 2.2.5.26). Sample [**XML**](#gt_xml) is provided in [Schedule Example](#Section_4.2.22) (section 4.2.22).
+**bstrScheduleXML:** A string that specifies the modified schedule, in the form of a [Schedule](#Section_4.2.22) element (section 2.2.5.26). Sample [**XML**](#gt_xml) is provided in [Schedule Example](#Section_4.2.22) (section 4.2.22).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -6134,7 +6134,7 @@ The GetExclusionList method gets the current [**exclusion list**](#gt_exclusion-
 
 );
 
-**pbstrExclusionList:** A pointer to a string that returns the exclusion list, in the form of an [ExclusionList](#Section_2.2.5.16) element (section 2.2.5.16). For an example, see [ExclusionList Example](#Section_4.2.13) (section 4.2.13).
+**pbstrExclusionList:** A pointer to a string that returns the exclusion list, in the form of an [ExclusionList](#Section_4.2.13) element (section 2.2.5.16). For an example, see [ExclusionList Example](#Section_4.2.13) (section 4.2.13).
 
 **enumListType:** An [EXCLUSIONLIST_TYPE](#Section_2.2.3.2) enumeration (section 2.2.3.2) value that specifies whether the list is system-defined or user-defined.
 
@@ -6160,7 +6160,7 @@ The SetExclusionList method updates the contents of the [**exclusion list**](#gt
 
 );
 
-**bstrExclusionList:** A string that specifies a list of processes, in the form of an [ExclusionList](#Section_2.2.5.16) element (section 2.2.5.16). For an example, see (section [4.2.13](#Section_4.2.13)).
+**bstrExclusionList:** A string that specifies a list of processes, in the form of an [ExclusionList](#Section_4.2.13) element (section 2.2.5.16). For an example, see (section [4.2.13](#Section_4.2.13)).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -6279,7 +6279,7 @@ The CreateMachineGroup method creates and initializes a [**machine group**](#gt_
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**bstrMachineGroupInfo:** A string that specifies information about the machine group to be created, including its identifier, in the format of a [MachineGroup](#Section_3.2.4.6) element (section 2.2.5.18).<85>
+**bstrMachineGroupInfo:** A string that specifies information about the machine group to be created, including its identifier, in the format of a [MachineGroup](#Section_4.2.15) element (section 2.2.5.18).<85>
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -6312,7 +6312,7 @@ The GetMachineGroupInfo method returns information about a machine group.
 
 **bstrMachineGroupId:** A string that specifies the identifier of the machine group for which to return information.
 
-**pbstrMachineGroupInfo:** A pointer to a string that SHOULD return information about the machine group, in the format specified in [MachineGroup (section 2.2.5.17)](#Section_3.2.4.6).
+**pbstrMachineGroupInfo:** A pointer to a string that SHOULD return information about the machine group, in the format specified in [MachineGroup (section 2.2.5.17)](#Section_2.2.5.17).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -6343,7 +6343,7 @@ The ModifyMachineGroup method modifies an existing machine group. The method rep
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**bstrMachineGroupInfo:** A string that specifies the new information for the machine group, in the format specified in [MachineGroup](#Section_3.2.4.6) element (section [2.2.5.18](#Section_3.2.4.6)).
+**bstrMachineGroupInfo:** A string that specifies the new information for the machine group, in the format specified in [MachineGroup](#Section_4.2.15) element (section [2.2.5.18](#Section_2.2.5.18)).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -6437,7 +6437,7 @@ The AddMachine method adds a machine to a machine group.
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**bstrMachineInfo:** A string that specifies the machine, in the format specified in [Machine](#Section_3.2.4.6) element (section 2.2.5.17).<95>
+**bstrMachineInfo:** A string that specifies the machine, in the format specified in [Machine](#Section_4.2.15) element (section 2.2.5.17).<95>
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -6469,7 +6469,7 @@ The GetMachineInfo method returns information about a machine. If more than one 
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**pbstrMachineInfo:** A pointer to a string that returns information about the machine, in the format specified in [Machine](#Section_3.2.4.6) element (section 2.2.5.17).
+**pbstrMachineInfo:** A pointer to a string that returns information about the machine, in the format specified in [Machine](#Section_4.2.15) element (section 2.2.5.17).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -6504,7 +6504,7 @@ If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**bstrMachineInfo:** A string that specifies the new information for the machine, in the format specified in [Machine](#Section_3.2.4.6) element (section 2.2.5.17).
+**bstrMachineInfo:** A string that specifies the new information for the machine, in the format specified in [Machine](#Section_4.2.15) element (section 2.2.5.17).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -6898,7 +6898,7 @@ The GetProcessList method returns a list of processes for a specified policy.
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
-**pbstrProcessList:** A pointer to a string that returns a list of processes in the form of a [ProcessList](#Section_2.2.5.4) element (section 2.2.5.23). The data about matching processes is queried from the operating system to create the ProcessList element.
+**pbstrProcessList:** A pointer to a string that returns a list of processes in the form of a [ProcessList](#Section_2.2.5.23) element (section 2.2.5.23). The data about matching processes is queried from the operating system to create the ProcessList element.
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -7004,7 +7004,7 @@ The GetConditionalPolicy function returns conditions for a specified conditional
 
 **bstrPolicyName:** The name of the conditional policy for which conditions are to be returned.<111>
 
-**pbstrPolicyInfo:** A pointer to a string that returns the [**resource policy**](#gt_resource-policy) conditions, in the form of a [ConditionalPolicy element](#Section_2.2.5.12) (section 2.2.5.12). For an example, see [ConditionalPolicy example](#Section_4.2.9) (section 4.2.9).
+**pbstrPolicyInfo:** A pointer to a string that returns the [**resource policy**](#gt_resource-policy) conditions, in the form of a [ConditionalPolicy element](#Section_4.2.9) (section 2.2.5.12). For an example, see [ConditionalPolicy example](#Section_4.2.9) (section 4.2.9).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -7026,7 +7026,7 @@ The **SetConditionalPolicy** method loads specified [**conditions**](#gt_conditi
 
 );
 
-**bstrPolicyInfo:** A string that specifies the conditions to be loaded in the form of a [ConditionalPolicy element](#Section_2.2.5.12) (section 2.2.5.12). For an example, see [ConditionalPolicy example](#Section_4.2.9) (section 4.2.9).
+**bstrPolicyInfo:** A string that specifies the conditions to be loaded in the form of a [ConditionalPolicy element](#Section_4.2.9) (section 2.2.5.12). For an example, see [ConditionalPolicy example](#Section_4.2.9) (section 4.2.9).
 
 If this parameter is NULL, **E_INVALIDARG** SHOULD be returned.<112>
 
@@ -7095,7 +7095,7 @@ The GetRemoteUserCategories method retrieves user categories information from th
 
 );
 
-**pbstrRemoteUserCategoriesInfo:** A pointer to a string that returns categories of remote session users, in the format of a [Users](#Section_4.2.25) element (section 2.2.5.30).
+**pbstrRemoteUserCategoriesInfo:** A pointer to a string that returns categories of remote session users, in the format of a [Users](#Section_2.2.5.30) element (section 2.2.5.30).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -7116,7 +7116,7 @@ The SetRemoteUserCategories method sets user categories information on the WSRM 
 
 );
 
-**bstrRemoteUserCategoriesInfo:** A string that specifies categories of remote session users, in the format of a [Users](#Section_4.2.25) element (section 2.2.5.30).
+**bstrRemoteUserCategoriesInfo:** A string that specifies categories of remote session users, in the format of a [Users](#Section_2.2.5.30) element (section 2.2.5.30).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -7196,7 +7196,7 @@ If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
 **pbstrResourceGroupInfo:** A pointer to a string that returns the selection criteria, in the form of a [ProcessMatchingCriteria](#Section_4.2.20) element (section 2.2.5.24). For an example, see the [ProcessMatchingCriteria](#Section_4.2.20) example (section 4.2.20).
 
-If *bstrResourceGroupName* is "\", all resource groups MUST be returned, in the form of a [ProcessMatchingCriteriaCollection](#Section_2.2.5.25) element (section 2.2.5.25). For an example, see the [ProcessMatchingCriteriaCollection](#Section_4.2.21) example (section 4.2.21).
+If *bstrResourceGroupName* is "\", all resource groups MUST be returned, in the form of a [ProcessMatchingCriteriaCollection](#Section_4.2.21) element (section 2.2.5.25). For an example, see the [ProcessMatchingCriteriaCollection](#Section_4.2.21) example (section 4.2.21).
 
 **Return Values:** This method returns 0x00000000 for success or a negative [**HRESULT**](#gt_hresult) value (in the following table or in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) if an error occurs.
 
@@ -7262,7 +7262,7 @@ The CreateResourceGroup function creates a new [**resource group**](#gt_resource
 
 );
 
-**bstrResourceGroupInfo:** A string that specifies a new resource group, in the form of a [ProcessMatchingCriteria (section 2.2.5.24)](#Section_4.2.20) element (section 2.2.5.24). For an example, see [ProcessMatchingCriteria](#Section_4.2.20) example (section 4.2.20).
+**bstrResourceGroupInfo:** A string that specifies a new resource group, in the form of a [ProcessMatchingCriteria (section 2.2.5.24)](#Section_2.2.5.24) element (section 2.2.5.24). For an example, see [ProcessMatchingCriteria](#Section_4.2.20) example (section 4.2.20).
 
 If this parameter is NULL, **E_INVALIDARG** MUST be returned.
 
@@ -7455,7 +7455,7 @@ The following sequence of WSRM client actions can be used to export selected [**
 - Call the [GetMachineGroupInfo](#Section_3.2.4.6.2) method to identify the name of the [**machine group**](#gt_machine-group) under which the machine will be added.
 - Call the [AddMachine](#Section_3.2.4.6.6) method with the following parameters:
 - *bstrParentMachineGroupId* set to the name of the machine group to which the machine will be added.
-- *bstrMachineInfo* set to the machine to be added, in the format of a [Machine](#Section_3.2.4.6) element (section 2.2.5.17).
+- *bstrMachineInfo* set to the machine to be added, in the format of a [Machine](#Section_4.2.15) element (section 2.2.5.17).
 - Release the pointer to the interface.
 <a id="Section_4.1.6"></a>
 ### 4.1.6 Create And Initialize a Machine Group
@@ -7466,7 +7466,7 @@ The following sequence of WSRM client actions can be used to create and initiali
 - Get a pointer to the [IWRMMachineGroup](#Section_3.2.4.6) interface.
 - Call the [CreateMachineGroup](#Section_3.2.4.6.1) method with the following parameters:
 - *bstrParentMachineGroupId* can be either "Machine Groups", "Default" or the name of any existing machine group. The new machine group will be created with this machine group as the parent.
-- *bstrMachineGroupInfo* set to the machine group to be created, in the format of a [MachineGroup](#Section_3.2.4.6) element (section 2.2.5.17).
+- *bstrMachineGroupInfo* set to the machine group to be created, in the format of a [MachineGroup](#Section_4.2.15) element (section 2.2.5.17).
 - Release the pointer to the interface.
 <a id="Section_4.1.7"></a>
 ### 4.1.7 Create a Custom Resource Allocation Policy
@@ -7512,23 +7512,23 @@ The following table lists the types of sample XML data that are presented in thi
 | [AccountingProcessList (section 4.2.4)](#Section_4.2.4) | Specifies a list of [**accounting processes**](#gt_accounting-process), including process properties. |
 | [AccountingQueryCondition (section 4.2.5)](#Section_4.2.5) | Specifies a query on the accounting database. |
 | [Calendar (section 4.2.6)](#Section_4.2.6) | Controls the scheduling of [**resource allocation**](#gt_resource-allocation). |
-| [Calendars (section 4.2.7)](#Section_2.2.5.11) | Specifies one or more [**calendar**](#gt_calendar) objects. |
-| [CalendarsCollection (section 4.2.8)](#Section_2.2.5.11) | Specifies a collection of calendar and schedule objects. |
+| [Calendars (section 4.2.7)](#Section_4.2.7) | Specifies one or more [**calendar**](#gt_calendar) objects. |
+| [CalendarsCollection (section 4.2.8)](#Section_4.2.8) | Specifies a collection of calendar and schedule objects. |
 | [ConditionalPolicy (section 4.2.9)](#Section_4.2.9) | Controls the selection of [**resource allocation policies (RAP)**](#gt_resource-allocation-policy-rap). |
 | [ConfigurationFiles (section 4.2.10)](#Section_4.2.10) | Specifies configurations used for the import and export of user information. |
 | [DependencyList (section 4.2.11)](#Section_4.2.11) | Specifies dependent policies and calendar events. |
 | [Events (section 4.2.12)](#Section_4.2.12) | Specifies a list of scheduled calendar events. |
 | [ExclusionList (section 4.2.13)](#Section_4.2.13) | Specifies processes to exclude from management. |
 | [Machine (section 4.2.14)](#Section_4.2.14) | Specifies parameters for managing machines within [**machine group**](#gt_machine-group). |
-| [MachineGroup (section 4.2.15)](#Section_3.2.4.6) | Specifies parameters for managing machine groups. |
+| [MachineGroup (section 4.2.15)](#Section_4.2.15) | Specifies parameters for managing machine groups. |
 | [NotificationConfigInfo (section 4.2.16)](#Section_4.2.16) | Specifies the notification configuration. |
 | - | - |
-| [Policy (section 4.2.19)](#Section_4.2.18) | Specifies parameters for managing resource allocation. |
+| [Policy (section 4.2.19)](#Section_4.2.19) | Specifies parameters for managing resource allocation. |
 | [ProcessMatchingCriteria (section 4.2.20)](#Section_4.2.20) | Specifies parameters for [**resource management**](#gt_resource-management). |
 | [ProcessMatchingCriteriaCollection (section 4.2.21)](#Section_4.2.21) | Specifies a collection of [**process matching criteria (PMC)**](#gt_process-matching-criteria-pmc) elements. |
 | [Schedule (section 4.2.22)](#Section_4.2.22) | Schedules a calendar event for resource management. |
 | [ServiceList (section 4.2.23)](#Section_4.2.23) | Specifies services that are registered with the server. |
-| [SupportedClients (section 4.2.24)](#Section_2.2.5.29) | Specifies the level of support for clients on the WSRM server. |
+| [SupportedClients (section 4.2.24)](#Section_4.2.24) | Specifies the level of support for clients on the WSRM server. |
 | [Users (section 4.2.25)](#Section_4.2.25) | Specifies categories of remote session users. |
 
 <a id="Section_4.2.1"></a>
@@ -7643,7 +7643,7 @@ Additional XML data examples are specified in section [4.2](#Section_4.2).
 <a id="Section_4.2.4"></a>
 ### 4.2.4 AccountingProcessList Example
 
-The following is an example of the [AccountingProcessList](#Section_2.2.5.4) [**XML**](#gt_xml) element (section 2.2.5.4).
+The following is an example of the [AccountingProcessList](#Section_4.2.4) [**XML**](#gt_xml) element (section 2.2.5.4).
 
 <?xml version="1.0"?>
 
@@ -7838,7 +7838,7 @@ Additional XML data examples are specified in section [4.2](#Section_4.2).
 <a id="Section_4.2.7"></a>
 ### 4.2.7 Calendars Example
 
-The following is an example of the [Calendars](#Section_2.2.5.11) (section 2.2.5.10) XML element.
+The following is an example of the [Calendars](#Section_4.2.7) (section 2.2.5.10) XML element.
 
 <?xml version="1.0"?>
 
@@ -8113,7 +8113,7 @@ Additional XML data examples are specified in section [4.2](#Section_4.2).
 <a id="Section_4.2.10"></a>
 ### 4.2.10 ConfigurationFiles Example
 
-The following is an example of the [ConfigurationFiles (section 2.2.5.13)](#Section_4.2.10) [**XML**](#gt_xml) element.
+The following is an example of the [ConfigurationFiles (section 2.2.5.13)](#Section_2.2.5.13) [**XML**](#gt_xml) element.
 
 <?xml version="1.0"?>
 
@@ -8393,7 +8393,7 @@ Additional XML data examples are specified in section [4.2](#Section_4.2).
 <a id="Section_4.2.14"></a>
 ### 4.2.14 Machine Example
 
-The following is an example of the [Machine (section 2.2.5.17)](#Section_3.2.4.6) [**XML**](#gt_xml) element.
+The following is an example of the [Machine (section 2.2.5.17)](#Section_2.2.5.17) [**XML**](#gt_xml) element.
 
 <Machine Name="WSRMServer01" Description="" FQDN="CN=WSRMServer01,
 
@@ -8408,7 +8408,7 @@ Additional XML data examples are specified in section [4.2](#Section_4.2).
 <a id="Section_4.2.15"></a>
 ### 4.2.15 MachineGroup Example
 
-The following is an example of the [MachineGroup (section 2.2.5.18)](#Section_3.2.4.6) [**XML**](#gt_xml) element.
+The following is an example of the [MachineGroup (section 2.2.5.18)](#Section_2.2.5.18) [**XML**](#gt_xml) element.
 
 <?xml version="1.0"?>
 
@@ -10245,7 +10245,7 @@ net start wsrm
 
 <94> Section 3.2.4.6.3: Windows only checks the current node and its children's group name for duplication while modifying the machine group. This error can be reproduced by making the following sequence of calls in a fresh configuration setup.
 
-- Import the machine group XML given in the example in section [4.2.15](#Section_3.2.4.6), using the **ImportXml** method.
+- Import the machine group XML given in the example in section [4.2.15](#Section_4.2.15), using the **ImportXml** method.
 - Call **ModifyMachineGroup** with *bstrMachineGroupId* as "Communication Servers", *enumMGMergeOptions* as "OVERWRITE_MG_MERGE_OPTION", and *bstrMachineGroupInfo* as "<MachineGroup Name="Backup Servers" Description=""><Machine Name="BS1" Description="" /> </MachineGroup>".
 - **ModifyMachineGroup** fails with WRM_ERR_MACHINEGROUP_ALREADY_EXISTS because the name of the machine group "Communication Servers" is being modified to "Backup Servers", which already exists in the configuration.
 <95> Section 3.2.4.6.6: Windows does not validate machine name or its presence in domain while validating machine details.
@@ -10278,7 +10278,7 @@ net start wsrm
 
 <109> Section 3.2.4.7.5: Windows returns this value if the XML data is corrupt.
 
-<110> Section 3.2.4.7.9: Windows Server 2008, Windows Vista, Windows 7, and Windows Server 2008 R2 never return this error because a default resource allocation policy (RAP) is always set. [EqualPerProcess](#Section_d4b0ec93065b43f39743a04dd8e368e7) is the default RAP.
+<110> Section 3.2.4.7.9: Windows Server 2008, Windows Vista, Windows 7, and Windows Server 2008 R2 never return this error because a default resource allocation policy (RAP) is always set. [EqualPerProcess](#Section_2.2.2.8) is the default RAP.
 
 <111> Section 3.2.4.7.14: Windows only accepts "GlobalCP" as the conditional policy name.
 

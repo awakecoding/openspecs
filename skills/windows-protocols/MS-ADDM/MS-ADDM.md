@@ -237,7 +237,7 @@ Additionally, the protocols share a selection language, derived from XPath 1.0 [
 
 This document also specifies other shared cross-protocol aspects of ADWS, such as the [**endpoints**](#gt_endpoint) used and shared [**SOAP headers**](#gt_soap-header) and [**SOAP fault**](#gt_soap-fault) details [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521).
 
-Finally, this document provides a mechanism for performing a range retrieval operation through some Web Service protocols in the ADWS protocol set. Range retrieval, as specified in section [2.7](#Section_1.3), allows for returning only a portion of the complete set of values of a multivalued attribute, or specifying that only a certain portion of the set of values of a multivalued attribute be retrieved. For the same purpose, it defines an extension to the shared XML view of data that incorporates this range retrieval extension.
+Finally, this document provides a mechanism for performing a range retrieval operation through some Web Service protocols in the ADWS protocol set. Range retrieval, as specified in section [2.7](#Section_2.7), allows for returning only a portion of the complete set of values of a multivalued attribute, or specifying that only a certain portion of the set of values of a multivalued attribute be retrieved. For the same purpose, it defines an extension to the shared XML view of data that incorporates this range retrieval extension.
 
 Note that this document does not define a protocol. Rather, it serves as a common repository for information used across the entire ADWS protocol set. For operations such as range retrieval, it provides common extensions to [WXFR] and [WSENUM], which are used by certain protocols within the ADWS protocol set.<1>
 
@@ -343,7 +343,7 @@ In the ADWS data model, [**directory objects**](#gt_directory-object) are identi
 - In the XML examples and definitions, GUID values are represented by the string form of a [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid), as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) section 3.
 For a directory object *O*, to specify the object reference property of *O* as a GUID, the value of the GUID MUST equal the value of *O*!objectGUID. Alternatively, the object reference property of *O* can be specified as *O*'s LDAP distinguished name (*O*!distinguishedName) instead.
 
-The object reference property (in either GUID or distinguished name form) in a [**SOAP message**](#gt_soap-message) request identifies the directory object that should be operated on by the operation specified in that message (see section [2.5.2](#Section_2.3.3.1)). The object reference property in a [**SOAP**](#gt_soap) response message indicates the identity of a directory object that is returned in that response message.
+The object reference property (in either GUID or distinguished name form) in a [**SOAP message**](#gt_soap-message) request identifies the directory object that should be operated on by the operation specified in that message (see section [2.5.2](#Section_2.5.2)). The object reference property in a [**SOAP**](#gt_soap) response message indicates the identity of a directory object that is returned in that response message.
 
 The object reference property value in the GUID form of {11111111-1111-1111-1111-111111111111} exclusively refers to the LDAP rootDSE [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325).
 
@@ -1126,7 +1126,7 @@ S(RANGEHIGH(B))(B)
 
 For each multivalued LDAP attribute for which the server is including only a portion of the values contained in that attribute, both the RangeLow and RangeHigh XML attributes are returned.
 
-ADWS specification of the possible values of these XML attributes, which are returned in the response as part of the XML view of the object for a request with range specification, is illustrated in section [2.7.2](#Section_1.3).
+ADWS specification of the possible values of these XML attributes, which are returned in the response as part of the XML view of the object for a request with range specification, is illustrated in section [2.7.2](#Section_2.7.2).
 
 <a id="Section_2.7.2"></a>
 ### 2.7.2 Range Specifiers for Requests

@@ -132,7 +132,7 @@ See [Revision History](#revision-history) for full version history.
 
 This protocol specification describes the X.509 Certificate Enrollment Policy Protocol, a protocol between a requesting client and a responding server for the exchange of a [**certificate enrollment policy**](#gt_certificate-enrollment-policy).
 
-The communication is initiated by a requesting client that requests either the full certificate enrollment policy, or a subset, by passing in a filter. A server processes the identity of the client and an optionally provided client filter, and generates a response with a collection of certificate enrollment policy objects accompanied by a collection of [**certificate**](#gt_certificate) issuers. The returned certificate issuers provide X509v3 Security Token issuance using [MS-WSTEP](#Section_3.1.4.1.3.12).
+The communication is initiated by a requesting client that requests either the full certificate enrollment policy, or a subset, by passing in a filter. A server processes the identity of the client and an optionally provided client filter, and generates a response with a collection of certificate enrollment policy objects accompanied by a collection of [**certificate**](#gt_certificate) issuers. The returned certificate issuers provide X509v3 Security Token issuance using [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md).
 
 The X.509 Certificate Enrollment Policy Protocol is a minimal messaging protocol that includes a single client request message (GetPolicies) with a matching server response message (GetPoliciesResponse). The server can alternatively respond with a [**SOAP fault**](#gt_soap-fault) message.
 
@@ -227,7 +227,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-WCCE] Microsoft Corporation, "[Windows Client Certificate Enrollment Protocol](../MS-WCCE/MS-WCCE.md)".
 
-[MS-WSTEP] Microsoft Corporation, "[WS-Trust X.509v3 Token Enrollment Extensions](#Section_3.1.4.1.3.12)".
+[MS-WSTEP] Microsoft Corporation, "[WS-Trust X.509v3 Token Enrollment Extensions](../MS-WSTEP/MS-WSTEP.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -248,7 +248,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [DUBUISSON] Dubuisson, O., "ASN.1 Communication between Heterogeneous Systems", Morgan Kaufmann, October 2000, ISBN: 0126333610.
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_1.3)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [RFC4262] Santesson, S., "X.509 Certificate Extension for Secure/Multipurpose Internet Mail Extensions (S/MIME) Capabilities", RFC 4262, December 2005, [https://www.rfc-editor.org/info/rfc4262](https://go.microsoft.com/fwlink/?LinkId=90463)
 
@@ -286,7 +286,7 @@ The server that implements the X.509 Certificate Enrollment Policy Protocol requ
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
 
-The X.509 Certificate Enrollment Policy Protocol is recommended for use as part of a managed [**PKI**](#gt_public-key-infrastructure-pki) to provide clients with policy guidance for the [**X.509**](#gt_x509) [**certificate**](#gt_certificate) life cycle. It is possible to enroll for a certificate (to request and receive one) without knowing the policy information provided by this protocol, and therefore, use of this protocol is optional. However, with the policy information, a client can avoid making requests that would be rejected, and can therefore save time and network bandwidth. If the client is running, for example, an autoenrollment process ([MS-CERSOD](#Section_1.3) sections 2.1.2.2 and 2.1.2.2.2), that process might require this policy information.
+The X.509 Certificate Enrollment Policy Protocol is recommended for use as part of a managed [**PKI**](#gt_public-key-infrastructure-pki) to provide clients with policy guidance for the [**X.509**](#gt_x509) [**certificate**](#gt_certificate) life cycle. It is possible to enroll for a certificate (to request and receive one) without knowing the policy information provided by this protocol, and therefore, use of this protocol is optional. However, with the policy information, a client can avoid making requests that would be rejected, and can therefore save time and network bandwidth. If the client is running, for example, an autoenrollment process ([MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) sections 2.1.2.2 and 2.1.2.2.2), that process might require this policy information.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -384,7 +384,7 @@ The client side of this protocol is simply a pass-through. That is, no additiona
 <a id="Section_3.1"></a>
 ## 3.1 IPolicy Server Details
 
-The IPolicy server hosts a message endpoint that receives [GetPolicies (section 3.1.4.1.1.1)](#Section_3.1.4.1.2.1) messages. Once received, the server processes the client request, formulates a response, and sends either a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.2.2) response message or a [**SOAP fault**](#gt_soap-fault). Once the message has been sent to the client, the server returns to the waiting state.
+The IPolicy server hosts a message endpoint that receives [GetPolicies (section 3.1.4.1.1.1)](#Section_3.1.4.1.1.1) messages. Once received, the server processes the client request, formulates a response, and sends either a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.1.2) response message or a [**SOAP fault**](#gt_soap-fault). Once the message has been sent to the client, the server returns to the waiting state.
 
 ![X.509 Certificate Enrollment Policy Protocol session state diagram](media/image4.png)
 
@@ -418,7 +418,7 @@ A server MUST initialize the **DefaultLanguage** data element with the language 
 
 | Operation | Description |
 | --- | --- |
-| [GetPolicies (section 3.1.4.1)](#Section_1.3) | The GetPolicies operation defines the client request and server response messages that are used to complete the act of retrieving a [**certificate enrollment policy**](#gt_certificate-enrollment-policy). |
+| [GetPolicies (section 3.1.4.1)](#Section_3.1.4.1) | The GetPolicies operation defines the client request and server response messages that are used to complete the act of retrieving a [**certificate enrollment policy**](#gt_certificate-enrollment-policy). |
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 GetPolicies Operation
@@ -551,7 +551,7 @@ The <GetPoliciesResponse> element contains the server response.
 | <CACollection> | Groups one or more CA objects together. |
 | <CAReferenceCollection> | Groups one or more <cAReference> elements together. |
 | <CAURI> | Defines the [**URI**](#gt_uniform-resource-identifier-uri) for a certificate authority. |
-| <CAURICollection> | Groups one or more [CAURI (section 3.1.4.1.3.5)](#Section_3.1.4.1.3.5) objects in a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.2.2) message. |
+| <CAURICollection> | Groups one or more [CAURI (section 3.1.4.1.3.5)](#Section_3.1.4.1.3.5) objects in a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.1.2) message. |
 | <CertificateEnrollmentPolicy> | Encapsulates a [**certificate enrollment policy**](#gt_certificate-enrollment-policy) object and its set of issuers. |
 | <CertificateValidity> | Contains information about the expected validity of an issued [**certificate**](#gt_certificate), and the expected period when renewal starts. |
 | <Client> | Contains information about the client's current state and preferences. |
@@ -647,7 +647,7 @@ minOccurs="0" maxOccurs="unbounded" />
 
 </xs:complexType>
 
-**xcep:commonName:** A string value of the [**common name (CN)**](#gt_common-name-cn) of a CertificateEnrollmentPolicy object. The <xcep:commonName> element MUST be unique in the scope of a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.2.2) message.
+**xcep:commonName:** A string value of the [**common name (CN)**](#gt_common-name-cn) of a CertificateEnrollmentPolicy object. The <xcep:commonName> element MUST be unique in the scope of a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.1.2) message.
 
 **policySchema:** An integer value presenting the schema version of the corresponding CertificateEnrollmentPolicy. The <policySchema> element SHOULD be an integer value of 1, 2, or 3.
 
@@ -1069,7 +1069,7 @@ The <KeyArchivalAttributes> complex type contains the required attributes that M
 
 </xs:complexType>
 
-**symmetricAlgorithmOIDReference:** A reference to an <oIDReferenceID> element of an existing [**OID**](#gt_object-identifier-oid) object as defined in section [3.1.4.1.3.16](#Section_3.1.4.1.3.16). The referenced OID object identifies the expected symmetric key algorithm used when encrypting a private key during key exchange requests. The value MUST correspond to an existing <oIDReferenceID> in the GetPoliciesResponse (section [3.1.4.1.1.2](#Section_3.1.4.1.2.2)) message.
+**symmetricAlgorithmOIDReference:** A reference to an <oIDReferenceID> element of an existing [**OID**](#gt_object-identifier-oid) object as defined in section [3.1.4.1.3.16](#Section_3.1.4.1.3.16). The referenced OID object identifies the expected symmetric key algorithm used when encrypting a private key during key exchange requests. The value MUST correspond to an existing <oIDReferenceID> in the GetPoliciesResponse (section [3.1.4.1.1.2](#Section_3.1.4.1.1.2)) message.
 
 **symmetricAlgorithmKeyLength:** An integer value representing the expected bit length of a symmetric key used when encrypting a private key during key exchange requests. The <symmetricAlgorithmKeyLength> element MUST be a positive nonzero integer value.
 
@@ -1156,7 +1156,7 @@ minOccurs="1" maxOccurs="unbounded" />
 
 </xs:complexType>
 
-**oIDReference:** An integer reference to an <oIDReferenceID> element in an OID object in a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.2.2) message. The integer MUST reference an existing <oIDReferenceID> in this GetPoliciesResponse message.
+**oIDReference:** An integer reference to an <oIDReferenceID> element in an OID object in a [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.1.2) message. The integer MUST reference an existing <oIDReferenceID> in this GetPoliciesResponse message.
 
 <a id="Section_3.1.4.1.3.19"></a>
 ###### 3.1.4.1.3.19 PolicyCollection
@@ -1931,7 +1931,7 @@ xmlns="http://schemas.microsoft.com/windows/pki/2009/01/enrollmentpolicy">
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The X.509 Certificate Enrollment Policy Protocol does not provide message-level signing or message-level encryption for either [GetPolicies (section 3.1.4.1.1.1)](#Section_3.1.4.1.2.1) request messages or [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.2.2) response messages. Implementers should make use of available transport protection as available in HTTPS to provide security to the client/server interaction.
+The X.509 Certificate Enrollment Policy Protocol does not provide message-level signing or message-level encryption for either [GetPolicies (section 3.1.4.1.1.1)](#Section_3.1.4.1.1.1) request messages or [GetPoliciesResponse (section 3.1.4.1.1.2)](#Section_3.1.4.1.1.2) response messages. Implementers should make use of available transport protection as available in HTTPS to provide security to the client/server interaction.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

@@ -1213,7 +1213,7 @@ This commit coordination ensures that either all the resource managers end up co
 
 Section [1.3.1](#Section_1.3.1), covering the [**transaction lifetime**](#gt_transaction-lifetime), provides a more complete description of the Two-Phase Commit protocol. Section 10.4 of [GRAY] also provides an excellent description.
 
-The MSDTC Connection Manager: OleTx Transaction Protocol uses the transports protocol described in [MS-CMPO](#Section_2.1), and the multiplexing protocol described in [MS-CMP](../MS-CMP/MS-CMP.md), as a transport layer. This protocol provides concrete mechanisms for beginning, propagating, and completing atomic transactions. It also provides mechanisms for coordinating agreement on a single atomic outcome for each transaction and for reliably distributing that outcome to all [**participants**](#gt_participant) in the transaction.
+The MSDTC Connection Manager: OleTx Transaction Protocol uses the transports protocol described in [MS-CMPO](../MS-CMPO/MS-CMPO.md), and the multiplexing protocol described in [MS-CMP](../MS-CMP/MS-CMP.md), as a transport layer. This protocol provides concrete mechanisms for beginning, propagating, and completing atomic transactions. It also provides mechanisms for coordinating agreement on a single atomic outcome for each transaction and for reliably distributing that outcome to all [**participants**](#gt_participant) in the transaction.
 
 This protocol is applicable to [**application**](#gt_application) scenarios where atomic transaction processing is a requirement. This protocol is usable in network topologies where the transports protocol, together with the multiplexing protocol, are a viable network transport for establishing long-lived [**session**](#gt_session) relationships between the participants in an atomic transaction.
 
@@ -1264,7 +1264,7 @@ This document uses the following terms:
 **connection**: In OleTx, an ordered set of logically related messages. The relationship between the messages is defined by the higher-layer protocol, but they are guaranteed to be delivered exactly one time and in order relative to other messages in the connection.
 
 <a id="gt_connection-type"></a>
-**connection type**: A specific set of interactions between participants in an OleTx protocol that accomplishes a specific set of state changes. A connection type consists of a bidirectional sequence of messages that are conveyed by using the MSDTC Connection Manager: OleTx Transports Protocol and the MSDTC Connection Manager: OleTx Multiplexing Protocol transport protocol, as described in [MS-CMPO](#Section_2.1) and [MS-CMP](../MS-CMP/MS-CMP.md). A specified transaction typically involves many different connection types during its lifetime.
+**connection type**: A specific set of interactions between participants in an OleTx protocol that accomplishes a specific set of state changes. A connection type consists of a bidirectional sequence of messages that are conveyed by using the MSDTC Connection Manager: OleTx Transports Protocol and the MSDTC Connection Manager: OleTx Multiplexing Protocol transport protocol, as described in [MS-CMPO](../MS-CMPO/MS-CMPO.md) and [MS-CMP](../MS-CMP/MS-CMP.md). A specified transaction typically involves many different connection types during its lifetime.
 
 <a id="gt_contact-identifier"></a>
 **contact identifier**: A universally unique identifier (UUID) that identifies a partner in the MSDTC Connection Manager: OleTx Transports Protocol. These UUIDs are frequently converted to and from string representations. This string representation has to follow the format specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) Appendix A. In addition, the UUIDs have to be compared, as specified in [C706] Appendix A.
@@ -1479,7 +1479,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-CMOM] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Management Protocol](../MS-CMOM/MS-CMOM.md)".
 
-[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](#Section_2.1)".
+[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](../MS-CMPO/MS-CMPO.md)".
 
 [MS-CMP] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Multiplexing Protocol](../MS-CMP/MS-CMP.md)".
 
@@ -1561,12 +1561,12 @@ Figure 1: Transaction tree
 
 Eventually, the **root application** that began the **transaction** determines that no more **work** is to be performed under the **transaction**. When that occurs, the **application** sends a [**Commit request**](#gt_commit-request) to the **root transaction manager** to begin the process of completing the **transaction**.
 
-When the **root transaction manager** receives the **Commit** request, it begins the process of determining the **transaction** [**outcome**](#gt_outcome) and communicating that outcome to all interested **participants**. That process begins with zero or more [**Phase Zero waves**](#gt_phase-zero-wave) followed by [Phase One](#Section_3.2.1.3.7) and [Phase Two](#Section_1.3.1.3) of the Two-Phase Commit sequence.
+When the **root transaction manager** receives the **Commit** request, it begins the process of determining the **transaction** [**outcome**](#gt_outcome) and communicating that outcome to all interested **participants**. That process begins with zero or more [**Phase Zero waves**](#gt_phase-zero-wave) followed by [Phase One](#Section_4.5.1) and [Phase Two](#Section_4.5.2) of the Two-Phase Commit sequence.
 
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 Phase Zero
 
-When a [**Commit request**](#gt_commit-request) is issued by the [**root application**](#gt_root-application), the [**transaction**](#gt_transaction) first enters [**Phase Zero**](#gt_phase-zero). If there are no [**Phase Zero participants**](#gt_phase-zero-participant), the **transaction** leaves **Phase Zero** and proceeds to [Phase One](#Section_3.2.1.3.7).
+When a [**Commit request**](#gt_commit-request) is issued by the [**root application**](#gt_root-application), the [**transaction**](#gt_transaction) first enters [**Phase Zero**](#gt_phase-zero). If there are no [**Phase Zero participants**](#gt_phase-zero-participant), the **transaction** leaves **Phase Zero** and proceeds to [Phase One](#Section_4.5.1).
 
 **Phase Zero** is composed of one or more [**Phase Zero waves**](#gt_phase-zero-wave). At the beginning of a **Phase Zero wave**, all **Phase Zero participants** are notified that the **transaction** has entered **Phase Zero**. While the [**participants**](#gt_participant) process the **Phase Zero** notification, they can continue to marshal the **transaction** to new participants. Consequently, participating [**transaction managers**](#gt_transaction-manager) can still accept new [**enlistments**](#gt_enlistment) during **Phase Zero**.
 
@@ -1600,7 +1600,7 @@ When all votes are collected by the **root transaction manager**, a decision abo
 
 Otherwise, if one or more of the votes is Aborted or if a Commit outcome decision cannot be successfully recorded, the **transaction manager** makes an [**Abort outcome**](#gt_abort-outcome) decision.
 
-After an outcome decision is made, the **root transaction manager** proceeds to [Phase Two](#Section_1.3.1.3) to distribute outcome notification messages throughout the **transaction tree**.
+After an outcome decision is made, the **root transaction manager** proceeds to [Phase Two](#Section_4.5.2) to distribute outcome notification messages throughout the **transaction tree**.
 
 The following figure depicts the Phase One flow.
 
@@ -1615,9 +1615,9 @@ When **Phase Two** begins, the [**root transaction manager**](#gt_root-transacti
 
 If the transaction outcome is a [**Commit outcome**](#gt_commit-outcome), the transaction enters the committing state. Each [**participant**](#gt_participant) that voted Prepared is sent an order to commit. The **participants** perform any necessary commit processing and respond with a committed notification.
 
-If the **transaction** outcome is an [**Abort outcome**](#gt_abort-outcome), the **transaction** enters the [Aborting](#Section_3.2.1.3.11) state. Each **participant** that voted Prepared is sent an order to abort. The **participants** perform any necessary abort processing and respond with an Aborted notification.
+If the **transaction** outcome is an [**Abort outcome**](#gt_abort-outcome), the **transaction** enters the [Aborting](#Section_3.8.1.1.4) state. Each **participant** that voted Prepared is sent an order to abort. The **participants** perform any necessary abort processing and respond with an Aborted notification.
 
-If a Prepared **participant** loses contact with its [**transaction manager**](#gt_transaction-manager), it is said to be [In Doubt](#Section_3.2.1.3.12). If it is a [**durable resource manager**](#gt_durable-resource-manager), it attempts to reconnect to the transaction manager and perform [**recovery**](#gt_recovery) to learn the outcome of the transaction. See section [1.3.4](#Section_3.8.5.2.1) for recovery details.
+If a Prepared **participant** loses contact with its [**transaction manager**](#gt_transaction-manager), it is said to be [In Doubt](#Section_3.2.1.3.12). If it is a [**durable resource manager**](#gt_durable-resource-manager), it attempts to reconnect to the transaction manager and perform [**recovery**](#gt_recovery) to learn the outcome of the transaction. See section [1.3.4](#Section_1.3.4) for recovery details.
 
 In general, **participants** (including the [**root application**](#gt_root-application)) are sent the outcome decision notification in parallel.
 
@@ -1641,9 +1641,9 @@ In addition to the [**two-phase commit**](#gt_two-phase-commit) processing descr
 
 Until a [**participant**](#gt_participant) votes on the [**outcome**](#gt_outcome) of the [**transaction**](#gt_transaction), any participant can decide to unilaterally stop the transaction by issuing an [**Abort request**](#gt_abort-request) to its [**transaction manager**](#gt_transaction-manager). This ability is known as a **Unilateral Abort**.
 
-After a **transaction manager** receives an Abort request from one of its **participants**, it immediately transitions the **transaction** to the [Aborting](#Section_3.2.1.3.11) state, which guarantees an [**Abort outcome**](#gt_abort-outcome). All other **participants** will be notified of the Abort outcome, although it is possible that the [**root application**](#gt_root-application) does not discover the Abort outcome until it attempts to complete the transaction or perform some other operation involving the **transaction manager** or another **participant**.
+After a **transaction manager** receives an Abort request from one of its **participants**, it immediately transitions the **transaction** to the [Aborting](#Section_3.8.1.1.4) state, which guarantees an [**Abort outcome**](#gt_abort-outcome). All other **participants** will be notified of the Abort outcome, although it is possible that the [**root application**](#gt_root-application) does not discover the Abort outcome until it attempts to complete the transaction or perform some other operation involving the **transaction manager** or another **participant**.
 
-After a specified **transaction manager** enters the Aborting state, it does not issue any further [**Phase Zero**](#gt_phase-zero) notifications or [Phase One](#Section_3.2.1.3.7) requests to vote. For a **transaction** that spans two or more **transaction managers** due to propagation, it is possible for the Abort outcome decision to race with other **Phase Zero** or **Phase One** activity as it is communicated between the **transaction managers**.
+After a specified **transaction manager** enters the Aborting state, it does not issue any further [**Phase Zero**](#gt_phase-zero) notifications or [Phase One](#Section_4.5.1) requests to vote. For a **transaction** that spans two or more **transaction managers** due to propagation, it is possible for the Abort outcome decision to race with other **Phase Zero** or **Phase One** activity as it is communicated between the **transaction managers**.
 
 The following figure shows the Unilateral Abort flow.
 
@@ -1654,9 +1654,9 @@ Figure 5: Unilateral Abort flow
 <a id="Section_1.3.2.2"></a>
 #### 1.3.2.2 Single-Phase Commit
 
-If a [**transaction manager**](#gt_transaction-manager) has exactly one subordinate [**Phase One enlistment**](#gt_phase-one-enlistment), the **transaction manager** attempts to perform the [**single-phase commit**](#gt_single-phase-commit) optimization. In this case, the **transaction manager** sends the [**subordinate participant**](#gt_subordinate-participant) a request to perform a **single-phase commit**, instead of the standard [Phase One](#Section_3.2.1.3.7) Prepare request. This optimization delegates the right to decide the [**transaction**](#gt_transaction) [**outcome**](#gt_outcome) to the subordinate.
+If a [**transaction manager**](#gt_transaction-manager) has exactly one subordinate [**Phase One enlistment**](#gt_phase-one-enlistment), the **transaction manager** attempts to perform the [**single-phase commit**](#gt_single-phase-commit) optimization. In this case, the **transaction manager** sends the [**subordinate participant**](#gt_subordinate-participant) a request to perform a **single-phase commit**, instead of the standard [Phase One](#Section_4.5.1) Prepare request. This optimization delegates the right to decide the [**transaction**](#gt_transaction) [**outcome**](#gt_outcome) to the subordinate.
 
-The **subordinate** accepts this delegation by making an outcome decision and eventually notifying the **transaction manager**; or it rejects the Single-Phase Commit request by responding Prepared. In the latter case, the **transaction manager** makes its own outcome decision and then engages in a standard [Phase Two](#Section_1.3.1.3) exchange with the [**participant**](#gt_participant).
+The **subordinate** accepts this delegation by making an outcome decision and eventually notifying the **transaction manager**; or it rejects the Single-Phase Commit request by responding Prepared. In the latter case, the **transaction manager** makes its own outcome decision and then engages in a standard [Phase Two](#Section_4.5.2) exchange with the [**participant**](#gt_participant).
 
 There is a possible disadvantage to this optimization: if the **transaction manager** loses contact with the **subordinate participant** after sending the **Single-Phase Commit** request but before receiving an outcome notification, it has no reliable mechanism for recovering the actual outcome of the **transaction**. Consequently, the **transaction manager** sends an [**In Doubt outcome**](#gt_in-doubt-outcome) to any [**applications**](#gt_application) or [**voters**](#gt_voter) awaiting informational outcome notification.
 
@@ -1734,7 +1734,7 @@ The [**transaction manager**](#gt_transaction-manager) role is typically respons
 - Ensuring the outcome decision is reliably distributed
 - Coordinating the process of [**recovery**](#gt_recovery) if failures occur
 - Coordinating the outcome of individual **transactions** by using the [**Two-Phase Commit**](#gt_two-phase-commit) protocol.
-- Coordinating recovery with other **participants** after a process or communication failure. See section [1.3.4](#Section_3.8.5.2.1) for recovery details.
+- Coordinating recovery with other **participants** after a process or communication failure. See section [1.3.4](#Section_1.3.4) for recovery details.
 A **transaction manager** is best understood as the aggregation of several cooperating software modules that work together to provide the services previously mentioned. This protocol calls these software modules [**facets**](#gt_facet), and assumes the presence of the following five **facets**:
 
 - A **facet** that acts as a **core transaction manager**
@@ -1744,7 +1744,7 @@ A **transaction manager** is best understood as the aggregation of several coope
 - A **facet** that acts as a [**subordinate transaction manager**](#gt_subordinate-transaction-manager)
 A **transaction manager** provides implementation-specific mechanisms to allow the **facets** to communicate with one another within the **transaction manager** itself.
 
-In contrast, the **transaction manager facets** use the MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](#Section_2.1), and the MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), as transports for this protocol when they communicate with other **participants** (for example, **applications**, **resource managers**, and **remote transaction managers**). The subprotocols that are used to provide services to these participants are known as [**connection types**](#gt_connection-type). The specific connection types that are used in this protocol are specified in detail in section [3](../MS-CMPO/MS-CMPO.md).
+In contrast, the **transaction manager facets** use the MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), and the MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), as transports for this protocol when they communicate with other **participants** (for example, **applications**, **resource managers**, and **remote transaction managers**). The subprotocols that are used to provide services to these participants are known as [**connection types**](#gt_connection-type). The specific connection types that are used in this protocol are specified in detail in section [3](#Section_3).
 
 These **facets** are functionally dependent upon each other. A general-purpose **transaction manager** is composed of all five of these **facets**.
 
@@ -1782,7 +1782,7 @@ When the [**transaction manager**](#gt_transaction-manager) is communicating wit
 - **Resource manager** [**registration**](#gt_registration)
 - [**Recovery**](#gt_recovery) and [**outcome**](#gt_outcome) notification for [In Doubt](#Section_3.2.1.3.12) [**transactions**](#gt_transaction)
 - **Transaction** [**enlistment**](#gt_enlistment) for [**Phase Zero**](#gt_phase-zero), [**Phase One**](#gt_phase-one), and [**voter**](#gt_voter) [**participants**](#gt_participant)
-- [Phase Zero](#Section_3.7.1.1.7), [Phase One](#Section_3.2.1.3.7), and [Phase Two](#Section_1.3.1.3) notifications inside the [**Two-Phase Commit**](#gt_two-phase-commit) protocol
+- [Phase Zero](#Section_1.3.1.1), [Phase One](#Section_4.5.1), and [Phase Two](#Section_4.5.2) notifications inside the [**Two-Phase Commit**](#gt_two-phase-commit) protocol
 <a id="Section_1.3.3.3.4"></a>
 ##### 1.3.3.3.4 Superior Transaction Manager Facet
 
@@ -1823,7 +1823,7 @@ At minimum:
 - Before a durable **resource manager** or [**subordinate transaction manager**](#gt_subordinate-transaction-manager) sends a Prepared notification to its [**superior transaction manager**](#gt_superior-transaction-manager), it needs to first ensure that it can derive the information that is needed to contact its **superior transaction manager** and to inquire about the [**outcome**](#gt_outcome) of the [**transaction**](#gt_transaction) after a [**transient failure**](#gt_transient-failure). This requirement is needed for the subordinate to perform [**recovery**](#gt_recovery) on [In Doubt](#Section_3.2.1.3.12) transactions.
 - Before a **transaction manager** can communicate the **transaction** outcome to a [**subordinate participant**](#gt_subordinate-participant) or the [**root application**](#gt_root-application), it has to first ensure that it can derive the **transaction** outcome for as long as at least one **durable subordinate** has not acknowledged receipt of the **transaction** outcome. This requirement is needed for the **superior** to perform recovery on Failed to Commit **transactions**.
 - Before a **durable resource manager** or **subordinate transaction manager** acknowledges a Commit notification from its **superior transaction manager**, it has to first ensure that it will not perform recovery on the **transaction** after a transient failure. This requirement allows the **superior transaction manager** to implement the [**Presumed Abort**](#gt_presumed-abort) optimization.
-The information that is needed to be able to contact another [**participant**](#gt_participant) is identical to the information that was needed to establish the initial transport [**session**](#gt_session) with that **participant**, as specified in [MS-CMPO](#Section_2.1) section 1.3.3.1.
+The information that is needed to be able to contact another [**participant**](#gt_participant) is identical to the information that was needed to establish the initial transport [**session**](#gt_session) with that **participant**, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 1.3.3.1.
 
 <a id="Section_1.3.4.2"></a>
 #### 1.3.4.2 Resource Manager Recovery
@@ -1862,7 +1862,7 @@ However, when two **participants** do not share a common **transaction manager**
 
 When a **participant** (the source) determines that it marshals a **transaction** to a second **participant** (the destination), the **participant** chooses between two distinct propagation techniques:
 
-- [**push propagation**](#gt_push-propagation) (section [1.3.5.2](#Section_3.7.5.1.1))
+- [**push propagation**](#gt_push-propagation) (section [1.3.5.2](#Section_1.3.5.2))
 - [**pull propagation**](#gt_pull-propagation) (section [1.3.5.1](#Section_1.3.5.1))
 **Push propagation** requires the source **participant** to have a prior knowledge about which **transaction manager** the destination **participant** is associated with. In contrast, **pull propagation** allows the source **participant** to marshal the **transaction** without any awareness of the **transaction manager** of the destination **participant**.
 
@@ -1910,7 +1910,7 @@ Figure 10: Transaction manager push propagation
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The following figure illustrates the relationship between the MSDTC Connection Manager: OleTx Transaction Protocol [MS-DTCO] and the underlying protocols on which it depends [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](#Section_2.1).
+The following figure illustrates the relationship between the MSDTC Connection Manager: OleTx Transaction Protocol [MS-DTCO] and the underlying protocols on which it depends [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 
 ![Protocol relationships](media/image11.png)
 
@@ -1923,7 +1923,7 @@ This protocol provides extensibility elements that are used by the following spe
 - [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md)
 - [MS-TIPP](../MS-TIPP/MS-TIPP.md)
 - [MS-WSRVCAT](../MS-WSRVCAT/MS-WSRVCAT.md)
-The following protocols perform [**transaction marshaling**](#gt_transaction-marshaling) by using the structures specified in section [2.2.5](#Section_3.4.5.2) and its subsections of [MS-DTCO]:
+The following protocols perform [**transaction marshaling**](#gt_transaction-marshaling) by using the structures specified in section [2.2.5](#Section_2.2.5) and its subsections of [MS-DTCO]:
 
 - [MS-COM](../MS-COM/MS-COM.md)
 - [MS-MQRR](../MS-MQRR/MS-MQRR.md)
@@ -1931,7 +1931,7 @@ The following protocols perform [**transaction marshaling**](#gt_transaction-mar
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-This protocol requires that all participating roles possess implementations of MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), and MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](#Section_2.1).
+This protocol requires that all participating roles possess implementations of MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), and MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -1940,7 +1940,7 @@ This protocol applies to scenarios where distributed [**atomic transaction**](#g
 
 [**Distributed transactions**](#gt_distributed-transaction) are generally required in scenarios where several [**applications**](#gt_application) and [**resource managers**](#gt_a7d0361f-8608-454d-9a52-67d4d181ae09) cooperate to perform a set of related [**work**](#gt_work) items that require the [**ACID**](#gt_acid) properties of a distributed transaction. These properties are needed to be able to make changes to persistent state in a deterministic, correct, and highly reliable manner. Although **distributed transactions** are one of several mechanisms for accomplishing this goal, they are the most efficient and understood general-purpose solution.
 
-This specific **distributed transaction** protocol requires network topologies where the MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](#Section_2.1), and the MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), constitute a viable network transport for establishing long-lived [**session**](#gt_session) relationships between different parties supporting many short-lived [**connection**](#gt_connection) exchanges that accomplish specific tasks.
+This specific **distributed transaction** protocol requires network topologies where the MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), and the MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), constitute a viable network transport for establishing long-lived [**session**](#gt_session) relationships between different parties supporting many short-lived [**connection**](#gt_connection) exchanges that accomplish specific tasks.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -1964,9 +1964,9 @@ This protocol provides five different versions. The following are the implicatio
 - Support for [**connection types**](#gt_connection-type) is version-specific and is either required, optional, or not allowed for a given Protocol Version.
 - For a version-specific supported connection type, support for all messages defined for that connection type is required.
 - The layout of data associated with specific messages is version-specific and is determined by the Protocol Version.
-Protocol Version Numbers as a Versioning Mechanism (section [2.2.1.1](#Section_1.3)) specifies details of what it means to support a certain Protocol Version Number. Protocol Versioning Details (section [3.1.4](#Section_3.2.1.1)) specifies how the Protocol Version numbers are negotiated during communication initiation.
+Protocol Version Numbers as a Versioning Mechanism (section [2.2.1.1](#Section_2.2.1.1)) specifies details of what it means to support a certain Protocol Version Number. Protocol Versioning Details (section [3.1.4](#Section_3.1.4)) specifies how the Protocol Version numbers are negotiated during communication initiation.
 
-- Structures with fields containing version numbers as versioning mechanism: Certain structures have fields containing version numbers that specify how to interpret other parts of the structure. As an example, the **Propagation_Token** (section [2.2.5.4](#Section_3.3.4.3)) structure has the fields **dwVersionMin** and **dwVersionMax** the values of which are used to indicate whether certain other fields are present or not.
+- Structures with fields containing version numbers as versioning mechanism: Certain structures have fields containing version numbers that specify how to interpret other parts of the structure. As an example, the **Propagation_Token** (section [2.2.5.4](#Section_2.2.5.4)) structure has the fields **dwVersionMin** and **dwVersionMax** the values of which are used to indicate whether certain other fields are present or not.
 **Structures with Fields Containing Version Numbers as Versioning Mechanism** (section [2.2.2](#Section_2.2.2)) provides a list of the structures that fall in this category and links to information regarding each.
 
 - Structures with complex fields using specific values to indicate the type of the complex field. Certain structures have a field that specifies how to interpret other parts of the structure. As an example, the **STmToTmProtocol** structure (section [2.2.5.9](#Section_2.2.5.9)) uses the value of the **tmprotDescribed** field to specify how to interpret the rest of the fields in that structure.
@@ -1978,7 +1978,7 @@ Protocol Version Numbers as a Versioning Mechanism (section [2.2.1.1](#Section
 This protocol uses the following versioning negotiation mechanisms for each of the versioning mechanisms discussed above.
 
 - Protocol Version Numbers as versioning mechanism
-This protocol makes use of the explicit versioning negotiation mechanism as specified in [MS-CMPO](#Section_2.1), **BuildContext Primary**, section 3.3.4.2.1. An implementation of this protocol uses this mechanism to specify which versions of the protocol it supports and to negotiate a mutually agreeable version with its partners (see Protocol Versioning Details, (section [3.1.4](#Section_3.2.1.1))).
+This protocol makes use of the explicit versioning negotiation mechanism as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), **BuildContext Primary**, section 3.3.4.2.1. An implementation of this protocol uses this mechanism to specify which versions of the protocol it supports and to negotiate a mutually agreeable version with its partners (see Protocol Versioning Details, (section [3.1.4](#Section_3.1.4))).
 
 - Structures with fields containing version numbers as versioning mechanism
 There is no versioning negotiation mechanism for this case. The version numbers are passed in each structure by the sender, and interpreted by the receiver.
@@ -2020,7 +2020,7 @@ This protocol has no standards assignments.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-This protocol uses implementations of MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](#Section_2.1), and MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), as the transport layer for sending and receiving protocol messages.
+This protocol uses implementations of MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), and MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md), as the transport layer for sending and receiving protocol messages.
 
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Messages, Connections, and Sessions
@@ -2029,17 +2029,17 @@ The layout of each **message** that is defined by this protocol MUST extend the 
 
 Each **message** MUST be sent by using an active [MS-CMP] [**connection**](#gt_connection) that has been established between an [**initiator**](#gt_initiator) and an [**acceptor**](#gt_acceptor). The mechanisms that are used to initiate and accept **connections** are as specified in [MS-CMP] sections 3.1.4.2 and 3.1.5.5.
 
-Each **connection** MUST be initiated inside an active [MS-CMP] [**session**](#gt_session) that has been established between two [**OleTx**](#gt_oletx) [**participants**](#gt_participant). The mechanisms that are used to establish **sessions** are as specified in [MS-CMPO](#Section_2.1) section 1.3.3. The **session** creation is handled by MSDTC Connection Manager: OleTx Multiplexing Protocol, when a new **connection** is initiated.
+Each **connection** MUST be initiated inside an active [MS-CMP] [**session**](#gt_session) that has been established between two [**OleTx**](#gt_oletx) [**participants**](#gt_participant). The mechanisms that are used to establish **sessions** are as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 1.3.3. The **session** creation is handled by MSDTC Connection Manager: OleTx Multiplexing Protocol, when a new **connection** is initiated.
 
 When a new **connection** is initiated the OleTx **participant** MUST provide the following:
 
-- The **Name Object** of the partner computed from implementation-specific configuration (section [2.1.2.3](#Section_2.1.2.2)).
+- The **Name Object** of the partner computed from implementation-specific configuration (section [2.1.2.3](#Section_2.1.2.3)).
 - The [**connection type**](#gt_connection-type).
-- An **Incoming Message Notification Interface** object ([MS-CMP] section 3.1.1.1) with local events (section [3.1.8](../MS-CMP/MS-CMP.md)) to receive incoming message notifications from MSDTC Connection Manager: OleTx Multiplexing Protocol layer [MS-CMP].
+- An **Incoming Message Notification Interface** object ([MS-CMP] section 3.1.1.1) with local events (section [3.1.8](#Section_3.1.8)) to receive incoming message notifications from MSDTC Connection Manager: OleTx Multiplexing Protocol layer [MS-CMP].
 <a id="Section_2.1.2"></a>
 ### 2.1.2 MS-CMP and MS-CMPO Initialization
 
-To establish a transports protocol [**session**](#gt_session) as specified in [MS-CMPO](#Section_2.1) Local **Partner State** (section 3.2.1.1), the following values MUST be provided to the lower-layer multiplexing protocol which initializes the transports protocol with the following values:
+To establish a transports protocol [**session**](#gt_session) as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) Local **Partner State** (section 3.2.1.1), the following values MUST be provided to the lower-layer multiplexing protocol which initializes the transports protocol with the following values:
 
 - A security-level value that indicates the requested RPC authentication level. The **Security Level** field is initialized with the security-level value. Possible values for this element are specified in [MS-CMPO] section 3.2.1.1.
 - The minimum and maximum protocol version values as computed in section [2.1.2.2](#Section_2.1.2.2). The **Minimum Level 3 Version Number** and **Maximum Level 3 Version Number** fields are initialized with the computed minimum and maximum protocol version values.
@@ -2054,7 +2054,7 @@ When an [**application**](#gt_application) or [**resource manager**](#gt_resourc
 <a id="Section_2.1.2.2"></a>
 #### 2.1.2.2 Computing Protocol Version Values
 
-The process for computing the minimum and maximum protocol version numbers used in initializing the underlying transport specified in [MS-CMPO](#Section_2.1) is defined in **Protocol Versioning Details** (section [3.1.4](#Section_3.2.1.1)).
+The process for computing the minimum and maximum protocol version numbers used in initializing the underlying transport specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) is defined in **Protocol Versioning Details** (section [3.1.4](#Section_3.1.4)).
 
 <a id="Section_2.1.2.3"></a>
 #### 2.1.2.3 Computing a Name Object
@@ -2063,7 +2063,7 @@ The **Name** object that is used to initiate a **session** is obtained in a vari
 
 When an application or resource manager initiates a **connection** to its **transaction manager**, the **application** or **resource manager** MUST use implementation-specific configuration information to compute a **Name** object that represents the **transaction manager**:
 
-- For [**pull propagation**](#gt_pull-propagation) of transactions, the source **application** MUST include the **Name** object representing its **transaction manager** in the marshaling information that is sent to the destination **application**. The **Propagation Token** (section [2.2.5.4](#Section_3.3.4.3)) structure SHOULD be used for marshaling this information.
+- For [**pull propagation**](#gt_pull-propagation) of transactions, the source **application** MUST include the **Name** object representing its **transaction manager** in the marshaling information that is sent to the destination **application**. The **Propagation Token** (section [2.2.5.4](#Section_2.2.5.4)) structure SHOULD be used for marshaling this information.
 - For **pull propagation** of transactions, the [**subordinate transaction manager**](#gt_subordinate-transaction-manager) (the **transaction manager** of the destination) MUST communicate its own **Name** object to the [**superior transaction manager**](#gt_superior-transaction-manager) (the source **transaction manager**) using a **CONNTYPE_PARTNERTM_BRANCH** connection (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1)).
 - For [**push propagation**](#gt_push-propagation) of **transactions**, the destination **application** MUST make the **Name** object that represents its **transaction manager** available to the source **application**. The **SWhereabouts** (section [2.2.5.11](#Section_2.2.5.11)) structure SHOULD be used for marshaling this information. Alternatively, the **NAMEOBJECTBLOB** (section [2.2.5.3](#Section_2.2.5.3)) structure MAY be used for the same purpose.<1>
 - For **push propagation** of **transactions**, the **superior transaction manager** MUST communicate its own **Name** object to the subordinate transaction manager using a **CONNTYPE_PARTNERTM_PROPAGATE** (section [2.2.9.1.1.1](#Section_2.2.9.1.1.1)) connection.
@@ -2093,14 +2093,14 @@ The following table shows version-specific aspects for [**connection types**](#g
 
 | Version-specific aspect | V1 | V2 | V4 | V5 | V6 |
 | --- | --- | --- | --- | --- | --- |
-| Version supports connection type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) | No | Yes | Yes | Yes | Yes |
+| Version supports connection type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) | No | Yes | Yes | Yes | Yes |
 | Version supports connection type CONNTYPE_TXUSER_EXTENDEDWHEREABOUTS (section [2.2.8.2.2.1](#Section_2.2.8.2.2.1))<3> | No | No | No | Optional | Optional |
-| Version supports connection type CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1.1)) | No | No | Yes | Yes | Yes |
+| Version supports connection type CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1)) | No | No | Yes | Yes | Yes |
 | Version supports connection type CONNTYPE_TXUSER_IMPORT2 (section [2.2.8.2.2.5](#Section_2.2.8.2.2.5)) | No | Yes | Yes | Yes | Yes |
 | Version supports connection type CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3))<4> | No | No | No | Optional | Optional |
 | Version supports connection type CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3))<5> | No | Optional | No | No | No |
 | Version supports connection type CONNTYPE_TXUSER_SETTXTIMEOUT2 (section [2.2.8.3.4](#Section_2.2.8.3.4))<6> | No | No | Optional | Optional | Optional |
-| Version supports connection type CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) | No | No | Yes | Yes | Yes |
+| Version supports connection type CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5)) | No | No | Yes | Yes | Yes |
 | Version supports messages TXUSER_EXPORT_MTAG_CREATE2 (section [2.2.8.2.2.2.2](#Section_2.2.8.2.2.2.2)) and TXUSER_EXPORT_MTAG_CREATE_NET_TX_DISABLED (section [2.2.8.2.2.2.4](#Section_2.2.8.2.2.2.4)) | No | No | Yes | Yes | Yes |
 | Version supports message TXUSER_RESOLVE_MTAG_ACCESSDENIED (section [2.2.8.3.2.1](#Section_2.2.8.3.2.1))<7> | No | No | Optional | Yes | Yes |
 | The **SourceTmAddress** field is described by the structure NAMEOBJECTBLOB (section [2.2.5.3](#Section_2.2.5.3)) in message TXUSER_ASSOCIATE_MTAG_ASSOCIATE (section [2.2.8.2.1.1.1](#Section_2.2.8.2.1.1.1)) | Yes | No | No | No | No |
@@ -2132,7 +2132,7 @@ The following table shows version-specific aspects for **connection types** that
 | Version-specific aspect | V1 | V2 | V4 | V5 | V6 |
 | --- | --- | --- | --- | --- | --- |
 | Version supports connection type [CONNTYPE_TXUSER_PHASE0](#Section_2.2.10.2.1) | No | Yes | Yes | Yes | Yes |
-| Version supports connection type [CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL](#Section_2.2.10.1.2.1)<8> | No | No | No | Optional | Optional |
+| Version supports connection type [CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL](#Section_2.2.10.1.2)<8> | No | No | No | Optional | Optional |
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Structures with Fields Containing Version Numbers as Versioning Mechanism
@@ -2207,7 +2207,7 @@ packet-beta
 
 **guidEndpoint (16 bytes):** This field MUST contain a GUID that specifies the [**contact identifier**](#gt_contact-identifier) of the transaction manager.
 
-**grbComProtsSupported (4 bytes):** Indicates the RPC transports for which the transaction manager is listening. The value MUST be the result of the bitwise OR combination of one or more flags as specified in [MS-CMPO](#Section_2.1) section 2.2.4.
+**grbComProtsSupported (4 bytes):** Indicates the RPC transports for which the transaction manager is listening. The value MUST be the result of the bitwise OR combination of one or more flags as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 2.2.4.
 
 **wszHostName (variable):** This field MUST contain a null-terminated, little-endian UTF-16 encoded string that specifies the [**NetBIOS host name**](#gt_netbios-host-name) of the transaction manager. This field MUST NOT contain a [**Unicode**](#gt_unicode) [**byte order mark**](#gt_byte-order-mark) (BOM) character. The length of this field MUST be 2 to 32 bytes, inclusive. For details about Unicode and character sets, see [[MSDN-ANSI]](https://go.microsoft.com/fwlink/?LinkId=89952).
 
@@ -2287,7 +2287,7 @@ packet-beta
 
 **dwReserved1 (4 bytes):** Reserved. This field MUST be set to an implementation-specific value and MUST be ignored on receipt. The default value of this field is 0xCD64CD64.<11>
 
-**grbComProtsSupported (4 bytes):** Indicates which RPC transports that the transaction manager can use to communicate. The value MUST be the result of a bitwise OR operation of one or more flags, as specified in the **COM_PROTOCOL** data type in [MS-CMPO](#Section_2.1) section 2.2.4.
+**grbComProtsSupported (4 bytes):** Indicates which RPC transports that the transaction manager can use to communicate. The value MUST be the result of a bitwise OR operation of one or more flags, as specified in the **COM_PROTOCOL** data type in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 2.2.4.
 
 **szHostName (variable):** A null-terminated Latin-1 ANSI string, as specified in [ISO/IEC-8859-1], that MUST specify the host name of the transaction manager instance. It MUST have the length specified by **dwcbHostName**.
 
@@ -2342,7 +2342,7 @@ packet-beta
   128-191: "szHostname (variable)"
 ```
 
-**comprotSupported (4 bytes):** Indicates which RPC transports the transaction manager supports for communication. The value MUST be the result of the bitwise OR combination of one or more flags as specified in the **COM_PROTOCOL** data type in [MS-CMPO](#Section_2.1) section 2.2.4.
+**comprotSupported (4 bytes):** Indicates which RPC transports the transaction manager supports for communication. The value MUST be the result of the bitwise OR combination of one or more flags as specified in the **COM_PROTOCOL** data type in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 2.2.4.
 
 **guidEndpointID (16 bytes):** This field MUST be a GUID that specifies the [**contact identifier**](#gt_contact-identifier) of the transaction manager.
 
@@ -2373,7 +2373,7 @@ packet-beta
   160-223: "szTipTmUrl (variable)"
 ```
 
-**szDescription (40 bytes):** See the **szDesc** field in **Propagation Token** structure (section [2.2.5.4](#Section_3.3.4.3)) for details.
+**szDescription (40 bytes):** See the **szDesc** field in **Propagation Token** structure (section [2.2.5.4](#Section_2.2.5.4)) for details.
 
 **isoLevel (4 bytes):** The isolation level of the **transaction**. The value MUST be one as specified in the **OLETX_ISOLATION_LEVEL** enumeration (section [2.2.6.9](#Section_2.2.6.9)).
 
@@ -2528,7 +2528,7 @@ CONNTYPE_PARTNERTM_BRANCH = 0x00000104
 
 **CONNTYPE_TXUSER_BEGINNER:** This connection type is used by applications that begin, commit, and roll back transactions.
 
-**CONNTYPE_TXUSER_IMPORT:** This connection type is used by a destination application to complete a [Push Propagation](#Section_3.7.5.1.1) that is initiated by a source application.
+**CONNTYPE_TXUSER_IMPORT:** This connection type is used by a destination application to complete a [Push Propagation](#Section_1.3.5.2) that is initiated by a source application.
 
 **CONNTYPE_TXUSER_ENLISTMENT:** This connection type is used by a [**durable resource manager**](#gt_durable-resource-manager) to establish an [**enlistment**](#gt_enlistment) with its transaction manager.
 
@@ -3058,7 +3058,7 @@ Each marker bit corresponds to a security access flag maintained by the by the *
 <a id="Section_2.2.8.1.1"></a>
 ##### 2.2.8.1.1 CONNTYPE_TXUSER_BEGINNER
 
-The **CONNTYPE_TXUSER_BEGINNER** connection type is used by applications that begin, commit, and roll back transactions. For more information about **CONNTYPE_TXUSER_BEGINNER** as an [**initiator**](#gt_initiator), see section [3.3.5.1.1](#Section_3.3.5.1.1), and as an [**acceptor**](#gt_acceptor), see section [3.4.5.1.1](#Section_3.4.5.1.1.2).
+The **CONNTYPE_TXUSER_BEGINNER** connection type is used by applications that begin, commit, and roll back transactions. For more information about **CONNTYPE_TXUSER_BEGINNER** as an [**initiator**](#gt_initiator), see section [3.3.5.1.1](#Section_3.3.5.1.1), and as an [**acceptor**](#gt_acceptor), see section [3.4.5.1.1](#Section_3.4.5.1.1).
 
 <a id="Section_2.2.8.1.1.1"></a>
 ###### 2.2.8.1.1.1 TXUSER_BEGINNER_MTAG_ABORT
@@ -3099,7 +3099,7 @@ packet-beta
 
 **dwTimeout (4 bytes):** A 32-bit unsigned integer that MUST contain the time-out value, in milliseconds, for the transaction. The value zero MUST be interpreted as an infinite time-out. A transaction SHOULD NOT abort due to time-out before the time-out that is specified by this value has expired.
 
-**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_3.3.4.3) for details.
+**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_2.2.5.4) for details.
 
 **isoFlags (4 bytes):** The isolation flags for the transaction. The value MUST be a legal combination of values from the OLETX_ISOLATION_FLAGS enumeration (section [2.2.6.8](#Section_2.2.6.8)).
 
@@ -3215,7 +3215,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_BEGIN2** connection type is used by an **application** to begin, commit, or [**rollback**](#gt_rollback) a transaction or to change the time-out of a transaction. This connection type supersedes [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1) and [CONNTYPE_TXUSER_SETTXTIMEOUT2](#Section_2.2.8.3.4).
 
-For more information about **CONNTYPE_TXUSER_BEGIN2** as an [**initiator**](#gt_initiator), see [3.3.5.1.2](#Section_3.3.5.1.2.1), and as an [**acceptor**](#gt_acceptor), see [3.4.5.1.2](#Section_3.4.5.1.2.3).
+For more information about **CONNTYPE_TXUSER_BEGIN2** as an [**initiator**](#gt_initiator), see [3.3.5.1.2](#Section_3.3.5.1.2), and as an [**acceptor**](#gt_acceptor), see [3.4.5.1.2](#Section_3.4.5.1.2).
 
 This connection type also uses the following message:
 
@@ -3256,7 +3256,7 @@ packet-beta
 
 **dwTimeout (4 bytes):** A 32-bit unsigned integer that MUST contain the time-out value, in milliseconds, for the transaction. The value zero MUST be interpreted as an infinite time-out. A transaction SHOULD NOT abort due to time-out before the time-out that is specified by this value has expired.
 
-**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_3.3.4.3) for details.
+**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_2.2.5.4) for details.
 
 **isoFlags (4 bytes):** The isolation flags for the transaction. The value MUST be a legal combination of values from the **OLETX_ISOLATION_FLAGS** (section [2.2.6.8](#Section_2.2.6.8)) enumeration.
 
@@ -3330,7 +3330,7 @@ packet-beta
 <a id="Section_2.2.8.1.2.7"></a>
 ###### 2.2.8.1.2.7 TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT
 
-The **TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT** message modifies the transaction time-out when it is used in **CONNTYPE_TXUSER_BEGIN2** (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection type and **CONNTYPE_TXUSER_SETTXTIMEOUT** (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection type, or queries if the transaction manager and supports the capability to do so when used in **CONNTYPE_TXUSER_SETTXTIMEOUT2** (section [2.2.8.3.4](#Section_2.2.8.3.4)).
+The **TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT** message modifies the transaction time-out when it is used in **CONNTYPE_TXUSER_BEGIN2** (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection type and **CONNTYPE_TXUSER_SETTXTIMEOUT** (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection type, or queries if the transaction manager and supports the capability to do so when used in **CONNTYPE_TXUSER_SETTXTIMEOUT2** (section [2.2.8.3.4](#Section_2.2.8.3.4)).
 
 This message is also used for **CONNTYPE_TXUSER_SETTXTIMEOUT** (section 2.2.8.3.3) connections and **CONNTYPE_TXUSER_SETTXTIMEOUT2** (section 2.2.8.3.4) connections.
 
@@ -3375,7 +3375,7 @@ The **CONNTYPE_TXUSER_PROMOTE** connection type is used by an application to do 
 - Change the time-out of a transaction
 This connection type supersedes [CONNTYPE_TXUSER_SETTXTIMEOUT2](#Section_2.2.8.3.4).
 
-For more information about **CONNTYPE_TXUSER_PROMOTE** as an [**initiator**](#gt_initiator), see section [3.3.5.1.3](#Section_3.3.5.1.3.2), and as an [**acceptor**](#gt_acceptor), see section [3.4.5.1.3](#Section_3.4.5.1.3.2).
+For more information about **CONNTYPE_TXUSER_PROMOTE** as an [**initiator**](#gt_initiator), see section [3.3.5.1.3](#Section_3.3.5.1.3), and as an [**acceptor**](#gt_acceptor), see section [3.4.5.1.3](#Section_3.4.5.1.3).
 
 This connection type also uses the following messages:
 
@@ -3409,7 +3409,7 @@ packet-beta
 
 **dwTimeout (4 bytes):** A 32-bit unsigned integer that MUST contain the time-out value, in milliseconds, for the transaction. The value zero MUST be interpreted as an infinite time-out. A transaction SHOULD NOT abort due to time-out before the time-out that is specified by this value has expired.
 
-**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_3.3.4.3) for details.
+**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_2.2.5.4) for details.
 
 **isoFlags (4 bytes):** The isolation flags for the transaction. The value MUST be a legal combination of values from the OLETX_ISOLATION_FLAGS (section [2.2.6.8](#Section_2.2.6.8)) enumeration.
 
@@ -3456,7 +3456,7 @@ packet-beta
 
 **cbSourceTmAddr (4 bytes):** A 4-byte integer value that MUST contain the length, in bytes, of the **SourceTmAddr** field. The length MUST include the padding bytes used in the **SourceTmAddr** field.
 
-**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_3.3.4.3) for details.
+**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_2.2.5.4) for details.
 
 **SourceTmAddr (variable):** This field is used for identifying the address of the **superior transaction manager** against which the pull propagation operation is requested. This field MUST contain either a **NAMEOBJECTBLOB** (section [2.2.5.3](#Section_2.2.5.3)) structure or an **OLETX_TM_ADDR** (section [2.2.4.2](#Section_2.2.4.2)) structure in a version-specific manner as specified in **Version-Specific Aspects of Connection Types Relevant to an Application** (section [2.2.1.1.1](#Section_2.2.1.1.1)). The **SourceTmAddr** field MUST be aligned on a 4-byte boundary by padding with arbitrary values.
 
@@ -3561,7 +3561,7 @@ packet-beta
 <a id="Section_2.2.8.2.1.1.9"></a>
 TXUSER_ASSOCIATE_MTAG_TOO_LATE
 
-The **TXUSER_ASSOCIATE_MTAG_TOO_LATE** message is sent in response to a TXUSER_ASSOCIATE_MTAG_ASSOCIATE (section [2.2.8.2.1.1.1](#Section_2.2.8.2.1.1.1)) message. It indicates that the associate request failed because the transaction specified by the **guidTx** field in the **TXUSER_ASSOCIATE_MTAG_ASSOCIATE** message is neither in the Active, [Phase Zero](#Section_3.7.1.1.7), nor [Phase Zero Complete](#Section_3.2.1.3.4) state.
+The **TXUSER_ASSOCIATE_MTAG_TOO_LATE** message is sent in response to a TXUSER_ASSOCIATE_MTAG_ASSOCIATE (section [2.2.8.2.1.1.1](#Section_2.2.8.2.1.1.1)) message. It indicates that the associate request failed because the transaction specified by the **guidTx** field in the **TXUSER_ASSOCIATE_MTAG_ASSOCIATE** message is neither in the Active, [Phase Zero](#Section_1.3.1.1), nor [Phase Zero Complete](#Section_3.8.7.6) state.
 
 ```mermaid
 packet-beta
@@ -3861,7 +3861,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_EXPORT2** connection type is used by a source application to initiate a push propagation to a destination application. This connection type supersedes [CONNTYPE_TXUSER_EXPORT](#Section_2.2.8.2.2.2).
 
-For more information about **CONNTYPE_TXUSER_EXPORT2** as an initiator, see section [3.3.5.2.2.3](#Section_3.3.5.2.2.3), and as an acceptor, see section [3.4.1.9](#Section_3.4.1.5).
+For more information about **CONNTYPE_TXUSER_EXPORT2** as an initiator, see section [3.3.5.2.2.3](#Section_3.3.5.2.2.3), and as an acceptor, see section [3.4.1.9](#Section_3.4.1.9).
 
 This connection type also uses the following messages:
 
@@ -4056,7 +4056,7 @@ packet-beta
 
 **isoFlags (4 bytes):** The isolation flags for the transaction. The value MUST be a legal combination of values from the **OLETX_ISOLATION_FLAGS** (section [2.2.6.8](#Section_2.2.6.8)) enumeration.
 
-**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_3.3.4.3) for details.
+**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_2.2.5.4) for details.
 
 <a id="Section_2.2.8.2.2.5.4"></a>
 TXUSER_IMPORT2_MTAG_SINK_ERROR
@@ -4103,7 +4103,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_GETTXDETAILS** connection type is used by an application to retrieve details about a transaction from its transaction manager.
 
-For more information about **CONNTYPE_TXUSER_GETTXDETAILS** as an initiator, see section [3.3.5.3.1](#Section_3.3.5.3.1.1), and as an acceptor, see section [3.4.5.3.1](#Section_3.4.5.3.1).
+For more information about **CONNTYPE_TXUSER_GETTXDETAILS** as an initiator, see section [3.3.5.3.1](#Section_3.3.5.3.1), and as an acceptor, see section [3.4.5.3.1](#Section_3.4.5.3.1).
 
 <a id="Section_2.2.8.3.1.1"></a>
 ###### 2.2.8.3.1.1 TXUSER_GETTXDETAILS_MTAG_GET
@@ -4147,7 +4147,7 @@ packet-beta
 
 **vszSuperiorName (variable):** This field MUST contain an [OLETX_VARLEN_STRING](#Section_2.2.4.3) structure. The structure specifies an implementation-specific name for the **Name** property of the **Superior** Enlistment object (see section [3.2.1](#Section_3.2.1)) that is maintained by the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)). The [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet) is initialized as specified in Initialization (section [3.2.3](#Section_3.2.3)). If the transaction manager is the [**root transaction manager**](#gt_root-transaction-manager) for the transaction, the value MUST be a zero-length **OLETX_VARLEN_STRING**. If the transaction manager is not acting as the root transaction manager for the transaction, the value MUST NOT be a zero-length **OLETX_VARLEN_STRING**. This field MUST be aligned on a 4-byte boundary by padding with arbitrary values that MUST be ignored on receipt.
 
-**vszSuperiorID (variable):** This field contains an **OLETX_VARLEN_STRING** structure. The structure MUST contain an implementation-specific identifier that corresponds to the **Enlistment Object.Identifier** property of the **Superior Enlistment** object (section 3.2.1) that is maintained by the Core Transaction Manager Facet as described for **Enlistment** objects (section [3.1.1](#Section_3.1.3.1)). The Core Transaction Manager Facet is initialized as specified in **Initialization** (section 3.2.3 ). If the transaction manager is the root transaction manager for the transaction, the value MUST be a zero-length **OLETX_VARLEN_STRING**. This field MUST be aligned on a 4-byte boundary by padding with arbitrary values that MUST be ignored on receipt.
+**vszSuperiorID (variable):** This field contains an **OLETX_VARLEN_STRING** structure. The structure MUST contain an implementation-specific identifier that corresponds to the **Enlistment Object.Identifier** property of the **Superior Enlistment** object (section 3.2.1) that is maintained by the Core Transaction Manager Facet as described for **Enlistment** objects (section [3.1.1](#Section_3.1.1)). The Core Transaction Manager Facet is initialized as specified in **Initialization** (section 3.2.3 ). If the transaction manager is the root transaction manager for the transaction, the value MUST be a zero-length **OLETX_VARLEN_STRING**. This field MUST be aligned on a 4-byte boundary by padding with arbitrary values that MUST be ignored on receipt.
 
 **rgSubordinates (variable):** An array of **OLETX_VARLEN_STRING** structure pairs. Each pair MUST specify an implementation-specific name, followed by an implementation-specific identifier. The array MUST contain **lSubordinateCount** pairs of **OLETX_VARLEN_STRING** structures, representing the collection of subordinates enlisted on the transaction. If **lSubordinateCount** contains zero, this field MUST NOT be present. This field MUST be aligned on a 4-byte boundary by padding with arbitrary values that MUST be ignored on receipt. The name and identifier correspond to the **Name** and **Enlistment Object.Identifier** properties (section 3.1.1) respectively, of the [**Phase One Enlistment**](#gt_phase-one-enlistment) list that is maintained by the core transaction manager facet (section 3.2.1) and initialized as specified in Enlistment Object Initialization (section [3.1.3.1](#Section_3.1.3.1)).
 
@@ -4170,7 +4170,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_RESOLVE** connection type is used by an application either to manually resolve the outcome of an [In Doubt](#Section_3.2.1.3.12) transaction or cause its transaction manager to forget a transaction that is in the [Failed to Notify](#Section_3.2.1.3.13) state.
 
-For more information about **CONNTYPE_TXUSER_RESOLVE** as an initiator, see section [3.3.5.3.2](#Section_3.3.5.3.2.2), and as an acceptor, see section [3.4.5.3.2](#Section_3.4.5.3.2.2).
+For more information about **CONNTYPE_TXUSER_RESOLVE** as an initiator, see section [3.3.5.3.2](#Section_3.3.5.3.2), and as an acceptor, see section [3.4.5.3.2](#Section_3.4.5.3.2).
 
 <a id="Section_2.2.8.3.2.1"></a>
 ###### 2.2.8.3.2.1 TXUSER_RESOLVE_MTAG_ACCESSDENIED
@@ -4312,7 +4312,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_SETTXTIMEOUT** connection type is used by an application to modify the time-out of a transaction that has been initiated on a [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1) connection.
 
-For more information about **CONNTYPE_TXUSER_SETTXTIMEOUT** as an initiator, see section [3.3.5.3.3](#Section_3.3.5.3.3.1), and as an acceptor, see section [3.4.5.3.3](#Section_3.4.5.3.3).
+For more information about **CONNTYPE_TXUSER_SETTXTIMEOUT** as an initiator, see section [3.3.5.3.3](#Section_3.3.5.3.3), and as an acceptor, see section [3.4.5.3.3](#Section_3.4.5.3.3).
 
 This connection type also uses the **TXUSER_SETTXTIMEOUT_MTAG_REQUEST_COMPLETE** (section [2.2.8.1.2.6](#Section_2.2.8.1.2.6)), **TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT** (section [2.2.8.1.2.7](#Section_2.2.8.1.2.7)), and **TXUSER_SETTXTIMEOUT_MTAG_TOO_LATE** (section [2.2.8.1.2.8](#Section_2.2.8.1.2.8)) messages.
 
@@ -4333,9 +4333,9 @@ packet-beta
 <a id="Section_2.2.8.3.4"></a>
 ##### 2.2.8.3.4 CONNTYPE_TXUSER_SETTXTIMEOUT2
 
-The **CONNTYPE_TXUSER_SETTXTIMEOUT2** connection type is used by an application to query the transaction manager's support for modifying the time-out of a transaction that has been initiated on a [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) or [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3) connection.
+The **CONNTYPE_TXUSER_SETTXTIMEOUT2** connection type is used by an application to query the transaction manager's support for modifying the time-out of a transaction that has been initiated on a [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) or [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3) connection.
 
-For more information about **CONNTYPE_TXUSER_SETTXTIMEOUT2** as an initiator, see section [3.3.5.3.4](#Section_3.3.5.3.4.2), and as an acceptor, see section [3.4.5.3.4](#Section_3.4.5.3.4).
+For more information about **CONNTYPE_TXUSER_SETTXTIMEOUT2** as an initiator, see section [3.3.5.3.4](#Section_3.3.5.3.4), and as an acceptor, see section [3.4.5.3.4](#Section_3.4.5.3.4).
 
 This connection type also uses the **TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT** (section [2.2.8.1.2.7](#Section_2.2.8.1.2.7)) and **TXUSER_SETTXTIMEOUT_MTAG_TX_NOT_FOUND** (section [2.2.8.3.3.1](#Section_2.2.8.3.3.1)) messages.
 
@@ -4344,7 +4344,7 @@ This connection type also uses the **TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT** (se
 
 The **CONNTYPE_TXUSER_TRACE** connection type is used by an application to ask its transaction manager to trace the status of a transaction by using an implementation-specific mechanism.
 
-For more information about **CONNTYPE_TXUSER_TRACE** as an initiator, see section [3.3.5.3.5](#Section_3.3.5.3.5.3), and as an acceptor, see section [3.4.5.3.5](#Section_3.4.5.3.5).
+For more information about **CONNTYPE_TXUSER_TRACE** as an initiator, see section [3.3.5.3.5](#Section_3.3.5.3.5), and as an acceptor, see section [3.4.5.3.5](#Section_3.4.5.3.5).
 
 <a id="Section_2.2.8.3.5.1"></a>
 ###### 2.2.8.3.5.1 TXUSER_TRACE_MTAG_DUMP_TRANSACTION
@@ -4489,7 +4489,7 @@ packet-beta
 
 **isoLevel (4 bytes):** The isolation level of the transaction. The value MUST be one as specified in the OLETX_ISOLATION_LEVEL (section [2.2.6.9](#Section_2.2.6.9)) enumeration.
 
-**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_3.3.4.3) for details.
+**szDesc (40 bytes):** The description of the transaction, as a fixed-size array of 40 bytes that contains a null-terminated Latin-1 ANSI string, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). See section [2.2.5.4](#Section_2.2.5.4) for details.
 
 <a id="Section_2.2.9.1.1.1.2"></a>
 PARTNERTM_PROPAGATE_MTAG_PROPAGATED
@@ -4939,7 +4939,7 @@ For more information about **CONNTYPE_PARTNERTM_REDELIVERCOMMIT** as an initiato
 <a id="Section_2.2.9.2.2.1.1"></a>
 PARTNERTM_REDELIVERCOMMIT_MTAG_COMMITREQ
 
-The **PARTNERTM_REDELIVERCOMMIT_MTAG_COMMITREQ** message is sent by the superior transaction manager to begin [Phase Two](#Section_1.3.1.3) commit processing.
+The **PARTNERTM_REDELIVERCOMMIT_MTAG_COMMITREQ** message is sent by the superior transaction manager to begin [Phase Two](#Section_4.5.2) commit processing.
 
 ```mermaid
 packet-beta
@@ -5074,7 +5074,7 @@ This connection type also uses the following messages:
 - **TXUSER_RESOURCEMANAGER_MTAG_DUPLICATE** (section [2.2.10.1.1.2](#Section_2.2.10.1.1.2))
 - **TXUSER_RESOURCEMANAGER_MTAG_REENLISTMENTCOMPLETE** (section [2.2.10.1.1.3](#Section_2.2.10.1.1.3))
 - **TXUSER_RESOURCEMANAGER_MTAG_REQUEST_COMPLETE** (section [2.2.10.1.1.4](#Section_2.2.10.1.1.4))
-For more information about **CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL** as an initiator, see section [3.5.5.1.2](#Section_3.5.5.1.2.3), and as an acceptor, see section [3.6.5.1.2](#Section_3.6.5.1.2.1).
+For more information about **CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL** as an initiator, see section [3.5.5.1.2](#Section_3.5.5.1.2), and as an acceptor, see section [3.6.5.1.2](#Section_3.6.5.1.2).
 
 <a id="Section_2.2.10.1.2.1"></a>
 ###### 2.2.10.1.2.1 TXUSER_RESOURCEMANAGERINTERNAL_MTAG_DUPLICATEDETECTED
@@ -5098,7 +5098,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_PHASE0** connection type is used by a resource manager to enlist for Phase Zero notifications from its transaction manager.
 
-For more details about **CONNTYPE_TXUSER_PHASE0** as an initiator, see section [3.5.5.2.1](#Section_3.5.5.2.1.2), and as an acceptor, see section [3.6.5.2.1](#Section_3.6.5.2.1.1).
+For more details about **CONNTYPE_TXUSER_PHASE0** as an initiator, see section [3.5.5.2.1](#Section_3.5.5.2.1), and as an acceptor, see section [3.6.5.2.1](#Section_3.6.5.2.1).
 
 <a id="Section_2.2.10.2.1.1"></a>
 ###### 2.2.10.2.1.1 TXUSER_PHASE0_MTAG_CREATE
@@ -5120,7 +5120,7 @@ packet-beta
 <a id="Section_2.2.10.2.1.2"></a>
 ###### 2.2.10.2.1.2 TXUSER_PHASE0_MTAG_CREATE_TOO_LATE
 
-The **TXUSER_PHASE0_MTAG_CREATE_TOO_LATE** message is sent by the transaction manager if the creation of the [**Phase Zero**](#gt_phase-zero) failed because the enlistment request was made too late in the specified [**transaction lifetime**](#gt_transaction-lifetime). See Create Phase Zero Enlistment Failure (section [3.6.7.7](#Section_3.7.7.5)) and Register Phase Zero Failure (section [3.2.7.28](#Section_3.2.7.28)) for more details.
+The **TXUSER_PHASE0_MTAG_CREATE_TOO_LATE** message is sent by the transaction manager if the creation of the [**Phase Zero**](#gt_phase-zero) failed because the enlistment request was made too late in the specified [**transaction lifetime**](#gt_transaction-lifetime). See Create Phase Zero Enlistment Failure (section [3.6.7.7](#Section_3.6.7.7)) and Register Phase Zero Failure (section [3.2.7.28](#Section_3.2.7.28)) for more details.
 
 ```mermaid
 packet-beta
@@ -5220,7 +5220,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_ENLISTMENT** connection type is used by a durable resource manager to establish an enlistment with its transaction manager.
 
-For more details about **CONNTYPE_TXUSER_ENLISTMENT** as an initiator, see section [3.5.5.2.2](#Section_3.5.5.2.2.1), and as an acceptor, see section [3.6.5.2.2](#Section_3.6.5.2.2).
+For more details about **CONNTYPE_TXUSER_ENLISTMENT** as an initiator, see section [3.5.5.2.2](#Section_3.5.5.2.2), and as an acceptor, see section [3.6.5.2.2](#Section_3.6.5.2.2).
 
 <a id="Section_2.2.10.2.2.1"></a>
 ###### 2.2.10.2.2.1 TXUSER_ENLISTMENT_MTAG_ABORTREQ
@@ -5419,7 +5419,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_REENLIST** connection type is used by a durable resource manager to determine the outcome of an [In Doubt](#Section_3.2.1.3.12) transaction.
 
-For more information about **CONNTYPE_TXUSER_REENLIST** as an initiator, see section [3.5.5.3.1](#Section_3.5.5.3.1.1), and as an acceptor, see section [3.6.5.3.1](#Section_3.6.5.3.1.2).
+For more information about **CONNTYPE_TXUSER_REENLIST** as an initiator, see section [3.5.5.3.1](#Section_3.5.5.3.1), and as an acceptor, see section [3.6.5.3.1](#Section_3.6.5.3.1).
 
 <a id="Section_2.2.10.3.1.1"></a>
 ###### 2.2.10.3.1.1 TXUSER_REENLIST_MTAG_REENLIST
@@ -5494,7 +5494,7 @@ packet-beta
 
 The **CONNTYPE_TXUSER_VOTER** connection type is used by a volatile resource manager to establish a voter enlistment with its transaction manager.
 
-For more details on **CONNTYPE_TXUSER_VOTER** as an initiator, see section [3.5.5.4.1](#Section_3.5.5.4.1.6), and as an acceptor, see section [3.6.5.4.1](#Section_3.6.5.4.1).
+For more details on **CONNTYPE_TXUSER_VOTER** as an initiator, see section [3.5.5.4.1](#Section_3.5.5.4.1), and as an acceptor, see section [3.6.5.4.1](#Section_3.6.5.4.1).
 
 <a id="Section_2.2.10.4.1.1"></a>
 ###### 2.2.10.4.1.1 TXUSER_STATUS_MTAG_ABORTED
@@ -5600,7 +5600,7 @@ packet-beta
 <a id="Section_2.2.10.4.1.8"></a>
 ###### 2.2.10.4.1.8 TXUSER_VOTER_MTAG_VOTEREQ
 
-The **TXUSER_VOTER_MTAG_VOTEREQ** message is sent by the transaction manager to request that the resource manager perform any operations it needs to during [Phase One](#Section_3.2.1.3.7) and to vote on the outcome of the transaction.
+The **TXUSER_VOTER_MTAG_VOTEREQ** message is sent by the transaction manager to request that the resource manager perform any operations it needs to during [Phase One](#Section_4.5.1) and to vote on the outcome of the transaction.
 
 ```mermaid
 packet-beta
@@ -5648,7 +5648,7 @@ Note that the abstract data model can be implemented in a variety of ways. This 
 A participant MUST also maintain the following data elements:
 
 - **Transaction table**: A table of entries to [**transaction**](#gt_transaction) objects, keyed by [**transaction identifier**](#gt_transaction-identifier).
-- **Session Table**: A table of **Session** objects, as maintained by the multiplexing protocol specified in [MS-CMP] section 3.1.1. The MSDTC Connection Manager: OleTx Transaction Protocol reads the **Session** table data elements provided by [MS-CMPO](#Section_2.1) but does not extend or modify the table.
+- **Session Table**: A table of **Session** objects, as maintained by the multiplexing protocol specified in [MS-CMP] section 3.1.1. The MSDTC Connection Manager: OleTx Transaction Protocol reads the **Session** table data elements provided by [MS-CMPO](../MS-CMPO/MS-CMPO.md) but does not extend or modify the table.
 Each transaction object MUST contain the following data structures:
 
 - **Transaction Object.Identifier**: This field contains a GUID that specifies the transaction identifier.
@@ -5717,7 +5717,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The initialization process of this protocol MUST initialize the underlying instance of the MSDTC Connection Manager: OleTx Multiplexing ([MS-CMP](../MS-CMP/MS-CMP.md)) and MSDTC Connection Manager: OleTx Transports ([MS-CMPO](#Section_2.1)) protocols as specified in section [2.1.2](../MS-CMP/MS-CMP.md).
+The initialization process of this protocol MUST initialize the underlying instance of the MSDTC Connection Manager: OleTx Multiplexing ([MS-CMP](../MS-CMP/MS-CMP.md)) and MSDTC Connection Manager: OleTx Transports ([MS-CMPO](../MS-CMPO/MS-CMPO.md)) protocols as specified in section [2.1.2](#Section_2.1.2).
 
 If initialization fails for the underlying [MS-CMP] protocol as specified in [MS-CMP] section 3.1.3.1, or for the underlying [MS-CMPO] protocol as specified in [MS-CMPO] section 3.2.3.1, then the initialization of the [MS-DTCO] protocol MUST also fail, and an implementation-specific failure result MUST be returned to the higher-layer business logic.
 
@@ -5752,7 +5752,7 @@ A protocol role implementation that claims a version as the maximum supported pr
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Negotiating a Common Protocol Version
 
-Before exchanging any protocol messages, two [**participants**](#gt_participant) of the protocol MUST agree on what protocol version to use for their communication. To negotiate a common protocol version, the two protocol participants MUST use the version negotiation mechanism provided by the MSDTC Connection Manager: OleTx Transports Protocol transport (see **BuildContext**, **Primary** [MS-CMPO](#Section_2.1) section 3.3.4.2.1) as follows:
+Before exchanging any protocol messages, two [**participants**](#gt_participant) of the protocol MUST agree on what protocol version to use for their communication. To negotiate a common protocol version, the two protocol participants MUST use the version negotiation mechanism provided by the MSDTC Connection Manager: OleTx Transports Protocol transport (see **BuildContext**, **Primary** [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.3.4.2.1) as follows:
 
 - When a protocol participant ([**application**](#gt_application), [**resource manager**](#gt_resource-manager-rm), [**transaction manager**](#gt_transaction-manager)) initializes its underlying MSDTC Connection Manager: OleTx Transports Protocol transport, it MUST do the following:
 - Set the **Minimum Level 3 Version Number** data field of the underlying MSDTC Connection Manager: OleTx Transports Protocol implementation to 0x00000001 (see also [MS-CMPO] section 3.2.1.1). Note that the MSDTC Connection Manager: OleTx Transaction Protocol is layered on top of MSDTC Connection Manager: OleTx Multiplexing Protocol (specified in [MS-CMP](../MS-CMP/MS-CMP.md)), which is layered on top of the MSDTC Connection Manager: OleTx Transports Protocol (specified in [MS-CMPO]). Therefore, it is a level-three protocol for the MSDTC Connection Manager: OleTx Transports Protocol (as defined in [MS-CMPO] section 2.2.2).
@@ -5809,7 +5809,7 @@ The **Initiate Connection** event MUST be signaled with the following parameters
 - The [**connection type**](#gt_connection-type) of the outgoing connection.
 On **Initiate Connection** event signal, an OleTx connection participant MUST perform the following:
 
-- Create a new **Incoming Message Notification Interface** object with the event fields set to local events **Receiving a Message** (section [3.1.8.4](#Section_3.1.8.4)) and **Connection Disconnected** (section [3.1.8.3](#Section_3.3.5.3.4.2)) respectively.
+- Create a new **Incoming Message Notification Interface** object with the event fields set to local events **Receiving a Message** (section [3.1.8.4](#Section_3.1.8.4)) and **Connection Disconnected** (section [3.1.8.3](#Section_3.1.8.3)) respectively.
 - Signal **Create Connection** event as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.4.2 by passing the following parameters:
 - The **Name** Object of the partner to create the connection.
 - The connection type of the outgoing connection.
@@ -5860,7 +5860,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that the abstract data model can be implemented in a variety of ways. This protocol does not prescribe or advocate any specific implementation technique.
 
-The [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST maintain all the data elements specified in section [3.1.1](#Section_3.1.3.1).
+The [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST maintain all the data elements specified in section [3.1.1](#Section_3.1.1).
 
 The [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet) MUST also maintain the following data elements:
 
@@ -5869,7 +5869,7 @@ The [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet) MUS
 - **Extended Whereabouts**: A memory buffer that represents the [**extended whereabouts**](#gt_extended-whereabouts) information of the [**transaction manager**](#gt_transaction-manager), contributed by protocol extension objects as specified in section 3.2.1.5.
 - **Extended Whereabouts Size**: The size of the extended whereabouts buffer, in bytes.
 - **Extended Whereabouts Protocol Count**: The number of protocol extension objects that contributed to the extended whereabouts information.
-- **Security Level**: An enumeration that indicates the security level at which the transaction manager initializes communication by using the transports protocol as specified in [MS-CMPO](#Section_2.1) and the multiplexing protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.2.1.1. This element MUST be set to one of the following values:<21>
+- **Security Level**: An enumeration that indicates the security level at which the transaction manager initializes communication by using the transports protocol as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) and the multiplexing protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.2.1.1. This element MUST be set to one of the following values:<21>
 - **No Security:** This value is set to indicate that the RPC communications MUST NOT require validation of the identity for an incoming message.
 - **Incoming Authentication:** This value is set to indicate that the RPC communication SHOULD validate the identity for an incoming message.
 - **Mutual Authentication:** This value is set to indicate that the RPC communication SHOULD validate that there is a known identity for an incoming [**connection**](#gt_connection). The incoming connection is refused if the identity is not established. The incoming identity MUST match the pattern "<domain>\<incoming-MSDTC-name>$", where <incoming-MSDTC-name> is the source hostname for the connection, and <domain> is the name of the domain in which the host is a member.
@@ -5901,7 +5901,7 @@ The Core Transaction Manager Facet MUST extend the definition of a **transaction
 - **Isolation Level**: An Isolation Level value as specified in section [2.2.6.9](#Section_2.2.6.9).
 - **Isolation Flags**: An Isolation Flags value as specified in section [2.2.6.8](#Section_2.2.6.8).
 - **Description**: An implementation-specific description string that is provided to the core transaction manager when the transaction is created.
-- **Timeout**: A 32-bit unsigned integer that represents the number of milliseconds after which a root transaction MUST time out if an outcome is not reached. This value MUST be used to initialize the Transaction Timeout Timer (section [3.2.2.1](#Section_3.2.6.1)).
+- **Timeout**: A 32-bit unsigned integer that represents the number of milliseconds after which a root transaction MUST time out if an outcome is not reached. This value MUST be used to initialize the Transaction Timeout Timer (section [3.2.2.1](#Section_3.2.2.1)).
 - **GRFRM**: A 32-bit unsigned integer that contains an implementation-defined value, as defined in section [2.2.7.1](#Section_2.2.7.1).
 The Core Transaction Manager Facet MUST extend the definition of a **connection** object, as specified in [MS-CMP] section 3.1.1.1, to include the following data element:
 
@@ -5946,20 +5946,20 @@ The **State** field of the [**transaction**](#gt_transaction) object MUST repres
 
 The transaction **State** MUST support the following states:
 
-- [Idle](#Section_3.3.1.9.1)
-- [Active](#Section_3.5.1.1.5)
-- [Phase Zero](#Section_3.7.1.1.7)
-- [Phase Zero Complete](#Section_3.2.1.3.4)
+- [Idle](#Section_3.2.1.3.1)
+- [Active](#Section_3.2.1.3.2)
+- [Phase Zero](#Section_1.3.1.1)
+- [Phase Zero Complete](#Section_3.8.7.6)
 - [Voting](#Section_3.2.1.3.5)
 - [Voting Complete](#Section_3.2.7.35)
-- [Phase One](#Section_3.2.1.3.7)
-- [Phase One Complete](#Section_3.2.1.3.8)
+- [Phase One](#Section_4.5.1)
+- [Phase One Complete](#Section_3.8.7.7)
 - [Single Phase Commit](#Section_3.2.1.3.9)
-- [Committing](#Section_3.8.1.2.12)
-- [Aborting](#Section_3.2.1.3.11)
+- [Committing](#Section_3.2.1.3.10)
+- [Aborting](#Section_3.8.1.1.4)
 - [In Doubt](#Section_3.2.1.3.12)
 - [Failed to Notify](#Section_3.2.1.3.13)
-- [Ended](#Section_3.3.1.10.3)
+- [Ended](#Section_3.2.1.3.14)
 The following state machine diagrams reflect the states and the events that directly change them. The [**transaction manager**](#gt_transaction-manager) and the **transaction** can receive more events than those shown, but those events do not affect the state of the **transaction**.
 
 ![Transaction manager states and events (Phase Zero)](media/image12.png)
@@ -5997,7 +5997,7 @@ The following events are processed in the Active state:
 - [Enlistment Unilaterally Aborted](#Section_3.2.7.19)
 - [Notify Aborted](#Section_3.2.7.23)
 - [Unenlist Phase Zero Enlistment](#Section_3.2.7.34)
-- [Transaction Timeout Timer](#Section_3.2.6.1)
+- [Transaction Timeout Timer](#Section_3.2.2.1)
 <a id="Section_3.2.1.3.3"></a>
 ##### 3.2.1.3.3 Phase Zero
 
@@ -6014,7 +6014,7 @@ The following events are processed in the Phase Zero state:
 - [Enlistment Unilaterally Aborted](#Section_3.2.7.19)
 - [Notify Aborted](#Section_3.2.7.23)
 - [Unenlist Phase Zero Enlistment](#Section_3.2.7.34)
-- [Transaction Timeout Timer](#Section_3.2.6.1)
+- [Transaction Timeout Timer](#Section_3.2.2.1)
 <a id="Section_3.2.1.3.4"></a>
 ##### 3.2.1.3.4 Phase Zero Complete
 
@@ -6031,7 +6031,7 @@ The following events are processed in the Phase Zero Complete state:
 - [Begin Voting](#Section_3.2.7.7)
 - [Enlistment Unilaterally Aborted](#Section_3.2.7.19)
 - [Notify Aborted](#Section_3.2.7.23)
-- [Transaction Timeout Timer](#Section_3.2.6.1)
+- [Transaction Timeout Timer](#Section_3.2.2.1)
 <a id="Section_3.2.1.3.5"></a>
 ##### 3.2.1.3.5 Voting
 
@@ -6042,7 +6042,7 @@ The following events are processed in the Voting state:
 - [Voting Complete](#Section_3.2.7.35)
 - [Enlistment Unilaterally Aborted](#Section_3.2.7.19)
 - [Notify Aborted](#Section_3.2.7.23)
-- [Transaction Timeout Timer](#Section_3.2.6.1)
+- [Transaction Timeout Timer](#Section_3.2.2.1)
 <a id="Section_3.2.1.3.6"></a>
 ##### 3.2.1.3.6 Voting Complete
 
@@ -6053,7 +6053,7 @@ The following events are processed in the Voting Complete state:
 - [Enlistment Unilaterally Aborted](#Section_3.2.7.19)
 - [Notify Aborted](#Section_3.2.7.23)
 - [Forget Transaction](#Section_3.2.7.22)
-- [Transaction Timeout Timer](#Section_3.2.6.1)
+- [Transaction Timeout Timer](#Section_3.2.2.1)
 <a id="Section_3.2.1.3.7"></a>
 ##### 3.2.1.3.7 Phase One
 
@@ -6065,14 +6065,14 @@ The following events are processed in the Phase One state:
 - [Enlistment Unilaterally Aborted](#Section_3.2.7.19)
 - [Notify Aborted](#Section_3.2.7.23)
 - [Phase One Completed](#Section_3.2.7.25)
-- [Transaction Timeout Timer](#Section_3.2.6.1)
+- [Transaction Timeout Timer](#Section_3.2.2.1)
 <a id="Section_3.2.1.3.8"></a>
 ##### 3.2.1.3.8 Phase One Complete
 
 The following events are processed in the Phase One Complete state:
 
 - [Begin Commit](#Section_3.2.7.2)
-- [Begin In Doubt](#Section_3.4.7.4)
+- [Begin In Doubt](#Section_3.2.7.3)
 - [Forget Transaction](#Section_3.2.7.22)
 <a id="Section_3.2.1.3.9"></a>
 ##### 3.2.1.3.9 Single Phase Commit
@@ -6095,7 +6095,7 @@ The following events are processed in the Committing state:
 
 The following events are processed in the Aborting state:
 
-- [Begin Rollback](#Section_3.4.7.5)
+- [Begin Rollback](#Section_3.2.7.6)
 - [Enlistment Rollback Complete](#Section_3.2.7.18)
 - [Forget Transaction](#Section_3.2.7.22)
 - [Request Transaction Outcome](#Section_3.2.7.33)
@@ -6142,7 +6142,7 @@ An event MUST consist of the following data elements:
 - The list of arguments with which the event MUST be signaled
 This protocol assumes the existence of an implementation-specific communication mechanism used to signal events between facets inside a transaction manager. This communication mechanism MUST NOT allow [**man-in-the-middle**](#gt_9918372c-45a0-4f70-b53f-06972f29318e) or other classes of intermediary attacks.
 
-Each facet MUST provide a definition for the **Name** and **Enlistment Object.Identifier** fields of an [Enlistment object](#Section_3.1.3.1), as specified in section 3.1.1.
+Each facet MUST provide a definition for the **Name** and **Enlistment Object.Identifier** fields of an [Enlistment object](#Section_3.1.1), as specified in section 3.1.1.
 
 The conceptual model that is described here requires that one and only one thread of operation be active inside the facets that make up the transaction manager.
 
@@ -6156,7 +6156,7 @@ A [**protocol extension**](#gt_protocol-extension) is an implementation-specific
 - The ability to augment the list of [**transaction manager**](#gt_transaction-manager) [**facets**](#gt_facet), as specified in section [3.2.1.4](#Section_3.2.1.4), to include additional protocol-specific facets
 - The ability to define custom behavior for the **Name** and **Property** fields on [**Enlistment**](#gt_enlistment) objects that are created inside these facets
 - The ability to contribute [**whereabouts**](#gt_whereabouts) information to the **extended whereabouts** field of the core transaction manager
-- The ability to contribute [**recovery**](#gt_recovery) information to **Enlistment** objects that are stored in the durable log, as specified in section [3.1.1](#Section_3.1.3.1)
+- The ability to contribute [**recovery**](#gt_recovery) information to **Enlistment** objects that are stored in the durable log, as specified in section [3.1.1](#Section_3.1.1)
 A **protocol extension** object MUST provide the following data structures:
 
 - **Identifier**: A GUID that uniquely identifies the protocol extension
@@ -6165,18 +6165,18 @@ A **protocol extension** object MUST provide the following data structures:
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-The [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST provide a [Transaction Timeout Timer](#Section_3.2.6.1).
+The [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST provide a [Transaction Timeout Timer](#Section_3.2.2.1).
 
 <a id="Section_3.2.2.1"></a>
 #### 3.2.2.1 Transaction Timeout Timer
 
 The **Transaction Timeout** timer MUST be set when a new [**transaction**](#gt_transaction) is created. It MUST be canceled when a transaction enters one of the following states:
 
-- [Phase One Complete](#Section_3.2.1.3.8)
+- [Phase One Complete](#Section_3.8.7.7)
 - [Single Phase Commit](#Section_3.2.1.3.9)
-- [Committing](#Section_3.8.1.2.12)
-- [Aborting](#Section_3.2.1.3.11)
-- [Ended](#Section_3.3.1.10.3)
+- [Committing](#Section_3.2.1.3.10)
+- [Aborting](#Section_3.8.1.1.4)
+- [Ended](#Section_3.2.1.3.14)
 The default value is specified by the **Timeout** field on the **transaction** object for which the instance of the timer is set. The minimum value of the timer MUST be zero, which means that the timer never generates a timer event.
 
 When the timer is initialized, the initialization MUST provide a **transaction** object to associate with the timer. When the timer expires, the same **transaction** object MUST be a **transaction** object provided alongside the timer notification. The [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST provide a distinct Transaction Timeout Timer instance for each active transaction. If an implementation sets the value of the timeout timer to zero, the **Transaction Timeout Timer** event (section [3.2.6.1](#Section_3.2.6.1)) is never signaled, and therefore the transaction never times out. Examples of negative consequences of transactions that do not time out include [**resource**](#gt_resource) availability and deadlocks between resources. In the availability example, if an application starts a transaction and accesses a resource, to provide isolation that resource typically blocks access to the specific item until the transaction completes. But if the application has an issue and does not complete the transaction within a reasonable amount of time, other applications are prevented from accessing the resource item. In the deadlock example, two resources are accessed by two different applications, but in reverse order. This results in the two applications blocking each other because each has its own transaction that holds a lock that the other needs to proceed. When transaction timeout values are implemented, these error scenarios resolve themselves by forcing the transactions to [**rollback**](#gt_rollback) after the specified timer period.
@@ -6198,9 +6198,9 @@ When the [Core Transaction Manager Facet](#Section_1.3.3.3.1) is initialized:
 - Allow TIP
 - Allow XA
 - Allow LUTransactions
-- The lower-layer transport protocol, the MSDTC Connection Manager: OleTx Multiplexing Protocol (section [2.1](#Section_2.1)) MUST be initialized as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.3, by passing the following parameter values as specified in section [2.1.2](../MS-CMP/MS-CMP.md). The MSDTC Connection Manager: OleTx Multiplexing Protocol initialization as specified in [MS-CMP] section 3.1.3, initializes the MSDTC Connection Manager: OleTx Transports Protocol layer with additional parameters as specified in [MS-CMPO](#Section_2.1) section 3.2.3.
+- The lower-layer transport protocol, the MSDTC Connection Manager: OleTx Multiplexing Protocol (section [2.1](#Section_2.1)) MUST be initialized as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.3, by passing the following parameter values as specified in section [2.1.2](#Section_2.1.2). The MSDTC Connection Manager: OleTx Multiplexing Protocol initialization as specified in [MS-CMP] section 3.1.3, initializes the MSDTC Connection Manager: OleTx Transports Protocol layer with additional parameters as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.3.
 - The **Security Level** field ([MS-CMPO] Local Partner State (section 3.2.1.1)) is initialized with the **Security Level** value in Core Transaction Manager Facet.
-- The **Minimum Level 3 Version Number** and **Maximum Level 3 Version Number** fields ([MS-CMPO] section 3.2.1.1) are initialized with the computed minimum and maximum protocol version values, as specified in section [3.1.4.2](../MS-CMPO/MS-CMPO.md).
+- The **Minimum Level 3 Version Number** and **Maximum Level 3 Version Number** fields ([MS-CMPO] section 3.2.1.1) are initialized with the computed minimum and maximum protocol version values, as specified in section [3.1.4.2](#Section_3.1.4.2).
 - Compute a **Local Name Object** by initializing the fields of the **Name** object (see [MS-CMPO] section 3.2.1.4) with following values:
 - **HostName**: The **HostName** field is initialized with the value of the **ComputerName.NetBIOS** element of the machine as specified in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.2.
 - **CID**: The **CID** field is initialized as follows:
@@ -6249,7 +6249,7 @@ The **Core Transaction Manager Facet**.**Durable Log** size is configurable and 
 If the **Core Transaction Manager Facet.Durable Log** of the [Core Transaction Manager Facet](#Section_1.3.3.3.1) is not empty, it MUST perform the following actions:
 
 - For each **transaction** object in the **Core Transaction Manager Facet.Durable Log** of the [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet):
-- Initialize the **transaction** object fields which are not durably stored with default values, as specified in Transaction Object Initialization (section [3.2.3.1](#Section_3.1.3.1)).
+- Initialize the **transaction** object fields which are not durably stored with default values, as specified in Transaction Object Initialization (section [3.2.3.1](#Section_3.2.3.1)).
 - Copy the **transaction** object to the transaction table of the Core Transaction Manager Facet.<25>
 - After all transactions in the **Core Transaction Manager Facet.Durable Log** are copied to the transaction table, start accepting new connections.
 - For each **transaction** object in the transaction table of the Core Transaction Manager Facet:
@@ -6274,13 +6274,13 @@ None.
 When the **Transaction Timeout** timer expires, the core [**transaction manager**](#gt_transaction-manager) MUST perform the following actions:
 
 - If the provided [**transaction**](#gt_transaction) object is in one of the following states, the core transaction manager MUST ignore the timer event:
-- [Phase One Complete](#Section_3.2.1.3.8)
+- [Phase One Complete](#Section_3.8.7.7)
 - [Single Phase Commit](#Section_3.2.1.3.9)
-- [Committing](#Section_3.8.1.2.12)
-- [Aborting](#Section_3.2.1.3.11)
+- [Committing](#Section_3.2.1.3.10)
+- [Aborting](#Section_3.8.1.1.4)
 - [In Doubt](#Section_3.2.1.3.12)
 - [Failed to Notify](#Section_3.2.1.3.13)
-- [Ended](#Section_3.3.1.10.3)
+- [Ended](#Section_3.2.1.3.14)
 - Otherwise, the core transaction manager MUST:
 - Signal the [Unilaterally Aborted](#Section_3.4.7.23) event on the transaction's superior enlistment's transaction manager [**facet**](#gt_facet) with the **Superior Enlistment** object of the transaction.
 - Signal the [Notify Aborted](#Section_3.2.7.23) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) using the provided **transaction** object.
@@ -6322,11 +6322,11 @@ The **Begin Commit** event MUST be signaled with the following argument:
 - A **transaction** object
 If the **Begin Commit** event is signaled, the [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet) MUST perform the following actions:
 
-- Set the transaction state to Committing (section [3.2.1.3.10](#Section_3.8.1.2.12)).
+- Set the transaction state to Committing (section [3.2.1.3.10](#Section_3.2.1.3.10)).
 - If the **Phase Two Voter Enlistment list** of the transaction is not empty:
 - For each [**Enlistment**](#gt_enlistment) object in the **Phase Two Voter Enlistment list** of transaction:
 - Remove the **Enlistment** object from the **Phase Two Voter Enlistment list** of the transaction.
-- Signal the **Begin Commit** event (see sections [3.4.7.3](#Section_3.2.7.2), [3.6.7.1](#Section_3.2.7.2), and [3.7.7.1](#Section_3.2.7.2)) on the enlistment's transaction manager facet field with the **Enlistment** object.
+- Signal the **Begin Commit** event (see sections [3.4.7.3](#Section_3.4.7.3), [3.6.7.1](#Section_3.6.7.1), and [3.7.7.1](#Section_3.7.7.1)) on the enlistment's transaction manager facet field with the **Enlistment** object.
 - If the **Phase Two Enlistment list** of the transaction is not empty:
 - For each **Enlistment** object in the **Phase Two Enlistment list** of the transaction:
 - Signal the **Begin Commit** event on the **enlistment's** transaction manager facet field with the **Enlistment** object.
@@ -6341,8 +6341,8 @@ The **Begin In Doubt** event MUST be signaled with the following argument:
 - A **transaction** object
 If the **Begin In Doubt** event is signaled, the [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST perform the following actions:
 
-- For each [**Enlistment**](#gt_enlistment) object in the [Phase Two](#Section_1.3.1.3) [**Voter**](#gt_voter) **Enlistment** list of the transaction:
-- Signal the **Begin In Doubt** event (see sections [3.4.7.4](#Section_3.4.7.4) and [3.6.7.2](#Section_3.4.7.4)) on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the **Enlistment** object.
+- For each [**Enlistment**](#gt_enlistment) object in the [Phase Two](#Section_4.5.2) [**Voter**](#gt_voter) **Enlistment** list of the transaction:
+- Signal the **Begin In Doubt** event (see sections [3.4.7.4](#Section_3.4.7.4) and [3.6.7.2](#Section_3.6.7.2)) on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the **Enlistment** object.
 - Signal the Forget Transaction (section [3.2.7.22](#Section_3.2.7.22)) event on the Core Transaction Manager Facet with the provided **transaction** object.
 <a id="Section_3.2.7.4"></a>
 #### 3.2.7.4 Begin Phase One
@@ -6364,15 +6364,15 @@ The **Begin Phase Zero** event MUST be signaled with the following arguments:
 - A [**transaction**](#gt_transaction) object
 If the **Begin Phase Zero** event is signaled, the [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST perform the following actions:
 
-- Set the transaction state to Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)).
+- Set the transaction state to Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)).
 - Move each Enlistment object in the **Next** [**Phase Zero Wave**](#gt_phase-zero-wave) **Enlistment** list of the transaction to the [**Phase Zero Enlistment**](#gt_phase-zero-enlistment) list of the transaction.
 - Set the [**Phase Zero**](#gt_phase-zero) **Registered** flag of the **transaction** object to FALSE.
 - If the **Phase Zero Enlistment** list of the transaction is not empty:
 - For each **Enlistment** object in the **Phase Zero Enlistment** list of the transaction:
-- Signal the **Begin Phase Zero** event (see sections [3.6.7.4](#Section_3.2.7.5) and [3.7.7.3](#Section_3.2.7.5)) on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the **Enlistment** object.
+- Signal the **Begin Phase Zero** event (see sections [3.6.7.4](#Section_3.6.7.4) and [3.7.7.3](#Section_3.7.7.3)) on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the **Enlistment** object.
 - Otherwise:
 - Set the transaction state to Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)).
-- Signal the **Phase Zero Complete** event (see sections [3.4.7.14](#Section_3.4.7.14) and [3.8.7.6](#Section_3.2.1.3.4)) on the superior enlistment's transaction manager facet of the transaction with the following arguments:
+- Signal the **Phase Zero Complete** event (see sections [3.4.7.14](#Section_3.4.7.14) and [3.8.7.6](#Section_3.8.7.6)) on the superior enlistment's transaction manager facet of the transaction with the following arguments:
 - The **Superior Enlistment** object of the transaction
 - The success [**outcome**](#gt_outcome)
 <a id="Section_3.2.7.6"></a>
@@ -6395,14 +6395,14 @@ The **Begin Voting** event MUST be signaled with the following arguments:
 If the **Begin Voting** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
 
 - Set the transaction state to Voting (section [3.2.1.3.5](#Section_3.2.1.3.5)).
-- If the Phase One (section [1.3.1.2](#Section_3.2.1.3.7)) [**Voter**](#gt_voter) [**Enlistment**](#gt_enlistment) list of the transaction is empty:
+- If the Phase One (section [1.3.1.2](#Section_1.3.1.2)) [**Voter**](#gt_voter) [**Enlistment**](#gt_enlistment) list of the transaction is empty:
 - Signal the Voting Complete (section [3.2.7.35](#Section_3.2.7.35)) event on the Core Transaction Manager Facet with the provided **transaction** object.
 - Otherwise:
 - For each **Enlistment** object in the **Phase One** **Voter Enlistment** list of the transaction:
-- Signal the **Begin Voting** event (see sections [3.4.7.6](#Section_3.2.7.7) and [3.6.7.6](#Section_3.2.7.7)) on the enlistment's [**transaction manager**](#gt_transaction-manager) facet field with the **Enlistment** object.
+- Signal the **Begin Voting** event (see sections [3.4.7.6](#Section_3.4.7.6) and [3.6.7.6](#Section_3.6.7.6)) on the enlistment's [**transaction manager**](#gt_transaction-manager) facet field with the **Enlistment** object.
 - If the **Phase One** **Enlistment** list of the transaction contains more than one element, or if it contains one element and the [**Single Phase Commit**](#gt_single-phase-commit) flag (defined in section [3.2.1](#Section_3.2.1)) of the transaction is set to FALSE:
 - For each **Enlistment** object in the **Phase One Voter Enlistment** list of the transaction:
-- Signal the **Begin Phase One** (see section [3.6.7.3](#Section_3.2.7.4) and section [3.7.7.2](#Section_3.2.7.4)) event on the enlistment's transaction manager facet field with the following argument:
+- Signal the **Begin Phase One** (see section [3.6.7.3](#Section_3.6.7.3) and section [3.7.7.2](#Section_3.7.7.2)) event on the enlistment's transaction manager facet field with the following argument:
 - The **Enlistment** object
 - The **Single Phase Commit** flag set to false
 <a id="Section_3.2.7.8"></a>
@@ -6442,18 +6442,18 @@ The **Create Phase Zero Enlistment** event MUST be signaled with the following a
 - An Enlistment object
 If the **Create Phase Zero Enlistment** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
 
-- If the [**transaction**](#gt_transaction) state of the **transaction** object referenced by the provided **Enlistment** object is Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)):
+- If the [**transaction**](#gt_transaction) state of the **transaction** object referenced by the provided **Enlistment** object is Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)):
 - The Core Transaction Manager Facet MUST:
-- Signal the Create Phase Zero Enlistment Success (see section [3.6.7.8](#Section_3.7.7.6) and section [3.7.7.6](#Section_3.7.7.6)) event on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the provided **Enlistment** object.
-- Signal the Begin Phase Zero (section [3.6.7.4](#Section_3.2.7.5) and section [3.7.7.3](#Section_3.2.7.5)) event on the provided Enlistment object's transaction manager facet with the provided Enlistment object.
-- Otherwise, if the transaction state is Active (section [3.2.1.3.2](#Section_3.5.1.1.5)) or Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
+- Signal the Create Phase Zero Enlistment Success (see section [3.6.7.8](#Section_3.6.7.8) and section [3.7.7.6](#Section_3.7.7.6)) event on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the provided **Enlistment** object.
+- Signal the Begin Phase Zero (section [3.6.7.4](#Section_3.6.7.4) and section [3.7.7.3](#Section_3.7.7.3)) event on the provided Enlistment object's transaction manager facet with the provided Enlistment object.
+- Otherwise, if the transaction state is Active (section [3.2.1.3.2](#Section_3.2.1.3.2)) or Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
 - If the Next [**Phase Zero Wave**](#gt_phase-zero-wave) Enlistment list of the transaction is empty:
 - Signal the Register Phase Zero (section [3.4.7.15](#Section_3.4.7.15)) event on the transaction's superior enlistment's transaction manager facet with the transaction's **Superior Enlistment** object.
 - Otherwise, if the list is nonempty and the [**Phase Zero**](#gt_phase-zero) Registered flag of the transaction is true:
 - Signal the **Create Phase Zero Enlistment Success** (section 3.6.7.8 and section 3.7.7.6) event on the enlistment object's transaction manager facet with the **Enlistment** object.
 - Add the provided enlistment to the **Next Phase Zero Wave Enlistment** list of the transaction.
 - Otherwise:
-- Signal the **Create Phase Zero Enlistment Failure** (section [3.6.7.7](#Section_3.7.7.5) and section [3.7.7.5](#Section_3.7.7.5)) event on the **Enlistment** object's transaction manager facet field with the following arguments:
+- Signal the **Create Phase Zero Enlistment Failure** (section [3.6.7.7](#Section_3.6.7.7) and section [3.7.7.5](#Section_3.7.7.5)) event on the **Enlistment** object's transaction manager facet field with the following arguments:
 - The provided **Enlistment** object
 - The Too Late reason code
 <a id="Section_3.2.7.11"></a>
@@ -6464,8 +6464,8 @@ The **Create Subordinate Enlistment** event MUST be signaled with the following 
 - An Enlistment object
 If the **Create Subordinate Enlistment** event is signaled, the [Core Transaction Manager Facet](#Section_1.3.3.3.1) MUST perform the following actions:
 
-- If the state of the [**transaction**](#gt_transaction) object referenced by the provided **Enlistment** object is not Active (section [3.2.1.3.2](#Section_3.5.1.1.5)) and not Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)) and not Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
-- Signal the Create Subordinate Enlistment Failure (see sections [3.6.7.10](#Section_3.7.7.7) and [3.7.7.7](#Section_3.7.7.7)) event on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the following arguments:
+- If the state of the [**transaction**](#gt_transaction) object referenced by the provided **Enlistment** object is not Active (section [3.2.1.3.2](#Section_3.2.1.3.2)) and not Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)) and not Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
+- Signal the Create Subordinate Enlistment Failure (see sections [3.6.7.10](#Section_3.6.7.10) and [3.7.7.7](#Section_3.7.7.7)) event on the **Enlistment** object's [**transaction manager**](#gt_transaction-manager) facet with the following arguments:
 - The provided **Enlistment** object
 - The Too Late reason code
 - Otherwise, if the **Core Transaction Manager Facet.Durable Log** is too full to accept the **transaction** object referenced by the provided **Enlistment** object:
@@ -6479,7 +6479,7 @@ If the **Create Subordinate Enlistment** event is signaled, the [Core Transactio
 - The Too Many reason code
 - Otherwise:
 - Add the provided **Enlistment** object to the transaction's [**Phase One Enlistment**](#gt_phase-one-enlistment) list.
-- Signal the Create Subordinate Enlistment Success (see sections [3.6.7.11](#Section_3.6.7.11) and [3.7.7.8](#Section_3.6.7.11)) event on the **Enlistment** object's transaction manager facet with the provided **Enlistment** object.
+- Signal the Create Subordinate Enlistment Success (see sections [3.6.7.11](#Section_3.6.7.11) and [3.7.7.8](#Section_3.7.7.8)) event on the **Enlistment** object's transaction manager facet with the provided **Enlistment** object.
 <a id="Section_3.2.7.12"></a>
 #### 3.2.7.12 Create Superior Enlistment
 
@@ -6543,8 +6543,8 @@ The **Create Voter Enlistment** event MUST be signaled with the following argume
 - An Enlistment object
 If the **Create** [**Voter**](#gt_voter) **Enlistment** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
 
-- If the state of the [**transaction**](#gt_transaction) object referenced by the provided **Enlistment** object is not Active (section [3.2.1.3.2](#Section_3.5.1.1.5)) and not Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)) and not Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
-- Signal the **Create Voter Enlistment Failure** (see section [3.4.7.9](#Section_3.6.7.12) and section[3.6.7.12](#Section_3.6.7.12)) event on the **Enlistment** object's [**Transaction Manager**](#gt_transaction-manager) facet with the following arguments:
+- If the state of the [**transaction**](#gt_transaction) object referenced by the provided **Enlistment** object is not Active (section [3.2.1.3.2](#Section_3.2.1.3.2)) and not Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)) and not Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
+- Signal the **Create Voter Enlistment Failure** (see section [3.4.7.9](#Section_3.4.7.9) and section[3.6.7.12](#Section_3.6.7.12)) event on the **Enlistment** object's [**Transaction Manager**](#gt_transaction-manager) facet with the following arguments:
 - The **Enlistment** object
 - The Too Late reason code
 - Otherwise:
@@ -6568,7 +6568,7 @@ If the **Enlistment Commit Complete** event is signaled, the Core Transaction Ma
 The **Enlistment Phase One Complete** event MUST be signaled with the following arguments:
 
 - An [**Enlistment**](#gt_enlistment) object.
-- A value indicating the enlistment's [**outcome**](#gt_outcome) for Phase One (section [1.3.1.2](#Section_3.2.1.3.7)). This value MUST be set to one of the following values:
+- A value indicating the enlistment's [**outcome**](#gt_outcome) for Phase One (section [1.3.1.2](#Section_1.3.1.2)). This value MUST be set to one of the following values:
 - Committed
 - Aborted
 - In Doubt
@@ -6597,7 +6597,7 @@ If the **Enlistment Phase One Complete** event is signaled, the Core Transaction
 - Signal the **Phase One Complete** event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
 - The transaction's **Superior Enlistment** object
 - The [**In Doubt outcome**](#gt_in-doubt-outcome)
-- Signal the Begin In Doubt (section [3.2.7.3](#Section_3.4.7.4)) event on the Core Transaction Manager Facet with the provided **transaction** object.
+- Signal the Begin In Doubt (section [3.2.7.3](#Section_3.2.7.3)) event on the Core Transaction Manager Facet with the provided **transaction** object.
 - Cease processing the event.
 - If the transaction state is Phase One or Single Phase Commit:
 - If the enlistment's **Phase One** outcome is Aborted:
@@ -6618,7 +6618,7 @@ If the **Enlistment Phase One Complete** event is signaled, the Core Transaction
 The **Enlistment Phase Zero Complete** event MUST be signaled with the following arguments:
 
 - An [**Enlistment**](#gt_enlistment) object.
-- A value indicating the enlistment's [**outcome**](#gt_outcome) for Phase Zero (section [1.3.1.1](#Section_3.7.1.1.7)). This value MUST be set to one of the following values:
+- A value indicating the enlistment's [**outcome**](#gt_outcome) for Phase Zero (section [1.3.1.1](#Section_1.3.1.1)). This value MUST be set to one of the following values:
 - Completed
 - Aborted
 If the **Enlistment Phase Zero Complete** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
@@ -6629,14 +6629,14 @@ If the **Enlistment Phase Zero Complete** event is signaled, the Core Transactio
 - If the transaction's **Phase Zero Enlistments** list is now empty:
 - Set the transaction's state to Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)).
 - If the transaction's **Doomed** flag is set to true:
-- Signal the Phase Zero Complete (section [3.8.7.6](#Section_3.2.1.3.4)) event on the transaction's Superior Enlistment's [**Transaction Manager**](#gt_transaction-manager) facet with the following arguments:
+- Signal the Phase Zero Complete (section [3.8.7.6](#Section_3.8.7.6)) event on the transaction's Superior Enlistment's [**Transaction Manager**](#gt_transaction-manager) facet with the following arguments:
 - The transaction's **Superior Enlistment** object
 - The Failure outcome
 - Signal the Notify Aborted (section [3.2.7.23](#Section_3.2.7.23)) event on the Core Transaction Manager Facet with the provided **transaction** object.
 - Otherwise:
 - If the transaction's **Root** flag is TRUE:
 - If the transaction's Next [**Phase Zero Wave**](#gt_phase-zero-wave) Enlistment list is not empty:
-- Set the transaction's **State** to Active (section [3.2.1.3.2](#Section_3.5.1.1.5)).
+- Set the transaction's **State** to Active (section [3.2.1.3.2](#Section_3.2.1.3.2)).
 - Signal the Begin Phase Zero (section [3.2.7.5](#Section_3.2.7.5)) event on the Core Transaction Manager Facet with the provided Enlistment's **transaction** object.
 - Otherwise:
 - Signal the **Phase Zero Complete** event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
@@ -6666,22 +6666,22 @@ The **Enlistment Unilaterally Aborted** event MUST be signaled with the followin
 - An [**Enlistment**](#gt_enlistment) object
 If the **Enlistment Unilaterally Aborted** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
 
-- If the [**transaction**](#gt_transaction) state is Active (section [3.2.1.3.2](#Section_3.5.1.1.5)), Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)), Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)), Voting (section [3.2.1.3.5](#Section_3.2.1.3.5)), Voting Complete (section [3.2.1.3.6](#Section_3.2.7.35)) or Phase One (section [3.2.1.3.7](#Section_3.2.1.3.7)):
+- If the [**transaction**](#gt_transaction) state is Active (section [3.2.1.3.2](#Section_3.2.1.3.2)), Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)), Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)), Voting (section [3.2.1.3.5](#Section_3.2.1.3.5)), Voting Complete (section [3.2.1.3.6](#Section_3.2.1.3.6)) or Phase One (section [3.2.1.3.7](#Section_3.2.1.3.7)):
 - Remove the provided **Enlistment** object from any of the following transaction lists in which it is present:
 - Next [**Phase Zero Wave**](#gt_phase-zero-wave) Enlistment list
 - [**Phase Zero Enlistment**](#gt_phase-zero-enlistment) list
 - [**Phase One Enlistment**](#gt_phase-one-enlistment) list
 - Phase One [**Voter**](#gt_voter) Enlistment list
 - If the transaction state is Phase Zero (section 3.2.1.3.3):
-- Signal the **Phase Zero Complete** (see sections [3.4.7.14](#Section_3.4.7.14) and [3.8.7.6](#Section_3.2.1.3.4)) event on the transaction's Superior Enlistment's [**Transaction Manager**](#gt_transaction-manager) Facet with the following arguments:
+- Signal the **Phase Zero Complete** (see sections [3.4.7.14](#Section_3.4.7.14) and [3.8.7.6](#Section_3.8.7.6)) event on the transaction's Superior Enlistment's [**Transaction Manager**](#gt_transaction-manager) Facet with the following arguments:
 - The transaction's **Superior Enlistment** object
 - The Failure [**outcome**](#gt_outcome)
 - Otherwise, if the transaction state is Voting (section 3.2.1.3.5) or Phase One (section 3.2.1.3.7):
-- Signal the **Phase One Complete** (see sections [3.4.7.13](#Section_3.4.7.13) and [3.8.7.7](#Section_3.2.1.3.8)) event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
+- Signal the **Phase One Complete** (see sections [3.4.7.13](#Section_3.4.7.13) and [3.8.7.7](#Section_3.8.7.7)) event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
 - The transaction's **Superior Enlistment** object
 - The Aborted outcome
 - Otherwise:
-- Signal the **Unilaterally Aborted** (see sections [3.4.7.23](#Section_3.4.7.23) and [3.8.7.11](#Section_3.4.7.23)) event on the transaction's Superior Enlistment's Transaction Manager facet with the transaction's **Superior Enlistment** object.
+- Signal the **Unilaterally Aborted** (see sections [3.4.7.23](#Section_3.4.7.23) and [3.8.7.11](#Section_3.8.7.11)) event on the transaction's Superior Enlistment's Transaction Manager facet with the transaction's **Superior Enlistment** object.
 - Signal the Notify Aborted (section [3.2.7.23](#Section_3.2.7.23)) event on the Core Transaction Manager Facet (section 1.3.3.3.1) with the **transaction** object referenced by the **Transaction** field of the provided **Enlistment** object.
 - Otherwise, ignore the event.
 <a id="Section_3.2.7.20"></a>
@@ -6700,7 +6700,7 @@ If the **Enlistment Vote Complete** event is signaled, the Core Transaction Mana
 - Otherwise:
 - If the Enlistment's **Vote** [**outcome**](#gt_outcome) is Aborted:
 - Set the transaction's **Doomed** flag to TRUE.
-- Remove the Enlistment from the transaction's Phase One (section [1.3.1.2](#Section_3.2.1.3.7)) [**Voter**](#gt_voter) Enlistment list.
+- Remove the Enlistment from the transaction's Phase One (section [1.3.1.2](#Section_1.3.1.2)) [**Voter**](#gt_voter) Enlistment list.
 - Signal the **Phase One Completed** event (section [3.2.7.25](#Section_3.2.7.25)) on the transaction's Superior Enlistment's [**Transaction Manager**](#gt_transaction-manager) facet with the following arguments:
 - The transaction's **Superior Enlistment** object.
 - The Aborted outcome.
@@ -6725,7 +6725,7 @@ The **Export Transaction** event MUST be signaled with the following arguments:
 - A **Name** object representing the remote [**subordinate transaction manager**](#gt_subordinate-transaction-manager)
 If the **Export Transaction** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
 
-- If the transaction state is not Active (section [3.2.1.3.2](#Section_3.5.1.1.5)), or Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)), or Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
+- If the transaction state is not Active (section [3.2.1.3.2](#Section_3.2.1.3.2)), or Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)), or Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
 - Signal the Export Transaction Failure (section [3.4.7.11](#Section_3.4.7.11)) event on the [**Transaction Manager**](#gt_transaction-manager) communicating with an Application facet with the following arguments:
 - The provided **transaction** object
 - The Too Late reason code
@@ -6734,7 +6734,7 @@ If the **Export Transaction** event is signaled, the Core Transaction Manager Fa
 - The provided **transaction** object
 - The Log Full reason code
 - Otherwise:
-- Compute the number of Enlistment objects in the transaction's [Phase One](#Section_3.2.1.3.7) Enlistment list whose Transaction Manager Facet field is the [**superior transaction manager**](#gt_superior-transaction-manager).
+- Compute the number of Enlistment objects in the transaction's [Phase One](#Section_4.5.1) Enlistment list whose Transaction Manager Facet field is the [**superior transaction manager**](#gt_superior-transaction-manager).
 - If that number is equal to an implementation-specific value that indicates the maximum allowed Transaction Manager enlistments:<28>
 - Signal the **Export Transaction Failure** event on the Transaction Manager communicating with an Application facet with the following arguments:
 - The provided **transaction** object
@@ -6766,10 +6766,10 @@ If the **Notify Aborted** event is signaled, the Core Transaction Manager Facet�
 - Set the transaction's state to Aborting (section [3.2.1.3.11](#Section_3.2.1.3.11)).
 - Move each Enlistment object in the transaction's **Next Phase Zero Wave Enlistment list** to the transaction's [**Phase Zero Enlistment**](#gt_phase-zero-enlistment) list.
 - For each **Enlistment** object in the transaction's Phase Zero Enlistment list:
-- Signal the **Phase Zero Aborted** event (see sections [3.6.7.14](#Section_3.6.7.14) and [3.7.7.9](#Section_3.6.7.14)) on the Enlistment's [**Transaction Manager**](#gt_transaction-manager) facet field with the **Enlistment** object.
-- Move each **Enlistment** object in the transaction's Phase One (section [1.3.1.2](#Section_3.2.1.3.7)) [**Voter**](#gt_voter) Enlistment list to the transaction's Phase Two (section [1.3.1.3](#Section_1.3.1.3)) Voter Enlistment list
+- Signal the **Phase Zero Aborted** event (see sections [3.6.7.14](#Section_3.6.7.14) and [3.7.7.9](#Section_3.7.7.9)) on the Enlistment's [**Transaction Manager**](#gt_transaction-manager) facet field with the **Enlistment** object.
+- Move each **Enlistment** object in the transaction's Phase One (section [1.3.1.2](#Section_1.3.1.2)) [**Voter**](#gt_voter) Enlistment list to the transaction's Phase Two (section [1.3.1.3](#Section_1.3.1.3)) Voter Enlistment list
 - For each **Enlistment** object in the transaction's **Phase Two Voter Enlistment** list:
-- Signal the **Begin Rollback** event (sections [3.4.7.5](#Section_3.4.7.5), [3.6.7.5](#Section_3.4.7.5) and [3.7.7.4](#Section_3.4.7.5)) on the Enlistment's Transaction Manager facet field with the **Enlistment** object.
+- Signal the **Begin Rollback** event (sections [3.4.7.5](#Section_3.4.7.5), [3.6.7.5](#Section_3.6.7.5) and [3.7.7.4](#Section_3.7.7.4)) on the Enlistment's Transaction Manager facet field with the **Enlistment** object.
 - Move each Enlistment object in the transaction's **Phase One Enlistment** list to the transaction's **Phase Two Enlistment** list.
 - If the transaction's [**Phase Two Enlistment**](#gt_phase-two-enlistment) list is not empty:
 - For each **Enlistment** object in the transaction's **Phase Two Enlistment** list:
@@ -6787,7 +6787,7 @@ If the **Notify Recovered Transaction Committed** event is signaled, the Core Tr
 - Set the transaction's state to Failed to Notify (section [3.2.1.3.13](#Section_3.2.1.3.13)).
 - If the **Phase Two Enlistment** list of the transaction is not empty:
 - For each **Enlistment** object in the **Phase Two Enlistment** list of the transaction:
-- Signal the [Begin Commit](#Section_3.2.7.2) event (see sections 3.4.7.3, [3.6.7.1](#Section_3.2.7.2), and [3.7.7.1](#Section_3.2.7.2)) on the enlistment's [**transaction manager**](#gt_transaction-manager) facet field with the Enlistment object.
+- Signal the [Begin Commit](#Section_3.4.7.3) event (see sections 3.4.7.3, [3.6.7.1](#Section_3.6.7.1), and [3.7.7.1](#Section_3.7.7.1)) on the enlistment's [**transaction manager**](#gt_transaction-manager) facet field with the Enlistment object.
 - Otherwise:
 - Signal the Forget Transaction (section [3.2.7.22](#Section_3.2.7.22)) event on the Core Transaction Manager Facet with the provided **transaction** object.
 <a id="Section_3.2.7.25"></a>
@@ -6800,7 +6800,7 @@ If the **Phase One Completed** event is signaled, the Core [**Transaction Manage
 
 - Set the state of the transaction to Phase One Complete (section [3.2.1.3.8](#Section_3.2.1.3.8)).
 - If both the transaction's [**Phase Two Enlistment**](#gt_phase-two-enlistment) list and the transaction's Phase Two (section [1.3.1.3](#Section_1.3.1.3)) [**Voter**](#gt_voter) [**Enlistment**](#gt_enlistment) list are empty:
-- Signal the **Phase One Complete** (see sections [3.4.7.13](#Section_3.4.7.13) and [3.8.7.7](#Section_3.2.1.3.8)) event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
+- Signal the **Phase One Complete** (see sections [3.4.7.13](#Section_3.4.7.13) and [3.8.7.7](#Section_3.8.7.7)) event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
 - The transaction's **Superior Enlistment** object
 - The Read Only [**outcome**](#gt_outcome)
 - Signal the Forget Transaction (section [3.2.7.22](#Section_3.2.7.22)) event on the Core Transaction Manager Facet's (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the provided **transaction** object.
@@ -6846,7 +6846,7 @@ The **Propagate Transaction Success** event MUST be signaled with the following 
 - An Enlistment object
 If the **Propagate Transaction Success** event is signaled, the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) MUST perform the following actions:
 
-- If the Enlistment's [**transaction**](#gt_transaction) is not Active (section [3.2.1.3.2](#Section_3.5.1.1.5)), Phase Zero (section [3.2.1.3.3](#Section_3.7.1.1.7)), or Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
+- If the Enlistment's [**transaction**](#gt_transaction) is not Active (section [3.2.1.3.2](#Section_3.2.1.3.2)), Phase Zero (section [3.2.1.3.3](#Section_3.2.1.3.3)), or Phase Zero Complete (section [3.2.1.3.4](#Section_3.2.1.3.4)):
 - Signal the Export Transaction Failure (section [3.4.7.11](#Section_3.4.7.11)) event on the [**Transaction Manager**](#gt_transaction-manager) communicating with an Application facet with the following arguments:
 - The **transaction** object referenced by the provided **Enlistment** object
 - The Too Late reason code
@@ -6865,7 +6865,7 @@ The **Register Phase Zero Failure** event MUST be signaled with the following ar
 If the **Register Phase Zero Failure** event is signaled, the Core [**Transaction Manager**](#gt_transaction-manager) MUST perform the following actions:
 
 - For each Enlistment object in the [**transaction's**](#gt_transaction) Next [**Phase Zero Wave**](#gt_phase-zero-wave) **Enlistment** list:
-- Signal the Create Phase Zero Enlistment Failure event (see sections [3.6.7.7](#Section_3.7.7.5) and [3.7.7.5](#Section_3.7.7.5)) on the **Enlistment** object's Transaction Manager facet with the following arguments:
+- Signal the Create Phase Zero Enlistment Failure event (see sections [3.6.7.7](#Section_3.6.7.7) and [3.7.7.5](#Section_3.7.7.5)) on the **Enlistment** object's Transaction Manager facet with the following arguments:
 - The **Enlistment** object
 - The provided reason code
 - Remove the **Enlistment** object from the list.
@@ -6878,7 +6878,7 @@ The **Register Phase Zero Success** event MUST be signaled with the following ar
 If the **Register Phase Zero Success** event is signaled, the Core [**Transaction Manager**](#gt_transaction-manager) MUST perform the following actions:
 
 - For each **Enlistment** object in the [**transaction's**](#gt_transaction) Next [**Phase Zero Wave**](#gt_phase-zero-wave) Enlistment list:
-- Signal the [Create Phase Zero Enlistment Success](#Section_3.7.7.6) event (see sections 3.6.7.8 and [3.7.7.6](#Section_3.7.7.6)) on the **Enlistment** object's Transaction Manager facet with the **Enlistment** object.
+- Signal the [Create Phase Zero Enlistment Success](#Section_3.6.7.8) event (see sections 3.6.7.8 and [3.7.7.6](#Section_3.7.7.6)) on the **Enlistment** object's Transaction Manager facet with the **Enlistment** object.
 - Set the [**Phase Zero**](#gt_phase-zero) Registered flag of the **transaction** object referenced by the Enlistment to TRUE.
 <a id="Section_3.2.7.30"></a>
 #### 3.2.7.30 Resolve Transaction
@@ -6951,7 +6951,7 @@ If the **Set Transaction Timeout** event is signaled, the Core Transaction Manag
 - If the transaction state is not **Active**:
 - Signal the Set Transaction Timeout Failure (section [3.4.7.21](#Section_3.4.7.21)) event on the [**Transaction Manager**](#gt_transaction-manager) communicating with an Application facet with the provided **transaction** object.
 - Otherwise:
-- Cancel the Transaction Timeout Timer (section [3.2.2.1](#Section_3.2.6.1)).
+- Cancel the Transaction Timeout Timer (section [3.2.2.1](#Section_3.2.2.1)).
 - Set the transaction **Timeout** field to the provided value.
 - Update the transaction timer's timeout value to the provided timespan value.
 - Signal the Set Transaction Timeout Success (section [3.4.7.22](#Section_3.4.7.22)) event on the Transaction Manager communicating with an Application facet with the **transaction** object.
@@ -6963,10 +6963,10 @@ If the **Set Transaction Timeout** event is signaled, the Core Transaction Manag
 - An Enlistment object
 If the **Request Transaction Outcome** event is signaled, the core [**transaction manager**](#gt_transaction-manager) MUST perform the following actions:
 
-- If the state of the [**transaction**](#gt_transaction) object referenced by the provided **Enlistment** object is Committing (section [3.2.1.3.10](#Section_3.8.1.2.12)) or Failed to Notify (section [3.2.1.3.13](#Section_3.2.1.3.13)):
-- Signal the Begin Commit (section [3.6.7.1](#Section_3.2.7.2)) event on the provided Enlistment object's transaction manager facet with the provided **Enlistment** object.
-- Otherwise, if the provided enlistment's transaction state is Aborting (section [3.2.1.3.11](#Section_3.2.1.3.11)) or Ended (section [3.2.1.3.14](#Section_3.3.1.10.3)):
-- Signal the Begin Rollback (section [3.6.7.5](#Section_3.4.7.5)) event on the provided **Enlistment** object's Transaction Manager facet with the provided **Enlistment** object.
+- If the state of the [**transaction**](#gt_transaction) object referenced by the provided **Enlistment** object is Committing (section [3.2.1.3.10](#Section_3.2.1.3.10)) or Failed to Notify (section [3.2.1.3.13](#Section_3.2.1.3.13)):
+- Signal the Begin Commit (section [3.6.7.1](#Section_3.6.7.1)) event on the provided Enlistment object's transaction manager facet with the provided **Enlistment** object.
+- Otherwise, if the provided enlistment's transaction state is Aborting (section [3.2.1.3.11](#Section_3.2.1.3.11)) or Ended (section [3.2.1.3.14](#Section_3.2.1.3.14)):
+- Signal the Begin Rollback (section [3.6.7.5](#Section_3.6.7.5)) event on the provided **Enlistment** object's Transaction Manager facet with the provided **Enlistment** object.
 - Otherwise, ignore the event.
 <a id="Section_3.2.7.34"></a>
 #### 3.2.7.34 Unenlist Phase Zero Enlistment
@@ -6994,7 +6994,7 @@ If the **Voting Complete** event is signaled, the Core Transaction Manager Facet
 - Signal the **Phase One Completed** event (section [3.2.7.25](#Section_3.2.7.25)) on the transaction's Superior Enlistment's [**Transaction Manager**](#gt_transaction-manager) facet using the following arguments:
 - The Superior Enlistment that is referenced by the provided **transaction** object
 - The Read Only [**outcome**](#gt_outcome)
-- Set the transaction State to Ended (section [3.2.1.3.14](#Section_3.3.1.10.3)).
+- Set the transaction State to Ended (section [3.2.1.3.14](#Section_3.2.1.3.14)).
 - Otherwise:
 - If the transaction's [**Single Phase Commit**](#gt_single-phase-commit) flag (defined in section [3.2.1](#Section_3.2.1)) is set to true:
 - Signal the **Phase One Complete** event on the transaction's Superior Enlistment's Transaction Manager facet with the following arguments:
@@ -7009,11 +7009,11 @@ If the **Voting Complete** event is signaled, the Core Transaction Manager Facet
 - The Prepared outcome
 - Otherwise, if the transaction's **Single Phase Commit** flag is set to TRUE and the transaction's Phase One Enlistment list contains one element:
 - Set the transaction's state to Single Phase Commit.
-- Signal the **Begin Phase One** event (see the [**Resource Manager**](#gt_resource-manager-rm) and [**Superior Transaction Manager**](#gt_superior-transaction-manager) **Begin Phase One** events in sections [3.6.7.3](#Section_3.2.7.4) and [3.7.7.2](#Section_3.2.7.4), respectively) on the enlistment's **Transaction Manager Facet** field with the following arguments:
+- Signal the **Begin Phase One** event (see the [**Resource Manager**](#gt_resource-manager-rm) and [**Superior Transaction Manager**](#gt_superior-transaction-manager) **Begin Phase One** events in sections [3.6.7.3](#Section_3.6.7.3) and [3.7.7.2](#Section_3.7.7.2), respectively) on the enlistment's **Transaction Manager Facet** field with the following arguments:
 - The **Enlistment** object
 - The **Single Phase Commit** flag set to TRUE
 - Otherwise:
-- Set the transaction's State to [Phase One](#Section_3.2.1.3.7).
+- Set the transaction's State to [Phase One](#Section_4.5.1).
 - For each **Enlistment** object in the transaction's Phase One Enlistment list:
 - Signal the **Begin Phase One** event (see the Resource Manager and Superior Transaction Manager **Begin Phase One** events in sections 3.6.7.3 and 3.7.7.2, respectively) on the enlistment's **Transaction Manager Facet** field with the following arguments:
 - The **Enlistment** object
@@ -7026,7 +7026,7 @@ If the **Voting Complete** event is signaled, the Core Transaction Manager Facet
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with the behavior that is described in this document.
 
-An [**application**](#gt_application) MUST maintain all the data elements that are specified in section [3.1.1](#Section_3.1.3.1).
+An [**application**](#gt_application) MUST maintain all the data elements that are specified in section [3.1.1](#Section_3.1.1).
 
 An application MUST extend the definition of a [**transaction**](#gt_transaction) object to include the following data elements:
 
@@ -7095,7 +7095,7 @@ This is the final state.
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 CONNTYPE_TXUSER_BEGIN2 Initiator States
 
-The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
+The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
 
 - Idle
 - Awaiting Begin Response
@@ -7409,7 +7409,7 @@ Figure 21: CONNTYPE_TXUSER_EXPORT initiator states
 
 This is the initial state. The following event is processed in this state:
 
-- Creating an Export Connection (section [3.3.4.4](#Section_3.6.1.2.2))
+- Creating an Export Connection (section [3.3.4.4](#Section_3.3.4.4))
 <a id="Section_3.3.1.8.2"></a>
 ##### 3.3.1.8.2 Awaiting Create Response
 
@@ -7458,7 +7458,7 @@ Figure 22: CONNTYPE_TXUSER_EXPORT2 initiator states
 
 This is the initial state. The following event is processed in this state:
 
-- Creating an Export Connection (section [3.3.4.4](#Section_3.6.1.2.2))
+- Creating an Export Connection (section [3.3.4.4](#Section_3.3.4.4))
 <a id="Section_3.3.1.9.2"></a>
 ##### 3.3.1.9.2 Awaiting Create Response
 
@@ -7487,7 +7487,7 @@ This is the final state.
 <a id="Section_3.3.1.10"></a>
 #### 3.3.1.10 CONNTYPE_TXUSER_GETTXDETAILS Initiator States
 
-The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1.3)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
+The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
 
 - Idle
 - Awaiting Response
@@ -7634,7 +7634,7 @@ This is the final state.
 <a id="Section_3.3.1.14"></a>
 #### 3.3.1.14 CONNTYPE_TXUSER_TRACE Initiator States
 
-The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
+The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
 
 - Idle
 - Awaiting Trace Response
@@ -7666,7 +7666,7 @@ This is the final state.
 <a id="Section_3.3.1.15"></a>
 #### 3.3.1.15 CONNTYPE_TXUSER_GETSECURITYFLAGS Initiator States
 
-The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1.1)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
+The [**application**](#gt_application) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1)) [**connection type**](#gt_connection-type). In this role, the application MUST provide support for the following states:
 
 - Idle
 - Awaiting Get Response
@@ -7682,7 +7682,7 @@ Figure 28: CONNTYPE_TXUSER_GETSECURITYFLAGS initiator states
 
 This is the initial state. The following event is processed in this state:
 
-- Obtaining the Security Configuration of the Transaction Manager Using CONNTYPE_TXUSER_GETSECURITYFLAGS (section [3.3.4.11](#Section_3.3.4.11.1))
+- Obtaining the Security Configuration of the Transaction Manager Using CONNTYPE_TXUSER_GETSECURITYFLAGS (section [3.3.4.11](#Section_3.3.4.11))
 <a id="Section_3.3.1.15.2"></a>
 ##### 3.3.1.15.2 Awaiting Get Response
 
@@ -7732,7 +7732,7 @@ If the higher-layer business logic begins a [**transaction**](#gt_transaction) w
 - The application MUST return a Failure result to the higher-layer business logic.
 If the higher-layer business logic decides to begin a transaction without using a predetermined transaction identifier, the application MUST perform the following actions:
 
-- If the transaction manager supports the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection type as specified in section 2.2.1.1.1:
+- If the transaction manager supports the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection type as specified in section 2.2.1.1.1:
 - The application MUST attempt to begin a transaction by using CONNTYPE_TXUSER_BEGIN2.
 - Otherwise:
 - The application MUST attempt to begin a transaction by using CONNTYPE_TXUSER_BEGINNER (section [2.2.8.1.1](#Section_2.2.8.1.1)).
@@ -7741,9 +7741,9 @@ If the higher-layer business logic decides to begin a transaction without using 
 
 The application MUST perform the following actions:
 
-- Initiate a new CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection using the transaction manager **Name** field of the application.
+- Initiate a new CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection using the transaction manager **Name** field of the application.
 - Send a TXUSER_BEGIN2_MTAG_BEGIN (section [2.2.8.1.2.2](#Section_2.2.8.1.2.2)) message using the connection and the values that are provided by the higher-layer business logic:
-- The **isoLevel**, **dwTimeout**, **szDesc**, and **isoFlags** fields MUST be set as specified in section [2.2.8](#Section_2.2.6.1).
+- The **isoLevel**, **dwTimeout**, **szDesc**, and **isoFlags** fields MUST be set as specified in section [2.2.8](#Section_2.2.8).
 - Set the connection state to Awaiting Begin Response.
 <a id="Section_3.3.4.1.2"></a>
 ##### 3.3.4.1.2 Beginning a Transaction Using CONNTYPE_TXUSER_BEGINNER
@@ -7778,10 +7778,10 @@ If the higher-layer business logic changes the time-out of an existing [**transa
 - If the **Root** field of the transaction is false:
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
-- If the [**root transaction manager**](#gt_root-transaction-manager) supports the CONNTYPE_TXUSER_SETTXTIMEOUT2 (section [3.3.1.13](#Section_3.3.1.13.3)) [**connection type**](#gt_connection-type), as specified in section [2.2.1.1.1](#Section_2.2.1.1.1):
+- If the [**root transaction manager**](#gt_root-transaction-manager) supports the CONNTYPE_TXUSER_SETTXTIMEOUT2 (section [3.3.1.13](#Section_3.3.1.13)) [**connection type**](#gt_connection-type), as specified in section [2.2.1.1.1](#Section_2.2.1.1.1):
 - The application MUST attempt to change the transaction time-out by using CONNTYPE_TXUSER_SETTXTIMEOUT2 (section 3.3.1.13).
 - Otherwise:
-- The application MUST attempt to change the transaction time-out by using CONNTYPE_TXUSER_SETTXTIMEOUT (section [3.3.1.12](#Section_3.3.1.12.2)).
+- The application MUST attempt to change the transaction time-out by using CONNTYPE_TXUSER_SETTXTIMEOUT (section [3.3.1.12](#Section_3.3.1.12)).
 <a id="Section_3.3.4.2.1"></a>
 ##### 3.3.4.2.1 Changing a Transaction Timeout Using CONNTYPE_TXUSER_SETTXTIMEOUT
 
@@ -7803,7 +7803,7 @@ The application MUST perform the following actions:
 
 The application MUST perform the following steps:
 
-- Find an instance of a CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection in the connection list of the transaction. This connection is referred to as the beginner connection.
+- Find an instance of a CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection in the connection list of the transaction. This connection is referred to as the beginner connection.
 - If a connection is not found:
 - The application MUST return a failure result to the higher-layer business logic.
 - Otherwise, if the connection state is not Processing Transaction (section [3.3.1.2.3](#Section_3.3.1.2.3)) or Processing Transaction (section [3.3.1.3.3](#Section_3.3.1.3.3)):
@@ -7822,7 +7822,7 @@ The application MUST perform the following steps:
 
 If the higher-layer business logic decides to obtain a [Propagation Token](#Section_3.3.4.3) for a [**transaction**](#gt_transaction), the [**application**](#gt_application) MUST perform the following actions:
 
-- Find a [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3), [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1), or [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) connection in the transaction connection list.
+- Find a [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3), [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1), or [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) connection in the transaction connection list.
 - If the [**connection**](#gt_connection) is not found,
 - The application MUST return a failure result to the higher-layer business logic.
 - Otherwise,
@@ -7873,7 +7873,7 @@ If the higher-layer business logic initiates a [**push propagation**](#gt_push-p
 
 If the higher-layer business logic specifies that [**transaction**](#gt_transaction) trace records are to be generated to the trace file of the [**transaction manager**](#gt_transaction-manager) for the higher-layer business logic specified transaction object, the [**application**](#gt_application) MUST perform the following steps:
 
-- Initiate a new CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) [**connection**](#gt_connection) by using the **Transaction Manager Name** field of the application.
+- Initiate a new CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5)) [**connection**](#gt_connection) by using the **Transaction Manager Name** field of the application.
 - Send a TXUSER_TRACE_MTAG_DUMP_TRANSACTION (section [2.2.8.3.5.1](#Section_2.2.8.3.5.1)) message:
 - The **guidTx** field MUST be set to the **Transaction Object.Identifier** of the provided transaction.
 - Set the connection state to Awaiting Trace Response.
@@ -7938,7 +7938,7 @@ If the higher-layer business logic specifies that a [**transaction**](#gt_transa
 
 If the higher-layer business logic initiates the commit of an existing [**transaction**](#gt_transaction), the [**application**](#gt_application) MUST perform the following steps:
 
-- Find a [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3), [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1), or [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) connection in the transaction connection list.
+- Find a [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3), [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1), or [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) connection in the transaction connection list.
 - If a CONNTYPE_TXUSER_PROMOTE is found:
 - The application MUST attempt to complete the transaction by using CONNTYPE_TXUSER_PROMOTE.
 - Otherwise, if a CONNTYPE_TXUSER_BEGINNER is found:
@@ -7955,7 +7955,7 @@ The application MUST perform the following actions:
 - If the [**connection**](#gt_connection) state is not Processing Transaction:
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
-- Send a TXUSER_BEGIN2_MTAG_COMMIT (section [2.2.8.1.2.3](#Section_2.2.8.1.2.3)) message using the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection:
+- Send a TXUSER_BEGIN2_MTAG_COMMIT (section [2.2.8.1.2.3](#Section_2.2.8.1.2.3)) message using the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection:
 - Set the connection state to Awaiting Commit Response.
 <a id="Section_3.3.4.8.2"></a>
 ##### 3.3.4.8.2 Commit a Transaction Using CONNTYPE_TXUSER_BEGINNER
@@ -7985,7 +7985,7 @@ The application MUST perform the following actions:
 
 If the higher-layer business logic initiates the [**rollback**](#gt_rollback) of an existing [**transaction**](#gt_transaction), the [**application**](#gt_application) MUST perform the following steps:
 
-- Find a [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3), [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4), [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1), [CONNTYPE_TXUSER_IMPORT2](#Section_2.2.8.2.2.5), or [CONNTYPE_TXUSER_IMPORT](#Section_2.2.8.2.2.4) [**connection**](#gt_connection) in the transaction connection list.
+- Find a [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3), [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2), [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1), [CONNTYPE_TXUSER_IMPORT2](#Section_2.2.8.2.2.5), or [CONNTYPE_TXUSER_IMPORT](#Section_2.2.8.2.2.4) [**connection**](#gt_connection) in the transaction connection list.
 - If a CONNTYPE_TXUSER_PROMOTE is found:
 - The application MUST attempt to roll back a transaction by using CONNTYPE_TXUSER_PROMOTE.
 - Otherwise, if a CONNTYPE_TXUSER_BEGIN2 is found:
@@ -8005,7 +8005,7 @@ The application MUST perform the following actions:
 - If the connection state is not Processing Transaction:
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
-- Send a TXUSER_BEGIN2_MTAG_ABORT (section [2.2.8.1.2.1](#Section_2.2.8.1.2.1)) message using the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection.
+- Send a TXUSER_BEGIN2_MTAG_ABORT (section [2.2.8.1.2.1](#Section_2.2.8.1.2.1)) message using the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection.
 - Set the connection state to Awaiting Abort Response.
 <a id="Section_3.3.4.9.2"></a>
 ##### 3.3.4.9.2 Abort a Transaction Using CONNTYPE_TXUSER_BEGINNER
@@ -8062,7 +8062,7 @@ If the higher-layer business logic wants to obtain [**extended whereabouts**](#g
 
 If the higher-layer business logic wants to obtain the security configuration of the [**transaction manager**](#gt_transaction-manager), the [**application**](#gt_application) MUST perform the following steps:
 
-- Initiate a new CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1.1)) [**connection**](#gt_connection) by using the **Transaction Manager Name** field of the application.
+- Initiate a new CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1)) [**connection**](#gt_connection) by using the **Transaction Manager Name** field of the application.
 - Send a TXUSER_GETSECURITYFLAGS_MTAG_GETSECURITYFLAGS (section [2.2.8.4.1.2](#Section_2.2.8.4.1.2)) message.
 - Set the connection state to Awaiting Get Response.
 <a id="Section_3.3.4.11.1"></a>
@@ -8070,7 +8070,7 @@ If the higher-layer business logic wants to obtain the security configuration of
 
 If the higher-layer business logic wants to obtain the details for a [**transaction**](#gt_transaction), the [**application**](#gt_application) MUST perform the following steps:
 
-- Initiate a new CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1.3)) [**connection**](#gt_connection) by using the **Transaction Manager Name** field of the application.
+- Initiate a new CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1)) [**connection**](#gt_connection) by using the **Transaction Manager Name** field of the application.
 - Add the connection to the connection list of the transaction.
 - Send a TXUSER_GETTXDETAILS_MTAG_GET (section [2.2.8.3.1.1](#Section_2.2.8.3.1.1)) message using the connection:
 - The **guidTx** field MUST be set to the provided **Transaction Object.Identifier**.
@@ -8078,7 +8078,7 @@ If the higher-layer business logic wants to obtain the details for a [**transact
 <a id="Section_3.3.4.12"></a>
 #### 3.3.4.12 Pulling a Transaction
 
-If the higher-layer business logic wants to perform [**pull propagation**](#gt_pull-propagation) of a [**transaction**](#gt_transaction) by using a Propagation_Token (section [2.2.5.4](#Section_3.3.4.3)) structure, the [**application**](#gt_application) MUST perform the following actions:
+If the higher-layer business logic wants to perform [**pull propagation**](#gt_pull-propagation) of a [**transaction**](#gt_transaction) by using a Propagation_Token (section [2.2.5.4](#Section_2.2.5.4)) structure, the [**application**](#gt_application) MUST perform the following actions:
 
 - Initiate a new [CONNTYPE_TXUSER_ASSOCIATE](#Section_2.2.8.2.1.1) [**connection**](#gt_connection) using the **Transaction Manager Name** field of the application.
 - Create a new transaction object that uses the **guidTx** field of the **Propagation_Token** as the [**transaction identifier**](#gt_transaction-identifier).
@@ -8160,7 +8160,7 @@ If the higher-layer business logic determines that it needs to manually resolve 
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 CONNTYPE_TXUSER_BEGINNER as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules that are specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.3.5.1.1.1"></a>
 ###### 3.3.5.1.1.1 Receiving a TXUSER_BEGINNER_MTAG_BEGUN Message
@@ -8228,11 +8228,11 @@ When a CONNTYPE_TXUSER_BEGINNER (section [2.2.8.1.1](#Section_2.2.8.1.1)) conn
 - Return a transaction aborted result to the higher-layer business logic.
 - If the connection state is Awaiting Commit Response:
 - Return a transaction In Doubt (section [3.2.1.3.12](#Section_3.2.1.3.12)) result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 CONNTYPE_TXUSER_BEGIN2 as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules that are specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.3.5.1.2.1"></a>
 ###### 3.3.5.1.2.1 Receiving a TXUSER_BEGIN2_MTAG_SINK_BEGUN Message
@@ -8310,7 +8310,7 @@ When the application receives a [TXUSER_BEGIN2_MTAG_SINK_ERROR](#Section_2.2.8.1
 <a id="Section_3.4.5.2.1.1.2"></a>
 ###### 3.3.5.1.2.6 Connection Disconnected
 
-When a [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) connection is disconnected, the application MUST perform the following actions:
+When a [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) connection is disconnected, the application MUST perform the following actions:
 
 - If the connection state is Awaiting Begin Response:
 - Return a failure result to the higher-layer business logic.
@@ -8318,11 +8318,11 @@ When a [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) connection is disconnected
 - Return a transaction aborted result to the higher-layer business logic.
 - If the connection state is Awaiting Commit Response:
 - Return a transaction In Doubt (section [3.2.1.3.12](#Section_3.2.1.3.12)) result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.1.3"></a>
 ##### 3.3.5.1.3 CONNTYPE_TXUSER_PROMOTE as Initiator
 
-Unless stated otherwise in this section, the CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) [**connection type**](#gt_connection-type) that is acting as an [**initiator**](#gt_initiator) MUST follow the same message processing rules as the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection type that is acting as an initiator, as specified in CONNTYPE_TXUSER_BEGIN2 as Initiator (section [3.3.5.1.2](#Section_3.3.5.1.2.1)).
+Unless stated otherwise in this section, the CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) [**connection type**](#gt_connection-type) that is acting as an [**initiator**](#gt_initiator) MUST follow the same message processing rules as the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection type that is acting as an initiator, as specified in CONNTYPE_TXUSER_BEGIN2 as Initiator (section [3.3.5.1.2](#Section_3.3.5.1.2)).
 
 <a id="Section_3.3.5.1.3.1"></a>
 ###### 3.3.5.1.3.1 Receiving a TXUSER_BEGIN2_MTAG_SINK_BEGUN Message
@@ -8359,7 +8359,7 @@ When the application receives a TXUSER_BEGIN2_MTAG_SINK_ERROR message, the appli
 <a id="Section_3.3.5.2.1.1"></a>
 ###### 3.3.5.2.1.1 CONNTYPE_TXUSER_ASSOCIATE as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the messages as specified in section [3.1](#Section_1.3).
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the messages as specified in section [3.1](#Section_3.1).
 
 The application MUST also follow the processing rules that are specified in the following sections.
 
@@ -8410,14 +8410,14 @@ When a CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1))
 
 - If the connection state is Awaiting Associate Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Push Propagation
 
 <a id="Section_3.3.5.2.2.1"></a>
 ###### 3.3.5.2.2.1 CONNTYPE_TXUSER_EXTENDEDWHEREABOUTS as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.2.2.1.1"></a>
 Receiving a TXUSER_EXTENDEDWHEREABOUTS_MTAG_GOT Message
@@ -8448,11 +8448,11 @@ When a CONNTYPE_TXUSER_EXTENDEDWHEREABOUTS (section [2.2.8.2.2.1](#Section_2.2
 
 - If the connection state is Awaiting Get Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.2.2.2"></a>
 ###### 3.3.5.2.2.2 CONNTYPE_TXUSER_EXPORT as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.2.2.2.1"></a>
 Receiving a TXUSER_EXPORT_MTAG_CREATED Message
@@ -8501,11 +8501,11 @@ When a CONNTYPE_TXUSER_EXPORT (section [2.2.8.2.2.2](#Section_2.2.8.2.2.2)) co
 
 - If the connection state is Awaiting Create Response or Awaiting Export Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.2.2.3"></a>
 ###### 3.3.5.2.2.3 CONNTYPE_TXUSER_EXPORT2 as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.2.2.3.1"></a>
 Receiving a TXUSER_EXPORT_MTAG_CREATED Message
@@ -8534,11 +8534,11 @@ When a CONNTYPE_TXUSER_EXPORT2 (section [2.2.8.2.2.3](#Section_2.2.8.2.2.3)) c
 
 - If the connection state is Awaiting Create Response or Awaiting Export Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.2.2.4"></a>
 ###### 3.3.5.2.2.4 CONNTYPE_TXUSER_IMPORT as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the messages as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the messages as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.2.2.4.1"></a>
 Receiving a TXUSER_IMPORT_MTAG_IMPORTED Message
@@ -8583,11 +8583,11 @@ When a CONNTYPE_TXUSER_IMPORT (section [2.2.8.2.2.4](#Section_2.2.8.2.2.4)) co
 
 - If the connection state is Awaiting Import Response or Awaiting Abort Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.2.2.5"></a>
 ###### 3.3.5.2.2.5 CONNTYPE_TXUSER_IMPORT2 as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the messages as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the messages as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.2.2.5.1"></a>
 Receiving a TXUSER_IMPORT2_MTAG_SINK_IMPORTED Message
@@ -8629,14 +8629,14 @@ When a CONNTYPE_TXUSER_IMPORT2 (section [2.2.8.2.2.5](#Section_2.2.8.2.2.5)) c
 
 - If the connection state is Awaiting Import Response or Awaiting Abort Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Transaction Administration
 
 <a id="Section_3.3.5.3.1"></a>
 ##### 3.3.5.3.1 CONNTYPE_TXUSER_GETTXDETAILS as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.3.1.1"></a>
 ###### 3.3.5.3.1.1 Receiving a TXUSER_GETTXDETAILS_MTAG_GOTIT Message
@@ -8664,15 +8664,15 @@ When the application receives a [TXUSER_GETTXDETAILS_MTAG_TX_NOT_FOUND](#Section
 <a id="Section_3.4.5.2.2.3.4"></a>
 ###### 3.3.5.3.1.3 CONNTYPE_TXUSER_GETTXDETAILS Connection Disconnected
 
-When a CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1.3)) connection is disconnected, the application MUST perform the following actions:
+When a CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1)) connection is disconnected, the application MUST perform the following actions:
 
 - If the connection state is Awaiting Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.3.2"></a>
 ##### 3.3.5.3.2 CONNTYPE_TXUSER_RESOLVE as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the message as specified in section [3.1.1](#Section_3.1.3.1). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the message as specified in section [3.1.1](#Section_3.1.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.3.2.1"></a>
 ###### 3.3.5.3.2.1 Receiving a TXUSER_RESOLVE_MTAG_REQUEST_COMPLETE Message
@@ -8718,11 +8718,11 @@ When a [CONNTYPE_TXUSER_RESOLVE](#Section_2.2.8.3.2) connection is disconnected,
 
 - If the connection state is Awaiting Abort Response, Awaiting Commit Response, or Awaiting Forget Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.3.3"></a>
 ##### 3.3.5.3.3 CONNTYPE_TXUSER_SETTXTIMEOUT as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.3.3.1"></a>
 ###### 3.3.5.3.3.1 Receiving a TXUSER_SETTXTIMEOUT_MTAG_REQUEST_COMPLETE Message
@@ -8750,11 +8750,11 @@ When a [CONNTYPE_TXUSER_SETTXTIMEOUT](#Section_2.2.8.3.3) connection is disconne
 
 - If the connection state is Awaiting Set Timeout Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.3.4"></a>
 ##### 3.3.5.3.4 CONNTYPE_TXUSER_SETTXTIMEOUT2 as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.3.4.1"></a>
 ###### 3.3.5.3.4.1 Receiving a TXUSER_SETTXTIMEOUT_MTAG_TX_NOT_FOUND Message
@@ -8762,7 +8762,7 @@ For all messages that are received in this [**connection type**](#gt_connection-
 When the application receives a TXUSER_SETTXTIMEOUT_MTAG_TX_NOT_FOUND (section [2.2.8.3.3.1](#Section_2.2.8.3.3.1)) message, the application MUST perform the following actions:
 
 - If the [**connection**](#gt_connection) state is Awaiting Set Timeout Response:
-- Find an instance of a CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection in the [**transaction**](#gt_transaction) connection list. This connection is referred to as the beginner connection.
+- Find an instance of a CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection in the [**transaction**](#gt_transaction) connection list. This connection is referred to as the beginner connection.
 - If a beginner connection is not found:
 - The application MUST return a failure result to the higher-layer business logic.
 - Otherwise, if the beginner connection state is not Awaiting Set Timeout Response:
@@ -8780,11 +8780,11 @@ When a [CONNTYPE_TXUSER_SETTXTIMEOUT2](#Section_2.2.8.3.4) connection is disconn
 
 - If the connection state is Awaiting Set Timeout Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2)
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3)
 <a id="Section_3.3.5.3.5"></a>
 ##### 3.3.5.3.5 CONNTYPE_TXUSER_TRACE as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_1.3). The application MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**application**](#gt_application) MUST process the message as specified in section [3.1](#Section_3.1). The application MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.3.5.1"></a>
 ###### 3.3.5.3.5.1 Receiving a TXUSER_TRACE_MTAG_REQUEST_COMPLETE Message
@@ -8808,18 +8808,18 @@ When the application receives one of these messages, the application MUST perfor
 <a id="Section_3.7.5.1.2.1.9"></a>
 ###### 3.3.5.3.5.3 Connection Disconnected
 
-When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) connection is disconnected, the application MUST perform the following actions:
+When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5)) connection is disconnected, the application MUST perform the following actions:
 
 - If the connection state is Awaiting Trace Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Transaction Manager Administration
 
 <a id="Section_3.3.5.4.1"></a>
 ##### 3.3.5.4.1 CONNTYPE_TXUSER_GETSECURITYFLAGS as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the message as specified in section [3.1](#Section_1.3). The [**transaction manager**](#gt_transaction-manager) MUST also follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the application MUST process the message as specified in section [3.1](#Section_3.1). The [**transaction manager**](#gt_transaction-manager) MUST also follow the processing rules as specified in the following sections.
 
 <a id="Section_3.3.5.4.1.1"></a>
 ###### 3.3.5.4.1.1 Receiving a TXUSER_GETSECURITYFLAGS _MTAG_FETCHED Message
@@ -8836,11 +8836,11 @@ When the application receives a TXUSER_GETSECURITYFLAGS_MTAG_FETCHED (section 
 <a id="Section_3.7.5.2.1.1.2"></a>
 ###### 3.3.5.4.1.2 CONNTYPE_TXUSER_GETSECURITYFLAGS Connection Disconnected
 
-When a CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1.1)) connection is disconnected, the application MUST perform the following actions:
+When a CONNTYPE_TXUSER_GETSECURITYFLAGS (section [2.2.8.4.1](#Section_2.2.8.4.1)) connection is disconnected, the application MUST perform the following actions:
 
 - If the connection state is Awaiting Get Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
 
@@ -8864,7 +8864,7 @@ The [**transaction manager**](#gt_transaction-manager) communicating with an [**
 The transaction manager communicating with an application facet MUST also maintain the following data elements:
 
 - **Associates Table**: A table where each object is a list of [**connection**](#gt_connection) objects of type CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1)), keyed by the identifier of the [**transaction**](#gt_transaction) with which the connections are associated. All connection objects in each list reference the same transaction object, and there is only one list per transaction in the **Associates Table**.
-Enlistment objects that are created by the transaction manager communicating with an application facet MUST provide the following properties, as specified in section [3.1.1](#Section_3.1.3.1):
+Enlistment objects that are created by the transaction manager communicating with an application facet MUST provide the following properties, as specified in section [3.1.1](#Section_3.1.1):
 
 - **Name**: An empty string
 - **Enlistment Object.Identifier**: An empty string
@@ -8930,7 +8930,7 @@ This is the final state.
 <a id="Section_3.4.1.2"></a>
 #### 3.4.1.2 CONNTYPE_TXUSER_BEGIN2 Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
 
 - Idle
 - Beginning Transaction
@@ -9094,8 +9094,8 @@ The following events are processed in this state:
 
 The following events are processed in this state:
 
-- Begin Voting (section [3.4.7.6](#Section_3.2.7.7)).
-- Begin Commit (section [3.4.7.3](#Section_3.2.7.2))
+- Begin Voting (section [3.4.7.6](#Section_3.4.7.6)).
+- Begin Commit (section [3.4.7.3](#Section_3.4.7.3))
 - Begin Rollback (section [3.4.7.5](#Section_3.4.7.5))
 - Begin In Doubt (section [3.4.7.4](#Section_3.4.7.4))
 <a id="Section_3.4.1.4.4"></a>
@@ -9162,15 +9162,15 @@ This is the initial state. The following event is processed in this state:
 The following events are processed in this state:
 
 - Create Voter Enlistment Success (section [3.4.7.10](#Section_3.4.7.10))
-- Create Voter Enlistment Failure (section [3.4.7.9](#Section_3.6.7.12))
+- Create Voter Enlistment Failure (section [3.4.7.9](#Section_3.4.7.9))
 <a id="Section_3.4.1.6.3"></a>
 ##### 3.4.1.6.3 Active
 
 The following events are processed in this state:
 
 - Receiving a TXUSER_IMPORT_MTAG_ABORT Message (section [3.4.5.2.2.4.2](#Section_3.4.5.2.2.4.2))
-- Begin Voting (section [3.4.7.6](#Section_3.2.7.7))
-- Begin Commit (section [3.4.7.3](#Section_3.2.7.2))
+- Begin Voting (section [3.4.7.6](#Section_3.4.7.6))
+- Begin Commit (section [3.4.7.3](#Section_3.4.7.3))
 - Begin Rollback (section [3.4.7.5](#Section_3.4.7.5))
 - Begin In Doubt (section [3.4.7.4](#Section_3.4.7.4))
 <a id="Section_3.4.1.6.4"></a>
@@ -9180,7 +9180,7 @@ The following events are processed in this state:
 
 - Receiving a TXUSER_IMPORT_MTAG_ABORT Message (section [3.4.5.2.2.4.2](#Section_3.4.5.2.2.4.2))
 - Begin Rollback (section [3.4.7.5](#Section_3.4.7.5))
-- Begin Commit (section [3.4.7.3](#Section_3.2.7.2))
+- Begin Commit (section [3.4.7.3](#Section_3.4.7.3))
 - Begin In Doubt (section [3.4.7.4](#Section_3.4.7.4))
 <a id="Section_3.4.1.6.5"></a>
 ##### 3.4.1.6.5 Processing Abort Request
@@ -9224,15 +9224,15 @@ The following events are processed in this state:
 - Set Transaction Attributes Success (section [3.4.7.20](#Section_3.4.7.20))
 - Set Transaction Attributes Failure (section [3.4.7.19](#Section_3.4.7.19))
 - Create Voter Enlistment Success (section [3.4.7.10](#Section_3.4.7.10))
-- Create Voter Enlistment Failure (section [3.4.7.9](#Section_3.6.7.12))
+- Create Voter Enlistment Failure (section [3.4.7.9](#Section_3.4.7.9))
 <a id="Section_3.4.1.7.3"></a>
 ##### 3.4.1.7.3 Active
 
 The following events are processed in this state:
 
 - Receiving a TXUSER_IMPORT2_MTAG_ABORT message (section [3.4.5.2.2.5.3](#Section_3.4.5.2.2.5.3))
-- Begin Voting (section [3.4.7.6](#Section_3.2.7.7))
-- Begin Commit (section [3.4.7.3](#Section_3.2.7.2))
+- Begin Voting (section [3.4.7.6](#Section_3.4.7.6))
+- Begin Commit (section [3.4.7.3](#Section_3.4.7.3))
 - Begin Rollback (section [3.4.7.5](#Section_3.4.7.5))
 - Begin In Doubt (section [3.4.7.4](#Section_3.4.7.4))
 <a id="Section_3.4.1.7.4"></a>
@@ -9241,7 +9241,7 @@ The following events are processed in this state:
 The following events are processed in this state:
 
 - Receiving a TXUSER_IMPORT2_MTAG_ABORT message (section [3.4.5.2.2.5.3](#Section_3.4.5.2.2.5.3))
-- Begin Commit (section [3.4.7.3](#Section_3.2.7.2))
+- Begin Commit (section [3.4.7.3](#Section_3.4.7.3))
 - Begin Rollback (section [3.4.7.5](#Section_3.4.7.5))
 - Begin In Doubt (section [3.4.7.4](#Section_3.4.7.4))
 <a id="Section_3.4.1.7.5"></a>
@@ -9351,7 +9351,7 @@ This is the final state.
 <a id="Section_3.4.1.10"></a>
 #### 3.4.1.10 CONNTYPE_TXUSER_GETTXDETAILS Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_GETTXDETAILS](#Section_2.2.8.3.1.3) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_GETTXDETAILS](#Section_2.2.8.3.1) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
 
 - Idle
 - Processing Inquiry
@@ -9493,7 +9493,7 @@ This is the final state.
 <a id="Section_3.4.1.14"></a>
 #### 3.4.1.14 CONNTYPE_TXUSER_TRACE Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_TRACE](#Section_2.2.8.3.5.2) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_TRACE](#Section_2.2.8.3.5) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
 
 - Idle
 - Processing Trace Request
@@ -9523,7 +9523,7 @@ This is the final state.
 <a id="Section_3.4.1.15"></a>
 #### 3.4.1.15 CONNTYPE_TXUSER_GETSECURITYFLAGS Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_GETSECURITYFLAGS](#Section_2.2.8.4.1.1) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) MUST act as an [**acceptor**](#gt_acceptor) for the [CONNTYPE_TXUSER_GETSECURITYFLAGS](#Section_2.2.8.4.1) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with an application MUST provide support for the following states:
 
 - Idle
 - Processing Request
@@ -9562,13 +9562,13 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 
 - The transaction manager communicating with an application facet MUST examine the following security flags on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) and perform the following actions:
 - If the Allow Network Access flag is set to false:
-- For all [**Connection**](#gt_connection) types listed in [3.4.1](../MS-CMP/MS-CMP.md), the transaction manager communicating with an application facet MUST refuse to accept incoming Connections from remote machines as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
+- For all [**Connection**](#gt_connection) types listed in [3.4.1](#Section_3.4.1), the transaction manager communicating with an application facet MUST refuse to accept incoming Connections from remote machines as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
 - Otherwise:
 - If the Allow Remote Clients flag is set to false:
 - For the following Connection types, the transaction manager communicating with an application facet MUST refuse to accept incoming Connection from remote machines as specified in [MS-CMP] section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
 - [CONNTYPE_TXUSER_ASSOCIATE](#Section_2.2.8.2.1.1)
 - [CONNTYPE_TXUSER_BEGINNER](#Section_2.2.8.1.1)
-- [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4)
+- [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2)
 - [CONNTYPE_TXUSER_EXPORT](#Section_2.2.8.2.2.2)
 - [CONNTYPE_TXUSER_EXPORT2](#Section_2.2.8.2.2.3)
 - [CONNTYPE_TXUSER_IMPORT](#Section_2.2.8.2.2.4)
@@ -9576,9 +9576,9 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 - [CONNTYPE_TXUSER_PROMOTE](#Section_2.2.8.1.3)
 - If Allow Remote Administration flag is set to false:
 - For the following connection types, the transaction manager communicating with an application facet MUST refuse to accept incoming Connections from remote machines as specified in [MS-CMP] section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
-- [CONNTYPE_TXUSER_GETTXDETAILS](#Section_2.2.8.3.1.3)
+- [CONNTYPE_TXUSER_GETTXDETAILS](#Section_2.2.8.3.1)
 - [CONNTYPE_TXUSER_RESOLVE](#Section_2.2.8.3.2)
-- [CONNTYPE_TXUSER_TRACE](#Section_2.2.8.3.5.2)
+- [CONNTYPE_TXUSER_TRACE](#Section_2.2.8.3.5)
 All data elements maintained by the transaction manager communicating with an application facet are initialized to an empty value unless stated otherwise in this section or in the initialization sections of the facets the transaction manager communicating with an application facet extends, as specified in section 3.4.1.
 
 <a id="Section_3.4.4"></a>
@@ -9595,7 +9595,7 @@ No higher-layer triggered events apply here.
 <a id="Section_3.4.5.1.1"></a>
 ##### 3.4.5.1.1 CONNTYPE_TXUSER_BEGINNER as Acceptor
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with an application facet MUST also follow the processing rules that are specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with an application facet MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.4.5.1.1.1"></a>
 ###### 3.4.5.1.1.1 Receiving a TXUSER_BEGINNER_MTAG_BEGIN Message
@@ -9644,7 +9644,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 
 - If the connection state is Active:
 - Set the connection state to Aborting Transaction.
-- Signal the Begin Rollback (section [3.2.7.6](#Section_3.4.7.5)) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the transaction object referenced by the Enlistment object referenced by this connection.
+- Signal the Begin Rollback (section [3.2.7.6](#Section_3.2.7.6)) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the transaction object referenced by the Enlistment object referenced by this connection.
 - If the connection state is Aborting Transaction:
 - Send a [TXUSER_BEGINNER_MTAG_REQUEST_COMPLETED](#Section_2.2.8.1.1.9) message using the connection.
 - Set the connection state to Ended.
@@ -9656,12 +9656,12 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 When a CONNTYPE_TXUSER_BEGINNER (section [2.2.8.1.1](#Section_2.2.8.1.1)) connection is disconnected, the transaction manager communicating with an application facet MUST perform the following actions:
 
 - If the connection state is Active (section [3.4.1.1.3](#Section_3.4.1.1.3)):
-- Signal the Begin Rollback (section [3.2.7.6](#Section_3.4.7.5)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the transaction object referenced by the Enlistment object referenced by this connection.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Signal the Begin Rollback (section [3.2.7.6](#Section_3.2.7.6)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the transaction object referenced by the Enlistment object referenced by this connection.
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.4.5.1.2"></a>
 ##### 3.4.5.1.2 CONNTYPE_TXUSER_BEGIN2 as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.1.2.1"></a>
 ###### 3.4.5.1.2.1 Receiving a TXUSER_BEGIN2_MTAG_BEGIN Message
@@ -9718,21 +9718,21 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 
 - If the connection state is Active:
 - Set the connection state to Aborting Transaction.
-- Signal the Begin Rollback (section [3.2.7.6](#Section_3.4.7.5)) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the transaction object referenced by the Enlistment object referenced by this connection.
+- Signal the Begin Rollback (section [3.2.7.6](#Section_3.2.7.6)) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the transaction object referenced by the Enlistment object referenced by this connection.
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.4.5.1.2.5"></a>
 <a id="Section_3.8.5.1.2.1.10"></a>
 ###### 3.4.5.1.2.5 Connection Disconnected
 
-When a CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the following actions:
+When a CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the following actions:
 
 - If the connection state is Active (section [3.4.1.2.3](#Section_3.4.1.2.3)):
-- Signal the Begin Rollback (section [3.2.7.6](#Section_3.4.7.5)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the transaction object referenced by the Enlistment object referenced by this connection.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Signal the Begin Rollback (section [3.2.7.6](#Section_3.2.7.6)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the transaction object referenced by the Enlistment object referenced by this connection.
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.4.5.1.3"></a>
 ##### 3.4.5.1.3 CONNTYPE_TXUSER_PROMOTE as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.1.3.1"></a>
 ###### 3.4.5.1.3.1 Receiving a TXUSER_BEGINNER_MTAG_PROMOTE Message
@@ -9763,13 +9763,13 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 <a id="Section_3.4.5.1.3.2"></a>
 ###### 3.4.5.1.3.2 Receiving a TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT, TXUSER_BEGIN2_MTAG_COMMIT, or TXUSER_BEGIN2_MTAG_ABORT Message
 
-When the [**transaction manager**](#gt_transaction-manager) communicating with an application facet receives one of these messages, it MUST follow the same message-processing rules as the CONNTYPE_TXUSER_BEGIN2 connection type acting as an acceptor, as specified in section [3.4.5.1.2](#Section_3.4.5.1.2.3).
+When the [**transaction manager**](#gt_transaction-manager) communicating with an application facet receives one of these messages, it MUST follow the same message-processing rules as the CONNTYPE_TXUSER_BEGIN2 connection type acting as an acceptor, as specified in section [3.4.5.1.2](#Section_3.4.5.1.2).
 
 <a id="Section_3.4.5.1.3.3"></a>
 <a id="Section_3.8.5.2.2.1.2"></a>
 ###### 3.4.5.1.3.3 Connection Disconnected
 
-When a CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the same actions as the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) connection type acting as an acceptor. See section [3.4.5.1.2](#Section_3.4.5.1.2.3) for more details.
+When a CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the same actions as the CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) connection type acting as an acceptor. See section [3.4.5.1.2](#Section_3.4.5.1.2) for more details.
 
 <a id="Section_3.4.5.2"></a>
 #### 3.4.5.2 Transaction Propagation
@@ -9780,7 +9780,7 @@ When a CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) conne
 <a id="Section_3.4.5.2.1.1"></a>
 ###### 3.4.5.2.1.1 CONNTYPE_TXUSER_ASSOCIATE as Acceptor
 
-For all messages received in this connection type, the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules that are specified in the following sections.
+For all messages received in this connection type, the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.4.5.2.1.1.1"></a>
 Receiving a TXUSER_ASSOCIATE_MTAG_ASSOCIATE Message
@@ -9823,14 +9823,14 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 - Use the **isoLevel** field as the Isolation Level value.
 - Use the **szDesc** field as the Description value.
 - If the **SourceTmAddr** field contains OLETX_TM_ADDR (section 2.2.4.2), convert the **SourceTmAddr** field from the message to a new Name object, as specified in section [3.1.1.2](#Section_3.1.1.2).
-- Otherwise, convert the **SourceTmAddr** field from the message to a new Name object, as specified in Converting a NAMEOBJECTBLOB Structure to a Name Object (section [3.1.1.4](#Section_2.2.5.3)).
+- Otherwise, convert the **SourceTmAddr** field from the message to a new Name object, as specified in Converting a NAMEOBJECTBLOB Structure to a Name Object (section [3.1.1.4](#Section_3.1.1.4)).
 - Signal the Associate Transaction (section [3.2.7.1](#Section_3.2.7.1)) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the following arguments:
 - The transaction object.
 - The new Name object.
 - Otherwise, the message MUST be processed as an invalid message as specified in section 3.1.6.
 Connection Disconnected
 
-When a [CONNTYPE_TXUSER_ASSOCIATE](#Section_2.2.8.2.1.1) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a [CONNTYPE_TXUSER_ASSOCIATE](#Section_2.2.8.2.1.1) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.2.2"></a>
 ##### 3.4.5.2.2 Push Propagation
@@ -9838,7 +9838,7 @@ When a [CONNTYPE_TXUSER_ASSOCIATE](#Section_2.2.8.2.1.1) connection is disconnec
 <a id="Section_3.4.5.2.2.1"></a>
 ###### 3.4.5.2.2.1 CONNTYPE_TXUSER_EXTENDEDWHEREABOUTS as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.2.2.1.1"></a>
 Receiving a TXUSER_EXTENDEDWHEREABOUTS_MTAG_GET Message
@@ -9861,12 +9861,12 @@ When the transaction manager communicating with an application facet receives a 
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 Connection Disconnected
 
-When a CONNTYPE_TXUSER_EXTENDEDWHEREABOUTS (section [2.2.8.2.2.1](#Section_2.2.8.2.2.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_EXTENDEDWHEREABOUTS (section [2.2.8.2.2.1](#Section_2.2.8.2.2.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.2.2.2"></a>
 ###### 3.4.5.2.2.2 CONNTYPE_TXUSER_EXPORT as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.2.2.2.1"></a>
 Receiving a TXUSER_EXPORT_MTAG_CREATE Message
@@ -9887,7 +9887,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 - Set the connection state to Ended.
 - Otherwise:
 - If the **SourceTmAddr** field contains an OLETX_TM_ADDR structure, convert the **SourceTmAddr** field from the message to a new Name object, as specified in section [3.1.1.2](#Section_3.1.1.2).
-- Otherwise, convert the **SourceTmAddr** field from the message to a new Name object, as specified in Converting a NAMEOBJECTBLOB Structure to a Name Object (section [3.1.1.4](#Section_2.2.5.3)).
+- Otherwise, convert the **SourceTmAddr** field from the message to a new Name object, as specified in Converting a NAMEOBJECTBLOB Structure to a Name Object (section [3.1.1.4](#Section_3.1.1.4)).
 - Store the Name object in the **Connection-Specific Data** field of the connection object.
 - Send a [TXUSER_EXPORT_MTAG_CREATED](#Section_2.2.8.2.2.2.5) message using the connection.
 - Set the connection state to Connection Active.
@@ -9932,12 +9932,12 @@ When the [**transaction manager**](#gt_transaction-manager) receives a [TXUSER_E
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 Connection Disconnected
 
-When a CONNTYPE_TXUSER_EXPORT (section [2.2.8.2.2.2](#Section_2.2.8.2.2.2)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_EXPORT (section [2.2.8.2.2.2](#Section_2.2.8.2.2.2)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.2.2.3"></a>
 ###### 3.4.5.2.2.3 CONNTYPE_TXUSER_EXPORT2 as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST process the messages as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST process the messages as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.2.2.3.1"></a>
 Receiving a TXUSER_EXPORT_MTAG_CREATE Message
@@ -9956,12 +9956,12 @@ When the [**transaction manager**](#gt_transaction-manager) receives a [TXUSER_E
 
 Connection Disconnected
 
-When a CONNTYPE_TXUSER_EXPORT2 (section [2.2.8.2.2.3](#Section_2.2.8.2.2.3)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_EXPORT2 (section [2.2.8.2.2.3](#Section_2.2.8.2.2.3)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.2.2.4"></a>
 ###### 3.4.5.2.2.4 CONNTYPE_TXUSER_IMPORT as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the messages as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the messages as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.2.2.4.1"></a>
 Receiving a TXUSER_IMPORT_MTAG_IMPORT Message
@@ -10000,12 +10000,12 @@ When the [**transaction manager**](#gt_transaction-manager) receives a [TXUSER_I
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 Connection Disconnected
 
-When a CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.2.2.5"></a>
 ###### 3.4.5.2.2.5 CONNTYPE_TXUSER_IMPORT2 as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the messages as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the messages as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.2.2.5.1"></a>
 Receiving a TXUSER_IMPORT2_MTAG_IMPORT Message
@@ -10067,7 +10067,7 @@ When the [**transaction manager**](#gt_transaction-manager) receives a TXUSER_IM
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 Connection Disconnected
 
-When a CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.3"></a>
 #### 3.4.5.3 Transaction Administration
@@ -10075,7 +10075,7 @@ When a CONNTYPE_TXUSER_ASSOCIATE (section [2.2.8.2.1.1](#Section_2.2.8.2.1.1))
 <a id="Section_3.4.5.3.1"></a>
 ##### 3.4.5.3.1 CONNTYPE_TXUSER_GETTXDETAILS as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules that are specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.4.5.3.1.1"></a>
 ###### 3.4.5.3.1.1 Receiving a TXUSER_GETTXDETAILS_MTAG_GET Message
@@ -10101,12 +10101,12 @@ When the [**transaction manager**](#gt_transaction-manager) receives a [TXUSER_G
 <a id="Section_3.4.5.3.1.2"></a>
 ###### 3.4.5.3.1.2 Connection Disconnected
 
-When a CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1.3)) connection is disconnected, the transaction manager MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_GETTXDETAILS (section [2.2.8.3.1](#Section_2.2.8.3.1)) connection is disconnected, the transaction manager MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.3.2"></a>
 ##### 3.4.5.3.2 CONNTYPE_TXUSER_RESOLVE as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.3.2.1"></a>
 ###### 3.4.5.3.2.1 Receiving a TXUSER_RESOLVE_MTAG_CHILD_ABORT Message
@@ -10115,7 +10115,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 
 - If the [**connection**](#gt_connection) state is Idle:
 - Set the connection state to Processing Abort Request.
-- Verify if the [**initiator**](#gt_initiator) identity of the connection is authenticated as an administrator, see section [5.1](#Section_5).<30>
+- Verify if the [**initiator**](#gt_initiator) identity of the connection is authenticated as an administrator, see section [5.1](#Section_5.1).<30>
 - If the initiator identity is not authorized to perform the requested action
 - Signal the Resolve Transaction Access Denied (section [3.4.7.17](#Section_3.4.7.17)) event on the Transaction Manager facet communicating with an Application facet with the following arguments:
 - The current connection object.
@@ -10136,7 +10136,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 
 - If the connection state is Idle:
 - Set the connection state to Processing Commit request.
-- Verify if the initiator identity of the connection is authenticated as an administrator, see section [5.1](#Section_5).<31>
+- Verify if the initiator identity of the connection is authenticated as an administrator, see section [5.1](#Section_5.1).<31>
 - If the initiator identity is not authorized to perform the requested action
 - Signal the Resolve Transaction Access Denied (section [3.4.7.17](#Section_3.4.7.17)) event on the Transaction Manager facet communicating with an Application facet with the following arguments:
 - The current connection object.
@@ -10157,7 +10157,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 
 - If the connection state is Idle:
 - Set the connection state to Processing Forget Request.
-- Verify if the initiator identity of the connection is authenticated as an administrator, see section [5.1](#Section_5).<32>
+- Verify if the initiator identity of the connection is authenticated as an administrator, see section [5.1](#Section_5.1).<32>
 - If the initiator identity is not authorized to perform the requested action
 - Signal the Resolve Transaction Access Denied (section [3.4.7.17](#Section_3.4.7.17)) event on the Transaction Manager facet communicating with an Application facet with the following arguments:
 - The current connection object.
@@ -10174,12 +10174,12 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 <a id="Section_3.4.5.3.2.4"></a>
 ###### 3.4.5.3.2.4 Connection Disconnected
 
-When a CONNTYPE_TXUSER_RESOLVE (section [2.2.8.3.2](#Section_2.2.8.3.2)) connection is disconnected, the transaction manager MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_RESOLVE (section [2.2.8.3.2](#Section_2.2.8.3.2)) connection is disconnected, the transaction manager MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.3.3"></a>
 ##### 3.4.5.3.3 CONNTYPE_TXUSER_SETTXTIMEOUT as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.3.3.1"></a>
 ###### 3.4.5.3.3.1 Receiving a TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT Message
@@ -10200,12 +10200,12 @@ When the transaction manager receives a TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT (
 <a id="Section_3.4.5.3.3.2"></a>
 ###### 3.4.5.3.3.2 Connection Disconnected
 
-When a CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection is disconnected, the transaction manager MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection is disconnected, the transaction manager MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.3.4"></a>
 ##### 3.4.5.3.4 CONNTYPE_TXUSER_SETTXTIMEOUT2 as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_1.3). The [**application**](#gt_application) MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_3.1). The [**application**](#gt_application) MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.3.4.1"></a>
 ###### 3.4.5.3.4.1 Receiving a TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT Message
@@ -10222,12 +10222,12 @@ When the transaction manager receives a TXUSER_SETTXTIMEOUT_MTAG_SETTXTIMEOUT (
 <a id="Section_3.4.5.3.4.2"></a>
 ###### 3.4.5.3.4.2 Connection Disconnected
 
-When a CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.3.5"></a>
 ##### 3.4.5.3.5 CONNTYPE_TXUSER_TRACE as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.3.5.1"></a>
 ###### 3.4.5.3.5.1 Receiving a TXUSER_TRACE_MTAG_DUMP_TRANSACTION Message
@@ -10250,7 +10250,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 <a id="Section_3.4.5.3.5.2"></a>
 ###### 3.4.5.3.5.2 Connection Disconnected
 
-When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) connection is disconnected, the transaction manager communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5)) connection is disconnected, the transaction manager communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.5.4"></a>
 #### 3.4.5.4 Transaction Manager Administration
@@ -10258,7 +10258,7 @@ When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) conne
 <a id="Section_3.4.5.4.1"></a>
 ##### 3.4.5.4.1 CONNTYPE_TXUSER_GETSECURITYFLAGS as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with an [**application**](#gt_application) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with an application facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.4.5.4.1.1"></a>
 ###### 3.4.5.4.1.1 Receiving a TXUSER_GETSECURITYFLAGS_MTAG_GETSECURITYFLAGS Message
@@ -10298,7 +10298,7 @@ When the transaction manager communicating with an application facet receives a 
 <a id="Section_3.4.5.4.1.2"></a>
 ###### 3.4.5.4.1.2 Connection Disconnected
 
-When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5.2)) connection is disconnected, the transaction manager communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_TRACE (section [2.2.8.3.5](#Section_2.2.8.3.5)) connection is disconnected, the transaction manager communicating with an application facet MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.4.6"></a>
 ### 3.4.6 Timer Events
@@ -10435,7 +10435,7 @@ If the Create Transaction Failure event is signaled, the transaction manager MUS
 - Log Full: TXUSER_BEGINNER_MTAG_BEGIN_LOG_FULL (section [2.2.8.1.1.3](#Section_2.2.8.1.1.3))
 - No Mem: TXUSER_BEGINNER_MTAG_BEGIN_NO_MEM (section [2.2.8.1.1.4](#Section_2.2.8.1.1.4))
 - Set the connection state to Ended.
-- Otherwise, if the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- Otherwise, if the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - Send a TXUSER_BEGIN2_MTAG_SINK_ERROR (section [2.2.8.1.2.5](#Section_2.2.8.1.2.5)) message:
 - The Error field MUST be set to the value matching the following reason codes:
 - Log Full: TRUN_TXBEGIN_ERROR_BEGIN_LOG_FULL
@@ -10454,7 +10454,7 @@ If the Create Transaction Success event is signaled, the transaction manager MUS
 - Send a TXUSER_BEGINNER_MTAG_BEGUN (section [2.2.8.1.1.5](#Section_2.2.8.1.1.5)) message.
 - The **guidTx** field MUST be set to the **Transaction Object.Identifier** field of the transaction object.
 - Set the connection state to Active.
-- Otherwise, if the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- Otherwise, if the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - Send a TXUSER_BEGIN2_MTAG_SINK_BEGUN (section [2.2.8.1.2.4](#Section_2.2.8.1.2.4)) message:
 - The **guidTx** field MUST be set to the **Transaction Object.Identifier** field of the transaction object.
 - Set the connection state to Active.
@@ -10545,7 +10545,7 @@ If the Export Transaction Success event is signaled, the transaction manager MUS
 The Phase One Complete event MUST be signaled with the following arguments:
 
 - An Enlistment object.
-- A value indicating the [**outcome**](#gt_outcome) of [Phase One](#Section_3.2.1.3.7). The value MUST be set to one of the following values:
+- A value indicating the [**outcome**](#gt_outcome) of [Phase One](#Section_4.5.1). The value MUST be set to one of the following values:
 - Read Only
 - Committed
 - Aborted
@@ -10556,7 +10556,7 @@ If the Phase One Complete event is signaled, the [**Transaction Manager**](#gt_t
 - If the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGINNER (section [2.2.8.1.1](#Section_2.2.8.1.1)):
 - Send a TXUSER_BEGINNER_MTAG_REQUEST_COMPLETED (section [2.2.8.1.1.9](#Section_2.2.8.1.1.9)) message.
 - Set the connection state to Ended.
-- Otherwise, if the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- Otherwise, if the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - Send a TXUSER_BEGIN2_MTAG_SINK_ERROR (section [2.2.8.1.2.5](#Section_2.2.8.1.2.5)) message:
 - The Error field MUST be set to TRUN_TXBEGIN_ERROR_NOTIFY_COMMITTED.
 - Set the connection state to Ended.
@@ -10661,7 +10661,7 @@ If the **Rollback Complete** event is signaled, the transaction manager MUST per
 - If the connection state is Aborting Transaction:
 - Send a TXUSER_BEGINNER_MTAG_REQUEST_COMPLETED (section [2.2.8.1.1.9](#Section_2.2.8.1.1.9)) message.
 - Set the connection state to Ended.
-- If the connection referenced by the enlistment is of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- If the connection referenced by the enlistment is of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - If the connection state is Modifying Timeout:
 - Send a TXUSER_SETTXTIMEOUT_MTAG_TOO_LATE (section [2.2.8.1.2.8](#Section_2.2.8.1.2.8)) message.
 - Otherwise, if the connection state is Active, Aborting Transaction, or Committing Transaction:
@@ -10707,7 +10707,7 @@ The Set Transaction Timeout Failure event MUST be signaled with the following ar
 - A transaction object
 If the Set Transaction Timeout Failure event is signaled, the transaction manager MUST perform the following actions:
 
-- If the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- If the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - Send a TXUSER_SETTXTIMEOUT_MTAG_TOO_LATE (section [2.2.8.1.2.8](#Section_2.2.8.1.2.8)) message using the connection.
 - Set the connection state to Active.
 - Otherwise, if the transaction's connection list contains a CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection:
@@ -10721,7 +10721,7 @@ The Set Transaction Timeout Success event MUST be signaled with the following ar
 - A transaction object
 If the Set Transaction Timeout Success event is signaled, the transaction manager MUST perform the following actions:
 
-- If the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- If the transaction's connection list contains a connection of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - Send a TXUSER_SETTXTIMEOUT_MTAG_REQUEST_COMPLETE (section [2.2.8.1.2.6](#Section_2.2.8.1.2.6)) message using the connection.
 - Set the connection state to Active.
 - Otherwise, if the transaction's connection list contains a CONNTYPE_TXUSER_SETTXTIMEOUT (section [2.2.8.3.3](#Section_2.2.8.3.3)) connection:
@@ -10738,7 +10738,7 @@ If the Unilaterally Aborted event is signaled, the transaction manager MUST perf
 - If the enlistment's connection is of type CONNTYPE_TXUSER_BEGINNER (section [2.2.8.1.1](#Section_2.2.8.1.1)):
 - If the connection state is Active.
 - Set the connection state to Aborting Transaction.
-- Otherwise, if the enlistment's connection is of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2.4)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
+- Otherwise, if the enlistment's connection is of type CONNTYPE_TXUSER_BEGIN2 (section [2.2.8.1.2](#Section_2.2.8.1.2)) or CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)):
 - Send a TXUSER_BEGIN2_MTAG_SINK_ERROR (section [2.2.8.1.2.5](#Section_2.2.8.1.2.5)) message:
 - The Error field MUST be set to TRUN_TXBEGIN_ERROR_NOTIFY_ABORTED.
 - Set the connection state to Ended.
@@ -10752,7 +10752,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that the abstract data model can be implemented in a variety of ways. This protocol does not prescribe or advocate any specific implementation technique.
 
-A [**resource manager**](#gt_resource-manager-rm) MUST maintain all the data elements as specified in section [3.1.1](#Section_3.1.3.1).
+A [**resource manager**](#gt_resource-manager-rm) MUST maintain all the data elements as specified in section [3.1.1](#Section_3.1.1).
 
 A resource manager MUST also maintain the following data elements:
 
@@ -10762,7 +10762,7 @@ A resource manager MUST also maintain the following data elements:
 - **Reenlistment list**: A list of [**connection**](#gt_connection) objects.
 - **Transaction manager name**: A Name object that identifies the [**transaction manager**](#gt_transaction-manager).
 - **Reenlistment timeout**: A value that indicates the number of milliseconds the resource manager will wait for an [**outcome**](#gt_outcome) while reenlisting on a transaction.
-- **Resource Manager.Connection**: A connection object that MUST be of type CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1)) or CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1.1)).
+- **Resource Manager.Connection**: A connection object that MUST be of type CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2)) or CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1.1)).
 When a transaction object is stored in the **Resource Manager.Durable Log** of the resource manager, the resource manager MUST record, at minimum, the following fields:
 
 - The **Resource Manager.Identifier** field
@@ -10827,7 +10827,7 @@ This is the final state.
 <a id="Section_3.5.1.2"></a>
 #### 3.5.1.2 CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL Initiator States
 
-The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
+The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
 
 - Idle
 - Awaiting Create Response
@@ -10898,7 +10898,7 @@ Figure 46: CONNTYPE_TXUSER_PHASE0 Initiator States
 
 This is the initial state. The following event is processed in this state:
 
-- Enlisting as a Phase Zero Participant on a Specific Transaction (section [3.5.4.2](#Section_3.7.1.1.7))
+- Enlisting as a Phase Zero Participant on a Specific Transaction (section [3.5.4.2](#Section_3.5.4.2))
 <a id="Section_3.5.1.3.2"></a>
 ##### 3.5.1.3.2 Awaiting Create Response
 
@@ -10913,7 +10913,7 @@ The following events are processed in this state:
 
 - Receiving a TXUSER_PHASE0_MTAG_PHASE0REQ (section [3.5.5.2.1.3](#Section_3.5.5.2.1.3)) message
 - Receiving a TXUSER_PHASE0_MTAG_PHASE0REQ_ABORT (section [3.5.5.2.1.4](#Section_3.5.5.2.1.4)) message
-- Canceling Enlistment as a Phase Zero Participant on a Specific Transaction (section [3.5.4.1](#Section_3.7.1.1.7))
+- Canceling Enlistment as a Phase Zero Participant on a Specific Transaction (section [3.5.4.1](#Section_3.5.4.1))
 <a id="Section_3.5.1.3.4"></a>
 ##### 3.5.1.3.4 Processing Phase Zero Request
 
@@ -10928,7 +10928,7 @@ This is the final state.
 <a id="Section_3.5.1.4"></a>
 #### 3.5.1.4 CONNTYPE_TXUSER_ENLISTMENT Initiator States
 
-The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
+The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
 
 - Idle
 - Awaiting Enlistment Response
@@ -11005,7 +11005,7 @@ This is the final state.
 <a id="Section_3.5.1.5"></a>
 #### 3.5.1.5 CONNTYPE_TXUSER_REENLIST Initiator States
 
-The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
+The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
 
 - Idle
 - Awaiting Reenlist Response
@@ -11038,7 +11038,7 @@ This is the final state.
 <a id="Section_3.5.1.6"></a>
 #### 3.5.1.6 CONNTYPE_TXUSER_VOTER Initiator States
 
-The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
+The [**resource manager**](#gt_resource-manager-rm) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1)) [**connection type**](#gt_connection-type). In this role, the resource manager MUST provide support for the following states:
 
 - Idle
 - Awaiting Creation Response
@@ -11149,7 +11149,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - A transaction object.
 If the higher-layer business logic decides to enlist on a specific transaction, the resource manager MUST perform the following steps:
 
-- Initiate a new CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) connection to the [**transaction manager**](#gt_transaction-manager), using the **Transaction Manager Name** field of the resource manager.
+- Initiate a new CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) connection to the [**transaction manager**](#gt_transaction-manager), using the **Transaction Manager Name** field of the resource manager.
 - Assign the transaction object to the connection-specific data of the connection.
 - Add the connection to the connection list of the transaction.
 - Send a TXUSER_ENLISTMENT_MTAG_ENLIST (section [2.2.10.2.2.5](#Section_2.2.10.2.2.5)) message using the connection:
@@ -11165,12 +11165,12 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - A connection object.
 When the higher-layer business logic completes an enlistment [**Abort request**](#gt_abort-request), as specified in section [3.5.5.2.2.5](#Section_3.5.5.2.2.5) and [3.5.5.3.1.2](#Section_3.5.5.3.1.2), the resource manager MUST perform the following steps:
 
-- If the connection type of the connection object is CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)):
+- If the connection type of the connection object is CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)):
 - If the transaction object referenced by the connection object was added to the **Resource Manager.Durable Log**:
 - Remove the transaction object from the **Resource Manager.Durable Log**.
 - Send a TXUSER_ENLISTMENT_MTAG_ABORTREQDONE (section [2.2.10.2.2.2](#Section_2.2.10.2.2.2)) message using the connection.
 - Set the connection state to Ended.
-- Otherwise, if the connection type of the connection object is CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)):
+- Otherwise, if the connection type of the connection object is CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)):
 - If the transaction object referenced by the connection object was added to the **Resource Manager.Durable Log**:
 - Remove the transaction object from the **Resource Manager.Durable Log**.
 - Remove the connection from the reenlistment list of the resource manager.
@@ -11186,11 +11186,11 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - A connection object
 When the higher-layer business logic completes an enlistment [**Commit request**](#gt_commit-request) as specified in section [3.5.5.2.2.4](#Section_3.5.5.2.2.4) and [3.5.5.3.1.1](#Section_3.5.5.3.1.1), the resource manager MUST perform the following steps:
 
-- If the connection type of the connection object is CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)):
+- If the connection type of the connection object is CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)):
 - Remove the transaction object referenced by the connection object from the **Resource Manager.Durable Log**.
 - Send a TXUSER_ENLISTMENT_MTAG_COMMITREQDONE (section [2.2.10.2.2.4](#Section_2.2.10.2.2.4)) message using the connection.
 - Set the connection state to Ended.
-- Otherwise, if the connection type of the connection object is CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)):
+- Otherwise, if the connection type of the connection object is CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)):
 - Remove the transaction object referenced by the connection object from the **Resource Manager.Durable Log**.
 - Remove the connection from the reenlistment list of the resource manager.
 - If the list is now empty:
@@ -11202,7 +11202,7 @@ When the higher-layer business logic completes an enlistment [**Commit request**
 
 This event MUST be signaled by the higher-layer business logic with the following arguments:
 
-- A CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) connection object.
+- A CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) connection object.
 - An [**outcome**](#gt_outcome) value. This value MUST be one of the following:
 - Prepared
 - Read Only
@@ -11228,7 +11228,7 @@ When the higher-layer business logic completes a Prepare request, as specified i
 
 This event MUST be signaled by the higher-layer business logic with the following arguments:
 
-- A CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) connection object.
+- A CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) connection object.
 - An [**outcome**](#gt_outcome) value. This value MUST be one of the following:
 - Read Only
 - Prepared
@@ -11277,7 +11277,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - A transaction object
 If the higher-layer business logic decides to register as a [**voter**](#gt_voter) on a specific [**transaction manager**](#gt_transaction-manager), the resource manager MUST perform the following steps:
 
-- Initiate a new CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)) connection to the transaction manager using the transaction manager **Name** field of the resource manager.
+- Initiate a new CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1)) connection to the transaction manager using the transaction manager **Name** field of the resource manager.
 - Send a TXUSER_VOTER_MTAG_CREATE (section [2.2.10.4.1.4](#Section_2.2.10.4.1.4)) message using the connection:
 - Set the **guidTX** field to the **Transaction Object.Identifier** field of the transaction object.
 - Set the connection state to Awaiting Creation Response.
@@ -11288,7 +11288,7 @@ If the higher-layer business logic wants to register with the [**transaction man
 
 - The resource manager SHOULD set the **Session Identifier** field to a new GUID value as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460). Optionally, the resource manager MAY instead set the **Session Identifier** field to [**NULL GUID**](#gt_null-guid).
 - If the transaction manager's resource manager supports the CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL connection type as specified in section [2.2.1.1.3](#Section_2.2.1.1.3):
-- The resource manager MUST attempt to [register with the transaction manager](#Section_3.5.4.10.2) using [CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL](#Section_2.2.10.1.2.1).
+- The resource manager MUST attempt to [register with the transaction manager](#Section_3.5.4.10.2) using [CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL](#Section_2.2.10.1.2).
 - Otherwise:
 - The resource manager MUST attempt to [register with the transaction manager](#Section_3.5.4.10.1) using [CONNTYPE_TXUSER_RESOURCEMANAGER](#Section_2.2.10.1.1).
 <a id="Section_3.5.4.10.1"></a>
@@ -11307,7 +11307,7 @@ The resource manager MUST perform the following actions:
 
 The resource manager MUST perform the following actions:
 
-- Initiate a new [CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL](#Section_2.2.10.1.2.1) connection using the [**transaction manager**](#gt_transaction-manager) Name field of the resource manager.
+- Initiate a new [CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL](#Section_2.2.10.1.2) connection using the [**transaction manager**](#gt_transaction-manager) Name field of the resource manager.
 - Assign the new connection to the **Resource Manager.Connection** field of the resource manager.
 - Send a [TXUSER_RESOURCEMANAGER_MTAG_CREATE](#Section_2.2.10.1.1.1) message using the connection:
 - Set the **guidRM** field to the **Resource Manager.Identifier** field of the resource manager.
@@ -11346,7 +11346,7 @@ When the higher-layer business logic completes a Voter Vote request, the resourc
 <a id="Section_3.5.5.1.1"></a>
 ##### 3.5.5.1.1 CONNTYPE_TXUSER_RESOURCEMANAGER as Initiator
 
-For all messages that are received in this connection type, the [**resource manager**](#gt_resource-manager-rm) MUST process the messages as specified in section [3.1](#Section_1.3). The resource manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this connection type, the [**resource manager**](#gt_resource-manager-rm) MUST process the messages as specified in section [3.1](#Section_3.1). The resource manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.5.5.1.1.1"></a>
 ###### 3.5.5.1.1.1 Receiving a TXUSER_RESOURCEMANAGER_MTAG_DUPLICATE Message
@@ -11374,11 +11374,11 @@ When a CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1
 
 - If the connection state is Active, Awaiting Create Response, Recovering, or Awaiting Completion Confirmation:
 - Set the connection state to Ended.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.5.5.1.2"></a>
 ##### 3.5.5.1.2 CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL as Initiator
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the messages as specified in section [3.1](#Section_1.3). The resource manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the messages as specified in section [3.1](#Section_3.1). The resource manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.5.5.1.2.1"></a>
 ###### 3.5.5.1.2.1 Receiving a TXUSER_RESOURCEMANAGER_MTAG_DUPLICATE or TXUSER_RESOURCEMANAGER_MTAG_REQUEST_COMPLETE Message
@@ -11395,7 +11395,7 @@ When the resource manager receives a [TXUSER_RESOURCEMANAGERINTERNAL_MTAG_DUPLIC
 <a id="Section_3.5.5.1.2.3"></a>
 ###### 3.5.5.1.2.3 Connection Disconnected
 
-When a CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1)) connection is disconnected, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2)) connection is disconnected, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.5.5.2"></a>
 #### 3.5.5.2 Transaction Coordination
@@ -11403,7 +11403,7 @@ When a CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_
 <a id="Section_3.5.5.2.1"></a>
 ##### 3.5.5.2.1 CONNTYPE_TXUSER_PHASE0 as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_1.3). The resource manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_3.1). The resource manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.5.5.2.1.1"></a>
 ###### 3.5.5.2.1.1 Receiving a TXUSER_PHASE0_MTAG_CREATED Message
@@ -11451,11 +11451,11 @@ When a CONNTYPE_TXUSER_PHASE0 (section [2.2.10.2.1](#Section_2.2.10.2.1)) conn
 - Return a failure result to the higher-layer business logic.
 - Otherwise, if the connection state is Active or Processing [**Phase Zero**](#gt_phase-zero) Request:
 - Send a Transaction Aborted notification to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.5.5.2.2"></a>
 ##### 3.5.5.2.2 CONNTYPE_TXUSER_ENLISTMENT as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_1.3). The resource manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_3.1). The resource manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.5.5.2.2.1"></a>
 ###### 3.5.5.2.2.1 Receiving a TXUSER_ENLISTMENT_MTAG_ENLISTED Message
@@ -11513,18 +11513,18 @@ When the resource manager receives a [TXUSER_ENLISTMENT_MTAG_ABORTREQ](#Section_
 <a id="Section_3.5.5.2.2.6"></a>
 ###### 3.5.5.2.2.6 Connection Disconnected
 
-When a CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) connection is disconnected, the resource manager MUST perform the following actions:
+When a CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) connection is disconnected, the resource manager MUST perform the following actions:
 
 - If the connection state is either Awaiting Enlistment Response, Active, or Preparing For Transaction Commit:
 - Send an [**Abort request**](#gt_abort-request) to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.5.5.3"></a>
 #### 3.5.5.3 Transaction Recovery
 
 <a id="Section_3.5.5.3.1"></a>
 ##### 3.5.5.3.1 CONNTYPE_TXUSER_REENLIST as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_1.3). The resource manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_3.1). The resource manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.5.5.3.1.1"></a>
 ###### 3.5.5.3.1.1 Receiving a TXUSER_REENLIST_MTAG_REENLIST_COMMITTED Message
@@ -11556,18 +11556,18 @@ When the resource manager receives a [TXUSER_REENLIST_MTAG_REENLIST_TIMEOUT](#Se
 <a id="Section_3.5.5.3.1.4"></a>
 ###### 3.5.5.3.1.4 Connection Disconnected
 
-When a CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)) connection is disconnected, the resource manager MUST perform the following actions:
+When a CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)) connection is disconnected, the resource manager MUST perform the following actions:
 
 - If the connection state is Awaiting Reenlistment Response:
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.5.5.4"></a>
 #### 3.5.5.4 Voting
 
 <a id="Section_3.5.5.4.1"></a>
 ##### 3.5.5.4.1 CONNTYPE_TXUSER_VOTER as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_1.3). The resource manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**resource manager**](#gt_resource-manager-rm) MUST process the message as specified in section [3.1](#Section_3.1). The resource manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.5.5.4.1.1"></a>
 ###### 3.5.5.4.1.1 Receiving a TXUSER_VOTER_MTAG_CREATED Message
@@ -11626,13 +11626,13 @@ When the resource manager receives a [TXUSER_STATUS_MTAG_INDOUBT](#Section_2.2.1
 <a id="Section_3.5.5.4.1.7"></a>
 ###### 3.5.5.4.1.7 Connection Disconnected
 
-When a CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)) connection is disconnected, the resource manager MUST perform the following actions:
+When a CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1)) connection is disconnected, the resource manager MUST perform the following actions:
 
 - If the connection state is Awaiting Creation Response:
 - Return a failure result to the higher-layer business logic.
 - Otherwise, if the connection state is Awaiting Outcome:
 - Send a Transaction [In Doubt](#Section_3.2.1.3.12) notification to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.5.6"></a>
 ### 3.5.6 Timer Events
 
@@ -11651,7 +11651,7 @@ The Recover Transaction event MUST be signaled with the following arguments:
 - A [**transaction**](#gt_transaction) object.
 If the Recover Transaction event is signaled, the resource manager MUST perform the following steps:
 
-- Initiate a new CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)) [**connection**](#gt_connection) to the [**transaction manager**](#gt_transaction-manager), using the Transaction Manager Name field of the resource manager.
+- Initiate a new CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)) [**connection**](#gt_connection) to the [**transaction manager**](#gt_transaction-manager), using the Transaction Manager Name field of the resource manager.
 - Set the **Transaction** field of the connection object to the provided transaction object.
 - Add the connection to the reenlistment list of the resource manager.
 - Add the connection to the connection list of the transaction object.
@@ -11703,7 +11703,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that the abstract data model can be implemented in a variety of ways. This protocol does not prescribe or advocate any specific implementation technique.
 
-The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST maintain all the data elements as specified in sections [3.1.1](#Section_3.1.3.1) and [3.2.1](#Section_3.2.1).
+The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST maintain all the data elements as specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.2.1).
 
 The transaction manager communicating with a resource manager facet MUST additionally maintain the following data elements:
 
@@ -11713,7 +11713,7 @@ A resource manager object MUST contain the following data structures:
 
 - **Resource Manager Object.Identifier**: Specifies the resource manager identifier.
 - **Session Identifier**: A GUID that specifies the [**resource manager session identifier**](#gt_resource-manager-session-identifier).
-- **Resource Manager Object.Connection**: The CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1)) or CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1.1)) [**connection**](#gt_connection) object that is associated with the resource manager.
+- **Resource Manager Object.Connection**: The CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2)) or CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1.1)) [**connection**](#gt_connection) object that is associated with the resource manager.
 Enlistment objects that are created by the transaction manager communicating with a resource manager facet MUST provide the following properties as specified in section 3.1.1:
 
 - **Name**: The resource manager identifier field of the Enlistment object, formatted as a string as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) Appendix A.
@@ -11769,7 +11769,7 @@ The final state is the Ended state.
 <a id="Section_3.6.1.2"></a>
 #### 3.6.1.2 CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
 
 - Idle (section [3.6.1.2.1](#Section_3.6.1.2.1))
 - Creating (section [3.6.1.2.2](#Section_3.6.1.2.2))
@@ -11841,14 +11841,14 @@ This is the initial state. The following event us processed in this state:
 
 The following events are processed in this state:
 
-- Create Phase Zero Enlistment Success (section [3.6.7.8](#Section_3.7.7.6))
-- Create Phase Zero Enlistment Failure (section [3.6.7.7](#Section_3.7.7.5))
+- Create Phase Zero Enlistment Success (section [3.6.7.8](#Section_3.6.7.8))
+- Create Phase Zero Enlistment Failure (section [3.6.7.7](#Section_3.6.7.7))
 <a id="Section_3.6.1.3.3"></a>
 ##### 3.6.1.3.3 Active
 
 The following events are processed in this state:
 
-- Begin Phase Zero (section [3.6.7.4](#Section_3.2.7.5))
+- Begin Phase Zero (section [3.6.7.4](#Section_3.6.7.4))
 - Phase Zero Aborted (section [3.6.7.14](#Section_3.6.7.14))
 - Receiving a TXUSER_PHASE0_MTAG_UNENLIST Message (section [3.6.5.2.1.3](#Section_3.6.5.2.1.3))
 <a id="Section_3.6.1.3.4"></a>
@@ -11866,7 +11866,7 @@ This is the final state.
 <a id="Section_3.6.1.4"></a>
 #### 3.6.1.4 CONNTYPE_TXUSER_ENLISTMENT Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
 
 - Idle (section [3.6.1.4.1](#Section_3.6.1.4.1))
 - Processing Enlistment Request (section [3.6.1.4.2](#Section_3.6.1.4.2))
@@ -11894,21 +11894,21 @@ Figure 54: CONNTYPE_TXUSER_ENLISTMENT acceptor states (active)
 This is the initial state. The following event is processed in this state:
 
 - Receiving a TXUSER_ENLISTMENT_MTAG_ENLIST Message (section [3.6.5.2.2.1](#Section_3.6.5.2.2.1))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
 <a id="Section_3.6.1.4.2"></a>
 ##### 3.6.1.4.2 Processing Enlistment Request
 
 The following events are processed in this state:
 
 - Create Subordinate Enlistment Success (section [3.6.7.11](#Section_3.6.7.11))
-- Create Subordinate Enlistment Failure (section [3.6.7.10](#Section_3.7.7.7))
+- Create Subordinate Enlistment Failure (section [3.6.7.10](#Section_3.6.7.10))
 <a id="Section_3.6.1.4.3"></a>
 ##### 3.6.1.4.3 Active
 
 The following events are processed in this state:
 
-- Begin Phase One (section [3.6.7.3](#Section_3.2.7.4))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
+- Begin Phase One (section [3.6.7.3](#Section_3.6.7.3))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
 <a id="Section_3.6.1.4.4"></a>
 ##### 3.6.1.4.4 Awaiting Single-Phase Commit Response
 
@@ -11921,7 +11921,7 @@ The following event is processed in this state:
 The following events are processed in this state:
 
 - Receiving a TXUSER_ENLISTMENT_MTAG_PREPAREREQDONE Message (section [3.6.5.2.2.2](#Section_3.6.5.2.2.2))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
 <a id="Section_3.6.1.4.6"></a>
 ##### 3.6.1.4.6 Awaiting Prepare Response Aborted
 
@@ -11933,8 +11933,8 @@ The following event is processed in this state:
 
 The following events are processed in this state:
 
-- Begin Commit (section [3.6.7.1](#Section_3.2.7.2))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
+- Begin Commit (section [3.6.7.1](#Section_3.6.7.1))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
 <a id="Section_3.6.1.4.8"></a>
 ##### 3.6.1.4.8 Awaiting Commit Response
 
@@ -11955,7 +11955,7 @@ This is the final state.
 <a id="Section_3.6.1.5"></a>
 #### 3.6.1.5 CONNTYPE_TXUSER_REENLIST Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
 
 - Idle (section [3.6.1.5.1](#Section_3.6.1.5.1))
 - Processing Reenlist Request (section [3.6.1.5.2](#Section_3.6.1.5.2))
@@ -11977,8 +11977,8 @@ This is the initial state. The following event is processed in this state:
 
 The following events are processed in this state:
 
-- Begin Commit (section [3.6.7.1](#Section_3.2.7.2))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
+- Begin Commit (section [3.6.7.1](#Section_3.6.7.1))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
 - Reenlist Timeout Timer (section [3.6.6.1](#Section_3.6.6.1))
 <a id="Section_3.6.1.5.3"></a>
 ##### 3.6.1.5.3 Ended
@@ -11988,7 +11988,7 @@ This is the final state.
 <a id="Section_3.6.1.6"></a>
 #### 3.6.1.6 CONNTYPE_TXUSER_VOTER Acceptor States
 
-The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
+The [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) MUST act as an [**acceptor**](#gt_acceptor) for the CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1)) [**connection type**](#gt_connection-type). In this role, the transaction manager communicating with a resource manager MUST provide support for the following states:
 
 - Idle (section [3.6.1.6.1](#Section_3.6.1.6.1))
 - Create Voter (section [3.6.1.6.2](#Section_3.6.1.6.2))
@@ -12020,8 +12020,8 @@ The following events are processed in this state:
 
 The following events are processed in this state:
 
-- Begin Voting (section [3.6.7.6](#Section_3.2.7.7))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
+- Begin Voting (section [3.6.7.6](#Section_3.6.7.6))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
 <a id="Section_3.6.1.6.4"></a>
 ##### 3.6.1.6.4 Awaiting Voter Response
 
@@ -12033,9 +12033,9 @@ The following event is processed in this state:
 
 The following events are processed in this state:
 
-- Begin Commit (section [3.6.7.1](#Section_3.2.7.2))
-- Begin Rollback (section [3.6.7.5](#Section_3.4.7.5))
-- Begin In Doubt (section [3.6.7.2](#Section_3.4.7.4))
+- Begin Commit (section [3.6.7.1](#Section_3.6.7.1))
+- Begin Rollback (section [3.6.7.5](#Section_3.6.7.5))
+- Begin In Doubt (section [3.6.7.2](#Section_3.6.7.2))
 <a id="Section_3.6.1.6.6"></a>
 ##### 3.6.1.6.6 Ended
 
@@ -12049,7 +12049,7 @@ The [**transaction manager**](#gt_transaction-manager) communicating with a [**r
 <a id="Section_3.6.2.1"></a>
 #### 3.6.2.1 Reenlist Time-Out Timer
 
-The timer MUST be set when the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) receives a TXUSER_REENLIST_MTAG_REENLIST (section [2.2.10.3.1.1](#Section_2.2.10.3.1.1)) message on a CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)) [**connection**](#gt_connection). The timer MUST be canceled when the CONNTYPE_TXUSER_REENLIST connection is disconnected.
+The timer MUST be set when the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) receives a TXUSER_REENLIST_MTAG_REENLIST (section [2.2.10.3.1.1](#Section_2.2.10.3.1.1)) message on a CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)) [**connection**](#gt_connection). The timer MUST be canceled when the CONNTYPE_TXUSER_REENLIST connection is disconnected.
 
 The timer has no default value. The initial value of the timer MUST be provided in the TXUSER_REENLIST_MTAG_REENLIST message. The minimum value of the timer MUST be zero, which means that the timer never generates a timer event. In this case, the Reenlist Time-Out Timer Event (section [3.6.6.1](#Section_3.6.6.1)) is never signaled, and the timeout reply message triggered by this event is never sent.
 
@@ -12063,11 +12063,11 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 - The transaction manager communicating with a resource manager facet MUST examine the following security flags on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) and perform the following actions:
 - If either the Allow Network Access flag or the Allow Remote Clients flag is set to false:
 - For the following connection types, the transaction manager communicating with a resource manager facet MUST refuse to accept incoming [**connections**](#gt_connection) from remote machines as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
-- CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10))
+- CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2))
 - CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1.1))
-- CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1))
-- CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1))
-- CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8))
+- CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2))
+- CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1))
+- CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1))
 - CONNTYPE_TXUSER_PHASE0 (section [2.2.10.2.1](#Section_2.2.10.2.1))
 All data elements maintained by the transaction manager communicating with a resource manager facet are initialized to an empty value unless stated otherwise in this section or in the initialization sections of the facets the transaction manager communicating with a resource manager facet extends, as specified in section [3.6.1](#Section_3.6.1).
 
@@ -12085,7 +12085,7 @@ None.
 <a id="Section_3.6.5.1.1"></a>
 ##### 3.6.5.1.1 CONNTYPE_TXUSER_RESOURCEMANAGER as Acceptor
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.6.5.1.1.1"></a>
 ###### 3.6.5.1.1.1 Receiving a TXUSER_RESOURCEMANAGER_MTAG_CREATE Message
@@ -12120,7 +12120,7 @@ When a CONNTYPE_TXUSER_RESOURCEMANAGER (section [2.2.10.1.1](#Section_2.2.10.1
 <a id="Section_3.6.5.1.2"></a>
 ##### 3.6.5.1.2 CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.6.5.1.2.1"></a>
 ###### 3.6.5.1.2.1 Receiving a TXUSER_RESOURCEMANAGER_MTAG_CREATE Message
@@ -12148,7 +12148,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 <a id="Section_3.6.5.1.2.3"></a>
 ###### 3.6.5.1.2.3 Connection Disconnected
 
-When a CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1))connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with a resource manager facet MUST:
+When a CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2))connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with a resource manager facet MUST:
 
 - Set the connection state to Ended.
 - Signal the Resource Manager Down (section [3.6.7.16](#Section_3.6.7.16)) event on the transaction manager communicating with a resource manager facet with the resource manager object referenced by the Connection-Specific Data field of the connection.
@@ -12158,7 +12158,7 @@ When a CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_
 <a id="Section_3.6.5.2.1"></a>
 ##### 3.6.5.2.1 CONNTYPE_TXUSER_PHASE0 as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.6.5.2.1.1"></a>
 ###### 3.6.5.2.1.1 Receiving a TXUSER_PHASE0_MTAG_CREATE Message
@@ -12216,11 +12216,11 @@ When a CONNTYPE_TXUSER_PHASE0 (section [2.2.10.2.1](#Section_2.2.10.2.1)) conn
 - The aborted [**outcome**](#gt_outcome) value.
 - Otherwise, if the connection state is Active (section [3.6.1.3.3](#Section_3.6.1.3.3)):
 - Signal the Enlistment Unilaterally Aborted (section [3.2.7.19](#Section_3.2.7.19)) event on the Core Transaction Manager Facet with the Enlistment object that is referenced by this connection.
-- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.6.5.2.2"></a>
 ##### 3.6.5.2.2 CONNTYPE_TXUSER_ENLISTMENT as Acceptor
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.6.5.2.2.1"></a>
 ###### 3.6.5.2.2.1 Receiving a TXUSER_ENLISTMENT_MTAG_ENLIST Message
@@ -12259,7 +12259,7 @@ When the [**transaction manager**](#gt_transaction-manager) receives a TXUSER_EN
 - If the connection state is Awaiting Single Phase Commit Response:
 - Signal the Enlistment Phase One Complete (section [3.2.7.16](#Section_3.2.7.16)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the following arguments:
 - The Enlistment object of the connection.
-- The [Phase One](#Section_3.2.1.3.7) [**outcome**](#gt_outcome) set to:
+- The [Phase One](#Section_4.5.1) [**outcome**](#gt_outcome) set to:
 - Committed if the **prepareReqDone** field from the message is TXUSER_ENLISTMENT_PREPAREREQDONE_SINGLEPHASE_COMMIT.
 - Aborted if the **prepareReqDone** field from the message is TXUSER_ENLISTMENT_PREPAREREQDONE_ABORT.
 - Read Only if the **prepareReqDone** field from the message is TXUSER_ENLISTMENT_PREPAREREQDONE_READONLY.
@@ -12303,7 +12303,7 @@ When the [**transaction manager**](#gt_transaction-manager) receives a [TXUSER_E
 <a id="Section_3.6.5.2.2.5"></a>
 ###### 3.6.5.2.2.5 Connection Disconnected
 
-When a CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the following actions:
+When a CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) MUST perform the following actions:
 
 - If the connection state is either Processing Enlistment Request (section [3.6.1.4.2](#Section_3.6.1.4.2)) or Active (section [3.6.1.4.3](#Section_3.6.1.4.3)):
 - Signal the Enlistment Unilaterally Aborted (section [3.2.7.19](#Section_3.2.7.19)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the Enlistment object of the connection.
@@ -12319,14 +12319,14 @@ When a CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10
 - Add the Enlistment object of the connection to the **Failed to Notify List** of the transaction manager (section [3.6.1](#Section_3.6.1)).
 - Otherwise, if the connection state is Awaiting Abort Response (section [3.6.1.4.9](#Section_3.6.1.4.9)):
 - Signal the Enlistment Rollback Complete (section [3.2.7.18](#Section_3.2.7.18)) event on the Core Transaction Manager Facet with the Enlistment object of the connection.
-- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.6.5.3"></a>
 #### 3.6.5.3 Transaction Recovery
 
 <a id="Section_3.6.5.3.1"></a>
 ##### 3.6.5.3.1 CONNTYPE_TXUSER_REENLIST as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.6.5.3.1.1"></a>
 ###### 3.6.5.3.1.1 Receiving a TXUSER_REENLIST_MTAG_REENLIST Message
@@ -12362,7 +12362,7 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 <a id="Section_3.6.5.3.1.2"></a>
 ###### 3.6.5.3.1.2 Connection Disconnected
 
-This event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+This event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.6.5.4"></a>
 #### 3.6.5.4 Voting
@@ -12370,7 +12370,7 @@ This event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.
 <a id="Section_3.6.5.4.1"></a>
 ##### 3.6.5.4.1 CONNTYPE_TXUSER_VOTER as Acceptor
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) that is communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**transaction manager**](#gt_transaction-manager) that is communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The transaction manager communicating with a resource manager facet MUST additionally follow the processing rules as specified in the following sections.
 
 <a id="Section_3.6.5.4.1.1"></a>
 ###### 3.6.5.4.1.1 Receiving a TXUSER_VOTER_MTAG_CREATE Message
@@ -12414,11 +12414,11 @@ When the [**transaction manager**](#gt_transaction-manager) communicating with a
 <a id="Section_3.6.5.4.1.3"></a>
 ###### 3.6.5.4.1.3 Connection Disconnected
 
-When a CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with a resource manager facet MUST perform the following actions:
+When a CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1)) connection is disconnected, the [**transaction manager**](#gt_transaction-manager) communicating with a resource manager facet MUST perform the following actions:
 
 - If the connection state is either Active (section [3.6.1.6.3](#Section_3.6.1.6.3)) or Awaiting Voter Response:
 - Signal the Enlistment Unilaterally Aborted (section [3.2.7.19](#Section_3.2.7.19)) event on the Core Transaction Manager Facet (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the Enlistment object that is referenced by this connection.
-- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.6.6"></a>
 ### 3.6.6 Timer Events
 
@@ -12428,7 +12428,7 @@ When a CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)) con
 When this timer expires, the [**transaction manager**](#gt_transaction-manager) communicating with a [**resource manager**](#gt_resource-manager-rm) [**facet**](#gt_facet) MUST perform the following actions:
 
 - Send a TXUSER_REENLIST_MTAG_REENLIST_TIMEOUT (section [2.2.10.3.1.4](#Section_2.2.10.3.1.4)) message using the connection that is referenced by the provided [**Enlistment**](#gt_enlistment) object.
-- Set the [**transaction**](#gt_transaction) state to Ended (section [3.2.1.3.14](#Section_3.3.1.10.3)).
+- Set the [**transaction**](#gt_transaction) state to Ended (section [3.2.1.3.14](#Section_3.2.1.3.14)).
 <a id="Section_3.6.7"></a>
 ### 3.6.7 Other Local Events
 
@@ -12436,9 +12436,9 @@ A [**transaction manager**](#gt_transaction-manager) communicating with a [**res
 
 The transaction manager communicating with a resource manager MUST be prepared to process local events pertaining to [**Phase Zero**](#gt_phase-zero) functionality only on versions where the [**connection type**](#gt_connection-type) [CONNTYPE_TXUSER_PHASE0](#Section_2.2.10.2.1) is supported. Section [2.2.1.1.3](#Section_2.2.1.1.3) defines protocol version support for this connection type. The following local events are affected:
 
-- [Create Phase Zero Enlistment Success](#Section_3.7.7.6)
-- [Create Phase Zero Enlistment Failure](#Section_3.7.7.5)
-- [Begin Phase Zero](#Section_3.2.7.5)
+- [Create Phase Zero Enlistment Success](#Section_3.6.7.8)
+- [Create Phase Zero Enlistment Failure](#Section_3.6.7.7)
+- [Begin Phase Zero](#Section_3.6.7.4)
 - [Phase Zero Aborted](#Section_3.6.7.14)
 <a id="Section_3.6.7.1"></a>
 #### 3.6.7.1 Begin Commit
@@ -12448,16 +12448,16 @@ The Begin Commit event MUST be signaled with the following arguments:
 - An [**Enlistment**](#gt_enlistment) object
 If the Begin Commit event is signaled, the [**transaction manager**](#gt_transaction-manager) MUST perform the following actions:
 
-- If the [**connection**](#gt_connection) of the provided enlistment is of type CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1.8)):
+- If the [**connection**](#gt_connection) of the provided enlistment is of type CONNTYPE_TXUSER_VOTER (section [2.2.10.4.1](#Section_2.2.10.4.1)):
 - Send a TXUSER_STATUS_MTAG_COMMITTED (section [2.2.10.4.1.2](#Section_2.2.10.4.1.2)) message using the connection.
 - Set the connection state to Ended.
-- Otherwise, if the connection of the provided enlistment is of type CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2.10)):
+- Otherwise, if the connection of the provided enlistment is of type CONNTYPE_TXUSER_ENLISTMENT (section [2.2.10.2.2](#Section_2.2.10.2.2)):
 - If the connection state is Ended:
 - Add the provided Enlistment object to the **Failed to Notify List** of the transaction manager (section [3.6.1](#Section_3.6.1)).
 - Otherwise:
 - Send a TXUSER_ENLISTMENT_MTAG_COMMITREQ (section [2.2.10.2.2.3](#Section_2.2.10.2.2.3)) message using the connection.
 - Set the connection state to Awaiting Commit Response (section [3.6.1.4.8](#Section_3.6.1.4.8)).
-- Otherwise, if the connection of the provided enlistment is of type CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1.1)):
+- Otherwise, if the connection of the provided enlistment is of type CONNTYPE_TXUSER_REENLIST (section [2.2.10.3.1](#Section_2.2.10.3.1)):
 - If the connection state is Processing Reenlist Request (section [3.6.1.5.2](#Section_3.6.1.5.2)):
 - Send a TXUSER_REENLIST_MTAG_REENLIST_COMMITTED (section [2.2.10.3.1.3](#Section_2.2.10.3.1.3)) message using the connection.
 - Set the connection state to Ended.
@@ -12515,10 +12515,10 @@ The **Begin Rollback** event MUST be signaled with the following arguments:
 - An Enlistment object
 If the **Begin Rollback** event is signaled, the [**transaction manager**](#gt_transaction-manager) MUST perform the following actions:
 
-- If the connection of the provided enlistment is of type [CONNTYPE_TXUSER_VOTER](#Section_2.2.10.4.1.8):
+- If the connection of the provided enlistment is of type [CONNTYPE_TXUSER_VOTER](#Section_2.2.10.4.1):
 - Send a [TXUSER_STATUS_MTAG_ABORTED](#Section_2.2.10.4.1.1) message using the connection.
 - Set the connection state to Ended.
-- Otherwise, if the connection of the provided enlistment is of type [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2.10):
+- Otherwise, if the connection of the provided enlistment is of type [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2):
 - If the connection state is Idle:
 - Signal the [Enlistment Rollback Complete](#Section_3.2.7.18) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the provided Enlistment object.
 - Otherwise:
@@ -12527,7 +12527,7 @@ If the **Begin Rollback** event is signaled, the [**transaction manager**](#gt_t
 - Set the connection state to Awaiting Abort Response.
 - Otherwise, if the connection state is Awaiting Prepare Response:
 - Set the connection state to Awaiting Prepare Response Aborted.
-- Otherwise, if the connection of the provided enlistment is of type [CONNTYPE_TXUSER_REENLIST](#Section_2.2.10.3.1.1):
+- Otherwise, if the connection of the provided enlistment is of type [CONNTYPE_TXUSER_REENLIST](#Section_2.2.10.3.1):
 - If the connection state is Processing Reenlist Request:
 - Send a [TXUSER_REENLIST_MTAG_REENLIST_ABORTED](#Section_2.2.10.3.1.2) message using the connection.
 - Set the connection state to Ended.
@@ -12583,7 +12583,7 @@ If the Create Resource Manager event is signaled, the [**transaction manager**](
 
 - Search for a resource manager object in the transaction manager's Active Resource Manager table with the same resource manager identifier as the provided resource manager object.
 - If such a resource manager object is found in the table:
-- If the connection object that is referenced by the found resource manager object is of type CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2.1)):
+- If the connection object that is referenced by the found resource manager object is of type CONNTYPE_TXUSER_RESOURCEMANAGERINTERNAL (section [2.2.10.1.2](#Section_2.2.10.1.2)):
 - If the connection state of the found resource manager object is either Reenlisting or Active:
 - Send a TXUSER_RESOURCEMANAGERINTERNAL_MTAG_DUPLICATEDETECTED (section [2.2.10.1.2.1](#Section_2.2.10.1.2.1)) message using the connection object that is referenced by the found resource manager object.
 - Send a TXUSER_RESOURCEMANAGER_MTAG_DUPLICATE (section [2.2.10.1.1.2](#Section_2.2.10.1.1.2)) message using the connection object that is referenced by the provided resource manager object. Set the state of the connection object that referenced the provided resource manager object to Ended.
@@ -12702,7 +12702,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that the abstract data model can be implemented in a variety of ways. This protocol does not prescribe or advocate any specific implementation technique.
 
-The [**superior transaction manager**](#gt_superior-transaction-manager) [**facet**](#gt_facet) MUST maintain all the data elements that are specified in sections [3.1.1](#Section_3.1.3.1) and [3.2.1](#Section_3.2.1).
+The [**superior transaction manager**](#gt_superior-transaction-manager) [**facet**](#gt_facet) MUST maintain all the data elements that are specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.2.1).
 
 The Superior Transaction Manager facet MUST also maintain the following data elements:
 
@@ -12717,7 +12717,7 @@ The superior transaction manager MUST provide the states that are defined in the
 
 The [**superior transaction manager**](#gt_superior-transaction-manager) MUST act as an [**initiator**](#gt_initiator) for the CONNTYPE_PARTNERTM_PROPAGATE (section [2.2.9.1.1.1](#Section_2.2.9.1.1.1)) [**connection type**](#gt_connection-type). In this role, the superior transaction manager MUST provide support for the states in this section:
 
-- Idle (section [3.7.1.1.1](#Section_3.7.1.1.10))
+- Idle (section [3.7.1.1.1](#Section_3.7.1.1.1))
 - Awaiting Propagation Response (section [3.7.1.1.2](#Section_3.7.1.1.2))
 - Active (section [3.7.1.1.3](#Section_3.7.1.1.3))
 - Awaiting Abort Response (section [3.7.1.1.4](#Section_3.7.1.1.4))
@@ -12756,8 +12756,8 @@ The following events are processed in this state:
 
 - Receiving PARTNERTM_PROPAGATE_MTAG_PHASE0REGISTER (section [3.7.5.1.1.1.3](#Section_3.7.5.1.1.1.3))
 - Receiving PARTNERTM_PROPAGATE_MTAG_ABORTNOTIFY (section [3.7.5.1.1.1.4](#Section_3.7.5.1.1.1.4))
-- Begin Phase One (section [3.7.7.2](#Section_3.2.7.4)).
-- Begin Rollback (section [3.7.7.4](#Section_3.4.7.5))
+- Begin Phase One (section [3.7.7.2](#Section_3.7.7.2)).
+- Begin Rollback (section [3.7.7.4](#Section_3.7.7.4))
 <a id="Section_3.7.1.1.4"></a>
 ##### 3.7.1.1.4 Awaiting Abort Response
 
@@ -12777,7 +12777,7 @@ The following events are processed in this state:
 The following events are processed in this state:
 
 - Receiving PARTNERTM_PROPAGATE_MTAG_ABORTNOTIFY (section [3.7.5.1.1.1.3](#Section_3.7.5.1.1.1.3))
-- Begin Phase Zero (section [3.7.7.3](#Section_3.2.7.5))
+- Begin Phase Zero (section [3.7.7.3](#Section_3.7.7.3))
 - Receiving PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR (section [3.7.5.1.1.1.4](#Section_3.7.5.1.1.1.4))
 <a id="Section_3.7.1.1.7"></a>
 ##### 3.7.1.1.7 Phase Zero
@@ -12814,8 +12814,8 @@ The following events are processed in this state:
 
 The following events are processed in this state:
 
-- Begin Commit (section [3.7.7.1](#Section_3.2.7.2))
-- Begin Rollback (section [3.7.7.4](#Section_3.4.7.5))
+- Begin Commit (section [3.7.7.1](#Section_3.7.7.1))
+- Begin Rollback (section [3.7.7.4](#Section_3.7.7.4))
 <a id="Section_3.7.1.1.12"></a>
 ##### 3.7.1.1.12 Awaiting Commit Response
 
@@ -12850,7 +12850,7 @@ This is the initial state. The following event is processed in this state:
 
 The following events are processed in this state:
 
-- Create Subordinate Enlistment Success (section [3.7.7.8](#Section_3.6.7.11))
+- Create Subordinate Enlistment Success (section [3.7.7.8](#Section_3.7.7.8))
 - Create Subordinate Enlistment Failure (section [3.7.7.7](#Section_3.7.7.7))
 <a id="Section_3.7.1.2.3"></a>
 ##### 3.7.1.2.3 Active
@@ -12859,8 +12859,8 @@ The following events are processed in this state:
 
 - Receiving PARTNERTM_PROPAGATE_MTAG_PHASE0REGISTER (section [3.7.5.1.2.1.2](#Section_3.7.5.1.2.1.2))
 - Receiving PARTNERTM_PROPAGATE_MTAG_ABORTNOTIFY (section [3.7.5.1.2.1.4](#Section_3.7.5.1.2.1.4))
-- Begin Phase One (section [3.7.7.2](#Section_3.2.7.4))
-- Begin Rollback (section [3.7.7.4](#Section_3.4.7.5)).
+- Begin Phase One (section [3.7.7.2](#Section_3.7.7.2))
+- Begin Rollback (section [3.7.7.4](#Section_3.7.7.4)).
 <a id="Section_3.7.1.2.4"></a>
 ##### 3.7.1.2.4 Awaiting Abort Response
 
@@ -12880,7 +12880,7 @@ The following events are processed in this state:
 The following events are processed in this state:
 
 - Receiving PARTNERTM_PROPAGATE_MTAG_ABORTNOTIFY (section [3.7.5.1.2.1.4](#Section_3.7.5.1.2.1.4))
-- Begin Phase Zero (section [3.7.7.3](#Section_3.2.7.5))
+- Begin Phase Zero (section [3.7.7.3](#Section_3.7.7.3))
 - Receiving PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR (section [3.7.5.1.2.1.8](#Section_3.7.5.1.2.1.8))
 <a id="Section_3.7.1.2.7"></a>
 ##### 3.7.1.2.7 Phase Zero
@@ -12917,8 +12917,8 @@ The following events are processed in this state:
 
 The following events are processed in this state:
 
-- Begin Commit (section [3.7.7.1](#Section_3.2.7.2))
-- Begin Rollback (section [3.7.7.4](#Section_3.4.7.5))
+- Begin Commit (section [3.7.7.1](#Section_3.7.7.1))
+- Begin Rollback (section [3.7.7.4](#Section_3.7.7.4))
 <a id="Section_3.7.1.2.12"></a>
 ##### 3.7.1.2.12 Awaiting Commit Response
 
@@ -12947,7 +12947,7 @@ Figure 59: CONNTYPE_PARTNERTM_REDELIVERCOMMIT initiator states
 
 This is the initial state. The following event is processed in this state:
 
-- Begin Commit (section [3.7.7.1](#Section_3.2.7.2))
+- Begin Commit (section [3.7.7.1](#Section_3.7.7.1))
 <a id="Section_3.7.1.3.2"></a>
 ##### 3.7.1.3.2 Awaiting Confirmation
 
@@ -12996,7 +12996,7 @@ This is the final state.
 <a id="Section_3.7.2"></a>
 ### 3.7.2 Timers
 
-The [**superior transaction manager**](#gt_superior-transaction-manager) [**facet**](#gt_facet) MUST provide the following [Redeliver Commit Timer](#Section_3.7.6.1).
+The [**superior transaction manager**](#gt_superior-transaction-manager) [**facet**](#gt_facet) MUST provide the following [Redeliver Commit Timer](#Section_3.7.2.1).
 
 <a id="Section_3.7.2.1"></a>
 #### 3.7.2.1 Redeliver Commit Timer
@@ -13036,7 +13036,7 @@ No higher-layer triggered events apply.
 <a id="Section_3.7.5.1.1.1"></a>
 ###### 3.7.5.1.1.1 CONNTYPE_PARTNERTM_PROPAGATE as Initiator
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**superior transaction manager**](#gt_superior-transaction-manager) MUST process the message as specified in section [3.1](#Section_1.3).
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**superior transaction manager**](#gt_superior-transaction-manager) MUST process the message as specified in section [3.1](#Section_3.1).
 
 Also, for incoming messages, the superior transaction manager MUST override the verification actions of the default state as specified in section 3.1 in the following manner:
 
@@ -13084,7 +13084,7 @@ When the [**superior transaction manager**](#gt_superior-transaction-manager) fa
 <a id="Section_3.7.5.1.1.1.4"></a>
 Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR Message
 
-The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.3.5.3.4.2) event.
+The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.1.8.3) event.
 
 Connection Disconnected
 
@@ -13107,7 +13107,7 @@ When a CONNTYPE_PARTNERTM_PROPAGATE (section [2.2.9.1.1.1](#Section_2.2.9.1.1.
 <a id="Section_3.7.5.1.2.1"></a>
 ###### 3.7.5.1.2.1 CONNTYPE_PARTNERTM_BRANCH as Acceptor
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [**superior transaction manager**](#gt_superior-transaction-manager) MUST process the message as specified in section [3.1](#Section_1.3).
+For all messages that are received in this [**connection type**](#gt_connection-type), the [**superior transaction manager**](#gt_superior-transaction-manager) MUST process the message as specified in section [3.1](#Section_3.1).
 
 Also, for incoming messages, the superior transaction manager MUST override the verification actions of the default state, as specified in section [3.1.6](#Section_3.1.6), in the following manner:
 
@@ -13119,7 +13119,7 @@ The superior transaction manager MUST also follow the processing rules as specif
 <a id="Section_3.7.5.1.2.1.1"></a>
 Receiving a PARTNERTM_BRANCH_MTAG_BRANCHING Message
 
-When the [**superior transaction manager**](#gt_superior-transaction-manager) receives a [PARTNERTM_BRANCH_MTAG_BRANCHING](#Section_3.7.1.2.2) message, the superior transaction manager MUST perform the following actions:
+When the [**superior transaction manager**](#gt_superior-transaction-manager) receives a [PARTNERTM_BRANCH_MTAG_BRANCHING](#Section_2.2.9.1.2.1.7) message, the superior transaction manager MUST perform the following actions:
 
 - If the [**connection**](#gt_connection) state is Idle:
 - Set the connection state to Branching.
@@ -13216,7 +13216,7 @@ When the [**superior transaction manager**](#gt_superior-transaction-manager) re
 <a id="Section_3.7.5.1.2.1.8"></a>
 Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR Message
 
-The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.3.5.3.4.2) event.
+The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.1.8.3) event.
 
 Connection Disconnected
 
@@ -13248,7 +13248,7 @@ When a CONNTYPE_PARTNERTM_BRANCH (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1))
 - The Aborted outcome value
 - Otherwise, if the connection state is either Branching, Active, Phase Zero Registration, or Requesting Phase Zero:
 - Signal the Enlistment Unilaterally Aborted (section [3.2.7.19](#Section_3.2.7.19)) event on the Core Transaction Manager Facet with the Enlistment object that is referenced by this connection.
-- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.7.5.2"></a>
 #### 3.7.5.2 Transaction Recovery
 
@@ -13258,7 +13258,7 @@ When a CONNTYPE_PARTNERTM_BRANCH (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1))
 <a id="Section_3.7.5.2.1.1"></a>
 ###### 3.7.5.2.1.1 CONNTYPE_PARTNERTM_CHECKABORT as Acceptor
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**Superior Transaction Manager**](#gt_superior-transaction-manager) [**facet**](#gt_facet) MUST process the message in accordance with section [3.1](#Section_1.3). The Superior Transaction Manager facet MUST additionally follow the processing rules specified in the following sections.
+For all messages received in this [**connection type**](#gt_connection-type), the [**Superior Transaction Manager**](#gt_superior-transaction-manager) [**facet**](#gt_facet) MUST process the message in accordance with section [3.1](#Section_3.1). The Superior Transaction Manager facet MUST additionally follow the processing rules specified in the following sections.
 
 <a id="Section_3.7.5.2.1.1.1"></a>
 Receiving a PARTNERTM_CHECKABORT_MTAG_CHECK Message
@@ -13277,7 +13277,7 @@ When the [**Superior Transaction Manager**](#gt_superior-transaction-manager) [*
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 Connection Disconnected
 
-When a CONNTYPE_PARTNERTM_CHECKABORT (section [2.2.9.2.1.1](#Section_2.2.9.2.1.1)) connection is disconnected, the Superior Transaction Manager Facet (section [1.3.3.3.4](#Section_1.3.3.3.4)) MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_PARTNERTM_CHECKABORT (section [2.2.9.2.1.1](#Section_2.2.9.2.1.1)) connection is disconnected, the Superior Transaction Manager Facet (section [1.3.3.3.4](#Section_1.3.3.3.4)) MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.7.5.2.2"></a>
 ##### 3.7.5.2.2 Superior-Driven Recovery
@@ -13285,7 +13285,7 @@ When a CONNTYPE_PARTNERTM_CHECKABORT (section [2.2.9.2.1.1](#Section_2.2.9.2.1
 <a id="Section_3.7.5.2.2.1"></a>
 ###### 3.7.5.2.2.1 CONNTYPE_PARTNERTM_REDELIVERCOMMIT as Initiator
 
-For all messages received in this [**connection type**](#gt_connection-type), the [**Superior Transaction Manager**](#gt_superior-transaction-manager) [**Facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_1.3). The Superior Transaction Manager Facet MUST additionally follow the processing rules as specified in this section.
+For all messages received in this [**connection type**](#gt_connection-type), the [**Superior Transaction Manager**](#gt_superior-transaction-manager) [**Facet**](#gt_facet) MUST process the message as specified in section [3.1](#Section_3.1). The Superior Transaction Manager Facet MUST additionally follow the processing rules as specified in this section.
 
 <a id="Section_3.7.5.2.2.1.1"></a>
 Receiving a PARTNERTM_REDELIVERCOMMIT_MTAG_COMMITREQDONE Message
@@ -13305,7 +13305,7 @@ When the [**superior transaction manager**](#gt_superior-transaction-manager) fa
 - Set the connection state to Waiting to Rerequest.
 - Initialize a Redeliver Commit timer with the following arguments:
 - The Enlistment object of the connection
-- An implementation-specific time-out value, as specified in [Redeliver Commit Timer](#Section_3.7.6.1)
+- An implementation-specific time-out value, as specified in [Redeliver Commit Timer](#Section_3.7.2.1)
 - Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.6](#Section_3.1.6).
 Connection Disconnected
 
@@ -13315,8 +13315,8 @@ When a CONNTYPE_PARTNERTM_REDELIVERCOMMIT (section [2.2.9.2.2.1](#Section_2.2.
 - Cancel the Redeliver Commit Timer associated with the connection.
 - If the connection state is Idle, Waiting to Rerequest, or Awaiting Confirmation:
 - Set the connection state to Ended.
-- Signal the Begin Commit (section [3.7.7.1](#Section_3.2.7.2)) event on the Superior Transaction Manager Facet with the Enlistment object referenced by the **Enlistment** field of the connection.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Signal the Begin Commit (section [3.7.7.1](#Section_3.7.7.1)) event on the Superior Transaction Manager Facet with the Enlistment object referenced by the **Enlistment** field of the connection.
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.7.6"></a>
 ### 3.7.6 Timer Events
 
@@ -13341,8 +13341,8 @@ The Superior Transaction Manager MUST be prepared to process local events pertai
 
 - [Create Phase Zero Enlistment Success](#Section_3.7.7.6)
 - [Create Phase Zero Enlistment Failure](#Section_3.7.7.5)
-- [Begin Phase Zero](#Section_3.2.7.5)
-- [Phase Zero Aborted](#Section_3.6.7.14)
+- [Begin Phase Zero](#Section_3.7.7.3)
+- [Phase Zero Aborted](#Section_3.7.7.9)
 <a id="Section_3.7.7.1"></a>
 #### 3.7.7.1 Begin Commit
 
@@ -13500,7 +13500,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that the abstract data model can be implemented in a variety of ways. This protocol does not prescribe or advocate any specific implementation technique.
 
-The Subordinate Transaction Manager Facet (section [3.8](#Section_3.8)) MUST maintain all the data elements as specified in section [3.1.1](#Section_3.1.3.1) and section [3.2.1](#Section_3.2.1).
+The Subordinate Transaction Manager Facet (section [3.8](#Section_3.8)) MUST maintain all the data elements as specified in section [3.1.1](#Section_3.1.1) and section [3.2.1](#Section_3.2.1).
 
 [**Enlistment**](#gt_enlistment) objects that are created by the [**subordinate transaction manager**](#gt_subordinate-transaction-manager) MUST provide the following properties as specified in section 3.1.1:
 
@@ -13551,7 +13551,7 @@ The following events are processed in this state:
 The following events are processed in this state:
 
 - Register Phase Zero (section [3.8.7.9](#Section_3.8.7.9))
-- Unilaterally Aborted (section [3.8.7.11](#Section_3.4.7.23))
+- Unilaterally Aborted (section [3.8.7.11](#Section_3.8.7.11))
 - Receiving a PARTNERTM_PROPAGATE_MTAG_ABORTREQ message (section [3.8.5.1.2.1.5](#Section_3.8.5.1.2.1.5))
 - Receiving a PARTNERTM_PROPAGATE_MTAG_PREPAREREQ message (section [3.8.5.1.2.1.7](#Section_3.8.5.1.2.1.7))
 - Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR message (section [3.8.5.1.1.1.3](#Section_3.8.5.1.1.1.3))
@@ -13573,15 +13573,15 @@ The following events are processed in this state:
 
 *The following events are processed in this state:*
 
-- *Receiving a PARTNERTM_PROPAGATE_MTAG_PHASE0 message (section* [*3.8.5.1.2.1.6*](#Section_b67349bf782c4c8e8ac6d55bb1570a0f)*)*
-- *Unilaterally Aborted (section* [*3.8.7.11*](#Section_3.4.7.23)*)*
-- *Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR message (section* [*3.8.5.1.2.1.9*](#Section_7a54927eda2e44d68a5c2fcea0d2df93))
+- *Receiving a PARTNERTM_PROPAGATE_MTAG_PHASE0 message (section* [*3.8.5.1.2.1.6*](#Section_3.8.5.1.2.1.6)*)*
+- *Unilaterally Aborted (section* [*3.8.7.11*](#Section_3.8.7.11)*)*
+- *Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR message (section* [*3.8.5.1.2.1.9*](#Section_3.8.5.1.2.1.9))
 <a id="Section_3.8.1.1.7"></a>
 ##### 3.8.1.1.7 Awaiting Phase Zero Outcome
 
 The following events are processed in this state:
 
-- Phase Zero Complete (section [3.8.7.6](#Section_3.2.1.3.4))
+- Phase Zero Complete (section [3.8.7.6](#Section_3.8.7.6))
 - Register Phase Zero (section [3.8.7.9](#Section_3.8.7.9))
 <a id="Section_3.8.1.1.8"></a>
 ##### 3.8.1.1.8 Awaiting Registration Response During Phase Zero
@@ -13596,13 +13596,13 @@ The following events are processed in this state:
 
 The following event is processed in this state:
 
-- Phase Zero Complete (section [3.8.7.6](#Section_3.2.1.3.4))
+- Phase Zero Complete (section [3.8.7.6](#Section_3.8.7.6))
 <a id="Section_3.8.1.1.10"></a>
 ##### 3.8.1.1.10 Preparing
 
 The following event is processed in this state:
 
-- Phase One Complete (section [3.8.7.7](#Section_3.2.1.3.8))
+- Phase One Complete (section [3.8.7.7](#Section_3.8.7.7))
 <a id="Section_3.8.1.1.11"></a>
 ##### 3.8.1.1.11 Prepared
 
@@ -13652,7 +13652,7 @@ The following events are processed in this state:
 The following events are processed in this state:
 
 - Register Phase Zero (section [3.8.7.9](#Section_3.8.7.9))
-- Unilaterally Aborted (section [3.8.7.11](#Section_3.4.7.23))
+- Unilaterally Aborted (section [3.8.7.11](#Section_3.8.7.11))
 - Receiving a PARTNERTM_PROPAGATE_MTAG_ABORTREQ Message (section [3.8.5.1.2.1.5](#Section_3.8.5.1.2.1.5))
 - Receiving a PARTNERTM_PROPAGATE_MTAG_PREPAREREQ Message (section [3.8.5.1.2.1.7](#Section_3.8.5.1.2.1.7))
 - Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR Message (section [3.8.5.1.2.1.9](#Section_3.8.5.1.2.1.9))
@@ -13676,14 +13676,14 @@ The following events are processed in this state:
 The following events are processed in this state:
 
 - Receiving a PARTNERTM_PROPAGATE_MTAG_PHASE0 (section [3.8.5.1.2.1.6](#Section_3.8.5.1.2.1.6)) message
-- Unilaterally Aborted (section [3.8.7.11](#Section_3.4.7.23)).
+- Unilaterally Aborted (section [3.8.7.11](#Section_3.8.7.11)).
 - Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR (section [3.8.5.1.2.1.9](#Section_3.8.5.1.2.1.9)) message
 <a id="Section_3.8.1.2.7"></a>
 ##### 3.8.1.2.7 Awaiting Phase Zero Outcome
 
 The following event is processed in this state:
 
-- Phase Zero Complete (section [3.8.7.6](#Section_3.2.1.3.4))
+- Phase Zero Complete (section [3.8.7.6](#Section_3.8.7.6))
 <a id="Section_3.8.1.2.8"></a>
 ##### 3.8.1.2.8 Awaiting Registration Response During Phase Zero
 
@@ -13697,13 +13697,13 @@ The following events are processed in this state:
 
 The following event is processed in this state:
 
-- Phase Zero Complete (section [3.8.7.6](#Section_3.2.1.3.4))
+- Phase Zero Complete (section [3.8.7.6](#Section_3.8.7.6))
 <a id="Section_3.8.1.2.10"></a>
 ##### 3.8.1.2.10 Preparing
 
 The following event is processed in this state:
 
-- Phase One Complete (section [3.8.7.7](#Section_3.2.1.3.8))
+- Phase One Complete (section [3.8.7.7](#Section_3.8.7.7))
 <a id="Section_3.8.1.2.11"></a>
 ##### 3.8.1.2.11 Prepared
 
@@ -13833,7 +13833,7 @@ There are no higher-layer triggered events.
 <a id="Section_3.8.5.1.1.1"></a>
 ###### 3.8.5.1.1.1 CONNTYPE_PARTNERTM_PROPAGATE as Acceptor
 
-For all messages received in this connection type, the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) MUST process the message as specified in section [3.1](#Section_1.3).
+For all messages received in this connection type, the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) MUST process the message as specified in section [3.1](#Section_3.1).
 
 Also, the **Subordinate Transaction Manager Facet** MUST override the default state verification actions for incoming messages as specified in section [3.1.6](#Section_3.1.6) in the following manner:
 
@@ -13885,7 +13885,7 @@ It MUST follow the same message processing rules as the CONNTYPE_PARTNERTM_BRANC
 <a id="Section_3.8.5.1.1.1.3"></a>
 Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR Message
 
-The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.3.5.3.4.2) event.
+The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.1.8.3) event.
 
 <a id="Section_3.8.5.1.1.1.4"></a>
 CONTYPE_PARTNERTM_PROPAGATE Connection Disconnected
@@ -13898,7 +13898,7 @@ When a CONNTYPE_PARTNERTM_PROPAGATE (section [2.2.9.1.1.1](#Section_2.2.9.1.1.
 <a id="Section_3.8.5.1.2.1"></a>
 ###### 3.8.5.1.2.1 CONNTYPE_PARTNERTM_BRANCH as Initiator
 
-For all messages received in this connection type, the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) MUST process the message as specified in section [3.1](#Section_1.3).
+For all messages received in this connection type, the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) MUST process the message as specified in section [3.1](#Section_3.1).
 
 Also, the **Subordinate Transaction Manager Facet** MUST override the default state verification actions for incoming messages as specified in section [3.1.6](#Section_3.1.6) in the following manner:
 
@@ -13973,7 +13973,7 @@ When the **Subordinate Transaction Manager Facet** receives a [PARTNERTM_PROPAGA
 
 - If the connection state is either Active or Prepared:
 - Set the connection state to Aborting.
-- Signal the [Begin Rollback](#Section_3.4.7.5) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the transaction object referenced by the Enlistment object referenced by this connection.
+- Signal the [Begin Rollback](#Section_3.2.7.6) event on the [Core Transaction Manager Facet](#Section_1.3.3.3.1) with the transaction object referenced by the Enlistment object referenced by this connection.
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.8.5.1.2.1.6"></a>
 Receiving a PARTNERTM_PROPAGATE_MTAG_PHASE0 Message
@@ -14010,7 +14010,7 @@ When the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Secti
 <a id="Section_3.8.5.1.2.1.9"></a>
 Receiving a PARTNERTM_PROPAGATE_MTAG_PROTOCOL_ERROR Message
 
-The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.3.5.3.4.2) event.
+The processing of this event MUST be identical to the processing of the [Connection Disconnected](#Section_3.1.8.3) event.
 
 Connection Disconnected
 
@@ -14019,8 +14019,8 @@ When a CONNTYPE_PARTNERTM_BRANCH (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1))
 - If the connection state is Prepared:
 - Signal the Recover **In Doubt Transaction** (section [3.8.7.8](#Section_3.8.7.8)) event on the **Subordinate Transaction Manager Facet** with the Enlistment object referenced by this connection.
 - Otherwise, if the connection state is Preparing:
-- If the transaction object's Single Phase Commit flag (defined in section [3.2.1](#Section_3.2.1)) is false, signal the **Begin Rollback** (section [3.2.7.6](#Section_3.4.7.5)) event on **Core Transaction Manager Facet** (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the transaction object referenced by the **Enlistment** object referenced by this connection.
-- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- If the transaction object's Single Phase Commit flag (defined in section [3.2.1](#Section_3.2.1)) is false, signal the **Begin Rollback** (section [3.2.7.6](#Section_3.2.7.6)) event on **Core Transaction Manager Facet** (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the transaction object referenced by the **Enlistment** object referenced by this connection.
+- Otherwise, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 - Otherwise, if the connection state is Awaiting Branch Response:
 - Create an Enlistment object with the following values:
 - The **Subordinate Transaction Manager Facet**.
@@ -14050,7 +14050,7 @@ Receiving a PARTNERTM_CHECKABORT_MTAG_ABORTED Message
 When the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) receives a **PARTNERTM_CHECKABORT_MTAG_ABORTED** (section [2.2.9.2.1.1.2](#Section_2.2.9.2.1.1.2)) message, the **Subordinate Transaction Manager** MUST perform the following actions:
 
 - If the connection state is Awaiting Confirmation:
-- Signal the **Begin Rollback** (section [3.2.7.6](#Section_3.4.7.5)) event on the **Core Transaction Manager Facet** (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the:
+- Signal the **Begin Rollback** (section [3.2.7.6](#Section_3.2.7.6)) event on the **Core Transaction Manager Facet** (section [1.3.3.3.1](#Section_1.3.3.3.1)) with the:
 - The transaction object referenced by the **Enlistment** object referenced by this connection.
 - Set the Connection state to Ended.
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
@@ -14075,7 +14075,7 @@ When a CONNTYPE_PARTNERTM_CHECKABORT (section [2.2.9.2.1.1](#Section_2.2.9.2.1
 - If the connection state is Idle, Waiting to Rerequest, or Awaiting Confirmation:
 - Signal the Recover In Doubt Transaction (section [3.8.7.8](#Section_3.8.7.8)) event on the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) with the Enlistment object referenced by this connection.
 - Set the connection state to Ended.
-- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+- Finally, in all cases, the event MUST be processed as specified in section [3.1.8.3](#Section_3.1.8.3).
 <a id="Section_3.8.5.2.2"></a>
 ##### 3.8.5.2.2 Superior-Driven Recovery
 
@@ -14104,7 +14104,7 @@ When the **subordinate transaction manager** receives a **PARTNERTM_REDELIVERCOM
 - Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.8.1](#Section_3.1.8.1).
 Connection Disconnected
 
-When a CONNTYPE_PARTNERTM_REDELIVERCOMMIT (section [2.2.9.2.2.1](#Section_2.2.9.2.2.1)) connection is disconnected, the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) MUST perform the actions as specified in section [3.1.8.3](#Section_3.3.5.3.4.2).
+When a CONNTYPE_PARTNERTM_REDELIVERCOMMIT (section [2.2.9.2.2.1](#Section_2.2.9.2.2.1)) connection is disconnected, the **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.3.3.5)) MUST perform the actions as specified in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_3.8.6"></a>
 ### 3.8.6 Timer Events
@@ -14128,7 +14128,7 @@ A **Subordinate Transaction Manager Facet** (section [1.3.3.3.5](#Section_1.3.
 The **subordinate transaction manager** MUST be prepared to process local events pertaining to Phase Zero functionality only on versions where the connection type [CONNTYPE_TXUSER_PHASE0](#Section_2.2.10.2.1) is supported. Version-Specific Aspects of Connection Types Relevant to a Resource Manager (section [2.2.1.1.3](#Section_2.2.1.1.3)) defines protocol version support for this connection type. The following local events are affected:
 
 - [Register Phase Zero](#Section_3.8.7.9)
-- [Phase Zero Complete](#Section_3.2.1.3.4)
+- [Phase Zero Complete](#Section_3.8.7.6)
 <a id="Section_3.8.7.1"></a>
 #### 3.8.7.1 Branch Transaction
 
@@ -14140,7 +14140,7 @@ If the **Branch Transaction** event is signaled, the **Subordinate Transaction M
 
 - Initiate a new **CONNTYPE_PARTNERTM_BRANCH** (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1)) connection to the provided Name object.
 - Assign the provided transaction object to the connection's Connection-Specific Data field.
-- Send a **PARTNERTM_BRANCH_MTAG_BRANCHING** (section [2.2.9.1.2.1.7](#Section_3.7.1.2.2)) message using the connection:
+- Send a **PARTNERTM_BRANCH_MTAG_BRANCHING** (section [2.2.9.1.2.1.7](#Section_2.2.9.1.2.1.7)) message using the connection:
 - Set the **guidTX** field to the provided **Transaction Object.Identifier** field of the transaction object.
 - Set the connection state to Awaiting Branch Response (section [3.8.1.2.2](#Section_3.8.1.2.2)).
 <a id="Section_3.8.7.2"></a>
@@ -14218,7 +14218,7 @@ If the **Phase Zero Complete** event is signaled, the **Subordinate Transaction 
 The **Phase One Complete** event MUST be signaled with the following arguments:
 
 - An Enlistment object.
-- A value indicating the outcome of [Phase One](#Section_3.2.1.3.7). The value MUST be set to one of the following values:
+- A value indicating the outcome of [Phase One](#Section_4.5.1). The value MUST be set to one of the following values:
 - Read Only
 - Prepared
 - Committed
@@ -14305,7 +14305,7 @@ If the **Unilaterally Aborted** event is signaled, the **Subordinate Transaction
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-The following sections describe several operations as used in common scenarios to illustrate the function of this protocol. These protocol examples generally assume that an OleTx transports session, as specified in [MS-CMPO](#Section_2.1) section 3.2.1.2, has already been established between the two participants. However, some examples exhibit how one participant establishes a new OleTx transports session with another participant because of the protocol that is being demonstrated.
+The following sections describe several operations as used in common scenarios to illustrate the function of this protocol. These protocol examples generally assume that an OleTx transports session, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.1.2, has already been established between the two participants. However, some examples exhibit how one participant establishes a new OleTx transports session with another participant because of the protocol that is being demonstrated.
 
 Participants communicate with each other by using OleTx multiplexing connections, as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.1.1, that are in turn layered on top of the OleTx transports infrastructure (as specified in [MS-CMPO] section 3.3.1). In these examples, messages are sent from one participant to another by submitting a MESSAGE_PACKET (section [2.2.4.1](#Section_2.2.4.1)) to the underlying OleTx multiplexing layer, as specified in [MS-CMP] section 3.1.4.1.
 
@@ -14319,7 +14319,7 @@ This scenario shows how an application creates and completes a transaction. The 
 
 This packet sequence is initiated by starting a connection on a transport session between an application and a transaction manager.
 
-[CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4): The packet sequence starts when an application initiates a connection using CONNTYPE_TXUSER_BEGIN2.
+[CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2): The packet sequence starts when an application initiates a connection using CONNTYPE_TXUSER_BEGIN2.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -14377,7 +14377,7 @@ The application commits the transaction by sending a [TXUSER_BEGIN2_MTAG_COMMIT]
 | dwReserved1: 0xcd64cd64 | dwReserved1 | 0xcd64cd64 |
 | Variable | grfRM | 0x00000000 0 |
 
-In response, the transaction manager attempts to commit the transaction by using a **two-phase commit**. If the transaction manager successfully completes [Phase One](#Section_3.2.1.3.7) of the transaction, the **transaction manager** sends a [TXUSER_BEGIN2_MTAG_SINK_ERROR](#Section_2.2.8.1.2.5) user message to the application with TRUN_TXBEGIN_ERROR_NOTIFY_COMMITTED specified in the **Error** field.
+In response, the transaction manager attempts to commit the transaction by using a **two-phase commit**. If the transaction manager successfully completes [Phase One](#Section_4.5.1) of the transaction, the **transaction manager** sends a [TXUSER_BEGIN2_MTAG_SINK_ERROR](#Section_2.2.8.1.2.5) user message to the application with TRUN_TXBEGIN_ERROR_NOTIFY_COMMITTED specified in the **Error** field.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -14484,7 +14484,7 @@ After the receiving application gets the TXUSER_ASSOCIATE_MTAG_ASSOCIATED respon
 
 If the receiver's transaction manager does not have a reference to the requested transaction in its list of transaction objects, it attempts to contact the sender's transaction manager. If successful, it requests a subordinate branch to the transaction through the sender's transaction manager.
 
-To branch the transaction, the receiver's transaction manager needs to have a transport session with the sender's transaction manager. If there is no existing transport session, the receiver's transaction manager uses the **OLETX_TM_ADDR** information about the sender's transaction manager from the Propagation_Token (section [2.2.5.4](#Section_3.3.4.3)) to initiate a session between the two participants. Depending on the value of both participants' contact identifiers, the receiver's transaction manager initiates the transport session as either the primary or secondary partner.
+To branch the transaction, the receiver's transaction manager needs to have a transport session with the sender's transaction manager. If there is no existing transport session, the receiver's transaction manager uses the **OLETX_TM_ADDR** information about the sender's transaction manager from the Propagation_Token (section [2.2.5.4](#Section_2.2.5.4)) to initiate a session between the two participants. Depending on the value of both participants' contact identifiers, the receiver's transaction manager initiates the transport session as either the primary or secondary partner.
 
 To branch the transaction, the receiver's transaction manager initiates a connection over its transport session with the sender's transaction manager. If the transaction branching is successful, the **superior transaction manager** (that is, the sender's transaction manager) adds the receiver's transaction manager as a subordinate branch to the transaction.
 
@@ -14499,7 +14499,7 @@ To branch the transaction, the receiver's transaction manager initiates a connec
 | Variable | dwcbVarLenData | 0x00000000 0 |
 | dwReserved1: 0xcd64cd64 | dwReserved1 | 0xcd64cd64 |
 
-The receiver's **transaction manager** then sends a [PARTNERTM_BRANCH_MTAG_BRANCHING](#Section_3.7.1.2.2) user message with the transaction identifier of the requested transaction.
+The receiver's **transaction manager** then sends a [PARTNERTM_BRANCH_MTAG_BRANCHING](#Section_2.2.9.1.2.1.7) user message with the transaction identifier of the requested transaction.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -14768,7 +14768,7 @@ The resource manager needs to keep this connection open for the duration of its 
 
 To enlist in an existing transaction, the resource manager needs to have knowledge of the existing transaction, which likely happened as a result of marshaling the transaction from an application to the resource manager.
 
-[CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2.10): The packet sequence starts when the resource manager initiates a connection by using CONNTYPE_TXUSER_ENLISTMENT.
+[CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2): The packet sequence starts when the resource manager initiates a connection by using CONNTYPE_TXUSER_ENLISTMENT.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -14867,21 +14867,21 @@ When the resource manager successfully completes its commit work, it replies to 
 | Variable | dwcbVarLenData | 0x00000000 0 |
 | dwReserved1: 0xcd64cd64 | dwReserved1 | 0xcd64cd64 |
 
-The resource manager has now completed all its work that is associated with the transaction and initiates the disconnect sequence on its [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2.10) connection with its transaction manager.
+The resource manager has now completed all its work that is associated with the transaction and initiates the disconnect sequence on its [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2) connection with its transaction manager.
 
 <a id="Section_4.5"></a>
 ## 4.5 Transaction Manager Two-Phase Commit Scenario
 
 This scenario shows how a **transaction manager** performs the **Two-Phase Commit** Protocol as both the superior transaction manager facet and the subordinate transaction manager facet.
 
-For this scenario, all connections that are associated with the transaction are extant. The root **transaction manager** has an existing [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) connection between itself and the initiating application. Optionally, the transaction has one or more existing [CONNTYPE_PARTNERTM_BRANCH](#Section_2.2.9.1.2.1) or [CONNTYPE_PARTNERTM_PROPAGATE](#Section_2.2.9.1.1.1) connections between a **superior transaction manager facet** and its subordinate transaction manager facets. (A **Subordinate Transaction Manager Facet** can also act as a superior transaction manager facet if it has any subordinate branches.) Optionally, each transaction manager also has one or more [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2.10) connections with its registered **resource managers**.
+For this scenario, all connections that are associated with the transaction are extant. The root **transaction manager** has an existing [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) connection between itself and the initiating application. Optionally, the transaction has one or more existing [CONNTYPE_PARTNERTM_BRANCH](#Section_2.2.9.1.2.1) or [CONNTYPE_PARTNERTM_PROPAGATE](#Section_2.2.9.1.1.1) connections between a **superior transaction manager facet** and its subordinate transaction manager facets. (A **Subordinate Transaction Manager Facet** can also act as a superior transaction manager facet if it has any subordinate branches.) Optionally, each transaction manager also has one or more [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2) connections with its registered **resource managers**.
 
 For this scenario, it is assumed that there are no phase-zero or voter enlistments and that the root transaction manager has more than one subordinate branch and thus will not perform a **single-phase commit**.
 
 <a id="Section_4.5.1"></a>
 ### 4.5.1 Phase One
 
-The protocol sequence begins when the **root transaction manager** receives the [TXUSER_BEGIN2_MTAG_COMMIT](#Section_2.2.8.1.2.3) user message from the initiating application over its existing [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2.4) connection (compare [Committing the Transaction](#Section_4.1.2.1)).
+The protocol sequence begins when the **root transaction manager** receives the [TXUSER_BEGIN2_MTAG_COMMIT](#Section_2.2.8.1.2.3) user message from the initiating application over its existing [CONNTYPE_TXUSER_BEGIN2](#Section_2.2.8.1.2) connection (compare [Committing the Transaction](#Section_4.1.2.1)).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -14898,7 +14898,7 @@ The root transaction manager then iterates through the subordinate branches of e
 <a id="Section_4.5.1.1"></a>
 #### 4.5.1.1 Phase One - Subordinate Resource Managers
 
-If the subordinate branch is a **resource manager** (that is, using a [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2.10) connection), the transaction manager sends a [TXUSER_ENLISTMENT_MTAG_PREPAREREQ](#Section_2.2.10.2.2.11) user message with fSinglePhase set to zero.
+If the subordinate branch is a **resource manager** (that is, using a [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2) connection), the transaction manager sends a [TXUSER_ENLISTMENT_MTAG_PREPAREREQ](#Section_2.2.10.2.2.11) user message with fSinglePhase set to zero.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -14974,17 +14974,17 @@ If each subordinate branch of the **root transaction manager** successfully prep
 | dwReserved1: 0xcd64cd64 | dwReserved1 | 0xcd64cd64 |
 | Variable | Error | 0x0000001F TRUN_TXBEGIN_ERROR_NOTIFY_COMMITTED |
 
-The **root transaction manager** then initiates [Phase Two](#Section_1.3.1.3) processing.
+The **root transaction manager** then initiates [Phase Two](#Section_4.5.2) processing.
 
 <a id="Section_4.5.2"></a>
 ### 4.5.2 Phase Two
 
-The **root transaction manager** begins [Phase Two](#Section_1.3.1.3) by iterating through each subordinate branch of the transaction and notifying the subordinates that **Phase Two** processing has begun. In this example, the transaction commits.
+The **root transaction manager** begins [Phase Two](#Section_4.5.2) by iterating through each subordinate branch of the transaction and notifying the subordinates that **Phase Two** processing has begun. In this example, the transaction commits.
 
 <a id="Section_4.5.2.1"></a>
 #### 4.5.2.1 Phase Two - Subordinate Resource Managers
 
-If the subordinate branch is a **resource manager** (that is, it uses a [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2.10) connection), the **transaction manager** sends a [TXUSER_ENLISTMENT_MTAG_COMMITREQ](#Section_2.2.10.2.2.3) user message.
+If the subordinate branch is a **resource manager** (that is, it uses a [CONNTYPE_TXUSER_ENLISTMENT](#Section_2.2.10.2.2) connection), the **transaction manager** sends a [TXUSER_ENLISTMENT_MTAG_COMMITREQ](#Section_2.2.10.2.2.3) user message.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -15022,7 +15022,7 @@ If the subordinate branch is a transaction manager (that is, it is using either 
 | Variable | dwcbVarLenData | 0x00000000 0 |
 | dwReserved1: 0xcd64cd64 | dwReserved1 | 0xcd64cd64 |
 
-When the **Subordinate Transaction Manager Facet** receives the **commit request** for a transaction, it then iterates through each subordinate branch of the transaction and notifies the subordinates that the transaction is committed. The transaction manager then waits for reply notifications from each of the subordinates to complete [Phase Two](#Section_1.3.1.3) processing.
+When the **Subordinate Transaction Manager Facet** receives the **commit request** for a transaction, it then iterates through each subordinate branch of the transaction and notifies the subordinates that the transaction is committed. The transaction manager then waits for reply notifications from each of the subordinates to complete [Phase Two](#Section_4.5.2) processing.
 
 When each subordinate branch of the transaction replies that it has committed the transaction (that is, each subordinate replies with a TXUSER_ENLISTMENT_COMMITREQDONE_OK or PARTNERTM_PROPAGATE_COMMITREQDONE_OK in the message, depending on the connection type), the transaction manager replies to its **Superior Transaction Manager Facet** with a **PARTNERTM_PROPAGATE_MTAG_COMMITREQDONE** message. If the connection was created by using CONNTYPE_PARTNERTM_BRANCH, **fIsMaster** is one (1). If the connection was created by using CONNTYPE_PARTNERTM_PROPAGATE, then **fIsMaster** is zero (0).
 
@@ -15055,7 +15055,7 @@ After the resource manager registers with the transaction manager (compare [Regi
 <a id="Section_4.6.2"></a>
 ### 4.6.2 Reenlisting in In-Doubt Transactions
 
-To reenlist in any transaction that is in-doubt, the resource manager establishes a [CONNTYPE_TXUSER_REENLIST](#Section_2.2.10.3.1.1) connection with its transaction manager.
+To reenlist in any transaction that is in-doubt, the resource manager establishes a [CONNTYPE_TXUSER_REENLIST](#Section_2.2.10.3.1) connection with its transaction manager.
 
 CONNTYPE_TXUSER_REENLIST: The packet sequence starts when the resource manager initiates a CONNTYPE_TXUSER_REENLIST connection.
 
@@ -15160,14 +15160,14 @@ Misuse of the Two-Phase Commit Protocol can enable participants to perform simpl
 
 Consequently, implementers need to take the following steps to ensure that transaction processing occurs in a secure environment:
 
-- Each participant is expected to initialize [MS-CMPO](#Section_2.1) sessions by using Mutual Authentication, as specified in [MS-CMPO] section 3.2.1.1. For information on **Security Level** authentication values see section [3.2.1](../MS-CMPO/MS-CMPO.md).
+- Each participant is expected to initialize [MS-CMPO](../MS-CMPO/MS-CMPO.md) sessions by using Mutual Authentication, as specified in [MS-CMPO] section 3.2.1.1. For information on **Security Level** authentication values see section [3.2.1](#Section_3.2.1).
 - All transaction manager and resource manager implementations uphold the following principles:
 - Every transaction reaches a common outcome for all participants, in accord with a correctly executed Two-Phase Commit Protocol.
 - No transaction remains [In Doubt](#Section_3.2.1.3.12) for a longer period of time than the application's higher-layer business logic accepts. This specific determination is implementation-specific.
 - When authentication credentials are available, the acceptor is expected authorize Incoming Connections to ensure that the initiator is entitled to perform the actions that it is requesting. Implementations are recommended to adhere to the following authorization policies:
 - The following connection types need to be accepted only for authenticated principals that have administrator privileges:
 - [CONNTYPE_TXUSER_RESOLVE](#Section_2.2.8.3.2)
-- [CONNTYPE_TXUSER_TRACE](#Section_2.2.8.3.5.2)
+- [CONNTYPE_TXUSER_TRACE](#Section_2.2.8.3.5)
 When Incoming Authentication is available, the above connection types are required to be established by a user identity that is authenticated as an administrator.
 
 - The following connection types need to be accepted only for authenticated principals whose principal name takes the form of <DomainName>\<MachineName>$:
@@ -15185,7 +15185,7 @@ An implementation can further restrict the set of supported connection types thr
 
 | Security parameter | Section |
 | --- | --- |
-| RPC security level | [MS-CMPO](#Section_2.1) section 3.2.1.1 |
+| RPC security level | [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.1.1 |
 | Transaction manager security flags | [3.2](#Section_3.2) |
 
 <a id="Section_6"></a>
@@ -15216,7 +15216,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 2.1.2.3: While performing [**push propagation**](#gt_push-propagation), the **Name** object (as specified in [MS-CMPO](#Section_2.1) section 3.2.1.4) of the **transaction manager** is represented as follows. Windows NT 4.0 Option Pack uses the **NAMEOBJECTBLOB** (section [2.2.5.3](#Section_2.2.5.3)) structure. Otherwise, applicable Windows releases use the SWhereabouts (section [2.2.5.11](#Section_2.2.5.11)) structure.
+<1> Section 2.1.2.3: While performing [**push propagation**](#gt_push-propagation), the **Name** object (as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.1.4) of the **transaction manager** is represented as follows. Windows NT 4.0 Option Pack uses the **NAMEOBJECTBLOB** (section [2.2.5.3](#Section_2.2.5.3)) structure. Otherwise, applicable Windows releases use the SWhereabouts (section [2.2.5.11](#Section_2.2.5.11)) structure.
 
 <2> Section 2.2.1.1: MSDTC Connection Manager: OleTx Transaction Protocol versions are as follows:
 
@@ -15263,7 +15263,7 @@ The **TmProtocolExtended** field is included if the transaction manager is so co
 
 <17> Section 2.2.10.2.2.8: Windows limits transactions to 32 direct enlistments.
 
-<18> Section 3.1.4.3: Regarding the MSDTC Connection Manager: OleTx Transaction Protocol connection establishment in Windows, an MSDTC Connection Manager: OleTx Transaction Protocol session partner does send connection requests for connection types that it supports (when required by the protocol rules, see section [3](../MS-CMP/MS-CMP.md)). The CONNTYPE_TXUSER_EXPORT2 (section [2.2.8.2.2.3](#Section_2.2.8.2.2.3)) and CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection types could be sent to the other partner, which might not support these connection types. As a result, the requests for the unsupported connection types are rejected with an MTAG_CONNECTION_REQ_DENIED ([MS-CMP](../MS-CMP/MS-CMP.md) section 2.2.5). When the **CONNTYPE_TXUSER_PROMOTE** connection type is rejected, applicable Windows releases return the failure result to the higher business layer. When the **CONNTYPE_TXUSER_EXPORT2** connection type is rejected, Windows falls back to the CONNTYPE_TXUSER_EXPORT (section [2.2.8.2.2.2](#Section_2.2.8.2.2.2)) connection type.
+<18> Section 3.1.4.3: Regarding the MSDTC Connection Manager: OleTx Transaction Protocol connection establishment in Windows, an MSDTC Connection Manager: OleTx Transaction Protocol session partner does send connection requests for connection types that it supports (when required by the protocol rules, see section [3](#Section_3)). The CONNTYPE_TXUSER_EXPORT2 (section [2.2.8.2.2.3](#Section_2.2.8.2.2.3)) and CONNTYPE_TXUSER_PROMOTE (section [2.2.8.1.3](#Section_2.2.8.1.3)) connection types could be sent to the other partner, which might not support these connection types. As a result, the requests for the unsupported connection types are rejected with an MTAG_CONNECTION_REQ_DENIED ([MS-CMP](../MS-CMP/MS-CMP.md) section 2.2.5). When the **CONNTYPE_TXUSER_PROMOTE** connection type is rejected, applicable Windows releases return the failure result to the higher business layer. When the **CONNTYPE_TXUSER_EXPORT2** connection type is rejected, Windows falls back to the CONNTYPE_TXUSER_EXPORT (section [2.2.8.2.2.2](#Section_2.2.8.2.2.2)) connection type.
 
 <19> Section 3.1.4.3: Regarding the sending of messages over an established MSDTC Connection Manager: OleTx Transaction Protocol connection in Windows, an MSDTC Connection Manager: OleTx Transaction Protocol session partner never sends messages that it supports (when required by the protocol rules, see section 3), but that are not supported by the negotiated protocol version (in the context of the connection's connection type) with one exception: TXUSER_RESOLVE_MTAG_ACCESSDENIED (section [2.2.8.3.2.1](#Section_2.2.8.3.2.1)). For the **TXUSER_RESOLVE_MTAG_ACCESSDENIED** message, a partner that supports this message sends it (when required by protocol rules) even if it is not supported by the negotiated protocol version.
 

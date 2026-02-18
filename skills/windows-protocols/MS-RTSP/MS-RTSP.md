@@ -519,7 +519,7 @@ If the multimedia data is transmitted over TCP, the Windows Media HTTP Streaming
 
 This document covers versioning issues in the following areas:
 
-**Supported Transports:** RTSP Windows Media Extensions are implemented on top of TCP. Also, implementations that require connectionless transmission of multimedia data over an unreliable network service support UDP. For details, see section [2.1](#Section_2.2.6.11).
+**Supported Transports:** RTSP Windows Media Extensions are implemented on top of TCP. Also, implementations that require connectionless transmission of multimedia data over an unreliable network service support UDP. For details, see section [2.1](#Section_2.1).
 
 **Protocol Versions:** RTSP version 1.0, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335), is supported.
 
@@ -529,7 +529,7 @@ This document covers versioning issues in the following areas:
 
 **Capability Negotiation:** RTSP Windows Media Extensions perform explicit capability negotiation by using the following mechanisms:
 
-- The **type** attribute in SDP, as specified in section [2.2.5.2.6](#Section_2.2.5.2.6.5).
+- The **type** attribute in SDP, as specified in section [2.2.5.2.6](#Section_2.2.5.2.6).
 - The [Supported (section 2.2.6.10)](#Section_2.2.6.10) header.
 - The [X-Accept-Authentication (section 2.2.6.14)](#Section_2.2.6.14) header.
 <a id="Section_1.8"></a>
@@ -571,7 +571,7 @@ The following table lists the structures that are defined in this section.
 
 | Name | Section | Description |
 | --- | --- | --- |
-| RTP Payload Format for ASF Data Packets | [2.2.1](#Section_2.2.5.3) | The [**RTP**](#gt_real-time-transport-protocol-rtp) payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets |
+| RTP Payload Format for ASF Data Packets | [2.2.1](#Section_2.2.1) | The [**RTP**](#gt_real-time-transport-protocol-rtp) payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets |
 | RTP Payload Format for Forward Error Correction | [2.2.2](#Section_2.2.2) | The RTP payload format for [**forward error correction (FEC)**](#gt_forward-error-correction-fec) |
 | RTP Payload Format for Retransmitted RTP Packets and Packet-Pair Data | [2.2.3](#Section_2.2.3) | The RTP payload format for retransmitted [**RTP packets**](#gt_rtp-packet) and packet-pair data |
 | RTCP NACK Packet Syntax | [2.2.4](#Section_2.2.4) | The syntax of [**RTCP**](#gt_real-time-transport-control-protocol-rtcp) negative acknowledgement (NACK) packets |
@@ -1059,17 +1059,17 @@ This property indicates to a client that the [**content**](#gt_content) is an en
 <a id="Section_2.2.5.2.6.6"></a>
 ###### 2.2.5.2.6.6 skipbackward
 
-This property indicates that the server supports skipping to the previous entry in the server-side [**playlist**](#gt_playlist) by using the **pl-offset** token on the [X-Playlist (section 2.2.6.20)](#Section_2.2.5.2.6.5) header.
+This property indicates that the server supports skipping to the previous entry in the server-side [**playlist**](#gt_playlist) by using the **pl-offset** token on the [X-Playlist (section 2.2.6.20)](#Section_2.2.6.20) header.
 
 <a id="Section_2.2.5.2.6.7"></a>
 ###### 2.2.5.2.6.7 skipforward
 
-This property indicates that the server supports skipping to the next entry in the server-side [**playlist**](#gt_playlist) by using the **pl-offset** token on the [X-Playlist (section 2.2.6.20)](#Section_2.2.5.2.6.5) header.
+This property indicates that the server supports skipping to the next entry in the server-side [**playlist**](#gt_playlist) by using the **pl-offset** token on the [X-Playlist (section 2.2.6.20)](#Section_2.2.6.20) header.
 
 <a id="Section_2.2.5.3"></a>
 #### 2.2.5.3 RTP Payload Format for ASF Data Packets
 
-The RTP payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets, as specified in section [2.2.1](#Section_2.2.5.3), MUST be identified by the [**MIME type**](#gt_mime-type) "audio/x-asf-pf" for audio [**streams**](#gt_stream), "video/x-asf-pf" for video streams, and "application/x-asf-pf" for streams that are neither audio nor video.
+The RTP payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets, as specified in section [2.2.1](#Section_2.2.1), MUST be identified by the [**MIME type**](#gt_mime-type) "audio/x-asf-pf" for audio [**streams**](#gt_stream), "video/x-asf-pf" for video streams, and "application/x-asf-pf" for streams that are neither audio nor video.
 
 The RTP clock frequency MUST be 1,000 Hz.
 
@@ -1518,7 +1518,7 @@ If a server never sends the [Supported](#Section_2.2.6.10) header, clients MUST 
 <a id="Section_2.2.6.10.3"></a>
 ##### 2.2.6.10.3 com.microsoft.wm.locid
 
-The com.microsoft.wm.locid token specifies that the client wants the server to include the **LocationId** field in the [RTP payload format headers](#Section_2.2.1.3) of RTP packets. This applies only to RTP packets that use the RTP payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets, as specified in section [2.2.1](#Section_2.2.5.3).
+The com.microsoft.wm.locid token specifies that the client wants the server to include the **LocationId** field in the [RTP payload format headers](#Section_2.2.1.3) of RTP packets. This applies only to RTP packets that use the RTP payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets, as specified in section [2.2.1](#Section_2.2.1).
 
 This token is defined only for use in requests sent to a server.
 
@@ -1529,7 +1529,7 @@ If a client never sends the Supported header, or if a client does not specify th
 <a id="Section_2.2.6.10.4"></a>
 ##### 2.2.6.10.4 com.microsoft.wm.packetpairssrc
 
-The com.microsoft.wm.packetpairssrc token specifies that when the server sends packet-pair data over the RTP by using the RTP payload format, as specified in section [2.2.3.2](#Section_2.2.3.2), the **SSRC** field in the RTP header is set to the same **SSRC** value specified by the server in the RTSP [Transport](#Section_2.2.6.11) header in the response to the SETUP request for the retransmission [**stream**](#gt_stream). For information on the retransmission stream, see section [2.2.5.5](#Section_2.2.5.5).
+The com.microsoft.wm.packetpairssrc token specifies that when the server sends packet-pair data over the RTP by using the RTP payload format, as specified in section [2.2.3.2](#Section_2.2.3.2), the **SSRC** field in the RTP header is set to the same **SSRC** value specified by the server in the RTSP [Transport](#Section_2.1) header in the response to the SETUP request for the retransmission [**stream**](#gt_stream). For information on the retransmission stream, see section [2.2.5.5](#Section_2.2.5.5).
 
 This token is defined only for use in responses sent to a client.
 
@@ -1786,7 +1786,7 @@ The numerical value MUST be an integer in the range 1 to 4,294,967,295, inclusiv
 
 The X-Playlist-Seek-Id header requests the server to seek the [**playlist**](#gt_playlist) entry with the ID specified as the numerical value of this header.
 
-If a client includes this header in a request, the numerical value MUST be either the identifier of the current playlist entry or the identifier of the previous playlist entry. (Identifiers for playlist entries are obtained from the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header.)
+If a client includes this header in a request, the numerical value MUST be either the identifier of the current playlist entry or the identifier of the previous playlist entry. (Identifiers for playlist entries are obtained from the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header.)
 
 This header is defined only for requests sent to a server.
 
@@ -1938,10 +1938,10 @@ The purpose of the Announce request is to send information to the client on a ne
 The Announce request is defined as the ANNOUNCE request method, sent by the server to the client, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 10.3, with the following additional constraints:
 
 - The ANNOUNCE method includes the Session header, as specified in [RFC2326] section 12.37.
-- The ANNOUNCE method includes the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header.
+- The ANNOUNCE method includes the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header.
 - The ANNOUNCE method includes the [Content-Type (section 2.2.6.3)](#Section_2.2.6.3) header with the media type [application/sdp](#Section_2.2.6.3.1).
 - The message body of the ANNOUNCE method contains SDP, as specified in section 2.2.5.
-The [X-Receding-PlaylistChange (section 2.2.6.26)](#Section_2.2.5.2.6.5) is allowed to be included in the request.
+The [X-Receding-PlaylistChange (section 2.2.6.26)](#Section_2.2.6.26) is allowed to be included in the request.
 
 The Announce request is allowed to include the [Cache-Control (section 2.2.6.2)](#Section_2.2.6.2) header, because different cache control directives can apply to each entry in a server-side playlist.
 
@@ -2083,7 +2083,7 @@ The purpose of the GetContentInfo request is to retrieve cache-control informati
 
 The GetContentInfo request is implemented by using the GET_PARAMETER request method (sent by the client to the server) and MUST adhere to the syntax for GET_PARAMETER, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 10.8.
 
-The [Content-Type](#Section_2.2.6.3) header MUST be present in the request, and MUST specify the media type [application/x-wms-getcontentinfo (section 2.2.6.3.5)](#Section_2.2.7.4). The size of the message body MUST be 1 byte. The value of this byte MUST be 0x00.
+The [Content-Type](#Section_2.2.6.3) header MUST be present in the request, and MUST specify the media type [application/x-wms-getcontentinfo (section 2.2.6.3.5)](#Section_2.2.6.3.5). The size of the message body MUST be 1 byte. The value of this byte MUST be 0x00.
 
 A server that receives a GET_PARAMETER request MUST treat it as a GetContentInfo request if the Content-Type header specifies the application/x-wms-getcontentinfo media type.
 
@@ -2140,7 +2140,7 @@ The purpose of the LogConnect request is to submit statistics on the client to t
 
 The LogConnect request is defined as the SET_PARAMETER request method (sent by the client to the server), as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 10.9, with the following additional constraints:
 
-- The [Content-Type](#Section_2.2.6.3) header is present in the request and specifies the media type [application/x-wms-Logconnectstats (section 2.2.6.3.6)](#Section_2.2.7.6).
+- The [Content-Type](#Section_2.2.6.3) header is present in the request and specifies the media type [application/x-wms-Logconnectstats (section 2.2.6.3.6)](#Section_2.2.6.3.6).
 - The response to a LogConnect request is defined as a SET_PARAMETER response with the additional constraint that the response cannot have a message body.
 The following example shows a LogConnect request:
 
@@ -2231,8 +2231,8 @@ The main purpose of the Play request is to ask the server to start streaming RTP
 The Play request is implemented by using the PLAY request method and MUST adhere to the syntax for PLAY, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 10.5, with the following additional constraints:
 
 - The Play request includes the Session header (as specified in [RFC2326] section 12.37).
-- The Play request specifies either a [Range (section 2.2.6.7)](#Section_2.2.6.7) header or an [X-Playlist (section 2.2.6.20)](#Section_2.2.5.2.6.5) header.
-- If the stream is a part of a server-side playlist then the Play request includes the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header.
+- The Play request specifies either a [Range (section 2.2.6.7)](#Section_2.2.6.7) header or an [X-Playlist (section 2.2.6.20)](#Section_2.2.6.20) header.
+- If the stream is a part of a server-side playlist then the Play request includes the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header.
 For information on predictive stream selection, see section [2.2.6.10.5](#Section_2.2.6.10.5).
 
 The response to the Play request can include the [Cache-Control (section 2.2.6.2)](#Section_2.2.6.2) header.
@@ -2285,7 +2285,7 @@ It is not possible to use a SelectStream request to replace a pair of streams if
 Regardless of the RTSP request method used in the syntax of the SelectStream request, the following constraints apply to the syntax:
 
 - The URL specified on the RTSP request line is the stream URL, not the one of the complete RTSP presentation.
-- If the stream is a part of a server-side [**playlist**](#gt_playlist) then the SelectStream request includes the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header.
+- If the stream is a part of a server-side [**playlist**](#gt_playlist) then the SelectStream request includes the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header.
 - If the request contains a message body then the [Content-Type](#Section_2.2.6.3) header specifies the media type [application/x-wms-streamswitch (section 2.2.6.3.9)](#Section_2.2.6.3.9).
 The message body is defined by the following [**ABNF**](#gt_augmented-backus-naur-form-abnf) syntax:
 
@@ -2556,7 +2556,7 @@ The client MUST send a [GetContentInfo](#Section_2.2.7.4) request to the server,
 
 In addition, the common processing steps, as specified in section [3.1.5.1](#Section_3.1.5.1), MUST be followed when sending the GetContentInfo request.
 
-After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.3](#Section_2.2.7.4).
+After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.3](#Section_3.1.5.3).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Request to Retrieve Content Information
@@ -2579,14 +2579,14 @@ The [Describe](#Section_2.2.7.2) request MUST adhere to the Describe syntax, as 
 
 In addition, the common processing steps, as specified in section [3.1.5.1](#Section_3.1.5.1), MUST be followed when sending the Describe request.
 
-After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.4](#Section_2.2.7.2).
+After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.4](#Section_3.1.5.4).
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Request to Start Streaming Content
 
 This higher-layer triggered event can occur when the client is not currently [**streaming**](#gt_streaming) from the server. The event causes the client to send one or more [SelectStream](#Section_2.2.7.10) requests to the server followed by a [Play](#Section_2.2.7.9) request. The following are the most common scenarios in which an application would ask the client to request the server to start streaming content:
 
-- A media player application that has examined the [**ASF**](#gt_advanced-systems-format-asf) file header that was received from the server (section [3.1.5.4](#Section_2.2.7.2)) and determined that it can decompress and play the multimedia content.
+- A media player application that has examined the [**ASF**](#gt_advanced-systems-format-asf) file header that was received from the server (section [3.1.5.4](#Section_3.1.5.4)) and determined that it can decompress and play the multimedia content.
 - A cache that has determined that the currently cached copy of the content, if any, is either stale or incomplete.
 - A server or intermediate device, such as a non-caching proxy, that is asking for content to be streamed on behalf of another client.
 Next, the client MUST send a SelectStream request to the server, as specified in section [3.1.4.3.1](#Section_3.1.4.3.1).
@@ -2598,7 +2598,7 @@ Because the [**ASF**](#gt_advanced-systems-format-asf) file header specifies mul
 
 The syntax for SelectStream requests is specified in section 2.2.7.10. the common processing steps specified in section [3.1.5.1](#Section_3.1.5.1) MUST be followed when sending a SelectStream request.
 
-The higher layer MUST specify, for each stream, if the stream is supposed to be streamed over UDP or TCP. For streams that are to be streamed over UDP, the client MUST specify the same UDP port number, or pair of UDP port numbers, in the *client_port* parameter on the [Transport](#Section_2.2.6.11) header. For details, see section [2.2.7.10.1](#Section_2.2.7.10.1).
+The higher layer MUST specify, for each stream, if the stream is supposed to be streamed over UDP or TCP. For streams that are to be streamed over UDP, the client MUST specify the same UDP port number, or pair of UDP port numbers, in the *client_port* parameter on the [Transport](#Section_2.1) header. For details, see section [2.2.7.10.1](#Section_2.2.7.10.1).
 
 For each stream that is to be streamed over UDP, if the SDP media description for that stream indicates that the server can transmit RTP packets that contain [**FEC**](#gt_forward-error-correction-fec) data, the client SHOULD send a SelectStream request to select RTP packets containing FEC data. (RTP packets containing FEC data have a separate stream URL that has to be explicitly selected by using SelectStream for the server to transmit the FEC RTP packets.) For information on how to determine if FEC RTP packets can be selected and for how to determine the URL to use in the SelectStream request, see section [2.2.5.4](#Section_2.2.5.4).
 
@@ -2638,7 +2638,7 @@ All of the SelectStream requests SHOULD be pipelined; that is, if there is more 
 
 For each SelectStream request the client sends, the client increment the SelectStream-request-counter by 1.
 
-The client MUST wait for the response to each of the SelectStream requests that it has sent. How to process the response is specified in section [3.1.5.16](#Section_3.1.5.16.1). The client MUST continue to process incoming RTP packets while it is waiting for the response to the SelectStream requests.
+The client MUST wait for the response to each of the SelectStream requests that it has sent. How to process the response is specified in section [3.1.5.16](#Section_3.1.5.16). The client MUST continue to process incoming RTP packets while it is waiting for the response to the SelectStream requests.
 
 If the client did not send any SelectStream requests, it MUST now send a [Play](#Section_2.2.7.9) request, as specified in section [3.1.5.16.1](#Section_3.1.5.16.1).
 
@@ -2647,7 +2647,7 @@ If the client did not send any SelectStream requests, it MUST now send a [Play](
 
 This event occurs if the higher layer has detected that one or more RTP packets containing [**ASF**](#gt_advanced-systems-format-asf) data packets has been lost, and the higher layer wants to ask the server to resend one or more of the lost RTP packets.
 
-For this higher-layer triggered event to be possible, the value of the **State** variable in the abstract data model MUST be PLAYING, the client MUST have requested that at least one of the streams be delivered over UDP by using the [SelectStream](#Section_2.2.7.10) request, and the client MUST have sent a SelectStream request for the retransmission [**stream**](#gt_stream) (section [3.1.5.4](#Section_2.2.7.2)).
+For this higher-layer triggered event to be possible, the value of the **State** variable in the abstract data model MUST be PLAYING, the client MUST have requested that at least one of the streams be delivered over UDP by using the [SelectStream](#Section_2.2.7.10) request, and the client MUST have sent a SelectStream request for the retransmission [**stream**](#gt_stream) (section [3.1.5.4](#Section_3.1.5.4)).
 
 The **Sequence Number** field in the RTP packets that belong to the same RTP [**session**](#gt_session) increment sequentially, and this allows the higher layer to detect if an RTP packet has been lost.
 
@@ -2694,7 +2694,7 @@ If the client specified the Speed header (as specified in [[RFC2326]](https://go
 
 After sending the request, the client MUST be prepared for the response to be received. How to process the response is specified in section [3.1.5.19](#Section_3.1.5.19).
 
-If the value of the **State** variable is PLAYING, the client MUST also be prepared to receive RTP packets and an [EndOfStream](#Section_2.2.7.3) request. Information on how to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2), and information on how to process an EndOfStream request is specified in section [3.1.5.13](#Section_3.1.5.13).
+If the value of the **State** variable is PLAYING, the client MUST also be prepared to receive RTP packets and an [EndOfStream](#Section_2.2.7.3) request. Information on how to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12), and information on how to process an EndOfStream request is specified in section [3.1.5.13](#Section_3.1.5.13).
 
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 Request to Finish Streaming Session
@@ -2733,7 +2733,7 @@ The client MUST support the following features: [com.microsoft.wm.eosmsg](#Secti
 
 If the client intends to forward the content to another client by using a different streaming protocol, such as the Windows Media HTTP Streaming Protocol as specified in [MS-WMSP](../MS-WMSP/MS-WMSP.md), the client SHOULD specify the [com.microsoft.wm.locid](#Section_2.2.6.10.3) token on the Supported header. Otherwise, that token MUST NOT be specified.
 
-If the request is any of the types [Describe](#Section_2.2.7.2), [SelectStream](#Section_2.2.7.10), [Teardown](#Section_2.2.7.13), or [UdpPacketPair](#Section_2.2.7.14), and if the Playlist-gen-id variable in the abstract data model has a nonzero value, the client MUST specify the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header in the request. The numerical value specified on the X-Playlist-Gen-Id header MUST be equal to the value of the Playlist-gen-id variable.
+If the request is any of the types [Describe](#Section_2.2.7.2), [SelectStream](#Section_2.2.7.10), [Teardown](#Section_2.2.7.13), or [UdpPacketPair](#Section_2.2.7.14), and if the Playlist-gen-id variable in the abstract data model has a nonzero value, the client MUST specify the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header in the request. The numerical value specified on the X-Playlist-Gen-Id header MUST be equal to the value of the Playlist-gen-id variable.
 
 The client SHOULD specify the [X-Accept-Authentication (section 2.2.6.14)](#Section_2.2.6.14) and [X-Accept-Proxy-Authentication (section 2.2.6.15)](#Section_2.2.6.15) headers in the request.
 
@@ -2760,7 +2760,7 @@ The client MUST check the status code in the response to determine if the reques
 
 The client MUST process the [Supported](#Section_2.2.6.10) header, if present <24>. Each feature token on the header MUST be added to the Server-features variable in the abstract data model. If the header is present, any feature token not listed on the header MUST be removed from the Server-features variable.
 
-The client MUST process the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header, if present. If it is present, the Playlist-gen-id variable in the abstract data model MUST be set to the numerical value specified on that header.
+The client MUST process the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header, if present. If it is present, the Playlist-gen-id variable in the abstract data model MUST be set to the numerical value specified on that header.
 
 The client MUST process the *timeout* parameter on the Session header, if present. If the Session header is present, the KeepAlive-timeout variable in the abstract data model MUST be set to the value of the delta-seconds syntax element. If the *timeout* parameter is missing, the KeepAlive-timeout variable MUST be set to the default value for the delta-seconds syntax element. The Session header is specified in [RFC2326] section 12.37.
 
@@ -2794,7 +2794,7 @@ Otherwise, if the higher layer wants to measure the bottleneck bandwidth on the 
 
 If the value of the SelectStream-request-counter is greater than 0, then it MUST wait for the response to the SelectStream request. How to process the response is specified in section [3.1.5.6](#Section_3.1.5.6).
 
-If the client has sent the TcpPacketPair request, it MUST wait for the response to the TcpPacketPair request. How to process the response is specified in section [3.1.5.5](#Section_2.2.7.12). <26>
+If the client has sent the TcpPacketPair request, it MUST wait for the response to the TcpPacketPair request. How to process the response is specified in section [3.1.5.5](#Section_3.1.5.5). <26>
 
 Otherwise, the client MUST wait until a higher-layer triggered event occurs. The next higher-layer triggered event is a request to start streaming content, as specified in section [3.1.4.3](#Section_3.1.4.3).
 
@@ -2816,13 +2816,13 @@ The client MUST first follow the steps as specified in section [3.1.5.2](#Sectio
 
 If the value of the **State** variable is INIT, it MUST be set to READY.
 
-The client MUST set the value of the **RTCP-Destination-Port** variable to the value of the second port number in the server_port parameter of the [Transport](#Section_2.2.6.11) header.
+The client MUST set the value of the **RTCP-Destination-Port** variable to the value of the second port number in the server_port parameter of the [Transport](#Section_2.1) header.
 
 If the **Server-features** variable indicates that the server supports [com.microsoft.wm.srvppair (section 2.2.6.10.6)](#Section_2.2.6.10.6), the client SHOULD set the value of the **SSRC-id** variable to the value of the "ssrc" parameter on the Transport header and send a [UdpPacketPair](#Section_2.2.7.14) request to the server.<27>
 
 If the client has sent the UdpPacketPair request, the client MUST start the Firewall timer. The time-out of the Firewall timer SHOULD be 10 seconds plus (if it can be determined) half the round-trip time between the server and the client.
 
-If the client has sent the UdpPacketPair request, the client MUST wait until one of the following happens: It receives the response to the UdpPacketPair request, it receives an RTP packet containing packet-pair data, or the Firewall timer expires. Information on how to process the response to the UdpPacketPair request is specified in section [3.1.5.7](#Section_2.2.7.14). How to process RTP packets containing packet-pair data is specified in section [3.1.5.8](#Section_3.1.5.12).
+If the client has sent the UdpPacketPair request, the client MUST wait until one of the following happens: It receives the response to the UdpPacketPair request, it receives an RTP packet containing packet-pair data, or the Firewall timer expires. Information on how to process the response to the UdpPacketPair request is specified in section [3.1.5.7](#Section_3.1.5.7). How to process RTP packets containing packet-pair data is specified in section [3.1.5.8](#Section_3.1.5.8).
 
 Otherwise, the client MUST wait until a higher-layer triggered event occurs. The next higher-layer triggered event is a request to start streaming content, which is specified in section [3.1.4.3](#Section_3.1.4.3).
 
@@ -2831,7 +2831,7 @@ Otherwise, the client MUST wait until a higher-layer triggered event occurs. The
 
 The client MUST first follow the steps as specified in section [3.1.5.2](#Section_3.1.5.2).
 
-If the Firewall timer is still running, the client MUST wait for an RTP packet containing packet-pair data to be received. How to process RTP packets containing packet-pair data is specified in section [3.1.5.8](#Section_3.1.5.12).
+If the Firewall timer is still running, the client MUST wait for an RTP packet containing packet-pair data to be received. How to process RTP packets containing packet-pair data is specified in section [3.1.5.8](#Section_3.1.5.8).
 
 Otherwise, the client MUST wait until a higher-layer triggered event occurs. The next higher-layer triggered event is a request to start streaming content, as specified in section [3.1.4.3](#Section_3.1.4.3).
 
@@ -2867,7 +2867,7 @@ Otherwise, if there are no pending responses to previously transmitted requests,
 
 Otherwise, if the value of the **State** variable is PLAYING, the client MUST wait for an RTP packet to be received or for a higher-layer triggered event to occur.
 
-How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2).
+How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12).
 
 Otherwise, if the value of the **State** variable is READY, the client MUST send a [Play](#Section_2.2.7.9) request, following the rules as specified in section [3.1.5.9.1](#Section_3.1.5.9.1).
 
@@ -2907,7 +2907,7 @@ The value of the **State** variable MUST be set to PLAYING.
 
 If at least one of the selected streams is delivered over TCP, the [KeepAlive](#Section_2.2.7.5) timer SHOULD be stopped.
 
-The client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
+The client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
 
 If the client sent a [LogConnect](#Section_2.2.7.6) request immediately after sending the [Play](#Section_2.2.7.9) request, the client MUST now be prepared to receive the LogConnect response. How to process that response is specified in section [3.1.5.11](#Section_3.1.5.11).
 
@@ -2922,14 +2922,14 @@ If the response includes the X-StartupProfile (section [2.2.6.28](#Section_2.2.6
 
 The client MUST first follow the steps as specified in section [3.1.5.2](#Section_3.1.5.2).
 
-If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
+If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
 
 Otherwise, the client MUST wait for a higher-layer triggered event.
 
 <a id="Section_3.1.5.12"></a>
 #### 3.1.5.12 Receiving RTP Packets
 
-The client MUST verify that the RTP packet is compliant with the RTP payload format syntax. The RTP payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets is specified in section [2.2.1](#Section_2.2.5.3). The RTP payload format for [**FEC**](#gt_forward-error-correction-fec) packets is specified in section [2.2.2](#Section_2.2.2). The RTP payload format for retransmitted RTP packets is specified in section [2.2.3.1](#Section_2.2.3.1).
+The client MUST verify that the RTP packet is compliant with the RTP payload format syntax. The RTP payload format for [**ASF**](#gt_advanced-systems-format-asf) data packets is specified in section [2.2.1](#Section_2.2.1). The RTP payload format for [**FEC**](#gt_forward-error-correction-fec) packets is specified in section [2.2.2](#Section_2.2.2). The RTP payload format for retransmitted RTP packets is specified in section [2.2.3.1](#Section_2.2.3.1).
 
 Details on how to determine what RTP payload format is used for a packet are specified in [[RFC3550]](https://go.microsoft.com/fwlink/?LinkId=90433), section 5.1. In summary, it involves determining the RTP [**session**](#gt_session) by examining the UDP destination port number (if UDP is used) and the **SSRC** field in the RTP header. It then involves checking the value of the **Payload Type** field in the RTP header and cross-referencing this with the RTP payload format for that value, as specified in SDP [[RFC4566]](https://go.microsoft.com/fwlink/?LinkId=90484).
 
@@ -2956,7 +2956,7 @@ For every RTP packet in **RTP-Queue** that contains [**FEC**](#gt_forward-error-
 - The client SHOULD search **RTP-Queue** for RTP packets that contain FEC data that were generated by the RTP packets in the Current Span. The packets that are found are referred to as the Current FEC Packets.
 - The client SHOULD search **RTP-Queue** to determine whether any of the RTP packets in the Current Span are missing.
 - If no packets in the Current Span are missing, then the client MUST remove each of the RTP packets that belong to the Current Span from **RTP-Queue**, and process each of them according to the rules in section 3.1.5.12.2; the Current FEC Packets MUST be discarded without processing.
-- If one or more of the RTP packets in the Current Span are missing, then recovery by using the Vandermonde Matrix Algorithm (section [2.2.2.2](#Section_4.2)) is possible if the count of Current FEC Packets is greater than or equal to the count of RTP packets that are missing from the Current Span. If recovery is possible, the client SHOULD use the Vandermonde Matrix Algorithm (section 2.2.2.2) to reconstruct the missing RTP packets. Then, the client MUST remove each of the RTP packets that belong to the Current Span from **RTP-Queue** and process each one of them as well as any RTP packets that were reconstructed, according to the rules in section 3.1.5.12.2, and the Current FEC Packets MUST be discarded without processing.
+- If one or more of the RTP packets in the Current Span are missing, then recovery by using the Vandermonde Matrix Algorithm (section [2.2.2.2](#Section_2.2.2.2)) is possible if the count of Current FEC Packets is greater than or equal to the count of RTP packets that are missing from the Current Span. If recovery is possible, the client SHOULD use the Vandermonde Matrix Algorithm (section 2.2.2.2) to reconstruct the missing RTP packets. Then, the client MUST remove each of the RTP packets that belong to the Current Span from **RTP-Queue** and process each one of them as well as any RTP packets that were reconstructed, according to the rules in section 3.1.5.12.2, and the Current FEC Packets MUST be discarded without processing.
 <a id="Section_3.1.5.12.2"></a>
 ##### 3.1.5.12.2 Processing of RTP Packets
 
@@ -2986,7 +2986,7 @@ The client MUST validate that the request adheres to the syntax as specified in 
 
 The client MUST send an EndOfStream response.
 
-If the RTP-Info header is present in the request, for each [**stream**](#gt_stream) specified on that header, the client MUST compare the value of the *seq* parameter against the value of the **Sequence Number** field (defined in [[RFC3550]](https://go.microsoft.com/fwlink/?LinkId=90433) section 5.1) in the RTP header of the most recent RTP packet. If the *seq* parameter indicates that the server has transmitted one or more RTP packets that have not yet been received by the client, the client SHOULD wait for those remaining RTP packets to be received and process the rules, as specified in section [3.1.5.12](#Section_3.1.5.12.2), for each RTP packet that is received. Processing of the rules, as specified in section 3.1.5.13, MUST continue once the missing RTP packets are received.
+If the RTP-Info header is present in the request, for each [**stream**](#gt_stream) specified on that header, the client MUST compare the value of the *seq* parameter against the value of the **Sequence Number** field (defined in [[RFC3550]](https://go.microsoft.com/fwlink/?LinkId=90433) section 5.1) in the RTP header of the most recent RTP packet. If the *seq* parameter indicates that the server has transmitted one or more RTP packets that have not yet been received by the client, the client SHOULD wait for those remaining RTP packets to be received and process the rules, as specified in section [3.1.5.12](#Section_3.1.5.12), for each RTP packet that is received. Processing of the rules, as specified in section 3.1.5.13, MUST continue once the missing RTP packets are received.
 
 If the message body of the request does not contain the "End-Of-Playlist-Entry: true" syntax element, the **State** variable MUST be set to READY.
 
@@ -3020,15 +3020,15 @@ The client MUST validate that the request adheres to the syntax as specified in 
 
 The client MUST process [Supported](#Section_2.2.6.10) header, if present <28>. Each feature token on the header MUST be added to the Server-features variable in the abstract data model. If the header is present, any feature token not listed on the header MUST be removed from the Server-features variable.
 
-The client MUST process the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header, if present. If it is present, the Playlist-gen-id variable in the abstract data model MUST be set to the numerical value specified on that header.
+The client MUST process the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header, if present. If it is present, the Playlist-gen-id variable in the abstract data model MUST be set to the numerical value specified on that header.
 
 The client MUST extract the [**ASF**](#gt_advanced-systems-format-asf) file header from the SDP (section [2.2.5.2.3.1](#Section_2.2.5.2.3.1)), and SHOULD make it available to the higher layer. If the SDP contains a content description list (section [2.2.5.2.3.2](#Section_2.2.5.2.3.2)), it SHOULD also be made available to the higher layer.
 
 The client MUST send a response to the Announce request.
 
-If the [X-RTP-Info](#Section_2.2.6.27) header is present in the request, it indicates the streams that the server has selected for the [**playlist**](#gt_playlist) entry described by the SDP. The client needs to remember this because it will need this information once it is ready to select the streams for this playlist entry that it wants to receive. For details, see section [3.1.4.5](#Section_2.2.5.2.6.5).
+If the [X-RTP-Info](#Section_2.2.6.27) header is present in the request, it indicates the streams that the server has selected for the [**playlist**](#gt_playlist) entry described by the SDP. The client needs to remember this because it will need this information once it is ready to select the streams for this playlist entry that it wants to receive. For details, see section [3.1.4.5](#Section_3.1.4.5).
 
-If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets from any of the streams listed on the X-RTP-Info header. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2).
+If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets from any of the streams listed on the X-RTP-Info header. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12).
 
 The client MUST also be prepared to receive a higher-layer triggered event. The next higher-layer triggered event is a request to select the streams from the new playlist entry, as specified in section 3.1.4.5.
 
@@ -3039,7 +3039,7 @@ The client MUST first follow the steps as specified in section [3.1.5.2](#Sectio
 
 If any responses to previously transmitted requests are still pending, the client MUST be prepared to receive a response. For any [SelectStream](#Section_2.2.7.10) request for which a response is pending, the client MUST follow the rules, as specified in this section. The client MUST also be prepared to receive an RTP packet.
 
-How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2).
+How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12).
 
 For any received response, the client MUST decrement the SelectStream-request-counter by 1.
 
@@ -3080,7 +3080,7 @@ Otherwise, the client MUST wait for a higher-layer triggered event.
 
 The client MUST first follow the steps as specified in section [3.1.5.2](#Section_3.1.5.2).
 
-If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
+If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
 
 Otherwise, the client MUST wait for a higher-layer triggered event.
 
@@ -3089,7 +3089,7 @@ Otherwise, the client MUST wait for a higher-layer triggered event.
 
 The client MUST first follow the steps as specified in section [3.1.5.2](#Section_3.1.5.2).
 
-If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12.2). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
+If the value of the **State** variable is PLAYING, the client MUST be prepared to receive RTP packets. How to process RTP packets is specified in section [3.1.5.12](#Section_3.1.5.12). The client MUST also be prepared to receive an [EndOfStream](#Section_2.2.7.3) request. How to process this request is specified in section [3.1.5.13](#Section_3.1.5.13).
 
 Otherwise, the client MUST wait for a higher-layer triggered event.
 
@@ -3145,7 +3145,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Client-features**: This variable stores the capabilities that the client specified on the most recently received [Supported](#Section_2.2.6.10) header. The default value of this variable is that the client does not support any of the capabilities as specified in section 2.2.6.10.
 
-**FEC-Parameter-State**: This variable stores the fec-parameters token for each stream that uses FEC. The fec-parameters token is defined in section [2.1](#Section_2.2.6.11). The initial value of this variable is empty.
+**FEC-Parameter-State**: This variable stores the fec-parameters token for each stream that uses FEC. The fec-parameters token is defined in section [2.1](#Section_2.1). The initial value of this variable is empty.
 
 **FEC-Span-Counters**: This is a collection of numerical counters. There is one counter for each stream in the content. The counter counts the number of RTP packets that have been transmitted in an [**FEC**](#gt_forward-error-correction-fec) span. The value of a counter is in the range 0x00 to 0x17, inclusive. The initial value of all counters is 0x00.
 
@@ -3211,7 +3211,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Use-UDP**: This variable is a flag with possible values 0 and 1. If the value is 1, it means that the server is sending RTP packets for streams other than the retransmission stream over UDP. If the value is 0, it means that the server is sending RTP packets for streams other than the retransmission stream over TCP. The default value is 0.
 
-**v-port**: The value of this variable defines the RTP UDP port number in the *client_port* parameter of the [Transport](#Section_2.2.6.11) header in the SelectStream request provided by the client for the retransmission stream. The initial value is 0.
+**v-port**: The value of this variable defines the RTP UDP port number in the *client_port* parameter of the [Transport](#Section_2.1) header in the SelectStream request provided by the client for the retransmission stream. The initial value is 0.
 
 **v-ssrc**: The value of this variable is an identifier assigned by the server to the numerical value of the ssrc field that the server provided in the Transport header in its response (see section 2.2.6.11). The initial value is 0.
 
@@ -3241,7 +3241,7 @@ The **State** variable MUST be set to INIT. The server SHOULD confirm its role a
 
 When the higher layer notifies the server that the last RTP packet has been sent, the server MUST send an [EndOfStream (section 2.2.7.3)](#Section_2.2.7.3) request to the client.
 
-If the value of the Playlist-gen-id variable in the abstract data model does not equal 0, then the EndOfStream request MUST include the [X-Playlist-Gen-Id header (section 2.2.6.22)](#Section_2.2.5.2.6.5).
+If the value of the Playlist-gen-id variable in the abstract data model does not equal 0, then the EndOfStream request MUST include the [X-Playlist-Gen-Id header (section 2.2.6.22)](#Section_2.2.6.22).
 
 If the Selected-Streams variable in the abstract data model contains one or more audio or video streams, then the EndOfStream request MUST include the RTP-Info header, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 12.33. The *seq* parameter MUST be specified for each stream-url on the RTP-Info header. The **rtptime** parameter SHOULD NOT be specified for any stream-url on the RTP-Info header.
 
@@ -3288,11 +3288,11 @@ For each stream in the ASF content that has an average bit rate that is differen
 
 If the value of the **Playlist-gen-id** does not equal 0, the server MUST change the value of the **Previous-playlist-entry-id** variable to the current Playlist-gen-id.
 
-The server MUST change the value of the **Playlist-gen-id** variable in the abstract data model such that each playlist entry gets a different identifier. This variable MUST be used as the value for the [X-Playlist-Gen-Id](#Section_2.2.5.2.6.5) header in the Announce request. For details, see section 2.2.7.1.
+The server MUST change the value of the **Playlist-gen-id** variable in the abstract data model such that each playlist entry gets a different identifier. This variable MUST be used as the value for the [X-Playlist-Gen-Id](#Section_2.2.6.22) header in the Announce request. For details, see section 2.2.7.1.
 
-The server SHOULD use the local event defined in [Broadcast ID (section 3.2.7.8)](#Section_2.2.5.2.6.1) to obtain a numerical identifier. If the numerical identifier is provided, the server MUST include the [X-Broadcast-Id header (section 2.2.6.16)](#Section_2.2.5.2.6.1) in the Announce response, and the numerical value on that header MUST be equal to the numerical identifier provided by the higher layer. If the numerical identifier is unavailable, then the X-Broadcast-Id header MUST NOT be included in the Announce response.
+The server SHOULD use the local event defined in [Broadcast ID (section 3.2.7.8)](#Section_3.2.7.8) to obtain a numerical identifier. If the numerical identifier is provided, the server MUST include the [X-Broadcast-Id header (section 2.2.6.16)](#Section_2.2.6.16) in the Announce response, and the numerical value on that header MUST be equal to the numerical identifier provided by the higher layer. If the numerical identifier is unavailable, then the X-Broadcast-Id header MUST NOT be included in the Announce response.
 
-If the ASF file header of the new playlist entry retrieved from the variable **New-ASF-File-Header** describes the previous entry in the playlist (as opposed to the next entry), the [X-Receding-PlaylistChange (section 2.2.6.26)](#Section_2.2.5.2.6.5) MUST be included in the Announce request. If the ASF file header of the new playlist entry retrieved from the variable **New-ASF-File-Header** describes the next entry in the playlist (the normal case during streaming in the forward direction), then the X-Receding-PlaylistChange MUST NOT be included.
+If the ASF file header of the new playlist entry retrieved from the variable **New-ASF-File-Header** describes the previous entry in the playlist (as opposed to the next entry), the [X-Receding-PlaylistChange (section 2.2.6.26)](#Section_2.2.6.26) MUST be included in the Announce request. If the ASF file header of the new playlist entry retrieved from the variable **New-ASF-File-Header** describes the next entry in the playlist (the normal case during streaming in the forward direction), then the X-Receding-PlaylistChange MUST NOT be included.
 
 The server MAY specify the [Supported (section 2.2.6.10)](#Section_2.2.6.10) header in the request. If the Supported header is specified, the header MUST correctly reflect the features that are supported by the server. For information about what feature tokens to list on the Supported header, see section [3.2.5.2](#Section_3.2.5.2).
 
@@ -3342,7 +3342,7 @@ After sending the Announce request, the server MUST wait for the response or any
 
 This event can occur when the value of the **State** variable is PLAYING. The higher layer provides an ASF packet that will be sent to the client by the server using RTP packets.
 
-The RTP packets MUST use the RTP payload for ASF data packets, as specified in section [2.2.1](#Section_2.2.5.3).
+The RTP packets MUST use the RTP payload for ASF data packets, as specified in section [2.2.1](#Section_2.2.1).
 
 The ASF payloads in the ASF packets MUST be filtered such that only ASF payloads that belong to streams specified in the variable **Selected-Streams** are included in the ASF packets.
 
@@ -3377,7 +3377,7 @@ The server MUST validate that the request is of one of the types specified in se
 
 The server SHOULD invoke the local event specified in section [3.2.7.6](#Section_3.2.7.6) to report to the higher layer that a RTSP request has been received. If, as a result of invoking the event in section 3.2.7.6, the higher layer specifies that the RTSP request is rejected, the server MUST delete the [**session**](#gt_session) state, if any, and close the [**TCP**](#gt_transmission-control-protocol-tcp) connection to the client.
 
-When receiving a request other than Play and Teardown where the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header is present, and the value on that header is both not equal to 0 and does not match the value of the Playlist-gen-id variable in the [abstract data model (section 3.1.1)](#Section_3.1.1), then the server SHOULD treat this as an error and respond with RTSP status code 412.
+When receiving a request other than Play and Teardown where the [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header is present, and the value on that header is both not equal to 0 and does not match the value of the Playlist-gen-id variable in the [abstract data model (section 3.1.1)](#Section_3.1.1), then the server SHOULD treat this as an error and respond with RTSP status code 412.
 
 If the request is not a SendEvent request and the request includes the Session header then the server MUST load the state associated with the RTSP session ID specified on that header. If the matching state cannot be found then the server MUST treat this as an error and respond with status code 454 (as specified in [RFC2326] section 12.37). If the request includes the Session header and the length of the session-id field on that header exceeds 20 characters then the server SHOULD treat this as an error and respond with status code 454.
 
@@ -3416,7 +3416,7 @@ When responding to a [GetContentInfo](#Section_2.2.7.4) request, the server SHOU
 
 When the server includes the Session header in the response, it SHOULD also include the *timeout* parameter (as specified in [RFC2326] section 12.37). The value of the *timeout* parameter MUST be set to a value less than or equal to the timeout interval of the Idle-Timeout timer. It is recommended that the value of the token be at least a few seconds less than the timeout interval to allow for processing delays and network delays.
 
-If the Playlist-gen-id variable in the abstract data model has a nonzero value, the client MUST specify an [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.5.2.6.5) header in the response. The numerical value specified on the header MUST be equal to the value of the Playlist-gen-id variable.
+If the Playlist-gen-id variable in the abstract data model has a nonzero value, the client MUST specify an [X-Playlist-Gen-Id (section 2.2.6.22)](#Section_2.2.6.22) header in the response. The numerical value specified on the header MUST be equal to the value of the Playlist-gen-id variable.
 
 The Idle-Timeout timer MUST be started unless the value of the **State** variable in the abstract data model is PLAYING and RTP packets are transmitted over TCP.
 
@@ -3450,11 +3450,11 @@ If the server is not sending a response with status code 403 or 407, the server 
 
 After sending a response with status code 401 or 407, the server MUST NOT close the TCP connection to the client because the client is expected to resubmit the [Describe](#Section_2.2.7.2) request with the appropriate credentials.
 
-If the server is not sending a response with an error status code, and if the request does not specify a Session header, the server MUST create new state by performing the initialization procedure as specified in section [3.2.3](#Section_3.1.3).
+If the server is not sending a response with an error status code, and if the request does not specify a Session header, the server MUST create new state by performing the initialization procedure as specified in section [3.2.3](#Section_3.2.3).
 
 The Describe response MUST follow the rules as specified in section [3.2.5.2](#Section_3.2.5.2) and MUST conform to the syntax specified in 2.2.7.2.
 
-The server SHOULD use the local event defined in [Broadcast ID (section 3.2.7.8)](#Section_2.2.5.2.6.1) to obtain a numerical identifier. If the numerical identifier is provided, the server MUST include the [X-Broadcast-Id header (section 2.2.6.16)](#Section_2.2.5.2.6.1) in the Describe response, and the numerical value on that header MUST be equal to the numerical identifier provided by the higher layer. If the numerical identifier is unavailable, then the X-Broadcast-Id header MUST NOT be included in the Describe response.
+The server SHOULD use the local event defined in [Broadcast ID (section 3.2.7.8)](#Section_3.2.7.8) to obtain a numerical identifier. If the numerical identifier is provided, the server MUST include the [X-Broadcast-Id header (section 2.2.6.16)](#Section_2.2.6.16) in the Describe response, and the numerical value on that header MUST be equal to the numerical identifier provided by the higher layer. If the numerical identifier is unavailable, then the X-Broadcast-Id header MUST NOT be included in the Describe response.
 
 The SDP in the message body of the Describe response MUST include the ASF file header of the current playlist entry, which is provided by the higher layer.
 
@@ -3466,7 +3466,7 @@ For each media description that corresponds to a stream in the [**ASF**](#gt_adv
 
 For each stream in the ASF content that has an average bit rate that is different from the peak bit rate the server MUST include the "X-AV" bandwidth modifier in SDP as specified in section [2.2.5.1.4](#Section_2.2.5.1.4).
 
-After sending the response, if the status code indicates success (for example, 200), the server MUST wait for a [TcpPacketPair](#Section_2.2.7.12) request or a [SelectStream](#Section_2.2.7.10) request to be received. How to process a TcpPacketPair request is specified in section [3.2.5.5](#Section_2.2.7.12). How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+After sending the response, if the status code indicates success (for example, 200), the server MUST wait for a [TcpPacketPair](#Section_2.2.7.12) request or a [SelectStream](#Section_2.2.7.10) request to be received. How to process a TcpPacketPair request is specified in section [3.2.5.5](#Section_3.2.5.5). How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 If the status code of the response was 401 or 407, the server MUST wait for another Describe request and process it as specified in this section.
 
@@ -3481,7 +3481,7 @@ The TcpPacketPair response MUST follow the rules as specified in sections [3.2.5
 
 As specified in section 2.2.7.12, the response consists of three $P packets. The server SHOULD deliver the $P packets to the TCP layer such that each $P packet is transmitted in a separate TCP segment.
 
-After sending the response, the server MUST wait for another request to be received. Normally, a [SelectStream](#Section_2.2.7.10) request will be received at this point. How to process this request is specified in section [3.2.5.6](#Section_2.2.7.10).
+After sending the response, the server MUST wait for another request to be received. Normally, a [SelectStream](#Section_2.2.7.10) request will be received at this point. How to process this request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Receiving a SelectStream Request
@@ -3525,7 +3525,7 @@ In addition to the rules in section 3.2.5.6.4, if the values of the *OldStream* 
 
 The server MUST check with the higher layer that the URL that the client specified in the request is valid. It MUST be one of the URLs specified by the **control** attribute in SDP (section [2.2.5.2.1](#Section_2.2.5.2.1)) or the URL for one of the [**FEC**](#gt_forward-error-correction-fec) streams (section [2.2.5.4](#Section_2.2.5.4)). If it is not, this is an error, and the server MUST respond with some suitable RTSP error status code such as 400.
 
-If the request is for a retransmission stream, the server MUST set the **v-ssrc** value equal to the numeric value of the **ssrc** field provided in the [Transport](#Section_2.2.6.11) header as specified in section 2.2.6.11. The server MUST set the **v-port** value equal to the RTP UDP port in the *client_port* parameter of the Transport header as specified in section 2.2.6.11.
+If the request is for a retransmission stream, the server MUST set the **v-ssrc** value equal to the numeric value of the **ssrc** field provided in the [Transport](#Section_2.1) header as specified in section 2.2.6.11. The server MUST set the **v-port** value equal to the RTP UDP port in the *client_port* parameter of the Transport header as specified in section 2.2.6.11.
 
 If the request is not for a retransmission stream and the RTSP request method is not [TEARDOWN](#Section_3.2.5.6.2) and the Transport header is present in the request and if the lower-transport field ([[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 12.39) is equal to UDP, then the **Use-UDP** variable MUST be set to 1.
 
@@ -3537,7 +3537,7 @@ Any streams that are removed without being replaced by a different stream MUST b
 
 The [SelectStream](#Section_2.2.7.10) response MUST follow the rules as specified in sections [3.2.5.2](#Section_3.2.5.2) and 2.2.7.10.
 
-If the request is for an FEC stream, the higher layer SHOULD specify the fec-parameter token, as specified in section [2.1](#Section_2.2.6.11). If the higher layer specifies the fec-parameter token, the server MUST include this token on the Transport header in the SelectStream's response. The server MUST also save the fec-parameter token that was provided by the higher layer. If the **FEC-Parameter-State** variable already contains a fec-parameter token for a given stream, the new token replaces the old token.
+If the request is for an FEC stream, the higher layer SHOULD specify the fec-parameter token, as specified in section [2.1](#Section_2.1). If the higher layer specifies the fec-parameter token, the server MUST include this token on the Transport header in the SelectStream's response. The server MUST also save the fec-parameter token that was provided by the higher layer. If the **FEC-Parameter-State** variable already contains a fec-parameter token for a given stream, the new token replaces the old token.
 
 After sending the response, the server MUST wait for another request to be received.
 
@@ -3545,9 +3545,9 @@ If the value of the **State** variable is READY, then any one or more of the fol
 
 If the value of the **State** variable is PLAYING, then any one or more of the following requests are possible: another SelectStream request, a [Pause](#Section_2.2.7.8) request, a KeepAlive request, a SendEvent request, or a Teardown request. The server MUST continue transmitting RTP packets while in the PLAYING state and MUST be prepared to receive RTCP packets.
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
-How to process a UdpPacketPair request is specified in section [3.2.5.7](#Section_2.2.7.14).
+How to process a UdpPacketPair request is specified in section [3.2.5.7](#Section_3.2.5.7).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3576,7 +3576,7 @@ The RTP packets MUST be sent to the **v-port**.
 
 The UdpPacketPair response MUST follow the rules as specified in sections [3.2.5.2](#Section_3.2.5.2) and 2.2.7.14.
 
-After sending the response, the server MUST wait for another request to be received. Normally, a [SelectStream](#Section_2.2.7.10) request will be received at this point. How to process this request is specified in section [3.2.5.6](#Section_2.2.7.10).
+After sending the response, the server MUST wait for another request to be received. Normally, a [SelectStream](#Section_2.2.7.10) request will be received at this point. How to process this request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 Receiving a Play Request
@@ -3615,13 +3615,13 @@ The following rules apply to the case when the server specifies the X-Burst-Stre
 - The server MUST NOT specify a larger value for the *BurstBandwidth* parameter than the one that is requested by the client.
 - The higher layer SHOULD specify how many milliseconds of content it can deliver at the rate that the server will specify on the *BurstBandwidth* parameter on the X-Burst-Streaming header, and the server SHOULD specify a value for *BurstDuration* parameter of the X-Burst-Streaming header that is the smaller of the millisecond value provided by the higher layer and the value that the client requested.
 - The server MUST NOT specify a larger value for the *BurstDuration* parameter than the one that is requested by the client.
-If the value of the **Client-features** variable in the abstract data model indicates that the client supports the [com.microsoft.wm.startupprofile (section 2.2.6.10.8)](#Section_2.2.6.10.8) feature, and if the server is including the X-Accelerate-Streaming header in the response to the Play request, then the server SHOULD invoke the event specified in section [3.2.7.7](#Section_2.2.6.28) to compute the values for the [X-StartupProfile (section 2.2.6.28)](#Section_2.2.6.28) header. The value of the *AccelDuration* parameter on the X-Accelerate-Streaming header that the server sends in the response to this Play request SHOULD be provided as the input parameter to the event in section 3.2.7.7. If the server successfully computes the values for the X-StartupProfile header, then the X-StartupProfile header SHOULD be included in the response to the Play request.
+If the value of the **Client-features** variable in the abstract data model indicates that the client supports the [com.microsoft.wm.startupprofile (section 2.2.6.10.8)](#Section_2.2.6.10.8) feature, and if the server is including the X-Accelerate-Streaming header in the response to the Play request, then the server SHOULD invoke the event specified in section [3.2.7.7](#Section_3.2.7.7) to compute the values for the [X-StartupProfile (section 2.2.6.28)](#Section_2.2.6.28) header. The value of the *AccelDuration* parameter on the X-Accelerate-Streaming header that the server sends in the response to this Play request SHOULD be provided as the input parameter to the event in section 3.2.7.7. If the server successfully computes the values for the X-StartupProfile header, then the X-StartupProfile header SHOULD be included in the response to the Play request.
 
 If the request includes the [X-Playlist-Seek-Id](#Section_2.2.6.23) header, and if the value of this header is equal to the **Previous-playlist-entry-id** variable, but not 0, the server MUST assign this value to the **Playlist-gen-id** variable in the abstract data model. The server MUST set the value of the **Previous-playlist-entry-id** variable to 0, and MUST send an [EndOfStream](#Section_2.2.7.3) request immediately after sending the Play response.
 
 The server MUST NOT specify the X-StartupProfile header in the response unless the client has specified support for the com.microsoft.wm.startupprofile feature.
 
-If the request specified [X-Playlist header](#Section_2.2.5.2.6.5), then the server MUST provide the X-Playlist header and the **Playlist-gen-id** variable to the higher layer and check with the higher layer that the request is valid. If it is not valid (for example, if there is no next or previous playlist entry), this is an error and the server MUST respond with some suitable RTSP error status code (as specified in [RFC2326] 7.1.1), such as 400.
+If the request specified [X-Playlist header](#Section_2.2.6.20), then the server MUST provide the X-Playlist header and the **Playlist-gen-id** variable to the higher layer and check with the higher layer that the request is valid. If it is not valid (for example, if there is no next or previous playlist entry), this is an error and the server MUST respond with some suitable RTSP error status code (as specified in [RFC2326] 7.1.1), such as 400.
 
 If the server will immediately send an EndOfStream request after this response (for example, this would normally happen if the client included the X-Playlist header in the Play request), the Play response MUST include the [X-Playlist-Change-Notice (section 2.2.6.21)](#Section_2.2.6.21) header.
 
@@ -3635,9 +3635,9 @@ While sending RTP packets, the server MUST be prepared for another request to be
 
 Any one or more of the following requests are possible: [LogConnect](#Section_2.2.7.6), [SelectStream](#Section_2.2.7.10), [Pause](#Section_2.2.7.8), [KeepAlive](#Section_2.2.7.5), [SendEvent](#Section_2.2.7.11), or [Teardown](#Section_2.2.7.13) request. The server MUST also be prepared to receive RTCP [[RFC3556]](https://go.microsoft.com/fwlink/?LinkId=90434) packets.
 
-How to process a LogConnect request is specified in section [3.2.5.9](#Section_2.2.7.6).
+How to process a LogConnect request is specified in section [3.2.5.9](#Section_3.2.5.9).
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Pause request is specified in section [3.2.5.11](#Section_3.2.5.11).
 
@@ -3668,7 +3668,7 @@ If the value of the **State** variable is READY, then any one or more of the fol
 
 If the value of the **State** variable is PLAYING, then any one or more of the following requests are possible: SelectStream, [Pause](#Section_2.2.7.8), KeepAlive, SendEvent, or Teardown request. The server MUST continue transmitting RTP packets while in the PLAYING state and MUST be prepared to receive RTCP packets.
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3709,7 +3709,7 @@ If the value of the **State** variable is READY, then any one or more of the fol
 
 If the value of the **State** variable is PLAYING, then any one or more of the following requests are possible: SelectStream, [Pause](#Section_2.2.7.8), KeepAlive, SendEvent, or Teardown request. The server MUST continue transmitting RTP packets while in the PLAYING state and MUST be prepared to receive RTCP packets.
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3744,7 +3744,7 @@ Any one or more of the following requests are possible: LogPlay, [SelectStream](
 
 How to process a LogPlay request is specified in section [3.2.5.12](#Section_3.2.5.12).
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3775,7 +3775,7 @@ If the value of the **State** variable is READY, then any one or more of the fol
 
 If the value of the **State** variable is PLAYING, then any one or more of the following requests are possible: SelectStream, [Pause](#Section_2.2.7.8), KeepAlive, SendEvent, or Teardown request. The server MUST continue transmitting RTP packets while in the PLAYING state and MUST be prepared to receive RTCP packets.
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3806,7 +3806,7 @@ If the value of the **State** variable is PLAYING, then any one or more of the f
 
 How to process a LogPlay request is specified in section [3.2.5.12](#Section_3.2.5.12).
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3835,7 +3835,7 @@ If the value of the **State** variable is PLAYING, then any one or more of the f
 
 How to process a LogPlay request is specified in section [3.2.5.12](#Section_3.2.5.12).
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3864,7 +3864,7 @@ If the value of the **State** variable is READY, then any one or more of the fol
 
 If the value of the **State** variable is PLAYING, then any one or more of the following requests are possible: SelectStream, [Pause](#Section_2.2.7.8), KeepAlive, SendEvent, or Teardown request. The server MUST continue transmitting RTP packets while in the PLAYING state and MUST be prepared to receive RTCP packets.
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -3901,7 +3901,7 @@ If the value of the **State** variable is PLAYING, then any one or more of the f
 
 How to process a LogPlay request is specified in section [3.2.5.12](#Section_3.2.5.12).
 
-How to process a SelectStream request is specified in section [3.2.5.6](#Section_2.2.7.10).
+How to process a SelectStream request is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 How to process a Play request is specified in section [3.2.5.8](#Section_3.2.5.8).
 
@@ -4025,7 +4025,7 @@ If the value of the **Profile_FirstSendTime** variable is 18,446,744,073,709,551
 
 If the value of the **Profile_FirstSendTime** variable is 18,446,744,073,709,551,615 and the content is not broadcast content, then the value of the **Profile_FirstSendTime** variable MUST be set to the value of the **Send Time** field of the ASF packet that includes the ASF payload.
 
-If the value of the **Profile_FirstSendTime** variable is still 18,446,744,073,709,551,615, then the current ASF payload MUST NOT be inspected further, and the server SHOULD continue inspecting the next applicable ASF payload as specified in section [3.2.7.7](#Section_2.2.6.28).
+If the value of the **Profile_FirstSendTime** variable is still 18,446,744,073,709,551,615, then the current ASF payload MUST NOT be inspected further, and the server SHOULD continue inspecting the next applicable ASF payload as specified in section [3.2.7.7](#Section_3.2.7.7).
 
 If the value of the **Send Time** field of the ASF packet that includes the ASF payload, minus the value of **Profile_FirstSendTime**, exceeds the value of the *AccelDuration* parameter on the [X-Accelerate-Streaming](#Section_2.2.6.13) header that is sent by the server, then the current ASF payload MUST NOT be inspected further, and the server MUST stop inspecting ASF payloads. (The server can then proceed with assigning values to the fields of the [X-StartupProfile](#Section_2.2.6.28) header, as specified in section 3.2.7.7.)
 
@@ -4135,7 +4135,7 @@ The following sections describe several operations as used in common scenarios t
 <a id="Section_4.1"></a>
 ## 4.1 RTP Packet Syntax
 
-The size of the RTP payload format header, as specified in section [2.2.1](#Section_2.2.5.3), varies from 4 to 16 bytes, depending on how the **R**, **D**, and **I** fields are set. When none of the fields are set to 1, the size of the RTP payload format header is 4 bytes. When only one of the fields is set to 1, the size of the RTP payload format header is 8 bytes. When two fields are set to 1, the size of the RTP payload format header is 12 bytes. When all three fields are set to 1, the size of the RTP payload format header is 16 bytes.
+The size of the RTP payload format header, as specified in section [2.2.1](#Section_2.2.1), varies from 4 to 16 bytes, depending on how the **R**, **D**, and **I** fields are set. When none of the fields are set to 1, the size of the RTP payload format header is 4 bytes. When only one of the fields is set to 1, the size of the RTP payload format header is 8 bytes. When two fields are set to 1, the size of the RTP payload format header is 12 bytes. When all three fields are set to 1, the size of the RTP payload format header is 16 bytes.
 
 The following illustration represents an [**ASF**](#gt_advanced-systems-format-asf) data packet as it would be sent on the network. In this typical scenario, the total packet size is 1,500 bytes, which includes the following headers and payloads:
 
@@ -4468,7 +4468,7 @@ Content-Type: application/x-wms-streamswitch
 
 From the SDP description sequence, the client can select audio or video streams, and for each of these it can select associated [**FEC**](#gt_forward-error-correction-fec) streams.
 
-The following example illustrates a request/response exchange in which the client requests FEC using a packet span of 24 and 4 FEC packets per span (FecSpan=4). The third parameter, the **FecBurstMargin** field, is used to buffer a set of packet spans and associated FEC packets in the form of a [Vandermonde matrix (section 2.2.2.2)](#Section_4.2), which is a calculation commonly applied to error correction problems.
+The following example illustrates a request/response exchange in which the client requests FEC using a packet span of 24 and 4 FEC packets per span (FecSpan=4). The third parameter, the **FecBurstMargin** field, is used to buffer a set of packet spans and associated FEC packets in the form of a [Vandermonde matrix (section 2.2.2.2)](#Section_2.2.2.2), which is a calculation commonly applied to error correction problems.
 
 The example also shows another FEC parameter, known as the FEC burst margin (FecBurstMargin=6), used to recover from burst losses.
 
@@ -4738,7 +4738,7 @@ Figure 18: RTSP state diagram with caching proxy server (client perspective)
 
 Figure 19: RTSP state diagram with caching proxy server (server perspective)
 
-A proxy server, whether acting as a server or as a client, is largely identical in state to an origin server (as specified in diagrams in sections [3.1](#Section_1.3) and [3.2](#Section_1.3).) That is, when streaming to a client, the proxy server is acting as a regular (origin) server. When acting as a logical client, the proxy server is forwarding requests to the origin server. As indicated in the following figure that illustrates caching proxy server states, much of the decision matrix previously described occurs as a result of the Setup request that causes the initial transition into the "Ready" state. One additional state—the Waiting for GetContentInfo response state—becomes available with the introduction of a caching proxy server. This state, which is indicated by the dotted boxes in the RTSP state diagrams shown here, is applicable only if the caching proxy server is acting as a client to the origin server and only if the content on the cache has expired. The caching proxy server remains in the "Waiting for GetContentInfo response" state until it receives the GetContentInfo response from the origin server. The response to the GetContentInfo request determines whether the [**session**](#gt_session) is streamed from the cache or from the origin server. In either case, both the origin server and the proxy server transition back to the "Ready" state.
+A proxy server, whether acting as a server or as a client, is largely identical in state to an origin server (as specified in diagrams in sections [3.1](#Section_3.1) and [3.2](#Section_3.2).) That is, when streaming to a client, the proxy server is acting as a regular (origin) server. When acting as a logical client, the proxy server is forwarding requests to the origin server. As indicated in the following figure that illustrates caching proxy server states, much of the decision matrix previously described occurs as a result of the Setup request that causes the initial transition into the "Ready" state. One additional state—the Waiting for GetContentInfo response state—becomes available with the introduction of a caching proxy server. This state, which is indicated by the dotted boxes in the RTSP state diagrams shown here, is applicable only if the caching proxy server is acting as a client to the origin server and only if the content on the cache has expired. The caching proxy server remains in the "Waiting for GetContentInfo response" state until it receives the GetContentInfo response from the origin server. The response to the GetContentInfo request determines whether the [**session**](#gt_session) is streamed from the cache or from the origin server. In either case, both the origin server and the proxy server transition back to the "Ready" state.
 
 When a client requests on-demand content from a caching proxy server, the proxy server first checks whether the content exists locally and whether the content is valid. If both conditions are true, then the proxy server can transmit the content from its local cache to the client. If the content has expired, the proxy server establishes a connection to the origin server to determine whether the cached copy of the content is still valid. If the proxy server is able to determine that the cached content is still valid, then the proxy server is allowed to transmit the content to the client. If the cached copy of the content is invalid and caching of the content is allowed, then the proxy server might replace its cached copy by downloading the content from the origin server into the cache. The proxy server would then be able to transmit the content to the requesting client.
 
@@ -4756,9 +4756,9 @@ The proxy server comprises a server role and a client role. In the following des
 - The media player client sends a [Describe (section 2.2.7.2)](#Section_2.2.7.2) request.
 - The higher layer of the proxy server checks whether the requested content is in its local cache. If the content is not in the cache, the higher layer of the proxy server creates an instance of the client role and uses the client role to open a connection with the origin server. These steps are described in section [4.6.3](#Section_4.6.3).
 - The higher layer of the proxy server checks whether the content in the local cache is valid. If the content is not valid, the higher layer of the proxy server creates an instance of the client role and uses the client role to revalidate the content. If the content is still not valid, then the higher layer of the proxy server opens a connection with the origin server. These steps are described in section 4.6.3.
-- The server role of the proxy server sends a "200 OK" response that includes the SDP record and the [Cache-Control (section 2.2.6.2)](#Section_2.2.6.2) header, as specified in [3.2.5.4](#Section_2.2.7.2).
+- The server role of the proxy server sends a "200 OK" response that includes the SDP record and the [Cache-Control (section 2.2.6.2)](#Section_2.2.6.2) header, as specified in [3.2.5.4](#Section_3.2.5.4).
 - The media player client sends a SelectStream ([2.2.7.10](#Section_2.2.7.10)) request using the Setup method for each selected stream.
-- The server role of the proxy server sends a "200 OK" response to the media player client, as specified in [3.2.5.6](#Section_2.2.7.10).
+- The server role of the proxy server sends a "200 OK" response to the media player client, as specified in [3.2.5.6](#Section_3.2.5.6).
 - The media player client submits a Play request to start receiving the RTP packets.
 - The server role of the proxy server responds with "200 OK" and begins sending the RTP packets for the requested streams to the client, as specified in [3.2.5.8](#Section_3.2.5.8).
 - The client role of the proxy server communicates any subscribed-to events to the origin server using the SendEvent ([2.2.7.11](#Section_2.2.7.11)) request, as specified in [3.1.4.7](#Section_3.1.4.7) and[3.1.4.9](#Section_3.1.4.9).
@@ -4780,9 +4780,9 @@ The proxy server comprises a server role and a client role. In the following des
 - The media player client sends a [Describe (section 2.2.7.2)](#Section_2.2.7.2) request.
 - The higher layer of the proxy server checks whether it has a client role that is currently receiving the content. If the content is not being received by any client role, then the higher layer of the proxy server creates an instance of the client role and uses it to open a connection with the origin server. These steps are described in section [4.6.3](#Section_4.6.3).
 - The higher layer of proxy server checks whether the content can be split, as determined by the x-wms-proxy-split directive on the [Cache-Control (section 2.2.6.2)](#Section_2.2.6.2) header that is provided by the client role. If the content cannot be split, and using the current client role would cause the content to be split, then the higher layer of the proxy server creates another instance of the client role and uses it to open a connection with the origin server. These steps are described in 4.6.3.
-- The server role of the proxy server sends a "200 OK" response that includes the SDP record and the Cache-Control header, as specified in [3.2.5.4](#Section_2.2.7.2).
+- The server role of the proxy server sends a "200 OK" response that includes the SDP record and the Cache-Control header, as specified in [3.2.5.4](#Section_3.2.5.4).
 - The media player client sends a SelectStream ([2.2.7.10](#Section_2.2.7.10)) request using the Setup method for each selected stream.
-- The server role of the proxy server sends a "200 OK" response to the media player client, as specified in [3.2.5.6](#Section_2.2.7.10).
+- The server role of the proxy server sends a "200 OK" response to the media player client, as specified in [3.2.5.6](#Section_3.2.5.6).
 - The client role of the proxy server communicates any subscribed-to events to the origin server using the SendEvent ([2.2.7.11](#Section_2.2.7.11)) request, as specified in [3.1.4.7](#Section_3.1.4.7) and [3.1.4.9](#Section_3.1.4.9).
 - The media player client submits play statistics using a [LogPlay (section 2.2.7.7)](#Section_2.2.7.7) request.
 - The server role of the proxy server responds with "200 OK", as specified in [3.2.5.12](#Section_3.2.5.12).
@@ -4816,7 +4816,7 @@ RTSP Windows Media Extensions are at risk of an attack in which the attacker spo
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
 
-The only security parameter, HTTP access authentication, is found in section [2.1](#Section_2.2.6.11).
+The only security parameter, HTTP access authentication, is found in section [2.1](#Section_2.1).
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

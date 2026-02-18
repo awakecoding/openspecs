@@ -240,7 +240,7 @@ Negotiation of the WebDAV Protocol and of HTTP/1.1 options in general is specifi
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-The extensions that are defined in this protocol can be extended in constrained ways, as specified in section [2.2.3](#Section_449).
+The extensions that are defined in this protocol can be extended in constrained ways, as specified in section [2.2.3](#Section_2.2.3).
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -266,16 +266,16 @@ The extension headers in this protocol conform to the form and behavior of other
 
 The following header extensions are specified in this section:
 
-- The X-MSDAVEXT response header has been added to the OPTIONS response and indicates support for the extensions that are covered in this document, as specified in section [2.2.1](#Section_449).
+- The X-MSDAVEXT response header has been added to the OPTIONS response and indicates support for the extensions that are covered in this document, as specified in section [2.2.1](#Section_2.2.1).
 - The [Translate](#Section_449) request header allows the client to request the source of an entity, as specified in section 2.2.2.
-- The X-MSDAVEXT_ERROR response header provides a mechanism for extended error handling, as specified in section [2.2.3](#Section_449).
-- The X-MSDAVEXTLockTimeout request/response header enables bundling of LOCK information (as specified in [RFC4918] section 8.10) with GET, PUT, and POST messages, as specified in section [2.2.4.1](#Section_449).
-- The Lock-Token request/response header enables bundling of LOCK information with GET, PUT, and POST messages, as specified in section [2.2.4.2](#Section_449).
-- The Ms-Echo-Request header is sent by the server when returning a 449 Retry With status, as specified in section [2.2.7](#Section_449).
-- The Ms-Echo-Reply header is sent by the client when making a request in response to a 449 Retry With status, as specified in section [2.2.8](#Section_449).
+- The X-MSDAVEXT_ERROR response header provides a mechanism for extended error handling, as specified in section [2.2.3](#Section_2.2.3).
+- The X-MSDAVEXTLockTimeout request/response header enables bundling of LOCK information (as specified in [RFC4918] section 8.10) with GET, PUT, and POST messages, as specified in section [2.2.4.1](#Section_2.2.4.1).
+- The Lock-Token request/response header enables bundling of LOCK information with GET, PUT, and POST messages, as specified in section [2.2.4.2](#Section_2.2.4.2).
+- The Ms-Echo-Request header is sent by the server when returning a 449 Retry With status, as specified in section [2.2.7](#Section_2.2.7).
+- The Ms-Echo-Reply header is sent by the client when making a request in response to a 449 Retry With status, as specified in section [2.2.8](#Section_2.2.8).
 The following new content type is specified in this extension:
 
-- The Multipart/MSDAVEXTPrefixEncoded content type allows [**entity**](#gt_entity) [**properties**](#gt_f930baab-25f1-4142-bced-5effc9f62d45) and entity content to be bundled in a single message, as specified in section [2.2.5](#Section_449).
+- The Multipart/MSDAVEXTPrefixEncoded content type allows [**entity**](#gt_entity) [**properties**](#gt_f930baab-25f1-4142-bced-5effc9f62d45) and entity content to be bundled in a single message, as specified in section [2.2.5](#Section_2.2.5).
 The following new status code is specified in this extension:
 
 - The 449 Retry With status code allows the server to indicate that the request did not contain sufficient information and needs to be retried by the client, as specified in section [2.2.6](#Section_449).
@@ -292,7 +292,7 @@ Ext-options = "1" | "PROPFIND" | "PROPPATCH"
 
 The presence of this header with a value of 1 in the OPTIONS response indicates that the server supports the new extensions described in this document. This header with a value of 1 is valid only on an OPTIONS response.
 
-The presence of this header with a value of PROPFIND on a GET or POST request indicates that the server which sends X-MSDAVEXT: 1 in its OPTIONS response MUST return both the [**properties**](#gt_f930baab-25f1-4142-bced-5effc9f62d45) and the actual file together in the response using the multipart/MSDAVEXTPrefixEncoded content type, as specified in section [2.2.5](#Section_449). In accordance with [RFC2616] section 9.4, a server MUST respond to a HEAD request with this header with the same headers it would in a GET request but without the message body.
+The presence of this header with a value of PROPFIND on a GET or POST request indicates that the server which sends X-MSDAVEXT: 1 in its OPTIONS response MUST return both the [**properties**](#gt_f930baab-25f1-4142-bced-5effc9f62d45) and the actual file together in the response using the multipart/MSDAVEXTPrefixEncoded content type, as specified in section [2.2.5](#Section_2.2.5). In accordance with [RFC2616] section 9.4, a server MUST respond to a HEAD request with this header with the same headers it would in a GET request but without the message body.
 
 The presence of this header with a value of PROPPATCH on a PUT request indicates that the body of the request contains both the properties and the actual file together in the request. The content type header MUST indicate the media type of multipart/MSDAVEXTPrefixEncoded.
 
@@ -311,7 +311,7 @@ Translate-header = "Translate" ":" Translate-value
 
 Translate-value = "t" | "f" | "F"
 
-If Translate-value is "t", the server is to process the content before returning it to the client; if it is "f" | "F", the server is to return the unprocessed content (that is, the source without the programmatic interpretation) to the client. The values "f" and "F" are synonymous. All other values SHOULD be ignored by the server. For more information about the processing of this header, see section [3.2.5.1](#Section_449).<5>
+If Translate-value is "t", the server is to process the content before returning it to the client; if it is "f" | "F", the server is to return the unprocessed content (that is, the source without the programmatic interpretation) to the client. The values "f" and "F" are synonymous. All other values SHOULD be ignored by the server. For more information about the processing of this header, see section [3.2.5.1](#Section_3.2.5.1).<5>
 
 This header MUST be supported on the GET verb and MAY be supported on other verbs.<6>
 
@@ -356,14 +356,14 @@ The Lock Time-out header is valid on the requests and responses for GET, PUT, an
 
 - On a request: The number portion of this header specifies the time-out for creating or refreshing the lock. A value of 0 indicates an unlock request.
 - On a response: When included in a response to create or refresh the lock operation, the Lock Time-out header specifies the remaining time for which the lock is valid.
-The [Lock-Token header](#Section_449) MUST be included to unlock or refresh the file, as specified in sections [3.1.5.4](#Section_449) and [3.2.5.2](#Section_449).
+The [Lock-Token header](#Section_449) MUST be included to unlock or refresh the file, as specified in sections [3.1.5.4](#Section_3.1.5.4) and [3.2.5.2](#Section_3.2.5.2).
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 Lock-Token Header
 
 The Lock-Token header in the WebDAV Protocol: Client Extensions is the same Lock-Token header as specified in [[RFC4918]](https://go.microsoft.com/fwlink/?LinkId=151240) section 10.5. This extension extends only the applicability of the header.
 
-The Lock-Token header MAY be included on GET, PUT, and POST requests and responses. When this header and the X-MSDAVEXTLockTimeout header are included on these requests, it instructs the server to either refresh or release the lock; or to perform a write operation on a locked object, as specified in section [3.1.5.4](#Section_449).<9>
+The Lock-Token header MAY be included on GET, PUT, and POST requests and responses. When this header and the X-MSDAVEXTLockTimeout header are included on these requests, it instructs the server to either refresh or release the lock; or to perform a write operation on a locked object, as specified in section [3.1.5.4](#Section_3.1.5.4).<9>
 
 The Lock-Token header SHOULD be included in a PUT request that acts on a locked [**resource**](#gt_resource). It MAY be validated by the server before honoring a PUT request. A server MUST NOT fail a PUT request simply because the header is not present in the request. The Lock-Token MUST be included in GET, HEAD, POST, and PUT responses from servers that return an X-MSDAVEXT: 1 header from an OPTIONS request.
 
@@ -460,7 +460,7 @@ If the client does not support the extensions, the client MAY ignore the header 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 WebDAV Extension Header
 
-The X-MSDAVEXT header has been added to indicate support for WebDAV Protocol: Client Extensions and to request optional server behavior. For more information, see section [3.1.5](#Section_449).
+The X-MSDAVEXT header has been added to indicate support for WebDAV Protocol: Client Extensions and to request optional server behavior. For more information, see section [3.1.5](#Section_3.1.5).
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 Extensions to GET and POST
@@ -480,7 +480,7 @@ An X-MSDAVEXT: PROPPATCH header in the request instructs the server that the pro
 
 This header SHOULD be included only on PUT commands that are targeted to servers that support the extensions, as advertised by an X-MSDAVEXT: 1 header in the OPTIONS command response from the server.<15>
 
-The Content-Type: multipart/MSDAVEXTPrefixEncoded header MUST be added by the client on the request, and the body SHOULD be of the format specified in section [2.2.5](#Section_449).
+The Content-Type: multipart/MSDAVEXTPrefixEncoded header MUST be added by the client on the request, and the body SHOULD be of the format specified in section [2.2.5](#Section_2.2.5).
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Translate Header
@@ -581,7 +581,7 @@ The [**WebDAV server**](#gt_webdav-server) MAY add the [extended error](#Section
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Extensions to GET and POST
 
-The [**WebDAV server**](#gt_webdav-server) SHOULD ignore the header if it receives an X-MSDAVEXT: PROPFIND header when support for the WebDAV Protocol: Client Extensions is not advertised. If the WebDAV server advertised the support for the extensions, it MUST process the command and return the [**properties**](#gt_f930baab-25f1-4142-bced-5effc9f62d45) and the file contents in the format that is specified in section [2.2.5](#Section_449).<24>
+The [**WebDAV server**](#gt_webdav-server) SHOULD ignore the header if it receives an X-MSDAVEXT: PROPFIND header when support for the WebDAV Protocol: Client Extensions is not advertised. If the WebDAV server advertised the support for the extensions, it MUST process the command and return the [**properties**](#gt_f930baab-25f1-4142-bced-5effc9f62d45) and the file contents in the format that is specified in section [2.2.5](#Section_2.2.5).<24>
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Extensions to PUT
@@ -747,7 +747,7 @@ Date: Tue, 25 Jan 2005 03:11:51 GMT
 <a id="Section_4.3"></a>
 ## 4.3 Example Command Combinations
 
-The headers and extensions, as specified in section [2](#Section_449), enable multiple operations to be combined in a single request/response. The following list shows the typical combinations:
+The headers and extensions, as specified in section [2](#Section_2), enable multiple operations to be combined in a single request/response. The following list shows the typical combinations:
 
 - POST or GET + PropFind
 - POST or GET + Lock or Refresh or Unlock
@@ -975,7 +975,7 @@ Please adjust your screen resolution to 1600 x 1200 to enjoy this content.
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-[**WebDAV servers**](#gt_webdav-server) that support the translate: f header need to perform access checks before returning the source of the file, as specified in section [3.2.5.1](#Section_449), in order to protect any source content (for example, database passwords).<26>
+[**WebDAV servers**](#gt_webdav-server) that support the translate: f header need to perform access checks before returning the source of the file, as specified in section [3.2.5.1](#Section_3.2.5.1), in order to protect any source content (for example, database passwords).<26>
 
 <a id="Section_5.1.1"></a>
 ### 5.1.1 Data Security Using File Encryption
@@ -1035,7 +1035,7 @@ The WebDAV server in Internet Information Services applies the Translate header 
 
 Windows SharePoint Services 2.0 and Windows SharePoint Services 3.0 support this header on GET, POST, and HEAD commands, and all others ignore it.
 
-<7> Section 2.2.3: Extended error handling is supported by the WebDAV client only in Windows Vista operating system and later and Windows Server 2008 operating system and later; and by a WebDAV server that uses Windows SharePoint Services 3.0. If the WebDAV server includes this header in the response, the WebDAV client in Windows Vista operating system and later and Windows Server 2008 operating system and later propagates these errors to applications for their use. A complete list of errors that are supported is specified in section [3.1.5.3](#Section_449).
+<7> Section 2.2.3: Extended error handling is supported by the WebDAV client only in Windows Vista operating system and later and Windows Server 2008 operating system and later; and by a WebDAV server that uses Windows SharePoint Services 3.0. If the WebDAV server includes this header in the response, the WebDAV client in Windows Vista operating system and later and Windows Server 2008 operating system and later propagates these errors to applications for their use. A complete list of errors that are supported is specified in section [3.1.5.3](#Section_3.1.5.3).
 
 <8> Section 2.2.4: These headers are supported by a WebDAV client in Windows Vista operating system and later and Windows Server 2008 operating system and later, and by a WebDAV server that is using Windows SharePoint Services 3.0 technology.
 
@@ -1045,7 +1045,7 @@ Windows SharePoint Services 2.0 and Windows SharePoint Services 3.0 support this
 
 <11> Section 3.1.1: The WebDAV client in Windows Vista operating system and later and Windows Server 2008 operating system and later keeps track of server capabilities for the extensions and uses the new headers only against those servers that advertise this behavior.
 
-<12> Section 3.1.5: The WebDAV client in Windows sends an OPTIONS command to verify server support for extensions. In Windows XP and Windows Server 2003, the WebDAV client does not support the extensions, and, therefore, the new headers are ignored on the OPTIONS response. In Windows Vista operating system and later and Windows Server 2008 operating system and later, the WebDAV client does support the extensions, and the new headers in the server OPTIONS response are not ignored. Support for the HTTP 449 retry extension, as specified in section [3.1.5.5](#Section_449) and [3.2.5.6](#Section_449), is not indicated by the OPTIONS command. Clients may choose to support the HTTP 449 retry extension independent of their support for other WebDAV client extensions.
+<12> Section 3.1.5: The WebDAV client in Windows sends an OPTIONS command to verify server support for extensions. In Windows XP and Windows Server 2003, the WebDAV client does not support the extensions, and, therefore, the new headers are ignored on the OPTIONS response. In Windows Vista operating system and later and Windows Server 2008 operating system and later, the WebDAV client does support the extensions, and the new headers in the server OPTIONS response are not ignored. Support for the HTTP 449 retry extension, as specified in section [3.1.5.5](#Section_3.1.5.5) and [3.2.5.6](#Section_3.2.5.6), is not indicated by the OPTIONS command. Clients may choose to support the HTTP 449 retry extension independent of their support for other WebDAV client extensions.
 
 <13> Section 3.1.5.1.1: The WebDAV client in Windows Vista operating system and later and Windows Server 2008 operating system and later treats the response as an error if the WebDAV server advertised the support for the extensions and returns a content type that is not multipart/MSDAVEXTPrefixEncoded in response to a request that has the X-MSDAVEXT: PROPFIND header.
 

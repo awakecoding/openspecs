@@ -523,7 +523,7 @@ None.
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Pointer Image Cache
 
-The Pointer Image Cache contains a collection of pointer images sent to the client using the **TS_POINTERATTRIBUTE** (section [2.2.2.5](../MS-RDPBCGR/MS-RDPBCGR.md)) and **TS_LARGEPOINTERATTRIBUTE** (section [2.2.2.6](../MS-RDPBCGR/MS-RDPBCGR.md)) structures. The size and color depth (either variable or fixed at 24 bpp) of the cache are specified in the Pointer Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.5).
+The Pointer Image Cache contains a collection of pointer images sent to the client using the **TS_POINTERATTRIBUTE** (section [2.2.2.5](#Section_2.2.2.5)) and **TS_LARGEPOINTERATTRIBUTE** (section [2.2.2.6](#Section_2.2.2.6)) structures. The size and color depth (either variable or fixed at 24 bpp) of the cache are specified in the Pointer Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.5).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -587,7 +587,7 @@ None.
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Pointer Image Cache
 
-The Pointer Image Cache contains a collection of pointer images sent to the client using the **TS_POINTERATTRIBUTE** (section [2.2.2.5](../MS-RDPBCGR/MS-RDPBCGR.md)) and **TS_LARGEPOINTERATTRIBUTE** (section [2.2.2.6](../MS-RDPBCGR/MS-RDPBCGR.md)) structures. The images stored in the cache are used to set the shape of the pointer when processing an RDP_MOUSE_CURSOR_MOUSEPTR_UPDATE_PDU (section [2.2.3.3](../MS-RDPBCGR/MS-RDPBCGR.md)) that contains a **cachedPointerIndex** field. The size and color depth (either variable or fixed at 24 bpp) of the cache are specified in the Pointer Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.5).
+The Pointer Image Cache contains a collection of pointer images sent to the client using the **TS_POINTERATTRIBUTE** (section [2.2.2.5](#Section_2.2.2.5)) and **TS_LARGEPOINTERATTRIBUTE** (section [2.2.2.6](#Section_2.2.2.6)) structures. The images stored in the cache are used to set the shape of the pointer when processing an RDP_MOUSE_CURSOR_MOUSEPTR_UPDATE_PDU (section [2.2.3.3](#Section_2.2.3.3)) that contains a **cachedPointerIndex** field. The size and color depth (either variable or fixed at 24 bpp) of the cache are specified in the Pointer Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.5).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers

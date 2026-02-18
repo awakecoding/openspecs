@@ -229,7 +229,7 @@ Two software plug-ins interact with each other through files in the [**folder re
 - Folder Redirection Client-Side Plug-in
 The Folder Redirection Administrative-Side Plug-in provides a user interface by which network administrators can establish and update folder locations for users' folders. It relies on the Group Policy Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md), to specify the location of the remote storage location where the folder redirection configuration data is to be stored. This [**GPO path**](#gt_b6f231be-60b0-4890-bd73-5637568f2aea) is metadata in a [**GPO**](#gt_group-policy-object-gpo) that is stored on the [**domain controller (DC)**](#gt_domain-controller-dc) where the Folder Redirection Protocol configuration data is stored. The plug-in uses [**SMB**](#gt_server-message-block-smb) operations, as specified in [MS-SMB](../MS-SMB/MS-SMB.md), to retrieve existing configuration data (in the form of files) from that location and to store updated configuration to it.
 
-The Folder Redirection Client-Side Plug-in is a component of each client machine in the network that users log on to. It is invoked by the client implementation of the Group Policy Protocol, as specified in [MS-GPOL], on behalf of the user logging on to the operating system. The protocol provides the folder redirection protocol with the remote storage location from which the protocol reads the Folder Redirection Client-Side Plug-in configuration data. This location is constructed based on the GPO path in the GPO retrieved by the Group Policy Protocol. The client-side plug-in uses SMB operations to retrieve the current configuration data from that location. The plug-in then parses the data and configures the folder redirection subsystem of the underlying operating system to redirect the user's user profile folders to the locations specified, as described in section [1.3.4](#Section_1.3).
+The Folder Redirection Client-Side Plug-in is a component of each client machine in the network that users log on to. It is invoked by the client implementation of the Group Policy Protocol, as specified in [MS-GPOL], on behalf of the user logging on to the operating system. The protocol provides the folder redirection protocol with the remote storage location from which the protocol reads the Folder Redirection Client-Side Plug-in configuration data. This location is constructed based on the GPO path in the GPO retrieved by the Group Policy Protocol. The client-side plug-in uses SMB operations to retrieve the current configuration data from that location. The plug-in then parses the data and configures the folder redirection subsystem of the underlying operating system to redirect the user's user profile folders to the locations specified, as described in section [1.3.4](#Section_1.3.4).
 
 **Note** The remote storage location can be implemented using a variety of techniques such as a network share. Therefore, implementing a remote storage location does not require understanding the folder redirection protocol.
 
@@ -327,7 +327,7 @@ Messages exchanged in this protocol allow the client to discover settings in the
 
 There are two versions of the protocol specified in the following sections:
 
-- [2.2.1](#Section_4.1) Folder Redirection Protocol Version Zero Configuration Data
+- [2.2.1](#Section_2.2.1) Folder Redirection Protocol Version Zero Configuration Data
 - [2.2.2](#Section_2.2.2) Folder Redirection Protocol Version One Configuration Data
 Both versions convey a message as a .ini file. Each file is encoded in UTF-16LE with Byte Order Mark (0xFFFE). The syntax of each file, and thus the syntax of each message, is specified by the Augmented Backus-Naur Form (ABNF) non-terminal IniFile, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. The following sections use the terminology sections, keys, and values of that document to specify concrete syntax of each message.
 
@@ -486,7 +486,7 @@ Initialization occurs upon initiation of the administrative-side plug-in by an a
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-When initiated by an administrator, the Folder Redirection Administrative-Side Plug-in MUST read the protocol configuration data from the remote storage location and pass that information to a user interface to display the current settings to an administrator. If the administrator makes any settings changes for a [**folder**](#gt_folder) through the user interface of the administrative-side plug-in, the Folder Redirection Administrative-Side Plug-in MUST write that configuration data as [**Unicode**](#gt_unicode) (in a file using the format specified in section [2.2.1](#Section_4.1)) to the remote storage location using remote file access.
+When initiated by an administrator, the Folder Redirection Administrative-Side Plug-in MUST read the protocol configuration data from the remote storage location and pass that information to a user interface to display the current settings to an administrator. If the administrator makes any settings changes for a [**folder**](#gt_folder) through the user interface of the administrative-side plug-in, the Folder Redirection Administrative-Side Plug-in MUST write that configuration data as [**Unicode**](#gt_unicode) (in a file using the format specified in section [2.2.1](#Section_2.2.1)) to the remote storage location using remote file access.
 
 For Version Zero of the [**folder redirection**](#gt_folder-redirection) protocol, the file name used MUST be <gpo path>\User\Documents & Settings\fdeploy.ini; and for Version One of the protocol, the file name MUST be <gpo path>\User\Documents & Settings\fdeploy1.ini, where <gpo path> is provided by the Group Policy Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md).
 
@@ -495,7 +495,7 @@ After every creation, modification or deletion that affects a Folder Redirection
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Extraneous Data Ignored
 
-Any sections or keys in the configuration file that do not conform to the configuration format, as specified in sections [2.2.1](#Section_4.1) and [2.2.2](#Section_2.2.2), MUST be ignored by the administrative-side plug-in. When the administrative-side plug-in modifies a configuration file, the new file it stores MUST include any unrecognized sections and any unrecognized keys in sections that the plug-in has not deleted or replaced entirely.
+Any sections or keys in the configuration file that do not conform to the configuration format, as specified in sections [2.2.1](#Section_2.2.1) and [2.2.2](#Section_2.2.2), MUST be ignored by the administrative-side plug-in. When the administrative-side plug-in modifies a configuration file, the new file it stores MUST include any unrecognized sections and any unrecognized keys in sections that the plug-in has not deleted or replaced entirely.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Using the Protocol Versions
@@ -542,7 +542,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-When the client-side plug-in is initialized by the Group Policy Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md), it MUST read in the configuration data from the remote storage location, as specified in section [3.1.3](#Section_3.2.3). If **AlwaysWaitForNetworkAtStartupAndLogon** is TRUE, the client-side plug-in MUST wait for network connectivity before attempting to read the configuration data from the remote storage location.
+When the client-side plug-in is initialized by the Group Policy Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md), it MUST read in the configuration data from the remote storage location, as specified in section [3.1.3](#Section_3.1.3). If **AlwaysWaitForNetworkAtStartupAndLogon** is TRUE, the client-side plug-in MUST wait for network connectivity before attempting to read the configuration data from the remote storage location.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -590,12 +590,12 @@ For each [**GPO**](#gt_group-policy-object-gpo) in "**New or Changed GPO list**"
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Ignoring Extraneous Data
 
-Any sections or keys in the configuration file that do not conform to the configuration format, as specified in sections [2.2.1](#Section_4.1) and [2.2.2](#Section_2.2.2), MUST be ignored by the client-side plug-in.
+Any sections or keys in the configuration file that do not conform to the configuration format, as specified in sections [2.2.1](#Section_2.2.1) and [2.2.2](#Section_2.2.2), MUST be ignored by the client-side plug-in.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Using the Protocol Versions
 
-When Group Policy provides a [**GPO path**](#gt_b6f231be-60b0-4890-bd73-5637568f2aea), the client SHOULD<13> try Version One of the protocol; the client attempts to retrieve fdeploy1.ini using the GPO path, as specified in section [3.1.3](#Section_3.2.3), and parse it according to section [2.2.2](#Section_2.2.2). If the client successfully accesses the Version One file, it MUST NOT try Version Zero. If the Version One file is absent, the client tries Version Zero. It attempts to retrieve fdeploy.ini, and, if successful, parses it according to section [2.2.1](#Section_4.1).
+When Group Policy provides a [**GPO path**](#gt_b6f231be-60b0-4890-bd73-5637568f2aea), the client SHOULD<13> try Version One of the protocol; the client attempts to retrieve fdeploy1.ini using the GPO path, as specified in section [3.1.3](#Section_3.1.3), and parse it according to section [2.2.2](#Section_2.2.2). If the client successfully accesses the Version One file, it MUST NOT try Version Zero. If the Version One file is absent, the client tries Version Zero. It attempts to retrieve fdeploy.ini, and, if successful, parses it according to section [2.2.1](#Section_2.2.1).
 
 Alternatively, the client simply attempts Version Zero of the protocol, fetching only fdeploy.ini and, if successful, parsing it according to section 2.2.1.
 
@@ -694,7 +694,7 @@ FullPath=\\FileServer2\%USERNAME%\Documents
 <a id="Section_4.3"></a>
 ## 4.3 Version One Configuration File Example
 
-The following is an example of a Version One configuration file. This example illustrates only some of the redirection options, as specified in section [2.2.1](#Section_4.1).
+The following is an example of a Version One configuration file. This example illustrates only some of the redirection options, as specified in section [2.2.1](#Section_2.2.1).
 
 [version]
 
@@ -743,7 +743,7 @@ ExcludeFolders=625B53C3-AB48-4EC1-BA1F-A1EF4146FC19
 <a id="Section_4.4"></a>
 ## 4.4 Version Zero Configuration File Example
 
-An example of a Version Zero configuration file follows. This example illustrates only some of the redirection options specified in section [2.2.1](#Section_4.1).
+An example of a Version Zero configuration file follows. This example illustrates only some of the redirection options specified in section [2.2.1](#Section_2.2.1).
 
 [FolderStatus]
 

@@ -194,7 +194,7 @@ Many modern computers have built-in hardware to help secure data. This is typica
 
 On a server that supports key [**attestation**](#gt_attestation) (see [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 1.3.2.2), it is possible to prove that the key that is bound to a certificate request comes from a TPM and is non-migratable, and that all cryptographic operations using the private portion of the key occur inside the same TPM.
 
-For details about [**key attestation**](#gt_key-attestation) see [MS-CSRA](../MS-CSRA/MS-CSRA.md) section 3.1.1.1.2, [MS-CRTD](#Section_2.9.1.3) section 2.27, and [MS-WCCE] sections 1.3.2.2, 2.2.2.5, 3.1.1.4.3.4, and 3.2.2.6.2.1.2.5 (among others).
+For details about [**key attestation**](#gt_key-attestation) see [MS-CSRA](../MS-CSRA/MS-CSRA.md) section 3.1.1.1.2, [MS-CRTD](../MS-CRTD/MS-CRTD.md) section 2.27, and [MS-WCCE] sections 1.3.2.2, 2.2.2.5, 3.1.1.4.3.4, and 3.2.2.6.2.1.2.5 (among others).
 
 <a id="Section_1.2"></a>
 ## 1.2 Glossary
@@ -202,7 +202,7 @@ For details about [**key attestation**](#gt_key-attestation) see [MS-CSRA](../MS
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_administrator"></a>
 **administrator**: A user who has complete and unrestricted access to the computer or domain.
@@ -223,7 +223,7 @@ This document uses the following terms:
 **CA policy algorithm**: An algorithm that determines whether to issue a certificate for a specified certificate request and defines how that certificate is constructed.
 
 <a id="gt_ca-system"></a>
-**CA system**: The system that implements the protocols and data structures specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md), [MS-CSRA](../MS-CSRA/MS-CSRA.md), [MS-CRTD](#Section_2.9.1.3), and [MS-ICPR](../MS-ICPR/MS-ICPR.md).
+**CA system**: The system that implements the protocols and data structures specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md), [MS-CSRA](../MS-CSRA/MS-CSRA.md), [MS-CRTD](../MS-CRTD/MS-CRTD.md), and [MS-ICPR](../MS-ICPR/MS-ICPR.md).
 
 <a id="gt_cep"></a>
 **CEP**: The [**certificate enrollment policy**](#gt_certificate-enrollment-policy) as defined in [MS-XCEP](../MS-XCEP/MS-XCEP.md).
@@ -363,17 +363,17 @@ This document uses the following terms:
 <a id="Section_1.3"></a>
 ## 1.3 References
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-CRTD] Microsoft Corporation, "[Certificate Templates Structure](#Section_2.9.1.3)".
+[MS-CRTD] Microsoft Corporation, "[Certificate Templates Structure](../MS-CRTD/MS-CRTD.md)".
 
 [MS-CSRA] Microsoft Corporation, "[Certificate Services Remote Administration Protocol](../MS-CSRA/MS-CSRA.md)".
 
 [MS-DRSR] Microsoft Corporation, "[Directory Replication Service (DRS) Remote Protocol](../MS-DRSR/MS-DRSR.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MS-GPREG] Microsoft Corporation, "[Group Policy: Registry Extension Encoding](../MS-GPREG/MS-GPREG.md)".
 
@@ -424,7 +424,7 @@ The clients have to first be configured with information about which policy serv
 
 **Domain controller**: Enrollment clients and CA servers in enterprise mode primarily depend on the Active Directory and optionally on Group Policy server as described earlier in this section.
 
-The following diagram shows the functionality of the Certificate Services protocols in enterprise mode. The classification and purpose of the member protocols are described in section [2.2](#Section_3.4).
+The following diagram shows the functionality of the Certificate Services protocols in enterprise mode. The classification and purpose of the member protocols are described in section [2.2](#Section_2.2).
 
 ![Certificate Services protocols functional architecture in enterprise mode](media/image3.png)
 
@@ -530,7 +530,7 @@ There are two methods for [**certificate enrollment**](#gt_certificate-enrollmen
 
 **DCOM-based certificate enrollment**
 
-DCOM-based certificate enrollment uses WCCE for [**certificate**](#gt_certificate) requests. When a [**CA**](#gt_certification-authority-ca) is operating in [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) mode, it uses the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) profile specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3 to obtain a [**CEP**](#gt_cep) from a [**domain controller (DC)**](#gt_domain-controller-dc). The CEP is expressed via [**certificate templates**](#gt_certificate-template) that are data structures specified in [MS-CRTD](#Section_2.9.1.3) and Certificate Authority (CA) information.
+DCOM-based certificate enrollment uses WCCE for [**certificate**](#gt_certificate) requests. When a [**CA**](#gt_certification-authority-ca) is operating in [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) mode, it uses the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) profile specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3 to obtain a [**CEP**](#gt_cep) from a [**domain controller (DC)**](#gt_domain-controller-dc). The CEP is expressed via [**certificate templates**](#gt_certificate-template) that are data structures specified in [MS-CRTD](../MS-CRTD/MS-CRTD.md) and Certificate Authority (CA) information.
 
 ![DCOM-based certificate enrollment](media/image7.png)
 
@@ -601,7 +601,7 @@ The following table provides a comprehensive list of the Certificate Services pr
 | Windows Client Certificate Enrollment Protocol | This protocol is based on [**DCOM**](#gt_distributed-component-object-model-dcom). It is responsible for [**certificate enrollment**](#gt_certificate-enrollment), and it enables clients to request various services from a [**CA**](#gt_certification-authority-ca), such as certificate enrollment and property retrieval. | [MS-WCCE](../MS-WCCE/MS-WCCE.md) |
 | Certificate Services Remote Administration Protocol | This protocol is responsible for CA administration, and it enables administrative tools to configure the state and policy of a CA on a server. | [MS-CSRA](../MS-CSRA/MS-CSRA.md) |
 | ICertPassage Remote Protocol | This protocol is a subset of the Windows Client Certificate Enrollment (WCCE) Protocol used for certificate enrollment over [**RPC**](#gt_remote-procedure-call-rpc) by clients that do not support DCOM. | [MS-ICPR](../MS-ICPR/MS-ICPR.md) |
-| Certificate Templates Structure | [**Certificate templates**](#gt_certificate-template) are stored in [**Active Directory**](#gt_active-directory) and are used when the CA operates as an [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca). They contain details about requesting and issuing [**certificates**](#gt_certificate). Policy algorithms on the CA use certificate templates to determine how to respond to certificate requests. [MS-CRTD](#Section_2.9.1.3) defines [**attributes**](#gt_attribute) that are accessed by using the [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap). | [MS-CRTD] |
+| Certificate Templates Structure | [**Certificate templates**](#gt_certificate-template) are stored in [**Active Directory**](#gt_active-directory) and are used when the CA operates as an [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca). They contain details about requesting and issuing [**certificates**](#gt_certificate). Policy algorithms on the CA use certificate templates to determine how to respond to certificate requests. [MS-CRTD](../MS-CRTD/MS-CRTD.md) defines [**attributes**](#gt_attribute) that are accessed by using the [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap). | [MS-CRTD] |
 | X.509 Certificate Enrollment Policy Protocol | This protocol is based on SOAP. It enables clients to retrieve enrollment policies. | [MS-XCEP](../MS-XCEP/MS-XCEP.md) |
 | WS-Trust Enrollment Extensions | This protocol is based on SOAP. It provides Web services-based certificate enrollment, renewal and pending certificate retrieval. The WS-Trust profile enables X.509 certificate enrollment. | [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md) |
 
@@ -649,8 +649,8 @@ None.
 
 This system depends on the following systems and components in the [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) mode:
 
-- The [**Active Directory**](#gt_active-directory) for the storage and retrieval of [**certificate templates**](#gt_certificate-template) [MS-ADOD](#Section_2.1).
-- The [**Group Policy**](#gt_group-policy) server for the [**policy server endpoints**](#gt_policy-server-endpoint) information through the Group Policy: Registry Extension Encoding (GPREG) protocol [MS-GPOD](#Section_2.1).
+- The [**Active Directory**](#gt_active-directory) for the storage and retrieval of [**certificate templates**](#gt_certificate-template) [MS-ADOD](../MS-ADOD/MS-ADOD.md).
+- The [**Group Policy**](#gt_group-policy) server for the [**policy server endpoints**](#gt_policy-server-endpoint) information through the Group Policy: Registry Extension Encoding (GPREG) protocol [MS-GPOD](../MS-GPOD/MS-GPOD.md).
 <a id="Section_2.4"></a>
 ## 2.4 Assumptions and Preconditions
 
@@ -683,7 +683,7 @@ There are two main use cases for the [**CA system**](#gt_ca-system):
 
 - Enroll for a Certificate
 - Administer the [**CA**](#gt_certification-authority-ca)
-The Enroll for a Certificate use case is the most important use case for this system. In its simplest form, it allows a caller, either an [**end entity**](#gt_end-entity) or an enrollment agent, to request a [**certificate**](#gt_certificate) from a CA. See the examples in sections [3.1](#Section_3.2) and [3.3](#Section_3.3). Upon successful completion of the use case, the end entity receives a certificate signed by the CA.
+The Enroll for a Certificate use case is the most important use case for this system. In its simplest form, it allows a caller, either an [**end entity**](#gt_end-entity) or an enrollment agent, to request a [**certificate**](#gt_certificate) from a CA. See the examples in sections [3.1](#Section_3.1) and [3.3](#Section_3.3). Upon successful completion of the use case, the end entity receives a certificate signed by the CA.
 
 Common variations of the [**certificate enrollment**](#gt_certificate-enrollment) use case are as follows:
 
@@ -797,7 +797,7 @@ Figure 12: CA Administration use cases
 
 **Context of Use**: [**Key archival**](#gt_key-archival) and recovery is typically used in [**encryption**](#gt_encryption) scenarios. When an encryption certificate, its private key, or both are unavailable for decryption, the ability to recover them will provide the ability to decrypt data that was encrypted by using the certificate and its [**public key**](#gt_public-key).
 
-Key archival behavior is defined by a flag that is set within the [**certificate template**](#gt_certificate-template), as specified in [MS-CRTD](#Section_2.9.1.3) section 2.27. When an [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) issues a certificate that is based on a template with the key archival flag, the issued certificate and its corresponding private key are archived within the CA database, as defined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 1.3.2.1.
+Key archival behavior is defined by a flag that is set within the [**certificate template**](#gt_certificate-template), as specified in [MS-CRTD](../MS-CRTD/MS-CRTD.md) section 2.27. When an [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) issues a certificate that is based on a template with the key archival flag, the issued certificate and its corresponding private key are archived within the CA database, as defined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 1.3.2.1.
 
 **Direct Actor**: The direct actor is the [**CA administrator**](#gt_ca-administrator).
 
@@ -888,14 +888,14 @@ The [**CA**](#gt_certification-authority-ca) can operate in one of two modes: as
 <a id="Section_2.6.3"></a>
 ### 2.6.3 Certificate Template Versions
 
-[**Certificate templates**](#gt_certificate-template) have four different versions, as specified in [MS-CRTD](#Section_2.9.1.3) section 2.16. The processing rules for the client and server for each version of the certificate templates are specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) sections 3.1.2 and 3.2.2.
+[**Certificate templates**](#gt_certificate-template) have four different versions, as specified in [MS-CRTD](../MS-CRTD/MS-CRTD.md) section 2.16. The processing rules for the client and server for each version of the certificate templates are specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) sections 3.1.2 and 3.2.2.
 
 <a id="Section_2.7"></a>
 ## 2.7 Error Handling
 
-The system does not define any errors beyond those described in the specifications of the member protocols, as listed in section [2.2](#Section_3.4).
+The system does not define any errors beyond those described in the specifications of the member protocols, as listed in section [2.2](#Section_2.2).
 
-Section [3](#Section_2.1) of the member protocol specifications describes the errors relevant to each protocol.
+Section [3](#Section_3) of the member protocol specifications describes the errors relevant to each protocol.
 
 <a id="Section_2.8"></a>
 ## 2.8 Coherency Requirements
@@ -956,7 +956,7 @@ Much of the data stored in the database is provided by the caller requesting a c
 <a id="Section_2.9.1.4"></a>
 #### 2.9.1.4 Certificates for Special Roles
 
-Although not required by the protocol, it is a best practice to restrict the use of [**certificates**](#gt_certificate) that are issued for [**KRAs**](#gt_key-recovery-agent-kra) and enrollment agents by requiring explicit [**CA administrator**](#gt_ca-administrator) approval. These certificates have special purposes in some of the scenarios for this system, as described in the Examples (section [3](#Section_2.1)).
+Although not required by the protocol, it is a best practice to restrict the use of [**certificates**](#gt_certificate) that are issued for [**KRAs**](#gt_key-recovery-agent-kra) and enrollment agents by requiring explicit [**CA administrator**](#gt_ca-administrator) approval. These certificates have special purposes in some of the scenarios for this system, as described in the Examples (section [3](#Section_3)).
 
 <a id="Section_2.9.1.5"></a>
 #### 2.9.1.5 Caller Authentication
@@ -1029,7 +1029,7 @@ This section provides the following examples to describe the use of the Certific
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Enrollment from a Standalone CA (Basic Enrollment)
 
-This example demonstrates the Enroll for a [**certificate**](#gt_certificate) use case described in section [2.5.3.1](#Section_2.1).
+This example demonstrates the Enroll for a [**certificate**](#gt_certificate) use case described in section [2.5.3.1](#Section_2.5.3.1).
 
 The goal of this example is to enroll for a certificate. The simplest case of [**certificate enrollment**](#gt_certificate-enrollment) is basic enrollment. In this example, the caller creates a PKCS#10 request by populating its fields as the caller chooses. The caller then uses an implementation that has a WCCE client component to submit the request to the WCCE server (the [**CA**](#gt_certification-authority-ca)).
 
@@ -1058,9 +1058,9 @@ The message flow represented in the preceding figure is as follows:
 <a id="Section_3.2"></a>
 ## 3.2 Example 2: Enrollment from a Standalone CA (Basic Enrollment) with Certificate Transparency Enabled
 
-This example further demonstrates the “Enroll for a Certificate” use case, as described in section [2.5.3.1](#Section_2.1).
+This example further demonstrates the “Enroll for a Certificate” use case, as described in section [2.5.3.1](#Section_2.5.3.1).
 
-This example builds on the previous example in section [3.1](#Section_3.2), by introducing an enrollment scenario that uses the Certificate Transparency feature described in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 1.3.2.3 and in section [1.1.6](../MS-WCCE/MS-WCCE.md) of this document.
+This example builds on the previous example in section [3.1](#Section_3.1), by introducing an enrollment scenario that uses the Certificate Transparency feature described in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 1.3.2.3 and in section [1.1.6](#Section_1.1.6) of this document.
 
 **Initial System State and Prerequisites**
 
@@ -1094,9 +1094,9 @@ The WCCE client builds a SignedCertificateTimestampList structure from the SCT s
 <a id="Section_3.3"></a>
 ## 3.3 Example 3: Enrollment from an Enterprise CA (Template-based Enrollment)
 
-This example demonstrates the Enroll for a [**certificate**](#gt_certificate) use case described in section [2.5.3.1](#Section_2.1).
+This example demonstrates the Enroll for a [**certificate**](#gt_certificate) use case described in section [2.5.3.1](#Section_2.5.3.1).
 
-This example builds on the example in section [3.1](#Section_3.2) by introducing an [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca). An enterprise CA uses [**certificate templates**](#gt_certificate-template) for all [**certificate enrollments**](#gt_certificate-enrollment). Certificate templates, as defined in [MS-CRTD](#Section_2.9.1.3), contain data for requesting and issuing certificates. Policy algorithms use certificate templates to determine how to respond to certificate requests. In this example, the caller creates a certificate request PKCS#10, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.1.1.4.3.1.1, that is based on the certificate template. The enterprise CA then uses the template information to decide whether to issue the certificate, and if it does, how to construct the certificate.
+This example builds on the example in section [3.1](#Section_3.1) by introducing an [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca). An enterprise CA uses [**certificate templates**](#gt_certificate-template) for all [**certificate enrollments**](#gt_certificate-enrollment). Certificate templates, as defined in [MS-CRTD](../MS-CRTD/MS-CRTD.md), contain data for requesting and issuing certificates. Policy algorithms use certificate templates to determine how to respond to certificate requests. In this example, the caller creates a certificate request PKCS#10, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.1.1.4.3.1.1, that is based on the certificate template. The enterprise CA then uses the template information to decide whether to issue the certificate, and if it does, how to construct the certificate.
 
 **Initial System State and Prerequisites**
 
@@ -1140,7 +1140,7 @@ Figure 16: Request for a certificate
 <a id="Section_3.4"></a>
 ## 3.4 Example 4: Enrollment in the Domain Environment with the XCEP/WSTEP Protocols
 
-This example describes the Enroll for a [**certificate**](#gt_certificate) use case described in section [2.5.3.1](#Section_2.1).
+This example describes the Enroll for a [**certificate**](#gt_certificate) use case described in section [2.5.3.1](#Section_2.5.3.1).
 
 **Initial System State and Prerequisites**
 
@@ -1183,7 +1183,7 @@ Figure 18: Request for a certificate
 <a id="Section_3.5"></a>
 ## 3.5 Example 5: Enrollment with CA Administrator Approval
 
-This example demonstrates the Enroll for a Certificate and Approve Pending Request use cases described in section [2.5.3.1](#Section_2.1).
+This example demonstrates the Enroll for a Certificate and Approve Pending Request use cases described in section [2.5.3.1](#Section_2.5.3.1).
 
 This example builds on the example in section [3.3](#Section_3.3) by introducing a [**CA administrator**](#gt_ca-administrator) who modifies and approves the [**certificate**](#gt_certificate) request before the certificate is issued. One possible context for this scenario is where the certificate that is being requested requires a higher level of scrutiny before it can be issued or requires input from someone other than the requestor.
 
@@ -1253,7 +1253,7 @@ Figure 22: Request for the issued certificate
 <a id="Section_3.6"></a>
 ## 3.6 Example 6: Enroll on Behalf of Request and Renewal
 
-This example demonstrates the Enroll for a [**certificate**](#gt_certificate), Enroll Certificate on Behalf of User and Renew Certificate use cases described in section [2.5.3.1](#Section_2.1).
+This example demonstrates the Enroll for a [**certificate**](#gt_certificate), Enroll Certificate on Behalf of User and Renew Certificate use cases described in section [2.5.3.1](#Section_2.5.3.1).
 
 This example builds on the example in section [3.3](#Section_3.3) by introducing a cosigner for the certificate request. In this example, the enrollment agent creates and signs the initial certificate request. The enrollment agent then submits the signed request to the [**CA**](#gt_certification-authority-ca). The CA returns the issued certificate to the enrollment agent, who then provides the issued certificate to the [**end entity**](#gt_end-entity) via an out-of-band process.
 
@@ -1318,13 +1318,13 @@ The end entity has the renewed certificate.
 <a id="Section_3.7"></a>
 ## 3.7 Example 7: Private Key Archival and Recovery
 
-This example is the combination of two separate use cases. The first is the Enroll for a Certificate - End Entity use case, section [2.5.3.1](#Section_2.1), and the second is the Recover Archived Certificate and Key - [**CA administrator**](#gt_ca-administrator) use case, section [2.5.3.2](#Section_2.1). This example builds on the example in section [3.3](#Section_3.3) by introducing [**private key**](#gt_private-key) archival and recovery. A CA administrator configures the [**CA**](#gt_certification-authority-ca) to be able to archive private keys. An [**end entity**](#gt_end-entity) enrolls for an [**encryption**](#gt_encryption) [**certificate**](#gt_certificate), based upon a template that has been configured for archival. Later, a CA administrator recovers the archived certificate and a private key from the CA database.
+This example is the combination of two separate use cases. The first is the Enroll for a Certificate - End Entity use case, section [2.5.3.1](#Section_2.5.3.1), and the second is the Recover Archived Certificate and Key - [**CA administrator**](#gt_ca-administrator) use case, section [2.5.3.2](#Section_2.5.3.2). This example builds on the example in section [3.3](#Section_3.3) by introducing [**private key**](#gt_private-key) archival and recovery. A CA administrator configures the [**CA**](#gt_certification-authority-ca) to be able to archive private keys. An [**end entity**](#gt_end-entity) enrolls for an [**encryption**](#gt_encryption) [**certificate**](#gt_certificate), based upon a template that has been configured for archival. Later, a CA administrator recovers the archived certificate and a private key from the CA database.
 
 **Initial System State and Prerequisites**
 
 This example of Key Archival and Recovery is based on the following additional assumption in addition to ones that are described in the example in section 3.3:
 
-- The [**certificate template**](#gt_certificate-template) has been configured in [**Active Directory**](#gt_active-directory) with the msPKI-Private-Key-Flag [**attribute**](#gt_attribute) with the 0x00000001 (CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL) bit as specified in [MS-CRTD](#Section_2.9.1.3).
+- The [**certificate template**](#gt_certificate-template) has been configured in [**Active Directory**](#gt_active-directory) with the msPKI-Private-Key-Flag [**attribute**](#gt_attribute) with the 0x00000001 (CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL) bit as specified in [MS-CRTD](../MS-CRTD/MS-CRTD.md).
 - A CA administrator is acting as a KRA and has obtained a KRA encryption certificate.
 **Sequence**
 
@@ -1439,7 +1439,7 @@ Figure 32: Revoke the certificate
 <a id="Section_3.9"></a>
 ## 3.9 Example 9: Certificate Denied by the Policy Algorithm
 
-This example represents a failure scenario for the Enroll for a Certificate - End Entity use case described in section [2.5.3.1](#Section_2.1).
+This example represents a failure scenario for the Enroll for a Certificate - End Entity use case described in section [2.5.3.1](#Section_2.5.3.1).
 
 This example builds on the example in section [3.3](#Section_3.3).
 
@@ -1474,14 +1474,14 @@ Figure 33: Query for available certificate templates from Active Directory serve
 Figure 34: Request for a certificate
 
 - The end entity, by using the WCCE client component, creates a PKCS#10 request that is based on one of the certificate templates and submits it to the CA by calling the Request method specified in [MS-WCCE] section 3.1.2.4.2.
-- When the CA receives the request, the policy algorithm is checked to determine whether it is to be issued. The CA examines ntSecurityDescriptor of the certificate template that corresponds to the request to determine if the caller has the permissions that are required to enroll for that template, as specified in [MS-WCCE] section 3.2.2.6.2.1.4.3 and [MS-CRTD](#Section_2.9.1.3) section 2.5. In this example, the caller does not have permission, so the error 0x80094012L (CERTSRV_E_TEMPLATE_DENIED) is returned.
+- When the CA receives the request, the policy algorithm is checked to determine whether it is to be issued. The CA examines ntSecurityDescriptor of the certificate template that corresponds to the request to determine if the caller has the permissions that are required to enroll for that template, as specified in [MS-WCCE] section 3.2.2.6.2.1.4.3 and [MS-CRTD](../MS-CRTD/MS-CRTD.md) section 2.5. In this example, the caller does not have permission, so the error 0x80094012L (CERTSRV_E_TEMPLATE_DENIED) is returned.
 **Final System State**
 
 - The CA-WCCE Server stores the request fields in the Request table, as specified in [MS-WCCE] sections 3.2.1.4.2.1.4.4 and 3.2.1.4.2.1.4.5, with the status of the certificate (1) request and also the end entity details.
 <a id="Section_3.10"></a>
 ## 3.10 Example 10: Certificate Denied Due to Out-of-Sync Certificate Templates
 
-This example represents another failure scenario for the Enroll for a Certificate - End Entity use case described in section [2.5.3.1](#Section_2.1). This example builds on the example in section [3.3](#Section_3.3) and describes a situation where two [**Active Directory**](#gt_active-directory) servers are out-of-sync, resulting in a version mismatch between the [**certificate templates**](#gt_certificate-template) that are used by client and server. Due to this mismatch, the server rejects the request. Later, after the directory is synchronized, the client submits another request that results in the [**certificate**](#gt_certificate) being issued.
+This example represents another failure scenario for the Enroll for a Certificate - End Entity use case described in section [2.5.3.1](#Section_2.5.3.1). This example builds on the example in section [3.3](#Section_3.3) and describes a situation where two [**Active Directory**](#gt_active-directory) servers are out-of-sync, resulting in a version mismatch between the [**certificate templates**](#gt_certificate-template) that are used by client and server. Due to this mismatch, the server rejects the request. Later, after the directory is synchronized, the client submits another request that results in the [**certificate**](#gt_certificate) being issued.
 
 **Initial System state and Prerequisites**
 

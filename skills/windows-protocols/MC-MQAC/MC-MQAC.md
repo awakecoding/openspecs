@@ -534,7 +534,7 @@ This document specifies the Message Queuing (MSMQ): ActiveX Client Protocol, a c
 The following notational conventions are used throughout this document:
 
 - The period, or "dot" ("."), notation is used to refer to a property of a system abstract data model element. If **A** refers to an element of the system abstract data model, **A**.**Property** denotes the **Property** property of the element **A**.
-- The elements of the abstract data models that are defined in section [3](#Section_1.3) are referred to as instance variables. The names of instance variables and local input parameters are formatted in *italics*. Elements of the abstract data model in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) that are referred to in this document are in **bold** and non-italicized.
+- The elements of the abstract data models that are defined in section [3](#Section_3) are referred to as instance variables. The names of instance variables and local input parameters are formatted in *italics*. Elements of the abstract data model in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) that are referred to in this document are in **bold** and non-italicized.
 - A monospace font is used for all method signatures and [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) declarations.
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -634,7 +634,7 @@ This document uses the following terms:
 **opnum**: An operation number or numeric identifier that is used to identify a specific [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) method or a method in an interface. For more information, see [C706] section 12.5.2.12 or [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
 <a id="gt_path-name"></a>
-**path name**: The name of the receiving computer where the [**messages**](#gt_message) for a particular [**queue**](#gt_queue) are stored, and an optional PRIVATE$ key word indicating whether the [**queue**](#gt_queue) is private, followed by the name of the [**queue**](#gt_queue). Path names can also refer to subqueues; for more information, see [MS-MQMQ](#Section_2.2.3) section 2.1.
+**path name**: The name of the receiving computer where the [**messages**](#gt_message) for a particular [**queue**](#gt_queue) are stored, and an optional PRIVATE$ key word indicating whether the [**queue**](#gt_queue) is private, followed by the name of the [**queue**](#gt_queue). Path names can also refer to subqueues; for more information, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 
 <a id="gt_phase-one"></a>
 **Phase One**: The initial phase of a two-phase commit sequence. During this phase, the participants in the transaction are requested to prepare to be committed. This phase is also known as the "Prepare" phase. At the end of Phase One, the outcome of the transaction is known.
@@ -757,7 +757,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQMP] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Client Protocol](../MS-MQMP/MS-MQMP.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_2.2.3)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
 [MS-MQMR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Management Protocol](../MS-MQMR/MS-MQMR.md)".
 
@@ -782,7 +782,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [LDAP] Microsoft Corporation, "About Lightweight Directory Access Protocol", [http://msdn.microsoft.com/en-us/library/aa366075.aspx](https://go.microsoft.com/fwlink/?LinkId=89932)
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-ECP] Microsoft Corporation, "IEnumConnectionPoints interface", [http://msdn.microsoft.com/en-us/library/ms688265%28VS.85%29.aspx](https://go.microsoft.com/fwlink/?LinkId=128916)
 
@@ -840,7 +840,7 @@ The MSMQ: ActiveX Client Protocol provides [**clients**](#gt_client) with remote
 This document covers versioning issues in the following areas:
 
 - **Supported Transports**: The protocol uses the DCOM Remote Protocol, which in turn, uses [**RPC**](#gt_remote-procedure-call-rpc) over TCP as its only transport. See section [1.5](#Section_1.5) for details.
-- **Protocol Version**: This protocol is composed of several DCOM classes that are described in section [3](#Section_1.3). Each class features multiple interface revisions, where each interface revision is a binary-compatible successor to the previous revision.
+- **Protocol Version**: This protocol is composed of several DCOM classes that are described in section [3](#Section_3). Each class features multiple interface revisions, where each interface revision is a binary-compatible successor to the previous revision.
 **Capability Negotiation**: When binding to a [**server**](#gt_server), the client negotiates for a specific set of server functionalities by specifying the [**UUID**](#gt_universally-unique-identifier-uuid) that corresponds to the desired RPC interface via the COM IUnknown::QueryInterface method. For more information, see section [3.1](#Section_3.1).
 
 <a id="Section_1.8"></a>
@@ -859,23 +859,23 @@ The following table contains well-known [**GUIDs**](#gt_globally-unique-identifi
 | RPC interface UUID for IMSMQQuery2. | eba96b0e-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for IMSMQQuery3. | eba96b19-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for IMSMQQuery4. | eba96b24-2168-11d3-898c-00e02c074f6b |
-| Coclass UUID for [MSMQQuery](#Section_3.13.4.1). | d7d6e073-dccd-11d0-aa4b-0060970debae |
+| Coclass UUID for [MSMQQuery](#Section_3.13). | d7d6e073-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQMessage](#Section_3.17.4.1). | d7d6e074-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for IMSMQMessage2. | d9933be0-a567-11d2-b0f3-00e02c074f6b |
 | RPC interface UUID for IMSMQMessage3. | eba96b1a-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for IMSMQMessage4. | eba96b23-2168-11d3-898c-00e02c074f6b |
-| Coclass UUID for [MSMQMessage](#Section_3.17.4.1). | d7d6e075-dccd-11d0-aa4b-0060970debae |
+| Coclass UUID for [MSMQMessage](#Section_3.17). | d7d6e075-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQQueue](#Section_3.11.4.1). | d7d6e076-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for IMSMQQueue2. | ef0574e0-06d8-11d3-b100-00e02c074f6b |
 | RPC interface UUID for IMSMQQueue3. | eba96b1b-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for IMSMQQueue4. | eba96b20-2168-11d3-898c-00e02c074f6b |
-| Coclass UUID for [MSMQQueue](#Section_3.14). | d7d6e079-dccd-11d0-aa4b-0060970debae |
+| Coclass UUID for [MSMQQueue](#Section_3.11). | d7d6e079-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQPrivateEvent](#Section_3.16.4.3). | d7ab3341-c9d3-11d1-bb47-0080c7c5a2c0 |
 | RPC interface UUID for [IMSMQEvent](#Section_3.16.4.2). | d7d6e077-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for IMSMQEvent2. | eba96b12-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for IMSMQEvent3. | eba96b1c-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for [_DMSMQEventEvents](#Section_3.16.4.4). | d7d6e078-dccd-11d0-aa4b-0060970debae |
-| Coclass UUID for [MSMQEvent](#Section_3.16.4.1). | d7d6e07a-dccd-11d0-aa4b-0060970debae |
+| Coclass UUID for [MSMQEvent](#Section_3.16). | d7d6e07a-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQQueueInfo](#Section_3.10.4.1). | d7d6e07b-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for IMSMQQueueInfo2. | fd174a80-89cf-11d2-b0f2-00e02c074f6b |
 | RPC interface UUID for IMSMQQueueInfo3. | eba96b1d-2168-11d3-898c-00e02c074f6b |
@@ -887,7 +887,7 @@ The following table contains well-known [**GUIDs**](#gt_globally-unique-identifi
 | RPC interface UUID for IMSMQQueueInfos4. | eba96b22-2168-11d3-898c-00e02c074f6b |
 | Coclass UUID for [MSMQQueueInfos](#Section_3.14). | d7d6e07e-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQTransaction](#Section_3.9.4.1). | d7d6e07f-dccd-11d0-aa4b-0060970debae |
-| RPC interface UUID for [IMSMQTransaction2](#Section_2.2.2.1). | 2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b |
+| RPC interface UUID for [IMSMQTransaction2](#Section_3.9.4.2). | 2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b |
 | RPC interface UUID for [IMSMQTransaction3](#Section_3.9.4.3). | eba96b13-2168-11d3-898c-00e02c074f6b |
 | Coclass UUID for [MSMQTransaction](#Section_3.9.4.1). | d7d6e080-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQCoordinatedTransactionDispenser](#Section_3.7.4.1). | d7d6e081-dccd-11d0-aa4b-0060970debae |
@@ -898,19 +898,19 @@ The following table contains well-known [**GUIDs**](#gt_globally-unique-identifi
 | RPC interface UUID for IMSMQTransactionDispenser2. | eba96b11-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for IMSMQTransactionDispenser3. | eba96b15-2168-11d3-898c-00e02c074f6b |
 | Coclass UUID for [MSMQTransactionDispenser](#Section_3.6). | d7d6e084-dccd-11d0-aa4b-0060970debae |
-| RPC interface UUID for [IMSMQApplication](#Section_3.2.4.3). | d7d6e085-dccd-11d0-aa4b-0060970debae |
+| RPC interface UUID for [IMSMQApplication](#Section_3.2.4.1). | d7d6e085-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQApplication2](#Section_3.2.4.2). | 12a30900-7300-11d2-b0e6-00e02c074f6b |
 | RPC interface UUID for [IMSMQApplication3](#Section_3.2.4.3). | eba96b1f-2168-11d3-898c-00e02c074f6b |
-| Coclass UUID for [MSMQApplication](#Section_3.2.4.3). | d7d6e086-dccd-11d0-aa4b-0060970debae |
+| Coclass UUID for [MSMQApplication](#Section_3.2). | d7d6e086-dccd-11d0-aa4b-0060970debae |
 | RPC interface UUID for [IMSMQDestination](#Section_3.12.4.1). | eba96b16-2168-11d3-898c-00e02c074f6b |
 | RPC interface UUID for [IMSMQPrivateDestination](#Section_3.12.4.2). | eba96b17-2168-11d3-898c-00e02c074f6b |
-| Coclass UUID for [MSMQDestination](#Section_3.12). | eba96b18-2168-11d3-898c-00e02c074f6 |
+| Coclass UUID for [MSMQDestination](#Section_3.12.4.1). | eba96b18-2168-11d3-898c-00e02c074f6 |
 | RPC interface UUID for [IMSMQCollection](#Section_3.15.4.1). | 0188ac2f-ecb3-4173-9779-635ca2039c72 |
 | Coclass UUID for [MSMQCollection](#Section_3.15.4.1). | f72b9031-2f0c-43e8-924e-e6052cdc493f |
 | RPC interface UUID for [IMSMQManagement](#Section_3.3.4.1). | be5f0241-e489-4957-8cc4-a452fcf3e23e |
 | Coclass UUID for [MSMQManagement](#Section_3.3.4.1). | 39ce96fe-f4c5-4484-a143-4c2d5d324229 |
 | RPC interface UUID for [IMSMQOutgoingQueueManagement](#Section_3.5.4.1). | 64c478fb-f9b0-4695-8a7f-439ac94326d3 |
-| Coclass UUID for [MSMQOutgoingQueueManagement](#Section_3.5). | 0188401c-247a-4fed-99c6-bf14119d7055 |
+| Coclass UUID for [MSMQOutgoingQueueManagement](#Section_3.5.4.1). | 0188401c-247a-4fed-99c6-bf14119d7055 |
 | RPC interface UUID for [IMSMQQueueManagement](#Section_3.4.4.1). | 7fbe7759-5760-444d-b8a5-5e7ab9a84cce |
 | Coclass UUID for [MSMQQueueManagement](#Section_3.4.4.1). | 33b6d07e-f27d-42fa-b2d7-bf82e11e9374 |
 
@@ -1021,7 +1021,7 @@ MQ_DENY_RECEIVE_SHARE = 1
 
 } MQSHARE;
 
-**MQ_DENY_NONE:** This value indicates that the Queue is to be opened for nonexclusive access. If any OpenQueueDescriptor that refers to the Queue has a **ShareMode** value of **DenyReceive**, the [IMSMQQueueInfo4::Open](../MS-MQDMPR/MS-MQDMPR.md) method MUST return an error HRESULT. The **ShareMode** property of the OpenQueueDescriptor that was created by the Open method MUST be set to **DenyNone**. This value maps to the **QueueShareMode** enumeration constant of **DenyNone**, as defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.17.
+**MQ_DENY_NONE:** This value indicates that the Queue is to be opened for nonexclusive access. If any OpenQueueDescriptor that refers to the Queue has a **ShareMode** value of **DenyReceive**, the [IMSMQQueueInfo4::Open](#Section_3.10.4.1.28) method MUST return an error HRESULT. The **ShareMode** property of the OpenQueueDescriptor that was created by the Open method MUST be set to **DenyNone**. This value maps to the **QueueShareMode** enumeration constant of **DenyNone**, as defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.17.
 
 **MQ_DENY_RECEIVE_SHARE:** The Queue MUST be opened for exclusive access. If any OpenQueueDescriptor already refers to the Queue, the Open method MUST return an error HRESULT. If the Queue is opened successfully, the **ShareMode** property of the OpenQueueDescriptor MUST be set to **DenyReceive**. This value maps to the **QueueShareMode** enumeration constant of **DenyReceive** as defined in [MS-MQDMPR], section 3.1.1.17.
 
@@ -1051,7 +1051,7 @@ MQ_ADMIN_ACCESS = 0x0080
 
 } MQACCESS;
 
-**MQ_RECEIVE_ACCESS:** The OpenQueueDescriptor that is created by the [IMSMQQueueInfo4::Open](#Section_d1a87420f35d4ad39338993b12431368) method represents permission granted by the QueueManager to read and delete Messages from the **MessagePositionList** contained by the Queue that is referenced by the OpenQueueDescriptor.
+**MQ_RECEIVE_ACCESS:** The OpenQueueDescriptor that is created by the [IMSMQQueueInfo4::Open](#Section_3.10.4.1.28) method represents permission granted by the QueueManager to read and delete Messages from the **MessagePositionList** contained by the Queue that is referenced by the OpenQueueDescriptor.
 
 **MQ_SEND_ACCESS:** The OpenQueueDescriptor that is created by the Open method represents permission granted by the QueueManager to insert new Messages into the **MessagePositionList** contained by the Queue that is referenced by the OpenQueueDescriptor. This value is not valid when combined with MQ_ADMIN_ACCESS.
 
@@ -1096,8 +1096,8 @@ MQ_JOURNAL = 1
 
 Used by:
 
-- [IMSMQQueueInfo::Journal](#Section_f76e87cb98f5433092ed37d582f9e0b0)
-- [IMSMQQueueInfo::Journal](#Section_3e42f768509540da8521f1c686b92bcc)
+- [IMSMQQueueInfo::Journal](#Section_3.10.4.1.13)
+- [IMSMQQueueInfo::Journal](#Section_3.10.4.1.14)
 <a id="Section_2.2.2.5"></a>
 #### 2.2.2.5 MQTRANSACTIONAL
 
@@ -1146,8 +1146,8 @@ The ApplicationQueue only accepts Messages for which the **Signature** is succes
 
 Used by:
 
-- get [IMSMQQueueInfo::Authenticate](#Section_a1bd0554274e4031b993de549f5f9a63)
-- put [IMSMQQueueInfo::Authenticate](#Section_2ccf769e54fc4664a18b5da9d231278c)
+- get [IMSMQQueueInfo::Authenticate](#Section_3.10.4.1.21)
+- put [IMSMQQueueInfo::Authenticate](#Section_3.10.4.1.22)
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 MQPRIVLEVEL
 
@@ -1173,8 +1173,8 @@ MQ_PRIV_LEVEL_BODY = 2
 
 Used by:
 
-- get [IMSMQQueueInfo::PrivLevel](#Section_80ca6dadf1904f8ead892a3127cd2a3f)
-- put [IMSMQQueueInfo::PrivLevel](#Section_43e5d777dd874bfea272fc8a3f4fa412)
+- get [IMSMQQueueInfo::PrivLevel](#Section_3.10.4.1.11)
+- put [IMSMQQueueInfo::PrivLevel](#Section_3.10.4.1.12)
 The MQPRIVLEVEL enumeration values correspond to the enumeration values for Queue.**PrivacyLevel**, as shown in the following table:
 
 | MQPRIVLEVEL | Queue.PrivacyLevel |
@@ -1186,7 +1186,7 @@ The MQPRIVLEVEL enumeration values correspond to the enumeration values for Queu
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 MQMSGCURSOR
 
-The MQMSGCURSOR enumeration defines values that indicate the [**cursor**](#gt_cursor) behavior mode for notifications from an [MSMQQueue](#Section_3.14) method. The cursor behavior mode indicates how the state of the cursor that is associated with an event notification is updated.
+The MQMSGCURSOR enumeration defines values that indicate the [**cursor**](#gt_cursor) behavior mode for notifications from an [MSMQQueue](#Section_3.11) method. The cursor behavior mode indicates how the state of the cursor that is associated with an event notification is updated.
 
 typedef enum
 
@@ -1315,8 +1315,8 @@ MQMSG_CLASS_NACK_RECEIVE_TIMEOUT_AT_SENDER = 0xc003
 Used by:
 
 - get [IMSMQMessage::Class](#Section_09c668a923314f2180db92a1dd9cbfb2)
-- get [IMSMQMessage::MsgClass](#Section_d64b4b6e96b24268808dd0f4b8de18e4)
-- put [IMSMQMessage::MsgClass](#Section_831c2d4243b6446cabf24b034c1e6b51)
+- get [IMSMQMessage::MsgClass](#Section_3.17.4.1.65)
+- put [IMSMQMessage::MsgClass](#Section_3.17.4.1.66)
 The MQMSGCLASS enumeration values map to the enumeration values for Message.**Class** as shown in the following table:
 
 | MQMSGCLASS enumeration constants | Message.Class | Constant Values |
@@ -1362,8 +1362,8 @@ MQMSG_DELIVERY_RECOVERABLE = 1
 
 Used by:
 
-- get [IMSMQMessage::Delivery](#Section_e351c9b4ceba48db90ff30fcb7a5204d)
-- put [IMSMQMessage::Delivery](#Section_ef7d8949b1344a7e8dd733b4e25e30b6)
+- get [IMSMQMessage::Delivery](#Section_3.17.4.1.7)
+- put [IMSMQMessage::Delivery](#Section_3.17.4.1.8)
 The MQMSGDELIVERY enumeration values correspond to the enumeration values for Message.**DeliveryGuarantee**, as shown in the following table:
 
 | MQMSGDELIVERY | Message.DeliveryGuarantee |
@@ -1402,8 +1402,8 @@ MQMSG_ACKNOWLEDGMENT_FULL_RECEIVE = 0x0e
 
 Used by:
 
-- get [IMSMQMessage::Ack](#Section_c48e9085dfde4c99ad2f05a5db1a2a15)
-- put [IMSMQMessage::Ack](#Section_1d773983c08f4549a4f3bf9336b9c602)
+- get [IMSMQMessage::Ack](#Section_3.17.4.1.28)
+- put [IMSMQMessage::Ack](#Section_3.17.4.1.29)
 The MQMSGACKNOWLEDGEMENT enumeration values correspond to the enumeration values for Message.**AcknowledgementsRequested**, as shown in the following table:
 
 | MQMSGACKNOWLEDGEMENT | AcknowledgementsRequested |
@@ -1451,8 +1451,8 @@ MQMSG_DEADLETTER and MQMSG_JOURNAL MAY be specified to enable both forms of sour
 
 Used by:
 
-- get [IMSMQMessage::Journal](#Section_59efe5b1bf604c31960fc701bb9f768c)
-- put [IMSMQMessage::Journal](#Section_4ae00fd3df3145dc905905c3e09ed457)
+- get [IMSMQMessage::Journal](#Section_3.17.4.1.13)
+- put [IMSMQMessage::Journal](#Section_3.17.4.1.14)
 <a id="Section_2.2.2.13"></a>
 #### 2.2.2.13 MQMSGTRACE
 
@@ -1474,8 +1474,8 @@ MQMSG_SEND_ROUTE_TO_REPORT_QUEUE = 1
 
 Used by:
 
-- get [IMSMQMessage::Trace](#Section_8507102914d2440a9ec6db9349e937c1)
-- put [IMSMQMessage::Trace](#Section_56ca93d21e024c70af0630dc24aa3d96)
+- get [IMSMQMessage::Trace](#Section_3.17.4.1.9)
+- put [IMSMQMessage::Trace](#Section_3.17.4.1.10)
 The MQMSGTRACE enumeration values correspond to the enumeration values for Message.**TracingRequested** as shown in the following table:
 
 | MQMSGTRACE | Message.TracingRequested |
@@ -1504,8 +1504,8 @@ MQMSG_SENDERID_TYPE_SID = 1
 
 Used by:
 
-- get [IMSMQMessage::SenderIdType](#Section_5ea102b40a6842e9909010b042929e9b)
-- put [IMSMQMessage::SenderIDType](#Section_f5a9ee37f8d04e0988ca9ba2346d6f61)
+- get [IMSMQMessage::SenderIdType](#Section_3.17.4.1.46)
+- put [IMSMQMessage::SenderIDType](#Section_3.17.4.1.47)
 The MQMSGSENDERIDTYPE enumeration values correspond to the enumeration values for the Message.**SenderIdentifierType**, as shown in the following table.
 
 | MQMSGSENDERIDTYPE | Message.SenderIdentifierType |
@@ -1538,8 +1538,8 @@ MQMSG_PRIV_LEVEL_BODY_ENHANCED = 3
 
 Used by:
 
-- get [IMSMQMessage::PrivLevel](#Section_fe6011d819cc48a18146320c66774a64)
-- put [IMSMQMessage::PrivLevel](#Section_0f031c9f211e4fd289016305f916dc10)
+- get [IMSMQMessage::PrivLevel](#Section_3.17.4.1.2)
+- put [IMSMQMessage::PrivLevel](#Section_3.17.4.1.3)
 The MQMSGPRIVLEVEL enumeration values correspond to the enumeration values for Message.**PrivacyLevel**, as shown in the following table:
 
 | MQMSGPRIVLEVEL | Message.PrivacyLevel |
@@ -1577,7 +1577,7 @@ MQMSG_AUTH_LEVEL_SIG30 = 8
 
 **MQMSG_AUTH_LEVEL_ALWAYS:** Prior to inserting the Message into the OutgoingQueue, the Send operation MUST digitally sign the Message. For OutgoingQueues that transfer to destination [ApplicationQueue](#Section_3.1.1.2)s using the [**SOAP Reliable Messaging Protocol (SRMP)**](#gt_soap-reliable-messaging-protocol-srmp) [**message**](#gt_message) transfer process, an [**XML digital signature**](#gt_xml-digital-signature) MUST be created. For any other OutgoingQueue, this value SHOULD <4>be interpreted as equivalent to MQMSG_AUTH_LEVEL_SIG30.
 
-**MQMSG_AUTH_LEVEL_MSMQ10:** Prior to inserting the Message into the OutgoingQueue, the Send operation MUST digitally sign the Message according to the algorithm described in [MS-MQMQ](#Section_2.2.3) section 2.2.20.6, where the SecurityHeader.Flags.AS value is 0x1.
+**MQMSG_AUTH_LEVEL_MSMQ10:** Prior to inserting the Message into the OutgoingQueue, the Send operation MUST digitally sign the Message according to the algorithm described in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.6, where the SecurityHeader.Flags.AS value is 0x1.
 
 **MQMSG_AUTH_LEVEL_SIG10:** Prior to inserting the Message into the OutgoingQueue, the Send operation MUST digitally sign the Message according to the algorithm described in [MS-MQMQ] section 2.2.20.6, where the SecurityHeader.Flags.AS value is 0x1.
 
@@ -1589,8 +1589,8 @@ MQMSG_AUTH_LEVEL_SIG30 = 8
 
 Used by:
 
-- get [IMSMQMessage::AuthLevel](#Section_e6c4a64b38644606897eaa2a40d2e984)
-- put [IMSMQMessage::AuthLevel](#Section_441c0a67a99144ccb451b5ec5176c7d9)
+- get [IMSMQMessage::AuthLevel](#Section_3.17.4.1.4)
+- put [IMSMQMessage::AuthLevel](#Section_3.17.4.1.5)
 <a id="Section_2.2.2.17"></a>
 #### 2.2.2.17 MQMSGAUTHENTICATION
 
@@ -1618,7 +1618,7 @@ MQMSG_AUTHENTICATED_SIGXML = 9
 
 **MQMSG_AUTHENTICATION_NOT_REQUESTED:** The Message was not signed.
 
-**MQMSG_AUTHENTICATION_REQUESTED:** The Message was signed according to the algorithm described in [MS-MQMQ](#Section_2.2.3) section 2.2.20.6, where the SecurityHeader.Flags.AS value is 0x1.
+**MQMSG_AUTHENTICATION_REQUESTED:** The Message was signed according to the algorithm described in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.6, where the SecurityHeader.Flags.AS value is 0x1.
 
 **MQMSG_AUTHENTICATED_SIG10:** The Message was signed according to the algorithm described in [MS-MQMQ] section 2.2.20.6, where the SecurityHeader.Flags.AS value is 0x1.
 
@@ -1684,10 +1684,10 @@ MQMSG_CALG_SEAL = 0x6802
 
 Used by
 
-- get [IMSMQMessage::HashAlgorithm](#Section_99a3c9232bf547909e0e5eb42ca25e3d)
-- put [IMSMQMessage::HashAlgorithm](#Section_d18a7e45c27740d799628f6525ac476a)
-- get [IMSMQMessage::EncryptAlgorithm](#Section_48ad9a900a324917bb3e4e6e3cb3c04b)
-- put [IMSMQMessage::EncryptAlgorithm](#Section_b29b28ef67c94c20a45defc9cdc95ca7)
+- get [IMSMQMessage::HashAlgorithm](#Section_3.17.4.1.36)
+- put [IMSMQMessage::HashAlgorithm](#Section_3.17.4.1.37)
+- get [IMSMQMessage::EncryptAlgorithm](#Section_3.17.4.1.38)
+- put [IMSMQMessage::EncryptAlgorithm](#Section_3.17.4.1.39)
 The MQCALG enumeration values correspond to the enumeration values for Message.**HashAlgorithm** and Message.**EncryptionAlgorithm**, as shown in the following tables:
 
 | MQCALG | Message.HashAlgorithm |
@@ -1831,8 +1831,8 @@ XACTTC_ASYNC = 0x0004
 
 Used by:
 
-- [ITransaction::Commit](#Section_3.9.4.3.1)
-- [IMSMQTransaction::Commit](#Section_2.2.2.1)
+- [ITransaction::Commit](#Section_3.8.4.1.1)
+- [IMSMQTransaction::Commit](#Section_3.9.4.1.2)
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Structures
 
@@ -1978,7 +1978,7 @@ Used by:
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses abstract data model (ADM) elements specified in section [3.1.1](#Section_1.3). A subset of these elements can be published in a directory. This protocol accesses the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md) [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.
+This protocol uses abstract data model (ADM) elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a directory. This protocol accesses the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md) [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -1990,7 +1990,7 @@ The client side of this protocol is a pass-through; that is, no additional timer
 
 This section describes common implementation details that apply to the MSMQ: ActiveX Client Protocol, including the system data model expressed in conceptual terms (the abstract data model). The system data model represents an abstract [**message queuing system**](#gt_message-queuing-system) with which clients of this protocol interact.
 
-All object classes defined by the MSMQ: ActiveX Client Protocol MUST inherit from, and implement, the standard IUnknown and IDispatch interfaces, as defined in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8 and [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 3.1, respectively (except for the [TransactionImpl class](#Section_3.8) which implements IUnknown but not IDispatch.) Additional information can be found in [Box98]. For each object class that is defined in the following, the methods of IUnknown represent method [**opnums**](#gt_opnum) 0-2. The methods of IDispatch are opnums 3-6; therefore, the first defined opnum for each object class that is defined in sections [3.2](#Section_3.2.4.3) through [3.17](#Section_3.17.4.1) is 7.
+All object classes defined by the MSMQ: ActiveX Client Protocol MUST inherit from, and implement, the standard IUnknown and IDispatch interfaces, as defined in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8 and [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 3.1, respectively (except for the [TransactionImpl class](#Section_3.8) which implements IUnknown but not IDispatch.) Additional information can be found in [Box98]. For each object class that is defined in the following, the methods of IUnknown represent method [**opnums**](#gt_opnum) 0-2. The methods of IDispatch are opnums 3-6; therefore, the first defined opnum for each object class that is defined in sections [3.2](#Section_3.2) through [3.17](#Section_3.17) is 7.
 
 Section [2.2](#Section_2.2) describes the particular data types, such as enumerations and data collections, that are referred to by elements of the system data model. Sections 3.2-3.17 describe the client protocol and respective [**server**](#gt_server) behavior in terms of manipulating the system data. These sections use a property accessor method name disambiguation convention where the prefix "put_" denotes a "propput" invocation type, "get_" denotes a "propget" invocation type, and "putref_" denotes a "propputref" invocation. For more information about OLE Automation invocation types, refer to [MS-OAUT] sections 2.2.14 and 2.2.49.5.1
 
@@ -1999,7 +1999,7 @@ Section [2.2](#Section_2.2) describes the particular data types, such as enumera
 
 The following sections describe a conceptual model of possible data organization that an implementation may maintain to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with the behavior described in this document.
 
-The abstract data model (ADM) for this protocol includes elements that are protocol-specific and others that are shared between multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1 and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager, is described in [MS-MQOD](#Section_1.3).
+The abstract data model (ADM) for this protocol includes elements that are protocol-specific and others that are shared between multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1 and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager, is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.1.1.2](#Section_3.1.1.2) details the data model element that is private to this protocol.
 
@@ -2040,7 +2040,7 @@ An implementation of the [**message queuing system**](#gt_message-queuing-system
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Message Processing Events and Sequencing Rules
 
-The following message processing events and sequencing rules generally apply to the methods described in sections [3.2](#Section_3.2.4.3) to [3.17](#Section_3.17.4.1).
+The following message processing events and sequencing rules generally apply to the methods described in sections [3.2](#Section_3.2) to [3.17](#Section_3.17).
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Security
@@ -2094,7 +2094,7 @@ When the [**message queuing system**](#gt_message-queuing-system) responds to th
 
 This event MUST be generated with the following arguments:
 
-- iPathname: The path name of a [**queue**](#gt_queue) as specified in [MS-MQMQ](#Section_2.2.3) section 2.1.1.
+- iPathname: The path name of a [**queue**](#gt_queue) as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.1.
 **Return Values**
 
 - rStatus: A status code that can be one of the following:
@@ -2166,7 +2166,7 @@ The MSMQApplication object provides methods and properties that can be used to o
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-An implementation of the [MSMQApplication](#Section_3.2.4.3) [**coclass**](#gt_coclass) maintains the following abstract data element:
+An implementation of the [MSMQApplication](#Section_3.2) [**coclass**](#gt_coclass) maintains the following abstract data element:
 
 - **ComputerName**: This instance variable specifies the string representation of the represented QueueManager.ComputerName, if one is explicitly specified by the client. If this variable is not set, it MUST contain a NULL value, which implies that the *local* QueueManager will be represented by this object.
 <a id="Section_3.2.2"></a>
@@ -2178,7 +2178,7 @@ No protocol timers are required.
 ### 3.2.3 Initialization
 
 - The *ComputerName* instance variable MUST be initialized to a NULL value.
-- Clients MAY set the *ComputerName* instance variable by invoking the [put MSMQApplication::Machine](#Section_ec1427c3108a42ada7e762c1e4b927a1) method on the object.
+- Clients MAY set the *ComputerName* instance variable by invoking the [put MSMQApplication::Machine](#Section_3.2.4.3.6) method on the object.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
@@ -2200,7 +2200,7 @@ This [**coclass**](#gt_coclass) includes three interfaces. The numbered interfac
 | get [IsConnected](#Section_3.2.4.3.4) (Opnum 18) | X | - | - |
 | get [BytesInAllQueues](#Section_3.2.4.3.5) (Opnum 19) | X | - | - |
 | put [Machine](#Section_3.2.4.3.6) (Opnum 20) | X | - | - |
-| get [Machine](#Section_3.2.4.3.6) (Opnum 21) | X | - | - |
+| get [Machine](#Section_3.2.4.3.7) (Opnum 21) | X | - | - |
 | [Connect](#Section_3.2.4.3.8) (Opnum 22) | X | - | - |
 | [Disconnect](#Section_3.2.4.3.9) (Opnum 23) | X | - | - |
 | [Tidy](#Section_3.2.4.3.10) (Opnum 24) | X | - | - |
@@ -2266,9 +2266,9 @@ When processing this call, the server MUST follow these guidelines:
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 IMSMQApplication2 Interface
 
-The IMSMQApplication2 interface provides methods that return information about the [**queue manager**](#gt_queue-manager-qm) on a specific [**server**](#gt_server). IMSMQApplication2 inherits opnums 0 through 7 from the [IMSMQApplication](#Section_3.2.4.3) interface (section 3.2.4.1). The version number for this interface is 4.0.
+The IMSMQApplication2 interface provides methods that return information about the [**queue manager**](#gt_queue-manager-qm) on a specific [**server**](#gt_server). IMSMQApplication2 inherits opnums 0 through 7 from the [IMSMQApplication](#Section_3.2.4.1) interface (section 3.2.4.1). The version number for this interface is 4.0.
 
-To receive incoming remote calls for this interface, the server MUST implement a DCOM object class with the [**CLSID**](#gt_class-identifier-clsid) {d7d6e086-dccd-11d0-aa4b-0060970debae} (coclass [MSMQApplication](#Section_3.2.4.3) as specified in section [1.9](#Section_1.9)), which implements the IMSMQApplication2 interface using the [**UUID**](#gt_universally-unique-identifier-uuid) {12a30900-7300-11d2-b0e6-00e02c074f6b}.
+To receive incoming remote calls for this interface, the server MUST implement a DCOM object class with the [**CLSID**](#gt_class-identifier-clsid) {d7d6e086-dccd-11d0-aa4b-0060970debae} (coclass [MSMQApplication](#Section_3.2) as specified in section [1.9](#Section_1.9)), which implements the IMSMQApplication2 interface using the [**UUID**](#gt_universally-unique-identifier-uuid) {12a30900-7300-11d2-b0e6-00e02c074f6b}.
 
 Methods in RPC Opnum Order
 
@@ -2285,7 +2285,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 RegisterCertificate (Opnum 8)
 
-The RegisterCertificate method MUST register an MQUSERSIGNCERT ([MS-MQMQ](#Section_2.2.3) section 2.2.22) in User.**Certificates**. Implementations of this protocol use [**certificates**](#gt_certificate) to verify the sender for [**messages**](#gt_message) that are requesting authentication and to ensure message integrity.
+The RegisterCertificate method MUST register an MQUSERSIGNCERT ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.22) in User.**Certificates**. Implementations of this protocol use [**certificates**](#gt_certificate) to verify the sender for [**messages**](#gt_message) that are requesting authentication and to ensure message integrity.
 
 HRESULT RegisterCertificate(
 
@@ -2491,7 +2491,7 @@ The server MUST take no action and return E_NOTIMPL (0x80004001).
 
 The IMSMQApplication3 interface provides methods that allow clients to administer queues. IMSMQApplication3 inherits opnums 0 through 14 from the [IMSMQApplication2](#Section_3.2.4.2) (section 3.2.4.2) interface. The version number for this interface is 4.0.
 
-To receive incoming remote calls for this interface, the [**server**](#gt_server) MUST implement a DCOM object class with the [**CLSID**](#gt_class-identifier-clsid) {d7d6e086-dccd-11d0-aa4b-0060970debae} (coclass [MSMQApplication](#Section_3.2.4.3) as specified in section [1.9](#Section_1.9)), which implements the IMSMQApplication3 interface using the [**UUID**](#gt_universally-unique-identifier-uuid) {eba96b1f-2168-11d3-898c-00e02c074f6b}.
+To receive incoming remote calls for this interface, the [**server**](#gt_server) MUST implement a DCOM object class with the [**CLSID**](#gt_class-identifier-clsid) {d7d6e086-dccd-11d0-aa4b-0060970debae} (coclass [MSMQApplication](#Section_3.2) as specified in section [1.9](#Section_1.9)), which implements the IMSMQApplication3 interface using the [**UUID**](#gt_universally-unique-identifier-uuid) {eba96b1f-2168-11d3-898c-00e02c074f6b}.
 
 Methods in RPC Opnum Order
 
@@ -2503,7 +2503,7 @@ Methods in RPC Opnum Order
 | [IsConnected](#Section_3.2.4.3.4) | Returns a BOOLEAN value that indicates the connection status of the queue manager that is represented by this object. Opnum: 18 |
 | [BytesInAllQueues](#Section_3.2.4.3.5) | Returns the number of [**message**](#gt_message) bytes that are currently stored in all queues of the queue manager that is represented by this object. Opnum: 19 |
 | [Machine](#Section_3.2.4.3.6) | Sets the name of the computer on which the queue manager is located. Opnum: 20 |
-| [Machine](#Section_3.2.4.3.6) | Returns the name of the computer on which the queue manager that is represented by this object is running. Opnum: 21 |
+| [Machine](#Section_3.2.4.3.7) | Returns the name of the computer on which the queue manager that is represented by this object is running. Opnum: 21 |
 | [Connect](#Section_3.2.4.3.8) | Connects the queue manager represented by this object to the network and to the directory service. Opnum: 22 |
 | [Disconnect](#Section_3.2.4.3.9) | Disconnects the queue manager that is represented by this object from the network and the directory service. Opnum: 23 |
 | [Tidy](#Section_3.2.4.3.10) | Performs implementation-specific tasks to release unused resources of the queue manager that is represented by this object. Opnum: 24 |
@@ -2797,12 +2797,12 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [Init](#Section_3.3.4.1.1) | Initializes the object to represent the state of an active [**queue**](#gt_queue). Opnum: 7 |
 | [FormatName, get FormatName](#Section_3.3.4.1.2) | Returns a [**format name**](#gt_format-name) for the queue that is represented by this object. Opnum: 8 |
-| [Machine, get Machine](#Section_3.2.4.3.6) | Returns the name of the computer on which the queue manager that owns the queue represented by this object is running. Opnum: 9 |
+| [Machine, get Machine](#Section_3.3.4.1.3) | Returns the name of the computer on which the queue manager that owns the queue represented by this object is running. Opnum: 9 |
 | [MessageCount, get MessageCount](#Section_3.3.4.1.4) | Returns the number of [**messages**](#gt_message) in the queue that is represented by this object. Opnum: 10 |
 | [ForeignStatus, get ForeignStatus](#Section_3.3.4.1.5) | Returns a flag that indicates whether the queue that is represented by this object is a [**foreign queue**](#gt_foreign-queue). Opnum: 11 |
 | [QueueType, get QueueType](#Section_3.3.4.1.6) | Returns a flag that indicates the type of the queue that is represented by this object. Opnum: 12 |
 | [IsLocal, get IsLocal](#Section_3.3.4.1.7) | Returns a BOOLEAN value that indicates whether the queue that is represented by this object is owned by the local queue manager or a remote queue manager. Opnum: 13 |
-| [TransactionalStatus, get TransactionalStatus](#Section_3.9.4.1.1) | Returns a flag that indicates whether the queue that is represented by this object is a [**transactional queue**](#gt_transactional-queue) or a nontransactional queue. Opnum: 14 |
+| [TransactionalStatus, get TransactionalStatus](#Section_3.3.4.1.8) | Returns a flag that indicates whether the queue that is represented by this object is a [**transactional queue**](#gt_transactional-queue) or a nontransactional queue. Opnum: 14 |
 | [BytesInQueueget, BytesInQueue](#Section_3.3.4.1.9) | Returns the number of message bytes in the queue that is represented by this object. Opnum: 15 |
 
 <a id="Section_3.3.4.1.1"></a>
@@ -3107,7 +3107,7 @@ None.
 
 This event makes use of the following structures and enumerations:
 
-- The QUEUE_FORMAT_TYPE enumeration specified in [MS-MQMQ](#Section_2.2.3) section 2.2.6.
+- The QUEUE_FORMAT_TYPE enumeration specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.6.
 - The QUEUE_FORMAT structure specified in [MS-MQMQ] section 2.2.7.
 - The OBJECTID structure specified in [MS-MQMQ] section 2.2.8.
 - The DL_ID structure specified in [MS-MQMQ] section 2.2.9.
@@ -3167,7 +3167,7 @@ Set rStatus equal to TRUE.
 
 This event MUST be generated with the following arguments:
 
-- iPropID: A Queue Property Identifier, as specified in [MS-MQMQ](#Section_2.2.3) section 2.3.1.
+- iPropID: A Queue Property Identifier, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1.
 **Return Values**
 
 - rStatus: A status code that can be one of the following:
@@ -3232,7 +3232,7 @@ The MSMQQueueManagement object represents the state of a Queue, referred to here
 
 An implementation of the [MSMQManagement](#Section_3.3.4.1) [**coclass**](#gt_coclass) SHOULD also provide an implementation for the [MSMQQueueManagement](#Section_3.4.4.1) coclass. The represented Queue of the MSMQManagement coclass is the represented Queue of this coclass. This object inherits the instance variables defined in the MSMQManagement coclass.
 
-Refer to section [3.3.1](#Section_3.3) for the abstract data model of the MSMQManagement coclass.
+Refer to section [3.3.1](#Section_3.3.1) for the abstract data model of the MSMQManagement coclass.
 
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Timers
@@ -3244,7 +3244,7 @@ None.
 
 To obtain an instance of the [MSMQQueueManagement](#Section_3.4.4.1) object:
 
-- Clients MUST create an instance of the [MSMQManagement](#Section_3.3.4.1) object and initialize it by calling the [IMSMQManagement::Init](#Section_13f4d2bf3c1d4ef0825aa497df73bf5b) method on the object. Refer to section [3.3.3](#Section_3.3) for the initialization of the MSMQManagement [**coclass**](#gt_coclass).
+- Clients MUST create an instance of the [MSMQManagement](#Section_3.3.4.1) object and initialize it by calling the [IMSMQManagement::Init](#Section_13f4d2bf3c1d4ef0825aa497df73bf5b) method on the object. Refer to section [3.3.3](#Section_3.3.3) for the initialization of the MSMQManagement [**coclass**](#gt_coclass).
 - Clients MUST obtain the instance of MSMQQueueManagement by invoking a call to IUnknown::QueryInterface (refer to section [3.1](#Section_3.1)) on the MSMQManagement object, with the [**interface identifier**](#gt_interface-identifier-iid) of [IMSMQQueueManagement](#Section_3.4.4.1).
 - If the QueueIsOutgoing instance variable of the MSMQManagement object is equal to True, the [**server**](#gt_server) MUST return E_NOINTERFACE (0x80004002).
 <a id="Section_3.4.4"></a>
@@ -3263,7 +3263,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [JournalMessageCount, get JournalMessageCount](#Section_3.10.4.1.13) | Returns the number of journal [**messages**](#gt_message) in the journal [**queue**](#gt_queue) that is associated with the queue that is represented by this object. Opnum: 16 |
+| [JournalMessageCount, get JournalMessageCount](#Section_3.4.4.1.1) | Returns the number of journal [**messages**](#gt_message) in the journal [**queue**](#gt_queue) that is associated with the queue that is represented by this object. Opnum: 16 |
 | [BytesInJournal, get BytesInJournal](#Section_3.4.4.1.2) | Returns the number of message bytes in the journal queue that is associated with the queue that is represented by this object. Opnum: 17 |
 | [EodGetReceiveInfo](#Section_3.4.4.1.3) | Returns an array of collections of exactly-once-delivery (EOD) properties, with one collection for each queue manager that is transferring [**transactional messages**](#gt_transactional-message) to the queue that is represented by this object. Opnum: 18 |
 
@@ -3360,7 +3360,7 @@ The MSMQOutgoingQueueManagement object represents the state of an OutgoingQueue,
 <a id="Section_3.5.1"></a>
 ### 3.5.1 Abstract Data Model
 
-An implementation of the [MSMQManagement](#Section_3.3.4.1) [**coclass**](#gt_coclass) SHOULD provide the implementation for the [MSMQOutgoingQueueManagement](#Section_3.5) coclass as well. The represented Queue of the MSMQManagement coclass is the represented OutgoingQueue of this coclass. This object inherits the instance variables that are defined in the MSMQManagement coclass. Refer to section [3.3.1](#Section_3.3) for the abstract data model of the MSMQManagement coclass.
+An implementation of the [MSMQManagement](#Section_3.3.4.1) [**coclass**](#gt_coclass) SHOULD provide the implementation for the [MSMQOutgoingQueueManagement](#Section_3.5.4.1) coclass as well. The represented Queue of the MSMQManagement coclass is the represented OutgoingQueue of this coclass. This object inherits the instance variables that are defined in the MSMQManagement coclass. Refer to section [3.3.1](#Section_3.3.1) for the abstract data model of the MSMQManagement coclass.
 
 <a id="Section_3.5.2"></a>
 ### 3.5.2 Timers
@@ -3370,15 +3370,15 @@ No protocol timers are required.
 <a id="Section_3.5.3"></a>
 ### 3.5.3 Initialization
 
-To obtain an instance of the [MSMQOutgoingQueueManagement](#Section_3.5) object:
+To obtain an instance of the [MSMQOutgoingQueueManagement](#Section_3.5.4.1) object:
 
-- Clients MUST create an instance of the [MSMQManagement](#Section_3.3.4.1) object and initialize it by invoking the [IMSMQManagement::Init](#Section_13f4d2bf3c1d4ef0825aa497df73bf5b) method on the object. Refer to section [3.3.3](#Section_3.3) for the initialization of the MSMQManagement coclass.
+- Clients MUST create an instance of the [MSMQManagement](#Section_3.3.4.1) object and initialize it by invoking the [IMSMQManagement::Init](#Section_13f4d2bf3c1d4ef0825aa497df73bf5b) method on the object. Refer to section [3.3.3](#Section_3.3.3) for the initialization of the MSMQManagement coclass.
 - Clients MUST obtain the instance of MSMQOutgoingQueueManagement by invoking a call to IUnknown::QueryInterface (see section [3.1](#Section_3.1)) on the MSMQManagement object, with the [**interface identifier**](#gt_interface-identifier-iid) of [IMSMQOutgoingQueueManagement](#Section_3.5.4.1).
 - If the **QueueIsOutgoing** instance variable of the MSMQManagement object is equal to False, the [**server**](#gt_server) MUST return E_NOINTERFACE (0x80004002).
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Message Processing Events and Sequencing Rules
 
-The [MSMQOutgoingQueueManagement](#Section_3.5) coclass defines a single interface: [IMSMQOutgoingQueueManagement](#Section_3.5.4.1).
+The [MSMQOutgoingQueueManagement](#Section_3.5.4.1) coclass defines a single interface: [IMSMQOutgoingQueueManagement](#Section_3.5.4.1).
 
 <a id="Section_3.5.4.1"></a>
 #### 3.5.4.1 IMSMQOutgoingQueueManagement Interface
@@ -3392,7 +3392,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [State, get State](#Section_3.5.4.1.1) | Identifies the connection status of the outgoing [**queue**](#gt_queue) that is represented by this object. Opnum: 16 |
-| [NextHops, get NextHops](#Section_3.14.4.1.2) | Returns the address, or an array of possible addresses, for routing [**messages**](#gt_message) to the intermediate queue manager in the next hop. Opnum: 17 |
+| [NextHops, get NextHops](#Section_3.5.4.1.2) | Returns the address, or an array of possible addresses, for routing [**messages**](#gt_message) to the intermediate queue manager in the next hop. Opnum: 17 |
 | [EodGetSendInfo](#Section_3.5.4.1.3) | Returns a collection of named exactly-once-delivery (EOD) properties of the outgoing queue that is represented by this object. Opnum: 18 |
 | [Resume](#Section_3.5.4.1.4) | Resumes the transfer of messages from the outgoing queue that is represented by this object. Opnum: 19 |
 | [Pause](#Section_3.5.4.1.5) | Pauses the transfer of messages from the outgoing queue that is represented by this object. Opnum: 20 |
@@ -3618,7 +3618,7 @@ This coclass includes three interfaces. The numbered interfaces are binary-compa
 | Method name (in the most recent interface revision) | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- |
 | [BeginTransaction](#Section_3.6.4.1.1) (Opnum 7) | X | X | X |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 8) | X | X | - |
+| get [Properties](#Section_3.6.4.1.2) (Opnum 8) | X | X | - |
 
 <a id="Section_3.6.4.1"></a>
 #### 3.6.4.1 IMSMQTransactionDispenser3 Interface
@@ -3636,7 +3636,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [BeginTransaction](#Section_3.6.4.1.1) | Initiates a new [**internal transaction**](#gt_internal-transaction) and returns an [IMSMQTransaction3](#Section_3.9.4.3) object that represents the underlying newly created transaction.<23> Opnum: 7 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented.<24> Opnum: 8 |
+| [Properties, get Properties](#Section_3.6.4.1.2) | This method is not implemented.<24> Opnum: 8 |
 
 <a id="Section_3.6.4.1.1"></a>
 ##### 3.6.4.1.1 BeginTransaction (Opnum 7)
@@ -3721,7 +3721,7 @@ This coclass includes three interfaces. The numbered interfaces are binary-compa
 | Method name (in the most recent interface revision) | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- |
 | [BeginTransaction](#Section_3.6.4.1.1) (Opnum 7) | X | X | X |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 8) | X | X | - |
+| get [Properties](#Section_3.7.4.1.2) (Opnum 8) | X | X | - |
 
 <a id="Section_3.7.4.1"></a>
 #### 3.7.4.1 IMSMQCoordinatedTransactionDispenser3 Interface
@@ -3739,7 +3739,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [BeginTransaction](#Section_3.6.4.1.1) | Initiates a new Distributed Transaction Coordinator (DTC) transaction and returns an [IMSMQTransaction3](#Section_3.9.4.3) object that represents the underlying newly created transaction.<26> Opnum: 7 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented.<27> Opnum: 8 |
+| [Properties, get Properties](#Section_3.7.4.1.2) | This method is not implemented.<27> Opnum: 8 |
 
 <a id="Section_3.7.4.1.1"></a>
 ##### 3.7.4.1.1 BeginTransaction (Opnum 7)
@@ -3800,7 +3800,7 @@ None.
 <a id="Section_3.8"></a>
 ## 3.8 TransactionImpl Class Details
 
-The TransactionImpl class represents a [**transaction object**](#gt_transaction-object). This transaction object is uniquely identified by using a [**transaction identifier**](#gt_transaction-identifier) and is used internally by the [MSMQTransaction Coclass (section 3.9)](#Section_3.9.4.1) to commit, abort, and obtain status information about [**transactions**](#gt_transaction).
+The TransactionImpl class represents a [**transaction object**](#gt_transaction-object). This transaction object is uniquely identified by using a [**transaction identifier**](#gt_transaction-identifier) and is used internally by the [MSMQTransaction Coclass (section 3.9)](#Section_3.9) to commit, abort, and obtain status information about [**transactions**](#gt_transaction).
 
 <a id="Section_3.8.1"></a>
 ### 3.8.1 Abstract Data Model
@@ -3823,7 +3823,7 @@ None.
 <a id="Section_3.8.4"></a>
 ### 3.8.4 Message Processing Events and Sequencing Rules
 
-The [TransactionImpl (section 3.8)](#Section_3.8) class implements a single interface: [ITransaction (section 3.8.4.1)](#Section_3.9.4.3.1).
+The [TransactionImpl (section 3.8)](#Section_3.8) class implements a single interface: [ITransaction (section 3.8.4.1)](#Section_3.8.4.1).
 
 <a id="Section_3.8.4.1"></a>
 #### 3.8.4.1 ITransaction Interface
@@ -3991,11 +3991,11 @@ This coclass includes three interfaces. The numbered interfaces are binary-compa
 
 | Method name (in the most recent interface revision) | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- |
-| get [Transaction](#Section_3.9.4.3.1) (Opnum 7) | X | X | X |
-| [Commit](#Section_2.2.2.1) (Opnum 8) | X | X | X |
-| [Abort](#Section_3.8.4.1.2) (Opnum 9) | X | X | X |
+| get [Transaction](#Section_2.2.2.1) (Opnum 7) | X | X | X |
+| [Commit](#Section_3.9.4.1.2) (Opnum 8) | X | X | X |
+| [Abort](#Section_3.9.4.1.3) (Opnum 9) | X | X | X |
 | [InitNew](#Section_3.9.4.2.1) (Opnum 10) | X | X | - |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 11) | X | X | - |
+| get [Properties](#Section_3.9.4.2.2) (Opnum 11) | X | X | - |
 | get [ITransaction](#Section_3.9.4.3.1) (Opnum 12) | X | - | - |
 
 <a id="Section_3.9.4.1"></a>
@@ -4011,9 +4011,9 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Transaction, get Transaction](#Section_3.9.4.3.1) | This method is deprecated and SHOULD NOT be implemented. Opnum: 7 |
-| [Commit](#Section_2.2.2.1) | Commits the underlying [**internal transaction**](#gt_internal-transaction) or [**external transaction**](#gt_external-transaction). Opnum: 8 |
-| [Abort](#Section_3.8.4.1.2) | Aborts the underlying internal transaction or external transaction. Opnum: 9 |
+| [Transaction, get Transaction](#Section_2.2.2.1) | This method is deprecated and SHOULD NOT be implemented. Opnum: 7 |
+| [Commit](#Section_3.9.4.1.2) | Commits the underlying [**internal transaction**](#gt_internal-transaction) or [**external transaction**](#gt_external-transaction). Opnum: 8 |
+| [Abort](#Section_3.9.4.1.3) | Aborts the underlying internal transaction or external transaction. Opnum: 9 |
 
 <a id="Section_3.9.4.1.1"></a>
 ##### 3.9.4.1.1 Transaction (Opnum 7)
@@ -4059,7 +4059,7 @@ When the server processes this call, it MUST follow these guidelines:
 
 - If the *Transaction* instance variable is NULL:
 - Return E_INVALIDARG (0x80070057), and take no further action.
-- Commit the transaction by invoking the Commit method ([ITransaction::Commit](#Section_3.9.4.3.1) section 3.8.4.1.1) on the *Transaction* instance variable, passing the input parameters *fRetaining*, *grfTC*, and *grfRM*.
+- Commit the transaction by invoking the Commit method ([ITransaction::Commit](#Section_3.8.4.1.1) section 3.8.4.1.1) on the *Transaction* instance variable, passing the input parameters *fRetaining*, *grfTC*, and *grfRM*.
 <a id="Section_3.9.4.1.3"></a>
 ##### 3.9.4.1.3 Abort (Opnum 9)
 
@@ -4085,7 +4085,7 @@ When the server processes this call, it MUST follow these guidelines:
 
 - If the *Transaction* instance variable is NULL:
 - Return E_INVALIDARG (0x80070057), and take no further action.
-- Abort the transaction by invoking the Abort method ([ITransaction::Abort](#Section_3.9.4.3.1) section 3.8.4.1.2) on the *Transaction* instance variable, with the following parameters:
+- Abort the transaction by invoking the Abort method ([ITransaction::Abort](#Section_3.8.4.1.2) section 3.8.4.1.2) on the *Transaction* instance variable, with the following parameters:
 - pboidReason = NULL
 - fRetaining = input parameter *fRetaining*
 - fAsync = input parameter *fAsync*
@@ -4101,7 +4101,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [InitNew](#Section_3.9.4.2.1) | Initializes the object to represent an existing underlying [**transaction**](#gt_transaction) object. Opnum: 10 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented. Opnum: 11 |
+| [Properties, get Properties](#Section_3.9.4.2.2) | This method is not implemented. Opnum: 11 |
 
 <a id="Section_3.9.4.2.1"></a>
 ##### 3.9.4.2.1 InitNew (Opnum 10)
@@ -4114,7 +4114,7 @@ HRESULT InitNew(
 
 );
 
-**varTransaction:** A pointer to a [**VARIANT**](#gt_variant) that points to an existing underlying transaction object that is implementing the [ITransaction](#Section_3.9.4.3.1) interface. The VARIANT that is passed can be any one of the following types:
+**varTransaction:** A pointer to a [**VARIANT**](#gt_variant) that points to an existing underlying transaction object that is implementing the [ITransaction](#Section_3.8.4.1) interface. The VARIANT that is passed can be any one of the following types:
 
 - VT_UNKNOWN
 - VT_UNKNOWN | VT_BYREF
@@ -4159,7 +4159,7 @@ The server MUST take no action and return E_NOTIMPL (0x80004001).
 <a id="Section_3.9.4.3"></a>
 #### 3.9.4.3 IMSMQTransaction3 Interface
 
-The IMSMQTransaction3 interface provides methods that return information about the queue manager on a specific server. IMSMQTransaction3 inherits opnums 0 through 11 from the [IMSMQTransaction2](#Section_2.2.2.1) interface (section 3.9.4.2). The version number for this interface is 1.0.
+The IMSMQTransaction3 interface provides methods that return information about the queue manager on a specific server. IMSMQTransaction3 inherits opnums 0 through 11 from the [IMSMQTransaction2](#Section_3.9.4.2) interface (section 3.9.4.2). The version number for this interface is 1.0.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM object class with the [**CLSID**](#gt_class-identifier-clsid) {d7d6e080-dccd-11d0-aa4b-0060970debae} (coclass MSMQTransaction as specified in section [1.9](#Section_1.9)), which implements the IMSMQTransaction3 interface using the [**UUID**](#gt_universally-unique-identifier-uuid) {eba96b13-2168-11d3-898c-00e02c074f6b}.
 
@@ -4172,7 +4172,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.9.4.3.1"></a>
 ##### 3.9.4.3.1 ITransaction (Opnum 12)
 
-The ITransaction method is received by the server in an RPC_REQUEST packet. In response, the server returns the [ITransaction](#Section_3.9.4.3.1) interface on the underlying [**transaction**](#gt_transaction) object.
+The ITransaction method is received by the server in an RPC_REQUEST packet. In response, the server returns the [ITransaction](#Section_3.8.4.1) interface on the underlying [**transaction**](#gt_transaction) object.
 
 [propget] HRESULT ITransaction(
 
@@ -4227,7 +4227,7 @@ No protocol timers are required.
 
 The [MSMQQueueInfo](#Section_3.10) class can be constructed and initialized either by the client or by calling [IMSMQQuery4::LookupQueue](#Section_1f17f54de0864dff9e8687c2b0165739) or [IMSMQQuery4::LookupQueue_v2](#Section_ca768a59b51e4f8ca0a850613d8f90e0).
 
-- When IMSMQQuery4::LookupQueue or IMSMQQuery4::LookupQueue_v2 is called, the [MSMQQuery](#Section_3.13.4.1) object returns an [MSMQQueueInfos](#Section_3.14) collection that initializes the MSMQQueueInfo object instances on demand when the client iterates over the collection.
+- When IMSMQQuery4::LookupQueue or IMSMQQuery4::LookupQueue_v2 is called, the [MSMQQuery](#Section_3.13) object returns an [MSMQQueueInfos](#Section_3.14) collection that initializes the MSMQQueueInfo object instances on demand when the client iterates over the collection.
 - When the client constructs the object, the instance variables are set with the following default values.
 | Instance variable | Default value |
 | --- | --- |
@@ -4243,9 +4243,9 @@ The [MSMQQueueInfo](#Section_3.10) class can be constructed and initialized eith
 The value of the *IsRefreshed* instance variable is set to TRUE when the **MSMQQueueInfo::Refresh** method is called. The value of the *IsQueueCreated* instance variable is set to TRUE when the **Create** method is called. In either of the two cases, if the Queue is an [ApplicationQueue](#Section_3.1.1.2), the value of the *IsApplicationQueue* instance variable is set to TRUE.
 
 - If the client constructed the MSMQQueueInfo object to create an ApplicationQueue:
-- The client MUST call [put IMSMQQueueInfo4::PathName](#Section_c0fc744fee774df58689e37940689a75) before calling [IMSMQQueueInfo4::Create](#Section_f8e091cb054d4a46a03c66c07cb341a4).
+- The client MUST call [put IMSMQQueueInfo4::PathName](#Section_3.10.4.1.7) before calling [IMSMQQueueInfo4::Create](#Section_f8e091cb054d4a46a03c66c07cb341a4).
 - If the client constructed the MSMQQueueInfo object to open, refresh/update, or delete a Queue:
-- The client MUST call put IMSMQQueueInfo4::PathName or [put IMSMQQueueInfo4::FormatName](#Section_931c4667507047e89add60543739782f) before calling [IMSMQQueueInfo4::Open](#Section_d1a87420f35d4ad39338993b12431368), [IMSMQQueueInfo4::Refresh](#Section_e4072abdb4334b22a4ed8f654d182705), [IMSMQQueueInfo4::Update](#Section_62d593190e1849488cbaa06cb0d0f05b), or [IMSMQQueueInfo4::Delete](#Section_2928c2801a50498b9a1da3537c0be66b).
+- The client MUST call put IMSMQQueueInfo4::PathName or [put IMSMQQueueInfo4::FormatName](#Section_3.10.4.1.9) before calling [IMSMQQueueInfo4::Open](#Section_3.10.4.1.28), [IMSMQQueueInfo4::Refresh](#Section_e4072abdb4334b22a4ed8f654d182705), [IMSMQQueueInfo4::Update](#Section_62d593190e1849488cbaa06cb0d0f05b), or [IMSMQQueueInfo4::Delete](#Section_2928c2801a50498b9a1da3537c0be66b).
 <a id="Section_3.10.4"></a>
 ### 3.10.4 Message Processing Events and Sequencing Rules
 
@@ -4255,28 +4255,28 @@ This coclass includes four interfaces. The numbered interfaces are binary-compat
 | --- | --- | --- | --- | --- |
 | get [QueueGuid](#Section_3.10.4.1.1) (Opnum 7) | X | X | X | X |
 | get [ServiceTypeGuid](#Section_3.10.4.1.2) (Opnum 8) | X | X | X | X |
-| put [ServiceTypeGuid](#Section_3.10.4.1.2) (Opnum 9) | X | X | X | X |
+| put [ServiceTypeGuid](#Section_3.10.4.1.3) (Opnum 9) | X | X | X | X |
 | get [Label](#Section_3.10.4.1.4) (Opnum 10) | X | X | X | X |
-| put [Label](#Section_3.10.4.1.4) (Opnum 11) | X | X | X | X |
+| put [Label](#Section_3.10.4.1.5) (Opnum 11) | X | X | X | X |
 | get [PathName](#Section_3.10.4.1.6) (Opnum 12) | X | X | X | X |
-| put [PathName](#Section_3.10.4.1.6) (Opnum 13) | X | X | X | X |
-| get [FormatName](#Section_3.3.4.1.2) (Opnum 14) | X | X | X | X |
-| put [FormatName](#Section_3.3.4.1.2) (Opnum 15) | X | X | X | X |
+| put [PathName](#Section_3.10.4.1.7) (Opnum 13) | X | X | X | X |
+| get [FormatName](#Section_3.10.4.1.8) (Opnum 14) | X | X | X | X |
+| put [FormatName](#Section_3.10.4.1.9) (Opnum 15) | X | X | X | X |
 | get [IsTransactional](#Section_3.10.4.1.10) (Opnum 16) | X | X | X | X |
 | get [PrivLevel](#Section_3.10.4.1.11) (Opnum 17) | X | X | X | X |
-| put [PrivLevel](#Section_3.10.4.1.11) (Opnum 18) | X | X | X | X |
+| put [PrivLevel](#Section_3.10.4.1.12) (Opnum 18) | X | X | X | X |
 | get [Journal](#Section_3.10.4.1.13) (Opnum 19) | X | X | X | X |
-| put [Journal](#Section_3.10.4.1.13) (Opnum 20) | X | X | X | X |
+| put [Journal](#Section_3.10.4.1.14) (Opnum 20) | X | X | X | X |
 | get [Quota](#Section_3.10.4.1.15) (Opnum 21) | X | X | X | X |
-| put [Quota](#Section_3.10.4.1.15) (Opnum 22) | X | X | X | X |
+| put [Quota](#Section_3.10.4.1.16) (Opnum 22) | X | X | X | X |
 | get [BasePriority](#Section_3.10.4.1.17) (Opnum 23) | X | X | X | X |
-| put [BasePriority](#Section_3.10.4.1.17) (Opnum 24) | X | X | X | X |
+| put [BasePriority](#Section_3.10.4.1.18) (Opnum 24) | X | X | X | X |
 | get [CreateTime](#Section_3.10.4.1.19) (Opnum 25) | X | X | X | X |
 | get [ModifyTime](#Section_3.10.4.1.20) (Opnum 26) | X | X | X | X |
 | get [Authenticate](#Section_3.10.4.1.21) (Opnum 27) | X | X | X | X |
-| put [Authenticate](#Section_3.10.4.1.21) (Opnum 28) | X | X | X | X |
+| put [Authenticate](#Section_3.10.4.1.22) (Opnum 28) | X | X | X | X |
 | get [JournalQuota](#Section_3.10.4.1.23) (Opnum 29) | X | X | X | X |
-| put [JournalQuota](#Section_3.10.4.1.23) (Opnum 30) | X | X | X | X |
+| put [JournalQuota](#Section_3.10.4.1.24) (Opnum 30) | X | X | X | X |
 | get [IsWorldReadable](#Section_3.10.4.1.25) (Opnum 31) | X | X | X | X |
 | [Create](#Section_3.10.4.1.26) (Opnum 32) | X | X | X | X |
 | [Delete](#Section_3.10.4.1.27) (Opnum 33) | X | X | X | X |
@@ -4284,13 +4284,13 @@ This coclass includes four interfaces. The numbered interfaces are binary-compat
 | [Refresh](#Section_3.10.4.1.29) (Opnum 35) | X | X | X | X |
 | [Update](#Section_3.10.4.1.30) (Opnum 36) | X | X | X | X |
 | get [PathNameDNS](#Section_3.10.4.1.31) (Opnum 37) | X | X | X | - |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 38) | X | X | X | - |
-| get [Security](#Section_3.1.4.1) (Opnum 39) | X | X | X | - |
-| put [Security](#Section_3.1.4.1) (Opnum 40) | X | X | X | - |
+| get [Properties](#Section_3.10.4.1.32) (Opnum 38) | X | X | X | - |
+| get [Security](#Section_3.10.4.1.33) (Opnum 39) | X | X | X | - |
+| put [Security](#Section_3.10.4.1.34) (Opnum 40) | X | X | X | - |
 | get [IsTransactional2](#Section_3.10.4.1.35) (Opnum 41) | X | X | - | - |
 | get [IsWorldReadable2](#Section_3.10.4.1.36) (Opnum 42) | X | X | - | - |
 | get [MulticastAddress](#Section_3.10.4.1.37) (Opnum 43) | X | X | - | - |
-| put [MulticastAddress](#Section_3.10.4.1.37) (Opnum 44) | X | X | - | - |
+| put [MulticastAddress](#Section_3.10.4.1.38) (Opnum 44) | X | X | - | - |
 | get [ADsPath](#Section_3.10.4.1.39) (Opnum 45) | X | X | - | - |
 
 <a id="Section_3.10.4.1"></a>
@@ -4310,42 +4310,42 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [QueueGuid, get QueueGuid](#Section_3.10.4.1.1) | Returns the unique identifier of the queue. Opnum: 7 |
 | [ServiceTypeGuid, get ServiceTypeGuid](#Section_3.10.4.1.2) | Returns an identifier that indicates the type of service provided by the queue. Opnum: 8 |
-| [ServiceTypeGuid, put ServiceTypeGuid](#Section_3.10.4.1.2) | Sets an identifier that indicates the type of service provided by the queue. Opnum: 9 |
+| [ServiceTypeGuid, put ServiceTypeGuid](#Section_3.10.4.1.3) | Sets an identifier that indicates the type of service provided by the queue. Opnum: 9 |
 | [Label, get Label](#Section_3.10.4.1.4) | Returns the label of the queue. Opnum: 10 |
-| [Label, put Label](#Section_3.10.4.1.4) | Sets the label of the queue. Opnum: 11 |
+| [Label, put Label](#Section_3.10.4.1.5) | Sets the label of the queue. Opnum: 11 |
 | [PathName, get PathName](#Section_3.10.4.1.6) | Returns the path name of the queue. Opnum: 12 |
-| [PathName, put PathName](#Section_3.10.4.1.6) | Sets the path name of the queue. Opnum: 13 |
-| [FormatName, get FormatName](#Section_3.3.4.1.2) | Returns the format name that was set when the queue was created. Opnum: 14 |
-| [FormatName, put FormatName](#Section_3.3.4.1.2) | Sets the format name that is used to identify the queue. Opnum: 15 |
+| [PathName, put PathName](#Section_3.10.4.1.7) | Sets the path name of the queue. Opnum: 13 |
+| [FormatName, get FormatName](#Section_3.10.4.1.8) | Returns the format name that was set when the queue was created. Opnum: 14 |
+| [FormatName, put FormatName](#Section_3.10.4.1.9) | Sets the format name that is used to identify the queue. Opnum: 15 |
 | [IsTransactional, get IsTransactional](#Section_3.10.4.1.10) | Returns a value that indicates whether the queue is a [**transactional queue**](#gt_transactional-queue). Opnum: 16 |
 | [PrivLevel, get PrivLevel](#Section_3.10.4.1.11) | Returns the privacy level for the queue. Opnum: 17 |
-| [PrivLevel, put PrivLevel](#Section_3.10.4.1.11) | Sets the privacy level for the queue. Opnum: 18 |
+| [PrivLevel, put PrivLevel](#Section_3.10.4.1.12) | Sets the privacy level for the queue. Opnum: 18 |
 | [Journal, get Journal](#Section_3.10.4.1.13) | Returns the journaling level for the queue. Opnum: 19 |
-| [Journal, put Journal](#Section_3.10.4.1.13) | Sets the journaling level for the queue. Opnum: 20 |
+| [Journal, put Journal](#Section_3.10.4.1.14) | Sets the journaling level for the queue. Opnum: 20 |
 | [Quota, get Quota](#Section_3.10.4.1.15) | Returns the maximum size, in kilobytes, of the queue. Opnum: 21 |
-| [Quota, put Quota](#Section_3.10.4.1.15) | Sets the maximum size, in kilobytes, of the queue. Opnum: 22 |
+| [Quota, put Quota](#Section_3.10.4.1.16) | Sets the maximum size, in kilobytes, of the queue. Opnum: 22 |
 | [BasePriority, get BasePriority](#Section_3.10.4.1.17) | Returns the base priority of a public queue. Opnum: 23 |
-| [BasePriority, put BasePriority](#Section_3.10.4.1.17) | Sets the base priority of a public queue. Opnum: 24 |
-| [CreateTime, get CreateTime](#Section_3.10.4.1.26) | Returns a value that indicates the date and time when the queue was created. Opnum: 25 |
+| [BasePriority, put BasePriority](#Section_3.10.4.1.18) | Sets the base priority of a public queue. Opnum: 24 |
+| [CreateTime, get CreateTime](#Section_3.10.4.1.19) | Returns a value that indicates the date and time when the queue was created. Opnum: 25 |
 | [ModifyTime, get ModifyTime](#Section_3.10.4.1.20) | Returns a value that indicates the date and time when the queue's properties were last modified. Opnum: 26 |
 | [Authenticate, get Authenticate](#Section_3.10.4.1.21) | Returns the authentication level for the queue. Opnum: 27 |
-| [Authenticate, put Authenticate](#Section_3.10.4.1.21) | Sets the authentication level for the queue. Opnum: 28 |
-| [JournalQuota, get JournalQuota](#Section_3.10.4.1.13) | Returns the maximum size, in kilobytes, of the queue journal. Opnum: 29 |
-| [JournalQuota, put JournalQuota](#Section_3.10.4.1.13) | Sets the maximum size, in kilobytes, of the queue journal. Opnum: 30 |
+| [Authenticate, put Authenticate](#Section_3.10.4.1.22) | Sets the authentication level for the queue. Opnum: 28 |
+| [JournalQuota, get JournalQuota](#Section_3.10.4.1.23) | Returns the maximum size, in kilobytes, of the queue journal. Opnum: 29 |
+| [JournalQuota, put JournalQuota](#Section_3.10.4.1.24) | Sets the maximum size, in kilobytes, of the queue journal. Opnum: 30 |
 | [IsWorldReadable, get IsWorldReadable](#Section_3.10.4.1.25) | Returns a value that indicates whether everyone can read messages in the queue; or whether only the owner and administrators of the queue can read messages in it. Opnum: 31 |
 | [Create](#Section_3.10.4.1.26) | Creates a new queue using the path name. Opnum: 32 |
 | [Delete](#Section_3.10.4.1.27) | Deletes the queue using the format name or the path name. Opnum: 33 |
 | [Open](#Section_3.10.4.1.28) | Opens the queue identified by the format name.<34> Opnum: 34 |
 | [Refresh](#Section_3.10.4.1.29) | Refreshes the properties of the object by using the values stored in the directory service (for public queues) or provided by the local queue manager (for private queues). Opnum: 35 |
 | [Update](#Section_3.10.4.1.30) | Updates the properties that are stored in the directory service (for public queues) or the local queue manager (for private queues) by using values from this object. Opnum: 36 |
-| [PathNameDNS, get PathNameDNS](#Section_3.10.4.1.6) | Returns the DNS path name of the queue.<35> Opnum: 37 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | The method is not implemented.<36> Opnum: 38 |
-| [Security, get Security](#Section_3.1.4.1) | The method is not implemented.<37> Opnum: 39 |
-| [Security, put Security](#Section_3.1.4.1) | The method is not implemented.<38> Opnum: 40 |
-| [IsTransactional2, get IsTransactional2](#Section_3.10.4.1.10) | Returns a value that indicates whether the queue is a transactional queue.<39> Opnum: 41 |
-| [IsWorldReadable2, get IsWorldReadable2](#Section_3.10.4.1.25) | Returns a value that indicates whether everyone can read messages in the queue or only the owner and administrators of the queue can read messages in it.<40> Opnum: 42 |
+| [PathNameDNS, get PathNameDNS](#Section_3.10.4.1.31) | Returns the DNS path name of the queue.<35> Opnum: 37 |
+| [Properties, get Properties](#Section_3.10.4.1.32) | The method is not implemented.<36> Opnum: 38 |
+| [Security, get Security](#Section_3.10.4.1.33) | The method is not implemented.<37> Opnum: 39 |
+| [Security, put Security](#Section_3.10.4.1.34) | The method is not implemented.<38> Opnum: 40 |
+| [IsTransactional2, get IsTransactional2](#Section_3.10.4.1.35) | Returns a value that indicates whether the queue is a transactional queue.<39> Opnum: 41 |
+| [IsWorldReadable2, get IsWorldReadable2](#Section_3.10.4.1.36) | Returns a value that indicates whether everyone can read messages in the queue or only the owner and administrators of the queue can read messages in it.<40> Opnum: 42 |
 | [MulticastAddress, get MulticastAddress](#Section_3.10.4.1.37) | Returns the multicast addresses that are associated with the queue.<41> Opnum: 43 |
-| [MulticastAddress, put MulticastAddress](#Section_3.10.4.1.37) | Sets the multicast addresses that are associated with the queue.<42> Opnum: 44 |
+| [MulticastAddress, put MulticastAddress](#Section_3.10.4.1.38) | Sets the multicast addresses that are associated with the queue.<42> Opnum: 44 |
 | [ADsPath, get ADsPath](#Section_3.10.4.1.39) | Returns the directory path to a public queue.<43> Opnum: 45 |
 
 <a id="Section_3.10.4.1.1"></a>
@@ -4938,7 +4938,7 @@ When processing this call, the server MUST abide by the following contract:
 - Perform an access check by invoking the Access Check Algorithm ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2) with the following parameters:
 - SecurityDescriptor: **OwnerQueueManager.Security**.
 - Token: the security token of the caller.<44>
-- Access Request mask: **MQSEC_CREATE_QUEUE** as defined in section 2.2.24 of [MS-MQMQ](#Section_2.2.3).
+- Access Request mask: **MQSEC_CREATE_QUEUE** as defined in section 2.2.24 of [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md).
 - Object Tree: NULL.
 - PrincipalSelfSubst SID: NULL.
 - If the Access Check Algorithm does not return success:
@@ -4960,7 +4960,7 @@ When processing this call, the server MUST abide by the following contract:
 - Let **MachineSid** be a SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2), initialized to 0.
 - If the message queuing system is operating in Directory-Integrated mode:
 - A Get Object Properties Using LDAP ([MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) section 3.1.6.14) event MUST be generated with the following arguments:
-- *iPath* := a distinguished name of the form specified for a computer object in [MS-MQDSSM] section 2.2.1, where "<computer name>" is the computer name portion of the value of **refQueue.Pathname**, as specified in [MS-MQMQ](#Section_2.2.3) section 2.1.1.
+- *iPath* := a distinguished name of the form specified for a computer object in [MS-MQDSSM] section 2.2.1, where "<computer name>" is the computer name portion of the value of **refQueue.Pathname**, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.1.
 - *iAttributes* := a list of names consisting of one element, "objectSid".
 - If the Get Object Properties Using LDAP operation fails, the value of **MachineSid** MUST be unchanged. Otherwise, the value of **MachineSid** MUST be set to the value returned for the **objectSid** ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.45) attribute.
 - Let **newQueue.Security** be initialized to be empty.
@@ -5036,7 +5036,7 @@ HRESULT Open(
 
 **ShareMode:** A **long** that corresponds to one of the [MQSHARE](#Section_2.2.2.2) (section 2.2.2.2) enumeration values.
 
-**ppq:** A pointer to an [IMSMQQueue4](#Section_3.11.4.1) interface pointer that the [**server**](#gt_server) MUST set with an instance object of [MSMQQueue](#Section_3.14) that represents the open [**queue**](#gt_queue).
+**ppq:** A pointer to an [IMSMQQueue4](#Section_3.11.4.1) interface pointer that the [**server**](#gt_server) MUST set with an instance object of [MSMQQueue](#Section_3.11) that represents the open [**queue**](#gt_queue).
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -5082,7 +5082,7 @@ When processing this call, the [**server**](#gt_server) MUST abide by the follow
 - If *IsLocal* equals False and *IsPublic* equals False:
 - Return an error HRESULT, and take no further action.
 - Look up the queue identified by the *QueueFormatName* instance variable. If the queue exists:
-- If the *QueueFormatName* does not match the ABNF rule MachineQueuePath defined in [MS-MQMQ](#Section_2.2.3) section 2.1.2, the queue is an [ApplicationQueue](#Section_3.1.1.2) and the protocol MUST set *IsApplicationQueue* to True. Otherwise, *IsApplicationQueue* MUST be set to False.
+- If the *QueueFormatName* does not match the ABNF rule MachineQueuePath defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.2, the queue is an [ApplicationQueue](#Section_3.1.1.2) and the protocol MUST set *IsApplicationQueue* to True. Otherwise, *IsApplicationQueue* MUST be set to False.
 - Else:
 - Return an error HRESULT, and take no further action.
 - If *IsApplicationQueue* equals True:
@@ -5376,7 +5376,7 @@ Checking Pathname and QueueFormatName
 Parsing and Expanding Path Name
 
 - Define the *iPathname* variable as a string and set it to **refQueue**.**Pathname**.
-- Parse *iPathname* based on [MS-MQMQ](#Section_2.2.3) section 2.1.1 and define the following variables:
+- Parse *iPathname* based on [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.1 and define the following variables:
 - Define the *iIsSubqueue* variable as a string and set it to TRUE if the [**path name**](#gt_path-name) includes the Subqueue part, otherwise set it to FALSE.
 - Define the *iQueueName* variable as a string and set it to the QueueName part of the path name.
 - Define the *iComputer* variable as a string and set it to the Computer part of the path name.
@@ -5449,7 +5449,7 @@ Retrieving a Message from the **MessagePositionList** of the *referenced queue* 
 <a id="Section_3.11.1"></a>
 ### 3.11.1 Abstract Data Model
 
-An implementation of the [MSMQQueue](#Section_3.14) coclass maintains the following abstract data elements:
+An implementation of the [MSMQQueue](#Section_3.11) coclass maintains the following abstract data elements:
 
 - **OpenQueueDescriptor**: A reference to the OpenQueueDescriptor returned by the Open Queue event. Formally, the term *referenced queue* or **refQueue** is defined as the Queue that is identified by the **QueueReference** property of the OpenQueueDescriptor.
 - **Cursor**: An internal [**cursor**](#gt_cursor), as defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.2, that is used while iterating over the Messages in **the MessagePositionList** of the *referenced queue*. The various states that the **Cursor** transits through are described in [MS-MQDMPR] section 3.2.
@@ -5461,7 +5461,7 @@ The following state machine diagrams describe the different states and transitio
 <a id="Section_3.11.1.1"></a>
 #### 3.11.1.1 Object State Machine
 
-The [MSMQQueue](#Section_3.14) object has two states: **Opened**, which is the initial state of the object when it is obtained by using the [MSMQQueueInfo::Open](#Section_d1a87420f35d4ad39338993b12431368) method; and **Closed**.
+The [MSMQQueue](#Section_3.11) object has two states: **Opened**, which is the initial state of the object when it is obtained by using the [MSMQQueueInfo::Open](#Section_3.10.4.1.28) method; and **Closed**.
 
 ![MSMQQueue object states](media/image2.png)
 
@@ -5472,12 +5472,12 @@ Any call to any method in the object while it is in the **Closed** state MUST re
 <a id="Section_3.11.2"></a>
 ### 3.11.2 Timers
 
-The [MSMQQueue](#Section_3.14) object MUST maintain a timer with each call to receive or peek a Message from the associated [**queue**](#gt_queue) if the client supplied a time-out that is between 0 and INFINITE (0xFFFFFFFF).
+The [MSMQQueue](#Section_3.11) object MUST maintain a timer with each call to receive or peek a Message from the associated [**queue**](#gt_queue) if the client supplied a time-out that is between 0 and INFINITE (0xFFFFFFFF).
 
 <a id="Section_3.11.3"></a>
 ### 3.11.3 Initialization
 
-An [MSMQQueue](#Section_3.14) object MUST be instantiated and initialized by the [**server**](#gt_server) as a result of an invocation of the [MSMQQueueInfo::Open](#Section_d1a87420f35d4ad39338993b12431368) method.
+An [MSMQQueue](#Section_3.11) object MUST be instantiated and initialized by the [**server**](#gt_server) as a result of an invocation of the [MSMQQueueInfo::Open](#Section_3.10.4.1.28) method.
 
 Initialization via an MSMQQueueInfo::Open call results in the following:
 
@@ -5516,7 +5516,7 @@ This coclass includes four interfaces. The numbered interfaces are binary-compat
 | [ReceiveCurrent](#Section_3.11.4.1.16) (Opnum 22) | X | X | X | - |
 | [PeekNext](#Section_3.11.4.1.17) (Opnum 23) | X | X | X | - |
 | [PeekCurrent](#Section_3.11.4.1.18) (Opnum 24) | X | X | X | - |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 25) | X | X | X | - |
+| get [Properties](#Section_3.11.4.1.19) (Opnum 25) | X | X | X | - |
 | get [Handle2](#Section_3.11.4.1.20) (Opnum 26) | X | X | - | - |
 | [ReceiveByLookupId](#Section_3.11.4.1.21) (Opnum 27) | X | X | - | - |
 | [ReceiveNextByLookupId](#Section_3.11.4.1.22) (Opnum 28) | X | X | - | - |
@@ -5565,8 +5565,8 @@ Methods in RPC Opnum Order
 | [ReceiveCurrent](#Section_3.11.4.1.16) | Retrieves the message at the current cursor position and removes it from the queue.<52><53> Opnum: 22 |
 | [PeekNext](#Section_3.11.4.1.17) | Advances the cursor to the next message in the queue and retrieves it without removing it.<54> Opnum: 23 |
 | [PeekCurrent](#Section_3.11.4.1.18) | Retrieves the message at the current cursor position without removing it.<55><56> Opnum: 24 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented.<57> Opnum: 25 |
-| [Handle2, get Handle](#Section_3.11.4.1.4) | Returns the handle of the open queue.<58> Opnum: 26 |
+| [Properties, get Properties](#Section_3.11.4.1.19) | This method is not implemented.<57> Opnum: 25 |
+| [Handle2, get Handle](#Section_3.11.4.1.20) | Returns the handle of the open queue.<58> Opnum: 26 |
 | [ReceiveByLookupId](#Section_3.11.4.1.21) | Retrieves the message with a lookup identifier that is equal to the specified lookup ID and removes it from the queue.<59><60> Opnum: 27 |
 | [ReceiveNextByLookupId](#Section_3.11.4.1.22) | Retrieves the message that follows a message with a lookup identifier equal to the specified lookup ID and removes it from the queue.<61><62> Opnum: 28 |
 | [ReceivePreviousByLookupId](#Section_3.11.4.1.23) | Retrieves the message that precedes a message with a lookup identifier equal to the specified lookup ID and removes it from the queue.<63><64> Opnum: 29 |
@@ -5578,7 +5578,7 @@ Methods in RPC Opnum Order
 | [PeekFirstByLookupId](#Section_3.11.4.1.29) | Retrieves the message at the head of the queue without removing it.<75><76> Opnum: 35 |
 | [PeekLastByLookupId](#Section_3.11.4.1.30) | Retrieves the message at the tail of the queue without removing it.<77><78> Opnum: 36 |
 | [Purge](#Section_3.11.4.1.31) | Deletes all the messages in the queue.<79> Opnum: 37 |
-| [IsOpen2, get IsOpen2](#Section_3.11.4.1.5) | Returns a value indicating whether the queue is open.<80> Opnum: 38 |
+| [IsOpen2, get IsOpen2](#Section_3.11.4.1.32) | Returns a value indicating whether the queue is open.<80> Opnum: 38 |
 | [ReceiveByLookupIdAllowPeek](#Section_3.11.4.1.33) | Retrieves the message with a lookup identifier that equals the specified lookup ID and removes it from the queue.<81> Opnum: 39 |
 
 <a id="Section_3.11.4.1.1"></a>
@@ -5742,7 +5742,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -5780,7 +5780,7 @@ When processing this call, the server MUST follow these guidelines:
 - Define and retrieve *transaction identifier* as described in section [2.2.1](#Section_2.2.1), using the enum numeric value represented by the *Transaction* input parameter.
 - Else:
 - Return an error, and take no further action.
-- Identify the [**transaction**](#gt_transaction), as defined in section [3.1.1](#Section_1.3), from the **TransactionCollection** of the QueueManager, where the value of the Transaction.Identifier property equals the value of the transaction identifier.
+- Identify the [**transaction**](#gt_transaction), as defined in section [3.1.1](#Section_3.1.1), from the **TransactionCollection** of the QueueManager, where the value of the Transaction.Identifier property equals the value of the transaction identifier.
 - If a transaction cannot be located in the QueueManager.**TransactionCollection**:
 - Create a new Transaction object, and set the Transaction object in the QueueManager.**TransactionCollection**. Add the created Transaction object to the QueueManager.**TransactionCollection**.
 - Define *suitable message* as the first Message from the head of the **MessagePositionList** of the *referenced queue* for which the MessagePosition.**State** attribute does not equal **Locked**.
@@ -5796,7 +5796,7 @@ Based on the rStatus, the following actions MUST be taken:
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - If the rStatus is not MQ_OK and the *ReceiveTimeout* input parameter is INFINITE (0xFFFFFFFF):
 - Block this call until a *suitable message* is available.
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the WantBody and WantDestinationQueue input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the WantBody and WantDestinationQueue input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *ReceiveTimeout* input parameter is neither 0 nor INFINITE (0xFFFFFFFF):
 - Block the call until either of the following events occurs:
@@ -5843,7 +5843,7 @@ If this parameter is not specified by the client, the [**server**](#gt_server) M
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -5881,7 +5881,7 @@ When processing this call, the server MUST follow these guidelines:
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - If the *ReceiveTimeout* input parameter is INFINITE (0xFFFFFFFF):
 - Block this call until a *suitable message* is available.
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *ReceiveTimeout* input parameter is neither 0 nor INFINITE (0xFFFFFFFF):
 - Block the call until either of the following events occurs:
@@ -5949,7 +5949,7 @@ Asynchronously:
 - *iCursor*: MUST be set to a reference to the *Cursor* instance variable.
 - If the returned rStatus is not MQ_OK:
 - If the returned rStatus is MQ_ERROR_ILLEGAL_CURSOR_ACTION, and the *ReceiveTimeout* input parameter equals 0:
-- Fire the [ArrivedError](#Section_3.16.4.4.2) (section 3.16.4.4.2) event on the [MSMQEvent](#Section_3.16.4.1) object that is identified by the *Event* input parameter. Specify the *ErrorCode* parameter as MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
+- Fire the [ArrivedError](#Section_3.16.4.4.2) (section 3.16.4.4.2) event on the [MSMQEvent](#Section_3.16) object that is identified by the *Event* input parameter. Specify the *ErrorCode* parameter as MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - If the returned rStatus is MQ_ERROR_IO_TIMEOUT, and the *ReceiveTimeout* input parameter is greater than 0 and does not equal INFINITE, and the time-out identified by the *ReceiveTimeout* input parameter expires:
 - Fire the ArrivedError event on the MSMQEvent object identified by the *Event* input parameter. Specify the *ErrorCode* parameter as MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - Else, if the returned rStatus is MQ_OK:
@@ -6030,7 +6030,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6089,7 +6089,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return an error MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - If the rStatus is MQ_OK:
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Advance the cursor represented by the *Cursor* instance variable.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an enlisted MSMQTransaction instance:
@@ -6126,7 +6126,7 @@ If this parameter is not specified by the client, the [**server**](#gt_server) M
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6171,7 +6171,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return an error MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - If rStatus is MQ_OK:
-- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.13"></a>
@@ -6197,7 +6197,7 @@ If this parameter is not specified by the client, the [**server**](#gt_server) M
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6243,7 +6243,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return an error MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - If rStatus is MQ_OK:
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody* and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.14"></a>
@@ -6281,7 +6281,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6345,7 +6345,7 @@ When processing this call, the server MUST follow these guidelines:
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - If the *ReceiveTimeout* input parameter is INFINITE (0xFFFFFFFF):
 - Block this call until a *suitable message* is available.
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the rStatus is MQ_ERROR_IO_TIMEOUT and if the *ReceiveTimeout* input parameter is neither 0 nor INFINITE (0xFFFFFFFF):
 - Block the call until either of the following events occurs:
@@ -6394,7 +6394,7 @@ If this parameter is not specified by the client, the [**server**](#gt_server) M
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6445,7 +6445,7 @@ When processing this call, the server MUST follow these guidelines:
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - If the *ReceiveTimeout* input parameter is INFINITE (0xFFFFFFFF):
 - Block this call until a *suitable message* is available.
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *ReceiveTimeout* input parameter is neither 0 nor INFINITE (0xFFFFFFFF):
 - Block the call until either of the following events occurs:
@@ -6494,7 +6494,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6562,7 +6562,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return an error MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - If rStatus is MQ_OK:
-- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Advance the cursor represented by the *Cursor* instance variable.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
@@ -6601,7 +6601,7 @@ If this parameter is not specified by the client, the [**server**](#gt_server) M
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6656,7 +6656,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return an error MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - If rStatus is MQ_OK:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.18"></a>
@@ -6684,7 +6684,7 @@ If this parameter is not specified by the client, the [**server**](#gt_server) M
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6739,7 +6739,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return an error MQ_ERROR_IO_TIMEOUT (0xc00e001b), and take no further action.
 - If rStatus is MQ_OK:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.19"></a>
@@ -6819,7 +6819,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6880,7 +6880,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
 - Set the State property of the *suitable message* to Locked.
@@ -6928,7 +6928,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -6975,7 +6975,7 @@ When processing this call, the server MUST follow these guidelines:
 - Return an error, and take no further action.
 - Identify the Transaction from the TransactionCollection of the QueueManager, where the value of the Transaction.Identifier property equals the value of the [**transaction**](#gt_transaction) identifier.
 - If a Transaction cannot be located:
-- Create a new Transaction, and set the Transaction.Identifier property to the value of the *transaction identifier*. Refer to this Transaction as the identified [Transaction](#Section_3.9.4.3.1) from here on.
+- Create a new Transaction, and set the Transaction.Identifier property to the value of the *transaction identifier*. Refer to this Transaction as the identified [Transaction](#Section_2.2.2.1) from here on.
 - Add the created Transaction to the TransactionCollection of the QueueManager.
 - Define *suitable message* as the Message following the position in the MessagePositionList of the *referenced queue* that is identified by the *LookupId* input parameter (as described by the Message.LookupIdentifier), where the [State](#Section_3.5.4.1.1) property of the Message does not equal Locked.
 - Attempt to retrieve the *suitable message* by raising the Read Message By Lookup Identifier event with the following arguments:
@@ -6989,7 +6989,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
 - Set the State property of the *suitable message* to Locked.
@@ -7037,7 +7037,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -7098,7 +7098,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
 - Set the State property of the *suitable message* to Locked.
@@ -7142,7 +7142,7 @@ If this parameter is not specified by the client, the server MUST use the defaul
 
 | Value | Meaning |
 | --- | --- |
-| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17.4.1) object that has the DestinationQueueInfo property set. |
+| VARIANT_TRUE 0xFFFF | The server MUST return an [MSMQMessage](#Section_3.17) object that has the DestinationQueueInfo property set. |
 | VARIANT_FALSE 0x0000 | Default. The server MUST return an MSMQMessage object that does not have the DestinationQueueInfo property set. |
 
 **WantBody:** A pointer to a VARIANT (VT_BOOL).
@@ -7201,7 +7201,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else, if one or more *suitable messages* are available:
-- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message* from *rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
 - Set the [State](#Section_3.5.4.1.1) property of the *suitable message* to Locked.
@@ -7298,7 +7298,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else, if one or more *suitable messages* are available:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
 - Set the [State](#Section_3.5.4.1.1) property of the *suitable message* to Locked.
@@ -7387,7 +7387,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.27"></a>
@@ -7466,7 +7466,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.28"></a>
@@ -7545,7 +7545,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance. Return S_OK (0x00000000), and take no further action.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.29"></a>
@@ -7618,7 +7618,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else, if one or more *suitable messages* are available:
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.30"></a>
@@ -7691,7 +7691,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else, if one or more *suitable messages* are available:
-- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message from rMessage*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantBody*, *WantDestinationQueue*, and *WantConnectorType* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.11.4.1.31"></a>
@@ -7836,7 +7836,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *ppmsg* output parameter to NULL.
 - Return MQ_ERROR_MESSAGE_NOT_FOUND (0xc00e0008), and take no further action.
 - Else:
-- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17).
+- Retrieve the *suitable message*, and instantiate an MSMQMessage instance and initialize it with the *suitable message*, observing the requirements set forth by the *WantConnectorType*, *WantBody*, and *WantDestinationQueue* input parameters. For details of initializing the MSMQMessage object, refer to section [3.17.3](#Section_3.17.3).
 - Set the *ppmsg* output parameter to the newly instantiated MSMQMessage instance.
 - If the *Transaction* input parameter is equal to MQ_MTS_TRANSACTION (0x00000001), MQ_XA_TRANSACTION (0x00000002), or a pointer to an MSMQTransaction instance:
 - Set the State property of the *suitable message* to Locked.
@@ -7870,7 +7870,7 @@ A MSMQDestination object provides methods to identify one or more Queues and to 
 - Open an MSMQDestination object for sending messages to the identified Queues.
 - Close an MSMQDestination object and the corresponding OpenQueueDescriptor.
 - Check whether the MSMQDestination object is ready for use to send messages.
-To identify Queues and prepare an MSMQDestination object for use, one of the following methods MUST be invoked on an instance of this object prior to calling [MSMQDestination::Open](#Section_18130287e795428385117967faf53aa9):
+To identify Queues and prepare an MSMQDestination object for use, one of the following methods MUST be invoked on an instance of this object prior to calling [MSMQDestination::Open](#Section_3.12.4.1.1):
 
 - MSMQDestination::put_ADsPath, to specify the directory path that identifies Queues
 - MSMQDestination::put_PathName, to specify the [**path name**](#gt_path-name) of one or more Queues
@@ -7878,7 +7878,7 @@ To identify Queues and prepare an MSMQDestination object for use, one of the fol
 <a id="Section_3.12.1"></a>
 ### 3.12.1 Abstract Data Model
 
-An implementation of the [MSMQDestination](#Section_3.12) coclass MUST maintain the following abstract data elements:
+An implementation of the [MSMQDestination](#Section_3.12.4.1) coclass MUST maintain the following abstract data elements:
 
 - **DestinationOpenQueueDescriptor**: An **OpenQueueDescriptor** as described in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.16
 - **QueueFormatName**: A string that represents the format name that identifies one or more Queues
@@ -7901,7 +7901,7 @@ When the object is constructed by a client, the [**server**](#gt_server) MUST se
 <a id="Section_3.12.4"></a>
 ### 3.12.4 Message Processing Events and Sequencing Rules
 
-The [MSMQDestination](#Section_3.12) coclass defines two interfaces: [IMSMQDestination](#Section_3.12.4.1) and [IMSMQPrivateDestination](#Section_3.12.4.2).
+The [MSMQDestination](#Section_3.12.4.1) coclass defines two interfaces: [IMSMQDestination](#Section_3.12.4.1) and [IMSMQPrivateDestination](#Section_3.12.4.2).
 
 <a id="Section_3.12.4.1"></a>
 #### 3.12.4.1 IMSMQDestination Interface
@@ -7916,20 +7916,20 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Open](#Section_3.10.4.1.28) | Opens the MSMQDestination object for sending messages to queue or queues identified by the directory path, format name, or path name. Opnum: 7 |
-| [Close](#Section_3.11.4.1.6) | Closes the open MSMQDestination object. Opnum: 8 |
-| [IsOpen, get IsOpen](#Section_3.11.4.1.5) | Returns a Boolean indicating whether the MSMQDestination object is open for sending messages. Opnum: 9 |
+| [Open](#Section_3.12.4.1.1) | Opens the MSMQDestination object for sending messages to queue or queues identified by the directory path, format name, or path name. Opnum: 7 |
+| [Close](#Section_3.12.4.1.2) | Closes the open MSMQDestination object. Opnum: 8 |
+| [IsOpen, get IsOpen](#Section_3.12.4.1.3) | Returns a Boolean indicating whether the MSMQDestination object is open for sending messages. Opnum: 9 |
 | [IADs, get IADs](#Section_3.12.4.1.4) | The IMSMQDestination::get_IADs method is not implemented. Opnum: 10 |
-| [IADs, putref IADs](#Section_3.12.4.1.4) | The IMSMQDestination::put_IADs method is not implemented. Opnum: 11 |
-| [ADsPath, get ADsPath](#Section_3.10.4.1.39) | Returns the directory path that identifies the queue or queues represented by this object. Opnum: 12 |
-| [ADsPath, put ADsPath](#Section_3.10.4.1.39) | Sets the directory path that identifies the queue or queues represented by this object. Opnum: 13 |
-| [PathName, get PathName](#Section_3.10.4.1.6) | Returns the path name that identifies the queue or queues represented by this object. Opnum: 14 |
-| [PathName, put PathName](#Section_3.10.4.1.6) | Sets the path name that identifies the queue represented by this object. Opnum: 15 |
-| [FormatName, get FormatName](#Section_3.3.4.1.2) | Returns the format name that identifies the queue or queues represented by this object. Opnum: 16 |
-| [FormatName, put FormatName](#Section_3.3.4.1.2) | Sets the format name that identifies the queue or queues represented by this object. Opnum: 17 |
-| [Destinations, get Destinations](#Section_3.17.4.1.82) | The IMSMQDestination::get_Destinations method is not implemented. Opnum: 18 |
-| [Destinations, putref Destinations](#Section_3.17.4.1.82) | The IMSMQDestination::put_Destinations method is not implemented. Opnum: 19 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | The IMSMQDestination::get_Properties method is not implemented. Opnum: 20 |
+| [IADs, putref IADs](#Section_3.12.4.1.5) | The IMSMQDestination::put_IADs method is not implemented. Opnum: 11 |
+| [ADsPath, get ADsPath](#Section_3.12.4.1.6) | Returns the directory path that identifies the queue or queues represented by this object. Opnum: 12 |
+| [ADsPath, put ADsPath](#Section_3.12.4.1.7) | Sets the directory path that identifies the queue or queues represented by this object. Opnum: 13 |
+| [PathName, get PathName](#Section_3.12.4.1.8) | Returns the path name that identifies the queue or queues represented by this object. Opnum: 14 |
+| [PathName, put PathName](#Section_3.12.4.1.9) | Sets the path name that identifies the queue represented by this object. Opnum: 15 |
+| [FormatName, get FormatName](#Section_3.12.4.1.10) | Returns the format name that identifies the queue or queues represented by this object. Opnum: 16 |
+| [FormatName, put FormatName](#Section_3.12.4.1.11) | Sets the format name that identifies the queue or queues represented by this object. Opnum: 17 |
+| [Destinations, get Destinations](#Section_3.12.4.1.12) | The IMSMQDestination::get_Destinations method is not implemented. Opnum: 18 |
+| [Destinations, putref Destinations](#Section_3.12.4.1.13) | The IMSMQDestination::put_Destinations method is not implemented. Opnum: 19 |
+| [Properties, get Properties](#Section_3.12.4.1.14) | The IMSMQDestination::get_Properties method is not implemented. Opnum: 20 |
 
 <a id="Section_3.12.4.1.1"></a>
 ##### 3.12.4.1.1 Open (Opnum 7)
@@ -7977,7 +7977,7 @@ When processing this call, the server MUST follow these guidelines:
 <a id="Section_3.12.4.1.3"></a>
 ##### 3.12.4.1.3 IsOpen (Opnum 9)
 
-The IsOpen method is received by the [**server**](#gt_server) in an RPC_REQUEST packet. In response, the server returns a Boolean value indicating whether the [MSMQDestination](#Section_3.12) object is open for sending [**messages**](#gt_message).
+The IsOpen method is received by the [**server**](#gt_server) in an RPC_REQUEST packet. In response, the server returns a Boolean value indicating whether the [MSMQDestination](#Section_3.12.4.1) object is open for sending [**messages**](#gt_message).
 
 [propget] HRESULT IsOpen(
 
@@ -8083,8 +8083,8 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *QueueFormatName* instance variable to the *rFormatName* return value that identifies the queue.
 - Set the *QueuePathName* instance variable to NULL.
 - If the *DestinationOpenQueueDescriptor* instance variable is not equal to NULL, reopen the object by:
-- Calling the [MSMQDestination::Close](#Section_4ae08554470d44739a8095e26e5da0e5) method.
-- Calling the [MSMQDestination::Open](#Section_18130287e795428385117967faf53aa9) method.
+- Calling the [MSMQDestination::Close](#Section_3.12.4.1.2) method.
+- Calling the [MSMQDestination::Open](#Section_3.12.4.1.1) method.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.12.4.1.8"></a>
 ##### 3.12.4.1.8 PathName (Opnum 14)
@@ -8131,8 +8131,8 @@ When processing this call, the [**server**](#gt_server) MUST follow these guidel
 - The server MUST set the QueueFormatName to the value of the FormatName return value.
 - Set the *DirectoryPath* instance variable to NULL.
 - If the *DestinationOpenQueueDescriptor* instance variable is not equal to NULL, reopen the object as follows:
-- Call the [MSMQDestination::Close](#Section_4ae08554470d44739a8095e26e5da0e5) method.
-- Call the [MSMQDestination::Open](#Section_18130287e795428385117967faf53aa9) method.
+- Call the [MSMQDestination::Close](#Section_3.12.4.1.2) method.
+- Call the [MSMQDestination::Open](#Section_3.12.4.1.1) method.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.12.4.1.10"></a>
 ##### 3.12.4.1.10 FormatName (Opnum 16)
@@ -8145,7 +8145,7 @@ The FormatName method is received by the server in an RPC_REQUEST packet. In res
 
 );
 
-**pbstrFormatName:** A pointer to a BSTR that contains the format name of the queue or queues represented by the [MSMQDestination](#Section_3.12) object.
+**pbstrFormatName:** A pointer to a BSTR that contains the format name of the queue or queues represented by the [MSMQDestination](#Section_3.12.4.1) object.
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -8164,7 +8164,7 @@ The FormatName method is received by the server in an RPC_REQUEST packet. In res
 
 );
 
-**bstrFormatName:** A BSTR that contains the format name of the queue or queues represented by the [MSMQDestination](#Section_3.12) object.
+**bstrFormatName:** A BSTR that contains the format name of the queue or queues represented by the [MSMQDestination](#Section_3.12.4.1) object.
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -8174,8 +8174,8 @@ When processing this call, the server MUST follow these guidelines:
 - Set the *QueuePathName* instance variable to NULL.
 - Set the DirectoryPath instance variable to NULL.
 - If the *DestinationOpenQueueDescriptor* instance variable is not equal to NULL, reopen the object as follows:
-- Call the [MSMQDestination::Close](#Section_4ae08554470d44739a8095e26e5da0e5) method.
-- Call the [MSMQDestination::Open](#Section_18130287e795428385117967faf53aa9) method.
+- Call the [MSMQDestination::Close](#Section_3.12.4.1.2) method.
+- Call the [MSMQDestination::Open](#Section_3.12.4.1.1) method.
 - Return S_OK (0x00000000), and take no further action.
 <a id="Section_3.12.4.1.12"></a>
 ##### 3.12.4.1.12 Destinations (Opnum 18)
@@ -8253,8 +8253,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Handle, get Handle](#Section_3.11.4.1.4) | Returns the handle of the open queue. Opnum: 7 |
-| [Handle, put handle](#Section_3.11.4.1.4) | Sets the handle of the open queue. Opnum: 8 |
+| [Handle, get Handle](#Section_3.12.4.2.1) | Returns the handle of the open queue. Opnum: 7 |
+| [Handle, put handle](#Section_3.12.4.2.2) | Sets the handle of the open queue. Opnum: 8 |
 
 <a id="Section_3.12.4.2.1"></a>
 ##### 3.12.4.2.1 Handle (Opnum 7)
@@ -8278,7 +8278,7 @@ When processing this call, the server MUST follow these guidelines:
 <a id="Section_3.12.4.2.2"></a>
 ##### 3.12.4.2.2 Handle (Opnum 8)
 
-The Handle method is received by the [**server**](#gt_server) in an RPC_REQUEST packet. In response, the server sets the *QueueHandle* instance variable that identifies the OpenQueueDescriptor. This method is internally used by other MSMQ objects like [MSMQMessage](#Section_3.17.4.1).
+The Handle method is received by the [**server**](#gt_server) in an RPC_REQUEST packet. In response, the server sets the *QueueHandle* instance variable that identifies the OpenQueueDescriptor. This method is internally used by other MSMQ objects like [MSMQMessage](#Section_3.17).
 
 [propput] HRESULT Handle(
 
@@ -8379,10 +8379,10 @@ This coclass includes four interfaces. The numbered interfaces are binary-compat
 | Method name (in the most recent interface revision) | Rev. 4 | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- | --- |
 | [LookupQueue_v2](#Section_3.13.4.1.1) (Opnum 7) | X | X | X | X |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 8) | X | X | X | - |
+| get [Properties](#Section_3.13.4.1.2) (Opnum 8) | X | X | X | - |
 | [LookupQueue](#Section_3.13.4.1.3) (Opnum 9) | X | X | - | - |
 
-The interfaces represent revisions to the [MSMQQuery](#Section_3.13.4.1) class over time. IMSMQQuery is the oldest interface, and [IMSMQQuery4](#Section_3.13.4.1) is the newest.
+The interfaces represent revisions to the [MSMQQuery](#Section_3.13) class over time. IMSMQQuery is the oldest interface, and [IMSMQQuery4](#Section_3.13.4.1) is the newest.
 
 <a id="Section_3.13.4.1"></a>
 #### 3.13.4.1 IMSMQQuery4 Interface
@@ -8400,7 +8400,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [LookupQueue_v2](#Section_3.13.4.1.1) | Creates and returns an MSMQQueueInfos object, which defines a query that can be used to locate public queues.<82> Opnum: 7 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | Not implemented.<83> Opnum: 8 |
+| [Properties, get Properties](#Section_3.13.4.1.2) | Not implemented.<83> Opnum: 8 |
 | [LookupQueue](#Section_3.13.4.1.3) | Creates and returns an MSMQQueueInfos object, which defines a query that can be used to locate public queues. This method supersedes LookupQueue_v2 and includes additional query parameters.<84><85> Opnum: 9 |
 
 <a id="Section_3.13.4.1.1"></a>
@@ -8482,7 +8482,7 @@ When processing this call, the server MUST follow these guidelines:
 - Add: "CreateTime" *RelCreateTimeOpCreateTime*
 - If *ModifyTime* is not unspecified (VT_ERROR) AND *RelModifyTime* is not REL_NOP:
 - Add: "ModifyTime" *RelModifyTimeOpModifyTime*
-- Create and initialize a new MSMQQueueInfos instance object, and pass the values of the following input parameters to the initialization of the MSMQQueueInfos instance object. For information about the initialization process, refer to section [3.14.3](#Section_3.14). These values are referred to as query constraints.
+- Create and initialize a new MSMQQueueInfos instance object, and pass the values of the following input parameters to the initialization of the MSMQQueueInfos instance object. For information about the initialization process, refer to section [3.14.3](#Section_3.14.3). These values are referred to as query constraints.
 - If initialization of the MSMQQueueInfos object instance succeeds:
 - Obtain a pointer to the **IMSMQQueueInfos4** interface by calling **IUnknown:QueryInterface** (see section [3.1](#Section_3.1)) on the newly-created *MSMQQueueInfos* object with the interface identifier of **IMSMQQueueInfos4**.
 - Set the *ppqinfos* output parameter to the previously-obtained **IMSMQQueueInfos4** interface pointer.
@@ -8599,7 +8599,7 @@ When processing this call, the server MUST follow these guidelines:
 - Add: " ModifyTime" *RelModifyTimeOpModifyTime*.
 - If *MulticastAddress* is not unspecified (VT_ERROR) AND *RelMulticastAddress* is not REL_NOP:
 - Add: " MulticastAddress" *RelMulticastAddressOpMulticastAddress*.
-- Create and initialize a new *MSMQQueueInfos* instance object, and pass *queryFilter* to the initialization of the *MSMQQueueInfos* instance object. For information about the initialization process, refer to section [3.14.3](#Section_3.14). These values are referred to as query constraints.
+- Create and initialize a new *MSMQQueueInfos* instance object, and pass *queryFilter* to the initialization of the *MSMQQueueInfos* instance object. For information about the initialization process, refer to section [3.14.3](#Section_3.14.3). These values are referred to as query constraints.
 - If initialization of the *MSMQQueueInfos* object instance succeeds:
 - Obtain a pointer to the **IMSMQQueueInfos4** interface by calling **IUnknown:QueryInterface** (see section [3.1](#Section_3.1)) on the newly-created *MSMQQueueInfos* object with the interface identifier of **IMSMQQueueInfos4**.
 - Set the *ppqinfos* output parameter to the previously-obtained **IMSMQQueueInfos4** interface pointer.
@@ -8618,7 +8618,7 @@ None.
 <a id="Section_3.14"></a>
 ## 3.14 MSMQQueueInfos Coclass Details
 
-The MSMQQueueInfos coclass is created by an [MSMQQuery](#Section_3.13.4.1) object and is used by a client application to query for and enumerate over a collection of [**public queues**](#gt_public-queue) from the directory. An MSMQQueueInfos object dynamically queries the directory, and therefore the query results collection might change if new public queues are added that match the query constraints or if an existing public queue's properties are modified so that they no longer match the specified query constraints.
+The MSMQQueueInfos coclass is created by an [MSMQQuery](#Section_3.13) object and is used by a client application to query for and enumerate over a collection of [**public queues**](#gt_public-queue) from the directory. An MSMQQueueInfos object dynamically queries the directory, and therefore the query results collection might change if new public queues are added that match the query constraints or if an existing public queue's properties are modified so that they no longer match the specified query constraints.
 
 <a id="Section_3.14.1"></a>
 ### 3.14.1 Abstract Data Model
@@ -8636,7 +8636,7 @@ None.
 <a id="Section_3.14.3"></a>
 ### 3.14.3 Initialization
 
-The [**server**](#gt_server) MUST provide an instance of this object to the client in an initialized state as a result of [MSMQQuery::LookupQueue_v2](#Section_ca768a59b51e4f8ca0a850613d8f90e0) (section 3.13.4.1.1) or [MSMQQuery::LookupQueue](#Section_1f17f54de0864dff9e8687c2b0165739) (section 3.13.4.1.3) calls. To initialize the object, the query constraints MUST be set by the [MSMQQuery](#Section_3.13.4.1) object that created this instance.
+The [**server**](#gt_server) MUST provide an instance of this object to the client in an initialized state as a result of [MSMQQuery::LookupQueue_v2](#Section_ca768a59b51e4f8ca0a850613d8f90e0) (section 3.13.4.1.1) or [MSMQQuery::LookupQueue](#Section_1f17f54de0864dff9e8687c2b0165739) (section 3.13.4.1.3) calls. To initialize the object, the query constraints MUST be set by the [MSMQQuery](#Section_3.13) object that created this instance.
 
 - The initialized query constraints MUST be used to populate the *ResultQueueCollection* instance variable. The server MUST populate the *ResultQueueCollection* instance variable by generating a Read Directory event ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.20) with an attribute-filter set that constrains the returned set of Queues according to the specified query constraints
 - After initialization is complete, the server MUST set the *IsInitialized* instance variable to True.
@@ -8649,9 +8649,9 @@ This coclass includes four interfaces. The numbered interfaces are binary-compat
 
 | Method name (in the most recent interface revision) | Rev. 4 | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- | --- |
-| [Reset](#Section_3.11.4.1.10) (Opnum 7) | X | X | X | X |
+| [Reset](#Section_3.14.4.1.1) (Opnum 7) | X | X | X | X |
 | [Next](#Section_3.14.4.1.2) (Opnum 8) | X | X | X | X |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 9) | X | X | X | - |
+| get [Properties](#Section_3.14.4.1.3) (Opnum 9) | X | X | X | - |
 
 <a id="Section_3.14.4.1"></a>
 #### 3.14.4.1 IMSMQQueueInfos4 Interface
@@ -8668,9 +8668,9 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Reset](#Section_3.11.4.1.10) | Moves the *CollectionCursor* instance variable to the head of the *QueueCollection* instance variable. Opnum: 7 |
+| [Reset](#Section_3.14.4.1.1) | Moves the *CollectionCursor* instance variable to the head of the *QueueCollection* instance variable. Opnum: 7 |
 | [Next](#Section_3.14.4.1.2) | Returns an MSMQQueueInfo object that represents the next [**public queue**](#gt_public-queue) in the *ResultQueueCollection* instance variable.<86> Opnum: 8 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented.<87> Opnum: 9 |
+| [Properties, get Properties](#Section_3.14.4.1.3) | This method is not implemented.<87> Opnum: 9 |
 
 <a id="Section_3.14.4.1.1"></a>
 ##### 3.14.4.1.1 Reset (Opnum 7)
@@ -8750,7 +8750,7 @@ None.
 <a id="Section_3.15"></a>
 ## 3.15 MSMQCollection Coclass Details
 
-The MSMQCollection coclass encapsulates a collection of VARIANT values and is used by [MSMQOutgoingQueueManagement](#Section_3.5) and [MSMQQueueManagement](#Section_3.4.4.1) to provide sets of property values to the client.
+The MSMQCollection coclass encapsulates a collection of VARIANT values and is used by [MSMQOutgoingQueueManagement](#Section_3.5.4.1) and [MSMQQueueManagement](#Section_3.4.4.1) to provide sets of property values to the client.
 
 <a id="Section_3.15.1"></a>
 ### 3.15.1 Abstract Data Model
@@ -8864,12 +8864,12 @@ None.
 <a id="Section_3.16"></a>
 ## 3.16 MSMQEvent Coclass Details
 
-The MSMQEvent object provides an event notification facility that a client can configure to receive asynchronous notifications regarding the availability of Messages in a specific Queue. The relationship between the [MSMQQueue](#Section_3.14) object instance representing the specific Queue and the MSMQEvent is established through the [MSMQQueue4::EnableNotification](#Section_e9d4a14a497948ef8b42ef251f1ec592) method. The MSMQEvent class MUST support the IConnectionPoint and IConnectionPointContainer interfaces through which client callbacks are implemented. Each client that registers with an MSMQEvent object instance MUST provide a valid pointer to an object that implements the [_DMSMQEventEvents](#Section_3.16.4.4) interface. For further information regarding the IConnectionPoint and IConnectionPointContainer interfaces, refer to [Box98].
+The MSMQEvent object provides an event notification facility that a client can configure to receive asynchronous notifications regarding the availability of Messages in a specific Queue. The relationship between the [MSMQQueue](#Section_3.11) object instance representing the specific Queue and the MSMQEvent is established through the [MSMQQueue4::EnableNotification](#Section_e9d4a14a497948ef8b42ef251f1ec592) method. The MSMQEvent class MUST support the IConnectionPoint and IConnectionPointContainer interfaces through which client callbacks are implemented. Each client that registers with an MSMQEvent object instance MUST provide a valid pointer to an object that implements the [_DMSMQEventEvents](#Section_3.16.4.4) interface. For further information regarding the IConnectionPoint and IConnectionPointContainer interfaces, refer to [Box98].
 
 <a id="Section_3.16.1"></a>
 ### 3.16.1 Abstract Data Model
 
-The [MSMQEvent](#Section_3.16.4.1) object MUST maintain the following data elements:
+The [MSMQEvent](#Section_3.16) object MUST maintain the following data elements:
 
 - **ConnectionCollection**
 A collection of [_DMSMQEventEvents](#Section_3.16.4.4) (section 3.16.4.4) interface pointers that are implemented by the client applications. These pointers can be used to call back to the client to notify the client that an event has been raised. The collection MUST be stored as a key/value pair association. The key for each item is an integer value, referred to here as a *ConnectionCookie*, that uniquely identifies each item within the *ConnectionCollection* instance variable. The value associated with each key is a _DMSMQEventEvents interface pointer.
@@ -8894,7 +8894,7 @@ This coclass defines three numbered interfaces that are binary-compatible revisi
 
 | Method name (in the most recent interface revision) | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 7) | X | X | - |
+| get [Properties](#Section_3.16.4.1.1) (Opnum 7) | X | X | - |
 
 Additionally, the [**server**](#gt_server) MUST implement the standard DCOM event interfaces: [IConnectionPoint](#Section_3.16.4.5) and [IConnectionPointContainer](#Section_3.16.4.6). The server MAY implement the [IMSMQPrivateEvent](#Section_3.16.4.3) interface.
 
@@ -8915,7 +8915,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented.<88> Opnum: 7 |
+| [Properties, get Properties](#Section_3.16.4.1.1) | This method is not implemented.<88> Opnum: 7 |
 
 <a id="Section_3.16.4.1.1"></a>
 ##### 3.16.4.1.1 Properties (Opnum 7)
@@ -9001,7 +9001,7 @@ HRESULT FireArrivedEvent(
 
 **pq:** A pointer to an [IMSMQQueue](#Section_3.11.4.1) interface that upon success will be cast to an IDispatch pointer.
 
-**msgcursor:** A **long** value that specifies the value of the [**cursor**](#gt_cursor) option that was specified through the *Cursor* input parameter that was passed to the [IMSMQQueue4::EnableNotification](#Section_e9d4a14a497948ef8b42ef251f1ec592) operation to associate this [MSMQEvent](#Section_3.16.4.1) with [MSMQQueue](#Section_3.14). This parameter corresponds to the [MQMSGCURSOR](#Section_2.2.2.8) (section 2.2.2.8) enum.
+**msgcursor:** A **long** value that specifies the value of the [**cursor**](#gt_cursor) option that was specified through the *Cursor* input parameter that was passed to the [IMSMQQueue4::EnableNotification](#Section_e9d4a14a497948ef8b42ef251f1ec592) operation to associate this [MSMQEvent](#Section_3.16) with [MSMQQueue](#Section_3.11). This parameter corresponds to the [MQMSGCURSOR](#Section_2.2.2.8) (section 2.2.2.8) enum.
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -9030,7 +9030,7 @@ HRESULT FireArrivedErrorEvent(
 
 **hrStatus:** An HRESULT value that specifies the error code that was received from the Queue where the Message was delivered.
 
-**msgcursor:** A **long** value that specifies the value of the [**cursor**](#gt_cursor) option that was specified through the *Cursor* input parameter that was passed to the [IMSMQQueue4::EnableNotification](#Section_e9d4a14a497948ef8b42ef251f1ec592) operation to associate this [MSMQEvent](#Section_3.16.4.1) with the [**queue**](#gt_queue). This parameter corresponds to the [MQMSGCURSOR](#Section_2.2.2.8) (section 2.2.2.8) enum.
+**msgcursor:** A **long** value that specifies the value of the [**cursor**](#gt_cursor) option that was specified through the *Cursor* input parameter that was passed to the [IMSMQQueue4::EnableNotification](#Section_e9d4a14a497948ef8b42ef251f1ec592) operation to associate this [MSMQEvent](#Section_3.16) with the [**queue**](#gt_queue). This parameter corresponds to the [MQMSGCURSOR](#Section_2.2.2.8) (section 2.2.2.8) enum.
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -9092,7 +9092,7 @@ void ArrivedError(
 
 );
 
-**Queue:** A pointer to an IDispatch interface for the [MSMQQueue](#Section_3.14) that is associated with the event.
+**Queue:** A pointer to an IDispatch interface for the [MSMQQueue](#Section_3.11) that is associated with the event.
 
 **ErrorCode:** A **long** value that specifies the error code. The error code is an HRESULT casted to **long**.<91>
 
@@ -9122,7 +9122,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.16.4.5.1"></a>
 ##### 3.16.4.5.1 GetConnectionInterface (Opnum 3)
 
-The GetConnectionInterface method is received by the server in an RPC_REQUEST packet. In response, the server MUST return a pointer to the [**IID**](#gt_interface-identifier-iid) of the interface that client applications MUST implement for the [MSMQEvent](#Section_3.16.4.1) object to be able to notify them when an event is raised.
+The GetConnectionInterface method is received by the server in an RPC_REQUEST packet. In response, the server MUST return a pointer to the [**IID**](#gt_interface-identifier-iid) of the interface that client applications MUST implement for the [MSMQEvent](#Section_3.16) object to be able to notify them when an event is raised.
 
 HRESULT GetConnectionInterface(
 
@@ -9143,7 +9143,7 @@ When processing this call, the [**server**](#gt_server) MUST follow these guidel
 <a id="Section_3.16.4.5.2"></a>
 ##### 3.16.4.5.2 GetConnectionPointContainer (Opnum 4)
 
-The GetConnectionPointContainer method is received by the server in an RPC_REQUEST packet. In response, the server MUST return a pointer to a pointer to an [IConnectionPointContainer](#Section_3.16.4.6) interface for the [MSMQEvent](#Section_3.16.4.1) object.
+The GetConnectionPointContainer method is received by the server in an RPC_REQUEST packet. In response, the server MUST return a pointer to a pointer to an [IConnectionPointContainer](#Section_3.16.4.6) interface for the [MSMQEvent](#Section_3.16) object.
 
 HRESULT GetConnectionPointContainer(
 
@@ -9235,7 +9235,7 @@ When processing this call, the [**server**](#gt_server) MUST follow these guidel
 - If the *ppEnum* output parameter equals NULL:
 - Return E_POINTER (0x80000005), and take no further action.
 - If the server does not implement this method, return E_NOTIMPL (0x80004001) and take no further action.
-- Set the *ppEnum* output parameter to a pointer to an IEnumConnections interface for the [MSMQEvent](#Section_3.16.4.1) object instance. The *ppEnum* output parameter will enable enumeration of all the currently registered callback objects that exist in the *ConnectionCollection* instance variable.
+- Set the *ppEnum* output parameter to a pointer to an IEnumConnections interface for the [MSMQEvent](#Section_3.16) object instance. The *ppEnum* output parameter will enable enumeration of all the currently registered callback objects that exist in the *ConnectionCollection* instance variable.
 <a id="Section_3.16.4.6"></a>
 #### 3.16.4.6 IConnectionPointContainer Interface
 
@@ -9255,7 +9255,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.16.4.6.1"></a>
 ##### 3.16.4.6.1 EnumConnectionPoints (Opnum 3)
 
-The EnumConnectionPoints method is received by the server in an RPC_REQUEST packet. In response, the server MUST return a pointer to an IEnumConnectionPoints interface pointer, as defined in [[MSDN-ECP]](https://go.microsoft.com/fwlink/?LinkId=128916), that can be used by the client to enumerate all the IConnectionPoint implementations for the [MSMQEvent](#Section_3.16.4.1) object.
+The EnumConnectionPoints method is received by the server in an RPC_REQUEST packet. In response, the server MUST return a pointer to an IEnumConnectionPoints interface pointer, as defined in [[MSDN-ECP]](https://go.microsoft.com/fwlink/?LinkId=128916), that can be used by the client to enumerate all the IConnectionPoint implementations for the [MSMQEvent](#Section_3.16) object.
 
 HRESULT EnumConnectionPoints(
 
@@ -9298,7 +9298,7 @@ When processing this call, the [**server**](#gt_server) MUST follow these guidel
 - If the *riid* input parameter is NOT equal to the IID of the [_DMSMQEventEvents](#Section_3.16.4.4) interface ({D7D6E078-DCCD-11d0-AA4B-0060970DEBAE}):
 - Return CONNECT_E_NOCONNECTION (0x80040200), and take no further action.
 - Else:
-- Set the *ppCP* output parameter to a pointer to an IConnectionPoint interface for the [MSMQEvent](#Section_3.16.4.1) object.
+- Set the *ppCP* output parameter to a pointer to an IConnectionPoint interface for the [MSMQEvent](#Section_3.16) object.
 <a id="Section_3.16.5"></a>
 ### 3.16.5 Timer Events
 
@@ -9317,7 +9317,7 @@ The MSMQMessage coclass represents a single instance of a Message. It provides m
 <a id="Section_3.17.1"></a>
 ### 3.17.1 Abstract Data Model
 
-The [MSMQMessage](#Section_3.17.4.1) class represents a single instance of a Message. For specific details of the data elements, refer to [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
+The [MSMQMessage](#Section_3.17) class represents a single instance of a Message. For specific details of the data elements, refer to [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 In addition to supporting Message ADM data elements, the MSMQMessage object MUST maintain the following data elements:
 
@@ -9331,7 +9331,7 @@ An instance state variable, of type BSTR, that holds a string value containing e
 An instance state variable, of type BSTR, that holds a string value containing extra SOAP elements that can be specified by the client application to be appended to the header of an SRMP message.
 
 - **SenderIdentifierCache**
-An instance state variable that is of the same type as the Sender Identifier property of a Message. This allows the user to cache the value of the Sender Identifier property for optimization when sending multiple Messages with the same Sender Identifier property value. It is set with the [AttachCurrentSecurityContext](#Section_3.1.4.1) (section 3.17.4.1.49) and [AttachCurrentSecurityContext2](#Section_3.1.4.1) (section 3.17.4.1.87) functions. This instance variable persists its value for the lifetime of the MSMQMessage object, and once it is set, it can be altered only by subsequent calls to the AttachCurrentSecurityContext and AttachCurrentSecurityContext2 functions.
+An instance state variable that is of the same type as the Sender Identifier property of a Message. This allows the user to cache the value of the Sender Identifier property for optimization when sending multiple Messages with the same Sender Identifier property value. It is set with the [AttachCurrentSecurityContext](#Section_3.17.4.1.49) (section 3.17.4.1.49) and [AttachCurrentSecurityContext2](#Section_3.17.4.1.87) (section 3.17.4.1.87) functions. This instance variable persists its value for the lifetime of the MSMQMessage object, and once it is set, it can be altered only by subsequent calls to the AttachCurrentSecurityContext and AttachCurrentSecurityContext2 functions.
 
 - **SenderCertificateCache**
 An instance state variable that is of the same type as the Sender Certificate property of a Message. This allows the user to cache the value of the Sender Certificate property for optimization when sending multiple Messages with the same Sender Certificate property value. It is set with the AttachCurrentSecurityContext (section 3.17.4.1.49) and AttachCurrentSecurityContext2 (section 3.17.4.1.87) functions. This instance variable persists its value for the lifetime of the MSMQMessage object, and once it is set, it can be altered only by subsequent calls to the AttachCurrentSecurityContext (section 3.17.4.1.49) and AttachCurrentSecurityContext2 (section 3.17.4.1.87) functions.
@@ -9344,7 +9344,7 @@ None.
 <a id="Section_3.17.3"></a>
 ### 3.17.3 Initialization
 
-An [MSMQMessage](#Section_3.17.4.1) object can be initialized in two different ways: when it is created by the client application for sending or when it is created during the processing rules of a method provided by one of the interfaces of the [MSMQQueue](#Section_3.14) coclass that returns a pointer to an MSMQMessage object, such as the [Receive](#Section_3.11.4.1.14) method described in section 3.11.4.1.14.
+An [MSMQMessage](#Section_3.17) object can be initialized in two different ways: when it is created by the client application for sending or when it is created during the processing rules of a method provided by one of the interfaces of the [MSMQQueue](#Section_3.11) coclass that returns a pointer to an MSMQMessage object, such as the [Receive](#Section_3.11.4.1.14) method described in section 3.11.4.1.14.
 
 When a [**message**](#gt_message) is created by one of the MSMQQueue coclass methods, unless otherwise stated in the MSMQQueue method, the initialized values for the MSMQMessage object are populated with the corresponding values in the Message that was retrieved from a Queue's MessagePositionList. The default values for the MSMQMessage object which do not have a corresponding value in the Message object are shown in the column labeled "Initial value-MSMQQueue created" in the following table.
 
@@ -9408,92 +9408,92 @@ This coclass includes four interfaces. The numbered interfaces are binary-compat
 | Method name (in the most recent interface revision) | Rev. 4 | Rev. 3 | Rev. 2 | Rev. 1 |
 | --- | --- | --- | --- | --- |
 | get [Class](#Section_3.17.4.1.1) (Opnum 7) | X | X | X | X |
-| get [PrivLevel](#Section_3.10.4.1.11) (Opnum 8) | X | X | X | X |
-| put [PrivLevel](#Section_3.10.4.1.11) (Opnum 9) | X | X | X | X |
+| get [PrivLevel](#Section_3.17.4.1.2) (Opnum 8) | X | X | X | X |
+| put [PrivLevel](#Section_3.17.4.1.3) (Opnum 9) | X | X | X | X |
 | get [AuthLevel](#Section_3.17.4.1.4) (Opnum 10) | X | X | X | X |
-| put [AuthLevel](#Section_3.17.4.1.4) (Opnum 11) | X | X | X | X |
+| put [AuthLevel](#Section_3.17.4.1.5) (Opnum 11) | X | X | X | X |
 | get [IsAuthenticated](#Section_3.17.4.1.6) (Opnum 12) | X | X | X | X |
 | get [Delivery](#Section_3.17.4.1.7) (Opnum 13) | X | X | X | X |
-| put [Delivery](#Section_3.17.4.1.7) (Opnum 14) | X | X | X | X |
+| put [Delivery](#Section_3.17.4.1.8) (Opnum 14) | X | X | X | X |
 | get [Trace](#Section_3.17.4.1.9) (Opnum 15) | X | X | X | X |
-| put [Trace](#Section_3.17.4.1.9) (Opnum 16) | X | X | X | X |
+| put [Trace](#Section_3.17.4.1.10) (Opnum 16) | X | X | X | X |
 | get [Priority](#Section_3.17.4.1.11) (Opnum 17) | X | X | X | X |
-| put [Priority](#Section_3.17.4.1.11) (Opnum 18) | X | X | X | X |
-| get [Journal](#Section_3.10.4.1.13) (Opnum 19) | X | X | X | X |
-| put [Journal](#Section_3.10.4.1.13) (Opnum 20) | X | X | X | X |
+| put [Priority](#Section_3.17.4.1.12) (Opnum 18) | X | X | X | X |
+| get [Journal](#Section_3.17.4.1.13) (Opnum 19) | X | X | X | X |
+| put [Journal](#Section_3.17.4.1.14) (Opnum 20) | X | X | X | X |
 | get [ResponseQueueInfo_v1](#Section_3.17.4.1.15) (Opnum 21) | X | X | X | X |
-| putref [ResponseQueueInfo_v1](#Section_3.17.4.1.15) (Opnum 22) | X | X | X | X |
+| putref [ResponseQueueInfo_v1](#Section_3.17.4.1.16) (Opnum 22) | X | X | X | X |
 | get [AppSpecific](#Section_3.17.4.1.17) (Opnum 23) | X | X | X | X |
-| put [AppSpecific](#Section_3.17.4.1.17) (Opnum 24) | X | X | X | X |
+| put [AppSpecific](#Section_3.17.4.1.18) (Opnum 24) | X | X | X | X |
 | get [SourceMachineGuid](#Section_3.17.4.1.19) (Opnum 25) | X | X | X | X |
 | get [BodyLength](#Section_3.17.4.1.20) (Opnum 26) | X | X | X | X |
 | get [Body](#Section_3.17.4.1.21) (Opnum 27) | X | X | X | X |
-| put [Body](#Section_3.17.4.1.21) (Opnum 28) | X | X | X | X |
+| put [Body](#Section_3.17.4.1.22) (Opnum 28) | X | X | X | X |
 | get [AdminQueueInfo_v1](#Section_3.17.4.1.23) (Opnum 29) | X | X | X | X |
-| putref [AdminQueueInfo_v1](#Section_3.17.4.1.23) (Opnum 30) | X | X | X | X |
+| putref [AdminQueueInfo_v1](#Section_3.17.4.1.24) (Opnum 30) | X | X | X | X |
 | get [Id](#Section_3.17.4.1.25) (Opnum 31) | X | X | X | X |
 | get [CorrelationId](#Section_3.17.4.1.26) (Opnum 32) | X | X | X | X |
-| put [CorrelationId](#Section_3.17.4.1.26) (Opnum 33) | X | X | X | X |
+| put [CorrelationId](#Section_3.17.4.1.27) (Opnum 33) | X | X | X | X |
 | get [Ack](#Section_3.17.4.1.28) (Opnum 34) | X | X | X | X |
-| put [Ack](#Section_3.17.4.1.28) (Opnum 35) | X | X | X | X |
-| get [Label](#Section_3.10.4.1.4) (Opnum 36) | X | X | X | X |
-| put [Label](#Section_3.10.4.1.4) (Opnum 37) | X | X | X | X |
+| put [Ack](#Section_3.17.4.1.29) (Opnum 35) | X | X | X | X |
+| get [Label](#Section_3.17.4.1.30) (Opnum 36) | X | X | X | X |
+| put [Label](#Section_3.17.4.1.31) (Opnum 37) | X | X | X | X |
 | get [MaxTimeToReachQueue](#Section_3.17.4.1.32) (Opnum 38) | X | X | X | X |
-| put [MaxTimeToReachQueue](#Section_3.17.4.1.32) (Opnum 39) | X | X | X | X |
+| put [MaxTimeToReachQueue](#Section_3.17.4.1.33) (Opnum 39) | X | X | X | X |
 | get [MaxTimeToReceive](#Section_3.17.4.1.34) (Opnum 40) | X | X | X | X |
-| put [MaxTimeToReceive](#Section_3.17.4.1.34) (Opnum 41) | X | X | X | X |
+| put [MaxTimeToReceive](#Section_3.17.4.1.35) (Opnum 41) | X | X | X | X |
 | get [HashAlgorithm](#Section_3.17.4.1.36) (Opnum 42) | X | X | X | X |
-| put [HashAlgorithm](#Section_3.17.4.1.36) (Opnum 43) | X | X | X | X |
+| put [HashAlgorithm](#Section_3.17.4.1.37) (Opnum 43) | X | X | X | X |
 | get [EncryptAlgorithm](#Section_3.17.4.1.38) (Opnum 44) | X | X | X | X |
-| put [EncryptAlgorithm](#Section_3.17.4.1.38) (Opnum 45) | X | X | X | X |
+| put [EncryptAlgorithm](#Section_3.17.4.1.39) (Opnum 45) | X | X | X | X |
 | get [SentTime](#Section_3.17.4.1.40) (Opnum 46) | X | X | X | X |
 | get [ArrivedTime](#Section_3.17.4.1.41) (Opnum 47) | X | X | X | X |
 | get [DestinationQueueInfo](#Section_3.17.4.1.42) (Opnum 48) | X | X | X | X |
 | get [SenderCertificate](#Section_3.17.4.1.43) (Opnum 49) | X | X | X | X |
-| put [SenderCertificate](#Section_3.17.4.1.43) (Opnum 50) | X | X | X | X |
+| put [SenderCertificate](#Section_3.17.4.1.44) (Opnum 50) | X | X | X | X |
 | get [SenderId](#Section_3.17.4.1.45) (Opnum51) | X | X | X | X |
 | get [SenderIdType](#Section_3.17.4.1.46) (Opnum 52) | X | X | X | X |
-| put [SenderIdType](#Section_3.17.4.1.46) (Opnum 53) | X | X | X | X |
+| put [SenderIdType](#Section_3.17.4.1.47) (Opnum 53) | X | X | X | X |
 | [Send](#Section_3.17.4.1.48) (Opnum 54) | X | X | X | X |
-| [AttachCurrentSecurityContext](#Section_3.1.4.1) (Opnum 55) | X | X | X | X |
+| [AttachCurrentSecurityContext](#Section_3.17.4.1.49) (Opnum 55) | X | X | X | X |
 | get [SenderVersion](#Section_3.17.4.1.50) (Opnum 56) | X | X | X | - |
 | get [Extension](#Section_3.17.4.1.51) (Opnum 57) | X | X | X | - |
-| put [Extension](#Section_3.17.4.1.51) (Opnum 58) | X | X | X | - |
+| put [Extension](#Section_3.17.4.1.52) (Opnum 58) | X | X | X | - |
 | get [ConnectorTypeGuid](#Section_3.17.4.1.53) (Opnum 59) | X | X | X | - |
-| put [ConnectorTypeGuid](#Section_3.17.4.1.53) (Opnum 60) | X | X | X | - |
+| put [ConnectorTypeGuid](#Section_3.17.4.1.54) (Opnum 60) | X | X | X | - |
 | get [TransactionStatusQueueInfo](#Section_3.17.4.1.55) (Opnum 61) | X | X | X | - |
 | get [DestinationSymmetricKey](#Section_3.17.4.1.56) (Opnum 62) | X | X | X | - |
-| put [DestinationSymmetricKey](#Section_3.17.4.1.56) (Opnum 63) | X | X | X | - |
+| put [DestinationSymmetricKey](#Section_3.17.4.1.57) (Opnum 63) | X | X | X | - |
 | get [Signature](#Section_3.17.4.1.58) (Opnum 64) | X | X | X | - |
-| put [Signature](#Section_3.17.4.1.58) (Opnum 65) | X | X | X | - |
+| put [Signature](#Section_3.17.4.1.59) (Opnum 65) | X | X | X | - |
 | get [AuthenticationProviderType](#Section_3.17.4.1.60) (Opnum 66) | X | X | X | - |
-| put [AuthenticationProviderType](#Section_3.17.4.1.60) (Opnum 67) | X | X | X | - |
+| put [AuthenticationProviderType](#Section_3.17.4.1.61) (Opnum 67) | X | X | X | - |
 | get [AuthenticationProviderName](#Section_3.17.4.1.62) (Opnum 68) | X | X | X | - |
-| put [AuthenticationProviderName](#Section_3.17.4.1.62) (Opnum 69) | X | X | X | - |
-| put [SenderId](#Section_3.17.4.1.45) (Opnum 70) | X | X | X | - |
+| put [AuthenticationProviderName](#Section_3.17.4.1.63) (Opnum 69) | X | X | X | - |
+| put [SenderId](#Section_3.17.4.1.64) (Opnum 70) | X | X | X | - |
 | get [MsgClass](#Section_3.17.4.1.65) (Opnum 71) | X | X | X | - |
-| put [MsgClass](#Section_3.17.4.1.65) (Opnum 72) | X | X | X | - |
-| get [Properties](#Section_3.2.4.2.7) (Opnum 73) | X | X | X | - |
+| put [MsgClass](#Section_3.17.4.1.66) (Opnum 72) | X | X | X | - |
+| get [Properties](#Section_3.17.4.1.67) (Opnum 73) | X | X | X | - |
 | get [TransactionId](#Section_3.17.4.1.68) (Opnum 74) | X | X | X | - |
 | get [IsFirstInTransaction](#Section_3.17.4.1.69) (Opnum 75) | X | X | X | - |
 | get [IsLastInTransaction](#Section_3.17.4.1.70) (Opnum 76) | X | X | X | - |
 | get [ResponseQueueInfo_v2](#Section_3.17.4.1.71) (Opnum 77) | X | X | X | - |
-| putref [ResponseQueueInfo_v2](#Section_3.17.4.1.71) (Opnum 78) | X | X | X | - |
+| putref [ResponseQueueInfo_v2](#Section_3.17.4.1.72) (Opnum 78) | X | X | X | - |
 | get [AdminQueueInfo_v2](#Section_3.17.4.1.73) (Opnum 79) | X | X | X | - |
-| putref [AdminQueueInfo_v2](#Section_3.17.4.1.73) (Opnum 80) | X | X | X | - |
+| putref [AdminQueueInfo_v2](#Section_3.17.4.1.74) (Opnum 80) | X | X | X | - |
 | get [ReceivedAuthenticationLevel](#Section_3.17.4.1.75) (Opnum 81) | X | X | X | - |
 | get [ResponseQueueInfo](#Section_3.17.4.1.76) (Opnum 82) | X | X | - | - |
-| putref [ResponseQueueInfo](#Section_3.17.4.1.76) (Opnum 83) | X | X | - | - |
+| putref [ResponseQueueInfo](#Section_3.17.4.1.77) (Opnum 83) | X | X | - | - |
 | get [AdminQueueInfo](#Section_3.17.4.1.78) (Opnum 84) | X | X | - | - |
-| putref [AdminQueueInfo](#Section_3.17.4.1.78) (Opnum 85) | X | X | - | - |
+| putref [AdminQueueInfo](#Section_3.17.4.1.79) (Opnum 85) | X | X | - | - |
 | get [ResponseDestination](#Section_3.17.4.1.80) (Opnum 86) | X | X | - | - |
-| putref [ResponseDestination](#Section_3.17.4.1.80) (Opnum 87) | X | X | - | - |
+| putref [ResponseDestination](#Section_3.17.4.1.81) (Opnum 87) | X | X | - | - |
 | get [Destination](#Section_3.17.4.1.82) (Opnum 88) | X | X | - | - |
 | get [LookupId](#Section_3.17.4.1.83) (Opnum 89) | X | X | - | - |
 | get [IsAuthenticated2](#Section_3.17.4.1.84) (Opnum 90) | X | X | - | - |
 | get [IsFirstInTransaction2](#Section_3.17.4.1.85) (Opnum 91) | X | X | - | - |
 | get [IsLastInTransaction2](#Section_3.17.4.1.86) (Opnum 92) | X | X | - | - |
-| [AttachCurrentSecurityContext2](#Section_3.1.4.1) (Opnum 93) | X | X | - | - |
+| [AttachCurrentSecurityContext2](#Section_3.17.4.1.87) (Opnum 93) | X | X | - | - |
 | get [SoapEnvelope](#Section_3.17.4.1.88) (Opnum 94) | X | X | - | - |
 | get [CompoundMessage](#Section_3.17.4.1.89) (Opnum 95) | X | X | - | - |
 | put [SoapHeader](#Section_3.17.4.1.90) (Opnum 96) | X | X | - | - |
@@ -9515,92 +9515,92 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [Class, get Class](#Section_3.17.4.1.1) | Returns the message type. Opnum: 7 |
-| [PrivLevel, get PrivLevel](#Section_3.10.4.1.11) | Returns the privacy level of the message. Opnum: 8 |
-| [PrivLevel, put PrivLevel](#Section_3.10.4.1.11) | Sets the privacy level of the message. Opnum: 9 |
+| [PrivLevel, get PrivLevel](#Section_3.17.4.1.2) | Returns the privacy level of the message. Opnum: 8 |
+| [PrivLevel, put PrivLevel](#Section_3.17.4.1.3) | Sets the privacy level of the message. Opnum: 9 |
 | [AuthLevel, get AuthLevel](#Section_3.17.4.1.4) | Returns the authentication level of the message. Opnum: 10 |
-| [AuthLevel, put AuthLevel](#Section_3.17.4.1.4) | Sets the authentication level of the message. Opnum: 11 |
+| [AuthLevel, put AuthLevel](#Section_3.17.4.1.5) | Sets the authentication level of the message. Opnum: 11 |
 | [IsAuthenticated, get IsAuthenticated](#Section_3.17.4.1.6) | Returns a Boolean indicating whether the message was authenticated at the request of the sending application. Opnum: 12 |
 | [Delivery, get Delivery](#Section_3.17.4.1.7) | Returns the message delivery guarantee. Opnum: 13 |
-| [Delivery, put Delivery](#Section_3.17.4.1.7) | Sets the message delivery guarantee. Opnum: 14 |
+| [Delivery, put Delivery](#Section_3.17.4.1.8) | Sets the message delivery guarantee. Opnum: 14 |
 | [Trace, get Trace](#Section_3.17.4.1.9) | Returns an [MQMSGTRACE](#Section_2.2.2.13) enum indicating whether the message tracing feature is enabled for the message. Opnum: 15 |
-| [Trace, put Trace](#Section_3.17.4.1.9) | Sets the requested level of tracing. Opnum: 16 |
+| [Trace, put Trace](#Section_3.17.4.1.10) | Sets the requested level of tracing. Opnum: 16 |
 | [Priority, get Priority](#Section_3.17.4.1.11) | Returns the message priority. Opnum: 17 |
-| [Priority, put Priority](#Section_3.17.4.1.11) | Sets the message priority. Opnum: 18 |
-| [Journal, get Journal](#Section_3.10.4.1.13) | Returns the requested journaling setting. Opnum: 19 |
-| [Journal, put Journal](#Section_3.10.4.1.13) | Sets the requested journaling setting. Opnum: 20 |
+| [Priority, put Priority](#Section_3.17.4.1.12) | Sets the message priority. Opnum: 18 |
+| [Journal, get Journal](#Section_3.17.4.1.13) | Returns the requested journaling setting. Opnum: 19 |
+| [Journal, put Journal](#Section_3.17.4.1.14) | Sets the requested journaling setting. Opnum: 20 |
 | [ResponseQueueInfo_v1](#Section_3.17.4.1.15) | Returns an [MSMQQueueInfo](#Section_3.10) object that represents the Queue that will receive response messages from the receiving application. Opnum: 21 |
-| [ResponseQueueInfo_v1, putref ResponseQueueInfo_v1](#Section_3.17.4.1.76) | Sets the queue that will receive response messages from the receiving application. The client MUST pass an MSMQQueueInfo object that represents the Queue. Opnum: 22 |
+| [ResponseQueueInfo_v1, putref ResponseQueueInfo_v1](#Section_3.17.4.1.16) | Sets the queue that will receive response messages from the receiving application. The client MUST pass an MSMQQueueInfo object that represents the Queue. Opnum: 22 |
 | [AppSpecific, get AppSpecific](#Section_3.17.4.1.17) | Returns an application-specific value. Opnum: 23 |
-| [AppSpecific, put AppSpecific](#Section_3.17.4.1.17) | Sets an application-specific value. Opnum: 24 |
+| [AppSpecific, put AppSpecific](#Section_3.17.4.1.18) | Sets an application-specific value. Opnum: 24 |
 | [SourceMachineGuid, get SourceMachineGuid](#Section_3.17.4.1.19) | Returns the GUID identifier of the source computer that sent the message. Opnum: 25 |
-| [BodyLength, get BodyLength](#Section_3.17.4.1.21) | Returns the length of the message body. Opnum: 26 |
+| [BodyLength, get BodyLength](#Section_3.17.4.1.20) | Returns the length of the message body. Opnum: 26 |
 | [Body, get Body](#Section_3.17.4.1.21) | Returns the body of the message. Opnum: 27 |
-| [Body, put Body](#Section_3.17.4.1.21) | Sets the body of the message. Opnum: 28 |
+| [Body, put Body](#Section_3.17.4.1.22) | Sets the body of the message. Opnum: 28 |
 | [AdminQueueInfo_v1](#Section_3.17.4.1.23) | Returns the Queue that will receive system generated acknowledgment and error messages. Opnum: 29 |
-| [AdminQueueInfo_v1, putref AdminQueueInfo_v1](#Section_3.17.4.1.78) | Sets the Queue that will receive system-generated acknowledgment and error messages. Opnum: 30 |
+| [AdminQueueInfo_v1, putref AdminQueueInfo_v1](#Section_3.17.4.1.24) | Sets the Queue that will receive system-generated acknowledgment and error messages. Opnum: 30 |
 | [Id, get Id](#Section_3.17.4.1.25) | Returns the unique system-generated message identifier. Opnum: 31 |
 | [CorrelationId, get CorrelationId](#Section_3.17.4.1.26) | Returns the application-specific correlation identifier. Opnum: 32 |
-| [CorrelationId, put CorrelationId](#Section_3.17.4.1.26) | Sets the application-specific correlation identifier. Opnum: 33 |
+| [CorrelationId, put CorrelationId](#Section_3.17.4.1.27) | Sets the application-specific correlation identifier. Opnum: 33 |
 | [Ack, get Ack](#Section_3.17.4.1.28) | Returns the type of acknowledgment message that will be posted for the message. Opnum: 34 |
-| [Ack, put Ack](#Section_3.17.4.1.28) | Sets the type of acknowledgment message that will be posted for the message. Opnum: 35 |
-| [Label, get Label](#Section_3.10.4.1.4) | Returns the application-specific description of the message. Opnum: 36 |
-| [Label, put Label](#Section_3.10.4.1.4) | Sets the application-specific description of the message. Opnum: 37 |
+| [Ack, put Ack](#Section_3.17.4.1.29) | Sets the type of acknowledgment message that will be posted for the message. Opnum: 35 |
+| [Label, get Label](#Section_3.17.4.1.30) | Returns the application-specific description of the message. Opnum: 36 |
+| [Label, put Label](#Section_3.17.4.1.31) | Sets the application-specific description of the message. Opnum: 37 |
 | [MaxTimeToReachQueue, get MaxTimeToReachQueue](#Section_3.17.4.1.32) | Returns the maximum number of seconds for the message to reach the queue. Opnum: 38 |
-| [MaxTimeToReachQueue, put MaxTimeToReachQueue](#Section_3.17.4.1.32) | Sets the maximum number of seconds for the message to reach the queue. Opnum: 39 |
+| [MaxTimeToReachQueue, put MaxTimeToReachQueue](#Section_3.17.4.1.33) | Sets the maximum number of seconds for the message to reach the queue. Opnum: 39 |
 | [MaxTimeToReceive, get MaxTimeToReceive](#Section_3.17.4.1.34) | Returns the maximum number of seconds for the message to be received from the queue. Opnum: 40 |
-| [MaxTimeToReceive, put MaxTimeToReceive](#Section_3.17.4.1.34) | Sets the maximum number of seconds for the message to be received from the queue. Opnum: 41 |
+| [MaxTimeToReceive, put MaxTimeToReceive](#Section_3.17.4.1.35) | Sets the maximum number of seconds for the message to be received from the queue. Opnum: 41 |
 | [HashAlgorithm, get HashAlgorithm](#Section_3.17.4.1.36) | Returns the hashing algorithm used when authenticating the message. Opnum: 42 |
-| [HashAlgorithm, put HashAlgorithm](#Section_3.17.4.1.36) | Sets the hashing algorithm used when authenticating the message. Opnum: 43 |
+| [HashAlgorithm, put HashAlgorithm](#Section_3.17.4.1.37) | Sets the hashing algorithm used when authenticating the message. Opnum: 43 |
 | [EncryptAlgorithm, get EncryptionAlgorithm](#Section_3.17.4.1.38) | Returns the encryption algorithm used to encrypt the body of a message when encryption is requested. Opnum: 44 |
-| [EncryptAlgorithm, put EncryptionAlgorithm](#Section_3.17.4.1.38) | Sets the encryption algorithm used to encrypt the body of a message when encryption is requested. Opnum: 45 |
+| [EncryptAlgorithm, put EncryptionAlgorithm](#Section_3.17.4.1.39) | Sets the encryption algorithm used to encrypt the body of a message when encryption is requested. Opnum: 45 |
 | [SentTime, get SentTime](#Section_3.17.4.1.40) | Returns the UTC time that the message was sent. Opnum: 46 |
-| [ArrivedTime, get ArrivedTime](#Section_3.16.4.4.1) | Returns the UTC time that the message arrived in the Queue. Opnum: 47 |
-| [DestinationQueueInfo, get DestinationQueueInfo](#Section_3.17.4.1.82) | Returns the Queue to which the message is addressed.<100> Opnum: 48 |
-| [SenderCertificate, get SenderCertificate](#Section_3.17.4.1.48) | Returns the user certificate that is used to authenticate the message. Opnum: 49 |
-| [SenderCertificate, put SenderCertificate](#Section_3.17.4.1.48) | Sets the user certificate that is used to authenticate the message. Opnum: 50 |
-| [SenderId, get SenderId](#Section_3.17.4.1.48) | Returns the identifier of the sending user. Opnum: 51 |
-| [SenderIdType, get SenderType](#Section_3.17.4.1.48) | Returns the type of sender identifier used. Opnum: 52 |
-| [SenderIdType, put SenderIdType](#Section_3.17.4.1.48) | Sets the type of sender identifier used. Opnum: 53 |
+| [ArrivedTime, get ArrivedTime](#Section_3.17.4.1.41) | Returns the UTC time that the message arrived in the Queue. Opnum: 47 |
+| [DestinationQueueInfo, get DestinationQueueInfo](#Section_3.17.4.1.42) | Returns the Queue to which the message is addressed.<100> Opnum: 48 |
+| [SenderCertificate, get SenderCertificate](#Section_3.17.4.1.43) | Returns the user certificate that is used to authenticate the message. Opnum: 49 |
+| [SenderCertificate, put SenderCertificate](#Section_3.17.4.1.44) | Sets the user certificate that is used to authenticate the message. Opnum: 50 |
+| [SenderId, get SenderId](#Section_3.17.4.1.45) | Returns the identifier of the sending user. Opnum: 51 |
+| [SenderIdType, get SenderType](#Section_3.17.4.1.46) | Returns the type of sender identifier used. Opnum: 52 |
+| [SenderIdType, put SenderIdType](#Section_3.17.4.1.47) | Sets the type of sender identifier used. Opnum: 53 |
 | [Send](#Section_3.17.4.1.48) | Sends the message. Opnum: 54 |
-| [AttachCurrentSecurityContext](#Section_3.1.4.1) | Stores a cached copy of all the information required to attach a certificate to a message for authentication. If the values are not specified, it will query the directory for the values. Opnum: 55 |
-| [SenderVersion, get SenderVersion](#Section_3.17.4.1.48) | Returns the version of transfer used to send the message.<101> Opnum: 56 |
+| [AttachCurrentSecurityContext](#Section_3.17.4.1.49) | Stores a cached copy of all the information required to attach a certificate to a message for authentication. If the values are not specified, it will query the directory for the values. Opnum: 55 |
+| [SenderVersion, get SenderVersion](#Section_3.17.4.1.50) | Returns the version of transfer used to send the message.<101> Opnum: 56 |
 | [Extension, get Extension](#Section_3.17.4.1.51) | Returns application-specific information that is associated with the message.<102> Opnum: 57 |
-| [Extension, put Extension](#Section_3.17.4.1.51) | Sets application-specific information that is associated with the message.<103> Opnum: 58 |
-| [ConnectorTypeGuid, get ConnectorTypeGuid](#Section_3.2.4.3.8) | Returns an application-specific GUID that is used to identify the connector application.<104> Opnum: 59 |
-| [ConnectorTypeGuid, put ConnectorTypeGuid](#Section_3.2.4.3.8) | Sets an application-specific GUID that is used to identify the connector application.<105> Opnum: 60 |
-| [TransactionStatusQueueInfo, get TransactionStatusQueueInfo](#Section_3.9.4.1.1) | Returns the Queue to which connector applications will send acknowledgment messages when sending to a foreign [**transactional queue**](#gt_transactional-queue).<106><107> Opnum: 61 |
-| [DestinationSymmetricKey, get DestinationSymetricKey](#Section_3.17.4.1.82) | Returns the symmetric key used to encrypt the message.<108> Opnum: 62 |
-| [DestinationSymmetricKey, put DestinationSymmetricKey](#Section_3.17.4.1.82) | Sets the symmetric key used to encrypt the message.<109> Opnum: 63 |
+| [Extension, put Extension](#Section_3.17.4.1.52) | Sets application-specific information that is associated with the message.<103> Opnum: 58 |
+| [ConnectorTypeGuid, get ConnectorTypeGuid](#Section_3.17.4.1.53) | Returns an application-specific GUID that is used to identify the connector application.<104> Opnum: 59 |
+| [ConnectorTypeGuid, put ConnectorTypeGuid](#Section_3.17.4.1.54) | Sets an application-specific GUID that is used to identify the connector application.<105> Opnum: 60 |
+| [TransactionStatusQueueInfo, get TransactionStatusQueueInfo](#Section_3.17.4.1.55) | Returns the Queue to which connector applications will send acknowledgment messages when sending to a foreign [**transactional queue**](#gt_transactional-queue).<106><107> Opnum: 61 |
+| [DestinationSymmetricKey, get DestinationSymetricKey](#Section_3.17.4.1.56) | Returns the symmetric key used to encrypt the message.<108> Opnum: 62 |
+| [DestinationSymmetricKey, put DestinationSymmetricKey](#Section_3.17.4.1.57) | Sets the symmetric key used to encrypt the message.<109> Opnum: 63 |
 | [Signature, get Signature](#Section_3.17.4.1.58) | Returns the digital signature that is attached to the message.<110> Opnum: 64 |
-| [Signature, put Signature](#Section_3.17.4.1.58) | Sets the digital signature that is attached to the message.<111> Opnum: 65 |
+| [Signature, put Signature](#Section_3.17.4.1.59) | Sets the digital signature that is attached to the message.<111> Opnum: 65 |
 | [AuthenticationProviderType, get AuthenticationProviderType](#Section_3.17.4.1.60) | Returns the type of cryptographic provider used to generate the digital signature that is attached to the message.<112> Opnum: 66 |
-| [AuthenticationProviderType, put AuthenticationProviderType](#Section_3.17.4.1.60) | Sets the type of cryptographic provider used to generate the digital signature that is attached to the message.<113> Opnum: 67 |
+| [AuthenticationProviderType, put AuthenticationProviderType](#Section_3.17.4.1.61) | Sets the type of cryptographic provider used to generate the digital signature that is attached to the message.<113> Opnum: 67 |
 | [AuthenticationProviderName, get AuthenticationProviderName](#Section_3.17.4.1.62) | Returns the name of the cryptographic provider used to generate the digital signature that is attached to the message.<114> Opnum: 68 |
-| [AuthenticationProviderName, put AuthenticationProviderName](#Section_3.17.4.1.62) | Sets the name of the cryptographic provider used to generate the digital signature that is attached to the message.<115> Opnum: 69 |
-| [SenderId, put SenderId](#Section_3.17.4.1.48) | Sets the identifier of the sending user.<116> Opnum: 70 |
+| [AuthenticationProviderName, put AuthenticationProviderName](#Section_3.17.4.1.63) | Sets the name of the cryptographic provider used to generate the digital signature that is attached to the message.<115> Opnum: 69 |
+| [SenderId, put SenderId](#Section_3.17.4.1.64) | Sets the identifier of the sending user.<116> Opnum: 70 |
 | [MsgClass, get MsgClass](#Section_3.17.4.1.65) | Returns the message type.<117> Opnum: 71 |
-| [MsgClass, put MsgClass](#Section_3.17.4.1.65) | Sets the message type.<118> Opnum: 72 |
-| [Properties, get Properties](#Section_3.2.4.2.7) | This method is not implemented.<119> Opnum: 73 |
-| [TransactionId, get TransactionId](#Section_3.9.4.1.1) | Returns the identifier of the transaction within the scope of which this message was sent.<120> Opnum: 74 |
+| [MsgClass, put MsgClass](#Section_3.17.4.1.66) | Sets the message type.<118> Opnum: 72 |
+| [Properties, get Properties](#Section_3.17.4.1.67) | This method is not implemented.<119> Opnum: 73 |
+| [TransactionId, get TransactionId](#Section_3.17.4.1.68) | Returns the identifier of the transaction within the scope of which this message was sent.<120> Opnum: 74 |
 | [IsFirstInTransaction, get IsFirstInTransaction](#Section_3.17.4.1.69) | Returns an indicator of whether the message was the first message sent in the transaction.<121> Opnum: 75 |
 | [IsLastInTransaction, get IsLastInTransaction](#Section_3.17.4.1.70) | Returns an indicator of whether the message was the last message sent in the transaction.<122> Opnum: 76 |
 | [ResponseQueueInfo_v2](#Section_3.17.4.1.71) | Returns the Queue that will receive response messages from the receiving application.<123> Opnum: 77 |
-| [ResponseQueueInfo_v2](#Section_3.17.4.1.71) | Sets the Queue that will receive response messages from the receiving application.<124> Opnum: 78 |
+| [ResponseQueueInfo_v2](#Section_3.17.4.1.72) | Sets the Queue that will receive response messages from the receiving application.<124> Opnum: 78 |
 | [AdminQueueInfo_v2](#Section_3.17.4.1.73) | Returns the Queue that will receive system-generated acknowledgment messages.<125> Opnum: 79 |
-| [AdminQueueInfo_v2](#Section_3.17.4.1.73) | Sets the Queue that will receive system-generated acknowledgment messages.<126> Opnum: 80 |
-| [ReceivedAuthenticationLevel, get ReceivedAuthenticationLevel](#Section_3.11.4.1.14) | Returns an indicator specifying if the message was authenticated and what digital signature was used.<127> Opnum: 81 |
+| [AdminQueueInfo_v2](#Section_3.17.4.1.74) | Sets the Queue that will receive system-generated acknowledgment messages.<126> Opnum: 80 |
+| [ReceivedAuthenticationLevel, get ReceivedAuthenticationLevel](#Section_3.17.4.1.75) | Returns an indicator specifying if the message was authenticated and what digital signature was used.<127> Opnum: 81 |
 | [ResponseQueueInfo, get ResponseQueueInfo](#Section_3.17.4.1.76) | Returns the Queue that will receive response messages from the receiving application.<128><129> Opnum: 82 |
-| [ResponseQueueInfo, putref ResponseQueueInfo](#Section_3.17.4.1.76) | Sets the Queue that will receive response messages from the receiving application.<130><131> Opnum: 83 |
+| [ResponseQueueInfo, putref ResponseQueueInfo](#Section_3.17.4.1.77) | Sets the Queue that will receive response messages from the receiving application.<130><131> Opnum: 83 |
 | [AdminQueueInfo, get AdminQueueInfo](#Section_3.17.4.1.78) | Returns the Queue that will receive message queuing generated acknowledgment messages.<132><133> Opnum: 84 |
-| [AdminQueueInfo, putref AdminQueueInfo](#Section_3.17.4.1.78) | Sets the Queue that will receive message queuing generated acknowledgment messages.<134><135> Opnum: 85 |
+| [AdminQueueInfo, putref AdminQueueInfo](#Section_3.17.4.1.79) | Sets the Queue that will receive message queuing generated acknowledgment messages.<134><135> Opnum: 85 |
 | [ResponseDestination, get ResponseDestination](#Section_3.17.4.1.80) | Returns the destination that represents 0 or more Queues that will receive response messages from the receiving application.<136> Opnum: 86 |
-| [ResponseDestination, putref ResponseDestination](#Section_3.17.4.1.80) | Sets the destination that represents 0 or more Queues that will receive response messages from the receiving application.<137> Opnum: 87 |
+| [ResponseDestination, putref ResponseDestination](#Section_3.17.4.1.81) | Sets the destination that represents 0 or more Queues that will receive response messages from the receiving application.<137> Opnum: 87 |
 | [Destination, get Destination](#Section_3.17.4.1.82) | Returns the destination that represents 0 or more Queues that the Message will be sent to.<138> Opnum: 88 |
 | [LookupId, get LookupId](#Section_3.17.4.1.83) | Returns the lookup identifier for the message.<139> Opnum: 89 |
-| [IsAuthenticated2, get IsAuthenticated2](#Section_3.17.4.1.6) | Returns whether the message was authenticated at the request of the sending application.<140> Opnum: 90 |
-| [IsFirstInTransaction2, get IsFirstInTransaction2](#Section_3.17.4.1.69) | Returns an indicator of whether the message was the first message sent in the transaction.<141> Opnum: 91 |
-| [IsLastInTransaction2, get IsLastInTransaction2](#Section_3.17.4.1.70) | Returns an indicator of whether the message was the last message sent in the transaction.<142> Opnum: 92 |
-| [AttachCurrentSecurityContext2](#Section_3.1.4.1) | Stores a cached copy of all the information required to attach a certificate to a message for authentication. If the values are not specified, it will query the Directory for the values.<143> Opnum: 93 |
+| [IsAuthenticated2, get IsAuthenticated2](#Section_3.17.4.1.84) | Returns whether the message was authenticated at the request of the sending application.<140> Opnum: 90 |
+| [IsFirstInTransaction2, get IsFirstInTransaction2](#Section_3.17.4.1.85) | Returns an indicator of whether the message was the first message sent in the transaction.<141> Opnum: 91 |
+| [IsLastInTransaction2, get IsLastInTransaction2](#Section_3.17.4.1.86) | Returns an indicator of whether the message was the last message sent in the transaction.<142> Opnum: 92 |
+| [AttachCurrentSecurityContext2](#Section_3.17.4.1.87) | Stores a cached copy of all the information required to attach a certificate to a message for authentication. If the values are not specified, it will query the Directory for the values.<143> Opnum: 93 |
 | [SoapEnvelope, get SoapEnvelope](#Section_3.17.4.1.88) | Returns the SOAP envelope attached to an SRMP message.<144> Opnum: 94 |
 | [CompoundMessage, get CompoundMessage](#Section_3.17.4.1.89) | Returns the entire SRMP message, including the SOAP envelope and SOAP attachments.<145> Opnum: 95 |
 | [SoapHeader, put SoapHeader](#Section_3.17.4.1.90) | Sets additional application-specific header elements for inclusion in the SOAP envelope of an SRMP message.<146> Opnum: 96 |
@@ -9901,7 +9901,7 @@ The ResponseQueueInfo_v1 method is received by the server in an RPC_REQUEST pack
 
 );
 
-**ppqinfoResponse:** A pointer to a pointer to an IMSMQQueueInfo interface that upon successful completion will contain an [MSMQQueue](#Section_3.14) object representing the [**queue**](#gt_queue) that will receive the response [**messages**](#gt_message).
+**ppqinfoResponse:** A pointer to a pointer to an IMSMQQueueInfo interface that upon successful completion will contain an [MSMQQueue](#Section_3.11) object representing the [**queue**](#gt_queue) that will receive the response [**messages**](#gt_message).
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -10078,7 +10078,7 @@ HRESULT AdminQueueInfo_v1(
 
 );
 
-**ppqinfoAdmin:** A pointer to an IMSMQQueueInfo interface pointer that upon successful completion will contain an [MSMQQueue](#Section_3.14) object representing the [**queue**](#gt_queue) that will receive the administration [**messages**](#gt_message) sent by the system.
+**ppqinfoAdmin:** A pointer to an IMSMQQueueInfo interface pointer that upon successful completion will contain an [MSMQQueue](#Section_3.11) object representing the [**queue**](#gt_queue) that will receive the administration [**messages**](#gt_message) sent by the system.
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -10431,7 +10431,7 @@ The DestinationQueueInfo method is received by the server in an RPC_REQUEST pack
 
 );
 
-**ppqinfoDest:** A pointer to a pointer to an IMSMQQueueInfo interface that upon successful completion will contain an [MSMQQueue](#Section_3.14) object that represents the destination [**queue**](#gt_queue) for the [**message**](#gt_message).
+**ppqinfoDest:** A pointer to a pointer to an IMSMQQueueInfo interface that upon successful completion will contain an [MSMQQueue](#Section_3.11) object that represents the destination [**queue**](#gt_queue) for the [**message**](#gt_message).
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -10592,7 +10592,7 @@ When processing this call, the server MUST follow these guidelines:
 - Set the represented Message.SourceMachineIdentifier to the local **QueueManager.Identifier**.
 - If the represented Message.ConnectorTypeIdentifier equals the NULL GUID ({00000000-0000-0000-0000-000000000000}):
 - Set the represented Message.Class to MQMSG_CLASS_NORMAL (0x00000000).
-- Set the represented Message.Identifier to a new and unique value as specified by [MS-MQMQ](#Section_2.2.3) section 2.2.8.
+- Set the represented Message.Identifier to a new and unique value as specified by [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.8.
 - Define *queueFormatName* as follows:
 - If the *DestinationQueue* input parameter represents an MSMQQueue object:
 - Set *queueFormatName* to the result of calling MSMQQueueInfo::get_FormatName on the MSMQQueueInfo object returned as a result of calling the MSMQQueue::get_QueueInfo method on the MSMQQueue object represented by the *DestinationQueue* input parameter.
@@ -11022,7 +11022,7 @@ The TransactionId method is received by the server in an RPC_REQUEST packet. In 
 
 );
 
-**pvarXactId:** A pointer to a VARIANT that contains a 20-byte array (VT_ARRAY | VT_UI1) containing the [**transaction**](#gt_transaction) identifier. The format for this ID MUST follow the structure as defined in [MS-MQMQ](#Section_2.2.3) section 2.2.8, where the Lineage part is the [**GUID**](#gt_globally-unique-identifier-guid) of the sending computer and the Uniquifier part is a transaction sequence number.
+**pvarXactId:** A pointer to a VARIANT that contains a 20-byte array (VT_ARRAY | VT_UI1) containing the [**transaction**](#gt_transaction) identifier. The format for this ID MUST follow the structure as defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.8, where the Lineage part is the [**GUID**](#gt_globally-unique-identifier-guid) of the sending computer and the Uniquifier part is a transaction sequence number.
 
 **Return Values:** The method MUST return S_OK (0x00000000) on success or an implementation-specific error HRESULT on failure.
 
@@ -11505,7 +11505,7 @@ Figure 3: Retrieving the count of messages in a queue
 <a id="Section_4.2"></a>
 ## 4.2 Scenario: Retrieving IncomingTransactionalTransferInfo for an ApplicationQueue
 
-The following diagram depicts the use of [MSMQManagement](#Section_3.3.4.1), MSMQQueueManagement, and MSMQCollection in the retrieval of the EODTargetInfo collection from the **IncomingTransactionalTransferInfo** property of an **ApplicationQueue**, followed by the retrieval of the SeqNo property, which was arbitrarily selected from the available properties for the purposes of this example. First, an instance of the MSMQManagement object is created. Next, the MSMQManagement.Init method is called to initialize the instance to represent the state of the **ApplicationQueue** of interest. To obtain more detailed information about the **ApplicationQueue**, the MSMQManagement instance is queried as described in section [3.4.3](#Section_3.4) to obtain an MSMQQueueManagement instance. Then the MSMQQueueManagement.EodGetReceiveInfo method is called, which returns an MSMQCollection instance that contains the EODTargetInfo collection for the **IncomingTransactionalTransferInfo** property of the **ApplicationQueue** represented by the MSMQQueueManagement instance. Finally, the MSMQCollection.Item method is called, specifying the SeqNo property.
+The following diagram depicts the use of [MSMQManagement](#Section_3.3.4.1), MSMQQueueManagement, and MSMQCollection in the retrieval of the EODTargetInfo collection from the **IncomingTransactionalTransferInfo** property of an **ApplicationQueue**, followed by the retrieval of the SeqNo property, which was arbitrarily selected from the available properties for the purposes of this example. First, an instance of the MSMQManagement object is created. Next, the MSMQManagement.Init method is called to initialize the instance to represent the state of the **ApplicationQueue** of interest. To obtain more detailed information about the **ApplicationQueue**, the MSMQManagement instance is queried as described in section [3.4.3](#Section_3.4.3) to obtain an MSMQQueueManagement instance. Then the MSMQQueueManagement.EodGetReceiveInfo method is called, which returns an MSMQCollection instance that contains the EODTargetInfo collection for the **IncomingTransactionalTransferInfo** property of the **ApplicationQueue** represented by the MSMQQueueManagement instance. Finally, the MSMQCollection.Item method is called, specifying the SeqNo property.
 
 ![Retrieving IncomingTransactionalTransferInfo for an ApplicationQueue](media/image4.png)
 
@@ -11514,7 +11514,7 @@ Figure 4: Retrieving IncomingTransactionalTransferInfo for an ApplicationQueue
 <a id="Section_4.3"></a>
 ## 4.3 Scenario: Pausing an OutgoingQueue
 
-The following diagram depicts the use of [MSMQManagement](#Section_3.3.4.1) and MSMQOutgoingQueueManagement to pause transmission of messages from an OutgoingQueue. First, an instance of the MSMQManagement object is created. Next, the MSMQManagement.Init method is called to initialize the instance to represent the state of the OutgoingQueue of interest. To obtain functionality specific to OutgoingQueue data elements, the MSMQManagement instance is queried as described in section [3.5.3](#Section_3.5) to obtain an MSMQOutgoingQueueManagement instance. Finally, the MSMQOutgoingQueueManagement.Pause method is called.
+The following diagram depicts the use of [MSMQManagement](#Section_3.3.4.1) and MSMQOutgoingQueueManagement to pause transmission of messages from an OutgoingQueue. First, an instance of the MSMQManagement object is created. Next, the MSMQManagement.Init method is called to initialize the instance to represent the state of the OutgoingQueue of interest. To obtain functionality specific to OutgoingQueue data elements, the MSMQManagement instance is queried as described in section [3.5.3](#Section_3.5.3) to obtain an MSMQOutgoingQueueManagement instance. Finally, the MSMQOutgoingQueueManagement.Pause method is called.
 
 ![Pausing an OutgoingQueue](media/image5.png)
 
@@ -16270,7 +16270,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 2.2.2.18: This value is only supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003. All other applicable client and server releases of Windows can enable this value with a configuration option.
 
-<9> Section 3.2.4.1.1: The Windows API documentation for MSMQApplication.MachineIdOfMachineName includes the following error codes. For error code descriptions of the following name/value pairs, see [MS-MQMQ](#Section_2.2.3) section 2.4 and [[MSDN-MQEIC]](https://go.microsoft.com/fwlink/?LinkId=90044), in that order.
+<9> Section 3.2.4.1.1: The Windows API documentation for MSMQApplication.MachineIdOfMachineName includes the following error codes. For error code descriptions of the following name/value pairs, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.4 and [[MSDN-MQEIC]](https://go.microsoft.com/fwlink/?LinkId=90044), in that order.
 
 | Value | Meaning |
 | --- | --- |
@@ -16384,7 +16384,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | --- | --- |
 | MQ_ERROR_TRANSACTION_USAGE 0xC00E0050 | An attempted action cannot be performed within a transaction. |
 
-<29> Section 3.7.4.1.1: Windows clients obtain the reference to the [ITransaction (section 3.8.4.1)](#Section_3.9.4.3.1) object by calling the Windows SDK function [BeginTransaction](#Section_3.6.4.1.1) on the ITransactionDispenser object, which is obtained by calling DtcGetTransactionManager.
+<29> Section 3.7.4.1.1: Windows clients obtain the reference to the [ITransaction (section 3.8.4.1)](#Section_3.8.4.1) object by calling the Windows SDK function [BeginTransaction](#Section_3.6.4.1.1) on the ITransactionDispenser object, which is obtained by calling DtcGetTransactionManager.
 
 <30> Section 3.8.4.1.1: The Windows API documentation for ITransaction.**Commit** includes the following return codes. For return code descriptions of the following name/value pairs, see [MS-MQMQ] section 2.4 and [MSDN-MQEIC], in that order.
 

@@ -236,9 +236,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-OLEDS] Microsoft Corporation, "[Object Linking and Embedding (OLE) Data Structures](#Section_2)".
+[MS-OLEDS] Microsoft Corporation, "[Object Linking and Embedding (OLE) Data Structures](../MS-OLEDS/MS-OLEDS.md)".
 
-[MS-OLEPS] Microsoft Corporation, "[Object Linking and Embedding (OLE) Property Set Data Structures](#Section_2)".
+[MS-OLEPS] Microsoft Corporation, "[Object Linking and Embedding (OLE) Property Set Data Structures](../MS-OLEPS/MS-OLEPS.md)".
 
 [MSDN-SS] Microsoft Corporation, "Structured Storage", [http://msdn.microsoft.com/en-us/library/aa380369.aspx](https://go.microsoft.com/fwlink/?LinkId=90136)
 
@@ -267,7 +267,7 @@ The benefits of compound files include the following:
 
 - Because the compound file implementation provides a file system-like abstraction within a file, independent of the details of the underlying file system, compound files can be accessed by different applications on different platform operating systems. The compound file can be a generic container file format that holds data for multiple applications.
 - Because the separate objects in a compound file are saved in a standard format, any browser utility that is reading the standard format can list the storage objects and stream objects in the compound file, even though data within a particular [**object**](#gt_object) can be in a proprietary format.
-- Standardized data structures exist for writing certain types of stream objects--for example, summary information property sets (for more information about property sets, see [MS-OLEPS](#Section_2)). Applications can read these stream objects by using parsers for these data structures, even when the rest of the stream objects cannot be understood.
+- Standardized data structures exist for writing certain types of stream objects--for example, summary information property sets (for more information about property sets, see [MS-OLEPS](../MS-OLEPS/MS-OLEPS.md)). Applications can read these stream objects by using parsers for these data structures, even when the rest of the stream objects cannot be understood.
 The compound file implementation constructs a level of indirection by supporting a file system within a file. A single flat file requires a large contiguous sequence of bytes on the disk. By contrast, compound files define how to treat a single file as a structured collection of storage objects and stream objects that act as file system directories and files, respectively.
 
 ![Example of a compound file showing equal-length sector divisions](media/image4.png)
@@ -301,11 +301,11 @@ The compound file internal structures use the following Windows data types:
 - USHORT for [**header**](#gt_header) and directory fields
 - BYTE for header and directory fields
 - WCHAR for storage and stream names
-[MS-OLEPS](#Section_2) Microsoft OLE Property Set Data Structures
+[MS-OLEPS](../MS-OLEPS/MS-OLEPS.md) Microsoft OLE Property Set Data Structures
 
 OLE property sets are a standard set of stream formats that are typically implemented as compound file [**stream objects**](#gt_stream-object). Most [**applications**](#gt_application) that save their data in compound files also write out summary information property set data in the OLE property sets stream formats.
 
-[MS-OLEDS](#Section_2) Microsoft OLE Data Structures
+[MS-OLEDS](../MS-OLEDS/MS-OLEDS.md) Microsoft OLE Data Structures
 
 OLE linking and embedding streams and storages are used to contain data that is used by outside applications that implement the OLE interfaces and APIs.
 
@@ -355,7 +355,7 @@ The main structure that is used to manage [**sector**](#gt_sector) allocation an
 - FAT[N] contains sector #N's next sector in the chain.
 This allows a compound file to contain many sector chains in a single file. Many compound file structures, including [**user-defined data**](#gt_user-defined-data), are implemented as sector chains that are represented in the FAT.
 
-Even the FAT array itself is represented as a sector chain. The sector chain holds both internal and user-defined data streams. Because the FAT array is stored in a sector chain, the double-indirect file allocation table ([**DIFAT**](#gt_double-indirect-file-allocation-table-difat)) array is used to find the [FAT sector](#Section_2.3) locations. Each DIFAT array entry contains a 32-bit sector number.
+Even the FAT array itself is represented as a sector chain. The sector chain holds both internal and user-defined data streams. Because the FAT array is stored in a sector chain, the double-indirect file allocation table ([**DIFAT**](#gt_double-indirect-file-allocation-table-difat)) array is used to find the [FAT sector](#Section_3.2) locations. Each DIFAT array entry contains a 32-bit sector number.
 
 - DIFAT[0] contains FAT sector #0's location.
 - DIFAT[1] contains FAT sector #1's location.
@@ -404,7 +404,7 @@ Each [**sector**](#gt_sector), except for the header, is identified by a nonnega
 | MAXREGSECT | 0xFFFFFFFA | Maximum regular sector number. |
 | Not applicable | 0xFFFFFFFB | Reserved for future use. |
 | DIFSECT | 0xFFFFFFFC | Specifies a [DIFAT sector](#Section_2.5) in the [**FAT**](#gt_file-allocation-table-fat). |
-| FATSECT | 0xFFFFFFFD | Specifies a [FAT sector](#Section_2.3) in the FAT. |
+| FATSECT | 0xFFFFFFFD | Specifies a [FAT sector](#Section_3.2) in the FAT. |
 | ENDOFCHAIN | 0xFFFFFFFE | End of a linked chain of sectors. |
 | FREESECT | 0xFFFFFFFF | Specifies an unallocated sector in the FAT, [**Mini FAT**](#gt_mini-fat), or [**DIFAT**](#gt_double-indirect-file-allocation-table-difat). |
 
@@ -497,7 +497,7 @@ packet-beta
 | --- | --- |
 | 0x00000000 | If Major Version is 3, the Number of Directory Sectors MUST be zero. |
 
-**Number of FAT Sectors (4 bytes):** This integer field contains the count of the number of [FAT sectors](#Section_2.3) in the compound file.
+**Number of FAT Sectors (4 bytes):** This integer field contains the count of the number of [FAT sectors](#Section_3.2) in the compound file.
 
 **First Directory Sector Location (4 bytes):** This integer field contains the starting sector number for the [**directory stream**](#gt_directory-stream).
 
@@ -599,7 +599,7 @@ packet-beta
 <a id="Section_2.5"></a>
 ## 2.5 Compound File DIFAT Sectors
 
-The [**DIFAT**](#gt_double-indirect-file-allocation-table-difat) array is used to represent [**storage**](#gt_storage) of the [FAT sectors](#Section_2.3). The DIFAT is represented by an array of 32-bit [**sector numbers**](#gt_sector-number). The DIFAT array is stored both in the header and in DIFAT sectors. In the header, the DIFAT array occupies 109 entries, and in each DIFAT sector, the DIFAT array occupies the entire [**sector**](#gt_sector) minus 4 bytes. (The last field is for chaining the DIFAT sector chain.)
+The [**DIFAT**](#gt_double-indirect-file-allocation-table-difat) array is used to represent [**storage**](#gt_storage) of the [FAT sectors](#Section_3.2). The DIFAT is represented by an array of 32-bit [**sector numbers**](#gt_sector-number). The DIFAT array is stored both in the header and in DIFAT sectors. In the header, the DIFAT array occupies 109 entries, and in each DIFAT sector, the DIFAT array occupies the entire [**sector**](#gt_sector) minus 4 bytes. (The last field is for chaining the DIFAT sector chain.)
 
 ![Sectors of a DIFAT array](media/image13.png)
 
@@ -823,7 +823,7 @@ The range lock sector MUST NOT contain any [**user-defined data**](#gt_user-defi
 <a id="Section_2.9"></a>
 ## 2.9 Compound File Size Limits
 
-The minimum size of a compound file is one [**header**](#gt_header), one [FAT sector](#Section_2.3), and one [directory sector](#Section_3.3), which is three [**sectors**](#gt_sector) total. Therefore, a compound file MUST be at least three sectors in length.
+The minimum size of a compound file is one [**header**](#gt_header), one [FAT sector](#Section_3.2), and one [directory sector](#Section_3.3), which is three [**sectors**](#gt_sector) total. Therefore, a compound file MUST be at least three sectors in length.
 
 A 512-byte sector compound file MUST be no greater than 2 GB in size for compatibility reasons. This means that every stream, including the [**directory entry**](#gt_directory-entry) array and [**mini stream**](#gt_mini-stream), inside a 512-byte sector compound file MUST be less than 2 GB in size.
 
@@ -858,7 +858,7 @@ Figure 16: Example of a compound file
 | 0x0006 (64 bytes per [**Mini Stream**](#gt_mini-stream) sector) | 0x0020 | Mini Stream Sector Size |
 | Variable | 0x0022 | Reserved 0x0000 0x00000000 |
 | Variable | 0x0028 | Number of directory Sector 0x00000000 (not used for version 3) |
-| Variable | 0x002C | Number of FAT sectors 0x00000001 (1 [FAT sector](#Section_2.3)) |
+| Variable | 0x002C | Number of FAT sectors 0x00000001 (1 [FAT sector](#Section_3.2)) |
 | Variable | 0x0030 | Directory Starting Sector Location 0x00000001 (sector #1 for Directory) |
 | Variable | 0x0034 | Transaction Signature 0x00000000 (not used) |
 | Variable | 0x0038 | Mini Stream Size Cutoff 0x00001000 (4,096 bytes) |
@@ -936,7 +936,7 @@ Figure 16: Example of a compound file
 <a id="Section_3.2"></a>
 ## 3.2 Sector #0: FAT Sector
 
-This [**sector**](#gt_sector) is the first and only [FAT sector](#Section_2.3) in the file, with five non-empty entries.
+This [**sector**](#gt_sector) is the first and only [FAT sector](#Section_3.2) in the file, with five non-empty entries.
 
 FAT[Sector #0]: 0xFFFFFFFD = FATSECT: marks this sector as a FAT sector.
 
@@ -1183,7 +1183,7 @@ All fields are zeroes except for the child, right sibling, and left sibling poin
 <a id="Section_3.4"></a>
 ## 3.4 Sector #2: MiniFAT Sector
 
-The [mini FAT sector](#Section_2.4) is identical to a [FAT sector](#Section_2.3) in structure, but instead of describing allocations for the file, the [**mini FAT**](#gt_mini-fat) describes allocations for the [**mini stream**](#gt_mini-stream). The following is a chain of eight contiguous [**sectors**](#gt_sector).
+The [mini FAT sector](#Section_2.4) is identical to a [FAT sector](#Section_3.2) in structure, but instead of describing allocations for the file, the [**mini FAT**](#gt_mini-fat) describes allocations for the [**mini stream**](#gt_mini-stream). The following is a chain of eight contiguous [**sectors**](#gt_sector).
 
 MiniFAT[Sector #0]: 0x00000001: This sector points to the second sector of "Stream 1".
 
@@ -1369,7 +1369,7 @@ Although the user-defined data ends at file offset 0x000A1F, the [mini stream se
 
 It is recommended that implementers be aware of the technical challenges of validating the CFB format and the potential security implications of insufficient validation.
 
-Due to the representation of [**sector chains**](#gt_sector-chain), verifying the correctness of the [**FAT**](#gt_file-allocation-table-fat) [**sectors**](#gt_sector) of a compound file (section [2.3](#Section_2.3)) requires reads from the underlying storage medium (for example, disk) with total read size linear in the total file size, as well as temporary storage (for example, RAM) linear in the total file size. Similarly, verifying the correctness of the [**directory**](#gt_directory) sectors of a compound file (section [2.6](#Section_3.3)) requires read size and temporary storage linear in the total number of directory entries, that is, in the total number of [**stream objects**](#gt_stream-object) and [**storage objects**](#gt_storage-object) in the file. The flexibility of sector allocation that is permitted by the format can increase the performance costs of validation in practice because FAT sectors, directory sectors, and so forth are often noncontiguous.
+Due to the representation of [**sector chains**](#gt_sector-chain), verifying the correctness of the [**FAT**](#gt_file-allocation-table-fat) [**sectors**](#gt_sector) of a compound file (section [2.3](#Section_2.3)) requires reads from the underlying storage medium (for example, disk) with total read size linear in the total file size, as well as temporary storage (for example, RAM) linear in the total file size. Similarly, verifying the correctness of the [**directory**](#gt_directory) sectors of a compound file (section [2.6](#Section_2.6)) requires read size and temporary storage linear in the total number of directory entries, that is, in the total number of [**stream objects**](#gt_stream-object) and [**storage objects**](#gt_storage-object) in the file. The flexibility of sector allocation that is permitted by the format can increase the performance costs of validation in practice because FAT sectors, directory sectors, and so forth are often noncontiguous.
 
 If a parser has performance requirements, such as efficient access to small portions of a large file, it might not be possible to both satisfy the performance requirements and completely validate compound files. Parser implementers might instead choose to validate only the portions of the file that are requested by an application.
 

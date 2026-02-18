@@ -330,7 +330,7 @@ As specified in section [2](#Section_2), the Active Directory Federation Service
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The [GetProxyTrustConfiguration](#Section_3.1.4.1) request, [LsRequestSecurityToken](#Section_3.1.4.2) request, [RequestSecurityTokenWithToken](#Section_3.2.5.3) request, and [LsRequestSecurityTokenWithCookie](#Section_3.1.4.4) request messages MUST be transmitted using the HTTP POST method; they MUST NOT be transmitted using the GET method.
+The [GetProxyTrustConfiguration](#Section_3.1.1.1) request, [LsRequestSecurityToken](#Section_3.1.4.2) request, [RequestSecurityTokenWithToken](#Section_3.1.4.3) request, and [LsRequestSecurityTokenWithCookie](#Section_3.1.4.4) request messages MUST be transmitted using the HTTP POST method; they MUST NOT be transmitted using the GET method.
 
 The client role and server role MUST use the HTTPS URL scheme to identify the server endpoints for processing the GetProxyTrustConfiguration request, LsRequestSecurityToken request, RequestSecurityTokenWithToken request, and LsRequestSecurityTokenWithCookie request messages.
 
@@ -746,7 +746,7 @@ The SOAP body of the request message MUST conform to the following XML Schema.
 | Parameter | Value |
 | --- | --- |
 | inToken | The syntax of this parameter is specified in section [3.1.1.2](#Section_3.1.1.2). |
-| targetRealmName | The syntax of this parameter is specified in section [2.2.4](#Section_3.1.4.2). |
+| targetRealmName | The syntax of this parameter is specified in section [2.2.4](#Section_2.2.4). |
 
 <a id="Section_2.2.7"></a>
 ### 2.2.7 RequestSecurityTokenWithToken Response
@@ -767,7 +767,7 @@ The SOAP body of the response message MUST conform to the following XML Schema.
 
 </s:element>
 
-The RSTRResult schema is specified in section [2.2.5](#Section_3.2.5.2.2).
+The RSTRResult schema is specified in section [2.2.5](#Section_2.2.5).
 
 <a id="Section_2.2.8"></a>
 ### 2.2.8 LsRequestSecurityTokenWithCookie Request
@@ -826,7 +826,7 @@ The SOAP body of the response message MUST conform to the following XML Schema.
 
 </s:element>
 
-The RSTRResult schema is specified above in section [2.2.5](#Section_3.2.5.2.2).
+The RSTRResult schema is specified above in section [2.2.5](#Section_2.2.5).
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -905,7 +905,7 @@ The initialization steps required for each of the three protocol message request
 <a id="Section_3.1.3.1"></a>
 #### 3.1.3.1 GetProxyTrustConfiguration Initialization
 
-The client MAY maintain a cached copy of the data described in the [GetProxyTrustConfiguration](#Section_3.1.4.1) section.<1>
+The client MAY maintain a cached copy of the data described in the [GetProxyTrustConfiguration](#Section_3.1.1.1) section.<1>
 
 Prior to emitting a GetProxyTrustConfiguration request, the client MUST obtain the version number and [**GUID**](#gt_globally-unique-identifier-guid), as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) section 3, of the currently cached trust information. If no trust information is cached on the client, the client MUST use a version number equal to 0, and a GUID equal to 00000000-0000-0000-0000-000000000000.
 
@@ -922,7 +922,7 @@ The GetProxyTrustConfiguration, LsRequestSecurityToken, RequestSecurityTokenWith
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 GetProxyTrustConfiguration
 
-As described in the [GetProxyTrustConfiguration](#Section_3.1.4.1) section, the client sends a GetProxyTrustConfiguration request when the client needs the data described in the GetProxyTrustConfiguration section to verify the [**security tokens**](#gt_security-token) issued by the server. Thus, a GetProxyTrustConfiguration request MAY be triggered by the receipt of a security token request at the client, as described in [MS-MWBF](../MS-MWBF/MS-MWBF.md). Implementations MAY choose to improve the performance of handling security token requests by sending a GetProxyTrustConfiguration request and caching the data from the response prior to receiving a request for a security token.<2>
+As described in the [GetProxyTrustConfiguration](#Section_3.1.1.1) section, the client sends a GetProxyTrustConfiguration request when the client needs the data described in the GetProxyTrustConfiguration section to verify the [**security tokens**](#gt_security-token) issued by the server. Thus, a GetProxyTrustConfiguration request MAY be triggered by the receipt of a security token request at the client, as described in [MS-MWBF](../MS-MWBF/MS-MWBF.md). Implementations MAY choose to improve the performance of handling security token requests by sending a GetProxyTrustConfiguration request and caching the data from the response prior to receiving a request for a security token.<2>
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 LsRequestSecurityToken
@@ -944,7 +944,7 @@ When the client is serving as a proxy for an [**STS**](#gt_security-token-servic
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The request messages detailed in section [2](#Section_2) are all unrelated to one another. A client MUST emit request messages according to the events that trigger the requests as described above in the [Higher-Layer Triggered Events](#Section_3.2.4) section. The following sections define the message processing rules separately for the GetProxyTrustConfiguration, LsRequestSecurityToken, RequestSecurityTokenWithToken, and LsRequestSecurityTokenWithCookie message exchanges.
+The request messages detailed in section [2](#Section_2) are all unrelated to one another. A client MUST emit request messages according to the events that trigger the requests as described above in the [Higher-Layer Triggered Events](#Section_3.1.4) section. The following sections define the message processing rules separately for the GetProxyTrustConfiguration, LsRequestSecurityToken, RequestSecurityTokenWithToken, and LsRequestSecurityTokenWithCookie message exchanges.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 GetProxyTrustConfiguration
@@ -964,7 +964,7 @@ Processing the response can be divided into processing the versioning, certifica
 <a id="Section_3.1.5.1.2.1"></a>
 ###### 3.1.5.1.2.1 Versioning
 
-As detailed in section [3.1.1.1](#Section_3.1.4.1), the response MUST contain a version number and [**GUID**](#gt_globally-unique-identifier-guid) representing the configuration data described in section [2.2.2](#Section_2.2.2). This version number and GUID MUST be compared to the locally cached information. If the GUID from the response is different than the GUID cached locally, then the response contains newer data that MUST be used instead of the locally cached data. If the response GUID and locally cached GUID are identical, but the locally cached version number is less than the response version number, then the response contains newer data that MUST be used instead of the locally cached data. If there is no locally cached data, the version number and GUID MUST be ignored.
+As detailed in section [3.1.1.1](#Section_3.1.1.1), the response MUST contain a version number and [**GUID**](#gt_globally-unique-identifier-guid) representing the configuration data described in section [2.2.2](#Section_2.2.2). This version number and GUID MUST be compared to the locally cached information. If the GUID from the response is different than the GUID cached locally, then the response contains newer data that MUST be used instead of the locally cached data. If the response GUID and locally cached GUID are identical, but the locally cached version number is less than the response version number, then the response contains newer data that MUST be used instead of the locally cached data. If there is no locally cached data, the version number and GUID MUST be ignored.
 
 <a id="Section_3.1.5.1.2.2"></a>
 ###### 3.1.5.1.2.2 STS Data
@@ -1022,7 +1022,7 @@ If the Status value is not Success, then the request was not successful and that
 <a id="Section_3.1.5.2.2.2"></a>
 ###### 3.1.5.2.2.2 PolicyVersion
 
-As detailed in the [LsRequestSecurityToken Response](#Section_3.2.5.2.2) section, the response MUST contain a version number and [**GUID**](#gt_globally-unique-identifier-guid) representing the configuration data described in the [LsRequestSecurityToken, RequestSecurityTokenWithToken, and LsRequestSecurityTokenWithCookie](#Section_3.1.1.2) sections. Similarly to a GetProxyTrustConfiguration response message, this version number and GUID MUST be compared to the locally cached information. If the GUID from the response is different than the GUID cached locally, then the server has newer configuration data and the client SHOULD emit a GetProxyTrustConfiguration request to update its local cache. If the response GUID and locally cached GUID are identical, but the locally cached version number is less than the response version number, then the server has newer configuration data and the client SHOULD emit a GetProxyTrustConfiguration request to update its local cache. If there is no locally cached data, the version number and GUID MUST be ignored.<10>
+As detailed in the [LsRequestSecurityToken Response](#Section_2.2.5) section, the response MUST contain a version number and [**GUID**](#gt_globally-unique-identifier-guid) representing the configuration data described in the [LsRequestSecurityToken, RequestSecurityTokenWithToken, and LsRequestSecurityTokenWithCookie](#Section_3.1.1.2) sections. Similarly to a GetProxyTrustConfiguration response message, this version number and GUID MUST be compared to the locally cached information. If the GUID from the response is different than the GUID cached locally, then the server has newer configuration data and the client SHOULD emit a GetProxyTrustConfiguration request to update its local cache. If the response GUID and locally cached GUID are identical, but the locally cached version number is less than the response version number, then the server has newer configuration data and the client SHOULD emit a GetProxyTrustConfiguration request to update its local cache. If there is no locally cached data, the version number and GUID MUST be ignored.<10>
 
 <a id="Section_3.1.5.2.2.3"></a>
 ###### 3.1.5.2.2.3 CredentialsVerification
@@ -1052,7 +1052,7 @@ The RequestSecurityTokenWithToken exchange MUST consist of a single request mess
 <a id="Section_3.1.5.3.1"></a>
 ##### 3.1.5.3.1 RequestSecurityTokenWithToken Request
 
-As described in the [RequestSecurityTokenWithToken](#Section_3.2.5.3) section, when the client is serving as a proxy for an [**STS**](#gt_security-token-service-sts) in the [**relying party**](#gt_relying-party-rp) role described in [MS-MWBF](../MS-MWBF/MS-MWBF.md), the client MUST emit an RequestSecurityTokenWithToken request message after it receives a [**security token**](#gt_security-token) as part of a security token request using the protocol described in [MS-MWBF].
+As described in the [RequestSecurityTokenWithToken](#Section_3.1.4.3) section, when the client is serving as a proxy for an [**STS**](#gt_security-token-service-sts) in the [**relying party**](#gt_relying-party-rp) role described in [MS-MWBF](../MS-MWBF/MS-MWBF.md), the client MUST emit an RequestSecurityTokenWithToken request message after it receives a [**security token**](#gt_security-token) as part of a security token request using the protocol described in [MS-MWBF].
 
 The security token received by the client in the *wresult* parameter described in [MS-MWBF] MUST be Base64-encoded according to [[RFC4648]](https://go.microsoft.com/fwlink/?LinkId=90487), and included in the request in the inToken element of the request.
 
@@ -1063,7 +1063,7 @@ If the [**web browser requestor**](#gt_web-browser-requestor) also presents a co
 <a id="Section_3.1.5.3.2"></a>
 ##### 3.1.5.3.2 RequestSecurityTokenWithToken Response
 
-Response processing for a RequestSecurityTokenWithToken response MUST be the same as the processing for a LsRequestSecurityToken response as described in the [LsRequestSecurityToken Response](#Section_3.2.5.2.2) section, with the exception of the processing of the ForeignRealmUri element.
+Response processing for a RequestSecurityTokenWithToken response MUST be the same as the processing for a LsRequestSecurityToken response as described in the [LsRequestSecurityToken Response](#Section_4.5) section, with the exception of the processing of the ForeignRealmUri element.
 
 For RequestSecurityTokenWithToken response messages, if the SuppressRealmCookie configuration value is false, then the client MUST use the value of the ForeignRealmUri element to write an [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399) cookie to the [**web browser requestor**](#gt_web-browser-requestor) that records the [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) of the token presented by web browser requestor’s using [MS-MWBF](../MS-MWBF/MS-MWBF.md). If the SuppressRealmCookie configuration value is true, then the *ForeignRealmUri* parameter MUST be ignored.
 
@@ -1086,7 +1086,7 @@ If the security token request includes a *wauth* parameter as described in secti
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 LsRequestSecurityTokenWithCookie Response
 
-Response processing for an LsRequestSecurityTokenWithCookie response MUST be the same as the processing for a LsRequestSecurityToken response as described in the [LsRequestSecurityToken Response](#Section_3.2.5.2.2) section.
+Response processing for an LsRequestSecurityTokenWithCookie response MUST be the same as the processing for a LsRequestSecurityToken response as described in the [LsRequestSecurityToken Response](#Section_4.5) section.
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -1106,7 +1106,7 @@ This section describes details of protocol processing that must be understood to
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-The abstract data model described in section [3.1.1](#Section_3.1) applies for the server role as well.
+The abstract data model described in section [3.1.1](#Section_3.1.1) applies for the server role as well.
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -1136,7 +1136,7 @@ The GetProxyTrustConfiguration exchange MUST consist of a single request message
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 GetProxyTrustConfiguration Request Processing
 
-The version number and [**GUID**](#gt_globally-unique-identifier-guid) parameters in GetProxyTrustConfiguration requests MUST be compared to the current version number and GUID of the server’s local configuration. If the GUID in the request is different than the GUID of the server’s local configuration, then the client has an outdated copy. If the version number in the request is different than the version number of the server’s local configuration, then the client has an outdated copy. Otherwise the client has an up-to-date copy. For the corresponding response processing, see section [3.2.5.1.2](#Section_3.2.5.1.2.4) below.
+The version number and [**GUID**](#gt_globally-unique-identifier-guid) parameters in GetProxyTrustConfiguration requests MUST be compared to the current version number and GUID of the server’s local configuration. If the GUID in the request is different than the GUID of the server’s local configuration, then the client has an outdated copy. If the version number in the request is different than the version number of the server’s local configuration, then the client has an outdated copy. Otherwise the client has an up-to-date copy. For the corresponding response processing, see section [3.2.5.1.2](#Section_3.2.5.1.2) below.
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 GetProxyTrustConfiguration Response Processing
@@ -1155,7 +1155,7 @@ The Version element MUST be set to the version number for the current configurat
 <a id="Section_3.2.5.1.2.2"></a>
 ###### 3.2.5.1.2.2 STS Data
 
-The server MUST maintain a URI to identify itself as described in [GetProxyTrustConfiguration](#Section_3.1.4.1) section. This URI MUST be included in the response as the HostedRealmUriStr element.
+The server MUST maintain a URI to identify itself as described in [GetProxyTrustConfiguration](#Section_3.1.1.1) section. This URI MUST be included in the response as the HostedRealmUriStr element.
 
 The server MUST maintain a URL that represents the endpoint on which it listens for [MS-MWBF](../MS-MWBF/MS-MWBF.md) requests. This URL MUST be included in the response as the LsUrlStr element.
 
@@ -1235,7 +1235,7 @@ If there is an error attempting to generate the security token, the Status value
 <a id="Section_3.2.5.2.2.2"></a>
 ###### 3.2.5.2.2.2 PolicyVersion
 
-As detailed in the [LsRequestSecurityToken Response](#Section_3.2.5.2.2) section, the response MUST contain a version number and [**GUID**](#gt_globally-unique-identifier-guid) representing the configuration data described in the [LsRequestSecurityToken, RequestSecurityTokenWithToken, and LsRequestSecurityTokenWithCookie](#Section_3.1.1.2) sections. Similarly to a GetProxyTrustConfiguration response message, the Version element MUST be set to the version number for the current configuration maintained by the server. The Guid element MUST be set to the GUID for the current configuration maintained by the server.
+As detailed in the [LsRequestSecurityToken Response](#Section_2.2.5) section, the response MUST contain a version number and [**GUID**](#gt_globally-unique-identifier-guid) representing the configuration data described in the [LsRequestSecurityToken, RequestSecurityTokenWithToken, and LsRequestSecurityTokenWithCookie](#Section_3.1.1.2) sections. Similarly to a GetProxyTrustConfiguration response message, the Version element MUST be set to the version number for the current configuration maintained by the server. The Guid element MUST be set to the GUID for the current configuration maintained by the server.
 
 <a id="Section_3.2.5.2.2.3"></a>
 ###### 3.2.5.2.2.3 CredentialsVerification
@@ -1287,7 +1287,7 @@ RequestSecurityTokenWithToken response processing can be divided into Status, Po
 <a id="Section_3.2.5.3.2.1"></a>
 ###### 3.2.5.3.2.1 Status
 
-The server MUST process the Status element in an RequestSecurityTokenWithToken response as specified in the [Status](#Section_3.2.5.4.2.1) section.
+The server MUST process the Status element in an RequestSecurityTokenWithToken response as specified in the [Status](#Section_3.1.5.2.2.1) section.
 
 <a id="Section_3.2.5.3.2.2"></a>
 ###### 3.2.5.3.2.2 PolicyVersion
@@ -1312,7 +1312,7 @@ The server MUST generate the value of the SecurityToken element as specified in 
 <a id="Section_3.2.5.3.2.6"></a>
 ###### 3.2.5.3.2.6 LogonAcceleratorToken
 
-The server MUST process the LogonAcceleratorToken element in an RequestSecurityTokenWithToken response as specified in the [LogonAcceleratorToken](#Section_3.2.5.4.2.6) section.
+The server MUST process the LogonAcceleratorToken element in an RequestSecurityTokenWithToken response as specified in the [LogonAcceleratorToken](#Section_3.1.5.2.2.6) section.
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 LsRequestSecurityTokenWithCookie
@@ -1338,7 +1338,7 @@ LsRequestSecurityTokenWithCookie response processing can be divided into Status,
 <a id="Section_3.2.5.4.2.1"></a>
 ###### 3.2.5.4.2.1 Status
 
-The server MUST process the Status element in an LsRequestSecurityTokenWithCookie response as specified in the [Status](#Section_3.2.5.4.2.1) section.
+The server MUST process the Status element in an LsRequestSecurityTokenWithCookie response as specified in the [Status](#Section_3.1.5.2.2.1) section.
 
 <a id="Section_3.2.5.4.2.2"></a>
 ###### 3.2.5.4.2.2 PolicyVersion
@@ -2964,7 +2964,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 3.1.3.1: After the data described in the [GetProxyTrustConfiguration](#Section_3.1.4.1) section is obtained for the first time via a GetProxyTrustConfiguration exchange, Windows maintains a cached copy of the data described in the GetProxyTrustConfiguration section.
+<1> Section 3.1.3.1: After the data described in the [GetProxyTrustConfiguration](#Section_3.1.1.1) section is obtained for the first time via a GetProxyTrustConfiguration exchange, Windows maintains a cached copy of the data described in the GetProxyTrustConfiguration section.
 
 <2> Section 3.1.4.1: Windows sends a GetProxyTrustConfiguration request when the client service is started, and caches the data from the response. If the cached version of the data described in section GetProxyTrustConfiguration is not available when a [**security token**](#gt_security-token) request is received, Windows will attempt to obtain the data again by sending a GetProxyTrustConfiguration request upon receipt of the security token.
 

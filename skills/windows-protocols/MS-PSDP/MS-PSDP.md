@@ -310,7 +310,7 @@ The characters and spaces of the format identifier string are encoded as [**Unic
 
 The [**hash**](#gt_hash) of the format identifier is transmitted beginning with the first [**octet**](#gt_octet) of the octet array.
 
-For sample format identifier strings and their corresponding hashes, see section [4](#Section_1.3).
+For sample format identifier strings and their corresponding hashes, see section [4](#Section_4).
 
 <a id="Section_3"></a>
 # 3 Protocol Details

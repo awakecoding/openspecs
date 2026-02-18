@@ -608,7 +608,7 @@ The Failover state machine has the states described in [[IETF-DHCPFOP-12]](https
 <a id="Section_3.1.2.1"></a>
 #### 3.1.2.1 Safe Period Timer
 
-The **Safe Period** timer is a configurable timer that is used to automatically transition from the **COMMUNICATION-INTERRUPTED** to **PARTNER-DOWN** state. If configured, this timer is initialized when a new [**failover relationship**](#gt_failover-relationship) is created or when the **Safe Period** timer is enabled for an existing failover relationship by using the **R_DhcpV4FailoverCreateRelationship** method ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.2.4.90) and the **R_DhcpV4FailoverSetRelationship** method ([MS-DHCPM] section 3.2.4.91). This timer is reset whenever the failover relationship transitions to **COMMUNICATION-INTERRUPTED** as specified in the failover state diagram in section [3.1.1](../MS-DHCPM/MS-DHCPM.md). This is a one-time timer with a default value of 60 minutes<3>; that is, unless the timer is stopped, it will expire once at the end of the specified timer interval. This timer value SHOULD be set appropriately, factoring in the time required for administrator intervention. This timer SHOULD be stopped when the communication has been restored between the failover partners or when the administrator has manually set the failover relationship state to the **PARTNER-DOWN** state by calling the **R_DhcpV4FailoverSetRelationship** method ([MS-DHCPM] section 3.2.4.91).
+The **Safe Period** timer is a configurable timer that is used to automatically transition from the **COMMUNICATION-INTERRUPTED** to **PARTNER-DOWN** state. If configured, this timer is initialized when a new [**failover relationship**](#gt_failover-relationship) is created or when the **Safe Period** timer is enabled for an existing failover relationship by using the **R_DhcpV4FailoverCreateRelationship** method ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.2.4.90) and the **R_DhcpV4FailoverSetRelationship** method ([MS-DHCPM] section 3.2.4.91). This timer is reset whenever the failover relationship transitions to **COMMUNICATION-INTERRUPTED** as specified in the failover state diagram in section [3.1.1](#Section_3.1.1). This is a one-time timer with a default value of 60 minutes<3>; that is, unless the timer is stopped, it will expire once at the end of the specified timer interval. This timer value SHOULD be set appropriately, factoring in the time required for administrator intervention. This timer SHOULD be stopped when the communication has been restored between the failover partners or when the administrator has manually set the failover relationship state to the **PARTNER-DOWN** state by calling the **R_DhcpV4FailoverSetRelationship** method ([MS-DHCPM] section 3.2.4.91).
 
 <a id="Section_3.1.2.2"></a>
 #### 3.1.2.2 Connect Retry Timer
@@ -642,7 +642,7 @@ When the DHCP server is booting after shutdown, or a new [**failover relationshi
 
 If this is a new failover relationship created between the two servers, after the communication has been established with the partner server, the DHCP server MUST transition both failover endpoints to the **RECOVER** state.
 
-Otherwise, after the communication has been established with the partner server, the failover endpoint MUST transition to the communication-failed state indicated by the **prevState** member of the shared **DHCPv4FailoverRelationship** ADM element ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.1.1.33). The communication failed state is depicted in the Failover state machine figure in section [3.1.1](../MS-DHCPM/MS-DHCPM.md).
+Otherwise, after the communication has been established with the partner server, the failover endpoint MUST transition to the communication-failed state indicated by the **prevState** member of the shared **DHCPv4FailoverRelationship** ADM element ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.1.1.33). The communication failed state is depicted in the Failover state machine figure in section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -685,7 +685,7 @@ BIT 0 and BIT 1 signify the state of the leased IPv4 address, as shown in the fo
 | ADDRESS_STATE_DECLINED (0x2) | The IPv4 address request is declined by the DHCPv4 client; therefore, the specified value is an invalid IPv4 address. |
 | ADDRESS_STATE_DOOM (0x3) | The IPv4 address is in the DOOMED state and is marked for deletion. |
 
-BIT 2 and BIT 3 signify information related to Name Protection (section [3.3.3](#Section_3.2.3)) for the leased IPv4 address, as shown in the following table.
+BIT 2 and BIT 3 signify information related to Name Protection (section [3.3.3](#Section_3.3.3)) for the leased IPv4 address, as shown in the following table.
 
 | Value | Meaning |
 | --- | --- |
@@ -875,7 +875,7 @@ When a [**failover endpoint**](#gt_failover-endpoint) transitions to the **RECOV
 <a id="Section_3.1.7.2"></a>
 #### 3.1.7.2 Sending a DHCP Failover UPDREQALL Message
 
-When a backed-up DHCP database is restored by using the **R_DhcpRestoreDatabase** method ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.2.4.46), the DHCP server implementing this specification MUST transition to the **RECOVER** state (section [3.1.1](../MS-DHCPM/MS-DHCPM.md)) and send an **UPDREQALL** message to its failover partner server.
+When a backed-up DHCP database is restored by using the **R_DhcpRestoreDatabase** method ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.2.4.46), the DHCP server implementing this specification MUST transition to the **RECOVER** state (section [3.1.1](#Section_3.1.1)) and send an **UPDREQALL** message to its failover partner server.
 
 The behavior of the **UPDREQALL** message (as specified in [[IETF-DHCPFOP-12]](https://go.microsoft.com/fwlink/?LinkId=217377) section 7.4.1) is unchanged by the extensions specified in this document.
 
@@ -902,7 +902,7 @@ None.
 <a id="Section_3.2.2.1"></a>
 #### 3.2.2.1 Address Rebalancing Timer
 
-The purpose of the **Address Rebalancing** timer is to trigger periodic address space redistribution between the failover partners. This timer is initialized when a new [**failover relationship**](#gt_failover-relationship) is created by using the **R_DhcpV4FailoverCreateRelationship** method ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.2.4.90) and reset whenever the failover relationship transitions to the **NORMAL** state as shown in the Failover state machine figure in section [3.1.1](../MS-DHCPM/MS-DHCPM.md)).
+The purpose of the **Address Rebalancing** timer is to trigger periodic address space redistribution between the failover partners. This timer is initialized when a new [**failover relationship**](#gt_failover-relationship) is created by using the **R_DhcpV4FailoverCreateRelationship** method ([MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.2.4.90) and reset whenever the failover relationship transitions to the **NORMAL** state as shown in the Failover state machine figure in section [3.1.1](#Section_3.1.1)).
 
 This is a periodic timer with a default interval value of 5 minutes<11>; that is, unless the timer is stopped, it will expire periodically as specified by the timer interval. This timer value SHOULD be set appropriately, factoring in the client processing rate of the DHCP server. This timer has to be stopped when the communication between the partners is down.
 

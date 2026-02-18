@@ -138,7 +138,7 @@ This document uses the following terms:
 **RPC endpoint**: A network-specific address of a server process for remote procedure calls (RPCs). The actual name of the RPC endpoint depends on the RPC protocol sequence being used. For example, for the NCACN_IP_TCP RPC protocol sequence an RPC endpoint might be TCP port 1025. For more information, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
 <a id="gt_security-descriptor"></a>
-**security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a discretionary access control list (DACL) with [**SIDs**](#gt_security-identifier-sid) for the security principals who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP](#Section_2.2.1) section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
+**security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a discretionary access control list (DACL) with [**SIDs**](#gt_security-identifier-sid) for the security principals who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
 
 <a id="gt_security-identifier-sid"></a>
 **security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
@@ -168,13 +168,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** Registration is required to download the document.
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -277,7 +277,7 @@ This protocol MUST use the following UUIDs:
 
 This protocol MUST indicate to the RPC runtime that it is to support both the NDR and NDR64 transfer syntaxes and provide a negotiation mechanism for determining which transfer syntax will be used ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.1.1.5.1.1).
 
-The following data types are specified in [MS-DTYP](#Section_2.2.1):
+The following data types are specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md):
 
 | Data type name | Section |
 | --- | --- |
@@ -472,8 +472,8 @@ This protocol uses the following structures.
 | AUTHZR_CONTEXT_INFORMATION | [2.2.3.3](#Section_2.2.3.3) | Contains security information about a principal. |
 | AUTHZR_SECURITY_ATTRIBUTE_STRING_VALUE | [2.2.3.4](#Section_2.2.3.4) | Specifies a string value associated with a security attribute. |
 | AUTHZR_SECURITY_ATTRIBUTE_V1 | [2.2.3.5](#Section_2.2.3.5) | Specifies a security attribute and one or more value pairs. |
-| AUTHZR_SECURITY_ATTRIBUTE_V1_VALUE | [2.2.3.6](#Section_2.2.3.5) | Specifies a value associated with a security attribute. |
-| AUTHZR_SECURITY_ATTRIBUTES_INFORMATION | [2.2.3.7](#Section_5) | Specifies one or more security attributes and values. |
+| AUTHZR_SECURITY_ATTRIBUTE_V1_VALUE | [2.2.3.6](#Section_2.2.3.6) | Specifies a value associated with a security attribute. |
+| AUTHZR_SECURITY_ATTRIBUTES_INFORMATION | [2.2.3.7](#Section_2.2.3.7) | Specifies one or more security attributes and values. |
 | AUTHZR_SID_AND_ATTRIBUTES | [2.2.3.8](#Section_2.2.3.8) | Contains information about the security identifiers (SIDs) in a [**token**](#gt_token). |
 | AUTHZR_TOKEN_GROUPS | [2.2.3.9](#Section_2.2.3.9) | Represents a [**security identifier (SID)**](#gt_security-identifier-sid) and its attributes. |
 | AUTHZR_TOKEN_USER | [2.2.3.10](#Section_2.2.3.10) | Identifies the user associated with a token. |
@@ -558,7 +558,7 @@ AUTHZR_SECURITY_ATTRIBUTES_INFORMATION* pTokenClaims;
 | --- | --- |
 | 0x0001 (user) | ContextInfoUnion contains an AUTHZR_TOKEN_USER structure, as specified in section [2.2.3.10](#Section_2.2.3.10). |
 | 0x0002 (groups) 0x0003 (restricted groups) 0x000C (device groups) | ContextInfoUnion contains an AUTHZR_TOKEN_GROUPS structure, as specified in section [2.2.3.9](#Section_2.2.3.9). |
-| 0x000D (user claim) 0x000E (device claim) | ContextInfoUnion contains an AUTHZR_SECURITY_ATTRIBUTES_INFORMATION structure, as specified in section [2.2.3.7](#Section_5). |
+| 0x000D (user claim) 0x000E (device claim) | ContextInfoUnion contains an AUTHZR_SECURITY_ATTRIBUTES_INFORMATION structure, as specified in section [2.2.3.7](#Section_2.2.3.7). |
 
 **ContextInfoUnion:** A pointer to an AUTHZR_TOKEN_USER, AUTHZR_TOKEN_GROUPS, or AUTHZR_SECURITY_ATTRIBUTES_INFORMATION structure, depending on the value of ValueType.
 
@@ -619,7 +619,7 @@ ULONG Flags;
 
 **ValueCount:** The number of attribute and value pairs pointed to by the **Values** member. The number of attribute and value pairs MUST be between 0 and 1,024, inclusive.
 
-**Values:** An array of AUTHZR_SECURITY_ATTRIBUTE_V1_VALUE structures, as defined in section [2.2.3.6](#Section_2.2.3.5). Each structure contains a security attribute and value pair.
+**Values:** An array of AUTHZR_SECURITY_ATTRIBUTE_V1_VALUE structures, as defined in section [2.2.3.6](#Section_2.2.3.6). Each structure contains a security attribute and value pair.
 
 <a id="Section_2.2.3.6"></a>
 #### 2.2.3.6 AUTHZR_SECURITY_ATTRIBUTE_V1_VALUE
@@ -696,7 +696,7 @@ DWORD Attributes;
 
 } AUTHZR_SID_AND_ATTRIBUTES;
 
-**Sid:** A SID structure, as specified in [MS-DTYP](#Section_2.2.1) section 2.4.2.3. This is a pass-through value and SHOULD NOT be interpreted by the RAZA protocol.
+**Sid:** A SID structure, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.3. This is a pass-through value and SHOULD NOT be interpreted by the RAZA protocol.
 
 **Attributes:** Specifies attributes associated with the SID. This is a pass-through value and SHOULD NOT be interpreted by the RAZA protocol.
 
@@ -768,7 +768,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The RAZA server maintains one or more of the following abstract data types as abstract variables:
 
-- **ImpersonationAccessToken (Public):** A Token/Authorization Context (see [MS-DTYP](#Section_2.2.1) section 2.5.2).
+- **ImpersonationAccessToken (Public):** A Token/Authorization Context (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2).
 - **ClientContext:**A data structure containing the following members:
 - **RPCClient:** An AUTHZR_HANDLE structure (section [2.2.1.1](#Section_2.2.1.1)).
 - **AuthzContext:** An **ImpersonationAccessToken**.
@@ -870,7 +870,7 @@ If the function fails, it MUST return a nonzero error code.
 When a RAZA server receives this message, the server MUST perform the following:
 
 - If any bits other than 0x00000008 are set in *Flags*, the server MUST return ERROR_INVALID_PARAMETER.
-- Call *LsarOpenPolicy* ([MS-LSAT](#Section_5) section 3.1.4.2) with the following as input:
+- Call *LsarOpenPolicy* ([MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.2) with the following as input:
 - *SystemName*: NULL.
 - *DesiredAccess*: Contains the bit value 0x00000800 for POLICY_LOOKUP_NAMES.
 - Call *LsarLookupSids* ([MS-LSAT] section 3.1.4.11) on the returned **PolicyHandle**.
@@ -966,7 +966,7 @@ If the function fails, it MUST return a nonzero error code.
 When a RAZA server receives this message, the server MUST perform the following:
 
 - Check that the upper 16 bits of the **Flags** parameter are set to zero, and if not, return a nonzero error code.
-- If the client connects to the server using ObjectUUID as 5fc860e0-6f6e-4fc2-83cd-46324f25e90b then remove all ACEs of type SYSTEM_SCOPED_POLICY_ID_ACE ([MS-DTYP](#Section_2.2.1) section 2.4.4.16) from the pSecurityDescriptors[0] parameter.
+- If the client connects to the server using ObjectUUID as 5fc860e0-6f6e-4fc2-83cd-46324f25e90b then remove all ACEs of type SYSTEM_SCOPED_POLICY_ID_ACE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.4.16) from the pSecurityDescriptors[0] parameter.
 - Perform an AccessCheck evaluation using the algorithm specified in [MS-DTYP] section 2.5.3.2, where the preceding parameters are mapped to the parameter names of the algorithm described according to the following table.
 | AccessCheck pseudocode parameter | RAZA protocol AuthzrAccessCheck evaluation |
 | --- | --- |
@@ -1052,7 +1052,7 @@ DWORD AuthzrModifyClaims(
 
 **pClaimOperations:** A pointer to an array of AUTHZ_SECURITY_ATTRIBUTE_OPERATION enumerations, as defined in section [2.2.2.2](#Section_2.2.2.2). Specifies the operations to be performed on each claim.
 
-**pClaims:** A pointer to an array of AUTHZR_SECURITY_ATTRIBUTES_INFORMATION structures, as defined in section [2.2.3.7](#Section_5). Contains the claim(s) used to modify the client context.
+**pClaims:** A pointer to an array of AUTHZR_SECURITY_ATTRIBUTES_INFORMATION structures, as defined in section [2.2.3.7](#Section_2.2.3.7). Contains the claim(s) used to modify the client context.
 
 **Return Values:**
 
@@ -1218,7 +1218,7 @@ None.
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full IDL is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](#Section_2.2.1) Appendix A. The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
+For ease of implementation, the full IDL is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A. The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
 
 import "ms-dtyp.idl";
 

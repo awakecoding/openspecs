@@ -379,12 +379,12 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [EPSG] International Association of Oil & Gas Producers, "About the EPSG Dataset", [http://www.epsg.org/](https://go.microsoft.com/fwlink/?LinkID=148018)
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The [**conceptual schema definition language (CSDL)**](#gt_conceptual-schema-definition-language-csdl) is an XML-based file format that describes the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm). CSDL is based on standards defined in [[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) and [[XMLSCHEMA1]](https://go.microsoft.com/fwlink/?LinkId=90608). The root of the CSDL is a [Schema](#Section_2.1.1) element. Following that root, these child elements are supported: [Using](#Section_2.1.13), [EntityType](#Section_2.1.2), [ComplexType](#Section_2.1.7), [Association](#Section_2.1.8), and [EntityContainer](#Section_2.1.14). In CSDL 2.0 and CSDL 3.0, **Schema** elements can have [Function](#Section_2.1.30) as a child element. **EntityContainer** elements conceptually represent a **DataSource** and can contain [EntitySet](#Section_2.1.18), [AssociationSet](#Section_2.1.19), and [FunctionImport](#Section_2.1.15) as child elements. In CSDL 3.0, **Schema** elements can have [ValueTerm](#Section_2.1.31) and [Annotations](#Section_2.1.35) as child elements.
+The [**conceptual schema definition language (CSDL)**](#gt_conceptual-schema-definition-language-csdl) is an XML-based file format that describes the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm). CSDL is based on standards defined in [[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) and [[XMLSCHEMA1]](https://go.microsoft.com/fwlink/?LinkId=90608). The root of the CSDL is a [Schema](#Section_2.1.1) element. Following that root, these child elements are supported: [Using](#Section_2.1.13), [EntityType](#Section_2.1.2), [ComplexType](#Section_2.1.7), [Association](#Section_2.1.8), and [EntityContainer](#Section_2.1.14). In CSDL 2.0 and CSDL 3.0, **Schema** elements can have [Function](#Section_2.1.15) as a child element. **EntityContainer** elements conceptually represent a **DataSource** and can contain [EntitySet](#Section_2.1.18), [AssociationSet](#Section_2.1.19), and [FunctionImport](#Section_2.1.15) as child elements. In CSDL 3.0, **Schema** elements can have [ValueTerm](#Section_2.1.31) and [Annotations](#Section_2.1.35) as child elements.
 
 Conceptually, a CSDL file has an overall structure that resembles the following schema.
 
@@ -645,7 +645,7 @@ The following rules apply to the **NavigationProperty** element:
 - **NavigationProperty** can contain any number of **AnnotationAttribute** attributes. The full names of the **AnnotationAttribute** attributes cannot collide.
 - **NavigationProperty** can contain a maximum of one [Documentation](#Section_2.1.21) element.
 - **NavigationProperty** can contain any number of [AnnotationElement](#Section_2.1.22) elements.
-- In CSDL 3.0, **NavigationProperty** can have a **ContainsTarget** defined. When **ContainsTarget** is absent, it defaults to "false". When it is set to "true", **ContainsTarget** indicates [containment NavigationProperty (section 2.1.39)](#Section_2.1.4).
+- In CSDL 3.0, **NavigationProperty** can have a **ContainsTarget** defined. When **ContainsTarget** is absent, it defaults to "false". When it is set to "true", **ContainsTarget** indicates [containment NavigationProperty (section 2.1.39)](#Section_2.1.39).
 - In CSDL 3.0, **NavigationProperty** can contain any number of [ValueAnnotation](#Section_3.1) elements.
 - Child elements of **NavigationProperty** are to appear in this sequence: **Documentation**, **AnnotationElement**.
 ![Graphic representation in table format of the rules that apply to the NavigationProperty element.](media/image4.png)
@@ -774,7 +774,7 @@ The following rules apply to the **Association** element:
 - An **Association** is a [**schema level named element**](#gt_schema-level-named-element) and has a unique name.
 - **Association** can contain any number of [AnnotationAttribute](#Section_2.2.7) attributes. The full names of **AnnotationAttribute** cannot collide.
 - An **Association** element can contain a maximum of one [Documentation](#Section_2.1.21) element.
-- **Association** MUST have exactly two [End](#Section_2.1.8) elements defined.
+- **Association** MUST have exactly two [End](#Section_f5fec50d29304265945d965cd4db8153) elements defined.
 - **Association** can have one [ReferentialConstraint](#Section_2.1.11) element defined.
 - **Association** can contain any number of [AnnotationElement](#Section_2.1.22) elements.
 - Child elements of **Association** are to appear in this sequence: **Documentation**, **End**, **ReferentialConstraint**, **AnnotationElement**.
@@ -1046,7 +1046,7 @@ The following rules apply to the **FunctionImport** element:
 - If the return type of **FunctionImport** is of **ComplexType** or scalar type, the [EntitySet](#Section_2.1.18) attribute cannot be defined.
 - **FunctionImport** can contain any number of [AnnotationAttribute](#Section_2.2.7) attributes. The full names of the **AnnotationAttribute** attributes cannot collide.
 - The **FunctionImport** element can contain a maximum of one [Documentation](#Section_2.1.21) element.
-- **FunctionImport** can have zero or more [Parameter](#Section_2.1.24) elements.
+- **FunctionImport** can have zero or more [Parameter](#Section_2.1.17) elements.
 - **Parameter** element names inside a **FunctionImport** cannot collide.
 - **FunctionImport** can have an **IsSideEffecting** attribute defined. Possible values are "true" and "false". If the **IsSideEffecting** attribute is omitted, the value of the **IsSideEffecting** attribute defaults to "true".
 - **FunctionImport** can have an **IsBindable** attribute defined. Possible values are "true" and "false". If the **IsBindable** attribute is omitted, the value of the **IsBindable** attribute is assumed to be "false".
@@ -1098,8 +1098,8 @@ The following rules apply to the **FunctionImport Parameter** element:
 - **Parameter** MUST have a **Name** defined.
 - The **Type** of the **Parameter** MUST be defined. **Type** is a [**scalar type**](#gt_scalar-type), [ComplexType](#Section_2.1.7), or [EntityType](#Section_2.1.2) or a [**collection**](#gt_collection) of scalar, **ComplexType**, or **EntityType** types.
 - **Parameter** can define the **Mode** of the parameter. Possible values are "In", "Out", and "InOut".
-- For a given **Parameter**, a [MaxLength](#Section_2.2.1.16.1.3) value can be specified.
-- [Precision](#Section_2.2.1.7.1.1) can be specified for a given **Parameter**.
+- For a given **Parameter**, a [MaxLength](#Section_2.2.1.2.1.1) value can be specified.
+- [Precision](#Section_2.2.1.4.1.1) can be specified for a given **Parameter**.
 - [Scale](#Section_2.2.1.7.1.2) can be specified for a given **Parameter**.
 - **Parameter** can contain any number of [AnnotationAttribute](#Section_2.2.7) attributes. The full names of the **AnnotationAttribute** attributes cannot collide.
 - **Parameter** can contain a maximum of one [Documentation](#Section_2.1.21) element.
@@ -1451,7 +1451,7 @@ The following rules apply to the **Function** element:
 - A complex type or a collection of complex types.
 - A row type or a collection of row types.
 - A reference type or a collection of reference types.
-- **Function** can contain any number of [Parameter](#Section_2.1.24) elements.
+- **Function** can contain any number of [Parameter](#Section_2.1.17) elements.
 - **Function** can contain any number of [AnnotationElement](#Section_2.1.22) elements.
 - In CSDL 3.0, **Function** can contain any number of [ValueAnnotation](#Section_3.1) elements.
 - **Parameter**, **DefiningExpression**, and **ReturnType** can appear in any order.
@@ -1854,9 +1854,9 @@ The following rules apply to the **ValueAnnotation** element:
 - [EntitySet](#Section_2.1.18)
 - [EntityType](#Section_2.1.2)
 - [FunctionImport](#Section_2.1.15)
-- [FunctionImport Parameter](#Section_2.1.24)
-- [Model Function](#Section_2.1.30)
-- [Model Function Parameter](#Section_2.1.24)
+- [FunctionImport Parameter](#Section_2.1.17)
+- [Model Function](#Section_2.1.15)
+- [Model Function Parameter](#Section_2.1.17)
 - [NavigationProperty](#Section_2.1.4)
 - [Property](#Section_2.1.3)
 - **ValueAnnotation** can have a **Qualifier** attribute defined unless the **ValueAnnotation** is a child element of an Annotations element that has a **Qualifier** attribute defined. If a **Qualifier** is defined, it has to be a **SimpleIdentifier**. **Qualifier** is used to differentiate bindings based on external context.
@@ -7783,7 +7783,7 @@ CSDL 2.0 is restricted in the following ways:
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.5
 - Microsoft .NET Framework 4.0

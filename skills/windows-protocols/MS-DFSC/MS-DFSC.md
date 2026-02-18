@@ -325,7 +325,7 @@ The DFS: Referral Protocol is a command/acknowledge protocol that sends out a se
 - Sysvol referrals, which identify the DCs that host a domain's SYSVOL or NETLOGON shares.
 Domain-joined clients issue all five types of referral requests, while non-domain-joined clients issue only [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) and DFS link referral requests. Optionally, clients can also be used to administer DFS namespaces (see [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md)).
 
-Clients can maintain local caches of information that are received through referral requests to avoid future referral requests and to improve the performance of DFS resource access, as specified in section [3.1.1](#Section_1.5.2).
+Clients can maintain local caches of information that are received through referral requests to avoid future referral requests and to improve the performance of DFS resource access, as specified in section [3.1.1](#Section_3.1.1).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -432,12 +432,12 @@ All 16-bit and 32-bit integers in REQ_GET_DFS_REFERRAL and RESP_GET_DFS_REFERRAL
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Host Name
 
-"Host name" refers to the <servername> component of the UNC Path specified in section [2.2.1.3](#Section_1.3).
+"Host name" refers to the <servername> component of the UNC Path specified in section [2.2.1.3](#Section_2.2.1.3).
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Share Name
 
-"Share name" refers to the <share> component of the UNC Path specified in section [2.2.1.3](#Section_1.3).
+"Share name" refers to the <share> component of the UNC Path specified in section [2.2.1.3](#Section_2.2.1.3).
 
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 UNC Path
@@ -455,7 +455,7 @@ A [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) MUST be in one of the
 
 - \\<ServerName>\<DFSName>
 - \\<DomainName>\<DFSName>
-<ServerName > is the [**host name**](#gt_host-name) (as specified in section [2.2.1.1](#Section_2.2.1.1)) of a [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) (as specified in section [2.2.1.6](#Section_2.2.1.3)) of the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890); <DomainName> is the [**domain name**](#gt_domain-name) of the [**domain**](#gt_domain) that hosts the [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace); and <DFSName> is the [**DFS namespace name**](#gt_dfs-namespace-name). [**Stand-alone DFS namespaces**](#gt_stand-alone-dfs-namespace) MUST be referred to only by the first path format; [**domain-based DFS namespaces**](#gt_domain-based-dfs-namespace) MUST be referred to in either format, although the second format is preferred.
+<ServerName > is the [**host name**](#gt_host-name) (as specified in section [2.2.1.1](#Section_2.2.1.1)) of a [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) (as specified in section [2.2.1.6](#Section_2.2.1.6)) of the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890); <DomainName> is the [**domain name**](#gt_domain-name) of the [**domain**](#gt_domain) that hosts the [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace); and <DFSName> is the [**DFS namespace name**](#gt_dfs-namespace-name). [**Stand-alone DFS namespaces**](#gt_stand-alone-dfs-namespace) MUST be referred to only by the first path format; [**domain-based DFS namespaces**](#gt_domain-based-dfs-namespace) MUST be referred to in either format, although the second format is preferred.
 
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 DFS Link
@@ -961,7 +961,7 @@ The client MUST validate that the returned referral response is properly formed,
 
 When an I/O operation that is issued to a link target fails with STATUS_PATH_NOT_COVERED (0xC0000257), the client MUST fail the original I/O request.
 
-When an I/O operation issued to a [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) server in step 8 of section [3.1.4.1](#Section_2.2.1.3) fails with STATUS_PATH_NOT_COVERED (0xC0000257), it indicates that the portion of the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) accessed by the client is not contained in the DFS root target server.
+When an I/O operation issued to a [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) server in step 8 of section [3.1.4.1](#Section_3.1.4.1) fails with STATUS_PATH_NOT_COVERED (0xC0000257), it indicates that the portion of the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) accessed by the client is not contained in the DFS root target server.
 
 To identify the [**DFS link targets**](#gt_44e2f830-c28b-41e3-8c3c-d0bb576ed9fb) that contain the required portion of the DFS namespace, the client MUST look up the path used for the I/O operation in ReferralCache. On a cache hit, the resulting ReferralCache entry MUST be used in further processing.
 
@@ -990,7 +990,7 @@ The **NumberOfReferrals** field in the referral header contains the number of re
 
 When a [**DFS path**](#gt_151c87db-05a4-40c3-99bd-4b682530d210) resolves to multiple referral entries, and the client supplies a buffer insufficiently large to hold the entries, the client can experience a non-deterministic server response.
 
-If a [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) request fails with STATUS_BUFFER_OVERFLOW (0x80000005), the client SHOULD retry the referral request with a bigger buffer size.<11> Response data buffer size is determined as specified in section [3.2.5.1](#Section_3.3.5.1).
+If a [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) request fails with STATUS_BUFFER_OVERFLOW (0x80000005), the client SHOULD retry the referral request with a bigger buffer size.<11> Response data buffer size is determined as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.1.5.4.1"></a>
 ##### 3.1.5.4.1 Receiving a Domain Referral Response
@@ -1006,7 +1006,7 @@ The [**DFS client**](#gt_c2787719-60e0-4b69-8efe-c33edf9b40b2) MUST NOT modify t
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 Receiving a DC Referral Response
 
-This is applicable only to a domain-joined computer. The [**DFS client**](#gt_c2787719-60e0-4b69-8efe-c33edf9b40b2) receives this referral response for the [**DC**](#gt_domain-controller-dc) referral request that it sent in step 5.2 of section [3.1.4.1](#Section_2.2.1.3). The DC referral response MUST be version 3 or later; otherwise, the client MUST ignore the referral response.
+This is applicable only to a domain-joined computer. The [**DFS client**](#gt_c2787719-60e0-4b69-8efe-c33edf9b40b2) receives this referral response for the [**DC**](#gt_domain-controller-dc) referral request that it sent in step 5.2 of section [3.1.4.1](#Section_3.1.4.1). The DC referral response MUST be version 3 or later; otherwise, the client MUST ignore the referral response.
 
 The client MUST verify that the **NumberOfReferrals** field of the referral header is 1 and that the NameListReferral bit is set in the referral entry. The other bits of **ReferralEntryFlags** in the referral entry MUST be ignored. The **NumberOfExpandedNames** in the referral entry contains the number of DC names returned. The client MUST use the value in the **NumberOfExpandedNames** field to determine how many names are present in the list at **ExpandedNameOffset**. The client can access the first null-terminated [**Unicode**](#gt_unicode) DC name string that is returned by adding the value in the **ExpandedNameOffset** field to the address of the referral entry. Immediately following the null termination of a DC name is the next DC name returned. The client can access the null-terminated Unicode [**domain name**](#gt_domain-name) that corresponds to the referral response by adding the value in the **SpecialNameOffset** to the address of the referral entry.
 
@@ -1015,7 +1015,7 @@ The client MUST add the list of DCs determined for a domain name to DCList of th
 <a id="Section_3.1.5.4.3"></a>
 ##### 3.1.5.4.3 Receiving a Root Referral Response or Link Referral Response
 
-This section describes the processing that occurs when the client gets a referral response after sending a [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) referral request in step 6 of section [3.1.4.1](#Section_2.2.1.3) or a link referral request in either step 9 of section 3.1.4.1 or in section [3.1.5.1](#Section_3.1.5.1).
+This section describes the processing that occurs when the client gets a referral response after sending a [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) referral request in step 6 of section [3.1.4.1](#Section_3.1.4.1) or a link referral request in either step 9 of section 3.1.4.1 or in section [3.1.5.1](#Section_3.1.5.1).
 
 If the referral request is successful, but the **NumberOfReferrals** field in the referral header (as specified in section [2.2.4](#Section_2.2.4)) is 0, the [**DFS server**](#gt_dfs-server) could not find suitable targets to return to the client. In this case, the client MUST fail the original I/O operation with STATUS_OBJECT_PATH_NOT_FOUND.
 
@@ -1043,12 +1043,12 @@ If this response is due to a referral request that was sent in step 2.2 in secti
 - Update the Interlink flag from the referral response, based on the test in section 3.1.5.4.5.
 - If the target specified by the TargetHint is not present in the referral response, set the TargetHint to point to the first target of the TargetList in ReferralCache.
 - If the TargetFailback is set in the ReferralCache entry, and if the TargetHint is not in the first target set of the TargetList, set the TargetHint to point to the first target in the first target set of the TargetList. This is referred to as a [**DFS client target failback**](#gt_506d8850-6fcd-469a-b837-da4aaadf7ec6). Target failback can also be performed at instances other than just at ReferralCache entry refresh time based on an implementation-defined policy.
-If an attempt to refresh an existing but expired ReferralCache entry fails, an implementation-defined error behavior MAY be used. For example, the client can initiate ReferralCache entry refresh at the end of a soft time-out period (as specified in section [3.1.1](#Section_1.5.2)) while permitting the use of the entry and either discard it at the end of a hard time-out period (as specified in section 3.1.1) or fail the I/O operations that use the ReferralCache entry.<16>
+If an attempt to refresh an existing but expired ReferralCache entry fails, an implementation-defined error behavior MAY be used. For example, the client can initiate ReferralCache entry refresh at the end of a soft time-out period (as specified in section [3.1.1](#Section_3.1.1)) while permitting the use of the entry and either discard it at the end of a hard time-out period (as specified in section 3.1.1) or fail the I/O operations that use the ReferralCache entry.<16>
 
 <a id="Section_3.1.5.4.4"></a>
 ##### 3.1.5.4.4 Receiving a sysvol Referral Response
 
-The client receives this referral response for the sysvol referral request that it sent in step 10 of section [3.1.4.1](#Section_2.2.1.3).
+The client receives this referral response for the sysvol referral request that it sent in step 10 of section [3.1.4.1](#Section_3.1.4.1).
 
 This referral response MUST be handled in the same manner as that of a ROOT referral response, as specified in section [3.1.5.4.3](#Section_3.1.5.4.3).
 
@@ -1072,7 +1072,7 @@ On joining a [**domain**](#gt_domain), the client updates its BootstrapDC, issue
 <a id="Section_3.2"></a>
 ## 3.2 DFS Root Target Server Details
 
-A [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) server hosts the [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) of a [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890). This section specifies how a DFS root target server processes and responds to [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) requests from [**DFS clients**](#gt_c2787719-60e0-4b69-8efe-c33edf9b40b2). If the server is also a [**DC**](#gt_domain-controller-dc), it MUST also conform to the specification in section [3.3](#Section_1.3).
+A [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) server hosts the [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) of a [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890). This section specifies how a DFS root target server processes and responds to [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) requests from [**DFS clients**](#gt_c2787719-60e0-4b69-8efe-c33edf9b40b2). If the server is also a [**DC**](#gt_domain-controller-dc), it MUST also conform to the specification in section [3.3](#Section_3.3).
 
 DFS root target servers respond to DFS root referral requests and [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) referral requests.<17>
 
@@ -1123,7 +1123,7 @@ When the [**DFS server**](#gt_dfs-server) is started:
 
 As specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.5.9 and [MS-SMB](../MS-SMB/MS-SMB.md) section 3.3.5.5, the SMB server invokes the [**DFS**](#gt_distributed-file-system-dfs) server to normalize the path name.
 
-- If the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) initialization (as specified in section [3.2.3](#Section_3.2)) corresponding to the share in the path is not yet complete, the DFS server MUST fail the path normalization request with STATUS_DFS_UNAVAILABLE.
+- If the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) initialization (as specified in section [3.2.3](#Section_3.2.3)) corresponding to the share in the path is not yet complete, the DFS server MUST fail the path normalization request with STATUS_DFS_UNAVAILABLE.
 - Otherwise, the DFS server matches the path name against [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea). If the path matches or contains a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619), the DFS server MUST respond to the path normalization request with STATUS_PATH_NOT_COVERED, indicating to the client to resolve the path by using a DFS link referral request. Otherwise, the DFS server MUST change the path name to a path relative to the root of the namespace and return STATUS_SUCCESS. For example, if the path name is "\MyDomain\MyDfs\MyDir\file1", then the DFS server MUST change the path name to "MyDir\file1".
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Handling a DFS Referral Request
@@ -1138,7 +1138,7 @@ The caller provides the following:
 
 **MaxOutputResponse**: The maximum response buffer size that the calling application will accept.
 
-The server processes this request as specified in section [3.2.5.1](#Section_3.3.5.1).
+The server processes this request as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -1222,7 +1222,7 @@ Because there are three dimensions available for the sorting of targets—site c
 After the sorted list of targets is available, noting that the list can be empty due to DFS in-site referral mode, the server still MUST initialize the RESP_GET_DFS_REFERRAL referral header as follows:
 
 - For a DFS root referral response, the **PathConsumed** field MUST be set to the length, in bytes, of the first two path components in the referral request. For a DFS link referral response, **PathConsumed** MUST be set to the length, in bytes, of the DFS referral request path prefix that matches the DFS link. This field MUST consist of the length of the whole path components in their entirety. For example, if the referral request path is "\MyDomain\MyDfs\dir1\link1\dir2\file1" and "\MyDomain\MyDfs\dir\link1" is a DFS link, **PathConsumed** is 50 (2 bytes for each of the 25 characters).
-- **NumberOfReferrals** MUST be set to the number of complete DFS referral entries that can be returned in the response buffer provided by the DFS referral request. The server MAY silently drop targets that will not fit in the buffer. However, if the buffer size is insufficient to return even one referral entry, the server MUST fail the referral request, as specified in section [3.2.5.1](#Section_3.3.5.1).<27>
+- **NumberOfReferrals** MUST be set to the number of complete DFS referral entries that can be returned in the response buffer provided by the DFS referral request. The server MAY silently drop targets that will not fit in the buffer. However, if the buffer size is insufficient to return even one referral entry, the server MUST fail the referral request, as specified in section [3.2.5.1](#Section_3.2.5.1).<27>
 - If DFS root targets are returned or if a DFS interlink is returned, the ReferralServers bit of the referral entry MUST be set to 1. In all other cases, it MUST be set to 0.
 - If DFS root targets are returned or if DFS link targets are returned, the StorageServers bit of the referral entry MUST be set to 1. In all other cases, it MUST be set to 0.
 - For a DFS referral version 1, the ReferralServers and StorageServers bits of the referral entry MUST be set to 1.
@@ -1262,7 +1262,7 @@ This section specifies how a [**DFS server**](#gt_dfs-server) on a [**DC**](#gt_
 
 A DFS server on a DC MUST respond to [**domain**](#gt_domain), DC, sysvol, root, and link-referral requests.
 
-If that DFS server is also hosting [**DFS root targets**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671), then in addition to the requirements in this section, it MUST also conform to the requirements in section [3.2](#Section_2.2.1.6) while processing referral requests for those DFS root targets.
+If that DFS server is also hosting [**DFS root targets**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671), then in addition to the requirements in this section, it MUST also conform to the requirements in section [3.2](#Section_3.2) while processing referral requests for those DFS root targets.
 
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
@@ -1292,7 +1292,7 @@ Servers receive and act upon [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Receiving a DFS Referral Request
 
-For more information about [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) requests, see section [3.2.5.1](#Section_3.3.5.1). The processing of individual referral requests is explained in the following sections.
+For more information about [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) requests, see section [3.2.5.1](#Section_3.2.5.1). The processing of individual referral requests is explained in the following sections.
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Receiving a Domain Referral Request
@@ -1411,7 +1411,7 @@ The server MUST add one referral entry structure for each target returned. The s
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 Receiving a Root Referral Request or Link Referral Request
 
-Root referral requests and link referral requests MUST be handled as specified in section [3.2.5.5](#Section_3.3.5.5), with the following exception: a [**DC**](#gt_domain-controller-dc) MUST process root referral requests and link referral requests for [**domain-based DFS namespaces**](#gt_domain-based-dfs-namespace) in the [**domain**](#gt_domain) for which it is a DC. The name of the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) in the second component of the DFS root referral request path MUST be validated against the domain-based DFS namespaces in the domain of the DC and if the namespace does not exist, the DFS server SHOULD fail the root referral request with a STATUS_NO_SUCH_FILE (0xC000000F) return code.<46> This MUST be done by searching the name attribute in the objects under the [**DFS**](#gt_distributed-file-system-dfs) configuration container of the directory service. A DC MUST fail the link referral request with STATUS_NOT_FOUND, if it’s not the DFS root target for the DFS namespace specified in the link referral request.
+Root referral requests and link referral requests MUST be handled as specified in section [3.2.5.5](#Section_3.2.5.5), with the following exception: a [**DC**](#gt_domain-controller-dc) MUST process root referral requests and link referral requests for [**domain-based DFS namespaces**](#gt_domain-based-dfs-namespace) in the [**domain**](#gt_domain) for which it is a DC. The name of the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) in the second component of the DFS root referral request path MUST be validated against the domain-based DFS namespaces in the domain of the DC and if the namespace does not exist, the DFS server SHOULD fail the root referral request with a STATUS_NO_SUCH_FILE (0xC000000F) return code.<46> This MUST be done by searching the name attribute in the objects under the [**DFS**](#gt_distributed-file-system-dfs) configuration container of the directory service. A DC MUST fail the link referral request with STATUS_NOT_FOUND, if it’s not the DFS root target for the DFS namespace specified in the link referral request.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events

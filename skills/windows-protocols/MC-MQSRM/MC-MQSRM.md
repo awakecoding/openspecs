@@ -247,7 +247,7 @@ See [Revision History](#revision-history) for full version history.
 
 This document specifies the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP), which defines a mechanism for reliably transferring [**messages**](#gt_message) between two [**message queues**](#gt_message-queue) that are located on two different hosts. The document also specifies how [**MSMQ**](#gt_microsoft-message-queuing-msmq) uses the Pragmatic General Multicast (PGM) Protocol to provide reliable multicasting of SRMP messages between a sending message queue and a set of receiving message queues.
 
-SRMP uses SOAP 1.1 over HTTP, as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520), to transport data but augments it with additional levels of acknowledgment to ensure that messages are reliably transferred regardless of connection, application, or node failures. For more information about MSMQ architecture and concepts, see [MS-MQOD](#Section_1.3.2) and [MS-MQMQ](#Section_1.3.2).
+SRMP uses SOAP 1.1 over HTTP, as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520), to transport data but augments it with additional levels of acknowledgment to ensure that messages are reliably transferred regardless of connection, application, or node failures. For more information about MSMQ architecture and concepts, see [MS-MQOD](../MS-MQOD/MS-MQOD.md) and [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md).
 
 Familiarity with Internet messaging standards, such as HTTP, MIME, [**XML**](#gt_xml), and SOAP, is required for a complete understanding of this specification. Also, familiarity with the basic concepts of MSMQ is required.
 
@@ -364,19 +364,19 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
-[MS-MQDMPR] Microsoft Corporation, "[Message Queuing (MSMQ): Common Data Model and Processing Rules](#Section_1.3.2)".
+[MS-MQDMPR] Microsoft Corporation, "[Message Queuing (MSMQ): Common Data Model and Processing Rules](../MS-MQDMPR/MS-MQDMPR.md)".
 
-[MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](#Section_1.3.2)".
+[MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](../MS-MQDSSM/MS-MQDSSM.md)".
 
-[MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](#Section_1.3.2)".
+[MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](../MS-MQDS/MS-MQDS.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_1.3.2)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
-[MS-MQQB] Microsoft Corporation, "[Message Queuing (MSMQ): Message Queuing Binary Protocol](#Section_1.3.2)".
+[MS-MQQB] Microsoft Corporation, "[Message Queuing (MSMQ): Message Queuing Binary Protocol](../MS-MQQB/MS-MQQB.md)".
 
-[MS-MQRR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Remote Read Protocol](#Section_1.3.2)".
+[MS-MQRR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Remote Read Protocol](../MS-MQRR/MS-MQRR.md)".
 
 [MS-PAC] Microsoft Corporation, "[Privilege Attribute Certificate Data Structure](../MS-PAC/MS-PAC.md)".
 
@@ -417,7 +417,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3.2)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-WSROUTING] Microsoft Corporation, "Web Services Routing Protocol (WS-Routing)", [http://msdn.microsoft.com/en-us/library/ms951249.aspx](https://go.microsoft.com/fwlink/?LinkId=95260)
 
@@ -440,7 +440,7 @@ Queues are typically hosted by a communications service called a [**queue manage
 
 MSMQ is designed to send messages asynchronously to computers that are temporarily unavailable. When sending a message, the QM indicates to the client application that the sending operation has succeeded as soon as the message is created with valid properties and placed in an [**outgoing queue**](#gt_outgoing-queue). The message remains in the outgoing queue until it is delivered to its destination or until the message expires. Note that the sending operation does not immediately deliver the message. It instead stores the message in a queue to be delivered asynchronously by the QM.
 
-The QM handles message delivery by continually checking for messages in all the local outgoing queues. When it finds messages, the QM attempts to transmit the messages to their destinations. If the message does not reach its destination queue or if it is discarded before a receiving application retrieves it, the QM on the sending side does not return any information to the sending application. Applications can obtain information about message delivery from acknowledgment messages that the destination host sends back and also from the [**dead-letter queues**](#gt_dead-letter-queue) and [**queue journals**](#gt_queue-journal) for messages sent. For more information about MSMQ architecture, see [MS-MQOD](#Section_1.3.2).
+The QM handles message delivery by continually checking for messages in all the local outgoing queues. When it finds messages, the QM attempts to transmit the messages to their destinations. If the message does not reach its destination queue or if it is discarded before a receiving application retrieves it, the QM on the sending side does not return any information to the sending application. Applications can obtain information about message delivery from acknowledgment messages that the destination host sends back and also from the [**dead-letter queues**](#gt_dead-letter-queue) and [**queue journals**](#gt_queue-journal) for messages sent. For more information about MSMQ architecture, see [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 <a id="Section_1.3.3"></a>
 ### 1.3.3 SRMP
@@ -468,7 +468,7 @@ A typical [**message**](#gt_message) that is exchanged in a [**message queuing**
 
 Regular messages can, like [**durable**](#gt_durable-message) or [**stream messages**](#gt_stream-message), survive a network failure. For example, if the client sends regular messages, and the link between the QM and the target computer fails, the QM continues to store the messages in its memory and retries the connection. However, if the sending QM fails before the link is restored, the undelivered regular messages are lost. Likewise, regular messages on a server are lost if a receiving QM fails.
 
-Regular messages correspond to express messages, as described in [MS-MQQB](#Section_1.3.2) section 1.3.2.1.1.
+Regular messages correspond to express messages, as described in [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 1.3.2.1.1.
 
 <a id="Section_1.3.5.2"></a>
 #### 1.3.5.2 Durable Messages
@@ -477,7 +477,7 @@ Regular messages correspond to express messages, as described in [MS-MQQB](#Sect
 
 Disk storage makes delivery somewhat slower than with [**regular messages**](#gt_regular-message) but is ideal when persistence through service restart or failure is required. If a computer fails or is shut down while sending messages, the messages are stored on disk. When the computer is restarted and the [**QM**](#gt_queue-manager-qm) service restarts, the sending process automatically resumes. Durable messages are not guaranteed to be delivered only once or in order.
 
-Durable messages correspond to recoverable messages, as described in [MS-MQQB](#Section_1.3.2) section 1.3.2.1.2.
+Durable messages correspond to recoverable messages, as described in [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 1.3.2.1.2.
 
 <a id="Section_1.3.5.3"></a>
 #### 1.3.5.3 Stream Messages
@@ -488,14 +488,14 @@ Stream messages are intended to be used in situations where the [**QM**](#gt_que
 
 SRMP does not mandate the implementation details of the transactional capture of messages, as long as the external behavior of a QM is consistent with the behavior specified in this document.
 
-Stream messages correspond to transactional messages, as described in [MS-MQQB](#Section_1.3.2) section 1.3.2.1.3.
+Stream messages correspond to transactional messages, as described in [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 1.3.2.1.3.
 
 <a id="Section_1.3.6"></a>
 ### 1.3.6 Message Queues
 
 A [**queue**](#gt_queue) is a logical data structure that contains an ordered list of zero or more [**messages**](#gt_message). A [**QM**](#gt_queue-manager-qm) maintains a set of queues that hold messages. The QM requires a set of predefined or [**system queues**](#gt_system-queue), which are defined in [System Queues (section 1.3.6.1)](#Section_1.3.6.1) and dynamically creates [**outgoing queues**](#gt_outgoing-queue), which are defined in [Outgoing Queues (section 1.3.6.2)](#Section_1.3.6.2), that are referenced throughout this document. A QM configuration defines a set of user queues that are the targets for messages sent by using SRMP.
 
-Messages transferred by using SRMP are addressed to specific queues by name. SRMP identifies queues that use the formats specified in [MS-MQMQ](#Section_1.3.2) section 2.1. SRMP does not mandate the implementation details of queues, as long as their external behaviors are consistent with those described in this document.
+Messages transferred by using SRMP are addressed to specific queues by name. SRMP identifies queues that use the formats specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1. SRMP does not mandate the implementation details of queues, as long as their external behaviors are consistent with those described in this document.
 
 A queue can be transactional or nontransactional. A [**transactional queue**](#gt_transactional-queue) accepts only [**stream messages**](#gt_stream-message), and a nontransactional queue accepts only [**regular**](#gt_33e6328f-7bea-4371-8157-25f94cc985fa) and [**durable messages**](#gt_durable-message). A transactional queue requires persistent storage of messages and guaranteed consistency through process or node failure.
 
@@ -542,7 +542,7 @@ This protocol uses the following types of internal receipts:
 
 - **Delivery receipt**: This message acknowledges receipt of regular and durable user messages.
 - **Commitment receipt**: This message acknowledges that a delivered message has been removed from the destination [**queue**](#gt_queue). Removal from the destination queue could be the result of a user-level application that reads the message from the queue, or of an administrative action, such as deleting the message or the queue. The receipt can represent a positive or negative acknowledgment.
-- **Stream receipt**: This message acknowledges in-order receipt of [**stream messages**](#gt_stream-message). This receipt is required to guarantee EOIO delivery of stream messages. [**Stream receipts**](#gt_stream-receipt) correspond to order acknowledgments, as described in [MS-MQQB](#Section_1.3.2) section 1.3.5.1.
+- **Stream receipt**: This message acknowledges in-order receipt of [**stream messages**](#gt_stream-message). This receipt is required to guarantee EOIO delivery of stream messages. [**Stream receipts**](#gt_stream-receipt) correspond to order acknowledgments, as described in [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 1.3.5.1.
 <a id="Section_1.3.9"></a>
 ### 1.3.9 Protocol Security
 
@@ -675,7 +675,7 @@ The following figure shows a diagram of the protocol layers.
 
 Figure 2: Protocol layer diagram
 
-This protocol uses shared state and processing rules described in [MS-MQDMPR](#Section_1.3.2). For more information, see [MS-MQDMPR] section 1.4 for details about relationships between all MSMQ protocols through this shared state.
+This protocol uses shared state and processing rules described in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md). For more information, see [MS-MQDMPR] section 1.4 for details about relationships between all MSMQ protocols through this shared state.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -848,16 +848,16 @@ The WS-Routing <action> element MUST be present as a child element of the <rp:pa
 
 <action>MSMQ:mqsender label</action>
 
-If the message is a delivery receipt (see section [2.2.5.4](#Section_2.2.5.4)) or a commitment receipt (see section [2.2.5.5](#Section_2.2.5.2.3)) in response to a previous SRMP message (containing <deliveryReceiptRequest> or <commitmentReceiptRequest>), the <action> element MUST contain the identical label string as the initial message.<6>
+If the message is a delivery receipt (see section [2.2.5.4](#Section_2.2.5.4)) or a commitment receipt (see section [2.2.5.5](#Section_2.2.5.5)) in response to a previous SRMP message (containing <deliveryReceiptRequest> or <commitmentReceiptRequest>), the <action> element MUST contain the identical label string as the initial message.<6>
 
 If the message is a [**stream receipt**](#gt_stream-receipt) (see section [2.2.5.6](#Section_2.2.5.6)) in response to a previous [**stream message**](#gt_stream-message), the <action> element MUST contain the label string "MSMQ:QM Ordering Ack".
 
-The <action> element corresponds to the **Message.Label** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <action> element corresponds to the **Message.Label** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 to Element
 
-The WS-Routing <to> element MUST be present as a child element of the <rp:path> element. It MUST contain a string that represents the URI of the destination [**queue**](#gt_queue) that is the ultimate destination of the message. For details about [**MSMQ**](#gt_microsoft-message-queuing-msmq) naming, see [MS-MQMQ](#Section_1.3.2) section 2.1.
+The WS-Routing <to> element MUST be present as a child element of the <rp:path> element. It MUST contain a string that represents the URI of the destination [**queue**](#gt_queue) that is the ultimate destination of the message. For details about [**MSMQ**](#gt_microsoft-message-queuing-msmq) naming, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 
 If HTTP is selected as the underlying transport protocol, the URI of the destination queue MUST begin with "http://", as the following example shows.
 
@@ -871,20 +871,20 @@ If PGM [[RFC3208]](https://go.microsoft.com/fwlink/?LinkId=95257) is selected as
 
 <to>MSMQ:MULTICAST=234.1.1.1:8001</to>
 
-The <to> element corresponds to the **Message.DestinationQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <to> element corresponds to the **Message.DestinationQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <a id="Section_2.2.4.3"></a>
 #### 2.2.4.3 id Element
 
 The WS-Routing <id> element MUST be present as a child element of the <rp:path> element. The content of this element uniquely identifies the [**message**](#gt_message) across all [**MSMQ**](#gt_microsoft-message-queuing-msmq) [**QMs**](#gt_queue-manager-qm).
 
-If the <Msmq> element is not present in the message (see section [2.2.6](#Section_1.3)), the <id> element MUST be ignored.
+If the <Msmq> element is not present in the message (see section [2.2.6](#Section_2.2.6)), the <id> element MUST be ignored.
 
 If the <Msmq> element is present in the message, the <id> element MUST contain a string that begins with "uuid:", followed by an index number of type xs:unsignedLong that identifies the message, followed by "@", and then followed by a [GUID string](#Section_2.2.1.1) that identifies the sending QM.
 
 The sending QM [**GUID**](#gt_globally-unique-identifier-guid) SHOULD<7> be identical to the <SourceQmGuid> child element of the <Msmq> element.
 
-The <id> element corresponds to the **Message.Identifier** attribute of the ADM Message data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <id> element corresponds to the **Message.Identifier** attribute of the ADM Message data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <id>uuid:26626@32221eda-9376-46df-b6ed-783091123831</id>
 
@@ -893,11 +893,11 @@ The <id> element corresponds to the **Message.Identifier** attribute of the ADM 
 
 The WS-Routing <rev> element MAY be present as a child element of the <rp:path> element. If present, exactly one<8> WS-Routing <via> element MUST be present as a child element of the <rev> element.
 
-The <rev> element describes the reverse path that response [**messages**](#gt_message) follow. This element SHOULD contain a string that represents the URI of the application-level response [**queue**](#gt_queue) in the <via> element. The URI MAY use HTTP/HTTPS name formatting (similar to the URI in the <to> element that is described in section [2.2.4.2](#Section_2.2.4.2)), or it MAY use standard name formating that is prefixed with "MSMQ:". For details about [**MSMQ**](#gt_microsoft-message-queuing-msmq) naming, see [MS-MQMQ](#Section_1.3.2) section 2.1.
+The <rev> element describes the reverse path that response [**messages**](#gt_message) follow. This element SHOULD contain a string that represents the URI of the application-level response [**queue**](#gt_queue) in the <via> element. The URI MAY use HTTP/HTTPS name formatting (similar to the URI in the <to> element that is described in section [2.2.4.2](#Section_2.2.4.2)), or it MAY use standard name formating that is prefixed with "MSMQ:". For details about [**MSMQ**](#gt_microsoft-message-queuing-msmq) naming, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 
 The <via> element MAY be empty,<9> which is equivalent to not including a <rev> element in the message.
 
-The <via> element corresponds to the **Message.ResponseQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <via> element corresponds to the **Message.ResponseQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <rev>
 
@@ -931,7 +931,7 @@ The SRMP <expiresAt> element MUST be present as a child element of the <properti
 
 The <expiresAt> element represents the expiration time stamp of the [**message**](#gt_message), beyond which time, the message MUST not be processed by the receiver and MUST be discarded.
 
-The <expiresAt> element corresponds to the **Message.TimeToReachQueue** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <expiresAt> element corresponds to the **Message.TimeToReachQueue** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <expiresAt>20070619T210654</expiresAt>
 
@@ -944,7 +944,7 @@ It MUST contain an ISO 8601 date string, as the following example shows, and is 
 
 The <sentAt> element represents the sending time stamp of the [**message**](#gt_message). It MUST NOT be modified on any attempt at retransmission of the message if previous transmission attempts have failed.
 
-The <sentAt> element corresponds to the **Message.SentTime** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <sentAt> element corresponds to the **Message.SentTime** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <sentAt>20070618T210654</sentAt>
 
@@ -967,13 +967,13 @@ The child elements of <services> are used as described in the following sections
 <a id="Section_2.2.5.2.1"></a>
 ##### 2.2.5.2.1 durable/ Element
 
-The SRMP <durable/> element MAY be present as a child element of the <services> element. If the <stream> element (see section [2.2.5.3](#Section_3.1.1.1.6)) is present, <durable/> MUST be present.
+The SRMP <durable/> element MAY be present as a child element of the <services> element. If the <stream> element (see section [2.2.5.3](#Section_2.2.5.3)) is present, <durable/> MUST be present.
 
 If <durable/> is present, the [**message**](#gt_message) MUST be persisted to stable storage at the sender before transmission and MUST be persisted at the receiver immediately on receipt and prior to further processing.
 
 If a delivery receipt has been requested (see section [2.2.5.2.2](#Section_2.2.5.2.2)), the receipt MUST be sent only after the message has been durably stored.
 
-The <durable/> element corresponds to the **Message.DeliveryGuarantee = Recoverable** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <durable/> element corresponds to the **Message.DeliveryGuarantee = Recoverable** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <durable/>
 
@@ -982,7 +982,7 @@ The <durable/> element corresponds to the **Message.DeliveryGuarantee = Recovera
 
 The SRMP <deliveryReceiptRequest> element MAY be present as a child element of the <services> element. If present, the SRMP <sendTo> element MUST be present as a child element of the <deliveryReceiptRequest> element, as the following example shows. The <sendTo> element MUST contain a string that represents the URI of the administration [**queue**](#gt_queue) to which receipts are sent. The URI MUST use HTTP/HTTPS name formatting (similar to the URI in the <to> element, which is described in section [2.2.4.2](#Section_2.2.4.2)).
 
-The <deliveryReceiptRequest> element corresponds to the **Message.AcknowledgementsRequested += AckPosArrive** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <deliveryReceiptRequest> element corresponds to the **Message.AcknowledgementsRequested += AckPosArrive** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 If the <deliveryReceiptRequest> element is present, the receiver MUST acknowledge acceptance of the [**message**](#gt_message) with a receipt. The receipt acknowledges that the receiver understands each SRMP element that is marked with "mustUnderstand=1", has performed all actions that are required of the SRMP receiver prior to sending the receipt, and is committed to performing all actions that are required of the receiver after sending the receipt. In the context of [**MSMQ**](#gt_microsoft-message-queuing-msmq), this means that the message was received and placed in the destination queue at the receiver. The receipt MUST be sent to the URI that is specified in the <sendTo> element.
 
@@ -999,7 +999,7 @@ The <sendTo> element corresponds to the **Message.AdministationQueueFormatName**
 
 The SRMP <commitmentReceiptRequest> element MAY be present as a child element of the <services> element. If present:
 
-- The SRMP <sendTo> element MUST be present as a child element of the <commitmentReceiptRequest> element. The <sendTo> element MUST contain a string that represents the URI of the administration [**queue**](#gt_queue) to which receipts are sent. The URI MUST use HTTP/HTTPS name formatting (similar to the URI in the <to> element, which is described in section [2.2.4.2](#Section_2.2.4.2)). The <sendTo> element corresponds to the **Message.AdministationQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+- The SRMP <sendTo> element MUST be present as a child element of the <commitmentReceiptRequest> element. The <sendTo> element MUST contain a string that represents the URI of the administration [**queue**](#gt_queue) to which receipts are sent. The URI MUST use HTTP/HTTPS name formatting (similar to the URI in the <to> element, which is described in section [2.2.4.2](#Section_2.2.4.2)). The <sendTo> element corresponds to the **Message.AdministationQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 - The SRMP <positiveOnly/> element MAY be present as a child element of the <commitmentReceiptRequest> element, as the following example shows. If present, the receiver MUST send a positive commitment receipt if it understands all elements marked with "mustUnderstand=1" and is committed to processing the [**message**](#gt_message). In the context of [**MSMQ**](#gt_microsoft-message-queuing-msmq), this means that the message was received, placed in the destination queue at the receiver, and successfully removed from the destination queue by the receiving application. The <positiveOnly/> element corresponds to the **Message.AcknowledgementsRequested += AckPosReceive** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR] section 3.1.1.12.
 - The SRMP <negativeOnly/> element MAY be present as a child element of the <commitmentReceiptRequest> element. If present, the receiver MUST send a negative commitment receipt if it attempted to process the message but decided not to commit to complete its processing; or if the message expired before the receiver attempted to process the message. In the context of MSMQ, this means that the message was discarded or otherwise removed from the destination queue before the receiving application was able to receive it. The <negativeOnly/> element corresponds to the **Message.AcknowledgementsRequested += AckNegReceive** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR] section 3.1.1.12.
 - If neither <positiveOnly/> nor <negativeOnly/> is present, the receiver MUST NOT send any commitment receipts.
@@ -1017,7 +1017,7 @@ The SRMP <commitmentReceiptRequest> element MAY be present as a child element of
 
 The SRMP <stream> element MAY be present as a child element of the <se:Header> element. If present, it MUST be marked with the SOAP attribute **se:mustUnderstand="1"**, as the following example shows.
 
-If a <stream> element is present, the <Msmq> element specified in section [2.2.6](#Section_1.3) MUST be present. [**Messages**](#gt_message) sent in a [**stream**](#gt_stream) MUST be persistent; therefore, the <durable/> child element of the <services> element MUST be present (see section [2.2.5.2.1](#Section_2.2.5.2.1)).
+If a <stream> element is present, the <Msmq> element specified in section [2.2.6](#Section_2.2.6) MUST be present. [**Messages**](#gt_message) sent in a [**stream**](#gt_stream) MUST be persistent; therefore, the <durable/> child element of the <services> element MUST be present (see section [2.2.5.2.1](#Section_2.2.5.2.1)).
 
 The <stream> element defines child elements for a label and context for message [**sequences**](#gt_sequence). In particular, it defines the concepts of the first message, current message, and previous message. The receiver MUST NOT process any message more than once, and the receiver MUST NOT accept any message unless the previous message has been accepted.
 
@@ -1028,7 +1028,7 @@ The child elements of <stream> are used as described in the following sections.
 <a id="Section_2.2.5.3.1"></a>
 ##### 2.2.5.3.1 streamId Element
 
-The SRMP <streamId> element MUST be present as a child element of the <stream> element. It defines a unique identifier for the [**stream**](#gt_stream) and MUST begin with "uid:", as the example shows, and be followed by a [GUID string](#Section_2.2.1.1) that identifies the sending [**QM**](#gt_queue-manager-qm) that corresponds to the **QueueManager.Identifier** attribute of the ADM **QueueManager** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.1.
+The SRMP <streamId> element MUST be present as a child element of the <stream> element. It defines a unique identifier for the [**stream**](#gt_stream) and MUST begin with "uid:", as the example shows, and be followed by a [GUID string](#Section_2.2.1.1) that identifies the sending [**QM**](#gt_queue-manager-qm) that corresponds to the **QueueManager.Identifier** attribute of the ADM **QueueManager** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1.
 
 The GUID string identifier MUST be followed by a backslash (\), which MUST be followed by a [**sequence**](#gt_sequence) number of type xs:unsignedLong that corresponds to the **Message.TransactionalMessageSequenceIdentifier** attribute of the ADM **Message** data element. The higher-value half of the 64-bit stream identifier forms the **Message.TransactionalMessageSequenceIdentifier.TimeStamp**; the lower-value half forms the **Message.TransactionalMessageSequenceIdentifier.Ordinal**. For details, see [MS-MQDMPR] section 3.1.1.12.
 
@@ -1043,7 +1043,7 @@ The SRMP <current> element MUST be present as a child element of the <stream> el
 
 It MUST contain a number of type xs:unsignedLong, as the following example shows, that defines the relative location of the [**message**](#gt_message) in the [**stream**](#gt_stream). The first message in the stream MUST be assigned the value 1.
 
-The <current> element corresponds to the **Message.TransactionSequenceNumber** attribute of the ADM Message data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <current> element corresponds to the **Message.TransactionSequenceNumber** attribute of the ADM Message data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <current>42</current>
 
@@ -1056,7 +1056,7 @@ If present, it MUST contain a number of type xs:unsignedLong, as the following e
 
 The <previous> element is used to indicate gaps in the stream that occur if the sender skips some messages without invalidating the entire stream.
 
-The <previous> element corresponds to the **Message.TransactionPreviousSequenceNumber** attribute of the ADM Message data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <previous> element corresponds to the **Message.TransactionPreviousSequenceNumber** attribute of the ADM Message data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <previous>41</previous>
 
@@ -1065,7 +1065,7 @@ The <previous> element corresponds to the **Message.TransactionPreviousSequenceN
 
 The SRMP <start> element MAY be present as a child element of the <stream> element. If present, the SRMP element <sendReceiptsTo> MUST be present as a child element of the <start> element, as the following example shows. The <sendReceiptsTo> element MUST contain a string that represents the URI of the administration [**queue**](#gt_queue) to which receipts are sent. The URI MUST use HTTP/HTTPS name formatting (similar to the URI in the <to> element, which is described in section [2.2.4.2](#Section_2.2.4.2)).
 
-The <sendReceiptsTo> element corresponds to the **Message.AdministationQueueFormatName** attribute of the ADM Message data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <sendReceiptsTo> element corresponds to the **Message.AdministationQueueFormatName** attribute of the ADM Message data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 The <start> element MUST be present in the first [**message**](#gt_message) of a [**stream**](#gt_stream) and MUST NOT be present in any subsequent message of the stream.
 
@@ -1132,7 +1132,7 @@ The SRMP <streamReceipt> element MAY be present as a child element of the <se:He
 <a id="Section_2.2.6"></a>
 ### 2.2.6 MSMQ Elements
 
-[**MSMQ**](#gt_microsoft-message-queuing-msmq) uses the following [**XML**](#gt_xml) elements for specific purposes. They each have corresponding attributes in the ADM **Message** data element of the abstract data model, as described in [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+[**MSMQ**](#gt_microsoft-message-queuing-msmq) uses the following [**XML**](#gt_xml) elements for specific purposes. They each have corresponding attributes in the ADM **Message** data element of the abstract data model, as described in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 MSMQ elements are child elements of the <Msmq> element. The <Msmq> element SHOULD<12> be present as a child element of the <se:Header> element. If present, the MSMQ namespace MUST be declared as xmlns="msmq.namespace.xml", as the following example shows.
 
@@ -1143,37 +1143,37 @@ The child elements of <Msmq> are used as described in the following sections.
 <a id="Section_2.2.6.1"></a>
 #### 2.2.6.1 Class Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Class> element MUST be present as a child element of the <Msmq> element. The <Class> element corresponds to the **Message.Class** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Class> element MUST be present as a child element of the <Msmq> element. The <Class> element corresponds to the **Message.Class** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
-The <Class> element MUST contain a number of type xs:unsignedLong, as the following example shows, that corresponds to an enumeration value as described in [MS-MQMQ](#Section_1.3.2) section 2.2.18.1.6.
+The <Class> element MUST contain a number of type xs:unsignedLong, as the following example shows, that corresponds to an enumeration value as described in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6.
 
 <Class>255</Class>
 
 <a id="Section_2.2.6.2"></a>
 #### 2.2.6.2 Priority Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Priority> element MUST be present as a child element of the <Msmq> element. The <Priority> element corresponds to the **Message.Priority** attribute of the ADM **Message** data element. It MUST contain a number of type xs:unsignedLong with valid values from 0 to 7, as the following example shows. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Priority> element MUST be present as a child element of the <Msmq> element. The <Priority> element corresponds to the **Message.Priority** attribute of the ADM **Message** data element. It MUST contain a number of type xs:unsignedLong with valid values from 0 to 7, as the following example shows. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <Priority>3</Priority>
 
 <a id="Section_2.2.6.3"></a>
 #### 2.2.6.3 Journal/ Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Journal/> element MAY be present as a child element of the <Msmq> element. The <Journal/> element, as the following example shows, corresponds to the **Message.PositiveJournalingRequested = True** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Journal/> element MAY be present as a child element of the <Msmq> element. The <Journal/> element, as the following example shows, corresponds to the **Message.PositiveJournalingRequested = True** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <Journal/>
 
 <a id="Section_2.2.6.4"></a>
 #### 2.2.6.4 DeadLetter/ Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <DeadLetter/> element, as the following example shows, MAY be present as a child element of the <Msmq> element. The <DeadLetter/> element corresponds to the **Message.NegativeJournalingRequested = True** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <DeadLetter/> element, as the following example shows, MAY be present as a child element of the <Msmq> element. The <DeadLetter/> element corresponds to the **Message.NegativeJournalingRequested = True** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <DeadLetter/>
 
 <a id="Section_2.2.6.5"></a>
 #### 2.2.6.5 Correlation Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Correlation> element MAY be present as a child element of the <Msmq> element. The <Correlation> element corresponds to the **Message.CorrelationIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Correlation> element MAY be present as a child element of the <Msmq> element. The <Correlation> element corresponds to the **Message.CorrelationIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 The <Correlation> element MUST be encoded as a set of bytes in base64, as the following example shows, and as is described in [[RFC3548]](https://go.microsoft.com/fwlink/?LinkId=90432).
 
@@ -1182,7 +1182,7 @@ The <Correlation> element MUST be encoded as a set of bytes in base64, as the fo
 <a id="Section_2.2.6.6"></a>
 #### 2.2.6.6 Trace/ Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Trace/> element, as the following example shows, MAY be present as a child element of the <Msmq> element. The <Trace/> element corresponds to the **Message.TracingRequested = True** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Trace/> element, as the following example shows, MAY be present as a child element of the <Msmq> element. The <Trace/> element corresponds to the **Message.TracingRequested = True** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <Trace/>
 
@@ -1191,28 +1191,28 @@ The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Trace/> element, as the foll
 
 The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <ConnectorType> element MAY be present as a child element of the <Msmq> element. It MUST contain a [GUID string](#Section_2.2.1.1), as the following example shows.
 
-The <ConnectorType> element corresponds to the **Message.ConnectorTypeIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The <ConnectorType> element corresponds to the **Message.ConnectorTypeIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <ConnectorType>fd74b8eb-2af7-4ac5-9405-074e315df392</ConnectorType>
 
 <a id="Section_2.2.6.8"></a>
 #### 2.2.6.8 App Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <App> element MAY be present as a child element of the <Msmq> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <App> element corresponds to the **Message.ApplicationTag** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <App> element MAY be present as a child element of the <Msmq> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <App> element corresponds to the **Message.ApplicationTag** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <App>36</App>
 
 <a id="Section_2.2.6.9"></a>
 #### 2.2.6.9 BodyType Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <BodyType> element MUST be present as a child element of the <Msmq> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <BodyType> element corresponds to the **Message.BodyType** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <BodyType> element MUST be present as a child element of the <Msmq> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <BodyType> element corresponds to the **Message.BodyType** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <BodyType>8</BodyType>
 
 <a id="Section_2.2.6.10"></a>
 #### 2.2.6.10 HashAlgorithm Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <HashAlgorithm> element MAY be present as a child element of the <Msmq> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <HashAlgorithm> element corresponds to the **Message.HashAlgorithm** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <HashAlgorithm> element MAY be present as a child element of the <Msmq> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <HashAlgorithm> element corresponds to the **Message.HashAlgorithm** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <HashAlgorithm>32772</HashAlgorithm>
 
@@ -1221,7 +1221,7 @@ The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <HashAlgorithm> element MAY b
 
 The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Eod> element MAY be present as a child element of the <Msmq> element. If this element is present:
 
-- The MSMQ <First/> element, as the following example shows, MAY be present as a child element of the <Eod> element. The <First/> element corresponds to the **Message.FirstInTransaction** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+- The MSMQ <First/> element, as the following example shows, MAY be present as a child element of the <Eod> element. The <First/> element corresponds to the **Message.FirstInTransaction** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 - The MSMQ <Last/> element MAY be present as a child element of the <Eod> element. The <Last/> element corresponds to the **Message.LastInTransaction** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR] section 3.1.1.12.
 - The MSMQ <ConnectorId> element MAY be present as a child element of the <Eod> element. It MUST contain a [GUID string](#Section_2.2.1.1). The <ConnectorId> element corresponds to the **Message.ConnectorQueueManagerIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR] section 3.1.1.12.
 <Eod>
@@ -1237,7 +1237,7 @@ The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Eod> element MAY be present 
 
 The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Provider> element MAY be present as a child element of the <Msmq> element. If this element is present:
 
-- The MSMQ <Type> element MUST be present as a child element of the <Provider> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <Type> element corresponds to the **Message.AuthenticationProviderType** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+- The MSMQ <Type> element MUST be present as a child element of the <Provider> element. It MUST contain a number of type xs:unsignedLong, as the following example shows. The <Type> element corresponds to the **Message.AuthenticationProviderType** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 - The MSMQ <Name> element MUST be present as a child element of the <Provider> element. It MUST contain a string that represents a provider. The <Name> element corresponds to the **Message.AuthenticationProviderName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR] section 3.1.1.12.
 <Provider>
 
@@ -1250,14 +1250,14 @@ The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <Provider> element MAY be pre
 <a id="Section_2.2.6.13"></a>
 #### 2.2.6.13 SourceQmGuid Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <SourceQmGuid> element MUST be present as a child element of the <Msmq> element. It MUST contain a [GUID string](#Section_2.2.1.1), as the following example shows. The <SourceQmGuid > element corresponds to the **Message.SourceMachineIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <SourceQmGuid> element MUST be present as a child element of the <Msmq> element. It MUST contain a [GUID string](#Section_2.2.1.1), as the following example shows. The <SourceQmGuid > element corresponds to the **Message.SourceMachineIdentifier** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <SourceQmGuid>fd74b8eb-2af7-4ac5-9405-074e315df392</SourceQmGuid>
 
 <a id="Section_2.2.6.14"></a>
 #### 2.2.6.14 DestinationMqf Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <DestinationMqf> element MAY be present as a child element of the <Msmq> element. It MUST contain one or more MSMQ-formatted names, each name separated by white space, as the following example shows. The <DestinationMqf> element corresponds to the **Message.DestinationMultiQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <DestinationMqf> element MAY be present as a child element of the <Msmq> element. It MUST contain one or more MSMQ-formatted names, each name separated by white space, as the following example shows. The <DestinationMqf> element corresponds to the **Message.DestinationMultiQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <DestinationMqf>
 
@@ -1272,7 +1272,7 @@ http://Machine3/msmq/private$/SimpleQ
 <a id="Section_2.2.6.15"></a>
 #### 2.2.6.15 AdminMqf Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <AdminMqf> element MAY be present as a child element of the <Msmq> element. It MUST contain one or more MSMQ-formatted names, each name separated by white space, as the following example shows. The <AdminMqf> element corresponds to the **Message.AdministrationMultiQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <AdminMqf> element MAY be present as a child element of the <Msmq> element. It MUST contain one or more MSMQ-formatted names, each name separated by white space, as the following example shows. The <AdminMqf> element corresponds to the **Message.AdministrationMultiQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <AdminMqf>
 
@@ -1287,7 +1287,7 @@ http://Machine3/msmq/private$/AdminQ
 <a id="Section_2.2.6.16"></a>
 #### 2.2.6.16 ResponseMqf Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <ResponseMqf> element MAY be present as a child element of the <Msmq> element. It MUST contain one or more MSMQ-formatted names, each name separated by white space, as the following example shows. The <ResponseMqf> element corresponds to the **Message.ResponseMultiQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <ResponseMqf> element MAY be present as a child element of the <Msmq> element. It MUST contain one or more MSMQ-formatted names, each name separated by white space, as the following example shows. The <ResponseMqf> element corresponds to the **Message.ResponseMultiQueueFormatName** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 <ResponseMqf>
 
@@ -1302,7 +1302,7 @@ http://Machine3/msmq/private$/ResponseQ
 <a id="Section_2.2.6.17"></a>
 #### 2.2.6.17 TTrq Element
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <TTrq> element MUST be present as a child element of the <Msmq> element. It MUST contain an ISO 8601 date string, as the following example shows. The <TTrq> element corresponds to the **Message.TimeToReachQueue** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+The [**MSMQ**](#gt_microsoft-message-queuing-msmq) <TTrq> element MUST be present as a child element of the <Msmq> element. It MUST contain an ISO 8601 date string, as the following example shows. The <TTrq> element corresponds to the **Message.TimeToReachQueue** attribute of the ADM **Message** data element. For details, see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 
 The <TTrq> element represents the expiration time stamp of the [**message**](#gt_message), beyond which time the message MUST not be processed by the receiver and MUST be discarded.
 
@@ -1378,7 +1378,7 @@ The value in the <SignatureValue> element is calculated by hashing the data in t
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses abstract data model (ADM) elements specified in section [3.1.1](#Section_1.3). A subset of these elements can be published in a directory. This protocol SHOULD<13> access the directory using the algorithm specified in [MS-MQDSSM](#Section_1.3.2) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<14>
+This protocol uses abstract data model (ADM) elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a directory. This protocol SHOULD<13> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<14>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -1395,7 +1395,7 @@ There are no distinct client and server roles in this protocol; therefore, all p
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The document is organized in order to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with what is described in this document.
 
-The abstract data model for this protocol includes elements that are specific to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are co-located at a common queue manager. The shared abstract data model is defined in [MS-MQDMPR](#Section_1.3.2) section 3.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3.2).
+The abstract data model for this protocol includes elements that are specific to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are co-located at a common queue manager. The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.1.1.1.3](#Section_3.1.1.1.3) details the elements from the shared data model that are manipulated by this protocol, and sections [3.1.1.1.4](#Section_3.1.1.1.4) through [3.1.1.1.6](#Section_3.1.1.1.6) detail the data model elements that are specific to this protocol.
 
@@ -1471,7 +1471,7 @@ Figure 8: Stream message position deleted state receiver
 <a id="Section_3.1.1.1.3"></a>
 ##### 3.1.1.1.3 Shared Data Elements
 
-This protocol manipulates the following abstract data model (ADM) elements from the shared ADM that is defined in [MS-MQDMPR](#Section_1.3.2) section 3.1.1.
+This protocol manipulates the following abstract data model (ADM) elements from the shared ADM that is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.
 
 **QueueManager:** As defined in [MS-MQDMPR] section 3.1.1.1.
 
@@ -1481,7 +1481,7 @@ This protocol manipulates the following abstract data model (ADM) elements from 
 - **QueueCollection:** A table of queues that are deployed at the host and keyed by name.
 **Queue:** As defined in [MS-MQDMPR] section 3.1.1.2.
 
-- **Pathname:** The name of the queue. For more information about queue naming conventions, see [MS-MQMQ](#Section_1.3.2) section 2.1.
+- **Pathname:** The name of the queue. For more information about queue naming conventions, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 - **Transactional:** A Boolean value that indicates whether the queue supports [**transactional messages**](#gt_transactional-message).
 **OutgoingQueue:** As defined in [MS-MQDMPR] section 3.1.1.3: An ordered list of ADM **Message** data elements. This queue contains unsent [**messages**](#gt_message) or messages awaiting receipts. **Message** elements that contain [**durable**](#gt_durable-message) or [**stream messages**](#gt_stream-message) MUST be saved to persistent storage. This queue MUST generate the Message Position Available event, as described in [MS-MQDMPR] section 3.1.7.2.2
 
@@ -1489,12 +1489,12 @@ This protocol manipulates the following abstract data model (ADM) elements from 
 
 **IncomingTransactionalTransferInfo:** As defined in [MS-MQDMPR] section 3.1.1.5.
 
-**Message:** As defined in [MS-MQDMPR] section 3.1.1.12: The **Message** data element is used by SRMP to serialize and deserialize protocol messages, from or to its attributes, as described in sections [3.1.5.1.1](#Section_3.1.5.1.10) and [3.1.7.2.3](#Section_3.1.7.2.3). In addition, this protocol extends the data element for SRMP-specific attributes, as described in the next section.
+**Message:** As defined in [MS-MQDMPR] section 3.1.1.12: The **Message** data element is used by SRMP to serialize and deserialize protocol messages, from or to its attributes, as described in sections [3.1.5.1.1](#Section_3.1.5.1.1) and [3.1.7.2.3](#Section_3.1.7.2.3). In addition, this protocol extends the data element for SRMP-specific attributes, as described in the next section.
 
 <a id="Section_3.1.1.1.4"></a>
 ##### 3.1.1.1.4 SRMPMessage
 
-The **SRMPMessage** data element extends the **Message** data element (see [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12) and constitutes the internal representation of an SRMP [**message**](#gt_message).
+The **SRMPMessage** data element extends the **Message** data element (see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) and constitutes the internal representation of an SRMP [**message**](#gt_message).
 
 The **SRMPMessage** data element adds the following attributes to the base **Message** element:
 
@@ -1538,7 +1538,7 @@ The **Stream** data element contains the following attributes:
 
 **ResendIntervalIndex:** A numeric value that contains the index into **SRMPState.ResendTimerTable** that determines the current number of seconds the local [**queue manager**](#gt_queue-manager-qm) will wait for a [**stream receipt**](#gt_stream-receipt) before resending [**messages**](#gt_message).
 
-**IncomingId:** An OBJECTID, as specified in [MS-MQMQ](#Section_1.3.2) section 2.2.8, that uniquely identifies the current incoming sequence of stream messages in the scope of the entire message queuing system. This value MUST be saved to persistent storage. This value consists of two subattributes, as described in section 2.2.5.3.1:
+**IncomingId:** An OBJECTID, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.8, that uniquely identifies the current incoming sequence of stream messages in the scope of the entire message queuing system. This value MUST be saved to persistent storage. This value consists of two subattributes, as described in section 2.2.5.3.1:
 
 - **GUID**: A GUID.
 - **Ordinal**: A monotonically increasing ordinal number.
@@ -1604,7 +1604,7 @@ To provide exactly-once-and-in-order (EOIO) guarantees for [**stream messages**]
 
 A stream message contains the following:
 
-- The <stream> element, as specified in section [2.2.5.3](#Section_3.1.1.1.6), which indicates the stream ID in the <streamId> element.
+- The <stream> element, as specified in section [2.2.5.3](#Section_2.2.5.3), which indicates the stream ID in the <streamId> element.
 - The sequence number in the <current> element.
 - The sequence number of the previous message in the <previous> element. If the <previous> element is not present, the previous message has a sequence number of <previous> - 1.
 This information allows the remote host to determine if a message is in order and to identify duplicates.
@@ -1645,14 +1645,14 @@ The <lastOrdinal> element specifies to the sender the highest message sequence n
 <a id="Section_3.1.1.3.3"></a>
 ##### 3.1.1.3.3 Final Stream Receipts
 
-Final [**stream receipts**](#gt_stream-receipt) pertain to [**stream message**](#gt_stream-message) [**sequences**](#gt_sequence) (section [3.1.1.2](#Section_3.1.1.2)). The receiving [**QM**](#gt_queue-manager-qm) sends a final stream receipt to the sender in the form of a regular SRMP [**message**](#gt_message) that contains the [<streamReceipt>](#Section_2.2.5.6) element and also the <[commitmentReceipt](#Section_2.2.5.2.3)> element. The purpose of a final stream receipt is to notify the sending QM that the stream message was removed from the destination [**queue**](#gt_queue) so that the sending QM can perform negative journaling (deadlettering). Final stream receipts are sent for stream messages only if the sending application requested negative journaling, that is, the <[DeadLetter/](#Section_2.2.6.4)> element is present in the stream message.
+Final [**stream receipts**](#gt_stream-receipt) pertain to [**stream message**](#gt_stream-message) [**sequences**](#gt_sequence) (section [3.1.1.2](#Section_3.1.1.2)). The receiving [**QM**](#gt_queue-manager-qm) sends a final stream receipt to the sender in the form of a regular SRMP [**message**](#gt_message) that contains the [<streamReceipt>](#Section_2.2.5.6) element and also the <[commitmentReceipt](#Section_2.2.5.5)> element. The purpose of a final stream receipt is to notify the sending QM that the stream message was removed from the destination [**queue**](#gt_queue) so that the sending QM can perform negative journaling (deadlettering). Final stream receipts are sent for stream messages only if the sending application requested negative journaling, that is, the <[DeadLetter/](#Section_2.2.6.4)> element is present in the stream message.
 
 The <streamReceipt> element contains a [**stream**](#gt_stream) ID (in the [<streamId>](#Section_2.2.5.3.1) element) and a stream sequence number (in the <lastOrdinal> element) that specify the stream message being acknowledged.
 
 <a id="Section_3.1.1.3.4"></a>
 ##### 3.1.1.3.4 Commitment Receipts
 
-The receiving [**QM**](#gt_queue-manager-qm) sends a commitment receipt to the sender as a regular SRMP [**message**](#gt_message) that contains the [<commitmentReceipt>](#Section_2.2.5.2.3) element. The purpose of a commitment receipt is to notify the sending application that the receiving QM either discarded the original message or passed it to the receiving application. Commitment receipts are sent only if the sending application requested them by adding the [<commitmentReceiptRequest>](#Section_2.2.5.2.3) element to the message, as specified in section 2.2.5.2.3.
+The receiving [**QM**](#gt_queue-manager-qm) sends a commitment receipt to the sender as a regular SRMP [**message**](#gt_message) that contains the [<commitmentReceipt>](#Section_2.2.5.5) element. The purpose of a commitment receipt is to notify the sending application that the receiving QM either discarded the original message or passed it to the receiving application. Commitment receipts are sent only if the sending application requested them by adding the [<commitmentReceiptRequest>](#Section_2.2.5.2.3) element to the message, as specified in section 2.2.5.2.3.
 
 If the sender has specified the <positiveOnly/> element, the receiver MUST send a positive commitment receipt if the receiving application has successfully retrieved the message from the destination [**queue**](#gt_queue). If the sender has specified the <negativeOnly/> element, the receiver MUST send a negative commitment receipt if the message is discarded from the destination queue because it expired or because the queue was purged.
 
@@ -1689,7 +1689,7 @@ Next, the sender sends a stream message that uses a sequence number of 2 to the 
 
 Finally, the sender sends another stream message that has a sequence number of 3, and the remote host acknowledges it by returning "HTTP 200 OK" and also returning a stream receipt that has the <lastOrdinal> set to 3.
 
-Because SRMP uses HTTP 1.1 as a transport, which is a connectionless protocol, no separate messages need to be exchanged for establishing or closing a connection. The connectionless nature of SRMP at the transport layer is in contrast to the connection-oriented Message Queuing Binary Protocol ([MS-MQQB](#Section_1.3.2)), which otherwise serves the same purpose for unicast messages.
+Because SRMP uses HTTP 1.1 as a transport, which is a connectionless protocol, no separate messages need to be exchanged for establishing or closing a connection. The connectionless nature of SRMP at the transport layer is in contrast to the connection-oriented Message Queuing Binary Protocol ([MS-MQQB](../MS-MQQB/MS-MQQB.md)), which otherwise serves the same purpose for unicast messages.
 
 ![Stream sequence and receipts](media/image10.png)
 
@@ -1730,7 +1730,7 @@ This session-specific wait timer regulates the amount of time that the protocol 
 
 This session-specific timer regulates the amount of time that the protocol waits before sending a [Stream Receipt (section 3.1.1.3.2)](#Section_3.1.1.3.2). The protocol maintains one instance of the timer per message stream.
 
-The protocol MUST start the timer when it receives a stream message and durably stores it to disk. The timer MUST expire after 500 milliseconds. Upon expiration of the timer, the protocol MUST raise a [Stream Receipt Coalescing Timer (section 3.1.6.3)](#Section_3.1.2.3) event.
+The protocol MUST start the timer when it receives a stream message and durably stores it to disk. The timer MUST expire after 500 milliseconds. Upon expiration of the timer, the protocol MUST raise a [Stream Receipt Coalescing Timer (section 3.1.6.3)](#Section_3.1.6.3) event.
 
 <a id="Section_3.1.2.4"></a>
 #### 3.1.2.4 Session Cleanup Timer
@@ -1761,7 +1761,7 @@ The following values MUST be initialized globally:
 The following values MUST be initialized for [**streams**](#gt_stream):
 
 - For each **Stream** in **SRMPState.StreamCollection**, the value of the **Stream** object MUST be loaded from persistent storage.
-- The **Stream Receipt Wait Timer** (section [3.1.2.2](#Section_3.1.6.2)) MUST be disabled.
+- The **Stream Receipt Wait Timer** (section [3.1.2.2](#Section_3.1.2.2)) MUST be disabled.
 - **LastAcknowledgedStreamMessage** MUST be set to zero.
 - **UnacknowledgedStreamMessages** MUST be set to an empty collection.
 - **SendReceiptsTo** MUST be set to an empty string.
@@ -1769,9 +1769,9 @@ The following values MUST be initialized for [**streams**](#gt_stream):
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-In addition to the local events listed in section [3.1.7](#Section_1.3), the operation of the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol is initiated and subsequently driven by the following higher-layer triggered event:
+In addition to the local events listed in section [3.1.7](#Section_3.1.7), the operation of the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol is initiated and subsequently driven by the following higher-layer triggered event:
 
-- Queue Manager Started ([MS-MQDMPR](#Section_1.3.2) section 3.1.4.1).
+- Queue Manager Started ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.4.1).
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Queue Manager Started
 
@@ -1804,7 +1804,7 @@ These steps are described in detail in the following sections.
 Any SRMP [**message**](#gt_message) that is received by the [**QM**](#gt_queue-manager-qm) MUST be deserialized in the following way:
 
 - A new instance of the **SRMPMessage** data element MUST be created.
-- The *SRMPMessage.SoapCompoundMessage* attribute MUST be set to the entire contents of the incoming SRMP message, as described in [MS-MQDMPR](#Section_1.3.2) section 3.1.1.12.
+- The *SRMPMessage.SoapCompoundMessage* attribute MUST be set to the entire contents of the incoming SRMP message, as described in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12.
 - The **SRMPMessage.SoapEnvelope** attribute MUST be set to the SOAP envelope of the incoming SRMP message, as described in [MS-MQDMPR] section 3.1.1.12.
 - The **SRMPMessage.SoapHeader** attribute MUST be set to the SOAP header of the incoming SRMP message, as described in [MS-MQDMPR] section 3.1.1.12.
 - The **SRMPMessage.SoapBody** attribute MUST be set to the SOAP body of the incoming SRMP message, as described in [MS-MQDMPR] section 3.1.1.12.
@@ -1818,7 +1818,7 @@ Any SRMP [**message**](#gt_message) that is received by the [**QM**](#gt_queue-m
 - If the string that is contained in the <to> element begins with "http://" or "https://", the **SRMPMessage.DestinationQueueFormatName** attribute MUST be set to the string that is contained in the <to> element, prepended with "DIRECT=".
 - If the string that is contained in the <to> element begins with "MSMQ:MULTICAST", the **SRMPMessage.DestinationQueueFormatName** attribute MUST be set to the suffix of the <to> element directly following the "MSMQ:" prefix.
 - The contents of the <id> element MUST be parsed and assigned as follows:
-- A new instance of type **OBJECTID** (see [MS-MQMQ](#Section_1.3.2) section 2.2.8) MUST be instantiated.
+- A new instance of type **OBJECTID** (see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.8) MUST be instantiated.
 - If the <Msmq> element is present in the message, the index component of the new OBJECTID (**OBJECTID.Uniquifier**) MUST be set to the substring of the <id> element that follows the string "uuid:" and precedes the "@" character, and then converted to a numeric value; otherwise, the **OBJECTID.Uniquifier** MUST be set to 1.
 - If the <Msmq> element is present in the message, the [**GUID**](#gt_globally-unique-identifier-guid) component of the new OBJECTID (**OBJECTID.Lineage**) MUST be set to the substring of the <id> element that directly follows the "@" character; otherwise, the **OBJECTID.Lineage** MUST be set to a NULL GUID.
 - The **SRMPMessage.Identifier** attribute MUST be set to the new OBJECTID.
@@ -1892,9 +1892,9 @@ The protocol MUST perform the following steps:
 
 - If **SRMPMessage.DestinationQueueFormatName** begins with "MULTICAST" and **SRMPMessage.DestinationQueueFormatName** does not correspond to a queue in **QueueManager.QueueCollection**, the protocol MUST disregard the message and perform no further processing.
 - If **SRMPMessage.DestinationQueueFormatName** does not begin with "MULTICAST":
-- If the host part of the format name in **SRMPMessage.DestinationQueueFormatName**, as defined in [MS-MQMQ](#Section_1.3.2) section 2.1.2, does not represent the local machine:
+- If the host part of the format name in **SRMPMessage.DestinationQueueFormatName**, as defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.2, does not represent the local machine:
 - If **TransparentStoreAndForward** is FALSE, the protocol MUST disregard the message and perform no further processing. Otherwise:
-- The protocol MUST generate an Open Queue ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.5) event with the following arguments:
+- The protocol MUST generate an Open Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.5) event with the following arguments:
 - *iFormatName* := **SRMPMessage.DestinationQueueFormatName**
 - *iRequiredAccess* := **QueueAccessType.SendAccess**
 - *iSharedMode* := **QueueShareMode.DenyNone**
@@ -1920,12 +1920,12 @@ The protocol MUST perform the following steps:
 <a id="Section_3.1.5.1.4"></a>
 ##### 3.1.5.1.4 Checking Message Expiration
 
-To control [**message**](#gt_message) lifetime, a message can contain a <[TTrq](#Section_2.2.6.17)> element in the <[Msmq](#Section_1.3)> element or the <[expiresAt](#Section_2.2.5.1.1)> element in the <[properties](#Section_2.2.5.1)> element. Both these elements are deserialized to the **SRMPMessage.TimeToReachQueue** attribute, with the <TTrq> element taking precedence, if it is present in the message. The protocol checks this value while sending a message, as specified in section [3.1.7.2.1](#Section_3.1.7.2.1); it is not checked while processing a received message.
+To control [**message**](#gt_message) lifetime, a message can contain a <[TTrq](#Section_2.2.6.17)> element in the <[Msmq](#Section_2.2.6)> element or the <[expiresAt](#Section_2.2.5.1.1)> element in the <[properties](#Section_2.2.5.1)> element. Both these elements are deserialized to the **SRMPMessage.TimeToReachQueue** attribute, with the <TTrq> element taking precedence, if it is present in the message. The protocol checks this value while sending a message, as specified in section [3.1.7.2.1](#Section_3.1.7.2.1); it is not checked while processing a received message.
 
 <a id="Section_3.1.5.1.5"></a>
 ##### 3.1.5.1.5 Identifying the Message Type
 
-A [**message**](#gt_message) is identified by inspecting the contents of its SOAP <header> element (see section [2.2.2](#Section_2.2.2)). The following section describes how to identify each message type. Any message that does not match one of the types defined below MUST be ignored. For details about message class identifiers, see [MS-MQMQ](#Section_1.3.2) section 2.2.18.1.6.
+A [**message**](#gt_message) is identified by inspecting the contents of its SOAP <header> element (see section [2.2.2](#Section_2.2.2)). The following section describes how to identify each message type. Any message that does not match one of the types defined below MUST be ignored. For details about message class identifiers, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6.
 
 If the <Class> element of the <Msmq> element is set to MQMSG_CLASS_NORMAL and the <deliveryReceipt>, <streamReceipt>, and <commitmentReceipt> elements are not present, the message is a User message and MUST be processed according to [User Message Processing (section 3.1.5.1.6)](#Section_3.1.5.1.6).
 
@@ -1936,7 +1936,7 @@ If the <streamReceipt> element is present, the <deliveryReceipt> and <commitment
 If the <streamReceipt> element is present, the <commitmentReceipt> element is present, the <deliveryReceipt> element is not present, the <action> element of the <path> element is set to "MSMQ:QM Ordering Ack", and one of the following is true, the message is a Final stream receipt message and MUST be processed according to [Final Stream Receipt Message Processing (section 3.1.5.1.9)](#Section_3.1.5.1.9).
 
 - The <Class> element of the <Msmq> element is set to MQMSG_CLASS_ACK_RECEIVE and the <decision> element contains the string "positive".
-- The <Class> element of the <Msmq> element is set to MQMSG_CLASS_NACK_DELETED, the <decision> element contains the string "negative", and the remote [**queue**](#gt_queue) was purged by an administrative action before being received, as specified in [MS-MQRR](#Section_1.3.2) section 3.2.4.7.
+- The <Class> element of the <Msmq> element is set to MQMSG_CLASS_NACK_DELETED, the <decision> element contains the string "negative", and the remote [**queue**](#gt_queue) was purged by an administrative action before being received, as specified in [MS-MQRR](../MS-MQRR/MS-MQRR.md) section 3.2.4.7.
 - The <Class> element of the <Msmq> element is set to MQMSG_CLASS_NACK_Q_DELETED, the <decision> element contains the string "negative", and the original message was deleted from the destination queue because the queue was deleted.
 - The <Class> element of the <Msmq> element is set to MQMSG_CLASS_NACK_Q_PURGED, the <decision> element contains the string "negative", and the original message was deleted from the destination queue because the queue was purged.
 - The <Class> element of the <Msmq> element is set to MQMSG_CLASS_NACK_RECEIVE_TIMEOUT and the <decision> element contains the string "negative" and the original message was deleted from the destination queue because the message expired.
@@ -1965,7 +1965,7 @@ The protocol MUST perform all these steps, which are described in greater detail
 <a id="Section_3.1.5.1.6.1"></a>
 ###### 3.1.5.1.6.1 Checking Message Signature
 
-If **Message.AuthenticationLevel** ([MS-MQDMPR](#Section_1.3.2) section 3.1.1.12) equals **XmlSig**, the protocol MUST perform the following actions:
+If **Message.AuthenticationLevel** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) equals **XmlSig**, the protocol MUST perform the following actions:
 
 - If the <Signature> element is not present, the protocol MUST disregard the message and perform no further processing.
 - If the <Signature> element is present and the <SignedInfo> element of the <Signature> element is not present, the protocol MUST disregard the message and perform no further processing.
@@ -1989,7 +1989,7 @@ If **Message.AuthenticationLevel** ([MS-MQDMPR](#Section_1.3.2) section 3.1.1.12
 <a id="Section_3.1.5.1.6.2"></a>
 ###### 3.1.5.1.6.2 Processing Regular and Durable Messages
 
-If the <[durable/](#Section_2.2.5.2.1)> element in the <[services](#Section_2.2.5.2)> element is present, or if the <[stream](#Section_3.1.1.1.6)> element is present, the protocol MUST save the [**message**](#gt_message) to disk.
+If the <[durable/](#Section_2.2.5.2.1)> element in the <[services](#Section_2.2.5.2)> element is present, or if the <[stream](#Section_2.2.5.3)> element is present, the protocol MUST save the [**message**](#gt_message) to disk.
 
 If the <[deliveryReceiptRequest](#Section_2.2.5.2.2)> element is present in the message, the protocol MUST create a delivery receipt (see section [3.1.1.3.1](#Section_3.1.1.3.1)) to acknowledge that the message was received and durably stored. The delivery receipt MUST be addressed to the administration queue of the message sender by setting the <to> element of the delivery receipt to the value of **SRMPMessage.AdministationQueueFormatName**. The <receivedAt> child element of the <deliveryReceipt> element of the delivery receipt MUST be set to **SRMPMessage.ArrivalTime**. The <id> child element of the <deliveryReceipt> element of the delivery receipt MUST be set to **SRMPMessage.Identifier**. The delivery receipt MUST be sent to the remote host as specified in section [3.1.7.2.5](#Section_3.1.7.2.5).
 
@@ -1998,7 +1998,7 @@ If the <[deliveryReceiptRequest](#Section_2.2.5.2.2)> element is present in the 
 
 [**Stream messages**](#gt_stream-message) that are duplicates or are out of order are rejected. If the [**message**](#gt_message) does not satisfy one of the following criteria, then it is either a duplicate or out of order and MUST be ignored. No further processing is performed.
 
-- The [<stream>](#Section_3.1.1.1.6) element contains the <[start](#Section_2.2.5.3.4)> element, its <current> element is set to 1, and its <[streamId](#Section_2.2.5.3.1)> element is not equal to **Stream.IncomingId**.
+- The [<stream>](#Section_2.2.5.3) element contains the <[start](#Section_2.2.5.3.4)> element, its <current> element is set to 1, and its <[streamId](#Section_2.2.5.3.1)> element is not equal to **Stream.IncomingId**.
 OR
 
 - The <streamId> element is equal to **Stream.IncomingId**, and its <current> element is equal to **Stream.IncomingSequenceNumber** + 1.
@@ -2014,7 +2014,7 @@ If the message was not rejected, the protocol MUST perform the following steps:
 - If **Stream.UnackedStreamMessageArrivalTime** equals zero, the protocol MUST set **Stream.UnackedStreamMessageArrivalTime** to the current system time.
 - If the [Stream Receipt Coalescing Timer (section 3.1.2.3)](#Section_3.1.2.3) is running, the protocol MUST stop the Stream Receipt Coalescing Timer.
 - If the current system time – **Stream.UnackedStreamMessageArrivalTime** is equal to or greater than 10 seconds, the protocol MUST perform the following actions:
-- The protocol MUST raise the [Stream Receipt Coalescing Timer (section 3.1.6.3)](#Section_3.1.2.3) event.
+- The protocol MUST raise the [Stream Receipt Coalescing Timer (section 3.1.6.3)](#Section_3.1.6.3) event.
 - The protocol MUST set **Stream.UnackedStreamMessageArrivalTime** to zero.
 - The protocol MUST perform no further actions.
 - The protocol MUST start the Stream Receipt Coalescing Timer.
@@ -2077,7 +2077,7 @@ For each [**message**](#gt_message) that is marked as acknowledged by setting **
 
 For each message that is marked as acknowledged by setting **SRMPMessage.AwaitingStreamReceipt** to **False**, the protocol MUST increment **OutgoingTransferInfo.EodNoReadCount** by 1.
 
-After updating, if the counter **OutgoingTransferInfo.EodNoAckCount** is greater than zero, the protocol MUST select the first message in the **OutgoingQueue**, where **SRMPMessage.TransactionSequenceNumber** is greater than zero, and **SRMPMessage.AwaitingStreamReceipt** is set to TRUE. The protocol MUST set the **OutgoingTransferInfo.EodFirstNonAck** attribute to a new **SEQUENCE_INFO** structure (as specified in [MS-MQMQ](#Section_1.3.2) section 2.2.5) where:
+After updating, if the counter **OutgoingTransferInfo.EodNoAckCount** is greater than zero, the protocol MUST select the first message in the **OutgoingQueue**, where **SRMPMessage.TransactionSequenceNumber** is greater than zero, and **SRMPMessage.AwaitingStreamReceipt** is set to TRUE. The protocol MUST set the **OutgoingTransferInfo.EodFirstNonAck** attribute to a new **SEQUENCE_INFO** structure (as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.5) where:
 
 - **SeqID** MUST be set to the **SRMPMessage.TransactionalMessageSequenceIdentifier** of the selected message.
 - **SeqNo** MUST be set to the **SRMPMessage.TransactionSequenceNumber** of the selected message.
@@ -2093,11 +2093,11 @@ The **OutgoingTransferInfo.EodResendInterval** MUST be set to the value at the i
 
 The protocol MUST delete all elements from the **OutgoingQueue** where **SRMPMessage.TransactionSequenceNumber** is greater than zero, **SRMPMessage.AwaitingStreamReceipt** is set to **False**, and **SRMPMessage.AwaitingFinalStreamReceipt** is set to **False** by performing the following steps:
 
-- Raise a Message Position Deleted event as defined in [MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.1 for each such message with the following arguments:
+- Raise a Message Position Deleted event as defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1 for each such message with the following arguments:
 - *iQueue*: A reference to the **OutgoingQueue**.
 - *iPosition*: The **MessagePosition** of the message.
 - *iReason*: **AckReachQueue** ([MS-MQDMPR] section 3.1.1.12).
-- Raise a [Stream Element Removed event (section 3.1.7.6)](#Section_2.2.5.3) with the following argument:
+- Raise a [Stream Element Removed event (section 3.1.7.6)](#Section_3.1.7.6) with the following argument:
 - *iQueue*: A reference to the **OutgoingQueue**.
 <a id="Section_3.1.5.1.8.4"></a>
 ###### 3.1.5.1.8.4 Source Journaling
@@ -2125,12 +2125,12 @@ The protocol MUST identify the message from the **OutgoingQueue** where:
 - The **SRMPMessage.TransactionSequenceNumber** is equal to the <lastOrdinal> element in the <streamReceipt> element.
 If no such message can be found, the protocol MUST discard the final stream receipt message and perform no further action.
 
-The protocol MUST delete the identified message from the **OutgoingQueue** by raising a Message Position Deleted event as defined in [MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.1 with the following arguments:
+The protocol MUST delete the identified message from the **OutgoingQueue** by raising a Message Position Deleted event as defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1 with the following arguments:
 
 - *iQueue*: A reference to the **OutgoingQueue**.
 - *iPosition*: The **MessagePosition** of the identified message.
 - *iReason*: AckReceive ([MS-MQDMPR] section 3.1.1.12).
-The protocol MUST raise a [Stream Element Removed Event (section 3.1.7.6)](#Section_2.2.5.3) with the following argument:
+The protocol MUST raise a [Stream Element Removed Event (section 3.1.7.6)](#Section_3.1.7.6) with the following argument:
 
 - *iQueue*: A reference to the **OutgoingQueue**.
 <a id="Section_3.1.5.1.9.2"></a>
@@ -2168,7 +2168,7 @@ The protocol MUST perform an access check to authorize access to the queue that 
 
 - The protocol MUST declare the destinationQueue variable and set it equal to the **Queue** specified by **SRMPMessage.DestinationQueueFormatName**.
 - The protocol MUST declare the queueSecurityDescriptor variable and set it equal to destinationQueue.**Security**.
-- If destinationQueue.**QueueType** = Public, the destinationQueue security descriptor MUST be queried from the directory by raising a Read Directory ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.20) event with the following arguments:
+- If destinationQueue.**QueueType** = Public, the destinationQueue security descriptor MUST be queried from the directory by raising a Read Directory ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.20) event with the following arguments:
 - *iDirectoryObjectType*: "Queue"
 - *iFilter*: "Identifier" EQUALS destinationQueue.**Identifier**
 - If the query returns an *rStatus* value that is not equal to **DirectoryOperationResult.Success**, the protocol MUST disregard the message and perform no further processing.
@@ -2177,7 +2177,7 @@ The protocol MUST perform an access check to authorize access to the queue that 
 - The protocol MUST perform an access check by invoking the Access Check Algorithm ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2) with the following parameters:
 - *SecurityDescriptor*: queueSecurityDescriptor
 - *Token*: Perform the following actions to generate a token to represent the sender's authorization data. If any failure occurs in these actions, the protocol MUST continue as if access_denied is returned from the Access Check Algorithm.
-- Construct an RPC binding to the Local Security Authority (Translation Methods) Remote Protocol server on the local machine ([MS-LSAT](#Section_5) section 2.1).
+- Construct an RPC binding to the Local Security Authority (Translation Methods) Remote Protocol server on the local machine ([MS-LSAT](../MS-LSAT/MS-LSAT.md) section 2.1).
 - Invoke the **LsarOpenPolicy (Opnum 6)** method ([MS-LSAT] section 3.1.4.2) to obtain a policy handle with the *DesiredAccess* parameter set to POLICY_LOOKUP_NAMES.
 - Invoke the **LsarLookupSids (Opnum 15)** method ([MS-LSAT] section 3.1.4.11) to obtain the account name of the message sender with the following parameters:
 - *PolicyHandle*: the policy handle obtained in the preceding step.
@@ -2189,7 +2189,7 @@ The protocol MUST perform an access check to authorize access to the queue that 
 - Invoke the **LsarClose (Opnum 0)** method ([MS-LSAT] section 3.1.4.3) to close the policy handle.
 - Use the sender's account name to obtain its Privilege Attribute Certificate (PAC), [MS-PAC](../MS-PAC/MS-PAC.md) as specified in [MS-SFU](../MS-SFU/MS-SFU.md) section 3.1.5.1.1.2.
 - Create a token and populate its **Sids[]** field with the **SIDs** of the user, the user's primary group and other groups contained in the PAC ([MS-PAC] section 2.5). The **KERB_VALIDATION_INFO.LogonDomainId** is used to construct the **SIDs** from relative identifiers.
-- *Access Request mask*: **MQSEC_WRITE_MESSAGE** ([MS-MQMQ](#Section_1.3.2) section 2.2.25).
+- *Access Request mask*: **MQSEC_WRITE_MESSAGE** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.25).
 - *Object Tree*: NULL
 - *PrincipalSelfSubst SID*: NULL
 - If the Access Check Algorithm does not return success, the protocol MUST disregard the message and perform no further processing.
@@ -2214,7 +2214,7 @@ If the <DeadLetter/> element is present in the <Msmq> element, the protocol MUST
 <a id="Section_3.1.5.2.1.1"></a>
 ###### 3.1.5.2.1.1 Nonstream Messages
 
-If the [**message**](#gt_message) expires or is purged from the destination [**queue**](#gt_queue) before reaching the receiving application, the message MUST be moved to the system [**dead-letter queue**](#gt_dead-letter-queue). This is achieved by generating the Move Message event (see [MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.16) with the following parameters:
+If the [**message**](#gt_message) expires or is purged from the destination [**queue**](#gt_queue) before reaching the receiving application, the message MUST be moved to the system [**dead-letter queue**](#gt_dead-letter-queue). This is achieved by generating the Move Message event (see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) with the following parameters:
 
 - *iMessagePos*: A reference to the **MessagePosition** in the queue from which the message was deleted (that is, the *iPosition* argument of the [Message Position Deleted](#Section_3.1.7.3) event).
 - *iTargetQueue*: **QueueManager.SystemDeadletterQueue**
@@ -2227,7 +2227,7 @@ A [**stream message**](#gt_stream-message) [SRMPMessage (section 3.1.1.1.4)](#
 
 The dead-letter queue can be the system transactional dead-letter queue or an application-specified [**transactional queue**](#gt_transactional-queue). If **SRMPMessage.ApplicationDeadletterQueue** is set and matches the path name of a Queue object in **QueueManager.QueueCollection** and that **Queue.Transactional** attribute is equal to True, use that Queue object as the dead-letter queue; otherwise use **QueueManager.SystemTransactionalDeadletterQueue** as the dead-letter queue.
 
-Move the message to the dead-letter queue by generating the Move Message event (see [MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.16) with the following parameters:
+Move the message to the dead-letter queue by generating the Move Message event (see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) with the following parameters:
 
 - *iMessagePos*: A reference to the **MessagePosition** in the **OutgoingQueue** from which the message was deleted.
 - *iTargetQueue*: The dead-letter queue chosen in the preceding step.
@@ -2238,7 +2238,7 @@ The system transactional dead-letter queue is system-generated and implementatio
 
 A [**message**](#gt_message) that is deleted from the **OutgoingQueue** with the <Journal/> element present in the <Msmq> element MUST be moved to the system [**queue journal**](#gt_queue-journal).
 
-This is achieved by generating the Move Message event (see [MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.16) with the following parameters:
+This is achieved by generating the Move Message event (see [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) with the following parameters:
 
 - *iMessagePos*: A reference to the **MessagePosition** in the **OutgoingQueue** from which the message was deleted.
 - *iTargetQueue*: **QueueManaer.SystemJournalQueue.**
@@ -2262,9 +2262,9 @@ This event indicates a periodic time-out in order to retransmit [**messages**](#
 
 If *iQueue*.**MessagePositionList** is not empty, the protocol MUST perform the following:
 
-- If *iQueue*.**State** is **Disconnected**, raise an [Establish Transport Connection (section 3.1.7.9)](#Section_2.1) event with the following argument:
+- If *iQueue*.**State** is **Disconnected**, raise an [Establish Transport Connection (section 3.1.7.9)](#Section_3.1.7.9) event with the following argument:
 - *iOutgoingQueue* := The **OutgoingQueue** ADM element instance for this session.
-- For each **MessagePosition** ADM element instance in *iQueue*.**MessagePositionList**, the Add Message To Dispatch Collection ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.28) event MUST be raised with the following arguments:
+- For each **MessagePosition** ADM element instance in *iQueue*.**MessagePositionList**, the Add Message To Dispatch Collection ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.28) event MUST be raised with the following arguments:
 - *iPosition* := A reference to the **MessagePosition**
 - *iData* := NULL
 The protocol MUST restart the **Retransmission Timer** if it is in the stopped state.
@@ -2278,7 +2278,7 @@ This event MUST be generated with the following arguments:
 **Return Values**:
 
 - None
-This event indicates a time-out while waiting for a [**stream receipt**](#gt_stream-receipt) from the remote host. When the Stream Receipt Wait Timer (section [3.1.2.2](#Section_3.1.6.2)) fires, the protocol MUST retransmit all [**messages**](#gt_message) in the **OutgoingQueue** that have **SRMPMessage.TransactionSequenceNumber** greater than zero, **SRMPMessage.AwaitingStreamReceipt** set to **True**.
+This event indicates a time-out while waiting for a [**stream receipt**](#gt_stream-receipt) from the remote host. When the Stream Receipt Wait Timer (section [3.1.2.2](#Section_3.1.2.2)) fires, the protocol MUST retransmit all [**messages**](#gt_message) in the **OutgoingQueue** that have **SRMPMessage.TransactionSequenceNumber** greater than zero, **SRMPMessage.AwaitingStreamReceipt** set to **True**.
 
 The **Stream Receipt Wait Timer** MUST be restarted with an interval of **OutgoingTransferInfo.EodResendInterval**.
 
@@ -2311,9 +2311,9 @@ When the [Session Cleanup Timer (section 3.1.2.4)](#Section_3.1.2.4) expires, 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
 
-In addition to the higher-layer triggered events listed in section [3.1.4](#Section_1.3), the operation of the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol is initiated and subsequently driven by the following events:
+In addition to the higher-layer triggered events listed in section [3.1.4](#Section_3.1.4), the operation of the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol is initiated and subsequently driven by the following events:
 
-- Message Position Deleted ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.1).
+- Message Position Deleted ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1).
 - Message Position Available ([MS-MQDMPR] section 3.1.7.2.2).
 - Pause Queue ([MS-MQDMPR] section 3.1.7.2.3).
 - Resume Queue ([MS-MQDMPR] section 3.1.7.2.4).
@@ -2343,12 +2343,12 @@ The value of **SRMPMessage.TimeToReachQueue** controls the message lifetime. The
 
 For the purpose of this section, CURRENT_TIME is defined as the number of seconds elapsed since midnight (00:00:00), January 1, 1970 (Coordinated Universal Time).
 
-If CURRENT_TIME minus **SRMPMessage.SentTime** is greater than **SRMPMessage.TimeToReachQueue**, the message has expired. An expired message MUST NOT be sent to the remote queue manager. An expired message MUST be journaled using the logic described in section [3.1.5.2](#Section_3.1.5.2). If the message is not removed from the **OutgoingQueue** by the steps in section 3.1.5.2, it MUST be deleted from the **OutgoingQueue** by raising a Message Position Deleted event as defined in [MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.1 with the following arguments:
+If CURRENT_TIME minus **SRMPMessage.SentTime** is greater than **SRMPMessage.TimeToReachQueue**, the message has expired. An expired message MUST NOT be sent to the remote queue manager. An expired message MUST be journaled using the logic described in section [3.1.5.2](#Section_3.1.5.2). If the message is not removed from the **OutgoingQueue** by the steps in section 3.1.5.2, it MUST be deleted from the **OutgoingQueue** by raising a Message Position Deleted event as defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1 with the following arguments:
 
 - *iQueue*: A reference to the **OutgoingQueue**.
 - *iPosition*: The **MessagePosition** of the identified message.
 - *iReason*: **NackReachQueueTimeout** ([MS-MQDMPR] section 3.1.1.12).
-If **SRMPMessage.TransactionIdentifier** is specified for the expired message, the protocol MUST raise a [Stream Element Removed Event (section 3.1.7.6)](#Section_2.2.5.3) with the following argument:
+If **SRMPMessage.TransactionIdentifier** is specified for the expired message, the protocol MUST raise a [Stream Element Removed Event (section 3.1.7.6)](#Section_3.1.7.6) with the following argument:
 
 - *iQueue*: A reference to the **OutgoingQueue**.
 <a id="Section_3.1.7.2.2"></a>
@@ -2361,7 +2361,7 @@ The protocol MUST set the [<id>](#Section_2.2.4.3) element in the <path> element
 
 If **SRMPMessage.TransactionIdentifier** is specified, the [**message**](#gt_message) is a [**stream message**](#gt_stream-message), and the following steps MUST be performed:
 
-- The protocol MUST declare the currentStream variable and set it equal to the element in **SRMPState.StreamCollection** with a **Stream.DestinationHost** attribute equal to the Host component of *iQueue*.**DestinationFormatName**, as described in [MS-MQMQ](#Section_1.3.2) section 2.1.2.
+- The protocol MUST declare the currentStream variable and set it equal to the element in **SRMPState.StreamCollection** with a **Stream.DestinationHost** attribute equal to the Host component of *iQueue*.**DestinationFormatName**, as described in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.2.
 - If no such **Stream** ADM element exists in **SRMPState.StreamCollection**, the protocol MUST create a new **Stream** ADM element, set currentStream equal to the newly created **Stream**, and perform the following steps:
 - currentStream.**Id.GUID** MUST be set to the local **QueueManager.Identifier**.
 - currentStream.**Id.Ordinal** MUST be set to **SRMPState.StreamIdOrdinal**.
@@ -2565,7 +2565,7 @@ A new **SRMPMessage** to be sent by the QM MUST be serialized in the following w
 - The UTC date/time string calculated by adding the time span value contained in the **SRMPMessage.TimeToReachQueue** attribute to the UTC date/time value contained in the **SRMPMessage.SentTime** attribute MUST be appended to the string buffer.
 - The string </TTrq> MUST be appended to the string buffer.
 - The string </Msmq> MUST be appended to the string buffer.
-- If **Message.AuthenticationLevel** ([MS-MQDMPR](#Section_1.3.2) section 3.1.1.12) equals **XmlSig**, the following actions MUST be taken.
+- If **Message.AuthenticationLevel** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) equals **XmlSig**, the following actions MUST be taken.
 - The string <Signature xmlns="http://www.w3.org/2000/02/xmldsig#"> MUST be appended to the string buffer.
 - The string <SignedInfo> MUST be appended to the string buffer.
 - The string <SignatureMethod Algorithm="http://www.w3.org/2000/02/xmldsig#dsa"></SignatureMethod> MUST be appended to the string buffer.
@@ -2605,15 +2605,15 @@ The protocol MUST send the message on the transport (see section [3.1.7.7](#Sect
 - If the response is "HTTP 200 OK" the message was received, saved to disk if it is durable, and placed in the destination queue. The responsibility for the message has been transferred to the receiving QM. The sending QM MUST delete the message from the **OutgoingQueue** ADM element if the message is a regular or durable message; however, if the message is a stream message (that is, **SRMPMessage.TransactionSequenceNumber** has a value not equal to zero) the sending QM MUST retain the message in the **OutgoingQueue**. A non-stream message that is deleted from the **OutgoingQueue** with the <Journal/> element present in the <Msmq> element MUST be journaled as specified in section [3.1.5.2.2](#Section_3.1.5.2.2). The [Session Cleanup Timer (section 3.1.2.4)](#Section_3.1.2.4) MUST be canceled, if running, and then started.
 - If the response is "HTTP 400 Bad Request", the message was received but rejected by the receiving QM because of malformed SRMP syntax. No further processing of the message is possible; the sending QM MUST delete the message from the **OutgoingQueue**. A message that is deleted from the **OutgoingQueue** with the <Deadletter/> element present in the <Msmq> element MUST be deadlettered as specified in section [3.1.5.2.1](#Section_3.1.5.2.1). The Session Cleanup Timer MUST be canceled, if running, and then started.
 - If the response is "HTTP 5xx Internal Server Error" or if the transport times out with no response, the receiving QM did not receive the message. The protocol MUST perform the following steps:
-- The [Stream Receipt Wait Timer (section 3.1.2.2)](#Section_3.1.6.2) MUST be canceled.
+- The [Stream Receipt Wait Timer (section 3.1.2.2)](#Section_3.1.2.2) MUST be canceled.
 - The transport connection MUST be closed.
 - *iQueue*.**State** MUST be set to **Inactive**.
-- Raise a Remove Messages From Dispatch Collection By Queue ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.1.34) event with the following argument:
+- Raise a Remove Messages From Dispatch Collection By Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.34) event with the following argument:
 - *iOutgoingQueue* := *iQueue*
 <a id="Section_3.1.7.3"></a>
 #### 3.1.7.3 Message Position Deleted
 
-This event is triggered when the Message Position Deleted ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.1) event is raised. For the protocol to process this event, the following conditions MUST be met:
+This event is triggered when the Message Position Deleted ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1) event is raised. For the protocol to process this event, the following conditions MUST be met:
 
 - The *iQueue* argument MUST NOT contain a reference to the **OutgoingQueue**. It MUST contain a reference to a valid destination queue on the local machine.
 - The *iPosition* argument MUST contain a reference to a **MessagePosition** containing an **SRMPMessage** object.
@@ -2625,7 +2625,7 @@ This event is generated when a [**message**](#gt_message) is removed from a dest
 
 If the <[commitmentReceiptRequest](#Section_2.2.5.2.3)> element is present in a user [**message**](#gt_message), the protocol MUST send a commitment receipt (see section [3.1.1.3.4](#Section_3.1.1.3.4)) message to the original sender when the message is removed from the destination [**queue**](#gt_queue). If the <positiveOnly/> element is present, a positive commitment receipt MUST be sent if the message is received by the receiving application. If the <negativeOnly/> element is present, a negative commitment receipt MUST be sent if the message expires or is purged from the destination queue before reaching the receiving application. If neither element is present, commitment receipts MUST NOT be sent.
 
-The <[id](#Section_2.2.4.3)> element in the <[commitmentReceipt](#Section_2.2.5.2.3)> element MUST be set to the <id> element of the <path> element of the original message requesting the receipt.
+The <[id](#Section_2.2.4.3)> element in the <[commitmentReceipt](#Section_2.2.5.5)> element MUST be set to the <id> element of the <path> element of the original message requesting the receipt.
 
 The <decidedAt> element MUST be set to the CURRENT_TIME at which the outcome was recorded, and the <decision> element MUST be set to "positive" for a positive receipt or to "negative" for a negative receipt.
 
@@ -2641,9 +2641,9 @@ For nonstream messages, if the <[DeadLetter/](#Section_2.2.6.4)> element is pres
 <a id="Section_3.1.7.3.3"></a>
 ##### 3.1.7.3.3 Sending a Final Stream Receipt
 
-For [**stream messages**](#gt_stream-message), if the <[Deadletter/](#Section_2.2.6.4)> element is present in the <Msmq> element the protocol MUST send a [final stream receipt](#Section_3.1.5.1.9) [**message**](#gt_message) to the original sender when the message is removed from the destination [**queue**](#gt_queue).
+For [**stream messages**](#gt_stream-message), if the <[Deadletter/](#Section_2.2.6.4)> element is present in the <Msmq> element the protocol MUST send a [final stream receipt](#Section_3.1.1.3.3) [**message**](#gt_message) to the original sender when the message is removed from the destination [**queue**](#gt_queue).
 
-The <[id](#Section_2.2.4.3)> element in the <[commitmentReceipt](#Section_2.2.5.2.3)> element MUST be set to the <id> element of the <path> element of the original message.
+The <[id](#Section_2.2.4.3)> element in the <[commitmentReceipt](#Section_2.2.5.5)> element MUST be set to the <id> element of the <path> element of the original message.
 
 The <decidedAt> element MUST be set to the CURRENT_TIME at which the outcome was recorded, and the <decision> element MUST be set to "positive" for a positive receipt or to "negative" for a negative receipt.
 
@@ -2656,7 +2656,7 @@ The [**stream receipt**](#gt_stream-receipt) message MUST be addressed to the se
 <a id="Section_3.1.7.4"></a>
 #### 3.1.7.4 Pause Queue Event
 
-This event is triggered when the Pause Queue ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.3) event is raised. Upon this event, the [Stream Receipt Wait Timer (section 3.1.2.2)](#Section_3.1.6.2) and the [Retransmission Timer (section 3.1.2.1)](#Section_3.1.2.1) MUST be canceled, the transport connection MUST be closed, and *iQueue*.**State** MUST be set to **OnHold**.
+This event is triggered when the Pause Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.3) event is raised. Upon this event, the [Stream Receipt Wait Timer (section 3.1.2.2)](#Section_3.1.2.2) and the [Retransmission Timer (section 3.1.2.1)](#Section_3.1.2.1) MUST be canceled, the transport connection MUST be closed, and *iQueue*.**State** MUST be set to **OnHold**.
 
 Finally, a Remove Messages From Dispatch Collection By Queue ([MS-MQDMPR] section 3.1.7.1.34) event MUST be raised with the following argument:
 
@@ -2664,11 +2664,11 @@ Finally, a Remove Messages From Dispatch Collection By Queue ([MS-MQDMPR] sectio
 <a id="Section_3.1.7.5"></a>
 #### 3.1.7.5 Resume Queue Event
 
-This event is triggered when the Resume Queue ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.4) event is raised. If there are [**messages**](#gt_message) in the *iQueue*.**MessagePositionList**, they MUST be transferred using the steps specified in section [3.1.7.2](#Section_3.1.7.2).
+This event is triggered when the Resume Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.4) event is raised. If there are [**messages**](#gt_message) in the *iQueue*.**MessagePositionList**, they MUST be transferred using the steps specified in section [3.1.7.2](#Section_3.1.7.2).
 
 If *iQueue*.**MessagePositionList** is not empty, the protocol MUST perform the following:
 
-- If *iQueue*.**State** is **Disconnected**, raise an [Establish Transport Connection (section 3.1.7.9)](#Section_2.1) event with the following argument:
+- If *iQueue*.**State** is **Disconnected**, raise an [Establish Transport Connection (section 3.1.7.9)](#Section_3.1.7.9) event with the following argument:
 - *iOutgoingQueue* := *iQueue*
 - For each **MessagePosition** ADM element instance in *iQueue*.**MessagePositionList**, the Add Message To Dispatch Collection ([MS-MQDMPR] section 3.1.7.1.28) event MUST be raised with the following arguments:
 - *iPosition* := A reference to the **MessagePosition**.
@@ -2678,7 +2678,7 @@ If *iQueue*.**MessagePositionList** is not empty, the protocol MUST perform the 
 
 This event MUST be generated with the following arguments:
 
-- *iQueue*: A reference to an OutgoingQueue [MS-MQDMPR](#Section_1.3.2) section 3.1.1.3) ADM element instance.
+- *iQueue*: A reference to an OutgoingQueue [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.3) ADM element instance.
 **Return Value**:
 
 - None.
@@ -2689,7 +2689,7 @@ The following steps MUST be performed to process this event:
 <a id="Section_3.1.7.7"></a>
 #### 3.1.7.7 Message Position Available
 
-This event is triggered when the Message Position Available ([MS-MQDMPR](#Section_1.3.2) section 3.1.7.2.2) event is raised.
+This event is triggered when the Message Position Available ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.2) event is raised.
 
 The following arguments are passed when the event is raised:
 
@@ -2700,12 +2700,12 @@ The following steps MUST be performed to process the event:
 - If *iQueue* is not an **OutgoingQueue** ADM element instance, take no further action.
 - If neither of the following conditions is met, take no further action.
 - *iQueue*.**Multicast** is TRUE.
-- *iQueue*.**DestinationFormatName** is a direct format name (see [MS-MQMQ](#Section_1.3.2) section 2.1.2) and it specifies using HTTP or HTTPS.
+- *iQueue*.**DestinationFormatName** is a direct format name (see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.2) and it specifies using HTTP or HTTPS.
 - If *iQueue*.**State** is equal to **OnHold** or **Inactive**, take no further action.
 - Convert the **Message** ADM element referred to by *iPosition*.**MessageReference** to an **SRMPMessage** ADM element by adding the fields described in section [3.1.1.1.4](#Section_3.1.1.1.4), initialized as follows:
 - **AwaitingStreamReceipt** is set to FALSE.
 - **AwaitingFinalStreamReceipt** is set to FALSE.
-- If the *iQueue*.**ConnectionHistory** array is empty, the protocol MUST establish a connection by raising an [Establish Transport Connection (section 3.1.7.9)](#Section_2.1) event with the following argument:
+- If the *iQueue*.**ConnectionHistory** array is empty, the protocol MUST establish a connection by raising an [Establish Transport Connection (section 3.1.7.9)](#Section_3.1.7.9) event with the following argument:
 - *iOutgoingQueue* := *iQueue*
 - The Add Message To Dispatch Collection ([MS-MQDMPR] section 3.1.7.1.28) event MUST be raised with the following arguments.
 - *iPosition* := A reference to **OutgoingMessagePosition.MessagePosition**.
@@ -2716,7 +2716,7 @@ The following steps MUST be performed to process the event:
 This event MUST be generated with the following arguments:
 
 - *iPosition*: Not used.
-- *iMessagePosition*: A reference to a **MessagePosition** ([MS-MQDMPR](#Section_1.3.2) section 3.1.1.11) ADM element instance.
+- *iMessagePosition*: A reference to a **MessagePosition** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.11) ADM element instance.
 **Return Value**:
 
 - None.
@@ -2732,14 +2732,14 @@ The following steps MUST be performed to process this event:
 
 This event MUST be generated with the following argument:
 
-- *iOutgoingQueue*: A reference to an **OutgoingQueue** ([MS-MQDMPR](#Section_1.3.2) section 3.1.1.3) ADM element instance.
+- *iOutgoingQueue*: A reference to an **OutgoingQueue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.3) ADM element instance.
 **Return Value:**
 
 - None.
 The following steps MUST be performed to process this event:
 
 - Set *iOutgoingQueue*.**State** to **Waiting**.
-- If *iOutgoingQueue*.**Multicast** is TRUE, the protocol MUST establish a PGM [[RFC3208]](https://go.microsoft.com/fwlink/?LinkId=95257) connection to the IP address indicated by the multicast format name ([MS-MQMQ](#Section_1.3.2) section 2.1.6) in *iOutgoingQueue*.**DestinationFormatName**.
+- If *iOutgoingQueue*.**Multicast** is TRUE, the protocol MUST establish a PGM [[RFC3208]](https://go.microsoft.com/fwlink/?LinkId=95257) connection to the IP address indicated by the multicast format name ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.6) in *iOutgoingQueue*.**DestinationFormatName**.
 - Otherwise:
 - Let DestinationHost be a string that is initialized to the host part of the format name in *iOutgoingQueue*.**DestinationFormatName**, as defined in [MS-MQMQ] section 2.1.2.
 - The URL formed by removing "DIRECT=" from the beginning of DestinationHost MUST be checked against the URLs in the **From** ADM attributes of the **Redirection** ADM element instances in the [OutboundRedirectionCollection (section 3.1.1.1.10.1)](#Section_3.1.1.1.10.1) ADM element. If a match is found, the URL SHOULD also be checked against the URLs in the **OutboundRedirectionExceptionCollection** ADM element.<30> If a match is not found in the exceptions, then DestinationHost MUST be set to the host part of the URL in the **To** ADM attribute of the matching **Redirection** ADM element instance in the **OutboundRedirectionCollection** ADM element.
@@ -3862,7 +3862,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <12> Section 2.2.6: Windows always generates this element in any protocol message. If the element is omitted, Windows processes the message and assumes default values for all subelements.
 
-<13> Section 2.3: For Windows NT operating system and Windows 2000 operating system, this protocol uses the Message Queuing (MSMQ): Directory Service Protocol [MS-MQDS](#Section_1.3.2).
+<13> Section 2.3: For Windows NT operating system and Windows 2000 operating system, this protocol uses the Message Queuing (MSMQ): Directory Service Protocol [MS-MQDS](../MS-MQDS/MS-MQDS.md).
 
 <14> Section 2.3: For the Message Queuing (MSMQ): Directory Service Protocol [MS-MQDS], the Directory Service schema elements are described in [MS-MQDS] sections 2.2.10 and 3.1.4.21.1 through 3.1.4.21.4.
 

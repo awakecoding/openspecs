@@ -1543,7 +1543,7 @@ This section specifies a conceptual model of a possible data organization that a
 - **Pending List:** A set of messages that have been sent and are awaiting acknowledgment or retransmission. Each entry in the queue has the following state:
 - **Message:** The message buffer.
 - **Retry Count:** The number of send attempts remaining for this message before failure is declared.
-- **Message Retransmission Timer:** A timer that handles the retransmission of a packet if an acknowledgment is not received within the expiration time. See section [3.1.2](#Section_3.2.2).
+- **Message Retransmission Timer:** A timer that handles the retransmission of a packet if an acknowledgment is not received within the expiration time. See section [3.1.2](#Section_3.1.2).
 - **Pending Route Entry Add List:** A list of route entries in the process of being added to the Route Entry Cache. Each entry has the following state:
 - **RouteEntry:** The route entry being pended.
 - **NeedCpa:** Flag indicating if a [**CPA**](#gt_certified-peer-address-cpa) is requested.
@@ -1623,7 +1623,7 @@ The following parameters MUST be supplied to the resolving logic:
 and optionally
 
 - *InitialBestMatchRouteEntry*, which is a [ROUTE_ENTRY](#Section_2.2.3.3) structure used by the protocol during key registration. See section [3.2.4.1](#Section_3.2.4.1) for details.
-- *InitialNextHopRouteEntry*, which is a ROUTE_ENTRY structure used by the protocol during maintenance. See section [3.2.6.2](#Section_3.1.6.1) for details.
+- *InitialNextHopRouteEntry*, which is a ROUTE_ENTRY structure used by the protocol during maintenance. See section [3.2.6.2](#Section_3.2.6.2) for details.
 A Resolver MUST then perform the following steps:
 
 - Attempt to create a new entry in the **Outstanding Resolves Table** element, and fail the request if one cannot be created. If one is created, initialize the fields as follows.
@@ -1699,7 +1699,7 @@ Upon receiving a [FLOOD](#Section_2.2.2.4) message, a DRT [**node**](#gt_node) M
 
 On receipt of an [AUTHORITY](#Section_2.2.2.6) message, the DRT [**node**](#gt_node) MUST first check whether the AUTHORITY message conforms to the syntax as specified in section 2.2.2.6, and drop the message if not. Otherwise, it looks in the Pending List for a [LOOKUP](#Section_2.2.2.8) message or [INQUIRE](#Section_2.2.2.5) message whose **MessageID** matches the **Acked MessageID** in the AUTHORITY message. If none is found, drop the message.
 
-The DRT node MUST then check whether the [AUTHORITY_BUFFER](#Section_2.2.2.6.1) message is fragmented by comparing the **Size** field in the AUTHORITY message and the received message size. If the AUTHORITY_BUFFER message is not fragmented, it MUST be processed as specified in section [3.1.5.5.1](#Section_3.1.5.5.1.2). Otherwise, the DRT node MUST start the reassembly process as follows:
+The DRT node MUST then check whether the [AUTHORITY_BUFFER](#Section_2.2.2.6.1) message is fragmented by comparing the **Size** field in the AUTHORITY message and the received message size. If the AUTHORITY_BUFFER message is not fragmented, it MUST be processed as specified in section [3.1.5.5.1](#Section_3.1.5.5.1). Otherwise, the DRT node MUST start the reassembly process as follows:
 
 To reassemble fragmented packets into the original AUTHORITY message, a DRT node MUST use the **MessageID** from the [DRT Header](#Section_2.2.1) and the **source IP** address and **Port** to look for an existing entry in the Reassembly List. If no entry exists, the node MUST attempt to create one and drop the message if it cannot create one. Otherwise, continue processing as follows.
 
@@ -1723,7 +1723,7 @@ The Outstanding Resolves Table MUST then be checked to find whether an entry has
 - Add the address used when sending the previous LOOKUP message to the resolve entry's ResolvePath.
 - Increment the entry's TotalUsefulHops.
 - If the **L** flag in the AUTHORITY_BUFFER message is set, increment the resolve entry's SuspiciousCount.
-- If the **N** flag in the AUTHORITY_BUFFER message is clear, begin validating the route entry in the resolve entry's CurrentNextHop as specified in [3.1.5.6](#Section_2.2.3.3). Otherwise clear the CurrentNextHop because the key is no longer registered at that node and remove this node from the cache. In either case, continue processing as follows.
+- If the **N** flag in the AUTHORITY_BUFFER message is clear, begin validating the route entry in the resolve entry's CurrentNextHop as specified in [3.1.5.6](#Section_3.1.5.6). Otherwise clear the CurrentNextHop because the key is no longer registered at that node and remove this node from the cache. In either case, continue processing as follows.
 - If CurrentNextHop is not clear and if the key of the route entry in the resolve entry's CurrentNextHop is numerically closer to the Target Key than the key of the resolve entry's CurrentBestMatch, push the CurrentBestMatch onto the BestMatchStack and create a copy of the resolve entry's CurrentNextHop and save it in the resolve entry's CurrentBestMatch.
 - If the resolve entry's CurrentNextHop is not empty and the UseCount of the entry is 3, then clear the resolve entry's CurrentNextHop.
 - If the **Route Entry** field is present in the AUTHORITY_BUFFER message then create a route entry and store it in the resolve entry's NewNextHop.
@@ -1817,7 +1817,7 @@ All Publishers MUST follow the rules for Resolvers as well as the rules for Publ
 
 This section specifies a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The **Cloud State** data structure (section [3.1.1](#Section_3.1)) is extended by adding two additional subcomponents to the **Conversation Table** component specified in section 3.1.1, **Peer's IP Address and Port** and **Hashed Nonce**, and by adding one additional component, the **Locally Registered Key List**.
+The **Cloud State** data structure (section [3.1.1](#Section_3.1.1)) is extended by adding two additional subcomponents to the **Conversation Table** component specified in section 3.1.1, **Peer's IP Address and Port** and **Hashed Nonce**, and by adding one additional component, the **Locally Registered Key List**.
 
 - **Conversation Table:** A table of active synchronization conversations from new [**nodes**](#gt_node) in the process of joining the [**cloud**](#gt_cloud). Each entry has the following state:
 - **Peer's IP Address and Port:** The IP address and port number of the peer.
@@ -1836,7 +1836,7 @@ The specific cache organization is an implementation detail,<4> but the followin
 
 - It MUST be such that a search for a single registration in the cloud can be implemented on the order of Log10(n) LOOKUP message operations, where n is the total number of registrations in the cloud. (For example, the cache structure described in [[PAST]](https://go.microsoft.com/fwlink/?LinkId=90243) has this property.)
 - The cache MUST logically include all entries in each of the node's [**leaf sets**](#gt_leaf-set).
-This constraint on the cache ensures that there is always a discoverable path to a registered key. DRT nodes, which are also Publishers, also use this constraint to detect and repair partitions in the cloud, section [3.2.6.2.1](#Section_3.2.6.2.1.1).
+This constraint on the cache ensures that there is always a discoverable path to a registered key. DRT nodes, which are also Publishers, also use this constraint to detect and repair partitions in the cloud, section [3.2.6.2.1](#Section_3.2.6.2.1).
 
 - A DRT node MUST maintain a cache of at least 10 route entries (or all route entries in the cloud, if there are fewer than 10), of the keys of which are evenly distributed around the number space.
 This constraint ensures that when a neighbor is performing a bootstrap operation and sends [SOLICIT](#Section_2.2.2.1) messages for entries for this node's cache, it is possible to [ADVERTISE](#Section_2.2.2.2) an even distribution of candidates.
@@ -1849,7 +1849,7 @@ This constraint ensures that when a neighbor is performing a bootstrap operation
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The Publisher performs no initialization beyond that specified in section [3.1.3](#Section_3.1).
+The Publisher performs no initialization beyond that specified in section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1888,7 +1888,7 @@ Whenever a FLOOD message with the **D** flag clear is sent, the node MUST also p
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receiving a New ROUTE_ENTRY
 
-[SOLICIT](#Section_2.2.2.1), [LOOKUP](#Section_2.2.2.8), [FLOOD](#Section_2.2.2.4), and [AUTHORITY](#Section_2.2.2.6) messages contain route entries. The processing required when receiving a new [ROUTE_ENTRY](#Section_2.2.3.3) structure is specified in section [3.1.5.6](#Section_2.2.3.3). Publishers MUST follow the same rules, with the following additions:
+[SOLICIT](#Section_2.2.2.1), [LOOKUP](#Section_2.2.2.8), [FLOOD](#Section_2.2.2.4), and [AUTHORITY](#Section_2.2.2.6) messages contain route entries. The processing required when receiving a new [ROUTE_ENTRY](#Section_2.2.3.3) structure is specified in section [3.1.5.6](#Section_3.1.5.6). Publishers MUST follow the same rules, with the following additions:
 
 If the key of the ROUTE_ENTRY message falls within one of the [**node's**](#gt_node) key [**leaf sets**](#gt_leaf-set), it MUST set the **A** and **C** flags in the [INQUIRE](#Section_2.2.2.5) message to request a **CPA** and **Certificate Chain**, and **NeedCpa** MUST be set to true for the entry added to the Pending Route Entry Add List.
 
@@ -1906,7 +1906,7 @@ When a [LOOKUP](#Section_2.2.2.8) message is received, a [**node**](#gt_node) MU
 - If both a ClosestLocalMatch and a ClosestRemoteMatch are found, the node MUST now prepare an [AUTHORITY_BUFFER](#Section_2.2.2.6.1) message to send back to the sender of the LOOKUP message. If both a ClosestLocalMatch and a ClosestRemoteMatch are found, the one closest to Target Key MUST be placed in the ROUTE_ENTRY message in the [AUTHORITY](#Section_2.2.2.6) message. Otherwise, the match that is found MUST be used.
 - If ValidateNotLocal is set, the **N** flag in the AUTHORITY_BUFFER (section 2.2.2.6.1) message MUST be set.
 - If TargetSuspicious is set, the **L** flag in the AUTHORITY_BUFFER (section 2.2.2.6.1) message MUST be set.
-- The AUTHORITY_BUFFER message MUST now be sent back to the sender of the LOOKUP message, section [3.2.5.7](#Section_2.2.2.6).
+- The AUTHORITY_BUFFER message MUST now be sent back to the sender of the LOOKUP message, section [3.2.5.7](#Section_3.2.5.7).
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving a SOLICIT Message
 
@@ -1930,7 +1930,7 @@ When the [REQUEST](#Section_2.2.2.3) message is received for a given [**cloud**]
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Receiving a FLOOD Message
 
-Section [3.1.5.4](#Section_3.2.5.5) specifies the rules for handling received [FLOOD](#Section_2.2.2.4) messages. In addition to those rules, when sending an [ACK](#Section_2.2.2.7) message in response to a FLOOD message with a nonzero **Validate Key** field, a Publisher MUST check its Locally Registered Key List. If the **Validate Key** is not in the list, the Publisher MUST set the **N** flag in the ACK message.
+Section [3.1.5.4](#Section_3.1.5.4) specifies the rules for handling received [FLOOD](#Section_2.2.2.4) messages. In addition to those rules, when sending an [ACK](#Section_2.2.2.7) message in response to a FLOOD message with a nonzero **Validate Key** field, a Publisher MUST check its Locally Registered Key List. If the **Validate Key** is not in the list, the Publisher MUST set the **N** flag in the ACK message.
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Receiving an INQUIRE Message
@@ -1940,7 +1940,7 @@ When a DRT [**node**](#gt_node) receives an [INQUIRE](#Section_2.2.2.5) message,
 - Check whether the INQUIRE message conforms to the syntax as specified in section 2.2.2.5, and drop the message if not. If the protocol is executing in membership or confidential security mode, pass the [REQUEST](#Section_2.2.2.3) message to the SecurityModule for verification of the Credential and Signature fields. If verification fails, drop the message. Otherwise, continue processing as follows.
 - Check the Locally Registered KEY List for the presence of the KEY in the **Validate KEY** field. If the KEY is not found, the node MUST construct an [AUTHORITY_BUFFER](#Section_2.2.2.6.1) message with the **N** flag set, return it to the sender, and take no further action. Otherwise, continue processing as follows.
 - If the KEY is in the Locally Registered KEY List, the node MUST construct an AUTHORITY_BUFFER message.
-- If the **A** flag in the INQUIRE message is set, construct a [**CPA**](#gt_certified-peer-address-cpa) (as specified in section [3.2.5.7](#Section_2.2.2.6)) for the locally registered KEY, including the INQUIRE message. If the **NONCE** field is not present in the INQUIRE message, an all-zero **NONCE** SHOULD be used by the receiver when processing the INQUIRE.
+- If the **A** flag in the INQUIRE message is set, construct a [**CPA**](#gt_certified-peer-address-cpa) (as specified in section [3.2.5.7](#Section_3.2.5.7)) for the locally registered KEY, including the INQUIRE message. If the **NONCE** field is not present in the INQUIRE message, an all-zero **NONCE** SHOULD be used by the receiver when processing the INQUIRE.
 - If the **C** flag in the INQUIRE message is set, retrieve the Certificate Chain, if any, for the CPA message and insert it into the AUTHORITY_BUFFER message.
 - If the **X** flag in the INQUIRE message is set, retrieve the **Extended Payload**, if any, for the ID and insert it into the AUTHORITY_BUFFER message.
 - Send the AUTHORITY_BUFFER message to the source of the INQUIRE message, as specified in section 3.2.5.7.
@@ -1979,7 +1979,7 @@ The following are the three possibilities:
 - The best match key exists in the local cache of this node and there are no cache entries with key between the best match key and the Target Key. This means there is no evidence of a cloud split.
 - The best match key exists in the local cache of this node and there is at least one Route Entry with a key between the best match key and the Target Key. This tends to suggest that the cloud is split with the local node being part of the bigger cloud.
 - The best match key is not part of the local cache of this node. This indicates that the cloud is likely split, because the best match key woud otherwise have been the locally published DRT_ID. If the best match key is closer to the Target Key than any other entry in the local cache, this suggests that the local node is part of the smaller cloud piece. Otherwise, if the local node has a cache entry that is closer to the Target Key than the best match key, this indicates that the local node is part of the bigger cloud piece.
-If the indication is that the local node is part of a small cloud, a DRT node SHOULD repeat the split detection process, as specified in section [3.2.6.2.1](#Section_3.2.6.2.1.1), for each locally published key except the Target Key (which it just completed). This will help to get as many parts of the number space merged as possible.
+If the indication is that the local node is part of a small cloud, a DRT node SHOULD repeat the split detection process, as specified in section [3.2.6.2.1](#Section_3.2.6.2.1), for each locally published key except the Target Key (which it just completed). This will help to get as many parts of the number space merged as possible.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -1992,7 +1992,7 @@ When a Conversation Timer expires for a given Conversation Table entry, the DRT 
 <a id="Section_3.2.6.2"></a>
 #### 3.2.6.2 Maintenance Timer Expiry
 
-When the Maintenance Timer expires, the DRT [**node**](#gt_node) MUST attempt to detect [**cloud**](#gt_cloud) splits (as specified in section [3.2.6.2.1](#Section_3.2.6.2.1.1)).
+When the Maintenance Timer expires, the DRT [**node**](#gt_node) MUST attempt to detect [**cloud**](#gt_cloud) splits (as specified in section [3.2.6.2.1](#Section_3.2.6.2.1)).
 
 If a node finds that it has no entries in its cache, it SHOULD also try to resynchronize with the nodes it knows to obtain more entries. Synchronization is initiated when the node sends a [SOLICIT](#Section_2.2.2.1) message, as specified in section [3.1.4.3](#Section_3.1.4.3).
 
@@ -2026,7 +2026,7 @@ At the completion of the preceding process for all locally registered keys, a DR
 <a id="Section_3.2.6.3"></a>
 #### 3.2.6.3 Message Retransmission Timer Expiry
 
-When the Message Retransmission Timer expires, the DRT [**node**](#gt_node) MUST follow the rules as specified in section [3.1.6.2](#Section_3.2.6.3). In addition to those rules, a Publisher MUST also take additional actions for specific message types, specified as follows.
+When the Message Retransmission Timer expires, the DRT [**node**](#gt_node) MUST follow the rules as specified in section [3.1.6.2](#Section_3.1.6.2). In addition to those rules, a Publisher MUST also take additional actions for specific message types, specified as follows.
 
 - If the message stored is an [INQUIRE](#Section_2.2.2.5) message, and the Retry Count is decremented to 0, The [ROUTE_ENTRY](#Section_2.2.3.3) MUST be found in the **Pending Route Entry Add List** element based on the **MessageID** of the timed out INQUIRE message and MUST be silently discarded.
 - If the message stored is a [SOLICIT](#Section_2.2.2.1) message, and the Retry Count is decremented to 0, the conversation MUST be located in the **Conversation table** element by using the **SolicitMessageId** field. If found, the conversation state MUST be released.
@@ -2223,7 +2223,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 3.1.2: Windows performs periodic cache maintenance every 15 seconds when the number of cache entries is more than 2; otherwise, it performs periodic cache maintenance every 10 seconds.
 
-<2> Section 3.1.4.2: Windows picks ten (or as many as exist, if less than ten) randomly chosen [**nodes**](#gt_node) that are in the Route Entry Cache (see sections [3.1.1](#Section_3.1) and [3.2.1.1](#Section_3.2.1.1)).
+<2> Section 3.1.4.2: Windows picks ten (or as many as exist, if less than ten) randomly chosen [**nodes**](#gt_node) that are in the Route Entry Cache (see sections [3.1.1](#Section_3.1.1) and [3.2.1.1](#Section_3.2.1.1)).
 
 <3> Section 3.1.6.1: Windows attempts to maintain a cache of at least 10 route entries (or all route entries in the cloud, if there are fewer than 10), the keys of which are evenly distributed around the number space.
 

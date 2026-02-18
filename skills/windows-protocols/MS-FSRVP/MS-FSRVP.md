@@ -152,7 +152,7 @@ This document uses the following terms:
 **fully qualified domain name (FQDN)**: An unambiguous domain name that gives an absolute location in the Domain Name System's (DNS) hierarchy tree, as defined in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 3.1 and [[RFC2181]](https://go.microsoft.com/fwlink/?LinkId=127732) section 11.
 
 <a id="gt_hresult"></a>
-**HRESULT**: An integer value that indicates the result or status of an operation. A particular HRESULT can have different meanings depending on the protocol using it. See [MS-ERREF](#Section_2.2.4) section 2.1 and specific protocol documents for further details.
+**HRESULT**: An integer value that indicates the result or status of an operation. A particular HRESULT can have different meanings depending on the protocol using it. See [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1 and specific protocol documents for further details.
 
 <a id="gt_indexing"></a>
 **indexing**: The process of extracting text or properties from files and storing the extracted values in an index or property cache.
@@ -195,7 +195,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.2.4)".
+[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -237,7 +237,7 @@ The File Server Remote VSS Protocol is applicable in environments in which shado
 
 This document covers versioning in the following areas:
 
-- Protocol Versions: This protocol currently supports one version. The operations listed in section [3.1.4](#Section_3.2) are applicable for version 1 of the protocol as defined in section [2.2.2.4](#Section_2.2.2.4). The client queries the minimum and maximum versions supported by server through the RPC method **GetSupportedVersion (Opnum 0)**.
+- Protocol Versions: This protocol currently supports one version. The operations listed in section [3.1.4](#Section_3.1.4) are applicable for version 1 of the protocol as defined in section [2.2.2.4](#Section_2.2.2.4). The client queries the minimum and maximum versions supported by server through the RPC method **GetSupportedVersion (Opnum 0)**.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor Extensible Fields
 
@@ -264,7 +264,7 @@ The File Server Remote VSS Protocol endpoint is available only on RPC over named
 
 This protocol MUST use the UUID as specified in section [1.9](#Section_1.9). The RPC version number is 3.0.
 
-This protocol allows any user to establish a connection to the RPC server. The protocol requires the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.2).
+This protocol allows any user to establish a connection to the RPC server. The protocol requires the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -393,7 +393,7 @@ PFSSAGENT_SHARE_MAPPING_1 ShareMapping1;
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Error Codes
 
-The following error codes are specific to File Server Remote VSS Protocol (FSRVP) in addition to the [**HRESULT**](#gt_hresult) values as defined in [MS-ERREF](#Section_2.2.4) section 2.1.
+The following error codes are specific to File Server Remote VSS Protocol (FSRVP) in addition to the [**HRESULT**](#gt_hresult) values as defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 | Return value/code | Description |
 | --- | --- |
@@ -410,7 +410,7 @@ The following error codes are specific to File Server Remote VSS Protocol (FSRVP
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The methods in this RPC interface MUST return ZERO (0x00000000) or a nonerror [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.4) section 2.1) to indicate success or a nonzero error code as specified in section [2.2.4](#Section_2.2.4), to indicate failure. Unless otherwise specified in section [3.2.4](#Section_3.1.4), the client-side of the File Server Remote VSS Protocol MUST NOT interpret returned error codes and MUST simply return error codes to the invoking application.
+The methods in this RPC interface MUST return ZERO (0x00000000) or a nonerror [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1) to indicate success or a nonzero error code as specified in section [2.2.4](#Section_2.2.4), to indicate failure. Unless otherwise specified in section [3.2.4](#Section_3.2.4), the client-side of the File Server Remote VSS Protocol MUST NOT interpret returned error codes and MUST simply return error codes to the invoking application.
 
 The following diagram describes the typical client and server environments and the interactions between various components.
 
@@ -418,12 +418,12 @@ The following diagram describes the typical client and server environments and t
 
 Figure 1: FSRVP client and server environments and components
 
-The application server hosts VSS writers that are components of the applications accessing their data from a remote file share. The backup/restore tools interact with the [**shadow copy utility**](#gt_shadow-copy-utility) on the application server to perform backup of the application's data on the remote file server. When the storage location supplied by the backup tool is a UNC path, the shadow copy utility directs the backup requests to the FSRVP client. The FSRVP client exchanges messages with the FSRVP server on the file server to query, create, or delete the shadow copies. The FSRVP server acts as a backup tool on the file server and interacts with the local shadow copy utility to respond to client's requests. The server's processing behavior is outlined in section [3.1](#Section_1.3) and the client's processing behavior is outlined in section [3.2](#Section_3.2).<1>
+The application server hosts VSS writers that are components of the applications accessing their data from a remote file share. The backup/restore tools interact with the [**shadow copy utility**](#gt_shadow-copy-utility) on the application server to perform backup of the application's data on the remote file server. When the storage location supplied by the backup tool is a UNC path, the shadow copy utility directs the backup requests to the FSRVP client. The FSRVP client exchanges messages with the FSRVP server on the file server to query, create, or delete the shadow copies. The FSRVP server acts as a backup tool on the file server and interacts with the local shadow copy utility to respond to client's requests. The server's processing behavior is outlined in section [3.1](#Section_3.1) and the client's processing behavior is outlined in section [3.2](#Section_3.2).<1>
 
 <a id="Section_3.1"></a>
 ## 3.1 FileServerVssAgent Server Details
 
-The server implementing this interface responds to the client's requests as specified in section [3.1.4](#Section_3.2). Upon the client's request, the server initiates a [**shadow copy**](#gt_shadow-copy) set (see section [3.1.1.2](#Section_3.1.1.2)) and performs shadow copy operations on that set.
+The server implementing this interface responds to the client's requests as specified in section [3.1.4](#Section_3.1.4). Upon the client's request, the server initiates a [**shadow copy**](#gt_shadow-copy) set (see section [3.1.1.2](#Section_3.1.1.2)) and performs shadow copy operations on that set.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -489,7 +489,7 @@ The **MappedShare** element consists of the following properties:
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-**Message Sequence Timer**: This timer controls the amount of time the server waits between successive messages received from the client. The values taken by this timer for individual messages are specified in section [3.1.4](#Section_3.2).
+**Message Sequence Timer**: This timer controls the amount of time the server waits between successive messages received from the client. The values taken by this timer for individual messages are specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -1379,7 +1379,7 @@ The client MUST close the RPC connection to the server and release the binding h
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Timer Events
 
-Upon the expiration of RPC Call Timeout Timer, as specified in section [3.2.2](#Section_3.1.2), the client MUST close the RPC connection to the server and release the binding handle.
+Upon the expiration of RPC Call Timeout Timer, as specified in section [3.2.2](#Section_3.2.2), the client MUST close the RPC connection to the server and release the binding handle.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Other Local Events

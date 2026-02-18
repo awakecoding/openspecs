@@ -445,9 +445,9 @@ This protocol operates by passing COM+ specific information in object activation
 
 A context can contain the following context properties:
 
-- The Transaction Context Property (section [1.3.2](#Section_1.3))
+- The Transaction Context Property (section [1.3.2](#Section_1.3.2))
 - The Activity Context Property (section [1.3.3](#Section_1.3.3))
-- The Security Context Property (section [1.3.4](#Section_1.3.2))
+- The Security Context Property (section [1.3.4](#Section_1.3.4))
 - The User-Defined Context Property (section [1.3.5](#Section_1.3.5))
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 Context Properties and Activations
@@ -535,7 +535,7 @@ Figure 5: A root and non-root transaction object, each with a transaction contex
 <a id="Section_1.3.2.5"></a>
 #### 1.3.2.5 MS-DTC Transaction Propagation Methods
 
-The transaction protocol described in [MS-DTCO](../MS-DTCO/MS-DTCO.md) specifies two methods for propagating a [**transaction**](#gt_transaction) from one machine to another. For historical reasons, this protocol accommodates transaction manager implementations on client and server machines that support either or both methods. For more information, see section [2.2.6.1](../MS-DTCO/MS-DTCO.md) and [[MSDN-DTC]](https://go.microsoft.com/fwlink/?LinkId=89994).
+The transaction protocol described in [MS-DTCO](../MS-DTCO/MS-DTCO.md) specifies two methods for propagating a [**transaction**](#gt_transaction) from one machine to another. For historical reasons, this protocol accommodates transaction manager implementations on client and server machines that support either or both methods. For more information, see section [2.2.6.1](#Section_2.2.6.1) and [[MSDN-DTC]](https://go.microsoft.com/fwlink/?LinkId=89994).
 
 <a id="Section_1.3.2.6"></a>
 #### 1.3.2.6 Transaction Lifetime
@@ -597,8 +597,8 @@ This protocol is useful and appropriate when a distributed, object-based archite
 This document covers versioning issues in the following area:
 
 - Capability Negotiation: The protocol performs explicit capability negotiation, as follows:
-- By use of the COMVERSION structure ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.11) as specified in section [2.2.5](#Section_2.2.5) and section [3.12.4](#Section_3.9.4).
-- By use of the [MS-DTC Capabilities](#Section_8599ea52f5a04bb3835b0d6409f7472d) (section 2.2.6.1) as specified in section [2.2.2.1.2](#Section_2.2.2.1.2) and section [2.2.4.1](#Section_2.2.4.1).
+- By use of the COMVERSION structure ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.11) as specified in section [2.2.5](#Section_2.2.5) and section [3.12.4](#Section_3.12.4).
+- By use of the [MS-DTC Capabilities](#Section_2.2.6.1) (section 2.2.6.1) as specified in section [2.2.2.1.2](#Section_2.2.2.1.2) and section [2.2.4.1](#Section_2.2.4.1).
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
@@ -611,17 +611,17 @@ The following is a table of well-known [**GUIDs**](#gt_globally-unique-identifie
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| [Transaction Context Property](#Section_2.2.2.1) identifier, [Transaction ORPC Extensions](#Section_3.15) identifier, and [Transaction Envoy Property](#Section_2.2.4.1) identifier (guidTransactionProperty) | {ecabaeb1-7f19-11d2-978e-0000f8757e2a} | [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5 |
+| [Transaction Context Property](#Section_2.2.2.1) identifier, [Transaction ORPC Extensions](#Section_2.2.3.1) identifier, and [Transaction Envoy Property](#Section_2.2.4.1) identifier (guidTransactionProperty) | {ecabaeb1-7f19-11d2-978e-0000f8757e2a} | [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5 |
 | [Activity Context Property](#Section_2.2.2.2) identifier (guidActivityProperty) | {ecabaeb4-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | [Security Envoy Property](#Section_2.2.4.2) identifier and [Security ORPC Extension](#Section_2.2.3.2) identifier (guidSecurityProperty) | {ecabaeb8-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
-| [User-Defined Context Property](#Section_1.3.1) identifier (guidUserPropertiesProperty) | {ecabaeb6-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
+| [User-Defined Context Property](#Section_2.2.2.3) identifier (guidUserPropertiesProperty) | {ecabaeb6-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | OBJREF_CUSTOM unmarshaler [**CLSID**](#gt_class-identifier-clsid) for [Class Factory Wrapper](#Section_2.2.5) (CLSID_CFW) | {ecabafc0-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | OBJREF_CUSTOM unmarshaler CLSID for User-Defined Context Property (CLSID_UserContextProperty) | {ecabafb3-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | OBJREF_CUSTOM unmarshaler CLSID for Transaction Context Property (CLSID_TransactionUnmarshal) | {ecabafac-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | OBJREF_CUSTOM unmarshaler CLSID for Activity Context Property (CLSID_ActivityUnmarshal) | {ecabafaa-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | Unmarshaling CLSID for the Security Envoy Property (CLSID_SecurityEnvoy) | {ecabafab-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
 | Unmarshaling CLSID for the Transaction Envoy Property (CLSID_TransactionEnvoy) | {ecabafad-7f19-11d2-978e-0000f8757e2a} | [C706] section A.2.5 |
-| [**RPC**](#gt_remote-procedure-call-rpc) interface UUID for [ITransactionStream](#Section_3.23.4.2) (IID_ITransactionStream) | {97199110-DB2E-11d1-A251-0000F805CA53} | [C706] section A.2.5 |
+| [**RPC**](#gt_remote-procedure-call-rpc) interface UUID for [ITransactionStream](#Section_3.23) (IID_ITransactionStream) | {97199110-DB2E-11d1-A251-0000F805CA53} | [C706] section A.2.5 |
 
 <a id="Section_2"></a>
 # 2 Messages
@@ -632,7 +632,7 @@ Field types in packet diagrams are specified by the packet diagram and the field
 
 This protocol references commonly used data types as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
-Unless otherwise qualified, instances of **GUID** in sections 2 and [3](#Section_1.3) refer to [MS-DTYP] section 2.3.4.
+Unless otherwise qualified, instances of **GUID** in sections 2 and [3](#Section_3) refer to [MS-DTYP] section 2.3.4.
 
 <a id="Section_2.1"></a>
 ## 2.1 Transport
@@ -670,7 +670,7 @@ The following table shows which context properties are located within either the
 | --- | --- |
 | [Transaction (section 2.2.2.1)](#Section_2.2.2.1) | If present, this property MUST be in client context only. |
 | [Activity (section 2.2.2.2)](#Section_2.2.2.2) | If present, this property MUST be in client context only. |
-| [User-defined (section 2.2.2.3)](#Section_1.3.1) | If present, this property MUST be in both client and prototype contexts. |
+| [User-defined (section 2.2.2.3)](#Section_2.2.2.3) | If present, this property MUST be in both client and prototype contexts. |
 
 The user context property, if present, MUST be sent within both the client and prototype contexts, and both copies MUST be identical.
 
@@ -679,7 +679,7 @@ The user context property, if present, MUST be sent within both the client and p
 
 To indicate to the server that the client is running within a [**transaction**](#gt_transaction), the client MUST include a transaction context property as part of the client context in an object activation request.
 
-The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the transaction context property MUST be set to guidTransactionProperty, as specified in section [1.9](#Section_5). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the transaction context property MUST be set to GUID_NULL. The transaction context property MUST be marshaled using the OBJREF_CUSTOM format ([MS-DCOM] section 2.2.18.6), and the **CLSID** field of the OBJREF_CUSTOM instance MUST be set to CLSID_TransactionUnmarshal, as specified in section 1.9.
+The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the transaction context property MUST be set to guidTransactionProperty, as specified in section [1.9](#Section_1.9). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the transaction context property MUST be set to GUID_NULL. The transaction context property MUST be marshaled using the OBJREF_CUSTOM format ([MS-DCOM] section 2.2.18.6), and the **CLSID** field of the OBJREF_CUSTOM instance MUST be set to CLSID_TransactionUnmarshal, as specified in section 1.9.
 
 The format of the OBJREF_CUSTOM.pObjectData buffer for CLSID_TransactionUnmarshal MUST be specified as follows.
 
@@ -715,7 +715,7 @@ packet-beta
 <a id="Section_2.2.2.1.2"></a>
 ##### 2.2.2.1.2 TransactionStream
 
-The TransactionStream structure is used when the client passes a reference to the client's [ITransactionStream](#Section_3.23.4.2) interface and conveys information about the capabilities of the DTCO transaction manager implementation on the client.
+The TransactionStream structure is used when the client passes a reference to the client's [ITransactionStream](#Section_3.23) interface and conveys information about the capabilities of the DTCO transaction manager implementation on the client.
 
 ```mermaid
 packet-beta
@@ -762,7 +762,7 @@ packet-beta
 
 To indicate to the server that the client is running within an [**activity**](#gt_activity), the client MUST include an activity context property as part of the client context in an object activation request.
 
-The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the activity context property MUST be set to guidActivityProperty, as specified in section [1.9](#Section_5). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the activity context property MUST be set to GUID_NULL. The activity context property MUST be marshaled using the OBJREF_CUSTOM format ([MS-DCOM] section 2.2.18.6), and the **CLSID** field of the OBJREF_CUSTOM instance MUST be set to CLSID_ActivityUnmarshal, as specified in section 1.9.
+The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the activity context property MUST be set to guidActivityProperty, as specified in section [1.9](#Section_1.9). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the activity context property MUST be set to GUID_NULL. The activity context property MUST be marshaled using the OBJREF_CUSTOM format ([MS-DCOM] section 2.2.18.6), and the **CLSID** field of the OBJREF_CUSTOM instance MUST be set to CLSID_ActivityUnmarshal, as specified in section 1.9.
 
 The format of the OBJREF_CUSTOM.pObjectData buffer for CLSID_ActivityUnmarshal MUST be specified as follows.
 
@@ -787,7 +787,7 @@ packet-beta
 
 The user-defined context property, if present, MUST be included as part of both the client and prototype contexts during activation requests. This context property contains a logical set of name/value pairs.
 
-The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the user-defined context property MUST be set to guidUserPropertiesProperty, as specified in section [1.9](#Section_5). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the [activity context property](#Section_2.2.2.2) MUST be set to GUID_NULL. The user-defined context property MUST be marshaled using the OBJREF_CUSTOM format ([MS-DCOM] section 2.2.18.6), and the **CLSID** field of the OBJREF_CUSTOM instance MUST be set to CLSID_UserContextProperty, as specified in section 1.9.
+The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the user-defined context property MUST be set to guidUserPropertiesProperty, as specified in section [1.9](#Section_1.9). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the [activity context property](#Section_2.2.2.2) MUST be set to GUID_NULL. The user-defined context property MUST be marshaled using the OBJREF_CUSTOM format ([MS-DCOM] section 2.2.18.6), and the **CLSID** field of the OBJREF_CUSTOM instance MUST be set to CLSID_UserContextProperty, as specified in section 1.9.
 
 The format of the OBJREF_CUSTOM.pObjectData buffer for CLSID_UserContextProperty MUST be specified as follows:
 
@@ -850,7 +850,7 @@ Context ORPC extensions are specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) sectio
 
 These extensions are used to coordinate the state of a [**transaction**](#gt_transaction) in use by both the client and the server.
 
-The **policyID** field of the EntryHeader for this extension MUST be set to [guidTransactionProperty (section 1.9)](#Section_5).
+The **policyID** field of the EntryHeader for this extension MUST be set to [guidTransactionProperty (section 1.9)](#Section_1.9).
 
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 Transaction ORPC Call Extensions
@@ -935,9 +935,9 @@ Obtain the value of the **cbEHBuffer** field from the EntryHeader ([MS-DCOM](../
 <a id="Section_2.2.3.1.2"></a>
 ##### 2.2.3.1.2 Transaction ORPC Return Extensions
 
-These extensions are returned in the [**ORPC**](#gt_object-remote-procedure-call-orpc) response by a server in response to one of the call extensions specified in section [2.2.3.1](#Section_3.15).
+These extensions are returned in the [**ORPC**](#gt_object-remote-procedure-call-orpc) response by a server in response to one of the call extensions specified in section [2.2.3.1](#Section_2.2.3.1).
 
-The **policyID** field of the EntryHeader for these extensions MUST be set to [guidTransactionProperty (section 1.9)](#Section_5).
+The **policyID** field of the EntryHeader for these extensions MUST be set to [guidTransactionProperty (section 1.9)](#Section_1.9).
 
 <a id="Section_2.2.3.1.2.1"></a>
 ###### 2.2.3.1.2.1 TransactionPropRetHeader
@@ -995,9 +995,9 @@ Obtain the value of the **cbEHBuffer** field from the EntryHeader, [MS-DCOM](../
 
 This extension sends security information for this protocol as out-of-band data on [**ORPC**](#gt_object-remote-procedure-call-orpc) calls between two instances of this protocol. The security information provides a record of the chain of caller identities and other security attributes within a series of ORPC calls.
 
-The [Security ORPC Extension](#Section_2.2.3.2) structure MUST contain an array of [Security Property Collection (section 2.2.3.2.3)](#Section_2.2.3.2.3) structures. Each Security Property Collection structure in turn MUST contain an array of [Security Property (section 2.2.3.2.1)](#Section_2.2.3.2.1) structures. Each Security Property structure MUST specify a [Security Property Type (section 2.2.3.2.1.1)](#Section_2.2.3.2.1).
+The [Security ORPC Extension](#Section_2.2.3.2) structure MUST contain an array of [Security Property Collection (section 2.2.3.2.3)](#Section_2.2.3.2.3) structures. Each Security Property Collection structure in turn MUST contain an array of [Security Property (section 2.2.3.2.1)](#Section_2.2.3.2.1) structures. Each Security Property structure MUST specify a [Security Property Type (section 2.2.3.2.1.1)](#Section_2.2.3.2.1.1).
 
-The **policyID** field of the EntryHeader ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.21.5) of the Security ORPC Extension MUST be set to [guidSecurityProperty (section 1.9)](#Section_5).
+The **policyID** field of the EntryHeader ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.21.5) of the Security ORPC Extension MUST be set to [guidSecurityProperty (section 1.9)](#Section_1.9).
 
 <a id="Section_2.2.3.2.1"></a>
 ##### 2.2.3.2.1 Security Property
@@ -1011,7 +1011,7 @@ packet-beta
   32-95: "Data (variable)"
 ```
 
-**PropertyType (2 bytes):** An unsigned short that MUST contain one of the values specified in the Type column in section [2.2.3.2.1.1](#Section_2.2.3.2.1).
+**PropertyType (2 bytes):** An unsigned short that MUST contain one of the values specified in the Type column in section [2.2.3.2.1.1](#Section_2.2.3.2.1.1).
 
 **Size (2 bytes):** An unsigned short that MUST contain the size of the **Data** array as specified in section 2.2.3.2.1.1.
 
@@ -1024,7 +1024,7 @@ The following table lists the valid Security Property Types for the PropertyType
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| MUST be an array of bytes specifying the [**security identifier (SID)**](#gt_security-identifier-sid) of the caller. The array MUST be padded to a multiple of 4. | 0x0b01 or 0x0b06 | MUST be set to the number of bytes in the **Data** field rounded to a multiple of 4. If the value is 0x0b01, the **Data** field MUST contain a SID obtained by authenticating the caller using DCOM/RPC authentication mechanisms. If the value is 0x0b06, the **Data** field MUST contain a **SID** supplied by an application or a higher-level protocol. The **collectionType** field of the [security property collection header (section 2.2.3.2.2)](#Section_2.2.3.2.3) MUST be set to 0x0a02. |
+| MUST be an array of bytes specifying the [**security identifier (SID)**](#gt_security-identifier-sid) of the caller. The array MUST be padded to a multiple of 4. | 0x0b01 or 0x0b06 | MUST be set to the number of bytes in the **Data** field rounded to a multiple of 4. If the value is 0x0b01, the **Data** field MUST contain a SID obtained by authenticating the caller using DCOM/RPC authentication mechanisms. If the value is 0x0b06, the **Data** field MUST contain a **SID** supplied by an application or a higher-level protocol. The **collectionType** field of the [security property collection header (section 2.2.3.2.2)](#Section_2.2.3.2.2) MUST be set to 0x0a02. |
 | Variable | 0x0b02 or 0x0b07 | MUST be set to the number of bytes in the **Data** field rounded to a multiple of 4. MUST be an array of Unicode characters that specifies the Windows NT account name of the caller. The array MUST be terminated with the NULL Unicode character and MUST be padded to a multiple of 4. If the value is 0x0b02, the **Data** field MUST contain a Windows NT account name obtained by authenticating the caller using DCOM/RPC authentication mechanisms. If the value is 0x0b07, the **Data** field MUST contain a Windows NT account name supplied by an application or a higher-level protocol. The **collectionType** field of the security property collection header (section 2.2.3.2.2) MUST be set to 0x0a02. |
 | Variable | 0x0b03 | MUST be set to 0x0004. MUST be a **DWORD** that MUST contain the RPC authentication service value used in the ORPC call. For more details on RPC authentication services, see [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8. The **collectionType** field of the security property collection header (section 2.2.3.2.2) MUST be set to 0x0a02. |
 | Variable | 0x0b04 | MUST be set to 0x0004. MUST be a **DWORD** that MUST contain the RPC authentication level value used in the ORPC call. For more details on RPC authentication levels, see [MS-RPCE] section 2.2.1.1.8. The **collectionType** field of the security property collection header (section 2.2.3.2.2) MUST be set to 0x0a02. |
@@ -1062,7 +1062,7 @@ packet-beta
   32-95: "Properties (variable)"
 ```
 
-**Header (4 bytes):** A [Security Property Collection Header (section 2.2.3.2.2)](#Section_2.2.3.2.3).
+**Header (4 bytes):** A [Security Property Collection Header (section 2.2.3.2.2)](#Section_2.2.3.2.2).
 
 **Properties (variable):** An array of Security Property structures. The number of elements in the array MUST be specified in the **cProperties** field of **Header**.
 
@@ -1101,7 +1101,7 @@ packet-beta
 
 **cCollections (2 bytes):** The unsigned number of elements in the **Collections** array.
 
-**Collections (variable):** An array of security property collections (section 2.2.3.2.3). The **collectionType** field in the [Security Property Collection Header (section 2.2.3.2.2)](#Section_2.2.3.2.3) of the first element of the array, if present, MUST be set to 0x0a01. The **collectionType** field in the Security Property Collection Header of the remaining elements of the array, if present, MUST be set to 0x0a02. The second array element, if present, indicates the security property of the direct [**ORPC**](#gt_object-remote-procedure-call-orpc) caller. Subsequent array elements, if present, indicate the security properties of previous callers in the ORPC call chain.
+**Collections (variable):** An array of security property collections (section 2.2.3.2.3). The **collectionType** field in the [Security Property Collection Header (section 2.2.3.2.2)](#Section_2.2.3.2.2) of the first element of the array, if present, MUST be set to 0x0a01. The **collectionType** field in the Security Property Collection Header of the remaining elements of the array, if present, MUST be set to 0x0a02. The second array element, if present, indicates the security property of the direct [**ORPC**](#gt_object-remote-procedure-call-orpc) caller. Subsequent array elements, if present, indicate the security properties of previous callers in the ORPC call chain.
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 OBJREF_EXTENDED Context Properties
@@ -1113,7 +1113,7 @@ The server represents some or all server context properties as part of the marsh
 
 The Transaction Envoy Property is used to notify the unmarshaling client that the server object is running within a [**transaction**](#gt_transaction). The server object returns the transaction envoy context property as part of an OBJREF_EXTENDED instance.
 
-The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the transaction envoy property MUST be set to guidTransactionProperty (see section [1.9](#Section_5)). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the transaction envoy property MUST be set to CLSID_TransactionEnvoy (see section 1.9).
+The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the transaction envoy property MUST be set to guidTransactionProperty (see section [1.9](#Section_1.9)). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the transaction envoy property MUST be set to CLSID_TransactionEnvoy (see section 1.9).
 
 The marshaled data buffer for the property MUST be specified in the following format.
 
@@ -1141,7 +1141,7 @@ packet-beta
 
 This property is used to notify the unmarshaling client that the server object is using security specified by this protocol. The server object returns the security envoy context property as part of an OBJREF_EXTENDED instance.
 
-The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the security envoy property MUST be set to guidSecurityProperty (see section [1.9](#Section_5)). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the security envoy property MUST be set to CLSID_SecurityEnvoy (see section 1.9).
+The **policyId** field of the PROPMARSHALHEADER instance ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.20.1) for the security envoy property MUST be set to guidSecurityProperty (see section [1.9](#Section_1.9)). The **CLSID** field of the PROPMARSHALHEADER instance ([MS-DCOM] section 2.2.20.1) for the security envoy property MUST be set to CLSID_SecurityEnvoy (see section 1.9).
 
 The marshaled data buffer for the property MUST be specified in the following format:
 
@@ -1166,7 +1166,7 @@ packet-beta
 
 If a client with a COMVERSION ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.11) greater than or equal to 5.6 requests a [**class factory**](#gt_class-factory) reference during activation ([MS-DCOM] section 3.1.2.5.2.3.2), the server MUST return an OBJREF_CUSTOM instance containing a marshaled representation of the class factory. The unmarshaler of the OBJREF_CUSTOM instance on the client MUST convert object creation requests on the class factory reference to normal object activation requests. This process enables the client to send its client and prototype context properties during class-factory-based object activation requests in the same way that these properties are sent during normal object activation requests.
 
-CLSID_CFW (see section [1.9](#Section_5)) MUST be the unmarshaler **CLSID** for the OBJREF_CUSTOM instance.
+CLSID_CFW (see section [1.9](#Section_1.9)) MUST be the unmarshaler **CLSID** for the OBJREF_CUSTOM instance.
 
 The format of the **OBJREF_CUSTOM.pObjectData** buffer for this CLSID_CFW MUST be specified as follows.
 
@@ -1264,7 +1264,7 @@ A client root transaction object maintains the following data structures:
 
 - A [TransactionStream (section 2.2.2.1.2)](#Section_2.2.2.1.2) object.
 - A **TransactionStreamID** GUID. This GUID is shared with the [Client Transaction Envoy Unmarshaling (section 3.20)](#Section_3.20)
-- A **DtcCapabilities** value, consisting of a set of flags as specified in section [2.2.6.1](#Section_2.2.6.1). This value is shared with the [ITransactionStream Server (section 3.23)](#Section_3.23.4.2).
+- A **DtcCapabilities** value, consisting of a set of flags as specified in section [2.2.6.1](#Section_2.2.6.1). This value is shared with the [ITransactionStream Server (section 3.23)](#Section_3.23).
 - An **IsolationLevel** value.
 - A **CurrentTSN** value. This value is shared with the ITransactionStream Server.
 - A Propagation_Token instance.
@@ -1279,10 +1279,10 @@ None.
 
 When a client root transaction object is initialized, it MUST do the following:
 
-- Create the data structures described in section [3.1.1](#Section_1.3).
+- Create the data structures described in section [3.1.1](#Section_3.1.1).
 - Set the **RootTxnObject** flag to TRUE.
 - Set the **CurrentTSN** value to 1.
-- Set the DtcCap_CanTransmit (section [2.2.6.1](../MS-DTCO/MS-DTCO.md)) bit in the **DtcCapabilities** value if the local DTCO [**transaction manager**](#gt_transaction-manager) implementation supports the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) method of sending transactions.
+- Set the DtcCap_CanTransmit (section [2.2.6.1](#Section_2.2.6.1)) bit in the **DtcCapabilities** value if the local DTCO [**transaction manager**](#gt_transaction-manager) implementation supports the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) method of sending transactions.
 - Set the DtcCap_CanExport (section 2.2.6.1) bit in the **DtcCapabilities** value if the local DTCO transaction manager implementation supports the STxInfo ([MS-DTCO] section 2.2.5.10) method of sending transactions.
 - Set the **IsolationLevel** value to one of the values specified in section [2.2.6.2](#Section_2.2.6.2).
 - Set the Propagation_Token instance to the Propagation_Token of the currently active transaction instance.
@@ -1307,7 +1307,7 @@ The client root transaction object MUST do the following:
 - Set the **StreamID** field to the TransactionStreamID [**GUID**](#gt_globally-unique-identifier-guid).
 - Set the **StreamVariant** field to 0x0001.
 - Set the **DtcCapabilities** field to its DtcCapabilities value.
-- Marshal the [TransactionStream (section 2.2.2.1.2)](#Section_2.2.2.1.2) object (as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.1) to an STDOBJREF structure ([MS-DCOM] section 2.2.18.2) and set the **TransactionStream** field to the STDOBJREF. The **iid** field of the OBJREF ([MS-DCOM] section 2.2.18) structure contained in the STDOBJREF structure MUST be set to IID_ITransactionStream as specified in section [1.9](#Section_5).
+- Marshal the [TransactionStream (section 2.2.2.1.2)](#Section_2.2.2.1.2) object (as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.1) to an STDOBJREF structure ([MS-DCOM] section 2.2.18.2) and set the **TransactionStream** field to the STDOBJREF. The **iid** field of the OBJREF ([MS-DCOM] section 2.2.18) structure contained in the STDOBJREF structure MUST be set to IID_ITransactionStream as specified in section [1.9](#Section_1.9).
 - Set the **MarshalSize** field to the size, in bytes, of the **TransactionStream** field.
 - Set the **IsolationLevel** field, if present, to the **IsolationLevel** value.
 <a id="Section_3.1.4.2"></a>
@@ -1342,7 +1342,7 @@ When the client root transaction object initiates the commit of the current tran
 <a id="Section_3.1.6.2"></a>
 #### 3.1.6.2 Transaction Abort
 
-The client root [**transaction**](#gt_transaction) object MUST initiate a cancellation of the current transaction if requested by a higher-level protocol or by the client [Transaction ORPC Extension](#Section_3.15).
+The client root [**transaction**](#gt_transaction) object MUST initiate a cancellation of the current transaction if requested by a higher-level protocol or by the client [Transaction ORPC Extension](#Section_2.2.3.1).
 
 <a id="Section_3.2"></a>
 ## 3.2 Client Non-Root Transaction Object Activation Details
@@ -1474,7 +1474,7 @@ This section describes a conceptual model of possible data organization that an 
 
 A client user context property maintains the following data structures:
 
-- A table of name/value pair mappings, with the types of names and values as specified in section [2.2.2.3](#Section_1.3.1).
+- A table of name/value pair mappings, with the types of names and values as specified in section [2.2.2.3](#Section_2.2.2.3).
 <a id="Section_3.5.2"></a>
 ### 3.5.2 Timers
 
@@ -1488,7 +1488,7 @@ Not applicable to [Client User Property Activation (section 3.5)](#Section_3.5
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Message Processing Events and Sequencing Rules
 
-If an application or higher-level protocol supplies user-defined context properties (see section [2.2.2.3](#Section_1.3.1)) during activation, the client MUST copy and propagate them as part of both the client context and the prototype context in the activation request.
+If an application or higher-level protocol supplies user-defined context properties (see section [2.2.2.3](#Section_2.2.2.3)) during activation, the client MUST copy and propagate them as part of both the client context and the prototype context in the activation request.
 
 <a id="Section_3.5.5"></a>
 ### 3.5.5 Timer Events
@@ -1514,7 +1514,7 @@ The client maintains the following data structure:
 <a id="Section_3.6.2"></a>
 ### 3.6.2 Timers
 
-Not applicable to [Client Class Factory Wrapper Activation (section 3.6)](#Section_2.2.5).
+Not applicable to [Client Class Factory Wrapper Activation (section 3.6)](#Section_3.6).
 
 <a id="Section_3.6.3"></a>
 ### 3.6.3 Initialization
@@ -1533,7 +1533,7 @@ When the application makes object creation requests on the [**class factory**](#
 - Setting the value of the **classID** field in the InstantiationInfoData structure ([MS-DCOM] section 2.2.22.2.1) to the value of the **Clsid** field from the class factory wrapper structure.
 - Setting the value of the **guidPartition** field in the SpecialPropertiesData structure ([MS-DCOM] section 2.2.22.2.2) to the value of the **PartitionID** field from the class factory wrapper structure.
 - Setting the value of the **dwOrigClsCtx** field in the SpecialPropertiesData structure ([MS-DCOM] section 2.2.22.2.2) to the value of the **Clsctx** field from the class factory wrapper structure.
-- Sending client and prototype context properties in the ActivationContextInfoData structure ([MS-DCOM] section 2.2.22.2.5) as specified in section [1.3.1.1](#Section_1.3.1).
+- Sending client and prototype context properties in the ActivationContextInfoData structure ([MS-DCOM] section 2.2.22.2.5) as specified in section [1.3.1.1](#Section_1.3.1.1).
 - If the activation request succeeds, return success, or continue processing as follows if not.
 - For each element in the **ShortNames** array in the Class Factory Wrapper structure:
 - Make an object activation request by specifying the **ShortNames** array element as the remote server name and by setting all the other parameters to the same values specified in the first activation request.
@@ -1545,12 +1545,12 @@ When the application makes object creation requests on the [**class factory**](#
 <a id="Section_3.6.5"></a>
 ### 3.6.5 Timer Events
 
-Not applicable to [Client Class Factory Wrapper Activation (section 3.6)](#Section_2.2.5).
+Not applicable to [Client Class Factory Wrapper Activation (section 3.6)](#Section_3.6).
 
 <a id="Section_3.6.6"></a>
 ### 3.6.6 Other Local Events
 
-Not applicable to [Client Class Factory Wrapper Activation (section 3.6)](#Section_2.2.5).
+Not applicable to [Client Class Factory Wrapper Activation (section 3.6)](#Section_3.6).
 
 <a id="Section_3.7"></a>
 ## 3.7 Server Root Transaction Object Activation Details
@@ -1599,7 +1599,7 @@ A server non-root transaction object maintains the following data structures:
 
 - A [TransactionStream (section 2.2.2.1.2)](#Section_2.2.2.1.2) object reference. This object reference is shared with the [Server Transaction ORPC Extension (section 3.15)](#Section_3.15).
 - A **TransactionStreamID** [**GUID**](#gt_globally-unique-identifier-guid). This GUID is shared with the [Server Transaction Envoy Marshaling Details (section 3.18)](#Section_3.18).
-- A [DtcCapabilities](#Section_8599ea52f5a04bb3835b0d6409f7472d) value, containing a set of flags as specified in section 2.2.6.1. This value is shared with the Server Transaction ORPC Extension.
+- A [DtcCapabilities](#Section_2.2.6.1) value, containing a set of flags as specified in section 2.2.6.1. This value is shared with the Server Transaction ORPC Extension.
 - An **IsolationLevel** value.
 - A Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) instance.
 - An **InTransaction** flag. This flag is shared with the Server Transaction ORPC Extension.
@@ -1749,7 +1749,7 @@ Not applicable to [Server User Property Activation (section 3.11)](#Section_3.
 <a id="Section_3.11.4"></a>
 ### 3.11.4 Message Processing Events and Sequencing Rules
 
-When processing an activation, if [user-defined context properties (section 2.2.2.3)](#Section_1.3.1) are present in the client and prototype contexts, the server MUST copy and supply these properties to applications or higher-level protocols that consume the properties.
+When processing an activation, if [user-defined context properties (section 2.2.2.3)](#Section_2.2.2.3) are present in the client and prototype contexts, the server MUST copy and supply these properties to applications or higher-level protocols that consume the properties.
 
 <a id="Section_3.11.5"></a>
 ### 3.11.5 Timer Events
@@ -1767,17 +1767,17 @@ Not applicable to [Server User Property Activation (section 3.11)](#Section_3.
 <a id="Section_3.12.1"></a>
 ### 3.12.1 Abstract Data Model
 
-Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_2.2.5).
+Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_3.12).
 
 <a id="Section_3.12.2"></a>
 ### 3.12.2 Timers
 
-Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_2.2.5).
+Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_3.12).
 
 <a id="Section_3.12.3"></a>
 ### 3.12.3 Initialization
 
-Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_2.2.5).
+Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_3.12).
 
 <a id="Section_3.12.4"></a>
 ### 3.12.4 Message Processing Events and Sequencing Rules
@@ -1801,12 +1801,12 @@ If the activation request is for a [**class factory**](#gt_class-factory) object
 <a id="Section_3.12.5"></a>
 ### 3.12.5 Timer Events
 
-Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_2.2.5).
+Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_3.12).
 
 <a id="Section_3.12.6"></a>
 ### 3.12.6 Other Local Events
 
-Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_2.2.5).
+Not applicable to [Server Class Factory Wrapper Activation (section 3.12)](#Section_3.12).
 
 <a id="Section_3.13"></a>
 ## 3.13 Client Transaction ORPC Extension Details
@@ -1818,7 +1818,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The client transaction ORPC extension maintains the following data structures:
 
-- A **RootTxnObject** flag. This flag is initialized by the [Client Root Transaction Object (section 3.1)](#Section_1.3.2.2) or the [Client Non-Root Transaction Object (section 3.2)](#Section_1.3.2.3).
+- A **RootTxnObject** flag. This flag is initialized by the [Client Root Transaction Object (section 3.1)](#Section_3.1) or the [Client Non-Root Transaction Object (section 3.2)](#Section_3.2).
 - A **DtcCapabilities** value, consisting of a set of flags as specified in section [2.2.6.1](#Section_2.2.6.1). This value is shared with and initialized by the [Client Transaction Envoy Unmarshaling (section 3.20)](#Section_3.20).
 - A **TransactionRequiredInORPC** flag. This flag is shared with and initialized by the Client Transaction Envoy Unmarshaling.
 - A **WhereaboutsID** [**GUID**](#gt_globally-unique-identifier-guid). This GUID is shared with and initialized by the Client Transaction Envoy Unmarshaling.
@@ -1835,8 +1835,8 @@ None.
 
 When the client transaction [**ORPC**](#gt_object-remote-procedure-call-orpc) extension is initialized, it MUST do the following:
 
-- Create the data structures described in section [3.13.1](#Section_3.13).
-- If the **RootTxnObject** flag is set to TRUE, it MUST set the CurrentTSN value to the CurrentTSN value of the [client root transaction object (section 3.1)](#Section_1.3.2.2).
+- Create the data structures described in section [3.13.1](#Section_3.13.1).
+- If the **RootTxnObject** flag is set to TRUE, it MUST set the CurrentTSN value to the CurrentTSN value of the [client root transaction object (section 3.1)](#Section_3.1).
 - Otherwise, it MUST set the CurrentTSN value to 1.
 - It MUST set the KnownTSN value to 0.
 <a id="Section_3.13.4"></a>
@@ -1859,7 +1859,7 @@ Otherwise, the client transaction ORPC extension MUST construct a [TransactionPr
 - Otherwise, if the **m_usFlags** field is set to TransactionPropCallFlag_NeedWhereabouts, the client transaction ORPC extension MUST set the **m_usVariant** field to TransactionPropCall_None.
 - Otherwise, if the DtcCap_CanTransmit bit is set in the DtcCapabilities value, the client transaction ORPC extension MUST set the **m_usVariant** field to TransactionPropCall_TransmitterBuffer and MUST follow the TransactionPropCallHeader structure with a [TransactionPropCallTransmitterBuffer (section 2.2.3.1.1.3)](#Section_2.2.3.1.1.3) structure containing the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) for the current transaction.
 - Otherwise, if the DtcCap_CanExport bit is set in the DtcCapabilities value, the client transaction ORPC extension MUST set the **m_usVariant** field to [TransactionPropCallExportCookie (section 2.2.3.1.1.2)](#Section_2.2.3.1.1.2) and MUST follow the TransactionPropCallHeader structure with TransactionPropCallExportCookie containing the STxInfo ([MS-DTCO] section 2.2.5.10) for the current transaction.
-If the ORPC request contains an application object in an ORPC request parameter, the client transaction ORPC extension MUST marshal the application object as specified in section [3.19](#Section_5).
+If the ORPC request contains an application object in an ORPC request parameter, the client transaction ORPC extension MUST marshal the application object as specified in section [3.19](#Section_3.19).
 
 If the ORPC request contains an application object reference in an ORPC request parameter, the client transaction ORPC extension MUST marshal the application object reference as specified in section [3.20](#Section_3.20).
 
@@ -1890,9 +1890,9 @@ None.
 <a id="Section_3.13.6.1"></a>
 #### 3.13.6.1 Transaction Outcome Participation
 
-The [Client Transaction ORPC Extension](#Section_3.13) MUST instruct the [Client Root Transaction Object (section 3.1)](#Section_1.3.2.2) to initiate the cancellation of the transaction if the TransactionPropRetFlag_Abort flag is set in the **m_usFlags** field of the [TransactionPropRetHeader (section 2.2.3.1.2.1)](#Section_2.2.3.1.2.1) structure contained in the [**ORPC**](#gt_object-remote-procedure-call-orpc) response.
+The [Client Transaction ORPC Extension](#Section_3.13) MUST instruct the [Client Root Transaction Object (section 3.1)](#Section_3.1) to initiate the cancellation of the transaction if the TransactionPropRetFlag_Abort flag is set in the **m_usFlags** field of the [TransactionPropRetHeader (section 2.2.3.1.2.1)](#Section_2.2.3.1.2.1) structure contained in the [**ORPC**](#gt_object-remote-procedure-call-orpc) response.
 
-The Client Transaction ORPC Extension MUST instruct the [Client Non-Root Transaction Object (section 3.2)](#Section_1.3.2.3) to vote to cancel the transaction if the TransactionPropRetFlag_Abort flag is set in the **m_usFlags** field of TransactionPropRetHeader contained in the ORPC response.
+The Client Transaction ORPC Extension MUST instruct the [Client Non-Root Transaction Object (section 3.2)](#Section_3.2) to vote to cancel the transaction if the TransactionPropRetFlag_Abort flag is set in the **m_usFlags** field of TransactionPropRetHeader contained in the ORPC response.
 
 <a id="Section_3.14"></a>
 ## 3.14 Client Security ORPC Extension Details
@@ -1902,22 +1902,22 @@ The Client Transaction ORPC Extension MUST instruct the [Client Non-Root Transac
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-If the client receives an [**ORPC**](#gt_object-remote-procedure-call-orpc), it acts as a server and maintains the data structures specified in section [3.16.1](#Section_3.16). In addition, it maintains the data structures specified in section [3.22.1](#Section_3.22).
+If the client receives an [**ORPC**](#gt_object-remote-procedure-call-orpc), it acts as a server and maintains the data structures specified in section [3.16.1](#Section_3.16.1). In addition, it maintains the data structures specified in section [3.22.1](#Section_3.22.1).
 
 <a id="Section_3.14.2"></a>
 ### 3.14.2 Timers
 
-Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_2.2.3.2).
+Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_3.14).
 
 <a id="Section_3.14.3"></a>
 ### 3.14.3 Initialization
 
-Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_2.2.3.2).
+Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_3.14).
 
 <a id="Section_3.14.4"></a>
 ### 3.14.4 Message Processing Events and Sequencing Rules
 
-When the client makes an [**ORPC**](#gt_object-remote-procedure-call-orpc) request (see [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.2), the extension MUST add a [Security ORPC Extension (section 2.2.3.2.4)](#Section_2.2.3.2) structure to the ORPC message. The extension MUST create the structure and MUST:
+When the client makes an [**ORPC**](#gt_object-remote-procedure-call-orpc) request (see [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.2), the extension MUST add a [Security ORPC Extension (section 2.2.3.2.4)](#Section_2.2.3.2.4) structure to the ORPC message. The extension MUST create the structure and MUST:
 
 - Set the **Style** field to 0x0000 unless an application or a higher-level protocol requires the extension to set this field to 0x0002.
 - If the **Style** field is set to 0x0000, the extension MUST create the rest of the structure as follows:
@@ -1984,12 +1984,12 @@ When the client makes an [**ORPC**](#gt_object-remote-procedure-call-orpc) reque
 <a id="Section_3.14.5"></a>
 ### 3.14.5 Timer Events
 
-Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_2.2.3.2).
+Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_3.14).
 
 <a id="Section_3.14.6"></a>
 ### 3.14.6 Other Local Events
 
-Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_2.2.3.2).
+Not applicable to [Client Security ORPC Extensions (section 3.14)](#Section_3.14).
 
 <a id="Section_3.15"></a>
 ## 3.15 Server Transaction ORPC Extension Details
@@ -2029,7 +2029,7 @@ None.
 
 When the server transaction ORPC extension is initialized, it MUST do the following:
 
-- Create the data structures described in section [3.15.1](#Section_3.15).
+- Create the data structures described in section [3.15.1](#Section_3.15.1).
 - Set the **CurrentTSN** value to zero.
 - Set the TransactionUpdated flag to FALSE.
 <a id="Section_3.15.4"></a>
@@ -2037,7 +2037,7 @@ When the server transaction ORPC extension is initialized, it MUST do the follow
 
 When a [Server Transaction ORPC Extension](#Section_3.15) receives an [**ORPC**](#gt_object-remote-procedure-call-orpc), it MUST perform the following sequence of operations.
 
-If the incoming ORPC does not contain a [Transaction ORPC Extension (section 2.2.3.1)](#Section_3.15), the server transaction ORPC extension MUST do the following:
+If the incoming ORPC does not contain a [Transaction ORPC Extension (section 2.2.3.1)](#Section_2.2.3.1), the server transaction ORPC extension MUST do the following:
 
 - If the DtcCap_CanExport bit (section [2.2.6.1](#Section_2.2.6.1)) is not set in the DtcCapabilities value and the DtcCap_CanTransmit bit (section 2.2.6.1) is not set in the DtcCapabilities value, the server transaction ORPC extension MUST stop further processing and MUST return CONTEXT_E_TMNOTAVAILABLE from the ORPC request.
 - If the DtcCap_CanExport bit is set in the DtcCapabilities value and the local DTCO transaction manager implementation does not support the STxInfo ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.10) method of sending [**transactions**](#gt_transaction) or if the DtcCap_CanTransmit bit is set in the DtcCapabilities value and the local DTCO transaction manager implementation does not support the Propagation_Token ([MS-DTCO] section 2.2.5.4) method of sending transactions, the server transaction ORPC extension MUST stop further processing and MUST return CONTEXT_E_TMNOTAVAILABLE from the ORPC request.
@@ -2066,7 +2066,7 @@ If the incoming ORPC does not contain a [Transaction ORPC Extension (section 2
 - Set the Propagation_Token instance to the value returned in the *prgbTransmitterBuffer* parameter.
 - Set the **TransactionUpdated** flag to TRUE.
 - If the GetSeqAndTxViaTransmitter call fails, the server transaction ORPC extension MUST do the following:
-- Call the [GetTxViaTransmitter (section 3.23.4.4)](#Section_1.3.2) method of the TransactionStream object reference, setting the *ulRequestSeq* parameter to the **CurrentTSN** value.
+- Call the [GetTxViaTransmitter (section 3.23.4.4)](#Section_3.23.4.4) method of the TransactionStream object reference, setting the *ulRequestSeq* parameter to the **CurrentTSN** value.
 - If the GetTxViaTransmitter call succeeds, the server transaction ORPC extension MUST do the following:
 - Set the Propagation_Token instance to the value returned in *prgbTransmitterBuffer*.
 - Set the **TransactionUpdated** flag to TRUE.
@@ -2134,7 +2134,7 @@ The server transaction ORPC extension MUST instruct the [Server Non-Root Transac
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The [server security ORPC extension (section 3.16)](#Section_2.2.3.2) maintains a table of [Security ORPC Extension (section 2.2.3.2.4)](#Section_2.2.3.2) structures.
+The [server security ORPC extension (section 3.16)](#Section_3.16) maintains a table of [Security ORPC Extension (section 2.2.3.2.4)](#Section_2.2.3.2.4) structures.
 
 <a id="Section_3.16.2"></a>
 ### 3.16.2 Timers
@@ -2149,7 +2149,7 @@ None.
 <a id="Section_3.16.4"></a>
 ### 3.16.4 Message Processing Events and Sequencing Rules
 
-On receipt of an [**ORPC**](#gt_object-remote-procedure-call-orpc) ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.4), the [Security ORPC Extension (section 2.2.3.2.4)](#Section_2.2.3.2) MUST:
+On receipt of an [**ORPC**](#gt_object-remote-procedure-call-orpc) ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.4), the [Security ORPC Extension (section 2.2.3.2.4)](#Section_2.2.3.2.4) MUST:
 
 - Add an entry to the Security ORPC Extension table, and MUST set the fields in the entry to the corresponding fields in the Security ORPC Extension structure contained in the ORPC message.
 When returning from an ORPC ([MS-DCOM] section 3.1.1.5.4), the Security ORPC Extension MUST remove the entry corresponding to the ORPC from the Security ORPC Extension table.
@@ -2172,7 +2172,7 @@ None.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The server maintains the data structures specified in section [3.9.1](#Section_3.9). In addition, the server maintains the following:
+The server maintains the data structures specified in section [3.9.1](#Section_3.9.1). In addition, the server maintains the following:
 
 - A table of objects, keyed by the activity ID.
 - An activity timer for each activity.
@@ -2203,7 +2203,7 @@ When processing an incoming [**ORPC**](#gt_object-remote-procedure-call-orpc) ca
 - If they are different, the server MUST:
 - Start the activity timer.
 - Attempt to take the activity lock.
-- If the timer expires, the server MUST reject the incoming ORPC call as specified in section [3.17.5](#Section_3.5.5).
+- If the timer expires, the server MUST reject the incoming ORPC call as specified in section [3.17.5](#Section_3.17.5).
 - If the activity lock is acquired, the server MUST:
 - Set the causality identifier of the current object to that of the incoming ORPC call.
 - Reset the activity timer.
@@ -2249,8 +2249,8 @@ None.
 
 When a server transaction envoy object is initialized, it MUST do the following:
 
-- Create the data structures described in section [3.18.1](#Section_3.12.1).
-- Set the DtcCap_CanTransmit bit (section [2.2.6.1](../MS-DTCO/MS-DTCO.md)) in the DtcCapabilities value if the local DTCO transaction manager implementation supports the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) method of sending transactions.
+- Create the data structures described in section [3.18.1](#Section_3.18.1).
+- Set the DtcCap_CanTransmit bit (section [2.2.6.1](#Section_2.2.6.1)) in the DtcCapabilities value if the local DTCO transaction manager implementation supports the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) method of sending transactions.
 - Set the DtcCap_CanExport bit (2.2.6.1) in the DtcCapabilities value if the local DTCO transaction manager implementation supports the STxInfo ([MS-DTCO] section 2.2.5.10) method of sending transactions.
 - Set the **SWhereaboutsID** [**GUID**](#gt_globally-unique-identifier-guid) to a GUID that uniquely identifies the SWhereabouts ([MS-DTCO] section 2.2.5.11) of the local DTCO transaction manager implementation.
 <a id="Section_3.18.4"></a>
@@ -2283,7 +2283,7 @@ None.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The [server security envoy (section 3.19)](#Section_5) maintains the following [**GUID**](#gt_globally-unique-identifier-guid) data structure instances:
+The [server security envoy (section 3.19)](#Section_3.19) maintains the following [**GUID**](#gt_globally-unique-identifier-guid) data structure instances:
 
 - domainGUID, which identifies the domain of the computer.
 - machineGUID, which identifies the computer.
@@ -2295,14 +2295,14 @@ None.
 <a id="Section_3.19.3"></a>
 ### 3.19.3 Initialization
 
-On initialization, the [server security envoy (section 3.19)](#Section_5) MUST:
+On initialization, the [server security envoy (section 3.19)](#Section_3.19) MUST:
 
 - Set the domainGUID to the GUID of the domain of the computer. For more information, see [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 2.2.1.2.1.
 - Set the machineGUID to a GUID that uniquely identifies the computer.
 <a id="Section_3.19.4"></a>
 ### 3.19.4 Message Processing Events and Sequencing Rules
 
-When an object is marshaled, the [server security envoy (section 3.19)](#Section_5) MUST contribute a security envoy context property (section [2.2.4.2](#Section_2.2.4.2)) to the OBJREF_EXTENDED ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.18.7) instance representing the marshaled object reference ([MS-DCOM] section 3.1.1.5.1). The security envoy property MUST be created as follows:
+When an object is marshaled, the [server security envoy (section 3.19)](#Section_3.19) MUST contribute a security envoy context property (section [2.2.4.2](#Section_2.2.4.2)) to the OBJREF_EXTENDED ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 2.2.18.7) instance representing the marshaled object reference ([MS-DCOM] section 3.1.1.5.1). The security envoy property MUST be created as follows:
 
 - The **guidServerDomain** field MUST be set to domainGUID.
 - The **guidServerMachine** field MUST be set to machineGUID.
@@ -2326,7 +2326,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The client [**transaction**](#gt_transaction) envoy unmarshaling maintains the following data structures, one for each [OBJREF_EXTENDED (section 2.2.4)](#Section_2.2.4) object reference unmarshaled by the client:
 
-- A **TransactionStreamID** [**GUID**](#gt_globally-unique-identifier-guid). This GUID is shared with and initialized by the [Client Root Transaction Object (section 3.1)](#Section_1.3.2.2) if the client transaction envoy is for a root transaction object. This GUID is shared with and initialized by the [Client Non-Root Transaction Object (section 3.2)](#Section_1.3.2.3) if the client transaction envoy is for a non-root transaction object.
+- A **TransactionStreamID** [**GUID**](#gt_globally-unique-identifier-guid). This GUID is shared with and initialized by the [Client Root Transaction Object (section 3.1)](#Section_3.1) if the client transaction envoy is for a root transaction object. This GUID is shared with and initialized by the [Client Non-Root Transaction Object (section 3.2)](#Section_3.2) if the client transaction envoy is for a non-root transaction object.
 - A **DtcCapabilities** value, consisting of a set of flags specified in section [2.2.6.1](#Section_2.2.6.1). This flag is shared with the [Client Transaction ORPC Extension (section 3.13)](#Section_3.13).
 - A **TransactionRequiredInORPC** flag. This flag is shared with the Client Transaction ORPC Extension.
 - A **WhereaboutsID** GUID. This GUID is shared with the Client Transaction ORPC Extension.
@@ -2345,12 +2345,12 @@ None.
 
 Upon unmarshaling an [OBJREF_EXTENDED (section 2.2.4)](#Section_2.2.4) object reference, the client [**transaction**](#gt_transaction) envoy unmarshaling MUST do the following:
 
-- Create the data structures described in section [3.20.1](#Section_3.12.1).
+- Create the data structures described in section [3.20.1](#Section_3.20.1).
 - Set the TransactionRequiredInORPC flag to FALSE if the OBJREF_EXTENDED structure does not contain a [Transaction Envoy Property (section 2.2.4.1)](#Section_2.2.4.1) and stop further processing.
 - Read the **StreamID** [**GUID**](#gt_globally-unique-identifier-guid) from the Transaction Envoy Property and compare it with the **TransactionStreamID** GUID. If they do not match, the client MUST set the TransactionRequiredInORPC flag to FALSE and MUST stop further processing.
 - Otherwise, set the TransactionRequiredInORPC flag to TRUE.
 - Copy the Transaction Envoy Property contained in the OBJREF_EXTENDED structure to the Transaction Envoy Property value.
-- Set the DtcCap_CanTransmit bit (section [2.2.6.1](../MS-DTCO/MS-DTCO.md)) in the DtcCapabilities value if the local DTCO transaction manager implementation supports the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) method of sending transactions and if the DtcCap_CanTransmit bit is set in the **DtcCapabilities** field of the Transaction Envoy Property contained in the OBJREF_EXTENDED structure.
+- Set the DtcCap_CanTransmit bit (section [2.2.6.1](#Section_2.2.6.1)) in the DtcCapabilities value if the local DTCO transaction manager implementation supports the Propagation_Token ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.5.4) method of sending transactions and if the DtcCap_CanTransmit bit is set in the **DtcCapabilities** field of the Transaction Envoy Property contained in the OBJREF_EXTENDED structure.
 - Set the DtcCap_CanExport bit (section 2.2.6.1) in the DtcCapabilities value if the local DTCO transaction manager implementation supports the STxInfo ([MS-DTCO] section 2.2.5.10) method of sending transactions and if the DtcCap_CanExport bit is set in the **DtcCapabilities** field of the Transaction Envoy Property contained in the OBJREF_EXTENDED structure.
 - If the only bit set in the DtcCapabilities value is DtcCap_CanExport, set the **WhereaboutsID** GUID to the **WhereaboutsID** field of the Transaction Envoy Property contained in the OBJREF_EXTENDED structure and look it up in the Whereabouts table. If the entry is not found in the table, create an entry with the **WhereaboutsID** GUID and an empty SWhereabouts ([MS-DTCO] section 2.2.5.11) and add the entry to the Whereabouts table.
 <a id="Section_3.20.4"></a>
@@ -2452,9 +2452,9 @@ None.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-An [ITransactionStream Server (section 3.23)](#Section_3.23.4.2) maintains the following data structures:
+An [ITransactionStream Server (section 3.23)](#Section_3.23) maintains the following data structures:
 
-- A **CurrentTSN** value. This value is shared with and initialized by the [Client Root Transaction Object (section 3.1)](#Section_1.3.2.2).
+- A **CurrentTSN** value. This value is shared with and initialized by the [Client Root Transaction Object (section 3.1)](#Section_3.1).
 - A **DtcCapabilities** value, consisting of a set of flags as specified in section [2.2.6.1](#Section_2.2.6.1). This value is shared with and initialized by the Client Root Transaction Object.
 <a id="Section_3.23.2"></a>
 ### 3.23.2 Timers
@@ -2476,7 +2476,7 @@ Methods in RPC Opnum Order
 | [GetSeqAndTxViaExport](#Section_3.23.4.1) | Returns an SWhereabouts and an STxInfo, and updates the client's currently known [**TSN**](#gt_transaction-sequence-number-tsn). Opnum: 3 |
 | [GetSeqAndTxViaTransmitter](#Section_3.23.4.2) | Returns a Propagation_Token (as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md)) and updates the client's currently known TSN. Opnum: 4 |
 | [GetTxViaExport](#Section_3.23.4.3) | Returns an STxInfo (as specified in [MS-DTCO]) for the requested TSN, or returns an error. Opnum: 5 |
-| [GetTxViaTransmitter](#Section_1.3.2) | Returns a Propagation_Token (as specified in [MS-DTCO]) for the specified TSN, or returns an error. Opnum: 6 |
+| [GetTxViaTransmitter](#Section_3.23.4.4) | Returns a Propagation_Token (as specified in [MS-DTCO]) for the specified TSN, or returns an error. Opnum: 6 |
 
 The methods MUST NOT throw exceptions.
 
@@ -2517,7 +2517,7 @@ BYTE** prgbExportCookie
 
 **Return Values:** The method MUST return a positive value or zero, to indicate successful completion, or a negative value to indicate failure. The client MUST treat any negative return value as a fatal error.
 
-When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, the [ITransactionStream Server (section 3.23)](#Section_3.23.4.2) MUST do the following:
+When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, the [ITransactionStream Server (section 3.23)](#Section_3.23) MUST do the following:
 
 - If the DtcCap_CanExport bit is not set in the DtcCapabilities value, it MUST return CO_E_NOT_SUPPORTED.
 - If *ulKnownSeq* is the same as the CurrentTSN value, the ITransactionStream Server MUST:
@@ -2557,7 +2557,7 @@ BYTE** prgbTransmitterBuffer
 
 **Return Values:** The method MUST return a positive value or zero, to indicate successful completion, or a negative value to indicate failure. The client MUST treat any negative return value as a fatal error.
 
-When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, the [ITransactionStream Server](#Section_3.23.4.2) MUST do the following:
+When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, the [ITransactionStream Server](#Section_3.23) MUST do the following:
 
 - If the DtcCap_CanTransmit bit is not set in the **DtcCapabilities** value, it MUST return CO_E_NOT_SUPPORTED.
 - If *ulKnownSeq* is the same as the **CurrentTSN** value, the ITransactionStream Server MUST do the following:
@@ -2601,7 +2601,7 @@ BYTE** prgbExportCookie
 
 **Return Values:** The method MUST return a positive value or zero to indicate successful completion, or a negative value to indicate failure. The client MUST treat any negative return value as a fatal error.
 
-When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, if *ulRequestSeq* is the same as the CurrentTSN value, the [ITransactionStream Server (section 3.23)](#Section_3.23.4.2) MUST do the following:
+When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, if *ulRequestSeq* is the same as the CurrentTSN value, the [ITransactionStream Server (section 3.23)](#Section_3.23) MUST do the following:
 
 - Set *pulcbExportCookie* to the size of *prgbExportCookie*.
 - Copy STxInfo of the currently active transaction to the *prgbExportCookie* out parameter.
@@ -2632,7 +2632,7 @@ BYTE** prgbTransmitterBuffer
 
 **Return Values:** The method MUST return a positive value or zero to indicate successful completion, or a negative value to indicate failure. The client MUST treat any negative return value as a fatal error.
 
-When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, if *ulRequestSeq* is the same as the CurrentTSN, the [ITransactionStream Server (section 3.23)](#Section_3.23.4.2) MUST:
+When processing this [**ORPC**](#gt_object-remote-procedure-call-orpc) call, if *ulRequestSeq* is the same as the CurrentTSN, the [ITransactionStream Server (section 3.23)](#Section_3.23) MUST:
 
 - Set *pulcbExportCookie* to the size of *prgbExportCookie*.
 - Copy Propagation_Token of the currently active transaction to the *prgbExportCookie* out parameter.

@@ -108,7 +108,7 @@ The NTFS file system provides performance, reliability, and advanced features th
 
 **File shares**
 
-A file share represents a directory tree and its included files. It is a local resource that is offered by a file server and is consumed by a client application by using the File Access Services protocols, as described in [MS-FASOD](#Section_2.1).
+A file share represents a directory tree and its included files. It is a local resource that is offered by a file server and is consumed by a client application by using the File Access Services protocols, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md).
 
 **Disks and volumes**
 
@@ -209,7 +209,7 @@ This document uses the following terms:
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-DCOM] Microsoft Corporation, "[Distributed Component Object Model (DCOM) Remote Protocol](../MS-DCOM/MS-DCOM.md)".
 
@@ -217,11 +217,11 @@ This document uses the following terms:
 
 [MS-EFSR] Microsoft Corporation, "[Encrypting File System Remote (EFSRPC) Protocol](../MS-EFSR/MS-EFSR.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_2.1)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
 [MS-FSRVP] Microsoft Corporation, "[File Server Remote VSS Protocol](../MS-FSRVP/MS-FSRVP.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MS-OAUT] Microsoft Corporation, "[OLE Automation Protocol](../MS-OAUT/MS-OAUT.md)".
 
@@ -385,9 +385,9 @@ None.
 The Storage Services protocols depend on the following entities:
 
 - The process that is used to enroll an EFS certificate as described in [MS-EFSR](../MS-EFSR/MS-EFSR.md) section 3.1.4.1.
-- The Authentication Services system, as described in [MS-AUTHSOD](#Section_2.1), for authenticating the Storage Services [**Admin Client**](#gt_admin-client).
+- The Authentication Services system, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), for authenticating the Storage Services [**Admin Client**](#gt_admin-client).
 - The Active Directory domain for [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search and modify operations that are required by the [**EFS**](#gt_encrypting-file-system-efs) [**certificate**](#gt_certificate) enrollment algorithm, as described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.
-- The Group Policy Protocols system, as described in [MS-GPOD](#Section_2.1), for enabling remote administrative configuration of the Encrypting File System (EFS).
+- The Group Policy Protocols system, as described in [MS-GPOD](../MS-GPOD/MS-GPOD.md), for enabling remote administrative configuration of the Encrypting File System (EFS).
 <a id="Section_2.4"></a>
 ## 2.4 Assumptions and Preconditions
 

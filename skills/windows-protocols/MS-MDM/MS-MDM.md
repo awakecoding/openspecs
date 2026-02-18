@@ -421,7 +421,7 @@ For more information, see [[MSDN-ADDToken]](https://go.microsoft.com/fwlink/?Lin
 
 **Note 4:** When an MDM device establishes an [**SSL**](#gt_secure-sockets-layer-ssl)/[**TLS**](#gt_transport-layer-security-tls) connection with the MDM server through SSL bridging–enabled proxies, the client device identity certificate obtained by the target MDM server from transport security will be the intermediate proxy server client authentication certificate instead of the actual device client identity certificate.<5> It is required that the MDM client and MDM server have a mechanism to send and verify device identity securely in this case. This is achieved by including a client certificate's related HTTP header in a DM package. The MDM server can identify a connecting device by examining the device client identity certificate issued earlier at MDM enrollment time. The device client identity certificate is used to establish the SSL/TLS connection to the MDM server.
 
-- Every SyncML message (section [2.2.2](#Section_2.2.4.1)) that comes from the MDM client carries an additional HTTP header named MS-Signature and Authorization. This header contains a BASE64-encoded [**Cryptographic Message Syntax (CMS)**](#gt_cryptographic-message-syntax-cms) Detached Signature of the complete SyncML message (**SyncHdr**, **SyncBody**) [**SHA-2 hash**](#gt_sha-2-hash). Signing is performed using the [**private key**](#gt_private-key) of the device identity certificate.
+- Every SyncML message (section [2.2.2](#Section_2.2.2)) that comes from the MDM client carries an additional HTTP header named MS-Signature and Authorization. This header contains a BASE64-encoded [**Cryptographic Message Syntax (CMS)**](#gt_cryptographic-message-syntax-cms) Detached Signature of the complete SyncML message (**SyncHdr**, **SyncBody**) [**SHA-2 hash**](#gt_sha-2-hash). Signing is performed using the [**private key**](#gt_private-key) of the device identity certificate.
 - The device identity certificate ([**public key**](#gt_public-key)) and PKCS9 [**UTC**](#gt_coordinated-universal-time-utc) signing time stamp are included as part of the authenticated attributes in the signature.
 - This is an opt-in function. By default, the MDM client doesn't sign the DM package. During MDM enrollment, the server could require the DM client to sign the outgoing MD package via RequireMessageSigning node in DMClient CSP ([[MSDOCS-DMClient-CSP]](https://go.microsoft.com/fwlink/?linkid=2161995)). For more information about device enrollment and DMClient CSP, see [MS-MDE2](../MS-MDE2/MS-MDE2.md).
 - The MDM server validates the signature, and time stamp using a device identity certificate. It ensures the device's client identity certificate is valid (issued by MDM at enrollment time), the time is valid (optional), and the signature is valid and trusted by the MDM server as of today.
@@ -527,9 +527,9 @@ The **CmdID** element type specifies a unique command identifier for the SyncML 
 
 <CmdID>(#PCDATA)</CmdID>
 
-**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Alert (section 2.2.7.2)](#Section_2.2.7.2), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_3.1.5.1.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
+**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Alert (section 2.2.7.2)](#Section_2.2.7.2), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_2.2.7.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
 
-**Restrictions: CmdID** MUST always be present in the [SyncML](#Section_2.2.4.1) message. **CmdID** MUST be unique within the SyncML message and MUST NOT be the string "0".
+**Restrictions: CmdID** MUST always be present in the [SyncML](#Section_2.2.2) message. **CmdID** MUST be unique within the SyncML message and MUST NOT be the string "0".
 
 **Content Model:** (#PCDATA)
 
@@ -544,7 +544,7 @@ The **CmdRef** element type specifies a reference to a [CmdID](#Section_2.2.3.2)
 
 **Parent Elements:** [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status](#Section_2.2.6.1)
 
-**Restrictions: CmdRef** MUST refer to the CmdID (section 2.2.3.2) of the [SyncML](#Section_2.2.4.1) command referred to by **Status**. **CmdRef** MUST be present in the SyncML message, except when the **Status** command refers to the [SyncHdr (section 2.2.4.2)](#Section_2.2.4.2) of the associated SyncML request message. For example, a status can be sent back to the originator for exceptions (that is, (401) Unauthorized) found within the SyncHdr of the originator’s request.
+**Restrictions: CmdRef** MUST refer to the CmdID (section 2.2.3.2) of the [SyncML](#Section_2.2.2) command referred to by **Status**. **CmdRef** MUST be present in the SyncML message, except when the **Status** command refers to the [SyncHdr (section 2.2.4.2)](#Section_2.2.4.2) of the associated SyncML request message. For example, a status can be sent back to the originator for exceptions (that is, (401) Unauthorized) found within the SyncHdr of the originator’s request.
 
 **Content Model:** (#PCDATA)
 
@@ -559,7 +559,7 @@ The **Final** element type indicates that a SyncML message is the last message i
 
 **Parent Element:** [SyncBody (section 2.2.4.3)](#Section_2.2.4.3)
 
-**Restrictions: Final** MUST only be specified in the last [SyncML](#Section_2.2.4.1) message in a SyncML package. When **Final** is not present in a SyncML message, more messages follow the SyncML message in the current SyncML package. The semantics for the different SyncML packages are specified by the SyncML Representation Protocol [[OMA-SyncMLRP1.2.2]](https://go.microsoft.com/fwlink/?LinkId=301534) and the [**OMA-DM**](#gt_oma-dm) protocol [[OMA-DMP1.2.1]](https://go.microsoft.com/fwlink/?LinkId=301533).
+**Restrictions: Final** MUST only be specified in the last [SyncML](#Section_2.2.2) message in a SyncML package. When **Final** is not present in a SyncML message, more messages follow the SyncML message in the current SyncML package. The semantics for the different SyncML packages are specified by the SyncML Representation Protocol [[OMA-SyncMLRP1.2.2]](https://go.microsoft.com/fwlink/?LinkId=301534) and the [**OMA-DM**](#gt_oma-dm) protocol [[OMA-DMP1.2.1]](https://go.microsoft.com/fwlink/?LinkId=301533).
 
 **Content Model:** (EMPTY)
 
@@ -583,7 +583,7 @@ The **LocURI** element type specifies the target or source-specific address. The
 <a id="Section_2.2.3.6"></a>
 #### 2.2.3.6 MsgID
 
-The **MsgID** element type specifies a unique [SyncML](#Section_2.2.4.1) session identifier for the SyncML message. The element type has the following syntax.
+The **MsgID** element type specifies a unique [SyncML](#Section_2.2.2) session identifier for the SyncML message. The element type has the following syntax.
 
 <MsgID>(#PCDATA)</MsgID>
 
@@ -598,7 +598,7 @@ The **MsgID** element type specifies a unique [SyncML](#Section_2.2.4.1) session
 <a id="Section_2.2.3.7"></a>
 #### 2.2.3.7 MsgRef
 
-The **MsgRef** element type specifies a reference to a [**MsgID (section 2.2.3.6)**](#Section_2.2.3.6) that is used by a [SyncML](#Section_2.2.4.1) [Results (section 2.2.7.8)](#Section_2.2.7.8) or response [Status (section 2.2.6.1)](#Section_2.2.6.1). The element type has the following syntax.
+The **MsgRef** element type specifies a reference to a [**MsgID (section 2.2.3.6)**](#Section_2.2.3.6) that is used by a [SyncML](#Section_2.2.2) [Results (section 2.2.7.8)](#Section_2.2.7.8) or response [Status (section 2.2.6.1)](#Section_2.2.6.1). The element type has the following syntax.
 
 <MsgRef>(#PCDATA)</MsgRef>
 
@@ -613,7 +613,7 @@ The **MsgRef** element type specifies a reference to a [**MsgID (section 2.2.3
 <a id="Section_2.2.3.8"></a>
 #### 2.2.3.8 SessionID
 
-The **SessionID** element type specifies the identifier of the [SyncML](#Section_2.2.4.1) session that is associated with the SyncML message. The **SessionID** can remain valid across the exchange of many SyncML messages between the client and server. The element type has the following syntax.
+The **SessionID** element type specifies the identifier of the [SyncML](#Section_2.2.2) session that is associated with the SyncML message. The **SessionID** can remain valid across the exchange of many SyncML messages between the client and server. The element type has the following syntax.
 
 The element type has the following syntax.
 
@@ -636,7 +636,7 @@ The **Source** element type specifies source routing or mapping information. The
 
 **Parent Elements:** [Item (section 2.2.5.2)](#Section_2.2.5.2), [SyncHdr (section 2.2.4.2)](#Section_2.2.4.2)
 
-**Restrictions:** When specified in the **Item** element type, **Source** specifies the resource item that is the source of the SyncML command. When specified in the **SyncHdr** element type, **Source** specifies the source routing information for the network device that originated the [SyncML](#Section_2.2.4.1) message.
+**Restrictions:** When specified in the **Item** element type, **Source** specifies the resource item that is the source of the SyncML command. When specified in the **SyncHdr** element type, **Source** specifies the source routing information for the network device that originated the [SyncML](#Section_2.2.2) message.
 
 **Content Model:** ([LocURI (section 2.2.3.5)](#Section_2.2.3.5))
 
@@ -668,7 +668,7 @@ The **Target** element type specifies target routing information. The element ty
 
 **Parent Elements:** [Item (section 2.2.5.2)](#Section_2.2.5.2), [SyncHdr (section 2.2.4.2)](#Section_2.2.4.2)
 
-**Restrictions:** When specified in the Item element type, **Target** specifies the [**WMI**](#gt_windows-management-instrumentation-wmi) class that is the target of the [SyncML](#Section_2.2.4.1) command. When specified in the **SyncHdr** element type, **Target** specifies the target routing information for the network device that is receiving the SyncML message.
+**Restrictions:** When specified in the Item element type, **Target** specifies the [**WMI**](#gt_windows-management-instrumentation-wmi) class that is the target of the [SyncML](#Section_2.2.2) command. When specified in the **SyncHdr** element type, **Target** specifies the target routing information for the network device that is receiving the SyncML message.
 
 **Content Model:** ([LocURI (section 2.2.3.5)](#Section_2.2.3.5))
 
@@ -685,7 +685,7 @@ The **TargetRef** element type specifies the [Target (section 2.2.3.11)](#Sect
 
 **Restrictions:** When specified in the **Status** element type, **TargetRef** identifies the target address specified in the command associated with the response status.
 
-The element type MAY be specified in a **Status** element command corresponding to any [SyncML](#Section_2.2.4.1) command that includes the Target element type.
+The element type MAY be specified in a **Status** element command corresponding to any [SyncML](#Section_2.2.2) command that includes the Target element type.
 
 **Content Model:** ([LocURI (section 2.2.3.5)](#Section_2.2.3.5))
 
@@ -700,7 +700,7 @@ The **VerDTD** element type specifies the major and minor version identifier of 
 
 **Parent Element:** [SyncHdr (section 2.2.4.2)](#Section_2.2.4.2)
 
-**Restrictions: VerDTD** MUST be specified in the **SyncHdr**. When the XML document conforms to the current revision of the [SyncML](#Section_2.2.4.1) representation protocol specification, **VerDTD** MUST be 1.2. Note that major revisions to a specification can create incompatibilities that generally require a new SyncML parser. Minor revisions involve changes that do not impact basic compatibility of the parser.
+**Restrictions: VerDTD** MUST be specified in the **SyncHdr**. When the XML document conforms to the current revision of the [SyncML](#Section_2.2.2) representation protocol specification, **VerDTD** MUST be 1.2. Note that major revisions to a specification can create incompatibilities that generally require a new SyncML parser. Minor revisions involve changes that do not impact basic compatibility of the parser.
 
 **Content Model:** (#PCDATA)
 
@@ -709,7 +709,7 @@ The **VerDTD** element type specifies the major and minor version identifier of 
 <a id="Section_2.2.3.14"></a>
 #### 2.2.3.14 VerProto
 
-The **VerProto** element type specifies the major and minor version identifier of the Device Management representation protocol specification that is used to represent the [SyncML](#Section_2.2.4.1) message. The element type has the following syntax.
+The **VerProto** element type specifies the major and minor version identifier of the Device Management representation protocol specification that is used to represent the [SyncML](#Section_2.2.2) message. The element type has the following syntax.
 
 <VerProto>(#PCDATA)</VerProto>
 
@@ -724,12 +724,12 @@ The **VerProto** element type specifies the major and minor version identifier o
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Message Container Elements
 
-Message container elements provide basic container support for the [SyncML](#Section_2.2.4.1) message.
+Message container elements provide basic container support for the [SyncML](#Section_2.2.2) message.
 
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 SyncML
 
-The **SyncML** element type serves as the container for a [SyncML Message](#Section_2.2.4.1). The element type has the following syntax.
+The **SyncML** element type serves as the container for a [SyncML Message](#Section_2.2.2). The element type has the following syntax.
 
 <SyncML xmlns=‘SYNCML:SYNCML1.2’>(SyncHdr, SyncBody)</SyncML>
 
@@ -759,7 +759,7 @@ The **SyncHdr** element type serves as the container for the revisioning routing
 <a id="Section_2.2.4.3"></a>
 #### 2.2.4.3 SyncBody
 
-The **SyncBody** element type serves as the container for the body or contents of the [SyncML message](#Section_2.2.4.1). The element type has the following syntax.
+The **SyncBody** element type serves as the container for the body or contents of the [SyncML message](#Section_2.2.2). The element type has the following syntax.
 
 - <SyncBody>((Atomic | Exec | Get | Results | Status | Add | Replace | Delete)+, Final?)</SyncBody>
 If the server has set the DMClient CSP node
@@ -776,14 +776,14 @@ The server provides the value for the ProviderID as specified in [MS-MDE2](../MS
 
 **Restrictions:** None.
 
-**Content Model:** (([Atomic (section 2.2.7.3)](#Section_2.2.7.3) | [Exec (section 2.2.7.5)](#Section_2.2.7.5) | [Get (section 2.2.7.6)](#Section_2.2.7.6) | [Results (section 2.2.7.8)](#Section_2.2.7.8) | [Status (section 2.2.6.1)](#Section_2.2.6.1) | [Add (section 2.2.7.1)](#Section_2.2.7.1) | [Replace (section 2.2.7.7)](#Section_2.2.7.7) | [Delete (section 2.2.7.4)](#Section_3.1.5.1.4))+, [Final (section 2.2.3.4)](#Section_2.2.3.4)?)
+**Content Model:** (([Atomic (section 2.2.7.3)](#Section_2.2.7.3) | [Exec (section 2.2.7.5)](#Section_2.2.7.5) | [Get (section 2.2.7.6)](#Section_2.2.7.6) | [Results (section 2.2.7.8)](#Section_2.2.7.8) | [Status (section 2.2.6.1)](#Section_2.2.6.1) | [Add (section 2.2.7.1)](#Section_2.2.7.1) | [Replace (section 2.2.7.7)](#Section_2.2.7.7) | [Delete (section 2.2.7.4)](#Section_2.2.7.4))+, [Final (section 2.2.3.4)](#Section_2.2.3.4)?)
 
 **Attributes:** None.
 
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Data Description Elements
 
-Data description elements are used as container elements for data exchanged in a [SyncML](#Section_2.2.4.1) message.
+Data description elements are used as container elements for data exchanged in a [SyncML](#Section_2.2.2) message.
 
 <a id="Section_2.2.5.1"></a>
 #### 2.2.5.1 Data
@@ -815,7 +815,7 @@ The **Item** element type provides a container for item data. The element type h
 
 <Item>(#PCDATA)</Item>
 
-**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Delete (section 2.2.7.4)](#Section_3.1.5.1.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
+**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Delete (section 2.2.7.4)](#Section_2.2.7.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
 
 **Restrictions:** When the source **URI** for the item data is an external entity, the [Data (section 2.2.5.1)](#Section_2.2.5.1) element is not present, and the recipient retrieves the data from the specified network location. When **Data** is present in the **Item** it MUST be the last element in the **Item**.
 
@@ -834,7 +834,7 @@ The **Meta** element type provides a container for meta-information about the pa
 
 <Meta>(#PCDATA)</Meta>
 
-**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_3.1.5.1.4), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Item (section 2.2.5.2)](#Section_2.2.5.2), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8)
+**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_2.2.7.4), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Item (section 2.2.5.2)](#Section_2.2.5.2), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8)
 
 **Restrictions:** When **Meta** is specified in an **Atomic** or **Sync** command, the scope of the meta-information includes all of the contained commands, unless the meta-information is overridden by another **Meta** element in a contained command.
 
@@ -869,7 +869,7 @@ The **Status** element type specifies the request status code for a correspondin
 
 - The [**Item (section 2.2.5.2)**](#Section_2.2.5.2) element type is optional and can be present multiple times as required. **Item** contains additional information about the status condition, such as the SyncML command. When multiple **Item** elements are specified in a command, if the status codes for all Items are not identical, a unique **Status** element MUST be returned for each **Item**. If all status codes are identical, the same **Status** element MAY be returned for all Items.
 - **Status** MUST be returned for the [**SyncHdr (section 2.2.4.2)**](#Section_2.2.4.2) and MUST be the first **Status** element in the **SyncBody** of the response. Even in the case where **Status** elements for a previous request span multiple messages and responses, the **Status** in the **SyncHdr** MUST be the first **Status** element in the **SyncBody** followed by other **Status** elements and/or remaining **Status** elements for previous requests. However, when a [**client**](#gt_client) creates a message containing only a successful **Status** in a **SyncHdr**, the entire message MUST NOT be sent. A [**server**](#gt_server) MUST send this message.
-- The [**CmdID (section 2.2.3.2)**](#Section_2.2.3.2) element type specifies the unique identifier for the [SyncML message](#Section_2.2.4.1) for the command.
+- The [**CmdID (section 2.2.3.2)**](#Section_2.2.3.2) element type specifies the unique identifier for the [SyncML message](#Section_2.2.2) for the command.
 - The [**MsgRef (section 2.2.3.7)**](#Section_2.2.3.7) element type specifies the [**MsgID (section 2.2.3.6)**](#Section_2.2.3.6) for the associated **SyncML request** from the server.
 - The **CmdRef** element type MUST be present and specifies the CmdID for the associated SyncML request from the server. When **CmdRef** is zero, **Status** is a status code for the **SyncHdr** of the SyncML message referenced by the command corresponding to the **Status**.
 - The [**Cmd (section 2.2.3.1)**](#Section_2.2.3.1) element type specifies the name of the SyncML command associated with the SyncML request. When **CmdRef** is "0", **Cmd** can also be set to `"SyncHdr"`.
@@ -946,7 +946,7 @@ The **Atomic** element specifies the SyncML command to request that subordinate 
 **Restrictions:** The [**CmdID (section 2.2.3.2)**](#Section_2.2.3.2) element type is required and specifies the unique identifier for the command in the SyncML message.
 
 - The [**Meta (section 2.2.5.3)**](#Section_2.2.5.3) element is optional. When **Meta** is present, it specifies meta-information to be used for the command. The scope of the meta-information is limited to the command.
-- One or more sets of subordinate commands to be executed are specified as a series of one or more of the following commands: [**Add (section 2.2.7.1)**](#Section_2.2.7.1), [**Delete (section 2.2.7.4)**](#Section_3.1.5.1.4), **Atomic (section 2.2.7.3)**, [**Replace (section 2.2.7.7)**](#Section_2.2.7.7), [**Get (section 2.2.7.6)**](#Section_2.2.7.6), and [**Exec (section 2.2.7.5)**](#Section_2.2.7.5). Note that a particular command can be specified multiple times to achieve execution of contained commands. For example.
+- One or more sets of subordinate commands to be executed are specified as a series of one or more of the following commands: [**Add (section 2.2.7.1)**](#Section_2.2.7.1), [**Delete (section 2.2.7.4)**](#Section_2.2.7.4), **Atomic (section 2.2.7.3)**, [**Replace (section 2.2.7.7)**](#Section_2.2.7.7), [**Get (section 2.2.7.6)**](#Section_2.2.7.6), and [**Exec (section 2.2.7.5)**](#Section_2.2.7.5). Note that a particular command can be specified multiple times to achieve execution of contained commands. For example.
 <Atomic>(CmdID, Meta,(Add,Get),(Delete,Replace),(Add,Exec))</Atomic>
 
 **Content Model:** ([CmdID](#Section_2.2.3.2), Meta?, (Add| Delete | Atomic | Replace | Get | Exec)+)
@@ -1013,7 +1013,7 @@ The **Replace** element specifies the SyncML command to replace data items. The 
 
 **Parent Elements:** [**Atomic (section 2.2.7.3)**](#Section_2.2.7.3), [**SyncBody (section 2.2.4.3)**](#Section_2.2.4.3)
 
-**Restrictions:** The [**CmdID (section 2.2.3.2)**](#Section_2.2.3.2) element type is required and specifies the unique identifier for the command in the [SyncML message](#Section_2.2.4.1).
+**Restrictions:** The [**CmdID (section 2.2.3.2)**](#Section_2.2.3.2) element type is required and specifies the unique identifier for the command in the [SyncML message](#Section_2.2.2).
 
 - The [**Meta (section 2.2.5.3)**](#Section_2.2.5.3) element is optional. When **Meta** is present, it specifies the meta-information to be used for the command.
 - One or more [**Item (section 2.2.5.2)**](#Section_2.2.5.2) element types MUST be specified. The **Item** elements contain the data items to replace.
@@ -1047,7 +1047,7 @@ The **Results** element specifies the SyncML command to return the results of a 
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-MDM is based on a subset of the [**OMA-DM**](#gt_oma-dm) protocol (OMA-TS-DM_Protocol-V1_2_1-20080617-A) [[OMA-DMP1.2.1]](https://go.microsoft.com/fwlink/?LinkId=301533). [SyncML messages](#Section_2.2.4.1) issued by the [**client**](#gt_client) to the [**server**](#gt_server) and from the server to the client are defined in section [3.1.5](#Section_3.1.5) and are a subset of the SyncML messages defined in the SyncML Representation Protocol (OMA-TS-SyncML-RepPro-V1_2_2-20090724-A) [[OMA-SyncMLRP1.2.2]](https://go.microsoft.com/fwlink/?LinkId=301534). MDM does not modify or extend any elements defined in [OMA-SyncMLRP1.2.2].
+MDM is based on a subset of the [**OMA-DM**](#gt_oma-dm) protocol (OMA-TS-DM_Protocol-V1_2_1-20080617-A) [[OMA-DMP1.2.1]](https://go.microsoft.com/fwlink/?LinkId=301533). [SyncML messages](#Section_2.2.2) issued by the [**client**](#gt_client) to the [**server**](#gt_server) and from the server to the client are defined in section [3.1.5](#Section_3.1.5) and are a subset of the SyncML messages defined in the SyncML Representation Protocol (OMA-TS-SyncML-RepPro-V1_2_2-20090724-A) [[OMA-SyncMLRP1.2.2]](https://go.microsoft.com/fwlink/?LinkId=301534). MDM does not modify or extend any elements defined in [OMA-SyncMLRP1.2.2].
 
 **Device Management Session**
 
@@ -1290,7 +1290,7 @@ No classes are specified for the **Atomic** command. Valid classes for the comma
 
 The **Delete** command is used by the originator to request that data elements accessible to the recipient be deleted. The target location URI contains the **resource** to delete.
 
-The following XML snippet shows example usage of the [Delete](#Section_3.1.5.1.4) command. The syntax for the **Delete** element type is specified in section 2.2.7.4.
+The following XML snippet shows example usage of the [Delete](#Section_2.2.7.4) command. The syntax for the **Delete** element type is specified in section 2.2.7.4.
 
 <SyncBody>
 
@@ -1499,7 +1499,7 @@ The following XML snippet shows example usage of the **Results** response comman
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
-**Retry Timer Event:** If the client receives an HTTP 429 (Too Many Requests) response code from the [**Device Management Service (DMS)**](#gt_device-management-service-dms), the retry timer (section [3.1.2](#Section_3.2.2) Timers) SHOULD<15> use the "Retry-After" field value in the response specified by the device management service before resubmitting a request. The HTTP 429 response code indicates the user has sent too many requests in a given amount of time to the device management service.
+**Retry Timer Event:** If the client receives an HTTP 429 (Too Many Requests) response code from the [**Device Management Service (DMS)**](#gt_device-management-service-dms), the retry timer (section [3.1.2](#Section_3.1.2) Timers) SHOULD<15> use the "Retry-After" field value in the response specified by the device management service before resubmitting a request. The HTTP 429 response code indicates the user has sent too many requests in a given amount of time to the device management service.
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -1541,7 +1541,7 @@ None.
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-**Retry Timer:** A timer that sets the delay for resending requests when the server responds that it has received too many requests in a given time window, as defined in section [3.1.2](#Section_3.2.2).
+**Retry Timer:** A timer that sets the delay for resending requests when the server responds that it has received too many requests in a given time window, as defined in section [3.1.2](#Section_3.1.2).
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
@@ -1551,7 +1551,7 @@ None.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
 
-Higher-layer triggered events are push-initiated device management sessions as defined in section [3.1.4](#Section_3.2.4). The push event triggers a device session when OMA DM client is in "multi-user AVD" mode. There is no event for user session.
+Higher-layer triggered events are push-initiated device management sessions as defined in section [3.1.4](#Section_3.1.4). The push event triggers a device session when OMA DM client is in "multi-user AVD" mode. There is no event for user session.
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -1664,7 +1664,7 @@ The **Retry Timer Event** defined in section [3.1.6](#Section_3.1.6) is per OMA 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
 
-The **UserAgentOrigin** field applies to AVD, and [**ACL**](#gt_access-control-list-acl) is not supported as defined in section [3.1.7](#Section_3.2.7).
+The **UserAgentOrigin** field applies to AVD, and [**ACL**](#gt_access-control-list-acl) is not supported as defined in section [3.1.7](#Section_3.1.7).
 
 <a id="Section_4"></a>
 # 4 Protocol Examples

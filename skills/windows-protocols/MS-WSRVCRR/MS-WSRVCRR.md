@@ -218,7 +218,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [RFC4346] Dierks, T., and Rescorla, E., "The Transport Layer Security (TLS) Protocol Version 1.1", RFC 4346, April 2006, [http://www.ietf.org/rfc/rfc4346.txt](https://go.microsoft.com/fwlink/?LinkId=90474)
 
@@ -429,7 +429,7 @@ An [**RMS**](#gt_reliable-messaging-source-rms) MUST maintain the following data
 - **Request Identifier:** A unique identifier used for finding a Request Holder when a protocol request finishes.
 - **Request Message:** An Application Request message.
 - **Replay Count:** A nonnegative integer value, the number of times a [**request message**](#gt_request-message) has been replayed.
-- **Response Sequence Number List:** A list of nonnegative integer values that contains the sequence numbers of all [Application Response messages](#Section_2.2.2) received.
+- **Response Sequence Number List:** A list of nonnegative integer values that contains the sequence numbers of all [Application Response messages](#Section_2.2.10) received.
 - **Inbound Sequence Identifier:** The unique [**Uniform Resource Identifier (URI)**](#gt_uniform-resource-identifier-uri) of the sequence used for [**reliable**](#gt_7b45e8d4-93c5-4cef-aaa9-958243ff864a) transfer of messages from the [**RMD**](#gt_reliable-messaging-destination-rmd) to the RMS.
 - **Outbound Sequence Identifier:** The unique URI of the sequence used for reliable transfer of messages from the RMS to the RMD.
 - For the **WSRM Version:** An enumeration with the following possible values:
@@ -590,7 +590,7 @@ If RESPONSE_RECEIVED is signaled, the [**RMS**](#gt_reliable-messaging-source-rm
 - Signal the FAULT event.
 - Otherwise:
 - Send the **Request Message** field of the Request Holder on the underlying protocol passing **Transmission Timeout** and **Request Identifier**.
-- Otherwise, if Response is an [Application Response message](#Section_2.2.2):
+- Otherwise, if Response is an [Application Response message](#Section_2.2.10):
 - If the SequenceAcknowledgement header block in the Header element of Response does not acknowledge the [**sequence**](#gt_sequence) number in the Sequence header block in the Header element of the **Request** field of Holder:
 - Signal the FAULT event.
 - Remove the Request Holder from the **Request List**.
@@ -672,7 +672,7 @@ An [**RMD**](#gt_reliable-messaging-destination-rmd) MUST maintain the following
 - TERMINATING
 - CLOSED
 - FAULTED
-- **Next Sequence Number**: A nonnegative integer value, this value is the [**sequence**](#gt_sequence) number for the next [Application Response message](#Section_2.2.2).
+- **Next Sequence Number**: A nonnegative integer value, this value is the [**sequence**](#gt_sequence) number for the next [Application Response message](#Section_2.2.10).
 - **Response List:** A list of Response Holder objects. A Response Holder object MUST include the following data elements about a single [**request**](#gt_request):
 - **Request Identifier**: A unique identifier used for finding a Response Holder when the higher-layer logic finishes processing of a [**request message**](#gt_request-message).
 - **State:** An enumeration with the following possible values:
@@ -1989,7 +1989,7 @@ The WS-ReliableMessaging Protocol: Reliable Request-Reply Extension has no secur
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 The terms "earlier" and "later", when used with a product version, refer to either all preceding versions or all subsequent versions, respectively. The term "through" refers to the inclusive range of versions. Applicable Microsoft products are listed chronologically in this section.
 

@@ -150,7 +150,7 @@ This document uses the following terms:
 **Media Access Control (MAC) address**: A hardware address provided by the network interface vendor that uniquely identifies each interface on a physical network for communication with other interfaces, as specified in [[IEEE802.3]](https://go.microsoft.com/fwlink/?LinkId=89911). It is used by the media access control sublayer of the data link layer of a network connection.
 
 <a id="gt_peergroup"></a>
-**PeerGroup**: A group of one or more machines connected through the Peer-to-Peer Grouping Security Protocol [MS-PPSEC](#Section_5).
+**PeerGroup**: A group of one or more machines connected through the Peer-to-Peer Grouping Security Protocol [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md).
 
 <a id="gt_peer-to-peer"></a>
 **peer-to-peer**: A server-less networking technology that allows several participating network devices to share resources and communicate directly with each other.
@@ -202,7 +202,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-PPGRH] Microsoft Corporation, "[Peer-to-Peer Graphing Protocol](../MS-PPGRH/MS-PPGRH.md)".
 
-[MS-PPSEC] Microsoft Corporation, "[Peer-to-Peer Grouping Security Protocol](#Section_5)".
+[MS-PPSEC] Microsoft Corporation, "[Peer-to-Peer Grouping Security Protocol](../MS-PPSEC/MS-PPSEC.md)".
 
 [MS-RPRN] Microsoft Corporation, "[Print System Remote Protocol](../MS-RPRN/MS-RPRN.md)".
 
@@ -237,7 +237,7 @@ The HomeGroup Protocol is used to create a trust relationship that facilitates t
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Role of Web Services on Devices (WSD)
 
-[**WSD**](#gt_web-services-on-devices-wsd) is used to publish messages that are discoverable to all machines on the subnet. These messages include the HomeGroup Invitation (section [2.2.1.1](#Section_3.1.5.1)) and Shared Printer (section [2.2.1.2](#Section_2.2.1.2)) messages.
+[**WSD**](#gt_web-services-on-devices-wsd) is used to publish messages that are discoverable to all machines on the subnet. These messages include the HomeGroup Invitation (section [2.2.1.1](#Section_2.2.1.1)) and Shared Printer (section [2.2.1.2](#Section_2.2.1.2)) messages.
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Role of the PeerGroup
@@ -250,24 +250,24 @@ The [**PeerGroup**](#gt_peergroup) is used as a secure line of communication bet
 <a id="Section_1.3.3.1"></a>
 #### 1.3.3.1 Creating a Homegroup
 
-A machine that attempts to create a [**homegroup**](#gt_homegroup) accomplishes this by first creating a [**PeerGroup**](#gt_peergroup), which is the secure [**peer-to-peer**](#gt_peer-to-peer) connection through which the homegroup is synchronized, as outlined in [MS-PPSEC](#Section_5). This homegroup machine sets the homegroup password, which is used to secure the homegroup. Once the PeerGroup has been created, this first machine publishes an invitation to the homegroup via [**WSD**](#gt_web-services-on-devices-wsd), which allows new machines on the subnet to discover the homegroup.
+A machine that attempts to create a [**homegroup**](#gt_homegroup) accomplishes this by first creating a [**PeerGroup**](#gt_peergroup), which is the secure [**peer-to-peer**](#gt_peer-to-peer) connection through which the homegroup is synchronized, as outlined in [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md). This homegroup machine sets the homegroup password, which is used to secure the homegroup. Once the PeerGroup has been created, this first machine publishes an invitation to the homegroup via [**WSD**](#gt_web-services-on-devices-wsd), which allows new machines on the subnet to discover the homegroup.
 
 <a id="Section_1.3.3.2"></a>
 #### 1.3.3.2 Discovering and Joining the Homegroup
 
-A machine detects that there is a [**homegroup**](#gt_homegroup) on the subnet by receiving a HomeGroup Invitation message (section [2.2.1.1](#Section_3.1.5.1)) over [**WSD**](#gt_web-services-on-devices-wsd). With the invitation and the correct homegroup password, the machine is able to join the [**PeerGroup**](#gt_peergroup), and by extension, the homegroup.
+A machine detects that there is a [**homegroup**](#gt_homegroup) on the subnet by receiving a HomeGroup Invitation message (section [2.2.1.1](#Section_2.2.1.1)) over [**WSD**](#gt_web-services-on-devices-wsd). With the invitation and the correct homegroup password, the machine is able to join the [**PeerGroup**](#gt_peergroup), and by extension, the homegroup.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-This protocol depends on [[DPWS]](https://go.microsoft.com/fwlink/?LinkId=127841) to enable the discovery of a [**homegroup**](#gt_homegroup) on the subnet, and [MS-PPSEC](#Section_5) to create a [**PeerGroup**](#gt_peergroup) for communication between members of the homegroup. These two protocols are used independently of each other; that is, neither protocol sits above the other in the relationship hierarchy.
+This protocol depends on [[DPWS]](https://go.microsoft.com/fwlink/?LinkId=127841) to enable the discovery of a [**homegroup**](#gt_homegroup) on the subnet, and [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md) to create a [**PeerGroup**](#gt_peergroup) for communication between members of the homegroup. These two protocols are used independently of each other; that is, neither protocol sits above the other in the relationship hierarchy.
 
 This protocol also requires that all machines implement the [**Internet protocol version 6 (IPv6)**](#gt_internet-protocol-version-6-ipv6) protocol.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-The prerequisites for this protocol include those for the WSD, as described in [[DPWS]](https://go.microsoft.com/fwlink/?LinkId=127841), and PeerGroup, as described in [MS-PPSEC](#Section_5).
+The prerequisites for this protocol include those for the WSD, as described in [[DPWS]](https://go.microsoft.com/fwlink/?LinkId=127841), and PeerGroup, as described in [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md).
 
 In addition, this protocol requires the following:
 
@@ -370,7 +370,7 @@ The HomeGroup invitation includes the [**PeerGroup**](#gt_peergroup) invitation 
 
 </xs:schema>
 
-**INVITATION:** The actual invitation from the PeerGroup. The format for this message and the manner in which it is generated is described in [MS-PPSEC](#Section_5).
+**INVITATION:** The actual invitation from the PeerGroup. The format for this message and the manner in which it is generated is described in [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md).
 
 **NETWORKNAME:** If any member of the homegroup is connected wirelessly to the network, this value is the [**service set identifier (SSID)**](#gt_service-set-identifier-ssid) of the [**wireless access point (WAP)**](#gt_wireless-access-point-wap). If all machines are wired, then this value is NULL. The value for this element is the same across all of the homegroup members. If a new member of the homegroup is the first to use WAP, then this element is updated to reflect the SSID of the WAP.
 
@@ -499,7 +499,7 @@ HomeGroup Member Info messages are used to broadcast a [**homegroup**](#gt_homeg
 
 **COMPUTERNAME:** The machine name of the machine that is sending the message [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
-**PEERID:** The Peer Identity of the machine that is sending the message [MS-PPSEC](#Section_5).
+**PEERID:** The Peer Identity of the machine that is sending the message [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md).
 
 **RECORDID:** A [**GUID**](#gt_globally-unique-identifier-guid)-formatted string. This element SHOULD be an all null GUID formatted as: {00000000-0000-0000-0000-000000000000}. This element can be populated with another GUID-formatted string, but it MUST contain a value.
 
@@ -584,7 +584,7 @@ The HomeGroup Record format is the base data structure that is used by the [**Pe
 
 **MACHINE:** The machine name of the record creator.
 
-**PEERID:** The PeerID of the machine that creates the record [MS-PPSEC](#Section_5).
+**PEERID:** The PeerID of the machine that creates the record [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md).
 
 **HOMEGROUP_DATA:** This element is used to transmit the data of the message subtypes and is populated by individual messages.
 
@@ -1151,7 +1151,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-This protocol is initialized when a machine creates or joins a [**homegroup**](#gt_homegroup). When this protocol is first initialized, the machine SHOULD check for the HomeGroup Invitation WSD message (section [2.2.1.1](#Section_3.1.5.1)). If a HomeGroup Invitation is detected, then the machine MAY join the homegroup, as described in section [3.1.4.2](#Section_3.1.4.2).
+This protocol is initialized when a machine creates or joins a [**homegroup**](#gt_homegroup). When this protocol is first initialized, the machine SHOULD check for the HomeGroup Invitation WSD message (section [2.2.1.1](#Section_2.2.1.1)). If a HomeGroup Invitation is detected, then the machine MAY join the homegroup, as described in section [3.1.4.2](#Section_3.1.4.2).
 
 If no invitation is detected, then the machine MAY create a homegroup, as described in section [3.1.4.1](#Section_3.1.4.1).
 
@@ -1161,9 +1161,9 @@ If no invitation is detected, then the machine MAY create a homegroup, as descri
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Creating the Homegroup
 
-To participate in a [**homegroup**](#gt_homegroup), a machine MUST create the homegroup when a HomeGroup Invitation message (section [2.2.1.1](#Section_3.1.5.1)) does not exist. This requires a homegroup password. All other machines will then be able to join the homegroup when the first machine's HomeGroup Invitation is detected.
+To participate in a [**homegroup**](#gt_homegroup), a machine MUST create the homegroup when a HomeGroup Invitation message (section [2.2.1.1](#Section_2.2.1.1)) does not exist. This requires a homegroup password. All other machines will then be able to join the homegroup when the first machine's HomeGroup Invitation is detected.
 
-A new homegroup is created by creating a new [**PeerGroup**](#gt_peergroup) with a secure Peer ID [MS-PPSEC](#Section_5). The Peer ID is a unique identifier that other members in the PeerGroup can use to identify a particular member [MS-PPSEC]. The machine then generates the signing keys, as described in section [3.1.4.5.2](#Section_3.1.4.5.2). The machine MUST then take the following actions:
+A new homegroup is created by creating a new [**PeerGroup**](#gt_peergroup) with a secure Peer ID [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md). The Peer ID is a unique identifier that other members in the PeerGroup can use to identify a particular member [MS-PPSEC]. The machine then generates the signing keys, as described in section [3.1.4.5.2](#Section_3.1.4.5.2). The machine MUST then take the following actions:
 
 - Send a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5)), a HomeGroup Member Info message (section [2.2.2.1](#Section_2.2.2.1)), a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2)) for each user on the machine, a HomeGroup Credentials message (section [2.2.2.2.1](#Section_2.2.2.2.1)), and a HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.3)) to the PeerGroup. If the data contained in a message changes, the machine MUST create new messages and send them to the PeerGroup.
 - Publish a HomeGroup Invitation [**WSD**](#gt_web-services-on-devices-wsd) message (section 2.2.1.1). If the data contained in the HomeGroup Invitation WSD message changes, the machine MUST create a new HomeGroup Invitation WSD message and publish it on the WSD channel.
@@ -1174,9 +1174,9 @@ There is no required order for sending or publishing these messages.
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Joining the Homegroup
 
-Joining an existing [**homegroup**](#gt_homegroup) requires the presence of a HomeGroup Invitation message. Multiple HomeGroup Invitation messages can be present on the network.<9> When a HomeGroup Invitation message has been detected, the machine MUST use the [**PeerGroup**](#gt_peergroup) invitation located in the <INVITATION> element of the HomeGroup Invitation message (section [2.2.1.1](#Section_3.1.5.1)), as well as the homegroup password, to join the PeerGroup.
+Joining an existing [**homegroup**](#gt_homegroup) requires the presence of a HomeGroup Invitation message. Multiple HomeGroup Invitation messages can be present on the network.<9> When a HomeGroup Invitation message has been detected, the machine MUST use the [**PeerGroup**](#gt_peergroup) invitation located in the <INVITATION> element of the HomeGroup Invitation message (section [2.2.1.1](#Section_2.2.1.1)), as well as the homegroup password, to join the PeerGroup.
 
-The machine joins the PeerGroup in the manner described in [MS-PPSEC](#Section_5) section 3.1.4.3. Once the machine has joined the PeerGroup, it is considered a member of the homegroup.<10>
+The machine joins the PeerGroup in the manner described in [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md) section 3.1.4.3. Once the machine has joined the PeerGroup, it is considered a member of the homegroup.<10>
 
 After joining the PeerGroup, the machine MUST then take the following actions:
 
@@ -1286,7 +1286,7 @@ For the purposes of participating in this protocol, any messages that are receiv
 <a id="Section_4.1"></a>
 ## 4.1 HomeGroup Invitation
 
-The following is an example of a WSD HomeGroup message that uses the layout of the HomeGroup Invitation message (section [2.2.1.1](#Section_3.1.5.1)).
+The following is an example of a WSD HomeGroup message that uses the layout of the HomeGroup Invitation message (section [2.2.1.1](#Section_2.2.1.1)).
 
 <HOMEGROUP_RECORD>
 
@@ -1378,7 +1378,7 @@ The following are some points to consider regarding specific elements of this me
 
 - **NETWORKNAME**: A value of "2PC-airlinkN" indicates that at least one of the machines in the [**HomeGroup**](#gt_homegroup) is connected wirelessly; otherwise, the value would be NULL.
 - **HOMEGROUPSIZE**: Indicates the number of homegroup members which in this case is five.
-- **INVITATION:** Supplies the invitation to the actual [**PeerGroup**](#gt_peergroup), which has been generated according to the Peer-to-Peer Grouping Security Protocol Specification [MS-PPSEC](#Section_5).
+- **INVITATION:** Supplies the invitation to the actual [**PeerGroup**](#gt_peergroup), which has been generated according to the Peer-to-Peer Grouping Security Protocol Specification [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md).
 - **DIGITALHASH**: Provides an example of the hashed certificate.
 <a id="Section_4.2"></a>
 ## 4.2 HomeGroup Member Info
@@ -1632,14 +1632,14 @@ The following is an example (in base64-encoded representation) of the HomeGroup 
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The HomeGroup Protocol relies partially on the Peer-to-Peer Grouping Security Protocol [MS-PPSEC](#Section_5) to secure the [**PeerGroup**](#gt_peergroup) traffic. Encryption and hashing within the sent messages is achieved through open cryptographic standards.
+The HomeGroup Protocol relies partially on the Peer-to-Peer Grouping Security Protocol [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md) to secure the [**PeerGroup**](#gt_peergroup) traffic. Encryption and hashing within the sent messages is achieved through open cryptographic standards.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
 
 | Security parameter | Section |
 | --- | --- |
-| <DIGITALHASH> | Section [2.2.1.1](#Section_3.1.5.1) |
+| <DIGITALHASH> | Section [2.2.1.1](#Section_2.2.1.1) |
 | <PASSWORD> | Section [2.2.2.2.1](#Section_2.2.2.2.1) |
 | <SIGNINGKEYS> | Section [2.2.2.2.5](#Section_2.2.2.2.5) |
 | Message Signing and Encryption | Section [3.1.4.5](#Section_3.1.4.5) |

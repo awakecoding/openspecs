@@ -184,7 +184,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-TPSOD] Microsoft Corporation, "[Transaction Processing Services Protocols Overview](#Section_1.3)".
+[MS-TPSOD] Microsoft Corporation, "[Transaction Processing Services Protocols Overview](../MS-TPSOD/MS-TPSOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -216,7 +216,7 @@ For efficiency, the CMP batches messages by using **Boxcar** objects (section [3
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](#Section_1970a8a0799d4308b9274e4ea23dc225) is explicitly layered upon the transport protocol that is specified in MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_4.1.3), and its design is greatly influenced by that protocol. It relies on the transport protocol to provide [**sessions**](#gt_session) and peer-to-peer message exchange. This protocol, in turn, provides message batching and [**connection**](#gt_connection) multiplexing services to MSDTC Connection Manager: OleTx Transaction Protocol [MS-DTCO](../MS-DTCO/MS-DTCO.md) layered on top of the multiplexing to provide application-specific functionality. For example, the transaction protocol that is specified in [MS-DTCM](../MS-DTCM/MS-DTCM.md) is a set of connections with different [**connection types**](#gt_connection-type) layered above this protocol, and it is used for coordinating distributed atomic transactions, see [MS-TPSOD](#Section_1.3). The following diagram illustrates the protocol layering.
+MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](#Section_1970a8a0799d4308b9274e4ea23dc225) is explicitly layered upon the transport protocol that is specified in MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_4.1.3), and its design is greatly influenced by that protocol. It relies on the transport protocol to provide [**sessions**](#gt_session) and peer-to-peer message exchange. This protocol, in turn, provides message batching and [**connection**](#gt_connection) multiplexing services to MSDTC Connection Manager: OleTx Transaction Protocol [MS-DTCO](../MS-DTCO/MS-DTCO.md) layered on top of the multiplexing to provide application-specific functionality. For example, the transaction protocol that is specified in [MS-DTCM](../MS-DTCM/MS-DTCM.md) is a set of connections with different [**connection types**](#gt_connection-type) layered above this protocol, and it is used for coordinating distributed atomic transactions, see [MS-TPSOD](../MS-TPSOD/MS-TPSOD.md). The following diagram illustrates the protocol layering.
 
 ![Relationship of MS-CMP to other protocols](media/image2.png)
 
@@ -257,7 +257,7 @@ This section specifies how the MSDTC Connection Manager: OleTx Multiplexing Prot
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-Messages in this protocol MUST be transported over an instance of the transports protocol specified in [MS-CMPO](#Section_4.1.3) [**session**](#gt_session); therefore, each instance of this protocol MUST have an underlying transports protocol instance. The initialization of the transports protocol instance occurs during the initialization of the instance of this protocol and is specified in section [3](../MS-CMPO/MS-CMPO.md).
+Messages in this protocol MUST be transported over an instance of the transports protocol specified in [MS-CMPO](#Section_4.1.3) [**session**](#gt_session); therefore, each instance of this protocol MUST have an underlying transports protocol instance. The initialization of the transports protocol instance occurs during the initialization of the instance of this protocol and is specified in section [3](#Section_3).
 
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Transmitting Messages and Boxcars
@@ -279,7 +279,7 @@ A **Boxcar** MUST contain at least one message and MUST NOT contain more than 3,
 
 When an implementation of MSDTC Connection Manager: OleTx Multiplexing Protocol (CMP) wants to transmit a **Boxcar** over a [**session**](#gt_session), it provides the underlying implementation of the transports protocol (specified in [MS-CMPO](#Section_4.1.3)) with the session to transmit the **Boxcar** on, the count of messages in the **Boxcar**, and the byte array that makes up the **Boxcar** itself, as specified in [MS-CMPO] section 3.4.6.5. Also, a CMP implementation MUST NOT transmit more than one **Boxcar** at a time.
 
-For more information about transmitting messages in [**boxcars**](#gt_boxcar), see section [3.1.7.1](#Section_2). For more information about interpreting boxcars after they have been received, see section [3.1.5](#Section_3.1.5).
+For more information about transmitting messages in [**boxcars**](#gt_boxcar), see section [3.1.7.1](#Section_3.1.7.1). For more information about interpreting boxcars after they have been received, see section [3.1.5](#Section_3.1.5).
 
 <a id="Section_2.1.2"></a>
 ### 2.1.2 Security
@@ -498,7 +498,7 @@ An implementation of this protocol MUST maintain the following data elements:
 - **Incoming Connection Table**: A table of **Connection** objects in use that are initiated by the remote partner and indexed by the **Connection ID** field of the **Connection** object.
 - **Count of Allocated Incoming Connections**: An unsigned 32-bit integer counting the number of incoming connections that have been allocated by the remote partner in the session. Partners in this protocol use their respective underlying transports protocol instances to negotiate a number of pre-allocated **Connection** objects that each connection requires. The number of allocated incoming connections is the value requested by the remote partner. New connections are allowed to be created until the number of entries in the **Incoming Connection Table** equals the count requested by the remote partner. If the remote partner requires more connections to be created, it MUST request that more be allocated, causing this count to be increased.
 - **Boxcar Queue**: An ordered queue of **Boxca**r objects to be transmitted on this session.
-The management of these additional data elements is the responsibility of this protocol implementation as outlined in sections [3.1.4.2](#Section_4.1.1), [3.1.5.1](#Section_3.1.5.1), [3.1.5.5](#Section_3.1.5.5), and [3.1.7.3](#Section_3.1.7.3).
+The management of these additional data elements is the responsibility of this protocol implementation as outlined in sections [3.1.4.2](#Section_3.1.4.2), [3.1.5.1](#Section_3.1.5.1), [3.1.5.5](#Section_3.1.5.5), and [3.1.7.3](#Section_3.1.7.3).
 
 **Note** It is possible to implement the conceptual data by using a variety of techniques. An implementation is at liberty to implement such data in any way it pleases.
 
@@ -566,7 +566,7 @@ When the higher-layer protocol requests to send a message, it MUST specify the *
 
 The MSDTC Connection Manager: OleTx Multiplexing Protocol (CMP) instance MUST allocate an **MTAG_USER_MESSAGE** message (section [3.1.5.6](#Section_3.1.5.6)). It MUST set the **dwUserMsgType** field in the **MsgHeader** field to the provided message type, it MUST set the **dwConnectionId** field in the **MsgHeader** field to the **Connection ID** of the provided **Connection** object, it MUST set the **dwcbVarLenData** field in the **MsgHeader** field to the length of the provided array, and it MUST set the **MessageData** field to the provided byte array. Finally, if the provided **Connection** object is contained in an **Outgoing Connection Table**, then the **fIsMaster** field of the **MsgHeader** field MUST be set to 0x00000001; otherwise, it MUST be set to 0x00000000.
 
-This message MUST be enqueued on the **Session** object associated with the provided **Connection** object as described in section [3.1.7.1](#Section_2).
+This message MUST be enqueued on the **Session** object associated with the provided **Connection** object as described in section [3.1.7.1](#Section_3.1.7.1).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Create Connection
@@ -591,7 +591,7 @@ If the request is successful, then the number of resources that were actually al
 
 Next, the CMP instance MUST allocate a new **Connection** object with the specified connection type and with a connection identifier that is currently unused in the **Outgoing Connection Table**. The **Accepted** field of the new **Connection** object MUST be set to true. This **Connection** object MUST be added to the **Outgoing Connection Table**. If the **Idle Timer** is active, the timer MUST be canceled. The **Incoming Message Notification Interface** that was provided by the higher-layer protocol MUST be stored in the **Incoming Message Notification** ADM element.
 
-Finally, the CMP instance MUST allocate an **MTAG_CONNECTION_REQ** message. It MUST set the **dwUserMsgType** field in the **MsgHeader** field to the specified connection type, and it MUST set the **dwConnectionId** field in the **MsgHeader** field to the connection identifier of the new **Connection** object. It MUST enqueue the message on the **Session** object as described in section [3.1.7.1](#Section_2).
+Finally, the CMP instance MUST allocate an **MTAG_CONNECTION_REQ** message. It MUST set the **dwUserMsgType** field in the **MsgHeader** field to the specified connection type, and it MUST set the **dwConnectionId** field in the **MsgHeader** field to the connection identifier of the new **Connection** object. It MUST enqueue the message on the **Session** object as described in section [3.1.7.1](#Section_3.1.7.1).
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Disconnect Connection
@@ -601,7 +601,7 @@ When the higher-layer protocol requests to disconnect a connection, it MUST spec
 - **Connection** object to disconnect.
 This **Connection** object MUST be contained in an **Outgoing Connection Table** in a **Session** object contained in the **Session Table**; otherwise, the request to disconnect the connection MUST fail.
 
-The MSDTC Connection Manager: OleTx Multiplexing Protocol (CMP) instance MUST allocate an **MTAG_DISCONNECT** message and set the **dwConnectionId** field in the **MsgHeader** field of the message to the connection identifier of that specified **Connection** object. It MUST enqueue this message on the **Session** object of the specified **Connection** object as described in section [3.1.7.1](#Section_2).
+The MSDTC Connection Manager: OleTx Multiplexing Protocol (CMP) instance MUST allocate an **MTAG_DISCONNECT** message and set the **dwConnectionId** field in the **MsgHeader** field of the message to the connection identifier of that specified **Connection** object. It MUST enqueue this message on the **Session** object of the specified **Connection** object as described in section [3.1.7.1](#Section_3.1.7.1).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -617,7 +617,7 @@ All CMP messages are extensions of the **MESSAGE_PACKET** structure as specified
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 MTAG_DISCONNECT (MsgTag 0x00000001)
 
-When an **MTAG_DISCONNECT** message is received over a session, the MSDTC Connection Manager: OleTx Multiplexing Protocol (CMP) implementation MUST look at the **dwConnectionId** field of the **MsgHeader** field of the message, and retrieve the **Connection** object (section [3.1.7.1](#Section_2)) with the matching **Connection ID** from the **Incoming Connection Table** of the **Session** object. If no such **Connection** object exists, the **MTAG_DISCONNECT** message MUST be silently ignored.
+When an **MTAG_DISCONNECT** message is received over a session, the MSDTC Connection Manager: OleTx Multiplexing Protocol (CMP) implementation MUST look at the **dwConnectionId** field of the **MsgHeader** field of the message, and retrieve the **Connection** object (section [3.1.7.1](#Section_3.1.7.1)) with the matching **Connection ID** from the **Incoming Connection Table** of the **Session** object. If no such **Connection** object exists, the **MTAG_DISCONNECT** message MUST be silently ignored.
 
 Otherwise, the higher-layer protocol MUST be notified of the **Connection Disconnected** (section [3.1.7.4.2](#Section_3.1.7.4.2)) event by signaling this event using the **Incoming Message Notification Interface** as described in section [3.1.1.1](#Section_3.1.1.1), and the CMP implementation MUST remove the **Connection** object from the **Incoming Connection Table** of the **Session** object. If both the **Incoming Connection Table** and the **Outgoing Connection Table** of the **Session** object are now empty, the **Idle Timer** MUST be started.
 
@@ -655,7 +655,7 @@ Otherwise, the implementation of the multiplexing protocol MUST allocate a **Con
 
 The implementation MUST then notify the higher-layer protocol of the incoming connection, providing the **Connection** object and its connection type. The higher-layer protocol MUST either accept or reject the connection.
 
-If the higher-layer protocol rejects the connection, then it MUST provide a protocol-specific, 32-bit unsigned integer that specifies the reason for the rejection. The implementation MUST then allocate a new **MTAG_CONNECTION_REQ_DENIED** message (section [3.1.5.3](#Section_3.1.5.3)), initializing the **dwConnectionId** field of the **MsgHeader** field to the **Connection ID** of the **Connection** object and the **Reason** field to the unsigned integer provided by the higher-layer protocol. It MUST then enqueue this message on the **Session** object as specified in section [3.1.7.1](#Section_2).
+If the higher-layer protocol rejects the connection, then it MUST provide a protocol-specific, 32-bit unsigned integer that specifies the reason for the rejection. The implementation MUST then allocate a new **MTAG_CONNECTION_REQ_DENIED** message (section [3.1.5.3](#Section_3.1.5.3)), initializing the **dwConnectionId** field of the **MsgHeader** field to the **Connection ID** of the **Connection** object and the **Reason** field to the unsigned integer provided by the higher-layer protocol. It MUST then enqueue this message on the **Session** object as specified in section [3.1.7.1](#Section_3.1.7.1).
 
 If the higher-layer protocol accepts the connection, then the implementation of the multiplexing protocol MUST set the **Accepted** field of the **Connection** object to true.
 
@@ -767,14 +767,14 @@ The **MESSAGE_PACKET** also contains an extra 64 bytes of data for the message b
 | Variable | isoLevel | 0x00100000 ISOLATIONLEVEL_SERIALIZABLE |
 | Variable | szDesc | 0x6d617845 0x20656c70 0x6e617254 0x74636173 0x206e6f69 0x3933202d 0x61686320 0x6c207372 0x2e676e6f 0x002e2e2e "Example Transaction - 39 chars long...." |
 
-To send these **MESSAGE_PACKETs**, the initiator wraps the two messages into a single boxcar, which is in turn passed to the instance of the underlying transports protocol specified in [MS-CMPO](#Section_4.1.3), as specified in sections [2.1.1.3](../MS-CMPO/MS-CMPO.md) and [3.1.7.1](#Section_2).
+To send these **MESSAGE_PACKETs**, the initiator wraps the two messages into a single boxcar, which is in turn passed to the instance of the underlying transports protocol specified in [MS-CMPO](#Section_4.1.3), as specified in sections [2.1.1.3](#Section_2.1.1.3) and [3.1.7.1](#Section_3.1.7.1).
 
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Creating a Boxcar
 
 A **Boxcar** always begins with a **BOX_CAR_HEADER** structure (section [2.2.1](#Section_2.2.1)). The first two fields (**dwSeqNumThisCar** and **dwAckSeqNum**) are reserved and are always set to zero. The third field (**dwcbTotal**) contains the total number of bytes in the **Boxcar** (in this case, 0x00000080; 128 bytes.) The fourth field (**dwcMessages**) contains the total number of **MESSAGE_PACKETs** in the **BOX_CAR_HEADER** (in this case, 2).
 
-The rest of the **Boxcar** contains an array of **MESSAGE_PACKET** structures. In this example, the two **MESSAGE_PACKET** structures from section [4.1.1](#Section_2.2.2) are included in this **Boxcar**. Note that individual **MESSAGE_PACKET** structures are aligned to 8-byte boundaries, and that they are present in the order that they are intended to be processed. The following is the final **Boxcar** structure.
+The rest of the **Boxcar** contains an array of **MESSAGE_PACKET** structures. In this example, the two **MESSAGE_PACKET** structures from section [4.1.1](#Section_4.1.1) are included in this **Boxcar**. Note that individual **MESSAGE_PACKET** structures are aligned to 8-byte boundaries, and that they are present in the order that they are intended to be processed. The following is the final **Boxcar** structure.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |

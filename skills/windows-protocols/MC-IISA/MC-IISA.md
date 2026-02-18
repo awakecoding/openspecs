@@ -384,31 +384,31 @@ The following parameters are implementation-specific proprietary assignments.<1>
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| DCOM [**CLSID**](#gt_class-identifier-clsid) for the [AppHostAdminManager](#Section_4.1) | 228fb8f7-fb53-4fd5-8c7b-ff59de606c5b | None |
+| DCOM [**CLSID**](#gt_class-identifier-clsid) for the [AppHostAdminManager](#Section_3.1.4.1) | 228fb8f7-fb53-4fd5-8c7b-ff59de606c5b | None |
 | DCOM CLSID for the [AppHostWritableAdminManager](#Section_3.1.4.30) | 2b72133b-3f5b-4602-8952-803546ce3344 | None |
 | RPC Interface [**UUID**](#gt_universally-unique-identifier-uuid) for [IAppHostMappingExtension](#Section_3.1.4.16) | 31a83ea0-c0e4-4a2c-8a01-353cc2a4c60a | None |
 | RPC Interface UUID for [IAppHostChildElementCollection](#Section_3.1.4.3) | 08a90f5f-0702-48d6-b45f-02a9885a9768 | None |
 | RPC Interface UUID for [IAppHostPropertyCollection](#Section_3.1.4.23) | 0191775e-bcff-445a-b4f4-3bdda54e2816 | None |
 | RPC Interface UUID for [IAppHostConfigLocationCollection](#Section_3.1.4.8) | 832a32f7-b3ea-4b8c-b260-9a2923001184 | None |
 | RPC Interface UUID for [IAppHostMethodCollection](#Section_3.1.4.18) | d6c7cd8f-bb8d-4f96-b591-d3a5f1320269 | None |
-| RPC Interface UUID for [IAppHostElementSchemaCollection](#Section_3.1.4.12) | 0344cdda-151e-4cbf-82da-66ae61e97754 | None |
-| RPC Interface UUID for [IAppHostPropertySchemaCollection](#Section_3.1.4.25) | 8bed2c68-a5fb-4b28-8581-a0dc5267419f | None |
+| RPC Interface UUID for [IAppHostElementSchemaCollection](#Section_3.1.4.15) | 0344cdda-151e-4cbf-82da-66ae61e97754 | None |
+| RPC Interface UUID for [IAppHostPropertySchemaCollection](#Section_3.1.4.26) | 8bed2c68-a5fb-4b28-8581-a0dc5267419f | None |
 | RPC Interface UUID for [IAppHostConstantValueCollection](#Section_3.1.4.11) | 5b5a68e6-8b9f-45e1-8199-a95ffccdffff | None |
 | RPC Interface UUID for [IAppHostConstantValue](#Section_3.1.4.10) | 0716caf8-7d05-4a46-8099-77594be91394 | None |
 | RPC Interface UUID for [IAppHostPropertySchema](#Section_3.1.4.25) | 450386db-7409-4667-935e-384dbbee2a9e | None |
 | RPC Interface UUID for [IAppHostCollectionSchema](#Section_3.1.4.4) | de095db1-5368-4d11-81f6-efef619b7bcf | None |
 | RPC Interface UUID for [IAppHostElementSchema](#Section_3.1.4.14) | ef13d885-642c-4709-99ec-b89561c6bc69 | None |
-| RPC Interface UUID for [IAppHostMethodSchema](#Section_3.1.4.17) | 2d9915fb-9d42-4328-b782-1b46819fab9e | None |
+| RPC Interface UUID for [IAppHostMethodSchema](#Section_3.1.4.20) | 2d9915fb-9d42-4328-b782-1b46819fab9e | None |
 | RPC Interface UUID for [IAppHostMethodInstance](#Section_3.1.4.19) | b80f3c42-60e0-4ae0-9007-f52852d3dbed | None |
 | RPC Interface UUID for [IAppHostMethod](#Section_3.1.4.17) | 7883ca1c-1112-4447-84c3-52fbeb38069d | None |
 | RPC Interface UUID for [IAppHostConfigException](#Section_3.1.4.5) | 4dfa1df3-8900-4bc7-bbb5-d1a458c52410 | None |
-| RPC Interface UUID for [IAppHostPropertyException](#Section_3.1.4.22) | eafe4895-a929-41ea-b14d-613e23f62b71 | None |
+| RPC Interface UUID for [IAppHostPropertyException](#Section_3.1.4.24) | eafe4895-a929-41ea-b14d-613e23f62b71 | None |
 | RPC Interface UUID for [IAppHostElementCollection](#Section_3.1.4.13) | c8550bff-5281-4b1e-ac34-99b6fa38464d | None |
 | RPC Interface UUID for [IAppHostElement](#Section_3.1.4.12) | 64ff8ccc-b287-4dae-b08a-a72cbf45f453 | None |
 | RPC Interface UUID for [IAppHostProperty](#Section_3.1.4.22) | ed35f7a1-5024-4e7b-a44d-07ddaf4b524d | None |
 | RPC Interface UUID for [IAppHostConfigLocation](#Section_3.1.4.7) | 370af178-7758-4dad-8146-7391f6e18585 | None |
 | RPC Interface UUID for [IAppHostSectionDefinition](#Section_3.1.4.27) | c5c04795-321c-4014-8fd6-d44658799393 | None |
-| RPC Interface UUID for [IAppHostSectionDefinitionCollection](#Section_3.1.4.27) | b7d381ee-8860-47a1-8af4-1f33b2b1f325 | None |
+| RPC Interface UUID for [IAppHostSectionDefinitionCollection](#Section_3.1.4.28) | b7d381ee-8860-47a1-8af4-1f33b2b1f325 | None |
 | RPC Interface UUID for [IAppHostSectionGroup](#Section_3.1.4.29) | 0dd8a158-ebe6-4008-a1d9-b7ecc8f1104b | None |
 | RPC Interface UUID for [IAppHostConfigFile](#Section_3.1.4.6) | ada4e6fb-e025-401e-a5d0-c3134a281f07 | None |
 | RPC Interface UUID for [IAppHostPathMapper](#Section_3.1.4.21) | e7927575-5cc3-403b-822e-328a6b904bee | None |
@@ -427,7 +427,7 @@ This protocol MUST use the DCOM Remote Protocol, as specified in [MS-DCOM](../MS
 
 This protocol MUST use the RPC [**UUIDs**](#gt_universally-unique-identifier-uuid) specified in section [1.9](#Section_1.9).
 
-To receive incoming remote calls for these [**interfaces**](#gt_interface), the server MUST implement a DCOM Object Class with the [**CLSIDs**](#gt_class-identifier-clsid) (specified in section 1.9) [AppHostAdminManager](#Section_4.1) using the UUID {228fb8f7-fb53-4fd5-8c7b-ff59de606c5b}, and [AppHostWritableAdminManager](#Section_3.1.4.30) using the UUID {2b72133b-3f5b-4602-8952-803546ce3344}.
+To receive incoming remote calls for these [**interfaces**](#gt_interface), the server MUST implement a DCOM Object Class with the [**CLSIDs**](#gt_class-identifier-clsid) (specified in section 1.9) [AppHostAdminManager](#Section_3.1.4.1) using the UUID {228fb8f7-fb53-4fd5-8c7b-ff59de606c5b}, and [AppHostWritableAdminManager](#Section_3.1.4.30) using the UUID {2b72133b-3f5b-4602-8952-803546ce3344}.
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -615,8 +615,8 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [GetAdminSection](#Section_3.1.4.1.1) | Opnum: 3 |
-| [GetMetadata](#Section_3.1.4.22.7) | Opnum: 4 |
-| [SetMetadata](#Section_3.1.4.1) | Opnum: 5 |
+| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 4 |
+| [SetMetadata](#Section_3.1.4.1.3) | Opnum: 5 |
 | [ConfigManager](#Section_3.1.4.1.4) | Opnum: 6 |
 
 <a id="Section_3.1.4.1.1"></a>
@@ -698,7 +698,7 @@ HRESULT GetMetadata(
 <a id="Section_3.1.4.1.3"></a>
 ##### 3.1.4.1.3 SetMetadata (Opnum 5)
 
-The SetMetadata method is received by the server in an RPC_REQUEST packet. In response, the administration system implementation changes its behavior as specified by the provided metadata. This method is the opposite of the [GetMetadata](#Section_3.1.4.22.7) method, which retrieves a specified behavior property of the administration system. SetMetadata sets a specified behavior property of the administration system.
+The SetMetadata method is received by the server in an RPC_REQUEST packet. In response, the administration system implementation changes its behavior as specified by the provided metadata. This method is the opposite of the [GetMetadata](#Section_3.1.4.1.2) method, which retrieves a specified behavior property of the administration system. SetMetadata sets a specified behavior property of the administration system.
 
 This method is used to set a metadata property.
 
@@ -763,7 +763,7 @@ The ConfigManager method is received by the server in an RPC_REQUEST packet. In 
 
 The IAppHostChangeHandler describes an [**interface**](#gt_interface) that clients can implement and that is called when the administration system has detected a change in a part of its path hierarchy.
 
-To receive incoming remote calls for this interface, the client MUST implement this interface (09829352-87c2-418d-8d79-4133969a489d). It MUST then specify an object that implements this interface to the [IAppHostAdminManager::SetMetadata()](#Section_3.1.4.1) method by using a bstrMetadataName of "changeHandler".
+To receive incoming remote calls for this interface, the client MUST implement this interface (09829352-87c2-418d-8d79-4133969a489d). It MUST then specify an object that implements this interface to the [IAppHostAdminManager::SetMetadata()](#Section_3.1.4.1.3) method by using a bstrMetadataName of "changeHandler".
 
 The server then calls this object when the administration system detects a change. The administration system is free to determine the supported time period during which the changes are detected and conveyed through this interface. The time period is either the lifetime of the administration system or a shorter time period.
 
@@ -872,7 +872,7 @@ Methods in RPC Opnum Order
 | [RemoveElementSchema](#Section_3.1.4.4.3) | Opnum: 5 |
 | [ClearElementSchema](#Section_3.1.4.4.4) | Opnum: 6 |
 | [IsMergeAppend](#Section_3.1.4.4.5) | Opnum: 7 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 8 |
+| [GetMetadata](#Section_3.1.4.4.6) | Opnum: 8 |
 | [DoesAllowDuplicates](#Section_3.1.4.4.7) | Opnum: 9 |
 
 <a id="Section_3.1.4.4.1"></a>
@@ -1200,12 +1200,12 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [ConfigPath](#Section_3.1.4.5.3) | Opnum: 3 |
+| [ConfigPath](#Section_3.1.4.6.1) | Opnum: 3 |
 | [FilePath](#Section_3.1.4.6.2) | Opnum: 4 |
 | [Locations](#Section_3.1.4.6.3) | Opnum: 5 |
-| [GetAdminSection](#Section_3.1.4.1.1) | Opnum: 6 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 7 |
-| [SetMetadata](#Section_3.1.4.1.3) | Opnum: 8 |
+| [GetAdminSection](#Section_3.1.4.6.4) | Opnum: 6 |
+| [GetMetadata](#Section_3.1.4.6.5) | Opnum: 7 |
+| [SetMetadata](#Section_3.1.4.6.6) | Opnum: 8 |
 | [ClearInvalidSections](#Section_3.1.4.6.7) | Opnum: 9 |
 | [RootSectionGroup](#Section_3.1.4.6.8) | Opnum: 10 |
 
@@ -1407,8 +1407,8 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [Path](#Section_3.1.4.7.1) | Opnum: 3 |
-| [Count](#Section_3.1.4.3.1) | Opnum: 4 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 5 |
+| [Count](#Section_3.1.4.7.2) | Opnum: 4 |
+| [Item](#Section_3.1.4.7.3) | Opnum: 5 |
 | [AddConfigSection](#Section_3.1.4.7.4) | Opnum: 6 |
 | [DeleteConfigSection](#Section_3.1.4.7.5) | Opnum: 7 |
 
@@ -1541,8 +1541,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.8.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.8.2) | Opnum: 4 |
 | [AddLocation](#Section_3.1.4.8.3) | Opnum: 5 |
 | [DeleteLocation](#Section_3.1.4.8.4) | Opnum: 6 |
 
@@ -1784,8 +1784,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.11.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.11.2) | Opnum: 4 |
 
 <a id="Section_3.1.4.11.1"></a>
 ##### 3.1.4.11.1 Count (Opnum 3)
@@ -1850,12 +1850,12 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Opnum: 3 |
+| [Name](#Section_3.1.4.12.1) | Opnum: 3 |
 | [Collection](#Section_3.1.4.12.2) | Opnum: 4 |
 | [Properties](#Section_3.1.4.12.3) | Opnum: 5 |
-| [ChildElements](#Section_3.1.4.12) | Opnum: 6 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 7 |
-| [SetMetadata](#Section_3.1.4.1.3) | Opnum: 8 |
+| [ChildElements](#Section_3.1.4.12.4) | Opnum: 6 |
+| [GetMetadata](#Section_3.1.4.12.5) | Opnum: 7 |
+| [SetMetadata](#Section_3.1.4.12.6) | Opnum: 8 |
 | [Schema](#Section_3.1.4.12.7) | Opnum: 9 |
 | [GetElementByName](#Section_3.1.4.12.8) | Opnum: 10 |
 | [GetPropertyByName](#Section_3.1.4.12.9) | Opnum: 11 |
@@ -2155,13 +2155,13 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Returns the count of elements. Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Returns the value that is associated with the element at the specified index. Opnum: 4 |
+| [Count](#Section_3.1.4.13.1) | Returns the count of elements. Opnum: 3 |
+| [Item](#Section_3.1.4.13.2) | Returns the value that is associated with the element at the specified index. Opnum: 4 |
 | [AddElement](#Section_3.1.4.13.3) | Adds an element to the collection. Opnum: 5 |
 | [DeleteElement](#Section_3.1.4.13.4) | Deletes an element from the collection. Opnum: 6 |
-| [Clear](#Section_3.1.4.12.10) | Clears an element from the collection. Opnum: 7 |
+| [Clear](#Section_3.1.4.13.5) | Clears an element from the collection. Opnum: 7 |
 | [CreateNewElement](#Section_3.1.4.13.6) | Creates a new element in the collection. Opnum: 8 |
-| [Schema](#Section_3.1.4.12.7) | Returns the Document Object Model (DOM) description for the collection. Opnum: 9 |
+| [Schema](#Section_3.1.4.13.7) | Returns the Document Object Model (DOM) description for the collection. Opnum: 9 |
 
 <a id="Section_3.1.4.13.1"></a>
 ##### 3.1.4.13.1 Count (Opnum 3)
@@ -2335,9 +2335,9 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Returns the name of the element entry. Opnum: 3 |
+| [Name](#Section_3.1.4.14.1) | Returns the name of the element entry. Opnum: 3 |
 | [DoesAllowUnschematizedProperties](#Section_3.1.4.14.2) | Determines if the section allows unrecognized attributes. Opnum: 4 |
-| [GetMetadata](#Section_3.1.4.1.2) | Used to get a metadata property. Opnum: 5 |
+| [GetMetadata](#Section_3.1.4.14.3) | Used to get a metadata property. Opnum: 5 |
 | [CollectionSchema](#Section_3.1.4.14.4) | Opnum: 6 |
 | [ChildElementSchemas](#Section_3.1.4.14.5) | Opnum: 7 |
 | [PropertySchemas](#Section_3.1.4.14.6) | Opnum: 8 |
@@ -2507,8 +2507,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.15.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.15.2) | Opnum: 4 |
 
 <a id="Section_3.1.4.15.1"></a>
 ##### 3.1.4.15.1 Count (Opnum 3)
@@ -2706,8 +2706,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Opnum: 3 |
-| [Schema](#Section_3.1.4.12.7) | Opnum: 4 |
+| [Name](#Section_3.1.4.17.1) | Opnum: 3 |
+| [Schema](#Section_3.1.4.17.2) | Opnum: 4 |
 | [CreateInstance](#Section_3.1.4.17.3) | Opnum: 5 |
 
 <a id="Section_3.1.4.17.1"></a>
@@ -2783,8 +2783,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.18.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.18.2) | Opnum: 4 |
 
 <a id="Section_3.1.4.18.1"></a>
 ##### 3.1.4.18.1 Count (Opnum 3)
@@ -2846,8 +2846,8 @@ Methods in RPC Opnum Order
 | [Input](#Section_3.1.4.19.1) | Opnum: 3 |
 | [Output](#Section_3.1.4.19.2) | Opnum: 4 |
 | [Execute](#Section_3.1.4.19.3) | Opnum: 5 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 6 |
-| [SetMetadata](#Section_3.1.4.1.3) | Opnum: 7 |
+| [GetMetadata](#Section_3.1.4.19.4) | Opnum: 6 |
+| [SetMetadata](#Section_3.1.4.19.5) | Opnum: 7 |
 
 <a id="Section_3.1.4.19.1"></a>
 ##### 3.1.4.19.1 Input (Opnum 3)
@@ -2967,10 +2967,10 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Opnum: 3 |
+| [Name](#Section_3.1.4.20.1) | Opnum: 3 |
 | [InputSchema](#Section_3.1.4.20.2) | Opnum: 4 |
 | [OutputSchema](#Section_3.1.4.20.3) | Opnum: 5 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 6 |
+| [GetMetadata](#Section_3.1.4.20.4) | Opnum: 6 |
 
 <a id="Section_3.1.4.20.1"></a>
 ##### 3.1.4.20.1 Name (Opnum 3)
@@ -3063,7 +3063,7 @@ HRESULT GetMetadata(
 
 The IAppHostPathMapper [**interface**](#gt_interface) provides methods that are called by the server implementation when the server informs the client about hierarchy mapping decisions.
 
-To receive incoming remote calls for this interface, the client MUST implement a [**UUID**](#gt_universally-unique-identifier-uuid) (e7927575-5cc3-403b-822e-328a6b904bee). It MUST then specify an object that implements this interface to the [IAppHostAdminManager::SetMetadata()](#Section_3.1.4.1) method with a bstrMetadataName of "pathMapper".
+To receive incoming remote calls for this interface, the client MUST implement a [**UUID**](#gt_universally-unique-identifier-uuid) (e7927575-5cc3-403b-822e-328a6b904bee). It MUST then specify an object that implements this interface to the [IAppHostAdminManager::SetMetadata()](#Section_3.1.4.1.3) method with a bstrMetadataName of "pathMapper".
 
 As an administration system maps hierarchy paths to physical paths on the server, it optionally calls this client-supplied object that implements the IAppHostPathMapper interface. The implementer of this interface receives details of all mappings and can change the results of each mapping if required.
 
@@ -3073,7 +3073,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [MapPath](#Section_3.1.4.16.4) | Opnum: 3 |
+| [MapPath](#Section_3.1.4.21.1) | Opnum: 3 |
 
 <a id="Section_3.1.4.21.1"></a>
 ##### 3.1.4.21.1 MapPath (Opnum 3)
@@ -3117,15 +3117,15 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Opnum: 3 |
-| [Value](#Section_3.1.4.10.2) | "getter" Opnum: 4 |
-| [Value](#Section_3.1.4.10.2) | "setter" Opnum: 5 |
-| [Clear](#Section_3.1.4.12.10) | Opnum: 6 |
+| [Name](#Section_3.1.4.22.1) | Opnum: 3 |
+| [Value](#Section_3.1.4.22.2) | "getter" Opnum: 4 |
+| [Value](#Section_3.1.4.22.3) | "setter" Opnum: 5 |
+| [Clear](#Section_3.1.4.22.4) | Opnum: 6 |
 | [StringValue](#Section_3.1.4.22.5) | Opnum: 7 |
 | [Exception](#Section_3.1.4.22.6) | Opnum: 8 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 9 |
-| [SetMetadata](#Section_3.1.4.1.3) | Opnum: 10 |
-| [Schema](#Section_3.1.4.12.7) | Opnum: 11 |
+| [GetMetadata](#Section_3.1.4.22.7) | Opnum: 9 |
+| [SetMetadata](#Section_3.1.4.22.8) | Opnum: 10 |
+| [Schema](#Section_3.1.4.22.9) | Opnum: 11 |
 
 <a id="Section_3.1.4.22.1"></a>
 ##### 3.1.4.22.1 Name (Opnum 3)
@@ -3347,8 +3347,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.23.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.23.2) | Opnum: 4 |
 
 <a id="Section_3.1.4.23.1"></a>
 ##### 3.1.4.23.1 Count (Opnum 3)
@@ -3399,7 +3399,7 @@ The Item method is received by the server in an RPC_REQUEST packet. In response,
 <a id="Section_3.1.4.24"></a>
 #### 3.1.4.24 IAppHostPropertyException
 
-The IAppHostPropertyException [**interface**](#gt_interface) provides methods that access the exception information that the administration system encountered when processing the corresponding [IAppHostProperty](#Section_3.1.4.22). The administration system can indicate errors as encountered by filling in this exception. This behavior is defined by the [IAppHostAdminManager](#Section_4.1) metadata "ignoreInvalidAttributes".
+The IAppHostPropertyException [**interface**](#gt_interface) provides methods that access the exception information that the administration system encountered when processing the corresponding [IAppHostProperty](#Section_3.1.4.22). The administration system can indicate errors as encountered by filling in this exception. This behavior is defined by the [IAppHostAdminManager](#Section_3.1.4.1) metadata "ignoreInvalidAttributes".
 
 The IAppHostPropertyException interface inherits opnums 0–9 from the [IAppHostConfigException](#Section_3.1.4.5) interface.
 
@@ -3479,7 +3479,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Opnum: 3 |
+| [Name](#Section_3.1.4.25.1) | Opnum: 3 |
 | [Type](#Section_3.1.4.25.2) | Opnum: 4 |
 | [DefaultValue](#Section_3.1.4.25.3) | Opnum: 5 |
 | [IsRequired](#Section_3.1.4.25.4) | Opnum: 6 |
@@ -3488,7 +3488,7 @@ Methods in RPC Opnum Order
 | [IsExpanded](#Section_3.1.4.25.7) | Opnum: 9 |
 | [ValidationType](#Section_3.1.4.25.8) | Opnum: 10 |
 | [ValidationParameter](#Section_3.1.4.25.9) | Opnum: 11 |
-| [GetMetadata](#Section_3.1.4.1.2) | Opnum: 12 |
+| [GetMetadata](#Section_3.1.4.25.10) | Opnum: 12 |
 | [IsCaseSensitive](#Section_3.1.4.25.11) | Opnum: 13 |
 | [PossibleValues](#Section_3.1.4.25.12) | Opnum: 14 |
 | [DoesAllowInfinite](#Section_3.1.4.25.13) | Opnum: 15 |
@@ -3821,8 +3821,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.26.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.26.2) | Opnum: 4 |
 
 <a id="Section_3.1.4.26.1"></a>
 ##### 3.1.4.26.1 Count (Opnum 3)
@@ -3880,14 +3880,14 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Name](#Section_3.1.4.10.1) | Opnum: 3 |
-| [Type](#Section_3.1.4.25.2) | "getter" Opnum: 4 |
-| [Type](#Section_3.1.4.25.2) | "setter" Opnum: 5 |
-| [OverrideModeDefault](#Section_3.1.4.27.5) | "getter" Opnum: 6 |
+| [Name](#Section_3.1.4.27.1) | Opnum: 3 |
+| [Type](#Section_3.1.4.27.2) | "getter" Opnum: 4 |
+| [Type](#Section_3.1.4.27.3) | "setter" Opnum: 5 |
+| [OverrideModeDefault](#Section_3.1.4.27.4) | "getter" Opnum: 6 |
 | [OverrideModeDefault](#Section_3.1.4.27.5) | "setter" Opnum: 7 |
-| [AllowDefinition](#Section_3.1.4.27.7) | "getter" Opnum: 8 |
+| [AllowDefinition](#Section_3.1.4.27.6) | "getter" Opnum: 8 |
 | [AllowDefinition](#Section_3.1.4.27.7) | "setter" Opnum: 9 |
-| [AllowLocation](#Section_3.1.4.27.9) | "getter" Opnum: 10 |
+| [AllowLocation](#Section_3.1.4.27.8) | "getter" Opnum: 10 |
 | [AllowLocation](#Section_3.1.4.27.9) | "setter" Opnum: 11 |
 
 <a id="Section_3.1.4.27.1"></a>
@@ -4090,8 +4090,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.28.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.28.2) | Opnum: 4 |
 | [AddSection](#Section_3.1.4.28.3) | Opnum: 5 |
 | [DeleteSection](#Section_3.1.4.28.4) | Opnum: 6 |
 
@@ -4198,14 +4198,14 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count](#Section_3.1.4.3.1) | Opnum: 3 |
-| [Item](#Section_3.1.4.3.2) | Opnum: 4 |
+| [Count](#Section_3.1.4.29.1) | Opnum: 3 |
+| [Item](#Section_3.1.4.29.2) | Opnum: 4 |
 | [Sections](#Section_3.1.4.29.3) | Opnum: 5 |
 | [AddSectionGroup](#Section_3.1.4.29.4) | Opnum: 6 |
 | [DeleteSectionGroup](#Section_3.1.4.29.5) | Opnum: 7 |
-| [Name](#Section_3.1.4.10.1) | Opnum: 8 |
-| [Type](#Section_3.1.4.25.2) | "getter" Opnum: 9 |
-| [Type](#Section_3.1.4.25.2) | "setter" Opnum: 10 |
+| [Name](#Section_3.1.4.29.6) | Opnum: 8 |
+| [Type](#Section_3.1.4.29.7) | "getter" Opnum: 9 |
+| [Type](#Section_3.1.4.29.8) | "setter" Opnum: 10 |
 
 <a id="Section_3.1.4.29.1"></a>
 ##### 3.1.4.29.1 Count (Opnum 3)
@@ -4384,7 +4384,7 @@ The Type (Set) method is received by the server in an RPC_REQUEST packet. In res
 <a id="Section_3.1.4.30"></a>
 #### 3.1.4.30 IAppHostWritableAdminManager
 
-The IAppHostWritableAdminManager [**interface**](#gt_interface) provides methods that access a writable version of an administration system. It extends the [IAppHostAdminManager](#Section_4.1), which is a read-only interface. The IAppHostWritableAdminManager adds methods to allow writing to the administration system, the most important of which is the CommitChanges method, which instructs the administration system to persist any in-memory changes that it has accumulated.
+The IAppHostWritableAdminManager [**interface**](#gt_interface) provides methods that access a writable version of an administration system. It extends the [IAppHostAdminManager](#Section_3.1.4.1), which is a read-only interface. The IAppHostWritableAdminManager adds methods to allow writing to the administration system, the most important of which is the CommitChanges method, which instructs the administration system to persist any in-memory changes that it has accumulated.
 
 The IAppHostWritableAdminManager interface inherits opnums 0–6 from the IAppHostAdminManager interface, as defined in this protocol specification and the IUnknown interface.
 
@@ -4394,7 +4394,7 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [CommitChanges](#Section_3.1.4.30.1) | Opnum: 7 |
 | [CommitPath](#Section_3.1.4.30.2) | "getter" Opnum: 8 |
-| [CommitPath](#Section_3.1.4.30.2) | "setter" Opnum: 9 |
+| [CommitPath](#Section_3.1.4.30.3) | "setter" Opnum: 9 |
 
 <a id="Section_3.1.4.30.1"></a>
 ##### 3.1.4.30.1 CommitChanges (Opnum 7)

@@ -220,7 +220,7 @@ Host Name: The host name of the [**RAS server**](#gt_f8c23490-c220-4d75-a9bd-db0
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-When a [**RAS server**](#gt_f8c23490-c220-4d75-a9bd-db04e8fc1c48) starts, it MUST immediately send a server advertisement, as specified in section [2.2.1](#Section_2.2.1), and start its [Advertisement Timer](#Section_3.1.2).
+When a [**RAS server**](#gt_f8c23490-c220-4d75-a9bd-db04e8fc1c48) starts, it MUST immediately send a server advertisement, as specified in section [2.2.1](#Section_2.2.1), and start its [Advertisement Timer](#Section_b6bfa96c4b484a2296f570c09ba1bb69).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -235,7 +235,7 @@ The [**RAS server**](#gt_f8c23490-c220-4d75-a9bd-db04e8fc1c48) role has no messa
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
-When the [Advertisement Timer](#Section_3.1.2) expires, the [**RAS server**](#gt_f8c23490-c220-4d75-a9bd-db04e8fc1c48) MUST send a server advertisement, as specified in section [2.2.1](#Section_2.2.1), and restart its Advertisement Timer.
+When the [Advertisement Timer](#Section_b6bfa96c4b484a2296f570c09ba1bb69) expires, the [**RAS server**](#gt_f8c23490-c220-4d75-a9bd-db04e8fc1c48) MUST send a server advertisement, as specified in section [2.2.1](#Section_2.2.1), and restart its Advertisement Timer.
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events

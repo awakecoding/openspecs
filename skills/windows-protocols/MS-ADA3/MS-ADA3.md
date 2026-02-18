@@ -414,7 +414,7 @@ Active Directory Schema Attributes N-Z contains a partial list of the objects th
 <a id="Section_1.1"></a>
 ## 1.1 References
 
-[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](#Section_2)".
+[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](../MS-ADA2/MS-ADA2.md)".
 
 [MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
@@ -4179,7 +4179,7 @@ Version-Specific Behavior: First implemented on Windows 2000 Server.
 <a id="Section_2.120"></a>
 ## 2.120 Attribute primaryGroupID
 
-This attribute specifies the relative identifier (RID) for the primary group of the user. By default, this is the RID for the Domain Users group. The user is a member of its primary group, although the group is not listed in the user's memberOf attribute. Likewise, a group object's member attribute will not list the user objects whose primaryGroupID is set to the group. For more information, refer to [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.8.2, [MS-ADTS](../MS-ADTS/MS-ADTS.md), and [MS-ADA2](#Section_2) sections 2.43 and 2.45.
+This attribute specifies the relative identifier (RID) for the primary group of the user. By default, this is the RID for the Domain Users group. The user is a member of its primary group, although the group is not listed in the user's memberOf attribute. Likewise, a group object's member attribute will not list the user objects whose primaryGroupID is set to the group. For more information, refer to [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.8.2, [MS-ADTS](../MS-ADTS/MS-ADTS.md), and [MS-ADA2](../MS-ADA2/MS-ADA2.md) sections 2.43 and 2.45.
 
 cn: Primary-Group-ID
 
@@ -9845,7 +9845,7 @@ The [schemaFlagsEx](#Section_2.226) attribute was added to this attribute defini
 <a id="Section_2.303"></a>
 ## 2.303 Attribute templateRoots2
 
-This attribute specifies an attribute used on the Exchange Server configuration container to indicate where the template containers are stored. This information is used by the Active Directory MAPI provider. Similar to [templateRoots](#Section_2.303), it differs by being a linked attribute.
+This attribute specifies an attribute used on the Exchange Server configuration container to indicate where the template containers are stored. This information is used by the Active Directory MAPI provider. Similar to [templateRoots](#Section_2.302), it differs by being a linked attribute.
 
 cn: Template-Roots2
 

@@ -7672,7 +7672,7 @@ The following credentials types are used by the protocol:
 
 **Server Administrator Credentials**: User name and password combination for a user that has administrator privileges on the server. These credentials are used in the onboarding process only.
 
-**Server Management Credentials**: The specific user name "WmsManagement" and the WmsManagement password returned from [RequestWmsControlCredentials Operation (section 3.4.4.2)](#Section_3.4.4.2.2.1). These credentials can be used to authenticate all non-onboarding API calls to the server.
+**Server Management Credentials**: The specific user name "WmsManagement" and the WmsManagement password returned from [RequestWmsControlCredentials Operation (section 3.4.4.2)](#Section_3.4.4.2). These credentials can be used to authenticate all non-onboarding API calls to the server.
 
 **Server Control Credentials**: The specific user name "WmsControl" and the WmsControl password returned from RequestWmsControlCredentials Operation (section 3.4.4.2). These credentials can be used to authenticate a subset of the non-onboarding API calls to the server.
 
@@ -20937,7 +20937,7 @@ The following table summarizes the [**XML Schema**](#gt_xml-schema-xsd) complex 
 
 **wsPassword**: Contains the password to be associated with the account.
 
-**eType**: Contains the type of account to create with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.1.2):
+**eType**: Contains the type of account to create with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2):
 
 | Value | Meaning |
 | --- | --- |
@@ -21112,7 +21112,7 @@ The **WMS_USER_WS** complex type containis data about a single user.
 
 **wsDescription**: Contains the user account description.
 
-**UserType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.1.2):
+**UserType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2):
 
 | Value | Meaning |
 | --- | --- |
@@ -21384,7 +21384,7 @@ The following table summarizes the [**XML Schema**](#gt_xml-schema-xsd) complex 
 
 </xsd:complexType>
 
-**peType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.1.2):
+**peType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2):
 
 | Value | Meaning |
 | --- | --- |
@@ -21438,7 +21438,7 @@ Client name: "SampleClient`.microsoft.com`"
 The following example message sequence shows how the binding step is performed between a client and a server (section [3.4](#Section_3.4)). All requests flow from the client to the server, and all responses flow from the server to the client. This example shows the following three request-response exchanges:
 
 - RequestSslCertificate (section [3.1.4.2](#Section_3.1.4.2))
-- RequestWmsControlCredentials (section [3.4.4.2](#Section_3.4.4.2.2.1))
+- RequestWmsControlCredentials (section [3.4.4.2](#Section_3.4.4.2))
 - SetSslCertificate (section [3.4.4.1](#Section_3.4.4.1))
 <!-- Client/Server Binding: RequestSslCertificate() Request -->
 
@@ -21685,7 +21685,7 @@ xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
 <a id="Section_4.2"></a>
 ## 4.2 Generic API Call Example
 
-The protocol is a set of APIs that can be called by the client by sending a [**SOAP**](#gt_soap) request to the server and receiving the results (if any) in the SOAP response. All the APIs other than those described in section [4.1](#Section_4.1) require authentication using the user name "WmsControl" and the server’s generated [**WmsControl password**](#gt_wmscontrol-password). The **GetSessionFlags** method (section [3.7.4.12](#Section_3.7.4.12.2.2)) is used in the following example:
+The protocol is a set of APIs that can be called by the client by sending a [**SOAP**](#gt_soap) request to the server and receiving the results (if any) in the SOAP response. All the APIs other than those described in section [4.1](#Section_4.1) require authentication using the user name "WmsControl" and the server’s generated [**WmsControl password**](#gt_wmscontrol-password). The **GetSessionFlags** method (section [3.7.4.12](#Section_3.7.4.12)) is used in the following example:
 
 <!-- GetSessionFlags() Request -->
 

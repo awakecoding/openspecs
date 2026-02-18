@@ -455,7 +455,7 @@ This document uses the following terms:
 **access level**: The type of access that the client requests for an object, such as read access, write access, or administrative access.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_adaptive-port-monitor-apmon"></a>
 **adaptive port monitor (APMON)**: A port monitor that supports printing to network printers that comply with either Web Services for Devices (WSD) or the internet printing protocol (IPP). The monitor automatically selects whether to use WSD or IPP.
@@ -776,7 +776,7 @@ This document uses the following terms:
 **security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl) with [**SIDs**](#gt_security-identifier-sid) for the security principals who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
 
 <a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](#Section_1.3) section 1.1.1.2.
+**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 <a id="gt_security-provider"></a>
 **security provider**: A pluggable security module that is specified by the protocol layer above the [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) layer, and will cause the [**RPC**](#gt_remote-procedure-call-rpc) layer to use this module to secure messages in a communication session with the server. The security provider is sometimes referred to as an [**authentication**](#gt_authentication) service. For more information, see [C706] and [MS-RPCE].
@@ -970,9 +970,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** There is a charge to download the specification.
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](#Section_1.3)".
+[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](../MS-AZOD/MS-AZOD.md)".
 
 [MS-EMFSPOOL] Microsoft Corporation, "[Enhanced Metafile Spool Format](../MS-EMFSPOOL/MS-EMFSPOOL.md)".
 
@@ -1036,7 +1036,7 @@ The following sections give an overview of these functions.
 
 A client can use this protocol to perform remote management operations on a [**print server**](#gt_print-server). With server access credentials, client applications can manipulate the print server state and print server components, such as [**printer driver**](#gt_printer-driver) configuration and [**print queue**](#gt_print-queue) configuration, or add printer drivers and printers; they can monitor the print queue status; and they can perform general print server administration.
 
-These operations are supported in the protocol by a set of [container](#Section_3.1.4.1.8.7) structures that are used by different [**print system**](#gt_print-system) components, specifically: [DRIVER_CONTAINER](#Section_2.2.1.2.3), [FORM_CONTAINER](#Section_2.2.1.2.4), [JOB_CONTAINER](#Section_2.2.1.2.5), [PORT_CONTAINER](#Section_2.2.1.2.7), [SECURITY_CONTAINER](#Section_2.2.1.2.13), and [PRINTER_CONTAINER](#Section_2.2.1.2.9). These print system components are supported as specified in section [2.2.1](#Section_2.2.1).
+These operations are supported in the protocol by a set of [container](#Section_2.2.1.2) structures that are used by different [**print system**](#gt_print-system) components, specifically: [DRIVER_CONTAINER](#Section_2.2.1.2.3), [FORM_CONTAINER](#Section_2.2.1.2.4), [JOB_CONTAINER](#Section_2.2.1.2.5), [PORT_CONTAINER](#Section_2.2.1.2.7), [SECURITY_CONTAINER](#Section_2.2.1.2.13), and [PRINTER_CONTAINER](#Section_2.2.1.2.9). These print system components are supported as specified in section [2.2.1](#Section_2.2.1).
 
 To produce printed output that is the same, regardless of the configuration, the printer driver that is installed on the client computer must be identical to or compatible with the printer driver that is installed on the print server. This protocol provides the methods that the client can use after it connects to a printer on a print server to obtain the information about the printer driver that is associated with the printer. If necessary, the client computer can use this information to download the printer driver from the print server. For more information about printer drivers, see [[MSDN-MPD]](https://go.microsoft.com/fwlink/?LinkId=91840).
 
@@ -1080,7 +1080,7 @@ Figure 3: Notification of print system changes
 
 The box labeled 'Local Server' in the above diagram represents an entity running on the client system. This entity is either implemented in the end-user application or in a separate process. Since the entity implements a Print System Remote Protocol [**endpoint**](#gt_endpoint), which can only be registered once per system, there can be at most one of these entities running on the client system at any time. If an end-user application directly implements this entity, this end-user application would not be able to run on a system that also runs a [**print system**](#gt_print-system) implementation, and only one such application could.
 
-In addition to composing and returning the notifications, the print server maintains a change identifier that it changes whenever the server-side printing configuration changes; for example, changes to user-configurable settings, print queue items, [**print job**](#gt_print-job) status, or to the printer driver would cause this identifier to change. The print client can query this change identifier by using the [RpcGetPrinterData (section 3.1.4.2.7)](#Section_3.1.4.2.19) method that is defined in this protocol and calling it with the *pValueName* parameter pointing to the string "ChangeID".
+In addition to composing and returning the notifications, the print server maintains a change identifier that it changes whenever the server-side printing configuration changes; for example, changes to user-configurable settings, print queue items, [**print job**](#gt_print-job) status, or to the printer driver would cause this identifier to change. The print client can query this change identifier by using the [RpcGetPrinterData (section 3.1.4.2.7)](#Section_3.1.4.2.7) method that is defined in this protocol and calling it with the *pValueName* parameter pointing to the string "ChangeID".
 
 When a disconnected print client reconnects to the print server, it can query the change identifier again, and if the change identifier is different from the one returned when it queried before it was disconnected, the client retrieves the complete configuration information and updates its view of the server configuration by using printer driver management methods (section [3.1.4.4](#Section_3.1.4.4)).
 
@@ -1124,7 +1124,7 @@ This specification covers versioning issues in the following areas:
 
 - **Supported Transports**: The Print System Remote Protocol uses [**RPC**](#gt_remote-procedure-call-rpc) over named pipes only.
 - **Protocol Versions**: The protocol version specified in the [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file is 1.0.
-Versioning of data structures defined by the protocol is controlled using a **Level** value in all Containers (section [2.2.1.2)](#Section_3.1.4.1.8.7); the usage pattern of Level values is defined in section [2.2](#Section_2.2). Levels can be sequential, and data structures identified by a later version level, if extending an earlier level, are a superset of the data structure identified by the earlier level. The Level value is also a parameter to some RPC methods.
+Versioning of data structures defined by the protocol is controlled using a **Level** value in all Containers (section [2.2.1.2)](#Section_2.2.1.2); the usage pattern of Level values is defined in section [2.2](#Section_2.2). Levels can be sequential, and data structures identified by a later version level, if extending an earlier level, are a superset of the data structure identified by the earlier level. The Level value is also a parameter to some RPC methods.
 
 - **Security and Authentication Methods**: Versioning of security is handled by the underlying [**RPC transport**](#gt_rpc-transport); see [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.3 for more information.
 - **Localization**: This protocol specifies languages and localizable [**string resources**](#gt_string-resource) for [**printer forms**](#gt_printer-form). See LANGID (section [2.2.1.1.3](#Section_2.2.1.1.3)) and **RPC_FORM_INFO_2** structure (section [2.2.1.6.2](#Section_2.2.1.6.2)) for details.
@@ -1187,9 +1187,9 @@ Unless noted otherwise, the following statements apply to this specification:
 - The term "empty string" means a string containing only the terminating null character.
 - The term "optional pointer" means that providing a pointer value in the parameter or member is optional. If the pointer value is not provided, the value of the parameter or member MUST be NULL.
 - This protocol specification uses [**curly braced GUID strings**](#gt_curly-braced-guid-string) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3).
-This protocol introduces a variety of data types that bundle information about printers, [**printer drivers**](#gt_printer-driver), [**print jobs**](#gt_print-job), and [**ports**](#gt_port). These data types are collectively referred to as [INFO](#Section_3.1.4.1.9) data types, and include [DRIVER_INFO_1 (section 2.2.1.5.1)](#Section_2.2.1.5), [PRINTER_INFO_1 (section 2.2.1.10.2)](#Section_2.2.1.10), [JOB_INFO_1 (section 2.2.1.7.1)](#Section_2.2.1.7.1), and [PORT_INFO_1 (section 2.2.1.9.1)](#Section_2.2.1.9). As data types were refined in the evolution of this protocol, new INFO data type versions have been introduced to represent extended or different bundles of information. The term "level" is used to differentiate between the different type versions, and the number of the level is reflected in the name of the data type, for example, JOB_INFO_1, [JOB_INFO_2](#Section_2.2.1.7.2), and [JOB_INFO_3](#Section_2.2.1.7.3).
+This protocol introduces a variety of data types that bundle information about printers, [**printer drivers**](#gt_printer-driver), [**print jobs**](#gt_print-job), and [**ports**](#gt_port). These data types are collectively referred to as [INFO](#Section_3.1.4.1.9) data types, and include [DRIVER_INFO_1 (section 2.2.1.5.1)](#Section_2.2.1.5.1), [PRINTER_INFO_1 (section 2.2.1.10.2)](#Section_2.2.1.10.2), [JOB_INFO_1 (section 2.2.1.7.1)](#Section_2.2.1.7.1), and [PORT_INFO_1 (section 2.2.1.9.1)](#Section_2.2.1.9.1). As data types were refined in the evolution of this protocol, new INFO data type versions have been introduced to represent extended or different bundles of information. The term "level" is used to differentiate between the different type versions, and the number of the level is reflected in the name of the data type, for example, JOB_INFO_1, [JOB_INFO_2](#Section_2.2.1.7.2), and [JOB_INFO_3](#Section_2.2.1.7.3).
 
-To simplify method parameter lists and to increase robustness of RPC marshaling, the protocol introduces CONTAINER data types, which consolidate the input parameters used by RPC methods. Some CONTAINER data types hold a Level value along with a union of pointer values pointing to different INFO data type versions; the specific Level values available for each CONTAINER data type are documented in section [2.2.1.2](#Section_3.1.4.1.8.7). For example, a [JOB_CONTAINER (section 2.2.1.2.5)](#Section_2.2.1.2.5) contains a level value and a union of pointers to the different [JOB_INFO](#Section_2.2.1.7) data type versions, which are selected by the Level value. Other CONTAINER data types hold a pointer value that points to a structure, along with a numerical value representing the size of the structure. For example, a [DEVMODE_CONTAINER (section 2.2.1.2.1)](#Section_2.2.1.2.1) contains a size value and a pointer to a custom-marshaled structure. Finally, several CONTAINER data types hold a version value, a value representing a set of flags, an array of structures, and a value representing the number of elements in the array. The [RPC_BIDI_REQUEST_CONTAINER (section 2.2.1.2.10)](#Section_2.2.1.2.10) is an example of a CONTAINER data type in this category.
+To simplify method parameter lists and to increase robustness of RPC marshaling, the protocol introduces CONTAINER data types, which consolidate the input parameters used by RPC methods. Some CONTAINER data types hold a Level value along with a union of pointer values pointing to different INFO data type versions; the specific Level values available for each CONTAINER data type are documented in section [2.2.1.2](#Section_2.2.1.2). For example, a [JOB_CONTAINER (section 2.2.1.2.5)](#Section_2.2.1.2.5) contains a level value and a union of pointers to the different [JOB_INFO](#Section_2.2.1.7) data type versions, which are selected by the Level value. Other CONTAINER data types hold a pointer value that points to a structure, along with a numerical value representing the size of the structure. For example, a [DEVMODE_CONTAINER (section 2.2.1.2.1)](#Section_2.2.1.2.1) contains a size value and a pointer to a custom-marshaled structure. Finally, several CONTAINER data types hold a version value, a value representing a set of flags, an array of structures, and a value representing the number of elements in the array. The [RPC_BIDI_REQUEST_CONTAINER (section 2.2.1.2.10)](#Section_2.2.1.2.10) is an example of a CONTAINER data type in this category.
 
 Most of the INFO data types have an IDL form and a custom-marshaled form. IDL forms can be used in conjunction with CONTAINER data types, as input parameters to methods that set values, such as [RpcSetPrinter (section 3.1.4.2.5)](#Section_3.1.4.2.5), while custom-marshaled forms can be used as output parameters to methods that get values, such as [RpcGetPrinter (section 3.1.4.2.6)](#Section_3.1.4.2.6). The layout and order of members of IDL forms are in most cases the same as those of corresponding custom-marshaled forms, with the distinction that IDL forms use the type "[string] wchar_t *" to point to strings, while custom-marshaled forms use an offset relative to the start of the structure.
 
@@ -1206,8 +1206,8 @@ To address this problem, methods that specify such input arguments accept separa
 
 In addition to the [**RPC**](#gt_remote-procedure-call-rpc) base types and definitions specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-DTYP](../MS-DTYP/MS-DTYP.md), the Print System Remote Protocol defines data types in the following sections:
 
-- [Common IDL Data Types (section 2.2.1.1)](#Section_2.2.1)
-- [Containers (section 2.2.1.2)](#Section_3.1.4.1.8.7)
+- [Common IDL Data Types (section 2.2.1.1)](#Section_2.2.1.1)
+- [Containers (section 2.2.1.2)](#Section_2.2.1.2)
 - [Members in INFO Structures (section 2.2.1.3)](#Section_2.2.1.3)
 - [DOC_INFO_1 (section 2.2.1.4)](#Section_2.2.1.4)
 - [DRIVER_INFO (section 2.2.1.5)](#Section_2.2.1.5)
@@ -1332,7 +1332,7 @@ This type is declared as follows:
 
 typedef [context_handle] void* PRINTER_HANDLE;
 
-The PRINTER_HANDLE context handle is returned by [RpcAddPrinter](#Section_3.1.4.4.8), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), and [RpcOpenPrinterEx](#Section_3.1.4.2.14).
+The PRINTER_HANDLE context handle is returned by [RpcAddPrinter](#Section_3.1.4.2.3), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), and [RpcOpenPrinterEx](#Section_3.1.4.2.14).
 
 <a id="Section_2.2.1.1.5"></a>
 ##### 2.2.1.1.5 RECTL
@@ -1631,7 +1631,7 @@ PORT_INFO_FF* pPortInfoFF;
 
 **Note:** Despite the bitwise AND of **Level** with 0x00FFFFFF, no values for **Level** are valid besides those specified.
 
-**pPortInfo1:** If the **Level** member is 0x00000001, this member is a pointer to a **PORT_INFO_1** structure that provides information about the printer port. For details, see section [2.2.1.9.1](#Section_2.2.1.9).
+**pPortInfo1:** If the **Level** member is 0x00000001, this member is a pointer to a **PORT_INFO_1** structure that provides information about the printer port. For details, see section [2.2.1.9.1](#Section_2.2.1.9.1).
 
 **pPortInfo2:** If the **Level** member is 0x00000002, this member is a pointer to a **PORT_INFO_2** structure that provides information about the printer port. For details, see section [2.2.1.9.2](#Section_2.2.1.9.2).
 
@@ -1719,7 +1719,7 @@ PRINTER_INFO_9* pPrinterInfo9;
 
 **pPrinterInfoStress:** If the **Level** member is 0x00000000, this member is a pointer to a **PRINTER_INFO_STRESS** structure (section [2.2.1.10.1](#Section_2.2.1.10.1)), which provides diagnostic printer information.
 
-**pPrinterInfo1:** If the **Level** member is 0x00000001, this member is a pointer to a **PRINTER_INFO_1** (section [2.2.1.10.2](#Section_2.2.1.10)) structure, which provides printer information.
+**pPrinterInfo1:** If the **Level** member is 0x00000001, this member is a pointer to a **PRINTER_INFO_1** (section [2.2.1.10.2](#Section_2.2.1.10.2)) structure, which provides printer information.
 
 **pPrinterInfo2:**If the **Level** member is 0x00000002, this member is a pointer to a **PRINTER_INFO_2** (section [2.2.1.10.3](#Section_2.2.1.10.3)) structure, which provides detailed printer information.
 
@@ -1790,7 +1790,7 @@ DWORD Count;
 <a id="Section_2.2.1.2.12"></a>
 ##### 2.2.1.2.12 RPC_BINARY_CONTAINER
 
-The **RPC_BINARY_CONTAINER** structure is a container for binary printer data and is used in the **RPC_BIDI_DATA** (section [2.2.1.12.3)](#Section_2.2.1.12.3) structure.<8>
+The **RPC_BINARY_CONTAINER** structure is a container for binary printer data and is used in the **RPC_BIDI_DATA** (section [2.2.1.12.3)](#Section_d6e679dc5a244936ac6858251dbd1555) structure.<8>
 
 typedef struct _RPC_BINARY_CONTAINER {
 
@@ -1852,7 +1852,7 @@ SPLCLIENT_INFO_3* pNotUsed2;
 
 **ClientInfo:** Client information in a structure that corresponds to the information level specified by the **Level** member.
 
-**pClientInfo1:** A pointer to an **SPLCLIENT_INFO_1** structure (section [2.2.1.11.1)](#Section_2.2.1.11.1) information.
+**pClientInfo1:** A pointer to an **SPLCLIENT_INFO_1** structure (section [2.2.1.11.1)](#Section_dd99a589aecd4c259111ded01b10f347) information.
 
 **pNotUsed1:** A pointer to a structure that is specified only as a placeholder in the IDL and MUST be ignored.
 
@@ -1909,7 +1909,7 @@ RPC_BranchOfficeJobData JobData[];
 
 **cJobDataEntries:** The number of **RPC_BranchOfficeJobData** structures in the **JobData** member.
 
-**JobData:** An array of **RPC_BranchOfficeJobData** structures. Each structure in the array contains a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)).
+**JobData:** An array of **RPC_BranchOfficeJobData** structures. Each structure in the array contains a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)).
 
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Members in INFO Structures
@@ -1940,7 +1940,7 @@ This section describes members commonly used in **DRIVER_INFO** (section [2.2.1
 
 **pName:** A pointer to a string that specifies the name of the [**printer driver**](#gt_printer-driver); for example, "QMS 810". For rules governing printer driver names, see section [2.2.4.3](#Section_2.2.4.3).
 
-**cVersion (4 bytes):** A DWORD that has an implementation-specific value that identifies the driver version and the operating system version for which the printer driver was written. The driver version contained by each printer driver object in the "List of Printer Drivers" is described in section [3.1.1](#Section_3.2.1).<13>
+**cVersion (4 bytes):** A DWORD that has an implementation-specific value that identifies the driver version and the operating system version for which the printer driver was written. The driver version contained by each printer driver object in the "List of Printer Drivers" is described in section [3.1.1](#Section_3.1.1).<13>
 
 **ConfigFileArray (variable):** A string that specifies a file name or a full path and file name for the printer driver configuration module. The location of this buffer is determined by the value of the **ConfigFileOffset** member.
 
@@ -2114,7 +2114,7 @@ This section describes the members that are commonly used in **MONITOR_INFO** st
 
 This section describes members commonly used in **PORT_INFO** structures.
 
-**pPortName**: A pointer to a string that specifies a supported printer [**port**](#gt_port). For rules governing port names, see section [2.2.4.10](#Section_2.2.2.4.10).
+**pPortName**: A pointer to a string that specifies a supported printer [**port**](#gt_port). For rules governing port names, see section [2.2.4.10](#Section_2.2.4.10).
 
 <a id="Section_2.2.1.3.6"></a>
 ##### 2.2.1.3.6 PRINTER_INFO Members
@@ -2133,7 +2133,7 @@ This section describes members commonly used in **PRINTER_INFO** structures.
 
 **pSecurityDescriptor**: An optional pointer to a **SECURITY_DESCRIPTOR** structure ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) and MUST be ignored on receipt. Actual **SECURITY_DESCRIPTOR** data is passed to a method via a self-relative **SECURITY_DESCRIPTOR** structure in a **SECURITY_CONTAINER** (section [2.2.1.2.13](#Section_2.2.1.2.13)).
 
-**pPortName**: This member is a pointer to a string that specifies the ports used to transmit data to a printer. For rules governing [**port**](#gt_port) names, see section [2.2.4.10](#Section_2.2.2.4.10).
+**pPortName**: This member is a pointer to a string that specifies the ports used to transmit data to a printer. For rules governing [**port**](#gt_port) names, see section [2.2.4.10](#Section_2.2.4.10).
 
 <a id="Section_2.2.1.3.7"></a>
 ##### 2.2.1.3.7 SPLCLIENT_INFO Members
@@ -3001,7 +3001,7 @@ DWORD Flags;
 
 **Flags:** The value of this member MUST be the result of a bitwise OR of zero or more of the [Printer Enumeration Flags (section 2.2.3.7)](#Section_2.2.3.7).
 
-If the **PRINTER_INFO_1** structure is used in a **PRINTER_CONTAINER** (section [2.2.1.2.9)](#Section_2.2.1.2.9) as input to [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8) or [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), **Flags** MUST be a bitwise OR of zero or more of the PRINTER_ATTRIBUTE values defined in [Status and Attribute Values (section 2.2.3.12)](#Section_2.2.3.12).
+If the **PRINTER_INFO_1** structure is used in a **PRINTER_CONTAINER** (section [2.2.1.2.9)](#Section_2.2.1.2.9) as input to [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3) or [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), **Flags** MUST be a bitwise OR of zero or more of the PRINTER_ATTRIBUTE values defined in [Status and Attribute Values (section 2.2.3.12)](#Section_2.2.3.12).
 
 **pName:** This member is synonymous with **pPrinterName** (section [3.1.4.1.5](#Section_3.1.4.1.5)).
 
@@ -3307,7 +3307,7 @@ All members not defined in this section are specified in sections [2.2.1.3.7](#S
 <a id="Section_2.2.1.12.1"></a>
 ##### 2.2.1.12.1 RPC_BIDI_REQUEST_DATA
 
-The **RPC_BIDI_REQUEST_DATA** structure holds a single [**bidirectional**](#gt_bidirectional) request.<67> The request is part of a bidirectional communication request using the [RpcSendRecvBidiData (section 3.1.4.2.27)](#Section_3.1.4.2.27) method. One or more **RPC_BIDI_REQUEST_DATA** structures MUST be contained in a **RPC_BIDI_REQUEST_CONTAINER** (section [2.2.1.2.10)](#Section_2.2.1.2.10).
+The **RPC_BIDI_REQUEST_DATA** structure holds a single [**bidirectional**](#gt_bidirectional) request.<67> The request is part of a bidirectional communication request using the [RpcSendRecvBidiData (section 3.1.4.2.27)](#Section_3.1.4.2.27) method. One or more **RPC_BIDI_REQUEST_DATA** structures MUST be contained in a **RPC_BIDI_REQUEST_CONTAINER** (section [2.2.1.2.10)](#Section_4ea856c44c374485868ae7ac8e331e5e).
 
 typedef struct _RPC_BIDI_REQUEST_DATA {
 
@@ -3427,7 +3427,7 @@ DWORD Count;
 | --- | --- |
 | PRINTER_NOTIFY_OPTIONS_REFRESH 0x00000001 | Refreshed data is requested from the server for all monitored members. |
 
-**Count:** The number of **RPC_V2_NOTIFY_OPTIONS_TYPE** structures (section [2.2.1.13.2)](#Section_2.2.1.13.2) in the array pointed to by the **pTypes** member.
+**Count:** The number of **RPC_V2_NOTIFY_OPTIONS_TYPE** structures (section [2.2.1.13.2)](#Section_3cce2507707d4a8e8ce8388463a24952) in the array pointed to by the **pTypes** member.
 
 **pTypes:** A pointer to an array of **RPC_V2_NOTIFY_OPTIONS_TYPE** structures, each of which identifies a set of [**print job**](#gt_print-job) or printer information members to be monitored by a printer change notification object.
 
@@ -3568,11 +3568,11 @@ SECURITY_CONTAINER SecurityDescriptor;
 
 } RPC_V2_NOTIFY_INFO_DATA_DATA;
 
-**String:** Case **TABLE_STRING**: This member specifies a **STRING_CONTAINER** structure (section [2.2.1.2.15)](#Section_2.2.1.2.15).
+**String:** Case **TABLE_STRING**: This member specifies a **STRING_CONTAINER** structure (section [2.2.1.2.15)](#Section_5f6aaa8dad83427892fa2afaaf8b75fc).
 
 **dwData:** Case **TABLE_DWORD**: This member specifies an array of two **DWORD** values that contain the member's current data.
 
-**SystemTime:** Case **TABLE_TIME** This member specifies a **SYSTEMTIME_CONTAINER** structure (section [2.2.1.2.16)](#Section_2.2.1.2.16).
+**SystemTime:** Case **TABLE_TIME** This member specifies a **SYSTEMTIME_CONTAINER** structure (section [2.2.1.2.16)](#Section_1438066b4b56488898213e2432dc0f07).
 
 **DevMode:** Case **TABLE_DEVMODE**: This member specifies a **DEVMODE_CONTAINER** structure (section [2.2.1.2.1)](#Section_2.2.1.2.1) that defines default printer attributes such as the paper orientation and printing resolution.
 
@@ -3603,7 +3603,7 @@ RPC_V2_NOTIFY_INFO* pInfo;
 <a id="Section_2.2.1.14.1"></a>
 ##### 2.2.1.14.1 RPC_PrintPropertyValue
 
-The **RPC_PrintPropertyValue** structure specifies the value of a Job Named Property (section [3.1.1](#Section_3.2.1)).<80>
+The **RPC_PrintPropertyValue** structure specifies the value of a Job Named Property (section [3.1.1](#Section_3.1.1)).<80>
 
 typedef struct {
 
@@ -3652,7 +3652,7 @@ DWORD cbBuf;
 <a id="Section_2.2.1.14.2"></a>
 ##### 2.2.1.14.2 RPC_PrintNamedProperty
 
-The **RPC_PrintNamedProperty** structure specifies a Job Named Property (section [3.1.1](#Section_3.2.1)).<81>
+The **RPC_PrintNamedProperty** structure specifies a Job Named Property (section [3.1.1](#Section_3.1.1)).<81>
 
 typedef struct {
 
@@ -3664,12 +3664,12 @@ RPC_PrintPropertyValue propertyValue;
 
 **propertyName:** A pointer to a string containing the name of the property.
 
-**propertyValue:** An **RPC_PrintPropertyValue** structure (section [2.2.1.14.1)](#Section_2.2.1.14.1) containing the value of the property.
+**propertyValue:** An **RPC_PrintPropertyValue** structure (section [2.2.1.14.1)](#Section_2ed8404520264696b2e263dbffdc6d21) containing the value of the property.
 
 <a id="Section_2.2.1.14.3"></a>
 ##### 2.2.1.14.3 RPC_EPrintPropertyType
 
-The **RPC_EPrintPropertyType** enumeration specifies the type of the value contained by a Job Named Property (section [3.1.1](#Section_3.2.1)).<82>
+The **RPC_EPrintPropertyType** enumeration specifies the type of the value contained by a Job Named Property (section [3.1.1](#Section_3.1.1)).<82>
 
 typedef enum
 
@@ -3700,7 +3700,7 @@ kRpcPropertyTypeBuffer
 <a id="Section_2.2.1.14.4"></a>
 ##### 2.2.1.14.4 SPLFILE_CONTENT_TYPE_PROP_NAME
 
-The SPL_CONTENT_TYPE_PROP_NAME constant defines the name of a standard **Job Named Property** (section [3.1.1](#Section_3.2.1)) that specifies the [**spool file**](#gt_spool-file) format for the print data that is sent by the client.<83>
+The SPL_CONTENT_TYPE_PROP_NAME constant defines the name of a standard **Job Named Property** (section [3.1.1](#Section_3.1.1)) that specifies the [**spool file**](#gt_spool-file) format for the print data that is sent by the client.<83>
 
 #define SPLFILE_CONTENT_TYPE_PROP_NAME L"Spool File Contents"
 
@@ -3721,7 +3721,7 @@ The following are the valid string values for this property.
 <a id="Section_2.2.1.15.1"></a>
 ##### 2.2.1.15.1 EBranchOfficeJobEventType
 
-The E**BranchOfficeJobEventType** enumeration specifies the type of [**Windows Event**](#gt_windows-event) contained by a **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)).<84>
+The E**BranchOfficeJobEventType** enumeration specifies the type of [**Windows Event**](#gt_windows-event) contained by a **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)).<84>
 
 typedef enum
 
@@ -3756,7 +3756,7 @@ kLogOfflineFileFull
 <a id="Section_2.2.1.15.2"></a>
 ##### 2.2.1.15.2 RPC_BranchOfficeJobData
 
-The **RPC_BranchOfficeJobData** structure holds a [**branch office print remote logging**](#gt_branch-office-print-remote-logging) structure that contains the data required to log a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)) corresponding to a specific type of [**Windows Event**](#gt_windows-event).<85>
+The **RPC_BranchOfficeJobData** structure holds a [**branch office print remote logging**](#gt_branch-office-print-remote-logging) structure that contains the data required to log a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)) corresponding to a specific type of [**Windows Event**](#gt_windows-event).<85>
 
 typedef struct {
 
@@ -3792,26 +3792,26 @@ RPC_BranchOfficeLogOfflineFileFull LogOfflineFileFull;
 
 } RPC_BranchOfficeJobData;
 
-**eEventType:** The type of Windows Event to which the **Branch Office Print Remote Log Entry** corresponds, which MUST be an **EBranchOfficeJobEventType** (section [2.2.1.15.1)](#Section_2.2.1.15.1) value.
+**eEventType:** The type of Windows Event to which the **Branch Office Print Remote Log Entry** corresponds, which MUST be an **EBranchOfficeJobEventType** (section [2.2.1.15.1)](#Section_d070101180b3473d843cedf7e4c5bc86) value.
 
 **JobId:** The identifier of a [**print job**](#gt_print-job).
 
 **JobInfo:** The branch office print remote logging structure that contains the data required to log a **Branch Office Print Remote Log Entry** corresponding to the **eEventType** member value.
 
-**LogJobPrinted:** An **RPC_BranchOfficeJobDataPrinted** (section [2.2.1.15.5)](#Section_2.2.1.15.5) structure for a **Branch Office Print Remote Log Entry** corresponding to [**event ID**](#gt_event-id) 307. This structure is present only if **eEventType** is set to **kLogJobPrinted**.
+**LogJobPrinted:** An **RPC_BranchOfficeJobDataPrinted** (section [2.2.1.15.5)](#Section_b4a220487837460eb1bd8d34f4270f29) structure for a **Branch Office Print Remote Log Entry** corresponding to [**event ID**](#gt_event-id) 307. This structure is present only if **eEventType** is set to **kLogJobPrinted**.
 
-**LogJobRendered:** An **RPC_BranchOfficeJobDataRendered** (section [2.2.1.15.6)](#Section_2.2.1.15.6) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 805. This structure is present only if **eEventType** is set to **kLogJobRendered**.
+**LogJobRendered:** An **RPC_BranchOfficeJobDataRendered** (section [2.2.1.15.6)](#Section_e90ee32f12f44310923871aca7dd9cb1) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 805. This structure is present only if **eEventType** is set to **kLogJobRendered**.
 
-**LogJobError:** An **RPC_BranchOfficeJobDataError** (section [2.2.1.15.3)](#Section_2.2.1.15.3) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 372. This structure is present only if **eEventType** is set to **kLogJobError**.
+**LogJobError:** An **RPC_BranchOfficeJobDataError** (section [2.2.1.15.3)](#Section_d86fd29b95124c80a14b5f5fb25e5975) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 372. This structure is present only if **eEventType** is set to **kLogJobError**.
 
-**LogPipelineFailed:** An **RPC_BranchOfficeJobDataPipelineFailed** (section [2.2.1.15.4)](#Section_2.2.1.15.4) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 824. This structure is present only if **eEventType** is set to **kLogJobPipelineError**.
+**LogPipelineFailed:** An **RPC_BranchOfficeJobDataPipelineFailed** (section [2.2.1.15.4)](#Section_31a2aecb2d7a4846a93be4fd708863e0) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 824. This structure is present only if **eEventType** is set to **kLogJobPipelineError**.
 
-**LogOfflineFileFull:** An **RPC_BranchOfficeLogOfflineFileFull** (section [2.2.1.15.7)](#Section_2.2.1.15.7) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 868. This structure is present only if **eEventType** is set to **kLogOfflineFileFull**.
+**LogOfflineFileFull:** An **RPC_BranchOfficeLogOfflineFileFull** (section [2.2.1.15.7)](#Section_55fcc7c1d63e448888cd8ce5d9dd945c) structure for a **Branch Office Print Remote Log Entry** corresponding to event ID 868. This structure is present only if **eEventType** is set to **kLogOfflineFileFull**.
 
 <a id="Section_2.2.1.15.3"></a>
 ##### 2.2.1.15.3 RPC_BranchOfficeJobDataError
 
-The **RPC_BranchOfficeJobDataError** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)).<86> This entry contains the information needed to create [**event ID**](#gt_event-id) 372 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Admin [**event channel**](#gt_event-channel).
+The **RPC_BranchOfficeJobDataError** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)).<86> This entry contains the information needed to create [**event ID**](#gt_event-id) 372 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Admin [**event channel**](#gt_event-channel).
 
 typedef struct {
 
@@ -3868,7 +3868,7 @@ DWORD PrintedPages;
 <a id="Section_2.2.1.15.4"></a>
 ##### 2.2.1.15.4 RPC_BranchOfficeJobDataPipelineFailed
 
-The **RPC_BranchOfficeJobDataPipelineFailed** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)).<87> This entry contains the information needed to create [**event ID**](#gt_event-id) 824 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Operational [**event channel**](#gt_event-channel).
+The **RPC_BranchOfficeJobDataPipelineFailed** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)).<87> This entry contains the information needed to create [**event ID**](#gt_event-id) 824 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Operational [**event channel**](#gt_event-channel).
 
 typedef struct {
 
@@ -3889,7 +3889,7 @@ typedef struct {
 <a id="Section_2.2.1.15.5"></a>
 ##### 2.2.1.15.5 RPC_BranchOfficeJobDataPrinted
 
-The **RPC_BranchOfficeJobDataPrinted** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)).<88> This entry contains the information needed to create [**event ID**](#gt_event-id) 307 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Operational [**event channel**](#gt_event-channel).
+The **RPC_BranchOfficeJobDataPrinted** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)).<88> This entry contains the information needed to create [**event ID**](#gt_event-id) 307 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Operational [**event channel**](#gt_event-channel).
 
 typedef struct {
 
@@ -3921,7 +3921,7 @@ DWORD TotalPages;
 
 **pPrinterName:** A pointer to a string that specifies the name of the printer used for the print job. For rules governing printer names, see section [2.2.4.14](#Section_2.2.4.14).
 
-**pPortName:** A pointer to a string that specifies a supported printer [**port**](#gt_port). For rules governing port names, see section [2.2.4.10](#Section_2.2.2.4.10).
+**pPortName:** A pointer to a string that specifies a supported printer [**port**](#gt_port). For rules governing port names, see section [2.2.4.10](#Section_2.2.4.10).
 
 **Size:** A 64-bit signed integer that specifies the size of the print job, in bytes.
 
@@ -3930,7 +3930,7 @@ DWORD TotalPages;
 <a id="Section_2.2.1.15.6"></a>
 ##### 2.2.1.15.6 RPC_BranchOfficeJobDataRendered
 
-The **RPC_BranchOfficeJobDataRendered** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1)).<89> This entry contains the information needed to create [**event ID**](#gt_event-id) 805 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Operational [**event channel**](#gt_event-channel).
+The **RPC_BranchOfficeJobDataRendered** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1)).<89> This entry contains the information needed to create [**event ID**](#gt_event-id) 805 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Operational [**event channel**](#gt_event-channel).
 
 typedef struct {
 
@@ -3967,7 +3967,7 @@ short TTOption;
 <a id="Section_2.2.1.15.7"></a>
 ##### 2.2.1.15.7 RPC_BranchOfficeLogOfflineFileFull
 
-The **RPC_BranchOfficeLogOfflineFileFull** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.2.1))<90> that indicates the **Branch Office Print Remote Log Offline Archive** (section [3.2.1](#Section_3.2.1)) has exceeded the maximum allowed size.<91> This entry contains the information needed to create [**event ID**](#gt_event-id) 868 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Admin [**event channel**](#gt_event-channel).
+The **RPC_BranchOfficeLogOfflineFileFull** structure holds a single **Branch Office Print Remote Log Entry** (section [3.1.1](#Section_3.1.1))<90> that indicates the **Branch Office Print Remote Log Offline Archive** (section [3.2.1](#Section_3.2.1)) has exceeded the maximum allowed size.<91> This entry contains the information needed to create [**event ID**](#gt_event-id) 868 in the [**Microsoft-Windows-PrintService**](#gt_microsoft-windows-printservice)/Admin [**event channel**](#gt_event-channel).
 
 typedef struct {
 
@@ -4475,7 +4475,7 @@ packet-beta
 <a id="Section_2.2.2.4.1"></a>
 ##### 2.2.2.4.1 _DRIVER_INFO_1
 
-The **_DRIVER_INFO_1** structure specifies [**printer driver**](#gt_printer-driver) information. It is a custom-[**marshaled**](#gt_37e89d91-2800-49d1-9d17-45ebe167ad87) form of the **_DRIVER_INFO_1** (section [2.2.1.5.1)](#Section_2.2.1.5) structure.
+The **_DRIVER_INFO_1** structure specifies [**printer driver**](#gt_printer-driver) information. It is a custom-[**marshaled**](#gt_37e89d91-2800-49d1-9d17-45ebe167ad87) form of the **_DRIVER_INFO_1** (section [2.2.1.5.1)](#Section_df308bbf8ff74b0f930bcb9b90080b90) structure.
 
 ```mermaid
 packet-beta
@@ -4830,7 +4830,7 @@ packet-beta
 
 **NameArray (variable):** This member MUST contain a string that specifies the [**print processor**](#gt_print-processor) name. The location of this buffer is determined by the value of the **NameOffset** member. For rules governing print processor names, see section [2.2.4.11](#Section_2.2.4.11).
 
-Members not defined in this section are identical to members in the **_DRIVER_INFO_4** structure (section [2.2.2.4.4)](#Section_2.2.1.5).
+Members not defined in this section are identical to members in the **_DRIVER_INFO_4** structure (section [2.2.2.4.4)](#Section_2a53e91004c34aba905a26741dcd59dd).
 
 <a id="Section_2.2.2.4.6"></a>
 ##### 2.2.2.4.6 _DRIVER_INFO_6
@@ -5279,7 +5279,7 @@ packet-beta
   64-95: "FileVersion"
 ```
 
-**FileNameOffset (4 bytes):** A 32-bit unsigned integer that specifies the number of bytes from the start of the **_DRIVER_INFO_101** (section [2.2.2.4.9)](#Section_2.2.2.4.9) structure that contains this structure to the start of the **FileNameArray** field.
+**FileNameOffset (4 bytes):** A 32-bit unsigned integer that specifies the number of bytes from the start of the **_DRIVER_INFO_101** (section [2.2.2.4.9)](#Section_821d675e39444c77b4ec3b519883cfa6) structure that contains this structure to the start of the **FileNameArray** field.
 
 **FileType (4 bytes):** A 32-bit unsigned integer that specifies the file type using one of the constant values from the following table.
 
@@ -5930,7 +5930,7 @@ packet-beta
 <a id="Section_2.2.2.8.1"></a>
 ##### 2.2.2.8.1 _PORT_INFO_1
 
-The **_PORT_INFO_1** structure specifies information about a printer [**port**](#gt_port). It is a custom-[**marshaled**](#gt_37e89d91-2800-49d1-9d17-45ebe167ad87) form of the **_PORT_INFO_1** (section [2.2.1.9.1)](#Section_2.2.1.9) structure.
+The **_PORT_INFO_1** structure specifies information about a printer [**port**](#gt_port). It is a custom-[**marshaled**](#gt_37e89d91-2800-49d1-9d17-45ebe167ad87) form of the **_PORT_INFO_1** (section [2.2.1.9.1)](#Section_2.2.1.9.1) structure.
 
 ```mermaid
 packet-beta
@@ -6132,7 +6132,7 @@ packet-beta
 <a id="Section_2.2.2.9.2"></a>
 ##### 2.2.2.9.2 _PRINTER_INFO_1
 
-The **_PRINTER_INFO_1** structure specifies printer information. It is a custom-[**marshaled**](#gt_37e89d91-2800-49d1-9d17-45ebe167ad87) form of the **_PRINTER_INFO_1** (section [2.2.1.10.2)](#Section_2.2.1.10) structure. See **_PRINTER_INFO_1** for the definition of **Flags**.
+The **_PRINTER_INFO_1** structure specifies printer information. It is a custom-[**marshaled**](#gt_37e89d91-2800-49d1-9d17-45ebe167ad87) form of the **_PRINTER_INFO_1** (section [2.2.1.10.2)](#Section_2.2.1.10.2) structure. See **_PRINTER_INFO_1** for the definition of **Flags**.
 
 ```mermaid
 packet-beta
@@ -6150,7 +6150,7 @@ packet-beta
   96-127: "CommentOffset"
 ```
 
-**Flags (4 bytes):** The value of this member MUST be the result of a bitwise OR of zero or more of the [Printer Enumeration Flags](#Section_2.2.3.7) (section 2.2.3.7). If the **_PRINTER_INFO_1** structure is used in a **PRINTER_CONTAINER** (section [2.2.1.2.9](#Section_2.2.1.2.9)) as input to RpcAddPrinter (section [3.1.4.2.3](#Section_3.1.4.4.8)) or RpcAddPrinterEx (section [3.1.4.2.15](#Section_3.1.4.2.15)), **Flags** MUST be a bitwise OR of zero or more of the PRINTER_ATTRIBUTE values defined in Status and Attribute Values (section [2.2.3.12](#Section_2.2.3.12)).
+**Flags (4 bytes):** The value of this member MUST be the result of a bitwise OR of zero or more of the [Printer Enumeration Flags](#Section_2.2.3.7) (section 2.2.3.7). If the **_PRINTER_INFO_1** structure is used in a **PRINTER_CONTAINER** (section [2.2.1.2.9](#Section_2.2.1.2.9)) as input to RpcAddPrinter (section [3.1.4.2.3](#Section_3.1.4.2.3)) or RpcAddPrinterEx (section [3.1.4.2.15](#Section_3.1.4.2.15)), **Flags** MUST be a bitwise OR of zero or more of the PRINTER_ATTRIBUTE values defined in Status and Attribute Values (section [2.2.3.12](#Section_2.2.3.12)).
 
 **DescriptionOffset (4 bytes):** An unsigned integer that specifies the number of bytes from the start of the structure to the start of the **DescriptionArray** member.
 
@@ -6899,7 +6899,7 @@ The **Access Values** in the following table lists [**access level**](#gt_access
 - Access values that are named starting with "JOB" are used for opening print job objects.
 - Access values that are named starting with "PRINTER" are used for opening printer objects and port objects.
 - Access values that are named starting with "SERVER" are used for opening print server objects.
-The ACCESS_MASK data type ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.3) specifies standard access rights and reserves a range of values for protocol-specific use. The following table defines printing-specific access rights in the reserved range and in combination with standard access rights. For more information concerning access rights, see [MS-AZOD](#Section_1.3) section 1.1.1.5.
+The ACCESS_MASK data type ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.3) specifies standard access rights and reserves a range of values for protocol-specific use. The following table defines printing-specific access rights in the reserved range and in combination with standard access rights. For more information concerning access rights, see [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.5.
 
 For completeness, the table lists all defined access values and identifies those that MUST NOT be used with the Print System Remote Protocol.
 
@@ -7005,7 +7005,7 @@ The **Server Notification Values** specify types of changes in the **Data** memb
 
 | Name/value | Description |
 | --- | --- |
-| SERVER_NOTIFY_FIELD_PRINT_DRIVER_ISOLATION_GROUP 0x0000 | Specifies that the [**printer driver**](#gt_printer-driver) isolation group setting for the print server has changed. **Reserved** contains **TABLE_STRING** and **Data.String** contains the updated value of the print server's "PrintDriverIsolationGroups" configuration data. For details, see [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).<149> |
+| SERVER_NOTIFY_FIELD_PRINT_DRIVER_ISOLATION_GROUP 0x0000 | Specifies that the [**printer driver**](#gt_printer-driver) isolation group setting for the print server has changed. **Reserved** contains **TABLE_STRING** and **Data.String** contains the updated value of the print server's "PrintDriverIsolationGroups" configuration data. For details, see [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).<149> |
 
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 Notification Data Type Values
@@ -7165,7 +7165,7 @@ The **Registry Type Values** specify the type of a data value in the registry us
 
 The **Server Handle Key Values** are used to store printer configuration data. The values named in the following table MUST be supported by [**print servers**](#gt_print-server) as follows:
 
-- In a call to [RpcGetPrinterData](#Section_3.1.4.2.19) or [RpcGetPrinterDataEx](#Section_3.1.4.2.19), the *pValueName* parameter identifies the data that MUST be returned in the *pData* parameter. The value pointed to by *pValueName* MUST be one of the strings specified in the "Server handle key value name" column.
+- In a call to [RpcGetPrinterData](#Section_3.1.4.2.7) or [RpcGetPrinterDataEx](#Section_3.1.4.2.19), the *pValueName* parameter identifies the data that MUST be returned in the *pData* parameter. The value pointed to by *pValueName* MUST be one of the strings specified in the "Server handle key value name" column.
 The specified [**registry**](#gt_registry) type values are defined in section [2.2.3.9](#Section_2.2.3.9).
 
 - If the "Read-write" column is checked, a print server SHOULD keep track of the value set by a call to [RpcSetPrinterData](#Section_3.1.4.2.8) or [RpcSetPrinterDataEx](#Section_3.1.4.2.18) in the *pData* parameter, and it SHOULD return the same value in a subsequent call to RpcGetPrinterData or RpcGetPrinterDataEx.
@@ -7184,7 +7184,7 @@ The specified [**registry**](#gt_registry) type values are defined in section [2
 | "NetPopup" REG_DWORD | X | X | If this value is nonzero, the print server MAY alert the [**print client**](#gt_print-client) of the status of a print job.<166> |
 | "NetPopupToComputer" REG_DWORD | X | X | If this value is nonzero, the print server MAY alert the print client of changes to the status of a print job.<167> |
 | "OSVersion" REG_BINARY | - | - | OS version information, in the form of an [OSVERSIONINFO structure (section 2.2.3.10.1)](#Section_2.2.3.10.1). |
-| "OSVersionEx" REG_BINARY | - | - | Extended OS version information, in the form of an [OSVERSIONINFOEX structure (section 2.2.3.10.2)](#Section_2.2.3.10.1). |
+| "OSVersionEx" REG_BINARY | - | - | Extended OS version information, in the form of an [OSVERSIONINFOEX structure (section 2.2.3.10.2)](#Section_2.2.3.10.2). |
 | "PortThreadPriority" REG_DWORD | X | X | The current priority of the thread on which the print server sends data to printers. This value MUST be one of the [Thread Priority values (section 2.2.3.10.6)](#Section_2.2.3.10.6) constants. This key name MAY be used remotely.<168> |
 | "PortThreadPriorityDefault" REG_DWORD | - | X | The default priority of the thread on which the print server sends data to printers. This value MUST be one of the Thread Priority values constants. This key name MAY be used remotely.<169> |
 | "RemoteFax" REG_DWORD | - | - | 0x0001 if the Microsoft Fax [**printer driver**](#gt_printer-driver) supports remote clients, zero otherwise. If this value is zero, print client connections to the Microsoft Fax printer driver SHOULD NOT be made. |
@@ -7205,7 +7205,7 @@ The specified [**registry**](#gt_registry) type values are defined in section [2
 <a id="Section_2.2.3.10.1"></a>
 ##### 2.2.3.10.1 OSVERSIONINFO
 
-The **OSVERSIONINFO** structure specifies operating system (OS) version information for use with Server Handle Key Values (section [2.2.3.10](#Section_2.2.3.10.5)).
+The **OSVERSIONINFO** structure specifies operating system (OS) version information for use with Server Handle Key Values (section [2.2.3.10](#Section_2.2.3.10)).
 
 ```mermaid
 packet-beta
@@ -7232,7 +7232,7 @@ packet-beta
 <a id="Section_2.2.3.10.2"></a>
 ##### 2.2.3.10.2 OSVERSIONINFOEX
 
-The **OSVERSIONINFOEX** structure specifies extended operating system (OS) version information for use with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).
+The **OSVERSIONINFOEX** structure specifies extended operating system (OS) version information for use with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).
 
 ```mermaid
 packet-beta
@@ -7259,7 +7259,7 @@ packet-beta
 <a id="Section_2.2.3.10.3"></a>
 ##### 2.2.3.10.3 OS_TYPE Enumeration
 
-The **OS_TYPE** enumeration specifies information about the operating system (OS) type for use with Server Handle Key Values (section [2.2.3.10](#Section_2.2.3.10.5)).<184>
+The **OS_TYPE** enumeration specifies information about the operating system (OS) type for use with Server Handle Key Values (section [2.2.3.10](#Section_2.2.3.10)).<184>
 
 typedef enum
 
@@ -7282,7 +7282,7 @@ VER_NT_SERVER = 0x00000003
 <a id="Section_2.2.3.10.4"></a>
 ##### 2.2.3.10.4 Event Log Flags
 
-The **Event Log Flags** specify events for a [**print server**](#gt_print-server) to log in its internal event log, for use with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5). These flags can be combined to specify multiple options.
+The **Event Log Flags** specify events for a [**print server**](#gt_print-server) to log in its internal event log, for use with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10). These flags can be combined to specify multiple options.
 
 | Name/value | Description |
 | --- | --- |
@@ -7295,12 +7295,12 @@ The **Event Log Flags** specify events for a [**print server**](#gt_print-server
 <a id="Section_2.2.3.10.5"></a>
 ##### 2.2.3.10.5 Product Suite Flags
 
-The **Product Suite Flags** are implementation-specific values for the product suites that are available on the operating system (OS). They are used with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).<185>
+The **Product Suite Flags** are implementation-specific values for the product suites that are available on the operating system (OS). They are used with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).<185>
 
 <a id="Section_2.2.3.10.6"></a>
 ##### 2.2.3.10.6 Thread Priority Values
 
-The **Thread Priority Values** specify priorities for threads on which [**print servers**](#gt_print-server) schedule jobs or send data to printers, for use with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).
+The **Thread Priority Values** specify priorities for threads on which [**print servers**](#gt_print-server) schedule jobs or send data to printers, for use with [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).
 
 | Name/value | Description |
 | --- | --- |
@@ -7315,7 +7315,7 @@ The **Thread Priority Values** specify priorities for threads on which [**print 
 
 The **Printer Data Values** are used to store printer configuration data. The values named in the following table MUST be supported on [**print servers**](#gt_print-server) for each printer as follows:
 
-- In a call to [RpcGetPrinterData (section 3.1.4.2.7)](#Section_3.1.4.2.19) or [RpcGetPrinterDataEx (section 3.1.4.2.19)](#Section_3.1.4.2.19), the *pValueName* parameter identifies the data that MUST be returned in the *pData* parameter. The key name pointed to by *pKeyName* MUST be NULL, and the value pointed to by *pValueName* MUST be one of the strings specified in the "Printer data value name" column.
+- In a call to [RpcGetPrinterData (section 3.1.4.2.7)](#Section_3.1.4.2.7) or [RpcGetPrinterDataEx (section 3.1.4.2.19)](#Section_3.1.4.2.19), the *pValueName* parameter identifies the data that MUST be returned in the *pData* parameter. The key name pointed to by *pKeyName* MUST be NULL, and the value pointed to by *pValueName* MUST be one of the strings specified in the "Printer data value name" column.
 The specified [**registry**](#gt_registry) type values are defined in section [2.2.3.9](#Section_2.2.3.9).
 
 - If the "Read-write" column is checked, a print server SHOULD keep track of the value set by a call to [RpcSetPrinterData (section 3.1.4.2.8)](#Section_3.1.4.2.8) or [RpcSetPrinterDataEx (section 3.1.4.2.18)](#Section_3.1.4.2.18) in the *pData* parameter, and it SHOULD return the same value in a subsequent call to RpcGetPrinterData or RpcGetPrinterDataEx.
@@ -7612,7 +7612,7 @@ When the **PRINTER_NAME_EX1** form is used as the name parameter with RpcOpenPri
 - **PRINTER_NAME_EX2** specifies the name of the [**port**](#gt_port) to be opened.
 When the **PRINTER_NAME_EX2** form is used as the name parameter with RpcOpenPrinter or RpcOpenPrinterEx, a port object is returned that can be used with RpcStartDocPrinter (section [3.1.4.9.1](#Section_3.1.4.9.1)) and RpcWritePrinter to print directly to a port without intermediate spooling.
 
-- **PORT_NAME** is a port name (section [2.2.4.10](#Section_2.2.2.4.10)).
+- **PORT_NAME** is a port name (section [2.2.4.10](#Section_2.2.4.10)).
 - **PRINTER_NAME_EX3** specifies the name of the port to be opened.
 When the **PRINTER_NAME_EX3** form is used as the name parameter with RpcOpenPrinter or RpcOpenPrinterEx, a port object is returned that can be used with RpcXcvData (section [3.1.4.6.5](#Section_3.1.4.6.5)) to communicate directly with a port.
 
@@ -7712,8 +7712,8 @@ Because of LDAP failures, print queue objects in the Active Directory do not nec
 
 [**Print servers**](#gt_print-server) perform the following steps when fulfilling a client request to publish a [**print queue**](#gt_print-queue) to the [**Active Directory**](#gt_active-directory).
 
-- Locate the [**domain controller**](#gt_domain-controller-dc) (section [2.3.3](#Section_1.3)).
-- Determine the [**distinguished name (DN)**](#gt_distinguished-name-dn) for the [**container**](#gt_container) representing the print server in the directory. This container is created when the print server joins the [**domain**](#gt_domain) ([MS-ADOD](#Section_1.3) section 2.7.7.1). The print server uses the DRSR protocol [MS-DRSR](../MS-DRSR/MS-DRSR.md) to determine the DN, as follows.
+- Locate the [**domain controller**](#gt_domain-controller-dc) (section [2.3.3](#Section_2.3.3)).
+- Determine the [**distinguished name (DN)**](#gt_distinguished-name-dn) for the [**container**](#gt_container) representing the print server in the directory. This container is created when the print server joins the [**domain**](#gt_domain) ([MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.7.7.1). The print server uses the DRSR protocol [MS-DRSR](../MS-DRSR/MS-DRSR.md) to determine the DN, as follows.
 - The print server calls the [**RPC**](#gt_remote-procedure-call-rpc) method IDL_DRSCrackNames as defined in [MS-DRSR] section 4.1.4. The input arguments for this call are the following.
 | Attribute | Description |
 | --- | --- |
@@ -7964,7 +7964,7 @@ The methods that are defined by this protocol are grouped into functional catego
 | Document printing | Methods for printing documents, pages and data. | [3.1.4.9](#Section_3.1.4.9) |
 | Notifications | Methods for obtaining notifications of printing events. | [3.1.4.10](#Section_3.1.4.10) |
 | Monitor modules | Methods specified by executable [**language monitors**](#gt_language-monitor). | [3.1.4.11](#Section_3.1.4.11) |
-| Job named property management | Methods for creating, updating, deleting, and enumerating **Job Named Properties** (section [3.1.1](#Section_3.2.1)).<251> | [3.1.4.12](#Section_3.1.4.12) |
+| Job named property management | Methods for creating, updating, deleting, and enumerating **Job Named Properties** (section [3.1.1](#Section_3.1.1)).<251> | [3.1.4.12](#Section_3.1.4.12) |
 | [**Branch office print remote logging**](#gt_branch-office-print-remote-logging) | Methods for processing **Branch Office Print Remote Log Entries** (section 3.1.1).<252> | [3.1.4.13](#Section_3.1.4.13) |
 
 The following table lists all the methods of the Print System Remote Protocol in ascending [**opnum**](#gt_opnum) order.
@@ -7978,7 +7978,7 @@ Methods in RPC Opnum Order
 | [RpcSetJob](#Section_3.1.4.3.1) | RpcSetJob pauses, resumes, cancels, or restarts a print job. It also sets print job parameters, for example, the job priority and the document name. Opnum: 2 |
 | [RpcGetJob](#Section_3.1.4.3.2) | RpcGetJob retrieves information about a specified print job. Opnum: 3 |
 | [RpcEnumJobs](#Section_3.1.4.3.3) | RpcEnumJobs retrieves information about a specified set of print jobs for a specified printer. Opnum: 4 |
-| [RpcAddPrinter](#Section_3.1.4.4.8) | RpcAddPrinter adds a printer to the list of supported printers for a specified server. Opnum: 5 |
+| [RpcAddPrinter](#Section_3.1.4.2.3) | RpcAddPrinter adds a printer to the list of supported printers for a specified server. Opnum: 5 |
 | [RpcDeletePrinter](#Section_3.1.4.2.4) | RpcDeletePrinter deletes the specified printer object. Opnum: 6 |
 | [RpcSetPrinter](#Section_3.1.4.2.5) | RpcSetPrinter sets the data for a specified printer or sets the state of the specified printer by pausing or resuming printing, or clearing all print jobs. Opnum: 7 |
 | [RpcGetPrinter](#Section_3.1.4.2.6) | RpcGetPrinter retrieves information about a specified printer. Opnum: 8 |
@@ -7999,7 +7999,7 @@ Methods in RPC Opnum Order
 | [RpcEndDocPrinter](#Section_3.1.4.9.7) | RpcEndDocPrinter notifies the print spooler that the application is at the end of the current print job. Opnum: 23 |
 | [RpcAddJob](#Section_3.1.4.3.4) | RpcAddJob returns ERROR_INVALID_PARAMETER. Opnum: 24 |
 | [RpcScheduleJob](#Section_3.1.4.3.5) | RpcScheduleJob returns ERROR_SPL_NO_ADDJOB. Opnum: 25 |
-| [RpcGetPrinterData](#Section_3.1.4.2.19) | RpcGetPrinterData retrieves configuration data for a printer or print server. Opnum: 26 |
+| [RpcGetPrinterData](#Section_3.1.4.2.7) | RpcGetPrinterData retrieves configuration data for a printer or print server. Opnum: 26 |
 | [RpcSetPrinterData](#Section_3.1.4.2.8) | RpcSetPrinterData sets the configuration data for a printer or print server. Opnum: 27 |
 | [RpcWaitForPrinterChange](#Section_3.1.4.10.1) | RpcWaitForPrinterChange retrieves information about the most recent change notification associated with a printer or print server. Opnum: 28 |
 | [RpcClosePrinter](#Section_3.1.4.2.9) | RpcClosePrinter closes a handle to a printer object, server object, job object, or port object. Opnum: 29 |
@@ -8045,7 +8045,7 @@ Methods in RPC Opnum Order
 | [RpcOpenPrinterEx](#Section_3.1.4.2.14) | RpcOpenPrinterEx retrieves handle for a printer, port, port monitor, print job, or print server. This method is similar to RpcOpenPrinter but takes a pointer to an [SPLCLIENT_CONTAINER (section 2.2.1.2.14)](#Section_2.2.1.2.14) structure, which contains information about the connecting client. Opnum: 69 |
 | [RpcAddPrinterEx](#Section_3.1.4.2.15) | RpcAddPrinterEx installs a printer on the print server. This method is similar to RpcAddPrinter but takes a pointer to an SPLCLIENT_CONTAINER structure, which contains information about the connecting client. Opnum: 70 |
 | [RpcSetPort](#Section_3.1.4.6.4) | RpcSetPort sets the status associated with a printer port. Opnum: 71 |
-| [RpcEnumPrinterData](#Section_3.1.4.2.20) | RpcEnumPrinterData enumerates configuration data for a specified printer. Opnum: 72 |
+| [RpcEnumPrinterData](#Section_3.1.4.2.16) | RpcEnumPrinterData enumerates configuration data for a specified printer. Opnum: 72 |
 | [RpcDeletePrinterData](#Section_3.1.4.2.17) | RpcDeletePrinterData deletes specified configuration data for a printer. Opnum: 73 |
 | Opnum74NotUsedOnWire | Reserved for local use. Opnum: 74 |
 | Opnum75NotUsedOnWire | Reserved for local use. Opnum: 75 |
@@ -8241,7 +8241,7 @@ Except for diagnostic purposes, the server state as visible to the client throug
 <a id="Section_3.1.4.1.8"></a>
 ##### 3.1.4.1.8 CONTAINER Parameters
 
-This section specifies common [CONTAINER](#Section_3.1.4.1.8.7) parameters and related validation and processing requirements.
+This section specifies common [CONTAINER](#Section_2.2.1.2) parameters and related validation and processing requirements.
 
 <a id="Section_3.1.4.1.8.1"></a>
 ###### 3.1.4.1.8.1 DEVMODE_CONTAINER Parameters
@@ -8325,7 +8325,7 @@ The individual method sections include the following parameter validation steps 
 - If *pSepFile* is not NULL, verify that it points to a string that names an existing file on the server. If that verification fails, return ERROR_INVALID_SEPARATOR_FILE.
 - Verify that *pPortName* is not NULL and points to a string that identifies an existing [**port**](#gt_port) on the server. If that verification fails, return ERROR_UNKNOWN_PORT.
 - Verify that *pDriverName* is not NULL and points to a string that identifies an existing [**printer driver**](#gt_printer-driver) on the server. If that verification fails, return ERROR_UNKNOWN_PRINTER_DRIVER.
-- Verify that, if the *Attributes* parameter has the flag PRINTER_ATTRIBUTE_SHARED (section [2.2.3.12](#Section_2.2.3.12)) set, the printer driver identified by *pDriverName* does not have the attribute that printers using that printer driver cannot be shared (section [3.1.1](#Section_3.2.1)). If that verification fails, return ERROR_PRINTER_NOT_SHAREABLE.
+- Verify that, if the *Attributes* parameter has the flag PRINTER_ATTRIBUTE_SHARED (section [2.2.3.12](#Section_2.2.3.12)) set, the printer driver identified by *pDriverName* does not have the attribute that printers using that printer driver cannot be shared (section [3.1.1](#Section_3.1.1)). If that verification fails, return ERROR_PRINTER_NOT_SHAREABLE.
 - Verify that the **Priority** member of PRINTER_INFO_2 is within the range specified in section 2.2.1.10.3. If that verification fails, return ERROR_INVALID_PRIORITY.
 - Verify that all members of the PRINTER_CONTAINER structure comply with the constraints defined in section 2.2.1.10, with the exception of **pServerName**, which SHOULD be ignored.
 Unless noted otherwise, if any of the preceding validation steps fail, return ERROR_INVALID_PARAMETER.
@@ -8446,11 +8446,11 @@ This section specifies methods for discovering and obtaining access to supported
 | --- | --- |
 | [RpcEnumPrinters](#Section_3.1.4.2.1) | RpcEnumPrinters enumerates available printers, [**print servers**](#gt_print-server), [**domains**](#gt_domain), or [**print providers**](#gt_print-provider). Opnum 0 |
 | [RpcOpenPrinter](#Section_3.1.4.2.2) | RpcOpenPrinter retrieves a handle for a printer, [**port**](#gt_port), port monitor, print job, or print server. Opnum 1 |
-| [RpcAddPrinter](#Section_3.1.4.4.8) | RpcAddPrinter adds a printer to the list of supported printers for a specified server. Opnum 5 |
+| [RpcAddPrinter](#Section_3.1.4.2.3) | RpcAddPrinter adds a printer to the list of supported printers for a specified server. Opnum 5 |
 | [RpcDeletePrinter](#Section_3.1.4.2.4) | RpcDeletePrinter deletes the specified printer object. Opnum 6 |
 | [RpcSetPrinter](#Section_3.1.4.2.5) | RpcSetPrinter sets the data for a specified printer or sets the state of the specified printer by pausing or resuming printing or clearing all [**print jobs**](#gt_print-job). Opnum 7 |
 | [RpcGetPrinter](#Section_3.1.4.2.6) | RpcGetPrinter retrieves information about a specified printer. Opnum 8 |
-| [RpcGetPrinterData](#Section_3.1.4.2.19) | RpcGetPrinterData retrieves printer configuration data for a printer or print server. Opnum 26 |
+| [RpcGetPrinterData](#Section_3.1.4.2.7) | RpcGetPrinterData retrieves printer configuration data for a printer or print server. Opnum 26 |
 | [RpcSetPrinterData](#Section_3.1.4.2.8) | RpcSetPrinterData sets the configuration data for a printer or print server. Opnum 27 |
 | [RpcClosePrinter](#Section_3.1.4.2.9) | RpcClosePrinter closes a handle to a printer object, server object, job object, or port object. Opnum 29 |
 | [RpcCreatePrinterIC](#Section_3.1.4.2.10) | RpcCreatePrinterIC called by the [**Graphics Device Interface (GDI)**](#gt_graphics-device-interface-gdi) to create an [**information context**](#gt_information-context) for a printer. Opnum 40 |
@@ -8459,7 +8459,7 @@ This section specifies methods for discovering and obtaining access to supported
 | [RpcResetPrinter](#Section_3.1.4.2.13) | RpcResetPrinter resets the [**data type**](#gt_data-type) and [**device**](#gt_device) mode values to use for printing documents submitted by the [RpcStartDocPrinter](#Section_3.1.4.9.1) method (section 3.1.4.9.1). Opnum 52 |
 | [RpcOpenPrinterEx](#Section_3.1.4.2.14) | RpcOpenPrinterEx retrieves a handle for a printer, port, port monitor, print job, or print server. Opnum 69 |
 | [RpcAddPrinterEx](#Section_3.1.4.2.15) | RpcAddPrinterEx installs a printer on the print server. Opnum 70 |
-| [RpcEnumPrinterData](#Section_3.1.4.2.20) | RpcEnumPrinterData enumerates configuration data for a specified printer. Opnum 72 |
+| [RpcEnumPrinterData](#Section_3.1.4.2.16) | RpcEnumPrinterData enumerates configuration data for a specified printer. Opnum 72 |
 | [RpcDeletePrinterData](#Section_3.1.4.2.17) | RpcDeletePrinterData deletes specified configuration data for a printer. Opnum 73 |
 | [RpcSetPrinterDataEx](#Section_3.1.4.2.18) | RpcSetPrinterDataEx sets the configuration data for a printer or print server. This method extends RpcSetPrinterData (section 3.1.4.2.8), but by additionally allowing the caller to specify the [**registry**](#gt_registry) key under which to store the data. Opnum 77 |
 | [RpcGetPrinterDataEx](#Section_3.1.4.2.19) | RpcGetPrinterDataEx retrieves configuration data for the specified printer or print server. This method extends RpcGetPrinterData (section 3.1.4.2.7) and can retrieve values sorted under a specified key by RpcSetPrinterDataEx (section 3.1.4.2.18). Opnum 78 |
@@ -8509,9 +8509,9 @@ BYTE* pPrinterEnum,
 | Value | Description |
 | --- | --- |
 | 0x00000000 | [_PRINTER_INFO_STRESS (section 2.2.2.9.1)](#Section_2.2.2.9.1) |
-| 0x00000001 | [_PRINTER_INFO_1 (section 2.2.2.9.2)](#Section_2.2.1.10) |
+| 0x00000001 | [_PRINTER_INFO_1 (section 2.2.2.9.2)](#Section_2.2.2.9.2) |
 | 0x00000002 | [_PRINTER_INFO_2 (section 2.2.2.9.3)](#Section_2.2.2.9.3) |
-| 0x00000004 | [_PRINTER_INFO_4 (section 2.2.2.9.5)](#Section_2.2.1.10) |
+| 0x00000004 | [_PRINTER_INFO_4 (section 2.2.2.9.5)](#Section_2.2.2.9.5) |
 | 0x00000005 | [_PRINTER_INFO_5 (section 2.2.2.9.6)](#Section_2.2.2.9.6) |
 
 **pPrinterEnum:** A pointer to a [BUFFER](#Section_3.1.4.1.9) defined in INFO Structures Query Parameters (section 3.1.4.1.9).
@@ -8536,7 +8536,7 @@ Upon receiving this message, the server SHOULD validate parameters as follows:
 - Additional validation MAY<265> be performed.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
-- If the value of the *Level* parameter is 0x00000001 and the **PRINTER_ENUM_NETWORK** bit is set in the *Flags* parameter, the server SHOULD enumerate all printers from the "List of Known Printers" (section [3.1.1](#Section_3.2.1)).<266>
+- If the value of the *Level* parameter is 0x00000001 and the **PRINTER_ENUM_NETWORK** bit is set in the *Flags* parameter, the server SHOULD enumerate all printers from the "List of Known Printers" (section [3.1.1](#Section_3.1.1)).<266>
 If the server does not maintain a list of known printers, or if the list has not contained at least one entry for an implementation-specific period of time, the server SHOULD return ERROR_CAN_NOT_COMPLETE.<267>
 
 - For any other validated values for the *Level* and *Flags* parameters, the server SHOULD enumerate all printers in the "List of Printers" (section 3.1.1) on the print server or print provider that comply with the value of the *Flags* parameter. This information SHOULD be restricted for security reasons.<268>
@@ -8569,7 +8569,7 @@ DWORD RpcOpenPrinter(
 
 **pDevModeContainer:** A pointer to a [DEVMODE_CONTAINER](#Section_2.2.1.2.1) structure. This parameter MUST adhere to the specification in [DEVMODE_CONTAINER Parameters (section 3.1.4.1.8.1)](#Section_3.1.4.1.8.1).
 
-**AccessRequired:** The [**access level**](#gt_access-level) that the client requires for interacting with the object to which a handle is being opened. The value of this parameter is one of those specified in [Access Values (section 2.2.3.1)](#Section_2.2.4.1) or 0. For rules governing access values, see section [2.2.4.1](#Section_2.2.4.1).
+**AccessRequired:** The [**access level**](#gt_access-level) that the client requires for interacting with the object to which a handle is being opened. The value of this parameter is one of those specified in [Access Values (section 2.2.3.1)](#Section_2.2.3.1) or 0. For rules governing access values, see section [2.2.4.1](#Section_2.2.4.1).
 
 If AccessRequired is set to 0 (if no specific access level is requested), the server MUST assume a GENERIC_READ (section 2.2.3.1) access level.
 
@@ -8588,7 +8588,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 - The server in the "List of Print Server Names"
 - The port monitor in the "List of Port Monitors"
 - The port in the "List of Ports".
-These lists are specified in section [3.1.1](#Section_3.2.1).
+These lists are specified in section [3.1.1](#Section_3.1.1).
 
 - Create an implementation-specific representation of the printer, server, job, port monitor, or port ("the object") that MUST include:
 - A [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) handle, which is a snapshot of the printer, server, job, port monitor, or port data that is specific to this instance of the invocation.
@@ -8618,11 +8618,11 @@ DWORD RpcAddPrinter(
 
 **pName:** A parameter specified in [Print Server Name Parameters (section 3.1.4.1.4)](#Section_3.1.4.1.4).
 
-**pPrinterContainer:** A parameter specified in [PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6)](#Section_2.2.1.2.9). The **Level** member of the PRINTER_CONTAINER MUST be 0x00000001 or 0x00000002.
+**pPrinterContainer:** A parameter specified in [PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6)](#Section_3.1.4.1.8.6). The **Level** member of the PRINTER_CONTAINER MUST be 0x00000001 or 0x00000002.
 
 **pDevModeContainer:** A parameter specified in [DEVMODE_CONTAINER Parameters (section 3.1.4.1.8.1)](#Section_3.1.4.1.8.1).
 
-**pSecurityContainer:** A parameter specified in [SECURITY_CONTAINER Parameters (section 3.1.4.1.8.7)](#Section_2.2.1.2.13).
+**pSecurityContainer:** A parameter specified in [SECURITY_CONTAINER Parameters (section 3.1.4.1.8.7)](#Section_3.1.4.1.8.7).
 
 **pHandle:** A pointer to a variable that receives the printer [**RPC context handle**](#gt_rpc-context-handle) to the printer object added. RPC context handles are specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -8644,7 +8644,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 
 - Perform PRINTER_CONTAINER parameter processing steps as specified in PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6).
 - If the value of the **Level** member of the PRINTER_CONTAINER is 0x00000001, and if the server does not maintain a "List of Known Printers", the server MUST return ERROR_PRINTER_ALREADY_EXISTS [MS-ERREF]. Otherwise, the server MUST continue to process the message and compose a response to the client as follows:
-- If the [PRINTER_ATTRIBUTE_SHARED](#Section_2.2.3.12) bit is set in the **Flags** member of the [PRINTER_INFO_1](#Section_2.2.1.10) structure, add the printer<270> to the "List of Known Printers" as specified in section [3.1.1](#Section_3.2.1).
+- If the [PRINTER_ATTRIBUTE_SHARED](#Section_2.2.3.12) bit is set in the **Flags** member of the [PRINTER_INFO_1](#Section_2.2.1.10.2) structure, add the printer<270> to the "List of Known Printers" as specified in section [3.1.1](#Section_3.1.1).
 - If PRINTER_ATTRIBUTE_SHARED bit is not set in the **Flags** member of the PRINTER_INFO_1 structure, remove the printer from the "List of Known Printers".
 - Store NULL in the output parameter pointed to by *pHandle*.
 - Increment the number of network printers added to this server.
@@ -8658,7 +8658,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 - An RPC handle
 - A snapshot of the printer data specific to this instance of the printer invocation.
 - The data from the [DEVMODE](#Section_2.2.2.1) that is contained in the [DEVMODE_CONTAINER](#Section_2.2.1.2.1) pointed to by the *pDevModeContainer* parameter if it is not NULL.
-- Store the RPC handle for the session in the output parameter pointed to by *pHandle*. The handle returned from this method MUST be granted [PRINTER_ALL_ACCESS](#Section_2.2.4.1) permission.
+- Store the RPC handle for the session in the output parameter pointed to by *pHandle*. The handle returned from this method MUST be granted [PRINTER_ALL_ACCESS](#Section_945c4df5496949c5b1ce59c1b3f35024) permission.
 - Increment the printer's reference count to prevent deletion.
 - If there are any clients that are registered for notifications on the server object change, a notification MUST be sent to those clients.
 - Return the status of the operation.
@@ -8673,13 +8673,13 @@ DWORD RpcDeletePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that MUST have been opened by using the [RpcAddPrinter](#Section_3.1.4.4.8), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
+**hPrinter:** A handle to a printer object that MUST have been opened by using the [RpcAddPrinter](#Section_3.1.4.2.3), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps as specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps as specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - If any jobs are pending on the printer, use the implementation-specific policy to determine if a delete operation can be made pending or if an error is returned.<271>
 Additional validation MAY be performed. <272>
 
@@ -8709,13 +8709,13 @@ DWORD RpcSetPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
-**pPrinterContainer:** A parameter specified in [PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6)](#Section_2.2.1.2.9). If the *Command* is 0, the **Level** member of the [PRINTER_CONTAINER](#Section_2.2.1.2.9) MUST be 0x00000000 or a number from 0x00000002 to 0x00000007. If the *Command* parameter is 1, 2, or 3, the **Level** member of the PRINTER_CONTAINER MUST be 0x00000000.
+**pPrinterContainer:** A parameter specified in [PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6)](#Section_3.1.4.1.8.6). If the *Command* is 0, the **Level** member of the [PRINTER_CONTAINER](#Section_2.2.1.2.9) MUST be 0x00000000 or a number from 0x00000002 to 0x00000007. If the *Command* parameter is 1, 2, or 3, the **Level** member of the PRINTER_CONTAINER MUST be 0x00000000.
 
 **pDevModeContainer:** A parameter specified in [DEVMODE_CONTAINER Parameters (section 3.1.4.1.8.1)](#Section_3.1.4.1.8.1).
 
-**pSecurityContainer:** A parameter specified in [SECURITY_CONTAINER Parameters (section 3.1.4.1.8.7)](#Section_2.2.1.2.13).
+**pSecurityContainer:** A parameter specified in [SECURITY_CONTAINER Parameters (section 3.1.4.1.8.7)](#Section_3.1.4.1.8.7).
 
 **Command:** A value that specifies an action to perform. If this value is non-zero, it is one of the printer control values in the following table, and the **Level** member of the PRINTER_CONTAINER (section 2.2.1.2.9) structure that is pointed to by the *pPrinterContainer* parameter MUST be 0x00000000.
 
@@ -8725,13 +8725,13 @@ DWORD RpcSetPrinter(
 | PRINTER_CONTROL_RESUME 0x00000002 | Resumes a paused printer object. |
 | PRINTER_CONTROL_PURGE 0x00000003 | Deletes all print jobs queued for the printer object. |
 
-If this value is zero, the **PrinterInfo** member of the PRINTER_CONTAINER structure that is pointed to by the *pPrinterContainer* parameter MUST contain a pointer to a [PRINTER_INFO (section 2.2.2.9)](#Section_2.2.1.10) structure that this method can use. See section [2.2.1.10.1](#Section_2.2.1.10.1) for details.
+If this value is zero, the **PrinterInfo** member of the PRINTER_CONTAINER structure that is pointed to by the *pPrinterContainer* parameter MUST contain a pointer to a [PRINTER_INFO (section 2.2.2.9)](#Section_2.2.2.9) structure that this method can use. See section [2.2.1.10.1](#Section_2.2.1.10.1) for details.
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Perform the validation steps specified in PRINTER_CONTAINER Parameters.
 - Verify that the information provided in the PRINTER_CONTAINER that is pointed to by the *pPrinterContainer* parameter is consistent with the value in *Command*, according to the following table:
 | Command | Level in PRINTER_CONTAINER |
@@ -8784,21 +8784,21 @@ BYTE* pPrinter,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14). This value MAY be a handle to a [**print server**](#gt_print-server) object.<277>
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14). This value MAY be a handle to a [**print server**](#gt_print-server) object.<277>
 
 **Level:** The level of printer information structure, as follows.
 
 | Value | Description |
 | --- | --- |
 | 0x00000000 | Corresponds to [_PRINTER_INFO_STRESS (section 2.2.2.9.1)](#Section_2.2.2.9.1). |
-| 0x00000001 | Corresponds to [_PRINTER_INFO_1 (section 2.2.2.9.2)](#Section_2.2.1.10). |
+| 0x00000001 | Corresponds to [_PRINTER_INFO_1 (section 2.2.2.9.2)](#Section_2.2.2.9.2). |
 | 0x00000002 | Corresponds to [_PRINTER_INFO_2 (section 2.2.2.9.3)](#Section_2.2.2.9.3). |
-| 0x00000003 | Corresponds to [_PRINTER_INFO_3 (section 2.2.2.9.4)](#Section_2.2.1.10.4). |
-| 0x00000004 | Corresponds to [_PRINTER_INFO_4 (section 2.2.2.9.5)](#Section_2.2.1.10). |
+| 0x00000003 | Corresponds to [_PRINTER_INFO_3 (section 2.2.2.9.4)](#Section_2.2.2.9.4). |
+| 0x00000004 | Corresponds to [_PRINTER_INFO_4 (section 2.2.2.9.5)](#Section_2.2.2.9.5). |
 | 0x00000005 | Corresponds to [_PRINTER_INFO_5 (section 2.2.2.9.6)](#Section_2.2.2.9.6). |
 | 0x00000006 | Corresponds to [PRINTER_INFO_6 (section 2.2.2.9.7)](#Section_2.2.2.9.7). |
-| 0x00000007 | Corresponds to [PRINTER_INFO_7 (section 2.2.2.9.8)](#Section_2.2.1.10.8). |
-| 0x00000008 | Corresponds to [_PRINTER_INFO_8 (section 2.2.2.9.9)](#Section_2.2.1.10). |
+| 0x00000007 | Corresponds to [PRINTER_INFO_7 (section 2.2.2.9.8)](#Section_2.2.2.9.8). |
+| 0x00000008 | Corresponds to [_PRINTER_INFO_8 (section 2.2.2.9.9)](#Section_2.2.2.9.9). |
 | 0x00000009 | Not valid remotely; the server MUST respond by returning ERROR_NOT_SUPPORTED. |
 
 **pPrinter:** A pointer to a [BUFFER](#Section_3.1.4.1.9) (INFO Structures Query Parameters (section 3.1.4.1.9)).
@@ -8813,7 +8813,7 @@ BYTE* pPrinter,
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Perform the validation steps specified in INFO Structures Query Parameters.
 - Additional validation MAY<278> be performed.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -8841,11 +8841,11 @@ DWORD RpcGetPrinterData(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pValueName:** A pointer to a string that identifies the configuration data to get. For rules governing value names, see section [2.2.4.18](#Section_2.2.4.18).
 
-For print servers, the value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).
+For print servers, the value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).
 
 For printer objects, the value name MAY be one of the predefined strings listed in [Printer Data Values (section 2.2.3.11)](#Section_2.2.3.11). Also, the value name "ChangeID"<279> is reserved by the protocol and has a special meaning. It identifies a read-only value that specifies that a change identifier is returned in the buffer pointed to by *pData*. This identifier is a **DWORD** that is set by the print server to a new, unique value each time printer information changes. The client SHOULD use the change identifier to decide if it has stale information about a printer object, in which case it SHOULD call this method or [RpcGetPrinter (section 3.1.4.2.6)](#Section_3.1.4.2.6) to update its view of the printer object. Only the fact that the *pData* buffer value changes is significant; the change identifier value itself is arbitrary. If the value name is not one of these predefined strings, it is an arbitrary string defined by the printer driver associated with the printer object or by client applications.
 
@@ -8863,7 +8863,7 @@ This parameter can be NULL if *nSize* equals zero
 
 Upon receiving this message, the server validates parameters as follows:
 
-- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - The server MUST perform the validation steps that are specified in Dynamically Typed Query Parameters.
 - For server objects, the server MUST verify that the *pValueName* parameter points to a string that is one of the predefined value names listed in Server Handle Key Values (section 2.2.3.10). If this verification fails, return ERROR_INVALID_PARAMETER.
 - For printer objects, the server MUST verify that, if the *pValueName* parameter points to a string that is one of the predefined value names listed in Printer Data Values (section 2.2.3.11), the print server supports retrieving the value for this printer according to the rules in section 2.2.3.11. If this verification fails, return ERROR_NOT_SUPPORTED.
@@ -8892,11 +8892,11 @@ DWORD RpcSetPrinterData(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pValueName:** A pointer to a string that identifies the configuration data to set. For rules governing value names, see section [2.2.4.18](#Section_2.2.4.18).
 
-For print servers, the value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).
+For print servers, the value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).
 
 For printer objects, the value name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. The value name "ChangeID"<281> is reserved by the protocol and MUST NOT be used in a call to RpcSetPrinterData.
 
@@ -8910,7 +8910,7 @@ For printer objects, the value name is an arbitrary string defined by the [**pri
 
 Upon receiving this message, the server validates parameters as follows:
 
-- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4),.
+- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11),.
 - For server objects, the server MUST verify that the *pValueName* parameter points to a string that is one of the predefined value names listed in Server Handle Key Values with the "read-write" column selected. If this verification fails, return ERROR_INVALID_PARAMETER.
 - For printer objects, the server MAY verify that the *pValueName* parameter points to a string that complies with the rules specified in section 2.2.4.18.
 - Additional validation SHOULD<282> be performed.
@@ -8929,13 +8929,13 @@ DWORD RpcClosePrinter(
 
 );
 
-**phPrinter:** A pointer to a handle to a printer object, server object, job object, or port object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**phPrinter:** A pointer to a handle to a printer object, server object, job object, or port object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object, server object, job object, or port object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object, server object, job object, or port object can be used without further access checks.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client.
 
 Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -8966,7 +8966,7 @@ DWORD RpcCreatePrinterIC(
 
 );
 
-**hPrinter:** A handle to a printer object (section [2.2.1.1.4](#Section_2.2.1.1.4)) that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object (section [2.2.1.1.4](#Section_2.2.1.1.4)) that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pHandle:** A pointer to a printer information context handle (section [2.2.1.1.2](#Section_2.2.1.1.2)).
 
@@ -8976,7 +8976,7 @@ DWORD RpcCreatePrinterIC(
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Perform the validation steps specified in DEVMODE_CONTAINER Parameters.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -9083,7 +9083,7 @@ DWORD RpcResetPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pDatatype:** A parameter specified in [Datatype Name Parameters (section 3.1.4.1.1)](#Section_3.1.4.1.1).
 
@@ -9093,7 +9093,7 @@ DWORD RpcResetPrinter(
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Perform the validation steps specified in Datatype Name Parameters.
 - Perform the validation steps specified in DEVMODE_CONTAINER Parameters.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -9130,7 +9130,7 @@ DWORD RpcOpenPrinterEx(
 
 **pDevModeContainer:** A pointer to a [DEVMODE_CONTAINER](#Section_2.2.1.2.1) structure. This parameter MUST adhere to the specification in [DEVMODE_CONTAINER Parameters (section 3.1.4.1.8.1)](#Section_3.1.4.1.8.1).
 
-**AccessRequired:** The [**access level**](#gt_access-level) that the client requires for interacting with the object to which a handle is being opened. The value of this parameter is one of those specified in [Access Values (section 2.2.3.1)](#Section_2.2.4.1). For rules governing access values, see section [2.2.4.1](#Section_2.2.4.1).
+**AccessRequired:** The [**access level**](#gt_access-level) that the client requires for interacting with the object to which a handle is being opened. The value of this parameter is one of those specified in [Access Values (section 2.2.3.1)](#Section_2.2.3.1). For rules governing access values, see section [2.2.4.1](#Section_2.2.4.1).
 
 If no specific access level is requested, the server MUST assume a generic read access level.
 
@@ -9154,7 +9154,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 - The server in the "List of Print Server Names"; or
 - The port monitor in the "List of Port Monitors"; or
 - The port in the "List of Ports".
-These lists are specified in section [3.1.1](#Section_3.2.1).
+These lists are specified in section [3.1.1](#Section_3.1.1).
 
 - Create an implementation-specific representation of the printer, server, job, port monitor, or port ("the object") that MUST include:
 - An **RPC handle**, which is a snapshot of the printer, server, job, port monitor, or port data that is specific to this instance of the invocation.
@@ -9187,11 +9187,11 @@ DWORD RpcAddPrinterEx(
 
 **pName:** A parameter specified in [Print Server Name Parameters (section 3.1.4.1.4)](#Section_3.1.4.1.4).
 
-**pPrinterContainer:** A parameter specified in [PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6)](#Section_2.2.1.2.9). The **Level** member of the [PRINTER_CONTAINER](#Section_2.2.1.2.9) MUST be 0x00000001 or 0x00000002.
+**pPrinterContainer:** A parameter specified in [PRINTER_CONTAINER Parameters (section 3.1.4.1.8.6)](#Section_3.1.4.1.8.6). The **Level** member of the [PRINTER_CONTAINER](#Section_2.2.1.2.9) MUST be 0x00000001 or 0x00000002.
 
 **pDevModeContainer:** A parameter specified in [DEVMODE_CONTAINER Parameters (section 3.1.4.1.8.1)](#Section_3.1.4.1.8.1).
 
-**pSecurityContainer:** A parameter specified in [SECURITY_CONTAINER Parameters (section 3.1.4.1.8.7)](#Section_2.2.1.2.13).
+**pSecurityContainer:** A parameter specified in [SECURITY_CONTAINER Parameters (section 3.1.4.1.8.7)](#Section_3.1.4.1.8.7).
 
 **pClientInfo:** A parameter specified in [SPLCLIENT_CONTAINER Parameters (section 3.1.4.1.8.8)](#Section_3.1.4.1.8.8).
 
@@ -9216,7 +9216,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 
 - Perform PRINTER_CONTAINER parameter processing steps as specified in PRINTER_CONTAINER Parameters, section 3.1.4.1.8.6.
 - If the value of the **Level** member of the PRINTER_CONTAINER that is pointed to by the *pPrinterContainer* parameter is 0x00000001, and if the server does not maintain a "List of Known Printers", the server MUST return ERROR_PRINTER_ALREADY_EXISTS [MS-ERREF]. Otherwise, the server MUST continue to process the message and compose a response to the client as follows:
-- If the [PRINTER_ATTRIBUTE_SHARED](#Section_2.2.3.12) bit is set in the **Flags** member of the PRINTER_INFO structure pointed to by the **pPrinterInfo1** member of the PRINTER_CONTAINER that is pointed to by the *pPrinterContainer* parameter, add the printer to the "List of Known Printers" as specified in [Abstract Data Model (section 3.1.1)](#Section_3.2.1).<290>
+- If the [PRINTER_ATTRIBUTE_SHARED](#Section_2.2.3.12) bit is set in the **Flags** member of the PRINTER_INFO structure pointed to by the **pPrinterInfo1** member of the PRINTER_CONTAINER that is pointed to by the *pPrinterContainer* parameter, add the printer to the "List of Known Printers" as specified in [Abstract Data Model (section 3.1.1)](#Section_3.1.1).<290>
 - If PRINTER_ATTRIBUTE_SHARED is not set in the **Flags** member of the PRINTER_INFO structure pointed to by the **pPrinterInfo1** member of the PRINTER_CONTAINER that is pointed to by the *pPrinterContainer* parameter, remove the printer from the "List of Known Printers".
 - Store NULL in the output parameter that is pointed to by *pHandle*.
 - Return ERROR_PRINTER_ALREADY_EXISTS [MS-ERREF].
@@ -9231,7 +9231,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 - A snapshot of the printer data specific to this instance of the printer invocation.
 - The data from [DEVMODE](#Section_2.2.2.1) that is contained in the [DEVMODE_CONTAINER](#Section_2.2.1.2.1) pointed to by the *pDevModeContainer* parameter if it is not NULL.
 - The data from the [SPLCLIENT_CONTAINER](#Section_2.2.1.2.14) that is pointed to by the *pClientInfo* parameter if it is not NULL.
-- Store the **RPC handle** for the session in the output parameter *pHandle*. The handle returned from this method MUST be granted [PRINTER_ALL_ACCESS](#Section_2.2.4.1) permission.
+- Store the **RPC handle** for the session in the output parameter *pHandle*. The handle returned from this method MUST be granted [PRINTER_ALL_ACCESS](#Section_945c4df5496949c5b1ce59c1b3f35024) permission.
 - Increment the printer's reference count to prevent deletion.
 - If any clients are registered for notifications of the server object change, a notification MUST be broadcast to them.
 - Return the status of the operation.
@@ -9264,7 +9264,7 @@ wchar_t* pValueName,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **dwIndex:** The index of the configuration data value to retrieve. The value MUST be greater than or equal to zero and less than the total number of configuration data values for the printer. The client SHOULD use **RpcEnumPrinterKeys** to determine the total number of configuration data values for the printer.
 
@@ -9288,7 +9288,7 @@ This parameter can be NULL if *cbValueName* equals zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Verify that the value of the *cbValueName* parameter is not smaller than the number of bytes required to hold the string that specifies the name of the value. If that verification fails, the server MUST update the variable that is pointed to by the *pcbValueName* parameter with the number of bytes required and return ERROR_MORE_DATA [MS-ERREF].
 - Verify that the value of the *dwIndex* parameter is greater than or equal to zero, and smaller than the total number of values for the printer. If *dwIndex* is greater than or equal to the number of values available for the printer, the server MUST return ERROR_NO_MORE_ITEMS, as specified in [MS-ERREF]
 - Perform the validation steps specified in Dynamically Typed Query Parameters.
@@ -9310,7 +9310,7 @@ DWORD RpcDeletePrinterData(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pValueName:** A pointer to a string that identifies the configuration data to delete. For rules governing value names, see section [2.2.4.18](#Section_2.2.4.18).
 
@@ -9320,7 +9320,7 @@ The value name is an arbitrary string defined by the [**printer driver**](#gt_pr
 
 Upon receiving this message, the server validates parameters as follows:
 
-- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - The server MAY verify that the value name is not "ChangeID" and that it complies with the rules specified in section 2.2.4.18.
 - Additional validation SHOULD<296> be performed.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -9348,7 +9348,7 @@ DWORD RpcSetPrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pKeyName:** A pointer to a string that specifies the key under which the value is to be set. A key name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. For rules governing key names, see section [2.2.4.7](#Section_2.2.4.7).
 
@@ -9356,7 +9356,7 @@ If *hPrinter* is a handle to a server object, the key name can be NULL, and the 
 
 **pValueName:** A pointer to a string that identifies the data to set. For rules governing value names, see section [2.2.4.18](#Section_2.2.4.18).
 
-For print servers, a value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).
+For print servers, a value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).
 
 For printer objects, a value name is an arbitrary string defined by the printer driver associated with the printer object. The value name "ChangeID" is reserved by the protocol and MUST NOT be used in a call to RpcSetPrinterDataEx.<299>
 
@@ -9370,7 +9370,7 @@ For printer objects, a value name is an arbitrary string defined by the printer 
 
 Upon receiving this message, the server validates parameters as follows:
 
-- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - If the *hPrinter* parameter is a handle to a printer object, the server MUST verify that the *pKeyName* parameter points to a string that complies with the rules for key names specified in section 2.2.4.7.
 - For server objects, the server MUST verify that the *pValueName* parameter points to a string that is one of the predefined value names listed in Server Handle Key Values (section 2.2.3.10) with the "read-write" column selected. If this verification fails, return ERROR_INVALID_PARAMETER.
 - For printer objects, the server MAY verify that the *pValueName* parameter points to a string that complies with the rules specified in section 2.2.4.18.
@@ -9383,7 +9383,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 <a id="Section_3.1.4.2.19"></a>
 ##### 3.1.4.2.19 RpcGetPrinterDataEx (Opnum 78)
 
-RpcGetPrinterDataEx retrieves configuration data for the specified printer or [**print server**](#gt_print-server).<301> This method is similar to [RpcGetPrinterData (section 3.1.4.2.7)](#Section_3.1.4.2.19), but it also allows the caller to specify the [**registry**](#gt_registry) key from which to retrieve the data.
+RpcGetPrinterDataEx retrieves configuration data for the specified printer or [**print server**](#gt_print-server).<301> This method is similar to [RpcGetPrinterData (section 3.1.4.2.7)](#Section_3.1.4.2.7), but it also allows the caller to specify the [**registry**](#gt_registry) key from which to retrieve the data.
 
 DWORD RpcGetPrinterDataEx(
 
@@ -9403,7 +9403,7 @@ DWORD RpcGetPrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pKeyName:** A pointer to a string that specifies the key under which the value is to be queried. A key name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. For rules governing key names, see section [2.2.4.7](#Section_2.2.4.7).
 
@@ -9411,7 +9411,7 @@ If *hPrinter* is a handle to a server object, the key name can be NULL.
 
 **pValueName:** A pointer to a string that identifies the data to get. For rules governing value names, see section [2.2.4.18](#Section_2.2.4.18).
 
-For print servers, the value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10.5).
+For print servers, the value name is one of the predefined strings listed in [Server Handle Key Values (section 2.2.3.10)](#Section_2.2.3.10).
 
 For printer objects, the value name MAY be one of the predefined strings listed in [Printer Data Values (section 2.2.3.11)](#Section_2.2.3.11). If the value name is not one of the predefined strings, it is an arbitrary string defined by the printer driver associated with the printer object. See RpcGetPrinterData for further details on the interpretation of this value.
 
@@ -9427,7 +9427,7 @@ For printer objects, the value name MAY be one of the predefined strings listed 
 
 Upon receiving this message, the server validates parameters as follows:
 
-- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - If *hPrinter* is a handle to a printer object, the server MUST verify that the *pKeyName* parameter points to a string that complies with the rules for key names specified in section 2.2.4.7.
 - For server objects, the server MUST verify that the *pValueName* parameter points to a string that is one of the predefined value names listed in Server Handle Key Values (section 2.2.3.10). If this verification fails, return ERROR_INVALID_PARAMETER.
 - For printer objects, the server MUST verify that, if the *pValueName* parameter points to a string that is one of the predefined value names listed in Printer Data Values (section 2.2.3.11), the print server supports retrieving the value for this printer according to the rules in section 2.2.3.11. If this verification fails, return ERROR_NOT_SUPPORTED.
@@ -9444,7 +9444,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 <a id="Section_3.1.4.2.20"></a>
 ##### 3.1.4.2.20 RpcEnumPrinterDataEx (Opnum 79)
 
-RpcEnumPrinterDataEx enumerates all value names and data for a specified printer and key.<304> This method is similar to [RpcEnumPrinterData](#Section_3.1.4.2.20) (section 3.1.4.2.16) but also allows the caller to specify the [**registry**](#gt_registry) key from which to enumerate the data, and allows retrieving several values in a single call.
+RpcEnumPrinterDataEx enumerates all value names and data for a specified printer and key.<304> This method is similar to [RpcEnumPrinterData](#Section_3.1.4.2.16) (section 3.1.4.2.16) but also allows the caller to specify the [**registry**](#gt_registry) key from which to enumerate the data, and allows retrieving several values in a single call.
 
 DWORD RpcEnumPrinterDataEx(
 
@@ -9462,7 +9462,7 @@ DWORD RpcEnumPrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pKeyName:** A pointer to a string that specifies the key containing the values to enumerate. A key name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. For rules governing key names, see section [2.2.4.7](#Section_2.2.4.7).
 
@@ -9480,7 +9480,7 @@ This parameter can be NULL if *cbEnumValues* equals zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Verify that the *pKeyName* parameter points to a string that complies with the rules for key names specified in section 2.2.4.7. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Perform the validation steps specified in PRINTER_ENUM_VALUES Structures Query Parameters.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -9509,7 +9509,7 @@ wchar_t* pSubkey,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pKeyName:** A pointer to a string that specifies the key containing the subkeys to enumerate. A key name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. For rules governing key names, see section [2.2.4.7](#Section_2.2.4.7).
 
@@ -9525,7 +9525,7 @@ This parameter can be NULL if *cbSubkey* equals zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Perform the validation steps specified in String Query Parameters, substituting ERROR_MORE_DATA [MS-ERREF] for ERROR_INSUFFICIENT_BUFFER.
 - Verify that the key specified in the string that is pointed to by the *pKeyName* parameter exists on the server. If it does not exist, the server MUST return ERROR_FILE_NOT_FOUND [MS-ERREF].
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -9548,7 +9548,7 @@ DWORD RpcDeletePrinterDataEx(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pKeyName:** A pointer to a string that specifies the key containing the value to delete. A key name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. For rules governing key names, see section [2.2.4.7](#Section_2.2.4.7).
 
@@ -9560,7 +9560,7 @@ The value name is an arbitrary string defined by the printer driver associated w
 
 Upon receiving this message, the server validates parameters as follows:
 
-- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4),.
+- The server MUST perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11),.
 - The server MUST verify that the *pKeyName* parameter points to a string that complies with the rules for key names specified in section 2.2.4.7. If this verification fails, return ERROR_INVALID_PARAMETER.
 - The server MAY verify that the *pValueName* parameter points to a string that complies with the rules specified in section 2.2.4.18.
 - Additional validation SHOULD<308> be performed.
@@ -9581,7 +9581,7 @@ DWORD RpcDeletePrinterKey(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14) methods.
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14) methods.
 
 **pKeyName:** A pointer to a string that specifies the key to delete. A key name is an arbitrary string defined by the [**printer driver**](#gt_printer-driver) associated with the printer object. For rules governing key names, see section [2.2.4.7](#Section_2.2.4.7).
 
@@ -9589,7 +9589,7 @@ DWORD RpcDeletePrinterKey(
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the *pKeyName* parameter points to a string that complies with the rules for key names specified in section 2.2.4.7. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Additional validation MAY<310> be performed.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -9737,7 +9737,7 @@ DWORD RpcSendRecvBidiData(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pAction:** A pointer to a string that specifies an action to take. The following actions SHOULD be supported.<318>, <319> Port monitors MAY support additional, implementation-specific action strings.
 
@@ -9757,7 +9757,7 @@ DWORD RpcSendRecvBidiData(
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
 - Verify that the port monitor supports this method, and if that verification fails, return ERROR_NOT_SUPPORTED.
 - Verify that the string that is pointed to by the *pAction* parameter specifies a valid command and is supported by the port monitor, and if that verification fails, return any of the following error codes to indicate the request cannot be supported: ERROR_NOT_SUPPORTED, ERROR_INVALID_PARAMETER.
 - Verify that the *pReqData* is a pointer, and if that verification fails, return ERROR_INVALID_PARAMETER.
@@ -9799,7 +9799,7 @@ DWORD RpcSetJob(
 
 );
 
-**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of the print job. This value MUST NOT be zero.
 
@@ -9826,7 +9826,7 @@ If the value of the *Command* parameter is zero, this pointer MUST be specified.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps for [PRINTER_HANDLE parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps for [PRINTER_HANDLE parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the value of the *JobId* parameter corresponds to a print job in the list of jobs. If this method is called with a job object handle, *JobId* MUST match the job identifier specified in the call to RpcOpenPrinter or RpcOpenPrinterEx.
 - If the *pJobContainer* parameter is specified, verify that it points to a valid JOB_CONTAINER as follows:
 - The **Level** member MUST be a value between 0x00000001 and 0x00000004, inclusive;
@@ -9878,7 +9878,7 @@ BYTE* pJob,
 
 );
 
-**hPrinter:** A handle to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of the print job. This value MUST NOT be zero.
 
@@ -9898,7 +9898,7 @@ This parameter can be NULL if *cbBuf* equals zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
 - Verify that the value of the *JobId* parameter corresponds to a job in the list of jobs. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Perform the validation steps that are specified in section 3.1.4.1.9.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -9932,7 +9932,7 @@ BYTE* pJob,
 
 );
 
-**hPrinter:** A handle to a printer object or port object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or port object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **FirstJob:** The zero-based position within the [**print queue**](#gt_print-queue) of the first print job to enumerate.
 
@@ -9958,7 +9958,7 @@ This parameter can be NULL if *cbBuf* equals zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
 - Perform the validation steps specified in INFO Structures Query Parameters (section 3.1.4.1.9).
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -9987,7 +9987,7 @@ BYTE* pAddJob,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened using [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened using [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Level:** A value that MUST be 0x00000001, 0x00000002 or 0x00000003.
 
@@ -10022,7 +10022,7 @@ DWORD RpcScheduleJob(
 
 );
 
-**hPrinter:** A handle to a printer object that was opened using [RpcAddPrinter](#Section_3.1.4.4.8), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened using [RpcAddPrinter](#Section_3.1.4.2.3), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of the print job.
 
@@ -10030,7 +10030,7 @@ DWORD RpcScheduleJob(
 
 Upon receiving this message, the server SHOULD validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 If parameter validation fails, the server SHOULD fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST return ERROR_SPL_NO_ADDJOB.
 
 This method MUST be implemented to ensure compatibility with protocol clients.
@@ -10129,11 +10129,11 @@ BYTE* pDrivers,
 | Value | Description |
 | --- | --- |
 | 0x00000001 | Corresponds to [_DRIVER_INFO_1 (section 2.2.2.4.1)](#Section_2.2.2.4.1). |
-| 0x00000002 | Corresponds to [_DRIVER_INFO_2 (section 2.2.2.4.2)](#Section_2.2.1.5). |
-| 0x00000003 | Corresponds to [_DRIVER_INFO_3 (section 2.2.2.4.3)](#Section_2.2.1.5). |
-| 0x00000004 | Corresponds to [_DRIVER_INFO_4 (section 2.2.2.4.4)](#Section_2.2.1.5). |
+| 0x00000002 | Corresponds to [_DRIVER_INFO_2 (section 2.2.2.4.2)](#Section_2.2.2.4.2). |
+| 0x00000003 | Corresponds to [_DRIVER_INFO_3 (section 2.2.2.4.3)](#Section_2.2.2.4.3). |
+| 0x00000004 | Corresponds to [_DRIVER_INFO_4 (section 2.2.2.4.4)](#Section_2.2.2.4.4). |
 | 0x00000005 | Corresponds to [_DRIVER_INFO_5 (section 2.2.2.4.5)](#Section_2.2.2.4.5). |
-| 0x00000006 | Corresponds to [_DRIVER_INFO_6 (section 2.2.2.4.6)](#Section_2.2.1.5). |
+| 0x00000006 | Corresponds to [_DRIVER_INFO_6 (section 2.2.2.4.6)](#Section_2.2.2.4.6). |
 | 0x00000008 | Corresponds to [_DRIVER_INFO_8 (section 2.2.2.4.8)](#Section_2.2.2.4.8). |
 
 **pDrivers:** A pointer to the [BUFFER](#Section_3.1.4.1.9), as specified in INFO Structures Query Parameters (section 3.1.4.1.9).
@@ -10186,7 +10186,7 @@ BYTE* pDriver,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pEnvironment:** A parameter specified in [Environment Name Parameters (section 3.1.4.1.3)](#Section_3.1.4.1.3).
 
@@ -10195,10 +10195,10 @@ BYTE* pDriver,
 | Value | Description |
 | --- | --- |
 | 0x00000001 | Corresponds to [_DRIVER_INFO_1 (section 2.2.2.4.1)](#Section_2.2.2.4.1). |
-| 0x00000002 | Corresponds to [_DRIVER_INFO_2 (section 2.2.2.4.2)](#Section_2.2.1.5). |
-| 0x00000003 | Corresponds to [_DRIVER_INFO_3 (section 2.2.2.4.3)](#Section_2.2.1.5). |
-| 0x00000004 | Corresponds to [_DRIVER_INFO_4 (section 2.2.2.4.4)](#Section_2.2.1.5). |
-| 0x00000006 | Corresponds to [_DRIVER_INFO_6 (section 2.2.2.4.6)](#Section_2.2.1.5). |
+| 0x00000002 | Corresponds to [_DRIVER_INFO_2 (section 2.2.2.4.2)](#Section_2.2.2.4.2). |
+| 0x00000003 | Corresponds to [_DRIVER_INFO_3 (section 2.2.2.4.3)](#Section_2.2.2.4.3). |
+| 0x00000004 | Corresponds to [_DRIVER_INFO_4 (section 2.2.2.4.4)](#Section_2.2.2.4.4). |
+| 0x00000006 | Corresponds to [_DRIVER_INFO_6 (section 2.2.2.4.6)](#Section_2.2.2.4.6). |
 | 0x00000008 | Corresponds to [_DRIVER_INFO_8 (section 2.2.2.4.8)](#Section_2.2.2.4.8). |
 
 **pDriver:** An optional pointer to *BUFFER*, as specified in [INFO Structures Query Parameters (section 3.1.4.1.9)](#Section_3.1.4.1.9).
@@ -10215,7 +10215,7 @@ This parameter SHOULD be NULL if *cbBuf* is zero.
 
 Upon receiving this message, the server MUST validate parameters by performing the validation steps specified in:
 
-- [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4)). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11)). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Environment Name Parameters (section 3.1.4.1.3).
 - INFO Structures Query Parameters (section 3.1.4.1.9).
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -10342,7 +10342,7 @@ BYTE* pDriver,
 
 );
 
-**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pEnvironment:** A parameter specified in [Environment Name Parameters (section 3.1.4.1.3)](#Section_3.1.4.1.3).
 
@@ -10351,11 +10351,11 @@ BYTE* pDriver,
 | Value | Description |
 | --- | --- |
 | 0x00000001 | Corresponds to [_DRIVER_INFO_1 (section 2.2.2.4.1)](#Section_2.2.2.4.1). |
-| 0x00000002 | Corresponds to [_DRIVER_INFO_2 (section 2.2.2.4.2)](#Section_2.2.1.5). |
-| 0x00000003 | Corresponds to [_DRIVER_INFO_3 (section 2.2.2.4.3)](#Section_2.2.1.5). |
-| 0x00000004 | Corresponds to [_DRIVER_INFO_4 (section 2.2.2.4.4)](#Section_2.2.1.5). |
+| 0x00000002 | Corresponds to [_DRIVER_INFO_2 (section 2.2.2.4.2)](#Section_2.2.2.4.2). |
+| 0x00000003 | Corresponds to [_DRIVER_INFO_3 (section 2.2.2.4.3)](#Section_2.2.2.4.3). |
+| 0x00000004 | Corresponds to [_DRIVER_INFO_4 (section 2.2.2.4.4)](#Section_2.2.2.4.4). |
 | 0x00000005 | Corresponds to [_DRIVER_INFO_5 (section 2.2.2.4.5)](#Section_2.2.2.4.5). |
-| 0x00000006 | Corresponds to [_DRIVER_INFO_6 (section 2.2.2.4.6)](#Section_2.2.1.5). |
+| 0x00000006 | Corresponds to [_DRIVER_INFO_6 (section 2.2.2.4.6)](#Section_2.2.2.4.6). |
 | 0x00000008 | Corresponds to [_DRIVER_INFO_8 (section 2.2.2.4.8)](#Section_2.2.2.4.8). |
 | 0x00000065 | Corresponds to [_DRIVER_INFO_101 (section 2.2.2.4.9)](#Section_2.2.2.4.9). |
 
@@ -10381,7 +10381,7 @@ This parameter can be NULL if *cbBuf* is zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Perform the validation steps specified in Environment Name Parameters.
 - Perform the validation steps specified in INFO Structures Query Parameters.
 In addition, the print server SHOULD validate that, if the *Level* parameter is 0x00000065, the printer driver associated with the printer object has a driver version strictly less than 0x00000004. If that validation fails, this method MUST return ERROR_CAN_NOT_COMPLETE.<338>
@@ -10431,7 +10431,7 @@ These flags can be combined to specify multiple options.
 
 **dwVersionNum:** The version of the printer driver to delete.
 
-The value of this parameter is implementation-specific and identifies the driver version and the operating system for which the driver was written. The driver version for each printer driver object in a **List of Printers** (section [3.1.1](#Section_3.2.1)). It has the same format and meaning as the **cVersion** members in [RPC_DRIVER_INFO structures (section 2.2.1.5)](#Section_2.2.1.5).<340>
+The value of this parameter is implementation-specific and identifies the driver version and the operating system for which the driver was written. The driver version for each printer driver object in a **List of Printers** (section [3.1.1](#Section_3.1.1)). It has the same format and meaning as the **cVersion** members in [RPC_DRIVER_INFO structures (section 2.2.1.5)](#Section_2.2.1.5).<340>
 
 This parameter MUST be ignored if the **DPD_DELETE_SPECIFIC_VERSION** flag in the *dwDeleteFlag* parameter is not set.
 
@@ -10499,7 +10499,7 @@ Zero or more of the following flags can be specified.
 | APD_COPY_FROM_DIRECTORY 0x00000010 | Add the printer driver by using the fully qualified file names that are specified in the _DRIVER_INFO_6 structure. If this flag is specified, one of the other copy flags in this bit field MUST be specified. |
 | APD_DONT_COPY_FILES_TO_CLUSTER 0x00001000 | When adding a printer driver to a print server cluster, do not copy the driver files to the shared cluster disk. |
 | APD_COPY_TO_ALL_SPOOLERS 0x00002000 | Add the printer driver to cluster spooler servers. |
-| APD_INSTALL_WARNED_DRIVER 0x00008000 | Add the printer driver, even if it is in the server's **List of Warned Printer Drivers** (section [3.1.1](#Section_3.2.1)).<343> |
+| APD_INSTALL_WARNED_DRIVER 0x00008000 | Add the printer driver, even if it is in the server's **List of Warned Printer Drivers** (section [3.1.1](#Section_3.1.1)).<343> |
 | APD_RETURN_BLOCKING_STATUS_CODE 0x00010000 | Specifies the implementation-specific error code to return if the printer driver is blocked from installation by server policy.<344> |
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
@@ -10671,7 +10671,7 @@ DWORD RpcAddForm(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that MUST have been opened using the [RpcAddPrinter](#Section_3.1.4.4.8), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
+**hPrinter:** A handle to a printer object or server object that MUST have been opened using the [RpcAddPrinter](#Section_3.1.4.2.3), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
 
 **pFormInfoContainer:** This parameter MUST adhere to the parameter specification in [FORM_CONTAINER Parameters (section 3.1.4.1.8.4)](#Section_3.1.4.1.8.4).
 
@@ -10679,7 +10679,7 @@ DWORD RpcAddForm(
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Perform the validation steps that are specified in FORM_CONTAINER Parameters (section 3.1.4.1.8.4).
 - Verify that the form does not already exist, and if that verification fails, return ERROR_FILE_EXISTS [MS-ERREF].
 - Additional validation MAY<353> be performed.
@@ -10701,7 +10701,7 @@ DWORD RpcDeleteForm(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that MUST have been opened by using the [RpcAddPrinter](#Section_3.1.4.4.8), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
+**hPrinter:** A handle to a printer object or server object that MUST have been opened by using the [RpcAddPrinter](#Section_3.1.4.2.3), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
 
 **pFormName:** A pointer to a string that MUST identify the form to delete. For rules governing form names, see section [2.2.4.5](#Section_2.2.4.5).
 
@@ -10709,7 +10709,7 @@ DWORD RpcDeleteForm(
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the *pFormName* parameter points to a string that identifies an existing form. If that verification fails, return ERROR_INVALID_FORM_NAME [MS-ERREF].
 - Additional validation MAY<354> be performed.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -10741,7 +10741,7 @@ BYTE* pForm,
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pFormName:** A pointer to a string that specifies the form name for which data is required. For rules governing form names, see section [2.2.4.5](#Section_2.2.4.5).
 
@@ -10766,7 +10766,7 @@ This parameter can be NULL if *cbBuf* equals zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
 - Verify that the *pFormName* parameter points to a string that identifies an existing form. If that verification fails, return ERROR_INVALID_FORM_NAME [MS-ERREF].
 - Perform the validation steps specified in INFO Structures Query Parameters.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -10788,7 +10788,7 @@ DWORD RpcSetForm(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pFormName:** A pointer to a string that specifies the form name on which the form information is set. For rules governing form names, see section [2.2.4.5](#Section_2.2.4.5).
 
@@ -10830,7 +10830,7 @@ BYTE* pForm,
 
 );
 
-**hPrinter:** A handle to a printer object or server object that MUST have been opened by using the [RpcAddPrinter](#Section_3.1.4.4.8), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
+**hPrinter:** A handle to a printer object or server object that MUST have been opened by using the [RpcAddPrinter](#Section_3.1.4.2.3), [RpcAddPrinterEx](#Section_3.1.4.2.15), [RpcOpenPrinter](#Section_3.1.4.2.2), or [RpcOpenPrinterEx](#Section_3.1.4.2.14) methods.
 
 **Level:** This value refers to the level of form information structure, as follows.
 
@@ -10903,8 +10903,8 @@ BYTE* pPort,
 
 | Value | Description |
 | --- | --- |
-| 0x00000001 | Corresponds to [_PORT_INFO_1](#Section_2.2.2.8) (section 2.2.2.8.1). |
-| 0x00000002 | Corresponds to [_PORT_INFO_2](#Section_2.2.2.8) (section 2.2.2.8.2). |
+| 0x00000001 | Corresponds to [_PORT_INFO_1](#Section_2.2.2.8.1) (section 2.2.2.8.1). |
+| 0x00000002 | Corresponds to [_PORT_INFO_2](#Section_2.2.2.8.2) (section 2.2.2.8.2). |
 
 **pPort:** A pointer to the BUFFER, as specified in INFO Structures Query Parameters, section [3.1.4.1.9](#Section_3.1.4.1.9).
 
@@ -10949,7 +10949,7 @@ DWORD RpcDeletePort(
 
 **hWnd:** The value of this parameter SHOULD be set to zero when sent and MUST be ignored on receipt.
 
-**pPortName:** A pointer to a string that specifies the name of the port that is deleted. For rules governing port names, see section [2.2.4.10](#Section_2.2.2.4.10).
+**pPortName:** A pointer to a string that specifies the name of the port that is deleted. For rules governing port names, see section [2.2.4.10](#Section_2.2.4.10).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
@@ -10986,7 +10986,7 @@ DWORD RpcAddPortEx(
 
 **pName:** A parameter specified in [Print Server Name Parameters (section 3.1.4.1.4)](#Section_3.1.4.1.4).
 
-**pPortContainer:** A parameter specified in [PORT_CONTAINER Parameters (section 3.1.4.1.8.5)](#Section_2.2.1.2.7). The value of the **Level** member in the [PORT_CONTAINER](#Section_2.2.1.2.7) that is referenced by this parameter MUST be 0x00000001 or 0xFFFFFFFF.
+**pPortContainer:** A parameter specified in [PORT_CONTAINER Parameters (section 3.1.4.1.8.5)](#Section_3.1.4.1.8.5). The value of the **Level** member in the [PORT_CONTAINER](#Section_2.2.1.2.7) that is referenced by this parameter MUST be 0x00000001 or 0xFFFFFFFF.
 
 **pPortVarContainer:** A pointer to a [PORT_VAR_CONTAINER (section 2.2.1.2.8)](#Section_2.2.1.2.8) information structure that contains information about the port.
 
@@ -11027,9 +11027,9 @@ DWORD RpcSetPort(
 
 **pName:** A parameter that adheres to the specification in [Print Server Name Parameters (section 3.1.4.1.4)](#Section_3.1.4.1.4).
 
-**pPortName:** A pointer to a string that specifies the name of the printer port. For rules governing port names, see section [2.2.4.10](#Section_2.2.2.4.10).
+**pPortName:** A pointer to a string that specifies the name of the printer port. For rules governing port names, see section [2.2.4.10](#Section_2.2.4.10).
 
-**pPortContainer:** A parameter that adheres to the specification in [PORT_CONTAINER Parameters (section 3.1.4.1.8.5)](#Section_2.2.1.2.7). The level as specified in the **Level** member of the [PORT_CONTAINER](#Section_2.2.1.2.7) structure MUST be 0x00000003.
+**pPortContainer:** A parameter that adheres to the specification in [PORT_CONTAINER Parameters (section 3.1.4.1.8.5)](#Section_3.1.4.1.8.5). The level as specified in the **Level** member of the [PORT_CONTAINER](#Section_2.2.1.2.7) structure MUST be 0x00000003.
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
@@ -11153,8 +11153,8 @@ BYTE* pMonitor,
 
 | Value | Description |
 | --- | --- |
-| 0x00000001 | Corresponds to [_MONITOR_INFO_1](#Section_2.2.2.7) (section 2.2.2.7.1). |
-| 0x00000002 | Corresponds to [_MONITOR_INFO_2](#Section_2.2.2.7) (section 2.2.2.7.2). |
+| 0x00000001 | Corresponds to [_MONITOR_INFO_1](#Section_2.2.2.7.1) (section 2.2.2.7.1). |
+| 0x00000002 | Corresponds to [_MONITOR_INFO_2](#Section_2.2.2.7.2) (section 2.2.2.7.2). |
 
 **pMonitor:** This parameter SHOULD be ignored if *cbBuf* equals zero; otherwise, it is a pointer to the [BUFFER](#Section_3.1.4.1.9), as specified in INFO Structures Query Parameters, section 3.1.4.1.9.
 
@@ -11193,7 +11193,7 @@ DWORD RpcAddMonitor(
 
 **Name:** A parameter that adheres to the specification in [Print Server Name Parameters (section 3.1.4.1.4)](#Section_3.1.4.1.4).
 
-**pMonitorContainer:** A parameter that adheres to the specification in [MONITOR_CONTAINER Parameters (section 3.1.4.1.8.9)](#Section_3.1.4.1.8). The **Level** member of the [MONITOR_CONTAINER](#Section_2.2.1.2.6) MUST be 0x00000002.
+**pMonitorContainer:** A parameter that adheres to the specification in [MONITOR_CONTAINER Parameters (section 3.1.4.1.8.9)](#Section_3.1.4.1.8.9). The **Level** member of the [MONITOR_CONTAINER](#Section_2.2.1.2.6) MUST be 0x00000002.
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
@@ -11381,7 +11381,7 @@ BYTE* pPrintProcessorDirectory,
 
 **Level:** The value of this parameter MUST be 0x00000001.
 
-**pPrintProcessorDirectory:** This parameter MAY be NULL if *cbBuf* equals zero; otherwise, it is a pointer to [BUFFER](#Section_3.1.4.1.7) as specified in String Query Parameters, section 3.1.4.1.7.
+**pPrintProcessorDirectory:** This parameter MAY be NULL if *cbBuf* equals zero; otherwise, it is a pointer to [BUFFER](#Section_6bae59aff92341b9b39513872aaf2ce0) as specified in String Query Parameters, section 3.1.4.1.7.
 
 **cbBuf:** This parameter MUST adhere to the parameter specification in String Query Parameters, section 3.1.4.1.7.
 
@@ -11520,9 +11520,9 @@ DWORD RpcStartDocPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14). The printer handle MUST NOT be in use for printing another document at the time of this call.
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14). The printer handle MUST NOT be in use for printing another document at the time of this call.
 
-**pDocInfoContainer:** A parameter specified in [DOC_INFO_CONTAINER Parameters (section 3.1.4.1.8.2)](#Section_2.2.1.2.2).
+**pDocInfoContainer:** A parameter specified in [DOC_INFO_CONTAINER Parameters (section 3.1.4.1.8.2)](#Section_3.1.4.1.8.2).
 
 **pJobId:** A pointer to a variable that receives a nonzero [**print job**](#gt_print-job) identifier. The job MUST be created with an identifier that is unique for this printer.
 
@@ -11530,7 +11530,7 @@ DWORD RpcStartDocPrinter(
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
 - Perform the validation steps that are specified in DOC_INFO_CONTAINER Parameters.
 - The server MUST verify that RpcStartDocPrinter does not get called twice for a given printer or port object without an intervening call to [RpcEndDocPrinter (section 3.1.4.9.7)](#Section_3.1.4.9.7). If that verification fails, return ERROR_INVALID_HANDLE.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -11556,13 +11556,13 @@ DWORD RpcStartPagePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
 - Verify that a job has been associated with *hPrinter* using [RpcStartDocPrinter](#Section_3.1.4.9.1), and if that verification fails, return ERROR_SPL_NO_STARTDOC [MS-ERREF].
 - Verify that printing of the job has not been canceled, and if that verification fails, return ERROR_PRINT_CANCELLED [MS-ERREF].
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -11593,7 +11593,7 @@ DWORD RpcWritePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pBuf:** A pointer to a buffer that contains the data to be written. This parameter can be NULL if the value of the *cbBuf* parameter is zero.
 
@@ -11627,13 +11627,13 @@ DWORD RpcEndPagePrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
 - Verify that printing of the job has not been canceled, and if that verification fails, return ERROR_PRINT_CANCELLED [MS-ERREF].
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -11652,13 +11652,13 @@ DWORD RpcAbortPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or port object can be used without further access checks.
 - Verify that a job has been associated with *hPrinter* by using [RpcStartDocPrinter](#Section_3.1.4.9.1), and if that verification fails, return ERROR_SPL_NO_STARTDOC [MS-ERREF].
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -11699,7 +11699,7 @@ This parameter can be NULL if the value of the *cbBuf* parameter is zero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that printing of the job has not been canceled and if that verification fails, return ERROR_PRINT_CANCELLED [MS-ERREF].
 - If the value of the *cbBuf* parameter is not zero, verify that the *pBuf* parameter is not NULL.
 - Additional validation MAY<376> be performed.
@@ -11721,7 +11721,7 @@ DWORD RpcEndDocPrinter(
 
 );
 
-**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or [**port**](#gt_port) object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
@@ -11768,7 +11768,7 @@ DWORD RpcFlushPrinter(
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the port object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the port object can be used without further access checks.
 - Verify that a previous [RpcWritePrinter (section 3.1.4.9.3)](#Section_3.1.4.9.3) on the same port object has failed due to job cancellation, and if that verification fails, return ERROR_INVALID_HANDLE as specified in [MS-ERREF].
 - If the value of the *cbBuf* parameter is not zero, verify that the *pBuf* parameter is not NULL.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -11805,7 +11805,7 @@ DWORD RpcWaitForPrinterChange(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Flags:** The change notifications to wait for. The value of this parameter is a bitwise OR of one or more printer change values, defined in sections [2.2.3.6.1](#Section_2.2.3.6.1) and [2.2.3.6.2](#Section_2.2.3.6.2). For rules governing printer change values, see section [2.2.4.13](#Section_2.2.4.13).
 
@@ -11837,7 +11837,7 @@ DWORD RpcFindClosePrinterChangeNotification(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values:** This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
@@ -11875,7 +11875,7 @@ BYTE* pBuffer
 
 );
 
-**hPrinter:** A handle to a printer or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **fdwFlags:** Flags that specify the conditions that are required for a change notification object to enter a signaled state. A change notification MUST occur when one or more of the specified conditions are met.
 
@@ -11895,7 +11895,7 @@ This parameter specifies a bitwise OR of zero or more [Printer Change Values (s
 
 Upon receiving this message, the [**print server**](#gt_print-server) MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
 - Verify that a notification object is not already associated with the current handle.
 If parameter validation fails, the server MUST fail the operation immediately returning a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -11927,7 +11927,7 @@ DWORD RpcRemoteFindFirstPrinterChangeNotificationEx(
 
 );
 
-**hPrinter:** A handle to a printer or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **fdwFlags:** Flags that specify the conditions that are required for a change notification object to enter a signaled state. A change notification MUST occur when one or more of the specified conditions are met.
 
@@ -11947,7 +11947,7 @@ The value of this parameter can be NULL if the value of *fdwFlags* is nonzero.
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
+- Perform the validation steps specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
 - Verify that a notification object is not already associated with the current handle.
 - Verify that either *pOptions* is not NULL or that the value *fdwFlags* is valid and not zero.
 If parameter validation fails, the server MUST fail the operation immediately returning a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -11976,7 +11976,7 @@ DWORD RpcRouterRefreshPrinterChangeNotification(
 
 );
 
-**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A handle to a printer object or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 This handle MUST have been previously used successfully by the client in a call to [RpcRemoteFindFirstPrinterChangeNotification (section 3.1.4.10.3)](#Section_3.1.4.10.3) or [RpcRemoteFindFirstPrinterChangeNotificationEx (section 3.1.4.10.4)](#Section_3.1.4.10.4), and it MUST NOT have been closed by calling [RpcFindClosePrinterChangeNotification (section 3.1.4.10.2)](#Section_3.1.4.10.2).
 
@@ -11990,7 +11990,7 @@ This handle MUST have been previously used successfully by the client in a call 
 
 Upon receiving this message, the server MUST validate parameters as follows:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer or server object can be used without further access checks.
 - Verify that the client is in the list of notification clients for the printer object or server object.
 - Verify that a notification back channel to the client has been established and is still open.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -12043,7 +12043,7 @@ Additional actions MAY be supported in a given implementation.<386> The followin
 
 This section describes the implementation of **XcvData** methods in [**LOCALMON**](#gt_localmon). This [**monitor module**](#gt_monitor-module) is used to control parallel and serial [**ports**](#gt_port) that could have a printer connected to them.<387>
 
-For parallel and serial port naming, see section [2.2.4.10](#Section_2.2.2.4.10). For more information about the values listed in the left column in the following table, see section [3.1.4.6.5](#Section_3.1.4.6.5).
+For parallel and serial port naming, see section [2.2.4.10](#Section_2.2.4.10). For more information about the values listed in the left column in the following table, see section [3.1.4.6.5](#Section_3.1.4.6.5).
 
 | Value | Description |
 | --- | --- |
@@ -12059,7 +12059,7 @@ For parallel and serial port naming, see section [2.2.4.10](#Section_2.2.2.4.10)
 
 This section describes the implementation of **XcvData** methods in [**LPRMON**](#gt_lprmon). This [**monitor module**](#gt_monitor-module) is used to control printers over a network on machines that have implemented Unix [**print server**](#gt_print-server) functions and expose them through the **Line Printer (LPR) Protocol**, as defined in [[RFC1179]](https://go.microsoft.com/fwlink/?LinkId=90269).<388>
 
-For network [**port**](#gt_port) naming, see section [2.2.4.10](#Section_2.2.2.4.10). For more information about the values listed in the Value column in the following table, see section [3.1.4.6.5](#Section_3.1.4.6.5).
+For network [**port**](#gt_port) naming, see section [2.2.4.10](#Section_2.2.4.10). For more information about the values listed in the Value column in the following table, see section [3.1.4.6.5](#Section_3.1.4.6.5).
 
 | Value | Description |
 | --- | --- |
@@ -12075,9 +12075,9 @@ Information about the implementation of the [**TCPMON**](#gt_tcpmon) [**monitor 
 
 The TCPMON monitor module is used to control printers directly connected to a **TCP/IP** network.<389>
 
-For network [**port**](#gt_port) naming, see section [2.2.4.10](#Section_2.2.2.4.10).
+For network [**port**](#gt_port) naming, see section [2.2.4.10](#Section_2.2.4.10).
 
-For structures used with the TCPMON monitor module, see section [2.2.2.14](#Section_2.2.2.14.5)
+For structures used with the TCPMON monitor module, see section [2.2.2.14](#Section_2.2.2.14)
 
 The following table defines command values used by the TCPMON monitor module.<390>
 
@@ -12105,9 +12105,9 @@ The following table defines command values used by the TCPMON monitor module.<39
 
 This section describes the implementation of the [XcvData](#Section_3.1.4.6.5) method in [**WSDMON**](#gt_wsdmon). This [**monitor module**](#gt_monitor-module) is used to control [**Web Services for Devices (WSD)**](#gt_web-services-for-devices-wsd) printers.<391> WSDMON does not have a corresponding user interface module.
 
-For network [**port**](#gt_port) naming, see section [2.2.4.10](#Section_2.2.2.4.10).
+For network [**port**](#gt_port) naming, see section [2.2.4.10](#Section_2.2.4.10).
 
-For structures used with the WSDMON monitor module, see section [2.2.2.15](#Section_2.2.2.15.1).
+For structures used with the WSDMON monitor module, see section [2.2.2.15](#Section_2.2.2.15).
 
 The following table defines command values used by the WSDMON monitor module.<392>
 
@@ -12125,7 +12125,7 @@ The following table defines command values used by the WSDMON monitor module.<39
 | "AddPrinterPort" | Searches for a WSD Printer Service at the supplied URI of the endpoint, and if one is found, creates a new WSD port connected to the discovered device. This command is only supported on cluster servers. The required value for the *pInputData* parameter is a pointer to a string specifying the URI of the WSD endpoint. The required value for the *pOutputData* parameter is a pointer to a buffer that receives a string identifying the new port name if a WSD Printer Service is found; otherwise, ERROR_PRINTER_NOT_FOUND is returned [MS-ERREF]. |
 | "BackupPort" | Initiates a query for the WSD port backup data. The required value for the *pOutputData* parameter is a pointer to a buffer that receives a [WSD_BACKUP_PORT_DATA](#Section_2.2.2.15.2) structure. |
 | "AssocDeviceMulticast" | Searches for a WSD Printer Service at the device endpoint that is specified by the **GlobalID**, which in turn is specified by the string pointed to by *pInputData*, and installs the printer if found. This command is only supported on stand-alone servers. The required value for the *pInputData* parameter is a pointer to a string specifying the **GlobalID** of the WSD endpoint. If a WSD Printer Service is found, a **PnPX** installation of the printer is initiated; otherwise, ERROR_PRINTER_NOT_FOUND is returned [MS-ERREF]. |
-| "RestorePort" | Searches for a WSD printer service that is identified by the **ServiceID** at the device endpoint specified by the **GlobalID** and optionally **RemoteURL**, depending on the value of the **DiscoveryMethod**.<393> If the value of **DiscoveryMethod** is *kMulticast*, only the **ServiceID** and **GlobalID** values MUST be used for the search. If the value of **DiscoveryMethod** is *kDirected*, the **ServiceID**, **GlobalID**, and **RemoteURL** values MUST be used for the search. The required value for the *pInputData* parameter is a [WSD_BACKUP_PORT_DATA_EX](#Section_2.2.2.15.2) structure (section 2.2.2.15.3) that contains the values relevant to the printer port to restore. If a matching WSD printer service is found, a **PnPX** installation of the printer is initiated; otherwise a new port with the specified information is created with a status of PORT_STATUS_OFFLINE (section [2.2.1.9.3](#Section_2.2.1.9.3)). The required value for the *pOutputData* parameter is a pointer to a buffer that receives a string identifying the new port by name. |
+| "RestorePort" | Searches for a WSD printer service that is identified by the **ServiceID** at the device endpoint specified by the **GlobalID** and optionally **RemoteURL**, depending on the value of the **DiscoveryMethod**.<393> If the value of **DiscoveryMethod** is *kMulticast*, only the **ServiceID** and **GlobalID** values MUST be used for the search. If the value of **DiscoveryMethod** is *kDirected*, the **ServiceID**, **GlobalID**, and **RemoteURL** values MUST be used for the search. The required value for the *pInputData* parameter is a [WSD_BACKUP_PORT_DATA_EX](#Section_2.2.2.15.3) structure (section 2.2.2.15.3) that contains the values relevant to the printer port to restore. If a matching WSD printer service is found, a **PnPX** installation of the printer is initiated; otherwise a new port with the specified information is created with a status of PORT_STATUS_OFFLINE (section [2.2.1.9.3](#Section_2.2.1.9.3)). The required value for the *pOutputData* parameter is a pointer to a buffer that receives a string identifying the new port by name. |
 | "AddMulticastPort" | Searches for a WSD Printer Service at the device endpoint that is specified by the **GlobalID**, which in turn is specified by the string pointed to by *pInputData*, and if one is found, creates a new WSD port connected to the discovered device.<394><395> |
 
 <a id="Section_3.1.4.11.5"></a>
@@ -12135,7 +12135,7 @@ This section describes the implementation of the XcvData method in [**APMON**](#
 
 For network port naming, see section [2.2.2.4.10](#Section_2.2.2.4.10).
 
-For structures used with the APMON monitor module, see section [2.2.2.16](#Section_2.2.2.16.2). APMON also supports all of the XcvData commands listed in this section for ports connected to WSD printers (see section [3.1.4.11.4](#Section_3.1.4.11.4)).
+For structures used with the APMON monitor module, see section [2.2.2.16](#Section_2.2.2.16). APMON also supports all of the XcvData commands listed in this section for ports connected to WSD printers (see section [3.1.4.11.4](#Section_3.1.4.11.4)).
 
 The following table defines command values used by the APMON monitor module.
 
@@ -12153,7 +12153,7 @@ The following table defines command values used by the APMON monitor module.
 <a id="Section_3.1.4.12"></a>
 #### 3.1.4.12 Job Named Property Management Methods
 
-This section specifies methods for creating, updating, deleting, and enumerating **Job Named Properties** (section [3.1.1](#Section_3.2.1)) for a specified [**print job**](#gt_print-job).
+This section specifies methods for creating, updating, deleting, and enumerating **Job Named Properties** (section [3.1.1](#Section_3.1.1)) for a specified [**print job**](#gt_print-job).
 
 | Method | Description |
 | --- | --- |
@@ -12165,7 +12165,7 @@ This section specifies methods for creating, updating, deleting, and enumerating
 <a id="Section_3.1.4.12.1"></a>
 ##### 3.1.4.12.1 RpcGetJobNamedPropertyValue (Opnum 110)
 
-**RpcGetJobNamedPropertyValue** retrieves the current value of the specified **Job Named Property** (section [3.1.1](#Section_3.2.1)).<397>
+**RpcGetJobNamedPropertyValue** retrieves the current value of the specified **Job Named Property** (section [3.1.1](#Section_3.1.1)).<397>
 
 DWORD RpcGetJobNamedPropertyValue(
 
@@ -12179,7 +12179,7 @@ DWORD RpcGetJobNamedPropertyValue(
 
 );
 
-**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of a [**print job**](#gt_print-job). This value MUST NOT be zero.
 
@@ -12191,7 +12191,7 @@ DWORD RpcGetJobNamedPropertyValue(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the value of the *JobId* parameter corresponds to a job in the list of jobs. If the object specified by the *hPrinter* parameter is a server object, search for a print job in each printer in the list of printers on the [**print server**](#gt_print-server). If the object specified by the *hPrinter* parameter is a printer object, search for a print job only in the list of print jobs for the specified printer. If the object specified by the *hPrinter* parameter is a job object, compare the identifier of this print job with the specified *JobId*. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the value of the *pValue* parameter is a pointer to a string. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the value of the *pszName* parameter corresponds to an existing **Job Named Property** for the print job specified with the *JobId* parameter. If this verification fails, return ERROR_NOT_FOUND.
@@ -12204,7 +12204,7 @@ On successful completion of this call, the client SHOULD free the buffer specifi
 <a id="Section_3.1.4.12.2"></a>
 ##### 3.1.4.12.2 RpcSetJobNamedProperty (Opnum 111)
 
-**RpcSetJobNamedProperty** creates a new **Job Named Property** (section [3.1.1](#Section_3.2.1)), or changes the value of an existing **Job Named Property** for the specified [**print job**](#gt_print-job).<398>
+**RpcSetJobNamedProperty** creates a new **Job Named Property** (section [3.1.1](#Section_3.1.1)), or changes the value of an existing **Job Named Property** for the specified [**print job**](#gt_print-job).<398>
 
 DWORD RpcSetJobNamedProperty(
 
@@ -12216,7 +12216,7 @@ DWORD RpcSetJobNamedProperty(
 
 );
 
-**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of a print job. This value MUST NOT be zero.
 
@@ -12226,7 +12226,7 @@ DWORD RpcSetJobNamedProperty(
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the value of the *JobId* parameter corresponds to a job in the list of jobs. If the object specified by the *hPrinter* parameter is a server object, search for a print job in each printer in the list of printers on the [**print server**](#gt_print-server). If the object specified by the *hPrinter* parameter is a printer object, search for a print job only in the list of print jobs for the specified printer. If the object specified by the *hPrinter* parameter is a job object, compare the identifier of this print job with the specified *JobId*. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the RPC_PrintNamedProperty structure specified by the *pProperty* parameter contains an **ePropertyType** member set to a valid value as specified in section [2.2.1.14.3](#Section_2.2.1.14.3). If this verification fails, return ERROR_INVALID_FLAGS.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
@@ -12237,7 +12237,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 <a id="Section_3.1.4.12.3"></a>
 ##### 3.1.4.12.3 RpcDeleteJobNamedProperty (Opnum 112)
 
-**RpcDeleteJobNamedProperty** deletes an existing **Job Named Property** (section [3.1.1](#Section_3.2.1)) for the specified print job.<399>
+**RpcDeleteJobNamedProperty** deletes an existing **Job Named Property** (section [3.1.1](#Section_3.1.1)) for the specified print job.<399>
 
 DWORD RpcDeleteJobNamedProperty(
 
@@ -12249,7 +12249,7 @@ DWORD RpcDeleteJobNamedProperty(
 
 );
 
-**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of a [**print job**](#gt_print-job). This value MUST NOT be zero.
 
@@ -12259,7 +12259,7 @@ DWORD RpcDeleteJobNamedProperty(
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the value of the *JobId* parameter corresponds to a job in the list of jobs. If the object specified by the *hPrinter* parameter is a server object, search for a print job in each printer in the list of printers on the [**print server**](#gt_print-server). If the object specified by the *hPrinter* parameter is a printer object, search for a print job only in the list of print jobs for the specified printer. If the object specified by the *hPrinter* parameter is a job object, compare the identifier of this print job with the specified *JobId*. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the value of the *pszName* parameter is a pointer to a string. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the value of the *pszName* parameter corresponds to an existing **Job Named Property** for the print job specified with the *JobId* parameter. If this verification fails, return ERROR_NOT_FOUND.
@@ -12270,7 +12270,7 @@ If parameter validation fails, the server MUST fail the operation immediately an
 <a id="Section_3.1.4.12.4"></a>
 ##### 3.1.4.12.4 RpcEnumJobNamedProperties (Opnum 113)
 
-**RpcEnumJobNamedProperties** enumerates the **Job Named Properties** (section [3.1.1](#Section_3.2.1)) for the specified [**print job**](#gt_print-job).<400>
+**RpcEnumJobNamedProperties** enumerates the **Job Named Properties** (section [3.1.1](#Section_3.1.1)) for the specified [**print job**](#gt_print-job).<400>
 
 DWORD RpcEnumJobNamedProperties(
 
@@ -12284,7 +12284,7 @@ DWORD RpcEnumJobNamedProperties(
 
 );
 
-**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object, job object, or server object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **JobId:** The identifier of a print job. This value MUST NOT be zero.
 
@@ -12296,7 +12296,7 @@ DWORD RpcEnumJobNamedProperties(
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that the value of the *JobId* parameter corresponds to a job in the list of jobs. If the object specified by the *hPrinter* parameter is a server object, search for a print job in each printer in the list of printers on the [**print server**](#gt_print-server). If the object specified by the *hPrinter* parameter is a printer object, search for a print job only in the list of print jobs for the specified printer. If the object specified by the *hPrinter* parameter is a job object, compare the identifier of this print job with the specified *JobId*. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the *pcProperties* and *ppProperties* pointers are not NULL. If this verification fails, return ERROR_INVALID_PARAMETER.
 - Verify that the buffer to contain the array of **RPC_PrintNamedProperty** structures can be successfully allocated. If this verification fails, return ERROR_NOT_ENOUGH_MEMORY.
@@ -12310,7 +12310,7 @@ Upon a successful completion of this call the client SHOULD free the buffer spec
 <a id="Section_3.1.4.13"></a>
 #### 3.1.4.13 Branch Office Print Remote Logging Methods
 
-This section specifies methods for processing **Branch Office Print Remote Log Entries** (section [3.1.1](#Section_3.2.1)) for a specified printer.
+This section specifies methods for processing **Branch Office Print Remote Log Entries** (section [3.1.1](#Section_3.1.1)) for a specified printer.
 
 | Method | Description |
 | --- | --- |
@@ -12319,7 +12319,7 @@ This section specifies methods for processing **Branch Office Print Remote Log E
 <a id="Section_3.1.4.13.1"></a>
 ##### 3.1.4.13.1 RpcLogJobInfoForBranchOffice (Opnum 116)
 
-RpcLogJobInfoForBranchOffice processes one or more **Branch Office Print Remote Log Entries** (section [3.1.1](#Section_3.2.1)).<401>
+RpcLogJobInfoForBranchOffice processes one or more **Branch Office Print Remote Log Entries** (section [3.1.1](#Section_3.1.1)).<401>
 
 DWORD RpcLogJobInfoForBranchOffice(
 
@@ -12329,7 +12329,7 @@ DWORD RpcLogJobInfoForBranchOffice(
 
 );
 
-**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.4.8), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A [PRINTER_HANDLE (section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by [RpcAddPrinter (section 3.1.4.2.3)](#Section_3.1.4.2.3), [RpcAddPrinterEx (section 3.1.4.2.15)](#Section_3.1.4.2.15), [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), or [RpcOpenPrinterEx (section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **pBranchOfficeJobDataContainer:** A pointer to an [RPC_BranchOfficeJobDataContainer (section 2.2.1.2.17)](#Section_2.2.1.2.17) structure that contains one or more [RPC_BranchOfficeJobData (section 2.2.1.15.2)](#Section_2.2.1.15.2) structures, each of which holds a single **Branch Office Print Remote Log Entry**.
 
@@ -12337,7 +12337,7 @@ DWORD RpcLogJobInfoForBranchOffice(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_2.2.1.1.4). This method SHOULD assume that the handle to the printer object can be used without further access checks.
+- Perform the validation steps that are specified in [PRINTER_HANDLE Parameters (section 3.1.4.1.11)](#Section_3.1.4.1.11). This method SHOULD assume that the handle to the printer object can be used without further access checks.
 - Verify that the value of the *pBranchOfficeJobDataContainer* parameter is a pointer, and if that verification fails, return ERROR_INVALID_PARAMETER.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -12353,7 +12353,7 @@ This section specifies methods for print support applications to use for handlin
 | RpcRegeneratePrintDeviceCapabilities [(section 3.1.4.14.1)](#Section_3.1.4.14.1) | Regenerates the printer device capabilities configuration file. Upon receiving this call, the server ensures the print devices capabilities for the specified printer are up to date. Opnum:117 |
 | Opnum118NotUsedOnWire | Reserved for local use. Opnum: 118 |
 | RpcIppCreateJobOnPrinter [(section 3.1.4.14.2)](#Section_3.1.4.14.2) | Calls the IPP printer handler to issue a create job message for IPP printers supporting this request and having the current print job active, or stores the attributes and [**PDL**](#gt_page-description-language-pdl) format to cache. The server propagates the cached values to the printer when the job becomes active and the printer is able to handle the request. Opnum: 119 |
-| RpcIppGetJobAttributes [(section 3.1.4.14.](#Section_49ef3debbb0143c79817d45fd6308ec5)3) | Sends a server request for IPP job attributes from the printer for the active print job or attributes retrieved from the cache. Opnum: 120 |
+| RpcIppGetJobAttributes [(section 3.1.4.14.](#Section_3.1.4.14.3)3) | Sends a server request for IPP job attributes from the printer for the active print job or attributes retrieved from the cache. Opnum: 120 |
 | RpcIppSetJobAttributes [(section 3.1.4.14.4)](#Section_3.1.4.14.4) | Sends a set job attributes request to the printer for the active print job or stores them to the cache. The server propagates the cached values to the printer when the job becomes active and the printer is able to handle the request. Opnum: 121 |
 | RpcIppGetPrinterAttributes [(section 3.1.4.14.5)](#Section_3.1.4.14.5) | Requests IPP printer attributes from the printer via Get-Printer-Attributes IPP request. This request can be sent to the connected printer even when there are no active print jobs present. Opnum: 122 |
 | RpcIppSetPrinterAttributes [(section 3.1.4.14.6)](#Section_3.1.4.14.6) | Sends a set printer attributes request to the printer via Set-Printer-Attributes IPP request. This request can be sent to the connected printer even when there are no active print jobs present. Opnum: 123 |
@@ -12371,13 +12371,13 @@ RpcRegeneratePrintDeviceCapabilities(
 
 );
 
-**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.4.8), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.2.3), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **Return Values**: This method MUST return zero (ERROR_SUCCESS) to indicate successful completion or a nonzero Windows error code to indicate failure [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_3.1.4.1.11).
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the client. Otherwise, the server MUST process the message and compose a response to the client as follows:
 
 - Return the status of the operation.
@@ -12406,7 +12406,7 @@ RpcIppCreateJobOnPrinter(
 
 );
 
-**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.4.8), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.2.3), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **jobId:** The identifier of a [**print job**](#gt_print-job). This value MUST NOT be zero.
 
@@ -12424,7 +12424,7 @@ RpcIppCreateJobOnPrinter(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that *ippResponseBuffer* and *ippResponseBufferSize* parameters are not null.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the [**print client**](#gt_print-client). Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -12456,7 +12456,7 @@ RpcIppGetJobAttributes(
 
 );
 
-**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.4.8), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.2.3), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **jobId:** The identifier of a [**print job**](#gt_print-job). This value MUST NOT be zero.
 
@@ -12472,7 +12472,7 @@ RpcIppGetJobAttributes(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that *ippResponseBuffer* and *ippResponseBufferSize* parameters are not null.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the [**print client**](#gt_print-client). Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -12504,7 +12504,7 @@ RpcIppSetJobAttributes(
 
 );
 
-**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.4.8), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.2.3), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **jobId:** The identifier of a [**print job**](#gt_print-job). This value MUST NOT be zero.
 
@@ -12520,7 +12520,7 @@ RpcIppSetJobAttributes(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that *ippResponseBuffer* and *ippResponseBufferSize* parameters are not null.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the [**print client**](#gt_print-client). Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -12550,7 +12550,7 @@ RpcIppGetPrinterAttributes(
 
 );
 
-**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.4.8), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.2.3), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **attributeNameCount:** The number of elements in the array pointed to by *attributeNames* parameter.
 
@@ -12564,7 +12564,7 @@ RpcIppGetPrinterAttributes(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that *ippResponseBuffer* and *ippResponseBufferSize* parameters are not null.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the [**print client**](#gt_print-client). Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -12594,7 +12594,7 @@ RpcIppSetPrinterAttributes(
 
 );
 
-**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.4.8), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
+**hPrinter:** A PRINTER_HANDLE [(section 2.2.1.1.4)](#Section_2.2.1.1.4) to a printer object that was opened by RpcAddPrinter [(section 3.1.4.2.3)](#Section_3.1.4.2.3), RpcAddPrinterEx [(section 3.1.4.2.15)](#Section_3.1.4.2.15), RpcOpenPrinter [(section 3.1.4.2.2)](#Section_3.1.4.2.2), or RpcOpenPrinterEx [(section 3.1.4.2.14)](#Section_3.1.4.2.14).
 
 **jobAttributeGroupBufferSize:** The size, in bytes, of the buffer pointed to by the *jobAttributeGroupBuffer* parameter.
 
@@ -12608,7 +12608,7 @@ RpcIppSetPrinterAttributes(
 
 On receiving this message, the server MUST validate the following:
 
-- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_2.2.1.1.4).
+- Perform the validation steps that are specified in PRINTER_HANDLE Parameters [(section 3.1.4.1.11)](#Section_3.1.4.1.11).
 - Verify that *ippResponseBuffer* and *ippResponseBufferSize* parameters are not null.
 If parameter validation fails, the server MUST fail the operation immediately and return a nonzero error response to the [**print client**](#gt_print-client). Otherwise, the server MUST process the message and compose a response to the client as follows:
 
@@ -12637,7 +12637,7 @@ This section describes a conceptual model of a possible data organization that a
 
 The following abstract data model is used to support a print client operating in [**branch office print mode**](#gt_branch-office-print-mode).<409>
 
-**Branch Office Print Remote Log Offline Archive:** When [**branch office print remote logging**](#gt_branch-office-print-remote-logging) is enabled (section [2.2.3.11](#Section_2.2.3.11)), a print client can create certain [**event channel**](#gt_event-channel) entries on the [**print server**](#gt_print-server) in response to [**Windows Events**](#gt_windows-event) while processing a [**print job**](#gt_print-job). Those entries are in the form of **Branch Office Print Remote Log Entries** (section [3.1.1](#Section_3.2.1)) in [Branch Office Print Remote Logging Structures (section 2.2.1.15)](#Section_2.2.1.15), and they are sent to the server in a [RPC_BranchOfficeJobDataContainer (section 2.2.1.2.17)](#Section_2.2.1.2.17) by using the [RpcLogJobInfoForBranchOffice (section 3.1.4.13.1)](#Section_3.1.4.13.1) method.
+**Branch Office Print Remote Log Offline Archive:** When [**branch office print remote logging**](#gt_branch-office-print-remote-logging) is enabled (section [2.2.3.11](#Section_2.2.3.11)), a print client can create certain [**event channel**](#gt_event-channel) entries on the [**print server**](#gt_print-server) in response to [**Windows Events**](#gt_windows-event) while processing a [**print job**](#gt_print-job). Those entries are in the form of **Branch Office Print Remote Log Entries** (section [3.1.1](#Section_3.1.1)) in [Branch Office Print Remote Logging Structures (section 2.2.1.15)](#Section_2.2.1.15), and they are sent to the server in a [RPC_BranchOfficeJobDataContainer (section 2.2.1.2.17)](#Section_2.2.1.2.17) by using the [RpcLogJobInfoForBranchOffice (section 3.1.4.13.1)](#Section_3.1.4.13.1) method.
 
 If a print client is unable to contact the print server when processing a branch office print job, printing-related Windows Events are written to the **Branch Office Print Remote Log Offline Archive**. When contact with the print server is restored, those entries can be retransmitted.
 
@@ -12659,7 +12659,7 @@ The client MUST perform initialization according to the following rules when cal
 - Use context handles across multiple calls to the server for methods taking a [PRINTER_HANDLE](#Section_2.2.1.1.4).
 - Use handles bound to a single call to the server for name-based methods taking a [STRING_HANDLE](#Section_2.2.1.1.7). An [**rpc_binding_from_string_binding**](#gt_rpc_binding_from_string_binding) method MUST be implemented by the client.
 - Reuse a context handle in multiple invocations when creating a [**print job**](#gt_print-job), such as in a call to [RpcOpenPrinter](#Section_3.1.4.2.2) followed by multiple calls to [RpcStartPagePrinter](#Section_3.1.4.9.2) and [RpcWritePrinter](#Section_3.1.4.9.3). For an example of this sequence of calls, see section [3.2.4.2.1](#Section_3.2.4.2.1).
-- A context handle SHOULD be reused in multiple invocations when getting or setting information on a printer, such as in a call to RpcOpenPrinter followed by multiple calls to [RpcGetPrinter](#Section_3.1.4.2.6), [RpcGetPrinterData](#Section_3.1.4.2.19), [RpcSetPrinter](#Section_3.1.4.2.5), or other methods taking a PRINTER_HANDLE or [GDI_HANDLE](#Section_2.2.1.1.2).
+- A context handle SHOULD be reused in multiple invocations when getting or setting information on a printer, such as in a call to RpcOpenPrinter followed by multiple calls to [RpcGetPrinter](#Section_3.1.4.2.6), [RpcGetPrinterData](#Section_3.1.4.2.7), [RpcSetPrinter](#Section_3.1.4.2.5), or other methods taking a PRINTER_HANDLE or [GDI_HANDLE](#Section_2.2.1.1.2).
 - When creating the RPC binding handle on the named pipe **\pipe\spoolss**, the client MUST specify an **ImpersonationLevel** of 2 (**Impersonation** [MS-SMB2](../MS-SMB2/MS-SMB2.md) (section 2.2.13).
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
@@ -12844,7 +12844,7 @@ This section contains sequence specifications that the client MUST follow to per
 
 To print a document using [RpcStartDocPrinter (section 3.1.4.9.1)](#Section_3.1.4.9.1), the client MUST perform the following steps:
 
-- Invoke [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), supplying the name of the target printer in the *pPrinterName* parameter and an *AccessRequired* [Access Value (section 2.2.3.1)](#Section_2.2.4.1) that includes **PRINTER_ACCESS_USE**.
+- Invoke [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), supplying the name of the target printer in the *pPrinterName* parameter and an *AccessRequired* [Access Value (section 2.2.3.1)](#Section_2.2.3.1) that includes **PRINTER_ACCESS_USE**.
 - Using the printer handle obtained from RpcOpenPrinter:
 - Invoke RpcStartDocPrinter to initiate the [**print job**](#gt_print-job).
 - For each page in the print job:
@@ -12873,7 +12873,7 @@ To enumerate the printers on a [**print server**](#gt_print-server), the [**prin
 
 To enumerate the jobs that are currently queued to a printer, the [**print client**](#gt_print-client) performs the following steps:
 
-- Invoke [RpcOpenPrinter](#Section_3.1.4.2.2), supplying the name of the target printer in the *pPrinterName* parameter and an *AccessRequired* value that includes [PRINTER_ACCESS_USE](#Section_2.2.4.1).
+- Invoke [RpcOpenPrinter](#Section_3.1.4.2.2), supplying the name of the target printer in the *pPrinterName* parameter and an *AccessRequired* value that includes [PRINTER_ACCESS_USE](#Section_945c4df5496949c5b1ce59c1b3f35024).
 - Using the printer handle that was obtained from RpcOpenPrinter:
 - Set a local job position context to the desired starting index, typically zero.
 - Set a local number of jobs to return in a single operation.<417>
@@ -12891,7 +12891,7 @@ To enumerate the jobs that are currently queued to a printer, the [**print clien
 
 To receive notifications for a printing event, a [**print client**](#gt_print-client) performs the following steps:
 
-- Invoke [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), supplying the name of the target printer in the *pPrinterName* parameter and an *AccessRequired* value that includes **PRINTER_ACCESS_USE** from [Access Values (section 2.2.3.1)](#Section_2.2.4.1).
+- Invoke [RpcOpenPrinter (section 3.1.4.2.2)](#Section_3.1.4.2.2), supplying the name of the target printer in the *pPrinterName* parameter and an *AccessRequired* value that includes **PRINTER_ACCESS_USE** from [Access Values (section 2.2.3.1)](#Section_2.2.3.1).
 - Using the printer handle that was obtained from RpcOpenPrinter, invoke [RpcRemoteFindFirstPrinterChangeNotificationEx (section 3.1.4.10.4)](#Section_3.1.4.10.4), supplying the notification flags and the job and printer fields that notifications are to be delivered for. The call also supplies a value in *dwPrinterLocal* that the client can use to identify the source for the later notifications.
 The [**print server**](#gt_print-server) opens a channel to the client as a result of processing this call by calling the client's [RpcReplyOpenPrinter (section 3.2.4.1.1)](#Section_3.2.4.1.1) method.
 
@@ -12910,7 +12910,7 @@ The server closes the channel to the client as a result of processing this call 
 To announce its shared printers to [**print servers**](#gt_print-server), the [**print client**](#gt_print-client) performs these steps:
 
 - Make a policy-specific determination whether shared printers are enumerated to print servers.<418>
-- If shared printers are enumerated, for each printer installed on the client that has the [PRINTER_ATTRIBUTE_SHARED](#Section_2.2.3.12) set, create a [PRINTER_CONTAINER](#Section_2.2.1.2.9) with **Level** set to 0x00000001, and populate it with a [PRINTER_INFO_1](#Section_2.2.1.10) describing the printer, and then call the print server's [RpcAddPrinter](#Section_3.1.4.4.8) or [RpcAddPrinterEx](#Section_3.1.4.2.15) method.<419>
+- If shared printers are enumerated, for each printer installed on the client that has the [PRINTER_ATTRIBUTE_SHARED](#Section_2.2.3.12) set, create a [PRINTER_CONTAINER](#Section_2.2.1.2.9) with **Level** set to 0x00000001, and populate it with a [PRINTER_INFO_1](#Section_2.2.1.10.2) describing the printer, and then call the print server's [RpcAddPrinter](#Section_3.1.4.2.3) or [RpcAddPrinterEx](#Section_3.1.4.2.15) method.<419>
 <a id="Section_3.2.4.2.6"></a>
 ##### 3.2.4.2.6 Adding a Printer to a Print Server
 
@@ -12922,7 +12922,7 @@ To add a printer to a [**print server**](#gt_print-server), the [**print client*
 - The client MUST allocate a [PRINTER_CONTAINER](#Section_2.2.1.2.9) structure and populate it with a [PRINTER_INFO_2](#Section_2.2.1.10.3) structure describing the new printer.
 - The client MUST allocate a [DEVMODE_CONTAINER](#Section_2.2.1.2.1) and populate it with the default DEVMODE for the new printer.
 - The client MUST allocate a [SECURITY_CONTAINER](#Section_2.2.1.2.13) and populate it with a SECURITY_DESCRIPTOR containing the security information for the new printer.
-- The client MUST call the print server's [RpcAddPrinter](#Section_3.1.4.4.8) with the print server's name, and the CONTAINER parameters from steps 4, 5, and 6. Alternatively, the client can use the [RpcAddPrinterEx](#Section_3.1.4.2.15) and specify an additional [SPLCLIENT_CONTAINER](#Section_2.2.1.2.14) that describes the client in more detail. RpcAddPrinterEx returns a [PRINTER_HANDLE](#Section_2.2.1.1.4) to the newly added printer in the variable pointed to by *pHandle*. The client SHOULD close that handle using [RpcClosePrinter](#Section_3.1.4.2.9) when it no longer requires it.
+- The client MUST call the print server's [RpcAddPrinter](#Section_3.1.4.2.3) with the print server's name, and the CONTAINER parameters from steps 4, 5, and 6. Alternatively, the client can use the [RpcAddPrinterEx](#Section_3.1.4.2.15) and specify an additional [SPLCLIENT_CONTAINER](#Section_2.2.1.2.14) that describes the client in more detail. RpcAddPrinterEx returns a [PRINTER_HANDLE](#Section_2.2.1.1.4) to the newly added printer in the variable pointed to by *pHandle*. The client SHOULD close that handle using [RpcClosePrinter](#Section_3.1.4.2.9) when it no longer requires it.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Timer Events
 
@@ -12944,7 +12944,7 @@ No additional local events are used on the client beyond the events maintained i
 To add a printer ("HP LaserJet 4") to a [**print server**](#gt_print-server) ("CORPSERV"), a client ("TESTCLT") performs the following steps:
 
 - Enumerate existing [**printer drivers**](#gt_printer-driver) using [RpcEnumPrinterDrivers](#Section_3.1.4.4.2).
-- The client obtains the server platform by calling [RpcGetPrinterData](#Section_3.1.4.2.19) on a server object with the "Architecture" key value.
+- The client obtains the server platform by calling [RpcGetPrinterData](#Section_3.1.4.2.7) on a server object with the "Architecture" key value.
 - The client calls RpcEnumPrinterDrivers, specifying the environment parameter to match the server platform.
 RpcEnumPrinterDrivers( L"\\\\CORPSERV"., L"Windows NT x86", 1, NULL, 0, &countBytesNeeded, &driversFound )
 
@@ -12960,7 +12960,7 @@ RpcEnumPrinterDrivers ( L"\\\\CORPSERV", L"Windows NT x86", 1, driverInfo1, coun
 - The client calls [RpcEnumPorts](#Section_3.1.4.6.1) to enumerate the available ports. This process is analogous to the previous step, which enumerated printer drivers using RpcEnumPrinterDrivers.
 - The client displays a dialog box so the end user can pick the driver, enter a desired port, and optionally enter a share name for the new printer.
 - If the driver does not already exist, or the client requests to update the driver, use RpcAddPrinterDriver to add the driver to the print server, as shown in [4.2](#Section_4.2).
-- Populate a [PRINTER_INFO_2](#Section_2.2.1.10.3) structure with information about the new printer and call [RpcAddPrinter](#Section_3.1.4.4.8).
+- Populate a [PRINTER_INFO_2](#Section_2.2.1.10.3) structure with information about the new printer and call [RpcAddPrinter](#Section_3.1.4.2.3).
 - The client allocates and zero-initializes a PRINTER_INFO_2 structure.
 - The client sets the following members of the structure:
 pPrinterName = L"HP LaserJet 4" /* Typically set to the driver name */
@@ -17185,7 +17185,7 @@ packet-beta
 
 <183> Section 2.2.3.10.1: The values of the **dwBuildNumber** member in the **OSVERSIONINFO** structure (section 2.2.3.10.1) for specific versions of Windows are listed in the product behavior note for **dwBuildNumber** in Versioning and Capability Negotiation (section [1.7](#Section_1.7)).
 
-<184> Section 2.2.3.10.3: Windows uses the following values to specify information about the OS type for use with Server Handle Key Values (section [2.2.3.10](#Section_2.2.3.10.5)).
+<184> Section 2.2.3.10.3: Windows uses the following values to specify information about the OS type for use with Server Handle Key Values (section [2.2.3.10](#Section_2.2.3.10)).
 
 | Name/value | Description |
 | --- | --- |
@@ -17343,7 +17343,7 @@ Clients connecting to a Windows print server need to be prepared to handle poole
 
 <222> Section 2.2.4.12: Windows restricts print provider name strings to 260 characters, including the terminating null character.
 
-<223> Section 2.2.4.14: Windows uses the following **PRINTER_NAME_POSTFIX** values: "LocalOnly", "LocalsplOnly", and "DrvConvert". "LocalOnly" means that the client asks the server to use only local printer settings for [RpcGetPrinterData](#Section_3.1.4.2.19) and [RpcSetPrinterData](#Section_3.1.4.2.8), and it specifies that the client is not interested in printing to this local printer but only in accessing the printer's local settings. "LocalsplOnly" and "DrvConvert" are treated the same way and mean that the client asks the server to open only the local printer with the respective name (**PRINTER_NAME_PREFIX**) if such local printer exists. These postfix strings are used on Windows during the upgrade of a printer driver and in other cases where it is preferred that a printer is accessed locally.
+<223> Section 2.2.4.14: Windows uses the following **PRINTER_NAME_POSTFIX** values: "LocalOnly", "LocalsplOnly", and "DrvConvert". "LocalOnly" means that the client asks the server to use only local printer settings for [RpcGetPrinterData](#Section_3.1.4.2.7) and [RpcSetPrinterData](#Section_3.1.4.2.8), and it specifies that the client is not interested in printing to this local printer but only in accessing the printer's local settings. "LocalsplOnly" and "DrvConvert" are treated the same way and mean that the client asks the server to open only the local printer with the respective name (**PRINTER_NAME_PREFIX**) if such local printer exists. These postfix strings are used on Windows during the upgrade of a printer driver and in other cases where it is preferred that a printer is accessed locally.
 
 <224> Section 2.2.4.14: Windows restricts printer name strings to 539 characters (259 + 260 + 20), including all backslashes, other separators, and the terminating null character.
 
@@ -17533,7 +17533,7 @@ Definitions for placeholders in the preceding table:
 - [Driver Name] is a driver name (section [2.2.4.3](#Section_2.2.4.3)).
 - [Processor Name] is a print processor name (section [2.2.4.11](#Section_2.2.4.11)).
 - [Monitor Name] is a monitor name (section [2.2.4.8](#Section_2.2.4.8)).
-- [Port Name] is a port name ([2.2.4.10](#Section_2.2.2.4.10)).
+- [Port Name] is a port name ([2.2.4.10](#Section_2.2.4.10)).
 - [Printer Name] is a printer name (section [2.2.4.14](#Section_2.2.4.14)).
 <249> Section 3.1.1: **Locations of Print System Components in the Server File System**
 
@@ -17643,11 +17643,11 @@ An administrator can configure a print server to not perform this validation ste
 
 <264> Section 3.1.4.2.1: Windows servers return E_NOTIMPL ([MS-ERREF] section 2.3.1) for error conditions or if no printers are found matching the requested flags, except for servers in the following versions: Windows NT 3.1, Windows NT 3.5, Windows NT 3.51, Windows NT 4.0, Windows 2000, Windows XP, Windows Server 2003.
 
-<265> Section 3.1.4.2.1: Windows servers check that the client user has the [SERVER_ACCESS_ENUMERATE](#Section_2.2.4.1) permission.
+<265> Section 3.1.4.2.1: Windows servers check that the client user has the [SERVER_ACCESS_ENUMERATE](#Section_945c4df5496949c5b1ce59c1b3f35024) permission.
 
 <266> Section 3.1.4.2.1: Windows servers return the printers in alphabetical order.
 
-<267> Section 3.1.4.2.1: Windows uses a policy-defined period (default: 60 minutes) from the first call to [RpcAddPrinter](#Section_3.1.4.4.8) with *Level* set to 0x00000001 to determine whether ERROR_CAN_NOT_COMPLETE is returned.
+<267> Section 3.1.4.2.1: Windows uses a policy-defined period (default: 60 minutes) from the first call to [RpcAddPrinter](#Section_3.1.4.2.3) with *Level* set to 0x00000001 to determine whether ERROR_CAN_NOT_COMPLETE is returned.
 
 <268> Section 3.1.4.2.1: In Windows, the enumeration is restricted as follows:
 
@@ -17829,7 +17829,7 @@ Print providers are a Windows implementation detail and are not required by this
 
 <342> Section 3.1.4.4.8: The RpcAddPrinterDriverEx method is not supported on Windows NT 3.1, Windows NT 3.5, Windows NT 3.51, Windows 95, Windows NT 4.0, Windows 98, and Windows Millennium Edition.
 
-<343> Section 3.1.4.4.8: On Windows XP and Windows Server 2003, the print server maintains a **List of Warned Printer Drivers** (section [3.1.1](#Section_3.2.1)). Printer drivers in this list are added to the server if the **APD_INSTALL_WARNED_DRIVER** bit is set.
+<343> Section 3.1.4.4.8: On Windows XP and Windows Server 2003, the print server maintains a **List of Warned Printer Drivers** (section [3.1.1](#Section_3.1.1)). Printer drivers in this list are added to the server if the **APD_INSTALL_WARNED_DRIVER** bit is set.
 
 If a client attempts to add a printer driver that is in the list, but with this bit not set, the server returns the ERROR_PRINTER_DRIVER_WARNED error code. If a client attempts to add a printer driver that is in the list, and with this bit set, the server attempts to add the printer driver (section [3.1.4.4.8](#Section_3.1.4.4.8)). On all other versions of Windows, this list does not exist, and the flag is ignored.
 

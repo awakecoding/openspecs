@@ -654,7 +654,7 @@ packet-beta
 | --- | --- |
 | 0 | CT_NIST_P256_KDF_SHA512 |
 
-**HMACSize (2 bytes):** The expected size of HMAC (see Encryption section [3.1.3.1](#Section_1.3) for details).
+**HMACSize (2 bytes):** The expected size of HMAC (see Encryption section [3.1.3.1](#Section_3.1.3.1) for details).
 
 **Nonce (8 bytes):** Random values (see Encryption section 3.1.3.1 for details).
 
@@ -694,7 +694,7 @@ packet-beta
 | 2 | Failure_Authentication |
 | 3 | Failure_NotAllowed |
 
-**HMACSize (2 bytes):** The expected size of HMAC (see Encryption section [3.1.3.1](#Section_1.3) for details).
+**HMACSize (2 bytes):** The expected size of HMAC (see Encryption section [3.1.3.1](#Section_3.1.3.1) for details).
 
 **Nonce (8 bytes):** Random values (see section 3.1.3.1 Encryption for details).
 
@@ -1444,7 +1444,7 @@ The signed thumbprint (from the certificates setup during initialization) that i
 
 Also after the first connection messages are exchanged, an ephemeral Diffie-Hellman secret is created. This secret is then passed into a standard HKDF algorithm to obtain a cryptographically random buffer of 64 bytes. The first 16 bytes are used to create an [**encryption**](#gt_encryption) [**key**](#gt_key), the next 16 bytes are used to create an [**initialization vector**](#gt_initialization-vector) (IV) key (both are [**Advanced Encryption Standard (AES)**](#gt_advanced-encryption-standard-aes) 128-bit in [**cipher block chaining (CBC)**](#gt_cipher-block-chaining-cbc) mode), and the final 32 bytes are used to create a hash (SHA-256) with a shared secret that is meant to be used for message authentication ([**Hash-based Message Authentication Code (HMAC)**](#gt_hash-based-message-authentication-code-hmac)). All messages after the initial connection message exchange are encrypted and verified using a combination of these objects.
 
-The examples in section [4](#Section_1.3) are unencrypted payloads. Described here is the transformation each message goes through to becoming encrypted.
+The examples in section [4](#Section_4) are unencrypted payloads. Described here is the transformation each message goes through to becoming encrypted.
 
 The payload of each message is considered to be the content beyond the "EndAdditionalHeaders" marker. The payload is prepended with the total size of the payload as an unsigned 4-byte integer. This modified payload's length is then rounded up to a multiple of the encryption algorithm's block length (16 bytes) and is referred to as the to-be-encrypted payload length. The difference between the to-be-encrypted payload length and the modified payload length is referred to as the padding length. The modified payload is then padded to the to-be-encrypted payload length by appending the padding length repeatedly in the remaining space.
 

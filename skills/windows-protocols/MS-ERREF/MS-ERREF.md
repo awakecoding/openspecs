@@ -106,11 +106,11 @@ None.
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-If a protocol returns [**HRESULTs**](#gt_hresult), the protocol uses HRESULTs, as specified in section [2.1](#Section_2.1.1).
+If a protocol returns [**HRESULTs**](#gt_hresult), the protocol uses HRESULTs, as specified in section [2.1](#Section_2.1).
 
 If a protocol uses Win32 error codes, these values are taken from the Windows error number space, as specified in section [2.2](#Section_2.2).
 
-If a protocol uses NTSTATUS values, these values are specified in section [2.3](#Section_2.3.1).
+If a protocol uses NTSTATUS values, these values are specified in section [2.3](#Section_2.3).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Protocols and Other Structures
@@ -161,7 +161,7 @@ packet-beta
 
 **S (1 bit):** Severity. If set, indicates a failure result. If clear, indicates a success result.
 
-**R (1 bit):** Reserved. If the **N** bit is clear, this bit MUST be set to 0. If the **N** bit is set, this bit is defined by the NTSTATUS numbering space (as specified in section [2.3](#Section_2.3.1)).
+**R (1 bit):** Reserved. If the **N** bit is clear, this bit MUST be set to 0. If the **N** bit is set, this bit is defined by the NTSTATUS numbering space (as specified in section [2.3](#Section_2.3)).
 
 **C (1 bit):** Customer. This bit specifies if the value is customer-defined or Microsoft-defined. The bit is set for customer-defined values and clear for Microsoft-defined values.<1>
 
@@ -233,7 +233,7 @@ The following table lists the currently defined facility codes:
 <a id="Section_2.1.1"></a>
 ### 2.1.1 HRESULT Values
 
-Combining the fields of an [**HRESULT**](#gt_hresult) into a single, 32-bit numbering space, the following HRESULT values are defined, in addition to those derived from [NTSTATUS values (section 2.3.1)](#Section_2.3) and [Win32 error codes (section 2.2)](#Section_2.2). This document provides the common usage details of the HRESULTs; individual protocol specifications provide expanded or modified definitions.
+Combining the fields of an [**HRESULT**](#gt_hresult) into a single, 32-bit numbering space, the following HRESULT values are defined, in addition to those derived from [NTSTATUS values (section 2.3.1)](#Section_2.3.1) and [Win32 error codes (section 2.2)](#Section_2.2). This document provides the common usage details of the HRESULTs; individual protocol specifications provide expanded or modified definitions.
 
 Most values also have a default message defined, which can be used to map the value to a human-readable text message; when this is done, the HRESULT value is also known as a message identifier.
 
@@ -3184,7 +3184,7 @@ The macro is as follows:
 <a id="Section_2.2"></a>
 ## 2.2 Win32 Error Codes
 
-All Win32 error codes MUST be in the range 0x0000 to 0xFFFF, although Win32 error codes can be used both in 16-bit fields (such as within the [**HRESULT**](#gt_hresult) type specified in section [2.1](#Section_2.1.1)) as well as 32-bit fields. Most values also have a default message defined, which can be used to map the value to a human-readable text message; when this is done, the Win32 error code is also known as a message identifier.
+All Win32 error codes MUST be in the range 0x0000 to 0xFFFF, although Win32 error codes can be used both in 16-bit fields (such as within the [**HRESULT**](#gt_hresult) type specified in section [2.1](#Section_2.1)) as well as 32-bit fields. Most values also have a default message defined, which can be used to map the value to a human-readable text message; when this is done, the Win32 error code is also known as a message identifier.
 
 The following table specifies the values and corresponding meanings of the Win32 error codes. Vendors SHOULD NOT assign other meanings to these values, to avoid the risk of a collision in the future.
 
@@ -7956,7 +7956,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.3.1](#Section_2.3) NTSTATUS Values | 11820 : Added STATUS_SMB_BAD_CLUSTER_DIALECT and STATUS_SMB_NO_PREAUTH_INTEGRITY_HASH_OVERLAP to the table of NTSTATUS values. | Major |
+| [2.3.1](#Section_2.3.1) NTSTATUS Values | 11820 : Added STATUS_SMB_BAD_CLUSTER_DIALECT and STATUS_SMB_NO_PREAUTH_INTEGRITY_HASH_OVERLAP to the table of NTSTATUS values. | Major |
 
 <a id="revision-history"></a>
 

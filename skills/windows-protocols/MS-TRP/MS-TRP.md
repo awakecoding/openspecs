@@ -567,7 +567,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -611,7 +611,7 @@ An ACD group represents a class of calls that requires a particular type of hand
 
 The Queue object represents a point in the ACD system where calls are temporarily held pending action. Access to a queue object allows an application to read a variety of standard statistics that relate to queue usage; however, access does not give an application the ability to control calls on the queue. Only applications that have access to the associated addresses and lines are able to control the calls on the queue.
 
-Monitoring and control of ACD agent status on stations is supported through these functions: [GetAgentCaps](#Section_2.2.4.1.3.23), [GetAgentStatus](#Section_2.2.4.2.2.15), [GetAgentGroupList](#Section_2.2.4.2.2.11), [GetAgentActivityList](#Section_2.2.4.2.2.9), [SetAgentGroup](#Section_2.2.4.1.3.58), [SetAgentState](#Section_2.2.4.1.3.61), and [SetAgentActivity](#Section_2.2.4.1.3.57).
+Monitoring and control of ACD agent status on stations is supported through these functions: [GetAgentCaps](#Section_2.2.4.1.3.23), [GetAgentStatus](#Section_2.2.4.1.3.28), [GetAgentGroupList](#Section_2.2.4.1.3.24), [GetAgentActivityList](#Section_2.2.4.2.2.9), [SetAgentGroup](#Section_2.2.4.1.3.58), [SetAgentState](#Section_2.2.4.1.3.61), and [SetAgentActivity](#Section_2.2.4.1.3.57).
 
 Architecturally, ACD functionality is implemented in a server-based application. The client functions mentioned above, rather than mapping to the telephony service provider, are conveyed to a server application that has registered (using an option of [Open](#Section_2.2.4.1.1.5)) as a handler for such functions.
 
@@ -706,12 +706,12 @@ Security and Authentication Methods: The Telephony Remote Protocol depends on th
 
 Localization: The Telephony Remote Protocol does not contain locale-specific information.
 
-Protocol Versions: The Telephony Remote Protocol has only one interface version. However, the underlying TAPI operations supported by the protocol can correspond to any of the multiple versions of TAPI. This difference is handled in the protocol by allowing additional values for the constants that are passed in the RPC packets between the client and server. The use of these methods is specified in section [3.1](#Section_3.1). The constants specified in section [2](#Section_1.3) include details on the TAPI versions for which they are valid. The client and server determine the TAPI version as described in the following sections:
+Protocol Versions: The Telephony Remote Protocol has only one interface version. However, the underlying TAPI operations supported by the protocol can correspond to any of the multiple versions of TAPI. This difference is handled in the protocol by allowing additional values for the constants that are passed in the RPC packets between the client and server. The use of these methods is specified in section [3.1](#Section_3.1). The constants specified in section [2](#Section_2) include details on the TAPI versions for which they are valid. The client and server determine the TAPI version as described in the following sections:
 
 - [Initialize](#Section_2.2.4.1.1.1) RPC packets for line device requests.
 - [Initialize](#Section_2.2.4.1.1.1) RPC packets for phone device requests.
-- [NegotiateAPIVersion](#Section_2.2.4.1.4.2) RPC packets for line devices.
-- [NegotiateAPIVersion](#Section_2.2.4.1.4.2) RPC packets for phone devices.
+- [NegotiateAPIVersion](#Section_2.2.4.1.1.2) RPC packets for line devices.
+- [NegotiateAPIVersion](#Section_2.2.4.1.1.2) RPC packets for phone devices.
 The client queries the line device capabilities by sending the line [GetDevCaps](#Section_2.2.4.1.1.3) packet.
 
 The client determines the address capabilities by sending the [GetAddressCaps](#Section_2.2.4.1.1.4) packet to the server.
@@ -904,11 +904,11 @@ The [**server**](#gt_server) is responsible for maintaining data structures inte
 | HCALL | [LINE_APPNEWCALL](#Section_2.2.4.2.1.6) **Note** This packet is sent only if the client has negotiated a TAPI version of 2.0, 2.1, 2.2, 3.0, and 3.1. | Param2 | [DeallocateCall](#Section_2.2.4.1.3.6) |
 | HCALL | [LINE_CALLSTATE](#Section_2.2.4.2.1.8) **Note** Clients that have negotiated a TAPI version earlier than 2.0, need to examine if this packet is an "old" call (same handle as an already obtained valid call handle) or a new call (different from all existing valid call handles). For clients that negotiated a TAPI version of 2.0, 2.1, 2.2, 3.0, and 3.1, this will always be an "old" call because the handle would have already been sent through LINE_APPNEWCALL. | hCall | DeallocateCall |
 | HCALL | [CompleteTransfer](#Section_2.2.4.1.3.8) | hConfCall | DeallocateCall |
-| HCALL | [Forward](#Section_2.2.4.2.2.8) | hConsultCall | DeallocateCall |
-| HCALL | [MakeCall](#Section_2.2.4.2.2.19) | hCall | DeallocateCall |
+| HCALL | [Forward](#Section_2.2.4.1.3.16) | hConsultCall | DeallocateCall |
+| HCALL | [MakeCall](#Section_2.2.4.1.3.43) | hCall | DeallocateCall |
 | HCALL | [PickUp](#Section_2.2.4.1.3.49) | hCall | DeallocateCall |
-| HCALL | [PrepareAddToConference](#Section_2.2.4.2.2.22) | hConsultCall | DeallocateCall |
-| HCALL | [SetUpConference](#Section_2.2.4.2.2.23) | hConfCall | DeallocateCall |
+| HCALL | [PrepareAddToConference](#Section_2.2.4.1.3.50) | hConsultCall | DeallocateCall |
+| HCALL | [SetUpConference](#Section_2.2.4.1.3.77) | hConfCall | DeallocateCall |
 | HCALL | SetUpConference | hConsultCall | DeallocateCall |
 | HCALL | [SetUpTransfer](#Section_2.2.4.1.3.78) | hConsultCall | DeallocateCall |
 | HCALL | [UnPark](#Section_2.2.4.1.3.82) | hCall | DeallocateCall |
@@ -938,7 +938,7 @@ The LINEADDRCAPFLAGS_Constants are bit-flag constants that are used in the dwAdd
 | LINEADDRCAPFLAGS_FWDCONSULT 0x00000100 | Specifies whether call forwarding involves the establishment of a consultation call. |
 | LINEADDRCAPFLAGS_SETUPCONFNULL 0x00000200 | Specifies whether setting up a conference call starts with an initial call (FALSE) or with no initial call (TRUE). |
 | LINEADDRCAPFLAGS_AUTORECONNECT 0x00000400 | Specifies whether dropping a consultation call automatically reconnects to the call on consultation hold. TRUE if reconnection happens automatically; otherwise, FALSE. |
-| LINEADDRCAPFLAGS_COMPLETIONID 0x00000800 | Specifies whether the completion identifiers that are returned by the [CompleteCall](#Section_2.2.4.2.2.2) packet are useful and unique. Must be TRUE if valid; otherwise, FALSE. |
+| LINEADDRCAPFLAGS_COMPLETIONID 0x00000800 | Specifies whether the completion identifiers that are returned by the [CompleteCall](#Section_2.2.4.1.3.7) packet are useful and unique. Must be TRUE if valid; otherwise, FALSE. |
 | LINEADDRCAPFLAGS_TRANSFERHELD 0x00001000 | Specifies whether a handheld call can be transferred. |
 | LINEADDRCAPFLAGS_TRANSFERMAKE 0x00002000 | Specifies whether an entirely new call can be established for use as a consultation call on transfer. |
 | LINEADDRCAPFLAGS_CONFERENCEHELD 0x00004000 | Specifies whether a handheld call can be included in a conference call. |
@@ -961,7 +961,7 @@ The following constants are present in TAPI versions 2.0, 2.1, 2.2, 3.0, and 3.1
 | LINEADDRCAPFLAGS_HOLDMAKESNEW 0x04000000 | When a call on this address is placed on hold (using the [Hold](#Section_2.2.4.1.3.42) packet or external action), a new call must be automatically created (most likely in LINECALLSTATE_DIALTONE). |
 | LINEADDRCAPFLAGS_NOINTERNALCALLS 0x08000000 | The address must be associated with a direct calling office (CO) line (trunk) and must not be used to make internal calls on a private branch exchange (PBX). The application can use this indication to assist the user in selecting the correct call appearance to use for making a call. When this bit is off, it does not necessarily indicate that the address can be used to make internal calls, because the service provider might not be aware of the line type. |
 | LINEADDRCAPFLAGS_NOEXTERNALCALLS 0x10000000 | The address is associated with an internal line on a PBX that is restricted in such a way that it cannot be used to place calls to an address outside the switch (for example, it is an intercom). The application can use this indication to assist the user in selecting the correct call appearance to use for making a call. When this bit is off, it does not necessarily indicate that the address can be used to make external calls because the service provider might not be aware of the line type. |
-| LINEADDRCAPFLAGS_SETCALLINGID 0x20000000 | The application can choose to set the CallingPartyID member in [LINECALLPARAMS](#Section_2.2.6.20) when calling [MakeCall](#Section_2.2.4.2.2.19) and other functions that accept a LINECALLPARAMS packet. If the content of the identifier is acceptable and a path is available, the service provider passes the identifier along to the called party to indicate the identity of the calling party. |
+| LINEADDRCAPFLAGS_SETCALLINGID 0x20000000 | The application can choose to set the CallingPartyID member in [LINECALLPARAMS](#Section_2.2.6.20) when calling [MakeCall](#Section_2.2.4.1.3.43) and other functions that accept a LINECALLPARAMS packet. If the content of the identifier is acceptable and a path is available, the service provider passes the identifier along to the called party to indicate the identity of the calling party. |
 
 The following constants are present in TAPI versions 2.2, 3.0, and 3.1.
 
@@ -1067,7 +1067,7 @@ The following constants are present in TAPI versions 2.2, 3.0, and 3.1.
 | LINEADDRFEATURE_PICKUPGROUP 0x00000200 | The PickUp packet can be used to pick up a call in the group. |
 | LINEADDRFEATURE_PICKUPDIRECT 0x00000400 | The PickUp packet can be used to pick up a call on a specific address. |
 | LINEADDRFEATURE_PICKUPWAITING 0x00000800 | The PickUp packet (with a null destination address) can be used to pick up a call-waiting call. It does not necessarily indicate that a waiting call is actually present because it is often impossible for a telephony device to automatically detect such a call. It must, however, indicate that the hook-flash function (a button on a telephone that simulates a quick off-hook/on-hook/off-hook cycle) will be invoked to attempt to switch to such a call. |
-| LINEADDRFEATURE_FORWARDFWD 0x00001000 | The [Forward](#Section_2.2.4.2.2.8) packet can be used to forward calls on the address to other numbers. LINEADDRFEATURE_FORWARD must also be set. **Note** If any of the "FORWARD" bits are set in the dwAddressFeatures member in LINEADDRESSSTATUS but the LINEADDRFEATURE_FORWARD bit is set, any of the forward modes can work; the service provider has simply not specified which ones. |
+| LINEADDRFEATURE_FORWARDFWD 0x00001000 | The [Forward](#Section_2.2.4.1.3.16) packet can be used to forward calls on the address to other numbers. LINEADDRFEATURE_FORWARD must also be set. **Note** If any of the "FORWARD" bits are set in the dwAddressFeatures member in LINEADDRESSSTATUS but the LINEADDRFEATURE_FORWARD bit is set, any of the forward modes can work; the service provider has simply not specified which ones. |
 | LINEADDRFEATURE_FORWARDDND 0x00002000 | The Forward packet (with an empty destination address) can be used to turn on the Do Not Disturb feature on the address. LINEADDRFEATURE_FORWARD must also be set. |
 
 This constant MUST be used both in [LINEADDRESSCAPS](#Section_2.2.6.6) (returned by the [GetAddressCaps](#Section_2.2.4.1.1.4) packet) and in LINEADDRESSSTATUS (returned by the [GetAddressStatus](#Section_2.2.4.1.3.21) packet). LINEADDRESSCAPS reports the availability of the address features by the service provider (mainly the switch) for a specified address. The LINEADDRESSSTATUS packet reports, for a specified address, which address features can actually be invoked while the address is in the current state.
@@ -1084,9 +1084,9 @@ The following constants are present in TAPI versions 2.0, 2.1, 2.2, 3.0, and 3.1
 | LINEAGENTFEATURE_SETAGENTGROUP 0x00000001 | The [SetAgentGroup](#Section_2.2.4.1.3.58) packet can be invoked on this address. |
 | LINEAGENTFEATURE_SETAGENTSTATE 0x00000002 | The [SetAgentState](#Section_2.2.4.1.3.61) packet can be invoked on this address. |
 | LINEAGENTFEATURE_SETAGENTACTIVITY 0x00000004 | The [SetAgentActivity](#Section_2.2.4.1.3.57) packet can be invoked on this address. |
-| LINEAGENTFEATURE_AGENTSPECIFIC 0x00000008 | The [AgentSpecific](#Section_2.2.4.2.2.1) packet can be invoked on this address. |
+| LINEAGENTFEATURE_AGENTSPECIFIC 0x00000008 | The [AgentSpecific](#Section_2.2.4.1.3.3) packet can be invoked on this address. |
 | LINEAGENTFEATURE_GETAGENTACTIVITYLIST 0x00000010 | The [GetAgentActivityList](#Section_2.2.4.2.2.9) packet can be invoked on this address. |
-| LINEAGENTFEATURE_GETAGENTGROUP 0x00000020 | The [GetAgentGroupList](#Section_2.2.4.2.2.11) packet can be invoked on this address. |
+| LINEAGENTFEATURE_GETAGENTGROUP 0x00000020 | The [GetAgentGroupList](#Section_2.2.4.1.3.24) packet can be invoked on this address. |
 
 <a id="Section_2.2.3.1.8"></a>
 ##### 2.2.3.1.8 LINEAGENTSESSIONSTATE_Constants
@@ -1167,8 +1167,8 @@ The following constants are present in TAPI versions 2.0, 2.1, 2.2, 3.0, and 3.1
 | LINEAGENTSTATUS_STATE 0x00000002 | The dwState member in LINEAGENTSTATUS must have been updated. |
 | LINEAGENTSTATUS_NEXTSTATE 0x00000004 | The dwNextState member in LINEAGENTSTATUS must have been updated. |
 | LINEAGENTSTATUS_ACTIVITY 0x00000008 | The dwActivityID, dwActivitySize, or dwActivityOffset member in LINEAGENTSTATUS must have been updated. |
-| LINEAGENTSTATUS_ACTIVITYLIST 0x00000010 | The [LINEAGENTACTIVITYLIST](#Section_2.2.6.10) packet must have been updated. The application can send the [GetAgentActivityList](#Section_2.2.4.2.2.9) packet to get the updated list. |
-| LINEAGENTSTATUS_GROUPLIST 0x00000020 | The [LINEAGENTGROUPLIST](#Section_2.2.6.11) packet must have been updated. The application can send the [GetAgentGroupList](#Section_2.2.4.2.2.11) packet to get the updated list. |
+| LINEAGENTSTATUS_ACTIVITYLIST 0x00000010 | The [LINEAGENTACTIVITYLIST](#Section_2.2.6.10) packet must have been updated. The application can send the [GetAgentActivityList](#Section_2.2.4.1.3.22) packet to get the updated list. |
+| LINEAGENTSTATUS_GROUPLIST 0x00000020 | The [LINEAGENTGROUPLIST](#Section_2.2.6.11) packet must have been updated. The application can send the [GetAgentGroupList](#Section_2.2.4.1.3.24) packet to get the updated list. |
 | LINEAGENTSTATUS_CAPSCHANGE 0x00000040 | The capabilities in [LINEAGENTCAPS](#Section_2.2.6.13) must have been updated. The application can send the [GetAgentCaps](#Section_2.2.4.1.3.23) packet to get the updated list. |
 | LINEAGENTSTATUS_VALIDSTATES 0x00000080 | The dwValidStates member in LINEAGENTSTATUS must have been updated. |
 | LINEAGENTSTATUS_VALIDNEXTSTATES 0x00000100 | The dwValidNextStates member in LINEAGENTSTATUS must have been updated. |
@@ -1278,7 +1278,7 @@ The LINECALLFEATURE_Constants are bit-flag constants that indicate operations th
 | LINECALLFEATURE_ADDTOCONF 0x00000002 | Add the call to the current conference (use the [AddToConference](#Section_2.2.4.1.3.2) packet). |
 | LINECALLFEATURE_ANSWER 0x00000004 | Answer the call (use the [Answer](#Section_2.2.4.1.3.4) packet). |
 | LINECALLFEATURE_BLINDTRANSFER 0x00000008 | Perform a blind transfer on the call (use the [BlindTransfer](#Section_2.2.4.1.3.5) packet). |
-| LINECALLFEATURE_COMPLETECALL 0x00000010 | Complete the call (use the [CompleteCall](#Section_2.2.4.2.2.2) packet). |
+| LINECALLFEATURE_COMPLETECALL 0x00000010 | Complete the call (use the [CompleteCall](#Section_2.2.4.1.3.7) packet). |
 | LINECALLFEATURE_COMPLETETRANSF 0x00000020 | Complete the call transfer (use the [CompleteTransfer](#Section_2.2.4.1.3.8) packet). |
 | LINECALLFEATURE_DIAL 0x00000040 | Dial the destination number for the call (use the [Dial](#Section_2.2.4.1.3.14) packet). |
 | LINECALLFEATURE_DROP 0x00000080 | Drop the call (use the [Drop](#Section_2.2.4.1.3.15) packet). |
@@ -1289,8 +1289,8 @@ The LINECALLFEATURE_Constants are bit-flag constants that indicate operations th
 | LINECALLFEATURE_MONITORDIGITS 0x00001000 | Monitor digits on the call (use the [MonitorDigits](#Section_2.2.4.1.3.44) packet). |
 | LINECALLFEATURE_MONITORMEDIA 0x00002000 | Monitor the media of the call (use the [MonitorMedia](#Section_2.2.4.1.3.45) packet). |
 | LINECALLFEATURE_MONITORTONES 0x00004000 | Monitor tones on the call (use the [MonitorTones](#Section_2.2.4.1.3.46) packet). |
-| LINECALLFEATURE_PARK 0x00008000 | Park the call (use the [Park](#Section_2.2.4.2.2.20) packet). |
-| LINECALLFEATURE_PREPAREADDCONF 0x00010000 | Prepare the call for addition to a conference (use the [PrepareAddToConference](#Section_2.2.4.2.2.22) packet). |
+| LINECALLFEATURE_PARK 0x00008000 | Park the call (use the [Park](#Section_2.2.4.1.3.48) packet). |
+| LINECALLFEATURE_PREPAREADDCONF 0x00010000 | Prepare the call for addition to a conference (use the [PrepareAddToConference](#Section_2.2.4.1.3.50) packet). |
 | LINECALLFEATURE_REDIRECT 0x00020000 | Redirect the call to another destination (use the [Redirect](#Section_2.2.4.1.3.51) packet). |
 | LINECALLFEATURE_REMOVEFROMCONF 0x00040000 | Remove the call from the conference (use the [RemoveFromConference](#Section_2.2.4.1.3.53) packet). |
 | LINECALLFEATURE_SECURECALL 0x00080000 | Secure the call (use the [SecureCall](#Section_2.2.4.1.3.54) packet). |
@@ -1298,7 +1298,7 @@ The LINECALLFEATURE_Constants are bit-flag constants that indicate operations th
 | LINECALLFEATURE_SETCALLPARAMS 0x00200000 | Set call parameters (use the [SetCallParams](#Section_2.2.4.1.3.66) packet). |
 | LINECALLFEATURE_SETMEDIACONTROL 0x00400000 | Set media controls (see the [SetMediaControl](#Section_2.2.4.1.3.72) packet). |
 | LINECALLFEATURE_SETTERMINAL 0x00800000 | Set the terminal to be used with the call (use [SetTerminal](#Section_2.2.4.1.3.76) packet). |
-| LINECALLFEATURE_SETUPCONF 0x01000000 | Set up a conference (use the [SetUpConference](#Section_2.2.4.2.2.23) packet). |
+| LINECALLFEATURE_SETUPCONF 0x01000000 | Set up a conference (use the [SetUpConference](#Section_2.2.4.1.3.77) packet). |
 | LINECALLFEATURE_SETUPTRANSFER 0x02000000 | Set up a transfer (use the [SetUpTransfer](#Section_2.2.4.1.3.78) packet). |
 | LINECALLFEATURE_SWAPHOLD 0x04000000 | Perform a swap hold operation (use the [SwapHold](#Section_2.2.4.1.3.79) packet). |
 | LINECALLFEATURE_UNHOLD 0x08000000 | Take the call off hold (use the [Unhold](#Section_2.2.4.1.3.81) packet). |
@@ -1330,15 +1330,15 @@ The following constants are present in TAPI versions 2.0, 2.1, 2.2, 3.0, and 3.1
 
 | Constant/value | Description |
 | --- | --- |
-| LINECALLFEATURE2_NOHOLDCONFERENCE 0x00000001 | If this bit is on, a No Hold Conference can be created by using the LINECALLPARAMFLAGS_NOHOLDCONFERENCE option with the [SetUpConference](#Section_2.2.4.2.2.23) packet. The LINECALLFEATURE_SETUPCONF bit will also be on in the dwCallFeatures member. |
+| LINECALLFEATURE2_NOHOLDCONFERENCE 0x00000001 | If this bit is on, a No Hold Conference can be created by using the LINECALLPARAMFLAGS_NOHOLDCONFERENCE option with the [SetUpConference](#Section_2.2.4.1.3.77) packet. The LINECALLFEATURE_SETUPCONF bit will also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_ONESTEPTRANSFER 0x00000002 | If this bit is on, One Step Transfer can be created by using the LINECALLPARAMFLAGS_ONESTEPTRANSFER option with the [SetUpTransfer](#Section_2.2.4.1.3.78) packet. The LINECALLFEATURE_SETUPTRANSFER bit will also be on in the **dwCallFeatures** member. |
-| LINECALLFEATURE2_COMPLCAMPON 0x00000004 | If this bit is on, the Camp On feature can be invoked by using the LINECOMPLMODE_CAMPON option with the [CompleteCall](#Section_2.2.4.2.2.2) packet. The LINECALLFEATURE_COMPLETECALL bit will also be on in the dwCallFeatures member. |
+| LINECALLFEATURE2_COMPLCAMPON 0x00000004 | If this bit is on, the Camp On feature can be invoked by using the LINECOMPLMODE_CAMPON option with the [CompleteCall](#Section_2.2.4.1.3.7) packet. The LINECALLFEATURE_COMPLETECALL bit will also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_COMPLCALLBACK 0x00000008 | If this bit is on, the Callback feature can be invoked by using the LINECOMPLMODE_CALLBACK option with the CompleteCall packet. The LINECALLFEATURE_COMPLETECALL bit will also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_COMPLINTRUDE 0x00000010 | If this bit is on, the Intrude feature can be invoked by using the LINECOMPLMODE_INTRUDE option with the CompleteCall packet. The LINECALLFEATURE_COMPLETECALL bit will also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_COMPLMESSAGE 0x00000020 | If this bit is on, the Leave Packet feature can be invoked by using the LINECOMPLMODE_MESSAGE option with the CompleteCall packet. The LINECALLFEATURE_COMPLETECALL bit will also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_TRANSFERNORM 0x00000040 | If this bit is on, the [CompleteTransfer](#Section_2.2.4.1.3.8) packet can be used to resolve the transfer as a normal transfer. The LINECALLFEATURE_COMPLETETRANSF bit will also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_TRANSFERCONF 0x00000080 | If this bit is on, the CompleteTransfer packet can be used to resolve the transfer as a three-way conference. The LINECALLFEATURE_COMPLETETRANSF bit must also be on in the dwCallFeatures member. |
-| LINECALLFEATURE2_PARKDIRECT 0x00000100 | If this bit is on, the Directed Park feature can be invoked by using the LINEPARKMODE_DIRECTED option with the [Park](#Section_2.2.4.2.2.20) packet. The LINECALLFEATURE_PARK bit must also be on in the dwCallFeatures member. |
+| LINECALLFEATURE2_PARKDIRECT 0x00000100 | If this bit is on, the Directed Park feature can be invoked by using the LINEPARKMODE_DIRECTED option with the [Park](#Section_2.2.4.1.3.48) packet. The LINECALLFEATURE_PARK bit must also be on in the dwCallFeatures member. |
 | LINECALLFEATURE2_PARKNONDIRECT 0x00000200 | If this bit is on, the Non-Directed Park feature can be invoked by using the LINEPARKMODE_NONDIRECTED option with the Park packet. The LINECALLFEATURE_PARK bit must also be on in the **dwCallFeatures** member. |
 
 **Note** If none of the "COMPL" bits is specified in the dwCallFeatures2 member in [LINECALLSTATUS](#Section_2.2.6.17) but LINECALLFEATURE_COMPLETECALL is specified, it is possible that any of them will work, but the service provider has not specified which.
@@ -1444,7 +1444,7 @@ The LINECALLPARAMFLAGS_Constants bit-flag constants describe various status flag
 | Constant/value | Description |
 | --- | --- |
 | LINECALLPARAMFLAGS_SECURE 0x00000001 | The call is to be set up as secure. |
-| LINECALLPARAMFLAGS_IDLE 0x00000002 | The call is to be originated on an idle call appearance and not join a call in progress. When using the [MakeCall](#Section_2.2.4.2.2.19) packet, if the LINECALLPARAMFLAGS_IDLE value is not set and there is an existing call on the line, the function breaks into the existing call if necessary to make the new call. If there is no existing call, the function makes the new call as specified. |
+| LINECALLPARAMFLAGS_IDLE 0x00000002 | The call is to be originated on an idle call appearance and not join a call in progress. When using the [MakeCall](#Section_2.2.4.1.3.43) packet, if the LINECALLPARAMFLAGS_IDLE value is not set and there is an existing call on the line, the function breaks into the existing call if necessary to make the new call. If there is no existing call, the function makes the new call as specified. |
 | LINECALLPARAMFLAGS_BLOCKID 0x00000004 | The identity of the originator is to be concealed (block caller ID). |
 | LINECALLPARAMFLAGS_ORIGOFFHOOK 0x00000008 | The phone of the originator is to be automatically taken off the hook. |
 | LINECALLPARAMFLAGS_DESTOFFHOOK 0x00000010 | The phone of the called party is to be automatically taken off the hook. |
@@ -1453,7 +1453,7 @@ The following constants are present in TAPI versions 2.0, 2.1, 2.2, 3.0, and 3.1
 
 | Constant/value | Description |
 | --- | --- |
-| LINECALLPARAMFLAGS_NOHOLDCONFERENCE 0x00000020 | This bit must be used only in conjunction with [SetUpConference](#Section_2.2.4.2.2.23) and [PrepareAddToConference](#Section_2.2.4.2.2.22) packet. The address to be conferenced with the current call must be specified in the TargetAddress member in [LINECALLPARAMS](#Section_2.2.6.20). The consultation call does not physically draw the dial tone from the switch but will progress through various call establishment states (for example, dialing or proceeding). When the consultation call reaches the connected state, the conference is automatically established: the original call, which had remained in the connected state, enters the conferenced state; the consultation call enters the conferenced state; the hConfCall enters the connected state. If the consultation call fails (enters the disconnected state followed by idle), the hConfCall also enters the idle state, and the original call (which might have been an existing conference, in the case of the PrepareAddToConference packet) remains in the connected state. The original party (or parties) never perceive the call as having gone on hold. This feature is often used to add a supervisor to an ACD agent call when necessary to monitor interactions with an irate caller. |
+| LINECALLPARAMFLAGS_NOHOLDCONFERENCE 0x00000020 | This bit must be used only in conjunction with [SetUpConference](#Section_2.2.4.1.3.77) and [PrepareAddToConference](#Section_2.2.4.1.3.50) packet. The address to be conferenced with the current call must be specified in the TargetAddress member in [LINECALLPARAMS](#Section_2.2.6.20). The consultation call does not physically draw the dial tone from the switch but will progress through various call establishment states (for example, dialing or proceeding). When the consultation call reaches the connected state, the conference is automatically established: the original call, which had remained in the connected state, enters the conferenced state; the consultation call enters the conferenced state; the hConfCall enters the connected state. If the consultation call fails (enters the disconnected state followed by idle), the hConfCall also enters the idle state, and the original call (which might have been an existing conference, in the case of the PrepareAddToConference packet) remains in the connected state. The original party (or parties) never perceive the call as having gone on hold. This feature is often used to add a supervisor to an ACD agent call when necessary to monitor interactions with an irate caller. |
 | LINECALLPARAMFLAGS_PREDICTIVEDIAL 0x00000040 | This bit must be used only when placing a call on an address with predictive dialing capability (LINEADDRCAPFLAGS_PREDICTIVEDIALER is on in the dwAddrCapFlags member in [LINEADDRESSCAPS](#Section_2.2.6.6)). The bit must be on to enable the enhanced call progress and/or media device monitoring capabilities of the device. If this bit is not on, the call will be placed without enhanced call progress or media type monitoring, and no automatic transfer will be initiated based on the call state. |
 | LINECALLPARAMFLAGS_ONESTEPTRANSFER 0x00000080 | This bit must be used only in conjunction with the [SetUpTransfer](#Section_2.2.4.1.3.78) packet. It combines the operation of the SetUpTransfer packet followed by the [Dial](#Section_2.2.4.1.3.14) packet on the consultation call into a single step. The address to be dialed must be specified in the TargetAddress member in LINECALLPARAMS. The original call must be placed in the onHoldPendingTransfer state, just as if the SetUpTransfer packet were called normally, and the consultation call must be established normally. The application must still call the [CompleteTransfer](#Section_2.2.4.1.3.8) packet to effect the transfer. This feature is often used when invoking a transfer from a [**server**](#gt_server) over a third-party call control link because such links frequently do not support the normal two-step process. |
 
@@ -1635,7 +1635,7 @@ The LINEDEVCAPFLAGS_Constants are bit-flag constants that are a collection of Bo
 | LINEDEVCAPFLAGS_HIGHLEVCOMP 0x00000002 | Specifies whether high-level compatibility information elements must be supported on this line. |
 | LINEDEVCAPFLAGS_LOWLEVCOMP 0x00000004 | Specifies whether low-level compatibility information elements must be supported on this line. |
 | LINEDEVCAPFLAGS_MEDIACONTROL 0x00000008 | Specifies whether media-control operations must be available for calls at this line. |
-| LINEDEVCAPFLAGS_MULTIPLEADDR 0x00000010 | Specifies whether the [MakeCall](#Section_2.2.4.2.2.19) or [Dial](#Section_2.2.4.1.3.14) packet is able to deal with multiple addresses at once (as for inverse multiplexing). |
+| LINEDEVCAPFLAGS_MULTIPLEADDR 0x00000010 | Specifies whether the [MakeCall](#Section_2.2.4.1.3.43) or [Dial](#Section_2.2.4.1.3.14) packet is able to deal with multiple addresses at once (as for inverse multiplexing). |
 | LINEDEVCAPFLAGS_CLOSEDROP 0x00000020 | Specifies what happens when an open line must be closed while the application has active calls on the line. If TRUE, the service provider drops (clears) all active calls on the line when the last application that opened the line closes it with the [Close](#Section_2.2.4.1.2.1) packet. If FALSE, the service provider does not drop active calls in such cases. Instead, the calls remain active and under control of external devices. A service provider typically sets this bit to FALSE if there is some other device that can keep the call alive, for example, if an analog line has the computer and phone both set to connect directly to them in a party-line configuration. The off-the-hook phone will automatically keep the call active even after the computer turns off. |
 | LINEDEVCAPFLAGS_DIALBILLING 0x00000040 | This flag indicates whether the "$", "@", or "W" dialable string modifier must be supported for a particular line device. It must be TRUE if the modifier is supported; otherwise, FALSE. The "?" (prompts user to continue dialing) must not be supported by a line device. This flag allows an application to determine which modifiers would result in the generation of a LINEERR. The application has the choice of pre-scanning dialable strings for unsupported characters or passing the "raw" string from the TranslateAddress packet directly to the provider as part of a function, such as the MakeCall packet or the Dial packet, and letting the function generate an error to tell the application which unsupported modifier occurs first in the string. |
 | LINEDEVCAPFLAGS_DIALQUIET 0x00000080 | This flag indicates whether the "$", "@", or "W" dialable string modifier must be supported for a particular line device. It must be TRUE if the modifier is supported; otherwise, FALSE. The "?" (which prompts the user to continue dialing) must not be supported by a line device. This flag indicates which modifiers would result in the generation of a LINEERR error. Dialable strings can be pre-scanned for unsupported characters or passing the "raw" string from the TranslateAddress packet directly to the provider as part of a function, such as the MakeCall packet or the Dial packet, and let the function generate an error to tell the application which unsupported modifier occurs first in the string. |
@@ -1684,7 +1684,7 @@ The following constants are present in TAPI versions 1.4, 2.0, 2.1, 2.2, 3.0, an
 | --- | --- |
 | LINEDEVSTATE_CAPSCHANGE 0x00100000 | Indicates that, because of configuration changes made by the user or other circumstances, one or more of the members in the [LINEDEVCAPS](#Section_2.2.6.23) packet for the address must have changed. The application uses GetDevCaps packet to read the updated packet. If a service provider sends a LINE_LINEDEVSTATE packet containing this value to TAPI, TAPI must pass it along. If a previous TAPI version has been negotiated, the [**endpoint**](#gt_endpoint) must receive LINE_LINEDEVSTATE packets specifying LINEDEVSTATE_REINIT, requiring a shut down and re-initialization of the connection to TAPI to obtain the updated information. |
 | LINEDEVSTATE_CONFIGCHANGE 0x00200000 | Indicates that configuration changes must have been made to one or more of the media devices that are associated with the line device. The [GetDevConfig](#Section_2.2.4.1.3.33) packet can be used to read the updated information. If a service provider sends a LINE_LINEDEVSTATE packet that contains this value to TAPI, TAPI must pass it along. |
-| LINEDEVSTATE_COMPLCANCEL 0x00800000 | Indicates that the call completion that is identified by the completion identifier that is contained in the dwParam2 parameter of the LINE_LINEDEVSTATE packet must have been externally canceled and is no longer considered valid. (If that value were to be passed in a subsequent call to the [UncompleteCall](#Section_2.2.4.2.2.2) packet, the function would fail with LINEERR_INVALCOMPLETIONID). If a service provider sends a LINE_LINEDEVSTATE packet that contains this value to TAPI, TAPI must pass it along. |
+| LINEDEVSTATE_COMPLCANCEL 0x00800000 | Indicates that the call completion that is identified by the completion identifier that is contained in the dwParam2 parameter of the LINE_LINEDEVSTATE packet must have been externally canceled and is no longer considered valid. (If that value were to be passed in a subsequent call to the [UncompleteCall](#Section_2.2.4.1.3.80) packet, the function would fail with LINEERR_INVALCOMPLETIONID). If a service provider sends a LINE_LINEDEVSTATE packet that contains this value to TAPI, TAPI must pass it along. |
 | LINEDEVSTATE_REMOVED 0x01000000 | Indicates that the device must have been removed from the computer by the service provider (most likely through user action, through a control panel, or similar utility). A LINE_LINEDEVSTATE packet with this value will typically be immediately followed by a [LINE_CLOSE](#Section_2.2.4.2.1.9) packet on the device. Subsequent attempts to access the device prior to TAPI being reinitialized must result in a LINEERR_NODEVICE error being returned to the application. If a service provider sends a LINE_LINEDEVSTATE packet that contains this value to TAPI, TAPI must pass it along. |
 
 <a id="Section_2.2.3.1.34"></a>
@@ -1910,8 +1910,8 @@ The following constants are present in TAPI versions 2.0, 2.1, 2.2, 3.0, and 3.1
 
 | Constant/value | Description |
 | --- | --- |
-| LINEFEATURE_SETDEVSTATUS 0x00000040 | The [SetLineDevStatus](#Section_2.2.6.24) packet can be invoked on the line device. |
-| LINEFEATURE_FORWARDFWD 0x00000080 | The [Forward](#Section_2.2.4.2.2.8) packet can be used to forward calls on all addresses on the line to other numbers. LINEFEATURE_FORWARD will also be set. |
+| LINEFEATURE_SETDEVSTATUS 0x00000040 | The [SetLineDevStatus](#Section_2.2.4.1.3.71) packet can be invoked on the line device. |
+| LINEFEATURE_FORWARDFWD 0x00000080 | The [Forward](#Section_2.2.4.1.3.16) packet can be used to forward calls on all addresses on the line to other numbers. LINEFEATURE_FORWARD will also be set. |
 | LINEFEATURE_FORWARDDND 0x00000100 | The Forward packet (with an empty destination address) can be used to turn on the Do Not Disturb feature on all addresses on the line. LINEFEATURE_FORWARD will also be set. |
 
 The LINEFEATURE_Constants are used in LINEDEVSTATUS (returned by the [GetLineDevStatus](#Section_2.2.4.1.3.36) packet). LINEDEVSTATUS reports, for a particular line, which line features can actually be invoked while the line is in the current state. An application would make this determination dynamically after line state changes, which are typically caused by address or call-related activities on the line.
@@ -2087,27 +2087,27 @@ The LINEPROXYREQUEST_Constants are used in two contexts. First, to indicate whic
 | LINEPROXYREQUEST_SETAGENTSTATE 0x00000002 | Associated with the [SetAgentState](#Section_2.2.4.1.3.61) packet. |
 | LINEPROXYREQUEST_SETAGENTACTIVITY 0x00000003 | Associated with the [SetAgentActivity](#Section_2.2.4.1.3.57) packet. |
 | LINEPROXYREQUEST_GETAGENTCAPS 0x00000004 | Associated with the [GetAgentCaps](#Section_2.2.4.1.3.23) packet. |
-| LINEPROXYREQUEST_GETAGENTSTATUS 0x00000005 | Associated with the [GetAgentStatus](#Section_2.2.4.2.2.15) packet. |
-| LINEPROXYREQUEST_AGENTSPECIFIC 0x00000006 | Associated with the [AgentSpecific](#Section_2.2.4.2.2.1) packet. |
+| LINEPROXYREQUEST_GETAGENTSTATUS 0x00000005 | Associated with the [GetAgentStatus](#Section_2.2.4.1.3.28) packet. |
+| LINEPROXYREQUEST_AGENTSPECIFIC 0x00000006 | Associated with the [AgentSpecific](#Section_2.2.4.1.3.3) packet. |
 | LINEPROXYREQUEST_GETAGENTACTIVITYLIST 0x00000007 | Associated with the [GetAgentActivityList](#Section_2.2.4.2.2.9) packet. |
-| LINEPROXYREQUEST_GETAGENTGROUPLIST 0x00000008 | Associated with the [GetAgentGroupList](#Section_2.2.4.2.2.11) packet. |
+| LINEPROXYREQUEST_GETAGENTGROUPLIST 0x00000008 | Associated with the [GetAgentGroupList](#Section_2.2.4.1.3.24) packet. |
 
 The following constants are present in TAPI versions 2.2, 3.0, and 3.1:
 
 | Constant/value | Description |
 | --- | --- |
-| LINEPROXYREQUEST_CREATEAGENT 0x00000009 | Associated with the [CreateAgent](#Section_2.2.4.1.3.10) packet. |
+| LINEPROXYREQUEST_CREATEAGENT 0x00000009 | Associated with the [CreateAgent](#Section_2.2.4.2.2.4) packet. |
 | LINEPROXYREQUEST_SETAGENTMEASUREMENTPERIOD 0x0000000A | Associated with the [SetAgentMeasurementPeriod](#Section_2.2.4.1.3.59) packet. |
 | LINEPROXYREQUEST_GETAGENTINFO 0x0000000B | Associated with the [GetAgentInfo](#Section_2.2.4.1.3.25) packet. |
 | LINEPROXYREQUEST_CREATEAGENTSESSION 0x0000000C | Associated with the [CreateAgentSession](#Section_2.2.4.2.2.5) packet. |
-| LINEPROXYREQUEST_GETAGENTSESSIONLIST 0x0000000D | Associated with the [GetAgentSessionList](#Section_2.2.4.2.2.14) packet. |
+| LINEPROXYREQUEST_GETAGENTSESSIONLIST 0x0000000D | Associated with the [GetAgentSessionList](#Section_2.2.4.1.3.27) packet. |
 | LINEPROXYREQUEST_SETAGENTSESSIONSTATE 0x0000000E | Associated with the [SetAgentSessionState](#Section_2.2.4.1.3.60) packet. |
-| LINEPROXYREQUEST_GETAGENTSESSIONINFO 0x0000000F | Associated with the [GetAgentSessionInfo](#Section_2.2.4.2.2.13) packet. |
+| LINEPROXYREQUEST_GETAGENTSESSIONINFO 0x0000000F | Associated with the [GetAgentSessionInfo](#Section_2.2.4.1.3.26) packet. |
 | LINEPROXYREQUEST_GETQUEUELIST 0x00000010 | Associated with the [GetQueueList](#Section_2.2.4.1.3.41) packet. |
 | LINEPROXYREQUEST_SETQUEUEMEASUREMENTPERIOD 0x00000011 | Associated with the [SetQueueMeasurementPeriod](#Section_2.2.4.1.3.74) packet. |
-| LINEPROXYREQUEST_GETQUEUEINFO 0x00000012 | Associated with the [GetQueueInfo](#Section_2.2.4.2.2.17) packet. |
-| LINEPROXYREQUEST_GETGROUPLIST 0x00000013 | Associated with the [GetGroupList](#Section_2.2.4.2.2.16) packet. |
-| LINEPROXYREQUEST_SETAGENTSTATEEX 0x00000014 | Associated with the [SetAgentStateEx](#Section_2.2.4.1.3.61) packet. |
+| LINEPROXYREQUEST_GETQUEUEINFO 0x00000012 | Associated with the [GetQueueInfo](#Section_2.2.4.1.3.40) packet. |
+| LINEPROXYREQUEST_GETGROUPLIST 0x00000013 | Associated with the [GetGroupList](#Section_2.2.4.1.3.34) packet. |
+| LINEPROXYREQUEST_SETAGENTSTATEEX 0x00000014 | Associated with the [SetAgentStateEx](#Section_2.2.4.1.3.62) packet. |
 
 <a id="Section_2.2.3.1.49"></a>
 ##### 2.2.3.1.49 LINEPROXYSTATUS_Constants
@@ -2646,7 +2646,7 @@ Zero indicates success. A negative error number indicates that an error occurred
 
 **VarData (variable):** Contains the null-terminated Unicode strings that are indicated by the **dwFriendlyNameOffset** and **dwModuleNameOffset** fields.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.1.2"></a>
 ###### 2.2.4.1.1.2 NegotiateAPIVersion
@@ -2771,9 +2771,9 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **dwDeviceID (4 bytes):** An unsigned 32-bit integer. The line device to be queried. A valid value of dwDeviceID is in the range 0 to dwNumDevs – 1. The client obtains dwNumDevs by sending a Initialize packet to the remote server.
 
-**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The negotiated TSPI version number. This value has already been negotiated for this device through the [NegotiateAPIVersion](#Section_2.2.4.1.4.2) packet.
+**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The negotiated TSPI version number. This value has already been negotiated for this device through the [NegotiateAPIVersion](#Section_2.2.4.1.1.2) packet.
 
-**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The negotiated extension version number. This value has already been negotiated for this device through the [NegotiateExtVersion](#Section_2.2.4.1.6.12) packet. This parameter is not validated by TAPI when this function is called.
+**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The negotiated extension version number. This value has already been negotiated for this device through the [NegotiateExtVersion](#Section_2.2.4.1.3.47) packet. This parameter is not validated by TAPI when this function is called.
 
 **lpLineDevCaps (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of a [LINEDEVCAPS](#Section_2.2.6.23) data packet that is filled with line device capabilities information upon successful completion of the request.
 
@@ -2797,7 +2797,7 @@ On successful completion, this field contains the offset, in bytes, of the data 
 
 **VarData (variable):** MUST be present on successful completion of the request. MUST contain a LINEDEVCAPS data structure.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.1.4"></a>
 ###### 2.2.4.1.1.4 GetAddressCaps
@@ -2840,7 +2840,7 @@ MUST return zero, if the function succeeds; or an error number, if an error occu
 
 **dwAddressID (4 bytes):** An unsigned 32-bit integer. The address on the specified line device whose capabilities are to be queried. An address identifier is permanently associated with an address; the identifier remains constant across operating system upgrades. valid value of dwAddressID is in the range 0 to dwNumAddresses – 1. The client obtains dwNumAddresses from the LIVEDEVCAPS obtained by sending a GetDevCaps packet to the remote server. This parameter is not validated by TAPI when this function is called.
 
-**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The version number of the TSPI to be used. The high-order word contains the major version number; the low-order word contains the minor version number. This number is obtained by [NegotiateAPIVersion](#Section_2.2.4.1.4.2).
+**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The version number of the TSPI to be used. The high-order word contains the major version number; the low-order word contains the minor version number. This number is obtained by [NegotiateAPIVersion](#Section_2.2.4.1.1.2).
 
 **dwExtVersion (4 bytes):** An unsigned 32-bit integer. The version number of the service provider–specific extensions to be used. This number is zero if no device-specific extensions are to be used. Otherwise, the high-order word contains the major version number; the low-order word contains the minor version number. This value is obtained for this device by sending the NegotiateExtVersion packet. This parameter is not validated by TAPI when this function is called.
 
@@ -2862,7 +2862,7 @@ MUST return zero, if the function succeeds; or an error number, if an error occu
 
 **VarData (variable):** Present on successful completion of the request. Contains a LINEADDRESSCAPS packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.1.5"></a>
 ###### 2.2.4.1.1.5 Open
@@ -2914,9 +2914,9 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). Set to TAPI_NO_DATA (0xFFFFFFFF). Upon successful completion of the request, this field MUST contain the handle representing the opened line device.
 
-**dwNegotiatedVersion (4 bytes):** An unsigned 32-bit integer. The version that is negotiated via the [NegotiateAPIVersion](#Section_2.2.4.1.4.2) request.
+**dwNegotiatedVersion (4 bytes):** An unsigned 32-bit integer. The version that is negotiated via the [NegotiateAPIVersion](#Section_2.2.4.1.1.2) request.
 
-**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The extension version number under which the application and the service provider agree to operate. This number is obtained with [NegotiateExtVersion](#Section_2.2.4.1.6.12).
+**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The extension version number under which the application and the service provider agree to operate. This number is obtained with [NegotiateExtVersion](#Section_2.2.4.1.3.47).
 
 **OpenContext (4 bytes):** An unsigned 32-bit integer. The Callback instance, set to 0.
 
@@ -2938,7 +2938,7 @@ Similar handle-swapping semantics can exist between the TAPI service and telepho
 
 **VarData (variable):** This field MUST contain the LINECALLPARAMS packet that is indicated by the **pCallParams** field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.2"></a>
 ##### 2.2.4.1.2 Terminate Session for Line Device
@@ -3162,7 +3162,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains the user information that is indicated in the lpsUserUserInfo field. The user information can be an [**ASCII**](#gt_ascii) or Unicode string and this data is opaque to the protocol.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.2"></a>
 ###### 2.2.4.1.3.2 AddToConference
@@ -3210,9 +3210,9 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hConfCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the conference call obtained by sending the [SetUpConference](#Section_2.2.4.2.2.23) packet. The application MUST be an owner of this call. Any monitoring (media, tones, digits) on a conference call applies only to the hConfCall and not to the individual participating calls. The call state of hConfCall MUST be onHoldPendingConference or onHold.
+**hConfCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the conference call obtained by sending the [SetUpConference](#Section_2.2.4.1.3.77) packet. The application MUST be an owner of this call. Any monitoring (media, tones, digits) on a conference call applies only to the hConfCall and not to the individual participating calls. The call state of hConfCall MUST be onHoldPendingConference or onHold.
 
-**hConsultCall (4 bytes):** An HCALL. The handle to the call to be added to the conference call. One way of obtaining a valid hConsultCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of this call. This call cannot be either a parent of another conference or a participant in any conference. Depending on the device capabilities that are indicated in [LINEADDRESSCAPS](#Section_2.2.6.6), the hConsultCall parameter might not necessarily have been established by using the SetUpConference or [PrepareAddToConference](#Section_2.2.4.2.2.22) packet. The call state of hConsultCall can be connected, onHold, proceeding, or ringback.
+**hConsultCall (4 bytes):** An HCALL. The handle to the call to be added to the conference call. One way of obtaining a valid hConsultCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of this call. This call cannot be either a parent of another conference or a participant in any conference. Depending on the device capabilities that are indicated in [LINEADDRESSCAPS](#Section_2.2.6.6), the hConsultCall parameter might not necessarily have been established by using the SetUpConference or [PrepareAddToConference](#Section_2.2.4.1.3.50) packet. The call state of hConsultCall can be connected, onHold, proceeding, or ringback.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -3324,7 +3324,7 @@ Additional return values are specific to the agent handler.
 
 **VarData (variable):** Contains a parameter block that corresponds to the proprietary handler-specific functions of the agent handler. This data is opaque to the protocol.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.4"></a>
 ###### 2.2.4.1.3.4 Answer
@@ -3407,7 +3407,7 @@ The following table shows the return values for this function.
 
 **VarData (variable):** Contains the user information that is indicated in the lpsUserUserInfo field. The user information can be an [**ASCII**](#gt_ascii) or Unicode string, and this data is opaque to the protocol.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.5"></a>
 ###### 2.2.4.1.3.5 BlindTransfer
@@ -3484,7 +3484,7 @@ The following table shows the return values for this function.
 
 **VarData (variable):** Contains a null-terminated Unicode string that is indicated in the lpszDestAddress field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.6"></a>
 ###### 2.2.4.1.3.6 DeallocateCall
@@ -3527,7 +3527,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The call handle to be deallocated. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. An application with monitoring privileges for a call can always deallocate its handle for that call. An application with owner privilege for a call can deallocate its handle unless it is the only owner of the call and the call is not in the idle state. The call handle is no longer valid after it has been deallocated.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The call handle to be deallocated. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. An application with monitoring privileges for a call can always deallocate its handle for that call. An application with owner privilege for a call can deallocate its handle unless it is the only owner of the call and the call is not in the idle state. The call handle is no longer valid after it has been deallocated.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -3604,7 +3604,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose completion is requested. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall must be busy, ringback.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose completion is requested. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall must be busy, ringback.
 
 **lpdwCompletionIDContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
@@ -3778,7 +3778,7 @@ If dwAddressMode is LINEADDRESSMODE_ADDRESSID, any address on the line is accept
 
 **VarData (variable):** Contains a LINECALLPARAMS packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.10"></a>
 ###### 2.2.4.1.3.10 CreateAgent
@@ -3858,7 +3858,7 @@ MUST return a request identifier if the asynchronous operation starts; otherwise
 
 **VarData (variable):** Contains the null-terminated Unicode strings that are indicated in the lpszAgentID and lpszAgentPIN fields.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.11"></a>
 ###### 2.2.4.1.3.11 CreateAgentSession
@@ -3916,13 +3916,13 @@ Returns a request identifier if the asynchronous operation starts; otherwise, th
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the line device. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent for whom the session is to be created. This field MUST have been obtained by sending the [CreateAgent](#Section_2.2.4.1.3.10) packet.
+**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent for whom the session is to be created. This field MUST have been obtained by sending the [CreateAgent](#Section_2.2.4.2.2.4) packet.
 
 **lpszAgentPIN (4 bytes):** An unsigned 32-bit integer. The offset in the VarData field that contains a null-terminated Unicode string that contains the agent PIN or password. This field is set to TAPI_NO_DATA (0xFFFFFFFF) if no PIN was supplied.
 
 **dwWorkingAddressID (4 bytes):** An unsigned 32-bit integer. The identifier of the address on which the agent receives calls for this session.
 
-**lpGroupID (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field and [**GUID**](#gt_globally-unique-identifier-guid), as specified in [MS-DTYP](#Section_2.2.1) section 2.3.4.2, that identifies the group for which the session is being created.
+**lpGroupID (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field and [**GUID**](#gt_globally-unique-identifier-guid), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.2, that identifies the group for which the session is being created.
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of the GUID that is indicated in the lpGroupID field.
 
@@ -3992,7 +3992,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwAddressID (4 bytes):** An unsigned 32-bit integer. The address on the specified line to be operated on. An address identifier is permanently associated with an address; the identifier MUST remain constant across operating system upgrades. A valid value of dwAddressID is in the range 0 to dwNumAddresses –1. The client obtains dwNumAddresses from the [LINEDEVCAPS](#Section_2.2.6.23)obtained by sending a [GetDevCaps](#Section_2.2.4.1.1.3)packet to the remote server.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. This parameter is optional, but if it is specified, the call it represents MUST belong to the hLine line device. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The call state of hCall is device specific.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. This parameter is optional, but if it is specified, the call it represents MUST belong to the hLine line device. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The call state of hCall is device specific.
 
 **lpParamsContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
@@ -4012,7 +4012,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains a parameter block that is indicated in the lpParams field. The format of this parameter block is device-specific and its contents are passed by TAPI, to or from the TSP.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.13"></a>
 ###### 2.2.4.1.3.13 DevSpecificFeature
@@ -4086,7 +4086,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains a feature-dependent parameter block that is indicated in the lpParams field. The format of this parameter block is device-specific and its contents are passed by TAPI, to or from the TSP.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.14"></a>
 ###### 2.2.4.1.3.14 Dial
@@ -4141,7 +4141,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which a number is to be dialed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall can be any state except idle and disconnected.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which a number is to be dialed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall can be any state except idle and disconnected.
 
 **lpszDestAddress (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of a null-terminated Unicode string that specifies the destination to dial by using the standard dialable number format.
 
@@ -4167,7 +4167,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains a null-terminated Unicode string that is indicated in the lpszDestAddress field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.15"></a>
 ###### 2.2.4.1.3.15 Drop
@@ -4216,7 +4216,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be dropped. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall can be any state except idle.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be dropped. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall can be any state except idle.
 
 **lpsUserUserInfo (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of user-user information, to send to the remote party as part of the call disconnect. When this field is set to -1 (0xFFFFFFFF), no user-user information is sent.
 
@@ -4242,7 +4242,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains the user information that is indicated in the lpsUserUserInfo field. The user information can be an [**ASCII**](#gt_ascii) or Unicode string, and this data is opaque to the protocol.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.16"></a>
 ###### 2.2.4.1.3.16 Forward
@@ -4322,7 +4322,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains the LINEFORWARDLIST and LINECALLPARAMS packets that are indicated in the fields lpForwardList and lpCallParams.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.17"></a>
 ###### 2.2.4.1.3.17 GatherDigits
@@ -4375,7 +4375,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which digits are to be gathered. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall can be any state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which digits are to be gathered. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall can be any state.
 
 **dwEndtoEndID (4 bytes):** An unsigned 32-bit integer. A unique, uninterpreted identifier of the request for its entire lifetime, that is, until the matching [LINE_GATHERDIGITS](#Section_2.2.4.2.1.14) packet is sent. The service provider MUST include this identifier as one of the parameters in the packet.
 
@@ -4411,7 +4411,7 @@ Detect digits as [**DTMF**](#gt_dual-tone-multi-frequency-dtmf) tones. Valid dig
 
 **VarData (variable):** Present if the lpszTerminationDigits field is not set to TAPI_NO_DATA (0xFFFFFFFF). Contains a null-terminated Unicode string as specified by lpszTerminationDigits.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.18"></a>
 ###### 2.2.4.1.3.18 GenerateDigits
@@ -4460,7 +4460,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall can be any state. TAPI does not impose any call state requirements; however, some Tapi Service Providers can require that the hCall be is the LINECALLSTATE_CONNECTED state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall can be any state. TAPI does not impose any call state requirements; however, some Tapi Service Providers can require that the hCall be is the LINECALLSTATE_CONNECTED state.
 
 **dwDigitMode (4 bytes):** An unsigned 32-bit integer. The format to be used for signaling these digits. This parameter MUST use one of the [LINEDIGITMODE_Constants](#Section_2.2.3.1.36).
 
@@ -4488,7 +4488,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **VarData (variable):** Contains a null-terminated Unicode character packet that is indicated in the lpszDigits field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.19"></a>
 ###### 2.2.4.1.3.19 GenerateTone
@@ -4536,7 +4536,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which a tone is to be generated. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall can be any state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which a tone is to be generated. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall can be any state.
 
 **dwToneMode (4 bytes):** An unsigned 32-bit integer. Defines the tone to be generated. Tones can be either standard or custom. A custom tone is composed of a set of arbitrary frequencies. A small number of standard tones are predefined. The duration of the tone MUST be specified by dwDuration for both standard and custom tones. If dwToneMode is set to zero, any digit or tone generation in progress is canceled. This parameter MUST use one of the [LINETONEMODE_Constants](#Section_2.2.3.1.57).
 
@@ -4571,7 +4571,7 @@ This parameter is not validated by TAPI when this function is called.
 
 **VarData (variable):** Contains a number of LINEGENERATETONE packets that are equal to the value of the dwNumTones field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.20"></a>
 ###### 2.2.4.1.3.20 GetAddressID
@@ -4645,7 +4645,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **VarData (variable):** Present on successful completion of the request. Contains a packet that holds the address that is assigned to the specified line device, as indicated in the lpsAddress field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.21"></a>
 ###### 2.2.4.1.3.21 GetAddressStatus
@@ -4719,7 +4719,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **VarData (64 bytes):** This field is only present on successful completion of the request. Contains a LINEADDRESSSTATUS packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.22"></a>
 ###### 2.2.4.1.3.22 GetAgentActivityList
@@ -5008,7 +5008,7 @@ MUST return a request identifier if the asynchronous operation starts; otherwise
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the open line device. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be retrieved. This field MUST have been obtained by sending the [CreateAgent](#Section_2.2.4.1.3.10) packet.
+**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be retrieved. This field MUST have been obtained by sending the [CreateAgent](#Section_2.2.4.2.2.4) packet.
 
 **lpAgentInfoContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
@@ -5158,7 +5158,7 @@ Returns a request identifier if the asynchronous operation starts; otherwise, th
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the open line device. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be retrieved. This field MUST have been obtained by sending the [CreateAgent](#Section_2.2.4.1.3.10) packet.
+**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be retrieved. This field MUST have been obtained by sending the [CreateAgent](#Section_2.2.4.2.2.4) packet.
 
 **lpAgentSessionListContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
@@ -5328,7 +5328,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (20 bytes):** Present on successful completion of the request. Contains a LINECALLHUBTRACKINGINFO packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.30"></a>
 ###### 2.2.4.1.3.30 GetCallIDs
@@ -5372,7 +5372,7 @@ MUST return zero if the function succeeds, or an error number if an error occurs
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose identifier is needed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose identifier is needed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet.
 
 **lpdwAddressID (4 bytes):** An unsigned 32-bit integer. Set to TAPI_NO_DATA (0xFFFFFFFF). Upon successful completion of the request, this field contains the address identifier of the call.
 
@@ -5441,7 +5441,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose call information is to be retrieved. The call state of hCall can be any state. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose call information is to be retrieved. The call state of hCall can be any state. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet.
 
 **lpCallInfo (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of a [LINECALLINFO](#Section_2.2.6.19) packet that is filled with call-related information upon successful completion of the request.
 
@@ -5471,7 +5471,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (variable):** Present on successful completion of the request. Contains a LINECALLINFO packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.32"></a>
 ###### 2.2.4.1.3.32 GetCallStatus
@@ -5516,7 +5516,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to query for its status. The call state of hCall can be any state. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to query for its status. The call state of hCall can be any state. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet.
 
 **lpCallStatus (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of a [LINECALLSTATUS](#Section_2.2.6.17) packet that is filled with call status information upon successful completion of the request.
 
@@ -5546,7 +5546,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (variable):** Present on successful completion of the request. Contains a LINECALLSTATUS packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.33"></a>
 ###### 2.2.4.1.3.33 GetDevConfig
@@ -5624,7 +5624,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (variable):** Contains a null-terminated Unicode string that is indicated by the lpszDeviceClass field in the original request. On successful completion of the request, this field contains only a VARSTRING packet that is indicated by the lpDeviceConfig field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.34"></a>
 ###### 2.2.4.1.3.34 GetGroupList
@@ -5751,7 +5751,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **dwAddressID (4 bytes):** An unsigned 32-bit integer. An address on the specified open line device. An address identifier is permanently associated with an address; the identifier remains constant across operating system upgrades. A valid value of dwAddressID is in the range 0 to dwNumAddresses – 1. The client obtains dwNumAddresses from the [LINEDEVCAPS](#Section_2.2.6.23) obtained by sending a [GetDevCaps](#Section_2.2.4.1.1.3) packet to the remote server. TAPI does not validate this parameter when this function is called.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet.
 
 **dwSelect (4 bytes):** An unsigned 32-bit integer. Specifies whether the device identifier that is requested is associated with the line, address, or a single call. The dwSelect parameter MUST have only one of the [LINECALLSELECT_Constants](#Section_2.2.3.1.28).
 
@@ -5777,7 +5777,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (variable):** Contains a null-terminated Unicode string that is indicated by the lpszDeviceClass field in the original request. On successful completion of the request, this field contains only a VARSTRING packet that is indicated by the lpDeviceConfig field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.36"></a>
 ###### 2.2.4.1.3.36 GetLineDevStatus
@@ -5852,7 +5852,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (variable):** Present on successful completion of the request. Contains a LINEDEVSTATUS packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.37"></a>
 ###### 2.2.4.1.3.37 GetNewCalls
@@ -5931,7 +5931,7 @@ On successful completion, this field MUST contain the offset, in bytes, of the p
 
 **VarData (variable):** This field is present only on successful completion of the request and contains a LINECALLLIST packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.38"></a>
 ###### 2.2.4.1.3.38 GetNumAddressIDs
@@ -6050,7 +6050,7 @@ MUST return zero if the request succeeds; otherwise, the function MUST return on
 
 **dwDeviceID (4 bytes):** An unsigned 32-bit integer. The line device to query. A valid value of dwDeviceID is in the range 0 to dwNumDevs –1. The client obtains dwNumDevs by sending a Initialize packet to the remote server.
 
-**dwAppAPIVersion (4 bytes):** An unsigned 32-bit integer. The version number of TAPI to be used. This value is obtained by sending the [NegotiateAPIVersion](#Section_2.2.4.1.4.2) packet.
+**dwAppAPIVersion (4 bytes):** An unsigned 32-bit integer. The version number of TAPI to be used. This value is obtained by sending the [NegotiateAPIVersion](#Section_2.2.4.1.1.2) packet.
 
 **lpLineProxyRequestList (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of a [LINEPROXYREQUESTLIST](#Section_2.2.6.34) packet that contains a list of the currently supported proxy requests, upon successful completion of the request.
 
@@ -6076,7 +6076,7 @@ On successful completion, this field contains the offset, in bytes, of the packe
 
 **VarData (variable):** Contains a LINEPROXYREQUESTLIST packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.40"></a>
 ###### 2.2.4.1.3.40 GetQueueInfo
@@ -6209,7 +6209,7 @@ MUST return a request identifier if the asynchronous operation starts; otherwise
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the open line device. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**pGroupID (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of a [**GUID**](#gt_globally-unique-identifier-guid) that identifies the group for which the list of queues is requested. The GUID of the group is obtained by sending a [GetAgentGroupList](#Section_2.2.4.2.2.11) packet to the remote server.
+**pGroupID (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of a [**GUID**](#gt_globally-unique-identifier-guid) that identifies the group for which the list of queues is requested. The GUID of the group is obtained by sending a [GetAgentGroupList](#Section_2.2.4.1.3.24) packet to the remote server.
 
 **cbGUID (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of the packet that is indicated in the pGroupID field, set to "sizeof (GUID)".
 
@@ -6231,7 +6231,7 @@ MUST return a request identifier if the asynchronous operation starts; otherwise
 
 **VarData (16 bytes):** Contains the GUID that is indicated by the **pGroupID** field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.42"></a>
 ###### 2.2.4.1.3.42 Hold
@@ -6278,7 +6278,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be placed on hold. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall must be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be placed on hold. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall must be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -6392,7 +6392,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains a null-terminated Unicode string that is indicated by the lpszDestAddress field and a LINECALLPARAMS packet that is indicated by the lpCallParams field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.44"></a>
 ###### 2.2.4.1.3.44 MonitorDigits
@@ -6438,7 +6438,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which digits are to be detected. The call state of hCall can be any state except idle or disconnected. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which digits are to be detected. The call state of hCall can be any state except idle or disconnected. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server.
 
 **dwDigitModes (4 bytes):** An unsigned 32-bit integer. The digit modes that are to be monitored. A dwDigitModes parameter with a value of 0 cancels digit monitoring. The dwDigitModes parameter MUST have one of the [LINEDIGITMODE_Constants](#Section_2.2.3.1.36).
 
@@ -6508,7 +6508,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. The call state of hCall can be any state except idle. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. The call state of hCall can be any state except idle. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server.
 
 **dwMediaModes (4 bytes):** An unsigned 32-bit integer. The media types to be monitored. The dwMediaModes parameter MUST be a bitwise combination of [LINEMEDIAMODE_Constants](#Section_2.2.3.1.44). A value of 0 cancels all media type monitoring.
 
@@ -6580,7 +6580,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on whose voice channel tones are to be monitored. The call state of hCall can be any state except idle. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on whose voice channel tones are to be monitored. The call state of hCall can be any state except idle. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server.
 
 **lpToneList (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field. Contains a list of tones to be monitored of type [LINEMONITORTONE](#Section_2.2.6.37).
 
@@ -6608,7 +6608,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **VarData (20 bytes):** Contains a LINEMONITORTONE packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.47"></a>
 ###### 2.2.4.1.3.47 NegotiateExtVersion
@@ -6731,7 +6731,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be parked. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall must be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be parked. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall must be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
 
 **dwParkMode (4 bytes):** An unsigned 32-bit integer. The park mode with which the call is to be parked; MUST be one of the [LINEPARKMODE_Constants](#Section_2.2.3.1.47).
 
@@ -6755,7 +6755,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains the null-terminated Unicode string that is indicated by the lpszDirAddress field or a VARSTRING packet that is indicated by the lpszNonDirAddress field.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.49"></a>
 ###### 2.2.4.1.3.49 PickUp
@@ -6831,7 +6831,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains two null-terminated Unicode strings that are indicated by the lpszDestAddress and lpszGroupID fields.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.50"></a>
 ###### 2.2.4.1.3.50 PrepareAddToConference
@@ -6893,7 +6893,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hConfCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a conference call. This field MUST have been obtained by sending the [SetUpConference](#Section_2.2.4.2.2.23) packet. The application MUST be an owner of this call. The call state of hConfCall MUST be connected.
+**hConfCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a conference call. This field MUST have been obtained by sending the [SetUpConference](#Section_2.2.4.1.3.77) packet. The application MUST be an owner of this call. The call state of hConfCall MUST be connected.
 
 **lphConsultCallContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
@@ -6917,7 +6917,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains a LINECALLPARAMS packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.51"></a>
 ###### 2.2.4.1.3.51 Redirect
@@ -6967,7 +6967,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be redirected. The client can obtain a valid hCall from the [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall must be offering. The client must have sent [MakeCall](#Section_2.2.4.2.2.19) packet to have hCall in offering state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be redirected. The client can obtain a valid hCall from the [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall must be offering. The client must have sent [MakeCall](#Section_2.2.4.1.3.43) packet to have hCall in offering state.
 
 **lpszDestAddress (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of a null-terminated Unicode string that specifies the destination address.
 
@@ -6993,7 +6993,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** MUST contain the null-terminated Unicode strings that are indicated by the lpszDestAddress.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.52"></a>
 ###### 2.2.4.1.3.52 ReleaseUserUserInfo
@@ -7038,7 +7038,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call for which user-user information is to be released. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call for which user-user information is to be released. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -7176,7 +7176,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be secured. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall can be any state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be secured. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall can be any state.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -7244,7 +7244,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the line where an extension version is to be selected. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The extension version to be selected. This version number has been negotiated by using the [NegotiateExtVersion](#Section_2.2.4.1.6.12) packet. The most-significant WORD is the major version number and the least-significant WORD is the minor version number. Calling this function with a dwExtVersion of zero cancels the current selection.
+**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The extension version to be selected. This version number has been negotiated by using the [NegotiateExtVersion](#Section_2.2.4.1.3.47) packet. The most-significant WORD is the major version number and the least-significant WORD is the minor version number. Calling this function with a dwExtVersion of zero cancels the current selection.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -7315,7 +7315,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier of the asynchronous request.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which to send user-user information. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall must be connected, offering, accepted, or ringback.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call on which to send user-user information. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall must be connected, offering, accepted, or ringback.
 
 **lpsUserUserInfo (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of user-user information to send to the remote party. When this field is set to -1 (0xFFFFFFFF), no user-user information is to be sent.
 
@@ -7341,7 +7341,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **VarData (variable):** Contains the user information that is indicated in the lpsUserUserInfo field. The user information can be an [**ASCII**](#gt_ascii) or Unicode string, and this data is opaque to the protocol.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.57"></a>
 ###### 2.2.4.1.3.57 SetAgentActivity
@@ -7558,7 +7558,7 @@ MUST return a request identifier if the asynchronous operation starts; otherwise
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the line device. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be changed. The client obtains this handle by sending a [CreateAgent](#Section_2.2.4.1.3.10) packet to the remote server.
+**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be changed. The client obtains this handle by sending a [CreateAgent](#Section_2.2.4.2.2.4) packet to the remote server.
 
 **dwMeasurementPeriod (4 bytes):** An unsigned 32-bit integer. The new measurement period, in seconds. MUST be greater than zero.
 
@@ -7788,7 +7788,7 @@ MUST return a request identifier if the asynchronous operation starts; otherwise
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the line device. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be changed. The client obtains this handle by sending a [CreateAgent](#Section_2.2.4.1.3.10) packet to the remote server.
+**hAgent (4 bytes):** An unsigned 32-bit integer. The identifier of the agent whose information is to be changed. The client obtains this handle by sending a [CreateAgent](#Section_2.2.4.2.2.4) packet to the remote server.
 
 **dwAgentState (4 bytes):** An unsigned 32-bit integer. The new agent state. MUST be one of the [LINEAGENTSTATEEX_Constants](#Section_2.2.3.1.11), or zero, to leave the agent state unchanged and modify only the next state.
 
@@ -7852,7 +7852,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** The handle to the call whose application-specific field needs to be set. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state.
+**hCall (4 bytes):** The handle to the call whose application-specific field needs to be set. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state.
 
 **dwAppSpecific (4 bytes):** The new content of the dwAppSpecific member for the call's LINECALLINFO packet. This value is uninterpreted by the service provider. This parameter is not validated by TAPI when this function is called.
 
@@ -7925,7 +7925,7 @@ Returns a positive request identifier if the asynchronous operation starts; othe
 
 **dwRequestID (4 bytes):** An unsigned 32-bit integer. The identifier for reporting asynchronous completion information.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST have OWNER privileges.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST have OWNER privileges.
 
 **lpCallData (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the **VarData** field, that contains the data to be copied to the CallData field in [LINECALLINFO](#Section_2.2.6.19), replacing any existing data.
 
@@ -7951,7 +7951,7 @@ Returns a positive request identifier if the asynchronous operation starts; othe
 
 **VarData (variable):** Contains data to copy to the CallData member of a LINECALLINFO packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.65"></a>
 ###### 2.2.4.1.3.65 SetCallHubTracking
@@ -8024,7 +8024,7 @@ MUST return zero if the function succeeds or an error number if an error occurs.
 
 **VarData (20 bytes):** Contains a LINECALLHUBTRACKINGINFO packet.
 
-The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.9.
+The contents of this field MUST be DWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9.
 
 <a id="Section_2.2.4.1.3.66"></a>
 ###### 2.2.4.1.3.66 SetCallParams
@@ -8084,7 +8084,7 @@ Returns a positive request identifier if the function will be completed asynchro
 | 0x00000000 | The server MUST generate a unique positive request ID to return as the Ack_ReturnValue. |
 | 0x00000001 — 0x7FFFFFFF | The server MUST use this value instead of generating a unique positive request ID. |
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose parameters are to be changed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state except idle or disconnected.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose parameters are to be changed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state except idle or disconnected.
 
 **dwBearerMode (4 bytes):** An unsigned 32-bit integer. The new bearer mode for the call. This field MUST use one of the [LINEBEARERMODE_Constants](#Section_2.2.3.1.15).
 
@@ -8167,7 +8167,7 @@ Returns a positive request identifier if the asynchronous operation starts; othe
 | 0x00000000 | The server MUST generate a unique positive request ID to return as the Ack_ReturnValue. |
 | 0x00000001 — 0x7FFFFFFF | The server MUST use this value instead of generating a unique positive request ID. |
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST have OWNER privilege.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST have OWNER privilege.
 
 **lpSendingFlowspec (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, in the VarData field of a WinSock2 [FLOWSPEC](#Section_2.2.4.1.3.67.1) packet that is followed by provider-specific data.
 
@@ -8296,7 +8296,7 @@ Returns a positive request identifier if the asynchronous operation starts; othe
 | 0x00000000 | The server MUST generate a unique positive request ID to return as the Ack_ReturnValue. |
 | 0x00000001 — 0x7FFFFFFF | The server MUST use this value instead of generating a unique positive request ID. |
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST have OWNER privileges.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST have OWNER privileges.
 
 **dwTreatment (4 bytes):** An unsigned 32-bit integer. MUST be one of the call treatments that are supported on the address on which the call appears, as indicated by [LINEADDRESSCAPS](#Section_2.2.6.6). LINEERR_INVALPARAM is returned if the specified treatment is not supported.
 
@@ -8592,7 +8592,7 @@ Returns zero if the function succeeds or an error number if an error occurs. Com
 
 **dwAddressID (4 bytes):** An unsigned 32-bit integer. An address on the particular open line device. An address identifier is permanently associated with an address; the identifier remains constant across operating system upgrades. TAPI does not validate this parameter when this function is called. A valid value of dwAddressID is in the range 0 to dwNumAddresses –1. The client obtains dwNumAddresses from the [LINEDEVCAPS](#Section_2.2.6.23) obtained by sending a [GetDevCaps](#Section_2.2.4.1.1.3) packet to the remote server.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The call state of hCall can be any state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The call state of hCall can be any state.
 
 **dwSelect (4 bytes):** An unsigned 32-bit integer. Specifies whether the requested media control is associated with a single call; is the default for all calls on an address; or is the default for all calls on a line. This parameter MUST use the [LINECALLSELECT_Constants](#Section_2.2.3.1.28).
 
@@ -8662,7 +8662,7 @@ Returns zero if the request succeeds or a negative error number if an error occu
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose media type is to be changed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call whose media type is to be changed. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hCall can be any state.
 
 **dwMediaMode (4 bytes):** An unsigned 32-bit integer. The new media types for the call. This parameter MUST use the [LINEMEDIAMODE_Constants](#Section_2.2.3.1.44). If the UNKNOWN media type flag is set, other media type flags can also be set. This field MUST be used to identify the media type of a call when the media type is not fully determined, but is narrowed down to one of a small set of specified media types. If the UNKNOWN flag is not set, only a single media type can be specified.
 
@@ -8893,7 +8893,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **dwAddressID (4 bytes):** An unsigned 32-bit integer. The address on the specified open line device. An address identifier is permanently associated with an address; the identifier remains constant across operating system upgrades. A valid value of dwAddressID is in the range 0 to dwNumAddresses –1. The client obtains dwNumAddresses from the [LINEDEVCAPS](#Section_2.2.6.23) obtained by sending a [GetDevCaps](#Section_2.2.4.1.1.3) packet to the remote server.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The call state of hCall can be any state if dwSelect is CALL.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to a call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. Also a valid hCall can be obtained from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The call state of hCall can be any state if dwSelect is CALL.
 
 **dwSelect (4 bytes):** An unsigned 32-bit integer. Specifies whether the terminal setting is requested for the line, the address, or just the specified call. If line or address is specified, events either apply to the line or address itself, or serve as a default initial setting for all new calls on the line or address. This parameter MUST use one of the [LINECALLSELECT_Constants](#Section_2.2.3.1.28).
 
@@ -8985,7 +8985,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the Initial call that identifies the first party of a conference call. In some environments, a call MUST exist to start a conference call, and the application MUST be an owner of this call. In other telephony environments, where no call initially exists, hCall MUST be left NULL, and hLine MUST be specified to identify the line on which the conference call is to be initiated. If hCall is not NULL, the call state of hCall must be connected. One way in which this handle can be obtained is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet to the remote server.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the Initial call that identifies the first party of a conference call. In some environments, a call MUST exist to start a conference call, and the application MUST be an owner of this call. In other telephony environments, where no call initially exists, hCall MUST be left NULL, and hLine MUST be specified to identify the line on which the conference call is to be initiated. If hCall is not NULL, the call state of hCall must be connected. One way in which this handle can be obtained is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet to the remote server.
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the line. This handle MUST be used to identify the line device on which to originate the conference call if hCall is NULL. The hLine parameter is ignored if hCall is not NULL. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
@@ -9079,7 +9079,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be transferred. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hCall must be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
+**hCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the call to be transferred. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hCall must be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
 
 **lphConsultCallContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
@@ -9157,7 +9157,7 @@ Returns a positive request identifier if the function will be completed asynchro
 | 0x00000000 | An unsigned 32-bit integer. The server MUST generate a unique positive request ID to return as the Ack_ReturnValue. |
 | 0x00000001 — 0x7FFFFFFF | The server MUST use this value instead of generating a unique positive request ID. |
 
-**hActiveCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the active call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.2.2.19) packet. The application MUST be an owner of the call. The call state of hActiveCall MUST be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
+**hActiveCall (4 bytes):** An [HCALL](#Section_2.2.1.1). The handle to the active call. One way of obtaining a valid hCall is by sending the [MakeCall](#Section_2.2.4.1.3.43) packet. The application MUST be an owner of the call. The call state of hActiveCall MUST be connected. One way to have hCall in connected state is by sending [Answer](#Section_2.2.4.1.3.4) packet.
 
 **hHeldCall (4 bytes):** An HCALL. The handle to the consultation call. One way of obtaining a valid hCall is from [LINE_CALLSTATE](#Section_2.2.4.2.1.8) packet sent by the remote server. The application MUST be an owner of the call. The call state of hHeldCall can be onHoldPendingTransfer, onHoldPendingConference, or onHold.
 
@@ -9234,7 +9234,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the line device on which a call completion is to be canceled. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**dwCompletionID (4 bytes):** An unsigned 32-bit integer. The completion identifier for the request that is to be canceled. This value is obtained by sending a [CompleteCall](#Section_2.2.4.2.2.2) request to the remote server.
+**dwCompletionID (4 bytes):** An unsigned 32-bit integer. The completion identifier for the request that is to be canceled. This value is obtained by sending a [CompleteCall](#Section_2.2.4.1.3.7) request to the remote server.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -9388,7 +9388,7 @@ Returns a positive request identifier if the function will be completed asynchro
 
 **lpContext (4 bytes):** An unsigned 32-bit integer. The opaque, client-specified value that is used by the client upon request completion; MUST be returned by the server in the request completion packet.
 
-**hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the open line device on which a call is to be unparked. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet. To park the call, the client needs to send a [Park](#Section_2.2.4.2.2.20) packet to the remote server.
+**hLine (4 bytes):** An [HLINE](#Section_2.2.1.2). The handle to the open line device on which a call is to be unparked. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet. To park the call, the client needs to send a [Park](#Section_2.2.4.1.3.48) packet to the remote server.
 
 **dwAddressID (4 bytes):** An unsigned 32-bit integer. The address on hLine at which the unpark is to be originated. An address identifier is permanently associated with an address; the identifier remains constant across operating system upgrades. A valid value of dwAddressID is in the range 0 to dwNumAddresses – 1. The client obtains dwNumAddresses from the [LINEDEVCAPS](#Section_2.2.6.23) obtained by sending a [GetDevCaps](#Section_2.2.4.1.1.3) packet to the remote server.
 
@@ -9631,9 +9631,9 @@ Returns zero if the request succeeds or a negative error number if an error occu
 
 **dwDeviceID (4 bytes):** An unsigned 32-bit integer. The identifier of the phone device to be queried. A valid value of dwDeviceID is in the range 0 to dwNumDevs – 1. The client obtains dwNumDevs by sending a Initialize packet to the remote server.
 
-**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The version number of the TAPI to be used. The high-order word contains the major version number; the low-order word contains the minor version number. This number is obtained by using [NegotiateAPIVersion](#Section_2.2.4.1.4.2).
+**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The version number of the TAPI to be used. The high-order word contains the major version number; the low-order word contains the minor version number. This number is obtained by using [NegotiateAPIVersion](#Section_2.2.4.1.1.2).
 
-**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The version number of the service provider-specific extensions to be used. This number is obtained by using [NegotiateExtVersion](#Section_2.2.4.1.6.12). It can be zero if no device-specific extensions are used. Otherwise, the high-order word contains the major version number; the low-order word contains the minor version number.
+**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The version number of the service provider-specific extensions to be used. This number is obtained by using [NegotiateExtVersion](#Section_2.2.4.1.3.47). It can be zero if no device-specific extensions are used. Otherwise, the high-order word contains the major version number; the low-order word contains the minor version number.
 
 **lpPhoneCaps (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of a [PHONECAPS](#Section_2.2.6.42) packet that contains phone device capability information on successful completion of the request.
 
@@ -9723,9 +9723,9 @@ Returns zero if the request succeeds or a negative error number if an error occu
 
 **hPhone (4 bytes):** An [HPHONE](#Section_2.2.1.4). Set to TAPI_NO_DATA (0xFFFFFFFF). Upon successful completion of the request, this field contains the handle for the phone device to be used by TAPI in subsequent calls to identify the device.
 
-**dwNegotiatedVersion (4 bytes):** An unsigned 32-bit integer. The version that is negotiated via the [NegotiateAPIVersion](#Section_2.2.4.1.4.2) request.
+**dwNegotiatedVersion (4 bytes):** An unsigned 32-bit integer. The version that is negotiated via the [NegotiateAPIVersion](#Section_2.2.4.1.1.2) request.
 
-**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The extension version number under which the application and the service provider agree to operate. This number is zero if the application does not use any extensions. This number is obtained from [NegotiateExtVersion](#Section_2.2.4.1.6.12).
+**dwExtVersion (4 bytes):** An unsigned 32-bit integer. The extension version number under which the application and the service provider agree to operate. This number is zero if the application does not use any extensions. This number is obtained from [NegotiateExtVersion](#Section_2.2.4.1.3.47).
 
 **OpenContext (4 bytes):** An unsigned 32-bit integer. The Callback instance, set to 0.
 
@@ -9889,7 +9889,7 @@ Returns zero if the request succeeds or a negative error number if an error occu
 <a id="Section_2.2.4.1.6"></a>
 ##### 2.2.4.1.6 Phone Device Requests
 
-The packets in the following sections, from the [DevSpecific (section 2.2.4.1.6.1)](#Section_2.2.4.2.3.1) packet to the [SetVolume (section 2.2.4.1.6.22)](#Section_2.2.4.1.6.22) packet, describe phone device requests that are sent from a TAPI [**client**](#gt_client) to a TAPI [**server**](#gt_server) on the tapsrv interface by using a [ClientRequest](#Section_3.1.4.2) [**remote procedure call**](#gt_remote-procedure-call-rpc).
+The packets in the following sections, from the [DevSpecific (section 2.2.4.1.6.1)](#Section_2.2.4.1.6.1) packet to the [SetVolume (section 2.2.4.1.6.22)](#Section_2.2.4.1.6.22) packet, describe phone device requests that are sent from a TAPI [**client**](#gt_client) to a TAPI [**server**](#gt_server) on the tapsrv interface by using a [ClientRequest](#Section_3.1.4.2) [**remote procedure call**](#gt_remote-procedure-call-rpc).
 
 <a id="Section_2.2.4.1.6.1"></a>
 ###### 2.2.4.1.6.1 DevSpecific
@@ -10778,7 +10778,7 @@ Returns 0 if the request succeeds or a negative error number if an error occurs.
 
 **dwDeviceID (4 bytes):** An unsigned 32-bit integer. The identifier of the phone device to be queried. A valid value of dwDeviceID is in the range 0 to dwNumDevs –1. The client obtains dwNumDevs by sending a Initialize packet to the remote server.
 
-**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The TAPI version number that was negotiated for the specified phone device by using [NegotiateAPIVersion](#Section_2.2.4.1.4.2).
+**dwTSPIVersion (4 bytes):** An unsigned 32-bit integer. The TAPI version number that was negotiated for the specified phone device by using [NegotiateAPIVersion](#Section_2.2.4.1.1.2).
 
 **dwLowVersion (4 bytes):** An unsigned 32-bit integer. The least recent extension version of the extension identifier that is returned by NegotiateAPIVersion and with which the application is compliant. The high-order word is the major version number; the low-order word is the minor version number.
 
@@ -10844,7 +10844,7 @@ Returns 0 if the function succeeds or an error number if an error occurs. The fo
 
 **hPhone (4 bytes):** An [HPHONE](#Section_2.2.1.4). The handle to the phone for which an extension version is to be selected. This field MUST have been obtained by sending the [Open](#Section_2.2.4.1.1.5) packet.
 
-**dwExtVersion (4 bytes):** The extension version to be selected. This field MUST have been obtained by sending the [NegotiateExtVersion](#Section_2.2.4.1.6.12) packet. The most-significant WORD is the major version number and the least-significant WORD is the minor version number. Calling this function with a dwExtVersion of zero cancels the current selection.
+**dwExtVersion (4 bytes):** The extension version to be selected. This field MUST have been obtained by sending the [NegotiateExtVersion](#Section_2.2.4.1.3.47) packet. The most-significant WORD is the major version number and the least-significant WORD is the minor version number. Calling this function with a dwExtVersion of zero cancels the current selection.
 
 **Reserved2 (4 bytes):** An unsigned 32-bit integer. This field is used for padding and MUST be ignored on receipt. It can be any value.
 
@@ -11804,7 +11804,7 @@ MUST return zero if the request succeeds or a negative error number if an error 
 
 **Reserved1 (4 bytes):** An unsigned 32-bit integer. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**dwAPIVersion (4 bytes):** An unsigned 32-bit integer. The highest version of TAPI that is supported by the application (not necessarily the value that is negotiated by the [NegotiateAPIVersion](#Section_2.2.4.1.4.2) packet on some particular line devices).
+**dwAPIVersion (4 bytes):** An unsigned 32-bit integer. The highest version of TAPI that is supported by the application (not necessarily the value that is negotiated by the [NegotiateAPIVersion](#Section_2.2.4.1.1.2) packet on some particular line devices).
 
 **lpProviderList (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of a [LINEPROVIDERLIST](#Section_2.2.6.32) packet that is filled with agent capabilities information, upon successful completion of the request. On successful completion, this field contains the offset, in bytes, of the packet in the VarData field.
 
@@ -12582,7 +12582,7 @@ This information MUST be passed back to the application with each completion and
 <a id="Section_2.2.4.2.1.3"></a>
 ###### 2.2.4.2.1.3 LINE_AGENTSPECIFIC
 
-The LINE_AGENTSPECIFIC packet is sent when the status of an ACD agent changes on a line that the application currently has open. An ACD agent can be established using [CreateAgent](#Section_2.2.4.1.3.10) packet. The application can send the [GetAgentStatus](#Section_2.2.4.2.2.15) packet to determine the current status of the agent.
+The LINE_AGENTSPECIFIC packet is sent when the status of an ACD agent changes on a line that the application currently has open. An ACD agent can be established using [CreateAgent](#Section_2.2.4.2.2.4) packet. The application can send the [GetAgentStatus](#Section_2.2.4.1.3.28) packet to determine the current status of the agent.
 
 ```mermaid
 packet-beta
@@ -12614,7 +12614,7 @@ This information MUST be passed back to the application with each completion and
 
 **Param1 (4 bytes):** An unsigned 32-bit integer. The index into the array of handler extension identifiers in the [LINEAGENTCAPS](#Section_2.2.6.13) packet of the handler extension with which the asynchronous event is associated.
 
-**Param2 (4 bytes):** An unsigned 32-bit integer. Specific to the handler extension. This value MUST be used to cause the application to send an [AgentSpecific](#Section_2.2.4.2.2.1) packet to obtain further details about the asynchronous event.
+**Param2 (4 bytes):** An unsigned 32-bit integer. Specific to the handler extension. This value MUST be used to cause the application to send an [AgentSpecific](#Section_2.2.4.1.3.3) packet to obtain further details about the asynchronous event.
 
 **Param3 (4 bytes):** An unsigned 32-bit integer. Specific to the handler extension.
 
@@ -12627,7 +12627,7 @@ If there is no valid call handle that is associated with the packet, the server 
 <a id="Section_2.2.4.2.1.4"></a>
 ###### 2.2.4.2.1.4 LINE_AGENTSTATUS
 
-The LINE_AGENTSTATUS packet is sent when the status of an ACD agent changes on a line that the application currently has open. An ACD agent can be created using [CreateAgent](#Section_2.2.4.1.3.10) packet. The application can invoke the [GetAgentStatus](#Section_2.2.4.2.2.15) packet to determine the current status of the agent.
+The LINE_AGENTSTATUS packet is sent when the status of an ACD agent changes on a line that the application currently has open. An ACD agent can be created using [CreateAgent](#Section_2.2.4.2.2.4) packet. The application can invoke the [GetAgentStatus](#Section_2.2.4.1.3.28) packet to determine the current status of the agent.
 
 ```mermaid
 packet-beta
@@ -12668,7 +12668,7 @@ This information MUST be passed back to the application with each completion and
 <a id="Section_2.2.4.2.1.5"></a>
 ###### 2.2.4.2.1.5 LINE_AGENTSTATUSEX
 
-The LINE_AGENTSTATUSEX packet is sent when the status of an ACD agent changes on an agent handler for which the application currently has an open line. An ACD agent can be created using [CreateAgent](#Section_2.2.4.1.3.10) packet.
+The LINE_AGENTSTATUSEX packet is sent when the status of an ACD agent changes on an agent handler for which the application currently has an open line. An ACD agent can be created using [CreateAgent](#Section_2.2.4.2.2.4) packet.
 
 ```mermaid
 packet-beta
@@ -12750,7 +12750,7 @@ This information MUST be passed back to the application with each completion and
 <a id="Section_2.2.4.2.1.7"></a>
 ###### 2.2.4.2.1.7 LINE_CALLINFO
 
-The LINE_CALLINFO packet is sent when call information about the specified call has changed. A call can be established using [MakeCall](#Section_2.2.4.2.2.19) packet. The application can send the [GetCallInfo](#Section_2.2.4.1.3.31) packet to determine the current call information.
+The LINE_CALLINFO packet is sent when call information about the specified call has changed. A call can be established using [MakeCall](#Section_2.2.4.1.3.43) packet. The application can send the [GetCallInfo](#Section_2.2.4.1.3.31) packet to determine the current call information.
 
 ```mermaid
 packet-beta
@@ -12799,7 +12799,7 @@ No LINE_CALLINFO messages are sent for a call after the call has entered the idl
 <a id="Section_2.2.4.2.1.8"></a>
 ###### 2.2.4.2.1.8 LINE_CALLSTATE
 
-The LINE_CALLSTATE packet is sent when the status of the specified call has changed. Typically, several such packets are received during the lifetime of a call. Applications are notified of new incoming calls with this packet. A call can be established using the [MakeCall](#Section_2.2.4.2.2.19) packet. The application can use the [GetCallStatus](#Section_2.2.4.1.3.32) packet to retrieve more detailed information about the current status of the call.
+The LINE_CALLSTATE packet is sent when the status of the specified call has changed. Typically, several such packets are received during the lifetime of a call. Applications are notified of new incoming calls with this packet. A call can be established using the [MakeCall](#Section_2.2.4.1.3.43) packet. The application can use the [GetCallStatus](#Section_2.2.4.1.3.32) packet to retrieve more detailed information about the current status of the call.
 
 ```mermaid
 packet-beta
@@ -13876,7 +13876,7 @@ The following sections, [AgentSpecific (section 2.2.4.2.2.1)](#Section_2.2.4.2
 <a id="Section_2.2.4.2.2.1"></a>
 ###### 2.2.4.2.2.1 AgentSpecific
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [AgentSpecific](#Section_2.2.4.2.2.1) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [AgentSpecific](#Section_2.2.4.1.3.3) request.
 
 ```mermaid
 packet-beta
@@ -13913,12 +13913,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that is returned in the VarData field.
 
-**VarData (variable):** Opaque data sent to the [**client**](#gt_client) according to the corresponding AgentSpecific request. The server provides padding to ensure that the entire packet is aligned on a QWORD boundary, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Opaque data sent to the [**client**](#gt_client) according to the corresponding AgentSpecific request. The server provides padding to ensure that the entire packet is aligned on a QWORD boundary, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.2"></a>
 ###### 2.2.4.2.2.2 CompleteCall
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [CompleteCall](#Section_2.2.4.2.2.2) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [CompleteCall](#Section_2.2.4.1.3.7) request.
 
 ```mermaid
 packet-beta
@@ -14005,7 +14005,7 @@ packet-beta
 <a id="Section_2.2.4.2.2.4"></a>
 ###### 2.2.4.2.2.4 CreateAgent
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [CreateAgent](#Section_2.2.4.1.3.10) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [CreateAgent](#Section_2.2.4.2.2.4) request.
 
 ```mermaid
 packet-beta
@@ -14042,7 +14042,7 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.5"></a>
 ###### 2.2.4.2.2.5 CreateAgentSession
@@ -14084,12 +14084,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.6"></a>
 ###### 2.2.4.2.2.6 DevSpecific
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [DevSpecific](#Section_2.2.4.2.3.1) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [DevSpecific](#Section_2.2.4.1.6.1) request.
 
 ```mermaid
 packet-beta
@@ -14126,12 +14126,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.7"></a>
 ###### 2.2.4.2.2.7 DevSpecificFeature
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [DevSpecificFeature](#Section_2.2.4.1.3.13) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [DevSpecificFeature](#Section_2.2.4.2.2.7) request.
 
 ```mermaid
 packet-beta
@@ -14168,12 +14168,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains opaque data of the size specified by **dwSize**. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.8"></a>
 ###### 2.2.4.2.2.8 Forward
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [Forward](#Section_2.2.4.2.2.8) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [Forward](#Section_2.2.4.1.3.16) request.
 
 ```mermaid
 packet-beta
@@ -14258,7 +14258,7 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains a [LINEAGENTACTIVITYLIST](#Section_2.2.6.10) packet. The offset and size fields within the LINEAGENTACTIVITYLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains a [LINEAGENTACTIVITYLIST](#Section_2.2.6.10) packet. The offset and size fields within the LINEAGENTACTIVITYLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.10"></a>
 ###### 2.2.4.2.2.10 GetAgentCaps
@@ -14300,12 +14300,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet. The dwSize MUST NOT exceed the lpAgentCapsSize specified in the original line GetAgentCaps request.
 
-**VarData (variable):** Contains the [LINEAGENTCAPS](#Section_2.2.6.13) packet. The offset and size fields within the LINEAGENTCAPS and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains the [LINEAGENTCAPS](#Section_2.2.6.13) packet. The offset and size fields within the LINEAGENTCAPS and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.11"></a>
 ###### 2.2.4.2.2.11 GetAgentGroupList
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentGroupList](#Section_2.2.4.2.2.11) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentGroupList](#Section_2.2.4.1.3.24) request.
 
 ```mermaid
 packet-beta
@@ -14342,7 +14342,7 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet. The dwSize MUST NOT exceed the lpAgentGroupListSize specified in the original line GetAgentGroupList request.
 
-**VarData (variable):** Contains [LINEAGENTGROUPLIST](#Section_2.2.6.11) packet. The offset and size fields within the LINEAGENTGROUPLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains [LINEAGENTGROUPLIST](#Section_2.2.6.11) packet. The offset and size fields within the LINEAGENTGROUPLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.12"></a>
 ###### 2.2.4.2.2.12 GetAgentInfo
@@ -14384,12 +14384,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains a [LINEAGENTINFO](#Section_2.2.6.47) packet. Offset and size fields within the LINEAGENTINFO and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains a [LINEAGENTINFO](#Section_2.2.6.47) packet. Offset and size fields within the LINEAGENTINFO and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.13"></a>
 ###### 2.2.4.2.2.13 GetAgentSessionInfo
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentSessionInfo](#Section_2.2.4.2.2.13) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentSessionInfo](#Section_2.2.4.1.3.26) request.
 
 ```mermaid
 packet-beta
@@ -14426,12 +14426,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains a [LINEAGENTSESSIONINFO](#Section_2.2.6.16) packet. The offset and size fields within the LINEAGENTSESSIONINFO and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains a [LINEAGENTSESSIONINFO](#Section_2.2.6.16) packet. The offset and size fields within the LINEAGENTSESSIONINFO and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.14"></a>
 ###### 2.2.4.2.2.14 GetAgentSessionList
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentSessionList](#Section_2.2.4.2.2.14) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentSessionList](#Section_2.2.4.1.3.27) request.
 
 ```mermaid
 packet-beta
@@ -14468,12 +14468,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains a [LINEAGENTSESSIONLIST](#Section_2.2.6.15) packet. The offset and size fields within the LINEAGENTSESSIONLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains a [LINEAGENTSESSIONLIST](#Section_2.2.6.15) packet. The offset and size fields within the LINEAGENTSESSIONLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.15"></a>
 ###### 2.2.4.2.2.15 GetAgentStatus
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentStatus](#Section_2.2.4.2.2.15) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [GetAgentStatus](#Section_2.2.4.1.3.28) request.
 
 ```mermaid
 packet-beta
@@ -14512,12 +14512,12 @@ packet-beta
 
 **VarData (variable):** Contains the agent status [LINEAGENTSTATUS](#Section_2.2.6.8) data of size dwSize. The offset and size fields within the LINEAGENTSTATUS MUST refer to data within this VarData field.
 
-The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.16"></a>
 ###### 2.2.4.2.2.16 GetGroupList
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [GetGroupList](#Section_2.2.4.2.2.16) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [GetGroupList](#Section_2.2.4.1.3.34) request.
 
 ```mermaid
 packet-beta
@@ -14554,12 +14554,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet. The dwSize is MUST NOT exceed the lpAgentGroupListSize specified in the original line GetGroupList request.
 
-**VarData (variable):** Contains [LINEAGENTGROUPLIST](#Section_2.2.6.11) packet. The offset and size fields within the LINEAGENTGROUPLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains [LINEAGENTGROUPLIST](#Section_2.2.6.11) packet. The offset and size fields within the LINEAGENTGROUPLIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.17"></a>
 ###### 2.2.4.2.2.17 GetQueueInfo
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [GetQueueInfo](#Section_2.2.4.2.2.17) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [GetQueueInfo](#Section_2.2.4.1.3.40) request.
 
 ```mermaid
 packet-beta
@@ -14596,7 +14596,7 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (52 bytes):** Contains a [LINEQUEUEINFO](#Section_2.2.6.29) packet. The offset and size fields within the LINEQUEUEINFO and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (52 bytes):** Contains a [LINEQUEUEINFO](#Section_2.2.6.29) packet. The offset and size fields within the LINEQUEUEINFO and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.18"></a>
 ###### 2.2.4.2.2.18 GetQueueList
@@ -14638,12 +14638,12 @@ packet-beta
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that immediately follows this packet.
 
-**VarData (variable):** Contains a [LINEQUEUELIST](#Section_2.2.6.35) packet. The offset and size fields within the LINEQUEUELIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Contains a [LINEQUEUELIST](#Section_2.2.6.35) packet. The offset and size fields within the LINEQUEUELIST and further included packets MUST refer to data within this VarData field. The contents of this field MUST be QWORD-aligned, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.4.2.2.19"></a>
 ###### 2.2.4.2.2.19 MakeCall
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [MakeCall](#Section_2.2.4.2.2.19) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [MakeCall](#Section_2.2.4.1.3.43) request.
 
 ```mermaid
 packet-beta
@@ -14691,7 +14691,7 @@ packet-beta
 <a id="Section_2.2.4.2.2.20"></a>
 ###### 2.2.4.2.2.20 Park
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [Park](#Section_2.2.4.2.2.20) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [Park](#Section_2.2.4.1.3.48) request.
 
 ```mermaid
 packet-beta
@@ -14781,7 +14781,7 @@ packet-beta
 <a id="Section_2.2.4.2.2.22"></a>
 ###### 2.2.4.2.2.22 PrepareAddToConference
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [PrepareAddToConference](#Section_2.2.4.2.2.22) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [PrepareAddToConference](#Section_2.2.4.1.3.50) request.
 
 ```mermaid
 packet-beta
@@ -14829,7 +14829,7 @@ packet-beta
 <a id="Section_2.2.4.2.2.23"></a>
 ###### 2.2.4.2.2.23 SetUpConference
 
-This is the completion packet sent by the [**server**](#gt_server) for the line [SetUpConference](#Section_2.2.4.2.2.23) request.
+This is the completion packet sent by the [**server**](#gt_server) for the line [SetUpConference](#Section_2.2.4.1.3.77) request.
 
 ```mermaid
 packet-beta
@@ -14988,7 +14988,7 @@ packet-beta
 <a id="Section_2.2.4.2.3"></a>
 ##### 2.2.4.2.3 Special Case Phone Device Completion Packets
 
-[DevSpecific (section 2.2.4.2.3.1)](#Section_2.2.4.2.3.1) is a phone device completion packet sent by the TAPI [**server**](#gt_server) to the TAPI [**client**](#gt_client) for specific (phone [DevSpecific](#Section_2.2.4.2.3.1)) requests.
+[DevSpecific (section 2.2.4.2.3.1)](#Section_2.2.4.2.3.1) is a phone device completion packet sent by the TAPI [**server**](#gt_server) to the TAPI [**client**](#gt_client) for specific (phone [DevSpecific](#Section_2.2.4.1.6.1)) requests.
 
 <a id="Section_2.2.4.2.3.1"></a>
 ###### 2.2.4.2.3.1 DevSpecific
@@ -15026,11 +15026,11 @@ packet-beta
 
 **Result (4 bytes):** An unsigned 32-bit integer. The request result, for example, 0 for success or a [LINEERR_Constants](#Section_2.2.3.1.38) value for an error.
 
-**lpParamsContext (4 bytes):** An unsigned 32-bit integer. An opaque, client-specified value that MUST be equal to the lpParamsContext value in the original phone [DevSpecific](#Section_2.2.4.2.3.1) request.
+**lpParamsContext (4 bytes):** An unsigned 32-bit integer. An opaque, client-specified value that MUST be equal to the lpParamsContext value in the original phone [DevSpecific](#Section_2.2.4.1.6.1) request.
 
 **dwSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of any returned variable-length data that is returned in **VarData** field.
 
-**VarData (variable):** Opaque data sent to the [**client**](#gt_client) according to the corresponding original DevSpecific request. The server provides padding to ensure that the entire packet is aligned on a QWORD boundary, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.40.
+**VarData (variable):** Opaque data sent to the [**client**](#gt_client) according to the corresponding original DevSpecific request. The server provides padding to ensure that the entire packet is aligned on a QWORD boundary, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.40.
 
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Data Templates
@@ -15069,7 +15069,7 @@ If **hDevice** refers to a line device handle and the **hRemoteLine** value spec
 
 If **hDevice** refers to a phone device handle and the **hRemotePhone** value specified in the original scoping of the phone [Open](#Section_2.2.4.1.1.5) request was nonzero, then the server MUST set this field to the **hRemotePhone** value.
 
-**Msg (4 bytes):** An unsigned 32-bit integer. The packet type identifier. The value MUST be one of the packet type identifier values in the completion packets in section [2.2.4.2.1](#Section_2.2.4.2.1.9).
+**Msg (4 bytes):** An unsigned 32-bit integer. The packet type identifier. The value MUST be one of the packet type identifier values in the completion packets in section [2.2.4.2.1](#Section_2.2.4.2.1).
 
 **OpenContext (4 bytes):** An unsigned 32-bit integer. An opaque, client-specified value that MUST be equal to the OpenContext value specified in the original scoping of the line Open or the phone Open requests.
 
@@ -15434,7 +15434,7 @@ packet-beta
 
 **dwForwardModes (4 bytes):** An unsigned 32-bit integer. The different modes of forwarding that are available for this address. This member MUST use one or more of the [LINEFORWARDMODE_Constants](#Section_2.2.3.1.40).
 
-**dwMaxForwardEntries (4 bytes):** An unsigned 32-bit integer. The maximum number of entries that can be passed to the [Forward](#Section_2.2.4.2.2.8) packet in the lpForwardList parameter.
+**dwMaxForwardEntries (4 bytes):** An unsigned 32-bit integer. The maximum number of entries that can be passed to the [Forward](#Section_2.2.4.1.3.16) packet in the lpForwardList parameter.
 
 **dwMaxSpecificEntries (4 bytes):** An unsigned 32-bit integer. The maximum number of entries in the lpForwardList parameter that is passed to the Forward packet that can contain forwarding instructions based on a specific caller ID (selective call forwarding). This member is zero if selective call forwarding is not supported.
 
@@ -15565,7 +15565,7 @@ This packet MUST be returned by the GetAddressStatus packet. When items in this 
 <a id="Section_2.2.6.8"></a>
 #### 2.2.6.8 LINEAGENTSTATUS
 
-The LINEAGENTSTATUS packet describes the current status of an ACD agent. LINEAGENTSTATUS is supplied by the server in the field VarData of the completion packet of the [GetAgentStatus](#Section_2.2.4.2.2.15) request.
+The LINEAGENTSTATUS packet describes the current status of an ACD agent. LINEAGENTSTATUS is supplied by the server in the field VarData of the completion packet of the [GetAgentStatus](#Section_2.2.4.1.3.28) request.
 
 ```mermaid
 packet-beta
@@ -15666,7 +15666,7 @@ packet-beta
 
 The LINEAGENTGROUPLIST packet describes a list of ACD agent groups. This packet can contain an array of [LINEAGENTGROUPENTRY](#Section_2.2.6.12) packets.
 
-Multiple packets use the LINEAGENTGROUPLIST packet; these include the [GetAgentGroupList](#Section_2.2.4.2.2.11), [GetGroupList](#Section_2.2.4.2.2.16), and [SetAgentGroup](#Section_2.2.4.1.3.58) packets.
+Multiple packets use the LINEAGENTGROUPLIST packet; these include the [GetAgentGroupList](#Section_2.2.4.1.3.24), [GetGroupList](#Section_2.2.4.1.3.34), and [SetAgentGroup](#Section_2.2.4.1.3.58) packets.
 
 ```mermaid
 packet-beta
@@ -15770,7 +15770,7 @@ packet-beta
 
 **dwAgentExtensionIDListSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of the agent extension IDs array.
 
-**dwAgentExtensionIDListOffset (4 bytes):** An unsigned 32-bit integer. The offset from the beginning of the packet to an array of LINEEXTENSIONID packets. The size is dwNumExtensionIDs times SIZEOF(LINEEXTENSIONID). The array lists the 128-bit [**UUID**](#gt_universally-unique-identifier-uuid) for all agent-handler–specific extensions supported by the agent handle for the address. The extension being used is referenced in the [AgentSpecific](#Section_2.2.4.2.2.1) packet and the [LINE_AGENTSPECIFIC](#Section_2.2.4.2.1.3) packet by its position in this table, the first entry being entry 0, so it is important that the agent handler always present extension identifiers in this array in the same order. The size of the array MUST be specified by **dwAgentExtensionIDListOffset**.
+**dwAgentExtensionIDListOffset (4 bytes):** An unsigned 32-bit integer. The offset from the beginning of the packet to an array of LINEEXTENSIONID packets. The size is dwNumExtensionIDs times SIZEOF(LINEEXTENSIONID). The array lists the 128-bit [**UUID**](#gt_universally-unique-identifier-uuid) for all agent-handler–specific extensions supported by the agent handle for the address. The extension being used is referenced in the [AgentSpecific](#Section_2.2.4.1.3.3) packet and the [LINE_AGENTSPECIFIC](#Section_2.2.4.2.1.3) packet by its position in this table, the first entry being entry 0, so it is important that the agent handler always present extension identifiers in this array in the same order. The size of the array MUST be specified by **dwAgentExtensionIDListOffset**.
 
 **ProxyGUID (16 bytes):** The GUID for the ACD proxy associated with the line. This element is exposed only if a TAPI version of 2.2, 3.0, or 3.1 has been negotiated.
 
@@ -15798,7 +15798,7 @@ packet-beta
 <a id="Section_2.2.6.15"></a>
 #### 2.2.6.15 LINEAGENTSESSIONLIST
 
-The LINEAGENTSESSIONLIST packet describes a list of ACD agent sessions. This packet can contain an array of [LINEAGENTSESSIONENTRY](#Section_2.2.6.14) packets. LINEAGENTSESSIONENTRY is supplied by the server in the field VarData of the completion packet of the [GetAgentSessionList](#Section_2.2.4.2.2.14) request.
+The LINEAGENTSESSIONLIST packet describes a list of ACD agent sessions. This packet can contain an array of [LINEAGENTSESSIONENTRY](#Section_2.2.6.14) packets. LINEAGENTSESSIONENTRY is supplied by the server in the field VarData of the completion packet of the [GetAgentSessionList](#Section_2.2.4.1.3.27) request.
 
 ```mermaid
 packet-beta
@@ -16082,7 +16082,7 @@ packet-beta
 
 **dwRelatedCallID (4 bytes):** An unsigned 32-bit integer. Telephony environments that use the call identifier can find it necessary to relate one call to another. The **dwRelatedCallID** member can be used by the service provider for this purpose.
 
-**dwCallParamFlags (4 bytes):** An unsigned 32-bit integer. This field specifies a collection of call-related parameters when the call is outgoing. These are the same call parameters specified in the [MakeCall](#Section_2.2.4.2.2.19) packet This member MUST use [LINECALLPARAMFLAGS_Constants](#Section_2.2.3.1.24).
+**dwCallParamFlags (4 bytes):** An unsigned 32-bit integer. This field specifies a collection of call-related parameters when the call is outgoing. These are the same call parameters specified in the [MakeCall](#Section_2.2.4.1.3.43) packet This member MUST use [LINECALLPARAMFLAGS_Constants](#Section_2.2.3.1.24).
 
 **dwCallStates (4 bytes):** An unsigned 32-bit integer. The value that specifies the call states of type [LINECALLSTATE_Constants](#Section_2.2.3.1.29) for which the application can be notified on this call. The **dwCallStates** member is constant in LINECALLINFO and does not change depending on the call state. It MUST use LINECALLSTATE_Constants.
 
@@ -16166,7 +16166,7 @@ packet-beta
 
 **dwCalledPartySize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of the field that holds a user-friendly description of the called party.
 
-**dwCalledPartyOffset (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, from the beginning of this packet. This data can be specified with the [MakeCall](#Section_2.2.4.2.2.19) packet and can be optionally specified in the *lpCallParams* parameter whenever a new call is established. It is useful for call logging purposes.
+**dwCalledPartyOffset (4 bytes):** An unsigned 32-bit integer. The offset, in bytes, from the beginning of this packet. This data can be specified with the [MakeCall](#Section_2.2.4.1.3.43) packet and can be optionally specified in the *lpCallParams* parameter whenever a new call is established. It is useful for call logging purposes.
 
 **dwCommentSize (4 bytes):** An unsigned 32-bit integer. The size, in bytes, of the field that holds a comment about the call that is provided by the application that originated the call using the MakeCall packet.
 
@@ -16235,7 +16235,7 @@ The fields **dwCallTreatment** through **dwReceivingFlowspecOffset** are availab
 <a id="Section_2.2.6.20"></a>
 #### 2.2.6.20 LINECALLPARAMS
 
-The LINECALLPARAMS packet describes parameters supplied when making calls using the [MakeCall](#Section_2.2.4.2.2.19) packet. The LINECALLPARAMS packet is also used as a parameter in other operations, such as line [Open](#Section_2.2.4.1.1.5).
+The LINECALLPARAMS packet describes parameters supplied when making calls using the [MakeCall](#Section_2.2.4.1.3.43) packet. The LINECALLPARAMS packet is also used as a parameter in other operations, such as line [Open](#Section_2.2.4.1.1.5).
 
 ```mermaid
 packet-beta
@@ -16796,7 +16796,7 @@ This packet cannot be extended.
 
 If 0 is specified for a member, the default value is used. If a nonzero value is specified for a member that is outside the range specified by the **MinDialParams** and **MaxDialParams** members in the [LINEDEVCAPS](#Section_2.2.6.23) packet, the nearest value within the valid range is used instead.
 
-The [MakeCall](#Section_2.2.4.2.2.19) packet allows an application to adjust the dialing parameters to be used for the call. The SetCallParams packet can be used to adjust the dialing parameters of an existing call. The [LINECALLINFO](#Section_2.2.6.19) packet lists the call's current dialing parameters.
+The [MakeCall](#Section_2.2.4.1.3.43) packet allows an application to adjust the dialing parameters to be used for the call. The SetCallParams packet can be used to adjust the dialing parameters of an existing call. The [LINECALLINFO](#Section_2.2.6.19) packet lists the call's current dialing parameters.
 
 <a id="Section_2.2.6.27"></a>
 #### 2.2.6.27 LINEGENERATETONE
@@ -17009,7 +17009,7 @@ An address identifier is permanently associated with an address; the identifier 
 <a id="Section_2.2.6.29"></a>
 #### 2.2.6.29 LINEQUEUEINFO
 
-The LINEQUEUEINFO packet provides information about a queue on a line device. The [GetQueueInfo](#Section_2.2.4.2.2.17) function returns the LINEQUEUEINFO packet. This packet requires TAPI 3.0 version negotiation.
+The LINEQUEUEINFO packet provides information about a queue on a line device. The [GetQueueInfo](#Section_2.2.4.1.3.40) function returns the LINEQUEUEINFO packet. This packet requires TAPI 3.0 version negotiation.
 
 ```mermaid
 packet-beta
@@ -17101,7 +17101,7 @@ This member is set to 0 if **dwForwardMode** is not one of the following values:
 <a id="Section_2.2.6.31"></a>
 #### 2.2.6.31 LINEFORWARDLIST
 
-The LINEFORWARDLIST packet describes a list of forwarding instructions. This packet can contain an array of [LINEFORWARD](#Section_2.2.6.31) packets. The line [Forward](#Section_2.2.4.2.2.8) packet uses this packet.
+The LINEFORWARDLIST packet describes a list of forwarding instructions. This packet can contain an array of [LINEFORWARD](#Section_2.2.6.31) packets. The line [Forward](#Section_2.2.4.1.3.16) packet uses this packet.
 
 ```mermaid
 packet-beta
@@ -17578,7 +17578,7 @@ The members dwDeviceClassesSize through dwMonitoredHeadsetHookSwitchModes are av
 <a id="Section_2.2.6.43"></a>
 #### 2.2.6.43 PHONEEXTENSIONID
 
-The PHONEEXTENSIONID packet describes an extension identifier. Extension identifiers are used to identify service provider-specific extensions for phone device classes. PHONEEXTENSIONID is supplied by the server in the field VarData of the returned version of the phone [NegotiateAPIVersion](#Section_2.2.4.1.4.2) packet if the request is completed successfully.
+The PHONEEXTENSIONID packet describes an extension identifier. Extension identifiers are used to identify service provider-specific extensions for phone device classes. PHONEEXTENSIONID is supplied by the server in the field VarData of the returned version of the phone [NegotiateAPIVersion](#Section_2.2.4.1.1.2) packet if the request is completed successfully.
 
 ```mermaid
 packet-beta
@@ -17620,7 +17620,7 @@ The LINEMEDIACONTROLCALLSTATE packet defines a tuple <call states, media-control
 <a id="Section_2.2.6.45"></a>
 #### 2.2.6.45 LINEEXTENSIONID
 
-The LINEEXTENSIONID packet describes an extension identifier. Extension identifiers are used to identify service provider-specific extensions for line devices. This packet is used by the line [NegotiateAPIVersion](#Section_2.2.4.1.4.2) packet.
+The LINEEXTENSIONID packet describes an extension identifier. Extension identifiers are used to identify service provider-specific extensions for line devices. This packet is used by the line [NegotiateAPIVersion](#Section_2.2.4.1.1.2) packet.
 
 ```mermaid
 packet-beta
@@ -19090,7 +19090,7 @@ None
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-A [**client**](#gt_client) can negotiate versions for each device one at a time ([NegotiateAPIVersion](#Section_2.2.4.1.4.2)) or for all devices at once ([NegotiateAPIVersionForAllDevices](#Section_2.2.4.1.8.2)). A client can ask the [**server**](#gt_server) to use either the remotesp interface or mailslot for communication of asynchronous completion or spontaneous events. The remotesp interface is assumed in the sequence diagrams.
+A [**client**](#gt_client) can negotiate versions for each device one at a time ([NegotiateAPIVersion](#Section_2.2.4.1.1.2)) or for all devices at once ([NegotiateAPIVersionForAllDevices](#Section_2.2.4.1.8.2)). A client can ask the [**server**](#gt_server) to use either the remotesp interface or mailslot for communication of asynchronous completion or spontaneous events. The remotesp interface is assumed in the sequence diagrams.
 
 <a id="Section_4.1"></a>
 ## 4.1 Packet Exchanges to Establish the Session
@@ -19129,7 +19129,7 @@ Figure 5: Client making an outgoing call
 A [**client**](#gt_client) can make an outgoing call by following the steps below:
 
 - The client establishes the session as described in the example in section [4.1](#Section_4.1).
-- The client calls the [MakeCall](#Section_2.2.4.2.2.19) packet to the [**server**](#gt_server) to make an outgoing call. The return value is a positive number that is the request identifier or a negative number in case of error.
+- The client calls the [MakeCall](#Section_2.2.4.1.3.43) packet to the [**server**](#gt_server) to make an outgoing call. The return value is a positive number that is the request identifier or a negative number in case of error.
 - The server calls the [RemoteSPEventProc](#Section_3.3.4.2) method of the client with the [LINE_REPLY](#Section_2.2.4.2.1.25) packet, which matches the request identifier previously returned for the MakeCall packet. The LINE_REPLY packet that is returned is actually the MakeCall completion packet, and it contains the handle to the newly created call, which is then used in packets requiring [HCALL](#Section_2.2.1.1). A return value of zero indicates that the call was made successfully, or a negative number is returned on error.
 - When done with the call, the client calls [ClientRequest](#Section_3.1.4.2) with the [Drop](#Section_2.2.4.1.3.15) packet to terminate the call. It uses the HCALL returned by the MakeCall completion packet. The server closes the call and returns 0 if it is successful and a negative error number if an error occurs.
 - The client calls ClientRequest with the [DeallocateCall](#Section_2.2.4.1.3.6) packet to release any resources on the server. For example, even after terminating the call, the client might want to query information about the terminated call, such as the caller ID. The server closes the call and the handle for this call is no longer valid. The server returns 0 if the DeallocateCall operation is successful and a negative error number if an error occurs.
@@ -19179,7 +19179,7 @@ Figure 8: Client forwarding a call
 The [**client**](#gt_client) can forward incoming calls by following the steps below:
 
 - The client establishes the session as described in the example in section [4.1](#Section_4.1).
-- The client calls the [Forward](#Section_2.2.4.2.2.8) packet to the [**server**](#gt_server) to forward calls on the line address or to modify (including cancel) existing forward instructions. The return value is a positive number that is the request identifier, or a negative number in case of error.
+- The client calls the [Forward](#Section_2.2.4.1.3.16) packet to the [**server**](#gt_server) to forward calls on the line address or to modify (including cancel) existing forward instructions. The return value is a positive number that is the request identifier, or a negative number in case of error.
 - The server calls the [RemoteSPEventProc](#Section_3.3.4.2) method of the client with the [LINE_REPLY](#Section_2.2.4.2.1.25) packet, which matches the request identifier previously returned for the Forward packet. A return value of 0 indicates that the operation was carried out successfully, or a negative number is returned on error.
 - The client can terminate the session as described in the example in section [4.2](#Section_4.2).
 <a id="Section_4.7"></a>
@@ -19234,7 +19234,7 @@ Figure 13: ACD proxy request and response exchange
 The agent application can send proxy requests and receive proxy responses by following these steps:
 
 - The client establishes the session as described in the example in section [4.1](#Section_4.1).
-- The client sends a [CreateAgent](#Section_2.2.4.1.3.10) packet to server to create an agent. The return value is a positive number that is the request identifier, or a negative number in case of error.
+- The client sends a [CreateAgent](#Section_2.2.4.2.2.4) packet to server to create an agent. The return value is a positive number that is the request identifier, or a negative number in case of error.
 - The server creates a packet [LINE_PROXYREQUEST](#Section_2.2.4.2.1.21) with structure based on the client requested packet type. For CreateAgent packet, LINE_PROXYREQUEST packet is created with structure of type LINEPROXYREQUEST_CREATEAGENT.
 - The server sends the LINE_PROXYREQUEST packet to registered proxy function handler.
 - After completing the request, proxy application sends the response by calling lineProxyResponse function which results in generation of [LINE_REPLY](#Section_2.2.4.2.1.25) packet.
@@ -19249,7 +19249,7 @@ Figure 14: Creating agent session for an ACD group
 The agent application can create an agent session for an ACD group by following these steps:
 
 - The client establishes the session and creates an agent as described in the example in section [4.11](#Section_4.11).
-- The client sends a [GetAgentGroupList](#Section_2.2.4.2.2.11) packet to server to obtain the agent groups into which agent is permitted to log on to the automatic call distributor. The return value is a positive number that is the request identifier, or a negative number in case of error.
+- The client sends a [GetAgentGroupList](#Section_2.2.4.1.3.24) packet to server to obtain the agent groups into which agent is permitted to log on to the automatic call distributor. The return value is a positive number that is the request identifier, or a negative number in case of error.
 - The server creates a packet [LINE_PROXYREQUEST](#Section_2.2.4.2.1.21) with structure based on the client requested packet type. For GetAgentGroupList packet, LINE_PROXYREQUEST packet is created with structure of type LINEPROXYREQUEST_GETAGENTGROUPLIST.
 - The server sends the LINE_PROXYREQUEST packet to registered proxy function handler.
 - After completing the request, proxy application sends the response by calling lineProxyResponse function which results in generation of [LINE_REPLY](#Section_2.2.4.2.1.25) packet with LINEAGENTGROUPLIST.

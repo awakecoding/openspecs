@@ -425,7 +425,7 @@ If the client supports the SQoS 1.1 dialect, it MUST also implement the followin
 <a id="Section_3.1.2.1"></a>
 #### 3.1.2.1 Per Logical Flow
 
-**StatusRequestTimer**: When this timer expires, the client SHOULD issue a status request for the logical flow, as specified in section [3.1.6](#Section_3.2.6).
+**StatusRequestTimer**: When this timer expires, the client SHOULD issue a status request for the logical flow, as specified in section [3.1.6](#Section_3.1.6).
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -465,7 +465,7 @@ After opening the remote file, in order to issue a Storage Quality of Service Re
 
 - All fields of the STORAGE_QOS_CONTROL_REQUEST structure SHOULD initially be set to zero.
 - The **ProtocolVersion** field MUST be set to an implementation-specific value<3>.
-- The **Options** field MUST contain at least one of the flags defined in section 2.2.2.2, as specified in the rest of this section and in section [3.1.6](#Section_3.2.6).
+- The **Options** field MUST contain at least one of the flags defined in section 2.2.2.2, as specified in the rest of this section and in section [3.1.6](#Section_3.1.6).
 - If the **Options** field includes the STORAGE_QOS_CONTROL_GET_STATUS flag, the maximum output buffer size MUST be at least 80 (size of STORAGE_QOS_CONTROL_RESPONSE).
 - If the handle to the **Open** has not yet been associated to a logical flow, the **Options** field MUST include the STORAGE_QOS_CONTROL_FLAG_SET_LOGICAL_FLOW_ID flag and **LogicalFlowID** must be set to a non-empty GUID.
 - If the **Options** field includes the STORAGE_QOS_CONTROL_FLAG_PROBE_POLICY flag, the **LogicalFlowID** MUST NOT be set to an empty GUID.

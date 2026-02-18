@@ -134,7 +134,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-The Remote Desktop Protocol: Input Virtual Channel Extension applies to the Remote Desktop Protocol: Basic Connectivity and Graphics Remoting, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 1 to 5. The input protocol defined in section [2.2](../MS-RDPBCGR/MS-RDPBCGR.md) is used to remote multitouch and pen input from a [**terminal server**](#gt_terminal-server) client to a terminal server. The multitouch and pen input is generated at the client by a physical or virtual digitizer, encoded, and then sent on the wire to the server. After this input is received and decoded by the server, it is injected into the session associated with the remote user, effectively remoting the multitouch and pen input generated at the client.
+The Remote Desktop Protocol: Input Virtual Channel Extension applies to the Remote Desktop Protocol: Basic Connectivity and Graphics Remoting, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 1 to 5. The input protocol defined in section [2.2](#Section_2.2) is used to remote multitouch and pen input from a [**terminal server**](#gt_terminal-server) client to a terminal server. The multitouch and pen input is generated at the client by a physical or virtual digitizer, encoded, and then sent on the wire to the server. After this input is received and decoded by the server, it is injected into the session associated with the remote user, effectively remoting the multitouch and pen input generated at the client.
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -874,7 +874,7 @@ None.
 
 The structure and fields of the **RDPINPUT_SC_READY_PDU** message are specified in section [2.2.3.1](#Section_2.2.3.1).
 
-If the server does not support touch injection, then it MUST NOT send this [**PDU**](#gt_protocol-data-unit-pdu) to the client. The **protocolVersion** field SHOULD be set to at least RDPINPUT_PROTOCOL_V200 (0x00020000) if the server supports the injection of pen input using the [RDPINPUT_PEN_EVENT_PDU (section 2.2.3.7)](#Section_2.2.3.7.1.1)message.
+If the server does not support touch injection, then it MUST NOT send this [**PDU**](#gt_protocol-data-unit-pdu) to the client. The **protocolVersion** field SHOULD be set to at least RDPINPUT_PROTOCOL_V200 (0x00020000) if the server supports the injection of pen input using the [RDPINPUT_PEN_EVENT_PDU (section 2.2.3.7)](#Section_2.2.3.7)message.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Processing an RDPINPUT_CS_READY_PDU Message

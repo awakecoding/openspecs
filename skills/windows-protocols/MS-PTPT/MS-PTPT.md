@@ -445,7 +445,7 @@ The primary higher-layer trigger events include:
 
 To establish a PPTP call session, the [**PNS**](#gt_pptp-network-server-pns) MUST establish a control connection with the [**PAC**](#gt_privilege-attribute-certificate-pac), as specified in [[RFC2637]](https://go.microsoft.com/fwlink/?LinkId=92846) section 1.3.1, if a control connection is not already established. On the newly created or existing control connection, the PNS MUST send the **Outgoing-Call-Request** message ([RFC2637] section 2.7) to the PAC to establish the PPTP call session with the PAC, as specified in [RFC2637] section 3.2.4.2.
 
-Before attempting to establish the connection, the PNS SHOULD start the [Dial out Timer (section 3.3.2)](#Section_3.1.2) and the timer SHOULD be stopped only when the control connection is in the established state. When the timer expires, the control connection MUST be closed.
+Before attempting to establish the connection, the PNS SHOULD start the [Dial out Timer (section 3.3.2)](#Section_3.3.2) and the timer SHOULD be stopped only when the control connection is in the established state. When the timer expires, the control connection MUST be closed.
 
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 Disconnect PPTP Call Session
@@ -867,7 +867,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <4> Section 3.1.3: The Windows implementation reads the registry value "<PPTP-Registry-Location>\InactivityIdleSeconds" to obtain the echo timeout value. If this registry value is not present, the PAC/PNS uses an echo timeout value of 60 seconds.
 
-<5> Section 3.1.3: As part of the initialization process, the Windows implementation reads the registry value "<PPTP-Registry-Location>\ValidateAddress" to initialize the flag that determines whether the PAC/PNS validates the received GRE packets, as specified in section [3.1.5](#Section_1.3).
+<5> Section 3.1.3: As part of the initialization process, the Windows implementation reads the registry value "<PPTP-Registry-Location>\ValidateAddress" to initialize the flag that determines whether the PAC/PNS validates the received GRE packets, as specified in section [3.1.5](#Section_3.1.5).
 
 <6> Section 3.1.5: The source IP address validation for received packets can be enabled for Windows using the registry key using registry value "<PPTP-Registry-Location>\ValidateAddress". If this registry value is not present or is set to 0, IP validation is not performed.
 

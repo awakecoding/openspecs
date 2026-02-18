@@ -381,7 +381,7 @@ The [**VSAs**](#gt_vendor-specific-attribute-vsa) specified in this document rel
 Protocols between the client and the [**Network Access Protection (NAP)**](#gt_network-access-protection-nap) server (for example, PPP [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283), 802.1x [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910), and Health Certificate Enrollment [MS-HCEP](../MS-HCEP/MS-HCEP.md)) relate to the Microsoft VSAs in the following ways:
 
 - Unless otherwise noted, [**RADIUS attributes**](#gt_radius-attribute) are sent only between a [**RADIUS client**](#gt_radius-client) and a [**RADIUS server**](#gt_radius-server). However, some Microsoft RADIUS VSAs can be transported over the protocols between the [**endpoint**](#gt_endpoint) and the [**NAS**](#gt_network-access-server-nas) in addition to being transported over RADIUS. For example, the enrollment protocol transports the MS-AFW-Zone attribute, as specified in [MS-HCEP] section 2.2.2.2.
-- The Microsoft RADIUS VSAs can affect the operation of the protocols between the endpoint and the NAS. For example, the [MS-Quarantine-Grace-Time](#Section_3.2.5.2.5) attribute sets a limit on the time that a client can remain connected through a particular NAS, regardless of the protocol between the client and the NAS.
+- The Microsoft RADIUS VSAs can affect the operation of the protocols between the endpoint and the NAS. For example, the [MS-Quarantine-Grace-Time](#Section_2.2.1.10) attribute sets a limit on the time that a client can remain connected through a particular NAS, regardless of the protocol between the client and the NAS.
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
@@ -457,7 +457,7 @@ packet-beta
 
 **Vendor-ID (4 bytes):** A 32-bit unsigned integer in network byte order, the most significant 8 bits MUST be set to 0 and the remaining 24 bits MUST be set to the SMI code of the vendor taken from [[IANA-ENT]](https://go.microsoft.com/fwlink/?LinkId=89883). Microsoft VSAs MUST have the **Vendor-ID** field set to 311 (0x00000137).
 
-**Vendor-Type (1 byte):** An 8-bit unsigned integer that MUST specify the VSA type contained in the **Attribute-Specific Value** field. Microsoft VSA vendor types MUST be set as specified in [[RFC2548]](https://go.microsoft.com/fwlink/?LinkId=90366) and in sections [2.2.1.1](#Section_3.2.5.1.1) through [2.2.1.27](#Section_2.2.1.27) of this specification.
+**Vendor-Type (1 byte):** An 8-bit unsigned integer that MUST specify the VSA type contained in the **Attribute-Specific Value** field. Microsoft VSA vendor types MUST be set as specified in [[RFC2548]](https://go.microsoft.com/fwlink/?LinkId=90366) and in sections [2.2.1.1](#Section_2.2.1.1) through [2.2.1.27](#Section_2.2.1.27) of this specification.
 
 **Vendor-Length (1 byte):** An 8-bit unsigned integer that MUST be set to 2 plus the length of **Attribute-Specific Value**. The RADIUS client SHOULD ignore the attribute if Vendor-Length is less than 3.
 
@@ -478,7 +478,7 @@ The fields of the **MS-RAS-Client-Name** VSA MUST be set as follows:
 
 **Attribute-Specific Value**: This field MUST be the machine name of the endpoint that requests network access, sent in ASCII format, and MUST be null terminated. A valid character set includes the symbols ! @ # $ % ^ & ' ) ( . - _ { } ~ in addition to letters and numbers.<1>
 
-For more details about MS-RAS-Client-Name, see sections [3.2.5.1.1](#Section_3.2.5.1.10) and [3.3.5.1.1](#Section_3.3.5.1.15).
+For more details about MS-RAS-Client-Name, see sections [3.2.5.1.1](#Section_3.2.5.1.1) and [3.3.5.1.1](#Section_3.3.5.1.1).
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 MS-RAS-Client-Version
@@ -510,7 +510,7 @@ The fields of MS-Quarantine-IPFilter MUST be set as follows:
 
 **Attribute-Specific Value**: A list of IPv4 filter sets, defined as follows:
 
-The usage of this attribute within Access-Request, Access-Accept, Access-Reject, Access-Challenge and Accounting-Request packets is defined in section [3.1.5.2](#Section_2). If multiple MS-Quarantine-IPFilter VSAs occur in a single RADIUS packet, the **Attribute-Specific Value** field from each MUST be concatenated in the order received to form the full MS-Quarantine-IPFilter value.
+The usage of this attribute within Access-Request, Access-Accept, Access-Reject, Access-Challenge and Accounting-Request packets is defined in section [3.1.5.2](#Section_3.1.5.2). If multiple MS-Quarantine-IPFilter VSAs occur in a single RADIUS packet, the **Attribute-Specific Value** field from each MUST be concatenated in the order received to form the full MS-Quarantine-IPFilter value.
 
 ```mermaid
 packet-beta
@@ -619,7 +619,7 @@ The complete list is specified in [[IANA-PROTO-NUM]](https://go.microsoft.com/fw
 
 **Destination Port (2 bytes):** If the Protocol is TCP or UDP, this MUST be a 16-bit unsigned integer in network byte order that specifies a port number for the corresponding protocol. If the Protocol is ICMP or ICMPv6, this MUST be a 16-bit unsigned integer in little-endian byte order that specifies a corresponding code indicator for ICMP or ICMPv6. For all other protocol values, this MUST be set to 0 (byte order does not matter).
 
-For more details about MS-Quarantine-IPFilter, see sections [3.2.5.2.1](#Section_3.2.5.2.12) and [3.3.5.2.1](#Section_3.3.5.2.12).
+For more details about MS-Quarantine-IPFilter, see sections [3.2.5.2.1](#Section_3.2.5.2.1) and [3.3.5.2.1](#Section_3.3.5.2.1).
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 MS-Quarantine-Session-Timeout
@@ -820,7 +820,7 @@ For more details about MS-Machine-Name, see sections [3.2.5.1.7](#Section_3.2.5.
 
 MS-IPv6-Filter is a [**VSA**](#gt_vendor-specific-attribute-vsa), as specified in section [2.2.1](#Section_2.2.1). It is used to limit the inbound and/or outbound access of the [**endpoint**](#gt_endpoint).
 
-This attribute can be sent by a [**RADIUS server**](#gt_radius-server) to define the network access scope of the endpoint. It is used only for IPv6 addresses and MS-Filter; [[RFC2548]](https://go.microsoft.com/fwlink/?LinkId=90366) VSA is the corresponding attribute for IPv4 addresses. The structure of MS-Filter is identical to the structure of [MS-Quarantine-IPFilter](#Section_3.2.5.2.1), as specified in section 2.2.1.3. <3> This attribute defines traffic filters to a [**NAS**](#gt_network-access-server-nas) for restricting access for a specific network access connection. If multiple MS-IPv6-Filter attributes are contained within a packet, they MUST be in order and they MUST be consecutive attributes in the packet.
+This attribute can be sent by a [**RADIUS server**](#gt_radius-server) to define the network access scope of the endpoint. It is used only for IPv6 addresses and MS-Filter; [[RFC2548]](https://go.microsoft.com/fwlink/?LinkId=90366) VSA is the corresponding attribute for IPv4 addresses. The structure of MS-Filter is identical to the structure of [MS-Quarantine-IPFilter](#Section_2.2.1.3), as specified in section 2.2.1.3. <3> This attribute defines traffic filters to a [**NAS**](#gt_network-access-server-nas) for restricting access for a specific network access connection. If multiple MS-IPv6-Filter attributes are contained within a packet, they MUST be in order and they MUST be consecutive attributes in the packet.
 
 The fields of MS-IPv6-Filter MUST be set as follows:
 
@@ -830,7 +830,7 @@ The fields of MS-IPv6-Filter MUST be set as follows:
 
 **Attribute-Specific Value**: A list of IPv6 filter sets, defined as follows.
 
-The usage of this attribute within Access-Request, Access-Accept, Access-Reject, Access-Challenge and Accounting-Request packets is defined in section [3.1.5.2](#Section_2). If multiple MS-IPv6-Filter attributes occur in a single RADIUS packet, the **Attribute-Specific Value** field from each MUST be concatenated in the order received to form the full MS-IPv6-Filter value.
+The usage of this attribute within Access-Request, Access-Accept, Access-Reject, Access-Challenge and Accounting-Request packets is defined in section [3.1.5.2](#Section_3.1.5.2). If multiple MS-IPv6-Filter attributes occur in a single RADIUS packet, the **Attribute-Specific Value** field from each MUST be concatenated in the order received to form the full MS-IPv6-Filter value.
 
 ```mermaid
 packet-beta
@@ -1169,7 +1169,7 @@ There are no common higher-level events.
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Windows Implementation of RADIUS Attributes
 
-Section [3.1.5.2](#Section_2) specifies the Windows implementation of RADIUS [**VSA**](#gt_vendor-specific-attribute-vsa) attributes.<5>
+Section [3.1.5.2](#Section_3.1.5.2) specifies the Windows implementation of RADIUS [**VSA**](#gt_vendor-specific-attribute-vsa) attributes.<5>
 
 RADIUS/NAS attributes get used in parallel to the use of RNAP on the server. This table explains the mapping from Active Directory to [**RADIUS attributes**](#gt_radius-attribute) and these RADIUS attributes follow the standard RADIUS architecture [[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392) and [[RFC3162]](https://go.microsoft.com/fwlink/?LinkId=90407).
 
@@ -1290,7 +1290,7 @@ The RADIUS exchange is triggered by an Access-Request message sent from a [**NAS
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Abstract Interface for Setting an SoHR
 
-**SendRadiusAccessAccept**: An abstract interface for setting a [**statement of health response (SoHR)**](#gt_statement-of-health-response-sohr) message and additional information to be encapsulated in a RADIUS Access-Accept response that is sent from the NAP Policy Server back to the original RADIUS requestor. Encapsulating this information in the Access-Accept message is described in section [3.2.5.2](#Section_2). The interface is defined as follows:
+**SendRadiusAccessAccept**: An abstract interface for setting a [**statement of health response (SoHR)**](#gt_statement-of-health-response-sohr) message and additional information to be encapsulated in a RADIUS Access-Accept response that is sent from the NAP Policy Server back to the original RADIUS requestor. Encapsulating this information in the Access-Accept message is described in section [3.2.5.2](#Section_3.2.5.2). The interface is defined as follows:
 
 HRESULT SendRadiusAccessAccept(
 
@@ -1545,7 +1545,7 @@ When an [**RNAP server**](#gt_rnap-server) receives an Access-Request message se
 
 When the [**RADIUS server**](#gt_radius-server) receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.RASClientName** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the VSA. If a match is not found, the server SHOULD send an Access-Reject message to the NAS and stop processing.
 
-For more details about this attribute, see section [2.2.1.1](#Section_3.2.5.1.1).
+For more details about this attribute, see section [2.2.1.1](#Section_2.2.1.1).
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 MS-RAS-Client-Version
@@ -1559,7 +1559,7 @@ For more details about this attribute, see section [2.2.1.2](#Section_2.2.1.2).
 
 If the RADIUS User-Name attribute ([[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392) section 5.1) is found in the request, the [**RADIUS server**](#gt_radius-server) MUST ignore this attribute. Otherwise, the RADIUS server SHOULD convert the [**SID**](#gt_security-identifier-sid) to a Fully Qualified User Name using [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds). Once the Fully Qualified User Name is available, the server MUST follow the same processing rules specified in section [3.2.5.1.1](#Section_3.2.5.1.1). If the server fails to obtain the Fully Qualified User Name from AD DS, the server SHOULD send an Access-Reject message back to the [**NAS**](#gt_network-access-server-nas) and stop processing.
 
-For more details about this attribute, see section [2.2.1.5](#Section_5).
+For more details about this attribute, see section [2.2.1.5](#Section_2.2.1.5).
 
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 MS-Identity-Type
@@ -1577,7 +1577,7 @@ For more details about this attribute, see section [2.2.1.6](#Section_2.2.1.6).
 
 When the [**RADIUS server**](#gt_radius-server) receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.ServiceClass** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the VSA. If a match is not found, the server SHOULD send an Access-Reject message back to the [**NAS**](#gt_network-access-server-nas) and stop processing.
 
-For more details about this attribute, see section [2.2.1.7](#Section_3.3.5.1.5).
+For more details about this attribute, see section [2.2.1.7](#Section_2.2.1.7).
 
 <a id="Section_3.2.5.1.6"></a>
 ##### 3.2.5.1.6 MS-Network-Access-Server-Type
@@ -1649,7 +1649,7 @@ A [**RADIUS server**](#gt_radius-server) MUST process the Tunnel-Type RADIUS att
 
 When the RADIUS server receives this attribute, it checks the policy that has been configured by the server administrator. If configured to do so, the RADIUS server uses the value of this attribute to authorize the request.
 
-For more details about this vendor-specific value for the Tunnel-Type RADIUS attribute, see section [2.2.2.1](#Section_3.2.5.1.15).
+For more details about this vendor-specific value for the Tunnel-Type RADIUS attribute, see section [2.2.2.1](#Section_2.2.2.1).
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Creating RADIUS Access-Accept Messages
@@ -1661,7 +1661,7 @@ If the RADIUS server does not support NAP machine-health checks or if the machin
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 MS-Quarantine-IPFilter
 
-If the *ipv4Filter* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) specifies a filter, the [**RADIUS server**](#gt_radius-server) MUST add the MS-Quarantine-IPFilter attribute to the Access-Accept message in order to specify the network access scope of the [**endpoint**](#gt_endpoint). This attribute is constructed as described in section [2.2.1.3](#Section_3.2.5.2.1). The attribute-specific value is obtained by serializing the *ipv4Filter* parameter to the format described in that section.
+If the *ipv4Filter* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) specifies a filter, the [**RADIUS server**](#gt_radius-server) MUST add the MS-Quarantine-IPFilter attribute to the Access-Accept message in order to specify the network access scope of the [**endpoint**](#gt_endpoint). This attribute is constructed as described in section [2.2.1.3](#Section_2.2.1.3). The attribute-specific value is obtained by serializing the *ipv4Filter* parameter to the format described in that section.
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 MS-Quarantine-Session-Timeout
@@ -1671,19 +1671,19 @@ If the *quarantineSessionTimeout* parameter of the SendRadiusAccessAccept abstra
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 MS-Quarantine-User-Class
 
-If the *dhcpQuarantineUserClass* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) specifies a user class and the [**RADIUS client**](#gt_radius-client) is a [**DHCP server**](#gt_dynamic-host-configuration-protocol-dhcp-server), the [**RADIUS server**](#gt_radius-server) MUST add the MS-Quarantine-User-Class attribute to the Access-Accept message in order to specify the user class to be used when assigning an IP address to an [**endpoint**](#gt_endpoint) that has been granted restricted access. This attribute is constructed as described in section [2.2.1.8](#Section_3.3.5.2.3). The attribute-specific value is obtained by serializing the *dhcpQuarantineUserClass* parameter to the format described in that section.
+If the *dhcpQuarantineUserClass* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) specifies a user class and the [**RADIUS client**](#gt_radius-client) is a [**DHCP server**](#gt_dynamic-host-configuration-protocol-dhcp-server), the [**RADIUS server**](#gt_radius-server) MUST add the MS-Quarantine-User-Class attribute to the Access-Accept message in order to specify the user class to be used when assigning an IP address to an [**endpoint**](#gt_endpoint) that has been granted restricted access. This attribute is constructed as described in section [2.2.1.8](#Section_2.2.1.8). The attribute-specific value is obtained by serializing the *dhcpQuarantineUserClass* parameter to the format described in that section.
 
 If the client is not a DHCP server, this attribute MUST NOT be used.
 
 <a id="Section_3.2.5.2.4"></a>
 ##### 3.2.5.2.4 MS-Quarantine-State
 
-The [**RADIUS server**](#gt_radius-server) MUST add the MS-Quarantine-State attribute to the Access-Accept message in order to specify the network access level that the RADIUS server authorizes for the [**endpoint**](#gt_endpoint). This attribute is constructed as described in section [2.2.1.9](#Section_3.3.5.2.4). The attribute-specific value is obtained by converting the *quarantineState* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) to network byte order.
+The [**RADIUS server**](#gt_radius-server) MUST add the MS-Quarantine-State attribute to the Access-Accept message in order to specify the network access level that the RADIUS server authorizes for the [**endpoint**](#gt_endpoint). This attribute is constructed as described in section [2.2.1.9](#Section_2.2.1.9). The attribute-specific value is obtained by converting the *quarantineState* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) to network byte order.
 
 <a id="Section_3.2.5.2.5"></a>
 ##### 3.2.5.2.5 MS-Quarantine-Grace-Time
 
-If the *quarantineGraceTime* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) specifies a grace time, the [**RADIUS server**](#gt_radius-server) SHOULD add the MS-Quarantine-Grace-Time attribute to the Access-Accept message in order to specify the end of the time period during which the noncompliant [**endpoint**](#gt_endpoint) can have full access before being moved to a restricted connection. This attribute is constructed as described in section [2.2.1.10](#Section_3.2.5.2.5). The attribute-specific value is obtained by converting the *quarantineGraceTime* parameter to network byte order.
+If the *quarantineGraceTime* parameter of the SendRadiusAccessAccept abstract interface (section [3.2.4.1](#Section_3.2.4.1)) specifies a grace time, the [**RADIUS server**](#gt_radius-server) SHOULD add the MS-Quarantine-Grace-Time attribute to the Access-Accept message in order to specify the end of the time period during which the noncompliant [**endpoint**](#gt_endpoint) can have full access before being moved to a restricted connection. This attribute is constructed as described in section [2.2.1.10](#Section_2.2.1.10). The attribute-specific value is obtained by converting the *quarantineGraceTime* parameter to network byte order.
 
 <a id="Section_3.2.5.2.6"></a>
 ##### 3.2.5.2.6 MS-AFW-Zone
@@ -1905,7 +1905,7 @@ When an [**RNAP client's**](#gt_2ed5225f-f3b7-43e5-9355-bdb61a99fa3b) SendRadius
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 MS-RAS-Client-Name
 
-If the *clientName* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to NULL, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *clientName* parameter to the format described in section [2.2.1.1](#Section_3.2.5.1.1).
+If the *clientName* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to NULL, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *clientName* parameter to the format described in section [2.2.1.1](#Section_2.2.1.1).
 
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 MS-RAS-Client-Version
@@ -1919,7 +1919,7 @@ If the RADIUS User-Name attribute ([[RFC2865]](https://go.microsoft.com/fwlink/?
 
 If the RADIUS User-Name attribute ([RFC2865] section 5.1) is not NULL, this attribute MUST NOT be set.
 
-If the **sidDataLength** field of the *securityIdentity* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to zero, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *securityIdentity* parameter to the format described in section [2.2.1.5](#Section_5).
+If the **sidDataLength** field of the *securityIdentity* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to zero, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *securityIdentity* parameter to the format described in section [2.2.1.5](#Section_2.2.1.5).
 
 <a id="Section_3.3.5.1.4"></a>
 ##### 3.3.5.1.4 MS-Identity-Type
@@ -1929,7 +1929,7 @@ If the *identityType* parameter of the SendRadiusAccessRequest abstract interfac
 <a id="Section_3.3.5.1.5"></a>
 ##### 3.3.5.1.5 MS-Service-Class
 
-If the *serviceClass* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to NULL, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *serviceClass* parameter to the format described in section [2.2.1.7](#Section_3.3.5.1.5).
+If the *serviceClass* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to NULL, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *serviceClass* parameter to the format described in section [2.2.1.7](#Section_2.2.1.7).
 
 <a id="Section_3.3.5.1.6"></a>
 ##### 3.3.5.1.6 MS-Network-Access-Server-Type
@@ -1981,7 +1981,7 @@ If the *userIpv6Address* parameter of the SendRadiusAccessRequest abstract inter
 
 A [**RADIUS client**](#gt_radius-client) MUST set the Tunnel-Type [**RADIUS attribute**](#gt_radius-attribute) as specified in [[RFC2868]](https://go.microsoft.com/fwlink/?LinkId=90395), with one additional enhancement: A VPN server that supports the Secure Socket Tunneling Protocol (SSTP) SHOULD use the vendor-specific value 0x00013701 for the RADIUS Tunnel-Type attribute in Access-Request messages that are sent to a [**RADIUS server**](#gt_radius-server), which indicates that the tunnels configured by it are as described in [MS-SSTP](../MS-SSTP/MS-SSTP.md).<15>
 
-For more details about this vendor-specific value for the Tunnel-Type RADIUS attribute, see section [2.2.2.1](#Section_3.2.5.1.15).
+For more details about this vendor-specific value for the Tunnel-Type RADIUS attribute, see section [2.2.2.1](#Section_2.2.2.1).
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Processing RADIUS Access-Accept Messages
@@ -1993,7 +1993,7 @@ When a [**NAS**](#gt_network-access-server-nas) that supports this attribute <16
 
 For the late bound field, this is used to allow a NAS to change a field in the filter after the connection with the endpoint is complete. For example, the attribute would be configured for "ANY" to be used as the source address. The filter is implemented on the NAS as ANY. When the connection with the endpoint completes and the client is assigned an address, the filter is replaced with a specific value.
 
-For more details about this attribute, see section [2.2.1.3](#Section_3.2.5.2.1).
+For more details about this attribute, see section [2.2.1.3](#Section_2.2.1.3).
 
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 MS-Quarantine-Session-Timeout
@@ -2017,7 +2017,7 @@ When a DHCP RADIUS client receives this attribute, it assigns the DHCP client to
 
 Other RADIUS clients silently ignore this attribute.
 
-For more information about this attribute, see section [2.2.1.8](#Section_3.3.5.2.3).
+For more information about this attribute, see section [2.2.1.8](#Section_2.2.1.8).
 
 <a id="Section_3.3.5.2.4"></a>
 ##### 3.3.5.2.4 MS-Quarantine-State
@@ -2040,7 +2040,7 @@ If the value of the MS-Quarantine-State VSA is "On Probation", the RADIUS client
 - The VPN or Dial-Up Server MUST disconnect the endpoint after the time specified in the MS-Quarantine-Grace-Time elapses.
 - The DHCP server MUST ensure that the DHCP lease expires for the endpoint before or at the same time specified in the MS-Quarantine-Grace-Time (see section [3.3.5.2.5](#Section_3.3.5.2.5)) VSA.
 - The HRA MUST ignore this attribute.
-For more details about this attribute, see section [2.2.1.9](#Section_3.3.5.2.4).
+For more details about this attribute, see section [2.2.1.9](#Section_2.2.1.9).
 
 <a id="Section_3.3.5.2.5"></a>
 ##### 3.3.5.2.5 MS-Quarantine-Grace-Time
@@ -2053,7 +2053,7 @@ After the time-out expires, the NAS moves the client to a restricted quarantine 
 
 If the NAS later gets another Access-Accept for this endpoint, the previous grace time-out is dropped. Either the endpoint will get unrestricted access or a new grace time-out will be applied if this attribute is set again.
 
-For more details about this attribute, see section [2.2.1.10](#Section_3.2.5.2.5).
+For more details about this attribute, see section [2.2.1.10](#Section_2.2.1.10).
 
 <a id="Section_3.3.5.2.6"></a>
 ##### 3.3.5.2.6 MS-AFW-Zone
@@ -2282,7 +2282,7 @@ This is forwarded to the RADIUS server. The RADIUS server authenticates and auth
 
 - Attribute 0: MS-Quarantine-State = 1 [Restricted Access]
 - Attribute 1: MS-Quarantine-Session-Timeout = Time in seconds
-- Attribute 2: MS-Filter = List IPv4 traffic filters (the structure of MS-Filter is identical to the structure of MS-Quarantine-IPFilter, as specified in section [2.2.1.3](#Section_3.2.5.2.1)).
+- Attribute 2: MS-Filter = List IPv4 traffic filters (the structure of MS-Filter is identical to the structure of MS-Quarantine-IPFilter, as specified in section [2.2.1.3](#Section_2.2.1.3)).
 - Attribute 3: MS-IPv6-Filter = List IPv6 traffic filters
 - Attribute 4: MS-IPv4-Remediation-Servers= List of IPv4 Addresses
 - Attribute 5: MS-IPv6-Remediation-Servers= List of IPv6 Addresses
@@ -2311,7 +2311,7 @@ In addition, implementers can support a mode of operation wherein RADIUS will no
 
 | Security parameter | Section |
 | --- | --- |
-| MS-User-Security-Identity | [2.2.1.5](#Section_5) |
+| MS-User-Security-Identity | [2.2.1.5](#Section_2.2.1.5) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior
@@ -2386,15 +2386,15 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | MS-Secondary-DNS-Server | [RFC2548] | 2.7.7 | Yes | Yes | Yes | Yes | Yes | Yes |
 | MS-Primary-NBNS-Server | [RFC2548] | 2.7.8 | Yes | Yes | Yes | Yes | Yes | Yes |
 | MS-Secondary-NBNS-Server | [RFC2548] | 2.7.9 | Yes | Yes | Yes | Yes | Yes | Yes |
-| MS-RAS-Client-Name | This document | [MS-RAS-Client-Name (section 2.2.1.1)](#Section_3.2.5.1.1) | - | Yes | Yes | Yes | Yes | Yes |
+| MS-RAS-Client-Name | This document | [MS-RAS-Client-Name (section 2.2.1.1)](#Section_2.2.1.1) | - | Yes | Yes | Yes | Yes | Yes |
 | MS-RAS-Client-Version | This document | [MS-RAS-Client-Version (section 2.2.1.2)](#Section_2.2.1.2) | - | Yes | Yes | Yes | Yes | Yes |
-| MS-Quarantine-IPFilter | This document | [MS-Quarantine-IPFilter (section 2.2.1.3)](#Section_3.2.5.2.1) | - | Yes | Yes | Yes | Yes | Yes |
+| MS-Quarantine-IPFilter | This document | [MS-Quarantine-IPFilter (section 2.2.1.3)](#Section_2.2.1.3) | - | Yes | Yes | Yes | Yes | Yes |
 | MS-Quarantine-Session-Timeout | This document | [MS-Quarantine-Session-Timeout (section 2.2.1.4)](#Section_2.2.1.4) | - | Yes | Yes | Yes | Yes | Yes |
 | MS-Identity-Type | This document | [MS-Identity-Type (section 2.2.1.6)](#Section_2.2.1.6) | - | - | Yes | Yes | Yes | Yes |
-| MS-Service-Class | This document | [MS-Service-Class (section 2.2.1.7)](#Section_3.3.5.1.5) | - | - | Yes | Yes | Yes | Yes |
-| MS-Quarantine-User-Class | This document | [MS-Quarantine-User-Class (section 2.2.1.8)](#Section_3.3.5.2.3) | - | - | Yes | Yes | Yes | Yes |
-| MS-Quarantine-State | This document | [MS-Quarantine-State (section 2.2.1.9)](#Section_3.3.5.2.4) | - | - | Yes | Yes | Yes | Yes |
-| MS-Quarantine-Grace-Time | This document | [MS-Quarantine-Grace-Time (section 2.2.1.10)](#Section_3.2.5.2.5) | - | - | Yes | Yes | Yes | Yes |
+| MS-Service-Class | This document | [MS-Service-Class (section 2.2.1.7)](#Section_2.2.1.7) | - | - | Yes | Yes | Yes | Yes |
+| MS-Quarantine-User-Class | This document | [MS-Quarantine-User-Class (section 2.2.1.8)](#Section_2.2.1.8) | - | - | Yes | Yes | Yes | Yes |
+| MS-Quarantine-State | This document | [MS-Quarantine-State (section 2.2.1.9)](#Section_2.2.1.9) | - | - | Yes | Yes | Yes | Yes |
+| MS-Quarantine-Grace-Time | This document | [MS-Quarantine-Grace-Time (section 2.2.1.10)](#Section_2.2.1.10) | - | - | Yes | Yes | Yes | Yes |
 | MS-Network-Access-Server-Type | This document | [MS-Network-Access-Server-Type (section 2.2.1.11)](#Section_2.2.1.11) | - | - | Yes | Yes | Yes | Yes |
 | MS-AFW-Zone | This document | [MS-AFW-Zone (section 2.2.1.12)](#Section_2.2.1.12) | - | - | Yes | Yes | Yes | Yes |
 | MS-AFW-Protection-Level | This document | [MS-AFW-Protection-Level (section 2.2.1.13)](#Section_2.2.1.13) | - | - | Yes | Yes | Yes | Yes |
@@ -2412,7 +2412,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | MS-User-IPv4-Address | This document | [MS-User-IPv4-Address (section 2.2.1.25)](#Section_2.2.1.25) | - | - | Yes | Yes | Yes | Yes |
 | MS-User-IPv6-Address | This document | [MS-User-IPv6-Address (section 2.2.1.26)](#Section_2.2.1.26) | - | - | Yes | Yes | Yes | Yes |
 | MS-RDG-Device-Redirection | This document | [MS-RDG-Device-Redirection (section 2.2.1.27)](#Section_2.2.1.27) | - | - | Yes | Yes | Yes | Yes |
-| MS-Tunnel-Type | This document | [MS-Tunnel-Type (section 2.2.2.1)](#Section_3.2.5.1.15) | - | - | - | Yes | Yes | Yes |
+| MS-Tunnel-Type | This document | [MS-Tunnel-Type (section 2.2.2.1)](#Section_2.2.2.1) | - | - | - | Yes | Yes | Yes |
 
 <6> Section 3.1.5.3: Microsoft [**RADIUS clients**](#gt_radius-client) and RADIUS servers ignore VSAs in the following conditions:
 
@@ -2423,7 +2423,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 3.2.5.1.15: Only Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2 RADIUS servers support this vendor-specific value for the RADIUS Tunnel-Type attribute.
 
-<9> Section 3.2.5.2: When sending a response to a client configured as not compatible with [**NAP**](#gt_network-access-protection-nap), in Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2, RADIUS servers will exclude from the response the following attributes, described in section [3.2.5](#Section_3.1.5): MS-Quarantine-User-Class, MS-Quarantine-State, MS-Quarantine-Grace-Time, MS-Machine-Name, MS-IPv4-Remediation-Servers, MS-IPv6-Remediation-Servers, Not-Quarantine-Capable, and MS-Extended-Quarantine-State.
+<9> Section 3.2.5.2: When sending a response to a client configured as not compatible with [**NAP**](#gt_network-access-protection-nap), in Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2, RADIUS servers will exclude from the response the following attributes, described in section [3.2.5](#Section_3.2.5): MS-Quarantine-User-Class, MS-Quarantine-State, MS-Quarantine-Grace-Time, MS-Machine-Name, MS-IPv4-Remediation-Servers, MS-IPv6-Remediation-Servers, Not-Quarantine-Capable, and MS-Extended-Quarantine-State.
 
 <10> Section 3.3.4.1: Windows endpoints always use the format MS-RAS-x-<RAS Client Computer Name> (for example, MS-RAS-0-Laptop, where "Laptop" is the name of the computer in a string format). The value of x is either 0 or 1, where 0 indicates that the messenger service is not running on the endpoint machine and 1 indicates that the messenger service is running. This information is useful to decide whether the Microsoft RRAS Administrator can send messages to the user by using the messenger service. (This is a UI/API option to "Send Messages to User" in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.) Also note that this service is deprecated in Windows Server 2008 and Windows Vista and PPP always sends "MSRAS-0<>" on a Windows Vista client. For Windows Messenger Service, see [MS-MSRP].
 

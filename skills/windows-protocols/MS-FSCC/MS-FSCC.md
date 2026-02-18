@@ -669,7 +669,7 @@ The following reparse tags, with the exception of IO_REPARSE_TAG_SYMLINK, are pr
 | IO_REPARSE_TAG_RESERVED_ZERO 0x00000000 | Reserved reparse tag value. |
 | IO_REPARSE_TAG_RESERVED_ONE 0x00000001 | Reserved reparse tag value. |
 | IO_REPARSE_TAG_RESERVED_TWO 0x00000002 | Reserved reparse tag value. |
-| IO_REPARSE_TAG_MOUNT_POINT 0xA0000003 | Used for mount point support, specified in section [2.1.2.5](#Section_8.3). |
+| IO_REPARSE_TAG_MOUNT_POINT 0xA0000003 | Used for mount point support, specified in section [2.1.2.5](#Section_2.1.2.5). |
 | IO_REPARSE_TAG_HSM 0xC0000004 | Obsolete. Used by legacy Hierarchical Storage Management Product. |
 | IO_REPARSE_TAG_DRIVE_EXTENDER 0x80000005 | Home server drive extender.<3> |
 | IO_REPARSE_TAG_HSM2 0x80000006 | Obsolete. Used by legacy Hierarchical Storage Management Product. |
@@ -678,7 +678,7 @@ The following reparse tags, with the exception of IO_REPARSE_TAG_SYMLINK, are pr
 | IO_REPARSE_TAG_CSV 0x80000009 | Obsolete. Used by Clustered Shared Volumes (CSV) version 1 in Windows Server 2008 R2 operating system. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_DFS 0x8000000A | Used by the DFS filter. The DFS is described in the Distributed File System (DFS): Referral Protocol Specification [MS-DFSC](../MS-DFSC/MS-DFSC.md). Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_FILTER_MANAGER 0x8000000B | Used by [**filter manager**](#gt_filter-manager) test harness.<4> |
-| IO_REPARSE_TAG_SYMLINK 0xA000000C | Used for [**symbolic link**](#gt_symbolic-link) support. See section [2.1.2.4](#Section_8.3). |
+| IO_REPARSE_TAG_SYMLINK 0xA000000C | Used for [**symbolic link**](#gt_symbolic-link) support. See section [2.1.2.4](#Section_2.1.2.4). |
 | IO_REPARSE_TAG_IIS_CACHE 0xA0000010 | Used by Microsoft Internet Information Services (IIS) caching. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_DFSR 0x80000012 | Used by the DFS filter. The DFS is described in [MS-DFSC]. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_DEDUP 0x80000013 | Used by the Data Deduplication (Dedup) filter. Server-side interpretation only, not meaningful over the wire. |
@@ -708,7 +708,7 @@ The following reparse tags, with the exception of IO_REPARSE_TAG_SYMLINK, are pr
 | IO_REPARSE_TAG_CLOUD_F 0x9000F01A | Used by the Cloud Files filter, for files managed by a sync engine such as OneDrive. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_APPEXECLINK 0x8000001B | Used by Universal Windows Platform (UWP) packages to encode information that allows the application to be launched by CreateProcess. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_PROJFS 0x9000001C | Used by the Windows Projected File System filter, for files managed by a user mode provider such as VFS for Git. Server-side interpretation only, not meaningful over the wire. |
-| IO_REPARSE_TAG_LX_SYMLINK 0xA000001D | Used by the Windows Subsystem for Linux (WSL) to represent a UNIX symbolic link. See section [2.1.2.7](#Section_8.3). |
+| IO_REPARSE_TAG_LX_SYMLINK 0xA000001D | Used by the Windows Subsystem for Linux (WSL) to represent a UNIX symbolic link. See section [2.1.2.7](#Section_2.1.2.7). |
 | IO_REPARSE_TAG_STORAGE_SYNC 0x8000001E | Used by the Azure File Sync (AFS) filter. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_STORAGE_SYNC_FOLDER 0x90000027 | Used by the Azure File Sync (AFS) filter for folder. Server-side interpretation only, not meaningful over the wire. |
 | IO_REPARSE_TAG_WCI_TOMBSTONE 0xA000001F | Used by the Windows Container Isolation filter. Server-side interpretation only, not meaningful over the wire. |
@@ -780,7 +780,7 @@ packet-beta
 
 The **Symbolic Link Reparse Data Buffer** data element is a subtype of [REPARSE_DATA_BUFFER](#Section_8.3), which contains information on [**symbolic link**](#gt_symbolic-link) [**reparse points**](#gt_reparse-point). This reparse data buffer MUST be used only with [reparse tag values](#Section_8.3) whose high bit is set to 1.
 
-A symbolic link has a substitute name and a print name associated with it. The substitute name is a [pathname (section 2.1.5)](#Section_8.3) identifying the target of the symbolic link. The print name SHOULD be an informative pathname, suitable for display to a user, that also identifies the target of the symbolic link. Either pathname can contain dot directory names as specified in section [2.1.5.1](#Section_8.3).
+A symbolic link has a substitute name and a print name associated with it. The substitute name is a [pathname (section 2.1.5)](#Section_2.1.5) identifying the target of the symbolic link. The print name SHOULD be an informative pathname, suitable for display to a user, that also identifies the target of the symbolic link. Either pathname can contain dot directory names as specified in section [2.1.5.1](#Section_2.1.5.1).
 
 ```mermaid
 packet-beta
@@ -825,7 +825,7 @@ This field contains one of the values in the following table.
 
 The **Mount Point Reparse Data Buffer** data element is a subtype of [REPARSE_DATA_BUFFER](#Section_8.3), which contains information about mount point [**reparse points**](#gt_reparse-point). This reparse data buffer MUST be used only with [reparse tag values](#Section_8.3) whose high bit is set to 1.
 
-A mount point has a substitute name and a print name associated with it. The substitute name is a [pathname (section 2.1.5)](#Section_8.3) identifying the target of the mount point. The print name SHOULD be an informative pathname, suitable for display to a user, that also identifies the target of the mount point. Neither of these pathnames can contain dot directory names.
+A mount point has a substitute name and a print name associated with it. The substitute name is a [pathname (section 2.1.5)](#Section_2.1.5) identifying the target of the mount point. The print name SHOULD be an informative pathname, suitable for display to a user, that also identifies the target of the mount point. Neither of these pathnames can contain dot directory names.
 
 ```mermaid
 packet-beta
@@ -967,11 +967,11 @@ packet-beta
 <a id="Section_2.1.4"></a>
 ### 2.1.4 Alternate Data Streams
 
-A file system MAY<8> support alternate data streams within a file or a directory. For a general description of [**file streams**](#gt_file-stream), section [1.1](#Section_8.3).
+A file system MAY<8> support alternate data streams within a file or a directory. For a general description of [**file streams**](#gt_file-stream), section [1.1](#Section_1.1).
 
 Every file has a default stream, which is the stream that is referenced when no stream name component is specified as part of the pathname. A directory does not have a default data stream; however, it can have named alternate data streams.
 
-For more information on stream naming, see section [2.1.5](#Section_8.3); for more information on streams in general, see section [5](#Section_5).
+For more information on stream naming, see section [2.1.5](#Section_2.1.5); for more information on streams in general, see section [5](#Section_5).
 
 <a id="Section_2.1.5"></a>
 ### 2.1.5 Pathname
@@ -984,8 +984,8 @@ A pathname has the following characteristics:
 - A pathname that begins with a leading "\" backslash character, for example, "\a\b\c", is an absolute pathname. An absolute pathname SHOULD be evaluated relative to the root directory.
 - A pathname that omits a leading "\" backslash character, for example, "a\b\c", is a relative pathname. A relative pathname MAY be evaluated relative to any directory, such as an application's current working directory.
 - Each pathname component has one of the following forms:
-- A [**dot directory name**](#gt_dot-directory-name) as specified in section [2.1.5.1](#Section_8.3).
-- A filename as specified in section [2.1.5.2](#Section_8.3), optionally followed by a ":" colon character and a streamname as specified in section [2.1.5.3](#Section_2.1.5.3), optionally followed by a ":" colon character and a streamtype as specified in section [2.1.5.4](#Section_2.1.5.4). The streamname, if specified, MAY be zero-length only if streamtype is also specified; otherwise, it MUST be at least one character. The streamtype, if specified, MUST be at least one character.
+- A [**dot directory name**](#gt_dot-directory-name) as specified in section [2.1.5.1](#Section_2.1.5.1).
+- A filename as specified in section [2.1.5.2](#Section_2.1.5.2), optionally followed by a ":" colon character and a streamname as specified in section [2.1.5.3](#Section_2.1.5.3), optionally followed by a ":" colon character and a streamtype as specified in section [2.1.5.4](#Section_2.1.5.4). The streamname, if specified, MAY be zero-length only if streamtype is also specified; otherwise, it MUST be at least one character. The streamtype, if specified, MUST be at least one character.
 <a id="Section_2.1.5.1"></a>
 #### 2.1.5.1 Dot Directory Names
 
@@ -1062,7 +1062,7 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** field.
 
-**FileName (variable):** A sequence of Unicode characters containing a pathname (section [2.1.5](#Section_8.3)). The meaning of the pathname depends on the operation. The name string is not null-terminated. There are scenarios where one or more padding characters can be at the end of the string due to buffer alignment requirements, but their presence and their values MUST NOT be relied upon. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
+**FileName (variable):** A sequence of Unicode characters containing a pathname (section [2.1.5](#Section_2.1.5)). The meaning of the pathname depends on the operation. The name string is not null-terminated. There are scenarios where one or more padding characters can be at the end of the string due to buffer alignment requirements, but their presence and their values MUST NOT be relied upon. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
 
 <a id="Section_2.1.8"></a>
 ### 2.1.8 Boolean
@@ -1199,11 +1199,11 @@ This message does not contain any additional data elements.
 <a id="Section_2.3.2"></a>
 ### 2.3.2 FSCTL_CREATE_OR_GET_OBJECT_ID Reply
 
-This message returns the results of the [FSCTL_CREATE_OR_GET_OBJECT_ID request](#Section_2.3.1) in a [FILE_OBJECTID_BUFFER (section 2.1.3)](#Section_8.3).
+This message returns the results of the [FSCTL_CREATE_OR_GET_OBJECT_ID request](#Section_2.3.1) in a [FILE_OBJECTID_BUFFER (section 2.1.3)](#Section_2.1.3).
 
 The buffer can be either Type 1 or Type 2 as follows:
 
-- If neither FSCTL_SET_OBJECT_ID_EXTENDED nor FSCTL_SET_OBJECT_ID has been previously issued on the file, then the buffer is of Type 1 and contains implementation-generated values as specified in section [2.1.3.1](#Section_8.3).
+- If neither FSCTL_SET_OBJECT_ID_EXTENDED nor FSCTL_SET_OBJECT_ID has been previously issued on the file, then the buffer is of Type 1 and contains implementation-generated values as specified in section [2.1.3.1](#Section_2.1.3.1).
 - If FSCTL_SET_OBJECT_ID was used to set the [**object ID**](#gt_object-id), then the buffer is of the type that was used during that FSCTL_SET_OBJECT_ID call.
 - If FSCTL_SET_OBJECT_ID_EXTENDED was issued to change the object ID's extended information, then the buffer is of Type 2.
 There is no way for the issuer of this [**FSCTL**](#gt_file-system-control-fsctl) to determine the returned buffer type without knowing whether the object ID was previously set or modified and by what means (FSCTL_SET_OBJECT_ID_EXTENDED or FSCTL_SET_OBJECT_ID).
@@ -1269,7 +1269,7 @@ The only data item this message returns is a status code, as specified in sectio
 
 The FSCTL_DUPLICATE_EXTENTS_TO_FILE<18> request message requests that the server copy the specified portion of one file (that is the source file) into a specified portion of another file (target file) on the same volume. The logical sizes of the portions have to be the same. The two files involved in this operation can refer to the same file, but in that case, the logical portions have to refer to disjoint regions on the file. The FSCTL is sent on a handle opened to the target file.
 
-When used locally, the request message takes the form of DUPLICATE_EXTENTS_DATA as specified in section [2.3.7.1](../MS-SMB2/MS-SMB2.md). When used remotely with [MS-SMB2](../MS-SMB2/MS-SMB2.md), the request message takes the form of SMB2_DUPLICATE_EXTENTS_DATA as specified in section [2.3.7.2](../MS-SMB2/MS-SMB2.md).
+When used locally, the request message takes the form of DUPLICATE_EXTENTS_DATA as specified in section [2.3.7.1](#Section_2.3.7.1). When used remotely with [MS-SMB2](../MS-SMB2/MS-SMB2.md), the request message takes the form of SMB2_DUPLICATE_EXTENTS_DATA as specified in section [2.3.7.2](#Section_2.3.7.2).
 
 <a id="Section_2.3.7.1"></a>
 #### 2.3.7.1 DUPLICATE_EXTENTS_DATA
@@ -1334,7 +1334,7 @@ The only data item this message returns is a status code, as specified in sectio
 
 The FSCTL_DUPLICATE_EXTENTS_TO_FILE_EX<21> request message requests that the server copy the specified portion of the source file into a specified portion of the target file on the same volume. The logical sizes of the portions MUST be the same. The two files involved in this operation can refer to the same file but the logical portions have to refer to disjoint regions on the file. The FSCTL is sent on a handle opened to the target file. When the DUPLICATE_EXTENTS_DATA_EX_SOURCE_ATOMIC flag isn’t set, the behavior is identical to FSCTL_DUPLICATE_EXTENTS_TO_FILE. When the flag is set, duplication is atomic from the source's point of view. It means duplication fully succeeds or fails without side effect (when only part of source file region is duplicated).
 
-When used locally, the request message takes the form of DUPLICATE_EXTENTS_DATA_EX as specified in section [2.3.9.1](../MS-SMB2/MS-SMB2.md). When used remotely with [MS-SMB2](../MS-SMB2/MS-SMB2.md), the request message takes the form of SMB2_DUPLICATE_EXTENTS_DATA_EX as specified in section [2.3.9.2](../MS-SMB2/MS-SMB2.md).
+When used locally, the request message takes the form of DUPLICATE_EXTENTS_DATA_EX as specified in section [2.3.9.1](#Section_2.3.9.1). When used remotely with [MS-SMB2](../MS-SMB2/MS-SMB2.md), the request message takes the form of SMB2_DUPLICATE_EXTENTS_DATA_EX as specified in section [2.3.9.2](#Section_2.3.9.2).
 
 <a id="Section_2.3.9.1"></a>
 #### 2.3.9.1 DUPLICATE_EXTENTS_DATA_EX
@@ -1944,7 +1944,7 @@ packet-beta
 <a id="Section_2.3.16"></a>
 ### 2.3.16 FSCTL_FIND_FILES_BY_SID Reply
 
-The FSCTL_FIND_FILES_BY_SID Reply message returns the results of the [FSCTL_FIND_FILES_BY_SID Request (section 2.3.15)](#Section_2.3.15) as an array of [FILE_NAME_INFORMATION (section 2.1.7)](#Section_2.1.7) data elements containing relative pathnames (section [2.1.5](#Section_8.3)), one for each matching file or directory that is found, in no necessary order. All returned file names MUST be relative to the directory on which the FSCTL_FIND_FILES_BY_SID Request was issued. This returns as many **FILE_NAME_INFORMATION** data elements as will fit in the provided output buffer. The beginning of each **FILE_NAME_INFORMATION** data element MUST be aligned to an 8-byte boundary, as measured from the beginning of the buffer. The last **FILE_NAME_INFORMATION** structure returned MAY<25> contain trailing padding.
+The FSCTL_FIND_FILES_BY_SID Reply message returns the results of the [FSCTL_FIND_FILES_BY_SID Request (section 2.3.15)](#Section_2.3.15) as an array of [FILE_NAME_INFORMATION (section 2.1.7)](#Section_2.1.7) data elements containing relative pathnames (section [2.1.5](#Section_2.1.5)), one for each matching file or directory that is found, in no necessary order. All returned file names MUST be relative to the directory on which the FSCTL_FIND_FILES_BY_SID Request was issued. This returns as many **FILE_NAME_INFORMATION** data elements as will fit in the provided output buffer. The beginning of each **FILE_NAME_INFORMATION** data element MUST be aligned to an 8-byte boundary, as measured from the beginning of the buffer. The last **FILE_NAME_INFORMATION** structure returned MAY<25> contain trailing padding.
 
 This message also returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this [**FSCTL**](#gt_file-system-control-fsctl) is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -2203,7 +2203,7 @@ This message does not contain any additional data elements.
 <a id="Section_2.3.26"></a>
 ### 2.3.26 FSCTL_GET_OBJECT_ID Reply
 
-This message returns the results of an [FSCTL_GET_OBJECT_ID request](#Section_2.3.25) in a [FILE_OBJECTID_BUFFER (section 2.1.3)](#Section_8.3).
+This message returns the results of an [FSCTL_GET_OBJECT_ID request](#Section_2.3.25) in a [FILE_OBJECTID_BUFFER (section 2.1.3)](#Section_2.1.3).
 
 If the file system of the [**volume**](#gt_volume) containing the specified file or directory does not support the use of object IDs, the request will not succeed. The error code returned in this situation is specified in section [2.2](#Section_2.2).
 
@@ -2413,7 +2413,7 @@ This message also returns a status code as specified in section 2.2. Upon succes
 <a id="Section_2.3.35"></a>
 ### 2.3.35 FSCTL_IS_PATHNAME_VALID Request
 
-The FSCTL_IS_PATHNAME_VALID request message requests that the server indicate whether the specified pathname is well-formed (of acceptable length, with no invalid characters, and so on - see section [2.1.5](#Section_8.3)) with respect to the [**volume**](#gt_volume) that contains the file or directory associated with the handle on which this [**FSCTL**](#gt_file-system-control-fsctl) was invoked.
+The FSCTL_IS_PATHNAME_VALID request message requests that the server indicate whether the specified pathname is well-formed (of acceptable length, with no invalid characters, and so on - see section [2.1.5](#Section_2.1.5)) with respect to the [**volume**](#gt_volume) that contains the file or directory associated with the handle on which this [**FSCTL**](#gt_file-system-control-fsctl) was invoked.
 
 The data element is as follows.
 
@@ -3041,7 +3041,7 @@ For UDF file systems with a virtual allocation table, this information is availa
 
 **FsFormatName (24 bytes):** Always returns "UDF" in Unicode characters followed by nine Unicode NULL characters.
 
-**FormatTime (8 bytes):** The time the volume was formatted; see section [2.1.1](#Section_8.3).
+**FormatTime (8 bytes):** The time the volume was formatted; see section [2.1.1](#Section_2.1.1).
 
 **LastUpdateTime (8 bytes):** The time the volume was last updated; see section 2.1.1.
 
@@ -3184,7 +3184,7 @@ packet-beta
 
 **Usn (8 bytes):** A 64-bit signed integer, opaque to the client, containing the USN of the record. This value is unique within the [**volume**](#gt_volume) on which the file is stored. This value MUST be greater than or equal to 0. This value MUST be 0 if no USN change journal records have been logged for the file or directory associated with this record. For more information, see [[MSDN-CJ]](https://go.microsoft.com/fwlink/?LinkId=89970).
 
-**TimeStamp (8 bytes):** The absolute system time that this change journal event was logged; see section [2.1.1](#Section_8.3).
+**TimeStamp (8 bytes):** The absolute system time that this change journal event was logged; see section [2.1.1](#Section_2.1.1).
 
 **Reason (4 bytes):** A 32-bit unsigned integer that contains flags that indicate reasons for changes that have accumulated in this file or directory journal record since the file or directory was opened. When a file or directory is closed, a final USN record is generated with the USN_REASON_CLOSE flag set in this field. The next change, occurring after the next open operation or deletion, starts a new record with a new set of reason flags. A rename or move operation generates two USN records: one that records the old parent directory for the item and one that records the new parent in the **ParentFileReferenceNumber** member. Possible values for the reason code are as follows (all unused bits are reserved for future use and MUST NOT be used).
 
@@ -3728,7 +3728,7 @@ The only data item this message returns is a status code, as specified in sectio
 <a id="Section_2.3.77"></a>
 ### 2.3.77 FSCTL_SET_OBJECT_ID Request
 
-This message sets the [**object identifier**](#gt_object-identifier-oid) for the file or directory associated with the handle on which this [**FSCTL**](#gt_file-system-control-fsctl) was invoked. The message contains a [FILE_OBJECTID_BUFFER (section 2.1.3)](#Section_8.3) data element. Either a Type 1 or a Type 2 buffer is valid.<77><78>
+This message sets the [**object identifier**](#gt_object-identifier-oid) for the file or directory associated with the handle on which this [**FSCTL**](#gt_file-system-control-fsctl) was invoked. The message contains a [FILE_OBJECTID_BUFFER (section 2.1.3)](#Section_2.1.3) data element. Either a Type 1 or a Type 2 buffer is valid.<77><78>
 
 <a id="Section_2.3.78"></a>
 ### 2.3.78 FSCTL_SET_OBJECT_ID Reply
@@ -4004,8 +4004,8 @@ File information classes are numerical values (specified by the Level column in 
 | [FileMailslotSetInformation](#Section_2.4.30) | 27 | LOCAL |
 | [FileModeInformation](#Section_2.4.31) | 16 | Query, Set<95> |
 | FileMoveClusterInformation | 31 | <96> |
-| [FileNameInformation](#Section_8.3) | 9 | LOCAL |
-| [FileNamesInformation](#Section_8.3) | 12 | Query |
+| [FileNameInformation](#Section_2.4.32) | 9 | LOCAL |
+| [FileNamesInformation](#Section_2.4.33) | 12 | Query |
 | [FileNetworkOpenInformation](#Section_2.4.34) | 34 | Query |
 | [FileNormalizedNameInformation](#Section_2.4.35) | 48 | Query<97> |
 | [FileObjectIdInformation](#Section_2.4.36) | 29 | LOCAL |
@@ -4084,7 +4084,7 @@ packet-beta
 
 **AlignmentInformation (4 bytes):** A [FILE_ALIGNMENT_INFORMATION](#Section_9b0b997185aa46518438f1c4298bcb0d) structure specified in section 2.4.3.
 
-**NameInformation (variable):** A [FILE_NAME_INFORMATION](#Section_2.1.7) structure specified in section [2.4.32](#Section_8.3).
+**NameInformation (variable):** A [FILE_NAME_INFORMATION](#Section_2.1.7) structure specified in section [2.4.32](#Section_2.4.32).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4178,7 +4178,7 @@ packet-beta
 
 **FileAttributes (4 bytes):** A 32-bit unsigned integer that contains the file attributes. Valid file attributes are as specified in section [2.6](#Section_2.6).
 
-**ReparseTag (4 bytes):** A 32-bit unsigned integer that specifies the [**reparse point tag**](#gt_reparse-point-tag). If the **FileAttributes** member includes the FILE_ATTRIBUTE_REPARSE_POINT attribute flag, this member specifies the reparse tag. Otherwise, this member SHOULD be set to 0, and MUST be ignored. Section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**ReparseTag (4 bytes):** A 32-bit unsigned integer that specifies the [**reparse point tag**](#gt_reparse-point-tag). If the **FileAttributes** member includes the FILE_ATTRIBUTE_REPARSE_POINT attribute flag, this member specifies the reparse tag. Otherwise, this member SHOULD be set to 0, and MUST be ignored. Section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4204,7 +4204,7 @@ packet-beta
   288-319: "Reserved"
 ```
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). A valid time for this field is an integer greater than or equal to 0. When setting file attributes, a value of 0 indicates to the server that it MUST NOT change this attribute. When setting file attributes, a value of -1 indicates to the server that it MUST NOT change this attribute for all subsequent operations on the same file handle. When setting file attributes, a value of -2 indicates to the server that it MUST change this attribute for all subsequent operations on the same file handle. This field MUST NOT be set to a value less than -2.<104>
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). A valid time for this field is an integer greater than or equal to 0. When setting file attributes, a value of 0 indicates to the server that it MUST NOT change this attribute. When setting file attributes, a value of -1 indicates to the server that it MUST NOT change this attribute for all subsequent operations on the same file handle. When setting file attributes, a value of -2 indicates to the server that it MUST change this attribute for all subsequent operations on the same file handle. This field MUST NOT be set to a value less than -2.<104>
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. A valid time for this field is an integer greater than or equal to 0. When setting file attributes, a value of 0 indicates to the server that it MUST NOT change this attribute. When setting file attributes, a value of -1 indicates to the server that it MUST NOT change this attribute for all subsequent operations on the same file handle. When setting file attributes, a value of -2 indicates to the server that it MUST change this attribute for all subsequent operations on the same file handle. This field MUST NOT be set to a value less than -2.<105>
 
@@ -4259,7 +4259,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<108>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). This value MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). This value MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. This value MUST be greater than or equal to 0.
 
@@ -4275,7 +4275,7 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** member.
 
-**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_8.3). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
+**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_2.1.2.1). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
 **ShortNameLength (1 byte):** An 8-bit signed integer that specifies the length, in bytes, of the file name contained in the **ShortName** member. This value MUST be greater than or equal to 0.
 
@@ -4283,7 +4283,7 @@ packet-beta
 
 **ShortName (24 bytes):** A sequence of Unicode characters containing the short (8.3) file name. When working with this field, use **ShortNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4363,7 +4363,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<113>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). This value MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). This value MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. This value MUST be greater than or equal to 0.
 
@@ -4379,7 +4379,7 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** member.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4519,7 +4519,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<115>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). This value MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). This value MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. This value MUST be greater than or equal to 0.
 
@@ -4535,9 +4535,9 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** member.
 
-**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_8.3). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
+**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_2.1.2.1). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4703,7 +4703,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<117>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -4721,7 +4721,7 @@ packet-beta
 
 **EaSize (4 bytes):** A 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
-**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. Section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. Section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 **FileId (8 bytes):** The 64-bit file ID, as specified in section [2.1.9](#Section_2.1.9), for the file. For file systems that do not support a 64-bit file ID, this field MUST be set to 0, and MUST be ignored. For file systems which do not explicitly store directory entries named ".." (synonymous with the parent directory), an implementation MAY set this field to 0 for the entry named "..", and this value MUST be ignored.<118>
 
@@ -4731,7 +4731,7 @@ packet-beta
 
 **ShortName (24 bytes):** A sequence of Unicode characters containing the short (8.3) file name. When working with this field, use **ShortNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4772,7 +4772,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<119>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -4790,11 +4790,11 @@ packet-beta
 
 **EaSize (4 bytes):** A 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
-**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 **FileId (8 bytes):** The 64-bit file ID, as specified in section [2.1.9](#Section_2.1.9), for the file. For file systems that do not support a 64-bit file ID, this field MUST be set to 0, and MUST be ignored. For file systems which do not explicitly store directory entries named ".." (synonymous with the parent directory), an implementation MAY set this field to 0 for the entry named "..", and this value MUST be ignored.<120>
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4839,7 +4839,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<121>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -4857,7 +4857,7 @@ packet-beta
 
 **EaSize (4 bytes):** A 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
-**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 **FileId (8 bytes):** The 64-bit file ID, as specified in section [2.1.9](#Section_2.1.9), for the file. For file systems that do not support a 64-bit file ID, this field MUST be set to 0, and MUST be ignored. For file systems which do not explicitly store directory entries named ".." (synonymous with the parent directory), an implementation MAY set this field to 0 for the entry named "..", and this value MUST be ignored.<122>
 
@@ -4869,7 +4869,7 @@ packet-beta
 
 **ShortName (24 bytes):** A sequence of Unicode characters containing the short (8.3) file name. When working with this field, use **ShortNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4911,7 +4911,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<123>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -4929,13 +4929,13 @@ packet-beta
 
 **EaSize (4 bytes):** A 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
-**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 **FileId (8 bytes):** The 64-bit file ID, as specified in section [2.1.9](#Section_2.1.9), for the file. For file systems that do not support a 64-bit file ID, this field MUST be set to 0, and MUST be ignored. For file systems which do not explicitly store directory entries named ".." (synonymous with the parent directory), an implementation MAY set this field to 0 for the entry named "..", and this value MUST be ignored.<124>
 
 **FileId128 (16 bytes):** The 128-bit file ID, as specified in section [2.1.10](#Section_2.1.10), of the file. For file systems that do not support a 128-bit file ID, this field MUST be set to 0, and MUST be ignored.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -4979,7 +4979,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<125>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -4995,7 +4995,7 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** member.
 
-**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_8.3). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
+**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_2.1.2.1). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
 **ShortNameLength (1 byte):** An 8-bit signed integer that specifies the length, in bytes, of the file name contained within the **ShortName** member.
 
@@ -5007,7 +5007,7 @@ packet-beta
 
 **FileId (8 bytes):** The 64-bit file ID, as specified in section [2.1.9](#Section_2.1.9), for the file. For file systems that do not support a 64-bit file ID, this field MUST be set to 0, and MUST be ignored. For file systems which do not explicitly store directory entries named ".." (synonymous with the parent directory), an implementation MAY set this field to 0 for the entry named "..", and this value MUST be ignored.<126>
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -5048,7 +5048,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<127>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -5066,11 +5066,11 @@ packet-beta
 
 **EaSize (4 bytes):** A 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
-**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**ReparsePointTag (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a 32-bit unsigned integer value containing the reparse point tag that uniquely identifies the owner of the reparse point. section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 **FileId (16 bytes):** The 128-bit file ID, as specified in section [2.1.10](#Section_2.1.10), of the file. For file systems that do not support a 128-bit file ID, this field MUST be set to 0, and MUST be ignored.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory name**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory name**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -5111,7 +5111,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<129>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -5127,13 +5127,13 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** member.
 
-**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_8.3). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
+**EaSize (4 bytes):** If **FILE_ATTRIBUTE_REPARSE_POINT** is set in the **FileAttributes** field, this field MUST contain a reparse tag as specified in section [2.1.2.1](#Section_2.1.2.1). Otherwise, this field is a 32-bit unsigned integer that contains the combined length, in bytes, of the extended attributes (EA) for the file.
 
 **Reserved (4 bytes):** Reserved for alignment. This field can contain any value and MUST be ignored.
 
 **FileId (8 bytes):** The 64-bit file ID, as specified in section [2.1.9](#Section_2.1.9), for the file. For file systems that do not support a 64-bit file ID, this field MUST be set to 0, and MUST be ignored. For file systems which do not explicitly store directory entries named ".." (synonymous with the parent directory), an implementation MAY set this field to 0 for the entry named "..", and this value MUST be ignored.<130>
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. [**Dot directory names**](#gt_dot-directory-name) are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -5146,7 +5146,7 @@ This operation returns a status code as specified in section [2.2](#Section_2.2)
 
 This information class is used locally to query transactional visibility information for the files in a directory. This information class MAY be implemented for file systems that return the FILE_SUPPORTS_TRANSACTIONS flag in response to **FileFsAttributeInformation** specified in section [2.5.1](#Section_2.5.1). This information class MUST NOT be implemented for file systems that do not return that flag.
 
-This information class returns a list that contains a **FILE_ID_GLOBAL_TX_DIR_INFORMATION** data element for each file or directory within the target directory. This list MUST reflect the presence of a subdirectory named "." (synonymous with the target directory itself) within the target directory and one named ".." (synonymous with the parent directory of the target directory), unless the target directory is the root of the volume. For more details, see section [2.1.5.1](#Section_8.3).
+This information class returns a list that contains a **FILE_ID_GLOBAL_TX_DIR_INFORMATION** data element for each file or directory within the target directory. This list MUST reflect the presence of a subdirectory named "." (synonymous with the target directory itself) within the target directory and one named ".." (synonymous with the parent directory of the target directory), unless the target directory is the root of the volume. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 When multiple **FILE_ID_GLOBAL_TX_DIR_INFORMATION** data elements are present in the buffer, each MUST be aligned on an 8-byte boundary. Any bytes inserted for alignment SHOULD be set to zero, and the receiver MUST ignore them. No padding is required following the last data element.
 
@@ -5174,7 +5174,7 @@ packet-beta
 
 **FileIndex (4 bytes):** A 32-bit unsigned integer that contains the byte offset of the file within the parent directory. For file systems in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order, this field SHOULD be set to 0 and MUST be ignored.<131>
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -5414,7 +5414,7 @@ This operation returns a status code as specified in section [2.2](#Section_2.2)
 <a id="Section_2.4.32"></a>
 ### 2.4.32 FileNameInformation
 
-This information class is used locally to query the name of a file. This information class returns a **FILE_NAME_INFORMATION** data element containing an absolute pathname (section [2.1.5](#Section_8.3)).
+This information class is used locally to query the name of a file. This information class returns a **FILE_NAME_INFORMATION** data element containing an absolute pathname (section [2.1.5](#Section_2.1.5)).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -5448,7 +5448,7 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** member.
 
-**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_8.3).
+**FileName (variable):** A sequence of Unicode characters containing the file name. When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter. Dot directory names are valid for this field. For more details, see section [2.1.5.1](#Section_2.1.5.1).
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -5475,7 +5475,7 @@ packet-beta
   416-447: "Reserved"
 ```
 
-**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**CreationTime (8 bytes):** The time when the file was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **LastAccessTime (8 bytes):** The last time the file was accessed; see section 2.1.1. The value of this field MUST be greater than or equal to 0.
 
@@ -5732,7 +5732,7 @@ This operation returns a status code as specified in section [2.2](#Section_2.2)
 <a id="Section_2.4.41"></a>
 ### 2.4.41 FileQuotaInformation
 
-This information class is used to query or to set file quota information for a [**volume**](#gt_volume). For queries, an optional buffer of [FILE_GET_QUOTA_INFORMATION (section 2.4.41.1)](../MS-SMB/MS-SMB.md) data elements is provided by the client to specify the [**SID**](#gt_security-identifier-sid)s for which quota information is requested. If the **FILE_GET_QUOTA_INFORMATION** buffer is not specified, information for all quotas is returned. A buffer of **FILE_QUOTA_INFORMATION** data elements is returned by the server. For sets, **FILE_QUOTA_INFORMATION** data elements are populated and sent by the client, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2.7.6.1 and [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.15.<145>
+This information class is used to query or to set file quota information for a [**volume**](#gt_volume). For queries, an optional buffer of [FILE_GET_QUOTA_INFORMATION (section 2.4.41.1)](#Section_2.4.41.1) data elements is provided by the client to specify the [**SID**](#gt_security-identifier-sid)s for which quota information is requested. If the **FILE_GET_QUOTA_INFORMATION** buffer is not specified, information for all quotas is returned. A buffer of **FILE_QUOTA_INFORMATION** data elements is returned by the server. For sets, **FILE_QUOTA_INFORMATION** data elements are populated and sent by the client, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2.7.6.1 and [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.15.<145>
 
 When multiple **FILE_QUOTA_INFORMATION** data elements are present in the buffer, each MUST be aligned on an 8-byte boundary. Any bytes inserted for alignment SHOULD be set to zero, and the receiver MUST ignore them. No padding is required following the last data element.
 
@@ -5753,7 +5753,7 @@ packet-beta
 
 **SidLength (4 bytes):** A 32-bit unsigned integer that contains the length, in bytes, of the **Sid** data element.
 
-**ChangeTime (8 bytes):** The last time that the quota was changed; see section [2.1.1](#Section_8.3). This value MUST be greater than or equal to 0x0000000000000000. When setting quota information, the server MUST ignore the value of this field.
+**ChangeTime (8 bytes):** The last time that the quota was changed; see section [2.1.1](#Section_2.1.1). This value MUST be greater than or equal to 0x0000000000000000. When setting quota information, the server MUST ignore the value of this field.
 
 **QuotaUsed (8 bytes):** A 64-bit signed integer that contains the amount of quota used by this user, in bytes. This value MUST be greater than or equal to 0x0000000000000000. When setting quota information, the server MUST ignore the value of this field.
 
@@ -5838,7 +5838,7 @@ packet-beta
 
 **FileNameLength (4 bytes):** A 32-bit unsigned integer that specifies the length, in bytes, of the file name contained within the **FileName** field.
 
-**FileName (variable):** A sequence of [**Unicode characters**](#gt_unicode-character) containing the new file name of type **Filename** (section [2.1.5.2](#Section_8.3)). When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
+**FileName (variable):** A sequence of [**Unicode characters**](#gt_unicode-character) containing the new file name of type **Filename** (section [2.1.5.2](#Section_2.1.5.2)). When working with this field, use **FileNameLength** to determine the length of the file name rather than assuming the presence of a trailing null delimiter.
 
 <a id="Section_2.4.42.2"></a>
 #### 2.4.42.2 FileRenameInformation for SMB2
@@ -5929,7 +5929,7 @@ packet-beta
 
 **FileReferenceNumber (8 bytes):** The 64-bit file ID, as specified in section 2.1.9, for the file.
 
-**Tag (4 bytes):** A 32-bit unsigned integer value containing the [**reparse point tag**](#gt_reparse-point-tag) that uniquely identifies the owner of the reparse point. Section [2.1.2.1](#Section_8.3) contains more details on reparse tags.
+**Tag (4 bytes):** A 32-bit unsigned integer value containing the [**reparse point tag**](#gt_reparse-point-tag) that uniquely identifies the owner of the reparse point. Section [2.1.2.1](#Section_2.1.2.1) contains more details on reparse tags.
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -6093,7 +6093,7 @@ packet-beta
 
 **StreamAllocationSize (8 bytes):** A 64-bit signed integer that contains the file stream allocation size, in bytes. The value of this field MUST be an integer multiple of the [**cluster**](#gt_cluster) size.
 
-**StreamName (variable):** A sequence of Unicode characters containing the name of the stream using the form ":streamname:$DATA", or "::$DATA" for the default data stream, as specified in section [2.1.4](#Section_8.3). This field is not null-terminated and MUST be handled as a sequence of **StreamNameLength** bytes.
+**StreamName (variable):** A sequence of Unicode characters containing the name of the stream using the form ":streamname:$DATA", or "::$DATA" for the default data stream, as specified in section [2.1.4](#Section_2.1.4). This field is not null-terminated and MUST be handled as a sequence of **StreamNameLength** bytes.
 
 This operation returns a status code as specified in section [2.2](#Section_2.2). Upon success, the status code returned by the function that processes this file information class is STATUS_SUCCESS. The most common error codes are listed in the following table.
 
@@ -6457,7 +6457,7 @@ packet-beta
   144-191: "VolumeLabel (variable)"
 ```
 
-**VolumeCreationTime (8 bytes):** The time when the volume was created; see section [2.1.1](#Section_8.3). The value of this field MUST be greater than or equal to 0.
+**VolumeCreationTime (8 bytes):** The time when the volume was created; see section [2.1.1](#Section_2.1.1). The value of this field MUST be greater than or equal to 0.
 
 **VolumeSerialNumber (4 bytes):** A 32-bit unsigned integer that contains the serial number of the volume. The serial number is an opaque value generated by the file system at format time, and is not necessarily related to any hardware serial number for the device on which the file system is located. No specific format or content of this field is required for protocol interoperation. This value is not required to be unique.
 
@@ -6595,7 +6595,7 @@ If two or more files have been renamed, the corresponding **FILE_NOTIFY_INFORMAT
 <a id="Section_2.8"></a>
 ## 2.8 Cluster Shared Volume File System IOCTLs
 
-SQL Server Remote Storage Profile [MS-SQLRS](../MS-SQLRS/MS-SQLRS.md) relies on the [**I/O control (IOCTL)**](#gt_io-control-ioctl) code structures, and definitions in this section, to interpret certain fields that can be sent or received as part of its processing. See section [2.3](../MS-SQLRS/MS-SQLRS.md) for more information about processing.
+SQL Server Remote Storage Profile [MS-SQLRS](../MS-SQLRS/MS-SQLRS.md) relies on the [**I/O control (IOCTL)**](#gt_io-control-ioctl) code structures, and definitions in this section, to interpret certain fields that can be sent or received as part of its processing. See section [2.3](#Section_2.3) for more information about processing.
 
 <a id="Section_2.8.1"></a>
 ### 2.8.1 IOCTL_STORAGE_QUERY_PROPERTY Request

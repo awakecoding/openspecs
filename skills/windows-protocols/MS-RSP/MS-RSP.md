@@ -201,7 +201,7 @@ This is a simple request-response protocol. For every method that the server rec
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The Remote Shutdown Protocol is dependent upon [**RPC**](#gt_remote-procedure-call-rpc) and [**SMB**](#gt_server-message-block-smb) for its transport. For the InitShutdown interface (section [3.2](#Section_1.3)), this protocol uses RPC [MS-RPCE](../MS-RPCE/MS-RPCE.md) over [**named pipes**](#gt_named-pipe). Named pipes, in turn, use the SMB protocol [MS-SMB](../MS-SMB/MS-SMB.md).
+The Remote Shutdown Protocol is dependent upon [**RPC**](#gt_remote-procedure-call-rpc) and [**SMB**](#gt_server-message-block-smb) for its transport. For the InitShutdown interface (section [3.2](#Section_3.2)), this protocol uses RPC [MS-RPCE](../MS-RPCE/MS-RPCE.md) over [**named pipes**](#gt_named-pipe). Named pipes, in turn, use the SMB protocol [MS-SMB](../MS-SMB/MS-SMB.md).
 
 No other protocol currently depends on the Remote Shutdown Protocol.
 
@@ -376,9 +376,9 @@ The remote shutdown [**RPC**](#gt_remote-procedure-call-rpc) interfaces are used
 
 This section presents the details of the Remote Shutdown Protocol:
 
-- Section [3.1](#Section_1.3) specifies the WinReg RPC interface.
-- Section [3.2](#Section_1.3) specifies the InitShutdown RPC interface.
-- Section [3.3](#Section_6.2) specifies the WindowsShutdown RPC interface.
+- Section [3.1](#Section_3.1) specifies the WinReg RPC interface.
+- Section [3.2](#Section_3.2) specifies the InitShutdown RPC interface.
+- Section [3.3](#Section_3.3) specifies the WindowsShutdown RPC interface.
 All remote shutdown methods return 0x00000000 on success; otherwise, they return a 32-bit, nonzero Win32 error code. For more information on Win32 error values, see [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 The default pointer type for the shutdown RPC interface is pointer_default(unique). Method calls are received at a dynamically assigned [**endpoint**](#gt_endpoint) ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.1.1.1). The endpoints for the Netlogon service are negotiated by the RPC endpoint mapper ([MS-RPCE] section 2.1.1.1).

@@ -127,9 +127,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [IBARCH] Infiniband Trade Association, "Infiniband Architecture Specification, Volume 1", Release 1.2.1, January 2008, [https://cw.infinibandta.org/document/dl/7143](https://go.microsoft.com/fwlink/?LinkId=230464)
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-BRWSA] Microsoft Corporation, "[Common Internet File System (CIFS) Browser Auxiliary Protocol](../MS-BRWSA/MS-BRWSA.md)".
 
@@ -147,11 +147,11 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
-[MS-FSMOD] Microsoft Corporation, "[File Services Management Protocols Overview](#Section_2.1)".
+[MS-FSMOD] Microsoft Corporation, "[File Services Management Protocols Overview](../MS-FSMOD/MS-FSMOD.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
-[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](#Section_2.1)".
+[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](../MS-PRSOD/MS-PRSOD.md)".
 
 [MS-RAP] Microsoft Corporation, "[Remote Administration Protocol](../MS-RAP/MS-RAP.md)".
 
@@ -222,7 +222,7 @@ The primary components of the File Access Services (FAS) are a minimum of two co
 <a id="Section_2.1.1"></a>
 ### 2.1.1 System Purpose
 
-The purpose of the File Access Services (FAS) System is to allow applications to access and share files that are available on other networked computers. Applications generally have access to files on the local storage of the computer on which they are running. The FAS protocols allow applications to have similar access to files that are stored remotely. Administrators can decide which files to share on any given computer (see [MS-FSMOD](#Section_2.1) for details), and any computer can serve as both a server and a client. Once the files have been made available, FAS protocols are used to create, read, write, update, and delete files remotely.
+The purpose of the File Access Services (FAS) System is to allow applications to access and share files that are available on other networked computers. Applications generally have access to files on the local storage of the computer on which they are running. The FAS protocols allow applications to have similar access to files that are stored remotely. Administrators can decide which files to share on any given computer (see [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md) for details), and any computer can serve as both a server and a client. Once the files have been made available, FAS protocols are used to create, read, write, update, and delete files remotely.
 
 <a id="Section_2.1.2"></a>
 ### 2.1.2 Applicability
@@ -253,7 +253,7 @@ Following are the components that interact with the FAS System.
 - Print Services: Depends on the FAS System for transferring a print image file to the print server.
 - File Service: An abstraction of the software running on a file server that provides remote file access to one or more users. The service can also be managed by one or more administrators. Internally, it contains a datastore to persist changes made to files through the file access protocols. The datastore is an implementation-dependent local file system. A file service provides an abstraction of SMB Service, NFS Service, WebDAV Service, and DFS Service.
 - File Client: The abstractions of low-level protocol state and operating software that run on application and administrative nodes, respectively. The client is used by applications to effect communication with the remote components of the File Access Services.
-- Application and Admin Tool: Represent typical programs with which a user and an administrator interact, respectively. This is a somewhat arbitrary distinction, and many programs have both Application and Admin Tool features. For example, a graphical shell is frequently used directly by a user to perform personal file management tasks. This type of program is classified as an application, but it certainly has some aspects of an admin tool. For more details about admin tools, see [MS-FSMOD](#Section_2.1).
+- Application and Admin Tool: Represent typical programs with which a user and an administrator interact, respectively. This is a somewhat arbitrary distinction, and many programs have both Application and Admin Tool features. For example, a graphical shell is frequently used directly by a user to perform personal file management tasks. This type of program is classified as an application, but it certainly has some aspects of an admin tool. For more details about admin tools, see [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md).
 <a id="Section_2.1.4"></a>
 ### 2.1.4 Protocol Communications
 
@@ -393,8 +393,8 @@ Figure 4: File Access Services System distributed environment with five computer
 
 The following external systems depend on the File Access Services System:
 
-- Print Services [MS-PRSOD](#Section_2.1): For transferring a print image file to the print server.
-- Group Policy [MS-GPOD](#Section_2.1): For downloading group policy information from the SYSVOL share to group policy client, which behaves for this purpose as a File Access Services Application.
+- Print Services [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md): For transferring a print image file to the print server.
+- Group Policy [MS-GPOD](../MS-GPOD/MS-GPOD.md): For downloading group policy information from the SYSVOL share to group policy client, which behaves for this purpose as a File Access Services Application.
 <a id="Section_2.3.2"></a>
 ### 2.3.2 Dependencies on Other Systems/Components
 
@@ -421,7 +421,7 @@ The File Access Services System can be influenced by the external systems and co
 
 Specific system influences are as follows:
 
-- Identity conversion from credentials supplied by the NFS file client to credentials acceptable to the local authentication system on the NFS file service (for example, the Authentication Services Protocols defined in [MS-AUTHSOD](#Section_2.1)) and to the object store is done through the User Name Mapping Protocol ([MS-UNMP](../MS-UNMP/MS-UNMP.md)) or an [[RFC2307]](https://go.microsoft.com/fwlink/?LinkId=90333)-compliant LDAP store (such as the Active Directory Protocols defined in [MS-ADOD](#Section_2.1)).
+- Identity conversion from credentials supplied by the NFS file client to credentials acceptable to the local authentication system on the NFS file service (for example, the Authentication Services Protocols defined in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md)) and to the object store is done through the User Name Mapping Protocol ([MS-UNMP](../MS-UNMP/MS-UNMP.md)) or an [[RFC2307]](https://go.microsoft.com/fwlink/?LinkId=90333)-compliant LDAP store (such as the Active Directory Protocols defined in [MS-ADOD](../MS-ADOD/MS-ADOD.md)).
 - nisNetgroup object as defined in an [RFC2307]-compliant LDAP store or netgroups defined in Network Information Service [[NIS]](https://go.microsoft.com/fwlink/?LinkId=90234) are consumed by the NFS file service.
 - Group Policy enables the file client to interact with the BranchCache Hosted Cache Service. This enables a client to publish and retrieve content for a file that is located on a share, as defined in [MS-SMB2](../MS-SMB2/MS-SMB2.md).
 <a id="Section_2.4"></a>
@@ -433,13 +433,13 @@ System Availability: The File Access Services System is installed on all the com
 
 Domain Configuration: In a domain configuration, file client and file service have access to directory services provided by the domain.
 
-Authentication Services: Authentication services as described in [MS-AUTHSOD](#Section_2.1) are available to all file clients and file services.
+Authentication Services: Authentication services as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) are available to all file clients and file services.
 
 RPC: Components of file client and file service that use Remote Procedure Call interfaces have all prerequisites specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 1.5 satisfied.
 
 Network Configuration: In order for system components running on different computers to communicate, the network services and infrastructure are functional and configured such that required protocols, ports, and so on are remotely accessible.
 
-Domain Functionality: For system functionality requiring a domain (as defined in [MS-ADOD](#Section_2.1)) and directory services (as defined in [MS-ADOD]), at least one domain controller is configured and accessible. Some functionality, such as domain-based DFS namespaces, can require an Active Directory-style domain as noted in [MS-DFSC](../MS-DFSC/MS-DFSC.md).
+Domain Functionality: For system functionality requiring a domain (as defined in [MS-ADOD](../MS-ADOD/MS-ADOD.md)) and directory services (as defined in [MS-ADOD]), at least one domain controller is configured and accessible. Some functionality, such as domain-based DFS namespaces, can require an Active Directory-style domain as noted in [MS-DFSC](../MS-DFSC/MS-DFSC.md).
 
 Domain Functional Level: In order for an NFS file service to authenticate users represented by AUTH_SYS credentials, this system has a domain available at a functional level that supports S4U extensions.
 
@@ -677,7 +677,7 @@ None.
 <a id="Section_2.5.5.1"></a>
 #### 2.5.5.1 List File Servers
 
-This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.1)).
+This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.5.1)).
 
 **Context of Use:** To display a list of file servers available in the workgroup when a User accesses a file via an application.
 
@@ -714,7 +714,7 @@ The computers that provide file services are listed.
 <a id="Section_2.5.5.2"></a>
 #### 2.5.5.2 List Shares
 
-This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.1)).
+This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.5.1)).
 
 **Context of Use:** To display a list of file shares when a User has located and selected a file server.
 
@@ -738,7 +738,7 @@ This use case supports the **Access a File in a Workgroup** use case (section [2
 **Trigger:** The Application receives a request from the User to retrieve a list of shares hosted by the file server.
 
 - The application directs a file client to establish a communication channel to the SMB file service, as specified in [MS-SRVS] section 2.1.
-- The SMB file service authenticates the User through the mechanisms specified in [MS-AUTHSOD](#Section_2.1).
+- The SMB file service authenticates the User through the mechanisms specified in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The application directs the file client to contact the SMB file service using **NetrShareEnum** ([MS-SRVS] section 3.1.4.8) to retrieve the list of shares.
 - The SMB file service authorizes the User through the procedure specified in [MS-SRVS] section 3.1.4.8, and then performs the action and returns the results to the Application.
 **Post Condition**
@@ -753,7 +753,7 @@ Shares on a file server are listed.
 <a id="Section_2.5.5.3"></a>
 #### 2.5.5.3 List Files in a Shared Directory - Application
 
-This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.1)) and **Access a File in a Domain** use case (section [2.5.2](#Section_2.1)).
+This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.5.1)) and **Access a File in a Domain** use case (section [2.5.2](#Section_2.5.2)).
 
 **Context of Use:** To display a list of files and directories when the User has selected a share to enumerate.
 
@@ -792,7 +792,7 @@ The files in a share directory are listed.
 <a id="Section_2.5.5.4"></a>
 #### 2.5.5.4 Open a File in an SMB File Share - Application
 
-This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.1)), the **Access a File in a Domain** use case (section [2.5.2](#Section_2.1)), and the **Two Applications Communicate via a Shared File** use case ([2.5.3](#Section_2.5.3)).
+This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.5.1)), the **Access a File in a Domain** use case (section [2.5.2](#Section_2.5.2)), and the **Two Applications Communicate via a Shared File** use case ([2.5.3](#Section_2.5.3)).
 
 **Context of Use:** To open or create a file when the User has located a shared directory and wants to open or create a file in that directory using the SMB network access protocol.
 
@@ -816,7 +816,7 @@ This use case supports the **Access a File in a Workgroup** use case (section [2
 **Trigger:** Based on interactions with the User, the Application determines whether to open or create a file in a target directory.
 
 - The Application directs the file client to establish a communication channel to an SMB File Service.
-- The SMB File Service authenticates the User through the mechanisms as specified in [MS-AUTHSOD](#Section_2.1).
+- The SMB File Service authenticates the User through the mechanisms as specified in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The Application directs the file client to send a CREATE request to the SMB File Service (as specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.3) to open a file with an appropriate CreateDisposition as specified in the same section.
 - The SMB File Service authorizes the User using the mechanisms of [MS-SMB2] section 2.2.13, with an appropriate CreateDisposition as specified in the same section.
 - The SMB File Service performs the create operation and returns a file handle to the Application.
@@ -837,7 +837,7 @@ The User will get the handle for the desired file in a shared directory located 
 <a id="Section_2.5.5.5"></a>
 #### 2.5.5.5 Perform a File Operation Using SMB
 
-This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.1)), the **Access a File in a Domain** use case (section [2.5.2](#Section_2.1)) and the **Two Applications Communicate via a Shared File** use case ([2.5.3](#Section_2.5.3)).
+This use case supports the **Access a File in a Workgroup** use case (section [2.5.1](#Section_2.5.1)), the **Access a File in a Domain** use case (section [2.5.2](#Section_2.5.2)) and the **Two Applications Communicate via a Shared File** use case ([2.5.3](#Section_2.5.3)).
 
 **Context of Use:** To read or write the contents of the file or close the handle when the User has obtained a handle to a file in an SMB share directory and wants to perform an operation on the file.
 
@@ -994,7 +994,7 @@ A directory change notification is sent to the Application.
 <a id="Section_2.5.5.9"></a>
 #### 2.5.5.9 List Files in a Web Directory
 
-This use case supports the **Access a Remote File Using WebDAV** use case (section [2.5.4](#Section_2.1)).
+This use case supports the **Access a Remote File Using WebDAV** use case (section [2.5.4](#Section_2.5.4)).
 
 **Context of Use:** To display a list of files and directories when the User has selected a URL to be enumerated.
 
@@ -1018,7 +1018,7 @@ This use case supports the **Access a Remote File Using WebDAV** use case (secti
 **Trigger:** The application receives a request from the User to display a list of files and directories in a web directory.
 
 - The application directs the file client to send the GET method in a WebDAV HTTP request ([[RFC4918]](https://go.microsoft.com/fwlink/?LinkId=151240) section 8.4) to a WebDAV service, in order to display a list of files and directories.
-- If the User has not previously authenticated, the WebDAV service authenticates the User ([MS-AUTHSOD](#Section_2.1) section 2.1.2.5) and then retrieves the list of files and directories from the back–end database.
+- If the User has not previously authenticated, the WebDAV service authenticates the User ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.5) and then retrieves the list of files and directories from the back–end database.
 **Post Condition**
 
 Files and directories in a web directory are listed.
@@ -1029,7 +1029,7 @@ Files and directories in a web directory are listed.
 <a id="Section_2.5.5.10"></a>
 #### 2.5.5.10 Perform File Operation Using WebDAV
 
-This use case supports the **Access a Remote File Using WebDAV** use case (section [2.5.4](#Section_2.1)).
+This use case supports the **Access a Remote File Using WebDAV** use case (section [2.5.4](#Section_2.5.4)).
 
 **Context of Use:** To read, write, or delete the contents of the file when the User wants to do those operations on a file in a web directory.
 
@@ -1053,7 +1053,7 @@ This use case supports the **Access a Remote File Using WebDAV** use case (secti
 **Trigger:** The Application receives a request from the User to perform a file operation on a file in a web directory.
 
 - The Application directs the File Client to send a GET method of WebDAV HTTP requests ([[RFC4918]](https://go.microsoft.com/fwlink/?LinkId=151240) section 9.4) to WebDAV service to read the content of a file in a web directory.
-- If the user has not previously authenticated, WebDAV Service authenticates the User ([MS-AUTHSOD](#Section_2.1) section 2.1.2.5) and then it reads the contents of the file located in the back–end database.
+- If the user has not previously authenticated, WebDAV Service authenticates the User ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.5) and then it reads the contents of the file located in the back–end database.
 **Post Condition**
 
 The file operations are done.
@@ -1116,18 +1116,18 @@ None.
 <a id="Section_3"></a>
 # 3 Examples
 
-This section contains a set of examples illustrating common uses of the File Access Services. These examples provide more details of the system summary use cases introduced in section [2.5](#Section_2.1). The examples are as follows:
+This section contains a set of examples illustrating common uses of the File Access Services. These examples provide more details of the system summary use cases introduced in section [2.5](#Section_2.5). The examples are as follows:
 
 - **Access a File in a Workgroup**
 - **Access a File in a Domain**
 - **Two Applications Communicate Through a Shared File**
 - **Access a Remote File Using WebDAV**
-Additionally, the examples include a number of referenced sub-scenarios, which are documented separately, in section [3.5](../MS-SMB2/MS-SMB2.md). The sequence diagram examples in this section are shown in terms of messages defined in version 2 of SMB file access protocols [MS-SMB2] and version 3 of NFS file access protocols [RFC1813]. The semantics defined for these versions of the protocol can be mapped to other versions of the respective protocols.
+Additionally, the examples include a number of referenced sub-scenarios, which are documented separately, in section [3.5](#Section_3.5). The sequence diagram examples in this section are shown in terms of messages defined in version 2 of SMB file access protocols [MS-SMB2] and version 3 of NFS file access protocols [RFC1813]. The semantics defined for these versions of the protocol can be mapped to other versions of the respective protocols.
 
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Access a File in a Workgroup
 
-**Access a File in a Workgroup** is illustrative of typical User interaction with the File Access Services System as a User locates a file server and a share on it, obtains a directory listing, and then reads the file content. This example demonstrates the use case described in section [2.5.1](#Section_2.1).
+**Access a File in a Workgroup** is illustrative of typical User interaction with the File Access Services System as a User locates a file server and a share on it, obtains a directory listing, and then reads the file content. This example demonstrates the use case described in section [2.5.1](#Section_2.5.1).
 
 **Prerequisites**
 
@@ -1176,7 +1176,7 @@ Figure 9: Sequence diagram for Display the list of shares on a file server
 <a id="Section_3.2"></a>
 ## 3.2 Example 2: Access a File in a Domain
 
-The **Access a File in a Domain** use case illustrates a typical user interaction with the File Access Services System; the user locates a file within a DFS namespace and then reads it. This example demonstrates the use case described in section [2.5.2](#Section_2.1).
+The **Access a File in a Domain** use case illustrates a typical user interaction with the File Access Services System; the user locates a file within a DFS namespace and then reads it. This example demonstrates the use case described in section [2.5.2](#Section_2.5.2).
 
 **Prerequisites**
 
@@ -1207,7 +1207,7 @@ The sequence described in this example details how an application uses the file 
 
 Figure 10: Sequence diagram for Open a file within a DFS namespace
 
-The application invokes the open file operation within the DFS namespace with the specified UncPath, in order to direct the file client to communicate with the SMB File Service. This allows the application to gain access to the file and return a handle that it can use in subsequent operations against the file. The file client performs the mechanisms described in [MS-DFSC](../MS-DFSC/MS-DFSC.md) section 3.1.4.1 to perform the application's request. These mechanisms include sequences equivalent to the **Open a File in an SMB File Share** (section [3.5.1](../MS-DFSC/MS-DFSC.md)) sequence diagram.
+The application invokes the open file operation within the DFS namespace with the specified UncPath, in order to direct the file client to communicate with the SMB File Service. This allows the application to gain access to the file and return a handle that it can use in subsequent operations against the file. The file client performs the mechanisms described in [MS-DFSC](../MS-DFSC/MS-DFSC.md) section 3.1.4.1 to perform the application's request. These mechanisms include sequences equivalent to the **Open a File in an SMB File Share** (section [3.5.1](#Section_3.5.1)) sequence diagram.
 
 - If the operation was successful, the SMB file service generates a handle, which is returned to the file client for use when performing subsequent operations on the file.
 **Task 2: Enumerate a Directory Using the SMB Protocol**
@@ -1287,7 +1287,7 @@ Figure 12: Sequence diagram for Open a file in an NFS file share
 - The file service verifies the credentials of the incoming bind request and binds to the configured Active Directory service.
 - The file service sends an LDAP Search request message to the Active Directory service in order to translate the supplied NFS identity (UID) to an account name that can be presented to the authentication service.
 - The Active Directory service returns a list of zero or more account names, with related records and a count, as described in [RFC2251] section 4.5. Whenever there is no unique translation from the supplied identity, the NFS file service fails the authentication and returns STATUS_NOT_FOUND back to the caller.
-- Whenever there is a unique translation from the supplied NFS identity, the NFS file service continues the authentication process. The file service sends a logon user request message to the authentication service in order to authenticate the user identified by the account name obtained as a result of the LDAP search request, as described in section 6 of [MS-AUTHSOD](#Section_2.1).
+- Whenever there is a unique translation from the supplied NFS identity, the NFS file service continues the authentication process. The file service sends a logon user request message to the authentication service in order to authenticate the user identified by the account name obtained as a result of the LDAP search request, as described in section 6 of [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The authentication service returns a security token, used in subsequent operations to identify the user account.
 - On successful completion of authentication, the mount service validates the directory path, by verifying that the path sent by the NFS file client is provisioned for NFS sharing on the file server.
 - The file client then traverses the path to the file on the NFS file share, in order to obtain an NFS File Handle corresponding to the file. The file client uses a LOOKUP request as described in [RFC1813] section 3.3.3 to obtain an NFS file handle corresponding to the component path to the target file.
@@ -1343,7 +1343,7 @@ The file service responds to the file client with the contents of the file that 
 <a id="Section_3.4"></a>
 ## 3.4 Example 4: Access a Remote File Using WebDAV
 
-**Access a Remote File Using WebDAV** illustrates a typical user interaction with the WebDAV service, as the user locates a file within a web directory, writes into it, and then reads the file. This example demonstrates the use case described in section [2.5.4](#Section_2.1).
+**Access a Remote File Using WebDAV** illustrates a typical user interaction with the WebDAV service, as the user locates a file within a web directory, writes into it, and then reads the file. This example demonstrates the use case described in section [2.5.4](#Section_2.5.4).
 
 **Prerequisites**
 
@@ -1429,7 +1429,7 @@ Figure 21: Sequence diagram for Close a file using SMB
 <a id="Section_4"></a>
 # 4 Microsoft Implementations
 
-There are no variations in the behavior of the File Access Services System in different versions of Windows beyond those described in the specifications of the protocols supported by the system, as listed in section [2.2](#Section_2.1).
+There are no variations in the behavior of the File Access Services System in different versions of Windows beyond those described in the specifications of the protocols supported by the system, as listed in section [2.2](#Section_2.2).
 
 The information in this specification is applicable to the following Microsoft products:
 

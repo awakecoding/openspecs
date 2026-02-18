@@ -425,7 +425,7 @@ If F has any ghosted extents, the NT backup file MUST generate one GHOSTED_EXTEN
 
 An implementation creating a file F given an [**NT backup file**](#gt_nt-backup-file) MUST process all of the [**backup streams**](#gt_backup-stream) contained within the NT backup file.
 
-For [OBJECT_ID](#Section_2.7), [REPARSE_DATA](#Section_2.8), and [SECURITY_DATA](#Section_2.6) backup streams, it SHOULD create the corresponding [**object ID**](#gt_object-id), [**reparse point**](#gt_reparse-point), or [**security descriptor**](#gt_security-descriptor) on F, if the file system in which F resides supports those features. If there is more than one backup stream of any of these particular types (or of type [DATA](#Section_2.4)), the implementation creating F can either:
+For [OBJECT_ID](#Section_2.7), [REPARSE_DATA](#Section_2.8), and [SECURITY_DATA](#Section_2.11) backup streams, it SHOULD create the corresponding [**object ID**](#gt_object-id), [**reparse point**](#gt_reparse-point), or [**security descriptor**](#gt_security-descriptor) on F, if the file system in which F resides supports those features. If there is more than one backup stream of any of these particular types (or of type [DATA](#Section_2.4)), the implementation creating F can either:
 
 - Select any one of the backup streams of that type, or <7>
 - Fail without reconstituting that stream due to the presence of more than one backup stream of that type
@@ -456,7 +456,7 @@ The [**serialized**](#gt_serialize) representation of a.txt is:
 
 ![image1](media/image1.png)
 
-The [WIN32_STREAM_IDs](#Section_2.2) at the beginning of each [**backup stream**](#gt_backup-stream) are indicated by a gray background. There are three backup streams in this case: first, a [SECURITY_DATA](#Section_2.6) stream that contains the [**security descriptor**](#gt_security-descriptor) for this file; second, the [DATA](#Section_2.4) stream that contains the contents of the [**main stream**](#gt_main-stream); and third, an [ALTERNATE_DATA](#Section_2.3) stream that contains the contents of stream1. The NTFS file system reports alternate stream names as ":streamName:$DATA." This is an implementation detail of the NTFS file system and does imply that other file systems necessarily follow this stream naming convention.
+The [WIN32_STREAM_IDs](#Section_2.2) at the beginning of each [**backup stream**](#gt_backup-stream) are indicated by a gray background. There are three backup streams in this case: first, a [SECURITY_DATA](#Section_2.11) stream that contains the [**security descriptor**](#gt_security-descriptor) for this file; second, the [DATA](#Section_2.4) stream that contains the contents of the [**main stream**](#gt_main-stream); and third, an [ALTERNATE_DATA](#Section_2.3) stream that contains the contents of stream1. The NTFS file system reports alternate stream names as ":streamName:$DATA." This is an implementation detail of the NTFS file system and does imply that other file systems necessarily follow this stream naming convention.
 
 <a id="Section_4"></a>
 # 4 Security Considerations

@@ -406,7 +406,7 @@ This state terminates when:
 - The client receives a POP3_AUTH_NTLM_Succeeded_Response or POP3_AUTH_NTLM_Fail_Response.
 - A failure is reported by the NTLM subsystem.
 - Stop: completed_authentication.
-This is the state of the client when it exits the inside_authentication state. The rules for exiting the inside_authentication state are defined in Message Processing Events and Sequencing Rules section [3.1.5](#Section_3.2.5). The behavior of POP3 in this state is not in the scope of this document—it represents the end state of the authentication protocol.
+This is the state of the client when it exits the inside_authentication state. The rules for exiting the inside_authentication state are defined in Message Processing Events and Sequencing Rules section [3.1.5](#Section_3.1.5). The behavior of POP3 in this state is not in the scope of this document—it represents the end state of the authentication protocol.
 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 NTLM Subsystem Interaction
@@ -441,7 +441,7 @@ None.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The NTLM POP3 Extension is driven by a series of message exchanges between a POP3 server and a POP3 client. The rules governing the sequencing of commands and the internal states of the client and server are defined by a combination of [[RFC1734]](https://go.microsoft.com/fwlink/?LinkId=90286) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.1.1](../MS-NLMP/MS-NLMP.md) completely defines how the rules specified in [RFC1734] and [MS-NLMP] govern POP3 authentication.
+The NTLM POP3 Extension is driven by a series of message exchanges between a POP3 server and a POP3 client. The rules governing the sequencing of commands and the internal states of the client and server are defined by a combination of [[RFC1734]](https://go.microsoft.com/fwlink/?LinkId=90286) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.1.1](#Section_3.1.1) completely defines how the rules specified in [RFC1734] and [MS-NLMP] govern POP3 authentication.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Receiving a POP3_NTLM_Supported_Response Message
@@ -539,7 +539,7 @@ This state terminates when:
 
 - The NTLM subsystem reports completion with either a success or failed authentication status, upon which the server sends the client a POP3_AUTH_NTLM_Succeeded_Response or POP3_AUTH_NTLM_Fail_Response, as specified in [[RFC1734]](https://go.microsoft.com/fwlink/?LinkId=90286). These are the only responses returned to the client.
 - Stop: completed_authentication
-This is the state of the server after it exits the inside_authentication state. The rules for exiting the inside_authentication state are defined in section [3.2.5](#Section_1.3). The behavior of POP3 in this state is defined in [RFC1734]—it represents the end_state of the authentication protocol.
+This is the state of the server after it exits the inside_authentication state. The rules for exiting the inside_authentication state are defined in section [3.2.5](#Section_3.2.5). The behavior of POP3 in this state is defined in [RFC1734]—it represents the end_state of the authentication protocol.
 
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 NTLM Subsystem Interaction

@@ -136,7 +136,7 @@ This document specifies the Messenger Service Remote Protocol. The Messenger Ser
 - Manage the names for which the message server receives messages.
 The message server does not maintain [**client**](#gt_client) state information.
 
-It is recommended that this protocol not be implemented due to the lack of security features in the protocol, as described in section [5.1](#Section_5).
+It is recommended that this protocol not be implemented due to the lack of security features in the protocol, as described in section [5.1](#Section_5.1).
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -218,7 +218,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-CIFS] Microsoft Corporation, "[Common Internet File System (CIFS) Protocol](../MS-CIFS/MS-CIFS.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -254,7 +254,7 @@ The Messenger Service Remote Protocol suite is designed to perform the following
 
 - Receive and display short text messages to the console user. (This function is referred to in this document as the "messaging protocol".)
 - Manage the names for which a [**message server**](#gt_message-server) receives messages. (This function is referred to in this document as the "name management protocol".)
-The name management protocol portion of the Messenger Service Remote Protocol is used to manage the set of names for which the message server accepts messages. The operations in this protocol are very simple, consisting of add, remove, and enumeration methods. The messaging protocol portion of the Messenger Service Remote Protocol actually has several forms and runs over [**mailslots**](#gt_mailslot) over Server Message Block Protocol, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) and [**RPC dynamic endpoints**](#gt_rpc-dynamic-endpoint) over User Datagram Protocol (UDP) (as specified in [[RFC768]](https://go.microsoft.com/fwlink/?LinkId=90490)). For how the message [**client**](#gt_client) selects the transport that is used for the messaging protocol, see section [3.2](#Section_1.3).
+The name management protocol portion of the Messenger Service Remote Protocol is used to manage the set of names for which the message server accepts messages. The operations in this protocol are very simple, consisting of add, remove, and enumeration methods. The messaging protocol portion of the Messenger Service Remote Protocol actually has several forms and runs over [**mailslots**](#gt_mailslot) over Server Message Block Protocol, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) and [**RPC dynamic endpoints**](#gt_rpc-dynamic-endpoint) over User Datagram Protocol (UDP) (as specified in [[RFC768]](https://go.microsoft.com/fwlink/?LinkId=90490)). For how the message [**client**](#gt_client) selects the transport that is used for the messaging protocol, see section [3.2](#Section_3.2).
 
 Typically, the Messenger Service Remote Protocol is used to send a short text message from a [**server**](#gt_server), such as a file server or print server, to a client machine; for example, to indicate that a print job has completed or that a file server is shutting down and all of its clients need to save their work and disconnect. As such, the roles of client and server are reversed from typical protocols, with the message server (recipient) of the messages often being the workstation machine and the message client (sender) being a server-class machine.
 
@@ -299,7 +299,7 @@ There are no standards assignments directly associated with this protocol.
 This protocol does depend on [**RPC**](#gt_remote-procedure-call-rpc) and uses the following RPC [**UUIDs**](#gt_universally-unique-identifier-uuid):
 
 - 17FDD703-1827-4E34-79D4-24A55C53BB37 (for name management methods)
-- 5A7B91F8-FF00-11D0-A9B2-00C04FB6E6FC (for the [NetrSendMessage](#Section_3.2.4.3) method)
+- 5A7B91F8-FF00-11D0-A9B2-00C04FB6E6FC (for the [NetrSendMessage](#Section_3.2.4.2) method)
 This protocol does use NetBIOS for message delivery in some cases. If NetBIOS is used on a TCP/IP network, UDP port 138 can be used, and NetBIOS might need to perform other functions such as name resolution on other ports (as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261)) to support this protocol.
 
 When this protocol uses named pipes, the pipe name used is \PIPE\MSGSVC.
@@ -319,22 +319,22 @@ This protocol suite has a variety of transports, the use of which is detailed in
 <a id="Section_2.1.1"></a>
 ### 2.1.1 RPC Transport
 
-The Messenger Service Remote Protocol MUST use either the [**RPC**](#gt_remote-procedure-call-rpc) over UDP protocol sequence (NCADG_IP_UDP) or the RPC over Named Pipes (NCACN_NP) protocol sequence, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), depending on the interface used. When RPC over Named Pipes is used as the [**RPC protocol sequence**](#gt_rpc-protocol-sequence), the pipe name that MUST be used is \PIPE\MSGSVC. For the NCADG_IP_UDP, see section [3.2.4](../MS-RPCE/MS-RPCE.md). For the NCACN_NP protocol, see section [3.1.4](../MS-RPCE/MS-RPCE.md).
+The Messenger Service Remote Protocol MUST use either the [**RPC**](#gt_remote-procedure-call-rpc) over UDP protocol sequence (NCADG_IP_UDP) or the RPC over Named Pipes (NCACN_NP) protocol sequence, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), depending on the interface used. When RPC over Named Pipes is used as the [**RPC protocol sequence**](#gt_rpc-protocol-sequence), the pipe name that MUST be used is \PIPE\MSGSVC. For the NCADG_IP_UDP, see section [3.2.4](#Section_3.2.4). For the NCACN_NP protocol, see section [3.1.4](#Section_3.1.4).
 
 This protocol MUST use the following [**UUIDs**](#gt_universally-unique-identifier-uuid):
 
 - 17FDD703-1827-4E34-79D4-24A55C53BB37 (for recipient name management methods)
-- 5A7B91F8-FF00-11D0-A9B2-00C04FB6E6FC (for the [NetrSendMessage](#Section_3.2.4.3) method)
+- 5A7B91F8-FF00-11D0-A9B2-00C04FB6E6FC (for the [NetrSendMessage](#Section_3.2.4.2) method)
 This protocol MUST use [**RPC dynamic endpoints**](#gt_rpc-dynamic-endpoint) for RPC over TCP/IP, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 4.
 
 For each recipient name registered with the [**message server**](#gt_message-server), on each bound [**local area network adapter (LANA)**](#gt_local-area-network-adapter-lana), the message server MUST register the corresponding [**NetBIOS name**](#gt_netbios-name) using the convention defined in [MS-NBTE](../MS-NBTE/MS-NBTE.md) section 1.8, with a [**NetBIOS suffix**](#gt_netbios-suffix) value of 0x03.
 
-This protocol allows any user to establish a connection to the [**RPC server**](#gt_rpc-server). When using named pipes as the [**RPC transport**](#gt_rpc-transport), the protocol uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE]. The message server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4.5](../MS-RPCE/MS-RPCE.md). When using UDP as the RPC transport, the protocol does not perform authentication.
+This protocol allows any user to establish a connection to the [**RPC server**](#gt_rpc-server). When using named pipes as the [**RPC transport**](#gt_rpc-transport), the protocol uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE]. The message server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4.5](#Section_3.1.4.5). When using UDP as the RPC transport, the protocol does not perform authentication.
 
 <a id="Section_2.1.2"></a>
 ### 2.1.2 Mailslots
 
-This protocol MUST use the [**mailslot**](#gt_mailslot) datagram delivery [**server**](#gt_server), as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md). Mailslot messages, specified in sections [3.2.4.4](#Section_2) and [3.2.4.5](#Section_2), MUST be sent to the following mailslot: \\recipient name\MAILSLOT\MESSNGR.
+This protocol MUST use the [**mailslot**](#gt_mailslot) datagram delivery [**server**](#gt_server), as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md). Mailslot messages, specified in sections [3.2.4.4](#Section_3.2.4.4) and [3.2.4.5](#Section_3.2.4.5), MUST be sent to the following mailslot: \\recipient name\MAILSLOT\MESSNGR.
 
 The recipient name MUST be the [**NetBIOS name**](#gt_netbios-name) of the intended recipient of the message.
 
@@ -345,7 +345,7 @@ When using mailslots to transport messages, the protocol does not perform authen
 <a id="Section_2.1.3"></a>
 ### 2.1.3 SMB
 
-The Messenger Service Remote Protocol MUST use the SMB [**server**](#gt_server), as specified in [MS-SMB](../MS-SMB/MS-SMB.md). SMB messages are specified in sections [3.2.4.4](#Section_2) and [3.2.4.5](#Section_2).
+The Messenger Service Remote Protocol MUST use the SMB [**server**](#gt_server), as specified in [MS-SMB](../MS-SMB/MS-SMB.md). SMB messages are specified in sections [3.2.4.4](#Section_3.2.4.4) and [3.2.4.5](#Section_3.2.4.5).
 
 SMB messages MUST always be sent to the [**NetBIOS name**](#gt_netbios-name) of the intended recipient of the message.
 
@@ -354,7 +354,7 @@ When using SMB to transport messages, the protocol does not perform authenticati
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
 
-In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types, the following sections use the definition of DWORD, as specified in [MS-DTYP](#Section_2.2.1).
+In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types, the following sections use the definition of DWORD, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Data Types
@@ -362,7 +362,7 @@ In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types, the followin
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 MSGSVC_HANDLE
 
-MSGSVC_HANDLE is a null-terminated string that MUST denote the [**NetBIOS name**](#gt_netbios-name) (as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) section 14 and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261) section 4.1) or the [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of the remote computer on which the method is to execute. See ServerName parameter in NetrMessageNameAdd (Opnum 0) (section [3.1.4.1)](#Section_3.1.4.6), NetrMessageNameEnum (Opnum 1) (section [3.1.4.2)](#Section_3.1.4.7), NetrMessageNameGetInfo (Opnum 2) (section [3.1.4.3)](#Section_3.1.4.9), and NetrMessageNameDel (Opnum 3) (section [3.1.4.4)](#Section_e1bdd0470e864d02a712615d24b1a18a).
+MSGSVC_HANDLE is a null-terminated string that MUST denote the [**NetBIOS name**](#gt_netbios-name) (as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) section 14 and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261) section 4.1) or the [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of the remote computer on which the method is to execute. See ServerName parameter in NetrMessageNameAdd (Opnum 0) (section [3.1.4.1)](#Section_3.1.4.5), NetrMessageNameEnum (Opnum 1) (section [3.1.4.2)](#Section_3.1.4.7), NetrMessageNameGetInfo (Opnum 2) (section [3.1.4.3)](#Section_3.1.4.9), and NetrMessageNameDel (Opnum 3) (section [3.1.4.4)](#Section_e1bdd0470e864d02a712615d24b1a18a).
 
 This type is declared as follows:
 
@@ -388,7 +388,7 @@ typedef struct _MSG_INFO_0 {
 
 **msgi0_name:** Pointer to a buffer that receives the name string in UTF-16 format. There are two sources for this parameter:
 
-- It is the UTF-16 formatted *Name* parameter passed in [NetrMessageNameGetInfo](#Section_3.1.4.9) (section 3.1.4.3) that has been verified to have an equivalent entry in the message table in section [3.1.1](#Section_3.1) according to the following algorithm.
+- It is the UTF-16 formatted *Name* parameter passed in [NetrMessageNameGetInfo](#Section_3.1.4.9) (section 3.1.4.3) that has been verified to have an equivalent entry in the message table in section [3.1.1](#Section_3.1.1) according to the following algorithm.
 Function CompareName (passed in Unicode name)
 
 Convert the name to uppercase as specified in [MS-UCODEREF] section 3.1.5.3
@@ -435,7 +435,7 @@ DWORD msgi1_forward_flag;
 
 **msgi1_name:** Pointer to a buffer that receives the name string in UTF-16 format. There are two sources for this parameter:
 
-- It is the UTF-16 formatted *Name* parameter passed in [NetrMessageNameGetInfo](#Section_3.1.4.9) (section 3.1.4.3) that has been verified to have an equivalent entry in the message table in section [3.1.1](#Section_3.1) according to the following algorithm.
+- It is the UTF-16 formatted *Name* parameter passed in [NetrMessageNameGetInfo](#Section_3.1.4.9) (section 3.1.4.3) that has been verified to have an equivalent entry in the message table in section [3.1.1](#Section_3.1.1) according to the following algorithm.
 Function CompareName (passed in Unicode name)
 
 Convert the name to uppercase as specified in [MS-UCODEREF] section 3.1.5.3
@@ -588,7 +588,7 @@ The following two sections describe how to implement and interpret SMB_COM_SEND_
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 SMB_COM_SEND_MESSAGE Request Message
 
-The [SMB_COM_SEND_MESSAGE](#Section_3.2.4.3) message is used to send an entire text message in which the length of the message is 128 bytes or less.
+The [SMB_COM_SEND_MESSAGE](#Section_3.2.4.2) message is used to send an entire text message in which the length of the message is 128 bytes or less.
 
 In the SMB header of these messages, the **Command** field MUST be set to 0xD0, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2.3.1. In the response message, the header MAY contain a Status code, as specified in [MS-SMB] section 2.2.3.1. All other fields in the SMB header MUST be set to 0x00.<3>
 
@@ -630,7 +630,7 @@ The response message to SMB_COM_SEND_MESSAGE is specified in section [2.2.3.1.2]
 <a id="Section_2.2.3.1.2"></a>
 ##### 2.2.3.1.2 SMB_COM_SEND_MESSAGE Response Message
 
-The payload of the [SMB_COM_SEND_MESSAGE](#Section_3.2.4.3) response message is specified as follows.
+The payload of the [SMB_COM_SEND_MESSAGE](#Section_3.2.4.2) response message is specified as follows.
 
 ```mermaid
 packet-beta
@@ -652,7 +652,7 @@ The following two sections describe how to implement and interpret SMB_COM_SEND_
 <a id="Section_2.2.3.2.1"></a>
 ##### 2.2.3.2.1 SMB_COM_SEND_START_MB_MESSAGE Request Message
 
-The [SMB_COM_SEND_START_MB_MESSAGE](#Section_2.2.3.2.2) message is used to signal that a new text message is being sent and to carry the strings that contain the names of the sender and the intended recipient of the text message.
+The [SMB_COM_SEND_START_MB_MESSAGE](#Section_2.2.3.2.1) message is used to signal that a new text message is being sent and to carry the strings that contain the names of the sender and the intended recipient of the text message.
 
 In the SMB header of this message, the **Command** field MUST be set to 0xD5, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2.3.1. In the response message, the header MAY contain a Status code, as specified in [MS-SMB] section 2.2.3.1. All other fields in the SMB header MUST be set to 0x00.<5>
 
@@ -700,7 +700,7 @@ packet-beta
 
 **ByteCount (2 bytes):** A 16-bit value that MUST be zero for this message.
 
-The request message to [SMB_COM_SEND_START_MB_MESSAGE](#Section_2.2.3.2.2) is specified in section 2.2.3.2.1.
+The request message to [SMB_COM_SEND_START_MB_MESSAGE](#Section_2.2.3.2.1) is specified in section 2.2.3.2.1.
 
 <a id="Section_2.2.3.3"></a>
 #### 2.2.3.3 SMB_COM_SEND_TEXT_MB_MESSAGE Request and Response Messages
@@ -765,7 +765,7 @@ The following two sections describe how to implement and interpret SMB_COM_SEND_
 <a id="Section_2.2.3.4.1"></a>
 ##### 2.2.3.4.1 SMB_COM_SEND_END_MB_MESSAGE Request Message
 
-The [SMB_COM_SEND_END_MB_MESSAGE](#Section_2.2.3.4.2) message is used to indicate that transmission of a multiblock text message is complete.
+The [SMB_COM_SEND_END_MB_MESSAGE](#Section_2.2.3.4.1) message is used to indicate that transmission of a multiblock text message is complete.
 
 In the SMB header of this message, the **Command** field MUST be set to 0xD6, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2.3.1. In the response message, the header MAY contain a Status code, as specified in [MS-SMB] section 2.2.3.1. All other fields in the SMB header MUST be set to 0x00.<8>
 
@@ -789,7 +789,7 @@ The response message to SMB_COM_SEND_END_MB_MESSAGE is specified in section [2.2
 <a id="Section_2.2.3.4.2"></a>
 ##### 2.2.3.4.2 SMB_COM_SEND_END_MB_MESSAGE Response Message
 
-The payload of the [SMB_COM_SEND_END_MB_MESSAGE](#Section_2.2.3.4.2) response message is specified as follows.
+The payload of the [SMB_COM_SEND_END_MB_MESSAGE](#Section_2.2.3.4.1) response message is specified as follows.
 
 ```mermaid
 packet-beta
@@ -823,12 +823,12 @@ The [**message server**](#gt_message-server) maintains a table (in memory) of [*
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-Timers are used to retry some name management operations that might initially fail due to contention issues with a name table. This behavior is specified in section [3.1.4.6](../MS-RPCE/MS-RPCE.md). Timers are used by [**RPC**](#gt_remote-procedure-call-rpc) to implement resiliency to network outages, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). Timers are present in [**NetBIOS name**](#gt_netbios-name) operations, as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) section 15 and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261) section 4.2.
+Timers are used to retry some name management operations that might initially fail due to contention issues with a name table. This behavior is specified in section [3.1.4.6](#Section_3.1.4.6). Timers are used by [**RPC**](#gt_remote-procedure-call-rpc) to implement resiliency to network outages, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). Timers are present in [**NetBIOS name**](#gt_netbios-name) operations, as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) section 15 and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261) section 4.2.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The [**message server**](#gt_message-server) side MUST register the [**endpoint**](#gt_endpoint) (as specified in section [2.1.1](#Section_2.1.1)) with [**RPC**](#gt_remote-procedure-call-rpc) (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)) using default security settings and dynamic endpoints. The server SHOULD register the local machine name as if it had received [NetrMessageNameAdd](#Section_3.1.4.6), as specified in section [3.1.4.6](../MS-RPCE/MS-RPCE.md).
+The [**message server**](#gt_message-server) side MUST register the [**endpoint**](#gt_endpoint) (as specified in section [2.1.1](#Section_2.1.1)) with [**RPC**](#gt_remote-procedure-call-rpc) (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)) using default security settings and dynamic endpoints. The server SHOULD register the local machine name as if it had received [NetrMessageNameAdd](#Section_3.1.4.5), as specified in section [3.1.4.6](#Section_3.1.4.6).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Message Processing and Sequencing Rules
@@ -837,7 +837,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [NetrMessageNameAdd](#Section_3.1.4.6) | Opnum: 0 |
+| [NetrMessageNameAdd](#Section_3.1.4.5) | Opnum: 0 |
 | [NetrMessageNameEnum](#Section_3.1.4.7) | Opnum: 1 |
 | [NetrMessageNameGetInfo](#Section_3.1.4.9) | Opnum: 2 |
 | [NetrMessageNameDel](#Section_3.1.4.4) | Opnum: 3 |
@@ -1119,7 +1119,7 @@ The messaging protocol is used for the actual transmission of the text messages 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-The messaging protocol relies on the name tables maintained by the name management protocol, as specified in section [3.1.1](#Section_3.1).
+The messaging protocol relies on the name tables maintained by the name management protocol, as specified in section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -1140,7 +1140,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [NetrSendMessage](#Section_3.2.4.3) | Opnum: 0 |
+| [NetrSendMessage](#Section_3.2.4.2) | Opnum: 0 |
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 NetrSendMessage (Opnum 0)
@@ -1193,7 +1193,7 @@ The message [**client**](#gt_client) MUST select a [**message server**](#gt_mess
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Receiving NetrSendMessage
 
-When the [**message server**](#gt_message-server) receives a [NetrSendMessage](#Section_3.2.4.3) message, it MUST check the table of names it is maintaining for each [**LANA**](#gt_local-area-network-adapter-lana) to see if the name supplied in the *To* parameter matches one of the names in the table. If there is a match, the message server SHOULD display the message in the *Text* parameter. The method of displaying the message is implementation-specific. A message server MAY impose security or other policies that control whether the message is displayed, the maximum length of a message, and so on.<24>
+When the [**message server**](#gt_message-server) receives a [NetrSendMessage](#Section_3.2.4.2) message, it MUST check the table of names it is maintaining for each [**LANA**](#gt_local-area-network-adapter-lana) to see if the name supplied in the *To* parameter matches one of the names in the table. If there is a match, the message server SHOULD display the message in the *Text* parameter. The method of displaying the message is implementation-specific. A message server MAY impose security or other policies that control whether the message is displayed, the maximum length of a message, and so on.<24>
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 Sending Mailslot Messages or SMB Messages
@@ -1210,7 +1210,7 @@ The sender MAY send the message to the mailslot \\recipient name\MAILSLOT\MESSNG
 
 The sender MAY send the message as a directed SMB on each LANA, as defined in the following.
 
-If the message text is 128 bytes or less in length, the sender SHOULD send the message as an [SMB_COM_SEND_MESSAGE](#Section_3.2.4.3) request message. The SMB_COM_SEND_MESSAGE request message MUST be constructed as follows:
+If the message text is 128 bytes or less in length, the sender SHOULD send the message as an [SMB_COM_SEND_MESSAGE](#Section_3.2.4.2) request message. The SMB_COM_SEND_MESSAGE request message MUST be constructed as follows:
 
 - *From* MUST be a valid NetBIOS name.
 - *From* MUST be converted to a null-terminated ASCII string and be placed in the **OriginatorName** field.
@@ -1219,7 +1219,7 @@ If the message text is 128 bytes or less in length, the sender SHOULD send the m
 - *Text* MUST be placed in the **Data** buffer.
 If the message text is more than 128 bytes in length, the sender SHOULD break the message text into 128-byte segments. In this case:
 
-- The sender MUST send the first segment as an [SMB_COM_SEND_START_MB_MESSAGE](#Section_2.2.3.2.2) request message. The SMB_COM_SEND_START_MB_MESSAGE request message MUST be constructed as follows:
+- The sender MUST send the first segment as an [SMB_COM_SEND_START_MB_MESSAGE](#Section_2.2.3.2.1) request message. The SMB_COM_SEND_START_MB_MESSAGE request message MUST be constructed as follows:
 - *From* MUST be a valid NetBIOS name.
 - *From* MUST be converted to a null-terminated ASCII string and be placed in the **OriginatorName** field.
 - *To* MUST be a valid NetBIOS name.
@@ -1229,7 +1229,7 @@ If the message text is more than 128 bytes in length, the sender SHOULD break th
 - The **Data** field of each of these messages MUST contain sequential, contiguous segments of *Text*.
 - Every segment of *Text* except the last SHOULD be exactly 128 bytes in length.
 - The sender SHOULD NOT send additional segments until acknowledgment is received that the previous segment is received in the form of an SMB_COM_SEND_TEXT_MB_MESSAGE response message.
-- After sending the last segment of *Text*, the sender MUST send an [SMB_COM_SEND_END_MB_MESSAGE](#Section_2.2.3.4.2) request message.<25>
+- After sending the last segment of *Text*, the sender MUST send an [SMB_COM_SEND_END_MB_MESSAGE](#Section_2.2.3.4.1) request message.<25>
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Receiving Mailslot Messages or SMB Messages
 
@@ -1274,7 +1274,7 @@ Consider two computers, PRINTSERVER (a print [**server**](#gt_server)) and WORKS
 
 Figure 1: Name management protocol flow diagram
 
-Example 1. The [**message server**](#gt_message-server) on WORKSTATION, during boot, registers the [**NetBIOS name**](#gt_netbios-name) "WORKSTATION [03]" with its sole [**LANA**](#gt_local-area-network-adapter-lana). The component that caused the name to be registered did so by using the [NetrMessageNameAdd](#Section_3.1.4.6) method of the name management protocol. The flow of this protocol is illustrated in Figure 1.
+Example 1. The [**message server**](#gt_message-server) on WORKSTATION, during boot, registers the [**NetBIOS name**](#gt_netbios-name) "WORKSTATION [03]" with its sole [**LANA**](#gt_local-area-network-adapter-lana). The component that caused the name to be registered did so by using the [NetrMessageNameAdd](#Section_3.1.4.5) method of the name management protocol. The flow of this protocol is illustrated in Figure 1.
 
 Example 2. A user "ALICE" logs on to WORKSTATION. The message server on WORKSTATION registers the NetBIOS name "ALICE [03]" with the LANA. The component that caused the name to be registered did so by using the NetrMessageNameAdd method of the name management protocol. The flow of this protocol is illustrated in Figure 1.
 
@@ -1282,7 +1282,7 @@ Example 2. A user "ALICE" logs on to WORKSTATION. The message server on WORKSTAT
 
 Figure 2: Name management protocol flow diagram
 
-Example 3. Subsequently, Alice uses some program to print a document. Through means unrelated to this example, the print job is delivered to the print server. On finishing its work, the print server needs to notify Alice. The print server selects among the three protocols available to it for message delivery. Because [**mailslots**](#gt_mailslot) and SMB use broadcast mechanisms, and, therefore, are suitable only for machines in the same collision domain, the print server selects the [NetrSendMessage](#Section_3.2.4.3) method of the message-sending protocol.
+Example 3. Subsequently, Alice uses some program to print a document. Through means unrelated to this example, the print job is delivered to the print server. On finishing its work, the print server needs to notify Alice. The print server selects among the three protocols available to it for message delivery. Because [**mailslots**](#gt_mailslot) and SMB use broadcast mechanisms, and, therefore, are suitable only for machines in the same collision domain, the print server selects the [NetrSendMessage](#Section_3.2.4.2) method of the message-sending protocol.
 
 The print server constructs the message, setting *To* to Alice's NetBIOS name, *From* to its own NetBIOS name, and *Text* to the text Print Job Completed. The print server invokes the NetrSendMessage method that delivers the message to the message service on Alice's machine. The message service causes the text of the message to display on the console. The flow of this protocol is illustrated in Figure 2.
 
@@ -1516,7 +1516,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <10> Section 3.1.4.4: Windows XP and Windows Server 2003 both limit the MsgName parameter to 16 characters, including the terminating null character, when calling NetrMessageNameDel(). If the MsgName is longer than 16 characters, the server returns ERROR_INVALID_PARAMETER. Windows 2000 does not check the length of the MsgName parameter when calling NetrMessageNameDel() but reads in only the first 255 characters.
 
-<11> Section 3.1.4.5: Windows XP and Windows Server 2003 both limit the *MsgName* parameter to 16 characters, including the terminating null character, when calling [NetrMessageNameAdd()](#Section_3.1.4.6). If the *MsgName* is longer than 16 characters, the server returns ERROR_INVALID_PARAMETER. Windows 2000 does not check the length of the *MsgName* parameter when calling NetrMessageNameAdd() but reads in only the first 255 characters.
+<11> Section 3.1.4.5: Windows XP and Windows Server 2003 both limit the *MsgName* parameter to 16 characters, including the terminating null character, when calling [NetrMessageNameAdd()](#Section_3.1.4.5). If the *MsgName* is longer than 16 characters, the server returns ERROR_INVALID_PARAMETER. Windows 2000 does not check the length of the *MsgName* parameter when calling NetrMessageNameAdd() but reads in only the first 255 characters.
 
 <12> Section 3.1.4.6: Windows implementations require that the message client be an administrator or a local user of the machine.
 
@@ -1544,7 +1544,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <24> Section 3.2.4.3: When the message server receives a message for a registered recipient name, the message server causes the message to be displayed on the console of the interactive user of the machine. The maximum message length that displays is 4,095 characters.
 
-<25> Section 3.2.4.4: Windows sends messages of up to 128 bytes using [SMB_COM_SEND_MESSAGE](#Section_3.2.4.3) and uses the multiblock SMB sequence for messages larger than 128 bytes. When a message is more than 128 bytes, Windows breaks the messages into 128-byte segments prior to transmission. Where a behavior is defined as SHOULD, Windows implements that behavior.
+<25> Section 3.2.4.4: Windows sends messages of up to 128 bytes using [SMB_COM_SEND_MESSAGE](#Section_3.2.4.2) and uses the multiblock SMB sequence for messages larger than 128 bytes. When a message is more than 128 bytes, Windows breaks the messages into 128-byte segments prior to transmission. Where a behavior is defined as SHOULD, Windows implements that behavior.
 
 The Windows implementation of the message client for the protocols defined in this document rejects messages sent to the recipient name *.
 
@@ -1552,7 +1552,7 @@ For recipient names that end in an asterisk, Windows attempts to deliver the mes
 
 For recipient names that do not end in an asterisk, Windows attempts to deliver the message by way of SMB.
 
-If message delivery over SMB is attempted and fails, Windows attempts to deliver the message by way of a call to [NetrSendMessage](#Section_3.2.4.3).
+If message delivery over SMB is attempted and fails, Windows attempts to deliver the message by way of a call to [NetrSendMessage](#Section_3.2.4.2).
 
 <26> Section 3.2.4.5: When the message server receives a mailslot message for a registered recipient name, the message server causes the message to be displayed on the console of the interactive user of the machine. The maximum message length that displays is 4,095 characters.
 

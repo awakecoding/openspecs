@@ -119,7 +119,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1.1"></a>
 ## 1.1 Conceptual Overview
 
-Both the client and server versions of Windows implement standard authentication protocols as part of an extensible architecture that consists of security support provider (SSP) security packages. These protocols include [**Kerberos**](#gt_kerberos), [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls), and Simple and Protected Generic Security Service Application Program Interface ([**GSS**](#gt_generic-security-services-gss)-API) Negotiation Mechanism ([**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego)), and their extensions, as specified in [MS-KILE](../MS-KILE/MS-KILE.md), [MS-TLSP](#Section_2.9), [MS-SPNG](../MS-SPNG/MS-SPNG.md), and [MS-NEGOEX](#Section_2.9) respectively.
+Both the client and server versions of Windows implement standard authentication protocols as part of an extensible architecture that consists of security support provider (SSP) security packages. These protocols include [**Kerberos**](#gt_kerberos), [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls), and Simple and Protected Generic Security Service Application Program Interface ([**GSS**](#gt_generic-security-services-gss)-API) Negotiation Mechanism ([**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego)), and their extensions, as specified in [MS-KILE](../MS-KILE/MS-KILE.md), [MS-TLSP](../MS-TLSP/MS-TLSP.md), [MS-SPNG](../MS-SPNG/MS-SPNG.md), and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md) respectively.
 
 These protocols enable the authentication of users, computers, and services. The authentication process, in turn, enables authorized users and services to access resources securely.
 
@@ -182,7 +182,7 @@ Multitier client/server applications present a special situation for the [**Kerb
 
 The Kerberos protocol deals with this situation through a mechanism called [**delegation of authentication**](#gt_delegation-of-authentication). Essentially, the client delegates authentication to a server by communicating to the [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) that the server is authorized to represent the client.
 
-Similar to Kerberos delegation, the Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](#Section_2.9) enables applications to securely delegate a user's credentials from the client to the target server. However, it does so by using a completely different mechanism with different usability and security characteristics. Unlike Kerberos delegation, the CredSSP Protocol requires prompting for user credentials when a policy specifies their delegation. This difference means that the user has some control over whether the delegation occurs and, more importantly, which credentials are used. With Kerberos delegation, only the user's Active Directory credentials can be delegated.
+Similar to Kerberos delegation, the Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md) enables applications to securely delegate a user's credentials from the client to the target server. However, it does so by using a completely different mechanism with different usability and security characteristics. Unlike Kerberos delegation, the CredSSP Protocol requires prompting for user credentials when a policy specifies their delegation. This difference means that the user has some control over whether the delegation occurs and, more importantly, which credentials are used. With Kerberos delegation, only the user's Active Directory credentials can be delegated.
 
 The CredSSP Protocol is used only in scenarios where other delegation schemes such as Kerberos delegation cannot be used; for example, in non-domain scenarios.
 
@@ -264,7 +264,7 @@ Windows uses [**Active Directory**](#gt_active-directory) as the account databas
 
 Every computer that runs Windows has its own local [**domain**](#gt_domain); that is, it has an account database for accounts that are specific to that computer. Conceptually, this is an account database like any other with accounts, groups, [**SIDs**](#gt_security-identifier-sid), and so on. These are referred to as local accounts, local groups, and so on. Because computers typically do not trust each other for account information, these identities stay local to the computer on which they were created.
 
-The Security Account Manager (SAM) Remote Protocol (Client-to-Server) [MS-SAMR](#Section_2.9) exposes this account database, for both the local domain and domains across a network. This protocol specifies the behavior for the local domain and domains across a network by defining a common data model, [**Active Directory**](#gt_active-directory), as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+The Security Account Manager (SAM) Remote Protocol (Client-to-Server) [MS-SAMR](../MS-SAMR/MS-SAMR.md) exposes this account database, for both the local domain and domains across a network. This protocol specifies the behavior for the local domain and domains across a network by defining a common data model, [**Active Directory**](#gt_active-directory), as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 In a [**domain controller**](#gt_domain-controller-dc) configuration, the data manipulated by the server of this protocol is stored in Active Directory and is replicated by the replication protocol specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md), made available through the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) interface specified in [MS-ADTS] section 3.1.1.3, and replicated by the NETLOGON replication interface specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md). The data manipulated by the server of this protocol is used as a [**security principal**](#gt_security-principal) database for authentication protocols such as NTLM [MS-NLMP](../MS-NLMP/MS-NLMP.md) and Kerberos [MS-KILE](../MS-KILE/MS-KILE.md).
 
@@ -328,7 +328,7 @@ For more information about the SSPI, see [[SSPI]](https://go.microsoft.com/fwlin
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by [**Kerberos**](#gt_kerberos) [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by [**Kerberos**](#gt_kerberos) [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_asymmetric-encryption"></a>
 **asymmetric encryption**: An encryption method that uses one key to encrypt and uses a different key to decrypt; these keys are linked by mathematical requirements.
@@ -601,31 +601,31 @@ This document uses the following terms:
 
 [IETFDRAFT-NEGOEX-04] Short, M., Zhu, L., Damour, K, and McPherson, D, "SPNEGO Extended Negotiation (NEGOEX) Security Mechanism", draft-zhu-negoex-04, January 2011, [https://tools.ietf.org/id/draft-zhu-negoex-04.txt](https://go.microsoft.com/fwlink/?linkid=2112888)
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
 [MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](../MS-APDS/MS-APDS.md)".
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_2.1)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MS-CIFS] Microsoft Corporation, "[Common Internet File System (CIFS) Protocol](../MS-CIFS/MS-CIFS.md)".
 
-[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](#Section_2.9)".
+[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](../MS-CSSP/MS-CSSP.md)".
 
 [MS-DPSP] Microsoft Corporation, "[Digest Protocol Extensions](../MS-DPSP/MS-DPSP.md)".
 
 [MS-DRSR] Microsoft Corporation, "[Directory Replication Service (DRS) Remote Protocol](../MS-DRSR/MS-DRSR.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_2.1.2.3.1)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
 [MS-KKDCP] Microsoft Corporation, "[Kerberos Key Distribution Center (KDC) Proxy Protocol](../MS-KKDCP/MS-KKDCP.md)".
 
-[MS-NEGOEX] Microsoft Corporation, "[SPNEGO Extended Negotiation (NEGOEX) Security Mechanism](#Section_2.9)".
+[MS-NEGOEX] Microsoft Corporation, "[SPNEGO Extended Negotiation (NEGOEX) Security Mechanism](../MS-NEGOEX/MS-NEGOEX.md)".
 
 [MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
@@ -643,11 +643,11 @@ This document uses the following terms:
 
 [MS-RDPBCGR] Microsoft Corporation, "[Remote Desktop Protocol: Basic Connectivity and Graphics Remoting](../MS-RDPBCGR/MS-RDPBCGR.md)".
 
-[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](#Section_2.1)".
+[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](../MS-RDSOD/MS-RDSOD.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_2.9)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SFU] Microsoft Corporation, "[Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol](../MS-SFU/MS-SFU.md)".
 
@@ -659,7 +659,7 @@ This document uses the following terms:
 
 [MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](../MS-SPNG/MS-SPNG.md)".
 
-[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](#Section_2.9)".
+[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](../MS-TLSP/MS-TLSP.md)".
 
 [MS-WSMV] Microsoft Corporation, "[Web Services Management Protocol Extensions for Windows Vista](../MS-WSMV/MS-WSMV.md)".
 
@@ -739,7 +739,7 @@ As a final step to the authentication process, the account database verifies ide
 
 Windows PKI provides a framework of services, technology, protocols, and standards that enable the deployment and management of a strong information security system that is based on [**public key**](#gt_public-key) technology. Authentication Services interact with Windows PKI to encrypt and decrypt messages, to sign and verify messages, and to verify the identities of the client and server by using digital certificates. As shown in the preceding diagram, distributed client and server applications interact with Windows PKI for certificate enrollment, renewal, and certificate signature validation.
 
-The [**SSL**](#gt_secure-sockets-layer-ssl)/[**TLS**](#gt_transport-layer-security-tls) [MS-TLSP](#Section_2.9), PKINIT [MS-PKCA](../MS-PKCA/MS-PKCA.md), and Kerberos Network Authentication Service [MS-SFU](../MS-SFU/MS-SFU.md) protocols assume that Windows PKI functions are available as described in [MS-CERSOD](#Section_2.1).
+The [**SSL**](#gt_secure-sockets-layer-ssl)/[**TLS**](#gt_transport-layer-security-tls) [MS-TLSP](../MS-TLSP/MS-TLSP.md), PKINIT [MS-PKCA](../MS-PKCA/MS-PKCA.md), and Kerberos Network Authentication Service [MS-SFU](../MS-SFU/MS-SFU.md) protocols assume that Windows PKI functions are available as described in [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md).
 
 Windows PKI relies on Microsoft CryptoAPI version 2 for secure cryptographic operations and [**private key**](#gt_private-key) management.
 
@@ -757,7 +757,7 @@ Users can perform an interactive logon by using a local user account for local l
 A user can interactively logon to a computer in one of two ways:
 
 - Locally, when the user has direct physical access to the computer.
-- Remotely, through Terminal Services, in which case the logon is further qualified as remote interactive. Microsoft Terminal Server uses the CredSSP Protocol [MS-CSSP](#Section_2.9) to securely delegate the user's password or smart card PIN from the client to the server to remotely log on the user and to establish a Terminal Services session.
+- Remotely, through Terminal Services, in which case the logon is further qualified as remote interactive. Microsoft Terminal Server uses the CredSSP Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md) to securely delegate the user's password or smart card PIN from the client to the server to remotely log on the user and to establish a Terminal Services session.
 After an interactive logon, Windows runs applications on the user's behalf, and the user interacts with those applications to access protected resources either locally or on remote computers.
 
 **Local logon**
@@ -857,13 +857,13 @@ As the preceding diagram shows, Authentication Services includes the following a
 Authentication protocols:
 
 - Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md)
-- Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](#Section_2.9)
+- Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md)
 - NT LAN Manager (NTLM) Authentication Protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md)
-- Secure Sockets Layer (SSL)/Transport Layer Security (TLS) Protocols (SSL/TLS) [MS-TLSP](#Section_2.9)
+- Secure Sockets Layer (SSL)/Transport Layer Security (TLS) Protocols (SSL/TLS) [MS-TLSP](../MS-TLSP/MS-TLSP.md)
 - Kerberos Protocol Extensions [MS-KILE](../MS-KILE/MS-KILE.md) [MS-SFU](../MS-SFU/MS-SFU.md) [MS-PKCA](../MS-PKCA/MS-PKCA.md)
 - Simple and Protected Generic Security Service Application Program Interface ([**GSS**](#gt_generic-security-services-gss)-API) Negotiation Mechanism (SPNEGO) Protocol Extensions [MS-SPNG](../MS-SPNG/MS-SPNG.md)
 - The Extended GSS-API Negotiation Mechanism (NEGOEX) [[IETFDRAFT-NEGOEX-02]](https://go.microsoft.com/fwlink/?LinkId=132205)
-- SPNEGO Extended Negotiation (NEGOEX) Security Mechanism (NEGOEX-04) [MS-NEGOEX](#Section_2.9)
+- SPNEGO Extended Negotiation (NEGOEX) Security Mechanism (NEGOEX-04) [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md)
 - Public Key Cryptography Based User-to-User Authentication - (PKU2U) [[PKU2U-DRAFT]](https://go.microsoft.com/fwlink/?LinkId=208275)
 - Kerberos Proxy Key Distribution Protocol [MS-KKDCP](../MS-KKDCP/MS-KKDCP.md)
 Auxiliary Protocols:
@@ -941,7 +941,7 @@ The protocols commonly used in enterprise environments for authentication and se
 <a id="Section_2.1.2.3.1"></a>
 ##### 2.1.2.3.1 File Access Services
 
-The File Access Services section describes the steps that the file access services protocols ([MS-FASOD](#Section_2.1.2.3.1)) undertake to support authentication.
+The File Access Services section describes the steps that the file access services protocols ([MS-FASOD](../MS-FASOD/MS-FASOD.md)) undertake to support authentication.
 
 The core protocols of the file access services are:
 
@@ -958,7 +958,7 @@ Figure 8: Authentication protocol standards in the enterprise environment
 
 The preceding diagram shows that network traffic conforms to the file access services protocols that are used between the file system client and the file system server. The file access services protocols that are used between file access client and server carry authentication protocol messages as opaque payloads in their protocol messages.
 
-SMB and SMB2 rely on the Simple and Protected Generic Security Service Application Programming Interface Negotiation Mechanism (SPNEGO) ([[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), [MS-SPNG](../MS-SPNG/MS-SPNG.md), and [MS-NEGOEX](#Section_2.9)) for authentication, which in turn relies on Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) and on the NTLM [MS-NLMP](../MS-NLMP/MS-NLMP.md) [**challenge/response authentication**](#gt_challengeresponse-authentication) protocol. If the agreed-on authentication protocol between client and server is NTLM [MS-NLMP], the file server authenticates the user [**credentials**](#gt_credential) provided by the file access services client using the APDS protocol [MS-APDS](../MS-APDS/MS-APDS.md) to the [**DC**](#gt_domain-controller-dc) that contains the user account information. Otherwise, if the authentication protocol is Kerberos [MS-KILE], the file server authenticates the user identity by validating the [**service ticket**](#gt_service-ticket) to the SMB service submitted by the file system client.
+SMB and SMB2 rely on the Simple and Protected Generic Security Service Application Programming Interface Negotiation Mechanism (SPNEGO) ([[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), [MS-SPNG](../MS-SPNG/MS-SPNG.md), and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md)) for authentication, which in turn relies on Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) and on the NTLM [MS-NLMP](../MS-NLMP/MS-NLMP.md) [**challenge/response authentication**](#gt_challengeresponse-authentication) protocol. If the agreed-on authentication protocol between client and server is NTLM [MS-NLMP], the file server authenticates the user [**credentials**](#gt_credential) provided by the file access services client using the APDS protocol [MS-APDS](../MS-APDS/MS-APDS.md) to the [**DC**](#gt_domain-controller-dc) that contains the user account information. Otherwise, if the authentication protocol is Kerberos [MS-KILE], the file server authenticates the user identity by validating the [**service ticket**](#gt_service-ticket) to the SMB service submitted by the file system client.
 
 <a id="Section_2.1.2.3.2"></a>
 ##### 2.1.2.3.2 Remote Desktop and Web Services
@@ -971,7 +971,7 @@ Figure 9: Credential delegation through the CredSSP Protocol
 
 The preceding diagram shows that RDP and the Web Services Management Protocol trigger the CredSSP Protocol to delegate the user's credentials. For more details about how and when these protocols trigger the CredSSP Protocol, refer to [MS-RDPBCGR] or [MS-WSMV].
 
-As described in [MS-CSSP](#Section_2.9), the CredSSP Protocol first establishes a Transport Layer Security (TLS)-encrypted channel between the client and the target server by using the SSL/TLS Protocol [MS-TLSP](#Section_2.9). The CredSSP Protocol uses TLS as an encrypted pipe; it does not rely on the client or [**server authentication**](#gt_server-authentication) services that are available in TLS. The CredSSP Protocol then uses the SPNEGO Protocol [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9) to negotiate the NTLM or [**Kerberos**](#gt_kerberos) authentication protocol that performs [**mutual authentication**](#gt_mutual-authentication) and provides confidentiality services, which are used to securely bind to the TLS channel and encrypt the credentials for the target server. In environments where the Kerberos protocol is not supported, the NTLM protocol is selected to establish trust between the [**client computer**](#gt_client-computer) and the [**server computer**](#gt_server-computer). Otherwise, the Kerberos authentication protocol is selected because the Kerberos protocol ensures server authentication.
+As described in [MS-CSSP](../MS-CSSP/MS-CSSP.md), the CredSSP Protocol first establishes a Transport Layer Security (TLS)-encrypted channel between the client and the target server by using the SSL/TLS Protocol [MS-TLSP](../MS-TLSP/MS-TLSP.md). The CredSSP Protocol uses TLS as an encrypted pipe; it does not rely on the client or [**server authentication**](#gt_server-authentication) services that are available in TLS. The CredSSP Protocol then uses the SPNEGO Protocol [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md) to negotiate the NTLM or [**Kerberos**](#gt_kerberos) authentication protocol that performs [**mutual authentication**](#gt_mutual-authentication) and provides confidentiality services, which are used to securely bind to the TLS channel and encrypt the credentials for the target server. In environments where the Kerberos protocol is not supported, the NTLM protocol is selected to establish trust between the [**client computer**](#gt_client-computer) and the [**server computer**](#gt_server-computer). Otherwise, the Kerberos authentication protocol is selected because the Kerberos protocol ensures server authentication.
 
 The Kerberos [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) Proxy Protocol [MS-KKDCP](../MS-KKDCP/MS-KKDCP.md) is used to allow Kerberos clients to use KDC proxy servers to communicate to KDCs for Kerberos Network Authentication Service (V5) protocol [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and Kerberos change password protocol exchanges [[RFC3244]](https://go.microsoft.com/fwlink/?LinkId=90409). RDP and IPsec are examples of KDC proxy usage.
 
@@ -1003,18 +1003,18 @@ Figure 11: Authentication protocol standards in an intranet web environment
 
 When a browser uses NTLM [MS-NLMP](../MS-NLMP/MS-NLMP.md) or Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md), if the user's account information is not available locally, the web server authenticates the user credentials provided by the web browser by using the APDS protocol to the [**DC**](#gt_domain-controller-dc) that contains the user's account information.
 
-When a web browser uses the SSL/TLS [MS-TLSP](#Section_2.9) protocols to provide an [**X.509**](#gt_x509) certificate, if the user's account information is not available locally, the web server uses the Remote Certificate Mapping Protocol [MS-RCMP](../MS-RCMP/MS-RCMP.md) to authenticate the certificate with the DC that contains the user's account.
+When a web browser uses the SSL/TLS [MS-TLSP](../MS-TLSP/MS-TLSP.md) protocols to provide an [**X.509**](#gt_x509) certificate, if the user's account information is not available locally, the web server uses the Remote Certificate Mapping Protocol [MS-RCMP](../MS-RCMP/MS-RCMP.md) to authenticate the certificate with the DC that contains the user's account.
 
 When a web browser uses Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) for web authentication, a [**service ticket**](#gt_service-ticket) to the web service is obtained from the DC.
 
 <a id="Section_2.1.2.5"></a>
 #### 2.1.2.5 Mixed Web Environment
 
-As listed in section [2.2.3](#Section_2.2.3), the authentication protocols that are primarily used in web environments for authentication and secure transportation of application data are Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md), Transport Layer Security (TLS) Profile [MS-TLSP](#Section_2.9), and HTTP Authentication: Basic and Digest Access Authentication [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373).
+As listed in section [2.2.3](#Section_2.2.3), the authentication protocols that are primarily used in web environments for authentication and secure transportation of application data are Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md), Transport Layer Security (TLS) Profile [MS-TLSP](../MS-TLSP/MS-TLSP.md), and HTTP Authentication: Basic and Digest Access Authentication [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373).
 
 The following diagram illustrates authentication protocol interactions in a mixed web environment, which is the combination of Internet and enterprise environments.
 
-If users have [**domain accounts**](#gt_domain-account) but have to connect to a web server from outside the [**domain**](#gt_domain) or from an untrusted domain (for example, over the Internet), clients cannot use the SPNEGO [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9) or [**Kerberos**](#gt_kerberos) [MS-KILE](../MS-KILE/MS-KILE.md) protocols. Instead, clients can use custom authentication protocols, an HTTP authentication mechanism, or the SSL/TLS protocol [MS-TLSP] and then can transition to Kerberos protocol extensions.
+If users have [**domain accounts**](#gt_domain-account) but have to connect to a web server from outside the [**domain**](#gt_domain) or from an untrusted domain (for example, over the Internet), clients cannot use the SPNEGO [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md) or [**Kerberos**](#gt_kerberos) [MS-KILE](../MS-KILE/MS-KILE.md) protocols. Instead, clients can use custom authentication protocols, an HTTP authentication mechanism, or the SSL/TLS protocol [MS-TLSP] and then can transition to Kerberos protocol extensions.
 
 ![Authentication protocol standards in a mixed web environment](media/image12.png)
 
@@ -1082,7 +1082,7 @@ Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md) specify:
 
 Figure 15: Relationships between SSL/TLS protocol standards and Microsoft extensions
 
-- Transport Layer Security (TLS) Profile [MS-TLSP](#Section_2.9): Specifies the differences between the requirements of the referenced RFC documents and the Microsoft implementation.
+- Transport Layer Security (TLS) Profile [MS-TLSP](../MS-TLSP/MS-TLSP.md): Specifies the differences between the requirements of the referenced RFC documents and the Microsoft implementation.
 <a id="Section_2.2"></a>
 ## 2.2 Protocol Summary
 
@@ -1098,9 +1098,9 @@ The tables in the following sections group the Authentication Services protocols
 | Public Key Cryptography for Initial Authentication (PKINIT) in Kerberos Protocol | Specifies Microsoft extensions to the Public Key Cryptography for Initial Authentication in Kerberos (PKINIT) protocol. These extensions describe how the Windows implementations of PKINIT differ from what is specified in [[RFC4556]](https://go.microsoft.com/fwlink/?LinkId=90482) and [[RFC5349]](https://go.microsoft.com/fwlink/?LinkId=129652). | [MS-PKCA](../MS-PKCA/MS-PKCA.md) |
 | Authentication Protocol Domain Support | Specifies the communication between a server and a [**domain controller**](#gt_domain-controller-dc) that uses [**Netlogon**](#gt_netlogon) interfaces ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.2) to complete an authentication sequence for certain authentication protocols and provides group membership information. | [MS-APDS] |
 | Simple and Protected GSS-API Negotiation Mechanism ([**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego)) Extension | Extends [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), which specifies a negotiation mechanism for the Generic Security Service Application Programming Interface (GSS-API) [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). Extension is based on version 2 of NEGOEX [[IETFDRAFT-NEGOEX-02]](https://go.microsoft.com/fwlink/?LinkId=132205). | [MS-SPNG](../MS-SPNG/MS-SPNG.md) |
-| SPNEGO Extended Negotiation (NEGOEX) Security Mechanism | Extends [RFC4178], enhances the capabilities of SPNEGO by providing a security mechanism that can be negotiated by the SPNEGO protocol. Extension is based on version 4 of NEGOEX [[IETFDRAFT-NEGOEX-04]](https://go.microsoft.com/fwlink/?linkid=2112888). | [MS-NEGOEX](#Section_2.9) |
+| SPNEGO Extended Negotiation (NEGOEX) Security Mechanism | Extends [RFC4178], enhances the capabilities of SPNEGO by providing a security mechanism that can be negotiated by the SPNEGO protocol. Extension is based on version 4 of NEGOEX [[IETFDRAFT-NEGOEX-04]](https://go.microsoft.com/fwlink/?linkid=2112888). | [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md) |
 | Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol | These two extensions to Kerberos enable an application service to obtain a Kerberos [**service ticket**](#gt_service-ticket) on behalf of a user, but each provides a different way to obtain a ticket on behalf of a user. | [MS-SFU](../MS-SFU/MS-SFU.md) |
-| Credential Security Support Provider (CredSSP) Protocol | Enables an application to securely delegate a user's [**credentials**](#gt_credential) from a client to a target server. | [MS-CSSP](#Section_2.9) |
+| Credential Security Support Provider (CredSSP) Protocol | Enables an application to securely delegate a user's [**credentials**](#gt_credential) from a client to a target server. | [MS-CSSP](../MS-CSSP/MS-CSSP.md) |
 | Netlogon Remote Protocol | Used for user and machine authentication on [**domain**](#gt_domain)-based networks. | [MS-NRPC] |
 
 <a id="Section_2.2.2"></a>
@@ -1110,13 +1110,13 @@ The tables in the following sections group the Authentication Services protocols
 | --- | --- | --- |
 | Digest Protocol Extensions | Extends the Digest Authentication standard [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373) and [[RFC2831]](https://go.microsoft.com/fwlink/?LinkId=90387). | [MS-DPSP](../MS-DPSP/MS-DPSP.md) |
 | Remote Certificate Mapping Protocol | Used by servers that authenticate users by using [**X.509**](#gt_x509) certificates. This protocol allows the server to use a directory, database, or other technology to map the user's X.509 certificate to a [**security principal**](#gt_security-principal). This protocol returns the [**authorization**](#gt_authorization) information that is associated with the security principal in the form of a [**privilege attribute certificate (PAC)**](#gt_privilege-attribute-certificate-pac), as specified in [MS-PAC](../MS-PAC/MS-PAC.md), that represents the user's identity and group memberships. | [MS-RCMP](../MS-RCMP/MS-RCMP.md) |
-| [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) Profile | Specifies the differences between Microsoft implementation and the SSL/TLS standards. | [MS-TLSP](#Section_2.9) |
+| [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) Profile | Specifies the differences between Microsoft implementation and the SSL/TLS standards. | [MS-TLSP](../MS-TLSP/MS-TLSP.md) |
 | NT LAN Manager (NTLM) Authentication Protocol | See section [2.2.1](#Section_2.2.1). | [MS-NLMP](../MS-NLMP/MS-NLMP.md) |
 | Kerberos Protocol Extensions | See section 2.2.1. | [MS-KILE](../MS-KILE/MS-KILE.md) |
 | Public Key Cryptography for Initial Authentication (PKINIT) in Kerberos Protocol | Specifies the Microsoft extensions to the Public Key Cryptography for Initial Authentication in Kerberos (PKINIT) protocol and enables the use of [**public key**](#gt_public-key) cryptography in the initial authentication exchange (that is, in the Authentication Service (AS) exchange) of the [**Kerberos**](#gt_kerberos) protocol [MS-KILE]. | [MS-PKCA](../MS-PKCA/MS-PKCA.md) |
 | Authentication Protocol Domain Support | See section 2.2.1. | [MS-APDS](../MS-APDS/MS-APDS.md) |
 | Simple and Protected Generic Security Service Application Programming Interface Negotiation Mechanism ([**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) ) Protocol Extensions | See section 2.2.1. | [MS-SPNG](../MS-SPNG/MS-SPNG.md) |
-| SPNEGO Extended Negotiation (NEGOEX) Security Mechanism | See section 2.2.1. | [MS-NEGOEX](#Section_2.9) |
+| SPNEGO Extended Negotiation (NEGOEX) Security Mechanism | See section 2.2.1. | [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md) |
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Internet Web Environment
@@ -1124,7 +1124,7 @@ The tables in the following sections group the Authentication Services protocols
 | Protocol name | Description | Short name |
 | --- | --- | --- |
 | Digest Protocol Extensions | See section [2.2.2](#Section_2.2.2). | [MS-DPSP](../MS-DPSP/MS-DPSP.md) |
-| [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) Profile | See section 2.2.2. | [MS-TLSP](#Section_2.9) |
+| [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) Profile | See section 2.2.2. | [MS-TLSP](../MS-TLSP/MS-TLSP.md) |
 | [**Kerberos**](#gt_kerberos) [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) Proxy Protocol | This protocol lets Kerberos clients use KDC [**proxy**](#gt_proxy) servers to communicate to KDCs for the Kerberos [**Authentication Service (AS)**](#gt_authentication-service-as), [**ticket-granting service (TGS)**](#gt_ticket-granting-service-tgs), and change password exchanges. | [MS-KKDCP](../MS-KKDCP/MS-KKDCP.md) |
 
 <a id="Section_2.3"></a>
@@ -1137,23 +1137,23 @@ The following subsections identify the context in which Authentication Services 
 
 Because Authentication Services authenticate users, computers, and security services in a [**domain**](#gt_domain) environment, any system or protocol that operates within a domain or has a mode of operation within a domain is influenced by this system. However, the following groups of related protocols depend more closely on the Authentication Services protocols:
 
-**Active Directory** [MS-ADOD](#Section_2.1): Describes how the directory is structured and how [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) operations are carried out on the directory store. To authenticate the identities of clients that attempt to operate on the directory store, Active Directory uses the **Authentication Services** protocols to authenticate so that [**authorization**](#gt_authorization) decisions can be made, such as whether a client has permission to perform a particular operation against a directory object.
+**Active Directory** [MS-ADOD](../MS-ADOD/MS-ADOD.md): Describes how the directory is structured and how [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) operations are carried out on the directory store. To authenticate the identities of clients that attempt to operate on the directory store, Active Directory uses the **Authentication Services** protocols to authenticate so that [**authorization**](#gt_authorization) decisions can be made, such as whether a client has permission to perform a particular operation against a directory object.
 
-**Certificate Services** [MS-CERSOD](#Section_2.1): Describes how the certificate authority leverages the **Authentication Services** protocols to manage certificate distribution and enrollment and makes authorization decisions that are based on information that is associated with the accounts in the domain.
+**Certificate Services** [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md): Describes how the certificate authority leverages the **Authentication Services** protocols to manage certificate distribution and enrollment and makes authorization decisions that are based on information that is associated with the accounts in the domain.
 
-**File Access Services** [MS-FASOD](#Section_2.1.2.3.1): Describes its dependance on the **Authentication Services** protocols to authenticate an identity before it is determined whether the requested identity has the required access rights on a file object, such as permission to read from a file or write to a file.
+**File Access Services** [MS-FASOD](../MS-FASOD/MS-FASOD.md): Describes its dependance on the **Authentication Services** protocols to authenticate an identity before it is determined whether the requested identity has the required access rights on a file object, such as permission to read from a file or write to a file.
 
-**Group Policy Protocols** [MS-GPOD](#Section_2.1): Describes how a domain client can retrieve [**group policy**](#gt_group-policy) information from a [**domain controller**](#gt_domain-controller-dc), which is based on the group memberships of the [**domain accounts**](#gt_domain-account) and on the domain account locations in the [**LDAP directory**](#gt_ldap-directory) structure. Group Policy protocols depend on the **Authentication Services** protocols to secure communications between the Group Policy client and the Group Policy server.
+**Group Policy Protocols** [MS-GPOD](../MS-GPOD/MS-GPOD.md): Describes how a domain client can retrieve [**group policy**](#gt_group-policy) information from a [**domain controller**](#gt_domain-controller-dc), which is based on the group memberships of the [**domain accounts**](#gt_domain-account) and on the domain account locations in the [**LDAP directory**](#gt_ldap-directory) structure. Group Policy protocols depend on the **Authentication Services** protocols to secure communications between the Group Policy client and the Group Policy server.
 
-**Remote Desktop Services Protocols** [MS-RDSOD](#Section_2.1): Describes the functionality to securely connect remote clients and servers, to channel communication between components of remote clients and servers, and to manage servers. [**RDP**](#gt_remote-desktop-protocol-rdp) protocols depend on the services of the **Authentication Services** protocols to authenticate identities and to help ensure secure communications.
+**Remote Desktop Services Protocols** [MS-RDSOD](../MS-RDSOD/MS-RDSOD.md): Describes the functionality to securely connect remote clients and servers, to channel communication between components of remote clients and servers, and to manage servers. [**RDP**](#gt_remote-desktop-protocol-rdp) protocols depend on the services of the **Authentication Services** protocols to authenticate identities and to help ensure secure communications.
 
 <a id="Section_2.3.2"></a>
 ### 2.3.2 Dependencies on Other Systems/Components
 
 The Authentication Services protocols depend on the following systems:
 
-- Active Directory [MS-ADOD](#Section_2.1)
-- Public Key Infrastructure (PKI) [MS-CERSOD](#Section_2.1)
+- Active Directory [MS-ADOD](../MS-ADOD/MS-ADOD.md)
+- Public Key Infrastructure (PKI) [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md)
 The Authentication Services protocols depend on Active Directory for identity information.
 
 The Authentication Services protocols depend on the certificate authority (CA)/[**PKI**](#gt_public-key-infrastructure-pki) infrastructure for certificate validation, signature validation, and asymmetric cryptography security services. Microsoft clients use the Crypto API 2.0 library for these features.
@@ -1174,7 +1174,7 @@ The following assumptions and preconditions apply to this document.
 - The client and server machines have been joined to the domain.
 - Higher-layer protocols and service implementations are configured and running on the authenticating client and server systems, such as:
 - [**Distributed File System (DFS)**](#gt_distributed-file-system-dfs)
-- Group Policy [MS-GPOD](#Section_2.1)
+- Group Policy [MS-GPOD](../MS-GPOD/MS-GPOD.md)
 - [**Network Time Protocol (NTP)**](#gt_b7983e55-135a-4006-beb9-ebed39432cbb)
 <a id="Section_2.5"></a>
 ## 2.5 Use Cases
@@ -1185,8 +1185,8 @@ The following sections describe a set of use cases that span the functionality o
 | --- | --- |
 | [Interactive Logon (section 2.5.3)](#Section_2.5.3) | [Interactive Domain Logon: Service Ticket for Client Computer (section 2.5.3.1.1)](#Section_2.5.3.1.1) |
 | [Network Logon (section 2.5.4)](#Section_2.5.4) | [Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Server Authentication (section 2.5.4.1.2)](#Section_2.5.4.1.2), [Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Delegation of Authentication (section 2.5.4.1.4)](#Section_2.5.4.1.4), and [Credential Delegation (section 2.5.4.1.5)](#Section_2.5.4.1.5). |
-| [Auxiliary (section 2.5.5)](#Section_2.5.5) | [Authenticate a User or Computer Identity to a Kerberos Authentication Server (section 2.5.5.1)](#Section_2.1), [Negotiate Authentication Protocol (section 2.5.5.2)](#Section_2.1), and [S4U2self Mechanism: Get a Service Ticket for a Front-end Server (section 2.5.5.3)](#Section_2.5.5.3). These use cases support the other use cases that are listed in this table and in the following tables. |
-| [Security Services (section 2.5.6)](#Section_2.5.6) | [Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6) [Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6.2) |
+| [Auxiliary (section 2.5.5)](#Section_2.5.5) | [Authenticate a User or Computer Identity to a Kerberos Authentication Server (section 2.5.5.1)](#Section_2.5.5.1), [Negotiate Authentication Protocol (section 2.5.5.2)](#Section_2.5.5.2), and [S4U2self Mechanism: Get a Service Ticket for a Front-end Server (section 2.5.5.3)](#Section_2.5.5.3). These use cases support the other use cases that are listed in this table and in the following tables. |
+| [Security Services (section 2.5.6)](#Section_2.5.6) | [Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6.1) [Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6.2) |
 
 The use cases listed in the following table apply to a multi-[**domain**](#gt_domain) environment in a single [**forest**](#gt_forest).
 
@@ -1206,8 +1206,8 @@ The use cases listed in the following table apply to a cross-forest environment.
 
 The use cases of the Authentication Services protocols have the following supporting actors:
 
-- Account database: To authenticate client and server application identities, the Authentication Services protocols depend on the account database (account DB) as an [**identity store**](#gt_identity-store). Windows uses an account database implemented by means of Active Directory Services, as described in [MS-ADOD](#Section_2.1). The account DB is on the same machine as the [**Authentication Authority (AA)**](#gt_authentication-authority-aa), so no network traffic occurs.
-- [**Public key infrastructure (PKI)**](#gt_public-key-infrastructure-pki): To authenticate the identities of client and server applications that use certificate-based authentication mechanisms, the Authentication Services protocols use Windows PKI to verify digital certificates and use the symmetric and asymmetric cryptography services of Windows PKI to provide security services, such as encryption and signing algorithms to the client and server applications. Windows implements PKI by means of Certificate Services [MS-CERSOD](#Section_2.1).
+- Account database: To authenticate client and server application identities, the Authentication Services protocols depend on the account database (account DB) as an [**identity store**](#gt_identity-store). Windows uses an account database implemented by means of Active Directory Services, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md). The account DB is on the same machine as the [**Authentication Authority (AA)**](#gt_authentication-authority-aa), so no network traffic occurs.
+- [**Public key infrastructure (PKI)**](#gt_public-key-infrastructure-pki): To authenticate the identities of client and server applications that use certificate-based authentication mechanisms, the Authentication Services protocols use Windows PKI to verify digital certificates and use the symmetric and asymmetric cryptography services of Windows PKI to provide security services, such as encryption and signing algorithms to the client and server applications. Windows implements PKI by means of Certificate Services [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md).
 <a id="Section_2.5.2"></a>
 ### 2.5.2 Actors
 
@@ -1259,7 +1259,7 @@ Figure 16: Interactive domain logon - service ticket for client computer use cas
 
 **Main Success Scenario:**
 
-- The identity of the user is proven to the AA as described in section [2.5.5.1](#Section_2.1).
+- The identity of the user is proven to the AA as described in section [2.5.5.1](#Section_2.5.5.1).
 - The LSA requests a service ticket for the client computer by including a [**Kerberos authenticator**](#gt_kerberos-authenticator) and the [**TGT**](#gt_ticket-granting-ticket-tgt) that was received in the preceding step in a [**Kerberos**](#gt_kerberos) request and sending the request to the AA.
 - The AA validates the request and returns a service ticket for the client computer.
 **Alternative Scenario:** This scenario occurs when [**Flexible Authentication Secure Tunneling (FAST)**](#gt_flexible-authentication-secure-tunneling-fast) mode is supported and configured on both the [**Authentication Client**](#gt_authentication-client) and the AA and when the preceding preconditions are met.
@@ -1309,7 +1309,7 @@ The [**LSA**](#gt_local-security-authority-lsa) initiates this use case with the
 
 **Main Success Scenario:**
 
-- The identity of the user is proven to AA1 as described in section [2.5.5.1](#Section_2.1).
+- The identity of the user is proven to AA1 as described in section [2.5.5.1](#Section_2.5.5.1).
 - The LSA requests a service ticket for the client computer by including a [**Kerberos authenticator**](#gt_kerberos-authenticator) and the [**TGT**](#gt_ticket-granting-ticket-tgt) that was received in the preceding step in a [**Kerberos**](#gt_kerberos) request and by sending it to AA1.
 - AA1 cannot issue the service ticket for the client computer because it is joined to domain2 and only AA2 can do so; therefore, AA1 replies with a referral ticket for domain2, as described in [[Referrals]](https://go.microsoft.com/fwlink/?LinkId=90258).
 - On receiving the referral ticket, the LSA locates AA2 and sends a TGS request that includes the referral ticket.
@@ -1358,8 +1358,8 @@ Figure 17: Client authentication use case
 
 **Main Success Scenario:** Negotiation leads to the use of [**Kerberos**](#gt_kerberos).
 
-- The client and server application negotiate as described in section [2.5.5.2](#Section_2.1) and agree on Kerberos as the authentication protocol.
-- The identity of the client application is proven to the **AA** as described in section [2.5.5.1](#Section_2.1).
+- The client and server application negotiate as described in section [2.5.5.2](#Section_2.5.5.2) and agree on Kerberos as the authentication protocol.
+- The identity of the client application is proven to the **AA** as described in section [2.5.5.1](#Section_2.5.5.1).
 - The client application sends the target server application's identity and the [**TGT**](#gt_ticket-granting-ticket-tgt) material that was obtained in step 2 to the **AA** to request a [**service ticket**](#gt_service-ticket) for the service application.
 - The **AA** locates the identity of the server application in its account DB and returns a service ticket and a [**session key**](#gt_session-key) to the client application.
 - The client application builds the [**authenticator**](#gt_authenticator) by using a session key and sends the service ticket plus the authenticator to the target application.
@@ -1634,12 +1634,12 @@ Figure 21: Credential delegation use case
 
 **Success Guarantee:** The user credentials are successfully delegated to the target server.
 
-**Trigger:** A client application, such as a Remote Desktop client or a Web services client, triggers the CredSSP Protocol [MS-CSSP](#Section_2.9) as the preferred authentication protocol for delegating the user's credentials.
+**Trigger:** A client application, such as a Remote Desktop client or a Web services client, triggers the CredSSP Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md) as the preferred authentication protocol for delegating the user's credentials.
 
 **Main Success Scenario:** Negotiation Leads to Kerberos
 
 - The client and server applications establish an encrypted channel by using the TLS protocol, as described in [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324).
-- The client and server applications negotiate over the TLS-encrypted channel that was established in step 1, as described in section [2.5.5.2](#Section_2.1), and agree on Kerberos as the authentication protocol.
+- The client and server applications negotiate over the TLS-encrypted channel that was established in step 1, as described in section [2.5.5.2](#Section_2.5.5.2), and agree on Kerberos as the authentication protocol.
 - By using the Kerberos protocol, as described in section [2.5.4.1.3](#Section_2.5.4.1.3), the client and server mutually authenticate each other and establish an encryption key.
 - The client application sends the user's password or [**smart card**](#gt_smart-card) PIN to the target server. This transaction is protected by using the Kerberos encryption key that was established in the preceding step.
 **Alternate Scenario:** Negotiation Leads to NTLM
@@ -1689,8 +1689,8 @@ Figure 22: Client authentication use case
 
 **Main Success Scenario:** Negotiation leads to the use of [**Kerberos**](#gt_kerberos).
 
-- The client and server application negotiate, as described in section [2.5.5.2](#Section_2.1), and agree on Kerberos as the authentication protocol.
-- The identity of the client application is proven to AA1, as described in section [2.5.5.1](#Section_2.1).
+- The client and server application negotiate, as described in section [2.5.5.2](#Section_2.5.5.2), and agree on Kerberos as the authentication protocol.
+- The identity of the client application is proven to AA1, as described in section [2.5.5.1](#Section_2.5.5.1).
 - The client application sends the target server application's identity and the [**TGT**](#gt_ticket-granting-ticket-tgt) material that was obtained in step 2 to AA1 to request a [**service ticket**](#gt_service-ticket) for the server application.
 - AA1 cannot issue the service ticket for the identity of the server application because the server identity is not defined in Account DB #1; therefore, AA1 replies with a referral ticket to AA2, as described in [[Referrals]](https://go.microsoft.com/fwlink/?LinkId=90258).
 - When the client application receives the referral ticket, the client application locates AA2 and sends the TGS request with the received referral ticket.
@@ -1752,8 +1752,8 @@ Figure 23: Client authentication in a cross-forest environment
 
 **Main Success Scenario:** Negotiation leads to the use of [**Kerberos**](#gt_kerberos).
 
-- The client and server applications negotiate as described in section [2.5.5.2](#Section_2.1) and agree on Kerberos as the authentication protocol.
-- The identity of the client application is proven to AA1, as described in the Main Success Scenario in section [2.5.5.1](#Section_2.1).
+- The client and server applications negotiate as described in section [2.5.5.2](#Section_2.5.5.2) and agree on Kerberos as the authentication protocol.
+- The identity of the client application is proven to AA1, as described in the Main Success Scenario in section [2.5.5.1](#Section_2.5.5.1).
 - The client application sends the target server application's identity and the [**TGT**](#gt_ticket-granting-ticket-tgt) material that was obtained in step 2 to AA1 to request a [**service ticket**](#gt_service-ticket) for the server application.
 - AA1 cannot find an entry for the server application identity in DB #1 and requests the [**GC server**](#gt_global-catalog-server-gc-server) to verify the server application identity. The GC server replies that the service is located in forest2; therefore, AA1 sends the referral ticket to the root authority of forest1 (FAA1).
 - On receiving the referral ticket, the client application locates FAA1 and sends the TGS request with the received referral ticket.
@@ -1985,7 +1985,7 @@ Figure 28: Data confidentiality (sealing) use case
 
 **Preconditions:**
 
-- The first two preconditions of section [2.5.6.1](#Section_2.5.6).
+- The first two preconditions of section [2.5.6.1](#Section_2.5.6.1).
 - The [**authentication client**](#gt_authentication-client) and the [**authentication server**](#gt_authentication-server) have agreed on an encryption algorithm method and a [**secret key**](#gt_secret-key).
 **Minimal Guarantees:** When the secure exchange of the application data fails, the client or server application receives an error message that indicates the reason for the failure.
 
@@ -2004,7 +2004,7 @@ Figure 28: Data confidentiality (sealing) use case
 <a id="Section_2.6"></a>
 ## 2.6 Versioning, Capability Negotiation, and Extensibility
 
-No capability negotiation is associated with Authentication Services. Any deviations from a specific version's implementation of these protocol specifications are documented in the respective protocol document. Capability negotiations between client and server implementations of these protocols are specified in the System Versioning and Capability Negotiation sections in their respective technical documents. For more details, see sections 1.7 of the member protocol specifications that are listed in section [2.2](#Section_2.1).
+No capability negotiation is associated with Authentication Services. Any deviations from a specific version's implementation of these protocol specifications are documented in the respective protocol document. Capability negotiations between client and server implementations of these protocols are specified in the System Versioning and Capability Negotiation sections in their respective technical documents. For more details, see sections 1.7 of the member protocol specifications that are listed in section [2.2](#Section_2.2).
 
 <a id="Section_2.7"></a>
 ## 2.7 Error Handling
@@ -2019,7 +2019,7 @@ None.
 <a id="Section_2.9"></a>
 ## 2.9 Security
 
-Implementers have to be aware that Kerberos Protocol Extensions [MS-KILE](../MS-KILE/MS-KILE.md) and [**public key**](#gt_public-key)-based authentication ([MS-PKCA](../MS-PKCA/MS-PKCA.md) and [MS-TLSP](#Section_2.9)) offer stronger security guarantees in terms of initial authentication and in subsequent confidentiality and integrity of client-server traffic and server-server traffic. [**Digest authentication**](#gt_digest-authentication) or NTLM authentication can be used in environments in which these stronger mechanisms are not available.
+Implementers have to be aware that Kerberos Protocol Extensions [MS-KILE](../MS-KILE/MS-KILE.md) and [**public key**](#gt_public-key)-based authentication ([MS-PKCA](../MS-PKCA/MS-PKCA.md) and [MS-TLSP](../MS-TLSP/MS-TLSP.md)) offer stronger security guarantees in terms of initial authentication and in subsequent confidentiality and integrity of client-server traffic and server-server traffic. [**Digest authentication**](#gt_digest-authentication) or NTLM authentication can be used in environments in which these stronger mechanisms are not available.
 
 Because the security of [**Kerberos**](#gt_kerberos) authentication is in part based upon the time stamps of the [**tickets**](#gt_ticket), it is critical to have accurately set clocks on the machines in the Kerberos environment. As stated in the Kerberos documents, a short lifetime for tickets is used to prevent attackers from performing successful brute force attacks or replay attacks. If the clocks of the machines in a Kerberos environment drift, the network becomes vulnerable to such attacks. Because clock synchronization is vital to Kerberos protocol security, if clocks are not synchronized within a reasonable time window, Kerberos will report fatal errors and refuse to function.
 
@@ -2036,7 +2036,7 @@ There are no additional considerations.
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: GSS Authentication Protocol Process - Stock Quote Server
 
-This example describes the [**GSS**](#gt_generic-security-services-gss) authentication protocol process. It builds on the use cases for [Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Server Authentication (section 2.5.4.1.2)](#Section_2.5.4.1.2), [Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Security Services: Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6), [Security Services: Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6.2), and their dependent use cases.
+This example describes the [**GSS**](#gt_generic-security-services-gss) authentication protocol process. It builds on the use cases for [Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Server Authentication (section 2.5.4.1.2)](#Section_2.5.4.1.2), [Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Security Services: Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6.1), [Security Services: Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6.2), and their dependent use cases.
 
 Every application protocol uses its own mechanism to transport the GSS-API security tokens from an Application Client to an Application Server. The following example explains the interactions of the [**Authentication Client**](#gt_authentication-client), the [**Authentication Server**](#gt_authentication-server), and the [**Authentication Authority (AA)**](#gt_authentication-authority-aa) through GSS-APIs [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
 
@@ -2246,7 +2246,7 @@ The client validates the **KRB_TGS_REP** message ([MS-KILE] section 3.3.4). If t
 <a id="Section_3.3"></a>
 ## 3.3 Example 3: Connecting to an SMB2 Share
 
-The examples in the following subsections describe connecting to an SMB2 share by using Kerberos protocol [MS-KILE](../MS-KILE/MS-KILE.md) or NTLM protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md). They build on the use cases for [Network Logon: Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Network Logon: Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Security Services: Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6), and their dependent use cases.
+The examples in the following subsections describe connecting to an SMB2 share by using Kerberos protocol [MS-KILE](../MS-KILE/MS-KILE.md) or NTLM protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md). They build on the use cases for [Network Logon: Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Network Logon: Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Security Services: Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6.1), and their dependent use cases.
 
 ### Using Kerberos Protocol Extensions [MS-KILE]
 
@@ -2267,9 +2267,9 @@ This example describes using [**Kerberos**](#gt_kerberos) protocol extensions [M
 
 Figure 32: Connecting to an SMB2 share with [MS-KILE] as the authentication protocol
 
-**Negotiating an Authentication Protocol** (see section [2.5.5.2](#Section_2.1))
+**Negotiating an Authentication Protocol** (see section [2.5.5.2](#Section_2.5.5.2))
 
-The SMB2 client and the SMB2 server negotiate the authentication protocol by using the SPNEGO protocol [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9).
+The SMB2 client and the SMB2 server negotiate the authentication protocol by using the SPNEGO protocol [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md).
 
 Step 1: When the user tries to access the network share on the SMB2 server, the SMB2 client sends the **SMB2 NEGOTIATE Request** message ([MS-SMB2](../MS-SMB2/MS-SMB2.md) section 2.2.3) to the SMB2 server to negotiate SMB2 capabilities, such as [**SMB dialects**](#gt_smb-dialect) between the SMB2 client and server.
 
@@ -2326,7 +2326,7 @@ This example describes using [**NTLM Protocol**](#gt_nt-lan-manager-ntlm) [MS-NL
 
 Figure 33: Connecting to an SMB2 share with [MS-NLMP] as the authentication protocol
 
-The SMB2 client and the SMB2 server negotiate the authentication protocol by using the SPNEGO protocol [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9).
+The SMB2 client and the SMB2 server negotiate the authentication protocol by using the SPNEGO protocol [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md).
 
 Step 1: When the user tries to access the network share on the SMB2 server, the SMB2 client sends the **SMB2 NEGOTIATE Request** ([MS-SMB2](../MS-SMB2/MS-SMB2.md) section 2.2.3) message to the SMB2 server to negotiate SMB2 capabilities, such as [**SMB dialects**](#gt_smb-dialect) between the SMB2 client and server
 

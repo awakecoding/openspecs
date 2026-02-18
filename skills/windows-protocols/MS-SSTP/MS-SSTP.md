@@ -307,14 +307,14 @@ Many VPN services provide a way for mobile and home users to access the corporat
 
 This protocol provides an encrypted tunnel (an [**SSTP tunnel**](#gt_sstp-tunnel)) by means of the SSL/TLS protocol. When a client establishes an SSTP-based VPN connection, it first establishes a TCP connection to the [**SSTP server**](#gt_sstp-server) over TCP port 443. [**SSL/TLS handshake**](#gt_ssltls-handshake) occurs over this TCP connection.
 
-After the successful negotiation of SSL/TLS, the client sends an HTTP request with content length encoding and a large content length on the SSL protected connection (see section [3.2.4.1](#Section_4.3) for more details). The server sends back an HTTP response with status HTTP_STATUS_OK(200). The specific request and response details that are discussed earlier can be found in section [4.1](#Section_4.1). The HTTPS connection is now established, and the client can send and receive [SSTP Control Packets](#Section_2.2.2) and [SSTP Data Packets](#Section_2.2.3) on this connection. HTTPS connection establishment when a web proxy is present is specified in [[SSLPROXY]](https://go.microsoft.com/fwlink/?LinkId=90535).
+After the successful negotiation of SSL/TLS, the client sends an HTTP request with content length encoding and a large content length on the SSL protected connection (see section [3.2.4.1](#Section_3.2.4.1) for more details). The server sends back an HTTP response with status HTTP_STATUS_OK(200). The specific request and response details that are discussed earlier can be found in section [4.1](#Section_4.1). The HTTPS connection is now established, and the client can send and receive [SSTP Control Packets](#Section_2.2.2) and [SSTP Data Packets](#Section_2.2.3) on this connection. HTTPS connection establishment when a web proxy is present is specified in [[SSLPROXY]](https://go.microsoft.com/fwlink/?LinkId=90535).
 
 SSTP performs the following features:
 
 - Allowing delineation of PPP frames from the continuous stream of data that is sent by using HTTPS. For more information about PPP, see [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283).
 - Negotiation of parameters between two entities. See section [1.7](#Section_1.7) for more details.
 - Extensible message format to support new parameters in the future. For more information, see section [2.2](#Section_2.2).
-- Security operations to prevent a man-in-the-middle attacker from relaying PPP frames inappropriately over SSTP. SSTP uses keying material generated during PPP authentication for crypto binding (sections [3.2.5.2](#Section_2.2.7) and [3.3.5.2.3](#Section_3.3.5.2.3)).
+- Security operations to prevent a man-in-the-middle attacker from relaying PPP frames inappropriately over SSTP. SSTP uses keying material generated during PPP authentication for crypto binding (sections [3.2.5.2](#Section_3.2.5.2) and [3.3.5.2.3](#Section_3.3.5.2.3)).
 SSTP Control Packets contain messages to negotiate parameters and to ensure that there is no untrusted man-in-the-middle. SSTP Data Packets contain PPP frames as payload.
 
 In an SSTP–based VPN, the protocol layer negotiation occurs in the following order:
@@ -365,7 +365,7 @@ The Secure Socket Tunneling Protocol (SSTP) is useful for establishing VPN conne
 
 The Secure Socket Tunneling Protocol (SSTP) contains version fields in all the messages. This functionality allows a server implementation to support multiple versions of SSTP and to determine what version is implemented on the client. The server then uses that version of protocol behavior for SSTP negotiation.
 
-SSTP also allows for negotiation of SHA1 and SHA256 for hashing. The negotiation is as specified in sections [2.2.7](#Section_2.2.7), [2.2.6](#Section_2.2.6), [2.2.10](#Section_2.2.10), [3.2.5.2](#Section_2.2.7), and [3.2.5.3.2](#Section_3.2.5.3.2).
+SSTP also allows for negotiation of SHA1 and SHA256 for hashing. The negotiation is as specified in sections [2.2.7](#Section_2.2.7), [2.2.6](#Section_2.2.6), [2.2.10](#Section_2.2.10), [3.2.5.2](#Section_3.2.5.2), and [3.2.5.3.2](#Section_3.2.5.3.2).
 
 The server presents the hashing functions that it supports, and the client selects the hashing function that it also supports from this list. If both the client and server support both SHA1 and SHA256, then the client prefers SHA256 over SHA1.
 
@@ -635,7 +635,7 @@ packet-beta
 
 **Reserved1 (3 bytes):** This 24-bit field is reserved for future use. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**Hash Protocol Bitmask (1 byte):** This 1-byte bitmask field is used (with the **ServerHashProtocolSupported** state variable described in section [3.3.1](#Section_3.3.1)) to specify the hashing methods allowed by the server that the client uses to compute the Compound MAC in the [Crypto Binding attribute](#Section_2.2.7). For more information, see section [3.2.5.2](#Section_2.2.7). The following bits are defined.
+**Hash Protocol Bitmask (1 byte):** This 1-byte bitmask field is used (with the **ServerHashProtocolSupported** state variable described in section [3.3.1](#Section_3.3.1)) to specify the hashing methods allowed by the server that the client uses to compute the Compound MAC in the [Crypto Binding attribute](#Section_2.2.7). For more information, see section [3.2.5.2](#Section_3.2.5.2). The following bits are defined.
 
 A 1 MUST be placed in the appropriate bit position to select the supported hash protocol. The server MUST select at least one hash protocol. If the server selects both the SHA256 and the [**SHA1 hash**](#gt_sha1-hash) protocols and the client supports both hash protocols (as indicated by the value of the **ClientHashProtocolSupported** state variable described in section [3.2.1](#Section_3.2.1)), then the client MUST select the SHA256 protocol. For more information about how the client processes the **Hash Protocol Bitmask** when it receives a [Call Connect Acknowledge message](#Section_2.2.10), see section [3.2.5.3.2](#Section_3.2.5.3.2).
 
@@ -706,7 +706,7 @@ packet-beta
 
 **Padding (variable):** This field is reserved for future use. MUST be set to zero when sent and MUST be ignored on receipt. This field is either zero bytes long when the SHA256 Cert Hash is used, or 12 bytes long when the SHA1 Cert Hash is used.
 
-**Compound MAC (variable):** A variable-length unsigned integer that contains the value that is used to cryptographically associate the higher-layer authentication (that is, PPP authentication) with the lower-layer HTTPS connection and therefore ensure that the SSTP client and the SSTP server participated in both of them. (For more information, see section [3.2.5.2](#Section_2.2.7) and also see [RFC1661].) This field is either 20 bytes long when the SHA1 Hash Protocol is used for Compound MAC computation, or 32 bytes long when the SHA256 Hash Protocol is used for Compound MAC computation.
+**Compound MAC (variable):** A variable-length unsigned integer that contains the value that is used to cryptographically associate the higher-layer authentication (that is, PPP authentication) with the lower-layer HTTPS connection and therefore ensure that the SSTP client and the SSTP server participated in both of them. (For more information, see section [3.2.5.2](#Section_3.2.5.2) and also see [RFC1661].) This field is either 20 bytes long when the SHA1 Hash Protocol is used for Compound MAC computation, or 32 bytes long when the SHA256 Hash Protocol is used for Compound MAC computation.
 
 **Padding1 (variable):** A variable-length field that is reserved for future use. MUST be set to zero when sent and MUST be ignored on receipt. This field is either zero bytes long when the SHA256 Cert Hash is used, or 12 bytes long when the SHA1 Cert Hash is used.
 
@@ -901,7 +901,7 @@ packet-beta
 
 **Reserved2 (3 bytes):** This 24-bit field is reserved for future use. MUST be set to zero when sent and MUST be ignored on receipt.
 
-**Hash Protocol Bitmask (1 byte):** This 1-byte bitmask field is used (with the **ServerHashProtocolSupported** state variable described in section [3.3.1](#Section_3.3.1)) to specify the hashing methods allowed by the server that the client uses to compute the Compound MAC in the [Crypto Binding attribute](#Section_2.2.7). For more information, see section [3.2.5.2](#Section_2.2.7). The following bits are defined.
+**Hash Protocol Bitmask (1 byte):** This 1-byte bitmask field is used (with the **ServerHashProtocolSupported** state variable described in section [3.3.1](#Section_3.3.1)) to specify the hashing methods allowed by the server that the client uses to compute the Compound MAC in the [Crypto Binding attribute](#Section_2.2.7). For more information, see section [3.2.5.2](#Section_3.2.5.2). The following bits are defined.
 
 A 1 MUST be placed in the appropriate bit position to select the supported hash protocol. The server MUST select at least one hash protocol. If the server selects both the SHA256 and the [**SHA1 hash**](#gt_sha1-hash) protocols and the client supports both hash protocols (as indicated by the value of the **ClientHashProtocolSupported** state variable described in section [3.2.1](#Section_3.2.1)), then the client MUST select the SHA256 protocol. For more information about how the client processes the **Hash Protocol Bitmask** when it receives a Call Connect Acknowledge message, see section [3.2.5.3.2](#Section_3.2.5.3.2).
 
@@ -998,7 +998,7 @@ packet-beta
 
 **Padding (variable):** A variable-length field that is reserved for future use. MUST be set to zero when sent and MUST be ignored on receipt. This field is either zero bytes long when the SHA256 Cert Hash is used or 12 bytes long when the [**SHA1**](#gt_168fbe0c-fc02-4722-979e-b0261766ac9c) Cert Hash is used.
 
-**Compound MAC (variable):** A variable-length, unsigned integer containing the value that is used to cryptographically associate the higher-layer authentication (that is, PPP authentication) with a lower-layer [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection. This association ensures that the [**SSTP client**](#gt_sstp-client) and the SSTP server participated in both PPP authentication and HTTPS connection. (For more information, see section [3.2.5.2](#Section_2.2.7) and [RFC1661].) This field is either 20 bytes long when the SHA1 hash protocol is used for Compound MAC computation or 32 bytes long when the SHA256 hash protocol is used for Compound MAC computation.
+**Compound MAC (variable):** A variable-length, unsigned integer containing the value that is used to cryptographically associate the higher-layer authentication (that is, PPP authentication) with a lower-layer [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection. This association ensures that the [**SSTP client**](#gt_sstp-client) and the SSTP server participated in both PPP authentication and HTTPS connection. (For more information, see section [3.2.5.2](#Section_3.2.5.2) and [RFC1661].) This field is either 20 bytes long when the SHA1 hash protocol is used for Compound MAC computation or 32 bytes long when the SHA256 hash protocol is used for Compound MAC computation.
 
 **Padding1 (variable):** A variable-length field that is reserved for future use MUST be set to zero when sent and MUST be ignored on receipt. This field is either zero bytes in length when the SHA256 Hash Protocol is used for Compound MAC computation or 12 bytes in length when the SHA1 Hash Protocol is used.
 
@@ -1323,7 +1323,7 @@ Both the SSTP client and server maintain the current state for each SSTP connect
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 State Machine
 
-This section describes the [**state machine**](#gt_state-machine) that applies to both the client and server for the [Call Disconnect](#Section_2.2.14) and [Call Abort](#Section_3.1.1.1.2) phases. The state machine for call establishment is different for the client and server and is as specified in sections [3.2.1.1.1](#Section_3.2.1.1.1) and [3.3.1.1.1](#Section_3.3.1.1.1), respectively.
+This section describes the [**state machine**](#gt_state-machine) that applies to both the client and server for the [Call Disconnect](#Section_3.1.1.1.1) and [Call Abort](#Section_3.1.1.1.2) phases. The state machine for call establishment is different for the client and server and is as specified in sections [3.2.1.1.1](#Section_3.2.1.1.1) and [3.3.1.1.1](#Section_3.3.1.1.1), respectively.
 
 <a id="Section_3.1.1.1.1"></a>
 ##### 3.1.1.1.1 State Machine Call Disconnect
@@ -1360,7 +1360,7 @@ To abort an SSTP connection, the SSTP client and server state machines have the 
 | --- | --- |
 | Call_Abort_In_Progress_1 | This is the initial state when the SSTP connection reaches abort-related conditions, such as the receipt of an invalid message, as described in the client and server state machines in sections [3.2.1](#Section_3.2.1) and [3.3.1](#Section_3.3.1). In this state, SSTP_MSG_CALL_ABORT is sent to the [**SSTP far end**](#gt_sstp-far-end), and **CurrentState** is changed to Call_Abort_Pending. |
 | Call_Abort_In_Progress_2 | This is the initial state that the SSTP connection transitions to when the SSTP_MSG_CALL_ABORT message is received from the SSTP far end. In this state, SSTP_MSG_CALL_ABORT is sent to the SSTP far end, and **CurrentState** is changed to Call_Abort_Timeout_Pending. |
-| Call_Abort_Pending | In this state, the SSTP connection waits for the SSTP_MSG_CALL_ABORT message from the SSTP far end. When an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message is received, or when a lower layer disconnects or times out, the Call Abort is completed. Other than SSTP_MSG_CALL_ABORT, any SSTP control message received while in this state is silently discarded. |
+| Call_Abort_Pending | In this state, the SSTP connection waits for the SSTP_MSG_CALL_ABORT message from the SSTP far end. When an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message is received, or when a lower layer disconnects or times out, the Call Abort is completed. Other than SSTP_MSG_CALL_ABORT, any SSTP control message received while in this state is silently discarded. |
 | Call_Abort_Timeout_Pending | In this state, the SSTP connection waits for the timer to expire or for the lower layer to be disconnected. When either of these conditions is met, the Call Abort is completed. Any SSTP control message received while in this state is silently discarded. |
 
 <a id="Section_3.1.2"></a>
@@ -1388,7 +1388,7 @@ There are two timers related to disconnect processing:
 
 - TIMER_VAL_DISCONNECT_STATE_TIMER_1
 - TIMER_VAL_DISCONNECT_STATE_TIMER_2
-The first timer is started by an [**SSTP peer**](#gt_sstp-peer) when it has initiated a disconnect by sending the [Call Disconnect message](#Section_2.2.14) to the [**SSTP far end**](#gt_sstp-far-end). If the SSTP peer receives a [Call Disconnect Acknowledge message](#Section_2) from the SSTP far end before the timer expires, then it MUST cancel the timer and immediately clear the connection state to clean up the connection.
+The first timer is started by an [**SSTP peer**](#gt_sstp-peer) when it has initiated a disconnect by sending the [Call Disconnect message](#Section_3.1.1.1.1) to the [**SSTP far end**](#gt_sstp-far-end). If the SSTP peer receives a [Call Disconnect Acknowledge message](#Section_7c572ceb571946d0a5ddf68a44a90292) from the SSTP far end before the timer expires, then it MUST cancel the timer and immediately clear the connection state to clean up the connection.
 
 When the SSTP far end receives a Call Disconnect message, it responds with a Call Disconnect Acknowledge message and then starts the second timer (that is, TIMER_VAL_DISCONNECT_STATE_TIMER_2). This timer ensures that the SSTP peer receives the Call Disconnect Acknowledge message that is sent by the SSTP far end.
 
@@ -1397,7 +1397,7 @@ The first timer SHOULD be set to 5 seconds. The second timer SHOULD be set to 1 
 <a id="Section_3.1.2.3"></a>
 #### 3.1.2.3 Hello Timer
 
-To detect HTTPS connection failures in the absence of any active data transfers, [Echo Request and Echo Response messages](#Section_2) are periodically sent by the [**SSTP peer**](#gt_sstp-peer) and [**SSTP far end**](#gt_sstp-far-end), respectively. Both the [**SSTP client**](#gt_sstp-client) and [**SSTP server**](#gt_sstp-server) start a Hello timer after a successful SSTP connection setup. For example, after a successful [Call Connect Request](#Section_2.2.9), [Call Connect Acknowledge](#Section_2.2.10), and [Call Connected](#Section_2.2.11) message exchange, a Hello timer is initiated. The timer is restarted after receiving an [SSTP packet](#Section_2.2.1) (both the [SSTP control packet](#Section_2.2.2) and the [SSTP data packet](#Section_2.2.3)).
+To detect HTTPS connection failures in the absence of any active data transfers, [Echo Request and Echo Response messages](#Section_7c572ceb571946d0a5ddf68a44a90292) are periodically sent by the [**SSTP peer**](#gt_sstp-peer) and [**SSTP far end**](#gt_sstp-far-end), respectively. Both the [**SSTP client**](#gt_sstp-client) and [**SSTP server**](#gt_sstp-server) start a Hello timer after a successful SSTP connection setup. For example, after a successful [Call Connect Request](#Section_2.2.9), [Call Connect Acknowledge](#Section_2.2.10), and [Call Connected](#Section_2.2.11) message exchange, a Hello timer is initiated. The timer is restarted after receiving an [SSTP packet](#Section_2.2.1) (both the [SSTP control packet](#Section_2.2.2) and the [SSTP data packet](#Section_2.2.3)).
 
 On expiry of the Hello timer, the SSTP peer MUST send an Echo Request packet. On receipt of Echo Request packet, the SSTP far end MUST respond with an Echo Response packet. If the SSTP far end does not respond with an Echo Response (or any SSTP packet) within the next timer interval, then it MUST abort the connection without sending a [Call Abort packet](#Section_3.1.1.1.2).
 
@@ -1413,11 +1413,11 @@ See sections [3.2.3](#Section_3.2.3) and [3.3.3](#Section_3.3.3).
 
 The SSTP layer interfaces with the PPP layer using the following events. These events are triggered by the PPP layer.
 
-**Send PPP control frame:** This event is used by the PPP layer to send a PPP control payload to the SSTP layer. The SSTP layer then sends the PPP control payload to the [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) layer after performing the necessary encapsulation (see sections [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.2.7)).
+**Send PPP control frame:** This event is used by the PPP layer to send a PPP control payload to the SSTP layer. The SSTP layer then sends the PPP control payload to the [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) layer after performing the necessary encapsulation (see sections [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.3.7)).
 
 **Send PPP data frame:** This event is used by the PPP layer to send a PPP data payload to the SSTP layer. The SSTP layer then sends the PPP data payload to the HTTPS layer after performing the necessary encapsulation (see sections 3.2.7 and 3.3.7).
 
-**PPP authentication completed:** This event is used by the PPP layer to notify the SSTP layer that PPP authentication has been completed (see sections 3.2.7 and 3.3.7). The PPP layer uses this event to pass the higher layer authentication key (HLAK) to the SSTP layer. The SSTP layer on the client will use this attribute to generate and send the crypto binding attribute (section [3.2.5.2](#Section_2.2.7)) to the server. The SSTP layer on the server will use this attribute to validate the crypto binding attribute sent by the client (section [3.3.5.2.3](#Section_3.3.5.2.3)).
+**PPP authentication completed:** This event is used by the PPP layer to notify the SSTP layer that PPP authentication has been completed (see sections 3.2.7 and 3.3.7). The PPP layer uses this event to pass the higher layer authentication key (HLAK) to the SSTP layer. The SSTP layer on the client will use this attribute to generate and send the crypto binding attribute (section [3.2.5.2](#Section_3.2.5.2)) to the server. The SSTP layer on the server will use this attribute to validate the crypto binding attribute sent by the client (section [3.3.5.2.3](#Section_3.3.5.2.3)).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -1430,7 +1430,7 @@ This protocol MUST attempt to delineate the SSTP frames that are contained in th
 If an invalid SSTP message is received, the SSTP state machine aborts processing using the following procedure.
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 For the attribute parameters that are received from the [Call Connect Request message](#Section_2.2.9), the server MAY respond with a negative acknowledgment. In the negative acknowledgment message, the server MUST include the list of attributes that are not acceptable and the reason that they were not accepted.
@@ -1451,7 +1451,7 @@ By default, packets of any size can be sent or received through the tunnel, as W
 
 To enable large SSTP payloads, both MTU (on the sender) and MRU (on the receiver) need to be set to larger values.
 
-SSTP packet processing for common messages is covered separately for the client state machine and server state machine, in sections [3.2.5.3](#Section_3.3.5.2) and [3.3.5.2](#Section_3.3.5.2).
+SSTP packet processing for common messages is covered separately for the client state machine and server state machine, in sections [3.2.5.3](#Section_3.2.5.3) and [3.3.5.2](#Section_3.3.5.2).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -1473,7 +1473,7 @@ When the TIMER_VAL_DISCONNECT_STATE_TIMER_2 expires, the SSTP peer MUST immediat
 <a id="Section_3.1.6.3"></a>
 #### 3.1.6.3 Hello Timer Processing
 
-When the [Hello timer](#Section_3.1.2.3) expires, an [Echo Request packet](#Section_2) MUST be sent by the [**SSTP peer**](#gt_sstp-peer) to the [**SSTP far end**](#gt_sstp-far-end).
+When the [Hello timer](#Section_3.1.2.3) expires, an [Echo Request packet](#Section_7c572ceb571946d0a5ddf68a44a90292) MUST be sent by the [**SSTP peer**](#gt_sstp-peer) to the [**SSTP far end**](#gt_sstp-far-end).
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -1485,7 +1485,7 @@ The SSTP layer interfaces with a local PPP layer on both clients and servers. Th
 
 **Check PPP frame type:** This event is used by the SSTP layer to check whether a given PPP payload is a PPP control frame or a PPP data frame.
 
-**Receive PPP control frame:** This event is used by the SSTP layer to indicate a PPP control frame to the PPP layer (see section [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.2.7)).
+**Receive PPP control frame:** This event is used by the SSTP layer to indicate a PPP control frame to the PPP layer (see section [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.3.7)).
 
 **Receive PPP data frame:** This event is used by the SSTP layer to indicate a PPP data frame to the PPP layer (see section 3.2.7 and 3.3.7).
 
@@ -1498,15 +1498,15 @@ The SSTP layer interfaces with a local PPP layer on both clients and servers. Th
 
 The SSTP layer on both client-side and server-side implementations interfaces with the local [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) layer using the following events.
 
-**Open HTTPS connection:** This event is used by the SSTP client to initiate an HTTPS connection to the SSTP server. The SSTP layer specifies the hostname or IP address of the SSTP server when calling this event. If the HTTPS connection is established successfully, the HTTPS layer returns the server certificate hash (see section [3.2.4.1](#Section_4.3)).
+**Open HTTPS connection:** This event is used by the SSTP client to initiate an HTTPS connection to the SSTP server. The SSTP layer specifies the hostname or IP address of the SSTP server when calling this event. If the HTTPS connection is established successfully, the HTTPS layer returns the server certificate hash (see section [3.2.4.1](#Section_3.2.4.1)).
 
-**Accept HTTPS connection:** This event is used by the SSTP server to accept a new incoming HTTPS connection from the SSTP client (section [3.3.7](#Section_3.2.7)).
+**Accept HTTPS connection:** This event is used by the SSTP server to accept a new incoming HTTPS connection from the SSTP client (section [3.3.7](#Section_3.3.7)).
 
 **Close HTTPS connection:** This event is used by an SSTP peer to close the HTTPS connection.
 
 **Send HTTPS stream:** This event is used by the SSTP client and the SSTP server to send an SSTP control packet or an SSTP data packet to the local HTTPS layer. The HTTPS layer encrypts the SSTP packet as a byte stream and sends it to the SSTP peer.
 
-**Receive HTTPS stream:** This event is used by the HTTPS layer to indicate a stream of bytes to the local SSTP layer as received from the SSTP far end. The SSTP layer delineates the stream of bytes into SSTP control packets and SSTP data packets. If delineation fails, the connection is immediately aborted (section [3.1.5.1](#Section_3.1.5.1)) and a lower link down event is sent to the PPP layer. If delineation succeeds, the SSTP control packets are passed to the SSTP state machine for further processing (sections [3.2.5.3](#Section_3.3.5.2) and [3.3.5.2](#Section_3.3.5.2)). The SSTP data packets, including all PPP control frames and all PPP data frames, are passed to the PPP layer after further processing as defined in sections [3.2.7](#Section_3.2.7) and 3.3.7.
+**Receive HTTPS stream:** This event is used by the HTTPS layer to indicate a stream of bytes to the local SSTP layer as received from the SSTP far end. The SSTP layer delineates the stream of bytes into SSTP control packets and SSTP data packets. If delineation fails, the connection is immediately aborted (section [3.1.5.1](#Section_3.1.5.1)) and a lower link down event is sent to the PPP layer. If delineation succeeds, the SSTP control packets are passed to the SSTP state machine for further processing (sections [3.2.5.3](#Section_3.2.5.3) and [3.3.5.2](#Section_3.3.5.2)). The SSTP data packets, including all PPP control frames and all PPP data frames, are passed to the PPP layer after further processing as defined in sections [3.2.7](#Section_3.2.7) and 3.3.7.
 
 **HTTPS connection disconnected:** This interface is used by the HTTPS layer to indicate a disconnection of the HTTPS connection. This disconnection can happen due to events such as network interface failure, network failure, TCP failure, SSL/TLS failure, lower layer HTTPS session disconnected, and similar scenarios. In all such scenarios, the SSTP layer MUST immediately clean up the call-related information without any over-the-wire interaction. The SSTP layer MUST send a lower-link-down event to the higher layer (PPP). For more information about PPP, see [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283).
 
@@ -1530,7 +1530,7 @@ The [**SSTP client**](#gt_sstp-client) connection establishment phase goes throu
 - Client_Call_Connected
 Additional state values common to both the client and server state machines are defined in section [3.1.1](#Section_3.1.1).
 
-**ClientCertificateHash**: A multi-octet variable that the client uses to store the [**SHA1 hash**](#gt_sha1-hash) or the SHA256 hash of the server certificate that is obtained during [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) negotiation. The client initializes this variable to the value of the server certificate hash when the HTTPS session is established (section [3.2.4.1](#Section_4.3)). This variable stores a 20-byte SHA1 hash or a 32-byte SHA256 hash. This variable is used to generate the value of the [Crypto Binding attribute (section 2.2.7)](#Section_2.2.7) when the client sends an SSTP_MSG_CALL_CONNECTED message (sections [3.2.5.2](#Section_2.2.7) and [3.2.7](#Section_3.2.7)).
+**ClientCertificateHash**: A multi-octet variable that the client uses to store the [**SHA1 hash**](#gt_sha1-hash) or the SHA256 hash of the server certificate that is obtained during [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) negotiation. The client initializes this variable to the value of the server certificate hash when the HTTPS session is established (section [3.2.4.1](#Section_3.2.4.1)). This variable stores a 20-byte SHA1 hash or a 32-byte SHA256 hash. This variable is used to generate the value of the [Crypto Binding attribute (section 2.2.7)](#Section_2.2.7) when the client sends an SSTP_MSG_CALL_CONNECTED message (sections [3.2.5.2](#Section_3.2.5.2) and [3.2.7](#Section_3.2.7)).
 
 **ClientBypassHLAuth**: In this Boolean variable, the SSTP layer stores a flag that will be used to indicate higher layer to bypass authentication ([3.1.7.1](#Section_3.1.7.1)). This variable is initialized by the client management layer during the establish [**SSTP tunnel**](#gt_sstp-tunnel) event (3.2.4.1).
 
@@ -1584,7 +1584,7 @@ The client MAY<6> choose to implement different values of timer after sending th
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-Client-side initialization is performed when the user tries to establish an [**SSTP tunnel**](#gt_sstp-tunnel) to an [**SSTP server**](#gt_sstp-server). This process is specified in section [3.2.4.1](#Section_4.3).
+Client-side initialization is performed when the user tries to establish an [**SSTP tunnel**](#gt_sstp-tunnel) to an [**SSTP server**](#gt_sstp-server). This process is specified in section [3.2.4.1](#Section_3.2.4.1).
 
 The client administrator uses the **ClientHashProtocolSupported** state variable (section [3.2.1](#Section_3.2.1)) to initialize the list of hash protocols that the [**SSTP client**](#gt_sstp-client) supports.
 
@@ -1621,7 +1621,7 @@ If the HTTPS session established successfully, the SSTP state machine MUST be in
 
 To bring down the [**SSTP tunnel**](#gt_sstp-tunnel), the management layer on the client MUST send a disconnect SSTP tunnel request to the SSTP layer. This event can be used to bring down the established SSTP tunnel or a call setup that is in progress.
 
-For an established SSTP tunnel, this request typically comes after the encapsulated protocol has completed its teardown (in this specific implementation, it is the PPP). After the PPP is torn down, SSTP is triggered to bring down the SSTP tunnel by sending this event. On receiving this event, the [**SSTP peer**](#gt_sstp-peer) initiates the disconnection by sending the [Call Disconnect message](#Section_2.2.14) to the [**SSTP far end**](#gt_sstp-far-end). Section [3.1.1.1.1](#Section_3.1.1.1.1) specifies the protocol state machine details for the disconnect event processing. For more information about PPP teardown, see [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283) section 3.7.
+For an established SSTP tunnel, this request typically comes after the encapsulated protocol has completed its teardown (in this specific implementation, it is the PPP). After the PPP is torn down, SSTP is triggered to bring down the SSTP tunnel by sending this event. On receiving this event, the [**SSTP peer**](#gt_sstp-peer) initiates the disconnection by sending the [Call Disconnect message](#Section_3.1.1.1.1) to the [**SSTP far end**](#gt_sstp-far-end). Section [3.1.1.1.1](#Section_3.1.1.1.1) specifies the protocol state machine details for the disconnect event processing. For more information about PPP teardown, see [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283) section 3.7.
 
 For a call setup in progress, it is possible for the disconnect event to occur due to cancellation of the establish SSTP tunnel request. In this case, irrespective of the current state, the SSTP peer changes **CurrentState** to Call_Disconnect_In_Progress_1. Upon entering this state, the SSTP peer sends an SSTP_MSG_CALL_DISCONNECT to the SSTP far end, starts the TIMER_VAL_DISCONNECT_STATE_TIMER_1 timer and then updates **CurrentState** to Call_Disconnect_Ack_Pending. The SSTP far end MUST acknowledge the disconnect request by sending SSTP_MSG_CALL_DISCONNECT_ACK regardless of the value of **CurrentState**.
 
@@ -1803,7 +1803,7 @@ If **CurrentState** is set to Client_Connect_Request_Sent:
 - At least one of the hash protocols in the Hash Protocol Bitmask field is a hash protocol supported by the client (as specified in the **ClientHashProtocolSupported** state variable described in section [3.2.1](#Section_3.2.1)). If more than one hash protocol is supported, a stronger one is chosen (see section [2.2.10](#Section_2.2.10)). The hash protocol chosen for computing the [Crypto Binding attribute](#Section_2.2.7) value is stored in the **ClientHashProtocolChosen** state variable (described in section 3.2.1) and is referenced when the client generates the Crypto Binding attribute (section 2.2.7) while sending an [SSTP_MSG_CALL_CONNECTED](#Section_2.2.11) message.
 - If any of the previous conditions are false:
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the [TIMER_VAL_ABORT_STATE_TIMER_1 (section 3.1.2.1)](#Section_3.1.2.1) timer).
 - Change **CurrentState** to Call_Abort_Pending.
 - If all of the conditions are true (the message is valid), the client MUST:
@@ -1834,7 +1834,7 @@ If **CurrentState** is set to Client_Connect_Request_Sent:
 - Restart the Negotiation timer.
 - If the retry count is exceeded, the SSTP client MUST:
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 Else if **CurrentState** is set to Call_Abort_Timeout_Pending, Call_Abort_Pending, Call_Disconnect_Ack_Pending, or Call_Disconnect_Timeout_Pending:
@@ -1860,7 +1860,7 @@ Else if **CurrentState** is set to Call_Abort_Timeout_Pending, Call_Disconnect_T
 Else:
 
 - Change **CurrentState** to Call_Abort_In_Progress_2.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_2 timer (section 3.1.2.1).
 - Change **CurrentState** to Call_Abort_Timeout_Pending.
 <a id="Section_3.2.5.3.5"></a>
@@ -1873,7 +1873,7 @@ Else if **CurrentState** is set to Call_Disconnect_Ack_Pending:
 
 - Stop the TIMER_VAL_DISCONNECT_STATE_TIMER_1 timer (section [3.1.2.2](#Section_3.1.2.2)).
 - Change **CurrentState** to Call_Disconnect_In_Progress_2.
-- Send an [SSTP_MSG_CALL_DISCONNECT_ACK (section 2.2.15)](#Section_2) message.
+- Send an [SSTP_MSG_CALL_DISCONNECT_ACK (section 2.2.15)](#Section_2.2.15) message.
 - Start the TIMER_VAL_DISCONNECT_STATE_TIMER_2 timer (section 3.1.2.2).
 - Change **CurrentState** to Call_Disconnect_Timeout_Pending.
 Else:
@@ -1895,7 +1895,7 @@ Else if **CurrentState** is set to Call_Abort_Pending, Call_Abort_Timeout_Pendin
 Else:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.2.5.3.7"></a>
@@ -1904,14 +1904,14 @@ Else:
 If **CurrentState** is set to Client_Call_Connected:
 
 - Restart the Hello timer (section [3.1.2.3](#Section_3.1.2.3)).
-- Send an [SSTP_MSG_ECHO_RESPONSE (section 2.2.15)](#Section_2) message.
+- Send an [SSTP_MSG_ECHO_RESPONSE (section 2.2.15)](#Section_2.2.15) message.
 Else if **CurrentState** is set to Call_Abort_Timeout_Pending, Call_Abort_Pending, Call_Disconnect_Ack_Pending, or Call_Disconnect_Timeout_Pending:
 
 - Ignore the message.
 Else if **CurrentState** has any other value:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.2.5.3.8"></a>
@@ -1926,7 +1926,7 @@ Else if **CurrentState** is set to Call_Abort_Timeout_Pending, Call_Abort_Pendin
 Else if **CurrentState** is set to any other value:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.2.6"></a>
@@ -1938,7 +1938,7 @@ Else if **CurrentState** is set to any other value:
 Negotiation Timer Expired:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.2.7"></a>
@@ -1951,7 +1951,7 @@ For local events common to both client and server, see section [3.1.7](#Section_
 
 **Inner Authentication Completed Event:** This event will be sent by the higher layer when the authentication (that is, PPP authentication) has been completed successfully or bypassed (that is, **ClientBypassHLAuth** is set to TRUE). If the higher-layer authentication has failed, the higher layer sends the [Disconnect Tunnel Event (section 3.2.4.2)](#Section_3.2.4.2) to notify the client. When this event is sent the client MUST:
 
-- Send an [SSTP_MSG_CALL_CONNECTED (section 3.3.5.2.3)](#Section_3.3.5.2.3) message that contains the same nonce value that the server sends in the [Call Connect Acknowledge (section 2.2.10)](#Section_2.2.10) message. This message MUST contain the [Crypto Binding attribute](#Section_2.2.7). For information about how to construct the Crypto Binding attribute, see section [3.2.5.2](#Section_2.2.7).
+- Send an [SSTP_MSG_CALL_CONNECTED (section 3.3.5.2.3)](#Section_3.3.5.2.3) message that contains the same nonce value that the server sends in the [Call Connect Acknowledge (section 2.2.10)](#Section_2.2.10) message. This message MUST contain the [Crypto Binding attribute](#Section_2.2.7). For information about how to construct the Crypto Binding attribute, see section [3.2.5.2](#Section_3.2.5.2).
 - Update **CurrentState** to Client_Call_Connected.
 When the client receives a PPP control frame from the PPP layer, the client MUST:
 
@@ -2093,7 +2093,7 @@ If **CurrentState** is set to Server_Connect_Request_Pending:
 Else if **CurrentState** has any other value:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 If **CurrentState** is set to Server_Connect_Request_Pending, the following message processing takes place.
@@ -2132,7 +2132,7 @@ If **CurrentState** is set to Server_Call_Connected_Pending:
 Else if **CurrentState** has any other value:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1))
 - Change **CurrentState** to Call_Abort_Pending.
 If **CurrentState** is Server_Call_Connected_Pending, the following message processing takes place.
@@ -2142,7 +2142,7 @@ The [SSTP_MSG_CALL_CONNECTED](#Section_2.2.11) message MUST be received by an [*
 The server MUST verify the following:
 
 - A [Crypto Binding attribute](#Section_2.2.7) is present.
-- The [Crypto Binding attribute](#Section_2.2.7) contains the same nonce that it sent in the Call Connect Acknowledge message.
+- The [Crypto Binding attribute](#Section_3.2.5.2) contains the same nonce that it sent in the Call Connect Acknowledge message.
 - The Crypto Binding attribute contains the hash of the certificate that the server used for establishing the [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection, **ServerCertificateHash**.
 - The Crypto Binding attribute contains a hash protocol that is supported by the server and specified in the **ServerHashProtocolSupported** state variable described in section 3.3.1 (that is, it uses one of the hash protocols that it inserted into the Call Connect Acknowledge message).
 - The server MUST verify that the binding attribute contains a valid Compound MAC. To accomplish this, the server computes a new compound MAC (3.2.5.2) using the stored **ServerHLAKKey** variable from the connection table and then compares the same against the compound MAC sent by the client inside SSTP_MSG_CALL_CONNECTED.
@@ -2170,7 +2170,7 @@ Else if **CurrentState** is set to Call_Abort_Timeout_Pending or Call_Disconnect
 Else:
 
 - Change **CurrentState** to Call_Abort_In_Progress_2.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_2 timer (section 3.1.2.1).
 - Change **CurrentState** to Call_Abort_Timeout_Pending.
 The HTTPS listener MUST continue to function as it did before the cleanup process. The cleanup of the connection MUST NOT affect other existing HTTPS connections and MUST NOT affect the ability of the HTTPS listener to accept new connections.
@@ -2209,7 +2209,7 @@ Else if **CurrentState** is set to Call_Abort_Pending, Call_Abort_Timeout_Pendin
 Else:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 The HTTPS listener MUST continue to function as it did before the cleanup process. The cleanup of the connection MUST NOT affect other existing HTTPS connections and MUST NOT affect the ability of the HTTPS listener to accept new connections.
@@ -2220,14 +2220,14 @@ The HTTPS listener MUST continue to function as it did before the cleanup proces
 If **CurrentState** is set to Server_Call_Connected:
 
 - Restart the Hello timer (section [3.1.2.3](#Section_3.1.2.3)).
-- Send an [SSTP_MSG_ECHO_RESPONSE (section 2.2.15)](#Section_2) message.
+- Send an [SSTP_MSG_ECHO_RESPONSE (section 2.2.15)](#Section_2.2.15) message.
 Else if **CurrentState** is Call_Abort_Timeout_Pending, Call_Abort_Pending, Call_Disconnect_Ack_Pending, or Call_Disconnect_Timeout_Pending:
 
 - Ignore the message.
 Else if **CurrentState** is set to any other value:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.3.5.2.8"></a>
@@ -2242,7 +2242,7 @@ Else if **CurrentState** is set to Call_Abort_Timeout_Pending, Call_Abort_Pendin
 Else if **CurrentState** is set to any other value:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.3.6"></a>
@@ -2254,7 +2254,7 @@ Else if **CurrentState** is set to any other value:
 Negotiation Timer Expired:
 
 - Change **CurrentState** to Call_Abort_In_Progress_1.
-- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_3.1.1.1.2) message.
+- Send an [SSTP_MSG_CALL_ABORT (section 2.2.13)](#Section_2.2.13) message.
 - Start the TIMER_VAL_ABORT_STATE_TIMER_1 timer (section [3.1.2.1](#Section_3.1.2.1)).
 - Change **CurrentState** to Call_Abort_Pending.
 <a id="Section_3.3.7"></a>
@@ -2338,7 +2338,7 @@ The teardown of the HTTP connection layer is done by signaling the request/respo
 
 After the bidirectional HTTPS layer is up, the SSTP finite [**state machine**](#gt_state-machine) begins. The server initializes the FSM by waiting for the SSTP [Call Connect Request message](#Section_2.2.9) to arrive from the client. After the Call Connect Request message arrives, the server validates the [Encapsulated Protocol ID attribute](#Section_2.2.5) value for PPP. The [**SSTP server**](#gt_sstp-server) then responds to the client by using the [Call Connect Acknowledge message](#Section_2.2.10). The client sends the [Call Connected message](#Section_2.2.11) to the server to indicate that it is ready to send data traffic. When the server receives the Call Connected message, it allows bidirectional data transfer on the SSTP connection.
 
-After the control channel is established, the echo timers continue to send [Echo Request messages](#Section_2) in order to keep the channel alive. Echo responses are sent and received to ensure that the connection is not broken.
+After the control channel is established, the echo timers continue to send [Echo Request messages](#Section_7c572ceb571946d0a5ddf68a44a90292) in order to keep the channel alive. Echo responses are sent and received to ensure that the connection is not broken.
 
 ![SSTP call setup for a non-proxy scenario](media/image6.png)
 
@@ -2347,11 +2347,11 @@ Figure 6: SSTP call setup for a non-proxy scenario
 <a id="Section_4.4"></a>
 ## 4.4 SSTP Layer Teardown
 
-This protocol uses forceful teardown through the [Call Abort message](#Section_3.1.1.1.2) in addition to graceful shutdown through the [Call Disconnect message](#Section_2.2.14).
+This protocol uses forceful teardown through the [Call Abort message](#Section_3.1.1.1.2) in addition to graceful shutdown through the [Call Disconnect message](#Section_3.1.1.1.1).
 
 The Call Abort message is used in situations in which the SSTP control channel negotiation has encountered a problem such as a time-out, an invalid message, or other similar problems. The Call Abort-based shutdown uses short timers for quick cleanup.
 
-Graceful shutdown occurs when the Call Disconnect message is sent to the far end. The far end responds by sending a [Call Disconnect Acknowledge message](#Section_2) in order to signal the end of data transfer.
+Graceful shutdown occurs when the Call Disconnect message is sent to the far end. The far end responds by sending a [Call Disconnect Acknowledge message](#Section_7c572ceb571946d0a5ddf68a44a90292) in order to signal the end of data transfer.
 
 ![SSTP graceful shutdown](media/image7.png)
 
@@ -2393,7 +2393,7 @@ Figure 8: SSTP call setup for a proxy scenario
 <a id="Section_4.6"></a>
 ## 4.6 Handling the HTTPS Termination Proxy
 
-If an [**SSTP tunnel**](#gt_sstp-tunnel) is established through an [**HTTPS termination proxy**](#gt_https-termination-proxy), the [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection terminates at the proxy and a new HTTP bidirectional connection to the [**SSTP server**](#gt_sstp-server) is attempted. The query variable **tenantid** (section [3.2.4.1](#Section_4.3)) can be used to select the SSTP server behind the proxy. After the connection is established, the proxy forwards the data across the two connections.
+If an [**SSTP tunnel**](#gt_sstp-tunnel) is established through an [**HTTPS termination proxy**](#gt_https-termination-proxy), the [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection terminates at the proxy and a new HTTP bidirectional connection to the [**SSTP server**](#gt_sstp-server) is attempted. The query variable **tenantid** (section [3.2.4.1](#Section_3.2.4.1)) can be used to select the SSTP server behind the proxy. After the connection is established, the proxy forwards the data across the two connections.
 
 <a id="Section_4.7"></a>
 ## 4.7 Crypto Binding
@@ -2413,7 +2413,7 @@ The details for the packet are as follows.
 - Attribute ID: 0x01 (SSTP_ATTRIB_ENCAPSULATED_PROTOCOL_ID)
 - Length: 0x006
 - Value: 0x0001 (SSTP_ENCAPSULATED_PROTOCOL_PPP)
-The server responds to the client with SSTP_MSG_CALL_CONNECT_ACK. In this case, the server supports only the SHA256 hash algorithm for [crypto binding](#Section_2.2.7). The actual data bytes are as follows.
+The server responds to the client with SSTP_MSG_CALL_CONNECT_ACK. In this case, the server supports only the SHA256 hash algorithm for [crypto binding](#Section_3.2.5.2). The actual data bytes are as follows.
 
 10 01 00 30 00 02 00 01 00 04 00 28 00 00 00 02
 
@@ -2593,7 +2593,7 @@ The [**SSTP server**](#gt_sstp-server) begins forwarding the PPP data frames onl
 | Security parameter | Section |
 | --- | --- |
 | Authentication | [2.1](#Section_2.1) |
-| Hashing algorithms | [3.2.5.2](#Section_2.2.7) |
+| Hashing algorithms | [3.2.5.2](#Section_3.2.5.2) |
 
 <a id="Section_5.3"></a>
 ## 5.3 Attack Scenarios
@@ -2621,7 +2621,7 @@ Figure 10: Client connecting to an unauthorized SSTP server
 
 In this scenario, an attacker poses as a man in the middle (MITM). For example, an MITM could be using a rogue wireless access point in a wireless-enabled enterprise environment.
 
-The data flow in case of attack (without an SSTP [crypto binding](#Section_2.2.7) solution) looks like this:
+The data flow in case of attack (without an SSTP [crypto binding](#Section_3.2.5.2) solution) looks like this:
 
 - The MITM establishes an HTTPS connection with the [**SSTP server**](#gt_sstp-server).
 - By using some technique (such as a rogue access point (AP) that has a similar name to the enterprise network), the MITM attacker gets a real client to initiate an EAP authentication (which can be any EAP method) with an authorized SSTP server. The client cannot determine that the HTTPS channel has been established to the man-in-the-middle machine; the client attempts to authenticate to a known authorized server by using EAP authentication, as usual.

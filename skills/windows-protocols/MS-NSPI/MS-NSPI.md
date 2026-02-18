@@ -379,7 +379,7 @@ The NSPI client and NSPI server are expected to share at least one [**security p
 
 The NSPI client is expected to possess credentials recognized by the server. These credentials are obtained from the shared security provider. The mechanism for obtaining these credentials is specific to the protocol of the security provider used.
 
-The NSPI server is expected to have determined any local policies as specified in sections [2](#Section_1.3), [3](#Section_1.3), and [5](#Section_5). This allows the server to provide consistent behavior for all communications in the protocol.
+The NSPI server is expected to have determined any local policies as specified in sections [2](#Section_2), [3](#Section_3), and [5](#Section_5). This allows the server to provide consistent behavior for all communications in the protocol.
 
 The server is expected to be configured to support the required [**codepages**](#gt_210637d9-9634-4652-a935-ded3cd434f38) and [**language code identifiers (LCID)**](#gt_language-code-identifier-lcid), as specified in sections [2.2.4](#Section_2.2.4) and [2.2.5](#Section_2.2.5). This allows the server to provide the minimal required string conversions and sort orders.
 
@@ -484,7 +484,7 @@ In addition to the Property Types defined in [MS-OXCDATA], all NSPI servers and 
 | --- | --- |
 | PtypEmbeddedTable 0x0000000D | Single 32-bit value, referencing an [**address list**](#gt_address-list). |
 | PtypNull 0x00000001 | Clients MUST NOT specify this Property Type in any method's input parameters. The server MUST specify this Property Type in any method's output parameters to indicate that a property has a value that cannot be expressed in the NSPI Protocol. |
-| PtypUnspecified 0x00000000 | Clients specify this Property Type in a method's input parameter to indicate that the client will accept any Property Type the server chooses when returning propvalues. Servers MUST NOT specify this Property Type in any method's output parameters except the method [NspiGetIDsFromNames](#Section_3.1.4.17). |
+| PtypUnspecified 0x00000000 | Clients specify this Property Type in a method's input parameter to indicate that the client will accept any Property Type the server chooses when returning propvalues. Servers MUST NOT specify this Property Type in any method's output parameters except the method [NspiGetIDsFromNames](#Section_2.2.15). |
 
 All NSPI clients and servers MUST NOT use any other Property Types.
 
@@ -727,7 +727,7 @@ This value is used to specify optional behavior to an [**NSPI**](#gt_name-servic
 <a id="Section_2.2.15"></a>
 ### 2.2.15 NspiGetIDsFromNames Flags
 
-This value is used to specify optional behavior to an [**NSPI**](#gt_name-service-provider-interface-nspi) server. It appears as a flag in the [NspiGetIDsFromNames](#Section_3.1.4.17) method.
+This value is used to specify optional behavior to an [**NSPI**](#gt_name-service-provider-interface-nspi) server. It appears as a flag in the [NspiGetIDsFromNames](#Section_2.2.15) method.
 
 | Name and value | Description |
 | --- | --- |
@@ -736,7 +736,7 @@ This value is used to specify optional behavior to an [**NSPI**](#gt_name-servic
 <a id="Section_2.2.16"></a>
 ### 2.2.16 NspiGetTemplateInfo Flags
 
-These values are used to specify optional behavior to an [**NSPI**](#gt_name-service-provider-interface-nspi) server. They appear as bit flags in the [NspiGetTemplateInfo](#Section_3.1.4.20) method. Possible values are as follows.
+These values are used to specify optional behavior to an [**NSPI**](#gt_name-service-provider-interface-nspi) server. They appear as bit flags in the [NspiGetTemplateInfo](#Section_2.2.16) method. Possible values are as follows.
 
 | Name and value | Description |
 | --- | --- |
@@ -776,22 +776,22 @@ The following table summarizes the types that are defined in this specification.
 | [StringArray_r](#Section_2.3.1.6) | Property value structure |
 | [BinaryArray_r](#Section_2.3.1.7) | Property value structure |
 | [FlatUIDArray_r](#Section_2.3.1.8) | Property value structure |
-| [WStringArray_r](#Section_2.3.1.6) | Property value structure |
+| [WStringArray_r](#Section_2.3.1.9) | Property value structure |
 | [DateTimeArray_r](#Section_2.3.1.10) | Property value structure |
 | [PROP_VAL_UNION](#Section_2.3.1.11) | Property value structure |
 | [PropertyValue_r](#Section_2.3.1.12) | Property value structure |
 | [PropertyRow_r](#Section_2.3.2) | Table row structure |
 | [PropertyRowSet_r](#Section_2.3.3) | Table rows structure |
-| [AndRestriction_r](#Section_2.3.4.11) | Table restriction structure |
+| [AndRestriction_r](#Section_2.3.4.1) | Table restriction structure |
 | OrRestriction_r | Table restriction structure |
-| [NotRestriction_r](#Section_2.3.4.11) | Table restriction structure |
+| [NotRestriction_r](#Section_2.3.4.2) | Table restriction structure |
 | [ContentRestriction_r](#Section_2.3.5) | Table restriction structure |
-| [BitMaskRestriction_r](#Section_2.3.4.11) | Table restriction structure |
-| [PropertyRestriction_r](#Section_2.3.4.11) | Table restriction structure |
-| [ComparePropsRestriction_r](#Section_2.3.4.11) | Table restriction structure |
-| [SubRestriction_r](#Section_2.3.4.11) | Table restriction structure |
-| [SizeRestriction_r](#Section_2.3.4.11) | Table restriction structure |
-| [ExistRestriction_r](#Section_2.3.4.11) | Table restriction structure |
+| [BitMaskRestriction_r](#Section_2.3.4.4) | Table restriction structure |
+| [PropertyRestriction_r](#Section_2.3.4.5) | Table restriction structure |
+| [ComparePropsRestriction_r](#Section_2.3.4.6) | Table restriction structure |
+| [SubRestriction_r](#Section_2.3.4.7) | Table restriction structure |
+| [SizeRestriction_r](#Section_2.3.4.8) | Table restriction structure |
+| [ExistRestriction_r](#Section_2.3.4.9) | Table restriction structure |
 | [RestrictionUnion_r](#Section_2.3.4.10) | Table restriction structure |
 | [Restriction_r](#Section_2.3.4.11) | Table restriction structure |
 | [PropertyName_r](#Section_2.3.5.1) | Address book property specifier |
@@ -1753,7 +1753,7 @@ The following table specifies [**NSPI**](#gt_name-service-provider-interface-nsp
 
 | Method | Description |
 | --- | --- |
-| [NspiGetTemplateInfo](#Section_3.1.4.20) | String values can be returned in the output parameter *ppData*. |
+| [NspiGetTemplateInfo](#Section_2.2.16) | String values can be returned in the output parameter *ppData*. |
 | [NspiGetSpecialTable](#Section_2.2.13) | String values can be returned in the output parameter *ppRows*. |
 | [NspiGetProps](#Section_3.1.4.7) | String values can be returned in the output parameter *ppRows*. |
 | [NspiQueryRows](#Section_3.1.4.8) | String values can be returned in the output parameter *ppRows*. |
@@ -1793,7 +1793,7 @@ The following table specifies [**NSPI**](#gt_name-service-provider-interface-nsp
 <a id="Section_3.1.1.2.5.1"></a>
 ###### 3.1.1.2.5.1 Unicode String Comparison
 
-[**NSPI**](#gt_name-service-provider-interface-nspi) servers MUST compare [**Unicode**](#gt_unicode) representations of strings according to [MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md). All methods in which a server is required to perform such Unicode string comparison include [**LCID**](#gt_language-code-identifier-lcid) as part of the input parameters. The server SHOULD compare the strings using the closest supported LCID.<8> The NSPI Protocol does not constrain how a server chooses this closest supported LCID. However, because the protocol intends for clients to be able to persist sorted string values across multiple NSPI connections to an NSPI server, a server SHOULD NOT modify its algorithm for choosing the closest LCID once an algorithm has been implemented because doing so would lead to inconsistent behavior of NSPI methods across multiple NSPI sessions. The server MUST minimally support the **LCID NSPI_DEFAULT_LOCALE** flag ([2.2.4](../MS-UCODEREF/MS-UCODEREF.md)). When making comparisons of Unicode string values, if the server uses **LCID NSPI_DEFAULT_LOCALE**, the server MUST also use the flag **NSPI_DEFAULT_LOCALE_COMPARE_FLAGS** for the comparison. Otherwise, the server MUST use the flag **NSPI_NON_DEFAULT_LOCALE_COMPARE_FLAGS**.
+[**NSPI**](#gt_name-service-provider-interface-nspi) servers MUST compare [**Unicode**](#gt_unicode) representations of strings according to [MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md). All methods in which a server is required to perform such Unicode string comparison include [**LCID**](#gt_language-code-identifier-lcid) as part of the input parameters. The server SHOULD compare the strings using the closest supported LCID.<8> The NSPI Protocol does not constrain how a server chooses this closest supported LCID. However, because the protocol intends for clients to be able to persist sorted string values across multiple NSPI connections to an NSPI server, a server SHOULD NOT modify its algorithm for choosing the closest LCID once an algorithm has been implemented because doing so would lead to inconsistent behavior of NSPI methods across multiple NSPI sessions. The server MUST minimally support the **LCID NSPI_DEFAULT_LOCALE** flag ([2.2.4](#Section_2.2.4)). When making comparisons of Unicode string values, if the server uses **LCID NSPI_DEFAULT_LOCALE**, the server MUST also use the flag **NSPI_DEFAULT_LOCALE_COMPARE_FLAGS** for the comparison. Otherwise, the server MUST use the flag **NSPI_NON_DEFAULT_LOCALE_COMPARE_FLAGS**.
 
 <a id="Section_3.1.1.2.5.2"></a>
 ###### 3.1.1.2.5.2 8-Bit String Comparison
@@ -1808,7 +1808,7 @@ When making comparisons of 8-bit character string values, the [**NSPI**](#gt_nam
 <a id="Section_3.1.1.2.6"></a>
 ##### 3.1.1.2.6 String Sorting
 
-Every [**NSPI**](#gt_name-service-provider-interface-nspi) server MUST support sorting on [**Unicode**](#gt_unicode) string representations for the property **PidTagDisplayName**. If the server supports the **SortTypePhoneticDisplayName** property, it MUST also support sorting on Unicode string representation for the property **PidTagAddressBookPhoneticDisplayName**. The server MUST minimally support the **LCID NSPI_DEFAULT_LOCALE** flag. This sorting adheres to [MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md) and section [3.1.1.2.5](#Section_3.1.1.2.5.2) in this specification.
+Every [**NSPI**](#gt_name-service-provider-interface-nspi) server MUST support sorting on [**Unicode**](#gt_unicode) string representations for the property **PidTagDisplayName**. If the server supports the **SortTypePhoneticDisplayName** property, it MUST also support sorting on Unicode string representation for the property **PidTagAddressBookPhoneticDisplayName**. The server MUST minimally support the **LCID NSPI_DEFAULT_LOCALE** flag. This sorting adheres to [MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md) and section [3.1.1.2.5](#Section_3.1.1.2.5) in this specification.
 
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Tables
@@ -1924,7 +1924,7 @@ This protocol does not introduce any timers. For any transport-level timers, see
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Each [**NSPI**](#gt_name-service-provider-interface-nspi) server MUST have at least one unique [**GUID**](#gt_globally-unique-identifier-guid), used to identify an NSPI session (section [3.1.4.1](#Section_2.2.11)). The server MUST acquire this GUID before it is prepared to respond to NSPI Protocol methods. The protocol does not constrain how a server acquires this GUID. The server MUST maintain this GUID for the duration of an NSPI session. Although the protocol places no further boundary or requirements on the time period for which the server maintains this GUID, it is recommended that implementations maximize this time period to improve the usability of the NSPI server for clients.
+Each [**NSPI**](#gt_name-service-provider-interface-nspi) server MUST have at least one unique [**GUID**](#gt_globally-unique-identifier-guid), used to identify an NSPI session (section [3.1.4.1](#Section_3.1.4.1)). The server MUST acquire this GUID before it is prepared to respond to NSPI Protocol methods. The protocol does not constrain how a server acquires this GUID. The server MUST maintain this GUID for the duration of an NSPI session. Although the protocol places no further boundary or requirements on the time period for which the server maintains this GUID, it is recommended that implementations maximize this time period to improve the usability of the NSPI server for clients.
 
 Each NSPI server maintains a set of [**Address Book objects**](#gt_address-book-object) and containers, according to [MS-OXOABK](../MS-OXOABK/MS-OXOABK.md). The NSPI Protocol does not constrain how an NSPI server obtains its initial data set, nor does it constrain the contents of this initial data set. How an NSPI server obtains this data is an implementation-specific detail.
 
@@ -1956,12 +1956,12 @@ Methods in RPC Opnum Order
 | [NspiCompareMIds](#Section_3.1.4.12) | Compare the position of two rows in a table. Opnum: 10 |
 | [NspiModProps](#Section_3.1.4.14) | Modify a property of a row in the address book. Opnum: 11 |
 | [NspiGetSpecialTable](#Section_2.2.13) | Retrieve the [**address book hierarchy table**](#gt_address-book-hierarchy-table) of the NSPI server, or retrieve the [**address creation table**](#gt_address-creation-table) from the NSPI server. Opnum: 12 |
-| [NspiGetTemplateInfo](#Section_3.1.4.20) | Retrieve addressing or [**display templates**](#gt_display-template) from the NSPI server. Opnum: 13 |
+| [NspiGetTemplateInfo](#Section_2.2.16) | Retrieve addressing or [**display templates**](#gt_display-template) from the NSPI server. Opnum: 13 |
 | [NspiModLinkAtt](#Section_2.2.17) | Modify a property of a row in the address book. Applies only to rows that support the PtypEmbeddedTable Property Type. Opnum: 14 |
 | Opnum15NotUsedOnWire | Opnum: 15 |
 | [NspiQueryColumns](#Section_2.2.14) | Retrieve a list of all the [**proptags**](#gt_proptag) the NSPI server recognizes. Opnum: 16 |
 | [NspiGetNamesFromIDs](#Section_3.1.4.16) | Retrieve the property names associated with [**Property IDs**](#gt_property-id) from the NSPI server. Opnum: 17 |
-| [NspiGetIDsFromNames](#Section_3.1.4.17) | Retrieve the Property IDs associated with property names from the NSPI server. Opnum: 18 |
+| [NspiGetIDsFromNames](#Section_2.2.15) | Retrieve the Property IDs associated with property names from the NSPI server. Opnum: 18 |
 | [NspiResolveNames](#Section_3.1.4.18) | Perform ANR on a set of provided names. The names are specified in the [**codepage**](#gt_210637d9-9634-4652-a935-ded3cd434f38) of the client. Opnum: 19 |
 | [NspiResolveNamesW](#Section_3.1.4.19) | Perform ANR on a set of provided names. The names are specified in the [**Unicode**](#gt_unicode) character set. Opnum: 20 |
 
@@ -2096,7 +2096,7 @@ Upon receiving this message, the server MUST process the data from the message s
 
 - If the input parameter *dwFlags* does not contain the value **NspiUnicodeStrings**, and the input parameter *dwFlags* does not contain the value **NspiAddressCreationTemplates**, and the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return value other than Success, the server MUST return a NULL for the output parameter *ppRows*.
-- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the input parameter *dwFlags* contains both the value **NspiAddressCreationTemplates** and the value **NspiUnicodeStrings**, the server MUST ignore the value **NspiUnicodeStrings** and proceed as if the parameter *dwFlags* contained only the value **NspiAddressCreationTemplates**.
 - If the input parameter *dwFlags* does not contain the value **NspiAddressCreationTemplates**, the client is requesting the rows of the server's address book hierarchy table (section 3.1.1.3.3.1).
 - If the client is requesting the rows of the server's address book hierarchy table and the server is not maintaining an address book hierarchy table, the server MUST return the error code OutOfResources.
@@ -2146,7 +2146,7 @@ Upon receiving this message, the server MUST process the data from the message s
 
 - If the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values specified in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return value other than Success, the server MUST NOT modify the output parameter *pStat*.
-- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - The server locates the initial position row in the table specified by the **ContainerID** field of the input parameter *pStat* as follows:
 - If the row specified by the **CurrentRec** field of the input parameter *pStat* is not MID_CURRENT, the server locates that row as the initial position row. If the row cannot be found, the NSPI server MUST return the error NotFound.
@@ -2194,7 +2194,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success, the server MUST return a NULL for the output parameter *ppColumns*.
-- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the input parameter *dwFlags* contains the bit flag **NspiUnicodeProptypes**, then the server MUST report the Property Type of all string valued properties as PtypString.
 - If the input parameter *dwFlags* does not contain the bit flag **NspiUnicodeProptypes**, the server MUST report the Property Type of all string valued properties as PtypString8.
 - Subject to the prior constraints, the server MUST construct a list of all the properties it is aware of and return that list as an SPropTagArray in the output parameter *ppColumns*. The protocol does not constrain the order of this list.
@@ -2239,7 +2239,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success, the server MUST return a NULL for the output parameter *ppPropTags*.
-- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the input parameter *CodePage* does not specify a codepage the [**NSPI**](#gt_name-service-provider-interface-nspi) server supports, the server MUST return the return value InvalidCodepage.
 - If the input parameter *dwMId* does not specify an object in the Address Book, the server MUST return the value GeneralFailure.
 - If the input parameter *dwFlags* contains the bit flag **fSkipObjects**, the server MUST NOT return any [**proptags**](#gt_proptag) with the Property Type PtypEmbeddedTable in the output parameter *ppPropTags*.
@@ -2288,7 +2288,7 @@ Upon receiving this message, the server MUST process the data from the message s
 
 - If the **CodePage** field of the input parameter *pStat* is set to the value CP_WINUNICODE and the type of the proptags in the input parameter pPropTags is PtypString8, then the server MUST return one of the return values specified in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return values other than ErrorsReturned or Success, the server MUST return a NULL for the output parameter *ppRows*.
-- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations according to section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - The server constructs a list of proptags for which it will return property values as follows:
 - If the input parameter *pPropTags* is not NULL, the client is requesting the server return only those properties and their values in the output parameter *ppRows*. The server MUST use this list.
@@ -2363,7 +2363,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If the **CodePage** field of the input parameter pStat contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the input parameter lpETable is NULL and the input parameter Count is 0, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return values other than Success, the server MUST return a NULL for the output parameter *ppRows* and MUST NOT modify the output parameter *pStat*.
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the input parameter *lpETable* is NULL and the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - The server constructs a list of proptags for which it will return property values as follows:
 - If the input parameter *pPropTags* is not NULL, the client is requesting the server return only those properties and their values in the output parameter *ppRows*. The server MUST use this list.
@@ -2454,7 +2454,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If the input parameter lpETable is not NULL and does not contain an Explicit Table both containing a restriction of the table specified by the input parameter pStat and sorted as specified by the SortType field of the input parameter pStat, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the input parameter Reserved contains any value other than 0, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return values other than Success, the server MUST return a NULL for the output parameter *ppRows* and MUST NOT modify the value of the parameter *pStat*.
-- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - If the input parameter *lpETable* is NULL, the server MUST use the table specified by the input parameter *pStat* when constructing the return parameter *ppRows*.
 - If the input parameter *lpETable* contains an Explicit Table, the server MUST use that table when constructing the return parameter *ppRows*.
@@ -2549,7 +2549,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If the input parameter *Filter* contains any value other than NULL and the **SortOrder** field of the input parameter *pStat* contains any value other than SortTypeDisplayName or SortTypePhoneticDisplayName, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the input parameter Reserved1 contains any value other than 0, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return values other than Success, the server MUST return a NULL for the output parameters *ppOutMIds* and *ppRows* and MUST NOT modify the value of the parameter *pStat*.
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the reserved input parameter **pReserved** contains any value other than NULL, the server MUST return the value TooComplex.
 - If the server does not support the SortTypePhoneticDisplayName and the **SortType** field of the input parameter *pStat* has the value SortTypePhoneticDisplayName, the server MUST return the value GeneralFailure.
 - If the input **SortType** field of the input parameter *pStat* is SortTypeDisplayName or SortTypePhoneticDisplayName and the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
@@ -2621,7 +2621,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the **SortType** field of the input parameter *pStat* contains any value other than SortTypeDisplayName or SortTypePhoneticDisplayName, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return values other than Success, the server MUST return a NULL for the output parameter *ppOutMIds* and MUST NOT modify the value of the parameter *pStat*
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server does not support the SortTypePhoneticDisplayName and the **SortType** field of the input parameter *pStat* has the value SortTypePhoneticDisplayName, the server MUST return the value GeneralFailure.
 - The server constructs an Explicit Table as follows:
 - The server locates all the objects specified in the Explicit Table specified by the input value *pInMIds*. The server MUST ignore any MIds that do not specify an object.
@@ -2678,7 +2678,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
-- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - If the server returns any return value other than Success, the protocol does not constrain the value in the return parameter *plResult*.
 - If the server is unable to locate the objects specified by the input parameters *MId1* or *MId2* in the table specified by the **ContainerID** field of the input parameter *pStat*, the server MUST return the return value GeneralFailure.
@@ -2722,7 +2722,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success, the server MUST return the value NULL in the return parameter *ppOutMIds*.
-- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate an appropriate mapping between a DN and a MId, it MUST map the DN to a MId with the value 0.
 - The server constructs a list of MIds to return to the client, encoding the mappings. The list is in a one-to-one order preserving correspondence with the list of DNs in the input parameter *pNames*. The server MUST return the list in the output parameter *ppOutMIds*.
 - If no other return values have been specified by these constraints, the server MUST return the return value Success.
@@ -2767,7 +2767,7 @@ Upon receiving this message, the server MUST process the data from the message s
 
 - If the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return value other than Success, the server MUST NOT modify any properties of any objects in the address book.
-- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the reserved input parameter Reserved contains any value other than 0, the server MUST return the value CallFailed.
 - If the input parameter *pPropTags* is NULL, the server MUST return the value InvalidParameter.
 - If the server is unable to locate the object specified by the **CurrentRec** field of the input parameter *pStat*, the server MUST return the value InvalidParameter.
@@ -2817,7 +2817,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success, the server MUST NOT modify any properties of any objects in the address book.
-- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the input parameter *ulPropTag* does not specify a proptag the server recognizes, the server MUST return NotFound.
 - If the server is unable to locate the object specified by the input parameter *dwMId*, the server MUST return the value InvalidParameter.
 - If the server is able to locate the object, but will not allow modifications to the object due to its [**display type**](#gt_display-type), the server MUST NOT modify any properties of any objects in the address book, and the server MUST return the value Success.
@@ -2869,7 +2869,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success, the server MUST return a NULL for the output parameters *ppReturnedPropTags* and *ppNames*.
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the input parameter *pPropTags* has the value NULL and the input parameter *lpGuid* has the value PS_MAPI, as defined in [MS-OXCDATA](../MS-OXCDATA/MS-OXCDATA.md), the server MUST return the value NotSupported.
 - The server constructs a list of property sets as follows:
 - If the input parameter *lpGuid* is not NULL, the list of property sets contains only the property set specified by the value of *lpGuid*.
@@ -2930,7 +2930,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success or ErrorsReturned, the server MUST return a NULL for the output parameters *ppPropTags*.
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - The server constructs a list of proptags. This list MUST be in a one-to-one order preserving correspondence with the list of names specified in the input parameter *pNames*. The values in this list are constructed as follows:
 - If the *lpGuid* field of the PropertyName_r structure that the *pNames* input parameter points to is NULL, the server MUST insert the proptag value 0x0000000A into the list.
 - If the server is unable to locate a proptag corresponding to a property name, the server MUST insert the proptag value 0x0000000A into the list.
@@ -2989,7 +2989,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the input parameter Reserved1 contains any value other than 0, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return value other than Success, the server MUST return the value NULL in the return parameters *ppMIds* and *ppRows*.
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - The server constructs a list of the MIds defined in section [2.2.9](#Section_2.2.9) to return to the client. These MIds are those that result from applying the ANR process (see section 3.1.1.6) to the strings in the input parameter *paStr*. This list is in a one-to-one order preserving correspondence with the strings in the input parameter *paStr*. The server MUST return this list of MIds in the output parameter *ppMIds*.
 - Subject to the prior constraints, the server MUST construct an PropertyRowSet_r to return to the client. This PropertyRowSet_r MUST be exactly the same PropertyRowSet_r that would be returned via the method [NspiQueryRows](#Section_3.1.4.8) with the following parameters:
@@ -3056,7 +3056,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If the **CodePage** field of the input parameter *pStat* contains the value CP_WINUNICODE, the server MUST return one of the return values documented in section [2.2.2](#Section_2.2.2). No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the input parameter Reserved1 contains any value other than 0, the server MUST return one of the return values documented in section 2.2.2. No further constraints are applied to server processing of this method; in this case server behavior is undefined. Note especially that there is no constraint on the data the server returns in any output parameter other than the return value, nor is there any constraint on how or if the server changes its state.
 - If the server returns any return value other than Success, the server MUST return the value NULL in the return parameters *ppMIds* and *ppRows*.
-- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in [Security (section 5)](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the server is unable to locate the address book container specified by the **ContainerID** field in the input parameter *pStat*, the server MUST return the return value InvalidBookmark.
 - The server constructs a list of the MIds defined in section [2.2.9](#Section_2.2.9) to return to the client. These MIds are those that result from the ANR process (see section 3.1.1.6) to the strings in the input parameter *paStr*. This list is in a one-to-one order preserving correspondence with the strings in the input parameter *paStr*. The server MUST return this list of MIds in the output parameter *ppMIds*.
 - Subject to the prior constraints, the server MUST construct an PropertyRowSet_r to return to the client. This PropertyRowSet_r MUST be exactly the same PropertyRowSet_r that would be returned via the method [NspiQueryRows](#Section_3.1.4.8) with the following parameters:
@@ -3121,7 +3121,7 @@ Server Processing Rules
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
 - If the server returns any return value other than Success, the server MUST return the value NULL in the return parameters *ppData*.
-- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5) for more information.
+- The server MAY make additional validations as described in section [5](#Section_5). If the server chooses to limit the visibility of data based on these validations, the server MUST proceed as if that data did not exist in the address book. See the product behavior note cited in section [5.1](#Section_5.1) for more information.
 - If the codepage specified in the *dwCodePage* input parameter has the value CP_WINUNICODE, the server MUST return the value InvalidCodePage.
 - If the server does not recognize the codepage specified in the *dwCodePage* input parameter as a supported codepage, the server MUST return the value InvalidCodePage.
 - The server locates the template for which it will return information as follows:
@@ -3167,7 +3167,7 @@ None.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
-In order to obtain any context handle to the server, the [NspiBind](#Section_2.2.11) method MUST be called initially. With the *contextHandle* parameter returned from this method, it is possible to call any associated methods on the handle. See section [4](#Section_1.3) for an example.
+In order to obtain any context handle to the server, the [NspiBind](#Section_2.2.11) method MUST be called initially. With the *contextHandle* parameter returned from this method, it is possible to call any associated methods on the handle. See section [4](#Section_4) for an example.
 
 This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runtime via the strict_context_handle attribute that it is to reject use of context handles created by a method of a different RPC interface than this one, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.
 

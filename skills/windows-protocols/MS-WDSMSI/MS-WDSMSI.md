@@ -166,7 +166,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-WDSC] Microsoft Corporation, "[Windows Deployment Services Control Protocol](../MS-WDSC/MS-WDSC.md)".
 
-[MS-WDSMT] Microsoft Corporation, "[Windows Deployment Services Multicast Transport Protocol](#Section_2.1)".
+[MS-WDSMT] Microsoft Corporation, "[Windows Deployment Services Multicast Transport Protocol](../MS-WDSMT/MS-WDSMT.md)".
 
 [RFC2104] Krawczyk, H., Bellare, M., and Canetti, R., "HMAC: Keyed-Hashing for Message Authentication", RFC 2104, February 1997, [https://www.rfc-editor.org/info/rfc2104](https://go.microsoft.com/fwlink/?LinkId=90314)
 
@@ -237,7 +237,7 @@ This protocol is applicable when a client is required to download [**content**](
 This document covers versioning issues in the following areas.
 
 - Supported Transports: This protocol can be implemented on top of the WDS Control Protocol and the User Datagram Protocol (UDP).
-- Security and Authentication Methods: The WDS Multicast Session Initiation Protocol over the WDS Control Protocol supports authentication. The security requirements are specified in section [2.2](#Section_1.3).
+- Security and Authentication Methods: The WDS Multicast Session Initiation Protocol over the WDS Control Protocol supports authentication. The security requirements are specified in section [2.2](#Section_2.2).
 - Localization: The protocol does not support localization, and as such acts as a pass-through for all strings.
 - Capability Negotiation: The protocol does explicit capability negotiations for certain Endpoint [**GUID**](#gt_globally-unique-identifier-guid) and OpCodes as specified in the following section.
 | Capability | Section |
@@ -333,11 +333,11 @@ For a multicast session using an IPv6 address, this variable MUST be set to 16 b
 
 The reply packet MAY include the following variables.
 
-**SymKey** (WDSCPL_VAR_BLOB as specified in [MS-WDSC] section 2.2.1.3.2.1): Specifies the shared cryptographic key to use to compute and/or validate the hash of the packets using the Hash Message Authentication Code (HMAC) algorithm ([[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314)) specified by the **HMACAlgId** variable for WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1).
+**SymKey** (WDSCPL_VAR_BLOB as specified in [MS-WDSC] section 2.2.1.3.2.1): Specifies the shared cryptographic key to use to compute and/or validate the hash of the packets using the Hash Message Authentication Code (HMAC) algorithm ([[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314)) specified by the **HMACAlgId** variable for WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md).
 
 When this variable is specified, **HashAlgId** and **HMACAlgId** variables MUST be specified as well.
 
-Section [2.2.1.1](#Section_5) specifies the rules to determine the [**client security mode**](#gt_client-security-mode) and section [2.2.1.2](#Section_5) specifies the rules to determine the server security mode.
+Section [2.2.1.1](#Section_2.2.1.1) specifies the rules to determine the [**client security mode**](#gt_client-security-mode) and section [2.2.1.2](#Section_2.2.1.2) specifies the rules to determine the server security mode.
 
 **SignKey** (WDSCPL_VAR_BLOB as specified in [MS-WDSC] section 2.2.1.3.2.1): Specifies the public [**RSA key**](#gt_rsa-key) to use to validate the signature of packets sent by server.
 
@@ -369,7 +369,7 @@ When this variable is specified in the reply packet, it controls the mechanism u
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Determine Client Security Mode
 
-The following flowchart specifies the logic to be followed by the client to determine the [**client security mode**](#gt_client-security-mode) for the WDS Multicast Transport Protocol, as specified in [MS-WDSMT](#Section_2.1).
+The following flowchart specifies the logic to be followed by the client to determine the [**client security mode**](#gt_client-security-mode) for the WDS Multicast Transport Protocol, as specified in [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md).
 
 ![Client security mode flowchart](media/image3.png)
 
@@ -378,7 +378,7 @@ Figure 3: Client security mode flowchart
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Determine Server Security Mode
 
-The following flowchart specifies the logic to be followed by the client to determine the [**server security mode**](#gt_server-security-mode) for WDS Multicast Transport Protocol, as specified in [MS-WDSMT](#Section_2.1).
+The following flowchart specifies the logic to be followed by the client to determine the [**server security mode**](#gt_server-security-mode) for WDS Multicast Transport Protocol, as specified in [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md).
 
 ![Server security mode flowchart](media/image4.png)
 
@@ -702,7 +702,7 @@ None.
 
 | Security Parameter | Section |
 | --- | --- |
-| Endpoint GUID, OpCodes, and Security | Section [2.2](#Section_1.3) |
+| Endpoint GUID, OpCodes, and Security | Section [2.2](#Section_2.2) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

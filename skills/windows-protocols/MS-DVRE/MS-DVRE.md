@@ -202,11 +202,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** There are 32 versions up to RFC7519.
 
-[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](#Section_2.2.6)".
+[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
-[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](#Section_2.2.6)".
+[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](../MS-ADA2/MS-ADA2.md)".
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_2.2.6)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
 [MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
@@ -403,7 +403,7 @@ The protocol accesses the following Directory Service schema classes and attribu
 
 For the syntactic specifications of the following <Class> or <Class><Attribute> pairs, refer to:
 
-Active Directory Domain Services (AD DS) ([MS-ADA1](#Section_2.2.6), [MS-ADA2](#Section_2.2.6), [MS-ADA3](#Section_2.2.6), and [MS-ADSC](../MS-ADSC/MS-ADSC.md)).
+Active Directory Domain Services (AD DS) ([MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), [MS-ADA3](../MS-ADA3/MS-ADA3.md), and [MS-ADSC](../MS-ADSC/MS-ADSC.md)).
 
 | Class | Attribute |
 | --- | --- |
@@ -636,7 +636,7 @@ The WSDL definition is:
 
 The **IWindowsDeviceEnrollmentService_RequestSecurityToken_WindowsDeviceEnrollmentServiceErrorFault_FaultMessage** message contains the SOAP fault associated with an error in the request from the client to the server.
 
-**WindowsDeviceEnrollmentServiceError:** Defined in section [3.1.4.1.2.1](#Section_3.1.4.1.2.11). The object MUST be included in the <s:Detail> element of a SOAP fault, and clients MUST ignore the entire WindowsDeviceEnrollmentServiceError node in the SOAP fault response.
+**WindowsDeviceEnrollmentServiceError:** Defined in section [3.1.4.1.2.1](#Section_3.1.4.1.2.1). The object MUST be included in the <s:Detail> element of a SOAP fault, and clients MUST ignore the entire WindowsDeviceEnrollmentServiceError node in the SOAP fault response.
 
 <a id="Section_3.1.4.1.2"></a>
 ##### 3.1.4.1.2 Elements
@@ -890,7 +890,7 @@ If the value of the **ms-DS-Registration-Quota** attribute is not zero and the t
 | 1.2.840.113556.1.5.284.2 | The server MUST generate a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid) and include it as the value. |
 | 1.2.840.113556.1.5.284.3 | The objectGuid of the user object ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.269) on the directory server that corresponds to the authenticating user. |
 | 1.2.840.113556.1.5.284.4 | The objectGuid of the domain object ([MS-ADSC] section 2.43) on the directory server. |
-| 1.2.840.113556.1.5.284.1 | The invocationId ([MS-ADA1](#Section_2.2.6) section 2.314) of the nTDSDSA object for the directory server. |
+| 1.2.840.113556.1.5.284.1 | The invocationId ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.314) of the nTDSDSA object for the directory server. |
 
 - The server MUST sign the request by using the issuer certificate stored in the **ms-DS-Issuer-Certificates** attribute of the **ms-DS-Device-Registration-Service** object with the most recent timestamp (see section [2.3.1](#Section_2.3.1)). The server MUST use a SHA256WithRSAEncryption signature algorithm and SHA256 hash algorithm.
 - The server MUST send a request to the directory server to create a device record as an instance of the **ms-DS-Device** class as a child of the container specified in the **ms-DS-Device-Location** attribute of the **ms-DS-Device-Registration-Service** object.

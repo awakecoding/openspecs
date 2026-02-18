@@ -236,7 +236,7 @@ This document uses the following terms:
 **directory**: The database that stores information about objects such as users, groups, computers, printers, and the directory service that makes this information available to users and applications.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides [**authentication**](#gt_authentication) of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides [**authentication**](#gt_authentication) of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_domain-controller-dc"></a>
 **domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its [**forest**](#gt_forest). If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
@@ -382,7 +382,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](../MS-GPOL/MS-GPOL.md)".
 
@@ -401,7 +401,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 NTLM is a [**challenge**](#gt_challenge)-response style authentication protocol. This means that to authenticate a user, the server sends a challenge to the client. The client then sends back a response that is a function of the challenge, the user's password, and possibly other information. Computing the correct response requires knowledge of the user's password. The server (or another party trusted by the server) can validate the response by consulting an account database to get the user's password and computing the proper response for that challenge.
 
-NTLM has messages and a state machine, like other protocols, but it does not have a network protocol stack layer. The NTLM protocols are embedded protocols. Rather, NTLM is implemented as a subroutine package that creates, reads and manipulates NTLM packets - but communicates those packets as byte arrays between the NTLM code and the caller. The caller is typically the code of some other protocol - one that has a defined layer in the network stack. Unlike stand-alone application protocols such as [MS-SMB](../MS-SMB/MS-SMB.md) or HTTP, [**NTLM messages**](#gt_ntlm-message) are embedded in the packets of an application protocol that requires authentication of a user. The application protocol semantics determine how and when the NTLM messages are encoded, framed, and transported from the client to the server and vice versa. See section [4](../MS-SMB/MS-SMB.md) for an example of how NTLM messages are embedded in the SMB Version 1.0 Protocol as specified in [MS-SMB].
+NTLM has messages and a state machine, like other protocols, but it does not have a network protocol stack layer. The NTLM protocols are embedded protocols. Rather, NTLM is implemented as a subroutine package that creates, reads and manipulates NTLM packets - but communicates those packets as byte arrays between the NTLM code and the caller. The caller is typically the code of some other protocol - one that has a defined layer in the network stack. Unlike stand-alone application protocols such as [MS-SMB](../MS-SMB/MS-SMB.md) or HTTP, [**NTLM messages**](#gt_ntlm-message) are embedded in the packets of an application protocol that requires authentication of a user. The application protocol semantics determine how and when the NTLM messages are encoded, framed, and transported from the client to the server and vice versa. See section [4](#Section_4) for an example of how NTLM messages are embedded in the SMB Version 1.0 Protocol as specified in [MS-SMB].
 
 The NTLM implementation also differs from normal protocol implementations, in that the best way to implement it is as a function library called by some other protocol implementation (the application protocol), rather than as a layer in a network protocol stack. For more information about [**GSS**](#gt_generic-security-services-gss)-API calls, see section [3.4.6](#Section_3.4.6). The NTLM function library receives parameters from the application protocol caller and returns an authentication message that the caller places into fields of its own messages as it chooses. Nevertheless, if one looks at just the NTLM messages apart from the application protocol in which they are embedded, there is an NTLM protocol and that is what is specified by this document.
 
@@ -425,7 +425,7 @@ The following diagram shows a typical [**connection-oriented NTLM**](#gt_connect
 
 Figure 1: Typical NTLM authentication message flow
 
-**Note** In the preceding diagram, the embedding of NTLM messages in the application protocol is shown by placing the NTLM messages within [ ] brackets. NTLM messages for both connection-oriented and [**connectionless**](#gt_connectionless-protocol) authentication are embedded in the application protocol as shown. Variations between the connection-oriented and connectionless NTLM protocol sequence are documented in sections [1.3.1.1](#Section_3.1.5.1) and [1.3.1.2](#Section_3.1.5.2).
+**Note** In the preceding diagram, the embedding of NTLM messages in the application protocol is shown by placing the NTLM messages within [ ] brackets. NTLM messages for both connection-oriented and [**connectionless**](#gt_connectionless-protocol) authentication are embedded in the application protocol as shown. Variations between the connection-oriented and connectionless NTLM protocol sequence are documented in sections [1.3.1.1](#Section_1.3.1.1) and [1.3.1.2](#Section_1.3.1.2).
 
 After an authenticated NTLM [**session**](#gt_session) is established, the subsequent application messages can be protected with NTLM [**session security**](#gt_session-security). This is done by the application, which specifies what options (such as message integrity or confidentiality, as specified in the Abstract Data Model) it requires, before the NTLM authentication message sequence begins.<3>
 
@@ -438,7 +438,7 @@ An overview of the connection-oriented and connectionless variants of NTLM is pr
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 NTLM Connection-Oriented Call Flow
 
-The following illustration shows a typical NTLM [**connection-oriented**](#gt_a102d214-1b25-4113-b95f-466986ddbade) call flow when an application protocol creates an [**authenticated**](#gt_authentication) [**session**](#gt_session). For detailed message specifications, see section [2](#Section_2). The messages are processed (section [3](#Section_1.3)).
+The following illustration shows a typical NTLM [**connection-oriented**](#gt_a102d214-1b25-4113-b95f-466986ddbade) call flow when an application protocol creates an [**authenticated**](#gt_authentication) [**session**](#gt_session). For detailed message specifications, see section [2](#Section_2). The messages are processed (section [3](#Section_3)).
 
 ![Connection-oriented NTLM message flow](media/image2.png)
 
@@ -469,7 +469,7 @@ Although it appears that the server is initiating the request, the client initia
 
 Because NTLM is embedded in the application protocol, it does not have transport dependencies of its own.
 
-NTLM is used for authentication by several application protocols, including server message block [MS-SMB](../MS-SMB/MS-SMB.md) (SMB), and [MS-NTHT](../MS-NTHT/MS-NTHT.md) (HTTP). For an example of how NTLM is used in SMB, see section [4](../MS-SMB/MS-SMB.md).
+NTLM is used for authentication by several application protocols, including server message block [MS-SMB](../MS-SMB/MS-SMB.md) (SMB), and [MS-NTHT](../MS-NTHT/MS-NTHT.md) (HTTP). For an example of how NTLM is used in SMB, see section [4](#Section_4).
 
 Other protocols invoke NTLM as a function library. The interface to that library is specified in GSS-API [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). The NTLM implementation of GSS-API calls is specified in section [3.4.6](#Section_3.4.6).<4>
 
@@ -546,7 +546,7 @@ packet-beta
 
 **payload (variable):** The payload data contains a message-dependent number of individual payload messages. This payload data is referenced by byte offsets located in the **MessageDependentFields**.
 
-The message integrity NTLMSSP_MESSAGE_SIGNATURE message (section [2.2.2.9](#Section_2.2.2.9.1)) is fixed length and is appended to the calling application's messages. This message type is used only when an application has requested message integrity or confidentiality operations, based on the [**session key**](#gt_session-key) negotiated during a successful authentication.
+The message integrity NTLMSSP_MESSAGE_SIGNATURE message (section [2.2.2.9](#Section_2.2.2.9)) is fixed length and is appended to the calling application's messages. This message type is used only when an application has requested message integrity or confidentiality operations, based on the [**session key**](#gt_session-key) negotiated during a successful authentication.
 
 All multiple-byte values are encoded in [**little-endian**](#gt_little-endian) byte order. Unless specified otherwise, 16-bit value fields are of type unsigned short, while 32-bit value fields are of type unsigned long.
 
@@ -671,7 +671,7 @@ If the NTLMSSP_REQUEST_TARGET flag is not set in **NegotiateFlags**, indicating 
 - **TargetNameBufferOffset** field SHOULD be set to the offset from the beginning of the CHALLENGE_MESSAGE to where the **TargetName** would be in **Payload** if it were present.
 **NegotiateFlags (4 bytes):** A **NEGOTIATE** structure that contains a set of flags, as defined by section [2.2.2.5](#Section_2.2.2.5). The server sets flags to indicate options it supports or, if there has been a NEGOTIATE_MESSAGE (section 2.2.1.1), the choices it has made from the options offered by the client. If the client has set the NTLMSSP_NEGOTIATE_SIGN in the NEGOTIATE_MESSAGE the Server MUST return it.
 
-**ServerChallenge (8 bytes):** A 64-bit value that contains the NTLM challenge. The challenge is a 64-bit [**nonce**](#gt_nonce). The processing of the ServerChallenge is specified in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_1.3).
+**ServerChallenge (8 bytes):** A 64-bit value that contains the NTLM challenge. The challenge is a 64-bit [**nonce**](#gt_nonce). The processing of the ServerChallenge is specified in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 **Reserved (8 bytes):** An 8-byte array whose elements MUST be zero when sent and MUST be ignored on receipt.
 
@@ -866,7 +866,7 @@ packet-beta
 
 **LmChallengeResponse (variable):** An **LM_RESPONSE** structure (section [2.2.2.3](#Section_2.2.2.3)) or an **LMv2_RESPONSE** structure (section [2.2.2.4](#Section_2.2.2.4)) that contains the computed LM response to the [**challenge**](#gt_challenge). If NTLM v2 authentication is configured, then **LmChallengeResponse** MUST be an **LMv2_RESPONSE** structure. Otherwise, it MUST be an **LM_RESPONSE** structure.
 
-**NtChallengeResponse (variable):** An [NTLM_RESPONSE](#Section_2.2.2.6) structure (section 2.2.2.6) or **NTLMv2_RESPONSE** structure (section [2.2.2.8](#Section_2.2.2.4)) that contains the computed NT response to the challenge. If NTLM v2 authentication is configured, **NtChallengeResponse** MUST be an **NTLMv2_RESPONSE**. Otherwise, it MUST be an **NTLM_RESPONSE**.
+**NtChallengeResponse (variable):** An [NTLM_RESPONSE](#Section_2.2.2.6) structure (section 2.2.2.6) or **NTLMv2_RESPONSE** structure (section [2.2.2.8](#Section_2.2.2.8)) that contains the computed NT response to the challenge. If NTLM v2 authentication is configured, **NtChallengeResponse** MUST be an **NTLMv2_RESPONSE**. Otherwise, it MUST be an **NTLM_RESPONSE**.
 
 **DomainName (variable):** The [**domain**](#gt_domain) or computer name hosting the user account. **DomainName** MUST be encoded in the negotiated character set.
 
@@ -874,7 +874,7 @@ packet-beta
 
 **Workstation (variable):** The name of the computer to which the user is logged on. **Workstation** MUST be encoded in the negotiated character set.
 
-**EncryptedRandomSessionKey (variable):** The client's encrypted random [**session key**](#gt_session-key). **EncryptedRandomSessionKey** and its usage are defined in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_1.3).
+**EncryptedRandomSessionKey (variable):** The client's encrypted random [**session key**](#gt_session-key). **EncryptedRandomSessionKey** and its usage are defined in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 NTLM Structures
@@ -946,7 +946,7 @@ packet-beta
   0-95: "Response (24 bytes)"
 ```
 
-**Response (24 bytes):** A 24-byte array of unsigned char that contains the client's **LmChallengeResponse** as defined in section [3.3.1](#Section_4.2.2).
+**Response (24 bytes):** A 24-byte array of unsigned char that contains the client's **LmChallengeResponse** as defined in section [3.3.1](#Section_3.3.1).
 
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 LMv2_RESPONSE
@@ -959,7 +959,7 @@ packet-beta
   96-159: "ChallengeFromClient"
 ```
 
-**Response (16 bytes):** A 16-byte array of unsigned char that contains the client's LM [**challenge**](#gt_challenge)-response. This is the portion of the **LmChallengeResponse** field to which the HMAC_MD5 algorithm has been applied, as defined in section [3.3.2](#Section_4.2.2). Specifically, **Response** corresponds to the result of applying the HMAC_MD5 algorithm, using the key ResponseKeyLM, to a message consisting of the concatenation of the ResponseKeyLM, ServerChallenge and ClientChallenge.
+**Response (16 bytes):** A 16-byte array of unsigned char that contains the client's LM [**challenge**](#gt_challenge)-response. This is the portion of the **LmChallengeResponse** field to which the HMAC_MD5 algorithm has been applied, as defined in section [3.3.2](#Section_3.3.2). Specifically, **Response** corresponds to the result of applying the HMAC_MD5 algorithm, using the key ResponseKeyLM, to a message consisting of the concatenation of the ResponseKeyLM, ServerChallenge and ClientChallenge.
 
 **ChallengeFromClient (8 bytes):** An 8-byte array of unsigned char that contains the client's ClientChallenge (as defined in section 3.3.2). See section [3.1.5.1.2](#Section_3.1.5.1.2) for details.
 
@@ -1083,12 +1083,12 @@ packet-beta
   0-95: "Response (24 bytes)"
 ```
 
-**Response (24 bytes):** A 24-byte array of unsigned char that contains the client's **NtChallengeResponse** (section [3.3.1](#Section_4.2.2)).
+**Response (24 bytes):** A 24-byte array of unsigned char that contains the client's **NtChallengeResponse** (section [3.3.1](#Section_3.3.1)).
 
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 NTLM v2: NTLMv2_CLIENT_CHALLENGE
 
-The **NTLMv2_CLIENT_CHALLENGE** structure defines the client [**challenge**](#gt_challenge) in the [AUTHENTICATE_MESSAGE](#Section_2.2.1.3). This structure is used only when NTLM v2 authentication is configured and is transported in the [NTLMv2_RESPONSE (section 2.2.2.8)](#Section_2.2.2.4) structure.<30>
+The **NTLMv2_CLIENT_CHALLENGE** structure defines the client [**challenge**](#gt_challenge) in the [AUTHENTICATE_MESSAGE](#Section_2.2.1.3). This structure is used only when NTLM v2 authentication is configured and is transported in the [NTLMv2_RESPONSE (section 2.2.2.8)](#Section_2.2.2.8) structure.<30>
 
 ```mermaid
 packet-beta
@@ -1112,7 +1112,7 @@ packet-beta
 
 **TimeStamp (8 bytes):** A 64-bit unsigned integer that contains the current system time, represented as the number of 100 nanosecond ticks elapsed since midnight of January 1, 1601 (UTC).
 
-**ChallengeFromClient (8 bytes):** An 8-byte array of unsigned char that contains the client's ClientChallenge (as defined in section [3.3.2](#Section_4.2.2)). See section [3.1.5.1.2](#Section_3.1.5.1.2) for details.
+**ChallengeFromClient (8 bytes):** An 8-byte array of unsigned char that contains the client's ClientChallenge (as defined in section [3.3.2](#Section_3.3.2)). See section [3.1.5.1.2](#Section_3.1.5.1.2) for details.
 
 **Reserved3 (4 bytes):** A 32-bit unsigned integer that SHOULD be 0x00000000 and MUST be ignored on receipt.
 
@@ -1129,18 +1129,18 @@ packet-beta
   96-159: "NTLMv2_CLIENT_CHALLENGE (variable)"
 ```
 
-**Response (16 bytes):** A 16-byte array of unsigned char that contains the client's **NTChallengeResponse** as defined in section [3.3.2](#Section_4.2.2). Response corresponds to the NTProofStr variable from section 3.3.2.
+**Response (16 bytes):** A 16-byte array of unsigned char that contains the client's **NTChallengeResponse** as defined in section [3.3.2](#Section_3.3.2). Response corresponds to the NTProofStr variable from section 3.3.2.
 
 **NTLMv2_CLIENT_CHALLENGE (variable):** A variable-length byte array, defined in section [2.2.2.7](#Section_2.2.2.7), that contains the **ClientChallenge** as defined in section 3.3.2. ChallengeFromClient corresponds to the temp variable from section 3.3.2.
 
 <a id="Section_2.2.2.9"></a>
 #### 2.2.2.9 NTLMSSP_MESSAGE_SIGNATURE
 
-The **NTLMSSP_MESSAGE_SIGNATURE** structure (section [3.4.4](#Section_1.3)), specifies the signature block used for application message integrity and confidentiality. This structure is then passed back to the application, which embeds it within the application protocol messages, along with the NTLM-encrypted or integrity-protected application message data.
+The **NTLMSSP_MESSAGE_SIGNATURE** structure (section [3.4.4](#Section_3.4.4)), specifies the signature block used for application message integrity and confidentiality. This structure is then passed back to the application, which embeds it within the application protocol messages, along with the NTLM-encrypted or integrity-protected application message data.
 
 This structure MUST take one of the two following forms, depending on whether the NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY flag is negotiated:
 
-- [NTLMSSP_MESSAGE_SIGNATURE](#Section_2.2.2.9.1)
+- [NTLMSSP_MESSAGE_SIGNATURE](#Section_2.2.2.9)
 - [NTLMSSP_MESSAGE_SIGNATURE for Extended Session Security](#Section_2.2.2.9.2)
 <a id="Section_2.2.2.9.1"></a>
 ##### 2.2.2.9.1 NTLMSSP_MESSAGE_SIGNATURE
@@ -1214,9 +1214,9 @@ packet-beta
 
 The following sections offer a detailed specification of the NTLM message computation:
 
-- Sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_1.3) specify how the client and server compute messages and respond to messages.
-- Section [3.3](#Section_1.3) specifies how the response computation is calculated, depending on whether NTLM v1 or NTLM v2 is used. This includes the ComputeResponse function, as well as the [**NTOWF**](#gt_ntowf) and [**LMOWF**](#gt_lmowf) functions, which are used by the ComputeResponse function.
-- Section [3.4](#Section_1.3) specifies how message integrity and message confidentiality are provided, including a detailed specification of the algorithms used to calculate the signing and sealing [**keys**](#gt_key).
+- Sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5) specify how the client and server compute messages and respond to messages.
+- Section [3.3](#Section_3.3) specifies how the response computation is calculated, depending on whether NTLM v1 or NTLM v2 is used. This includes the ComputeResponse function, as well as the [**NTOWF**](#gt_ntowf) and [**LMOWF**](#gt_lmowf) functions, which are used by the ComputeResponse function.
+- Section [3.4](#Section_3.4) specifies how message integrity and message confidentiality are provided, including a detailed specification of the algorithms used to calculate the signing and sealing [**keys**](#gt_key).
 The Cryptographic Operations Reference in section [6](#Section_6) defines the cryptographic primitives used in this section.
 
 <a id="Section_3.1"></a>
@@ -1260,7 +1260,7 @@ The following variables are internal to the client and are maintained for the en
 
 **ClientSealingKey:** The sealing key used by the client to seal messages and used by the server to unseal client messages. It is generated after the client is authenticated by the server and is not passed over the wire.
 
-**SeqNum:** A 4-byte [**sequence number**](#gt_sequence-number) (section [3.4.4](#Section_1.3)).
+**SeqNum:** A 4-byte [**sequence number**](#gt_sequence-number) (section [3.4.4](#Section_3.4.4)).
 
 **ServerSealingKey:** The sealing key used by the server to seal messages and used by the client to unseal server messages. It is generated after the client is authenticated by the server and is not passed over the wire.
 
@@ -1334,7 +1334,7 @@ Once the security context is established, the client application can call GSS_Wr
 Once the security context is established, the client application can call GSS_UnwrapEx() (section [3.4.7](#Section_3.4.7)) to decrypt messages that were encrypted by GSS_WrapEx.
 
 - GSS_GetMIC
-Once the security context is established, the client application can call GSS_GetMICEx() (section [3.4.8](#Section_3.4.8)) to sign messages, producing an **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9.1)).
+Once the security context is established, the client application can call GSS_GetMICEx() (section [3.4.8](#Section_3.4.8)) to sign messages, producing an **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9)).
 
 - GSS_VerifyMIC
 Once the security context is established, the client application can call GSS_VerifyMICEx() (section [3.4.9](#Section_3.4.9)) to verify a signature produced by GSS_GetMICEx().
@@ -1495,7 +1495,7 @@ If NTLM v2 authentication is used and the CHALLENGE_MESSAGE does not contain bot
 
 If NTLM v2 authentication is used and the CHALLENGE_MESSAGE **TargetInfo** field (section 2.2.1.2) has an MsvAvTimestamp present, the client SHOULD NOT send the LmChallengeResponse and SHOULD send Z(24) instead.<48>
 
-Response keys are computed using the ComputeResponse() function, as specified in section [3.3](#Section_1.3).
+Response keys are computed using the ComputeResponse() function, as specified in section [3.3](#Section_3.3).
 
 Set AUTHENTICATE_MESSAGE.NtChallengeResponse,
 
@@ -1644,7 +1644,7 @@ The following sections specify variables that are internal to the server and are
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Variables Internal to the Protocol
 
-The server maintains all of the variables that the client does (section [3.1.1.1](#Section_3.2.1.1)) except the **ClientConfigFlags**.
+The server maintains all of the variables that the client does (section [3.1.1.1](#Section_3.1.1.1)) except the **ClientConfigFlags**.
 
 Additionally, the server maintains the following:
 
@@ -1705,7 +1705,7 @@ After the security context is established, the server application can call GSS_W
 Once the security context is established, the server application can call GSS_UnwrapEx() (section [3.4.7](#Section_3.4.7)) to decrypt messages that were encrypted by GSS_WrapEx.
 
 - GSS_GetMIC
-Once the security context is established, the server application can call GSS_GetMICEx() (section [3.4.8](#Section_3.4.8)) to sign messages, producing an NTLMSSP_MESSAGE_SIGNATURE structure whose fields are defined in section [2.2.2.9](#Section_2.2.2.9.1).
+Once the security context is established, the server application can call GSS_GetMICEx() (section [3.4.8](#Section_3.4.8)) to sign messages, producing an NTLMSSP_MESSAGE_SIGNATURE structure whose fields are defined in section [2.2.2.9](#Section_2.2.2.9).
 
 - GSS_VerifyMIC
 Once the security context is established, the server application can call GSS_VerifyMICEx() (section [3.4.9](#Section_3.4.9)) to verify a signature produced by GSS_GetMICEx().
@@ -2140,11 +2140,11 @@ If the AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field,<68> then 
 
 - AvId == MsvAvFlags
 - Value bit 0x2 == 1
-If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.2.1.1)) difference from the server time, then the server SHOULD return a failure.<69>
+If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.1.1.1)) difference from the server time, then the server SHOULD return a failure.<69>
 
 Both the client and the server now have the session, signing, and sealing keys. When the client runs an integrity check on the next message from the server, it detects that the server has determined (either directly or indirectly) the user password.
 
-**Note** User names MUST be case-insensitive. For additional information about the case sensitivity of user names, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.2.
+**Note** User names MUST be case-insensitive. For additional information about the case sensitivity of user names, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.2.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Connectionless NTLM
@@ -2199,7 +2199,7 @@ AUTHENTICATE_MESSAGE))
 
 Endif
 
-If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.2.1.1)) difference from the server time, then the server SHOULD return a failure.<74>
+If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.1.1.1)) difference from the server time, then the server SHOULD return a failure.<74>
 
 If NTLM v2 authentication is used and channel binding is provided by the application, then the server MUST verify the channel binding<75>:
 
@@ -2521,11 +2521,11 @@ ConcatenationOf(Message, MAC(Handle, SigningKey, SeqNum, Message))
 
 EndDefine
 
-The format of the message integrity data that is appended to each message for signing and sealing purposes is defined by the NTLMSSP_MESSAGE_SIGNATURE structure (section [2.2.2.9](#Section_2.2.2.9.1)).
+The format of the message integrity data that is appended to each message for signing and sealing purposes is defined by the NTLMSSP_MESSAGE_SIGNATURE structure (section [2.2.2.9](#Section_2.2.2.9)).
 
 **Note** If the client is sending the message, the signing [**key**](#gt_key) is the one that the client calculated. If the server is sending the message, the signing key is the one that the server calculated. The same is true for the sealing key. The [**sequence number**](#gt_sequence-number) can be explicitly provided by the application protocol or by the NTLM security [**service**](#gt_service) provider. If the latter is chosen, the sequence number is initialized to zero and then incremented by one for each message sent.
 
-On receipt, the [**message authentication code (MAC)**](#gt_message-authentication-code-mac) value is computed and compared with the received value. If they differ, the message MUST be discarded (section [3.4.4](#Section_1.3)).
+On receipt, the [**message authentication code (MAC)**](#gt_message-authentication-code-mac) value is computed and compared with the received value. If they differ, the message MUST be discarded (section [3.4.4](#Section_3.4.4)).
 
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Message Confidentiality
@@ -2573,7 +2573,7 @@ Message confidentiality is available in connectionless mode only if the client c
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Message Signature Functions
 
-In the case of connectionless NTLM authentication, the *SeqNum* parameter SHOULD be specified by the application and the RC4 stream MUST be reinitialized before each message (see section [3.4](#Section_1.3)).
+In the case of connectionless NTLM authentication, the *SeqNum* parameter SHOULD be specified by the application and the RC4 stream MUST be reinitialized before each message (see section [3.4](#Section_3.4)).
 
 In the case of connection-oriented authentication, the *SeqNum* parameter MUST start at 0 and is incremented by one for each message sent. The receiver expects the first received message to have *SeqNum* equal to 0, and to be one greater for each subsequent message received. If a received message does not contain the expected *SeqNum*, an error MUST be returned to the receiving application, and *SeqNum* is not incremented.
 
@@ -3001,12 +3001,12 @@ The input data can be a list of security buffers.
 
 Input data buffers for which conf_req_flag==TRUE are encrypted (section [3.4.3](#Section_3.4.3), Message Confidentiality) in output_message.
 
-For NTLMv1, input data buffers for which sign==TRUE are included in the message signature. For NTLMv2, all input data buffers are included in the message signature (section [3.4.6.1](#Section_3.4.9.1)).
+For NTLMv1, input data buffers for which sign==TRUE are included in the message signature. For NTLMv2, all input data buffers are included in the message signature (section [3.4.6.1](#Section_3.4.6.1)).
 
 <a id="Section_3.4.6.1"></a>
 #### 3.4.6.1 Signature Creation for GSS_WrapEx()
 
-Section [3.4.2](#Section_3.4.2) specifies the algorithm used by GSS_WrapEx() to create the signature. The signature contains the **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9.1)).
+Section [3.4.2](#Section_3.4.2) specifies the algorithm used by GSS_WrapEx() to create the signature. The signature contains the **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9)).
 
 The [**checksum**](#gt_checksum) is computed over the concatenated input buffers using only the input data buffers where sign==TRUE for NTLMv1 and all of the input data buffers for NTLMv2, including the cleartext data buffers.
 
@@ -3061,7 +3061,7 @@ This call is identical to GSS_GetMIC(), except that it supports multiple input b
 <a id="Section_3.4.8.1"></a>
 #### 3.4.8.1 Signature Creation for GSS_GetMICEx()
 
-Section [3.4.2](#Section_3.4.2) specifies the algorithm used by GSS_GetMICEx() to create the signature. The per_msg_token contains the **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9.1)).
+Section [3.4.2](#Section_3.4.2) specifies the algorithm used by GSS_GetMICEx() to create the signature. The per_msg_token contains the **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9)).
 
 The [**checksum**](#gt_checksum) is computed over the concatenated input buffers using only the input data buffers where sign==TRUE for NTLMv1 and all of the input data buffers including the buffers where sign==FALSE for NTLMv2.
 
@@ -3087,7 +3087,7 @@ This call is identical to GSS_VerifyMIC(), except that it supports multiple inpu
 
 For NTLMv1, all input data buffers where signed==TRUE are concatenated together and the signature is verified against the resulting concatenated buffer. For NTLMv2, the signature is verified for all of the input data buffers including the buffers where signed==FALSE.
 
-Section [3.4.2](#Section_3.4.2) specifies the algorithm used by GSS_VerifyMICEx() to create the signature to verify against. The per_msg_token contains the **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9.1)).
+Section [3.4.2](#Section_3.4.2) specifies the algorithm used by GSS_VerifyMICEx() to create the signature to verify against. The per_msg_token contains the **NTLMSSP_MESSAGE_SIGNATURE** structure (section [2.2.2.9](#Section_2.2.2.9)).
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -3172,7 +3172,7 @@ ServerChallenge:
 <a id="Section_4.2.2"></a>
 ### 4.2.2 NTLM v1 Authentication
 
-The following calculations are used in section [3.3.1](#Section_4.2.2).
+The following calculations are used in section [3.3.1](#Section_3.3.1).
 
 The Challenge Flags used in the following NTLM v1 examples are:
 
@@ -3195,7 +3195,7 @@ The Challenge Flags used in the following NTLM v1 examples are:
 <a id="Section_4.2.2.1.1"></a>
 ##### 4.2.2.1.1 LMOWFv1()
 
-The LMOWFv1() is defined in section [3.3.1](#Section_4.2.2).
+The LMOWFv1() is defined in section [3.3.1](#Section_3.3.1).
 
 DES( UpperCase( Passwd)[0..6],"KGS!@#$%"):
 
@@ -3212,14 +3212,14 @@ When calculating the LMOWFv1 using the values above, then LMOWFv1("Password", "U
 <a id="Section_4.2.2.1.2"></a>
 ##### 4.2.2.1.2 NTOWFv1()
 
-The NTOWFv1() is defined in section [3.3.1](#Section_4.2.2). When calculating the NTOWFv1 using the values above, then NTOWFv1("Password", "User", "Domain") is:
+The NTOWFv1() is defined in section [3.3.1](#Section_3.3.1). When calculating the NTOWFv1 using the values above, then NTOWFv1("Password", "User", "Domain") is:
 
 0000000: a4 f4 9c 40 65 10 bd ca b6 82 4e e7 c3 0f d8 52 ...@e.....N....R
 
 <a id="Section_4.2.2.1.3"></a>
 ##### 4.2.2.1.3 Session Base Key and Key Exchange Key
 
-The SessionBaseKey is specified in section [3.3.1](#Section_4.2.2).
+The SessionBaseKey is specified in section [3.3.1](#Section_3.3.1).
 
 0000000: d8 72 62 b0 cd e4 b1 cb 74 99 be cc cd f1 07 84 .rb.═...t...═...
 
@@ -3229,7 +3229,7 @@ The SessionBaseKey is specified in section [3.3.1](#Section_4.2.2).
 <a id="Section_4.2.2.2.1"></a>
 ##### 4.2.2.2.1 NTLMv1 Response
 
-The NTChallengeResponse is specified in section [3.3.1](#Section_4.2.2). With NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY not set, using the values above, the result is:
+The NTChallengeResponse is specified in section [3.3.1](#Section_3.3.1). With NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY not set, using the values above, the result is:
 
 0000000: 67 c4 30 11 f3 02 98 a2 ad 35 ec e6 4f 16 33 1c g─0......5..O.3.
 
@@ -3238,7 +3238,7 @@ The NTChallengeResponse is specified in section [3.3.1](#Section_4.2.2). With NT
 <a id="Section_4.2.2.2.2"></a>
 ##### 4.2.2.2.2 LMv1 Response
 
-The LmChallengeResponse is specified in section [3.3.1](#Section_4.2.2). With the NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY flag not set and with the NoLMResponseNTLMv1 flag not set, using the values above, the result is:
+The LmChallengeResponse is specified in section [3.3.1](#Section_3.3.1). With the NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY flag not set and with the NoLMResponseNTLMv1 flag not set, using the values above, the result is:
 
 0000000: 98 de f7 b8 7f 88 aa 5d af e2 df 77 96 88 a1 72 .......].......r
 
@@ -3356,7 +3356,7 @@ Assembled Signature:
 <a id="Section_4.2.3"></a>
 ### 4.2.3 NTLM v1 with Client Challenge
 
-The following calculations are used in section [3.3.1](#Section_4.2.2). This example uses weaker key strengths than advised. Using stronger key strengths with NTLM v1 with client challenge results in the same GSS_WrapEx outputs with NTLMv2.
+The following calculations are used in section [3.3.1](#Section_3.3.1). This example uses weaker key strengths than advised. Using stronger key strengths with NTLM v1 with client challenge results in the same GSS_WrapEx outputs with NTLMv2.
 
 The Challenge Flags used in the following NTLM v1 examples are:
 
@@ -3378,14 +3378,14 @@ The Challenge Flags used in the following NTLM v1 examples are:
 <a id="Section_4.2.3.1.1"></a>
 ##### 4.2.3.1.1 NTOWFv1()
 
-The NTOWFv1() is defined in section [3.3.1](#Section_4.2.2). When calculating the NTOWFv1 using the values above, then NTOWFv1("Password", "User", "Domain") is:
+The NTOWFv1() is defined in section [3.3.1](#Section_3.3.1). When calculating the NTOWFv1 using the values above, then NTOWFv1("Password", "User", "Domain") is:
 
 0000000: a4 f4 9c 40 65 10 bd ca b6 82 4e e7 c3 0f d8 52 ...@e.....N....R
 
 <a id="Section_4.2.3.1.2"></a>
 ##### 4.2.3.1.2 Session Base Key
 
-The SessionBaseKey is specified in section [3.3.1](#Section_4.2.2):
+The SessionBaseKey is specified in section [3.3.1](#Section_3.3.1):
 
 0000000: d8 72 62 b0 cd e4 b1 cb 74 99 be cc cd f1 07 84 .rb.═...t...═.•.
 
@@ -3402,7 +3402,7 @@ The KeyExchangeKey is specified in section [3.4.5.1](#Section_3.4.5.1). Using th
 <a id="Section_4.2.3.2.1"></a>
 ##### 4.2.3.2.1 LMv1 Response
 
-The LmChallengeResponse is specified in section [3.3.1](#Section_4.2.2). Using the previous values, the result is:
+The LmChallengeResponse is specified in section [3.3.1](#Section_3.3.1). Using the previous values, the result is:
 
 0000000: aa aa aa aa aa aa aa aa 00 00 00 00 00 00 00 00 ................
 
@@ -3411,7 +3411,7 @@ The LmChallengeResponse is specified in section [3.3.1](#Section_4.2.2). Using t
 <a id="Section_4.2.3.2.2"></a>
 ##### 4.2.3.2.2 NTLMv1 Response
 
-The NTChallengeResponse is specified in section [3.3.1](#Section_4.2.2). Using the values above, the result is:
+The NTChallengeResponse is specified in section [3.3.1](#Section_3.3.1). Using the values above, the result is:
 
 0000000: 75 37 f8 03 ae 36 71 28 ca 45 82 04 bd e7 ca f8 u7...6q(.E......
 
@@ -3504,7 +3504,7 @@ Signature:
 <a id="Section_4.2.4"></a>
 ### 4.2.4 NTLMv2 Authentication
 
-The following calculations are used in section [3.3.2](#Section_4.2.2).
+The following calculations are used in section [3.3.2](#Section_3.3.2).
 
 The Challenge Flags used in the following NTLM v2 examples are:
 
@@ -3537,21 +3537,21 @@ AV Pair 2 - NetBIOS Domain name:
 <a id="Section_4.2.4.1.1"></a>
 ##### 4.2.4.1.1 NTOWFv2() and LMOWFv2()
 
-The [**LMOWF v2**](#gt_lmowf-v2)() and The [**NTOWF v2**](#gt_ntowf-v2)() are defined in section [3.3.2](#Section_4.2.2). When calculating the LMOWFv2 or NTOWFv2, using the values above, then NTOWFv2("Password", "User", "Domain") is:
+The [**LMOWF v2**](#gt_lmowf-v2)() and The [**NTOWF v2**](#gt_ntowf-v2)() are defined in section [3.3.2](#Section_3.3.2). When calculating the LMOWFv2 or NTOWFv2, using the values above, then NTOWFv2("Password", "User", "Domain") is:
 
 0000000: 0c 86 8a 40 3b fd 7a 93 a3 00 1e f2 2e f0 2e 3f ...@;..........?
 
 <a id="Section_4.2.4.1.2"></a>
 ##### 4.2.4.1.2 Session Base Key
 
-The SessionBaseKey is specified in section [3.3.2](#Section_4.2.2). Using the values above:
+The SessionBaseKey is specified in section [3.3.2](#Section_3.3.2). Using the values above:
 
 0000000: 8d e4 0c ca db c1 4a 82 f1 5c b0 ad 0d e9 5c a3 ......J..\....\.
 
 <a id="Section_4.2.4.1.3"></a>
 ##### 4.2.4.1.3 temp
 
-temp is specified in section [3.3.2](#Section_4.2.2). Using the values above:
+temp is specified in section [3.3.2](#Section_3.3.2). Using the values above:
 
 01 01 00 00 00 00 00 00 00 00 00 00 δ∩j•••••••••••••
 
@@ -3569,7 +3569,7 @@ temp is specified in section [3.3.2](#Section_4.2.2). Using the values above:
 <a id="Section_4.2.4.2.1"></a>
 ##### 4.2.4.2.1 LMv2 Response
 
-The LmChallengeResponse is specified in section [3.3.2](#Section_4.2.2). Using the values above:
+The LmChallengeResponse is specified in section [3.3.2](#Section_3.3.2). Using the values above:
 
 0000000: 86 c3 50 97 ac 9c ec 10 25 54 76 4a 57 cc cc 19 ..P.....%TvJW...
 
@@ -3578,7 +3578,7 @@ The LmChallengeResponse is specified in section [3.3.2](#Section_4.2.2). Using t
 <a id="Section_4.2.4.2.2"></a>
 ##### 4.2.4.2.2 NTLMv2 Response
 
-The NTChallengeResponse is specified in section [3.3.2](#Section_4.2.2). Using the values above, the response (section [2.2.2.8](#Section_2.2.2.8)) is:
+The NTChallengeResponse is specified in section [3.3.2](#Section_3.3.2). Using the values above, the response (section [2.2.2.8](#Section_2.2.2.8)) is:
 
 0000000: 68 cd 0a b8 51 e5 1c 96 aa bc 92 7b eb ef 6a 1c h═..Q......{..j.
 
@@ -3708,9 +3708,9 @@ When the Guest user account has been assigned a password and is used explicitly 
 
 | Security parameter | Section |
 | --- | --- |
-| MD4/MD5 usage in NTLM v1 | [3.3.1](#Section_4.2.2) |
-| MD4/MD5 usage in NTLM v2 | [3.3.2](#Section_4.2.2) |
-| MD5/RC4 usage during session security | [3.4](#Section_1.3) |
+| MD4/MD5 usage in NTLM v1 | [3.3.1](#Section_3.3.1) |
+| MD4/MD5 usage in NTLM v2 | [3.3.2](#Section_3.3.2) |
+| MD5/RC4 usage during session security | [3.4](#Section_3.4) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Cryptographic Operations Reference
@@ -3720,12 +3720,12 @@ In the algorithms provided in this documentation, pseudocode is provided to illu
 | Functions | Description | Section |
 | --- | --- | --- |
 | AddAVPair(T, Id, Value) | An auxiliary function that is used to manage [**AV pairs**](#gt_av-pair) in NTLM messages. It is defined as follows. AddAvPair(T, Id, Value) { STRING T USHORT Id STRING Value T = ConcatenationOf(T, Id) T = ConcatenationOf(T, Length(Value)) T = ConcatenationOf(T, Value) } | [3.2.5.1.1](#Section_3.2.5.1.1) |
-| ComputeResponse(...) | A function that computes the NT response, LM responses, and [**key exchange key**](#gt_key-exchange-key) from the [**response keys**](#gt_response-key) and [**challenge**](#gt_challenge). | [3.1.5.1.2](#Section_3.1.5.1.2), [3.2.5.1.2](#Section_3.2.5.1.2), [3.3.1](#Section_4.2.2), [3.3.2](#Section_4.2.2) |
-| ConcatenationOf(string1, string2, ... stringN) | Indicates the left-to-right concatenation of the string parameters, from the first string to the *Nn*th. Any numbers are converted to strings and all numeric conversions to strings retain all digits, even nonsignificant ones. The result is a string. For example, ConcatenationOf(0x00122, "XYZ", "Client") results in the string "00122XYZClient." | 3.3.1, 3.3.2, [3.4.2](#Section_3.4.2), [3.4.3](#Section_3.4.3), [3.4.4](#Section_1.3), [3.4.5.1](#Section_3.4.5.1), [3.4.5.2](#Section_3.4.5.2), [3.4.5.3](#Section_3.4.5.3) |
+| ComputeResponse(...) | A function that computes the NT response, LM responses, and [**key exchange key**](#gt_key-exchange-key) from the [**response keys**](#gt_response-key) and [**challenge**](#gt_challenge). | [3.1.5.1.2](#Section_3.1.5.1.2), [3.2.5.1.2](#Section_3.2.5.1.2), [3.3.1](#Section_3.3.1), [3.3.2](#Section_3.3.2) |
+| ConcatenationOf(string1, string2, ... stringN) | Indicates the left-to-right concatenation of the string parameters, from the first string to the *Nn*th. Any numbers are converted to strings and all numeric conversions to strings retain all digits, even nonsignificant ones. The result is a string. For example, ConcatenationOf(0x00122, "XYZ", "Client") results in the string "00122XYZClient." | 3.3.1, 3.3.2, [3.4.2](#Section_3.4.2), [3.4.3](#Section_3.4.3), [3.4.4](#Section_3.4.4), [3.4.5.1](#Section_3.4.5.1), [3.4.5.2](#Section_3.4.5.2), [3.4.5.3](#Section_3.4.5.3) |
 | CRC32(M) | Indicates a 32-bit [**CRC**](#gt_cyclic-redundancy-check-crc) calculated over M. | 3.4.3, 3.4.4 |
 | DES(K, D) | Indicates the encryption of an 8-byte data item D with the 7-byte key K using the Data Encryption Standard (DES) algorithm in Electronic Codebook (ECB) mode. The result is 8 bytes in length ([[FIPS46-2]](https://go.microsoft.com/fwlink/?LinkId=89871)). | 3.3.1, 3.4.5.1 |
 | DESL(K, D) | Indicates the encryption of an 8-byte data item D with the 16-byte key K using the Data Encryption Standard Long (DESL) algorithm. The result is 24 bytes in length. DESL(K, D) is computed as follows. ConcatenationOf( DES(K[0..6], D), \ DES(K[7..13], D), DES( \ ConcatenationOf(K[14..15], Z(5)), D)); **Note** K[] implies a key represented as a character array. | 3.3.1 |
-| GetVersion() | An auxiliary function that returns an operating system version-specific value (section [2.2.2.8](#Section_2.2.2.4)). | [3.1.5.1.1](#Section_3.1.5.1.1), 3.1.5.1.2, 3.2.5.1.1, 3.2.5.1.2 |
+| GetVersion() | An auxiliary function that returns an operating system version-specific value (section [2.2.2.8](#Section_2.2.2.8)). | [3.1.5.1.1](#Section_3.1.5.1.1), 3.1.5.1.2, 3.2.5.1.1, 3.2.5.1.2 |
 | LMGETKEY(U, D) | Retrieve the user's LM response key from the server database ([**directory**](#gt_directory) or local database). | 3.2.5.1.2 |
 | NTGETKEY(U, D) | Retrieve the user's NT response key from the server database. | 3.2.5.1.2 |
 | HMAC(K, M) | Indicates the encryption of data item M with the key K using the HMAC algorithm ([[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314)). | 3.3.2, 3.4.4 |

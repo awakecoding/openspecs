@@ -259,7 +259,7 @@ The Internet Information Services (IIS) Inetinfo Remote Protocol is appropriate 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The Internet Information Services (IIS) Inetinfo Remote Protocol has been modified between versions of [**IIS**](#gt_internet-information-services-iis) in ways that make interoperability between different server implementations difficult. Modifications to the interface between IIS versions will be noted in section [2.2](#Section_2.2) or section [3.1](#Section_3.1.5.10).<1>
+The Internet Information Services (IIS) Inetinfo Remote Protocol has been modified between versions of [**IIS**](#gt_internet-information-services-iis) in ways that make interoperability between different server implementations difficult. Modifications to the interface between IIS versions will be noted in section [2.2](#Section_2.2) or section [3.1](#Section_3.1).<1>
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1565,7 +1565,7 @@ DWORD R_InetInfoGetVersion(
 
 );
 
-**pszServer:** A custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** A custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwReserved:** An unused parameter. MUST be ignored by the server implementation.
 
@@ -1594,9 +1594,9 @@ DWORD R_InetInfoGetAdminInformation(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **ppConfig:** The pointer to a pointer to an [**INET_INFO_CONFIG_INFO**](#Section_2.2.3) structure that contains configuration data for the specified Internet protocol server.
 
@@ -1630,9 +1630,9 @@ DWORD R_InetInfoGetSites(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **ppSites:** The pointer to a pointer to [**INET_INFO_SITE_LIST**](#Section_2.2.9) that specifies the list of defined server instances for the Internet protocol server specified by *dwServerMask*.
 
@@ -1661,9 +1661,9 @@ DWORD R_InetInfoSetAdminInformation(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **pConfig:** The pointer to an [**INET_INFO_CONFIG_INFO**](#Section_2.2.3) structure containing the property configuration to set. The client MUST set the appropriate flag in the **FieldControl** member for any data field in pConfig that is to be set by the server.
 
@@ -1700,7 +1700,7 @@ DWORD R_InetInfoGetGlobalAdminInformation(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwServerMask:** This value MUST be ignored by the server.
 
@@ -1729,7 +1729,7 @@ DWORD R_InetInfoSetGlobalAdminInformation(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwServerMask:** This value MUST be ignored by the server.
 
@@ -1763,11 +1763,11 @@ DWORD R_InetInfoQueryStatistics(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **Level:** The level of detail to be retrieved. This member MUST be set to 0. If another value is sent by the client, the server MUST return ERROR_INVALID_LEVEL (0x0000007C).
 
-**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24). A value of 0 indicates that aggregate statistical data is to be returned for all protocol servers.
+**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2). A value of 0 indicates that aggregate statistical data is to be returned for all protocol servers.
 
 **StatsInfo:** The pointer to an [**INET_INFO_STATISTICS_INFO**](#Section_2.2.12) union that contains the data to be returned.
 
@@ -1794,9 +1794,9 @@ DWORD R_InetInfoClearStatistics(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **Return Values:** The method returns 0 (ERROR_SUCCESS) to indicate success; otherwise, it returns a nonzero error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2 or [MS-ERREF] section 2.3.1. The most common error codes are listed in the following table.
 
@@ -1823,9 +1823,9 @@ DWORD R_InetInfoFlushMemoryCache(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServerMask:** The identifier for the target Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **Return Values:** The method returns 0 (ERROR_SUCCESS) to indicate success; otherwise, it returns a nonzero error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2 or [MS-ERREF] section 2.3.1. The most common error codes are listed in the following table.
 
@@ -1852,7 +1852,7 @@ DWORD R_InetInfoGetServerCapabilities(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwReserved:** This value MUST be ignored by the server.
 
@@ -1885,7 +1885,7 @@ DWORD R_W3QueryStatistics2(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwLevel:** The level of detail to be retrieved. This parameter MUST be set to 0 by the client. Other values MUST generate a return code of ERROR_INVALID_LEVEL (0x0000007C).
 
@@ -1925,7 +1925,7 @@ DWORD R_W3ClearStatistics2(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). Value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). Value MUST NOT be used by the server implementation.
 
 **dwInstance:** The ID of the protocol [**server instance**](#gt_internet-protocol-server-instance-server-instance) whose statistical data is being cleared.
 
@@ -1960,7 +1960,7 @@ DWORD R_FtpQueryStatistics2(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwLevel:** The level of detail to be retrieved. This parameter MUST be set to 0 by the client. Other values MUST generate a return code of ERROR_INVALID_LEVEL (0x0000007C).
 
@@ -2000,7 +2000,7 @@ DWORD R_FtpClearStatistics2(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
 **dwInstance:** The ID of the protocol [**server instance**](#gt_internet-protocol-server-instance-server-instance) whose statistical data is being cleared.
 
@@ -2033,9 +2033,9 @@ DWORD R_IISEnumerateUsers(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServiceId:** The identifier for the specified Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServiceId:** The identifier for the specified Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **dwInstance:** The ID of the [**Internet protocol server instance**](#gt_internet-protocol-server-instance-server-instance) whose users are being enumerated.
 
@@ -2070,9 +2070,9 @@ DWORD R_IISDisconnectUser(
 
 );
 
-**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1). The value MUST NOT be used by the server implementation.
+**pszServer:** The custom binding handle for the target system, as specified in section [2.1.1](#Section_2.1.1). The value MUST NOT be used by the server implementation.
 
-**dwServiceId:** The identifier for the specified Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.24).
+**dwServiceId:** The identifier for the specified Internet protocol server, as specified in section [**2.2.2**](#Section_2.2.2).
 
 **dwInstance:** The ID of the [**Internet protocol server instance**](#gt_internet-protocol-server-instance-server-instance) whose user is being disconnected.
 
@@ -2111,7 +2111,7 @@ This section describes a sequence of operations to illustrate the function of th
 - *pszServer* = "server host name"
 - *dwServerMask* = 0x00000001 (INET_FTP_SVC_ID)
 - *ppConfig* = address of LPINET_INFO_CONFIG_INFO
-- The client establishes a connection to the remote server by building an explicit server binding handle as specified in section [**2.2.1**](#Section_2.2.19).
+- The client establishes a connection to the remote server by building an explicit server binding handle as specified in section [**2.2.1**](#Section_2.2.1).
 - When the server receives this request from the client, it allocates and initializes the [**INET_INFO_CONFIG_INFO**](#Section_2.2.3) structure and populates it with data from the FTP server. The server then returns 0 (ERROR_SUCCESS) and the pointer to the **INET_INFO_CONFIG_INFO** structure in the *ppConfig* parameter of the response.
 - The client retrieves the virtual root data from the returned **INET_INFO_CONFIG_INFO** structure, returns it to the application, and frees the data allocated by the RPC client Stub.
 <a id="Section_5"></a>
@@ -2127,8 +2127,8 @@ None.
 
 | Security parameter | Section |
 | --- | --- |
-| RPC_C_AUTHN_WINNT | [2.1.1](#Section_2.1) |
-| RPC_C_AUTHN_LEVEL_CONNECT | [2.1.2](#Section_2.1) |
+| RPC_C_AUTHN_WINNT | [2.1.1](#Section_2.1.1) |
+| RPC_C_AUTHN_LEVEL_CONNECT | [2.1.2](#Section_2.1.2) |
 | RPC_C_AUTHN_LEVEL_PKT_PRIVACY | 2.1.2 |
 
 <a id="Section_6"></a>

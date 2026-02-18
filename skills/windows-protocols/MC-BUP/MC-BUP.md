@@ -413,7 +413,7 @@ The following steps describe the message flow process that is common to both mod
 
 The client gets the [**request entity**](#gt_request-entity) and the [**destination URL**](#gt_destination-url) through the higher-layer protocol.
 
-- The client initiates the upload by sending a [CREATE-SESSION (section 2.2.2)](#Section_1.3) message, which prompts the server to create a [**BITS session**](#gt_bits-session) for the destination URL.
+- The client initiates the upload by sending a [CREATE-SESSION (section 2.2.2)](#Section_2.2.2) message, which prompts the server to create a [**BITS session**](#gt_bits-session) for the destination URL.
 - After the BITS session is created, the server sends a [**BITS session ID**](#gt_bits-session-id) through an [Ack response (section 2.2.3)](#Section_2.2.3).
 - After the client determines that the BITS session creation was successful, it sends the request entity in a set of [FRAGMENT (section 2.2.6)](#Section_2.2.6) messages to the server. For each fragment being sent from the client, the server processes and updates its copy of the request entity.
 - After the FRAGMENT (section 2.2.6) is successfully received and processed, the server sends [Ack (section 2.2.7)](#Section_2.2.7) with the byte range received.
@@ -422,7 +422,7 @@ The client gets the [**request entity**](#gt_request-entity) and the [**destinat
 
 In this mode, the [**request entity**](#gt_request-entity) is uploaded to the server. Figure 1 (section [1.3)](#Section_1.3) explains this mode of operation in detail.
 
-- Steps 1 through 5, described in section [1.3.1](#Section_3.2.5.2.2), are executed.
+- Steps 1 through 5, described in section [1.3.1](#Section_1.3.1), are executed.
 - After the final FRAGMENT message is processed successfully by the server, the request entity is reassembled at the server. Depending on the [notification options (section 3.2.1.1)](#Section_3.2.1.1) (NotificationType and NotificationURL) defined on the [**back-end client**](#gt_back-end-client), the back-end client can send the request entity to the server application provided through the notificationURL. This step is needed ONLY if the back-end server needs to be notified about the request entity and is not necessary for a simple upload.
 - After the server sends a success Ack response to the final FRAGMENT message, the client sends a [CLOSE-SESSION (section 2.2.8)](#Section_2.2.8) message, which prompts the server to move the request entity to the [**destination URL**](#gt_destination-url) and delete [**BITS session**](#gt_bits-session) data for the given session on the server.
 <a id="Section_1.3.3"></a>
@@ -430,7 +430,7 @@ In this mode, the [**request entity**](#gt_request-entity) is uploaded to the se
 
 In this mode, the server sends the [**request entity**](#gt_request-entity) to the server application, which constructs a [**response entity**](#gt_response-entity). The server application sends the URL of the reply to the client as part of the response to the final FRAGMENT sent from the client. The following steps, along with the diagram in section [1.3](#Section_1.3), explain this mode of operation in detail.
 
-- Steps 1 through 5, described in section [1.3.1](#Section_3.2.5.2.2), are executed.
+- Steps 1 through 5, described in section [1.3.1](#Section_1.3.1), are executed.
 - After the final [FRAGMENT (section 2.2.6)](#Section_2.2.6) message is processed successfully by the server, the server sends the path to the request entity to the [**back-end client**](#gt_back-end-client).
 - The back-end client sends the request entity to the server application provided through the notificationURL.
 - The server application sends a [**reply URL**](#gt_reply-url) to the back-end client. The back-end client sends this information to the server. The server sends this information to the client as part of a header in the [Ack (section 2.2.7)](#Section_2.2.7) response for the final FRAGMENT message.
@@ -492,7 +492,7 @@ This document covers versioning issues in the following areas.
 <a id="Section_1.7.1"></a>
 ### 1.7.1 Client to Server Upload
 
-- Supported Transports: This protocol is implemented on top of HTTP 1.1 as discussed in section [2.2](#Section_1.3).
+- Supported Transports: This protocol is implemented on top of HTTP 1.1 as discussed in section [2.2](#Section_2.2).
 - Capability Negotiation: The client sends the supported protocols initially as part of the CREATE-SESSION message request. The server picks the best protocol it can use to talk to the client and sends it as part of the Ack response for CREATE-SESSION. This version of the specification defines a single protocol whose identifying [**GUID**](#gt_globally-unique-identifier-guid) is {7df0354d-249b-430f-820d-3d2a9bef4931}.
 <a id="Section_1.7.2"></a>
 ### 1.7.2 Server to Client Download
@@ -548,12 +548,12 @@ Each response message MUST include a BITS-specific HTTP message header field nam
 
 Content-Name: This indicates the name of the [**request entity**](#gt_request-entity). This SHOULD follow the rules mentioned for field content in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 4.2. The length SHOULD NOT exceed 260 characters. The value passed through this header is not currently being used on the server.<3>
 
-Content-Length: This indicates the number of bytes being included in the message body of the request or the response. This MUST follow the rules described in [RFC2616] section 14.13. This field MUST be present for all the request messages in section [2.2](#Section_1.3).
+Content-Length: This indicates the number of bytes being included in the message body of the request or the response. This MUST follow the rules described in [RFC2616] section 14.13. This field MUST be present for all the request messages in section [2.2](#Section_2.2).
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 HTTP Header Fields Introduced by the BITS Upload Protocol
 
-BITS-Packet-Type: This represents the type of the message being sent from client to server or server to client. This is a string of characters and MUST be one of the following: CREATE-SESSION, PING, FRAGMENT, CLOSE-SESSION, CANCEL-SESSION, or Ack. This field MUST be present for all the request and response messages defined in section [2.2](#Section_1.3) except sections [2.2.12](#Section_2.2.12) and [2.2.13](#Section_2.2.13).
+BITS-Packet-Type: This represents the type of the message being sent from client to server or server to client. This is a string of characters and MUST be one of the following: CREATE-SESSION, PING, FRAGMENT, CLOSE-SESSION, CANCEL-SESSION, or Ack. This field MUST be present for all the request and response messages defined in section [2.2](#Section_2.2) except sections [2.2.12](#Section_2.2.12) and [2.2.13](#Section_2.2.13).
 
 **BITS-Session-Id**: A [**GUID**](#gt_globally-unique-identifier-guid) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3), which MUST be unique among all sessions on a particular server, that identifies the [**BITS session**](#gt_bits-session) for the given [**request entity**](#gt_request-entity). This field MUST be present in all request messages except CREATE-SESSION. The field MUST be present in response messages with an HTTP status of 200. It MAY be present in other response messages; if present, its value MUST be the same as in the corresponding request message.
 
@@ -581,7 +581,7 @@ The CREATE-SESSION message represents a request to the server to create an uploa
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 Standard HTTP Header Fields
 
-The standard HTTP header fields are [Content-Name (section 2.2.1.1)](#Section_2.2.11.1) and Content-Length (section 2.2.1.1).
+The standard HTTP header fields are [Content-Name (section 2.2.1.1)](#Section_2.2.1.1) and Content-Length (section 2.2.1.1).
 
 The Content-Name field SHOULD<5> be present. The value is defined in section [2.2.1.2](#Section_2.2.1.2).
 
@@ -609,7 +609,7 @@ This message is an acknowledgment to the CREATE-SESSION message.
 
 Accept-Encoding: This specifies the content encoding schemes that the server supports; see sections 3.5 and 14.3 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) for more details.<7>
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0 for this message.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0 for this message.
 
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -641,7 +641,7 @@ The client MAY send this message to check if it can contact the host returned as
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0 for this message.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0 for this message.
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -661,7 +661,7 @@ This message is an acknowledgment to the PING message.
 <a id="Section_2.2.5.1"></a>
 #### 2.2.5.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0.
 
 <a id="Section_2.2.5.2"></a>
 #### 2.2.5.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -692,7 +692,7 @@ The client and server MAY impose limits on the minimum and maximum length of a f
 <a id="Section_2.2.6.1"></a>
 #### 2.2.6.1 Standard HTTP Header Fields
 
-[Content-Name (section 2.2.1.1)](#Section_2.2.11.1): This SHOULD be sent with the first fragment message and MAY be sent with the other fragment messages. This value SHOULD match the Content-Name value sent as part of a [CREATE-SESSION (section 2.2.2)](#Section_1.3) message.<11>
+[Content-Name (section 2.2.1.1)](#Section_2.2.1.1): This SHOULD be sent with the first fragment message and MAY be sent with the other fragment messages. This value SHOULD match the Content-Name value sent as part of a [CREATE-SESSION (section 2.2.2)](#Section_2.2.2) message.<11>
 
 Content-Length (section 2.2.1.1): This specifies the length of the data being uploaded.
 
@@ -720,7 +720,7 @@ The server MUST send this message as an acknowledgment to the FRAGMENT message.
 <a id="Section_2.2.7.1"></a>
 #### 2.2.7.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0.
 
 <a id="Section_2.2.7.2"></a>
 #### 2.2.7.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -750,7 +750,7 @@ This message MUST be sent to the server to inform that the upload of the [**requ
 <a id="Section_2.2.8.1"></a>
 #### 2.2.8.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0.
 
 <a id="Section_2.2.8.2"></a>
 #### 2.2.8.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -772,7 +772,7 @@ The server MUST send this message as an acknowledgment to CLOSE-SESSION request 
 <a id="Section_2.2.9.1"></a>
 #### 2.2.9.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0.
 
 <a id="Section_2.2.9.2"></a>
 #### 2.2.9.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -798,7 +798,7 @@ The client MUST send this message to terminate the given upload and cause the se
 <a id="Section_2.2.10.1"></a>
 #### 2.2.10.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0.
 
 <a id="Section_2.2.10.2"></a>
 #### 2.2.10.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -820,7 +820,7 @@ The server MUST send this message as an acknowledgment to the CANCEL-SESSION req
 <a id="Section_2.2.11.1"></a>
 #### 2.2.11.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): The value MUST be 0.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): The value MUST be 0.
 
 <a id="Section_2.2.11.2"></a>
 #### 2.2.11.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -846,14 +846,14 @@ The [**back-end client**](#gt_back-end-client) MUST send this message if the not
 <a id="Section_2.2.12.1"></a>
 #### 2.2.12.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): This MUST be equal to the size of the message body.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): This MUST be equal to the size of the message body.
 
 <a id="Section_2.2.12.2"></a>
 #### 2.2.12.2 HTTP Header Fields Introduced by the BITS Upload Protocol
 
 BITS-Original-Request-URL: This specifies the [**destination URL**](#gt_destination-url) of the [**request entity**](#gt_request-entity). This MUST follow the rules defined in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 3.2.2. This field MUST be present.
 
-BITS-Request-DataEntity-Name: If the [**back-end client**](#gt_back-end-client) and server reside on the same host, the value MAY be a local file system path, using whatever naming conventions are supported by the host. If the back-end client and server reside on different hosts, the value MUST be in [**Universal Naming Convention (UNC)**](#gt_universal-naming-convention-unc) format, accessible via the [MS-SMB](../MS-SMB/MS-SMB.md) protocol. This specifies the full path to the request entity. This field MUST be present only if the notification type is [NOTIFICATION_BY_REFERENCE (section 3.2.1.1)](#Section_3.2.1.1), and this field MUST NOT be present otherwise. The rules specified for the [Content-Name (section 2.2.1.1)](#Section_2.2.11.1) header (range of characters that can be used) would apply to this as well. No limit is imposed in the back-end client on the number of characters that the value of this field could contain.<13>
+BITS-Request-DataEntity-Name: If the [**back-end client**](#gt_back-end-client) and server reside on the same host, the value MAY be a local file system path, using whatever naming conventions are supported by the host. If the back-end client and server reside on different hosts, the value MUST be in [**Universal Naming Convention (UNC)**](#gt_universal-naming-convention-unc) format, accessible via the [MS-SMB](../MS-SMB/MS-SMB.md) protocol. This specifies the full path to the request entity. This field MUST be present only if the notification type is [NOTIFICATION_BY_REFERENCE (section 3.2.1.1)](#Section_3.2.1.1), and this field MUST NOT be present otherwise. The rules specified for the [Content-Name (section 2.2.1.1)](#Section_2.2.1.1) header (range of characters that can be used) would apply to this as well. No limit is imposed in the back-end client on the number of characters that the value of this field could contain.<13>
 
 BITS-Response-DataEntity-Name: This specifies the full path where the response data from the [**server application**](#gt_server-application) MUST be stored. If the back-end client and server reside on the same host, the value MAY be a local file system path, using whatever naming conventions are supported by the host. If the back-end client and server reside on different hosts, the value MUST be in UNC format, accessible via the [MS-SMB] protocol. This field MUST be present only if the notification type is NOTIFICATION_BY_REFERENCE (section 3.2.1.1), and this field MUST NOT be present otherwise. The rules specified for the Content-Name (section 2.2.1.1) header (range of characters that can be used) would apply to this as well. No limit is imposed in the back-end client on the number of characters that the value of this field could contain.<14>
 
@@ -870,7 +870,7 @@ The server application sends this message to the [**back-end client**](#gt_back-
 <a id="Section_2.2.13.1"></a>
 #### 2.2.13.1 Standard HTTP Header Fields
 
-[Content-Length (section 2.2.1.1)](#Section_2.2.11.1): This MUST be equal to the size of the message body.
+[Content-Length (section 2.2.1.1)](#Section_2.2.1.1): This MUST be equal to the size of the message body.
 
 <a id="Section_2.2.13.2"></a>
 #### 2.2.13.2 HTTP Header Fields Introduced by the BITS Upload Protocol
@@ -911,7 +911,7 @@ The client maintains the following information about the upload:
 
 **SourceEntityBuffer:** The buffer that contains data passed by a higher-layer protocol that needs to be uploaded.
 
-**SourceEntityName:** This represents the value sent as part of the [Content-Name (section 2.2.1.1)](#Section_2.2.11.1) header field.
+**SourceEntityName:** This represents the value sent as part of the [Content-Name (section 2.2.1.1)](#Section_2.2.1.1) header field.
 
 **SourceEntitySize:** A 64-bit integer that holds the size of the data being uploaded.
 
@@ -986,12 +986,12 @@ Figure 4: Possible state transitions
 <a id="Section_3.1.2.1"></a>
 #### 3.1.2.1 Upload Request Timeout
 
-This timer limits the amount of time taken for sending any of the requests mentioned in section [2.2](#Section_1.3) regardless of the state transitions involved. The default value is 2 minutes; the legal range is any positive value.
+This timer limits the amount of time taken for sending any of the requests mentioned in section [2.2](#Section_2.2) regardless of the state transitions involved. The default value is 2 minutes; the legal range is any positive value.
 
 <a id="Section_3.1.2.2"></a>
 #### 3.1.2.2 Upload Response Timeout
 
-This timer limits the amount of time taken for receiving any of the responses mentioned in section [2.2](#Section_1.3) from the server regardless of the state transitions involved. The default value is 5 minutes; the legal range is any positive value.
+This timer limits the amount of time taken for receiving any of the responses mentioned in section [2.2](#Section_2.2) from the server regardless of the state transitions involved. The default value is 5 minutes; the legal range is any positive value.
 
 <a id="Section_3.1.2.3"></a>
 #### 3.1.2.3 Host Fallback Timeout
@@ -1400,7 +1400,7 @@ For handling other HTTP status codes, refer to section [3.1.5.2.1](#Section_3.1.
 <a id="Section_3.1.5.2.6"></a>
 ##### 3.1.5.2.6 CANCEL-SESSION Response
 
-The client MUST verify that the message satisfies the requirements in sections [2.2.1](#Section_2.2.1) and [2.2.11](#Section_2.2.10), discarding the message if not.
+The client MUST verify that the message satisfies the requirements in sections [2.2.1](#Section_2.2.1) and [2.2.11](#Section_2.2.11), discarding the message if not.
 
 If the HTTP status code is 200, the server has successfully cleaned up [**BITS session**](#gt_bits-session)-specific data for the given upload. More details of state transitions based on the response is in section [3.1.5.1.6](#Section_3.1.5.1.6).
 
@@ -1435,7 +1435,7 @@ The client sends ERROR_TRANSPORT to the higher-layer protocol.
 <a id="Section_3.2"></a>
 ## 3.2 Upload Server Details
 
-An implementation that includes the upload mode SHOULD also implement the notification semantics presented in this section and in sections [3.3](#Section_1.3) and [3.4](#Section_3.4). If the implementation also implements the [**upload-reply**](#gt_upload-reply) of this protocol, it MUST implement the notification semantics as described in sections 3.3 and 3.4.
+An implementation that includes the upload mode SHOULD also implement the notification semantics presented in this section and in sections [3.3](#Section_3.3) and [3.4](#Section_3.4). If the implementation also implements the [**upload-reply**](#gt_upload-reply) of this protocol, it MUST implement the notification semantics as described in sections 3.3 and 3.4.
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -1491,7 +1491,7 @@ A BITSSessionWrapper object contains the following properties:
 - BITSSessionId: This refers to [BITS-Session-Id (section 2.2.3.2)](#Section_2.2.3.2).
 - State: This represents the current active state of a BITSSessionWrapper object. This is an enumeration and contains one of the values mentioned in the following state table.
 - DestinationURL: This refers to the [**destination URL**](#gt_destination-url).
-- RequestEntityPath: This represents the physical path to the request entity for the upload. The rules specified for the [Content-Name (section 2.2.1.1)](#Section_2.2.11.1) header (maximum character limit, range of characters that can be used) apply to this as well.
+- RequestEntityPath: This represents the physical path to the request entity for the upload. The rules specified for the [Content-Name (section 2.2.1.1)](#Section_2.2.1.1) header (maximum character limit, range of characters that can be used) apply to this as well.
 - ResponseEntityPath: This represents the physical path to the [response entity](#Section_1.3.3) used in [**upload-reply**](#gt_upload-reply) mode. The rules specified for Content-Name (section 2.2.1.1) header (maximum character limit, range of characters that can be used) apply to this as well.
 - UploadEntitySize: A 64-bit integer that represents the number of bytes of the request entity.
 - ReplyURL: This is the same as [**reply URL**](#gt_reply-url).
@@ -1720,7 +1720,7 @@ Apply the message processing rules as described in sections [3.2.5.2.1](#Section
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 General Rules for HTTP-Level Error Responses
 
-This section describes several circumstances where the server's response to an incoming message is a response at the HTTP level rather than a message from section [2.2](#Section_1.3). In all such cases, the response MUST conform to the format defined in section 6 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The HTTP message body of these messages SHOULD be empty.
+This section describes several circumstances where the server's response to an incoming message is a response at the HTTP level rather than a message from section [2.2](#Section_2.2). In all such cases, the response MUST conform to the format defined in section 6 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The HTTP message body of these messages SHOULD be empty.
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Message Flow
@@ -1749,14 +1749,14 @@ If (error occurs in any of the above actions)
 
 Return error response to the client.
 
-The message format for responses for the corresponding request messages can be found in section [2.2](#Section_1.3).
+The message format for responses for the corresponding request messages can be found in section [2.2](#Section_2.2).
 
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Common Message Validation
 
-See section [2.2.1](#Section_2.2.1) for more details about the common standard HTTP headers and HTTP headers specific to the BITS Upload Protocol. The response sent from the server in the discussion that follows MUST be based on the type of message received from the client (except PING messages). See sections [2.2.3](#Section_2.2.3), [2.2.7](#Section_2.2.7), [2.2.9](#Section_2.2.9), and [2.2.11](#Section_2.2.10) for the message format of various responses sent from the server.
+See section [2.2.1](#Section_2.2.1) for more details about the common standard HTTP headers and HTTP headers specific to the BITS Upload Protocol. The response sent from the server in the discussion that follows MUST be based on the type of message received from the client (except PING messages). See sections [2.2.3](#Section_2.2.3), [2.2.7](#Section_2.2.7), [2.2.9](#Section_2.2.9), and [2.2.11](#Section_2.2.11) for the message format of various responses sent from the server.
 
-The server MUST verify that the request message satisfies the requirements in section [2.2](#Section_1.3). If the request message fails to satisfy the requirements, the server MUST send a 400 HTTP status code with BITS-Error 0x80070057, BITS-Error-Context 0x5.
+The server MUST verify that the request message satisfies the requirements in section [2.2](#Section_2.2). If the request message fails to satisfy the requirements, the server MUST send a 400 HTTP status code with BITS-Error 0x80070057, BITS-Error-Context 0x5.
 
 The server MUST check whether the client has sufficient access permissions to upload the [**request entity**](#gt_request-entity) to the location provided through the [**destination URL**](#gt_destination-url). If not, the server MUST send a 403 HTTP status code with BITS-Error 0x80070005, BITS-Error-Context 0x5.
 
@@ -1811,7 +1811,7 @@ The server MUST delete the [**request entity**](#gt_request-entity), [**response
 
 If ResponseEntityPath was returned from the [**back-end client**](#gt_back-end-client), the server MUST delete it.
 
-The server MUST send the response as described in section [2.2.11](#Section_2.2.10).
+The server MUST send the response as described in section [2.2.11](#Section_2.2.11).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -1824,7 +1824,7 @@ When the time-out is hit, the server MUST clean up all the data associated with 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
 
-The server MAY choose to reduce the number of active sessions in response to implementation-dependent criteria, such as resource limits or detection of a denial-of-service attack.<26> The affected sessions MUST be cleaned up as described in section [3.2.6.1](#Section_3.2.2.1).
+The server MAY choose to reduce the number of active sessions in response to implementation-dependent criteria, such as resource limits or detection of a denial-of-service attack.<26> The affected sessions MUST be cleaned up as described in section [3.2.6.1](#Section_3.2.6.1).
 
 <a id="Section_3.3"></a>
 ## 3.3 Back-End Client Details
@@ -1848,7 +1848,7 @@ The [**back-end client**](#gt_back-end-client) uses the following state elements
 - NotificationURL (Optional): This specifies the URL of the server application to which the server sends the request entity. This MUST be present if the NotificationType property is not NONE.
 - [DestinationURL](#Section_1.1): This SHOULD be passed from the upload server. This is the same as destination URL.
 - [RequestEntityPath (section 3.2.1.4)](#Section_3.2.1.4): This SHOULD be passed from the upload server.
-- ResponseEntityPath: This represents the physical path to the request entity used in [upload-reply (section 1.3.3)](#Section_1.3.3) mode. The rules specified for [Content-Name (section 2.2.1.1)](#Section_2.2.11.1) header (maximum character limit, range of characters that can be used) apply to this as well. This information is passed to the upload server.
+- ResponseEntityPath: This represents the physical path to the request entity used in [upload-reply (section 1.3.3)](#Section_1.3.3) mode. The rules specified for [Content-Name (section 2.2.1.1)](#Section_2.2.1.1) header (maximum character limit, range of characters that can be used) apply to this as well. This information is passed to the upload server.
 - ReplyURL: This is same as [**reply URL**](#gt_reply-url).
 - HTTPStatusCode: This represents the HTTP status code as described in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 10. This is returned to a server component.
 - BitsErrorCode: This represents [BITS-Error (section 2.2.1.2)](#Section_2.2.1.2).
@@ -2088,7 +2088,7 @@ Report HTTPStatusCode, BITSErrorCode to the higher-layer protocol.
 <a id="Section_3.3.5.3.1"></a>
 ##### 3.3.5.3.1 General Rules for HTTP-Level Error Responses
 
-This section describes several circumstances where the server's response to an incoming message is a response at the HTTP level rather than a message from section [2.2](#Section_1.3). In all such cases, the response MUST conform to the format defined in section 6 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The HTTP message body of these messages SHOULD be empty.
+This section describes several circumstances where the server's response to an incoming message is a response at the HTTP level rather than a message from section [2.2](#Section_2.2). In all such cases, the response MUST conform to the format defined in section 6 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The HTTP message body of these messages SHOULD be empty.
 
 <a id="Section_3.3.5.3.2"></a>
 ##### 3.3.5.3.2 Notification Response
@@ -2158,7 +2158,7 @@ None.
 <a id="Section_3.4.5.1"></a>
 #### 3.4.5.1 General Rules for HTTP-Level Error Responses
 
-This section describes several circumstances where the server's response to an incoming message is a response at the HTTP level rather than a message from section [2.2](#Section_1.3). In all such cases, the response MUST conform to the format defined in section 6 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The HTTP message body of these messages SHOULD be empty.
+This section describes several circumstances where the server's response to an incoming message is a response at the HTTP level rather than a message from section [2.2](#Section_2.2). In all such cases, the response MUST conform to the format defined in section 6 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The HTTP message body of these messages SHOULD be empty.
 
 <a id="Section_3.4.5.2"></a>
 #### 3.4.5.2 Notification Request
@@ -2430,7 +2430,7 @@ Set state to STATE_DOWNLOAD.
 
 The client initiates a new **FileSearchRequest** element as specified in [MS-BPCR](../MS-BPCR/MS-BPCR.md) section 3.1.4.1 by setting the values of OriginalUrl to DESTINATION_URL, FileModificationTime to DATA_TIMESTAMP and FileSize to DATA_LENGTH, and waits for the search to complete.
 
-During this time, The RESULT_FOUND event ([MS-BPCR] section 3.1.7.3.2) is handled as specified in section [3.6.7.1](../MS-BPCR/MS-BPCR.md).
+During this time, The RESULT_FOUND event ([MS-BPCR] section 3.1.7.3.2) is handled as specified in section [3.6.7.1](#Section_3.6.7.1).
 
 After the search is completed, the client searches the **Table of Contents**, identifying ranges in APPLICATION_RANGES that do not have a corresponding row. For each missing range, the client inserts a row with RECORD_ID set to NULL and **Source** set to the hostname from DESTINATION_URL.
 

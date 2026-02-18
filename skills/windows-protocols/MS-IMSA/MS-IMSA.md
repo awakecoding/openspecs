@@ -441,7 +441,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The [**Internet Information Services (IIS)**](#gt_internet-information-services-iis) IMSAdminBaseW Remote Protocol is a client/server protocol that is used for remotely managing a hierarchical configuration data store ([**metabase**](#gt_metabase)). The layout and specifics of such a store are specified in section [3.1.1](#Section_3.1).
+The [**Internet Information Services (IIS)**](#gt_internet-information-services-iis) IMSAdminBaseW Remote Protocol is a client/server protocol that is used for remotely managing a hierarchical configuration data store ([**metabase**](#gt_metabase)). The layout and specifics of such a store are specified in section [3.1.1](#Section_3.1.1).
 
 The Internet Information Services (IIS) IMSAdminBaseW Remote Protocol also provides DCOM interfaces to manage server entities, such as [**web applications**](#gt_web-application) and [**public key**](#gt_public-key) certificates, which can be defined or referenced in the metabase data store.
 
@@ -475,7 +475,7 @@ This document covers versioning issues in the following areas:
 
 **Supported Transports:** The IIS IMSAdminBaseW Remote Protocol uses the remote protocol described in [MS-DCOM](../MS-DCOM/MS-DCOM.md) and multiple [**RPC protocol sequences**](#gt_rpc-protocol-sequence), as specified in section [2.1](#Section_2.1).
 
-**Protocol Versions:** This protocol has multiple interfaces, as specified in section [3](#Section_1.3).
+**Protocol Versions:** This protocol has multiple interfaces, as specified in section [3](#Section_3).
 
 **Security and Authentication Methods:** Authentication and security are provided as specified in [MS-DCOM] and [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -496,13 +496,13 @@ The following parameters are private Microsoft assignments.
 | DCOM [**CLSID**](#gt_class-identifier-clsid) for the IIS IMSAdminBaseW Remote Protocol (CLSID_MSAdminBase_W) | A9E69610-B80D-11D0-B9B9-00A0C922E750 | None |
 | DCOM CLSID for the IIS IMSAdminBaseW Remote Protocol (CLSID_WamAdmin) | 61738644-F196-11D0-9953-00C04FD919C1 | None |
 | DCOM CLSID for the IIS IMSAdminBaseW Remote Protocol (CLSID_IISCertObj) | 62B8CCBE-5A45-4372-8C4A-6A87DD3EDD60 | None |
-| [**RPC**](#gt_remote-procedure-call-rpc) Interface [**UUID**](#gt_universally-unique-identifier-uuid) for [IMSAdminBaseW](#Section_3.2) | 70B51430-B6CA-11d0-B9B9-00A0C922E750 | None |
+| [**RPC**](#gt_remote-procedure-call-rpc) Interface [**UUID**](#gt_universally-unique-identifier-uuid) for [IMSAdminBaseW](#Section_3.1) | 70B51430-B6CA-11d0-B9B9-00A0C922E750 | None |
 | RPC Interface UUID for [IMSAdminBase2W](#Section_3.3) | 8298d101-f992-43b7-8eca-5052d885b995 | None |
-| RPC Interface UUID for [IMSAdminBase3W](#Section_3.6) | f612954d-3b0b-4c56-9563-227b7be624b4 | None |
-| RPC Interface UUID for [IWamAdmin](#Section_3.8) | 29822AB7-F302-11D0-9953-00C04FD919C1 | None |
+| RPC Interface UUID for [IMSAdminBase3W](#Section_3.5) | f612954d-3b0b-4c56-9563-227b7be624b4 | None |
+| RPC Interface UUID for [IWamAdmin](#Section_3.7) | 29822AB7-F302-11D0-9953-00C04FD919C1 | None |
 | RPC Interface UUID for [IWamAdmin2](#Section_3.8) | 29822AB8-F302-11D0-9953-00C04FD919C1 | None |
 | RPC Interface UUID for [IIISApplicationAdmin](#Section_3.9) | 7C4E1804-E342-483D-A43E-A850CFCC8D18 | None |
-| RPC Interface UUID for [IIISCertObj](#Section_3.11) | BD0C73BC-805B-4043-9C30-9A28D64DD7D2 | None |
+| RPC Interface UUID for [IIISCertObj](#Section_3.10) | BD0C73BC-805B-4043-9C30-9A28D64DD7D2 | None |
 
 <a id="Section_2"></a>
 # 2 Messages
@@ -514,19 +514,19 @@ This protocol MUST use the remote protocol specified in [MS-DCOM](../MS-DCOM/MS-
 
 This protocol MUST use the following [**UUIDs**](#gt_universally-unique-identifier-uuid):
 
-[IMSAdminBaseW](#Section_3.2): 70B51430-B6CA-11D0-B9B9-00A0C922E750
+[IMSAdminBaseW](#Section_3.1): 70B51430-B6CA-11D0-B9B9-00A0C922E750
 
 [IMSAdminBase2W](#Section_3.3): 8298D101-F992-43B7-8ECA-5052D885B995
 
-[IMSAdminBase3W](#Section_3.6): F612954D-3B0B-4C56-9563-227B7BE624B4
+[IMSAdminBase3W](#Section_3.5): F612954D-3B0B-4C56-9563-227B7BE624B4
 
-[IWamAdmin](#Section_3.8):29822AB7-F302-11D0-9953-00C04FD919C1
+[IWamAdmin](#Section_3.7):29822AB7-F302-11D0-9953-00C04FD919C1
 
 [IWamAdmin2](#Section_3.8): 29822AB8-F302-11D0-9953-00C04FD919C1
 
 [IIISApplicationAdmin](#Section_3.9): 7C4E1804-E342-483D-A43E-A850CFCC8D18
 
-[IIISCertObj](#Section_3.11): BD0C73BC-805B-4043-9C30-9A28D64DD7D2
+[IIISCertObj](#Section_3.10): BD0C73BC-805B-4043-9C30-9A28D64DD7D2
 
 To receive incoming remote calls for these interfaces, the server MUST implement a DCOM Object Class with the CLSIDs (specified in section [1.9](#Section_1.9)) CLSID_MSAdminBase_W using the UUID {A9E69610-B80D-11D0-B9B9-00A0C922E750}, CLSID_WamAdmin using the UUID {61738644-F196-11D0-9953-00C04FD919C1}, and CLSID_IISCertObj using the UUID {62B8CCBE-5A45-4372-8C4A-6A87DD3EDD60}.
 
@@ -637,7 +637,7 @@ packet-beta
 
 **SignedHashLength (4 bytes):** A 32-bit unsigned integer that contains the size, in bytes, of the **SignedHash** field.
 
-**EncryptedSessionKey (variable):** A variable-length array of bytes that contains session key information. For more information about the internal organization of data inside this field, see [ENCRYPTED_SESSION_KEY_BLOB (section 2.2.2.2.1)](#Section_2.2.2.2).
+**EncryptedSessionKey (variable):** A variable-length array of bytes that contains session key information. For more information about the internal organization of data inside this field, see [ENCRYPTED_SESSION_KEY_BLOB (section 2.2.2.2.1)](#Section_2.2.2.2.1).
 
 **Padding (variable):** A variable-length array of bytes that contains zero to seven bytes of padding based on the **SessionKeyDataLength** field. The number of padding bytes is calculated as the difference between an 8-byte aligned **EncryptedSessionKeyLength** field and the actual **EncryptedSessionKeyLength** field.
 
@@ -758,7 +758,7 @@ packet-beta
 <a id="Section_2.2.4"></a>
 ### 2.2.4 METADATA_GETALL_RECORD
 
-The METADATA_GETALL_RECORD structure defines an analogous structure to [METADATA_RECORD](#Section_2.2.7) but is used only to return data from a call to the [R_GetAllData](#Section_3.1.4.22) method. Data retrieval specifications are provided in R_GetAllData method parameters, not in this structure (as is the case with METADATA_RECORD). The R_GetAllData method returns the data from multiple entries as an array of METADATA_GETALL_RECORD structures.
+The METADATA_GETALL_RECORD structure defines an analogous structure to [METADATA_RECORD](#Section_2.2.7) but is used only to return data from a call to the [R_GetAllData](#Section_3.2.4.7) method. Data retrieval specifications are provided in R_GetAllData method parameters, not in this structure (as is the case with METADATA_RECORD). The R_GetAllData method returns the data from multiple entries as an array of METADATA_GETALL_RECORD structures.
 
 typedef struct _METADATA_GETALL_RECORD{
 
@@ -981,7 +981,7 @@ The MD_BACKUP_MAX_LEN constant is used to define the maximum size of a string th
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The client side of the [IWamAdmin](#Section_3.8), [IWamAdmin2](#Section_3.8), and [IIISApplicationAdmin](#Section_3.9) interfaces are simply a pass-through. That is, no additional timers or other state is required on the client side of this protocol. Calls made by the higher-layer protocol or application are passed directly to the transport, and the results returned by the transport are passed directly back to the higher-layer protocol or application.
+The client side of the [IWamAdmin](#Section_3.7), [IWamAdmin2](#Section_3.8), and [IIISApplicationAdmin](#Section_3.9) interfaces are simply a pass-through. That is, no additional timers or other state is required on the client side of this protocol. Calls made by the higher-layer protocol or application are passed directly to the transport, and the results returned by the transport are passed directly back to the higher-layer protocol or application.
 
 <a id="Section_3.1"></a>
 ## 3.1 IMSAdminBaseW Server Details
@@ -991,7 +991,7 @@ The client side of the [IWamAdmin](#Section_3.8), [IWamAdmin2](#Section_3.8), an
 
 The following information must be maintained by the server for use in responding to client queries and commands.
 
-Configuration storage, interfaced by [IMSAdminBaseW](#Section_3.2), is to be implemented as a hierarchical tree-like store of data. Configuration data is accessed through the [**metabase**](#gt_metabase) path, where each node of the path represents branch of the tree, similar to the registry key. The node is identified by a name that is unique between siblings and the metabase path is combined from node names separated by predefined separation characters. Each node could contain any number of data value items (data) identified by numerical IDs, and any number of child nodes.
+Configuration storage, interfaced by [IMSAdminBaseW](#Section_3.1), is to be implemented as a hierarchical tree-like store of data. Configuration data is accessed through the [**metabase**](#gt_metabase) path, where each node of the path represents branch of the tree, similar to the registry key. The node is identified by a name that is unique between siblings and the metabase path is combined from node names separated by predefined separation characters. Each node could contain any number of data value items (data) identified by numerical IDs, and any number of child nodes.
 
 In addition to the registry-like features, the metabase provides data value items inheritance along the metabase path in such a manner, that data value item defined on the node located closer to the root of the tree could be inherited by lower level nodes. Each data value item carries an attribute that could be used to find, if the data on any particular node is defined on that node, or inherited from the parent node.
 
@@ -1031,7 +1031,7 @@ The IIS IMSAdminBaseW Remote Protocol server MUST be initialized by registering 
 
 This DCOM interface inherits the IUnknown interface. Method [**opnum**](#gt_opnum) field values start with 3; opnum values 0 through 2 represent the IUnknown_QueryInterface, IUnknown_AddRef, and IUnknown_Release methods, respectively, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-Methods with opnum field values 34 through 39 are defined in section [3.3.4](#Section_3.3), and field value 40 is defined in section [3.5.4](#Section_3.6).
+Methods with opnum field values 34 through 39 are defined in section [3.3.4](#Section_3.3.4), and field value 40 is defined in section [3.5.4](#Section_3.5.4).
 
 This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runtime that it is to perform a strict [**Network Data Representation (NDR)**](#gt_network-data-representation-ndr) data consistency check at target level 5.0, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.
 
@@ -1046,10 +1046,10 @@ Methods in RPC Opnum Order
 | [CopyKey](#Section_3.1.4.5) | Copies or moves a node, including its subnodes and data, to a specified destination. The copied or moved node becomes a subnode of the destination node. Opnum: 7 |
 | [RenameKey](#Section_3.1.4.28) | Renames a node in the metabase. Opnum: 8 |
 | [R_SetData](#Section_3.2.4.4) | Sets a data item for a particular node in the metabase. Opnum: 9 |
-| [R_GetData](#Section_3.1.4.23) | Returns a data entry from a particular node in the metabase. Opnum: 10 |
+| [R_GetData](#Section_3.2.4.5) | Returns a data entry from a particular node in the metabase. Opnum: 10 |
 | [DeleteData](#Section_3.1.4.8) | Deletes specific data entries from a node in the metabase. Opnum: 11 |
 | [R_EnumData](#Section_3.2.4.6) | Enumerates the data entries of a node in the metabase. Opnum: 12 |
-| [R_GetAllData](#Section_3.1.4.22) | Returns all data associated with a node in the metabase, including all values that the node inherits. Opnum: 13 |
+| [R_GetAllData](#Section_3.2.4.7) | Returns all data associated with a node in the metabase, including all values that the node inherits. Opnum: 13 |
 | [DeleteAllData](#Section_3.1.4.9) | Deletes all or a subset of local data associated with a particular node. Opnum: 14 |
 | [CopyData](#Section_3.1.4.10) | Copies or moves data between nodes. Opnum: 15 |
 | [GetDataPaths](#Section_3.1.4.17) | Returns the paths of all nodes in the subtree relative to a specified starting node that contains the supplied identifier. Opnum: 16 |
@@ -1091,9 +1091,9 @@ When the client expects transfer of sensitive data, it will initiate negotiation
 
 There are four methods that take advantage of this protection:
 
-- [R_GetData](#Section_3.1.4.23)
+- [R_GetData](#Section_3.2.4.5)
 - [R_EnumData](#Section_3.2.4.6)
-- [R_GetAllData](#Section_3.1.4.22)
+- [R_GetAllData](#Section_3.2.4.7)
 - [R_SetData](#Section_3.2.4.4)
 Sensitive data is marked with the METADATA_SECURE secure flag in the METADATA_RECORD or METADATA_GETALL_RECORD structure.<2>
 
@@ -1169,7 +1169,7 @@ The following steps MUST be performed by the receiver:
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 OpenKey (Opnum 17)
 
-The OpenKey method opens a node for read access, write access, or both. The returned handle can be used by several of the other methods in the [IMSAdminBaseW](#Section_3.2) interface.
+The OpenKey method opens a node for read access, write access, or both. The returned handle can be used by several of the other methods in the [IMSAdminBaseW](#Section_3.1) interface.
 
 HRESULT OpenKey(
 
@@ -1218,7 +1218,7 @@ When processing this call, the [**server**](#gt_server) MUST do the following:
 - Check that the relative path points to a valid node; otherwise, return ERROR_PATH_NOT_FOUND.
 - Determine if it is possible to provide the required access type for the destination node with the path combined from the parent handle path and the relative path.
 - If the destination node represents the root of the metabase and the requested access is for write, the server returns an error.
-- If the destination node falls into part of the metabase that is locked as described in [3.1.1](#Section_3.1), the server SHOULD attempt to provide access during the time-out, which is passed as a parameter. If, after this time-out, the node is still locked, the server SHOULD return ERROR_PATH_BUSY.<3>
+- If the destination node falls into part of the metabase that is locked as described in [3.1.1](#Section_3.1.1), the server SHOULD attempt to provide access during the time-out, which is passed as a parameter. If, after this time-out, the node is still locked, the server SHOULD return ERROR_PATH_BUSY.<3>
 - If access could be provided, the server calculates the handle of the destination node, increases its lock count, and saves its state.
 Return the following information to the client:
 
@@ -1710,7 +1710,7 @@ When processing this call, the [**server**](#gt_server) MUST do the following:
 - The server SHOULD check whether the handle was opened for read access. If not, return E_ACCESSDENIED.<13>
 - The server SHOULD check whether the relative path points to the existing subnode of the parent handle. If not, return ERROR_PATH_NOT_FOUND.
 - Obtain the requested data using an index parameter. If the index is equal or greater than the number of data items associated with the node, return ERROR_NO_MORE_ITEMS.
-- To return the data value to the client, build the IIS_CRYPTO_BLOB structure as specified in the rules of the [R_GetData](#Section_3.1.4.23) method.
+- To return the data value to the client, build the IIS_CRYPTO_BLOB structure as specified in the rules of the [R_GetData](#Section_3.2.4.5) method.
 <a id="Section_3.1.4.13"></a>
 #### 3.1.4.13 Backup (Opnum 28)
 
@@ -2383,7 +2383,7 @@ HRESULT R_SetData(
 | 0x80070003 ERROR_PATH_NOT_FOUND | The system cannot find the path specified. |
 | 0x80070005 E_ACCESSDENIED | General access denied error. |
 | 0x80070057 E_INVALIDARG | An invalid parameter value was specified. |
-| 0x800CC808 MD_ERROR_CANNOT_REMOVE_SECURE_ATTRIBUTE | The **METADATA_SECURE** attribute cannot be removed from a data item via the [R_GetData](#Section_3.1.4.23) method. Use the [DeleteData](#Section_3.1.4.8) method to remove the secure data. |
+| 0x800CC808 MD_ERROR_CANNOT_REMOVE_SECURE_ATTRIBUTE | The **METADATA_SECURE** attribute cannot be removed from a data item via the [R_GetData](#Section_3.2.4.5) method. Use the [DeleteData](#Section_3.1.4.8) method to remove the secure data. |
 | 0x80070008 ERROR_NOT_ENOUGH_MEMORY | There is not enough memory to complete the operation. |
 
 The [**opnum**](#gt_opnum) field value for this method is 9.
@@ -2552,7 +2552,7 @@ When processing this call, the server MUST do the following:
 <a id="Section_3.1.4.32"></a>
 #### 3.1.4.32 UnmarshalInterface (Opnum 32)
 
-The UnmarshalInterface method returns a pointer to the [IMSAdminBaseW](#Section_3.2) interface.
+The UnmarshalInterface method returns a pointer to the [IMSAdminBaseW](#Section_3.1) interface.
 
 HRESULT UnmarshalInterface(
 
@@ -2589,7 +2589,7 @@ No local events are maintained on the server other than the events that are main
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-The client uses the abstract data model defined by the server; see section [3.1.1](#Section_3.1).
+The client uses the abstract data model defined by the server; see section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Secure Session Context
@@ -2670,7 +2670,7 @@ The client MUST perform the following steps:
 - Compare hashes from the previous two steps. If they match, the server owns the server's [**key exchange private key**](#gt_key-exchange-private-key) and was able to decrypt the client's session key.
 If a hash validation fails, the receiver MUST reject the data and the method that is processing the encrypted data MUST fail. Error messages resulting from a hash validation failure are implementation-dependent.
 
-- [**Secure session**](#gt_secure-session) negotiation is now complete. The client and server can now use secure session to encrypt/decrypt data of a sensitive nature marked by the METADATA_SECURE secure flag with calls to the [R_GetData](#Section_3.1.4.23), [R_EnumData](#Section_3.2.4.6), [R_GetAllData](#Section_3.1.4.22), and [R_SetData](#Section_3.2.4.4) methods.
+- [**Secure session**](#gt_secure-session) negotiation is now complete. The client and server can now use secure session to encrypt/decrypt data of a sensitive nature marked by the METADATA_SECURE secure flag with calls to the [R_GetData](#Section_3.2.4.5), [R_EnumData](#Section_3.2.4.6), [R_GetAllData](#Section_3.2.4.7), and [R_SetData](#Section_3.2.4.4) methods.
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 R_SetData (Opnum 9)
 
@@ -2698,7 +2698,7 @@ The following set of steps MUST be performed by the client to decrypt or decode 
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 R_EnumData (Opnum 12)
 
-The session negotiation requirement, [IIS_CRYPTO_BLOB](#Section_2.2.2) handling, and [METADATA_RECORD](#Section_2.2.7) handling is identical to that used by the [R_GetData](#Section_3.1.4.23) method.
+The session negotiation requirement, [IIS_CRYPTO_BLOB](#Section_2.2.2) handling, and [METADATA_RECORD](#Section_2.2.7) handling is identical to that used by the [R_GetData](#Section_3.2.4.5) method.
 
 <a id="Section_3.2.4.7"></a>
 #### 3.2.4.7 R_GetAllData (Opnum 13)
@@ -2731,7 +2731,7 @@ No additional local events are used on the client beyond the events maintained i
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-This interface uses the same data model as the [IMSAdminBaseW](#Section_3.2) interface.
+This interface uses the same data model as the [IMSAdminBaseW](#Section_3.1) interface.
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
@@ -2741,14 +2741,14 @@ No protocol timers are required beyond those used internally by [**RPC**](#gt_re
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-Initialization is specified in section [3.1.3](#Section_3.11.3).
+Initialization is specified in section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Message Processing Events and Sequencing Rules
 
 This DCOM interface inherits the IUnknown interface. The method [**opnum**](#gt_opnum) field values start with 3; opnum values 0 through 2 represent the IUnknown_QueryInterface, IUnknown_AddRef, and IUnknown_Release methods, respectively, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-Methods with opnum field values 3 through 33 are defined in section [3.1.4](#Section_3.2), and field value 40 is defined in section [3.5.4](#Section_3.6).
+Methods with opnum field values 3 through 33 are defined in section [3.1.4](#Section_3.1.4), and field value 40 is defined in section [3.5.4](#Section_3.5.4).
 
 The IMSAdminBase2W [**RPC**](#gt_remote-procedure-call-rpc) interface extends the IMSAdminBaseW interface, adding functionality for [**metabase**](#gt_metabase) importing and exporting, history management, and secure data [**encryption**](#gt_encryption) on backup. The IMSAdminBase2W protocol does not maintain client state information.
 
@@ -2758,7 +2758,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [BackupWithPasswd](#Section_3.3.4.1) | Backs up the metabase to a specified location, using a supplied password to encrypt all secure data. Opnum: 34 |
+| [BackupWithPasswd](#Section_4.2) | Backs up the metabase to a specified location, using a supplied password to encrypt all secure data. Opnum: 34 |
 | [RestoreWithPasswd](#Section_4.7) | Restores the metabase from a backup, using a supplied password to decrypt the secure data. Opnum: 35 |
 | [Export](#Section_3.3.4.3) | Exports the metabase from a supplied location to a specific file name. Opnum: 36 |
 | [Import](#Section_3.3.4.4) | Imports a previously exported metabase into an existing one. Opnum: 37 |
@@ -3114,12 +3114,12 @@ No protocol timers are required beyond those used internally by [**RPC**](#gt_re
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-The client MUST perform initialization according to the rules defined in section [3.2.3](#Section_3.11.3).
+The client MUST perform initialization according to the rules defined in section [3.2.3](#Section_3.2.3).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Message Processing Events and Sequencing Rules
 
-The client SHOULD follow the rules defined in section [3.2.4](#Section_3.9.4).
+The client SHOULD follow the rules defined in section [3.2.4](#Section_3.2.4).
 
 <a id="Section_3.4.5"></a>
 ### 3.4.5 Timer Events
@@ -3139,7 +3139,7 @@ No additional local events are used on the client beyond the events maintained i
 <a id="Section_3.5.1"></a>
 ### 3.5.1 Abstract Data Model
 
-No specific abstract data model is required. This interface uses the same data model as the [IMSAdminBaseW](#Section_3.2) interface.
+No specific abstract data model is required. This interface uses the same data model as the [IMSAdminBaseW](#Section_3.1) interface.
 
 <a id="Section_3.5.2"></a>
 ### 3.5.2 Timers
@@ -3156,7 +3156,7 @@ This protocol uses DCOM initialization, as specified in [MS-DCOM](../MS-DCOM/MS-
 
 This DCOM interface inherits the IUnknown interface. Method [**opnum**](#gt_opnum) field values start with 3; opnum values 0 through 2 represent the IUnknown_QueryInterface, IUnknown_AddRef, and IUnknown_Release methods, respectively, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-Methods with opnum field values 3 through 33 are defined in section [3.1.4](#Section_3.2), and those with field values 34 through 39 are defined in section [3.3.4](#Section_3.3).
+Methods with opnum field values 3 through 33 are defined in section [3.1.4](#Section_3.1.4), and those with field values 34 through 39 are defined in section [3.3.4](#Section_3.3.4).
 
 The IMSAdminBase3W [**RPC**](#gt_remote-procedure-call-rpc) interface extends the IMSAdminBase2W interface by providing a method to return the nodes of children from a specified [**metabase**](#gt_metabase) path. The IMSAdminBase3W protocol does not maintain client state information; the protocol is stateless.
 
@@ -3166,7 +3166,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetChildPaths](#Section_3.5.4.1) | Returns all child nodes of a specified path from a supplied metadata handle. Opnum: 40 |
+| [GetChildPaths](#Section_4.8) | Returns all child nodes of a specified path from a supplied metadata handle. Opnum: 40 |
 
 When a remote call is made, the [**UUID**](#gt_universally-unique-identifier-uuid) and version number of the interface are specified in the **abstract_syntax** and **abstract_syntax_vers** fields of the incoming RPC_BIND packet, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -3252,12 +3252,12 @@ No protocol timers are required beyond those used internally by [**RPC**](#gt_re
 <a id="Section_3.6.3"></a>
 ### 3.6.3 Initialization
 
-The client MUST perform initialization according to the rules defined in section [3.5.3](#Section_3.11.3).
+The client MUST perform initialization according to the rules defined in section [3.5.3](#Section_3.5.3).
 
 <a id="Section_3.6.4"></a>
 ### 3.6.4 Message Processing Events and Sequencing Rules
 
-Client SHOULD follow the rules defined in [3.5.4](#Section_3.6).
+Client SHOULD follow the rules defined in [3.5.4](#Section_3.5.4).
 
 <a id="Section_3.6.5"></a>
 ### 3.6.5 Timer Events
@@ -3277,7 +3277,7 @@ No additional local events are used on the client beyond the events maintained i
 <a id="Section_3.7.1"></a>
 ### 3.7.1 Abstract Data Model
 
-The [IWamAdmin](#Section_3.8) interface makes use of the configuration storage ([**metabase**](#gt_metabase)) described in section [3.1.1](#Section_3.1). Although the data elements stored in the metabase are not strictly part of the protocol, correct client interoperation requires that they be set as specified in the message processing descriptions that follow. The data elements [MD_APP_ISOLATED](#Section_2.2.10) and [MD_APP_ROOT](#Section_2.2.9) are specified in sections 2.2.10 and 2.2.9, respectively.
+The [IWamAdmin](#Section_3.7) interface makes use of the configuration storage ([**metabase**](#gt_metabase)) described in section [3.1.1](#Section_3.1.1). Although the data elements stored in the metabase are not strictly part of the protocol, correct client interoperation requires that they be set as specified in the message processing descriptions that follow. The data elements [MD_APP_ISOLATED](#Section_2.2.10) and [MD_APP_ROOT](#Section_2.2.9) are specified in sections 2.2.10 and 2.2.9, respectively.
 
 <a id="Section_3.7.2"></a>
 ### 3.7.2 Timers
@@ -3287,7 +3287,7 @@ None.
 <a id="Section_3.7.3"></a>
 ### 3.7.3 Initialization
 
-The [IWamAdmin](#Section_3.8) server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) interface and listening on the RPC [**well-known endpoint**](#gt_well-known-endpoint), as specified in section [2.1](#Section_2.1). The server MUST then wait for IWamAdmin clients to establish a connection.
+The [IWamAdmin](#Section_3.7) server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) interface and listening on the RPC [**well-known endpoint**](#gt_well-known-endpoint), as specified in section [2.1](#Section_2.1). The server MUST then wait for IWamAdmin clients to establish a connection.
 
 <a id="Section_3.7.4"></a>
 ### 3.7.4 Message Processing Events and Sequencing Rules
@@ -3521,7 +3521,7 @@ No local events are maintained on the server other than the events that are main
 <a id="Section_3.8.1"></a>
 ### 3.8.1 Abstract Data Model
 
-This interface uses the same data model as the [IWamAdmin](#Section_3.8) interface, section [3.7.1](#Section_3.7.1).
+This interface uses the same data model as the [IWamAdmin](#Section_3.7) interface, section [3.7.1](#Section_3.7.1).
 
 <a id="Section_3.8.2"></a>
 ### 3.8.2 Timers
@@ -3538,7 +3538,7 @@ The [IWamAdmin2](#Section_3.8) server MUST be initialized by registering the [**
 
 This DCOM interface inherits the IUnknown interface. Method [**opnum**](#gt_opnum) field values start with 3; opnum values 0 through 2 represent the IUnknown_QueryInterface, IUnknown_AddRef, and IUnknown_Release methods, respectively, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-The IWamAdmin2 interface extends the [IWamAdmin](#Section_3.8) interface. Method opnum field values 3 through 8 are defined in section 3.7.4.
+The IWamAdmin2 interface extends the [IWamAdmin](#Section_3.7) interface. Method opnum field values 3 through 8 are defined in section 3.7.4.
 
 This interface includes the following method.
 
@@ -3603,7 +3603,7 @@ No local events are maintained on the server other than the events that are main
 <a id="Section_3.9.1"></a>
 ### 3.9.1 Abstract Data Model
 
-This interface uses the same data model as the [IWamAdmin](#Section_3.8) interface, section [3.7.1](#Section_3.7.1).
+This interface uses the same data model as the [IWamAdmin](#Section_3.7) interface, section [3.7.1](#Section_3.7.1).
 
 <a id="Section_3.9.2"></a>
 ### 3.9.2 Timers
@@ -3873,9 +3873,9 @@ No local events are maintained on the server other than the events that are main
 <a id="Section_3.10.1"></a>
 ### 3.10.1 Abstract Data Model
 
-The [IIISCertObj](#Section_3.11) interface manages [**IIS**](#gt_internet-information-services-iis) web server [**certificates**](#gt_certificate). Web server certificates are stored in a server [**certificate store**](#gt_certificate-store). They are referenced in the IIS [**metabase**](#gt_metabase) and used by the web server for [**Secure Sockets Layer (SSL)**](#gt_secure-sockets-layer-ssl) communication with HTTP clients.
+The [IIISCertObj](#Section_3.10) interface manages [**IIS**](#gt_internet-information-services-iis) web server [**certificates**](#gt_certificate). Web server certificates are stored in a server [**certificate store**](#gt_certificate-store). They are referenced in the IIS [**metabase**](#gt_metabase) and used by the web server for [**Secure Sockets Layer (SSL)**](#gt_secure-sockets-layer-ssl) communication with HTTP clients.
 
-The IIISCertObj interface makes use of the configuration storage (metabase) described in section [3.1.1](#Section_3.1). Although data elements stored in the metabase are not strictly part of the protocol, correct client interoperation requires that they be set as specified in the message processing descriptions that follow.
+The IIISCertObj interface makes use of the configuration storage (metabase) described in section [3.1.1](#Section_3.1.1). Although data elements stored in the metabase are not strictly part of the protocol, correct client interoperation requires that they be set as specified in the message processing descriptions that follow.
 
 <a id="Section_3.10.2"></a>
 ### 3.10.2 Timers
@@ -3885,7 +3885,7 @@ None.
 <a id="Section_3.10.3"></a>
 ### 3.10.3 Initialization
 
-The [IIISCertObj](#Section_3.11) server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) interface and listening on the RPC well-known [**endpoint**](#gt_endpoint), as specified in section [2.1](#Section_2.1). The server MUST then wait for IIISCertObj clients to establish a connection.
+The [IIISCertObj](#Section_3.10) server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) interface and listening on the RPC well-known [**endpoint**](#gt_endpoint), as specified in section [2.1](#Section_2.1). The server MUST then wait for IIISCertObj clients to establish a connection.
 
 <a id="Section_3.10.4"></a>
 ### 3.10.4 Message Processing Events and Sequencing Rules
@@ -3905,7 +3905,7 @@ Methods in RPC Opnum Order
 | Opnum7NotUsedOnWire | Reserved for local use.<30> Opnum: 7 |
 | Opnum8NotUsedOnWire | Reserved for local use.<31> Opnum: 8 |
 | Opnum9NotUsedOnWire | Reserved for local use.<32> Opnum: 9 |
-| [InstanceName (Set)](#Section_3.11.4.1) | Set the web server instance used by subsequent method calls. Opnum: 10 |
+| [InstanceName (Set)](#Section_3.10.4.1) | Set the web server instance used by subsequent method calls. Opnum: 10 |
 | Opnum11NotUsedOnWire | Reserved for local use. Opnum: 11 |
 | [IsInstalledRemote](#Section_3.10.4.2) | Determine whether a [**certificate**](#gt_certificate) is associated with the specified *InstanceName*. Opnum: 12 |
 | Opnum13NotUsedOnWire | Reserved for local use. Opnum: 13 |
@@ -3976,7 +3976,7 @@ The **opnum** field value for this method is 12.
 
 When processing this call, the server MUST do the following:
 
-- If the [InstanceName (Set)](#Section_3.11.4.1) method has not been called to set the web [**server instance**](#gt_internet-protocol-server-instance-server-instance), return E_INVALIDARG.
+- If the [InstanceName (Set)](#Section_3.10.4.1) method has not been called to set the web [**server instance**](#gt_internet-protocol-server-instance-server-instance), return E_INVALIDARG.
 - Attempt to retrieve the certificate referenced at the specified *InstanceName*. If the certificate can be retrieved on the target system, set *retval* to VARIANT_TRUE. If the certificate cannot be retrieved on the target system or if no certificate is referenced at the specified *InstanceName*, set *retval* to VARIANT_FALSE. Return S_OK.
 <a id="Section_3.10.4.3"></a>
 #### 3.10.4.3 IsExportableRemote (Opnum 14)
@@ -4002,7 +4002,7 @@ The **opnum** field value for this method is 14.
 
 When processing this call, the server MUST do the following:
 
-- If the [InstanceName (Set)](#Section_3.11.4.1) method has not been called to set the web [**server instance**](#gt_internet-protocol-server-instance-server-instance), return E_INVALIDARG.
+- If the [InstanceName (Set)](#Section_3.10.4.1) method has not been called to set the web [**server instance**](#gt_internet-protocol-server-instance-server-instance), return E_INVALIDARG.
 - Attempt to retrieve the certificate referenced at the specified *InstanceName*. If the certificate cannot be retrieved on the target system or if no certificate is referenced at the specified *InstanceName*, set *retval* to VARIANT_FALSE and return S_OK.
 - Attempt to retrieve the [**private key**](#gt_private-key) for the certificate and to determine whether the key can be exported. If the key can be retrieved and is exportable, set *retval* to VARIANT_TRUE, otherwise set *retval* to VARIANT_FALSE. Return S_OK.
 <a id="Section_3.10.4.4"></a>
@@ -4030,7 +4030,7 @@ The **opnum** field value for this method is 16.
 
 When processing this call, the server MUST do the following:
 
-- If the [InstanceName (Set)](#Section_3.11.4.1) method has not been called to set the web [**server instance**](#gt_internet-protocol-server-instance-server-instance), return E_INVALIDARG.
+- If the [InstanceName (Set)](#Section_3.10.4.1) method has not been called to set the web [**server instance**](#gt_internet-protocol-server-instance-server-instance), return E_INVALIDARG.
 - Attempt to retrieve the certificate referenced at the specified *InstanceName*. If the certificate cannot be retrieved on the target system or if no certificate is referenced at the specified *InstanceName*, return S_FALSE.
 - Attempt to retrieve the **Subject** field from the certificate ([[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.1.2.6). For each [**relative distinguished name (RDN)**](#gt_relative-distinguished-name-rdn) contained in the **Subject** field, append the [**object identifier (OID)**](#gt_object-identifier-oid) for the attribute type and the attribute value to a Unicode string separated by the equals character, '=' (0x003D). If there is more than one RDN contained in the **Subject** field, separate the type/value pairs with a newline character, '\n' (0x000A). Append a newline to the string.
 - Attempt to retrieve the **Issuer** field from the certificate ([RFC3280] section 4.1.2.4). Retrieve the attribute value for one of the RDNs in the **Issuer** field and append the characters '4' (0x0034), '=' (0x003D), the retrieved attribute value, and '\n' (0x000A) to the Unicode data string.<34>
@@ -4247,7 +4247,7 @@ The client creates an [**RPC**](#gt_remote-procedure-call-rpc) association (or b
 <a id="Section_3.11.4.1"></a>
 #### 3.11.4.1 InstanceName (Set) (Opnum 10)
 
-The client MUST call this method to set a web [**server instance**](#gt_internet-protocol-server-instance-server-instance) before calling the following interface methods: [IsInstalledRemote](#Section_3.10.4.2), [IsExportableRemote](#Section_3.10.4.3), and [GetCertInfoRemote](#Section_3.10.4.4). For other interface methods, the *ServerInstance* is specified as a parameter, and a preceding call to [InstanceName](#Section_3.11.4.1) has no effect.
+The client MUST call this method to set a web [**server instance**](#gt_internet-protocol-server-instance-server-instance) before calling the following interface methods: [IsInstalledRemote](#Section_3.10.4.2), [IsExportableRemote](#Section_3.10.4.3), and [GetCertInfoRemote](#Section_3.10.4.4). For other interface methods, the *ServerInstance* is specified as a parameter, and a preceding call to [InstanceName](#Section_3.10.4.1) has no effect.
 
 <a id="Section_3.11.5"></a>
 ### 3.11.5 Timer Events
@@ -4268,7 +4268,7 @@ No additional local events are used on the client beyond the events maintained i
 The following example demonstrates how to get a handle that the DCOM Class Object can use to make the rest of the calls.
 
 - The client initializes COM by calling the CoInitializeEx function. For more information, see [[MSDN-CoInitialize]](https://go.microsoft.com/fwlink/?LinkId=93395).
-- The client initializes COM security by calling the CoInitializeSecurity function. In this call, the client sets the impersonation level and authentication level that will be used by COM for subsequent calls. The [IMSAdminBaseW](#Section_3.2) interface does not provide any additional security by itself; it relies on COM for this.<46>
+- The client initializes COM security by calling the CoInitializeSecurity function. In this call, the client sets the impersonation level and authentication level that will be used by COM for subsequent calls. The [IMSAdminBaseW](#Section_3.1) interface does not provide any additional security by itself; it relies on COM for this.<46>
 - The client creates an instance of the IMSAdminBaseW interface using a CoCreateInstance COM call and passing the remote computer name.
 - The client queries the IMSAdminBaseW interface from the pointer returned by CoCreateInstance.
 - From this point, the client has a valid pointer to the IMSAdminBaseW interface that can be used to perform additional processing via the other methods defined on the interface.
@@ -4278,7 +4278,7 @@ The following example demonstrates how to get a handle that the DCOM Class Objec
 
 The client initiates a connection to the server through standard DCOM calls, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-The client calls the [BackupWithPasswd](#Section_3.3.4.1) method and provides the following parameters:
+The client calls the [BackupWithPasswd](#Section_4.2) method and provides the following parameters:
 
 - A Unicode string that includes the terminating null character, which indicates the backup name. For example, an empty string signifies that the default backup name will be used.
 - An integer that indicates the backup version. For example, a parameter value equal to the MD_BACKUP_HIGHEST_VERSION flag signifies that the backup version is a replacement to the highest existing backup version.
@@ -4369,7 +4369,7 @@ The client uses the [OpenKey](#Section_3.1.4.2) method and provides the followin
 - METADATA_PERMISSION_READ, which asks the server to open the key with read privileges.
 - 10, which tells the server to time out after 10 milliseconds if it cannot open the key.
 - A pointer to a handle that the server will fill in with the handle to the node that has been opened.
-If the OpenKey call is successful, the client calls the [GetChildPaths](#Section_3.5.4.1) method, providing the following parameters to determine from the server how much space is required for a successful call to the GetChildPaths method:
+If the OpenKey call is successful, the client calls the [GetChildPaths](#Section_4.8) method, providing the following parameters to determine from the server how much space is required for a successful call to the GetChildPaths method:
 
 - The handle to the key opened by the OpenKey method.
 - An empty string, which is used by the server to locate the child paths relative to the handle passed in the first parameter.
@@ -4413,7 +4413,7 @@ The client's session key gets generated and is encrypted with the server's key e
 - The client receives the client's session key hash from the server. It verifies that the server owns the private key for the [**key exchange key pair**](#gt_key-exchange-key-pair) and that it was able to decrypt the client's session keys.
 By this point in the sequence, the server and the client have exchanged the session keys that will be used to encrypt the sensitive data. Also, the signature keys have been exchanged that will be used for message integrity checks.
 
-The client calls the [R_GetData](#Section_3.1.4.23) method to retrieve the sensitive data.
+The client calls the [R_GetData](#Section_3.2.4.5) method to retrieve the sensitive data.
 
 - The server retrieves the requested data and determines whether the METADATA_SECURE secure flag is set. The server encrypts the data value requested, builds the [IIS_CRYPTO_BLOB](#Section_2.2.2) message, and sends the data to the client.
 - The client checks the received data and determines whether the METADATA_SECURE secure flag is set. The client decrypts the data and verifies the signature.
@@ -5270,13 +5270,13 @@ To negotiate cleartext mode of operation, client and server still go through the
 - Any [**signature public key**](#gt_signature-public-key) BLOB is replaced with a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to the CLEARTEXT_BLOB_SIGNATURE signature, and where the **BlobData** field contains the "SiGk" string without the terminating null character.
 - Any [**session key**](#gt_session-key) BLOB is replaced with a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to the CLEARTEXT_BLOB_SIGNATURE signature, and where the **BlobData** field contains the "SeSk" string without the terminating null character.
 - Any hash exchanged is replaced with a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to the CLEARTEXT_BLOB_SIGNATURE signature, and where the **BlobData** field contains one byte set to 0x00.
-Sensitive data will not be encrypted in this mode of operation. Instead of using a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to ENCRYPTED_DATA_SIGNATURE, the sensitive data will be placed into a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to CLEARTEXT_DATA_SIGNATURE in a call to [R_SetData](#Section_3.2.4.4), [R_GetData](#Section_3.1.4.23), [R_EnumData](#Section_3.2.4.6), and [R_GetAllData](#Section_3.1.4.22).
+Sensitive data will not be encrypted in this mode of operation. Instead of using a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to ENCRYPTED_DATA_SIGNATURE, the sensitive data will be placed into a IIS_CRYPTO_BLOB structure with the **BlobSignature** field set to CLEARTEXT_DATA_SIGNATURE in a call to [R_SetData](#Section_3.2.4.4), [R_GetData](#Section_3.2.4.5), [R_EnumData](#Section_3.2.4.6), and [R_GetAllData](#Section_3.2.4.7).
 
 [**Decryption**](#gt_decryption) does not apply in this mode of operation. Instead of decrypting data store in a IIS_CRYPTO_BLOB structure, the data is simply retrieved from the IIS_CRYPTO_BLOB instance with a CLEARTEXT_DATA_SIGNATURE signature.
 
 <2> Section 3.1.4.1: Windows Server 2003, Windows Vista, and Windows Server 2008 take advantage of the RPC/COM packet privacy feature. It provides a protective layer over the weak encryption used to protect data that is part of the IMSAdminBaseW Remote Protocol. Note that RPC/COM packet privacy is not a replacement of the IIS IMSAdminBaseW Remote Protocol security features.
 
-<3> Section 3.1.4.2: On Windows Vista and later, and on Windows Server 2008 and later, the /LM/W3SVC path and all its child paths do not implement the locking behavior described in [3.1.1](#Section_3.1). [OpenKey](#Section_3.1.4.2) calls on these paths will succeed and will not return ERROR_PATH_BUSY even if other keys are open to parent or child paths.
+<3> Section 3.1.4.2: On Windows Vista and later, and on Windows Server 2008 and later, the /LM/W3SVC path and all its child paths do not implement the locking behavior described in [3.1.1](#Section_3.1.1). [OpenKey](#Section_3.1.4.2) calls on these paths will succeed and will not return ERROR_PATH_BUSY even if other keys are open to parent or child paths.
 
 <4> Section 3.1.4.4: On Windows Vista and later, and on Windows Server 2008 and later, there is no check of the permission level of the [**metabase**](#gt_metabase) handle used in the [AddKey](#Section_3.1.4.4) method for metabase paths under and including /LM/W3SVC.
 
@@ -5328,7 +5328,7 @@ When the [GetSystemChangeNumber](#Section_3.1.4.21) method is called, the sum of
 
 <26> Section 3.7.4.1: The metabase path for a web application is valid if it is below the root node of a website. A website metabase path is a numeric key underneath the Web service key, "/LM/W3SVC". For example, "/LM/W3SVC/1" defines a website with site id 1. The root of the website is a key with the name "ROOT". For example, "/LM/W3SVC/2/ROOT" is the root node of the website with site id 2. The **<AppCreate>** method will allow applications to be created on valid web application paths as well as on paths underneath the Web service key that are not under a website. On Windows NT 4.0 SP2, Windows 2000 Professional, Windows 2000 Server, Windows XP, and Windows Server 2003 the **<AppCreate>** method will allow applications to be created on any child path of the Web service key, "/LM/W3SVC". Attempts to create an application on an invalid path will return an error.
 
-<27> Section 3.7.4.4: For Windows Vista and later, and for Windows Server 2008 and later, [IWamAdmin](#Section_3.8) methods are not able to query or modify the running state of an application.
+<27> Section 3.7.4.4: For Windows Vista and later, and for Windows Server 2008 and later, [IWamAdmin](#Section_3.7) methods are not able to query or modify the running state of an application.
 
 <28> Section 3.8.4.1: The metabase path for a website application is valid if it is below the root node of a website. A website metabase path is a numeric key underneath the Web service key, "/LM/W3SVC". For example, "/LM/W3SVC/1" defines a website with site id 1. The root of the website is a key with the name "ROOT". For example, "/LM/W3SVC/2/ROOT" is the root node of the website with site id 2. The **<AppCreate>** method will allow applications to be created on valid website application paths as well as on paths underneath the Web service key that are not under a website. On Windows NT 4.0 SP2, Windows 2000 Professional, Windows 2000 Server, Windows XP, and Windows Server 2003, the **<AppCreate>** method will allow applications to be created on any child path of the Web service key, "/LM/W3SVC". Attempts to create an application on an invalid path will return an error.
 

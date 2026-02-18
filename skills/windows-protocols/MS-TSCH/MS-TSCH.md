@@ -304,7 +304,7 @@ This document uses the following terms:
 **credential**: Previously established, authentication data that is used by a security principal to establish its own identity. When used in reference to the Netlogon Protocol, it is the data that is stored in the NETLOGON_CREDENTIAL structure.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_domain-name-system-dns"></a>
 **Domain Name System (DNS)**: A hierarchical, distributed database that contains mappings of domain names to various types of data, such as IP addresses. DNS enables the location of computers and services by user-friendly names, and it also enables the discovery of other information stored in the database.
@@ -449,7 +449,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.3.14)".
+[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-EVEN6] Microsoft Corporation, "[EventLog Remoting Protocol Version 6.0](../MS-EVEN6/MS-EVEN6.md)".
 
@@ -478,7 +478,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-WCCE] Microsoft Corporation, "[Windows Client Certificate Enrollment Protocol](../MS-WCCE/MS-WCCE.md)".
 
@@ -502,24 +502,24 @@ We conduct frequent surveys of the normative references to assure their continue
 The Task Scheduler Remoting Protocol is used to register and configure tasks or to query the status of running [**tasks**](#gt_task) on a remote server. The Task Scheduler Remoting Protocol primarily consists of three separate remote procedure call (RPC) interfaces:
 
 - Net Schedule ([ATSvc](#Section_3.1.4.1))
-- Task Scheduler Agent ([SASec](#Section_4.1.1))
-- Windows Vista operating system Task Remote Protocol ([ITaskSchedulerService](#Section_3.2.5.4))
+- Task Scheduler Agent ([SASec](#Section_3.2.5.3))
+- Windows Vista operating system Task Remote Protocol ([ITaskSchedulerService](#Section_4.2.2))
 All three interfaces use [**RPC**](#gt_remote-procedure-call-rpc) as their transport to configure and manage tasks remotely.
 
 The three interfaces represent a continuum of increasing functionality, with ATSvc providing rudimentary functionality and ITaskSchedulerService providing the most functionality. Historically, the ATSvc interface is the oldest.<1> The three interfaces are not independent—they operate on the [**task store**](#gt_task-store), shared persistent storage for tasks.
 
 In the ATSvc interface (see section 3.2.5.2), a task can be anything that can be specified on a command line for execution on the server. The client can specify execution at a given time or repeated execution on particular days of the week or month. In addition to creating tasks with [NetrJobAdd (section 3.2.5.2.1)](#Section_3.2.5.2.1), the interface includes methods for deleting tasks (section [3.2.5.2.2](#Section_3.2.5.2.2)), enumerating tasks (section [3.2.5.2.3](#Section_3.2.5.2.3)), and querying the status of a task (section [3.2.5.2.4](#Section_3.2.5.2.4)).
 
-The SASec interface (section 3.2.5.3), only includes methods for manipulating account information, because most SASec-created task configuration is stored in the file system using the .JOB file format (section [2.4](#Section_2.4)). Clients add, delete, enumerate, and query tasks using a remote file system protocol as specified in section [3.2.5](#Section_1.3). The .JOB file format provides more features than the ATSvc interface for specifying tasks.<2>
+The SASec interface (section 3.2.5.3), only includes methods for manipulating account information, because most SASec-created task configuration is stored in the file system using the .JOB file format (section [2.4](#Section_2.4)). Clients add, delete, enumerate, and query tasks using a remote file system protocol as specified in section [3.2.5](#Section_3.2.5). The .JOB file format provides more features than the ATSvc interface for specifying tasks.<2>
 
 Clients use the Windows Remote Registry Protocol Specification, as specified in [MS-RRP](../MS-RRP/MS-RRP.md), to discover the path of the remote directory that stores the tasks as .JOB files (section 3.2.5.3). Clients use the SASec interface methods to supply security [**credentials**](#gt_credential) for the remote task execution.
 
-In contrast, the ITaskSchedulerService interface (section 3.2.5.4) includes methods for creating, deleting, enumerating, and querying tasks. The remote registry and file system protocols are not used. The ITaskSchedulerService interface uses [**XML**](#gt_xml) to specify task configuration (section [2.5](#Section_1.3)). The XML schema provides more features than the .JOB File Format for specifying tasks.
+In contrast, the ITaskSchedulerService interface (section 3.2.5.4) includes methods for creating, deleting, enumerating, and querying tasks. The remote registry and file system protocols are not used. The ITaskSchedulerService interface uses [**XML**](#gt_xml) to specify task configuration (section [2.5](#Section_2.5)). The XML schema provides more features than the .JOB File Format for specifying tasks.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The [ATSvc](../MS-RRP/MS-RRP.md), [SASec](#Section_4.1.1), and [ITaskSchedulerService](#Section_3.2.5.4) interfaces in the Task Scheduler Remoting Protocol use the [**RPC**](#gt_remote-procedure-call-rpc) Protocol [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) for transport as specified in section [2.1](#Section_2.1). The SASec interface requires that clients also use the Windows Remote Registry Protocol Specification [MS-RRP](../MS-RRP/MS-RRP.md), which uses RPC, and a remote file system protocol. Implementers can refer to section 5.1 of [MS-DCOM](../MS-DCOM/MS-DCOM.md) for security considerations.
+The [ATSvc](../MS-RRP/MS-RRP.md), [SASec](#Section_3.2.5.3), and [ITaskSchedulerService](#Section_4.2.2) interfaces in the Task Scheduler Remoting Protocol use the [**RPC**](#gt_remote-procedure-call-rpc) Protocol [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) for transport as specified in section [2.1](#Section_2.1). The SASec interface requires that clients also use the Windows Remote Registry Protocol Specification [MS-RRP](../MS-RRP/MS-RRP.md), which uses RPC, and a remote file system protocol. Implementers can refer to section 5.1 of [MS-DCOM](../MS-DCOM/MS-DCOM.md) for security considerations.
 
 No higher-layer protocols make use of the Task Scheduler Remoting Protocol.
 
@@ -529,7 +529,7 @@ No higher-layer protocols make use of the Task Scheduler Remoting Protocol.
 The Task Scheduler Remoting Protocol requires the following preconditions:
 
 - The server is prepared to receive remote procedure calls rpc_server_use_protseq and rpc_server_register_if, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 3.
-- The server's remote file system implementation is required to support file change notifications (section [3.2.5.3](#Section_4.1.1)).
+- The server's remote file system implementation is required to support file change notifications (section [3.2.5.3](#Section_3.2.5.3)).
 - The client and server are required to have [**security providers**](#gt_security-provider) to support encrypted remote calls.
 - The client is required to possess [**credentials**](#gt_credential) recognized by the server.
 <a id="Section_1.6"></a>
@@ -540,7 +540,7 @@ This protocol is applicable to scheduling [**tasks**](#gt_task) and querying the
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-There are four versions of the Task Scheduler Remoting Protocol that correspond to the [ATSvc](#Section_3.1.4.1), [SASec](#Section_4.1.1), and [ITaskSchedulerService](#Section_3.2.5.4) (for the last two) interfaces. The following table provides the task version number, as specified in section [3.2.1](#Section_3.1.1), for these interfaces:
+There are four versions of the Task Scheduler Remoting Protocol that correspond to the [ATSvc](#Section_3.1.4.1), [SASec](#Section_3.2.5.3), and [ITaskSchedulerService](#Section_4.2.2) (for the last two) interfaces. The following table provides the task version number, as specified in section [3.2.1](#Section_3.2.1), for these interfaces:
 
 Tasks created with ATSvc are v1.0, tasks created with SASec are v1.1, and tasks created with ITaskSchedulerService are v1.2 or v1.3. ATSvc, SASec, and ITaskSchedulerService support managing all five versions--v1.0, v1.1, v1.2, v1.3, and v1.4.
 
@@ -554,17 +554,17 @@ Tasks created with ATSvc are v1.0, tasks created with SASec are v1.1, and tasks 
 
 There is no explicit version or capability negotiation in the Task Scheduler Remoting Protocol. Instead, the availability of an [**RPC**](#gt_remote-procedure-call-rpc) interface indicates support for that version of the protocol by the server.
 
-Though versioning is mentioned in this specification as summarized here, it is not subject to negotiation. The ITaskSchedulerService interface has a method [SchRpcHighestVersion (section 3.2.5.4.1)](#Section_3.2.5.4.1) that returns the highest version in the format 0xMMMMmmmm, where 'M' stands for the major version hex digits and 'm' stands for the minor version hex digits. The only version numbers currently supported are 0x00010002 and 0x00010003, and no negotiation takes place. The .JOB file format contains a **File Version** field (see [FIXDLEN_DATA (section 2.4.1)](#Section_2.4.1)), but this field is always set to 0x0001, so it is not subject to negotiation. The [**XML**](#gt_xml) schema contains a Version element (see section [2.5.1](#Section_2.5)), but this element is for the use of the task itself and not related to Task Scheduler Remoting Protocol versioning.
+Though versioning is mentioned in this specification as summarized here, it is not subject to negotiation. The ITaskSchedulerService interface has a method [SchRpcHighestVersion (section 3.2.5.4.1)](#Section_3.2.5.4.1) that returns the highest version in the format 0xMMMMmmmm, where 'M' stands for the major version hex digits and 'm' stands for the minor version hex digits. The only version numbers currently supported are 0x00010002 and 0x00010003, and no negotiation takes place. The .JOB file format contains a **File Version** field (see [FIXDLEN_DATA (section 2.4.1)](#Section_2.4.1)), but this field is always set to 0x0001, so it is not subject to negotiation. The [**XML**](#gt_xml) schema contains a Version element (see section [2.5.1](#Section_2.5.1)), but this element is for the use of the task itself and not related to Task Scheduler Remoting Protocol versioning.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-This protocol uses HRESULT return codes, which are vendor-extensible. Vendors are free to choose their own values for this field, as long as the C bit (0x20000000) is set, indicating it is a customer code. For more information, see [MS-ERREF](#Section_2.3.14).<3>
+This protocol uses HRESULT return codes, which are vendor-extensible. Vendors are free to choose their own values for this field, as long as the C bit (0x20000000) is set, indicating it is a customer code. For more information, see [MS-ERREF](../MS-ERREF/MS-ERREF.md).<3>
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
 
-The following is a table of well-known [**UUIDs**](#gt_universally-unique-identifier-uuid) used in the [ATSvc](#Section_3.1.4.1), [SASec](#Section_4.1.1), and [ITaskSchedulerService](#Section_3.2.5.4) protocols.
+The following is a table of well-known [**UUIDs**](#gt_universally-unique-identifier-uuid) used in the [ATSvc](#Section_3.1.4.1), [SASec](#Section_3.2.5.3), and [ITaskSchedulerService](#Section_4.2.2) protocols.
 
 | Name | Value | Purpose |
 | --- | --- | --- |
@@ -582,9 +582,9 @@ The ATSvc and SASec interfaces use the ncacn_np [**RPC protocol sequence**](#gt_
 
 The Task Scheduler Remoting Protocol MUST use [MS-RPCE](../MS-RPCE/MS-RPCE.md) as its transport protocol.
 
-When using the [ATSvc](../MS-RPCE/MS-RPCE.md) and [SASec](#Section_4.1.1) interfaces, the Task Scheduler Remoting Protocol client and server MUST specify ncacn_np as the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) ([MS-RPCE] section 2.1.1.2).
+When using the [ATSvc](../MS-RPCE/MS-RPCE.md) and [SASec](#Section_3.2.5.3) interfaces, the Task Scheduler Remoting Protocol client and server MUST specify ncacn_np as the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) ([MS-RPCE] section 2.1.1.2).
 
-When using the [ITaskSchedulerService](#Section_3.2.5.4) interface, the Task Scheduler Remoting Protocol client and server MUST specify ncacn_ip_tcp. The ATSvc and SASec interfaces use a [**well-known endpoint**](#gt_well-known-endpoint) (see section [1.9](#Section_1.9)) whereas the ITaskSchedulerService interface uses a [**dynamic endpoint**](#gt_dynamic-endpoint). The server MUST specify the "Simple and Protected GSS-API Negotiation Mechanism" (0x9) as the [**RPC**](#gt_remote-procedure-call-rpc) authentication service ([MS-RPCE] section 2.2.1.1.7). The client SHOULD specify either "Simple and Protected GSS-API Negotiation Mechanism" or "NTLM" (0xA) as the authentication service.<4>
+When using the [ITaskSchedulerService](#Section_4.2.2) interface, the Task Scheduler Remoting Protocol client and server MUST specify ncacn_ip_tcp. The ATSvc and SASec interfaces use a [**well-known endpoint**](#gt_well-known-endpoint) (see section [1.9](#Section_1.9)) whereas the ITaskSchedulerService interface uses a [**dynamic endpoint**](#gt_dynamic-endpoint). The server MUST specify the "Simple and Protected GSS-API Negotiation Mechanism" (0x9) as the [**RPC**](#gt_remote-procedure-call-rpc) authentication service ([MS-RPCE] section 2.2.1.1.7). The client SHOULD specify either "Simple and Protected GSS-API Negotiation Mechanism" or "NTLM" (0xA) as the authentication service.<4>
 
 The client SHOULD use an [**authentication level**](#gt_authentication-level) of Packet Privacy to connect to the server. If the server does not support this authentication level, the client SHOULD fall back to Connection. Authentication levels are specified in detail in [MS-RPCE] section 3.3.1.5.2.2.
 
@@ -632,7 +632,7 @@ All the ATSvc methods, as specified in section 3.2.5.2, have an ATSVC_HANDLE as 
 <a id="Section_2.3.3"></a>
 ### 2.3.3 SASEC_HANDLE
 
-The [SASec](#Section_4.1.1) interface on a particular server is referred to by its [**handle**](#gt_handle), a SASEC_HANDLE. For the SASec interface, the handle is the NetBIOS name of the server providing the interface.
+The [SASec](#Section_3.2.5.3) interface on a particular server is referred to by its [**handle**](#gt_handle), a SASEC_HANDLE. For the SASec interface, the handle is the NetBIOS name of the server providing the interface.
 
 All the SASec methods, as specified in section 3.2.5.3, have an SASEC_HANDLE as their first parameter. This string is translated to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle using RPC APIs.
 
@@ -863,7 +863,7 @@ packet-beta
 <a id="Section_2.3.8"></a>
 ### 2.3.8 TASK_USER_CRED
 
-The TASK_USER_CRED structure contains user [**credentials**](#gt_credential) and is passed to the server during [**task registration**](#gt_5d98b0b1-7545-4aff-b4b3-786ed48911a3), as specified in section [3.2.5.4.2](#Section_3.2.5.4.20).
+The TASK_USER_CRED structure contains user [**credentials**](#gt_credential) and is passed to the server during [**task registration**](#gt_5d98b0b1-7545-4aff-b4b3-786ed48911a3), as specified in section [3.2.5.4.2](#Section_3.2.5.4.2).
 
 typedef struct _TASK_USER_CRED {
 
@@ -875,9 +875,9 @@ DWORD flags;
 
 } TASK_USER_CRED;
 
-**userId:** Contains the user name identifying the account under which the [**task**](#gt_task) can execute. The user name is a string recognized by Windows authentication, as specified in [MS-AUTHSOD](#Section_1.3) section 1.1.1.2.<9>
+**userId:** Contains the user name identifying the account under which the [**task**](#gt_task) can execute. The user name is a string recognized by Windows authentication, as specified in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.2.<9>
 
-**password:** Contains the password associated with the user specified in the preceding userId field above, represented as a string. For information about security considerations, see section [5.1](#Section_5).
+**password:** Contains the password associated with the user specified in the preceding userId field above, represented as a string. For information about security considerations, see section [5.1](#Section_5.1).
 
 **flags:** The flags field contains individual bit flags that are structured as shown in the following table. The client MUST set the undefined bits to 0. The undefined bits are ignored on receipt.
 
@@ -924,7 +924,7 @@ packet-beta
 <a id="Section_2.3.9"></a>
 ### 2.3.9 TASK_LOGON_TYPE
 
-The TASK_LOGON_TYPE is a DWORD parameter to the [SchRpcRegisterTask](#Section_3.2.5.4.20) method. It specifies how a user context is established for a [**task**](#gt_task).
+The TASK_LOGON_TYPE is a DWORD parameter to the [SchRpcRegisterTask](#Section_3.2.5.4.2) method. It specifies how a user context is established for a [**task**](#gt_task).
 
 | Value | Meaning |
 | --- | --- |
@@ -964,7 +964,7 @@ DWORD line, column;
 <a id="Section_2.3.11"></a>
 ### 2.3.11 Path Names
 
-Many of the [ITaskSchedulerService](#Section_3.2.5.4) methods have a [**Unicode string**](#gt_unicode-string) path parameter. This parameter specifies the location of the task in the [**XML**](#gt_xml) [**task store**](#gt_task-store), as specified in section [3.2.1](#Section_3.1.1). Path names start with a "\" character followed by zero or more names, and separated by single "\" characters. An empty string is equivalent to "\".
+Many of the [ITaskSchedulerService](#Section_4.2.2) methods have a [**Unicode string**](#gt_unicode-string) path parameter. This parameter specifies the location of the task in the [**XML**](#gt_xml) [**task store**](#gt_task-store), as specified in section [3.2.1](#Section_3.2.1). Path names start with a "\" character followed by zero or more names, and separated by single "\" characters. An empty string is equivalent to "\".
 
 Names do not:
 
@@ -1003,7 +1003,7 @@ Unless specified explicitly, all failure values are treated as equivalent for pr
 <a id="Section_2.4"></a>
 ## 2.4 .JOB File Format
 
-A .JOB file specifies [**task**](#gt_task) configuration. Clients that use the [SASec](#Section_4.1.1) interface create the .JOB file and write it to the server by using a remote file system protocol, as specified in section [3.1.4.2.2](#Section_3.1.4.2.2). Clients read .JOB files from the server as specified in section [3.1.4.2.5](#Section_3.1.4.2.5).
+A .JOB file specifies [**task**](#gt_task) configuration. Clients that use the [SASec](#Section_3.2.5.3) interface create the .JOB file and write it to the server by using a remote file system protocol, as specified in section [3.1.4.2.2](#Section_3.1.4.2.2). Clients read .JOB files from the server as specified in section [3.1.4.2.5](#Section_3.1.4.2.5).
 
 A .JOB file consists of two main sections, fixed-length (section [2.4.1](#Section_2.4.1)) and variable-length (section [2.4.2](#Section_2.4.2)).
 
@@ -1612,9 +1612,9 @@ The signature is calculated as follows:
 <a id="Section_2.5"></a>
 ## 2.5 XML Task Definition Format
 
-The [ITaskSchedulerService](#Section_3.2.5.4) interface uses [**XML**](#gt_xml) to define [**tasks**](#gt_task). Tasks are XML documents that MUST adhere to the schema specified in this section.
+The [ITaskSchedulerService](#Section_4.2.2) interface uses [**XML**](#gt_xml) to define [**tasks**](#gt_task). Tasks are XML documents that MUST adhere to the schema specified in this section.
 
-The server MUST validate an XML task definition's conformance to this schema and return an error if invalid, as specified in section [3.2.5.4.2](#Section_3.2.5.4.20).
+The server MUST validate an XML task definition's conformance to this schema and return an error if invalid, as specified in section [3.2.5.4.2](#Section_3.2.5.4.2).
 
 The task schema contains the following six top-level parts. The "Actions" part MUST be present.
 
@@ -3454,7 +3454,7 @@ Example:
 
 The following fields MAY be localized:
 
-- **RegistrationInfo** elements (see section [2.5.1](#Section_2.5)):
+- **RegistrationInfo** elements (see section [2.5.1](#Section_2.5.1)):
 <xs:element name="Source" type="xs:string" minOccurs="0"/>
 
 <xs:element name="Author" type="xs:string" minOccurs="0"/>
@@ -3545,8 +3545,8 @@ The server MUST support parameter substitution in the following fields in the [A
 The Task Scheduler Remoting Protocol consists of three interfaces:<36>
 
 - Net Schedule ([ATSvc](#Section_3.1.4.1))
-- Task Scheduler Agent ([SASec](#Section_4.1.1))
-- Vista Task Remote Protocol ([ITaskSchedulerService](#Section_3.2.5.4))
+- Task Scheduler Agent ([SASec](#Section_3.2.5.3))
+- Vista Task Remote Protocol ([ITaskSchedulerService](#Section_4.2.2))
 All three interfaces can be used to configure and manage [**tasks**](#gt_task) remotely. The three interfaces represent a continuum of increasing functionality, with ATSvc providing rudimentary functionality and ITaskSchedulerService providing the most functionality. Clients are advised to use the lowest-functionality interface that meets their application requirements, but clients MAY try to bind to ITaskSchedulerService and then fall back to SASec and then ATSvc if the newer interfaces are not supported.
 
 The protocol's client role consists of using these interfaces to make calls on the server to implement application or user requests. The client does not maintain any protocol state.
@@ -3571,16 +3571,16 @@ The client MUST establish a binding to the server as specified in [MS-RPCE](../M
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-Applications and users use the Task Scheduler Remoting Protocol to implement the following conceptual operations: Add Task, Delete Task, Modify Task, Retrieve Task Status, and Enumerate Tasks. The following subsections specify how the client uses the [ATSvc](#Section_3.1.4.1), [SASec](#Section_4.1.1), and [ITaskSchedulerService](#Section_3.2.5.4) interfaces to accomplish these operations.
+Applications and users use the Task Scheduler Remoting Protocol to implement the following conceptual operations: Add Task, Delete Task, Modify Task, Retrieve Task Status, and Enumerate Tasks. The following subsections specify how the client uses the [ATSvc](#Section_3.1.4.1), [SASec](#Section_3.2.5.3), and [ITaskSchedulerService](#Section_4.2.2) interfaces to accomplish these operations.
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 ATSvc Client Processing
 
 This subsection specifies how the client uses the [ATSvc](#Section_3.1.4.1) interface to implement the following conceptual operations: Add Task, Delete Task, Retrieve Task Status, and Enumerate Tasks.
 
-Note that the [SASec](#Section_4.1.1) interface includes two methods ([SASetNSAccountInformation](#Section_3.2.5.3.5) and [SAGetNSAccountInformation](#Section_3.2.5.3.6)) that clients of the ATSvc interface use to set or get account information that applies to ATSvc [**tasks**](#gt_task). For more information, see section 3.2.5.2.
+Note that the [SASec](#Section_3.2.5.3) interface includes two methods ([SASetNSAccountInformation](#Section_3.2.5.3.5) and [SAGetNSAccountInformation](#Section_3.2.5.3.6)) that clients of the ATSvc interface use to set or get account information that applies to ATSvc [**tasks**](#gt_task). For more information, see section 3.2.5.2.
 
-The ATSvc methods take as their first parameter an [ATSVC_HANDLE](#Section_2.3.2), which is a [**Unicode string**](#gt_unicode-string) specifying the server. The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) [**binding handle**](#gt_binding-handle) for the remote server, which it obtained during initialization, as specified in section [3.1.3](#Section_3.2.3). For more details, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2. This first parameter is not mentioned further in the following subsections.
+The ATSvc methods take as their first parameter an [ATSVC_HANDLE](#Section_2.3.2), which is a [**Unicode string**](#gt_unicode-string) specifying the server. The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) [**binding handle**](#gt_binding-handle) for the remote server, which it obtained during initialization, as specified in section [3.1.3](#Section_3.1.3). For more details, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2. This first parameter is not mentioned further in the following subsections.
 
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 Add Task
@@ -3621,23 +3621,23 @@ First, the client MUST invoke NetrJobEnum with the following parameter values:
 - A pointer to a **DWORD** to receive the remaining number of entries in the *pTotalEntries* parameter.
 - A pointer to a **DWORD** to receive the resume [**handle**](#gt_handle) in the *pResumeHandle* parameter.
 - The client MUST initialize the *pResumeHandle***DWORD** to 0.
-If the NetrJobEnum method returns ERROR_MORE_DATA [MS-ERREF](#Section_2.3.14), the client can continue to invoke NetrJobEnum until a call to NetrJobEnum returns ERROR_SUCCESS [MS-ERREF]. In subsequent calls to NetrJobEnum, the client MUST pass the parameter values as previously specified, except the client MUST initialize the *pResumeHandle***DWORD** to the value returned via the *pResumeHandle* parameter of the previous NetrJobEnum call.
+If the NetrJobEnum method returns ERROR_MORE_DATA [MS-ERREF](../MS-ERREF/MS-ERREF.md), the client can continue to invoke NetrJobEnum until a call to NetrJobEnum returns ERROR_SUCCESS [MS-ERREF]. In subsequent calls to NetrJobEnum, the client MUST pass the parameter values as previously specified, except the client MUST initialize the *pResumeHandle***DWORD** to the value returned via the *pResumeHandle* parameter of the previous NetrJobEnum call.
 
 Finally, the client MUST free the memory allocated for the AT_ENUM array returned from each NetrJobEnum call, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 5.1.1.1.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 SASec Client Processing
 
-This subsection specifies how the client uses the [SASec](#Section_4.1.1) interface to implement the following conceptual operations: Add Task, Delete Task, Modify Task, Retrieve Task Status, and Enumerate Tasks. It also specifies how the client uses the SASec interface to get or set account information for [ATSvc](#Section_3.1.4.1) tasks.
+This subsection specifies how the client uses the [SASec](#Section_3.2.5.3) interface to implement the following conceptual operations: Add Task, Delete Task, Modify Task, Retrieve Task Status, and Enumerate Tasks. It also specifies how the client uses the SASec interface to get or set account information for [ATSvc](#Section_3.1.4.1) tasks.
 
 The SASec interface only includes methods for getting and setting account information associated with tasks. Clients using the SASec interface MAY use a remote file system protocol and the Windows Remote Registry Protocol, as specified in [MS-RRP](../MS-RRP/MS-RRP.md), to accomplish most operations.<37>
 
-The SASec methods take as their first parameter an [SASEC_HANDLE](#Section_2.3.3), which is a [**Unicode string**](#gt_unicode-string) specifying the server. The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) [**binding handle**](#gt_binding-handle) for the remote server, which it obtained during initialization, as specified in section [3.1.3](#Section_3.2.3). RPC functionality used here is as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2. This first parameter is not mentioned further in this section's subsections.
+The SASec methods take as their first parameter an [SASEC_HANDLE](#Section_2.3.3), which is a [**Unicode string**](#gt_unicode-string) specifying the server. The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) [**binding handle**](#gt_binding-handle) for the remote server, which it obtained during initialization, as specified in section [3.1.3](#Section_3.1.3). RPC functionality used here is as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2. This first parameter is not mentioned further in this section's subsections.
 
 <a id="Section_3.1.4.2.1"></a>
 ##### 3.1.4.2.1 Common Operations
 
-[SASec](#Section_4.1.1) client processing makes use of several common operations, which are specified once in this section to avoid duplication in the following subsections.
+[SASec](#Section_3.2.5.3) client processing makes use of several common operations, which are specified once in this section to avoid duplication in the following subsections.
 
 <a id="Section_3.1.4.2.1.1"></a>
 ###### 3.1.4.2.1.1 Determining Task Folder
@@ -3713,7 +3713,7 @@ Next, the client MUST enumerate all files that have a .JOB extension in the task
 <a id="Section_3.1.4.2.7"></a>
 ##### 3.1.4.2.7 ATSvc Account Information
 
-The [SASec](#Section_4.1.1) interface has the methods [SASetNSAccountInformation](#Section_3.2.5.3.5) and [SAGetNSAccountInformation](#Section_3.2.5.3.6), which manipulate the account information that is associated with [ATSvc](#Section_3.1.4.1) tasks. This account information, as specified in section 3.2.5.3.5, MUST apply to all ATSvc tasks, including tasks that the client adds (as specified in section [3.1.4.1.1](#Section_3.1.4.1.1)) after calling SASetNSAccountInformation.
+The [SASec](#Section_3.2.5.3) interface has the methods [SASetNSAccountInformation](#Section_3.2.5.3.5) and [SAGetNSAccountInformation](#Section_3.2.5.3.6), which manipulate the account information that is associated with [ATSvc](#Section_3.1.4.1) tasks. This account information, as specified in section 3.2.5.3.5, MUST apply to all ATSvc tasks, including tasks that the client adds (as specified in section [3.1.4.1.1](#Section_3.1.4.1.1)) after calling SASetNSAccountInformation.
 
 To change the account information that is associated with all ATSvc tasks, the client MUST invoke the SASetNSAccountInformation method with the following parameter values:
 
@@ -3731,7 +3731,7 @@ Next, the client MUST invoke the SAGetNSAccountInformation method with the follo
 <a id="Section_3.1.4.2.8.1"></a>
 ###### 3.1.4.2.8.1 Run
 
-To run a task, the client MUST first know the path of the task. The path of a task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To run a task, the client MUST first know the path of the task. The path of a task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
 The client MUST then invoke the [SchRpcRun](#Section_3.2.5.4.13) method with the following parameters:
 
@@ -3745,9 +3745,9 @@ The client MUST then invoke the [SchRpcRun](#Section_3.2.5.4.13) method with the
 <a id="Section_3.1.4.2.8.2"></a>
 ###### 3.1.4.2.8.2 Stop
 
-To stop one or more instances of a task, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To stop one or more instances of a task, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
-The client MUST then invoke the [SchRpcStop](#Section_3.2.5.4.11) method with the following parameters:
+The client MUST then invoke the [SchRpcStop](#Section_3.2.5.4.12) method with the following parameters:
 
 - The path of the existing task in the *path* parameter.
 - Zero in the *flags* parameter.
@@ -3763,16 +3763,16 @@ Then the client MUST invoke the [SchRpcStopInstance](#Section_3.2.5.4.11) method
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 ITaskSchedulerService Client Processing
 
-This subsection specifies how the client uses the [ITaskSchedulerService](#Section_3.2.5.4) interface to implement the following conceptual operations: Add Task, Delete Task, Retrieve Task Status, and Enumerate Tasks.
+This subsection specifies how the client uses the [ITaskSchedulerService](#Section_4.2.2) interface to implement the following conceptual operations: Add Task, Delete Task, Retrieve Task Status, and Enumerate Tasks.
 
-The ITaskSchedulerService methods MUST take as their first parameter an [**RPC**](#gt_remote-procedure-call-rpc) [**binding handle**](#gt_binding-handle) for the remote server, which they MUST have obtained during initialization, as specified in section [3.1.3](#Section_3.2.3). This first parameter is not present in the [**IDL**](#gt_interface-definition-language-idl) in section 3.2.5.4 because it is an "explicit handle" as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 4.3.5. This first parameter is not mentioned further in the following sections.
+The ITaskSchedulerService methods MUST take as their first parameter an [**RPC**](#gt_remote-procedure-call-rpc) [**binding handle**](#gt_binding-handle) for the remote server, which they MUST have obtained during initialization, as specified in section [3.1.3](#Section_3.1.3). This first parameter is not present in the [**IDL**](#gt_interface-definition-language-idl) in section 3.2.5.4 because it is an "explicit handle" as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 4.3.5. This first parameter is not mentioned further in the following sections.
 
 <a id="Section_3.1.4.3.1"></a>
 ##### 3.1.4.3.1 Add Task
 
 First, the client MUST construct an [**XML**](#gt_xml) task definition (section [2.4.2.11](#Section_2.4.2.11)) that MUST specify the features of the task. The task description has several optional elements, but it MUST have an Actions node specifying the actions the task will execute.
 
-Next, the client MUST invoke the [SchRpcRegisterTask](#Section_3.2.5.4.20) method with the following parameters:
+Next, the client MUST invoke the [SchRpcRegisterTask](#Section_3.2.5.4.2) method with the following parameters:
 
 - The required location of the task (or NULL) in the *path* parameter.
 - The task definition in the *xmlTaskDefinition* parameter.
@@ -3796,7 +3796,7 @@ The client MUST invoke [SchRpcCreateFolder](#Section_3.2.5.4.4) with the followi
 <a id="Section_3.1.4.3.3"></a>
 ##### 3.1.4.3.3 Delete Task or Folder
 
-To delete a task or folder, the client MUST first know the path of the task or folder. The path of the task or folder is determined when the client creates the task or folder or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6.2).
+To delete a task or folder, the client MUST first know the path of the task or folder. The path of the task or folder is determined when the client creates the task or folder or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6).
 
 Next, the client MUST invoke [SchRpcDelete](#Section_3.2.5.4.14) with the following parameter values:
 
@@ -3808,25 +3808,25 @@ Next, the client MUST invoke [SchRpcDelete](#Section_3.2.5.4.14) with the follow
 <a id="Section_3.1.4.3.4.1"></a>
 ###### 3.1.4.3.4.1 Set the Security Descriptor of a Task
 
-To set the [**security descriptor**](#gt_security-descriptor) of a task, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6.2). Sometimes it is beneficial for the client to avoid adding its identity to the security descriptor. In order for the client to avoid adding its identity to the security descriptor, the client MUST set the TASK_DONT_ADD_PRINCIPAL_ACE bit in the flags parameter.
+To set the [**security descriptor**](#gt_security-descriptor) of a task, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6). Sometimes it is beneficial for the client to avoid adding its identity to the security descriptor. In order for the client to avoid adding its identity to the security descriptor, the client MUST set the TASK_DONT_ADD_PRINCIPAL_ACE bit in the flags parameter.
 
-The client MUST invoke [SchRpcSetSecurity](#Section_5) with the following parameters:
+The client MUST invoke [SchRpcSetSecurity](#Section_3.2.5.4.5) with the following parameters:
 
 - The path of the existing task in the *path* parameter.
 - SCH_FLAG_TASK (and TASK_DONT_ADD_PRINCIPAL_ACE, if required) in the *flags* parameter.
 <a id="Section_3.1.4.3.4.2"></a>
 ###### 3.1.4.3.4.2 Set the Security Descriptor of a Folder
 
-To set the [**security descriptor**](#gt_security-descriptor) of a folder, the client MUST first know the path of the folder. The path of the folder is determined when the client creates the folder or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6.2).
+To set the [**security descriptor**](#gt_security-descriptor) of a folder, the client MUST first know the path of the folder. The path of the folder is determined when the client creates the folder or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6).
 
-The client MUST then invoke the [SchRpcSetSecurity](#Section_5) method with the following parameter values:
+The client MUST then invoke the [SchRpcSetSecurity](#Section_3.2.5.4.5) method with the following parameter values:
 
 - The path of the existing task or folder in the *path* parameter.
 - SCH_FLAG_FOLDER in the *flags* parameter.
 <a id="Section_3.1.4.3.4.3"></a>
 ###### 3.1.4.3.4.3 Set the Enabled State of a Task
 
-To set the enabled state of a [**task**](#gt_task), the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6.2).
+To set the enabled state of a [**task**](#gt_task), the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6).
 
 The client MUST then invoke the [SchRpcEnableTask](#Section_3.2.5.4.20) method with the following parameter values:
 
@@ -3835,7 +3835,7 @@ The client MUST then invoke the [SchRpcEnableTask](#Section_3.2.5.4.20) method w
 <a id="Section_3.1.4.3.4.4"></a>
 ###### 3.1.4.3.4.4 Modify a Task Definition
 
-To modify a task definition, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6.2).
+To modify a task definition, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6).
 
 Next, the client MUST invoke [SchRpcRetrieveTask](#Section_3.2.5.4.3) with the following parameters:
 
@@ -3843,7 +3843,7 @@ Next, the client MUST invoke [SchRpcRetrieveTask](#Section_3.2.5.4.3) with the f
 - An array of strings specifying the required localization languages, as specified in [[RFC3066]](https://go.microsoft.com/fwlink/?LinkId=90404), in priority order in the *languagesBuffer*.
 - A pointer to an unsigned long containing the number of strings in the array in the *pulNumLanguages* parameter.
 - The location of a buffer to receive the localized task definition in the *xmlTaskDefinition* parameter.
-After retrieving the task definition, the client MUST modify the task definition as required and MUST invoke [SchRpcRegisterTask](#Section_3.2.5.4.20) with the following parameters:
+After retrieving the task definition, the client MUST modify the task definition as required and MUST invoke [SchRpcRegisterTask](#Section_3.2.5.4.2) with the following parameters:
 
 - The path of the existing task in the *path* parameter.
 - The modified task definition in the *xmlTaskDefinition* parameter.
@@ -3862,7 +3862,7 @@ Finally, the client MUST deallocate the actual path and ErrorInfo, as specified 
 <a id="Section_3.1.4.3.5.1"></a>
 ###### 3.1.4.3.5.1 Retrieve a Task
 
-To retrieve a task's definition, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6.2).
+To retrieve a task's definition, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server, as specified in section [3.1.4.3.6](#Section_3.1.4.3.6).
 
 Then the client MUST invoke the [SchRpcRetrieveTask](#Section_3.2.5.4.3) method with the following parameters:
 
@@ -3875,9 +3875,9 @@ The client MUST deallocate the *xmlTaskDefinition* after successful execution, a
 <a id="Section_3.1.4.3.5.2"></a>
 ###### 3.1.4.3.5.2 Retrieve a Task's Security Descriptor
 
-To retrieve a task's [**security descriptor**](#gt_security-descriptor), the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To retrieve a task's [**security descriptor**](#gt_security-descriptor), the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
-Next, the client MUST invoke the [SchRpcGetSecurity](#Section_5) method with the following parameters:
+Next, the client MUST invoke the [SchRpcGetSecurity](#Section_3.2.5.4.6) method with the following parameters:
 
 - The path of the existing task in the *path* parameter.
 - The type of security information desired in the *securityInformation* parameter. For more information on the SECURITY_INFORMATION structure, see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.7.
@@ -3904,7 +3904,7 @@ The client MUST deallocate the *pPath* and *pCurrentAction* after successful exe
 <a id="Section_3.1.4.3.5.4"></a>
 ###### 3.1.4.3.5.4 Retrieve a Task's Scheduled Run Times
 
-To retrieve a task's scheduled run times, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To retrieve a task's scheduled run times, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
 Then the client MUST invoke the [SchRpcScheduledRuntimes](#Section_3.2.5.4.16) method with the following parameters:
 
@@ -3920,7 +3920,7 @@ The client MUST deallocate the *pRuntimes* parameter after successful execution 
 <a id="Section_3.1.4.3.5.5"></a>
 ###### 3.1.4.3.5.5 Retrieve a Task's Last Run Information
 
-To retrieve a task's last run information, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To retrieve a task's last run information, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
 The client MUST then invoke the [SchRpcGetLastRunInfo](#Section_3.2.5.4.17) method with the following parameters:
 
@@ -3930,7 +3930,7 @@ The client MUST then invoke the [SchRpcGetLastRunInfo](#Section_3.2.5.4.17) meth
 <a id="Section_3.1.4.3.5.6"></a>
 ###### 3.1.4.3.5.6 Retrieve a Task's Information
 
-To retrieve a task's information, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To retrieve a task's information, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
 The client MUST then invoke the [SchRpcGetTaskInfo](#Section_3.2.5.4.18) with the following parameters:
 
@@ -3941,7 +3941,7 @@ The client MUST then invoke the [SchRpcGetTaskInfo](#Section_3.2.5.4.18) with th
 <a id="Section_3.1.4.3.5.7"></a>
 ###### 3.1.4.3.5.7 Retrieve the Number of Times a Task Did Not Run
 
-To retrieve the number of times a task did not run, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To retrieve the number of times a task did not run, the client MUST first know the path of the task. The path of the task is determined when the client creates the task or queries the server (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
 The client MUST then invoke the [SchRpcGetNumberOfMissedRuns](#Section_3.2.5.4.19) method with the following parameters:
 
@@ -3987,7 +3987,7 @@ If the SchRpcEnumFolders method returns S_FALSE, the client MUST continue to inv
 <a id="Section_3.1.4.3.6.3"></a>
 ###### 3.1.4.3.6.3 Enumerate a Task's Running Instances
 
-To enumerate a task's running instances the client MUST first know the task's path. The task's path is obtained when adding the task (section [3.1.4.3.1](#Section_3.1.4.3.1)) and when enumerating tasks (section [3.1.4.3.6](#Section_3.1.4.3.6.2)).
+To enumerate a task's running instances the client MUST first know the task's path. The task's path is obtained when adding the task (section [3.1.4.3.1](#Section_3.1.4.3.1)) and when enumerating tasks (section [3.1.4.3.6](#Section_3.1.4.3.6)).
 
 The client MUST then invoke the [SchRpcEnumInstances](#Section_3.2.5.4.9) method with the following parameters:
 
@@ -4010,7 +4010,7 @@ None.
 <a id="Section_3.2"></a>
 ## 3.2 Server Role Details
 
-As specified in this section, the Task Scheduler Remoting Protocol server SHOULD implement the [ATSvc](#Section_3.1.4.1), [SASec](#Section_4.1.1), and [ITaskSchedulerService](#Section_3.2.5.4) interfaces. At least one of the interfaces MUST be implemented. The server MAY implement any combination that includeds at least one of the interfaces.<44>
+As specified in this section, the Task Scheduler Remoting Protocol server SHOULD implement the [ATSvc](#Section_3.1.4.1), [SASec](#Section_3.2.5.3), and [ITaskSchedulerService](#Section_4.2.2) interfaces. At least one of the interfaces MUST be implemented. The server MAY implement any combination that includeds at least one of the interfaces.<44>
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -4019,8 +4019,8 @@ This section describes a conceptual model of possible data organization that an 
 
 The primary conceptual data structure maintained by the server is a **task store**. The [**task store**](#gt_task-store) MUST be persistent. It MUST consist of three logical stores having the following characteristics:
 
-- [ITaskSchedulerService](#Section_3.2.5.4) servers MUST support an [**XML**](#gt_xml) task store, which is a hierarchical store that holds XML task definitions (section [2.4.2.11](#Section_2.4.2.11)). The server MUST support [**security descriptors**](#gt_security-descriptor) on folders in the XML task store.
-- [SASec](#Section_4.1.1) servers MUST support a .JOB task store, which is a single file folder holding [.JOB files](#Section_2.4) (section 2.4) that MUST be accessible via a remote file-system protocol. In addition to the file folder, the .JOB task store MUST contain a Boolean value per task, which differentiates between valid and invalid tasks.
+- [ITaskSchedulerService](#Section_4.2.2) servers MUST support an [**XML**](#gt_xml) task store, which is a hierarchical store that holds XML task definitions (section [2.4.2.11](#Section_2.4.2.11)). The server MUST support [**security descriptors**](#gt_security-descriptor) on folders in the XML task store.
+- [SASec](#Section_3.2.5.3) servers MUST support a .JOB task store, which is a single file folder holding [.JOB files](#Section_2.4) (section 2.4) that MUST be accessible via a remote file-system protocol. In addition to the file folder, the .JOB task store MUST contain a Boolean value per task, which differentiates between valid and invalid tasks.
 - [ATSvc](#Section_3.1.4.1) servers MUST support an AT task store, which is a list of [AT_ENUM](#Section_2.3.6) task information structures (section 2.3.6).
 A Task Scheduler Remoting Protocol server that implements more than one of these interfaces MAY consolidate the task store data structures, to the extent that the individual interfaces' semantics (as specified later in this section) are preserved. In particular, tasks created or modified using the ATSvc interface MUST be visible (that is, enumerable and controllable) using the ITaskSchedulerService, SASec, and ATSvc interfaces.
 
@@ -4056,14 +4056,14 @@ This section specifies the Task Scheduler Remoting Protocol server operation in 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 EventLog Events
 
-If the server implements the [ITaskSchedulerService](#Section_3.2.5.4) interface and has a task registered with an Event [**trigger**](#gt_trigger) ([EventTrigger (section 2.5.3.6)](#Section_2.5.3.6)), the server MUST subscribe to events (section [3.2.5.4.2](#Section_3.2.5.4.20)) as specified in [MS-EVEN6](../MS-EVEN6/MS-EVEN6.md) section 3.1.1.9.
+If the server implements the [ITaskSchedulerService](#Section_4.2.2) interface and has a task registered with an Event [**trigger**](#gt_trigger) ([EventTrigger (section 2.5.3.6)](#Section_2.5.3.6)), the server MUST subscribe to events (section [3.2.5.4.2](#Section_3.2.5.4.2)) as specified in [MS-EVEN6](../MS-EVEN6/MS-EVEN6.md) section 3.1.1.9.
 
 Upon receiving an EventLog ([MS-EVEN](../MS-EVEN/MS-EVEN.md)) notification, the server MUST traverse the [**task store**](#gt_task-store) and start all valid, enabled tasks (section [3.2.5.1.2](#Section_3.2.5.1.2)) that have a satisfied [**XPATH**](#gt_xml-path-language-xpath) query.
 
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Idle
 
-If the server implements the [ITaskSchedulerService](#Section_3.2.5.4) interface or the [SASec](#Section_4.1.1) interface, the server MUST detect when the machine enters an idle state.<47>
+If the server implements the [ITaskSchedulerService](#Section_4.2.2) interface or the [SASec](#Section_3.2.5.3) interface, the server MUST detect when the machine enters an idle state.<47>
 
 Upon detecting an idle state, the server MUST traverse the [**task store**](#gt_task-store) and MUST start all valid, enabled tasks (section [3.2.5.1.2](#Section_3.2.5.1.2)) that have idle [**triggers**](#gt_trigger).
 
@@ -4072,14 +4072,14 @@ Upon detecting the end of an idle state, the server MUST traverse the running ta
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Startup
 
-If the server implements the [ITaskSchedulerService](#Section_3.2.5.4) interface or the [SASec](#Section_4.1.1) interface, after server initialization (section [3.2.3](#Section_3.2.3)) the server MUST traverse the [**task store**](#gt_task-store) and MUST start all valid, enabled tasks (section [3.2.5.1.2](#Section_3.2.5.1.2)) that are configured to run at system startup.
+If the server implements the [ITaskSchedulerService](#Section_4.2.2) interface or the [SASec](#Section_3.2.5.3) interface, after server initialization (section [3.2.3](#Section_3.2.3)) the server MUST traverse the [**task store**](#gt_task-store) and MUST start all valid, enabled tasks (section [3.2.5.1.2](#Section_3.2.5.1.2)) that are configured to run at system startup.
 
 Next, if the server implements the ITaskSchedulerService interface, the server MUST traverse the task store and MUST start all valid, enabled tasks that were scheduled to be started during the time period when the service was inactive and that have the **StartWhenAvailable** field set to TRUE in their [**XML**](#gt_xml) task definition.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 Session Change
 
-If the server implements the [ITaskSchedulerService](#Section_3.2.5.4) or [SASec](#Section_4.1.1) interface, it MUST detect logon session change. If the server implements the ITaskSchedulerService interface, it MUST detect desktop connection session change, session lock session change, and session unlock session change. For more information about session changes, please see [[MSDN-GINA]](https://go.microsoft.com/fwlink/?LinkId=100300).
+If the server implements the [ITaskSchedulerService](#Section_4.2.2) or [SASec](#Section_3.2.5.3) interface, it MUST detect logon session change. If the server implements the ITaskSchedulerService interface, it MUST detect desktop connection session change, session lock session change, and session unlock session change. For more information about session changes, please see [[MSDN-GINA]](https://go.microsoft.com/fwlink/?LinkId=100300).
 
 Upon detecting session change, the server MUST traverse the [**task store**](#gt_task-store) and MUST start tasks with the following attributes:
 
@@ -4091,12 +4091,12 @@ All valid, enabled tasks that are configured to start for all users.
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Sleep
 
-If the server implements the [ITaskSchedulerService](#Section_3.2.5.4) interface, it MUST detect when the server is about to enter sleep mode. If the [**task store**](#gt_task-store) contains a task that is configured with the **WakeToRun** field set to TRUE in its [**XML**](#gt_xml) task definition, the server MUST arrange to exit sleep mode in time to run the task.
+If the server implements the [ITaskSchedulerService](#Section_4.2.2) interface, it MUST detect when the server is about to enter sleep mode. If the [**task store**](#gt_task-store) contains a task that is configured with the **WakeToRun** field set to TRUE in its [**XML**](#gt_xml) task definition, the server MUST arrange to exit sleep mode in time to run the task.
 
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 Wake
 
-If the server implements the [ITaskSchedulerService](#Section_3.2.5.4) interface, then the interface implementation MUST perform the following steps:
+If the server implements the [ITaskSchedulerService](#Section_4.2.2) interface, then the interface implementation MUST perform the following steps:
 
 - Detect that the server has exited sleep mode.
 Traverse the [**task store**](#gt_task-store).
@@ -4112,7 +4112,7 @@ This section uses both [**IDL**](#gt_interface-definition-language-idl) and bit-
 
 Except where otherwise specified, the Task Scheduler Remoting Protocol uses the UTF-16LE [**Unicode**](#gt_unicode) encoding [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) for all string values, including all string constants appearing in this specification.
 
-This section specifies how the server processes [Net Schedule (ATSvc)](#Section_4d44c426fad24cc79677bfcd235dca33), [Task Scheduler Agent (SASec)](#Section_4.1.1), and [Task Remote Protocol (ITaskSchedulerService)](#Section_3.2.5.4) interface method calls.
+This section specifies how the server processes [Net Schedule (ATSvc)](#Section_4d44c426fad24cc79677bfcd235dca33), [Task Scheduler Agent (SASec)](#Section_3.2.5.3), and [Task Remote Protocol (ITaskSchedulerService)](#Section_4.2.2) interface method calls.
 
 Most methods have many possible error returns. In cases where more than one error applies, the server processing order specified here is not meant to constrain an implementation's choice of error code.
 
@@ -4149,7 +4149,7 @@ When adding a task to the task store with a logon or session change [**trigger**
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Starting a Task
 
-First, the server MUST obtain the account name associated with the [**task**](#gt_task) as follows. For [ATSvc](#Section_3.1.4.1) tasks, the server MUST use the ATSvc account name. For [SASec](#Section_4.1.1) tasks, the server MUST obtain the account name from the account name store. For [ITaskSchedulerService](#Section_3.2.5.4) tasks, the server MUST obtain the account name from the **UserId** element of the [**XML**](#gt_xml) task definition (section [2.5.6](#Section_2.5.6)) if it is not the empty string, and use "LocalSystem" if it is not present or the empty string.
+First, the server MUST obtain the account name associated with the [**task**](#gt_task) as follows. For [ATSvc](#Section_3.1.4.1) tasks, the server MUST use the ATSvc account name. For [SASec](#Section_3.2.5.3) tasks, the server MUST obtain the account name from the account name store. For [ITaskSchedulerService](#Section_4.2.2) tasks, the server MUST obtain the account name from the **UserId** element of the [**XML**](#gt_xml) task definition (section [2.5.6](#Section_2.5.6)) if it is not the empty string, and use "LocalSystem" if it is not present or the empty string.
 
 Next, the server MUST check the credential store for a mapping from the account name to a password. If a mapping is found, the server MUST use the password from the mapping to run the task. Otherwise, if the TASK_FLAG_RUN_ONLY_IF_LOGGED_ON flag is set in the task definition and the account name is [**logged on**](#gt_logged-on-user), the server MUST run the task using the logged-on account. Otherwise, the server MUST NOT run the task.
 
@@ -4167,7 +4167,7 @@ The server MUST delete the entry from the running [**task**](#gt_task) list. The
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 ATSvc Message Processing Events and Sequencing Rules
 
-The ATSvc [**RPC**](#gt_remote-procedure-call-rpc) interface provides methods to control scheduled tasks. All the ATSvc methods MUST have administrator privileges, as specified in section [3.2.5](#Section_1.3) and its subsections.
+The ATSvc [**RPC**](#gt_remote-procedure-call-rpc) interface provides methods to control scheduled tasks. All the ATSvc methods MUST have administrator privileges, as specified in section [3.2.5](#Section_3.2.5) and its subsections.
 
 If the server implements the ATSvc interface, it MUST implement the methods as specified in the following table.
 
@@ -4201,7 +4201,7 @@ NET_API_STATUS NetrJobAdd(
 
 **pJobId:** MUST return a pointer to the task identifier when the NetrJobAdd method is successful.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14) or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14) or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 In response to this request, the server MUST:
 
@@ -4238,7 +4238,7 @@ NET_API_STATUS NetrJobDel(
 
 **MaxJobId:** MUST specify the high end of the range of tasks to be deleted. This parameter MUST NOT be smaller than *MinJobId*.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 To delete all tasks, specify MinJobId as 0 and MaxJobId as 0xFFFFFFFF.
 
@@ -4281,7 +4281,7 @@ NET_API_STATUS NetrJobEnum(
 
 **pResumeHandle:** MUST be a pointer to an index into the list of tasks. This value indicates the index number at which the enumeration MUST start.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 In response to this request the server MUST:
 
@@ -4318,7 +4318,7 @@ NET_API_STATUS NetrJobGetInfo(
 
 **ppAtInfo:** MUST be a pointer to an [AT_INFO](#Section_2.3.4) structure as specified in section 2.3.4.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 In response to this request the server MUST:
 
@@ -4461,7 +4461,7 @@ HRESULT SASetAccountInformation(
 
 **pwszAccount:** Pointer to a string that MUST specify the account name. This string MAY be expressed either as a UPN in the form user@domain or as a Security Account Manager (SAM) name in the form domain\account.
 
-**pwszPassword:** Pointer to a string that MUST specify the password for the account. See section [5.1](#Section_5).
+**pwszPassword:** Pointer to a string that MUST specify the password for the account. See section [5.1](#Section_5.1).
 
 **dwJobFlags:** The **dwJobFlags** field MUST contain individual bit flags that MUST have one or more of the following values:
 
@@ -4507,7 +4507,7 @@ packet-beta
 
 Undefined bits MUST be set to 0 when sent and ignored upon receipt.
 
-**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14) or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.<52>
+**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14) or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.<52>
 
 Upon receipt of the SASetAccountInformation call, the server MUST:
 
@@ -4554,7 +4554,7 @@ HRESULT SASetNSAccountInformation(
 
 **pwszAccount:** MUST be a pointer to a string that specifies the account name.
 
-**pwszPassword:** MUST be a pointer to a string that specifies the password for the named account. See section [5.1](#Section_5) for security considerations.
+**pwszPassword:** MUST be a pointer to a string that specifies the password for the named account. See section [5.1](#Section_5.1) for security considerations.
 
 Upon receipt of the SASetNSAccountInformation call, the server MUST:
 
@@ -4564,7 +4564,7 @@ Upon receipt of the SASetNSAccountInformation call, the server MUST:
 - Return the value 0x8007000D, which is the HRESULT form of the Win32 error ERROR_INVALID_DATA, if the *pwszPassword* parameter is NULL.<62>
 - Return E_ACCESSDENIED if the *pwszPassword* parameter is not valid for *pwszAccount*.<63>
 - Store the *pwszAccount* string in the ATSvc account name and add an entry to the credential store mapping from *pwszAccount* to *pwszPassword*.
-If any errors are raised during the processing, they are returned. For more information about return codes, see section [2.3.14](#Section_2.3.14) and Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+If any errors are raised during the processing, they are returned. For more information about return codes, see section [2.3.14](#Section_2.3.14) and Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 <a id="Section_3.2.5.3.6"></a>
 ##### 3.2.5.3.6 SAGetNSAccountInformation (Opnum 2)
@@ -4585,11 +4585,11 @@ wchar_t wszBuffer[]
 
 **Handle:** Pointer to a [**Unicode string**](#gt_unicode-string) that MUST specify the server. The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) [**Binding handle**](#gt_binding-handle). The server MUST ignore this parameter. For more details, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2.
 
-**ccBufferSize:** MUST contain the number of characters in the array supplied by the client and filled by the server. This value MUST be the size of the *wszBuffer* parameter. MAX_BUFFER_SIZE is equal to 273. For more information on MAX_BUFFER_SIZE, see the [SaSec](#Section_4.1.1) interface IDL (section [6.2](#Section_6.2)).
+**ccBufferSize:** MUST contain the number of characters in the array supplied by the client and filled by the server. This value MUST be the size of the *wszBuffer* parameter. MAX_BUFFER_SIZE is equal to 273. For more information on MAX_BUFFER_SIZE, see the [SaSec](#Section_3.2.5.3) interface IDL (section [6.2](#Section_6.2)).
 
 **wszBuffer:** Upon input, MUST be an empty array of size equal to the *ccBufferSize* parameter. The client SHOULD initialize the array to contain zeroes. Upon return, the array MUST contain the ATSvc account name.
 
-**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.
+**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.
 
 Upon receipt of the SAGetNSAccountInformation call, the server MUST:
 
@@ -4625,11 +4625,11 @@ wchar_t wszBuffer[]
 
 **pwszJobName:** MUST be a pointer to a string that specifies a task name, such as "MyJob.job".
 
-**ccBufferSize:** MUST contain the number of characters in the array supplied by the client and filled by the server. This value MUST be the size of the *wszBuffer* parameter. MAX_BUFFER_SIZE is equal to 273. For more information on MAX_BUFFER_SIZE, see the [SaSec](#Section_4.1.1) interface IDL (section [6.2](#Section_6.2)).
+**ccBufferSize:** MUST contain the number of characters in the array supplied by the client and filled by the server. This value MUST be the size of the *wszBuffer* parameter. MAX_BUFFER_SIZE is equal to 273. For more information on MAX_BUFFER_SIZE, see the [SaSec](#Section_3.2.5.3) interface IDL (section [6.2](#Section_6.2)).
 
 **wszBuffer:** Upon input, MUST be an empty array of size equal to the *ccBufferSize* parameter. The client SHOULD initialize the array to contain zeroes. Upon return, the array MUST contain the name of the account to be used as the context the task runs under.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SAGetAccountInformation call, the server MUST:
 
@@ -4657,17 +4657,17 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [SchRpcHighestVersion](#Section_3.2.5.4.1) | The SchRpcHighestVersion method returns the highest version of the Task Scheduler Remoting Protocol supported by the server. Opnum: 0 |
-| [SchRpcRegisterTask](#Section_3.2.5.4.20) | The SchRpcRegisterTask method registers a task with the server. Opnum: 1 |
+| [SchRpcRegisterTask](#Section_3.2.5.4.2) | The SchRpcRegisterTask method registers a task with the server. Opnum: 1 |
 | [SchRpcRetrieveTask](#Section_3.2.5.4.3) | The SchRpcRetrieveTask method returns a task definition. Opnum: 2 |
 | [SchRpcCreateFolder](#Section_3.2.5.4.4) | The SchRpcCreateFolder method creates a new folder. Opnum: 3 |
-| [SchRpcSetSecurity](#Section_5) | The SchRpcSetSecurity method sets a [**security descriptor**](#gt_security-descriptor) on a task or folder. Opnum: 4 |
-| [SchRpcGetSecurity](#Section_5) | The SchRpcGetSecurity method gets the security descriptor associated with a task or folder. Opnum: 5 |
+| [SchRpcSetSecurity](#Section_3.2.5.4.5) | The SchRpcSetSecurity method sets a [**security descriptor**](#gt_security-descriptor) on a task or folder. Opnum: 4 |
+| [SchRpcGetSecurity](#Section_3.2.5.4.6) | The SchRpcGetSecurity method gets the security descriptor associated with a task or folder. Opnum: 5 |
 | [SchRpcEnumFolders](#Section_3.2.5.4.7) | The SchRpcEnumFolders method retrieves a list of folders on the server. Opnum: 6 |
 | [SchRpcEnumTasks](#Section_3.2.5.4.8) | The SchRpcEnumTasks method returns the list of tasks in a specific folder. Opnum: 7 |
 | [SchRpcEnumInstances](#Section_3.2.5.4.9) | The SchRpcEnumInstances method returns a list of instances of a specified task that are currently running. Opnum: 8 |
 | [SchRpcGetInstanceInfo](#Section_3.2.5.4.10) | The SchRpcGetInstanceInfo method gets information about an instance of a running task. Opnum: 9 |
 | [SchRpcStopInstance](#Section_3.2.5.4.11) | The SchRpcStopInstance method stops a specified instance of a task. Opnum: 10 |
-| [SchRpcStop](#Section_3.2.5.4.11) | The SchRpcStop method stops all currently running instances of a task specified by a path. Opnum: 11 |
+| [SchRpcStop](#Section_3.2.5.4.12) | The SchRpcStop method stops all currently running instances of a task specified by a path. Opnum: 11 |
 | [SchRpcRun](#Section_3.2.5.4.13) | The SchRpcRun method runs a task specified by a path. Opnum: 12 |
 | [SchRpcDelete](#Section_3.2.5.4.14) | The SchRpcDelete method deletes a task or folder in the [**task store**](#gt_task-store). Opnum: 13 |
 | [SchRpcRename](#Section_3.2.5.4.15) | The SchRpcRename method is unused. Opnum: 14 |
@@ -4696,7 +4696,7 @@ HRESULT SchRpcHighestVersion(
 | 0x00010003 | Version 1.3 of the protocol is in use. |
 | 0x00010004 | Version 1.4 of the protocol is in use. |
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcHighestVersion call, the server MUST return the highest version of the Task Scheduler Remoting Protocol that is supported by the server in the *pVersion* parameter.
 
@@ -4729,7 +4729,7 @@ HRESULT SchRpcRegisterTask(
 
 **path:** MUST contain the full path associated (or to be associated) with a task as specified in section [2.3.11](#Section_2.3.11). A NULL path indicates that the server SHOULD either take the path from the task definition or generate a path itself.
 
-**xml:** MUST contain the task definition in [**XML**](#gt_xml) format as specified in section [2.5](#Section_1.3).
+**xml:** MUST contain the task definition in [**XML**](#gt_xml) format as specified in section [2.5](#Section_2.5).
 
 **flags:** The flags field MUST contain individual bit flags that MUST have one or more of the following values.
 
@@ -4792,7 +4792,7 @@ Undefined bits. MUST be set to zero when sent and MUST be ignored on receipt.<66
 
 **pErrorInfo:** If this parameter is non-NULL and the XML task definition is invalid, the server MUST return additional error information.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in section 2 of [MS-ERREF](#Section_2.3.14).
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in section 2 of [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 Upon receipt of the SchRpcRegisterTask call, the server MUST:
 
@@ -4934,7 +4934,7 @@ Upon receipt of the SchRpcRegisterTask call, the server MUST:
 - Return E_ACCESSDENIED if a password is required (section 3.2.5.1.1) but the password provided in the *pCreds* parameter is not valid for the principal chosen.
 - Determine the correct path.
 - MUST use the *path* parameter if non-NULL.
-- Otherwise, if present, MUST use the URI element of the *RegistrationInfo* node of the task definition (section [2.5.1](#Section_2.5)).
+- Otherwise, if present, MUST use the URI element of the *RegistrationInfo* node of the task definition (section [2.5.1](#Section_2.5.1)).
 - Otherwise, MUST generate a [**UUID**](#gt_universally-unique-identifier-uuid) and MUST use the string representation of it surrounded by '{' and '}' characters, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.3.
 - If the path determined does not exist in the XML task store and the TASK_UPDATE flag is specified instead of the TASK_CREATE flag in the *flags* parameter, and the *flags* parameter is not 0: the server MUST return the value 0x80070002, the HRESULT form of the Win32 error ERROR_FILE_NOT_FOUND.
 - If the following three conditions are all true:
@@ -4981,7 +4981,7 @@ HRESULT SchRpcRetrieveTask(
 
 **pXml:** MUST contain the task definition in [**XML**](#gt_xml) format, localized using the language names contained in the *languagesBuffer* parameter. For more information about XML localization, see section [2.5.8](#Section_2.5.8).
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcRetrieveTask call, the server MUST:
 
@@ -5015,7 +5015,7 @@ HRESULT SchRpcCreateFolder(
 
 **flags:** Unused, MUST be 0.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcCreateFolder call, the server MUST:
 
@@ -5088,7 +5088,7 @@ packet-beta
 | FF SCH_FLAG_FOLDER | If set to 1, the server MUST apply the security descriptor to folders. |
 | FT SCH_FLAG_TASK | If set to 1, the server MUST apply the security descriptor to tasks. |
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcSetSecurity call, the server MUST:
 
@@ -5123,7 +5123,7 @@ HRESULT SchRpcGetSecurity(
 
 **sddl:** MUST point to a buffer that will receive security information in string format. The string format is specified in [MS-DTYP] section 2.5.1.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcGetSecurity call that requires the server to return the security descriptor of the requested object, the server MUST:
 
@@ -5220,7 +5220,7 @@ Where the bits are defined as:
 
 **pNames:** Buffer MUST contain returned folder names.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcEnumFolders call, the server MUST:
 
@@ -5314,7 +5314,7 @@ packet-beta
 
 **pNames:** Buffer that MUST contain returned [**task names**](#gt_task-name).
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcEnumTasks call, the server MUST:
 
@@ -5324,7 +5324,7 @@ Upon receipt of the SchRpcEnumTasks call, the server MUST:
 - Return the value 0x8007007B, the HRESULT form of the Win32 error **ERROR_INVALID_NAME**, if the specified *path* is not in the format specified in section 2.3.11.
 - Return the value 0x80070003, the HRESULT form of the Win32 error ERROR_PATH_NOT_FOUND, if the specified *path* does not exist on the server in the [**XML**](#gt_xml) [**task store**](#gt_task-store).
 - Return the HRESULT version of the Win32 error ERROR_FILE_NOT_FOUND if the *path* parameter does not name a folder in the XML task store, or if the caller does not have either read or write access to that folder.
-- Enumerate the tasks in that folder, starting the enumeration at the ordinal position given by the DWORD value pointed to by the *pStartIndex* parameter. The server MUST NOT enumerate more than *cRequested* tasks. The server MUST enumerate as many tasks as are available, up to a total of *cRequested* tasks. The server MUST skip tasks that the caller does not have read or write access to. The server MUST skip tasks that are hidden (section [2.5.4.12](#Section_3.2.5.4.12)) unless the TASK_ENUM_HIDDEN bit is set in the *flags* parameter.<72>
+- Enumerate the tasks in that folder, starting the enumeration at the ordinal position given by the DWORD value pointed to by the *pStartIndex* parameter. The server MUST NOT enumerate more than *cRequested* tasks. The server MUST enumerate as many tasks as are available, up to a total of *cRequested* tasks. The server MUST skip tasks that the caller does not have read or write access to. The server MUST skip tasks that are hidden (section [2.5.4.12](#Section_2.5.4.12)) unless the TASK_ENUM_HIDDEN bit is set in the *flags* parameter.<72>
 - Return an array of pointers to the enumerated null-terminated task names in the *pNames* parameter.
 - Return the number of enumerated task names in the *pcNames* parameter.
 - Increment the value pointed to by the *pStartIndex* parameter by the number of enumerated task names.
@@ -5396,14 +5396,14 @@ The client MUST set undefined bits to 0. The server MUST return an error if any 
 
 **pGuids:** MUST be an array of [**GUIDs**](#gt_globally-unique-identifier-guid).
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcEnumInstances call, the server MUST:
 
 - Return E_INVALIDARG if any bit other than TASK_ENUM_HIDDEN is set in the *flags* parameter.
 - Return 0x8007007B, the HRESULT form of the Win32 error **ERROR_INVALID_NAME** if the specified path is not in the format specified in section 2.3.11.
 - Return 0x80070002, the HRESULT form of the Win32 error ERROR_FILE_NOT_FOUND if the task specified in the *path* parameter does not exist on the server or the file specified by the *path* parameter does not exist in the [**XML**](#gt_xml) [**task store**](#gt_task-store).<73>
-- Enumerate all of the running task instances in the running task list conceptual data structure. If the *path* parameter is not NULL, the server MUST skip all entries in the running task list whose locations do not match the *path* parameter. The server MUST skip all entries for tasks to which the caller does not have read access. Unless the TASK_ENUM_HIDDEN bit is set in the *flags* parameter, the server MUST skip all entries for hidden tasks (section [2.5.4.12](#Section_3.2.5.4.12)).
+- Enumerate all of the running task instances in the running task list conceptual data structure. If the *path* parameter is not NULL, the server MUST skip all entries in the running task list whose locations do not match the *path* parameter. The server MUST skip all entries for tasks to which the caller does not have read access. Unless the TASK_ENUM_HIDDEN bit is set in the *flags* parameter, the server MUST skip all entries for hidden tasks (section [2.5.4.12](#Section_2.5.4.12)).
 - Return an array of [**task instance**](#gt_task-instance) IDs from the enumerated running task instances in the *pGuids* parameter.
 - Return the number of task instance IDs in the *pcGuids* parameter.
 - Return S_OK.
@@ -5450,7 +5450,7 @@ GUID** pGroupInstances,
 
 **pEnginePID:** MUST be the location where the Process ID of the process executing the task is to be returned. If NULL, specifies that the Process ID is not requested.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcGetInstanceInfo, the server MUST:
 
@@ -5481,7 +5481,7 @@ HRESULT SchRpcStopInstance(
 
 **flags:** Unused. The client MUST send 0 and the server MUST return an error if nonzero.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcStopInstance call, the server MUST:
 
@@ -5507,7 +5507,7 @@ HRESULT SchRpcStop(
 
 **flags:** Unused. The client MUST set 0, and the server MUST return an error if nonzero.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcStop call, the server MUST:
 
@@ -5605,7 +5605,7 @@ Undefined bits MUST be set to 0 when sent and the server MUST return an error if
 
 **pGuid:** MUST contain a [**GUID**](#gt_globally-unique-identifier-guid) for the [**task instance**](#gt_task-instance) created as result of this call.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcRun call, the server MUST:
 
@@ -5653,7 +5653,7 @@ HRESULT SchRpcDelete(
 
 **flags:** Unused. The client MUST set to zero and the server MUST return an error if nonzero.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcDelete call, the server MUST:
 
@@ -5685,7 +5685,7 @@ HRESULT SchRpcRename(
 
 **flags:** Reserved. The client MUST set this parameter to zero.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcRename call the server MUST return E_NOTIMPL.
 
@@ -5726,7 +5726,7 @@ HRESULT SchRpcScheduledRuntimes(
 
 **pRuntimes:** MUST be a pointer to an array of scheduled runtimes. The server MUST return the first *pcRuntimes* runtimes in the specified time interval.
 
-**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information on return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcScheduledRuntimes call that requires the server to return the state of the scheduled instances of a task, the server MUST:
 
@@ -5771,7 +5771,7 @@ HRESULT SchRpcGetLastRunInfo(
 
 **pLastReturnCode:** The server MUST return an error if this parameter is NULL. The server MUST return the exit code from the task's last execution, or zero if the task has never finished execution.
 
-**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcGetLastRunInfo call that requires the server to return the info of the last instance of a task, the server MUST:
 
@@ -5858,7 +5858,7 @@ Undefined bits. MUST be set to zero when sent and MUST be ignored on receipt.
 
 **pState:** If non-NULL and the SCH_FLAG_STATE bit in the *flags* parameter is set, the server MUST return the current state of the task in the format specified in section [2.3.13](#Section_2.3.13). Otherwise, the server MUST ignore this parameter.
 
-**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcGetTaskInfo call, the server MUST:
 
@@ -5892,7 +5892,7 @@ HRESULT SchRpcGetNumberOfMissedRuns(
 
 **pNumberOfMissedRuns:** MUST be the address of a DWORD that receives the number of times a task was scheduled to run but did not.
 
-**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](#Section_2.3.14) section 2.1.
+**Return Values:** For more information about return codes, see section [2.3.14](#Section_2.3.14), or Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 Upon receipt of the SchRpcGetNumberOfMissedRuns call, the server MUST:
 
@@ -5918,7 +5918,7 @@ HRESULT SchRpcEnableTask(
 
 **enabled:** If TRUE, the server MUST enable the task. Otherwise, the server MUST disable the task.
 
-**Return Values:** For more information about return codes, see [MS-ERREF](#Section_2.3.14) section 2.
+**Return Values:** For more information about return codes, see [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.
 
 Upon receipt of the SchRpcEnableTask call, the server MUST:
 
@@ -5965,29 +5965,29 @@ The following sections provide several examples that illustrate the most complex
 <a id="Section_4.1"></a>
 ## 4.1 Packet Sequence for Task Creation
 
-This section illustrates the Task Scheduler Remoting Protocol operation by depicting the sequence of packets that are sent during the creation of a [**task**](#gt_task), using both the [SASec](#Section_4.1.1) and [ITaskSchedulerService](#Section_3.2.5.4) interfaces.
+This section illustrates the Task Scheduler Remoting Protocol operation by depicting the sequence of packets that are sent during the creation of a [**task**](#gt_task), using both the [SASec](#Section_3.2.5.3) and [ITaskSchedulerService](#Section_4.2.2) interfaces.
 
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Packet Sequence for Task Creation Using SASec Interface
 
-The following illustration depicts the sequence of packets for creating a [**task**](#gt_task) by using the [SASec](#Section_4.1.1) interface.
+The following illustration depicts the sequence of packets for creating a [**task**](#gt_task) by using the [SASec](#Section_3.2.5.3) interface.
 
 ![Example of task creation with SASec protocol](media/image1.png)
 
 Figure 1: Example of task creation with SASec protocol
 
-The client binds to the server, as specified in section [3.1.3](#Section_3.2.3). Next, the client requests the location of the tasks [**folder**](#gt_folder) on the server where the task configuration file is stored, as specified in section [3.1.4.2.1.1](#Section_3.1.4.2.1.1). Then the client transfers the .JOB configuration file followed by a client message setting the task account information as specified in section [3.2.5.3.4](#Section_3.2.5.3.4). For more information, see [2.4](#Section_2.4).
+The client binds to the server, as specified in section [3.1.3](#Section_3.1.3). Next, the client requests the location of the tasks [**folder**](#gt_folder) on the server where the task configuration file is stored, as specified in section [3.1.4.2.1.1](#Section_3.1.4.2.1.1). Then the client transfers the .JOB configuration file followed by a client message setting the task account information as specified in section [3.2.5.3.4](#Section_3.2.5.3.4). For more information, see [2.4](#Section_2.4).
 
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Packet Sequence for Task Creation Using ITaskScheduler Interface
 
-The following illustration depicts the sequence of packets for creating a task using the [ITaskSchedulerService](#Section_3.2.5.4) interface.
+The following illustration depicts the sequence of packets for creating a task using the [ITaskSchedulerService](#Section_4.2.2) interface.
 
 ![Example of task creation with ITaskSchedulerService protocol](media/image2.png)
 
 Figure 2: Example of task creation with ITaskSchedulerService protocol
 
-The client binds to the server, as specified in section [3.1.3](#Section_3.2.3). Next, the client inquires about the highest task version supported by the server to which a ITaskScheduler compliant server will reply with the version information specified in section [1.7](#Section_1.7). Then the client sends the [**XML**](#gt_xml) configuration and the [**credentials**](#gt_credential) for running the task, as specified in section [3.1.4.3.1](#Section_3.1.4.3.1).
+The client binds to the server, as specified in section [3.1.3](#Section_3.1.3). Next, the client inquires about the highest task version supported by the server to which a ITaskScheduler compliant server will reply with the version information specified in section [1.7](#Section_1.7). Then the client sends the [**XML**](#gt_xml) configuration and the [**credentials**](#gt_credential) for running the task, as specified in section [3.1.4.3.1](#Section_3.1.4.3.1).
 
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Task XML Example
@@ -6071,18 +6071,18 @@ Starts Notepad when a specified user logs on.
 <a id="Section_4.2"></a>
 ## 4.2 Examples of Operations Flow
 
-This section provides a conceptual protocol operation flow for the [SASec](#Section_4.1.1) and [ITaskSchedulerService](#Section_3.2.5.4) interfaces.
+This section provides a conceptual protocol operation flow for the [SASec](#Section_3.2.5.3) and [ITaskSchedulerService](#Section_4.2.2) interfaces.
 
 <a id="Section_4.2.1"></a>
 ### 4.2.1 SASec Operation Flow
 
-The following figure provides a conceptual service operation flow with respect to [SASec](#Section_4.1.1) interface.
+The following figure provides a conceptual service operation flow with respect to [SASec](#Section_3.2.5.3) interface.
 
 ![SASec operation flow](media/image3.png)
 
 Figure 3: SASec operation flow
 
-**Server_Bind:** Client binds to the server, as specified in section [3.1.3](#Section_3.2.3).
+**Server_Bind:** Client binds to the server, as specified in section [3.1.3](#Section_3.1.3).
 
 **Task_Folder_Located:** Client makes a Remote Registry call to request the location of the task folder on the server, as specified in section [3.1.4.2.1.1](#Section_3.1.4.2.1.1).
 
@@ -6099,17 +6099,17 @@ Figure 3: SASec operation flow
 <a id="Section_4.2.2"></a>
 ### 4.2.2 ITaskSchedulerService Operation Flow
 
-The following figure illustrates a conceptual protocol operation flow for the [ITaskSchedulerService](#Section_3.2.5.4) interface. All the operations involve the task definition / configuration [**XML**](#gt_xml) document. For task creation and update, a new or updated task definition is remoted from the client. Deletion and enumeration operate on the XML definitions already existing on the server. In all cases, the task definition exists in the form of an XML document, each task as a separate file, organized in subdirectories under the Tasks root directory.
+The following figure illustrates a conceptual protocol operation flow for the [ITaskSchedulerService](#Section_4.2.2) interface. All the operations involve the task definition / configuration [**XML**](#gt_xml) document. For task creation and update, a new or updated task definition is remoted from the client. Deletion and enumeration operate on the XML definitions already existing on the server. In all cases, the task definition exists in the form of an XML document, each task as a separate file, organized in subdirectories under the Tasks root directory.
 
 ![ITaskSchedulerService operation flow](media/image4.png)
 
 Figure 4: ITaskSchedulerService operation flow
 
-**Server_Bind:** Client binds to the server, as specified in section [3.1.3](#Section_3.2.3).
+**Server_Bind:** Client binds to the server, as specified in section [3.1.3](#Section_3.1.3).
 
 **Op_Request_and_XML_Config_and_Creds_Received:** Server receives a request for operation such as create, update, or delete a task, or enumerate tasks. In the case of creating or updating a task, the task XML configuration is passed along in the [**RPC**](#gt_remote-procedure-call-rpc) call, together with the [**credentials**](#gt_credential) for running the created / updated task as specified in section [3.1.4.3.1](#Section_3.1.4.3.1).
 
-**Folder_Accessible:** If a task creation is requested, the server first checks if the client has access to the folder where the tasks are required to be registered according to the URI element specified in section [2.5.1](#Section_2.5).
+**Folder_Accessible:** If a task creation is requested, the server first checks if the client has access to the folder where the tasks are required to be registered according to the URI element specified in section [2.5.1](#Section_2.5.1).
 
 **Permissions_Check_&Trigger_Reg:** If the task creation is requested, the server first checks that the client is allowed to register the task according to the configuration requested. The permissions check is performed according to the permissions table in section [3.2.5.1.1](#Section_3.2.5.1.1). In addition, the server configures the [**trigger**](#gt_trigger) as specified in section [3.2.4](#Section_3.2.4).
 
@@ -6137,9 +6137,9 @@ Preferred [**security providers**](#gt_security-provider): Implementers are advi
 
 Authentication Methods: For all three protocol interfaces, the RPC server requires RPC_C_AUTHN_GSS_NEGOTIATE or RPC_C_AUTHN_WINNT authorization. The RPC client uses an authentication level of RPC_C_AUTHN_LEVEL_PKT_PRIVACY (value = 6), as specified in [MS-RPCE] section 2.2.1.1.8.
 
-The [SAGetAccountInformation](#Section_3.2.5.3.7) method in the [SASec](#Section_4.1.1) interface (section 3.2.5.3.7) has a *wszBuffer* input/output parameter. To avoid sending uninitialized memory, implementers are advised to create the client such that it initializes the buffer before it is sent.
+The [SAGetAccountInformation](#Section_3.2.5.3.7) method in the [SASec](#Section_3.2.5.3) interface (section 3.2.5.3.7) has a *wszBuffer* input/output parameter. To avoid sending uninitialized memory, implementers are advised to create the client such that it initializes the buffer before it is sent.
 
-The [SchRpcRetrieveTask](#Section_3.2.5.4.3) method in the [ITaskSchedulerService](#Section_3.2.5.4) interface (section 3.2.5.4.3) has a *pulNumLanguages* input parameter that is unused. To avoid sending uninitialized memory, implementers are advised to create the client implementation such that it specifies the address of an initialized DWORD.
+The [SchRpcRetrieveTask](#Section_3.2.5.4.3) method in the [ITaskSchedulerService](#Section_4.2.2) interface (section 3.2.5.4.3) has a *pulNumLanguages* input parameter that is unused. To avoid sending uninitialized memory, implementers are advised to create the client implementation such that it specifies the address of an initialized DWORD.
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
@@ -6768,7 +6768,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.3: The [SASec](#Section_4.1.1) interface was introduced in the Windows 2000 operating system and the [ITaskSchedulerService](#Section_3.2.5.4) interface made its debut in Windows Vista.
+<1> Section 1.3: The [SASec](#Section_3.2.5.3) interface was introduced in the Windows 2000 operating system and the [ITaskSchedulerService](#Section_4.2.2) interface made its debut in Windows Vista.
 
 <2> Section 1.3: Windows clients use the [**server message block (SMB)**](#gt_server-message-block-smb) remote file-system protocol [MS-SMB](../MS-SMB/MS-SMB.md).
 
@@ -6784,9 +6784,9 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 2.3.4: The Windows implementation returns 0x00000057.
 
-<9> Section 2.3.8: In Microsoft implementations, this protocol supports any authentication supported by the underlying operating system. For more information on authentication in Windows, see [MS-AUTHSOD](#Section_1.3).
+<9> Section 2.3.8: In Microsoft implementations, this protocol supports any authentication supported by the underlying operating system. For more information on authentication in Windows, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 
-<10> Section 2.3.14: Windows returns failure codes to invoking applications uninterpreted. In addition to the error codes, as specified in [MS-ERREF](#Section_2.3.14), the Windows Task Scheduler server also uses the following HRESULT error codes:
+<10> Section 2.3.14: Windows returns failure codes to invoking applications uninterpreted. In addition to the error codes, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md), the Windows Task Scheduler server also uses the following HRESULT error codes:
 
 | Value | Meaning |
 | --- | --- |

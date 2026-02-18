@@ -450,7 +450,7 @@ This document uses the following terms:
 **RPC transport**: The underlying network services used by the remote procedure call (RPC) runtime for communications between network nodes. For more information, see [C706] section 2.
 
 <a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP](#Section_2.2.1) section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
+**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 <a id="gt_session"></a>
 **session**: A collection of applications simultaneously running under the same Win32 subsystem.
@@ -503,7 +503,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -666,7 +666,7 @@ Both types of endpoints (Static endpoints and well-known endpoints) MUST be supp
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
 
-In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and in [MS-RPCE](../MS-RPCE/MS-RPCE.md), this document uses the following definitions, as specified in [MS-DTYP](#Section_2.2.1):
+In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and in [MS-RPCE](../MS-RPCE/MS-RPCE.md), this document uses the following definitions, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md):
 
 - BOOL
 - BOOLEAN
@@ -1354,7 +1354,7 @@ QUERY_SESSION_DATA_LICENSE_VALIDATION
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 PSESSIONENUM
 
-PSESSIONENUM is a pointer to a structure containing information about the sessions running on the [**terminal server**](#gt_terminal-server). It is returned by [RpcGetEnumResult](#Section_3.3.4.3.9).
+PSESSIONENUM is a pointer to a structure containing information about the sessions running on the [**terminal server**](#gt_terminal-server). It is returned by [RpcGetEnumResult](#Section_3.3.4.3.6).
 
 typedef struct _SESSIONENUM {
 
@@ -1559,7 +1559,7 @@ SESSIONENUM_LEVEL3 SessionEnum_Level3;
 <a id="Section_2.2.2.6"></a>
 #### 2.2.2.6 PEXECENVDATA
 
-PEXECENVDATA is a pointer to a structure containing information about the [**sessions**](#gt_session) running on the [**terminal server**](#gt_terminal-server) and the sessions running on virtual machines hosted on the server.<48> It is returned by [RpcGetAllSessions](#Section_3.3.4.3.11).
+PEXECENVDATA is a pointer to a structure containing information about the [**sessions**](#gt_session) running on the [**terminal server**](#gt_terminal-server) and the sessions running on virtual machines hosted on the server.<48> It is returned by [RpcGetAllSessions](#Section_3.3.4.3.10).
 
 typedef struct _EXECENVDATA {
 
@@ -1986,7 +1986,7 @@ WCHAR Name[33];
 <a id="Section_2.2.2.13"></a>
 #### 2.2.2.13 LOGONID
 
-LOGONID is a macro defined to be the structure **SESSIONID**. This type represents information about the session or [**WinStation**](#gt_windows-station-winstation) identified by the identifier **SessionId**. For more information, see the macro definition in section [6.5](#Section_2.2.1.5).
+LOGONID is a macro defined to be the structure **SESSIONID**. This type represents information about the session or [**WinStation**](#gt_windows-station-winstation) identified by the identifier **SessionId**. For more information, see the macro definition in section [6.5](#Section_6.5).
 
 typedef struct _SESSIONID {
 
@@ -2017,7 +2017,7 @@ WINSTATIONSTATECLASS State;
 <a id="Section_2.2.2.14"></a>
 #### 2.2.2.14 TS_PROCESS_INFORMATION_NT4
 
-The TS_PROCESS_INFORMATION_NT4 structure is returned by [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.19).
+The TS_PROCESS_INFORMATION_NT4 structure is returned by [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.20).
 
 typedef struct _TS_PROCESS_INFORMATION_NT4 {
 
@@ -2037,7 +2037,7 @@ ULONG Pad;
 
 **LogonId:** The session ID of the process.
 
-**ProcessSid:** The security identifier (SID), as specified in [MS-DTYP](#Section_2.2.1) section 2.4.2, of the owner of the process.
+**ProcessSid:** The security identifier (SID), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, of the owner of the process.
 
 **Pad:** MUST be set to 0.
 
@@ -2070,7 +2070,7 @@ PBYTE pSid;
 
 **SizeOfSid:** Size of **pSid**, in bytes.
 
-**pSid:** The security identifier (SID), as specified in [MS-DTYP](#Section_2.2.1), of the owner of the process.
+**pSid:** The security identifier (SID), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md), of the owner of the process.
 
 <a id="Section_2.2.2.15.1"></a>
 ##### 2.2.2.15.1 TS_SYS_PROCESS_INFORMATION
@@ -2247,7 +2247,7 @@ PBYTE pSid;
 
 **SizeOfSid:** Size, in bytes, of the security identifier (SID) structure pointed to by **pSid**.
 
-**pSid:** Security identifier (SID), as specified in [MS-DTYP](#Section_2.2.1) section 2.4.2, of the process.
+**pSid:** Security identifier (SID), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, of the process.
 
 <a id="Section_2.2.2.16.1"></a>
 ##### 2.2.2.16.1 TS_SYS_PROCESS_INFORMATION_NT6
@@ -5396,7 +5396,7 @@ packet-beta
 
 **PropName (variable):** A Unicode string whose length is indicated by the NameLength field. The string indicates the name of the property.
 
-**PropValue (variable):** An encoded binary BLOB of length indicated by the ValueLength field. This field either contains a 32-bit unsigned integer or an array of ASCII characters. See [Encoding and decoding PropValue field](#Section_2.3.2) for encoding and decoding this BLOB.
+**PropValue (variable):** An encoded binary BLOB of length indicated by the ValueLength field. This field either contains a 32-bit unsigned integer or an array of ASCII characters. See [Encoding and decoding PropValue field](#Section_27cd734ab78041e6b9d5b6c9fba6c16a) for encoding and decoding this BLOB.
 
 The following table describes various PropName fields and associated PropValue fields used by Terminal Services.
 
@@ -5492,16 +5492,16 @@ Note that the terms "client side" and "server side" refer to the initiating and 
 <a id="Section_3.1"></a>
 ## 3.1 Determining a Caller's Permissions and Access Rights
 
-To determine access rights, the caller's token is retrieved from the [**RPC transport**](#gt_rpc-transport), as described for **RpcImpersonationAccessToken** in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. It MAY use the [**security identifier (SID)**](#gt_security-identifier-sid) that represents the user account in the caller's token. For more information about tokens, see [MS-DTYP](#Section_2.2.1) section 2.5.2. For more information about SIDs, see [MS-DTYP] section 2.4.2.
+To determine access rights, the caller's token is retrieved from the [**RPC transport**](#gt_rpc-transport), as described for **RpcImpersonationAccessToken** in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. It MAY use the [**security identifier (SID)**](#gt_security-identifier-sid) that represents the user account in the caller's token. For more information about tokens, see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2. For more information about SIDs, see [MS-DTYP] section 2.4.2.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Determining a Caller's Permissions
 
-During processing of methods that implement access checks, this protocol performs access security verification on the caller's identity by using the algorithm specified by the Access Check Algorithm Pseudo code ([MS-DTYP](#Section_2.2.1) section 2.5.3.2). The input parameters of that algorithm are mapped as follows:
+During processing of methods that implement access checks, this protocol performs access security verification on the caller's identity by using the algorithm specified by the Access Check Algorithm Pseudo code ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2). The input parameters of that algorithm are mapped as follows:
 
 - **SecurityDescriptor**: This MUST be the **SECURITY_DESCRIPTOR** of the session.<149> For more information about **SECURITY_DESCRIPTOR**, see [MS-DTYP] section 2.4.6.
 - **Token / Authorization Context**: This MUST be the caller's token.
-- **Access Request mask**: This is specified by each method's processing logic and MUST be one or more of the WinStationOpen access values specified in section [6.5](#Section_2.2.1.5).
+- **Access Request mask**: This is specified by each method's processing logic and MUST be one or more of the WinStationOpen access values specified in section [6.5](#Section_6.5).
 - **Object Tree**: This parameter MUST be NULL.
 - **PrincipalSelfSubst SID**: This parameter MUST be NULL.
 <a id="Section_3.1.2"></a>
@@ -5512,7 +5512,7 @@ During processing of methods that implement access checks of whether the caller 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Determining Whether a Caller Is an Administrator
 
-During processing of methods that implement access checks of whether the caller is an [**administrator**](#gt_administrator), this protocol performs access security verification on the caller's identity by using the support function SidInToken ([MS-DTYP](#Section_2.2.1) section 2.5.3.1.1). The input parameters of that algorithm are mapped as follows:
+During processing of methods that implement access checks of whether the caller is an [**administrator**](#gt_administrator), this protocol performs access security verification on the caller's identity by using the support function SidInToken ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.1.1). The input parameters of that algorithm are mapped as follows:
 
 - **Token:** MUST be the caller's token.
 - **SidToTest:** MUST be the [**SID**](#gt_security-identifier-sid) of administrators.
@@ -5574,7 +5574,7 @@ This section describes a conceptual model of possible data organization that an 
 
 - [RpcOpenSession](#Section_3.3.4.1.1) as the *phSession* parameter.
 - [RpcCloseSession](#Section_3.3.4.1.2) as the *phSession* parameter.
-- [RpcConnect](#Section_3.7.4.1.33) as the *hSession* parameter.
+- [RpcConnect](#Section_3.3.4.1.3) as the *hSession* parameter.
 - [RpcDisconnect](#Section_3.3.4.1.4) as the *hSession* parameter.
 - [RpcLogoff](#Section_3.3.4.1.5) as the *hSession* parameter.
 - [RpcGetUserName](#Section_3.3.4.1.6) as the *hSession* parameter.
@@ -5583,7 +5583,7 @@ This section describes a conceptual model of possible data organization that an 
 - [RpcIsSessionDesktopLocked](#Section_3.3.4.1.9) as the *hSession* parameter.
 - [RpcShowMessageBox](#Section_3.3.4.1.10) as the *hSession* parameter.
 - [RpcGetTimes](#Section_3.3.4.1.11) as the *hSession* parameter.
-**ExecutionEnvironmentData:** A structure containing information about the [**sessions**](#gt_session) running on the terminal server and the sessions running on virtual machines hosted on the server. It is used with [RpcGetAllSessions](#Section_3.3.4.3.11) and returned as the *ppSessionData* parameter.
+**ExecutionEnvironmentData:** A structure containing information about the [**sessions**](#gt_session) running on the terminal server and the sessions running on virtual machines hosted on the server. It is used with [RpcGetAllSessions](#Section_3.3.4.3.10) and returned as the *ppSessionData* parameter.
 
 **SessionState:** Current state of a session. It MUST be set to one of the values of the **WINSTATIONSTATECLASS** enumeration as defined in section [2.2.1.9](#Section_2.2.1.9). The following list shows how **SessionState** is used with various methods.
 
@@ -5601,9 +5601,9 @@ This section describes a conceptual model of possible data organization that an 
 
 **DeviceSessions:** The number of sessions connected using media center extender device only. These sessions are of SESSIONTYPE_MEDIACENTEREXT as defined in SESSIONTYPE (section 2.2.1.18). It is used with the RpcGetLoggedOnCount method and is returned as the *pDeviceSessions* parameter. For more information on media center, see [[MSFT-WINMCE]](https://go.microsoft.com/fwlink/?LinkId=208408).
 
-**PSESSIONENUM:** Pointer to a structure containing information about the sessions running on the terminal server. This structure is described in detail in section [2.2.2.4](#Section_2.2.2.4). It is used with the [RpcGetEnumResult](#Section_3.3.4.3.9) method and returned as the *ppSessionEnumResult* parameter.
+**PSESSIONENUM:** Pointer to a structure containing information about the sessions running on the terminal server. This structure is described in detail in section [2.2.2.4](#Section_2.2.2.4). It is used with the [RpcGetEnumResult](#Section_3.3.4.3.6) method and returned as the *ppSessionEnumResult* parameter.
 
-**SessionInfo:** Union of structures, each structure providing different levels of detail about sessions running on a computer. This union is described in detail in section [2.2.2.4.1](#Section_2.2.2.4.1.1). It is used with the RpcGetEnumResult method and returned as the **Data** field of the *ppSessionEnumResult* parameter.
+**SessionInfo:** Union of structures, each structure providing different levels of detail about sessions running on a computer. This union is described in detail in section [2.2.2.4.1](#Section_2.2.2.4.1). It is used with the RpcGetEnumResult method and returned as the **Data** field of the *ppSessionEnumResult* parameter.
 
 **SessionInfo_Ex:** Union of structures, each structure providing different levels of detail about sessions running on a computer. This union is described in detail in section [2.2.2.5.1](#Section_2.2.2.5.1). It is used with the RpcGetEnumResultEx method and returned as the **Data** field of the *ppSessionEnumResult* parameter.
 
@@ -5617,7 +5617,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **LogonTime:** Represents the most recent time of a logon to the session. It is used with the RpcGetTimes method and returned as the *pLogonTime* parameter.
 
-**PLSMSESSIONINFORMATION:** Pointer to a structure containing information about a session running on the terminal server. This structure is described in detail in section [2.2.2.8](#Section_2.2.2.8). It is used with the [RpcGetSessionInformation](#Section_3.3.4.1.16) method and returned as the *pSessionInfo* parameter.
+**PLSMSESSIONINFORMATION:** Pointer to a structure containing information about a session running on the terminal server. This structure is described in detail in section [2.2.2.8](#Section_2.2.2.8). It is used with the [RpcGetSessionInformation](#Section_3.3.4.1.13) method and returned as the *pSessionInfo* parameter.
 
 **PLSMSESSIONINFORMATION_EX:** Pointer to a structure containing information about a session running on the terminal server. This structure is described in detail in section [2.2.2.9](#Section_2.2.2.9). It is used with the RpcGetSessionInformationEx method and returned as the *LSMSessionInfoExPtr* parameter.
 
@@ -5665,7 +5665,7 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [RpcOpenSession](#Section_3.3.4.1.1) | Returns a [**handle**](#gt_handle) to a specified session on the terminal server. Opnum: 0 |
 | [RpcCloseSession](#Section_3.3.4.1.2) | Closes the connection to the specified session on the terminal server. Opnum: 1 |
-| [RpcConnect](#Section_3.7.4.1.33) | Reconnects a session handle returned by RpcOpenSession to another specified session on the terminal server. Opnum: 2 |
+| [RpcConnect](#Section_3.3.4.1.3) | Reconnects a session handle returned by RpcOpenSession to another specified session on the terminal server. Opnum: 2 |
 | [RpcDisconnect](#Section_3.3.4.1.4) | Disconnects the specified session on the terminal server. Opnum: 3 |
 | [RpcLogoff](#Section_3.3.4.1.5) | Logs off the specified session on the terminal server. Opnum: 4 |
 | [RpcGetUserName](#Section_3.3.4.1.6) | Gets the username and [**domain**](#gt_domain) name of the user logged on to the specified session on the terminal server. Opnum: 5 |
@@ -5675,7 +5675,7 @@ Methods in RPC Opnum Order
 | [RpcShowMessageBox](#Section_3.3.4.1.10) | Displays a message box, with a specified message and title, in the target user session running on the terminal server. Opnum: 9 |
 | [RpcGetTimes](#Section_3.3.4.1.11) | Gets the connected, disconnected, and logged on time for the specified session on the terminal server. Opnum: 10 |
 | [RpcGetSessionCounters](#Section_3.3.4.1.12) | Returns the various performance counters associated with the terminal server. Opnum: 11 |
-| [RpcGetSessionInformation](#Section_3.3.4.1.16) | Retrieves information about a specified session running on a terminal server. Opnum: 12 |
+| [RpcGetSessionInformation](#Section_3.3.4.1.13) | Retrieves information about a specified session running on a terminal server. Opnum: 12 |
 | Opnum13NotUsedOnWire | Not implemented. Opnum: 13 |
 | Opnum14NotUsedOnWire | Not implemented. Opnum: 14 |
 | [RpcGetLoggedOnCount](#Section_3.3.4.1.14) | Gets the number of user-connected and device-connected sessions. Opnum: 15 |
@@ -6285,12 +6285,12 @@ Methods in RPC Opnum Order
 | [RpcFilterByState](#Section_3.3.4.3.3) | Based on the state of the sessions, adds a filter to the session enumeration result running on a terminal server. Opnum: 2 |
 | [RpcFilterByCallersName](#Section_3.3.4.3.4) | Based on the caller name, adds a filter to the session enumeration result running on a terminal server. Opnum: 3 |
 | [RpcEnumAddFilter](#Section_3.3.4.3.5) | Adds another filter to the current enumeration. Opnum: 4 |
-| [RpcGetEnumResult](#Section_3.3.4.3.9) | Returns a structure of the type [PSESSIONENUM](#Section_2.2.2.4) containing the list of sessions currently running on the terminal server after applying the specified filter. Opnum: 5 |
+| [RpcGetEnumResult](#Section_3.3.4.3.6) | Returns a structure of the type [PSESSIONENUM](#Section_2.2.2.4) containing the list of sessions currently running on the terminal server after applying the specified filter. Opnum: 5 |
 | [RpcFilterBySessionType](#Section_3.3.4.3.7) | Based on the type of the session, adds a filter to the session enumeration result running on a terminal server. Opnum: 6 |
 | Opnum7NotUsedOnWire | Not implemented. Opnum: 7 |
 | [RpcGetSessionIds](#Section_3.3.4.3.8) | Returns a list of the IDs associated with the sessions running on a terminal server that satisfies the specified filter. Opnum: 8 |
 | [RpcGetEnumResultEx](#Section_3.3.4.3.9) | Returns a structure of [PSESSIONENUM_EX](#Section_2.2.2.5) containing the list of sessions currently running on the terminal server after applying the specified filter. Opnum: 9 |
-| [RpcGetAllSessions](#Section_3.3.4.3.11) | Returns a structure of [PEXECENVDATA](#Section_2.2.2.6) containing the list of sessions currently running on the terminal server and the sessions currently running on the virtual machines hosted by the server. Opnum: 10 |
+| [RpcGetAllSessions](#Section_3.3.4.3.10) | Returns a structure of [PEXECENVDATA](#Section_2.2.2.6) containing the list of sessions currently running on the terminal server and the sessions currently running on the virtual machines hosted by the server. Opnum: 10 |
 | [RpcGetAllSessionsEx](#Section_3.3.4.3.11) | Returns a structure of [PEXECENVDATAEX](#Section_2.2.2.7) containing the list of sessions currently running on the terminal server and the sessions currently running on the virtual machines hosted by the server. Opnum: 11 |
 
 <a id="Section_3.3.4.3.1"></a>
@@ -6338,7 +6338,7 @@ HRESULT RpcCloseEnum(
 <a id="Section_3.3.4.3.3"></a>
 ##### 3.3.4.3.3 RpcFilterByState (Opnum 2)
 
-The RpcFilterByState method adds a filter to the session enumeration result, running on a [**terminal server**](#gt_terminal-server), based on the state of the sessions. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.9) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
+The RpcFilterByState method adds a filter to the session enumeration result, running on a [**terminal server**](#gt_terminal-server), based on the state of the sessions. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.6) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
 
 HRESULT RpcFilterByState(
 
@@ -6365,7 +6365,7 @@ HRESULT RpcFilterByState(
 <a id="Section_3.3.4.3.4"></a>
 ##### 3.3.4.3.4 RpcFilterByCallersName (Opnum 3)
 
-The RpcFilterByCallersName method adds a filter to the session enumeration result, running on a [**terminal server**](#gt_terminal-server), based on the caller name. The enumeration will return only sessions belonging to the user making this call. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.9) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
+The RpcFilterByCallersName method adds a filter to the session enumeration result, running on a [**terminal server**](#gt_terminal-server), based on the caller name. The enumeration will return only sessions belonging to the user making this call. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.6) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
 
 HRESULT RpcFilterByCallersName(
 
@@ -6384,7 +6384,7 @@ HRESULT RpcFilterByCallersName(
 <a id="Section_3.3.4.3.5"></a>
 ##### 3.3.4.3.5 RpcEnumAddFilter (Opnum 4)
 
-The RpcEnumAddFilter method adds another filter to the current enumeration. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.9) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
+The RpcEnumAddFilter method adds another filter to the current enumeration. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.6) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
 
 HRESULT RpcEnumAddFilter(
 
@@ -6438,7 +6438,7 @@ HRESULT RpcGetEnumResult(
 <a id="Section_3.3.4.3.7"></a>
 ##### 3.3.4.3.7 RpcFilterBySessionType (Opnum 6)
 
-The RpcFilterBySessionType method adds a filter to the session enumeration result, running on a terminal server, based on the type of the session. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.9) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
+The RpcFilterBySessionType method adds a filter to the session enumeration result, running on a terminal server, based on the type of the session. This method MUST be called after [RpcOpenEnum](#Section_3.3.4.3.1) and before [RpcGetEnumResult](#Section_3.3.4.3.6) or [RpcGetEnumResultEx](#Section_3.3.4.3.9). No special permissions are required to call this method.
 
 HRESULT RpcFilterBySessionType(
 
@@ -6657,13 +6657,13 @@ This section describes a conceptual model of possible data organization that an 
 
 **PROTOCOLSTATUS_INFO_TYPE**: Specifies the protocol status information requested for a particular session running on a terminal server. It is defined in section [2.2.2.2](#Section_2.2.2.2). The following list shows how **PROTOCOLSTATUS_INFO_TYPE** is used with various methods.
 
-- [RpcGetProtocolStatus](#Section_2.2.2.20.1): as the *InfoType* parameter.
+- [RpcGetProtocolStatus](#Section_3.5.4.1.3): as the *InfoType* parameter.
 - [RpcGetSessionProtocolLastInputTime](#Section_3.5.4.1.7): as the *InfoType* parameter.
 **QUERY_SESSION_DATA_TYPE**: The type of data to retrieve about the session. It is used with [RpcQuerySessionData](#Section_3.5.4.1.9) and MUST be set to one of the values described in section [2.2.2.3](#Section_2.2.2.3).
 
 **WINSTATIONCLIENT**: Structure that defines the client-requested configuration when connecting to a session. This structure is described in detail in section [2.2.2.19](#Section_2.2.2.19). It is used with the [RpcGetClientData](#Section_3.5.4.1.1) method.
 
-**PLISTENERENUM**: Structure that contains information about a terminal server listener. This structure is described in detail in section [2.2.2.12](#Section_2.2.2.12.1). It is used with [RpcGetAllListeners](#Section_3.5.4.1.6) and returned as the *ppListeners* parameter.
+**PLISTENERENUM**: Structure that contains information about a terminal server listener. This structure is described in detail in section [2.2.2.12](#Section_2.2.2.12). It is used with [RpcGetAllListeners](#Section_3.5.4.1.6) and returned as the *ppListeners* parameter.
 
 **WINSTATIONCONFIG**: Structure that contains WinStation configuration data. This structure is described in detail in section [2.2.2.30.1](#Section_2.2.2.30.1). It is used with the [RpcGetConfigData](#Section_3.5.4.1.2) method.
 
@@ -6717,7 +6717,7 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [RpcGetClientData](#Section_3.5.4.1.1) | Returns information about the client that is connected to a particular session running on a [**terminal server**](#gt_terminal-server). Opnum: 0 |
 | [RpcGetConfigData](#Section_3.5.4.1.2) | Returns the configuration data that is associated with the user connected to a particular session running on a terminal server. Opnum: 1 |
-| [RpcGetProtocolStatus](#Section_2.2.2.20.1) | Retrieves information about the status of the protocol that is used to connect to a particular session running on a terminal server. Opnum: 2 |
+| [RpcGetProtocolStatus](#Section_3.5.4.1.3) | Retrieves information about the status of the protocol that is used to connect to a particular session running on a terminal server. Opnum: 2 |
 | [RpcGetLastInputTime](#Section_3.5.4.1.4) | Returns the time the last user input was received for the specified session running on a terminal server by the associated protocol. Opnum: 3 |
 | [RpcGetRemoteAddress](#Section_3.5.4.1.5) | Retrieves the IP address of the client machine that is connected to the session on the terminal server. Opnum: 4 |
 | Opnum5NotUsedOnWire | Not implemented. Opnum: 5 |
@@ -6906,7 +6906,7 @@ PLISTENERENUM* ppListeners,
 
 **hBinding:** The [**RPC**](#gt_remote-procedure-call-rpc) binding [**handle**](#gt_handle). For more information, see [[MSDN-RPCBIND]](https://go.microsoft.com/fwlink/?LinkId=93771).
 
-**ppListeners:** The list of Terminal Services listeners running on the terminal server. This is an array of type [PLISTENERENUM](#Section_2.2.2.12.1).
+**ppListeners:** The list of Terminal Services listeners running on the terminal server. This is an array of type [PLISTENERENUM](#Section_2.2.2.12).
 
 **Level:** The level of information that is requested for the listeners. The only supported value is 1.
 
@@ -7251,15 +7251,15 @@ This section describes a conceptual model of possible data organization that an 
 
 **WINSTATIONCLIENT**: Structure that defines the client-requested configuration when connecting to a session. This structure is described in detail in section [2.2.2.19](#Section_2.2.2.19). It is used with the RpcWinStationQueryInformation method.
 
-**LOGONID**: Structure that represents information about the session or WinStation. This structure is described in detail in section [2.2.2.13](#Section_2.2.2.13). It is used with the [RpcWinStationEnumerate](#Section_3.7.4.1.19) method and is returned as the *pLogonId* parameter.
+**LOGONID**: Structure that represents information about the session or WinStation. This structure is described in detail in section [2.2.2.13](#Section_2.2.2.13). It is used with the [RpcWinStationEnumerate](#Section_3.7.4.1.4) method and is returned as the *pLogonId* parameter.
 
-**TS_PROCESS_INFORMATION_NT4**: Structure that represents information about a process running in a session. This structure is described in detail in section [2.2.2.14](#Section_2.2.2.14). It is used with the [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) method and is returned inside the *pProcessBuffer* parameter.
+**TS_PROCESS_INFORMATION_NT4**: Structure that represents information about a process running in a session. This structure is described in detail in section [2.2.2.14](#Section_2.2.2.14). It is used with the [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.20) method and is returned inside the *pProcessBuffer* parameter.
 
-**TS_ALL_PROCESS_INFO**: Structure that contains data about all the processes running on the system that are accessible to a user. This structure is described in detail in section [2.2.2.15](#Section_2.2.2.15.1.1). It is used with the [RpcWinStationGetAllProcesses](#Section_3.7.4.1.22) method and is returned as the *ppTsAllProcessesInfo* parameter.
+**TS_ALL_PROCESS_INFO**: Structure that contains data about all the processes running on the system that are accessible to a user. This structure is described in detail in section [2.2.2.15](#Section_2.2.2.15). It is used with the [RpcWinStationGetAllProcesses](#Section_3.7.4.1.22) method and is returned as the *ppTsAllProcessesInfo* parameter.
 
 **TS_SYS_PROCESS_INFORMATION**: Structure that contains information about a process running in a session. This structure is described in detail in section [2.2.2.15.1](#Section_2.2.2.15.1). It is used with the RpcWinStationEnumerateProcesses method and is returned inside the *pProcessBuffer* parameter.
 
-**TS_PROCESS_INFORMATION_NT6**: Structure that represents information about a process running in a session. This structure is described in detail in section [2.2.2.16](#Section_2.2.2.16.2.1). It is used with the [RpcWinStationGetAllProcesses_NT6](#Section_3.7.4.1.34) method and is returned inside the *ppTsAllProcessesInfo* parameter.
+**TS_PROCESS_INFORMATION_NT6**: Structure that represents information about a process running in a session. This structure is described in detail in section [2.2.2.16](#Section_2.2.2.16). It is used with the [RpcWinStationGetAllProcesses_NT6](#Section_3.7.4.1.34) method and is returned inside the *ppTsAllProcessesInfo* parameter.
 
 **PDPARAMS**: Structure containing the protocol driver parameters. This structure is described in detail in section [2.2.2.21](#Section_2.2.2.21). It is used with the RpcWinStationQueryInformation and RpcWinStationSetInformation methods.
 
@@ -7269,15 +7269,15 @@ This section describes a conceptual model of possible data organization that an 
 
 **WDCONFIG**: Structure containing the WinStation (session) driver configuration. This structure is described in detail in section [2.2.2.27](#Section_2.2.2.27). It is used with the RpcWinStationQueryInformation method.
 
-**CDCONFIG**: Structure that represents connection driver configuration. This structure is described in detail in section [2.2.2.28](#Section_2.2.2.28.2). It is used with RpcWinStationQueryInformation and is returned as the *pWinStationInformation* parameter when "WinStationCd" is passed as the *WinStationInformationClass* parameter.
+**CDCONFIG**: Structure that represents connection driver configuration. This structure is described in detail in section [2.2.2.28](#Section_2.2.2.28). It is used with RpcWinStationQueryInformation and is returned as the *pWinStationInformation* parameter when "WinStationCd" is passed as the *WinStationInformationClass* parameter.
 
 **WINSTATIONCREATE**: Structure that represents a session to which the user can connect. This structure is described in detail in section [2.2.2.29](#Section_2.2.2.29). It is used with RpcWinStationQueryInformation and is returned as the *pWinStationInformation* parameter when "WinStationCreateData" is passed as the *WinStationInformationClass* parameter.
 
 **WINSTATIONVIDEODATA**: Structure that represents the resolution and color depth of a session. This structure is described in detail in section [2.2.2.33](#Section_2.2.2.33). It is used with RpcWinStationQueryInformation and is returned as the *pWinStationInformation* parameter when "WinStationVideoData" is passed as the *WinStationInformationClass* parameter.
 
-**WINSTATIONLOADINDICATORDATA**: Structure that represents the data used for the load balancing of a server. This structure is described in detail in section [2.2.2.34](#Section_2.2.2.34.1). It is used with RpcWinStationQueryInformation and is returned as the *pWinStationInformation* parameter when "WinStationLoadIndicator" is passed as the *WinStationInformationClass* parameter.
+**WINSTATIONLOADINDICATORDATA**: Structure that represents the data used for the load balancing of a server. This structure is described in detail in section [2.2.2.34](#Section_2.2.2.34). It is used with RpcWinStationQueryInformation and is returned as the *pWinStationInformation* parameter when "WinStationLoadIndicator" is passed as the *WinStationInformationClass* parameter.
 
-**WINSTATIONSHADOW**: Structure that represents the current shadow state of a session. This structure is described in detail in section [2.2.2.35](#Section_2.2.2.35.1). The following list shows how **WINSTATIONSHADOW** is used with various methods.
+**WINSTATIONSHADOW**: Structure that represents the current shadow state of a session. This structure is described in detail in section [2.2.2.35](#Section_2.2.2.35). The following list shows how **WINSTATIONSHADOW** is used with various methods.
 
 - RpcWinStationQueryInformation: as the *pWinStationInformation* parameter when "WinStationShadowInfo" is passed as the *WinStationInformationClass* parameter.
 - RpcWinStationSetInformation: as the *pWinStationInformation* parameter when "WinStationShadowInfo" is passed as the *WinStationInformationClass* parameter.
@@ -7332,13 +7332,13 @@ Methods in RPC Opnum Order
 | [RpcWinStationOpenServer](#Section_3.7.4.1.1) | Returns a server [**handle**](#gt_handle) that can be used in other [**WinStation**](#gt_windows-station-winstation) API methods for querying information on the WinStation (sessions) on the server. Opnum: 0 |
 | [RpcWinStationCloseServer](#Section_3.7.4.1.2) | Closes the server handle for WinStation APIs. Opnum: 1 |
 | [RpcIcaServerPing](#Section_3.7.4.1.3) | Verifies that the server is alive. Opnum: 2 |
-| [RpcWinStationEnumerate](#Section_3.7.4.1.19) | Retrieves a list of [LOGONID](#Section_2.2.2.13) structures for sessions on a terminal server. Opnum: 3 |
+| [RpcWinStationEnumerate](#Section_3.7.4.1.4) | Retrieves a list of [LOGONID](#Section_2.2.2.13) structures for sessions on a terminal server. Opnum: 3 |
 | [RpcWinStationRename](#Section_3.7.4.1.5) | Enables the caller to change the name of the session. Opnum: 4 |
 | [RpcWinStationQueryInformation](#Section_3.7.4.1.6) | Retrieves various types of configuration information on a session. Opnum: 5 |
 | [RpcWinStationSetInformation](#Section_3.7.4.1.7) | Sets various types of configuration information for a session. Opnum: 6 |
 | [RpcWinStationSendMessage](#Section_3.7.4.1.8) | Displays a message box on a given terminal server session and, optionally, waits for a reply. Opnum: 7 |
 | [RpcLogonIdFromWinStationName](#Section_3.7.4.1.9) | Given a session name, returns the session's session ID. Opnum: 8 |
-| [RpcWinStationNameFromLogonId](#Section_2.2.1.5) | Retrieves the Windows Station (WinStation) name for a specific session. Opnum: 9 |
+| [RpcWinStationNameFromLogonId](#Section_3.7.4.1.10) | Retrieves the Windows Station (WinStation) name for a specific session. Opnum: 9 |
 | [RpcWinStationConnect](#Section_3.7.4.1.11) | Connects a user's terminal server client from a given terminal server session to a different terminal server session. Opnum: 10 |
 | Opnum11NotUsedOnWire | Reserved for local use. Opnum: 11 |
 | Opnum12NotUsedOnWire | Reserved for local use. Opnum: 12 |
@@ -7346,7 +7346,7 @@ Methods in RPC Opnum Order
 | [RpcWinStationReset](#Section_3.7.4.1.13) | Resets a session. Opnum: 14 |
 | [RpcWinStationShutdownSystem](#Section_3.7.4.1.14) | Shuts down the system and, optionally, logs off all sessions. May also reboot the system. Opnum: 15 |
 | [RpcWinStationWaitSystemEvent](#Section_3.7.4.1.15) | Waits synchronously for a system event from an RPC API request on behalf of the caller. Opnum: 16 |
-| [RpcWinStationShadow](#Section_2.2.2.35) | Starts a shadow operation (remote control) of another terminal server session. Opnum: 17 |
+| [RpcWinStationShadow](#Section_3.7.4.1.16) | Starts a shadow operation (remote control) of another terminal server session. Opnum: 17 |
 | Opnum18NotUsedOnWire | Reserved for local use. Opnum: 18 |
 | Opnum19NotUsedOnWire | Reserved for local use. Opnum: 19 |
 | Opnum20NotUsedOnWire | Reserved for local use. Opnum: 20 |
@@ -7363,7 +7363,7 @@ Methods in RPC Opnum Order
 | Opnum31NotUsedOnWire | Reserved for local use. Opnum: 31 |
 | Opnum32NotUsedOnWire | Reserved for local use. Opnum: 32 |
 | Opnum33NotUsedOnWire | Reserved for local use. Opnum: 33 |
-| [OldRpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) | This function in turn calls the [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) function. Opnum: 34 |
+| [OldRpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) | This function in turn calls the [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.20) function. Opnum: 34 |
 | Opnum35NotUsedOnWire | Reserved for local use. Opnum: 35 |
 | RpcWinStationEnumerateProcesses | Returns the process information for an NT4 terminal server. Supported only for backward compatibility with that platform. Opnum: 36 |
 | [RpcWinStationTerminateProcess](#Section_3.7.4.1.21) | Terminates the specified process. Opnum: 37 |
@@ -7375,7 +7375,7 @@ Methods in RPC Opnum Order
 | [RpcWinStationGetAllProcesses](#Section_3.7.4.1.22) | Retrieves a list of the processes on a remote server on which the caller has permission to receive information. Opnum: 43 |
 | [RpcWinStationGetProcessSid](#Section_3.7.4.1.23) | Retrieves the process SID for a given process ID and process start time combination. Opnum: 44 |
 | [RpcWinStationGetTermSrvCountersValue](#Section_3.7.4.1.24) | Retrieves the current value of requested terminal server performance counters. Opnum: 45 |
-| [RpcWinStationReInitializeSecurity](#Section_5) | Reinitializes security for all non-console WinStation remote connection protocols specified in the registry. Opnum: 46 |
+| [RpcWinStationReInitializeSecurity](#Section_3.7.4.1.25) | Reinitializes security for all non-console WinStation remote connection protocols specified in the registry. Opnum: 46 |
 | Opnum47NotUsedOnWire | Reserved for local use. Opnum: 47 |
 | Opnum48NotUsedOnWire | Reserved for local use. Opnum: 48 |
 | Opnum49NotUsedOnWire | Reserved for local use. Opnum: 49 |
@@ -7388,7 +7388,7 @@ Methods in RPC Opnum Order
 | Opnum56NotUsedOnWire | Reserved for local use. Opnum: 56 |
 | Opnum57NotUsedOnWire | Reserved for local use. Opnum: 57 |
 | [RpcWinStationUpdateSettings](#Section_3.7.4.1.27) | Rereads settings for all WinStations. Opnum: 58 |
-| [RpcWinStationShadowStop](#Section_2.2.2.35) | Stops all shadow operations on the specified session. Opnum: 59 |
+| [RpcWinStationShadowStop](#Section_3.7.4.1.28) | Stops all shadow operations on the specified session. Opnum: 59 |
 | [RpcWinStationCloseServerEx](#Section_3.7.4.1.29) | Closes the server handle for WinStation APIs. Opnum: 60 |
 | [RpcWinStationIsHelpAssistantSession](#Section_3.7.4.1.30) | Determines whether a session is created by a HelpAssistant account (used for Remote Assistance). Opnum: 61 |
 | [RpcWinStationGetMachinePolicy](#Section_3.7.4.1.31) | Returns a copy of the terminal server machine policy to the caller. Opnum: 62 |
@@ -7535,7 +7535,7 @@ PCHAR pLogonId,
 <a id="Section_3.7.4.1.5"></a>
 ##### 3.7.4.1.5 RpcWinStationRename (Opnum 4)
 
-The RpcWinStationRename method enables the caller to change the name of the session. The caller MUST have DELETE permission, as specified in [MS-DTYP](#Section_2.2.1) section 2.4.3, on the session that is identified by the old name.<162>
+The RpcWinStationRename method enables the caller to change the name of the session. The caller MUST have DELETE permission, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.3, on the session that is identified by the old name.<162>
 
 BOOLEAN RpcWinStationRename(
 
@@ -7571,7 +7571,7 @@ BOOLEAN RpcWinStationRename(
 
 **pWinStationNameNew:** The pointer to a string that is the new name of the session being renamed.
 
-**NameNewSize:** The length of the string in characters pointed to by *pWinStationNameNew* including the terminating NULL character. Name MUST be shorter than or equal to [WINSTATIONNAME_LENGTH](#Section_2.2.1.5).
+**NameNewSize:** The length of the string in characters pointed to by *pWinStationNameNew* including the terminating NULL character. Name MUST be shorter than or equal to [WINSTATIONNAME_LENGTH](#Section_6.5).
 
 **Return Values:** Returns TRUE if the call succeeded, or FALSE if the method failed. On failure, pResult indicates the failure status code.
 
@@ -7635,11 +7635,11 @@ The following classes are supported.
 | WinStationInformation 8 | Retrieves information on the session, including connect state, session's name, connect time, disconnect time, time last input was received from the client, logon time, user's username and [**domain**](#gt_domain), and the current time. *pWinStationInformation* points to a VARDATA_WIRE structure followed by a [WINSTATIONINFORMATION](#Section_2.2.2.20) structure. The *WinStationInformationLength* MUST be sizeof(VARDATA_WIRE) + sizeof(WINSTATIONINFORMATION). The **Size** field in the VARDATA_WIRE structure MUST be set to sizeof(WINSTATIONINFORMATION) and the **Offset** set to sizeof(VARDATA_WIRE). |
 | WinStationUserToken 14 | Retrieves the user's token in the session. Caller requires WINSTATION_ALL_ACCESS permission. The *pWinStationInformation* argument points to a [WINSTATIONUSERTOKEN](#Section_2.2.2.32) structure, and *WinStationInformationLength* MUST be sizeof(WINSTATIONUSERTOKEN). |
 | WinStationVideoData 16 | Retrieves resolution and color depth of the session. The *pWinStationInformation* argument points to a [WINSTATIONVIDEODATA](#Section_2.2.2.33) structure, and *WinStationInformationLength* MUST be sizeof(WINSTATIONVIDEODATA). |
-| WinStationCd 18 | Retrieves connection driver configuration data. The *pWinStationInformation* points to a [CDCONFIG](#Section_2.2.2.28.2) structure, and *WinStationInformationLength* MUST be sizeof(CDCONFIG). |
+| WinStationCd 18 | Retrieves connection driver configuration data. The *pWinStationInformation* points to a [CDCONFIG](#Section_2.2.2.28) structure, and *WinStationInformationLength* MUST be sizeof(CDCONFIG). |
 | WinStationVirtualData 20 | Query client virtual data. The *pWinStationInformation* argument MUST point to 8 bytes and *WinStationInformationLength* MUST be 8. |
 | WinStationLoadBalanceSessionTarget 24 | Retrieves the target session ID for a client redirected from another server in a load balancing cluster. The *pWinStationInformation* points to a ULONG, and *WinStationInformationLength* MUST be sizeof(ULONG). If there is no redirection, -1 is returned in *pWinStationInformation*.<168> |
-| WinStationLoadIndicator 25 | Retrieves an indicator of the load on the server. The *pWinStationInformation* argument points to a [WINSTATIONLOADINDICATORDATA](#Section_2.2.2.34.1) structure. *WinStationInformationLength* MUST be sizeof(WINSTATIONLOADINDICATORDATA). |
-| WinStationShadowInfo 26 | Retrieves the current shadow state of a session. The *pWinStationInformation* argument points to a [WINSTATIONSHADOW](#Section_2.2.2.35.1) structure. *WinStationInformationLength* MUST be sizeof(WINSTATIONSHADOW).<169> |
+| WinStationLoadIndicator 25 | Retrieves an indicator of the load on the server. The *pWinStationInformation* argument points to a [WINSTATIONLOADINDICATORDATA](#Section_2.2.2.34) structure. *WinStationInformationLength* MUST be sizeof(WINSTATIONLOADINDICATORDATA). |
+| WinStationShadowInfo 26 | Retrieves the current shadow state of a session. The *pWinStationInformation* argument points to a [WINSTATIONSHADOW](#Section_2.2.2.35) structure. *WinStationInformationLength* MUST be sizeof(WINSTATIONSHADOW).<169> |
 | WinStationDigProductId 27 | Retrieves the client product ID and current product ID of the session. The *pWinStationInformation* argument points to a [WINSTATIONPRODID](#Section_2.2.2.36) structure. *WinStationInformationLength* MUST be sizeof(WINSTATIONPRODID).<170> |
 | WinStationLockedState 28 | Retrieves the current locked state of the session, TRUE or FALSE. The *pWinStationInformation* argument points to a BOOL variable. *WinStationInformationLength* MUST be sizeof(BOOL). |
 | WinStationRemoteAddress 29 | Retrieves the remote IP address of the terminal server client in the session. The *pWinStationInformation* argument points to a [WINSTATIONREMOTEADDRESS](#Section_2.2.2.37) structure. *WinStationInformationLength* MUST be sizeof(WINSTATIONREMOTEADDRESS). |
@@ -7827,7 +7827,7 @@ BOOLEAN RpcLogonIdFromWinStationName(
 
 **pWinStationName:** The pointer to a buffer holding the session name.
 
-**NameSize:** The length of the string in characters pointed to by *pWinStationName* including the terminating NULL character. MUST be less than or equal to [WINSTATIONNAME_LENGTH](#Section_2.2.1.5).
+**NameSize:** The length of the string in characters pointed to by *pWinStationName* including the terminating NULL character. MUST be less than or equal to [WINSTATIONNAME_LENGTH](#Section_6.5).
 
 **pLogonId:** The matching session ID for the session specified by *pWinStationName*.
 
@@ -7864,7 +7864,7 @@ BOOLEAN RpcWinStationNameFromLogonId(
 | Value | Meaning |
 | --- | --- |
 | STATUS_SUCCESS 0x00000000 | The call succeeded. |
-| STATUS_INVALID_PARAMETER 0xC000000D | *NameSize* value is less than [WINSTATIONNAME_LENGTH](#Section_2.2.1.5) + 1. |
+| STATUS_INVALID_PARAMETER 0xC000000D | *NameSize* value is less than [WINSTATIONNAME_LENGTH](#Section_6.5) + 1. |
 | 0x80071B6E | The session does not exist or the caller does not have WINSTATION_QUERY permission. |
 
 **LoginId:** The ID of the session for which to retrieve the WinStation name.
@@ -8213,7 +8213,7 @@ BOOLEAN RpcWinStationReadRegistry(
 <a id="Section_3.7.4.1.19"></a>
 ##### 3.7.4.1.19 OldRpcWinStationEnumerateProcesses (Opnum 34)
 
-The OldRpcWinStationEnumerateProcesses method calls the [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) method and returns whatever is returned by that method. It has the same parameters as the RpcWinStationEnumerateProcesses method. No special permissions are required to call this method.<191>
+The OldRpcWinStationEnumerateProcesses method calls the [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.20) method and returns whatever is returned by that method. It has the same parameters as the RpcWinStationEnumerateProcesses method. No special permissions are required to call this method.<191>
 
 BOOLEAN OldRpcWinStationEnumerateProcesses(
 
@@ -8369,7 +8369,7 @@ PTS_ALL_PROCESSES_INFO* ppTsAllProcessesInfo
 
 **pNumberOfProcesses:** The number of processes requested by the caller. On return, this indicates the number of processes actually stored in the *ppTsAllProcessesInfo* parameter.
 
-**ppTsAllProcessesInfo:** Pointer to an array of processes allocated and returned by the method. ***ppTsAllProcessesInfo** is allocated by the method to be an array of [TS_ALL_PROCESSES_INFO](#Section_2.2.2.15.1.1) structures. The array returned by the method MUST be freed by the caller.
+**ppTsAllProcessesInfo:** Pointer to an array of processes allocated and returned by the method. ***ppTsAllProcessesInfo** is allocated by the method to be an array of [TS_ALL_PROCESSES_INFO](#Section_2.2.2.15) structures. The array returned by the method MUST be freed by the caller.
 
 **Return Values:** Returns TRUE if the call succeeded, and FALSE if the lookup failed. On failure, pResult indicates the failure status code.
 
@@ -8381,7 +8381,7 @@ PTS_ALL_PROCESSES_INFO* ppTsAllProcessesInfo
 <a id="Section_3.7.4.1.23"></a>
 ##### 3.7.4.1.23 RpcWinStationGetProcessSid (Opnum 44)
 
-The RpcWinStationGetProcessSid method retrieves the process security identifier (SID), as specified in [MS-DTYP](#Section_2.2.1) section 2.4.2, for a given process ID and process start time combination.<193>The caller MUST have the PROCESS_QUERY_INFORMATION access right to the process being queried and the TOKEN_QUERY access right to the access token associated with the process. For more information on the process access rights, see [[MSDN-PROCRIGHTS]](https://go.microsoft.com/fwlink/?LinkId=208137). For more information on access rights for access tokens, see [[MSDN-TOKENRIGHTS]](https://go.microsoft.com/fwlink/?LinkId=208138).
+The RpcWinStationGetProcessSid method retrieves the process security identifier (SID), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, for a given process ID and process start time combination.<193>The caller MUST have the PROCESS_QUERY_INFORMATION access right to the process being queried and the TOKEN_QUERY access right to the access token associated with the process. For more information on the process access rights, see [[MSDN-PROCRIGHTS]](https://go.microsoft.com/fwlink/?LinkId=208137). For more information on access rights for access tokens, see [[MSDN-TOKENRIGHTS]](https://go.microsoft.com/fwlink/?LinkId=208138).
 
 BOOLEAN RpcWinStationGetProcessSid(
 
@@ -8830,7 +8830,7 @@ PTS_ALL_PROCESSES_INFO_NT6* ppTsAllProcessesInfo
 
 **pNumberOfProcesses:** The number of processes requested by the caller. On return, this indicates the number of processes actually stored in the ppTsAllProcessesInfo parameter.
 
-**ppTsAllProcessesInfo:** Pointer to an array of processes allocated and returned by the method. *ppTsAllProcessesInfo is allocated by the method to be an array of [TS_ALL_PROCESSES_INFO_NT6](#Section_2.2.2.16.2.1) structures. The array returned by the method MUST be freed by the caller.
+**ppTsAllProcessesInfo:** Pointer to an array of processes allocated and returned by the method. *ppTsAllProcessesInfo is allocated by the method to be an array of [TS_ALL_PROCESSES_INFO_NT6](#Section_2.2.2.16) structures. The array returned by the method MUST be freed by the caller.
 
 **Return Values:** Returns TRUE if the call succeeded, and FALSE if the lookup failed. On failure, pResult indicates the failure status code.
 
@@ -9254,7 +9254,7 @@ The sequence of messages for enumerating sessions on the server is as follows:
 
 - After an RPC binding has been established to the server, the client requests a session enumeration handle to be opened by the server by calling the [RpcOpenEnum](#Section_3.3.4.3.1) method.
 - The server, in response, opens a handle of the type [ENUM_HANDLE](#Section_2.2.1.2) and returns to the client.
-- The client then calls the [RpcGetEnumResult](#Section_3.3.4.3.9) method by passing this handle, along with an uninitialized buffer, to get the list of sessions.
+- The client then calls the [RpcGetEnumResult](#Section_3.3.4.3.6) method by passing this handle, along with an uninitialized buffer, to get the list of sessions.
 - The server, on receiving the request, allocates memory for the buffer and fills it with an array of [SESSIONENUM](#Section_2.2.2.4) structures containing session information, one for each session on the server. It also returns the number of sessions on the server.
 - The client, on receiving the data, calls the [RpcCloseEnum](#Section_3.3.4.3.2) method to inform the server to close the enumeration handle.
 - The server, on receiving the RpcCloseEnum call, closes the enumeration handle.
@@ -9823,7 +9823,7 @@ The sequence of messages for enumerating sessions on the server is as follows:
 
 - After an RPC binding has been established to the server, the client requests a handle to the server to be opened by calling the [RpcWinStationOpenServer](#Section_3.7.4.1.1) method.
 - The server in response will open up a handle and return to the client.
-- The client then calls the [RpcWinStationEnumerate](#Section_3.7.4.1.19) method by passing this handle along with an uninitialized buffer to get the list of sessions.
+- The client then calls the [RpcWinStationEnumerate](#Section_3.7.4.1.4) method by passing this handle along with an uninitialized buffer to get the list of sessions.
 - The server on receiving the request will allocate memory for the buffer and fill it with an array of [LOGONID](#Section_2.2.2.13) structures containing session information, one for each session on the server. It will also return the number of sessions on the server.
 - The client, on receiving the data, calls the [RpcWinStationCloseServerEx](#Section_3.7.4.1.29) method to inform the server to close the server handle.
 - The server on receiving the RpcWinStationCloseServerEx call will close the server handle.
@@ -10003,14 +10003,14 @@ The only security parameter is Authentication Protocol, section [2.1](#Section_2
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) and headers are provided in the following sections, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](#Section_2.2.1) Appendix A.
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) and headers are provided in the following sections, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A.
 
 When compiling these IDLs with the MIDL compiler, "MIDL_PASS" has to be defined. This can be done by using the midl command line with the /D switch. For example, "midl /D MIDL_PASS legacy.idl".
 
 <a id="Section_6.1"></a>
 ## 6.1 Appendix A.1: tspubrpc.idl
 
-For ease of implementation, the full IDL is provided, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](#Section_2.2.1) Appendix A and "tsdef.h" is as specified in section [6.5](#Section_2.2.1.5).
+For ease of implementation, the full IDL is provided, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A and "tsdef.h" is as specified in section [6.5](#Section_6.5).
 
 import "ms-dtyp.idl";
 
@@ -10725,7 +10725,7 @@ PEXECENVDATAEX *ppSessionData,
 <a id="Section_6.2"></a>
 ## 6.2 Appendix A.2: rcmpublic.idl
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](#Section_2.2.1) Appendix A.
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A.
 
 import "ms-dtyp.idl";
 
@@ -11050,7 +11050,7 @@ HRESULT RpcIsListening(
 <a id="Section_6.3"></a>
 ## 6.3 Appendix A.3: legacy.idl
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](#Section_2.2.1) Appendix A and "allproc.h" is as specified in section [6.7](../MS-DTYP/MS-DTYP.md).
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided, where "ms-dtyp.idl" is the IDL as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A and "allproc.h" is as specified in section [6.7](#Section_6.7).
 
 import "ms-dtyp.idl";
 
@@ -14741,7 +14741,7 @@ In Windows the session manager is csrss.exe.
 
 <191> Section 3.7.4.1.19: The [OldRpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) method returns the process information for a terminal server and is supported only on Windows NT Server 4.0 operating system terminal server for backward compatibility.
 
-<192> Section 3.7.4.1.20: The [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.19) method returns the process information for a terminal server and is supported only on Windows NT Server 4.0 terminal server for backwards compatibility.
+<192> Section 3.7.4.1.20: The [RpcWinStationEnumerateProcesses](#Section_3.7.4.1.20) method returns the process information for a terminal server and is supported only on Windows NT Server 4.0 terminal server for backwards compatibility.
 
 <193> Section 3.7.4.1.23: RpcWinStationGetProcessSid is not supported in Windows NT.
 

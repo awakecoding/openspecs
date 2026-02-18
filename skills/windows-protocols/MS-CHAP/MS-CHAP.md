@@ -262,7 +262,7 @@ The Extensible Authentication Protocol Method for Microsoft CHAP is separate fro
 
 The diagram in section [2.1](#Section_2.1) illustrates the relationship between EAP [RFC3748], the Extensible Authentication Protocol Method for Microsoft CHAP, and MSCHAPv2 [[RFC2759]](https://go.microsoft.com/fwlink/?LinkId=90379).
 
-The protocol has a configuration setting called **fUseWinLogonCreds**, as specified in section [3.1.1](../MS-GPWL/MS-GPWL.md). The [**EAP peer**](#gt_eap-peer) that initializes this protocol is responsible for configuring this setting as well. The peer itself might be configured through the [**group policy**](#gt_group-policy). For example, the Group Policy: Wireless/Wired Protocol Extension [MS-GPWL](../MS-GPWL/MS-GPWL.md) specifies the group policy protocol to configure and deploy wireless local area network (WLAN). This configuration also carries the EAP method configuration as a part of it. The peer can use this configuration to initialize the MS-CHAP method.
+The protocol has a configuration setting called **fUseWinLogonCreds**, as specified in section [3.1.1](#Section_3.1.1). The [**EAP peer**](#gt_eap-peer) that initializes this protocol is responsible for configuring this setting as well. The peer itself might be configured through the [**group policy**](#gt_group-policy). For example, the Group Policy: Wireless/Wired Protocol Extension [MS-GPWL](../MS-GPWL/MS-GPWL.md) specifies the group policy protocol to configure and deploy wireless local area network (WLAN). This configuration also carries the EAP method configuration as a part of it. The peer can use this configuration to initialize the MS-CHAP method.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -628,7 +628,7 @@ If the **currentState** variable is set to EAP_CHAP_CHALLENGE_SENT, then:
 - If the validation is successful, then:
 - Prepare a Success-Request packet which embeds the resulting MSCHAPv2 Success packet, and send it to the [**peer**](#gt_peer).
 - Set **currentState** to EAP_CHAP_SUCCESS_REQUEST_SENT.
-- If the validation fails due to an expired password and [AllowPasswordChange](#Section_445709abd25f433c85d4a827c029a28e) is true, then:
+- If the validation fails due to an expired password and [AllowPasswordChange](#Section_3.3.1) is true, then:
 - Prepare a Failure-Request packet that embeds the MSCHAPv2 Failure packet with the **R** bit set to zero and the corresponding validation error, and send it to the peer.
 - Obtain the **AuthenticatorChallenge** from the Failure-Request packet.
 - Set **currentState** to EAP_CHAP_CHANGE_PASSWORD_SENT.

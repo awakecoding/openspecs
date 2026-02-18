@@ -266,7 +266,7 @@ Figure 1: Device to host connect
 
 Process notes follow:
 
-- Metadata handshake is not always required during startup sequence. See section [2.2.2](#Section_2.2.2.1).
+- Metadata handshake is not always required during startup sequence. See section [2.2.2](#Section_2.2.2).
 - Wireless enrollment is only present during startup when connected via USB.
 - Audio initialization sequence differs in that it starts with a set device state: Stop.
 - For other device types, the Gamepad Input Report MUST be replaced by an appropriate report.
@@ -280,7 +280,7 @@ All GIP devices advertise a Hello [**message**](#gt_message) at enumeration that
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Metadata Stage
 
-See section [2.2.2](#Section_2.2.2.1) for more information.
+See section [2.2.2](#Section_2.2.2) for more information.
 
 <a id="Section_1.3.4"></a>
 ### 1.3.4 Gamepad Input Report
@@ -290,7 +290,7 @@ The Gamepad Input Report that follows the Motor exchange in the previous figure 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Audio
 
-An audio streaming device is a special case. Audio data is not routed to or from the vendor’s library. Instead, it is communicated directly to the host’s audio stack, and special handling is done to ensure regular and continuous flow of data. See section [2.2.11](#Section_3.1.3) for more information.
+An audio streaming device is a special case. Audio data is not routed to or from the vendor’s library. Instead, it is communicated directly to the host’s audio stack, and special handling is done to ensure regular and continuous flow of data. See section [2.2.11](#Section_2.2.11) for more information.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -1383,7 +1383,7 @@ Figure 4: Audio device initialization sequence
 
 The first steps of Hello and Metadata exchange (if required) are the same as with any other device. After this point the host will send a Set Device State: STOP, followed by an audio control message to specify the audio configuration the device is to use. This differs from non-audio devices that receive a Set Device State: START, after Hello or the Metadata exchange.
 
-The host always picks the first configuration listed in the **SupportedAudioFormats** section of the device’s metadata. See section [2.2.2](#Section_2.2.2.1) for GIP metadata. The device will respond to the request with the format configuration it is using. Additional format negotiations will not be issued by the host unless the device responds with a mismatched format configuration, or the host fails to receive a response from the device within one second. The response will be the same as the format request, apart from the sequence ID. However, in the case the host receives a mismatched audio configuration, it will try up to four times to negotiate a matching configuration with the device. The device SHOULD not send the audio format response until it has properly configured its audio hardware and is prepared to send or receive audio data.
+The host always picks the first configuration listed in the **SupportedAudioFormats** section of the device’s metadata. See section [2.2.2](#Section_2.2.2) for GIP metadata. The device will respond to the request with the format configuration it is using. Additional format negotiations will not be issued by the host unless the device responds with a mismatched format configuration, or the host fails to receive a response from the device within one second. The response will be the same as the format request, apart from the sequence ID. However, in the case the host receives a mismatched audio configuration, it will try up to four times to negotiate a matching configuration with the device. The device SHOULD not send the audio format response until it has properly configured its audio hardware and is prepared to send or receive audio data.
 
 If the device’s hardware configuration does not support the requested audio format, the device SHOULD reply with a format it can support from the list of audio configurations in the **SupportedAudioFormats** section of the metadata. The host will then retry negotiation of the audio configuration first by transmission of Set Device State: STOP, then another Audio Control: Configuration message that uses the format indicated by the device.
 
@@ -1855,7 +1855,7 @@ The following table shows the **Extended Status** field of a device message.
 
 Table 32: Extended Status Device Message: Extended Status Field
 
-The device MUST send status in the scenarios defined in Status Device Command section [3.1.5.5.2](#Section_3.1.5.5.2.2). On connection/reconnection, status SHOULD be sent after receipt of Set Device State: START. Other than for power off or reset state changes, status SHOULD NOT be sent before getting Set Device State: START.
+The device MUST send status in the scenarios defined in Status Device Command section [3.1.5.5.2](#Section_3.1.5.5.2). On connection/reconnection, status SHOULD be sent after receipt of Set Device State: START. Other than for power off or reset state changes, status SHOULD NOT be sent before getting Set Device State: START.
 
 During transmission of status, if the input data has changed in the last 20 seconds, the Device Active bit is set. Otherwise, the Device Active bit is cleared. GIP devices that lack IR LEDs SHOULD always clear the Device Active bit.
 
@@ -2072,7 +2072,7 @@ Table 43: Downstream GIP Message: LED IR Command
 
 OPTIONAL. All Debug Commands are encapsulated within GIP message type 0x1F (Command Data Class).
 
-To enable support for Debug Commands, the GIP Metadata JSON for the device MUST list system command 0x1F (31) in the **SupportedInSystemCommands** and **SupportedOutSystemCommands** arrays within the **DeviceMetadata** object. See Metadata Exchange section [2.2.2](#Section_2.2.2.1) and [[MSLEARN-XIGC-API]](https://go.microsoft.com/fwlink/?linkid=2281343) gipdocs download for more information on metadata requirements.
+To enable support for Debug Commands, the GIP Metadata JSON for the device MUST list system command 0x1F (31) in the **SupportedInSystemCommands** and **SupportedOutSystemCommands** arrays within the **DeviceMetadata** object. See Metadata Exchange section [2.2.2](#Section_2.2.2) and [[MSLEARN-XIGC-API]](https://go.microsoft.com/fwlink/?linkid=2281343) gipdocs download for more information on metadata requirements.
 
 <a id="Section_3.1.5.5.9.1"></a>
 ###### 3.1.5.5.9.1 Debug Large Message Request
@@ -2151,7 +2151,7 @@ Table 47: Upstream GIP Message: Debug Command: Test Command Response
 
 OPTIONAL. All Extended Commands are encapsulated within GIP message type 0x1E (Command Data Class) and utilize a request and response [**transaction**](#gt_transaction) flow. Only GIP hosts issue requests to devices that indicate support for Extended Commands, and these devices are expected to respond.
 
-To enable support for Extended Commands, the GIP Metadata JSON for the device MUST list system command 0x1E (30) in the **SupportedInSystemCommands** and **SupportedOutSystemCommands** arrays within the **DeviceMetadata** object. See Metadata Exchange section [2.2.2](#Section_2.2.2.1) for more information on metadata and where to find its requirements [[MSLEARN-XIGC-API]](https://go.microsoft.com/fwlink/?linkid=2281343) gipdocs download.
+To enable support for Extended Commands, the GIP Metadata JSON for the device MUST list system command 0x1E (30) in the **SupportedInSystemCommands** and **SupportedOutSystemCommands** arrays within the **DeviceMetadata** object. See Metadata Exchange section [2.2.2](#Section_2.2.2) for more information on metadata and where to find its requirements [[MSLEARN-XIGC-API]](https://go.microsoft.com/fwlink/?linkid=2281343) gipdocs download.
 
 Any device that supports message type 0x1E (Extended Command) MUST support at minimum the Get Capabilities sub-command. If a device receives an Extended Command sub-command that it does not support, it MUST respond with status 1 (NOT_SUPPORTED).
 
@@ -2729,7 +2729,7 @@ The host requests metadata up to four times at 500 ms intervals.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-For audio initialization, see section [2.2.11](#Section_3.1.3).
+For audio initialization, see section [2.2.11](#Section_2.2.11).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events

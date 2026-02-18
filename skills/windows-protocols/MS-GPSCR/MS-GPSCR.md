@@ -167,9 +167,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_1.3)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_1.3)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MSFT-PROFSCR] Microsoft Corporation, "Assign a logon script to a user or group", January 21, 2005, [http://technet2.microsoft.com/windowsserver/en/library/e9028566-1be7-45f8-a219-6b09dce34f8d1033.mspx?mfr=true](https://go.microsoft.com/fwlink/?LinkId=100893)
 
@@ -184,7 +184,7 @@ The protocol allows for administration of up to two separate groups of scripts. 
 
 User-logon scripts configured using this protocol differ from user-logon scripts configured as part of user-object scripts [[MSFT-PROFSCR]](https://go.microsoft.com/fwlink/?LinkId=100893).
 
-An overview of the timeline when user and computer policies are applied to a client is described in [MS-GPOD](#Section_1.3) section 3.1.
+An overview of the timeline when user and computer policies are applied to a client is described in [MS-GPOD](../MS-GPOD/MS-GPOD.md) section 3.1.
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Background
@@ -229,7 +229,7 @@ The following sequence of operations is performed from the policy administration
 
 This protocol depends on the Group Policy: Core Protocol specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) to provide a list of applicable [**GPOs**](#gt_group-policy-object-gpo). It also transmits [**Group Policy**](#gt_group-policy) settings and instructions between the client and the [**Group Policy server**](#gt_group-policy-server) by reading and writing files using file access services.
 
-See [MS-FASOD](#Section_1.3) for an overview of file access services.
+See [MS-FASOD](../MS-FASOD/MS-FASOD.md) for an overview of file access services.
 
 ![Group Policy: Scripts Extension Encoding protocol relationship diagram](media/image2.png)
 
@@ -418,14 +418,14 @@ The administrative tool has a user interface that allows an administrator to aut
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Scripts.ini
 
-The scripts.ini file (as specified in section [2.2.2](#Section_2.2.2)) contains the settings for the Scripts Executable group defined in the client abstract data model (section [3.2.1](#Section_1.3)). These settings are:
+The scripts.ini file (as specified in section [2.2.2](#Section_2.2.2)) contains the settings for the Scripts Executable group defined in the client abstract data model (section [3.2.1](#Section_3.2.1)). These settings are:
 
 - Script Type that identifies when the script is to be executed. Values can be one of the following: Startup, Logon, Shutdown, or Logoff.
 - Executable Item is the command line and its parameters.
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 PSScripts.ini
 
-The psscripts.ini file (as specified in section [2.2.3](#Section_2.2.3)) contains the settings for the PSScripts Executable group defined in the client abstract data model (section [3.2.1](#Section_1.3)). These settings are:
+The psscripts.ini file (as specified in section [2.2.3](#Section_2.2.3)) contains the settings for the PSScripts Executable group defined in the client abstract data model (section [3.2.1](#Section_3.2.1)). These settings are:
 
 - Script Type that identifies when the script is to be executed. Values can be one of the following: Startup, Logon, Shutdown, or Logoff.
 - Executable Item is the command line and its parameters.
@@ -438,7 +438,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-When the administrative-side plug-in starts, it gets a scoped [**GPO**](#gt_group-policy-object-gpo) path from the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. The plug-in then processes the GPO path as specified in Message Processing Events and Sequencing Rules (section [3.1.5](#Section_3.2.5)).
+When the administrative-side plug-in starts, it gets a scoped [**GPO**](#gt_group-policy-object-gpo) path from the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. The plug-in then processes the GPO path as specified in Message Processing Events and Sequencing Rules (section [3.1.5](#Section_3.1.5)).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events

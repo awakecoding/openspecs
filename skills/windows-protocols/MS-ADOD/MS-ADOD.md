@@ -152,13 +152,13 @@ AD DS is also accessible via LDAP versions 2 and 3, but it extends the basic DS 
 
 Except where noted otherwise, information in this document applies to both AD DS and AD LDS. The Active Directory system encompasses both AD DS and AD LDS.
 
-Physically, the Active Directory system consists of one or more computer [**servers**](#gt_server) that run a directory service. In the case of both AD DS and AD LDS, these computers are referred to as [**domain controllers (DCs)**](#gt_domain-controller-dc). Even though the directory service can be running on multiple computers, these computers replicate the contents of the directory so that a [**client**](#gt_client) sees a consistent view of the directory no matter which directory server or DC it communicates with. The network protocols that perform this replication are described in [MS-DRSR](#Section_2.7.5), [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.6, and [MS-SRPL](#Section_2.7.5).<1>
+Physically, the Active Directory system consists of one or more computer [**servers**](#gt_server) that run a directory service. In the case of both AD DS and AD LDS, these computers are referred to as [**domain controllers (DCs)**](#gt_domain-controller-dc). Even though the directory service can be running on multiple computers, these computers replicate the contents of the directory so that a [**client**](#gt_client) sees a consistent view of the directory no matter which directory server or DC it communicates with. The network protocols that perform this replication are described in [MS-DRSR](../MS-DRSR/MS-DRSR.md), [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.6, and [MS-SRPL](../MS-SRPL/MS-SRPL.md).<1>
 
 **Note** This document, like [MS-ADTS] and [MS-DRSR], uses the term "domain controller" to refer to a DS that runs as either AD DS or AD LDS. Both AD DS and AD LDS are considered to be directory services.
 
 Directory objects can be created and deleted in the directory. Subsequent to its creation, the contents of a directory object can be modified by adding or removing attributes and their values, or by changing the values of existing attributes. Clients can retrieve the contents of directory objects either by reading the attributes of a specific object or by querying for any objects that match client-specified criteria.
 
-The core protocol that clients use to perform operations is LDAP version 3 as described in [MS-ADTS] which is preferred over version 2. Clients can also communicate with the Active Directory system by using the network protocols described in [MS-DRSR], [MS-SRPL], [MS-SAMR](#Section_2.11), [MS-LSAD](#Section_2.11), [MS-LSAT](#Section_2.11), and [MS-DSSP](../MS-DSSP/MS-DSSP.md), as well as the Web Service protocols described in [MS-ADDM](../MS-ADDM/MS-ADDM.md), [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md), [MS-ADCAP](../MS-ADCAP/MS-ADCAP.md), [MS-WSDS](../MS-WSDS/MS-WSDS.md), and [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md). The set of protocols that the Active Directory system supports depends on whether the system is running as AD DS or AD LDS (see section [2.8](#Section_2.8)).
+The core protocol that clients use to perform operations is LDAP version 3 as described in [MS-ADTS] which is preferred over version 2. Clients can also communicate with the Active Directory system by using the network protocols described in [MS-DRSR], [MS-SRPL], [MS-SAMR](../MS-SAMR/MS-SAMR.md), [MS-LSAD](../MS-LSAD/MS-LSAD.md), [MS-LSAT](../MS-LSAT/MS-LSAT.md), and [MS-DSSP](../MS-DSSP/MS-DSSP.md), as well as the Web Service protocols described in [MS-ADDM](../MS-ADDM/MS-ADDM.md), [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md), [MS-ADCAP](../MS-ADCAP/MS-ADCAP.md), [MS-WSDS](../MS-WSDS/MS-WSDS.md), and [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md). The set of protocols that the Active Directory system supports depends on whether the system is running as AD DS or AD LDS (see section [2.8](#Section_2.8)).
 
 This document provides a description of the client-server functionality of the Active Directory system and additional specific benefits that a client realizes from being associated with an AD DS directory service (that is, "joined to a domain") that are described later in this document. This document does not describe identity and security concepts that are defined as part of the Windows Protocols Overview Document [MS-WPO](../MS-WPO/MS-WPO.md).
 
@@ -198,7 +198,7 @@ Replication within a [**site**](#gt_site) occurs as a response to changes. On it
 
 When a change occurs on a source domain controller, it notifies its destination replication partner, prompting the destination domain controller to request the changes from the source domain controller. The source domain controller either responds to the change request with a replication operation or places the request in a queue if requests are already pending. Each domain controller has a queue of pending replication operations that are processed one at a time.
 
-Directory Replication Service (DRS) Remote Protocol [MS-DRSR] is an RPC protocol for replication and management of data in Active Directory. Domain controllers use the Security Account Manager (SAM) Remote Protocol (Server-to-Server) [MS-SAMS](#Section_2.11) to forward time-critical database changes to the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), and to forward time-critical database changes from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a [**writable NC replica**](#gt_51db485c-dcf6-4845-99b3-2df414ef0aa9) within the same domain outside the normal replication protocol. This protocol is used only between Active Directory servers in the same domain. Beginning with Windows Server 2008 operating system, this protocol was extended to forward certain write operations that are not time critical from an RODC to a writable NC replica. The SAMS protocol addresses the requirement to propagate a subset of database changes to the PDC more quickly than the Directory Replication Service (DRS) Remote Protocol. This rapid propagation is used for sensitive information when the delay imposed by standard Active Directory replication creates an unwelcome burden on the user or creates a risk to the enterprise. An example of the former is a password change operation; if the password is not made available rapidly, a user can experience unpredictable authentication failures when the new password is tried against domain controllers that have not yet replicated it. An example of the latter is when an account is locked out due to multiple password failures; the lockout condition, and, equally important, the lockout-cleared condition, has to be propagated rapidly throughout the domain.
+Directory Replication Service (DRS) Remote Protocol [MS-DRSR] is an RPC protocol for replication and management of data in Active Directory. Domain controllers use the Security Account Manager (SAM) Remote Protocol (Server-to-Server) [MS-SAMS](../MS-SAMS/MS-SAMS.md) to forward time-critical database changes to the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), and to forward time-critical database changes from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a [**writable NC replica**](#gt_51db485c-dcf6-4845-99b3-2df414ef0aa9) within the same domain outside the normal replication protocol. This protocol is used only between Active Directory servers in the same domain. Beginning with Windows Server 2008 operating system, this protocol was extended to forward certain write operations that are not time critical from an RODC to a writable NC replica. The SAMS protocol addresses the requirement to propagate a subset of database changes to the PDC more quickly than the Directory Replication Service (DRS) Remote Protocol. This rapid propagation is used for sensitive information when the delay imposed by standard Active Directory replication creates an unwelcome burden on the user or creates a risk to the enterprise. An example of the former is a password change operation; if the password is not made available rapidly, a user can experience unpredictable authentication failures when the new password is tried against domain controllers that have not yet replicated it. An example of the latter is when an account is locked out due to multiple password failures; the lockout condition, and, equally important, the lockout-cleared condition, has to be propagated rapidly throughout the domain.
 
 Replication can be event-driven or schedule-driven as explained in [MS-ADTS] section 3.1.1.1.14.
 
@@ -339,7 +339,7 @@ This document uses the following terms:
 **Domain Name System (DNS)**: A hierarchical, distributed database that contains mappings of domain names to various types of data, such as IP addresses. DNS enables the location of computers and services by user-friendly names, and it also enables the discovery of other information stored in the database.
 
 <a id="gt_domain-naming-context-domain-nc"></a>
-**domain naming context (domain NC)**: A specific type of [**naming context (NC)**](#gt_naming-context-nc), or an instance of that type, that represents a [**domain**](#gt_domain). A [**domain NC**](#gt_domain-naming-context-domain-nc) can contain security principal objects; no other type of [**NC**](#gt_naming-context-nc) can contain security principal objects. [**Domain NCs**](#gt_domain-naming-context-domain-nc) appear in the [**global catalog (GC)**](#gt_global-catalog-gc). A [**domain NC**](#gt_domain-naming-context-domain-nc) is hosted by one or more [**domain controllers (DCs)**](#gt_domain-controller-dc) operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds). In [**AD DS**](#gt_active-directory-domain-services-ad-ds), a [**forest**](#gt_forest) has one or more [**domain NCs**](#gt_domain-naming-context-domain-nc). A domain NC cannot exist in AD LDS. The root of a [**domain NC**](#gt_domain-naming-context-domain-nc) is an object of class domainDNS; for directory replication [MS-DRSR](#Section_2.7.5), see domainDNS.
+**domain naming context (domain NC)**: A specific type of [**naming context (NC)**](#gt_naming-context-nc), or an instance of that type, that represents a [**domain**](#gt_domain). A [**domain NC**](#gt_domain-naming-context-domain-nc) can contain security principal objects; no other type of [**NC**](#gt_naming-context-nc) can contain security principal objects. [**Domain NCs**](#gt_domain-naming-context-domain-nc) appear in the [**global catalog (GC)**](#gt_global-catalog-gc). A [**domain NC**](#gt_domain-naming-context-domain-nc) is hosted by one or more [**domain controllers (DCs)**](#gt_domain-controller-dc) operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds). In [**AD DS**](#gt_active-directory-domain-services-ad-ds), a [**forest**](#gt_forest) has one or more [**domain NCs**](#gt_domain-naming-context-domain-nc). A domain NC cannot exist in AD LDS. The root of a [**domain NC**](#gt_domain-naming-context-domain-nc) is an object of class domainDNS; for directory replication [MS-DRSR](../MS-DRSR/MS-DRSR.md), see domainDNS.
 
 <a id="gt_domain-object"></a>
 **domain object**: A unit of data storage in a [**domain**](#gt_domain) that is maintained and made available to [**domain**](#gt_domain) members by a [**domain controller (DC)**](#gt_domain-controller-dc).
@@ -556,7 +556,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-CIFS] Microsoft Corporation, "[Common Internet File System (CIFS) Protocol](../MS-CIFS/MS-CIFS.md)".
 
-[MS-DRSR] Microsoft Corporation, "[Directory Replication Service (DRS) Remote Protocol](#Section_2.7.5)".
+[MS-DRSR] Microsoft Corporation, "[Directory Replication Service (DRS) Remote Protocol](../MS-DRSR/MS-DRSR.md)".
 
 [MS-DSSP] Microsoft Corporation, "[Directory Services Setup Remote Protocol](../MS-DSSP/MS-DSSP.md)".
 
@@ -564,9 +564,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_2.11)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_2.11)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-MAIL] Microsoft Corporation, "[Remote Mailslot Protocol](../MS-MAIL/MS-MAIL.md)".
 
@@ -576,9 +576,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_2.11)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
-[MS-SAMS] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Server-to-Server)](#Section_2.11)".
+[MS-SAMS] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Server-to-Server)](../MS-SAMS/MS-SAMS.md)".
 
 [MS-SMB2] Microsoft Corporation, "[Server Message Block (SMB) Protocol Versions 2 and 3](../MS-SMB2/MS-SMB2.md)".
 
@@ -586,7 +586,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-SNTP] Microsoft Corporation, "[Network Time Protocol (NTP) Authentication Extensions](../MS-SNTP/MS-SNTP.md)".
 
-[MS-SRPL] Microsoft Corporation, "[Directory Replication Service (DRS) Protocol Extensions for SMTP](#Section_2.7.5)".
+[MS-SRPL] Microsoft Corporation, "[Directory Replication Service (DRS) Protocol Extensions for SMTP](../MS-SRPL/MS-SRPL.md)".
 
 [MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
@@ -659,8 +659,8 @@ The [**Active Directory**](#gt_active-directory) protocols provide a centralized
 - For storage of relatively static data that is expected to be read at a significantly higher rate than it is updated.
 - For use in scenarios where [**domain**](#gt_domain) integration capabilities are required. When deploying the Active Directory system to provide these capabilities, the [**AD DS**](#gt_active-directory-domain-services-ad-ds) mode of operation is used.
 - For use in scenarios where other systems that have a dependency on the Active Directory system, such as Group Policy or Message Queuing, are to be deployed. When deploying the Active Directory system in support of these other systems, make sure to choose the appropriate mode of operation (typically, AD DS) for the Active Directory system.
-- As a directory service for use by applications, such as web portals, that store information about their registered users. In scenarios where domain integration capabilities are not required, the [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) mode of operation can be a particularly good choice because it does not require support for protocols such as [MS-SAMR](#Section_2.11) (SAMR), [MS-LSAD](#Section_2.11) (LSAD), and [MS-LSAT](#Section_2.11) (LSAT) that are not used by the [**client**](#gt_client) application in these scenarios.
-- For replication of objects. Active Directory is a distributed directory service that stores objects that represent real-world entities such as users, computers, services, and network resources. Objects in the [**directory**](#gt_directory) are distributed among all [**domain controllers**](#gt_domain-controller-dc) in a [**forest**](#gt_forest). Directory replication protocols [MS-DRSR](#Section_2.7.5) (DRSR), [MS-SRPL](#Section_2.7.5) (SRPL), [MS-SAMS](#Section_2.11) (SAMS) are used to replicate [**directory objects**](#gt_directory-object) between different domain controllers.
+- As a directory service for use by applications, such as web portals, that store information about their registered users. In scenarios where domain integration capabilities are not required, the [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) mode of operation can be a particularly good choice because it does not require support for protocols such as [MS-SAMR](../MS-SAMR/MS-SAMR.md) (SAMR), [MS-LSAD](../MS-LSAD/MS-LSAD.md) (LSAD), and [MS-LSAT](../MS-LSAT/MS-LSAT.md) (LSAT) that are not used by the [**client**](#gt_client) application in these scenarios.
+- For replication of objects. Active Directory is a distributed directory service that stores objects that represent real-world entities such as users, computers, services, and network resources. Objects in the [**directory**](#gt_directory) are distributed among all [**domain controllers**](#gt_domain-controller-dc) in a [**forest**](#gt_forest). Directory replication protocols [MS-DRSR](../MS-DRSR/MS-DRSR.md) (DRSR), [MS-SRPL](../MS-SRPL/MS-SRPL.md) (SRPL), [MS-SAMS](../MS-SAMS/MS-SAMS.md) (SAMS) are used to replicate [**directory objects**](#gt_directory-object) between different domain controllers.
 The Active Directory protocols are not used for the following purposes:
 
 - As a replacement for a file system. Directory services such as the Active Directory system are not intended for storing highly volatile data, and emphasize read performance over write performance. They are also not designed for storing large amounts of unstructured data, such as storing a multimegabyte value in a single [**attribute**](#gt_attribute) of a directory object.
@@ -720,7 +720,7 @@ As shown in the preceding diagram, the member protocols that make up the Active 
 
 - The core group contains protocols that are supported by all [**directory**](#gt_directory) [**servers**](#gt_server) in the Active Directory system, whether they run in [**AD DS**](#gt_active-directory-domain-services-ad-ds) or [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) mode. This group includes [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), which is the primary protocol that is used to read and write objects in the [**directory tree**](#gt_directory-tree). The [MS-DSSP](../MS-DSSP/MS-DSSP.md) (DSSP) protocol does not perform operations against the directory tree, but is included in this group because it is also present on all directory servers in the Active Directory Services Protocols.
 - The SAM group includes SAMR and SAMS. SAMR is used to perform [**account**](#gt_account) maintenance and operates on the same directory tree as the core group of protocols, but it provides access to only a subset of the objects in that tree, and further, provides access to only a subset of the [**attributes**](#gt_attribute) on those objects. SAMR is supported only when operating in AD DS mode. SAMS is used to perform account maintenance and time-critical database changes between Active Directory servers that are in the same [**domain**](#gt_domain).
-- The LSA group contains the LSAD and LSAT protocols. Both protocols are serviced by the same [**RPC**](#gt_remote-procedure-call-rpc) interface and [**endpoint**](#gt_endpoint) ([MS-LSAD](#Section_2.11) section 1.8, Vendor-Extensible Fields, and [MS-LSAT](#Section_2.11) section 1.8, Vendor-Extensible Fields).
+- The LSA group contains the LSAD and LSAT protocols. Both protocols are serviced by the same [**RPC**](#gt_remote-procedure-call-rpc) interface and [**endpoint**](#gt_endpoint) ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 1.8, Vendor-Extensible Fields, and [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 1.8, Vendor-Extensible Fields).
 - The Web Services group consists of the WS-Transfer, WS-Enumeration, and [**ADCAP**](#gt_adcap) protocols along with the [MS-WSDS](../MS-WSDS/MS-WSDS.md) (WSDS), and [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md) (WSPELD) protocol extensions. This protocol group is only supported on some versions of the Active Directory Services. Much like the core group, these protocols permit clients to read and write [**directory objects**](#gt_directory-object) in the directory tree, and to perform selected tasks against the tree. Unlike the core group, the protocols in this group are based on [**SOAP**](#gt_soap) rather than remote procedure call (RPC) or block-structured transports.
 - The Directory Replication group contains the DRSR and SRPL protocols. DRSR is an RPC protocol that is used for management of replication and management of data in Active Directory. SRPL is the extension to the DRS protocol for transport over the Simple Mail Transfer Protocol (SMTP).
 The following diagram shows the relationship among the protocols of the Active Directory system.
@@ -739,23 +739,23 @@ The protocols in the following table enable the core functionality of the Active
 | Protocol name | Description | Short name |
 | --- | --- | --- |
 | Active Directory extensions for [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap), versions 2 and 3 | Active Directory is a server for LDAP. [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3 specifies the extensions and variations of LDAP that are supported by Active Directory. **Note** In a reference to LDAP without a version number, LDAP refers to both versions 2 and 3. | [MS-ADTS] section 3.1.1.3.1 |
-| Directory Replication Service Remote Protocol (drsuapi) - Replication | The Directory Replication Service (DRS) Remote Protocol. This protocol includes the drsuapi and dsaop [**RPC**](#gt_remote-procedure-call-rpc) interfaces. Methods on these interfaces provide replication of directory information among the domain controllers of an AD DS [**domain**](#gt_domain). Methods on these interfaces also provide a variety of functionality to clients, such as converting names between formats and retrieving information about AD DS domain controllers. This protocol also supports DC cloning operations.<2> | [MS-DRSR](#Section_2.7.5) |
-| SMTP Replication Protocol Extensions | The Directory Replication Service (DRS) Protocol Extensions for SMTP. This protocol provides Simple Mail Transfer Protocol (SMTP) transport of replication information as an alternative to RPC. | [MS-SRPL](#Section_2.7.5) |
+| Directory Replication Service Remote Protocol (drsuapi) - Replication | The Directory Replication Service (DRS) Remote Protocol. This protocol includes the drsuapi and dsaop [**RPC**](#gt_remote-procedure-call-rpc) interfaces. Methods on these interfaces provide replication of directory information among the domain controllers of an AD DS [**domain**](#gt_domain). Methods on these interfaces also provide a variety of functionality to clients, such as converting names between formats and retrieving information about AD DS domain controllers. This protocol also supports DC cloning operations.<2> | [MS-DRSR](../MS-DRSR/MS-DRSR.md) |
+| SMTP Replication Protocol Extensions | The Directory Replication Service (DRS) Protocol Extensions for SMTP. This protocol provides Simple Mail Transfer Protocol (SMTP) transport of replication information as an alternative to RPC. | [MS-SRPL](../MS-SRPL/MS-SRPL.md) |
 | Directory Services Setup Remote Protocol | The Directory Services Setup Remote Protocol, as defined in [MS-DSSP](../MS-DSSP/MS-DSSP.md). This protocol can be used to retrieve information about the state of a computer in a domain or a non-domain workgroup. | [MS-DSSP] |
 
 The protocols in the following table enable account maintenance when the Active Directory system is operating in AD DS mode. This includes the creation, modification, retrieval, and deletion of users and groups.
 
 | Protocol name | Description | Short name |
 | --- | --- | --- |
-| Security Account Manager (SAM) Remote Protocol (Client-to-Server) | The Security Account Manager (SAM) Remote Protocol. Clients can use this protocol to perform account maintenance, for example, to create and delete accounts. The capabilities of this protocol are a subset of the capabilities of LDAP. | [MS-SAMR](#Section_2.11) |
-| Security Account Manager (SAM) Remote Protocol (Server-to-Server) | The Security Account Manager (SAM) Remote Protocol. Domain controllers (DCs) use this protocol to forward time-critical database changes to the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), and to forward time-critical database changes from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a [**writable NC replica**](#gt_51db485c-dcf6-4845-99b3-2df414ef0aa9) within the same domain outside the normal replication protocol. This protocol is used only between Active Directory servers in the same domain. | [MS-SAMS](#Section_2.11) |
+| Security Account Manager (SAM) Remote Protocol (Client-to-Server) | The Security Account Manager (SAM) Remote Protocol. Clients can use this protocol to perform account maintenance, for example, to create and delete accounts. The capabilities of this protocol are a subset of the capabilities of LDAP. | [MS-SAMR](../MS-SAMR/MS-SAMR.md) |
+| Security Account Manager (SAM) Remote Protocol (Server-to-Server) | The Security Account Manager (SAM) Remote Protocol. Domain controllers (DCs) use this protocol to forward time-critical database changes to the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), and to forward time-critical database changes from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a [**writable NC replica**](#gt_51db485c-dcf6-4845-99b3-2df414ef0aa9) within the same domain outside the normal replication protocol. This protocol is used only between Active Directory servers in the same domain. | [MS-SAMS](../MS-SAMS/MS-SAMS.md) |
 
 The protocols in the following table allow [**clients**](#gt_client) to retrieve security [**policy**](#gt_policy) information and translate [**security identifiers (SIDs)**](#gt_security-identifier-sid) that [**identity**](#gt_identity) [**security principals**](#gt_security-principal), such as users, to human-readable names.
 
 | Protocol name | Description | Short name |
 | --- | --- | --- |
-| Local Security Authority (Domain Policy) Remote Protocol | The Local Security Authority (Domain Policy) Remote Protocol. Clients can use this protocol to retrieve security policy information. | [MS-LSAD](#Section_2.11) |
-| Local Security Authority (Translation Methods) Remote Protocol | The Local Security Authority (Translation Methods) Remote Protocol. Clients can use this protocol to translate security identifiers (SIDs) of security principals to human-readable names, and vice versa. | [MS-LSAT](#Section_2.11) |
+| Local Security Authority (Domain Policy) Remote Protocol | The Local Security Authority (Domain Policy) Remote Protocol. Clients can use this protocol to retrieve security policy information. | [MS-LSAD](../MS-LSAD/MS-LSAD.md) |
+| Local Security Authority (Translation Methods) Remote Protocol | The Local Security Authority (Translation Methods) Remote Protocol. Clients can use this protocol to translate security identifiers (SIDs) of security principals to human-readable names, and vice versa. | [MS-LSAT](../MS-LSAT/MS-LSAT.md) |
 
 The protocols in the following table enable Web services for the Active Directory system that allow access to the directory tree and the management of Active Directory account information and topologies.
 
@@ -1336,7 +1336,7 @@ The directory is the entity that contains the account being created.
 - The client application establishes a connection to the DC. Windows Authentication Services uses the supplied credentials to authenticate the client application ([MS-AUTHSOD] section 2).
 - The client application sends a request to the DC to create a new account and specifies the account name for the new account.
 - The DC verifies that the credentials supplied through the client application have the necessary access-control rights to complete the operation ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3).
-- The DC validates the constraints on the new account name ([MS-SAMR](#Section_2.11) sections 3.1.1.6 and 3.1.1.8.4).
+- The DC validates the constraints on the new account name ([MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.1.6 and 3.1.1.8.4).
 - The DC creates an object in the directory that represents the new account with the account name that the client supplied. The [**directory object**](#gt_directory-object) is additionally populated with [**attributes**](#gt_attribute) that are mandated by the server's processing rules and constraints ([MS-ADTS] sections 3.1.1.5.1 and 3.1.1.5.2 and [MS-SAMR] sections 3.1.1.8 and 3.1.1.9).
 - The DC sends a response to the client application that the new account has been successfully created.
 **Postcondition**
@@ -1361,7 +1361,7 @@ The new account is created and ready for use.
 6. The DC sends a response to the client application that the supplied account name is already in use by an existing account.
 
 - If the DC has used all of the [**relative identifiers (RIDs)**](#gt_relative-identifier-rid) that were allocated to it by RID Master FSMO role owner:
-1-5. Same as Main Success Scenario. Then, after step 5, the DC sends a RID allocation request to the RID Master DC according to the rules specified in [MS-DRSR](#Section_2.7.5) section 4.1.10.4.3 to obtain a new RID range.
+1-5. Same as Main Success Scenario. Then, after step 5, the DC sends a RID allocation request to the RID Master DC according to the rules specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.4.3 to obtain a new RID range.
 
 6-7. Same as main Success Scenario.
 
@@ -1417,7 +1417,7 @@ The directory is the entity that contains the user's existing account.
 - The client application establishes a connection to the directory server. Windows Authentication Services uses the supplied [**credentials**](#gt_credential) to authenticate the client application ([MS-AUTHSOD] section 2).
 - The client application sends a request to the directory server to reset the password of an existing account. This request includes the account name of the account and the new password supplied by the administrator.
 - The directory server verifies that the credentials that are supplied through the client application have the necessary access-control rights to complete the operation. ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3).
-- The directory server verifies that the new password satisfies the password [**policy**](#gt_policy), as described in [MS-SAMR](#Section_2.11) section 3.1.1.7.1.
+- The directory server verifies that the new password satisfies the password [**policy**](#gt_policy), as described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.1.
 - The directory server updates the password of the existing account with the new value that is supplied in the request. Additional [**attributes**](#gt_attribute) are updated as mandated by the server's processing rules and constraints ([MS-ADTS] sections 3.1.1.5.1 and 3.1.1.5.3 and [MS-SAMR] section 3.1.1.8.7).
 - The directory server sends a response to the client application that the password has been successfully updated.
 **Postcondition**
@@ -1484,7 +1484,7 @@ The directory is the entity that contains the user's existing account.
 - The client application sends a request to the directory server to change the password of an existing account. This request includes the account name of the account, the current password, and the new password that the user supplies.
 - The directory server verifies that the credentials that are supplied through the client application have the necessary access-control rights to complete the operation ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3).
 - The directory server verifies that the current password that is supplied through the client application matches the account's password that is stored in the directory.
-- The directory server verifies that the new password satisfies the password [**policy**](#gt_policy), as described in [MS-SAMR](#Section_2.11) section 3.1.1.7.1.
+- The directory server verifies that the new password satisfies the password [**policy**](#gt_policy), as described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.1.
 - The directory server updates the password of the existing account with the new value that is supplied in the request. Additional [**attributes**](#gt_attribute) are updated as mandated by the server's processing rules and constraints ([MS-ADTS] sections 3.1.1.5.1 and 3.1.1.5.3 and [MS-SAMR] section 3.1.1.8.7).
 - The directory server sends a response to the client application that the password has been successfully updated.
 **Postcondition**
@@ -1560,10 +1560,10 @@ The directory is the entity that contains the user's existing account.
 - The client application sends a request to the DC to change the password of the given account. This request includes the account name, the current password, and the new password supplied by the user.
 - An access check is performed on the DC to ensure that the user has the access rights to complete the operation, as described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.
 - The DC verifies that the current password that is supplied through the client application matches the account's password that is stored in the directory.
-- The DC verifies that the new password satisfies the password [**policy**](#gt_policy), as described in [MS-SAMR](#Section_2.11) section 3.1.1.7.1.
+- The DC verifies that the new password satisfies the password [**policy**](#gt_policy), as described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.1.
 - The DC updates the password of the existing account with the new value that is supplied in the request. Additional [**attributes**](#gt_attribute) are updated as mandated by the server's processing rules and constraints ([MS-ADTS] sections 3.1.1.5.1 and 3.1.1.5.3 and [MS-SAMR] section 3.1.1.8.7).
 - The DC establishes a secure channel with the PDC according to the processing rules and constraints specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md) sections 3.1.1 and 3.1.4.3 and [MS-ADTS] section 6.1.6.9.2.
-- The DC sends a password update request to the PDC according to the processing rules and constraints specified in [MS-SAMS](#Section_2.11) section 3.3.5.4.
+- The DC sends a password update request to the PDC according to the processing rules and constraints specified in [MS-SAMS](../MS-SAMS/MS-SAMS.md) section 3.3.5.4.
 - The PDC sends a response to the DC indicating that the password has been successfully updated.
 - The DC sends a response to the client application that the password has been successfully updated.
 **Postconditions**
@@ -1621,9 +1621,9 @@ The directory is the entity that contains the user's existing account.
 - The client application establishes a connection to the RODC. Windows Authentication Services uses the supplied [**credentials**](#gt_credential) to authenticate the client application, as described in [MS-AUTHSOD] section 2.
 - The client application sends a request to the RODC to change the password of an existing account according to rules specified in one of the following references:
 - [MS-NRPC](../MS-NRPC/MS-NRPC.md) sections 3.5.4.4.6 and 3.5.4.4.5
-- [MS-SAMR](#Section_2.11) sections 3.1.5.10.2 and 3.1.5.10.3
+- [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.5.10.2 and 3.1.5.10.3
 - The RODC processes the request according to the following rules.
-- If the client application sends the request in step 3 according to the rules specified in [MS-NRPC], the RODC forwards the request to the DC according to the processing rules specified in [MS-SAMS](#Section_2.11) section 3.2.4.4.
+- If the client application sends the request in step 3 according to the rules specified in [MS-NRPC], the RODC forwards the request to the DC according to the processing rules specified in [MS-SAMS](../MS-SAMS/MS-SAMS.md) section 3.2.4.4.
 - If the client application sends the request in step 3 according to the rules specified in [MS-SAMR], the RODC forwards the request to the DC according to the processing rules specified in [MS-SAMS] section 3.2.4.5.
 - The DC processes the request from the RODC according to the rules that are specified in the appropriate section of [MS-SAMS], as indicated in step 4, and sends a response.
 - On receiving the success response from the DC, the RODC sends that response to the client application.
@@ -1679,7 +1679,7 @@ The directory is the entity that contains user accounts and logon details of the
 - The client application establishes a connection to the RODC. Windows Authentication Services that is present in the RODC uses the supplied credentials to authenticate the user ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2).
 - The RODC verifies that the credentials supplied by the client application have the necessary access-control rights to complete the operation ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3).
 - If the user is successfully authenticated, the RODC sends a success response to the client application.
-- On successful verification of step 3, the RODC sends a LogonTimeStampUpdatesForward request ([MS-SAMS](#Section_2.11) section 3.2.4.6) to the DC.
+- On successful verification of step 3, the RODC sends a LogonTimeStampUpdatesForward request ([MS-SAMS](../MS-SAMS/MS-SAMS.md) section 3.2.4.6) to the DC.
 - The DC updates the lastLogonTimeStamp attribute of the user account and sends a response.
 **Postcondition**
 
@@ -1852,7 +1852,7 @@ The directory is the entity that contains the security group being created.
 - The client application establishes a connection to the directory server. Windows Authentication Services authenticates the client application by using the supplied credentials ([MS-AUTHSOD] section 2).
 - The client application sends a request to the directory server to create a new security group and specifies the group name for the new group.
 - The directory server verifies that the credentials that are supplied through the client application have the necessary access-control rights to complete the operation ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3).
-- The directory server validates the constraints on the new group name, as described in [MS-SAMR](#Section_2.11) sections 3.1.1.6 and 3.1.1.8.4.
+- The directory server validates the constraints on the new group name, as described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.1.6 and 3.1.1.8.4.
 - The directory server creates an object in the directory that represents the new security group with the group name supplied by the client. The [**directory object**](#gt_directory-object) is additionally populated with [**attributes**](#gt_attribute) that are mandated by the server's processing rules and constraints ([MS-ADTS] sections 3.1.1.5.1 and 3.1.1.5.2).
 - The directory server sends a response to the client application that the new security group has been successfully created.
 **Postcondition**
@@ -1923,7 +1923,7 @@ The directory is the entity that contains the list being modified.
 - The client application establishes a connection to the directory server. Windows Authentication Services uses the supplied credentials to authenticate the client application ([MS-AUTHSOD] section 2).
 - The client application sends a request to the directory server to modify the member list of the specified group. The updates for the member list are included in the request.
 - The directory server verifies that the credentials supplied through the client application have the necessary access-control rights to complete the operation ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3).
-- The directory server verifies that the new member list satisfies the constraints described in [MS-SAMR](#Section_2.11) section 3.1.1.8.9.
+- The directory server verifies that the new member list satisfies the constraints described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.8.9.
 - The [**directory object**](#gt_directory-object) that represents the group is modified with the new member list. Additional processing might occur, as described in [MS-ADTS] sections 3.1.1.5.1 and 3.1.1.5.3, and [MS-SAMR] section 3.1.1.8.9.
 - The directory server sends a response to the client application that the member list has been modified.
 **Postcondition**
@@ -2318,7 +2318,7 @@ The translated information is available to the client application.
 
 **Extensions**
 
-- The SID or the name that is supplied through the client application is misformatted, as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.3 and [MS-LSAT](#Section_2.11) section 3.1.4.5, respectively:
+- The SID or the name that is supplied through the client application is misformatted, as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.3 and [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.5, respectively:
 1-4. Same as Main Success Scenario.
 
 5. The directory server sends a response to the client application indicating that an invalid parameter was used in the request, as described in [MS-LSAT] sections 3.1.4.5 and 3.1.4.9.
@@ -2476,7 +2476,7 @@ Replicate changes to a GC or a partial replica by using SMTP
 
 All the details in the preceding scenario are the same except that there are additional preconditions as follows:
 
-- DC1 and DC2 are in different [**sites**](#gt_site) ([MS-SRPL](#Section_2.7.5) section 1.3).
+- DC1 and DC2 are in different [**sites**](#gt_site) ([MS-SRPL](../MS-SRPL/MS-SRPL.md) section 1.3).
 - The domain controllers require the ability to send and receive SMTP messages using any SMTP mail transfer agent, as specified in [[RFC2821]](https://go.microsoft.com/fwlink/?LinkId=90384).
 - There are additional conditions that the configurations of the domain controllers have to meet before the DRS Protocol Extensions for SMTP can be used to replicate state between the domain controllers, as described in [MS-SRPL] sections 1.5 and 3.1.3.
 <a id="Section_2.7.5.3"></a>
@@ -2519,7 +2519,7 @@ Domain administrators and applications are the entities that trigger the transfe
 - DC1 identifies the new FSMO role owner to be DC2, either arbitrarily in the case of demotion, or because of the input of the administrator.
 - DC1 and DC2 perform [**mutual authentication**](#gt_mutual-authentication) by using [**Kerberos**](#gt_kerberos).
 - DC1 sends a rootDSE modify message ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.3) to DC2 requesting that DC2 assume ownership of the FSMO role.
-- DC2 determines the current owner of the FSMO role, which in this case is DC1, and invokes an extended operation request ([MS-DRSR](#Section_2.7.5) section 4.1.10.4.3) against DC1 to request transfer of the FSMO role ownership.
+- DC2 determines the current owner of the FSMO role, which in this case is DC1, and invokes an extended operation request ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.4.3) against DC1 to request transfer of the FSMO role ownership.
 - DC1 transfers its FSMO role to DC2 through the transfer request.
 **Postcondition**
 
@@ -2532,7 +2532,7 @@ None.
 <a id="Section_2.7.6"></a>
 ### 2.7.6 Trust Management
 
-These use cases describe the creation of trust relationships between [**domains**](#gt_domain) or [**forests**](#gt_forest), along with trust validation. A domain trust is created by creating a [**trusted domain object (TDO)**](#gt_trusted-domain-object-tdo), as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.6. These TDOs are managed and created as specified in [MS-LSAD](#Section_2.11) section 3.1.4.7. The Netlogon Remote Protocol ([MS-NRPC](../MS-NRPC/MS-NRPC.md) (NRPC)) validates or manages domain trusts, as specified in [MS-NRPC] section 3.5.4.7.
+These use cases describe the creation of trust relationships between [**domains**](#gt_domain) or [**forests**](#gt_forest), along with trust validation. A domain trust is created by creating a [**trusted domain object (TDO)**](#gt_trusted-domain-object-tdo), as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.6. These TDOs are managed and created as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.7. The Netlogon Remote Protocol ([MS-NRPC](../MS-NRPC/MS-NRPC.md) (NRPC)) validates or manages domain trusts, as specified in [MS-NRPC] section 3.5.4.7.
 
 ![Use cases for trust management](media/image35.png)
 
@@ -2712,7 +2712,7 @@ The primary interest of the client computer is that the machine local state of t
 - **Trigger**: The client administrator triggers this use case to unjoin the client computer from the domain.
 - The domain client uses the Locate a Domain Controller use case to locate a domain controller. For more information, see section [2.7.7.3.1](#Section_2.7.7.3.1).
 - The domain client uses the [**credentials**](#gt_credential) of the domain administrator to establish an [**SMB**](#gt_server-message-block-smb)/CIFS connection to the domain controller ([MS-SMB2](../MS-SMB2/MS-SMB2.md), [MS-SMB](../MS-SMB/MS-SMB.md), or [MS-CIFS](../MS-CIFS/MS-CIFS.md)).
-- The domain client uses the SAMR protocol to disable the machine account on the domain controller [MS-SAMR](#Section_2.11).
+- The domain client uses the SAMR protocol to disable the machine account on the domain controller [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 - The (former) domain client updates its local state.
 - The (former) domain client closes connections.
 - The (former) domain client reinitializes local protocols.
@@ -2812,7 +2812,7 @@ Modes and Protocols Supported
 
 | Mode | Protocols supported | Protocols of which a subset is supported | Schemas implemented |
 | --- | --- | --- | --- |
-| AD DS (without Web Services) | [MS-DSSP](../MS-DSSP/MS-DSSP.md) (DSSP) [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932) (LDAP) [MS-LSAD](#Section_2.11) (LSAD) [MS-LSAT](#Section_2.11) (LSAT) [MS-SAMR](#Section_2.11) (SAMR) | DRSR: All methods of the dsaop RPC interface are supported. All methods of the drsuapi interface are supported except for the following: IDL_DRSInitDemotion IDL_DRSFinishDemotion | [MS-ADA1](../MS-ADA1/MS-ADA1.md) [MS-ADA2](../MS-ADA2/MS-ADA2.md) [MS-ADA3](../MS-ADA3/MS-ADA3.md) [MS-ADSC](../MS-ADSC/MS-ADSC.md) |
+| AD DS (without Web Services) | [MS-DSSP](../MS-DSSP/MS-DSSP.md) (DSSP) [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932) (LDAP) [MS-LSAD](../MS-LSAD/MS-LSAD.md) (LSAD) [MS-LSAT](../MS-LSAT/MS-LSAT.md) (LSAT) [MS-SAMR](../MS-SAMR/MS-SAMR.md) (SAMR) | DRSR: All methods of the dsaop RPC interface are supported. All methods of the drsuapi interface are supported except for the following: IDL_DRSInitDemotion IDL_DRSFinishDemotion | [MS-ADA1](../MS-ADA1/MS-ADA1.md) [MS-ADA2](../MS-ADA2/MS-ADA2.md) [MS-ADA3](../MS-ADA3/MS-ADA3.md) [MS-ADSC](../MS-ADSC/MS-ADSC.md) |
 | AD DS (with Web Services) | [MS-ADCAP](../MS-ADCAP/MS-ADCAP.md) (ADCAP) [MS-DSSP] (DSSP) [LDAP] (LDAP) [MS-LSAD] (LSAD) [MS-LSAT] (LSAT) [MS-SAMR] (SAMR) [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) (WS-Enumeration) [[WXFR]](https://go.microsoft.com/fwlink/?LinkId=90587) (WS-Transfer) *Protocol Extensions* [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md) (IMDA) [MS-WSDS](../MS-WSDS/MS-WSDS.md) (WSDS) [MS-WSPELD](../MS-WSPELD/MS-WSPELD.md) (WSPELD) | DRSR: All methods of the dsaop RPC interface are supported. All methods of the drsuapi interface are supported except for the following: IDL_DRSInitDemotion IDL_DRSFinishDemotion | [MS-ADA1] [MS-ADA2] [MS-ADA3] [MS-ADSC] |
 | AD LDS (without Web Services) | [LDAP] (LDAP) | DRSR: All methods of the drsuapi RPC interface are supported except for the following: IDL_DRSAddSidHistory IDL_DRSDomainControllerInfo IDL_DRSRemoveDsDomain IDL_DRSGetNT4ChangeLog IDL_DRSGetMemberships IDL_DRSInterDomainMove IDL_DRSGetMemberships2 IDL_DRSQuerySitesByCost IDL_DRSWriteSpn No methods of the dsaop RPC interface are supported. DSSP: Supported in the same manner as any [**member server**](#gt_member-server) or stand-alone [**server**](#gt_server) on which the Active Directory system is not running. | [MS-ADLS](../MS-ADLS/MS-ADLS.md) |
 | AD LDS (with Web Services) | [LDAP] (LDAP) [WSENUM] (WS-Enumeration) [WXFR] (WS-Transfer) *Protocol Extensions* [MS-WSTIM] (IMDA) [MS-WSDS] (WSDS) [MS-WSPELD] (WSPELD) | ADCAP: All methods of the AccountManagement port type are supported. The following methods of the TopologyManagement port type are supported: MoveADOperationMasterRole ChangeOptionalFeature DRSR: All methods of the drsuapi RPC interface are supported except for the following: IDL_DRSAddSidHistory IDL_DRSDomainControllerInfo IDL_DRSRemoveDsDomain IDL_DRSGetNT4ChangeLog IDL_DRSGetMemberships IDL_DRSInterDomainMove IDL_DRSGetMemberships2 IDL_DRSQuerySitesByCost IDL_DRSWriteSpn No methods of the dsaop interface are supported. DSSP: Supported in the same manner as any member server or stand-alone server on which the Active Directory system is not running. | [MS-ADLS] |
@@ -2941,11 +2941,11 @@ In the Active Directory system, the following protocols perform access checks, a
 - ADCAP [MS-ADCAP](../MS-ADCAP/MS-ADCAP.md)
 The following protocols substitute, in full or in part, a different access check methodology, as described in the protocol's Technical Document:
 
-- DRSR [MS-DRSR](#Section_2.7.5)
-- SAMR [MS-SAMR](#Section_2.11)
-- SAMS [MS-SAMS](#Section_2.11)
-- LSAD [MS-LSAD](#Section_2.11)
-- LSAT [MS-LSAT](#Section_2.11)
+- DRSR [MS-DRSR](../MS-DRSR/MS-DRSR.md)
+- SAMR [MS-SAMR](../MS-SAMR/MS-SAMR.md)
+- SAMS [MS-SAMS](../MS-SAMS/MS-SAMS.md)
+- LSAD [MS-LSAD](../MS-LSAD/MS-LSAD.md)
+- LSAT [MS-LSAT](../MS-LSAT/MS-LSAT.md)
 - DSSP [MS-DSSP](../MS-DSSP/MS-DSSP.md)
 When performing an access check, the [**identity**](#gt_identity) of the requestor, represented as a [**security identifier (SID)**](#gt_security-identifier-sid), is used to compare the permissions that are required to perform a given operation to the permissions that are granted to that identity, in accord with the access check rules of the protocol in use. Each protocol specifies a means by which a requestor can prove (authenticate) its identity to the [**directory service**](#gt_directory-service-ds) so that the identity can be used in subsequent access check decisions. Each protocol's means of authentication is described in the corresponding protocol document, except that for WS-Transfer, WS-Enumeration, and ADCAP, it is instead described in [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.1.
 
@@ -2968,12 +2968,12 @@ Transport- and Message-Level Security Features
 | --- | --- | --- |
 | LDAP | Transport-level Protection is provided by signing and encryption over a [**Secure Sockets Layer (SSL)**](#gt_secure-sockets-layer-ssl)/[**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls)-protected connection. | [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.2.2 |
 | - | Message-level Protection is provided by signing and/or encryption using [**SASL**](#gt_sasl). | [MS-ADTS] section 5.1.2.1, Using SASL |
-| DRSR | Message-level Protection is provided by use of the SPNEGO security provider ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) to protect the messages at the [**RPC**](#gt_remote-procedure-call-rpc) layer. | [MS-DRSR](#Section_2.7.5) sections 2.2.3.1 and 2.2.4.1 |
+| DRSR | Message-level Protection is provided by use of the SPNEGO security provider ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) to protect the messages at the [**RPC**](#gt_remote-procedure-call-rpc) layer. | [MS-DRSR](../MS-DRSR/MS-DRSR.md) sections 2.2.3.1 and 2.2.4.1 |
 | DSSP | None. | - |
-| SAMR | Transport-level When using RPC over the [**SMB**](#gt_server-message-block-smb) transport, protection is provided by the SMB transport. | [MS-SAMR](#Section_2.11) section 2.1 |
+| SAMR | Transport-level When using RPC over the [**SMB**](#gt_server-message-block-smb) transport, protection is provided by the SMB transport. | [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1 |
 | - | Message-level When using RPC over the [**TCP**](#gt_transmission-control-protocol-tcp) transport, protection is provided by use of the SPNEGO security provider ([MS-RPCE] section 2.2.1.1.7) to protect the messages at the RPC layer. | [MS-SAMR] section 2.1 |
-| LSAD | Transport-level Protection is provided by the SMB transport over which the RPC requests are sent. | [MS-LSAD](#Section_2.11) section 2.1 |
-| LSAT | Transport-level When using RPC over the SMB transport, protection is provided by the SMB transport. | [MS-LSAT](#Section_2.11) sections 2.1 and 3.1.4 |
+| LSAD | Transport-level Protection is provided by the SMB transport over which the RPC requests are sent. | [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.1 |
+| LSAT | Transport-level When using RPC over the SMB transport, protection is provided by the SMB transport. | [MS-LSAT](../MS-LSAT/MS-LSAT.md) sections 2.1 and 3.1.4 |
 | - | Message-level When using RPC over the TCP transport, protection is provided by use of the [**Netlogon**](#gt_netlogon) security provider ([MS-RPCE] section 2.2.1.1.7) to protect the messages at the RPC layer. | [MS-LSAT] sections 2.1 and 3.1.4 |
 | WS-Transfer | Transport-level Protection is provided by the use of TLS [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324) to protect the TCP transport. When using the Windows integrated authentication [**endpoints**](#gt_endpoint), the SPNEGO security provider is used to negotiate the session key used by TLS. When using the username/password authentication endpoints, TLS is used to negotiate a session key using the server's certificate. | [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.1 |
 | WS-Enumeration | Same as WS-Transfer, above. | [MS-ADDM] section 2.1 |
@@ -3018,7 +3018,7 @@ To protect its own security, the Active Directory system uses the mechanisms des
 
 Other systems that interact with the Active Directory system can take the following steps to protect the security of this system:
 
-- Use the [**service principal names (SPNs)**](#gt_service-principal-name-spn) defined in [MS-DRSR](#Section_2.7.5) sections 2.2.3.2, 2.2.3.3, 2.2.4.2, and 2.2.4.3 to perform [**mutual authentication**](#gt_mutual-authentication) against the directory service.
+- Use the [**service principal names (SPNs)**](#gt_service-principal-name-spn) defined in [MS-DRSR](../MS-DRSR/MS-DRSR.md) sections 2.2.3.2, 2.2.3.3, 2.2.4.2, and 2.2.4.3 to perform [**mutual authentication**](#gt_mutual-authentication) against the directory service.
 - Use the mechanisms that are available in the protocols to provide integrity and confidentiality of the messages.
 - If performing a request against the directory service on behalf of a less-trusted component, any input from the less-trusted component is validated to protect against a luring attack where the less-trusted component tries to get the more-trusted component to perform an operation of the less-trusted component's choice against the directory service.
 - Avoid performing queries against the directory service that take an excessive amount of time to satisfy; for example, queries that require the directory service to walk through tens of thousands of entries to find a matching entry.
@@ -3155,13 +3155,13 @@ Figure 43: Message flow to join a domain by creating a new account via SAMR
 - If the client receives a successful response from the domain controller, the DC is located. If the response is not successful, the task fails.
 - To establish an [**SMB**](#gt_server-message-block-smb)/CIFS session to the domain controller, the domain client sends an SMB session bind request. In this bind request, it sends anonymous user [**credentials**](#gt_credential) to the domain controller ([MS-CIFS](../MS-CIFS/MS-CIFS.md) section 3.2.4.2).
 - When a successful SMB session bind response is received from the domain controller, the SMB/CIFS session is established between the domain client and the DC.
-- By using the SMB/CIFS session (established in the preceding step) as transport, the domain client makes an LsarOpenPolicy2 [**RPC**](#gt_remote-procedure-call-rpc) call to obtain a [**policy**](#gt_policy) handle. This handle is used for subsequent calls to retrieve domain information from the domain controller ([MS-LSAD](#Section_2.11) section 3.1.4.4.1).
+- By using the SMB/CIFS session (established in the preceding step) as transport, the domain client makes an LsarOpenPolicy2 [**RPC**](#gt_remote-procedure-call-rpc) call to obtain a [**policy**](#gt_policy) handle. This handle is used for subsequent calls to retrieve domain information from the domain controller ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.1).
 - Upon receiving a successful response from the domain controller, the domain client obtains a policy handle.
 - Using the policy handle obtained from the preceding step, the domain client sends an LsarQueryInformationPolicy2 request to the domain controller to retrieve domain information ([MS-LSAD] section 3.1.4.4.3).
 - Upon receiving a successful response from the domain controller, the domain client retrieves domain information and updates its abstract data.
 - The domain client makes an LsarClose RPC call to close the policy handle ([MS-LSAD] section 3.1.4.9.4.) that was obtained in step 6.
 - Upon a successful response from the domain controller, the policy handle is closed. Any failure during the preceding call sequence causes the task to fail.
-- By using the SMB connection that was established previously, the domain client makes a SamrConnect5 request ([MS-SAMR](#Section_2.11) section 1.7.2) to the domain controller to connect to the SAM RPC [**server**](#gt_server) on the DC.
+- By using the SMB connection that was established previously, the domain client makes a SamrConnect5 request ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 1.7.2) to the domain controller to connect to the SAM RPC [**server**](#gt_server) on the DC.
 - Upon a successful response from the domain controller, the domain client receives a handle to the server object from the DC.
 - By using the server handle that was obtained in the preceding step, the domain client sends a SamrOpenDomain request ([MS-SAMR] section 3.1.5.1.5) to the domain controller to obtain a handle for a [**domain object**](#gt_domain-object).
 - Upon a successful response, the domain controller returns a handle for a domain object.
@@ -3171,7 +3171,7 @@ Figure 43: Message flow to join a domain by creating a new account via SAMR
 - Upon a successful response from the domain controller, the password is set.
 - After the new user account has been created, the domain client sends a SamrCloseHandle request to the domain controller to close the handles that were opened previously ([MS-SAMR] section 3.1.5.13.1).
 - Upon successful completion of the preceding call sequence, the domain client has successfully created or updated the client account in the domain.
-- The domain client sends an IDL_DRSBind request, which creates a context handle that is necessary to call any other methods in the interface ([MS-DRSR](#Section_2.7.5) section 4.1.3).
+- The domain client sends an IDL_DRSBind request, which creates a context handle that is necessary to call any other methods in the interface ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.3).
 - Upon a successful response from the domain controller, the domain client obtains a context handle.
 - The domain client sends an IDL_DRSCrackNames request ([MS-DRSR] section 4.1.4) to the domain controller to obtain the distinguished name (DN).
 - Upon a successful response from the domain controller, the domain client updates the DN of the client account.
@@ -3227,7 +3227,7 @@ Figure 44: Message flow to join a domain by creating a new account via LDAP
 - Upon a successful response from the domain controller, the domain client updates the local domain GUID and domain [**SID**](#gt_security-identifier-sid) in its abstract data.
 - The domain client computer sends an LDAP search request to the domain controller ([RFC2251] section 4.5.1) with baseObject set to the concatenation of "CN=Partitions," with the value of configurationNamingContext that was obtained in step 5.
 - Upon a successful response from the domain controller, the domain client updates the [**NetBIOS**](#gt_netbios) name in its abstract data.
-- The domain client sends an IDL_DRSBind request ([MS-DRSR](#Section_2.7.5) section 4.1.3) to create a context handle that is necessary to call any other DRSR messages.
+- The domain client sends an IDL_DRSBind request ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.3) to create a context handle that is necessary to call any other DRSR messages.
 - The domain controller sends an IDL_DRSBind response to the domain client.
 - The domain client sends an IDL_DRSCrackNames request ([MS-DRSR] section 4.1.4) to the domain controller to get the NetBIOS name from the canonical name of the domain.
 - Upon a successful response from the domain controller, the NetBIOS-formatted domain name and the computer name are used to form the NetBIOS-formatted computer name.
@@ -3290,7 +3290,7 @@ Figure 45: Message flow for unjoining from a domain
 
 4. Upon a successful response from domain controller, the SMB/SMB2/CIFS session is established between the domain client and the DC.
 
-5. By using the SMB connection that was established in the previous step, the domain client sends a SamrConnect5 request ([MS-SAMR](#Section_2.11) section 3.1.5.1.1) to the domain controller to connect to the SAM [**RPC**](#gt_remote-procedure-call-rpc) [**server**](#gt_server) on the DC.
+5. By using the SMB connection that was established in the previous step, the domain client sends a SamrConnect5 request ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.1.1) to the domain controller to connect to the SAM [**RPC**](#gt_remote-procedure-call-rpc) [**server**](#gt_server) on the DC.
 
 6. Upon a successful response from domain controller, the domain client receives a handle to the server object from the DC.
 
@@ -3353,7 +3353,7 @@ In this example, an administrator provisions a user [**account**](#gt_account) b
 
 This example applies only to [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds).
 
-This example uses LDAP and the Kerberos protocol and uses concepts described in [MS-SAMR](#Section_2.11) (although it does not use the protocol defined in [MS-SAMR]).
+This example uses LDAP and the Kerberos protocol and uses concepts described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) (although it does not use the protocol defined in [MS-SAMR]).
 
 This example covers the use cases in sections [2.7.2.1](#Section_2.7.2.1), Create a New Account - Client Application, and [2.7.2.2](#Section_2.7.2.2), Reset an Existing Account's Password - Client Application.
 
@@ -3453,7 +3453,7 @@ Figure 47: Message flow for provisioning a user account by using the SAMR protoc
 
 Unless otherwise noted, all responses that include a return code contain a return code that indicates that the operation was successfully performed.
 
-- The client binds to the SAMR [**endpoint**](#gt_endpoint) on the server using a supported transport, as specified in [MS-SAMR](#Section_2.11) section 2.1.
+- The client binds to the SAMR [**endpoint**](#gt_endpoint) on the server using a supported transport, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1.
 - The next step is to open a SAMR handle to the directory server. The client application sends a SamrConnect5 request ([MS-SAMR] section 3.1.5.1.1) with the DesiredAccess parameter set to MAXIMUM_ALLOWED ([MS-SAMR] section 2.2.1.1) to the server, requesting a server handle.
 - The server processes the request ([MS-SAMR] section 3.1.5.1.1) and sends a response with the server handle to be used by later calls.
 Before continuing by opening a SAMR handle to the domain, the client application has to first know the [**security identifier (SID)**](#gt_security-identifier-sid) of the [**domain**](#gt_domain). This is determined in steps 4-7.
@@ -3516,7 +3516,7 @@ Figure 48: Message flow for provisioning a user account by using the SAMR protoc
 
 Unless otherwise noted, all responses that include a return code contain a return code that indicates that the operation was successfully performed.
 
-1. The client binds to the SAMR [**endpoint**](#gt_endpoint) on the server using a supported transport, as specified in [MS-SAMR](#Section_2.11) section 2.1.
+1. The client binds to the SAMR [**endpoint**](#gt_endpoint) on the server using a supported transport, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1.
 
 2. The next step is to open a SAMR handle to the DC (directory server). The client application sends a SamrConnect5 request ([MS-SAMR] section 3.1.5.1.1) with the DesiredAccess parameter set to MAXIMUM_ALLOWED ([MS-SAMR] section 2.2.1.1) to the server, requesting a server handle.
 
@@ -3546,7 +3546,7 @@ Now that the client application has the domain handle, it can use this handle to
 
 11. – 13. When the server receives the request and determines that it has exhausted its allocated RIDs, it attempts to connect to the owner of the RID Master FSMO role, or RID master. The server obtains the appropriate IP address from the [**DNS**](#gt_domain-name-system-dns) and mutually authenticates with the RID master.
 
-14. The DC sends an IDL_DRSBind request, as specified in [MS-DRSR](#Section_2.7.5) section 4.1.3, to the RID master.
+14. The DC sends an IDL_DRSBind request, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.3, to the RID master.
 
 15. The RID master returns a Directory Replication Service (DRS) handle to the DC.
 
@@ -3597,7 +3597,7 @@ Figure 49: Message flow for changing a user account's password
 
 Unless otherwise noted, all responses that include a return code contain a return code that indicates that the operation was performed successfully.
 
-- The client binds to the SAMR [**endpoint**](#gt_endpoint) on the server using a supported transport, as specified in [MS-SAMR](#Section_2.11) section 2.1.
+- The client binds to the SAMR [**endpoint**](#gt_endpoint) on the server using a supported transport, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1.
 - The next step is to open a SAMR handle to the directory server. The client application sends a SamrConnect5 request ([MS-SAMR] section 3.1.5.1.1) to the server with the desired value set in the *DesiredAccess* parameter ([MS-SAMR] section 2.2.1.1). This message requests a server handle.
 - The server processes the request ([MS-SAMR] section 3.1.5.1.1) and sends a response with the server handle to be used in later calls.
 Before continuing by opening a SAMR handle to the [**domain**](#gt_domain), the client application has to first know the domain names hosted by the directory server. This is determined by using steps 4 and 5.
@@ -3669,7 +3669,7 @@ Figure 50: Message flow to change a user account's password
 
 Unless otherwise noted, all responses that include a return code contain a return code that indicates that the operation was performed successfully.
 
-1. The client application uses a supported transport to bind to the SAMR [**endpoint**](#gt_endpoint) on the DC, as described in [MS-SAMR](#Section_2.11) section 2.1.
+1. The client application uses a supported transport to bind to the SAMR [**endpoint**](#gt_endpoint) on the DC, as described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1.
 
 2. The next step is to open a SAMR handle to the DC's SAMR [**server**](#gt_server). The client application sends a SamrConnect5 request ([MS-SAMR] section 3.1.5.1.1) to the DC with the desired value set in the *DesiredAccess* parameter ([MS-SAMR] section 2.2.1.1). This message requests a server handle.
 
@@ -3703,7 +3703,7 @@ The client application now has the user account RID and can use it to open a han
 
 13. – 20. The DC establishes a secure channel with the PDC, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.1.4.1.
 
-21. The DC sends a password update request to the PDC, as specified in [MS-SAMS](#Section_2.11) section 3.2.4.4, using the NetrLogonSendToSam method defined in [MS-NRPC] section 3.5.4.8.4, and according to the rules in [MS-NRPC] section 3.4.5.6.4.
+21. The DC sends a password update request to the PDC, as specified in [MS-SAMS](../MS-SAMS/MS-SAMS.md) section 3.2.4.4, using the NetrLogonSendToSam method defined in [MS-NRPC] section 3.5.4.8.4, and according to the rules in [MS-NRPC] section 3.4.5.6.4.
 
 22. The PDC processes the request according to the rules specified in [MS-SAMS] section 3.3.5.2 and [MS-NRPC] section 3.5.4.8.4, and returns a response.
 
@@ -3756,7 +3756,7 @@ Unless otherwise noted, all responses that include a return code contain a retur
 
 4. – 11. In these steps, the RODC establishes a secure channel with a DC that contains a [**writable NC replica**](#gt_51db485c-dcf6-4845-99b3-2df414ef0aa9) of the domain, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.1.4.1.
 
-12. The RODC sends a password update request to the DC, as specified in [MS-SAMS](#Section_2.11) section 3.2.4.6, by using the NetrLogonSendToSam method specified in [MS-NRPC] section 3.5.4.8.4, and according to the processing rules specified in [MS-NRPC] section 3.4.5.6.4.
+12. The RODC sends a password update request to the DC, as specified in [MS-SAMS](../MS-SAMS/MS-SAMS.md) section 3.2.4.6, by using the NetrLogonSendToSam method specified in [MS-NRPC] section 3.5.4.8.4, and according to the processing rules specified in [MS-NRPC] section 3.4.5.6.4.
 
 13. The DC processes the request ([MS-SAMS] section 3.3.5.6 and [MS-NRPC] section 3.5.4.8.4), updates the user account's lastLogonTimeStamp attribute, and returns a response.
 
@@ -3795,7 +3795,7 @@ Figure 52: Message flow for determining the group membership of a user
 
 Unless otherwise noted, all responses that include a return code contain a return code that indicates that the operation was performed successfully.
 
-- The client application uses a supported transport to bind to the SAMR [**endpoint**](#gt_endpoint) on the server, as specified in [MS-SAMR](#Section_2.11) section 2.1.
+- The client application uses a supported transport to bind to the SAMR [**endpoint**](#gt_endpoint) on the server, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1.
 - The next step is to open a SAMR handle to the directory server. To obtain a server handle, the client application sends a SamrConnect5 request ([MS-SAMR] section 3.1.5.1.1) with the *DesiredAccess* parameter set to MAXIMUM_ALLOWED ([MS-SAMR] section 2.2.1.1) to the directory server.
 - The server processes the request ([MS-SAMR] section 3.1.5.1.1) and sends a response with the server handle to be used by later calls.
 Before the client application continues to open a SAMR handle to the [**domain**](#gt_domain), the client has to first know the [**SID**](#gt_security-identifier-sid) of the domain. This is determined in steps 4 and 5.
@@ -3975,7 +3975,7 @@ Unless otherwise noted, all responses that include a return code contain a retur
 - The directory server verifies the credentials ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2) and sends an LDAP bind response ([RFC2251] section 4.2.3) to the client application.
 - An LDAP add request ([RFC2251] section 4.7) is sent to the directory server. The LDAP add operation contains the distinguishedName, samAccountName, objectClass, and groupType for the new group.
 - The directory server processes the add request ([RFC2251] section 4.7) and performs validation, as described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 3.1.1.5.1 and 3.1.1.5.2. The directory server then sends an LDAP add response that indicates success.
-- The client uses the DRSR protocol ([MS-DRSR](#Section_2.7.5) section 4.1.3) to request an [**RPC**](#gt_remote-procedure-call-rpc) [**binding**](#gt_binding) handle to establish a connection with the directory server.
+- The client uses the DRSR protocol ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.3) to request an [**RPC**](#gt_remote-procedure-call-rpc) [**binding**](#gt_binding) handle to establish a connection with the directory server.
 - The directory server processes the bind request and sends a response with an RPC binding handle.
 - The client uses the RPC binding handle ([MS-DRSR] section 4.1.4) to send a request for name translation to the directory server. The request specifies the name to translate (the user's NT4 [**account**](#gt_account) name, in this example), its format (NT4 account name), and the desired format for the response (distinguished name (DN)).
 - The directory server processes the request and returns the translated name (the user's distinguished name (DN)), as defined in [MS-DRSR] section 4.1.4.3.
@@ -3985,7 +3985,7 @@ Unless otherwise noted, all responses that include a return code contain a retur
 - The client sends an LDAP unbind request ([RFC2251] section 4.3) to the directory server. The LDAP connection to the directory server is closed.
 At this point, the group has been created with the attributes that the administrator requested, and a user has been added as a member of that group with only the information about that user's NT4 account name. The remainder of this example is about displaying the resultant group's member list.
 
-- The client uses a supported transport ([MS-SAMR](#Section_2.11) section 2.1) to bind to the SAMR [**endpoint**](#gt_endpoint) on the directory server.
+- The client uses a supported transport ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1) to bind to the SAMR [**endpoint**](#gt_endpoint) on the directory server.
 - The next step is to open a SAMR handle to the directory server. To request a server handle, the client application sends a SamrConnect5 request ([MS-SAMR] section 3.1.5.1.1) to the directory server, with the *DesiredAccess* parameter set to MAXIMUM_ALLOWED ([MS-SAMR] section 2.2.1.1).
 - The directory server processes the request and sends a response with the server handle to be used by later calls.
 Before the client continues to open a SAMR handle to the [**domain**](#gt_domain), the client has to first have the [**security identifier (SID)**](#gt_security-identifier-sid) of the domain. The SID is determined in steps 16 and 17.
@@ -4274,7 +4274,7 @@ Unless otherwise noted, all responses that include a return code contain a retur
 - The directory server verifies the credentials ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2), and sends an LDAP bind response ([RFC2251] section 4.2.3) to the client application.
 - An LDAP search request ([RFC2251] section 4.5.1) is sent to the directory, querying the directory for the object specified by the administrator to the client application in order to retrieve the nTSecurityDescriptor [**attribute**](#gt_attribute) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3 and [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.36).
 - The directory server performs an access check to ensure that the client has permissions to read the attribute ([MS-ADTS] section 5.1.3) and then sends an LDAP search response ([RFC2251] section 4.5.2) that contains the current value of the nTSecurityDescriptor attribute for the object that is specified in the request.
-- The client extracts the SIDs of the [**security principals**](#gt_security-principal) that are specified in the ntSecurityDescriptor attribute of the object ([MS-ADTS] section 5.1 and [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) and then sends an LsarOpenPolicy<7> request ([MS-LSAT](#Section_2.11) section 3.1.4.2) with the *DesiredAccess* parameter set to POLICY_LOOKUP_NAMES ([MS-LSAD](#Section_2.11) section 2.2.1.1.2) to the server to retrieve a context handle that it can later use to request name/SID translations.
+- The client extracts the SIDs of the [**security principals**](#gt_security-principal) that are specified in the ntSecurityDescriptor attribute of the object ([MS-ADTS] section 5.1 and [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) and then sends an LsarOpenPolicy<7> request ([MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.2) with the *DesiredAccess* parameter set to POLICY_LOOKUP_NAMES ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.1.1.2) to the server to retrieve a context handle that it can later use to request name/SID translations.
 - The directory server processes the LsarOpenPolicy request by performing an access check for the desired access ([MS-LSAD] section 3.1.4.2) and constructing an LSAPR_HANDLE ([MS-LSAD] section 2.2.2.1), as described in [MS-LSAT] section 3.1.4.2. It sends the response to the client.
 - The client sends an LsarLookupSids<8> request ([MS-LSAT] section 3.1.4.11) using the server handle from step 6. In this request, it specifies the SIDs that it wants to be translated to names for display to the administrator.
 - The directory server processes the request, as described in [MS-LSAT] section 3.1.4.11, and sends a response to the client that includes the names of the security principals whose SIDs were passed in the request.
@@ -4364,7 +4364,7 @@ The following sequence diagram shows the message flow that is associated with th
 
 Figure 66: Message flow for replication changes within a domain
 
-- DC1 and DC2 use [**Kerberos**](#gt_kerberos) ([MS-DRSR](#Section_2.7.5) section 2.2.3.2) to perform [**mutual authentication**](#gt_mutual-authentication).
+- DC1 and DC2 use [**Kerberos**](#gt_kerberos) ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 2.2.3.2) to perform [**mutual authentication**](#gt_mutual-authentication).
 - DC2 sends an IDL_DRSBind request to DC1, which creates a context handle that is required to call any other methods in the interface ([MS-DRSR] section 4.1.3).
 - Upon a successful response from DC1, DC2 obtains a context handle.
 - DC2 invokes IDL_DRSGetNCChanges on DC1 periodically to replicate the changes that are performed to DC1 ([MS-DRSR] section 4.1.10).
@@ -4419,7 +4419,7 @@ The following sequence diagram shows the message flow that is associated with th
 
 Figure 67: Message flow for transferring FSMO roles
 
-- DC1 uses [**Kerberos**](#gt_kerberos) ([MS-DRSR](#Section_2.7.5) section 2.2.3.2) to perform [**mutual authentication**](#gt_mutual-authentication) with DC2.
+- DC1 uses [**Kerberos**](#gt_kerberos) ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 2.2.3.2) to perform [**mutual authentication**](#gt_mutual-authentication) with DC2.
 - DC1 sends an IDL_DRSBind request to DC2, which creates a context handle that is required to call any other methods in the interface ([MS-DRSR] section 4.1.3).
 - Upon a successful response from DC2, DC1 obtains a context handle.
 - DC1 invokes IDL_DRSGetNCChanges on DC2 to inform DC2 that it needs to abandon its Infrastructure FSMO role and transfer it to DC2. DC1 chooses DC2 randomly out of all its replication partners.
@@ -4479,7 +4479,7 @@ Figure 68: Message flow to replicate changes to a GC or a partial replica
 - DC1 sends an SRV query request to the [**Domain Name System (DNS)**](#gt_domain-name-system-dns) [**server**](#gt_server) to obtain the IP address of DC2.
 - The DNS server responds to DC1 and returns the IP address of DC2 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6).
 - DC1 sends the SMTP message as follows.
-The DRS engine hands the SRPL extension a [**binary large object (BLOB)**](#gt_binary-large-object-blob) that contains a "get changes" request. The SRPL extension performs the higher-layer triggered operation ([MS-SRPL](#Section_2.7.5) section 3.2.4) that encodes the request BLOB as a frame. The frame is then handed to the SMTP service on DC1. The frame, as an attachment to an SMTP mail message, is sent to DC2. DC2 receives the request. The SMTP service on DC2 receives the mail message from DC1 and gives the frame to the SRPL extension. The SRPL extension performs message processing operations ([MS-SRPL] section 3.3.5) and then passes the BLOB to the DRS engine, which processes the request.
+The DRS engine hands the SRPL extension a [**binary large object (BLOB)**](#gt_binary-large-object-blob) that contains a "get changes" request. The SRPL extension performs the higher-layer triggered operation ([MS-SRPL](../MS-SRPL/MS-SRPL.md) section 3.2.4) that encodes the request BLOB as a frame. The frame is then handed to the SMTP service on DC1. The frame, as an attachment to an SMTP mail message, is sent to DC2. DC2 receives the request. The SMTP service on DC2 receives the mail message from DC1 and gives the frame to the SRPL extension. The SRPL extension performs message processing operations ([MS-SRPL] section 3.3.5) and then passes the BLOB to the DRS engine, which processes the request.
 
 - DC2 sends the SMTP response as follows.
 After it processes the request, the DRS engine on DC2 generates another DRS BLOB, which contains the response. The SRPL extension performs the higher-layer triggered operation and then passes the response to the SMTP service. The SMTP service sends the message to DC1 as an attachment to an SMTP mail message. DC1 receives the response. The SMTP service on DC1 receives the mail message and gives the frame to the SRPL extension. The SRPL extension performs message processing and passes the BLOB to the DRS engine, which processes the response.
@@ -4489,7 +4489,7 @@ After it processes the request, the DRS engine on DC2 generates another DRS BLOB
 
 This example demonstrates the use case in section [2.7.1.6](#Section_2.7.1.6), Cross-Domain Move - Client Application.
 
-It is explained in [MS-DRSR](#Section_2.7.5) section 4.1.15.4.
+It is explained in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.15.4.
 
 <a id="Section_4"></a>
 # 4 Microsoft Implementations

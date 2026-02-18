@@ -340,7 +340,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_4)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-SMB2] Microsoft Corporation, "[Server Message Block (SMB) Protocol Versions 2 and 3](../MS-SMB2/MS-SMB2.md)".
 
@@ -355,7 +355,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [INCITS-T10/11-059] INCITS, "T10 specification 11-059", [http://www.t10.org/cgi-bin/ac.pl?t=d&f=11-059r9.pdf](https://go.microsoft.com/fwlink/?LinkId=239442)
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-CIFS] Microsoft Corporation, "[Common Internet File System (CIFS) Protocol](../MS-CIFS/MS-CIFS.md)".
 
@@ -722,7 +722,7 @@ The object store MUST implement the following:
 - **OwnerIndex:** An index into **SIDs** indicating the SID of the user.
 - **PrimaryGroup:** An index into **SIDs** indicating the SID of the user's primary group.
 - **DefaultDACL:** An ACL structure, as specified in [MS-DTYP] section 2.4.5, representing the default DACL assigned to new files created by the user.
-- **PrivilegeSet:** A set of privilege names, as specified in [MS-LSAD](#Section_4) section 3.1.1.2.1, representing the privileges held by the user.
+- **PrivilegeSet:** A set of privilege names, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1, representing the privileges held by the user.
 <a id="Section_2.1.1.14"></a>
 #### 2.1.1.14 Constants
 
@@ -1112,7 +1112,7 @@ If **Oplock** is not empty and **Oplock.State** is not NO_OPLOCK:
 - Set *BreakToNone* to TRUE
 - Set *BreakCacheState* to (READ_CACHING|WRITE_CACHING).
 - EndCase
-- Case SET_INFORMATION, as specified in section [2.1.5.15](#Section_2.1.5.15.4):
+- Case SET_INFORMATION, as specified in section [2.1.5.15](#Section_2.1.5.15):
 - Switch (**OpParams.FileInformationClass**):
 - Case FileEndOfFileInformation:
 - Case FileAllocationInformation:
@@ -1130,7 +1130,7 @@ If **Oplock** is not empty and **Oplock.State** is not NO_OPLOCK:
 - Set *BreakCacheState* to HANDLE_CACHING.
 - EndCase
 - EndSwitch // FileInfoClass
-- Case FS_CONTROL, as specified in section [2.1.5.10](#Section_2.1.5.10.29.2):
+- Case FS_CONTROL, as specified in section [2.1.5.10](#Section_2.1.5.10):
 - If **OpParams.ControlCode** is FSCTL_SET_ZERO_DATA:
 - Set *BreakToNone* to TRUE.
 - Set *BreakCacheState* to (READ_CACHING|WRITE_CACHING).
@@ -1527,7 +1527,7 @@ Pseudocode for the algorithm is as follows:
 - **OwnerIndex** set to **SecurityContext.OwnerIndex**.
 - **PrimaryGroup** set to **SecurityContext.PrimaryGroup**.
 - **DefaultDACL** set to **SecurityContext.DefaultDACL**.
-- **Privileges** set to **SecurityContext.PrivilegeSet** in locally unique identifier (LUID) form, as specified in [MS-LSAD](#Section_4) section 3.1.1.2.1.
+- **Privileges** set to **SecurityContext.PrivilegeSet** in locally unique identifier (LUID) form, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1.
 - The object store MUST use the access check algorithm described in [MS-DTYP] section 2.5.3.2, with input values as follows:
 - **SecurityDescriptor** set to the **SecurityDescriptor** above.
 - **Token** set to *Token*.
@@ -1645,7 +1645,7 @@ The pseudocode for the algorithm is as follows:
 
 This section describes operations the object store performs in response to events triggered by higher-layer applications. The higher-layer application for this document is generally a [**server**](#gt_server) application that is processing requests for a local or remote client.
 
-In performing these operations, the object store MAY make persistent changes to objects described in the abstract data model, section [2.1.1](#Section_1.3). If any operation fails, the object store SHOULD undo any persistent changes that were made prior to the failure, unless specifically noted otherwise in the operation.
+In performing these operations, the object store MAY make persistent changes to objects described in the abstract data model, section [2.1.1](#Section_2.1.1). If any operation fails, the object store SHOULD undo any persistent changes that were made prior to the failure, unless specifically noted otherwise in the operation.
 
 In addition to the parameters explicitly listed, each operation in this section takes an implementation-specific parameter (**IORequest**) that uniquely identifies the in-progress I/O operation. The caller generates the **IORequest** value and passes it in as an additional parameter to the event. The **IORequest** parameter is used to support operation cancellation, as specified in section [2.1.5.19](#Section_2.1.5.19).
 
@@ -2675,7 +2675,7 @@ Pseudocode for the algorithm is as follows:
 - If **FileNamePattern** is empty:
 - Set **FileNamePattern** to "*".
 - Else:
-- If **FileNamePattern** is not a valid filename component as described in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.1.5, with the exceptions that wildcard characters described in section [2.1.4.3](../MS-FSCC/MS-FSCC.md) are permitted and the strings "." and ".." are permitted, the operation MUST be failed with STATUS_OBJECT_NAME_INVALID.
+- If **FileNamePattern** is not a valid filename component as described in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.1.5, with the exceptions that wildcard characters described in section [2.1.4.3](#Section_2.1.4.3) are permitted and the strings "." and ".." are permitted, the operation MUST be failed with STATUS_OBJECT_NAME_INVALID.
 - EndIf
 - Set **Open.QueryPattern** to **FileNamePattern** for use in subsequent queries.
 - Else:
@@ -2730,7 +2730,7 @@ Pseudocode for the algorithm is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2768,7 +2768,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_DIRECTORY_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2794,7 +2794,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_FULL_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2825,7 +2825,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_64_EXTD_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2867,7 +2867,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_64_EXTD_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2902,7 +2902,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_ALL_EXTD_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2947,7 +2947,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_ALL_EXTD_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2985,7 +2985,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -3030,7 +3030,7 @@ OutputBuffer is an array of one or more FILE_ID_EXTD_DIR_INFORMATION structures 
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than **FieldOffset(**FILE_ID_EXTD_DIR_INFORMATION.FileName**)**, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry*.**NextEntryOffset** set to zero
 - *Entry*.**FileIndex** set to zero
@@ -3065,7 +3065,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_FULL_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -3103,7 +3103,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_NAMES_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -5371,10 +5371,10 @@ Pseudocode for the operation is as follows:
 - **OutputBuffer.StandardInformation** MUST be filled using the operation described in section [2.1.5.12.27](#Section_2.1.5.12.27).
 - **OutputBuffer.InternalInformation** MUST be filled using the operation described in section [2.1.5.12.17](#Section_2.1.5.12.17).
 - **OutputBuffer.EaInformation** MUST be filled using the operation described in section [2.1.5.12.10](#Section_2.1.5.12.10).
-- **OutputBuffer.AccessInformation** MUST be filled using the operation described in section [2.1.5.12.1](#Section_2.1.5.12.17).
+- **OutputBuffer.AccessInformation** MUST be filled using the operation described in section [2.1.5.12.1](#Section_2.1.5.12.1).
 - **OutputBuffer.PositionInformation** MUST be filled using the operation described in section [2.1.5.12.23](#Section_2.1.5.12.23).
 - **OutputBuffer.ModeInformation** MUST be filled using the operation described in section [2.1.5.12.18](#Section_2.1.5.12.18).
-- **OutputBuffer.AlignmentInformation** MUST be filled using the operation described in section [2.1.5.12.2](#Section_2.1.5.12.24).
+- **OutputBuffer.AlignmentInformation** MUST be filled using the operation described in section [2.1.5.12.2](#Section_2.1.5.12.2).
 - **OutputBuffer.NameInformation** MUST be filled using the operation described in section [2.1.5.12.19](#Section_2.1.5.12.19), saving the returned ByteCount in *NameInformationLength* and the returned Status in *NameInformationStatus*.
 - Upon successful completion of the operation, the object store MUST return:
 - **ByteCount** set to ***FieldOffset(***FILE_ALL_INFORMATION.NameInformation***)*** + *NameInformationLength*.
@@ -5585,7 +5585,7 @@ Pseudocode for the operation is as follows:
 <a id="Section_2.1.5.12.19"></a>
 ##### 2.1.5.12.19 FileNameInformation
 
-This operation is not supported from a remote client, it is only supported from a local client or as part of processing a query for the FileAllInformation operation as specified in section [2.1.5.12.3](#Section_2.1.5.12.30). If used to query from a remote client, this operation MUST be failed with a status code of STATUS_NOT_SUPPORTED.
+This operation is not supported from a remote client, it is only supported from a local client or as part of processing a query for the FileAllInformation operation as specified in section [2.1.5.12.3](#Section_2.1.5.12.3). If used to query from a remote client, this operation MUST be failed with a status code of STATUS_NOT_SUPPORTED.
 
 **OutputBuffer** is of type FILE_NAME_INFORMATION as described in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.5.
 
@@ -5612,7 +5612,7 @@ Pseudocode for the operation is as follows:
 <a id="Section_2.1.5.12.20"></a>
 ##### 2.1.5.12.20 FileNamesInformation
 
-This operation is not supported as a file information class, it is only supported as a directory information class, as specified in section [2.1.5.5.3.6](#Section_2.1.5.5.3.6). If used to query file information STATUS_ INVALID_INFO_CLASS MUST be returned.
+This operation is not supported as a file information class, it is only supported as a directory information class, as specified in section [2.1.5.5.3.6](#Section_DC533FF549534A358AEDD597C89D3C85). If used to query file information STATUS_ INVALID_INFO_CLASS MUST be returned.
 
 <a id="Section_2.1.5.12.21"></a>
 ##### 2.1.5.12.21 FileNetworkOpenInformation
@@ -7685,7 +7685,7 @@ Cancellation provides the ability for operations that block for extended periods
 
 The Object Store MUST maintain a list of waiting operations that can be canceled by adding them to the **CancelableOperations.CancelableOperationList** as defined in section [2.1.1.12](#Section_2.1.1.12).
 
-Each operation receives an implementation-specific identifier (**IORequest**) that uniquely identifies an in-progress I/O operation, as specified in section [2.1.5](#Section_1.3).
+Each operation receives an implementation-specific identifier (**IORequest**) that uniquely identifies an in-progress I/O operation, as specified in section [2.1.5](#Section_2.1.5).
 
 When a cancellation request is received, scan **CancelableOperations.CancelableOperationList** looking for an operation *CanceledOperation* that matches **IORequest**. If found, *CanceledOperation* MUST be removed from **CancelableOperations.CancelableOperationList** and *CanceledOperation* MUST be failed with STATUS_CANCELED returned for the status of the canceled operation. If not found, the cancel request returns performing no action.<197>
 
@@ -7792,7 +7792,7 @@ None.
 <a id="Section_4.1"></a>
 ## 4.1 Security Considerations for Implementers
 
-Security is opaque to file systems. Some file systems store security descriptors as opaque blobs and then call security support routines to perform the necessary security checks. Other file systems do not implement security. Security considerations are called out in the sections where they are used. Please refer to [MS-AUTHSOD](#Section_1.3) for a security overview.
+Security is opaque to file systems. Some file systems store security descriptors as opaque blobs and then call security support routines to perform the necessary security checks. Other file systems do not implement security. Security considerations are called out in the sections where they are used. Please refer to [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) for a security overview.
 
 <a id="Section_4.2"></a>
 ## 4.2 Index of Security Parameters
@@ -8360,7 +8360,7 @@ Other Windows file systems do not recognize any stream type names.
 
 <185> Section 2.1.5.15.12: In Windows 11 and earlier and Windows Server 2022 and earlier, the destination directory of a FileRenameInformation operation is opened with **ShareAccess** equal to FILE_SHARE_READ|FILE_SHARE_WRITE. If there is a pre-existing handle with DELETE access on the destination directory this will result in the operation failing with STATUS_SHARING_VIOLATION.
 
-<186> Section 2.1.5.15.12: On Windows NTFS, NTFS checks for open files beneath the directory being renamed (performs section [2.1.4.2](#Section_2.1.4.2)), it records the count of open files. If there is a lease to break, NTFS requests the break and then goes back to the start of performing [2.1.5.15.12](#Section_2.1.5.15.12.1). NTFS waits for the lease break acknowledgment and restarts the rename operation. When NTFS performs section 2.1.4.2 again, it again records how many open files there are beneath the directory and compares that to the previous count. If the current count is greater than or equal to the previous count, NTFS fails the rename and prevents a possible race condition.
+<186> Section 2.1.5.15.12: On Windows NTFS, NTFS checks for open files beneath the directory being renamed (performs section [2.1.4.2](#Section_2.1.4.2)), it records the count of open files. If there is a lease to break, NTFS requests the break and then goes back to the start of performing [2.1.5.15.12](#Section_2.1.5.15.12). NTFS waits for the lease break acknowledgment and restarts the rename operation. When NTFS performs section 2.1.4.2 again, it again records how many open files there are beneath the directory and compares that to the previous count. If the current count is greater than or equal to the previous count, NTFS fails the rename and prevents a possible race condition.
 
 <187> Section 2.1.5.15.12: The file system only updates **LastChangeTime** if no user has explicitly set **LastChangeTime**. The NTFS and ReFS file systems defer setting **LastChangeTime** until the handle is closed.
 

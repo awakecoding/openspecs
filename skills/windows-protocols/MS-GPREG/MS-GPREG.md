@@ -236,7 +236,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](../MS-RRP/MS-RRP.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -259,7 +259,7 @@ A client plug-in uses the contents of the GPO to retrieve settings specific to i
 
 Registry-based settings are accessible from a [**GPO**](#gt_group-policy-object-gpo) through the Group Policy: Registry Extension Encoding. The protocol provides mechanisms both for administrative tools (or any tool that allows an administrator to view or modify the contents of a GPO) to obtain metadata about registry-based settings and for clients to obtain applicable registry-based settings.
 
-Group Policy: Registry Extension Encoding settings can be administered using [**administrative templates**](#gt_administrative-template) (as specified in Policy Description Message (section [2.2.2](#Section_1.3))). An administrative template is a file associated with a GPO that combines information on the syntax of registry-based settings with human-readable descriptions of the settings as well as other information. Administrative tools use administrative templates to allow administrators to configure registry-based settings for applications on clients.
+Group Policy: Registry Extension Encoding settings can be administered using [**administrative templates**](#gt_administrative-template) (as specified in Policy Description Message (section [2.2.2](#Section_2.2.2))). An administrative template is a file associated with a GPO that combines information on the syntax of registry-based settings with human-readable descriptions of the settings as well as other information. Administrative tools use administrative templates to allow administrators to configure registry-based settings for applications on clients.
 
 Group Policy: Registry Extension Encoding settings are specified using [**registry policy files**](#gt_registry-policy-file) (as specified in Registry Policy Message Syntax (section [2.2.1](#Section_2.2.1))). An administrative tool uses the information within the administrative template to write out a registry policy file and associate it with a GPO. The Group Policy: Registry Extension Encoding plug-in on each client reads registry policy files specified by applicable GPOs and applies their contents to its [**registry**](#gt_registry).
 
@@ -282,7 +282,7 @@ User Policy Mode
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-This protocol depends on the Group Policy: Core Protocol (as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md)) to provide a list of applicable [**Group Policy Objects (GPOs)**](#gt_group-policy-object-gpo). It also transmits Group Policy settings and instructions between the client and the Group Policy server by reading and writing files using remote file access. See [MS-WPO](#Section_1.3) section 6.4 for an overview of remote file access.
+This protocol depends on the Group Policy: Core Protocol (as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md)) to provide a list of applicable [**Group Policy Objects (GPOs)**](#gt_group-policy-object-gpo). It also transmits Group Policy settings and instructions between the client and the Group Policy server by reading and writing files using remote file access. See [MS-WPO](../MS-WPO/MS-WPO.md) section 6.4 for an overview of remote file access.
 
 This protocol is used instead of the Windows Remote Registry Protocol, specified in [MS-RRP](../MS-RRP/MS-RRP.md), to configure the same settings on many computers.
 
@@ -344,7 +344,7 @@ The sections that follow specify the syntax for the following protocol elements:
 
 [**Registry policy files**](#gt_registry-policy-file) (as specified in Registry Policy Message Syntax (section [2.2.1](#Section_2.2.1))).
 
-The [**administrative templates**](#gt_administrative-template) (ADM format) file (as specified in ADM-Based Policy Description Message (section [2.2.2.1](#Section_1.3))) and the [**Extended Administrative Templates (ADMX)**](#gt_extended-administrative-template-admx) file (as specified in ADMX-Based Policy Description Message (section [2.2.2.2](#Section_2.2.2.2))).
+The [**administrative templates**](#gt_administrative-template) (ADM format) file (as specified in ADM-Based Policy Description Message (section [2.2.2.1](#Section_2.2.2.1))) and the [**Extended Administrative Templates (ADMX)**](#gt_extended-administrative-template-admx) file (as specified in ADMX-Based Policy Description Message (section [2.2.2.2](#Section_2.2.2.2))).
 
 Each protocol element is described as a message, which corresponds one-to-one with a file transferred using remote file access. The protocol is driven through the exchange of these messages, as specified in Protocol Details (section [3](#Section_3)).
 
@@ -940,7 +940,7 @@ None.
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The administrative abstract data model mirrors the client abstract data model in Abstract Data Model (section [3.2.1](#Section_1.3)), the difference being that the administrative abstract data model is logically encapsulated within a single [**GPO's**](#gt_group-policy-object-gpo) User Policy and Computer Policy sections.
+The administrative abstract data model mirrors the client abstract data model in Abstract Data Model (section [3.2.1](#Section_3.2.1)), the difference being that the administrative abstract data model is logically encapsulated within a single [**GPO's**](#gt_group-policy-object-gpo) User Policy and Computer Policy sections.
 
 This protocol also includes one ADM element, **Administered GPO (Public)**, which is directly accessed from the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.1.3.
 
@@ -1001,7 +1001,7 @@ The Load Policy Settings event can be invoked by Group Policy Extensions to read
 
 **Policy Setting State:** The value of the settings in the GPO as described in Computer Policy Setting State (section [3.1.1.3](#Section_3.1.1.3)) and [User Policy Setting State (section 3.1.1.4](#Section_3.1.1.4)).
 
-This event causes the Policy Administration Load Message Sequence (section [3.1.5.3](#Section_3.1.5.5)) to be performed using the <gpo path> and **Policy Setting State** logical parameters from this event.
+This event causes the Policy Administration Load Message Sequence (section [3.1.5.3](#Section_3.1.5.3)) to be performed using the <gpo path> and **Policy Setting State** logical parameters from this event.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Update Policy Settings Event
@@ -1034,7 +1034,7 @@ The Update Policy Comments event is invoked by the Group Policy Registry Adminis
 
 **Policy Comment State:** The value of the comments to be stored as described in Policy Comment State (section [3.1.1.5](#Section_3.1.1.5)).
 
-This event causes the Policy Administration Comment Update Message Sequence (section [3.1.5.6](#Section_3.1.5.4)) to be performed using the <gpo path> and the **Policy Comment State** logical parameters from this event.
+This event causes the Policy Administration Comment Update Message Sequence (section [3.1.5.6](#Section_3.1.5.6)) to be performed using the <gpo path> and the **Policy Comment State** logical parameters from this event.
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 ADM-Based Policy Description Load Event
@@ -1055,7 +1055,7 @@ This event causes the Policy Description Sequence for ADMX-Based Administrative 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-Messages MUST be processed in the order of these subsections: [3.1.5.1](#Section_3.1.5.1) and/or [3.1.5.2](#Section_3.1.5.2) in any order, and [3.1.5.3](#Section_3.1.5.5) followed by [3.1.5.4](#Section_3.1.5.4) if applicable. The administrative plug-in executes the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates. All administrative template settings created by the execution of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates are serialized to and deserialized from the registry.pol file. The sequencing of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates can therefore occur in any order. When an administrator loads any Registry Policy Setting, the Policy Administration Load Message Sequencing is executed by the administrative plug-in. When an administrator makes a change to any Registry Policy Setting, the Policy Administration Update Message Sequencing is executed by the administrative plug-in.
+Messages MUST be processed in the order of these subsections: [3.1.5.1](#Section_3.1.5.1) and/or [3.1.5.2](#Section_3.1.5.2) in any order, and [3.1.5.3](#Section_3.1.5.3) followed by [3.1.5.4](#Section_3.1.5.4) if applicable. The administrative plug-in executes the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates. All administrative template settings created by the execution of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates are serialized to and deserialized from the registry.pol file. The sequencing of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates can therefore occur in any order. When an administrator loads any Registry Policy Setting, the Policy Administration Load Message Sequencing is executed by the administrative plug-in. When an administrator makes a change to any Registry Policy Setting, the Policy Administration Update Message Sequencing is executed by the administrative plug-in.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Policy Description Sequences for ADM-Based Administrative Templates
@@ -3235,7 +3235,7 @@ name.</xs:documentation>
 <a id="Section_7.2"></a>
 ## 7.2 ADMX Policy Definition Schema
 
-The [**ADMX**](#gt_extended-administrative-template-admx) Policy Definition Types Schema provides the schema elements and types used to define the required information for creating individual [**policy settings**](#gt_policy-setting). These elements define the category, supported on and individual policy setting definition information, including the localized presentation portions. Also defined are elements in the ADMX File Schema (section [7.3](#Section_7.4)).
+The [**ADMX**](#gt_extended-administrative-template-admx) Policy Definition Types Schema provides the schema elements and types used to define the required information for creating individual [**policy settings**](#gt_policy-setting). These elements define the category, supported on and individual policy setting definition information, including the localized presentation portions. Also defined are elements in the ADMX File Schema (section [7.3](#Section_7.3)).
 
 | ADMX Policy Definition Types Schema Element/Group Name (Parent Elements or Types) | Description |
 | --- | --- |

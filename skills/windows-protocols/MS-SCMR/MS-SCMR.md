@@ -263,7 +263,7 @@ This document uses the following terms:
 **security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl) with [**SIDs**](#gt_security-identifier-sid) for the security principals who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
 
 <a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](#Section_1.3) section 1.1.1.2.
+**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 <a id="gt_server-message-block-smb"></a>
 **Server Message Block (SMB)**: A protocol that is used to request file and print services from server systems over a network. The SMB protocol extends the CIFS protocol with additional security, file, and disk management support. For more information, see [[CIFS]](https://go.microsoft.com/fwlink/?linkid=2109334) and [MS-SMB](../MS-SMB/MS-SMB.md).
@@ -315,7 +315,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -328,7 +328,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](#Section_1.3)".
+[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](../MS-AZOD/MS-AZOD.md)".
 
 [MSDN-CtrlSvcEx] Microsoft Corporation, "ControlServiceEx function", [http://msdn.microsoft.com/en-us/library/ms682110(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=157502)
 
@@ -443,7 +443,7 @@ The following bit flags indicate which components to include in a **SECURITY_DES
 
 | Value | Meaning |
 | --- | --- |
-| DACL_SECURITY_INFORMATION 0x00000004 | If set, the security descriptor MUST include the object's [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl). DACL information is specified in [MS-AZOD](#Section_1.3) section 1.1.1.3. |
+| DACL_SECURITY_INFORMATION 0x00000004 | If set, the security descriptor MUST include the object's [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl). DACL information is specified in [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.3. |
 | GROUP_SECURITY_INFORMATION 0x00000002 | If set, specifies the [**security identifier (SID)**](#gt_security-identifier-sid), as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, (LSAPR_SID) of the object's primary group. Primary group information is specified in [MS-DTYP]. |
 | OWNER_SECURITY_INFORMATION 0x00000001 | If set, specifies the security identifier (SID) (LSAPR_SID) of the object's owner. |
 | SACL_SECURITY_INFORMATION 0x00000008 | If set, the security descriptor MUST include the object's [**system access control list (SACL)**](#gt_system-access-control-list-sacl). SACL information is specified in [MS-AZOD] section 1.1.1.3. |
@@ -612,7 +612,7 @@ The forward slash, back slash, comma, and space characters are illegal in servic
 
 **lpDisplayName:** A pointer to a null-terminated string that contains the display name of the service.
 
-**ServiceStatusProcess:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.47) structure that contains status information for the lpServiceName service.
+**ServiceStatusProcess:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.49) structure that contains status information for the lpServiceName service.
 
 <a id="Section_2.2.13"></a>
 ### 2.2.13 ENUM_SERVICE_STATUS_PROCESSW
@@ -637,7 +637,7 @@ The forward slash, back slash, comma, and space characters are illegal in servic
 
 **lpDisplayName:** A pointer to a null-terminated string that contains the display name of the service.
 
-**ServiceStatusProcess:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.47) structure that contains status information for the lpServiceName service.
+**ServiceStatusProcess:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.49) structure that contains status information for the lpServiceName service.
 
 <a id="Section_2.2.14"></a>
 ### 2.2.14 QUERY_SERVICE_CONFIGA
@@ -865,7 +865,7 @@ DWORD Delay;
 
 *LPSC_ACTION;
 
-**Type:** The action to be performed. This member MUST be one of the values from the [SC_ACTION_TYPE (section 2.2.18)](#Section_2.2.19) enumeration.
+**Type:** The action to be performed. This member MUST be one of the values from the [SC_ACTION_TYPE (section 2.2.18)](#Section_2.2.18) enumeration.
 
 **Delay:** The time, in milliseconds, to wait before performing the specified action.
 
@@ -1055,7 +1055,7 @@ PSERVICE_NOTIFY_STATUS_CHANGE_PARAMS_2 pStatusChangeParams;
 
 **pStatusChangeParam1:** A [SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1 (section 2.2.43)](#Section_2.2.43) structure that contains the service status notification information.
 
-**pStatusChangeParams:** A [SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_2 (section 2.2.44)](#Section_2.2.42) structure that contains the service status notification information.
+**pStatusChangeParams:** A [SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_2 (section 2.2.44)](#Section_2.2.44) structure that contains the service status notification information.
 
 <a id="Section_2.2.24"></a>
 ### 2.2.24 SC_RPC_NOTIFY_PARAMS_LIST
@@ -1328,7 +1328,7 @@ SERVICE_STATUS_PROCESS ServiceStatus;
 
 *PSERVICE_CONTROL_STATUS_REASON_OUT_PARAMS;
 
-**ServiceStatus:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.47) structure that contains the current status of the service.
+**ServiceStatus:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.49) structure that contains the current status of the service.
 
 <a id="Section_2.2.33"></a>
 ### 2.2.33 SERVICE_DELAYED_AUTO_START_INFO
@@ -1411,7 +1411,7 @@ DWORD dwsaActionsOffset;
 
 **dwResetPeriod:** The time, in seconds, after which to reset the failure count to zero if there are no failures.
 
-**dwRebootMsgOffset:** The offset for the buffer containing the message that is broadcast in response to the SC_ACTION_REBOOT service controller action (section [2.2.18](#Section_2.2.19)) to all server users prior to a server reboot.
+**dwRebootMsgOffset:** The offset for the buffer containing the message that is broadcast in response to the SC_ACTION_REBOOT service controller action (section [2.2.18](#Section_2.2.18)) to all server users prior to a server reboot.
 
 **dwCommandOffset:** The offset for the buffer that contains the [**Unicode**](#gt_unicode) command line of the process that the process creation function executes in response to the SC_ACTION_RUN_COMMAND service controller action (section 2.2.18).
 
@@ -1529,7 +1529,7 @@ typedef SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_2 SERVICE_NOTIFY_STATUS_CHANGE_PAR
 <a id="Section_2.2.43"></a>
 ### 2.2.43 SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1
 
-The SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1 structure defines the service status notification information. If a client uses this structure, the server copies data from this structure to the newer structure specified in [2.2.44](#Section_2.2.42), and uses the newer structure.
+The SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1 structure defines the service status notification information. If a client uses this structure, the server copies data from this structure to the newer structure specified in [2.2.44](#Section_2.2.44), and uses the newer structure.
 
 typedef struct _SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1 {
 
@@ -1572,7 +1572,7 @@ DWORD dwSequence;
 
 **CallbackParamAddressArray:** Not used.
 
-**ServiceStatus:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.47) structure that contains information about the service.
+**ServiceStatus:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.49) structure that contains information about the service.
 
 **dwNotificationStatus:** A value that indicates the notification status. If this member is ERROR_SUCCESS, the notification has succeeded and the server adds valid information to the **ServiceStatus**, **dwNotificationTriggered**, and **pszServiceNames** members. If this member is ERROR_REQUEST_ABORTED or ERROR_SERVICE_MARKED_FOR_DELETE, the notification has failed.
 
@@ -1628,7 +1628,7 @@ DWORD dwNotificationTriggered;
 
 **CallbackParamAddressArray:** Not used.
 
-**ServiceStatus:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.47) structure that contains information about the service.
+**ServiceStatus:** A [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.49) structure that contains information about the service.
 
 **dwNotificationStatus:** A value that indicates the notification status. If this member is ERROR_SUCCESS, the notification has succeeded and the server adds valid information to the ServiceStatus, dwNotificationTriggered, and pszServiceNames members. If this member is ERROR_REQUEST_ABORTED or ERROR_SERVICE_MARKED_FOR_DELETE, the notification has failed.
 
@@ -1769,7 +1769,7 @@ PBYTE pRequiredPrivileges;
 
 **cbRequiredPrivileges**: Size, in bytes, of the pRequiredPrivileges buffer.
 
-**pRequiredPrivileges**: Buffer that contains the required privileges of a service in the format of a sequence of null-terminated strings, terminated by an empty string (\0). The privilege constants are detailed in [MS-LSAD](#Section_5) section 3.1.1.2.1.
+**pRequiredPrivileges**: Buffer that contains the required privileges of a service in the format of a sequence of null-terminated strings, terminated by an empty string (\0). The privilege constants are detailed in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1.
 
 <a id="Section_2.2.49"></a>
 ### 2.2.49 SERVICE_STATUS_PROCESS
@@ -2100,7 +2100,7 @@ The Service Control Manager maintains the following ADM elements.
 | Value | Meaning |
 | --- | --- |
 | **SCM database** | A collection of service records. |
-| **SecurityDescriptor** | A [**security descriptor**](#gt_security-descriptor), as specified in [MS-AZOD](#Section_1.3) section 1.1.1.3, that is used to control an access to the **SCM database**. |
+| **SecurityDescriptor** | A [**security descriptor**](#gt_security-descriptor), as specified in [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.3, that is used to control an access to the **SCM database**. |
 | **GroupList** | An ordered list of strings that services can specify as a **ServiceGroup**. |
 | **BootAccepted** | A flag indicating whether a successful call to RNotifyBootConfigStatus has already been made to the server. This element is not accessible via any method and is internal to the protocol implementation. |
 
@@ -2120,7 +2120,7 @@ The Service Record maintains the following ADM elements.
 | **ImagePath** | Full qualified path to the service binary file. |
 | **ObjectName** | If the service is a user-mode program, the name of the account under which the service executes. If the service is a driver, the name of the driver object that IO manager creates for the driver in the ObjectManager namespace. |
 | **Password** | Password associated with the account specified in **ObjectName**. |
-| **RequiredPrivileges** | Required privileges for the service. Privileges determine the type of system operations that can be performed. The privilege constants are detailed in [MS-LSAD](#Section_5) Privilege Data Model (section 3.1.1.2.1). |
+| **RequiredPrivileges** | Required privileges for the service. Privileges determine the type of system operations that can be performed. The privilege constants are detailed in [MS-LSAD](../MS-LSAD/MS-LSAD.md) Privilege Data Model (section 3.1.1.2.1). |
 | **ServiceSidType** | Type of service security identifier (SID). |
 | **FailureActionsOnNonCrashFailures** | Failure action setting of a service that determines when **FailureActions** are to be executed. |
 | **DependOnGroup** | Service groups that MUST be started before this service. |
@@ -2128,7 +2128,7 @@ The Service Record maintains the following ADM elements.
 | **Type** | Type of service. |
 | **TriggerInfo** | Trigger setting of the service.<30> |
 | **PreferredNode** | Preferred node setting of the service.<31> |
-| **Tag** | A number that is unique within the Group. Refer to the definition of Group as defined previously in this table. For driver services that have SERVICE_BOOT_START or SERVICE_SYSTEM_START start types [see *dwStartType* in RChangeServiceConfigW (section 3.1.4.11), RCreateServiceW (section [3.1.4.12](#Section_3.1.4.12)), RChangeServiceConfigA (section [3.1.4.22](#Section_3.1.4.22)), RCreateServiceA (section [3.1.4.23](#Section_3.1.4.23)), and RCreateServiceWOW64A (section [3.1.4.41](#Section_3.1.4.41))], the server starts each service based on its Tag's position within the Group. |
+| **Tag** | A number that is unique within the Group. Refer to the definition of Group as defined previously in this table. For driver services that have SERVICE_BOOT_START or SERVICE_SYSTEM_START start types [see *dwStartType* in RChangeServiceConfigW (section 3.1.4.11), RCreateServiceW (section [3.1.4.12](#Section_3.1.4.11)), RChangeServiceConfigA (section [3.1.4.22](#Section_3.1.4.22)), RCreateServiceA (section [3.1.4.23](#Section_3.1.4.23)), and RCreateServiceWOW64A (section [3.1.4.41](#Section_3.1.4.41))], the server starts each service based on its Tag's position within the Group. |
 | **SecurityDescriptor** | A security descriptor, as specified in [MS-AZOD] section 1.1.1.3, that describes the client access rights for changing service configuration. |
 | **ServiceStatus** | The server maintains a SERVICE_STATUS (section [2.2.47](#Section_2.2.47)) to keep track of the service runtime information. |
 | **HandleCount** | Counter for the number of RPC context handles currently created for this service record. This element is not accessible via any method and is internal to the protocol implementation. |
@@ -2426,7 +2426,7 @@ DWORD RQueryServiceObjectSecurity(
 
 **hService:** An [SC_RPC_HANDLE](#Section_2.2.4) (section 2.2.4) data type that defines the handle to a [**service record**](#gt_service-record) or to the SCM database that MUST have been created previously using one of the open methods specified in section [3.1.4](#Section_3.1.4).
 
-**dwSecurityInformation:** A [SECURITY_INFORMATION (section 2.2.1)](#Section_5) type definition that specifies the security information being requested.
+**dwSecurityInformation:** A [SECURITY_INFORMATION (section 2.2.1)](#Section_2.2.1) type definition that specifies the security information being requested.
 
 **lpSecurityDescriptor:** A pointer to a buffer that contains a copy of the SECURITY_DESCRIPTOR structure (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) for the specified service object.
 
@@ -2476,7 +2476,7 @@ DWORD RSetServiceObjectSecurity(
 
 **hService:** An [SC_RPC_HANDLE](#Section_2.2.4) (section 2.2.4) data type that defines the handle to a [**service record**](#gt_service-record) or to the SCM database that MUST have been created previously using one of the open methods specified in section [3.1.4](#Section_3.1.4).
 
-**dwSecurityInformation:** A [SECURITY_INFORMATION (section 2.2.1)](#Section_5) type definition that specifies the security information being set.
+**dwSecurityInformation:** A [SECURITY_INFORMATION (section 2.2.1)](#Section_2.2.1) type definition that specifies the security information being set.
 
 **lpSecurityDescriptor:** A pointer to a buffer of bytes that contains the new security information.
 
@@ -2931,9 +2931,9 @@ Specify NULL or an empty string if the service does not belong to a [**load-orde
 
 In response to this request from the client, for a successful operation the server MUST use the service name specified in the *lpServiceName* parameter to create a new service record in the SCM database and use the values from the appropriate parameters of the client request to update the attributes of this newly created service record.
 
-The server MUST treat the lpPassword as a clear-text password if the client is using RPC over TCP, ncacn_ip_tcp (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)). See section [2.1.2](#Section_2.1).
+The server MUST treat the lpPassword as a clear-text password if the client is using RPC over TCP, ncacn_ip_tcp (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)). See section [2.1.2](#Section_2.1.2).
 
-The server MUST treat the lpPassword as encrypted and decrypt it, if the client is using a RPC over NP, ncacn_np (as specified in [MS-RPCE]). The server MUST first retrieve a [**session key**](#gt_session-key) as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) (section 3.5.4.4). An [**RPC server**](#gt_rpc-server) application requests the session key of a client and then uses the routine as specified in [MS-LSAD](#Section_5) (section 5.1.2) to decrypt the password.
+The server MUST treat the lpPassword as encrypted and decrypt it, if the client is using a RPC over NP, ncacn_np (as specified in [MS-RPCE]). The server MUST first retrieve a [**session key**](#gt_session-key) as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) (section 3.5.4.4). An [**RPC server**](#gt_rpc-server) application requests the session key of a client and then uses the routine as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) (section 5.1.2) to decrypt the password.
 
 If the service is created successfully, the server MUST return a handle to the service in the *lpServiceHandle* parameter with the access rights associated with this handle as specified in the *dwDesiredAccess* parameter of the client request.
 
@@ -3679,9 +3679,9 @@ Specify NULL or an empty string if the service does not belong to a [**load-orde
 
 In response to this request from the client, for a successful operation the server MUST use the service name specified in the *lpServiceName* parameter to create a new service record in the SCM database and use the values from the appropriate parameters of the client request to update the attributes of this newly created service record.
 
-The server MUST treat the lpPassword as a clear-text password if the client is using RPC over TCP, ncacn_ip_tcp (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)). See section [2.1.2](#Section_2.1) Client.
+The server MUST treat the lpPassword as a clear-text password if the client is using RPC over TCP, ncacn_ip_tcp (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)). See section [2.1.2](#Section_2.1.2) Client.
 
-The server MUST treat the lpPassword as encrypted and decrypt it, if the client is using a RPC over NP, ncacn_np (as specified in [MS-RPCE]). The server MUST first retrieve a [**session key**](#gt_session-key) as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) (section 3.5.4.4). An [**RPC server**](#gt_rpc-server) application requests the session key of a client and then uses the routine as specified in [MS-LSAD](#Section_5) (section 5.1.2) to decrypt the password.
+The server MUST treat the lpPassword as encrypted and decrypt it, if the client is using a RPC over NP, ncacn_np (as specified in [MS-RPCE]). The server MUST first retrieve a [**session key**](#gt_session-key) as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) (section 3.5.4.4). An [**RPC server**](#gt_rpc-server) application requests the session key of a client and then uses the routine as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) (section 5.1.2) to decrypt the password.
 
 If the service is created successfully, the server MUST return a handle to the service in the *lpServiceHandle* parameter with the access rights associated with this handle as specified in the *dwDesiredAccess* parameter of the client request.
 
@@ -4095,7 +4095,7 @@ The forward slash, back slash, comma, and space characters are illegal in servic
 
 **lpDisplayName:** A pointer to a buffer that receives the null-terminated ANSI string that contains the service display name.
 
-**lpcchBuffer:** An [LPBOUNDED_DWORD_4K](#Section_2.2.7) (section 2.2.7) data type that defines the pointer to a variable that specifies the size, in chars, of the buffer. On output, this variable receives the size of the service's display name, excluding the terminating null character.
+**lpcchBuffer:** An [LPBOUNDED_DWORD_4K](#Section_d5e2cc227db64101b36ff4377e836b4c) (section 2.2.7) data type that defines the pointer to a variable that specifies the size, in chars, of the buffer. On output, this variable receives the size of the service's display name, excluding the terminating null character.
 
 **Return Values:** The method returns 0x00000000 (ERROR_SUCCESS) on success; otherwise, it returns one of the following error codes.
 
@@ -4138,7 +4138,7 @@ LPSTR lpKeyName,
 
 **lpKeyName:** A pointer to a buffer that receives the null-terminated ANSI string that contains the service name.
 
-**lpcchBuffer:** An [LPBOUNDED_DWORD_4K](#Section_2.2.7) (section 2.2.7) data type that defines the pointer to a variable that specifies the size, in chars, of the buffer. On output, this variable receives the size of the service name, excluding the terminating null character.
+**lpcchBuffer:** An [LPBOUNDED_DWORD_4K](#Section_d5e2cc227db64101b36ff4377e836b4c) (section 2.2.7) data type that defines the pointer to a variable that specifies the size, in chars, of the buffer. On output, this variable receives the size of the service name, excluding the terminating null character.
 
 **Return Values:** The method returns 0x00000000 (ERROR_SUCCESS) on success; otherwise, it returns one of the following error codes.
 
@@ -4210,7 +4210,7 @@ LPCWSTR pszGroupName
 
 **cbBufSize:** The size, in bytes, of the array pointed to by *lpBuffer*.
 
-**pcbBytesNeeded:** An [LPBOUNDED_DWORD_256K](#Section_2.2.9) (section 2.2.9) pointer to a variable that contains the number of bytes needed to store the array of service entries.
+**pcbBytesNeeded:** An [LPBOUNDED_DWORD_256K](#Section_6c441817d7364a94a4440c1810a6c473) (section 2.2.9) pointer to a variable that contains the number of bytes needed to store the array of service entries.
 
 **lpServicesReturned:** An LPBOUNDED_DWORD_256K (section 2.2.9) pointer to a variable that contains the number of service entries returned.
 
@@ -4456,7 +4456,7 @@ DWORD RQueryServiceStatusEx(
 
 **InfoLevel:** An enumerated value from [SC_STATUS_TYPE (section 2.2.29)](#Section_2.2.29) that specifies which service attributes are returned. MUST be SC_STATUS_PROCESS_INFO.
 
-**lpBuffer:** A pointer to the buffer that contains the status information in the form of a [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.47) structure.
+**lpBuffer:** A pointer to the buffer that contains the status information in the form of a [SERVICE_STATUS_PROCESS (section 2.2.49)](#Section_2.2.49) structure.
 
 **cbBufSize:** The size, in bytes, of the *lpBuffer* parameter.
 
@@ -4982,7 +4982,7 @@ DWORD RNotifyServiceStatusChange(
 
 **pfCreateRemoteQueue:** Not used. This MUST be ignored.
 
-**phNotify:** An [LPSC_NOTIFY_RPC_HANDLE](#Section_2.2.6) (section 2.2.6) data type that defines a handle to the notification status associated with the client for the specified service.
+**phNotify:** An [LPSC_NOTIFY_RPC_HANDLE](#Section_40e0fec2d70a41829a45b5da7e2d0943) (section 2.2.6) data type that defines a handle to the notification status associated with the client for the specified service.
 
 **Return Values:** The method returns 0x00000000 (ERROR_SUCCESS) on success; otherwise, it returns one of the following error codes.
 
@@ -5027,7 +5027,7 @@ error_status_t RGetNotifyResults(
 
 **hNotify:** An [SC_NOTIFY_RPC_HANDLE (section 2.2.6)](#Section_2.2.6) data type that defines a handle to the notification status associated with the client. This is the handle returned by an RNotifyServiceStatusChange call.
 
-**ppNotifyParams:** A pointer to a buffer that receives an [SC_RPC_NOTIFY_PARAMS_LIST (section 2.2.24)](#Section_2.2.23) data type.
+**ppNotifyParams:** A pointer to a buffer that receives an [SC_RPC_NOTIFY_PARAMS_LIST (section 2.2.24)](#Section_2.2.24) data type.
 
 **Return Values:** The method returns 0x00000000 (ERROR_SUCCESS) on success; otherwise, it returns one of the following error codes.
 
@@ -7369,7 +7369,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <6> Section 2.2.23: The SC_RPC_NOTIFY_PARAMS structure is not available in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<7> Section 2.2.24: The [SC_RPC_NOTIFY_PARAMS_LIST](#Section_2.2.23) structure is not available in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<7> Section 2.2.24: The [SC_RPC_NOTIFY_PARAMS_LIST](#Section_2.2.24) structure is not available in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
 <8> Section 2.2.30: The SERVICE_CONTROL_STATUS_REASON_IN_PARAMSA structure is not available in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 

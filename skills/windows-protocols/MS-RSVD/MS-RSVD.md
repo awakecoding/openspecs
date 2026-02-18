@@ -271,7 +271,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.2.3)".
+[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
@@ -847,7 +847,7 @@ packet-beta
 
 **Data (variable):** A variable-length field that contains the additional input specified by the **OperationType** field.
 
-If the **OperationType** is **SvhdxMetaOperationTypeCreateSnapshot**, this field is provided in the format SVHDX_META_OPERATION_CREATE_SNAPSHOT as specified in section [2.2.4.17.1](#Section_2.2.4.17.1.1).
+If the **OperationType** is **SvhdxMetaOperationTypeCreateSnapshot**, this field is provided in the format SVHDX_META_OPERATION_CREATE_SNAPSHOT as specified in section [2.2.4.17.1](#Section_2.2.4.17.1).
 
 If the **OperationType** is **SvhdxMetaOperationTypeExtractSnapshots**, this field is provided in the format SVHDX_META_OPERATION_EXTRACT as specified in section [2.2.4.17.2](#Section_2.2.4.17.2).
 
@@ -1804,7 +1804,7 @@ The application provides:
 - Stage 5 value
 - Stage 6 value
 - **SnapshotId**: A GUID to uniquely identify the snapshot.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3) as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17) as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1845,7 +1845,7 @@ The application provides:
 - Stage 6 value
 - **SnapshotId**: A GUID to uniquely identify the snapshot.
 - **LogFileID**: A GUID to identify the log file.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1882,7 +1882,7 @@ The application provides:
 
 - A handle to the **Open** identifying a VHD set.
 - **TransactionId**: A GUID used to uniquely identify the start operation.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1910,7 +1910,7 @@ The application provides:
 - **SnapshotId**: A GUID to identify the first snapshot data to include in the extract.
 - **SnapshotLimitId**: A GUID to identify the last snapshot data to include in the extract.
 - **DestinationFileName**: A VHD file name into which the difference data will be written.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1941,7 +1941,7 @@ The application provides:
 - A handle to the **Open** identifying a shared virtual disk.
 - **TransactionId**: A GUID used to uniquely identify the start operation.
 - **DestinationVhdSetName**: A name for the VHD set.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1971,7 +1971,7 @@ The application provides:
 - **ExpandOnly**: Indicates that a size can only be expanded.
 - **AllowUnsafeVirtualSize**: Indicates that the new size can be less than the data on the disk.
 - **ShrinkToMinimumSafeSize**: Indicates that the server automatically shrinks the virtual disk to the minimum safe virtual size.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -2169,7 +2169,7 @@ The application provides:
 
 - A handle to the **Open** identifying a VHD set.
 - **SnapshotId**: A GUID to uniquely identify the snapshot.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -2491,7 +2491,7 @@ The server MUST process a command as specified in the following table.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-For this section, if **IsSVHDXSupported** is FALSE, the server MUST fail the request with STATUS_INVALID_DEVICE_REQUEST, as specified in [MS-ERREF](#Section_2.2.3).
+For this section, if **IsSVHDXSupported** is FALSE, the server MUST fail the request with STATUS_INVALID_DEVICE_REQUEST, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receiving an Open Request

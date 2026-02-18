@@ -171,7 +171,7 @@ This section provides a conceptual overview of the major components and processe
 <a id="Section_1.1.1"></a>
 ### 1.1.1 Group Policy Core Protocol
 
-The Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1) is a client/server protocol that enables a [**Group Policy client**](#gt_group-policy-client) to discover and retrieve [**policy settings**](#gt_policy-setting) that are created by a [**Group Policy administrator**](#gt_group-policy-administrator) (a [**domain**](#gt_domain) administrator) and are stored as a [**Group Policy Object (GPO)**](#gt_group-policy-object-gpo) in [**Active Directory**](#gt_active-directory) ([MS-ADTS](../MS-ADTS/MS-ADTS.md)). A Group Policy administrator creates policy settings to control Group Policy client behavior and capabilities. The Group Policy: Core Protocol then facilitates the communication of the administrator-defined policies from the [**Group Policy server**](#gt_group-policy-server) to domain members such as a Group Policy client or a user who is interactively logged on to the Group Policy client computer.
+The Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md) is a client/server protocol that enables a [**Group Policy client**](#gt_group-policy-client) to discover and retrieve [**policy settings**](#gt_policy-setting) that are created by a [**Group Policy administrator**](#gt_group-policy-administrator) (a [**domain**](#gt_domain) administrator) and are stored as a [**Group Policy Object (GPO)**](#gt_group-policy-object-gpo) in [**Active Directory**](#gt_active-directory) ([MS-ADTS](../MS-ADTS/MS-ADTS.md)). A Group Policy administrator creates policy settings to control Group Policy client behavior and capabilities. The Group Policy: Core Protocol then facilitates the communication of the administrator-defined policies from the [**Group Policy server**](#gt_group-policy-server) to domain members such as a Group Policy client or a user who is interactively logged on to the Group Policy client computer.
 
 For example, a Group Policy administrator might want to target the firewall configuration of a group of client computers to open a specific port on each client computer. The Group Policy administrator can use the [**Group Policy**](#gt_group-policy) protocols to create a policy setting that specifies the firewall configuration, and the Group Policy: Core Protocol enables it to be delivered to Group Policy clients.
 
@@ -206,7 +206,7 @@ There are two types of [**policy settings**](#gt_policy-setting), as follows:
 
 **User policy settings**: These specify capabilities and behaviors for interactively logged-on users. These settings can also affect different users who are logged on to the same computer. Examples of such settings include the user's default location for saving documents, or the desktop background image for a user.
 
-Some settings affect users regardless of the computer that they log on to. For example, policy source mode, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.1.2, can override user policy settings by causing computer policy settings to be applied to the user.
+Some settings affect users regardless of the computer that they log on to. For example, policy source mode, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.1.2, can override user policy settings by causing computer policy settings to be applied to the user.
 
 **Computer policy settings**: These specify capabilities and behaviors for individual computers, even when no users are logged on. Computer policy settings can also globally affect every user who logs on to the computer. Examples include policy settings that enable a computer to host a web server, schedule automated disk backups of the computer, or specify a standard web home page for all users of the computer.
 
@@ -225,7 +225,7 @@ The application of [**Group Policy**](#gt_group-policy) settings to the Group Po
 
 Both of these storage components can reside on the Group Policy server. Through the hierarchical modeling of Active Directory, GPOs can be linked to [**site**](#gt_site), [**domain**](#gt_domain), and [**organizational unit (OU)**](#gt_organizational-unit-ou) containers to enable policy settings to be applied to target users and computers that are associated with these containers. This infrastructure provides a high degree of flexibility that enables the [**Group Policy administrator**](#gt_group-policy-administrator) to customize configurations, such as delivering a specific piece of software to specialized users based on their membership in an OU.
 
-A GPO is uniquely identified by a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid). GPO settings are evaluated by the [**Group Policy client**](#gt_group-policy-client) through the hierarchical nature of Active Directory and by interpreting the extension policy file data on the Group Policy file share. The processes for creating a GPO are described in section [2.1.3.2.1](#Section_2.1.3.2.1.1).
+A GPO is uniquely identified by a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid). GPO settings are evaluated by the [**Group Policy client**](#gt_group-policy-client) through the hierarchical nature of Active Directory and by interpreting the extension policy file data on the Group Policy file share. The processes for creating a GPO are described in section [2.1.3.2.1](#Section_2.1.3.2.1).
 
 <a id="Section_1.1.4"></a>
 ### 1.1.4 Group Policy Extensions
@@ -236,7 +236,7 @@ A few Group Policy extensions have only an administrative-side, as shown in the 
 
 CSEs and Administrative tool extensions function in the following manner:
 
-**CSEs**: Enable the application of explicit functionality to various subsystems on a Group Policy client. This is accomplished by implementing application-specific policy settings, such as the client security policies specified in [MS-GPSB](#Section_2.9), on Group Policy client computers.
+**CSEs**: Enable the application of explicit functionality to various subsystems on a Group Policy client. This is accomplished by implementing application-specific policy settings, such as the client security policies specified in [MS-GPSB](../MS-GPSB/MS-GPSB.md), on Group Policy client computers.
 
 The CSEs that apply to a set of policy targets are designated by the Extension list of a GPO. Each CSE in the GPO Extension list is represented as a GUID that is associated with a CSE protocol, sometimes referred to as a client-side plug-in, residing on the Group Policy client computer. The GUID enables the core Group Policy engine on the Group Policy client to locate and invoke the CSE protocol, which in turn applies policy settings to the policy target. These settings are all defined by the GPO, which includes the extension policy files that reside on the [**Group Policy file share**](#gt_group-policy-file-share).
 
@@ -245,7 +245,7 @@ CSE protocols depend on the execution of the core Group Policy engine on the Gro
 - To identify GPOs for a CSE to query to obtain the stored settings for that extension.
 - To provide the message sequences for retrieving the CSE settings that are stored in the logical part of a GPO.
 - To invoke a file access protocol to retrieve extension-related policy settings in the extension policy files on the Group Policy file share.
-**Administrative tool extensions**: Facilitate authoring and modification of specific administrative settings that are related to extended functionality, such as the security-based settings specified in [MS-GPIPSEC](#Section_2.9).
+**Administrative tool extensions**: Facilitate authoring and modification of specific administrative settings that are related to extended functionality, such as the security-based settings specified in [MS-GPIPSEC](../MS-GPIPSEC/MS-GPIPSEC.md).
 
 The Administrative tool extensions that apply to policy targets are designated by the Extension list of a GPO. Each Administrative tool extension in the GPO Extension list is represented as a GUID that is associated with an administrative-side extension protocol, sometimes referred to as an administrative plug-in. The plug-in resides on the computer that hosts the Administrative tool. This GUID enables the Administrative tool to locate the extension for administering the GPO settings that are related to that particular extension. Settings for such extensions, for example, those specified in [MS-GPSB], are typically stored in Active Directory via the Lightweight Directory Access Protocol (LDAP) [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)] and in the Group Policy file share via a file access protocol.
 
@@ -256,7 +256,7 @@ Administrative tool extension protocols depend on the Administrative tool for th
 - To invoke a file access protocol to retrieve or store extension-related policy settings in the extension policy files on the Group Policy file share.
 Policy settings for a given class of extension functionality are communicated by a CSE protocol itself and not directly by the core Group Policy engine. The behavior of a given protocol extension is specified in the documentation for that extension. For example, the behavior of the Group Policy: IP Security (IPsec) Protocol is documented in [MS-GPIPSEC].
 
-The extension protocols that are native to Group Policy are specified in section 2.2. However, vendors can extend the functionality of Group Policy by implementing custom Group Policy extensions, as described in [MS-GPOL](#Section_2.1.1.1) section 1.8.
+The extension protocols that are native to Group Policy are specified in section 2.2. However, vendors can extend the functionality of Group Policy by implementing custom Group Policy extensions, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 1.8.
 
 <a id="Section_1.1.5"></a>
 ### 1.1.5 Group Policy Data Storage
@@ -267,7 +267,7 @@ The Group Policy protocols read and write policy information to and from the Gro
 
 Some policy configuration settings that are stored in GPOs can be regarded as Group Policy metadata because this information (section [1.1.7.3](#Section_1.1.7.3)), embedded in the attributes of Active Directory objects, is used to identify Group Policy configurations such as SOM, extension applicability, and the policy file location, rather than the actual policy settings that are applied to Group Policy clients. For example, a GPO contains attributes that specify a user extension list and computer extension list that are specific to that particular GPO configuration. These lists specify the extension protocols that apply to target users and computers, for which the GPO is configured. The actual settings for these extensions are stored in the Group Policy file share and comprise the actual policy settings that [**CSEs**](#gt_cses) apply on the Group Policy client. However, it is a GPO attribute in Active Directory that holds the pointer to the file share location where the CSE policy settings reside.
 
-**Group Policy file share data store**: This store persists user and computer policy settings and also maintains a file that specifies GPO version information. If a GPO has registry settings, the Group Policy file share data store will contain the file registry.pol, which stores the registry settings that are generated by configuring Administrative template items with a management tool such as the Group Policy Management Console (GPMC). The Group Policy file share store can exist locally on the Group Policy server or remotely on a file share, where policy data is retrieved via a file access protocol. The [**Group Policy**](#gt_group-policy) protocols use file access protocols, as described in [MS-FASOD](#Section_2.1) for file access operations
+**Group Policy file share data store**: This store persists user and computer policy settings and also maintains a file that specifies GPO version information. If a GPO has registry settings, the Group Policy file share data store will contain the file registry.pol, which stores the registry settings that are generated by configuring Administrative template items with a management tool such as the Group Policy Management Console (GPMC). The Group Policy file share store can exist locally on the Group Policy server or remotely on a file share, where policy data is retrieved via a file access protocol. The [**Group Policy**](#gt_group-policy) protocols use file access protocols, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md) for file access operations
 
 Policy settings for Group Policy extensions are persisted in extension policy files on the Group Policy file share and/or in a GPO. These settings are retrieved for the application of extension policy settings on the Group Policy client. For more information about how extension settings are applied to a Group Policy client, refer to section [1.1.7.4](#Section_1.1.7.4).
 
@@ -280,7 +280,7 @@ Policy administration also applies to modifying and authoring [**Group Policy ex
 
 **Modifying extension settings:** GPOs that contain classes of settings for a specific [**Administrative tool extension**](#gt_administrative-tool-extensions) are identified by an [**Administrative tool extension GUID**](#gt_administrative-tool-extension-guid), which is used to invoke the extension protocol that can retrieve the associated settings from a GPO for updating. The retrieval process is facilitated by the Administrative tool, which invokes LDAP and a file access protocol to access the settings. After extension settings are edited, the Administrative tool sends an LDAP **modifyRequest** to update the logical component of a GPO and a file access open/write request to update the [**Group Policy file share**](#gt_group-policy-file-share) location where the extension policy files reside.
 
-**Authoring extension settings:** When authoring new extension settings for a new GPO, the Group Policy administrator first creates the new GPO by following the processes described in section [2.1.3.2.1](#Section_2.1.3.2.1.1). Thereafter, the Group Policy administrator can use the Administrative tool to author settings for an Administrative tool extension. When this occurs, the Administrative tool sends an LDAP **addRequest** to Active Directory to write the Administrative tool extension GUID and [**client-side extension GUID (CSE GUID)**](#gt_client-side-extension-guid-cse-guid) to the Extension lists of the GPO. These attributes enable the Group Policy client to determine which Group Policy extensions settings to apply to the Group Policy client during the policy application process.
+**Authoring extension settings:** When authoring new extension settings for a new GPO, the Group Policy administrator first creates the new GPO by following the processes described in section [2.1.3.2.1](#Section_2.1.3.2.1). Thereafter, the Group Policy administrator can use the Administrative tool to author settings for an Administrative tool extension. When this occurs, the Administrative tool sends an LDAP **addRequest** to Active Directory to write the Administrative tool extension GUID and [**client-side extension GUID (CSE GUID)**](#gt_client-side-extension-guid-cse-guid) to the Extension lists of the GPO. These attributes enable the Group Policy client to determine which Group Policy extensions settings to apply to the Group Policy client during the policy application process.
 
 **Configuring administrative template settings:** Policy administration includes the configuration of Administrative template settings that are accessible from a management tool such as the [**GPMC**](#gt_group-policy-management-console-gpmc). The Administrative template policy configurations generate [**registry**](#gt_registry) settings that are stored in the file registry.pol, which is located on the Group Policy file share. During policy application, this file is read by the Group Policy: Registry Extension Encoding protocol [MS-GPREG](../MS-GPREG/MS-GPREG.md), and its settings are applied to the Group Policy client registry.
 
@@ -295,7 +295,7 @@ The application of Group Policy is triggered by specific events, such as a user 
 
 **DC discovery**: The Group Policy client searches for a domain controller (DC) and connects to Active Directory. The communication details for this process are described in section [2.1.3.1.1](#Section_2.1.3.1.1).
 
-**DN discovery**: The Group Policy client attempts to discover the [**DN**](#gt_distinguished-name-dn) of the policy target, which is used in querying for applicable GPOs, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.2.
+**DN discovery**: The Group Policy client attempts to discover the [**DN**](#gt_distinguished-name-dn) of the policy target, which is used in querying for applicable GPOs, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.2.
 
 **Domain SOM search**: The Group Policy client queries the Group Policy server for any GPOs that are linked to the domain, which therefore applies to the Group Policy client policy target account. The communication details for this process are described in section [2.1.3.1.2](#Section_2.1.3.1.2).
 
@@ -339,7 +339,7 @@ The application of Group Policy in either computer policy mode or user policy mo
 <a id="Section_1.1.7.2"></a>
 #### 1.1.7.2 Discovering the Server and Applicable GPOs
 
-[**Policy application**](#gt_policy-application) starts with an initial discovery step by the [**Group Policy client**](#gt_group-policy-client) to locate a [**domain controller**](#gt_domain-controller-dc), as described in [MS-ADOD](#Section_2.1) (section 3.1.1). This step is necessary to identify the domain controller that contains the Group Policy Objects container for the [**domain**](#gt_domain) in which the Group Policy client resides. After locating a domain controller, the [**core Group Policy engine**](#gt_core-group-policy-engine) on the Group Policy client performs a set of [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) queries to [**Active Directory**](#gt_active-directory) on the [**Group Policy server**](#gt_group-policy-server).
+[**Policy application**](#gt_policy-application) starts with an initial discovery step by the [**Group Policy client**](#gt_group-policy-client) to locate a [**domain controller**](#gt_domain-controller-dc), as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) (section 3.1.1). This step is necessary to identify the domain controller that contains the Group Policy Objects container for the [**domain**](#gt_domain) in which the Group Policy client resides. After locating a domain controller, the [**core Group Policy engine**](#gt_core-group-policy-engine) on the Group Policy client performs a set of [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) queries to [**Active Directory**](#gt_active-directory) on the [**Group Policy server**](#gt_group-policy-server).
 
 The initial queries determine which [**GPOs**](#gt_group-policy-object-gpo) were assigned to the [**policy target**](#gt_policy-target) accounts by the [**Group Policy administrator**](#gt_group-policy-administrator), which include the domain computer account and the account of the user logged on to the Group Policy client. The remaining queries assemble the logical GPO from its component parts, which include the components stored in Active Directory and in the file system ([**Group Policy file share**](#gt_group-policy-file-share)), as described in sections [1.1.7.3](#Section_1.1.7.3) and [1.1.7.4](#Section_1.1.7.4).
 
@@ -394,7 +394,7 @@ All SOM containers have to maintain the following attributes:
 
 **gpLink:** A [**directory**](#gt_directory) string value for the **gpLink** attribute of the SOM container.
 
-**gpOptions:** An integer value that is used to set the Group Policy inheritance configuration among hierarchical SOM containers. For more information, see [MS-GPOL](#Section_2.1.1.1) section 2.2.2.
+**gpOptions:** An integer value that is used to set the Group Policy inheritance configuration among hierarchical SOM containers. For more information, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.2.
 
 **SOM object type:** Specifies the type of Active Directory container that the SOM represents; one of the following values is assigned to this attribute:
 
@@ -419,9 +419,9 @@ The Group Policy administrator uses the Active Directory container objects for t
 
 **Domain Controllers container:** A default container that is automatically created when a server is promoted to a [**domain controller**](#gt_domain-controller-dc). It is linked to the domain controller's [**OU**](#gt_organizational-unit-ou) and manages security settings for all domain controllers in a domain.
 
-**WMI Filters container:** A default container that is automatically created when a server is promoted to a domain controller. It holds [**WMI**](#gt_windows-management-instrumentation-wmi) filter objects that the Group Policy administrator creates and that are linked to GPOs to exempt specific [**Group Policy clients**](#gt_group-policy-client) from the extension policy settings that they hold. For information about evaluating WMI filters, refer to [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.7.
+**WMI Filters container:** A default container that is automatically created when a server is promoted to a domain controller. It holds [**WMI**](#gt_windows-management-instrumentation-wmi) filter objects that the Group Policy administrator creates and that are linked to GPOs to exempt specific [**Group Policy clients**](#gt_group-policy-client) from the extension policy settings that they hold. For information about evaluating WMI filters, refer to [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.7.
 
-**Group Policy Objects container:** A default container that is automatically created when a server is promoted to a domain controller. It provides a hierarchical repository for GPOs that the Group Policy administrator creates with the use of the [**Administrative tool**](#gt_administrative-tool). For more information about how GPOs are created, refer to section [2.1.3.2.1](#Section_2.1.3.2.1.1).
+**Group Policy Objects container:** A default container that is automatically created when a server is promoted to a domain controller. It provides a hierarchical repository for GPOs that the Group Policy administrator creates with the use of the [**Administrative tool**](#gt_administrative-tool). For more information about how GPOs are created, refer to section [2.1.3.2.1](#Section_2.1.3.2.1).
 
 **Default Domain Controllers Policy:** A default GPO that is automatically created and linked to the domain whenever a server is promoted to a domain controller. This GPO represents the default policy that is applied to all domain controllers in the Domain Controllers container.
 
@@ -444,7 +444,7 @@ Group Policy structure is similar to that of Active Directory, because it mainta
 - GPO status
 - [**Access control list (ACL)**](#gt_access-control-list-acl)
 - [**GUID**](#gt_globally-unique-identifier-guid)-references to the [**CSEs**](#gt_cses) that are to be invoked when the [**core Group Policy engine**](#gt_core-group-policy-engine) on the [**Group Policy client**](#gt_group-policy-client) processes the GPO.
-When the Group Policy administrator creates a GPO, Active Directory creates a Group Policy container object for that GPO, as described in section [2.1.3.2.1](#Section_2.1.3.2.1.1). This Group Policy container is a container object of the groupPolicyContainer class and is named with a GUID that identifies the GPO. The Group Policy container is stored under the CN=Policies,CN=System container within the domain. The Administrative tool and the Group Policy client locate this container according to its DN, which is the exact path to the Group Policy container object in the Active Directory data store.
+When the Group Policy administrator creates a GPO, Active Directory creates a Group Policy container object for that GPO, as described in section [2.1.3.2.1](#Section_2.1.3.2.1). This Group Policy container is a container object of the groupPolicyContainer class and is named with a GUID that identifies the GPO. The Group Policy container is stored under the CN=Policies,CN=System container within the domain. The Administrative tool and the Group Policy client locate this container according to its DN, which is the exact path to the Group Policy container object in the Active Directory data store.
 
 **Physical component**: Consists of the Group Policy file share component that stores GPT and Group Policy extension settings on a domain controller or other server.
 
@@ -457,7 +457,7 @@ Whenever the [**Group Policy administrator**](#gt_group-policy-administrator) cr
 
 The [**GPO**](#gt_group-policy-object-gpo) configuration model accommodates settings for users and computers, and includes Software, Windows, and Administrative Templates settings for both user and computer configurations. Software settings enable the [**Group Policy administrator**](#gt_group-policy-administrator) to specify software applications to be installed on [**Group Policy client**](#gt_group-policy-client) computers; Windows settings hold the extension configurations; and Administrative Templates represents Group Policy client subsystems for which [**registry**](#gt_registry) settings can be configured.
 
-[**Policy targets**](#gt_policy-target) in [**Active Directory**](#gt_active-directory) are individual user and computer accounts that exist within [**domain**](#gt_domain), [**site**](#gt_site), or [**OU**](#gt_organizational-unit-ou) containers. Each site, domain, and OU has a **gpLink** attribute that associates it with one or more Group Policy container objects, which represent GPOs in Active Directory. Each GPO contains various attributes that are associated with users and computers. This includes an attribute that specifies the [**GPO path**](#gt_group-policy-object-gpo-path) to policy files that store user and computer [**policy settings**](#gt_policy-setting). The file system component of a GPO itself is configured with [**directories**](#gt_directory) that hold policy data for users and computers. Therefore, when the Group Policy administrator views a GPO in a management interface such as the [**GPMC**](#gt_group-policy-management-console-gpmc), two different sets of configuration settings are provided, as shown in the diagram of section [2.1.3.2.2](#Section_2.1.3.2.2.2):
+[**Policy targets**](#gt_policy-target) in [**Active Directory**](#gt_active-directory) are individual user and computer accounts that exist within [**domain**](#gt_domain), [**site**](#gt_site), or [**OU**](#gt_organizational-unit-ou) containers. Each site, domain, and OU has a **gpLink** attribute that associates it with one or more Group Policy container objects, which represent GPOs in Active Directory. Each GPO contains various attributes that are associated with users and computers. This includes an attribute that specifies the [**GPO path**](#gt_group-policy-object-gpo-path) to policy files that store user and computer [**policy settings**](#gt_policy-setting). The file system component of a GPO itself is configured with [**directories**](#gt_directory) that hold policy data for users and computers. Therefore, when the Group Policy administrator views a GPO in a management interface such as the [**GPMC**](#gt_group-policy-management-console-gpmc), two different sets of configuration settings are provided, as shown in the diagram of section [2.1.3.2.2](#Section_2.1.3.2.2):
 
 **User Configuration:** Contains all information related to user policies that Group Policy clients retrieve during [**policy application**](#gt_policy-application) in user policy mode, which includes data for the applicable [**CSEs**](#gt_cses). These CSEs store all server state for policy settings within the user configuration, in a format that is described in corresponding extension specifications.
 
@@ -477,7 +477,7 @@ This document uses the following terms:
 **access control list (ACL)**: A list of [**access control entries (ACEs)**](#gt_access-control-entry-ace) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-directory-domain-services-ad-ds"></a>
 **Active Directory Domain Services (AD DS)**: A [**directory service (DS)**](#gt_directory-service-ds) implemented by a [**domain controller (DC)**](#gt_domain-controller-dc). The [**DS**](#gt_directory-service-ds) provides a data store for objects that is distributed across multiple [**DCs**](#gt_domain-controller-dc). The [**DCs**](#gt_domain-controller-dc) interoperate as peers to ensure that a local change to an object replicates correctly across [**DCs**](#gt_domain-controller-dc). AD DS is a deployment of [**Active Directory**](#gt_active-directory) [MS-ADTS](../MS-ADTS/MS-ADTS.md).
@@ -507,7 +507,7 @@ This document uses the following terms:
 **configuration naming context (config NC)**: A specific type of naming context (NC), or an instance of that type, that contains configuration information. In [**Active Directory**](#gt_active-directory), a single [**config NC**](#gt_configuration-naming-context-config-nc) is shared among all [**domain controllers (DCs)**](#gt_domain-controller-dc) in the forest. A [**config NC**](#gt_configuration-naming-context-config-nc) cannot contain security principal objects.
 
 <a id="gt_core-group-policy-engine"></a>
-**core Group Policy engine**: The software entity that implements the Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1). The core Group Policy engine issues the message sequences that result in core protocol network traffic during policy application on [**Group Policy clients**](#gt_group-policy-client). The engine handles functions on behalf of the core protocol such as the Group Policy refresh interval, [**GPO**](#gt_group-policy-object-gpo) and policy file access, GPO filtering and ordering, and invoking transport protocols for retrieving and storing policy settings.
+**core Group Policy engine**: The software entity that implements the Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md). The core Group Policy engine issues the message sequences that result in core protocol network traffic during policy application on [**Group Policy clients**](#gt_group-policy-client). The engine handles functions on behalf of the core protocol such as the Group Policy refresh interval, [**GPO**](#gt_group-policy-object-gpo) and policy file access, GPO filtering and ordering, and invoking transport protocols for retrieving and storing policy settings.
 
 <a id="gt_directory"></a>
 **directory**: The database that stores information about objects such as users, groups, computers, printers, and the [**directory service**](#gt_directory-service-ds) that makes this information available to users and applications.
@@ -519,7 +519,7 @@ This document uses the following terms:
 **distinguished name (DN)**: A name that uniquely identifies an object by using the relative distinguished name (RDN) for the object, and the names of container objects and domains that contain the object. The distinguished name (DN) identifies the object and its location in a tree.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set must act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_2.1) section 1.1.1.5 and [MS-ADTS].
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set must act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS].
 
 <a id="gt_domain-controller-dc"></a>
 **domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the [**configuration naming context (config NC)**](#gt_configuration-naming-context-config-nc), schema naming context (schema NC), and one of the [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). If the [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds), only one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the [**config NC**](#gt_configuration-naming-context-config-nc) and the schema NC in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
@@ -629,17 +629,17 @@ This document uses the following terms:
 <a id="Section_1.3"></a>
 ## 1.3 References
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_2.1)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_2.1)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
 [MS-GPAC] Microsoft Corporation, "[Group Policy: Audit Configuration Extension](../MS-GPAC/MS-GPAC.md)".
 
@@ -649,25 +649,25 @@ This document uses the following terms:
 
 [MS-GPEF] Microsoft Corporation, "[Group Policy: Encrypting File System Extension](../MS-GPEF/MS-GPEF.md)".
 
-[MS-GPFAS] Microsoft Corporation, "[Group Policy: Firewall and Advanced Security Data Structure](#Section_2.9)".
+[MS-GPFAS] Microsoft Corporation, "[Group Policy: Firewall and Advanced Security Data Structure](../MS-GPFAS/MS-GPFAS.md)".
 
 [MS-GPFR] Microsoft Corporation, "[Group Policy: Folder Redirection Protocol Extension](../MS-GPFR/MS-GPFR.md)".
 
 [MS-GPIE] Microsoft Corporation, "[Group Policy: Internet Explorer Maintenance Extension](../MS-GPIE/MS-GPIE.md)".
 
-[MS-GPIPSEC] Microsoft Corporation, "[Group Policy: IP Security (IPsec) Protocol Extension](#Section_2.9)".
+[MS-GPIPSEC] Microsoft Corporation, "[Group Policy: IP Security (IPsec) Protocol Extension](../MS-GPIPSEC/MS-GPIPSEC.md)".
 
 [MS-GPNAP] Microsoft Corporation, "[Group Policy: Network Access Protection (NAP) Extension](../MS-GPNAP/MS-GPNAP.md)".
 
 [MS-GPNRPT] Microsoft Corporation, "[Group Policy: Name Resolution Policy Table (NRPT) Data Extension](../MS-GPNRPT/MS-GPNRPT.md)".
 
-[MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](#Section_2.1.1.1)".
+[MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](../MS-GPOL/MS-GPOL.md)".
 
-[MS-GPPREF] Microsoft Corporation, "[Group Policy: Preferences Extension Data Structure](#Section_1.3)".
+[MS-GPPREF] Microsoft Corporation, "[Group Policy: Preferences Extension Data Structure](../MS-GPPREF/MS-GPPREF.md)".
 
 [MS-GPREG] Microsoft Corporation, "[Group Policy: Registry Extension Encoding](../MS-GPREG/MS-GPREG.md)".
 
-[MS-GPSB] Microsoft Corporation, "[Group Policy: Security Protocol Extension](#Section_2.9)".
+[MS-GPSB] Microsoft Corporation, "[Group Policy: Security Protocol Extension](../MS-GPSB/MS-GPSB.md)".
 
 [MS-GPSCR] Microsoft Corporation, "[Group Policy: Scripts Extension Encoding](../MS-GPSCR/MS-GPSCR.md)".
 
@@ -681,7 +681,7 @@ This document uses the following terms:
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
-[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](#Section_2.1)".
+[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](../MS-PRSOD/MS-PRSOD.md)".
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
@@ -689,7 +689,7 @@ This document uses the following terms:
 
 [MS-WMI] Microsoft Corporation, "[Windows Management Instrumentation Remote Protocol](../MS-WMI/MS-WMI.md)".
 
-[MS-WSUSOD] Microsoft Corporation, "[Windows Server Update Services Protocols Overview](#Section_2.1)".
+[MS-WSUSOD] Microsoft Corporation, "[Windows Server Update Services Protocols Overview](../MS-WSUSOD/MS-WSUSOD.md)".
 
 [MS-WUSP] Microsoft Corporation, "[Windows Update Services: Client-Server Protocol](../MS-WUSP/MS-WUSP.md)".
 
@@ -740,12 +740,12 @@ System administrators are required to provide consistency among groups of comput
 
 As the enabling technology in Windows, Group Policy allows programs and administrators to use [**Active Directory**](#gt_active-directory) as an infrastructure to centralize network administration, centrally define management policy, and delegate administrative authority. Users, computers, devices, and resources are represented as objects in Active Directory. With Group Policy, administrators can target [**policy settings**](#gt_policy-setting) on everything from users and computers to individual objects throughout the Active Directory hierarchy.
 
-Group Policy depends on a domain-joined environment, as described in section [2.4](#Section_2.4). In this environment, the Group Policy protocols enable a [**Group Policy client**](#gt_group-policy-client) to retrieve [**GPO**](#gt_group-policy-object-gpo) metadata and policy settings from a [**Group Policy server**](#gt_group-policy-server), and it enables the [**Administrative tool**](#gt_administrative-tool) to create, retrieve, update, and delete policy settings. The Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1) provides the core functionality of Group Policy, as described in section [1.1.1](../MS-GPOL/MS-GPOL.md). Group Policy functionality is extensible on both the client side ([**policy application**](#gt_policy-application)) and the administrative side (policy administration).
+Group Policy depends on a domain-joined environment, as described in section [2.4](#Section_2.4). In this environment, the Group Policy protocols enable a [**Group Policy client**](#gt_group-policy-client) to retrieve [**GPO**](#gt_group-policy-object-gpo) metadata and policy settings from a [**Group Policy server**](#gt_group-policy-server), and it enables the [**Administrative tool**](#gt_administrative-tool) to create, retrieve, update, and delete policy settings. The Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md) provides the core functionality of Group Policy, as described in section [1.1.1](#Section_1.1.1). Group Policy functionality is extensible on both the client side ([**policy application**](#gt_policy-application)) and the administrative side (policy administration).
 
 <a id="Section_2.1.1.1"></a>
 #### 2.1.1.1 Core Protocol
 
-The Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1) is the main [**Group Policy**](#gt_group-policy) protocol. It is a client/server protocol that allows clients to discover and retrieve [**policy settings**](#gt_policy-setting) created by [**Group Policy administrators**](#gt_group-policy-administrator). Policy settings are the directives that Group Policy administrators employ to control client behavior. Section [1.1.1](../MS-GPOL/MS-GPOL.md) describes the Group Policy: Core Protocol in more detail.
+The Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md) is the main [**Group Policy**](#gt_group-policy) protocol. It is a client/server protocol that allows clients to discover and retrieve [**policy settings**](#gt_policy-setting) created by [**Group Policy administrators**](#gt_group-policy-administrator). Policy settings are the directives that Group Policy administrators employ to control client behavior. Section [1.1.1](#Section_1.1.1) describes the Group Policy: Core Protocol in more detail.
 
 <a id="Section_2.1.1.2"></a>
 #### 2.1.1.2 Extensible Architecture
@@ -775,7 +775,7 @@ The Administrative tool, along with its associated extensions, can be located an
 
 **Note** All Group Policy server SKUs, and Group Policy clients with Remote Server Administration Tools [[MSDN-RSATW7]](https://go.microsoft.com/fwlink/?LinkId=220457) installed, have the Administrative tool and extensions.
 
-**Group Policy client:** The client computer on which Group Policy settings are applied by invoking the [**core Group Policy engine**](#gt_core-group-policy-engine) and the [**CSEs**](#gt_cses). The Group Policy client communicates with [**Group Policy data store**](#gt_group-policy-data-store) components, which includes the Active Directory and Group Policy file share data stores, via the Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1), as implemented by the core Group Policy engine on the client computer.
+**Group Policy client:** The client computer on which Group Policy settings are applied by invoking the [**core Group Policy engine**](#gt_core-group-policy-engine) and the [**CSEs**](#gt_cses). The Group Policy client communicates with [**Group Policy data store**](#gt_group-policy-data-store) components, which includes the Active Directory and Group Policy file share data stores, via the Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md), as implemented by the core Group Policy engine on the client computer.
 
 **Group Policy Extensions:** Consist of CSE and [**Administrative tool extension**](#gt_administrative-tool-extensions) protocols that enhance the base functionality of Group Policy. Extension data is typically read from and written to Group Policy data store components.
 
@@ -814,9 +814,9 @@ Group Policy makes use of several protocols to facilitate communications among i
 The [**Administrative tool**](#gt_administrative-tool) uses the following communication protocols:
 
 - [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) and a file access protocol for accessing [**Group Policy data store**](#gt_group-policy-data-store) components, which includes the [**Active Directory**](#gt_active-directory) data store on the [**Group Policy server**](#gt_group-policy-server) and the [**Group Policy file share**](#gt_group-policy-file-share) data store.
-- [**DNS**](#gt_domain-name-system-dns), as described in [MS-ADOD](#Section_2.1) section 3.1.1, for locating a [**domain controller**](#gt_domain-controller-dc).
+- [**DNS**](#gt_domain-name-system-dns), as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 3.1.1, for locating a [**domain controller**](#gt_domain-controller-dc).
 - Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) or NT LAN Manager (NTLM) Authentication Protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md), as described in [MS-SPNG](../MS-SPNG/MS-SPNG.md), for authenticating to the Group Policy server.
-- Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1), for invoking and processing [**Administrative tool extensions**](#gt_administrative-tool-extensions) via the Administrative tool.
+- Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md), for invoking and processing [**Administrative tool extensions**](#gt_administrative-tool-extensions) via the Administrative tool.
 **Group Policy Client Communication Protocols**
 
 The [**Group Policy client**](#gt_group-policy-client) uses the following communication protocols:
@@ -848,7 +848,7 @@ The Group Policy data store uses the following communication protocols:
 - File access protocol, when access is required for updating and retrieving user and computer policy settings, and GPO version information, on the Group Policy file share.
 The protocols and services that enable communications between Group Policy components are described as follows:
 
-**Authentication protocols:** Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are provided by NTLM, specified in [MS-NLMP], or Kerberos, as specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and [MS-KILE], to secure communications within the Group Policy protocols. These protocols also provides authentication services that support the client-to-server communication within and outside Group Policy. This includes the use of the Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Protocol Extensions as described in [MS-SPNG], which facilitate a secure environment while negotiating which authentication protocol the Group Policy protocols use: either NTLM [MS-NLMP] or Kerberos [RFC4120], as described in [MS-SPNG], section 1.5.
+**Authentication protocols:** Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are provided by NTLM, specified in [MS-NLMP], or Kerberos, as specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and [MS-KILE], to secure communications within the Group Policy protocols. These protocols also provides authentication services that support the client-to-server communication within and outside Group Policy. This includes the use of the Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Protocol Extensions as described in [MS-SPNG], which facilitate a secure environment while negotiating which authentication protocol the Group Policy protocols use: either NTLM [MS-NLMP] or Kerberos [RFC4120], as described in [MS-SPNG], section 1.5.
 
 **DNS Server:** DNS, as specified in [[RFC1034]](https://go.microsoft.com/fwlink/?LinkId=90263) and [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264), is used by both the Group Policy client and the Administrative tool to discover the location of the Group Policy server.
 
@@ -876,9 +876,9 @@ The general functions of Group Policy components as follows:
 - Accessing [**policy settings**](#gt_policy-setting) on the [**Group Policy file share**](#gt_group-policy-file-share).
 - Filtering and ordering GPOs
 - Providing notification of Group Policy changes.
-**Extension protocols:** Consist of [**CSE**](#gt_cses) and [**Administrative tool extension**](#gt_administrative-tool-extensions) protocols that extend Group Policy application functionality. Note that implementers can create their own custom extension protocols, as described in [MS-GPOL](#Section_2.1.1.1), section 1.8.
+**Extension protocols:** Consist of [**CSE**](#gt_cses) and [**Administrative tool extension**](#gt_administrative-tool-extensions) protocols that extend Group Policy application functionality. Note that implementers can create their own custom extension protocols, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md), section 1.8.
 
-In the preceding diagram, the color-code scheme indicates that most [**Group Policy extension**](#gt_group-policy-extension) protocols implement both an administrative-side and a client-side extension. However, the Group Policy: Firewall and Advanced Security Data Structure defined in [MS-GPFAS](#Section_2.9), implements only an administrative-side extension. For additional information about administrative-side and client-side extensions, see sections [1.1.4](../MS-GPFAS/MS-GPFAS.md) and [2.2](../MS-GPFAS/MS-GPFAS.md).
+In the preceding diagram, the color-code scheme indicates that most [**Group Policy extension**](#gt_group-policy-extension) protocols implement both an administrative-side and a client-side extension. However, the Group Policy: Firewall and Advanced Security Data Structure defined in [MS-GPFAS](../MS-GPFAS/MS-GPFAS.md), implements only an administrative-side extension. For additional information about administrative-side and client-side extensions, see sections [1.1.4](#Section_1.1.4) and [2.2](#Section_2.2).
 
 **Group Policy file share:** An implementation-specific version of a file share location. The Group Policy file share location and its internal [**directory**](#gt_directory) structure are shared with all [**Group Policy clients**](#gt_group-policy-client) and can be replicated to other peers in a multimaster topology.
 
@@ -908,7 +908,7 @@ The Group Policy server maintains state via two [**Group Policy data store**](#g
 
 These data stores are modified as a result of changes made when authoring or modifying [**policy settings**](#gt_policy-setting) with the [**Administrative tool**](#gt_administrative-tool). In addition, [**Group Policy clients**](#gt_group-policy-client) use these repositories as read-only stores during the [**policy application**](#gt_policy-application) process.
 
-For more information about the Group Policy server, including how GPOs are structured, see [MS-GPOL](#Section_2.1.1.1) section 3.1.
+For more information about the Group Policy server, including how GPOs are structured, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.1.
 
 <a id="Section_2.1.2.3.2"></a>
 ##### 2.1.2.3.2 Group Policy Client
@@ -919,7 +919,7 @@ The core Group Policy engine has the task of managing various functionalities on
 
 - Applying Group Policy at regular intervals, as described in sections [2.8.1](#Section_2.8.1) and [2.8.2](#Section_2.8.2).
 - Accessing [**GPO**](#gt_group-policy-object-gpo) attribute information from the appropriate locations in [**Active Directory**](#gt_active-directory) and accessing [**policy settings**](#gt_policy-setting) on the [**Group Policy file share**](#gt_group-policy-file-share).
-- Handling special cases that affect all CSEs, such as loopback mode, are described in [MS-GPOL](#Section_2.1.1.1) section 3.2.1.3.
+- Handling special cases that affect all CSEs, such as loopback mode, are described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.1.3.
 - Appropriately filtering and ordering GPOs, as described in [MS-GPOL] sections 3.2.5.1.6 and 3.2.5.1.7.
 - Invoking extension protocol sequences, as described in [MS-GPOL] section 3.2.5.1.10.
 - Maintaining version numbers and histories for all CSEs.
@@ -927,7 +927,7 @@ The core Group Policy engine has the task of managing various functionalities on
 - Notifying various components of changes made by Group Policy. The core Group Policy engine is responsible for this activity after the completion of policy processing.
 The basic communication flow that is associated with the Group Policy client consists of the following:
 
-- The Group Policy client locates a [**domain controller**](#gt_domain-controller-dc) ([**Group Policy server**](#gt_group-policy-server)), as described in [MS-ADOD](#Section_2.1) (section 3.1.1).
+- The Group Policy client locates a [**domain controller**](#gt_domain-controller-dc) ([**Group Policy server**](#gt_group-policy-server)), as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) (section 3.1.1).
 - The Group Policy client uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to query the Group Policy server for a list of GPOs, as described in [MS-GPOL] section 3.2.5.1.5.
 - For each object in the GPO list, the Group Policy client queries the Group Policy server for the GPO's attributes, using LDAP and a file access protocol, as described in [MS-GPOL] sections 3.2.5.1.5, 3.2.5.1.6, and 3.2.5.1.7.
 - Based on the [**GUIDs**](#gt_globally-unique-identifier-guid) in the Extension list of GPOs, the core Group Policy engine on the Group Policy client invokes the appropriate CSEs ([MS-GPOL] section 3.2.5.1.10).
@@ -937,17 +937,17 @@ The basic communication flow that is associated with the Group Policy client con
 
 The [**Administrative tool**](#gt_administrative-tool) facilitates the creation, deletion, and modification of [**Group Policy**](#gt_group-policy) settings. It also enables the [**Group Policy administrator**](#gt_group-policy-administrator) to define the manner in which [**policy settings**](#gt_policy-setting) are to be applied, by creating the [**SOM**](#gt_scope-of-management-som) configuration and [**GPO**](#gt_group-policy-object-gpo) precedence order.
 
-The Administrative tool uses the same set of protocols to discover the [**Group Policy server**](#gt_group-policy-server) and the same extensions when authoring policy as the [**Group Policy client**](#gt_group-policy-client) uses to discover the Group Policy server and apply policy settings. An overview of communication and authoring processes is provided in section [2.1.3.2.1](#Section_2.1.3.2.1.1).
+The Administrative tool uses the same set of protocols to discover the [**Group Policy server**](#gt_group-policy-server) and the same extensions when authoring policy as the [**Group Policy client**](#gt_group-policy-client) uses to discover the Group Policy server and apply policy settings. An overview of communication and authoring processes is provided in section [2.1.3.2.1](#Section_2.1.3.2.1).
 
 The basic communication flow associated with the Administrative tool consists of the following:
 
-- The Administrative tool locates the [**domain controller**](#gt_domain-controller-dc) (Group Policy server) as specified in [MS-ADOD](#Section_2.1) section 3.1.1.
+- The Administrative tool locates the [**domain controller**](#gt_domain-controller-dc) (Group Policy server) as specified in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 3.1.1.
 - The Administrative tool uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to query [**Active Directory**](#gt_active-directory) on the Group Policy server for the retrieval of GPO attributes.
 - The [**core Group Policy engine**](#gt_core-group-policy-engine) on the computer that hosts the Administrative tool invokes an [**Administrative tool extension**](#gt_administrative-tool-extensions), via a [**GUID**](#gt_globally-unique-identifier-guid) that is specified in the GPO Extension list.
 - The Administrative tool extension retrieves Group Policy attributes from the logical component of a GPO by using LDAP to query Active Directory on the Group Policy server, as described in section [1.1.6](#Section_1.1.6).
 - The Administrative tool extension retrieves policy settings from the file system component of the GPO by using a file access protocol to query the appropriate [**Group Policy file share**](#gt_group-policy-file-share) [**directory**](#gt_directory) locations.
 - The extension uses LDAP or a file access protocol to update Group Policy attributes in Active Directory on the Group Policy server and extension and template setting changes on the Group Policy file share, respectively.
-- The Administrative tool uses LDAP to update version information for the GPO in Active Directory and uses a file access protocol to update version information in the gpt.ini file on the Group Policy file share. This is described in detail in [MS-GPOL](#Section_2.1.1.1) section 3.3.4.1.
+- The Administrative tool uses LDAP to update version information for the GPO in Active Directory and uses a file access protocol to update version information in the gpt.ini file on the Group Policy file share. This is described in detail in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.4.1.
 <a id="Section_2.1.3"></a>
 ### 2.1.3 Group Policy Communication Process Details
 
@@ -973,7 +973,7 @@ Figure 7: Policy application process
 
 The [**Group Policy client**](#gt_group-policy-client) locates the [**Group Policy server**](#gt_group-policy-server) by discovering the location where the [**Active Directory**](#gt_active-directory) data store resides, and through an associated [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) lookup, locates the file system share where the extension policy files reside. In the Microsoft implementation, both the Active Directory data store and file system share ([**SYSVOL**](#gt_system-volume-sysvol)) are located on the Group Policy server, which is the [**domain controller**](#gt_domain-controller-dc).
 
-The process of locating a domain controller (Group Policy server) is specified in [MS-ADOD](#Section_2.1) sections 2.5 and 3.1.1.
+The process of locating a domain controller (Group Policy server) is specified in [MS-ADOD](../MS-ADOD/MS-ADOD.md) sections 2.5 and 3.1.1.
 
 <a id="Section_2.1.3.1.2"></a>
 ##### 2.1.3.1.2 Domain SOM Search and Response
@@ -982,14 +982,14 @@ The process of locating a domain controller (Group Policy server) is specified i
 
 The Group Policy server processes the information that is provided as part of the request for the domain SOM and returns an object with **gpLink** and **gpOptions** attribute information to the Group Policy client along with the [**DN**](#gt_distinguished-name-dn) to which it applies.
 
-The **gpLink** attribute retrieved from the domain container in Active Directory holds LDAP DNs for GPOs that are associated with domain-level SOM. This information enables the [**policy application**](#gt_policy-application) process to determine GPO names, the policy file location on the [**Group Policy file share**](#gt_group-policy-file-share), and any extensions that are specified in the GPO extension lists, all of which apply to domain-level SOM. For information about the corresponding **gpLink** and **gpOptions** ADM elements, see [MS-GPOL](#Section_2.1.1.1) section 3.2.1.6.
+The **gpLink** attribute retrieved from the domain container in Active Directory holds LDAP DNs for GPOs that are associated with domain-level SOM. This information enables the [**policy application**](#gt_policy-application) process to determine GPO names, the policy file location on the [**Group Policy file share**](#gt_group-policy-file-share), and any extensions that are specified in the GPO extension lists, all of which apply to domain-level SOM. For information about the corresponding **gpLink** and **gpOptions** ADM elements, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.1.6.
 
 The domain SOM data is added to an **SOM list** maintained by the Group Policy client. For information about the **SOM list** ADM element, see [MS-GPOL] section 3.2.1.6.
 
 <a id="Section_2.1.3.1.3"></a>
 ##### 2.1.3.1.3 Site SOM Search and Response
 
-After the [**Group Policy client**](#gt_group-policy-client) has determined its [**domain**](#gt_domain) [**SOM**](#gt_scope-of-management-som), it then uses a [**site**](#gt_site) search message, as described in [MS-GPOL](#Section_2.1.1.1) sections 2.2.3 and 3.2.5.1.4, to determine the site to which the computer belongs. The name of the site to which the Group Policy client computer belongs is maintained by the client **site name** ADM element, as described in [MS-ADOD](#Section_2.1) section 3.1.1. Because the site can change based on the Group Policy client's location, the **site name** ADM element is maintained as part of policy processing.
+After the [**Group Policy client**](#gt_group-policy-client) has determined its [**domain**](#gt_domain) [**SOM**](#gt_scope-of-management-som), it then uses a [**site**](#gt_site) search message, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) sections 2.2.3 and 3.2.5.1.4, to determine the site to which the computer belongs. The name of the site to which the Group Policy client computer belongs is maintained by the client **site name** ADM element, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 3.1.1. Because the site can change based on the Group Policy client's location, the **site name** ADM element is maintained as part of policy processing.
 
 After the Group Policy client has the site to which it belongs, it makes an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) query for the same attributes that a domain SOM search does. These are the **gpLink** and **gpOptions** attributes, although the Group Policy client also passes the site name that it has discovered in this LDAP query. The [**Group Policy server**](#gt_group-policy-server) returns the **gpLink** and **gpOptions** attribute values that apply to the Group Policy client for processing.
 
@@ -1002,7 +1002,7 @@ If the site search message specified in [MS-GPOL] section 2.2.3 is invalid in an
 
 After the [**Group Policy client**](#gt_group-policy-client) has computed the [**domain**](#gt_domain) [**SOM**](#gt_scope-of-management-som) and configured the **SOM list**, the Group Policy client searches for the [**GPOs**](#gt_group-policy-object-gpo) that apply to it.
 
-The search for GPOs involves the Group Policy client creating a prioritized list of GPOs, as described in [MS-GPOL](#Section_2.1.1.1) sections 3.2.5.1.5, 3.2.5.1.6, and 3.2.5.1.7, and sending an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) query that contains this list to the [**Group Policy server**](#gt_group-policy-server). The Group Policy server returns an LDAP reply with further attribute information about each queried GPO, as described in [MS-GPOL] section 2.2.4. These attributes describe the GPO display name, the location of the policy file on the [**Group Policy file share**](#gt_group-policy-file-share), extensions used in that policy file, a security descriptor, an enabled flag, denial status, and any [**WMI**](#gt_windows-management-instrumentation-wmi) filters that might apply to the GPO.
+The search for GPOs involves the Group Policy client creating a prioritized list of GPOs, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) sections 3.2.5.1.5, 3.2.5.1.6, and 3.2.5.1.7, and sending an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) query that contains this list to the [**Group Policy server**](#gt_group-policy-server). The Group Policy server returns an LDAP reply with further attribute information about each queried GPO, as described in [MS-GPOL] section 2.2.4. These attributes describe the GPO display name, the location of the policy file on the [**Group Policy file share**](#gt_group-policy-file-share), extensions used in that policy file, a security descriptor, an enabled flag, denial status, and any [**WMI**](#gt_windows-management-instrumentation-wmi) filters that might apply to the GPO.
 
 This LDAP query message requires the success of all previous messages that have retrieved SOM data and a **gpLink** attribute that is associated with each SOM, and this information is stored in the **SOM list**. If this message is invalid, the entire [**policy application**](#gt_policy-application) sequence is terminated, and the Group Policy client must not generate further policy application messages for this GPO processing sequence.
 
@@ -1017,7 +1017,7 @@ For each GPO that is successfully retrieved in each search, the Group Policy cli
 <a id="Section_2.1.3.1.5"></a>
 ##### 2.1.3.1.5 WMI Filter Processing
 
-When the [**Group Policy client**](#gt_group-policy-client) has processed the [**GPO**](#gt_group-policy-object-gpo) attributes returned by the [**Group Policy server**](#gt_group-policy-server) and has determined that a policy object has a [**WMI**](#gt_windows-management-instrumentation-wmi) query that applies to a GPO, the Group Policy client also has the location of that WMI filter in [**Active Directory**](#gt_active-directory). The Group Policy client then uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to query the Group Policy server for the WMI query by passing into the query the required location and attributes, as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.5.
+When the [**Group Policy client**](#gt_group-policy-client) has processed the [**GPO**](#gt_group-policy-object-gpo) attributes returned by the [**Group Policy server**](#gt_group-policy-server) and has determined that a policy object has a [**WMI**](#gt_windows-management-instrumentation-wmi) query that applies to a GPO, the Group Policy client also has the location of that WMI filter in [**Active Directory**](#gt_active-directory). The Group Policy client then uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to query the Group Policy server for the WMI query by passing into the query the required location and attributes, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.5.
 
 The Group Policy server replies with an LDAP response that returns the necessary attribute information, as described in [MS-GPOL] section 2.2.5. The Group Policy client processes the WMI query to determine which GPOs apply to it, as indicated by the WMI query.
 
@@ -1026,7 +1026,7 @@ If the WMI query cannot be evaluated due to a local Group Policy client error, t
 <a id="Section_2.1.3.1.6"></a>
 ##### 2.1.3.1.6 Link Speed Determination
 
-The [**Group Policy client**](#gt_group-policy-client) estimates the link speed of the network between the Group Policy client and [**Group Policy**](#gt_group-policy) by implementation-specific means. See [MS-GPOL](#Section_2.1.1.1) section 2.2.6 for link speed determination. The implementation can send a message to determine link speed by using ICMP as a transport, but it must support at least 500-byte packets, as described in [[RFC792]](https://go.microsoft.com/fwlink/?LinkId=90492). If the determined link speed ([MS-GPOL] section 3.2.5.1.9) is below an implementation-defined threshold, the implementation should not invoke any bandwidth-intensive protocol extension sequence. See [MS-GPOL] section 3.2.5.1.10 for more information.
+The [**Group Policy client**](#gt_group-policy-client) estimates the link speed of the network between the Group Policy client and [**Group Policy**](#gt_group-policy) by implementation-specific means. See [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.6 for link speed determination. The implementation can send a message to determine link speed by using ICMP as a transport, but it must support at least 500-byte packets, as described in [[RFC792]](https://go.microsoft.com/fwlink/?LinkId=90492). If the determined link speed ([MS-GPOL] section 3.2.5.1.9) is below an implementation-defined threshold, the implementation should not invoke any bandwidth-intensive protocol extension sequence. See [MS-GPOL] section 3.2.5.1.10 for more information.
 
 <a id="Section_2.1.3.1.7"></a>
 ##### 2.1.3.1.7 Policy File Read Operation
@@ -1048,7 +1048,7 @@ By using the specific extensions that are relevant to the GPO, the Group Policy 
 
 When authoring new [**GPOs**](#gt_group-policy-object-gpo) with the [**Administrative tool**](#gt_administrative-tool), the [**Group Policy administrator**](#gt_group-policy-administrator) follows the same initial steps of the protocol sequence that occurs during [**Group Policy client**](#gt_group-policy-client) operations:
 
-- Locate a [**Group Policy server**](#gt_group-policy-server), as specified in section [2.1.3.1.1](#Section_2.1.3.1.1) and [MS-ADOD](#Section_2.1) (section 3.1.1).
+- Locate a [**Group Policy server**](#gt_group-policy-server), as specified in section [2.1.3.1.1](#Section_2.1.3.1.1) and [MS-ADOD](../MS-ADOD/MS-ADOD.md) (section 3.1.1).
 - Initiate an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **BindRequest** and **BindResponse**, as specified in section [2.1.3.1.2](#Section_2.1.3.1.2).
 Thereafter, to complete the GPO configuration, the [**Active Directory**](#gt_active-directory) containers and file system components of the GPO have to be created, and various GPO attributes have to be set.
 
@@ -1057,7 +1057,7 @@ Thereafter, to complete the GPO configuration, the [**Active Directory**](#gt_ac
 
 To construct a [**GPO**](#gt_group-policy-object-gpo) after the preceding initial protocol sequence, it is necessary to create a Group Policy container object for the GPO in [**Active Directory**](#gt_active-directory) on the [**Group Policy server**](#gt_group-policy-server). The Group Policy container for a GPO is an object of the *groupPolicyContainer* class. The Group Policy container is typically created in the *Group Policy Objects* container within the [**domain**](#gt_domain); it is then linked to the domain container. Following creation of the Group Policy container object, GPO *User* and *Machine* subcontainers have to be created to complete the Active Directory components of the GPO.
 
-To create the Group Policy container for a GPO, the [**Administrative tool**](#gt_administrative-tool) sends [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) messages to the Group Policy server. The first message is an LDAP **addRequest** that follows the format specified in [MS-GPOL](#Section_2.1.1.1) section 2.2.8.1.4, to create a Policies container. Additional LDAP messages, as specified in [MS-GPOL] sections 2.2.8.1.5, 2.2.8.1.6, and 2.2.8.1.7, are then required for each of the following:
+To create the Group Policy container for a GPO, the [**Administrative tool**](#gt_administrative-tool) sends [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) messages to the Group Policy server. The first message is an LDAP **addRequest** that follows the format specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.8.1.4, to create a Policies container. Additional LDAP messages, as specified in [MS-GPOL] sections 2.2.8.1.5, 2.2.8.1.6, and 2.2.8.1.7, are then required for each of the following:
 
 - GPO **addRequest**
 - GPO *User* subcontainer **addRequest**
@@ -1080,7 +1080,7 @@ The following steps create the GPO path directory and gpt.ini file on the Group 
 - Send a **Close** request by using SPNEGO for authentication, as described in [MS-SPNG].
 - Send an **Open** request for the GPO path by using SPNEGO for authentication, as described in [MS-SPNG].
 - Send a **Create File** request to create a file named gpt.ini by using SPNEGO for authentication, as described in [MS-SPNG].
-- Send a **Write File** request to write contents to the gpt.ini file (as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.4), that contains the required section named "General"; the key "Version" under the General section; and the value of the key "Version" set to "0" for the first version. The Write File request uses SPNEGO for authentication, as described in [MS-SPNG].
+- Send a **Write File** request to write contents to the gpt.ini file (as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4), that contains the required section named "General"; the key "Version" under the General section; and the value of the key "Version" set to "0" for the first version. The Write File request uses SPNEGO for authentication, as described in [MS-SPNG].
 Sample content for a gpt.ini file is described in [MS-GPOL] section 4.10.
 
 - Send a **Close** request by using SPNEGO for authentication, as described in [MS-SPNG].
@@ -1119,14 +1119,14 @@ Any failures from these file access protocol operations means that the overall m
 
 **versionNumber:** Stores the current version number for the *groupPolicyContainer* of the GPO. Versioning is used to determine how many changes have been made to the GPO and whether the changes synchronize with the version that is specified by the gpt.ini file in the [**GPO path**](#gt_group-policy-object-gpo-path).
 
-After a GPO is successfully created, it can be edited in the same manner as an existing policy is edited, as described in section [2.1.3.2.2](#Section_2.1.3.2.2.2).
+After a GPO is successfully created, it can be edited in the same manner as an existing policy is edited, as described in section [2.1.3.2.2](#Section_2.1.3.2.2).
 
 <a id="Section_2.1.3.2.2"></a>
 ##### 2.1.3.2.2 Editing Existing Policies
 
 Before the administrator can use the [**Administrative tool**](#gt_administrative-tool) to edit policy objects, a connection to [**Active Directory**](#gt_active-directory) is required to look up [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) objects. This involves the same two steps that are used in [**policy application**](#gt_policy-application):
 
-- Locate a [**Group Policy server**](#gt_group-policy-server), as described in section [2.1.3.1.1](#Section_2.1.3.1.1) and [MS-ADOD](#Section_2.1) (section 3.1.1).
+- Locate a [**Group Policy server**](#gt_group-policy-server), as described in section [2.1.3.1.1](#Section_2.1.3.1.1) and [MS-ADOD](../MS-ADOD/MS-ADOD.md) (section 3.1.1).
 - Initiate an LDAP **BindRequest** and **BindResponse**, as described in section [2.1.3.1.2](#Section_2.1.3.1.2).
 After the Administrative tool discovers a writable Group Policy server and makes a successful connection to Active Directory, the administrator can select a policy to be edited.
 
@@ -1143,7 +1143,7 @@ The sections that follow describe the processes that occur when editing [**GPOs*
 
 When the administrator uses the [**Administrative tool**](#gt_administrative-tool) to update the configuration of an administrative-side extension, the tool invokes the administrative extension via a [**GUID**](#gt_globally-unique-identifier-guid) that is referenced in the [**GPO**](#gt_group-policy-object-gpo) Extension list. To apply updates, the extensions make direct writes against [**Active Directory**](#gt_active-directory) by using [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), and against the policy settings files via a file access protocol.
 
-Whenever the Administrative tool invokes an extension protocol specified by a GPO and that extension modifies the GPO, the extension invokes a GPO extension update sequence, which in turn generates a GPO extension update message. This is an LDAP **modifyRequest** message with specific parameters passed, as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.8.2.
+Whenever the Administrative tool invokes an extension protocol specified by a GPO and that extension modifies the GPO, the extension invokes a GPO extension update sequence, which in turn generates a GPO extension update message. This is an LDAP **modifyRequest** message with specific parameters passed, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.8.2.
 
 The extension receives a **modifyResponse** message in reply. This message provides a return value that indicates success or failure of the **modifyRequest** message. A value equal to the integer zero indicates success, whereas any other value indicates failure.
 
@@ -1152,7 +1152,7 @@ The Administrative tool then uses a file access protocol to update the gpt.ini f
 <a id="Section_2.1.3.2.2.2"></a>
 ###### 2.1.3.2.2.2 Updating GPO Properties
 
-Whenever the administrator uses the [**Administrative tool**](#gt_administrative-tool) to modify [**GPO**](#gt_group-policy-object-gpo) properties, the tool generates a GPO property update message. This is an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **modifyRequest** message with specific passed parameters, as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.8.3. The Administrative tool receives a **modifyResponse** message in reply. This message provides a return value that indicates success or failure of the modify request. A value equal to the integer zero indicates success, whereas any other value indicates failure.
+Whenever the administrator uses the [**Administrative tool**](#gt_administrative-tool) to modify [**GPO**](#gt_group-policy-object-gpo) properties, the tool generates a GPO property update message. This is an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **modifyRequest** message with specific passed parameters, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.8.3. The Administrative tool receives a **modifyResponse** message in reply. This message provides a return value that indicates success or failure of the modify request. A value equal to the integer zero indicates success, whereas any other value indicates failure.
 
 The following tasks are also required after GPO properties are updated:
 
@@ -1162,12 +1162,12 @@ The following tasks are also required after GPO properties are updated:
 <a id="Section_2.1.3.2.2.3"></a>
 ###### 2.1.3.2.2.3 Updating SOM
 
-Whenever the administrator uses the [**Administrative tool**](#gt_administrative-tool) to modify [**SOM**](#gt_scope-of-management-som) properties, the tool generates a SOM property update message. This is an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **modifyRequest** message with specific passed parameters, as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.8.4. The Administrative tool receives a **modifyResponse** message in reply. This message provides a return value that indicates success or failure of the modify request. A value equal to the integer zero indicates success, whereas any other value indicates failure.
+Whenever the administrator uses the [**Administrative tool**](#gt_administrative-tool) to modify [**SOM**](#gt_scope-of-management-som) properties, the tool generates a SOM property update message. This is an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **modifyRequest** message with specific passed parameters, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.8.4. The Administrative tool receives a **modifyResponse** message in reply. This message provides a return value that indicates success or failure of the modify request. A value equal to the integer zero indicates success, whereas any other value indicates failure.
 
 <a id="Section_2.1.3.2.3"></a>
 ##### 2.1.3.2.3 Deleting Group Policy Objects
 
-To delete a [**GPO**](#gt_group-policy-object-gpo), it is necessary to delete all [**Active Directory**](#gt_active-directory) objects associated with the GPO on the [**Group Policy server**](#gt_group-policy-server) and to delete corresponding directories on the [**Group Policy file share**](#gt_group-policy-file-share) that contain user and computer settings, to which the GPO links. To delete the Active Directory objects for a GPO, it is necessary to send an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **delRequest** message, as described [MS-GPOL](#Section_2.1.1.1) section 2.2.8.5 and [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.8, from the [**Administrative tool**](#gt_administrative-tool) to the Group Policy server.
+To delete a [**GPO**](#gt_group-policy-object-gpo), it is necessary to delete all [**Active Directory**](#gt_active-directory) objects associated with the GPO on the [**Group Policy server**](#gt_group-policy-server) and to delete corresponding directories on the [**Group Policy file share**](#gt_group-policy-file-share) that contain user and computer settings, to which the GPO links. To delete the Active Directory objects for a GPO, it is necessary to send an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **delRequest** message, as described [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.8.5 and [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.8, from the [**Administrative tool**](#gt_administrative-tool) to the Group Policy server.
 
 The Group Policy server replies to the **delRequest** message with a **delResponse** message, as defined in [RFC2251] section 4.8. The value of the **resultCode** field in the **delResponse** message determines whether the delete operation succeeded or failed; success is indicated by a **resultCode** field value of zero, while all other values indicate failure.
 
@@ -1201,16 +1201,16 @@ The [**Group Policy**](#gt_group-policy) protocols use the following communicati
 
 **Lightweight Directory Access Protocol (LDAP):** Specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325). Used for communication with the Group Policy server to obtain [**GPO**](#gt_group-policy-object-gpo) attribute data.
 
-**File access services:** As described in [MS-FASOD](#Section_2.1). The Windows platform chooses an [**SMB**](#gt_server-message-block-smb) file access protocol to remotely access the [**Group Policy file share**](#gt_group-policy-file-share) and obtain user policy information, computer policy information, and GPO version data.
+**File access services:** As described in [MS-FASOD](../MS-FASOD/MS-FASOD.md). The Windows platform chooses an [**SMB**](#gt_server-message-block-smb) file access protocol to remotely access the [**Group Policy file share**](#gt_group-policy-file-share) and obtain user policy information, computer policy information, and GPO version data.
 
-**SPNEGO:** Specified in [MS-SPNG](../MS-SPNG/MS-SPNG.md). Used for authentication and authorization. See [MS-GPOL](#Section_2.1.1.1) section 1.4 for the authentication protocols that the Group Policy protocols support.
+**SPNEGO:** Specified in [MS-SPNG](../MS-SPNG/MS-SPNG.md). Used for authentication and authorization. See [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 1.4 for the authentication protocols that the Group Policy protocols support.
 
 <a id="Section_2.2"></a>
 ## 2.2 Protocol Summary
 
 This section describes the member protocols that accomplish the goals of [**Group Policy**](#gt_group-policy). The Group Policy protocols are organized into the following groups:
 
-- Group Policy core — consists of the Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1). The core protocol is implemented fully by the [**core Group Policy engine**](#gt_core-group-policy-engine), which enables the processing and application of Group Policy.
+- Group Policy core — consists of the Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md). The core protocol is implemented fully by the [**core Group Policy engine**](#gt_core-group-policy-engine), which enables the processing and application of Group Policy.
 - [**Group Policy extensions**](#gt_group-policy-extension) consist of the extension protocols listed in the following table after the Group Policy: Core Protocol.
 The following table provides a comprehensive list and functional description of the Group Policy member protocols.
 
@@ -1223,13 +1223,13 @@ The following table provides a comprehensive list and functional description of 
 | Group Policy: Central Access Policies Extension | Provides the means to configure central access policies on Group Policy client computers for centralized control of user access to resources. This protocol extension also contains the mechanisms that enable Group Policy administrators to retrieve policy files and configure central access policy information that is stored in the [**Group Policy data store**](#gt_group-policy-data-store). The administrative-side extension participates in authoring settings for central access policies via GPO configuration. The administrative-side extension of this protocol invokes [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to write or retrieve GPO information and invokes a file access protocol to write or read extension-specific data in central access policy files that are stored on the Group Policy file share. Central access policy settings are created or modified by the [**Administrative tool**](#gt_administrative-tool). The client-side extension retrieves policy settings from the file system component of one or more GPOs. These settings consist of one or more DNs of central access policy objects that reside in [**Active Directory**](#gt_active-directory). The [**CSE**](#gt_cses) binds to these objects and retrieves central access policy configuration data from the object attributes. The CSE uses this data to populate local data elements on the Group Policy client, typically a file server, to maintain state that later an administrator applies to enforce the central access policies that authorize user access to resources on the file server. | [MS-GPCAP](../MS-GPCAP/MS-GPCAP.md) |
 | Group Policy: Deployed Printer Connections Extension | Supports the management of printer connections that are hosted by print servers and shared by multiple users. The GPDPC extension has both client-side and administrative-side implementations. The administrative-side extension enables the Group Policy administrator to configure printer connections by updating settings in a GPO that applies to Group Policy clients. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to enable users to discover the printer connections that were configured by the Group Policy administrator and to apply them to the Group Policy client computer. | [MS-GPDPC](../MS-GPDPC/MS-GPDPC.md) |
 | Group Policy: Encrypting File System Extension | Enables remote administrative configuration of the [**Encrypting File System (EFS)**](#gt_encrypting-file-system-efs). The GPEF extension has both client-side and administrative-side implementations. The administrative-side extension enables the Group Policy Administrator to retrieve and edit EFS configuration settings that are stored in a [**registry**](#gt_registry)-based policy file on the Group Policy file share, for later application to the registry of Group Policy client that are affected by GPO(s) that specify those settings. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to parse the registry policy file settings and copy them to the Group Policy client registry. The EFS extension then reads those registry settings and applies them to the EFS subsystem on the Group Policy client computer. | [MS-GPEF](../MS-GPEF/MS-GPEF.md) |
-| Group Policy: Firewall and Advanced Security Data Structure Extension | Enables administrators to use Group Policy to control firewall and advanced security behavior on a Group Policy client with the use of the GPREG protocol. The GPFAS extension is invoked by the Administrative tool and is responsible for loading and updating the firewall and advanced security settings specified by a GPO. GPFAS reads registry values that are copied to the Group Policy client registry by the Group Policy: Registry Extension Encoding protocol [MS-GPREG](../MS-GPREG/MS-GPREG.md) and applies them to the local Firewall and Advanced Security Protocol server. Because this extension relies on the CSE implementation of GPREG, GPFAS is implemented as an administrative-side extension only. | [MS-GPFAS](#Section_2.9) |
+| Group Policy: Firewall and Advanced Security Data Structure Extension | Enables administrators to use Group Policy to control firewall and advanced security behavior on a Group Policy client with the use of the GPREG protocol. The GPFAS extension is invoked by the Administrative tool and is responsible for loading and updating the firewall and advanced security settings specified by a GPO. GPFAS reads registry values that are copied to the Group Policy client registry by the Group Policy: Registry Extension Encoding protocol [MS-GPREG](../MS-GPREG/MS-GPREG.md) and applies them to the local Firewall and Advanced Security Protocol server. Because this extension relies on the CSE implementation of GPREG, GPFAS is implemented as an administrative-side extension only. | [MS-GPFAS](../MS-GPFAS/MS-GPFAS.md) |
 | Group Policy: Folder Redirection Protocol Extension | Enables the Group Policy administrator to redirect the path of certain file system folders to a new location. The new location can be a folder on the local computer or a shared directory on a network. This enables users to work with documents on a remote server [**share**](#gt_share), as if the documents were located on the hard disk of their local computer. This extension has both client-side and administrative-side implementations. The administrative-side extension enables the Group Policy administrator to establish and configure folder locations for user folders and to store them on the Group Policy file share. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to retrieve GPFR configuration data from the Group Policy file share and to apply it to the Group Policy client computer. | [MS-GPFR](../MS-GPFR/MS-GPFR.md) |
-| Group Policy: IPsec Protocol Extension | Enables centralized configuration of the IPsec component on multiple client systems to provide basic traffic filtering, data integrity, and optional data encryption, for IP traffic. The Group Policy administrator assigns an IPsec policy to a group of managed client computers by using a GPO. This extension has both client-side and administrative-side implementations. The administrative-side extension enables the Group Policy administrator to create one or more IPsec policies and store them in policy files on the Group Policy file share. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to retrieve the associated policy settings that are stored in the policy files and to apply them to the Group Policy client computer. | [MS-GPIPSEC](#Section_2.9) |
+| Group Policy: IPsec Protocol Extension | Enables centralized configuration of the IPsec component on multiple client systems to provide basic traffic filtering, data integrity, and optional data encryption, for IP traffic. The Group Policy administrator assigns an IPsec policy to a group of managed client computers by using a GPO. This extension has both client-side and administrative-side implementations. The administrative-side extension enables the Group Policy administrator to create one or more IPsec policies and store them in policy files on the Group Policy file share. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to retrieve the associated policy settings that are stored in the policy files and to apply them to the Group Policy client computer. | [MS-GPIPSEC](../MS-GPIPSEC/MS-GPIPSEC.md) |
 | Group Policy: Name Resolution Policy Table (NRPT) Data Extension | Provides a mechanism for a Group Policy administrator to deploy and control any Name Resolution Policy behavior on a client by using the Group Policy: Registry Extension Encoding [[MS-GPREG]. | [MS-GPNRPT](../MS-GPNRPT/MS-GPNRPT.md) |
-| Group Policy: Preferences Extension Data Structure | Enables the Group Policy administrator to manage and deploy Group Policy preferences. Preferences settings are specified by using an XML file. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to invoke the preferences extension on his or her computer to define, maintain, and associate extension-specific settings with a GPO. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to read the XML preferences file specified by the GPO and apply its preferences configuration to the Group Policy client computer. The Group Policy: Preferences Extension supports both computer and use policy modes. [**Policy application**](#gt_policy-application) in computer policy mode applies to the Group Policy client computer and all users who log on to it, whereas user policy mode applies to specific users who log on to the Group Policy client computer. | [MS-GPPREF](#Section_1.3) |
+| Group Policy: Preferences Extension Data Structure | Enables the Group Policy administrator to manage and deploy Group Policy preferences. Preferences settings are specified by using an XML file. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to invoke the preferences extension on his or her computer to define, maintain, and associate extension-specific settings with a GPO. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to read the XML preferences file specified by the GPO and apply its preferences configuration to the Group Policy client computer. The Group Policy: Preferences Extension supports both computer and use policy modes. [**Policy application**](#gt_policy-application) in computer policy mode applies to the Group Policy client computer and all users who log on to it, whereas user policy mode applies to specific users who log on to the Group Policy client computer. | [MS-GPPREF](../MS-GPPREF/MS-GPPREF.md) |
 | Group Policy: Registry Extension Encoding | Provides the mechanism for a Group Policy administrator to control any behavior on a Group Policy client that depends on registry-based settings. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to use [**Administrative template**](#gt_administrative-template) settings to write a registry policy file and associate it with a GPO. The client-side is extension invoked by the core Group Policy engine on the Group Policy client to read the registry policy file specified by a GPO and apply its contents to the registry of the Group Policy client computer. | [MS-GPREG] |
-| Group Policy: Security Protocol Extension | Enables the Group Policy administrator to distribute and apply group security policies to multiple client systems. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to author security policies as .inf files and save them to the Group Policy file share. The Group Policy administrator assigns security policies by specifying a reference, within the logical structure of a GPO, to the Group Policy file share network location where the security policy files reside. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to process GPOs that refer to security policies. The client-side extracts the Group Policy file share network location from the GPO, transfers the security policy files to the Group Policy client computer by using a file access protocol, and then utilizes the retrieved security policy files to configure the security settings of the applicable subsystems on the Group Policy client computer. | [MS-GPSB](#Section_2.9) |
+| Group Policy: Security Protocol Extension | Enables the Group Policy administrator to distribute and apply group security policies to multiple client systems. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to author security policies as .inf files and save them to the Group Policy file share. The Group Policy administrator assigns security policies by specifying a reference, within the logical structure of a GPO, to the Group Policy file share network location where the security policy files reside. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to process GPOs that refer to security policies. The client-side extracts the Group Policy file share network location from the GPO, transfers the security policy files to the Group Policy client computer by using a file access protocol, and then utilizes the retrieved security policy files to configure the security settings of the applicable subsystems on the Group Policy client computer. | [MS-GPSB](../MS-GPSB/MS-GPSB.md) |
 | Group Policy: Scripts Extension Encoding | Provides a mechanism for the Group Policy administrator to configure the execution of administrator-specified code on specific [**policy targets**](#gt_policy-target) at computer start, computer shut-down, user logon, or user logoff. The code executed by specified policy targets is contained in a command-line tool or batch-processing script that resides in the file system of the Group Policy client computer or at a network file system location. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to store and retrieve GPO metadata that specifies a directive for running a command at computer startup or shutdown that affects the configuration of a Group Policy client subsystem. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to identify the directive that runs the administrator-specified command and to configure a command execution subsystem in the Group Policy client operating system with this directive, such that it executes the command at computer startup or shutdown. | [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md) |
 | Group Policy: Software Installation Protocol Extension | Enables a Group Policy administrator to install, update, and remove software applications on Group Policy client computers. This extension has both administrative-side and client-side implementations. The administrative-side extension enables the Group Policy administrator to specify applications to be installed on Group Policy client computers and to control the manner in which they are installed, for example, with minimum user interaction. The related settings are stored on the Group Policy file share and the metadata that specifies the path to the settings is stored in the logical structure of a GPO. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to locate the GPO(s) containing software installation settings, retrieve those settings from the appropriate Group Policy file share location, and apply them on the Group Policy client computer. | [MS-GPSI](../MS-GPSI/MS-GPSI.md) |
 | Group Policy: Wireless/Wired Protocol Extension | Enables a Group Policy administrator to create, update, and store GPWL data in a GPO. This extension has both administrative-side and client-side implementations. The administrative-side extension is used by the Group Policy administrator to read and edit wireless or wired policy settings through a user interface, and to store the settings within the logical structure of a GPO via LDAP. The client-side extension is invoked by the core Group Policy engine on the Group Policy client to retrieve the wireless or wired policy settings from the specified location via LDAP, and to apply them on the Group Policy client computer. | [MS-GPWL](../MS-GPWL/MS-GPWL.md) |
@@ -1247,12 +1247,12 @@ In [**policy application**](#gt_policy-application) mode, the core Group Policy 
 
 In the policy administration mode, the [**Administrative tool**](#gt_administrative-tool) uses Group Policy: Core protocol messaging when authoring and modifying extension-specific settings.
 
-For additional information about the Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1), see section [1.1](#Section_1.1).
+For additional information about the Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md), see section [1.1](#Section_1.1).
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Group Policy Extension Protocol Group
 
-[**Group Policy**](#gt_group-policy) is extended through [**CSE**](#gt_cses) functionality. Group Policy supports CSEs for the application of specific client functionality, such as the client security policies specified in [MS-GPSB](#Section_2.9), and supports [**Administrative tool extensions**](#gt_administrative-tool-extensions) for authoring extension-specific settings, such as the security settings specified in [MS-GPIPSEC](#Section_2.9).
+[**Group Policy**](#gt_group-policy) is extended through [**CSE**](#gt_cses) functionality. Group Policy supports CSEs for the application of specific client functionality, such as the client security policies specified in [MS-GPSB](../MS-GPSB/MS-GPSB.md), and supports [**Administrative tool extensions**](#gt_administrative-tool-extensions) for authoring extension-specific settings, such as the security settings specified in [MS-GPIPSEC](../MS-GPIPSEC/MS-GPIPSEC.md).
 
 CSEs are used for implementing application-specific [**policy settings**](#gt_policy-setting) on [**Group Policy client**](#gt_group-policy-client) computers. CSE protocols depend on the [**core Group Policy engine**](#gt_core-group-policy-engine) to execute on the Group Policy client to identify [**GPOs**](#gt_group-policy-object-gpo) to query for [**policy application**](#gt_policy-application).
 
@@ -1278,24 +1278,24 @@ The Group Policy protocols use a [**Group Policy file share**](#gt_group-policy-
 
 Windows components and subsystems that require configuration and change management depend on the [**Group Policy**](#gt_group-policy) protocols. As a result, Group Policy influences a large number of services and protocols. The most prominent examples of protocols and services that have a dependency on the Group Policy protocols are as follows:
 
-**Certificate Services**: Provide a set of customizable services for issuing certificates to requestors, managing certificate lifetime and renewals, and revoking certificates. Certificates are used in software security services that utilize public key technologies, to bind the identity of a person, device, or service to an associated private key. See [MS-CERSOD](#Section_2.1) for an overview of certificate services.
+**Certificate Services**: Provide a set of customizable services for issuing certificates to requestors, managing certificate lifetime and renewals, and revoking certificates. Certificates are used in software security services that utilize public key technologies, to bind the identity of a person, device, or service to an associated private key. See [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) for an overview of certificate services.
 
 Certificate services depend on the Group Policy protocols for the following:
 
 - Group Policy store: The Certificate Authority server depends on a Policy Server to store policy end point information that can be obtained through the Group Policy: Registry Extension Encoding [MS-GPREG](../MS-GPREG/MS-GPREG.md) protocol.
 - Policy Server discovery: The Certificate Authority server depends on Group Policy to enable enrollment clients to discover available certificate Policy Servers. For example, clients that enroll for certificates need to be configured with end point information that specifies which Policy Server to contact and how to authenticate to it. The Certificate Services rely upon Group Policy to store and configure this information with the [**Administrative tool**](#gt_administrative-tool).
-**File Access Services:** Provide a unified view of files and other resources, and includes facilities for centralized data management, file organization, and backup. It enables applications to access and share resources on a network file server, in a secure and managed environment. See [MS-FASOD](#Section_2.1) for an overview of file access services.
+**File Access Services:** Provide a unified view of files and other resources, and includes facilities for centralized data management, file organization, and backup. It enables applications to access and share resources on a network file server, in a secure and managed environment. See [MS-FASOD](../MS-FASOD/MS-FASOD.md) for an overview of file access services.
 
 The File Access Services depend on the Group Policy protocols for the configuration of individual protocol capabilities within the File Access Services. Without the Group Policy protocols, the File Access Services cannot be centrally configured and managed.
 
-**Print Services:** Support communication between print clients and [**print servers**](#gt_print-server). Print services enable print clients to submit print jobs to print queues that are managed by a print spooler component, which buffers and orders print jobs that arrive simultaneously from multiple print clients. Print Services use print drivers that are associated with the print queues to learn about printer capabilities. The Group Policy: Core Protocol [MS-GPOL](#Section_2.1.1.1) and Group Policy: Deployed Printer Connections Extension protocol [MS-GPDPC](../MS-GPDPC/MS-GPDPC.md) provide support for the Print Services. See [MS-PRSOD](#Section_2.1) for more information on print services.
+**Print Services:** Support communication between print clients and [**print servers**](#gt_print-server). Print services enable print clients to submit print jobs to print queues that are managed by a print spooler component, which buffers and orders print jobs that arrive simultaneously from multiple print clients. Print Services use print drivers that are associated with the print queues to learn about printer capabilities. The Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md) and Group Policy: Deployed Printer Connections Extension protocol [MS-GPDPC](../MS-GPDPC/MS-GPDPC.md) provide support for the Print Services. See [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md) for more information on print services.
 
 The Print Services depend on the Group Policy protocols for the following:
 
 - Propagating [**policy settings**](#gt_policy-setting) to print clients and print servers through the Group Policy: Core Protocol [MS-GPOL] to control local spooler behavior.
 - Restricting print clients from accessing specified print servers.
 - Remotely pushing pre-configured print queue connections to print clients, so that print clients have pre-established connections to specified print queues. The Print Services use the Group Policy: Deployed Printer Connections Extension [MS-GPDPC] protocol to distribute these pre-configured print queue connections to print clients.
-[**Windows Server Update Services (WSUS)**](#gt_windows-server-update-services-wsus)**:** Provide centralized update management in an enterprise computing environment. WSUS provides automated update discovery, delivery of relevant updates to computers, administrative control over update availability, and update activity monitoring. See [MS-WSUSOD](#Section_2.1) for an overview of WSUS protocols.
+[**Windows Server Update Services (WSUS)**](#gt_windows-server-update-services-wsus)**:** Provide centralized update management in an enterprise computing environment. WSUS provides automated update discovery, delivery of relevant updates to computers, administrative control over update availability, and update activity monitoring. See [MS-WSUSOD](../MS-WSUSOD/MS-WSUSOD.md) for an overview of WSUS protocols.
 
 WSUS depends on the Group Policy protocols for the following:
 
@@ -1312,7 +1312,7 @@ WSUS depends on the Group Policy protocols for the following:
 
 **Connectivity:** Group Policy requires physical network connectivity and correctly configured TCP/IP configuration on both the [**Group Policy server**](#gt_group-policy-server) and the [**Group Policy client**](#gt_group-policy-client). There is no specific requirement for the type of physical networking topology.
 
-It is important for the connectivity from the Group Policy client to the Group Policy server to be continuous. New and existing policies should be periodically refreshed with updates. See [MS-GPOL](#Section_2.1.1.1) section 3.2.1.17 for the Group Policy refresh interval. The client should be able to tolerate network outages and refresh for policy changes when it is reconnected to the network.
+It is important for the connectivity from the Group Policy client to the Group Policy server to be continuous. New and existing policies should be periodically refreshed with updates. See [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.1.17 for the Group Policy refresh interval. The client should be able to tolerate network outages and refresh for policy changes when it is reconnected to the network.
 
 **LDAP directory services and file access services:** Provides Group Policy services to Group Policy clients. The Group Policy server provides [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) and file access services as shown in the diagram of section [2.1.2.1](#Section_2.1.2.1).
 
@@ -1328,16 +1328,16 @@ Group Policy depends on the following services and protocols for the exchange of
 
 **Active Directory:** Specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md), [**Active Directory**](#gt_active-directory) is the [**directory service**](#gt_directory-service-ds) that stores information about objects on a network and makes this information available to users and network administrators. Administrators link [**GPOs**](#gt_group-policy-object-gpo) to Active Directory containers such as [**sites**](#gt_site), domains, and [**OUs**](#gt_organizational-unit-ou), and can also include user and computer objects. This enables [**policy settings**](#gt_policy-setting) to target specific users and computers throughout an organization.
 
-Group Policy requires Active Directory for storing group policies, so that Group Policy clients can discover and retrieve them. For detailed information on how the directory service is structured and how LDAP operations are conducted, see [MS-ADOD](#Section_2.1).
+Group Policy requires Active Directory for storing group policies, so that Group Policy clients can discover and retrieve them. For detailed information on how the directory service is structured and how LDAP operations are conducted, see [MS-ADOD](../MS-ADOD/MS-ADOD.md).
 
 **Authentication:** Specified in the following authentication protocols:
 
-- Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO) Protocol Extensions, as described in [MS-SPNG] and [MS-AUTHSOD](#Section_2.1).
+- Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO) Protocol Extensions, as described in [MS-SPNG] and [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - Kerberos Protocol Extensions, as described in [MS-KILE](../MS-KILE/MS-KILE.md) and [MS-AUTHSOD].
 - NT LAN Manager Authentication Protocol, as described in [MS-NLMP](../MS-NLMP/MS-NLMP.md) and [MS-AUTHSOD].
 **DNS:** For discovering Group Policy servers.
 
-**File Access Services:** As described in [MS-FASOD](#Section_2.1), for the following:
+**File Access Services:** As described in [MS-FASOD](../MS-FASOD/MS-FASOD.md), for the following:
 
 - Accessing the [**Group Policy file share**](#gt_group-policy-file-share) via a file access protocol.
 - Distributing Group Policy.
@@ -1368,7 +1368,7 @@ This system specifies no underlying protocols.
 
 The [**Group Policy**](#gt_group-policy) protocols require a persistent storage facility to maintain Abstract Data Model (ADM) elements. Examples of such a facility include file systems and databases. If this requirement is not satisfied, Group Policy does not function.
 
-The Group Policy ADM is based on the conceptual models specified in [MS-GPOL](#Section_2.1.1.1) sections 3.1.1, 3.2.1, and 3.3.1. General information about the [**Group Policy server**](#gt_group-policy-server), [**Group Policy client**](#gt_group-policy-client), and [**Administrative tool**](#gt_administrative-tool) ADMs for Group Policy follows:
+The Group Policy ADM is based on the conceptual models specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) sections 3.1.1, 3.2.1, and 3.3.1. General information about the [**Group Policy server**](#gt_group-policy-server), [**Group Policy client**](#gt_group-policy-client), and [**Administrative tool**](#gt_administrative-tool) ADMs for Group Policy follows:
 
 **Server Abstract Data Model:** The Group Policy server implements [**AD DS**](#gt_active-directory-domain-services-ad-ds) for the storage of managed generic objects known as [**GPOs**](#gt_group-policy-object-gpo), along with the policy information that affects these objects. However, the Group Policy server itself does not introduce any specific ADM elements. Rather, the Group Policy server maintains state in two conceptual stores: an [**Active Directory**](#gt_active-directory) data store and a domain-based [**Group Policy file share**](#gt_group-policy-file-share) data store that is accessible through a file access protocol.
 
@@ -1420,9 +1420,9 @@ The following actors support the use cases that are described in this section:
 
 - Remote file services [MS-FASOD]
 - [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) directory services [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)
-- Domain controller discovery ([MS-ADOD](#Section_2.1) (section 3.1.1))
+- Domain controller discovery ([MS-ADOD](../MS-ADOD/MS-ADOD.md) (section 3.1.1))
 - WMI services [MS-WMI](../MS-WMI/MS-WMI.md)
-**Authentication services:** The authentication services specified in [MS-AUTHSOD](#Section_2.1) provide identity, authentication, and authorization services through [**NTLM**](#gt_fff710f9-e3d1-4991-99a2-009768d57585) [MS-NLMP](../MS-NLMP/MS-NLMP.md) or Kerberos [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) to secure communications in Group Policy. This includes authentication services that support client-to-server communication within Group Policy.
+**Authentication services:** The authentication services specified in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) provide identity, authentication, and authorization services through [**NTLM**](#gt_fff710f9-e3d1-4991-99a2-009768d57585) [MS-NLMP](../MS-NLMP/MS-NLMP.md) or Kerberos [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) to secure communications in Group Policy. This includes authentication services that support client-to-server communication within Group Policy.
 
 <a id="Section_2.5.1"></a>
 ### 2.5.1 Use Case Diagram
@@ -1444,7 +1444,7 @@ The goal of this use case is to retrieve [**Group Policy**](#gt_group-policy) in
 
 **Context of use**
 
-Group Policy is applied after the Group Policy client contacts the Group Policy server and successfully retrieves new or updated content. Based on the [**SOM**](#gt_scope-of-management-som), the client retrieves the list of [**GPOs**](#gt_group-policy-object-gpo) for [**policy application**](#gt_policy-application), as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.5.
+Group Policy is applied after the Group Policy client contacts the Group Policy server and successfully retrieves new or updated content. Based on the [**SOM**](#gt_scope-of-management-som), the client retrieves the list of [**GPOs**](#gt_group-policy-object-gpo) for [**policy application**](#gt_policy-application), as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.5.
 
 **Actors**
 
@@ -1466,7 +1466,7 @@ Group Policy is applied after the Group Policy client contacts the Group Policy 
 
 - Ensure that policy settings stored in the Group Policy server are protected from unauthorized use.
 - Target policy settings for users and computers at different levels of granularity, which is known as SOM.
-- Ensure that policy setting management can be delegated as described in [MS-GPSB](#Section_2.9).
+- Ensure that policy setting management can be delegated as described in [MS-GPSB](../MS-GPSB/MS-GPSB.md).
 - Alter the default processing of policy settings.
 - Configure a large number of computers to execute administrator-specified code at computer start, computer shut-down, user logon, or user logoff, as described in [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md).
 **Preconditions**: The Group Policy client is able to access the Group Policy server.
@@ -1501,7 +1501,7 @@ The goal of this use case is to create, update, and delete [**Group Policy**](#g
 - Discover the [**Group Policy server**](#gt_group-policy-server).
 - Ensure read and write access to the Group Policy server.
 - Manage Group Policy.
-**Group Policy Server:** A [**domain controller**](#gt_domain-controller-dc) implementing [**Active Directory**](#gt_active-directory) [MS-ADOD](#Section_2.1) that contains a database of GPO that Group Policy administrators can read and write to. The Group Policy server responds to requests from the Group Policy administrator. The primary interests of the Group Policy server are to:
+**Group Policy Server:** A [**domain controller**](#gt_domain-controller-dc) implementing [**Active Directory**](#gt_active-directory) [MS-ADOD](../MS-ADOD/MS-ADOD.md) that contains a database of GPO that Group Policy administrators can read and write to. The Group Policy server responds to requests from the Group Policy administrator. The primary interests of the Group Policy server are to:
 
 - Support Administrative tool operations, such as creating, retrieving, modifying, and deleting GPOs that apply to groups of domain user and computer accounts in Active Directory
 - Store [**policy settings**](#gt_policy-setting) and attributes configured by the Group Policy administrator
@@ -1537,14 +1537,14 @@ This section describes the features of versioning, capability negotiation, and v
 
 [**Group Policy**](#gt_group-policy) protocols each have their own system versioning and capability negotiation.
 
-Group Policy relies on the Group Policy: Core Protocol, as implemented in the [**core Group Policy engine**](#gt_core-group-policy-engine), for the transport of policy information. It provides a versioning capability in an attribute of the [**Active Directory**](#gt_active-directory) object class for a [**GPO**](#gt_group-policy-object-gpo), as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.4. The version number is a simple integer that is also written to the gpt.ini file on the [**Group Policy file share**](#gt_group-policy-file-share), as described in [MS-GPOL] section 2.2.4. There is currently only one version, and if the [**Group Policy client**](#gt_group-policy-client) receives anything other than the current version for a GPO, the GPO does not participate in the Group Policy: Core Protocol, as described in [MS-GPOL] section 3.2.5.1.5.
+Group Policy relies on the Group Policy: Core Protocol, as implemented in the [**core Group Policy engine**](#gt_core-group-policy-engine), for the transport of policy information. It provides a versioning capability in an attribute of the [**Active Directory**](#gt_active-directory) object class for a [**GPO**](#gt_group-policy-object-gpo), as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. The version number is a simple integer that is also written to the gpt.ini file on the [**Group Policy file share**](#gt_group-policy-file-share), as described in [MS-GPOL] section 2.2.4. There is currently only one version, and if the [**Group Policy client**](#gt_group-policy-client) receives anything other than the current version for a GPO, the GPO does not participate in the Group Policy: Core Protocol, as described in [MS-GPOL] section 3.2.5.1.5.
 
 The System Versioning and Capability Negotiation implementation of extension protocols is documented in the respective extension protocol specifications. They are described in the Versioning and Capability Negotiation section of the respective protocol technical documents.
 
 <a id="Section_2.6.2"></a>
 ### 2.6.2 Vendor-Extensible Fields
 
-[**Group Policy**](#gt_group-policy) protocols can incorporate new functionality by adding new extensions to the [**Group Policy client**](#gt_group-policy-client) or the [**Administrative tool**](#gt_administrative-tool). Each new extension can also potentially be extended. For more information about implementing extensions on the Group Policy client, see [MS-GPOL](#Section_2.1.1.1) section 1.8. Extending the Administrative tool requires the use of the ADM specified in [MS-GPOL] section 3.3.1.
+[**Group Policy**](#gt_group-policy) protocols can incorporate new functionality by adding new extensions to the [**Group Policy client**](#gt_group-policy-client) or the [**Administrative tool**](#gt_administrative-tool). Each new extension can also potentially be extended. For more information about implementing extensions on the Group Policy client, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 1.8. Extending the Administrative tool requires the use of the ADM specified in [MS-GPOL] section 3.3.1.
 
 The system vendor-extensible fields of each extension protocol are documented in the respective extension protocol specification. These are specified in section 1.8 Vendor-Extensible Fields of the respective technical documents.
 
@@ -1590,7 +1590,7 @@ An internal failure in any [**CSE**](#gt_cses) does not cause the entire [**poli
 <a id="Section_2.7.1.2.3"></a>
 ##### 2.7.1.2.3 Link Speed Determination Failure
 
-If a failure in link speed determination occurs ([MS-GPOL](#Section_2.1.1.1) section 2.2.6), the [**Group Policy client**](#gt_group-policy-client) assumes link speed to be above the threshold and processes [**policy settings**](#gt_policy-setting) that belong to all [**CSEs**](#gt_cses). At the next scheduled [**policy application**](#gt_policy-application), the Group Policy client initiates link speed determination again in an attempt to recover from the failure. Recovery from the failure helps prevent application of policies from those CSEs that should not be invoked when link speed is below threshold.
+If a failure in link speed determination occurs ([MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.6), the [**Group Policy client**](#gt_group-policy-client) assumes link speed to be above the threshold and processes [**policy settings**](#gt_policy-setting) that belong to all [**CSEs**](#gt_cses). At the next scheduled [**policy application**](#gt_policy-application), the Group Policy client initiates link speed determination again in an attempt to recover from the failure. Recovery from the failure helps prevent application of policies from those CSEs that should not be invoked when link speed is below threshold.
 
 If the link speed cannot be determined, all policies are applied to ensure that critical functionalities are in place.
 
@@ -1625,7 +1625,7 @@ The [**Group Policy client**](#gt_group-policy-client) should have the following
 
 **Periodic Refresh timer:** This timer is triggered periodically to check for an updated policy for the computer or for each user who is interactively logged on to the computer. The frequency of this timer is implementation-specific.<2>
 
-For more information about Group Policy client periodic refresh timers, see [MS-GPOL](#Section_2.1.1.1) section 3.2.2.
+For more information about Group Policy client periodic refresh timers, see [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.2.
 
 <a id="Section_2.8.2"></a>
 ### 2.8.2 Nontimer Events
@@ -1644,7 +1644,7 @@ Policy application can also be invoked at other times, as described in section [
 
 Events associated with the use of the [**Administrative tool**](#gt_administrative-tool) include the following:
 
-**GPO creation:** Group Policy is created when the [**Group Policy administrator**](#gt_group-policy-administrator) uses the Administrative tool to create a [**GPO**](#gt_group-policy-object-gpo). This process triggers a GPO Creation message, as described in [MS-GPOL](#Section_2.1.1.1) section 2.2.8.1.
+**GPO creation:** Group Policy is created when the [**Group Policy administrator**](#gt_group-policy-administrator) uses the Administrative tool to create a [**GPO**](#gt_group-policy-object-gpo). This process triggers a GPO Creation message, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.8.1.
 
 **GPO property update:** A Group Policy property update occurs when the Group Policy administrator uses the policy administration sequence of a [**Group Policy extension**](#gt_group-policy-extension) protocol to change the properties of a GPO. This process triggers a GPO Property Update message, as described in [MS-GPOL] section 2.2.8.3.
 
@@ -1669,7 +1669,7 @@ In a distributed environment where information is stored and retrieved from clie
 
 This section describes the internal security of the [**Group Policy client**](#gt_group-policy-client). The general guideline for [**Group Policy**](#gt_group-policy) implementers is to ensure that the resources used by the [**core Group Policy engine**](#gt_core-group-policy-engine) and extensions are protected from unauthorized access. It is important to prevent users who do not have the required credentials from modifying or tampering with administrative configurations.
 
-The following diagram shows the different components that define the security boundaries of the Group Policy protocols on the Group Policy client. Elements that are external to the Group Policy protocols are described in [MS-GPOL](#Section_2.1.1.1).
+The following diagram shows the different components that define the security boundaries of the Group Policy protocols on the Group Policy client. Elements that are external to the Group Policy protocols are described in [MS-GPOL](../MS-GPOL/MS-GPOL.md).
 
 ![Group Policy security boundary components](media/image10.png)
 
@@ -1696,8 +1696,8 @@ The computer startup, computer shutdown, user logon, and user logoff events are 
 [**Group Policy**](#gt_group-policy) protocols use the encryption mechanisms provided by the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) and file access transports to ensure that the data is protected against tampering. Group Policy relies on the authentication mechanisms provided by the underlying protocols to establish user and computer identities. These security mechanisms include the following:
 
 - LDAP and file access protocol signing, for setting and retrieving policy data.
-- Kerberos [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) authentication for application of computer policy, as described in [MS-AUTHSOD](#Section_2.1) section 3.3.
-- SPNEGO authentication for application of user policy, as described in [MS-GPOL](#Section_2.1.1.1) section 5.
+- Kerberos [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) authentication for application of computer policy, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 3.3.
+- SPNEGO authentication for application of user policy, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 5.
 The Group Policy protocols do not define any additional external security beyond what is described in the specifications of the protocols listed in section [2.2](#Section_2.2).
 
 <a id="Section_2.10"></a>
@@ -1730,13 +1730,13 @@ This section describes various events that trigger the [**Group Policy**](#gt_gr
 - User logon to a computer.
 - User logoff from a computer.
 - Computer shutdown.
-This example maps to the use case specified in section [2.5.2](#Section_2.1.2.3.2), "Applying Group Policy".
+This example maps to the use case specified in section [2.5.2](#Section_2.5.2), "Applying Group Policy".
 
 **Prerequisites**
 
 The following prerequisites apply to this example:
 
-- The [**Group Policy client**](#gt_group-policy-client) is able to discover and communicate with the [**Group Policy server**](#gt_group-policy-server), as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The [**Group Policy client**](#gt_group-policy-client) is able to discover and communicate with the [**Group Policy server**](#gt_group-policy-server), as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 - The Group Policy server is storing policy and responds to requests from the Group Policy client.
 - The Group Policy client maintains a consistent configuration of policy information that is retrieved from the Group Policy server, which includes [**registry**](#gt_registry) settings, WMI data, and [**RSoP**](#gt_resultant-set-of-policy-rsop) data.
 - The [**Group Policy administrator**](#gt_group-policy-administrator) ensures that the Group Policy client policy configuration aligns with business requirements.
@@ -1789,7 +1789,7 @@ The Group Policy client then checks the link speed and processes any relevant fi
 
 Lastly, [**CSEs**](#gt_cses) read the relevant [**policy settings**](#gt_policy-setting) from the server that are stored in Active Directory and on the [**Group Policy file share**](#gt_group-policy-file-share), using [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) or a file access protocol, respectively, and apply them.
 
-This example maps to the use case specified in section [2.5.2](#Section_2.1.2.3.2), "Applying Group Policy".
+This example maps to the use case specified in section [2.5.2](#Section_2.5.2), "Applying Group Policy".
 
 **Prerequisites**
 
@@ -1798,7 +1798,7 @@ The following prerequisites apply to this example:
 - The Group Policy server is storing policy information.
 - The Group Policy client maintains a consistent configuration of policy information that is retrieved from the Group Policy server, which includes [**registry**](#gt_registry) settings, WMI data, and [**RSoP**](#gt_resultant-set-of-policy-rsop) data.
 - The [**Group Policy administrator**](#gt_group-policy-administrator) ensures that the Group Policy client policy configuration aligns with business requirements.
-- The Group Policy client has discovered the Group Policy server and connected with Active Directory, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The Group Policy client has discovered the Group Policy server and connected with Active Directory, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 - The Group Policy client has sent an LDAP **BindRequest** message, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.2, to the Group Policy server, and the Group Policy server has replied with an LDAP **BindResponse** message, as described in [RFC2251] section 4.2.3.
 - In this scenario, it is assumed that the Group Policy file share resides on the Group Policy server.
 **Initial System State**
@@ -1837,7 +1837,7 @@ The message sequence for this example is as follows:
 
 This example demonstrates the processes that occur when the [**Administrative tool**](#gt_administrative-tool) loads and retrieves the appropriate information from the data stores that contain [**Group Policy**](#gt_group-policy) data. The Administrative tool is populated with data that is retrieved from the [**Group Policy server**](#gt_group-policy-server).
 
-This example maps to the use case specified in [Administering Group Policy (section 2.5.3)](#Section_2.1).
+This example maps to the use case specified in [Administering Group Policy (section 2.5.3)](#Section_2.5.3).
 
 **Prerequisites**
 
@@ -1846,7 +1846,7 @@ The following prerequisites apply to this example:
 - Policy information that is stored in the [**Group Policy data store**](#gt_group-policy-data-store) aligns with business and organizational requirements.
 - The [**Group Policy administrator**](#gt_group-policy-administrator) who is running the Administrative tool has read/write access to [**Active Directory**](#gt_active-directory) on the Group Policy server and to the [**Group Policy file share**](#gt_group-policy-file-share).
 - The Group Policy server is a read/write [**domain controller (DC)**](#gt_domain-controller-dc).
-- The Administrative tool is able to discover and communicate with the Group Policy server, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The Administrative tool is able to discover and communicate with the Group Policy server, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 Note that the Group Policy server (DC) discovery and connection sequence for the [**Group Policy client**](#gt_group-policy-client) and Administrative tool are identical.
 
 - The computer hosting the Administrative tool is joined to the domain and the Group Policy administrator is logged on with domain credentials of sufficient rights.
@@ -1879,7 +1879,7 @@ The message sequence for this example is described as follows:
 
 This example describes the message flow during new policy authoring. When the [**Group Policy administrator**](#gt_group-policy-administrator) creates a new [**GPO**](#gt_group-policy-object-gpo), the [**Group Policy server**](#gt_group-policy-server) handles the request by provisioning resources in [**Active Directory**](#gt_active-directory) for a new GPO and appropriate directories are created on the [**Group Policy file share**](#gt_group-policy-file-share). After the new policy is created, the administrator opens the policy and begins setting the policy configuration. As the administrator authors [**policy settings**](#gt_policy-setting), the [**Administrative tool**](#gt_administrative-tool) communicates with Active Directory on the Group Policy server and the Group Policy file share to update these [**Group Policy data stores**](#gt_group-policy-data-store) with the policy data.
 
-This example maps to the use case specified in [Administering Group Policy (section 2.5.3)](#Section_2.1).
+This example maps to the use case specified in [Administering Group Policy (section 2.5.3)](#Section_2.5.3).
 
 **Prerequisites**
 
@@ -1888,7 +1888,7 @@ The following prerequisites apply to this example:
 - Policy information that is stored in the Group Policy data store aligns with business and organizational requirements
 - The Administrative tool has read/write access to the Group Policy server.
 - The Group Policy server is a read/write [**domain controller**](#gt_domain-controller-dc).
-- The Administrative tool is able to discover and communicate with the Group Policy server, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The Administrative tool is able to discover and communicate with the Group Policy server, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 - In this scenario, it is assumed that the Group Policy file share resides on the Group Policy server.
 **Note** The Group Policy server (DC) discovery and connection sequence for the [**Group Policy client**](#gt_group-policy-client) and Administrative tool are identical.
 
@@ -1921,7 +1921,7 @@ The examples in this section describe message sequences that occur during the po
 
 - Failure to contact [**Active Directory**](#gt_active-directory)
 - Failure to contact the Group Policy file share
-The examples in this section map to the use case specified in [Administering Group Policy (section 2.5.3)](#Section_2.1).
+The examples in this section map to the use case specified in [Administering Group Policy (section 2.5.3)](#Section_2.5.3).
 
 **Prerequisites**
 
@@ -1929,7 +1929,7 @@ The following prerequisites apply to the examples in this section:
 
 - Policy information stored in the [**Group Policy data store**](#gt_group-policy-data-store) aligns with business and organizational requirements.
 - The Group Policy server is a read/write [**domain controller**](#gt_domain-controller-dc).
-- The [**Administrative tool**](#gt_administrative-tool) is able to discover the Group Policy server, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The [**Administrative tool**](#gt_administrative-tool) is able to discover the Group Policy server, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 Note that the Group Policy server (DC) discovery and connection sequence for the [**Group Policy client**](#gt_group-policy-client) and Administrative tool are identical.
 
 - The Administrative tool has read/write access to the Group Policy server.
@@ -1953,7 +1953,7 @@ Figure 15: Administrative tool cannot connect with Active Directory
 
 The message sequence for this example is described as follows:
 
-- The Administrative tool attempts to locate the Group Policy server in the domain by the steps described in [MS-ADOD](#Section_2.1) section 3.1.1.
+- The Administrative tool attempts to locate the Group Policy server in the domain by the steps described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 3.1.1.
 - The Group Policy server information for the domain is returned.
 - The Administrative tool sends an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) query to Active Directory to retrieve [**GPO**](#gt_group-policy-object-gpo) information, as described in [MS-GPOL] sections 2.2.2, 2.2.3, and 2.2.4.
 - The Administrative tool fails to receive a response from the Group Policy server within a specified time-out interval.
@@ -1978,13 +1978,13 @@ The message sequence for this example is described as follows:
 
 In this example, a [**Group Policy client**](#gt_group-policy-client) queries a [**Group Policy server**](#gt_group-policy-server) for [**SOM**](#gt_scope-of-management-som) and version information. SOM containers such as [**domain**](#gt_domain), [**site**](#gt_site), and [**OU**](#gt_organizational-unit-ou) containers hold user and computer account information and are associated with [**GPOs**](#gt_group-policy-object-gpo). Each GPO is associated with a specific [**policy target**](#gt_policy-target), such as a user or computer account. Messages exchanged between the Group Policy client and the Group Policy server use [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as a transport.
 
-This example loosely maps to the use case specified in [Applying Group Policy — Group Policy client (section 2.5.2)](#Section_2.1.2.3.2).
+This example loosely maps to the use case specified in [Applying Group Policy — Group Policy client (section 2.5.2)](#Section_2.5.2).
 
 **Prerequisites**
 
 The following prerequisites apply to this example:
 
-- The Group Policy client has discovered the Group Policy server and has connected with [**Active Directory**](#gt_active-directory), as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The Group Policy client has discovered the Group Policy server and has connected with [**Active Directory**](#gt_active-directory), as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 - The Group Policy server stores policy and responds to LDAP requests from the Group Policy client.
 - The Group Policy client maintains a consistent configuration of policy information that is retrieved from the Group Policy server, which includes [**registry**](#gt_registry) settings, WMI data, and [**RSoP**](#gt_resultant-set-of-policy-rsop) data.
 - The [**Group Policy administrator**](#gt_group-policy-administrator) ensures that the Group Policy client policy configuration aligns with business requirements.
@@ -2033,7 +2033,7 @@ The examples in this section describe the message sequences during [**policy app
 
 - Failure to contact [**Active Directory**](#gt_active-directory).
 - Failure to contact the [**Group Policy file share**](#gt_group-policy-file-share).
-This example maps to the use case specified in [Applying Group Policy — Group Policy client (section 2.5.2)](#Section_2.1.2.3.2).
+This example maps to the use case specified in [Applying Group Policy — Group Policy client (section 2.5.2)](#Section_2.5.2).
 
 **Prerequisites**
 
@@ -2042,7 +2042,7 @@ The following prerequisites apply to the examples in this section:
 - The Group Policy server stores policy and responds to requests from the [**Group Policy client**](#gt_group-policy-client).
 - The Group Policy client maintains a consistent configuration of policy information that is retrieved from the Group Policy server, which includes [**registry**](#gt_registry) settings, WMI data, and [**RSoP**](#gt_resultant-set-of-policy-rsop) data.
 - The [**Group Policy administrator**](#gt_group-policy-administrator) ensures that the Group Policy client policy configuration aligns with business requirements.
-- The Group Policy client has discovered the Group Policy server and established a connection with Active Directory, as described in [MS-GPOL](#Section_2.1.1.1) section 3.2.5.1.1.
+- The Group Policy client has discovered the Group Policy server and established a connection with Active Directory, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.1.
 - The Group Policy client has sent an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) **BindRequest** message, as described in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.2, to the Group Policy server and the Group Policy server has replied with an LDAP **BindResponse** message, as described in [RFC2251] section 4.2.3.
 - For the failure to contact Group Policy file share scenario, it is assumed that the Group Policy file share resides on the Group Policy server.
 **Initial System State**

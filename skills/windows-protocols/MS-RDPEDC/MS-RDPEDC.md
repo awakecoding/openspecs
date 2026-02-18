@@ -309,7 +309,7 @@ Figure 4: Sequence of drawing operations on a redirection surface
 
 Drawing to a redirection surface can happen only after a redirection surface is created and is attached to a logical surface.
 
-The **FLUSH_COMPOSEONCE** command causes an explicit flush for the compose-once sprite. See [Drawing Operations Management](#Section_3.3.5.3) in section 3.2.5.3 for more detail.
+The **FLUSH_COMPOSEONCE** command causes an explicit flush for the compose-once sprite. See [Drawing Operations Management](#Section_2.2.3) in section 3.2.5.3 for more detail.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols

@@ -305,7 +305,7 @@ packet-beta
 
 **flags (1 byte):** A bitmask that contains values from the following table that are combined using the bitwise OR operation.
 
-**Note** For a description of how these flags determine the frame type, see section [2](#Section_1.3).
+**Note** For a description of how these flags determine the frame type, see section [2](#Section_2).
 
 | Value | Meaning |
 | --- | --- |
@@ -374,13 +374,13 @@ packet-beta
 
 **flags (1 byte):** A bitmask that contains values from the following table that are combined using the bitwise OR operation.
 
-**Note** For a description of how these flags determine the frame type, see section [2](#Section_1.3).
+**Note** For a description of how these flags determine the frame type, see section [2](#Section_2).
 
 | Value | Meaning |
 | --- | --- |
 | 0x80 | (EXT or EXTENSION) Indicates that the extended flags field is present. |
 | 0x40 | (BIG) Indicates that big frame format is used. This value MUST be 0 because the big frame format was never implemented. |
-| 0x20 | (CMD or COMMAND) Indicates that this is a Data Frame. This bit MUST be set for [Data Frames](#Section_61d3af8e8be8487191d250df8a261945). If the EXT bit is also set, the packet MUST be ignored. |
+| 0x20 | (CMD or COMMAND) Indicates that this is a Data Frame. This bit MUST be set for [Data Frames](#Section_2.2.2). If the EXT bit is also set, the packet MUST be ignored. |
 | 0x10 | (STA or START) Indicates the start of a message that can span multiple protocol frames. |
 | 0x08 | (EOM or END OF MESSAGE) Indicates the end of a message that can span multiple protocol frames. |
 | 0x04 | (SAK or SEND ACKNOWLEDGE) Specifies a request for immediate acknowledgment after this frame is received. |
@@ -442,13 +442,13 @@ packet-beta
 
 **flags (1 byte):** A bitmask that contains values from the following table that are combined using the bitwise OR operation.
 
-**Note** For a description of how these flags determine the frame type, see section [2](#Section_1.3).
+**Note** For a description of how these flags determine the frame type, see section [2](#Section_2).
 
 | Value | Meaning |
 | --- | --- |
 | 0x80 | (EXT or EXTENSION) This value MUST be set to 0. |
 | 0x40 | (BIG) Indicates that big frame format is used. This value MUST be 0 because the big frame format was never implemented. |
-| 0x20 | (CMD or COMMAND) Indicates that this is a Data Frame. This bit MUST be set for [Data Frames](#Section_61d3af8e8be8487191d250df8a261945). If the EXT bit is also set, the packet MUST be ignored. |
+| 0x20 | (CMD or COMMAND) Indicates that this is a Data Frame. This bit MUST be set for [Data Frames](#Section_2.2.2). If the EXT bit is also set, the packet MUST be ignored. |
 | 0x10 | (STA or START) Indicates the start of a message that can span multiple protocol frames. |
 | 0x08 | (EOM or END OF MESSAGE) Indicates the end of a message that can span multiple protocol frames. |
 | 0x04 | (SAK or SEND ACKNOWLEDGE) Specifies a request for immediate acknowledgment after this frame is received. |
@@ -539,7 +539,7 @@ None.
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Player Indexes Header Processing
 
-When any frame arrives, the player indexes header specified in section [2.2.1](../MC-DPL4CS/MC-DPL4CS.md) MUST be evaluated to ensure that the source and destination player indexes represent valid [**players**](#gt_player) participating in the [**game session**](#gt_game-session), as specified in [MC-DPL4CS](../MC-DPL4CS/MC-DPL4CS.md). When delivering data frame [**payloads**](#gt_payload) to the higher layer, these indexes SHOULD be provided.
+When any frame arrives, the player indexes header specified in section [2.2.1](#Section_2.2.1) MUST be evaluated to ensure that the source and destination player indexes represent valid [**players**](#gt_player) participating in the [**game session**](#gt_game-session), as specified in [MC-DPL4CS](../MC-DPL4CS/MC-DPL4CS.md). When delivering data frame [**payloads**](#gt_payload) to the higher layer, these indexes SHOULD be provided.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Data Frame Processing

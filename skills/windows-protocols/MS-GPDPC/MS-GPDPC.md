@@ -268,7 +268,7 @@ The following diagram shows the consumers of the Deployed Printer Connections pr
 
 Figure 1: Consumers of the Deployed Printer Connections Protocol
 
-The situations in which this protocol is used are described in two scenarios: the **administrative scenario** and the **client scenario**, which are defined in sections [1.3.2.1](#Section_1.3.2.1) and [1.3.2.2](#Section_1.3.2.1), respectively.
+The situations in which this protocol is used are described in two scenarios: the **administrative scenario** and the **client scenario**, which are defined in sections [1.3.2.1](#Section_1.3.2.1) and [1.3.2.2](#Section_1.3.2.2), respectively.
 
 <a id="Section_1.3.2.1"></a>
 #### 1.3.2.1 Administrative Scenario
@@ -494,7 +494,7 @@ CN=<GPO_GUID>, CN=Policies, CN=System, DC=<x>, DC=<y>, DC=<z>
 
 where <x>, <y>, <z> is the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of the domain/LDAP server, and <GPO_GUID> is the [**curly braced GUID string**](#gt_curly-braced-guid-string) containing the [**GUID**](#gt_globally-unique-identifier-guid) of the [**GPO**](#gt_group-policy-object-gpo) that is being queried or updated.
 
-To use LDAP, the administrative tool plug-in invokes the Initializing an ADConnection task ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1) with the following parameters, and stores the new *TaskReturnADConnection* returned from the task as the **ADConnection handle** ADM element (section [3.1.1](#Section_3.1)):
+To use LDAP, the administrative tool plug-in invokes the Initializing an ADConnection task ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1) with the following parameters, and stores the new *TaskReturnADConnection* returned from the task as the **ADConnection handle** ADM element (section [3.1.1](#Section_3.1.1)):
 
 - *TaskInputTargetName*: MAY be specified by the administrator, or if not specified, NULL
 - *TaskInputPortNumber*: 389
@@ -641,7 +641,7 @@ When the client-side plug-in receives a [Process Group Policy](#Section_3.2.4.1)
 
 - The client-side plug-in MUST initialize the **DesiredConnections list** abstract data model element (section [3.2.1](#Section_3.2.1)) to the list of printer connections in the **PreviouslyAppliedConnections list** abstract data model element (section 3.2.1).
 - For each [**GPO**](#gt_group-policy-object-gpo) in the *Deleted GPO list* parameter (specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1), the client-side plug-in MUST remove any printer connections from the **DesiredConnections list** that were assigned to the user or machine by this GPO, as determined by the [**GUID**](#gt_globally-unique-identifier-guid) of the GPO.
-- The client-side plug-in MUST issue one LDAP search for each GPO in the *New or Changed GPO list* parameter ([MS-GPOL] section 3.2.4.1) to obtain a list of all new or changed printer connection settings. The message format for this LDAP search is specified in section [3.2.5.1](../MS-GPOL/MS-GPOL.md).
+- The client-side plug-in MUST issue one LDAP search for each GPO in the *New or Changed GPO list* parameter ([MS-GPOL] section 3.2.4.1) to obtain a list of all new or changed printer connection settings. The message format for this LDAP search is specified in section [3.2.5.1](#Section_3.2.5.1).
 - The list of printer connection settings that was obtained from [**Active Directory**](#gt_active-directory) in the previous step SHOULD be removed from the **DesiredConnections list** cache, as determined by the [**Group Policy Object (GPO) GUIDs**](#gt_group-policy-object-gpo-guid). The list of printer connection settings MUST then be added to the **DesiredConnections list**.
 - The client-side plug-in MUST compare the **DesiredConnections list** with the **PreviouslyAppliedConnections list**, and then:
 - If a connection is in the **DesiredConnections list** and the **PreviouslyAppliedConnections list**, the client-side plug-in MUST do nothing.

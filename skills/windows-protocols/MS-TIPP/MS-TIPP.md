@@ -358,7 +358,7 @@ This protocol represents an extension to the standard [**Transaction Internet Pr
 - All the nodes remain in their previous state.
 For multiple platforms to participate in this, it is important to have a standard protocol for reaching this agreement. The TIP standard protocol [RFC2371] specifies such a standard. This document defines an extension of the TIP standard protocol.
 
-The TIP standard protocol [RFC2371] specifies [**TIP connection**](#gt_tip-connection) initialization, push and pull enlistment, distributed agreement, and remote transactions. These are summarized in the following subsections and specified in sections [2](#Section_1.3) and [3](#Section_1.3). For additional requirements and supplemental information, see [[RFC2372]](https://go.microsoft.com/fwlink/?LinkId=94877).
+The TIP standard protocol [RFC2371] specifies [**TIP connection**](#gt_tip-connection) initialization, push and pull enlistment, distributed agreement, and remote transactions. These are summarized in the following subsections and specified in sections [2](#Section_2) and [3](#Section_3). For additional requirements and supplemental information, see [[RFC2372]](https://go.microsoft.com/fwlink/?LinkId=94877).
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Protocol Roles
@@ -668,7 +668,7 @@ A [**TIP connection**](#gt_tip-connection) object MUST contain the following dat
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 TIP Connection Management Operations
 
-The following operations on the table of [**TIP connection**](#gt_tip-connection) are used throughout section [3](#Section_1.3).
+The following operations on the table of [**TIP connection**](#gt_tip-connection) are used throughout section [3](#Section_3).
 
 <a id="Section_3.1.1.3.1"></a>
 ##### 3.1.1.3.1 GetTipConnection Operation
@@ -755,7 +755,7 @@ A TIP command object MUST contain the following data fields:
 <a id="Section_3.1.1.5"></a>
 #### 3.1.1.5 Transaction Identifier Converter Operations
 
-The following operations that convert between [**transaction**](#gt_transaction) identifier formats are used throughout section [3](#Section_1.3).
+The following operations that convert between [**transaction**](#gt_transaction) identifier formats are used throughout section [3](#Section_3).
 
 <a id="Section_3.1.1.5.1"></a>
 ##### 3.1.1.5.1 Convert TIP Transaction Identifier to Transaction Identifier Operation
@@ -852,19 +852,19 @@ When a [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) r
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a [BEGUN](#Section_2.2.2) TIP command object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Receiving CANTMULTIPLEX TIP Command
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a **CANTMULTIPLEX** TIP command object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Receiving CANTTLS TIP Command
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a **CANTTLS** TIP command object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receiving IDENTIFIED TIP Command
 
@@ -876,7 +876,7 @@ Upon receipt, the TIP transaction manager facet MUST perform the following actio
 - Test whether the receiving TIP connection object (section [3.1.1.2](#Section_3.1.1.2)) meets the following conditions:
 - The **Connection Type** field is set to Primary.
 - The **State** field is set to Initial Identify.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy these conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy these conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 - If the value of the provided *protocol version* is not 3, signal the Invalid TIP Command event (section 3.1.7.1) and terminate the processing of this event.
 - Set the **State** field of the TIP connection object to Idle.
 <a id="Section_3.1.5.5"></a>
@@ -893,7 +893,7 @@ Upon receipt, the TIP transaction manager facet MUST perform the following actio
 - Test whether the receiving [**TIP connection**](#gt_tip-connection) object meets the following conditions:
 - The **Connection Type** field is set to Secondary.
 - The **State** field is set to Initial.
-- If the receiving TIP connection does not satisfy these conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- If the receiving TIP connection does not satisfy these conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 - If the provided *primary transaction manager address* is not set to "-":
 - Set the **Partner Transaction Manager Address** field of the receiving TIP connection to the provided *primary transaction manager address*.
 - If the value of the **Allow Different Partner Address** flag is set to FALSE and the provided *primary transaction manager address* does not match the address from which the connection originated, signal the Invalid TIP Command event (section 3.1.7.1) and terminate the processing of this event.
@@ -903,7 +903,7 @@ Upon receipt, the TIP transaction manager facet MUST perform the following actio
 - The provided *highest protocol version* is set to a value greater than or equal to the minimum supported TIP Protocol version of the local TIP transaction manager facets.<6>
 - If the provided values do not satisfy one of the conditions:
 - Send an **ERROR** [**TIP command**](#gt_tip-command).
-- Terminate the TCP connection. This causes the [Transport Connection Down (section 3.1.7.2.2)](#Section_2.1) event to be signaled.
+- Terminate the TCP connection. This causes the [Transport Connection Down (section 3.1.7.2.2)](#Section_3.1.7.2.2) event to be signaled.
 - Set the **State** field of the receiving TIP connection object to Idle.
 - Send an **IDENTIFIED** (as specified in [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338) section 13) TIP command with the following argument:
 - The lesser between the provided *highest protocol version* and the maximum supported TIP Protocol version of the local TIP transaction manager facets.
@@ -921,26 +921,26 @@ Upon receipt, the TIP transaction manager facet MUST perform the following actio
 - The **State** field is set to Idle.
 - The TIP transaction manager facet MAY<8> test that the receiving [**TIP command**](#gt_tip-command) object meets the following condition:
 - The value of the provided <protocol-identifier> is "TMP2.0"
-- If the receiving TIP connection does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- If the receiving TIP connection does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 - Send a **CANTMULTIPLEX** (as specified in [RFC2371] section 13) TIP command.
 <a id="Section_3.1.5.7"></a>
 #### 3.1.5.7 Receiving MULTIPLEXING TIP Command
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a **MULTIPLEXING** TIP command object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 Receiving NEEDTLS TIP Command
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a **NEEDTLS** TIP command object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event. These actions do not conform to the [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338) specification.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event. These actions do not conform to the [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338) specification.
 <a id="Section_3.1.5.9"></a>
 #### 3.1.5.9 Receiving NOTBEGUN TIP Command
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a **NOTBEGUN** [**TIP command**](#gt_tip-command) object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 <a id="Section_3.1.5.10"></a>
 #### 3.1.5.10 Receiving TLS TIP Command
 
@@ -949,14 +949,14 @@ When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets)
 - Test whether the receiving [TIP connection object](#Section_3.1.1.2) meets the following conditions:
 - The **Connection Type** field is set to Secondary.
 - The **State** field is set to Initial.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 - The TIP transaction manager facet SHOULD<9> send a **CANTTLS** TIP command to conform to the [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338) specification.
 <a id="Section_3.1.5.11"></a>
 #### 3.1.5.11 Receiving TLSING TIP Command
 
 When the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) receives a **TLSING** [**TIP command**](#gt_tip-command) object, it MUST perform the following actions:
 
-- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- [**Signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
@@ -971,7 +971,7 @@ None.
 When a [**TIP command**](#gt_tip-command) is determined to be invalid, the [**TIP transaction manager facet**](#gt_tip-transaction-manager-facets) MUST perform the following actions:
 
 - The TIP transaction manager facet SHOULD<10> send the **ERROR** TIP command on the TIP command's [**TIP connection**](#gt_tip-connection).
-- If the TIP connection's **Connection Type** data field is Primary, terminate the TCP connection. This causes the [Transport Connection Down (section 3.1.7.2.2)](#Section_2.1) event to be signaled.
+- If the TIP connection's **Connection Type** data field is Primary, terminate the TCP connection. This causes the [Transport Connection Down (section 3.1.7.2.2)](#Section_3.1.7.2.2) event to be signaled.
 <a id="Section_3.1.7.2"></a>
 #### 3.1.7.2 Transport Events
 
@@ -984,7 +984,7 @@ The Received Message event is signaled when a TCP message arrives on the [**TIP*
 - Call the [GetTipConnection operation (section 3.1.1.3.1)](#Section_3.1.1.3.1) with the TCP connection as an input parameter. This returns a TIP connection object (section [3.1.1.2](#Section_3.1.1.2)) whose data fields include the following:
 - **Transport Connection:** The provided TCP connection.
 - Parse the message data into separate [**TIP commands**](#gt_tip-command) according to the ABNF rules as specified in section [2.2](#Section_2.2). To support **Pipelining**, the incoming message is parsed into separate TIP commands.
-- If this parsing is not successful, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.3.7.1) and terminate the processing of this event.
+- If this parsing is not successful, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.1.7.1)](#Section_3.1.7.1) and terminate the processing of this event.
 - For each of the TIP commands in this message, do the following:
 - Build a TIP command object from the parsed TIP command name, parameters, and the [**TIP connection**](#gt_tip-connection) object.
 - The TIP command object is now ready to be processed as an incoming message event.
@@ -1075,7 +1075,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) MUST perform all initialization as specified in section [3.1.3](#Section_1.3).
+The [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) MUST perform all initialization as specified in section [3.1.3](#Section_3.1.3).
 
 The enlistment objects that are created by the TIP superior transaction manager facet MUST initialize the Name and Identifier properties as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.7.1. The Transaction manager facet of the enlistment object MUST be initialized to the TIP superior transaction manager facet.
 
@@ -1121,7 +1121,7 @@ This section describes how each received [**TIP command**](#gt_tip-command) is p
 
 When the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) receives an ABORTED TIP command, it MUST perform the following actions:
 
-- If the **Connection Type** field of the receiving [**TIP connection**](#gt_tip-connection) object (section [3.1.1.2](#Section_3.1.1.2)) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the **Connection Type** field of the receiving [**TIP connection**](#gt_tip-connection) object (section [3.1.1.2](#Section_3.1.1.2)) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - If the **State** field of the receiving TIP connection object is not set to either Enlisted Abort, Prepared Abort, Enlisted Prepare, or Enlisted Commit, signal the Invalid TIP Command event (section 3.4.7.1) and terminate the processing of this TIP command.
 - If the **State** field of the receiving TIP connection object (section 3.1.1.2) is set to either Enlisted Abort or Prepared Abort:
 - Signal the **Enlistment Rollback Complete** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.18) event on the [**core transaction manager facet**](#gt_core-transaction-manager-facet) with the following argument:
@@ -1143,7 +1143,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving [TIP connection object](#Section_3.1.1.2) meets the following conditions:
 - The **Connection Type** field is set to Primary.
 - The **State** field is set to Idle Push.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - Call the TIP connection manager's FreeTipConnection operation with the following argument:
 - The receiving TIP connection object.
 - Notify the higher-layer business logic that the **Push** request succeeded.
@@ -1153,7 +1153,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 
 When the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) receives a COMMITTED TIP command, it MUST perform the following actions:
 
-- If the **Connection Type** field of the receiving [TIP connection object](#Section_3.1.1.2) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the **Connection Type** field of the receiving [TIP connection object](#Section_3.1.1.2) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - If the **State** field of the receiving TIP connection object is not set to either Enlisted Commit or Prepared Commit, signal the Invalid TIP Command event (section 3.4.7.1) and terminate the processing of this TIP command.
 - If the **State** field of the receiving TIP connection object is set to Enlisted Commit:
 - Signal the **Enlistment Phase One Complete event** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.16) on the [**core transaction manager facet**](#gt_core-transaction-manager-facet) with the following arguments:
@@ -1172,7 +1172,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving [TIP connection object](#Section_3.1.1.2) meets the following conditions:
 - The **Connection Type** field is set to Primary.
 - The **State** field is set to Idle Push.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - The TIP superior transaction manager facet SHOULD<11> call the TIP connection manager's FreeTipConnection operation with the following argument, to conform to the [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338) specification.
 - The TIP connection object referenced by the provided enlistment object.
 - Notify the higher-layer business logic that the **Push** request failed.
@@ -1185,7 +1185,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving [TIP connection object](#Section_3.1.1.2) meets the following conditions:
 - The **Connection Type** field is set to Primary.
 - The **State** field is set to Idle Reconnect.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - Signal the **Enlistment Commit Complete** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.15) event on the [**core transaction manager facet**](#gt_core-transaction-manager-facet) with the following argument:
 - The TIP connection object's enlistment object.
 - Call the TIP connection manager's [FreeTipConnection](#Section_3.1.1.3.4) operation with the following argument:
@@ -1196,7 +1196,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 
 When the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) receives a PREPARED TIP command, it MUST perform the following actions:
 
-- If the **Connection Type** field of the receiving [TIP connection object](#Section_3.1.1.2) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the **Connection Type** field of the receiving [TIP connection object](#Section_3.1.1.2) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - If the **State** field of the receiving TIP connection object is not set to Enlisted Prepare, signal the Invalid TIP Command Event (section 3.4.7.1) and terminate the processing of this TIP command.
 - If the **Partner Transaction Manager Address** field of the receiving TIP connection object is not set, signal the Invalid TIP Command Event (section 3.4.7.1) and terminate the processing of this TIP command.
 - Signal the **Enlistment Phase One Complete** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.16) event on the [**core transaction manager facet**](#gt_core-transaction-manager-facet) with the following arguments:
@@ -1220,8 +1220,8 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving TIP connection object meets the following conditions:
 - The **Connection Type** field is set to Secondary.
 - The **State** field is set to Idle.
-- If the receiving TIP connection does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this TIP command.
-- If the provided *superior's transaction identifier* does not have the [OleTxTipTransactionIdentifier](#Section_7924116a9e2a42ab85f27271b42d1a66) format, as specified in section 2.2:
+- If the receiving TIP connection does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this TIP command.
+- If the provided *superior's transaction identifier* does not have the [OleTxTipTransactionIdentifier](#Section_2.2) format, as specified in section 2.2:
 - Call the TIP connection manager's [HasPartnerTransaction](#Section_3.1.1.3.3) operation with the following arguments:
 - The provided [**partner transaction manager**](#gt_partner-transaction-manager) address.
 - The provided *superior's transaction identifier*.
@@ -1256,8 +1256,8 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving [TIP connection object](#Section_3.1.1.2) meets the following conditions:
 - The **Connection Type** field is set to Primary.
 - The **State** field is set to Idle Push.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, signal the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
-- If the provided *subordinate's transaction identifier* does not have the [OleTxTipTransactionIdentifier](#Section_7924116a9e2a42ab85f27271b42d1a66) format, as specified in section 2.2:
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, signal the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the provided *subordinate's transaction identifier* does not have the [OleTxTipTransactionIdentifier](#Section_2.2) format, as specified in section 2.2:
 - Call the TIP connection manager's HasPartnerTransaction operation with the following parameters:
 - The **Partner Transaction Manager Address** field of the enlistment object referenced by the receiving TIP connection object.
 - The provided *subordinate's transaction identifier*.
@@ -1279,7 +1279,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving TIP connection object meets the following conditions:
 - The **Connection Type** field is set to Secondary.
 - The **State** field is set to Idle.
-- If the receiving TIP connection does not satisfy the conditions, signal the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this TIP command.
+- If the receiving TIP connection does not satisfy the conditions, signal the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this TIP command.
 - Call the [**Transaction**](#gt_transaction) Identifier Converter's [Convert TIP Transaction Identifier to Transaction Identifier operation](#Section_3.1.1.5.1) with the following argument:
 - The provided *superior's transaction identifier*.
 - Attempt to find a transaction object in the transaction table of the [**core transaction manager facet**](#gt_core-transaction-manager-facet) that meets the following condition:
@@ -1291,7 +1291,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 
 When the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) receives a READONLY TIP command, it MUST perform the following actions:
 
-- If the **Connection Type** field of the receiving [TIP connection object](#Section_3.1.1.2) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the **Connection Type** field of the receiving [TIP connection object](#Section_3.1.1.2) is not set to Primary, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - If the TIP connection object's **State** field is not set to Enlisted Prepare, signal the Invalid TIP Command Event (section 3.4.7.1) and terminate the processing of this TIP command.
 - Signal the **Enlistment Phase One Complete** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.16) event on the [**core transaction manager facet**](#gt_core-transaction-manager-facet) with the following arguments:
 - The enlistment object referenced by the receiving TIP connection object.
@@ -1305,7 +1305,7 @@ When the [**TIP superior transaction manager facet**](#gt_tip-superior-transacti
 - Test whether the receiving [TIP connection object](#Section_3.1.1.2) meets the following conditions:
 - The **Connection Type** field is set to Primary.
 - The **State** field is set to Idle Reconnect.
-- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the receiving [**TIP connection**](#gt_tip-connection) does not satisfy the conditions, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - Set the TIP connection object's **State** field to Prepared Commit.
 - Send a **COMMIT** TIP command.
 <a id="Section_3.2.5.12"></a>
@@ -1331,7 +1331,7 @@ None.
 <a id="Section_3.2.7.1"></a>
 #### 3.2.7.1 Invalid TIP Command Event
 
-This event overrides the event with the same name specified in section [3.1](#Section_1.3). It is used by the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)).
+This event overrides the event with the same name specified in section [3.1](#Section_3.1). It is used by the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)).
 
 This event is triggered with the following argument:
 
@@ -1342,7 +1342,7 @@ When this event is [**signaled**](#gt_signal), it MUST perform the following act
 - If the **Connection Type** field of the receiving TIP connection object is set to Primary:
 - Call the [**TIP connection**](#gt_tip-connection) manager's TerminateTipConnection operation with the following argument:
 - The provided TIP connection object.
-- Signal the [Process Error](#Section_3.3.7.2) event with the following argument:
+- Signal the [Process Error](#Section_3.2.7.2) event with the following argument:
 - The provided TIP connection object.
 - Otherwise, if the **Connection Type** field of the receiving TIP connection object is set to Secondary:
 - Set the **State** field of the receiving TIP connection object to Error.
@@ -1445,7 +1445,7 @@ If the Create Subordinate Enlistment Failure event is signaled, the [**TIP super
 - Reset the TIP connection object referenced by the enlistment object referenced by the provided TIP connection object.
 - Call the [**TIP connection**](#gt_tip-connection) manager's TerminateTipConnection operation with the following argument:
 - The provided TIP connection object.
-- Signal the [Process Error](#Section_3.3.7.2) event with the following argument:
+- Signal the [Process Error](#Section_3.2.7.2) event with the following argument:
 - The TIP connection object referenced by the provided enlistment object.
 - Otherwise, if the **Connection Type** field of the TIP connection object referenced by the provided enlistment object is set to Secondary:
 - Send a **NOTPULLED** TIP command.
@@ -1472,7 +1472,7 @@ If the Create Subordinate Enlistment Success event is signaled, the [**TIP super
 <a id="Section_3.2.7.4.1"></a>
 ##### 3.2.7.4.1 Transport Connection Down
 
-This event overrides the event with the same name in section [3.1.7.2.2](#Section_2.1).
+This event overrides the event with the same name in section [3.1.7.2.2](#Section_3.1.7.2.2).
 
 This event is triggered with the following argument:
 
@@ -1480,7 +1480,7 @@ This event is triggered with the following argument:
 - If the Transport Connection Down event is [**signaled**](#gt_signal), the [**TIP superior transaction manager facet**](#gt_tip-superior-transaction-manager-facet) (section [1.3.1.2.1](#Section_1.3.1.2.1)) MUST perform the following actions:
 - Call the [**TIP connection**](#gt_tip-connection) manager's [TerminateTipConnection operation](#Section_3.1.1.3.5) with the following argument:
 - The provided TIP connection object.
-- Signal the [Process Error](#Section_3.3.7.2) event with the following argument:
+- Signal the [Process Error](#Section_3.2.7.2) event with the following argument:
 - The provided TIP connection object.
 <a id="Section_3.3"></a>
 ## 3.3 TIP Subordinate Transaction Manager Facet Details
@@ -1560,7 +1560,7 @@ The "<TIP command A> received/<TIP response B> sent" syntax in the table indicat
 <a id="Section_3.3.2.1"></a>
 #### 3.3.2.1 Query Timer
 
-The query timer MUST be started whenever recovery work is performed for an [In Doubt Transaction](#Section_3.3.7.3.6), as specified by the processing of the Receiving **QUERIEDEXISTS** [**TIP command**](#gt_tip-command) and [Process Error](#Section_3.3.7.2) events.
+The query timer MUST be started whenever recovery work is performed for an [In Doubt Transaction](#Section_3.3.7.3.6), as specified by the processing of the Receiving **QUERIEDEXISTS** [**TIP command**](#gt_tip-command) and [Process Error](#Section_3.2.7.2) events.
 
 The query timer MUST be canceled by the processing of the Receiving [RECONNECT](#Section_2.2.8) TIP command and by the processing of the [Query Timer Expired event](#Section_3.3.6.1).
 
@@ -1573,7 +1573,7 @@ When the timer expires, the Query Timer Expired event is [**signaled**](#gt_sign
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-The [**TIP subordinate transaction manager facet**](#gt_tip-subordinate-transaction-manager-facet) (section [1.3.1.2.2](#Section_1.3.1.2.2)) MUST perform all initialization as specified in section [3.1.3](#Section_1.3).
+The [**TIP subordinate transaction manager facet**](#gt_tip-subordinate-transaction-manager-facet) (section [1.3.1.2.2](#Section_1.3.1.2.2)) MUST perform all initialization as specified in section [3.1.3](#Section_3.1.3).
 
 The enlistment objects that are created by the TIP subordinate transaction manager facet MUST initialize the Name and Identifier properties as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.8.1. The Transaction manager facet of the enlistment object is set to the TIP subordinate transaction manager facet.
 
@@ -1589,7 +1589,7 @@ The Pull Transaction event MUST be [**signaled**](#gt_signal) by the [**higher-l
 - **Superior's Transaction Identifier**. See [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338) section 13 for information on this TIP command.
 If the Pull Transaction event is signaled, the [TIP subordinate transaction manager facet](#Section_1.3.1.2.2) MUST perform the following actions:
 
-- If the provided **Superior's Transaction Identifier** does not have the [OleTxTipTransactionIdentifier](#Section_7924116a9e2a42ab85f27271b42d1a66) format:
+- If the provided **Superior's Transaction Identifier** does not have the [OleTxTipTransactionIdentifier](#Section_2.2) format:
 - Call the [**TIP connection**](#gt_tip-connection) manager's [HasPartnerTransaction operation](#Section_3.1.1.3.3) with the following arguments:
 - The provided partner transaction manager address.
 - The provided **Superior Transaction Identifier**.
@@ -1789,7 +1789,7 @@ When the [**TIP subordinate transaction manager facet**](#gt_tip-subordinate-tra
 - Reset the **TIP Connection** field of the enlistment object referenced by the receiving TIP connection object.
 - Call the TIP connection manager's [FreeTipConnection](#Section_3.1.1.3.4) operation with the following argument:
 - The receiving TIP connection object.
-- [**Signal**](#gt_signal) the [Process Error](#Section_3.3.7.2) event with the following argument:
+- [**Signal**](#gt_signal) the [Process Error](#Section_3.2.7.2) event with the following argument:
 - The receiving TIP connection object.
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -1811,7 +1811,7 @@ A [**TIP subordinate transaction manager facet**](#gt_tip-subordinate-transactio
 <a id="Section_3.3.7.1"></a>
 #### 3.3.7.1 Invalid TIP Command Event
 
-This event overrides the event with the same name in section [3.1.7.1](#Section_3.3.7.1). It is used by the [**TIP subordinate transaction manager facet**](#gt_tip-subordinate-transaction-manager-facet) (section [1.3.1.2.2](#Section_1.3.1.2.2)).
+This event overrides the event with the same name in section [3.1.7.1](#Section_3.1.7.1). It is used by the [**TIP subordinate transaction manager facet**](#gt_tip-subordinate-transaction-manager-facet) (section [1.3.1.2.2](#Section_1.3.1.2.2)).
 
 This event is triggered with the following argument:
 
@@ -1822,7 +1822,7 @@ If the Invalid TIP Command event is [**signaled**](#gt_signal), the TIP subordin
 - If the **Connection Type** field of the receiving TIP connection object is set to Primary:
 - Call the TIP connection manager's [TerminateTipConnection operation](#Section_3.1.1.3.5) with the following argument:
 - The provided TIP connection object.
-- Signal the [Process Error](#Section_3.3.7.2) event with the following argument:
+- Signal the [Process Error](#Section_3.2.7.2) event with the following argument:
 - The provided TIP connection object.
 <a id="Section_3.3.7.2"></a>
 #### 3.3.7.2 Process Error
@@ -2018,7 +2018,7 @@ If the Unilaterally Aborted event is signaled, the [**TIP subordinate transactio
 <a id="Section_3.3.7.4.1"></a>
 ##### 3.3.7.4.1 Transport Connection Down
 
-This event overrides the event with the same name as specified in section [3.1.7.2.2](#Section_2.1).
+This event overrides the event with the same name as specified in section [3.1.7.2.2](#Section_3.1.7.2.2).
 
 The Transport Connection Down event MUST be [**signaled**](#gt_signal) with the following argument:
 
@@ -2027,7 +2027,7 @@ If the Transport Connection Down event is signaled, the [**TIP subordinate trans
 
 - Call the TIP connection manager's [TerminateTipConnection operation](#Section_3.1.1.3.5) with the following argument:
 - The provided TIP connection object.
-- Signal the [Process Error](#Section_3.3.7.2) event with the following argument:
+- Signal the [Process Error](#Section_3.2.7.2) event with the following argument:
 - The provided TIP connection object.
 <a id="Section_3.4"></a>
 ## 3.4 TIP Transaction Manager Communicating with an Application Facet Details
@@ -2077,7 +2077,7 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-The [**TIP transaction manager communicating with an application facet**](#gt_tip-transaction-manager-communicating-with-an-application-facet) (section [1.3.1.2.3](#Section_1.3.1.2.3)) MUST perform all initialization as specified in section [3.1.3](#Section_1.3).
+The [**TIP transaction manager communicating with an application facet**](#gt_tip-transaction-manager-communicating-with-an-application-facet) (section [1.3.1.2.3](#Section_1.3.1.2.3)) MUST perform all initialization as specified in section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
@@ -2094,7 +2094,7 @@ This section describes how each received [**TIP command**](#gt_tip-command) is p
 
 When the [**TIP transaction manager communicating with an application facet**](#gt_tip-transaction-manager-communicating-with-an-application-facet) (section [1.3.1.2.3](#Section_1.3.1.2.3)) receives an **ABORT** TIP command, it MUST perform the following actions:
 
-- If the **Connection Type** field of the receiving [**TIP connection**](#gt_tip-connection) object is not set to Secondary, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the **Connection Type** field of the receiving [**TIP connection**](#gt_tip-connection) object is not set to Secondary, [**signal**](#gt_signal) the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - If the **State** field of the receiving TIP connection object is not set to either Aborted or Begun, signal the Invalid TIP Command event (section 3.4.7.1) and terminate the processing of this TIP command.
 - If the **State** field of the receiving TIP connection object is set to Aborted:
 - Set the **State** field of the TIP connection object referenced by the provided enlistment object to Idle.
@@ -2115,7 +2115,7 @@ When the [**TIP transaction manager communicating with an application facet**](#
 - The **Connection Type** field of the receiving TIP connection object is not set to Secondary.
 - The **State** field of the receiving TIP connection object is not set to Idle.
 - The value of the **Allow Begin** flag is FALSE.
-- If the receiving TIP connection object satisfies any of the conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this TIP command.
+- If the receiving TIP connection object satisfies any of the conditions, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this TIP command.
 - Create a new [**transaction**](#gt_transaction) object with the following value:
 - The **Transaction Identifier** field is set to a new GUID value.
 - Set the transaction object referenced by the enlistment object referenced by the receiving TIP connection object to the new transaction object.
@@ -2126,7 +2126,7 @@ When the [**TIP transaction manager communicating with an application facet**](#
 
 When the [**TIP transaction manager communicating with an application facet**](#gt_tip-transaction-manager-communicating-with-an-application-facet) (section [1.3.1.2.3](#Section_1.3.1.2.3)) receives a **COMMIT** TIP command, it MUST perform the following actions:
 
-- If the **Connection Type** field of the receiving [**TIP connection**](#gt_tip-connection) object is not set to Secondary, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.3.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
+- If the **Connection Type** field of the receiving [**TIP connection**](#gt_tip-connection) object is not set to Secondary, [**signal**](#gt_signal) the [Invalid TIP Command event (section 3.4.7.1)](#Section_3.4.7.1) and terminate the processing of this [**TIP command**](#gt_tip-command).
 - If the **State** field of the receiving TIP connection object is not set to either Begun or Aborted, signal the Invalid TIP Command event (section 3.4.7.1) and terminate the processing of this TIP command.
 - If the **State** field of the receiving TIP connection object is set to Begun:
 - Signal the Begin Phase Zero ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.5) event on the [**core transaction manager facet**](#gt_core-transaction-manager-facet) with the following argument:
@@ -2156,7 +2156,7 @@ A [**TIP transaction manager communicating with an application facet**](#gt_tip-
 <a id="Section_3.4.7.1"></a>
 #### 3.4.7.1 Invalid TIP Command Event
 
-This event overrides the event with the same name as specified in section [3.1](#Section_1.3). It is used by the [**TIP transaction manager communicating with an application facet**](#gt_tip-transaction-manager-communicating-with-an-application-facet) (section [1.3.1.2.3](#Section_1.3.1.2.3)).
+This event overrides the event with the same name as specified in section [3.1](#Section_3.1). It is used by the [**TIP transaction manager communicating with an application facet**](#gt_tip-transaction-manager-communicating-with-an-application-facet) (section [1.3.1.2.3](#Section_1.3.1.2.3)).
 
 The Invalid TIP Command event is triggered with the following argument:
 
@@ -2267,7 +2267,7 @@ If the Unilaterally Aborted event is signaled, the [**TIP transaction manager co
 <a id="Section_3.4.7.3.1"></a>
 ##### 3.4.7.3.1 Transport Connection Down
 
-This event overrides the event with the same name as specified in section [3.1.7.2.2](#Section_2.1).
+This event overrides the event with the same name as specified in section [3.1.7.2.2](#Section_3.1.7.2.2).
 
 The Transport Connection Down event MUST be [**signaled**](#gt_signal) with the following argument:
 
@@ -2477,7 +2477,7 @@ When each subordinate branch of the transaction replies that it has committed th
 <a id="Section_4.1.3.2"></a>
 #### 4.1.3.2 Single-Phase Commit
 
-The single-phase commit [**TIP command**](#gt_tip-command) sequence is the same as that specified in section [4.1.3.1.3](#Section_4.1.3.1.3) except that when the [**TIP subordinate transaction manager**](#gt_tip-subordinate-transaction-manager) receives the [COMMIT TIP command](#Section_3.4.5.3), it then performs the activities of both [Phase One](#Section_4.1.3.1.2) and [Phase Two](#Section_4.1.3.1.4) before responding with the **COMMITTED** TIP command.
+The single-phase commit [**TIP command**](#gt_tip-command) sequence is the same as that specified in section [4.1.3.1.3](#Section_4.1.3.1.3) except that when the [**TIP subordinate transaction manager**](#gt_tip-subordinate-transaction-manager) receives the [COMMIT TIP command](#Section_3.3.5.2), it then performs the activities of both [Phase One](#Section_4.1.3.1.2) and [Phase Two](#Section_4.1.3.1.4) before responding with the **COMMITTED** TIP command.
 
 <a id="Section_4.2"></a>
 ## 4.2 Begin Scenario
@@ -2525,7 +2525,7 @@ Each participant upholds the following principles:
 
 - Every transaction reaches a common outcome for all participants, in accord with a correctly executed Two-Phase Commit Protocol.
 - No transaction remains In Doubt for a longer period of time than the application's [**higher-layer business logic**](#gt_higher-layer-business-logic) accepts.
-An implementation has the option to further restrict its exposure to security vulnerabilities by initializing the following flags specified in the [Abstract Data Model (section 3.1.1)](#Section_3.2.1) to FALSE:
+An implementation has the option to further restrict its exposure to security vulnerabilities by initializing the following flags specified in the [Abstract Data Model (section 3.1.1)](#Section_3.1.1) to FALSE:
 
 - Allow [**TIP**](#gt_tip)
 - Allow Begin
@@ -2580,11 +2580,11 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 3.1.5.6: On Windows 2000, the TIP transaction manager facet checks that the value of the provided <protocol identifier> is "TMP2.0". Otherwise, on Windows, the TIP transaction manager facet does not check the value of the provided <protocol identifier>.
 
-<9> Section 3.1.5.10: On Windows 2000, the TIP transaction manager facet signals the Invalid TIP Command event (section [3.1.7.1](#Section_3.3.7.1)) and terminates the processing of this event.
+<9> Section 3.1.5.10: On Windows 2000, the TIP transaction manager facet signals the Invalid TIP Command event (section [3.1.7.1](#Section_3.1.7.1)) and terminates the processing of this event.
 
 <10> Section 3.1.7.1: On Windows 2000, the TIP transaction manager facet might not send the **ERROR** TIP command or might send an invalid message.
 
-<11> Section 3.2.5.4: On Windows 2000, the TIP superior transaction manager facet signals the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.3.7.1).
+<11> Section 3.2.5.4: On Windows 2000, the TIP superior transaction manager facet signals the [Invalid TIP Command Event (section 3.4.7.1)](#Section_3.4.7.1).
 
 <12> Section 3.2.5.7: On Windows, the TIP superior transaction manager will terminate the corresponding TIP connection on receiving a TIP PULL command from a TIP subordinate transaction manager when the following conditions are true:
 
@@ -2647,10 +2647,10 @@ Following is the complete list of sections where this protocol extends the [RFC2
 - Section 2.2.7
 - Section 2.2.8
 - Section [3.1.1.3.2](#Section_3.1.1.3.2)
-- Section [3.1.5.6](#Section_3.1.5.2)
+- Section [3.1.5.6](#Section_3.1.5.6)
 - Section [3.1.5.9](#Section_3.1.5.9)
 - Section [3.1.5.11](#Section_3.1.5.11)
-- Section [3.1.7.1](#Section_3.3.7.1)
+- Section [3.1.7.1](#Section_3.1.7.1)
 - Section [3.2.5.4](#Section_3.2.5.4)
 - Section [3.2.5.7](#Section_3.2.5.7)
 - Section [3.2.7.3.4](#Section_3.2.7.3.4)

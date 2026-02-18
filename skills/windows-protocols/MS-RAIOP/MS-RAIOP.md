@@ -118,7 +118,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-This document describes the Remote Assistance Initiation over PNRP Protocol, which is used to establish a [**Remote Assistance connection**](#gt_remote-assistance-connection) between two computers. This protocol uses the [**Peer Name Resolution Protocol (PNRP)**](#gt_peer-name-resolution-protocol-pnrp), as specified in [MS-PNRP](#Section_2.2.2), to transfer the [Remote Assistance connection string (section 2.2.1)](#Section_2.2.1) securely between two computers. After the Remote Assistance connection string is transferred, a [**Remote Assistance session**](#gt_remote-assistance-session) can be established between the two computers.
+This document describes the Remote Assistance Initiation over PNRP Protocol, which is used to establish a [**Remote Assistance connection**](#gt_remote-assistance-connection) between two computers. This protocol uses the [**Peer Name Resolution Protocol (PNRP)**](#gt_peer-name-resolution-protocol-pnrp), as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md), to transfer the [Remote Assistance connection string (section 2.2.1)](#Section_2.2.1) securely between two computers. After the Remote Assistance connection string is transferred, a [**Remote Assistance session**](#gt_remote-assistance-session) can be established between the two computers.
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -146,7 +146,7 @@ This document uses the following terms:
 **extended payload**: An arbitrary BLOB of data associated with a [**Peer Name**](#gt_peer-name) and published by an application.
 
 <a id="gt_global-pnrp-cloud"></a>
-**Global PNRP cloud**: A PNRP cloud as specified in [MS-PNRP](#Section_2.2.2) with a name "Global".
+**Global PNRP cloud**: A PNRP cloud as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md) with a name "Global".
 
 <a id="gt_hexconvertedunicodestring"></a>
 **HexConvertedUnicodeString**: A [**Unicode string**](#gt_unicode-string) created from a binary, byte-granular value. The string is created by converting each byte, starting with the most significant byte and ending with the least significant byte, into two Unicode characters. The characters are the hexadecimal representation of each nibble of the byte, starting with the high-order nibble.
@@ -209,7 +209,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [FIPS197] FIPS PUBS, "Advanced Encryption Standard (AES)", FIPS PUB 197, November 2001, [https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf](https://go.microsoft.com/fwlink/?LinkId=89870)
 
-[MS-PNRP] Microsoft Corporation, "[Peer Name Resolution Protocol (PNRP) Version 4.0](#Section_2.2.2)".
+[MS-PNRP] Microsoft Corporation, "[Peer Name Resolution Protocol (PNRP) Version 4.0](../MS-PNRP/MS-PNRP.md)".
 
 [MS-RAI] Microsoft Corporation, "[Remote Assistance Initiation Protocol](../MS-RAI/MS-RAI.md)".
 
@@ -231,14 +231,14 @@ This protocol is used to transfer the [Remote Assistance Connection String (sec
 
 The protocol describes two methods based on [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) to exchange the Remote Assistance Connection String:
 
-**Using an Unsecured Peer Name**: This method uses [**Unsecured Peer Names**](#gt_unsecured-peer-name) (as specified in [MS-PNRP](#Section_2.2.2)) to transfer the Remote Assistance Connection String. The connection string is encrypted and posted as an [**extended payload**](#gt_extended-payload) associated with the Unsecured Peer Name. When this method is used, the novice relays a password to the expert. Using the password provided by the novice, the expert locates the Unsecured Peer Name, downloads the payload, and decrypts the Remote Assistance Connection String. Using the connection string, the expert can make a [**Remote Assistance connection**](#gt_remote-assistance-connection) to the novice.
+**Using an Unsecured Peer Name**: This method uses [**Unsecured Peer Names**](#gt_unsecured-peer-name) (as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md)) to transfer the Remote Assistance Connection String. The connection string is encrypted and posted as an [**extended payload**](#gt_extended-payload) associated with the Unsecured Peer Name. When this method is used, the novice relays a password to the expert. Using the password provided by the novice, the expert locates the Unsecured Peer Name, downloads the payload, and decrypts the Remote Assistance Connection String. Using the connection string, the expert can make a [**Remote Assistance connection**](#gt_remote-assistance-connection) to the novice.
 
 **Using a Secure Peer Name**: This method uses [**Secure Peer Names**](#gt_secure-peer-name) (as specified in [MS-PNRP]) to transfer the Remote Assistance Connection String between the novice and the expert. The novice and the expert can have [**Remote Assistance contacts**](#gt_remote-assistance-contact) for each other. This method does not require a password. Using the Secure Peer Name, the expert can download the extended payload that contains the Remote Assistance Connection String. Using the connection string, the expert can make a Remote Assistance connection to the novice.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-[**RAIOP**](#gt_raiop) assumes that the Peer Name Resolution Protocol [MS-PNRP](#Section_2.2.2) is available to transport the [Remote Assistance Connection String](#Section_2.2.1). After the Remote Assistance Connection String is transferred, the [**expert**](#gt_expert) can connect to the [**novice**](#gt_novice) and initiate a [**Remote Assistance session**](#gt_remote-assistance-session) as specified in [MS-RA](../MS-RA/MS-RA.md). This protocol also uses [**Remote Assistance contacts**](#gt_remote-assistance-contact) as specified in [MS-RA].
+[**RAIOP**](#gt_raiop) assumes that the Peer Name Resolution Protocol [MS-PNRP](../MS-PNRP/MS-PNRP.md) is available to transport the [Remote Assistance Connection String](#Section_2.2.1). After the Remote Assistance Connection String is transferred, the [**expert**](#gt_expert) can connect to the [**novice**](#gt_novice) and initiate a [**Remote Assistance session**](#gt_remote-assistance-session) as specified in [MS-RA](../MS-RA/MS-RA.md). This protocol also uses [**Remote Assistance contacts**](#gt_remote-assistance-contact) as specified in [MS-RA].
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -271,7 +271,7 @@ The Remote Assistance Initiation over PNRP Protocol does not use any standards a
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-This protocol uses the Peer Name Resolution Protocol, as specified in [MS-PNRP](#Section_2.2.2), for message transport.
+This protocol uses the Peer Name Resolution Protocol, as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md), for message transport.
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -284,17 +284,17 @@ The Remote Assistance Connection String referenced in this document is defined i
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Peer Name
 
-The [**Peer Name**](#gt_peer-name) that is referenced in this document is defined in [MS-PNRP](#Section_2.2.2) as a Peer Name. [**Unsecured Peer Names**](#gt_unsecured-peer-name) are Peer Names with an authority of "0".
+The [**Peer Name**](#gt_peer-name) that is referenced in this document is defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) as a Peer Name. [**Unsecured Peer Names**](#gt_unsecured-peer-name) are Peer Names with an authority of "0".
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Payload
 
-The payload that is associated with a [**Peer Name**](#gt_peer-name) and referenced in this document is defined in [MS-PNRP](#Section_2.2.2) section 2.2.3.3 as an EXTENDED_PAYLOAD message.
+The payload that is associated with a [**Peer Name**](#gt_peer-name) and referenced in this document is defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 2.2.3.3 as an EXTENDED_PAYLOAD message.
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 FriendlyName
 
-The FriendlyName that is associated with a [**Peer Name**](#gt_peer-name) and referenced in this document is defined in [MS-PNRP](#Section_2.2.2) section 2.2.3.1 as a FriendlyName string.
+The FriendlyName that is associated with a [**Peer Name**](#gt_peer-name) and referenced in this document is defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 2.2.3.1 as a FriendlyName string.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -304,7 +304,7 @@ The FriendlyName that is associated with a [**Peer Name**](#gt_peer-name) and re
 
 The purpose of the [**Unsecured Peer Name**](#gt_unsecured-peer-name) Initiation is to allow a [Remote Assistance Connection String](#Section_2.2.1) (defined in [MS-RA](../MS-RA/MS-RA.md)) to be passed from the [**publisher**](#gt_publisher) of the string to the [**consumer**](#gt_consumer). After the string is passed, the consumer uses the string to initialize a [**Remote Assistance connection**](#gt_remote-assistance-connection) and to view and share the publisher’s screen. After the [**Remote Assistance session**](#gt_remote-assistance-session) is started, the [**Peer Name**](#gt_peer-name) SHOULD be unregistered by the publisher because it has no further purpose.
 
-After the connection string is generated, the [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be joined as specified in [MS-PNRP](#Section_2.2.2) section 1.3.3. After the cloud is discovered and joined, the publisher MUST register an Unsecured Peer Name and associate the encrypted connection string as a payload to the Peer Name.
+After the connection string is generated, the [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be joined as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 1.3.3. After the cloud is discovered and joined, the publisher MUST register an Unsecured Peer Name and associate the encrypted connection string as a payload to the Peer Name.
 
 The task of initiating a Remote Assistance connection is shown in the following diagram.
 
@@ -338,7 +338,7 @@ A 30-minute timer SHOULD be started after registration of the [**Unsecured Peer 
 
 To initialize this protocol, the following MUST be done:
 
-- The [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be discovered and joined as defined in [MS-PNRP](#Section_2.2.2) section 1.3.3.
+- The [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be discovered and joined as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 1.3.3.
 - A connection string as defined in [MS-RAI](../MS-RAI/MS-RAI.md) section 2.2 MUST be created.
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -350,7 +350,7 @@ None.
 
 After initialization, a password MUST be derived as defined in section [3.1.5.1](#Section_3.1.5.1) and the connection string MUST be encrypted as defined in section [3.1.5.2](#Section_3.1.5.2). Next, an [**Unsecured Peer Name**](#gt_unsecured-peer-name) MUST be registered with the encrypted connection string as the payload as defined in section [3.1.5.3](#Section_3.1.5.3).
 
-After the [**Remote Assistance session**](#gt_remote-assistance-session) is established, the Unsecured Peer Name SHOULD be unregistered, as defined in [MS-PNRP](#Section_2.2.2) section 3.2.4.2.
+After the [**Remote Assistance session**](#gt_remote-assistance-session) is established, the Unsecured Peer Name SHOULD be unregistered, as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 3.2.4.2.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Deriving a Password
@@ -397,7 +397,7 @@ To register an [**Unsecured Peer Name**](#gt_unsecured-peer-name), a password MU
 - Concatenate the hash result to the original concatenated Unicode string, and copy the result into a byte buffer that is referred to as the hash input.
 - Repeat steps 4 and 5 for 99,999 times, for a total of 100,000 hash operations.
 - Transform the first 16 bytes of the hash result into a [**HexConvertedUnicodeString**](#gt_hexconvertedunicodestring). This transformation uses each sequence of 4 bits as a zero-based index into the Unicode lookup string "0123456789ABCDEF" to obtain a matching Unicode character. The order of the data is not changed (that is, the most significant first 4 bits are used to obtain the first value, and least significant last 4 bits are used to obtain the second value). The transformation produces a 32-character Unicode string that is referred to as the key string. For example, the hash result {0x9A, 0xC1, 0x32, ..., 0xAB} would yield the HexConvertedUnicodeString "9AC132…AB" with the in-memory representation of {0x39, 0x00, 0x41, 0x00, 0x43, 0x00, 0x31, 0x00, 0x33, 0x00, 0x32, 0x00, … 0x41, 0x00, 0x42, 0x00}.
-- Use the HexConvertedUnicodeString generated in step 7 to register an Unsecured Peer Name by using the HexConvertedUnicodeString as the classifier and an authority of "0". The encrypted connection string MUST be set as the payload. (See [MS-PNRP](#Section_2.2.2) for registering an Unsecured Peer Name.)
+- Use the HexConvertedUnicodeString generated in step 7 to register an Unsecured Peer Name by using the HexConvertedUnicodeString as the classifier and an authority of "0". The encrypted connection string MUST be set as the payload. (See [MS-PNRP](../MS-PNRP/MS-PNRP.md) for registering an Unsecured Peer Name.)
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
@@ -431,7 +431,7 @@ There are no timers associated with this section.
 
 The following steps initialize this protocol:
 
-- The [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be discovered and joined as defined in [MS-PNRP](#Section_2.2.2) section 1.3.3.
+- The [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be discovered and joined as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 1.3.3.
 - The password that is generated by the publisher when the connection information is published MUST be available to the application that is consuming the [**Unsecured Peer Name**](#gt_unsecured-peer-name) initiation.
 **Note** The protocol does not provide for the password to be transmitted from the publisher to the consumer.
 
@@ -461,7 +461,7 @@ To derive an [**Unsecured Peer Name**](#gt_unsecured-peer-name) from a password:
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Resolving the Unsecure Peer Name
 
-The derived [**Unsecured Peer Name**](#gt_unsecured-peer-name) (as defined in section [3.2.5.1](../MS-PNRP/MS-PNRP.md)) MUST be resolved as specified in [MS-PNRP](#Section_2.2.2) section 3.1.4.4. If the consumer fails to resolve the address, the consumer repeats the resolution up to two additional times until address resolution, each with a different initial value for the Unsecured Peer Name derivation as specified in section 3.2.5.1. For the first repetition, this value MUST be the number of hours elapsed since January 1, 1970, minus 1 hour. For the second repetition, this value MUST be the number of hours elapsed since January 1st, 1970, plus 1 hour. The payload associated with the Unsecured Peer Name is provided by the underlying Peer Name Resolution Protocol.
+The derived [**Unsecured Peer Name**](#gt_unsecured-peer-name) (as defined in section [3.2.5.1](#Section_3.2.5.1)) MUST be resolved as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 3.1.4.4. If the consumer fails to resolve the address, the consumer repeats the resolution up to two additional times until address resolution, each with a different initial value for the Unsecured Peer Name derivation as specified in section 3.2.5.1. For the first repetition, this value MUST be the number of hours elapsed since January 1, 1970, minus 1 hour. For the second repetition, this value MUST be the number of hours elapsed since January 1st, 1970, plus 1 hour. The payload associated with the Unsecured Peer Name is provided by the underlying Peer Name Resolution Protocol.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Decrypting the Payload
@@ -501,7 +501,7 @@ Figure 2: Publishing connection information
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-To use this method of publication, the consumer MUST have provided the publisher with the consumer's [**public key**](#gt_public-key). In addition, the publisher MUST have provided the consumer with a public key to allow for secure name registration (as defined in [MS-PNRP](#Section_2.2.2)).
+To use this method of publication, the consumer MUST have provided the publisher with the consumer's [**public key**](#gt_public-key). In addition, the publisher MUST have provided the consumer with a public key to allow for secure name registration (as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md)).
 
 The publisher MUST register a [**Secure Peer Name**](#gt_secure-peer-name) with a payload containing an encrypted [Remote Assistance Connection String](#Section_2.2.1). The payload MUST contain [**Remote Assistance connection**](#gt_remote-assistance-connection) information, which the consumer MUST use to establish a Remote Assistance connection.
 
@@ -516,7 +516,7 @@ A 30-minute timer SHOULD be started after the registration of the [**Secure Peer
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-To initialize this [**Secure Peer Name**](#gt_secure-peer-name) initiation, the [**Global PNRP cloud**](#gt_global-pnrp-cloud), MUST be discovered and joined as defined in [MS-PNRP](#Section_2.2.2) section 1.3.3. A Secure Peer Name MUST be created as specified in [MS-PNRP] and this secure name MUST be related to the [**public key**](#gt_public-key) that the consumer associated with the publisher. The publisher MUST have a public key that matches a private key that the consumer possesses.
+To initialize this [**Secure Peer Name**](#gt_secure-peer-name) initiation, the [**Global PNRP cloud**](#gt_global-pnrp-cloud), MUST be discovered and joined as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 1.3.3. A Secure Peer Name MUST be created as specified in [MS-PNRP] and this secure name MUST be related to the [**public key**](#gt_public-key) that the consumer associated with the publisher. The publisher MUST have a public key that matches a private key that the consumer possesses.
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
@@ -543,7 +543,7 @@ To generate the encrypted connection string payload, the following algorithm MUS
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Registering a Secure Peer Name
 
-To register a [**Secure Peer Name**](#gt_secure-peer-name), a [**public key**](#gt_public-key) from the public-private key pair that is known to the consumer MUST be used as an authority and the [**Unicode string**](#gt_unicode-string) "RAContact" MUST be used as a Peer identity to create a Secure Peer Name. The encrypted connection string payload that is generated in section [3.3.5.1](../MS-PNRP/MS-PNRP.md) MUST be used as the extended payload when this [**Peer Name**](#gt_peer-name) is registered. [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) covers registering a Peer Name and designating a payload to associate with the Peer Name. The **FriendlyName** (as specified in [MS-PNRP](#Section_2.2.2), section 3.2.4.1) string of the Peer Name MUST be set to the byte length of the portion of the payload that is the exported AES key defined in section 3.3.5.1. The byte length is expressed as a Unicode string containing the decimal equivalent of the value of the byte length. For example, if the value of the byte length is 324, the comment section would contain the Unicode string "324".
+To register a [**Secure Peer Name**](#gt_secure-peer-name), a [**public key**](#gt_public-key) from the public-private key pair that is known to the consumer MUST be used as an authority and the [**Unicode string**](#gt_unicode-string) "RAContact" MUST be used as a Peer identity to create a Secure Peer Name. The encrypted connection string payload that is generated in section [3.3.5.1](#Section_3.3.5.1) MUST be used as the extended payload when this [**Peer Name**](#gt_peer-name) is registered. [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) covers registering a Peer Name and designating a payload to associate with the Peer Name. The **FriendlyName** (as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md), section 3.2.4.1) string of the Peer Name MUST be set to the byte length of the portion of the payload that is the exported AES key defined in section 3.3.5.1. The byte length is expressed as a Unicode string containing the decimal equivalent of the value of the byte length. For example, if the value of the byte length is 324, the comment section would contain the Unicode string "324".
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -566,7 +566,7 @@ The purpose of the [**Secure Peer Name**](#gt_secure-peer-name) initiation is to
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Abstract Data Model
 
-To use this method of initiation, the consumer MUST have provided the publisher with the [**public key**](#gt_public-key) of the consumer. In addition, the publisher MUST have provided the consumer with a public key to allow for secure name resolution, as defined in [MS-PNRP](#Section_2.2.2). The consumer MUST resolve the [**Secure Peer Name**](#gt_secure-peer-name) of the publisher and retrieve the payload that is associated with the name. Finally, the consumer MUST decrypt the connection information by using the associated private key.
+To use this method of initiation, the consumer MUST have provided the publisher with the [**public key**](#gt_public-key) of the consumer. In addition, the publisher MUST have provided the consumer with a public key to allow for secure name resolution, as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md). The consumer MUST resolve the [**Secure Peer Name**](#gt_secure-peer-name) of the publisher and retrieve the payload that is associated with the name. Finally, the consumer MUST decrypt the connection information by using the associated private key.
 
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Timers
@@ -576,7 +576,7 @@ There are no timers associated with this section.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-To initialize [**Secure Peer Name**](#gt_secure-peer-name) initiation, the [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be discovered and joined as defined in [MS-PNRP](#Section_2.2.2) section 1.3.3. The publisher MUST have a [**public key**](#gt_public-key) that matches a private key that the consumer possesses.
+To initialize [**Secure Peer Name**](#gt_secure-peer-name) initiation, the [**Global PNRP cloud**](#gt_global-pnrp-cloud) MUST be discovered and joined as defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 1.3.3. The publisher MUST have a [**public key**](#gt_public-key) that matches a private key that the consumer possesses.
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
@@ -586,21 +586,21 @@ None.
 <a id="Section_3.4.5"></a>
 ### 3.4.5 Message Processing Events and Sequencing Rules
 
-To [**consume**](#gt_consume) the connection string using [**Secure Peer Name**](#gt_secure-peer-name) initiation, the published Secure Peer Name MUST first be resolved as specified in section [3.4.5.1](#Section_2.2.2). Next, the connection string MUST be decrypted as defined in section [3.4.5.2](#Section_3.4.5.2).
+To [**consume**](#gt_consume) the connection string using [**Secure Peer Name**](#gt_secure-peer-name) initiation, the published Secure Peer Name MUST first be resolved as specified in section [3.4.5.1](#Section_3.4.5.1). Next, the connection string MUST be decrypted as defined in section [3.4.5.2](#Section_3.4.5.2).
 
 The [MS-RA](../MS-RA/MS-RA.md) protocol defines a Remote Assistance Contact Information message that is used in a previous time to allow the publisher and consumer to exchange [**public keys**](#gt_public-key) and Secure Peer Names that match these public keys.
 
 <a id="Section_3.4.5.1"></a>
 #### 3.4.5.1 Resolving a Secure Peer Name
 
-A [**Secure Peer Name**](#gt_secure-peer-name) MUST be generated using the public key of the public-private key pair as an authority and the Unicode string "RAContact" as a Peer identity. The public key is obtained as part of the Remote Assistance Contact information as specified in [MS-RA](../MS-RA/MS-RA.md) section 2.2.5. Resolving the Secure Peer Name is defined in [MS-PNRP](#Section_2.2.2) section 3.1.4.4.
+A [**Secure Peer Name**](#gt_secure-peer-name) MUST be generated using the public key of the public-private key pair as an authority and the Unicode string "RAContact" as a Peer identity. The public key is obtained as part of the Remote Assistance Contact information as specified in [MS-RA](../MS-RA/MS-RA.md) section 2.2.5. Resolving the Secure Peer Name is defined in [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 3.1.4.4.
 
 <a id="Section_3.4.5.2"></a>
 #### 3.4.5.2 Decrypting the Connection String
 
 To decrypt the connection string, the consumer MUST use a private key that matches a [**public key**](#gt_public-key) that the publisher has. The following algorithm MUST be followed to decrypt the string:
 
-- Separate the exported key and the encrypted connection string. This information MUST be retrieved from the payload after the [**Peer Name**](#gt_peer-name) has been resolved. The byte length of the exported key MUST be retrieved from the **FriendlyName** (as specified in [MS-PNRP](#Section_2.2.2), section 3.2.4.1) string that is associated with the Peer Name.
+- Separate the exported key and the encrypted connection string. This information MUST be retrieved from the payload after the [**Peer Name**](#gt_peer-name) has been resolved. The byte length of the exported key MUST be retrieved from the **FriendlyName** (as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md), section 3.2.4.1) string that is associated with the Peer Name.
 - Decrypt the exported symmetric key by using the matching private key and the [**RSA**](#gt_rivest-shamir-adleman-rsa) algorithm.
 - Decrypt the connection string by using the symmetric key that was obtained in step 2.
 <a id="Section_3.4.6"></a>

@@ -1,6 +1,4 @@
-**[MS-MQOD]:**
-
-**Message Queuing Protocols Overview**
+# [MS-FSMOD]: File Services Management Protocols Overview
 
 Table of Contents
 
@@ -8,9 +6,8 @@ Table of Contents
 <summary>1 Introduction</summary>
 
 - [1 Introduction](#Section_1)
-  - [1.1 Conceptual Overview](#Section_1.1)
-  - [1.2 Glossary](#Section_1.2)
-  - [1.3 References](#Section_1.3)
+  - [1.1 Glossary](#Section_1.1)
+  - [1.2 References](#Section_1.2)
 </details>
 
 <details>
@@ -18,69 +15,53 @@ Table of Contents
 
 - [2 Functional Architecture](#Section_2)
   - [2.1 Overview](#Section_2.1)
-    - [2.1.1 Purpose](#Section_2.1.1)
-    - [2.1.2 Capabilities](#Section_2.1.2)
-      - [2.1.2.1 Message Delivery Assurance](#Section_2.1.2.1)
-      - [2.1.2.2 Message Transfer and Routing](#Section_2.1.2.2)
-      - [2.1.2.3 Message Security](#Section_2.1.2.3)
-      - [2.1.2.4 Management and Administration](#Section_2.1.2.4)
-    - [2.1.3 Interaction with External Components](#Section_2.1.3)
-      - [2.1.3.1 Message Queuing and Applications](#Section_2.1.3.1)
-      - [2.1.3.2 Reliable Message Processing Using Transactions](#Section_2.1.3.2)
-      - [2.1.3.3 Message Queuing and Directory Service](#Section_2.1.3.3)
-    - [2.1.4 Roles](#Section_2.1.4)
-      - [2.1.4.1 Application Roles](#Section_2.1.4.1)
-      - [2.1.4.2 Queue Manager Roles](#Section_2.1.4.2)
-        - [2.1.4.2.1 Queue Manager Roles for Application Interaction](#Section_2.1.4.2.1)
-        - [2.1.4.2.2 Queue Manager Roles for Message Transfer and Routing](#Section_2.1.4.2.2)
-        - [2.1.4.2.3 Queue Manager Role for Remote Read and Management](#Section_2.1.4.2.3)
-      - [2.1.4.3 Subcomponent Roles](#Section_2.1.4.3)
-      - [2.1.4.4 Protocol Roles](#Section_2.1.4.4)
-    - [2.1.5 Protocol Interactions](#Section_2.1.5)
-    - [2.1.6 MSMQ Components](#Section_2.1.6)
-    - [2.1.7 MSMQ Internal and External Communications](#Section_2.1.7)
-      - [2.1.7.1 Communications Within MSMQ](#Section_2.1.7.1)
-      - [2.1.7.2 Communications with External Systems](#Section_2.1.7.2)
-    - [2.1.8 MSMQ Applicability](#Section_2.1.8)
-    - [2.1.9 Relevant Standards](#Section_2.1.9)
+    - [2.1.1 System Purposes](#Section_2.1.1)
+    - [2.1.2 Relationship with External Components](#Section_2.1.2)
+    - [2.1.3 System Capabilities](#Section_2.1.3)
+    - [2.1.4 Abstract Components of the File Services Management System](#Section_2.1.4)
+    - [2.1.5 Protocol Relationship](#Section_2.1.5)
   - [2.2 Protocol Summary](#Section_2.2)
   - [2.3 Environment](#Section_2.3)
     - [2.3.1 Dependencies on This System](#Section_2.3.1)
     - [2.3.2 Dependencies on Other Systems/Components](#Section_2.3.2)
   - [2.4 Assumptions and Preconditions](#Section_2.4)
   - [2.5 Use Cases](#Section_2.5)
-    - [2.5.1 Create or Modify Queue - Application](#Section_2.5.1)
-    - [2.5.2 Query Queue Information- Application](#Section_2.5.2)
-    - [2.5.3 Send Message to Queue - Application](#Section_2.5.3)
-    - [2.5.4 Send Message in Transaction - Application](#Section_2.5.4)
-    - [2.5.5 Transfer Message](#Section_2.5.5)
-    - [2.5.6 Receive a Message from a Queue - Application](#Section_2.5.6)
-    - [2.5.7 Receive Message in Transaction – Application](#Section_2.5.7)
-    - [2.5.8 Exchange Message - Application](#Section_2.5.8)
+    - [2.5.1 Share Management Use Cases](#Section_2.5.1)
+      - [2.5.1.1 Create Share SMB](#Section_2.5.1.1)
+      - [2.5.1.2 List SMB Shares](#Section_2.5.1.2)
+      - [2.5.1.3 Getting and Setting the Properties for an Existing SMB Share](#Section_2.5.1.3)
+      - [2.5.1.4 Delete an SMB Share](#Section_2.5.1.4)
+    - [2.5.2 DFS Use Cases](#Section_2.5.2)
+      - [2.5.2.1 Create DFS Standalone Namespace](#Section_2.5.2.1)
+      - [2.5.2.2 Create DFS Domain Namespace](#Section_2.5.2.2)
+      - [2.5.2.3 Create DFS Link](#Section_2.5.2.3)
+      - [2.5.2.4 Add a Root Target to a Domain-Based Namespace](#Section_2.5.2.4)
+    - [2.5.3 DFS-R Configuration and Monitoring Use Cases](#Section_2.5.3)
+      - [2.5.3.1 Get Health Information for a DFS Replication](#Section_2.5.3.1)
+      - [2.5.3.2 Create a Directory Object for a DFS Replication Group Using Server Credentials](#Section_2.5.3.2)
+    - [2.5.4 Resource Management Use Cases](#Section_2.5.4)
+      - [2.5.4.1 Create and Configure a File Management Job](#Section_2.5.4.1)
+      - [2.5.4.2 Create a Report Job](#Section_2.5.4.2)
+      - [2.5.4.3 Configure File Screens and Directory Quotas](#Section_2.5.4.3)
+    - [2.5.5 Server Management Use Cases](#Section_2.5.5)
+      - [2.5.5.1 Attach an Alias Name to an Existing Server](#Section_2.5.5.1)
+      - [2.5.5.2 Detach an Alias Name from a Server](#Section_2.5.5.2)
+      - [2.5.5.3 Retrieve Alias Names](#Section_2.5.5.3)
+      - [2.5.5.4 Binding or Unbinding an SMB Server Transport Protocol](#Section_2.5.5.4)
+      - [2.5.5.5 Getting or Setting the Configuration Information for a Server](#Section_2.5.5.5)
+    - [2.5.6 SMB Redirector Use Cases](#Section_2.5.6)
+      - [2.5.6.1 Enable a Transport Protocol on an SMB Network Redirector](#Section_2.5.6.1)
+      - [2.5.6.2 Disable a Transport Protocol on an SMB Network Redirector](#Section_2.5.6.2)
+      - [2.5.6.3 Get Statistics about an SMB Network Redirector](#Section_2.5.6.3)
+      - [2.5.6.4 Get Transport Protocols Enabled on an SMB Network Redirector](#Section_2.5.6.4)
   - [2.6 Versioning, Capability Negotiation, and Extensibility](#Section_2.6)
+    - [2.6.1 Remote Administration Protocol](#Section_2.6.1)
+    - [2.6.2 File Replication Service](#Section_2.6.2)
   - [2.7 Error Handling](#Section_2.7)
-    - [2.7.1 Queue Manager Restart](#Section_2.7.1)
-    - [2.7.2 Transient Network Failure](#Section_2.7.2)
-    - [2.7.3 Transaction Coordinator Unavailable](#Section_2.7.3)
-    - [2.7.4 Directory Unavailable](#Section_2.7.4)
-    - [2.7.5 Internal Storage Failure](#Section_2.7.5)
-    - [2.7.6 Directory Inconsistency](#Section_2.7.6)
+    - [2.7.1 Connection Disconnected](#Section_2.7.1)
+    - [2.7.2 Internal Failures](#Section_2.7.2)
   - [2.8 Coherency Requirements](#Section_2.8)
   - [2.9 Security](#Section_2.9)
-    - [2.9.1 Security Elements](#Section_2.9.1)
-    - [2.9.2 Security Strategy and Mechanisms](#Section_2.9.2)
-    - [2.9.3 Storage Security](#Section_2.9.3)
-    - [2.9.4 Communication Security](#Section_2.9.4)
-      - [2.9.4.1 Security Layer](#Section_2.9.4.1)
-        - [2.9.4.1.1 Transport Layer Security](#Section_2.9.4.1.1)
-        - [2.9.4.1.2 Message Layer Security](#Section_2.9.4.1.2)
-        - [2.9.4.1.3 Security Model: PKI](#Section_2.9.4.1.3)
-        - [2.9.4.1.4 Message Layer Security Features](#Section_2.9.4.1.4)
-          - [2.9.4.1.4.1 Message Integrity](#Section_2.9.4.1.4.1)
-          - [2.9.4.1.4.2 Sender Authentication](#Section_2.9.4.1.4.2)
-          - [2.9.4.1.4.3 Message Privacy](#Section_2.9.4.1.4.3)
-        - [2.9.4.1.5 Message Layer Security Sequences](#Section_2.9.4.1.5)
-    - [2.9.5 Internal Security and External Security](#Section_2.9.5)
   - [2.10 Additional Considerations](#Section_2.10)
 </details>
 
@@ -88,15 +69,14 @@ Table of Contents
 <summary>3 Examples</summary>
 
 - [3 Examples](#Section_3)
-  - [3.1 Example 1: Disconnected Data Entry](#Section_3.1)
-  - [3.2 Example 2: Web Order Entry](#Section_3.2)
-  - [3.3 Example 3: Modify a Public Queue](#Section_3.3)
-  - [3.4 Example 4: Creating and Monitoring a Remote Private Queue](#Section_3.4)
-  - [3.5 Example 5: Branch Office Order Processing](#Section_3.5)
-  - [3.6 Example 6: Business-to-Business Messaging Across a Firewall](#Section_3.6)
-  - [3.7 Example 7: Server Farm](#Section_3.7)
-  - [3.8 Example 8: Stock Ticker](#Section_3.8)
-  - [3.9 Example 9: Business-to-Business Messaging Across Heterogeneous Systems](#Section_3.9)
+  - [3.1 Example 1: Creating an SMB Share](#Section_3.1)
+  - [3.2 Example 2: Deleting an SMB Share](#Section_3.2)
+  - [3.3 Example 3: Creating and Managing a DFS Domain Namespace](#Section_3.3)
+  - [3.4 Example 4: Creating an FSRM File Screen](#Section_3.4)
+  - [3.5 Example 5: Creating an FSRM Quota](#Section_3.5)
+  - [3.6 Example 6: Creating and Configuring a File Management Job](#Section_3.6)
+  - [3.7 Example 7: Creating a Scheduled Report Job](#Section_3.7)
+  - [3.8 Example 8: Client Cannot Connect to a DFS Service](#Section_3.8)
 </details>
 
 <details>
@@ -119,1928 +99,1995 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-[**Microsoft Message Queuing (MSMQ)**](#gt_microsoft-message-queuing-msmq) is a communications service that temporally decouples [**message**](#gt_message) send operations from message receive operations. The functionality enables [**applications**](#gt_application) to communicate even if those applications are not executed concurrently.
+This File System Management Overview describes the purpose and use of the protocols that are required for remote administration and management of file servers in an organization.
+
+The system administrator uses an administrative client to configure and query the state of file services, such as Distributed File System (DFS) and File Replication Service (FRS). The administrator can also use the administrative client to configure various policies that apply to the object store on a file server, such as disk quotas to set limits on user disk space use, screening and filtering to restrict the type of content that can be stored, and other policies. Users and applications access these services through file clients. File client and file access protocols are described in the File Access Services Protocol Overview ([MS-FASOD](../MS-FASOD/MS-FASOD.md)).
 
 <a id="Section_1.1"></a>
-## 1.1 Conceptual Overview
-
-The [**queue**](#gt_queue) is the central abstraction in [**Microsoft Message Queuing (MSMQ)**](#gt_microsoft-message-queuing-msmq). [**Applications**](#gt_application) send [**messages**](#gt_message) to a queue and/or [**receive**](#gt_receive) messages from a queue. The queue provides persistence of the messages, enabling them to survive across application restarts. As such, this abstraction enables an application to send message even if the receiving application is not executing or is unreachable due to a network outage.
-
-The following figure shows a high-level view of Message Queuing.
-
-![Message Queuing enables asynchronous message exchange](media/image1.png)
-
-Figure 1: Message Queuing enables asynchronous message exchange
-
-Message Queuing enables the following message exchange patterns between applications:
-
-- One-Way Messaging: A source application sends messages to a destination application and does not wait for the [**outcome**](#gt_outcome) of the message processing. A destination application receives messages and processes them.
-- Request-Response: A source application sends a message to a destination. The receiving application receives the request message and sends the response message to a queue specified by the sender in the request message. The sending application receives the response message and correlates it to the original request message.
-- Broadcast: A source application sends messages that can be received by zero or more applications. This pattern is useful in implementing publish-and-subscribe types of applications.
-Queues are hosted by a communications service called a [**queue manager**](#gt_queue-manager-qm), which runs in a separate service from the client applications so that the act of sending messages is decoupled from the act of receiving the messages. The following figure shows the intended interaction between applications and the queue manager by using the Message Queuing protocols.
-
-![Queues hosted by queue manager service](media/image2.png)
-
-Figure 2: Queues hosted by queue manager service
-
-Message Queuing can optionally interact with other components to provide richer functionality to applications. These components include the [**Directory Service**](#gt_directory-service-ds) and the [**Transaction Coordinator**](#gt_transaction-coordinator). The participants in a [**Message Queuing System**](#gt_message-queuing-system) are shown in the following figure and include:
-
-- Application: An application uses MSMQ [**application protocol**](#gt_application-protocol) and their associated components to exchange messages asynchronously with other applications, as well as to perform management and administrative operations on a Message Queuing System.
-- Queue Manager: A queue manager is the message communication service that hosts queues and interacts with the applications for sending and receiving messages. The queue manager also interacts with other queue managers to asynchronously transfer messages between queues across a network.
-- Directory Service: A Directory Service is an optional MSMQ subcomponent that stores and provides directory information such as network topology information, security key distribution, queue and system metadata, and queue discovery.
-- Transaction Coordinator: A Transaction Coordinator is an optional MSMQ subcomponent. An application can send or receive messages within the context of a [**transaction**](#gt_transaction), and the Transaction Coordinator interacts with the queue manager to accept or discard these operations, depending on the outcome of the transaction, while maintaining atomicity, consistency, isolation, and durability (ACID) behavior throughout the lifetime of the transaction.
-![Participating components in a Message Queuing System](media/image3.png)
-
-Figure 3: Participating components in a Message Queuing System
-
-A queue is a temporary placeholder for messages that are shared between applications. The simplest Message Queuing deployment involves two applications and a single queue that is accessible to both the applications. The queue is hosted and managed by a single queue manager. One application sends messages to the queue, and the other application receives the messages from the same queue, as shown in the following diagram.
-
-![MSMQ deployment with two applications and a single queue](media/image4.png)
-
-Figure 4: MSMQ deployment with two applications and a single queue
-
-The sending application sends a message to the queue. When the send operation is successful, the application proceeds with other work, or terminates. The receiving application subsequently receives the message asynchronously (2). The message is removed from the queue. This asynchronous message exchange pattern enables the temporal decoupling of the send operation from the receive operation.
-
-The following figure illustrates a topology that differs slightly from the previous one in that the sending application and the receiving application do not share the same queue. Instead, both the sending application and the receiving application interact with separate, directly accessible queues. The sending application interacts with a source queue, and the receiving application interacts with a destination queue. Additionally, the destination queue is directly reachable from the source queue in a network. Each queue is hosted and managed by a separate queue manager.
-
-![MSMQ deployment where applications do not share the same queue](media/image5.png)
-
-Figure 5: MSMQ deployment where applications do not share the same queue
-
-In the deployment topology that is shown in the preceding figure, the sending application puts a message in the queue [1]. This source queue works as the temporary placeholder for the message and is called the outgoing queue. Next, the Message Queuing System directly transfers the message to the destination queue and removes the message from the outgoing queue [2]. Finally, the receiving application receives the message from the destination queue [3].
-
-If the destination queue is not directly reachable from the source queue in a network, additional interim queues are required between the source queue and the final destination queue. Each interim queue is hosted and managed by a queue manager. Messages are routed to the final destination queue through one or more interim queues. Although the destination queue is not directly reachable from the source queue, each interim queue is reachable by its preceding queue and its successor queue.
-
-Queues are hosted and managed by a queue manager that plays the [**queue server**](#gt_queue-server) role. The queue manager hosts and manages a set of [**local queues**](#gt_local-queue), acts as an intermediary placeholder for storing and forwarding messages to their final destinations, and interacts with the applications for sending and receiving messages. The queue manager performs the following tasks:
-
-- On the send side, the queue manager manages its queues, accepts messages from the sending application, and optionally transfers messages to other queue managers. If the messages are destined for a queue that the send-side queue manager hosts, the messages are placed in that queue on the machine. (See the preceding figure captioned "MSMQ deployment with two applications and a single queue"). Alternatively, if the messages belong to a queue that is not hosted by the queue manager on the send side, the messages are placed in an outgoing queue and subsequently transferred to the destination queue manager. (See the preceding figure captioned "MSMQ deployment where applications do not share the same queue").
-- On the receive side, the queue manager manages its queues, accepts messages transferred from other queue managers, and delivers messages to the receiving application. The preceding figure captioned "MSMQ deployment with two applications and a single queue" illustrates the simple topology where the send-side queue manager is the same as the receive-side queue manager. In this figure, the single queue manager manages its queues, accepts messages from the sending application, and delivers them to the receiving application. The preceding figure captioned "MSMQ deployment where applications do not share the same queue" illustrates a topology that involves two separate queue managers, one at the send side that interacts with the sending application, and the other at the receiving side that interacts with the receiving application. These two queue managers interact to transfer messages between queues. As the queue manager on the send side transfers messages from its outgoing queue, the queue manager on the receive side accepts and stores those messages. Subsequently, the receive-side queue manager delivers the messages to the appropriate receiving applications.
-- Optionally, there can be other queue managers between the send and the receive queue managers. This approach facilitates efficient message routing between the source and the destination queues. These interim queue managers store incoming messages and route them to the next hop so that they can eventually reach the final destination queue.
-The queue manager undertakes one or more of the preceding tasks; for each task, the queue manager can manage more than one queue. In other words, a queue manager manages all its hosted queues and its outgoing queues, interacts with the sending and receiving applications, and interacts with other queue managers to transfer messages between queues.
-
-The following figure depicts an example of a simple Message Queuing System deployed on a network.
-
-![Message Queuing System deployed over a network](media/image6.png)
-
-Figure 6: Message Queuing System deployed over a network
-
-As depicted in the preceding figure, a sending application sends a message to a nearby queue manager. If the destination queue is hosted by the queue manager (a local queue), the queue manager stores the message in the local queue. Alternatively, if the destination queue is hosted by another queue manager on a different machine, the queue manager places the message in an outgoing queue. In either case, the sending application can proceed to do other work. The queue manager asynchronously transfers the message from the outgoing queue to the queue manager of the destination queue, optionally through interim queue managers for routing the message. Subsequently, a receiving application reads the message from the destination queue.
-
-<a id="Section_1.2"></a>
-## 1.2 Glossary
+## 1.1 Glossary
 
 This document uses the following terms:
 
-<a id="gt_access-control-entry-ace"></a>
-**access control entry (ACE)**: An entry in an [**access control list (ACL)**](#gt_access-control-list-acl) that contains a set of user rights and a [**security identifier (SID)**](#gt_security-identifier-sid) that identifies a principal for whom the rights are allowed, denied, or audited.
+<a id="gt_active-directory"></a>
+**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
-<a id="gt_access-control-list-acl"></a>
-**access control list (ACL)**: A list of [**access control entries (ACEs)**](#gt_b581857f-39aa-4979-876b-daba67a40f15) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
+<a id="gt_admin-client"></a>
+**admin client**: An instance of a client of the File Service administration protocols, as described in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md), [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md), [MS-FSRM](../MS-FSRM/MS-FSRM.md), [MS-SRVS](../MS-SRVS/MS-SRVS.md), and [MS-WKST](../MS-WKST/MS-WKST.md).
 
-<a id="gt_application"></a>
-**application**: A participant that is responsible for beginning, propagating, and completing an atomic transaction. An application communicates with a transaction manager in order to begin and complete transactions. An application communicates with a transaction manager in order to marshal transactions to and from other applications. An application also communicates in application-specific ways with a resource manager in order to submit requests for work on resources.
+<a id="gt_classification-rule"></a>
+**classification rule**: A FSRM object that defines a rule, which invokes a classification module on the files in a set of directories to apply property definition instances to each of those files.
 
-<a id="gt_application-protocol"></a>
-**application protocol**: A protocol that is used by [**applications**](#gt_application) to communicate with [**queue managers**](#gt_476f10ed-08f0-4887-b583-59d5cf909979). [**Application protocols**](#gt_application-protocol) include the Message Queuing (MSMQ): Queue Manager Client Protocol [MS-MQMP](../MS-MQMP/MS-MQMP.md), the Message Queuing (MSMQ): Queue Manager Management Protocol [MS-MQMR](../MS-MQMR/MS-MQMR.md) and the Message Queuing (MSMQ): ActiveX Client Protocol [MC-MQAC](../MC-MQAC/MC-MQAC.md).
+<a id="gt_computer-name"></a>
+**computer name**: The DNS or NetBIOS name.
 
-<a id="gt_asynchronous-messaging"></a>
-**asynchronous messaging**: Communication between two [**applications**](#gt_application) or systems, independent of time.
+<a id="gt_dfs-service"></a>
+**DFS service**: A service on the file server that implements the server functionality of the Namespace Referral protocol defined in [MS-DFSC](../MS-DFSC/MS-DFSC.md) and Namespace Management protocol defined in [MS-DFSNM].
 
-<a id="gt_at-most-once"></a>
-**at most once**: A [**message**](#gt_message) delivery assurance that requires that a [**Message Queuing System**](#gt_message-queuing-system) deliver a [**message**](#gt_message) to its destination [**at most once**](#gt_at-most-once). Some [**messages**](#gt_message) might not be delivered.
+<a id="gt_dfs-r"></a>
+**DFS-R**: A service that keeps [**DFS**](#gt_distributed-file-system-dfs) and SYSVOL folders in sync automatically. DFS-R is a state-based, multimaster replication system that supports replication scheduling and bandwidth throttling. This is a rewrite and new version of [**FRS**](#gt_file-replication-service-frs). For more information, see [MS-FRS2](../MS-FRS2/MS-FRS2.md).
 
-<a id="gt_atomic-transaction"></a>
-**atomic transaction**: A shared activity that provides mechanisms for achieving the atomicity, consistency, isolation, and durability (ACID) properties when state changes occur inside participating [**resource managers**](#gt_resource-manager-rm).
-
-<a id="gt_best-effort"></a>
-**best effort**: Indicates that a [**Message Queuing System**](#gt_message-queuing-system) makes a best effort to meet the specified [**message**](#gt_message) delivery assurance, but does not raise an error if the delivery assurance is not met.
-
-<a id="gt_connected-network"></a>
-**connected network**: A network of computers in which any two computers can communicate directly through a common transport protocol (for example, TCP/IP or SPX/IPX). A computer can belong to multiple connected networks.
-
-<a id="gt_connector-application"></a>
-**connector application**: An application that runs on a [**connector server**](#gt_connector-server) and translates both outgoing and incoming [**messages**](#gt_message) sent between a [**Message Queuing**](#gt_microsoft-message-queuing-msmq) computer and a foreign messaging system.
-
-<a id="gt_connector-server"></a>
-**connector server**: A Message Queuing routing server that is configured to send [**messages**](#gt_message) between a [**Message Queuing**](#gt_microsoft-message-queuing-msmq) site and one or more foreign sites. A [**connector server**](#gt_connector-server) has a [**connector application**](#gt_connector-application) running on it and two connector queues for each foreign site: one used for [**transactional messages**](#gt_transactional-message) and one used for nontransactional messages.
-
-<a id="gt_cursor"></a>
-**cursor**: A data structure providing sequential access over a message queue. A cursor has a current pointer that lies between the head and tail pointer of the [**queue**](#gt_queue). The pointer can be moved forward or backward through an operation on the cursor (Next). A [**message**](#gt_message) at the current pointer can be accessed through a nondestructive read (Peek) operation or a destructive read (Receive) operation.
-
-<a id="gt_dead-letter-queue"></a>
-**dead-letter queue**: A [**queue**](#gt_queue) that contains [**messages**](#gt_message) that were sent from a host with a request for negative source journaling and that could not be delivered. [**Message Queuing**](#gt_microsoft-message-queuing-msmq) provides a transactional dead-letter queue and a non-transactional dead-letter queue.
-
-<a id="gt_direct-format-name"></a>
-**direct format name**: A name that is used to reference a [**public queue**](#gt_public-queue) or a [**private queue**](#gt_private-queue) without accessing the MSMQ Directory Service. Message Queuing can use the physical, explicit location information provided by direct format names to send [**messages**](#gt_message) directly to their destinations. For more information, see [MS-MQMQ] section 2.1.
+<a id="gt_directory-quota"></a>
+**directory quota**: An FSRM object that is associated with a [**file system**](#gt_file-system) directory that limits the amount of data, which the system or any user can store in a directory.
 
 <a id="gt_directory-service-ds"></a>
-**directory service (DS)**: An entity that maintains a collection of objects. These objects can be remotely manipulated either by the Message Queuing (MSMQ): Directory Service Protocol, as specified in [MS-MQDS](../MS-MQDS/MS-MQDS.md), or by the Lightweight Directory Access Protocol (v3), as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325).
+**directory service (DS)**: A service that stores and organizes information about a computer network's users and network shares, and that allows network administrators to manage users' access to the shares. See also [**Active Directory**](#gt_active-directory).
 
-<a id="gt_directory-integrated-mode"></a>
-**Directory-Integrated mode**: A Message Queuing deployment mode in which the clients and servers use a [**Directory Service**](#gt_directory-service-ds) to enable a set of features pertaining to [**message**](#gt_message) security, efficient routing, [**queue**](#gt_queue) discovery, [**distribution lists**](#gt_distribution-list), and aliases. See also [**Workgroup mode**](#gt_workgroup-mode).
+<a id="gt_distributed-component-object-model-dcom"></a>
+**Distributed Component Object Model (DCOM)**: The Microsoft Component Object Model (COM) specification that defines how components communicate over networks, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-<a id="gt_discretionary-access-control-list-dacl"></a>
-**discretionary access control list (DACL)**: An [**access control list (ACL)**](#gt_access-control-list-acl) that is controlled by the owner of an object and that specifies the access particular users or groups can have to the object.
+<a id="gt_distributed-file-system-dfs"></a>
+**Distributed File System (DFS)**: A file system that logically groups physical shared folders located on different servers by transparently connecting them to one or more hierarchical namespaces. [**DFS**](#gt_distributed-file-system-dfs) also provides fault-tolerance and load-sharing capabilities.
 
-<a id="gt_distribution-list"></a>
-**distribution list**: An Active Directory object that can contain explicit references only to destinations published in Active Directory; that is, to [**public queues**](#gt_public-queue), queue aliases, and other distribution lists, but not to private and URL-named queues.
+<a id="gt_distributed-file-system-dfs-link"></a>
+**Distributed File System (DFS) link**: A component in a DFS path that lies below the DFS root and maps to one or more DFS link targets. Also interchangeably used to refer to a DFS path that contains the [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619).
+
+<a id="gt_distributed-file-system-dfs-namespace"></a>
+**Distributed File System (DFS) namespace**: A virtual view of shares on different servers as provided by [**DFS**](#gt_distributed-file-system-dfs). Each file in the namespace has a logical name and a corresponding address (path). A [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) consists of a root and many links and targets. The namespace starts with a root that maps to one or more root targets. Below the root are links that map to their own targets.
+
+<a id="gt_distributed-file-system-dfs-namespace-standalone"></a>
+**Distributed File System (DFS) namespace, standalone**: A [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) that has metadata stored locally on the host server. The path to access the root or a link starts with the host server name. A stand-alone DFS root has only one root target. Stand-alone roots are not fault-tolerant; when the root target is unavailable, the entire [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890) is inaccessible. Stand-alone DFS roots can be made fault tolerant by creating them on clustered file servers.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set must act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the Active Directory service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_2.1) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set must act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_domain-controller-dc"></a>
-**domain controller (DC)**: The service, running on a server, that implements Active Directory, or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When Active Directory is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its forest. If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its forest. For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When Active Directory is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When Active Directory is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its forest. The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
+**domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its forest. If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its forest. For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its forest. The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
 
-<a id="gt_enqueue"></a>
-**enqueue**: The process of adding data to a queue.
+<a id="gt_file"></a>
+**file**: An entity of data in the [**file system**](#gt_file-system) that a user can access and manage. A [**file**](#gt_file) must have a unique name in its directory. It consists of one or more streams of bytes that hold a set of related data, plus a set of attributes (also called properties) that describe the [**file**](#gt_file) or the data within the [**file**](#gt_file). The creation time of a [**file**](#gt_file) is an example of a file attribute.
 
-<a id="gt_enterprise"></a>
-**enterprise**: A unit of administration of a network of MSMQ queue managers. An enterprise consists of an MSMQ Directory Service, one or more [**connected networks**](#gt_connected-network), and one or more [**MSMQ sites**](#gt_msmq-site).
+<a id="gt_file-group"></a>
+**file group**: An FSRM object that contains a logical collection of file name patterns, which are identified by name that is used to define [**file screens**](#gt_file-screen) and file screen exceptions. [**File group**](#gt_file-group) definitions can also be used for generating report jobs that are based on the file type.
 
-<a id="gt_exactly-once"></a>
-**exactly once**: A [**message**](#gt_message) delivery assurance that requires that the [**Message Queuing**](#gt_microsoft-message-queuing-msmq) system delivers the [**message**](#gt_message) to the destination once and only once, such that each sent [**message**](#gt_message) is either delivered once to the destination or an error is raised.
+<a id="gt_file-management-job"></a>
+**file management job**: A scheduled task that applies a command to a set of files as determined by a list of conditions and a list of namespaces.
 
-<a id="gt_express-message"></a>
-**express message**: A volatile [**message**](#gt_message) that does not persist through [**queue manager**](#gt_queue-manager-qm) restarts. These express [**messages**](#gt_message) provide best-effort, at-most-once delivery assurance.
+<a id="gt_file-replication-service-frs"></a>
+**File Replication Service (FRS)**: One of the services offered by a [**domain controller (DC)**](#gt_domain-controller-dc), which is advertised through the Domain Controller Location protocol. The service being offered to clients is a replicated data storage volume that is associated with the default naming context (NC). The running or paused state of the [**FRS**](#gt_file-replication-service-frs) on a [**DC**](#gt_domain-controller-dc) is available through protocols documented in [MS-ADTS] section 6.3.
 
-<a id="gt_external-transaction"></a>
-**external transaction**: An atomic transaction context dispensed by a transaction coordinator other than an MSMQ queue manager, such as by a distributed transaction coordinator (DTC), and used by an MSMQ queue manager to coordinate its state changes with state changes in other resource managers. For more information on transactions, see [MS-DTCO](../MS-DTCO/MS-DTCO.md).
+<a id="gt_file-screen"></a>
+**file screen**: An FSRM object that is associated with a [**file system**](#gt_file-system) directory that limits the types of files that the system or any user can store in a directory. When a restricted file is detected, the FSRM server can raise one or more FSRM notifications.
 
-<a id="gt_facet"></a>
-**facet**: In OleTx, a subsystem in a [**transaction manager**](#gt_transaction-manager) that maintains its own per-[**transaction**](#gt_transaction) state and responds to intra-[**transaction manager**](#gt_transaction-manager) events from other [**facets**](#gt_facet). A [**facet**](#gt_facet) can also be responsible for communicating with other participants of a [**transaction**](#gt_transaction).
+<a id="gt_file-server"></a>
+**file server**: The service or process on a server computer that implements the server-side file access protocol components to enable remote file sharing for the file clients.
 
-<a id="gt_foreign-queue"></a>
-**foreign queue**: A messaging queue that resides on a computer that does not run an [**MSMQ**](#gt_microsoft-message-queuing-msmq) messaging application.
-
-<a id="gt_hypertext-transfer-protocol-http"></a>
-**Hypertext Transfer Protocol (HTTP)**: An application-level protocol for distributed, collaborative, hypermedia information systems (text, graphic images, sound, video, and other multimedia files) on the World Wide Web.
-
-<a id="gt_hypertext-transfer-protocol-secure-https"></a>
-**Hypertext Transfer Protocol Secure (HTTPS)**: An extension of HTTP that securely encrypts and decrypts web page requests. In some older protocols, "Hypertext Transfer Protocol over Secure Sockets Layer" is still used (Secure Sockets Layer has been deprecated). For more information, see [[SSL3]](https://go.microsoft.com/fwlink/?LinkId=90534) and [[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803).
-
-<a id="gt_in-routing-server"></a>
-**in-routing server**: An MSMQ routing server that receives all [**messages**](#gt_message) on behalf of a particular client and forwards those [**messages**](#gt_message) to that client.
-
-<a id="gt_internal-transaction"></a>
-**internal transaction**: An atomic transaction context dispensed by an MSMQ Queue Manager instance that can be used to atomically commit or roll back state changes within that MSMQ Queue Manager. The dispensing MSMQ Queue Manager instance is the transaction coordinator and is also the only resource manager participant supported by the transaction context. An internal transaction cannot, therefore, be used to coordinate state changes with other resource managers, including other MSMQ Queue Manager instances.
-
-<a id="gt_internetwork-packet-exchange-ipx"></a>
-**Internetwork Packet Exchange (IPX)**: A protocol that provides connectionless datagram delivery of messages. See [[IPX]](https://go.microsoft.com/fwlink/?LinkId=89914).
+<a id="gt_file-system"></a>
+**file system**: A system that enables applications to store and retrieve [**files**](#gt_file) on storage devices. Files are placed in a hierarchical structure. The file system specifies naming conventions for files and the format for specifying the path to a file in the tree structure. Each file system consists of one or more drivers and DLLs that define the data formats and features of the file system. File systems can exist on the following storage devices: diskettes, hard disks, jukeboxes, removable optical disks, and tape backup units.
 
 <a id="gt_lightweight-directory-access-protocol-ldap"></a>
-**Lightweight Directory Access Protocol (LDAP)**: The primary access protocol for Active Directory. Lightweight Directory Access Protocol (LDAP) is an industry-standard protocol, established by the Internet Engineering Task Force (IETF), which allows users to query and update information in a [**directory service (DS)**](#gt_directory-service-ds), as described in [MS-ADTS]. The Lightweight Directory Access Protocol can be either version 2 [[RFC1777]](https://go.microsoft.com/fwlink/?LinkId=90290) or version 3 [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337).
+**Lightweight Directory Access Protocol (LDAP)**: The primary access protocol for [**Active Directory**](#gt_active-directory). Lightweight Directory Access Protocol (LDAP) is an industry-standard protocol, established by the Internet Engineering Task Force (IETF), which allows users to query and update information in a [**directory service (DS)**](#gt_directory-service-ds), as described in [MS-ADTS]. The Lightweight Directory Access Protocol can be either version 2 [[RFC1777]](https://go.microsoft.com/fwlink/?LinkId=90290) or version 3 [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337).
 
-<a id="gt_local-queue"></a>
-**local queue**: For a [**queue manager**](#gt_queue-manager-qm), a [**queue**](#gt_queue) hosted by the [**queue manager**](#gt_queue-manager-qm) itself. For an [**application**](#gt_application), a [**queue**](#gt_queue) hosted by the [**queue manager**](#gt_queue-manager-qm) with which the [**application**](#gt_application) communicates.
+<a id="gt_named-pipe"></a>
+**named pipe**: A named, one-way, or duplex pipe for communication between a pipe server and one or more pipe clients.
 
-<a id="gt_management-application"></a>
-**management application**: An [**MSMQ**](#gt_microsoft-message-queuing-msmq) [**application**](#gt_application) that performs management operations, as specified in [MS-MQMR].
+<a id="gt_server"></a>
+**server**: A computer on which the remote procedure call (RPC) server is executing.
 
-<a id="gt_message"></a>
-**message**: A data structure representing a unit of data transfer between distributed applications. A message has message properties, which may include message header properties, a message body property, and message trailer properties.
+<a id="gt_service"></a>
+**service**: A process or agent that is available on the network, offering resources or services for clients. Examples of services include file servers, web servers, and so on.
 
-<a id="gt_message-queuing-system"></a>
-**message queuing system**: An installed or a hypothetical configuration of [**Microsoft Message Queuing (MSMQ)**](#gt_microsoft-message-queuing-msmq) protocol set components, including message queuing [**applications**](#gt_application), [**queue managers**](#gt_476f10ed-08f0-4887-b583-59d5cf909979), and optional subcomponents such as a [**Directory Service**](#gt_directory-service-ds) and a [**Transaction Coordinator**](#gt_transaction-coordinator).
+<a id="gt_session"></a>
+**session**: In Server Message Block (SMB), a persistent-state association between an SMB client and SMB server. A [**session**](#gt_session) is tied to the lifetime of the underlying NetBIOS or TCP connection.
 
-<a id="gt_microsoft-message-queuing-msmq"></a>
-**Microsoft Message Queuing (MSMQ)**: A communications service that provides asynchronous and reliable [**message**](#gt_message) passing between distributed [**applications**](#gt_application). In [**Message Queuing**](#gt_microsoft-message-queuing-msmq), [**applications**](#gt_application) send [**messages**](#gt_message) to [**queues**](#gt_queue) and consume [**messages**](#gt_message) from [**queues**](#gt_queue). The [**queues**](#gt_queue) provide persistence of the [**messages**](#gt_message), enabling the sending and receiving [**applications**](#gt_application) to operate asynchronously from one another.
+<a id="gt_share"></a>
+**share**: A resource offered by a Common Internet File System (CIFS) server for access by CIFS clients over the network. A [**share**](#gt_share) typically represents a directory tree and its included files (referred to commonly as a "disk share" or "file share") or a printer (a "print share"). If the information about the [**share**](#gt_share) is saved in persistent store (for example, Windows registry) and reloaded when a file server is restarted, then the [**share**](#gt_share) is referred to as a "sticky share". Some [**share**](#gt_share) names are reserved for specific functions and are referred to as special [**shares**](#gt_share): IPC$, reserved for interprocess communication, ADMIN$, reserved for remote administration, and A$, B$, C$ (and other local disk names followed by a dollar sign), assigned to local disk devices.
 
-<a id="gt_msmq-application-protocol"></a>
-**MSMQ application protocol**: A protocol that is used by [**applications**](#gt_application) to communicate with [**queue managers**](#gt_476f10ed-08f0-4887-b583-59d5cf909979). [**Application protocols**](#gt_application-protocol) include the Message Queuing (MSMQ): Queue Manager Client Protocol [MS-MQMP], the Message Queuing (MSMQ): Queue Manager Management Protocol [MS-MQMR] and the Message Queuing (MSMQ): ActiveX Client Protocol [MC-MQAC].
+<a id="gt_smb-access-protocols"></a>
+**SMB access protocols**: Refers collectively to protocols defined in [MS-CIFS](../MS-CIFS/MS-CIFS.md), [MS-SMB](../MS-SMB/MS-SMB.md), [MS-SMB2](../MS-SMB2/MS-SMB2.md), and [MS-FSCC](../MS-FSCC/MS-FSCC.md).
 
-<a id="gt_msmq-directory-service-server"></a>
-**MSMQ Directory Service server**: An MSMQ queue manager that provides MSMQ Directory Service. The server can act in either of the MSMQ Directory Service roles: Primary Site Controller (PSC) or Backup Site Controller (BSC).
+<a id="gt_smb-file-service"></a>
+**SMB file service**: A service on the file server that provides access to files using the SMB access protocols and related protocols.
 
-<a id="gt_msmq-management-server"></a>
-**MSMQ management server**: A role played by an MSMQ queue manager. An [**MSMQ management server**](#gt_msmq-management-server) enables management applications to perform management and administrative operations on the Message Queuing System. The Management Server operations are specified in [MS-MQMR] and [MS-MQCN](../MS-MQCN/MS-MQCN.md).
+<a id="gt_smb-network-redirector"></a>
+**SMB Network Redirector**: A service that handles requests for remote files and printer operations by using SMB access protocols.
 
-<a id="gt_msmq-routing-link"></a>
-**MSMQ routing link**: A communication link between two sites. A routing link is represented by a routing link object in the directory service. Routing links can have associated link costs. Routing links with their associated costs can be used to compute lowest-cost routing paths for store-and-forward messaging.
+<a id="gt_smb-share"></a>
+**SMB share**: A share that is accessed via the SMB access protocols.
 
-<a id="gt_msmq-site"></a>
-**MSMQ site**: A network of computers, typically physically collocated, that have high connectivity as measured in terms of latency (low) and throughput (high). A site is represented by a site object in the directory service. An MSMQ site maps one-to-one with an Active Directory site when Active Directory provides directory services to [**MSMQ**](#gt_microsoft-message-queuing-msmq).
+<a id="gt_universal-naming-convention-unc"></a>
+**Universal Naming Convention (UNC)**: A string format that specifies the location of a resource. For more information, see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.57.
 
-<a id="gt_msmq-site-gate"></a>
-**MSMQ site gate**: An MSMQ routing server through which all intersite messaging traffic flows.
+<a id="Section_1.2"></a>
+## 1.2 References
 
-<a id="gt_negative-source-journaling"></a>
-**negative source journaling**: The process of retaining copies of unsuccessfully delivered [**messages**](#gt_message). The copies are retained by the QueueManager. Also known as dead-lettering.
+Links to a document in the Microsoft Open Specifications library point to the correct section in the most recently published version of the referenced document. However, because individual documents in the library are not updated at the same time, the section numbers in the documents may not match. You can confirm the correct section numbering by checking the [Errata](https://go.microsoft.com/fwlink/?linkid=850906).
 
-<a id="gt_network-address"></a>
-**network address**: An address that is used to identify and communicate with a specific computer in a computer network. A computer can have more than one [**network address**](#gt_network-address). Any of these [**network addresses**](#gt_network-address) can be used to communicate with the computer.
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-<a id="gt_outcome"></a>
-**outcome**: One of the three possible results (Commit, Abort, In Doubt) reachable at the end of a life cycle for an [**atomic transaction**](#gt_atomic-transaction).
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
-<a id="gt_outgoing-queue"></a>
-**outgoing queue**: A temporary internal [**queue**](#gt_queue) that holds [**messages**](#gt_message) for a remote destination [**queue**](#gt_queue). The path name of an outgoing [**queue**](#gt_queue) is identical to the path name of the corresponding destination [**queue**](#gt_queue). An outgoing [**queue**](#gt_queue) is distinguished from its corresponding destination [**queue**](#gt_queue) by the fact that the outgoing [**queue**](#gt_queue) is located on the sending computer. The format name of an outgoing [**queue**](#gt_queue) is identical to the format name used by the [**messages**](#gt_message) to reference the destination [**queue**](#gt_queue). Messages that reference the destination [**queue**](#gt_queue) using a different format name are placed in a different outgoing [**queue**](#gt_queue).
+[MS-BRWS] Microsoft Corporation, "[Common Internet File System (CIFS) Browser Protocol](../MS-BRWS/MS-BRWS.md)".
 
-<a id="gt_out-routing-server"></a>
-**out-routing server**: An MSMQ routing server that receives all [**messages**](#gt_message) sent by a particular client and routes those [**messages**](#gt_message) on behalf of that client.
+[MS-DFSC] Microsoft Corporation, "[Distributed File System (DFS): Referral Protocol](../MS-DFSC/MS-DFSC.md)".
 
-<a id="gt_poison-message"></a>
-**poison message**: A [**message**](#gt_message) in a [**queue**](#gt_queue) that cannot be processed by an [**application**](#gt_application) because of errors unrelated to the [**Message Queuing System**](#gt_message-queuing-system). A [**poison message**](#gt_poison-message) can cause an [**application**](#gt_application) to fail repetitively until the [**message**](#gt_message) has been removed from the [**queue**](#gt_queue).
+[MS-DFSNM] Microsoft Corporation, "[Distributed File System (DFS): Namespace Management Protocol](../MS-DFSNM/MS-DFSNM.md)".
 
-<a id="gt_private-key"></a>
-**private key**: One of a pair of keys used in public-key cryptography. The private key is kept secret and is used to decrypt data that has been encrypted with the corresponding public key. For an introduction to this concept, see [[CRYPTO]](https://go.microsoft.com/fwlink/?LinkId=89841) section 1.8 and [[IEEE1363]](https://go.microsoft.com/fwlink/?LinkId=89899) section 3.1.
+[MS-DFSRH] Microsoft Corporation, "[DFS Replication Helper Protocol](../MS-DFSRH/MS-DFSRH.md)".
 
-<a id="gt_private-queue"></a>
-**private queue**: An application-defined message queue that is not registered in the MSMQ Directory Service. A private queue is deployed on a particular [**queue manager**](#gt_queue-manager-qm).
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
-<a id="gt_public-key"></a>
-**public key**: One of a pair of keys used in public-key cryptography. The public key is distributed freely and published as part of a digital certificate. For an introduction to this concept, see [CRYPTO] section 1.8 and [IEEE1363] section 3.1.
+[MS-FRS1] Microsoft Corporation, "[File Replication Service Protocol](../MS-FRS1/MS-FRS1.md)".
 
-<a id="gt_public-queue"></a>
-**public queue**: An application-defined message queue that is registered in the MSMQ Directory Service. A public queue can be deployed at any [**queue manager**](#gt_queue-manager-qm).
+[MS-FRS2] Microsoft Corporation, "[Distributed File System Replication Protocol](../MS-FRS2/MS-FRS2.md)".
 
-<a id="gt_queue"></a>
-**queue**: An object that holds [**messages**](#gt_message) passed between applications or [**messages**](#gt_message) passed between [**Message Queuing**](#gt_microsoft-message-queuing-msmq) and applications. In general, applications can send [**messages**](#gt_message) to queues and read [**messages**](#gt_message) from queues.
+[MS-FSRM] Microsoft Corporation, "[File Server Resource Manager Protocol](../MS-FSRM/MS-FSRM.md)".
 
-<a id="gt_queue-manager-qm"></a>
-**queue manager (QM)**: A message queuing service that manages [**queues**](#gt_queue) deployed on a computer. A queue manager can also provide asynchronous transfer of [**messages**](#gt_message) to [**queues**](#gt_queue) deployed on other queue managers.
+[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](../MS-PRSOD/MS-PRSOD.md)".
 
-<a id="gt_queue-server"></a>
-**queue server**: See MSMQ queue server.
+[MS-RAP] Microsoft Corporation, "[Remote Administration Protocol](#Section_2.6.1)".
 
-<a id="gt_receive"></a>
-**receive**: An atomic operation that retrieves and removes a [**message**](#gt_message) from a message queue.
+[MS-RDC] Microsoft Corporation, "[Remote Differential Compression Algorithm](../MS-RDC/MS-RDC.md)".
 
-<a id="gt_recoverable-message"></a>
-**recoverable message**: A [**message**](#gt_message) that persists through [**queue manager**](#gt_queue-manager-qm) restarts and provides best-effort, at-most-once delivery assurance.
+[MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-<a id="gt_remote-procedure-call-rpc"></a>
-**remote procedure call (RPC)**: A communication protocol used primarily between client and server. The term has three definitions that are often used interchangeably: a runtime environment providing for communication facilities between computers (the RPC runtime); a set of request-and-response message exchanges between computers (the RPC exchange); and the single message from an RPC exchange (the RPC message). For more information, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
+[MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
-<a id="gt_remote-queue"></a>
-**remote queue**: For a [**queue manager**](#gt_queue-manager-qm), a [**queue**](#gt_queue) that is hosted by a remote [**queue manager**](#gt_queue-manager-qm). For an [**application**](#gt_application), a [**queue**](#gt_queue) hosted by a [**queue manager**](#gt_queue-manager-qm) other than the one with which the [**application**](#gt_application) communicates.
+[MS-SRVS] Microsoft Corporation, "[Server Service Remote Protocol](../MS-SRVS/MS-SRVS.md)".
 
-<a id="gt_remote-read"></a>
-**remote read**: The act of reading (receiving) [**messages**](#gt_message) from a [**remote queue**](#gt_remote-queue).
-
-<a id="gt_resource-manager-rm"></a>
-**resource manager (RM)**: The participant that is responsible for coordinating the state of a resource with the outcome of atomic transactions. For a specified transaction, a resource manager enlists with exactly one transaction manager to vote on that transaction outcome and to obtain the final outcome. A resource manager is either durable or volatile, depending on its resource.
-
-<a id="gt_routing-link"></a>
-**routing link**: See [**MSMQ routing link**](#gt_msmq-routing-link).
-
-<a id="gt_routing-server"></a>
-**routing server**: See MSMQ routing server.
-
-<a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
-
-<a id="gt_site-gate"></a>
-**site gate**: See [**MSMQ site gate**](#gt_msmq-site-gate).
-
-<a id="gt_supporting-server"></a>
-**supporting server**: See MSMQ supporting server.
-
-<a id="gt_symmetric-key"></a>
-**symmetric key**: A secret key used with a cryptographic symmetric algorithm. The key needs to be known to all communicating parties. For an introduction to this concept, see [CRYPTO] section 1.5.
-
-<a id="gt_transaction"></a>
-**transaction**: A unit of interaction that guarantees the ACID properties— atomicity, consistency, isolation, and durability—as specified by the MSDTC Connection Manager: OleTx Transaction Protocol ([MS-DTCO])
-
-<a id="gt_transaction-coordinator"></a>
-**transaction coordinator**: A service that provides concrete mechanisms for beginning, propagating, and completing [**atomic transactions**](#gt_atomic-transaction). A transaction coordinator also provides mechanisms for coordinating agreement on a single atomic [**outcome**](#gt_outcome) for each [**transaction**](#gt_transaction) and for reliably distributing that [**outcome**](#gt_outcome) to all participants in the [**transactions**](#gt_transaction). For more information, see [MS-DTCO].
-
-<a id="gt_transaction-manager"></a>
-**transaction manager**: The party that is responsible for managing and distributing the outcome of [**atomic transactions**](#gt_atomic-transaction). A transaction manager is either a root transaction manager or a subordinate transaction manager for a specified transaction.
-
-<a id="gt_transactional-message"></a>
-**transactional message**: A [**message**](#gt_message) sent as part of a transaction. Transaction [**messages**](#gt_message) must be sent to [**transactional queues**](#gt_transactional-queue).
-
-<a id="gt_transactional-queue"></a>
-**transactional queue**: A [**queue**](#gt_queue) that contains only [**transactional messages**](#gt_transactional-message).
-
-<a id="gt_unicode-string"></a>
-**Unicode string**: A Unicode 8-bit string is an ordered sequence of 8-bit units, a Unicode 16-bit string is an ordered sequence of 16-bit code units, and a Unicode 32-bit string is an ordered sequence of 32-bit code units. In some cases, it could be acceptable not to terminate with a terminating null character. Unless otherwise specified, all [**Unicode strings**](#gt_unicode-string) follow the UTF-16LE encoding scheme with no Byte Order Mark (BOM).
-
-<a id="gt_unit-of-work"></a>
-**unit of work**: A set of individual operations that [**MSMQ**](#gt_microsoft-message-queuing-msmq) must successfully complete before any of the individual [**MSMQ**](#gt_microsoft-message-queuing-msmq) operations can be considered complete.
-
-<a id="gt_user-datagram-protocol-udp"></a>
-**User Datagram Protocol (UDP)**: The connectionless protocol within TCP/IP that corresponds to the transport layer in the ISO/OSI reference model.
-
-<a id="gt_workgroup-mode"></a>
-**workgroup mode**: A Message Queuing deployment mode in which the clients and servers operate without using a [**Directory Service**](#gt_directory-service-ds). In this mode, features pertaining to [**message**](#gt_message) security, efficient routing, [**queue**](#gt_queue) discovery, [**distribution lists**](#gt_distribution-list), and aliases are not available. See also [**Directory-Integrated mode**](#gt_directory-integrated-mode).
-
-<a id="Section_1.3"></a>
-## 1.3 References
-
-[MC-COMQC] Microsoft Corporation, "[Component Object Model Plus (COM+) Queued Components Protocol](../MC-COMQC/MC-COMQC.md)".
-
-[MC-MQAC] Microsoft Corporation, "[Message Queuing (MSMQ): ActiveX Client Protocol](../MC-MQAC/MC-MQAC.md)".
-
-[MC-MQSRM] Microsoft Corporation, "[Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP)](../MC-MQSRM/MC-MQSRM.md)".
-
-[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](../MS-ADA2/MS-ADA2.md)".
-
-[MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
-
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
-
-[MS-DTCO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transaction Protocol](../MS-DTCO/MS-DTCO.md)".
-
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
-
-[MS-MQBR] Microsoft Corporation, "[Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm](../MS-MQBR/MS-MQBR.md)".
-
-[MS-MQCN] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Change Notification Protocol](../MS-MQCN/MS-MQCN.md)".
-
-[MS-MQDMPR] Microsoft Corporation, "[Message Queuing (MSMQ): Common Data Model and Processing Rules](../MS-MQDMPR/MS-MQDMPR.md)".
-
-[MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](../MS-MQDSSM/MS-MQDSSM.md)".
-
-[MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](../MS-MQDS/MS-MQDS.md)".
-
-[MS-MQMP] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Client Protocol](../MS-MQMP/MS-MQMP.md)".
-
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
-
-[MS-MQMR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Management Protocol](../MS-MQMR/MS-MQMR.md)".
-
-[MS-MQQB] Microsoft Corporation, "[Message Queuing (MSMQ): Message Queuing Binary Protocol](../MS-MQQB/MS-MQQB.md)".
-
-[MS-MQQP] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol](../MS-MQQP/MS-MQQP.md)".
-
-[MS-MQRR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Remote Read Protocol](../MS-MQRR/MS-MQRR.md)".
-
-[MS-MQSD] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Discovery Protocol](../MS-MQSD/MS-MQSD.md)".
-
-[MS-RDPBCGR] Microsoft Corporation, "[Remote Desktop Protocol: Basic Connectivity and Graphics Remoting](../MS-RDPBCGR/MS-RDPBCGR.md)".
-
-[MSDN-WCF] Microsoft Corporation, "Windows Communication Foundation", [http://msdn.microsoft.com/en-us/library/ms735119.aspx](https://go.microsoft.com/fwlink/?LinkId=100290)
-
-[MSFT-PKI] Microsoft Corporation, "Best Practices for Implementing a Microsoft Windows Server 2003 Public Key Infrastructure", July 2004, [http://technet2.microsoft.com/WindowsServer/en/library/091cda67-79ec-481d-8a96-03e0be7374ed1033.mspx](https://go.microsoft.com/fwlink/?LinkId=90202)
-
-[RFC1321] Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321, April 1992, [http://www.ietf.org/rfc/rfc1321.txt](https://go.microsoft.com/fwlink/?LinkId=90275)
-
-[RFC2616] Fielding, R., Gettys, J., Mogul, J., et al., "Hypertext Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999, [http://www.rfc-editor.org/rfc/rfc2616.txt](https://go.microsoft.com/fwlink/?LinkId=90372)
-
-[RFC3208] Speakman, T., Crowcroft, J., Gemmell, J., Farinacci, D., Lin, S., Leshchiner, D., Luby, M., Montgomery, T., Rizzo, L., Tweedly, A., Bhaskar, N., Edmonstone, R., Sumanasekera, R., and Vicisano, L., "PGM Reliable Transport Protocol Specification", RFC 3208, December 2001, [http://www.ietf.org/rfc/rfc3208.txt](https://go.microsoft.com/fwlink/?LinkId=95257)
-
-[RFC3275] Eastlake III, D., Reagle, J., and Solo, D., "(Extensible Markup Language) XML-Signature Syntax and Processing", RFC 3275, March 2002, [http://www.ietf.org/rfc/rfc3275.txt](https://go.microsoft.com/fwlink/?LinkId=91146)
-
-[RFC3377] Hodges, J. and Morgan, R., "Lightweight Directory Access Protocol (v3): Technical Specification", RFC 3377, September 2002, [http://www.ietf.org/rfc/rfc3377.txt](https://go.microsoft.com/fwlink/?LinkID=91337)
-
-[SP800-32] NIST, "Introduction to Public Key Technology and the Federal PKI Infrastructure", SP800-32, February 2001, [http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-32.pdf](https://go.microsoft.com/fwlink/?LinkId=90524)
+[MS-WKST] Microsoft Corporation, "[Workstation Service Remote Protocol](../MS-WKST/MS-WKST.md)".
 
 <a id="Section_2"></a>
 # 2 Functional Architecture
 
+This section describes the basic structure of the system and the interrelationships among its parts, consumers, and dependencies.
+
 <a id="Section_2.1"></a>
 ## 2.1 Overview
 
-<a id="Section_2.1.1"></a>
-### 2.1.1 Purpose
+A goal of information technology (IT) groups is to manage [**file server**](#gt_file-server) resources efficiently while keeping them available and secure for users. As networks expand to include more users and [**servers**](#gt_server)—whether they are located in one site or in geographically distributed sites—administrators find it increasingly difficult to keep users connected to the [**files**](#gt_file) that they require. On one hand, distributing resources across a network makes them more available and promotes cross-organizational efforts. On the other hand, storing files on different file servers that are located throughout an organization makes it difficult for users to know where to look for information. Administrators also find it difficult to keep track of all the servers and users who use those servers. The task of replacing an old server with a new server becomes a major communication chore when users across an organization have to be notified to update links and file paths.
 
-The primary purpose of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols is to enable a temporal decoupling of [**applications**](#gt_application) by providing an [**asynchronous messaging**](#gt_asynchronous-messaging) service between applications that have to communicate reliably with each other through [**messages**](#gt_message) that they send and receive. The MSMQ protocols account for transient networking failure, system availability, and [**queue**](#gt_queue) location.
+Within the File Services Management system, the [**UNC**](#gt_universal-naming-convention-unc) path is usually rendered as "\\<Server>\<Share>\<Remaining path>", where a share is a specific instance of a file service that is present on the target server. While a UNC path name can be used to indicate the path to a specific physical share, it can also be used to virtualize access to [**shares**](#gt_share), through the use of the Distributed File System (DFS): Referral and the Distributed File System (DFS): Namespace Management Protocols.
+
+[**DFS**](#gt_distributed-file-system-dfs) allows administrators to group shared folders that are located on different servers by transparently connecting them to one or more [**DFS namespaces**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890). By using the DFS tools, an administrator selects which shared folders to present in the namespace, designs the hierarchy in which those folders appear, and determines the names that the shared folders show. When a user views the namespace, the folders appear to reside on a single, high-capacity hard disk. Users can navigate the namespace without having to know the server names or shared folders that host the data.
+
+An [**admin client**](#gt_admin-client) uses management protocols to configure and query the state of [**services**](#gt_service), such as the [**DFS Service**](#gt_dfs-service) and the File Services. The admin client is also used to configure various policies that apply to the object store on a file server, such as quotas to limit user disk space use, screening to restrict the type of content that is allowed to be stored), and other policies.
+
+<a id="Section_2.1.1"></a>
+### 2.1.1 System Purposes
+
+The purpose of the File Services Management system is to allow an administrator to configure and monitor file services remotely.
 
 <a id="Section_2.1.2"></a>
-### 2.1.2 Capabilities
+### 2.1.2 Relationship with External Components
 
-The Microsoft Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) protocols provide the following capabilities to messaging [**applications**](#gt_application):
+The File Services Management system interacts with several other Windows components. The following diagram shows the key interactions.
 
-[Message Delivery Assurance (section 2.1.2.1)](#Section_2.1.2.1)
+![Components interacting with the File Services Management system](media/image1.png)
 
-[Message Transfer and Routing (section 2.1.2.2)](#Section_2.1.2.2)
+Figure 1: Components interacting with the File Services Management system
 
-[Message Security (section 2.1.2.3)](#Section_2.9)
+File server, file system, domain controller, and printer services are used by the File Services Management system (FSM system).
 
-[Management and Administration (section 2.1.2.4)](#Section_2.1.2.4)
+**File server:** A computer hosting one or more instances of a file service, for example, an instance of an [**SMB file service**](#gt_smb-file-service). A File Services Management system is used to configure the file servers. File servers use [**file systems**](#gt_file-system) to store information in the form of files.
 
-<a id="Section_2.1.2.1"></a>
-#### 2.1.2.1 Message Delivery Assurance
+**File system:** A hierarchical store for persistence of user and application data. The File Services Management system uses a file system to store configuration data and to retrieve the properties of the file system objects. The File Services Management system depends on an external object store for storing files and directories, and for changing the configuration of the file system objects. In Windows, the object store is provided by a local file system, usually the NTFS file system.
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols provide the following levels of [**message**](#gt_message) delivery assurance:
+**Domain controller:** Used to store Distributed File System (DFS) namespace metadata if a domain-based namespace is created. The [**domain controller**](#gt_domain-controller-dc) is also used to store [**File Replication Service (FRS)**](#gt_file-replication-service-frs) objects, which store the configuration that is related to all replication members.
 
-**Best-effort Express Delivery:** Provides [**best-effort**](#gt_a08881df-8d7c-444b-9c93-398dc874d76f), [**at most once**](#gt_at-most-once) express delivery assurance through [**express messages**](#gt_express-message) that are volatile and therefore can be lost in transit during transient unavailability or failure of the Message Queuing components or of the underlying network. These messages do not persist through system restarts.
+**Printer services:** Printers can be shared by using the File Services Management system. The system uses printer services to provide printer sharing, where printers can be accessed as described in [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md). FSMOD protocols are used to configure the printers and present them to users.
 
-**Best-effort Delivery:** Provides best-effort, at most once delivery assurance through [**recoverable messages**](#gt_recoverable-message). These messages are saved by the [**queue manager**](#gt_queue-manager-qm) and therefore persist through system restarts. These messages can be lost in transit during transient unavailability or failure of the underlying network.
-
-**Exactly-once Delivery:** Provides [**exactly-once**](#gt_01da45f8-5f30-48cc-8273-30868c706746) delivery assurance for messages that are sent to [**transactional queues**](#gt_transactional-queue). A source [**applications**](#gt_application) sends one or more messages to a transactional queue as part of a [**transaction**](#gt_transaction). Subject to the [**outcome**](#gt_outcome) of the transaction, the queue manager accepts and persists these messages. Subsequently, the messages are transferred between queue managers for placement in the destination queue. A destination application [**receives**](#gt_receive) and processes messages as part of a transaction. Whether the messages are treated as consumed depends on the outcome of the transaction. A [**Message Queuing System**](#gt_message-queuing-system) is required to receive and deliver these messages only in the scope of a transaction.
-
-<a id="Section_2.1.2.2"></a>
-#### 2.1.2.2 Message Transfer and Routing
-
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocol set supports [**message**](#gt_message) transfer across complex network topologies and over a variety of network transport protocols that include the Transmission Control Protocol/Internet Protocol (TCP/IP) or the Internetwork Packet Exchange/Sequenced Packet Exchange ([**IPX**](#gt_internetwork-packet-exchange-ipx)/SPX), the User Datagram Protocol ([**UDP**](#gt_user-datagram-protocol-udp)), the Hypertext Transfer Protocol ([**HTTP**](#gt_hypertext-transfer-protocol-http)), the Hypertext Transfer Protocol over Secure Sockets Layer ([**HTTPS**](#gt_hypertext-transfer-protocol-secure-https)), and Pragmatic General Multicast ([[RFC3208]](https://go.microsoft.com/fwlink/?LinkId=95257)). To optimize message throughput, the MSMQ protocol set defines an optional routing mechanism to find and use the least-cost routing path between two machines, as described in [MS-MQBR](../MS-MQBR/MS-MQBR.md).
-
-<a id="Section_2.1.2.3"></a>
-#### 2.1.2.3 Message Security
-
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols enable secure messaging between [**applications**](#gt_application) by supporting a variety of security features that include user authentication, authorization, [**message**](#gt_message) integrity, and message encryption and decryption. The MSMQ security architecture is described in section [2.9](#Section_2.9) of this document.
-
-<a id="Section_2.1.2.4"></a>
-#### 2.1.2.4 Management and Administration
-
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocol set defines protocols for [**management applications**](#gt_management-application) for its configuration, management, and administration.
+**Admin tool:** A tool that provides management functionality to the administrator. The admin tool uses the File Services Management system to configure and retrieve configuration information for the file servers. It is also used to configure and query the state of the file services.
 
 <a id="Section_2.1.3"></a>
-### 2.1.3 Interaction with External Components
+### 2.1.3 System Capabilities
 
-This section describes the externally visible view of the [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols and the components in the system.
+The following are the administrative operations that can be performed by using the File Services Management Protocols:
 
-The following figure expands on the figure with the caption "Participating components in a Message Queuing System" in section [1.1](#Section_2.1) and shows the various internal and external components of a [**Message Queuing System**](#gt_message-queuing-system).
+**DFS namespace management:** The Distributed File System (DFS) namespace is a virtual view of resources that reside on one or more file servers. When a user views the namespace, the directories and files in it appear to reside on a single share. Users can navigate the namespace without previous knowledge of the server names or the shares hosting the data. By using the admin tools, an administrator selects which shared folders to present in the namespace, designs the hierarchy in which those folders appear, and determines the names that the shared folders show in the namespace, as described in Distributed File System (DFS): Namespace Management Protocol [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md).
 
-![Interactions with external components](media/image7.png)
+**Configuring Distributed File System Replication (DFS-R):** The administrator can use the admin tools to create, modify, and delete configuration objects in [**Active Directory**](#gt_active-directory). For this purpose, the administrator uses the Distributed File System (DFS) Replication Helper Protocol, as described in [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md).
 
-Figure 7: Interactions with external components
+**Monitoring Distributed File System Replication (DFS-R):** The administrator can monitor [**DFS-R**](#gt_dfs-r) on the server and collect statistics about the DFS-R operation. Information that can be collected includes:
 
-The [**queue manager**](#gt_queue-manager-qm) interacts with its internal storage subsystem for persistence of its configuration data, application data, which includes queues and nonvolatile [**messages**](#gt_message), and state. The exact storage mechanism that is used varies per implementation of the MSMQ protocol set; however, it retains persistent data and state across system restarts. The queue manager interacts with other queue managers in the implementation.
+- Number and size of replicated files on the server.
+- Disk use on the server.
+- Information about replicated folders on the server.
+- Replication backlog—the number of files that are not yet fully replicated.
+The interfaces that are used to collect these statistics are described in [MS-DFSRH].
 
-The queue manager optionally interacts with an external [**Transaction Coordinator**](#gt_transaction-coordinator) to provide transactional capabilities while sending or receiving messages to or from individual queues. Applications can create [**external transactions**](#gt_external-transaction) from the Transaction Coordinator and can pass them on to MSMQ protocols to atomically perform certain messaging operations. The external Transaction Coordinator functionality is described in [MS-DTCO](../MS-DTCO/MS-DTCO.md).
+**Directory quota management:** [**Directory quotas**](#gt_directory-quota) track and control directory space usage for NTFS file system volumes. Directory quotas allow administrators to control the amount of data that each user can store on a specific NTFS file system directory. A directory quota can be configured with one or more directory quota thresholds that define a set of highly customizable notifications that are sent when the quota usage reaches the threshold value. For more information on how to configure the directory quota, see the File Server Resource Manager Protocol [MS-FSRM](../MS-FSRM/MS-FSRM.md).
 
-The MSMQ protocol set optionally uses a directory through a [**Directory Service**](#gt_directory-service-ds) component. The directory stores and provides information such as network topology, security key distribution, queue and system metadata, and queue discovery. For more information about the Directory Service, see section [2.1.3.3](#Section_2.1.3.3).
+**File screen management:** Administrators can create and modify [**file screens**](#gt_file-screen) that restrict the types of files that can be stored in a specific directory and its subdirectories. For each file screen, there is a configurable list of blocked [**file groups**](#gt_file-group) that define a set of patterns, based on the file name, which is to be restricted. When a file is created or renamed, the server evaluates whether the file name matches a pattern in any file group that is configured on a parent portion of the path. If a match is found, the file is blocked, and a set of highly customizable File Server Resource Management (FSRM) notifications that are configured for the file screen are raised. For more information on how to configure a file screen, see [MS-FSRM].
 
-The following subsections describe the relationship of the queue manager with the preceding subcomponents.
+**Analyze storage use:** An administrator can generate reports to better understand how storage is used in specific directories. A storage report job specifies a set of directories to be analyzed to generate one or more reports. Report jobs can be run on a schedule or on demand. An administrator can also query and set properties on the report job to manipulate report generation parameters, format options, email delivery information, and other options. For more information on how to configure report jobs, see [MS-FSRM].
 
-<a id="Section_2.1.3.1"></a>
-#### 2.1.3.1 Message Queuing and Applications
+**File classification:** An administrator can classify files and apply policies that are based on that classification. An administrator can retrieve and modify the values that are assigned to classification properties for files that are stored on the server. An administrator can create, enumerate, modify, and delete [**classification rules**](#gt_classification-rule) and classification modules on the server. For more information on how to configure the file classification, see [MS-FSRM].
 
-[**Applications**](#gt_application) use the Microsoft Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) [**application protocols**](#gt_application-protocol) to accomplish [**asynchronous messaging**](#gt_asynchronous-messaging) functionalities. An application typically interacts with one [**queue manager**](#gt_queue-manager-qm). A queue manager implements the [**supporting server**](#gt_supporting-server) role or the [**queue server**](#gt_queue-server) role, or both, to communicate with applications that pursue message exchange functionality.
+**Creating and modifying a file management job:** A [**file management job**](#gt_file-management-job) is a scheduled task that applies a command to a set of files, as determined by lists of conditions and namespaces. File management jobs can also produce FSRM notifications at configurable intervals before a file is affected by the configured task.
 
-A queue manager acts as a supporting server. As a supporting server, it implements the server side of MQMP and thereby provides a subset of the MSMQ functionality, as described in [MS-MQMP](../MS-MQMP/MS-MQMP.md) section 1. An application interacts with the supporting server through the client side of MQMP. The following figure shows this deployment mode.
+**Modifying the file properties:** An administrator can set, enumerate, modify, and delete values of properties for specific files on the file server by interacting with the FSRM server component.
 
-![Queue manager as supporting server](media/image8.png)
+**Configuring the SMB Network Redirector:** An administrator can query and configure the [**SMB Network Redirector**](#gt_smb-network-redirector) by using the File Services Management system. For example, the administrator can query the [**computer name**](#gt_computer-name) or major and minor version numbers of the operating system from a remote computer. An administrator can set the following configuration options:
 
-Figure 8: Queue manager as supporting server
+- The number of seconds that the SMB Network Redirector maintains an inactive SMB connection to a remote computer's resource before closing it.
+- The number of simultaneous network commands that can be processed by the SMB Network Redirector.
+- The number of seconds that the SMB Network Redirector waits before the redirector disconnects an inactive SMB session.
+Configuration operations and the protocol that is used to carry out these tasks are described in [MS-WKST](../MS-WKST/MS-WKST.md).
 
-Alternatively, a queue manager acts as a queue server. As a queue server, it implements the server side of MQAC and both the client and server sides of the MQQP or MQRR. It thereby provides the full set of message exchange functionality of the MSMQ protocol set. An application interacts with the queue server through the client sides of the MQAC protocol. The following figure shows this deployment mode.
+**Managing information on the SMB server:** The administrator can query and configure information on the server, such as active connections, [**sessions**](#gt_session), [**shares**](#gt_share), files, and transport protocols. A server can be configured to present different resources based on the name the client connects with, allowing it to appear as multiple, distinct servers. This task is achieved by scoping a share to a specific name and by hosting all of the names on the same server. The Server Service Remote Protocol [MS-SRVS](../MS-SRVS/MS-SRVS.md) provides a list of configuration operations.
 
-![Queue manager as queue server](media/image9.png)
-
-Figure 9: Queue manager as queue server
-
-A queue manager acts as an [**MSMQ management server**](#gt_msmq-management-server). As an MSMQ management server, it implements the server side of MQMR and the management interfaces of the MQAC protocol, as well as the client and server side of the MQCN. It thereby provides the management and administrative capabilities of the MSMQ protocol set. An application interacts with the MSMQ management server through the client side of the MQMR protocol and the client side of the management interfaces of the MQAC protocol. The following figure shows this deployment mode.
-
-![Queue manager as Management Server](media/image10.png)
-
-Figure 10: Queue manager as Management Server
-
-<a id="Section_2.1.3.2"></a>
-#### 2.1.3.2 Reliable Message Processing Using Transactions
-
-As described in section [2.1.3](#Section_2.1.3), the Microsoft Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) protocol set supports end-to-end exactly-once delivery assurance through [**transactional messages**](#gt_transactional-message), as opposed to best-effort delivery assurance through express or [**recoverable messages**](#gt_recoverable-message). The MSMQ protocol set interacts with a [**Transaction Coordinator**](#gt_transaction-coordinator) to support transactional messaging. This section elaborates on the mechanism by which transactions are used together with exactly-once [**message**](#gt_message) delivery assurance to facilitate end-to-end reliable message processing.
-
-The MSMQ protocol set provides transactional semantics by defining explicit transaction boundaries in end-to-end messaging and also by defining the error-handling/compensation semantics. This functionality is achieved through the following steps:
-
-- An application sends a message to a transactional queue as part of a transaction.
-- If the destination queue is hosted on a remote machine with respect to the sending queue, the message is reliably transferred to the [**remote queue**](#gt_remote-queue) by using the MQQB, MQBR, or MQSRM message transfer and routing protocols.
-- The receiving application [**receives**](#gt_receive) and processes the message as part of another transaction.
-To manage the queue as a transactional resource, the queue managers for both the sending side and the receiving side implement the [**resource manager (RM)**](#gt_resource-manager-rm) role as described in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 1.3.3.2. As part of the RM role, each queue manager participates with the RM [**facet**](#gt_facet) of a [**transaction manager**](#gt_transaction-manager) coordinated by an external Transaction Coordinator, as described in [MS-DTCO] section 1.3.3.3.
-
-The participating applications fulfill the application role as described in [MS-DTCO] section 1.3.3.1. The sending application initiates and completes the transactions within the message send boundary. The receiving application initiates and completes the transaction within the message receipt boundary.
-
-The transactional semantics illustrated in the following figure includes the following steps:
-
-- **Transacted Send:**
-- The sending application creates a transaction and performs certain application-specific tasks on the transaction.
-- Subsequently, the application sends the message in the transaction.
-- The RM facet of the queue manager enlists in the transaction.
-- The queue manager [**enqueues**](#gt_enqueue) the message and makes this change invisible outside the scope of the transaction.
-- Subsequently, the application commits the transaction.
-- The Transaction Coordinator coordinates the transaction with all the RMs enlisted in the transaction, including the queue manager. For simplicity, the Prepare and Commit steps of a two-phase commit are depicted as a single TxCommit message in the following figure.
-- The queue manager participates in the two-phase commit with the Transaction Coordinator and makes the message visible upon a commit outcome of the transaction. In case of an abort outcome of the transaction, the message is discarded.
-The transaction boundary on the send side ends here.
-
-- **Reliable Transfer:**
-If the destination queue is hosted by a different queue manager than the one accepting the original message, the sending queue manager reliably transfers the message to the receiving queue manager. If the destination queue is hosted by the same queue manager, this step is not required.
-
-- The queue manager uses the MQQB or MQSRM transfer protocols to transfer the message to the destination queue. This operation is retried until an acknowledgment is received from the destination queue manager.
-- The destination queue manager receives and stores the message, and sends a transfer acknowledgment.
-- Upon receipt of a transfer acknowledgment from the destination queue manager, the source queue manager removes the message from the source queue.
-- **Transacted Receive:**
-The receiving application creates a transaction and performs certain application-specific tasks on the transaction.
-
-- Once the message is available in the destination queue, the receiving application can proceed with consuming the message within the scope of the transaction. The receiving application creates a transaction.
-- The application receives the message within the scope of the transaction.
-- The RM facet of the receiving queue manager enlists in the transaction.
-- The receiving queue manager makes the message invisible outside the context of the transaction.
-- The receiving queue manager returns the message to the application.
-- Subsequently, the application processes the message and commits the transaction.
-- The Transaction Coordinator coordinates the transaction with all the RMs enlisted in the transaction, including the queue manager. For simplicity, the Prepare and Commit steps of a two-phase commit are depicted as a single TxCommit message in the following figure.
-- The receiving queue manager participates in a two-phase commit with the Transaction Coordinator and deletes the message from the queue on a commit outcome of the transaction. In case of an abort outcome of the transaction, the message is returned back to the queue.
-The transactional boundary of the receiving application ends here.
-
-![Transaction boundaries in end-to-end message exchange](media/image11.png)
-
-Figure 11: Transaction boundaries in end-to-end message exchange
-
-The MSMQ protocol set specifies a lightweight internal Transaction Coordinator to avoid the overhead of [**external transactions**](#gt_external-transaction). MSMQ can dispense an [**internal transaction**](#gt_internal-transaction) to an application, and this transaction can be used to coordinate actions only with the dispensing queue manager. Internal transactions can be used for sending messages to transactional queues, as long as no other external transacted resource, including other transactional queues of a different queue manager, is participating in the same internal transaction. The queue manager acts as a standalone transaction manager, and no external Transaction Coordinator or other transaction managers are involved when an internal transaction is used. In an end-to-end message exchange, internal and external transactions can be mixed. Thus, a message can be sent using an internal transaction and received using an external transaction and vice versa.
-
-As part of reliable message processing, the MSMQ protocol set also provides the error-handling semantics through [**negative source journaling**](#gt_negative-source-journaling) and message Timers as specified in [MC-MQAC](../MC-MQAC/MC-MQAC.md) section 3.1.2. If the message times out or a failure is encountered in delivering the message to the destination queue, the queue manager places the message in the designated [**dead-letter queue**](#gt_dead-letter-queue) for the sending application to perform application-specific error handling.
-
-<a id="Section_2.1.3.3"></a>
-#### 2.1.3.3 Message Queuing and Directory Service
-
-The Microsoft Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) protocol set optionally supports a [**Directory Service**](#gt_directory-service-ds) to enable a set of features pertaining to message security, efficient routing, and the publishing of [**queues**](#gt_queue), [**distribution lists**](#gt_distribution-list), and queue aliases. The directory provides the MSMQ protocol set with global storage and an access mechanism for shared metadata.
-
-The MSMQ protocol set supports two predefined modes in terms of Directory Service integration: [**Workgroup mode**](#gt_workgroup-mode) or [**Directory-Integrated mode**](#gt_directory-integrated-mode).
-
-**Workgroup mode:** In this mode, MSMQ protocol set implementations do not use the Directory Service and are limited to [**private queues**](#gt_private-queue) using [**direct format name**](#gt_direct-format-name) addressing.
-
-**Directory-Integrated mode:** In this mode, MSMQ protocol set implementations interact with the Directory Service for publishing and accessing [**public queue**](#gt_public-queue) metadata, network topology information, and certificate and encryption metadata. In this mode, all [**queue managers**](#gt_476f10ed-08f0-4887-b583-59d5cf909979) participating in the implementation are located on machines that are [**domain**](#gt_domain)-joined.
-
-![Message Queuing in Directory-Integrated mode](media/image12.png)
-
-Figure 12: Message Queuing in Directory-Integrated mode
-
-The Directory Service and its function within the MSMQ protocol set are described in more detail in [MS-MQDS](../MS-MQDS/MS-MQDS.md) sections 1.3 and 3 and in [MC-MQAC](../MC-MQAC/MC-MQAC.md) section 1.4. Versions 1.0 and 2.0 of MSMQ implement their own Directory Service through the MQDS protocol. Subsequent versions of MSMQ use Active Directory as the Directory Service through the [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap)
-
-**Directory-Integrated mode with routing:** The MSMQ protocol set supports least-cost routing of messages within a computer network. This provision is particularly useful in complex network topologies--for example, MSMQ computers belong to different administrative regions. This configuration is accomplished by deploying an MSMQ protocol set implementation in Directory-Integrated mode with routing enabled. In this mode, the MSMQ implementation retrieves the network topology information from the Directory Service and uses this information for routing messages from one queue manager to another. If a direct connection to the final destination queue manager is not possible, the source queue manager makes use of interim special queue managers known as [**routing servers**](#gt_routing-server), which can efficiently route messages to the next hop.
-
-An overview of this type of deployment is described in [MS-MQBR](../MS-MQBR/MS-MQBR.md) section 1.3. The following diagram illustrates a typical deployment with routing servers across a complex network topology.
-
-![Enterprise deployment of MSMQ with routing](media/image13.png)
-
-Figure 13: Enterprise deployment of MSMQ with routing
-
-The preceding figure illustrates MSMQ deployment in an [**enterprise**](#gt_enterprise) environment over a complex deployment topology. The MSMQ routing functionality allows applications deployed on one part of the enterprise network to communicate with remote applications deployed on another part of the enterprise in such a way that, although there is no direct network connectivity between these two applications, MSMQ can use interim routing servers to transfer messages between the applications in a reliable way.
-
-An [**MSMQ site**](#gt_msmq-site) is a network of computers, typically physically collocated, that have high connectivity as measured in terms of latency (low) and throughput (high).
-
-An MSMQ routing link is a communication link between two MSMQ sites.
-
-A routing server is a queue manager role that enables Store-and-Forward messaging between computers within an MSMQ site.
-
-An [**MSMQ site gate**](#gt_msmq-site-gate)is a routing server that bridges two or more MSMQ sites such that all intersite messaging traffic flows through MSMQ site gates.
-
-In an enterprise multisite deployment as shown in the previous illustration, a message flows in the following manner:
-
-- The sender application sends the message to a source queue manager.
-- The queue manager transfers this message to a routing server in the same MSMQ site.
-- The routing server transfers the message to an MSMQ site gate.
-- The source MSMQ site gate transfers the message to the destination MSMQ site gate through the MSMQ routing link.
-- The destination [**site gate**](#gt_site-gate) transfers the message to the destination queue manager, optionally through one or more routing servers.
-- The destination queue manager places the message in the destination queue.
-Because both site gates and routing servers are queue managers themselves, applications can also use them as queue managers. This functionality is illustrated in the preceding figure through dotted association lines.
-
-The routing server algorithm as specified in [MS-MQBR] section 3.1 is used to determine the least-cost message route between the source and destination queue managers.
+**Managing the SMB server:** The administrator can query and configure the SMB server. For example, the administrator can identify the type of service that the SMB server is running, such as a server running the Workstation service, change the services that are running, and get a list of all servers of a specific type in a [**domain**](#gt_domain). The administrator can also configure aliases for a server by identifying multiple distinct names that present the same resources. The protocol that is used to manage an SMB server is described in [MS-SRVS].
 
 <a id="Section_2.1.4"></a>
-### 2.1.4 Roles
+### 2.1.4 Abstract Components of the File Services Management System
 
-The [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocol set supports the following components that interact with each another.
+The following diagram shows the abstract components of the File Services Management system.
 
-<a id="Section_2.1.4.1"></a>
-#### 2.1.4.1 Application Roles
+![Abstract components of the File Services Management system](media/image2.png)
 
-The following roles represent the external actors of the MSMQ protocol set:
+Figure 2: Abstract components of the File Services Management system
 
-**Application:** The application role represents the messaging actions performed by MSMQ applications. The application role typically includes message sending and receiving operations to or from application queues and uses the Message Queuing (MSMQ): Queue Manager Client Protocol (MQMP) or Message Queuing (MSMQ): ActiveX Client Protocol (MQAC) application protocols to interact with Message Queuing (MSMQ) protocol set components.
+**Admin tool:** The admin tool is a program that offers management functionality to the administrator by means of the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The admin tool is external to the File Services Management system and uses the admin client to accomplish its work.
 
-**Management Application:** This is a special application role that performs the management and administrative aspects of the MSMQ protocol set. This role uses the client side of the Message Queuing (MSMQ): Queue Manager Management Protocol (MQMR) and MQAC protocols to interact with the [**MSMQ management server**](#gt_msmq-management-server) role of the queue manager, as described in the following section.
+**Admin client:** The admin client is code running on the administrator's computer. The admin client implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
 
-<a id="Section_2.1.4.2"></a>
-#### 2.1.4.2 Queue Manager Roles
+**FSRM Service:** This service implements the server component of the File Server Resource Manager Protocol [MS-FSRM](../MS-FSRM/MS-FSRM.md), and provides interfaces for managing the configuration of directory quotas, file screens, classification properties, classification rules, file management jobs, report jobs, classifier modules, and storage modules on a computer. The FSRM Service provides the following features:
 
-This section describes the roles exhibited by the queue manager in the Message Queuing (MSMQ) protocol set.
+- Controls for the quantity of data
+- Mechanisms to manage the type of data
+- Classification of data
+- Application of policy that is based on metadata
+- Generation of reports about the data
+**FRS Service:** The File Replication Service (FRS) replicates files and folders that are stored on domain controllers and Distributed File System (DFS) shared folders. It implements the File Replication Service Protocol [MS-FRS1](../MS-FRS1/MS-FRS1.md) or the Distributed File System Replication Protocol [MS-FRS2](../MS-FRS2/MS-FRS2.md). Both of these protocols provide similar functionality; however, [MS-FRS1] is deprecated. The File Replication Service (FRS) also implements the server side of the DFS Replication Helper Protocol [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md), which is used to configure and monitor Distributed File System Replication (DFS-R) on a server.
 
-<a id="Section_2.1.4.2.1"></a>
-##### 2.1.4.2.1 Queue Manager Roles for Application Interaction
+**SMB File Service:** The SMB File Service implements server-side protocol components that are consumed by the admin client. It also implements the server-side of the Server Service Remote Protocol (SRVSVC) [MS-SRVS](../MS-SRVS/MS-SRVS.md), which is an administrative protocol that is used to query and configure certain properties of the SMB File Service on a server, such as active connections, sessions, shares, open files, and transport protocols. It implements the server side of the Workstation Service Remote Protocol [MS-WKST](../MS-WKST/MS-WKST.md), which is used to configure the behavior of an SMB Network Redirector.
 
-The Message Queuing (MSMQ) protocol set supports the following server roles that allow interaction with the applications, as described in section [2.1.3.1](#Section_2.1.3.1):
+**DFS Service:** The DFS Service groups shared folders, which are located on different servers, and presents them to users as a virtual tree of folders, known as a Distributed File System (DFS) namespace. The DFS Service implements the server-side protocol components of the Distributed File System (DFS): Referral (DFSC) Protocol [MS-DFSC](../MS-DFSC/MS-DFSC.md) and the Distributed File System (DFS): Namespace Management Protocol [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md).
 
-**Queue Server:** This role provides the MSMQ message exchange functionality and implements the server side of Message Queuing (MSMQ): ActiveX Client Protocol (MQAC) and both the server and client sides of Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol (MQQP) and Message Queuing (MSMQ): Queue Manager Remote Read Protocol (MQRR).
+**Legacy printer service:** This service implements the server side of the Remote Administration Protocol [MS-RAP](#Section_2.6.1), which supports certain server administration methods, such as SMB file share enumeration. This functionality has been superseded by the Workstation Service Remote Protocol [MS-WKST] and the Server Service Remote Protocol [MS-SRVS].
 
-**Management Server:** In this role, the queue manager provides management and administrative operations on the Message Queuing server. This role allows a management application to retrieve administrative information specific to queues and messages. The Management Server role also performs management operations on a queue. This role implements the server side of Message Queuing (MSMQ): Queue Manager Management Protocol (MQMR), as specified in [MS-MQMR](../MS-MQMR/MS-MQMR.md) section 3.1; the server side of Message Queuing (MSMQ): Directory Service Change Notification Protocol (MQCN), as specified in [MS-MQCN](../MS-MQCN/MS-MQCN.md) section 3.1; and the server side of the management interfaces of MQAC, as specified in [MC-MQAC](../MC-MQAC/MC-MQAC.md) sections 3.2, 3.3, and 3.4.
+**SMB Network Redirector:** A software component on a connected computer that handles requests for remote files and printer operations. An administrator can configure some aspects of SMB Network Redirector by using the Workstation Service Remote Protocol [MS-WKST].
 
-**Supporting Server:** This is a queue manager role that implements the server side of the supporting server protocol as specified in [MS-MQMP](../MS-MQMP/MS-MQMP.md).
-
-<a id="Section_2.1.4.2.2"></a>
-##### 2.1.4.2.2 Queue Manager Roles for Message Transfer and Routing
-
-The following roles of the queue manager involve transferring messages from the source to the destination.
-
-**Message Transfer:** This role performs the actual transfer of messages between two queue managers that are directly reachable from one another and implements both the client and server sides of the message transfer protocols, the Message Queuing (MSMQ): Binary Reliable Messaging Protocol (MQQB) and the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP).
-
-**Routing Server:** The queue manager performs the routing server role for facilitating the transfer of messages within a site or across sites. The routing server implements Store and Forward messaging in an enterprise MSMQ deployment. This role implements the Message Queuing: Binary Reliable Message Routing Algorithm [MS-MQBR](../MS-MQBR/MS-MQBR.md). A more specialized version of the routing server role is the site gate role, where the queue manager provides routing between sites.
-
-<a id="Section_2.1.4.2.3"></a>
-##### 2.1.4.2.3 Queue Manager Role for Remote Read and Management
-
-This queue manager role involves message read and management operations from a remote queue manager. Such operations are triggered by user applications as described in section [2.1.4.1](#Section_2.1.4.1). In response to the application requests involving remote message read operations, the queue manager role for application interaction, as described in section [2.1.4.2.1](#Section_2.1.4.2.1), uses this role to accomplish the functionality. This role implements both the client and server roles of the [**remote read**](#gt_remote-read) protocols, the Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol (MQQP) and the Message Queuing (MSMQ): Queue Manager Remote Read Protocol (MQRR).
-
-<a id="Section_2.1.4.3"></a>
-#### 2.1.4.3 Subcomponent Roles
-
-As described in section [2.1.3](#Section_2.1.3), the Transaction Coordinator and Directory Service subsystems interact with the Microsoft Message Queuing (MSMQ) protocol set. In addition to external implementations for these services, MSMQ also has its own implementations of these subsystems, with roles described as follows:
-
-**Internal Transaction Coordinator:** The queue manager implements an internal Transaction Coordinator and the associated resource manager to dispense and support internal transactions. The dispensing queue manager is the only resource manager participant supported by the transaction context; therefore, no other resource managers, including other queue managers, are able to participate with internal transactions.
-
-**MSMQ Directory Service Server:** A queue manager collocated with a directory can perform the role of a Directory Service by implementing the server side of Message Queuing (MSMQ): Directory Service Protocol (MQDS). The queue manager playing this role is known as the [**MSMQ Directory Service server**](#gt_msmq-directory-service-server). Versions 1.0 and 2.0 of MSMQ use the client side of MQDS and therefore can interact only with the MSMQ Directory Service server as its Directory Service. The MSMQ Directory Service server predates and is superseded by Active Directory. Subsequent versions of the MSMQ protocol set use the Lightweight Directory Access Protocol (LDAP) to interact with the Active Directory implementation of the Directory Service.
-
-<a id="Section_2.1.4.4"></a>
-#### 2.1.4.4 Protocol Roles
-
-The following table summarizes the roles of each protocol in the Microsoft Message Queuing (MSMQ) protocol set.
-
-| Protocol name | Protocol role |
-| --- | --- |
-| [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) Message Queuing (MSMQ): Data Structures | See section [2.2](../MS-MQMQ/MS-MQMQ.md). |
-| [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) Message Queuing (MSMQ): Common Data and Processing Rules | See section 2.2. |
-| [MC-MQAC](../MC-MQAC/MC-MQAC.md) Message Queuing (MSMQ): ActiveX Client Protocol | A Distributed Component Object Model(DCOM) protocol that provides a client application programming interface to the MSMQ protocol set. This protocol exposes the message queuing functionalities, such as queue management and discovery and sending and receiving of messages, to the client applications through a collection of DCOM objects. The queue manager implements the server side of this protocol, and applications use the client interfaces to invoke the required messaging functionality. |
-| [MS-MQMP](../MS-MQMP/MS-MQMP.md) Message Queuing (MSMQ): Queue Manager Client Protocol | A remote procedure call ([**RPC**](#gt_remote-procedure-call-rpc)) protocol that provides a client interface to the MSMQ protocol set through the supporting server deployment profile. The queue manager implements the server side of this protocol to fulfill the supporting server role. Applications use the client side of this protocol to perform various message queuing operations such as managing local private queues, managing [**cursors**](#gt_cursor), and sending and receiving messages. This protocol is tied closely to the Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol (MQQP) to implement various processing rules, as described in the respective protocol documents; therefore, if one protocol is implemented, the other protocol is implemented also. |
-| [MS-MQQB](../MS-MQQB/MS-MQQB.md) Message Queuing (MSMQ): Binary Reliable Messaging Protocol | A block protocol designed for reliable transfer of messages between two queues hosted by two different queue managers located on different machines. This protocol uses the Transmission Control Protocol/Internet Protocol (TCP/IP) or Internetwork Packet Exchange/Sequenced Packet Exchange (SPX/IPX) to transform the data between queue managers, but augments each with additional levels of acknowledgments that ensure that the messages are reliably transferred across, regardless of TCP or SPX connection failures, application failures, or node failures. The queue manager implements both the client and the server sides of this protocol. This protocol relies on the Lightweight Directory Access Protocol (LDAP) or the Message Queuing (MSMQ): Directory Service Protocol (MQDS) to look up persistent entries in the directory. This protocol also relies on the Message Queuing (MSMQ): Binary Reliable Messaging Algorithm (MQBR) to implement the routing server role of the queue manager. |
-| [MS-MQBR](../MS-MQBR/MS-MQBR.md) Message Queuing (MSMQ): Binary Reliable Messaging Algorithm | See section 2.2. |
-| [MC-MQSRM](../MC-MQSRM/MC-MQSRM.md) Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) | A Hypertext Transfer Protocol (HTTP)-based or Pragmatic General Multitask (PGM)-based protocol that uses SOAP encoding for reliable transfer of messages from one queue manager to others. The queue manager implements both the client and the server sides of this protocol. |
-| [MS-MQCN](../MS-MQCN/MS-MQCN.md) Message Queuing (MSMQ): Directory Service Change Notification Protocol | A block protocol for notifying a queue manager about changes made to the Directory Service objects owned by that queue manager. The types of notifications that can be performed by using this protocol include notifying a queue manager that a queue object has been created, changed, or deleted; and notifying a queue manager that its machine object has been changed. This protocol uses the Queuing (MSMQ): Message Queuing Binary Protocol (MQQB) to transfer notification messages between queue managers. Both the client and the server sides of this protocol are implemented by the queue manager. |
-| [MS-MQMR](../MS-MQMR/MS-MQMR.md) Message Queuing (MSMQ): Queue Manager Management Protocol | An RPC protocol that provides a client interface for management operations on a Message Queuing System. The various monitoring and administrative operations provided by this protocol include retrieval of information about queue managers and queues and taking queues and queue managers offline. The management applications use the client side of this protocol, and the queue manager implements the server side of this protocol. |
-| [MS-MQSD](../MS-MQSD/MS-MQSD.md) Message Queuing (MSMQ): Directory Service Discovery Protocol | A block protocol that uses the User Datagram Protocol (UDP) multicast for locating MSMQ Directory Service servers. The client side of this protocol is used by a server implementation of the Message Queuing (MSMQ): Queue Manager Client Protocol (MQMP). The queue manager implements both the client and the server sides of this protocol. |
-| [MS-MQDS](../MS-MQDS/MS-MQDS.md) Message Queuing (MSMQ): Directory Service Protocol | An RPC protocol that implements the MSMQ Directory Service. The queue manager and applications use the client side of this protocol to communicate with the Directory Service. The MSMQ Directory Service Server role of the queue manager implements the server side of MQDS. MSMQ 1.0 and 2.0 implement the client and server sides of this protocol. MSMQ 3.0 and 4.0 implement only the server side of this protocol. This protocol is not supported in MSMQ 5.0 and 6.0. |
-| [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) Message Queuing (MSMQ): Directory Service Schema Mapping | See section 2.2. |
-| [MS-MQQP](../MS-MQQP/MS-MQQP.md) Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol | An RPC protocol that provides an interface between two queue managers for reading and browsing messages from a remote queue. The queue manager implements both the client and the server sides of this protocol. This protocol is tightly coupled with MQMP in that the processing rules of MQMP invoke methods of this protocol. Therefore, if one protocol is implemented, the other one is implemented also. This protocol has been deprecated, and MQRR is the preferred protocol for implementing the remote read functionality. The Message Queuing (MSMQ): Queue Manager Remote Read Protocol (MQRR), however, does not replace MQQP, and it does not change the co-implementation requirement of MQMP and MQQP. |
-| [MS-MQRR](../MS-MQRR/MS-MQRR.md) Message Queuing (MSMQ): Queue Manager Remote Read Protocol | An RPC protocol that provides an interface between two queue managers for reading and browsing messages from a remote queue. This protocol is preferred for implementing the remote read functionality. The queue manager implements the client and server sides of this protocol. This protocol does not replace MQQP and does not change the co-implementation requirement of MQMP and MQQP. When this protocol is implemented, MQMP and MQQP can also be implemented for backward compatibility. |
+**Administrator:** The administrator is the person who administers the file server. The administrator organizes the file namespace, sets access rights, and enforces limits through quotas on users’ file storage. The administrator interacts with the File Services Management system through the admin tool.
 
 <a id="Section_2.1.5"></a>
-### 2.1.5 Protocol Interactions
+### 2.1.5 Protocol Relationship
 
-The following figure shows the interactions among the MSMQ protocol set components, queue manager roles, and the external entities, as described in section [2.1.3](#Section_2.1.3). How these components work together is explained later in this topic.
+The following diagram shows the protocol layering relationships for the File Services Management system member protocols that use remote procedure call (RPC) as a transport.
 
-![Interactions between Message Queuing protocols](media/image14.png)
+![Protocol relationship of RPC-related protocols](media/image3.png)
 
-Figure 14: Interactions between Message Queuing protocols
+Figure 3: Protocol relationship of RPC-related protocols
 
-The links in the preceding figure represent interactions between external entities, MSMQ protocol set components, and MSMQ protocol set roles.
+The protocols [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md), [MS-SRVS](../MS-SRVS/MS-SRVS.md), and [MS-WKST](../MS-WKST/MS-WKST.md) use [MS-RPCE](../MS-RPCE/MS-RPCE.md) over [**named pipes**](#gt_named-pipe). Thus, the protocols can be transported over [**SMB access protocols**](#gt_smb-access-protocols) and cannot use any of the other RPC transports. The File Server Resource Manager Protocol, as described in [MS-FSRM](../MS-FSRM/MS-FSRM.md), [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md), [MS-FRS1](../MS-FRS1/MS-FRS1.md), and [MS-FRS2](../MS-FRS2/MS-FRS2.md), uses the Remote Procedure Call Protocol Extensions over TCP only. For more information on the type of RPC transport, see section [2.10](#Section_2.10).
 
-The composite queue manager box represents multiple queue manager roles. A link that is associated with this box represents an association with all roles of the queue manager. A link that is associated with a specific inner box applies only to that particular role. The queue server, the supporting server, and the management server roles of the queue manager interact with different types of application programs, as described in section 2.1.3. The routing server role of the queue manager is responsible for message routing in a distributed network, as described in section [2.1.3.3](#Section_2.1.3.3).
+The following diagram shows the protocol layering relationships of the Remote Administration Protocol [MS-RAP](#Section_2.6.1).
 
-The composite application box represents applications in different deployment modes. A link that is associated with this box represents protocols that apply to all of these deployment modes. A link that is associated with a specific inner application mode applies only to that particular application. A DCOM application interacts with the queue server role of the queue manager by using the Message Queuing (MSMQ): ActiveX Client Protocol (MQAC), whereas a Message Queuing (MSMQ): Queue Manager Client Protocol (MQMP) application interacts with the supporting server role of the queue manager by using the MQMP protocol. A management application interacts with the management server role of the queue manager by using the Message Queuing (MSMQ): Queue Manager Management Protocol (MQMR) and MQAC protocols to accomplish administrative and management-related activities of the MSMQ protocol set.
+![Protocol relationship of the Remote Administration Protocol](media/image4.png)
 
-As described in section [2.1.3.2](#Section_2.1.3.2), a Transaction Coordinator interacts with MSMQ to send and receive transactional messages. Applications interact with the Transaction Coordinator through the application role, and the queue manager interacts with the Transaction Coordinator through the resource manager role of the Transaction Coordinator component.
+Figure 4: Protocol relationship of the Remote Administration Protocol
 
-As described in section 2.1.3.3, the directory service is an optional component of the MSMQ protocol set and enables certain functionalities of the queue manager that require interaction with a directory. In MSMQ versions 1.0 and 2.0, the queue manager that is collocated with a directory also assumes the role of a directory service through the MSMQ Directory Service server. In such a configuration, the directory service becomes another queue manager role in the preceding figure. In subsequent versions of the MSMQ protocol set, Active Directory is used as the directory service. Applications and the queue manager interact with the directory service.
-
-<a id="Section_2.1.6"></a>
-### 2.1.6 MSMQ Components
-
-The queue manager is the central piece of the Microsoft Message Queuing (MSMQ) communication service. Conceptually, the queue manager deals with every queued messaging aspect of the MSMQ protocol set. A queue manager instance interacts with other queue manager instances by implementing the client and server sides of the relevant MSMQ protocols. A queue manager instance interacts with applications to support message creation, modification, deletion, and exchange operations on a queue. A queue manager instance listens to and handles all incoming MSMQ network traffic for a machine network identifier and processes all the higher-layered triggered events, as described in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.4.
-
-The following diagram depicts the different facets of the queue manager on one machine (the central box) and the communications between these facets and remote queue managers, as well as the other subcomponents of MSMQ, such as client applications, the Transaction Coordinator, and the Directory Server.
-
-![MSMQ internal architecture](media/image15.png)
-
-Figure 15: MSMQ internal architecture
-
-The abstract data model and processing rules shared by the different facets of the queue manager are described in [MS-MQDMPR] section 3. This common model describes the abstract data model (ADM) elements that are shared across the MSMQ protocol set.
-
-The Client facet of the queue manager (the dotted box labeled "Client") interacts with the client applications. This facet implements the server sides of the Message Queuing (MSMQ): Queue Manager Client Protocol (MQMP), the Message Queuing (MSMQ): Queue Manager Management Protocol (MQMR), and the Message Queuing (MSMQ): ActiveX Client Protocol (MQAC). The applications use the client side of these protocols to interact with the queue manager for message exchange and management functionalities.
-
-The Directory facet of the queue manager (the dotted box labeled "Directory") handles the various directory-related operations. In MSMQ versions 1.0 and 2.0, the server side of the Message Queuing (MSMQ): Directory Service Protocol (MQDS) is implemented by the MSMQ Directory Service server and is collocated with the queue manager as part of the Directory facet. Client applications on these versions of MSMQ use the client side of the MQDS protocol to interact with the Directory Server. Similarly, a queue manager that is not collocated with the MSMQ Directory Service server uses the client side of MQDS to interact with a remote MSMQ Directory Service server. Furthermore, the queue manager uses the client side of the Message Queuing (MSMQ): Directory Service Discovery Protocol (MQSD) to discover the other MSMQ Directory Service servers. A queue manager running the role of an MSMQ Directory Service server implements the server side of MQSD to broadcast its presence. The MQDS and MQSD protocols are superseded by Active Directory in subsequent versions of MSMQ. With Active Directory, both the client applications as well as the Directory facet of the queue manager use Lightweight Directory Access Protocol (LDAP) and Message Queuing (MSMQ): Directory Service Schema Mapping (MQDSSM) to communicate directly with the directory. The operations on the Directory facet are invoked only when MSMQ is functioning in Directory-Integrated mode, as described in section [2.1.3.3](#Section_2.1.3.3).
-
-The Resource Manager facet of the queue manager (the dotted box labeled "Resource Manager") handles the interaction with the Transaction Coordinator to enable transactional operations on the transacted queues as described in section [2.1.3.2](../MS-DTCO/MS-DTCO.md). To manage the queue as a transactional resource, the queue manager implements the resource manager role of the Transaction Coordinator, as described in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 1.3.3.2, and participates with the resource manager facet of a transaction manager coordinated by an external Transaction Coordinator, as described in [MS-DTCO] section 1.3.3.3.
-
-The Remote Read and Management facet of the queue manager (the dotted box labeled "Remote Read/Mgmt") handles certain message exchange and management functionalities that involve queues hosted by remote queue managers. The operations on this facet are initiated by the actions performed by the Client facet of the queue manager. The queue manager implements the client side of MQRR and MQQP to invoke the remote queue operations on a remote queue manager. The Remote Read and Management facet of the remote queue manager implements the server sides of MQRR and MQQP to perform the remote operations requested.
-
-The Change Notification facet of the queue manager (the dotted box labeled "Change Notification") handles changes made to the resources owned by one queue manager to another. The queue manager implements the client side of MQCN to send the change notifications to a remote queue manager that implements the server side of MQCN. The operations of this facet are initiated by the actions performed by the Client facet and the Directory facet of the queue manager.
-
-The Message Transfer facet of the queue manager (the dotted box labeled "Message Transfer") implements the client and server sides of MQSRM, MQQB, and MQBR. The queue manager uses the client side of those protocols to send messages to the remote queue manager. The remote queue manager uses the server protocols to accept such messages. Operations on the Message Transfer facet are initiated by the actions performed by the Client facet, as well as the Change Notification facet of the queue manager.
-
-<a id="Section_2.1.7"></a>
-### 2.1.7 MSMQ Internal and External Communications
-
-The MSMQ protocol set does not define any communication constraints or additional message types beyond those described in the specifications of the protocols supported by the system, as listed in section [2.2](#Section_2.2).
-
-The following sections describe communications within the MSMQ protocol set and between it and external entities.
-
-<a id="Section_2.1.7.1"></a>
-#### 2.1.7.1 Communications Within MSMQ
-
-Microsoft Message Queuing (MSMQ) components communicate with one another using the following protocols and algorithms:
-
-- Message Queuing (MSMQ): Binary Reliable Messaging Protocol (MQQB): Used by one queue manager to transfer messages to another queue manager.
-- Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm (MQBR): Used in conjunction with MQQB by a queue manager to route messages to a final destination queue manager, optionally hopping through other interim queue managers.
-- Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP): Used by one queue manager to transfer messages to another queue manager.
-- Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol (MQQP): Used by a queue manager to perform message reading and management operations on a remote queue hosted by a remote queue manager. This protocol is superseded by Message Queuing (MSMQ): Queue Manager Remote Read Protocol (MQRR).
-- Message Queuing (MSMQ): Queue Manager Remote Read Protocol (MQRR): Used by a queue manager to perform message reading and management operations on a remote queue hosted by a remote queue manager.
-- Message Queuing (MSMQ): Directory Service Change Notification Protocol (MQCN): Used in conjunction with MQQB by a queue manager to send update notifications to a remote queue manager for resources owned by the remote queue manager.
-- Message Queuing (MSMQ): Directory Service Discovery Protocol (MQSD): Used by a queue manager that is operating as an MSMQ Directory Service server in versions 1.0 and 2.0 of MSMQ to send server discovery details to other queue managers that are not operating in the role of an MSMQ Directory Service server.
-- Message Queuing (MSMQ): Directory Service Protocol (MQDS): Used by a queue manager in versions 1.0 and 2.0 of MSMQ to communicate with another queue manager that is operating in the role of an MSMQ Directory Service server.
-Abstracts for these protocols and the specific communication within the Message Queuing components are listed in section [2.2](#Section_2.2).
-
-<a id="Section_2.1.7.2"></a>
-#### 2.1.7.2 Communications with External Systems
-
-Microsoft Message Queuing (MSMQ) communicates with external systems via different protocols, as follows:
-
-- Message Queuing (MSMQ) Queue Manager Client Protocol (MQMP): Used by a client application to communicate with a queue manager operating in the role of a supporting server, as described in sections [2.1.3.1](#Section_2.1.3.1) and [2.1.4.2.1](#Section_2.1.4.2.1).
-- Message Queuing (MSMQ): ActiveX Client Protocol (MQAC: Used by a client application to communicate with a queue manager operating in the role of a queue server or management server, or both, as described in sections 2.1.3.1 and 2.1.4.2.1.
-- Message Queuing (MSMQ): Queue Manager Management Protocol (MQMR): Used by a client application to communicate with a queue manager operating in the role of a management server, as described in sections 2.1.3.1 and 2.1.4.2.1.
-- Lightweight Directory Access Protocol (LDAP) as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3: Used by a queue manager operating in Directory-Integrated mode to communicate with Active Directory.
-- DTCO in a resource manager role as described in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 1.3.3.2: Used by the queue manager to enable transactional operations on transacted queues.
-Abstracts for these protocols and the specific communication with external systems are listed in section [2.2](#Section_2.2).
-
-<a id="Section_2.1.8"></a>
-### 2.1.8 MSMQ Applicability
-
-The Microsoft Messing Queuing (MSMQ) protocol set supports asynchronous messaging; therefore, it is not applicable to the following messaging applications:
-
-- Synchronous Messaging: The asynchronous message exchange patterns specified by the MSMQ protocol set introduce latency in comparison with a direct, synchronous communication pattern. Therefore, the MSMQ protocols are not suitable for applications that require message delivery within a short and predefined amount of time.
-- Use a Queue as a Database: Unlike a database system, a queue is neither intended to be used as a long-term storage medium nor to support general query functions. The queue provides enough storage to enable temporal decoupling of applications and to deal with time intervals when the applications are offline or the network is out of service, regardless of the volume of traffic. The queue is not a database.
-- Traditional End-to-End Transaction Flow: The MSMQ protocols do not provide true end-to-end transactional capability between the participating applications. Instead, MSMQ supports local transactional boundaries, reliable message transfer, and well-defined failure handling semantics. Therefore, MSMQ cannot be used for atomic update between applications.
-<a id="Section_2.1.9"></a>
-### 2.1.9 Relevant Standards
-
-The following table lists specific standards assignments for the Microsoft Message Queuing (MSMQ) protocol set.
-
-| Protocol Name | Short Name |
-| --- | --- |
-| LDAP: Lightweight Directory Access Protocol | [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337) |
+The Remote Administration Protocol [MS-RAP] is an administrative protocol that is transported by the Common Internet File System (CIFS) and the Server Message Block (SMB) Protocol, but not by the Server Message Block (SMB) Protocol Versions 2 and 3 [MS-SMB2]. The function of the Remote Administration Protocol, as described in [MS-RAP], has largely been replaced by newer protocols. In the File Services Management system, the Remote Administration Protocol is used as a discovery protocol. File Services clients can discover servers by using the Remote Administration Protocol to retrieve a list of servers from the Browser Service, as described in the Common Internet File System (CIFS) Browser Protocol [MS-BRWS](../MS-BRWS/MS-BRWS.md). The Remote Administration Protocol also supports certain client and server administration methods, such as SMB file share enumeration, but this functionality has been superseded by the Workstation Service Remote Protocol [MS-WKST] and the Server Service Remote Protocol [MS-SRVS].
 
 <a id="Section_2.2"></a>
 ## 2.2 Protocol Summary
 
-The following table provides a comprehensive list of the Microsoft Message Queuing (MSMQ) protocols.
+The following table provides a comprehensive list of the member protocols of the File Services Management system.
 
-| Protocol Name | Description | Short Name |
+| Protocol name | Description | Short name |
 | --- | --- | --- |
-| Message Queuing (MSMQ): Data Structures | The common definition and data structures used by the member protocols of the MSMQ protocol set. | [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) |
-| Message Queuing (MSMQ): Common Data Model and Processing Rules | The abstract data model, events, and processing rules shared by the member protocols of the MSMQ protocol set. | [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) |
-| Message Queuing (MSMQ): ActiveX Client Protocol | A DCOM protocol that provides a client application programming interface to the MSMQ protocol set. | [MC-MQAC](../MC-MQAC/MC-MQAC.md) |
-| Message Queuing (MSMQ): Queue Manager Client Protocol | An RPC protocol that provides a client interface to the MSMQ protocol set through the supporting server deployment profile. | [MS-MQMP](../MS-MQMP/MS-MQMP.md) |
-| Message Queuing (MSMQ): Binary Reliable Messaging Protocol | A block protocol over TCP/IP or SPX/IPX for reliable transfer of messages between two queue managers. | [MS-MQQB](../MS-MQQB/MS-MQQB.md) |
-| Message Queuing (MSMQ): Binary Reliable Messaging Algorithm | A routing algorithm used with MQQB by a queue manager to route messages to the appropriate queue manager in a complex network topology. | [MS-MQBR](../MS-MQBR/MS-MQBR.md) |
-| Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) | An HTTP-based or PGM-based protocol that uses SOAP encoding for reliable transfer of messages from one queue manager to others. | [MC-MQSRM](../MC-MQSRM/MC-MQSRM.md) |
-| Message Queuing (MSMQ): Directory Service Change Notification Protocol | A block protocol for notifying a queue manager about changes made to the Directory Service objects owned by that queue manager. | [MS-MQCN](../MS-MQCN/MS-MQCN.md) |
-| Message Queuing (MSMQ): Queue Manager Management Protocol | An RPC protocol that provides a client interface for MSMQ administration. | [MS-MQMR](../MS-MQMR/MS-MQMR.md) |
-| Message Queuing (MSMQ): Directory Service Discovery Protocol | A block protocol that uses UDP multicast for locating MSMQ Directory Service servers. | [MS-MQSD](../MS-MQSD/MS-MQSD.md) |
-| Message Queuing (MSMQ): Directory Service Protocol | An RPC protocol that implements the MSMQ Directory Service. This protocol is superseded by Active Directory. | [MS-MQDS](../MS-MQDS/MS-MQDS.md) |
-| Message Queuing (MSMQ): Directory Service Schema Mapping | A mapping between relevant Message Queuing abstract data model elements and a directory service over a Lightweight Directory Access Protocol (LDAP) interface. | [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) |
-| Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol | An RPC protocol that provides an interface between two queue managers for reading and browsing messages from a remote queue. This protocol has been superseded by MQRR. | [MS-MQQP](../MS-MQQP/MS-MQQP.md) |
-| Message Queuing (MSMQ): Queue Manager Remote Read Protocol | An RPC protocol that provides an interface between two queue managers for reading and browsing messages from a remote queue. This protocol supersedes MQQP. | [MS-MQRR](../MS-MQRR/MS-MQRR.md) |
-
-The member protocols are grouped according to their primary purposes.
-
-**Common Data Structure and Model:**
-
-Protocols in this group define the common data structures, abstract data models, and processing rules for all Microsoft Message Queuing (MSMQ) protocols.
-
-| Protocol Name | Short Name |
-| --- | --- |
-| Message Queuing (MSMQ): Data Structures | [MS-MQMQ] |
-| Message Queuing (MSMQ): Common Data Model and Processing Rules | [MS-MQDMPR] |
-
-**Message Transfer and Routing Protocols:**
-
-Protocols in this group enable transferring messages between queues hosted by different queue managers.
-
-| Protocol Name | Short Name |
-| --- | --- |
-| Message Queuing (MSMQ): Binary Reliable Messaging Protocol | [MS-MQQB] |
-| Message Queuing (MSMQ): Binary Reliable Messaging Algorithm | [MS-MQBR] |
-| Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) | [MC-MQSRM] |
-
-**Core Messaging Functionality Protocols:**
-
-Member protocols of this group provide message queuing functionality to applications and are invoked either directly by client applications or indirectly by the queue manager as a result of a client application requesting specific messaging functionality from the MSMQ protocols.
-
-| Protocol Name | Short Name |
-| --- | --- |
-| Message Queuing (MSMQ): ActiveX Client Protocol | [MC-MQAC] |
-| Message Queuing (MSMQ): Queue Manager Client Protocol | [MS-MQMP] |
-| Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol | [MS-MQQP] |
-| Message Queuing (MSMQ): Queue Manager Remote Read Protocol | [MS-MQRR] |
-| MSDTC Connection Manager: OleTx Transaction Protocol Specification | [MS-DTCO](../MS-DTCO/MS-DTCO.md) |
-
-**Management, Administration and Configuration Protocols:**
-
-Member protocols of this group provide administrative functionality to applications and are invoked either directly by client applications or indirectly by the queue manager as a result of a client application requesting specific message queuing administration functionality from the MSMQ protocols.
-
-| Protocol Name | Short Name |
-| --- | --- |
-| Message Queuing (MSMQ): ActiveX Client Protocol | [MC-MQAC] |
-| Message Queuing (MSMQ): Queue Manager Management Protocol | [MS-MQMR] |
-| Message Queuing (MSMQ): Directory Service Change Notification Protocol | [MS-MQCN] |
-
-**Directory Service Protocols:**
-
-Protocols and algorithms in this group provide storage and access to MSMQ directory objects.
-
-| Protocol Name | Short Name |
-| --- | --- |
-| Message Queuing (MSMQ): Directory Service Protocol | [MS-MQDS] |
-| Message Queuing (MSMQ): Directory Service Discovery Protocol | [MS-MQSD] |
-| Message Queuing (MSMQ): Directory Service Schema Mapping | [MS-MQDSSM] |
-| ADTS: Active Directory Technical Specification | [MS-ADTS](../MS-ADTS/MS-ADTS.md) |
+| File Server Resource Manager Protocol | This protocol describes operating system, file system, and storage concepts. The protocol exposes a set of interfaces that enable tools in a client role to manage the following: Directory quotas to limit the amount of storage capacity in a directory. File screens to limit the type of files in a directory. Setup of the file classification that defines the classification property schema and rules to automatically classify files. File management tasks that apply simple commands to filtered groups of files. Storage reports that cover storage usage and trend analysis. Query and modification of file classification values by retrieving and setting classification properties for files, as provided by the FSRM component server role. | [MS-FSRM](../MS-FSRM/MS-FSRM.md) |
+| Workstation Service Remote Protocol | This protocol is used to configure the properties and behavior of a Server Message Block (SMB) Network Redirector (SMB Network Redirector) on a computer. It is also used to configure domain membership. For example, this protocol can be used to query the platform identifier, computer name, or major and minor version numbers of the operating system that runs on a remote computer. The File Services Management system uses this protocol to configure an SMB Network Redirector. Other capabilities of this protocol are not used by the File Services Management system. | [MS-WKST](../MS-WKST/MS-WKST.md) |
+| Server Service Remote Protocol | This protocol is used to enable file and printer sharing and named pipe access to the server through the Server Message Block (SMB) Protocol [MS-SMB](../MS-SMB/MS-SMB.md). The protocol is also used for remote administration of servers that are running Windows operating systems. | [MS-SRVS](../MS-SRVS/MS-SRVS.md) |
+| Remote Administration Protocol | This protocol is used for legacy administrative functions which include tasks, such as share maintenance and printer maintenance on LAN Manager servers. In addition, the Common Internet File System (CIFS) Browser Protocol uses the Remote Administration Protocol to enumerate the servers on the network. Most of this protocol's functionality has been superseded by the Workstation Service Remote Protocol [MS-WKST], and the Server Service Remote Protocol [MS-SRVS]. | [MS-RAP](#Section_2.6.1) |
+| Distributed File System (DFS): Namespace Management Protocol | This protocol is used to create and administer Distributed File System (DFS) namespaces. DFS namespaces enable the creation of a virtual, contiguous file system namespace to unify multiple namespaces. | [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md) |
+| DFS Replication Helper Protocol | This protocol is a [**DCOM**](#gt_distributed-component-object-model-dcom) protocol that can be divided into two parts. One part consists of interfaces to change, modify, and delete configuration objects in Active Directory. The second part is an interface to monitor Distributed File System-Replication (DFS-R) on a server [MS-FRS2](../MS-FRS2/MS-FRS2.md) and to collect various statistics about the DFS Replication operation. | [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) |
+| Distributed File System Replication Protocol | This protocol is used to replicate files between file servers. It is a multimaster replication, which enables files to be changed by any member that participates in replicating shared files. Because it uses an optimistic replication strategy, files can be updated without any prior consensus or serialization. DFS-R uses the Remote Differential Compression (RDC) algorithm. DFS-R supersedes the older FRS replication protocol. | [MS-FRS2] |
+| File Replication Service Protocol | This protocol is an RPC protocol that is used on file servers to replicate files and folders among file servers on the network. This protocol enables multimaster file and folder replicas to be synchronized on multiple file servers. FRS is used to maintain duplicate copies of data files in system volume (SYSVOL) system folders on domain controllers in a domain. FRS can also be used to replicate data files among DFS shares. | [MS-FRS1](../MS-FRS1/MS-FRS1.md) |
+| Remote Differential Compression (RDC) Algorithm | This algorithm enables efficient synchronization of files with a remote source by using compression techniques to minimize the amount of data that is sent between a source location and a target location. This algorithm is used by the Distributed File System: Replication (DFS-R) Protocol. | [MS-RDC](../MS-RDC/MS-RDC.md) |
 
 <a id="Section_2.3"></a>
 ## 2.3 Environment
 
-The following sections identify the context in which the system exists. This context includes the systems that use the interfaces provided by this system of protocols, other systems that depend on this system, and, as appropriate, the methods by which components of the system communicate.
+The following sections identify the context in which the system exists. This includes the systems that use the interfaces that are provided by this system of protocols, other systems that depend on this system, and, as appropriate, the communication between components of the systems.
 
 <a id="Section_2.3.1"></a>
 ### 2.3.1 Dependencies on This System
 
-The following systems use the interfaces provided by the Microsoft Message Queuing (MSMQ) protocols:
-
-**Component Object Model Plus (COM+):** Uses the MSMQ protocols for implementing the COM+ Queued Components Protocol as specified in [MC-COMQC](../MC-COMQC/MC-COMQC.md).
-
-**RPC:** Can use the MSMQ protocols as a transport for supporting asynchronous [**RPC**](#gt_remote-procedure-call-rpc) calls.<1>
-
-**Windows Communication Foundation (WCF):** Uses the [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols as a transport for supporting queued communication. WCF uses the MSMQ primitives to provide additional message processing functionalities such as [**poison message**](#gt_poison-message) handling. This functionality is supported by keeping track of the number of times that an application has attempted to process a particular message in a queue and by moving the message from the queue to a separate designated queue when the number of such attempts exceeds a certain application-defined limit, such that the application does not receive the poison message anymore and can process other messages. See [[MSDN-WCF]](https://go.microsoft.com/fwlink/?LinkId=100290) for more information.
+File Access Services depends on the File Services Management system for share and namespace management.
 
 <a id="Section_2.3.2"></a>
 ### 2.3.2 Dependencies on Other Systems/Components
 
-In addition to the external subsystem dependencies specified in each Microsoft Message Queuing (MSMQ) protocol document, the MSMQ protocol set requires:
+The File Management Services system depends on the following external systems and components:
 
-- A durable storage system to persist state and data.
-- Various transports as specified in individual protocol technical documents.
-- Security infrastructure as described in section [2.9](#Section_2.9).
+- Object store: Used to store files and metadata.
+- Active Directory system: Used to store Distributed File System (DFS) namespace metadata. If an Active Directory system is unavailable, an administrator cannot create a domain-based Distributed File System (DFS) namespace and cannot use the Distributed File System Replication (DFS-R) Services.
+- Authentication Services system: Used to authenticate admin clients and the admin server. The Authentication services are described in the Authentication Services Protocols Overview [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 <a id="Section_2.4"></a>
 ## 2.4 Assumptions and Preconditions
 
-The following assumptions and preconditions are required for a Message Queuing System to start operation successfully:
+The following assumptions and preconditions for the File Services Management system to operate successfully:
 
-- The required MSMQ components are installed on the participating machines, and the queue manager, if any, is initialized on each machine.
-- Storage devices are configured and available and have enough space to store the system state and data.
-- The required transport protocols are available and fully initialized on the participating machines.
-- If transactions are used, a Transaction Coordinator is available and fully initialized.
-- Security package providers are available to the system.
-- The queue manager possesses valid security credentials suitable for authentication.
-The following additional assumptions and preconditions are required if a Message Queuing System is operating in Directory-Integrated mode as described in section [2.1.3.3](#Section_2.1.3.3):
+**System availability:** The File Services Management system must be installed on all computers involved.
 
-- At least one [**domain controller (DC)**](#gt_domain-controller-dc) exists for the domain.
-- Each machine is joined to the domain.
-- A Directory Service is initialized and available. If versions 1.0 or 2.0 of MSMQ are used, an MSMQ Directory Service server is initialized and available on a domain controller.
-- Appropriate Directory Service objects exist and are configured correctly. Details of these directory objects are specified in [MS-MQDS](../MS-MQDS/MS-MQDS.md) and [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md).
+**Domain configuration:** In a domain configuration, file clients and file services have access to [**directory services**](#gt_directory-service-ds) that are provided by the domain.
+
+**Authentication services:** Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all file clients and file services.
+
+**RPC:** Components of the file client and file services that use remote procedure call (RPC) interfaces have all prerequisites satisfied, as described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 1.5.
+
+**Network configuration:** For system components that are running on different computers to communicate, the network services and infrastructure are functional and configured in such a way that required protocols, ports, and so on are remotely accessible.
+
+**Domain functionality:** For system functionality that requires a domain and directory services, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md), at least one domain controller is configured and accessible. Some functionality could require an Active Directory domain as noted in individual technical documents.
+
 <a id="Section_2.5"></a>
 ## 2.5 Use Cases
 
-This section breaks down the functionality of the Microsoft Message Queuing (MSMQ) protocols into small granular use cases that can then be combined to build and manage complex distributed applications.
-
-The application is the direct actor for all use cases of the MSMQ protocols. The Directory Service is the supporting actor for all use cases of the MSMQ protocols. The Transaction Coordinator is the supporting actor for the use cases that require transacted work.
-
-The main functionality of the MSMQ protocol set is divided into two broad categories: "Message Exchange" and "MSMQ Management". The following use case diagram shows how the actors and Message Queuing use cases fit together into a complete Message Queuing System.
-
-![Use cases for the Message Queuing System](media/image16.png)
-
-Figure 16: Use cases for the Message Queuing System
-
-The use cases in the following sections define the following common actors and stakeholders.
-
-**Actors**
-
-Application: Applications use the various MSMQ application protocols to interact with a Message Queuing System. The role of an application is described in detail in sections [2.1.3.1](#Section_2.1.3.1) and [2.1.4.1](#Section_2.1.4.1) of this document. The application is the direct actor for all MSMQ use cases except [Transfer Message (section 2.5.5)](#Section_2.5.5).
-
-Application Users: Application users are the primary actors of a Message Queuing System. Application users perform business operations by using the functionality of distributed applications, which invoke message queuing activities within the system.
-
-System Administrators: System administrators are the primary actors for the MSMQ management and administrative operations and require MSMQ functionality to perform the following actions:
-
-- Understand the various operations and management aspects of a distributed application that uses message queuing functionality.
-- Perform various management and administrative operations on distributed applications that use message queuing functionality.
-- Enumerate the protocols and all the artifacts of these protocols (for example, message format, error codes, and retry logic) that they expect to see flowing over the networks in their enterprise.
-Directory Service: A Message Queuing System optionally uses a directory by invoking the client directory service interfaces, as described in section [2.1.3.3](#Section_2.1.3.3).
-
-Transaction Coordinator: To manage a queue as a transactional resource, the queue manager interacts as a resource manager with a Transaction Coordinator, as described in section [2.1.3.2](#Section_2.1.3.2).
-
-**Stakeholders**
-
-Developers: Developers can use the MSMQ protocol set to provide asynchronous messaging functionality to user applications and to implement seamless interoperability between existing and newly implemented Message Queuing Systems.
-
-Testers: Quality assurance teams require a Message Queuing System to test implementations created by developers and to verify the conformance of such implementations with the protocol specifications.
-
-Application Users: Application users are the primary actors of a Message Queuing System. Application users perform business operations by using the functionality of distributed applications, which invoke message queuing activities within the system.
-
 <a id="Section_2.5.1"></a>
-### 2.5.1 Create or Modify Queue - Application
+### 2.5.1 Share Management Use Cases
 
-**Context of Use:** The application makes changes to the queuing environment to facilitate message exchange operations between other participating applications of a Message Queuing System.
+Share Management use cases describe the management activities that the administrator performs to control a shared resource by using the admin tool. The share management activity includes the following share tasks:
 
-**Goal:** This use case is initiated by an application to create a queue or modify the properties of a queue.
+- Creation
+- Enumeration
+- Getting and setting information
+- Deletion
+The following diagram shows the Share Management use cases that are described in detail in the following sections.
+
+![Share Management use cases](media/image5.png)
+
+Figure 5: Share Management use cases
+
+<a id="Section_2.5.1.1"></a>
+#### 2.5.1.1 Create Share SMB
+
+**Goal**
+
+To create a share for access by using SMB access protocols.
+
+**Context of Use**
+
+The administrator is setting up a file server or is adding a share to an existing file server.
 
 **Actors**
 
-Application: See section [2.5](#Section_2.1).
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-System Administrators: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
 
-Directory Service: See section 2.5.
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
 
 **Preconditions**
 
-- The application has access to the machine on which a queue is to be created or modified.
-- The application has the necessary administrative rights to execute the operation.
+The administrator has identified a file server, an available share name on a file server, and a location on the file server's object store to host the share. An SMB File Service is present on the file server that implements the Server Service Remote Protocol [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
 **Main Success Scenario**
 
-Trigger: The direct actor triggers this use case based on the actions of the primary actor.
-
-The steps involved in the use case for creation or modification of a private queue are:
-
-- The application sends a request to the queue manager to create a private queue on that queue manager or to modify an existing private queue hosted by the queue manager.
-- The queue manager creates or modifies the queue and sends a response back to the application.
-The steps involved in public queue creation or modification are:
-
-- The application sends a request to a queue manager to create a public queue on any queue manager in the directory or to modify an existing public queue hosted by any queue manager in the directory.
-- The queue manager sends a message to the Directory Service to make the necessary changes in the directory. On receipt of this message, the Directory Service creates the public queue in the directory.
-- The queue manager sends a notification message to the queue manager that is hosting the queue to notify it of the changes. On receipt of such a notification message, the hosting queue manager synchronizes the changes identified in the notification message.
-- The queue manager sends a response back to the application.
+- Trigger: The admin tool receives a request from the administrator to create a share on the file server. The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1.
+- The admin tool contacts the SMB File Service by using the **NetrShareAdd** method, as described in [MS-SRVS] section 3.1.4.7, to create the share on the file server.
+- The SMB File Service authorizes the administrator through the mechanisms, as described in [MS-SRVS] section 3.1.4.7.
+- The SMB File Service creates the requested share that stores configuration information in an implementation-specific manner.
 **Postcondition**
 
-The queue is created or modified.
+The named share is created on the file server.
 
 **Extensions**
 
-None.
+If the communication channel for the Server Service Remote Protocol [MS-SRVS] cannot be established, or it becomes disconnected:
 
-<a id="Section_2.5.2"></a>
-### 2.5.2 Query Queue Information- Application
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the share could or could not have been created.
+If user authorization or user authentication fails:
 
-**Context of Use:** The application collects administrative information about a Message Queuing System and presents the information for management purposes.
+- The use case ends with failure.
+If share creation fails:
 
-**Goal:** This use case is initiated by an application to query configuration and runtime information abouta Message Queuing System.
+- The use case ends with failure.
+<a id="Section_2.5.1.2"></a>
+#### 2.5.1.2 List SMB Shares
+
+**Goal**
+
+To list shares on a file server that can be accessed through SMB access protocols.
+
+**Context of Use**
+
+The administrator has located and selected a file server and is required to discover any file shares on it.
 
 **Actors**
 
-Application: See section [2.5](#Section_2.1).
+- Admin tool
+The admin tool is the primary actor. It triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-System Administrators: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
 
-Directory Service: See section 2.5.
+- SMB File Service
+The SMB File Service is a supporting actor. It implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
 
 **Preconditions**
 
-- The application administrator completes the application-specific configuration of a Message Queuing System, such as creating the necessary queues.
-- The application has access to the machine and queue.
-- The application has the necessary administrative rights to execute the query.
+The user has identified a file server. An SMB File Service is present on the file server, as described in the Server Service Remote Protocol [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.
+
 **Main Success Scenario**
 
-Trigger: The direct actor triggers this use case based on the actions of the primary actor.
+- Trigger: The admin tool receives a request from the user to retrieve a list of shares that are hosted by the file server.
+- The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the user through the mechanisms, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1.
+- The admin tool contacts the SMB File Service by using the **NetrShareEnum** method ([MS-SRVS] section 3.1.4.8) to retrieve the list of shares.
+- The SMB File Service authorizes the user through the procedure, as described in [MS-SRVS] section 3.1.4.8.
+- The SMB File Service performs the action and returns the results to the application.
+- The admin tool displays a list of file shares.
+**Postcondition**
 
-The processing of the use case is as follows:
+The list of shares that are hosted by the file server is returned to the user.
 
-- The application sends a request to the queue manager to query the necessary data.
-- The queue manager responds to the query by providing the information requested.
+**Extensions**
+
+If the communication channel for the Server Service Remote Protocol, as described in [MS-SRVS], cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.1.3"></a>
+#### 2.5.1.3 Getting and Setting the Properties for an Existing SMB Share
+
+**Goal**
+
+To get or set the properties of an particular shared resource on the server in a **ShareList**, such as name, type, and permissions of the resource, comments that are associated with the resource, the maximum number of concurrent connections, the number of current connections, the local path for the resource, or a password for the current connection.
+
+**Context of Use**
+
+The administrator is setting up a file server or is changing the parameters of a shared resource.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+SMB File Service is a supporting actor that implements server-side protocol components and the File Services that are consumed by the admin client.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Preconditions**
+
+The administrator has identified a file server and an existing share name on a file server. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
+**Postcondition**
+
+The properties of the shared resource are retrieved and set by the administrator.
+
+**Main Success Scenario**
+
+Trigger: The admin tool receives a request from the administrator to get and set the information of an [**SMB share**](#gt_smb-share).
+
+- The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1.
+- The admin tool contacts SMB File Service by using the **NetrShareGetInfo** method ([MS-SRVS] section 3.1.4.11) to retrieve the information of a shared resource.
+- The SMB File Service authorizes the administrator through the mechanisms, as described in [MS-SRVS] section 3.1.4.10.
+- The SMB File Service returns the requested information of the shared resource.
+- The admin tool contacts the SMB File Service by using the **NetrShareSetInfo** method ([MS-SRVS] section 3.1.4.11) to create the share on the file server.
+- The SMB File Service authorizes the administrator through the mechanisms, as described in [MS-SRVS] section 3.1.4.11.
+- The SMB File Service updates the share.
+**Postcondition**
+
+The properties of the shared resource are retrieved and set by the administrator.
+
+**Extensions**
+
+If the communication channel for the Server Service Remote Protocol [MS-SRVS] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the share could or could not have been created.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.1.4"></a>
+#### 2.5.1.4 Delete an SMB Share
+
+**Goal**
+
+To delete a share from an SMB server.
+
+**Context of Use**
+
+The administrator is deleting a share from an existing file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by an administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the File Services that are consumed by the admin client.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication purposes.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Preconditions**
+
+The administrator has identified a file server and a share to be deleted on that server. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to delete a share on the file server.
+- The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1.
+- The admin tool contacts the SMB File Service by using the **NetrShareDel** method ([MS-SRVS] section 3.1.4.12) to delete the share from the file server.
+- The SMB File Service authorizes the administrator through the mechanisms, as described in [MS-SRVS] section 3.1.4.12.
+- The SMB File Service deleted the requested share.
+**Postcondition**
+
+The named share is deleted from the **ShareList** on the file server.
+
+**Extensions**
+
+If the communication channel for [MS-SRVS] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the share could or could not have been created.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.2"></a>
+### 2.5.2 DFS Use Cases
+
+The Distributed File System (DFS) functions provide the ability to logically group shares on multiple servers and to transparently link shares into a single, hierarchical namespace. DFS organizes shared resources on a network in a treelike structure. This section provides a series of use cases for namespace configuration and management.
+
+The following diagram shows the DFS use cases that are described in detail in the following sections.
+
+![DFS use cases](media/image6.png)
+
+Figure 6: DFS use cases
+
+<a id="Section_2.5.2.1"></a>
+#### 2.5.2.1 Create DFS Standalone Namespace
+
+**Goal**
+
+To create a [**standalone DFS namespace**](#gt_ce6af522-ba70-4ba1-a684-b98b809c72ad) for access by using SMB access protocols with extensions, as described in the Distributed File System (DFS): Namespace Referral Protocol [MS-DFSC](../MS-DFSC/MS-DFSC.md).
+
+**Context of Use**
+
+The administrator is setting up a file server or is adding a namespace to an existing file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- DFS Service
+The DFS Service is a supporting actor that provides the technology that helps administrators group shared folders that are located on different servers and present them to users as a virtual tree of folders that is known as a namespace.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication purposes.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Preconditions**
+
+The administrator has identified a Distributed File System (DFS) Service and an existing SMB file share on the File Service that is to be promoted to a DFS namespace. A DFS Service is present, as described in the Distributed File System (DFS): Namespace Management Protocol [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md).
+
+**Trigger:** The admin tool receives a request from the administrator to create a standalone DFS namespace on an SMB File Service.
+
+**Main Success Scenario**
+
+- The admin tool establishes a communication channel to the DFS Service, as described in [MS-DFSNM] section 2.1.
+- The DFS Service authenticates the administrator through the mechanisms as described in the Authentication Services Protocols Overview [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts DFS Service by using the **NetrDfsAddRootTarget** method ([MS-DFSNM] section 3.1.4.1.9) or the **NetrDfsAddStdRoot** method ([MS-DFSNM] section 3.1.4.4.1) to promote the share to a namespace on the file server.
+- The DFS Service authorizes the administrator through the mechanisms of the **NetrDfsAddRootTarget** method ([MS-DFSNM] section 3.1.4.1.9) or the **NetrDfsAddStdRoot** method ([MS-DFSNM] section 3.1.4.4.1), as appropriate to the call.
+- The DFS Service performs the action.
+**Postcondition**
+
+The named share is promoted to a DFS namespace on the SMB File Service.
+
+**Extensions**
+
+if the communication channel for the Distributed File System (DFS): Namespace Management Protocol [MS-DFSNM], cannot be established, or it becomes disconnected:
+
+- The admin tool might attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the DFS standalone namespace might or might not have been created.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.2.2"></a>
+#### 2.5.2.2 Create DFS Domain Namespace
+
+**Goal**
+
+To create a domain Distributed File System (DFS) namespace for access by using SMB access protocols with [MS-DFSC](../MS-DFSC/MS-DFSC.md) extensions.
+
+**Context of Use**
+
+The administrator is setting up a file server or is adding a namespace to an existing file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- DFS Service
+The DFS Service is a supporting actor that provides the technology that helps administrators group shared folders that are located on different servers and present them to users as a virtual tree of folders that is known as a namespace.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication.
+
+- Active Directory system
+The Active Directory system is a supporting actor. The File Services Management system stores metadata that is related to the domain DFS namespace in Active Directory.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Preconditions**
+
+The administrator has identified an SMB File Service and an existing SMB file share on the File Service to be promoted to a DFS domain namespace. A DFS Service is present on the SMB File Service, as described in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to create a DFS namespace on the SMB File Service.
+- The admin tool establishes a communication channel to the DFS Service, as described in [MS-DFSNM] section 2.1.
+- DFS Service authenticates the administrator through the mechanisms, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1.
+- The admin tool contacts DFS Service by using the **NetrDfsAddRootTarget** method ([MS-DFSNM] section 3.1.4.1.9) or the **NetrDfsAddFtRoot** method ([MS-DFSNM] section 3.1.4.3.1) to promote the share to a namespace on the SMB File Service.
+- The DFS Service authorizes the administrator through the mechanisms of the **NetrDfsAddRootTarget** method ([MS-DFSNM] section 3.1.4.1.9) or the **NetrDfsAddFtRoot** method ([MS-DFSNM] section 3.1.4.3.1), as appropriate to the call.
+- The DFS Service performs the action and interacts with the Active Directory directory service [MS-ADOD](../MS-ADOD/MS-ADOD.md) to store metadata changes that are related to the DFS namespace, as described in [MS-DFSNM].
+**Postcondition**
+
+The named share is promoted to a DFS namespace on the SMB File Service with corresponding metadata that is written to the Active Directory system.
+
+**Extensions**
+
+If the communication channel for [MS-DFSNM] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the namespace could or could not have been created.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.2.3"></a>
+#### 2.5.2.3 Create DFS Link
+
+**Goal**
+
+To create a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) for access by using SMB access protocols with extensions, as described in [MS-DFSC](../MS-DFSC/MS-DFSC.md).
+
+**Context of Use**
+
+The administrator is setting up a file server or is maintaining a namespace on an existing file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- DFS Service
+The DFS Service is a supporting actor that provides the technology that helps administrators group shared folders that are located on different servers and present them to users as a virtual tree of folders that is known as a namespace.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication purposes.
+
+- Active Directory system
+The Active Directory system is a supporting actor. The File Services Management system stores metadata that is related to the domain DFS namespace in Active Directory.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified an SMB File Service that hosts an instance of the given namespace, the SMB share on the SMB File Service that hosts the given namespace, the path in the share at which the link is created, and the target that the link refers to. A DFS Service is present on the SMB File Service, as described in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to create a DFS link on the SMB File Service.
+- The admin tool establishes a communication channel to DFS Service, as described in [MS-DFSNM] section 2.1.
+- The DFS Service authenticates the administrator through the mechanisms, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the DFS Service by using the **NetrDfsAdd** method ([MS-DFSNM] section 3.1.4.1.3) to create the link within the namespace, which also creates the DFS link object in the local object store.
+- The DFS Service authorizes the administrator through the mechanisms of the **NetrDfsAdd** method, as described in [MS-DFSNM] section 3.1.4.1.3.
+- The DFS Service performs the action.
+**Postcondition**
+
+The specified DFS link is created within the given DFS namespace on the SMB File Service along with corresponding metadata that is written to the Active Directory system in the case of a domain DFS namespace.
+
+**Extensions**
+
+If the communication channel for the DFS namespace, as described in [MS-DFSNM], cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the link could or could not have been created.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+In the case of a domain DFS namespace:
+
+- The DFS Service additionally interacts with the Active Directory system, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) to store metadata changes that are related to the DFS link, as described in [MS-DFSNM].
+<a id="Section_2.5.2.4"></a>
+#### 2.5.2.4 Add a Root Target to a Domain-Based Namespace
+
+**Goal**
+
+To add a DFS root target to an existing namespace that will host the DFS namespace.
+
+**Context of Use**
+
+The administrator has existing file servers in a domain and is required to set up a domain-based namespace.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- DFS Service
+The DFS Service is a supporting actor that provides the technology that helps administrators group shared folders on different servers and present them to users as a virtual tree of folders known as a namespace.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication purposes.
+
+- Active Directory system
+The Active Directory system is a supporting actor. The File Services Management system stores metadata that is related to the domain DFS namespace in Active Directory.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who sets up and manages the DFS root target servers and the DFS namespaces.
+
+**Preconditions**
+
+The administrator has identified an SMB File Service to act as a root server for an already created DFS namespace. A DFS Service is present on the SMB File Service, as described in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to add a DFS root target to an existing namespace.
+- The admin tool establishes a communication channel to the DFS Service, as described in [MS-DFSNM] section 2.1.
+- The DFS Service authenticates the administrator through the mechanisms, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts DFS Service by using the **NetrDfsAddFtRoot** method ([MS-DFSNM] section 3.1.4.3.1) to add the file server as a root target server to the existing namespace.
+- The DFS Service uses the **NetrDfsAddFtRoot** method to authorize the administrator through the mechanisms of [MS-DFSNM] section 3.1.4.3.1, as appropriate to the call.
+- The DFS Service performs the action, and interacts with the Active Directory directory service, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md), to store metadata changes that are related to the DFS namespace, as described in [MS-DFSNM].
+**Postcondition**
+
+The named share is promoted to a DFS namespace on the SMB File Service with corresponding metadata that is written to the Active Directory system.
+
+**Extensions**
+
+If the communication channel for the DFS namespace [MS-DFSNM] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the namespace could or could not have been created.
+If user authorization or authentication fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.3"></a>
+### 2.5.3 DFS-R Configuration and Monitoring Use Cases
+
+This section describes the configuration and monitoring activity of Distributed File System-Replication (DFS-R) on a server that includes the configuration of the DFS-R objects for the high availability of data that the server contains.
+
+The following diagram shows the DSF-R configuration and monitoring use cases that are described in detail in the following sections.
+
+![DFS-R configuration and monitoring use cases](media/image7.png)
+
+Figure 7: DFS-R configuration and monitoring use cases
+
+Goal
+
+To get the health information for a Distributed File System Replication (DFS-R) Service.
+
+**Context of Use**
+
+The administrator wants collect various statistics about the DFS-R operation on the DFS-R Service.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- DFS-R Service
+The DFS-R Service is a supporting actor that provides the interfaces to create, modify, and delete configuration objects in Active Directory by using the server's machine account. It also provides the interface to monitor DFS-R on the computer and to collect various statistics about the DFS-R operation.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to get the health report for DFS-R Service.
+- The admin tool establishes a communication channel to the DFS-R Service, as described in [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) section 2.1.
+- The DFS Service authenticates the administrator through the mechanisms of the Authentication Services Protocol Overview, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the DFS-R Service to get the health report by using either the **IServerHealthReport** interface or the **IServerHealthReport2** interface, as described in [MS-DFSRH] sections 3.1.5.4 and 3.1.5.5.
+- The DFS-R Service generates the report and returns it to the admin client.
+**Postcondition**
+
+The health report is generated and is returned to the administrator.
+
+**Extensions**
+
+If the communication channel for the DFS Replication Helper Protocol, as described in [MS-DFSRH], cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the namespace could or could not have been created.
+<a id="Section_2.5.3.1"></a>
+#### 2.5.3.1 Get Health Information for a DFS Replication
+
+**Goal**
+
+To get the health information for a Distributed File System Replication (DFS-R) Service.
+
+**Context of Use**
+
+The administrator has to collect statistics about the DFS-R operation that runs on the DFS-R Service.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- DFS-R Service
+The DFS-R Service is a supporting actor that provides the interfaces to create, modify, and delete configuration objects in Active Directory by using the server's machine account. It also provides the interface to monitor DFS-R on the computer and to collect statistics about the DFS-R operation.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator's has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to get the health report for the DFS-R Service.
+- The admin tool establishes a communication channel to the DFS-R Service, as described in [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) section 2.1.
+- The DFS Service authenticates the administrator through the mechanisms of the Authentication Services Protocols Overview, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the DFS-R Service to get the health report by using either the **IServerHealthReport** or the **IServerHealthReport2** interface, as described in [MS-DFSRH] sections 3.1.5.4 and 3.1.5.5.
+- The DFS-R Service generates the report and returns it to the admin client.
 **Post-Condition**
 
-- The state of the queue does not change.
-- The application receives the requested information.
+The health report is generated and returned to the administrator.
+
 **Extensions**
 
-None.
+- If the communication channel for the DFS Replication Helper Protocol, as described in [MS-DFSRH], cannot be established, or it becomes disconnected:
+The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the namespace could or could not have been created.
 
-<a id="Section_2.5.3"></a>
-### 2.5.3 Send Message to Queue - Application
+<a id="Section_2.5.3.2"></a>
+#### 2.5.3.2 Create a Directory Object for a DFS Replication Group Using Server Credentials
 
-**Context of Use:** An application creates a message and interacts with the queue manager to send the message. The application optionally uses a Directory Service for looking up the queue name.
+**Goal**
 
-**Goal:** This use case places a message in a queue.
+To create an Active Directory object that is used by the DFS-R Service.
+
+**Context of Use**
+
+The administrator creates Active Directory objects that have configuration information for DFS replication.
 
 **Actors**
 
-Application: See section [2.5](#Section_2.1).
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-Application Users: See section 2.5.
+- DFS-R Service
+The DFS-R Service is a supporting actor that provides the interfaces to create, modify, and delete configuration objects in Active Directory by using the server's machine account. It also provides the interface to monitor DFS-R on the computer and to collect statistics about the DFS-R operation.
 
-Directory Service: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- Active Directory system
+The Active Directory system is a supporting actor. The File Services Management system stores all configuration data that is related to the replication members in Active Directory.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
 
 **Preconditions**
 
-- The queue exists.
-- The application is authorized to send messages to the queue.
-- If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
+The administrator has identified an SMB File Service. A DFS-R Service is present on the SMB File Service, as described in [MS-FRS2](../MS-FRS2/MS-FRS2.md).
+
 **Main Success Scenario**
 
-**Trigger:** The direct actor triggers this use case based on the actions of the primary actor. It is also triggered by the [Exchange Message – Application (section 2.5.8)](#Section_2.5.8) use case.
-
-The steps involved in this use case are:
-
-- The application constructs a message to send.
-- The application optionally obtains the queue name from the Directory Service.
-- The application sends the message to the queue manager.
-- The queue manager performs validation checks and fails the operation in case of an error.
-- If the queue is hosted by this queue manager, the queue manager puts the message in the queue and returns a response back to the application. An extension of this step is described in [Send Message in Transaction - Application (section 2.5.4)](#Section_2.5.4).
-- If the queue is hosted by a different queue manager, the queue manager puts the message in an outgoing queue and invokes a separate use case to complete the message transfer operation, as described in [Transfer Message (section 2.5.5)](#Section_2.5.5).
+- Trigger: The admin tool receives a request from the administrator to create an Active Directory object.
+- The admin tool establishes a communication channel to the DFS-R Service, as described in [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) section 2.1.
+- The DFS Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts DFS-R Service to create an Active Directory object with a specified distinguished name and attributes.
+- The DFS-R Service authorizes the administrator through the mechanisms described in [MS-DFSRH] section 3.1.5.2.1 **IADProxy::CreateObject** or section 3.1.5.3.1 **IADProxy2::CreateObject**).
+- The DFS-R Service executes a Lightweight Directory Access Protocol ([**LDAP**](#gt_lightweight-directory-access-protocol-ldap)) command under machine security credentials to create an Active Directory object.
 **Postcondition**
 
-The message is placed in the destination queue.
+The requested Active Directory object is created.
 
 **Extensions**
 
-See Send Message in Transaction - Application.
+The following results occur if the communication channel for the DFS Replication Helper Protocol, as described in [MS-DFSRH], cannot be established, or it becomes disconnected:
 
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the namespace could or could not have been created.
 <a id="Section_2.5.4"></a>
-### 2.5.4 Send Message in Transaction - Application
+### 2.5.4 Resource Management Use Cases
 
-**Context of Use:** This use case extends the [Send Message to Queue - Application (section 2.5.3)](#Section_2.5.3) use case by adding transactional semantics to the message send operation. In this use case, the application and the queue manager interact with a Transaction Coordinator to send one or more messages in the context of a transaction. The messages are visible only after a successful outcome of the transaction. A failed outcome of the transaction undoes the entire message send operation.
+The File Server Resource Manager (FSRM) enables system administrators to understand how storage is used and to manage the use of their storage by generating storage reports, by applying quotas to volumes and folders, and by screening files on the server.
 
-**Goal:** This use case places one or more messages in a queue in the context of an [**atomic transaction**](#gt_atomic-transaction).
+The following diagram shows the Resource Management use cases that are described in detail in the following sections.
+
+![Resource Management use cases](media/image8.png)
+
+Figure 8: Resource Management use cases
+
+<a id="Section_2.5.4.1"></a>
+#### 2.5.4.1 Create and Configure a File Management Job
+
+**Goal**
+
+To create and configure a file management job.
+
+**Context of Use**
+
+The administrator is setting up a file server and is required to schedule a task that applies a command to a set of files as determined by a list of conditions and a list of namespaces.
 
 **Actors**
 
-Application: See section [2.5](#Section_2.1).
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-Application Users: See section 2.5.
+- FSRM Service
+The FSRM Service is a supporting actor. It provides functionality for setting up and managing storage on folders and shares on a file server.
 
-Transaction Coordinator: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
 
 **Preconditions**
 
-This use case has the following precondition, in addition to those described in the Send Message to Queue - Application extended use case:
+The administrator has identified a file server and a set of files on the server to schedule the job.
 
-- The Transaction Coordinator is accessible to the application and the queue manager in order to coordinate the transaction execution.
 **Main Success Scenario**
 
-**Trigger:** The direct actor triggers this use case based on the actions of the primary actor. It is also triggered by the [Exchange Message - Application (section 2.5.8)](#Section_2.5.8) use case.
+- Trigger: The admin tool receives a request from the Create and Configure a File management task. The admin tool establishes a communication channel to the File Server Resource Manager, which is a component of the File Service, as described in [MS-FSRM](../MS-FSRM/MS-FSRM.md) section 3.1.3.
+- The admin tool creates a file management job on the file server by using the **CreateFileManagementJob** method, as described in [MS-FSRM] section 3.2.4.2.50.2. It sets the **Name**, **NamespaceRoot**, and **Format** task by using the **IFsrmReportScheduler::CreateScheduleTask** method and **ExpirationDirectory** for the new namespace, as described in [MS-FSRM] sections 3.2.4.2.48.3, 3.2.4.2.48.5, 3.2.4.2.48.19, 3.2.4.2.37.2, and 3.2.4.2.48.11.
+- The admin tool modifies properties of the newly created file management job, such as the **ReportEnabled** property and the **Logging** property, and associates a different task.
+**Postcondition**
 
-The steps involved in this use case are as follows:
+The requested file management task is created and configured.
 
-- The application creates a transaction and follows steps 1 through 4 of Send Message to Queue - Application to send each message to the queue manager in the context of the transaction.
-- The queue manager enlists in the transaction if it has not enlisted in the transaction yet and does not make the messages visible outside the context of the transaction.
-- The queue manager returns a response back to the application.
-- The application commits or aborts the transaction, and the Transaction Coordinator communicates the outcome of the transaction to the resource manager facet of the queue manager. Upon a successful outcome, the queue manager makes the messages visible, and this use case continues to the next step. Conversely, on a failed outcome of the transaction, the queue manager undoes the message send operations, and this use case completes.
-- 5. For each message that is sent, follow step 6 of Send Message to Queue - Application.
-**Postconditions**
-
-- If the transaction succeeds, the messages are placed in the destination queue as with the post condition in Send Message to Queue - Application.
-- If the transaction fails, the messages do not appear in the destination queue.
 **Extensions**
 
-None.
+If the communication channel for the File Server Resource Manager Protocol [MS-FSRM] cannot be established, or it becomes disconnected:
 
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the namespace could or could not have been created.
+<a id="Section_2.5.4.2"></a>
+#### 2.5.4.2 Create a Report Job
+
+**Goal**
+
+To create a report job.
+
+**Context of Use**
+
+The administrator is setting up a file server and is required to analyze a set of directories and generate a report.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- FSRM Service
+The File Server Resource Manager (FSRM) Service is a supporting actor. It provides functionality for classifying data by applying policy that is based on file server metadata and by generating data reports on the file server.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified a file server and a set of directories on the server to generate the utilization report.
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request to create a report job.
+- The admin tool establishes a communication channel to the File Server Resource Manager, a component of the File Service, as described in [MS-FSRM](../MS-FSRM/MS-FSRM.md) section 3.1.3.
+- The admin tool creates a report job by using the **IFsrmReportManager::CreateReportJob** method ([MS-FSRM] section 3.2.4.2.33.2). The client calls the **IFsrmReportJob::NamespaceRoots(put)** ([MS-FSRM] section 3.2.4.2.34.5), **IFsrmReportJob::Task(put)** ([MS-FSRM] section 3.2.4.2.34.3), and **IFsrmReportJob::CreateReport** ([MS-FSRM] section 3.2.4.2.34.15) methods of the File Server Resource Manager Protocol [MS-FSRM] with valid values for each method.
+**Postcondition**
+
+The requested file management task is created and configured.
+
+**Extensions**
+
+If the communication channel for File Server Resource Manager Protocol [MS-FSRM] cannot be established, or it becomes disconnected:
+
+The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the report job could or could not have been created.
+
+<a id="Section_2.5.4.3"></a>
+#### 2.5.4.3 Configure File Screens and Directory Quotas
+
+**Goal**
+
+To configure a file screen and share directory quota on the file server.
+
+**Context of Use**
+
+The administrator is setting up a file server and has to configure a file screen and share directory quota.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- FSRM Service
+The FSRM Service is a supporting actor. It provides the ability to control the amount and type of data that is stored on a file server.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide SMB File Services.
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to configure quota and screening.
+- The admin tool establishes a communication channel to the File Server Resource Manager, a component of the File Service, as described in [MS-FSRM](../MS-FSRM/MS-FSRM.md) section 3.1.3.
+- The admin tool creates a quota on the file server by using the **IFsrmQuotaManager::CreateQuota** method, as described in [MS-FSRM] section 3.2.4.2.18.3, and provides the folder path on which the quota has to be applied. The admin tool calls the **IFsrmQuotaBase::QuotaLimit(put)** method ([MS-FSRM] section 3.2.4.2.14.3) with a valid quota limit.
+- Alternatively, the admin tool creates a file screen on the file server by using the **CreateFileScreen** method, as described in [MS-FSRM] sections 3.2.4.2.29.3 and 3.2.4.2.27.1. The admin tool then calls the **IFsrmFileScreenBase::BlockedFileGroups(put)** method ([MS-FSRM] section 3.2.4.2.26.2) with a valid collection of file groups.
+**Postcondition**
+
+The requested quota limits and file screens are instantiated on the file server.
+
+**Extensions**
+
+If the communication channel for File Server Resource Manager Protocol [MS-FSRM] cannot be established, or it becomes disconnected:
+
+- The admin tool might attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the file quota and file screen might or might not have been created.
 <a id="Section_2.5.5"></a>
-### 2.5.5 Transfer Message
+### 2.5.5 Server Management Use Cases
 
-**Context of Use:** This use case is optionally used by the use case in [Send Message to Queue – Application](#Section_2.5.3), Send Message to Queue, as well as by the use case in [Send Message in Transaction - Application (section 2.5.4)](#Section_2.5.4), Send Message in Transaction, to enable messages to be sent to queues that are not hosted by the source queue manager. This use case can be invoked only by the preceding Send Message use cases and is not intended to be directly invoked by the actors described in the Message Queuing use case diagram in section [2.5](#Section_2.1).
+This section describes the operations that are performed by administrator to manage an SMB share which includes the following operations: attaching and detaching the alias names, getting or setting the configuration information of a server, and binding and unbinding a server to a transport protocol.
 
-**Goal:** To transfer a message from one queue manager to another.
+The following diagram shows the Server Management use cases that are described in detail in the following sections.
+
+![Server Management use cases](media/image9.png)
+
+Figure 9: Server Management use cases
+
+<a id="Section_2.5.5.1"></a>
+#### 2.5.5.1 Attach an Alias Name to an Existing Server
+
+**Goal**
+
+To attach an alias name to an existing SMB server.
+
+**Context of Use**
+
+The administrator is setting up a file server and has to add an alias to an existing file server.
 
 **Actors**
 
-Application: See section 2.5.
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-Directory Service: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
 
 **Preconditions**
 
-This use case has the following preconditions, in addition to those of the invoking use cases (Send Message to Queue – Application or Send Message in Transaction - Application:
+The administrator has identified a file server to which he has to create an alias name. The administrator has also determined an alias name to add to the server name. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
 
-- If the send operation is invoked from the use case in Send Message to Queue – Application, steps 1 through 5 in Send Message to Queue – Application are performed and the message is placed in an outgoing queue, OR
-- If the send operation is invoked from the use case in Send Message in Transaction - Application, Send Message in Transaction, steps 1 through 4 in Send Message in Transaction - Application are performed, the transaction has a successful outcome, and as a result the message is placed in an outgoing queue.
 **Main Success Scenario**
 
-**Trigger:** This use case is triggered by the Send Message to Queue – Application use case or the Send Message in Transaction - Application use case.
+- Trigger: The admin tool receives a request from the administrator to add an alias to the file server.
+- The admin tool establishes a communication channel to SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the SMB File Service by using the **NetrServerAliasAdd** method ([MS-SRVS] section 3.1.4.44), to add an alias to the file server.
+- The SMB File Service authorizes the administrator through the mechanisms as described in [MS-SRVS] section 3.1.4.44.
+- The SMB File Service adds an alias to attach the existing server name.
+**Postcondition**
 
-The steps involved in this use case are:
+The server is accessible with the existing name and with the added alias.
 
-- The source queue manager determines the destination queue manager and transfers the message.
-- The destination queue manager accepts the message, performs duplication and validation checks, and places the message in the destination queue. If the identifier of an incoming message has been previously received by the destination queue manager, the message is treated as a duplicate and is discarded without any further processing. If the message fails validation checks, a negative acknowledgment is sent to the source queue manager. On successful transfer, the destination queue manager sends the appropriate acknowledgments to the source queue manager.
-- Steps 1 and 2 are repeated until the source queue manager receives the appropriate acknowledgments from the destination queue manager or rejects the message for further retransmission.
+**Extensions**
+
+If the communication channel for [MS-SRVS] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the alias could or could not have been created.
+If user authentication or authorization fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.5.2"></a>
+#### 2.5.5.2 Detach an Alias Name from a Server
+
+**Goal**
+
+To detach an alias name from an existing SMB server.
+
+**Context of Use**
+
+The administrator is setting up a file server and has to remove an alias that is associated with the file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified a file server from which an alias name is to be detached. The administrator also has an alias name to detach from the server name. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to delete an alias from the file server.
+- The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the SMB File Service by using the **NetrServerAliasDel** method, as described in the Server Service Remote Protocol [MS-SRVS] section 3.1.4.46, to delete an alias from the file server.
+- The SMB File Service authorizes the administrator through the mechanisms as described in [MS-SRVS] section 3.1.4.46.
+- The SMB File Service deletes the alias that is attached to the file server.
+**Postcondition**
+
+The server is not accessible by attempting to access it with the deleted alias.
+
+**Extensions**
+
+If the communication channel for the Server Service Remote Protocol [MS-SRVS] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the alias name could or could not have been created.
+If user authentication or authorization fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.5.3"></a>
+#### 2.5.5.3 Retrieve Alias Names
+
+**Goal**
+
+To retrieve all aliases that are attached to an existing SMB server.
+
+**Context of Use**
+
+The administrator is setting up a file server and has to enumerate all aliases that are attached to a file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication purposes.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified a file server for which aliases are to be enumerated. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to enumerate the aliases that are associated with a file server. The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the SMB File Service by using the **NetrServerAliasEnum** method ([MS-SRVS] section 3.1.4.45) to enumerate the alias that is attached to the file server.
+- The SMB File Service authorizes the administrator through the mechanisms as described in [MS-SRVS] section 3.1.4.45.
+- The SMB File Service enumerates all the aliases that are attached to the existing server name and returns the list of aliases to the admin tool.
+**Postcondition**
+
+The admin tool displays all the aliases that are associated with the SMB server.
+
+**Extensions**
+
+If the communication channel for the Server Service Remote Protocol, as described in [MS-SRVS], cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish the connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the aliases could or could not have been displayed.
+If user authentication or authorization fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.5.4"></a>
+#### 2.5.5.4 Binding or Unbinding an SMB Server Transport Protocol
+
+**Goal**
+
+To bind a transport protocol to an SMB server or to unbind a transport protocol from an SMB server.
+
+**Context of Use**
+
+The administrator is setting up an SMB server and has to bind or unbind the server to or from a transport protocol.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+The Authentication Services is the supporting actor that is used for authentication purposes.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified a file server to which he wants to bind and unbind the transport. The administrator has also determined a transport to bind and a transport to unbind. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to bind or unbind an SMB server to a transport protocol.
+- The admin tool establishes a communication channel to an SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the SMB File Service by using the **NetrServerTransportAdd** method ([MS-SRVS] section 3.1.4.22) to bind a transport with the file server or by using the **NetrServerTransportDel** method ([MS-SRVS] section 3.1.4.25) to unbind a transport with the file server.
+- The SMB File Service authorizes the administrator through the mechanisms as described in [MS-SRVS] sections 3.1.4.22 and 3.1.4.25.
+- The SMB File Service binds and unbinds the provided transports.
+**Postcondition**
+
+The server is accessible with bound transport, but is not accessible with unbound transport.
+
+**Extensions**
+
+The following results occur if the communication channel for the Server Service Remote Protocol [MS-SRVS] cannot be established, or it becomes disconnected:
+
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the server could or could not have been bound to or unbound from the transport protocol.
+If user authentication or authorization fails:
+
+- The use case ends with failure.
+<a id="Section_2.5.5.5"></a>
+#### 2.5.5.5 Getting or Setting the Configuration Information for a Server
+
+**Goal**
+
+To get and set the operating parameters for a file server.
+
+**Context of Use**
+
+The administrator is setting up and has to configure a file server.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB File Service
+The SMB File Service is a supporting actor that implements server-side protocol components and the file services that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the file server. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified a file server on which to get or set the configuration information. An SMB File Service is present on the file server, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md).
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to get or set the operating parameters of a file server.
+- The admin tool establishes a communication channel to the SMB File Service, as described in [MS-SRVS] section 2.1.
+- The SMB File Service authenticates the administrator through the mechanisms as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
+- The admin tool contacts the SMB File Service by using the **NetrServerGetInfo** method ([MS-SRVS] section 3.1.4.17) to get the operating parameters of the file server.
+- The SMB File Service authorizes the administrator through the mechanisms as described in [MS-SRVS] section 3.1.4.17.
+- The SMB File Service returns the requested configured information.
+- The admin tool contacts the SMB File Service by using the **NetrServerSetInfo** method ([MS-SRVS] section 3.1.4.18) to set the required operating parameters of the file server.
+- The SMB File Service authorizes the administrator through the mechanisms, as described in [MS-SRVS] section 3.1.4.18.
+- The SMB File Service updates the server configuration object.
 **Postcondition**
 
 None.
 
 **Extensions**
 
-In a variation of this use case, the Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm (MQBR) algorithm is used to perform a multihop message transfer. In this variation, the queue manager uses the MQBR algorithm in step 1 to determine the next hop queue manager, and the steps described in this section are repeated until the message reaches the final destination queue manager.
+If the communication channel for the Server Service Remote Protocol, as described in [MS-SRVS], cannot be established, or it becomes disconnected:
 
+- The admin tool can attempt to establish connection multiple times; ultimately, the use case ends with failure. Depending on when the connection failed, the operating parameters of the server could or could not have been set.
+If the user authentication fails:
+
+- The use case ends with failure.
 <a id="Section_2.5.6"></a>
-### 2.5.6 Receive a Message from a Queue - Application
+### 2.5.6 SMB Redirector Use Cases
 
-**Context of Use:** This use case covers the counterpart of the Send Message use case. An application receives a message from a queue. The application optionally uses a Directory Service to look up the queue name.
+This section describes the operations performed by administrator to manage an SMB Network Redirector.
 
-**Goal:** This use case receives a message from a queue.
+The following diagram shows the SMB Redirector use cases that are described in detail in the following sections.
+
+![Configure SMB Network Redirector use cases](media/image10.png)
+
+Figure 10: Configure SMB Network Redirector use cases
+
+<a id="Section_2.5.6.1"></a>
+#### 2.5.6.1 Enable a Transport Protocol on an SMB Network Redirector
+
+**Goal**
+
+To enable a transport protocol on an SMB Network Redirector.
+
+**Context of Use**
+
+The administrator is configuring the SMB Network Redirector and is required to enable a transport protocol.
 
 **Actors**
 
-Application: See section [2.5](#Section_2.1).
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-Application Users: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
 
-Directory Service: See section 2.5.
+- SMB Network Redirector
+The SMB Network Redirector is a supporting actor that handles requests for remote files and printer operations and uses the Server Message Block (SMB) protocol as access protocol. The SMB Network Redirector also implements server-side protocol components that are used to configure it and that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the SMB Network Redirector. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
 
 **Preconditions**
 
-This use case has the same preconditions as in [Send Message to Queue – Application (section 2.5.3)](#Section_2.5.3) with the exception that the receiving application is authorized to receive messages from the queue.
+The administrator has identified a remote computer to which a transport protocol is to be enabled. An SMB Network Redirector and the implementation of the Workstation Service Remote Protocol, as described in [MS-WKST](../MS-WKST/MS-WKST.md), is present on the remote computer.
 
 **Main Success Scenario**
 
-**Trigger:** The direct actor triggers this use case based on the actions of the primary actor. It is also triggered by the [Exchange Message - Application (section 2.5.8)](#Section_2.5.8)-use case.
-
-The steps involved in this use case are:
-
-- The application optionally obtains the queue name from the Directory Service.
-- The application sends a request to the queue manager to receive a message from the queue and waits for a response from the queue manager within a specific time-out.
-- The queue manager performs validation checks and fails the operation in case of an error.
-- If a message is not available, the queue manager blocks the application until a message is available, or until the receive operation in step 2 times out or is canceled. In the latter case, an error response is returned to the application, and this use case completes.
-- The queue manager removes the available message from the queue and returns it to the application as part of the response.
+- Trigger: The admin tool receives a request from the administrator to enable a transport protocol on an SMB Network Redirector.
+- The admin tool establishes a communication channel to the Workstation Service, as described in [MS-WKST] section 2.1.
+- The admin tool contacts the Workstation Service by using the **NetrWkstaTransportAdd** method ([MS-WKST] section 3.2.4.5) to enable the SMB Network Redirector to use a transport protocol on a remote computer.
+- The Workstation Service enables the provided transport protocol to be used by the SMB Network Redirector.
 **Postcondition**
 
-- If a message is available to receive in the queue and is returned to the application as a result of the receive operation, the message is removed from the queue.
+The SMB Network Redirector can use the provided transport protocol.
+
+<a id="Section_2.5.6.2"></a>
+#### 2.5.6.2 Disable a Transport Protocol on an SMB Network Redirector
+
+**Goal**
+
+To disable a transport protocol on an SMB Network Redirector.
+
+**Context of Use**
+
+The administrator is configuring the SMB Network Redirector and is required to disable a transport protocol.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB Network Redirector
+The SMB Network Redirector is a supporting actor that handles requests for remote files and printer operations that use the Server Message Block (SMB) protocol as access protocol. The SMB Network Redirector also implements server-side protocol components that are used to configure it and that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication purposes.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the SMB Network Redirector. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified a remote computer to which the administrator can disable a transport protocol. An SMB Network Redirector and the implementation of the Workstation Service Remote Protocol, as described in [MS-WKST](../MS-WKST/MS-WKST.md), are present on the remote computer.
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to disable a transport protocol on an SMB Network Redirector.
+- The admin tool establishes a communication channel to the Workstation Service, as described in [MS-WKST] section 2.1.
+- The admin tool contacts the Workstation Service by using the **NetrWkstaTransportDel** method, as described in [MS-WKST] section 3.2.4.6, to disable the SMB Network Redirector to use as transport protocol on a remote computer.
+- If any open file or printer handles are using the transport protocol that this call tries to disable, the server behavior depends on the value of the *ForceLevel* parameter that is provided by the admin tool. If the admin tool requested a forced deletion, the server forces all open handles to close, and then disables the transport protocol.
+**Postcondition**
+
+The SMB Network Redirector can use the provided transport protocol.
+
 **Extensions**
+
+- If any open file or printer handles are using the transport protocol that this call tries to disable, and the admin tool has not requested a forceful deletion:
+The call fails, and the transport protocol is not deleted.
+
+<a id="Section_2.5.6.3"></a>
+#### 2.5.6.3 Get Statistics about an SMB Network Redirector
+
+**Goal**
+
+To get various statistics about the SMB Network Redirector on a remote computer.
+
+**Context of Use**
+
+The administrator is configuring the SMB Network Redirector and is required to get various statistics.
+
+**Actors**
+
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
+
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB Network Redirector
+The SMB Network Redirector is a supporting actor that handles requests for remote files and printer operations that use SMB as access protocol. The SMB Network Redirector also implements server-side protocol components that are used to configure it and that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication.
+
+**Stakeholders**
+
+- Administrator
+The administrator is the person who administers the SMB Network Redirector. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
+
+**Preconditions**
+
+The administrator has identified an SMB Network Redirector, and the implementation of the Workstation Service Remote Protocol, as described in [MS-WKST](../MS-WKST/MS-WKST.md), is present on the remote computer.
+
+**Main Success Scenario**
+
+- Trigger: The admin tool receives a request from the administrator to get various statistics about the SMB Network Redirector on a remote computer.
+- The admin tool establishes a communication channel to the Workstation Service, as described in [MS-WKST] section 2.1.
+- The admin tool contacts the Workstation Service by using the **NetrWorkstationStatisticsGet** method ([MS-WKST] section 3.2.4.11) to get various statistics about the SMB Network Redirector on a remote computer.
+- The Workstation Service returns the corresponding statistics about the SMB Network Redirector.
+**Postcondition**
 
 None.
 
-<a id="Section_2.5.7"></a>
-### 2.5.7 Receive Message in Transaction – Application
+<a id="Section_2.5.6.4"></a>
+#### 2.5.6.4 Get Transport Protocols Enabled on an SMB Network Redirector
 
-**Context of Use:** This use case extends the use case described in [Receive a Message from a Queue - Application (section 2.5.6)](#Section_2.5.6) by adding transactional semantics to the message receive operation. In this use case, the application and the queue manager interact with a Transaction Coordinator to receive one or more messages in the context of a transaction. Whether the messages are consumed depends on the outcome of the transaction. The messages are removed from the queue only upon a successful outcome of the transaction. Conversely, the messages are returned back to the queue upon a failed outcome of the transaction.
+**Goal**
 
-**Goal:** This use case receives one or more messages from a queue in the context of an atomic transaction.
+To enumerate enabled transport protocols on an SMB Network Redirector.
 
-**Actors**
+**Context of Use**
 
-Application: See section [2.5](#Section_2.1).
-
-Application Users: See section 2.5.
-
-Transaction Coordinator: See section 2.5.
-
-**Stakeholders**
-
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
-
-**Preconditions**
-
-This use case has the following preconditions, in addition to those described in the extending use case in Receive a Message from a Queue – Application:
-
-- The Transaction Coordinator is accessible to the application as well as the queue manager in order to coordinate the transaction execution.
-**Main Success Scenario**
-
-**Trigger:** The direct actor triggers this use case based on the actions of the primary actor. It is also triggered by the [Exchange Message - Application (section 2.5.8)](#Section_2.5.8) use case.
-
-The steps involved in this use case are similar to those in Receive a Message from a Queue – Application, with the exception of additional interactions with the Transaction Coordinator system. The combined steps are:
-
-- The application creates a transaction and follows steps 1-4 of Receive a Message from a Queue – Application, to send each receive request to the queue manager under the context of the transaction.
-- The queue manager enlists in the transaction if it has not enlisted in the transaction yet. For each receive request, if a message was available from the previous step, the queue manager locks the message and thereby makes it invisible outside the context of the transaction, as if the message has been temporarily removed from the queue. Each message is returned to the application for the corresponding receive request.
-- The application commits or aborts the transaction, and the Transaction Coordinator communicates the outcome of the transaction to the resource manager facet of the queue manager. Upon a successful outcome of the transaction, the queue manager removes the messages from the queue. Conversely, upon a failed outcome, the queue manager undoes the receive operation and returns the messages back to the queue.
-**Postcondition**
-
-- If the outcome of the transaction is successful, the postcondition is the same as in Receive a Message from a Queue – Application.
-- If the outcome of the transaction is not successful, the messages are placed back in the queue.
-**Extensions**
-
-None.
-
-<a id="Section_2.5.8"></a>
-### 2.5.8 Exchange Message - Application
-
-**Context of Use:** The sending application creates the messages and sends them to the queue manager that hosts the queue. The receiving application receives the messages from the queue. This use case invokes the following supporting use cases:
-
-- [Send Message to Queue - Application (section 2.5.3)](#Section_2.5.3) (or [Send Message in Transaction - Application (section 2.5.4)](#Section_2.5.4) if a transaction is used for sending messages)
-- [Receive a Message from a Queue - Application](#Section_2.5.6) (or [Receive Message in Transaction – Application (section 2.5.7)](#Section_2.5.7) if a transaction is used for receiving messages)
-**Goal:** This use case enables two applications to exchange messages asynchronously. Messages are sent to a queue by a sending application and are received from the queue by a receiving application.
+The administrator is configuring the SMB Network Redirector and requires information about the transport protocols that are currently enabled for use by the Server Message Block (SMB) network.
 
 **Actors**
 
-Application: See section [2.5](#Section_2.1).
+- Admin tool
+The admin tool is the primary actor that triggers this use case. The admin tool is a program that offers management functionality to the administrator through the admin client. Typical admin tools are command-line tools and graphical shells, management utilities, and graphical management programs. The purpose of the admin tool is to correctly interpret, execute, and display the results of the commands that are issued by the administrator.
 
-Application Users: See section 2.5.
+- Admin client
+The admin client is a supporting actor that implements client-side protocol components and consumes the file server administration services that are offered by the file server. The admin client is internal to the File Services Management system.
+
+- SMB Network Redirector
+The SMB Network Redirector is a supporting actor that handles requests for remote files and printer operations that use SMB as access protocol. The SMB Network Redirector also implements server-side protocol components that are used to configure it and that are consumed by the admin client.
+
+- Authentication Services
+Authentication Services is the supporting actor that is used for authentication.
 
 **Stakeholders**
 
-Developers: See section 2.5.
-
-Testers: See section 2.5.
-
-Application Users: See section 2.5.
+- Administrator
+The administrator is the person who administers the SMB Network Redirector. The administrator has administrative rights and uses the File Services Management system to provide the SMB File Service.
 
 **Preconditions**
 
-The preconditions of this use case include those of the following supporting use cases.
-
-| Receive a Message | Send Message to Queue | Send Message in Transaction |
-| --- | --- | --- |
-| Receive a Message from a Queue - Application | None. | If the Send Message transaction is successful, the messages are accepted by the queue manager. If the transaction is aborted, the messages are not accepted by the queue manager. Receipt of the message is not guaranteed. |
-| Receive Message in Transaction – Application | None. | If the Send Message transaction is successful, the messages are accepted by the queue manager. If the transaction is aborted, the messages are not accepted by the queue manager. If the Send Message transaction is successful and the message is successfully received, the messages are delivered to the application and removed from the queue. If the receive transaction aborts, the messages are not removed from the queue. |
+The administrator has identified an SMB Network Redirector, and the implementation of the Workstation Service Remote Protocol, as described in [MS-WKST](../MS-WKST/MS-WKST.md), is present on the remote computer.
 
 **Main Success Scenario**
 
-**Trigger:** The direct actor triggers this use case based on the actions of the primary actor.
-
-The steps involved in this use case are:
-
-- On the sending application side, the use case Send Message to Queue - Application (or Send Message in Transaction - Application if a transaction is used) is triggered to send messages to a queue. This action is repeated when the sending application has more messages to send.
-- On the receiving application side, the use case Receive Message from a Queue - Application (or Receive Message in Transaction - Application if a transaction is used) is triggered to receive the messages. This action is repeated when the receiving application needs more messages from the sending application.
+- Trigger: The admin tool receives a request from the administrator to enumerate the enabled transport protocols on an SMB Network Redirector.
+- The admin tool establishes a communication channel to the Workstation Service, as described in [MS-WKST] section 2.1.
+- The admin tool contacts Workstation Service by using the **NetrWkstaTransportEnum** method ([MS-WKST] section 3.2.4.4) to enumerate the transport protocol that is enabled on the SMB Network Redirector.
+- The Workstation Service provides the transport protocols that are enabled on the SMB Network Redirector.
 **Postcondition**
-
-- The receiving application receives the messages that the sending application sends.
-**Extensions**
 
 None.
 
 <a id="Section_2.6"></a>
 ## 2.6 Versioning, Capability Negotiation, and Extensibility
 
-There are multiple versions of the MSMQ protocol set.<2>A summary of different versions and the protocols or protocol subsets implemented by these versions follows.
+<a id="Section_2.6.1"></a>
+### 2.6.1 Remote Administration Protocol
 
-**Message Queuing System versioning and capability negotiation**
+The current File Services Management system evolved from earlier systems for remote file access, including the Microsoft LAN Manager. These early systems did not have a general RPC transport available to them, and instead defined protocol-specific methods for encoding what would later be understood to be remote function calls. The Remote Administration Protocol, as described in [MS-RAP](#Section_2.6.1), is such a protocol.
 
-| System version | Protocols implemented | Protocol subsets implemented |
-| --- | --- | --- |
-| MSMQ 1.0 | MQQB, MQBR, MQCN, MQQP, MQSD, MQMP, MQMR, MQDS | MQAC: Version 1.0 of the COM interfaces listed in [MC-MQAC](../MC-MQAC/MC-MQAC.md). MQDS: Sections 3.1 and 3.2 listed in [MS-MQDS](../MS-MQDS/MS-MQDS.md). |
-| MSMQ 2.0 | MQQB, MQBR, MQCN, MQQP, MQSD, MQMP, MQMR, MQDS | MQAC: Version 2.0 of the COM interfaces listed in [MC-MQAC]. |
-| MSMQ 3.0 | MQQB, MQBR, MQCN, MQQP, MQSD, MQMP, MQMR, SRMP | MQAC: Version 3.0 of the COM interfaces listed in [MC-MQAC]. MQRR: Sections 3.1.4.1 through 3.1.4.9 inclusive from [MS-MQRR](../MS-MQRR/MS-MQRR.md). MQMP: The client version<3> of MSMQ 3.0 provides only the client-side implementation. The server version<4>of MSMQ 3.0 provides client-side and server-side implementations. MQDS: Only the server side of MQDS is implemented to provide directory service to MSMQ 1.0 and 2.0 clients. |
-| MSMQ 4.0 | MQQB, MQBR, MQCN, MQQP, MQSD, MQMP, MQMR, SRMP, MQRR | MQAC: Version 4.0 of the COM interfaces listed in [MC-MQAC]. MQDS: Only the server side of MQDS is implemented to provide directory service to MSMQ 1.0 and 2.0 clients. |
-| MSMQ 5.0 | MQQB, MQBR, MQCN, MQQP, MQSD, MQMP, MQMR, SRMP, MQRR | MQAC: Version 4.0 of the COM interfaces listed in [MC-MQAC]. |
-| MSMQ 6.0 | MQQB, MQBR, MQCN, MQQP, MQSD, MQMP, MQMR, SRMP, MQRR | MQAC: Version 4.0 of the COM interfaces listed in [MC-MQAC]. |
+With the introduction of the Microsoft Windows NT 3.1 operating system, an RPC transport, as described in [MS-RPCE](../MS-RPCE/MS-RPCE.md), became available to implementers of the File Services Management system. Rather than continuing to extend the Remote Administration Protocol, the new Server Service Remote Protocol [MS-SRVS](../MS-SRVS/MS-SRVS.md) was defined. It replaces the use of the Remote Administration Protocol within the File Services Management system between clients and servers, which is based on the new platforms. Support for the Remote Administration Protocol was maintained however, for interoperability with pre-RPC platforms that include the Microsoft Windows 95 operating system.
 
-Any deviations from a specific version's implementation of these protocol specifications are documented in the respective protocol documents. Abstracts for these protocols appear in section [2.2](#Section_2.2).
+In the Windows 7 operating system, the Remote Administration Protocol is deprecated. It can only be used to enumerate file shares.
 
-Capability negotiations between client and server implementations of these protocols are described in the sections titled "Versioning and Capability Negotiation" in the respective protocol specifications.
+<a id="Section_2.6.2"></a>
+### 2.6.2 File Replication Service
+
+The File Replication Service (FRS), as described in [MS-FRS1](../MS-FRS1/MS-FRS1.md), is a technology that was originally introduced in the Microsoft Windows 2000 Server operating system to replicate Distributed File System (DFS) folders and the SYSVOL folder on domain controllers. Starting with the Windows Server 2003 R2 operating system, Microsoft began to phase out the use of FRS. In the Windows Server 2003 R2 operating system, the DFS Replication (DFS-R) Service replaced FRS for replication of DFS folders, although FRS was still used to replicate the SYSVOL folder on domain controllers and could be configured to run on other custom folders.
+
+In the Windows Server 2008 operating system, DFS Replication replaced FRS for replicating the SYSVOL folder in domains that use the Windows Server 2008 domain functional level. In Windows Server 2008 R2 operating system, FRS can be used only to replicate the SYSVOL folder on domain controllers in domains that use the Windows Server 2003 operating system or the Windows 2000 Server domain functional levels.
 
 <a id="Section_2.7"></a>
 ## 2.7 Error Handling
 
-This section describes the common failures encountered by a Message Queuing System and its behavior under such conditions.
-
 <a id="Section_2.7.1"></a>
-### 2.7.1 Queue Manager Restart
+### 2.7.1 Connection Disconnected
 
-The queue manager can undergo both controlled and uncontrolled shutdown, resulting from either a planned system downtime or an unexpected failure of a component in the underlying operating system that requires a system reboot. The queue manager is required to be resilient to such system stoppage, and when the system restarts, the queue manager is required to reinitialize itself, restore to the state immediately preceding the shutdown, and honor the delivery assurance of the application messages as described in section [2.1.2.1](#Section_2.1.2.1). Specifically, the following rules apply for different message types:
+A common failure scenario is an unexpected breakdown of the connection between the system and external entities. A disconnection can be caused when the network is not available or when one of the communicating participants has become unavailable. In the case where the network is not available, both participants remain active and expect the other party to continue the communication pattern of the protocol in use at the time of the failure. Similarly, in the case where one of the participants is not available, the active participant expects the communication to proceed as specified by the protocol in use.
 
-- A transactional message sent by an application to deliver to a remote queue is required to persist through system restart until it is successfully transferred, a permanent delivery failure is encountered, or the message times out.
-- A transactional message in a local queue hosted by the queue manager is required to persist through system restart until it is consumed by the receiving application or the message times out.
-- A recoverable message sent by an application to deliver to a remote queue is required to persist through system restart if the message was never sent to the destination queue manager prior to the shutdown. Such a message remains in the outgoing queue until the queue manager makes a successful delivery attempt to the remote queue manager, a permanent delivery failure is encountered, or the message times out.
-- A recoverable message in a local queue hosted by the queue manager is required to persist through system restart until it is consumed by the receiving application or the message times out.
-- An express message is discarded following a system restart.
+Generally, a protocol detects a breakdown connection through one of the following methods:
+
+- Use of a timer object that generates an event if the corresponding participant has not responded within a reasonable time span.
+- Notification by the underlying protocol that the connection is disconnected.
+When a connection disconnected event is detected, it causes the protocol to initiate a recovery that can include a breakdown of all related communications and update any necessary data structures to maintain the system state.
+
+Details about how each protocol detects a connection disconnected event and how it behaves under this scenario are provided in the specifications of the member protocols.
+
 <a id="Section_2.7.2"></a>
-### 2.7.2 Transient Network Failure
+### 2.7.2 Internal Failures
 
-A Message Queuing System is required to gracefully handle network outages and restore normal operations when the network comes back online according to the following rules:
-
-- The message transfer protocols such as Message Queuing (MSMQ): Binary Reliable Messaging Protocol (MQQB) and Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) (MQSRM) handle network failures as part of their protocol as described in the respective protocol documents. When the network becomes available, these protocols resume their normal message transfer activities without requiring any additional external intervention. All other dependent protocols, such as Message Queuing (MSMQ): Directory Service Change Notification Protocol (MQCN), are required to remain unaffected by such interim network outages.
-- The messaging activities that require synchronous communication with another queue manager or the directory are required to be unavailable during network outages. Examples of such activities include the functions invoked by the Remote Read and Management facet and the Directory facet of the queue manager, as described in section [2.1.6](#Section_2.1.6). During a network outage, a Message Queuing System is required to fail the client operations that require synchronous communication across the network. When the network becomes available, a Message Queuing System is required to resume these operations without requiring any additional external intervention.
-<a id="Section_2.7.3"></a>
-### 2.7.3 Transaction Coordinator Unavailable
-
-The external Transaction Coordinator subcomponent of the Microsoft Message Queuing (MSMQ) protocol set provides transactional message processing, as described in section [2.1.3.2](#Section_2.1.3.2). The Transaction Coordinator interacts with the resource manager facet of the queue manager to enable transacted send to a local outgoing queue and transacted receive from a local or remote queue, as described in section [2.1.6](#Section_2.1.6). Because the Transaction Coordinator is an external subcomponent, it is possible that it can be temporarily unavailable. The queue manager gracefully handles the unavailability of the Transaction Coordinator according to the following rules:
-
-- If the Transaction Coordinator is unavailable during a queue manager startup, the queue manager has to initialize itself and start up.
-- If the Transaction Coordinator becomes unavailable when the queue manager is in the Running state, the queue manager gracefully aborts and cleans up all pending transactions maintained by the queue manager. The queue manager fails any message send or receive operation on a transactional queue. The queue manager performs all other activities that do not involve the use of a Transaction Coordinator in an undisrupted manner, including message transfer to a remote transactional queue that does not require the Transaction Coordinator.
-- When the Transaction Coordinator becomes available, the queue manager resumes normal transacted receive and send operations, without requiring external intervention.
-<a id="Section_2.7.4"></a>
-### 2.7.4 Directory Unavailable
-
-A Message Queuing System uses a directory if it is operating in the Directory-Integrated mode. The directory can become temporarily unavailable to one of more queue managers in the entire Message Queuing System. The queue manager gracefully handles the unavailability of this subcomponent according to the following rules:
-
-- If the directory is unavailable during the queue manager startup, the queue manager sets the **DirectoryIntegrated** ADM attribute of the local **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1) ADM element instance to **False**, indicating that it is operating in Workgroup mode. The queue manager supports all functionality available in Workgroup mode, and the queue manager fails all functionality that requires access to a directory. When the directory becomes available, the queue manager is externally restarted to resume operations in Directory-Integrated mode.
-- If the directory becomes unavailable when the queue manager is running, the **DirectoryOffline** ADM attribute of the local **QueueManager** ADM element instance is set to **True** to indicate that the queue manager is running under a constrained mode with no access to the directory. The queue manager fails all operations invoked by the Directory facet of the queue manager. The queue manager supports all functionality that does not require directory access. When the directory becomes available, the queue manager resets the **DirectoryOffline** ADM attribute of the local **QueueManager** ADM element instance to **False** and resumes operations in Directory-Integrated mode.
-<a id="Section_2.7.5"></a>
-### 2.7.5 Internal Storage Failure
-
-The queue manage uses a local persistent store to persist its state and data in an implementation-specific manner that is independent of the protocol. The Microsoft Message Queuing (MSMQ) protocol set does not mandate any specific redundancy strategy, inconsistency-detection mechanism, or backup and restore requirement on the implementation of the persistent store. The following rules are generally applied in case of an internal storage failure:
-
-- If the storage system is unable to persist data due to exceeded capacity, the MSMQ protocol set fails the entire related operation and performs any necessary clean-up operation to restore coherency of the store.
-- If the queue manager detects inconsistent configuration data such as queue configuration, and the storage implementation is capable of completely repairing the inconsistency, the queue manager brings the store to a consistent state before proceeding with any other operation.
-- If the queue manager detects inconsistency in the storage and the specific storage implementation mechanism is unable to repair the inconsistency, the queue manager stops all operations and shuts down until the storage is restored to a consistent state by an external administrator. The MSMQ protocol set does not mandate any backup or restore mechanism for its state and data. If the persistent store cannot be restored to a consistent state, the queue manager has to be completely uninstalled and reinstalled on the particular machine, resulting in the permanent loss of configuration and data.
-<a id="Section_2.7.6"></a>
-### 2.7.6 Directory Inconsistency
-
-As described in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, certain abstract data model (ADM) attributes of the ADM elements of the MSMQ protocol set are persisted in the directory and shared across all queue managers of the entire deployment. Each queue manager maintains certain attributes in the directory under the Machine Directory Service object of the machine domain, as described in [MS-MQDS](../MS-MQDS/MS-MQDS.md) section 2.2.10.3, and in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) sections 2.2.1, 2.2.2, and 3.1.6.4.1. The queue manager on a particular machine verifies that the state maintained under the directory belongs to this queue manager. An inconsistency arises if the machine and the directory go out-of-sync due to a manual reinstallation of the queue manager, or malicious corruption. During startup for Message Queuing (MSMQ): Directory Service Protocol (MQDS), the queue manager verifies that the **Identifier** ADM attribute of the local **QueueManager** ([MS-MQDMPR] section 3.1.1.1) ADM element instance matches the PROPID_QM_MACHINE_ID [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.2.2) property value of the Machine Directory Service object (for MQDS) or the objectGUID attribute of the mSMQConfiguration object (for MQDSSM), if one exists. If the Directory object exists and there is a mismatch, the queue manager sets the **DirectoryOffline** ADM attribute of the local **QueueManager** ADM element instance to **True** and starts the Directory Online Timer ([MS-MQDMPR] section 3.1.2.5).
+The File Service Management system does not defend against internal failures of its state, other than those that are described in the specifications of the member protocols. The components that comprise the system mutually determine that each is authoritative at all times.
 
 <a id="Section_2.8"></a>
 ## 2.8 Coherency Requirements
 
-The queue manager uses a local persistent store to persist its state and data in an implementation-specific protocol-independent manner. The Microsoft Message Queuing (MSMQ) protocol set does not mandate any specific redundancy strategy, inconsistency-detection mechanism, or backup-restore requirement for the implementation of the persistent store. If the storage system is unable to persist data due to exceeded capacity, the MSMQ protocol set fails the entire related operation and performs any necessary clean-up operation to restore coherency of the store.
+Each File Services Management protocol provides its own coherency mechanisms. There are no coherence mechanisms among dissimilar protocols. Because coherency mechanisms among similar protocols are specified in the individual protocol documents, there are no system-level coherency requirements.
 
 <a id="Section_2.9"></a>
 ## 2.9 Security
 
-This section documents those system-wide security issues that are not otherwise described in the Technical Documents (TDs) for the member protocols. It does not duplicate what is already described in the member protocol TDs unless there is some unique aspect that applies to the MSMQ protocol set as a whole.
-
-<a id="Section_2.9.1"></a>
-### 2.9.1 Security Elements
-
-A Message Queuing System is composed of components that store data and communicate with other components. Both the storage of components and the communications between components is secured.
-
-The following figure shows an overview of the storage in the system and communications among internal and external components.
-
-![Component storage and communications](media/image17.png)
-
-Figure 17: Component storage and communications
-
-The communications between two queue managers (1: internal communication) and between a queue manager and an external entity (2, 3, 4: external communication) are shown in the preceding figure. The communications between external entities are handled by those entities and are not included in the figure.
-
-<a id="Section_2.9.2"></a>
-### 2.9.2 Security Strategy and Mechanisms
-
-To secure both data objects and communications, the system uses the following set of security mechanisms:
-
-- [**Security identifiers (SIDs)**](#gt_security-identifier-sid) that identify security principals, as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.
-- Authentication mechanisms, as described in [MS-AUTHSOD](#Section_2.1).
-- [**Access control lists (ACLs)**](#gt_access-control-list-acl), [**discretionary access control lists (DACLs)**](#gt_discretionary-access-control-list-dacl), and [**access control entries (ACEs)**](#gt_b581857f-39aa-4979-876b-daba67a40f15) to specify authorization policy on data objects as described in [MS-DTYP] sections 2.4.5 and 2.4.4.
-- Communication security mechanisms of authentication, message integrity, and message privacy to protect communications during component interactions.
-<a id="Section_2.9.3"></a>
-### 2.9.3 Storage Security
-
-Data objects are stored, and the storage is protected by the owning component. The system defines discretionary access control lists ([**DACLs**](#gt_discretionary-access-control-list-dacl)) on each data object so that unauthorized access is not allowed. For queue manager data objects, the owning queue manager authorizes the user that requests access to these objects. For Directory Service data objects, the application and the queue manager are responsible for defining [**ACLs**](#gt_access-control-list-acl), and the Directory Service is responsible for authenticating and authorizing the requester according to the defined ACLs.
-
-Adding a message object to a queue object is controlled by the queue manager according to the ACLs specified on the queue object. The message carries the sender identity, which is used by the queue manager to perform access checks. The queue manager authenticates the sender as described in section [2.9.4.1.4](#Section_2.9.4.1.4.1). Without the implementation of sender authentication, a malicious user can provide a fake user identity in a message and bypass the access control defined for the queue object.
-
-<a id="Section_2.9.4"></a>
-### 2.9.4 Communication Security
-
-Communications occur over transports that are listed in the table in section [2.9.4.1](#Section_2.9.4.1). The system relies on the use of transport security features to secure communication. When needed, it augments the security features to provide required communication security support.
-
-<a id="Section_2.9.4.1"></a>
-#### 2.9.4.1 Security Layer
-
-Data transmitted between two components can be protected at two layers: the transport layer and the message layer.
-
-<a id="Section_2.9.4.1.1"></a>
-##### 2.9.4.1.1 Transport Layer Security
-
-The transport layer security refers to the security features that are provided by a transport that the system uses. For example, the remote procedure call (RPC) and Lightweight Directory Access Protocol (LDAP) transports provide security support for authentication, message integrity, and message privacy. The Hypertext Transfer Protocol over Secure Sockets Layer (HTTPS) transport provides support for server authentication and message privacy.
-
-The following table summarizes the security features that are supported by each transport.
-
-**Transport security support**
-
-| Transport | Security features |
-| --- | --- |
-| TCP/IP | None |
-| IPX/SPX | None |
-| HTTP | None |
-| HTTPS | Authentication, message integrity, message privacy |
-| UDP | None |
-| PGM | None |
-| RPC | Authentication, message integrity, message privacy |
-| LDAP | Authentication, message integrity, message privacy |
-| DCOM | Authentication, message integrity, message privacy |
-
-When the authentication support of the RPC transport is used, the client and the server have to agree on the authentication service provider to communicate with each other.<5>
-
-As shown in the preceding table, not all transports provide security support for communications, in particular the Transmission Control Protocol/Internet Protocol (TCP/IP) or Internetwork Packet Exchange/Sequenced Packet Exchange (IPX/SPX) transport that is used by the Message Queuing (MSMQ): Binary Reliable Messaging Protocol (MQQB) to transfer messages. In this case, the system provides a set of security features in the message layer to meet security needs.
-
-<a id="Section_2.9.4.1.2"></a>
-##### 2.9.4.1.2 Message Layer Security
-
-Message layer security, which is independent of the underlying transport, refers to security features that are provided by the system on a per-message basis. It includes message integrity, sender authentication, and message privacy. Message integrity and sender authentication provide end-to-end protection of the message, ensuring that a message is sent by the original sender without being altered during transfer. Message privacy is provided for hop-to-hop transfer of a message. It ensures that the message content is not disclosed to unauthorized users during network transfer.
-
-The message layer security features are built on the public key infrastructure (PKI) model as specified in [[SP800-32]](https://go.microsoft.com/fwlink/?LinkId=90524) and in [[MSFT-PKI]](https://go.microsoft.com/fwlink/?LinkId=90202).
-
-<a id="Section_2.9.4.1.3"></a>
-##### 2.9.4.1.3 Security Model: PKI
-
-A public key infrastructure (PKI) is an arrangement that binds a public key certificate with a respective user identity through a trusted third party. The main elements in the PKI are:
-
-- Certification authority (CA): A trusted entity that issues certificates for use by other entities.
-- Certificate: An electronic document that includes a digital signature to bind a public key with an identity.
-- Public/private key: A pair of keys that are used in the asymmetric cryptographic algorithms. The public key is distributed in the certificate, which can be validated with the CA by other entities. The private key is typically stored on the certificate holder's local computer.
-In the system, applications hold user certificates, and each queue manager holds two pairs of cryptography keys (signing keys and encryption keys). The system uses a Directory Service, rather than a CA, as the trusted third party to distribute the public certificates and keys.
-
-User Certificates
-
-A user certificate is used to sign an application message to provide the message integrity feature of the message layer security, as described in section [2.9.4.1.4](#Section_2.9.4.1.4.1).
-
-User certificates are registered in the Directory Service to enable the sender authentication feature of the message layer security as described in section 2.9.4.1.4. The user certificates are stored in the corresponding user object in the directory and are maintained in the **CertificateDigestList** ADM attribute of the **User** ADM element ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.15) ADM element. The registration associates the certificate with the corresponding user identity. To facilitate certificate lookup, a hash of the certificate (digest) is computed and saved together with the certificate as the **CertificateDigestList** ADM attribute of the **User** ADM element ([MS-MQDMPR] section 3.1.1.15). A user object can have multiple certificates. For more details about the user object attributes, see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.2.1.2.1 and [MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.415. For more details about the user certificate and its digest, see [MS-MQDMPR] section 3.1.1.15 and [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) sections 3.1.1.4 and 3.1.6.20.6.
-
-If an application is sending messages to a destination where the Directory Service is unavailable, the application can instead provide a user certificate from a Certification Authority trusted by both the sender and receiver to be used for signing the application message. If such a certificate is used for signing, the queue manager hosting the destination queue will still verify message integrity as described in section [2.9.4.1.4.1](#Section_2.9.4.1.4.1) before storing the message, but cannot authenticate the sender as described in section [2.9.4.1.4.2](#Section_2.9.4.1.4.2). The user certificate remains attached to the message so that the receiving application can verify the owner of the certificate if required.
-
-The private key associated with a certificate is stored securely and has to be available to the sender.
-
-Service Cryptography Keys
-
-Each queue manager has two pairs of cryptography keys: one pair for signing system internal messages and one pair for encrypting messages. These keys are represented, respectively, by the **PublicSigningKeyList** and **PublicEncryptionKeyList** ADM attributes of the **QueueManager** ADM element ([MS-MQDMPR] section 3.1.1.1). The private keys are stored securely and have to be available to the queue manager. The public keys are published in the Directory Service under the Machine object for this queue manager. For more details about the queue manager cryptography keys, see [MS-MQDMPR] section 3.1.1.1 and [MS-MQDSSM] sections 2.2.1 and 3.1.6.20.1.
-
-<a id="Section_2.9.4.1.4"></a>
-##### 2.9.4.1.4 Message Layer Security Features
-
-Using the user certificates, service cryptography keys, and the Directory Service for public key distribution, the system provides three message layer security features: message integrity, sender authentication, and message privacy.
-
-<a id="Section_2.9.4.1.4.1"></a>
-###### 2.9.4.1.4.1 Message Integrity
-
-Message integrity is achieved through the following sequence:
-
-- The sending application signs the message in the following steps:
-- Computes a hash from a set of message properties.
-- Encrypts the hash with the private key associated with the sender's certificate to generate a signature.
-- Attaches the signature and the certificate to the message.
-- The queue manager hosting the destination queue verifies the message integrity as follows:
-- Extracts the signature and certificate from the message.
-- Decrypts the signature with the public key in the certificate to get the sender-generated hash.
-- Computes the hash from the same set of message properties.
-- Verifies the signature by comparing the sender-generated hash with the service-computed hash.
-The signature format is protocol-specific. See [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.6 for the binary protocol and [[RFC3275]](https://go.microsoft.com/fwlink/?LinkId=91146) for the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP).
-
-For more details about the hash algorithms, the message properties used for hashing, and the algorithm to encrypt and decrypt the hash, see [MS-MQMQ] section 2.2.20.6.
-
-<a id="Section_2.9.4.1.4.2"></a>
-###### 2.9.4.1.4.2 Sender Authentication
-
-When a message contains the signature, the user certificate, and user identity of the sender, the queue manager of the destination queue verifies the sender identity that is carried in the message as follows:
-
-- Verifies the message integrity as described previously in [Message Integrity (section 2.9.4.1.4.1)](#Section_2.9.4.1.4.1). This step ensures that the message was not altered during transmission.
-- Computes the digest as the hash of the attached certificate using the MD5 algorithm as defined in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275).
-- Finds the **User** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.15) ADM element instance in the Directory Service that satisfies the following conditions:
-- The **CertificateDigestList** ADM attribute of the **User** ADM element instance contains the computed digest.
-- The **Certificates** ADM attribute of the **User** ADM element instance contains the certificate.
-- If a matching **User** ADM element instance is found:
-- Extracts the sender identity from the message.
-- Compares the extracted identity with the **SecurityIdentifier** ADM attribute of the matching **User** ADM element instance.
-- Authenticates the sender if the identities match; otherwise, rejects the message.
-- Otherwise, if no matching **User** ADM element instance is found, marks the sender as unauthenticated.
-When the message does not contain the signature, the user certificate, or the user identity of the sender, the queue manager does not verify the sender identity.
-
-<a id="Section_2.9.4.1.4.3"></a>
-###### 2.9.4.1.4.3 Message Privacy
-
-Message privacy is achieved through the following sequence:
-
-- The sending queue manager does the following:
-- Retrieves the public key information (see [MS-MQDS](../MS-MQDS/MS-MQDS.md) section 2.2.10.3) of the receiving queue manager from the queue manager's machine object in the Directory Service.
-- Dynamically generates a symmetric key. The symmetric key generation uses the key length and provider information in the receiving queue manager's public key information (see [MS-MQDS] section 2.2.20) to ensure that the receiving queue manager can decrypt the message.
-- Encrypts the symmetric key with the receiving queue manager's public key.
-- Encrypts the message with the symmetric key.
-- Attaches the encrypted symmetric key to the message. The message format is specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.6.
-- The receiving queue manager does the following:
-- Extracts the encrypted symmetric key from the message.
-- Decrypts it with its own private key.
-- Decrypts the message with the decrypted symmetric key.
-For more details about the encryption algorithm and related message properties, see [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 3.1.7.1.5.
-
-<a id="Section_2.9.4.1.5"></a>
-##### 2.9.4.1.5 Message Layer Security Sequences
-
-The following figure shows the sequences of the three message layer security features.
-
-![Message layer security sequences](media/image18.png)
-
-Figure 18: Message layer security sequences
-
-<a id="Section_2.9.5"></a>
-### 2.9.5 Internal Security and External Security
-
-Internal and external security is another view of protecting the data and the communications in the system.
-
-Internal security is the means by which the system protects its own data and internal communications, and external security is the means by which the system protects external communications. For the system, application messages are external communications. Objects described in section [2.9.1](#Section_2.9.1)are internal data. For communications labeled in the figure captioned "Component storage and communications" in section 2.9.1, 1 is internal communication, and 2, 3, and 4 are external communications.
-
-The security mechanisms previously described are used to ensure both internal and external security.
+Versioning of security is handled by the underlying RPC transport. For more information, see Remote Procedure Call Protocol Extensions ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3).
 
 <a id="Section_2.10"></a>
 ## 2.10 Additional Considerations
 
-None.
+The following table specifies the RPC transport that is used by each member protocol.
+
+| Protocol name | RPC binding |
+| --- | --- |
+| File Replication Service Protocol [MS-FRS1](../MS-FRS1/MS-FRS1.md) | ncacn_ip_tcp |
+| Distributed File System Replication Protocol [MS-FRS2](../MS-FRS2/MS-FRS2.md) | ncacn_ip_tcp |
+| Distributed File System (DFS): Namespace Management Protocol [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md) | ncacn_np |
+| Workstation Service Remote Protocol [MS-WKST](../MS-WKST/MS-WKST.md) | ncacn_np |
+| Server Service Remote Protocol [MS-SRVS](../MS-SRVS/MS-SRVS.md) | ncacn_np |
+| DFS Replication Helper Protocol [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) | ncacn_ip_tcp |
+| File Server Resource Manager Protocol [MS-FSRM](../MS-FSRM/MS-FSRM.md) | ncacn_ip_tcp |
+
+For more details on RPC binding, see [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.1.
 
 <a id="Section_3"></a>
 # 3 Examples
 
-The examples presented in the following subsections depend on these common prerequisites.
-
-- On each participating machine, a Message Queuing System is installed, and a queue manager is initialized as required by the example scenario.
-- The storage devices configured for the system are available to the system and have enough space to store the system state and data.
-- The transport protocols used by the Message Queuing Systems on the participating machines are available and fully initialized.
-- If transactions are used, a Transaction Coordinator is available and fully initialized.
-- Security package providers are available to the system.
-- The queue manager(s) possess valid security credentials suitable for authentication.
-- At least one domain controller exists for the domain.
-- Each machine is joined to the domain.
-- A Directory Service is initialized and available. If the Message Queuing System uses version 1.0 or 2.0 of the MSMQ protocol set, the MSMQ Directory Service server is initialized and available on a domain controller.
-- The necessary Directory Service objects exist and are configured correctly, as specified in [MS-MQDS](../MS-MQDS/MS-MQDS.md) for MSMQ versions 1.0 and 2.0 and in [MS-MQDSSM] for MSMQ versions 3.0 and 4.0.
 <a id="Section_3.1"></a>
-## 3.1 Example 1: Disconnected Data Entry
+## 3.1 Example 1: Creating an SMB Share
 
-This example demonstrates disconnected data entry as described in the [Send Message in Transaction - Application (section 2.5.4)](#Section_2.5.4) and [Receive Message in Transaction – Application (section 2.5.7)](#Section_2.5.7) use cases.
+This example demonstrates the use cases that are described in section [2.5.1.1](#Section_2.5.1.1).
+
+The sequence in this example describes how the application creates an SMB share at a given path in the object store of a given server.
 
 **Prerequisites**
 
-- See the common prerequisites defined in section [3](#Section_3) .
-- The queue exists.
-- The application is authorized to send [**messages**](#gt_message) to the queue.
-- If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
-- The Transaction Coordinator is accessible to the application and the queue manager in order to coordinate the transaction execution.
-- The receiving application is authorized to receive messages from the queue.
-- The order entry application and the salesperson laptop Queue Manager are deployed on the same machine.
-- The order processing application and the central office server Queue Manager are deployed on the same machine.
+- The participating client and server computers are configured to belong to the same Active Directory domain.
+- The admin tool has acquired an RPC calling context by using the procedure, as described in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 2.1.
+- The specific path that is to be provisioned for remote access must exist in the local object store of the file server.
 **Initial System State**
 
-One queue, the order queue, is configured on the central office server computer, and the [**network address**](#gt_network-address) of the central office server computer is provided to the Order Entry application.
+A share with the specified share name does not exist on the server computer.
 
 **Final System State**
 
-The final state of the Message Queuing System in this example is the same as the initial state.
+A share with the specified share name is created on the server computer.
 
-**Sequence of Events**
+The following sequence diagram shows the creation of a share on the SMB server by the admin tool.
 
-The following figure shows the sequence of events for this example.
+![Sequence diagram for creating an SMB share](media/image11.png)
 
-![Example of disconnected data entry](media/image19.png)
+Figure 11: Sequence diagram for creating an SMB share
 
-Figure 19: Example of disconnected data entry
+Sequence of Events
 
-- The order entry application creates a new unique transactional [**unit of work**](#gt_unit-of-work) identifier **XACTUOW** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) structure and invokes the ([MS-MQMP](../MS-MQMP/MS-MQMP.md) section 3.1.4.14) method to create an internal transaction handle for the **XACTUOW** structure.
-- The order entry application sends message 1 to the salesperson laptop Queue Manager by invoking the **rpc_ACSendMessageEx** ([MS-MQMP] section 3.1.5.2) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 1.
-- The order entry application commits the transaction by invoking the **R_QMCommitTransaction** ([MS-MQMP] section 3.1.4.15) method, specifying the internal transaction handle obtained at step 1.
-- The salesperson laptop Queue Manager stores message 1 in its outgoing queue.
-- The salesperson laptop Queue Manager sends an **EstablishConnection Packet** [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 2.2.3) and a **ConnectionParameters Packet** ([MS-MQQB] section 2.2.2) to initialize a session with the central office server Queue Manager and sends message 1 stored in the outgoing queue to the central office server Queue Manager.
-- The central office server Queue Manager stores message 1 in its order queue.
-- The central office server Queue Manager sends a **SessionAck Packet** ([MS-MQQB] section 2.2.6) and an **OrderAck Packet** ([MS-MQQB] section 2.2.4) to the salesperson laptop Queue Manager to acknowledge that it has received message 1, as specified in [MS-MQQB] section 3.1.1.7.3.
-- The order processing application creates a new unique transactional unit of work identifier **XACTUOW** structure and invokes the **R_QMEnlistInternalTransaction** method to create an internal transaction handle for the **XACTUOW** structure.
-- The order processing application receives message 1 from the central office server Queue Manager by invoking the **rpc_ACReceiveMessageEx** ([MS-MQMP] section 3.1.5.3) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 8.
-- The order processing application commits the transaction by invoking the **R_QMCommitTransaction** method, specifying the internal transaction handle obtained at step 8.
-- The central office server Queue Manager deletes message 1 from its queue manager.
-- The central office server Queue Manager sends a **FinalAck Packet** ([MS-MQQB] section 2.2.5) to the salesperson laptop Queue Manager as an end-to-end acknowledgment.
-- The order entry application creates a new unique transactional unit of work identifier **XACTUOW** structure and invokes the **R_QMEnlistInternalTransaction** method to create an internal transaction handle for the **XACTUOW** structure.
-- The order entry application sends message 2 to the salesperson laptop Queue Manager by invoking the **rpc_ACSendMessageEx** method, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 13.
-- The order entry application commits the transaction by invoking the **R_QMCommitTransaction** method, specifying the internal transaction handle obtained at step 14.
-- The salesperson laptop Queue Manager stores message 2 in its outgoing queue.
-- The salesperson laptop Queue Manager attempts to initialize a session with the central office server Queue Manager by sending an **EstablishConnection Packet** and a **ConnectionParameters Packet** and attempts to send message 2 stored in the outgoing queue to the central office server Queue Manager.
-- The transfer of message 2 fails due to network related issues, and no protocol acknowledgment is received by the salesperson laptop Queue Manager.
-- The salesperson laptop Queue Manager again attempts to initialize a session with the central office server Queue Manager by sending an **EstablishConnection Packet** and a **ConnectionParameters Packet** and attempts to send message 2 stored in the outgoing queue to the central office server Queue Manager.
-- The transfer of message 2 fails again due to network-related issues, and no protocol acknowledgment is received by the salesperson laptop Queue Manager.
-- The salesperson laptop Queue Manager deletes message 2 from its queue manager and places it in the dead-letter queue.
-- The order entry application queries the dead-letter queue of the salesperson laptop Queue Manager and receives message 2 from the salesperson laptop Queue Manager, as described in steps 8 through 10.
+- The admin client calls the **NetrShareGetInfo** method ([MS-SRVS] section 3.1.4.10). It specifies the share name and server name to check if a share with the given name exists.
+- The SMB File Service returns the **NERR_NetNameNotFound** error code to indicate that the share with the given name does not exist.
+- The admin client invokes the **NetprNameValidate** method ([MS-SRVS] section 3.1.4.32) to check the share name.
+- The SMB File Service returns a success code.
+- The admin client calls the **NetrShareAdd** method ([MS-SRVS] section 3.1.4.7). It specifies the share name, local object store path, and various options that are provided by the caller.
+- The SMB File Service returns a success code.
+- The admin client calls the **NetrShareSetInfo** method ([MS-SRVS] section 3.1.4.11). It specifies the share name and the access permissions.
+- The SMB File Service returns a success code.
 <a id="Section_3.2"></a>
-## 3.2 Example 2: Web Order Entry
+## 3.2 Example 2: Deleting an SMB Share
 
-This example demonstrates web order entry as described in the Send Message in Transaction - Application (section [2.5.4](#Section_2.5.4)) and Receive Message in Transaction – Application (section [2.5.7](#Section_2.5.7)) use cases.
+This example demonstrates the use cases described in section [2.5.1.4](#Section_2.5.1.4).
+
+The sequence in this example describes how the application deletes an SMB share from a given server.
 
 **Prerequisites**
 
-- See the common prerequisites defined in section [3](#Section_3).
-- The queue exists.
-- The application is authorized to send messages to the queue.
-- If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
-- The Transaction Coordinator is accessible to the application and the queue manager in order to coordinate the transaction execution.
-- The receiving application is authorized to receive messages from the queue.
-- The web server application and the web server Queue Manager are deployed on the same machine.
-- The back-end application and the back-end Queue Manager are deployed on the same machine.
+- The admin tool has acquired an RPC calling context.
 **Initial System State**
 
-To execute this example, the queue managers on the web servers, intermediary server, and back-end server are operating in the queue server roles.
-
-The queue manager on the intermediary server is initialized to contain a transactional queue. The queue manager on each web server dynamically creates an outgoing queue if there are recoverable messages pending transfer to the transactional queue. There is no requirement to create queues on the other queue managers.
+None.
 
 **Final System State**
 
-The final states for the queue managers are equal to their initial states. The intermediary server Queue Manager contains a transactional queue, and the queue is in a ready state.
+The specified share is removed from the list of shares that are available from that server.
+
+The following sequence diagram shows the steps to delete an SMB share.
+
+![Sequence diagram for deleting an SMB share](media/image12.png)
+
+Figure 12: Sequence diagram for deleting an SMB share
 
 **Sequence of Events**
 
-The sequence of events for web order entry is shown in the following figure.
+- The admin client calls the **NetrShareGetInfo** method ([MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.4.10). It specifies the share name and server name to check if the share exists.
+- The SMB File Service returns ERROR_SUCCESS to confirm that the share exists.
+- The admin client calls the **NetrConnectionEnum** method ([MS-SRVS] section 3.1.4.1) to check if the share is currently accessed.
+- The SMB File Service returns a success code with **TotalEntries** as 0 to indicate that the share is not currently accessed.
+- The admin client calls the **NetrShareDel** method ([MS-SRVS] section 3.1.4.12) after checking that the share is not in use.
+- The SMB File Service removes the share name from the share list and returns a success code to the admin client.
+In Windows-based implementations, the Shared Folders snap-in is used as the admin tool to centrally manage file shares on a computer. The Shared Folders snap-in calls the **NetrShareEnum** method ([MS-SRVS] section 3.1.4.8) to enumerate the share entries in the **ShareList**.
 
-![Sequence diagram for Example 2](media/image20.png)
-
-Figure 20: Sequence diagram for Example 2
-
-- The web client transmits the customer order to the web server application using the Transmission Control Protocol/Internet Protocol (TCP/IP) and Hypertext Transfer Protocol (HTTP) protocols, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372).
-- The order is transformed into an MSMQ message by the web server application.
-- The web server application sends the MSMQ message to the web server Queue Manager, which stores the MSMQ message in its outgoing queue as described in steps 1 through 4 of Example 1: Disconnected Data Entry (section [3.1)](#Section_14c0643d4d6c44cea9579b74d8b6916d).
-- An order completion page is sent to the web client by the web server application.
-- The web server Queue Manager sends an MSMQ [**transactional message**](#gt_transactional-message) to the intermediary server Queue Manager as described in steps 5 through 7 of Example 1: Disconnected Data Entry (section 3.1).
-- The back-end application creates a new unique transactional unit of work identifier **XACTUOW** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8 structure and invokes the **R_QMEnlistInternalTransaction** ([MS-MQMP](../MS-MQMP/MS-MQMP.md) section 3.1.4.14) method to create an internal transaction handle for the **XACTUOW** structure.
-- The back-end application receives the MSMQ message from the back-end Queue Manager by invoking the **rpc_ACReceiveMessageEx** ([MS-MQMP] section 3.1.5.3) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 6.
-- The back-end Queue Manager invokes the **R_OpenQueue** ([MS-MQRR](../MS-MQRR/MS-MQRR.md) section 3.1.4.2) method, which returns a **QUEUE_CONTEXT_HANDLE_SERIALIZE** ([MS-MQRR] section 2.2.4.2) handle; next, it invokes the **R_QMEnlistRemoteTransaction** ([MS-MQRR] section 3.1.4.12) method to propagate the distributed [**atomic transaction**](#gt_atomic-transaction) context to the intermediary server Queue Manager. The back-end Queue Manager utilizes the **QUEUE_CONTEXT_HANDLE_SERIALIZE** identifier and invokes the **R_StartTransactionalReceive** ([MS-MQRR] section 3.1.4.13) method and the **R_EndTransactionalReceive** ([MS-MQRR] section 3.1.4.15) method to receive the message from the opened queue of the intermediary server Queue Manager. Then the back-end Queue Manager invokes the **R_CloseQueue** ([MS-MQRR] section 3.1.4.3) method to close the **QUEUE_CONTEXT_HANDLE_SERIALIZE** handle.<6>
-- The back-end application processes the received MSMQ message.
-- The back-end application commits the transaction by invoking the **R_QMCommitTransaction** ([MS-MQMP] section 3.1.4.15) method, specifying the internal transaction handle obtained at step 6.
-- The Distributed Transaction commits the MSMQ message as described in step 10 of Example 1: Disconnected Data Entry (section 3.1).
-- The intermediary server Queue Manager removes the MSMQ message from its order queue as described in steps 12 and 13 of Example 1: Disconnected Data Entry (section 3.1).
-- The back-end application sends an order completion email to the web client.
 <a id="Section_3.3"></a>
-## 3.3 Example 3: Modify a Public Queue
+## 3.3 Example 3: Creating and Managing a DFS Domain Namespace
 
-This example demonstrates modifying a public queue as described in the [Create or Modify Queue - Application (section 2.5.1)](#Section_2.5.1) use case.
+This example demonstrates the use cases described in section [2.5.2.2](#Section_2.5.2.2), section [2.5.2.3](#Section_2.5.2.3), and section [2.5.2.4](#Section_2.5.2.4).
 
 **Prerequisites**
 
-- See the common prerequisites that are described in section [3](#Section_3).
-- The application has access to the machine on which a queue is to be created or modified.
-- The application has the necessary administrative rights to execute the operation.
+- The participating client and server computers are configured to belong to the same Active Directory domain.
+- A share is created on the file server.
+- Clients and Distributed File System (DFS) servers have access to the Active Directory system that is provided by the domain.
+- The application has acquired a remote procedure call (RPC) calling context for DFS Service by using the procedure as described in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md) section 2.1.
+- The application has acquired an RPC calling context for File Replication Service (FRS) Service by using the procedure as described in [MS-DFSRH](../MS-DFSRH/MS-DFSRH.md) section 2.1.
 **Initial System State**
 
-To execute this example, the remote machine has already created a public queue with a corresponding Directory Service object representing this public queue.
-
-The client application is initialized with the unique identifier of the public queue object on the Directory Service.
+None.
 
 **Final System State**
 
-In the final state of the Message Queuing System, both the Directory Service object representing the public queue on the Server Queue Manager and the public queue state on the Server Queue Manager have been updated with the new properties. The public queue in the Server Queue Manager is in a ready state.
+The specified local path on the file server functions as a DFS namespace with a single link.
 
-**Sequence of Events**
+This example is divided into three tasks:
 
-The following figure shows the sequence of events for modifying a public queue.
+- Creating a DFS domain namespace
+- Creating a DFS link
+- Creating a replication group
+The following sequence diagram shows the steps to create and manage a DFS domain namespace.
 
-![Sequence diagram modifying a public queue](media/image21.png)
+![Sequence diagram for creating and managing a namespace](media/image13.png)
 
-Figure 21: Sequence diagram modifying a public queue
+Figure 13: Sequence diagram for creating and managing a namespace
 
-- The Admin Application calls the **R_QMSetObjectProperties** ([MS-MQMP](../MS-MQMP/MS-MQMP.md) section 3.1.4.10) method to update the properties of a local private queue.
-- The client Queue Manager generates the Update Directory Object [MS-MQDS](../MS-MQDS/MS-MQDS.md) section 3.1.6.4) event to update the public queue object on the directory server with the modified properties.
-- 3. The Directory Service updates the public queue object with the modified properties sent in step 2.
-- The client Queue Manager creates a Change Notification Message ([MS-MQCN](../MS-MQCN/MS-MQCN.md) section 2.2.4), which includes a Notification Body ([MS-MQCN] section 2.2.5). The notification message is sent to the server Queue Manager.
-- The server Queue Manager requests the updated data using the Lightweight Directory Access Protocol (LDAP), as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md).
-- The Directory Server creates a Change Notification Message containing one or more Notification Updates ([MS-MQCN] section 2.2.6) and sends the update to the server Queue Manager.
-- The server Queue Manager updates its local queue with the data received in step 6.
+- **CreateNamespace:** The administrator requests that the admin tool creates a DFS namespace on the previously configured SMB share. The admin tool specifies the server, the share name, and various other options that are specific to the creation of the namespace.
+- **Create DFS Namespace:** The admin tool makes use of the admin client to create a DFS namespace. The sequence of steps is described in Task 1: Creating a DFS domain namespace.
+- **CreateLink:** The administrator requests that the admin tool create a DFS link in the DFS namespace. The admin tool specifies the server and share name of the namespace, the path at which the link is created, the target of the link, and various other options that are specific to creating the link.
+- **Create DFS Link:** The admin tool makes use of the admin client to create a DFS link. The sequence of steps is described in Task 2: Creating a DFS Link.
+- **CreateReplicationGroup (Optional):** The administrator requests that the admin tool creates an FRS replica group. It specifies the domain controller and the group members.
+- **Create DFS-R Replication group (Optional):** The admin tool makes use of the admin client to create a replication group. The sequence of steps is described in Task 3: Creating a Replication Group (Optional).
+Note: The admin tool uses the **NetrDfsEnum** method ([MS-DFSNM] section 3.1.4.1.7), or the **NetrDfsEnumEx** method ([MS-DFSNM] section 3.1.4.2.3) to enumerate the DFS root that is hosted on a server or the DFS links of the namespace that are hosted by a server. The admin tool calls the **NetrDfsManagerGetVersion** method ([MS-DFSNM] section 3.1.4.1.2) to determine the enumeration method to use. The admin tool calls these enumeration methods multiple times to refresh its list.
+
+**Task 1: Creating a DFS Domain Namespace**
+
+The following example describes the steps that are used to create a DFS domain namespace. The DFS service that is used in this example resides on the root target server.
+
+The following sequence diagram shows the steps to create a DFS domain namespace.
+
+![Sequence diagram for creating a DFS domain namespace](media/image14.png)
+
+Figure 14: Sequence diagram for creating a DFS domain namespace
+
+- The admin client calls the **NetrDfsAddRootTarget** method ([MS-DFSNM] section 3.1.4.1.9). The admin client specifies the server, the share to host the namespace, and various options that are provided by the administrator.<1>
+- The DFS Service creates a new DFS namespace Lightweight Directory Access Protocol (LDAP) entry with the DFS namespace anchor LDAP entry as its parent. The server also creates the DFS metadata that is required for the new DFS namespace and updates the DFS metadata in the object that corresponds to the DFS namespace. This update appears as an LDAP Add operation to the domain controller.
+- The DFS metadata write operation is successful, and the domain controller returns LDAP_SUCCESS to indicate success.
+- The DFS Service completes the **NetrDfsAddRootTarget** method and returns a success code to the admin client.
+**Task 2: Creating a DFS Link**
+
+The following example describes the steps that are used to add a new DFS link to an existing domainv2-based DFS namespace with one root target. The DFS service that is used in this example resides on the root target server.
+
+The following sequence diagram shows the steps to add a DFS link.
+
+![Sequence diagram for adding a DFS link](media/image15.png)
+
+Figure 15: Sequence diagram for adding a DFS link
+
+- The admin tool requests the admin client to create the given DFS link in the DFS namespace, which is hosted by the server that is identified in the RPC calling context. The admin client calls the **NetrDfsAdd** method ([MS-DFSNM] section 3.1.4.1.3) that specifies the link path, target, and other options.
+- The DFS service verifies the existence of the namespace name and the link ([MS-DFSNM] section 3.1.4.1.3).
+- The DFS service issues an LDAP Add request to the domain controller with the updated DFS metadata that contains the new DFS link information for a domainv2-based DFS namespace ([MS-DFSNM] section 3.1.4.1.3).
+- The LDAP Add operation is successful and the LDAP server returns an LDAP_SUCCESS message to the DFS service.
+- The **NetrDfsAdd** method that is invoked by the admin client finishes successfully. The DFS service returns a success code to the admin client.
+**Task 3: Creating a Replication Group (Optional)**
+
+The following example describes the steps to create a replication group on a domain controller.
+
+The following sequence diagram shows the steps to create a replication group.
+
+![Sequence diagram for creating a replication group](media/image16.png)
+
+Figure 16: Sequence diagram for creating a replication group
+
+- The admin client calls the **CreateObject** method of the DFS-R Service that passes the domain controller name and the replica members by using the **IADProxy::CreateObject** method<2>, as described in [MS-DFSRH] section 3.1.5.2.1, or by using the **IADProxy2::CreateObject** method ([MS-DFSRH] section 3.1.5.3.1).
+- The DFS-R Service uses LDAP messages to create the replication object on the domain controller ([MS-DFSRH] section 3.1.5.2.1).
+- After getting the success response from the domain controller, the DFS-R Service sends a success code to the admin client.
 <a id="Section_3.4"></a>
-## 3.4 Example 4: Creating and Monitoring a Remote Private Queue
+## 3.4 Example 4: Creating an FSRM File Screen
 
-This example demonstrates creating and monitoring a remote private queue as described in the [Create or Modify Queue - Application (section 2.5.1)](#Section_2.5.1) and [Query Queue Information- Application (section 2.5.2)](#Section_2.5.2) use cases.
+This example demonstrates the use cases described in section [2.5.4.3](#Section_2.5.4.3).
+
+This example describes the creation of a File Server Resource Manager (FSRM) file screen at a given path in the object store of a given server by the admin tool.
 
 **Prerequisites**
 
-- The common prerequisites defined in section [3](#Section_3).
-- The application has access to the machine on which a queue is to be created or modified.
-- The application has the necessary administrative rights to execute the operation.
-- The application administrator completes the application-specific configuration of the Message Queuing System, such as creating the necessary queues.
-- The application has access to the machine and queue.
-- The application has the necessary administrative rights to execute the query.
+- The admin tool has acquired an RPC calling context that provides the FSRM server ([MS-FSRM](../MS-FSRM/MS-FSRM.md) section 2.1).
 **Initial System State**
 
-To execute this example, the queue manager on the remote machine is operating in the queue server role.
+The participating client and server computers are configured to belong to the same Active Directory domain.
 
-The administrator application and the business applications are configured with the remote machine's address and the private queue's address on the remote queue manager.
+The following sequence diagram shows the steps to create an FSRM file screen.
 
-**Final System State**
+![Sequence diagram for creating an FSRM file screen](media/image17.png)
 
-The final state of the remote queue manager has a new private queue, and the queue is in a Ready state. The query to retrieve the number of messages from the remote queue manager's private queue does not alter the state in any way.
+Figure 17: Sequence diagram for creating an FSRM file screen
 
 **Sequence of Events**
 
-The following figure shows the sequence of events for creating and monitoring a remote private queue.
+- The admin tool requests that the admin client creates the given file screen by specifying the RPC calling context, the server, the local object store path, and the file group. The admin client queries the server to determine if there is an existing file screen that is specified on the object store path. To do this, it calls the **IFsrmFileScreenManager::GetFileScreen** method ([MS-FSRM] section 3.2.4.2.29.4). The server does not return any **IFsrmFileScreen** object ([MS-FSRM] section 3.2.4.2.27).
+- The admin client creates an empty **IFsrmFileScreen** object by using the **IFsrmFileScreenManager::CreateFileScreen** method ([MS-FSRM] section 3.2.4.2.29.3). The FSRM Service returns the reference to a newly created **IFsrmFileScreen** object.
+- The admin client acquires an **IFsrmCommittableCollection** object, which contains a pointer to every file group on the server, by using the **IFsrmFileGroupManager::EnumFileGroups** method ([MS-FSRM], section 3.2.4.2.25.3). The FSRM Service returns the **IFsrmCommittableCollection** object and a status code.
+- The admin client enumerates the names of each of the file groups that are returned in the step 3, by using the **IFsrmFileGroup::Name(get)** method ([MS-FSRM], section 3.2.4.2.23.2). The server returns the name of the file group.
+- The admin client acquires the **IFsrmMutableCollection** object from the file screen, to which it adds the caller-specified file group, by using the **IFsrmFileScreenBase::BlockedFileGroups(get)** method ([MS-FSRM] section 3.2.4.2.26.1). The FSRM Service returns the **IFsrmMutableCollection** object and a status code.
+- The admin client, by using the acquired collection object, adds the requested file group to the collection by using the **IFsrmMutableCollection::Add** method ([MS-FSRM] section 3.2.4.2.2.1). The FSRM Service returns a success code.
+- The admin client places the modified collection object in the file screen, by using the **IFsrmFileScreenBase::BlockedFileGroups(put)** method ([MS-FSRM] section 3.2.4.2.26.2). The FSRM Service returns a success code.
+- To complete the operation, the admin client instructs the server to commit the modifications to the file screen by using the **IFsrmFileScreen::Commit** method ([MS-FSRM] section 3.2.4.2.27.1). The FSRM Service returns a success code.
+**Final System State**
 
-![Sequence diagram of events to create or modify a remote private queue](media/image22.png)
+The FSRM Service successfully executes the requested operations, and the specified file screen policy is created on the server.
 
-Figure 22: Sequence diagram of events to create or modify a remote private queue
-
-- The Admin Application requests the creation of an **MSMQQueueInfo** ([MC-MQAC](../MC-MQAC/MC-MQAC.md) section 3.10.3) class instance to create an application queue.
-- A new **MSMQQueueInfo** class instance is created and returned to the Admin Application.
-- The Admin Application sets the path name indicating the queue to be referenced by the **MSMQMessageInfo** class instance by invoking the **PathName** ([MC-MQAC] section 3.10.4.1.7) method of the **IMSMQQueueInfo4** interface. Next, the Admin Application calls the **Create** ([MC-MQAC]section 3.10.4.1.26) method of the **IMSMQQueueInfo4** interface to create a new public or private application queue.
-- S_OK (0x00000000) is returned to the Admin Application on success.
-- Once the private queue is created on the Remote Queue Manager machine, other business applications running on various application machines send messages to and receive messages from the private queue, using the local queue managers on the respective machines, depending on the functionality of the business applications. Although these activities involve the MSMQ protocols, the specifics of these activities and the related protocols are not relevant for the purpose of this example.
-- The Admin Application requests information about the remote queue by invoking the **R_QMMgmtGetInfo** ([MS-MQMR](../MS-MQMR/MS-MQMR.md) section 3.1.4.1) method of the **qmmgmt** interface, providing an *aProp[]* parameter array with a single entry set to PROPID_MGMT_QUEUE_MESSAGE_COUNT ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.12.7).
-- This method returns success (MQ_OK (0x00000000)) and an *apVar[]* output parameter array with a single entry containing a PROPID_MGMT_QUEUE_MESSAGE_COUNT ([MS-MQMQ] section 2.3.12.7) property value with the number of messages in the remote queue.
 <a id="Section_3.5"></a>
-## 3.5 Example 5: Branch Office Order Processing
+## 3.5 Example 5: Creating an FSRM Quota
 
-This example demonstrates branch office order processing as described in the [Send Message to Queue – Application (section 2.5.3)](#Section_2.5.3) use case.
+This example demonstrates the use cases described in section [2.5.4.3](#Section_2.5.4.3).
+
+This example describes the creation of a File Server Resource Manager (FSRM) quota at a given path in the object store of a given server by the admin tool.
+
+**Initial System State**
+
+None.
 
 **Prerequisites**
 
-- See the common prerequisites defined in section [3](#Section_3).
-- The [**queue**](#gt_queue) exists.
-- The application is authorized to send [**messages**](#gt_message) to the queue.
-- If a [**Directory Service**](#gt_directory-service-ds) is not being used, the application is configured with the address of the queue prior to the send operation.
-**Initial System State**
-
-At least one Message Queuing System in each [**MSMQ site**](#gt_msmq-site) is designated as an [**MSMQ site gate**](#gt_msmq-site-gate), as specified in [MS-MQBR](../MS-MQBR/MS-MQBR.md). The [**In-Routing Servers**](#gt_in-routing-server) and [**Out-Routing Servers**](#gt_out-routing-server) are configured on all the MSMQ site gates. The Directory Service contains sufficient information to build a routing table, including:
-
-- The available machines in the enterprise.
-- The [**connected networks**](#gt_connected-network) for each of the machines.
-- The MSMQ sites in the enterprise.
-- All available [**routing links**](#gt_msmq-routing-link) and the associated costs for each link.
-The directory server has the [**public keys**](#gt_public-key) of all the machines in the enterprise. On startup, the [**queue manager**](#gt_queue-manager-qm) servers on the MSMQ site gates compute the routing tables containing the most optimal routes.
-
-One queue is configured in the company headquarters (HQ) server to receive sales data.
-
+- The participating client and server computers are configured to belong to the same Active Directory domain.
+- The admin tool has acquired an RPC calling context that provides the FSRM server ([MS-FSRM](../MS-FSRM/MS-FSRM.md) section 2.1).
 **Final System State**
 
-The final state of the Message Queuing System in the company HQ contains the sales data sent from the branch office server. The final states for all other Message Queuing Systems in this example are the same as their initial states.
+The FSRM Service successfully executes the requested operations, and the specified file quota policy is created on the server.
 
-**Sequence of Events**
+The following sequence diagram shows the steps to create an FSRM quota.
 
-The following figure shows the sequence of events for branch office order processing.
+![Sequence diagram for creating an FSRM quota](media/image18.png)
 
-![Sequence diagram for Example 5](media/image23.png)
+Figure 18: Sequence diagram for creating an FSRM quota
 
-Figure 23: Sequence diagram for Example 5
+Sequence of Events
 
-- To get the routing data, the branch office server calls the **S_DSGetProps** ([MS-MQDS](../MS-MQDS/MS-MQDS.md) section 3.1.4.7) method, providing a *dwObjectType* input parameter value of MQDS_ROUTINGLINK ([MS-MQDS] section 2.2.8), a *pwcsPathName* input parameter value of NULL or a null-terminated 16-bit [**Unicode string**](#gt_unicode-string), and an *aProp[]* input parameter array containing a single entry value of PROPID_L_ID (see [MS-MQDS] sections 2.2.9, 2.2.10.1, and 2.2.10.8). On success, the **S_DSGetProps** method returns an *apVar[]* output parameter array populated with [**routing link**](#gt_routing-link) properties ([MS-MQDS] section 3.1.4.21.8.1.9) and a return code of MQ_OK (0x00000000).
-- The branch office server initializes its **RoutingTable** ([MS-MQBR] sections 3.1.1.2 and 3.1.3.1) ADM element and computes a collection of **RoutingLink** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.8) ADM element instances by invoking the **GetDirectoryData** ([MS-MQBR] section 3.1.5.9) method, providing a *DataElementType* parameter set to the string "RoutingLink" and an empty *FilterArray* parameter.
-In case an MSMQ site is not reachable, the GetNextHopsForSiteGate ([MS-MQBR] section 3.1.5.3) event is invoked to get a list of alternate next hops from which the least-cost alternate route to the ultimate destination is constructed using Dijkstra's algorithm.
-
-- The regional HQ1 server follows step 1 to request routing data.
-- The regional HQ1 server follows step 2 to compute the routing table.
-- The regional HQ2 server follows step 1 to request routing data.
-- The regional HQ2 server follows step 2 to compute the routing table.
-- As specified in [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 3.1.7.1.5, the branch office server encrypts the message by requesting the public key of the company HQ server from the Directory Service. Next, the branch bffice server generates the Create Directory Object ([MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) section 3.1.6.1) event, providing an *iAttributeList* argument value set to **mSMQEncryptKey**, as specified in [MS-MQDSSM] section 3.1.6.1.1.2, to get an **MQDSPUBLICKEYS** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.2) structure.
-- Using the key length and provider information in the company HQ server's public key information to ensure that the company HQ server can decrypt the message, the branch office server dynamically generates a [**symmetric key**](#gt_symmetric-key). Next, the branch office server server encrypts the symmetric key with the company HQ server's public key obtained in step 7, encrypts the message with the symmetric key, and attaches the encrypted symmetric key to the message. The message format is specified in [MS-MQMQ] section 2.2.20.6.
-- The branch office server generates the Send User Message Event ([MS-MQQB] section 3.1.7.1) to send the encrypted message to the Regional HQ1 Server.
-- The regional HQ1 server invokes the GetNextHopsForSiteGate ([MS-MQBR] section 3.1.5.3) event to get the next route to send the message.
-- If the message transfer fails on this route, an alternate route is selected by invoking the GetNextHopsForSiteGate event.
-- The regional HQ1 server generates the Send User Message Event to send the encrypted message to the regional HQ2 server.
-- The regional HQ2 server performs steps 10 through 12 to find the next correct route and send the message to the company HQ server.
-- The queue manager of the Company HQ server decrypts the message as specified in [MS-MQQB] section 3.1.5.8.3, using the following high-level steps:
-- Extract the encrypted symmetric key from the message.
-- Decrypt the encrypted symmetric key with a [**private key**](#gt_private-key) from implementation-dependent local storage.
-- Decrypt the message with the decrypted symmetric key.
+- The admin client queries the server to determine if there is an existing quota that is specified on the object store path. To do this, it calls the **IFsrmQuotaManager::GetQuota** method ([MS-FSRM] section 3.2.4.2.18.5) by retrieving a potentially non-empty existing **IFsrmQuota** object. If an **IFsrmQuota** object is returned, the admin tool determines that no quota is currently configured on the server at the specified path.
+- The admin client creates an empty **IFsrmQuota** object by using the **IFsrmQuotaManager::CreateQuota** method ([MS-FSRM] section 3.2.4.2.18.3). The FSRM Service returns the reference to the newly created quota object and a success code.
+- The admin client modifies the returned **IFsrmQuota** object to reflect the specified quota limit by using the **IFsrmQuotaBase::QuotaLimit(put)** method ([MS-FSRM] section 3.2.4.2.14.3). The FSRM Service returns a success code.
+- To complete the operation, the admin client instructs the server to commit the modifications to the quota by using the **IFsrmQuotaObject::Commit** method ([MS-FSRM] section 3.2.4.2.15.1). The FSRM Service returns a success code.
 <a id="Section_3.6"></a>
-## 3.6 Example 6: Business-to-Business Messaging Across a Firewall
+## 3.6 Example 6: Creating and Configuring a File Management Job
 
-This example demonstrates business-to-business messaging across a firewall as described in use cases [Send Message to Queue – Application (section 2.5.3)](#Section_2.5.3) and [Receive a Message from a Queue – Application (section 2.5.6)](#Section_2.5.6).
+This example demonstrates the use cases described in section [2.5.4.1](#Section_2.5.4.1).
+
+The admin client creates a file management job and configures it.
 
 **Prerequisites**
 
-See the common prerequisites defined in section [3](#Section_3).
-
-- The queue exists.
-- The application is authorized to send messages to the queue.
-- If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
-- The receiving application is authorized to receive messages from the queue.
-- The order entry application and the employee desktop Queue Manager are deployed on the same machine.
-- The order processing application and the supplier server Queue Manager are deployed on the same machine.
+- The participating client and server computers are configured to belong to the same Active Directory domain.
+- The admin tool has acquired an RPC calling context that provides the FSRM server name ([MS-FSRM](../MS-FSRM/MS-FSRM.md) section 1.3).
 **Initial System State**
 
-The order queue is configured on the supplier server computer, with a name specified in the ordering system design, and the network address of the supplier server computer is provided to the order entry application.
-
-The acknowledgments queue and the response queue are configured on the manufacturer server computer, with names specified in the ordering system design, and the network address of the manufacturer server computer is provided to the order processing application and the order entry application.
+None.
 
 **Final System State**
 
-The final state of MSMQ in this example is the same as the initial state.
+A file management job is created and configured on the FSRM server.
+
+The following sequence diagram shows the steps to create and configure a file management job.
+
+![Sequence diagram for creating and configuring a file management job](media/image19.png)
+
+Figure 19: Sequence diagram for creating and configuring a file management job
 
 **Sequence of Events**
 
-The following figure shows the sequence of events for business-to-business messaging across a firewall.
-
-![Sequence diagram for Example 6](media/image24.png)
-
-Figure 24: Sequence diagram for Example 6
-
-- The order entry application creates a new unique transactional unit of work identifier **XACTUOW** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) structure, encapsulates an order in an MSMQ message, and sends it to the employee desktop Queue Manager, as described in steps 1 through 2 of Example 1: Disconnected Data Entry (section [3.1](../MS-MQMQ/MS-MQMQ.md)).
-- When network connectivity to the supplier server computer is available, the employee desktop Queue Manager transfers the order message to the supplier server Queue Manager using the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) over the Hypertext Transfer Protocol over Secure Sockets Layer (HTTPS) transport, as specified in [MC-MQSRM](../MC-MQSRM/MC-MQSRM.md) section 3.1.1.1.2.1. The supplier server Queue Manager receives the message from the network, as specified in [MC-MQSRM] section 3.1.5.1.6, and stores it in its order queue.
-- The order entry application creates a new unique transactional unit of work identifier **XACTUOW** structure and receives the order message from the supplier server Queue Manager, as described in steps 8 through 9 of Example 1: Disconnected Data Entry.
-- When the order processing application receives the message from the order queue, the supplier server Queue Manager sends a positive acknowledgment to the Acknowledgments queue, including the message identifierof the original message, as specified in [MC-MQSRM] section 2.2.4.3.
-- The order entry application receives the acknowledgment message from the manufacturer server Queue Manager by invoking the **rpc_ACReceiveMessageEx** ([MS-MQMP](../MS-MQMP/MS-MQMP.md) section 3.1.5.3) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 1.
-- The order processing application sends a response message to the supplier server Queue Manager by invoking the **rpc_ACSendMessageEx** ([MS-MQMP] section 3.1.5.2) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 3, and commits the transaction by invoking the **R_QMCommitTransaction** ([MS-MQMP] section 3.1.4.15) method.
-- When network connectivity to the supplier server computer is available, the supplier server Queue Manager transfers the response message to the manufacturer server Queue Manager using the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) over the Hypertext Transfer Protocol over Secure Sockets Layer (HTTPS) transport, as specified in [MC-MQSRM] section 3.1.1.1.2.1. The manufacturer server Queue Manager receives the message from the network and stores it in the response queue, as specified in [[MC-MQSRM] section 3.1.5.1.6.
-- The order entry application receives the response message from the manufacturer server Queue Manager by invoking the **rpc_ACReceiveMessageEx** method, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 1, and commits the transaction by invoking the **R_QMCommitTransaction** method.
+- The admin client creates a file management job by calling the **IFsrmFileManagementJobManager::CreateFileManagementJob** method, ([MS-FSRM] section 3.2.4.2.50.2). The FSRM Service returns a pointer to the file management job and returns a success code.
+- The admin client sets the **Name** property of the file management job by calling the **IFsrmFileManagementJob::Name(put)** method ([MS-FSRM] section 3.2.4.2.48.3), and the server returns ERROR_SUCCESS.
+- The admin client sets the **NamespaceRoot** property of the newly created file management job by calling the **IFsrmFileManagementJob::NamespaceRoot(put)** method ([MS-FSRM] section 3.2.4.2.48.5). The FSRM Service returns a success code.
+- The admin client sets the **Enable** property of the newly created file management job by calling the **IFsrmFileManagementJob::Enable(put)** method ([MS-FSRM] section 3.2.4.2.48.7). The FSRM Service returns a success code.
+- The admin client sets the **ExpirationDirectory** property for a new namespace by calling the **IFsrmFileManagementJob::ExpirationDirectory(put)** method ([MS-FSRM] section 3.2.4.2.48.110. The FSRM Service returns a success code.
+- The admin client sets the Operation type for new namespace by calling the **IFsrmFileManagementJob::OperationType(put)** method ([MS-FSRM] section 3.2.4.2.48.9). The FSRM Service returns a success code.
+- The admin client sets the list of report formats that the report job will create when the report job is generated by calling the **IFsrmFileManagementJob::Formats(put)** method ([MS-FSRM] section 3.2.4.2.48.19). The FSRM Service returns a success code.
+- The admin client adds a notification period to the file management job's list of notification periods by calling the **IFsrmFileManagementJob::AddNotification** method ([MS-FSRM] section 3.2.4.2.48.44). The FSRM Service returns a success code.
+- The admin client calls the **IFsrmFileManagementJob::Task(put)** method ([MS-FSRM] section 3.2.4.2.48.32), with the name of the scheduled task to be used in step 11. The FSRM Service returns a success code.
+- The admin client calls the **IFsrmFileManagementJob::Commit** method ([MS-FSRM] section 3.2.4.2.48.1) to commit the modifications to the file management job.
+- The admin client creates a scheduled task by calling the **IFsrmReportScheduler::CreateScheduleTask** method ([MS-FSRM] section 3.2.4.2.36.2) to pass in the name as it was used in step 9, namespaces, and serialized text of the task. The FSRM Service returns a success code.
 <a id="Section_3.7"></a>
-## 3.7 Example 7: Server Farm
+## 3.7 Example 7: Creating a Scheduled Report Job
 
-This example demonstrates the sequence of events for messages in a server farm, as described in the [Send Message to Queue – Application (section 2.5.3)](#Section_2.5.3) and [Receive a Message from a Queue – Application (section 2.5.6)](#Section_2.5.6) use cases.
+This example demonstrates the use cases described in section [2.5.4.2](#Section_2.5.4.2).
+
+The admin client creates a report job and configures it.
 
 **Prerequisites**
 
-See the common prerequisites that are described in section [3](#Section_3).
-
-- The [**queue**](#gt_queue) exists.
-- The application is authorized to send [**messages**](#gt_message) to the queue.
-- If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
-- The receiving application is authorized to receive messages from the queue.
+- The participating client and server computers are configured to belong to the same Active Directory domain.
+- The admin tool has acquired an RPC calling context that provides the FSRM server ([MS-FSRM](../MS-FSRM/MS-FSRM.md) section 2.1).
 **Initial System State**
 
-Each agent's computer is operating in the queue server role, and the Intermediary Server is operating in the supporting server role. The analysis servers are operating in the application role.
-
-The [**queue manager**](#gt_queue-manager-qm) on the Intermediary Server is initialized to contain a [**transactional queue**](#gt_transactional-queue) and configured to accept only authenticated messages. The queue manager on each agent's computer is initialized to contain queues to which response messages are sent by the analysis applications.
+None.
 
 **Final System State**
 
-The final states of the queue managers are equal to their initial states. The intermediary server queue manager contains a transactional queue, and the queue is in a ready state. Each agent's queue manager contains a queue, and the queue is in the ready state.
+The report job is created and configured.
 
-**Sequence of Events**
+The following sequence diagram shows the steps to create and configure a scheduled report job.
 
-The following figure shows the sequence of events for the server farm messages.
+![Sequence diagram for creating and configuring a scheduled report job](media/image20.png)
 
-![Message sequence for server farm](media/image25.png)
+Figure 20: Sequence diagram for creating and configuring a scheduled report job
 
-Figure 25: Message sequence for server farm
+Sequence of Events
 
-- The sales program application creates an **MSMQMessage** CoClass ([MC-MQAC](../MC-MQAC/MC-MQAC.md) section 3.17) instance and initializes the object as specified in [MC-MQAC] section 3.17.3 to transfer the data into the message.
-- The sales program application creates a new unique transactional unit of work identifier **XACTUOW** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) structure, encapsulates the message in an MSMQ message, and sends it to the Queue Manager on the Agent's Server, as described in steps 1 through 2 of Example 1: Disconnected Data Entry (section [3.1)](../MS-MQMQ/MS-MQMQ.md). The Queue Manager on the agent's server stores the message in its [**outgoing queue**](#gt_outgoing-queue).
-- The Queue Manager on the agent's server encrypts the message, as specified in [MS-MQQB](../MS-MQQB/MS-MQQB.md) section 3.1.7.1.5, authenticates the message, as specified in [MS-MQQB] section 3.1.5.8.3, and generates the Send User Message Event ([MS-MQQB] section 3.1.7.1) to send the message to the intermediary server Queue Manager.
-- The analysis program application creates a new unique transactional unit of work identifier **XACTUOW** structure and receives the message from the intermediary server Queue Manager, as described in steps 8 through 9 of Example 1: Disconnected Data Entry.
-- The analysis program analyses the received message.
-- The analysis program application sends the response message to the intermediary server Queue Manager by invoking the **rpc_ACSendMessageEx** ([MS-MQMP](../MS-MQMP/MS-MQMP.md) section 3.1.5.2) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 4.
-- The intermediary server Queue Manager stores the response message in its outgoing queue.
-- The intermediary server Queue Manager generates a Send User Message Event to send a response message to the Queue Manager on the agent’s server.
-- The sales program application receives the message from the Queue Manager on the agent’s server by invoking the **rpc_ACReceiveMessageEx** ([MS-MQMP] section 3.1.5.3) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the **XACTUOW** structure created at step 2.
-- The sales program application processes the received message to get the analysis result.
+- The admin client creates a report job instance by using the **IFsrmReportManager::CreateReportJob** method ([MS-FSRM] section 3.2.4.2.33.2). The FSRM Service returns a pointer to the created report job and a success code.
+- The admin client calls the **IFsrmReportJob::EnumReports** method to enumerate all the reports that are configured for the newly created job. The server returns S_OK upon successful completion ([MS-FSRM] section 3.2.4.2.34.14).
+- The admin client creates a report by calling the **IFsrmReportJob::CreateReport** method for each of the report types to add the report to the report job ([MS-FSRM] section 3.2.4.2.34.15). The FSRM Service returns a pointer to the created reports and a success code.
+- The admin client sets the filter of the created report objects by calling the **IFsrmReport::SetFilter** method for each report object to set the filter ([MS-FSRM] section 3.2.4.2.35.8). The FSRM Service returns a success code.
+- The admin client sets the NamespaceRoots of the newly created Report Job by calling the **IFsrmReportJob::NamespaceRoots(put)** method ([MS-FSRM] section 3.2.4.2.34.5). The FSRM Service returns a success code.
+- The admin client sets the list of report formats that the report job creates when the report job is generated by calling the **IFsrmReportJob::Formats(put)** method ([MS-FSRM] section 3.2.4.2.34.7). The FSRM Service returns a success code.
+- The admin client sets the email address recipient list to which the reports are emailed when the report job is successfully finished by calling the **IFsrmReportJob::MailTo(put)** method ([MS-FSRM] section 3.2.4.2.34.9). The FSRM Service returns a success code.
+- The Admin client calls the **IFsrmReportJob::Task(put)** method ([MS-FSRM] section 3.2.4.2.34.3), with the name of the scheduled task to be used in step 11. The FSRM Service returns a success code.
+- The admin client persists the report by calling the **IFsrmReportJob::Commit** method ([MS-FSRM] section 3.2.4.2.34.1). The FSRM Service returns a success code.
+- The admin client calls the **IFsrmReportJob::WaitForCompletion** method to wait until report task is finished ([MS-FSRM] section 3.2.4.2.34.17). The FSRM Service returns a success code.
+- The admin client calls the **IFsrmReportScheduler::CreateScheduleTask** method ([MS-FSRM] section 3.2.4.2.36.2) that passes in the name, namespaces as used in step 8, and serialized text for the task. The FSRM Service returns a success code.
 <a id="Section_3.8"></a>
-## 3.8 Example 8: Stock Ticker
+## 3.8 Example 8: Client Cannot Connect to a DFS Service
 
-This example demonstrates business-to-business messaging, as described in the [Send Message to Queue – Application (section 2.5.3)](#Section_2.5.3) and [Receive a Message from a Queue - Application (section 2.5.6)](#Section_2.5.6) use cases.
+This example demonstrates extension 1 of the use case described in section [2.5.2.1](#Section_2.5.2.1).
 
-**Prerequisites**
-
-See the common prerequisites defined in section [3](#Section_3).
-
-- The [**queue**](#gt_queue) exists.
-- The application is authorized to send [**messages**](#gt_message) to the queue.
-- If a [**Directory Service**](#gt_directory-service-ds) is not being used, the application is configured with the address of the queue prior to the send operation.
-- The receiving application is authorized to receive messages from the queue.
-- The back-end application and the back-end computer Queue Manager are deployed on the same machine.
-- Each Display Point display application and Display Point Queue Manager pair is deployed on the same machine, where the pairs are numbered #1 through #n, as depicted in the following figure.
-**Initial System State**
-
-There is one [**queue manager**](#gt_queue-manager-qm) on the back-end computer and one queue manager on each Display Point computer.
-
-One queue is configured on each Display Point computer, and each queue is configured with an IP multicast address. The queue name and IP multicast address are specified in the design of the applications.
-
-**Final System State**
-
-The final state of [**MSMQ**](#gt_microsoft-message-queuing-msmq) in this example is the same as the initial state.
-
-**Sequence of Events**
-
-The sequence of events for the stock ticker example is shown in the following figure.
-
-![Sequence diagram for the stock ticker example](media/image26.png)
-
-Figure 26: Sequence diagram for the stock ticker example
-
-- The back-end application sends the stock price update to the back-end computer Queue Manager.
-- The back-end computer Queue Manager transfers the message to the Display Point Queue Managers (Display Point #1 Queue Manager, … Display Point #n Queue Manager) using the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) (MQSRM) over the Pragmatic General Multicast (PGM) transport, as described in [[RFC3208]](https://go.microsoft.com/fwlink/?LinkId=95257) and in [MC-MQSRM](../MC-MQSRM/MC-MQSRM.md) sections 1.3.11 and 2.1.3. The Display Point Queue Managers store the messages in their respective queues.
-- Each Display Point display application creates a new unique transactional unit of work identifier **XACTUOW** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) structure and receives the stock price update message from its Display Point Queue Manager by invoking the **rpc_ACReceiveMessageEx** ([MS-MQMP](../MS-MQMP/MS-MQMP.md) section 3.1.5.3) method of the **qmcomm2** interface, providing a *ptb* input parameter initialized with the newly created **XACTUOW** structure.
-- Upon receiving the stock price update message, each Display Point display application extracts and displays the stock symbol and price.
-<a id="Section_3.9"></a>
-## 3.9 Example 9: Business-to-Business Messaging Across Heterogeneous Systems
-
-This example demonstrates business-to-business messaging across heterogeneous systems, as described in the [Send Message to Queue - Application (section 2.5.3)](#Section_2.5.3), [Transfer Message (section 2.5.5)](#Section_2.5.5), and [Receive a Message from a Queue – Application (section 2.5.6)](#Section_2.5.6) use cases.
+The admin client tries to establish a connection to the Distributed File System (DFS) Service to create a namespace and does not get a response from the DFS Service.
 
 **Prerequisites**
 
-See the common prerequisites defined in section [3](#Section_3).
+The prerequisites are described in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md) section 1.5.
 
-- The queue exists.
-- The application is authorized to send messages to the queue.
-- If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
-- The receiving application is authorized to receive messages from the queue.
-- The supply-chain management software and the customer’s server Queue Manager are deployed on the same machine.
-- The connector application and the messaging gateway Queue Manager are deployed on the same machine.
 **Initial System State**
 
-The client software for the manufacturer's message queuing system is installed on the messaging gateway computer, and then the [**connector application**](#gt_connector-application) is installed, which makes the messaging gateway computer a [**connector server**](#gt_connector-server). The connector queue on the messaging gateway computer is created as part of the connector application installation.
-
-The response queue is configured on the customer server to store responses from the manufacturer.
-
-An administrator creates a [**foreign queue**](#gt_foreign-queue) object in the Directory Service, representing the destination queue for messages traveling from the customer's server to the manufacturer.
+None.
 
 **Final System State**
 
-The final state of MSMQ in this example is the same as the initial state.
+None.
+
+The following sequence diagram shows the steps for the RPC bind calling context of the DFS Service.
+
+![Sequence diagram for showing an RPC bind operation with a No Response error message](media/image21.png)
+
+Figure 21: Sequence diagram for showing an RPC bind operation with a No Response error message
 
 **Sequence of Events**
 
-The sequence of events for the business-to-business messaging across heterogeneous systems example is shown in the following diagram.
-
-![Sequence diagram for Example 9](media/image27.png)
-
-Figure 27: Sequence diagram for Example 9
-
-- The customer's supply-chain management software sends a status report request to the manufacturer's supply-chain management software. The status report request is encapsulated in an MSMQ message, as described in steps 1 through 4 of Example 1: Disconnected Data Entry (section [3.1)](#Section_14c0643d4d6c44cea9579b74d8b6916d), along with necessary details such as the destination queue for the message.
-- The customer's server Queue Manager stores the message in an outgoing queue and looks up the destination queue in the Directory Service using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md).
-- Discovering that the destination is a foreign queue, the customer's server Queue Manager computes the route to the foreign queue by calling the **GetDirectoryData** ([MS-MQBR](../MS-MQBR/MS-MQBR.md) section 3.1.5.9) method, providing a *DataElementType* parameter set to "RoutingLink" and a *FilterArray* parameter set to no elements, to create a collection of **RoutingLink** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.8) ADM element instances that belong to the enterprise. In case a site is not reachable, the **GetNextHopsForSiteGate** ([MS-MQBR] section 3.1.5.3) algorithm is used to get a list of alternate next hops from which the least cost alternate route to the ultimate destination is constructed using Dijkstra's algorithm.
-- The next hop to get to the foreign queue is the connector queue on the messaging gateway computer, so the customer's server Queue Manager transfers the message to the messaging gateway computer using the Message Queuing (MSMQ): Message Queuing Binary Protocol (MQQB) when network connectivity is available, as described in step 5 of Example 1: Disconnected Data Entry.
-- The messaging gateway Queue Manager receives the message from the network and stores it in the connector queu.
-- The connector application receives the message from the connector queue and forwards the message to its final destination in the manufacturer's enterprise. The details of forwarding are specific to the connector application and the manufacturer's message queuing system and are not included in this example.
-- When the connector application receives a response, it determines where to send it, which in this case is the response queue on the customer server. Again, the details of how the connector application translates a destination expressed in the manufacturer's message queuing system syntax to a destination in MSMQ are specific to the connector application and the manufacturer's message queuing system and are not included in this example.
-- The connector application uses a local interface to pass the message and associated details, such as the message's destination, to the messaging gateway Queue Manager.
-- The messaging gateway Queue Manager stores the message in an outgoing queue and transfers it via MQQB to the customer server when network connectivity is available.
-- The customer's server Queue Manager receives the message from the network and stores it in the destination queue.
-- The customer's supply-chain management software receives the message and extracts the status report, and the process completes.
+- The admin tool uses the identified server to request that the admin client binds the RPC calling context.
+- The admin client initiates the bind operation by using the procedure ([MS-DFSNM] section 2.1).
+- The admin client does not get a response from the server. After the admin client waits for a time-out period, it sends the error message to the admin tool.
 <a id="Section_4"></a>
 # 4 Microsoft Implementations
 
-- Windows NT operating system
+There are no variations in the behavior of the File Access Services System in different versions of Windows beyond those described in the specifications of the protocols supported by the system, as listed in section [2.2](#Section_2.2).
+
+The information in this specification is applicable to the following Microsoft products:
+
 - Windows 95 operating system
-- Windows 98 operating system
+- Windows NT operating system
+- Windows NT 3.1 operating system
+- Windows NT 4.0 operating system
+- Windows NT Server 4.0 operating system
 - Windows 2000 operating system
 - Windows 2000 Server operating system
+- Windows 2000 Advanced Server operating system
 - Windows XP operating system
 - Windows Server 2003 operating system
 - Windows Server 2003 R2 operating system
@@ -2058,29 +2105,14 @@ Figure 27: Sequence diagram for Example 9
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows 11 operating system
+Exceptions, if any, are noted below. If a service pack number appears with the product version, behavior changed in that service pack. The new behavior also applies to subsequent service packs of the product unless otherwise specified.
+
 <a id="Section_4.1"></a>
 ## 4.1 Product Behavior
 
-<1> Section 2.3.1: The RPC system in Windows 2000 Server supports MSMQ as a transport.
+<1> Section 3.3: The **NetrDfsAddRootTarget** method is not supported on the following: Windows NT, Windows NT Server 4.0, Windows 2000 Server, Windows Server 2003, and Windows Server 2003 R2. The Windows client uses the **NetrDfsAddRootTarget** method to create the domain-based namespace if a user has enabled Windows 2008 mode. Otherwise, it uses the **NetrDfsAddFtRoot** method.
 
-<2> Section 2.6: The following table maps the MSMQ version to operating system version(s):
-
-| MSMQ version | Operating system version |
-| --- | --- |
-| MSMQ 1.0 | Windows NT, Windows 95, and Windows 98 |
-| MSMQ 2.0 | Windows 2000 Server |
-| MSMQ 3.0 | Windows XP and Windows Server 2003 |
-| MSMQ 4.0 | Windows Vista and Windows Server 2008 |
-| MSMQ 5.0 | Windows 7 and Windows Server 2008 R2 |
-| MSMQ 6.0 | Windows 8, Windows 8.1, Windows Server 2012, Windows Server 2012 R2, Windows 10, and Windows Server 2016 |
-
-<3> Section 2.6: The client version of MSMQ 3.0 is shipped with Windows XP.
-
-<4> Section 2.6: The server version of MSMQ 3.0 is shipped with Windows Server 2003.
-
-<5> Section 2.9.4.1.1: In Windows, the queue manager RPC servers register authentication services based on the machine's configuration. For example, Kerberos mutual authentication is registered only on a domain-joined machine.
-
-<6> Section 3.2: Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 operating system do not invoke the **R_CloseQueue** ([MS-MQRR](../MS-MQRR/MS-MQRR.md) section 3.1.4.3) method.
+<2> Section 3.3: In Windows, the DFS Management snap-in is used as the admin tool. When a domain administrator uses the DFS Management snap-in to create a replication group object, the **IADProxy::CreateObject** method is not used; instead, a direct LDAP call is used to create the replication group object.
 
 <a id="Section_5"></a>
 # 5 Change Tracking
@@ -2099,7 +2131,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [4](#Section_4) Microsoft Implementations | Added Windows 11 to the list of applicable products. | Major |
+| [4](#Section_4) Microsoft Implementations | Updated for this version of Windows client. | Major |
 
 <a id="revision-history"></a>
 
@@ -2107,19 +2139,20 @@ The changes made to this document are listed in the following table. For more in
 
 | Date | Version | Revision Class | Comments |
 | --- | --- | --- | --- |
-| 3/30/2012 | 1.0 | New | Released new document. |
-| 7/12/2012 | 1.1 | Minor | Clarified the meaning of the technical content. |
-| 10/25/2012 | 2.0 | Major | Updated and revised the technical content. |
+| 12/16/2011 | 1.0 | New | Released new document. |
+| 3/30/2012 | 2.0 | Major | Updated and revised the technical content. |
+| 7/12/2012 | 2.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 10/25/2012 | 2.0 | None | No changes to the meaning, language, or formatting of the technical content. |
 | 1/31/2013 | 2.0 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 8/8/2013 | 2.1 | Minor | Clarified the meaning of the technical content. |
-| 11/14/2013 | 2.1 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 2/13/2014 | 2.1 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 5/15/2014 | 2.1 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 6/30/2015 | 3.0 | Major | Significantly changed the technical content. |
-| 10/16/2015 | 3.0 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 9/26/2016 | 3.0 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 6/1/2017 | 3.0 | None | No changes to the meaning, language, or formatting of the technical content. |
-| 12/15/2017 | 4.0 | Major | Significantly changed the technical content. |
-| 11/5/2018 | 5.0 | Major | Significantly changed the technical content. |
-| 6/3/2021 | 6.0 | Major | Significantly changed the technical content. |
-| 10/26/2021 | 7.0 | Major | Significantly changed the technical content. |
+| 8/8/2013 | 3.0 | Major | Updated and revised the technical content. |
+| 11/14/2013 | 4.0 | Major | Updated and revised the technical content. |
+| 2/13/2014 | 4.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 5/15/2014 | 4.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 6/30/2015 | 5.0 | Major | Significantly changed the technical content. |
+| 10/16/2015 | 5.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 9/26/2016 | 5.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 6/1/2017 | 5.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 12/15/2017 | 6.0 | Major | Significantly changed the technical content. |
+| 11/5/2018 | 7.0 | Major | Significantly changed the technical content. |
+| 6/3/2021 | 8.0 | Major | Significantly changed the technical content. |
+| 10/26/2021 | 9.0 | Major | Significantly changed the technical content. |

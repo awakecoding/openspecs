@@ -238,9 +238,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -276,7 +276,7 @@ This protocol uses MSMQ as the transport to send [**envelope records**](#gt_enve
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-The .NET Message Framing MSMQ Binding Protocol requires that both the [**initiator**](#gt_initiator) and [**receiver**](#gt_receiver) satisfy all preconditions stated in section 2.4 of [MS-MQOD](#Section_1.3). The **Queue**, as defined in section 3.1.1.2 of [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md), is used for communication exists and is accessible by both the sender and receiver.
+The .NET Message Framing MSMQ Binding Protocol requires that both the [**initiator**](#gt_initiator) and [**receiver**](#gt_receiver) satisfy all preconditions stated in section 2.4 of [MS-MQOD](../MS-MQOD/MS-MQOD.md). The **Queue**, as defined in section 3.1.1.2 of [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md), is used for communication exists and is accessible by both the sender and receiver.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -1025,7 +1025,7 @@ The information in this specification is applicable to the following Microsoft p
 
 The terms "earlier" and "later", when used with a product version, refer to either all preceding versions or all subsequent versions, respectively. The term "through" refers to the inclusive range of versions. Applicable Microsoft products are listed chronologically in this section.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of the .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of the .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

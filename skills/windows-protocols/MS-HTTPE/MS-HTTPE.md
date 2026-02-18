@@ -165,7 +165,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** There is a charge to download the specification.
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [RFC2396] Berners-Lee, T., Fielding, R., and Masinter, L., "Uniform Resource Identifiers (URI): Generic Syntax", RFC 2396, August 1998, [https://www.rfc-editor.org/info/rfc2396](https://go.microsoft.com/fwlink/?LinkId=90339)
 
@@ -404,7 +404,7 @@ None.
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 2.0
 - Microsoft .NET Framework 3.5

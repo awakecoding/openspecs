@@ -501,7 +501,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-MQDSRP] Microsoft Corporation, "Message Queuing (MSMQ): Directory Service Replication Protocol", (Archived), [Message Queuing (MSMQ): Directory Service Replication Protocol](https://go.microsoft.com/fwlink/?LinkID=311687)
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [NTLM] Microsoft Corporation, "Microsoft NTLM", [http://msdn.microsoft.com/en-us/library/aa378749.aspx](https://go.microsoft.com/fwlink/?LinkId=90235)
 
@@ -549,7 +549,7 @@ This protocol is deprecated. Implementers are strongly urged to use the Lightwei
 
 This protocol relies on the Private Communication Technology (PCT) Protocol, as specified in [[PCT1]](https://go.microsoft.com/fwlink/?LinkId=90246), for authentication and [**message**](#gt_message) security. This protocol uses PCT as the security mechanism underlying the GSS API, as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378), and cannot be configured to use other security mechanisms, such as SSL or TLS.
 
-The MSMQ: Directory Service Protocol uses shared state and processing rules defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) and shared data structures defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md). The abstract local events described in section [3.2.6](#Section_1.3) are raised by the processing rules within the common processing rules defined in [MS-MQDMPR]. These events act as a simple translation layer to the RPC methods defined for this protocol, describing the conversion of arguments from abstract to concrete and the conversion of return values from concrete to abstract. The server side of the MSMQ: Directory Service Protocol processes those RPC methods either by maintaining a private abstract data model that leverages the data model types defined in [MS-MQDMPR] or by accessing an LDAP-based directory service using the [MS-MQDSSM] algorithm.
+The MSMQ: Directory Service Protocol uses shared state and processing rules defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) and shared data structures defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md). The abstract local events described in section [3.2.6](#Section_3.2.6) are raised by the processing rules within the common processing rules defined in [MS-MQDMPR]. These events act as a simple translation layer to the RPC methods defined for this protocol, describing the conversion of arguments from abstract to concrete and the conversion of return values from concrete to abstract. The server side of the MSMQ: Directory Service Protocol processes those RPC methods either by maintaining a private abstract data model that leverages the data model types defined in [MS-MQDMPR] or by accessing an LDAP-based directory service using the [MS-MQDSSM] algorithm.
 
 <a id="Section_1.5"></a>
 <a id="Section_3.1.4.21.8.1.8"></a>
@@ -611,7 +611,7 @@ The Message Queuing (MSMQ): Directory Service Protocol MUST use the [**UUID**](#
 
 This protocol uses security information as specified in [MS-RPCE]. This protocol uses implementation-specific<6> security providers.
 
-This protocol allows any user to establish a connection to an RPC server. The server uses the underlying RPC protocol to retrieve the identity of the method caller, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.4.4).
+This protocol allows any user to establish a connection to an RPC server. The server uses the underlying RPC protocol to retrieve the identity of the method caller, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -701,7 +701,7 @@ typedef [ref] PCONTEXT_HANDLE_TYPE* PPCONTEXT_HANDLE_TYPE;
 <a id="Section_2.2.7"></a>
 ### 2.2.7 PCONTEXT_HANDLE_DELETE_TYPE
 
-The PCONTEXT_HANDLE_DELETE_TYPE is an [**RPC**](#gt_remote-procedure-call-rpc) context handle type. This type is used to identify a pending directory object delete notification. See [S_DSBeginDeleteNotification (section 3.3.4.4)](#Section_4.4).
+The PCONTEXT_HANDLE_DELETE_TYPE is an [**RPC**](#gt_remote-procedure-call-rpc) context handle type. This type is used to identify a pending directory object delete notification. See [S_DSBeginDeleteNotification (section 3.3.4.4)](#Section_3.3.4.4).
 
 An RPC context handle specifies the information that is necessary to enable the RPC subsystem on the server to keep state information on a per-session basis and to do resource cleanup if the session is broken and the client cannot close the connection in an orderly manner. RPC context handles are as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 6.1.6.
 
@@ -728,7 +728,7 @@ The directory consists of eight types of directory objects. The directory object
 <a id="Section_2.2.9"></a>
 ### 2.2.9 Directory Service Pathname
 
-This specification uses [**directory service**](#gt_directory-service-ds) pathnames to refer to directory objects. Each MSMQ object type, as specified in section [2.2.8](#Section_3.2.6.3.3), has a particular format for pathnames or cannot be referenced by pathname. Object types that cannot be referenced by pathname can be referenced by [**GUID**](#gt_globally-unique-identifier-guid) instead.
+This specification uses [**directory service**](#gt_directory-service-ds) pathnames to refer to directory objects. Each MSMQ object type, as specified in section [2.2.8](#Section_2.2.8), has a particular format for pathnames or cannot be referenced by pathname. Object types that cannot be referenced by pathname can be referenced by [**GUID**](#gt_globally-unique-identifier-guid) instead.
 
 | Directory Object Type | Directory Service Pathname format |
 | --- | --- |
@@ -744,7 +744,7 @@ This specification uses [**directory service**](#gt_directory-service-ds) pathna
 <a id="Section_2.2.10"></a>
 ### 2.2.10 MSMQ Object Properties
 
-Each [**MSMQ**](#gt_message-queuing) object type, as specified in section [2.2.8](#Section_3.2.6.3.3), has a set of [**MSMQ object properties**](#gt_msmq-object-property) associated with it. Each MSMQ object property has a [**property identifier**](#gt_property-identifier), a variant type, and a semantic.
+Each [**MSMQ**](#gt_message-queuing) object type, as specified in section [2.2.8](#Section_2.2.8), has a set of [**MSMQ object properties**](#gt_msmq-object-property) associated with it. Each MSMQ object property has a [**property identifier**](#gt_property-identifier), a variant type, and a semantic.
 
 Some MSMQ object properties are interpreted by this protocol; other MSMQ object properties are simply treated as payload by this protocol. The following sections define the property identifier ranges associated with each directory object type and the subset of the MSMQ object properties that are interpreted by this protocol.
 
@@ -770,7 +770,7 @@ Property identifiers equal to or greater than 1000 (decimal) are reserved for us
 <a id="Section_3.1.4.21.8.1.4"></a>
 #### 2.2.10.2 Queue Object Properties
 
-The following table specifies the set of properties associated with directory objects of type [MQDS_QUEUE](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of properties associated with directory objects of type [MQDS_QUEUE](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -781,7 +781,7 @@ The following table specifies the set of properties associated with directory ob
 <a id="Section_2.2.10.3"></a>
 #### 2.2.10.3 Machine Object Properties
 
-The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_MACHINE](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_MACHINE](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -798,7 +798,7 @@ The following table specifies the set of [**MSMQ object properties**](#gt_msmq-o
 <a id="Section_3.1.4.21.8.2.8"></a>
 #### 2.2.10.4 Site Object Properties
 
-The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_SITE](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_SITE](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -808,7 +808,7 @@ The following table specifies the set of [**MSMQ object properties**](#gt_msmq-o
 <a id="Section_2.2.10.5"></a>
 #### 2.2.10.5 Connected Network Object Properties
 
-The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_CN](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_CN](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -818,7 +818,7 @@ The following table specifies the set of [**MSMQ object properties**](#gt_msmq-o
 <a id="Section_3.1.4.21.8.1.6"></a>
 #### 2.2.10.6 Enterprise Object Properties
 
-The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_ENTERPRISE](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_ENTERPRISE](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -828,7 +828,7 @@ The following table specifies the set of [**MSMQ object properties**](#gt_msmq-o
 <a id="Section_3.1.4.21.8.1.11"></a>
 #### 2.2.10.7 User Object Properties
 
-The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_USER](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_USER](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -837,7 +837,7 @@ The following table specifies the set of [**MSMQ object properties**](#gt_msmq-o
 <a id="Section_2.2.10.8"></a>
 #### 2.2.10.8 Routing Link Object Properties
 
-The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_ROUTINGLINK](#Section_3.2.6.3.3) that are used by this protocol.
+The following table specifies the set of [**MSMQ object properties**](#gt_msmq-object-property) associated with directory objects of type [MQDS_ROUTINGLINK](#Section_2.2.8) that are used by this protocol.
 
 | Property identifier | Variant type | Meaning |
 | --- | --- | --- |
@@ -1077,7 +1077,7 @@ This specification uses the PROPID type ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) sectio
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol implements a [**directory**](#gt_directory) that is accessed via events as specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1. The Directory Service schema elements for objects accessed via these events are defined in sections [2.2.10](#Section_1.3) and [3.1.4.21.1](#Section_3.1.4.21.1) through [3.1.4.21.4](#Section_3.1.4.21.4).
+This protocol implements a [**directory**](#gt_directory) that is accessed via events as specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1. The Directory Service schema elements for objects accessed via these events are defined in sections [2.2.10](#Section_2.2.10) and [3.1.4.21.1](#Section_3.1.4.21.1) through [3.1.4.21.4](#Section_3.1.4.21.4).
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -1114,9 +1114,9 @@ The server needs to maintain the GSS security context acquired through the [S_DS
 - [S_DSGetProps](#Section_3.1.4.7)
 - [S_DSGetPropsGuid](#Section_3.1.4.8)
 - [S_DSLookupNext](#Section_3.1.4.18)
-- [S_DSGetObjectSecurity](#Section_5)
-- [S_DSGetObjectSecurityGuid](#Section_5)
-- [S_DSQMGetObjectSecurity](#Section_5)
+- [S_DSGetObjectSecurity](#Section_3.1.4.11)
+- [S_DSGetObjectSecurityGuid](#Section_3.1.4.12)
+- [S_DSQMGetObjectSecurity](#Section_3.1.4.15)
 - [S_DSCreateServersCache](#Section_3.1.4.20)
 <a id="Section_3.1.1.4"></a>
 #### 3.1.1.4 PCONTEXT_HANDLE_SERVER_AUTH_TYPE RPC Context Handle
@@ -1212,18 +1212,18 @@ This protocol adds the following directory attributes to the **ConnectedNetwork*
 The **LookupIteratorState** ADM element represents the state associated with a directory lookup initiated by a [Begin Directory Lookup (section 3.1.6.7)](#Section_3.1.6.7) event. The state is used by the [Lookup Directory Next (section 3.1.6.8)](#Section_3.1.6.8) event and the [End Directory Lookup (section 3.1.6.9)](#Section_3.1.6.9) event. This ADM element MUST contain the following attributes:
 
 - **LookupState**: All information that is required by the server to maintain a result set of directory objects that match the restrictions supplied to the Begin Directory Lookup event and to allow the [Read Directory Next (section 3.2.6.5)](#Section_3.2.6.5) event to iteratively return information about those matching objects.
-- **ObjectType**: One of the directory object types, as defined in section [2.2.8](#Section_3.2.6.3.3), which indicates the type of the objects in the result set.
-- **PropertyList**: A list of [**property identifiers**](#gt_property-identifier) valid for objects of type **ObjectType** (see section [2.2.10](#Section_1.3)), which indicates the properties for which the Read Directory Next event returns data.
+- **ObjectType**: One of the directory object types, as defined in section [2.2.8](#Section_2.2.8), which indicates the type of the objects in the result set.
+- **PropertyList**: A list of [**property identifiers**](#gt_property-identifier) valid for objects of type **ObjectType** (see section [2.2.10](#Section_2.2.10)), which indicates the properties for which the Read Directory Next event returns data.
 <a id="Section_3.1.1.14"></a>
 #### 3.1.1.14 Directory Data Elements
 
 Servers MAY<12> maintain the following ADM elements.
 
-**Enterprise:** The [Enterprise (section 3.1.1.6)](#Section_3.2.6.3.3) ADM element captures information applicable to all elements of the [**enterprise**](#gt_enterprise).
+**Enterprise:** The [Enterprise (section 3.1.1.6)](#Section_3.1.1.6) ADM element captures information applicable to all elements of the [**enterprise**](#gt_enterprise).
 
 The **Enterprise** ADM element is found by constructing its [**directory service**](#gt_directory-service-ds) pathname from standardized components, rather than by following properties from other directory service objects.
 
-**QueueManagerCollection:** A collection of [QueueManager (section 3.1.1.7)](#Section_3.2.6.3.1) ADM element instances. A **QueueManager** ADM element instance describes the attributes and relationships of an [**MSMQ Queue Manager**](#gt_msmq-queue-manager). A **QueueManager** ADM element instance is created for each machine that has an MSMQ Queue Manager installed on it.
+**QueueManagerCollection:** A collection of [QueueManager (section 3.1.1.7)](#Section_3.1.1.7) ADM element instances. A **QueueManager** ADM element instance describes the attributes and relationships of an [**MSMQ Queue Manager**](#gt_msmq-queue-manager). A **QueueManager** ADM element instance is created for each machine that has an MSMQ Queue Manager installed on it.
 
 **QueueCollection:** A collection of [Queue (section 3.1.1.8)](#Section_3.1.1.8) ADM element instances. The **Queue** ADM element describes the attributes of a [**queue**](#gt_queue) that is hosted by a [**queue manager**](#gt_queue-manager-qm). A **Queue** ADM element instance captures information about a particular [**public queue**](#gt_public-queue).
 
@@ -1231,9 +1231,9 @@ The **Enterprise** ADM element is found by constructing its [**directory service
 
 **SiteCollection:** A collection of [Site (section 3.1.1.10)](#Section_3.1.1.10) ADM element instances that represent the sites in an enterprise. The **Site** ADM element describes the attributes of an [**MSMQ site**](#gt_msmq-site).
 
-**RoutingLinkCollection:** A collection of [RoutingLink (section 3.1.1.11)](#Section_3.2.6.4.5) ADM element instances that represent the [**routing links**](#gt_msmq-routing-link) in an enterprise. The **RoutingLink** ADM element describes the attributes of an MSMQ routing link.
+**RoutingLinkCollection:** A collection of [RoutingLink (section 3.1.1.11)](#Section_3.1.1.11) ADM element instances that represent the [**routing links**](#gt_msmq-routing-link) in an enterprise. The **RoutingLink** ADM element describes the attributes of an MSMQ routing link.
 
-**ConnectedNetworkCollection:** A collection of [ConnectedNetwork (section 3.1.1.12)](#Section_3.2.6.2.5) ADM element instances that represent the [**connected networks**](#gt_connected-network) in the **Enterprise**. The **ConnectedNetwork** ADM element describes the attributes of a connected network.
+**ConnectedNetworkCollection:** A collection of [ConnectedNetwork (section 3.1.1.12)](#Section_3.1.1.12) ADM element instances that represent the [**connected networks**](#gt_connected-network) in the **Enterprise**. The **ConnectedNetwork** ADM element describes the attributes of a connected network.
 
 <a id="Section_3.1.1.15"></a>
 #### 3.1.1.15 Negotiation Token Data Element
@@ -1243,9 +1243,9 @@ The server MUST maintain the security context acquired through the [S_DSValidate
 - [S_DSGetProps](#Section_3.1.4.7)
 - [S_DSGetPropsGuid](#Section_3.1.4.8)
 - [S_DSLookupNext](#Section_3.1.4.18)
-- [S_DSGetObjectSecurity](#Section_5)
-- [S_DSGetObjectSecurityGuid](#Section_5)
-- [S_DSQMGetObjectSecurity](#Section_5)
+- [S_DSGetObjectSecurity](#Section_3.1.4.11)
+- [S_DSGetObjectSecurityGuid](#Section_3.1.4.12)
+- [S_DSQMGetObjectSecurity](#Section_3.1.4.15)
 - [S_DSCreateServersCache](#Section_3.1.4.20)
 <a id="Section_3.1.1.16"></a>
 <a id="Section_3.1.4.21.8.2.1"></a>
@@ -1283,11 +1283,11 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [S_DSCreateObject](#Section_3.1.4.4) | Creates a directory object. Opnum: 0 |
-| [S_DSDeleteObject](#Section_3.1.4.6) | Deletes a directory object specified by a [**directory service**](#gt_directory-service-ds) pathname. Opnum: 1 |
+| [S_DSDeleteObject](#Section_3.1.4.5) | Deletes a directory object specified by a [**directory service**](#gt_directory-service-ds) pathname. Opnum: 1 |
 | [S_DSGetProps](#Section_3.1.4.7) | Returns properties associated with a directory object specified by a directory service pathname. Opnum: 2 |
-| [S_DSSetProps](#Section_3.1.4.10) | Sets properties associated with a directory object specified by a directory service pathname. Opnum: 3 |
-| [S_DSGetObjectSecurity](#Section_5) | Returns security properties associated with a directory object specified by a directory service pathname. Opnum: 4 |
-| [S_DSSetObjectSecurity](#Section_5) | Sets security properties associated with a directory object specified by a directory service pathname. Opnum: 5 |
+| [S_DSSetProps](#Section_3.1.4.9) | Sets properties associated with a directory object specified by a directory service pathname. Opnum: 3 |
+| [S_DSGetObjectSecurity](#Section_3.1.4.11) | Returns security properties associated with a directory object specified by a directory service pathname. Opnum: 4 |
+| [S_DSSetObjectSecurity](#Section_3.1.4.13) | Sets security properties associated with a directory object specified by a directory service pathname. Opnum: 5 |
 | [S_DSLookupBegin](#Section_3.1.4.17) | Begins a directory query to enumerate directory objects matching selection criteria. Opnum: 6 |
 | [S_DSLookupNext](#Section_3.1.4.18) | Returns the next item in a directory query result set. Opnum: 7 |
 | [S_DSLookupEnd](#Section_3.1.4.19) | Ends a directory query and closes the RPC context handle acquired from a previous call to S_DSLookupBegin. Opnum: 8 |
@@ -1295,15 +1295,15 @@ Methods in RPC Opnum Order
 | [S_DSDeleteObjectGuid](#Section_3.1.4.6) | Deletes a directory object specified by object identifier. Opnum: 10 |
 | [S_DSGetPropsGuid](#Section_3.1.4.8) | Returns properties associated with a directory object specified by object identifier. Opnum: 11 |
 | [S_DSSetPropsGuid](#Section_3.1.4.10) | Sets property identifiers associated with a directory object specified by object identifier. Opnum: 12 |
-| [S_DSGetObjectSecurityGuid](#Section_5) | Returns security properties associated with a directory object specified by object identifier. Opnum: 13 |
-| [S_DSSetObjectSecurityGuid](#Section_5) | Sets security properties associated with a directory object specified by object identifier. Opnum: 14 |
+| [S_DSGetObjectSecurityGuid](#Section_3.1.4.12) | Returns security properties associated with a directory object specified by object identifier. Opnum: 13 |
+| [S_DSSetObjectSecurityGuid](#Section_3.1.4.14) | Sets security properties associated with a directory object specified by object identifier. Opnum: 14 |
 | Opnum15NotUsedOnWire | Reserved for local use. Opnum: 15 |
 | Opnum16NotUsedOnWire | Reserved for local use. Opnum: 16 |
 | Opnum17NotUsedOnWire | Reserved for local use. Opnum: 17 |
 | Opnum18NotUsedOnWire | Reserved for local use. Opnum: 18 |
-| [S_DSQMSetMachineProperties](#Section_3.2.4.1) | Sets the properties of the MSMQ machine object in the directory service. Opnum: 19 |
+| [S_DSQMSetMachineProperties](#Section_3.1.4.16) | Sets the properties of the MSMQ machine object in the directory service. Opnum: 19 |
 | [S_DSCreateServersCache](#Section_3.1.4.20) | Returns a list of BSCs associated with the site the caller is in. Opnum: 20 |
-| [S_DSQMGetObjectSecurity](#Section_5) | Returns the security properties for the specified machine object. Opnum: 21 |
+| [S_DSQMGetObjectSecurity](#Section_3.1.4.15) | Returns the security properties for the specified machine object. Opnum: 21 |
 | [S_DSValidateServer](#Section_3.1.4.2) | Initiates an authentication handshake to authenticate the directory server to the client. Opnum: 22 |
 | [S_DSCloseServerHandle](#Section_3.1.4.3) | Closes an RPC context handle acquired from a previous call to S_DSValidateServer. Opnum: 23 |
 | Opnum24NotUsedOnWire | Reserved for local use. Opnum: 24 |
@@ -1469,7 +1469,7 @@ unsigned char* SecurityDescriptor,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of directory object to create. MUST be set to one of the object types, as specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of directory object to create. MUST be set to one of the object types, as specified in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** Pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that MUST contain the [**directory service**](#gt_directory-service-ds) pathname, as specified in section [2.2.9](#Section_2.2.9) for the object to be created in the directory service. If the object is of a type that is not referenced by pathname, as specified in section 2.2.9, this pointer MUST be NULL.
 
@@ -1540,7 +1540,7 @@ When processing this call, the server MUST:
 - If the *dwObjectType* is MQDS_ROUTINGLINK:
 - Verify for each property identifier in *aProp* that the property identifier is valid for an object of type MQDS_ROUTINGLINK, and that the corresponding variant in *apVar* is of the type defined for the property identifier, as specified in [MS-MQMQ] section 2.3.7. If any invalid property identifier or type is found, the server MUST take no further action and return a failure HRESULT.
 - If the *SecurityDescriptor* parameter is not NULL, the server SHOULD take no further action and return MQ_ERROR_ILLEGAL_PROPERTY (0xC00E0018).<24>
-- Map the values contained in *aProp* and *apVar* to [RoutingLink](#Section_3.2.6.4.5) ADM element attributes according to the rules specified in section [3.1.4.21.8.3.5](#Section_3.1.4.21.8.3.5) or, for property identifiers not listed there, in section [3.1.4.21.8.2.9](#Section_3.1.4.21.8.2.9). Property identifiers not listed in either section MUST be ignored. If the rules indicate that any property identifier is invalid, the server MUST take no further action and return a failure HRESULT.
+- Map the values contained in *aProp* and *apVar* to [RoutingLink](#Section_3.2.6.1.4) ADM element attributes according to the rules specified in section [3.1.4.21.8.3.5](#Section_3.1.4.21.8.3.5) or, for property identifiers not listed there, in section [3.1.4.21.8.2.9](#Section_3.1.4.21.8.2.9). Property identifiers not listed in either section MUST be ignored. If the rules indicate that any property identifier is invalid, the server MUST take no further action and return a failure HRESULT.
 - Create a new **RoutingLink** ADM element instance using the mapping from the preceding step and assign it to *dirObject*.
 - If the *dwObjectType* is MQDS_MACHINE:
 - Verify for each property identifier in *aProp* that the property identifier is valid for an object of type MQDS_MACHINE, and that the corresponding variant in *apVar* is of the type defined for the property identifier, as specified in [MS-MQMQ] section 2.3.2. If any invalid property identifier or type is found, the server MUST take no further action and return a failure HRESULT.
@@ -1594,7 +1594,7 @@ HRESULT S_DSDeleteObject(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object to delete. MUST be set to one of the directory object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object to delete. MUST be set to one of the directory object types specified in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** Pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that MUST contain the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), to the object in the directory service.
 
@@ -1634,7 +1634,7 @@ HRESULT S_DSDeleteObjectGuid(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object to delete. MUST be set to one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object to delete. MUST be set to one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** A pointer to the [**GUID**](#gt_globally-unique-identifier-guid) of the object to delete. This MUST be the identifier assigned to the object by the server when the object was created. See section [3.1.4.1](#Section_3.1.4.1).
 
@@ -1688,7 +1688,7 @@ unsigned char* pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which properties are to be retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which properties are to be retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** Pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that MUST contain the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), to the object in the directory service.
 
@@ -1745,7 +1745,7 @@ When processing this call the server MUST:
 | MQDS_SITE | See section [3.1.4.21.8.1.8](#Section_3.1.4.21.8.1.8) |
 | MQDS_CN | See section [3.1.4.21.8.1.10](#Section_3.1.4.21.8.1.10) |
 | MQDS_ENTERPRISE | See section [3.1.4.21.8.1.6](#Section_3.1.4.21.8.1.6) |
-| MQDS_ROUTINGLINK | See section [3.1.4.21.8.1.9](#Section_3.2.6.4.5) |
+| MQDS_ROUTINGLINK | See section [3.1.4.21.8.1.9](#Section_3.2.6.1.4) |
 
 - Construct the *pbServerSignature* parameter by creating a hash by using the [**MD5**](#gt_md5) algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275), and sealing it, as specified by the following pseudocode:
 Initialize an MD5 hash context
@@ -1808,7 +1808,7 @@ unsigned char* pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which properties are retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which properties are retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** MUST be set by the client to a pointer to the GUID of the object for which properties are retrieved.
 
@@ -1863,7 +1863,7 @@ When processing this call, the server MUST:
 | MQDS_SITE | See section [3.1.4.21.8.1.8](#Section_3.1.4.21.8.1.8) |
 | MQDS_CN | See section [3.1.4.21.8.1.10](#Section_3.1.4.21.8.1.10) |
 | MQDS_ENTERPRISE | See section [3.1.4.21.8.1.6](#Section_3.1.4.21.8.1.6) |
-| MQDS_ROUTINGLINK | See section [3.1.4.21.8.1.9](#Section_3.2.6.4.5) |
+| MQDS_ROUTINGLINK | See section [3.1.4.21.8.1.9](#Section_3.2.6.1.4) |
 | MQDS_USER | See section [3.1.4.21.8.1.11](#Section_3.1.4.21.8.1.11) |
 
 - Construct the *pbServerSignature* parameter by creating a hash by using the [**MD5**](#gt_md5) algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275), and sealing it, as specified by the following pseudocode:
@@ -1919,7 +1919,7 @@ HRESULT S_DSSetProps(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** MUST specify the type of object for which properties are to be set. For supported object types, see the table of object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** MUST specify the type of object for which properties are to be set. For supported object types, see the table of object types specified in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** Pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that MUST contain the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), to the object in the directory service.
 
@@ -2009,7 +2009,7 @@ HRESULT S_DSSetPropsGuid(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which properties are to be set. MUST be one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which properties are to be set. MUST be one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** Pointer to the GUID of the object for which properties are to be set.
 
@@ -2114,7 +2114,7 @@ unsigned char* pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which security properties are to be retrieved. MUST be set to one of the object types defined in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which security properties are to be retrieved. MUST be set to one of the object types defined in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** Pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that MUST contain the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), of the object in the directory service.
 
@@ -2255,11 +2255,11 @@ unsigned char* pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which security properties are to be retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which security properties are to be retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** MUST be set by the client to a pointer to the GUID of the object for which to retrieve security information.
 
-**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to return in the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_5).
+**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to return in the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_3.1.4.11).
 
 **pSecurityDescriptor:** If the *SecurityInformation* parameter is MQDS_SIGN_PUBLIC_KEY or MQDS_KEYX_PUBLIC_KEY, it SHOULD<59> contain a pointer to a [BLOBHEADER](#Section_2.2.19) structure followed by an [RSAPUBKEY (section 2.2.18)](#Section_2.2.18) structure. Otherwise, this parameter contains a pointer to a security descriptor, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 
@@ -2362,11 +2362,11 @@ HRESULT S_DSSetObjectSecurity(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which security properties are to be set. MUST be one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which security properties are to be set. MUST be one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** Pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that MUST contain the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), of the object in the directory service.
 
-**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to set from the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_5). Information in the *pSecurityDescriptor* parameter not associated with bits set in this field MUST be ignored.
+**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to set from the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_3.1.4.11). Information in the *pSecurityDescriptor* parameter not associated with bits set in this field MUST be ignored.
 
 **pSecurityDescriptor:** MUST contain a pointer to a security descriptor, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6, or to an [MQDS_PublicKey](#Section_2.2.20) structure.<63> See the *pSecurityDescriptor* parameter description in section 3.1.4.11. Note that where 3.1.4.11 indicates that *pSecurityDescriptor* contains a [BLOBHEADER](#Section_2.2.19) followed by an [RSAPUBKEY (section 2.2.18)](#Section_2.2.18) structure, this method actually contains an MQDS_PublicKey structure, which is the same structure prefixed by a 4-byte length field.
 
@@ -2442,11 +2442,11 @@ HRESULT S_DSSetObjectSecurityGuid(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which security properties are set. MUST be set to one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which security properties are set. MUST be set to one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** MUST be set by the client to a pointer to the GUID of the object for which properties are to be set.
 
-**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to set from the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_5).
+**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to set from the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_3.1.4.11).
 
 **pSecurityDescriptor:** MUST contain a pointer to security descriptor, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6, or to an [MQDS_PublicKey](#Section_2.2.20) structure.<68> See the *pSecurityDescriptor* parameter description in section 3.1.4.11. Note that while section 3.1.4.11 indicates that *pSecurityDescriptor* contains a [BLOBHEADER](#Section_2.2.19) followed by an [RSAPUBKEY (section 2.2.18)](#Section_2.2.18) structure, this method actually contains an MQDS_PublicKey structure, which is the same structure prefixed by a 4-byte length field.
 
@@ -2534,11 +2534,11 @@ unsigned char* pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which the security descriptor is retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which the security descriptor is retrieved. MUST be set to one of the object types specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** MUST be set by the client to a pointer to the GUID of the object to retrieve security information.
 
-**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to return in the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_5).
+**SecurityInformation:** MUST be set by the client to a bitwise mask specifying the information to return in the *pSecurityDescriptor* parameter. See the *SecurityInformation* parameter description in section [3.1.4.11](#Section_3.1.4.11).
 
 **pSecurityDescriptor:** If the *SecurityInformation* parameter is MQDS_SIGN_PUBLIC_KEY or MQDS_KEYX_PUBLIC_KEY, it SHOULD <73> contain a pointer to a [BLOBHEADER](#Section_2.2.19) structure followed by an [RSAPUBKEY (section 2.2.18)](#Section_2.2.18) structure. Otherwise, this parameter contains a security descriptor, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 
@@ -2546,7 +2546,7 @@ unsigned char* pbServerSignature,
 
 **lpnLengthNeeded:** A DWORD that the server MUST set to the length in bytes of the requested security descriptor or [**Public Key**](#gt_public-key). If the requested security descriptor or Public Key is larger than *nLength*, the server MUST set this parameter to the size in bytes needed for the requested security descriptor or Public Key, and return MQ_ERROR_SECURITY_DESCRIPTOR_TOO_SMALL (0xC00E0023).
 
-**dwContext:** MUST be set by the client to a value that the client can use to correlate callbacks with the initial call to S_DSQMGetObjectSecurityChallengeResponceProc. The server MUST supply this value in the *dwContext* parameter in the related calls of the S_DSQMGetObjectSecurityChallengeResponceProc (section [3.2.4.2](#Section_5)) callback method.
+**dwContext:** MUST be set by the client to a value that the client can use to correlate callbacks with the initial call to S_DSQMGetObjectSecurityChallengeResponceProc. The server MUST supply this value in the *dwContext* parameter in the related calls of the S_DSQMGetObjectSecurityChallengeResponceProc (section [3.2.4.2](#Section_3.2.4.2)) callback method.
 
 **phServerAuth:** A [PCONTEXT_HANDLE_SERVER_AUTH_TYPE](#Section_2.2.5) RPC context handle acquired from the *pphServerAuth* parameter in a previous call to [S_DSValidateServer](#Section_3.1.4.2). The server MUST use this parameter as a key to locate the GSS security context used to compute the signature returned in *pbServerSignature*. See section 3.1.4.2.
 
@@ -2947,7 +2947,7 @@ The following table summarizes the directory service object properties that cont
 
 | Directory service object type | Directory service object property identifier |
 | --- | --- |
-| [Queue](#Section_3.2.6.3.3) | PROPID_Q_INSTANCE 101 |
+| [Queue](#Section_2.2.8) | PROPID_Q_INSTANCE 101 |
 | Machine | PROPID_QM_MACHINE_ID 202 |
 | Site | PROPID_S_SITEID 302 |
 | Connected Network | PROPID_CN_GUID 503 |
@@ -2964,7 +2964,7 @@ The following table summarizes the directory service object properties that cont
 
 | Directory service object type | Directory service object property identifier |
 | --- | --- |
-| [Queue](#Section_3.2.6.3.3) | PROPID_Q_PATHNAME 103 |
+| [Queue](#Section_2.2.8) | PROPID_Q_PATHNAME 103 |
 | Machine | PROPID_QM_PATHNAME 203 |
 | Site | PROPID_S_PATHNAME 301 |
 | Connected Network | PROPID_CN_NAME 502 |
@@ -3191,7 +3191,7 @@ QueueManager
 | PROPID_QM_CREATE_TIME ([MS-MQMQ] section 2.3.2.16) | **CreateTime** | SHOULD be treated as invalid.<90> |
 | PROPID_QM_MODIFY_TIME ([MS-MQMQ] section 2.3.2.17) | **ModifyTime** | Set by server on write. If this [**property identifier**](#gt_property-identifier) is supplied, it MUST be treated as invalid. |
 | PROPID_QM_FOREIGN ([MS-MQMQ] section 2.3.2.18) | **ForeignSystem** | If value of property is 0x01, set **QueueManager.ForeignSystem** to TRUE; Else set to FALSE. |
-| PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | **OperatingSystemType** | Integer copied from property. See [3.1.4.21.8.3](../MS-MQMQ/MS-MQMQ.md). |
+| PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | **OperatingSystemType** | Integer copied from property. See [3.1.4.21.8.3](#Section_3.1.4.21.8.3). |
 | PROPID_QM_SIGN_PKS ([MS-MQMQ] section 2.3.2.33) | **PublicSigningKeyList** | MQDSPUBLICKEYS ([MS-MQMQ] section 2.2.2) structure copied from property. |
 | PROPID_QM_ENCRYPT_PK ([MS-MQMQ] section 2.3.2.38) | **PublicEncryptionKeyList** | MQDSPUBLICKEYS structure copied from property. |
 | PROPID_QM_SITE_IDS ([MS-MQMQ] section 2.3.2.21) | **SiteIdentifierList** | List of GUIDs copied from property. The list MUST NOT be empty. |
@@ -3446,7 +3446,7 @@ The server MUST use the context handle (supplied as an event argument) as a key 
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_3.2.6.3.3).
+- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_2.2.8).
 - *iPathName*: The [**directory service**](#gt_directory-service-ds) pathname of the object to be created, as defined in section [2.2.9](#Section_2.2.9).
 - *iNumberOfProperties*: The size (in elements) of the arrays *iPropertyID* and *iPropertyValue*. The arrays *iPropertyID* and *iPropertyValue* MUST have an identical number of elements.
 - *iPropertyID*: An array of [**property identifiers**](#gt_property-identifier) of properties to associate with the created object. Each element MUST specify a value from the property identifiers table as specified in section [2.2.10.1](#Section_2.2.10.1), for the directory object type specified in *iObjectType*. Each element MUST specify the property identifier for the corresponding property value at the same element index in *iPropertyValue*.
@@ -3504,7 +3504,7 @@ The server MUST perform the following actions to process this event:
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_3.2.6.3.3).
+- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_2.2.8).
 - *iPathName*: The [**directory service**](#gt_directory-service-ds) pathname of the object to be updated, as defined in section [2.2.9](#Section_2.2.9), or NULL.
 - *iGuidIdentifier*: The [**GUID**](#gt_globally-unique-identifier-guid) of the object to update, if *iPathName* is NULL. Not used if *iPathName* is not NULL, and can be [**GUID_NULL**](#gt_guid_null) in that case.
 - *iNumberOfProperties*: The size (in elements) of the arrays *iPropertyID* and *iPropertyValue*. The arrays *iPropertyID* and *iPropertyValue* MUST have an identical number of elements.
@@ -3550,7 +3550,7 @@ This event MAY<128> support additional object types defined in the following tab
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_3.2.6.3.3).
+- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_2.2.8).
 - *iPathName*: The directory service pathname of the object to be created, as defined in section [2.2.9](#Section_2.2.9), or NULL.
 - *iGuidIdentifier*: The [**GUID**](#gt_globally-unique-identifier-guid) of the object to delete, if *iPathName* is NULL. Not used if *iPathName* is not NULL, and can be [**GUID_NULL**](#gt_guid_null) in that case.
 - *iReplicate*: A Boolean value indicating whether replication of this change is needed. TRUE if replication is required, or FALSE if it is not.
@@ -3570,7 +3570,7 @@ The server MUST perform the following actions to process this event:
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_3.2.6.3.3).
+- *iObjectType*: One of the directory object types, as defined in section [2.2.8](#Section_2.2.8).
 - *iPathName*: The directory service pathname of the object to be read, as defined in section [2.2.9](#Section_2.2.9), or NULL.
 - *iGuidIdentifier*: The [**GUID**](#gt_globally-unique-identifier-guid) of the object to be read, if *iPathName* is NULL. Not used if *iPathName* is not NULL, and can be [**GUID_NULL**](#gt_guid_null) in that case.
 - *iNumberOfProperties*: The size (in elements) of the arrays *iPropertyID* and *iPropertyValue*. The arrays *iPropertyID* and *iPropertyValue* MUST have an identical number of elements.
@@ -3599,7 +3599,7 @@ The server MUST perform the following actions to process this event:
 | MQDS_CN | See section [3.1.4.21.8.1.10](#Section_3.1.4.21.8.1.10) |
 | MQDS_ENTERPRISE | See section [3.1.4.21.8.1.6](#Section_3.1.4.21.8.1.6) |
 | MQDS_USER | See section [3.1.4.21.8.1.11](#Section_3.1.4.21.8.1.11) |
-| MQDS_ROUTINGLINK | See section [3.1.4.21.8.1.9](#Section_3.2.6.4.5) |
+| MQDS_ROUTINGLINK | See section [3.1.4.21.8.1.9](#Section_3.2.6.1.4) |
 
 <a id="Section_3.1.6.7"></a>
 #### 3.1.6.7 Begin Directory Lookup
@@ -3616,7 +3616,7 @@ This event MUST be generated with the following arguments:
 The server MUST perform the following actions to process this event:
 
 - Create a new **LookupIteratorState** ADM element instance, which is referred to as *newStateObject*.
-- Examine the [**property identifiers**](#gt_property-identifier) in *iColumnSet.aCol* to determine the directory object type for which to search. Directory object types are defined in section [2.2.8](#Section_3.2.6.3.3), and the association by type with property identifiers is defined in section [2.2.10.1](#Section_2.2.10.1). Store the directory object type in *newStateObject*.**ObjectType**. If the property identifiers belong to more than one directory object type, perform no further processing and return an error.
+- Examine the [**property identifiers**](#gt_property-identifier) in *iColumnSet.aCol* to determine the directory object type for which to search. Directory object types are defined in section [2.2.8](#Section_2.2.8), and the association by type with property identifiers is defined in section [2.2.10.1](#Section_2.2.10.1). Store the directory object type in *newStateObject*.**ObjectType**. If the property identifiers belong to more than one directory object type, perform no further processing and return an error.
 - Populate the *newStateObject*.**PropertyList** with the property identifiers from *iColumnSet.aCol*.
 - The server SHOULD<131> generate a [Read Directory Begin](#Section_3.2.6.4) ([MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) section 3.1.6.4) event with the following arguments:
 - *iDirectoryObjectType* := the string representation of *newStateObject*.**ObjectType** as defined in the following table. If the object type is not in the table, take no further action, and return an error.
@@ -3707,7 +3707,7 @@ The server SHOULD<135> perform the following actions to process this event:
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: a value defined in section [2.2.8](#Section_3.2.6.3.3) that identifies the object type.
+- *iObjectType*: a value defined in section [2.2.8](#Section_2.2.8) that identifies the object type.
 - *iPathName*: a string that can be used to locate the directory object.
 - *iGuid*: a [**GUID**](#gt_globally-unique-identifier-guid) that can be used to locate the directory object.
 **Return Values:**
@@ -3753,7 +3753,7 @@ The server SHOULD<136> perform the following actions to process this event:
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: a value defined in section [2.2.8](#Section_3.2.6.3.3) that identifies the object type.
+- *iObjectType*: a value defined in section [2.2.8](#Section_2.2.8) that identifies the object type.
 - *iPathName*: a string that can be used to locate the directory object.
 - *iGuid*: a [**GUID**](#gt_globally-unique-identifier-guid) that can be used to locate the directory object.
 **Return Values**:
@@ -3791,7 +3791,7 @@ The server SHOULD<137> perform the following actions to process this event:
 
 This event MUST be generated with the following arguments:
 
-- *iObjectType*: a value defined in section [2.2.8](#Section_3.2.6.3.3) that identifies the object type.
+- *iObjectType*: a value defined in section [2.2.8](#Section_2.2.8) that identifies the object type.
 - *iPathName*: a string that can be used to locate the directory object.
 - *iGuid*: a GUID that can be used to locate the directory object.
 **Return Values**:
@@ -3842,7 +3842,7 @@ The server SHOULD<140> perform the following actions to process this event:
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and consists of elements that are defined in this protocol and elements that are specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1. Although the abstract data model for this protocol contains elements that are specified in [MS-MQDMPR], this protocol does not share instances of any of these elements or state with any other protocol. The relationship between this protocol, a [**queue manager**](#gt_queue-manager-qm), and other [**MSMQ**](#gt_message-queuing) protocols is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and consists of elements that are defined in this protocol and elements that are specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1. Although the abstract data model for this protocol contains elements that are specified in [MS-MQDMPR], this protocol does not share instances of any of these elements or state with any other protocol. The relationship between this protocol, a [**queue manager**](#gt_queue-manager-qm), and other [**MSMQ**](#gt_message-queuing) protocols is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.2.1.1](#Section_3.2.1.1) details the elements from the shared data model that are specified in [MS-MQDMPR]. Sections [3.2.1.2](#Section_3.2.1.2) through [3.2.1.6](#Section_3.2.1.6) detail the data model elements that are specific to this protocol.
 
@@ -3871,9 +3871,9 @@ The client needs to maintain the GSS security context, output_token from the GSS
 - [S_DSGetProps](#Section_3.1.4.7)
 - [S_DSGetPropsGuid](#Section_3.1.4.8)
 - [S_DSLookupNext](#Section_3.1.4.18)
-- [S_DSGetObjectSecurity](#Section_5)
-- [S_DSGetObjectSecurityGuid](#Section_5)
-- [S_DSQMGetObjectSecurity](#Section_5)
+- [S_DSGetObjectSecurity](#Section_3.1.4.11)
+- [S_DSGetObjectSecurityGuid](#Section_3.1.4.12)
+- [S_DSQMGetObjectSecurity](#Section_3.1.4.15)
 - [S_DSCreateServersCache](#Section_3.1.4.20)
 <a id="Section_3.2.1.3"></a>
 #### 3.2.1.3 SiteIdentifier Data Element
@@ -3934,8 +3934,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [S_DSQMSetMachinePropertiesSignProc](#Section_3.2.4.1) | A callback method called by the server in response to a client call to [S_DSQMSetMachineProperties](#Section_3.2.4.1). Through this method, the server provides a challenge that the client must sign to authenticate itself. Opnum: 0 |
-| [S_DSQMGetObjectSecurityChallengeResponceProc](#Section_5) | A callback method called by the server in response to a client call to [S_DSQMGetObjectSecurity](#Section_5). Through this method, the server provides a challenge that the client must sign to authenticate itself. Opnum: 1 |
+| [S_DSQMSetMachinePropertiesSignProc](#Section_3.2.4.1) | A callback method called by the server in response to a client call to [S_DSQMSetMachineProperties](#Section_3.1.4.16). Through this method, the server provides a challenge that the client must sign to authenticate itself. Opnum: 0 |
+| [S_DSQMGetObjectSecurityChallengeResponceProc](#Section_3.2.4.2) | A callback method called by the server in response to a client call to [S_DSQMGetObjectSecurity](#Section_3.1.4.15). Through this method, the server provides a challenge that the client must sign to authenticate itself. Opnum: 1 |
 | [S_InitSecCtx](#Section_3.2.4.3) | A callback method called by the server in response to a client call to [S_DSValidateServer](#Section_3.1.4.2). This method is called for each leg of a mutual authentication security context negotiation. Opnum: 2 |
 
 All methods MUST NOT throw exceptions.
@@ -3943,7 +3943,7 @@ All methods MUST NOT throw exceptions.
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 S_DSQMSetMachinePropertiesSignProc (Opnum 0)
 
-This method is a callback method called by the server during a client call to [S_DSQMSetMachineProperties](#Section_3.2.4.1). Through this method, the server provides a challenge that the client must sign to authenticate itself.
+This method is a callback method called by the server during a client call to [S_DSQMSetMachineProperties](#Section_3.1.4.16). Through this method, the server provides a challenge that the client must sign to authenticate itself.
 
 [callback] HRESULT S_DSQMSetMachinePropertiesSignProc(
 
@@ -4030,7 +4030,7 @@ Set *pdwSignatureSize to the size in bytes of the signed MD5 hash.
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 S_DSQMGetObjectSecurityChallengeResponceProc (Opnum 1)
 
-S_DSQMGetObjectSecurityChallengeResponceProc is a callback method called by the server during a client call to [S_DSQMGetObjectSecurity](#Section_5). Through this method, the server provides a challenge that the client must sign to authenticate itself.
+S_DSQMGetObjectSecurityChallengeResponceProc is a callback method called by the server during a client call to [S_DSQMGetObjectSecurity](#Section_3.1.4.15). Through this method, the server provides a challenge that the client must sign to authenticate itself.
 
 [callback] HRESULT S_DSQMGetObjectSecurityChallengeResponceProc(
 
@@ -4153,7 +4153,7 @@ There are no timer events.
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Other Local Events
 
-These events are made available by the MQDS client and are raised by the processing rules within the common processing rules defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md). These events act as a simple translation layer to the RPC methods specified in section [3.1.4](#Section_3.4.4).
+These events are made available by the MQDS client and are raised by the processing rules within the common processing rules defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md). These events act as a simple translation layer to the RPC methods specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_3.2.6.1"></a>
 #### 3.2.6.1 Create Directory Object
@@ -4168,7 +4168,7 @@ This event MUST be generated with the following arguments:
 - *rObjectGUID*: The [**GUID**](#gt_globally-unique-identifier-guid) of the newly created DirectoryObject. This value is undefined if *rStatus* does not equal DirectoryOperationResult.Success.
 The MQDS client MUST perform the following actions to process this event:
 
-- Determine the type of *iDirectoryObject*. If the type is not one of [QueueManager](#Section_3.2.6.3.1), [Queue](#Section_3.2.6.7.2), [Site](#Section_3.2.6.3.4), [RoutingLink](#Section_3.2.6.4.5), [ConnectedNetwork](#Section_3.2.6.2.5), or [User](#Section_3.2.6.7.7), processing MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError and *rObjectGUID* is undefined.
+- Determine the type of *iDirectoryObject*. If the type is not one of [QueueManager](#Section_3.2.6.1.1), [Queue](#Section_3.1.4.21.8.3.3), [Site](#Section_3.2.6.1.3), [RoutingLink](#Section_3.2.6.1.4), [ConnectedNetwork](#Section_3.2.6.1.5), or [User](#Section_3.1.4.21.8.3.7), processing MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError and *rObjectGUID* is undefined.
 - The steps of the create operation for that type of data element MUST be performed as defined in the following list of sections. The *rStatus* and *rObjectGUID* values described in that section MUST be returned.
 - **QueueManager**, section 3.2.6.1.1
 - **Queue**, section 3.2.6.1.2
@@ -4260,7 +4260,7 @@ The MQDS client MUST perform the following actions:
 | PROPID_Q_JOURNAL_QUOTA ([MS-MQMQ] section 2.3.1.7) | Integer copied from *iDirectoryObject.JournalQuota*. |
 | PROPID_Q_LABEL ([MS-MQMQ] section 2.3.1.8) | UNICODE string copied from *iDirectoryObject.Label*. |
 | PROPID_Q_AUTHENTICATE ([MS-MQMQ] section 2.3.1.11) | If *iDirectoryObject.Authentication* is TRUE, set to 1; Else set to 0. |
-| PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from *iDirectoryObject.PrivacyLevel*. See section [3.2.6.1.2.1](../MS-MQMQ/MS-MQMQ.md). |
+| PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from *iDirectoryObject.PrivacyLevel*. See section [3.2.6.1.2.1](#Section_3.2.6.1.2.1). |
 | PROPID_Q_TRANSACTION ([MS-MQMQ] section 2.3.1.13) | If *iDirectoryObject.Transactional* is TRUE, set to 1; Else set to 0. |
 | PROPID_Q_PARTITIONID ([MS-MQMQ] section 2.3.1.16) | GUIDs copied from *iDirectoryObject.PartitionIdentifier*. |
 | PROPID_Q_SCOPE ([MS-MQMQ] section 2.3.1.14) | If *iDirectoryObject.Scope* is **Enterprise**, set to 1; Else set to 0. |
@@ -4397,20 +4397,20 @@ The MQDS client MUST perform the following actions to process this event:
 
 - Determine the type of *iDirectoryObject*. If the type is Enterprise, processing MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - Perform the steps of the delete operation for that type of data element, as defined in the following sections listed, and return the *rStatus* value described in that section.
-- [QueueManager](#Section_3.2.6.3.1), section 3.2.6.2.1
-- [Queue](#Section_3.2.6.7.2), section 3.2.6.2.2
-- [Site](#Section_3.2.6.3.4), section 3.2.6.2.3
-- [RoutingLink](#Section_3.2.6.4.5), section 3.2.6.2.4
-- [ConnectedNetwork](#Section_3.2.6.2.5), section 3.2.6.2.5
-- [User](#Section_3.2.6.7.7), section 3.2.6.2.6
+- [QueueManager](#Section_3.2.6.1.1), section 3.2.6.2.1
+- [Queue](#Section_3.1.4.21.8.3.3), section 3.2.6.2.2
+- [Site](#Section_3.2.6.1.3), section 3.2.6.2.3
+- [RoutingLink](#Section_3.2.6.1.4), section 3.2.6.2.4
+- [ConnectedNetwork](#Section_3.2.6.1.5), section 3.2.6.2.5
+- [User](#Section_3.1.4.21.8.3.7), section 3.2.6.2.6
 <a id="Section_3.2.6.2.1"></a>
 ##### 3.2.6.2.1 QueueManager
 
 The MQDS client MUST perform the following actions:
 
-- The arguments supplied to the [Delete Directory Object](#Section_3.2.6.2) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
+- The arguments supplied to the [Delete Directory Object](#Section_3.1.6.5) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - At least one of the *iDirectoryObject.ComputerName* or *iDirectoryObject.Identifier* attributes MUST be populated.
-- If *iDirectoryObject.ComputerName* is populated, then the [S_DSDeleteObject](#Section_3.1.4.6) method (section 3.1.4.5) MUST be called with the following arguments:
+- If *iDirectoryObject.ComputerName* is populated, then the [S_DSDeleteObject](#Section_3.1.4.5) method (section 3.1.4.5) MUST be called with the following arguments:
 - *dwObjectType* MUST be MQDS_MACHINE.
 - *pwcsPathName* MUST point to a buffer containing the value of *iDirectoryObject.ComputerName*.
 - Otherwise, the [S_DSDeleteObjectGuid](#Section_3.1.4.6) method (section 3.1.4.6) MUST be called with the following arguments:
@@ -4423,9 +4423,9 @@ The MQDS client MUST perform the following actions:
 
 The MQDS client MUST perform the following actions:
 
-- The arguments supplied to the [Delete Directory Object](#Section_3.2.6.2) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
+- The arguments supplied to the [Delete Directory Object](#Section_3.1.6.5) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - At least one of the *iDirectoryObject.Pathname* or *iDirectoryObject.Identifier* attributes MUST be populated.
-- If *iDirectoryObject.Pathname* is populated, then the [S_DSDeleteObject](#Section_3.1.4.6) method (section 3.1.4.5) MUST be called with the following arguments:
+- If *iDirectoryObject.Pathname* is populated, then the [S_DSDeleteObject](#Section_3.1.4.5) method (section 3.1.4.5) MUST be called with the following arguments:
 - *dwObjectType* MUST be MQDS_QUEUE.
 - *pwcsPathName* MUST point to a buffer containing the value of *iDirectoryObject.Pathname*.
 - Otherwise, the [S_DSDeleteObjectGuid](#Section_3.1.4.6) method (section 3.1.4.6) MUST be called with the following arguments:
@@ -4438,7 +4438,7 @@ The MQDS client MUST perform the following actions:
 
 The MQDS client MUST perform the following actions:
 
-- The arguments supplied to the [Delete Directory Object](#Section_3.2.6.2) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
+- The arguments supplied to the [Delete Directory Object](#Section_3.1.6.5) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - The *iDirectoryObject.Identifier* attribute MUST be populated.
 - The [S_DSDeleteObjectGuid](#Section_3.1.4.6) method (section 3.1.4.6) MUST be called with the following arguments:
 - *dwObjectType* MUST be MQDS_SITE.
@@ -4450,7 +4450,7 @@ The MQDS client MUST perform the following actions:
 
 The MQDS client MUST perform the following actions:
 
-- The arguments supplied to the [Delete Directory Object](#Section_3.2.6.2) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
+- The arguments supplied to the [Delete Directory Object](#Section_3.1.6.5) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - The *iDirectoryObject.Identifier* attribute MUST be populated.
 - The [S_DSDeleteObjectGuid](#Section_3.1.4.6) method (section 3.1.4.6) MUST be called with the following arguments:
 - *dwObjectType* MUST be MQDS_ROUTINGLINK.
@@ -4462,7 +4462,7 @@ The MQDS client MUST perform the following actions:
 
 The MQDS client MUST perform the following actions:
 
-- The arguments supplied to the [Delete Directory Object](#Section_3.2.6.2) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
+- The arguments supplied to the [Delete Directory Object](#Section_3.1.6.5) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - The *iDirectoryObject.Identifier* attribute MUST be populated.
 - The [S_DSDeleteObjectGuid](#Section_3.1.4.6) method (section 3.1.4.6) MUST be called with the following arguments:
 - *dwObjectType* MUST be MQDS_CN.
@@ -4474,7 +4474,7 @@ The MQDS client MUST perform the following actions:
 
 The MQDS client MUST perform the following actions:
 
-- The arguments supplied to the [Delete Directory Object](#Section_3.2.6.2) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
+- The arguments supplied to the [Delete Directory Object](#Section_3.1.6.5) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to DirectoryOperationResult.GenericError.
 - The *iDirectoryObject.CertificateDigestList* attribute MUST be populated with exactly one digest.
 - The [S_DSDeleteObjectGuid](#Section_3.1.4.6) method (section 3.1.4.6) MUST be called with the following arguments:
 - *dwObjectType* MUST be MQDS_USER.
@@ -4506,8 +4506,8 @@ The MQDS client MUST perform the following actions to process this event:
 - [Queue (section 3.2.6.3.2)](#Section_3.2.6.3.2)
 - [Enterprise (section 3.2.6.3.3)](#Section_3.2.6.3.3)
 - [Site (section 3.2.6.3.4)](#Section_3.2.6.3.4)
-- [RoutingLink (section 3.2.6.3.5)](#Section_3.2.6.4.5)
-- [ConnectedNetwork (section 3.2.6.3.6)](#Section_3.2.6.2.5)
+- [RoutingLink (section 3.2.6.3.5)](#Section_3.2.6.3.5)
+- [ConnectedNetwork (section 3.2.6.3.6)](#Section_3.2.6.3.6)
 - [User (section 3.2.6.3.7)](#Section_3.2.6.3.7)
 - Processing MUST end. *rStatus* and *rDirectoryObject* MUST be set as described in the section listed above.
 - Otherwise, the following steps MUST be performed:
@@ -4544,14 +4544,14 @@ The MQDS client MUST perform the following actions:
 | **OutRoutingServerIdentifierList** | PROPID_QM_OUTFRS ([MS-MQMQ] section 2.3.2.7) | List of GUIDs copied from property. |
 | **InRoutingServerIdentifierList** | PROPID_QM_INFRS ([MS-MQMQ] section 2.3.2.8) | List of GUIDs copied from property. |
 | **RemoteAccessServer** | PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | If bit 0x00000010 of property is set, **RemoteAccessServer** is TRUE; Else, if bit 0x00000010 is not set, **RemoteAccessServer** is FALSE. |
-| **DirectoryServerType** | PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | Computed from property; see section [3.2.6.3.1.1](../MS-MQMQ/MS-MQMQ.md). |
+| **DirectoryServerType** | PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | Computed from property; see section [3.2.6.3.1.1](#Section_3.2.6.3.1.1). |
 | **QueueManagerQuota** | PROPID_QM_QUOTA ([MS-MQMQ] section 2.3.2.10) | Integer copied from property. |
 | **JournalQuota** | PROPID_QM_JOURNAL_QUOTA ([MS-MQMQ] section 2.3.2.14) | Integer copied from property. |
 | **QueueManagerVersion** | PROPID_QM_MACHINE_TYPE ([MS-MQMQ] section 2.3.2.15) | Unicode string copied from property. |
 | **CreateTime** | PROPID_QM_CREATE_TIME ([MS-MQMQ] section 2.3.2.16) | Integer copied from property. |
 | **ModifyTime** | PROPID_QM_MODIFY_TIME ([MS-MQMQ] section 2.3.2.17) | Integer copied from property. |
 | **ForeignSystem** | PROPID_QM_FOREIGN ([MS-MQMQ] section 2.3.2.18) | If property equals 0x01, **ForeignSystem** is TRUE; Else, if property equals 0x00, **ForeignSystem** is FALSE. |
-| **OperatingSystemType** | PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | Computed from property. See section [3.2.6.3.1.2](../MS-MQMQ/MS-MQMQ.md). |
+| **OperatingSystemType** | PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | Computed from property. See section [3.2.6.3.1.2](#Section_3.2.6.3.1.2). |
 | **Security** | PROPID_QM_SECURITY ([MS-MQMQ] section 2.3.2.36) | Security descriptor copied from property. |
 | **PublicSigningKeyList** | PROPID_QM_SIGN_PKS ([MS-MQMQ] section 2.3.2.33) | MQDSPUBLICKEYS structure ([MS-MQMQ] section 2.2.2) copied from property. |
 | **PublicEncryptionKeyList** | PROPID_QM_ENCRYPT_PKS ([MS-MQMQ] section 2.3.2.32) | MQDSPUBLICKEYS structure copied from property. |
@@ -4622,7 +4622,7 @@ The MQDS client MUST perform the following actions:
 | **CreateTime** | PROPID_Q_CREATE_TIME ([MS-MQMQ] section 2.3.1.9) | Integer copied from property. |
 | **ModifyTime** | PROPID_Q_MODIFY_TIME ([MS-MQMQ] section 2.3.1.10) | Integer copied from property. |
 | **Authentication** | PROPID_Q_AUTHENTICATE ([MS-MQMQ] section 2.3.1.11) | If property equals 1, **Authentication** is **True**; Else if property equals 0, **Authentication** is **False**. |
-| **PrivacyLevel** | PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from property. See section [3.2.6.3.2.1](../MS-MQMQ/MS-MQMQ.md). |
+| **PrivacyLevel** | PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from property. See section [3.2.6.3.2.1](#Section_3.2.6.3.2.1). |
 | **Transactional** | PROPID_Q_TRANSACTION ([MS-MQMQ] section 2.3.1.13) | If property equals 1, **Transactional** is **True**; Else if property equals 0, **Transactional** is **False**. |
 | **PartitionIdentifier** | PROPID_Q_PARTITIONID ([MS-MQMQ] section 2.3.1.16) | GUID copied from property. |
 | **Security** | PROPID_Q_SECURITY ([MS-MQMQ] section 2.3.1.25) | Security descriptor copied from property. |
@@ -4661,8 +4661,8 @@ The MQDS client MUST perform the following actions:
 | Enterprise ADM element attribute | Property identifier | Attribute value computation |
 | --- | --- | --- |
 | **Name** | PROPID_E_NAME ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.5.1) | [**Unicode**](#gt_unicode) string copied from property. |
-| **WeakenedSecurity** | PROPID_E_NAMESTYLE ([MS-MQMQ] section 2.3.5.2) | Computed from property. See section [3.2.6.3.3.1](../MS-MQMQ/MS-MQMQ.md). |
-| **CrytographicProvider** | PROPID_E_CSP_NAME ([MS-MQMQ] section 2.3.5.3) | Computed from property. See section [3.2.6.3.3.2](../MS-MQMQ/MS-MQMQ.md). |
+| **WeakenedSecurity** | PROPID_E_NAMESTYLE ([MS-MQMQ] section 2.3.5.2) | Computed from property. See section [3.2.6.3.3.1](#Section_3.2.6.3.3.1). |
+| **CrytographicProvider** | PROPID_E_CSP_NAME ([MS-MQMQ] section 2.3.5.3) | Computed from property. See section [3.2.6.3.3.2](#Section_3.2.6.3.3.2). |
 | **Identifier** | PROPID_E_ID ([MS-MQMQ] section 2.3.5.9) | [**GUID**](#gt_globally-unique-identifier-guid) copied from property. |
 | **DefaultTimeToLive** | PROPID_E_LONG_LIVE ([MS-MQMQ] section 2.3.5.15) | Integer copied from property. |
 | **OldDirectory** | PROPID_E_VERSION ([MS-MQMQ] section 2.3.5.16) | If property equals 3, **OldDirectory** is **True**. Else if property equals 200, **OldDirectory** is **False**. |
@@ -4827,12 +4827,12 @@ The MQDS client MUST perform the following actions to process this event:
 
 - Let **ReadIterator** be a [ReadDirectoryIteratorState (section 3.2.1.5)](#Section_3.2.1.5) ADM element instance, which MUST be created. The **ReadIterator** MUST be added to the [ReadDirectoryIteratorStateCollection (section 3.2.1.6)](#Section_3.2.1.6) ADM element. The value of *iDirectoryObjectType* MUST be copied to the **ReadIterator.DataElementType** attribute.
 - Based on *iDirectoryObjectType*, perform the steps of the read-begin operation for that type of ADM element, as specified in the sections that follow, and return the *rStatus* value specified in that section. The directory contents must NOT be modified by this operation.
-- [QueueManager (section 3.2.6.4.1)](#Section_3.2.6.3.1)
+- [QueueManager (section 3.2.6.4.1)](#Section_3.2.6.4.1)
 - [Queue (section 3.2.6.4.2)](#Section_3.2.6.4.2)
-- [Enterprise (section 3.2.6.4.3)](#Section_3.2.6.3.3)
+- [Enterprise (section 3.2.6.4.3)](#Section_3.2.6.4.3)
 - [Site (section 3.2.6.4.4)](#Section_3.2.6.4.4)
 - [RoutingLink (section 3.2.6.4.5)](#Section_3.2.6.4.5)
-- [ConnectedNetwork (section 3.2.6.4.6)](#Section_3.2.6.2.5)
+- [ConnectedNetwork (section 3.2.6.4.6)](#Section_3.2.6.4.6)
 - [User (section 3.2.6.4.7)](#Section_3.2.6.4.7)
 - If the value of *rStatus* is not **DirectoryOperationResult.Success**, the **ReadIterator** MUST be removed from the **ReadDirectoryIteratorStateCollection** ADM element and discarded, *rQueryHandle* is undefined, and processing MUST end.
 - If the value of *rStatus* is **DirectoryOperationResult.Success**, *rQueryHandle* MUST be set to the value of **ReadIterator.Handle**, and processing MUST end.
@@ -5180,12 +5180,12 @@ The MQDS client MUST perform the following actions to process this event:
 
 - Let **ReadIterator** be the [ReadDirectoryIteratorState (section 3.2.1.5)](#Section_3.2.1.5) ADM element found in the [ReadDirectoryIteratorStateCollection (section 3.2.1.6)](#Section_3.2.1.6) ADM element for which the value of the **Handle** attribute equals the value of *iQueryHandle*. If no such **ReadDirectoryIteratorState** ADM element is found, processing MUST end. *rStatus* MUST be set to **DirectoryOperationResult.GenericError**.
 - Perform the steps of the read-next operation for the type of ADM element indicated by **ReadIterator.DataElementType**, as defined in the sections listed as follows, and return the *rStatus* and *rDirectoryObject* values described in that section.
-- [QueueManager (section 3.2.6.5.1)](#Section_3.2.6.3.1)
+- [QueueManager (section 3.2.6.5.1)](#Section_3.2.6.5.1)
 - [Queue (section 3.2.6.5.2)](#Section_3.2.6.5.2)
-- [Enterprise (section 3.2.6.5.3)](#Section_3.2.6.3.3)
+- [Enterprise (section 3.2.6.5.3)](#Section_3.2.6.5.3)
 - [Site (section 3.2.6.5.4)](#Section_3.2.6.5.4)
-- [RoutingLink (section 3.2.6.5.5)](#Section_3.2.6.4.5)
-- [ConnectedNetwork (section 3.2.6.5.6)](#Section_3.2.6.2.5)
+- [RoutingLink (section 3.2.6.5.5)](#Section_3.2.6.5.5)
+- [ConnectedNetwork (section 3.2.6.5.6)](#Section_3.2.6.5.6)
 - [User (section 3.2.6.5.7)](#Section_3.2.6.5.7)
 <a id="Section_3.2.6.5.1"></a>
 ##### 3.2.6.5.1 QueueManager
@@ -5206,14 +5206,14 @@ The MQDS client MUST perform the following actions:
 | **OutRoutingServerIdentifierList** | PROPID_QM_OUTFRS ([MS-MQMQ] section 2.3.2.7) | List of GUIDs copied from property. |
 | **InRoutingServerIdentifierList** | PROPID_QM_INFRS ([MS-MQMQ] section 2.3.2.8) | List of GUIDs copied from property. |
 | **RemoteAccessServer** | PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | If bit 0x00000010 of property is set, **RemoteAccessServer** is TRUE; Else if bit 0x00000010 is not set, **RemoteAccessServer** is FALSE. |
-| **DirectoryServerType** | PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | Computed from property. See section [3.2.6.3.1.1](../MS-MQMQ/MS-MQMQ.md). |
+| **DirectoryServerType** | PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | Computed from property. See section [3.2.6.3.1.1](#Section_3.2.6.3.1.1). |
 | **QueueManagerQuota** | PROPID_QM_QUOTA ([MS-MQMQ] section 2.3.2.10) | Integer copied from property. |
 | **JournalQuota** | PROPID_QM_JOURNAL_QUOTA ([MS-MQMQ] section 2.3.2.14) | Integer copied from property. |
 | **QueueManagerVersion** | PROPID_QM_MACHINE_TYPE ([MS-MQMQ] section 2.3.2.15) | Unicode string copied from property. |
 | **CreateTime** | PROPID_QM_CREATE_TIME ([MS-MQMQ] section 2.3.2.16) | Integer copied from property. |
 | **ModifyTime** | PROPID_QM_MODIFY_TIME ([MS-MQMQ] section 2.3.2.17) | Integer copied from property. |
 | **ForeignSystem** | PROPID_QM_FOREIGN ([MS-MQMQ] section 2.3.2.18) | If property equals 0x01, **ForeignSystem** is TRUE; Else, if property equals 0x00, **ForeignSystem** is False. |
-| **OperatingSystemType** | PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | Computed from property. See section [3.2.6.3.1.2](../MS-MQMQ/MS-MQMQ.md). |
+| **OperatingSystemType** | PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | Computed from property. See section [3.2.6.3.1.2](#Section_3.2.6.3.1.2). |
 | **Security** | PROPID_QM_SECURITY ([MS-MQMQ] section 2.3.2.36) | Security descriptor copied from property. |
 | **PublicSigningKeyList** | PROPID_QM_SIGN_PKS ([MS-MQMQ] section 2.3.2.33) | MQDSPUBLICKEYS structure ([MS-MQMQ] section 2.2.2) copied from property. |
 | **PublicEncryptionKeyList** | PROPID_QM_ENCRYPT_PKS ([MS-MQMQ] section 2.3.2.32) | MQDSPUBLICKEYS structure copied from property. |
@@ -5252,7 +5252,7 @@ The MQDS client MUST perform the following actions:
 | **CreateTime** | PROPID_Q_CREATE_TIME ([MS-MQMQ] section 2.3.1.9) | Integer copied from property. |
 | **ModifyTime** | PROPID_Q_MODIFY_TIME ([MS-MQMQ] section 2.3.1.10) | Integer copied from property. |
 | **Authentication** | PROPID_Q_AUTHENTICATE ([MS-MQMQ] section 2.3.1.11) | If property equals 1, **Authentication** is TRUE; Else if property equals 0, **Authentication** is FALSE. |
-| **PrivacyLevel** | PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from property. See section [3.2.6.3.2.1](../MS-MQMQ/MS-MQMQ.md). |
+| **PrivacyLevel** | PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from property. See section [3.2.6.3.2.1](#Section_3.2.6.3.2.1). |
 | **Transactional** | PROPID_Q_TRANSACTION ([MS-MQMQ] section 2.3.1.13) | If property equals 1, **Transactional** is TRUE; Else if property equals 0, **Transactional** is FALSE. |
 | **PartitionIdentifier** | PROPID_Q_PARTITIONID ([MS-MQMQ] section 2.3.1.16) | GUID copied from property. |
 | **Security** | PROPID_Q_SECURITY ([MS-MQMQ] section 2.3.1.25) | Security descriptor copied from property. |
@@ -5275,8 +5275,8 @@ The MQDS client MUST perform the following actions:
 | Enterprise attribute | Property identifier | Attribute value computation |
 | --- | --- | --- |
 | Name | PROPID_E_NAME ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.5.1) | [**Unicode**](#gt_unicode) string copied from property. |
-| WeakenedSecurity | PROPID_E_NAMESTYLE ([MS-MQMQ] section 2.3.5.2) | Computed from property. See section [3.2.6.3.3.1](../MS-MQMQ/MS-MQMQ.md). |
-| CrytographicProvider | PROPID_E_CSP_NAME ([MS-MQMQ] section 2.3.5.3) | Computed from property. See section [3.2.6.3.3.2](../MS-MQMQ/MS-MQMQ.md). |
+| WeakenedSecurity | PROPID_E_NAMESTYLE ([MS-MQMQ] section 2.3.5.2) | Computed from property. See section [3.2.6.3.3.1](#Section_3.2.6.3.3.1). |
+| CrytographicProvider | PROPID_E_CSP_NAME ([MS-MQMQ] section 2.3.5.3) | Computed from property. See section [3.2.6.3.3.2](#Section_3.2.6.3.3.2). |
 | Identifier | PROPID_E_ID ([MS-MQMQ] section 2.3.5.9) | [**GUID**](#gt_globally-unique-identifier-guid) copied from property. |
 | DefaultTimeToLive | PROPID_E_LONG_LIVE ([MS-MQMQ] section section 2.3.5.15) | Integer copied from property. |
 | OldDirectory | PROPID_E_VERSION ([MS-MQMQ] section 2.3.5.16) | If property equals 3, OldDirectory is TRUE. Else if property equals 200 OldDirectory is FALSE. |
@@ -5400,13 +5400,13 @@ The MQDS client MUST perform the following actions to process this event:
 
 - Determine the type of *iDirectoryObject*.
 - Perform the steps of the write operation for that type of data element, as defined in the following sections listed, and return the **rStatus** value described in that section:
-- [QueueManager](#Section_3.2.6.3.1), section 3.2.6.7.1
-- [Queue](#Section_3.2.6.7.2), section 3.2.6.7.2
+- [QueueManager](#Section_3.2.6.1.1), section 3.2.6.7.1
+- [Queue](#Section_3.1.4.21.8.3.3), section 3.2.6.7.2
 - [Enterprise](#Section_3.2.6.3.3), section 3.2.6.7.3
-- [Site](#Section_3.2.6.3.4), section 3.2.6.7.4
-- [RoutingLink](#Section_3.2.6.4.5), section 3.2.6.7.5
-- [ConnectedNetwork](#Section_3.2.6.2.5), section 3.2.6.7.6
-- [User](#Section_3.2.6.7.7), section 3.2.6.7.7
+- [Site](#Section_3.2.6.1.3), section 3.2.6.7.4
+- [RoutingLink](#Section_3.2.6.1.4), section 3.2.6.7.5
+- [ConnectedNetwork](#Section_3.2.6.1.5), section 3.2.6.7.6
+- [User](#Section_3.1.4.21.8.3.7), section 3.2.6.7.7
 <a id="Section_3.2.6.7.1"></a>
 ##### 3.2.6.7.1 QueueManager
 
@@ -5415,18 +5415,18 @@ The MQDS client MUST perform the following actions:
 - The arguments supplied to the [Write Directory](#Section_3.2.6.7) event MUST meet the following conditions. If any of these conditions is violated, processing of the event MUST end. *rStatus* MUST be set to **DirectoryOperationResult.GenericError** and *rObjectGUID* is undefined.
 - At least one of the *iDirectoryObject*.ComputerName or *iDirectoryObject*.Identifier attributes MUST be populated.
 - If *iAttributeList* was not provided as an argument, then an *iAttributeList* MUST be constructed that MUST contain the names of all **QueueManager** directory attributes listed in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1.
-- The *aProp* and *apVar* arguments for the [S_DSSetProps](#Section_3.1.4.10) method (section 3.1.4.9) or [S_DSSetPropsGuid](#Section_3.1.4.10) method (section 3.1.4.10) MUST be computed. For each [**property identifier**](#gt_property-identifier) listed in the following table, if the corresponding **QueueManager** attribute name appears in *iAttributeList* and that attribute is populated in *iDirectoryObject*, add the property identifier to *aProp*, add a [PROPVARIANT](#Section_2.2.3) to *apVar* that is set to the correct type for the property and contains in the correct field the computed value for the property, as shown in the following table. **QueueManager** attribute names that appear in *iAttributeList* but do not appear in the following table or subsections referenced by the table MUST be ignored.
+- The *aProp* and *apVar* arguments for the [S_DSSetProps](#Section_3.1.4.9) method (section 3.1.4.9) or [S_DSSetPropsGuid](#Section_3.1.4.10) method (section 3.1.4.10) MUST be computed. For each [**property identifier**](#gt_property-identifier) listed in the following table, if the corresponding **QueueManager** attribute name appears in *iAttributeList* and that attribute is populated in *iDirectoryObject*, add the property identifier to *aProp*, add a [PROPVARIANT](#Section_2.2.3) to *apVar* that is set to the correct type for the property and contains in the correct field the computed value for the property, as shown in the following table. **QueueManager** attribute names that appear in *iAttributeList* but do not appear in the following table or subsections referenced by the table MUST be ignored.
 | Property identifier | Property value computation |
 | --- | --- |
 | PROPID_QM_CNS ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.2.6) | List of [**GUIDs**](#gt_globally-unique-identifier-guid) copied from *iDirectoryObject*.ConnectedNetworkIdentifierList. |
 | PROPID_QM_OUTFRS ([MS-MQMQ] section 2.3.2.7) | List of GUIDs copied from *iDirectoryObject*.OutRoutingServerIdentifierList. |
 | PROPID_QM_INFRS ([MS-MQMQ] section 2.3.2.8) | List of GUIDs copied from *iDirectoryObject*.InRoutingServerIdentifierList. |
-| PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | Computed from *iDirectoryObject*.DirectoryServer, *iDirectoryObject*.DirectoryServerType, *iDirectoryObject*.RemoteAccessServer, and *iDirectoryObject*.RoutingServer. See section [3.2.6.1.1.1](../MS-MQMQ/MS-MQMQ.md). |
+| PROPID_QM_SERVICE ([MS-MQMQ] section 2.3.2.9) | Computed from *iDirectoryObject*.DirectoryServer, *iDirectoryObject*.DirectoryServerType, *iDirectoryObject*.RemoteAccessServer, and *iDirectoryObject*.RoutingServer. See section [3.2.6.1.1.1](#Section_3.2.6.1.1.1). |
 | PROPID_QM_QUOTA ([MS-MQMQ] section 2.3.2.10) | Integer copied from *iDirectoryObject*.QueueManagerQuota. |
 | PROPID_QM_JOURNAL_QUOTA ([MS-MQMQ] section 2.3.2.14) | Integer copied from *iDirectoryObject*.JournalQuota. |
 | PROPID_QM_MACHINE_TYPE ([MS-MQMQ] section 2.3.2.15) | [**Unicode**](#gt_unicode) string copied from *iDirectoryObject*.QueueManagerVersion. |
 | PROPID_QM_FOREIGN ([MS-MQMQ] section 2.3.2.18) | If *iDirectoryObject*.ForeignSystem is TRUE, set to 0x01; Else, set to 0x00. |
-| PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | Computed from *iDirectoryObject*.OperatingSystemType. See section [3.2.6.1.1.2](../MS-MQMQ/MS-MQMQ.md). |
+| PROPID_QM_OS ([MS-MQMQ] section 2.3.2.19) | Computed from *iDirectoryObject*.OperatingSystemType. See section [3.2.6.1.1.2](#Section_3.2.6.1.1.2). |
 | PROPID_QM_SIGN_PKS ([MS-MQMQ] section 2.3.2.33) | MQDSPUBLICKEYS structure ([MS-MQMQ] section 2.2.2) copied from *iDirectoryObject*.PublicSigningKeyList. |
 | PROPID_QM_ENCRYPT_PKS ([MS-MQMQ] section 2.3.2.32) | MQDSPUBLICKEYS structure copied from *iDirectoryObject*.PublicEncryptionKeyList. |
 | PROPID_QM_SITE_IDS ([MS-MQMQ] section 2.3.2.21) | List of GUIDs copied from *iDirectoryObject*.SiteIdentifierList. |
@@ -5447,7 +5447,7 @@ The MQDS client MUST perform the following actions:
 - The arguments supplied to the [Write Directory](#Section_3.2.6.7) event MUST meet the following conditions. If any of these conditions are violated, processing of the event MUST end. *rStatus* MUST be set to **DirectoryOperationResult.GenericError**.
 - At least one of the *iDirectoryObject*.Identifier or *iDirectoryObject*.Pathname attributes MUST be populated.
 - If *iAttributeList* was not provided as an argument, then an *iAttributeList* MUST be constructed which MUST contain the names of all **Queue** directory attributes listed in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2.
-- The *aProp* and *apVar* arguments for the [S_DSSetProps](#Section_3.1.4.10) method (section 3.1.4.9) or [S_DSSetPropsGuid](#Section_3.1.4.10) method (section 3.1.4.10) MUST be computed. For each [**property identifier**](#gt_property-identifier) listed in the following table, if the corresponding **Queue** attribute name appears in *iAttributeList* and that attribute is populated in *iDirectoryObject*, add the property identifier to *aProp*, add a [PROPVARIANT](#Section_2.2.3) to *apVar* which is set to the correct type for the property and contains in the correct field the computed value for the property, as shown in the following table. **Queue** attribute names that appear in *iAttributeList* but do not appear in the following table or subsections referenced by the table MUST be ignored.
+- The *aProp* and *apVar* arguments for the [S_DSSetProps](#Section_3.1.4.9) method (section 3.1.4.9) or [S_DSSetPropsGuid](#Section_3.1.4.10) method (section 3.1.4.10) MUST be computed. For each [**property identifier**](#gt_property-identifier) listed in the following table, if the corresponding **Queue** attribute name appears in *iAttributeList* and that attribute is populated in *iDirectoryObject*, add the property identifier to *aProp*, add a [PROPVARIANT](#Section_2.2.3) to *apVar* which is set to the correct type for the property and contains in the correct field the computed value for the property, as shown in the following table. **Queue** attribute names that appear in *iAttributeList* but do not appear in the following table or subsections referenced by the table MUST be ignored.
 | Property identifier | Property value computation |
 | --- | --- |
 | PROPID_Q_TYPE ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1.2) | [**GUID**](#gt_globally-unique-identifier-guid) copied from *iDirectoryObject*.Type. |
@@ -5457,7 +5457,7 @@ The MQDS client MUST perform the following actions:
 | PROPID_Q_JOURNAL_QUOTA ([MS-MQMQ] section 2.3.1.7) | Integer copied from *iDirectoryObject*.JournalQuota. |
 | PROPID_Q_LABEL ([MS-MQMQ] section 2.3.1.8) | [**Unicode**](#gt_unicode) string copied from *iDirectoryObject*.Label. |
 | PROPID_Q_AUTHENTICATE ([MS-MQMQ] section 2.3.1.11) | If *iDirectoryObject*.Authentication is TRUE, set to 1; Else, set to 0. |
-| PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from *iDirectoryObject*.PrivacyLevel. See section [3.2.6.1.2.1](../MS-MQMQ/MS-MQMQ.md). |
+| PROPID_Q_PRIV_LEVEL ([MS-MQMQ] section 2.3.1.12) | Computed from *iDirectoryObject*.PrivacyLevel. See section [3.2.6.1.2.1](#Section_3.2.6.1.2.1). |
 | PROPID_Q_PARTITIONID ([MS-MQMQ] section 2.3.1.16) | GUID copied from *iDirectoryObject*.PartitionIdentifier. |
 | PROPID_Q_SECURITY ([MS-MQMQ] section 2.3.1.25) | [Security Descriptor](#Section_2.2.4) copied from *iDirectoryObject*.Security. |
 | PROPID_Q_SCOPE ([MS-MQMQ] section 2.3.1.14) | If *iDirectoryObject*.Scope is Enterprise, set to 1; Else set to 0. |
@@ -5479,8 +5479,8 @@ The MQDS client MUST perform the following actions:
 | Property identifier | Property value computation |
 | --- | --- |
 | PROPID_E_NAME ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.5.1) | [**Unicode**](#gt_unicode) string copied from *iDirectoryObject*.Name. |
-| PROPID_E_NAMESTYLE ([MS-MQMQ] section 2.3.5.2) | Computed from *iDirectoryObject*.WeakenedSecurity. See section [3.2.6.3.3.1](../MS-MQMQ/MS-MQMQ.md). |
-| PROPID_E_CSP_NAME ([MS-MQMQ] section 2.3.5.3) | Computed from *iDirectoryObject*.CryptographicProvider. See section [3.2.6.3.3.2](../MS-MQMQ/MS-MQMQ.md). |
+| PROPID_E_NAMESTYLE ([MS-MQMQ] section 2.3.5.2) | Computed from *iDirectoryObject*.WeakenedSecurity. See section [3.2.6.3.3.1](#Section_3.2.6.3.3.1). |
+| PROPID_E_CSP_NAME ([MS-MQMQ] section 2.3.5.3) | Computed from *iDirectoryObject*.CryptographicProvider. See section [3.2.6.3.3.2](#Section_3.2.6.3.3.2). |
 | PROPID_E_ID ([MS-MQMQ] section 2.3.5.9) | [**GUID**](#gt_globally-unique-identifier-guid) copied from *iDirectoryObject*.Identifier. |
 | PROPID_E_LONG_LIVE ([MS-MQMQ] section 2.3.5.15) | Integer copied from *iDirectoryObject*.DefaultTimeToLive. |
 | PROPID_E_VERSION ([MS-MQMQ] section 2.3.5.16) | If *iDirectoryObject*.OldDirectory is TRUE, set to 3, else set to 200. |
@@ -5608,13 +5608,13 @@ Column: PROPID_QM_ADDRESS
 
 This is an [**RPC**](#gt_remote-procedure-call-rpc) context handle that represents an in-progress directory object delete notification.
 
-A protocol client acquires a [PCONTEXT_HANDLE_DELETE_TYPE](#Section_2.2.7) RPC context handle through a call to the [S_DSBeginDeleteNotification](#Section_4.4) method. Each instance of this RPC context handle represents internal state that the server needs to maintain. The server SHOULD register a rundown method to close these context handles in the event that the client fails to call the [S_DSEndDeleteNotification](#Section_4.4) method.
+A protocol client acquires a [PCONTEXT_HANDLE_DELETE_TYPE](#Section_2.2.7) RPC context handle through a call to the [S_DSBeginDeleteNotification](#Section_3.3.4.4) method. Each instance of this RPC context handle represents internal state that the server needs to maintain. The server SHOULD register a rundown method to close these context handles in the event that the client fails to call the [S_DSEndDeleteNotification](#Section_3.3.4.6) method.
 
 The server MUST maintain the following state in the delete notification table.
 
 For deleting [**queues**](#gt_queue), the internal state that the server MUST retain includes the following:
 
-- The object type of the object being deleted (either [MQDS_QUEUE](#Section_3.2.6.3.3) or MQDS_MACHINE).
+- The object type of the object being deleted (either [MQDS_QUEUE](#Section_2.2.8) or MQDS_MACHINE).
 - The object pathname.
 - The object identifier of the owner site.<150>
 Also, if the object being deleted is an MQDS_QUEUE, the server MUST retain the following information:
@@ -5651,9 +5651,9 @@ Methods in RPC Opnum Order
 | [S_DSGetComputerSites](#Section_3.3.4.1) | Returns information on the sites of which a computer is a member. Opnum: 0 |
 | [S_DSGetPropsEx](#Section_3.3.4.2) | Returns extended properties associated with a directory object specified by a [directory service pathname](#Section_2.2.9). Opnum: 1 |
 | [S_DSGetPropsGuidEx](#Section_3.3.4.3) | Returns extended properties associated with a directory object specified by an object identifier. Opnum: 2 |
-| [S_DSBeginDeleteNotification](#Section_4.4) | Begins a delete notification. Opnum: 3 |
-| [S_DSNotifyDelete](#Section_4.4) | Notifies the server that a machine or queue has been deleted by the client. Opnum: 4 |
-| [S_DSEndDeleteNotification](#Section_4.4) | Ends a delete notification. Opnum: 5 |
+| [S_DSBeginDeleteNotification](#Section_3.3.4.4) | Begins a delete notification. Opnum: 3 |
+| [S_DSNotifyDelete](#Section_3.3.4.5) | Notifies the server that a machine or queue has been deleted by the client. Opnum: 4 |
+| [S_DSEndDeleteNotification](#Section_3.3.4.6) | Ends a delete notification. Opnum: 5 |
 | [S_DSIsServerGC](#Section_3.3.4.7) | Returns a value that indicates whether a server is a global catalog server. Opnum: 6 |
 | Opnum7NotUsedOnWire | Reserved for local use. Opnum: 7 |
 | [S_DSGetGCListInDomain](#Section_3.3.4.8) | Returns a list of global catalog servers in the specified domain. Opnum: 8 |
@@ -5756,7 +5756,7 @@ unsigned char* pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which properties are to be retrieved. MUST be set to one of the object types, as specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which properties are to be retrieved. MUST be set to one of the object types, as specified in section [2.2.8](#Section_2.2.8).
 
 **pwcsPathName:** MUST be set by the client to a pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that contains the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), of the object in the Directory Service from which to retrieve the properties.
 
@@ -5836,7 +5836,7 @@ unsigned char * pbServerSignature,
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**dwObjectType:** Specifies the type of object for which properties are to be retrieved. MUST be set to one of the object types, as specified in section [2.2.8](#Section_3.2.6.3.3).
+**dwObjectType:** Specifies the type of object for which properties are to be retrieved. MUST be set to one of the object types, as specified in section [2.2.8](#Section_2.2.8).
 
 **pGuid:** MUST specify a pointer to the object identifier of the object for which properties are to be retrieved.
 
@@ -5904,7 +5904,7 @@ HRESULT S_DSBeginDeleteNotification(
 
 **pwcsPathName:** MUST be set by the client to a pointer to a NULL-terminated 16-bit [**Unicode string**](#gt_unicode-string) that contains the directory service pathname, as specified in section [2.2.9](#Section_2.2.9), for an object of type MQDS_MACHINE or MQDS_QUEUE.<157>
 
-**pHandle:** MUST be set by the server to a pointer to a unique RPC context_handle representing the delete notification. This handle is used by the client in subsequent calls to [S_DSNotifyDelete](#Section_4.4).
+**pHandle:** MUST be set by the server to a pointer to a unique RPC context_handle representing the delete notification. This handle is used by the client in subsequent calls to [S_DSNotifyDelete](#Section_3.3.4.5).
 
 **phServerAuth:** A [PCONTEXT_HANDLE_SERVER_AUTH_TYPE](#Section_2.2.5) RPC context handle acquired from the *pphServerAuth* parameter in a previous call to [S_DSValidateServer](#Section_3.1.4.2). The server MUST use this parameter as a key to locate the GSS security context used to compute the signature returned in *pbServerSignature*. See section 3.1.4.2.
 
@@ -5923,7 +5923,7 @@ When processing this call, the server MUST:
 - Also, if the object type is MQDS_QUEUE, the server MUST:
 - Set the owner [**queue manager**](#gt_queue-manager-qm) object identifier to the queue manager object identifier for the queue.
 - Set the flag indicating if this queue is a foreign queue.
-The server MUST retain this information until the client calls the [S_DSEndDeleteNotification](#Section_4.4) method or until the [PCONTEXT_HANDLE_DELETE_TYPE rundown](#Section_3.3.6.1) event occurs.
+The server MUST retain this information until the client calls the [S_DSEndDeleteNotification](#Section_3.3.4.6) method or until the [PCONTEXT_HANDLE_DELETE_TYPE rundown](#Section_3.3.6.1) event occurs.
 
 <a id="Section_3.3.4.5"></a>
 #### 3.3.4.5 S_DSNotifyDelete (Opnum 4)
@@ -5940,7 +5940,7 @@ HRESULT S_DSNotifyDelete(
 
 **hBind:** MUST specify an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**Handle:** MUST be set by the client to a pointer to an RPC context_handle acquired from a previous call to [S_DSBeginDeleteNotification](#Section_4.4). This RPC context handle MUST NOT have been used in a previous call to [S_DSEndDeleteNotification](#Section_4.4).
+**Handle:** MUST be set by the client to a pointer to an RPC context_handle acquired from a previous call to [S_DSBeginDeleteNotification](#Section_3.3.4.4). This RPC context handle MUST NOT have been used in a previous call to [S_DSEndDeleteNotification](#Section_3.3.4.6).
 
 **Return Values:** If the method succeeds, the return value is MQ_OK (0x00000000). If the method fails, the return value is an implementation-specific error code.
 
@@ -5957,7 +5957,7 @@ While processing this call, the server MUST:
 <a id="Section_3.3.4.6"></a>
 #### 3.3.4.6 S_DSEndDeleteNotification (Opnum 5)
 
-The S_DSEndDeleteNotification method closes the [**RPC**](#gt_remote-procedure-call-rpc) context handle acquired from a previous call to [S_DSBeginDeleteNotification](#Section_4.4).
+The S_DSEndDeleteNotification method closes the [**RPC**](#gt_remote-procedure-call-rpc) context handle acquired from a previous call to [S_DSBeginDeleteNotification](#Section_3.3.4.4).
 
 void S_DSEndDeleteNotification(
 
@@ -6081,7 +6081,7 @@ There are no timer events.
 <a id="Section_3.3.6.1"></a>
 #### 3.3.6.1 PCONTEXT_HANDLE_DELETE_TYPE Rundown
 
-This event occurs when a [PCONTEXT_HANDLE_DELETE_TYPE](#Section_2.2.7) [**RPC**](#gt_remote-procedure-call-rpc) context handle has been established between a client and server through a call to [S_DSBeginDeleteNotification](#Section_4.4), and the RPC connection between the client and server is severed before the context handle has been closed via a call to [S_DSEndDeleteNotification](#Section_4.4).
+This event occurs when a [PCONTEXT_HANDLE_DELETE_TYPE](#Section_2.2.7) [**RPC**](#gt_remote-procedure-call-rpc) context handle has been established between a client and server through a call to [S_DSBeginDeleteNotification](#Section_3.3.4.4), and the RPC connection between the client and server is severed before the context handle has been closed via a call to [S_DSEndDeleteNotification](#Section_3.3.4.6).
 
 The server MUST use the context handle supplied as an event argument as a key to locate the delete notification entry in the delete notification table. The server MUST remove the delete notification entry from the table.
 
@@ -6111,9 +6111,9 @@ Initialization is as specified in section [3.2.3](#Section_3.2.3).
 
 To notify the server of an object deleted, the client MUST follow this sequence:
 
-- The client MUST call the [S_DSBeginDeleteNotification](#Section_4.4) method with *pwcsPathName* set to the [**directory service**](#gt_directory-service-ds) pathname, as specified in section [2.2.9](#Section_2.2.9), of the directory object to delete, and with *phServerAuth* set to the context handle previously acquired from a call to [S_DSValidateServer](#Section_3.1.4.2).
-- The client MUST call the [S_DSNotifyDelete](#Section_4.4) method with the handle set to the context handle acquired from the previous call to S_DSBeginDeleteNotification.
-- The client MUST call the [S_DSEndDeleteNotification](#Section_4.4) method with the handle set to the context handle acquired from the previous call to S_DSBeginDeleteNotification.
+- The client MUST call the [S_DSBeginDeleteNotification](#Section_3.3.4.4) method with *pwcsPathName* set to the [**directory service**](#gt_directory-service-ds) pathname, as specified in section [2.2.9](#Section_2.2.9), of the directory object to delete, and with *phServerAuth* set to the context handle previously acquired from a call to [S_DSValidateServer](#Section_3.1.4.2).
+- The client MUST call the [S_DSNotifyDelete](#Section_3.3.4.5) method with the handle set to the context handle acquired from the previous call to S_DSBeginDeleteNotification.
+- The client MUST call the [S_DSEndDeleteNotification](#Section_3.3.4.6) method with the handle set to the context handle acquired from the previous call to S_DSBeginDeleteNotification.
 <a id="Section_3.4.5"></a>
 ### 3.4.5 Timer Events
 
@@ -6147,7 +6147,7 @@ Figure 3: Protocol exchange complete
 <a id="Section_4.2"></a>
 ## 4.2 S_DSQMGetObjectSecurity and S_DSQMGetObjectSecurityChallengeResponceProc
 
-Collectively, the [S_DSQMGetObjectSecurity](#Section_5) and [S_DSQMGetObjectSecurityChallengeResponceProc](#Section_5) methods allow the server to authenticate the client in the context of retrieving security information related to a directory service object. The client makes the initial call to S_DSQMGetObjectSecurity and includes a correlation ID in the *dwContext* parameter. The server generates a random challenge via a call into its security provider. The server then invokes the S_DSQMGetObjectSecurityChallengeResponceProc on the client, passing both the random challenge and the correlation ID from the *dwContext* parameter in the initial call to S_DSQMGetObjectSecurity.
+Collectively, the [S_DSQMGetObjectSecurity](#Section_3.1.4.15) and [S_DSQMGetObjectSecurityChallengeResponceProc](#Section_3.2.4.2) methods allow the server to authenticate the client in the context of retrieving security information related to a directory service object. The client makes the initial call to S_DSQMGetObjectSecurity and includes a correlation ID in the *dwContext* parameter. The server generates a random challenge via a call into its security provider. The server then invokes the S_DSQMGetObjectSecurityChallengeResponceProc on the client, passing both the random challenge and the correlation ID from the *dwContext* parameter in the initial call to S_DSQMGetObjectSecurity.
 
 The client then calculates the [**MD5 hash**](#gt_md5-hash) (as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275)) of the random challenge bytes and signs this hash by using the [**private key**](#gt_private-key) corresponding to the [**public key**](#gt_public-key) associated with the directory object as registered in the directory service. If the directory service object for which the [**security identifier**](#gt_security-identifier-sid) is retrieved is a [**queue**](#gt_queue), the private key is the private key associated with the machine that owns the queue; otherwise, the private key is the private key associated with the directory service object. This signed hash is returned to the server in the *abCallengeResponce* parameter.
 
@@ -6173,7 +6173,7 @@ Figure 5: Calling the S_DSLookupEnd method
 <a id="Section_4.4"></a>
 ## 4.4 S_DSBeginDeleteNotification, S_DSNotifyDelete, and S_DSEndDeleteNotification
 
-Collectively, the [S_DSBeginDeleteNotification](#Section_4.4), [S_DSNotifyDelete](#Section_4.4), and [S_DSEndDeleteNotification](#Section_4.4) methods are used by the client to notify the server that a [**queue**](#gt_queue) or machine has been deleted by the client.
+Collectively, the [S_DSBeginDeleteNotification](#Section_3.3.4.4), [S_DSNotifyDelete](#Section_3.3.4.5), and [S_DSEndDeleteNotification](#Section_3.3.4.6) methods are used by the client to notify the server that a [**queue**](#gt_queue) or machine has been deleted by the client.
 
 This protocol exchange begins when the client calls S_DSBeginDeleteNotification specifying either the machine or queue to be deleted. The server obtains information on this machine or queue and retains it for later use, associating it with a delete context handle. The server returns the delete context handle to the client. The client calls S_DSNotifyDelete (specifying the delete context handle) after it has deleted the machine or queue. The client then calls S_DSEndDeleteNotification (specifying the delete context handle), which indicates to the server that it is to clean up the state retained from the call to S_DSBeginDeleteNotification.
 
@@ -7137,7 +7137,7 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - *iSeqNumber* := the **SequenceNumber** attribute of the directory object that was created
 <34> Section 3.1.4.5: For Windows NT, and Windows 2000 when operating in MSMQ mixed-mode, the server performs the following steps:
 
-- Let **ServerQueueManager** be the [QueueManager (section 3.1.1.7)](#Section_3.2.6.3.1) ADM element instance with which the server is co-located.
+- Let **ServerQueueManager** be the [QueueManager (section 3.1.1.7)](#Section_3.1.1.7) ADM element instance with which the server is co-located.
 - Let DoForward be a boolean that is set to FALSE. Let SiteGuid be a GUID that is set to GUID_NULL.
 - If *dwObjectType* is one of MQDS_SITE, MQDS_CN, MQDS_ENTERPRISE, MQDS_USER, or MQDS_ROUTINGLINK and **ServerQueueManager**.**DirectoryServerType** is not **PrimaryEnterpriseController**, DoForward is set to TRUE.
 - If *dwObjectType* is MQDS_QUEUE or MQDS_MACHINE:
@@ -7156,7 +7156,7 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - *iNumberOfProperties* := 0
 - *iPropertyID* := NULL
 - *iPropertyValue* := NULL
-- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSDeleteObject (section 3.1.4.5)](#Section_3.1.4.6) method, and no further processing is performed.
+- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSDeleteObject (section 3.1.4.5)](#Section_3.1.4.5) method, and no further processing is performed.
 <35> Section 3.1.4.5: For Windows NT, and Windows 2000 when operating in MSMQ mixed-mode, the server raises the Propagate Directory Change event, as described in section 3.1.7.1.2 of the archived [MC-MQDSRP] protocol, with the following arguments:
 
 - *iOperation* := 2
@@ -7261,7 +7261,7 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - *iNumberOfProperties* := *cp*
 - *iPropertyID* := *aProp*
 - *iPropertyValue* := *apVar*
-- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSSetProps](#Section_3.1.4.10) method, and no further processing is performed.
+- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSSetProps](#Section_3.1.4.9) method, and no further processing is performed.
 <46> Section 3.1.4.9: Only Windows NT Server supports this object type and updates the properties as specified. Windows 2000, Windows Server 2003 and Windows Server 2008 treat this type as invalid.
 
 <47> Section 3.1.4.9: The event is generated only for Windows NT and Windows 2000.
@@ -7366,7 +7366,7 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - **vt** field := VT_BLOB
 - **blob.cbSize** := *nlength*
 - **blob.pBlobData** := *pSecurityDescriptor*
-- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSSetObjectSecurity (section 3.1.4.13)](#Section_5) method, and no further processing is performed.
+- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSSetObjectSecurity (section 3.1.4.13)](#Section_3.1.4.13) method, and no further processing is performed.
 <65> Section 3.1.4.13: The event is generated only for Windows NT and Windows 2000.
 
 <66> Section 3.1.4.13: The event is generated only for Windows NT and Windows 2000.
@@ -7429,7 +7429,7 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - **vt** field := VT_BLOB
 - **blob.cbSize** := *nLength*
 - **blob.pBlobData** := *pSecurityDescriptor*
-- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSSetObjectSecurityGuid (section 3.1.4.14)](#Section_5) method, and no further processing is performed.
+- If the Change Remote Object event was raised, the *rStatus* returned by the event becomes the return value of the [S_DSSetObjectSecurityGuid (section 3.1.4.14)](#Section_3.1.4.14) method, and no further processing is performed.
 <70> Section 3.1.4.14: The event is generated only for Windows NT and Windows 2000.
 
 <71> Section 3.1.4.14: The event is generated only for Windows NT and Windows 2000.
@@ -7456,12 +7456,12 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - *iSeqNumber* := the **SequenceNumber** attribute of the **Queue** ADM element instance that was updated.
 <73> Section 3.1.4.15: Other key BLOB types might be supported but are untested. Windows uses only RSAPUBKEY (section 2.2.18) BLOBs.
 
-<74> Section 3.1.4.15: Only Windows NT Server, Windows 2000, and Windows Server 2003 invoke the [S_DSQMGetObjectSecurityChallengeResponceProc (section 3.2.4.2)](#Section_5) callback method to authenticate the client as follows:
+<74> Section 3.1.4.15: Only Windows NT Server, Windows 2000, and Windows Server 2003 invoke the [S_DSQMGetObjectSecurityChallengeResponceProc (section 3.2.4.2)](#Section_3.2.4.2) callback method to authenticate the client as follows:
 
 - Invoke S_DSQMGetObjectSecurityChallengeResponceProc with parameters set as follows:
 - *abChallenge* := A byte array of size 32 containing cryptographically random bytes.
 - *dwCallengeSize* := The size in bytes of *abChallenge*.
-- *dwContext* := the *dwContext* parameter of the [S_DSQMGetObjectSecurity (section 3.1.4.15)](#Section_5) method.
+- *dwContext* := the *dwContext* parameter of the [S_DSQMGetObjectSecurity (section 3.1.4.15)](#Section_3.1.4.15) method.
 - *abCallengeResponce* := A byte array of size 128.
 - *pdwCallengeResponceSize* := A pointer to a DWORD value.
 - *dwCallengeResponceMaxSize* := The size in bytes of *abCallengeResponce*.
@@ -7481,7 +7481,7 @@ Windows NT Server, Windows 2000, Windows XP, and Windows Server 2003 implement t
 - Decrypt the returned client signature *abCallengeResponce* using *publicKey*. Compare the result to the MD5 hash computed by the server. If the result and the [**MD5 hash**](#gt_md5-hash) do not match, return MQ_ERROR_ACCESS_DENIED, and take no further action.
 <75> Section 3.1.4.15: Windows NT Server, Windows 2000, and Windows XP return MQ_ERROR_INVALID_PARAMETER (0xC00E0006). Windows Server 2003, Windows Vista, and Windows Server 2008 return MQDS_WRONG_OBJ_TYPE (0xC00E0506)
 
-<76> Section 3.1.4.16: The [S_DSQMSetMachineProperties](#Section_3.2.4.1) method is called only by Windows NT 4.0.
+<76> Section 3.1.4.16: The [S_DSQMSetMachineProperties](#Section_3.1.4.16) method is called only by Windows NT 4.0.
 
 <77> Section 3.1.4.16: Only Windows NT Server, Windows 2000, and Windows Server 2003 authenticate the client as follows:
 

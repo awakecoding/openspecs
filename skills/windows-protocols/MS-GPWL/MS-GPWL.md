@@ -404,7 +404,7 @@ In the following illustration, Logical Client refers to an administrative tool; 
 
 Figure 2: Logical client/server LDAP modify communication
 
-Similarly, when an administrator uses an administrative tool to read or delete a wireless or wired Group Policy within a GPO, the administrative-side plug-in uses appropriate LDAP functionality to read or delete the data in the generic data store. See section [3.1](#Section_802) for more information on these operations.
+Similarly, when an administrator uses an administrative tool to read or delete a wireless or wired Group Policy within a GPO, the administrative-side plug-in uses appropriate LDAP functionality to read or delete the data in the generic data store. See section [3.1](#Section_3.1) for more information on these operations.
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Wireless/Wired Group Policy Client-Side Plug-in
@@ -454,19 +454,19 @@ The wireless [**Group Policy**](#gt_group-policy) provides versioning capability
 
 The administrative-side plug-in generates versioning data that reflects the wireless Group Policy format type and wireless network security settings. There are two format types: [**binary large object (BLOB)**](#gt_binary-large-object-blob)-based and [**XML**](#gt_xml)-based.
 
-In the BLOB-based format, the wireless connectivity and security settings are saved in a binary format, as described in section [2.2.1.1](#Section_802). The BLOB contains at least one sub-BLOB and can contain multiple sub-BLOBs. Each sub-BLOB contains a version number and version-specific policy settings. Three sub-BLOBs are currently defined:
+In the BLOB-based format, the wireless connectivity and security settings are saved in a binary format, as described in section [2.2.1.1](#Section_2.2.1.1). The BLOB contains at least one sub-BLOB and can contain multiple sub-BLOBs. Each sub-BLOB contains a version number and version-specific policy settings. Three sub-BLOBs are currently defined:
 
 - Version 1 supports wireless security standards up to Wired Equivalent Privacy (WEP). For more details about WEP, see [[IEEE802.11-2007]](https://go.microsoft.com/fwlink/?LinkID=89905).
 - Version 2 supports all the security standards version 1 supports plus Wi-Fi Protected Access (WPA).
 - Version 3 supports all the security standards version 2 supports plus Wi-Fi Protected Access 2 (WPA2).
-In the XML-based format, the wireless connectivity and security settings are saved in XML. The XML-based format for the wireless Group Policy does not provide versioning or capability negotiations. Currently only one version of the XML format is defined. However, as described in section [6.1](#Section_802), the [**XML schema (XSD)**](#gt_xml-schema-xsd) namespace contains versioning information so that versioning or capability negotiations can be added if necessary. For more information about the XML-based wireless Group Policy, see section [2.2.1.2](#Section_802).
+In the XML-based format, the wireless connectivity and security settings are saved in XML. The XML-based format for the wireless Group Policy does not provide versioning or capability negotiations. Currently only one version of the XML format is defined. However, as described in section [6.1](#Section_6.1), the [**XML schema (XSD)**](#gt_xml-schema-xsd) namespace contains versioning information so that versioning or capability negotiations can be added if necessary. For more information about the XML-based wireless Group Policy, see section [2.2.1.2](#Section_2.2.1.2).
 
 An XML-based wireless Group Policy takes precedence over a BLOB-based one. Within a format type, higher version numbers take precedence. The wireless Group Policy client-side plug-in fetches the version with highest precedence that it can interpret from those available in the generic data store.
 
 <a id="Section_1.7.2"></a>
 ### 1.7.2 Wired Group Policy Versioning and Capability Negotiation
 
-The [**XML**](#gt_xml)-based format for the wired [**Group Policy**](#gt_group-policy) does not provide versioning or capability negotiations. Currently, only one version of the XML format is defined. However, as described in section [6.2](#Section_802), the [**XML schema (XSD)**](#gt_xml-schema-xsd) namespace contains versioning information so that versioning or capability negotiations can be added if necessary. For more information about the XML-based wired Group Policy, see section [2.2.2](#Section_802).
+The [**XML**](#gt_xml)-based format for the wired [**Group Policy**](#gt_group-policy) does not provide versioning or capability negotiations. Currently, only one version of the XML format is defined. However, as described in section [6.2](#Section_6.2), the [**XML schema (XSD)**](#gt_xml-schema-xsd) namespace contains versioning information so that versioning or capability negotiations can be added if necessary. For more information about the XML-based wired Group Policy, see section [2.2.2](#Section_2.2.2).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -498,7 +498,7 @@ The Wireless/Wired Group Policy Protocol uses the LDAP protocol [[RFC2251]](http
 
 The Wireless/Wired Group Policy MUST be read from and written to the generic data store using LDAP [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325).
 
-The administrative-side plug-in and the client-side plug-in for the Wireless/Wired Group Policy Protocol MUST interact with the generic data store as described in sections [1.3.1](#Section_802) and [1.3.2](#Section_802), respectively.
+The administrative-side plug-in and the client-side plug-in for the Wireless/Wired Group Policy Protocol MUST interact with the generic data store as described in sections [1.3.1](#Section_1.3.1) and [1.3.2](#Section_1.3.2), respectively.
 
 The following class names are used while constructing various LDAP messages:
 
@@ -512,7 +512,7 @@ The following class names are used while constructing various LDAP messages:
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Message Syntax for BLOB-Based Wireless Group Policy
 
-For more information about BLOB-based policy, see section [1.7.1](#Section_802). The wireless policy data is specified in section [2.2.1.1.2](#Section_802). The format of the profile data of wireless policy data is specified in section [2.2.1.1.3](#Section_802).
+For more information about BLOB-based policy, see section [1.7.1](#Section_1.7.1). The wireless policy data is specified in section [2.2.1.1.2](#Section_2.2.1.1.2). The format of the profile data of wireless policy data is specified in section [2.2.1.1.3](#Section_2.2.1.1.3).
 
 The BLOB-based group policy MUST consist of an array of one or more (up to three) wireless policy sub-BLOBs. There is no ordering requirement for the wireless policy sub-BLOBs.
 
@@ -554,7 +554,7 @@ packet-beta
 <a id="Section_2.2.1.1.2"></a>
 ##### 2.2.1.1.2 Wireless Policy Data
 
-Wireless policy data contains wireless Group Policy settings as shown here. Among other fields, it contains an array of wireless profile settings. The format of the wireless profile settings depends on the value of the **MajorVersion** field in the wireless policy sub-BLOB, as specified in section [2.2.1.1.1](#Section_802). Currently, the format is defined for three values of the **MajorVersion** field: 1, 2, and 3. These formats are specified in sections [2.2.1.1.4](#Section_802) and [2.2.1.1.5](#Section_802).
+Wireless policy data contains wireless Group Policy settings as shown here. Among other fields, it contains an array of wireless profile settings. The format of the wireless profile settings depends on the value of the **MajorVersion** field in the wireless policy sub-BLOB, as specified in section [2.2.1.1.1](#Section_2.2.1.1.1). Currently, the format is defined for three values of the **MajorVersion** field: 1, 2, and 3. These formats are specified in sections [2.2.1.1.4](#Section_2.2.1.1.4) and [2.2.1.1.5](#Section_2.2.1.1.5).
 
 ```mermaid
 packet-beta
@@ -704,7 +704,7 @@ For more information on WPA-based authentication, see [IEEE802.11-2007] and [IEE
 
 **EAPDataLen (4 bytes):** A 4-byte unsigned integer specifying the length of the **EAPData** field.
 
-**EAPData (variable):** A BLOB specifying EAP configuration settings to use while performing IEEE 802.1X authentication. The format of the BLOB is implementation-specific; if Microsoft EAP methods are used by the clients, the formats specified in section [2.2.3.1](#Section_802) MUST be used.
+**EAPData (variable):** A BLOB specifying EAP configuration settings to use while performing IEEE 802.1X authentication. The format of the BLOB is implementation-specific; if Microsoft EAP methods are used by the clients, the formats specified in section [2.2.3.1](#Section_2.2.3.1) MUST be used.
 
 **MachineAuthentication (4 bytes):** A 4-byte unsigned integer; a nonzero value specifies that the domain client uses machine credentials to perform IEEE 802.1X authentication.
 
@@ -824,7 +824,7 @@ WPA2 authentication is as specified in [IEEE802.1X] and [IEEE802.11i].
 
 **EAPDataLen (4 bytes):** A 4-byte unsigned integer specifying the length of the **EAPData** field.
 
-**EAPData (variable):** A BLOB specifying EAP configuration settings to be used while performing IEEE 802.1X authentication. The format of the BLOB is implementation-specific; if Microsoft EAP methods are used by the clients, the formats specified in section [2.2.3.1](#Section_802) MUST be used.
+**EAPData (variable):** A BLOB specifying EAP configuration settings to be used while performing IEEE 802.1X authentication. The format of the BLOB is implementation-specific; if Microsoft EAP methods are used by the clients, the formats specified in section [2.2.3.1](#Section_2.2.3.1) MUST be used.
 
 **MachineAuthentication (4 bytes):** A 4-byte unsigned integer; a nonzero value specifies that the domain client uses computer credentials to perform IEEE 802.1X authentication.
 
@@ -890,7 +890,7 @@ WPA2 authentication is as specified in [IEEE802.1X] and [IEEE802.11i].
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Message Syntax for XML-Based Wireless Group Policy
 
-The XML-based wireless Group Policy MUST be packed as a single XML string that is constructed according to the wireless policy schema, as specified in [Appendix A](#Section_802) section [6.1](#Section_802). The syntax for fields in the XML string MUST adhere to this schema specification. In accordance with this schema, primitive data types are defined by the World Wide Web Consortium's XML schema. For more details, see [[XMLSCHEMA]](https://go.microsoft.com/fwlink/?LinkId=90603).
+The XML-based wireless Group Policy MUST be packed as a single XML string that is constructed according to the wireless policy schema, as specified in [Appendix A](#Section_802) section [6.1](#Section_6.1). The syntax for fields in the XML string MUST adhere to this schema specification. In accordance with this schema, primitive data types are defined by the World Wide Web Consortium's XML schema. For more details, see [[XMLSCHEMA]](https://go.microsoft.com/fwlink/?LinkId=90603).
 
 The fields in the wireless policy XML string MUST be as follows:
 
@@ -910,7 +910,7 @@ The fields in the wireless policy XML string MUST be as follows:
 
 **denyAllESS:** A true/false Boolean value; if true, the domain client connects only to 802.11 ad hoc networks.
 
-**profileList:** The list of wireless profiles within the policy, each of which MUST conform to the [**WLAN**](#gt_wireless-local-area-network-wlan) profile schema, as specified in Appendix A section [6.3.1](#Section_802). This element specifies an ordered list of wireless networks with settings that a domain client is to connect to. The elements of the WLAN profile schema are described in section [2.2.1.2.1](#Section_802).
+**profileList:** The list of wireless profiles within the policy, each of which MUST conform to the [**WLAN**](#gt_wireless-local-area-network-wlan) profile schema, as specified in Appendix A section [6.3.1](#Section_6.3.1). This element specifies an ordered list of wireless networks with settings that a domain client is to connect to. The elements of the WLAN profile schema are described in section [2.2.1.2.1](#Section_2.2.1.2.1).
 
 **allowEveryoneToCreateAllUserProfiles:** A Boolean value; if true, all users on the domain client are allowed to create WLAN profile settings that can be used by all other users on the same domain client to connect to WLANs.
 
@@ -929,7 +929,7 @@ Explicit user credentials are user credentials that a user has made available to
 <a id="Section_2.2.1.2.1"></a>
 ##### 2.2.1.2.1 Message Syntax for XML-Based Wireless Profiles
 
-An XML-based [**WLAN**](#gt_wireless-local-area-network-wlan) profile is packed as a single XML string that MUST be constructed according to the XML schema as specified in [Appendix A](#Section_802) section [6.3.1](#Section_802). In accordance with this schema, primitive data types are defined by the World Wide Web Consortium's XML schema. For more information, see [[XMLSCHEMA]](https://go.microsoft.com/fwlink/?LinkId=90603).
+An XML-based [**WLAN**](#gt_wireless-local-area-network-wlan) profile is packed as a single XML string that MUST be constructed according to the XML schema as specified in [Appendix A](#Section_802) section [6.3.1](#Section_6.3.1). In accordance with this schema, primitive data types are defined by the World Wide Web Consortium's XML schema. For more information, see [[XMLSCHEMA]](https://go.microsoft.com/fwlink/?LinkId=90603).
 
 **name:** A user-friendly name of the wireless profile specified by the wireless profile XML string.
 
@@ -1016,27 +1016,27 @@ Details on pre-authentication are as specified in [IEEE802.11i].
 - machine: Authentication is always to be performed by using the computer credentials. User authentication is never performed.
 - user: When users are not logged on to the domain computer, IEEE 802.1X authentication is performed using the computer credentials. After a user logs on to the computer, authentication is maintained with the computer credentials. If a user failed to connect to the network previously, IEEE 802.1X authentication is performed using the user credentials.
 - guest: Specifies that the domain client performs IEEE 802.1X authentication with guest credentials.
-**EAPConfig:** The EAP configuration used by the domain client while performing IEEE 802.1X authentication, as specified in [[RFC3748]](https://go.microsoft.com/fwlink/?LinkId=90444). The content of this element is specified in section [2.2.3.2](#Section_802).<9>
+**EAPConfig:** The EAP configuration used by the domain client while performing IEEE 802.1X authentication, as specified in [[RFC3748]](https://go.microsoft.com/fwlink/?LinkId=90444). The content of this element is specified in section [2.2.3.2](#Section_2.2.3.2).<9>
 
 **MacRandomization**: Settings that govern MAC address randomization on this profile.<10>
 
 - enableRandomization: A Boolean value; if set to TRUE, MAC address randomization will be enabled when connecting to this profile. If set to FALSE, MAC address randomization will not be enabled.
 - randomizeEveryday: A Boolean value; if TRUE, a different random MAC address will be used each day when connecting to this profile. If FALSE, the same random MAC address will be used for each connection to this profile.
 - randomizationSeed: A profile-specific seed used to generate the random MAC address or addresses.
-See section [6.3.3](#Section_802) for additional information.
+See section [6.3.3](#Section_6.3.3) for additional information.
 
 **transitionMode**: Specifies whether or not this is a transition mode profile. In general, transition mode profiles allow for connections between next- and previous-generation Wi-Fi networks. Specific transition mode behavior is defined on a per-feature basis; for example for WPA2/WPA3 transition mode the behavior is defined in the [[Wi-FiWPA33]](http://go.microsoft.com/fwlink/?LinkID=2262953) specification.<11>
 
-See section [6.3.4](#Section_802) for additional information.
+See section [6.3.4](#Section_6.3.4) for additional information.
 
 **QoSDSCPToUPMappingAllowed**: A Boolean value; if set to TRUE, DSCP To UP Mapping, as specified in [[Wi-FiQoS]](http://go.microsoft.com/fwlink/?LinkID=2263030), will be allowed when connecting to this profile.<12> When FALSE (default), DSCP To UP Mapping will not be allowed.
 
-See section [6.3.5](#Section_802) for additional information.
+See section [6.3.5](#Section_6.3.5) for additional information.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Message Syntax for Wired Group Policy
 
-The wired Group Policy MUST be packed as a single XML string that is constructed according to the wired policy schema, as specified in [Appendix A](#Section_802) section [6.2](#Section_802). The syntax for fields in the XML string MUST adhere to this schema specification.
+The wired Group Policy MUST be packed as a single XML string that is constructed according to the wired policy schema, as specified in [Appendix A](#Section_802) section [6.2](#Section_6.2). The syntax for fields in the XML string MUST adhere to this schema specification.
 
 The fields in the wired policy XML string MUST be as follows:
 
@@ -1046,7 +1046,7 @@ The fields in the wired policy XML string MUST be as follows:
 
 **enableAutoConfig:** This value determines if the domain clients use the wired authentication component in the operating system for managing wireless connectivity.
 
-**profileList:** The list of wired authentication profiles within the policy, each of which MUST conform to the wired [**LAN**](#gt_wireless-local-area-network-wlan) profile schema, as specified in Appendix A section [6.4](#Section_802). This list MUST contain at least one profile. The domain clients use these profile settings to perform wired authentication against the wired switches.
+**profileList:** The list of wired authentication profiles within the policy, each of which MUST conform to the wired [**LAN**](#gt_wireless-local-area-network-wlan) profile schema, as specified in Appendix A section [6.4](#Section_6.4). This list MUST contain at least one profile. The domain clients use these profile settings to perform wired authentication against the wired switches.
 
 **blockPeriod:** The length of time, in minutes, during which the domain client will not try to reconnect to the same network after an authentication failure.<13>
 
@@ -1057,7 +1057,7 @@ Explicit user credentials are user credentials that a user has made available to
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 Message Syntax for XML-Based Wired Profiles
 
-An [**XML**](#gt_xml)-based [**WLAN**](#gt_wireless-local-area-network-wlan) profile is packed as a single XML string that is constructed according to the [**XML schema (XSD)**](#gt_xml-schema-xsd) as specified in [Appendix A](#Section_802) section [6.4](#Section_802).<15>
+An [**XML**](#gt_xml)-based [**WLAN**](#gt_wireless-local-area-network-wlan) profile is packed as a single XML string that is constructed according to the [**XML schema (XSD)**](#gt_xml-schema-xsd) as specified in [Appendix A](#Section_802) section [6.4](#Section_6.4).<15>
 
 **OneXEnabled:** A Boolean value that specifies whether the network supports the IEEE 802.1X authentication protocol so domain clients can use it. If set to TRUE, the **security** element MUST contain a child element **OneX**, formed according to the XML schema (XSD) as specified in Appendix A section [6.5](#Section_802).
 
@@ -1084,7 +1084,7 @@ An [**XML**](#gt_xml)-based [**WLAN**](#gt_wireless-local-area-network-wlan) pro
 - machine: Authentication is always to be performed by using the computer credentials. User authentication is never performed.
 - user: When users are not logged on to the domain computer, IEEE 802.1X authentication is performed using the computer credentials. After a user logs on to the computer, authentication is maintained with the computer credentials. If a user failed to connect to the network previously, IEEE 802.1X authentication is performed using the user credentials.
 - guest: The domain client performs IEEE 802.1X authentication with guest credentials.
-**EAPConfig:** The EAP configuration used by the domain client while performing IEEE 802.1X authentication, as specified in [[RFC3748]](https://go.microsoft.com/fwlink/?LinkId=90444). The content of this element is specified in section [2.2.3.2](#Section_802).
+**EAPConfig:** The EAP configuration used by the domain client while performing IEEE 802.1X authentication, as specified in [[RFC3748]](https://go.microsoft.com/fwlink/?LinkId=90444). The content of this element is specified in section [2.2.3.2](#Section_2.2.3.2).
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Configuration Elements for EAP Methods
@@ -1094,15 +1094,15 @@ The format of the [**EAP**](#gt_eap) configuration elements is defined by the EA
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Configuration Element Syntax for BLOB-Based Wireless Profiles
 
-The BLOB-Based Wireless Profiles as specified in sections [2.2.1.1.4](#Section_802) and [2.2.1.1.5](#Section_802), contain a variable-length **EAPData** field. This field is a BLOB describing the [**Extensible Authentication Protocol (EAP)**](#gt_extensible-authentication-protocol-eap) configuration settings to be used while performing IEEE 802.1X [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910) authentication. The format of this field is specific to the [**EAP**](#gt_eap) method specified in the **EAPType** field of the same element and to the implementation of this EAP method being used by the clients.
+The BLOB-Based Wireless Profiles as specified in sections [2.2.1.1.4](#Section_2.2.1.1.4) and [2.2.1.1.5](#Section_2.2.1.1.5), contain a variable-length **EAPData** field. This field is a BLOB describing the [**Extensible Authentication Protocol (EAP)**](#gt_extensible-authentication-protocol-eap) configuration settings to be used while performing IEEE 802.1X [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910) authentication. The format of this field is specific to the [**EAP**](#gt_eap) method specified in the **EAPType** field of the same element and to the implementation of this EAP method being used by the clients.
 
 Following are the data formats for different values of **EAPType** assuming the Microsoft EAP method implementations. For other implementations of the EAP methods denoted by these **EAPType** values, contact the corresponding vendors for **EAPData** BLOB information.
 
 | EapType | EapData Format |
 | --- | --- |
-| 13 (EAP-TLS) | [EAPTLS_CONN_PROPERTIES (section 2.2.3.1.1)](#Section_802) |
-| 25 (EAP-PEAP) | [PEAP_CONN_PROP (section 2.2.3.1.2)](#Section_802) |
-| 26 (EAP-MSChapV2) | [EAPMSCHAPv2_CONN_PROPERTIES (section 2.2.3.1.3)](#Section_802) |
+| 13 (EAP-TLS) | [EAPTLS_CONN_PROPERTIES (section 2.2.3.1.1)](#Section_2.2.3.1.1) |
+| 25 (EAP-PEAP) | [PEAP_CONN_PROP (section 2.2.3.1.2)](#Section_2.2.3.1.2) |
+| 26 (EAP-MSChapV2) | [EAPMSCHAPv2_CONN_PROPERTIES (section 2.2.3.1.3)](#Section_2.2.3.1.3) |
 | Other | A BLOB with EAP configuration settings to be used for this **EAPType**. Please contact the corresponding vendor for the EAP method implementation on the client for the format of this data. |
 
 <a id="Section_2.2.3.1.1"></a>
@@ -1269,9 +1269,9 @@ Where the bits are defined as:
 | D | PeapEnableQuarantine: If set to 1, the client enables Network Access Protection feature in the PEAP protocol.<21> |
 | E | PeapEnableIdentityPrivacy: If set to 1, the client enables the identity privacy feature in the PEAP protocol.<22> |
 
-**PeapTlsProperties (variable):** A variable size data that follows the format defined by [PEAP_TLS_PHASE1_CONN_PROPERTIES (section 2.2.3.1.2.1)](#Section_802). This field indicates the parameters that the clients use to establish the TLS tunnel in Phase 1 of PEAP as specified in [MS-PEAP] section 3.3.5.2.
+**PeapTlsProperties (variable):** A variable size data that follows the format defined by [PEAP_TLS_PHASE1_CONN_PROPERTIES (section 2.2.3.1.2.1)](#Section_2.2.3.1.2.1). This field indicates the parameters that the clients use to establish the TLS tunnel in Phase 1 of PEAP as specified in [MS-PEAP] section 3.3.5.2.
 
-**InnerMethodProperties (variable):** Optional variable size data that follows the format defined by [PEAP_INNER_METHOD_PROPERTY (section 2.2.3.1.2.2)](#Section_802) indicating the parameters the client uses for Inner EAP method inside PEAP. This field is present if **NumberOfEAPTypes** field is set to 1.
+**InnerMethodProperties (variable):** Optional variable size data that follows the format defined by [PEAP_INNER_METHOD_PROPERTY (section 2.2.3.1.2.2)](#Section_2.2.3.1.2.2) indicating the parameters the client uses for Inner EAP method inside PEAP. This field is present if **NumberOfEAPTypes** field is set to 1.
 
 **IdentityPrivacyString (variable):** Optional variable size null-terminated [**Unicode**](#gt_unicode) string that MAY<23>be used to indicate the identity to be used in EAP-Identity response packet.
 
@@ -1438,20 +1438,20 @@ Where the bits are defined as:
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 Configuration Element Syntax for XML-Based Wired and Wireless Profiles
 
-The [**XML**](#gt_xml)-based wired and wireless profiles, as specified in section [2.2.1.2.1](#Section_802) and section [2.2.2.1](#Section_802), contain an optional element named **EAPConfig**. This element contains implementation-specific [**Extensible Authentication Protocol (EAP)**](#gt_extensible-authentication-protocol-eap) configuration settings to be used while performing IEEE 802.1X authentication, as specified in [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910).
+The [**XML**](#gt_xml)-based wired and wireless profiles, as specified in section [2.2.1.2.1](#Section_2.2.1.2.1) and section [2.2.2.1](#Section_2.2.2.1), contain an optional element named **EAPConfig**. This element contains implementation-specific [**Extensible Authentication Protocol (EAP)**](#gt_extensible-authentication-protocol-eap) configuration settings to be used while performing IEEE 802.1X authentication, as specified in [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910).
 
-The **EAPConfig** element contains one or more instances of the [EapHostConfig element (section 2.2.3.2.1)](#Section_802).
+The **EAPConfig** element contains one or more instances of the [EapHostConfig element (section 2.2.3.2.1)](#Section_2.2.3.2.1).
 
 <a id="Section_2.2.3.2.1"></a>
 ##### 2.2.3.2.1 EapHostConfig Element
 
 The EapHostConfig element is a string which MUST be formatted according to the [**XML schema**](#gt_xml-schema) in section [6.6](#Section_6.6). EapHostConfig contains the following elements:
 
-**EapMethod:** An element of type [EapMethodType (section 2.2.3.2.2)](#Section_802) as defined in section 2.2.3.2.2.
+**EapMethod:** An element of type [EapMethodType (section 2.2.3.2.2)](#Section_2.2.3.2.2) as defined in section 2.2.3.2.2.
 
 Exactly one of the following elements:
 
-**Config:** An element of type [BaseEapMethodConfig (section 2.2.3.2.3)](#Section_802), as defined in section 2.2.3.2.3, which contains implementation-specific [**EAP**](#gt_eap) configuration packaged as an [**XML**](#gt_xml) string.<26>
+**Config:** An element of type [BaseEapMethodConfig (section 2.2.3.2.3)](#Section_2.2.3.2.3), as defined in section 2.2.3.2.3, which contains implementation-specific [**EAP**](#gt_eap) configuration packaged as an [**XML**](#gt_xml) string.<26>
 
 **ConfigBlob:** The hexadecimal representation of a BLOB containing implementation-specific EAP configuration.<27>
 
@@ -1459,14 +1459,14 @@ Microsoft EAP method implementations can be accompanied by either XML or BLOB-fo
 
 | EapMethod\Type | Config Format | ConfigBlob Format |
 | --- | --- | --- |
-| 13 (EAP-TLS) | [BaseEap (section 2.2.3.2.4)](#Section_802) with [EapTlsConnectionProperties (section 2.2.3.2.5)](#Section_802) | [EAPTLS_CONN_PROPERTIES (section 2.2.3.1.1)](#Section_802) |
-| 25 (EAP-PEAP) | BaseEap with [MsPeapConnectionProperties (section 2.2.3.2.6)](#Section_802) | [PEAP_CONN_PROP (section 2.2.3.1.2)](#Section_802) |
-| 26 (EAP-MSChapV2) | BaseEap with [MsChapV2ConnectionPropertiesV1 (section 2.2.3.2.7)](#Section_802) | [EAPMSCHAPv2_CONN_PROPERTIES (section 2.2.3.1.3)](#Section_802) |
-| 21 (EAP-TTLS) | [EapTtlsConnectionPropertiesV1 (section 2.2.3.2.12)](#Section_802) | - |
-| 18 (EAP-SIM) | [EapSimConnectionPropertiesV1 (section 2.2.3.2.9)](#Section_802) | - |
-| 23 (EAP-AKA) | [EapAkaConnectionPropertiesV1 (section 2.2.3.2.10)](#Section_802) | - |
-| 50 (EAP-AKA') | [EapAkaPrimeConnectionPropertiesV1 (section 2.2.3.2.11)](#Section_802) | - |
-| 55 (EAP-TEAP) | [EapTeapConnectionPropertiesV1 (section 2.2.3.2.13)](#Section_802) | - |
+| 13 (EAP-TLS) | [BaseEap (section 2.2.3.2.4)](#Section_2.2.3.2.4) with [EapTlsConnectionProperties (section 2.2.3.2.5)](#Section_2.2.3.2.5) | [EAPTLS_CONN_PROPERTIES (section 2.2.3.1.1)](#Section_2.2.3.1.1) |
+| 25 (EAP-PEAP) | BaseEap with [MsPeapConnectionProperties (section 2.2.3.2.6)](#Section_2.2.3.2.6) | [PEAP_CONN_PROP (section 2.2.3.1.2)](#Section_2.2.3.1.2) |
+| 26 (EAP-MSChapV2) | BaseEap with [MsChapV2ConnectionPropertiesV1 (section 2.2.3.2.7)](#Section_2.2.3.2.7) | [EAPMSCHAPv2_CONN_PROPERTIES (section 2.2.3.1.3)](#Section_2.2.3.1.3) |
+| 21 (EAP-TTLS) | [EapTtlsConnectionPropertiesV1 (section 2.2.3.2.12)](#Section_2.2.3.2.12) | - |
+| 18 (EAP-SIM) | [EapSimConnectionPropertiesV1 (section 2.2.3.2.9)](#Section_2.2.3.2.9) | - |
+| 23 (EAP-AKA) | [EapAkaConnectionPropertiesV1 (section 2.2.3.2.10)](#Section_2.2.3.2.10) | - |
+| 50 (EAP-AKA') | [EapAkaPrimeConnectionPropertiesV1 (section 2.2.3.2.11)](#Section_2.2.3.2.11) | - |
+| 55 (EAP-TEAP) | [EapTeapConnectionPropertiesV1 (section 2.2.3.2.13)](#Section_2.2.3.2.13) | - |
 
 For other implementations of the EAP methods denoted by these **EAPType** values or for implementations of other EAP methods, please contact the corresponding vendors for the required contents of **Config** or **ConfigBlob**.
 
@@ -1490,12 +1490,12 @@ The BaseEapMethodConfig complex type defines a string which MUST be formatted ac
 
 All Microsoft EAP methods define the contents of the BaseEapMethodConfig to have the following contents:
 
-**Eap:** An element of type [BaseEap (section 2.2.3.2.4)](#Section_802), as specified in section 2.2.3.2.4.
+**Eap:** An element of type [BaseEap (section 2.2.3.2.4)](#Section_2.2.3.2.4), as specified in section 2.2.3.2.4.
 
 <a id="Section_2.2.3.2.4"></a>
 ##### 2.2.3.2.4 BaseEap
 
-All Microsoft EAP methods define the contents of the [BaseEapMethodConfig (section 2.2.3.2.3)](#Section_802) to contain one element of type BaseEap. Method-specific configuration is achieved by the elements of the BaseEap schema in a method-specific schema.
+All Microsoft EAP methods define the contents of the [BaseEapMethodConfig (section 2.2.3.2.3)](#Section_2.2.3.2.3) to contain one element of type BaseEap. Method-specific configuration is achieved by the elements of the BaseEap schema in a method-specific schema.
 
 The BaseEap complex type defines a string which MUST be formatted according to the [**XML schema**](#gt_xml-schema) in section [6.6.3](#Section_6.6.3). This schema defines the following elements:
 
@@ -1516,7 +1516,7 @@ The Microsoft implementation of EAP-TLS overrides the abstract type **BaseEapTyp
 
 **SimpleCertSelection:** An optional Boolean. If TRUE or absent, then the method will automatically select a certificate for authentication without user interaction, if possible. If FALSE, the method will always prompt the user to select a certificate.
 
-**ServerValidation:** An element of type [ServerValidationParameters (section 2.2.3.2.8)](#Section_802) as specified in section 2.2.3.2.8.
+**ServerValidation:** An element of type [ServerValidationParameters (section 2.2.3.2.8)](#Section_2.2.3.2.8) as specified in section 2.2.3.2.8.
 
 **DifferentUsername:** A Boolean. If TRUE, specifies that a different user name is to be used for [**EAP**](#gt_eap) Identity response than the one present in the certificate. If FALSE, EAP uses the same identity as in the certificate's alternate subject name.
 
@@ -1569,7 +1569,7 @@ The [EapTlsConnectionPropertiesV3 (section 6.8.3)](#Section_6.8.3) schema defi
 
 The Microsoft implementation of PEAP overrides the abstract type **BaseEapTypeParameters** with type **MsPeapConnectionPropertiesV1**. This type is defined to be a string formatted according to the [**XML schema**](#gt_xml-schema) in section [6.9.1](#Section_6.9.1). The **MsPeapConnectionPropertiesV1** type defines the following elements:
 
-**ServerValidation:** An optional element of type [ServerValidationParameters (section 2.2.3.2.8)](#Section_802).
+**ServerValidation:** An optional element of type [ServerValidationParameters (section 2.2.3.2.8)](#Section_2.2.3.2.8).
 
 **IdentityPrivacy:** An optional element<31> of type **IdentityPrivacyParameters** which contains information about anonymous identity usage during PEAP authentication. Use of this element is deprecated. If the **PeapExtensions** element exists, this **IdentityPrivacy** element is ignored and the **IdentityPrivacy** tag of **PeapExtensions** MUST be used instead. This element contains the following elements:
 
@@ -1581,7 +1581,7 @@ The Microsoft implementation of PEAP overrides the abstract type **BaseEapTypePa
 
 **InnerEapOptional:** An optional Boolean. If TRUE, PEAP does not attempt to perform inner EAP method authentication.
 
-**Eap:** An element of type [BaseEap (section 2.2.3.2.4)](#Section_802) containing parameters for the inner EAP method.
+**Eap:** An element of type [BaseEap (section 2.2.3.2.4)](#Section_2.2.3.2.4) containing parameters for the inner EAP method.
 
 **EnableQuarantineChecks:** An optional Boolean. If TRUE, PEAP performs NAP authorization checks as part of Phase 2 authentication as specified in [MS-PEAP] section 3.1.5.6. If FALSE or absent, it does not.
 
@@ -1649,7 +1649,7 @@ This type specifies the [**EAP**](#gt_eap) configuration required for EAP-SIM as
 
 This type specifies the [**EAP**](#gt_eap) configuration required for EAP-AKA as specified in [[RFC4187]](https://go.microsoft.com/fwlink/?LinkId=225919). It is defined as a complex element containing the following elements:
 
-**DontRevealPermanentID:** As specified in section [2.2.3.2.9](#Section_802).
+**DontRevealPermanentID:** As specified in section [2.2.3.2.9](#Section_2.2.3.2.9).
 
 **ProviderName:** As specified in section 2.2.3.2.9.
 
@@ -1664,7 +1664,7 @@ This type specifies the [**EAP**](#gt_eap) configuration required for EAP-AKA' a
 
 **EnableFastReauth:** An optional Boolean flag indicating whether the client can perform fast reauthentication ([[RFC4186]](https://go.microsoft.com/fwlink/?LinkId=225918) section 4.3.2) when possible. If set to TRUE, the fast reauthentication is performed. If set to FALSE or absent, full authentication is performed.
 
-**DontRevealPermanentID:** As specified in section [2.2.3.2.9](#Section_802).
+**DontRevealPermanentID:** As specified in section [2.2.3.2.9](#Section_2.2.3.2.9).
 
 **ProviderName:** As specified in section 2.2.3.2.9.
 
@@ -1675,7 +1675,7 @@ This type specifies the [**EAP**](#gt_eap) configuration required for EAP-AKA' a
 
 **TtlsConfig:** This type specifies the [**EAP**](#gt_eap) configuration required for EAP-TTLS as specified in [[RFC5281]](https://go.microsoft.com/fwlink/?LinkId=225924). It is defined as a complex element containing the following elements:
 
-**ServerValidation:** An optional element of type [ServerValidationParameters (section 2.2.3.2.8)](#Section_802). The ServerValidationParameters type is a complex element containing the following elements:
+**ServerValidation:** An optional element of type [ServerValidationParameters (section 2.2.3.2.8)](#Section_2.2.3.2.8). The ServerValidationParameters type is a complex element containing the following elements:
 
 **ServerNames:** An optional string that specifies the list of servers to which the client can authenticate.
 
@@ -1685,7 +1685,7 @@ This type specifies the [**EAP**](#gt_eap) configuration required for EAP-AKA' a
 
 **Phase2Authentication:** An optional element of the **Phase2AuthenticationParameters** type. The **Phase2AuthenticationParameters** type is a complex element containing one of the following elements:
 
-**Eap:** An element of type [BaseEap (section 2.2.3.2.4)](#Section_802) containing parameters for the inner EAP method.
+**Eap:** An element of type [BaseEap (section 2.2.3.2.4)](#Section_2.2.3.2.4) containing parameters for the inner EAP method.
 
 **PAPAuthentication:** An empty string whose presence indicates that TTLS will attempt PAP authentication protocol after the phase 1 tunnel is established as specified in [RFC5281] section 11.2.5.
 
@@ -1722,7 +1722,7 @@ This type specifies the [**EAP**](#gt_eap) configuration required for EAP-AKA' a
 
 **InnerMethodConfig**: An optional element of type **InnerMethodConfigParameters**. The **InnerMethodConfigParameters** type is a complex element containing the following elements:
 
-**Eap**: An element of type [2.2.3.2.1](#Section_802)**BaseEap** (section [2.2.3.2.4](#Section_802)) containing parameters for the inner EAP method.
+**Eap**: An element of type [2.2.3.2.1](#Section_2.2.3.2.1)**BaseEap** (section [2.2.3.2.4](#Section_2.2.3.2.4)) containing parameters for the inner EAP method.
 
 **Phase1Identity**: An optional element of **Phase1IdentityParameters** type. The **Phase1IdentityParameters** type is a complex element containing the following elements:
 
@@ -1749,14 +1749,14 @@ For the syntactic specifications of the following <Class> or <Class> <Attribute>
 <a id="Section_3.1"></a>
 ## 3.1 Administrative-Side Plug-in Details
 
-The administrative-side plug-in has a user interface that allows an administrator to author policy objects on the [**Active Directory**](#gt_active-directory) that have the format specified in section [2.2](#Section_802).
+The administrative-side plug-in has a user interface that allows an administrator to author policy objects on the [**Active Directory**](#gt_active-directory) that have the format specified in section [2.2](#Section_2.2).
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The abstract data model of the Wireless/Wired Group Policy Protocol for an administrator includes the abstract data model of Group Policy, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.1.1. For more information about the meanings of the different attributes, see [[MSFT-WNPE]](https://go.microsoft.com/fwlink/?LinkId=90213), [[MSFT-EADWNP]](https://go.microsoft.com/fwlink/?LinkId=90184), [[MSFT-NFLHWV]](https://go.microsoft.com/fwlink/?LinkId=90199), [[EXP-GPOL]](https://go.microsoft.com/fwlink/?LinkId=89863), [MS-ADSC](../MS-ADSC/MS-ADSC.md), and sections [6.15](../MS-GPOL/MS-GPOL.md) and [6.16](../MS-GPOL/MS-GPOL.md).
+The abstract data model of the Wireless/Wired Group Policy Protocol for an administrator includes the abstract data model of Group Policy, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.1.1. For more information about the meanings of the different attributes, see [[MSFT-WNPE]](https://go.microsoft.com/fwlink/?LinkId=90213), [[MSFT-EADWNP]](https://go.microsoft.com/fwlink/?LinkId=90184), [[MSFT-NFLHWV]](https://go.microsoft.com/fwlink/?LinkId=90199), [[EXP-GPOL]](https://go.microsoft.com/fwlink/?LinkId=89863), [MS-ADSC](../MS-ADSC/MS-ADSC.md), and sections [6.15](#Section_6.15) and [6.16](#Section_6.16).
 
-In addition, the administrator needs to obtain the configuration details of the networks being configured. The abstract data model for these configuration details maps to the data elements specified in section [2.2](#Section_802).
+In addition, the administrator needs to obtain the configuration details of the networks being configured. The abstract data model for these configuration details maps to the data elements specified in section [2.2](#Section_2.2).
 
 The following table shows different policy types and their corresponding containers and classes.
 
@@ -1783,11 +1783,11 @@ None.
 
 When the Wireless/Wired \Group Policy Protocol administrative-side plug-in starts, it gets a [**scoped Group Policy Object (GPO) path**](#gt_scoped-group-policy-object-gpo-path) from the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md). For each policyClass that it supports, the plug-in SHOULD<36> attempt to use LDAP (as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) to retrieve all existing Wireless/Wired Group Policy Protocol objects by searching for the returned [**Active Directory**](#gt_active-directory) objects that are an instance of the class. This Active Directory class MUST be searched under the policyContainerPath that corresponds to the policyType.
 
-To use LDAP, the administrative-side plug-in invokes the "Initialize an ADConnection" task ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1) with the following parameters and stores the new *TaskReturnADConnection* returned from the task as the [ADConnection Handle (section 3.1.1.1)](#Section_802) element:
+To use LDAP, the administrative-side plug-in invokes the "Initialize an ADConnection" task ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1) with the following parameters and stores the new *TaskReturnADConnection* returned from the task as the [ADConnection Handle (section 3.1.1.1)](#Section_3.1.1.1) element:
 
 - *TaskInputTargetName*: MAY be specified by the administrator, or if not specified, the joined domain name
 - *TaskInputPortNumber*: 389
-The Wireless/Wired Group Policy Protocol administrative-side plug-in then MUST read protocol-specific policy object data with the format specified in sections [2.2.1](#Section_802) and [2.2.2](#Section_802). Any additional entries in the configuration data that do not pertain to the configuration format specified in sections 2.2.1 and 2.2.2 are not defined by this protocol and MUST NOT be processed. It is recommended that the administrative-side plug-in then display the current policy information to the administrator.
+The Wireless/Wired Group Policy Protocol administrative-side plug-in then MUST read protocol-specific policy object data with the format specified in sections [2.2.1](#Section_2.2.1) and [2.2.2](#Section_2.2.2). Any additional entries in the configuration data that do not pertain to the configuration format specified in sections 2.2.1 and 2.2.2 are not defined by this protocol and MUST NOT be processed. It is recommended that the administrative-side plug-in then display the current policy information to the administrator.
 
 It is recommended that the administrator be informed if this step fails.
 
@@ -1799,29 +1799,29 @@ The following section specifies the higher-layer triggered events and correspond
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Policy Creation
 
-The following section describes the process for a policy creation trigger for a policyType specified according to the table in section [3.1.1](#Section_802).
+The following section describes the process for a policy creation trigger for a policyType specified according to the table in section [3.1.1](#Section_3.1.1).
 
-When an administrator triggers a request to create a policy for a policyType using the administrative-side plug-in, the administrative-side plug-in collects the policy settings from the administrator and formats them as specified in section [2.2](#Section_802).
+When an administrator triggers a request to create a policy for a policyType using the administrative-side plug-in, the administrative-side plug-in collects the policy settings from the administrator and formats them as specified in section [2.2](#Section_2.2).
 
-It MUST then generate a policyContainerPath from the scoped [**GPO**](#gt_group-policy-object-gpo) path, and check whether an [**Active Directory**](#gt_active-directory) object that is an instance of the policyClass already exists under the policyContainerPath. If such an object exists, the administrative-side plug-in MUST modify the existing policy object as specified in section [3.1.4.2](#Section_802); if such an object does not exist, the administrative-side plug-in MUST use the information in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) to store the formatted policy data in the store under the policyContainerPath as an instance of the policyClass class. The name of the object MUST be the same as the name of the policy that is assigned by the administrator who created the policy. This step could fail due to a failure returned from the LDAP messages or due to any other local reason. Detection and processing of such failures is implementation-specific, but it is recommended that the administrator be informed.
+It MUST then generate a policyContainerPath from the scoped [**GPO**](#gt_group-policy-object-gpo) path, and check whether an [**Active Directory**](#gt_active-directory) object that is an instance of the policyClass already exists under the policyContainerPath. If such an object exists, the administrative-side plug-in MUST modify the existing policy object as specified in section [3.1.4.2](#Section_3.1.4.2); if such an object does not exist, the administrative-side plug-in MUST use the information in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) to store the formatted policy data in the store under the policyContainerPath as an instance of the policyClass class. The name of the object MUST be the same as the name of the policy that is assigned by the administrator who created the policy. This step could fail due to a failure returned from the LDAP messages or due to any other local reason. Detection and processing of such failures is implementation-specific, but it is recommended that the administrator be informed.
 
 For example, when an administrator triggers a request to create a BLOB-based wireless Group Policy using the administrative-side plug-in, the administrative-side plug-in will collect the policy settings from the administrator and format them as specified in section 2.2.
 
 It then generates a <ScopedGPOPath>\Microsoft\Windows\Wireless path from the scoped GPO path. It checks whether an Active Directory object that is an instance of msieee80211-Policy already exists under <ScopedGPOPath>\Microsoft\Windows\Wireless. If such an object exists, the administrative-side plug-in modifies the existing policy object according to the steps specified in section 3.1.4.2; if such an object does not exist, the administrative-side plug-in uses LDAP ([RFC2251]) to store the formatted policy data in the store under <ScopedGPOPath>\Microsoft\Windows\Wireless as an instance of class msieee80211-Policy. The name of the object is the same as the name of the policy that is assigned by the administrator who created the policy.
 
-The specification of policyClass enumerations specified in the table in section 3.1.1 is as specified in section [6.15](../MS-ADSC/MS-ADSC.md), [6.16](../MS-ADSC/MS-ADSC.md) and in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.156.
+The specification of policyClass enumerations specified in the table in section 3.1.1 is as specified in section [6.15](#Section_6.15), [6.16](#Section_6.16) and in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.156.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Policy Modification
 
-For a given policyType, the administrative-side plug-in MUST already have a reference to an [**Active Directory**](#gt_active-directory) object that is an instance of the corresponding Active Directory class specified in the table in section [3.1.1](#Section_802). This reference MUST be stored under policyContainerPath. When the administrator triggers a request to modify this policy using the administrative-side plug-in, the administrative-side plug-in collects the new set of policy settings that includes the modified settings from the administrator and formats them as specified in section [2.2](#Section_802). The administrative-side plug-in MUST then modify this existing object using LDAP (as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)). This step could fail due to a failure returned from the LDAP messages or due to any other local reason. Detection and processing of such failures is implementation-specific, but it is recommended that the administrator be informed.
+For a given policyType, the administrative-side plug-in MUST already have a reference to an [**Active Directory**](#gt_active-directory) object that is an instance of the corresponding Active Directory class specified in the table in section [3.1.1](#Section_3.1.1). This reference MUST be stored under policyContainerPath. When the administrator triggers a request to modify this policy using the administrative-side plug-in, the administrative-side plug-in collects the new set of policy settings that includes the modified settings from the administrator and formats them as specified in section [2.2](#Section_2.2). The administrative-side plug-in MUST then modify this existing object using LDAP (as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)). This step could fail due to a failure returned from the LDAP messages or due to any other local reason. Detection and processing of such failures is implementation-specific, but it is recommended that the administrator be informed.
 
 For example, for an XML-based wireless Group Policy, the administrative-side plug-in will already have a reference to an existing Active Directory object that is an instance of the Active Directory class ms-net-ieee-80211-GroupPolicy and is stored under <ScopedGPOPath>\Microsoft\Windows\IEEE80211. When the administrator triggers a request to modify this policy using the administrative-side plug-in, the administrative-side plug-in collects the new set of policy settings that includes the modified settings from the administrator and formats them as specified in section 2.2. Then the administrative-side plug-in modifies this existing object, as specified in [RFC2251].
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Policy Deletion
 
-For a given policyType the administrative-side plug-in MUST already have a reference to an [**Active Directory**](#gt_active-directory) object that is an instance of the corresponding Active Directory class specified in the table in section [3.1.1](#Section_802). This reference MUST be stored under policyContainerPath. When the administrator triggers a request to delete this policy using the administrative-side plug-in, the administrative-side plug-in MUST delete this existing object using LDAP, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325). This step could fail due to a failure returned from the LDAP messages or due to any other local reason. Detection and processing of such failures is implementation-specific, but it is recommended that the administrator be informed.
+For a given policyType the administrative-side plug-in MUST already have a reference to an [**Active Directory**](#gt_active-directory) object that is an instance of the corresponding Active Directory class specified in the table in section [3.1.1](#Section_3.1.1). This reference MUST be stored under policyContainerPath. When the administrator triggers a request to delete this policy using the administrative-side plug-in, the administrative-side plug-in MUST delete this existing object using LDAP, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325). This step could fail due to a failure returned from the LDAP messages or due to any other local reason. Detection and processing of such failures is implementation-specific, but it is recommended that the administrator be informed.
 
 For example, for a wired Group Policy, the administrative-side plug-in already has a reference to an existing Active Directory object that is an instance of the Active Directory class ms-net-ieee-8023-GroupPolicy and stored under <ScopedGPOPath>\Microsoft\Windows\IEEE8023. When the administrator triggers a request to delete this policy using the administrative-side plug-in, the administrative-side plug-in deletes the existing policy object, as specified in [RFC2251], using delete.
 
@@ -1833,7 +1833,7 @@ For example, for a wired Group Policy, the administrative-side plug-in already h
 
 The following protocol sequences MUST be generated:
 
-- An LDAP BindRequest from the administrative-side plug-in to the [**Group Policy server**](#gt_group-policy-server) is generated. Authentication options MUST be specified in the LDAP BindRequest. In addition, message security can be requested of the underlying LDAP transport, as specified in section [2.1](#Section_802). The parameters MUST include the following.
+- An LDAP BindRequest from the administrative-side plug-in to the [**Group Policy server**](#gt_group-policy-server) is generated. Authentication options MUST be specified in the LDAP BindRequest. In addition, message security can be requested of the underlying LDAP transport, as specified in section [2.1](#Section_2.1). The parameters MUST include the following.
 | Parameter | Value |
 | --- | --- |
 | DN | A zero-length string |
@@ -1852,18 +1852,18 @@ After the successful BindResponse, the plug-in MUST send an LDAP SearchRequest t
 | timeLimit | This MUST be set to 0 (which specifies no limit). |
 | typesOnly | This MUST be set to FALSE according to the LDAP definition of FALSE. |
 | Filter | The query MUST be filtered so that only wireless or wired GPOs are returned. For BLOB-based wireless policy: The LDAP filter (objectClass= msieee80211-Policy) MUST be used. For XML-based wireless policy: The LDAP filter (objectClass= ms-net-ieee-80211-GroupPolicy) MUST be used. For wired Group Policy: The LDAP filter (objectClass= ms-net-ieee-8023-GroupPolicy) MUST be used. |
-| Attributes | The following attribute names are passed as inputs to the LDAP search request: For BLOB-based wireless policy: msieee80211-ID: An identifier to uniquely identify a BLOB-based wireless Group Policy. msieee80211-Data: A data BLOB according to a well-defined format that describes the different settings in the policy. For more information about interpreting this data, see section [2.2.1.1](#Section_802). cn: Name of the policy. description: A user-defined description for the policy. whenChanged: Time stamp of the last time the policy was edited. For XML-based wireless policy: ms-net-ieee-80211-GP-PolicyGUID: A unique identifier to identify the policy object. ms-net-ieee-80211-GP-PolicyData: An XML string according to a well-defined schema. For more information, see section [2.2](#Section_802). cn: Name of the policy. description: A description for the policy. whenChanged: Time stamp of the last time the policy was edited. For wired Group Policy: ms-net-ieee-8023-GP-PolicyGUID: A unique identifier to identify the policy object. ms-net-ieee-8023-GP-PolicyData: An XML string according to a well-defined schema. For more information, see section 2.2. cn: Name of the policy. description: A description for the policy. whenChanged: Time stamp of the last time the policy was edited. |
+| Attributes | The following attribute names are passed as inputs to the LDAP search request: For BLOB-based wireless policy: msieee80211-ID: An identifier to uniquely identify a BLOB-based wireless Group Policy. msieee80211-Data: A data BLOB according to a well-defined format that describes the different settings in the policy. For more information about interpreting this data, see section [2.2.1.1](#Section_2.2.1.1). cn: Name of the policy. description: A user-defined description for the policy. whenChanged: Time stamp of the last time the policy was edited. For XML-based wireless policy: ms-net-ieee-80211-GP-PolicyGUID: A unique identifier to identify the policy object. ms-net-ieee-80211-GP-PolicyData: An XML string according to a well-defined schema. For more information, see section [2.2](#Section_2.2). cn: Name of the policy. description: A description for the policy. whenChanged: Time stamp of the last time the policy was edited. For wired Group Policy: ms-net-ieee-8023-GP-PolicyGUID: A unique identifier to identify the policy object. ms-net-ieee-8023-GP-PolicyData: An XML string according to a well-defined schema. For more information, see section 2.2. cn: Name of the policy. description: A description for the policy. whenChanged: Time stamp of the last time the policy was edited. |
 
 - A successful reply from the LDAP search request MUST contain one or more LDAP search response messages. Those messages MUST contain one or more searchResultEntries. The searchResultEntry MUST also contain an attributes field with the values for the attributes request in the LDAP search message. The format of the attributes is specified in section 2.2.
-- An LDAP UnbindRequest is made by the plug-ins to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_802) for future requests.
-For details about creating, modifying, and deleting wired and wireless GPOs, see section [3](#Section_802).
+- An LDAP UnbindRequest is made by the plug-ins to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_3.1.1.1) for future requests.
+For details about creating, modifying, and deleting wired and wireless GPOs, see section [3](#Section_3).
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Creating a Wireless or Wired Policy Object on Active Directory
 
 When the administrative-side plug-in attempts to create a wireless or wired [**GPO**](#gt_group-policy-object-gpo) for a GPO, the following protocol sequence MUST be generated.
 
-An LDAP BindRequest from the administrative-side plug-in to the [**Group Policy server**](#gt_group-policy-server) and an LDAP BindResponse in reply MUST be generated. The parameters to the BindRequest MUST be identical to those specified in section [3.1.5.1](#Section_802).
+An LDAP BindRequest from the administrative-side plug-in to the [**Group Policy server**](#gt_group-policy-server) and an LDAP BindResponse in reply MUST be generated. The parameters to the BindRequest MUST be identical to those specified in section [3.1.5.1](#Section_3.1.5.1).
 
 - The administrative-side plug-in MUST search under the ScopedGPOPath for the existence of the container object named "Microsoft" by sending an LDAP Search message with the parameters shown in the following table.
 | Parameter | Value |
@@ -1952,7 +1952,7 @@ If the **resultCode** field of the **addResponse** message is non-zero, the add 
 | Parameter | Value |
 | --- | --- |
 | Entry | For BLOB-based wireless policy: It MUST be "CN=Wireless, CN=Windows, CN=Microsoft, Scoped GPO DN". For XML-based wireless policy: It MUST be "CN=IEEE80211, CN=Windows, CN=Microsoft, Scoped GPO DN". For wired policy: It MUST be "CN=IEEE8023, CN=Windows, CN=Microsoft, Scoped GPO DN". |
-| attributes | This field MUST specify the following attributes: For BLOB-based wireless policy: msieee80211-ID MUST be a unique identifier to uniquely identify a BLOB-based wireless Group Policy. msieee80211-Data MUST be a data BLOB according to a well-defined format that describes the different settings in the policy. For more information about interpreting this data, see section 3.1.5.1. description MUST be a user-defined description for the policy. whenChanged MUST be time stamp of the policy creation time by the administrative-side plug-in. The final timestamp value is created by the server. For XML-based wireless policy: ms-net-ieee-80211-GP-PolicyGUID MUST be a unique identifier to identify the policy object. ms-net-ieee-80211-GP-PolicyData MUST be an XML string according to a well-defined schema. For more information, see section [2.2](#Section_802). description: A description for the policy. whenChanged MUST be a time stamp of the policy creation time by the administrative-side plug-in. The final timestamp value is created by the server. For wired Group Policy: ms-net-ieee-8023-GP-PolicyGUID MUST be a unique identifier to identify the policy object. ms-net-ieee-8023-GP-PolicyData: MUST be an XML string according to a well-defined schema. For more information, see section 2.2. description: A description for the policy. whenChanged MUST be a time stamp of the policy creation time by the administrative-side plug-in. The final timestamp value is created by the server. |
+| attributes | This field MUST specify the following attributes: For BLOB-based wireless policy: msieee80211-ID MUST be a unique identifier to uniquely identify a BLOB-based wireless Group Policy. msieee80211-Data MUST be a data BLOB according to a well-defined format that describes the different settings in the policy. For more information about interpreting this data, see section 3.1.5.1. description MUST be a user-defined description for the policy. whenChanged MUST be time stamp of the policy creation time by the administrative-side plug-in. The final timestamp value is created by the server. For XML-based wireless policy: ms-net-ieee-80211-GP-PolicyGUID MUST be a unique identifier to identify the policy object. ms-net-ieee-80211-GP-PolicyData MUST be an XML string according to a well-defined schema. For more information, see section [2.2](#Section_2.2). description: A description for the policy. whenChanged MUST be a time stamp of the policy creation time by the administrative-side plug-in. The final timestamp value is created by the server. For wired Group Policy: ms-net-ieee-8023-GP-PolicyGUID MUST be a unique identifier to identify the policy object. ms-net-ieee-8023-GP-PolicyData: MUST be an XML string according to a well-defined schema. For more information, see section 2.2. description: A description for the policy. whenChanged MUST be a time stamp of the policy creation time by the administrative-side plug-in. The final timestamp value is created by the server. |
 
 Additionally, the attributes in the following table MUST also be supplied in the attributeList.
 
@@ -1964,13 +1964,13 @@ Additionally, the attributes in the following table MUST also be supplied in the
 This message creates an Active Directory object of the corresponding policy. If the **resultCode** field of the **addResponse** message is non-zero, the add operation failed. In this case, this protocol sequence MUST proceed to step 9 (LDAP UnbindRequest).
 
 - The administrative tool MUST invoke the Group Policy Extension Update task defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.4.4.
-- An LDAP UnbindRequest is be made by the plug-in that corresponds to the previous LDAP BindRequest to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_802) for future requests.
+- An LDAP UnbindRequest is be made by the plug-in that corresponds to the previous LDAP BindRequest to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_3.1.1.1) for future requests.
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Modifying a Wireless or Wired Policy Object on Active Directory
 
 When the administrative-side plug-in attempts to modify an existing wireless or wired [**GPO**](#gt_group-policy-object-gpo) for a GPO, the following protocol sequence MUST be generated:
 
-- Identify an existing wireless or wired policy from the [**Active Directory**](#gt_active-directory) that is to be modified. This can be done using the steps mentioned in section [3.1.5.1](#Section_802).
+- Identify an existing wireless or wired policy from the [**Active Directory**](#gt_active-directory) that is to be modified. This can be done using the steps mentioned in section [3.1.5.1](#Section_3.1.5.1).
 - For this policy, identify the following values.
 | Parameter | Value |
 | --- | --- |
@@ -1981,18 +1981,18 @@ When the administrative-side plug-in attempts to modify an existing wireless or 
 | Parameter | Value |
 | --- | --- |
 | Entry | For BLOB-based wireless policy: It MUST be CN=policyName, CN=Wireless, CN=Windows, CN=Microsoft, Scoped GPO DN. For XML-based wireless policy: It MUST be CN=policyName, CN=IEEE80211, CN=Windows, CN=Microsoft, Scoped GPO DN. For wired policy: It MUST be CN=policyName, CN=IEEE8023, CN=Windows, CN=Microsoft, Scoped GPO DN. Where policyName is the name of the policy identified in step 2. |
-| attributes | This field MUST specify the following attributes: For BLOB-based wireless policy: msieee80211-ID MUST be set the same as the one identified in step 2 for policyIdentifier. msieee80211-Data MUST be a data BLOB containing the modified policy settings formatted according to a well-defined format that describes the different settings in the policy. For more information about interpreting this data, see section 3.1.5.1. description MUST be a user-defined description for the policy. whenChanged MUST be a time stamp of the policy modification time by the administrative-side plug-in. For XML-based wireless policy: ms-net-ieee-80211-GP-PolicyGUID MUST be set the same as the one identified in step 2 for policyIdentifier. ms-net-ieee-80211-GP-PolicyData MUST be an XML string containing modified policy settings according to a well-defined schema. For more information, see section [2.2](#Section_802). description is a description for the policy. whenChanged MUST be a time stamp of the policy modification time by the administrative-side plug-in. For wired Group Policy: ms-net-ieee-8023-GP-PolicyGUID MUST be set the same as the one identified in step 2 for policyIdentifier. ms-net-ieee-8023-GP-PolicyData MUST be an XML string containing modified policy settings according to a well-defined schema. For more information, see section 2.2. description: A description for the policy. whenChanged MUST be a time stamp of the policy modification time by the administrative-side plug-in. |
+| attributes | This field MUST specify the following attributes: For BLOB-based wireless policy: msieee80211-ID MUST be set the same as the one identified in step 2 for policyIdentifier. msieee80211-Data MUST be a data BLOB containing the modified policy settings formatted according to a well-defined format that describes the different settings in the policy. For more information about interpreting this data, see section 3.1.5.1. description MUST be a user-defined description for the policy. whenChanged MUST be a time stamp of the policy modification time by the administrative-side plug-in. For XML-based wireless policy: ms-net-ieee-80211-GP-PolicyGUID MUST be set the same as the one identified in step 2 for policyIdentifier. ms-net-ieee-80211-GP-PolicyData MUST be an XML string containing modified policy settings according to a well-defined schema. For more information, see section [2.2](#Section_2.2). description is a description for the policy. whenChanged MUST be a time stamp of the policy modification time by the administrative-side plug-in. For wired Group Policy: ms-net-ieee-8023-GP-PolicyGUID MUST be set the same as the one identified in step 2 for policyIdentifier. ms-net-ieee-8023-GP-PolicyData MUST be an XML string containing modified policy settings according to a well-defined schema. For more information, see section 2.2. description: A description for the policy. whenChanged MUST be a time stamp of the policy modification time by the administrative-side plug-in. |
 
 This message modifies the existing Active Directory object of the corresponding policy. If the **resultCode** field of the **modifyResponse** message is nonzero, the modify operation failed. In this case, this protocol sequence MUST proceed to step 5 (LDAP UnbindRequest).
 
 - The administrative tool MUST invoke the Group Policy Extension Update task defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.4.4.
-- An LDAP UnbindRequest is made by the plug-in that corresponds to the previous LDAP BindRequest to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_802) for future requests.
+- An LDAP UnbindRequest is made by the plug-in that corresponds to the previous LDAP BindRequest to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_3.1.1.1) for future requests.
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Deleting a Wireless or Wired Policy Object on Active Directory
 
 When the administrative-side plug-in attempts to delete an existing wireless or wired [**GPO**](#gt_group-policy-object-gpo) for a GPO, the following protocol sequence MUST be generated:
 
-- Identify an existing wireless or wired policy from the [**Active Directory**](#gt_active-directory) that is to be deleted. This can be done using the steps mentioned in section [3.1.5.1](#Section_802)
+- Identify an existing wireless or wired policy from the [**Active Directory**](#gt_active-directory) that is to be deleted. This can be done using the steps mentioned in section [3.1.5.1](#Section_3.1.5.1)
 - For this policy, identify the following values.
 | Parameter | Value |
 | --- | --- |
@@ -2008,7 +2008,7 @@ This message deletes the existing Active Directory object of the corresponding p
 If the **resultCode** field of the **delResponse** message is non-zero, the delete operation failed. In this case, this protocol sequence MUST proceed to step 5 (LDAP UnbindRequest).
 
 - The administrative tool MUST invoke the Group Policy Extension Update task defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.4.4.
-- An LDAP UnbindRequest is be made by the plug-in that corresponds to the previous LDAP BindRequest to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_802) for future requests.
+- An LDAP UnbindRequest is be made by the plug-in that corresponds to the previous LDAP BindRequest to close the connection, unless the plug-in will reuse the [ADConnection Handle (section 3.1.1.1)](#Section_3.1.1.1) for future requests.
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
@@ -2029,12 +2029,12 @@ During policy application, the wireless or wired plug-in is invoked after the Gr
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The Wireless/Wired Group Policy Protocol plug-ins themselves maintain no state. The underlying wireless connection and wired authentication components in the client operating system maintain a state that MAY be updated by the plug-in. The abstract data model for the state maintained by the wireless connection and wired authentication components maps to the data elements specified in section [2.2](#Section_802).
+The Wireless/Wired Group Policy Protocol plug-ins themselves maintain no state. The underlying wireless connection and wired authentication components in the client operating system maintain a state that MAY be updated by the plug-in. The abstract data model for the state maintained by the wireless connection and wired authentication components maps to the data elements specified in section [2.2](#Section_2.2).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-When a wireless policy client-side plug-in applies a BLOB-based wireless Group Policy, it MAY maintain a timer that controls the time at which to check for updates to the currently applied policy. This timer is configured using the pollingInterval configuration retrieved as part of the BLOB-based wireless policy object specified in section [2.2.1.1](#Section_802).
+When a wireless policy client-side plug-in applies a BLOB-based wireless Group Policy, it MAY maintain a timer that controls the time at which to check for updates to the currently applied policy. This timer is configured using the pollingInterval configuration retrieved as part of the BLOB-based wireless policy object specified in section [2.2.1.1](#Section_2.2.1.1).
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
@@ -2055,12 +2055,12 @@ The plug-in does not make use of the flags or security token arguments.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-When the event described in section [3.2.4](#Section_802) is triggered, the plug-in selects the last [**GPO**](#gt_group-policy-object-gpo) in the list of new or changed GPOs passed by the Group Policy Core Protocol. Using the DN path of this highest-precedence GPO, the wireless or wired client-side plug-in MUST retrieve a corresponding protocol-specific policy as specified in sections [3.2.5.1](#Section_802), [3.2.5.2](#Section_802), and [3.2.5.3](#Section_802). The client-side plug-in MUST use the LDAP bind mechanism for authentication. In addition, message security is requested of the underlying LDAP transport, as specified in section [2.1](#Section_802). The Wireless/Wired Group Policy Protocol plug-in interprets the contents of the wireless or wired policy objects according to the format specified in section [2.2](#Section_802). Additional entries in the contents that are not included in section 2.2 MUST be ignored by the wireless or wired plug-in. The plug-in MUST provide policy settings to the wireless and wired connection components in the client's operating system.
+When the event described in section [3.2.4](#Section_3.2.4) is triggered, the plug-in selects the last [**GPO**](#gt_group-policy-object-gpo) in the list of new or changed GPOs passed by the Group Policy Core Protocol. Using the DN path of this highest-precedence GPO, the wireless or wired client-side plug-in MUST retrieve a corresponding protocol-specific policy as specified in sections [3.2.5.1](#Section_3.2.5.1), [3.2.5.2](#Section_3.2.5.2), and [3.2.5.3](#Section_3.2.5.3). The client-side plug-in MUST use the LDAP bind mechanism for authentication. In addition, message security is requested of the underlying LDAP transport, as specified in section [2.1](#Section_2.1). The Wireless/Wired Group Policy Protocol plug-in interprets the contents of the wireless or wired policy objects according to the format specified in section [2.2](#Section_2.2). Additional entries in the contents that are not included in section 2.2 MUST be ignored by the wireless or wired plug-in. The plug-in MUST provide policy settings to the wireless and wired connection components in the client's operating system.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Retrieving BLOB-Based Wireless Group Policy for a GPO
 
-The wireless Group Policy Protocol plug-in gets [**scoped GPO path**](#gt_scoped-group-policy-object-gpo-path) ([**scoped GPO distinguished name (DN)**](#gt_5ae3cacc-9e3c-459e-99f8-20a41628e5fe)) from the Group Policy client, as specified in section [3.2.4](#Section_802). The plug-in MUST issue an LDAP SearchRequest with the following parameters:
+The wireless Group Policy Protocol plug-in gets [**scoped GPO path**](#gt_scoped-group-policy-object-gpo-path) ([**scoped GPO distinguished name (DN)**](#gt_5ae3cacc-9e3c-459e-99f8-20a41628e5fe)) from the Group Policy client, as specified in section [3.2.4](#Section_3.2.4). The plug-in MUST issue an LDAP SearchRequest with the following parameters:
 
 - baseObject: CN=Wireless, CN=Windows, CN=Microsoft, {scoped GPO DN without LDAP:// prefix}
 - scope: 2
@@ -2071,29 +2071,29 @@ For the specification of msieee80211-Policy, see [MS-ADSC](../MS-ADSC/MS-ADSC.md
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Retrieving XML-Based Wireless Group Policy for a GPO
 
-The wireless Group Policy plug-in gets a scoped [**GPO**](#gt_group-policy-object-gpo) path (Scoped GPO [**DN**](#gt_distinguished-name-dn)) from the Group Policy protocol client (as specified in section [3.2.4](#Section_802)). The plug-in MUST issue an LDAP SearchRequest with the following parameters:
+The wireless Group Policy plug-in gets a scoped [**GPO**](#gt_group-policy-object-gpo) path (Scoped GPO [**DN**](#gt_distinguished-name-dn)) from the Group Policy protocol client (as specified in section [3.2.4](#Section_3.2.4)). The plug-in MUST issue an LDAP SearchRequest with the following parameters:
 
 - baseObject: CN=IEEE80211, CN=Windows, CN=Microsoft, {Scoped GPO DN without LDAP:// prefix}
 - scope: 2
 - attributes: ms-net-ieee-80211-GP-PolicyData
 - filter: objectClass= ms-net-ieee-80211-GroupPolicy
-For the specification of ms-net-ieee-80211-GP-PolicyData, see section [6.15](../MS-ADSC/MS-ADSC.md) and as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md). If the specified filter returns multiple policy objects, the first LDAPMessage buffer is used to read the policy data. If the policy contains multiple Unicode strings, the first string is used.
+For the specification of ms-net-ieee-80211-GP-PolicyData, see section [6.15](#Section_6.15) and as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md). If the specified filter returns multiple policy objects, the first LDAPMessage buffer is used to read the policy data. If the policy contains multiple Unicode strings, the first string is used.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Retrieving XML-Based Wired Group Policy for a GPO
 
-The wired Group Policy plug-in gets a [**scoped GPO path**](#gt_scoped-group-policy-object-gpo-path) ([**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn)) from the Group Policy client (as specified in section [3.2.4](#Section_802)). The plug-in MUST issue an LDAP SearchRequest with the following parameters:
+The wired Group Policy plug-in gets a [**scoped GPO path**](#gt_scoped-group-policy-object-gpo-path) ([**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn)) from the Group Policy client (as specified in section [3.2.4](#Section_3.2.4)). The plug-in MUST issue an LDAP SearchRequest with the following parameters:
 
 - baseObject: CN=IEEE8023, CN=Windows, CN=Microsoft, {Scoped GPO DN without LDAP:// prefix}
 - scope: 2
 - attributes: ms-net-ieee-8023-GP-PolicyData
 - filter: objectClass= ms-net-ieee-8023-GroupPolicy
-For the specification of ms-net-ieee-8023-GP-PolicyData, see section [6.16](../MS-ADSC/MS-ADSC.md), and as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md). If the specified filter returns multiple policy objects, the first LDAPMessage buffer is used to read the policy data. If the policy contains multiple Unicode strings, the first string is used.
+For the specification of ms-net-ieee-8023-GP-PolicyData, see section [6.16](#Section_6.16), and as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md). If the specified filter returns multiple policy objects, the first LDAPMessage buffer is used to read the policy data. If the policy contains multiple Unicode strings, the first string is used.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-When the timer specified in section [3.2.2](#Section_802) expires, the client MUST recheck for BLOB-based wireless policy updates using the method specified in section [3.2.5.1](#Section_802).
+When the timer specified in section [3.2.2](#Section_3.2.2) expires, the client MUST recheck for BLOB-based wireless policy updates using the method specified in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
@@ -2311,19 +2311,19 @@ This policy sample shows a BLOB which contains profiles for three wireless netwo
 <a id="Section_4.3.1"></a>
 ### 4.3.1 Wireless Policy Sub-BLOB Token Streams
 
-The following table shows token streams relating to the [Wireless Policy Sub-BLOB (section 2.2.1.1.1)](#Section_802).
+The following table shows token streams relating to the [Wireless Policy Sub-BLOB (section 2.2.1.1.1)](#Section_2.2.1.1.1).
 
 | Token Stream | Description |
 | --- | --- |
 | 03 00 | Major Version: 3 |
 | 00 00 | Minor Version: 0 |
 | F8 03 00 00 | WirelessPolicyDataLength: 0x3F8 = 1016 bytes |
-| 30 2A … 00 00 (1016 bytes) | Wireless Policy Data: see section [4.3.2](#Section_802) |
+| 30 2A … 00 00 (1016 bytes) | Wireless Policy Data: see section [4.3.2](#Section_4.3.2) |
 
 <a id="Section_4.3.2"></a>
 ### 4.3.2 Wireless Policy Data Token Streams
 
-The following table shows token streams relating to the [Wireless Policy Data (section 2.2.1.1.2)](#Section_802).
+The following table shows token streams relating to the [Wireless Policy Data (section 2.2.1.1.2)](#Section_2.2.1.1.2).
 
 | Token Stream | Description |
 | --- | --- |
@@ -2333,16 +2333,16 @@ The following table shows token streams relating to the [Wireless Policy Data (
 | 01 00 00 00 | ConnectToNonPreferredNtwks: Yes |
 | 03 00 00 00 | NumberOfWirelessProfileSettings: 3 |
 | 74 01 00 00 | WirelessProfileSettingsLength: 0x174 = 372 bytes |
-| 53 00 … 00 00 (372 bytes) | Wireless Profile Settings Data: See section [4.3.3](#Section_802) |
+| 53 00 … 00 00 (372 bytes) | Wireless Profile Settings Data: See section [4.3.3](#Section_4.3.3) |
 | 70 01 00 00 | WirelessProfileSettingsLength: 0x170 = 368 bytes |
-| 53 00 … 00 00 (368 bytes) | Wireless Profile Settings Data: see section [4.3.5](#Section_802) |
+| 53 00 … 00 00 (368 bytes) | Wireless Profile Settings Data: see section [4.3.5](#Section_4.3.5) |
 | 00 01 00 00 | WirelessProfileSettingsLength: 0x100 = 256 bytes |
-| 54 00 … 00 00 (256 bytes) | Wireless Profile Settings Data: see section [4.3.10](#Section_802) |
+| 54 00 … 00 00 (256 bytes) | Wireless Profile Settings Data: see section [4.3.10](#Section_4.3.10) |
 
 <a id="Section_4.3.3"></a>
 ### 4.3.3 First Wireless Profile Settings Version B Token Streams
 
-The following table shows token streams relating to the first [Wireless Profile Settings version B (section 2.2.1.1.5)](#Section_802).
+The following table shows token streams relating to the first [Wireless Profile Settings version B (section 2.2.1.1.5)](#Section_2.2.1.1.5).
 
 | Token Stream | Description |
 | --- | --- |
@@ -2357,7 +2357,7 @@ The following table shows token streams relating to the first [Wireless Profile 
 | 03 00 00 00 | 8021xSupplicantMode: Transmit per IEEE 802.1X |
 | 0D 00 00 00 | EAPType: EAP-TLS |
 | 72 00 00 00 | EAPDataLen: 0x72 = 114 bytes |
-| 02 00 … D6 56 (114 bytes) | EAPData: see section [4.3.4](#Section_802) |
+| 02 00 … D6 56 (114 bytes) | EAPData: see section [4.3.4](#Section_4.3.4) |
 | 01 00 00 00 | Machine Authentication: Computer Credentials |
 | 01 00 00 00 | Machine Authentication Type: With User Reauthentication |
 | 00 00 00 00 | Guest Authentication: No |
@@ -2382,7 +2382,7 @@ The following table shows token streams relating to the first [Wireless Profile 
 <a id="Section_4.3.4"></a>
 ### 4.3.4 EAPTLS_CONN_PROPERTIES Token Streams
 
-The following table shows token streams relating to [EAPTLS_CONN_PROPERTIES (section 2.2.3.1.1)](#Section_802), the EAPData field for EAP-TLS.
+The following table shows token streams relating to [EAPTLS_CONN_PROPERTIES (section 2.2.3.1.1)](#Section_2.2.3.1.1), the EAPData field for EAP-TLS.
 
 | Token Stream | Description |
 | --- | --- |
@@ -2403,7 +2403,7 @@ The following table shows token streams relating to [EAPTLS_CONN_PROPERTIES (se
 <a id="Section_4.3.5"></a>
 ### 4.3.5 Second Wireless Profile Settings Version B Token Streams
 
-The following table shows token streams relating to the second [Wireless Profile Settings version B (section 2.2.1.1.5)](#Section_802).
+The following table shows token streams relating to the second [Wireless Profile Settings version B (section 2.2.1.1.5)](#Section_2.2.1.1.5).
 
 | Token | StreamDescription |
 | --- | --- |
@@ -2418,7 +2418,7 @@ The following table shows token streams relating to the second [Wireless Profile
 | 02 00 00 00 | 8021xSupplicantMode: Send EAPOL-Start if needed |
 | 19 00 00 00 | EAPType: PEAP |
 | 6E 00 00 00 | EAPDataLen: 0x6E = 110 bytes |
-| 01 00 … 00 00 | (110 bytes)EAPData: see section [4.3.6](#Section_802) |
+| 01 00 … 00 00 | (110 bytes)EAPData: see section [4.3.6](#Section_4.3.6) |
 | 01 00 00 00 | Machine Authentication: Computer Credentials |
 | 01 00 00 00 | Machine Authentication Type: User Reauthentication |
 | 00 00 00 00 | Guest Authentication: No |
@@ -2443,7 +2443,7 @@ The following table shows token streams relating to the second [Wireless Profile
 <a id="Section_4.3.6"></a>
 ### 4.3.6 PEAP_CONN_PROP Token Streams
 
-The following table shows token streams relating to PEAP_CONN_PROP, the EAPData field for PEAP ([2.2.3.1.2](#Section_802)).
+The following table shows token streams relating to PEAP_CONN_PROP, the EAPData field for PEAP ([2.2.3.1.2](#Section_2.2.3.1.2)).
 
 | Token Stream | Description |
 | --- | --- |
@@ -2451,14 +2451,14 @@ The following table shows token streams relating to PEAP_CONN_PROP, the EAPData 
 | 6E 00 00 00 | Size: 0x6E = 110 bytes |
 | 01 00 00 00 | NumberOfEAPTypes: 1 |
 | 01 00 00 00 | Flags: PeapFastRoaming: True PeapInnerEAPOptional: False PeapEnforceCryptoBinding: False PeapEnableQuarantine: False |
-| 01 00 … 00 00 (66 bytes) | PeapTlsProperties: see section [4.3.7](#Section_802) |
-| 01 00 … 00 00 (20 bytes) | InnerMethodProperties: see section [4.3.8](#Section_802) |
+| 01 00 … 00 00 (66 bytes) | PeapTlsProperties: see section [4.3.7](#Section_4.3.7) |
+| 01 00 … 00 00 (20 bytes) | InnerMethodProperties: see section [4.3.8](#Section_4.3.8) |
 | 00 00 00 00 00 00 00 00 | Padding |
 
 <a id="Section_4.3.7"></a>
 ### 4.3.7 PEAP_TLS_PHASE1_CONN_PROPERTIES Field Token Streams
 
-The following table shows token streams relating to [PEAP_TLS_PHASE1_CONN_PROPERTIES (section 2.2.3.1.2.1)](#Section_802), the PeapTlsProperties field from PEAP_CONN_PROP.
+The following table shows token streams relating to [PEAP_TLS_PHASE1_CONN_PROPERTIES (section 2.2.3.1.2.1)](#Section_2.2.3.1.2.1), the PeapTlsProperties field from PEAP_CONN_PROP.
 
 | Token Stream | Description |
 | --- | --- |
@@ -2475,19 +2475,19 @@ The following table shows token streams relating to [PEAP_TLS_PHASE1_CONN_PROPER
 <a id="Section_4.3.8"></a>
 ### 4.3.8 PEAP_INNER_METHOD_PROPERTY Token Streams
 
-The following table shows token streams relating to [PEAP_INNER_METHOD_PROPERTY (section 2.2.3.1.2.2)](#Section_802), the InnerMethodProperties field from PEAP_CONN_PROP.
+The following table shows token streams relating to [PEAP_INNER_METHOD_PROPERTY (section 2.2.3.1.2.2)](#Section_2.2.3.1.2.2), the InnerMethodProperties field from PEAP_CONN_PROP.
 
 | Token Stream | Description |
 | --- | --- |
 | 01 00 00 00 | Version: 1 |
 | 14 00 00 00 | Size: 0x14 = 20 bytes |
 | 1A 00 00 00 | InnerEapType: The format of InnerEapData is EAPMSCHAPv2_CONN_PROPERTIES |
-| 01 00 … 00 00 (8 bytes) | InnerEapData: see section [4.3.9](#Section_802) |
+| 01 00 … 00 00 (8 bytes) | InnerEapData: see section [4.3.9](#Section_4.3.9) |
 
 <a id="Section_4.3.9"></a>
 ### 4.3.9 EAPMSCHAPv2_CONN_PROPERTIES Token Streams
 
-The following table shows token streams relating to [EAPMSCHAPv2_CONN_PROPERTIES (section 2.2.3.1.3)](#Section_802), the InnerEapData field from PEAP_INNER_METHOD_PROPERTY.
+The following table shows token streams relating to [EAPMSCHAPv2_CONN_PROPERTIES (section 2.2.3.1.3)](#Section_2.2.3.1.3), the InnerEapData field from PEAP_INNER_METHOD_PROPERTY.
 
 | Token Stream | Description |
 | --- | --- |
@@ -2497,7 +2497,7 @@ The following table shows token streams relating to [EAPMSCHAPv2_CONN_PROPERTIES
 <a id="Section_4.3.10"></a>
 ### 4.3.10 Wireless Profile Settings Version B Token Streams
 
-The following table shows token streams relating to the third [Wireless Profile Settings version B (section 2.2.1.1.5)](#Section_802) data.
+The following table shows token streams relating to the third [Wireless Profile Settings version B (section 2.2.1.1.5)](#Section_2.2.1.1.5) data.
 
 | Token Stream | Description |
 | --- | --- |
@@ -2543,7 +2543,7 @@ On the [**domain controller (DC)**](#gt_domain-controller-dc):
 
 - The IT administrator launches an administrative-side tool to modify the wireless Group Policy within the [**GPO**](#gt_group-policy-object-gpo). The administrative-side plug-in is invoked with the path of computer GPO – "testdomain\policies\defaultPolicy\Machine".
 - The administrative-side plug-in creates an LDAP distinguished name for this search "CN=IEEE80211, CN=Windows, CN=Microsoft, CN=Machine, CN=defaultPolicy, CN=policies, DC=testDomain, DC=com" and performs a "search" operation by searching for CN= ms-net-ieee-80211-GP-PolicyData with objectClass= ms-net-ieee-80211-GroupPolicy and baseObject scope.
-- This search returns the following object: "CN=DomainWirelessPolicy, CN=IEEE80211, CN=Windows, CN=Microsoft, CN=Machine, CN=defaultPolicy, CN=policies, DC=testDomain, DC=com". The administrative-side plug-in enumerates attributes of this [**Active Directory**](#gt_active-directory) object. It interprets the value of ms-net-ieee-80211-GP-PolicyData as the XML policy string according to the syntax indicated in section [2.2.1.2](#Section_802).
+- This search returns the following object: "CN=DomainWirelessPolicy, CN=IEEE80211, CN=Windows, CN=Microsoft, CN=Machine, CN=defaultPolicy, CN=policies, DC=testDomain, DC=com". The administrative-side plug-in enumerates attributes of this [**Active Directory**](#gt_active-directory) object. It interprets the value of ms-net-ieee-80211-GP-PolicyData as the XML policy string according to the syntax indicated in section [2.2.1.2](#Section_2.2.1.2).
 - The administrative-side plug-in creates a new policy XML string that contains HQWLAN as the preferred SSID. The new policy XML string conforms to the syntax described in section 2.2.1.2.
 - The administrative-side plug-in uses LDAP modify to set the newly created policy XML string as the value for ms-net-ieee-80211-GP-PolicyData for the policy object "CN=DomainWirelessPolicy, CN=IEEE80211, CN=Windows, CN=Microsoft, CN=Machine, CN=defaultPolicy, CN=policies, DC=testDomain, DC=com".
 - The administrative-side plug-in is informed, as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md), that the wireless Group Policy has been updated for the GPO with the path indicated by "testdomain\policies\defaultPolicy\Machine".
@@ -2560,7 +2560,7 @@ Later, the following steps happen on a client computer:
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-Section [2.1](#Section_802), Transport, recommends that the administrative-side and client-side plug-ins use the LDAP bind mechanism for authentication, and that they use the LDAP message security layer for confidentiality and integrity of the protocol messages (as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.1). The Wireless/Wired Group Policy Protocol does not have any security considerations beyond those specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md), section 5.1 for the Group Policy: Core Protocol.
+Section [2.1](#Section_2.1), Transport, recommends that the administrative-side and client-side plug-ins use the LDAP bind mechanism for authentication, and that they use the LDAP message security layer for confidentiality and integrity of the protocol messages (as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.1). The Wireless/Wired Group Policy Protocol does not have any security considerations beyond those specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md), section 5.1 for the Group Policy: Core Protocol.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -2569,8 +2569,8 @@ There are no security parameters for the Wireless/Wired Group Policy Protocol. T
 
 | Security parameter | Section |
 | --- | --- |
-| IEEE 802.11i parameters, as specified in [[IEEE802.11i]](https://go.microsoft.com/fwlink/?LinkId=89906). | [2.2.1](#Section_802) |
-| IEEE 802.1X parameters, as specified in [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910). | 2.2.1 and [2.2.2](#Section_802) |
+| IEEE 802.11i parameters, as specified in [[IEEE802.11i]](https://go.microsoft.com/fwlink/?LinkId=89906). | [2.2.1](#Section_2.2.1) |
+| IEEE 802.1X parameters, as specified in [[IEEE802.1X]](https://go.microsoft.com/fwlink/?LinkId=89910). | 2.2.1 and [2.2.2](#Section_2.2.2) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Schemas
@@ -6224,12 +6224,12 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.1.2.1](#Section_802) Message Syntax for XML-Based Wireless Profiles | 11694 : Added new settings: MacRandomization, transitionMode, and QoSDSCPToUPMappingAllowed. | Major |
-| [6.3.1](#Section_802) Wireless LAN Profile v1 Schema | 11694 : Updated v1 schema. | Major |
-| [6.3.2](#Section_802) Wireless LAN Profile v2 Schema | 11694 : Updated v2 schema. | Major |
-| [6.3.3](#Section_802) Wireless LAN Profile v3 Schema | 11694 : Added new section for the Wireless LAN Profile v3 schema. | Major |
-| [6.3.4](#Section_802) Wireless LAN Profile v4 Schema | 11694 : Added new section for the Wireless LAN Profile v4 schema. | Major |
-| [6.3.5](#Section_802) Wireless LAN Profile v5 Schema | 11694 : Added new section for the Wireless LAN Profile v5 schema. | Major |
+| [2.2.1.2.1](#Section_2.2.1.2.1) Message Syntax for XML-Based Wireless Profiles | 11694 : Added new settings: MacRandomization, transitionMode, and QoSDSCPToUPMappingAllowed. | Major |
+| [6.3.1](#Section_6.3.1) Wireless LAN Profile v1 Schema | 11694 : Updated v1 schema. | Major |
+| [6.3.2](#Section_6.3.2) Wireless LAN Profile v2 Schema | 11694 : Updated v2 schema. | Major |
+| [6.3.3](#Section_6.3.3) Wireless LAN Profile v3 Schema | 11694 : Added new section for the Wireless LAN Profile v3 schema. | Major |
+| [6.3.4](#Section_6.3.4) Wireless LAN Profile v4 Schema | 11694 : Added new section for the Wireless LAN Profile v4 schema. | Major |
+| [6.3.5](#Section_6.3.5) Wireless LAN Profile v5 Schema | 11694 : Added new section for the Wireless LAN Profile v5 schema. | Major |
 | [7](#Section_7) Appendix B: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
 
 <a id="revision-history"></a>

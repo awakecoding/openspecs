@@ -194,7 +194,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-NBFS] Microsoft Corporation, "[.NET Binary Format: SOAP Data Structure](../MC-NBFS/MC-NBFS.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [XML-INFOSET] Cowan, John, and Tobin, Richard, "XML Information Set (Second Edition)", W3C Recommendation, February 2004, [http://www.w3.org/TR/2004/REC-xml-infoset-20040204](https://go.microsoft.com/fwlink/?LinkId=95109)
 
@@ -248,7 +248,7 @@ The following table identifies the items that are not available in the .NET Bina
 <a id="Section_1.6"></a>
 ## 1.6 Versioning and Localization
 
-The .NET Binary Format: XML Data Structure has no versioning mechanism. The format contains both [**UTF-16**](#gt_utf-16) [[RFC2781]](https://go.microsoft.com/fwlink/?LinkId=90380)-encoded and [**UTF-8**](#gt_utf-8) [[RFC2279]](https://go.microsoft.com/fwlink/?LinkId=90331)-encoded [**strings**](#gt_string), and their use is described in section [2](#Section_1.3).
+The .NET Binary Format: XML Data Structure has no versioning mechanism. The format contains both [**UTF-16**](#gt_utf-16) [[RFC2781]](https://go.microsoft.com/fwlink/?LinkId=90380)-encoded and [**UTF-8**](#gt_utf-8) [[RFC2279]](https://go.microsoft.com/fwlink/?LinkId=90331)-encoded [**strings**](#gt_string), and their use is described in section [2](#Section_2).
 
 <a id="Section_1.7"></a>
 ## 1.7 Vendor-Extensible Fields
@@ -1588,7 +1588,7 @@ packet-beta
 
 **Bytes (variable):** The string encoded as UTF-8 [RFC2279] bytes.
 
-See [Chars8Text Record](#Section_2.2.3.27) for examples.
+See [Chars8Text Record](#Section_2.2.3.13) for examples.
 
 <a id="Section_2.2.3.15"></a>
 #### 2.2.3.15 Chars32Text Record (0x9C)
@@ -1605,7 +1605,7 @@ packet-beta
 
 **Bytes (variable):** The string encoded as UTF-8 [RFC2279] bytes.
 
-See [Chars8Text Record](#Section_2.2.3.27) for examples.
+See [Chars8Text Record](#Section_2.2.3.13) for examples.
 
 <a id="Section_2.2.3.16"></a>
 #### 2.2.3.16 Bytes8Text Record (0x9E)
@@ -1904,7 +1904,7 @@ For example, if the length is 6 and bytes = { 0x41, 0x00, 0x42, 0x00, 0x43, 0x00
 
 abc
 
-See [Chars8Text Record](#Section_2.2.3.27) for notes on escaping of characters.
+See [Chars8Text Record](#Section_2.2.3.13) for notes on escaping of characters.
 
 <a id="Section_2.2.3.28"></a>
 #### 2.2.3.28 UnicodeChars16Text Record (0xB8)
@@ -2176,7 +2176,7 @@ The record column shows each of the record types. The Type column shows the valu
 | Variable | QNameDictionaryText | BC 40 03 64 6F 63 06 F0 06 BC 08 8E 07 01 @.doc.d.¬.... <doc str880="i: str910"></doc> |
 | Variable | QNameDictionaryText WithEndElement | BD 40 04 54 79 70 65 BD 12 90 07 @.Type«... <Type>s:str912 </Type> |
 
-As described in section [2](#Section_1.3), the document is represented by the concatenation of the characters represented by the records. No additional characters can be inserted.
+As described in section [2](#Section_2), the document is represented by the concatenation of the characters represented by the records. No additional characters can be inserted.
 
 For example, if the document consists of the records
 
@@ -2204,7 +2204,7 @@ In many [**records**](#gt_record), the length of the data precedes the data itse
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

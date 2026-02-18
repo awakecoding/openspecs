@@ -205,7 +205,7 @@ This document uses the following terms:
 **connection**: In OleTx, an ordered set of logically related messages. The relationship between the messages is defined by the higher-layer protocol, but they are guaranteed to be delivered exactly one time and in order relative to other messages in the connection.
 
 <a id="gt_connection-type"></a>
-**connection type**: A specific set of interactions between participants in an OleTx protocol that accomplishes a specific set of state changes. A connection type consists of a bidirectional sequence of messages that are conveyed by using the MSDTC Connection Manager: OleTx Transports Protocol and the MSDTC Connection Manager: OleTx Multiplexing Protocol transport protocol, as described in [MS-CMPO](#Section_2.1) and [MS-CMP](../MS-CMP/MS-CMP.md). A specified transaction typically involves many different connection types during its lifetime.
+**connection type**: A specific set of interactions between participants in an OleTx protocol that accomplishes a specific set of state changes. A connection type consists of a bidirectional sequence of messages that are conveyed by using the MSDTC Connection Manager: OleTx Transports Protocol and the MSDTC Connection Manager: OleTx Multiplexing Protocol transport protocol, as described in [MS-CMPO](../MS-CMPO/MS-CMPO.md) and [MS-CMP](../MS-CMP/MS-CMP.md). A specified transaction typically involves many different connection types during its lifetime.
 
 <a id="gt_contact-identifier"></a>
 **contact identifier**: A universally unique identifier (UUID) that identifies a partner in the MSDTC Connection Manager: OleTx Transports Protocol. These UUIDs are frequently converted to and from string representations. This string representation has to follow the format specified in [C706] Appendix A. In addition, the UUIDs have to be compared, as specified in [C706] Appendix A.
@@ -349,7 +349,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** There is a charge to download the specification.
 
-[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](#Section_2.1)".
+[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](../MS-CMPO/MS-CMPO.md)".
 
 [MS-CMP] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Multiplexing Protocol](../MS-CMP/MS-CMP.md)".
 
@@ -371,7 +371,7 @@ None.
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The MSDTC Connection Manager: OleTx Transaction Internet Protocol serves as a bridge between the MSDTC Connection Manager: OleTx Transaction Protocol, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), and the open-standard Transaction Internet Protocol ([**TIP**](#gt_tip)), as specified in [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338). Functional details for TIP are provided in section [1.3.2](#Section_1.3) and in [Connection Type Details (section 2.2.5)](#Section_2.2.5).
+The MSDTC Connection Manager: OleTx Transaction Internet Protocol serves as a bridge between the MSDTC Connection Manager: OleTx Transaction Protocol, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), and the open-standard Transaction Internet Protocol ([**TIP**](#gt_tip)), as specified in [[RFC2371]](https://go.microsoft.com/fwlink/?LinkId=90338). Functional details for TIP are provided in section [1.3.2](#Section_1.3.2) and in [Connection Type Details (section 2.2.5)](#Section_2.2.5).
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 OleTx Transaction Protocol (MS-DTCO) and TIP
@@ -469,7 +469,7 @@ This protocol establishes the following relationships with other protocols:
 
 - This protocol uses the extensibility mechanism that is specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1.5 to become a [**protocol extension**](#gt_protocol-extension) to an [**OleTx TM**](#gt_oletx-transaction-manager-oletx-tm) implementation.
 - An implementation of this protocol uses [**TIP communication**](#gt_tip-communication) to interact with one or more [**TIP transaction managers**](#gt_tip-transaction-manager).
-- This protocol relies on the [**session**](#gt_session) and [**connection**](#gt_connection) transport infrastructure that is specified in [MS-CMPO](#Section_2.1) and [MS-CMP](../MS-CMP/MS-CMP.md).
+- This protocol relies on the [**session**](#gt_session) and [**connection**](#gt_connection) transport infrastructure that is specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) and [MS-CMP](../MS-CMP/MS-CMP.md).
 The following diagram illustrates the relationships with these other protocols.
 
 ![Protocol relationships](media/image4.png)
@@ -481,7 +481,7 @@ Figure 4: Protocol relationships
 
 The operation of this protocol assumes the following:
 
-- Both the [TIP interoperability application role (section 1.3.2.1)](#Section_1.3.2.1) and the [TIP interoperability provider role (section 1.3.2.2)](#Section_1.3.2.2) implement [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](#Section_2.1).
+- Both the [TIP interoperability application role (section 1.3.2.1)](#Section_1.3.2.1) and the [TIP interoperability provider role (section 1.3.2.2)](#Section_1.3.2.2) implement [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 - The TIP interoperability provider role operates as a protocol extension with an OleTx TM. More information is specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1.5.
 - The TIP interoperability provider role possesses an implementation of the TIP protocol.
 - The TIP interoperability application role possesses an implementation-specific mechanism to determine the contact information for the TIP interoperability provider role.
@@ -504,7 +504,7 @@ This section specifies the versioning and capability negotiation dependencies fo
 <a id="Section_1.7.2"></a>
 ### 1.7.2 Versioning Negotiation Mechanisms
 
-This protocol uses the explicit versioning negotiation mechanism that is specified in [MS-CMPO](#Section_2.1) section 3.3.4.2, BuildContext. An implementation of this protocol uses that mechanism to specify which versions of the protocol that it supports and to arrive at a mutually agreeable version with its partners. For specific information about versioning negotiation, see [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
+This protocol uses the explicit versioning negotiation mechanism that is specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.3.4.2, BuildContext. An implementation of this protocol uses that mechanism to specify which versions of the protocol that it supports and to arrive at a mutually agreeable version with its partners. For specific information about versioning negotiation, see [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
 
 By claiming support for a specific protocol version, an implementation is agreeing to provide support for the protocol elements that define that version. Protocol elements that are specific to a version are as follows:
 
@@ -534,7 +534,7 @@ This protocol references commonly used data types, such as GUID and UUID, as def
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-This protocol uses MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_2.1) and MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md) as the transport layer for sending and receiving protocol [**messages**](#gt_message).
+This protocol uses MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) and MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md) as the transport layer for sending and receiving protocol [**messages**](#gt_message).
 
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Messages, Connections, and Sessions
@@ -543,16 +543,16 @@ The layout of each [**message**](#gt_message) that is defined by this protocol M
 
 Each message MUST be sent by using an active [**connection**](#gt_connection), as specified in [MS-CMP], that has been established between the two [**protocol participants**](#gt_protocol-participant). The mechanisms that are used to initiate and accept connections are defined in [MS-CMP] section 3.
 
-Each connection MUST be initiated inside an active [**session**](#gt_session), as specified in [MS-CMPO](#Section_2.1), that has been established between the two protocol participants. The mechanism that is used to establish sessions is specified in [MS-CMPO] section 1.3.3.1.
+Each connection MUST be initiated inside an active [**session**](#gt_session), as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), that has been established between the two protocol participants. The mechanism that is used to establish sessions is specified in [MS-CMPO] section 1.3.3.1.
 
 <a id="Section_2.1.2"></a>
 ### 2.1.2 Parameters Passed to the Transport Layer
 
-To establish a [**session**](#gt_session), as specified in [MS-CMPO](#Section_2.1), the following values MUST be provided to the lower-layer protocol:
+To establish a [**session**](#gt_session), as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), the following values MUST be provided to the lower-layer protocol:
 
 - A Security Level value that indicates the needed RPC [**authentication level**](#gt_authentication-level). The possible values for this element are specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 - A [**name object**](#gt_name-object) that indicates the host name, the [**contact identifier**](#gt_contact-identifier), and the supported RPC network protocols of the remote [**endpoint**](#gt_endpoint) against which the session is established. Name objects are specified in [MS-CMPO] section 3.2.1.4.
-- The minimum and maximum values of the protocol version number, which specify the minimum and maximum protocol versions that are supported by the implementation. For more information, see section [3.1.3](#Section_3.2.3).
+- The minimum and maximum values of the protocol version number, which specify the minimum and maximum protocol versions that are supported by the implementation. For more information, see section [3.1.3](#Section_3.1.3).
 <a id="Section_2.1.2.1"></a>
 #### 2.1.2.1 Establishing a Security Level
 
@@ -566,7 +566,7 @@ The process of obtaining a [**name object**](#gt_name-object) for a [**session**
 <a id="Section_2.1.2.3"></a>
 #### 2.1.2.3 Obtaining the Minimum and Maximum Protocol Version Numbers
 
-The details of how to compute the minimum and maximum protocol version numbers are provided in [Common Initialization Details (section 3.1.3)](#Section_3.2.3).
+The details of how to compute the minimum and maximum protocol version numbers are provided in [Common Initialization Details (section 3.1.3)](#Section_3.1.3).
 
 <a id="Section_2.1.3"></a>
 ### 2.1.3 Protocol Versioning
@@ -921,7 +921,7 @@ packet-beta
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-These sections define the expected behavior of the [**protocol roles**](#gt_protocol-role) that are introduced in [Protocol Overview (section 1.3)](#Section_1.3): the [TIP interoperability application role (section 3.2)](#Section_1.3.2.1) and the [TIP interoperability provider role (section 3.3)](#Section_1.3.2.2). The following sections provide a specification for the functionality that is required of each role.
+These sections define the expected behavior of the [**protocol roles**](#gt_protocol-role) that are introduced in [Protocol Overview (section 1.3)](#Section_1.3): the [TIP interoperability application role (section 3.2)](#Section_3.2) and the [TIP interoperability provider role (section 3.3)](#Section_3.3). The following sections provide a specification for the functionality that is required of each role.
 
 <a id="Section_3.1"></a>
 ## 3.1 Common Details
@@ -938,9 +938,9 @@ This section describes a conceptual model of possible data organization that an 
 
 A [**protocol role**](#gt_protocol-role) that uses the transport layer to send or receive [**protocol messages**](#gt_protocol-message) MUST satisfy the following requirements:
 
-- It MUST use [**connections**](#gt_connection), as specified in [MS-CMP](../MS-CMP/MS-CMP.md), as a transport protocol for sending [**messages**](#gt_message). [Transport (section 2.1)](#Section_2.1) and [Common Initialization Details (section 3.1.3)](#Section_3.2.3) define the mechanisms by which this protocol initializes and makes use of an implementation, as specified in [MS-CMP].
+- It MUST use [**connections**](#gt_connection), as specified in [MS-CMP](../MS-CMP/MS-CMP.md), as a transport protocol for sending [**messages**](#gt_message). [Transport (section 2.1)](#Section_2.1) and [Common Initialization Details (section 3.1.3)](#Section_3.1.3) define the mechanisms by which this protocol initializes and makes use of an implementation, as specified in [MS-CMP].
 - It MUST maintain all the following data elements that are required and specified by [MS-CMP] section 3.1.1.
-- **Session Table**: A table of Session objects, as maintained by MSDTC Connection Manager: OleTx Multiplexing Protocol Specification and as specified in [MS-CMP] section 3.1.1. The MSDTC Connection Manager: OleTx Transaction Internet Protocol reads the **Session Table** data elements provided by [MS-CMPO](#Section_2.1) but does not extend or modify the table.
+- **Session Table**: A table of Session objects, as maintained by MSDTC Connection Manager: OleTx Multiplexing Protocol Specification and as specified in [MS-CMP] section 3.1.1. The MSDTC Connection Manager: OleTx Transaction Internet Protocol reads the **Session Table** data elements provided by [MS-CMPO](../MS-CMPO/MS-CMPO.md) but does not extend or modify the table.
 - It MUST support initiating as well as accepting multiple concurrent connections that are associated with one or more [**sessions**](#gt_session), as specified in [MS-CMPO]. Consequently, a role MUST support the existence of multiple connection instances that implement the same [**connection type**](#gt_connection-type). A role MUST also support initiating multiple concurrent sessions to a number of different [**endpoints**](#gt_endpoint).
 For more information about the transport layer, see Transport (section 2.1).
 
@@ -950,7 +950,7 @@ For more information about the transport layer, see Transport (section 2.1).
 The connection objects that are used in this specification extend the definition of a connection object, as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.1.1, to include the following data elements:
 
 - State: A state enumeration value that represents the current state of the connection while participating in the interactions that are associated with a certain [**connection type**](#gt_connection-type). A connection [**state machine**](#gt_state-machine) is defined as a set of possible connection states, together with a set of processing rules for messages and events, that are received in each state.
-- UsesVersion11: A Boolean flag that indicates whether the negotiated protocol version is MS-DTCM 1.0 or MS-DTCM 1.1. For more information about versioning, see [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
+- UsesVersion11: A Boolean flag that indicates whether the negotiated protocol version is MS-DTCM 1.0 or MS-DTCM 1.1. For more information about versioning, see [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
 The following rules apply to a connection state machine:
 
 - When a [**protocol participant**](#gt_protocol-participant) initiates or accepts a connection, the state field of the connection MUST be set to the Idle (section [3.2.1.1.1](#Section_3.2.1.1.1) or section [3.3.1.2.1.1](#Section_3.3.1.2.1.1)) state. When the connection is disconnected, the state of the connection MUST be set to the Ended (section [3.2.1.1.5](#Section_3.2.1.1.5) or section [3.3.1.2.1.5](#Section_3.3.1.2.1.5)) state.
@@ -967,10 +967,10 @@ None.
 
 Related to protocol versioning, when a [**protocol role**](#gt_protocol-role) is initialized, it MUST do the following:
 
-- Set the value of the Minimum Level 3 Version Number data field of the underlying transports protocol implementation to 1, as specified in [MS-CMPO](#Section_2.1) section 3.2.3.1.
+- Set the value of the Minimum Level 3 Version Number data field of the underlying transports protocol implementation to 1, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.3.1.
 - If the protocol role implements version 1.0 of this protocol:
-- The [TIP Interoperability Application Role (section 3.2)](#Section_1.3.2.1) sets the Maximum Level 3 Version Number data field of the underlying transports protocol implementation to either 1 or 2. Both values have the same interpretation, as specified in [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
-- The [TIP Interoperability Provider Role (section 3.3)](#Section_1.3.2.2) sets the Maximum Level 3 Version Number of the underlying transports protocol to 1.
+- The [TIP Interoperability Application Role (section 3.2)](#Section_3.2) sets the Maximum Level 3 Version Number data field of the underlying transports protocol implementation to either 1 or 2. Both values have the same interpretation, as specified in [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
+- The [TIP Interoperability Provider Role (section 3.3)](#Section_3.3) sets the Maximum Level 3 Version Number of the underlying transports protocol to 1.
 - Otherwise, if the role implements version 1.1 of this protocol:
 - Set the Maximum Level 3 Version Number data field of the underlying transports protocol implementation to 4, 5, or 6. All three values have the same interpretation, as specified in Versioning Negotiation (section 3.1.8).
 All roles MUST satisfy the following set of rules regarding the initiation of a connection, as specified in [MS-CMP](../MS-CMP/MS-CMP.md):
@@ -1015,7 +1015,7 @@ None.
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
 
-A protocol participant that uses a connection object MUST be prepared to handle the [Connection Disconnected event](#Section_3.3.5.1.3) at any time during the lifetime of that connection.
+A protocol participant that uses a connection object MUST be prepared to handle the [Connection Disconnected event](#Section_3.1.7.1) at any time during the lifetime of that connection.
 
 <a id="Section_3.1.7.1"></a>
 #### 3.1.7.1 Connection Disconnected
@@ -1030,9 +1030,9 @@ When a connection is disconnected, a [**protocol participant**](#gt_protocol-par
 
 This protocol has two versions: MS-DTCM 1.0 and MS-DTCM 1.1. Before exchanging any [**protocol messages**](#gt_protocol-message), the two [**protocol participants**](#gt_protocol-participant) MUST agree on what protocol version to use in their message exchange.
 
-To negotiate a common protocol version, the two protocol participants MUST use the version negotiation mechanism that is provided by [MS-CMPO](#Section_2.1) section 3.3.4.2 as follows:
+To negotiate a common protocol version, the two protocol participants MUST use the version negotiation mechanism that is provided by [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.3.4.2 as follows:
 
-- At initialization, each of the protocol participants set their Maximum Level 3 Version Number data field as specified in [Common Initialization Details](#Section_3.2.3).
+- At initialization, each of the protocol participants set their Maximum Level 3 Version Number data field as specified in [Common Initialization Details](#Section_3.1.3).
 - When a session is established between two protocol participants, the value of the **dwLevelThreeAccepted** field of the Session object's version field (as specified in [MS-CMPO] section 3.2.1.2) indicates the negotiated protocol version as follows:
 - If the value of the **dwLevelThreeAccepted** field is less than or equal to 3:
 - The negotiated protocol version is MS-DTCM 1.0.
@@ -1050,7 +1050,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The [TIP interoperability application role](#Section_1.3.2.1) MUST extend the common abstract data model that is specified in section [3.1.1](#Section_3.1.1) to include the following data elements:
 
-- [**TIP Interoperability Application Name**](#gt_tip-interoperability-application-name): A [**name object**](#gt_name-object) that is used to identify the TIP interoperability application with the underlying transport protocol, as specified in [MS-CMPO](#Section_2.1).
+- [**TIP Interoperability Application Name**](#gt_tip-interoperability-application-name): A [**name object**](#gt_name-object) that is used to identify the TIP interoperability application with the underlying transport protocol, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 - [**TIP Interoperability Provider Name**](#gt_tip-interoperability-provider-name): A name object that identifies the [TIP interoperability provider](#Section_1.3.2.2) that the TIP interoperability application MUST use.
 A TIP interoperability application MUST implement the states for its supported [**connection types**](#gt_connection-type) as specified in the following subsections of section 3.2.1.
 
@@ -1084,7 +1084,7 @@ The following events are processed in this state:
 
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLED Message](#Section_3.2.5.1.1)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLERROR Message](#Section_3.2.5.1.3)
-- [Connection Disconnected](#Section_3.3.5.1.3)
+- [Connection Disconnected](#Section_3.1.7.1)
 <a id="Section_3.2.1.1.3"></a>
 ##### 3.2.1.1.3 Awaiting Async Pull Response
 
@@ -1093,7 +1093,7 @@ The following events are processed in this state:
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLED Message](#Section_3.2.5.1.1)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULL_ASYNC_COMPLETE Message](#Section_3.2.5.1.2)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLERROR Message](#Section_3.2.5.1.3)
-- [Connection Disconnected](#Section_3.3.5.1.3)
+- [Connection Disconnected](#Section_3.1.7.1)
 <a id="Section_3.2.1.1.4"></a>
 ##### 3.2.1.1.4 Awaiting Push Response
 
@@ -1101,7 +1101,7 @@ The following events are processed in this state:
 
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSHED Message](#Section_3.2.5.1.4)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSHERROR Message](#Section_3.2.5.1.5)
-- [Connection Disconnected](#Section_3.3.5.1.3)
+- [Connection Disconnected](#Section_3.1.7.1)
 <a id="Section_3.2.1.1.5"></a>
 ##### 3.2.1.1.5 Ended
 
@@ -1117,7 +1117,7 @@ The [TIP interoperability application role](#Section_1.3.2.1) does not use any t
 
 When a [TIP interoperability application](#Section_1.3.2.1) is initialized:
 
-- The TIP Interoperability Application **Name** field MUST be set to a value that is obtained from an implementation-specific source. This field MUST be used when clients initialize the implementation of the underlying transports protocol as the Local [**Name object**](#gt_name-object), as specified in [MS-CMPO](#Section_2.1) section 3.2.3.1.
+- The TIP Interoperability Application **Name** field MUST be set to a value that is obtained from an implementation-specific source. This field MUST be used when clients initialize the implementation of the underlying transports protocol as the Local [**Name object**](#gt_name-object), as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.3.1.
 - The TIP Interoperability Provider **Name** field MUST be set to a value that is obtained from an implementation-specific source.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1220,7 +1220,7 @@ When a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is disconn
 
 - If the connection state is [Awaiting Sync Pull Response](#Section_3.2.1.1.2), [Awaiting Async Pull Response](#Section_3.2.1.1.3), or [Awaiting Push Response](#Section_3.2.1.1.4):
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.7.1](#Section_3.3.5.1.3).
+- Otherwise, the event MUST be processed as specified in section [3.1.7.1](#Section_3.1.7.1).
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
@@ -1241,7 +1241,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The [**TIP**](#gt_tip) interoperability provider MUST maintain all the data elements that are specified in the [Abstract Data Model (section 3.1.1)](#Section_3.1.1). The [TIP interoperability provider](#Section_1.3.2.2) MUST also maintain the following data elements:
 
-- [**TIP Interoperability Provider Name**](#gt_tip-interoperability-provider-name): A [**Name object**](#gt_name-object) that identifies the TIP interoperability provider with the underlying transport infrastructure of MSDTC Connection Manager: OleTx Transports Protocol, as specified in [MS-CMPO](#Section_2.1).
+- [**TIP Interoperability Provider Name**](#gt_tip-interoperability-provider-name): A [**Name object**](#gt_name-object) that identifies the TIP interoperability provider with the underlying transport infrastructure of MSDTC Connection Manager: OleTx Transports Protocol, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 - [**TIP Transaction Table**](#gt_tip-transaction-table): A table of entries to [**transaction objects**](#gt_transaction-object), as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.1.1, that are keyed by the [**TIP URL**](#gt_tip-url) of the TIP transaction with which a transaction object that is managed by the [**OleTx transaction manager**](#gt_oletx-transaction-manager-oletx-tm) is associated through TIP propagation.
 The TIP interoperability provider role MUST extend the definition of a transaction object, as specified in [MS-DTCO] section 3.2.1, to include the following data element:
 
@@ -1327,7 +1327,7 @@ There are no timers specifically for this [**protocol role**](#gt_protocol-role)
 
 When the [TIP interoperability provider role](#Section_1.3.2.2) is initialized, it MUST perform the following actions:
 
-- The value of the TIP Interoperability Provider Name field MUST be set to a value that is obtained from an implementation-specific source. This field MUST be used when initializing the underlying implementation of the transports protocol, as specified in [MS-CMPO](#Section_2.1) section 3.2.3.1.
+- The value of the TIP Interoperability Provider Name field MUST be set to a value that is obtained from an implementation-specific source. This field MUST be used when initializing the underlying implementation of the transports protocol, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.3.1.
 - Create an empty table to store [**TIP URL**](#gt_tip-url) and associated [**transaction object**](#gt_transaction-object) entries, and assign the newly created table to the TIP Transaction Table field.
 - By using an implementation-specific approach, establish itself as a protocol extension, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1.5, with an [**OleTx transaction manager**](#gt_oletx-transaction-manager-oletx-tm). As a result, it MUST initialize the following field:
 - Identifier MUST be set to [**GUID**](#gt_globally-unique-identifier-guid) NULL.
@@ -1438,7 +1438,7 @@ When the [TIP interoperability provider](#Section_1.3.2.2) receives one of these
 <a id="Section_3.3.5.1.3"></a>
 ##### 3.3.5.1.3 Connection Disconnected
 
-When a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is disconnected, the [TIP interoperability provider](#Section_1.3.2.2) MUST process the event as specified in [Connection Disconnected (section 3.1.7.1)](#Section_3.3.5.1.3).
+When a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is disconnected, the [TIP interoperability provider](#Section_1.3.2.2) MUST process the event as specified in [Connection Disconnected (section 3.1.7.1)](#Section_3.1.7.1).
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -1641,7 +1641,7 @@ When performing a [**TIP transaction propagation**](#gt_tip-transaction-propagat
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-The following protocol examples assume that a session, as specified in [MS-CMPO](#Section_2.1), is already established between two [**protocol participants**](#gt_protocol-participant) and that the negotiated protocol version for that session is MS-DTCM 1.1. For more information about protocol versions, see [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
+The following protocol examples assume that a session, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), is already established between two [**protocol participants**](#gt_protocol-participant) and that the negotiated protocol version for that session is MS-DTCM 1.1. For more information about protocol versions, see [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
 
 In these examples, protocol participants communicate with each other by using a multiplexing protocol connection, described in [MS-CMP](../MS-CMP/MS-CMP.md), that is in turn layered on top of the transports protocol infrastructure. Example messages are based on a MESSAGE_PACKET structure, as described in [MS-CMP] section 2.2.2, and are sent from one protocol participant to another by using the functionality that is provided by the underlying multiplexing protocol layer.
 
@@ -1713,7 +1713,7 @@ This scenario shows how a [TIP interoperability application](#Section_1.3.2.1) p
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Establishing a CONNTYPE_TXUSER_TIPPROXYGATEWAY Connection
 
-Before protocol-specific messages are exchanged, a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is established between the [TIP interoperability application](#Section_1.3.2.1) and the [TIP interoperability provider](#Section_1.3.2.2)—just as in the example [Establishing a CONNTYPE_TXUSER_TIPPROXYGATEWAY Connection (section 4.1.1)](#Section_2.2.5.1).
+Before protocol-specific messages are exchanged, a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is established between the [TIP interoperability application](#Section_1.3.2.1) and the [TIP interoperability provider](#Section_1.3.2.2)—just as in the example [Establishing a CONNTYPE_TXUSER_TIPPROXYGATEWAY Connection (section 4.1.1)](#Section_4.1.1).
 
 <a id="Section_4.2.2"></a>
 ### 4.2.2 Sending the TXUSER_TIPPROXYGATEWAY_MTAG_PUSH2 Message
@@ -1756,7 +1756,7 @@ After the TIP interoperability application receives the **TXUSER_TIPPROXYGATEWAY
 <a id="Section_5"></a>
 # 5 Security
 
-This protocol uses the security mechanism of the underlying transport infrastructure, as specified in [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](#Section_2.1). Because the information that is exchanged in messages by this protocol can contain sensitive data—for example, the [**transaction identifiers**](#gt_transaction-identifier) and [**transaction manager**](#gt_transaction-manager) addresses—implementers need to use [**mutual authentication**](#gt_mutual-authentication), as specified in [MS-CMPO] section 2.1.3.<12>
+This protocol uses the security mechanism of the underlying transport infrastructure, as specified in [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](../MS-CMPO/MS-CMPO.md). Because the information that is exchanged in messages by this protocol can contain sensitive data—for example, the [**transaction identifiers**](#gt_transaction-identifier) and [**transaction manager**](#gt_transaction-manager) addresses—implementers need to use [**mutual authentication**](#gt_mutual-authentication), as specified in [MS-CMPO] section 2.1.3.<12>
 
 For situations in which mutual authentication is not supported, implementers can provide the alternative transport security setting of [**incoming authentication**](#gt_incoming-authentication).
 

@@ -511,7 +511,7 @@ packet-beta
   32-39: "ResponseCode"
 ```
 
-**Transportheader (4 bytes):** A transport header (section [2.2.2.1](#Section_2.1)).
+**Transportheader (4 bytes):** A transport header (section [2.2.2.1](#Section_2.2.2.1)).
 
 **ResponseCode (1 byte):** A code that indicates the server response to the [**client**](#gt_client) request message.
 
@@ -569,7 +569,7 @@ The hosted cache MUST respond with a correctly formatted response message if the
 - The hosted cache MUST specify a response code of zero if the hosted cache already has all the block hashes in the segment.
 If the hosted cache does not have all the offered data blocks associated with the block hashes in the segment, it MUST initiate the Peer Content Caching and Retrieval: Retrieval Protocol (PCCRR) framework [MS-PCCRR](../MS-PCCRR/MS-PCCRR.md) as a [**client-role peer**](#gt_client-role-peer) to retrieve the missing blocks from the offering client.
 
-The hosted cache, acting as a PCCRR client-role peer, MUST connect to the client's IP address using the port number specified in the **CONNECTION_INFORMATION** field from the [INITIAL_OFFER_MESSAGE](#Section_2.2.1.3) request, as specified in section 2.2.1.3. The [**HoHoDk**](#gt_segment-id-hohodk) in the INITIAL_OFFER_MESSAGE request MUST be used to retrieve the corresponding [**segment hash of data**](#gt_segment-hash-of-data) ([**HoD**](#gt_hod)), list of block hashes, and the [**segment secret**](#gt_segment-secret) from the hosted cache's block cache (section [3.1.1](#Section_3.2.1)). The segment HoD, list of block hashes, and the segment secret MUST be passed to the PCCRR client-role peer. The retrieved blocks MUST be added to the hosted cache's block cache.
+The hosted cache, acting as a PCCRR client-role peer, MUST connect to the client's IP address using the port number specified in the **CONNECTION_INFORMATION** field from the [INITIAL_OFFER_MESSAGE](#Section_2.2.1.3) request, as specified in section 2.2.1.3. The [**HoHoDk**](#gt_segment-id-hohodk) in the INITIAL_OFFER_MESSAGE request MUST be used to retrieve the corresponding [**segment hash of data**](#gt_segment-hash-of-data) ([**HoD**](#gt_hod)), list of block hashes, and the [**segment secret**](#gt_segment-secret) from the hosted cache's block cache (section [3.1.1](#Section_3.1.1)). The segment HoD, list of block hashes, and the segment secret MUST be passed to the PCCRR client-role peer. The retrieved blocks MUST be added to the hosted cache's block cache.
 
 - The hosted cache MUST specify a response code of 1 if its list of block hashes associated with the segment is incomplete.
 <a id="Section_3.1.5.2"></a>

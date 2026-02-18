@@ -548,7 +548,7 @@ So that the destination host can correctly reassemble the fragmented message, ea
 
 Upon receipt of a fragment, the receiving host verifies whether it has already received other fragments for that fragment ID. If not, the receiving host starts a reassembly timer. It then verifies whether it has received all N fragments for the message, where the Nth fragment is indicated by a particular bit in the fragment. If the fragment reassembly timer expires before all fragments are correctly received, the receiving host has to discard all fragments.
 
-For details, see section [3.3](#Section_1.3).
+For details, see section [3.3](#Section_3.3).
 
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Authentication Using a Cryptographically Generated Address
@@ -557,7 +557,7 @@ This extension specifies a new authentication method for [**IKE**](#gt_internet-
 
 Hosts that support CGA authentication advertise their capability through an "IKE CGA version 1" [**vendor ID payload**](#gt_vendor-id-payload). CGA authentication is negotiated as a regular IKE authentication method; see section [1.7](#Section_1.7), Capability Negotiation. The CGA verification that occurs during this authentication ensures that the remote peer has access to the private key that was used to generate the CGA. This CGA verification uses the corresponding public key and a parameters structure that contains information originally used to generate the CGA. The public key and parameters structure is sent to the host that verifies the CGA. The public key is transmitted within an IKE [**certificate**](#gt_certificate) payload, and the parameters structure is transmitted by using a new CGA identification payload as part of the IKE [**main mode (MM)**](#gt_main-mode-mm) [**negotiation**](#gt_negotiation). Successful validation of the CGA completes the IKE main mode negotiation.
 
-For details, see section [3.4](#Section_1.3).
+For details, see section [3.4](#Section_3.4).
 
 <a id="Section_1.3.4"></a>
 ### 1.3.4 Fast Failover
@@ -566,7 +566,7 @@ This extension reduces the time required for a client to restore an [**IPsec**](
 
 The client uses a "Vid-Initial-Contact" [**vendor ID payload**](#gt_vendor-id-payload) (see section [1.7](#Section_1.7), Capability Negotiation) to signal to the cluster that it does not have any [**main mode security association (MM SA)**](#gt_main-mode-security-association-mm-sa) or [**quick mode security association (QM SA)**](#gt_quick-mode-security-association-qm-sa) established with the cluster so that the [**IKE**](#gt_internet-key-exchange-ike) session can be reallocated to a different node within the cluster. The server uses an "NLBS_PRESENT" vendor ID payload (see section 1.7, Capability Negotiation) to indicate to the client that the client is to use a shorter [**quick mode**](#gt_quick-mode) idle timer. In this way, a new QM SA is renegotiated faster if a failover occurs.
 
-For more information about clusters based on virtual IP addresses, see [[MSFT-WLBS]](https://go.microsoft.com/fwlink/?LinkId=90211). For specifications, see sections [3.5](#Section_1.3) and [3.6](#Section_1.3).
+For more information about clusters based on virtual IP addresses, see [[MSFT-WLBS]](https://go.microsoft.com/fwlink/?LinkId=90211). For specifications, see sections [3.5](#Section_3.5) and [3.6](#Section_3.6).
 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Negotiation Discovery
@@ -577,7 +577,7 @@ IKE Protocol Extensions enable a client to determine whether a remote peer suppo
 
 In the case of inbound traffic, negotiation discovery supports a policy-specified boundary mode in which the host can accept both Cleartext and secured connections to allow inbound traffic from non-IPsec-capable hosts in addition to secure connections from IPsec-capable hosts. The flow state table determines if an incoming Cleartext packet can be accepted.
 
-For details, see section [3.7](#Section_1.3).
+For details, see section [3.7](#Section_3.7).
 
 <a id="Section_1.3.6"></a>
 ### 1.3.6 Reliable Delete
@@ -586,7 +586,7 @@ This extension enables a peer to reliably confirm the deletion of a [**security 
 
 This capability is advertised through additional [**ISAKMP payloads**](#gt_isakmp-payload). The standard IKE Delete message is sent with an additional [**ISAKMP**](#gt_internet-security-association-and-key-management-protocol-isakmp) [**Nonce**](#gt_nonce) payload (as specified in [[RFC2408]](https://go.microsoft.com/fwlink/?LinkId=90348) section 3.13) appended. The host starts a retransmission timer when sending the Delete message. On receipt of the Delete message, the host constructs an acknowledgment message that contains an ISAKMP Nonce payload, an ISAKMP Delete payload, and the Message ID from the received Delete message in the ISAKMP header. On receipt of the acknowledgment message, the host verifies that the Message ID matches the Message ID that was sent with the Delete message. On expiration of the retransmission timer, the Delete message is retransmitted.
 
-For details, see section [3.8](#Section_1.3).
+For details, see section [3.8](#Section_3.8).
 
 <a id="Section_1.3.7"></a>
 ### 1.3.7 Denial of Service Protection
@@ -597,7 +597,7 @@ This extension enables a responder (1) to delay creating state until it has veri
 
 - That the source of a message is not a spoofed IP address.
 - When a threshold of incoming requests has been reached.
-For details, see section [3.9](#Section_1.3).
+For details, see section [3.9](#Section_3.9).
 
 <a id="Section_1.3.8"></a>
 ### 1.3.8 IKE/AuthIP Co-Existence
@@ -1111,7 +1111,7 @@ The following main data elements are required by any implementation:
 For each [**IKE**](#gt_internet-key-exchange-ike) MM SA, the following information MUST be maintained:
 
 - All states that are necessary for managing a standard IKE MM SA as defined in [RFC2409] appendix A for IKEv1 and [RFC4306] section 3.3.2 for IKEv2.
-- All states that are necessary for management of other IKE extensions for the [**SA**](#gt_security-association-sa), as specified in this section and in sections [3.2.1](#Section_3.2.1), [3.3.1](#Section_3.3.1), [3.4.1](#Section_3.4.1), [3.5.1](#Section_3.12.1), [3.6.1](#Section_3.12.1), [3.7.1](#Section_3.7.1), [3.8.1](#Section_3.8.1) for IKEv1 only, and [3.10.1](#Section_3.10.1) for IKEv2 only.
+- All states that are necessary for management of other IKE extensions for the [**SA**](#gt_security-association-sa), as specified in this section and in sections [3.2.1](#Section_3.2.1), [3.3.1](#Section_3.3.1), [3.4.1](#Section_3.4.1), [3.5.1](#Section_3.5.1), [3.6.1](#Section_3.6.1), [3.7.1](#Section_3.7.1), [3.8.1](#Section_3.8.1) for IKEv1 only, and [3.10.1](#Section_3.10.1) for IKEv2 only.
 The MMSAD MUST be indexed by the local and peer IP addresses and the [**initiator**](#gt_initiator) and [**responder (1)**](#gt_c37f09fa-24c8-4fd5-8edd-2c5e575bc211) cookies found in the [**ISAKMP**](#gt_internet-security-association-and-key-management-protocol-isakmp) header, as specified in [RFC2408].
 
 - Peer authorization database (PAD): The PAD and its management operations are specified in [RFC4301] section 4.4.3. This specification does not extend that definition. The PAD that is referred to in this specification contains rules that describe if and how IKE negotiates SAs with a remote peer, as specified in [RFC4301].
@@ -1136,7 +1136,7 @@ The possible connection entries are:
 - V6 protocol-only state entry: {IPv6 source address {16 bytes}, IPv6 destination address {16 bytes}, IP protocol {DWORD}}.
 All states that are necessary for management of IKE extensions are described in section 3.7.1 for IKEv1 only.
 
-- Other states: Additional states are defined in section [3.9.1](#Section_3.9) and section [3.11.1](#Section_3.11.1).
+- Other states: Additional states are defined in section [3.9.1](#Section_3.9.1) and section [3.11.1](#Section_3.11.1).
 **Note** The preceding conceptual data can be implemented by using a variety of techniques. Any data structure that stores the preceding conceptual data can be used in the implementation.
 
 <a id="Section_3.1.2"></a>
@@ -1254,12 +1254,12 @@ On receipt of message #1, a [**NAT**](#gt_network-address-translation-nat)-T sup
 - If both hosts support [[RFC3947]](https://go.microsoft.com/fwlink/?LinkId=90448) and [[DRAFT-NATT]](https://go.microsoft.com/fwlink/?LinkId=89854), the host MUST set the Selected Revision to [RFC3947]. For more information, see [DRAFT-NATT].
 - If both hosts share only one common revision, the host MUST set the Selected Revision to the common revision.
 - If the hosts do not share a common revision, the host MUST ignore the payload.
-Then, the host MUST construct message #2 (as specified in [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5) and add vendor ID payloads that advertise its NAT-T capabilities, setting the values of those payloads exactly as it would if it were constructing [**IKE**](#gt_internet-key-exchange-ike) message #1. For details, see section [3.2.4](#Section_3.2).
+Then, the host MUST construct message #2 (as specified in [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5) and add vendor ID payloads that advertise its NAT-T capabilities, setting the values of those payloads exactly as it would if it were constructing [**IKE**](#gt_internet-key-exchange-ike) message #1. For details, see section [3.2.4](#Section_3.2.4).
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Receiving Message #2
 
-On receipt of message #2, the host MUST check for the presence of [**NAT**](#gt_network-address-translation-nat)-T [**vendor ID payloads**](#gt_vendor-id-payload) and set the Selected Revision as specified in section [3.2.5.1](#Section_3.3.5.1).
+On receipt of message #2, the host MUST check for the presence of [**NAT**](#gt_network-address-translation-nat)-T [**vendor ID payloads**](#gt_vendor-id-payload) and set the Selected Revision as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving Other Messages
@@ -1298,7 +1298,7 @@ When this extension is implemented, the following additional state is maintained
 
 - Fragmentation supported: A flag that MUST be set if the peer supports receiving fragmented messages.
 - Fragmentation active: A flag that MUST be set if the IKE messages MUST be fragmented.
-- Fragmentation determination: The fragmentation need is determined by the firing of the fragmentation timer. See section [3.3.2](#Section_3.7.2) and the associated endnotes for more details. After determining that fragmentation is needed, the chosen [**MTU**](#gt_maximum-transmission-unit-mtu) MUST be the minimum MTU for the protocol, which is 576 bytes for IPv4 and 1280 bytes for IPv6.
+- Fragmentation determination: The fragmentation need is determined by the firing of the fragmentation timer. See section [3.3.2](#Section_3.3.2) and the associated endnotes for more details. After determining that fragmentation is needed, the chosen [**MTU**](#gt_maximum-transmission-unit-mtu) MUST be the minimum MTU for the protocol, which is 576 bytes for IPv4 and 1280 bytes for IPv6.
 - Fragment queue: A queue holding the fragments that correspond to incomplete IKE messages, indexed by the Fragment ID. Each entry in the queue MUST contain:
 - The Fragment ID, which is set to the **Fragment_ID** field in section [2.2.3.1](#Section_2.2.3.1).
 - The Fragment Number, which is set to the **Fragment_Number** field in section 2.2.3.1.
@@ -1437,7 +1437,7 @@ Peer authorization database (PAD): The following information MUST be maintained:
 - A [**self-signed certificate**](#gt_self-signed-certificate) (type X.509) compatible with the [**IKE**](#gt_internet-key-exchange-ike) [**exchange**](#gt_exchange). See [RFC2409] section 5.1.
 This data structure is used during:
 
-- Generation of a CGA and its associated self-signed certificate (see section [3.4.3](#Section_3.11.3)).
+- Generation of a CGA and its associated self-signed certificate (see section [3.4.3](#Section_3.4.3)).
 - Construction of an identity payload (see section [3.4.5.4](#Section_3.4.5.4)).
 - Verification of its association with a public key (see section [3.4.5.5](#Section_3.4.5.5)).
 <a id="Section_3.4.2"></a>
@@ -1450,7 +1450,7 @@ None.
 
 Each host configured to use [**CGA**](#gt_cryptographically-generated-address-cga) authentication MUST generate an [**Rivest-Shamir-Adleman (RSA)**](#gt_rivest-shamir-adleman-rsa) public/private key pair (see [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) and 3 and [[RFC3972]](https://go.microsoft.com/fwlink/?LinkId=90452) section 3). The host MUST then generate a X.509 [**self-signed certificate**](#gt_self-signed-certificate) that uses this key pair and is compatible with [**IKE**](#gt_internet-key-exchange-ike) (see [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5.1).
 
-The CGA itself MUST be created as described in [RFC3972] section 4. This IP address is used to send and receive the IKE packets described in section [3.4.5](#Section_3.12.5).
+The CGA itself MUST be created as described in [RFC3972] section 4. This IP address is used to send and receive the IKE packets described in section [3.4.5](#Section_3.4.5).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
@@ -1597,7 +1597,7 @@ Upon expiration of the [**QM SA**](#gt_quick-mode-security-association-qm-sa) id
 <a id="Section_3.6"></a>
 ## 3.6 Fast Failover Server Details
 
-The description in this section uses the message numbers from the protocol sequence diagram in section [3.5](#Section_1.3).
+The description in this section uses the message numbers from the protocol sequence diagram in section [3.5](#Section_3.5).
 
 <a id="Section_3.6.1"></a>
 ### 3.6.1 Abstract Data Model
@@ -1870,9 +1870,9 @@ None.
 <a id="Section_3.8.4.1"></a>
 #### 3.8.4.1 SA Deletion/Invalidation
 
-The higher layer application can cause [**SAs**](#gt_security-association-sa) to be deleted by changing the underlying security policy, or by triggering a local state cleanup (see section [3.8.7](#Section_1.3.6)). In such cases, the host SHOULD delete the SAs, as specified in [[RFC2408]](https://go.microsoft.com/fwlink/?LinkId=90348) section 5.15.
+The higher layer application can cause [**SAs**](#gt_security-association-sa) to be deleted by changing the underlying security policy, or by triggering a local state cleanup (see section [3.8.7](#Section_3.8.7)). In such cases, the host SHOULD delete the SAs, as specified in [[RFC2408]](https://go.microsoft.com/fwlink/?LinkId=90348) section 5.15.
 
-After a delete has been triggered, a delete notify MUST be sent immediately, but the [**MM SA**](#gt_main-mode-security-association-mm-sa) MUST NOT be deleted until [**quick mode**](#gt_quick-mode) delete processing has been completed. Moreover, the [**QM SAs**](#gt_quick-mode-security-association-qm-sa) associated with the MM SA MUST NOT be deleted until deletion is triggered by other protocol events, as specified in [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5.5. These protocol events are quick mode lifetime expiry as specified in [RFC2409] Section 5.5, policy changes (see section 3.8.7) or the peer sending a quick mode delete (See section [3.8.5](#Section_1.3.6)). Once all the QM SAs associated with the MM SA have been deleted the MM SA MUST be deleted.
+After a delete has been triggered, a delete notify MUST be sent immediately, but the [**MM SA**](#gt_main-mode-security-association-mm-sa) MUST NOT be deleted until [**quick mode**](#gt_quick-mode) delete processing has been completed. Moreover, the [**QM SAs**](#gt_quick-mode-security-association-qm-sa) associated with the MM SA MUST NOT be deleted until deletion is triggered by other protocol events, as specified in [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5.5. These protocol events are quick mode lifetime expiry as specified in [RFC2409] Section 5.5, policy changes (see section 3.8.7) or the peer sending a quick mode delete (See section [3.8.5](#Section_3.8.5)). Once all the QM SAs associated with the MM SA have been deleted the MM SA MUST be deleted.
 
 The host MUST then construct message #1 as follows:
 
@@ -1946,7 +1946,7 @@ Establishment of a successful [**QM SA**](#gt_quick-mode-security-association-qm
 <a id="Section_3.9"></a>
 ## 3.9 Denial of Service Protection Details
 
-[**IKE**](#gt_internet-key-exchange-ike) goes into DoS protection under the condition described in section [3.9.7](#Section_3.5.7).
+[**IKE**](#gt_internet-key-exchange-ike) goes into DoS protection under the condition described in section [3.9.7](#Section_3.9.7).
 
 Using the notation, as specified in [[RFC2408]](https://go.microsoft.com/fwlink/?LinkId=90348) section 4.1.1, the generalized form of an IKE [**exchange**](#gt_exchange) using the DoS Protection extension is as shown in the following figure. For more information, see [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5.
 
@@ -1968,7 +1968,7 @@ DoS Protection mode state: [**responder (1)**](#gt_c37f09fa-24c8-4fd5-8edd-2c5e5
 
 - A cookie field consisting of random data.
 - A cookie timeout period, initialized to 150 secs.
-This state is used by the cookie generation algorithm that is described in section [3.9.5.1](#Section_3.3.5.1).
+This state is used by the cookie generation algorithm that is described in section [3.9.5.1](#Section_3.9.5.1).
 
 <a id="Section_3.9.2"></a>
 ### 3.9.2 Timers
@@ -2212,12 +2212,12 @@ When this extension is implemented, the following additional state SHOULD<33> be
 
 [**Main mode security association database (MMSAD)**](#gt_main-mode-security-association-database-mmsad): The entry for each [**MM SA**](#gt_main-mode-security-association-mm-sa) contains the following fast-failover client-specific data elements:
 
-- InboundPacketTimeStamp: 1 octet, type: unsigned integer. A time stamp field that is present if the [**SA**](#gt_security-association-sa) has the Fast Failover flag set as described in section [3.5.1](#Section_3.12.1).
+- InboundPacketTimeStamp: 1 octet, type: unsigned integer. A time stamp field that is present if the [**SA**](#gt_security-association-sa) has the Fast Failover flag set as described in section [3.5.1](#Section_3.5.1).
 - A DeadPeerDetection flag: A flag that indicates whether the current SA is in dead peer detection mode.
 <a id="Section_3.12.2"></a>
 ### 3.12.2 Timers
 
-[**QM SA**](#gt_quick-mode-security-association-qm-sa) idle timer (for each QM SA): This timer controls the inactivity time before the QM SA can be deleted (as specified in section [3.5.7.1](#Section_3.5.7.1)). This timer MUST be set when the QM SA has been negotiated as described in section [3.5.2](#Section_3.7.2).
+[**QM SA**](#gt_quick-mode-security-association-qm-sa) idle timer (for each QM SA): This timer controls the inactivity time before the QM SA can be deleted (as specified in section [3.5.7.1](#Section_3.5.7.1)). This timer MUST be set when the QM SA has been negotiated as described in section [3.5.2](#Section_3.5.2).
 
 <a id="Section_3.12.3"></a>
 ### 3.12.3 Initialization
@@ -2425,7 +2425,7 @@ When this extension is implemented, the following additional state is maintained
 <a id="Section_3.15.2"></a>
 ### 3.15.2 Timers
 
-As specified in section [3.3.2](#Section_3.7.2).
+As specified in section [3.3.2](#Section_3.3.2).
 
 <a id="Section_3.15.3"></a>
 ### 3.15.3 Initialization
@@ -2464,7 +2464,7 @@ The IKE header prepended to the IKE Fragment messages is taken from the original
 <a id="Section_3.15.6"></a>
 ### 3.15.6 Timer Events
 
-As specified in section [3.3.6](#Section_3.2.6).
+As specified in section [3.3.6](#Section_3.3.6).
 
 <a id="Section_3.15.7"></a>
 ### 3.15.7 Other Local Events
@@ -2921,7 +2921,7 @@ concatenated with localAddr concatenated with curTime)
 
 Compute cookie as the first 8 bytes of tempCookie
 
-<28> Section 3.9.5.3: The Windows implementation checks the validity of the **Responder Cookie** field by regenerating the cookie using the algorithm specified in section [3.9.5.1](#Section_3.3.5.1). The algorithm is as follows.
+<28> Section 3.9.5.3: The Windows implementation checks the validity of the **Responder Cookie** field by regenerating the cookie using the algorithm specified in section [3.9.5.1](#Section_3.9.5.1). The algorithm is as follows.
 
 Set RCookie to the cookie field from message #2
 

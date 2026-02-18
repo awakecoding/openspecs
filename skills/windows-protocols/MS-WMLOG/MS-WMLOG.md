@@ -201,11 +201,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [ASF] Microsoft Corporation, "Advanced Systems Format Specification", December 2004, [https://download.microsoft.com/download/7/9/0/790fecaa-f64a-4a5e-a430-0bccdab3f1b4/ASF_Specification.doc](https://go.microsoft.com/fwlink/?LinkId=89814)
 
-[MS-MSB] Microsoft Corporation, "[Media Stream Broadcast (MSB) Protocol](#Section_2.1.39)".
+[MS-MSB] Microsoft Corporation, "[Media Stream Broadcast (MSB) Protocol](../MS-MSB/MS-MSB.md)".
 
-[MS-RTSP] Microsoft Corporation, "[Real-Time Streaming Protocol (RTSP) Windows Media Extensions](#Section_2.1.39)".
+[MS-RTSP] Microsoft Corporation, "[Real-Time Streaming Protocol (RTSP) Windows Media Extensions](../MS-RTSP/MS-RTSP.md)".
 
-[MS-WMSP] Microsoft Corporation, "[Windows Media HTTP Streaming Protocol](#Section_2.1.39)".
+[MS-WMSP] Microsoft Corporation, "[Windows Media HTTP Streaming Protocol](../MS-WMSP/MS-WMSP.md)".
 
 [MSDN-WMMETA] Microsoft Corporation, "Windows Media Metafiles", [http://msdn.microsoft.com/en-us/library/dd564665(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=92758)
 
@@ -226,7 +226,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MMSP] Microsoft Corporation, "[Microsoft Media Server (MMS) Protocol](#Section_2.1.39)".
+[MS-MMSP] Microsoft Corporation, "[Microsoft Media Server (MMS) Protocol](../MS-MMSP/MS-MMSP.md)".
 
 [W3C-EXLOG] World Wide Web Consortium, "Extended Log File Format", [http://www.w3.org/TR/WD-logfile.html](https://go.microsoft.com/fwlink/?LinkId=90561)
 
@@ -238,14 +238,14 @@ The Windows Media Log Data Structure is a syntax for logging messages. The loggi
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Protocols and Other Structures
 
-The logging messages defined in this specification are used by the Windows Media HTTP Streaming Protocol described in [MS-WMSP](#Section_2.1.39), and the Real-Time Streaming Protocol (RTSP) Windows Media Extensions, described in [MS-RTSP](#Section_2.1.39). When those two protocols are used, the logging messages defined by this specification can be encapsulated in protocol messages specific to the [**streaming**](#gt_streaming) protocol in use. The resulting protocol messages are sent to either Windows Media Services or to a [**proxy**](#gt_proxy) compatible with the logging message syntax defined in this specification.
+The logging messages defined in this specification are used by the Windows Media HTTP Streaming Protocol described in [MS-WMSP](../MS-WMSP/MS-WMSP.md), and the Real-Time Streaming Protocol (RTSP) Windows Media Extensions, described in [MS-RTSP](../MS-RTSP/MS-RTSP.md). When those two protocols are used, the logging messages defined by this specification can be encapsulated in protocol messages specific to the [**streaming**](#gt_streaming) protocol in use. The resulting protocol messages are sent to either Windows Media Services or to a [**proxy**](#gt_proxy) compatible with the logging message syntax defined in this specification.
 
-It is also possible to send logging messages to an HTTP web server. This is possible when using the two streaming protocols mentioned earlier and when using two other streaming protocols: the Microsoft Media Server (MMS) Protocol as described in [MS-MMSP](#Section_2.1.39), and the Media Stream Broadcast (MSB) Protocol as described in [MS-MSB](#Section_2.1.39).
+It is also possible to send logging messages to an HTTP web server. This is possible when using the two streaming protocols mentioned earlier and when using two other streaming protocols: the Microsoft Media Server (MMS) Protocol as described in [MS-MMSP](../MS-MMSP/MS-MMSP.md), and the Media Stream Broadcast (MSB) Protocol as described in [MS-MSB](../MS-MSB/MS-MSB.md).
 
 <a id="Section_1.5"></a>
 ## 1.5 Applicability Statement
 
-The syntax for logging messages defined by this specification is applicable to implementations of the four [**streaming**](#gt_streaming) protocols mentioned in section [1.4](#Section_2.1.39).
+The syntax for logging messages defined by this specification is applicable to implementations of the four [**streaming**](#gt_streaming) protocols mentioned in section [1.4](#Section_1.4).
 
 <a id="Section_1.6"></a>
 ## 1.6 Versioning and Localization
@@ -728,7 +728,7 @@ Example:
 <a id="Section_2.1.27"></a>
 ### 2.1.27 c-channelURL
 
-This field MUST specify the URL to the multicast station (.nsc) file, as specified in [MS-MSB](#Section_2.1.39), if such a file was used by the [**client**](#gt_client). Whenever an .nsc file is used, this field MUST be specified, even if the MSB Protocol was not used to [**stream (2)**](#gt_stream) [**content**](#gt_content).
+This field MUST specify the URL to the multicast station (.nsc) file, as specified in [MS-MSB](../MS-MSB/MS-MSB.md), if such a file was used by the [**client**](#gt_client). Whenever an .nsc file is used, this field MUST be specified, even if the MSB Protocol was not used to [**stream (2)**](#gt_stream) [**content**](#gt_content).
 
 The syntax of the **c-channelURL** field is defined in section 4.1 of [[RFC3986]](https://go.microsoft.com/fwlink/?LinkId=90453), as follows.
 
@@ -762,7 +762,7 @@ Example:
 
 The purpose of this field is to specify the file name of the [**content**](#gt_content) or server-side [**playlist**](#gt_playlist) entry that was [**streamed**](#gt_streaming) or played by the [**client**](#gt_client). For Legacy and Streaming Logs, the value of this field MUST be the content or server-side playlist entry that was streamed. For Rendering Logs, it MUST be the content or server-side playlist entry that was rendered (played).
 
-If the [**server**](#gt_server) provided a Content Description, as specified in [MS-WMSP](#Section_2.1.39), and the Content Description contains an entry named WMS_CONTENT_DESCRIPTION_PLAYLIST_ENTRY_URL, the value of the **cs-media-name** field MUST be equal to the value of the WMS_CONTENT_DESCRIPTION_PLAYLIST_ENTRY_URL entry.
+If the [**server**](#gt_server) provided a Content Description, as specified in [MS-WMSP](../MS-WMSP/MS-WMSP.md), and the Content Description contains an entry named WMS_CONTENT_DESCRIPTION_PLAYLIST_ENTRY_URL, the value of the **cs-media-name** field MUST be equal to the value of the WMS_CONTENT_DESCRIPTION_PLAYLIST_ENTRY_URL entry.
 
 Otherwise, if the client is using an Active Stream Redirector (.asx) file (for more information, see [[MSDN-WMMETA]](https://go.microsoft.com/fwlink/?LinkId=92758)), and the file specifies a logging parameter called "cs-media-name", then the value of the **cs-media-name** field in the logging message MUST be equal to the value of the "cs-media-name" logging parameter in the .asx file. See section [3.2](#Section_3.2) for an example of how this parameter is specified in an .asx file.
 
@@ -781,7 +781,7 @@ C:\wmpub\wmroot\MyAd2.asf
 
 The purpose of this field is to specify a value that can be associated with a server-side [**playlist**](#gt_playlist) entry to signify the role of the playlist entry. For Legacy and Streaming Logs, the value of this field MUST be the role of the server-side playlist entry that was [**streamed**](#gt_streaming). For Rendering Logs, it MUST be the role of the server-side playlist entry that was rendered (played).
 
-If the [**server**](#gt_server) provided a Content Description as specified in [MS-WMSP](#Section_2.1.39), and the Content Description contains an entry named WMS_CONTENT_DESCRIPTION_ROLE, the value of the **cs-media-role** field MUST be equal to the value of the WMS_CONTENT_DESCRIPTION_ROLE entry.
+If the [**server**](#gt_server) provided a Content Description as specified in [MS-WMSP](../MS-WMSP/MS-WMSP.md), and the Content Description contains an entry named WMS_CONTENT_DESCRIPTION_ROLE, the value of the **cs-media-role** field MUST be equal to the value of the WMS_CONTENT_DESCRIPTION_ROLE entry.
 
 Otherwise, if the [**client**](#gt_client) is using an Active Stream Redirector (.asx) file as specified in [[MSDN-WMMETA]](https://go.microsoft.com/fwlink/?LinkId=92758), and the file specifies a logging parameter called "cs-media-role", the value of the **cs-media-role** field in the logging message MUST be equal to the value of the "cs-media-role" logging parameter in the .asx file. See section [3.2](#Section_3.2) for an example of how this parameter is specified in an .asx file.
 
@@ -819,7 +819,7 @@ This field MUST specify the URL for the [**streaming**](#gt_streaming) [**conten
 
 Note that the value of this field can be different from the URL actually used if the [**server**](#gt_server) redirected the client to a different URL, or if the client decided to use a streaming protocol that is different from the one indicated by the URL scheme of the original URL.
 
-When the MSB Protocol specified in [MS-MSB](#Section_2.1.39) is used, the "asfm" MUST be used as the URL scheme in the **cs-url** field.
+When the MSB Protocol specified in [MS-MSB](../MS-MSB/MS-MSB.md) is used, the "asfm" MUST be used as the URL scheme in the **cs-url** field.
 
 The syntax of the **cs-url** field is defined in section 4.1 of [[RFC3986]](https://go.microsoft.com/fwlink/?LinkId=90453), as follows.
 
@@ -840,7 +840,7 @@ This field MUST specify the URL actually used by the [**client**](#gt_client). A
 
 Note that the value of this field can be different from the URL originally requested by the client if the [**server**](#gt_server) redirected the client to a different URL, or if the client decided to use a [**streaming**](#gt_streaming) protocol that is different from the one indicated by the URL scheme of the original URL.
 
-When the MSB Protocol is used, the "asfm" MUST be used as the URL scheme in the **cs-uri-stem** field, as specified in [MS-MSB](#Section_2.1.39).
+When the MSB Protocol is used, the "asfm" MUST be used as the URL scheme in the **cs-uri-stem** field, as specified in [MS-MSB](../MS-MSB/MS-MSB.md).
 
 The syntax of the **cs-uri-stem** field is defined in section 4.1 of [[RFC3986]](https://go.microsoft.com/fwlink/?LinkId=90453), as follows.
 
@@ -940,11 +940,11 @@ Example:
 
 This field MUST specify the protocol used to [**stream (2)**](#gt_stream) [**content**](#gt_content) to the [**client**](#gt_client).
 
-If the Windows Media HTTP Streaming Media Protocol was used, the value of the **protocol** field MUST be "http", as specified in [MS-WMSP](#Section_2.1.39).
+If the Windows Media HTTP Streaming Media Protocol was used, the value of the **protocol** field MUST be "http", as specified in [MS-WMSP](../MS-WMSP/MS-WMSP.md).
 
-If the RTSP Windows Media Extensions was used, the value of the **protocol** field MUST be "rtsp", as specified in [MS-RTSP](#Section_2.1.39).
+If the RTSP Windows Media Extensions was used, the value of the **protocol** field MUST be "rtsp", as specified in [MS-RTSP](../MS-RTSP/MS-RTSP.md).
 
-If the MSB Protocol was used, the value of the **protocol** field MUST be "asfm", as specified in [MS-MSB](#Section_2.1.39).
+If the MSB Protocol was used, the value of the **protocol** field MUST be "asfm", as specified in [MS-MSB](../MS-MSB/MS-MSB.md).
 
 **Note** The value for **protocol** can be different from the URL moniker used in the stream request.
 
@@ -1233,7 +1233,7 @@ cs-media-role SP s-proxied
 <a id="Section_2.3"></a>
 ## 2.3 Logging Messages Sent to Web Servers
 
-Most of the logging messages defined in this specification can be sent to a HTTP web server. The URL for the HTTP web server for which logging messages are submitted can be specified in an .asx file (for more information, see [[MSDN-WMMETA]](https://go.microsoft.com/fwlink/?LinkId=92758)). Some of the compatible streaming protocols (listed in section [1.4](#Section_2.1.39)) can also specify the HTTP web server URL through mechanisms that are specific to the [**streaming**](#gt_streaming) protocol. The syntax for the logging URL is defined as follows.
+Most of the logging messages defined in this specification can be sent to a HTTP web server. The URL for the HTTP web server for which logging messages are submitted can be specified in an .asx file (for more information, see [[MSDN-WMMETA]](https://go.microsoft.com/fwlink/?LinkId=92758)). Some of the compatible streaming protocols (listed in section [1.4](#Section_1.4)) can also specify the HTTP web server URL through mechanisms that are specific to the [**streaming**](#gt_streaming) protocol. The syntax for the logging URL is defined as follows.
 
 log-URL = Request-URI
 
@@ -2374,7 +2374,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <5> Section 2.5.1: Windows Media Player 6.4, Windows Media Format 7.0 SDK, Windows Media Format 7.1 SDK, and Windows Media Player for Windows XP never include the three optional fields.
 
-<6> Section 2.5.3: Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, Windows Vista, and Windows 7 do not include the "contentdescription" and "client-logging-data" syntax elements in the XML-format logging message when using RTSP [MS-RTSP](#Section_2.1.39).
+<6> Section 2.5.3: Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, Windows Vista, and Windows 7 do not include the "contentdescription" and "client-logging-data" syntax elements in the XML-format logging message when using RTSP [MS-RTSP](../MS-RTSP/MS-RTSP.md).
 
 <7> Section 2.6.2: Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, Windows Vista and later do not include the "contentdescription" and "client-logging-data" syntax elements in the XML-format logging message when using RTSP [MS-RTSP].
 

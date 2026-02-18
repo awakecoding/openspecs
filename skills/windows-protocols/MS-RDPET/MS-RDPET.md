@@ -85,7 +85,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-This document specifies the Remote Desktop Protocol: Telemetry Virtual Channel Extension to the Remote Desktop Protocol: Basic Connectivity and Graphics Remoting, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md). The telemetry protocol defined in section [2.2](../MS-RDPBCGR/MS-RDPBCGR.md) is used to send client performance metrics to the server, thus providing a way to collate statistics about the quality of the RDP experience.
+This document specifies the Remote Desktop Protocol: Telemetry Virtual Channel Extension to the Remote Desktop Protocol: Basic Connectivity and Graphics Remoting, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md). The telemetry protocol defined in section [2.2](#Section_2.2) is used to send client performance metrics to the server, thus providing a way to collate statistics about the quality of the RDP experience.
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 

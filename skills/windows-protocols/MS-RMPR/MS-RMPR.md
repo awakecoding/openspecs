@@ -508,7 +508,7 @@ This document uses the following terms:
 **Data Encryption Standard (DES)**: A specification for encryption of computer data that uses a 56-bit key developed by IBM and adopted by the U.S. government as a standard in 1976. For more information see [[FIPS46-3]](https://go.microsoft.com/fwlink/?LinkId=89872).
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](#Section_3.1.1.1.7).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_domain-account"></a>
 **domain account**: A stored set of attributes representing a principal used to authenticate a user or machine to an [**Active Directory**](#gt_active-directory) domain.
@@ -637,13 +637,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [FIPS180-2] National Institute of Standards and Technology, "Secure Hash Standard", FIPS PUB 180-2, August 2002, [http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf](https://go.microsoft.com/fwlink/?LinkId=89868)
 
-[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](#Section_3.1.1.1.7)".
+[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
-[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](#Section_3.1.1.1.7)".
+[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](../MS-ADA2/MS-ADA2.md)".
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_3.1.1.1.7)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
-[MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](#Section_3.1.1.1.7)".
+[MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
@@ -653,7 +653,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MWBF] Microsoft Corporation, "[Microsoft Web Browser Federated Sign-On Protocol](../MS-MWBF/MS-MWBF.md)".
 
-[MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](#Section_3.1.4.1)".
+[MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
 [MS-NTHT] Microsoft Corporation, "[NTLM Over HTTP Protocol](../MS-NTHT/MS-NTHT.md)".
 
@@ -661,7 +661,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RMPRS] Microsoft Corporation, "[Rights Management Services (RMS): Server-to-Server Protocol](../MS-RMPRS/MS-RMPRS.md)".
 
-[MS-RMPR] Microsoft Corporation, "[Rights Management Services (RMS): Client-to-Server Protocol](#Section_d8ed4b1ee6054668b1736312cba6977e)".
+[MS-RMPR] Microsoft Corporation, "[Rights Management Services (RMS): Client-to-Server Protocol](#Section_2.2.9.8.5.3)".
 
 [MS-RMSI] Microsoft Corporation, "[Rights Management Services (RMS): ISV Extension Protocol](../MS-RMSI/MS-RMSI.md)".
 
@@ -712,9 +712,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [ECMA-335] ECMA, "Common Language Infrastructure (CLI): Partitions I through VI", Standard ECMA-335, [https://ecma-international.org/publications-and-standards/standards/ecma-335/](https://go.microsoft.com/fwlink/?LinkId=93453)
 
-[MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](#Section_3.1.1.1.7)".
+[MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MSDN-TaskSch] Microsoft Corporation, "Task Scheduler", [http://msdn.microsoft.com/en-us/library/aa383614.aspx](https://go.microsoft.com/fwlink/?LinkId=90142)
 
@@ -845,7 +845,7 @@ This specification covers versioning issues in the following areas:
 - Security and Authentication Methods: The SOAP protocol passively supports [**NT LAN Manager (NTLM)**](#gt_nt-lan-manager-ntlm) authentication over HTTP or HTTPS, as specified in [[NTLM]](https://go.microsoft.com/fwlink/?LinkId=90235).
 - Localization: The RMS: Client-to-Server Protocol has no localization-dependent behaviors.
 - Capability Negotiation: The RMS: Client-to-Server Protocol supports limited capability negotiation via the VersionData type that is present on all protocol requests. On a request, the VersionData structure contains a MinimumVersion and MaximumVersion value indicating the range of versions the client is capable of understanding. On a response, the VersionData structure contains a MinimumVersion and MaximumVersion that the server is capable of understanding.<1>
-This protocol can be spread across multiple servers. To determine which servers are capable of specific methods, the client calls the [FindServiceLocationsForUser (section 3.7.4.2)](#Section_3.7.4.2.2.1) method in the [Server Service (section 3.7)](#Section_1.3).
+This protocol can be spread across multiple servers. To determine which servers are capable of specific methods, the client calls the [FindServiceLocationsForUser (section 3.7.4.2)](#Section_3.7.4.2) method in the [Server Service (section 3.7)](#Section_3.7).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -911,9 +911,9 @@ The following table summarizes the set of common XML Schema element definitions 
 
 | Element | Description |
 | --- | --- |
-| [Certificate](#Section_2.2.9.3) | Encloses any [**XrML**](#gt_xrml) [**certificate**](#gt_certificate) parameter that can be represented as a literal. |
-| [CertificateChain](#Section_3.7.4.1.3.1) | Contains an array of XML elements used to represent a [**certificate chain**](#gt_certificate-chain). |
-| [VersionData](#Section_2.2.4.2) | Contains versioning information that serves as a declaration of the capability support necessary to understand and process the entire request or response. |
+| [Certificate](#Section_4.5) | Encloses any [**XrML**](#gt_xrml) [**certificate**](#gt_certificate) parameter that can be represented as a literal. |
+| [CertificateChain](#Section_2.2.3.2) | Contains an array of XML elements used to represent a [**certificate chain**](#gt_certificate-chain). |
+| [VersionData](#Section_2.2.3.3) | Contains versioning information that serves as a declaration of the capability support necessary to understand and process the entire request or response. |
 | [string](#Section_3.6.4.1.4.8) | An extra XML wrapper for the string data type. |
 | [MaximumVersion](#Section_2.2.3.5) | Used to specify the maximum capability version requirement between client and server. |
 | [MinimumVersion](#Section_2.2.3.6) | Used to specify the minimum capability version requirement between client and server. |
@@ -1020,12 +1020,12 @@ The following table summarizes the set of common XML Schema complex type definit
 | Complex Type | Description |
 | --- | --- |
 | [ArrayOfXmlNode](#Section_2.2.4.1) | Contains an array of XML elements used exclusively for exchanging [**XrML**](#gt_xrml) [**certificates**](#gt_certificate). |
-| [VersionData](#Section_2.2.4.2) | Represents the capability version of the client and server. |
+| [VersionData](#Section_2.2.3.3) | Represents the capability version of the client and server. |
 
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 ArrayOfXmlNode Complex Type
 
-The ArrayOfXmlNode complex type contains an array of XML elements. It is used exclusively for exchanging [**XrML**](#gt_xrml) [**certificates**](#gt_certificate), each of which MUST be represented as an XML fragment. Each XML fragment is enclosed in the [Certificate](#Section_2.2.9.3) element. For more information on XrML, see [[XRML]](https://go.microsoft.com/fwlink/?LinkId=324306).
+The ArrayOfXmlNode complex type contains an array of XML elements. It is used exclusively for exchanging [**XrML**](#gt_xrml) [**certificates**](#gt_certificate), each of which MUST be represented as an XML fragment. Each XML fragment is enclosed in the [Certificate](#Section_4.5) element. For more information on XrML, see [[XRML]](https://go.microsoft.com/fwlink/?LinkId=324306).
 
 <xs:complexType name="ArrayOfXmlNode">
 
@@ -1423,8 +1423,8 @@ An ENABLINGBITS element includes a key and a hash encrypted together in a [**lic
 
 | License | KPublic | K | Hashed data |
 | --- | --- | --- | --- |
-| [**PL**](#gt_publishing-license-pl) | Licensor (RMS Server) public key | Symmetric [**content key**](#gt_content-key) | [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of PL |
-| [**UL**](#gt_use-license-ul) | [**RAC**](#gt_rms-account-certificate-rac) public key | Symmetric content key | [ISSUER](#Section_2.2.9.6.2) element of UL |
+| [**PL**](#gt_publishing-license-pl) | Licensor (RMS Server) public key | Symmetric [**content key**](#gt_content-key) | [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of PL |
+| [**UL**](#gt_use-license-ul) | [**RAC**](#gt_rms-account-certificate-rac) public key | Symmetric content key | [ISSUER](#Section_2.2.9.1.5) element of UL |
 | [**CLC Chain**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) | RAC public key | CLC private key | ISSUER element of CLC |
 | RAC | [**Security processor**](#gt_security-processor) public key | RAC private key | ISSUER element of RAC |
 
@@ -1667,7 +1667,7 @@ Issuing certificates MUST use the following template.
 
 *[[- rangetime -]]*: MUST be a RANGETIME (section 2.2.9.1.3) element describing the period during which the certificate can be used for issuance.
 
-*[[- conditionlist -]]*: SHOULD be present in the SLC if alternate revocation information is included. MUST NOT be present in other issuing certificates. If present, this MUST be a [CONDITIONLIST (section 2.2.9.3.4)](#Section_2.2.9.9.10) element that specifies alternate revocation information.
+*[[- conditionlist -]]*: SHOULD be present in the SLC if alternate revocation information is included. MUST NOT be present in other issuing certificates. If present, this MUST be a [CONDITIONLIST (section 2.2.9.3.4)](#Section_2.2.9.3.4) element that specifies alternate revocation information.
 
 *[[- signature -]]*: MUST be a [SIGNATURE (section 2.2.9.1.12)](#Section_2.2.9.1.12) element containing the cryptographic signature of the body of the certificate, generated by the issuer of the certificate. The hash MUST be the hash of the body. The signature MUST be the hash encrypted with the issuer's private key. The key length MUST be the length of the issuer's private key, which MUST match the length of the issuer's public key.
 
@@ -1708,7 +1708,7 @@ The DESCRIPTOR element of Issuing [**certificates**](#gt_certificate) describes 
 <a id="Section_2.2.9.3.2"></a>
 ##### 2.2.9.3.2 ISSUER
 
-The ISSUER element of issuing [**certificates**](#gt_certificate) identifies the issuer of the certificate and MUST use the following template. The contents are generally copied from the principal in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the issuer's certificates.
+The ISSUER element of issuing [**certificates**](#gt_certificate) identifies the issuer of the certificate and MUST use the following template. The contents are generally copied from the principal in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the issuer's certificates.
 
 <ISSUER>
 
@@ -1988,14 +1988,14 @@ The CONDITIONLIST element MUST use the following template.
 
 </CONDITIONLIST>
 
-*[[- distributionpoint1 -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.3.5)](#Section_2.2.9.5.3) element that contains the public key of the issuer of the SLC, as specified in DISTRIBUTIONPOINT.
+*[[- distributionpoint1 -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.3.5)](#Section_2.2.9.3.5) element that contains the public key of the issuer of the SLC, as specified in DISTRIBUTIONPOINT.
 
 *[[- distributionpoint2 -]]*: MUST contain at least one DISTRIBUTIONPOINT element that contains the public key of a third-party revocation authority that is allowed to revoke the SLC. If more than one third-party revocation authority is allowed to revoke the SLC, this includes additional DISTRIBUTIONPOINT elements as peers, with one element for each revocation authority, as specified in DISTRIBUTIONPOINT.
 
 <a id="Section_2.2.9.3.5"></a>
 ##### 2.2.9.3.5 DISTRIBUTIONPOINT
 
-The DISTRIBUTIONPOINT elements in the [CONDITIONLIST](#Section_2.2.9.9.10) describe the public keys of revocation authorities who are authorized to revoke the [**SLC**](#gt_server-licensor-certificate-slc). The DISTRIBUTIONPOINT elements MUST use the following template.
+The DISTRIBUTIONPOINT elements in the [CONDITIONLIST](#Section_2.2.9.3.4) describe the public keys of revocation authorities who are authorized to revoke the [**SLC**](#gt_server-licensor-certificate-slc). The DISTRIBUTIONPOINT elements MUST use the following template.
 
 <DISTRIBUTIONPOINT>
 
@@ -2044,13 +2044,13 @@ The SPC MUST use the following template.
 
 *[[- issuedtime -]]*: MUST be an [ISSUEDTIME (section 2.2.9.1.1)](#Section_2.2.9.1.1) element containing the time the SPC was generated, in [**UTC**](#gt_coordinated-universal-time-utc).
 
-*[[- descriptor -]]*: MUST be a [DESCRIPTOR (section 2.2.9.4.1)](#Section_2.2.9.6.1) element describing the SPC.
+*[[- descriptor -]]*: MUST be a [DESCRIPTOR (section 2.2.9.4.1)](#Section_2.2.9.4.1) element describing the SPC.
 
-*[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.4.2)](#Section_2.2.9.6.2) element describing the issuer of the SPC.
+*[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.4.2)](#Section_2.2.9.4.2) element describing the issuer of the SPC.
 
-*[[- distributionpoint -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.4.3)](#Section_2.2.9.5.3) element describing the location of the issuer of the SPC.
+*[[- distributionpoint -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.4.3)](#Section_2.2.9.4.3) element describing the location of the issuer of the SPC.
 
-*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.4.4)](#Section_2.2.9.1.11) element describing the principal and the SPC public key.
+*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.4.4)](#Section_2.2.9.4.4) element describing the principal and the SPC public key.
 
 *[[- signature -]]*: MUST be a [SIGNATURE (section 2.2.9.1.12)](#Section_2.2.9.1.12) element containing the cryptographic signature of the body of the [**certificate**](#gt_certificate), generated by the issuer of the certificate.
 
@@ -2084,7 +2084,7 @@ Microsoft Machine-Certificate
 <a id="Section_2.2.9.4.2"></a>
 ##### 2.2.9.4.2 ISSUER
 
-The ISSUER element of the [**SPC**](#gt_security-processor-certificate-spc) identifies the issuer of the [**certificate**](#gt_certificate). The contents of the ISSUER element MUST be copied verbatim from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the SPC issuer.
+The ISSUER element of the [**SPC**](#gt_security-processor-certificate-spc) identifies the issuer of the [**certificate**](#gt_certificate). The contents of the ISSUER element MUST be copied verbatim from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the SPC issuer.
 
 The ISSUER element MUST use the following template.
 
@@ -2293,15 +2293,15 @@ The RAC MUST use the following template.
 
 *[[- validitytime -]]*: SHOULD be a [VALIDITYTIME (section 2.2.9.1.2)](#Section_2.2.9.1.2) element describing the period of validity for the RAC, in UTC.
 
-*[[- descriptor -]]*: MUST be a [DESCRIPTOR (section 2.2.9.5.1)](#Section_2.2.9.6.1) element describing the RAC.
+*[[- descriptor -]]*: MUST be a [DESCRIPTOR (section 2.2.9.5.1)](#Section_2.2.9.5.1) element describing the RAC.
 
-*[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.5.2)](#Section_2.2.9.6.2) element describing the issuer of the RAC.
+*[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.5.2)](#Section_2.2.9.5.2) element describing the issuer of the RAC.
 
 *[[- distributionpoint-int -]]*: SHOULD be a [DISTRIBUTIONPOINT (section 2.2.9.5.3)](#Section_2.2.9.5.3) element containing the intranet [**URL**](#gt_uniform-resource-locator-url) address of the server that issued the RAC.
 
 *[[- distributionpoint-ext -]]*: SHOULD be a DISTRIBUTIONPOINT (section 2.2.9.5.3) element containing the external URL address of the server that issued the RAC.
 
-*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.5.4)](#Section_2.2.9.1.11) element describing the principal and the RAC public key.
+*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.5.4)](#Section_2.2.9.5.4) element describing the principal and the RAC public key.
 
 *[[- federationprincipals -]]*: MUST be a [FEDERATIONPRINCIPALS (section 2.2.9.5.5)](#Section_2.2.9.5.5) element that issues the RAC private key to the user account.
 
@@ -2331,7 +2331,7 @@ The DESCRIPTOR element of the [**RAC**](#gt_rms-account-certificate-rac) describ
 <a id="Section_2.2.9.5.2"></a>
 ##### 2.2.9.5.2 ISSUER
 
-The ISSUER element of the [**RAC**](#gt_rms-account-certificate-rac) identifies the issuer of the [**certificate**](#gt_certificate). The contents of the ISSUER element MUST be copied verbatim from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the issuing server's [**SLC**](#gt_server-licensor-certificate-slc).
+The ISSUER element of the [**RAC**](#gt_rms-account-certificate-rac) identifies the issuer of the [**certificate**](#gt_certificate). The contents of the ISSUER element MUST be copied verbatim from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the issuing server's [**SLC**](#gt_server-licensor-certificate-slc).
 
 The ISSUER element MUST use the following template.
 
@@ -2359,7 +2359,7 @@ The ISSUER element MUST use the following template.
 
 </ISSUER>
 
-*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the issuer of the certificate, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. MUST be taken from the object of the principal of the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) of the issuer's certificate.
+*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the issuer of the certificate, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. MUST be taken from the object of the principal of the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) of the issuer's certificate.
 
 *[[- name -]]*: In RMS 2.0, this element SHOULD be a string that describes the server's name. This element is not present in RMS 1.0.
 
@@ -2480,7 +2480,7 @@ The FEDERATIONPRINCIPALS element of the [**RAC**](#gt_rms-account-certificate-ra
 
 </FEDERATIONPRINCIPALS>
 
-*[[- machineobject -]]*: MUST be an object element that identifies the machine. MUST be copied verbatim from the object in the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the SPC, including the same [**GUID**](#gt_globally-unique-identifier-guid).
+*[[- machineobject -]]*: MUST be an object element that identifies the machine. MUST be copied verbatim from the object in the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the SPC, including the same [**GUID**](#gt_globally-unique-identifier-guid).
 
 *[[- enablingbits -]]*: MUST be the RAC private key encrypted with the SPC public key, contained within an [ENABLINGBITS](#Section_2.2.9.1.13) element. The encryption method can be any public key algorithm.
 
@@ -2563,11 +2563,11 @@ The CLC MUST use the following template.
 
 *[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.6.2)](#Section_2.2.9.6.2) element describing the issuer of the CLC.
 
-*[[- distributionpoint-int -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.6.3)](#Section_2.2.9.5.3) element containing the intranet [**URL**](#gt_uniform-resource-locator-url) address of the server that issued the CLC. The server at this address will issue [**ULs**](#gt_use-license-ul) from content that is published using this CLC.
+*[[- distributionpoint-int -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.6.3)](#Section_2.2.9.6.3) element containing the intranet [**URL**](#gt_uniform-resource-locator-url) address of the server that issued the CLC. The server at this address will issue [**ULs**](#gt_use-license-ul) from content that is published using this CLC.
 
 *[[- distributionpoint-ext -]]*: SHOULD be a DISTRIBUTIONPOINT (section 2.2.9.6.3) element containing the external URL address of the server that issued the CLC, but this is optional. The server at this address will issue ULs from content that is published using this CLC.
 
-*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.6.4)](#Section_2.2.9.1.11) element describing the principal and the CLC public key.
+*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.6.4)](#Section_2.2.9.6.4) element describing the principal and the CLC public key.
 
 *[[- workobject -]]*: MUST be an object element that identifies the [**certificate**](#gt_certificate). Copied verbatim from the object in the DESCRIPTOR (section 2.2.9.6.1), including the same [**GUID**](#gt_globally-unique-identifier-guid).
 
@@ -2601,7 +2601,7 @@ The DESCRIPTOR element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f
 <a id="Section_2.2.9.6.2"></a>
 ##### 2.2.9.6.2 ISSUER
 
-The ISSUER element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) identifies the issuer of the [**certificate**](#gt_certificate). The contents of the ISSUER element MUST be copied verbatim from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the [**SLC**](#gt_server-licensor-certificate-slc) of the issuing server.
+The ISSUER element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) identifies the issuer of the [**certificate**](#gt_certificate). The contents of the ISSUER element MUST be copied verbatim from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the [**SLC**](#gt_server-licensor-certificate-slc) of the issuing server.
 
 The ISSUER element MUST use the following template.
 
@@ -2707,7 +2707,7 @@ The ISSUEDPRINCIPALS element MUST use the following template.
 
 </ISSUEDPRINCIPALS>
 
-*[[- type -]]*: MUST be the type of user account, as determined by the authentication scheme. MUST be copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the [**RAC**](#gt_rms-account-certificate-rac).
+*[[- type -]]*: MUST be the type of user account, as determined by the authentication scheme. MUST be copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the [**RAC**](#gt_rms-account-certificate-rac).
 
 *[[- userid -]]*: MUST be the identifier of the user. MUST be copied verbatim from the principal element in the ISSUEDPRINCIPALS element of the RAC.
 
@@ -2770,15 +2770,15 @@ The PL SHOULD use the following template.
 
 *[[- issuedtime -]]*: MUST be an [ISSUEDTIME (section 2.2.9.1.1)](#Section_2.2.9.1.1) element containing the time the PL was generated, in [**UTC**](#gt_coordinated-universal-time-utc).
 
-*[[- descriptor -]]*: An optional element describing the [**policy**](#gt_policy) in the PL. If present, the *descriptor* MUST be a [DESCRIPTOR (section 2.2.9.7.1)](#Section_2.2.9.6.1) element.
+*[[- descriptor -]]*: An optional element describing the [**policy**](#gt_policy) in the PL. If present, the *descriptor* MUST be a [DESCRIPTOR (section 2.2.9.7.1)](#Section_2.2.9.7.1) element.
 
 *[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.7.2)](#Section_2.2.9.7.2) element describing the issuer of the PL.
 
-*[[- distributionpoint-int -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.7.3)](#Section_2.2.9.5.3) element containing the intranet [**URL**](#gt_uniform-resource-locator-url) address of the server that will issue [**ULs**](#gt_use-license-ul) from this PL.
+*[[- distributionpoint-int -]]*: MUST be a [DISTRIBUTIONPOINT (section 2.2.9.7.3)](#Section_2.2.9.7.3) element containing the intranet [**URL**](#gt_uniform-resource-locator-url) address of the server that will issue [**ULs**](#gt_use-license-ul) from this PL.
 
 *[[- distributionpoint-ext -]]*: SHOULD be a DISTRIBUTIONPOINT (section 2.2.9.7.3) element containing the external URL address of the server that will issue ULs from this PL.
 
-*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.7.4)](#Section_2.2.9.1.11) element describing the principal and the server public key.
+*[[- issuedprincipals -]]*: MUST be an [ISSUEDPRINCIPALS (section 2.2.9.7.4)](#Section_2.2.9.7.4) element describing the principal and the server public key.
 
 *[[- distributionpoint-ref -]]*: An optional element containing the author's referral information. If present, MUST be a DISTRIBUTIONPOINT (section 2.2.9.7.3) element of type "Referral-Info".
 
@@ -2786,9 +2786,9 @@ The PL SHOULD use the following template.
 
 *[[- owner -]]*: MUST be an [OWNER (section 2.2.9.7.5)](#Section_2.2.9.7.5) element that describes the author of the document.
 
-*[[- revocationpoint -]]*: An optional field that specifies the location of a revocation list for the PL. If present, MUST be a [CONDITIONLIST (section 2.2.9.7.9)](#Section_2.2.9.9.10) element.
+*[[- revocationpoint -]]*: An optional field that specifies the location of a revocation list for the PL. If present, MUST be a [CONDITIONLIST (section 2.2.9.7.9)](#Section_2.2.9.7.9) element.
 
-*[[- authenticateddata -]]*: MUST be an [AUTHENTICATEDDATA (section 2.2.9.7.6)](#Section_2.2.9.10.5) element that describes the usage policy issued by the author.
+*[[- authenticateddata -]]*: MUST be an [AUTHENTICATEDDATA (section 2.2.9.7.6)](#Section_2.2.9.7.6) element that describes the usage policy issued by the author.
 
 *[[- exclusionpolicy -]]*: MAY be a POLICYLIST element in an unsigned PL with type "exclusion" that identifies an exclusion policy list that applies to the PL and the information the PL protects. When the PL is signed, this is in the AUTHENTICATEDDATA element.
 
@@ -2832,7 +2832,7 @@ LCID [[- lcid -]]:NAME [[- name2 -]]:DESCRIPTION [[- description -]];
 <a id="Section_2.2.9.7.2"></a>
 ##### 2.2.9.7.2 ISSUER
 
-The ISSUER element of the [**PL**](#gt_publishing-license-pl) identifies the issuer of the [**license**](#gt_license). The object and [PUBLICKEY](#Section_2.2.9.1.6) elements of the ISSUER element MUST be copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) for [**offline publishing**](#gt_offline-publishing). The [SECURITYLEVEL](#Section_2.2.9.1.10) element is also copied from the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the issuer, but the values are optional.
+The ISSUER element of the [**PL**](#gt_publishing-license-pl) identifies the issuer of the [**license**](#gt_license). The object and [PUBLICKEY](#Section_2.2.9.1.6) elements of the ISSUER element MUST be copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) for [**offline publishing**](#gt_offline-publishing). The [SECURITYLEVEL](#Section_2.2.9.1.10) element is also copied from the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the issuer, but the values are optional.
 
 The object and PUBLICKEY elements of the ISSUER element MUST also be copied verbatim from the principal element in the ISSUEDPRINCIPALS element of the [**SLC**](#gt_server-licensor-certificate-slc) by the server for [**online publishing**](#gt_online-publishing).
 
@@ -2848,7 +2848,7 @@ The ISSUER element MUST use the following template.
 
 </ISSUER>
 
-*[[- object -]]*: MUST be the object element copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the issuer.
+*[[- object -]]*: MUST be the object element copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the issuer.
 
 *[[- publickey -]]*: MUST contain the issuer's public key. The exponent MUST be set to 65537. The size MUST be the size of the issuer's public key in bits. The modulus MUST contain the modulus of the issuer's public key.
 
@@ -2928,7 +2928,7 @@ The ISSUEDPRINCIPALS element MUST use the following template.
 
 </ISSUEDPRINCIPALS>
 
-*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the server that issues licenses from this PL, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. For an [**offline-published**](#gt_offline-publishing) PL, this MUST be taken from the object of the [ISSUER](#Section_2.2.9.6.2) element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f). For an [**online-published**](#gt_online-publishing) PL, this MUST be taken from the object of the principal of the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the [**SLC**](#gt_server-licensor-certificate-slc).
+*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the server that issues licenses from this PL, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. For an [**offline-published**](#gt_offline-publishing) PL, this MUST be taken from the object of the [ISSUER](#Section_2.2.9.5.2) element of the [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f). For an [**online-published**](#gt_online-publishing) PL, this MUST be taken from the object of the principal of the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the [**SLC**](#gt_server-licensor-certificate-slc).
 
 *[[- name -]]*: In RMS 2.0, this element SHOULD be a string that describes the server's name. This element is not present in RMS 1.0. For an offline-published PL, this MUST be taken from the object of the ISSUER element of the CLC. For an online-published PL, this MUST be taken from the object of the principal of the ISSUEDPRINCIPALS element of the SLC.
 
@@ -2979,7 +2979,7 @@ The AUTHENTICATEDDATA element MUST use the following template.
 <a id="Section_2.2.9.7.7"></a>
 ##### 2.2.9.7.7 POLICYLIST
 
-The **POLICYLIST** element of the [**PL**](#gt_publishing-license-pl) contains zero or more [POLICY](#Section_2.2.9.9.8) elements.
+The **POLICYLIST** element of the [**PL**](#gt_publishing-license-pl) contains zero or more [POLICY](#Section_2.2.9.7.8) elements.
 
 If no POLICY elements are included, the **POLICYLIST** element MUST use the following template.
 
@@ -3086,7 +3086,7 @@ seconds="[[- seconds -]]" />
 <a id="Section_2.2.9.8"></a>
 #### 2.2.9.8 Encrypted Rights Data
 
-The contents of the [**PL's**](#gt_publishing-license-pl) [AUTHENTICATEDDATA](#Section_2.2.9.10.5) element having an ID of "Encrypted-Rights-Data" MUST be an [**XrML**](#gt_xrml) document, as defined in [[XRML]](https://go.microsoft.com/fwlink/?LinkId=324306), referred to as Encrypted Rights Data (ERD). The ERD is XrML that defines the rights the author grants. It is encrypted for privacy protection and then base64-encoded. For a PL based on an official rights template, the contents of the ERD are copied verbatim from the rights template. The plaintext ERD MUST use the following template.
+The contents of the [**PL's**](#gt_publishing-license-pl) [AUTHENTICATEDDATA](#Section_2.2.9.7.6) element having an ID of "Encrypted-Rights-Data" MUST be an [**XrML**](#gt_xrml) document, as defined in [[XRML]](https://go.microsoft.com/fwlink/?LinkId=324306), referred to as Encrypted Rights Data (ERD). The ERD is XrML that defines the rights the author grants. It is encrypted for privacy protection and then base64-encoded. For a PL based on an official rights template, the contents of the ERD are copied verbatim from the rights template. The plaintext ERD MUST use the following template.
 
 <XrML xmlns="" version="1.2">
 
@@ -3120,19 +3120,19 @@ The contents of the [**PL's**](#gt_publishing-license-pl) [AUTHENTICATEDDATA](#S
 
 *[[- issuedtime -]]*: MUST be an [ISSUEDTIME (section 2.2.9.1.1)](#Section_2.2.9.1.1) element containing the time the ERD was generated, in [**UTC**](#gt_coordinated-universal-time-utc).
 
-*[[- descriptor -]]*: If present, MUST be a [DESCRIPTOR (section 2.2.9.8.1)](#Section_2.2.9.6.1) element describing the ERD.
+*[[- descriptor -]]*: If present, MUST be a [DESCRIPTOR (section 2.2.9.8.1)](#Section_2.2.9.8.1) element describing the ERD.
 
 *[[- issuer -]]*: MUST be present for an official rights template and MUST be an [ISSUER (section 2.2.9.8.2)](#Section_2.2.9.8.2) element describing the issuer of the ERD. The ISSUER SHOULD NOT be present if the *[[- erdtype -]]* is "Microsoft Rights Template".
 
-*[[- distributionpoint-pub -]]*: MUST be present for an official rights template and MUST be a [DISTRIBUTIONPOINT (section 2.2.9.8.3)](#Section_2.2.9.5.3) element containing the [**URL**](#gt_uniform-resource-locator-url) address of the server that issues [**ULs**](#gt_use-license-ul) for this ERD.
+*[[- distributionpoint-pub -]]*: MUST be present for an official rights template and MUST be a [DISTRIBUTIONPOINT (section 2.2.9.8.3)](#Section_2.2.9.8.3) element containing the [**URL**](#gt_uniform-resource-locator-url) address of the server that issues [**ULs**](#gt_use-license-ul) for this ERD.
 
 *[[- distributionpoint-ref -]]*: An optional element containing the author's referral information. If present, MUST be a DISTRIBUTIONPOINT (section 2.2.9.8.3) element of type "Referral-Info".
 
-*[[- work -]]*: A [WORK](#Section_2.2.9.10.4) element as specified in section 2.2.9.8.5. Contains a unique [**GUID**](#gt_globally-unique-identifier-guid) for the [**certificate**](#gt_certificate) and at least one [RIGHT](#Section_2.2.9.9.6) element. Can also include metadata specifying the owner of the PL and a list of time conditions on the usage [**policy**](#gt_policy).
+*[[- work -]]*: A [WORK](#Section_2.2.9.8.5) element as specified in section 2.2.9.8.5. Contains a unique [**GUID**](#gt_globally-unique-identifier-guid) for the [**certificate**](#gt_certificate) and at least one [RIGHT](#Section_2.2.9.8.5.3) element. Can also include metadata specifying the owner of the PL and a list of time conditions on the usage [**policy**](#gt_policy).
 
-*[[- authenticateddata -]]*: MAY be one or more [AUTHENTICATEDDATA](#Section_2.2.9.10.5) elements as defined in section 2.2.9.8.6.
+*[[- authenticateddata -]]*: MAY be one or more [AUTHENTICATEDDATA](#Section_2.2.9.7.6) elements as defined in section 2.2.9.8.6.
 
-*[[- exclusionpolicy -]]*: MAY be a [POLICYLIST (section 2.2.9.7.7)](#Section_2.2.9.9.7) element in a signed PL with type "exclusion" that identifies an exclusion policy list that applies to the PL and the information the PL protects.
+*[[- exclusionpolicy -]]*: MAY be a [POLICYLIST (section 2.2.9.7.7)](#Section_2.2.9.7.7) element in a signed PL with type "exclusion" that identifies an exclusion policy list that applies to the PL and the information the PL protects.
 
 *[[- inclusionpolicy -]]*: MAY be a POLICYLIST (section 2.2.9.7.7) element in a signed PL with type "inclusion" that identifies an inclusion policy list that applies to the PL and the information the PL protects.
 
@@ -3159,7 +3159,7 @@ The DESCRIPTOR element of the ERD describes the ERD and MUST use the following t
 
 </DESCRIPTOR>
 
-*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies this [DISTRIBUTIONPOINT](#Section_2.2.9.5.3) element, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces.
+*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies this [DISTRIBUTIONPOINT](#Section_2.2.9.1.7) element, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces.
 
 *[[- name -]]*: MUST be a [NAME](#Section_2.2.9.1.8) element providing the name of the [**policy**](#gt_policy) described in the ERD. The text of this element is structured as follows. One or more occurrences of the following structure MUST be present in each ERD descriptor, separated by a semicolon.
 
@@ -3174,7 +3174,7 @@ LCID [[- lcid -]]:NAME [[- name2 -]]:DESCRIPTION [[- description -]];
 <a id="Section_2.2.9.8.2"></a>
 ##### 2.2.9.8.2 ISSUER
 
-The ISSUER element of the ERD MUST identify the issuer of the ERD. The object and [PUBLICKEY](#Section_2.2.9.1.6) elements of the ISSUER element MUST be copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the template if it is based on a template.
+The ISSUER element of the ERD MUST identify the issuer of the ERD. The object and [PUBLICKEY](#Section_2.2.9.1.6) elements of the ISSUER element MUST be copied verbatim from the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the template if it is based on a template.
 
 The object and PUBLICKEY elements of the ISSUER element MUST be copied verbatim from the PRINCIPAL element in the ISSUEDPRINCIPALS element of the CLC if a template is not used.
 
@@ -3299,9 +3299,9 @@ The WORK element MUST use the following template.
 
 *[[- owner -]]*: An optional element that specifies the owner of the [**PL**](#gt_publishing-license-pl). If present MUST be a [METADATA](#Section_2.2.9.8.5.1) element as specified in section 2.2.9.8.5.1.
 
-*[[- preconditionlist -]]*: An optional element that specifies the time conditions on the usage [**policy**](#gt_policy). If present MUST be a [PRECONDITIONLIST](#Section_2.2.9.10.4.1) element as specified in section 2.2.9.8.5.2.
+*[[- preconditionlist -]]*: An optional element that specifies the time conditions on the usage [**policy**](#gt_policy). If present MUST be a [PRECONDITIONLIST](#Section_2.2.9.8.5.2) element as specified in section 2.2.9.8.5.2.
 
-*[[- right -]]*: MUST be one or more [RIGHT](#Section_2.2.9.9.6) elements as specified in section 2.2.9.8.5.3.
+*[[- right -]]*: MUST be one or more [RIGHT](#Section_2.2.9.8.5.3) elements as specified in section 2.2.9.8.5.3.
 
 <a id="Section_2.2.9.8.5.1"></a>
 ###### 2.2.9.8.5.1 METADATA
@@ -3451,7 +3451,7 @@ If present, the AUTHENTICATEDDATA element MUST use the following template.
 <a id="Section_2.2.9.9"></a>
 #### 2.2.9.9 Use License
 
-This section defines the format of the [**UL**](#gt_use-license-ul). The UL names an issued principal via the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element and then grants a set of rights to that principal, one right per [RIGHT](#Section_2.2.9.9.6) element.
+This section defines the format of the [**UL**](#gt_use-license-ul). The UL names an issued principal via the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element and then grants a set of rights to that principal, one right per [RIGHT](#Section_2.2.9.9.6) element.
 
 The UL SHOULD use the following template.
 
@@ -3511,13 +3511,13 @@ The UL SHOULD use the following template.
 
 *[[- issuedtime -]]*: MUST be an [ISSUEDTIME (section 2.2.9.1.1)](#Section_2.2.9.1.1) element containing the time the UL was generated, in [**UTC**](#gt_coordinated-universal-time-utc).
 
-*[[- descriptor -]]*: MUST be a [DESCRIPTOR (section 2.2.9.9.1)](#Section_2.2.9.6.1) element describing the UL.
+*[[- descriptor -]]*: MUST be a [DESCRIPTOR (section 2.2.9.9.1)](#Section_2.2.9.9.1) element describing the UL.
 
-*[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.9.2)](#Section_2.2.9.6.2) element describing the issuer of the UL.
+*[[- issuer -]]*: MUST be an [ISSUER (section 2.2.9.9.2)](#Section_2.2.9.9.2) element describing the issuer of the UL.
 
 *[[- issuedprincipals -]]*: MUST be an ISSUEDPRINCIPALS (section 2.2.9.9.3) element describing the principal and the user public key for which the UL is issued.
 
-*[[- distributionpoint-ref -]]*: An optional element containing the author's referral information. If present, MUST be a [DISTRIBUTIONPOINT (section 2.2.9.9.4)](#Section_2.2.9.5.3) element of type "Referral-Info".
+*[[- distributionpoint-ref -]]*: An optional element containing the author's referral information. If present, MUST be a [DISTRIBUTIONPOINT (section 2.2.9.9.4)](#Section_2.2.9.9.4) element of type "Referral-Info".
 
 *[[- workobject -]]*: MUST be an object element that identifies the content to which the UL applies. This object is created by the application used to create the [**PL**](#gt_publishing-license-pl) from which the UL was generated, and therefore contains application-specific information.
 
@@ -3529,7 +3529,7 @@ The UL SHOULD use the following template.
 
 *[[- condition -]]*: MAY be an element, as defined in section [2.2.9.9.9](#Section_2.2.9.9.9), that defines an excluded OS version span.
 
-*[[- exclusionpolicy -]]*: MAY be a [POLICYLIST (section 2.2.9.7.7)](#Section_2.2.9.9.7) element with type "exclusion" that identifies an exclusion [**policy**](#gt_policy) list that applies to the UL and the information that the UL protects.
+*[[- exclusionpolicy -]]*: MAY be a [POLICYLIST (section 2.2.9.7.7)](#Section_2.2.9.7.7) element with type "exclusion" that identifies an exclusion [**policy**](#gt_policy) list that applies to the UL and the information that the UL protects.
 
 *[[- inclusionpolicy -]]*: MAY be a POLICYLIST (section 2.2.9.7.7) element with type "inclusion" that identifies an inclusion policy list that applies to the UL and the information that the UL protects.
 
@@ -3556,7 +3556,7 @@ The DESCRIPTOR element of the [**UL**](#gt_use-license-ul) describes the UL and 
 
 </DESCRIPTOR>
 
-*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies this [DISTRIBUTIONPOINT](#Section_2.2.9.5.3) element, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces.
+*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies this [DISTRIBUTIONPOINT](#Section_2.2.9.1.7) element, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces.
 
 *[[- name -]]*: MAY be a [NAME](#Section_2.2.9.1.8) element giving the name of the [**policy**](#gt_policy) described in the UL.
 
@@ -3890,7 +3890,7 @@ seconds="[[- seconds -]]" />
 <a id="Section_2.2.9.10"></a>
 #### 2.2.9.10 Rights Policy Template
 
-This section defines the format of the rights policy template. Templates are generated by an administrator on the server and then distributed to client machines. A client generates a [PL](#Section_6.4) from a template when a user uses it to protect a document ([**offline publishing**](#gt_offline-publishing)). The PL is signed using the [CLC](#Section_4.5.3).
+This section defines the format of the rights policy template. Templates are generated by an administrator on the server and then distributed to client machines. A client generates a [PL](#Section_1.3.4) from a template when a user uses it to protect a document ([**offline publishing**](#gt_offline-publishing)). The PL is signed using the [CLC](#Section_2.2.9.6).
 
 The rights policy template MUST use the following template.
 
@@ -3920,17 +3920,17 @@ The rights policy template MUST use the following template.
 
 *[[- issuedtime -]]*: MUST be an [ISSUEDTIME](#Section_2.2.9.1.1) element containing the time the rights policy template was generated, in [**UTC**](#gt_coordinated-universal-time-utc).
 
-*[[- descriptor -]]*: MUST be a [DESCRIPTOR](#Section_2.2.9.6.1) element describing the rights policy template, as defined in section [2.2.9.10.1](#Section_2.2.9.10.1).
+*[[- descriptor -]]*: MUST be a [DESCRIPTOR](#Section_2.2.9.1.4) element describing the rights policy template, as defined in section [2.2.9.10.1](#Section_2.2.9.10.1).
 
-*[[- issuer -]]*: MUST be an [ISSUER](#Section_2.2.9.6.2) element describing the issuer of the rights policy template, as defined in section [2.2.9.10.2](#Section_2.2.9.10.2).
+*[[- issuer -]]*: MUST be an [ISSUER](#Section_2.2.9.1.5) element describing the issuer of the rights policy template, as defined in section [2.2.9.10.2](#Section_2.2.9.10.2).
 
-*[[- distributionpoint-pub -]]*: MUST be a [DISTRIBUTIONPOINT](#Section_2.2.9.5.3) element containing the intranet licensing [**URL**](#gt_uniform-resource-locator-url) of the server that will issue [**ULs**](#gt_use-license-ul) for the PL generated from this rights policy template, as specified in section [2.2.9.10.3](#Section_2.2.9.10.3).
+*[[- distributionpoint-pub -]]*: MUST be a [DISTRIBUTIONPOINT](#Section_2.2.9.1.7) element containing the intranet licensing [**URL**](#gt_uniform-resource-locator-url) of the server that will issue [**ULs**](#gt_use-license-ul) for the PL generated from this rights policy template, as specified in section [2.2.9.10.3](#Section_2.2.9.10.3).
 
 *[[- distributionpoint-ref -]]*: MUST be a DISTRIBUTIONPOINT element containing the rights request referral information, as specified in section 2.2.9.10.3.
 
 *[[-work -]]*: MUST be a [WORK](#Section_2.2.9.10.4) element containing the [**policy**](#gt_policy), as specified in section 2.2.9.10.4.
 
-*[[- authenticateddata -]]*: MUST be an [AUTHENTICATEDDATA](#Section_2.2.9.10.5) element that describes the usage policy issued by the author, as specified in section 2.2.9.10.5.
+*[[- authenticateddata -]]*: MUST be an [AUTHENTICATEDDATA](#Section_2.2.9.7.6) element that describes the usage policy issued by the author, as specified in section 2.2.9.10.5.
 
 *[[- signature -]]*: MUST be a [SIGNATURE](#Section_2.2.9.1.12) element containing the cryptographic signature of the body of the [**certificate**](#gt_certificate), generated by the issuer of the certificate. The hash MUST be the hash of the body. The signature MUST be the hash encrypted with the issuer's private key. The key length MUST be the length of the issuer's private key, which MUST match the length of the issuer's public key.
 
@@ -3966,7 +3966,7 @@ LCID [[- lcid -]]:NAME [[- name2 -]]:DESCRIPTION [[- description -]];
 <a id="Section_2.2.9.10.2"></a>
 ##### 2.2.9.10.2 ISSUER
 
-The ISSUER element of the [**rights policy template**](#gt_rights-policy-template) identifies the issuer of the template. The contents of the ISSUER element MUST be copied from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the [**SPC**](#gt_security-processor-certificate-spc) of the issuing server.
+The ISSUER element of the [**rights policy template**](#gt_rights-policy-template) identifies the issuer of the template. The contents of the ISSUER element MUST be copied from the contents of the principal element in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the [**SPC**](#gt_security-processor-certificate-spc) of the issuing server.
 
 The ISSUER element MUST use the following template.
 
@@ -3986,7 +3986,7 @@ The ISSUER element MUST use the following template.
 
 </ISSUER>
 
-*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the issuer of the [**license**](#gt_license), represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. MUST be taken from the object of the principal of the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) of the issuer's [**certificate**](#gt_certificate).
+*[[- GUID -]]*: MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the issuer of the [**license**](#gt_license), represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. MUST be taken from the object of the principal of the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) of the issuer's [**certificate**](#gt_certificate).
 
 *[[- name -]]*: SHOULD be a string containing a name for the server. The [NAME](#Section_2.2.9.1.8) element MAY be omitted.
 
@@ -3997,7 +3997,7 @@ The ISSUER element MUST use the following template.
 <a id="Section_2.2.9.10.3"></a>
 ##### 2.2.9.10.3 DISTRIBUTIONPOINT
 
-The DISTRIBUTIONPOINT element of the [**rights policy template**](#gt_rights-policy-template) either describes the intranet licensing [**URL**](#gt_uniform-resource-locator-url) of the server to be used for issuing [**ULs**](#gt_use-license-ul) for the [PL](#Section_6.4) generated from the rights policy template (this becomes a "publishing point" element), or the URL that is used when a recipient of a protected document wants to request rights to the document (this becomes a "referral-info" element). If the element describes the location of the server, it can be either an internal or an external location.
+The DISTRIBUTIONPOINT element of the [**rights policy template**](#gt_rights-policy-template) either describes the intranet licensing [**URL**](#gt_uniform-resource-locator-url) of the server to be used for issuing [**ULs**](#gt_use-license-ul) for the [PL](#Section_1.3.4) generated from the rights policy template (this becomes a "publishing point" element), or the URL that is used when a recipient of a protected document wants to request rights to the document (this becomes a "referral-info" element). If the element describes the location of the server, it can be either an internal or an external location.
 
 The DISTRIBUTIONPOINT elements MUST use the following template.
 
@@ -4112,7 +4112,7 @@ The element MAY be specified in two ways. One of the following two ways MUST be 
 <a id="Section_2.2.9.10.4.2"></a>
 ###### 2.2.9.10.4.2 RIGHTSGROUP
 
-The RIGHTSGROUP element contains [RIGHT](#Section_2.2.9.9.6) elements and users who have each of these rights.
+The RIGHTSGROUP element contains [RIGHT](#Section_2.2.9.8.5.3) elements and users who have each of these rights.
 
 RIGHT
 
@@ -4223,7 +4223,7 @@ NOLICCACHE: '0', or the element does not exist: Allow UL caching; '1': Do not al
 
 The protocol accesses the Directory Service schema classes and attributes listed in the table below.
 
-For the syntactic specifications of the following <Class> or <Class><Attribute> pairs, refer to one of the following Active Directory Domain Services (AD DS) documents: [MS-ADA1](#Section_3.1.1.1.7), [MS-ADA2](#Section_3.1.1.1.7), [MS-ADA3](#Section_3.1.1.1.7), or [MS-ADSC](#Section_3.1.1.1.7).
+For the syntactic specifications of the following <Class> or <Class><Attribute> pairs, refer to one of the following Active Directory Domain Services (AD DS) documents: [MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), [MS-ADA3](../MS-ADA3/MS-ADA3.md), or [MS-ADSC](../MS-ADSC/MS-ADSC.md).
 
 | Class | Attribute |
 | --- | --- |
@@ -4329,7 +4329,7 @@ The **ServerConfiguration** type contains all of the configuration data used by 
 
 **revocationType:** A string that indicates the revocation type for the server. This can be either "StandardRevocation" or "CustomRevocation".
 
-**revocationAuthorities:** A set of zero or more elements of type [RevocationAuthorityInformation (section 3.6.4.1.3.2)](#Section_3.6.4.2.3.1) that contain the binary public keys of the revocation authorities.
+**revocationAuthorities:** A set of zero or more elements of type [RevocationAuthorityInformation (section 3.6.4.1.3.2)](#Section_3.6.4.1.3.2) that contain the binary public keys of the revocation authorities.
 
 <a id="Section_3.1.1.1.2"></a>
 ##### 3.1.1.1.2 TrustedLicensingServer
@@ -4351,7 +4351,7 @@ A **PLCacheEntry** is used to store a parsed [**PL**](#gt_publishing-license-pl)
 
 **parsedPl:** An in-memory representation of a PL that has been parsed, validated, and had its signature verified.
 
-**racsWithNoRights:** A set of identities that have previously been determined to have no rights in the PL. Each element of the set contains the ID type and value from the ID element (section [2.2.9.5.4](#Section_2.2.9.1.11)) of the RAC that had no rights.
+**racsWithNoRights:** A set of identities that have previously been determined to have no rights in the PL. Each element of the set contains the ID type and value from the ID element (section [2.2.9.5.4](#Section_2.2.9.5.4)) of the RAC that had no rights.
 
 <a id="Section_3.1.1.1.4"></a>
 ##### 3.1.1.1.4 ApplicationExclusionEntry
@@ -4439,7 +4439,7 @@ Note that the preceding conceptual data can be implemented by using a variety of
 <a id="Section_3.1.1.3.1"></a>
 ##### 3.1.1.3.1 GetDirectoryForAccount
 
-**GetDirectoryForAccount** is an abstract interface that returns the **Directory** containing a specified account. The interface takes one parameter named *account* of type **DomainAccount** and returns a **Directory**. If [**Active Directory**](#gt_active-directory) is used, the directory is found by invoking the LsarLookupNames4 method specified in [MS-LSAT](#Section_5) section 3.1.4.5 on the primary [**domain**](#gt_domain) controller with the following parameters:
+**GetDirectoryForAccount** is an abstract interface that returns the **Directory** containing a specified account. The interface takes one parameter named *account* of type **DomainAccount** and returns a **Directory**. If [**Active Directory**](#gt_active-directory) is used, the directory is found by invoking the LsarLookupNames4 method specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.5 on the primary [**domain**](#gt_domain) controller with the following parameters:
 
 **Count:** Set to 1.
 
@@ -4460,7 +4460,7 @@ When LsarLookupNames4 returns, the *ReferencedDomains* parameter will contain th
 
 The procedure uses the following local variables:
 
-**ActiveDirectory_Connection:** An ADConnection handle (see [MS-ADTS](#Section_3.1.1.1.7) section 7.2).
+**ActiveDirectory_Connection:** An ADConnection handle (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.2).
 
 **Return_Value:** A string containing the email address to return. This variable is initialized to NULL.
 
@@ -4623,9 +4623,9 @@ The following high-level sequence diagram illustrates the operation of the proto
 
 Figure 5: Protocol operation
 
-The state data acquired from server bootstrapping previously described in section [3.1.3](#Section_3.3.3) MUST be retained on the server. Beyond this, no other state data is required on the server. The server MAY retain additional state data as an optimization, but it is not required. These operations are discussed in more detail in the following sections.
+The state data acquired from server bootstrapping previously described in section [3.1.3](#Section_3.1.3) MUST be retained on the server. Beyond this, no other state data is required on the server. The server MAY retain additional state data as an optimization, but it is not required. These operations are discussed in more detail in the following sections.
 
-**Note** The following defined methods MUST contain a [VersionData](#Section_2.2.4.2) element in the SOAP header (as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520)). For information on the VersionData element, see section 2.2.3.3.
+**Note** The following defined methods MUST contain a [VersionData](#Section_2.2.3.3) element in the SOAP header (as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520)). For information on the VersionData element, see section 2.2.3.3.
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Authentication
@@ -4674,7 +4674,7 @@ If the server supports clients on mobile platforms (such as PDAs and mobile phon
 
 When the HTTP server invokes the RMS server to process a request, it MUST provide a **RequestContext** containing additional context about the HTTP request. The **isAuthenticated** field MUST indicate whether the request was authenticated. If MWBF authentication was used, **authenticationType** MUST be MWBF and **authenticatedAccount** MUST be a **FederatedAccount** containing the values of the EmailAddress and ProxyAddresses claims.
 
-Otherwise, **authenticationType** SHOULD contain the authentication type used by the HTTP server and **authenticatedAccount** MUST be a **DomainAccount**. If the HTTP server supports the Negotiate protocol, the server SHOULD authenticate the client using SPNEGO-based Kerberos and [**NTLM**](#gt_nt-lan-manager-ntlm) HTTP Authentication [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). The server establishes a security context as specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) section 3.2 by calling the implementation-specific equivalent of GSS_Accept_sec_context as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.2. If the HTTP server does not support the Negotiate authentication protocol, the server authenticates the client using NTLM Over HTTP [MS-NTHT](../MS-NTHT/MS-NTHT.md). The server establishes a security context as specified in [MS-NLMP](#Section_3.1.4.1) section 3.2.4 by calling the implementation-specific equivalent of GSS_Accept_sec_context as specified in [RFC2743] section 2.2.2.
+Otherwise, **authenticationType** SHOULD contain the authentication type used by the HTTP server and **authenticatedAccount** MUST be a **DomainAccount**. If the HTTP server supports the Negotiate protocol, the server SHOULD authenticate the client using SPNEGO-based Kerberos and [**NTLM**](#gt_nt-lan-manager-ntlm) HTTP Authentication [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). The server establishes a security context as specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) section 3.2 by calling the implementation-specific equivalent of GSS_Accept_sec_context as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.2. If the HTTP server does not support the Negotiate authentication protocol, the server authenticates the client using NTLM Over HTTP [MS-NTHT](../MS-NTHT/MS-NTHT.md). The server establishes a security context as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.2.4 by calling the implementation-specific equivalent of GSS_Accept_sec_context as specified in [RFC2743] section 2.2.2.
 
 The security context can be queried using the implementation-specific equivalent of GSS_Inquire_context as specified in [RFC2743] section 2.2.6. The information obtained from the context includes a Token/Authorization Context ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2). The server obtains the [**SID**](#gt_security-identifier-sid) of the user from the value of the element **Token.Sids[Token.UserIndex]**. The SID SHOULD be stored in the **SID** field of the **DomainAccount**.
 
@@ -4694,7 +4694,7 @@ The following sections define the Active Directory objects related to the SCP.
 
 name: RightsManagementServices
 
-**parent**: Services ([MS-ADTS](#Section_3.1.1.1.7) section 6.1.1.2.4)
+**parent**: Services ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.4)
 
 objectClass: container
 
@@ -4749,7 +4749,7 @@ The server SHOULD validate the input for each operation and return a [**SOAP fau
 | Microsoft.DigitalRightsManagement.Core.MalformedDataVersionException | A client request contained a version number that is not valid and cannot be processed. |
 | System.ArgumentNullException | At least one of the required arguments was null. |
 
-The server SHOULD validate the [VersionData](#Section_2.2.4.2) element of the request. If the **MinimumVersion** element or the **MaximumVersion** element do not contain a valid version number (specified in section 2.2.4.2), the server SHOULD return a Microsoft.DigitalRightsManagement.Core.MalformedDataVersionException fault. If the **MaximumVersion** element contains a version number that is higher than the range supported by the server for the operation, the server SHOULD return a Microsoft.DigitalRightsManagement.Core.UnsupportedDataVersionException. If any input element that is required for successful processing of the operation is set to null, the server SHOULD return a System.ArgumentNullException fault.
+The server SHOULD validate the [VersionData](#Section_2.2.3.3) element of the request. If the **MinimumVersion** element or the **MaximumVersion** element do not contain a valid version number (specified in section 2.2.4.2), the server SHOULD return a Microsoft.DigitalRightsManagement.Core.MalformedDataVersionException fault. If the **MaximumVersion** element contains a version number that is higher than the range supported by the server for the operation, the server SHOULD return a Microsoft.DigitalRightsManagement.Core.UnsupportedDataVersionException. If any input element that is required for successful processing of the operation is set to null, the server SHOULD return a System.ArgumentNullException fault.
 
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 Cryptographic Modes
@@ -4785,7 +4785,7 @@ When modifying the persistent state of the server, the **configurationVersion** 
 
 The [**SLC**](#gt_server-licensor-certificate-slc) grants the server the right to issue [**certificates**](#gt_certificate) and [**licenses**](#gt_license) by way of the ISSUE RIGHT inside the [WORK](#Section_2.2.9.10.4) element of the certificate. The ISSUE RIGHT has a [RANGETIME](#Section_2.2.9.1.3) condition that specifies the range during which the SLC can be used for issuing certificates and licenses. Outside this range, the server SHOULD NOT issue certificates or licenses because those licenses and certificates will be invalid.
 
-If the RANGETIME on the ISSUE RIGHT expires, the server MUST have its SLC reissued to continue functioning. To have the SLC reissued, the server repeats the behavior specified in [3.1.3](#Section_3.3.3).
+If the RANGETIME on the ISSUE RIGHT expires, the server MUST have its SLC reissued to continue functioning. To have the SLC reissued, the server repeats the behavior specified in [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.2"></a>
 ## 3.2 ActivationProxyWebServiceSoap Server Details
@@ -4805,7 +4805,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-See section [3.1.3](#Section_3.3.3).
+See section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
@@ -5175,7 +5175,7 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-See section common server [Initialization (section 3.1.3)](#Section_3.3.3).
+See section common server [Initialization (section 3.1.3)](#Section_3.1.3).
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Message Processing Events and Sequencing Rules
@@ -5222,7 +5222,7 @@ Upon receiving a Certify request, the server SHOULD validate the follow items:
 - The signature of each certificate in the SPC certificate chain.
 - The public key of either the first or second certificate that follows the SPC in the SPC chain is present in the **trustedSpcCAKeys** field of **ServerState**.
 - The Repository [SECURITYLEVEL](#Section_2.2.9.1.10) in the SPC meets the minimum required version in the **spcExclusionPolicy** field of **ServerState**.
-If this validation fails, a Microsoft.DigitalRightsManagement.Core.VerifyMachineCertificateChainFailedException SOAP fault code SHOULD be returned. If the Repository SECURITYLEVEL in the SPC does not meet the minimum required version in the **spcExclusionPolicy** field of **ServerState**, the server SHOULD return the Microsoft.DigitalRightsManagement.Licensing.BlackBoxIsInvalidException SOAP fault code. The server SHOULD ignore the values of the following SPC elements: **[[- cps -]]**, **[[- type -]]** and **[[- name -]]** of the [ISSUER](#Section_2.2.9.6.2) element as described in section 2.2.9.4.2. If the SPC or any certificate in the SPC certificate chain contains public key lengths or hash algorithms that are not allowed in the cryptographic mode indicated by the **cryptographicMode** attribute of **ServerState**, the server SHOULD return a Microsoft.DigitalRightsManagement.Cryptography.UnsupportedCryptographicSetException fault.
+If this validation fails, a Microsoft.DigitalRightsManagement.Core.VerifyMachineCertificateChainFailedException SOAP fault code SHOULD be returned. If the Repository SECURITYLEVEL in the SPC does not meet the minimum required version in the **spcExclusionPolicy** field of **ServerState**, the server SHOULD return the Microsoft.DigitalRightsManagement.Licensing.BlackBoxIsInvalidException SOAP fault code. The server SHOULD ignore the values of the following SPC elements: **[[- cps -]]**, **[[- type -]]** and **[[- name -]]** of the [ISSUER](#Section_2.2.9.1.5) element as described in section 2.2.9.4.2. If the SPC or any certificate in the SPC certificate chain contains public key lengths or hash algorithms that are not allowed in the cryptographic mode indicated by the **cryptographicMode** attribute of **ServerState**, the server SHOULD return a Microsoft.DigitalRightsManagement.Cryptography.UnsupportedCryptographicSetException fault.
 
 If validation succeeds, the server SHOULD service the request. To service the request, the server SHOULD generate a new RAC chain. To generate a RAC chain, the server MUST provide a unique asymmetric key pair for the user. The server SHOULD invoke the **GetUserKeyPair** abstract interface, passing in a string identifying the user. If the **authenticationType** of the **RequestContext** is MWBF, the string SHOULD be the **emailAddress** of the **authenticatedAccount** of the **RequestContext**. Otherwise, the string SHOULD be the **SID** of the **authenticatedAccount** of the **RequestContext**. If the return value is null, the server MUST generate a unique asymmetric key pair for the user. If a new key pair is generated, the server SHOULD invoke the **SetUserKeyPair** abstract interface, passing in a string identifying the user, as described previously, and the generated key pair. The server SHOULD store the RAC if the **persistRac** field of **ServerState** is true. The [VALIDITYTIME](#Section_2.2.9.1.2) element of the RAC SHOULD be computed using the **racValidityTime** field of **ServerState**. If the request is for a temporary certificate, the **tempRacValidityTime** field of **ServerState** SHOULD be used. If the request was authenticated using Microsoft Web Browser Federated Sign-On authentication, the **federatedRacValidityTime** field of **ServerState** SHOULD be used. To account for clock differences between the clock and the server, the server SHOULD subtract an amount of time equal to the **certificateValidityTimeTolerance** field of **ServerState** from the [ISSUEDTIME](#Section_2.2.9.1.1) to compute the FROM value of the VALIDITYTIME. If the request is for a persistent RAC, the **RACtype** of the [ISSUEDPRINCIPALS (section 2.2.9.5.4)](#Section_2.2.9.5.4) MUST be a **SECURITYLEVEL** element with the name "Group-Identity-Credential-Type" and a value of "Persistent". If the request is for a temporary RAC, the **RACtype** of the ISSUEDPRINCIPALS MUST be a **SECURITYLEVEL** element with the name "Group-Identity-Credential-Type" and a value of "Temporary".
 
@@ -5232,7 +5232,7 @@ The server processes the **ISSUEDPRINCIPALS** element differently, depending on 
 
 **Non-MWBF authentication:** The **userid** of the **ISSUEDPRINCIPALS** MUST be the **SID** field of the **authenticatedAccount** of the **RequestContext**. The **emailaddress** of the **ISSUEDPRINCIPALS** MUST be the value returned by **GetEmailAddressForAccount** for the **authenticatedAccount** of the **RequestContext**. If the email address is not properly formatted, a Microsoft.DigitalRightsManagement.Core.VerifyEmailAddressFailedException SOAP fault code SHOULD be returned by the server. See [RFC822] for the correct format of an email address. If **GetEmailAddressForAccount** returns NULL, the server SHOULD return a Microsoft.DigitalRightsManagement.Utilities.ADEntrySearchFailedException SOAP fault code. The **emailalias** of the **ISSUEDPRINCIPALS** MUST NOT be present when MWBF authentication is not used.
 
-The RAC MUST contain the user's public key in the ISSUEDPRINCIPALS element. The RAC MUST contain the user's private key, encrypted to the SPC public key, in the [FEDERATIONPRINCIPALS](#Section_2.2.9.5.5) element. The server MUST include a [DISTRIBUTIONPOINT (section 2.2.9.5.3)](#Section_2.2.9.5.3) of type "Activation". The ADDRESS element SHOULD contain the **baseUrl** of the **ServerState** followed by "/certification". If the **externalCertificationUrl** of the **ServerState** is not null, the server SHOULD include a DISTRIBUTIONPOINT of type "Extranet-Activation". The ADDRESS element SHOULD contain the **externalCertificationUrl**. The [ISSUER](#Section_2.2.9.6.2) element of the RAC MUST be copied from the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the server's [**SLC**](#gt_server-licensor-certificate-slc). The [SIGNATURE](#Section_2.2.9.1.12) element of the RAC MUST be generated using the server's private key. The server's entire SLC chain MUST be appended to the RAC to form the RAC chain. For more information on the RAC chain, see section [2.2.9.5](#Section_2.2.9.5).
+The RAC MUST contain the user's public key in the ISSUEDPRINCIPALS element. The RAC MUST contain the user's private key, encrypted to the SPC public key, in the [FEDERATIONPRINCIPALS](#Section_2.2.9.5.5) element. The server MUST include a [DISTRIBUTIONPOINT (section 2.2.9.5.3)](#Section_2.2.9.5.3) of type "Activation". The ADDRESS element SHOULD contain the **baseUrl** of the **ServerState** followed by "/certification". If the **externalCertificationUrl** of the **ServerState** is not null, the server SHOULD include a DISTRIBUTIONPOINT of type "Extranet-Activation". The ADDRESS element SHOULD contain the **externalCertificationUrl**. The [ISSUER](#Section_2.2.9.5.2) element of the RAC MUST be copied from the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the server's [**SLC**](#gt_server-licensor-certificate-slc). The [SIGNATURE](#Section_2.2.9.1.12) element of the RAC MUST be generated using the server's private key. The server's entire SLC chain MUST be appended to the RAC to form the RAC chain. For more information on the RAC chain, see section [2.2.9.5](#Section_2.2.9.5).
 
 For a successful request, the server MUST return a RAC chain. If the **federationEnabled** field of **ServerState** is true and the user is calling the interface for Federated Identity, then a RAC with the type "federation" SHOULD be returned. For an unsuccessful request, the server MUST return a SOAP fault code listed above or a generic SOAP fault code. The client MUST treat all SOAP fault codes the same. For information on Certificate formats, see section [2.2.9](#Section_2.2.9).
 
@@ -5260,7 +5260,7 @@ The CertifySoapIn message contains the client's [**SPC**](#gt_security-processor
 <a id="Section_3.3.4.1.1.2"></a>
 ###### 3.3.4.1.1.2 CertifySoapOut
 
-The CertifySoapOut message contains the [**RAC**](#gt_rms-account-certificate-rac) chain. The RAC chain issues an encryption key pair to the user and binds the user's account to the machine through the [**SPC**](#gt_security-processor-certificate-spc). The [CertifyResponse](#Section_3.3.4.1.3.2) element also includes a [QuotaResponse](#Section_3.3.4.1.3.3) structure that the client SHOULD NOT use.
+The CertifySoapOut message contains the [**RAC**](#gt_rms-account-certificate-rac) chain. The RAC chain issues an encryption key pair to the user and binds the user's account to the machine through the [**SPC**](#gt_security-processor-certificate-spc). The [CertifyResponse](#Section_3.3.4.1.2.2) element also includes a [QuotaResponse](#Section_3.3.4.1.3.3) structure that the client SHOULD NOT use.
 
 <wsdl:message name="CertifySoapOut">
 
@@ -5276,7 +5276,7 @@ The CertifySoapOut message contains the [**RAC**](#gt_rms-account-certificate-ra
 | Element | Description |
 | --- | --- |
 | [Certify](#Section_3.3.4.1.2.1) | Contains the body of the request for the Certify request operation. |
-| [CertifyResponse](#Section_3.3.4.1.3.2) | Contains the response to a Certify request operation. |
+| [CertifyResponse](#Section_3.3.4.1.2.2) | Contains the response to a Certify request operation. |
 
 <a id="Section_3.3.4.1.2.1"></a>
 ###### 3.3.4.1.2.1 Certify
@@ -5338,7 +5338,7 @@ maxOccurs="1"
 | Complex Types | Description |
 | --- | --- |
 | [CertifyParams](#Section_3.3.4.1.3.1) | A list of machine certificates. |
-| [CertifyResponse](#Section_3.3.4.1.3.2) | Contains an array of certificates and certificate quota data. |
+| [CertifyResponse](#Section_3.3.4.1.2.2) | Contains an array of certificates and certificate quota data. |
 | [QuotaResponse](#Section_3.3.4.1.3.3) | Not used; kept for backwards-compatibility only. |
 
 <a id="Section_3.3.4.1.3.1"></a>
@@ -5478,7 +5478,7 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-See section common server [Initialization (section 3.1.3)](#Section_3.3.3).
+See section common server [Initialization (section 3.1.3)](#Section_3.1.3).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Message Processing Events and Sequencing Rules
@@ -5533,7 +5533,7 @@ Upon receiving an AcquireLicense request, the server SHOULD perform signature va
 - If the Repository [SECURITYLEVEL](#Section_2.2.9.1.10) in the [**SPC**](#gt_security-processor-certificate-spc) does not meet the minimum required version in the **spcExclusionPolicy** field of **ServerState**, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.BlackBoxIsInvalidException SOAP fault.
 - If a Credential-Creation-Time SECURITYLEVEL is present in the RAC and exceeds the [ISSUEDTIME](#Section_2.2.9.1.1) of the PL by more than the value of the **creationTimeTolerance** field of **ServerState**, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.CredentialCreationTimeException SOAP fault.
 - If any other errors are found validating the RAC chain, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.UnexpectedPersonaCertException SOAP fault.
-- If the **federationEnabled** field of **ServerState** is false and the RAC type is "federation" (section [2.2.9.5.4](#Section_2.2.9.1.11)), the server SHOULD reject the request.
+- If the **federationEnabled** field of **ServerState** is false and the RAC type is "federation" (section [2.2.9.5.4](#Section_2.2.9.5.4)), the server SHOULD reject the request.
 - If the PL chain fails signature validation, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.InvalidRightsLabelSignatureException fault.
 - If the current time is not within the range specified by the **VALIDITYTIME** of the PL and the **serverDecommissioned** field of **ServerState** is false, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.IssuanceLicenseIsNotWithinValidTimeRangeException fault.
 - If the **serverDecommissioned** field of **ServerState** is true, the server SHOULD return a Microsoft.RightsManagementServices.ClusterDecommissionedException fault.
@@ -5544,7 +5544,7 @@ If validation succeeds, the server SHOULD service the request. To service the re
 
 The server SHOULD follow any level of indirection in making this determination, such as group memberships, aliases, and so on. (The **IsPrincipalMemberOf** service is specified in [MS-RMPRS](../MS-RMPRS/MS-RMPRS.md).) If the **superUserEnabled** field of **ServerState** is true and the user is a member of the group specified in the **superUserGroup** field of the **ServerState**, the user SHOULD receive the OWNER right in the UL that is generated without regard to the rights specified in the PL. If the user is the OWNER specified in the PL, the user SHOULD receive the OWNER right in the UL that is generated without regard to the rights specified in the PL. If the user is not granted any access, the server returns a Microsoft.DigitalRightsManagement.Licensing.NoRightsForRequestedPrincipalException SOAP fault. If the **noRightsCacheEnabled** field of the **ServerState** is set to true, the server SHOULD add the ID type and value from the ID of the OBJECT of the PRINCIPAL of the ISSUEDPRINCIPALS of the RAC to the **racsWithNoRights** field of the **PLCacheEntry** with a **plSignature** field matching the SIGNATURE of the PL. If the [**GUID**](#gt_globally-unique-identifier-guid) in the DESCRIPTOR of the ERD of the PL matches the GUID of a Rights Policy Template in either the **publishedTemplates** field or the **archivedTemplates** field of the **ServerState**, the server SHOULD ignore the policy in the PL and instead use the policy from the matching entry in **publishedTemplates** or **archivedTemplates**.
 
-If the user is granted some level of access according to the policy, the server SHOULD generate a UL to return to the client. The UL MUST describe the access that has been granted along with any conditions on that access as determined by the policy. The [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the UL SHOULD contain a **PRINCIPAL** element with the same values as the **PRINCIPAL** element of the ISSUEDPRINCIPALS element of the RAC. If the ERD of the PL contains any POLICYLIST elements, these elements MUST be included in the UL. If the server has any **ApplicationExclusionEntry** values in the **applicationExclusionPolicy** field of **ServerState**, corresponding [POLICY](#Section_2.2.9.9.8) elements MUST be added to a POLICYLIST in the UL with type "exclusion". If the server **osExclusionEnabled** field of **ServerState** is true, a [CONDITION](#Section_2.2.9.9.9) element based on the **osExclusionPolicy** field of **ServerState** MUST be added to the [CONDITIONLIST](#Section_2.2.9.9.10) in the UL. The UL MUST contain the content key encrypted with the RAC public key. The [ISSUER](#Section_2.2.9.6.2) element of the UL MUST contain the public key of the server. The OWNER element of the **METADATA** of the UL SHOULD be copied verbatim from the [OWNER](#Section_2.2.9.7.5) element of the **METADATA** of the PL. If the *distributionpoint-ref* field of the PL is present, it SHOULD be copied verbatim to the *distributionpoint-ref* field of the UL. The body of the UL MUST be signed by the server, and the signature MUST be included in the SIGNATURE element of the UL. The server MUST append its SLC chain to the UL to complete the UL chain. For information about certificate formats, see section [2.2.9](#Section_2.2.9).
+If the user is granted some level of access according to the policy, the server SHOULD generate a UL to return to the client. The UL MUST describe the access that has been granted along with any conditions on that access as determined by the policy. The [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the UL SHOULD contain a **PRINCIPAL** element with the same values as the **PRINCIPAL** element of the ISSUEDPRINCIPALS element of the RAC. If the ERD of the PL contains any POLICYLIST elements, these elements MUST be included in the UL. If the server has any **ApplicationExclusionEntry** values in the **applicationExclusionPolicy** field of **ServerState**, corresponding [POLICY](#Section_2.2.9.7.8) elements MUST be added to a POLICYLIST in the UL with type "exclusion". If the server **osExclusionEnabled** field of **ServerState** is true, a [CONDITION](#Section_2.2.9.9.9) element based on the **osExclusionPolicy** field of **ServerState** MUST be added to the [CONDITIONLIST](#Section_2.2.9.3.4) in the UL. The UL MUST contain the content key encrypted with the RAC public key. The [ISSUER](#Section_2.2.9.9.2) element of the UL MUST contain the public key of the server. The OWNER element of the **METADATA** of the UL SHOULD be copied verbatim from the [OWNER](#Section_2.2.9.7.5) element of the **METADATA** of the PL. If the *distributionpoint-ref* field of the PL is present, it SHOULD be copied verbatim to the *distributionpoint-ref* field of the UL. The body of the UL MUST be signed by the server, and the signature MUST be included in the SIGNATURE element of the UL. The server MUST append its SLC chain to the UL to complete the UL chain. For information about certificate formats, see section [2.2.9](#Section_2.2.9).
 
 For a successful request, the server MUST return a UL chain. For an unsuccessful request, the server MUST return a SOAP fault code listed above or a generic SOAP fault code. The client MUST treat all SOAP fault codes the same.
 
@@ -5798,7 +5798,7 @@ namespace=""
 <a id="Section_3.4.4.1.3.4"></a>
 ###### 3.4.4.1.3.4 AcquireLicenseResponse
 
-The AcquireLicenseResponse complex type defines the parameters returned from an [AcquireLicense](#Section_3.4.4.1.2.1) operation. A valid response MUST include a [CertificateChain (LicensorCertChain)](#Section_3.7.4.1.3.1) parameter that is an [ArrayOfXmlNode](#Section_2.2.4.1) that represents the authorization [**policy**](#gt_policy) the server issues to the client. A ReferenceCertificates parameter is an ArrayOfXmlNode that represents other [**certificates**](#gt_certificate), not part of the authorization policy, that the server returns to the client. The ReferenceCertificates response parameter SHOULD<44> be empty.
+The AcquireLicenseResponse complex type defines the parameters returned from an [AcquireLicense](#Section_3.4.4.1.2.1) operation. A valid response MUST include a [CertificateChain (LicensorCertChain)](#Section_2.2.3.2) parameter that is an [ArrayOfXmlNode](#Section_2.2.4.1) that represents the authorization [**policy**](#gt_policy) the server issues to the client. A ReferenceCertificates parameter is an ArrayOfXmlNode that represents other [**certificates**](#gt_certificate), not part of the authorization policy, that the server returns to the client. The ReferenceCertificates response parameter SHOULD<44> be empty.
 
 <xs:complexType name="AcquireLicenseResponse">
 
@@ -6273,14 +6273,14 @@ None.
 <a id="Section_3.5.3"></a>
 ### 3.5.3 Initialization
 
-See section common server [Initialization (section 3.1.3)](#Section_3.3.3).
+See section common server [Initialization (section 3.1.3)](#Section_3.1.3).
 
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Message Processing Events and Sequencing Rules
 
 | Operation | Description |
 | --- | --- |
-| [AcquireIssuanceLicense Operation](#Section_3.5.4.1.2.1) | This request is used to sign a [**PL**](#gt_publishing-license-pl) during [**online publishing**](#gt_online-publishing). |
+| [AcquireIssuanceLicense Operation](#Section_3.5.4.1) | This request is used to sign a [**PL**](#gt_publishing-license-pl) during [**online publishing**](#gt_online-publishing). |
 | [GetClientLicensorCert Operation](#Section_3.5.4.2.2.1) | This request is used to obtain a [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f). |
 
 <a id="Section_3.5.4.1"></a>
@@ -6316,7 +6316,7 @@ In the AcquireIssuanceLicense operation, the client submits an unsigned PL and r
 Upon receiving an AcquireIssuanceLicense request, the server SHOULD validate the unsigned PL for format and syntax.
 
 - If the value of the **onlinePublishingEnabled** field of **ServerState** is false on the contacted server, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.OnlinePublishingDisabledException [**SOAP fault code**](#gt_soap-fault-code).
-- The [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of the unsigned PL MUST follow the syntax specified in section [2.2.9.7.4](#Section_2.2.9.7.4). If not, the server MUST reject the unsigned PL as invalid [**XrML**](#gt_xrml) and SHOULD return a Microsoft.DigitalRightsManagement.Utilities.UnspecifiedErrorException [**SOAP fault**](#gt_soap-fault).
+- The [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of the unsigned PL MUST follow the syntax specified in section [2.2.9.7.4](#Section_2.2.9.7.4). If not, the server MUST reject the unsigned PL as invalid [**XrML**](#gt_xrml) and SHOULD return a Microsoft.DigitalRightsManagement.Utilities.UnspecifiedErrorException [**SOAP fault**](#gt_soap-fault).
 - The server SHOULD determine whether the **PRINCIPAL** in the **ISSUEDPRINCIPALS** of the PL matches the **PRINCIPAL** in the **ISSUEDPRINCIPALS** of the [**SLC**](#gt_server-licensor-certificate-slc) in **ServerState** or in one of the elements of the **trustedLicensingServers** set in **ServerState**. A match is determined by comparing the **OBJECT ID** as well as the size and value of the modulus parameter in the **PUBLICKEY** element of the **ISSUEDPRINCIPALS** elements being compared. If there is no match, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.UnsignedIssuanceLicenseNoMatchingIssuedPrincipalException SOAP fault code.
 - If the type attribute of the BODY element of the Encrypted Rights Data of the PL chain is "Microsoft Official Rights Template" and the signature of the Encrypted Rights Data is not valid, the server SHOULD return a Microsoft.DigitalRightsManagement.Licensing.InvalidOfficialRightsTemplateException fault.
 - If the **serverDecommissioned** field of **ServerState** is true, the server SHOULD return a Microsoft.RightsManagementServices.ClusterDecommissionedException SOAP fault code.
@@ -6583,7 +6583,7 @@ maxOccurs="1"
 
 To create [**protected content**](#gt_protected-content) without continually contacting a server, the user needs a [**CLC chain**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) that corresponds to the user's account. The CLC chain represents the identity of a user who can create protected content on behalf of the issuing server. It issues an asymmetric signing key pair that is bound to the [**RAC**](#gt_rms-account-certificate-rac).
 
-The client uses the GetClientLicensorCert request to obtain a CLC. The client MUST have a valid RAC and [**SPC**](#gt_security-processor-certificate-spc) before calling GetClientLicensorCert. For more information about acquiring a RAC, see section [2.2.9.5](#Section_2.2.9.5). For more information about acquiring an SPC, see section [2.2.9.4](#Section_5).
+The client uses the GetClientLicensorCert request to obtain a CLC. The client MUST have a valid RAC and [**SPC**](#gt_security-processor-certificate-spc) before calling GetClientLicensorCert. For more information about acquiring a RAC, see section [2.2.9.5](#Section_2.2.9.5). For more information about acquiring an SPC, see section [2.2.9.4](#Section_2.2.9.4).
 
 ![GetClientLicensorCert message sequence](media/image12.png)
 
@@ -6659,7 +6659,7 @@ The GetClientLicensorCertSoapOut message contains the [**CLC chain**](#gt_f5d0f1
 
 </wsdl:message>
 
-[GetClientLicensorCertResponse](#Section_3.5.4.2.3.4): The GetClientLicensorCertResponse element, as specified in section 3.5.4.2.2.2.
+[GetClientLicensorCertResponse](#Section_3.5.4.2.2.2): The GetClientLicensorCertResponse element, as specified in section 3.5.4.2.2.2.
 
 <a id="Section_3.5.4.2.2"></a>
 ##### 3.5.4.2.2 Elements
@@ -6667,7 +6667,7 @@ The GetClientLicensorCertSoapOut message contains the [**CLC chain**](#gt_f5d0f1
 | Element | Description |
 | --- | --- |
 | [GetClientLicensorCert](#Section_3.5.4.2.2.1) | Contains the body of the request used in the GetClientLicensorCert operation. |
-| [GetClientLicensorCertResponse](#Section_3.5.4.2.3.4) | Contains the response parameters returned from the GetClientLicensorCertResponse operation. |
+| [GetClientLicensorCertResponse](#Section_3.5.4.2.2.2) | Contains the response parameters returned from the GetClientLicensorCertResponse operation. |
 
 <a id="Section_3.5.4.2.2.1"></a>
 ###### 3.5.4.2.2.1 GetClientLicensorCert
@@ -6731,7 +6731,7 @@ maxOccurs="1"
 | [ArrayOfGetClientLicensorCertParams](#Section_3.5.4.2.3.1) | An array of [GetClientLicensorCertParams](#Section_3.5.4.2.3.3). |
 | [ArrayOfGetClientLicensorCertResponse](#Section_3.5.4.2.3.2) | Contains an array of [**CLCs**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f). |
 | GetClientLicensorCertParams | Contains a user identity [**certificate chain**](#gt_certificate-chain). |
-| [GetClientLicensorCertResponse](#Section_3.5.4.2.3.4) | Contains an [ArrayOfXmlNode](#Section_2.2.4.1) that represents a CLC. |
+| [GetClientLicensorCertResponse](#Section_3.5.4.2.2.2) | Contains an [ArrayOfXmlNode](#Section_2.2.4.1) that represents a CLC. |
 
 <a id="Section_3.5.4.2.3.1"></a>
 ###### 3.5.4.2.3.1 ArrayOfGetClientLicensorCertParams
@@ -6759,7 +6759,7 @@ maxOccurs="unbounded"
 <a id="Section_3.5.4.2.3.2"></a>
 ###### 3.5.4.2.3.2 ArrayOfGetClientLicensorCertResponse
 
-The ArrayOfGetClientLicensorCertResponse complex type contains an array of [GetClientLicensorCertResponse](#Section_3.5.4.2.3.4) types that each contain a [**certificate chain**](#gt_certificate-chain) representing a [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f). The CLC grants permissions to the client on behalf of the server so the client can sign issuance [**licenses**](#gt_license) itself.
+The ArrayOfGetClientLicensorCertResponse complex type contains an array of [GetClientLicensorCertResponse](#Section_3.5.4.2.2.2) types that each contain a [**certificate chain**](#gt_certificate-chain) representing a [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f). The CLC grants permissions to the client on behalf of the server so the client can sign issuance [**licenses**](#gt_license) itself.
 
 <xs:complexType name="ArrayOfGetClientLicensorCertResponse">
 
@@ -6851,7 +6851,7 @@ None.
 <a id="Section_3.6.3"></a>
 ### 3.6.3 Initialization
 
-See section common server [Initialization (section 3.1.3)](#Section_3.3.3).
+See section common server [Initialization (section 3.1.3)](#Section_3.1.3).
 
 <a id="Section_3.6.4"></a>
 ### 3.6.4 Message Processing Events and Sequencing Rules
@@ -6880,8 +6880,8 @@ In the [EnrolleeServerInformation](#Section_3.6.4.1.4.6) complex type (section 3
 - **URL** SHOULD be set to **baseURL** from **ServerState**.
 In the [EnrolleeRevocationInformation (section 3.6.4.1.4.3)](#Section_3.6.4.1.4.3) complex type (section 3.6.4.1.4.3), the elements MUST be populated as follows:
 
-- The [RevocationTypeEnum (section 3.6.4.1.2.1)](#Section_3.6.4.2.2.1) MUST be set to **revocationType** from **ServerState**.
-- The [ArrayOfRevocationAuthorityInformation (section 3.6.4.1.4.4)](#Section_3.6.4.2.3.1) MUST be set to **revocationAuthorities** from **ServerState**.
+- The [RevocationTypeEnum (section 3.6.4.1.2.1)](#Section_3.6.4.1.2.1) MUST be set to **revocationType** from **ServerState**.
+- The [ArrayOfRevocationAuthorityInformation (section 3.6.4.1.4.4)](#Section_3.6.4.1.4.4) MUST be set to **revocationAuthorities** from **ServerState**.
 <a id="Section_3.6.4.1.1"></a>
 ##### 3.6.4.1.1 Messages
 
@@ -6917,7 +6917,7 @@ The Enroll response MUST be as follows. The minimum and maximum versions in the 
 
 | Simple Type | Description |
 | --- | --- |
-| [RevocationTypeEnum](#Section_3.6.4.2.2.1) | Indicates a particular type of revocation authority. |
+| [RevocationTypeEnum](#Section_3.6.4.1.2.1) | Indicates a particular type of revocation authority. |
 
 <a id="Section_3.6.4.1.2.1"></a>
 ###### 3.6.4.1.2.1 RevocationTypeEnum
@@ -6944,8 +6944,8 @@ The RevocationTypeEnum complex type indicates a particular type of revocation au
 | Element | Description |
 | --- | --- |
 | [Enroll](#Section_3.6.4.1.3.1) | Contains the body of an Enroll request operation. |
-| [RevocationAuthorityInformation](#Section_3.6.4.2.3.1) | Describes the public key of a third-party revocation authority that is allowed to revoke the [**SLC**](#gt_server-licensor-certificate-slc). |
-| [EnrollResponse](#Section_3.6.4.1.4.7) | Contains the body of an Enroll response operation. |
+| [RevocationAuthorityInformation](#Section_3.6.4.1.3.2) | Describes the public key of a third-party revocation authority that is allowed to revoke the [**SLC**](#gt_server-licensor-certificate-slc). |
+| [EnrollResponse](#Section_3.6.4.1.3.3) | Contains the body of an Enroll response operation. |
 
 <a id="Section_3.6.4.1.3.1"></a>
 ###### 3.6.4.1.3.1 Enroll
@@ -7016,10 +7016,10 @@ type="tns:EnrollResponse" />
 | [EnrollParameters](#Section_3.6.4.1.4.1) | Contains parameters for an Enroll request. |
 | [X509Information](#Section_3.6.4.1.4.2) | Contains binary-formatted X509 information. |
 | [EnrolleeRevocationInformation](#Section_3.6.4.1.4.3) | Contains information about the enrollee's revocation authorities. |
-| [ArrayOfRevocationAuthorityInformation](#Section_3.6.4.2.3.1) | Container for revocation authority information. |
-| [RevocationAuthorityInformation](#Section_3.6.4.2.3.1) | Contains a binary public key. |
+| [ArrayOfRevocationAuthorityInformation](#Section_3.6.4.1.4.4) | Container for revocation authority information. |
+| [RevocationAuthorityInformation](#Section_3.6.4.1.3.2) | Contains a binary public key. |
 | [EnrolleeServerInformation](#Section_3.6.4.1.4.6) | Contains data about the enrollee's server. |
-| [EnrollResponse](#Section_3.6.4.1.4.7) | Contains a response to an Enroll request. |
+| [EnrollResponse](#Section_3.6.4.1.3.3) | Contains a response to an Enroll request. |
 | [ArrayOfString](#Section_3.6.4.1.4.8) | Contains an array of strings. |
 
 <a id="Section_3.6.4.1.4.1"></a>
@@ -7105,7 +7105,7 @@ type="tns:ArrayOfRevocationAuthorityInformation" />
 
 **RevocationType:** The revocation type. MUST be either "StandardRevocation" or "CustomRevocation", specified as a string. Although "NonRevocable" is specified as a possible value by WSDL, it is not supported. "StandardRevocation" indicates that the issuer can revoke the [**SLC**](#gt_server-licensor-certificate-slc). "CustomRevocation" indicates that a third party specified by **aRevocationAuthorities** can revoke the SLC. "StandardRevocation" is recommended.
 
-**aRevocationAuthorities:** MUST exist only if **RevocationType** is set to "CustomRevocation"; otherwise, MUST be empty. If **RevocationType** is set to "CustomRevocation", this MUST contain one or more [RevocationAuthorityInformation](#Section_3.6.4.2.3.1) elements.
+**aRevocationAuthorities:** MUST exist only if **RevocationType** is set to "CustomRevocation"; otherwise, MUST be empty. If **RevocationType** is set to "CustomRevocation", this MUST contain one or more [RevocationAuthorityInformation](#Section_3.6.4.1.3.2) elements.
 
 <a id="Section_3.6.4.1.4.4"></a>
 ###### 3.6.4.1.4.4 ArrayOfRevocationAuthorityInformation
@@ -7247,10 +7247,10 @@ In the [EnrolleeServerInformation](#Section_3.6.4.1.4.6) complex type (section 3
 - **Version** SHOULD be set to **serverVersion** from **ServerState**.
 - **Name** SHOULD be set to **name** from **ServerState**.
 - **URL** SHOULD be set to **baseURL** from **ServerState**.
-In the [EnrolleeRevocationInformation (section 3.6.4.2.4.2)](#Section_3.6.4.1.4.3) complex type (section 3.6.4.2.4.2), the elements MUST be populated as follows:
+In the [EnrolleeRevocationInformation (section 3.6.4.2.4.2)](#Section_3.6.4.2.4.2) complex type (section 3.6.4.2.4.2), the elements MUST be populated as follows:
 
 - The [RevocationTypeEnum (section 3.6.4.2.2.1)](#Section_3.6.4.2.2.1) MUST be set to **revocationType** from **ServerState**.
-- The [ArrayOfRevocationAuthorityInformation (section 3.6.4.2.4.4)](#Section_3.6.4.2.3.1) MUST be set to **revocationAuthorities** from **ServerState**.
+- The [ArrayOfRevocationAuthorityInformation (section 3.6.4.2.4.4)](#Section_3.6.4.2.4.4) MUST be set to **revocationAuthorities** from **ServerState**.
 <a id="Section_3.6.4.2.1"></a>
 ##### 3.6.4.2.1 Messages
 
@@ -7302,11 +7302,11 @@ xmlns="http://microsoft.com/DRM/EnrollmentService">/>
 
 </s:schema>
 
-**EnrollmentParameters.RevocationInformation:** MUST be an [EnrolleeRevocationInformation (section 3.6.4.2.4.2)](#Section_3.6.4.1.4.3) complex type. The **RevocationType** element MUST be either "StandardRevocation" or "CustomRevocation", specified as a string. "StandardRevocation" indicates that the issuer can revoke the [**SLC**](#gt_server-licensor-certificate-slc). "CustomRevocation" indicates that a third party specified by **aRevocationAuthorities** can revoke the SLC. "StandardRevocation" is recommended. The **aRevocationAuthorities** element MUST exist only if **RevocationType** is set to "CustomRevocation" and MUST be empty otherwise. If **RevocationType** is set to "CustomRevocation", this MUST contain one or more [RevocationAuthorityInformation](#Section_3.6.4.2.3.1) elements, as specified in section 3.6.4.2.4.5.
+**EnrollmentParameters.RevocationInformation:** MUST be an [EnrolleeRevocationInformation (section 3.6.4.2.4.2)](#Section_3.6.4.2.4.2) complex type. The **RevocationType** element MUST be either "StandardRevocation" or "CustomRevocation", specified as a string. "StandardRevocation" indicates that the issuer can revoke the [**SLC**](#gt_server-licensor-certificate-slc). "CustomRevocation" indicates that a third party specified by **aRevocationAuthorities** can revoke the SLC. "StandardRevocation" is recommended. The **aRevocationAuthorities** element MUST exist only if **RevocationType** is set to "CustomRevocation" and MUST be empty otherwise. If **RevocationType** is set to "CustomRevocation", this MUST contain one or more [RevocationAuthorityInformation](#Section_3.6.4.1.3.2) elements, as specified in section 3.6.4.2.4.5.
 
-**EnrollmentParameters.CertificatePublicKey:** MUST be an [EnrolleeCertificatePublicKey (section 3.6.4.2.4.1)](#Section_2.2.9.1.6) complex type. The **aPublicKeyBytes** element MUST contain the server's RSA PKCS#1-encoded public key as a base64-encoded string. **GUID** MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the server, represented as a literal ASCII string enclosed in braces.
+**EnrollmentParameters.CertificatePublicKey:** MUST be an [EnrolleeCertificatePublicKey (section 3.6.4.2.4.1)](#Section_3.6.4.2.4.1) complex type. The **aPublicKeyBytes** element MUST contain the server's RSA PKCS#1-encoded public key as a base64-encoded string. **GUID** MUST be a unique [**GUID**](#gt_globally-unique-identifier-guid) that identifies the server, represented as a literal ASCII string enclosed in braces.
 
-**EnrollmentParameters.EnrolleeInformation:** MUST be an [EnrolleeServerInformation (section 3.6.4.2.4.3)](#Section_3.6.4.1.4.6) complex type. **Version** contains version information. The enrollment service validates that **Version** is not NULL and is not an empty string. The [**SKU**](#gt_stock-keeping-unit-sku), Name, and **URL** elements are ignored by the enrollment service.
+**EnrollmentParameters.EnrolleeInformation:** MUST be an [EnrolleeServerInformation (section 3.6.4.2.4.3)](#Section_3.6.4.2.4.3) complex type. **Version** contains version information. The enrollment service validates that **Version** is not NULL and is not an empty string. The [**SKU**](#gt_stock-keeping-unit-sku), Name, and **URL** elements are ignored by the enrollment service.
 
 <a id="Section_3.6.4.2.1.2"></a>
 ###### 3.6.4.2.1.2 Asynchronous Enrollment Response
@@ -7356,7 +7356,7 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 | Simple Type | Description |
 | --- | --- |
-| [RevocationTypeEnum](#Section_3.6.4.2.2.1) | Indicates a particular type of revocation authority. |
+| [RevocationTypeEnum](#Section_3.6.4.1.2.1) | Indicates a particular type of revocation authority. |
 
 <a id="Section_3.6.4.2.2.1"></a>
 ###### 3.6.4.2.2.1 RevocationTypeEnum
@@ -7382,7 +7382,7 @@ The RevocationTypeEnum complex type indicates a particular type of revocation au
 
 | Elements | Description |
 | --- | --- |
-| [RevocationAuthorityInformation](#Section_3.6.4.2.3.1) | Describes the public key of a third-party revocation authority that is allowed to revoke the SLC. |
+| [RevocationAuthorityInformation](#Section_3.6.4.1.3.2) | Describes the public key of a third-party revocation authority that is allowed to revoke the SLC. |
 
 <a id="Section_3.6.4.2.3.1"></a>
 ###### 3.6.4.2.3.1 RevocationAuthorityInformation
@@ -7406,11 +7406,11 @@ Describes the public key of a third-party revocation authority that is allowed t
 
 | Complex Types | Description |
 | --- | --- |
-| [EnrolleeCertificatePublicKey](#Section_2.2.9.1.6) | Contains a public key and an associated [**GUID**](#gt_globally-unique-identifier-guid). |
+| [EnrolleeCertificatePublicKey](#Section_3.6.4.2.4.1) | Contains a public key and an associated [**GUID**](#gt_globally-unique-identifier-guid). |
 | [EnrolleeRevocationInformation](#Section_3.6.4.1.4.3) | Contains information about the enrollee's revocation authorities. |
 | [EnrolleeServerInformation](#Section_3.6.4.1.4.6) | Contains data about the enrollee's server. |
-| [ArrayOfRevocationAuthorityInformation](#Section_3.6.4.2.3.1) | Container for revocation authority information. |
-| [RevocationAuthorityInformation](#Section_3.6.4.2.3.1) | Contains a binary public key. |
+| [ArrayOfRevocationAuthorityInformation](#Section_3.6.4.1.4.4) | Container for revocation authority information. |
+| [RevocationAuthorityInformation](#Section_3.6.4.1.3.2) | Contains a binary public key. |
 
 <a id="Section_3.6.4.2.4.1"></a>
 ###### 3.6.4.2.4.1 EnrolleeCertificatePublicKey
@@ -7439,7 +7439,7 @@ type="s1:guid" />
 
 **aPublicKeyBytes:** MUST contain the server's RSA PKCS#1-encoded public key as a base64-encoded string.
 
-**Guid:** MUST be a unique GUID that identifies the server, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. If the server has not previously acquired an SLC chain as specified in section [3.1.3.2](#Section_3.1.3.2), the server generates a new GUID. Otherwise, the server uses the GUID specified in the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) element of its SLC as specified in section 2.2.9.3.3.
+**Guid:** MUST be a unique GUID that identifies the server, represented as a literal [**ASCII**](#gt_ascii) string enclosed in braces. If the server has not previously acquired an SLC chain as specified in section [3.1.3.2](#Section_3.1.3.2), the server generates a new GUID. Otherwise, the server uses the GUID specified in the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) element of its SLC as specified in section 2.2.9.3.3.
 
 <a id="Section_3.6.4.2.4.2"></a>
 ###### 3.6.4.2.4.2 EnrolleeRevocationInformation
@@ -7575,14 +7575,14 @@ None.
 <a id="Section_3.7.3"></a>
 ### 3.7.3 Initialization
 
-See section common server [Initialization (section 3.1.3)](#Section_3.3.3).
+See section common server [Initialization (section 3.1.3)](#Section_3.1.3).
 
 <a id="Section_3.7.4"></a>
 ### 3.7.4 Message Processing Events and Sequencing Rules
 
 | Operation | Description |
 | --- | --- |
-| [GetLicensorCertificate Operation](#Section_3.7.4.1.2.1) | This request is used to acquire the [**SLC**](#gt_server-licensor-certificate-slc) chain from a server during [**online publishing**](#gt_online-publishing). |
+| [GetLicensorCertificate Operation](#Section_3.7.4.1) | This request is used to acquire the [**SLC**](#gt_server-licensor-certificate-slc) chain from a server during [**online publishing**](#gt_online-publishing). |
 | [FindServiceLocationsForUser Operation](#Section_3.7.4.2.2.1) | This request is used to discover the appropriate server for various services for a given user. |
 
 <a id="Section_3.7.4.1"></a>
@@ -8244,7 +8244,7 @@ The ServerInfoType simple type enumerates each of the possible types of informat
 
 **ServerFeatureInfo**: Requests the set of capabilities that the RMS server supports.
 
-**ServerLicensorCertificate**: Requests the [**server licensor certificate (SLC)**](#gt_server-licensor-certificate-slc) as described in section [3.7.4.1](#Section_3.7.4.1.2.1).
+**ServerLicensorCertificate**: Requests the [**server licensor certificate (SLC)**](#gt_server-licensor-certificate-slc) as described in section [3.7.4.1](#Section_3.7.4.1).
 
 **ServiceLocations**: Requests the [**URLs**](#gt_uniform-resource-locator-url) for [**endpoints**](#gt_endpoint) the server exposes.
 
@@ -8278,13 +8278,13 @@ All of the following ADM elements are persisted in implementation-specific stora
 - [**RAC**](#gt_rms-account-certificate-rac) chain: An XrML 1.2 certificate chain that issues an asymmetric encryption key pair to a user account, bound to a machine. Acquired by making a Certify request to the server.
 - [**CLC Chain**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f): An XrML 1.2 certificate chain that issues an asymmetric signing key pair to a user account, bound to a machine. Acquired by making a [GetClientLicensorCert](#Section_3.5.4.2.2.1) request to the server.
 - **List of official rights templates**: An official rights template is an XrML 1.2 certificate chain that defines usage [**policy**](#gt_policy). This usage policy is used to generate the [**PL**](#gt_publishing-license-pl) chain during [**offline publishing**](#gt_offline-publishing). A list of official rights templates is a collection of official rights templates. A list of official rights templates can be acquired by making an [AcquireTemplate (section 3.4.4.3)](#Section_3.4.4.3) request to the server.
-- [**SLC chain**](#gt_server-licensor-certificate-slc): An XrML 1.2 certificate chain that signs the RMS server's public key into the certificate hierarchy. Acquired by making a [GetLicensorCertificate](#Section_3.7.4.1.2.1) request to the server.
+- [**SLC chain**](#gt_server-licensor-certificate-slc): An XrML 1.2 certificate chain that signs the RMS server's public key into the certificate hierarchy. Acquired by making a [GetLicensorCertificate](#Section_3.7.4.1) request to the server.
 Note that the preceding conceptual data can be implemented using a variety of techniques. Any data structure that stores the preceding conceptual data can be used in the implementation.
 
 <a id="Section_3.8.1.2"></a>
 #### 3.8.1.2 Abstract Interfaces
 
-**GetPolicyName:** An abstract interface provided by the client that returns the [**policy**](#gt_policy) name to use when creating a [**PL**](#gt_publishing-license-pl). This interface takes no parameters and returns the policy name as a string formatted as described in section [2.2.9.7.1](#Section_2.2.9.6.1).
+**GetPolicyName:** An abstract interface provided by the client that returns the [**policy**](#gt_policy) name to use when creating a [**PL**](#gt_publishing-license-pl). This interface takes no parameters and returns the policy name as a string formatted as described in section [2.2.9.7.1](#Section_2.2.9.7.1).
 
 **GetPLID:** An abstract interface provided by the client that returns the PL ID to use when creating a PL. This interface takes no parameters and returns the PL ID as a [**GUID**](#gt_globally-unique-identifier-guid).
 
@@ -8320,7 +8320,7 @@ The client MAY use any of the following discovery mechanisms to locate RMS serve
 
 - [**Active Directory**](#gt_active-directory)
 - Existing client configuration data
-- Discovery of a server from a [DISTRIBUTIONPOINT](#Section_2.2.9.5.3) element in an existing [**license**](#gt_license)
+- Discovery of a server from a [DISTRIBUTIONPOINT](#Section_2.2.9.1.7) element in an existing [**license**](#gt_license)
 The following sections define each of the ways to discover an RMS server.<52>
 
 <a id="Section_3.8.3.2.1"></a>
@@ -8336,7 +8336,7 @@ A client machine MAY<53> be preconfigured with stored server locations.
 <a id="Section_3.8.3.2.3"></a>
 ##### 3.8.3.2.3 Locating an RMS Server by Using Existing Licenses or Certificates
 
-If the client has access to an existing [**PL**](#gt_publishing-license-pl) or [**UL**](#gt_use-license-ul), it MAY discover a server using the [**URL**](#gt_uniform-resource-locator-url) specified in the [DISTRIBUTIONPOINT](#Section_2.2.9.5.3) element in the [**license**](#gt_license). If multiple URLs are specified, the client MAY try any or all of them.
+If the client has access to an existing [**PL**](#gt_publishing-license-pl) or [**UL**](#gt_use-license-ul), it MAY discover a server using the [**URL**](#gt_uniform-resource-locator-url) specified in the [DISTRIBUTIONPOINT](#Section_2.2.9.1.7) element in the [**license**](#gt_license). If multiple URLs are specified, the client MAY try any or all of them.
 
 To find the appropriate server for an [Activate](#Section_3.2.4.1.2.1) request, the client SHOULD make a [FindServiceLocationsForUser](#Section_3.7.4.2.2.1) request to the DISTRIBUTIONPOINT URL requesting [ServiceType](#Section_3.7.4.2.4.1)"ActivationService". This ServiceType is for version 1.0 clients only. All other versions of the client MUST NOT request ServiceType"ActivationService".
 
@@ -8372,11 +8372,11 @@ Sequencing rules for the client can be divided into four sections: client bootst
 
 Client bootstrapping is required before [**offline publishing**](#gt_offline-publishing) or licensing can take place. It is not a prerequisite for [**online publishing**](#gt_online-publishing).
 
-The client MUST activate as a first step in bootstrapping. Activation is the process of certifying a given client machine for use in the RMS system. This is accomplished by binding an encryption key pair to the machine by way of the [**security processor**](#gt_security-processor) and its [**SPC**](#gt_security-processor-certificate-spc). Version 1.0 clients MUST make an [Activate (section 3.2.4.1)](#Section_3.2.4.1.2.1) request to the server to activate. All other versions of the client, including RMS 1.0 SP1, RMS 1.0 SP2, and RMS 2.0, activate themselves without contacting a server. The client generates its own security processor key pair and saves the private key in the **SPC private key** ADM element. The client then generates an SPC signed by the Trusted **SPC Issuer private key**. The client also creates an **SPC Chain** by appending the SPC with the **Trusted SPC Issuer chain** and saves it as the **SPC Chain** ADM element.
+The client MUST activate as a first step in bootstrapping. Activation is the process of certifying a given client machine for use in the RMS system. This is accomplished by binding an encryption key pair to the machine by way of the [**security processor**](#gt_security-processor) and its [**SPC**](#gt_security-processor-certificate-spc). Version 1.0 clients MUST make an [Activate (section 3.2.4.1)](#Section_3.2.4.1) request to the server to activate. All other versions of the client, including RMS 1.0 SP1, RMS 1.0 SP2, and RMS 2.0, activate themselves without contacting a server. The client generates its own security processor key pair and saves the private key in the **SPC private key** ADM element. The client then generates an SPC signed by the Trusted **SPC Issuer private key**. The client also creates an **SPC Chain** by appending the SPC with the **Trusted SPC Issuer chain** and saves it as the **SPC Chain** ADM element.
 
-The user MUST be certified to participate in the RMS system. This is accomplished by binding an encryption key pair to both the user and the client machine by way of a [**RAC**](#gt_rms-account-certificate-rac). The user MUST have a RAC to access [**protected content**](#gt_protected-content) or to publish protected content offline. The client uses the [Certify (section 3.3.4.1)](#Section_3.3.4.1.2.1) method to acquire a RAC.
+The user MUST be certified to participate in the RMS system. This is accomplished by binding an encryption key pair to both the user and the client machine by way of a [**RAC**](#gt_rms-account-certificate-rac). The user MUST have a RAC to access [**protected content**](#gt_protected-content) or to publish protected content offline. The client uses the [Certify (section 3.3.4.1)](#Section_3.3.4.1) method to acquire a RAC.
 
-To publish offline, the user MUST have a signing key pair. The [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) binds a signing key pair to a user through the RAC. A user MUST have a CLC to create protected content offline. The client uses the [FindServiceLocationsForUser (section 3.7.4.2)](#Section_3.7.4.2.2.1) method to find the [**licensing**](#gt_license) server for the user and the [GetClientLicensorCert (section 3.5.4.2)](#Section_3.5.4.2.2.1) method to acquire a CLC from that server.
+To publish offline, the user MUST have a signing key pair. The [**CLC**](#gt_f5d0f10f-abb4-4219-9006-27c19ea7bb8f) binds a signing key pair to a user through the RAC. A user MUST have a CLC to create protected content offline. The client uses the [FindServiceLocationsForUser (section 3.7.4.2)](#Section_3.7.4.2) method to find the [**licensing**](#gt_license) server for the user and the [GetClientLicensorCert (section 3.5.4.2)](#Section_3.5.4.2) method to acquire a CLC from that server.
 
 <a id="Section_3.8.4.2"></a>
 #### 3.8.4.2 Template Acquisition
@@ -8386,21 +8386,21 @@ The RMS client SHOULD<54> acquire a list of official rights policy templates fro
 <a id="Section_3.8.4.3"></a>
 #### 3.8.4.3 Online Publishing
 
-Client bootstrapping is not required for [**online publishing**](#gt_online-publishing). To create a [**PL**](#gt_publishing-license-pl), the client MUST have the public key of the licensing server so it can encrypt the [**content key**](#gt_content-key) and usage policies to the server. As the server's public key is stored in the [**SLC**](#gt_server-licensor-certificate-slc), the client MUST use the [GetLicensorCertificate (section 3.7.4.1)](#Section_3.7.4.1.2.1) method to acquire the server's SLC.
+Client bootstrapping is not required for [**online publishing**](#gt_online-publishing). To create a [**PL**](#gt_publishing-license-pl), the client MUST have the public key of the licensing server so it can encrypt the [**content key**](#gt_content-key) and usage policies to the server. As the server's public key is stored in the [**SLC**](#gt_server-licensor-certificate-slc), the client MUST use the [GetLicensorCertificate (section 3.7.4.1)](#Section_3.7.4.1) method to acquire the server's SLC.
 
 The client MAY include [DISTRIBUTIONPOINT (section 2.2.9.7.3)](#Section_2.2.9.7.3) of type "Referral-Info". The **ADDRESS** element SHOULD contain the [**URL**](#gt_uniform-resource-locator-url) of the server or an email address when the object type is "Referral-Info". The **NAME** element SHOULD contain the display name for the URL or the email when the object type is "Referral-Info". The **GUID** element SHOULD be a unique [**GUID**](#gt_globally-unique-identifier-guid) for this **DISTRIBUTIONPOINT** element.
 
 The client SHOULD set the [ISSUEDTIME (section 2.2.9.1.1)](#Section_2.2.9.1.1) element of the PL to the current time, expressed in [**UTC**](#gt_coordinated-universal-time-utc).
 
-The client SHOULD include a principal element in the [ISSUEDPRINCIPALS (section 2.2.9.7.4)](#Section_2.2.9.7.4) element. The object and public key of the **principal** element SHOULD be a verbatim copy of the object and public key of **principal** element of the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) in the SLC.
+The client SHOULD include a principal element in the [ISSUEDPRINCIPALS (section 2.2.9.7.4)](#Section_2.2.9.7.4) element. The object and public key of the **principal** element SHOULD be a verbatim copy of the object and public key of **principal** element of the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) in the SLC.
 
-For a PL based on an official rights template, the [DESCRIPTOR](#Section_2.2.9.6.1) element of the PL SHOULD be copied verbatim from the [DESCRIPTOR](#Section_2.2.9.10.1) element of the rights template. For PL's not based on an official rights template, the name field of the DESCRIPTOR element of the PL SHOULD be set to the value returned by the **GetPolicyName** abstract interface. The GUID field of the DESCRIPTOR SHOULD be set to the value returned by the **GetPLID** abstract interface.
+For a PL based on an official rights template, the [DESCRIPTOR](#Section_2.2.9.7.1) element of the PL SHOULD be copied verbatim from the [DESCRIPTOR](#Section_2.2.9.10.1) element of the rights template. For PL's not based on an official rights template, the name field of the DESCRIPTOR element of the PL SHOULD be set to the value returned by the **GetPolicyName** abstract interface. The GUID field of the DESCRIPTOR SHOULD be set to the value returned by the **GetPLID** abstract interface.
 
 The PL can include an [OWNER (section 2.2.9.7.5)](#Section_2.2.9.7.5) element. The OWNER element is an optional element specified by the application. The OWNER element identifies the content owner or author.
 
-The client SHOULD call the **GetRevocationPoint** abstract interface with the GUID field of the DESCRIPTOR as a parameter to get a revocation point for the PL. If the revocation point is not null, the **revocationpoint** field of the PL SHOULD be a [CONDITIONLIST (section 2.2.9.7.9)](#Section_2.2.9.9.10) element. The **type** field of CONDITIONLIST SHOULD be set to the type property of the revocation point. The **id** field of CONDITIONLIST SHOULD be set to the ID property of the revocation point. The **address** field of CONDITIONLIST SHOULD be set to the Address property of the revocation point. The **name** field of CONDITIONLIST SHOULD be set to the Name property of the revocation point. The **days**, **hours**, **minutes** and **seconds** fields of CONDITIONLIST SHOULD be set to the revocation point's Time Interval properties: Days, Hours, Minutes, and Seconds. The **modulus** field of the **publickey** field of CONDITIONLIST SHOULD be set to the base64-encoded value of the revocation list Public Key property of the revocation point. The **key length** field of the **publickey** field of the CONDITIONLIST SHOULD be set to the length, in bits, of the revocation list Public Key property of the revocation point.
+The client SHOULD call the **GetRevocationPoint** abstract interface with the GUID field of the DESCRIPTOR as a parameter to get a revocation point for the PL. If the revocation point is not null, the **revocationpoint** field of the PL SHOULD be a [CONDITIONLIST (section 2.2.9.7.9)](#Section_2.2.9.7.9) element. The **type** field of CONDITIONLIST SHOULD be set to the type property of the revocation point. The **id** field of CONDITIONLIST SHOULD be set to the ID property of the revocation point. The **address** field of CONDITIONLIST SHOULD be set to the Address property of the revocation point. The **name** field of CONDITIONLIST SHOULD be set to the Name property of the revocation point. The **days**, **hours**, **minutes** and **seconds** fields of CONDITIONLIST SHOULD be set to the revocation point's Time Interval properties: Days, Hours, Minutes, and Seconds. The **modulus** field of the **publickey** field of CONDITIONLIST SHOULD be set to the base64-encoded value of the revocation list Public Key property of the revocation point. The **key length** field of the **publickey** field of the CONDITIONLIST SHOULD be set to the length, in bits, of the revocation list Public Key property of the revocation point.
 
-After the PL is constructed, it MUST be signed by the server before it can be used for licensing. The client MUST use the [AcquireIssuanceLicense (section 3.5.4.1)](#Section_3.5.4.1.2.1) method to have the server sign the PL.
+After the PL is constructed, it MUST be signed by the server before it can be used for licensing. The client MUST use the [AcquireIssuanceLicense (section 3.5.4.1)](#Section_3.5.4.1) method to have the server sign the PL.
 
 <a id="Section_3.8.4.4"></a>
 #### 3.8.4.4 Offline Publishing
@@ -8414,7 +8414,7 @@ Offline publishing is the recommended method of publishing for client applicatio
 <a id="Section_3.8.4.5"></a>
 #### 3.8.4.5 Licensing
 
-To access the [**protected content**](#gt_protected-content), a user MUST have a [**UL**](#gt_use-license-ul) that binds the [**content key**](#gt_content-key) to the [**RAC**](#gt_rms-account-certificate-rac). To acquire a UL, the client MUST submit the **RAC chain** and [**PL**](#gt_publishing-license-pl) associated with the protected content to the server by using the [AcquireLicense (section 3.4.4.1)](#Section_3.4.4.1.2.1) method.
+To access the [**protected content**](#gt_protected-content), a user MUST have a [**UL**](#gt_use-license-ul) that binds the [**content key**](#gt_content-key) to the [**RAC**](#gt_rms-account-certificate-rac). To acquire a UL, the client MUST submit the **RAC chain** and [**PL**](#gt_publishing-license-pl) associated with the protected content to the server by using the [AcquireLicense (section 3.4.4.1)](#Section_3.4.4.1) method.
 
 <a id="Section_3.8.5"></a>
 ### 3.8.5 Timer Events
@@ -13292,9 +13292,9 @@ The Windows RMS implementation supports HTTPS for securing its ports, although S
 
 <8> Section 2.2.9.3.3: Applicable Windows Server releases set the value attribute of the *[[- serversku -]]* SECURITYLEVEL element to a string containing additional version information of the server. This information is not used in the RMS protocol.
 
-<9> Section 2.2.9.4.2: In Windows, the *[[- type -]]* element is taken from the OBJECT of the PRINCIPAL of the [ISSUEDPRINCIPALS](#Section_2.2.9.1.11) of the issuer's certificate. For a version 1 client, this element is set to "MS-DRM-Server". For a version 1 SP1, version 1 SP2, or version 2 client, this element is set to "MS-DRM-Desktop-Security-Processor".
+<9> Section 2.2.9.4.2: In Windows, the *[[- type -]]* element is taken from the OBJECT of the PRINCIPAL of the [ISSUEDPRINCIPALS](#Section_2.2.9.3.3) of the issuer's certificate. For a version 1 client, this element is set to "MS-DRM-Server". For a version 1 SP1, version 1 SP2, or version 2 client, this element is set to "MS-DRM-Desktop-Security-Processor".
 
-<10> Section 2.2.9.4.2: In Windows, the *[[- name -]]* element used in the [ISSUER](#Section_2.2.9.6.2) element has the following values:
+<10> Section 2.2.9.4.2: In Windows, the *[[- name -]]* element used in the [ISSUER](#Section_2.2.9.4.2) element has the following values:
 
 - For a version 1 client, this value is "Machine Activation Server".
 - For a version 1 SP1, version 1 SP2, or version 2 client, this value is "Microsoft DRM Production Desktop Security Processor Activation Certificate".

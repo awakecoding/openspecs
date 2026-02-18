@@ -132,7 +132,7 @@ Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other 
 This document uses the following terms:
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the Active Directory service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the Active Directory service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_domain-controller-dc"></a>
 **domain controller (DC)**: The service, running on a server, that implements Active Directory, or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When Active Directory is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its forest. If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its forest. For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When Active Directory is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When Active Directory is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its forest. The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
@@ -211,7 +211,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MD5Collision] Klima, V., "Tunnels in Hash Functions: MD5 Collisions Within a Minute", March 2006, [http://eprint.iacr.org/2006/105.pdf](https://go.microsoft.com/fwlink/?LinkId=89937)
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MSFT-WTSRE] Microsoft Corporation, "Windows Time Service Registry Entries", [http://technet.microsoft.com/en-us/library/cc773263(WS.10).aspx#w2k3tr_times_tools_uhlp](https://go.microsoft.com/fwlink/?LinkId=206411)
 
@@ -238,7 +238,7 @@ The NTP Authentication Extensions use the Netlogon Remote Protocol (as specified
 
 As specified in [MS-NRPC] section 3.5.4.3, the client uses the Netlogon [**domain controller locator**](#gt_domain-controller-locator) service to find a [**domain controller (DC)**](#gt_domain-controller-dc) that is a time source. The client and domain controller need to have pre-established trusted account information in the domain. The preestablished trusted account information is used to establish cryptographic keys and associated key identifiers for NTP authentication between the client and server.
 
-The client sends an authentication request for time-synchronization information with the key identifier. The server constructs the response with the time information requested. The server computes the crypto-checksum of the message. The server replies in an authentication response with the time information requested and the computed crypto-checksum. The client authenticates the authentication response by computing and matching the checksum. The client accepts only authenticated responses. The sequence diagram is as described in sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_3.2.5).
+The client sends an authentication request for time-synchronization information with the key identifier. The server constructs the response with the time information requested. The server computes the crypto-checksum of the message. The server replies in an authentication response with the time information requested and the computed crypto-checksum. The client authenticates the authentication response by computing and matching the checksum. The client accepts only authenticated responses. The sequence diagram is as described in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 This document describes an authentication mechanism that differs from the interim NTP authentication extension defined in [[RFC1305]](https://go.microsoft.com/fwlink/?LinkId=90272) Appendix C as follows:
 
@@ -286,7 +286,7 @@ Clients that are joined to a domain use the NTP Authentication Extensions to syn
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The NTP Authentication Extensions incorporate implicit capability negotiation based on the NTP message length, as described in sections [3.1.5](#Section_3.2.5), [3.1.6](#Section_3.1.6), and [3.2.5](#Section_3.2.5).
+The NTP Authentication Extensions incorporate implicit capability negotiation based on the NTP message length, as described in sections [3.1.5](#Section_3.1.5), [3.1.6](#Section_3.1.6), and [3.2.5](#Section_3.2.5).
 
 NTP version 3, as specified in [[RFC1305]](https://go.microsoft.com/fwlink/?LinkId=90272), and SNTP version 4, as specified in [[RFC2030]](https://go.microsoft.com/fwlink/?LinkId=103353), apply to this extension.
 
@@ -377,7 +377,7 @@ The optional **Authenticator** field used in the NTP authentication extension wa
 
 The **Authenticator** field is a 160-bit field. The **ExtendedAuthenticator** field is a 576-bit field. When using one of these extensions, the total NTP message length is 68 bytes or 120 bytes, respectively. Clients and [**domain controllers**](#gt_domain-controller-dc) rely on the NTP message length to detect the use of these extensions. For more information about the **Authenticator** field, see sections 2.2.1 and 2.2.2. For more information about the **ExtendedAuthenticator** field, see sections 2.2.3 and 2.2.4.
 
-The key identifier in the **Key Identifier** subfield in both the **Authenticator** and **ExtendedAuthenticator** fields identifies the cryptographic key used to generate the crypto-checksum. The association of key identifier and cryptographic key is established as a prerequisite, as explained in section [1.3.2](#Section_1.3.2). The method to compute the crypto-checksum is specified in sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_3.2.5).
+The key identifier in the **Key Identifier** subfield in both the **Authenticator** and **ExtendedAuthenticator** fields identifies the cryptographic key used to generate the crypto-checksum. The association of key identifier and cryptographic key is established as a prerequisite, as explained in section [1.3.2](#Section_1.3.2). The method to compute the crypto-checksum is specified in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Client NTP Request
@@ -390,7 +390,7 @@ packet-beta
   32-127: "Crypto-Checksum (16 bytes)"
 ```
 
-**Key Identifier (4 bytes):** A 32-bit unsigned integer in little-endian byte order (least significant byte first). This field identifies the cryptographic key used to generate the crypto-checksum. The least significant 31 bits are the least significant 31 bits of a [**relative identifier (RID)**](#gt_relative-identifier-rid) for a trusted account, as described in section [3.1.3](#Section_3.1.3). The most significant bit of the key identifier is a 1-bit key selector that identifies the cryptographic key to use in the pair of keys associated with the account. For more information on the semantics of this key selector, see sections [3.1.5](#Section_3.2.5), [3.1.6](#Section_3.1.6), and [3.2.5](#Section_3.2.5).
+**Key Identifier (4 bytes):** A 32-bit unsigned integer in little-endian byte order (least significant byte first). This field identifies the cryptographic key used to generate the crypto-checksum. The least significant 31 bits are the least significant 31 bits of a [**relative identifier (RID)**](#gt_relative-identifier-rid) for a trusted account, as described in section [3.1.3](#Section_3.1.3). The most significant bit of the key identifier is a 1-bit key selector that identifies the cryptographic key to use in the pair of keys associated with the account. For more information on the semantics of this key selector, see sections [3.1.5](#Section_3.1.5), [3.1.6](#Section_3.1.6), and [3.2.5](#Section_3.2.5).
 
 **Crypto-Checksum (16 bytes):** A 128-bit crypto-checksum that the encryption procedure computes. For more information, see section 3.2.5.<3>
 
@@ -811,9 +811,9 @@ If a validated time source was obtained in one of the above steps, it is returne
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-A higher-layer triggered event is used to immediately start the time synchronization process. This event is triggered by the W32TimeSync method in [MS-W32T](../MS-W32T/MS-W32T.md). For example, when an end user wants to immediately initiate synchronization of a client computer's time with that of a server, and when the client computer is configured for authenticated NTP time synchronization, the W32TimeSync method is used to trigger this event. When this event is triggered, the client polling timer specified in section [3.1.2](#Section_3.2.2) expires immediately.
+A higher-layer triggered event is used to immediately start the time synchronization process. This event is triggered by the W32TimeSync method in [MS-W32T](../MS-W32T/MS-W32T.md). For example, when an end user wants to immediately initiate synchronization of a client computer's time with that of a server, and when the client computer is configured for authenticated NTP time synchronization, the W32TimeSync method is used to trigger this event. When this event is triggered, the client polling timer specified in section [3.1.2](#Section_3.1.2) expires immediately.
 
-The client also responds to two higher-layer triggered events related to domain join and domain unjoin. These higher-layer triggered events are used to modify the configuration of the client when entering or leaving membership in a domain, respectively. For more information on domain membership, refer to [MS-AUTHSOD](#Section_1.3) section 1.1.1.3.
+The client also responds to two higher-layer triggered events related to domain join and domain unjoin. These higher-layer triggered events are used to modify the configuration of the client when entering or leaving membership in a domain, respectively. For more information on domain membership, refer to [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.3.
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Domain Join Processing
@@ -980,7 +980,7 @@ The resulting 512-bit CryptoChecksum value is returned to the caller upon comple
 <a id="Section_3.1.6.1"></a>
 #### 3.1.6.1 Client Polling Timer Event
 
-When the client polling timer expires, the client prepares a [Client NTP Request](#Section_2.2.1) message as described in section [3.1.5](#Section_3.2.5).
+When the client polling timer expires, the client prepares a [Client NTP Request](#Section_2.2.1) message as described in section [3.1.5](#Section_3.1.5).
 
 <a id="Section_3.1.6.2"></a>
 #### 3.1.6.2 Domain Controller Time Source Location Retry Timer Event
@@ -1329,7 +1329,7 @@ packet-beta
   416-447: "0x5E 0xBD 0xA9 0x0E0xB2 0x35 0x54 0x9A0xB2 0xA8 0xB3 0x4F0x50 0x1D 0x62 0x20"
 ```
 
-- The client receives the response and, after it verifies that the message size is 68 bytes, computes the crypto-checksums, as specified in section [3.1.5](#Section_3.2.5). The client finds that one of the calculated crypto-checksums matches the crypto-checksum in the response. The response is, therefore, authenticated successfully, and the client synchronizes its time.
+- The client receives the response and, after it verifies that the message size is 68 bytes, computes the crypto-checksums, as specified in section [3.1.5](#Section_3.1.5). The client finds that one of the calculated crypto-checksums matches the crypto-checksum in the response. The response is, therefore, authenticated successfully, and the client synchronizes its time.
 <a id="Section_5"></a>
 # 5 Security
 

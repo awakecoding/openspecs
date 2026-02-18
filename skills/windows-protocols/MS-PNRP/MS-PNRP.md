@@ -306,7 +306,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The Peer Name Resolution Protocol (PNRP) Version 4.0 uses messages to maintain a [**cloud**](#gt_cloud) of peer [**nodes**](#gt_node), to maintain a distributed cache of [**network endpoint**](#gt_network-endpoint) information, and to transfer requests for [Peer Name](#Section_4.1.3) resolutions between nodes. Together these messages allow applications to use registered Peer Names to obtain corresponding [**endpoint**](#gt_endpoint) information such as IP addresses and ports.
+The Peer Name Resolution Protocol (PNRP) Version 4.0 uses messages to maintain a [**cloud**](#gt_cloud) of peer [**nodes**](#gt_node), to maintain a distributed cache of [**network endpoint**](#gt_network-endpoint) information, and to transfer requests for [Peer Name](#Section_2.2.4) resolutions between nodes. Together these messages allow applications to use registered Peer Names to obtain corresponding [**endpoint**](#gt_endpoint) information such as IP addresses and ports.
 
 PNRP does not provide any mechanism for finding or browsing Peer Names; they are distributed by other means.
 
@@ -321,7 +321,7 @@ The PNRP registration and resolution mechanism does not rely on the existence of
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Identifiers
 
-PNRP uses [Peer Names](#Section_4.1.3) and [**PNRP IDs**](#gt_pnrp-id) to refer to resources within a [**cloud**](#gt_cloud), as illustrated in the following diagram.
+PNRP uses [Peer Names](#Section_2.2.4) and [**PNRP IDs**](#gt_pnrp-id) to refer to resources within a [**cloud**](#gt_cloud), as illustrated in the following diagram.
 
 ![PNRP resource dependencies](media/image1.png)
 
@@ -346,7 +346,7 @@ The Classifier element for a Peer Name is specified by the application registeri
 <a id="Section_1.3.1.2"></a>
 #### 1.3.1.2 PNRP IDs
 
-PNRP defines a numerical namespace for [**PNRP IDs**](#gt_pnrp-id). Each [Peer Name](#Section_4.1.3) is converted to a number, and the numbers are compared to determine proximity within the namespace.
+PNRP defines a numerical namespace for [**PNRP IDs**](#gt_pnrp-id). Each [Peer Name](#Section_2.2.4) is converted to a number, and the numbers are compared to determine proximity within the namespace.
 
 Peer Names are first converted to 128-bit numbers called [**Peer-To-Peer IDs (P2P IDs)**](#gt_peer-to-peer-id-p2p-id) by means of the following hashing function:
 
@@ -390,7 +390,7 @@ The information in a CPA includes:
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Delegation
 
-PNRP also allows one [**Peer Identity**](#gt_peer-identity) to delegate to another Peer Identity permission to advertise its [Peer Names](#Section_4.1.3). The following figure shows the resulting relationship between concepts in this case.
+PNRP also allows one [**Peer Identity**](#gt_peer-identity) to delegate to another Peer Identity permission to advertise its [Peer Names](#Section_2.2.4). The following figure shows the resulting relationship between concepts in this case.
 
 ![PNRP delegation process](media/image2.png)
 
@@ -442,7 +442,7 @@ After a publisher is reached, its [CPA](#Section_1.3.1.3) (and certificate chain
 
 In addition, the PNRP node can optionally participate in the following set of activities. Nodes that do not participate in these activities are known as "Resolve-only" nodes.
 
-- Register and un-register [Peer Names](#Section_4.1.3). When a Peer Name is registered, the PNRP node creates a PNRP ID and CPA. These are entered into a table of locally registered PNRP IDs, and a PNRP resolution is initiated for [PNRP ID + 1] to find the closest match. This request is processed by a number of nodes with PNRP IDs that are very similar to the registered ID. Each recipient that finds that the new PNRP ID falls within its own [**Leaf Set**](#gt_leaf-set) adds the entry for the new PNRP ID to its cache. When the resolve completes, the registering node will learn about an existing node that is numerically close to the registered PNRP ID. From the existing node, it can get the entries for the five numerically closest PNRP IDs on either side of the new PNRP ID (for example, the Leaf Set for that PNRP ID).
+- Register and un-register [Peer Names](#Section_2.2.4). When a Peer Name is registered, the PNRP node creates a PNRP ID and CPA. These are entered into a table of locally registered PNRP IDs, and a PNRP resolution is initiated for [PNRP ID + 1] to find the closest match. This request is processed by a number of nodes with PNRP IDs that are very similar to the registered ID. Each recipient that finds that the new PNRP ID falls within its own [**Leaf Set**](#gt_leaf-set) adds the entry for the new PNRP ID to its cache. When the resolve completes, the registering node will learn about an existing node that is numerically close to the registered PNRP ID. From the existing node, it can get the entries for the five numerically closest PNRP IDs on either side of the new PNRP ID (for example, the Leaf Set for that PNRP ID).
 When a PNRP ID is unregistered, a "Revoke CPA" is sent to two entries from the Leaf Set of the PNRP ID being unregistered. One entry is the numerically closest PNRP ID greater than the local PNRP ID, and the other one is the numerically closest ID less than the local ID. Each recipient checks its cache to determine whether an entry exists for the PNRP ID. If one is found, the recipient removes the entry from its cache. If the entry was in a Leaf Set of a locally registered PNRP ID, the node sends the revoke CPA on to two other members of its Leaf Set.
 
 - Participate in PNRP ID resolutions by other nodes. A node will, upon request, compare a target PNRP ID with entries in its cache to find the entry that is numerically closer to the desired PNRP ID than any that the Resolver has previously used. The node then sends a response to the requester with the associated addresses.
@@ -463,7 +463,7 @@ PNRP uses UDP [[RFC768]](https://go.microsoft.com/fwlink/?LinkId=90490) as a tra
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-It is assumed that a PNRP [**node**](#gt_node) that wants to participate in a given Site Local [**cloud**](#gt_cloud) already knows the name or addresses of a seed server for that [cloud](#Section_37959c9f37b34e449c0240504a91e445).
+It is assumed that a PNRP [**node**](#gt_node) that wants to participate in a given Site Local [**cloud**](#gt_cloud) already knows the name or addresses of a seed server for that [cloud](#Section_1.3.3).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -478,7 +478,7 @@ PNRP has no version-negotiation or capability-negotiation behavior, although it 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-PNRP defines a syntax for [Peer Names](#Section_4.1.3) that can be used by vendors to construct their own names. The legal syntax for a [**Peer Name**](#gt_peer-name) is specified in section [2.2.4](#Section_1.3.1.1).
+PNRP defines a syntax for [Peer Names](#Section_2.2.4) that can be used by vendors to construct their own names. The legal syntax for a [**Peer Name**](#gt_peer-name) is specified in section [2.2.4](#Section_2.2.4).
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -1516,7 +1516,7 @@ id-microsoftp2pgeneral-PeerName OBJECT_IDENTIFIER ::=
 
 PnrpPeerNameString ::= UniversalString (SIZE (1..192))
 
-**PnrpPeerNameString**: An arbitrary Peer Name string. This string is not used by PNRP, except to verify that it exists in the last certificate in the chain and that the value is the same in the first and last certificates in the chain. The **PnrpPeerNameString** value MUST conform to the syntax of a Peer Name, as specified in section [2.2.4](#Section_1.3.1.1).
+**PnrpPeerNameString**: An arbitrary Peer Name string. This string is not used by PNRP, except to verify that it exists in the last certificate in the chain and that the value is the same in the first and last certificates in the chain. The **PnrpPeerNameString** value MUST conform to the syntax of a Peer Name, as specified in section [2.2.4](#Section_2.2.4).
 
 <a id="Section_2.2.3.5.1.4"></a>
 ###### 2.2.3.5.1.4 PnrpRole
@@ -1572,7 +1572,7 @@ id-microsoftp2pgeneral-PeerClassifiers OBJECT_IDENTIFIER ::=
 
 PnrpClassifier ::= UniversalString (SIZE (1..150))
 
-**PnrpClassifier:** A classifier string for which permission is delegated to the next certificate in the chain. For every certificate in the chain other than the first certificate, each classifier MUST be one that is a legal delegate (as specified in section [2.2.3.5.1.5.1](#Section_1.3.2)) based on the same certificate's role, and the previous certificate's classifier list.
+**PnrpClassifier:** A classifier string for which permission is delegated to the next certificate in the chain. For every certificate in the chain other than the first certificate, each classifier MUST be one that is a legal delegate (as specified in section [2.2.3.5.1.5.1](#Section_2.2.3.5.1.5.1)) based on the same certificate's role, and the previous certificate's classifier list.
 
 <a id="Section_2.2.3.5.1.5.1"></a>
 Classifier Delegation
@@ -1706,7 +1706,7 @@ None.
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-A Resolver MUST provide to higher-layer applications and protocols three logical operations that can be invoked: [Opening a Cloud](#Section_3.1.4.1), [Resolving a Peer Name](#Section_3.1.4.4), and [Closing a Cloud](#Section_3.1.4.5).
+A Resolver MUST provide to higher-layer applications and protocols three logical operations that can be invoked: [Opening a Cloud](#Section_4.1.1), [Resolving a Peer Name](#Section_4.1), and [Closing a Cloud](#Section_3.1.4.5).
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Opening a Cloud
@@ -1770,7 +1770,7 @@ In a resolution operation, five inputs are provided by the application or higher
 - A ResolveCriteria corresponding to the OpCode values as specified in section [2.2.2.8](#Section_2.2.2.8), which is used by the higher-layer protocol to resolve specific service records for a given authority and classifier as defined by the higher-layer protocol semantics;
 - A flag indicating whether to consider locally-registered [**PNRP IDs**](#gt_pnrp-id); and
 - An indication in which [**cloud**](#gt_cloud) the resolution is to be done.
-If the cloud has not been opened (for example, no state in the Cloud Table exists), the node MUST fail the request. Otherwise, the Resolver MUST validate that the Peer Name conforms to the syntax as specified in section [2.2.4](#Section_1.3.1.1), and fail the request if it does not conform.
+If the cloud has not been opened (for example, no state in the Cloud Table exists), the node MUST fail the request. Otherwise, the Resolver MUST validate that the Peer Name conforms to the syntax as specified in section [2.2.4](#Section_2.2.4), and fail the request if it does not conform.
 
 If there are no addresses in the Local Endpoint List, the node MUST fail the request.
 
@@ -1809,7 +1809,7 @@ The following parameters MUST be supplied to the resolving logic:
 And optionally:
 
 - *InitialBestMatchRouteEntry*, which is a ROUTE_ENTRY structure used by the protocol during PeerName registration. See section [3.2.4.1](#Section_3.2.4.1) for details.
-- *InitialNextHopRouteEntry*, which is a ROUTE_ENTRY structure used by the protocol during maintenance. See section [3.2.6.2.1](#Section_3.2.6.2.1.1) for details.
+- *InitialNextHopRouteEntry*, which is a ROUTE_ENTRY structure used by the protocol during maintenance. See section [3.2.6.2.1](#Section_3.2.6.2.1) for details.
 A Resolver MUST then perform the following steps:
 
 - Attempt to create a new entry in the Outstanding Resolves Table, and fail the request if one cannot be created. If one was created, initialize the fields as follows.
@@ -1884,7 +1884,7 @@ Upon receiving a [FLOOD](#Section_2.2.2.4) message, a PNRP [**node**](#gt_node) 
 
 - Check whether the FLOOD message conforms to the syntax as specified in section 2.2.2.4, and drop the message if not. Otherwise, continue processing as follows.
 - If the **D** flag is clear, reply with an [ACK](#Section_2.2.2.7) message to the sending node.
-- If a [ROUTE_ENTRY](#Section_2.2.3.4) is supplied in the FLOOD message, begin validating the ROUTE_ENTRY as specified in [Receiving a New ROUTE_ENTRY (section 3.1.5.11)](#Section_3.2.5.1).
+- If a [ROUTE_ENTRY](#Section_2.2.3.4) is supplied in the FLOOD message, begin validating the ROUTE_ENTRY as specified in [Receiving a New ROUTE_ENTRY (section 3.1.5.11)](#Section_3.1.5.11).
 - If a **Revoke CPA** is supplied in the FLOOD message, validate the [CPA](#Section_1.3.1.3) (as specified in section [3.1.5.7](#Section_3.1.5.7)) as a **Revoke CPA** and, if not valid, discard.
 - Extract the **ClassifierHash**, **BinaryAuthority**, and **ServiceLocation** values from the CPA and use them to calculate the [**PNRP ID**](#gt_pnrp-id) for the CPA by using the formulas for P2PID and PNRP ID in section [3.1.4.4.1](#Section_3.1.4.4.1).
 - Remove the ROUTE_ENTRY (if any) for the PNRP ID of the **Revoke CPA** from the cache.
@@ -1893,7 +1893,7 @@ Upon receiving a [FLOOD](#Section_2.2.2.4) message, a PNRP [**node**](#gt_node) 
 
 On receipt of an [AUTHORITY](#Section_2.2.2.6) message, the PNRP [**node**](#gt_node) MUST first check whether the AUTHORITY message conforms to the syntax as specified in section 2.2.2.6, and drop the message if not. Otherwise, look in the Pending List for a [LOOKUP](#Section_2.2.2.8) message or [INQUIRE](#Section_2.2.2.5) message whose **Message ID** matches the **Acked Message ID** in the AUTHORITY message. If none is found, drop the message.
 
-The PNRP node MUST then check whether the [AUTHORITY_BUFFER](#Section_2.2.2.6.1) message is fragmented by comparing the **Size** field in the AUTHORITY message and the received message size. If the AUTHORITY_BUFFER message is not fragmented, it MUST be processed as specified in section [3.1.5.6.1](#Section_3.1.5.6.1.1). Otherwise, the PNRP node MUST start the reassembly process as follows:
+The PNRP node MUST then check whether the [AUTHORITY_BUFFER](#Section_2.2.2.6.1) message is fragmented by comparing the **Size** field in the AUTHORITY message and the received message size. If the AUTHORITY_BUFFER message is not fragmented, it MUST be processed as specified in section [3.1.5.6.1](#Section_3.1.5.6.1). Otherwise, the PNRP node MUST start the reassembly process as follows:
 
 To reassemble fragmented packets into the original AUTHORITY message, a PNRP node MUST use the **Message ID** from the [PNRP Header](#Section_2.2.1) and the **source IP address** and **Port** to look for an existing entry in the Reassembly List. If no entry exists, the node MUST attempt to create one and drop the message if it cannot create one. Otherwise, continue processing as follows.
 
@@ -1917,7 +1917,7 @@ The Outstanding Resolves Table MUST then be checked to find an entry that sent a
 - Add the address used when sending the previous LOOKUP message to the resolve entry's ResolvePath.
 - Increment the entry's TotalUsefulHops.
 - If the **L** flag in the AUTHORITY_BUFFER message is set, increment the resolve entry's SuspiciousCount.
-- If the **N** flag in the AUTHORITY_BUFFER message is clear, begin validating the route entry in the resolve entry's CurrentNextHop, as specified in section [3.1.5.11](#Section_3.2.5.1). Otherwise clear CurrentNextHop because the [**PNRP ID**](#gt_pnrp-id) is no longer registered at that node and remove this node from the cache. In either case, continue processing as follows.
+- If the **N** flag in the AUTHORITY_BUFFER message is clear, begin validating the route entry in the resolve entry's CurrentNextHop, as specified in section [3.1.5.11](#Section_3.1.5.11). Otherwise clear CurrentNextHop because the [**PNRP ID**](#gt_pnrp-id) is no longer registered at that node and remove this node from the cache. In either case, continue processing as follows.
 - If CurrentNextHop is not empty and if the PNRP ID of the route entry in the resolve entry's CurrentNextHop is numerically closer to the Target PNRP ID than the PNRP ID of the resolve entry's CurrentBestMatch, push CurrentBestMatch onto BestMatchStack, create a copy of the resolve entry's CurrentNextHop, and then save the copy in the resolve entry's CurrentBestMatch.
 - If the resolve entry's CurrentNextHop is not empty and the UseCount of the entry is 3, then clear the resolve entry's CurrentNextHop.
 - If the **Route Entry** field is present in the AUTHORITY_BUFFER message then create a route entry and store it in the resolve entry's NewNextHop.
@@ -2000,7 +2000,7 @@ To validate a [Certificate Chain](#Section_2.2.3.5), a node MUST perform the fol
 - Construct the Publisher's **BinaryAuthority**, which is the 160-bit SHA-1 [[RFC3174]](https://go.microsoft.com/fwlink/?LinkId=90408) hash of the public key that is received within the [CPA](#Section_1.3.1.3).
 - For all x in {1, n–1} (where n is the number of certificates in the chain), verify that the SubjectAltName in certificate x is the same as the IssuerAltName extension of certificate x+1.
 - For each certificate in the chain, verify that the current time is within the certificate's validity time (for more information, see [[RFC2459]](https://go.microsoft.com/fwlink/?LinkId=90356) section 4.1.2.5).
-- For each certificate in the chain with a nonzero number of [**classifiers**](#gt_classifier) in the [PnrpClassifiersList](#Section_2.2.3.5.1.5), verify that all classifiers conform to the classifier syntax as specified in section [2.2.4](#Section_1.3.1.1).
+- For each certificate in the chain with a nonzero number of [**classifiers**](#gt_classifier) in the [PnrpClassifiersList](#Section_2.2.3.5.1.5), verify that all classifiers conform to the classifier syntax as specified in section [2.2.4](#Section_2.2.4).
 - For all x in {1, n–1}, verify that the list of classifiers specified in the PnrpClassifiersList for certificate x+1 is delegated from the list of classifiers specified in the PnrpClassifiersList extension of certificate x, as specified in section 2.2.3.5.1.5. (There is no restriction on the list of classifiers as specified in the PnrpClassifiersList extension of certificate x=1.)
 - Verify that the first certificate in the chain is a self-signed certificate (for more information, see [RFC2459] section 6.1).
 - Verify that the first certificate in the chain has a [PnrpCertificateType](#Section_2.2.3.5.1.1) extension with a value of certTypeRoot (0x00000002).
@@ -2061,12 +2061,12 @@ All Publishers MUST follow the rules for Resolvers as well. This section specifi
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-Each entry in the Cloud Table (as specified in section [3.1.1](#Section_3.1)) is extended to have the following additional information:
+Each entry in the Cloud Table (as specified in section [3.1.1](#Section_3.1.1)) is extended to have the following additional information:
 
 - **Conversation Table:** A table of active synchronization conversations from new nodes in the process of joining the cloud. Each entry has the following state:
 - **Peer's IP Address and Port:** The IP address and port number of the peer.
 - **Hashed Nonce:** The **Hashed Nonce** value received in a [SOLICIT](#Section_2.2.2.1) message from the node.
-- **Locally Registered PNRP ID List:** A list of all [**PNRP IDs**](#gt_pnrp-id) registered by the PNRP node itself or on behalf of protocols or higher-layer applications publishing [Peer Names](#Section_1.3.1.1). Each entry in the list has the following fields:
+- **Locally Registered PNRP ID List:** A list of all [**PNRP IDs**](#gt_pnrp-id) registered by the PNRP node itself or on behalf of protocols or higher-layer applications publishing [Peer Names](#Section_2.2.4). Each entry in the list has the following fields:
 - **PNRP ID:** The locally registered PNRP ID.
 - **Leaf Set:** A list of the route entries for the five numerically closest PNRP IDs that are less than the locally registered PNRP ID and the five numerically closest PNRP IDs that are greater than the locally registered PNRP ID.
 **Note** The previously conceptual data can be implemented by using a variety of techniques. An implementer is at liberty to implement such data in any way that it pleases.
@@ -2080,7 +2080,7 @@ The specific cache organization is an implementation detail<5> but the following
 
 - It MUST be such that a search for a single registration in the cloud can be implemented on the order of Log10(n) LOOKUP message operations, where n is the total number of registrations in the cloud. (For example, the cache structure specified in [[PAST]](https://go.microsoft.com/fwlink/?LinkId=90243) has this property.)
 - The cache MUST logically include all entries in each of the node's [**Leaf Sets**](#gt_leaf-set).
-This constraint on the cache ensures that there is always a discoverable path to a registered PNRP ID. PNRP nodes, which are also Publishers, also use this constraint to detect and repair partitions in the cloud, as specified in section [3.2.6.2.1](#Section_3.2.6.2.1.1).
+This constraint on the cache ensures that there is always a discoverable path to a registered PNRP ID. PNRP nodes, which are also Publishers, also use this constraint to detect and repair partitions in the cloud, as specified in section [3.2.6.2.1](#Section_3.2.6.2.1).
 
 - A PNRP node MUST maintain a cache of at least 10 route entries (or all route entries in the cloud if there are fewer than 10), of the PNRP IDs of which are evenly distributed around the number space.
 This constraint ensures that when a neighbor is performing a bootstrap operation and solicits entries (using [SOLICIT](#Section_2.2.2.1) messages) for this node's cache, it is possible to advertise (using [ADVERTISE](#Section_2.2.2.2) messages) an even distribution of candidates.
@@ -2093,7 +2093,7 @@ This constraint ensures that when a neighbor is performing a bootstrap operation
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The Publisher performs no initialization beyond that specified in section [3.1.3](#Section_3.1).
+The Publisher performs no initialization beyond that specified in section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -2117,7 +2117,7 @@ If there are no addresses currently available in the Local Endpoint List, a fail
 To register a Peer Name in a given cloud, a node MUST perform the following steps:
 
 - Verify that an entry for the cloud exists in the Cloud Table. If not, return a failure.
-- Verify that the Peer Name conforms to the syntax as specified in section [2.2.4](#Section_1.3.1.1).
+- Verify that the Peer Name conforms to the syntax as specified in section [2.2.4](#Section_2.2.4).
 - If the application or higher-layer protocol did not specify a **ServiceLocationPrefix** value, select any one of the addresses in the Local Endpoint List, and select the first 64 bits as the ServiceLocationPrefix.
 - Create a [**PNRP ID**](#gt_pnrp-id) from the Peer Name provided by the application or higher-layer protocol and the Service Location Prefix, using the process specified in section [3.1.4.4.1](#Section_3.1.4.4.1), where the 64-bit ServiceLocationSuffix MUST be set to a random value.
 - The node MUST add the PNRP ID to its Locally Registered PNRP ID List.
@@ -2144,7 +2144,7 @@ Whenever a FLOOD message with the **D** flag clear is sent, the node MUST also p
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receiving a New ROUTE_ENTRY
 
-[SOLICIT](#Section_2.2.2.1), [LOOKUP](#Section_2.2.2.8), [FLOOD](#Section_2.2.2.4) and [AUTHORITY](#Section_2.2.2.6) messages contain route entries. The processing required when receiving a new [ROUTE_ENTRY](#Section_2.2.3.4) structure is specified in section [3.1.5.11](#Section_3.2.5.1). Publishers MUST follow the same rules, with the following additions:
+[SOLICIT](#Section_2.2.2.1), [LOOKUP](#Section_2.2.2.8), [FLOOD](#Section_2.2.2.4) and [AUTHORITY](#Section_2.2.2.6) messages contain route entries. The processing required when receiving a new [ROUTE_ENTRY](#Section_2.2.3.4) structure is specified in section [3.1.5.11](#Section_3.1.5.11). Publishers MUST follow the same rules, with the following additions:
 
 If the [**PNRP ID**](#gt_pnrp-id) of the ROUTE_ENTRY message falls within one of the node's PNRP ID [**Leaf Sets**](#gt_leaf-set), it MUST set the **A** and **C** flags in the [INQUIRE](#Section_2.2.2.5) message to request a [CPA](#Section_1.3.1.3) and [Certificate Chain](#Section_2.2.3.5), and **NeedCpa** MUST be set to true for the entry added to the Pending Route Entry Add List.
 
@@ -2229,7 +2229,7 @@ The PNRP node MUST then send the AUTHORITY message(s) to the specified node.
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Receiving an AUTHORITY Message
 
-Section [3.1.5.6.1](#Section_3.1.5.6.1.1) specifies the rules for handling received [AUTHORITY](#Section_2.2.2.6) messages. In addition to those rules, when a [Route Entry](#Section_2.2.3.4) completes validation and is added to the Route Entry Cache (as specified in [3.1.5.6.1.2](#Section_3.1.5.6.1.2)), the Publisher MUST also check, for each locally registered [**PNRP ID**](#gt_pnrp-id), whether the PNRP ID in the Route Entry would fall within the Publisher's [**Leaf Set**](#gt_leaf-set). If so, it MUST do the following:
+Section [3.1.5.6.1](#Section_3.1.5.6.1) specifies the rules for handling received [AUTHORITY](#Section_2.2.2.6) messages. In addition to those rules, when a [Route Entry](#Section_2.2.3.4) completes validation and is added to the Route Entry Cache (as specified in [3.1.5.6.1.2](#Section_3.1.5.6.1.2)), the Publisher MUST also check, for each locally registered [**PNRP ID**](#gt_pnrp-id), whether the PNRP ID in the Route Entry would fall within the Publisher's [**Leaf Set**](#gt_leaf-set). If so, it MUST do the following:
 
 - Add the Route Entry to the Leaf Set (removing the farthest entry on the same side of the locally registered PNRP ID, if there were already five entries in the Leaf Set on that side).
 - Build a list of Leaf Set neighbors to which to forward the new Route Entry. It MUST pick the nearest cached PNRP ID greater than the route entry's PNRP ID and the nearest cached PNRP ID less than the route entry's PNRP ID. If the Route Entry is being added because of a [FLOOD](#Section_2.2.2.4) message, any nodes with endpoints in the Already Flooded List of the FLOOD message MUST be excluded when looking for the nearest PNRP ID.
@@ -2250,7 +2250,7 @@ The following are the three possibilities:
 - The best match PNRP ID exists in the local cache of this node and there are no cache entries with PNRP ID between the best match PNRP ID and the Target PNRP ID. This means there is no evidence of a cloud split.
 - The best match PNRP ID exists in the local cache of this node and there is at least one Route Entry with a PNRP ID between the best match PNRP ID and the Target PNRP ID. This tends to suggest that the cloud is split with the local node being part of the bigger cloud.
 - The best match PNRP ID is not part of the local cache of this node. This indicates that the cloud is likely split, because the best match PNRP ID is the locally published PNRP_ID. If the best match PNRP ID is closer to the Target PNRP ID than any other entry in the local cache, this suggests that the local node is part of the smaller cloud piece. Otherwise, if the local node has a cache entry that is closer to the Target PNRP ID than the best match PNRP ID, this indicates that the local node is part of the bigger cloud piece.
-If the indication is that the local node is part of a small cloud, a PNRP node SHOULD repeat the split detection process, as specified in section [3.2.6.2.1](#Section_3.2.6.2.1.1), for each locally published PNRP ID except the Target PNRP ID (which it just completed). This will help to get as many parts of the number space merged as possible.
+If the indication is that the local node is part of a small cloud, a PNRP node SHOULD repeat the split detection process, as specified in section [3.2.6.2.1](#Section_3.2.6.2.1), for each locally published PNRP ID except the Target PNRP ID (which it just completed). This will help to get as many parts of the number space merged as possible.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -2263,7 +2263,7 @@ When a Conversation Timer expires for a given Conversation Table entry, the PNRP
 <a id="Section_3.2.6.2"></a>
 #### 3.2.6.2 Maintenance Timer Expiry
 
-When the Maintenance Timer expires, the PNRP node MUST attempt to detect cloud splits (as specified in section [3.2.6.2.1](#Section_3.2.6.2.1.1)).
+When the Maintenance Timer expires, the PNRP node MUST attempt to detect cloud splits (as specified in section [3.2.6.2.1](#Section_3.2.6.2.1)).
 
 If a node finds that it has no entries in its cache, it SHOULD also try to resynchronize with the nodes it knows in order to obtain more entries. Synchronization is initiated when the node sends a [SOLICIT](#Section_2.2.2.1) message, as specified in section [3.1.4.3](#Section_3.1.4.3).
 

@@ -8124,7 +8124,7 @@ Version-Specific Behavior: First implemented on ADAM and Windows Server 2008.
 <a id="Section_2.262"></a>
 ## 2.262 Attribute objectClasses
 
-This attribute is a multivalued property containing strings that represent each class in the schema. Each value contains the [governsID](#Section_2.91), [lDAPDisplayName](#Section_2.123), [mustContain](#Section_2.357), [mayContain](#Section_2.356), and so on.
+This attribute is a multivalued property containing strings that represent each class in the schema. Each value contains the [governsID](#Section_2.91), [lDAPDisplayName](#Section_2.123), [mustContain](#Section_2.249), [mayContain](#Section_2.135), and so on.
 
 cn: Object-Classes
 

@@ -323,7 +323,7 @@ Figure 3: Relationships between the application, the RMS client, and the RMS ser
 While the RMS: Client-to-Server Protocol [MS-RMPR] supports the most common scenarios for the creation and consumption of content by an application in the RMS system, the RMS: ISV Extension Protocol can be used when additional functionality is required to enable the application to communicate directly with the RMS server. The RMS: ISV Extension Protocol provides the following interfaces to support these more advanced scenarios:
 
 - Decommissioning: Enables RMS protection to be completely removed from protected content. When enabled on the RMS server, the [Decommissioning](#Section_6.1) interface accepts a [**publishing license**](#gt_publishing-license) and returns the content key from that [**license**](#gt_license).
-- Precertification: Enables protected content to be delivered with an authorization token for the recipient user. The [Precertification](#Section_5.1.2) interface is used to retrieve the public key of the specified user.
+- Precertification: Enables protected content to be delivered with an authorization token for the recipient user. The [Precertification](#Section_6.2) interface is used to retrieve the public key of the specified user.
 - Republishing: Enables a new IL to be created by using the same content key as an existing IL. The Republishing interface is used to alter the set of rights granted by an IL.
 - Prelicensing: Enables protected content to be delivered with an authorization token for the recipient user without requiring a precertification request. The Prelicensing interface is used to retrieve a [**use license**](#gt_use-license-ul) for the specified user.
 <a id="Section_1.3.1"></a>
@@ -354,7 +354,7 @@ Because the EditIssuanceLicense operation allows the requestor to have full cont
 
 When using the Precertification interface, the application is required to contact a server that is capable of issuing an [**RAC**](#gt_rms-account-certificate-rac) for a specific recipient. In an environment with multiple certification services, an application might require an application-specific configuration to determine which certification service to use for each user. If multiple applications prelicense content, an administrator might have to configure this data in independent ways.
 
-The Prelicensing interface shifts this responsibility to the RMS Server. The application can specify a list of recipients by email address and provide a [**publishing license**](#gt_publishing-license). The RMS Server will determine the public key for each user and issue a [**use license**](#gt_use-license-ul) for each recipient based on the rights granted in the publishing license. The RMS Server itself can use the Precertification interface of another server to retrieve a public key for a user when their key resides on that server. The Prelicensing interface exposes one request and response message to enable prelicensing via the [AcquirePreLicense (section 3.5.4.1)](#Section_3.5.4.1.2.1) operation.
+The Prelicensing interface shifts this responsibility to the RMS Server. The application can specify a list of recipients by email address and provide a [**publishing license**](#gt_publishing-license). The RMS Server will determine the public key for each user and issue a [**use license**](#gt_use-license-ul) for each recipient based on the rights granted in the publishing license. The RMS Server itself can use the Precertification interface of another server to retrieve a public key for a user when their key resides on that server. The Prelicensing interface exposes one request and response message to enable prelicensing via the [AcquirePreLicense (section 3.5.4.1)](#Section_3.5.4.1) operation.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -430,7 +430,7 @@ The interfaces MUST be exposed by the server at the following [**endpoints**](#g
 
 **Prelicensing:** This interface MUST be exposed at the following URL:
 
-[baseURL]/licensing/license.asmx: [AcquirePreLicense](#Section_3.5.4.1.2.1)
+[baseURL]/licensing/license.asmx: [AcquirePreLicense](#Section_3.5.4.1)
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Message Syntax
@@ -1131,10 +1131,10 @@ type="tns:ArrayOfPrecertifyResponse" />
 | Complex Type | Description |
 | --- | --- |
 | [<ArrayOfPrecertifyParams>](#Section_3.3.4.1.3.1) | Contains an array that consists of <PrecertifyParams> elements. |
-| [<PrecertifyParams>](#Section_3.3.4.1) | Contains the user identity information. |
+| [<PrecertifyParams>](#Section_3.3.4.1.3.2) | Contains the user identity information. |
 | [<Identification>](#Section_3.3.4.1.3.3) | Contains information that identifies the target user. |
 | [<ArrayOfPrecertifyResponse>](#Section_3.3.4.1.3.4) | Contains an array that consists of <PrecertifyResponse> elements, which in turn contain public key [**certificates**](#gt_certificate). |
-| [<PrecertifyResponse>](#Section_3.3.4.1.3.5) | Contains the signed [**publishing license**](#gt_publishing-license). |
+| [<PrecertifyResponse>](#Section_3.3.4.1.2.2) | Contains the signed [**publishing license**](#gt_publishing-license). |
 
 <a id="Section_3.3.4.1.3.1"></a>
 ###### 3.3.4.1.3.1 ArrayOfPrecertifyParams
@@ -1153,7 +1153,7 @@ nillable="true" type="tns:PrecertifyParams" />
 
 </s:complexType>
 
-**PrecertifyParams:** An element that contains the parameters of the request. The element is of the [<PrecertifyParams>](#Section_3.3.4.1) complex type as defined by the schema in section 3.3.4.1.3.2.
+**PrecertifyParams:** An element that contains the parameters of the request. The element is of the [<PrecertifyParams>](#Section_3.3.4.1.3.2) complex type as defined by the schema in section 3.3.4.1.3.2.
 
 <a id="Section_3.3.4.1.3.2"></a>
 ###### 3.3.4.1.3.2 PrecertifyParams
@@ -1228,7 +1228,7 @@ type="tns:PrecertifyResponse" />
 
 </s:complexType>
 
-**PrecertifyResponse:** An element that contains the public key certificate in the response. The element is of the <[PrecertifyResponse](#Section_3.3.4.1.3.5)> complex type as defined by the schema in section 3.3.4.1.3.5.
+**PrecertifyResponse:** An element that contains the public key certificate in the response. The element is of the <[PrecertifyResponse](#Section_3.3.4.1.2.2)> complex type as defined by the schema in section 3.3.4.1.3.5.
 
 <a id="Section_3.3.4.1.3.5"></a>
 ###### 3.3.4.1.3.5 PrecertifyResponse
@@ -1476,14 +1476,14 @@ type="tns:ArrayOfEditIssuanceLicenseResponse" />
 | Complex Type | Description |
 | --- | --- |
 | [<ArrayOfEditIssuanceLicenseParams>](#Section_3.4.4.1.3.1) | Contains an array that consists of <EditIssuanceLicenseParams> elements. |
-| [<EditIssuanceLicenseParams>](#Section_3.4.4.1) | Contains the signed and unsigned [**publishing licenses**](#gt_publishing-license-pl). |
+| [<EditIssuanceLicenseParams>](#Section_8069d8ef38754e738bae3fff2a5ed763) | Contains the signed and unsigned [**publishing licenses**](#gt_publishing-license-pl). |
 | [<ArrayOfEditIssuanceLicenseResponse>](#Section_3.4.4.1.3.3) | Contains an array that consists of <EditIssuanceLicenseResponse> elements. |
-| [<EditIssuanceLicenseResponse>](#Section_3.4.4.1) | Contains the signed [**publishing license**](#gt_publishing-license). |
+| [<EditIssuanceLicenseResponse>](#Section_d5803e58def54be9809d2580e060ed66) | Contains the signed [**publishing license**](#gt_publishing-license). |
 
 <a id="Section_3.4.4.1.3.1"></a>
 ###### 3.4.4.1.3.1 ArrayOfEditIssuanceLicenseParams
 
-The <ArrayOfEditIssuanceLicenseParams> complex type is an array that contains [<EditIssuanceLicenseParams>](#Section_3.4.4.1) elements. The array MUST contain exactly one <EditIssuanceLicenseParams> element.
+The <ArrayOfEditIssuanceLicenseParams> complex type is an array that contains [<EditIssuanceLicenseParams>](#Section_8069d8ef38754e738bae3fff2a5ed763) elements. The array MUST contain exactly one <EditIssuanceLicenseParams> element.
 
 <s:complexType name="ArrayOfEditIssuanceLicenseParams">
 
@@ -1547,7 +1547,7 @@ The <EditIssuanceLicenseParams> complex type contains the signed [**publishing l
 <a id="Section_3.4.4.1.3.3"></a>
 ###### 3.4.4.1.3.3 ArrayOfEditIssuanceLicenseResponse
 
-The <ArrayOfEditIssuanceLicenseResponse> complex type is an array that contains [<EditIssuanceLicenseResponse>](#Section_3.4.4.1) elements. The array MUST contain exactly one <EditIssuanceLicenseResponse> element.
+The <ArrayOfEditIssuanceLicenseResponse> complex type is an array that contains [<EditIssuanceLicenseResponse>](#Section_d5803e58def54be9809d2580e060ed66) elements. The array MUST contain exactly one <EditIssuanceLicenseResponse> element.
 
 <s:complexType name="ArrayOfEditIssuanceLicenseResponse">
 
@@ -1621,7 +1621,7 @@ None.
 
 | Operation | Description |
 | --- | --- |
-| [AcquirePreLicense](#Section_3.5.4.1.2.1) | Allows an application to retrieve [**use licenses**](#gt_8ea9c543-0cc2-4f60-894d-c3fb9a78e065) on behalf of recipients. |
+| [AcquirePreLicense](#Section_3.5.4.1) | Allows an application to retrieve [**use licenses**](#gt_8ea9c543-0cc2-4f60-894d-c3fb9a78e065) on behalf of recipients. |
 
 <a id="Section_3.5.4.1"></a>
 #### 3.5.4.1 AcquirePreLicense
@@ -1664,7 +1664,7 @@ The AcquirePreLicense operation MUST throw either [Common Fault Codes](#Section_
 
 | Exception | Description |
 | --- | --- |
-| ClusterDecommissionedException | The RMS Server is in decommissioning mode. In this mode, it will only service requests to the Decommissioning interface (section [3.2](#Section_6.1)). All other requests are rejected. |
+| ClusterDecommissionedException | The RMS Server is in decommissioning mode. In this mode, it will only service requests to the Decommissioning interface (section [3.2](#Section_3.2)). All other requests are rejected. |
 | AcquirePreLicenseInvalidLicenseeException | The license specified in AcquirePreLicense is invalid. |
 
 <a id="Section_3.5.4.1.1"></a>
@@ -1956,21 +1956,21 @@ The [Decommissioning](#Section_6.1) interface allows a requestor to retrieve the
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Precertification Interface
 
-The [Precertification](#Section_5.1.2) interface might involve communicating a recipient's email address between the requestor and the RMS Server. This can be considered sensitive or private information. An attacker observing the traffic between the requestor and the RMS Server might also be able to determine whether a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). Although the information in the content is not disclosed to this attacker, the attack could potentially make the recipient a target of another attack.
+The [Precertification](#Section_6.2) interface might involve communicating a recipient's email address between the requestor and the RMS Server. This can be considered sensitive or private information. An attacker observing the traffic between the requestor and the RMS Server might also be able to determine whether a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). Although the information in the content is not disclosed to this attacker, the attack could potentially make the recipient a target of another attack.
 
 It is strongly recommended that communication be done over HTTPS instead of HTTP so that this traffic is protected.
 
 <a id="Section_5.1.3"></a>
 ### 5.1.3 Republishing Interface
 
-The [Republishing](#Section_1.3.3) interface allows a requestor to alter the rights granted by any [**publishing license**](#gt_publishing-license) that allows republishing. This enables the requestor to gain access to content that is protected by the publishing license or to grant other users access to that content.
+The [Republishing](#Section_6.3) interface allows a requestor to alter the rights granted by any [**publishing license**](#gt_publishing-license) that allows republishing. This enables the requestor to gain access to content that is protected by the publishing license or to grant other users access to that content.
 
 It is strongly recommended that access to this interface be limited to a set of trusted users or machines.
 
 <a id="Section_5.1.4"></a>
 ### 5.1.4 Prelicensing Interface
 
-The [Prelicensing](#Section_3.5) interface involves the communication of a recipient's email address between the requestor and the RMS Server. This information could be considered sensitive or private. An attacker that observes the traffic between the requestor and the RMS Server might also be able to determine whether or not a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). While the information in the content will not be disclosed to this attacker, it could potentially make the recipient a target of another attack.
+The [Prelicensing](#Section_6.4) interface involves the communication of a recipient's email address between the requestor and the RMS Server. This information could be considered sensitive or private. An attacker that observes the traffic between the requestor and the RMS Server might also be able to determine whether or not a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). While the information in the content will not be disclosed to this attacker, it could potentially make the recipient a target of another attack.
 
 It is strongly recommended that communication be transported over HTTPS, rather than HTTP, to ensure traffic protection.
 

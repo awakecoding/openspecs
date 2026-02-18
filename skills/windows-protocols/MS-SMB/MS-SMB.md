@@ -348,7 +348,7 @@ This document uses the following terms:
 **Distributed File System (DFS)**: A file system that logically groups physical shared folders located on different servers by transparently connecting them to one or more hierarchical namespaces. [**DFS**](#gt_distributed-file-system-dfs) also provides fault-tolerance and load-sharing capabilities.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the Active Directory service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the Active Directory service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_fid"></a>
 **Fid**: A 16-bit value that the [**Server Message Block (SMB)**](#gt_server-message-block-smb) server uses to represent an opened file, [**named pipe**](#gt_named-pipe), printer, or device. A [**Fid**](#gt_fid) is returned by an [**SMB**](#gt_server-message-block-smb) server in response to a client request to open or create a file, [**named pipe**](#gt_named-pipe), printer, or device. The [**SMB**](#gt_server-message-block-smb) server guarantees that the [**Fid**](#gt_fid) value returned is unique for a given [**SMB**](#gt_server-message-block-smb) connection until the [**SMB**](#gt_server-message-block-smb) connection is closed, at which time the [**Fid**](#gt_fid) value can be reused. The [**Fid**](#gt_fid) is used by the [**SMB**](#gt_server-message-block-smb) client in subsequent [**SMB**](#gt_server-message-block-smb) commands to identify the opened file, [**named pipe**](#gt_named-pipe), printer, or device.
@@ -531,7 +531,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MD5Collision] Klima, V., "Tunnels in Hash Functions: MD5 Collisions Within a Minute", March 2006, [http://eprint.iacr.org/2006/105.pdf](https://go.microsoft.com/fwlink/?LinkId=89937)
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-BRWSA] Microsoft Corporation, "[Common Internet File System (CIFS) Browser Auxiliary Protocol](../MS-BRWSA/MS-BRWSA.md)".
 
@@ -549,7 +549,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-WKST] Microsoft Corporation, "[Workstation Service Remote Protocol](../MS-WKST/MS-WKST.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MS11-048] Microsoft Corporation, "MS11-048: Vulnerability in SMB Server could allow denial of service: June 14, 2011", [https://support.microsoft.com/en-us/help/2536275/ms11-048-vulnerability-in-smb-server-could-allow-denial-of-service-jun](https://go.microsoft.com/fwlink/?linkid=862488)
 
@@ -586,12 +586,12 @@ This document defines the SMB Version 1.0 Protocol extensions to CIFS, which pro
 - [**SMB connections**](#gt_smb-connection) that use Direct TCP for the SMB transport. The CIFS Protocol supports the use of NBT for connections, as specified in [MS-CIFS] section 2.1.1.2. The SMB Version 1.0 Protocol includes a method to connect directly over [**TCP**](#gt_transmission-control-protocol-tcp) (see [[RFC793]](https://go.microsoft.com/fwlink/?LinkId=150872)) without involving NetBIOS (see [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261)). Information about NetBIOS is specified in [[NETBEUI]](https://go.microsoft.com/fwlink/?LinkId=90224).
 - Support for retrieving extended information in response to [**share connect**](#gt_share-connect) and file open operations. Certain server functionality and indicators (such as the need for the client to cache the contents of a [**share**](#gt_share)) are new in the SMB Version 1.0 Protocol and are returned to the client through these extensions to existing commands.
 - Additional [**SMB commands**](#gt_smb-command) for the setting and querying of quotas by user. Provided the server supports quotas, the client can constrain the file system capacity consumed by the files of users.
-Many of these capabilities are exposed in enhancements to the [SMB_COM_NEGOTIATE](#Section_2.2.4.5) (section 2.2.4.5) and [SMB_COM_SESSION_SETUP_ANDX](#Section_3.3.5.3) (section 2.2.4.6) command requests and responses.
+Many of these capabilities are exposed in enhancements to the [SMB_COM_NEGOTIATE](#Section_2.2.4.5) (section 2.2.4.5) and [SMB_COM_SESSION_SETUP_ANDX](#Section_2.2.4.6) (section 2.2.4.6) command requests and responses.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The extensions to the CIFS protocol rely on the Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO), as described in [MS-AUTHSOD](#Section_1.3) section 2.1.2.3.1 and specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), for authentication, which in turn relies on Kerberos, as specified in [MS-KILE](../MS-KILE/MS-KILE.md), and/or the NT LAN Manager (NTLM), as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md), challenge/response authentication protocol.
+The extensions to the CIFS protocol rely on the Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO), as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1 and specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), for authentication, which in turn relies on Kerberos, as specified in [MS-KILE](../MS-KILE/MS-KILE.md), and/or the NT LAN Manager (NTLM), as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md), challenge/response authentication protocol.
 
 The Server Message Block (SMB) Version 2 Protocol is a new version of [**SMB**](#gt_server-message-block-smb). For more information about the SMB Version 2 Protocol, see [MS-SMB2](../MS-SMB2/MS-SMB2.md). This specification does not require implementation of the SMB Version 2 Protocol.
 
@@ -642,7 +642,7 @@ This document covers versioning issues in the following areas:
 - A server can return an error code (STATUS_NOT_SUPPORTED) when a client request is sent to a server for a new feature that is not supported.
 A client written to support these extensions cannot require that the target server implement these extensions to successfully connect. Thus, a server that does not implement an extension is still accessible by a client that implements that extension, although the relevant new features might not be available. The one exception is that a client offers the capability to be configured to require the new security features to create a more secure environment so that the client could be restricted from connecting successfully to servers that do not implement these features.
 
-Negotiation of the use of the Generic Security Service Application Program Interface (GSS API) for authentication is specified in section [3.2.4.2.4](#Section_3.2.4.2.4.1). The GSS API is specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
+Negotiation of the use of the Generic Security Service Application Program Interface (GSS API) for authentication is specified in section [3.2.4.2.4](#Section_3.2.4.2.4). The GSS API is specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -652,7 +652,7 @@ The CAP_UNIX capability bit is specified in order to allow third-party implement
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
 
-In addition to any standards assignments specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md), the Direct TCP Transport, as specified in section [2.2](../MS-CIFS/MS-CIFS.md), makes use of the following assignment:
+In addition to any standards assignments specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md), the Direct TCP Transport, as specified in section [2.2](#Section_2.2), makes use of the following assignment:
 
 | Parameter | TCP port value | Reference |
 | --- | --- | --- |
@@ -839,7 +839,7 @@ VolumeGUIDs (Volume Globally Unique Identifiers, or [**volume identifiers**](#gt
 
 [**Copychunk Resume Keys**](#gt_copychunk-resume-key) are generated on [**SMB**](#gt_server-message-block-smb) servers. The generation of Copychunk Resume Keys MUST satisfy the following constraints:
 
-- The Copychunk Resume Key MUST be a 24-byte opaque value generated by an SMB server in response to a request by the client (an SMB_COM_NT_TRANSACTION request with an NT_TRANSACT_IOCTL subcommand for the FSCTL_SRV_REQUEST_RESUME_KEY). For more information, see section [2.2.7.2](#Section_2.2.7.2.1.1).
+- The Copychunk Resume Key MUST be a 24-byte opaque value generated by an SMB server in response to a request by the client (an SMB_COM_NT_TRANSACTION request with an NT_TRANSACT_IOCTL subcommand for the FSCTL_SRV_REQUEST_RESUME_KEY). For more information, see section [2.2.7.2](#Section_2.2.7.2).
 - The Copychunk Resume Key MUST be unique on the SMB server for a given open file on a server.
 - The Copychunk Resume Key MUST remain valid for the lifetime of the open file on the server.
 - All possible values for the Copychunk Resume Key are valid.
@@ -989,7 +989,7 @@ No new SMB-specific [**Information Level**](#gt_information-level) codes are spe
 
 This document provides an extension of a new [**Information Level**](#gt_information-level) code value range called **pass-through Information Levels**, which can be used to set or query information on the server. These Information Levels allow [**SMB**](#gt_server-message-block-smb) clients to directly query Information Levels native to the underlying object store.<18>
 
-Servers indicate support for these new pass-through Information Levels by setting the new CAP_INFOLEVEL_PASSTHRU capability flag in an SMB_COM_NEGOTIATE server response (section [2.2.4.5.2](#Section_2.2.4.5.2.1)).
+Servers indicate support for these new pass-through Information Levels by setting the new CAP_INFOLEVEL_PASSTHRU capability flag in an SMB_COM_NEGOTIATE server response (section [2.2.4.5.2](#Section_2.2.4.5.2)).
 
 To access these new Information Levels, a client adds the constant SMB_INFO_PASSTHROUGH (0x03e8) to the desired native information class level value. This value is then sent in the **InformationLevel** field of the particular SMB_COM_TRANSACTION2 subcommand being used to access the Information Levels.
 
@@ -1018,7 +1018,7 @@ The following is a list of 32-bit status codes that are required to implement th
 | 0xC000000D STATUS_INVALID_PARAMETER | The parameter specified in the request is not valid. |
 | 0xC000000E STATUS_NO_SUCH_DEVICE | A device that does not exist was specified. |
 | 0xC0000010 STATUS_INVALID_DEVICE_REQUEST | The specified request is not a valid operation for the target device. |
-| 0xC0000016 STATUS_MORE_PROCESSING_REQUIRED | If extended security has been negotiated, then this error code can be returned in the SMB_COM_SESSION_SETUP_ANDX response from the server to indicate that additional authentication information is to be exchanged. See section [2.2.4.6](#Section_3.3.5.3) for details. |
+| 0xC0000016 STATUS_MORE_PROCESSING_REQUIRED | If extended security has been negotiated, then this error code can be returned in the SMB_COM_SESSION_SETUP_ANDX response from the server to indicate that additional authentication information is to be exchanged. See section [2.2.4.6](#Section_2.2.4.6) for details. |
 | 0xC0000022 STATUS_ACCESS_DENIED | The client did not have the required permission needed for the operation. |
 | 0xC0000023 STATUS_BUFFER_TOO_SMALL | The buffer is too small to contain the entry. No information has been written to the buffer. |
 | 0xC0000034 STATUS_OBJECT_NAME_NOT_FOUND | The object name is not found. |
@@ -1167,7 +1167,7 @@ packet-beta
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | If set by the client, the client is requesting compressed data for an SMB_COM_READ_ANDX request. If cleared by the server, the server is notifying the client that the data was written uncompressed. This bit field SHOULD only be set to one when NT LAN Manager or later is negotiated for the SMB dialect. | SMB_FLAGS2_COMPRESSED 0x0008 | - |
-| This flag SHOULD<22> be set by the client on the first [SMB_COM_SESSION_SETUP_ANDX request (section 2.2.4.6.1)](#Section_3.3.5.3) sent to a server that supports extended security if the client requires all further communication with this server to be signed. If the server does not support signing, it MUST disconnect the client by closing the underlying transport connection. Clients and servers MUST ignore this value for other requests and responses. If the client receives a non-signed response from the server, it MUST disconnect the underlying transport connection. This bit field SHOULD only be set to one when NT LAN Manager or later is negotiated for the SMB dialect, the client supports extended security, and the client is configured to require security signatures. | SMB_FLAGS2_SMB_SECURITY_SIGNATURE_REQUIRED 0x0010 | - |
+| This flag SHOULD<22> be set by the client on the first [SMB_COM_SESSION_SETUP_ANDX request (section 2.2.4.6.1)](#Section_2.2.4.6.1) sent to a server that supports extended security if the client requires all further communication with this server to be signed. If the server does not support signing, it MUST disconnect the client by closing the underlying transport connection. Clients and servers MUST ignore this value for other requests and responses. If the client receives a non-signed response from the server, it MUST disconnect the underlying transport connection. This bit field SHOULD only be set to one when NT LAN Manager or later is negotiated for the SMB dialect, the client supports extended security, and the client is configured to require security signatures. | SMB_FLAGS2_SMB_SECURITY_SIGNATURE_REQUIRED 0x0010 | - |
 | If set, the path contained in the message contains long names; otherwise, the paths are restricted to [**8.3 names**](#gt_83-name). This bit field SHOULD only be set to one when NT LAN Manager or later is negotiated for the SMB dialect. If client sets this bit in the request, the server SHOULD<23> also set this bit in the response. | SMB_FLAGS2_IS_LONG_NAME 0x0040 | - |
 | If set, the path in the request MUST contain an [**@GMT token**](#gt_gmt-token) (that is, a Previous Version token), as specified in section [2.2.1.1.1](#Section_2.2.1.1.1). | SMB_FLAGS2_REPARSE_PATH 0x0400 | - |
 | Indicates that the client or server supports SPNEGO authentication, as specified in section [3.2.5.2](#Section_3.2.5.2) for client behavior and section [3.3.5.2](#Section_3.3.5.2) for server behavior. This bit field SHOULD be set to one only when NT LAN Manager or later is negotiated for the SMB dialect and the client or server supports extended security. | SMB_FLAGS2_EXTENDED_SECURITY 0x0800 | - |
@@ -1709,7 +1709,7 @@ packet-beta
 
 The SMB_COM_TRANSACTION2 request is sent by a client to execute a specific operation of various types on the server. These operations include file enumeration, query and set file attribute operations, and [**DFS**](#gt_distributed-file-system-dfs) referral retrieval. The general format of the SMB_COM_TRANSACTION2 command requests and responses is given in [MS-CIFS](../MS-CIFS/MS-CIFS.md) sections 2.2.4.46 and 2.2.4.47. Execution of SMB_COM_TRANSACTION2 is defined as specified in [MS-CIFS] sections 3.2.4.1.5, 3.2.5.1.4, and 3.3.5.2.5.
 
-Valid SMB_COM_TRANSACTION2 subcommand codes, also known as "Trans2 subcommands", are specified in section [2.2.2.2](#Section_2.2.7.5). The format and syntax of these subcommands are specified in section [2.2.6](../MS-CIFS/MS-CIFS.md) and in [MS-CIFS] section 2.2.6.
+Valid SMB_COM_TRANSACTION2 subcommand codes, also known as "Trans2 subcommands", are specified in section [2.2.2.2](#Section_2.2.2.2). The format and syntax of these subcommands are specified in section [2.2.6](#Section_2.2.6) and in [MS-CIFS] section 2.2.6.
 
 <a id="Section_2.2.4.5"></a>
 #### 2.2.4.5 SMB_COM_NEGOTIATE (0x72)
@@ -1719,7 +1719,7 @@ Valid SMB_COM_TRANSACTION2 subcommand codes, also known as "Trans2 subcommands",
 
 All fields are defined as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.4.52.1. In order to support the extension in this document, the client MUST include the NT LAN Manager dialect (identified by the "NT LM 0.12" dialect string) in the **SMB_Data.Bytes.Dialects[]** array of the request.
 
-When set, the **SMB_Header.Flags2** SMB_FLAGS2_EXTENDED_SECURITY flag indicates support for specification [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) and GSS authentication (see section [3.1.5.1](#Section_3.1.5.1)), and indicates to the server that it sends an Extended Security response (see section [2.2.4.5.2](#Section_2.2.4.5.2.1)).
+When set, the **SMB_Header.Flags2** SMB_FLAGS2_EXTENDED_SECURITY flag indicates support for specification [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) and GSS authentication (see section [3.1.5.1](#Section_3.1.5.1)), and indicates to the server that it sends an Extended Security response (see section [2.2.4.5.2](#Section_2.2.4.5.2)).
 
 <a id="Section_2.2.4.5.2"></a>
 ##### 2.2.4.5.2 Server Response Extensions
@@ -1849,12 +1849,12 @@ The rest of the values in the capabilities table are included for completeness.
 | The server supports pass-through [**Information Levels**](#gt_information-level), as specified in section [2.2.2.3](#Section_2.2.2.3). This allows the client to pass Information Level structures in QUERY and SET operations.<32> | CAP_INFOLEVEL_PASSTHRU 0x00002000 | - |
 | Variable | CAP_LARGE_READX 0x00004000 | The server supports large read operations. This capability affects the maximum size, in bytes, of the server buffer for sending an SMB_COM_READ_ANDX response to the client. When this capability is set by the server (and set by the client in the SMB_COM_SESSION_SETUP_ANDX request), then the maximum server buffer size for sending data can exceed the **MaxBufferSize** field. Therefore, the server can send a single SMB_COM_READ_ANDX response to the client up to an implementation-specific default size.<33> When signing is active on a connection, then clients MUST limit read lengths to the **MaxBufferSize** value negotiated by the server irrespective of the value of the CAP_LARGE_READX flag. |
 | Variable | CAP_LARGE_WRITEX 0x00008000 | The server supports large write operations. This capability affects the maximum size, in bytes, of the server buffer for receiving an SMB_COM_WRITE_ANDX client request. When this capability is set by the server (and set by the client in the SMB_COM_SESSION_SETUP_ANDX request), then the maximum server buffer size of bytes it writes can exceed the **MaxBufferSize** field. Therefore, a client can send a single SMB_COM_WRITE_ANDX request up to this size.<34> When signing is active on a connection, then clients MUST limit write lengths to the **MaxBufferSize** value negotiated by the server, irrespective of the value of the CAP_LARGE_WRITEX flag. |
-| The server supports new light-weight I/O control ([**IOCTL**](#gt_io-control-ioctl)) and file system control ([**FSCTL**](#gt_file-system-control-fsctl)) operations. These operations are accessed using the NT_TRANSACT_IOCTL subcommand (section [2.2.7.2](#Section_2.2.7.2.1.1)).<35> | CAP_LWIO 0x00010000 | - |
+| The server supports new light-weight I/O control ([**IOCTL**](#gt_io-control-ioctl)) and file system control ([**FSCTL**](#gt_file-system-control-fsctl)) operations. These operations are accessed using the NT_TRANSACT_IOCTL subcommand (section [2.2.7.2](#Section_2.2.7.2)).<35> | CAP_LWIO 0x00010000 | - |
 | Variable | CAP_UNIX 0x00800000 | The server supports UNIX extensions.<36> For more information, see [[SNIA]](https://go.microsoft.com/fwlink/?LinkId=90519). |
 | Variable | CAP_COMPRESSED_DATA 0x02000000 | Reserved but not implemented.<37> The server supports compressed SMB packets. |
 | Variable | CAP_DYNAMIC_REAUTH 0x20000000 | The server supports re-authentication.<38> |
 | Variable | CAP_PERSISTENT_HANDLES 0x40000000 | Reserved but not implemented.<39> The server supports persistent handles. |
-| The server supports extended security for authentication, as specified in section [3.2.4.2.4](#Section_3.2.4.2.4.1). This bit is used in conjunction with the SMB_FLAGS2_EXTENDED_SECURITY **SMB_Header.Flags2** flag, as specified in section [2.2.3.1](#Section_2.2.3.1). | CAP_EXTENDED_SECURITY 0x80000000 | - |
+| The server supports extended security for authentication, as specified in section [3.2.4.2.4](#Section_3.2.4.2.4). This bit is used in conjunction with the SMB_FLAGS2_EXTENDED_SECURITY **SMB_Header.Flags2** flag, as specified in section [2.2.3.1](#Section_2.2.3.1). | CAP_EXTENDED_SECURITY 0x80000000 | - |
 
 **ChallengeLength (1 byte):** When the CAP_EXTENDED_SECURITY bit is set, the server MUST set this value to zero and clients MUST ignore this value.
 
@@ -2028,7 +2028,7 @@ packet-beta
 
 An SMB_COM_SESSION_SETUP_ANDX request MUST be sent by a client to begin user authentication on an [**SMB connection**](#gt_smb-connection) and establish an [**SMB session**](#gt_smb-session).
 
-When extended security is being used (see section [3.2.4.2.4](#Section_3.2.4.2.4.1)), the request MUST take the following form. Aside from the **SecurityBlobLength** field, the additional capabilities used in the **Capabilities** field, and the **ByteCount** and **SecurityBlob** fields, all other fields are as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.4.53.1.
+When extended security is being used (see section [3.2.4.2.4](#Section_3.2.4.2.4)), the request MUST take the following form. Aside from the **SecurityBlobLength** field, the additional capabilities used in the **Capabilities** field, and the **ByteCount** and **SecurityBlob** fields, all other fields are as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.4.53.1.
 
 SMB_Parameters
 
@@ -2118,7 +2118,7 @@ packet-beta
 
 **SecurityBlobLength (2 bytes):** This value MUST specify the length in bytes of the variable-length **SecurityBlob** field that is contained within the request.
 
-**Capabilities (4 bytes):** A set of client capabilities. This field has the same structure as the **SMB_Parameters.Capabilities** field of the SMB_COM_NEGOTIATE Server Response specified in section [2.2.4.5.2](#Section_2.2.4.5.2.1).<43>
+**Capabilities (4 bytes):** A set of client capabilities. This field has the same structure as the **SMB_Parameters.Capabilities** field of the SMB_COM_NEGOTIATE Server Response specified in section [2.2.4.5.2](#Section_2.2.4.5.2).<43>
 
 **SMB_Data (variable):**
 
@@ -2148,7 +2148,7 @@ packet-beta
 <a id="Section_2.2.4.6.2"></a>
 ##### 2.2.4.6.2 Server Response Extensions
 
-When extended security is being used (see section [3.2.4.2.4](#Section_3.2.4.2.4.1)), a successful response MUST take the following form. Aside from the SecurityBlobLength field, the additional capabilities used in the Capabilities field, the ByteCount and SecurityBlob fields, and the omission of the PrimaryDomain field, all of the other fields are as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.4.53.2.
+When extended security is being used (see section [3.2.4.2.4](#Section_3.2.4.2.4)), a successful response MUST take the following form. Aside from the SecurityBlobLength field, the additional capabilities used in the Capabilities field, the ByteCount and SecurityBlob fields, and the omission of the PrimaryDomain field, all of the other fields are as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.4.53.2.
 
 SMB_Parameters
 
@@ -2436,7 +2436,7 @@ Implementations that do not support the notion of a guest account MUST set this 
 
 The SMB_COM_NT_TRANSACT request is sent by a client to specify operations on the server. The operations include file open, file create, device I/O control, notify directory change, and set and query [**security descriptor**](#gt_security-descriptor)s. The general format of the SMB_COM_NT_TRANSACT command requests and responses is given in [MS-CIFS](../MS-CIFS/MS-CIFS.md) sections 2.2.4.62 and 2.2.4.63. Execution of SMB_COM_NT_TRANSACT is as specified in [MS-CIFS] sections 3.2.4.1.5, 3.2.5.1.4, and 3.3.5.2.5.
 
-Valid SMB_COM_NT_TRANSACT subcommand codes, also known as "NT Trans subcommand" codes, are specified in section [2.2.2.2](#Section_2.2.7.5). The format and syntax of these subcommands are specified in section [2.2.7](../MS-CIFS/MS-CIFS.md) and in [MS-CIFS] section 2.2.7.
+Valid SMB_COM_NT_TRANSACT subcommand codes, also known as "NT Trans subcommand" codes, are specified in section [2.2.2.2](#Section_2.2.2.2). The format and syntax of these subcommands are specified in section [2.2.7](#Section_2.2.7) and in [MS-CIFS] section 2.2.7.
 
 <a id="Section_2.2.4.9"></a>
 #### 2.2.4.9 SMB_COM_NT_CREATE_ANDX (0xA2)
@@ -2543,7 +2543,7 @@ packet-beta
 | Variable | NT_CREATE_OPEN_TARGET_DIR 0x00000008 | If set, then the client indicates that the parent directory of the target is to be opened. |
 | Variable | NT_CREATE_REQUEST_EXTENDED_RESPONSE 0x00000010 | If set, then the client is requesting extended information in the response. |
 
-**ImpersonationLevel (4 bytes):** This field specifies the impersonation level requested by the application that is issuing the create request, and MUST contain one of the following values. Impersonation is described in [MS-WPO](#Section_1.3) section 9.7; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
+**ImpersonationLevel (4 bytes):** This field specifies the impersonation level requested by the application that is issuing the create request, and MUST contain one of the following values. Impersonation is described in [MS-WPO](../MS-WPO/MS-WPO.md) section 9.7; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
 
 | Value | Meaning |
 | --- | --- |
@@ -2729,7 +2729,7 @@ The status of this subcommand is [**obsolescent**](#gt_obsolescent).<56> Aside f
 <a id="Section_2.2.6.1.1"></a>
 ##### 2.2.6.1.1 Client Request Extensions
 
-A TRANS2_FIND_FIRST2 subcommand of [SMB_COM_TRANSACTION2](#Section_3.2.5.11) is sent by the client to retrieve an enumeration of files, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.2.1.
+A TRANS2_FIND_FIRST2 subcommand of [SMB_COM_TRANSACTION2](#Section_2.2.4.4) is sent by the client to retrieve an enumeration of files, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.2.1.
 
 The list of valid [**Information Level**](#gt_information-level) values has been extended, as specified in section [2.2.2.3.1](#Section_2.2.2.3.1), to include SMB_FIND_FILE_ID_FULL_DIRECTORY_INFO and SMB_FIND_FILE_ID_BOTH_DIRECTORY_INFO. Extensions are also presented to the SMB_FIND_FILE_BOTH_DIRECTORY_INFO Information Level, as specified in section [2.2.8.1.1](#Section_2.2.8.1.1). This Information Level now provides support for accessing enumerations of available previous version timestamps of files or directories.
 
@@ -2756,7 +2756,7 @@ Thus subcommand also supports two new [**Information Levels**](#gt_information-l
 <a id="Section_2.2.6.2.1"></a>
 ##### 2.2.6.2.1 Client Request Extensions
 
-The TRANS2_FIND_NEXT2 subcommand of the [SMB_COM_TRANSACTION2](#Section_3.2.5.11) request is sent by a client to continue a file enumeration, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.3.1. The request format is identical to the request format that is specified in [MS-CIFS] section 2.2.6.3.1, except that two new [**Information Levels**](#gt_information-level) have been added and one has been extended. See section 2.2.6.1.1 for details.
+The TRANS2_FIND_NEXT2 subcommand of the [SMB_COM_TRANSACTION2](#Section_2.2.4.4) request is sent by a client to continue a file enumeration, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.3.1. The request format is identical to the request format that is specified in [MS-CIFS] section 2.2.6.3.1, except that two new [**Information Levels**](#gt_information-level) have been added and one has been extended. See section 2.2.6.1.1 for details.
 
 <a id="Section_2.2.6.2.2"></a>
 ##### 2.2.6.2.2 Server Response Extensions
@@ -2771,7 +2771,7 @@ This subcommand supports new pass-through [**Information Level**](#gt_informatio
 <a id="Section_2.2.6.3.1"></a>
 ##### 2.2.6.3.1 Client Request Extensions
 
-A TRANS2_QUERY_FS_INFORMATION subcommand of the [SMB_COM_TRANSACTION2](#Section_3.2.5.11) is sent by the client to request attribute information about the file system, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section [2.2.6.4.1](#Section_2.2.6.4.1).
+A TRANS2_QUERY_FS_INFORMATION subcommand of the [SMB_COM_TRANSACTION2](#Section_2.2.4.4) is sent by the client to request attribute information about the file system, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section [2.2.6.4.1](#Section_2.2.6.4.1).
 
 <a id="Section_2.2.6.3.2"></a>
 ##### 2.2.6.3.2 Server Response Extensions
@@ -2781,7 +2781,7 @@ A server MUST send a TRANS2_QUERY_FS_INFORMATION response in reply to an SMB_COM
 <a id="Section_2.2.6.4"></a>
 #### 2.2.6.4 TRANS2_SET_FS_INFORMATION (0x0004)
 
-The TRANS2_SET_FS_INFORMATION subcommand of the SMB_COM_TRANSACTION2 command (section [2.2.4.4](#Section_3.2.5.11)) is sent by the client to set file system attribute information on the server. This subcommand was introduced in the LAN Manager 2.0 dialect.<59>
+The TRANS2_SET_FS_INFORMATION subcommand of the SMB_COM_TRANSACTION2 command (section [2.2.4.4](#Section_2.2.4.4)) is sent by the client to set file system attribute information on the server. This subcommand was introduced in the LAN Manager 2.0 dialect.<59>
 
 The TRANS2_SET_FS_INFORMATION request and response formats are special cases of SMB_COM_TRANSACTION2 command. Only the TRANS2_SET_FS_INFORMATION specifics are described here.
 
@@ -2884,7 +2884,7 @@ A TRANS2_SET_PATH_INFORMATION subcommand of SMB_COM_TRANSACTION2 is sent by the 
 <a id="Section_2.2.6.6.2"></a>
 ##### 2.2.6.6.2 Server Response Extensions
 
-A server MUST send a TRANS2_SET_PATH_INFORMATION response in reply to an [SMB_COM_TRANSACTION2 (section 2.2.4.4)](#Section_3.2.5.11) client request with a TRANS2_SET_PATH_INFORMATION subcommand when the request is successful,as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.7.2.
+A server MUST send a TRANS2_SET_PATH_INFORMATION response in reply to an [SMB_COM_TRANSACTION2 (section 2.2.4.4)](#Section_2.2.4.4) client request with a TRANS2_SET_PATH_INFORMATION subcommand when the request is successful,as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.7.2.
 
 <a id="Section_2.2.6.7"></a>
 #### 2.2.6.7 TRANS2_QUERY_FILE_INFORMATION (0x0007)
@@ -2894,7 +2894,7 @@ This subcommand supports new pass-through Information Level capabilities, as spe
 <a id="Section_2.2.6.7.1"></a>
 ##### 2.2.6.7.1 Client Request Extensions
 
-A TRANS2_QUERY_FILE_INFORMATION subcommand of [SMB_COM_TRANSACTION2](#Section_3.2.5.11) is sent by a client to request attribute information for a file or directory that has been opened, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.8.1.
+A TRANS2_QUERY_FILE_INFORMATION subcommand of [SMB_COM_TRANSACTION2](#Section_2.2.4.4) is sent by a client to request attribute information for a file or directory that has been opened, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.8.1.
 
 <a id="Section_2.2.6.7.2"></a>
 ##### 2.2.6.7.2 Server Response Extensions
@@ -2909,7 +2909,7 @@ This subcommand supports new pass-through Information Level capabilities, as spe
 <a id="Section_2.2.6.8.1"></a>
 ##### 2.2.6.8.1 Client Request Extensions
 
-A TRANS2_SET_FILE_INFORMATION subcommand of [SMB_COM_TRANSACTION2](#Section_3.2.5.11) is sent by the client to request a change of attribute information for a file or directory that has been opened, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.9.1.
+A TRANS2_SET_FILE_INFORMATION subcommand of [SMB_COM_TRANSACTION2](#Section_2.2.4.4) is sent by the client to request a change of attribute information for a file or directory that has been opened, as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.6.9.1.
 
 <a id="Section_2.2.6.8.2"></a>
 ##### 2.2.6.8.2 Server Response Extensions
@@ -2925,7 +2925,7 @@ A server MUST send a TRANS2_SET_FILE_INFORMATION response in reply to an SMB_COM
 <a id="Section_2.2.7.1.1"></a>
 ##### 2.2.7.1.1 Client Request Extensions
 
-An [SMB_COM_NT_TRANSACT (section 2.2.4.8)](../MS-CIFS/MS-CIFS.md) command with an NT_TRANSACT_CREATE subcommand is sent by a client to open a file or device on the server. The NT_TRANSACT_CREATE subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.1. This extension adds the following:
+An [SMB_COM_NT_TRANSACT (section 2.2.4.8)](#Section_2.2.4.8) command with an NT_TRANSACT_CREATE subcommand is sent by a client to open a file or device on the server. The NT_TRANSACT_CREATE subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.1. This extension adds the following:
 
 - An additional flag bit is added to the **Flags** field. The additional flag, NT_CREATE_REQUEST_EXTENDED_RESPONSE, is used to request an extended response from the server.
 - An additional parameter value, SECURITY_DELEGATION, is added to the **ImpersonationLevel** field.
@@ -3007,7 +3007,7 @@ packet-beta
 
 **ImpersonationLevel (4 bytes):** This field specifies the impersonation level requested by the application that is issuing the create request, and MUST contain one of the following values.
 
-Impersonation is described in [MS-WPO](#Section_1.3) section 9.7; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
+Impersonation is described in [MS-WPO](../MS-WPO/MS-WPO.md) section 9.7; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
 
 | Value | Meaning |
 | --- | --- |
@@ -3140,7 +3140,7 @@ If the FILE_OPEN_REPARSE_POINT flag bit is set in **CreateOptions**, and there i
 <a id="Section_2.2.7.2"></a>
 #### 2.2.7.2 NT_TRANSACT_IOCTL (0x0002)
 
-An SMB_COM_NT_TRANSACT (section [2.2.4.8](../MS-CIFS/MS-CIFS.md)) command with an NT_TRANSACT_IOCTL subcommand is sent by a client to pass an [**IOCTL**](#gt_io-control-ioctl) or [**file system control (FSCTL)**](#gt_file-system-control-fsctl) command to a server. The NT_TRANSACT_IOCTL subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.2.
+An SMB_COM_NT_TRANSACT (section [2.2.4.8](#Section_2.2.4.8)) command with an NT_TRANSACT_IOCTL subcommand is sent by a client to pass an [**IOCTL**](#gt_io-control-ioctl) or [**file system control (FSCTL)**](#gt_file-system-control-fsctl) command to a server. The NT_TRANSACT_IOCTL subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.2.
 
 <a id="Section_2.2.7.2.1"></a>
 ##### 2.2.7.2.1 Client Request Extensions
@@ -3319,7 +3319,7 @@ packet-beta
 <a id="Section_2.2.7.2.2"></a>
 ##### 2.2.7.2.2 Server Response Extensions
 
-An [SMB_COM_NT_TRANSACT (section 2.2.4.8)](../MS-CIFS/MS-CIFS.md) response for an NT_TRANSACT_IOCTL ([MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.2) subcommand MUST be sent by a server in reply to a successful NT_TRANSACT_IOCTL request.
+An [SMB_COM_NT_TRANSACT (section 2.2.4.8)](#Section_2.2.4.8) response for an NT_TRANSACT_IOCTL ([MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.2) subcommand MUST be sent by a server in reply to a successful NT_TRANSACT_IOCTL request.
 
 The NT_TRANSACT_IOCTL response is a special case of the SMB_COM_NT_TRANSACT command response. Only the NT_TRANSACT_IOCTL specifics are described here.
 
@@ -3455,7 +3455,7 @@ packet-beta
 <a id="Section_2.2.7.3"></a>
 #### 2.2.7.3 NT_TRANSACT_SET_SECURITY_DESC (0x0003) Extensions
 
-An SMB_COM_NT_TRANSACT command (section [2.2.4.8](../MS-CIFS/MS-CIFS.md)) with an NT_TRANSACT_SET_SECURITY_DESC allows a client to set the security descriptors for a file or device on the server. The NT_TRANSACT_SET_SECURITY_DESC subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.3. This extension adds LABEL_SECURITY_INFORMATION, ATTRIBUTE_SECURITY_INFORMATION, SCOPE_SECURITY_INFORMATION, and BACKUP_SECURITY_INFORMATION parameter values to the **SecurityInformation** field.
+An SMB_COM_NT_TRANSACT command (section [2.2.4.8](#Section_2.2.4.8)) with an NT_TRANSACT_SET_SECURITY_DESC allows a client to set the security descriptors for a file or device on the server. The NT_TRANSACT_SET_SECURITY_DESC subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.3. This extension adds LABEL_SECURITY_INFORMATION, ATTRIBUTE_SECURITY_INFORMATION, SCOPE_SECURITY_INFORMATION, and BACKUP_SECURITY_INFORMATION parameter values to the **SecurityInformation** field.
 
 **SecurityInformation (4 bytes)**: A ULONG. Fields of the [**security descriptor**](#gt_security-descriptor) to be set. These values can be logically OR-ed together to set several descriptors in one request. Bits and security descriptors not mentioned in the following table MUST be ignored and MUST NOT be processed.
 
@@ -3473,7 +3473,7 @@ An SMB_COM_NT_TRANSACT command (section [2.2.4.8](../MS-CIFS/MS-CIFS.md)) with a
 <a id="Section_2.2.7.4"></a>
 #### 2.2.7.4 NT_TRANSACT_QUERY_SECURITY_DESC (0x0006) Extensions
 
-An SMB_COM_NT_TRANSACT command (section [2.2.4.8](../MS-CIFS/MS-CIFS.md)) with an NT_TRANSACT_QUERY_SECURITY_DESC allows a client to retrieve the security descriptors for a file or device on the server. The NT_TRANSACT_QUERY_SECURITY_DESC subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.6. This extension adds LABEL_SECURITY_INFORMATION, ATTRIBUTE_SECURITY_INFORMATION, SCOPE_SECURITY_INFORMATION, and BACKUP_SECURITY_INFORMATION parameter values to the **SecurityInfoFields** field.
+An SMB_COM_NT_TRANSACT command (section [2.2.4.8](#Section_2.2.4.8)) with an NT_TRANSACT_QUERY_SECURITY_DESC allows a client to retrieve the security descriptors for a file or device on the server. The NT_TRANSACT_QUERY_SECURITY_DESC subcommand is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.7.6. This extension adds LABEL_SECURITY_INFORMATION, ATTRIBUTE_SECURITY_INFORMATION, SCOPE_SECURITY_INFORMATION, and BACKUP_SECURITY_INFORMATION parameter values to the **SecurityInfoFields** field.
 
 **SecurityInfoFields (4 bytes)**: A ULONG. This field represents the requested fields of the [**security descriptor**](#gt_security-descriptor) to be retrieved. These values can be logically OR-ed together to request several descriptors in one request. The descriptor response format contains storage for all the descriptors. The values returned for security descriptors corresponding to bits not mentioned in the following table MUST be ignored.
 
@@ -4158,7 +4158,7 @@ The following elements extend the client abstract data model specified in [MS-CI
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 Per Tree Connect
 
-**Client.TreeConnect.GuestMaximalShareAccessRights:** The **GuestMaximalShareAccessRights** value as returned in the [SMB_COM_TREE_CONNECT_ANDX server response (section 2.2.4.7.2)](#Section_2.2.6.4.2).
+**Client.TreeConnect.GuestMaximalShareAccessRights:** The **GuestMaximalShareAccessRights** value as returned in the [SMB_COM_TREE_CONNECT_ANDX server response (section 2.2.4.7.2)](#Section_2.2.4.7.2).
 
 **Client.TreeConnect.MaximalShareAccessRights:** The **MaximalShareAccessRights** value as returned in the SMB_COM_TREE_CONNECT_ANDX server response (section 2.2.4.7.2).
 
@@ -4226,7 +4226,7 @@ Processing of this event is handled as specified in [MS-CIFS](../MS-CIFS/MS-CIFS
 <a id="Section_3.2.4.2.3"></a>
 ##### 3.2.4.2.3 Capabilities Negotiation
 
-Processing of this event is handled as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 3.2.4.2.3, with the addition that the new capabilities flags (specified in section [2.2.4.5.2](#Section_2.2.4.5.2.1)) are also to be considered in the list of possible capabilities.
+Processing of this event is handled as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 3.2.4.2.3, with the addition that the new capabilities flags (specified in section [2.2.4.5.2](#Section_2.2.4.5.2)) are also to be considered in the list of possible capabilities.
 
 <a id="Section_3.2.4.2.4"></a>
 ##### 3.2.4.2.4 User Authentication
@@ -4282,9 +4282,9 @@ The diagram illustrates the sequence of events during the protocol negotiation a
 
 The SMB_COM_NEGOTIATE Server response is processed as described in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 3.2.5.2. The protocol extensions in this document apply only to the NT LM 0.12 dialect of SMB. For further information on [**SMB dialects**](#gt_smb-dialect), see [MS-CIFS] section 1.7.
 
-If the NT LM 0.12 dialect is successfully negotiated, then the [**SMB**](#gt_server-message-block-smb) client examines the Capabilities field in the SMB_COM_NEGOTIATE server response (section [2.2.4.5.2](#Section_2.2.4.5.2.1)). If the CAP_EXTENDED_SECURITY bit is clear (0x00000000), then the SMB server does not support extended security. In order for authentication to proceed, the SMB client MUST build a non-extended SMB_COM_SESSION_SETUP_ANDX request, and MUST set the **WordCount** field to 0x0d. Authentication then proceeds as described in [MS-CIFS] section 3.2.4.2.4.
+If the NT LM 0.12 dialect is successfully negotiated, then the [**SMB**](#gt_server-message-block-smb) client examines the Capabilities field in the SMB_COM_NEGOTIATE server response (section [2.2.4.5.2](#Section_2.2.4.5.2)). If the CAP_EXTENDED_SECURITY bit is clear (0x00000000), then the SMB server does not support extended security. In order for authentication to proceed, the SMB client MUST build a non-extended SMB_COM_SESSION_SETUP_ANDX request, and MUST set the **WordCount** field to 0x0d. Authentication then proceeds as described in [MS-CIFS] section 3.2.4.2.4.
 
-If the CAP_EXTENDED_SECURITY bit is set (0x80000000), then the SMB server does support extended security. The SMB client MUST build an SMB_COM_SESSION_SETUP_ANDX request in the extended form, as specified in section [2.2.4.6.1](#Section_3.3.5.3). The request is sent to the SMB server, and the server builds an extended SMB_COM_SESSION_SETUP_ANDX server response (section [2.2.4.6.2](#Section_2.2.4.6.2)). The security BLOB in the session setup response is built as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
+If the CAP_EXTENDED_SECURITY bit is set (0x80000000), then the SMB server does support extended security. The SMB client MUST build an SMB_COM_SESSION_SETUP_ANDX request in the extended form, as specified in section [2.2.4.6.1](#Section_2.2.4.6.1). The request is sent to the SMB server, and the server builds an extended SMB_COM_SESSION_SETUP_ANDX server response (section [2.2.4.6.2](#Section_2.2.4.6.2)). The security BLOB in the session setup response is built as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
 
 Upon receiving the extended SMB_COM_SESSION_SETUP_ANDX server response (section 2.2.4.6.2), the SMB client invokes the local security package to determine whether the session setup request SHOULD be completed, aborted, or continued. A completed session indicates that the server has enough information to establish the session. An aborted session indicates that the server cannot proceed with the session setup because of an error in the information presented by the client, or otherwise. If the session setup has to be continued, the security package on the client and/or server requires an additional roundtrip before the session setup can be established. This is especially true of new security packages that support mutual authentication between the client and server.
 
@@ -4399,7 +4399,7 @@ The extension adds support for pass-through [**Information Levels**](#gt_informa
 
 **File Streams**
 
-A client can send a TRANS2_QUERY_FILE_INFORMATION subcommand of the [SMB_COM_TRANSACTION2 request](#Section_3.2.5.11) to the server with the **InformationLevel** field set to SMB_QUERY_FILE_STREAM_INFO (see [MS-CIFS] section 2.2.6.8). If the [**FID**](#gt_fid) field in the client request is on an [**SMB**](#gt_server-message-block-smb) [**share**](#gt_share) that does not support [**streams**](#gt_stream), then the server MUST fail the request with STATUS_INVALID_PARAMETER.
+A client can send a TRANS2_QUERY_FILE_INFORMATION subcommand of the [SMB_COM_TRANSACTION2 request](#Section_2.2.4.4) to the server with the **InformationLevel** field set to SMB_QUERY_FILE_STREAM_INFO (see [MS-CIFS] section 2.2.6.8). If the [**FID**](#gt_fid) field in the client request is on an [**SMB**](#gt_server-message-block-smb) [**share**](#gt_share) that does not support [**streams**](#gt_stream), then the server MUST fail the request with STATUS_INVALID_PARAMETER.
 
 A client can send a TRANS2_QUERY_PATH_INFORMATION subcommand of the SMB_COM_TRANSACTION2 request to the server with the **InformationLevel** field set to SMB_QUERY_FILE_STREAM_INFO (see [MS-CIFS] section 2.2.6.6.2). If the **FileName** field in the client request is on an SMB share that does not support streams, then the server MUST fail the request with STATUS_INVALID_PARAMETER.
 
@@ -4501,7 +4501,7 @@ The application MUST provide:
 - **RestartScan:** A **BOOLEAN** that indicates whether or not a scan on the volume is to be restarted.
 - **ReturnSingleEntry:** A **BOOLEAN**. If TRUE, then the server MUST return a single user quota information entry.
 - A security identifier ([**SID**](#gt_security-identifier-sid)) list, a start SID, or no SID. If the application provides both an SID list and a start SID, then the client MUST fail the request with STATUS_INVALID_PARAMETER.
-The client MUST construct an NT_TRANSACT_QUERY_QUOTA subcommand request, as specified in section [2.2.7.5.1](#Section_2.2.7.5), with the following additional requirements:
+The client MUST construct an NT_TRANSACT_QUERY_QUOTA subcommand request, as specified in section [2.2.7.5.1](#Section_2.2.7.5.1), with the following additional requirements:
 
 - **NT_Trans_Parameters.FID** MUST be set to the [**Fid**](#gt_fid) of the application-supplied Open.
 - **NT_Trans_Parameters.ReturnSingleEntry** MUST be set to the value of the application-supplied **ReturnSingleEntry** BOOLEAN.
@@ -4553,11 +4553,11 @@ In addition to the global processing rules for a client that receives any messag
 
 **Signing**
 
-If a message is received and Client.Connection.IsSigningActive is TRUE for the connection, the client uses **Client.Connection.ClientResponseSequenceNumber[PID,MID]** as the sequence number in signature verification, as specified in section [3.1.5.1](../MS-CIFS/MS-CIFS.md). If signature verification fails, then the message MUST be discarded and not processed. The client SHOULD disconnect the underlying connection and tear down all states associated with this connection. If the message is an oplock break, the signature is never verified, as specified in [MS-CIFS] section 3.2.5.42.
+If a message is received and Client.Connection.IsSigningActive is TRUE for the connection, the client uses **Client.Connection.ClientResponseSequenceNumber[PID,MID]** as the sequence number in signature verification, as specified in section [3.1.5.1](#Section_3.1.5.1). If signature verification fails, then the message MUST be discarded and not processed. The client SHOULD disconnect the underlying connection and tear down all states associated with this connection. If the message is an oplock break, the signature is never verified, as specified in [MS-CIFS] section 3.2.5.42.
 
 **Session Expiration and Re-authentication**
 
-If the request passed a valid authenticated [**session**](#gt_session) identifier in the **SMB_Header.UID** field and the status code in the [**SMB**](#gt_server-message-block-smb) header of the response is STATUS_NETWORK_SESSION_EXPIRED, then the client MUST look up the **Client.Connection.SessionTable [UID]**, set **Client.Session.AuthenticationState** to Expired, and attempt to re-authenticate this session. Re-authentication follows the steps as specified in section [3.2.4.2.4](#Section_3.2.4.2.4.1), except that the UID sent in the SMB header of the SMB_COM_SESSION_SETUP_ANDX request MUST be set to the UID that represents the expired Session. Also, as described in section [3.2.5.3](#Section_3.2.5.3), the existing Client.Session.SessionKey MUST NOT be modified during re-authentication after a session expiry.
+If the request passed a valid authenticated [**session**](#gt_session) identifier in the **SMB_Header.UID** field and the status code in the [**SMB**](#gt_server-message-block-smb) header of the response is STATUS_NETWORK_SESSION_EXPIRED, then the client MUST look up the **Client.Connection.SessionTable [UID]**, set **Client.Session.AuthenticationState** to Expired, and attempt to re-authenticate this session. Re-authentication follows the steps as specified in section [3.2.4.2.4](#Section_3.2.4.2.4), except that the UID sent in the SMB header of the SMB_COM_SESSION_SETUP_ANDX request MUST be set to the UID that represents the expired Session. Also, as described in section [3.2.5.3](#Section_3.2.5.3), the existing Client.Session.SessionKey MUST NOT be modified during re-authentication after a session expiry.
 
 If the authentication fails, then the resulting error code MUST be returned for whichever operation failed with STATUS_NETWORK_SESSION_EXPIRED and the session associated with this UID is removed from the **Client.Connection.SessionTable**. If authentication succeeds, then the client MUST set **Client.Session.AuthenticationState** to Valid and retry the operation that failed with STATUS_NETWORK_SESSION_EXPIRED.
 
@@ -4568,7 +4568,7 @@ Processing of an [SMB_COM_NEGOTIATE response](#Section_3.2.5.2) is handled as sp
 
 Storing extended security token and ServerGUID
 
-If the capabilities returned in the SMB_COM_NEGOTIATE response include CAP_EXTENDED_SECURITY, then the response MUST take the form defined in section [2.2.4.5.2](#Section_2.2.4.5.2.1), and the client MUST set the **Client.Connection.GSSNegotiateToken** to the value returned in the **SecurityBlob** field in the SMB_COM_NEGOTIATE server response.<93> If **SecurityBlobLength** is 0, then client-initiated authentication, with an authentication protocol of the client's choice, will be used instead of server-initiated SPNEGO authentication as described in [MS-AUTHSOD](#Section_1.3) section 2.1.2.2. The client MUST also set the **Client.Connection.ServerGUID** to the value returned in the **ServerGUID** field in the SMB_COM_NEGOTIATE server response.<94>
+If the capabilities returned in the SMB_COM_NEGOTIATE response include CAP_EXTENDED_SECURITY, then the response MUST take the form defined in section [2.2.4.5.2](#Section_2.2.4.5.2), and the client MUST set the **Client.Connection.GSSNegotiateToken** to the value returned in the **SecurityBlob** field in the SMB_COM_NEGOTIATE server response.<93> If **SecurityBlobLength** is 0, then client-initiated authentication, with an authentication protocol of the client's choice, will be used instead of server-initiated SPNEGO authentication as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.2. The client MUST also set the **Client.Connection.ServerGUID** to the value returned in the **ServerGUID** field in the SMB_COM_NEGOTIATE server response.<94>
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving an SMB_COM_SESSION_SETUP_ANDX Response
@@ -4588,7 +4588,7 @@ The client MUST then process the GSS token (the **SecurityBlob** field of the re
 
 - If the GSS authentication protocol indicates an error, then the error MUST be returned to the calling application that initiated the connection.
 - If the **Status** field of the response contains STATUS_SUCCESS and the GSS authentication protocol does not indicate an error, then authentication is complete. The **Client.Session.AuthenticationState** MUST be set to Valid and the **Client.Session.SessionKey** MUST be set using the value queried from the GSS protocol. For information about how this is calculated for Kerberos authentication via Generic Security Service Application Programming Interface (GSS-API), see [MS-KILE](../MS-KILE/MS-KILE.md). The client MUST set **Client.Session.SessionKeyState** to Available.
-- If the **Status** field of the response contains STATUS_MORE_PROCESSING_REQUIRED and the GSS authentication protocol did not indicate an error, then the client MUST create an [SMB_COM_SESSION_SETUP_ANDX request (section 2.2.4.6.1)](#Section_3.3.5.3) with the following parameters:
+- If the **Status** field of the response contains STATUS_MORE_PROCESSING_REQUIRED and the GSS authentication protocol did not indicate an error, then the client MUST create an [SMB_COM_SESSION_SETUP_ANDX request (section 2.2.4.6.1)](#Section_2.2.4.6.1) with the following parameters:
 - The client MUST set CAP_EXTENDED_SECURITY in the **Capabilities** field and set SMB_FLAGS2_EXTENDED_SECURITY in the SMB header **Flags2** field.
 - The **SecurityBlob** and **SecurityBlobLength** fields MUST be set to the output token and its length returned by the GSS protocol.
 - The **SMB_Header.UID** field MUST be set to the value of the **SMB_Header.UID** field received in the SMB_COM_SESSION_SETUP_ANDX response.
@@ -4618,7 +4618,7 @@ Once these steps are completed, the client MUST verify the signature of this res
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Receiving an SMB_COM_TREE_CONNECT_ANDX Response
 
-The processing of an [SMB_COM_TREE_CONNECT_ANDX Response](#Section_2.2.6.4.2) is handled as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 3.2.5.4 with the following additions:
+The processing of an [SMB_COM_TREE_CONNECT_ANDX Response](#Section_3.2.5.4) is handled as specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 3.2.5.4 with the following additions:
 
 **Requesting Extended Information**
 
@@ -4692,7 +4692,7 @@ If the response indicates that the operation is successful, then the client MUST
 <a id="Section_3.2.5.9.1.2"></a>
 ###### 3.2.5.9.1.2 Receiving an FSCTL_SRV_COPYCHUNK Function Code
 
-The success or failure code MUST be returned to the calling application. The FSCTL_SRV_COPYCHUNK response (section [2.2.7.2.2](#Section_2.2.7.2.2.2)) MUST also be returned to the calling application in both success and failure situations.
+The success or failure code MUST be returned to the calling application. The FSCTL_SRV_COPYCHUNK response (section [2.2.7.2.2](#Section_2.2.7.2.2)) MUST also be returned to the calling application in both success and failure situations.
 
 <a id="Section_3.2.5.9.2"></a>
 ##### 3.2.5.9.2 Receiving an NT_TRANSACT_QUERY_QUOTA Response
@@ -4973,7 +4973,7 @@ The new capabilities flags specified in section 2.2.4.5.1 MUST also be considere
 
 **Generating Extended Security Token**
 
-If the client indicated support for extended security by setting SMB_FLAGS2_EXTENDED_SECURITY in the Flags2 field of the [**SMB**](#gt_server-message-block-smb) header of the SMB_COM_NEGOTIATE request, then the server SHOULD set CAP_EXTENDED_SECURITY in the SMB_COM_NEGOTIATE response if it supports extended security. The response MUST take the form specified in section [2.2.4.5.2](#Section_2.2.4.5.2.1).
+If the client indicated support for extended security by setting SMB_FLAGS2_EXTENDED_SECURITY in the Flags2 field of the [**SMB**](#gt_server-message-block-smb) header of the SMB_COM_NEGOTIATE request, then the server SHOULD set CAP_EXTENDED_SECURITY in the SMB_COM_NEGOTIATE response if it supports extended security. The response MUST take the form specified in section [2.2.4.5.2](#Section_2.2.4.5.2).
 
 The server SHOULD set the **SecurityBlob** of the SMB_COM_NEGOTIATE response to the first GSS token (or fragment thereof) produced by the GSS authentication protocol it is configured to use (GSS tokens are as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378)). Otherwise, it leaves it empty. This token is also stored in **Server.Connection.GSSNegotiateToken**.
 
@@ -5045,7 +5045,7 @@ The processing of an [SMB_COM_TREE_CONNECT_ANDX request](#Section_2.2.4.7.1) is 
 
 **Requesting Extended Information**
 
-If the TREE_CONNECT_ANDX_EXTENDED_RESPONSE is set in the **Flags** field of the SMB_COM_TREE_CONNECT_ANDX request, then the server MUST respond with the structure specified in section [2.2.4.7.2](#Section_2.2.6.4.2).
+If the TREE_CONNECT_ANDX_EXTENDED_RESPONSE is set in the **Flags** field of the SMB_COM_TREE_CONNECT_ANDX request, then the server MUST respond with the structure specified in section [2.2.4.7.2](#Section_2.2.4.7.2).
 
 The server MUST populate the **SMB_Parameters.Words.OptionalSupport** field of the response with a value of **Server.Share.OptionalSupport**.
 
@@ -5303,7 +5303,7 @@ When sending the response to the client, the server SHOULD NOT <140>include any 
 
 This is a request for an opaque [**copychunk resume key**](#gt_copychunk-resume-key) for use in an FSCTL_SRV_COPYCHUNK operation. The server MUST generate a 24-byte value that is used to uniquely identify the open of the file against which this operation is executed.
 
-If this operation is successful, then the server MUST construct an FSCTL_SRV_REQUEST_RESUME_KEY response as specified in section [2.2.7.2.2](#Section_2.2.7.2.2.2), with the following additional requirements:
+If this operation is successful, then the server MUST construct an FSCTL_SRV_REQUEST_RESUME_KEY response as specified in section [2.2.7.2.2](#Section_2.2.7.2.2), with the following additional requirements:
 
 The **CopychunkResumeKey** field MUST be the server-generated value.
 
@@ -5316,7 +5316,7 @@ If the server does not support this operation, then it MUST fail the request wit
 
 This is a request for a server-side data copy as specified in section [2.2.7.2.1](#Section_2.2.7.2.1). The server MUST identify the source file based on the [**copychunk resume key**](#gt_copychunk-resume-key) field of the FSCTL_SRV_COPYCHUNK request. This copychunk resume key is a value that was returned by the server from an FSCTL_SRV_REQUEST_RESUME_KEY operation. If the copychunk resume key is not valid or does not represent an open file, then the server MUST fail the operation with STATUS_OBJECT_NAME_NOT_FOUND. If the file represented by the resume key is not opened for read-data access, then the server MUST fail the operation with STATUS_ACCESS_DENIED. Likewise, the target file MUST be specified by the [**Fid**](#gt_fid) in the SMB_COM_NT_TRANSACTION request. If the target file is not opened for write-data access, then the server MUST fail the operation with STATUS_ACCESS_DENIED and **ServerStatistics.sts0_permerrors** MUST be increased by 1.
 
-The server MUST validate that the amount of data to be written is within the server's configured bounds. If the server determines that the total chunk count is more than **Server.MaxCopyChunks**, or the size of any chunk is more than **Server.MaxCopyChunkSize**, or the total size of all chunks exceeds **Server.MaxTotalCopyChunkSize**, the server MUST fail the request with STATUS_INVALID_PARAMETER and return a response as specified in section [2.2.7.2.2](#Section_2.2.7.2.2.2).
+The server MUST validate that the amount of data to be written is within the server's configured bounds. If the server determines that the total chunk count is more than **Server.MaxCopyChunks**, or the size of any chunk is more than **Server.MaxCopyChunkSize**, or the total size of all chunks exceeds **Server.MaxTotalCopyChunkSize**, the server MUST fail the request with STATUS_INVALID_PARAMETER and return a response as specified in section [2.2.7.2.2](#Section_2.2.7.2.2).
 
 The server MUST iterate through the data ranges specified in the request by reading data from the source offset of the source file and writing it to the target offset of the target file. If the underlying object store returns a failure, then the server MUST stop and set the response parameters, as specified in section 2.2.7.2.2, to indicate how much data was successfully written, and set the **Status** field of the header with the error code received.
 
@@ -5337,7 +5337,7 @@ If the server does not support this operation, then it MUST fail the request wit
 
 The server MUST query the underlying object store, in an implementation-specific manner<141>, to enumerate the quota information for the list of SIDs specified in the **SidList** field, on which the file or directory indicated by the **Server.Open** identified by the **SMB_Parameters.Words.Setup.FID** field of the request resides. If the underlying object store does not support quotas, then the server MUST return STATUS_NOT_SUPPORTED.
 
-The format of the request determines which entries need to be returned, as specified in section [2.2.7.5.1](#Section_2.2.7.5). The server MUST place the quota information in the response, as specified in section [2.2.7.5.2](#Section_2.2.7.5.2), and send the response back to the client.
+The format of the request determines which entries need to be returned, as specified in section [2.2.7.5.1](#Section_2.2.7.5.1). The server MUST place the quota information in the response, as specified in section [2.2.7.5.2](#Section_2.2.7.5.2), and send the response back to the client.
 
 <a id="Section_3.3.5.11.3"></a>
 ##### 3.3.5.11.3 Receiving an NT_TRANS_SET_QUOTA Request
@@ -5432,7 +5432,7 @@ Server GUID = 01 B3 1E 23 07 2A A4 4D A1 9F B6 69 F0 45 71 90
 
 Security Blob in payload
 
-The client uses the initial security BLOB that is returned by the server along with any user credential information in order to obtain its security BLOB, as specified in [RFC2743] and defined in section [3.2.4.2.4](#Section_3.2.4.2.4.1). The resulting security BLOB is sent to the server as part of the [SMB_COM_SESSION_SETUP_ANDX extended request](#Section_3.3.5.3). The client also sends its capabilities and zero **UID** to mark the start of a new [**session**](#gt_session) setup exchange. The server verifies that the client requests extended security by checking the **Flags2** and **Capabilities** fields in the request, accepts as input the client security BLOB, and processes it, as specified in [RFC2743]. In this case, the security package requires more processing and returns a second security BLOB to be returned to the client. Also, the server allocates a new UID and associates it with this session setup exchange.
+The client uses the initial security BLOB that is returned by the server along with any user credential information in order to obtain its security BLOB, as specified in [RFC2743] and defined in section [3.2.4.2.4](#Section_3.2.4.2.4). The resulting security BLOB is sent to the server as part of the [SMB_COM_SESSION_SETUP_ANDX extended request](#Section_3.3.5.3). The client also sends its capabilities and zero **UID** to mark the start of a new [**session**](#gt_session) setup exchange. The server verifies that the client requests extended security by checking the **Flags2** and **Capabilities** fields in the request, accepts as input the client security BLOB, and processes it, as specified in [RFC2743]. In this case, the security package requires more processing and returns a second security BLOB to be returned to the client. Also, the server allocates a new UID and associates it with this session setup exchange.
 
 **Note** Extended security can require multiple request and response exchanges between client and server to complete. The **UID** is defined by the server on first response to an extended session setup and is used for the lifetime of the session.
 
@@ -6248,7 +6248,7 @@ SMB: Multiplex ID (Mid) = 2400 (0x960)
 <a id="Section_4.6"></a>
 ## 4.6 FSCTL SRV COPYCHUNK
 
-The following example refers to the sequence of operations for a file copy in which the source and the destination are on the same server. The [FSCTL_SRV_COPYCHUNK (section 2.2.7.2)](#Section_2.2.7.2.1.1) is used. The following sequence assumes that the [**SMB connection**](#gt_smb-connection) to the server, [**SMB session**](#gt_smb-session) establishment, and other operations have been completed.
+The following example refers to the sequence of operations for a file copy in which the source and the destination are on the same server. The [FSCTL_SRV_COPYCHUNK (section 2.2.7.2)](#Section_2.2.7.2) is used. The following sequence assumes that the [**SMB connection**](#gt_smb-connection) to the server, [**SMB session**](#gt_smb-session) establishment, and other operations have been completed.
 
 ![Copy file (from/to same remote server) sequence](media/image8.png)
 
@@ -7209,7 +7209,7 @@ Windows Vista operating system and later and Windows Server 2008 operating syste
 
 <80> Section 3.2.4.2.4: Windows-based SMB clients use the same connection to a server for all authentications other than terminal services. **Connections** configured for terminal services use one connection per user.
 
-<81> Section 3.2.4.2.4: In an [SMB_COM_SESSION_SETUP_ANDX request (section 2.2.4.6.1)](#Section_3.3.5.3), Windows-based SMB clients initialize the **SMB_Header.SecurityFeatures** field to ‘BSRSPYL‘ (0x42 0x53 0x52 0x53 0x50 0x59 0x4C). Windows-based SMB servers ignore this value.
+<81> Section 3.2.4.2.4: In an [SMB_COM_SESSION_SETUP_ANDX request (section 2.2.4.6.1)](#Section_2.2.4.6.1), Windows-based SMB clients initialize the **SMB_Header.SecurityFeatures** field to ‘BSRSPYL‘ (0x42 0x53 0x52 0x53 0x50 0x59 0x4C). Windows-based SMB servers ignore this value.
 
 <82> Section 3.2.4.2.4: Windows-based clients implement this option.
 
@@ -7239,7 +7239,7 @@ Windows Vista operating system and later and Windows Server 2008 operating syste
 
 <94> Section 3.2.5.2: When the server completes negotiation and returns the CAP_EXTENDED_SECURITY flag as not set, Windows-based SMB clients query the [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) to verify whether a service ticket is registered for the given [**security principal name (SPN)**](#gt_security-principal-name-spn). If the query indicates that the SPN is registered with the KDC, then the SMB client terminates the connection and returns an implementation-specific security downgrade error to the caller.
 
-<95> Section 3.2.5.3: The Windows GSS implementation supports raw Kerberos / NTLM messages in the **SecurityBlob** as described in [MS-AUTHSOD](#Section_1.3) section 2.1.2.2.
+<95> Section 3.2.5.3: The Windows GSS implementation supports raw Kerberos / NTLM messages in the **SecurityBlob** as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.2.
 
 <96> Section 3.2.5.3: Windows Vista operating system with Service Pack 1 (SP1), Windows Server 2008 operating system and later and Windows 7 operating system and later servers fail a non-extended security session setup request with STATUS_INVALID_PARAMETER if the registry key is either missing or set to zero.
 

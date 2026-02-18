@@ -290,7 +290,7 @@ A Miracast over Infrastructure session involves the following principals.
 
 **Miracast Sink:** A device that receives audio and video streams from the Miracast Source. This device is sometimes called a "receiver". Optionally, this device can also send input signals back to the Miracast Source.
 
-The following diagram illustrates the logical flow of establishing a Miracast over Infrastructure session, including successful and unsuccessful outcomes. For further details, see Protocol Details (section [3](#Section_1.3)).
+The following diagram illustrates the logical flow of establishing a Miracast over Infrastructure session, including successful and unsuccessful outcomes. For further details, see Protocol Details (section [3](#Section_3)).
 
 ![A Miracast over Infrastructure session](media/image1.png)
 
@@ -386,7 +386,7 @@ packet-beta
 | Message type | Section | Description |
 | --- | --- | --- |
 | SOURCE_READY 0x01 | [2.2.1](#Section_2.2.1) | Indicates the Miracast Source is ready to accept a connection on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port. |
-| STOP_PROJECTION 0x02 | [2.2.2](#Section_3.1.5.7) | Indicates the end of the projection. |
+| STOP_PROJECTION 0x02 | [2.2.2](#Section_2.2.2) | Indicates the end of the projection. |
 | SECURITY_HANDSHAKE 0x03 | [2.2.3](#Section_2.2.3) | Used to exchange DTLS handshake messages to initiate a connection with encryption of the multimedia stream. |
 | SESSION_REQUEST 0x04 | [2.2.4](#Section_2.2.4) | Indicates the Miracast Source intends to connect to the Sink using the specified options. |
 | PIN_CHALLENGE 0x05 | [2.2.5](#Section_2.2.5) | Sent by the Miracast Source to initiate the session using the PIN displayed by the Miracast Sink. |
@@ -881,7 +881,7 @@ The host name received by the Source during device discovery specifies the unqua
 
 When host name resolution is complete, the session proceeds to the Projection phase.
 
-The Source uses a **Discovery timer** (section [3.2.2](#Section_3.1.2)) to limit the time it spends on host name resolution. If this timer reaches its timeout, the host name resolution fails, and the Source falls back to standard Miracast.
+The Source uses a **Discovery timer** (section [3.2.2](#Section_3.2.2)) to limit the time it spends on host name resolution. If this timer reaches its timeout, the host name resolution fails, and the Source falls back to standard Miracast.
 
 **Projection**
 
@@ -903,7 +903,7 @@ In the case of beginning at the Security Handshake step, the Source sends a Secu
 
 In the case beginning at the Session Request step, the Source sends a Session Request message (section 2.2.4) and then proceeds to the Security Handshake phase. When the Sink which supports PIN entry receives the Session Request message with the PIN entry bit in the Security Options set (section [2.2.7.5](#Section_2.2.7.5)), it displays a random PIN for the user of the Source to provide. After the Security Handshake, if PIN entry was selected, the Source waits for user input of the displayed PIN then proceeds to the PIN entry phase to validate the PIN with the sink. The TLVArray of the PIN Challenge (section [2.2.5](#Section_2.2.5)) and PIN Response (section [2.2.6](#Section_2.2.6)) messages are encrypted using the key exchanged during the DTLS handshake. Following the PIN exchange, if performed, the Source listens on Real-Time Streaming Protocol (RTSP) control port 7236 for a connection request, then it sends the Source Ready message with the TLVArray encrypted using the key exchanged during the DTLS handshake. In turn, the Sink connects to the specified RTSP Source port to establish the link. In this case, the RTP (video and audio) and UIBC traffic shall be encrypted using the DTLS key exchanged.
 
-To stop the projection, the Source sends a Stop Projection message (section [2.2.2](#Section_3.1.5.7)) to notify the Sink. Upon receipt of that message, the Sink stops displaying the stream, and a disconnection follows from the Source on the socket that is connected on port 7250. The Sink may send a Stop Projection message to notify the Source of a graceful teardown of the session. Upon receipt of that message, the Source stops sending RTP/RTSP frames, and a disconnection follows on the socket that is connected on port 7250.
+To stop the projection, the Source sends a Stop Projection message (section [2.2.2](#Section_2.2.2)) to notify the Sink. Upon receipt of that message, the Sink stops displaying the stream, and a disconnection follows from the Source on the socket that is connected on port 7250. The Sink may send a Stop Projection message to notify the Source of a graceful teardown of the session. Upon receipt of that message, the Source stops sending RTP/RTSP frames, and a disconnection follows on the socket that is connected on port 7250.
 
 <a id="Section_3.1"></a>
 ## 3.1 Miracast Sink Details
@@ -959,7 +959,7 @@ Finally, the Sink MUST begin being discoverable by [**Beacons**](#gt_beacon) and
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-When the higher-layer application or protocol requests to disconnect the Miracast connection, the Sink MUST send the Stop Projection message (section [2.2.2](#Section_3.1.5.7)) to the Source to stop the projection of the multimedia data stream. After sending this message, the Sink MUST close the RTSP and TCP port 7250 session.
+When the higher-layer application or protocol requests to disconnect the Miracast connection, the Sink MUST send the Stop Projection message (section [2.2.2](#Section_2.2.2)) to the Source to stop the projection of the multimedia data stream. After sending this message, the Sink MUST close the RTSP and TCP port 7250 session.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -972,24 +972,24 @@ When a Miracast Sink receives a [**Probe Request**](#gt_probe-request) message, 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Receive Connection Request
 
-When a Miracast Sink receives a new [**TCP**](#gt_transmission-control-protocol-tcp) connection attempt on port 7250, but it already has a TCP connection established, the Sink SHOULD reject the new connection request, but it MAY close the existing TCP connection instead and accept the new one.<4> The Sink MUST enter the Socket Connected state (section [3.1.1](#Section_3.1)) and wait for the next message. The Sink MUST begin the Session Establishment Timer.
+When a Miracast Sink receives a new [**TCP**](#gt_transmission-control-protocol-tcp) connection attempt on port 7250, but it already has a TCP connection established, the Sink SHOULD reject the new connection request, but it MAY close the existing TCP connection instead and accept the new one.<4> The Sink MUST enter the Socket Connected state (section [3.1.1](#Section_3.1.1)) and wait for the next message. The Sink MUST begin the Session Establishment Timer.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Receive Source Ready Message
 
-When a Miracast Sink receives a Source Ready message (section [2.2.1](#Section_2.2.1)) while it is in the Socket Connected, Session Requested, DTLS Handshake Complete, or PIN Challenge state (section [3.1.1](#Section_3.1)), it MUST connect back to the Source over [**TCP**](#gt_transmission-control-protocol-tcp) on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port specified in the message.
+When a Miracast Sink receives a Source Ready message (section [2.2.1](#Section_2.2.1)) while it is in the Socket Connected, Session Requested, DTLS Handshake Complete, or PIN Challenge state (section [3.1.1](#Section_3.1.1)), it MUST connect back to the Source over [**TCP**](#gt_transmission-control-protocol-tcp) on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port specified in the message.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receive Session Request Message
 
-When a Miracast Sink receives a Session Request message (section [2.2.4](#Section_2.2.4)), it MUST parse the Security Options TLV (section [2.2.7.5](#Section_2.2.7.5)), store the Security Options (section [3.1.1](#Section_3.1)), and determine the next expected state. If the Security Options indicate UseDtlsStreamEncryption (section 2.2.7.5) and the Sink included this bit in its capabilities, then the Sink MUST go to the Waiting for Security Handshake state (section 3.1.1). If the Security Options also indicate SinkDisplaysPin (section 2.2.7.5) and the Sink included this bit in its capabilities, then the Sink MUST randomly generate and display an 8 digit numeric PIN.
+When a Miracast Sink receives a Session Request message (section [2.2.4](#Section_2.2.4)), it MUST parse the Security Options TLV (section [2.2.7.5](#Section_2.2.7.5)), store the Security Options (section [3.1.1](#Section_3.1.1)), and determine the next expected state. If the Security Options indicate UseDtlsStreamEncryption (section 2.2.7.5) and the Sink included this bit in its capabilities, then the Sink MUST go to the Waiting for Security Handshake state (section 3.1.1). If the Security Options also indicate SinkDisplaysPin (section 2.2.7.5) and the Sink included this bit in its capabilities, then the Sink MUST randomly generate and display an 8 digit numeric PIN.
 
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 Receive Security Handshake Message
 
 When a Miracast Sink receives a Security Handshake message (section [2.2.3](#Section_2.2.3)) and one of the following is true, it MUST proceed to complete the DTLS handshake procedure:
 
-- The Sink is in the Socket Connected state (section [3.1.1](#Section_3.1)).
+- The Sink is in the Socket Connected state (section [3.1.1](#Section_3.1.1)).
 - The Sink is in the Waiting for Security Handshake state (section 3.1.1).
 - The Sink is currently in the DTLS Handshake state (section 3.1.1) and this is an additional message.
 In all other cases, the Sink MUST ignore the message and MUST tear down the connection on TCP port 7250.
@@ -1001,7 +1001,7 @@ Upon completion of the DTLS handshake, the DTLS Encryption Key is stored for the
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 Receive PIN Challenge Message
 
-When the Miracast Sink receives a PIN Challenge message (section [2.2.7.6](#Section_2.2.7.6)) and it is in the Waiting for PIN state (section [3.1.1](#Section_3.1)), it MUST validate that the PIN Challenge TLV (section 2.2.7.6) contains the correct salted hash of the PIN.
+When the Miracast Sink receives a PIN Challenge message (section [2.2.7.6](#Section_2.2.7.6)) and it is in the Waiting for PIN state (section [3.1.1](#Section_3.1.1)), it MUST validate that the PIN Challenge TLV (section 2.2.7.6) contains the correct salted hash of the PIN.
 
 The salted hash of the PIN is derived as defined in section [3.1.5.6.1](#Section_3.1.5.6.1), using IP address of the Sink for the TCP connection over 7250.
 
@@ -1047,12 +1047,12 @@ af 3f 35 61 07 e1 d0 73 1e a9 bb 18 38 03 f9 c7
 <a id="Section_3.1.5.7"></a>
 #### 3.1.5.7 Receive Stop Projection Message
 
-When a Miracast Sink receives a Stop Projection message (section [2.2.2](#Section_3.1.5.7)), it MUST stop displaying the stream.
+When a Miracast Sink receives a Stop Projection message (section [2.2.2](#Section_2.2.2)), it MUST stop displaying the stream.
 
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 Receive Unexpected Message on TCP Port 7250
 
-When the Miracast Sink receives an unknown message type or a message type that is not expected based on its current state (as defined in section [3.1.1](#Section_3.1) or in a subsection under [3.1.5](#Section_3.1.5)), it MUST tear down the connection on TCP port 7250.
+When the Miracast Sink receives an unknown message type or a message type that is not expected based on its current state (as defined in section [3.1.1](#Section_3.1.1) or in a subsection under [3.1.5](#Section_3.1.5)), it MUST tear down the connection on TCP port 7250.
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -1064,14 +1064,14 @@ If either of the Miracast Sink timers (section [3.1.2](#Section_3.1.2)) reaches 
 
 If the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) connection receives a teardown message as it does in standard Miracast, or if the connection to the Source is lost, or if the TCP port 7250 connection is lost, the Sink MUST close its session.
 
-If any global configuration from section [3.1.1](#Section_3.1) is changed, then the new configuration MUST apply to all future connections and the initialization step MUST be repeated. Any existing connections SHOULD be terminated but an implementation MAY leave the sessions connected.
+If any global configuration from section [3.1.1](#Section_3.1.1) is changed, then the new configuration MUST apply to all future connections and the initialization step MUST be repeated. Any existing connections SHOULD be terminated but an implementation MAY leave the sessions connected.
 
 <a id="Section_3.1.7.1"></a>
 #### 3.1.7.1 RTSP Connection is successfully established
 
 When the Miracast Sink connects back to the Source over TCP on the RTSP port, the Sink MUST stop the Session Establishment Timer.
 
-The Sink MUST perform standard RTSP behavior. If the DTLS Encryption Key is stored (section [3.1.1](#Section_3.1)) from performing the security handshake, then the Miracast protocol is modified as follows:
+The Sink MUST perform standard RTSP behavior. If the DTLS Encryption Key is stored (section [3.1.1](#Section_3.1.1)) from performing the security handshake, then the Miracast protocol is modified as follows:
 
 - All RTP packets MUST be encrypted by the Source and decrypted by the Sink using the DTLS Encryption Key.
 - The UIBC Input Body of the UIBC payload MUST be encrypted by the Sink and decrypted by the Source using the DTLS Encryption Key.
@@ -1116,7 +1116,7 @@ This Miracast Source uses the following timers.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The Source ID [**TLV**](#gt_type-length-value-tlv) (section [2.2.7.3](#Section_2.2.7.3)) of the abstract data model (section [3.2.1](#Section_3.2)) is initialized to an implementation-dependent value.
+The Source ID [**TLV**](#gt_type-length-value-tlv) (section [2.2.7.3](#Section_2.2.7.3)) of the abstract data model (section [3.2.1](#Section_3.2.1)) is initialized to an implementation-dependent value.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1129,12 +1129,12 @@ When a higher-layer application requests discovery of Miracast Sinks, the Miraca
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 PIN Entry
 
-When a higher-layer application provides a PIN value, the Miracast Source MUST set its PIN (section [3.2.1](#Section_3.2)) to that value. The Source must wait for the DTLS Handshake to complete if it has not already.
+When a higher-layer application provides a PIN value, the Miracast Source MUST set its PIN (section [3.2.1](#Section_3.2.1)) to that value. The Source must wait for the DTLS Handshake to complete if it has not already.
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Disconnect Request
 
-When the higher-layer application or protocol requests to disconnect the Miracast connection, the Source MUST send the Stop Projection message (section [2.2.2](#Section_3.1.5.7)) to the Sink to stop the projection of the multimedia data stream. After sending this message, the Source MUST close the TCP session
+When the higher-layer application or protocol requests to disconnect the Miracast connection, the Source MUST send the Stop Projection message (section [2.2.2](#Section_2.2.2)) to the Sink to stop the projection of the multimedia data stream. After sending this message, the Source MUST close the TCP session
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -1142,13 +1142,13 @@ When the higher-layer application or protocol requests to disconnect the Miracas
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receive Beacon with Vendor Extension Attribute
 
-When a Miracast Source receives a [**Beacon**](#gt_beacon) message that includes a Vendor Extension Attribute (section [2.2.8](#Section_2.2.8)), it MUST read the Capability attribute (section [2.2.8.1](#Section_2.2.8.1)), and store this information in the Sink Capabilities (section [3.2.1](#Section_3.2)). If the **MiracastOverInfrastructureSupport** bit is not set, the Source MUST fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
+When a Miracast Source receives a [**Beacon**](#gt_beacon) message that includes a Vendor Extension Attribute (section [2.2.8](#Section_2.2.8)), it MUST read the Capability attribute (section [2.2.8.1](#Section_2.2.8.1)), and store this information in the Sink Capabilities (section [3.2.1](#Section_3.2.1)). If the **MiracastOverInfrastructureSupport** bit is not set, the Source MUST fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
 
 If Miracast over Infrastructure is supported by the Sink, the Source MUST do the following.
 
 - If one or more IP Address attributes (section [2.2.8.5](#Section_2.2.8.5)) are present in the message, the Source SHOULD<5> skip name resolution and treat the addresses as the result of host name resolution, by proceeding as specified in section [3.2.5.3](#Section_3.2.5.3); however, the Source MAY instead ignore them and continue as if they were not present.
 - If host name resolution was not skipped, the Source MUST do the following.
-- Start its **Discovery timer** (section [3.2.2](#Section_3.1.2)) to expire after an implementation-specific<6> period of time if host name resolution does not complete.
+- Start its **Discovery timer** (section [3.2.2](#Section_3.2.2)) to expire after an implementation-specific<6> period of time if host name resolution does not complete.
 - Begin host name resolution on the name in the Host Name Attribute (section [2.2.8.2](#Section_2.2.8.2)), using DNS and/or mDNS, the choice of which is implementation-specific.<7>
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Receive Probe Response with Vendor Extension Attribute
@@ -1162,7 +1162,7 @@ If Miracast over Infrastructure is supported by the Sink, the Source MUST perfor
 
 When a Miracast Source obtains a set of one or more IP addresses of the Miracast Sink, the Source MUST do the following.
 
-- Cancel its **Discovery timer** (section [3.2.2](#Section_3.1.2)).
+- Cancel its **Discovery timer** (section [3.2.2](#Section_3.2.2)).
 - Start its **Control Channel Connection timer**, which will expire after an implementation-specific<8> time unless it receives a connection over the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) control channel.
 - Attempt a connection to one of the IP addresses over [**TCP**](#gt_transmission-control-protocol-tcp) port 7250. The method of choosing a Sink IP address is implementation-specific.<9>
 <a id="Section_3.2.5.4"></a>
@@ -1174,7 +1174,7 @@ When the connection to the Sink over [**TCP**](#gt_transmission-control-protocol
 - Fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
 If the connection attempt succeeds, the Source MUST do the following.
 
-- Determine the optional features of the protocol to use and store them for the session (section [3.2.1](#Section_3.2)). If the Sink had the StreamEncryptionSupported bit set in the Capability Attribute (section [2.2.8.1](#Section_2.2.8.1)) the Source SHOULD<10> use stream encryption in the connection setup. If the Sink had the PinSupported bit set in the Capability Attribute, the Source SHOULD<11> use PIN display for the connection. The decision to use these capabilities is implementation specific and the result is stored in Selected Sink Capabilities (section 3.2.1).
+- Determine the optional features of the protocol to use and store them for the session (section [3.2.1](#Section_3.2.1)). If the Sink had the StreamEncryptionSupported bit set in the Capability Attribute (section [2.2.8.1](#Section_2.2.8.1)) the Source SHOULD<10> use stream encryption in the connection setup. If the Sink had the PinSupported bit set in the Capability Attribute, the Source SHOULD<11> use PIN display for the connection. The decision to use these capabilities is implementation specific and the result is stored in Selected Sink Capabilities (section 3.2.1).
 - If PIN entry is set in Selected Sink Capabilities (section 3.2.1):
 - The Source MUST send a Session Request message (section [2.2.4](#Section_2.2.4)) over the TCP session. The Security Option TLV (section [2.2.7.5](#Section_2.2.7.5)) in this message MUST contain the appropriate bits based on the Selected Sink Capabilities (section 3.2.1).
 - If Stream Encryption is set in Selected Sink Capabilities (section 3.2.1):
@@ -1185,7 +1185,7 @@ If the connection attempt succeeds, the Source MUST do the following.
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Receive Security Handshake Message
 
-When the Miracast Source receives a Security Handshake message (section [2.2.3](#Section_2.2.3)) and it is in the Security Handshake state of the connection flow but not yet complete (section [3.2.1](#Section_3.2)), it MUST proceed to complete the DTLS handshake procedure.
+When the Miracast Source receives a Security Handshake message (section [2.2.3](#Section_2.2.3)) and it is in the Security Handshake state of the connection flow but not yet complete (section [3.2.1](#Section_3.2.1)), it MUST proceed to complete the DTLS handshake procedure.
 
 The DTLS handshake procedure MUST be performed by parsing the Security Token TLV (section [2.2.7.4](#Section_2.2.7.4)) and responding. The procedure might involve multiple messages being sent and received, as specified in [[RFC6347]](https://go.microsoft.com/fwlink/?linkid=874835). Upon receiving a Security Handshake message, the Source MUST reset the **Security Handshake Message Timer**. Upon sending a Security Handshake message that requires a response, the Source MUST begin the **Security Handshake Message Timer**.
 
@@ -1223,9 +1223,9 @@ In all other cases, the Source MUST:
 
 When a Miracast Sink accepts an [**RTSP**](#gt_real-time-streaming-protocol-rtsp) connection, the Miracast Source MUST do the following.
 
-- Cancel the **Control Channel Connection** timer (section [3.2.2](#Section_3.1.2)).
+- Cancel the **Control Channel Connection** timer (section [3.2.2](#Section_3.2.2)).
 - Perform standard RTSP behavior.
-If Stream Encryption is set in **Selected Sink Capabilities** (section [3.2.1](#Section_3.2)), then the Miracast protocol is modified as follows:
+If Stream Encryption is set in **Selected Sink Capabilities** (section [3.2.1](#Section_3.2.1)), then the Miracast protocol is modified as follows:
 
 - All RTP packets MUST be encrypted by the Source and decrypted by the Sink using the **DTLS Encryption Key**.
 - The UIBC Input Body of the UIBC payload MUST be encrypted by the Sink and decrypted by the Source using the **DTLS Encryption Key**.
@@ -1239,7 +1239,7 @@ When the Miracast Source receives an unknown message type or a message type that
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-If any of the Miracast Source timers (section [3.2.2](#Section_3.1.2)) reaches its timeout, the Source MUST do the following.
+If any of the Miracast Source timers (section [3.2.2](#Section_3.2.2)) reaches its timeout, the Source MUST do the following.
 
 - Abandon its attempt to start a Miracast over Infrastructure session by closing any connections to the Sink and deleting its state.
 - Fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
@@ -1315,7 +1315,7 @@ This is an example of the Source Ready message (section [2.2.1](#Section_2.2.1))
 <a id="Section_4.3"></a>
 ## 4.3 Stop Projection Message Example
 
-This is an example of the Stop Projection message (section [2.2.2](#Section_3.1.5.7)).
+This is an example of the Stop Projection message (section [2.2.2](#Section_2.2.2)).
 
 00 38 // Size (56 bytes)
 

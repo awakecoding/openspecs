@@ -252,9 +252,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_1.3)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_1.3)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -276,7 +276,7 @@ Whenever GPOs are created or updated, Group Policy fires the **Process Group Pol
 
 A CSE uses GPO metadata to locate and retrieve settings that are specific to the CSE, and does so in a manner that is specific to that CSE. After the CSE-specific settings are retrieved, the CSE uses those settings to configure policy settings on Group Policy client computers.
 
-For additional background information about Group Policy, refer to the Group Policy Protocols Overview document [MS-GPOD](#Section_1.3).
+For additional background information about Group Policy, refer to the Group Policy Protocols Overview document [MS-GPOD](../MS-GPOD/MS-GPOD.md).
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Central Access Policies Protocol Extension Overview
@@ -328,7 +328,7 @@ Authorization policies are manually applied on a Group Policy client computer, s
 
 The Group Policy: Central Access Policies Extension depends on the Group Policy: Core Protocol specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md), to provide a list, via LDAP, of GPOs that apply to [**policy target**](#gt_policy-target) accounts. This protocol also depends on LDAP for retrieving CAPs. The Group Policy: Central Access Policies Extension also transmits [**Group Policy**](#gt_group-policy) settings and instructions between the [**Group Policy client**](#gt_group-policy-client) and the [**Group Policy file share**](#gt_group-policy-file-share) by reading and writing files via a file access protocol.
 
-**Note** For an overview of file access concepts, see [MS-FASOD](#Section_1.3).
+**Note** For an overview of file access concepts, see [MS-FASOD](../MS-FASOD/MS-FASOD.md).
 
 The following diagram illustrates the protocol relationships.
 
@@ -378,7 +378,7 @@ Standard assignments for the Group Policy: Central Access Policies Extension con
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The Group Policy: Central Access Policies Extension requires remote access to policy files, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2. All messages specified in section [2.2](../MS-GPOL/MS-GPOL.md) of this specification MUST be exchanged via a file access protocol between the [**Group Policy client**](#gt_group-policy-client) and [**Group Policy server**](#gt_group-policy-server) and between the [**Administrative tool**](#gt_administrative-tool) and the Group Policy server, assuming that the [**Group Policy file share**](#gt_group-policy-file-share) is located on the Group Policy server ( section [1.3](#Section_1.3)). <2>
+The Group Policy: Central Access Policies Extension requires remote access to policy files, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2. All messages specified in section [2.2](#Section_2.2) of this specification MUST be exchanged via a file access protocol between the [**Group Policy client**](#gt_group-policy-client) and [**Group Policy server**](#gt_group-policy-server) and between the [**Administrative tool**](#gt_administrative-tool) and the Group Policy server, assuming that the [**Group Policy file share**](#gt_group-policy-file-share) is located on the Group Policy server ( section [1.3](#Section_1.3)). <2>
 
 The [**core Group Policy engine**](#gt_core-group-policy-engine) MUST use this protocol's CSE GUID and [**Administrative tool extension GUID**](#gt_administrative-tool-extension-guid) values to invoke the client or administrative side of this protocol, respectively, which in turn invoke [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to access GPOs that require processing by this protocol.
 
@@ -496,7 +496,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-When the administrative-side extension of this protocol is invoked, it MUST obtain a [**computer-scoped Group Policy Object path**](#gt_computer-scoped-group-policy-object-path) from the **gPCFileSysPath** attribute of a GPO via the [**core Group Policy engine**](#gt_core-group-policy-engine), as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. It MUST then perform the processing instructions specified in section [3.1.5.1](../MS-GPOL/MS-GPOL.md).
+When the administrative-side extension of this protocol is invoked, it MUST obtain a [**computer-scoped Group Policy Object path**](#gt_computer-scoped-group-policy-object-path) from the **gPCFileSysPath** attribute of a GPO via the [**core Group Policy engine**](#gt_core-group-policy-engine), as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. It MUST then perform the processing instructions specified in section [3.1.5.1](#Section_3.1.5.1).
 
 **Note** The administrative-side extension of this protocol does not maintain any local state and therefore does not require local state variables nor any subsequent variable initialization. The administrative-side extension loads all the settings specified in section [2.2](#Section_2.2) into memory.
 
@@ -576,7 +576,7 @@ None.
 <a id="Section_3.2"></a>
 ## 3.2 Central Access Policy Configuration Client-Side Extension Details
 
-The CSE of the Group Policy: Central Access Policies Extension interacts with Group Policy as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2. The CSE MUST retrieve the [**central access policy (CAP)**](#gt_central-access-policy-cap) (section [3.2.5](../MS-GPOL/MS-GPOL.md)) and modify the appropriate part of the ADM for each element in the policy, as specified in this section.
+The CSE of the Group Policy: Central Access Policies Extension interacts with Group Policy as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2. The CSE MUST retrieve the [**central access policy (CAP)**](#gt_central-access-policy-cap) (section [3.2.5](#Section_3.2.5)) and modify the appropriate part of the ADM for each element in the policy, as specified in this section.
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -643,7 +643,7 @@ The CSE of this protocol receives the following higher-layer triggered event:
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Process Group Policy
 
-The CSE of Group Policy: Central Access Policies Extension protocol implements the **Process Group Policy** abstract event interface, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1. The CSE does not make use of the *Deleted GPO list*, *SessionFlags*, or the *SecurityToken* logical parameters of the event; rather, it only requires the *New or Changed GPO list* parameter. When the event is triggered, the CSE MUST perform the actions specified in section [3.2.5](../MS-GPOL/MS-GPOL.md).
+The CSE of Group Policy: Central Access Policies Extension protocol implements the **Process Group Policy** abstract event interface, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1. The CSE does not make use of the *Deleted GPO list*, *SessionFlags*, or the *SecurityToken* logical parameters of the event; rather, it only requires the *New or Changed GPO list* parameter. When the event is triggered, the CSE MUST perform the actions specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -651,7 +651,7 @@ The CSE of Group Policy: Central Access Policies Extension protocol implements t
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Client-Side Extension Invocation
 
-The CSE of the Group Policy: Central Access Policies Extension protocol MUST be invoked by the **Process Group Policy** event specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.10 whenever applicable GPOs require processing on the [**Group Policy client**](#gt_group-policy-client), as determined by the [**policy application**](#gt_policy-application) process specified in [MS-GPOL] section 3.2.5.1. When this occurs, the CSE of this protocol MUST perform the actions specified in sections [3.2.5.2](../MS-GPOL/MS-GPOL.md) and [3.2.5.3](../MS-GPOL/MS-GPOL.md).
+The CSE of the Group Policy: Central Access Policies Extension protocol MUST be invoked by the **Process Group Policy** event specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1.10 whenever applicable GPOs require processing on the [**Group Policy client**](#gt_group-policy-client), as determined by the [**policy application**](#gt_policy-application) process specified in [MS-GPOL] section 3.2.5.1. When this occurs, the CSE of this protocol MUST perform the actions specified in sections [3.2.5.2](#Section_3.2.5.2) and [3.2.5.3](#Section_3.2.5.3).
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Client-Side Extension Sequences
@@ -743,7 +743,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.3.2.1: In Windows, Group Policy and this protocol extension use file access services protocols (see [MS-FASOD](#Section_1.3) for file access operations.
+<1> Section 1.3.2.1: In Windows, Group Policy and this protocol extension use file access services protocols (see [MS-FASOD](../MS-FASOD/MS-FASOD.md) for file access operations.
 
 <2> Section 2.1: In Windows, the [**Group Policy file share**](#gt_group-policy-file-share) repository is a [**system volume (SYSVOL)**](#gt_system-volume-sysvol) share on the [**Group Policy server**](#gt_group-policy-server).
 

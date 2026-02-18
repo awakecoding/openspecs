@@ -187,7 +187,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](#Section_2.1)".
+[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](../MS-RDPEUDP/MS-RDPEUDP.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -199,7 +199,7 @@ None.
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The RDP-UDP2 transport specifies an extension mode to the RDP-UDP transport defined in the document [MS-RDPEUDP](#Section_2.1). This document describes the operational behaviors of the transport protocol when operating in the RDP-UDP2 mode. It has been designed to improve the performance of the network connectivity compared to a corresponding RDP-UDP connection and RDP-TCP connection, especially on wide area networks (WANs) or wireless networks with inherent packet loss noise.
+The RDP-UDP2 transport specifies an extension mode to the RDP-UDP transport defined in the document [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md). This document describes the operational behaviors of the transport protocol when operating in the RDP-UDP2 mode. It has been designed to improve the performance of the network connectivity compared to a corresponding RDP-UDP connection and RDP-TCP connection, especially on wide area networks (WANs) or wireless networks with inherent packet loss noise.
 
 The RDP-UDP2 transport extension has the following goals:
 
@@ -216,7 +216,7 @@ Unlike the RDP-UDP protocol however, the RDP-UDP2 transport only supports "Relia
 <a id="Section_1.3.1"></a>
 ### 1.3.1 RDP-UDP to RDP-UDP2 Transition
 
-The Remote Desktop UDP Transport Extension v2 protocol has two distinct phases of operation. The initial phase, UDP Connection Initialization, occurs when a [**UDP**](#gt_user-datagram-protocol-udp) connection is initialized between the [**terminal client (2)**](#gt_0e260a32-2049-4eaa-bdec-bfdee19bad4b) and the [**terminal server**](#gt_terminal-server). Data pertaining to the connection is exchanged and the UDP connection is setup as described in [MS-RDPEUDP](#Section_2.1). After this phase is completed successfully and an RDPUDP_PROTOCOL_VERSION is negotiated, this value is used to determine which version of the UDP transport extension will be used for the Data Transfer phase. If the negotiated RDPUDP_PROTOCOL_VERSION is RDPUDP_PROTOCOL_VERSION_2 or earlier, the protocol enters the RDP-UDP Data Transfer phase, where [**Coded Packets**](#gt_coded-packet) are exchanged according to the protocol described in the [MS-RDPEUDP] document. If the negotiated RDPUDP_PROTOCOL_VERSION value is greater than RDPUDP_PROTOCOL_VERSION_2, the protocol enters the v2 Data Transfer phase, where Coded Packets are exchanged according to the protocol described in the current document.
+The Remote Desktop UDP Transport Extension v2 protocol has two distinct phases of operation. The initial phase, UDP Connection Initialization, occurs when a [**UDP**](#gt_user-datagram-protocol-udp) connection is initialized between the [**terminal client (2)**](#gt_0e260a32-2049-4eaa-bdec-bfdee19bad4b) and the [**terminal server**](#gt_terminal-server). Data pertaining to the connection is exchanged and the UDP connection is setup as described in [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md). After this phase is completed successfully and an RDPUDP_PROTOCOL_VERSION is negotiated, this value is used to determine which version of the UDP transport extension will be used for the Data Transfer phase. If the negotiated RDPUDP_PROTOCOL_VERSION is RDPUDP_PROTOCOL_VERSION_2 or earlier, the protocol enters the RDP-UDP Data Transfer phase, where [**Coded Packets**](#gt_coded-packet) are exchanged according to the protocol described in the [MS-RDPEUDP] document. If the negotiated RDPUDP_PROTOCOL_VERSION value is greater than RDPUDP_PROTOCOL_VERSION_2, the protocol enters the v2 Data Transfer phase, where Coded Packets are exchanged according to the protocol described in the current document.
 
 ![image2](media/image2.png)
 
@@ -293,7 +293,7 @@ packet-beta
   320-447: "DataBody Payload (variable)"
 ```
 
-**Header (2 bytes):** A **Header** field as defined in section [2.2.2.1.](#Section_501167f0ad5c4c05b8f72649b2181b85)1.
+**Header (2 bytes):** A **Header** field as defined in section [2.2.2.1.](#Section_2.2.1.1)1.
 
 **ACK Payload (variable):** An **ACK Payload** field as defined in section [2.2.1.2.1](#Section_2.2.1.2.1).
 
@@ -463,7 +463,7 @@ packet-beta
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 PacketPrefixByte
 
-The PacketPrefixByte is a byte that MUST be sent with each RDP-UDP2 packet. The byte MUST be inserted in the RDP-UDP2 packet as described in section [3.1.1.1.5](#Section_3.1.1.1.5.2).
+The PacketPrefixByte is a byte that MUST be sent with each RDP-UDP2 packet. The byte MUST be inserted in the RDP-UDP2 packet as described in section [3.1.1.1.5](#Section_3.1.1.1.5).
 
 ```mermaid
 packet-beta
@@ -489,7 +489,7 @@ packet-beta
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The initialization phase from [MS-RDPEUDP](#Section_2.1) is used to negotiate the version of RDP UDP protocol, as specified in section [1.3.1](../MS-RDPEUDP/MS-RDPEUDP.md). If the negotiated version is greater than RDPUDP_PROTOCOL_VERSION_2, then RDP UDP Transport Extension v2 is used for the data transfer. RDP UDP Transport Extension v2 is a self-sufficient transport protocol that has a flow control mechanism that monitors packet flow in steady network traffic and that deals with packet losses caused by the unreliability of underlying UDP transport. The information exchanged over this protocol is used to detect available bandwidth and adapt the Remote Desktop Protocol to provide optimal performance for the detected runtime network condition.
+The initialization phase from [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) is used to negotiate the version of RDP UDP protocol, as specified in section [1.3.1](#Section_1.3.1). If the negotiated version is greater than RDPUDP_PROTOCOL_VERSION_2, then RDP UDP Transport Extension v2 is used for the data transfer. RDP UDP Transport Extension v2 is a self-sufficient transport protocol that has a flow control mechanism that monitors packet flow in steady network traffic and that deals with packet losses caused by the unreliability of underlying UDP transport. The information exchanged over this protocol is used to detect available bandwidth and adapt the Remote Desktop Protocol to provide optimal performance for the detected runtime network condition.
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 RDP-UDP2 Data Transfer Operation
@@ -517,7 +517,7 @@ The user generated data from higher layers of the RDP stack is encapsulated in t
 
 All [**Coded Packets**](#gt_coded-packet) have a sequence number that identifies their sending order. The sequence number uniquely identifies each datagram sent by the Sender. The sequence number value is increased by one for each Coded Packet that was sent. Retransmitted packets can have a different coded sequence number. The full resolution of a sequence number is 64 bit.
 
-To reduce the payload size of sending a sequence number in each packet, only the lower 16 bits of the sequence number is sent in a DATA payload. The Receiver SHOULD reconstruct the full sequence number using the technique described below. The active range of sequence numbers in use is limited to (1<< **LogWindowSize**)-1, where the variable **LogWindowSize** is specified in the header (section [2.2.2.1.](#Section_501167f0ad5c4c05b8f72649b2181b85)2) and has a maximum value of 15. So, the active range of the sequence numbers is limited to 32,767. This ensures that the full sequence number can be recovered without ambiguity using a nearby reference sequence number, which should be the sequence number of the last packet sent by the Sender or the sequence number of the last packet received by the Receiver.
+To reduce the payload size of sending a sequence number in each packet, only the lower 16 bits of the sequence number is sent in a DATA payload. The Receiver SHOULD reconstruct the full sequence number using the technique described below. The active range of sequence numbers in use is limited to (1<< **LogWindowSize**)-1, where the variable **LogWindowSize** is specified in the header (section [2.2.2.1.](#Section_2.2.1.1)2) and has a maximum value of 15. So, the active range of the sequence numbers is limited to 32,767. This ensures that the full sequence number can be recovered without ambiguity using a nearby reference sequence number, which should be the sequence number of the last packet sent by the Sender or the sequence number of the last packet received by the Receiver.
 
 - Form a candidate sequence number by combining the higher 16 bits taken from the reference sequence number and the received sequence number's lower 16 bits.
 - Compare the candidate sequence number with the reference sequence number as follows:
@@ -555,7 +555,7 @@ The **Packet_Type_Index** field contains the type of RDP-UDP2 packet that follow
 
 Before an RDP-UDP2 packet is sent over the UDP transport by the sender, it MUST be transformed to include the **PacketPrefixByte** using the procedure outlined below. After the procedure is completed, the payload can be sent over the UDP transport and the **PacketPrefixByte** will always be the eighth byte in the transmitted payload.
 
-- Generate a valid **PacketPrefixByte** (section [3.1.1.1.5](#Section_3.1.1.1.5.2)).
+- Generate a valid **PacketPrefixByte** (section [3.1.1.1.5](#Section_3.1.1.1.5)).
 - If the size of the RDP-UDP2 Packet Layout is less than 7 bytes, then it MUST be padded to be of length of 7 bytes and the original length in bytes MUST be set in the **Short_Packet_Length** field of the **PacketPrefixByte** structure. Otherwise, the **Short_Packet_Length** field of the **PacketPrefixByte** structure MUST be set to 7.
 - Prefix the **PacketPrefixByte** (section [2.2.1.3](#Section_2.2.1.3)) structure to the RDP-UDP2 Packet Layout. After this step, the first byte in the payload is the **PacketPrefixByte**, followed by the RDP-UDP2 Packet Layout.
 - Swap the first byte of the payload, which is the **PacketPrefixByte**, with the eighth byte of the payload.
@@ -674,7 +674,7 @@ The following timers are used by the Remote Desktop Protocol: UDP Transport Exte
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Before the protocol operation can commence, [**User Datagram Protocol (UDP)**](#gt_user-datagram-protocol-udp) network connectivity MUST be established between the endpoints: the [**terminal client (1)**](#gt_0e260a32-2049-4eaa-bdec-bfdee19bad4b) and the [**terminal server**](#gt_terminal-server). After the UDP connection is established, the terminal server and terminal client MUST complete the Connection Initialization Phase using the [MS-RDPEUDP](#Section_2.1) protocol as described in section [1.3.1](../MS-RDPEUDP/MS-RDPEUDP.md).
+Before the protocol operation can commence, [**User Datagram Protocol (UDP)**](#gt_user-datagram-protocol-udp) network connectivity MUST be established between the endpoints: the [**terminal client (1)**](#gt_0e260a32-2049-4eaa-bdec-bfdee19bad4b) and the [**terminal server**](#gt_terminal-server). After the UDP connection is established, the terminal server and terminal client MUST complete the Connection Initialization Phase using the [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) protocol as described in section [1.3.1](#Section_1.3.1).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events

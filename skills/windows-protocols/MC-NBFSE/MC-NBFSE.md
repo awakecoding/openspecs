@@ -109,7 +109,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -223,7 +223,7 @@ According to the StringTable structure, these strings are encoded as shown in th
 | --- | --- | --- |
 | Variable | 11 06 61 63 74 69 6F 6E 09 49 6E 76 65 6E 74 6F 72 79 | ..action.Inventory |
 
-The bolded items in the preceding table are the size (0x11) of the overall structure encoded using [**MultiByteInt31**](#gt_multibyteint31) and the start of the two strings (0x06, 0x09) encoded using MultiByteInt31 as well. The string "action" is assigned a value of 1 and Inventory is assigned a value of 3, as specified in section [2](#Section_1.3).
+The bolded items in the preceding table are the size (0x11) of the overall structure encoded using [**MultiByteInt31**](#gt_multibyteint31) and the start of the two strings (0x06, 0x09) encoded using MultiByteInt31 as well. The string "action" is assigned a value of 1 and Inventory is assigned a value of 3, as specified in section [2](#Section_2).
 
 Now, the two preceding records can be encoded more compactly, as shown in the following tables.
 
@@ -249,7 +249,7 @@ Consumers of this format have to consider limiting the size of the [StringTableÂ
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

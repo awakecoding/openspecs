@@ -250,7 +250,7 @@ This protocol depends on the [**Server Message Block (SMB)**](#gt_server-message
 
 This protocol is a [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc)-based protocol and therefore has the prerequisites, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), common to all RPC interfaces.
 
-Security considerations for RPC usage are specified in section [5.1](#Section_5).
+Security considerations for RPC usage are specified in section [5.1](#Section_5.1).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -633,14 +633,14 @@ ComputerRole is set only during initialization. It is initialized as follows:
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Promotion
 
-Promotion is the act of configuring a server operating system to be a domain controller. At the beginning of promotion, ComputerOperationState MUST be set to DsRoleOperationActive. At the end of promotion, ComputerOperationState MUST be set to DsRoleOperationNeedReboot. Finally, all protocols on the server MUST be reinitialized to complete promotion.<9> The appropriate states of ComputerOperationState and ComputerRole are set during initialization according to section [3.2.3](#Section_3.1.3), regardless of the state of a promotion.
+Promotion is the act of configuring a server operating system to be a domain controller. At the beginning of promotion, ComputerOperationState MUST be set to DsRoleOperationActive. At the end of promotion, ComputerOperationState MUST be set to DsRoleOperationNeedReboot. Finally, all protocols on the server MUST be reinitialized to complete promotion.<9> The appropriate states of ComputerOperationState and ComputerRole are set during initialization according to section [3.2.3](#Section_3.2.3), regardless of the state of a promotion.
 
 The operation or set of operations that constitute promotion (that configure a server operating system to be a domain controller) are server-to-server operations and are not included in this document and are not required for interoperation with clients. The required configuration for successful promotion is the abstract state required of a domain controller's existence as described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.2.1.
 
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Demotion
 
-Demotion is the act of configuring a domain controller to no longer be a domain controller. At the beginning of demotion, ComputerOperationState MUST be set to DsRoleOperationActive. At the end of demotion, ComputerOperationState MUST be set to DsRoleOperationNeedReboot. Finally, all protocols on the server MUST be reinitialized to complete demotion.<10> The appropriate states of ComputerOperationState and ComputerRole are set during initialization according to section [3.2.3](#Section_3.1.3), regardless of the state of a demotion.
+Demotion is the act of configuring a domain controller to no longer be a domain controller. At the beginning of demotion, ComputerOperationState MUST be set to DsRoleOperationActive. At the end of demotion, ComputerOperationState MUST be set to DsRoleOperationNeedReboot. Finally, all protocols on the server MUST be reinitialized to complete demotion.<10> The appropriate states of ComputerOperationState and ComputerRole are set during initialization according to section [3.2.3](#Section_3.2.3), regardless of the state of a demotion.
 
 The operation or set of operations that constitute demotion (that configure a domain controller to no longer be a domain controller) are server-to-server operations and are not included in this document, and are not required for interoperation with clients.
 

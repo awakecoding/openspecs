@@ -153,7 +153,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RDPEDYC] Microsoft Corporation, "[Remote Desktop Protocol: Dynamic Channel Virtual Channel Extension](../MS-RDPEDYC/MS-RDPEDYC.md)".
 
-[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](#Section_2.1)".
+[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](../MS-RDPEUDP/MS-RDPEUDP.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -173,7 +173,7 @@ None.
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The Remote Desktop Protocol: Multitransport Extension enables multiple side-band channels (also referred to as "multitransport connections") between an RDP client and server over different underlying transport protocols such as reliable UDP, or lossy UDP ([MS-RDPEUDP](#Section_2.1) section 1.3.1). Each multitransport connection leverages the strengths of the underlying transport protocol to efficiently deliver different types of RDP content, thereby improving the user's experience, especially on WAN or wireless networks.
+The Remote Desktop Protocol: Multitransport Extension enables multiple side-band channels (also referred to as "multitransport connections") between an RDP client and server over different underlying transport protocols such as reliable UDP, or lossy UDP ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) section 1.3.1). Each multitransport connection leverages the strengths of the underlying transport protocol to efficiently deliver different types of RDP content, thereby improving the user's experience, especially on WAN or wireless networks.
 
 After the main RDP connection has been established and secured, the server can initiate multitransport connections if it is determined that the connection would benefit from additional transports. Each multitransport connection that is initiated is bootstrapped with data that is exchanged on the main RDP connection by using the server-to-client Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1) sent during the RDP connection sequence ([MS-RDPBCGR] section 1.3.1.1).
 
@@ -190,7 +190,7 @@ Bootstrapping, creating, securing and finalizing a multitransport connection use
 
 Figure 1: Messages used by multitransport connections
 
-The RDP server initiates a multitransport connection by sending an Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1) to the RDP client over the main RDP connection. Upon receiving the Initiate Multitransport Request PDU the client initiates the creation of the requested transport (reliable or lossy UDP) as described in [MS-RDPEUDP](#Section_2.1) sections 1.3.2 and 1.3.2.1.
+The RDP server initiates a multitransport connection by sending an Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1) to the RDP client over the main RDP connection. Upon receiving the Initiate Multitransport Request PDU the client initiates the creation of the requested transport (reliable or lossy UDP) as described in [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) sections 1.3.2 and 1.3.2.1.
 
 After the transport has been successfully set up, the connection is secured by using Transport Layer Security (TLS) or Datagram Transport Layer Security (DTLS) to set up a secure channel. TLS ([[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324), [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474) and [[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803)) is used to secure reliable UDP transport connections, while DTLS ([[RFC4347]](https://go.microsoft.com/fwlink/?LinkId=227111)) is used to secure lossy UDP transport connections.
 
@@ -221,14 +221,14 @@ There is no explicit connection-termination protocol over a multitransport conne
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The Remote Desktop Protocol: Multitransport Extension operates over the RDP-UDP protocol, as defined in [MS-RDPEUDP](#Section_2.1) section 1, 2, and 3. Protocol traffic (section [2.2](../MS-RDPEUDP/MS-RDPEUDP.md)) is secured by using Transport Layer Security (TLS) ([[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324), [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474) and [[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803)) for reliable RDP-UDP streams and Datagram Transport Layer Security (DTLS) ([[RFC4347]](https://go.microsoft.com/fwlink/?LinkId=227111)) for unreliable (lossy) RDP-UDP streams. The TLS or DTLS handshake, as well as the encrypted payload, are embedded in the RDPUDP_SOURCE_PAYLOAD_HEADER as defined in [MS-RDPEUDP].
+The Remote Desktop Protocol: Multitransport Extension operates over the RDP-UDP protocol, as defined in [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) section 1, 2, and 3. Protocol traffic (section [2.2](#Section_2.2)) is secured by using Transport Layer Security (TLS) ([[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324), [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474) and [[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803)) for reliable RDP-UDP streams and Datagram Transport Layer Security (DTLS) ([[RFC4347]](https://go.microsoft.com/fwlink/?LinkId=227111)) for unreliable (lossy) RDP-UDP streams. The TLS or DTLS handshake, as well as the encrypted payload, are embedded in the RDPUDP_SOURCE_PAYLOAD_HEADER as defined in [MS-RDPEUDP].
 
 A multitransport connection is initiated by an RDP server sending the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.15.1) to an RDP client over the main RDP connection.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-The multitransport connection must be initiated over the main RDP connection using the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.15.1). The underlying RDP-UDP ([MS-RDPEUDP](#Section_2.1) section 1, 2, and 3) transport which is created must be secured with Transport Layer Security (TLS) or Datagram Transport Layer Security (DTLS).<1> Furthermore, the client and server MUST support the Remote Desktop Protocol: Dynamic Channel Virtual Channel Extension (as specified in [MS-RDPEDYC](../MS-RDPEDYC/MS-RDPEDYC.md)) and the client MUST advertise support for the "DRDYNVC" static channel in the Client Network Data block ([MS-RDPBCGR] section 2.2.1.3.4) sent in the MCS Connect Initial PDU with GCC Conference Create Request ([MS-RDPBCGR] section 2.2.1.3).
+The multitransport connection must be initiated over the main RDP connection using the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.15.1). The underlying RDP-UDP ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) section 1, 2, and 3) transport which is created must be secured with Transport Layer Security (TLS) or Datagram Transport Layer Security (DTLS).<1> Furthermore, the client and server MUST support the Remote Desktop Protocol: Dynamic Channel Virtual Channel Extension (as specified in [MS-RDPEDYC](../MS-RDPEDYC/MS-RDPEDYC.md)) and the client MUST advertise support for the "DRDYNVC" static channel in the Client Network Data block ([MS-RDPBCGR] section 2.2.1.3.4) sent in the MCS Connect Initial PDU with GCC Conference Create Request ([MS-RDPBCGR] section 2.2.1.3).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -256,7 +256,7 @@ None.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The Remote Desktop Protocol: Multitransport Extension operates over the RDP-UDP protocol, as defined in [MS-RDPEUDP](#Section_2.1), sections 1, 2 and 3.
+The Remote Desktop Protocol: Multitransport Extension operates over the RDP-UDP protocol, as defined in [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md), sections 1, 2 and 3.
 
 Multitransport connections are bootstrapped using the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1), which is sent from server to client over the main RDP connection.
 
@@ -413,7 +413,7 @@ All the PDUs that are sent over the multitransport connection contain an RDP_TUN
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Processing the Action Field of the Tunnel PDU Header
 
-The basic processing of a Tunnel PDU Header (section [2.2.1.1](../MS-RDPBCGR/MS-RDPBCGR.md)) begins with the reading of the **Action** field, which determines the type of [**PDU**](#gt_protocol-data-unit-pdu) that MUST be processed. During the connection establishment phase, the client first sends an RDP_TUNNEL_CREATEREQUEST PDU (section [2.2.2.1](../MS-RDPBCGR/MS-RDPBCGR.md)) over the multitransport connection. This PDU is constructed by using the information sent in the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.15.1) received over the main RDP connection. The PDU has an action code of RDPTUNNEL_ACTION_CREATEREQUEST (0x0), indicating to the server that it MUST process this PDU as a Tunnel Create Request PDU.
+The basic processing of a Tunnel PDU Header (section [2.2.1.1](#Section_2.2.1.1)) begins with the reading of the **Action** field, which determines the type of [**PDU**](#gt_protocol-data-unit-pdu) that MUST be processed. During the connection establishment phase, the client first sends an RDP_TUNNEL_CREATEREQUEST PDU (section [2.2.2.1](#Section_2.2.2.1)) over the multitransport connection. This PDU is constructed by using the information sent in the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.15.1) received over the main RDP connection. The PDU has an action code of RDPTUNNEL_ACTION_CREATEREQUEST (0x0), indicating to the server that it MUST process this PDU as a Tunnel Create Request PDU.
 
 The response to this Tunnel Create Request PDU, an RDP_TUNNEL_CREATERESPONSE PDU (section [2.2.2.2](#Section_2.2.2.2)), is sent by the server to the client using an action code of RDPTUNNEL_ACTION_CREATERESPONSE (0x1). This action code indicates to the client that the PDU MUST be decoded as a Tunnel Create Response PDU, as defined in section 2.2.2.2.
 
@@ -463,7 +463,7 @@ None.
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-**Connection Store**: In order to match incoming multitransport connections to existing main RDP connections, the server maintains a store of outstanding multitransport requests. The store contains the request ID and [**cookie**](#gt_cookie) that the server sent to the client as part of the Initiate Multitransport Request ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1) and a reference to the main RDP connection that initiated the multitransport request. When an incoming multitransport request is encountered, the server matches the **RequestID** field and **SecurityCookie** field presented by the multitransport connection as part of the Tunnel Create Request [**PDU**](#gt_protocol-data-unit-pdu) (section [2.2.2.1](../MS-RDPBCGR/MS-RDPBCGR.md)) to an outstanding request ID and cookie in the store. If a match is found, the server hands off the incoming multitransport connection to the main RDP connection that requested it, enabling multiple connections between server and client for the same RDP session.
+**Connection Store**: In order to match incoming multitransport connections to existing main RDP connections, the server maintains a store of outstanding multitransport requests. The store contains the request ID and [**cookie**](#gt_cookie) that the server sent to the client as part of the Initiate Multitransport Request ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1) and a reference to the main RDP connection that initiated the multitransport request. When an incoming multitransport request is encountered, the server matches the **RequestID** field and **SecurityCookie** field presented by the multitransport connection as part of the Tunnel Create Request [**PDU**](#gt_protocol-data-unit-pdu) (section [2.2.2.1](#Section_2.2.2.1)) to an outstanding request ID and cookie in the store. If a match is found, the server hands off the incoming multitransport connection to the main RDP connection that requested it, enabling multiple connections between server and client for the same RDP session.
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -486,7 +486,7 @@ None.
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Processing the RDP_TUNNEL_CREATEREQUEST PDU
 
-The RDP_TUNNEL_CREATEREQUEST PDU (section [2.2.2.1](../MS-RDPBCGR/MS-RDPBCGR.md)) is used by the server for two purposes. The first purpose is to correlate incoming requests to the existing main RDP connection on the server that originally sent the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1). The second is a security check that matches the incoming security [**cookie**](#gt_cookie) to the security cookie that was sent over the secured main RDP connection.
+The RDP_TUNNEL_CREATEREQUEST PDU (section [2.2.2.1](#Section_2.2.2.1)) is used by the server for two purposes. The first purpose is to correlate incoming requests to the existing main RDP connection on the server that originally sent the Initiate Multitransport Request PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.1). The second is a security check that matches the incoming security [**cookie**](#gt_cookie) to the security cookie that was sent over the secured main RDP connection.
 
 The **RequestID** and **SecurityCookie** fields of the RDP_TUNNEL_CREATEREQUEST PDU MUST be identical to the corresponding fields in the Initiate MultiTransport Request PDU that was sent from the server to the client over the main RDP connection. These fields are compared to the data stored in the **Connection Store** abstract data model element (section [3.2.1](#Section_3.2.1)).
 
@@ -602,7 +602,7 @@ RDP_TUNNEL_HEADER::Flags = 0x0
 
 The RDP multitransport connections use SSL and DTLS, respectively, for reliable and unreliable UDP transport connections for data encryption and server certificate validation.
 
-The client is authenticated to the server by presenting a security [**cookie**](#gt_cookie) as part of the Tunnel Create Request [**PDU**](#gt_protocol-data-unit-pdu) (section [2.2.2](../MS-RDPBCGR/MS-RDPBCGR.md)), which the server provided to the client over the secure main RDP connection, as defined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md).
+The client is authenticated to the server by presenting a security [**cookie**](#gt_cookie) as part of the Tunnel Create Request [**PDU**](#gt_protocol-data-unit-pdu) (section [2.2.2](#Section_2.2.2)), which the server provided to the client over the secure main RDP connection, as defined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md).
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

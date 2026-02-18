@@ -287,9 +287,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-NMF] Microsoft Corporation, "[.NET Message Framing Protocol](../MC-NMF/MC-NMF.md)".
 
-[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](#Section_2.2.6)".
+[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
-[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_2.2.3)".
+[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](../MS-ADDM/MS-ADDM.md)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
@@ -385,7 +385,7 @@ This document covers versioning issues in the following areas:
 - **Supported Transports:** This protocol extension can be implemented using transports that support sending [**SOAP messages**](#gt_soap-message) as described in section [2.1](#Section_2.1).
 - **Protocol Versions:** This protocol extension is not versioned.
 - **Capability Negotiation:** This protocol does not support capability negotiation.
-- **Localization:** This protocol includes text strings in various [**SOAP faults**](#gt_soap-fault). Localization considerations for such strings are specified in section [3.1.4.2](#Section_1.3).
+- **Localization:** This protocol includes text strings in various [**SOAP faults**](#gt_soap-fault). Localization considerations for such strings are specified in section [3.1.4.2](#Section_3.1.4.2).
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
@@ -572,7 +572,7 @@ The following table summarizes the set of common XML schema complex type definit
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 AttributeTypeAndValueXmlType
 
-Elements of this type contain an [**identity attribute type**](#gt_identity-attribute-type) and, optionally, [**identity attribute value**](#gt_identity-attribute-value)(s). It is used as the type of the [AttributeTypeAndValue](#Section_2.2.3.2) element. It is also used in the definition of the Change element (section [3.2.4.2.2](#Section_3.2.4.2.2.2)). Whether identity attribute values are included is a behavior defined by the context in which instances of this type are used and is specified in those portions of this document that specify the use of such instances.
+Elements of this type contain an [**identity attribute type**](#gt_identity-attribute-type) and, optionally, [**identity attribute value**](#gt_identity-attribute-value)(s). It is used as the type of the [AttributeTypeAndValue](#Section_2.2.3.2) element. It is also used in the definition of the Change element (section [3.2.4.2.2](#Section_3.2.4.2.2)). Whether identity attribute values are included is a behavior defined by the context in which instances of this type are used and is specified in those portions of this document that specify the use of such instances.
 
 <xsd:complexType name="AttributeTypeAndValueXmlType">
 
@@ -799,7 +799,7 @@ If the client specifies:
 
 - One or more [**identity attribute types**](#gt_identity-attribute-type) which were not valid expressions in the [**dialect**](#gt_dialect) specified in the [**SOAP message**](#gt_soap-message),
 - And/or one or more [**identity attributes**](#gt_identity-attribute) that are not valid for the [**identity object**](#gt_identity-object) that was the target of the operation specified in the SOAP message,
-the server SHOULD reject the operation and return a [**SOAP fault**](#gt_soap-fault) with the fault subcode wsman:CannotProcessFilter (as defined in Table 6 of [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849)).<16> The fault detail MAY<17> contain an **AttributeTypeNotValidForDialect** element and/or an **AttributeTypeNotValidForEntry** element, as described in sections [AttributeTypeNotValidForDialect (section 2.2.3.3)](#Section_2.2.3.1) and [AttributeTypeNotValidForEntry (section 2.2.3.4)](#Section_2.2.3.1).
+the server SHOULD reject the operation and return a [**SOAP fault**](#gt_soap-fault) with the fault subcode wsman:CannotProcessFilter (as defined in Table 6 of [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849)).<16> The fault detail MAY<17> contain an **AttributeTypeNotValidForDialect** element and/or an **AttributeTypeNotValidForEntry** element, as described in sections [AttributeTypeNotValidForDialect (section 2.2.3.3)](#Section_2.2.3.3) and [AttributeTypeNotValidForEntry (section 2.2.3.4)](#Section_2.2.3.4).
 
 | Element | Description |
 | --- | --- |
@@ -1023,7 +1023,7 @@ The server then assembles and returns a SOAP message containing a BaseObjectSear
 
 This mode of operation is similar to performing a WS-Transfer Get operation without using the IMDA protocol extensions.
 
-If an error occurs while processing this operation, the server SHOULD reject the operation and return one of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_1.3).
+If an error occurs while processing this operation, the server SHOULD reject the operation and return one of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.2.4.1.1"></a>
 ##### 3.2.4.1.1 Messages
@@ -1167,7 +1167,7 @@ wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/transfer/PutResponse" />
 
 For each Change element in the ModifyRequest, the server performs the modifications specified in that Change against the [**identity attribute**](#gt_identity-attribute) (also specified in the Change) of the [**identity object**](#gt_identity-object) targeted by the Put operation. The server SHOULD<34> perform these modifications as a single atomic transaction. If any of the modifications requested cannot be performed by the server for any reason, the server SHOULD perform none of the modifications and MUST fail the entire Put request. If there are no change elements present in the **ModifyRequest** message, then the server SHOULD NOT perform any modifications to the identity object.<35>
 
-If an error occurs while processing this operation, the server SHOULD reject the operation and return one of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_1.3).
+If an error occurs while processing this operation, the server SHOULD reject the operation and return one of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 Messages
@@ -1310,7 +1310,7 @@ wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/transfer/DeleteResponse" />
 
 </wsdl:operation>
 
-Unlike the Get and Put operations, the IMDA protocol extensions do not specify any new messages or processing rules for the Delete operation, and therefore the IdentityManagementOperation [**SOAP header**](#gt_soap-header) is not used on Delete requests. Instead, IMDA simply extends the specification for WS-Transfer Delete by permitting the server to return any of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_1.3).
+Unlike the Get and Put operations, the IMDA protocol extensions do not specify any new messages or processing rules for the Delete operation, and therefore the IdentityManagementOperation [**SOAP header**](#gt_soap-header) is not used on Delete requests. Instead, IMDA simply extends the specification for WS-Transfer Delete by permitting the server to return any of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Timer Events
@@ -1384,7 +1384,7 @@ The creation of the identity object and the assignment of identity attribute val
 
 Servers MAY<37> set other identity attributes on the identity objects to implementation-defined defaults as part of the object creation.
 
-If an error occurs while processing this operation, the server SHOULD reject the operation and return one of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_1.3).
+If an error occurs while processing this operation, the server SHOULD reject the operation and return one of the [**SOAP faults**](#gt_soap-fault) specified in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.3.4.1.1"></a>
 ##### 3.3.4.1.1 Messages
@@ -1470,12 +1470,12 @@ There are no other local events in this protocol extension.
 
 In this section, several sample IMDA operations are presented. First, an [**identity object**](#gt_identity-object) is created using a Create operation. Information from that identity object is then retrieved using Get operations. Finally, the object is modified using a Put operation.
 
-For illustrative purposes, the chosen [**XML**](#gt_xml) representation of identity objects in this section is the XML view of [**directory objects**](#gt_directory-object) shown in [MS-ADDM](#Section_2.2.3) section 2.3. For the Get and Put examples, the [**SOAP header**](#gt_soap-header) defined in [MS-ADDM] section 2.5 are used to specify the object that is the target of the operation.
+For illustrative purposes, the chosen [**XML**](#gt_xml) representation of identity objects in this section is the XML view of [**directory objects**](#gt_directory-object) shown in [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.3. For the Get and Put examples, the [**SOAP header**](#gt_soap-header) defined in [MS-ADDM] section 2.5 are used to specify the object that is the target of the operation.
 
 <a id="Section_4.1"></a>
 ## 4.1 Example of Creating an Identity Object
 
-In this section, a new [**identity object**](#gt_identity-object) is created using a Create operation with the IMDA protocol extensions. During the creation, [**identity attribute values**](#gt_identity-attribute-value) are specified for five [**identity attributes**](#gt_identity-attribute). For one of the identity attributes (named by the [**identity attribute type**](#gt_identity-attribute-type) "addata:otherTelephone"), two identity attribute values are specified. The [**dialect**](#gt_dialect) used for the identity attribute types is the XPath 1.0-derived dialect from [MS-ADDM](#Section_2.2.3) section 2.4. In the response, a wxf:ResourceCreated element is returned, the contents of which are used to target the IMDA operations against this newly created identity object in the subsequent examples.
+In this section, a new [**identity object**](#gt_identity-object) is created using a Create operation with the IMDA protocol extensions. During the creation, [**identity attribute values**](#gt_identity-attribute-value) are specified for five [**identity attributes**](#gt_identity-attribute). For one of the identity attributes (named by the [**identity attribute type**](#gt_identity-attribute-type) "addata:otherTelephone"), two identity attribute values are specified. The [**dialect**](#gt_dialect) used for the identity attribute types is the XPath 1.0-derived dialect from [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.4. In the response, a wxf:ResourceCreated element is returned, the contents of which are used to target the IMDA operations against this newly created identity object in the subsequent examples.
 
 SOAP Request Message
 
@@ -1658,7 +1658,7 @@ xmlns:wsa="http://www.w3.org/2005/08/addressing"> <wsa:Address>net.tcp://server0
 <a id="Section_4.2"></a>
 ## 4.2 Example of Retrieving Attribute Types from an Identity Object
 
-In this example, three [**identity attributes**](#gt_identity-attribute) are retrieved from the [**identity object**](#gt_identity-object) created in the preceding example using a Get operation with the IMDA protocol extensions. One of the identity attributes has multiple [**identity attribute values**](#gt_identity-attribute-value), and one of the requested identity attributes does not exist on the identity object and so is returned as an empty PartialAttribute element. As in the preceding example, the [**dialect**](#gt_dialect) used for the [**identity attribute types**](#gt_identity-attribute-type) is the XPath 1.0-derived dialect from [MS-ADDM](#Section_2.2.3) section 2.4.
+In this example, three [**identity attributes**](#gt_identity-attribute) are retrieved from the [**identity object**](#gt_identity-object) created in the preceding example using a Get operation with the IMDA protocol extensions. One of the identity attributes has multiple [**identity attribute values**](#gt_identity-attribute-value), and one of the requested identity attributes does not exist on the identity object and so is returned as an empty PartialAttribute element. As in the preceding example, the [**dialect**](#gt_dialect) used for the [**identity attribute types**](#gt_identity-attribute-type) is the XPath 1.0-derived dialect from [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.4.
 
 SOAP Request Message
 
@@ -2168,7 +2168,7 @@ CN=Sample User,CN=Users,DC=fabrikam,DC=com
 <a id="Section_4.4"></a>
 ## 4.4 Example of Modifying an Identity Object
 
-In this example, the previously created [**identity object**](#gt_identity-object) has two of its [**identity attributes**](#gt_identity-attribute) modified by using a Put operation with the IMDA protocol extensions. For the attribute identified by the [**identity attribute type**](#gt_identity-attribute-type) "addata:description", the previous [**identity attribute value**](#gt_identity-attribute-value) is replaced with a new value. For "addata:otherTelephone", an additional value is added, giving that attribute a total of three identity attribute values. The [**dialect**](#gt_dialect) used for the identity attribute types is the XPath 1.0-derived dialect from [MS-ADDM](#Section_2.2.3) section 2.4.
+In this example, the previously created [**identity object**](#gt_identity-object) has two of its [**identity attributes**](#gt_identity-attribute) modified by using a Put operation with the IMDA protocol extensions. For the attribute identified by the [**identity attribute type**](#gt_identity-attribute-type) "addata:description", the previous [**identity attribute value**](#gt_identity-attribute-value) is replaced with a new value. For "addata:otherTelephone", an additional value is added, giving that attribute a total of three identity attribute values. The [**dialect**](#gt_dialect) used for the identity attribute types is the XPath 1.0-derived dialect from [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.4.
 
 SOAP Request Message
 
@@ -2877,7 +2877,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.3.1: In [**Active Directory**](#gt_active-directory), the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) display name of an attribute is the value of its **lDAPDisplayName** attribute defined in [MS-ADA1](#Section_2.2.6) section 2.356.
+<1> Section 1.3.1: In [**Active Directory**](#gt_active-directory), the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) display name of an attribute is the value of its **lDAPDisplayName** attribute defined in [MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.356.
 
 <2> Section 1.6: The following products are applicable to WS-Transfer: Identity Management Operations for Directory Access Extensions:
 
@@ -2886,7 +2886,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 - Windows Server 2008 R2 and later have both the server and the client implementations.
 Active Directory Management Gateway Service is available for Windows Server 2003 operating system with Service Pack 2 (SP2), Windows Server 2003 R2 operating system with Service Pack 2 (SP2), and Windows Server 2008 operating system.
 
-<3> Section 2.1: Microsoft implementations of WS-Transfer: Identity Management Operations for Directory Access Extensions use SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). The transports used, as well as the authentication mechanisms supported and the [**endpoints**](#gt_endpoint) exposed, are specified in [MS-ADDM](#Section_2.2.3) section 2.1.
+<3> Section 2.1: Microsoft implementations of WS-Transfer: Identity Management Operations for Directory Access Extensions use SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). The transports used, as well as the authentication mechanisms supported and the [**endpoints**](#gt_endpoint) exposed, are specified in [MS-ADDM](../MS-ADDM/MS-ADDM.md) section 2.1.
 
 <4> Section 2.2.3.3: While processing a WS-Transfer Message which uses IMDA extensions, the server will generate a [wsman:CannotProcessFilter](#Section_3.1.4.2.3) fault with **AttributeTypeNotValidForDialect** element as fault detail, if the client specified one or more [**identity attribute types**](#gt_identity-attribute-type) that were not valid expressions in the [**dialect**](#gt_dialect) specified in the operation-specific [**SOAP message**](#gt_soap-message).
 
@@ -2912,7 +2912,7 @@ One instance of the ValueXmlType (that is, an AttributeValue element) can contai
 
 <13> Section 3.1.4.1: Microsoft implementations of WS-Transfer: Identity Management Operations for Directory Access Extensions do not support WS-Transfer Put and Create operations without use of the IMDA extensions and will reject any such operation that does not include the IdentityManagementOperation [**SOAP header**](#gt_soap-header) by returning a WS-Addressing Action Not Supported [**SOAP fault**](#gt_soap-fault) [[WSAddressing]](https://go.microsoft.com/fwlink/?LinkId=90575).
 
-Additionally, Microsoft implementations of WS-Transfer: Identity Management Operations for Directory Access Extensions will return IMDA-specified SOAP faults (section [3.1.4.2](#Section_1.3)) in response to WS-Transfer Get and Delete operations even if those operations do not include the IdentityManagementOperation SOAP header.
+Additionally, Microsoft implementations of WS-Transfer: Identity Management Operations for Directory Access Extensions will return IMDA-specified SOAP faults (section [3.1.4.2](#Section_3.1.4.2)) in response to WS-Transfer Get and Delete operations even if those operations do not include the IdentityManagementOperation SOAP header.
 
 <14> Section 3.1.4.2.1: Microsoft implementations of WS-Transfer: Identity Management Operations for Directory Access Extensions use the fault detail defined in [MS-ADDM] section 2.6.
 

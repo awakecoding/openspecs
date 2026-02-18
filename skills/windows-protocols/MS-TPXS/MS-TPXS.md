@@ -161,7 +161,7 @@ The telemetry data structure describes a telemetry client request and server res
 <a id="Section_2.1"></a>
 ## 2.1 Telemetry Request Message
 
-The telemetry request message describes the client request from the server. Each element is described below. The complete schema is specified in the section [5.1](#Section_2.1).
+The telemetry request message describes the client request from the server. Each element is described below. The complete schema is specified in the section [5.1](#Section_5.1).
 
 <a id="Section_2.1.1"></a>
 ### 2.1.1 req
@@ -181,7 +181,7 @@ The **req** (request) element is the topmost element of a client-to-server reque
 <a id="Section_2.1.1.1"></a>
 #### 2.1.1.1 tlm
 
-The **tlm** (telemetry) element is the namespace of the requested service. The **tlm** element is a child element of [req](#Section_2.1.1.1.2.2).
+The **tlm** (telemetry) element is the namespace of the requested service. The **tlm** element is a child element of [req](#Section_2.1.1).
 
 <xs:element name="tlm">
 
@@ -194,7 +194,7 @@ The **tlm** (telemetry) element is the namespace of the requested service. The *
 <a id="Section_2.1.1.1.1"></a>
 ##### 2.1.1.1.1 src
 
-The **src** (source) element is a child element of [tlm](#Section_2.2.1.1)**.** The **src** element and the child elements **desc** (description) and **mach** (machine) describe the client that is making the request.
+The **src** (source) element is a child element of [tlm](#Section_2.1.1.1)**.** The **src** element and the child elements **desc** (description) and **mach** (machine) describe the client that is making the request.
 
 <xs:element name="src" minOccurs="1" maxOccurs="1">
 
@@ -341,7 +341,7 @@ The **ctrl** element has a set of child **arg** elements with name-value (**nm**
 <a id="Section_2.1.1.1.2"></a>
 ##### 2.1.1.1.2 reqs
 
-The **reqs** (requests) element is the client request section of the message. **reqs** is a child element of [tlm](#Section_2.2.1.1).
+The **reqs** (requests) element is the client request section of the message. **reqs** is a child element of [tlm](#Section_2.1.1.1).
 
 <xs:element name="reqs" minOccurs="1" maxOccurs="1">
 
@@ -567,7 +567,7 @@ The **cmd** element has a set of child **arg** elements with name-value (**nm**,
 <a id="Section_2.2"></a>
 ## 2.2 Telemetry Response Message
 
-The telemetry response message describes the server response to a client telemetry request message. Each element is described in the following sections. The complete schema is specified in section [5.2](#Section_2.2).
+The telemetry response message describes the server response to a client telemetry request message. Each element is described in the following sections. The complete schema is specified in section [5.2](#Section_5.2).
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 resp
@@ -632,7 +632,7 @@ The **resp** (response) element describes a server response to a client request.
 <a id="Section_2.2.1.1.1.1.1"></a>
 namespace
 
-The **namespace** element is echoed back from the telemetry request message **req** (section [2.1.1](#Section_2.1.1.1.2.2)) unaltered. **namespace** is a child element of resp. See the telemetry request message **namespace** element as specified in section [2.1.1.1.2.2.1](#Section_2.1.1.1.2.2.1).
+The **namespace** element is echoed back from the telemetry request message **req** (section [2.1.1](#Section_2.1.1)) unaltered. **namespace** is a child element of resp. See the telemetry request message **namespace** element as specified in section [2.1.1.1.2.2.1](#Section_2.1.1.1.2.2.1).
 
 <xs:element name="namespace" minOccurs="1" maxOccurs="1">
 

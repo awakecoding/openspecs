@@ -312,7 +312,7 @@ For the remainder of sections 2 and 3, "message" refers to a COMQC [**message**]
 
 COMQC uses MSMQ Queue Manager Client Protocol [MS-MQMP](../MS-MQMP/MS-MQMP.md), and MSMQ: Data Structures [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) as transport.
 
-A new instance of a Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) **Message** ADM element (as specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) MUST be created. The message defined in section [2.2](../MS-MQDMPR/MS-MQDMPR.md) MUST be stored as a [**BLOB**](#gt_binary-large-object-blob) in the **Body** attribute of the **Message** ADM element instance.
+A new instance of a Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) **Message** ADM element (as specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) MUST be created. The message defined in section [2.2](#Section_2.2) MUST be stored as a [**BLOB**](#gt_binary-large-object-blob) in the **Body** attribute of the **Message** ADM element instance.
 
 The **Extension** attribute of the **Message** ADM element MUST be set to GUID (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.2) {1664BCFB-1751-11d2-B58E-00E0290E6C31}.
 
@@ -572,7 +572,7 @@ packet-beta
 
 This field contains the binary representation of the marshaled method parameters. The binary format is based on either the [**Network Data Representation (NDR)**](#gt_network-data-representation-ndr) format, defined in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), or the dispatch format (defined in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 3.1.4.4.2) with two exceptions defined in section [2.2.6.1.4](#Section_2.2.6.1.4) and section [2.2.6.1.5](#Section_2.2.6.1.5).
 
-If the ID in the method header is set to IID_IDispatch (as defined in [MS-OAUT] section [1.9](../MS-OAUT/MS-OAUT.md)), the dispatch marshaling format MUST be used. Otherwise, the NDR format MUST be used.
+If the ID in the method header is set to IID_IDispatch (as defined in [MS-OAUT] section [1.9](#Section_1.9)), the dispatch marshaling format MUST be used. Otherwise, the NDR format MUST be used.
 
 <a id="Section_2.2.6.1.1"></a>
 ##### 2.2.6.1.1 NDR Marshaling

@@ -708,7 +708,7 @@ Version 2 MCS Encoding Rules (defined in [[T125]](https://go.microsoft.com/fwlin
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Color Table Cache Capability Set (TS_COLORTABLE_CAPABILITYSET)
 
-The TS_COLORTABLE_CAPABILITYSET structure is an unused capability set that advertises the size of the color table cache used in conjunction with the Cache Color Table Secondary Drawing Order (see section [2.2.2.2.1.2.4](#Section_4.2.3)) and is based on the capability set in [[T128]](https://go.microsoft.com/fwlink/?LinkId=90544) section 8.2.8. This capability is sent by both client and server.
+The TS_COLORTABLE_CAPABILITYSET structure is an unused capability set that advertises the size of the color table cache used in conjunction with the Cache Color Table Secondary Drawing Order (see section [2.2.2.2.1.2.4](#Section_2.2.2.2.1.2.4)) and is based on the capability set in [[T128]](https://go.microsoft.com/fwlink/?LinkId=90544) section 8.2.8. This capability is sent by both client and server.
 
 Instead of being specified by the Color Table Cache Capability Set, the existence of color table caching is tied to support for the [MemBlt (section 2.2.2.2.1.1.2.9)](../MS-RDPBCGR/MS-RDPBCGR.md) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](../MS-RDPBCGR/MS-RDPBCGR.md) Primary Drawing orders. If support for these orders is advertised in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the existence of a color table cache with entries for six palettes is implied when palettized color is being used.
 
@@ -731,7 +731,7 @@ packet-beta
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 DrawNineGrid Cache Capability Set (TS_DRAW_NINEGRID_CAPABILITYSET)
 
-The TS_DRAW_NINEGRID_CAPABILITYSET structure is used to advertise support for NineGrid bitmap caching and rendering (see sections [2.2.2.2.1.1.2.21](#Section_4.1.21), [2.2.2.2.1.1.2.22](#Section_4.1.22), and [2.2.2.2.1.3.4](#Section_4.3.3)). This capability set is sent only from client to server.
+The TS_DRAW_NINEGRID_CAPABILITYSET structure is used to advertise support for NineGrid bitmap caching and rendering (see sections [2.2.2.2.1.1.2.21](#Section_2.2.2.2.1.1.2.21), [2.2.2.2.1.1.2.22](#Section_2.2.2.2.1.1.2.22), and [2.2.2.2.1.3.4](#Section_2.2.2.2.1.3.4)). This capability set is sent only from client to server.
 
 ```mermaid
 packet-beta
@@ -1431,25 +1431,25 @@ For the use of the TS_ZERO_FIELD_BYTE_BIT0 (0x40) and TS_ZERO_FIELD_BYTE_BIT1 (0
 | TS_ENC_DSTBLT_ORDER 0x00 | [DstBlt (section 2.2.2.2.1.1.2.1)](#Section_2.2.2.2.1.1.2.1) Primary Drawing Order. |
 | TS_ENC_PATBLT_ORDER 0x01 | [PatBlt (section 2.2.2.2.1.1.2.3)](#Section_2.2.2.2.1.1.2.3) Primary Drawing Order. |
 | TS_ENC_SCRBLT_ORDER 0x02 | [ScrBlt (section 2.2.2.2.1.1.2.7)](#Section_2.2.2.2.1.1.2.7) Primary Drawing Order. |
-| TS_ENC_DRAWNINEGRID_ORDER 0x07 | [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_4.1.21) Primary Drawing Order. |
-| TS_ENC_MULTI_DRAWNINEGRID_ORDER 0x08 | [MultiDrawNineGrid (section 2.2.2.2.1.1.2.22)](#Section_4.1.22) Primary Drawing Order. |
+| TS_ENC_DRAWNINEGRID_ORDER 0x07 | [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_2.2.2.2.1.1.2.21) Primary Drawing Order. |
+| TS_ENC_MULTI_DRAWNINEGRID_ORDER 0x08 | [MultiDrawNineGrid (section 2.2.2.2.1.1.2.22)](#Section_2.2.2.2.1.1.2.22) Primary Drawing Order. |
 | TS_ENC_LINETO_ORDER 0x09 | [LineTo (section 2.2.2.2.1.1.2.11)](#Section_2.2.2.2.1.1.2.11) Primary Drawing Order. |
-| TS_ENC_OPAQUERECT_ORDER 0x0A | [OpaqueRect (section 2.2.2.2.1.1.2.5)](#Section_4.1.5) Primary Drawing Order. |
-| TS_ENC_SAVEBITMAP_ORDER 0x0B | [SaveBitmap (section 2.2.2.2.1.1.2.12)](#Section_4.1.12) Primary Drawing Order. |
+| TS_ENC_OPAQUERECT_ORDER 0x0A | [OpaqueRect (section 2.2.2.2.1.1.2.5)](#Section_2.2.2.2.1.1.2.5) Primary Drawing Order. |
+| TS_ENC_SAVEBITMAP_ORDER 0x0B | [SaveBitmap (section 2.2.2.2.1.1.2.12)](#Section_2.2.2.2.1.1.2.12) Primary Drawing Order. |
 | TS_ENC_MEMBLT_ORDER 0x0D | [MemBlt (section 2.2.2.2.1.1.2.9)](#Section_2.2.2.2.1.1.2.9) Primary Drawing Order. |
 | TS_ENC_MEM3BLT_ORDER 0x0E | [Mem3Blt (section 2.2.2.2.1.1.2.10)](#Section_2.2.2.2.1.1.2.10) Primary Drawing Order. |
-| TS_ENC_MULTIDSTBLT_ORDER 0x0F | [MultiDstBlt (section 2.2.2.2.1.1.2.2)](#Section_4.1.2) Primary Drawing Order. |
-| TS_ENC_MULTIPATBLT_ORDER 0x10 | [MultiPatBlt (section 2.2.2.2.1.1.2.4)](#Section_4.1.4) Primary Drawing Order. |
-| TS_ENC_MULTISCRBLT_ORDER 0x11 | [MultiScrBlt (section 2.2.2.2.1.1.2.8)](#Section_4.1.8) Primary Drawing Order. |
-| TS_ENC_MULTIOPAQUERECT_ORDER 0x12 | [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_4.1.5) Primary Drawing Order. |
-| TS_ENC_FAST_INDEX_ORDER 0x13 | [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Order. |
-| TS_ENC_POLYGON_SC_ORDER 0x14 | [PolygonSC (section 2.2.2.2.1.1.2.16)](#Section_4.1.16) Primary Drawing Order. |
-| TS_ENC_POLYGON_CB_ORDER 0x15 | [PolygonCB (section 2.2.2.2.1.1.2.17)](#Section_4.1.17) Primary Drawing Order. |
-| TS_ENC_POLYLINE_ORDER 0x16 | [Polyline (section 2.2.2.2.1.1.2.18)](#Section_4.1.18) Primary Drawing Order. |
-| TS_ENC_FAST_GLYPH_ORDER 0x18 | [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_4.1.15) Primary Drawing Order. |
-| TS_ENC_ELLIPSE_SC_ORDER 0x19 | [EllipseSC (section 2.2.2.2.1.1.2.19)](#Section_4.1.19) Primary Drawing Order. |
-| TS_ENC_ELLIPSE_CB_ORDER 0x1A | [EllipseCB (section 2.2.2.2.1.1.2.20)](#Section_4.1.20) Primary Drawing Order. |
-| TS_ENC_INDEX_ORDER 0x1B | [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) Primary Drawing Order. |
+| TS_ENC_MULTIDSTBLT_ORDER 0x0F | [MultiDstBlt (section 2.2.2.2.1.1.2.2)](#Section_2.2.2.2.1.1.2.2) Primary Drawing Order. |
+| TS_ENC_MULTIPATBLT_ORDER 0x10 | [MultiPatBlt (section 2.2.2.2.1.1.2.4)](#Section_2.2.2.2.1.1.2.4) Primary Drawing Order. |
+| TS_ENC_MULTISCRBLT_ORDER 0x11 | [MultiScrBlt (section 2.2.2.2.1.1.2.8)](#Section_2.2.2.2.1.1.2.8) Primary Drawing Order. |
+| TS_ENC_MULTIOPAQUERECT_ORDER 0x12 | [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_2.2.2.2.1.1.2.6) Primary Drawing Order. |
+| TS_ENC_FAST_INDEX_ORDER 0x13 | [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_2.2.2.2.1.1.2.14) Primary Drawing Order. |
+| TS_ENC_POLYGON_SC_ORDER 0x14 | [PolygonSC (section 2.2.2.2.1.1.2.16)](#Section_2.2.2.2.1.1.2.16) Primary Drawing Order. |
+| TS_ENC_POLYGON_CB_ORDER 0x15 | [PolygonCB (section 2.2.2.2.1.1.2.17)](#Section_2.2.2.2.1.1.2.17) Primary Drawing Order. |
+| TS_ENC_POLYLINE_ORDER 0x16 | [Polyline (section 2.2.2.2.1.1.2.18)](#Section_2.2.2.2.1.1.2.18) Primary Drawing Order. |
+| TS_ENC_FAST_GLYPH_ORDER 0x18 | [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_2.2.2.2.1.1.2.15) Primary Drawing Order. |
+| TS_ENC_ELLIPSE_SC_ORDER 0x19 | [EllipseSC (section 2.2.2.2.1.1.2.19)](#Section_2.2.2.2.1.1.2.19) Primary Drawing Order. |
+| TS_ENC_ELLIPSE_CB_ORDER 0x1A | [EllipseCB (section 2.2.2.2.1.1.2.20)](#Section_2.2.2.2.1.1.2.20) Primary Drawing Order. |
+| TS_ENC_INDEX_ORDER 0x1B | [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) Primary Drawing Order. |
 
 **fieldFlags (variable):** A variable-length, 1-byte to 3-byte field. The optional **fieldFlags** field is used to indicate the presence of an order field in the encoded fields portion of the packet (represented by the **primaryOrderData** field). Each bit in the **fieldFlags** field functions as a flag and indicates if a particular order field is present.
 
@@ -1579,7 +1579,7 @@ Number of field encoding bytes: 2
 
 Maximum encoded field length: 26 bytes
 
-Note that the negotiation order number for the PatBlt Primary Drawing Order (0x01) is the same as that for the [OpaqueRect Primary Drawing Order (section 2.2.2.2.1.1.2.5)](#Section_4.1.5). Hence support for PatBlt implies support for OpaqueRect. The converse is also true.
+Note that the negotiation order number for the PatBlt Primary Drawing Order (0x01) is the same as that for the [OpaqueRect Primary Drawing Order (section 2.2.2.2.1.1.2.5)](#Section_2.2.2.2.1.1.2.5). Hence support for PatBlt implies support for OpaqueRect. The converse is also true.
 
 ```mermaid
 packet-beta
@@ -1617,7 +1617,7 @@ packet-beta
 
 **BrushStyle (1 byte):** An 8-bit, unsigned integer. The style of the brush used in the drawing operation.
 
-If the TS_CACHED_BRUSH (0x80) flag is set in the most significant bit of the BrushStyle field, a brush that was previously cached using the Cache Bitmap Secondary Order (see section [2.2.2.2.1.2.7](#Section_4.2.6)) MUST be used. In this case, the BrushHatch field MUST contain the index of the Brush Cache entry that holds the selected brush to use, and the low nibble of the BrushStyle field MUST contain an identifier describing the color depth of the cached brush.
+If the TS_CACHED_BRUSH (0x80) flag is set in the most significant bit of the BrushStyle field, a brush that was previously cached using the Cache Bitmap Secondary Order (see section [2.2.2.2.1.2.7](#Section_2.2.2.2.1.2.7)) MUST be used. In this case, the BrushHatch field MUST contain the index of the Brush Cache entry that holds the selected brush to use, and the low nibble of the BrushStyle field MUST contain an identifier describing the color depth of the cached brush.
 
 | Value | Meaning |
 | --- | --- |
@@ -1809,7 +1809,7 @@ packet-beta
 <a id="Section_2.2.2.2.1.1.2.7"></a>
 ScrBlt (SCRBLT_ORDER)
 
-The ScrBlt Primary Drawing Order is used to perform a bit-block transfer from a source region to a destination region. The source surface is always the primary drawing surface, while the target surface is the current target surface—specified by the [Switch Surface Alternate Secondary Drawing Order (section 2.2.2.2.1.3.3)](#Section_4.3.2).
+The ScrBlt Primary Drawing Order is used to perform a bit-block transfer from a source region to a destination region. The source surface is always the primary drawing surface, while the target surface is the current target surface—specified by the [Switch Surface Alternate Secondary Drawing Order (section 2.2.2.2.1.3.3)](#Section_2.2.2.2.1.3.3).
 
 Encoding order number: 2 (0x02)
 
@@ -1922,7 +1922,7 @@ packet-beta
 
 **cacheId (2 bytes):** A 16-bit, unsigned integer. The **cacheId** field contains the encoded bitmap cache ID and Color Table Cache entry.
 
-The high byte contains the index of the color table entry to use (cached previously with a [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_4.2.3) Secondary Drawing Order), and the low byte contains the ID of the bitmap cache in which the source bitmap is stored (cached previously with a Cache Bitmap - Revision 1 (section [2.2.2.2.1.2.2)](#Section_c9365b320be547c9af1afeba2ea1ee9f) or Cache Bitmap - Revision 2 (section [2.2.2.2.1.2.3)](#Section_3c76f8fbfcaa4ca69d2e3f449bdbed40) Secondary Drawing Order).
+The high byte contains the index of the color table entry to use (cached previously with a [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_2.2.2.2.1.2.4) Secondary Drawing Order), and the low byte contains the ID of the bitmap cache in which the source bitmap is stored (cached previously with a Cache Bitmap - Revision 1 (section [2.2.2.2.1.2.2)](#Section_c9365b320be547c9af1afeba2ea1ee9f) or Cache Bitmap - Revision 2 (section [2.2.2.2.1.2.3)](#Section_3c76f8fbfcaa4ca69d2e3f449bdbed40) Secondary Drawing Order).
 
 The color table entry MUST be in the range 0 to 5 (inclusive).
 
@@ -1987,7 +1987,7 @@ packet-beta
   256-271: "cacheIndex (optional)"
 ```
 
-**cacheId (2 bytes):** A 16-bit, unsigned integer. The **cacheId** field contains the encoded bitmap cache ID and Color Table Cache entry. The high byte contains the index of the color table entry to use (cached previously with a [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_4.2.3) Secondary Drawing Order), and the low byte contains the ID of the bitmap cache in which the source bitmap is stored (cached previously with a Cache Bitmap - Revision 1 (section [2.2.2.2.1.2.2)](#Section_c9365b320be547c9af1afeba2ea1ee9f) or Cache Bitmap - Revision 2 (section [2.2.2.2.1.2.3)](#Section_3c76f8fbfcaa4ca69d2e3f449bdbed40) Secondary Drawing Order).
+**cacheId (2 bytes):** A 16-bit, unsigned integer. The **cacheId** field contains the encoded bitmap cache ID and Color Table Cache entry. The high byte contains the index of the color table entry to use (cached previously with a [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_2.2.2.2.1.2.4) Secondary Drawing Order), and the low byte contains the ID of the bitmap cache in which the source bitmap is stored (cached previously with a Cache Bitmap - Revision 1 (section [2.2.2.2.1.2.2)](#Section_c9365b320be547c9af1afeba2ea1ee9f) or Cache Bitmap - Revision 2 (section [2.2.2.2.1.2.3)](#Section_3c76f8fbfcaa4ca69d2e3f449bdbed40) Secondary Drawing Order).
 
 The color table entry MUST be in the range 0 to 5 (inclusive).
 
@@ -2130,7 +2130,7 @@ Y = [SaveBitmapPosition / (480 * YGranularity)] * YGranularity
 
 X = [SaveBitmapPosition - (Y * 480)] / YGranularity
 
-An example of calculations to obtain the X and Y positions from the **SavedBitmapPosition** field are defined visually in section [4.5](#Section_4.1.12).
+An example of calculations to obtain the X and Y positions from the **SavedBitmapPosition** field are defined visually in section [4.5](#Section_4.5).
 
 **nLeftRect (variable):** The left coordinate of the virtual desktop rectangle to save specified by using a [Coord Field (section 2.2.2.2.1.1.1.1)](#Section_2.2.2.2.1.1.1.1).
 
@@ -2258,7 +2258,7 @@ All fragment cache indices MUST be in the range 0 to 255 (inclusive).
 <a id="Section_2.2.2.2.1.1.2.14"></a>
 FastIndex (FASTINDEX_ORDER)
 
-The FastIndex Primary Drawing Order encodes a set of glyph indices at a specified position. This order is an improved version of the [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) Primary Drawing Order. The regular GlyphIndex order contains five [**brush**](#gt_brush) fields that the FastIndex order does not: **BrushOrgX**, **BrushOrgY**, **BrushStyle**, **BrushHatch**, and **BrushExtra**. These extra fields MUST all be implicitly assumed to exist and contain default values of zero (implying that a solid color brush will be used).
+The FastIndex Primary Drawing Order encodes a set of glyph indices at a specified position. This order is an improved version of the [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) Primary Drawing Order. The regular GlyphIndex order contains five [**brush**](#gt_brush) fields that the FastIndex order does not: **BrushOrgX**, **BrushOrgY**, **BrushStyle**, **BrushHatch**, and **BrushExtra**. These extra fields MUST all be implicitly assumed to exist and contain default values of zero (implying that a solid color brush will be used).
 
 Encoding order number: 19 (0x13)
 
@@ -2335,7 +2335,7 @@ The only valid combinations of the encoding flags that are currently supported a
 <a id="Section_2.2.2.2.1.1.2.15"></a>
 FastGlyph (FASTGLYPH_ORDER)
 
-The FastGlyph Primary Drawing Order encodes a single glyph at a specified position. This primary drawing order is a fast way of outputting a single glyph and bypasses having to send a Cache Glyph Secondary Drawing Order (see sections [2.2.2.2.1.2.5](#Section_2.2.2.2.1.2.5) and [2.2.2.2.1.2.6](#Section_2.2.2.2.1.2.6)) followed by a [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) or [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Order.
+The FastGlyph Primary Drawing Order encodes a single glyph at a specified position. This primary drawing order is a fast way of outputting a single glyph and bypasses having to send a Cache Glyph Secondary Drawing Order (see sections [2.2.2.2.1.2.5](#Section_2.2.2.2.1.2.5) and [2.2.2.2.1.2.6](#Section_2.2.2.2.1.2.6)) followed by a [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) or [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_2.2.2.2.1.1.2.14) Primary Drawing Order.
 
 Encoding order number: 24 (0x18)
 
@@ -2672,7 +2672,7 @@ packet-beta
 
 **srcBottom (variable):** The bottom coordinate of the clipping rectangle to be applied to the bitmap stored at the entry given by the **bitmapId** field. The coordinate is specified by using a Coord Field (section 2.2.2.2.1.1.1.1).
 
-**bitmapId (2 bytes):** A 16-bit, unsigned integer. The index of the NineGrid Bitmap Cache entry wherein the bitmap and NineGrid transformation information are stored. This value MUST be greater than or equal to 0 and less than the maximum number of entries allowed in the NineGrid Bitmap Cache as specified by the **drawNineGridCacheEntries** field of the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21). The bitmap and transformation information stored in the cache MUST have already been cached in response to a [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3) Alternate Secondary Drawing Order.
+**bitmapId (2 bytes):** A 16-bit, unsigned integer. The index of the NineGrid Bitmap Cache entry wherein the bitmap and NineGrid transformation information are stored. This value MUST be greater than or equal to 0 and less than the maximum number of entries allowed in the NineGrid Bitmap Cache as specified by the **drawNineGridCacheEntries** field of the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2). The bitmap and transformation information stored in the cache MUST have already been cached in response to a [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4) Alternate Secondary Drawing Order.
 
 <a id="Section_2.2.2.2.1.1.2.22"></a>
 MultiDrawNineGrid (MULTI_DRAWNINEGRID_ORDER)
@@ -2708,7 +2708,7 @@ packet-beta
 
 **srcBottom (variable):** The bottom coordinate of the clipping rectangle to be applied to the bitmap stored at the entry given by the **bitmapId** field. The coordinate is specified by using a Coord Field (section 2.2.2.2.1.1.1.1).
 
-**bitmapId (2 bytes):** A 16-bit, unsigned integer. The index of the NineGrid Bitmap Cache entry wherein the bitmap and NineGrid transformation information are stored. This value MUST be greater than or equal to 0 and less than the maximum number of entries allowed in the NineGrid Bitmap Cache as specified by the **drawNineGridCacheEntries** field of the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21). The bitmap and transformation information stored in the cache MUST have already been cached in response to a [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3) Alternate Secondary Drawing Order.
+**bitmapId (2 bytes):** A 16-bit, unsigned integer. The index of the NineGrid Bitmap Cache entry wherein the bitmap and NineGrid transformation information are stored. This value MUST be greater than or equal to 0 and less than the maximum number of entries allowed in the NineGrid Bitmap Cache as specified by the **drawNineGridCacheEntries** field of the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2). The bitmap and transformation information stored in the cache MUST have already been cached in response to a [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4) Alternate Secondary Drawing Order.
 
 **nDeltaEntries (1 byte):** An 8-bit, unsigned integer. The number of bounding rectangles described by the **CodedDeltaList** field.
 
@@ -2744,12 +2744,12 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | TS_CACHE_BITMAP_UNCOMPRESSED 0x00 | Cache Bitmap - Revision 1 (section [2.2.2.2.1.2.2)](#Section_c9365b320be547c9af1afeba2ea1ee9f) Secondary Drawing Order with an uncompressed bitmap. |
-| TS_CACHE_COLOR_TABLE 0x01 | [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_4.2.3) Secondary Drawing Order. |
+| TS_CACHE_COLOR_TABLE 0x01 | [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_2.2.2.2.1.2.4) Secondary Drawing Order. |
 | TS_CACHE_BITMAP_COMPRESSED 0x02 | Cache Bitmap - Revision 1 (section 2.2.2.2.1.2.2) Secondary Drawing Order with a compressed bitmap. |
 | TS_CACHE_GLYPH 0x03 | Cache Glyph - Revision 1 (section [2.2.2.2.1.2.5)](#Section_6dc06088b1124f4fb0bcb97bba621a0c) or Cache Glyph - Revision 2 (section [2.2.2.2.1.2.6)](#Section_ffc80435136e442e908540ca1d27a413) Secondary Drawing Order. The version is indicated by the extraFlags field. |
 | TS_CACHE_BITMAP_UNCOMPRESSED_REV2 0x04 | Cache Bitmap - Revision 2 (section [2.2.2.2.1.2.3)](#Section_3c76f8fbfcaa4ca69d2e3f449bdbed40) Secondary Drawing Order with an uncompressed bitmap. |
 | TS_CACHE_BITMAP_COMPRESSED_REV2 0x05 | Cache Bitmap - Revision 2 (section 2.2.2.2.1.2.3) Secondary Drawing Order with a compressed bitmap. |
-| TS_CACHE_BRUSH 0x07 | [Cache Brush (section 2.2.2.2.1.2.7)](#Section_4.2.6) Secondary Drawing Order. |
+| TS_CACHE_BRUSH 0x07 | [Cache Brush (section 2.2.2.2.1.2.7)](#Section_2.2.2.2.1.2.7) Secondary Drawing Order. |
 | TS_CACHE_BITMAP_COMPRESSED_REV3 0x08 | Cache Bitmap - Revision 3 (section [2.2.2.2.1.2.8)](#Section_710cf5c26a0c4cea8d62fa4f639d7c5a) Secondary Drawing Order with a compressed bitmap. |
 
 <a id="Section_2.2.2.2.1.2.1.2"></a>
@@ -2969,7 +2969,7 @@ Cache Color Table (CACHE_COLOR_TABLE_ORDER)
 
 The Cache Color Table Secondary Drawing Order is used by the server to instruct the client to store a color table in a particular Color Table Cache entry. Color tables are used in the [MemBlt (section 2.2.2.2.1.1.2.9)](#Section_2.2.2.2.1.1.2.9) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](#Section_2.2.2.2.1.1.2.10) Primary Drawing Orders.
 
-Support for color table caching is not specified in the [Color Table Cache Capability Set (section 2.2.1.1)](#Section_3.1.1.1.3), but is instead implied by support for the MemBlt (section 2.2.2.2.1.1.2.9) and Mem3Blt (section 2.2.2.2.1.1.2.10) Primary Drawing Orders. If support for these orders is advertised in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the existence of a color table cache with entries for six palettes is assumed when palettized color is being used, and the Cache Color Table is used to update these palettes.
+Support for color table caching is not specified in the [Color Table Cache Capability Set (section 2.2.1.1)](#Section_2.2.1.1), but is instead implied by support for the MemBlt (section 2.2.2.2.1.1.2.9) and Mem3Blt (section 2.2.2.2.1.1.2.10) Primary Drawing Orders. If support for these orders is advertised in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the existence of a color table cache with entries for six palettes is assumed when palettized color is being used, and the Cache Color Table is used to update these palettes.
 
 ```mermaid
 packet-beta
@@ -3495,11 +3495,11 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| TS_ALTSEC_SWITCH_SURFACE 0x00 | Switch Surface Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.3](#Section_4.3.2)). |
-| TS_ALTSEC_CREATE_OFFSCR_BITMAP 0x01 | Create Offscreen Bitmap Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.2](#Section_4.3.1)). |
-| TS_ALTSEC_STREAM_BITMAP_FIRST 0x02 | Stream Bitmap First (Revision 1 and 2) Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.5.1](#Section_4.3.4)). |
-| TS_ALTSEC_STREAM_BITMAP_NEXT 0x03 | Stream Bitmap Next Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.5.2](#Section_4.3.5)). |
-| TS_ALTSEC_CREATE_NINEGRID_BITMAP 0x04 | Create NineGrid Bitmap Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.4](#Section_4.3.3)). |
+| TS_ALTSEC_SWITCH_SURFACE 0x00 | Switch Surface Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.3](#Section_2.2.2.2.1.3.3)). |
+| TS_ALTSEC_CREATE_OFFSCR_BITMAP 0x01 | Create Offscreen Bitmap Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.2](#Section_2.2.2.2.1.3.2)). |
+| TS_ALTSEC_STREAM_BITMAP_FIRST 0x02 | Stream Bitmap First (Revision 1 and 2) Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.5.1](#Section_2.2.2.2.1.3.5.1)). |
+| TS_ALTSEC_STREAM_BITMAP_NEXT 0x03 | Stream Bitmap Next Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.5.2](#Section_2.2.2.2.1.3.5.2)). |
+| TS_ALTSEC_CREATE_NINEGRID_BITMAP 0x04 | Create NineGrid Bitmap Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.4](#Section_2.2.2.2.1.3.4)). |
 | TS_ALTSEC_GDIP_FIRST 0x05 | Draw GDI+ First Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.6.2](#Section_4.3.6)). |
 | TS_ALTSEC_GDIP_NEXT 0x06 | Draw GDI+ Next Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.6.3](#Section_4.3.7)). |
 | TS_ALTSEC_GDIP_END 0x07 | Draw GDI+ End Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.6.4](#Section_4.3.8)). |
@@ -3577,7 +3577,7 @@ packet-beta
 <a id="Section_2.2.2.2.1.3.4"></a>
 Create NineGrid Bitmap (CREATE_NINEGRID_BITMAP_ORDER)
 
-The Create NineGrid Bitmap Alternate Secondary Drawing Order is used by the server to instruct the client to create a NineGrid bitmap of a particular width and height in the NineGrid Bitmap Cache (the color depth MUST be 32 bpp). Support for NineGrid drawing is specified in the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21).
+The Create NineGrid Bitmap Alternate Secondary Drawing Order is used by the server to instruct the client to create a NineGrid bitmap of a particular width and height in the NineGrid Bitmap Cache (the color depth MUST be 32 bpp). Support for NineGrid drawing is specified in the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2).
 
 ```mermaid
 packet-beta
@@ -3667,7 +3667,7 @@ The stream bitmap alternate secondary orders (added in RDP version 5.1) enable b
 
 None of the stream bitmap alternate secondary orders include the cache entry in which to store the streamed bitmap. This is because the server MUST always send a bitmap creation order that contains the bitmap cache entry data immediately after streaming the bitmap bits to the client.
 
-If support for NineGrid rendering is specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21), the support for bitmap streaming is implicitly assumed to be the case, as the NineGrid bitmaps are transported using bitmap streaming.
+If support for NineGrid rendering is specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2), the support for bitmap streaming is implicitly assumed to be the case, as the NineGrid bitmaps are transported using bitmap streaming.
 
 <a id="Section_2.2.2.2.1.3.5.1"></a>
 Stream Bitmap First (STREAM_BITMAP_FIRST_ORDER)
@@ -4002,7 +4002,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.2.3.1.1"></a>
 ###### 2.2.2.3.1.1 Bitmap Cache Error PDU Data (TS_BITMAP_CACHE_ERROR_PDU)
 
-The TS_BITMAP_CACHE_ERROR_PDU structure contains the contents of the Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu), which is essentially a Share Data Header (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.8.1.1.1.2) and an array of [Bitmap Cache Error Info (section 2.2.2.3.1.1.1)](#Section_3.2.1.3) structures.
+The TS_BITMAP_CACHE_ERROR_PDU structure contains the contents of the Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu), which is essentially a Share Data Header (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.8.1.1.1.2) and an array of [Bitmap Cache Error Info (section 2.2.2.3.1.1.1)](../MS-RDPBCGR/MS-RDPBCGR.md) structures.
 
 ```mermaid
 packet-beta
@@ -4236,7 +4236,7 @@ The **Level2ComprFlags** field MUST be ignored if the L1_INNER_COMPRESSION flag 
 <a id="Section_2.2.2.4.1.1"></a>
 ###### 2.2.2.4.1.1 RDP 6.1 Match Details (RDP61_MATCH_DETAILS)
 
-The RDP61_MATCH_DETAILS structure encapsulates all of the details, which describes a compression match in a history buffer. (See section [3.1.8.2.2](#Section_3.1.8.2.2.1) for a description of how matches are employed within the RDP 6.1 Compression Engine.)
+The RDP61_MATCH_DETAILS structure encapsulates all of the details, which describes a compression match in a history buffer. (See section [3.1.8.2.2](#Section_3.1.8.2.2) for a description of how matches are employed within the RDP 6.1 Compression Engine.)
 
 ```mermaid
 packet-beta
@@ -4317,7 +4317,7 @@ Depending on the values of the **CLL** and **CS** subfields of the FormatHeader 
 <a id="Section_2.2.2.5.1.1"></a>
 ###### 2.2.2.5.1.1 RDP 6.0 RLE Segments (RDP6_RLE_SEGMENTS)
 
-The RDP6_RLE_SEGMENTS structure contains the run-length encoded contents of a color plane and consists of a collection of [RDP6_RLE_SEGMENT](#Section_2.2.2.5.1.1) structures.
+The RDP6_RLE_SEGMENTS structure contains the run-length encoded contents of a color plane and consists of a collection of [RDP6_RLE_SEGMENT](#Section_2.2.2.5.1.2) structures.
 
 ```mermaid
 packet-beta
@@ -4382,7 +4382,7 @@ Bitmap caches are used by the client and server to store graphic bitmaps. Each b
 
 The Cache Bitmap - Revision 1 (section [2.2.2.2.1.2.2](#Section_2.2.2.2.1.2.2)), Cache Bitmap - Revision 2 (section [2.2.2.2.1.2.3](#Section_2.2.2.2.1.2.3)), and Cache Bitmap - Revision 3 (section [2.2.2.2.1.2.8](#Section_2.2.2.2.1.2.8)) Secondary Drawing Orders are used to update the contents of the client-side bitmap cache.
 
-There are two versions of bitmap caches. Revision 1 bitmap caches are used in association with the Cache Bitmap – Revision 1 Secondary Drawing Order and only support memory-based caching. Revision 2 bitmap caches are used in association with the both the Cache Bitmap – Revision 2 and Cache Bitmap – Revision 3 Secondary Drawing Orders and support persistent disk caching (in addition to memory caching) by associating a 64-bit key (derived from a cryptographic hash of the bitmap contents) with each bitmap. These 64-bit keys SHOULD be sent to the server on subsequent connections (using the Persistent Key List [**PDU**](#gt_protocol-data-unit-pdu) specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.17.1) to initialize the persistent disk cache. The server maintains its own cache of bitmap keys that it has already sent to the client (section [3.3.1.1](../MS-RDPBCGR/MS-RDPBCGR.md)).
+There are two versions of bitmap caches. Revision 1 bitmap caches are used in association with the Cache Bitmap – Revision 1 Secondary Drawing Order and only support memory-based caching. Revision 2 bitmap caches are used in association with the both the Cache Bitmap – Revision 2 and Cache Bitmap – Revision 3 Secondary Drawing Orders and support persistent disk caching (in addition to memory caching) by associating a 64-bit key (derived from a cryptographic hash of the bitmap contents) with each bitmap. These 64-bit keys SHOULD be sent to the server on subsequent connections (using the Persistent Key List [**PDU**](#gt_protocol-data-unit-pdu) specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.17.1) to initialize the persistent disk cache. The server maintains its own cache of bitmap keys that it has already sent to the client (section [3.3.1.1](#Section_3.3.1.1)).
 
 When using the Revision 2 bitmap caches, the client is able to request that the server delays forcing it to cache a bitmap to disk until the bitmap has been used more than once. This is implemented by requesting that the server maintain a Bitmap Cache Wait List (see section [3.3.1.3](#Section_3.3.1.3)). Once a particular bitmap has been encountered by the server more than once, it MUST instruct the client to cache it (see section 2.2.2.2.1.2.3).
 
@@ -4415,7 +4415,7 @@ Bitmap images stored in the bitmap caches are rendered using the MemBlt (section
 
 Glyph caching supports 10 glyph caches and 1 fragment cache to store bitmaps of font characters in memory. Glyphs are first cached in the glyph caches before being displayed. A fragment is a set of glyphs defined in terms of glyph indices.
 
-The Cache Glyph - Revision 1 (section [2.2.2.2.1.2.5)](#Section_6dc06088b1124f4fb0bcb97bba621a0c) and Cache Glyph - Revision 2 (section [2.2.2.2.1.2.6)](#Section_ffc80435136e442e908540ca1d27a413) Secondary Drawing Orders are used to update the glyph caches. The [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) and [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Orders consume glyphs from the glyph caches and also populate the Fragment Cache. The [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_4.1.15) Primary Drawing Order is used to update the glyph caches with a single glyph and to encode the same glyph at a specified position.
+The Cache Glyph - Revision 1 (section [2.2.2.2.1.2.5)](#Section_6dc06088b1124f4fb0bcb97bba621a0c) and Cache Glyph - Revision 2 (section [2.2.2.2.1.2.6)](#Section_ffc80435136e442e908540ca1d27a413) Secondary Drawing Orders are used to update the glyph caches. The [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) and [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_2.2.2.2.1.1.2.14) Primary Drawing Orders consume glyphs from the glyph caches and also populate the Fragment Cache. The [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_2.2.2.2.1.1.2.15) Primary Drawing Order is used to update the glyph caches with a single glyph and to encode the same glyph at a specified position.
 
 The actual layout of the glyph and fragment caches is specified in the Glyph Cache Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.8).
 
@@ -4439,30 +4439,30 @@ There is only one fragment cache, and by default it has 256 entries with 256 byt
 <a id="Section_3.1.1.1.3"></a>
 ##### 3.1.1.1.3 Color Table Cache
 
-The Color Table Cache is used to reduce bandwidth by caching color palettes. The existence of the Color Table Cache is implicitly tied to support for the [MemBlt (section 2.2.2.2.1.1.2.9)](../MS-RDPBCGR/MS-RDPBCGR.md) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](../MS-RDPBCGR/MS-RDPBCGR.md) Primary Drawing Orders. If support for these orders is advertised in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the existence of a color table cache with entries for six palettes is implied when palettized color is being used. Each of the six cached color tables holds 256 color mappings, initialized by the [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_4.2.3) Secondary Drawing Order. Cached color tables are used exclusively by the MemBlt (section 2.2.2.2.1.1.2.9) and Mem3Blt (section 2.2.2.2.1.1.2.10) Primary Drawing Orders.
+The Color Table Cache is used to reduce bandwidth by caching color palettes. The existence of the Color Table Cache is implicitly tied to support for the [MemBlt (section 2.2.2.2.1.1.2.9)](../MS-RDPBCGR/MS-RDPBCGR.md) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](../MS-RDPBCGR/MS-RDPBCGR.md) Primary Drawing Orders. If support for these orders is advertised in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the existence of a color table cache with entries for six palettes is implied when palettized color is being used. Each of the six cached color tables holds 256 color mappings, initialized by the [Cache Color Table (section 2.2.2.2.1.2.4)](../MS-RDPBCGR/MS-RDPBCGR.md) Secondary Drawing Order. Cached color tables are used exclusively by the MemBlt (section 2.2.2.2.1.1.2.9) and Mem3Blt (section 2.2.2.2.1.1.2.10) Primary Drawing Orders.
 
 <a id="Section_3.1.1.1.4"></a>
 ##### 3.1.1.1.4 Brush Caches
 
-There are two brush caches: a mono brush cache and a color brush cache. Each cache can hold 64 [**brush**](#gt_brush) entries. The size of a mono brush is 16 bytes, and the size of a color brush is 64 bytes for 8 bpp and 192 bytes for 24 bpp. Support for brush caching is specified by using the Brush Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7). The [Cache Brush (section 2.2.2.2.1.2.7)](#Section_4.2.6) Secondary Drawing Order is used to populate the brush caches.
+There are two brush caches: a mono brush cache and a color brush cache. Each cache can hold 64 [**brush**](#gt_brush) entries. The size of a mono brush is 16 bytes, and the size of a color brush is 64 bytes for 8 bpp and 192 bytes for 24 bpp. Support for brush caching is specified by using the Brush Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7). The [Cache Brush (section 2.2.2.2.1.2.7)](../MS-RDPBCGR/MS-RDPBCGR.md) Secondary Drawing Order is used to populate the brush caches.
 
 <a id="Section_3.1.1.1.5"></a>
 ##### 3.1.1.1.5 Offscreen Bitmap Cache
 
-The Offscreen Bitmap Cache is used to store writable offscreen bitmap surfaces. There is only one cache for all offscreen bitmaps. The bitmap sizes are variable and depend on the dimensions specified by the [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_4.3.1) Alternate Secondary Drawing Order.
+The Offscreen Bitmap Cache is used to store writable offscreen bitmap surfaces. There is only one cache for all offscreen bitmaps. The bitmap sizes are variable and depend on the dimensions specified by the [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_2.2.2.2.1.3.2) Alternate Secondary Drawing Order.
 
 The total cache size and cache entries are capped by the values specified in the Offscreen Bitmap Cache Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.9). The default size of the cache is 2.5 MB for 8 bpp, 5 MB for 16 bpp, or 7.5 MB for 24 bpp. The default number of allowed cache entries is 100.
 
-The Create Offscreen Bitmap (section 2.2.2.2.1.3.2) and [Switch Surface (section 2.2.2.2.1.3.3)](#Section_4.3.2) Alternate Secondary Drawing Orders are used to manipulate the offscreen cache. Images stored in the Offscreen Bitmap Cache are rendered with the [MemBlt (section 2.2.2.2.1.1.2.9)](#Section_2.2.2.2.1.1.2.9) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](#Section_2.2.2.2.1.1.2.10) Primary Drawing Orders.
+The Create Offscreen Bitmap (section 2.2.2.2.1.3.2) and [Switch Surface (section 2.2.2.2.1.3.3)](#Section_2.2.2.2.1.3.3) Alternate Secondary Drawing Orders are used to manipulate the offscreen cache. Images stored in the Offscreen Bitmap Cache are rendered with the [MemBlt (section 2.2.2.2.1.1.2.9)](#Section_2.2.2.2.1.1.2.9) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](#Section_2.2.2.2.1.1.2.10) Primary Drawing Orders.
 
 <a id="Section_3.1.1.1.6"></a>
 ##### 3.1.1.1.6 NineGrid Bitmap Cache
 
 The NineGrid bitmap cache is used to store NineGrid-compliant bitmaps. There is only one cache for all NineGrid bitmaps. The individual bitmap sizes are variable and depend on the bitmap dimensions.
 
-The total cache size and cache entries are capped by the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21). The default size of the cache is 2.5 MB for 8 bpp, 5 MB for 16 bpp, or 7.5 MB for 24 bpp. The default number of allowed cache entries is 256.
+The total cache size and cache entries are capped by the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2). The default size of the cache is 2.5 MB for 8 bpp, 5 MB for 16 bpp, or 7.5 MB for 24 bpp. The default number of allowed cache entries is 256.
 
-The [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3), [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_4.3.4), and [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_4.3.5) Alternate Secondary Drawing Orders are used to populate the NineGrid Bitmap Cache. Individual bitmaps within the cache are rendered with the [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_4.1.21) Primary Drawing Order. This primary drawing order applies a NineGrid algorithm to the bitmap before rendering it (for an example rendering, see section [4.4](#Section_4.4)).
+The [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4), [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_2.2.2.2.1.3.5.1), and [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_2.2.2.2.1.3.5.2) Alternate Secondary Drawing Orders are used to populate the NineGrid Bitmap Cache. Individual bitmaps within the cache are rendered with the [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_2.2.2.2.1.1.2.21) Primary Drawing Order. This primary drawing order applies a NineGrid algorithm to the bitmap before rendering it (for an example rendering, see section [4.4](#Section_4.4)).
 
 <a id="Section_3.1.1.1.7"></a>
 ##### 3.1.1.1.7 GDI+ Caches
@@ -5090,7 +5090,7 @@ Decompression with RDP6.1-BC is based on the principles specified in [MS-RDPBCGR
 | L1_PACKET_AT_FRONT 0x04 | The level-1 history buffer MUST be reinitialized (by filling it with zeros). This flag indicates that the data to be decompressed will not fit into the local level-1 history buffer at the current offset. |
 | L1_NO_COMPRESSION 0x02 | No compression was performed. The input data consists of raw literals that MUST be appended to the local level-1 history buffer. |
 | L1_COMPRESSED 0x01 | Compression with the level-1 compressor was performed. The input data MUST contain at least one match. The uncompressed data MUST be appended to the level-1 history buffer. |
-| L1_INNER_COMPRESSION 0x10 | Indicates that additional level-2 compression (using RDP 5.0 bulk compression) has been performed on the level-1 compressor output. If the L1_INNER_COMPRESSION flag is set, the data following the Level2ComprFlags field in the RDP 6.1 Compressed Data structure (see sections 2.2.2.4.1 and [2.2.2.5.1](#Section_2.2.2.5.1.1)) MUST first be passed to the chained level-2 RDP 5.0 bulk decompressor. The level-2 decompression MUST be controlled by the contents of the Level2ComprFlags field. After this decompression phase the output MUST then be processed by the RDP6.1-BC decompressor using the Level1ComprFlags field to control the decompression. |
+| L1_INNER_COMPRESSION 0x10 | Indicates that additional level-2 compression (using RDP 5.0 bulk compression) has been performed on the level-1 compressor output. If the L1_INNER_COMPRESSION flag is set, the data following the Level2ComprFlags field in the RDP 6.1 Compressed Data structure (see sections 2.2.2.4.1 and [2.2.2.5.1](#Section_2.2.2.5.1)) MUST first be passed to the chained level-2 RDP 5.0 bulk decompressor. The level-2 decompression MUST be controlled by the contents of the Level2ComprFlags field. After this decompression phase the output MUST then be processed by the RDP6.1-BC decompressor using the Level1ComprFlags field to control the decompression. |
 
 The following flowchart describes how the RDP6.1-BC decompression algorithm operates.
 
@@ -5343,12 +5343,12 @@ RAW [-5]; RUN [5]
 
 RAW [<none>]; RUN [6] (Previous base value assumed to be 0.)
 
-Due to the fact that the lengths of RAW and RUN components are limited to 4-bit values (see section [2.2.2.5.1.2](#Section_2.2.2.5.1.1)), individual segments can be broken up further into subsegments during encoding to produce RUN sequences consisting of more than 16 values.
+Due to the fact that the lengths of RAW and RUN components are limited to 4-bit values (see section [2.2.2.5.1.2](#Section_2.2.2.5.1.2)), individual segments can be broken up further into subsegments during encoding to produce RUN sequences consisting of more than 16 values.
 
 <a id="Section_3.1.9.2.1"></a>
 ##### 3.1.9.2.1 Encoding Run-Length Sequences
 
-Once a run-length encoder has broken up a scan-line into segments, it MUST encode each segment as one or more subsegments. The structure of segments and subsegments is the same and is defined in section [2.2.2.5.1.2](#Section_2.2.2.5.1.1).
+Once a run-length encoder has broken up a scan-line into segments, it MUST encode each segment as one or more subsegments. The structure of segments and subsegments is the same and is defined in section [2.2.2.5.1.2](#Section_2.2.2.5.1.2).
 
 The process of encoding scan-lines using RDP 6.0 RLE is best illustrated with a practical example. Assume that the following three scan-lines are present in a bitmap.
 
@@ -5425,7 +5425,7 @@ Figure 15: Encoding data using RDP 6.0 Run-Length Encoding (RLE)
 <a id="Section_3.1.9.2.2"></a>
 ##### 3.1.9.2.2 Extra Long RUN Sequences
 
-The lengths of RAW and RUN components are limited to 4-bit values and, as a result, encoding of run-lengths greater than 15 values requires special casing, as described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.1).
+The lengths of RAW and RUN components are limited to 4-bit values and, as a result, encoding of run-lengths greater than 15 values requires special casing, as described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.2).
 
 Encoding of an extra long RUN sequence is best described with an example. Assume that there is a pattern consisting of the letter A repeated 100 times. The resulting RLE segments are the following:
 
@@ -5450,7 +5450,7 @@ In hexadecimal, this becomes the following:
 <a id="Section_3.1.9.2.3"></a>
 ##### 3.1.9.2.3 Decoding Run-Length Sequences
 
-Encoding of run-length sequences ensures that there is at least one subsegment per scan-line. The control byte described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.1) contains all of the information necessary to decode the sequence bytes.
+Encoding of run-length sequences ensures that there is at least one subsegment per scan-line. The control byte described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.2) contains all of the information necessary to decode the sequence bytes.
 
 The process of decoding an encoded sequence of bytes for a color plane using RDP 6.0 RLE is best illustrated with a practical example. Assume that the following bytes are from a color plane in a bitmap that is 6 pixels wide by 3 pixels high.
 
@@ -5560,7 +5560,7 @@ Figure 16: Compressing a bitmap using RDP 6.0 Bitmap Compression
 <a id="Section_3.1.9.4"></a>
 #### 3.1.9.4 Decompressing a Bitmap
 
-The decision-flow used to decompress a bitmap that is compressed with RDP 6.0 Bitmap Compression is illustrated in the following figure. The flags describing the bitmap data (present in the compressed data format header) are defined in section [2.2.2.5.1](#Section_2.2.2.5.1.1).
+The decision-flow used to decompress a bitmap that is compressed with RDP 6.0 Bitmap Compression is illustrated in the following figure. The flags describing the bitmap data (present in the compressed data format header) are defined in section [2.2.2.5.1](#Section_2.2.2.5.1).
 
 ![Decompression of a bitmap compressed with RDP 6.0 Bitmap Compression](media/image17.png)
 
@@ -5589,7 +5589,7 @@ These records are updated as each primary drawing order is processed, and are us
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 Save Bitmap
 
-The Save Bitmap is a 480-by-480-pixel bitmap that is used to temporarily store desktop bitmap images received in the SaveBitmap Primary Drawing Order (see section [3.2.5.1.1.1.12](../MS-RDPBCGR/MS-RDPBCGR.md)). Bitmaps stored in the Save Bitmap are tiled to maximize the number of bitmaps that can be stored (a graphical representation of how bitmaps are stored is shown in the figure in section [4.5](#Section_4.1.12)). If support for the SaveBitmap Primary Drawing Order is not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the Save Bitmap is not required.
+The Save Bitmap is a 480-by-480-pixel bitmap that is used to temporarily store desktop bitmap images received in the SaveBitmap Primary Drawing Order (see section [3.2.5.1.1.1.12](../MS-RDPBCGR/MS-RDPBCGR.md)). Bitmaps stored in the Save Bitmap are tiled to maximize the number of bitmaps that can be stored (a graphical representation of how bitmaps are stored is shown in the figure in section [4.5](#Section_4.5)). If support for the SaveBitmap Primary Drawing Order is not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the Save Bitmap is not required.
 
 <a id="Section_3.2.1.3"></a>
 #### 3.2.1.3 Bitmap Cache
@@ -5627,13 +5627,13 @@ None.
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Drawing Orders
 
-All drawing orders are encapsulated in an [Orders Update (section 2.2.2.1)](../MS-RDPBCGR/MS-RDPBCGR.md), which is received as part of the Graphics Update [**PDU**](#gt_protocol-data-unit-pdu) (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.1.1.3); or they are encapsulated in a [Fast-Path Orders Update (section 2.2.2.2)](../MS-RDPBCGR/MS-RDPBCGR.md), which is received as part of the Fast-Path Update PDU (see [MS-RDPBCGR] section 2.2.9.1.2.1).
+All drawing orders are encapsulated in an [Orders Update (section 2.2.2.1)](#Section_2.2.2.1), which is received as part of the Graphics Update [**PDU**](#gt_protocol-data-unit-pdu) (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.1.1.3); or they are encapsulated in a [Fast-Path Orders Update (section 2.2.2.2)](#Section_2.2.2.2), which is received as part of the Fast-Path Update PDU (see [MS-RDPBCGR] section 2.2.9.1.2.1).
 
 There are three classes of drawing orders:
 
-- [Primary Drawing Orders (section 2.2.2.2.1.1)](#Section_3.3.5.1)
-- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_3.3.5.1)
-- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_3.3.5.1)
+- [Primary Drawing Orders (section 2.2.2.2.1.1)](#Section_2.2.2.2.1.1)
+- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_2.2.2.2.1.2)
+- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_2.2.2.2.1.3)
 Orders belonging to each of these classes are packed together into an Orders Update structure or a Fast-Path Orders Update structure, each order being aligned on a byte boundary.
 
 <a id="Section_3.2.5.1.1"></a>
@@ -5663,7 +5663,7 @@ The basic process to decode a primary drawing order begins with reading the cont
 - If support for the primary drawing order was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the client SHOULD ignore the order, and processing SHOULD cease.
 - Determine whether or not all of the data required to decode and process the order has been received in the [Orders Update (section 2.2.2.1)](#Section_2.2.2.1) structure or the [Fast-Path Orders Update (section 2.2.2.2)](#Section_2.2.2.2) structure. If the packet does not contain enough data, processing SHOULD cease, and the order update SHOULD be ignored.
 - Read the order data, and validate the fields to make sure all the field data is consistent with the order specification (for example, the maximum number of fields and maximum order size MUST conform to the order specification). If any of the field data for a given order is inconsistent or refers to non-existent or invalid items (such as a non-existent cache entry or invalid [**brush**](#gt_brush) format), processing of the order SHOULD terminate, and it SHOULD also be ignored.
-Once the order has been decoded, and all of the information necessary to process it has been collected, the data MUST be handed off to a graphics rendering module so that the images from the remote system can be displayed locally on the client system. The client MUST also update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.2.1.1) to ensure that future orders can be decoded correctly.
+Once the order has been decoded, and all of the information necessary to process it has been collected, the data MUST be handed off to a graphics rendering module so that the images from the remote system can be displayed locally on the client system. The client MUST also update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.3.1.2) to ensure that future orders can be decoded correctly.
 
 <a id="Section_3.2.5.1.1.1.1"></a>
 Processing of DstBlt
@@ -5673,7 +5673,7 @@ The structure and fields of the DstBlt Primary Drawing Order are specified in se
 <a id="Section_3.2.5.1.1.1.2"></a>
 Processing of MultiDstBlt
 
-The structure and fields of the MultiDstBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.2](#Section_4.1.2), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the MultiDstBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.2](#Section_2.2.2.2.1.1.2.2), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.3"></a>
 Processing of PatBlt
@@ -5685,19 +5685,19 @@ If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST h
 <a id="Section_3.2.5.1.1.1.4"></a>
 Processing of MultiPatBlt
 
-The structure and fields of the MultiPatBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.4](#Section_4.1.4), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the MultiPatBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.4](#Section_2.2.2.2.1.1.2.4), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST have been received by the client in a prior Cache Brush Secondary Drawing Order (see section [3.2.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). If this is not the case, the client SHOULD ignore this order. Furthermore, if support for brush caching was not specified in the Brush Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7), and a cached brush is included in the MultiPatBlt order, the client SHOULD ignore this order.
 
 <a id="Section_3.2.5.1.1.1.5"></a>
 Processing of OpaqueRect
 
-The structure and fields of the OpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.5](#Section_4.1.5), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the OpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.5](#Section_2.2.2.2.1.1.2.5), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.6"></a>
 Processing of MultiOpaqueRect
 
-The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_4.1.5), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_2.2.2.2.1.1.2.6), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.7"></a>
 Processing of ScrBlt
@@ -5707,7 +5707,7 @@ The structure and fields of the ScrBlt Primary Drawing Order are specified in se
 <a id="Section_3.2.5.1.1.1.8"></a>
 Processing of MultiScrBlt
 
-The structure and fields of the MultiScrBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.8](#Section_4.1.8), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the MultiScrBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.8](#Section_2.2.2.2.1.1.2.8), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.9"></a>
 Processing of MemBlt
@@ -5739,7 +5739,7 @@ The structure and fields of the LineTo Primary Drawing Order are specified in se
 <a id="Section_3.2.5.1.1.1.12"></a>
 Processing of SaveBitmap
 
-The structure and fields of the SaveBitmap Primary Drawing Order are specified in section [2.2.2.2.1.1.2.12](#Section_4.1.12), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order. Bitmap data received in this order MUST be stored in the Save Bitmap (see section [3.2.1.2](#Section_3.2.1.2)).
+The structure and fields of the SaveBitmap Primary Drawing Order are specified in section [2.2.2.2.1.1.2.12](#Section_2.2.2.2.1.1.2.12), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order. Bitmap data received in this order MUST be stored in the Save Bitmap (see section [3.2.1.2](#Section_3.2.1.2)).
 
 <a id="Section_3.2.5.1.1.1.13"></a>
 Processing of GlyphIndex
@@ -5755,14 +5755,14 @@ If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST h
 <a id="Section_3.2.5.1.1.1.14"></a>
 Processing of FastIndex
 
-The structure and fields of the FastIndex Primary Drawing Order are specified in section [2.2.2.2.1.1.2.14](#Section_4.1.14), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the FastIndex Primary Drawing Order are specified in section [2.2.2.2.1.1.2.14](#Section_2.2.2.2.1.1.2.14), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 The decoding and processing of the FastIndex Order follow the same principles as those outlined for the GlyphIndex Order specified in section [3.2.5.1.1.1.13](#Section_3.2.5.1.1.1.13). However, the FastIndex Order does not use cached brushes and also utilizes a more efficient field encoding.
 
 <a id="Section_3.2.5.1.1.1.15"></a>
 Processing of FastGlyph
 
-The structure and fields of the FastGlyph Primary Drawing Order are specified in section [2.2.2.2.1.1.2.15](#Section_4.1.15), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the FastGlyph Primary Drawing Order are specified in section [2.2.2.2.1.1.2.15](#Section_2.2.2.2.1.1.2.15), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 If support for glyph caching was not specified in the Glyph Cache Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.8), the client SHOULD ignore this order because it requires the existence of the glyph caches (see section [3.1.1.1.2](#Section_3.1.1.1.2)).
 
@@ -5773,45 +5773,45 @@ Once the client has completed decoding and processing the FastGlyph order, and t
 <a id="Section_3.2.5.1.1.1.16"></a>
 Processing of PolygonSC
 
-The structure and fields of the PolygonSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.16](#Section_4.1.16), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the PolygonSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.16](#Section_2.2.2.2.1.1.2.16), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.17"></a>
 Processing of PolygonCB
 
-The structure and fields of the PolygonCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.17](#Section_4.1.17), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the PolygonCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.17](#Section_2.2.2.2.1.1.2.17), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST have been received by the client in a prior Cache Brush Secondary Drawing Order (see section [3.2.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). If this is not the case, the client SHOULD ignore this order. Furthermore, if support for brush caching was not specified in the Brush Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7), and a cached brush is included in the PolygonCB order, the client SHOULD ignore this order.
 
 <a id="Section_3.2.5.1.1.1.18"></a>
 Processing of Polyline
 
-The structure and fields of the Polyline Primary Drawing Order are specified in section [2.2.2.2.1.1.2.18](#Section_4.1.18), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the Polyline Primary Drawing Order are specified in section [2.2.2.2.1.1.2.18](#Section_2.2.2.2.1.1.2.18), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.19"></a>
 Processing of EllipseSC
 
-The structure and fields of the EllipseSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.19](#Section_4.1.19), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the EllipseSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.19](#Section_2.2.2.2.1.1.2.19), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.20"></a>
 Processing of EllipseCB
 
-The structure and fields of the EllipseCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.20](#Section_4.1.20), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the EllipseCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.20](#Section_2.2.2.2.1.1.2.20), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST have been received by the client in a prior Cache Brush Secondary Drawing Order (see section [3.2.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). If this is not the case, the client SHOULD ignore this order. Furthermore, if support for brush caching was not specified in the Brush Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7), and a cached brush is included in the EllipseCB order, the client SHOULD ignore this order.
 
 <a id="Section_3.2.5.1.1.1.21"></a>
 Processing of DrawNineGrid
 
-The structure and fields of the DrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.21](#Section_4.1.21), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the DrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.21](#Section_2.2.2.2.1.1.2.21), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
-If support for NineGrid bitmap caching was not specified in the DrawNineGrid Cache Capability Set (see section [2.2.1.2](#Section_4.1.21)), the client SHOULD ignore the order since the order refers to NineGrid bitmaps in the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)).
+If support for NineGrid bitmap caching was not specified in the DrawNineGrid Cache Capability Set (see section [2.2.1.2](#Section_2.2.1.2)), the client SHOULD ignore the order since the order refers to NineGrid bitmaps in the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)).
 
 The source bitmap (which resides in the NineGrid Bitmap Cache) MUST have been created and initialized as a result of processing prior Create NineGrid Bitmap (see section [3.2.5.1.3.1.3](#Section_3.2.5.1.3.1.3)) and Stream Bitmap (see section [3.2.5.1.3.1.4](#Section_3.2.5.1.3.1.4)) Alternate Secondary Orders.
 
 <a id="Section_3.2.5.1.1.1.22"></a>
 Processing of MultiDrawNineGrid
 
-The structure and fields of the MultiDrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.22](#Section_4.1.22), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the MultiDrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.22](#Section_2.2.2.2.1.1.2.22), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 The decoding and processing of the MultiDrawNineGrid Order follow the same principles as those outlined for the DrawNineGrid order specified in section [3.2.5.1.1.1.21](#Section_3.2.5.1.1.1.21). However, the MultiDrawNineGrid includes multiple clipping rectangles, as opposed to the DrawNineGrid order, which only includes one clipping rectangle.
 
@@ -5821,7 +5821,7 @@ The decoding and processing of the MultiDrawNineGrid Order follow the same princ
 <a id="Section_3.2.5.1.2.1"></a>
 ###### 3.2.5.1.2.1 Processing Secondary Drawing Orders
 
-All secondary drawing orders are identified by the [Secondary Drawing Order Header (section 2.2.2.2.1.2.1.1)](#Section_2.2.2.2.1.2.1.1) and are used to manipulate the RDP caches (section [3.1.1.1](#Section_1.3)):
+All secondary drawing orders are identified by the [Secondary Drawing Order Header (section 2.2.2.2.1.2.1.1)](#Section_2.2.2.2.1.2.1.1) and are used to manipulate the RDP caches (section [3.1.1.1](#Section_3.1.1.1)):
 
 - The Cache Bitmap (Revision 1) Secondary Drawing Order (section [3.2.5.1.2.1.1](#Section_3.2.5.1.2.1.1)) manages the Revision 1 Bitmap Caches (section [3.1.1.1.1](#Section_3.1.1.1.1)).
 - The Cache Bitmap (Revision 2) Secondary Drawing Order (section [3.2.5.1.2.1.2](#Section_3.2.5.1.2.1.2)) and Cache Bitmap (Revision 3) Secondary Drawing Order (section [2.2.2.2.1.2.8](#Section_2.2.2.2.1.2.8)) manage the Revision 2 Bitmap Caches (section 3.1.1.1.1).
@@ -5842,14 +5842,14 @@ Processing of Cache Bitmap (Revision 2)
 
 The structure and fields of the Cache Bitmap (Revision 2) Secondary Drawing Order are specified in section [2.2.2.2.1.2.3](#Section_2.2.2.2.1.2.3). The order fields MUST be processed in accordance with this description.
 
-The destination cache in which to store the bitmap that is encapsulated in the cache order will either be a Standard Bitmap Cache (section [3.2.1.3](../MS-RDPBCGR/MS-RDPBCGR.md)) or a Persistent Bitmap Cache (section [3.2.1.4](../MS-RDPBCGR/MS-RDPBCGR.md)), depending on the cache structure that was specified using the Revision 2 Bitmap Cache Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 2.2.7.1.4.2 and 2.2.7.1.4.2.1). If the target cache is persistent, then the server MUST include a 64-bit key that uniquely identifies the bitmap (indicated by the presence of the CBR2_PERSISTENT_KEY_PRESENT (0x02) flag). The client MUST save this key in the Persisted Bitmap Keys store (section [3.2.1.5](../MS-RDPBCGR/MS-RDPBCGR.md)) so that the Persistent Key List PDUs can be sent as specified in [MS-RDPBCGR] section 3.2.5.3.17.
+The destination cache in which to store the bitmap that is encapsulated in the cache order will either be a Standard Bitmap Cache (section [3.2.1.3](#Section_3.2.1.3)) or a Persistent Bitmap Cache (section [3.2.1.4](#Section_3.2.1.4)), depending on the cache structure that was specified using the Revision 2 Bitmap Cache Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 2.2.7.1.4.2 and 2.2.7.1.4.2.1). If the target cache is persistent, then the server MUST include a 64-bit key that uniquely identifies the bitmap (indicated by the presence of the CBR2_PERSISTENT_KEY_PRESENT (0x02) flag). The client MUST save this key in the Persisted Bitmap Keys store (section [3.2.1.5](#Section_3.2.1.5)) so that the Persistent Key List PDUs can be sent as specified in [MS-RDPBCGR] section 3.2.5.3.17.
 
 If the client does not support the Revision 2 bitmap caches (specified in the Revision 2 Bitmap Cache Capability Set described in [MS-RDPBCGR] section 2.2.7.1.4.2), or the [MemBlt (section 2.2.2.2.1.1.2.9)](../MS-RDPBCGR/MS-RDPBCGR.md) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](../MS-RDPBCGR/MS-RDPBCGR.md) Primary Drawing Orders, this order SHOULD be ignored.
 
 <a id="Section_3.2.5.1.2.1.3"></a>
 Processing of Cache Color Table
 
-The structure and fields of the Cache Color Table Secondary Drawing Order are specified in section [2.2.2.2.1.2.4](#Section_4.2.3). The order fields MUST be processed in accordance with this description.
+The structure and fields of the Cache Color Table Secondary Drawing Order are specified in section [2.2.2.2.1.2.4](#Section_2.2.2.2.1.2.4). The order fields MUST be processed in accordance with this description.
 
 If the client does not support the [MemBlt (section 2.2.2.2.1.1.2.9)](#Section_2.2.2.2.1.1.2.9) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](#Section_2.2.2.2.1.1.2.10) Primary Drawing Orders, this order SHOULD be ignored. Furthermore, if a client encounters any inconsistencies or errors when decoding and processing the Cache Color Table Secondary Drawing Order, the connection SHOULD be dropped.
 
@@ -5858,7 +5858,7 @@ Processing of Cache Glyph (Revision 1)
 
 The structure and fields of the Cache Glyph (Revision 1) Secondary Drawing Order are specified in section [2.2.2.2.1.2.5](#Section_2.2.2.2.1.2.5). The order fields MUST be processed in accordance with this description.
 
-If the client does not support glyph caching (specified in the Glyph Cache Capability Set described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.8) or the GlyphIndex (section 2.2.2.2.1.2.5), [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14), and [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_4.1.15) Primary Drawing Orders, this order SHOULD be ignored. Furthermore, if a client encounters any inconsistencies or errors when decoding and processing the Cache Glyph (Revision 1) Secondary Drawing Order, the connection SHOULD be dropped.
+If the client does not support glyph caching (specified in the Glyph Cache Capability Set described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.8) or the GlyphIndex (section 2.2.2.2.1.2.5), [FastIndex (section 2.2.2.2.1.1.2.14)](../MS-RDPBCGR/MS-RDPBCGR.md), and [FastGlyph (section 2.2.2.2.1.1.2.15)](../MS-RDPBCGR/MS-RDPBCGR.md) Primary Drawing Orders, this order SHOULD be ignored. Furthermore, if a client encounters any inconsistencies or errors when decoding and processing the Cache Glyph (Revision 1) Secondary Drawing Order, the connection SHOULD be dropped.
 
 <a id="Section_3.2.5.1.2.1.5"></a>
 Processing of Cache Glyph (Revision 2)
@@ -5870,7 +5870,7 @@ The decoding and processing of the Cache Glyph (Revision 2) order follows the sa
 <a id="Section_3.2.5.1.2.1.6"></a>
 Processing of Cache Brush
 
-The structure and fields of the Cache Brush Secondary Drawing Order are specified in section [2.2.2.2.1.2.7](#Section_4.2.6). The order fields MUST be processed in accordance with this description.
+The structure and fields of the Cache Brush Secondary Drawing Order are specified in section [2.2.2.2.1.2.7](#Section_2.2.2.2.1.2.7). The order fields MUST be processed in accordance with this description.
 
 The primary drawing orders that use cached [**brushes**](#gt_brush) are:
 
@@ -5907,14 +5907,14 @@ If the client has not advertised support for a particular cache type or feature,
 <a id="Section_3.2.5.1.3.1.1"></a>
 Processing of Create Offscreen Bitmap
 
-The structure and fields of the Create Offscreen Bitmap Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.2](#Section_4.3.1). The order fields MUST be processed in accordance with this description.
+The structure and fields of the Create Offscreen Bitmap Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.2](#Section_2.2.2.2.1.3.2). The order fields MUST be processed in accordance with this description.
 
 If the client does not support offscreen bitmaps (specified in the Offscreen Bitmap Cache Capability Set described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.9), or the [MemBlt (section 2.2.2.2.1.1.2.9)](../MS-RDPBCGR/MS-RDPBCGR.md) and [Mem3Blt (section 2.2.2.2.1.1.2.10)](../MS-RDPBCGR/MS-RDPBCGR.md) Primary Drawing Orders, this order SHOULD be ignored.
 
 <a id="Section_3.2.5.1.3.1.2"></a>
 Processing of Switch Surface
 
-The structure and fields of the Switch Surface Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.3](#Section_4.3.2). The order fields MUST be processed in accordance with this description.
+The structure and fields of the Switch Surface Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.3](#Section_2.2.2.2.1.3.3). The order fields MUST be processed in accordance with this description.
 
 The Create Offscreen Bitmap Alternate Secondary Drawing Order (see section [3.2.5.1.3.1.1](#Section_3.2.5.1.3.1.1)), which is used to create the offscreen bitmap referenced in this order, MUST have been received by the client before processing this order.
 
@@ -5925,18 +5925,18 @@ The client SHOULD drop the connection if the value in the **bitmapId** field is 
 <a id="Section_3.2.5.1.3.1.3"></a>
 Processing of Create NineGrid Bitmap
 
-The structure and fields of the Create NineGrid Bitmap Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.4](#Section_4.3.3). The order fields MUST be processed in accordance with this description.
+The structure and fields of the Create NineGrid Bitmap Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.4](#Section_2.2.2.2.1.3.4). The order fields MUST be processed in accordance with this description.
 
-If the client does not support rendering NineGrid bitmaps (specified in the DrawNineGrid Capability Set described in section [2.2.1.2](#Section_4.1.21)), or support the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders (see sections [3.2.5.1.1.1.21](#Section_3.2.5.1.1.1.21) and [3.2.5.1.1.1.22](#Section_3.2.5.1.1.1.22), respectively), this order SHOULD be ignored.
+If the client does not support rendering NineGrid bitmaps (specified in the DrawNineGrid Capability Set described in section [2.2.1.2](#Section_2.2.1.2)), or support the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders (see sections [3.2.5.1.1.1.21](#Section_3.2.5.1.1.1.21) and [3.2.5.1.1.1.22](#Section_3.2.5.1.1.1.22), respectively), this order SHOULD be ignored.
 
 <a id="Section_3.2.5.1.3.1.4"></a>
 Processing of Stream Bitmap Orders
 
-The structure and fields of the Stream Bitmap First and Stream Bitmap Next Alternate Secondary Drawing Orders are specified in sections [2.2.2.2.1.3.5.1](#Section_4.3.4) and [2.2.2.2.1.3.5.2](#Section_4.3.5), respectively. The order fields MUST be processed in accordance with this description.
+The structure and fields of the Stream Bitmap First and Stream Bitmap Next Alternate Secondary Drawing Orders are specified in sections [2.2.2.2.1.3.5.1](#Section_2.2.2.2.1.3.5.1) and [2.2.2.2.1.3.5.2](#Section_2.2.2.2.1.3.5.2), respectively. The order fields MUST be processed in accordance with this description.
 
 The Stream Bitmap Orders are only used to populate the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)), and MUST follow immediately before the reception of a Create NineGrid Bitmap Alternate Secondary Drawing Order (see section [3.3.5.1.3.1.3](#Section_3.3.5.1.3.1.3)). The NineGrid Bitmap Cache entry to populate with the streamed bitmap data is implicitly assumed to be the entry specified in the Create NineGrid Bitmap Order.
 
-If the client does not support rendering NineGrid bitmaps (specified in the DrawNineGrid Capability Set described in section [2.2.1.2](#Section_4.1.21)), or support the DrawNineGrid or MultiDrawNineGrid Primary Drawing Orders (see sections [3.2.5.1.1.1.21](#Section_3.2.5.1.1.1.21) and [3.2.5.1.1.1.22](#Section_3.2.5.1.1.1.22), respectively), these orders SHOULD be ignored.
+If the client does not support rendering NineGrid bitmaps (specified in the DrawNineGrid Capability Set described in section [2.2.1.2](#Section_2.2.1.2)), or support the DrawNineGrid or MultiDrawNineGrid Primary Drawing Orders (see sections [3.2.5.1.1.1.21](#Section_3.2.5.1.1.1.21) and [3.2.5.1.1.1.22](#Section_3.2.5.1.1.1.22), respectively), these orders SHOULD be ignored.
 
 <a id="Section_3.2.5.1.3.1.5"></a>
 GDI+ Orders
@@ -5972,18 +5972,18 @@ The structure and fields of the Bitmap Cache Error PDU are specified in section 
 
 The Offscreen Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) SHOULD be sent to a server when the creation of an offscreen bitmap in the Offscreen Bitmap Cache (see section [3.1.1.1.5](#Section_3.1.1.1.5)) cannot be fulfilled due to a client-side failure (for example, low memory conditions).
 
-Creation of an offscreen bitmap is accomplished by using the [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_4.3.1) Alternate Secondary Drawing Order. The client SHOULD send the Offscreen Bitmap Cache Error PDU to the server to request that it disable offscreen bitmap caching and resend the drawing updates associated with the affected area. Any further errors related to the offscreen bitmap caching MUST be ignored by the client.
+Creation of an offscreen bitmap is accomplished by using the [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_2.2.2.2.1.3.2) Alternate Secondary Drawing Order. The client SHOULD send the Offscreen Bitmap Cache Error PDU to the server to request that it disable offscreen bitmap caching and resend the drawing updates associated with the affected area. Any further errors related to the offscreen bitmap caching MUST be ignored by the client.
 
-The structure and fields of the Offscreen Bitmap Cache Error PDU are specified in section [2.2.2.3.2](#Section_2.2.2.3.2.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
+The structure and fields of the Offscreen Bitmap Cache Error PDU are specified in section [2.2.2.3.2](#Section_2.2.2.3.2), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
 
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Sending of the DrawNineGrid Cache Error PDU
 
 The DrawNineGrid Cache Error PDU SHOULD be sent to a server when the creation of a NineGrid bitmap in the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)) cannot be fulfilled due to a client-side failure (for example, low memory conditions).
 
-Creation of a NineGrid bitmap in the NineGrid Bitmap Cache is accomplished by first using the [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3) Alternate Secondary Drawing Order, and then streaming the bitmap into the cache using the [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_4.3.4) and [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_4.3.5) Alternate Secondary Drawing Orders. If processing of any of these orders fails, the client SHOULD send the DrawNineGrid Error PDU to the server to request that it disable NineGrid bitmap caching and resend the drawing updates associated with the affected area. Any further errors related to NineGrid bitmap caching MUST be ignored by the client.
+Creation of a NineGrid bitmap in the NineGrid Bitmap Cache is accomplished by first using the [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4) Alternate Secondary Drawing Order, and then streaming the bitmap into the cache using the [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_2.2.2.2.1.3.5.1) and [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_2.2.2.2.1.3.5.2) Alternate Secondary Drawing Orders. If processing of any of these orders fails, the client SHOULD send the DrawNineGrid Error PDU to the server to request that it disable NineGrid bitmap caching and resend the drawing updates associated with the affected area. Any further errors related to NineGrid bitmap caching MUST be ignored by the client.
 
-The structure and fields of the DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.3](#Section_2.2.2.3.3.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
+The structure and fields of the DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.3](#Section_2.2.2.3.3), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
 
 <a id="Section_3.2.5.2.4"></a>
 ##### 3.2.5.2.4 Sending of the GDI+ Error PDU
@@ -5992,7 +5992,7 @@ The GDI+ Error [**PDU**](#gt_protocol-data-unit-pdu) SHOULD be sent to a server 
 
 The client SHOULD send the GDI+ Error PDU to the server to request that it resend all GDI+ content as bitmaps and not rely on the local client side GDI+ rendering. (The six GDI+ PDUs that are used to cache and render GDI+ primitives are specified in section [2.2.2.2.1.3.6](#Section_2.2.2.2.1.3.6).) Any further errors related to GDI+ rendering SHOULD be ignored by the client.
 
-The structure and fields of the GDI+ Error PDU are specified in section [2.2.2.3.4](#Section_2.2.2.3.4.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
+The structure and fields of the GDI+ Error PDU are specified in section [2.2.2.3.4](#Section_2.2.2.3.4), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -6059,13 +6059,13 @@ None.
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Drawing Orders
 
-All drawing orders are encapsulated in an [Orders Update (section 2.2.2.1)](../MS-RDPBCGR/MS-RDPBCGR.md), which is sent as part of the Graphics Update [**PDU**](#gt_protocol-data-unit-pdu) (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.1.1.3); or they are encapsulated in a [Fast-Path Orders Update (section 2.2.2.2)](../MS-RDPBCGR/MS-RDPBCGR.md), which is sent as part of the Fast-Path Update PDU (see [MS-RDPBCGR] section 2.2.9.1.2).
+All drawing orders are encapsulated in an [Orders Update (section 2.2.2.1)](#Section_2.2.2.1), which is sent as part of the Graphics Update [**PDU**](#gt_protocol-data-unit-pdu) (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.1.1.3); or they are encapsulated in a [Fast-Path Orders Update (section 2.2.2.2)](#Section_2.2.2.2), which is sent as part of the Fast-Path Update PDU (see [MS-RDPBCGR] section 2.2.9.1.2).
 
 There are three classes of drawing orders:
 
-- [Primary Drawing Orders (section 3.2.5.1.1)](#Section_3.3.5.1)
-- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_3.3.5.1)
-- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_3.3.5.1)
+- [Primary Drawing Orders (section 3.2.5.1.1)](#Section_3.2.5.1.1)
+- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_2.2.2.2.1.2)
+- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_2.2.2.2.1.3)
 Orders belonging to each of these classes are packed together into an Orders Update structure or a Fast-Path Orders Update structure, each order being aligned on a byte boundary.
 
 <a id="Section_3.3.5.1.1"></a>
@@ -6087,7 +6087,7 @@ If all of the Coord-type fields (see section [2.2.2.2.1.1.1.1](#Section_2.2.2.2.
 
 Before a given order is sent, the server MUST also ensure that all of the data required to process the order is accessible to the client. For example, if the order refers to a cached item, that item MUST be present in the client-side cache when the order is processed. Or, if palettized color is being used, the correct palette MUST be applied at the client-side.
 
-Once a primary drawing order has been constructed and transmitted to the client, the server MUST update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.2.1.1) to ensure that future encodings use the minimum fields and data required.
+Once a primary drawing order has been constructed and transmitted to the client, the server MUST update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.3.1.2) to ensure that future encodings use the minimum fields and data required.
 
 <a id="Section_3.3.5.1.1.1.1"></a>
 Construction of DstBlt
@@ -6099,7 +6099,7 @@ The DstBlt Order MUST NOT be sent to the client if support for it was not specif
 <a id="Section_3.3.5.1.1.1.2"></a>
 Construction of MultiDstBlt
 
-The structure and fields of the MultiDstBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.2](#Section_4.1.2). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the MultiDstBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.2](#Section_2.2.2.2.1.1.2.2). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The MultiDstBlt Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
@@ -6115,7 +6115,7 @@ The PatBlt Order MUST NOT be sent to the client if support for it was not specif
 <a id="Section_3.3.5.1.1.1.4"></a>
 Construction of MultiPatBlt
 
-The structure and fields of the MultiPatBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.4](#Section_4.1.4). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the MultiPatBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.4](#Section_2.2.2.2.1.1.2.4). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST be sent to the client before this order is dispatched by using a Cache Brush Secondary Drawing Order (see section [3.3.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). (The client specifies support for brush caching using the Brush Capability Set defined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7.)
 
@@ -6124,14 +6124,14 @@ The MultiPatBlt Order MUST NOT be sent to the client if support for it was not s
 <a id="Section_3.3.5.1.1.1.5"></a>
 Construction of OpaqueRect
 
-The structure and fields of the OpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.5](#Section_4.1.5). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the OpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.5](#Section_2.2.2.2.1.1.2.5). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The OpaqueRect Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
 <a id="Section_3.3.5.1.1.1.6"></a>
 Construction of MultiOpaqueRect
 
-The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_4.1.5). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_2.2.2.2.1.1.2.6). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The MultiOpaqueRect Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
@@ -6145,7 +6145,7 @@ The ScrBlt Order MUST NOT be sent to the client if support for it was not specif
 <a id="Section_3.3.5.1.1.1.8"></a>
 Construction of MultiScrBlt
 
-The structure and fields of the MultiScrBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.8](#Section_4.1.8). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the MultiScrBlt Primary Drawing Order are specified in section [2.2.2.2.1.1.2.8](#Section_2.2.2.2.1.1.2.8). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The MultiScrBlt Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
@@ -6190,7 +6190,7 @@ The LineTo Order MUST NOT be sent to the client if support for it was not specif
 <a id="Section_3.3.5.1.1.1.12"></a>
 Construction of SaveBitmap
 
-The structure and fields of the SaveBitmap Primary Drawing Order are specified in section [2.2.2.2.1.1.2.12](#Section_4.1.12). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the SaveBitmap Primary Drawing Order are specified in section [2.2.2.2.1.1.2.12](#Section_2.2.2.2.1.1.2.12). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The SaveBitmap Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
@@ -6203,12 +6203,12 @@ All of the glyphs associated with the glyph cache indices specified in the order
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST be sent to the client before this order is dispatched by using a Cache Brush Secondary Drawing Order (see section [3.3.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). (The client specifies support for brush caching using the Brush Capability Set defined in [MS-RDPBCGR] section 2.2.7.1.7.)
 
-If support for the FastIndex Primary Drawing Order (see section [2.2.2.2.1.1.2.14](#Section_4.1.14) ) was indicated in the Order Capability Set (see [MS-RDPBCGR] section 2.2.7.1.3), then the FastIndex Primary Drawing Order SHOULD be used to send the glyph indices.
+If support for the FastIndex Primary Drawing Order (see section [2.2.2.2.1.1.2.14](../MS-RDPBCGR/MS-RDPBCGR.md) ) was indicated in the Order Capability Set (see [MS-RDPBCGR] section 2.2.7.1.3), then the FastIndex Primary Drawing Order SHOULD be used to send the glyph indices.
 
 <a id="Section_3.3.5.1.1.1.14"></a>
 Construction of FastIndex
 
-The structure and fields of the FastIndex Primary Drawing Order are specified in section [2.2.2.2.1.1.2.14](#Section_4.1.14). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the FastIndex Primary Drawing Order are specified in section [2.2.2.2.1.1.2.14](#Section_2.2.2.2.1.1.2.14). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The construction of the FastIndex Order follows the same principles as those outlined for the GlyphIndex Order specified in section [3.3.5.1.1.1.13](#Section_3.3.5.1.1.1.13). However, the FastIndex Order does not use cached brushes and also utilizes a more efficient field encoding.
 
@@ -6217,7 +6217,7 @@ The FastIndex Order MUST NOT be sent to the client if support for it was not spe
 <a id="Section_3.3.5.1.1.1.15"></a>
 Construction of FastGlyph
 
-The structure and fields of the FastGlyph Primary Drawing Order are specified in section [2.2.2.2.1.1.2.15](#Section_4.1.15). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the FastGlyph Primary Drawing Order are specified in section [2.2.2.2.1.1.2.15](#Section_2.2.2.2.1.1.2.15). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 All of the glyphs associated with the glyph cache indices specified in the order MUST be sent to the client before this order is dispatched by using a Revision 1 or 2 Cache Glyph Secondary Drawing Order (see sections [2.2.2.2.1.2.2](../MS-RDPBCGR/MS-RDPBCGR.md) and [2.2.2.2.1.2.3](../MS-RDPBCGR/MS-RDPBCGR.md)) or a prior FastGlyph Primary Drawing Order. The usage of glyph cache indices implies that support for glyph caching MUST have been specified in the Glyph Cache Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.8).
 
@@ -6226,14 +6226,14 @@ The FastGlyph Order MUST NOT be sent to the client if support for it was not spe
 <a id="Section_3.3.5.1.1.1.16"></a>
 Construction of PolygonSC
 
-The structure and fields of the PolygonSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.16](#Section_4.1.16). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the PolygonSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.16](#Section_2.2.2.2.1.1.2.16). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The PolygonSC Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
 <a id="Section_3.3.5.1.1.1.17"></a>
 Construction of PolygonCB
 
-The structure and fields of the PolygonCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.17](#Section_4.1.17). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the PolygonCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.17](#Section_2.2.2.2.1.1.2.17). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST be sent to the client before this order is dispatched by using a Cache Brush Secondary Drawing Order (see section [3.3.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). (The client specifies support for brush caching using the Brush Capability Set defined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7.)
 
@@ -6242,21 +6242,21 @@ The PolygonCB Order MUST NOT be sent to the client if support for it was not spe
 <a id="Section_3.3.5.1.1.1.18"></a>
 Construction of PolyLine
 
-The structure and fields of the Polyline Primary Drawing Order are specified in section [2.2.2.2.1.1.2.18](#Section_4.1.18). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the Polyline Primary Drawing Order are specified in section [2.2.2.2.1.1.2.18](#Section_2.2.2.2.1.1.2.18). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The Polyline Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
 <a id="Section_3.3.5.1.1.1.19"></a>
 Construction of EllipseSC
 
-The structure and fields of the EllipseSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.19](#Section_4.1.19). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the EllipseSC Primary Drawing Order are specified in section [2.2.2.2.1.1.2.19](#Section_2.2.2.2.1.1.2.19). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The EllipseSC Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
 <a id="Section_3.3.5.1.1.1.20"></a>
 Construction of EllipseCB
 
-The structure and fields of the EllipseCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.20](#Section_4.1.20). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the EllipseCB Primary Drawing Order are specified in section [2.2.2.2.1.1.2.20](#Section_2.2.2.2.1.1.2.20). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 If a cached [**brush**](#gt_brush) is specified in this order, that brush MUST be sent to the client before this order is dispatched by using a Cache Brush Secondary Drawing Order (see section [3.3.5.1.2.1.6](../MS-RDPBCGR/MS-RDPBCGR.md)). (The client specifies support for brush caching using the Brush Capability Set defined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.7.)
 
@@ -6265,16 +6265,16 @@ The EllipseCB Order MUST NOT be sent to the client if support for it was not spe
 <a id="Section_3.3.5.1.1.1.21"></a>
 Construction of DrawNineGrid
 
-The structure and fields of the DrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.21](#Section_4.1.21). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the DrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.21](#Section_2.2.2.2.1.1.2.21). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
-Support for the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)) MUST have been specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21) because the order refers to the ID of a NineGrid-compatible bitmap in this cache. Furthermore, this bitmap MUST have been created and initialized before this order is dispatched by using the Create NineGrid Bitmap (see section [3.3.5.1.3.1.3](#Section_3.3.5.1.3.1.3)) and Stream Bitmap (see section [3.3.5.1.3.1.4](#Section_3.3.5.1.3.1.4)) Alternate Secondary Orders.
+Support for the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)) MUST have been specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2) because the order refers to the ID of a NineGrid-compatible bitmap in this cache. Furthermore, this bitmap MUST have been created and initialized before this order is dispatched by using the Create NineGrid Bitmap (see section [3.3.5.1.3.1.3](#Section_3.3.5.1.3.1.3)) and Stream Bitmap (see section [3.3.5.1.3.1.4](#Section_3.3.5.1.3.1.4)) Alternate Secondary Orders.
 
 The DrawNineGrid Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
 <a id="Section_3.3.5.1.1.1.22"></a>
 Construction of MultiDrawNineGrid
 
-The structure and fields of the MultiDrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.22](#Section_4.1.22). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the MultiDrawNineGrid Primary Drawing Order are specified in section [2.2.2.2.1.1.2.22](#Section_2.2.2.2.1.1.2.22). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The construction of the MultiDrawNineGrid Order follows the same principles as those outlined for the DrawNineGrid order specified in section [3.3.5.1.1.1.21](#Section_3.3.5.1.1.1.21). However, the MultiDrawNineGrid includes multiple clipping rectangles, as opposed to the DrawNineGrid Order, which only includes one clipping rectangle.
 
@@ -6321,7 +6321,7 @@ The Cache Bitmap (Revision 2) Order MUST NOT be sent to the client if support fo
 <a id="Section_3.3.5.1.2.1.3"></a>
 Construction of Cache Color Table
 
-The structure and fields of the Cache Color Table Secondary Drawing Order are specified in section [2.2.2.2.1.2.4](#Section_4.2.3). The order fields MUST be populated in accordance with this description.
+The structure and fields of the Cache Color Table Secondary Drawing Order are specified in section [2.2.2.2.1.2.4](#Section_2.2.2.2.1.2.4). The order fields MUST be populated in accordance with this description.
 
 The color tables that are cached by the Cache Color Table Secondary Drawing Order can be consumed by future MemBlt (see section [3.3.5.1.1.1.9](#Section_3.3.5.1.1.1.9)) and Mem3Blt (see section [3.3.5.1.1.1.11](#Section_3.3.5.1.1.1.11)) Primary Drawing Orders.
 
@@ -6352,7 +6352,7 @@ The Cache Glyph (Revision 2) Order MUST NOT be sent to the client if support for
 <a id="Section_3.3.5.1.2.1.6"></a>
 Construction of Cache Brush
 
-The structure and fields of the Cache Brush Secondary Drawing Order are specified in section [2.2.2.2.1.2.7](#Section_4.2.6). The order fields MUST be populated in accordance with this description.
+The structure and fields of the Cache Brush Secondary Drawing Order are specified in section [2.2.2.2.1.2.7](#Section_2.2.2.2.1.2.7). The order fields MUST be populated in accordance with this description.
 
 The [**brushes**](#gt_brush) that are cached by the Cache Brush Secondary Drawing Order can be consumed by a number of primary drawing orders:
 
@@ -6392,7 +6392,7 @@ All alternate secondary drawing orders MUST contain the [Alternate Secondary Dra
 <a id="Section_3.3.5.1.3.1.1"></a>
 Construction of Create Offscreen Bitmap
 
-The structure and fields of the Create Offscreen Bitmap Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.2](#Section_4.3.1). The order fields MUST be populated in accordance with this description.
+The structure and fields of the Create Offscreen Bitmap Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.2](#Section_2.2.2.2.1.3.2). The order fields MUST be populated in accordance with this description.
 
 The offscreen bitmaps managed by the Create Offscreen Bitmap Alternate Secondary Drawing Order are specified in the Switch Surface Alternate Secondary Drawing Order (see section [3.3.5.1.3.1.2](#Section_3.3.5.1.3.1.2)). The Switch Surface Order allows the server to change the default client rendering surface to any one of the bitmaps created in the Offscreen Bitmap Cache by the Create Offscreen Order. Once drawing to an offscreen bitmap is complete, the server MUST direct the client to render the bitmap data to the primary drawing surface by using the MemBlt (see section [3.3.5.1.1.1.9](#Section_3.3.5.1.1.1.9)) or Mem3Blt (see section [3.3.5.1.1.1.10](#Section_3.3.5.1.1.1.10)) Primary Drawing Order.
 
@@ -6401,7 +6401,7 @@ The Create Offscreen Bitmap Order MUST NOT be sent to the client if support for 
 <a id="Section_3.3.5.1.3.1.2"></a>
 Construction of Switch Surface
 
-The structure and fields of the Switch Surface Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.3](#Section_4.3.2). The order fields MUST be populated in accordance with this description.
+The structure and fields of the Switch Surface Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.3](#Section_2.2.2.2.1.3.3). The order fields MUST be populated in accordance with this description.
 
 The Create Offscreen Bitmap Alternate Secondary Drawing Order (see section [3.3.5.1.3.1.1](#Section_3.3.5.1.3.1.1)), which is used to create the offscreen bitmap referenced in this order, MUST be sent to the client before this order is dispatched.
 
@@ -6410,20 +6410,20 @@ The Switch Surface Order MUST NOT be sent to the client if support for offscreen
 <a id="Section_3.3.5.1.3.1.3"></a>
 Construction of Create NineGrid Bitmap
 
-The structure and fields of the Create NineGrid Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.4](#Section_4.3.3). The order fields MUST be populated in accordance with this description.
+The structure and fields of the Create NineGrid Alternate Secondary Drawing Order are specified in section [2.2.2.2.1.3.4](#Section_2.2.2.2.1.3.4). The order fields MUST be populated in accordance with this description.
 
 The NineGrid bitmaps produced by the Create NineGrid Bitmap Alternate Secondary Drawing Order are initialized by the Stream Bitmap Alternate Secondary Drawing Orders (see section [3.3.5.1.3.1.4](#Section_3.3.5.1.3.1.4)) and consumed by the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders (see sections [3.3.5.1.1.1.21](#Section_3.3.5.1.1.1.21) and [3.3.5.1.1.1.22](#Section_3.3.5.1.1.1.22)).
 
-The Create NineGrid Bitmap Order MUST NOT be sent to the client if support for NineGrid rendering was not specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21), or if NineGrid bitmap caching has been disabled due to the reception of a DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) (see section [3.3.5.2.3](#Section_3.3.5.2.3)). Furthermore, if client-side support for the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders does not exist (specified using the Order Capability Set specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the Create NineGrid Bitmap Order SHOULD NOT be sent to the client.
+The Create NineGrid Bitmap Order MUST NOT be sent to the client if support for NineGrid rendering was not specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2), or if NineGrid bitmap caching has been disabled due to the reception of a DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) (see section [3.3.5.2.3](#Section_3.3.5.2.3)). Furthermore, if client-side support for the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders does not exist (specified using the Order Capability Set specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the Create NineGrid Bitmap Order SHOULD NOT be sent to the client.
 
 <a id="Section_3.3.5.1.3.1.4"></a>
 Construction of Stream Bitmap Orders
 
-The structure and fields of the Stream Bitmap First and Stream Bitmap Next Alternate Secondary Drawing Orders are specified in sections [2.2.2.2.1.3.5.1](#Section_4.3.4) and [2.2.2.2.1.3.5.2](#Section_4.3.5), respectively. The order fields MUST be populated in accordance with these descriptions.
+The structure and fields of the Stream Bitmap First and Stream Bitmap Next Alternate Secondary Drawing Orders are specified in sections [2.2.2.2.1.3.5.1](#Section_2.2.2.2.1.3.5.1) and [2.2.2.2.1.3.5.2](#Section_2.2.2.2.1.3.5.2), respectively. The order fields MUST be populated in accordance with these descriptions.
 
 The Stream Bitmap Orders are only used to populate the NineGrid Bitmap Cache (see section [3.1.1.1.6](#Section_3.1.1.1.6)) and MUST follow immediately after the Create NineGrid Bitmap Alternate Secondary Drawing Order (see section [3.3.5.1.3.1.3](#Section_3.3.5.1.3.1.3)). The NineGrid Bitmap Cache entry to populate with the streamed bitmap data is implicitly assumed to be the entry specified in the Create NineGrid Bitmap Order.
 
-Because the Stream Bitmap Orders are only used to populate the NineGrid Bitmap Cache, they SHOULD NOT be sent to the client if support for NineGrid rendering was not specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_4.1.21), or if NineGrid bitmap caching has been disabled due to the reception of a DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) (see section [3.3.5.2.3](#Section_3.3.5.2.3)). Furthermore, if client-side support for the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders does not exist (specified using the Order Capability Set specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the Stream Bitmap Orders SHOULD NOT be sent to the client.
+Because the Stream Bitmap Orders are only used to populate the NineGrid Bitmap Cache, they SHOULD NOT be sent to the client if support for NineGrid rendering was not specified using the [DrawNineGrid Cache Capability Set (section 2.2.1.2)](#Section_2.2.1.2), or if NineGrid bitmap caching has been disabled due to the reception of a DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) (see section [3.3.5.2.3](#Section_3.3.5.2.3)). Furthermore, if client-side support for the DrawNineGrid and MultiDrawNineGrid Primary Drawing Orders does not exist (specified using the Order Capability Set specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the Stream Bitmap Orders SHOULD NOT be sent to the client.
 
 <a id="Section_3.3.5.1.3.1.5"></a>
 GDI+ Orders
@@ -6450,7 +6450,7 @@ The Draw GDI+ Orders MUST NOT be sent to the client if support for GDI+ 1.1 rend
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Processing of Bitmap Cache Error PDU
 
-The structure and fields of the Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.1](#Section_2.2.2.3.1.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.1](#Section_2.2.2.3.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST flush the appropriate Bitmap Cache entries (see section [3.1.1.1.1](#Section_3.1.1.1.1)) and resend the graphics data associated with the affected area.
 
@@ -6459,25 +6459,25 @@ The server SHOULD honor up to five Bitmap Cache Error PDUs for a given connectio
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Processing of the Offscreen Bitmap Cache Error PDU
 
-The structure and fields of the Offscreen Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.2](#Section_2.2.2.3.2.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the Offscreen Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.2](#Section_2.2.2.3.2), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST disable offscreen bitmap caching for the duration of the connection and resend the graphics data associated with the affected area.
 
-Once offscreen bitmap caching has been disabled, the server MUST NOT send the Create Offscreen Bitmap Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.2](#Section_4.3.1)) for the duration of the connection.
+Once offscreen bitmap caching has been disabled, the server MUST NOT send the Create Offscreen Bitmap Alternate Secondary Drawing Order (see section [2.2.2.2.1.3.2](#Section_2.2.2.2.1.3.2)) for the duration of the connection.
 
 <a id="Section_3.3.5.2.3"></a>
 ##### 3.3.5.2.3 Processing of the DrawNineGrid Cache Error PDU
 
-The structure and fields of the DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.3](#Section_2.2.2.3.3.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the DrawNineGrid Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.3](#Section_2.2.2.3.3), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST disable NineGrid bitmap caching for the duration of the connection and resend the graphics data associated with the affected area.
 
-Once NineGrid bitmap caching has been disabled, the server MUST NOT send the [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3) Alternate Secondary Drawing Order, and the [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_4.3.4) and [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_4.3.5) Alternate Secondary Drawing Orders for the duration of the connection.
+Once NineGrid bitmap caching has been disabled, the server MUST NOT send the [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4) Alternate Secondary Drawing Order, and the [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_2.2.2.2.1.3.5.1) and [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_2.2.2.2.1.3.5.2) Alternate Secondary Drawing Orders for the duration of the connection.
 
 <a id="Section_3.3.5.2.4"></a>
 ##### 3.3.5.2.4 Processing of the GDI+ Error PDU
 
-The structure and fields of the GDI+ Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.4](#Section_2.2.2.3.4.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the GDI+ Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.4](#Section_2.2.2.3.4), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST disable GDI+ 1.1 rendering for the duration of the connection. All future GDI+ content MUST be sent as bitmaps so that local client-side GDI+ rendering is not required.
 
@@ -6539,7 +6539,7 @@ DSTBLT_ORDER::bRop not present
 <a id="Section_4.1.2"></a>
 ### 4.1.2 MultiDstBlt
 
-The following is an annotated dump of a [MultiDstBlt (section 2.2.2.2.1.1.2.2)](#Section_4.1.2) Primary Drawing Order.
+The following is an annotated dump of a [MultiDstBlt (section 2.2.2.2.1.1.2.2)](#Section_2.2.2.2.1.1.2.2) Primary Drawing Order.
 
 00000000 09 0f 7f 12 01 2d 01 a0 00 0c 00 55 02 0d 00 04 .....-.....U....
 
@@ -6685,7 +6685,7 @@ PATBLT_ORDER::BrushExtra not present
 <a id="Section_4.1.4"></a>
 ### 4.1.4 MultiPatBlt
 
-The following is an annotated dump of a [MultiPatBlt (section 2.2.2.2.1.1.2.4)](#Section_4.1.4) Primary Drawing Order.
+The following is an annotated dump of a [MultiPatBlt (section 2.2.2.2.1.1.2.4)](#Section_2.2.2.2.1.1.2.4) Primary Drawing Order.
 
 00000000 09 10 df 31 e4 00 b7 00 0e 02 c5 01 5a ff ff 00 ...1........Z...
 
@@ -6804,7 +6804,7 @@ Rectangle is (541 - 313 = 228, 210 + 50 = 260, 228 + 526 = 754, 260 + 376 = 636)
 <a id="Section_4.1.5"></a>
 ### 4.1.5 OpaqueRect
 
-The following is an annotated dump of an [OpaqueRect (section 2.2.2.2.1.1.2.5)](#Section_4.1.5) Primary Drawing Order.
+The following is an annotated dump of an [OpaqueRect (section 2.2.2.2.1.1.2.5)](#Section_2.2.2.2.1.1.2.5) Primary Drawing Order.
 
 00000000 09 0a 3c 00 04 00 03 73 02 06 ..<....s..
 
@@ -6845,7 +6845,7 @@ OPAQUERECT_ORDER::nTopRect not present
 <a id="Section_4.1.6"></a>
 ### 4.1.6 MultiOpaqueRect
 
-The following is an annotated dump of a [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_4.1.5) Primary Drawing Order.
+The following is an annotated dump of a [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_2.2.2.2.1.1.2.6) Primary Drawing Order.
 
 00000000 09 12 bf 01 87 01 1c 01 f1 00 12 00 5c ef 04 16 ............\...
 
@@ -6989,7 +6989,7 @@ cc -> SCRBLT_ORDER::bRop = 0xcc = ROP Table Entry #204 = 0x00cc0020
 <a id="Section_4.1.8"></a>
 ### 4.1.8 MultiScrBlt
 
-The following is an annotated dump of a [MultiScrBlt (section 2.2.2.2.1.1.2.8)](#Section_4.1.8) Primary Drawing Order.
+The following is an annotated dump of a [MultiScrBlt (section 2.2.2.2.1.1.2.8)](#Section_2.2.2.2.1.1.2.8) Primary Drawing Order.
 
 00000000 09 11 ff 01 2d 03 4e 01 10 00 10 00 cc 2d 03 05 ....-.N......-..
 
@@ -7497,7 +7497,7 @@ TS_COLOR::Blue = 0x00
 <a id="Section_4.1.12"></a>
 ### 4.1.12 SaveBitmap
 
-The following is an annotated dump of a [SaveBitmap (section 2.2.2.2.1.1.2.12)](#Section_4.1.12) Primary Drawing Order.
+The following is an annotated dump of a [SaveBitmap (section 2.2.2.2.1.1.2.12)](#Section_2.2.2.2.1.1.2.12) Primary Drawing Order.
 
 00000000 19 0b 1b 74 45 00 00 79 70 10 ...tE..yp.
 
@@ -7546,12 +7546,12 @@ SAVEBITMAP_ORDER::Operation is not present
 <a id="Section_4.1.13"></a>
 ### 4.1.13 GlyphIndex
 
-The following sections provide examples of annotated dumps of [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) Primary Drawing Orders.
+The following sections provide examples of annotated dumps of [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) Primary Drawing Orders.
 
 <a id="Section_4.1.13.1"></a>
 #### 4.1.13.1 Example 1
 
-The following is the first example of an annotated dump of a [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) Primary Drawing Order.
+The following is the first example of an annotated dump of a [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) Primary Drawing Order.
 
 00000000 19 1b 00 01 20 6a 02 27 38 00 39 07 3a 06 3b 07 .... j.'8.9.:.;.
 
@@ -7632,7 +7632,7 @@ ff -> ADD Operation
 <a id="Section_4.1.13.2"></a>
 #### 4.1.13.2 Example 2
 
-The following is the second example of an annotated dump of a [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_4.1.13) Primary Drawing Order.
+The following is the second example of an annotated dump of a [GlyphIndex (section 2.2.2.2.1.1.2.13)](#Section_2.2.2.2.1.1.2.13) Primary Drawing Order.
 
 00000000 19 1b e8 3f 38 00 ff ff ff 0c 02 6e 01 4d 02 7b ...?8......n.M.{
 
@@ -7707,12 +7707,12 @@ fe -> USE Operation
 <a id="Section_4.1.14"></a>
 ### 4.1.14 FastIndex
 
-The following sections provide examples of annotated dumps of [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Orders.
+The following sections provide examples of annotated dumps of [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_2.2.2.2.1.1.2.14) Primary Drawing Orders.
 
 <a id="Section_4.1.14.1"></a>
 #### 4.1.14.1 Example 1
 
-The following is the first example of an annotated dump of a [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Order.
+The following is the first example of an annotated dump of a [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_2.2.2.2.1.1.2.14) Primary Drawing Order.
 
 00000000 09 13 ff 70 07 00 03 ff ff 00 74 3b 00 0e 00 71 ...p......t;...q
 
@@ -7817,7 +7817,7 @@ ff -> ADD Operation
 <a id="Section_4.1.14.2"></a>
 #### 4.1.14.2 Example 2
 
-The following is the second example of an annotated dump of a [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Order.
+The following is the second example of an annotated dump of a [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_2.2.2.2.1.1.2.14) Primary Drawing Order.
 
 00000000 19 13 e0 60 e2 d5 e2 e2 03 fe 1c 00 ...`........
 
@@ -7894,7 +7894,7 @@ fe -> USE Operation
 <a id="Section_4.1.15"></a>
 ### 4.1.15 FastGlyph
 
-The following is an annotated dump of a [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_4.1.15) Primary Drawing Order.
+The following is an annotated dump of a [FastGlyph (section 2.2.2.2.1.1.2.15)](#Section_2.2.2.2.1.1.2.15) Primary Drawing Order.
 
 00000000 0d 18 fb 7e 0f 8b 00 b1 00 2c 04 bd 00 06 00 03 ...~.....,......
 
@@ -8049,7 +8049,7 @@ bb 00 -> FASTGLYPH_ORDER::Y = 187
 <a id="Section_4.1.16"></a>
 ### 4.1.16 PolygonSC
 
-The following is an annotated dump of a [PolygonSC (section 2.2.2.2.1.1.2.16)](#Section_4.1.16) Primary Drawing Order.
+The following is an annotated dump of a [PolygonSC (section 2.2.2.2.1.1.2.16)](#Section_2.2.2.2.1.1.2.16) Primary Drawing Order.
 
 00000000 0d 14 7f 43 ae 00 b2 00 5c 36 02 0d 03 0d 01 20 ...C....\6.....
 
@@ -8398,7 +8398,7 @@ Actual point 54: 566, 781
 <a id="Section_4.1.17"></a>
 ### 4.1.17 PolygonCB
 
-The following is an annotated dump of a [PolygonCB (section 2.2.2.2.1.1.2.17)](#Section_4.1.17) Primary Drawing Order.
+The following is an annotated dump of a [PolygonCB (section 2.2.2.2.1.1.2.17)](#Section_2.2.2.2.1.1.2.17) Primary Drawing Order.
 
 00000000 09 15 ef 1b ea 00 46 01 0d 01 08 00 00 04 03 81 ......F.........
 
@@ -8475,7 +8475,7 @@ Actual point 3: 272, 335
 <a id="Section_4.1.18"></a>
 ### 4.1.18 Polyline
 
-The following is an annotated dump of a [Polyline (section 2.2.2.2.1.1.2.18)](#Section_4.1.18) Primary Drawing Order.
+The following is an annotated dump of a [Polyline (section 2.2.2.2.1.1.2.18)](#Section_2.2.2.2.1.1.2.18) Primary Drawing Order.
 
 00000000 2d 16 73 f8 01 b8 02 00 c0 00 20 6c 00 00 00 00 -.s....... l....
 
@@ -8690,7 +8690,7 @@ Actual point 32: 316, 6
 <a id="Section_4.1.19"></a>
 ### 4.1.19 EllipseSC
 
-The following is an annotated dump of an [EllipseSC (section 2.2.2.2.1.1.2.19)](#Section_4.1.19) Primary Drawing Order.
+The following is an annotated dump of an [EllipseSC (section 2.2.2.2.1.1.2.19)](#Section_2.2.2.2.1.1.2.19) Primary Drawing Order.
 
 00000000 0d 19 7f 29 ca 00 fb 3c 02 ca 00 47 01 eb 03 3c ...)...<...G...<
 
@@ -8769,7 +8769,7 @@ TS_COLOR::Blue = 0x00
 <a id="Section_4.1.20"></a>
 ### 4.1.20 EllipseCB
 
-The following is an annotated dump of an [EllipseCB (section 2.2.2.2.1.1.2.20)](#Section_4.1.20) Primary Drawing Order.
+The following is an annotated dump of an [EllipseCB (section 2.2.2.2.1.1.2.20)](#Section_2.2.2.2.1.1.2.20) Primary Drawing Order.
 
 00000000 0d 1a ff 0c b0 03 b9 c9 09 00 8e fe 10 01 5e 02 ..............^.
 
@@ -8870,7 +8870,7 @@ ELLIPSE_CB_ORDER::BrushExtra not present
 <a id="Section_4.1.21"></a>
 ### 4.1.21 DrawNineGrid
 
-The following is an annotated dump of a [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_4.1.21) Primary Drawing Order.
+The following is an annotated dump of a [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_2.2.2.2.1.1.2.21) Primary Drawing Order.
 
 00000000 1d 07 1c 87 39 03 86 00 4e 03 7d fb f9 0d ....9...N.}...
 
@@ -8949,7 +8949,7 @@ DRAWNINEGRID_ORDER_Order::srcBottom = last DRAWNINEGRID_ORDER_Order::srcBottom (
 <a id="Section_4.1.22"></a>
 ### 4.1.22 MultiDrawNineGrid
 
-The following is an annotated dump of a [MultiDrawNineGrid (section 2.2.2.2.1.1.2.22)](#Section_4.1.22) Primary Drawing Order.
+The following is an annotated dump of a [MultiDrawNineGrid (section 2.2.2.2.1.1.2.22)](#Section_2.2.2.2.1.1.2.22) Primary Drawing Order.
 
 00000000 1d 08 7c 03 9b 00 7c fe 03 02 a4 00 01 05 00 40 ..|...|........@
 
@@ -9459,7 +9459,7 @@ Decompressed bitmap data:
 <a id="Section_4.2.3"></a>
 ### 4.2.3 Cache Color Table
 
-The following is an annotated dump of a [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_4.2.3) Secondary Drawing Order.
+The following is an annotated dump of a [Cache Color Table (section 2.2.2.2.1.2.4)](#Section_2.2.2.2.1.2.4) Secondary Drawing Order.
 
 00000000 03 fc 03 00 00 01 00 00 01 00 00 00 00 00 00 80 ................
 
@@ -10322,7 +10322,7 @@ a0 -> X.X
 <a id="Section_4.2.6"></a>
 ### 4.2.6 Cache Brush
 
-The following is an annotated dump of a [Cache Brush (section 2.2.2.2.1.2.7)](#Section_4.2.6) Secondary Drawing Order.
+The following is an annotated dump of a [Cache Brush (section 2.2.2.2.1.2.7)](#Section_2.2.2.2.1.2.7) Secondary Drawing Order.
 
 00000000 03 07 00 00 00 07 00 01 08 08 81 08 aa 55 aa 55 .............U.U
 
@@ -10459,7 +10459,7 @@ Bitmap data (40 bytes):
 <a id="Section_4.3.1"></a>
 ### 4.3.1 Create Offscreen Bitmap
 
-The following is an annotated dump of a [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_4.3.1) Alternate Secondary Drawing Order.
+The following is an annotated dump of a [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_2.2.2.2.1.3.2) Alternate Secondary Drawing Order.
 
 00000000 06 00 80 60 01 10 00 01 00 02 00 ...`.......
 
@@ -10486,7 +10486,7 @@ d = 1
 <a id="Section_4.3.2"></a>
 ### 4.3.2 Switch Surface
 
-The following is an annotated dump of a [Switch Surface (section 2.2.2.2.1.3.3)](#Section_4.3.2) Alternate Secondary Drawing Order.
+The following is an annotated dump of a [Switch Surface (section 2.2.2.2.1.3.3)](#Section_2.2.2.2.1.3.3) Alternate Secondary Drawing Order.
 
 00000000 02 ff ff ...
 
@@ -10501,7 +10501,7 @@ ff ff -> SWITCH_SURFACE_ORDER::bitmapId = SCREEN_BITMAP_SURFACE (0xFFFF)
 <a id="Section_4.3.3"></a>
 ### 4.3.3 Create NineGrid Bitmap
 
-The following is an annotated dump of a [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3) Alternate Secondary Drawing Order.
+The following is an annotated dump of a [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4) Alternate Secondary Drawing Order.
 
 00000000 12 20 41 00 08 00 ab 01 05 00 00 00 00 00 07 00 . A.............
 
@@ -10554,7 +10554,7 @@ DSDNG_PERPIXELALPHA
 <a id="Section_4.3.4"></a>
 ### 4.3.4 Stream Bitmap First
 
-The following is an annotated dump of a [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_4.3.4) Alternate Secondary Drawing Order.
+The following is an annotated dump of a [Stream Bitmap First (section 2.2.2.2.1.3.5.1)](#Section_2.2.2.2.1.3.5.1) Alternate Secondary Drawing Order.
 
 00000000 0a 07 20 01 00 04 00 1e 00 7a 01 00 00 7a 01 02 .. ......z...z..
 
@@ -10645,7 +10645,7 @@ The next 378 bytes are the compressed bitmap (STREAM_BITMAP_FIRST_ORDER::BitmapB
 <a id="Section_4.3.5"></a>
 ### 4.3.5 Stream Bitmap Next
 
-The following is an annotated dump of a [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_4.3.5) Alternate Secondary Drawing Order.
+The following is an annotated dump of a [Stream Bitmap Next (section 2.2.2.2.1.3.5.2)](#Section_2.2.2.2.1.3.5.2) Alternate Secondary Drawing Order.
 
 00000000 0e 02 01 00 00 10 ff 03 71 f8 f8 f8 ff 03 c0 01 ........q.......
 
@@ -13070,12 +13070,12 @@ The following diagram illustrates how a source bitmap in the [NineGrid Bitmap Ca
 
 Figure 19: Illustration of Draw NineGrid Primary Drawing Order
 
-The [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_4.1.21) and [MultiDrawNineGrid (section 2.2.2.2.1.1.2.22)](#Section_4.1.22) Primary Drawing Orders are used to render NineGrid bitmaps that have been stored in the NineGrid Bitmap Cache using the [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_4.3.3) and [Stream Bitmap Orders (section 2.2.2.2.1.3.5)](#Section_2.2.2.2.1.3.5).
+The [DrawNineGrid (section 2.2.2.2.1.1.2.21)](#Section_2.2.2.2.1.1.2.21) and [MultiDrawNineGrid (section 2.2.2.2.1.1.2.22)](#Section_2.2.2.2.1.1.2.22) Primary Drawing Orders are used to render NineGrid bitmaps that have been stored in the NineGrid Bitmap Cache using the [Create NineGrid Bitmap (section 2.2.2.2.1.3.4)](#Section_2.2.2.2.1.3.4) and [Stream Bitmap Orders (section 2.2.2.2.1.3.5)](#Section_2.2.2.2.1.3.5).
 
 <a id="Section_4.5"></a>
 ## 4.5 Save Bitmap Example
 
-The [SaveBitmap (section 2.2.2.2.1.1.2.12)](#Section_4.1.12) Primary Drawing Order is used to encode a rectangular screen image for saving or restoring by the client.
+The [SaveBitmap (section 2.2.2.2.1.1.2.12)](#Section_2.2.2.2.1.1.2.12) Primary Drawing Order is used to encode a rectangular screen image for saving or restoring by the client.
 
 The following diagram shows how a 127-by-134-pixel virtual desktop rectangle received in the SaveBitmap Primary Drawing Order is tiled into the client-side [Save Bitmap (section 3.2.1.2)](#Section_3.2.1.2), and how the position of the next bitmap can be computed.
 

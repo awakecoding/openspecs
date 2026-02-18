@@ -242,7 +242,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [RFC2109] Kristol, D., and Montulli, L., "HTTP State Management Mechanism", RFC 2109, February 1997, [http://www.rfc-editor.org/rfc/rfc2109.txt](https://go.microsoft.com/fwlink/?LinkId=90315)
 
@@ -303,7 +303,7 @@ The message that is sent by the client is also a Callback Context Establishing M
 - The server sends a response back to the client. For example, the server acknowledges that the items in the shopping cart have been purchased.
 - At some point later on a different connection, the server retrieves the endpoint reference that it stored earlier in step 11.
 - The server sends a Context Participating Message to the endpoint reference from the callback context. For example, it notifies the specific customer that purchased items have been shipped.
-These examples and the examples in section [4](#Section_1.3) of this document demonstrate sending a context identifier from a server to a client in a [Server Context Establishing Message](#Section_2.2.6). This protocol does not require a client and server to exchange a context identifier by using a Client Context Initiating Message and a Server Context Establishing Message. A client and server can agree on a context identifier without this initial exchange. The protocol that is specified in section 3 allows the client to acquire a context identifier by using a Client Context Initiating Message and a Server Context Establishing Message; then subsequently, to send Context Participating Messages.
+These examples and the examples in section [4](#Section_4) of this document demonstrate sending a context identifier from a server to a client in a [Server Context Establishing Message](#Section_2.2.6). This protocol does not require a client and server to exchange a context identifier by using a Client Context Initiating Message and a Server Context Establishing Message. A client and server can agree on a context identifier without this initial exchange. The protocol that is specified in section 3 allows the client to acquire a context identifier by using a Client Context Initiating Message and a Server Context Establishing Message; then subsequently, to send Context Participating Messages.
 
 Alternatively, this protocol allows an implementation-specific context exchange mechanism to be leveraged to initialize the protocol with a context identifier. This context identifier can then be attached to subsequent Context Participating Messages.
 
@@ -1582,7 +1582,7 @@ None.
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 The terms "earlier" and "later", when used with a product version, refer to either all preceding versions or all subsequent versions, respectively. The term "through" refers to the inclusive range of versions. Applicable Microsoft products are listed chronologically in this section.
 

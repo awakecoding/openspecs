@@ -404,7 +404,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KKDCP] Microsoft Corporation, "[Kerberos Key Distribution Center (KDC) Proxy Protocol](../MS-KKDCP/MS-KKDCP.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
@@ -416,7 +416,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](../MS-RRP/MS-RRP.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SFU] Microsoft Corporation, "[Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol](../MS-SFU/MS-SFU.md)".
 
@@ -473,9 +473,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](../MS-APDS/MS-APDS.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_1.3)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
-[MS-GPSB] Microsoft Corporation, "[Group Policy: Security Protocol Extension](#Section_5)".
+[MS-GPSB] Microsoft Corporation, "[Group Policy: Security Protocol Extension](../MS-GPSB/MS-GPSB.md)".
 
 [MSFT-CVE-2022-33647] Microsoft Corporation, "Windows Kerberos Elevation of Privilege Vulnerability", CVE-2022-33647 September 13, 2022, [https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2022-33647](https://go.microsoft.com/fwlink/?linkid=2230247)
 
@@ -574,8 +574,8 @@ Kerberos V5 [**Authentication Protocol (AP) exchange**](#gt_authentication-proto
 Other non-RFC standard specifications relevant to the implementation of Kerberos are:
 
 - [**Active Directory**](#gt_active-directory), including: Active Directory Schema Attributes A-L [MS-ADA1](../MS-ADA1/MS-ADA1.md), Active Directory Schema Attributes M [MS-ADA2](../MS-ADA2/MS-ADA2.md), Active Directory Schema Attributes N-Z [MS-ADA3](../MS-ADA3/MS-ADA3.md), Active Directory Schema Classes [MS-ADSC](../MS-ADSC/MS-ADSC.md), and Active Directory Technical Specification [MS-ADTS](../MS-ADTS/MS-ADTS.md).
-- Group Policy: Security Protocol Extension [MS-GPSB](#Section_5)
-- Local Security Authority (Domain Policy) Remote Protocol Specification [MS-LSAD](#Section_5)
+- Group Policy: Security Protocol Extension [MS-GPSB](../MS-GPSB/MS-GPSB.md)
+- Local Security Authority (Domain Policy) Remote Protocol Specification [MS-LSAD](../MS-LSAD/MS-LSAD.md)
 The following are additional Kerberos extensions:
 
 - Authentication Protocol Domain Support Specification [MS-APDS](../MS-APDS/MS-APDS.md)
@@ -964,7 +964,7 @@ This section specifies details of KILE, including abstract data models and messa
 - **Common Details** (section [3.1](#Section_3.1)) specifies extensions to common elements.
 - **Client Details** (section [3.2](#Section_3.2)) specifies extensions specific to the client during the [**AS**](#gt_authentication-service-as), [**TGS**](#gt_ticket-granting-service-tgs), and [**AP exchanges**](#gt_authentication-protocol-ap-exchange).
 - **KDC Details** (section [3.3](#Section_3.3)) specifies extensions specific to the [**KDC**](#gt_key-distribution-center-kdc) processing of AS and TGS requests.
-- **Application Server Details** (section [3.4](#Section_1.3)) specifies extensions to the server processing of the AP exchange requests.
+- **Application Server Details** (section [3.4](#Section_3.4)) specifies extensions to the server processing of the AP exchange requests.
 <a id="Section_3.1"></a>
 ## 3.1 Common Details
 
@@ -1134,7 +1134,7 @@ The Kerberos V5 protocol defines optional [**authorization data**](#gt_authoriza
 KILE has added the following elements:
 
 - AD-AUTH-DATA-AP-OPTIONS (143) (section [3.2.5.8](#Section_3.2.5.8)).
-- KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) (sections 3.2.5.8 and [3.4.5.3](#Section_3.1.5)).
+- KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) (sections 3.2.5.8 and [3.4.5.3](#Section_3.4.5.3)).
 KILE does not support the following elements:
 
 - The AD-KDC-ISSUED element ([RFC4120] section 5.2.6.2).
@@ -1268,7 +1268,7 @@ After a connection is established through the [**AP exchange**](#gt_authenticati
 
 **Integrity:** A Boolean setting that indicates that the caller has elected to sign messages so that they cannot be tampered with while in transit.
 
-**MessageBlockSize:** An integer that indicates the minimum size of the input_message for GSS_WrapEx (section [3.4.5.4](#Section_3.4.5.4.1)). The size of the input_message MUST be a multiple of this value. This value depends on the encryption type:
+**MessageBlockSize:** An integer that indicates the minimum size of the input_message for GSS_WrapEx (section [3.4.5.4](#Section_3.4.5.4)). The size of the input_message MUST be a multiple of this value. This value depends on the encryption type:
 
 - For AES, the value equals the message block size ([[RFC3962]](https://go.microsoft.com/fwlink/?LinkId=90451) section 6)
 - For RC4, it equals 1 ([[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488) section 7.3)
@@ -1318,7 +1318,7 @@ The Kerberos client then initiates an [**AP exchange**](#gt_authentication-proto
 
 KILE provides no support for direct access to the Kerberos KRB_SAFE or KRB_PRIV messages.
 
-The client application then takes the AP exchange message and supplies it, in band with the application protocol, to the server. The Kerberos server processes the message as specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and completes the connection. The AP exchange is covered further in section [3.4](#Section_1.3).
+The client application then takes the AP exchange message and supplies it, in band with the application protocol, to the server. The Kerberos server processes the message as specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and completes the connection. The AP exchange is covered further in section [3.4](#Section_3.4).
 
 **Note**: The KRB_SAFE and KRB_PRIV messages are part of the KRB_SAFE exchange and KRB_PRIV exchange, respectively.
 
@@ -1386,7 +1386,7 @@ In addition to the RFC behavior ([[RFC6113]](https://go.microsoft.com/fwlink/?Li
 - If the client does not have a TGT for the realm and is creating an:
 - **AS-REQ:** the client obtains a TGT for the computer principal from the user principal's [**domain**](#gt_domain).
 - **TGS-REQ:** the client obtains a referral TGT for the user principal for the target domain.
-- [**Compound identity TGS-REQ**](#gt_compound-identity-tgs-req): the client obtains a user principal TGT and computer principal TGT for the target domain with the same [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_5.1.1)).
+- [**Compound identity TGS-REQ**](#gt_compound-identity-tgs-req): the client obtains a user principal TGT and computer principal TGT for the target domain with the same [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_3.1.5.8)).
 If a TGT for the required principals cannot be obtained and **RequireFAST** is:
 
 - **TRUE:** the client fails the request.
@@ -1471,7 +1471,7 @@ This section describes a conceptual model of possible data organization that an 
 KILE uses the abstract data model and default values specified in Kerberos V5, except for the following default configuration values ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 8.2):
 
 - **Minimum lifetime**: 0 minutes.
-- **MaxRenewAge**: A 64-bit signed integer containing the maximum renewable lifetime. KILE implementations, which use the LSAD for the configuration database, can directly access the **MaxRenewAge** field in the Kerberos Policy Information ([MS-LSAD](#Section_5) section 3.1.1.1).
+- **MaxRenewAge**: A 64-bit signed integer containing the maximum renewable lifetime. KILE implementations, which use the LSAD for the configuration database, can directly access the **MaxRenewAge** field in the Kerberos Policy Information ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.1).
 - **MaxClockSkew**: A 64-bit signed integer containing the Acceptable clock skew. KILE implementations, which use the LSAD for the configuration database, can directly access the **MaxClockSkew** field in the Kerberos Policy Information.
 The maximum [**ticket**](#gt_ticket) lifetime is configured separately for [**TGTs**](#gt_ticket-granting-ticket-tgt) and [**service tickets**](#gt_service-ticket):
 
@@ -1529,7 +1529,7 @@ To support all functionality of KILE, the account database MUST be extended to s
 - **Expired:** A Boolean setting to control when the password has expired. KILE implementations that use Active Directory for the account database use the **userAccountControl** attribute PE flag. The default is FALSE.
 - **GroupMembership:** A list of **GROUP_MEMBERSHIP** structures ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.2.2) that contain the groups to which the account belongs in the [**realm**](#gt_realm).
 - **Locked:** A Boolean setting to control when the account is locked out. KILE implementations that use Active Directory for the account database use the **userAccountControl** attribute L flag. The default is FALSE.
-- **LogonHours:** A binary value with the **SAMPR_LOGON_HOURS** structure ([MS-SAMR](#Section_5) section 2.2.6), indicating a logon policy describing the time periods during which the user can authenticate. KILE implementations that use Active Directory for the account database use the **logonHours** attribute ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.376).
+- **LogonHours:** A binary value with the **SAMPR_LOGON_HOURS** structure ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.6), indicating a logon policy describing the time periods during which the user can authenticate. KILE implementations that use Active Directory for the account database use the **logonHours** attribute ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.376).
 - **PasswordMustChange:** A FILETIME value indicating when the password must change. Setting to 0x7FFFFFFF FFFFFFFF never requires password change. KILE implementations that use Active Directory for the account database generate the value with the same method as the SAM ([MS-SAMR] section 3.1.5.14.4). The default is 0.
 - **Pre-AuthenticationNotRequired:** A Boolean setting to control when [**pre-authentication**](#gt_pre-authentication) data is required. KILE implementations that use Active Directory for the account database use the **userAccountControl** attribute DR flag. The default is 0.
 - **TrustedForDelegation:** A Boolean setting to control when to set the OK-AS-DELEGATE ticket flag ([RFC4120] section 2.8) in tickets for the principal. KILE implementations that use Active Directory for the account database use the **userAccountControl** attribute TD flag. The default is FALSE.
@@ -1555,9 +1555,9 @@ None.
 
 Kerberos V5 specifies that all [**KDCs**](#gt_key-distribution-center-kdc) in a [**domain**](#gt_domain) MUST have the same [**key**](#gt_key), and the name of the [**service**](#gt_service) for the [**TGS**](#gt_ticket-granting-service-tgs) is "krbtgt/domain-name" [**SPN**](#gt_service-principal-name-spn) ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 6.2).
 
-KILE implementations that use the LSAD for the configuration database load the KDC configuration from the Kerberos Policy Information ([MS-LSAD](#Section_5) section 3.1.1.1). The KDC calls the **LsarQueryDomainInformationPolicy** method ([MS-LSAD] section 3.1.4.4.7), and the *InformationClass* parameter is set to the value of PolicyDomainKerberosTicketInformation in order to retrieve the current values. The KDC configuration settings are set as follows:
+KILE implementations that use the LSAD for the configuration database load the KDC configuration from the Kerberos Policy Information ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.1). The KDC calls the **LsarQueryDomainInformationPolicy** method ([MS-LSAD] section 3.1.4.4.7), and the *InformationClass* parameter is set to the value of PolicyDomainKerberosTicketInformation in order to retrieve the current values. The KDC configuration settings are set as follows:
 
-- **MaxRenewAge** (section [3.3.1](#Section_3.2.1)) to the value of the **MaxRenewAge** field.
+- **MaxRenewAge** (section [3.3.1](#Section_3.3.1)) to the value of the **MaxRenewAge** field.
 - **MaxClockSkew** (section 3.3.1) to the value of the **MaxClockSkew** field.
 - **MaxServiceTicketAge** (section 3.3.1) to the value of the **MaxServiceTicketAge** field.
 - **MaxTicketAge** (section 3.3.1) to the value of the **MaxTicketAge** field.
@@ -1575,16 +1575,16 @@ If the KDC supports:<44>
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
 
-For KILE implementations which use the LSAD for the configuration database, a [**KDC**](#gt_key-distribution-center-kdc) ConfigurationChange event ([MS-LSAD](#Section_5) section 3.1.4.4.8) is triggered whenever the KDC configuration policy is changed in the LSAD database.
+For KILE implementations which use the LSAD for the configuration database, a [**KDC**](#gt_key-distribution-center-kdc) ConfigurationChange event ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.8) is triggered whenever the KDC configuration policy is changed in the LSAD database.
 
 <a id="Section_3.3.4.1"></a>
 #### 3.3.4.1 KDC Configuration Changes
 
 If an implementation supports multiple [**KDCs**](#gt_key-distribution-center-kdc) for a [**realm**](#gt_realm), then it needs a mechanism for keeping the KDC configuration database consistent across all the KDCs. KDC configuration change details are determined by the implementation.
 
-When KILE implementations that use the LSAD for the configuration database receive a KDC ConfigurationChange event, the KDC SHOULD call the LsarQueryDomainInformationPolicy method ([MS-LSAD](#Section_5) section 3.1.4.4.7). The *InformationClass* parameter SHOULD be set to the value of PolicyDomainKerberosTicketInformation in order to retrieve the current values. The KDC configuration settings are set as follows:
+When KILE implementations that use the LSAD for the configuration database receive a KDC ConfigurationChange event, the KDC SHOULD call the LsarQueryDomainInformationPolicy method ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.7). The *InformationClass* parameter SHOULD be set to the value of PolicyDomainKerberosTicketInformation in order to retrieve the current values. The KDC configuration settings are set as follows:
 
-- **MaxRenewAge** (section [3.3.1](#Section_3.2.1)) to the value of the **MaxRenewAge** field.
+- **MaxRenewAge** (section [3.3.1](#Section_3.3.1)) to the value of the **MaxRenewAge** field.
 - **MaxClockSkew** (section 3.3.1) to the value of the **MaxClockSkew** field.
 - **MaxServiceTicketAge** (section 3.3.1) to the value of the **MaxServiceTicketAge** field.
 - **MaxTicketAge** (section 3.3.1) to the value of the **MaxTicketAge** field.
@@ -1678,7 +1678,7 @@ Otherwise, the response will not contain a PAC.
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Determining Authentication Policy Silo Membership
 
-If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the KDC SHOULD<48> set **BelongsToSilo** to FALSE. See section [3.3.1.1](../MS-ADTS/MS-ADTS.md) for the following KDC pseudo variable definitions.
+If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the KDC SHOULD<48> set **BelongsToSilo** to FALSE. See section [3.3.1.1](#Section_3.3.1.1) for the following KDC pseudo variable definitions.
 
 **Note** The **BelongsToSilo** variable is a Boolean variable that is used for illustrative purposes in the processing rules of this section and section [3.3.5.5](#Section_3.3.5.5). The value of **BelongsToSilo** is not persisted across client requests.
 
@@ -1690,7 +1690,7 @@ If **domainControllerFunctionality** returns a value >= 6, the [**KDC**](#gt_key
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 Determining Authentication Policy Settings
 
-If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<49> set **PolicyName** to NULL. See section [3.3.1.1](../MS-ADTS/MS-ADTS.md) for the following KDC pseudo variable definitions.
+If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<49> set **PolicyName** to NULL. See section [3.3.1.1](#Section_3.3.1.1) for the following KDC pseudo variable definitions.
 
 If **domainControllerFunctionality** returns a value >= 6, the KDC checks whether the account has an Authentication Policy:
 
@@ -1827,7 +1827,7 @@ KILE concatenates the following information to use as the [**key**](#gt_key) sal
 
 Kerberos V5 does not enforce revocation of accounts prior to the expiration of issued [**tickets**](#gt_ticket).
 
-If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.2.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the KDCs and the KDC MUST verify that the account and return the following errors:
+If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.3.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the KDCs and the KDC MUST verify that the account and return the following errors:
 
 - If **Disabled** is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
 - If **Expired** is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
@@ -1844,7 +1844,7 @@ For KILE implementations that use [**Active Directory**](#gt_active-directory) f
 <a id="Section_3.3.5.6.4.1"></a>
 ###### 3.3.5.6.4.1 KERB_VALIDATION_INFO Structure
 
-For KILE implementations that use [**Active Directory**](#gt_active-directory) for the account database, [**KDCs**](#gt_key-distribution-center-kdc) retrieve the following attributes from local [**directory service**](#gt_directory-service-ds) instance with the same processing rules as defined in SamrQueryInformationUser2 method ([MS-SAMR](#Section_5) section 3.1.5.5.5) message processing. The **Buffer.SAMPR_USER_ALL_INFORMATION** structure is defined in [MS-SAMR] section 2.2.6.6 where the common fields are defined in section 2.2.6.1. The KDC populates the returned **KERB_VALIDATION_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.5) fields as follows:
+For KILE implementations that use [**Active Directory**](#gt_active-directory) for the account database, [**KDCs**](#gt_key-distribution-center-kdc) retrieve the following attributes from local [**directory service**](#gt_directory-service-ds) instance with the same processing rules as defined in SamrQueryInformationUser2 method ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.5.5) message processing. The **Buffer.SAMPR_USER_ALL_INFORMATION** structure is defined in [MS-SAMR] section 2.2.6.6 where the common fields are defined in section 2.2.6.1. The KDC populates the returned **KERB_VALIDATION_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.5) fields as follows:
 
 - The **LogonTime** field is set to the **Buffer.SAMPR_USER_ALL_INFORMATION.LastLogon** field of the SamrQueryInformationUser2 response message.
 - The **LogoffTime** field is computed and set as follows:
@@ -1972,24 +1972,24 @@ If the Application Server's service account does not have a registered SPN, the 
 
 If the OTHER_ORGANIZATION [**SID**](#gt_security-identifier-sid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) is in **KERB_VALIDATION_INFO.ExtraSids**, the PAC MUST be used to perform an access check for the Allowed-To-Authenticate right ([MS-ADTS] section 6.1.1.2.7.41) against the [**Active Directory**](#gt_active-directory) object of the account for which the service ticket request is being made. If the access check succeeds, the service ticket MUST be issued; otherwise, the KDC MUST return KDC_ERR_POLICY.
 
-If **domainControllerFunctionality** returns a value >= 6 ([MS-ADTS] section 3.1.1.3.2.25) and the account is not also the application service account, the KDC MUST determine whether an Authentication Policy is applied to the server or service (section [3.3.5.5](../MS-ADTS/MS-ADTS.md)); if Enforced is TRUE then:<67>
+If **domainControllerFunctionality** returns a value >= 6 ([MS-ADTS] section 3.1.1.3.2.25) and the account is not also the application service account, the KDC MUST determine whether an Authentication Policy is applied to the server or service (section [3.3.5.5](#Section_3.3.5.5)); if Enforced is TRUE then:<67>
 
 - If AllowedToAuthenticateTo is not NULL, the PAC of the user and the PAC of the armor TGT MUST be used to perform an access check for the ACTRL_DS_CONTROL_ACCESS right against the AllowedToAuthenticateTo. If the access check fails, the KDC MUST return KDC_ERR_POLICY.
-- If the TGT is issued by a read-only Domain Controller (RODC) (section [3.3.5.7.7](#Section_3.3.5.7.7)), the KDC MUST reject the request and return KDC_ERR_POLICY. Clients SHOULD send an AS-REQ to a full DC with PA-PAC-OPTIONS [167] (section [2.2.10](#Section_2.2.10)) padata type with the Branch Aware bit set to the TGS REQ (section [3.2.5.7](#Section_3.3.5.7)).
+- If the TGT is issued by a read-only Domain Controller (RODC) (section [3.3.5.7.7](#Section_3.3.5.7.7)), the KDC MUST reject the request and return KDC_ERR_POLICY. Clients SHOULD send an AS-REQ to a full DC with PA-PAC-OPTIONS [167] (section [2.2.10](#Section_2.2.10)) padata type with the Branch Aware bit set to the TGS REQ (section [3.2.5.7](#Section_3.2.5.7)).
 If there are no claims in the PAC and the PA-PAC-OPTIONS [167] (section 2.2.10) padata type does not have the Claims bit set (section 2.2.7), then the KDC does not call the TransformClaimsOnTrustTraversal procedure ([MS-ADTS] section 3.1.1.11.2.11). Otherwise the KDC calls this procedure.
 
 When **KERB_AUTH_DATA_LOOPBACK** data is present, the KDC copies the [**authorization data**](#gt_authorization-data) field ([RFC4120] section 5.2.6) with ad-type KERB_AUTH_DATA_LOOPBACK (142) and ad-data containing **KERB_AUTH_DATA_LOOPBACK** structure (section [2.2.4](#Section_2.2.4)) as an AD-IF-RELEVANT to the end of authorization data in the service ticket.
 
 If the **PAC_REQUESTOR** SID is present in the PAC and the client is from the KDC’s realm, the KDC MUST verify that the **cname** on the ticket resolves to an account with the same SID as the **PAC_REQUESTOR** SID (see section [3.3.5.6.1](#Section_3.3.5.6.1)). If it does not, the KDC MUST return KDC_ERR_TGT_REVOKED.
 
-The KILE KDC MUST copy the populated fields from the PAC in the TGT to the newly created PAC and, after processing all fields it supports, the KILE KDC MUST generate a new [Server Signature (section 3.3.5.6.4.3)](#Section_3.3.5.6.4.3) and [KDC Signature (section 3.3.5.6.4.4)](../MS-PAC/MS-PAC.md) which replace the existing signature fields in the PAC. The KDC MUST ensure that the **PAC** structure specified in [MS-PAC](../MS-PAC/MS-PAC.md) does not end with a zero-length buffer.
+The KILE KDC MUST copy the populated fields from the PAC in the TGT to the newly created PAC and, after processing all fields it supports, the KILE KDC MUST generate a new [Server Signature (section 3.3.5.6.4.3)](#Section_3.3.5.6.4.3) and [KDC Signature (section 3.3.5.6.4.4)](#Section_3.3.5.6.4.4) which replace the existing signature fields in the PAC. The KDC MUST ensure that the **PAC** structure specified in [MS-PAC](../MS-PAC/MS-PAC.md) does not end with a zero-length buffer.
 
 <a id="Section_3.3.5.7.1"></a>
 ##### 3.3.5.7.1 Check Account Policy for Every Session Ticket Request
 
 Kerberos V5 does not enforce revocation of accounts prior to the expiration of issued [**tickets**](#gt_ticket).
 
-If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.2.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the account KDCs. When this property is set on the account KDC for the client's domain, and the [**TGT**](#gt_ticket-granting-ticket-tgt) is older than an implementation-specific time<68>, the account KDC MUST verify that the account is still in good standing. Good standing means the account has not expired, been locked out, been disabled, or otherwise is not allowed to log on. If the KDC receiving the [**session**](#gt_session) ticket request is not in the user account’s [**domain**](#gt_domain), then the check cannot be made.
+If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.3.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the account KDCs. When this property is set on the account KDC for the client's domain, and the [**TGT**](#gt_ticket-granting-ticket-tgt) is older than an implementation-specific time<68>, the account KDC MUST verify that the account is still in good standing. Good standing means the account has not expired, been locked out, been disabled, or otherwise is not allowed to log on. If the KDC receiving the [**session**](#gt_session) ticket request is not in the user account’s [**domain**](#gt_domain), then the check cannot be made.
 
 - If Disabled is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
 - If Expired is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
@@ -2159,7 +2159,7 @@ None.
 <a id="Section_3.4"></a>
 ## 3.4 Application Server Details
 
-Kerberos V5 defines a protocol subordinate to some other application protocol, via [**GSS**](#gt_generic-security-services-gss)-API [[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459). KILE extends GSS-API (see [GSS_WrapEx (section 3.4.5.4)](#Section_3.4.5.4.1) and [GSS_UnwrapEx (section 3.4.5.5)](#Section_3.4.5.5)).
+Kerberos V5 defines a protocol subordinate to some other application protocol, via [**GSS**](#gt_generic-security-services-gss)-API [[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459). KILE extends GSS-API (see [GSS_WrapEx (section 3.4.5.4)](#Section_3.4.5.4) and [GSS_UnwrapEx (section 3.4.5.5)](#Section_3.4.5.5)).
 
 The [**AP exchange**](#gt_authentication-protocol-ap-exchange) is controlled by several logical parameters that are passed in by the higher-layer application protocol that is invoking KILE.
 
@@ -2184,14 +2184,14 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-All parameters that are specified in section [3.4.1](#Section_3.2.1) are reset and then set according to the higher-layer protocols request.
+All parameters that are specified in section [3.4.1](#Section_3.4.1) are reset and then set according to the higher-layer protocols request.
 
 The replay cache MUST be initialized with no entries.
 
 <a id="Section_3.4.3.1"></a>
 #### 3.4.3.1 msDS-SupportedEncryptionTypes attribute
 
-If the [**realm**](#gt_realm) is a KILE implementation that uses [**Active Directory**](#gt_active-directory) for the account database, the server SHOULD ensure that the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481) of its account object is set to the value of SupportedEncryptionTypes (section [3.1.1.5](../MS-ADA2/MS-ADA2.md)).
+If the [**realm**](#gt_realm) is a KILE implementation that uses [**Active Directory**](#gt_active-directory) for the account database, the server SHOULD ensure that the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481) of its account object is set to the value of SupportedEncryptionTypes (section [3.1.1.5](#Section_3.1.1.5)).
 
 When an application server is running under the machine account and NRPC is supported on the machine, the server calls NetrLogonGetDomainInfo ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.4.5.2.10) with the *Level* parameter set to 1 and **WkstaBuffer.WorkstationInfo.KerberosSupportedEncryptionTypes** set to zero.<76>If the **WkstaBuffer.WorkstationInfo.KerberosSupportedEncryptionTypes** returned is not equal to SupportedEncryptionTypes (section 3.1.1.5), then LDAP is used to update the setting:
 
@@ -2200,7 +2200,7 @@ When an application server is running under the machine account and NRPC is supp
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
 
-The [**AP exchange**](#gt_authentication-protocol-ap-exchange) is triggered by a higher-layer application protocol that requests security [**services**](#gt_service) for a connection or message exchange. The higher-layer application protocol MUST specify the name of the server to which it is attempting authentication and also MUST specify any of the parameters from section [3.4.1](#Section_3.2.1) that are required for Kerberos V5 [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) to perform the authentication.
+The [**AP exchange**](#gt_authentication-protocol-ap-exchange) is triggered by a higher-layer application protocol that requests security [**services**](#gt_service) for a connection or message exchange. The higher-layer application protocol MUST specify the name of the server to which it is attempting authentication and also MUST specify any of the parameters from section [3.4.1](#Section_3.4.1) that are required for Kerberos V5 [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) to perform the authentication.
 
 Calling applications use the [**SSPI**](#gt_security-support-provider-interface-sspi) API family to establish the connection and specify the target. Optionally, certain higher-layer protocols, such as Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO) [MS-SPNG](../MS-SPNG/MS-SPNG.md), will also specify the parameters.
 
@@ -2229,7 +2229,7 @@ When the checksum field is not present, the application server processes the req
 
 When the server receives AP exchange requests for SPNs with the serviceclass string equal to [**"RestrictedKrbHost"**](#gt_0827ff28-3f7e-40d8-94ec-cd9dc5995677), it will decrypt the ticket with the computer account's key and either create or use the [**session key**](#gt_session-key) for the "RestrictedKrbHost", regardless of the account the target [**service**](#gt_service) is running as.<77>
 
-If the ApplicationRequiresCBT parameter (section [3.4.1](#Section_3.2.1)) is set to TRUE, the server, if so configured, SHOULD<78> return GSS_S_BAD_BINDINGS whenever the AP exchange request message contains an all-zero channel binding value and does not contain the AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+If the ApplicationRequiresCBT parameter (section [3.4.1](#Section_3.4.1)) is set to TRUE, the server, if so configured, SHOULD<78> return GSS_S_BAD_BINDINGS whenever the AP exchange request message contains an all-zero channel binding value and does not contain the AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) KERB_AP_OPTIONS_CBT.
 
 If the [**service ticket**](#gt_service-ticket) received for the computer's principal is encrypted with DES, the KILE server MUST return KRB_AP_ERR_MODIFIED regardless of supporting DES.<79>
 
@@ -2264,7 +2264,7 @@ The server MUST search all AD-IF-RELEVANT containers for the KERB_AUTH_DATA_TOKE
 
 - If equal, the server processes the authentication as a local one, because the client and server are on the same machine, and can use the **KERB_AUTH_DATA_LOOPBACK** structure (section [2.2.4](#Section_2.2.4)) AuthorizationData for any local implementation purposes.
 - Otherwise, the server MUST ignore the KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) Authorization Data Type, the **KERB-AD-RESTRICTION-ENTRY** structure (section 2.2.6), the KERB_AUTH_DATA_LOOPBACK (142), and the containing **KERB_AUTH_DATA_LOOPBACK** structure (section 2.2.4).
-For KILE implementations that use a [**security identifier (SID)**](#gt_security-identifier-sid)-based authorization model, the server populates the User SID and Security Group SIDs in the **ImpersonationAccessToken** parameter (section [3.4.1](#Section_3.2.1)) as follows:
+For KILE implementations that use a [**security identifier (SID)**](#gt_security-identifier-sid)-based authorization model, the server populates the User SID and Security Group SIDs in the **ImpersonationAccessToken** parameter (section [3.4.1](#Section_3.4.1)) as follows:
 
 - Concatenate **LogonDomainId** and **UserId** [MS-PAC] section 2.5), add to the **ImpersonationAccessToken.Sids** array, and set the **ImpersonationAccessToken.UserIndex** field to this index.
 - Concatenate **LogonDomainId** and **PrimaryGroupId** ([MS-NRPC](../MS-NRPC/MS-NRPC.md) sections 2.2.1.4.11, 2.2.1.4.12, and 2.2.1.4.13), add the result to the **ImpersonationAccessToken.Sids** array, and set the **ImpersonationAccessToken.PrimaryGroup** field to this index.
@@ -2470,7 +2470,7 @@ When an application wants to use Kerberos-based authentication, it uses either t
 
 This might cause steps 1 to 4 (section [4.1](#Section_4.1)) to be repeated if there are new credentials supplied. It might also cause steps 3 and 4 (section 4.1) to be repeated if the server has not previously cached a [**ticket**](#gt_ticket) for the client.
 
-Step 5: When the [**service ticket**](#gt_service-ticket) to the application server is obtained, the client authenticates itself to the server by sending an AP-REQ wrapped in [**Generic Security Services (GSS)**](#gt_generic-security-services-gss) formatting (section [3.4](#Section_1.3) and [[RFC1964]](https://go.microsoft.com/fwlink/?LinkId=90304)).
+Step 5: When the [**service ticket**](#gt_service-ticket) to the application server is obtained, the client authenticates itself to the server by sending an AP-REQ wrapped in [**Generic Security Services (GSS)**](#gt_generic-security-services-gss) formatting (section [3.4](#Section_3.4) and [[RFC1964]](https://go.microsoft.com/fwlink/?LinkId=90304)).
 
 Step 6: The Kerberos runtime on the server validates the ticket by decrypting it, and it validates the [**authenticator**](#gt_authenticator) by decrypting and checking for replay and other attacks ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 3.2).
 
@@ -2701,7 +2701,7 @@ The encryption types AES128-CTC-HMAC-SHA1-96/AES256-CTC-HMAC-SHA1-96 or includin
 <a id="Section_5.1.1"></a>
 ### 5.1.1 RODC Key Version Numbers
 
-Because [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc) can be deployed in less secure locations, RODCs have different [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_5.1.1)) to ensure they are using a different key than the [**domain**](#gt_domain)'s DCs. This protects the domain if an RODC is compromised.
+Because [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc) can be deployed in less secure locations, RODCs have different [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_3.1.5.8)) to ensure they are using a different key than the [**domain**](#gt_domain)'s DCs. This protects the domain if an RODC is compromised.
 
 <a id="Section_5.1.2"></a>
 ### 5.1.2 SPNs with Serviceclass Equal to "RestrictedKrbHost"
@@ -2870,7 +2870,7 @@ Implementations that use the Windows registry to persistently store and retrieve
 - RegistryValueName: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\KDC\Parameters
 - RegistryValueType: 4
 - RegistryValue: CbacAndArmorLevel
-<42> Section 3.3.1: Windows implementations use the Registry Windows Remote Registry Protocol ([MS-RRP](../MS-RRP/MS-RRP.md)) to expose the key and value. For each abstract data model element that is loaded from the registry, there is one instance that is shared between the Windows Remote Registry Protocol and any protocols that use the abstract data model element. Any changes made to the registry keys will be reflected in the abstract data model elements when a PolicyChange event is received ([MS-GPOD](#Section_1.3) section 2.8.2) or on KDC start up.
+<42> Section 3.3.1: Windows implementations use the Registry Windows Remote Registry Protocol ([MS-RRP](../MS-RRP/MS-RRP.md)) to expose the key and value. For each abstract data model element that is loaded from the registry, there is one instance that is shared between the Windows Remote Registry Protocol and any protocols that use the abstract data model element. Any changes made to the registry keys will be reflected in the abstract data model elements when a PolicyChange event is received ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2) or on KDC start up.
 
 <43> Section 3.3.1.1: The **KerbSupportedEncryptionTypes** are not supported in Windows 2000, Windows XP, and Windows Server 2003. Compound identity is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
 
@@ -2978,11 +2978,11 @@ The changes made to this document are listed in the following table. For more in
 | [2.2.4](#Section_2.2.4) KERB_AUTH_DATA_LOOPBACK | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK | Major |
 | [2.2.13](#Section_2.2.13) KERB-SUPERSEDED-BY-USER | 30440 : Provided additional details about the structure. | Major |
 | [2.2.14](#Section_2.2.14) KERB-DMSA-KEY-PACKAGE | 30440 : Provided additional details about the structure. | Major |
-| [3.1.5.5](#Section_1.3) Other Elements and Options | 30430 : Appended "(143)" to AD_AUTH-DATA-AP-OPTIONS to be consistent with treatment of other constants. | Minor |
-| [3.2.5.7](#Section_3.3.5.7) TGS Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK | Major |
+| [3.1.5.5](#Section_3.1.5.5) Other Elements and Options | 30430 : Appended "(143)" to AD_AUTH-DATA-AP-OPTIONS to be consistent with treatment of other constants. | Minor |
+| [3.2.5.7](#Section_3.2.5.7) TGS Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK | Major |
 | [3.2.5.8](#Section_3.2.5.8) AP Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
 | [3.3.5.7](#Section_3.3.5.7) TGS Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
-| [3.4.5.3](#Section_3.1.5) Processing Authorization Data | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
+| [3.4.5.3](#Section_3.4.5.3) Processing Authorization Data | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
 
 <a id="revision-history"></a>
 

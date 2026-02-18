@@ -382,7 +382,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MMSP] Microsoft Corporation, "[Microsoft Media Server (MMS) Protocol](../MS-MMSP/MS-MMSP.md)".
 
-[MS-MSSOD] Microsoft Corporation, "[Media Streaming Server Protocols Overview](#Section_1.3)".
+[MS-MSSOD] Microsoft Corporation, "[Media Streaming Server Protocols Overview](../MS-MSSOD/MS-MSSOD.md)".
 
 [MSDN-ASX] Microsoft Corporation, "ASX Elements Reference", [http://msdn.microsoft.com/en-us/library/ms910265.aspx](https://go.microsoft.com/fwlink/?LinkId=137271)
 
@@ -647,7 +647,7 @@ Clients MAY ignore this content-type.
 <a id="Section_2.2.1.2.2"></a>
 ##### 2.2.1.2.2 application/vnd.ms.wms-hdr.asfv1
 
-This content-type specifies that the response consists of an [**Advanced Systems Format (ASF)**](#gt_advanced-systems-format-asf) header (as specified in [[ASF]](https://go.microsoft.com/fwlink/?LinkId=89814)) encapsulated in a [$H packet (section 2.2.3.5)](#Section_4.13.1). The $H packet MAY be preceded by [$P packets (section 2.2.3.7)](#Section_2.2.3.7) and [$M packets (section 2.2.3.6)](#Section_2.2.3.6).
+This content-type specifies that the response consists of an [**Advanced Systems Format (ASF)**](#gt_advanced-systems-format-asf) header (as specified in [[ASF]](https://go.microsoft.com/fwlink/?LinkId=89814)) encapsulated in a [$H packet (section 2.2.3.5)](#Section_2.2.3.5). The $H packet MAY be preceded by [$P packets (section 2.2.3.7)](#Section_2.2.3.7) and [$M packets (section 2.2.3.6)](#Section_2.2.3.6).
 
 <a id="Section_2.2.1.2.3"></a>
 ##### 2.2.1.2.3 application/x-mms-framed
@@ -657,7 +657,7 @@ This content-type specifies that the response consists of a sequence of framed M
 <a id="Section_2.2.1.2.4"></a>
 ##### 2.2.1.2.4 application/x-wms-getcontentinfo
 
-This content-type is used in a POST request to query cache-control information from a server.<12> For more information, see [GetContentInfo request (section 2.2.2.2)](#Section_2.2.1.2.4).
+This content-type is used in a POST request to query cache-control information from a server.<12> For more information, see [GetContentInfo request (section 2.2.2.2)](#Section_2.2.2.2).
 
 <a id="Section_2.2.1.2.5"></a>
 ##### 2.2.1.2.5 application/x-wms-LogStats
@@ -810,7 +810,7 @@ Pragma: client-lag=250
 <a id="Section_2.2.1.4.7"></a>
 ##### 2.2.1.4.7 expect-new-header
 
-This token is used as a notification from the server to the client that the [$M (section 2.2.3.6)](#Section_2.2.3.6) and [$H (section 2.2.3.5)](#Section_4.13.1) packets, which are sent as the first packets in the response to the [Play](#Section_3.2.5.6) request, will be immediately followed by a [$C packet (section 2.2.3.2)](#Section_2.2.3.2) and another $M and $H packet.
+This token is used as a notification from the server to the client that the [$M (section 2.2.3.6)](#Section_2.2.3.6) and [$H (section 2.2.3.5)](#Section_2.2.3.5) packets, which are sent as the first packets in the response to the [Play](#Section_3.1.4.3.1) request, will be immediately followed by a [$C packet (section 2.2.3.2)](#Section_2.2.3.2) and another $M and $H packet.
 
 This token is defined for use only in responses sent to a client.
 
@@ -887,7 +887,7 @@ This feature token is only defined for clients with a version greater than or eq
 <a id="Section_2.2.1.4.8.8"></a>
 ###### 2.2.1.4.8.8 stridable
 
-Indicates that the server supports fast-forward or rewind of the [**content**](#gt_content) using the [rate (section 2.2.1.4.22)](#Section_2.2.1.12.1) token on the [Pragma](#Section_2.2.1.4) header.
+Indicates that the server supports fast-forward or rewind of the [**content**](#gt_content) using the [rate (section 2.2.1.4.22)](#Section_2.2.1.4.22) token on the [Pragma](#Section_2.2.1.4) header.
 
 <a id="Section_2.2.1.4.9"></a>
 ##### 2.2.1.4.9 LinkBW
@@ -994,7 +994,7 @@ Pragma: packet-pair-experiment=1
 <a id="Section_2.2.1.4.15"></a>
 ##### 2.2.1.4.15 pipeline-experiment
 
-This token is used by a client to specify that it supports [Pipeline requests (section 2.2.2.5)](#Section_3.2.5.5). A server uses the token to specify whether it accepts pipeline requests.
+This token is used by a client to specify that it supports [Pipeline requests (section 2.2.2.5)](#Section_2.2.2.5). A server uses the token to specify whether it accepts pipeline requests.
 
 This token MUST have a value of either 0 or 1.
 
@@ -1011,7 +1011,7 @@ Pragma: pipeline-experiment=1
 <a id="Section_2.2.1.4.16"></a>
 ##### 2.2.1.4.16 pipeline-request
 
-This token is used by the client to identify the current request as a [pipeline request (section 2.2.2.5)](#Section_3.2.5.5). When attempting to determine if the [**pipelined mode**](#gt_pipelined-mode) of operation can be used, the client will send two pipeline requests and the pipeline request token MUST be present in both of those requests. The two requests MUST be sent "back-to-back", that is, be pipelined, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 8.1.2.2.
+This token is used by the client to identify the current request as a [pipeline request (section 2.2.2.5)](#Section_2.2.2.5). When attempting to determine if the [**pipelined mode**](#gt_pipelined-mode) of operation can be used, the client will send two pipeline requests and the pipeline request token MUST be present in both of those requests. The two requests MUST be sent "back-to-back", that is, be pipelined, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 8.1.2.2.
 
 This token MUST have a value of 1.
 
@@ -1028,7 +1028,7 @@ Pragma: pipeline-request=1
 <a id="Section_2.2.1.4.17"></a>
 ##### 2.2.1.4.17 pipeline-result
 
-This token is used in a response to a [pipeline request (section 2.2.2.5)](#Section_3.2.5.5), and it specifies if the [**pipelined mode**](#gt_pipelined-mode) of the protocol can be used. The token can have a value of 0 or 1.
+This token is used in a response to a [pipeline request (section 2.2.2.5)](#Section_2.2.2.5), and it specifies if the [**pipelined mode**](#gt_pipelined-mode) of the protocol can be used. The token can have a value of 0 or 1.
 
 This token is defined for use only in responses sent to a client.<31>
 
@@ -1079,7 +1079,7 @@ For more information about how the server specifies the ID of a playlist entry, 
 <a id="Section_2.2.1.4.20"></a>
 ##### 2.2.1.4.20 pl-offset
 
-This token indicates to the server whether to move forward or backward to an entry in a [**playlist**](#gt_playlist) relative to the entry ID specified in the [playlist-seek-id (section 2.2.1.4.19)](#Section_2.2.1.4.8.4) token. If the value of the pl-offset token is 1, it specifies that the server is requested to move forward to the next entry. A value of -1 specifies that the server is requested to move backward to the previous entry. A value of 0 specifies that the server is requested to stay at the playlist entry identified by the playlist-seek-id token.
+This token indicates to the server whether to move forward or backward to an entry in a [**playlist**](#gt_playlist) relative to the entry ID specified in the [playlist-seek-id (section 2.2.1.4.19)](#Section_2.2.1.4.19) token. If the value of the pl-offset token is 1, it specifies that the server is requested to move forward to the next entry. A value of -1 specifies that the server is requested to move backward to the previous entry. A value of 0 specifies that the server is requested to stay at the playlist entry identified by the playlist-seek-id token.
 
 This token is defined for use only in requests sent to a server with a version greater than or equal to 5.0 (as specified by the server in the [Server](#Section_2.2.1.5) header).<34>
 
@@ -1272,7 +1272,7 @@ Pragma: stream-time=1000
 <a id="Section_2.2.1.4.29"></a>
 ##### 2.2.1.4.29 timeout
 
-This token specifies the longest time interval, in milliseconds, that the server allows between [KeepAlive (section 2.2.2.3)](#Section_3.2.5.8) requests without timing out an idle [**session**](#gt_session).
+This token specifies the longest time interval, in milliseconds, that the server allows between [KeepAlive (section 2.2.2.3)](#Section_2.2.2.3) requests without timing out an idle [**session**](#gt_session).
 
 This token is defined for use only in responses sent to a client.
 
@@ -1533,7 +1533,7 @@ This token is defined for use only in responses sent to a client.
 <a id="Section_2.2.1.7.2"></a>
 ##### 2.2.1.7.2 com.microsoft.wm.predstrm
 
-This token specifies support for predictive stream selection. This is a technique in which the server selects a set of [**streams**](#gt_stream) from the next entry in a server-side [**playlist**](#gt_playlist) on the client's behalf and starts [**streaming**](#gt_streaming) those streams. When predictive stream selection is not used, the server will not start streaming the next entry in the server-side playlist until the client has sent a [SelectStream request (section 2.2.2.8)](#Section_3.2.5.7) or [PlayNextEntry request (section 2.2.2.7)](#Section_3.1.5.18), as appropriate (it depends on whether [**pipelined mode**](#gt_pipelined-mode) or [**non-pipelined mode**](#gt_non-pipelined-mode) is used).
+This token specifies support for predictive stream selection. This is a technique in which the server selects a set of [**streams**](#gt_stream) from the next entry in a server-side [**playlist**](#gt_playlist) on the client's behalf and starts [**streaming**](#gt_streaming) those streams. When predictive stream selection is not used, the server will not start streaming the next entry in the server-side playlist until the client has sent a [SelectStream request (section 2.2.2.8)](#Section_2.2.2.8) or [PlayNextEntry request (section 2.2.2.7)](#Section_2.2.2.7), as appropriate (it depends on whether [**pipelined mode**](#gt_pipelined-mode) or [**non-pipelined mode**](#gt_non-pipelined-mode) is used).
 
 <a id="Section_2.2.1.7.3"></a>
 ##### 2.2.1.7.3 com.microsoft.wm.srvppair
@@ -1545,7 +1545,7 @@ This token is defined for use only in responses sent to a client
 <a id="Section_2.2.1.7.4"></a>
 ##### 2.2.1.7.4 com.microsoft.wm.sswitch
 
-This token specifies support for the [SelectStream request (section 2.2.2.8)](#Section_3.2.5.7).
+This token specifies support for the [SelectStream request (section 2.2.2.8)](#Section_2.2.2.8).
 
 <a id="Section_2.2.1.7.5"></a>
 ##### 2.2.1.7.5 com.microsoft.wm.startupprofile
@@ -1986,7 +1986,7 @@ Supported: com.microsoft.wm.srvppair, com.microsoft.wm.sswitch, com.microsoft.wm
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 GetContentInfo (Request and Response)
 
-The purpose of the GetContentInfo request is to retrieve cache-control information from the server without incurring the overhead of a [Describe request](#Section_3.1.4.2.1).
+The purpose of the GetContentInfo request is to retrieve cache-control information from the server without incurring the overhead of a [Describe request](#Section_3.2.5.4).
 
 The GetContentInfo request is defined as an HTTP POST request that satisfies the ABNF syntax for WMS-GCInfo-Request and satisfies all of the following conditions:
 
@@ -2123,7 +2123,7 @@ Content-Length: 0
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 KeepAlive Request (Request and Response)
 
-The purpose of the KeepAlive request is to prevent the server from timing out any state that it maintains for the [**streaming**](#gt_streaming) [**session**](#gt_session). This request is useful if the server has stopped streaming (for example, as the result of the client sending a [Stop request (section 2.2.2.10)](#Section_2.2.2.10) and the client eventually intends to send a [Play request (section 2.2.2.6)](#Section_3.2.5.6) to ask the server to resume streaming).
+The purpose of the KeepAlive request is to prevent the server from timing out any state that it maintains for the [**streaming**](#gt_streaming) [**session**](#gt_session). This request is useful if the server has stopped streaming (for example, as the result of the client sending a [Stop request (section 2.2.2.10)](#Section_2.2.2.10) and the client eventually intends to send a [Play request (section 2.2.2.6)](#Section_2.2.2.6) to ask the server to resume streaming).
 
 If the client allows the server's session state to expire, it can become difficult to resume streaming from the same position that the server was stopped at, especially if the server was streaming from a server-side [**playlist**](#gt_playlist) with multiple entries (for example, consider the case of a server randomly generating a new server-side playlist each time a new session state is created).<51>
 
@@ -2134,7 +2134,7 @@ The composition of the KeepAlive request is different depending on whether the [
 <a id="Section_2.2.2.3.1"></a>
 ##### 2.2.2.3.1 Non-Pipelined Mode
 
-When the [**non-pipelined mode**](#gt_non-pipelined-mode) of this protocol is in use, the [KeepAlive request (section 2.2.2.3)](#Section_3.2.5.8) is a HTTP POST request that satisfies the ABNF syntax for WMS-KeepAlive10-Request and satisfies all of the following conditions:
+When the [**non-pipelined mode**](#gt_non-pipelined-mode) of this protocol is in use, the [KeepAlive request (section 2.2.2.3)](#Section_2.2.2.3) is a HTTP POST request that satisfies the ABNF syntax for WMS-KeepAlive10-Request and satisfies all of the following conditions:
 
 - The POST request includes a [Pragma](#Section_2.2.1.4) header with the [xKeepAliveInPause (section 2.2.1.4.34)](#Section_2.2.1.4.34) token.
 - The message body of the POST request is zero-length.
@@ -2257,7 +2257,7 @@ Connection: Keep-Alive
 <a id="Section_2.2.2.3.2"></a>
 ##### 2.2.2.3.2 Pipelined Mode
 
-The [KeepAlive request](#Section_3.2.5.8) for the pipelined mode of the protocol is an HTTP OPTIONS request that satisfies the ABNF syntax for the WMS-KeepAlive11-Request.
+The [KeepAlive request](#Section_2.2.2.3) for the pipelined mode of the protocol is an HTTP OPTIONS request that satisfies the ABNF syntax for the WMS-KeepAlive11-Request.
 
 WMS-KeepAlive11-Request = WMS-KeepAlive11-Req-Line
 
@@ -2441,7 +2441,7 @@ Supported: com.microsoft.wm.srvppair, com.microsoft.wm.sswitch, com.microsoft.wm
 
 The purpose of the Pipeline request is to determine whether the [**pipelined mode**](#gt_pipelined-mode) of operation of the protocol is possible.
 
-If a client sends a Pipeline request, the first Pipeline request is sent after the first [Describe request](#Section_3.1.4.2.1) and before the first [Play (section 2.2.2.6)](#Section_3.2.5.6) request.
+If a client sends a Pipeline request, the first Pipeline request is sent after the first [Describe request](#Section_3.2.5.4) and before the first [Play (section 2.2.2.6)](#Section_2.2.2.6) request.
 
 The Pipeline request is defined as an HTTP 1.1 GET request that satisfies the ABNF syntax for WMS-Pipeline-Request and satisfies all of the following conditions:
 
@@ -2631,7 +2631,7 @@ Supported: com.microsoft.wm.srvppair, com.microsoft.wm.sswitch, com.microsoft.wm
 
 The purpose of the Play request is to request the server to start [**streaming**](#gt_streaming) the [**content**](#gt_content) that is identified by the URL, as specified in [[RFC1738]](https://go.microsoft.com/fwlink/?LinkId=90287), and which is included in the request.
 
-If the client has previously sent a [Describe request (section 2.2.2.1)](#Section_3.1.4.2.1), the client will have obtained at least a [$H packet (section 2.2.3.5)](#Section_4.13.1) and perhaps also a [$M packet (section 2.2.3.6)](#Section_2.2.3.6) and [$P packets (section 2.2.3.7)](#Section_2.2.3.7). Based on the information provided by those packets, the client can include the [stream-switch-entry (section 2.2.1.4.27)](#Section_2.2.1.4.27) token on the [Pragma](#Section_2.2.1.4) header, specifying the [**streams**](#gt_stream) of the content that the client wants to receive.
+If the client has previously sent a [Describe request (section 2.2.2.1)](#Section_2.2.2.1), the client will have obtained at least a [$H packet (section 2.2.3.5)](#Section_2.2.3.5) and perhaps also a [$M packet (section 2.2.3.6)](#Section_2.2.3.6) and [$P packets (section 2.2.3.7)](#Section_2.2.3.7). Based on the information provided by those packets, the client can include the [stream-switch-entry (section 2.2.1.4.27)](#Section_2.2.1.4.27) token on the [Pragma](#Section_2.2.1.4) header, specifying the [**streams**](#gt_stream) of the content that the client wants to receive.
 
 The Play request is defined as an HTTP GET request that satisfies the ABNF syntax for WMS-Play-Request [[RFC4234]](https://go.microsoft.com/fwlink/?LinkId=90462) and satisfies all of the following conditions:
 
@@ -3552,7 +3552,7 @@ Content-Length: 0
 
 This section defines the packet types used by this protocol. The packets are sent by the server to the client. The packets will appear in the message body of any response sent by the server to an HTTP GET or POST request, as long as it is not a zero-length message body.
 
-When the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, the packets will appear in the server's response to the [Describe (section 2.2.2.1)](#Section_3.1.4.2.1) and [Play (section 2.2.2.6)](#Section_3.2.5.6) requests. If the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, the packets will typically also appear in the message body of the [Pipeline (section 2.2.2.5)](#Section_3.2.5.5), [PlayNextEntry (section 2.2.2.7)](#Section_3.1.5.18), and [SelectStream (section 2.2.2.8)](#Section_3.2.5.7) requests.
+When the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, the packets will appear in the server's response to the [Describe (section 2.2.2.1)](#Section_2.2.2.1) and [Play (section 2.2.2.6)](#Section_2.2.2.6) requests. If the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, the packets will typically also appear in the message body of the [Pipeline (section 2.2.2.5)](#Section_2.2.2.5), [PlayNextEntry (section 2.2.2.7)](#Section_2.2.2.7), and [SelectStream (section 2.2.2.8)](#Section_2.2.2.8) requests.
 
 The remainder of this section is organized as follows: Section [2.2.3.1](#Section_2.2.3.1) defines data structures and field definitions that are common to multiple packet types. Sections [2.2.3.2](#Section_2.2.3.2) through [2.2.3.8](#Section_2.2.3.8) define individual packet types.
 
@@ -3593,7 +3593,7 @@ packet-beta
 <a id="Section_2.2.3.1.2"></a>
 ##### 2.2.3.1.2 MMS Data Packet
 
-The MMS data packet structure (also referred to as "MMS Packet"), is a part of the [$D (Data) (section 2.2.3.3)](#Section_2.2.3.3), [$H (Header) (section 2.2.3.5)](#Section_4.13.1), and [$M (Metadata) (section 2.2.3.6)](#Section_2.2.3.6) packet types. The header portion of the MMS data packet is sometimes referred to as AF_HEADER_TYPE0.
+The MMS data packet structure (also referred to as "MMS Packet"), is a part of the [$D (Data) (section 2.2.3.3)](#Section_2.2.3.3), [$H (Header) (section 2.2.3.5)](#Section_2.2.3.5), and [$M (Metadata) (section 2.2.3.6)](#Section_2.2.3.6) packet types. The header portion of the MMS data packet is sometimes referred to as AF_HEADER_TYPE0.
 
 The maximum size of an MMS data packet is 65,535 bytes. If the object being transferred would cause this size limit to be exceeded, it MUST be transferred as multiple MMS packets. For example, if the size of an [**ASF**](#gt_advanced-systems-format-asf) header is 100,000 bytes, it MUST be transferred using at least two $H packets. If the first $H packet contains a 65,535-byte MMS packet, the second $H packet would contain a 34,481-byte MMS packet. The preservation of byte boundaries is not a requirement when fragmenting ASF headers.
 
@@ -3610,7 +3610,7 @@ packet-beta
 
 **Incarnation (1 byte):** An 8-bit sequence number. The initial value of this field SHOULD be 0. Sections [3.2.5.6](#Section_3.2.5.6) and [3.2.5.9](#Section_3.2.5.9) specify details about how this field is assigned. This field can be ignored by clients.
 
-**AFFlags (1 byte):** An 8-bit unsigned integer field. For $D packets, the field MUST be treated as a sequence number. The initial value MUST be 0 and it MUST increment by 1 for each $D packet that is transmitted. If the most recently transmitted $D packet had an **AFFlags** field value of 254, and the server receives a [Play (section 2.2.2.6)](#Section_3.2.5.6) or [PlayNextEntry (section 2.2.2.7)](#Section_3.1.5.18) request, then the first $D packet transmitted in the response SHOULD have the **AFFlags** field set to 0. For $M and $H packets the following rules apply: The AFFlags field MUST be set to 0x00 unless otherwise specified in this document. The **AFFlags** field MUST be set to 0x04 if the object being transferred is split into multiple MMS packets, and this is the first MMS data packet in the sequence. AFFlags MUST be set to 0x08 if this is the last MMS data packet in the sequence, and AFFlags MUST be set to 0x0C if this is both the first and the last packet in the sequence (that is, the object is fully contained in the **Payload** field of the current MMS data packet).
+**AFFlags (1 byte):** An 8-bit unsigned integer field. For $D packets, the field MUST be treated as a sequence number. The initial value MUST be 0 and it MUST increment by 1 for each $D packet that is transmitted. If the most recently transmitted $D packet had an **AFFlags** field value of 254, and the server receives a [Play (section 2.2.2.6)](#Section_2.2.2.6) or [PlayNextEntry (section 2.2.2.7)](#Section_2.2.2.7) request, then the first $D packet transmitted in the response SHOULD have the **AFFlags** field set to 0. For $M and $H packets the following rules apply: The AFFlags field MUST be set to 0x00 unless otherwise specified in this document. The **AFFlags** field MUST be set to 0x04 if the object being transferred is split into multiple MMS packets, and this is the first MMS data packet in the sequence. AFFlags MUST be set to 0x08 if this is the last MMS data packet in the sequence, and AFFlags MUST be set to 0x0C if this is both the first and the last packet in the sequence (that is, the object is fully contained in the **Payload** field of the current MMS data packet).
 
 **PacketSize (2 bytes):** A 16-bit unsigned integer field. This field MUST be set to the total size of the MMS packet, in bytes.
 
@@ -3669,14 +3669,14 @@ The $E packet is defined as a [Framing header (section 2.2.3.1.1)](#Section_2.
 
 | Value | Meaning |
 | --- | --- |
-| S_OK (0x00000000) | The server has finished [**streaming**](#gt_streaming) and no more $D packets (section 2.2.3.3) will be transmitted until the next [Play request (section 2.2.2.6)](#Section_3.2.5.6). |
+| S_OK (0x00000000) | The server has finished [**streaming**](#gt_streaming) and no more $D packets (section 2.2.3.3) will be transmitted until the next [Play request (section 2.2.2.6)](#Section_2.2.2.6). |
 | S_FALSE (0x00000001) | The server has finished streaming the current playlist entry. Other playlist entries still remain to be streamed. The server will transmit a $C packet when it switches to the next entry. |
 | NS_S_EOS_RECEDING (0x000D2F09) | The server was rewinding the content (streaming the content backward) and has reached the beginning of the current playlist entry. No more $D packets will be transmitted until the next Play request. |
 
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 $H (Header) Packet
 
-The $H (Header) packet is used by the server to transfer an [**ASF**](#gt_advanced-systems-format-asf) header to the client. The packet is sent in the response to [Describe (section 2.2.2.1)](#Section_3.1.4.2.1), [Play (section 2.2.2.6)](#Section_3.2.5.6), and [PlayNextEntry requests (section 2.2.2.7)](#Section_3.1.5.18), and after a [$C packet (section 2.2.3.2)](#Section_2.2.3.2).
+The $H (Header) packet is used by the server to transfer an [**ASF**](#gt_advanced-systems-format-asf) header to the client. The packet is sent in the response to [Describe (section 2.2.2.1)](#Section_2.2.2.1), [Play (section 2.2.2.6)](#Section_2.2.2.6), and [PlayNextEntry requests (section 2.2.2.7)](#Section_2.2.2.7), and after a [$C packet (section 2.2.3.2)](#Section_2.2.3.2).
 
 The $H packet MUST start with a [Framing header (section 2.2.3.1.1)](#Section_2.2.3.1.1), followed by an [MMS data packet (section 2.2.3.1.2)](#Section_2.2.3.1.2), with the following additional details:
 
@@ -3758,7 +3758,7 @@ A $P packet starts with a [Framing header (section 2.2.3.1.1)](#Section_2.2.3.
 <a id="Section_2.2.3.8"></a>
 #### 2.2.3.8 $T (Test Data Notification) Packet
 
-The $T (Test Data Notification) packet is sent by the server in the response to the first in a series of two [Pipeline requests (section 2.2.2.5)](#Section_3.2.5.5).<58>
+The $T (Test Data Notification) packet is sent by the server in the response to the first in a series of two [Pipeline requests (section 2.2.2.5)](#Section_2.2.2.5).<58>
 
 A $T packet is defined as a [Framing header (section 2.2.3.1.1)](#Section_2.2.3.1.1) with the following additional details:
 
@@ -3909,7 +3909,7 @@ For more information about the syntax for content-description, see section [2.2.
 <a id="Section_3.1"></a>
 ## 3.1 Client Details
 
-Unless specified otherwise, the protocol reports the occurrence of an error to the higher layer, stops all timers, and stops processing further messages. Possible errors include the following: failure to connect to the server, the connection to the server is unexpectedly closed, the response to a request indicates an error, the **Reason** field in the [$E](#Section_2.2.3.4) or [$C](#Section_2.2.3.2) packets indicates an error, a malformed packet is received (such as a [$D packet](#Section_2.2.3.3) not adhering to the syntax for packets of that type), or an unexpected packet (such as receiving a [$P packet](#Section_2.2.3.7) when waiting for a [$H packet](#Section_4.13.1)) is received.
+Unless specified otherwise, the protocol reports the occurrence of an error to the higher layer, stops all timers, and stops processing further messages. Possible errors include the following: failure to connect to the server, the connection to the server is unexpectedly closed, the response to a request indicates an error, the **Reason** field in the [$E](#Section_2.2.3.4) or [$C](#Section_2.2.3.2) packets indicates an error, a malformed packet is received (such as a [$D packet](#Section_3.2.4.1) not adhering to the syntax for packets of that type), or an unexpected packet (such as receiving a [$P packet](#Section_47975f8283a74866aad883c26dd513af) when waiting for a [$H packet](#Section_4.13.1)) is received.
 
 Unless specified otherwise, the client role of the protocol always provides the value of the **Higher-Layer-ID** variable in the Abstract Data Model to the higher layer when it invokes the higher layer.
 
@@ -3936,9 +3936,9 @@ This section describes a conceptual model of possible data organization that an 
 
 **Cookie-List**: This variable stores the list of cookies received from the Set-Cookie header. The initial value of the list is empty. The Cookie-List SHOULD be persistent and SHOULD be shared with other instances of the Windows Media Streaming Protocol (WMSP) and RTSP extensions run by the same user on the same machine. This means that if a cookie is set for the URL rtsp://example.com/, and then a cookie with the same name is set for the URL http://example.com/, the second cookie overrides the first cookie because the two URLs are considered equivalent.
 
-**Expected-Packets:** This variable specifies the packet types that the client is expecting to receive. The variable can be set to any combination of [$C](#Section_2.2.3.2), [$D](#Section_2.2.3.3), [$E](#Section_2.2.3.4), [$H](#Section_4.13.1), [$M](#Section_2.2.3.6), [$P](#Section_2.2.3.7), and [$T](#Section_2.2.3.8). The variable can also be empty, meaning that no packets are expected. The variable can be implemented as an unordered list or as a bit mask that is seven bits wide with one bit for each packet type. By default this variable is empty.
+**Expected-Packets:** This variable specifies the packet types that the client is expecting to receive. The variable can be set to any combination of [$C](#Section_2.2.3.2), [$D](#Section_3.2.4.1), [$E](#Section_2.2.3.4), [$H](#Section_4.13.1), [$M](#Section_2.2.3.6), [$P](#Section_2.2.3.7), and [$T](#Section_2.2.3.8). The variable can also be empty, meaning that no packets are expected. The variable can be implemented as an unordered list or as a bit mask that is seven bits wide with one bit for each packet type. By default this variable is empty.
 
-**Expected-Responses:** This variable is an ordered list where each element specifies the type of message response that is expected. Elements are always added to the tail end of the list when a request is sent and removed from the head of the list when a response is received. The possible values for the individual elements are: [Describe](#Section_3.1.4.2.1), [GetContentInfo](#Section_2.2.1.2.4), [KeepAlive](#Section_3.2.5.8), [Log](#Section_2.2.2.4), [pipeline](#Section_2.2.1.4.16), [Play](#Section_3.2.5.6), [PlayNextEntry](#Section_3.1.5.18), [SelectStream](#Section_3.2.5.7), [SendEvent](#Section_2.2.2.9), and [Stop](#Section_2.2.2.10). The default value of this variable is an empty list.
+**Expected-Responses:** This variable is an ordered list where each element specifies the type of message response that is expected. Elements are always added to the tail end of the list when a request is sent and removed from the head of the list when a response is received. The possible values for the individual elements are: [Describe](#Section_3.2.5.4), [GetContentInfo](#Section_2.2.1.2.4), [KeepAlive](#Section_2.2.2.3), [Log](#Section_2.2.2.4), [pipeline](#Section_2.2.2.3.2), [Play](#Section_3.1.4.3.1), [PlayNextEntry](#Section_2.2.1.4.35), [SelectStream](#Section_3.2.5.7), [SendEvent](#Section_2.2.1.2.6), and [Stop](#Section_2.2.2.10). The default value of this variable is an empty list.
 
 **Higher-Layer-ID:** This variable is a numerical identifier that is assigned by the higher layer. In case the higher layer is maintaining multiple instances of the client role, the higher layer can use this variable to determine which client role instance is invoking it, as long as the higher layer makes sure to assign a distinct **Higher-Layer-ID** value to each instance of the client role. The initial value is undefined.
 
@@ -3959,7 +3959,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-**Keepalive:** This timer is used for sending [KeepAlive requests (section 2.2.2.3)](#Section_3.2.5.8). The timeout period is controlled by the Keepalive-timeout variable specified in section [3.1.1](#Section_3.2.1). The minimum allowed value for the time-out period is 0.
+**Keepalive:** This timer is used for sending [KeepAlive requests (section 2.2.2.3)](#Section_2.2.2.3). The timeout period is controlled by the Keepalive-timeout variable specified in section [3.1.1](#Section_3.1.1). The minimum allowed value for the time-out period is 0.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -3993,7 +3993,7 @@ If the **Client-Initialization-Status** does not equal 1, then this will be the 
 
 The client MUST then establish a TCP connection to the server by using the IP address and port number obtained by parsing the URL.
 
-If the value of the Client-Token variable in the abstract data model is not "WMCacheProxy", the client MUST send a [Describe request (section 2.2.2.1)](#Section_3.1.4.2.1).
+If the value of the Client-Token variable in the abstract data model is not "WMCacheProxy", the client MUST send a [Describe request (section 2.2.2.1)](#Section_2.2.2.1).
 
 Otherwise, the client MUST send a [GetContentInfo request](#Section_2.2.1.2.4) to the server.
 
@@ -4008,7 +4008,7 @@ After having sent the request, the client MUST process the rules in section [3.1
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Request to Retrieve Content Information
 
-This event causes the client to send a [Describe request (section 2.2.2.1)](#Section_3.1.4.2.1) to the server. The most common scenarios in which an application would ask the client for information about multimedia [**content**](#gt_content) are the following.
+This event causes the client to send a [Describe request (section 2.2.2.1)](#Section_2.2.2.1) to the server. The most common scenarios in which an application would ask the client for information about multimedia [**content**](#gt_content) are the following.
 
 - A media player application that intends to play multimedia content, which will be [**streamed**](#gt_streaming) from a server. The media player knows the URL to the content and it might already know at what time position and at what rate it intends to play the content. However, before it can start playing the content, it needs to retrieve information about what audio and video [**streams**](#gt_stream) are included in the content, what decoders will be needed to decompress the content and other information.
 - A cache that already has a copy of the content but must retrieve information about the content from the server to determine if the cached copy is still fresh.
@@ -4022,7 +4022,7 @@ The client MUST then establish a TCP connection to the server by using the IP ad
 <a id="Section_3.1.4.2.1"></a>
 ##### 3.1.4.2.1 Sending the Describe Request
 
-The [Describe request](#Section_3.1.4.2.1) MUST adhere to the syntax specified in section 2.2.2.1.
+The [Describe request](#Section_3.2.5.4) MUST adhere to the syntax specified in section 2.2.2.1.
 
 In addition, the common processing steps specified in section [3.1.5.1](#Section_3.1.5.1) MUST be followed when sending the Describe request.
 
@@ -4035,35 +4035,35 @@ After having sent the request, the client MUST process the rules in section [3.1
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Request to Start Streaming Content
 
-This higher-layered triggered event can occur when the client is not currently [**streaming**](#gt_streaming) from the server. The event causes the client to send a [Play request (section 2.2.2.6)](#Section_3.2.5.6) to the server. The most common scenarios in which an application would ask the client to request the server to start streaming [**content**](#gt_content) are the following.
+This higher-layered triggered event can occur when the client is not currently [**streaming**](#gt_streaming) from the server. The event causes the client to send a [Play request (section 2.2.2.6)](#Section_2.2.2.6) to the server. The most common scenarios in which an application would ask the client to request the server to start streaming [**content**](#gt_content) are the following.
 
 - A media player application that has examined the [**ASF**](#gt_advanced-systems-format-asf) header that was received from the server (as specified in [3.1.5.8](#Section_3.1.5.8)) and determined that it is capable to decompress and play the multimedia content.
 - A cache that has determined that the currently-cached copy of the content, if any, is either stale or incomplete.
 - A server or intermediate device, such as a noncaching proxy, which is asking for content to be streamed on behalf of another client.
-If the TCP connection that is used for sending the most recent [Describe (section 2.2.2.1)](#Section_3.1.4.2.1), Play (section 2.2.2.6), or [PlayNextEntry (section 2.2.2.7)](#Section_3.1.5.18) request is still open, the connection MUST either be used for sending the next request or it MUST be closed at this time. If the TCP connection is closed, the client MUST then establish a TCP connection to the server by using the IP address and port number obtained by parsing the URL.
+If the TCP connection that is used for sending the most recent [Describe (section 2.2.2.1)](#Section_2.2.2.1), Play (section 2.2.2.6), or [PlayNextEntry (section 2.2.2.7)](#Section_2.2.2.7) request is still open, the connection MUST either be used for sending the next request or it MUST be closed at this time. If the TCP connection is closed, the client MUST then establish a TCP connection to the server by using the IP address and port number obtained by parsing the URL.
 
-If the value of the Pipeline-Test-Allowed variable is 1, and the KeepAlive-Mode variable specifies that the protocol is currently in [**non-pipelined mode**](#gt_non-pipelined-mode), the client SHOULD send two [Pipeline requests (section 2.2.2.5)](#Section_3.2.5.5). The Pipeline requests MUST adhere to the syntax defined in section 2.2.2.5 and MUST follow the rules in section [3.1.5.1](#Section_3.1.5.1). After having sent the two requests, the client MUST process the rules in section [3.1.5.2](#Section_3.1.5.2).
+If the value of the Pipeline-Test-Allowed variable is 1, and the KeepAlive-Mode variable specifies that the protocol is currently in [**non-pipelined mode**](#gt_non-pipelined-mode), the client SHOULD send two [Pipeline requests (section 2.2.2.5)](#Section_2.2.2.5). The Pipeline requests MUST adhere to the syntax defined in section 2.2.2.5 and MUST follow the rules in section [3.1.5.1](#Section_3.1.5.1). After having sent the two requests, the client MUST process the rules in section [3.1.5.2](#Section_3.1.5.2).
 
 Next, the client MUST send the Play request to the server, as specified in the next section [3.1.4.3.1](#Section_3.1.4.3.1).
 
 <a id="Section_3.1.4.3.1"></a>
 ##### 3.1.4.3.1 Sending a Play Request
 
-If the TCP connection that is used for sending the most recent [Describe](#Section_3.1.4.2.1), [Play](#Section_3.2.5.6), or [PlayNextEntry](#Section_3.1.5.18) request is still open, the connection MUST either be used for sending the Play request or it MUST be closed at this time. If the TCP connection is closed, the client MUST then establish a TCP connection to the server by using the IP address and port number that is obtained by parsing the URL.
+If the TCP connection that is used for sending the most recent [Describe](#Section_3.2.5.4), [Play](#Section_3.1.4.3.1), or [PlayNextEntry](#Section_2.2.1.4.35) request is still open, the connection MUST either be used for sending the Play request or it MUST be closed at this time. If the TCP connection is closed, the client MUST then establish a TCP connection to the server by using the IP address and port number that is obtained by parsing the URL.
 
 The Play request MUST adhere to the syntax that is specified in section 2.2.2.6.
 
 In addition, the common processing steps that are specified in section [3.1.5.1](#Section_3.1.5.1) MUST be followed when sending the Play request.
 
-Because the [**ASF**](#gt_advanced-systems-format-asf) header typically specifies multiple [**streams**](#gt_stream), the higher layer MUST select exactly which of the streams are [**streamed**](#gt_streaming) from the server. If a subset of the streams that are listed in the ASF header are selected to be streamed, or if the value of the Client-Token variable is not "NSServer", or if the [Client-Token-Version (section 3.1.1)](#Section_3.2.1) is greater than or equal to 9.0, the client MUST specify the complete selection state of all streams by including a [stream-switch-entry (section 2.2.1.4.27)](#Section_2.2.1.4.27) token on a [Pragma](#Section_2.2.1.4) header in the Play request. In this case, the stream-switch-entry token MUST specify all available streams, and each stream MUST either be marked as on by specifying the thinning level parameter as 0, or marked as off by specifying the thinning level parameter as 2, depending on the selection made by the higher layer. This token MUST be sent on a separate Pragma header; that is, no other tokens are allowed to be included on the same Pragma header as the stream-switch-entry token.
+Because the [**ASF**](#gt_advanced-systems-format-asf) header typically specifies multiple [**streams**](#gt_stream), the higher layer MUST select exactly which of the streams are [**streamed**](#gt_streaming) from the server. If a subset of the streams that are listed in the ASF header are selected to be streamed, or if the value of the Client-Token variable is not "NSServer", or if the [Client-Token-Version (section 3.1.1)](#Section_3.1.1) is greater than or equal to 9.0, the client MUST specify the complete selection state of all streams by including a [stream-switch-entry (section 2.2.1.4.27)](#Section_2.2.1.4.27) token on a [Pragma](#Section_2.2.1.4) header in the Play request. In this case, the stream-switch-entry token MUST specify all available streams, and each stream MUST either be marked as on by specifying the thinning level parameter as 0, or marked as off by specifying the thinning level parameter as 2, depending on the selection made by the higher layer. This token MUST be sent on a separate Pragma header; that is, no other tokens are allowed to be included on the same Pragma header as the stream-switch-entry token.
 
 If the higher layer specifies that the server skip to the next or previous [**playlist**](#gt_playlist) entry, and the Server-Version variable is greater than or equal to 5.0, the client SHOULD send this information to the server using the [pl-offset (section 2.2.1.4.20)](#Section_2.2.1.4.20) token on the Pragma header. To indicate that the client skips to the next entry, the client SHOULD specify a value of 1 for the pl-offset token on the Pragma header. To indicate that the client skips to the previous entry, the client SHOULD specify a value of -1 for the pl-offset token on the Pragma header.
 
 The higher layer MUST also provide either the time position or the ASF packet number from which the server is asked to start streaming. If a time position is provided, the client MUST send this information by using the [stream-time (section 2.2.1.4.28)](#Section_2.2.1.4.28) token on the Pragma header. If an ASF packet number is provided, the client MUST send this information by using either the [stream-offset (section 2.2.1.4.25)](#Section_2.2.1.4.25) token or the [packet-num (section 2.2.1.4.13)](#Section_2.2.1.4.13) token on the Pragma header.
 
-The higher layer MUST specify the playlist entry ID to which the previously mentioned time position or ASF packet number applies. Usually this playlist entry is the same entry that is indicated by the client Playlist-gen-id variable. However, if the client has recently received a [$M packet](#Section_2.2.3.6) and updated its Playlist-gen-id variable, the higher layer might not yet have processed the change to the playlist entry. The client MUST compare the value of its Playlist-gen-id variable against the playlist entry ID that is specified by the higher layer. If the values do not match and the playlist entry ID of the higher layer is nonzero, the client MUST specify a [playlist-seek-id (section 2.2.1.4.19)](#Section_2.2.1.4.8.4) token on the Pragma header and use the playlist entry ID of the higher layer as the value for that token.
+The higher layer MUST specify the playlist entry ID to which the previously mentioned time position or ASF packet number applies. Usually this playlist entry is the same entry that is indicated by the client Playlist-gen-id variable. However, if the client has recently received a [$M packet](#Section_2.2.3.6) and updated its Playlist-gen-id variable, the higher layer might not yet have processed the change to the playlist entry. The client MUST compare the value of its Playlist-gen-id variable against the playlist entry ID that is specified by the higher layer. If the values do not match and the playlist entry ID of the higher layer is nonzero, the client MUST specify a [playlist-seek-id (section 2.2.1.4.19)](#Section_2.2.1.4.19) token on the Pragma header and use the playlist entry ID of the higher layer as the value for that token.
 
-The higher layer MUST specify at what rate the multimedia [**content**](#gt_content) is played back. For example, if the higher layer wants to play the multimedia content in reverse, it MUST specify this and also specify the rate of playback. The client MUST send this information by using the [rate (section 2.2.1.4.22)](#Section_2.2.1.12.1) token on the Pragma header.
+The higher layer MUST specify at what rate the multimedia [**content**](#gt_content) is played back. For example, if the higher layer wants to play the multimedia content in reverse, it MUST specify this and also specify the rate of playback. The client MUST send this information by using the [rate (section 2.2.1.4.22)](#Section_2.2.1.4.22) token on the Pragma header.
 
 The higher layer SHOULD specify an amount of data that is streamed faster than real time and the bit rate at which the server streams this data. The higher layer SHOULD also specify the bit rate that can be used for streaming between the server and the client. If the value of the Server-Version variable is greater than or equal to 5.0, the client SHOULD send this information to the server by using the [AccelBW (section 2.2.1.4.1)](#Section_2.2.1.4.1), [AccelDuration (section 2.2.1.4.2)](#Section_2.2.1.4.2), and [LinkBW (section 2.2.1.4.9)](#Section_2.2.1.4.9) tokens on the Pragma header.
 
@@ -4082,9 +4082,9 @@ After having sent the request, the client MUST process the rules in section [3.1
 
 This event occurs when the higher layer changes the [**streams**](#gt_stream) that are currently being [**streamed**](#gt_streaming). For example, if the higher layer switches from an English language audio stream to a Spanish language one, or if the higher layer switches to a stream with higher quality video.
 
-If the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used and the TCP connection used for the most recent [Play](#Section_3.2.5.6) or [PlayNextEntry](#Section_3.1.5.18) request is open, the client MUST send a [SelectStream request (section 2.2.2.8)](#Section_3.2.5.7) on this connection.
+If the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used and the TCP connection used for the most recent [Play](#Section_3.1.4.3.1) or [PlayNextEntry](#Section_2.2.1.4.35) request is open, the client MUST send a [SelectStream request (section 2.2.2.8)](#Section_2.2.2.8) on this connection.
 
-Otherwise, the client MUST establish a new TCP connection to the server using the IP address and port number obtained by parsing the URL used for the [Describe request](#Section_3.1.4.2.1). A SelectStream request MUST be sent on this new connection, as specified in SelectStream Request (section 2.2.2.8).
+Otherwise, the client MUST establish a new TCP connection to the server using the IP address and port number obtained by parsing the URL used for the [Describe request](#Section_3.2.5.4). A SelectStream request MUST be sent on this new connection, as specified in SelectStream Request (section 2.2.2.8).
 
 The client SHOULD NOT send a SelectStream request to the server unless the value of the Server-features variable in the abstract data model indicates that the server supports the [com.microsoft.wm.sswitch](#Section_2.2.1.7.4) feature (2.2.1.7.4).
 
@@ -4099,11 +4099,11 @@ After having sent the request, the client MUST process the rules in section [3.1
 
 This event occurs after the higher layer has received the [**ASF**](#gt_advanced-systems-format-asf) header for a new [**playlist**](#gt_playlist) entry and the higher layer is ready to start processing the ASF packets for the new playlist entry. This event is the higher layer's opportunity to select the [**streams**](#gt_stream) to receive from the new playlist entry. Because the bit rate needed to stream each playlist entry depends on how the [**content**](#gt_content) was encoded and which streams are selected, the higher layer MAY also specify new values for the parameters that control how much faster than real time (if at all) the content is [**streamed**](#gt_streaming).
 
-If the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, or if the TCP connection used for the most recent [Play (section 2.2.2.6)](#Section_3.2.5.6) or [PlayNextEntry (section 2.2.2.7)](#Section_3.1.5.18) request is no longer open, the client MUST establish a new TCP connection to the server by using the IP address and port number obtained by parsing the URL used for the [Describe request (section 2.2.2.1)](#Section_3.1.4.2.1).
+If the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, or if the TCP connection used for the most recent [Play (section 2.2.2.6)](#Section_2.2.2.6) or [PlayNextEntry (section 2.2.2.7)](#Section_2.2.2.7) request is no longer open, the client MUST establish a new TCP connection to the server by using the IP address and port number obtained by parsing the URL used for the [Describe request (section 2.2.2.1)](#Section_2.2.2.1).
 
 If the value of the KeepAlive-Mode variable specifies that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, the client MUST send a PlayNextEntry request (section 2.2.2.7). The request MUST be sent on either the same TCP connection that was used for the most recent Play or PlayNextEntry request, or if that connection is no longer open, on the TCP connection that was newly established according to the preceding rules.
 
-If the value of the KeepAlive-Mode variable specifies that the non-pipelined mode of the protocol is used, the client MUST send a [SelectStream request (section 2.2.2.8)](#Section_3.2.5.7). The request MUST be sent on the TCP connection that was newly established according to the preceding rules.
+If the value of the KeepAlive-Mode variable specifies that the non-pipelined mode of the protocol is used, the client MUST send a [SelectStream request (section 2.2.2.8)](#Section_2.2.2.8). The request MUST be sent on the TCP connection that was newly established according to the preceding rules.
 
 If the client that wants the server to use predictive stream selection for the current playlist entry, then it MUST send the [Supported](#Section_2.2.1.7) header with the [com.microsoft.wm.predstrm](#Section_2.2.1.7.2) token (as specified in section 2.2.1.7.2) in the Play, SelectStream, or PlayNextEntry request, as appropriate. A client that does not want the server to use Predictive Stream Selection for the current playlist entry MUST send a Supported header without the com.microsoft.wm.predstrm token in the Play, SelectStream, or PlayNextEntry request.
 
@@ -4126,13 +4126,13 @@ After having sent the request, the client MUST process the rules in section [3.1
 
 This event occurs if the higher layer wants to stop [**streaming**](#gt_streaming). For example, if the end user requests that streaming stop or the end user requests to seek to some position in the content while the client is currently streaming multimedia [**content**](#gt_content) from a different position.
 
-If the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used and the TCP connection used for the most recent [Play request](#Section_3.2.5.6) is open, the client MUST close that TCP connection.
+If the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used and the TCP connection used for the most recent [Play request](#Section_3.1.4.3.1) is open, the client MUST close that TCP connection.
 
-If the value of the KeepAlive-Mode variable specifies that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used and the TCP connection used for the most recent Play or [PlayNextEntry request](#Section_3.1.5.18) is open, then the client MUST send a [Stop request (section 2.2.2.10)](#Section_2.2.2.10) on that connection.
+If the value of the KeepAlive-Mode variable specifies that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used and the TCP connection used for the most recent Play or [PlayNextEntry request](#Section_2.2.1.4.35) is open, then the client MUST send a [Stop request (section 2.2.2.10)](#Section_2.2.2.10) on that connection.
 
 If the value of the Client-State variable is STREAMING, and the value of the KeepAlive-Mode variable specifies that the pipelined mode of the protocol is used, then the client MUST send a [Log request (section 2.2.2.4)](#Section_2.2.2.4) to the server on the same TCP connection that the Stop request was sent on.
 
-If the value of the Client-State variable is STREAMING, and the non-pipelined mode of the protocol is used, the client MUST establish a new TCP connection to the server using the IP address and port number obtained by parsing the URL used for the [Describe request](#Section_3.1.4.2.1). The client MUST then send a Log request to the server on the new TCP connection.
+If the value of the Client-State variable is STREAMING, and the non-pipelined mode of the protocol is used, the client MUST establish a new TCP connection to the server using the IP address and port number obtained by parsing the URL used for the [Describe request](#Section_3.2.5.4). The client MUST then send a Log request to the server on the new TCP connection.
 
 If the server's product name is "Cougar", and its version number is greater than or equal to 9.0, as determined by the Server-Version variable, the previously mentioned Log request SHOULD contain a logging message in XML format as defined in [MS-WMLOG](../MS-WMLOG/MS-WMLOG.md). If the client will submit remote-log remote events using the [SendEvent request (section 2.2.2.9)](#Section_2.2.2.9), the logging information included in the Log request MUST be a "streaming" log, as defined in [MS-WMLOG]. Otherwise, the logging information MUST be a "legacy" style log, as defined in [MS-WMLOG].
 
@@ -4156,7 +4156,7 @@ If the value of the Client-State variable is STREAMING, the client MUST first re
 
 This event occurs when the application software is a media player and it has finished rendering (that is, playing back) the [**content**](#gt_content) in the current [**playlist**](#gt_playlist) entry.
 
-If the client specified the [Speed (section 2.2.1.4.24)](#Section_2.2.1.4.24) token on the [Pragma](#Section_2.2.1.4) header in the [Play (section 2.2.2.6)](#Section_3.2.5.6) or [PlayNextEntry (section 2.2.2.7)](#Section_3.1.5.18) request for the current playlist entry, and the server specified the remote-log remote event in the [x-wms-event-subscription](#Section_2.2.1.1.10) directive (as specified in section 2.2.1.1.10) on the [Cache-Control](#Section_2.2.1.1) header, the client MUST establish a new TCP connection to the server using the IP address and port number obtained by parsing the URL used for the [Describe request](#Section_3.1.4.2.1). The client MUST then send a [SendEvent request (section 2.2.2.9)](#Section_2.2.2.9) to the server on the new TCP connection.
+If the client specified the [Speed (section 2.2.1.4.24)](#Section_2.2.1.4.24) token on the [Pragma](#Section_2.2.1.4) header in the [Play (section 2.2.2.6)](#Section_2.2.2.6) or [PlayNextEntry (section 2.2.2.7)](#Section_2.2.2.7) request for the current playlist entry, and the server specified the remote-log remote event in the [x-wms-event-subscription](#Section_2.2.1.1.10) directive (as specified in section 2.2.1.1.10) on the [Cache-Control](#Section_2.2.1.1) header, the client MUST establish a new TCP connection to the server using the IP address and port number obtained by parsing the URL used for the [Describe request](#Section_3.2.5.4). The client MUST then send a [SendEvent request (section 2.2.2.9)](#Section_2.2.2.9) to the server on the new TCP connection.
 
 After having sent the request, the client MUST process the rules in section [3.1.5.2](#Section_3.1.5.2).
 
@@ -4174,9 +4174,9 @@ The server MUST add the name of the request type to the tail of the list in the 
 
 The request sent by the client MUST NOT specify any of the headers and tokens defined in section 2.2.2 that are defined only for use in responses.
 
-If the Server-Version variable is uninitialized, then the request sent by the client MUST NOT specify any of the headers and tokens defined in section [2.2.2.2](#Section_2.2.1.2.4) that are defined only for use in requests sent to servers with a version number higher than the version number indicated by the Server-Version variable.
+If the Server-Version variable is uninitialized, then the request sent by the client MUST NOT specify any of the headers and tokens defined in section [2.2.2.2](#Section_2.2.2.2) that are defined only for use in requests sent to servers with a version number higher than the version number indicated by the Server-Version variable.
 
-The client MUST specify the [User-Agent (section 2.2.1.8)](#Section_2.2.1.8) header in the request. The client-token parameter on the User-Agent header MUST be set to the value of the Client-Token variable in the abstract data model. If the value of Client-Token is "NSServer" and the client is acting as a proxy server, then the User-Agent header MUST include the"; via WMCacheProxy" syntax element. Otherwise, that syntax element MUST NOT be included. The client major and minor version number of the client-token MUST be set to the value of the [Client-Token-Version (section 3.1.1)](#Section_3.2.1).
+The client MUST specify the [User-Agent (section 2.2.1.8)](#Section_2.2.1.8) header in the request. The client-token parameter on the User-Agent header MUST be set to the value of the Client-Token variable in the abstract data model. If the value of Client-Token is "NSServer" and the client is acting as a proxy server, then the User-Agent header MUST include the"; via WMCacheProxy" syntax element. Otherwise, that syntax element MUST NOT be included. The client major and minor version number of the client-token MUST be set to the value of the [Client-Token-Version (section 3.1.1)](#Section_3.1.1).
 
 The client SHOULD specify the [Cache-Control (section 2.2.1.1)](#Section_2.2.1.1) header in the request.
 
@@ -4219,7 +4219,7 @@ The client MUST wait for a packet or a response to be received and then process 
 
 If the **Expected-Packets** variable specifies that a [$C](#Section_2.2.3.2) packet is expected and a $C packet is received, then the packet MUST be processed according to the rules in section [3.1.5.14](#Section_3.1.5.14).
 
-If the **Expected-Packets** variable specifies that a [$D](#Section_2.2.3.3) packet is expected and a $D packet is received, then the packet MUST be processed according to the rules in section [3.1.5.12](#Section_3.1.5.12).
+If the **Expected-Packets** variable specifies that a [$D](#Section_3.2.4.1) packet is expected and a $D packet is received, then the packet MUST be processed according to the rules in section [3.1.5.12](#Section_3.1.5.12).
 
 If the **Expected-Packets** variable specifies that a [$E](#Section_2.2.3.4) packet is expected and a $E packet is received, then the packet MUST be processed according to the rules in section [3.1.5.13](#Section_3.1.5.13).
 
@@ -4233,23 +4233,23 @@ If the **Expected-Packets** variable specifies that a [$T](#Section_2.2.3.8) pac
 
 If a packet is received but the packet type is not included in the **Expected-Packets** variable, then this MUST be treated as an error.
 
-If a response is received and the element at the head of the **Expected-Reponses** variable is [Describe](#Section_3.1.4.2.1), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.5](#Section_3.1.5.5).
+If a response is received and the element at the head of the **Expected-Reponses** variable is [Describe](#Section_3.2.5.4), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.5](#Section_3.1.5.5).
 
 If a response is received and the element at the head of the **Expected-Reponses** variable is [GetContentInfo](#Section_2.2.1.2.4), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.4](#Section_3.1.5.4).
 
-If a response is received and the element at the head of the **Expected-Reponses** variable is [KeepAlive](#Section_3.2.5.8), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.16](#Section_3.1.5.16).
+If a response is received and the element at the head of the **Expected-Reponses** variable is [KeepAlive](#Section_2.2.2.3), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.16](#Section_3.1.5.16).
 
 If a response is received and the element at the head of the **Expected-Reponses** variable is [Log](#Section_2.2.2.4), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.15](#Section_3.1.5.15).
 
-If a response is received and the element at the head of the **Expected-Reponses** variable is [Pipeline](#Section_2.2.1.4.16), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.9](#Section_3.1.5.9).
+If a response is received and the element at the head of the **Expected-Reponses** variable is [Pipeline](#Section_2.2.2.3.2), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.9](#Section_3.1.5.9).
 
-If a response is received and the element at the head of the **Expected-Reponses** variable is [Play](#Section_3.2.5.6), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.11](#Section_3.1.5.11).
+If a response is received and the element at the head of the **Expected-Reponses** variable is [Play](#Section_3.1.4.3.1), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.11](#Section_3.1.5.11).
 
-If a response is received and the element at the head of the **Expected-Reponses** variable is [PlayNextEntry](#Section_3.1.5.18), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.18](#Section_3.1.5.18).
+If a response is received and the element at the head of the **Expected-Reponses** variable is [PlayNextEntry](#Section_2.2.1.4.35), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.18](#Section_3.1.5.18).
 
 If a response is received and the element at the head of the **Expected-Reponses** variable is [SelectStream](#Section_3.2.5.7), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.17](#Section_3.1.5.17).
 
-If a response is received and the element at the head of the **Expected-Reponses** variable is [SendEvent](#Section_2.2.2.9), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.20](#Section_3.1.5.20).
+If a response is received and the element at the head of the **Expected-Reponses** variable is [SendEvent](#Section_2.2.1.2.6), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.20](#Section_3.1.5.20).
 
 If a response is received and the element at the head of the **Expected-Reponses** variable is [Stop](#Section_2.2.2.10), then the element at the head of the **Expected-Reponses** variable MUST be removed and the response MUST be processed according to the rules in section [3.1.5.19](#Section_3.1.5.19).
 
@@ -4289,7 +4289,7 @@ If the [Set-Cookie (section 2.2.1.6)](#Section_2.2.1.6) header is present in t
 
 The client MUST first follow the steps specified in section [3.1.5.3](#Section_3.1.5.3).
 
-If the value of the Client-Token variable is "WMCacheProxy", and the HTTP status code in the response is equal to 400, and the server version is less than 9.0 according to the Server-Version variable, the client MUST set the value of the Client-Token variable to "NSServer" and use a [Describe request](#Section_3.1.4.2.1) instead of a [GetContentInfo request](#Section_2.2.1.2.4) to get the server's [Cache-Control](#Section_2.2.1.1) header. To resubmit the request as a Describe request, it will be necessary to establish a new TCP connection to the server. The client MUST then continue by following the steps specified in section [3.1.4.2.1](#Section_3.1.4.2.1).
+If the value of the Client-Token variable is "WMCacheProxy", and the HTTP status code in the response is equal to 400, and the server version is less than 9.0 according to the Server-Version variable, the client MUST set the value of the Client-Token variable to "NSServer" and use a [Describe request](#Section_3.2.5.4) instead of a [GetContentInfo request](#Section_2.2.1.2.4) to get the server's [Cache-Control](#Section_2.2.1.1) header. To resubmit the request as a Describe request, it will be necessary to establish a new TCP connection to the server. The client MUST then continue by following the steps specified in section [3.1.4.2.1](#Section_3.1.4.2.1).
 
 Otherwise, if the HTTP status code indicates that the request succeeded, the server SHOULD report the information in the Cache-Control header to the higher layer.
 
@@ -4298,7 +4298,7 @@ Otherwise, if the HTTP status code indicates that the request succeeded, the ser
 
 The client MUST first follow the steps that are specified in section [3.1.5.3](#Section_3.1.5.3).
 
-If the value of the Client-Token variable is "WMCacheProxy", the HTTP status code in the response is equal to 400, and the server version is less than 9.0 (according to the Server-Version variable), the client MUST set the value of the Client-Token variable to "NSServer" and resubmit the [Describe request](#Section_3.1.4.2.1). To resubmit the Describe request, the client MUST establish a new TCP connection to the server. The client MUST then continue by following the steps specified in section [3.1.4.2.1](#Section_3.1.4.2.1).
+If the value of the Client-Token variable is "WMCacheProxy", the HTTP status code in the response is equal to 400, and the server version is less than 9.0 (according to the Server-Version variable), the client MUST set the value of the Client-Token variable to "NSServer" and resubmit the [Describe request](#Section_3.2.5.4). To resubmit the Describe request, the client MUST establish a new TCP connection to the server. The client MUST then continue by following the steps specified in section [3.1.4.2.1](#Section_3.1.4.2.1).
 
 If the response contains an HTTP status code in the range of 300–305, the server is requesting the client to connect to another server. The client MUST connect to the server that is specified in the response by following the rules in section 10.3 of [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). This is a brief summary of those rules: If the status code is 305, the URL on the Location header ([RFC2616] section 14.30) is for a proxy server and the URL that is used in the Describe request MUST remain unchanged. For status codes 300–304, the URL on the Location header MUST replace the URL used in the Describe request. The client MUST close the current TCP connection and establish a new TCP connection to the server, or proxy server, as appropriate, depending on the status code. The client MUST then continue by following the steps defined in Sending the Describe Request (section 3.1.4.2.1)
 
@@ -4314,7 +4314,7 @@ Otherwise, if the HTTP status code indicates that the request succeeded, the cli
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 Receiving a $P (Packet-Pair) Packet
 
-The client MUST verify that the [$P packet](#Section_2.2.3.7) adheres to the syntax specified in section 2.2.3.7.
+The client MUST verify that the [$P packet](#Section_47975f8283a74866aad883c26dd513af) adheres to the syntax specified in section 2.2.3.7.
 
 The client MUST verify that the value of the **$P-Packets-Expected** variable in the Abstract Data Model is greater than 0. If the value is 0, this MUST be treated as an error.
 
@@ -4356,20 +4356,20 @@ The client SHOULD make the ASF header available to a higher layer.
 
 If the value of the Client-State variable is INIT or IDLE, the client MUST wait until a higher-layer triggered event occurs.
 
-If the value of the Client-State variable is STREAMING, the client MUST set the value of the **Expected-Packets** variable to [$D](#Section_2.2.3.3) and [$E](#Section_2.2.3.4) and then process the rules in section 3.1.5.2.
+If the value of the Client-State variable is STREAMING, the client MUST set the value of the **Expected-Packets** variable to [$D](#Section_3.2.4.1) and [$E](#Section_2.2.3.4) and then process the rules in section 3.1.5.2.
 
 <a id="Section_3.1.5.9"></a>
 #### 3.1.5.9 Receiving a Pipeline Response
 
 The client MUST first follow the steps specified in section [3.1.5.3](#Section_3.1.5.3).
 
-If the element at the head of the list in the **Expected-Responses** variable is equal to [pipeline](#Section_2.2.1.4.16), the client MUST set the value of the **Expected-Packets** variable to [$T](#Section_2.2.3.8) and then process the rules in section [3.1.5.2](#Section_3.1.5.2).
+If the element at the head of the list in the **Expected-Responses** variable is equal to [pipeline](#Section_2.2.2.3.2), the client MUST set the value of the **Expected-Packets** variable to [$T](#Section_2.2.3.8) and then process the rules in section [3.1.5.2](#Section_3.1.5.2).
 
 If the Expected-Responses variable is an empty list or if the element at the head of the list in the **Expected-Responses** variable is not equal to pipeline, and if the value of the [pipeline-result (section 2.2.1.4.17)](#Section_2.2.1.4.17) token on the [Pragma](#Section_2.2.1.4) header is 1, then the client SHOULD set the KeepAlive-Mode variable to specify that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used.
 
 Otherwise, the KeepAlive-Mode variable MUST be set to specify that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used.
 
-Next, the value of the Pipeline-Test-Allowed variable MUST be set to 0, and the client MUST proceed with sending the [Play request](#Section_3.2.5.6) as specified in section [3.1.4.3.1](#Section_3.1.4.3.1).
+Next, the value of the Pipeline-Test-Allowed variable MUST be set to 0, and the client MUST proceed with sending the [Play request](#Section_3.1.4.3.1) as specified in section [3.1.4.3.1](#Section_3.1.4.3.1).
 
 <a id="Section_3.1.5.10"></a>
 #### 3.1.5.10 Receiving a $T (Test Data Notification) Packet
@@ -4389,7 +4389,7 @@ The value of the Client-State variable MUST be set to STREAMING.
 
 The client MUST communicate the **X-StartupProfile** header (section[2.2.1.12](#Section_2.2.1.12)), if present, to the higher layer.
 
-If the response includes a [Pragma](#Section_2.2.1.4) header with an [xResetStrm (section 2.2.1.4.37)](#Section_2.2.1.4.37) token, the client SHOULD treat it the same way it would treat receiving a [$C (Stream Change Notification) packet](#Section_2.2.3.2) with a zero-value **Reason** field, as specified in section [3.1.5.14](#Section_3.1.5.14). However, unlike the case of a [**playlist**](#gt_playlist) entry change, the client MUST NOT send a [PlayNextEntry request](#Section_3.1.5.18) in this situation.
+If the response includes a [Pragma](#Section_2.2.1.4) header with an [xResetStrm (section 2.2.1.4.37)](#Section_2.2.1.4.37) token, the client SHOULD treat it the same way it would treat receiving a [$C (Stream Change Notification) packet](#Section_2.2.3.2) with a zero-value **Reason** field, as specified in section [3.1.5.14](#Section_3.1.5.14). However, unlike the case of a [**playlist**](#gt_playlist) entry change, the client MUST NOT send a [PlayNextEntry request](#Section_2.2.1.4.35) in this situation.
 
 If the response includes a Pragma header with an expect-new-header [2.2.1.4.7](#Section_2.2.1.4.7) token, and the value of this token is set to 0 or omitted, then the client SHOULD assume that the packet that immediately follows the [$H (Header) packet](#Section_4.13.1) in the packet that the server will transmit in response to a Play request will not be a $C (Stream Change Notification) packet. If the value of this token is set to 1, then the server is intending to transmit a $C (Stream Change Notification) packet in response to the Play request. The client MUST therefore assume that the packet that immediately follows the $H (Header) packet that the server will transmit in response to a Play request will be a $C (Stream Change Notification) packet.
 
@@ -4404,7 +4404,7 @@ The client MUST then process the rules in section [3.1.5.2](#Section_3.1.5.2).
 <a id="Section_3.1.5.12"></a>
 #### 3.1.5.12 Receiving a $D (Data) Packet
 
-The client MUST verify that the [$D packet](#Section_2.2.3.3) adheres to the syntax specified in section 2.2.3.3.
+The client MUST verify that the [$D packet](#Section_3.2.4.1) adheres to the syntax specified in section 2.2.3.3.
 
 If the Keepalive timer is running, it MUST be stopped.
 
@@ -4516,9 +4516,9 @@ Next, the client MUST process the rules in section [3.1.5.2](#Section_3.1.5.2).
 
 When the KeepAlive timer expires, the following actions MUST take place.
 
-If the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, or if the TCP connection used for the most recent [Play (section 2.2.2.6)](#Section_3.2.5.6) or [PlayNextEntry request (section 2.2.2.7)](#Section_3.1.5.18) is no longer open, the client MUST establish a new TCP connection to the server and to the same TCP port used for the Play request.
+If the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, or if the TCP connection used for the most recent [Play (section 2.2.2.6)](#Section_2.2.2.6) or [PlayNextEntry request (section 2.2.2.7)](#Section_2.2.2.7) is no longer open, the client MUST establish a new TCP connection to the server and to the same TCP port used for the Play request.
 
-The client MUST send a [KeepAlive request (section 2.2.2.3)](#Section_3.2.5.8). If the value of the KeepAlive-Mode variable specifies that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, and if the TCP connection used for the most recent Play or PlayNextEntry request is still open, then the KeepAlive request MUST be sent using an HTTP OPTIONS request (as specified in section [2.2.2.3.2](#Section_2.2.2.3.2)) on the same TCP connection used for the most recent Play or PlayNextEntry request.
+The client MUST send a [KeepAlive request (section 2.2.2.3)](#Section_2.2.2.3). If the value of the KeepAlive-Mode variable specifies that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, and if the TCP connection used for the most recent Play or PlayNextEntry request is still open, then the KeepAlive request MUST be sent using an HTTP OPTIONS request (as specified in section [2.2.2.3.2](#Section_2.2.2.3.2)) on the same TCP connection used for the most recent Play or PlayNextEntry request.
 
 If the value of the KeepAlive-Mode variable specifies that the pipelined mode of the protocol is used and if the TCP connection used for the most recent Play or PlayNextEntry request is no longer open, then the KeepAlive request MUST be sent using an HTTP POST request (as specified in section [2.2.2.3.1](#Section_2.2.2.3.1)) on the TCP connection that was newly established according to the preceding rules.
 
@@ -4549,7 +4549,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Client-Version:** This variable stores the client product name and the major and minor version number that the client specified on the most recently received [User-Agent](#Section_2.2.1.8) header.
 
-**Data-Connection:** This variable stores information that identifies the TCP connection that the server sends [$D packets](#Section_2.2.3.3) to. The variable is comprised by the following information: source IP address, source TCP port number, destination IP address, and destination TCP port number. The source IP address and source TCP port number represent the IP address and TCP port number on which the server received the TCP connection. The destination IP address and destination TCP port number represent the IP address and port number on the client to which the server is sending TCP packets for this connection. The fields can assume any value allowed by the TCP/IP protocol implementation. A destination TCP port number value of 0 is reserved to indicate that the **Data-Connection** variable does not have a valid value. By default, the destination TCP port number value is 0.
+**Data-Connection:** This variable stores information that identifies the TCP connection that the server sends [$D packets](#Section_3.2.4.1) to. The variable is comprised by the following information: source IP address, source TCP port number, destination IP address, and destination TCP port number. The source IP address and source TCP port number represent the IP address and TCP port number on which the server received the TCP connection. The destination IP address and destination TCP port number represent the IP address and port number on the client to which the server is sending TCP packets for this connection. The fields can assume any value allowed by the TCP/IP protocol implementation. A destination TCP port number value of 0 is reserved to indicate that the **Data-Connection** variable does not have a valid value. By default, the destination TCP port number value is 0.
 
 **Higher-Layer-ID:** This variable is a numerical identifier that is assigned by the higher layer. In case the higher layer is maintaining multiple instances of the server role, the higher layer can use this variable to determine which server role instance is invoking it, as long as the higher layer makes sure to assign a distinct **Higher-Layer-ID** value to each instance of the server role. The initial value is undefined.
 
@@ -4578,12 +4578,12 @@ This section describes a conceptual model of possible data organization that an 
 
 **Idle-Timeout:** This timer is used for cleaning up an unused [**session**](#gt_session) state. If no requests are received from the client, the Idle-Timeout timer will expire and the server is then free to delete the session state. The minimum allowed value for the time-out period is 10 seconds. This timer does not have a default value. When the timer is started, the timeout interval SHOULD be set to 60000 milliseconds.
 
-**Pipeline-Test:** This timer is used as part of the processing of [pipeline requests](#Section_3.2.5.5). The minimum allowed value for the time-out period is 100 milliseconds. This timer does not have a default value.
+**Pipeline-Test:** This timer is used as part of the processing of [pipeline requests](#Section_2.2.2.5). The minimum allowed value for the time-out period is 100 milliseconds. This timer does not have a default value.
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-Initialization of the protocol occurs when a [Describe (section 2.2.2.1)](#Section_3.1.4.2.1) or [Play (section 2.2.2.6)](#Section_3.2.5.6) request is received and the request did not specify a [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on the [Pragma](#Section_2.2.1.4) header or the value of the token did not match the value of the Client-ID variable.
+Initialization of the protocol occurs when a [Describe (section 2.2.2.1)](#Section_2.2.2.1) or [Play (section 2.2.2.6)](#Section_2.2.2.6) request is received and the request did not specify a [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on the [Pragma](#Section_2.2.1.4) header or the value of the token did not match the value of the Client-ID variable.
 
 The variables defined by the abstract data model MUST initially assume their default values. For variables that do not have a default defined, the following rules MUST be followed:
 
@@ -4600,7 +4600,7 @@ The variables defined by the abstract data model MUST initially assume their def
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Notification That the Last $D Packet Has Been Sent
 
-When the higher layer notifies the server that the last [$D packet](#Section_2.2.3.3) has been sent, the server MUST send a [$E (End-of-Stream Notification) packet](#Section_2.2.3.4), except if the higher layer also indicates that a new [**ASF**](#gt_advanced-systems-format-asf) header is available, as specified in section [3.2.4.2](#Section_3.2.4.2).
+When the higher layer notifies the server that the last [$D packet](#Section_3.2.4.1) has been sent, the server MUST send a [$E (End-of-Stream Notification) packet](#Section_2.2.3.4), except if the higher layer also indicates that a new [**ASF**](#gt_advanced-systems-format-asf) header is available, as specified in section [3.2.4.2](#Section_3.2.4.2).
 
 If the higher layer indicates that a new ASF header is available, the server MAY send a $E packet prior to following the rules in section 3.2.4.2.
 
@@ -4619,7 +4619,7 @@ The Idle-Timeout timer MUST be started.
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Notification That a New ASF Header Is Available
 
-As a prerequisite for this event, the higher layer MUST already have notified the server that it has sent the last [$D packet](#Section_2.2.3.3) for the previous [**playlist**](#gt_playlist) entry, as specified in section [3.2.4.1](#Section_3.2.4.1).
+As a prerequisite for this event, the higher layer MUST already have notified the server that it has sent the last [$D packet](#Section_3.2.4.1) for the previous [**playlist**](#gt_playlist) entry, as specified in section [3.2.4.1](#Section_3.2.4.1).
 
 If the most recently received [SelectStream request](#Section_3.2.5.7), if any, specified the [client-lag](#Section_2.2.1.4.6) token on a [Pragma](#Section_2.2.1.4) header, the server SHOULD delay sending the [$C (Stream Change Notification) packet](#Section_2.2.3.2) by the smallest time amount specified by the client-lag token and 15000 milliseconds.
 
@@ -4637,11 +4637,11 @@ If the server identifies itself as "Cougar" with a version number greater than o
 
 For more information about $M packets, see section 2.2.3.6.
 
-If the $M packet is sent by the server, it MUST be sent immediately before the $H packet; that is, the server MUST NOT transmit packets of any other type between the $M packets and [$H packets (section 2.2.3.5)](#Section_4.13.1).
+If the $M packet is sent by the server, it MUST be sent immediately before the $H packet; that is, the server MUST NOT transmit packets of any other type between the $M packets and [$H packets (section 2.2.3.5)](#Section_2.2.3.5).
 
 The server MUST then send the [**ASF**](#gt_advanced-systems-format-asf) header of the new playlist entry, encoded as one or more $H (Header) packets.
 
-If the value of the Client-features variable specifies that the client supports the [com.microsoft.wm.predstrm](#Section_2.2.1.7.2) (see section 2.2.1.7.2) feature, and the server has also specified that it supports this feature, and the server has received a [Play request](#Section_3.2.5.6) or a SelectStream request for the previous playlist entry, the server MUST select suitable [**streams**](#gt_stream) from the ASF header of the new playlist entry, and start [**streaming**](#gt_streaming) $D packets to the client. In this case, the Session-State variable MUST be set to STREAMING and the Idle-Timeout timer MUST be stopped.
+If the value of the Client-features variable specifies that the client supports the [com.microsoft.wm.predstrm](#Section_2.2.1.7.2) (see section 2.2.1.7.2) feature, and the server has also specified that it supports this feature, and the server has received a [Play request](#Section_3.1.4.3.1) or a SelectStream request for the previous playlist entry, the server MUST select suitable [**streams**](#gt_stream) from the ASF header of the new playlist entry, and start [**streaming**](#gt_streaming) $D packets to the client. In this case, the Session-State variable MUST be set to STREAMING and the Idle-Timeout timer MUST be stopped.
 
 Otherwise, the Session-State variable MUST be set to WAITING, and if the Idle-Timeout timer is not running, it MUST be started.
 
@@ -4675,9 +4675,9 @@ If the server sends an authentication challenge to the client, it MUST be specif
 
 After having sent a response with status code 401 or 407, if the authentication scheme used in the authentication challenge is NTLM (as specified in [MS-NTHT](../MS-NTHT/MS-NTHT.md)), then the server SHOULD NOT close the TCP connection to the client. If the server is not closing the TCP connection to the client, and if HTTP 1.0 is used in the response, then the response MUST include the "Connection: Keep-Alive" header. For details about the usage of the Connection header in HTTP 1.0, see [[RFC2068]](https://go.microsoft.com/fwlink/?LinkId=90310) section 19.7.1.
 
-If the server is not sending a response with an error status code, and if the request has a [client-id](#Section_2.2.1.4.5) token on a [Pragma](#Section_2.2.1.4) header, the server MUST load the state that has a Client-ID variable with the same value as the value of the client-id token. If the matching state cannot be found, and the request type is not [Describe](#Section_3.1.4.2.1), KeepAlive using the HTTP OPTIONS method or [Play](#Section_3.2.5.6), then this MUST be treated as an error. The server MUST respond with a valid HTTP error status code, as specified in [RFC2616] section 10. For details about what to do in the case of Describe and Play requests, see sections [3.2.5.4](#Section_3.2.5.4) and [3.2.5.6](#Section_3.2.5.6), respectively.
+If the server is not sending a response with an error status code, and if the request has a [client-id](#Section_2.2.1.4.5) token on a [Pragma](#Section_2.2.1.4) header, the server MUST load the state that has a Client-ID variable with the same value as the value of the client-id token. If the matching state cannot be found, and the request type is not [Describe](#Section_3.2.5.4), KeepAlive using the HTTP OPTIONS method or [Play](#Section_3.1.4.3.1), then this MUST be treated as an error. The server MUST respond with a valid HTTP error status code, as specified in [RFC2616] section 10. For details about what to do in the case of Describe and Play requests, see sections [3.2.5.4](#Section_3.2.5.4) and [3.2.5.6](#Section_3.2.5.6), respectively.
 
-If the request does not have a client-id token on a Pragma header, and the request type is not [GetContentInfo](#Section_2.2.1.2.4), Describe, KeepAlive using the HTTP OPTIONS method, Play, or [SendEvent](#Section_2.2.2.9), this MUST be treated as an error. The server MUST respond with a valid HTTP error status code, as specified in [RFC2616] section 10.
+If the request does not have a client-id token on a Pragma header, and the request type is not [GetContentInfo](#Section_2.2.1.2.4), Describe, KeepAlive using the HTTP OPTIONS method, Play, or [SendEvent](#Section_2.2.1.2.6), this MUST be treated as an error. The server MUST respond with a valid HTTP error status code, as specified in [RFC2616] section 10.
 
 The client version information (client-token and major and minor version number) on the User-Agent header MUST be saved in the Client-Version variable in the abstract data model.
 
@@ -4725,7 +4725,7 @@ The GetContentInfo response MUST follow the rules in section [3.2.5.2](#Section_
 
 The message body of the GetContentInfo request MUST be ignored by the server.
 
-If the value of the Session-State variable is STREAMING and the value of the **Request-Connection variable** is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_2.2.3.3) and MUST add the GetContentInfo to the tail of the list in the **Pending-Responses** variable.
+If the value of the Session-State variable is STREAMING and the value of the **Request-Connection variable** is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_3.2.4.1) and MUST add the GetContentInfo to the tail of the list in the **Pending-Responses** variable.
 
 If the server does not add the GetContentInfo response to the **Pending-Responses** variable, then the server MUST send the GetContentInfo response.
 
@@ -4752,7 +4752,7 @@ If the higher layer indicates that the client shall be redirected to another ser
 - The **Command Name** field in the Command Entry MUST be set to the URL of the server that the higher layer has indicated that the client shall be redirected to.
 If the higher layer indicates that the client shall be redirected to another server, and if the URL to the other server is more than 256 characters long when represented as a Unicode string, and if the client version is less than 7.0, as indicated by the value of the Client-Version variable, then the server SHOULD respond with HTTP status code 500 or any other valid HTTP error status code, as specified in [RFC2616] section 10.
 
-If the server is not sending a response with an error status code (for example, 302 or 305), and if the request does not specify a [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on a [Pragma](#Section_2.2.1.4) header, the server MUST create a new state by performing the initialization procedure specified in section [3.2.3](#Section_2.2.1.5).
+If the server is not sending a response with an error status code (for example, 302 or 305), and if the request does not specify a [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on a [Pragma](#Section_2.2.1.4) header, the server MUST create a new state by performing the initialization procedure specified in section [3.2.3](#Section_3.2.3).
 
 If the request specifies a client-id token on a Pragma header, but the value of that token does not match the value of the Client-ID variable in any instance of the server's state, the server SHOULD create new state by performing the initialization procedure specified in section 3.2.3. The response MUST specify the [xResetStrm (section 2.2.1.4.37)](#Section_2.2.1.4.37) token on a Pragma header.
 
@@ -4760,9 +4760,9 @@ If the value of the Session-State variable in the abstract data model is not INI
 
 If the request includes a [pipeline-experiment (section 2.2.1.4.15)](#Section_2.2.1.4.15) token on the Pragma header, with the value set to 1, and the server supports the [**pipelined mode**](#gt_pipelined-mode) of the protocol, the server SHOULD specify the pipeline-experiment token on the Pragma header in the response, and the value of the token SHOULD be 1. Otherwise, the server SHOULD NOT specify the pipeline-experiment token on the Pragma header.
 
-If the request includes a [packet-pair-experiment (section 2.2.1.4.14)](#Section_2.2.1.4.14) token on the Pragma header, with the value set to 1, and the server supports sending [$P (Packet Pair)](#Section_2.2.3.7) packets, then the server SHOULD specify the packet-pair-experiment token on the Pragma header in the response, and the value of the token SHOULD be 1. Otherwise, the server SHOULD NOT specify the packet-pair-experiment token on the Pragma header.
+If the request includes a [packet-pair-experiment (section 2.2.1.4.14)](#Section_2.2.1.4.14) token on the Pragma header, with the value set to 1, and the server supports sending [$P (Packet Pair)](#Section_47975f8283a74866aad883c26dd513af) packets, then the server SHOULD specify the packet-pair-experiment token on the Pragma header in the response, and the value of the token SHOULD be 1. Otherwise, the server SHOULD NOT specify the packet-pair-experiment token on the Pragma header.
 
-The Describe response MUST follow the rules as specified in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.1](#Section_3.1.4.2.1).
+The Describe response MUST follow the rules as specified in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.1](#Section_2.2.2.1).
 
 If the higher-layer has provided the server with the earliest version number of Windows Media Player supported by the server, then the server MAY specify the [version-info (section 2.2.1.4.31)](#Section_2.2.1.4.31) token and the [version-url (section 2.2.1.4.32)](#Section_2.2.1.4.32) token on a Pragma header in the response, but SHOULD NOT specify these tokens when the version number specified by the Client-Version variable is greater than or equal to 7.0.
 
@@ -4782,7 +4782,7 @@ If the client implementation supports the pipelined mode of the protocol, the De
 
 If the version number specified by the Client-Version variable is greater than or equal to 9.0, and if the server is specifying the value of the server-token parameter on the [Server](#Section_2.2.1.5) header as "Cougar", the server MUST send one or more [$M (Metadata) packets (section 2.2.3.6)](#Section_2.2.3.6).
 
-The message body of the Describe response MUST end with the [**ASF**](#gt_advanced-systems-format-asf) header of the current [**playlist**](#gt_playlist) entry, encoded as one or more [$H (Header) packets (section 2.2.3.5)](#Section_4.13.1).
+The message body of the Describe response MUST end with the [**ASF**](#gt_advanced-systems-format-asf) header of the current [**playlist**](#gt_playlist) entry, encoded as one or more [$H (Header) packets (section 2.2.3.5)](#Section_2.2.3.5).
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Receiving a Pipeline Request
@@ -4791,7 +4791,7 @@ The server MUST first follow the steps specified in section [3.2.5.1](#Section_3
 
 If the value of the **Pipeline-Test-Started** variable in the Abstract Data Model is 0, the Pipeline-Test timer MUST be started. The recommended value for the time-out of this timer is 1 second.
 
-The Pipeline response MUST follow the rules as specified in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.5](#Section_3.2.5.5).
+The Pipeline response MUST follow the rules as specified in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.5](#Section_2.2.2.5).
 
 If the value of the **Pipeline-Test-Started** variable is 0, the response MUST use Chunked Transfer Coding and the message body of the response MUST contain a [$T (Test Data Notification) packet (section 2.2.3.8)](#Section_2.2.3.8). The response MUST NOT specify a zero-length chunk.
 
@@ -4814,9 +4814,9 @@ The server MUST first follow the steps specified in section [3.2.5.1](#Section_3
 
 The server MUST check with the higher layer that the URL that the client specified in the request is valid. If it is not, this is an error and the server MUST respond with a valid HTTP error status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 10.
 
-If the request specifies a [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on a [Pragma](#Section_2.2.1.4) header, and the value matches the value of a Client-ID variable in some instance of the server's state, and the value of the corresponding Session-State variable is STREAMING, the server SHOULD treat this as an error and fail the request. The reason is that a [Play request](#Section_3.2.5.6) for a [**session**](#gt_session) that is already [**streaming**](#gt_streaming) could be an attempt to hijack a session.
+If the request specifies a [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on a [Pragma](#Section_2.2.1.4) header, and the value matches the value of a Client-ID variable in some instance of the server's state, and the value of the corresponding Session-State variable is STREAMING, the server SHOULD treat this as an error and fail the request. The reason is that a [Play request](#Section_3.1.4.3.1) for a [**session**](#gt_session) that is already [**streaming**](#gt_streaming) could be an attempt to hijack a session.
 
-If the request does not specify a client-id token on a Pragma header, the server MUST create new state by performing the initialization procedure defined in section [3.2.3](#Section_2.2.1.5).
+If the request does not specify a client-id token on a Pragma header, the server MUST create new state by performing the initialization procedure defined in section [3.2.3](#Section_3.2.3).
 
 If the request specifies a client-id token on a Pragma header, but the value of that token does not match the value of the Client-ID variable in any instance of the server's state, the server MUST either create new state by performing the initialization procedure specified in section 3.2.3 or fail the request. Also, in this case, if the request is successful, the response MUST specify the [xResetStrm (section 2.2.1.4.37)](#Section_2.2.1.4.37) token on a Pragma header.
 
@@ -4828,7 +4828,7 @@ If the request does not contain a stream-switch-entry token on a Pragma header, 
 
 Otherwise, if the request does not contain a stream-switch-entry token on a Pragma header, the server MUST assume that none of the streams in the content are selected.
 
-If the request includes the [playlist-seek-id](#Section_2.2.1.4.8.4), then the server SHOULD communicate the playlist-seek-id header submitted by the client to the higher layer.
+If the request includes the [playlist-seek-id](#Section_2.2.1.4.19), then the server SHOULD communicate the playlist-seek-id header submitted by the client to the higher layer.
 
 The Play response MUST follow the rules as specified in section [3.2.5.2](#Section_3.2.5.2) and 2.2.2.6.
 
@@ -4868,7 +4868,7 @@ The server MUST set the value of the **Data-Connection** variable to the value o
 
 If the client version is greater than or equal to 9.0, as specified by the client on the User-Agent header, and the server is specifying the value of the server-token parameter on the [Server](#Section_2.2.1.5) header as "Cougar", the server MUST send one or more [$M (Metadata) packets (section 2.2.3.6)](#Section_2.2.3.6).
 
-The server MUST send the [**ASF**](#gt_advanced-systems-format-asf) header of the current [**playlist**](#gt_playlist) entry, encoded as one or more [$H (Header) packets (section 2.2.3.5)](#Section_4.13.1).
+The server MUST send the [**ASF**](#gt_advanced-systems-format-asf) header of the current [**playlist**](#gt_playlist) entry, encoded as one or more [$H (Header) packets (section 2.2.3.5)](#Section_2.2.3.5).
 
 If the server specified the xResetStrm token on a Pragma header in the response, and the client version is less than 7.0, as specified by the client on the User-Agent header, and the value of the client-token parameter on the User-Agent header is "NSPlayer", and the client specified the [request-context (section 2.2.1.4.23)](#Section_2.2.1.4.23) token on the Pragma header, and the value of that token is 2, the server MUST send a [$E (End-Of-Stream Notification) packet](#Section_2.2.3.4) with the **Reason** field set to 1, followed by a [$C (Stream Change Notification) packet](#Section_2.2.3.2) with the **Reason** field set to 0, followed by the ASF header of the current playlist entry, encoded as one or more $H packets.
 
@@ -4887,7 +4887,7 @@ The server MUST first follow the steps specified in section [3.2.5.1](#Section_3
 
 The server MUST process the [**stream**](#gt_stream) selection information specified on the [stream-switch-entry (section 2.2.1.4.27)](#Section_2.2.1.4.27) token on the [Pragma](#Section_2.2.1.4) header, if any. Any new streams that are transmitted as a result of the stream-switch-entry token MUST be transmitted beginning with an [**ASF**](#gt_advanced-systems-format-asf) key-frame payload. Any streams that are replaced by different streams MUST continue to be transmitted until the first ASF key-frame payload of the new stream is transmitted. How to determine if an ASF payload contains a key-frame is as specified in [[ASF]](https://go.microsoft.com/fwlink/?LinkId=89814) section 5.
 
-If the value of the Session-State variable is WAITING, and the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, then the State variable MUST be set to STREAMING and the server MUST start sending [$D (Data) packets](#Section_2.2.3.3) on the TCP connection that is identified by the value of the **Data-Connection** variable .
+If the value of the Session-State variable is WAITING, and the value of the KeepAlive-Mode variable specifies that the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, then the State variable MUST be set to STREAMING and the server MUST start sending [$D (Data) packets](#Section_3.2.4.1) on the TCP connection that is identified by the value of the **Data-Connection** variable .
 
 The server MUST store the current local time in the SelectStream-Time variable in the [Abstract Data Model (section 3.2.1)](#Section_3.2.1).
 
@@ -4895,7 +4895,7 @@ If the value of the **Session-State** variable is STREAMING and the value of the
 
 If the **Pending-Responses** variable is not an empty list, then the server MUST send all of the responses stored in the **Pending-Responses** variable. The responses MUST be sent by removing the element at the head of the list in the **Pending-Responses** variable, sending it, and then repeating this until **Pending-Responses** is an empty list.
 
-The SelectStream response MUST follow the rules in sections [3.2.5.2](#Section_3.2.5.2) and [2.2.2.8](#Section_3.2.5.7).
+The SelectStream response MUST follow the rules in sections [3.2.5.2](#Section_3.2.5.2) and [2.2.2.8](#Section_2.2.2.8).
 
 If the value of the State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable and if the value of the KeepAlive-Mode variable specifies that the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, the SelectStream response SHOULD use Chunked Transfer Coding.
 
@@ -4906,9 +4906,9 @@ If the value of the State variable is STREAMING and the value of the **Request-C
 
 The server MUST first follow the steps specified in section [3.2.5.1](#Section_3.2.5.1).
 
-The KeepAlive response MUST follow the rules in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.3](#Section_3.2.5.8).
+The KeepAlive response MUST follow the rules in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.3](#Section_2.2.2.3).
 
-If the value of the Session-State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_2.2.3.3) and MUST send the KeepAlive response to the tail of the list in the Pending-Responses variable.
+If the value of the Session-State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_3.2.4.1) and MUST send the KeepAlive response to the tail of the list in the Pending-Responses variable.
 
 If the server does not add the KeepAlive response to the Pending-Responses variable, then the server MUST send the KeepAlive response.
 
@@ -4929,28 +4929,28 @@ If the value of the **Session-State** variable is STREAMING and the value of the
 
 If the **Pending-Responses** variable is not an empty list, then the server MUST send all of the responses stored in the **Pending-Responses** variable. The responses MUST be sent by removing the element at the head of the list in the **Pending-Responses** variable, sending it, and then repeating this until **Pending-Responses** is an empty list.
 
-The PlayNextEntry response MUST follow the rules in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.7](#Section_3.1.5.18).
+The PlayNextEntry response MUST follow the rules in section [3.2.5.2](#Section_3.2.5.2) and [2.2.2.7](#Section_2.2.2.7).
 
 The server SHOULD specify the [X-StartupProfile (section 2.2.1.12)](#Section_2.2.1.12) header in the response, when the all following conditions are met:
 
 - The value of the Session-State variable is WAITING.
 - The client has specified support for the [com.microsoft.wm.startupprofile](#Section_2.2.1.7.5) feature on the [Supported](#Section_2.2.1.7) header, as specified in section 2.2.1.7.5.
 - The client has specified the [AccelDuration (section 2.2.1.4.2)](#Section_2.2.1.4.2) token on the Pragma header, and the value of the AccelDuration token is greater than 0
-- The client has specified the [rate (section 2.2.1.4.22)](#Section_2.2.1.12.1) token on the Pragma header, and the value of the rate token is 1, or the rate token is not specified.
+- The client has specified the [rate (section 2.2.1.4.22)](#Section_2.2.1.4.22) token on the Pragma header, and the value of the rate token is 1, or the rate token is not specified.
 The server MUST NOT specify the X-StartupProfile header in the response unless the client has specified support for the com.microsoft.wm.startupprofile feature.
 
-If the value of the Session-State variable is WAITING, the State variable MUST be set to STREAMING and the server MUST start sending [$D (Data) packets](#Section_2.2.3.3).
+If the value of the Session-State variable is WAITING, the State variable MUST be set to STREAMING and the server MUST start sending [$D (Data) packets](#Section_3.2.4.1).
 
 Any new streams that are transmitted as a result of the stream-switch-entry token MUST be transmitted beginning with an ASF key-frame payload. Details about how to determine whether an ASF payload contains a key-frame are as specified in [**ASF**](#gt_advanced-systems-format-asf)
 
-If the server will send [$M (Metadata) packets (section 2.2.3.6)](#Section_2.2.3.6) and [$H (Header) packets (section 2.2.3.5)](#Section_4.13.1), the server MAY set the [Incarnation field (section 2.2.3.1.2)](#Section_2.2.3.1.2) to the value of the [Incarnation variable (section 2.2.2.6)](#Section_3.2.5.6). If the server chooses to increment the Incarnation field, it MUST do it for both $M and $H packets so that the Incarnation field for both packet types stays synchronized.
+If the server will send [$M (Metadata) packets (section 2.2.3.6)](#Section_2.2.3.6) and [$H (Header) packets (section 2.2.3.5)](#Section_2.2.3.5), the server MAY set the [Incarnation field (section 2.2.3.1.2)](#Section_2.2.3.1.2) to the value of the [Incarnation variable (section 2.2.2.6)](#Section_2.2.2.6). If the server chooses to increment the Incarnation field, it MUST do it for both $M and $H packets so that the Incarnation field for both packet types stays synchronized.
 
 <a id="Section_3.2.5.10"></a>
 #### 3.2.5.10 Receiving a Stop Request
 
 The server MUST first follow the steps defined in section [3.2.5.1](#Section_3.2.5.1).
 
-If the value of the Session-State variable in the abstract data model is STREAMING, the server MUST stop sending [$D packets](#Section_2.2.3.3) and MUST send a zero-length chunk (as specified in the HTTP 1.1 protocol [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 3.6.1) before responding to the Stop request.
+If the value of the Session-State variable in the abstract data model is STREAMING, the server MUST stop sending [$D packets](#Section_3.2.4.1) and MUST send a zero-length chunk (as specified in the HTTP 1.1 protocol [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 3.6.1) before responding to the Stop request.
 
 The Session-State variable MUST be set to IDLE.
 
@@ -4973,7 +4973,7 @@ If the value of the Client-Token variable in the abstract data model is "WMCache
 
 The Log response MUST follow the rules in sections [3.2.5.2](#Section_3.2.5.2) and [2.2.2.4](#Section_2.2.2.4).
 
-If the value of the Session-State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_2.2.3.3) and MUST add the Log response to the tail of the list in the **Pending-Responses** variable.
+If the value of the Session-State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_3.2.4.1) and MUST add the Log response to the tail of the list in the **Pending-Responses** variable.
 
 If the server does not add the Log response to the **Pending-Responses** variable, then the server MUST send the Log response.
 
@@ -4984,7 +4984,7 @@ The server MUST first follow the steps defined in section [3.2.5.1](#Section_3.2
 
 The server MUST check with the higher layer that the URL that the client specified in the request is valid. If it is not, then this is an error, and the server MUST respond with a valid HTTP error status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 10.
 
-The [SendEvent request](#Section_2.2.2.9) does not require any server state. Hence, if the [client-id](#Section_2.2.1.4.5) token on the [Pragma](#Section_2.2.1.4) header is missing, this MUST NOT be treated as an error.
+The [SendEvent request](#Section_2.2.1.2.6) does not require any server state. Hence, if the [client-id](#Section_2.2.1.4.5) token on the [Pragma](#Section_2.2.1.4) header is missing, this MUST NOT be treated as an error.
 
 The server SHOULD communicate the remote-log event (section [2.2.5](#Section_2.2.5)) submitted by the client to the higher layer.
 
@@ -4994,7 +4994,7 @@ The server MAY communicate the remote-close event (section 2.2.5) submitted by t
 
 The SendEvent response MUST follow the rules in sections [3.2.5.2](#Section_3.2.5.2) and 2.2.2.9.
 
-If the value of the Session-State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_2.2.3.3) and MUST add the SendEvent response to the tail of the list in the **Pending-Responses** variable.
+If the value of the Session-State variable is STREAMING and the value of the **Request-Connection** variable is equal to the value of the **Data-Connection** variable, the server MUST continue sending [$D packets](#Section_3.2.4.1) and MUST add the SendEvent response to the tail of the list in the **Pending-Responses** variable.
 
 If the server does not add the **SendEvent** response to the **Pending-Responses** variable, then the server MUST send the **SendEvent** response.
 
@@ -5004,7 +5004,7 @@ If the server does not add the **SendEvent** response to the **Pending-Responses
 <a id="Section_3.2.6.1"></a>
 #### 3.2.6.1 Pipeline-Test Timer Expires
 
-When the Pipeline-Test timer expires, the server MUST set the value of the Pipeline-Test-Timer-Running variable to 0 and then the server MUST send a zero-length chunk to terminate the response to the first [pipeline request (section 2.2.2.5)](#Section_3.2.5.5).
+When the Pipeline-Test timer expires, the server MUST set the value of the Pipeline-Test-Timer-Running variable to 0 and then the server MUST send a zero-length chunk to terminate the response to the first [pipeline request (section 2.2.2.5)](#Section_2.2.2.5).
 
 The Pipeline-Test timer MUST remain in a stopped state.
 
@@ -5038,10 +5038,10 @@ Understanding the server states diagram:
 - All requests illustrated in the diagram, with the exception of Change Notification, are sent by the client to the server in the context of an HTTP request message using either the GET or POST methods. All server responses are in the context of an HTTP response message.
 - Requests that loop back on a given state indicate that the request is sent by the client to the server on a separate TCP connection. These requests do not interrupt other requests or [**sessions**](#gt_session) and can be sent multiple times without changing the server state.
 - The presence of a caching proxy server introduces an additional state, indicated by the dotted box in the preceding server states diagram. This state is not applicable during direct server and client interaction. For more information, see section [4.12](#Section_4.12).
-- A TCP connection is initiated with a server when a client issues its first [Describe request](#Section_3.1.4.2.1) containing a Request-URI ([[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 5.1.2) corresponding to the virtual publishing point for [**content**](#gt_content) on the server (the content can be stored or live.) This first Describe request initiates the server Idle state.
+- A TCP connection is initiated with a server when a client issues its first [Describe request](#Section_3.2.5.4) containing a Request-URI ([[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 5.1.2) corresponding to the virtual publishing point for [**content**](#gt_content) on the server (the content can be stored or live.) This first Describe request initiates the server Idle state.
 - In response to the initial Describe request, a [client-id](#Section_2.2.1.4.5) token value is created by the server and is used by the client throughout that individual [**streaming**](#gt_streaming) session. However, the server can send a new client-id that has to subsequently be used by the client.
-- TCP Disconnect occurs when the connection used for the [Play request](#Section_3.2.5.6) and server response is closed. The server can close the TCP connection after sending the response or because of an error or time-out that occurred on the server. Clients can also close the TCP connection in stop and resume scenarios. For more information, see section [4.7](#Section_2.2.2.3.1). A TCP Disconnect causes the server to change from its current state to the Idle state.
-- Change Notification, which contains the [$C (Stream Change Notification) packet](#Section_2.2.3.2), is sent by the server on the same TCP connection as the Play request. The Change Notification causes the server transition from streaming state to Waiting for [SelectStream](#Section_3.2.5.7) state. A client usually sends Describe, [Log](#Section_2.2.2.4), SelectStream, and [KeepAlive](#Section_3.2.5.8) requests on separate connections. A TCP Disconnect on one of these separate connections does not cause a state transition. A transition from the Idle state to Final state occurs when the session state is deleted as described in section [3.2](#Section_1.3). For example, see section [3.2.6.2](#Section_3.2.6.2).
+- TCP Disconnect occurs when the connection used for the [Play request](#Section_3.1.4.3.1) and server response is closed. The server can close the TCP connection after sending the response or because of an error or time-out that occurred on the server. Clients can also close the TCP connection in stop and resume scenarios. For more information, see section [4.7](#Section_4.7). A TCP Disconnect causes the server to change from its current state to the Idle state.
+- Change Notification, which contains the [$C (Stream Change Notification) packet](#Section_2.2.3.2), is sent by the server on the same TCP connection as the Play request. The Change Notification causes the server transition from streaming state to Waiting for [SelectStream](#Section_3.2.5.7) state. A client usually sends Describe, [Log](#Section_2.2.2.4), SelectStream, and [KeepAlive](#Section_2.2.2.3) requests on separate connections. A TCP Disconnect on one of these separate connections does not cause a state transition. A transition from the Idle state to Final state occurs when the session state is deleted as described in section [3.2](#Section_3.2). For example, see section [3.2.6.2](#Section_3.2.6.2).
 - The server remains in Waiting for SelectStream state until a SelectStream request is received, or until the TCP connection is closed. A SelectStream request causes a transition back to Streaming state. If the TCP connection is closed, it causes a transition to the Idle state.
 - By default when the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol is used, TCP connections are not reused. Therefore, the connection used for the Describe request is closed by the server when the server sends its response. However, the client can keep this connection open by including a Connection: Keep-Alive header with the request. If the server can comply, it notifies the client by including a Connection: Keep-Alive header in response. In this case, the client can send subsequent requests, such as the Play request, on the same connection. The presence of the Connection: Keep-Alive header does not trigger a state transition or otherwise change the state of the protocol. The Connection: Keep-Alive header is described in Hypertext Transfer Protocol 1.1, [RFC2616].
 For more information about sequencing associated with the various server states, see section 3.2.
@@ -5057,15 +5057,15 @@ Figure 2: WMS HTTP 1.1 caching proxy server states and sequencing
 
 Understanding the server states diagram:
 
-- All requests illustrated in the diagram are sent by the client to the server in the context of an HTTP request message by using one of the following: the GET method, the POST method, or the OPTIONS method. All server responses are in the context of an HTTP response message. For more information about the request types and the associated methods, see section [2.2.2.2](#Section_2.2.1.2.4).
+- All requests illustrated in the diagram are sent by the client to the server in the context of an HTTP request message by using one of the following: the GET method, the POST method, or the OPTIONS method. All server responses are in the context of an HTTP response message. For more information about the request types and the associated methods, see section [2.2.2.2](#Section_2.2.2.2).
 - Requests that loop back on a state indicate that the request is sent by the client to the server on the same TCP connection. The response to the client is not returned until the previous request is terminated by the server.
 - The presence of a caching proxy server introduces an additional state, indicated by the dotted box in the preceding server states diagram. This state is not applicable during direct server and client interaction. For more information, see section [4.12](#Section_4.12).
-- A TCP connection is initiated with a server when a client issues its first [Describe request](#Section_3.1.4.2.1) containing a Request-URI ([[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 5.1.2) corresponding to the virtual publishing point for [**content**](#gt_content) on the server. (The content can be stored or live.) This first Describe request initiates the server Idle state.
+- A TCP connection is initiated with a server when a client issues its first [Describe request](#Section_3.2.5.4) containing a Request-URI ([[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 5.1.2) corresponding to the virtual publishing point for [**content**](#gt_content) on the server. (The content can be stored or live.) This first Describe request initiates the server Idle state.
 - In response to the initial Describe request, a [client-id](#Section_2.2.1.4.5) token value is created by the server and is used by the client throughout that individual [**streaming**](#gt_streaming) [**session**](#gt_session). However, the server can send a new client-id that is subsequently used by the client.
-- By default when the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, the TCP connection created with the initial Describe request is kept open. If the server closes the connection, it notifies the client by including a Connection: Close header with the response. For more information about Connection: Close header, see HTTP 1.1, as specified in [RFC2616]. A TCP Disconnect causes the server to change from its current state to the Idle state; however, TCP connections are not required to be disconnected for the protocol to be in the Idle state. A transition from the Idle state to Final state occurs when the session state is deleted as described in section [3.2](#Section_1.3). For example, see section [3.2.6.2](#Section_3.2.6.2).
-- The server stays in the Streaming state while it is sending [$D](#Section_2.2.3.3) and [$E](#Section_2.2.3.4) packets to the client.
-- When the server receives a higher-layer event that indicates that the new ASF header is available, as defined in section [3.2.4.2](#Section_3.2.4.2), then the server transitions from the Streaming state to the Waiting for [PlayNextEntry](#Section_3.1.5.18) state. This transition is referred to as Change Notification in the diagram. The server then remains in that state until a PlayNextEntry request or [Stop](#Section_2.2.2.10) request is received, or until the TCP connection is closed. A PlayNextEntry request causes a transition back to Streaming state, while a Stop request causes a transition to Idle state. If the TCP connection is closed, it also causes a transition to the Idle state.
-- In an auto-reconnect scenario, the server maintains the session state. The client maintains the point or offset from which to resume playback. This offset is sent in the [stream-offset](#Section_2.2.1.4.25) token on the [Pragma](#Section_2.2.1.4) header with the next [Play request](#Section_3.2.5.6). The server does not expect a new Describe request because it has already sent the [$H (Header) packet](#Section_4.13.1) for the media [**stream**](#gt_stream). Also, the server does not need to conduct the packet-pair experiment again to determine the bit rate of the new connection. The sequence is identical to a server resuming from a Pause state. For more information, see section [4.8](#Section_2.2.2.3.2).
+- By default when the [**pipelined mode**](#gt_pipelined-mode) of the protocol is used, the TCP connection created with the initial Describe request is kept open. If the server closes the connection, it notifies the client by including a Connection: Close header with the response. For more information about Connection: Close header, see HTTP 1.1, as specified in [RFC2616]. A TCP Disconnect causes the server to change from its current state to the Idle state; however, TCP connections are not required to be disconnected for the protocol to be in the Idle state. A transition from the Idle state to Final state occurs when the session state is deleted as described in section [3.2](#Section_3.2). For example, see section [3.2.6.2](#Section_3.2.6.2).
+- The server stays in the Streaming state while it is sending [$D](#Section_3.2.4.1) and [$E](#Section_2.2.3.4) packets to the client.
+- When the server receives a higher-layer event that indicates that the new ASF header is available, as defined in section [3.2.4.2](#Section_3.2.4.2), then the server transitions from the Streaming state to the Waiting for [PlayNextEntry](#Section_2.2.1.4.35) state. This transition is referred to as Change Notification in the diagram. The server then remains in that state until a PlayNextEntry request or [Stop](#Section_2.2.2.10) request is received, or until the TCP connection is closed. A PlayNextEntry request causes a transition back to Streaming state, while a Stop request causes a transition to Idle state. If the TCP connection is closed, it also causes a transition to the Idle state.
+- In an auto-reconnect scenario, the server maintains the session state. The client maintains the point or offset from which to resume playback. This offset is sent in the [stream-offset](#Section_2.2.1.4.25) token on the [Pragma](#Section_2.2.1.4) header with the next [Play request](#Section_3.1.4.3.1). The server does not expect a new Describe request because it has already sent the [$H (Header) packet](#Section_4.13.1) for the media [**stream**](#gt_stream). Also, the server does not need to conduct the packet-pair experiment again to determine the bit rate of the new connection. The sequence is identical to a server resuming from a Pause state. For more information, see section [4.8](#Section_4.8).
 For more information about sequencing associated with the various server states, see section 3.2.
 
 <a id="Section_4.3"></a>
@@ -5081,7 +5081,7 @@ This technique is not necessary for devices with known bandwidths, such as cellu
 
 The following sequence occurs between a client and server when conducting the packet-pair experiment. The sequencing applies to both the [**pipelined mode**](#gt_pipelined-mode) and [**non-pipelined modes**](#gt_non-pipelined-mode) of the protocol.
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) and includes:
+- The client sends a [Describe request](#Section_3.2.5.4) and includes:
 - The [Pragma](#Section_2.2.1.4) header field with the token packet-pair-experiment=1.
 - The [Supported](#Section_2.2.1.7) header with the token [com.microsoft.wm.srvppair](#Section_2.2.1.7.3).
 - If the server is able to conduct the packet-pair experiment, the server response includes:
@@ -5156,10 +5156,10 @@ $H......<header payload>
 
 The following sequence occurs between a client and server during [**playlist**](#gt_playlist) [**streaming**](#gt_streaming) using predictive [**stream**](#gt_stream) selection. The sequencing applies to both the [**pipelined mode**](#gt_pipelined-mode) and [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol:
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with a [$H (Header) packet](#Section_4.13.1).
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more streams.
-- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_2.2.3.3) of the first playlist element.
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more streams.
+- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_3.2.4.1) of the first playlist element.
 - After all data packets of the first playlist element have been sent to the client, the server sends an [$E (End-of-Stream Notification) packet](#Section_2.2.3.4), and the server sends a [$C (Stream Change Notification) packet](#Section_2.2.3.2).
 - The client sends a [Log request](#Section_2.2.2.4) for the first element of the playlist.
 **Note** When the non-pipelined mode of the protocol is used, the client uses a separate TCP connection to send the Log request to the server; therefore, the server can respond to the Log request while still sending stream data through the previously opened connection.
@@ -5167,7 +5167,7 @@ The following sequence occurs between a client and server during [**playlist**](
 **Note** When the pipelined mode of the protocol is used, the client sends requests to the server on the same TCP connection. The response to the client is not returned until the previous request is terminated by the server.
 
 - The server sends $H (Header) and $D (Data) packets of the next element in the playlist.
-- The client notifies the server that it is rendering the second element of the playlist by sending a [SelectStream request](#Section_3.2.5.7). The client might select other streams than those predictably selected by the server. For information about predictive stream selection, see section [4.5.2](#Section_4.5).
+- The client notifies the server that it is rendering the second element of the playlist by sending a [SelectStream request](#Section_3.2.5.7). The client might select other streams than those predictably selected by the server. For information about predictive stream selection, see section [4.5.2](#Section_4.5.2).
 **Note** When the non-pipelined mode of the protocol is used, the client uses a separate TCP connection for the SelectStream request. The server responds immediately to this request while still sending stream data through the previously opened connection.
 
 **Note** When the pipelined mode of the protocol is used, the client uses the same TCP connection; therefore, the server does not respond to the SelectStream request until the previous request is terminated by the server.
@@ -5185,10 +5185,10 @@ Figure 4: Sequencing during normal playlist streaming
 
 The client can seek and skip to a new entry within a server-side [**playlist**](#gt_playlist). For more information, see section [4.5.1](#Section_4.5.1). The following sequence occurs between a client and server during a server-side playlist switch using either the [**pipelined mode**](#gt_pipelined-mode) or the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol:
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with a [$H (Header) packet](#Section_4.13.1).
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream).
-- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_2.2.3.3) of the first playlist element.
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream).
+- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_3.2.4.1) of the first playlist element.
 - After all data packets of the current playlist element have been sent to the client, the server sends an [$E (End-of-Stream Notification) packet](#Section_2.2.3.4), with the **Reason** field set to S_FALSE (0x00000001).
 - The server sends a [$C (Stream Change Notification) packet](#Section_2.2.3.2) to the client. This signal, like the data stream, is sent as part of the response body for the last GET request sent by the client.
 - The server sends the $H (Header) and [$M (Metadata)](#Section_2.2.3.6) packets for the next playlist entry.
@@ -5198,9 +5198,9 @@ The client can seek and skip to a new entry within a server-side [**playlist**](
 **Note** When the pipelined mode of the protocol is used, the client sends this POST request over the same TCP connection that was created with a client's initial GET request. The response to the POST request is not returned until the previous GET request is terminated by the server.
 
 - The client starts rendering the stream by sending a GET request.
-**Note** When the non-pipelined mode of the protocol is used, the client sends a [SelectStream request](#Section_3.2.5.7). This request contains the stream information in the [stream-switch-entry](#Section_2.2.1.4.27) token on the [Pragma](#Section_2.2.1.4) header. The client might select other streams than those predictably selected by the server. Predictive stream selection provides a way for the server to predict the streams that the client is going to request so the server can begin [**streaming**](#gt_streaming) those streams immediately. For more information, see section [4.5.2](#Section_4.5).
+**Note** When the non-pipelined mode of the protocol is used, the client sends a [SelectStream request](#Section_3.2.5.7). This request contains the stream information in the [stream-switch-entry](#Section_2.2.1.4.27) token on the [Pragma](#Section_2.2.1.4) header. The client might select other streams than those predictably selected by the server. Predictive stream selection provides a way for the server to predict the streams that the client is going to request so the server can begin [**streaming**](#gt_streaming) those streams immediately. For more information, see section [4.5.2](#Section_4.5.2).
 
-**Note** When the pipelined mode of the protocol is used, the client sends a [PlayNextEntry request](#Section_3.1.5.18) with the [xPlayNextEntry](#Section_2.2.1.4.35) token on the Pragma header over the same connection to the server. This request also contains the stream selection for the next entry in the stream-switch-entry token on the Pragma header. The xPlayNextEntry token indicates that the client can begin streaming the data for the next entry.
+**Note** When the pipelined mode of the protocol is used, the client sends a [PlayNextEntry request](#Section_2.2.1.4.35) with the [xPlayNextEntry](#Section_2.2.1.4.35) token on the Pragma header over the same connection to the server. This request also contains the stream selection for the next entry in the stream-switch-entry token on the Pragma header. The xPlayNextEntry token indicates that the client can begin streaming the data for the next entry.
 
 - The server terminates the Play request for the previous entry in the playlist.
 - The server sends the response for the Log request.
@@ -5227,10 +5227,10 @@ The following sequence occurs between a client and server during seeking or skip
 
 **Note** When the pipelined mode of the protocol is used, the client sends the Log request over the same TCP connection that was created with the client's initial GET request. The response to the POST request is not returned until the previous GET request is terminated by the server.
 
-- The client sends a [Play request](#Section_3.2.5.6) to the server. This GET request carries the seeking or skipping information. The [playlist-seek-id](#Section_2.2.1.4.8.4) token on the Pragma header indicates the current entry being rendered by the client. The [pl-offset](#Section_2.2.1.4.20) token on the Pragma header contains the information about whether the client requested to skip to the previous or the next entry. The following are possible offsets:
+- The client sends a [Play request](#Section_3.1.4.3.1) to the server. This GET request carries the seeking or skipping information. The [playlist-seek-id](#Section_2.2.1.4.19) token on the Pragma header indicates the current entry being rendered by the client. The [pl-offset](#Section_2.2.1.4.20) token on the Pragma header contains the information about whether the client requested to skip to the previous or the next entry. The following are possible offsets:
 - pl-offset=1 indicates that the client skips to the next entry. The server sends a GET response and then sends the[$C (Stream Change Notification) packet](#Section_2.2.3.2) and sends the [$H (Header)](#Section_4.13.1) packet and [$M (Metadata) packet](#Section_2.2.3.6) for the next header. From this point forward, the sequence follows a playlist change switch. For more information, see section [4.5](#Section_4.5).
 - pl-offset=-1 indicates that the client skips to the previous entry. See pl-offset=1 for detailed server information.
-- pl-offset=0 indicates that the client seeks within the current entry. If the pl-offset=0 token is specified and the server is not predicting [**streams**](#gt_stream), the server sends a GET response and starts streaming the data for the current entry. If the pl-offset=0 token is specified and the server predicts the stream that the client is going to request, then the server would send the GET response and immediately send a $C (Stream Change Notification) packet. The server then follows with $H (Header) and $M (Metadata) packets for the requested playlist entry. From that point on, the sequence of steps would be exactly the same as for a playlist change switch. For more information about predictive streaming, see section [4.5.2](#Section_4.5).
+- pl-offset=0 indicates that the client seeks within the current entry. If the pl-offset=0 token is specified and the server is not predicting [**streams**](#gt_stream), the server sends a GET response and starts streaming the data for the current entry. If the pl-offset=0 token is specified and the server predicts the stream that the client is going to request, then the server would send the GET response and immediately send a $C (Stream Change Notification) packet. The server then follows with $H (Header) and $M (Metadata) packets for the requested playlist entry. From that point on, the sequence of steps would be exactly the same as for a playlist change switch. For more information about predictive streaming, see section [4.5.2](#Section_4.5.2).
 ![Playlist seek-and-skip sequence in pipelined mode](media/image5.png)
 
 Figure 6: Playlist seek-and-skip sequence in pipelined mode
@@ -5300,10 +5300,10 @@ The following sequence occurs between a client and server during a server-side [
 
 For more information about [**streaming**](#gt_streaming) server-side playlist without predictive streaming, see section [4.5](#Section_4.5).
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with "Supported: [com.microsoft.wm.predstrm](#Section_2.2.1.7.2)".
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream) with the [Supported](#Section_2.2.1.7) header.
-- The server responds with a [$H (Header) packet](#Section_4.13.1) and [$D (Data) packets](#Section_2.2.3.3) of the first playlist entry.
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream) with the [Supported](#Section_2.2.1.7) header.
+- The server responds with a [$H (Header) packet](#Section_4.13.1) and [$D (Data) packets](#Section_3.2.4.1) of the first playlist entry.
 - The server sends a playlist change signal to the client by sending a [$C (Stream Change Notification) packet](#Section_2.2.3.2).
 - The client sends a [Log request](#Section_2.2.2.4) for the previous entry in the playlist.
 **Note** When the pipelined mode of the protocol is used, the client sends the Log request over the same TCP connection that was created with the client's initial GET request. The response to the POST request is not returned until the previous GET request is terminated by the server.
@@ -5314,7 +5314,7 @@ For more information about [**streaming**](#gt_streaming) server-side playlist w
 The client starts receiving the data for the next entry while it is rendering the data for the previous entry. By the time the client finishes rendering, it has accumulated enough data for the next entry to make a seamless switch.
 
 - If the client wants to override the streams selected by the server, the client sends a GET request to start streaming a new entry.
-**Note** When the pipelined mode of the protocol is used, the client sends a [PlayNextEntry request](#Section_3.1.5.18) with the [xPlayNextEntry](#Section_2.2.1.4.35) token on the Pragma header over the same connection to the server. This request also contains the [stream-switch-entry](#Section_2.2.1.4.27) token on the Pragma header for the next entry, which would override the server prediction of streams. The xPlayNextEntry token indicates that the client can continue streaming the data for the next entry. If the client is lagging behind the server, it can send a [client-lag](#Section_2.2.1.4.6) token on a Pragma header with a value specified in milliseconds. Upon receipt, the server would pause the predictive stream selection for the smallest time amount specified by the client-lag token and 15000 milliseconds.
+**Note** When the pipelined mode of the protocol is used, the client sends a [PlayNextEntry request](#Section_2.2.1.4.35) with the [xPlayNextEntry](#Section_2.2.1.4.35) token on the Pragma header over the same connection to the server. This request also contains the [stream-switch-entry](#Section_2.2.1.4.27) token on the Pragma header for the next entry, which would override the server prediction of streams. The xPlayNextEntry token indicates that the client can continue streaming the data for the next entry. If the client is lagging behind the server, it can send a [client-lag](#Section_2.2.1.4.6) token on a Pragma header with a value specified in milliseconds. Upon receipt, the server would pause the predictive stream selection for the smallest time amount specified by the client-lag token and 15000 milliseconds.
 
 **Note** When the non-pipelined mode of the protocol is used, the client sends a [SelectStream request](#Section_3.2.5.7). This request contains the stream-switch-entry token on a Pragma header that specifies the next entry for which the server sends data packets.
 
@@ -5381,10 +5381,10 @@ Pragma: stream-switch-entry=ffff:1:0 ffff:2:2 ffff:4:2 ffff:5:0
 
 The following sequence occurs between a client and server when [**streaming**](#gt_streaming) a single file. The sequencing applies to both the [**pipelined mode**](#gt_pipelined-mode) and the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol.
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with a [$H (Header)](#Section_4.13.1) packet.
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream).
-- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_2.2.3.3).
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream).
+- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_3.2.4.1).
 - After all $D (Data) packets have been sent to the client, the server sends a [$E (End-of-Stream Notification) packet](#Section_2.2.3.4) to indicate that the end of the ASF file has been reached.
 - The client sends a [Log request](#Section_2.2.2.4) to the server.
 - The server responds with a confirmation that it received the log.
@@ -5399,12 +5399,12 @@ Figure 9: Sequencing during single-file streaming
 
 The sequence described in this topic occurs between a client and server while [**streaming**](#gt_streaming) a file, pausing playback, and then resuming playback using the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol.
 
-For more information about the packet types, see section [2.2.2.3](#Section_3.2.5.8).
+For more information about the packet types, see section [2.2.2.3](#Section_2.2.2.3).
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with a [$H (Header)](#Section_4.13.1) packet.
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream).
-- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_2.2.3.3). The number and size of the $D (Data) packets are not necessarily known at the time of the Play request, so it is not possible for the server to send a Content-Length header. The server transmits $D (Data) packets for the stream until the TCP connection is closed.
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream).
+- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_3.2.4.1). The number and size of the $D (Data) packets are not necessarily known at the time of the Play request, so it is not possible for the server to send a Content-Length header. The server transmits $D (Data) packets for the stream until the TCP connection is closed.
 - The client stops streaming by terminating the TCP connection.
 - The client sends a KeepAlive request to the server.
 - The client sends a [Log request](#Section_2.2.2.4) to the server.
@@ -5427,10 +5427,10 @@ Figure 10: Stream, pause, and resume packet sequencing
 
 The sequence described in this topic occurs between a client and server while [**streaming**](#gt_streaming) a file, pausing playback, and then resuming playback using the [**pipelined mode**](#gt_pipelined-mode) of the protocol.
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with a [$H (Header) packet](#Section_4.13.1).
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream).
-- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_2.2.3.3). HTTP 1.1 Chunked Transfer Coding is used by the server to transmit the packets because the number and size of the $D (Data) packets are not necessarily known at the time of the Play response.
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream).
+- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_3.2.4.1). HTTP 1.1 Chunked Transfer Coding is used by the server to transmit the packets because the number and size of the $D (Data) packets are not necessarily known at the time of the Play response.
 - The client stops streaming by sending the [xStopStrm](#Section_2.2.1.4.38) token on a [Pragma](#Section_2.2.1.4) header in a [Stop request](#Section_2.2.2.10) to the server.
 - If a Stop request is received, the server acknowledges this request.
 - The client sends a [Log request](#Section_2.2.2.4) to the server.
@@ -5448,17 +5448,17 @@ The following figure shows the previously described sequence.
 
 Figure 11: Stream, stop, and resume packet sequencing
 
-To prevent an idle connection from being disconnected, the client sends periodic [KeepAlive requests](#Section_3.2.5.8) to the server.
+To prevent an idle connection from being disconnected, the client sends periodic [KeepAlive requests](#Section_2.2.2.3) to the server.
 
 <a id="Section_4.9"></a>
 ## 4.9 Streaming, Stopping, and Striding Playback
 
 The following sequence occurs between a client and server when [**streaming**](#gt_streaming) a file and then stopping it, followed by [**striding**](#gt_striding) and stopping the file again by using either the [**pipelined**](#gt_pipelined-mode) or the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol.
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server responds with a [$H (Header) packet](#Section_4.13.1).
-- The client sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream).
-- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_2.2.3.3).
+- The client sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream).
+- The server responds with a $H (Header) packet and [$D (Data) packets](#Section_3.2.4.1).
 - The client stops streaming.
 **Note** When the non-pipelined mode of the protocol is used, the client stops streaming the file by terminating the TCP connection.
 
@@ -5467,7 +5467,7 @@ The following sequence occurs between a client and server when [**streaming**](#
 - When the pipelined mode of the protocol is used, the server acknowledges if a Stop request is received.
 - The client sends a [Log request](#Section_2.2.2.4) to the server.
 - The server responds with a confirmation that it received the log.
-- The client sends a Play request for the same file at any rate, fast-forward or rewind, selecting one or more streams. The client can specify the rate using the [rate](#Section_2.2.1.12.1) token on the Pragma header. If this header is not specified, the server assumes that the rate is 1.0.
+- The client sends a Play request for the same file at any rate, fast-forward or rewind, selecting one or more streams. The client can specify the rate using the [rate](#Section_2.2.1.4.22) token on the Pragma header. If this header is not specified, the server assumes that the rate is 1.0.
 **Note** Playback rate for a stream can be changed only if the stream supports striding. If striding is supported, the server reports it in the [features](#Section_2.2.1.4.8) token on the Pragma header. If [$M (Metadata)](#Section_2.2.3.6) is present, it overrides the features token on a Pragma header.
 
 - The server responds with a $H (Header) packet and $D (Data) packets.
@@ -5480,7 +5480,7 @@ Figure 12: Stream, stop, stride, and stop packet sequencing
 <a id="Section_4.10"></a>
 ## 4.10 Stream Selection
 
-The [SelectStream request](#Section_3.2.5.7) is sent by the client to notify the server which [**streams**](#gt_stream) it requests. If a file contains only one stream, the SelectStream request will request that the server send the default streams for that file. A SelectStream request will always accompany a [Play request](#Section_3.2.5.6) to denote which audio and/or video streams the client wants to play based on preferences and bandwidth considerations. As with [Log](#Section_2.2.2.4) and [KeepAlive](#Section_3.2.5.8) requests, SelectStream request can be sent multiple times during a [**session**](#gt_session), and they are always sent as a POST request on a separate TCP connection.
+The [SelectStream request](#Section_3.2.5.7) is sent by the client to notify the server which [**streams**](#gt_stream) it requests. If a file contains only one stream, the SelectStream request will request that the server send the default streams for that file. A SelectStream request will always accompany a [Play request](#Section_3.1.4.3.1) to denote which audio and/or video streams the client wants to play based on preferences and bandwidth considerations. As with [Log](#Section_2.2.2.4) and [KeepAlive](#Section_2.2.2.3) requests, SelectStream request can be sent multiple times during a [**session**](#gt_session), and they are always sent as a POST request on a separate TCP connection.
 
 The following scenarios are examples of when a SelectStream request would be sent by the client:
 
@@ -5489,10 +5489,10 @@ The following scenarios are examples of when a SelectStream request would be sen
 - When streaming a multiple bit rate [**ASF**](#gt_advanced-systems-format-asf) file, the client will send a SelectStream request whenever it experiences a prolonged change in bandwidth conditions.
 The sequencing applies to both the [**pipelined**](#gt_pipelined-mode) and the [**non-pipelined mode**](#gt_non-pipelined-mode) of the protocol:
 
-- The client sends a [Describe request](#Section_3.1.4.2.1) to retrieve the ASF header.
+- The client sends a [Describe request](#Section_3.2.5.4) to retrieve the ASF header.
 - The server responds with a [$H](#Section_4.13.1) (Header) packet.
 - The client sends a Play request for the file, selecting one or more streams.
-- The server responds with a $H (Header) packet and [$D](#Section_2.2.3.3) (Data) packets.
+- The server responds with a $H (Header) packet and [$D](#Section_3.2.4.1) (Data) packets.
 - To change streams, the client passes the stream selection information using a SelectStream request with the [stream-switch-entry](#Section_2.2.1.4.27) token on a [Pragma](#Section_2.2.1.4) header.
 - The server responds by acknowledging the client request and switching to the requested stream.
 **Note** To avoid disruptions in a video stream, the server will switch the streams at a key frame.
@@ -5509,16 +5509,16 @@ Figure 13: Using the SelectStream Request packet sequencing
 <a id="Section_4.11"></a>
 ## 4.11 Windows Media Encoder to Windows Media Server Pull Distribution
 
-Pull Distribution is a concept of the Media Streaming Server System [MS-MSSOD](#Section_1.3) in which [**streaming**](#gt_streaming) [**content**](#gt_content) is transmitted from a source, such as Windows Media Encoder or Windows Media Services server, to a requestor, referred to as a "Distribution Server". It is possible to use the Windows Media Streaming Protocol (WMSP) client role and WMSP server role to build a system that implements Pull Distribution. The Distribution Server concept and its role in Pull Distribution are defined in [MS-MSSOD] section 1.1. In a Pull Distribution system, the Distribution Server uses the client role of a streaming protocol, such as WMSP, to connect to the source, which is typically an encoder. Similarly, if the Distribution Server has chosen to use WMSP, the source would use a WMSP server role to receive the request.
+Pull Distribution is a concept of the Media Streaming Server System [MS-MSSOD](../MS-MSSOD/MS-MSSOD.md) in which [**streaming**](#gt_streaming) [**content**](#gt_content) is transmitted from a source, such as Windows Media Encoder or Windows Media Services server, to a requestor, referred to as a "Distribution Server". It is possible to use the Windows Media Streaming Protocol (WMSP) client role and WMSP server role to build a system that implements Pull Distribution. The Distribution Server concept and its role in Pull Distribution are defined in [MS-MSSOD] section 1.1. In a Pull Distribution system, the Distribution Server uses the client role of a streaming protocol, such as WMSP, to connect to the source, which is typically an encoder. Similarly, if the Distribution Server has chosen to use WMSP, the source would use a WMSP server role to receive the request.
 
 The decision to connect to the encoder is made by the higher layer of the WMSP client role used by the Distribution Server. Similarly, the higher layer also decides how to manage the content that is received by the client role. In a possible scenario, the higher layer decides to use the server role of a streaming protocol, such as WMSP, to send the content to media player clients. This scenario is illustrated and described in more detail in [MS-MSSOD] section 2.1.5.
 
 The following sequence occurs between a Distribution Server and an encoder when streaming a single file:
 
-- The client role of the Distribution Server sends a [Describe request](#Section_3.1.4.2.1) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
+- The client role of the Distribution Server sends a [Describe request](#Section_3.2.5.4) to retrieve the [**ASF**](#gt_advanced-systems-format-asf) header.
 - The server role of the encoder responds with a [$H (Header)](#Section_4.13.1) packet.
-- The client role of the Distribution Server sends a [Play request](#Section_3.2.5.6) for the file, selecting one or more [**streams**](#gt_stream).
-- The server role of the encoder responds with a $H (Header) packet and [$D (Data)](#Section_2.2.3.3) packets.
+- The client role of the Distribution Server sends a [Play request](#Section_3.1.4.3.1) for the file, selecting one or more [**streams**](#gt_stream).
+- The server role of the encoder responds with a $H (Header) packet and [$D (Data)](#Section_3.2.4.1) packets.
 - After all $D (Data) packets have been sent to the client role, the server role of the encoder sends a [$E (End-of-Stream Notification)](#Section_2.2.3.4) packet with the value of the Reason field set to 0, to indicate that the end of the ASF file has been reached. In certain cases, the protocol allows the server role of the encoder to send more than one $E packet, all of which will have the Reason field set to 0. For more information about this, see [3.2.4.1](#Section_3.2.4.1).
 - The client role of the Distribution Server sends a [Log request](#Section_2.2.2.4) to the server role.
 - The server role of the encoder responds with a confirmation that it received the log.
@@ -5633,7 +5633,7 @@ When a client requests on-demand content from a caching proxy server, the proxy 
 
 For broadcast content, a proxy server might provide the capability to proxy live content from an origin server through another server. When a client requests live content, the proxy server checks whether it is already proxying the content. If so, it could split the [**streams**](#gt_stream) and delivers the content to all of the requesting clients. If the proxy server is not proxying the content, it could establish a connection to the origin server and forward the content from the origin server to the client. For broadcast content, it is conceivable that only one TCP connection would exist between the proxy server and the origin server.
 
-A proxy server, whether acting as a server or as a client, is largely identical in state to an origin server (as illustrated in sections [4.1](#Section_2.2.2.3.1) and [4.2](#Section_2.2.2.3.2).) That is, when streaming to a client, the proxy server is acting as a regular (origin) server. When acting as a logical client, the proxy server is forwarding requests to the origin server. As indicated in the following diagram, much of the decision matrix described previously occurs as a result of the [Describe request](#Section_3.1.4.2.1) that causes the initial transition into the "Idle" state. One additional state — the "Waiting for GetContentInfo response" state — becomes available with the introduction of a caching proxy server. This state is applicable only if the caching proxy server is acting as a client to the origin server and only if the content on the cache has expired. The caching proxy server will remain in the "Waiting for GetContentInfo response" state until it receives the GetContentInfo response from the origin server. The response to the [GetContentInfo request](#Section_2.2.1.2.4) will determine whether the [**session**](#gt_session) is streamed from the cache or from the origin server. In either case, both the origin server and the proxy server transition back to the "Idle" state.
+A proxy server, whether acting as a server or as a client, is largely identical in state to an origin server (as illustrated in sections [4.1](#Section_4.1) and [4.2](#Section_4.2).) That is, when streaming to a client, the proxy server is acting as a regular (origin) server. When acting as a logical client, the proxy server is forwarding requests to the origin server. As indicated in the following diagram, much of the decision matrix described previously occurs as a result of the [Describe request](#Section_3.2.5.4) that causes the initial transition into the "Idle" state. One additional state — the "Waiting for GetContentInfo response" state — becomes available with the introduction of a caching proxy server. This state is applicable only if the caching proxy server is acting as a client to the origin server and only if the content on the cache has expired. The caching proxy server will remain in the "Waiting for GetContentInfo response" state until it receives the GetContentInfo response from the origin server. The response to the [GetContentInfo request](#Section_2.2.1.2.4) will determine whether the [**session**](#gt_session) is streamed from the cache or from the origin server. In either case, both the origin server and the proxy server transition back to the "Idle" state.
 
 ![Caching proxy server states](media/image14.png)
 
@@ -5656,9 +5656,9 @@ Figure 16: Caching proxy server state flow diagram
 
 The general message sequence consists of the following steps:
 
-- The client sends a [Describe request](#Section_3.1.4.2.1).
+- The client sends a [Describe request](#Section_3.2.5.4).
 - The cache/proxy server responds with a [$H](#Section_4.13.1) packet that contains the [**content**](#gt_content) description.
-- The client sends a [Play request](#Section_3.2.5.6), selecting one or more [**streams**](#gt_stream).
+- The client sends a [Play request](#Section_3.1.4.3.1), selecting one or more [**streams**](#gt_stream).
 - The cache/proxy server determines whether the requested content is broadcast or on-demand (as indicated within the [x-wms-stream-type](#Section_2.2.1.1.12) directive on the [Cache-Control](#Section_2.2.1.1) header).
 - Depending on the type of the stream, the cache/proxy delivers the content to the client. These steps are described in sections [4.12.1.1](#Section_4.12.1.1) and [4.12.1.2](#Section_4.12.1.2).
 <a id="Section_4.12.1.1"></a>
@@ -5673,8 +5673,8 @@ If the [**content**](#gt_content) is not in the cache, the cache/proxy opens a c
 If the content is still stale, the cache/proxy opens a connection with the origin server, as specified in Request to Start Streaming Content, section 3.1.4.3. These steps are described in section 4.12.1.3.
 
 - The cache/proxy server sends the [Cache-Control](#Section_2.2.1.1) header to the client.
-- The cache/proxy server sends [$H](#Section_4.13.1) and [$D](#Section_2.2.3.3) packets for the requested stream from its local cache to the client.
-- The cache/proxy server communicates any subscribed-to events (as indicated within the [x-wms-event-subscription](#Section_2.2.1.1.10) directive on the Cache-Control header) to the origin server, as specified in [SendEvent Request](#Section_2.2.2.9), section 2.2.2.9.
+- The cache/proxy server sends [$H](#Section_4.13.1) and [$D](#Section_3.2.4.1) packets for the requested stream from its local cache to the client.
+- The cache/proxy server communicates any subscribed-to events (as indicated within the [x-wms-event-subscription](#Section_2.2.1.1.10) directive on the Cache-Control header) to the origin server, as specified in [SendEvent Request](#Section_2.2.1.2.6), section 2.2.2.9.
 The following illustration shows the sequencing that occurs when the client requests a file from a media server that is configured as a cache/proxy server.
 
 ![On-demand content delivery](media/image16.png)
@@ -5695,8 +5695,8 @@ If the content is not being received, the cache/proxy opens a connection with th
 - The cache/proxy server checks whether the local copy of the content is stale. If the content is stale, the cache/proxy server revalidates the content against the server.
 If the content is still stale after revalidation, then the cache/proxy opens a connection with the origin server, as specified in Request to Start Streaming Content, section 3.1.4.3. These steps are described in section 4.12.1.3.
 
-- The cache/proxy server splits the content stream and sends the [$H](#Section_4.13.1) and [$D](#Section_2.2.3.3) packets, which it receives from the origin server, to the client.
-- The cache/proxy server communicates any subscribed-to events (as indicated within the [x-wms-event-subscription](#Section_2.2.1.1.10) directive on the Cache-Control header) to the origin server, as specified in [SendEvent Request](#Section_2.2.2.9), section 2.2.2.9.
+- The cache/proxy server splits the content stream and sends the [$H](#Section_4.13.1) and [$D](#Section_3.2.4.1) packets, which it receives from the origin server, to the client.
+- The cache/proxy server communicates any subscribed-to events (as indicated within the [x-wms-event-subscription](#Section_2.2.1.1.10) directive on the Cache-Control header) to the origin server, as specified in [SendEvent Request](#Section_2.2.1.2.6), section 2.2.2.9.
 The following illustration shows the sequencing that occurs when the client requests broadcast content from a media server that is configured as a cache/proxy server.
 
 ![Broadcast content delivery](media/image17.png)
@@ -5712,8 +5712,8 @@ The following steps demonstrate the cache/proxy server and origin server communi
 - The origin server responds with the [Cache-Control](#Section_2.2.1.1) header for the content.
 - Optional: Additional handshaking can occur depending on the implementation of the origin server.
 - The cache/proxy server determines whether to cache the content that the origin server is about to [**stream**](#gt_stream). If the content is to be cached, the cache/proxy server stores the Cache-Control header information and the content in the local cache.
-- If the content is not fully cached in the cache/proxy server's local cache, or if the content will not be cached, the cache/proxy server sends a [Describe request](#Section_3.1.4.2.1) followed by a [Play request](#Section_3.2.5.6) to the origin server.
-- The cache/proxy sends the [$H](#Section_4.13.1) and [$D](#Section_2.2.3.3) packets for the requested content to the client. Depending on whether the content is already fully cached, the source is either the cache/proxy server's local cache or the origin server.
+- If the content is not fully cached in the cache/proxy server's local cache, or if the content will not be cached, the cache/proxy server sends a [Describe request](#Section_3.2.5.4) followed by a [Play request](#Section_3.1.4.3.1) to the origin server.
+- The cache/proxy sends the [$H](#Section_4.13.1) and [$D](#Section_3.2.4.1) packets for the requested content to the client. Depending on whether the content is already fully cached, the source is either the cache/proxy server's local cache or the origin server.
 - The cache/proxy server communicates any subscribed-to events (as indicated within the [x-wms-event-subscription](#Section_2.2.1.1.10) directive on the Cache-Control header) to the origin server.
 The following shows a sample GetContentInfo request and the corresponding response.
 
@@ -5800,7 +5800,7 @@ Figure 21: Packet processing rules flow chart
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The Windows Media HTTP Streaming Protocol is vulnerable to a [**session**](#gt_session) hijacking attack in which the attacker guesses the value of the [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on the [Pragma](#Section_2.2.1.4) header and the TCP port number used by the client. The attacker makes the server believe that the TCP connection to the client has been lost. Then the attacker establishes its own TCP connection to the server and sends a request with the victim's client-id value. To mitigate the attack, server implementations need to use a good random number generator when creating client-id values. Also, if HTTP Access Authentication is used, the server needs to authenticate access at least once on each new URL or TCP connection, or, preferably, on each [Play request](#Section_3.2.5.6).
+The Windows Media HTTP Streaming Protocol is vulnerable to a [**session**](#gt_session) hijacking attack in which the attacker guesses the value of the [client-id (section 2.2.1.4.5)](#Section_2.2.1.4.5) token on the [Pragma](#Section_2.2.1.4) header and the TCP port number used by the client. The attacker makes the server believe that the TCP connection to the client has been lost. Then the attacker establishes its own TCP connection to the server and sends a request with the victim's client-id value. To mitigate the attack, server implementations need to use a good random number generator when creating client-id values. Also, if HTTP Access Authentication is used, the server needs to authenticate access at least once on each new URL or TCP connection, or, preferably, on each [Play request](#Section_3.1.4.3.1).
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -5913,7 +5913,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <34> Section 2.2.1.4.20: This token is supported by Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, Windows Vista and later, and by Windows Media Services on Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
-<35> Section 2.2.1.4.23: The first [Play request](#Section_3.2.5.6) sent by Windows Media Player 6 specifies a value for this token that is 2. For other GET requests sent by Windows Media Player 6, the token is either omitted or has a value that is greater than 2. The first Play request sent by Windows Media Services on Windows NT 4.0 and Windows 2000 specifies a value for this token that is either 2 or 3. For other GET requests sent by Windows Media Services on Windows NT 4.0 and Windows 2000, the token is either omitted or has a value that is greater than 3.
+<35> Section 2.2.1.4.23: The first [Play request](#Section_3.1.4.3.1) sent by Windows Media Player 6 specifies a value for this token that is 2. For other GET requests sent by Windows Media Player 6, the token is either omitted or has a value that is greater than 2. The first Play request sent by Windows Media Services on Windows NT 4.0 and Windows 2000 specifies a value for this token that is either 2 or 3. For other GET requests sent by Windows Media Services on Windows NT 4.0 and Windows 2000, the token is either omitted or has a value that is greater than 3.
 
 <36> Section 2.2.1.4.24: This token is supported by Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, Windows Vista and later, and by Windows Media Services on Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2. Windows Media Services on Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 can respond to a request that specifies this token with a speed token that specifies a value that is less than what the client specified, but it will never be less than 1 if the client specified a value greater than 1.
 
@@ -6001,7 +6001,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <59> Section 2.2.5: Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, and Windows Vista support only the "remote-log" event.
 
-<60> Section 3.1.5.1: The [com.microsoft.wm.startupprofile (section 2.2.1.7.5)](#Section_2.2.1.7.5) token is only specified by Windows Media Format 9.5 SDK, Windows Vista and later. Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, and Windows Vista only specify the [com.microsoft.wm.predstrm (section 2.2.1.7.2)](#Section_2.2.1.7.2) token when the most recent Play (section 2.2.2.6) or [PlayNextEntry (section 2.2.2.7)](#Section_3.1.5.18) request did not include the speed token with a value other than 1 on a Pragma (section 2.2.1.4) header.
+<60> Section 3.1.5.1: The [com.microsoft.wm.startupprofile (section 2.2.1.7.5)](#Section_2.2.1.7.5) token is only specified by Windows Media Format 9.5 SDK, Windows Vista and later. Windows Media Format 9 Series SDK, Windows Media Format 9.5 SDK, and Windows Vista only specify the [com.microsoft.wm.predstrm (section 2.2.1.7.2)](#Section_2.2.1.7.2) token when the most recent Play (section 2.2.2.6) or [PlayNextEntry (section 2.2.2.7)](#Section_2.2.2.7) request did not include the speed token with a value other than 1 on a Pragma (section 2.2.1.4) header.
 
 <61> Section 3.1.5.1: Whether the same [**GUID**](#gt_globally-unique-identifier-guid) is used for all sessions or changed between different sessions is determined by how the user has configured Windows Media Player and/or the Windows Media Format SDK.
 

@@ -197,7 +197,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](../MS-MQDS/MS-MQDS.md)".
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-MSMQ] Microsoft Corporation, "Message Queuing (MSMQ)", [http://msdn.microsoft.com/en-us/library/ms711472.aspx](https://go.microsoft.com/fwlink/?LinkId=90047)
 
@@ -251,7 +251,7 @@ Figure 1: Enterprise as a set of MSMQ sites and MSMQ routing links
 
 Routing link cost provides a mechanism for administrators to enforce one route over another in cases where multiple routes exist.
 
-As described in section [3.1.6.1](#Section_3.1.6), each MSMQ queue manager that runs [**MSMQ**](#gt_microsoft-message-queuing-msmq) within an enterprise periodically queries the directory to determine whether it acts as an MSMQ site gate, and to build a routing table if the querying MSMQ queue manager is an MSMQ site gate.
+As described in section [3.1.6.1](#Section_3.1.6.1), each MSMQ queue manager that runs [**MSMQ**](#gt_microsoft-message-queuing-msmq) within an enterprise periodically queries the directory to determine whether it acts as an MSMQ site gate, and to build a routing table if the querying MSMQ queue manager is an MSMQ site gate.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -311,7 +311,7 @@ None.
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This algorithm uses abstract data model (ADM) elements specified in section [3.1.1](#Section_1.3). A subset of these elements can be published in a [**directory**](#gt_directory). This algorithm SHOULD<2> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<3>
+This algorithm uses abstract data model (ADM) elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a [**directory**](#gt_directory). This algorithm SHOULD<2> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<3>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -332,9 +332,9 @@ The Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm determines
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The abstract data model for the Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm comprises elements that are private to this algorithm and others that are shared between multiple MSMQ protocols that are co-located at a common [**MSMQ queue manager**](#gt_msmq-queue-manager). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm and other protocols that share a common MSMQ queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for the Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm comprises elements that are private to this algorithm and others that are shared between multiple MSMQ protocols that are co-located at a common [**MSMQ queue manager**](#gt_msmq-queue-manager). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm and other protocols that share a common MSMQ queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
-Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this algorithm, and section [3.1.1.2](#Section_3.1.3.1) details the data model element that is private to Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm.
+Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this algorithm, and section [3.1.1.2](#Section_3.1.1.2) details the data model element that is private to Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm.
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Shared Data Elements
@@ -366,7 +366,7 @@ The Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm SHOULD mai
 <a id="Section_3.1.2.1"></a>
 #### 3.1.2.1 QueueManager Query Timer
 
-This timer regulates the amount of time that the protocol waits before updating the information in the RoutingTable. This timer fires the QueueManager Query Timer Event, as described in section [3.1.6.1](#Section_3.1.6).
+This timer regulates the amount of time that the protocol waits before updating the information in the RoutingTable. This timer fires the QueueManager Query Timer Event, as described in section [3.1.6.1](#Section_3.1.6.1).
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -376,7 +376,7 @@ The [QueueManager Query Timer](#Section_3.1.2.1) SHOULD be started and SHOULD be
 <a id="Section_3.1.3.1"></a>
 #### 3.1.3.1 RoutingTable Initialization
 
-If [IsSiteGate](#Section_3.1.5.8) returns 0 when called with the **QueueManager.Identifier** initializing its [RoutingTable](#Section_3.1.3.1), the RoutingTable is initialized to be empty.
+If [IsSiteGate](#Section_3.1.5.8) returns 0 when called with the **QueueManager.Identifier** initializing its [RoutingTable](#Section_3.1.1.2), the RoutingTable is initialized to be empty.
 
 To create a collection of **Sites** that belong to the [**enterprise**](#gt_enterprise), the [GetDirectoryData (section 3.1.5.9)](#Section_3.1.5.9) method MUST be called, where the *DataElementType* parameter is the string "Site", and the *FilterArray* parameter has no elements.
 
@@ -406,7 +406,7 @@ None.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-This section describes how the Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm uses **QueueManager**, **Site**, **RoutingLink** (section 3.1.1 of [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md)), and [RoutingTable (section 3.1.1.2)](#Section_3.1.3.1) data elements to determine the next hop for a [**message**](#gt_message).
+This section describes how the Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm uses **QueueManager**, **Site**, **RoutingLink** (section 3.1.1 of [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md)), and [RoutingTable (section 3.1.1.2)](#Section_3.1.1.2) data elements to determine the next hop for a [**message**](#gt_message).
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 GetNextHops
@@ -901,7 +901,7 @@ RETURN with RequestedData
 <a id="Section_3.1.6.1"></a>
 #### 3.1.6.1 QueueManager Query Timer Event
 
-When this timer fires, a **QueueManager** reinitializes its [RoutingTable](#Section_3.1.3.1), as specified in section [3.1.3.1](#Section_3.1.3.1).
+When this timer fires, a **QueueManager** reinitializes its [RoutingTable](#Section_3.1.1.2), as specified in section [3.1.3.1](#Section_3.1.3.1).
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events

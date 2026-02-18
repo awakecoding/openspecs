@@ -367,7 +367,7 @@ There are no new message processing events or sequencing rules defined by SDP Ex
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Audio and Video
 
-The Session Description Protocol (SDP) for an [**audio/video session**](#gt_c1941087-e30b-46c9-a25d-5bed293312b3) is standard (according to RFC) with one exception: negotiation of encryption of the audio/video session uses additional extensions, which are specified in section [3.1.5.5](#Section_4.1).
+The Session Description Protocol (SDP) for an [**audio/video session**](#gt_c1941087-e30b-46c9-a25d-5bed293312b3) is standard (according to RFC) with one exception: negotiation of encryption of the audio/video session uses additional extensions, which are specified in section [3.1.5.5](#Section_3.1.5.5).
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Data Collaboration

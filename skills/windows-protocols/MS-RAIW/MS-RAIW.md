@@ -421,9 +421,9 @@ Because the [**NetBIOS**](#gt_netbios) protocol [[RFC1002]](https://go.microsoft
 This document covers versioning issues in the following areas:
 
 - **Supported Transports**: The Remote Administrative Interface: WINS protocol uses the [**RPC**](#gt_remote-procedure-call-rpc) protocol as a transport and [RPC Protocol Sequences](#Section_2.1) as specified in section 2.1.
-- **Protocol Versions**: This protocol has only one interface version, but that interface has been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_1.3).
+- **Protocol Versions**: This protocol has only one interface version, but that interface has been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_3.1).
 - **Security and Authentication Methods**: Authentication and security for the methods specified by this protocol are specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) and in section 2.1.
-- **Localization**: This protocol passes text strings in various methods. Localization considerations for such strings are specified in sections [2.2](#Section_2.2) and [3.1.4](#Section_3.2.4).
+- **Localization**: This protocol passes text strings in various methods. Localization considerations for such strings are specified in sections [2.2](#Section_2.2) and [3.1.4](#Section_3.1.4).
 - **Capability Negotiation**: The Remote Administrative Interface: WINS protocol does not support interface version negotiation. Instead, this protocol uses the interface version number specified in the [**interface definition language (IDL)**](#gt_interface-definition-language-idl) for versioning and capability negotiation.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -437,7 +437,7 @@ Remote Administrative Interface: WINS protocol uses the following private assign
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| [**RPC**](#gt_remote-procedure-call-rpc) interface [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid) | 45f52c28-7f9f-101a-b52b-08002b2efabe | [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5 [winsif interface (section 3.1)](#Section_1.3) |
+| [**RPC**](#gt_remote-procedure-call-rpc) interface [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid) | 45f52c28-7f9f-101a-b52b-08002b2efabe | [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5 [winsif interface (section 3.1)](#Section_3.1) |
 | RPC interface UUID | 811109bf-a4e1-11d1-ab54-00a0c91e9b45 | [C706] section A.2.5 [winsi2 interface (section 3.2)](#Section_3.2) |
 | [**Named pipe**](#gt_named-pipe) | "\pipe\WinsPipe" | [Transport (section 2.1)](#Section_2.1) |
 
@@ -482,7 +482,7 @@ In addition to the [**RPC**](#gt_remote-procedure-call-rpc) base types and defin
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 WINSIF_HANDLE
 
-The WINSIF_HANDLE data type is defined as a pointer to the [WINSINTF_BIND_DATA_T](#Section_2.2.2.2) structure. It is used by the [**RPC**](#gt_remote-procedure-call-rpc) methods [R_WinsGetBrowserNames](#Section_3.1.4.15) and [R_WinsStatusWHdl](#Section_3.1.4.21).
+The WINSIF_HANDLE data type is defined as a pointer to the [WINSINTF_BIND_DATA_T](#Section_2.2.2.2) structure. It is used by the [**RPC**](#gt_remote-procedure-call-rpc) methods [R_WinsGetBrowserNames](#Section_3.1.4.18) and [R_WinsStatusWHdl](#Section_3.1.4.21).
 
 This type is declared as follows:
 
@@ -1049,7 +1049,7 @@ DWORD dwNameLen;
 <a id="Section_2.2.2.10"></a>
 #### 2.2.2.10 WINSINTF_BROWSER_NAMES_T
 
-The WINSINTF_BROWSER_NAMES_T structure defines an array of browser names. This structure is used by the [**RPC**](#gt_remote-procedure-call-rpc) method [R_WinsGetBrowserNames](#Section_3.1.4.15).
+The WINSINTF_BROWSER_NAMES_T structure defines an array of browser names. This structure is used by the [**RPC**](#gt_remote-procedure-call-rpc) method [R_WinsGetBrowserNames](#Section_3.1.4.18).
 
 typedef struct _WINSINTF_BROWSER_NAMES_T {
 
@@ -1156,7 +1156,7 @@ The client side of The Remote Administrative Interface: WINS protocol is simply 
 
 The [**WINS**](#gt_windows-internet-name-service-wins) server supports two interfaces:
 
-- [winsif (section 3.1.4)](#Section_3.2.4)
+- [winsif (section 3.1.4)](#Section_3.1.4)
 - [winsi2 (section 3.2.4)](#Section_3.2.4)
 To support both interfaces, client applications are responsible for implementing mechanisms to manage memory such as the following:
 
@@ -1167,7 +1167,7 @@ Clients SHOULD call **midl_user_allocate** to allocate memory for any input poin
 <a id="Section_3.1"></a>
 ## 3.1 winsif Server Details
 
-The methods supported by the **winsif** interface are specified in [Message Processing Events and Sequencing Rules (section 3.1.4)](#Section_3.2.4).
+The methods supported by the **winsif** interface are specified in [Message Processing Events and Sequencing Rules (section 3.1.4)](#Section_3.1.4).
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -1194,7 +1194,7 @@ A [**NetBIOS name server (NBNS)**](#gt_netbios-name-server-nbns) maintains the f
 - Number of worker threads
 **Browser name cache**: A list of browser names that are stored in the [**target WINS server**](#gt_target-wins-server). When the [**WINS**](#gt_windows-internet-name-service-wins) service is initialized, the cache SHOULD be empty.
 
-The **Browser name cache** SHOULD be populated when the **R_WinsGetBrowserNames** method (section [3.1.4.18](#Section_3.1.4.15)) is called for the first time, and every subsequent call to that method SHOULD return the contents of the cache. If 3 minutes or more has elapsed from the time the **Browser name cache** is refreshed, the WINS service SHOULD get the name records from the target WINS server database and update the cache.
+The **Browser name cache** SHOULD be populated when the **R_WinsGetBrowserNames** method (section [3.1.4.18](#Section_3.1.4.18)) is called for the first time, and every subsequent call to that method SHOULD return the contents of the cache. If 3 minutes or more has elapsed from the time the **Browser name cache** is refreshed, the WINS service SHOULD get the name records from the target WINS server database and update the cache.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -1232,7 +1232,7 @@ Methods in RPC Opnum Order
 | [R_WinsGetBrowserNames_Old](#Section_3.1.4.15) | This method SHOULD not be used. Opnum: 14 |
 | [R_WinsDeleteWins](#Section_3.1.4.16) | Deletes all the records owned by a particular WINS server from the target WINS server database. Opnum: 15 |
 | [R_WinsSetFlags](#Section_3.1.4.17) | This method SHOULD not be used. Opnum: 16 |
-| [R_WinsGetBrowserNames](#Section_3.1.4.15) | Retrieves the [**Browser Names**](#gt_browser-name) information stored at the target WINS server. Opnum: 17 |
+| [R_WinsGetBrowserNames](#Section_3.1.4.18) | Retrieves the [**Browser Names**](#gt_browser-name) information stored at the target WINS server. Opnum: 17 |
 | [R_WinsGetDbRecsByName](#Section_3.1.4.19) | Retrieves records matching a specified [**owner**](#gt_owner) address from the target WINS server database. Opnum: 18 |
 | [R_WinsStatusNew](#Section_3.1.4.20) | Retrieves various configuration settings and the statistics of a WINS server. Opnum: 19 |
 | [R_WinsStatusWHdl](#Section_3.1.4.21) | Retrieves various configuration settings and the statistics of a WINS server. Opnum: 20 |
@@ -1604,7 +1604,7 @@ The following requirements and recommendations apply to a WINS server that proce
 - In response to a R_WinsGetDbRecs call, records are retrieved from the target WINS server database if their version numbers fall between *MinVersNo* and *MaxVersNo*, and if the records are owned by the owner WINS server whose address is specified by *pWinsAdd*.
 - If the R_WinsGetDbRecs caller specifies zero for both *MinVersNo* and *MaxVersNo*, all records owned by the WINS server specified by *pWinsAdd* are retrieved from the target WINS server's database.
 - The *MinVersNo* value MUST be less than or equal to *MaxVersNo* value for the R_WinsGetDbRecs call to succeed; otherwise, the server SHOULD return ERROR_WINS_INTERNAL.
-The R_WinsGetDbRecs caller is responsible for freeing the memory pointed to by *pRecs->pRow->pName* and *pRecs->pRow->pAdd* for each record, then using the **midl_user_free** function (section [3](#Section_1.3)) to free the *pRecs->pRow* and *pRecs* pointers themselves.
+The R_WinsGetDbRecs caller is responsible for freeing the memory pointed to by *pRecs->pRow->pName* and *pRecs->pRow->pAdd* for each record, then using the **midl_user_free** function (section [3](#Section_3)) to free the *pRecs->pRow* and *pRecs* pointers themselves.
 
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 R_WinsTerm (Opnum 6)
@@ -2056,7 +2056,7 @@ The following requirements and recommendations apply to a WINS server that proce
 - If the **Browser name cache** abstract data element (section [3.1.1](#Section_3.1.1)) has been populated, and less than 3 minutes have elapsed since it was last updated, this method SHOULD return the records from the cache by using the *pNames* parameter.
 - If this method call is being made for the first time, or if 3 minutes or more have elapsed since the **Browser name cache** was last updated, the cache SHOULD be refreshed by fetching records from the database, and the contents of the cache are returned.
 - If any error occurs while retrieving the records, the service SHOULD return an ERROR_WINS_INTERNAL error code.
-The R_WinsGetBrowserNames caller is responsible for freeing the memory pointed to by *pRecs->pRow->pName* and *pRecs->pRow->pAdd* for each record, then using the **midl_user_free** function (section [3](#Section_1.3)) to free the *pRecs->pRow* and *pRecs* pointers themselves.
+The R_WinsGetBrowserNames caller is responsible for freeing the memory pointed to by *pRecs->pRow->pName* and *pRecs->pRow->pAdd* for each record, then using the **midl_user_free** function (section [3](#Section_3)) to free the *pRecs->pRow* and *pRecs* pointers themselves.
 
 <a id="Section_3.1.4.19"></a>
 #### 3.1.4.19 R_WinsGetDbRecsByName (Opnum 18)
@@ -2122,7 +2122,7 @@ The following requirements and recommendations apply to a WINS server that proce
 - If the owner's address is specified and if the server can't find this address in its [**owner version map**](#gt_owner-version-map), the server returns error ERROR_WINS_INTERNAL error.
 - If no records match the search criteria, the server returns an ERROR_REC_NON_EXISTENT error. For any other error conditions, the server returns an ERROR_WINS_INTERNAL error.
 - Refer to [Retrieving All the Records of a WINS Database (section 4.6)](#Section_4.6) to see how to use R_WinsGetDbRecsByName to retrieve all the records of a database.
-The R_WinsGetDbRecsByName caller is responsible for freeing the memory pointed to by *pRecs->pRow->pName* and *pRecs->pRow->pAdd* for each record, then using the **midl_user_free** function (section [3](#Section_1.3)) to free the *pRecs->pRow* and *pRecs* pointers themselves.
+The R_WinsGetDbRecsByName caller is responsible for freeing the memory pointed to by *pRecs->pRow->pName* and *pRecs->pRow->pAdd* for each record, then using the **midl_user_free** function (section [3](#Section_3)) to free the *pRecs->pRow* and *pRecs* pointers themselves.
 
 <a id="Section_3.1.4.20"></a>
 #### 3.1.4.20 R_WinsStatusNew (Opnum 19)
@@ -2556,7 +2556,7 @@ Servers that implement this protocol require clients to request RPC_C_AUTHN_WINN
 <a id="Section_6.1"></a>
 ## 6.1 Appendix A.1: winsif.idl
 
-For ease of implementation, the full stand-alone [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file for the [winsif](#Section_1.3) interface (section 3.1) is provided. Some of the data types and structures used by this protocol are defined in other documents. In order for this IDL to stand alone, the types and structures from [MS-DTYP](../MS-DTYP/MS-DTYP.md) are imported.
+For ease of implementation, the full stand-alone [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file for the [winsif](#Section_3.1) interface (section 3.1) is provided. Some of the data types and structures used by this protocol are defined in other documents. In order for this IDL to stand alone, the types and structures from [MS-DTYP](../MS-DTYP/MS-DTYP.md) are imported.
 
 import "ms-dtyp.idl";
 
@@ -3085,7 +3085,7 @@ DECLARE_WINS_HANDLE( ServerHdl )
 <a id="Section_6.2"></a>
 ## 6.2 Appendix A.2: winsif2.idl
 
-For ease of implementation, the full stand-alone [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file for the [winsi2](#Section_3.2) interface (section [3.1](#Section_1.3)) is provided. Some of the data types and structures used by this protocol are defined in other documents. In order for this IDL to stand alone, the types and structures from the [winsif](#Section_3.1) interface (section 6.1) IDL are imported.
+For ease of implementation, the full stand-alone [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file for the [winsi2](#Section_3.2) interface (section [3.1](#Section_3.1)) is provided. Some of the data types and structures used by this protocol are defined in other documents. In order for this IDL to stand alone, the types and structures from the [winsif](#Section_3.1) interface (section 6.1) IDL are imported.
 
 import "ms-raiw_winsif.idl";
 
@@ -3166,7 +3166,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <2> Section 2.2.2.7: In Windows 2000 Server operating system and later if the value of the **WINSPriorityClass** member is other than NORMAL_PRIORITY_CLASS or HIGH_PRIORITY_CLASS, the system assumes the latter.
 
-<3> Section 3.1.4.1: Windows NT 4.0: The Remote Administrative Interface: WINS Protocol uses implicit binding, in which the RPC run-time library maintains the handle internally. No RPC methods except [R_WinsTombStoneDbRecs](#Section_3.2.4.1), [R_WinsTerm](#Section_3.1.4.7), and [R_WinsGetBrowserNames](#Section_3.1.4.15) take *ServerHdl* as a parameter.
+<3> Section 3.1.4.1: Windows NT 4.0: The Remote Administrative Interface: WINS Protocol uses implicit binding, in which the RPC run-time library maintains the handle internally. No RPC methods except [R_WinsTombStoneDbRecs](#Section_3.2.4.1), [R_WinsTerm](#Section_3.1.4.7), and [R_WinsGetBrowserNames](#Section_3.1.4.18) take *ServerHdl* as a parameter.
 
 <4> Section 3.1.4.1: Windows NT 4.0: The RPC method caller is required to have control-level access regardless of the action used.
 

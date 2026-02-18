@@ -403,9 +403,9 @@ The Microsoft Web Browser Federated Sign-On Protocol increases interoperability 
 - The parameters specified in [WSFederation1.2] section 13 are restricted for each message type.
 This protocol also adds optional parameters to address existing limitations to the protocol.
 
-In section [2.1](#Section_2.1), this document specifies restrictions on the choice of message transport allowed in [WSFederation1.2] section 13. The [WSFederation1.2] specification allows [wsignin1.0 (section 2.2.4)](#Section_3.3.5.2), [wsignout1.0 (section 2.2.5)](#Section_3.2.5.2), and [wsignoutcleanup1.0 (section 2.2.6)](#Section_3.3.5.4) operations to be transmitted using either GET or POST methods, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). This specification restricts wsignin1.0, wsignout1.0, and wsignoutcleanup1.0 requests to use only the GET method. This protocol also restricts wsignin1.0 responses to be transmitted to [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) using the POST method.
+In section [2.1](#Section_2.1), this document specifies restrictions on the choice of message transport allowed in [WSFederation1.2] section 13. The [WSFederation1.2] specification allows [wsignin1.0 (section 2.2.4)](#Section_2.2.4), [wsignout1.0 (section 2.2.5)](#Section_2.2.5), and [wsignoutcleanup1.0 (section 2.2.6)](#Section_2.2.6) operations to be transmitted using either GET or POST methods, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). This specification restricts wsignin1.0, wsignout1.0, and wsignoutcleanup1.0 requests to use only the GET method. This protocol also restricts wsignin1.0 responses to be transmitted to [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) using the POST method.
 
-Parameter removals, restrictions, and additions are specified in section [2.2](#Section_1.3). The parameter restrictions and removals are designed to aid interoperability by reducing the possible variations in the protocol. The parameter additions address issues such as communicating the expected authentication method and communicating a user's [**requestor IP/STS**](#gt_requestor-ipsts). The Microsoft Web Browser Federated Sign-On Protocol restricts the content of the *wresult* parameter (using the standards as specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) and [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508)) to enable interoperable communications of security tokens. The restrictions on the *wresult* parameter are specified in sections [2.2.4.1](#Section_2.2.4.1) and [2.2.4.2](#Section_2.2.4.2). The semantics and protocol details of these changes are addressed in section [3](#Section_1.3).
+Parameter removals, restrictions, and additions are specified in section [2.2](#Section_2.2). The parameter restrictions and removals are designed to aid interoperability by reducing the possible variations in the protocol. The parameter additions address issues such as communicating the expected authentication method and communicating a user's [**requestor IP/STS**](#gt_requestor-ipsts). The Microsoft Web Browser Federated Sign-On Protocol restricts the content of the *wresult* parameter (using the standards as specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) and [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508)) to enable interoperable communications of security tokens. The restrictions on the *wresult* parameter are specified in sections [2.2.4.1](#Section_2.2.4.1) and [2.2.4.2](#Section_2.2.4.2). The semantics and protocol details of these changes are addressed in section [3](#Section_3).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -472,7 +472,7 @@ This specification defers all capability negotiation to the specifications [[WSF
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-As specified in section [2](#Section_1.3), the Microsoft Web Browser Federated Sign-On Protocol uses the SAML 1.1 token format, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508), for [**security tokens**](#gt_security-token). Vendors can extend the SAML Advice element to communicate extended data in the security token.<1> [MS-MWBE](../MS-MWBE/MS-MWBE.md) specifies extensions to this protocol using the SAML Advice element. The XML elements placed under the SAML 1.1 Advice element can be guaranteed to be unique if the vendor registers the XML namespace URN with the Internet Assigned Numbers Authority (IANA).
+As specified in section [2](#Section_2), the Microsoft Web Browser Federated Sign-On Protocol uses the SAML 1.1 token format, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508), for [**security tokens**](#gt_security-token). Vendors can extend the SAML Advice element to communicate extended data in the security token.<1> [MS-MWBE](../MS-MWBE/MS-MWBE.md) specifies extensions to this protocol using the SAML Advice element. The XML elements placed under the SAML 1.1 Advice element can be guaranteed to be unique if the vendor registers the XML namespace URN with the Internet Assigned Numbers Authority (IANA).
 
 Vendors can use the existing extensibility points, as specified in [[WSFederation1.2]](https://go.microsoft.com/fwlink/?LinkId=306270) section 13.<2> As described in that specification, new URL parameters can be used to communicate extended information as part of the protocol. There is no process for guaranteeing that URL parameters added to the protocol by individual vendors are uniquely named across multiple vendors.
 
@@ -484,14 +484,14 @@ There are no standards assignments for this protocol beyond those specified in [
 <a id="Section_2"></a>
 # 2 Messages
 
-This section specifies the transport and syntax of request and response messages in normative detail. References to section [3](#Section_1.3) are included when knowledge of the protocol details are necessary to understand the context of message transport or syntax.
+This section specifies the transport and syntax of request and response messages in normative detail. References to section [3](#Section_3) are included when knowledge of the protocol details are necessary to understand the context of message transport or syntax.
 
 This protocol references commonly used data types as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The [wsignin1.0 (section 2.2.3)](#Section_3.3.5.2), [wsignout1.0 (section 2.2.5)](#Section_3.2.5.2), and [wsignoutcleanup1.0 (section 2.2.6)](#Section_3.3.5.4) requests MUST be transmitted using the GET method; they MUST NOT be transmitted using the POST method. This protocol also restricts [wsignin1.0 (section 2.2.4)](#Section_3.3.5.2) responses; such responses SHOULD<3> be transmitted to [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) using the POST method.
+The [wsignin1.0 (section 2.2.3)](#Section_2.2.3), [wsignout1.0 (section 2.2.5)](#Section_2.2.5), and [wsignoutcleanup1.0 (section 2.2.6)](#Section_2.2.6) requests MUST be transmitted using the GET method; they MUST NOT be transmitted using the POST method. This protocol also restricts [wsignin1.0 (section 2.2.4)](#Section_2.2.4) responses; such responses SHOULD<3> be transmitted to [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) using the POST method.
 
 The [**requestor IP/STS**](#gt_requestor-ipsts) and relying party SHOULD<4> use the HTTPS URL scheme to identify each [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) and [**WS resource**](#gt_web-service-ws-resource) for processing wsignin1.0 requests, wsignin1.0 responses, wsignout1.0 requests, and wsignoutcleanup1.0 requests. If the HTTPS URL scheme is not used, each IP/STS and WS resource is assumed to have other protection mechanisms or decided that protection is not necessary.
 
@@ -575,7 +575,7 @@ The wsignin1.0 response message is sent to the [**relying party**](#gt_relying-p
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 High-Level Format of wresult Parameter
 
-The syntax for successful [wsignin1.0](#Section_3.3.5.2) response message requires that the *wresult* parameter contain a [**security token**](#gt_security-token) that MUST be encoded as an RSTR element, as specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) section 6.2. The RSTR MUST contain a RequestedSecurityToken element, as specified in [WSTrust] section 6.2. This child element MUST contain either a security token that is constructed as an Assertion element, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2.3.2, or encrypted content in an **EncryptedData** element, as specified in [[XMLENC]](https://go.microsoft.com/fwlink/?LinkId=193339) section 3.4.
+The syntax for successful [wsignin1.0](#Section_2.2.3) response message requires that the *wresult* parameter contain a [**security token**](#gt_security-token) that MUST be encoded as an RSTR element, as specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) section 6.2. The RSTR MUST contain a RequestedSecurityToken element, as specified in [WSTrust] section 6.2. This child element MUST contain either a security token that is constructed as an Assertion element, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2.3.2, or encrypted content in an **EncryptedData** element, as specified in [[XMLENC]](https://go.microsoft.com/fwlink/?LinkId=193339) section 3.4.
 
 If present, the syntax of the **Assertion** element MUST conform to a subset of the SAML assertion syntax, as specified in section [2.2.4.2](#Section_2.2.4.2).
 
@@ -628,7 +628,7 @@ The following restrictions are placed on a SAML AttributeStatement used in the S
 - The AttributeStatement, if present, MUST contain one or more Attribute elements, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2.4.4.1. Each Attribute element encapsulates a name/value [**claim**](#gt_claim).
 - The Attribute element MUST have **AttributeName** and the corresponding **AttributeNamespace** attributes specified. These attributes are specified in [SAMLCore] section 2.4.4.1. The **AttributeName** attribute specifies the name of the claim, and one or more AttributeValue elements (specified in [SAMLCore] section 2.4.4.1.1) specify the value (or values) of the claim.<26>
 - All Attribute elements in the AttributeStatement SHOULD<27> have the namespace URL, http://schemas.xmlsoap.org/claims, for the AttributeNamespace attribute value.
-For more information, an example of a SAML attribute can be found in section [4.2.2](#Section_4.2.2). Values for the **AttributeName** attribute that correspond to claims are specified in the abstract data model in section [3](#Section_1.3).
+For more information, an example of a SAML attribute can be found in section [4.2.2](#Section_4.2.2). Values for the **AttributeName** attribute that correspond to claims are specified in the abstract data model in section [3](#Section_3).
 
 <a id="Section_2.2.4.2.1.3"></a>
 ###### 2.2.4.2.1.3 Subject Element
@@ -699,7 +699,7 @@ The following subsections describe a conceptual model of possible data organizat
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Security Token
 
-The primary protocol data unit transported by this protocol is a [**security token**](#gt_security-token) constructed as a subset of the SAML 1.1 assertion element syntax, as specified in section [2.2.4.2](#Section_2.2.4.2). Because this is the only security token format supported by this protocol, no abstract data model is introduced to represent a security token. Throughout section [3](#Section_1.3), wherever it is necessary to discuss internal constructs of a security token, the SAML terminology from section 2.2.4.2 will be used. For further specification, see [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508).
+The primary protocol data unit transported by this protocol is a [**security token**](#gt_security-token) constructed as a subset of the SAML 1.1 assertion element syntax, as specified in section [2.2.4.2](#Section_2.2.4.2). Because this is the only security token format supported by this protocol, no abstract data model is introduced to represent a security token. Throughout section [3](#Section_3), wherever it is necessary to discuss internal constructs of a security token, the SAML terminology from section 2.2.4.2 will be used. For further specification, see [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508).
 
 If a security token returned by this protocol is not formatted as required in section 2.2.4.2, the [**relying party**](#gt_relying-party-rp) MUST return an HTTP 1.1 status code 500 server error to the [**web browser requestor**](#gt_web-browser-requestor).
 
@@ -722,7 +722,7 @@ When a [**requestor IP/STS**](#gt_requestor-ipsts) or a [**resource IP/STS**](#g
 
 **AuthGroups** (optional): A string field used to contain a list of group names, if any exist for this user, that are returned by the **AuthMethod**.
 
-**AuthClaim** (optional): This record holds a [**claim**](#gt_claim) from a security token, as defined in section [3.1.1.4](#Section_3.3). There MUST be one claim per **AuthClaim** record; thus multiple records can be present.
+**AuthClaim** (optional): This record holds a [**claim**](#gt_claim) from a security token, as defined in section [3.1.1.4](#Section_3.1.1.4). There MUST be one claim per **AuthClaim** record; thus multiple records can be present.
 
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Federation Partner
@@ -739,7 +739,7 @@ Also, the relying party MUST obtain the certificate specified in [[X509]](https:
 
 The following is a potential representation for organizing this data. The data is organized as a series of records, each representing a federation partner. The fields of this record are as follows:
 
-- **Identifier**: A string field that uniquely identifies the security realm of the partner. It must be the value that is used for the wtrealm parameter for [wsignin1.0](#Section_3.3.5.2) request messages. For details, see section 2.2.3.
+- **Identifier**: A string field that uniquely identifies the security realm of the partner. It must be the value that is used for the wtrealm parameter for [wsignin1.0](#Section_2.2.3) request messages. For details, see section 2.2.3.
 - **Role**: A string field that identifies the role (or roles) played by the partner, and thus the types of protocol messages that it can send or receive. There are two possible values for this field, requestor IP/STS and relying party. This field must contain at least one value. If a federation partner is capable of playing both roles, this can be represented by a single record with both requestor IP/STS and relying party values present, or it MAY be represented by two separate records with different values for the **Role** field.<35>
 - **URL**: A field indicating the URL to which all protocol messages that are intended for the federation partner identified by this record must be sent.
 - **Certificate** (optional): A field indicating an X.509 certificate that holds the public key that corresponds to the private key used by the partner for signing security tokens. If the **Role** field contains requestor IP/STS, a certificate must be present. Otherwise this field does not apply. Note that the field can contain multiple certificates. If the requestor IP/STS is a farm of servers, all of the servers can use the same private key, or each server can use a different private key.<36>
@@ -747,7 +747,7 @@ A security token, as described in section [2.2.4.2](#Section_2.2.4.2), MUST cont
 
 The following is a potential representation for organizing this data. Two fields are added to the abstract data model of a federation partner record. For further specifications on the AttributeStatement element of a security token mentioned in the following data definitions, see section 2.2.4.2:
 
-- **ClaimsOut** (optional): A list of claims, as defined in section [3.1.1.4](#Section_3.3), that SHOULD be included in an AttributeStatement of a security token sent in a wsignin1.0 response message to the federation partner. This SHOULD match the corresponding **ClaimsIn** record at the federation partner.<37>
+- **ClaimsOut** (optional): A list of claims, as defined in section [3.1.1.4](#Section_3.1.1.4), that SHOULD be included in an AttributeStatement of a security token sent in a wsignin1.0 response message to the federation partner. This SHOULD match the corresponding **ClaimsIn** record at the federation partner.<37>
 - **ClaimsIn** (optional): A list of claims, as specified in section 3.1.1.4, that MAY be included in the AttributeStatement of a security token received in a wsignin1.0 response message from the federation partner. This SHOULD match the corresponding **ClaimsOut** record at the federation partner.<38>
 This protocol does not address whether these additional claims are treated as optional or mandatory by the requestor IP/STS. There is no guarantee that a particular user will have the attribute data necessary to satisfy every claim on the **ClaimsOut** list for every relying party that requests a security token for that user. Whether a requestor IP/STS fails a wsignin1.0 request message if it cannot set every claim is an implementation-specific detail that is not addressed in this protocol. It is recommended that a security token be issued and the relying party be allowed to decide if it has sufficient information about the user to grant access to the protected resource in question.<39>
 
@@ -793,14 +793,14 @@ Custom claim (optional): This claim is used to identify an application-specific 
 <a id="Section_3.1.1.5"></a>
 #### 3.1.1.5 Federation Partner Session Lists for Web Browser Requestors
 
-The protocol [wsignout1.0](#Section_3.2.5.2) request message and [wsignoutcleanup1.0](#Section_3.3.5.4) messages do not explicitly identify the [**user**](#gt_user) who has triggered the [**sign-out**](#gt_sign-out) operation. The [**web browser requestor**](#gt_web-browser-requestor) that transports these messages is the only link to the user. Thus, to process the wsignout1.0 request message and the wsignoutcleanup1.0 request message, a user's activity MUST be tracked in terms of the activity of the user's web browser requestor. [**Federation**](#gt_federation) partners MUST uniquely identify individual web browser requestors. This MAY<43> be done by setting an HTTP session cookie that contains a unique identifier. For more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399).
+The protocol [wsignout1.0](#Section_2.2.5) request message and [wsignoutcleanup1.0](#Section_2.2.6) messages do not explicitly identify the [**user**](#gt_user) who has triggered the [**sign-out**](#gt_sign-out) operation. The [**web browser requestor**](#gt_web-browser-requestor) that transports these messages is the only link to the user. Thus, to process the wsignout1.0 request message and the wsignoutcleanup1.0 request message, a user's activity MUST be tracked in terms of the activity of the user's web browser requestor. [**Federation**](#gt_federation) partners MUST uniquely identify individual web browser requestors. This MAY<43> be done by setting an HTTP session cookie that contains a unique identifier. For more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399).
 
 web browser requestor session: This is a list of [**security tokens**](#gt_security-token) that was issued to (or received from) a specific instance of a web browser requestor in response to Microsoft Web Browser Federated Sign-On Protocol messages. A web browser requestor session is delimited by the user starting and stopping an instance of the software that implements a web browser requestor. For example, if a user was to start two instances of the same web browser requestor software in parallel to obtain security tokens, this would be treated as two sessions. A [**requestor IP/STS**](#gt_requestor-ipsts) MUST maintain the list in terms of [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) using the value of the Audience element from each security token issued during the web browser requestor session. A relying party MUST maintain the list in terms of requestor IP/STSs using the value of the Issuer element from each security token received during the web browser requestor session.
 
 <a id="Section_3.1.1.5.1"></a>
 ##### 3.1.1.5.1 Requestor IP/STS Web Browser Requestor Sessions List
 
-The following is a potential representation for a [**requestor IP/STS**](#gt_requestor-ipsts) to organize the data for tracking [**web browser requestor**](#gt_web-browser-requestor) sessions to support processing of a [wsignout1.0](#Section_3.2.5.2) request and a [wsignoutcleanup1.0](#Section_3.3.5.4) request message. The data is organized as a list of records, each representing a particular web browser requestor session.
+The following is a potential representation for a [**requestor IP/STS**](#gt_requestor-ipsts) to organize the data for tracking [**web browser requestor**](#gt_web-browser-requestor) sessions to support processing of a [wsignout1.0](#Section_2.2.5) request and a [wsignoutcleanup1.0](#Section_2.2.6) request message. The data is organized as a list of records, each representing a particular web browser requestor session.
 
 The following is a potential representation for organizing the data record that represents a particular web browser requestor session on the list.
 
@@ -813,7 +813,7 @@ WebBrowserRequestorSession: This record holds the list of [**security tokens**](
 <a id="Section_3.1.1.5.2"></a>
 ##### 3.1.1.5.2 Relying Party Web Browser Requestor Sessions List
 
-The following is a potential representation for a [**relying party**](#gt_relying-party-rp) to organize the data for tracking [**web browser requestor**](#gt_web-browser-requestor) sessions to support processing of [wsignout1.0](#Section_3.2.5.2) and [wsignoutcleanup1.0](#Section_3.3.5.4) messages. The data is organized as a list of records, each representing a particular web browser requestor session.
+The following is a potential representation for a [**relying party**](#gt_relying-party-rp) to organize the data for tracking [**web browser requestor**](#gt_web-browser-requestor) sessions to support processing of [wsignout1.0](#Section_2.2.5) and [wsignoutcleanup1.0](#Section_2.2.6) messages. The data is organized as a list of records, each representing a particular web browser requestor session.
 
 The following is a potential representation for organizing the data record that represents a particular web browser requestor session on the list.
 
@@ -837,18 +837,18 @@ Implementations MAY<47> use a timer to indicate when the validity interval of a 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-[**Requestor IP/STSs**](#gt_requestor-ipsts) and [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) MUST exchange metadata and initialize [**federation**](#gt_federation) partner records in local configuration data, as specified in section [3.1.1.3](#Section_3.3). There is no protocol-specific initialization required for a [**web browser requestor**](#gt_web-browser-requestor).
+[**Requestor IP/STSs**](#gt_requestor-ipsts) and [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) MUST exchange metadata and initialize [**federation**](#gt_federation) partner records in local configuration data, as specified in section [3.1.1.3](#Section_3.1.1.3). There is no protocol-specific initialization required for a [**web browser requestor**](#gt_web-browser-requestor).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
 Administrative actions starting or stopping the [**requestor IP/STS**](#gt_requestor-ipsts) or [**relying party**](#gt_relying-party-rp) services, or changing service configuration data do not trigger protocol message exchanges. Protocol request messages are triggered by [**user**](#gt_user) action via a [**web browser requestor**](#gt_web-browser-requestor).
 
-The [wsignin1.0](#Section_3.3.5.2) request message is triggered when a web browser requestor sends an HTTP GET to a [**WS resource**](#gt_web-service-ws-resource) at a WS resource that requires users to be authenticated using this protocol.
+The [wsignin1.0](#Section_2.2.3) request message is triggered when a web browser requestor sends an HTTP GET to a [**WS resource**](#gt_web-service-ws-resource) at a WS resource that requires users to be authenticated using this protocol.
 
-The [wsignout1.0](#Section_3.2.5.2) request message is triggered when a user explicitly requests to initiate the [**sign-out**](#gt_sign-out) operation at a WS resource.
+The [wsignout1.0](#Section_2.2.5) request message is triggered when a user explicitly requests to initiate the [**sign-out**](#gt_sign-out) operation at a WS resource.
 
-The [wsignoutcleanup1.0](#Section_3.3.5.4) request message is triggered when a user explicitly requests to initiate the sign-out operation at a requestor IP/STS, or in response to the wsignout1.0 message discussed earlier.
+The [wsignoutcleanup1.0](#Section_2.2.6) request message is triggered when a user explicitly requests to initiate the sign-out operation at a requestor IP/STS, or in response to the wsignout1.0 message discussed earlier.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -858,7 +858,7 @@ This section describes message processing functionality that is common to [**fed
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Determining Message Type
 
-A [**requestor IP/STS**](#gt_requestor-ipsts) and a [**relying party**](#gt_relying-party-rp) process several different types of messages. Upon receipt of a message, they determine its type by inspection of the *wa* parameter. The *wa* parameter MUST be included in every message used by this protocol (for further specification, see section [2.2](#Section_1.3)). The *wa* parameter, and all other protocol-specific parameters, MUST be transported in query string parameters when the protocol message is transported using an HTTP GET. These parameters MUST be transported in the body of the HTTP POST when the protocol message is transported using an HTTP POST. If protocol-specific parameters are included in query string parameters with an HTTP POST, they SHOULD<48> be ignored.
+A [**requestor IP/STS**](#gt_requestor-ipsts) and a [**relying party**](#gt_relying-party-rp) process several different types of messages. Upon receipt of a message, they determine its type by inspection of the *wa* parameter. The *wa* parameter MUST be included in every message used by this protocol (for further specification, see section [2.2](#Section_2.2)). The *wa* parameter, and all other protocol-specific parameters, MUST be transported in query string parameters when the protocol message is transported using an HTTP GET. These parameters MUST be transported in the body of the HTTP POST when the protocol message is transported using an HTTP POST. If protocol-specific parameters are included in query string parameters with an HTTP POST, they SHOULD<48> be ignored.
 
 A [**web browser requestor**](#gt_web-browser-requestor) is not required to understand the types or content of the protocol messages it transports between a requestor IP/STS and a relying party.<49>
 
@@ -878,10 +878,10 @@ This protocol does not include provisions for automated retry or recovery proces
 
 This section describes the generic message processing performed by a [**relying party**](#gt_relying-party-rp) when requesting a [**security token**](#gt_security-token). The purpose is to authenticate a [**user**](#gt_user) by requesting a security token to be issued for a specific user with the relying party as the audience.
 
-The generic processing model for sending a [wsignin1.0](#Section_3.3.5.2) message MUST consist of the following steps, as described in the following subsections:
+The generic processing model for sending a [wsignin1.0](#Section_2.2.3) message MUST consist of the following steps, as described in the following subsections:
 
-- [Protocol Activation (section 3.1.5.3.1)](#Section_3.3.5.3.1)
-- [Parameter Marshaling (section 3.1.5.3.2)](#Section_3.3.5.3.2)
+- [Protocol Activation (section 3.1.5.3.1)](#Section_3.1.5.3.1)
+- [Parameter Marshaling (section 3.1.5.3.2)](#Section_3.1.5.3.2)
 - [Requestor IP/STS Security Realm Discovery (section 3.1.5.3.3)](#Section_3.1.5.3.3)
 - [Message Transmission (section 3.1.5.3.4)](#Section_3.1.5.3.4)
 <a id="Section_3.1.5.3.1"></a>
@@ -892,19 +892,19 @@ For a [**relying party**](#gt_relying-party-rp), the protocol is triggered when 
 <a id="Section_3.1.5.3.2"></a>
 ##### 3.1.5.3.2 Parameter Marshaling
 
-The [**relying party**](#gt_relying-party-rp) MUST set all the required query string parameters for a [wsignin1.0](#Section_3.3.5.2) request message, as specified in section 2.2.3. It MUST set the *wtrealm* value from the configuration data. It SHOULD<52> store the original application URL provided by [**WS resource**](#gt_web-service-ws-resource) in *wctx*.
+The [**relying party**](#gt_relying-party-rp) MUST set all the required query string parameters for a [wsignin1.0](#Section_2.2.3) request message, as specified in section 2.2.3. It MUST set the *wtrealm* value from the configuration data. It SHOULD<52> store the original application URL provided by [**WS resource**](#gt_web-service-ws-resource) in *wctx*.
 
 <a id="Section_3.1.5.3.3"></a>
 ##### 3.1.5.3.3 Requestor IP/STS Security Realm Discovery
 
-Because the [**user**](#gt_user) has not yet been authenticated, the [**relying party**](#gt_relying-party-rp) might not know where to send a [wsignin1.0](#Section_3.3.5.2) request message. The relying party MUST obtain the [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) identifier for the [**requestor IP/STS**](#gt_requestor-ipsts) that issues [**security tokens**](#gt_security-token) for the user. When the relying party is factored into [**WS resource**](#gt_web-service-ws-resource) and [**resource IP/STS**](#gt_resource-ipsts) components, the WS resource relies on the resource IP/STS to discover the correct [**federation**](#gt_federation) partner. The resource IP/STS MAY discover the security realm of the federation partner by interacting with the user via the user's [**web browser requestor**](#gt_web-browser-requestor). Or the information MAY be obtained or derived from a parameter (such as *whr*, *domain_hint*, *login_hint,* or *username,* specified in section 2.2.3) that was included on the original request to WS resource.<53>
+Because the [**user**](#gt_user) has not yet been authenticated, the [**relying party**](#gt_relying-party-rp) might not know where to send a [wsignin1.0](#Section_2.2.3) request message. The relying party MUST obtain the [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) identifier for the [**requestor IP/STS**](#gt_requestor-ipsts) that issues [**security tokens**](#gt_security-token) for the user. When the relying party is factored into [**WS resource**](#gt_web-service-ws-resource) and [**resource IP/STS**](#gt_resource-ipsts) components, the WS resource relies on the resource IP/STS to discover the correct [**federation**](#gt_federation) partner. The resource IP/STS MAY discover the security realm of the federation partner by interacting with the user via the user's [**web browser requestor**](#gt_web-browser-requestor). Or the information MAY be obtained or derived from a parameter (such as *whr*, *domain_hint*, *login_hint,* or *username,* specified in section 2.2.3) that was included on the original request to WS resource.<53>
 
 The resource IP/STS MUST use the security realm identifier to look up the correct federation partner record in configuration data and obtain the requestor IP/STS URL for protocol messages. Once obtained, the security realm identifier MAY<54> be preserved for subsequent sessions by writing an HTTP persistent cookie (for more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399)) to the web browser requestor.
 
 <a id="Section_3.1.5.3.4"></a>
 ##### 3.1.5.3.4 Message Transmission
 
-The [**relying party**](#gt_relying-party-rp) sends a [wsignin1.0](#Section_3.3.5.2) request message by returning an HTTP 302 response to the [**web browser requestor**](#gt_web-browser-requestor) with the Location field set to the URL of the [**requestor IP/STS**](#gt_requestor-ipsts).
+The [**relying party**](#gt_relying-party-rp) sends a [wsignin1.0](#Section_2.2.3) request message by returning an HTTP 302 response to the [**web browser requestor**](#gt_web-browser-requestor) with the Location field set to the URL of the [**requestor IP/STS**](#gt_requestor-ipsts).
 
 All the query string parameters required for the protocol MUST be set properly, as specified in section 2.2.3.
 
@@ -919,33 +919,33 @@ The **ad_fs_behavior_level** abstract data model (ADM) element is defined in [MS
 
 This section describes the generic message processing performed by either a [**requestor IP/STS**](#gt_requestor-ipsts) or a [**resource IP/STS**](#gt_resource-ipsts) (a component of a [**relying party**](#gt_relying-party-rp) specified in section [3.3](#Section_3.3)) when issuing a [**security token**](#gt_security-token). [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) is used generically to see either a requestor IP/STS or a resource IP/STS in the following subsections.
 
-The generic processing model for responding to a [wsignin1.0](#Section_3.3.5.2) message is specified to consist of the following steps, as described in the following subsections:
+The generic processing model for responding to a [wsignin1.0](#Section_2.2.3) message is specified to consist of the following steps, as described in the following subsections:
 
-- [Protocol Activation (section 3.1.5.4.1)](#Section_3.3.5.3.1)
-- [Message Validation (section 3.1.5.4.2)](#Section_3.3.5.2.2)
-- [User Identification and Authentication (section 3.1.5.4.3)](#Section_3.3.5.2.3)
-- [User Attribute Retrieval (section 3.1.5.4.4)](#Section_3.3.5.2.4)
-- [Claim Mapping (section 3.1.5.4.5)](#Section_3.3.5.2.5)
+- [Protocol Activation (section 3.1.5.4.1)](#Section_3.1.5.4.1)
+- [Message Validation (section 3.1.5.4.2)](#Section_3.1.5.4.2)
+- [User Identification and Authentication (section 3.1.5.4.3)](#Section_3.1.5.4.3)
+- [User Attribute Retrieval (section 3.1.5.4.4)](#Section_3.1.5.4.4)
+- [Claim Mapping (section 3.1.5.4.5)](#Section_3.1.5.4.5)
 - [SAML Assertion Construction (section 3.1.5.4.6)](#Section_3.1.5.4.6)
-- [Response Message Processing (section 3.1.5.4.7)](#Section_3.3.5.4.5)
+- [Response Message Processing (section 3.1.5.4.7)](#Section_3.1.5.4.7)
 <a id="Section_3.1.5.4.1"></a>
 ##### 3.1.5.4.1 Protocol Activation
 
-The protocol is triggered by receipt of a [wsignin1.0](#Section_3.3.5.2) request message. The syntax MUST be validated by ensuring that all required parameters are present and contain the correct type of data. For further specifications, see section 2.2.3.
+The protocol is triggered by receipt of a [wsignin1.0](#Section_2.2.3) request message. The syntax MUST be validated by ensuring that all required parameters are present and contain the correct type of data. For further specifications, see section 2.2.3.
 
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 Message Validation
 
-The syntax MUST be validated by ensuring that all required parameters are present and contain the correct type of data. For further specifications, see section [2.2.3](#Section_3.3.5.2).
+The syntax MUST be validated by ensuring that all required parameters are present and contain the correct type of data. For further specifications, see section [2.2.3](#Section_2.2.3).
 
-Before issuing a [**security token**](#gt_security-token) to protect the [**user's**](#gt_user) privacy, the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) MUST verify that the entity that sent the wsignin1.0 request message is a federated partner that holds the role of [**relying party**](#gt_relying-party-rp), as described in the [Abstract Data Model](#Section_3.4.1). The relying party's identifier MUST be retrieved from the *wtrealm* parameter in the request (as specified in section [2.2.1](#Section_2.2.1)) and compared against the [**federation**](#gt_federation) partner configuration data (as specified in section [3.1.1.2](#Section_3.1.1.2)). <55>
+Before issuing a [**security token**](#gt_security-token) to protect the [**user's**](#gt_user) privacy, the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) MUST verify that the entity that sent the wsignin1.0 request message is a federated partner that holds the role of [**relying party**](#gt_relying-party-rp), as described in the [Abstract Data Model](#Section_3.1.1). The relying party's identifier MUST be retrieved from the *wtrealm* parameter in the request (as specified in section [2.2.1](#Section_2.2.1)) and compared against the [**federation**](#gt_federation) partner configuration data (as specified in section [3.1.1.2](#Section_3.1.1.2)). <55>
 
 The *wauth* parameter, which is described in section 2.2.3, MAY<56> be used.
 
 <a id="Section_3.1.5.4.3"></a>
 ##### 3.1.5.4.3 User Identification and Authentication
 
-The [**user's**](#gt_user) identity is not conveyed explicitly in the [wsignin1.0](#Section_3.3.5.2) request message. The [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) MUST establish this by initiating a message exchange with the [**web browser requestor**](#gt_web-browser-requestor) that will cause the users to identify themselves and prove their right to assert that identity.
+The [**user's**](#gt_user) identity is not conveyed explicitly in the [wsignin1.0](#Section_2.2.3) request message. The [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) MUST establish this by initiating a message exchange with the [**web browser requestor**](#gt_web-browser-requestor) that will cause the users to identify themselves and prove their right to assert that identity.
 
 The user authentication methods are implementation-specific and are not addressed in this protocol. It is recommended that the IP/STS employ a standard protocol to authenticate the user, such as Kerberos (for more information, see [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458)). It MAY use an HTML form to collect credentials directly from the user (ideally using HTTPS) and compare them against a local database. Or it MAY authenticate the user by initiating the Microsoft Web Browser Federated Sign-On Protocol with another [**STS**](#gt_security-token-service-sts).<57>
 
@@ -968,12 +968,12 @@ If additional [**claims**](#gt_claim) are required by a ClaimsOut entry for the 
 
 Having assembled the required set of [**claims**](#gt_claim), the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) constructs a [**security token**](#gt_security-token) according to the SAML 1.1 assertion syntax specified in section [2.2.4.2](#Section_2.2.4.2). The [**relying party's**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) identity MUST be used to populate the Audience element of the required AuthenticationStatement. From the Authentication Context, AuthIdentity, AuthMethod, and AuthTime MUST be used to populate the Subject element, AuthenticationMethod attribute, and AuthenticationInstant, respectively, of the AuthenticationStatement. Additional claims required by the relying party MUST be placed in separate Attribute elements in the AttributeStatement.
 
-As specified in section [2.2.4.1](#Section_2.2.4.1), the security token MUST be encoded as a wst:RequestSecurityTokenResponse and returned in the *wresult* parameter of the [wsignin1.0](#Section_3.3.5.2) response message. The IP/STS MAY encrypt the security token as described in section 2.2.4.1.
+As specified in section [2.2.4.1](#Section_2.2.4.1), the security token MUST be encoded as a wst:RequestSecurityTokenResponse and returned in the *wresult* parameter of the [wsignin1.0](#Section_2.2.3) response message. The IP/STS MAY encrypt the security token as described in section 2.2.4.1.
 
 <a id="Section_3.1.5.4.7"></a>
 ##### 3.1.5.4.7 Response Message Processing
 
-All required parameters for a [wsignin1.0](#Section_3.3.5.2) response message MUST be set correctly. The completed response message MUST be returned in an HTTP POST, as specified in section [2.1](#Section_2.1), to the URL designated for the [**relying party**](#gt_relying-party-rp) that sent the request.<59>
+All required parameters for a [wsignin1.0](#Section_2.2.3) response message MUST be set correctly. The completed response message MUST be returned in an HTTP POST, as specified in section [2.1](#Section_2.1), to the URL designated for the [**relying party**](#gt_relying-party-rp) that sent the request.<59>
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -995,7 +995,7 @@ This section describes details of protocol processing that must be understood, i
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-A [**requestor IP/STS**](#gt_requestor-ipsts) does not require additions to the [abstract data model (section 3.1.1)](#Section_3.4.1).
+A [**requestor IP/STS**](#gt_requestor-ipsts) does not require additions to the [abstract data model (section 3.1.1)](#Section_3.1.1).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -1009,7 +1009,7 @@ Before any protocol messages can be exchanged, a [**requestor IP/STS**](#gt_requ
 
 To service protocol messages, a requestor IP/STS MUST be listening for requests at the URL it has advertised to federation partners.
 
-To service [wsignin1.0](#Section_3.3.5.2) request messages, a requestor IP/STS MUST be able to contact [**user**](#gt_user) authentication and account services in its local [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) to obtain the authenticated user identity and optional attributes necessary for constructing a [**security token**](#gt_security-token).
+To service [wsignin1.0](#Section_2.2.3) request messages, a requestor IP/STS MUST be able to contact [**user**](#gt_user) authentication and account services in its local [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) to obtain the authenticated user identity and optional attributes necessary for constructing a [**security token**](#gt_security-token).
 
 The protocol does not require specific initialization on receipt of a protocol message.
 
@@ -1029,15 +1029,15 @@ This section describes the logical steps performed by a [**requestor IP/STS**](#
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Issuing a Security Token by Responding to a wsignin1.0 Request Message
 
-This message is received by a [**requestor IP/STS**](#gt_requestor-ipsts) from a [**relying party**](#gt_relying-party-rp). The generic model for responding to a [wsignin1.0](#Section_3.3.5.2) message is specified to consist of the following steps (from section [3.1.5.4](#Section_3.1.5.4)):
+This message is received by a [**requestor IP/STS**](#gt_requestor-ipsts) from a [**relying party**](#gt_relying-party-rp). The generic model for responding to a [wsignin1.0](#Section_2.2.3) message is specified to consist of the following steps (from section [3.1.5.4](#Section_3.1.5.4)):
 
-- [Protocol Activation (section 3.1.5.4.1)](#Section_3.3.5.3.1)
-- [Message Validation (section 3.1.5.4.2)](#Section_3.3.5.2.2)
-- [User Identification and Authentication (section 3.1.5.4.3)](#Section_3.3.5.2.3)
-- [User Attribute Retrieval (section 3.1.5.4.4)](#Section_3.3.5.2.4)
-- [Claim Mapping (section 3.1.5.4.5)](#Section_3.3.5.2.5)
+- [Protocol Activation (section 3.1.5.4.1)](#Section_3.1.5.4.1)
+- [Message Validation (section 3.1.5.4.2)](#Section_3.1.5.4.2)
+- [User Identification and Authentication (section 3.1.5.4.3)](#Section_3.1.5.4.3)
+- [User Attribute Retrieval (section 3.1.5.4.4)](#Section_3.1.5.4.4)
+- [Claim Mapping (section 3.1.5.4.5)](#Section_3.1.5.4.5)
 - [SAML Assertion Construction (section 3.1.5.4.6)](#Section_3.1.5.4.6)
-- [Response Message Processing (section 3.1.5.4.7)](#Section_3.3.5.4.5)
+- [Response Message Processing (section 3.1.5.4.7)](#Section_3.1.5.4.7)
 A requestor IP/STS MUST process a wsignin1.0 request message, as described in the preceding sections, with the following exception:
 
 - User identification and authentication
@@ -1051,17 +1051,17 @@ This message is used to request that a [**requestor IP/STS**](#gt_requestor-ipst
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 Protocol Activation
 
-The protocol is triggered by receipt of a [wsignout1.0](#Section_3.2.5.2) request message. The request MUST be validated by ensuring that all required parameters are present and contain the correct type of data (as specified in section [2.2.3](#Section_3.3.5.2)).
+The protocol is triggered by receipt of a [wsignout1.0](#Section_2.2.5) request message. The request MUST be validated by ensuring that all required parameters are present and contain the correct type of data (as specified in section [2.2.3](#Section_2.2.3)).
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Clean-Up Processing
 
-A [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD delete any session state that has been locally cached for the [**web browser requestor**](#gt_web-browser-requestor) that delivered the [wsignout1.0](#Section_3.2.5.2) request message. A requestor IP/STS SHOULD send a [wsignoutcleanup1.0](#Section_3.3.5.4) message to each [**relying party**](#gt_relying-party-rp) to which a [**security token**](#gt_security-token) has been issued for the web browser requestor that delivered the wsignout1.0 request message, as specified in section [3.2.5.3](#Section_3.2.5.3).<61>
+A [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD delete any session state that has been locally cached for the [**web browser requestor**](#gt_web-browser-requestor) that delivered the [wsignout1.0](#Section_2.2.5) request message. A requestor IP/STS SHOULD send a [wsignoutcleanup1.0](#Section_2.2.6) message to each [**relying party**](#gt_relying-party-rp) to which a [**security token**](#gt_security-token) has been issued for the web browser requestor that delivered the wsignout1.0 request message, as specified in section [3.2.5.3](#Section_3.2.5.3).<61>
 
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Response Message Processing
 
-If a *wreply* parameter was included in the request, as specified in section [2.2.5](#Section_3.2.5.2), the [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD redirect the [**web browser requestor**](#gt_web-browser-requestor) to the specified URL when it has completed clean-up operations.<62>
+If a *wreply* parameter was included in the request, as specified in section [2.2.5](#Section_2.2.5), the [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD redirect the [**web browser requestor**](#gt_web-browser-requestor) to the specified URL when it has completed clean-up operations.<62>
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Outbound wsignoutcleanup1.0 Request Message Processing
@@ -1071,27 +1071,27 @@ This message is used to request that a [**relying party**](#gt_relying-party-rp)
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 Protocol Activation
 
-The protocol is triggered either when a [**user**](#gt_user) requests that the user's session be terminated, possibly by clicking a [**sign-out**](#gt_sign-out) button, or when a [wsignout1.0](#Section_3.2.5.2) request message is received from a [**relying party**](#gt_relying-party-rp).
+The protocol is triggered either when a [**user**](#gt_user) requests that the user's session be terminated, possibly by clicking a [**sign-out**](#gt_sign-out) button, or when a [wsignout1.0](#Section_2.2.5) request message is received from a [**relying party**](#gt_relying-party-rp).
 
 <a id="Section_3.2.5.3.2"></a>
 ##### 3.2.5.3.2 Relying Party Security Realm Discovery
 
-As specified in section [3.1.1.5.1](#Section_3.1.1.5.1), a [**requestor IP/STS**](#gt_requestor-ipsts) MAY store a session identifier for the [**web browser requestor**](#gt_web-browser-requestor) in an HTTP session cookie (for more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399)). It uses this identifier and its Outbound Sessions List to develop the list of [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) to which it SHOULD<63> send [wsignoutcleanup1.0](#Section_3.3.5.4) request messages.
+As specified in section [3.1.1.5.1](#Section_3.1.1.5.1), a [**requestor IP/STS**](#gt_requestor-ipsts) MAY store a session identifier for the [**web browser requestor**](#gt_web-browser-requestor) in an HTTP session cookie (for more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399)). It uses this identifier and its Outbound Sessions List to develop the list of [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) to which it SHOULD<63> send [wsignoutcleanup1.0](#Section_2.2.6) request messages.
 
 <a id="Section_3.2.5.3.3"></a>
 ##### 3.2.5.3.3 Clean-Up Processing
 
-Because the protocol does not guarantee a response to a [wsignoutcleanup1.0](#Section_3.3.5.4) message, a [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD clean up the locally cached session state that it maintains before sending wsignoutcleanup1.0 messages. For example, as specified in section [3.1.1.5.1](#Section_3.1.1.5.1), the WebBrowserRequestorSession record SHOULD be deleted from the Outbound Sessions List. As each wsignoutcleanup1.0 message is sent, the requestor IP/STS SHOULD delete the corresponding Session Entry from the record. When the last Session Entry is deleted, the WebBrowserRequestorSession SHOULD be deleted from the Outbound Sessions List.<64>
+Because the protocol does not guarantee a response to a [wsignoutcleanup1.0](#Section_2.2.6) message, a [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD clean up the locally cached session state that it maintains before sending wsignoutcleanup1.0 messages. For example, as specified in section [3.1.1.5.1](#Section_3.1.1.5.1), the WebBrowserRequestorSession record SHOULD be deleted from the Outbound Sessions List. As each wsignoutcleanup1.0 message is sent, the requestor IP/STS SHOULD delete the corresponding Session Entry from the record. When the last Session Entry is deleted, the WebBrowserRequestorSession SHOULD be deleted from the Outbound Sessions List.<64>
 
 <a id="Section_3.2.5.3.4"></a>
 ##### 3.2.5.3.4 Message Transmission
 
-The [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD send a [wsignoutcleanup1.0](#Section_3.3.5.4) request message to each [**relying party**](#gt_relying-party-rp) using an explicit HTTP GET method because the protocol does not support chaining wsignoutcleanup1.0 messages using the HTTP 1.1 redirection facilities. How these messages are sent is implementation-specific and not addressed in this protocol. The requestor IP/STS MAY walk the list of relying parties and issue the requests individually.<65>
+The [**requestor IP/STS**](#gt_requestor-ipsts) SHOULD send a [wsignoutcleanup1.0](#Section_2.2.6) request message to each [**relying party**](#gt_relying-party-rp) using an explicit HTTP GET method because the protocol does not support chaining wsignoutcleanup1.0 messages using the HTTP 1.1 redirection facilities. How these messages are sent is implementation-specific and not addressed in this protocol. The requestor IP/STS MAY walk the list of relying parties and issue the requests individually.<65>
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-A [**requestor IP/STS**](#gt_requestor-ipsts) does not need to interact with any timers, or service any timer events, beyond those that might be used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in section [3.1.6](#Section_3.3.6).<66>
+A [**requestor IP/STS**](#gt_requestor-ipsts) does not need to interact with any timers, or service any timer events, beyond those that might be used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in section [3.1.6](#Section_3.1.6).<66>
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
@@ -1108,12 +1108,12 @@ This section describes details of protocol processing that must be understood, i
 
 A [**relying party**](#gt_relying-party-rp) performs two distinct functions. It processes protocol messages and the [**security tokens**](#gt_security-token) it receives, and it controls [**user**](#gt_user) access to protected resources based on the contents of those security tokens. The latter function is implementation-specific and not addressed in this protocol. A relying party MAY<67> be factored into separate components, a [**resource IP/STS**](#gt_resource-ipsts), and a [**WS resource**](#gt_web-service-ws-resource) as follows. The resource IP/STS component MUST be able to perform all of the metadata and protocol message exchanges required to obtain a security token from a [**requestor IP/STS**](#gt_requestor-ipsts) in another [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50). The WS resource component SHOULD use the Authentication Context derived from that security token to control user access.
 
-The abstract data model for a relying party MAY<68> be extended to enable this componentization without requiring a requestor IP/STS to have interior knowledge of the relying party structure. This implementation-approach is supported by the following extensions of the abstract data model for a [**federation**](#gt_federation) partner, as specified in section [3.1.1.3](#Section_3.3).
+The abstract data model for a relying party MAY<68> be extended to enable this componentization without requiring a requestor IP/STS to have interior knowledge of the relying party structure. This implementation-approach is supported by the following extensions of the abstract data model for a [**federation**](#gt_federation) partner, as specified in section [3.1.1.3](#Section_3.1.1.3).
 
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Resource IP/STS Abstract Data Model Extensions
 
-The following is a potential representation for a [**resource IP/STS**](#gt_resource-ipsts) to organize the data that represents its [**federation**](#gt_federation) partners. The federation partner record is used, as specified in section [3.1.1.3](#Section_3.3), with the following extensions and dependencies for the possible range of values for fields:
+The following is a potential representation for a [**resource IP/STS**](#gt_resource-ipsts) to organize the data that represents its [**federation**](#gt_federation) partners. The federation partner record is used, as specified in section [3.1.1.3](#Section_3.1.1.3), with the following extensions and dependencies for the possible range of values for fields:
 
 **Identifier**: For a [**requestor IP/STS**](#gt_requestor-ipsts) from another [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50), it MUST be the *wtrealm* value, as specified in section 3.1.1.3. For a [**WS resource**](#gt_web-service-ws-resource), it MUST be an identifier that is unique within the security realm such as a web server or web application URL or URI.
 
@@ -1126,7 +1126,7 @@ The following is a potential representation for a [**resource IP/STS**](#gt_reso
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 WS Resource Abstract Data Model Extensions
 
-Following is a potential representation for a [**WS resource**](#gt_web-service-ws-resource) to organize the data that represents its [**federation**](#gt_federation) partners. The federation partner record is used, as specified in section [3.1.1.3](#Section_3.3), with the following restrictions on the range of values for the **Role** field:
+Following is a potential representation for a [**WS resource**](#gt_web-service-ws-resource) to organize the data that represents its [**federation**](#gt_federation) partners. The federation partner record is used, as specified in section [3.1.1.3](#Section_3.1.1.3), with the following restrictions on the range of values for the **Role** field:
 
 - **Role**: A string field that identifies the role (or roles) played by the partner and thus the types of protocol messages that it can send or receive. The only possible value for this field is [**resource IP/STS**](#gt_resource-ipsts).
 <a id="Section_3.3.2"></a>
@@ -1141,7 +1141,7 @@ Before protocol messages can be exchanged, a [**relying party**](#gt_relying-par
 
 To service protocol messages, a relying party MUST be listening for requests at the URL it has advertised to federation partners.
 
-To service [wsignin1.0](#Section_3.3.5.2) response messages, a relying party SHOULD<72> have network access to the certificate revocation list (CRL) distribution point (CDP) contained in X.509 certificates obtained from federation partners for the purpose of validating [**security token**](#gt_security-token) [**signatures**](#gt_signature), as specified in section 3.1.1.2.
+To service [wsignin1.0](#Section_2.2.3) response messages, a relying party SHOULD<72> have network access to the certificate revocation list (CRL) distribution point (CDP) contained in X.509 certificates obtained from federation partners for the purpose of validating [**security token**](#gt_security-token) [**signatures**](#gt_signature), as specified in section 3.1.1.2.
 
 The protocol does not require specific initialization upon receipt of a protocol message.
 
@@ -1158,20 +1158,20 @@ This section describes the logical steps performed by a [**relying party**](#gt_
 - wsignin1.0
 - wsignout1.0
 - wsignoutcleanup1.0
-Message processing by the relying party is described separately for the [**resource IP/STS**](#gt_resource-ipsts) and [**WS resource**](#gt_web-service-ws-resource) components that were introduced in the revised [abstract data model (section 3.3.1)](#Section_3.4.1).
+Message processing by the relying party is described separately for the [**resource IP/STS**](#gt_resource-ipsts) and [**WS resource**](#gt_web-service-ws-resource) components that were introduced in the revised [abstract data model (section 3.3.1)](#Section_3.3.1).
 
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Requesting a Security Token by Sending a wsignin1.0 Request Message
 
-This message is sent by a [**relying party**](#gt_relying-party-rp) to a [**requestor IP/STS**](#gt_requestor-ipsts) to request that a [**security token**](#gt_security-token) be issued for a specific [**user**](#gt_user) with the relying party as the audience. The generic model for sending a [wsignin1.0](#Section_3.3.5.2) message is specified to consist of the following steps in Requesting a Security Token by Issuing a wsignin1.0 Request Message (section [3.1.5.3)](#Section_d8eb827fb3044f5aa6ed82630a46dea4):
+This message is sent by a [**relying party**](#gt_relying-party-rp) to a [**requestor IP/STS**](#gt_requestor-ipsts) to request that a [**security token**](#gt_security-token) be issued for a specific [**user**](#gt_user) with the relying party as the audience. The generic model for sending a [wsignin1.0](#Section_2.2.3) message is specified to consist of the following steps in Requesting a Security Token by Issuing a wsignin1.0 Request Message (section [3.1.5.3)](#Section_3.1.5.3):
 
-- [Protocol Activation (section 3.1.5.3.1)](#Section_3.3.5.3.1)
-- [Parameter Marshaling (section 3.1.5.3.2)](#Section_3.3.5.3.2)
+- [Protocol Activation (section 3.1.5.3.1)](#Section_3.1.5.3.1)
+- [Parameter Marshaling (section 3.1.5.3.2)](#Section_3.1.5.3.2)
 - [Requestor IP/STS Security Realm Discovery (section 3.1.5.3.3)](#Section_3.1.5.3.3)
 - [Message Transmission (section 3.1.5.3.4)](#Section_3.1.5.3.4)
 A relying party MUST process a wsignin1.0 request message (section 2.2.3), as specified in the preceding sections, with the following exceptions:
 
-- [Protocol Activation (section 3.3.5.1.1)](#Section_3.3.5.3.1)
+- [Protocol Activation (section 3.3.5.1.1)](#Section_3.3.5.1.1)
 - Parameter Marshaling ([Message Validation (section 3.3.5.2.2)](#Section_3.3.5.2.2))
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Protocol Activation
@@ -1181,14 +1181,14 @@ When a [**relying party**](#gt_relying-party-rp) is factored into [**resource IP
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 Parameter Marshaling
 
-A [**resource IP/STS**](#gt_resource-ipsts) that sends a [wsignin1.0](#Section_3.3.5.2) request message to a [**security token service**](#gt_security-token-service-sts) in a different [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) MUST set the *wtrealm* parameter, as specified in [Common Syntax for Request Messages (section 2.2.1)](#Section_2.2.1). A [**WS resource**](#gt_web-service-ws-resource) that sends a wsignin1.0 request message to a security token service in the same security realm cannot use the *wtrealm* parameter. It MAY use the *wreply* parameter to distinguish itself from other WS resources in the security realm.<74>
+A [**resource IP/STS**](#gt_resource-ipsts) that sends a [wsignin1.0](#Section_2.2.3) request message to a [**security token service**](#gt_security-token-service-sts) in a different [**security realm**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) MUST set the *wtrealm* parameter, as specified in [Common Syntax for Request Messages (section 2.2.1)](#Section_2.2.1). A [**WS resource**](#gt_web-service-ws-resource) that sends a wsignin1.0 request message to a security token service in the same security realm cannot use the *wtrealm* parameter. It MAY use the *wreply* parameter to distinguish itself from other WS resources in the security realm.<74>
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Receiving a Security Token by Processing a wsignin1.0 Response Message
 
-This message is received by a [**resource IP/STS**](#gt_resource-ipsts) from a [**requestor IP/STS**](#gt_requestor-ipsts). The purpose is to accept a [**security token**](#gt_security-token) that was issued for a specific [**user**](#gt_user), with the resource IP/STS as the audience, in response to a [wsignin1.0](#Section_3.3.5.2) request message. The generic model for [**relying party**](#gt_relying-party-rp) processing of a [wsignin1.0](#Section_3.3.5.2) response message is specified to consist of the following steps, specified in the following sections:
+This message is received by a [**resource IP/STS**](#gt_resource-ipsts) from a [**requestor IP/STS**](#gt_requestor-ipsts). The purpose is to accept a [**security token**](#gt_security-token) that was issued for a specific [**user**](#gt_user), with the resource IP/STS as the audience, in response to a [wsignin1.0](#Section_2.2.3) request message. The generic model for [**relying party**](#gt_relying-party-rp) processing of a [wsignin1.0](#Section_2.2.3) response message is specified to consist of the following steps, specified in the following sections:
 
-- [Protocol Activation (section 3.3.5.2.1)](#Section_3.3.5.3.1)
+- [Protocol Activation (section 3.3.5.2.1)](#Section_3.3.5.2.1)
 - [Message Validation (section 3.3.5.2.2)](#Section_3.3.5.2.2)
 - [User Identification and Authentication (section 3.3.5.2.3)](#Section_3.3.5.2.3)
 - [User Attribute Retrieval (section 3.3.5.2.4)](#Section_3.3.5.2.4)
@@ -1197,12 +1197,12 @@ This message is received by a [**resource IP/STS**](#gt_resource-ipsts) from a [
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Protocol Activation
 
-The protocol is triggered by receipt of a [wsignin1.0](#Section_3.3.5.2) response messages.
+The protocol is triggered by receipt of a [wsignin1.0](#Section_2.2.3) response messages.
 
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Message Validation
 
-The syntax MUST be validated by ensuring that all required parameters are present and contain the correct type of data. For further specifications, see section [wsiginin1.0](#Section_3.3.5.2) response message.<75>
+The syntax MUST be validated by ensuring that all required parameters are present and contain the correct type of data. For further specifications, see section [wsiginin1.0](#Section_2.2.3) response message.<75>
 
 <a id="Section_3.3.5.2.3"></a>
 ##### 3.3.5.2.3 User Identification and Authentication
@@ -1222,7 +1222,7 @@ If additional [**claims**](#gt_claim) are required by a ClaimsIn entry for the [
 <a id="Section_3.3.5.2.6"></a>
 ##### 3.3.5.2.6 Resource Access Control
 
-The [**user's**](#gt_user) Authentication Context MUST be conveyed to the [**WS resource**](#gt_web-service-ws-resource) that the user originally tried to access. The location of the WS resource MUST be retrieved from the *wctx* parameter in the [wsignin1.0](#Section_3.3.5.2) response message. How this Authentication Context is passed to the WS resource is implementation-specific and not addressed in this protocol. Commonly used techniques when the [**relying party**](#gt_relying-party-rp) components are located on separate servers include an HTTP cookie, a query string parameter, or a POST body.<77>
+The [**user's**](#gt_user) Authentication Context MUST be conveyed to the [**WS resource**](#gt_web-service-ws-resource) that the user originally tried to access. The location of the WS resource MUST be retrieved from the *wctx* parameter in the [wsignin1.0](#Section_2.2.3) response message. How this Authentication Context is passed to the WS resource is implementation-specific and not addressed in this protocol. Commonly used techniques when the [**relying party**](#gt_relying-party-rp) components are located on separate servers include an HTTP cookie, a query string parameter, or a POST body.<77>
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Outbound wsignout1.0 Request Message Processing
@@ -1232,7 +1232,7 @@ This message is used to request that a [**requestor IP/STS**](#gt_requestor-ipst
 <a id="Section_3.3.5.3.1"></a>
 ##### 3.3.5.3.1 Protocol Activation
 
-The protocol is triggered when a [**user**](#gt_user) requests that the user's session be terminated, possibly by clicking a [**Sign-Out**](#gt_sign-out) button. The [**WS resource**](#gt_web-service-ws-resource) MUST notify the [**resource IP/STS**](#gt_resource-ipsts) to issue a [wsignout1.0](#Section_3.2.5.2) request. If the components are located on separate servers, this SHOULD be performed by sending a wsignout1.0 request message to the resource IP/STS using an HTTP 302 redirect.
+The protocol is triggered when a [**user**](#gt_user) requests that the user's session be terminated, possibly by clicking a [**Sign-Out**](#gt_sign-out) button. The [**WS resource**](#gt_web-service-ws-resource) MUST notify the [**resource IP/STS**](#gt_resource-ipsts) to issue a [wsignout1.0](#Section_2.2.5) request. If the components are located on separate servers, this SHOULD be performed by sending a wsignout1.0 request message to the resource IP/STS using an HTTP 302 redirect.
 
 <a id="Section_3.3.5.3.2"></a>
 ##### 3.3.5.3.2 Parameter Marshaling
@@ -1247,7 +1247,7 @@ As specified in [Relying Party Web Browser Requestor Sessions List (section 3.
 <a id="Section_3.3.5.3.4"></a>
 ##### 3.3.5.3.4 Message Transmission
 
-The [**resource IP/STS**](#gt_resource-ipsts) sends a [wsignout1.0](#Section_3.2.5.2) Request Message by returning an HTTP 302 response to the [**web browser requestor**](#gt_web-browser-requestor) with Location set to the URL of the [**requestor IP/STS**](#gt_requestor-ipsts). All the query string parameters required for the protocol MUST be set properly, as specified in wsignout1.0 Request Message.
+The [**resource IP/STS**](#gt_resource-ipsts) sends a [wsignout1.0](#Section_2.2.5) Request Message by returning an HTTP 302 response to the [**web browser requestor**](#gt_web-browser-requestor) with Location set to the URL of the [**requestor IP/STS**](#gt_requestor-ipsts). All the query string parameters required for the protocol MUST be set properly, as specified in wsignout1.0 Request Message.
 
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Inbound wsignoutcleanup1.0 Request Message Processing
@@ -1257,32 +1257,32 @@ This message is used to request that a [**resource IP/STS**](#gt_resource-ipsts)
 <a id="Section_3.3.5.4.1"></a>
 ##### 3.3.5.4.1 Protocol Activation
 
-The protocol is triggered by receipt of a [wsignoutcleanup1.0](#Section_3.3.5.4) message from a [**requestor IP/STS**](#gt_requestor-ipsts).
+The protocol is triggered by receipt of a [wsignoutcleanup1.0](#Section_2.2.6) message from a [**requestor IP/STS**](#gt_requestor-ipsts).
 
 <a id="Section_3.3.5.4.2"></a>
 ##### 3.3.5.4.2 Clean-Up Processing
 
-A [**resource IP/STS**](#gt_resource-ipsts) SHOULD send [wsignoutcleanup1.0](#Section_3.3.5.4) messages to [**WS resources**](#gt_web-service-ws-resource) for which [**security tokens**](#gt_security-token) have been issued. Because the protocol does not guarantee a response to a wsignoutcleanup1.0 message, a resource IP/STS SHOULD delete any session state that has been locally cached for the [**web browser requestor**](#gt_web-browser-requestor) before sending wsignoutcleanup1.0 messages to WS resources.<80>
+A [**resource IP/STS**](#gt_resource-ipsts) SHOULD send [wsignoutcleanup1.0](#Section_2.2.6) messages to [**WS resources**](#gt_web-service-ws-resource) for which [**security tokens**](#gt_security-token) have been issued. Because the protocol does not guarantee a response to a wsignoutcleanup1.0 message, a resource IP/STS SHOULD delete any session state that has been locally cached for the [**web browser requestor**](#gt_web-browser-requestor) before sending wsignoutcleanup1.0 messages to WS resources.<80>
 
 <a id="Section_3.3.5.4.3"></a>
 ##### 3.3.5.4.3 Relying Party Security Realm Discovery
 
-As specified in section [Relying Party Web Browser Requestor Sessions List (section 3.1.1.5.2)](#Section_3.1.1.5.2), a [**resource IP/STS**](#gt_resource-ipsts) MAY store a session identifier for the [**web browser requestor**](#gt_web-browser-requestor) in an HTTP session cookie (for more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399)). It SHOULD use this identifier and its Outbound Sessions List to develop the list of [**WS resources**](#gt_web-service-ws-resource) to which it SHOULD send [wsignoutcleanup1.0](#Section_3.3.5.4) request messages.<81>
+As specified in section [Relying Party Web Browser Requestor Sessions List (section 3.1.1.5.2)](#Section_3.1.1.5.2), a [**resource IP/STS**](#gt_resource-ipsts) MAY store a session identifier for the [**web browser requestor**](#gt_web-browser-requestor) in an HTTP session cookie (for more information, see [[RFC2965]](https://go.microsoft.com/fwlink/?LinkId=90399)). It SHOULD use this identifier and its Outbound Sessions List to develop the list of [**WS resources**](#gt_web-service-ws-resource) to which it SHOULD send [wsignoutcleanup1.0](#Section_2.2.6) request messages.<81>
 
 <a id="Section_3.3.5.4.4"></a>
 ##### 3.3.5.4.4 Message Transmission
 
-The [**resource IP/STS**](#gt_resource-ipsts) MUST send a [wsignoutcleanup1.0](#Section_3.3.5.4) request message to each [**WS resource**](#gt_web-service-ws-resource) using an explicit HTTP GET method because the protocol does not support chaining wsignoutcleanup1.0 messages using the HTTP 1.1 redirection facilities. How these messages are sent is implementation-specific and is not addressed in this protocol. The resource IP/STS MAY<82> walk the list of WS resources and issue the requests individually.
+The [**resource IP/STS**](#gt_resource-ipsts) MUST send a [wsignoutcleanup1.0](#Section_2.2.6) request message to each [**WS resource**](#gt_web-service-ws-resource) using an explicit HTTP GET method because the protocol does not support chaining wsignoutcleanup1.0 messages using the HTTP 1.1 redirection facilities. How these messages are sent is implementation-specific and is not addressed in this protocol. The resource IP/STS MAY<82> walk the list of WS resources and issue the requests individually.
 
 <a id="Section_3.3.5.4.5"></a>
 ##### 3.3.5.4.5 Response Message Processing
 
-When clean-up processing is complete, the [**relying party**](#gt_relying-party-rp) SHOULD return any relying party specific data (such as a string indicating that clean up is complete) to the [**web browser requestor**](#gt_web-browser-requestor). If the *wreply* parameter, as specified in section [2.2.6](#Section_3.3.5.4), was included with the wsignoutcleanup1.0 message, the response SHOULD be sent to the URL specified by *wreply*.<83>
+When clean-up processing is complete, the [**relying party**](#gt_relying-party-rp) SHOULD return any relying party specific data (such as a string indicating that clean up is complete) to the [**web browser requestor**](#gt_web-browser-requestor). If the *wreply* parameter, as specified in section [2.2.6](#Section_2.2.6), was included with the wsignoutcleanup1.0 message, the response SHOULD be sent to the URL specified by *wreply*.<83>
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
 
-A [**requestor IP/STS**](#gt_requestor-ipsts) does not need to interact with any timers, or service any timer events, beyond those that might be used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in [Timer Events (section 3.1.6)](#Section_3.3.6).<84>
+A [**requestor IP/STS**](#gt_requestor-ipsts) does not need to interact with any timers, or service any timer events, beyond those that might be used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in [Timer Events (section 3.1.6)](#Section_3.1.6).<84>
 
 <a id="Section_3.3.7"></a>
 ### 3.3.7 Other Local Events
@@ -1326,7 +1326,7 @@ The web browser requestor SHOULD transport all protocol message requests and res
 <a id="Section_3.4.6"></a>
 ### 3.4.6 Timer Events
 
-A [**web browser requestor**](#gt_web-browser-requestor) is not required to interact with any timers, or service any timer events, beyond those that are used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in section [3.1.6](#Section_3.3.6).
+A [**web browser requestor**](#gt_web-browser-requestor) is not required to interact with any timers, or service any timer events, beyond those that are used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in section [3.1.6](#Section_3.1.6).
 
 <a id="Section_3.4.7"></a>
 ### 3.4.7 Other Local Events
@@ -1336,7 +1336,7 @@ A [**web browser requestor**](#gt_web-browser-requestor) does not have dependenc
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-This section contains an example scenario for the protocol similar to the scenario specified in section [1.3](#Section_1.3). This section also includes sample XML sections for the [wsignin1.0](#Section_3.3.5.2) response parameters.
+This section contains an example scenario for the protocol similar to the scenario specified in section [1.3](#Section_1.3). This section also includes sample XML sections for the [wsignin1.0](#Section_2.2.3) response parameters.
 
 <a id="Section_4.1"></a>
 ## 4.1 Message Flows
@@ -1345,7 +1345,7 @@ This section describes an example flow of messages among a [**web browser reques
 
 - The web browser requestor sends a GET for the WS resource URL to the WS resource.
 - The WS resource returns a 302 Redirect to the resource IP/STS at the resource IP/STS URL.
-- Query string parameters are appended to the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) URL, that forms a [wsignin1.0](#Section_3.3.5.2) request message, as follows:
+- Query string parameters are appended to the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) URL, that forms a [wsignin1.0](#Section_2.2.3) request message, as follows:
 - A query string parameter is added, which indicates that WS resource is the resource wanting authentication (*wreply*).
 - The original requested WS resource URL is saved as a context parameter in the sign-in message (*wctx*).
 - Example URL follows.
@@ -1367,7 +1367,7 @@ This section describes an example flow of messages among a [**web browser reques
 - The web browser requestor sends a GET for the requestor IP/STS URL.
 - Authentication occurs.
 - The requestor IP/STS sends a 200 response to the client with a POST Redirect to the resource IP/STS URL:
-- The returned [[HTML]](https://go.microsoft.com/fwlink/?LinkId=89880) contains a hidden form that contains a [wsignin1.0](#Section_3.3.5.2) response and JavaScript, which causes the form to POST immediately (optionally the form can have a visible Submit button). The form's target is the resource IP/STS URL.
+- The returned [[HTML]](https://go.microsoft.com/fwlink/?LinkId=89880) contains a hidden form that contains a [wsignin1.0](#Section_2.2.3) response and JavaScript, which causes the form to POST immediately (optionally the form can have a visible Submit button). The form's target is the resource IP/STS URL.
 - The response contains a RequestSecurityTokenResponse message that includes a SAML token whose audience is the resource IP/STS. The token is signed by the requestor IP/STS X.509 certificate.
 - Example form follows.
 - <?xml version="1.0" encoding="utf-8" ?>
@@ -1686,7 +1686,7 @@ This section describes an example flow of messages among a [**web browser reques
 <a id="Section_4.2"></a>
 ## 4.2 XML Examples
 
-This section describes some XML examples of data found in the [wsignin1.0](#Section_3.3.5.2) response *wresult* parameter.
+This section describes some XML examples of data found in the [wsignin1.0](#Section_2.2.3) response *wresult* parameter.
 
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Example RSTR
@@ -1737,7 +1737,7 @@ Purchasing Agent
 <a id="Section_4.2.3"></a>
 ### 4.2.3 Using the X509Certificate Element
 
-The following is an example of the KeyInfo element, as specified in [[XMLDSig]](https://go.microsoft.com/fwlink/?LinkId=130861). This KeyInfo element is using the X509Certificate element to directly include the X.509 certificate, as recommended. For further specifications on the relevant message syntax, see [Security Token Signature (section 2.2.4.2.2)](#Section_5).
+The following is an example of the KeyInfo element, as specified in [[XMLDSig]](https://go.microsoft.com/fwlink/?LinkId=130861). This KeyInfo element is using the X509Certificate element to directly include the X.509 certificate, as recommended. For further specifications on the relevant message syntax, see [Security Token Signature (section 2.2.4.2.2)](#Section_2.2.4.2.2).
 
 <KeyInfo>
 
@@ -1752,7 +1752,7 @@ The following is an example of the KeyInfo element, as specified in [[XMLDSig]](
 <a id="Section_4.2.4"></a>
 ### 4.2.4 Using the X509SKI Element
 
-The following is an example of the KeyInfo element, as specified in [[XMLDSig]](https://go.microsoft.com/fwlink/?LinkId=130861). This KeyInfo element is using the optional X509SKI element to reference the X.509 certificate without copying the entire certificate. For further specifications on the relevant message syntax, see [Security Token Signature (section 2.2.4.2.2)](#Section_5).
+The following is an example of the KeyInfo element, as specified in [[XMLDSig]](https://go.microsoft.com/fwlink/?LinkId=130861). This KeyInfo element is using the optional X509SKI element to reference the X.509 certificate without copying the entire certificate. For further specifications on the relevant message syntax, see [Security Token Signature (section 2.2.4.2.2)](#Section_2.2.4.2.2).
 
 <KeyInfo>
 
@@ -1767,7 +1767,7 @@ The following is an example of the KeyInfo element, as specified in [[XMLDSig]](
 <a id="Section_4.3"></a>
 ## 4.3 Raw Message Examples
 
-This section shows messages that represent sample HTTP encoded wsignin1.0 [requests](#Section_3.3.5.2) and [responses](#Section_3.3.5.2) involving a [**WS resource**](#gt_web-service-ws-resource), [**resource IP/STS**](#gt_resource-ipsts), and [**requestor IP/STS**](#gt_requestor-ipsts) for one [**user**](#gt_user) accessing a WS resource.
+This section shows messages that represent sample HTTP encoded wsignin1.0 [requests](#Section_2.2.3) and [responses](#Section_2.2.3) involving a [**WS resource**](#gt_web-service-ws-resource), [**resource IP/STS**](#gt_resource-ipsts), and [**requestor IP/STS**](#gt_requestor-ipsts) for one [**user**](#gt_user) accessing a WS resource.
 
 <a id="Section_4.3.1"></a>
 ### 4.3.1 Original GET to WS Resource
@@ -2862,7 +2862,7 @@ The security considerations specified in [[WSFederation1.2]](https://go.microsof
 <a id="Section_5.1.1"></a>
 ### 5.1.1 Security Token Integrity
 
-The integrity of a [**security token**](#gt_security-token) is compromised when the security token is modified. A digital [**signature**](#gt_signature) on the [**digest**](#gt_digest) of a security token enables the recipient of the security token to determine whether or not the security token has been modified since it was signed. The Microsoft Web Browser Federated Sign-On Protocol uses digital signatures to secure the integrity of the security token contained in the [wsiginin1.0](#Section_3.3.5.2) response message while in transit. The [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) signs the security token that it issues, allowing the [**relying party**](#gt_relying-party-rp) to check for changes that might have occurred in transit. The strength of the digital signature depends on the signature algorithm used and the key sizes involved.<87>
+The integrity of a [**security token**](#gt_security-token) is compromised when the security token is modified. A digital [**signature**](#gt_signature) on the [**digest**](#gt_digest) of a security token enables the recipient of the security token to determine whether or not the security token has been modified since it was signed. The Microsoft Web Browser Federated Sign-On Protocol uses digital signatures to secure the integrity of the security token contained in the [wsiginin1.0](#Section_2.2.3) response message while in transit. The [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) signs the security token that it issues, allowing the [**relying party**](#gt_relying-party-rp) to check for changes that might have occurred in transit. The strength of the digital signature depends on the signature algorithm used and the key sizes involved.<87>
 
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Certificate Validation
@@ -2889,7 +2889,7 @@ Privacy is a concern whenever the transmission of [**user**](#gt_user) informati
 <a id="Section_5.1.6"></a>
 ### 5.1.6 Identifiers
 
-[Claim (section 3.1.1.4)](#Section_3.3) specifies the use of [**UPN**](#gt_user-principal-name-upn) and EmailAddress identifiers for [**users**](#gt_user). The [**relying party**](#gt_relying-party-rp) will depend on the identifier being unique so collisions have to be avoided. Collisions can be avoided by configuring a relying party to only accept a specific set of suffix [**domain naming service names**](#gt_domain-naming-service-name) used in the UPN or EmailAddress claim of the [**security token**](#gt_security-token) issued by a [**security realm's**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts). This prevents a malicious IP/STS from enabling its users to impersonate users from another IP/STS.<92>
+[Claim (section 3.1.1.4)](#Section_3.1.1.4) specifies the use of [**UPN**](#gt_user-principal-name-upn) and EmailAddress identifiers for [**users**](#gt_user). The [**relying party**](#gt_relying-party-rp) will depend on the identifier being unique so collisions have to be avoided. Collisions can be avoided by configuring a relying party to only accept a specific set of suffix [**domain naming service names**](#gt_domain-naming-service-name) used in the UPN or EmailAddress claim of the [**security token**](#gt_security-token) issued by a [**security realm's**](#gt_de3032bf-da14-4186-b8eb-8b6af7917c50) [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts). This prevents a malicious IP/STS from enabling its users to impersonate users from another IP/STS.<92>
 
 <a id="Section_5.1.7"></a>
 ### 5.1.7 Cookies
@@ -2901,8 +2901,8 @@ For more information on the HTTP cookie state management mechanism, see [[RFC296
 
 | Security parameter | Section |
 | --- | --- |
-| *wauth* | [wsignin1.0](#Section_3.3.5.2) request message |
-| *wresult* | [wsignin1.0](#Section_3.3.5.2) response message |
+| *wauth* | [wsignin1.0](#Section_2.2.3) request message |
+| *wresult* | [wsignin1.0](#Section_2.2.3) response message |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior
@@ -2939,7 +2939,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 2.2.1: These parameters are not supported. For the protocol behavior of Windows on these parameters, see section 3.1.5.1.
 
-<9> Section 2.2.2: This parameter is supported. For the protocol behavior of Windows on this parameter, see sections [3.1.5.4.7](#Section_3.3.5.4.5) and [3.3.5.1.2](#Section_3.3.5.1.2).
+<9> Section 2.2.2: This parameter is supported. For the protocol behavior of Windows on this parameter, see sections [3.1.5.4.7](#Section_3.1.5.4.7) and [3.3.5.1.2](#Section_3.3.5.1.2).
 
 <10> Section 2.2.2: This parameter is not supported. For the protocol behavior of Windows for this parameter, see section 3.1.5.1.
 
@@ -2949,7 +2949,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <13> Section 2.2.3: This parameter is supported by Windows. For the protocol behavior of Windows on this parameter, see section 3.3.5.1.2.
 
-<14> Section 2.2.3: The values supported for this parameter are specified in the following table. For the protocol behavior of Windows on this parameter, see sections [3.1.5.4.2](#Section_3.3.5.2.2) and 3.3.5.1.2
+<14> Section 2.2.3: The values supported for this parameter are specified in the following table. For the protocol behavior of Windows on this parameter, see sections [3.1.5.4.2](#Section_3.1.5.4.2) and 3.3.5.1.2
 
 | Method of authentication wanted | wauth URI |
 | --- | --- |
@@ -2985,7 +2985,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <27> Section 2.2.4.2.1.2: This namespace is supported. For the protocol behavior of Windows for AttributeNamespace values, see sections 3.1.5.4.7 and 3.3.5.2.2.
 
-<28> Section 2.2.4.2.1.3: On Active Directory Federation Services that shipped with Windows Server 2003 R2, Windows Server 2008, and Windows Server 2008 R2, Windows always specifies the NameIdentifier claim, and the value for the NameIdentifier element is the value of the EmailAddress, [**user**](#gt_user) principal name ([**UPN**](#gt_user-principal-name-upn)), or CommonName claim, as specified in the Abstract Data Model in section [3.1.1.4](#Section_3.3). The NameIdentifier element specifies the **Format** attribute, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2.4.2.2. The corresponding value of the **Format** attribute is one of the following, as specified in the Abstract Data Model (see section 3.1.1.4).
+<28> Section 2.2.4.2.1.3: On Active Directory Federation Services that shipped with Windows Server 2003 R2, Windows Server 2008, and Windows Server 2008 R2, Windows always specifies the NameIdentifier claim, and the value for the NameIdentifier element is the value of the EmailAddress, [**user**](#gt_user) principal name ([**UPN**](#gt_user-principal-name-upn)), or CommonName claim, as specified in the Abstract Data Model in section [3.1.1.4](#Section_3.1.1.4). The NameIdentifier element specifies the **Format** attribute, as specified in [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2.4.2.2. The corresponding value of the **Format** attribute is one of the following, as specified in the Abstract Data Model (see section 3.1.1.4).
 
 | Claim name | Format attribute URI |
 | --- | --- |
@@ -3033,7 +3033,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <48> Section 3.1.5.1: Federation partners do not emit query string parameters when sending a protocol message using an HTTP POST. If any query string parameters are received with an HTTP POST, they are ignored.
 
-<49> Section 3.1.5.1: The xml-attribute-request and the xml-pseudonym-request messages described in section [2.2](#Section_1.3) are not emitted by Windows. Windows Server 2003 R2 returns an HTTP 403 error message. With the exception of Windows Server 2003 R2, all applicable Windows Server releases return an HTTP 500 error message if they receive such messages. Any parameters that are not specified in section 2.2 or in the protocol extension specified in [MS-MWBE] are ignored by Windows.
+<49> Section 3.1.5.1: The xml-attribute-request and the xml-pseudonym-request messages described in section [2.2](#Section_2.2) are not emitted by Windows. Windows Server 2003 R2 returns an HTTP 403 error message. With the exception of Windows Server 2003 R2, all applicable Windows Server releases return an HTTP 500 error message if they receive such messages. Any parameters that are not specified in section 2.2 or in the protocol extension specified in [MS-MWBE] are ignored by Windows.
 
 <50> Section 3.1.5.2: An unsupported or unrecognized parameter received with a protocol message is ignored, and the message is processed as if it were not present.
 
@@ -3061,7 +3061,7 @@ If *whr, domain_hint, username,* and *login_hint* coexist in one request, the pr
 
 <59> Section 3.1.5.4.7: The following Windows behaviors apply for response message processing:
 
-- The *wctx* parameter specified in section [2.2.2](#Section_2) is always returned by Windows with the response if the parameter is present in the request.
+- The *wctx* parameter specified in section [2.2.2](#Section_2.2.2) is always returned by Windows with the response if the parameter is present in the request.
 - When emitting wsignin1.0 responses, Windows includes the wsp:AppliesTo element.
 - When emitting wsignin1.0 response messages, Windows does not include any other optional elements or attributes in the RSTR.
 - The presence of the SAML AttributeStatement in the SAML assertion in a wsignin1.0 response message emitted by Windows depends on configuration of the product. Windows supports emitting both no SAML AttributeStatement and one SAML AttributeStatement. Windows includes a SAML AttributeStatement when more than one claim is included in the token. For further specifications, see sections 3.1.1.4 and [3.1.5](#Section_3.1.5).
@@ -3114,9 +3114,9 @@ If *whr, domain_hint, username,* and *login_hint* coexist in one request, the pr
 - When receiving wsignin1.0 responses, Windows rejects any messages with the **EncryptedData** element described in section 2.2.4.1 with an HTTP 1.1 500 server error.
 <76> Section 3.3.5.2.4: A user's identity from the Subject element of the security token is mapped to a local Windows security principal identity in Active Directory based on local configuration. In terms of the Authentication Context abstract data model, the local Windows security principal identity replaces the AuthIdentity value derived from the Subject of a security token.
 
-<77> Section 3.3.5.2.6: The Microsoft Web Browser Federated Sign-On Protocol is used with the WS resource acting as a relying party and the resource IP/STS acting as a requestor IP/STS. The resource IP/STS sends a wsignin1.0 response message to the WS resource to issue a security token for the user. There is no change to the protocol message processing, as specified in section Issuing a Security Token by responding to a wsignin1.0 request message (section [3.1.5.4)](#Section_6c3816b388024ae681502111840c9889).
+<77> Section 3.3.5.2.6: The Microsoft Web Browser Federated Sign-On Protocol is used with the WS resource acting as a relying party and the resource IP/STS acting as a requestor IP/STS. The resource IP/STS sends a wsignin1.0 response message to the WS resource to issue a security token for the user. There is no change to the protocol message processing, as specified in section Issuing a Security Token by responding to a wsignin1.0 request message (section [3.1.5.4)](#Section_3.1.5.4).
 
-<78> Section 3.3.5.3.2: The *wreply* parameter described in section wsignout1.0 Request Message (section [2.2.5)](#Section_3.2.5.2) is not supported when emitting wsignout1.0 Request Messages.
+<78> Section 3.3.5.3.2: The *wreply* parameter described in section wsignout1.0 Request Message (section [2.2.5)](#Section_2.2.5) is not supported when emitting wsignout1.0 Request Messages.
 
 <79> Section 3.3.5.3.3: Relying party components, both resource IP/STSs and WS resources, send wsignout1.0 messages to security token services. An HTTP session cookie (for more information, see [RFC2965]) is issued to a web browser requestor to manage the list of security token services that are to be sent wsignout1.0 messages when the user requests to sign-out.
 
@@ -3126,7 +3126,7 @@ If *whr, domain_hint, username,* and *login_hint* coexist in one request, the pr
 
 <82> Section 3.3.5.4.4: An HTML page that contains a set of iframes (as specified in [[HTML]](https://go.microsoft.com/fwlink/?LinkId=89880) section 16.5), one for each WS resource, is returned to the web browser requestor. Processing of the iframes by the web browser requestor causes the wsignoutcleanup1.0 messages to be sent in parallel.
 
-<83> Section 3.3.5.4.5: When receiving a wsignoutcleanup1.0 request message (section [2.2.6)](#Section_3.3.5.4), the web browser requestor is not redirected to the *wreply* URL after sign-out processing is complete. Windows completes by returning a string indicating that clean up is complete for the security realm, regardless of the presence of *wreply*.
+<83> Section 3.3.5.4.5: When receiving a wsignoutcleanup1.0 request message (section [2.2.6)](#Section_2.2.6), the web browser requestor is not redirected to the *wreply* URL after sign-out processing is complete. Windows completes by returning a string indicating that clean up is complete for the security realm, regardless of the presence of *wreply*.
 
 <84> Section 3.3.6: Timers are not used to determine when validity intervals expire. The NotBefore and NotOnOrAfter values obtained from security tokens, as specified in section 2.2.4.2, and recoded in Authentication Contexts are checked explicitly.
 

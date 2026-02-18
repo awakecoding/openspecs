@@ -713,9 +713,9 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | Opnum3NotUsedOnWire | Reserved for local use. Opnum: 3 |
-| [GetContainerData](#Section_2.2.3) | Returns tracking information for [**instance containers**](#gt_instance-container). Opnum: 4 |
-| [GetComponentDataByContainer](#Section_2.2.4) | Returns tracking information for [**components**](#gt_component) by instance container. Opnum: 5 |
-| [GetComponentDataByContainerAndCLSID](#Section_2.2.4) | Returns tracking information for a component by instance container and CLSID. Opnum: 6 |
+| [GetContainerData](#Section_3.1.4.1.1) | Returns tracking information for [**instance containers**](#gt_instance-container). Opnum: 4 |
+| [GetComponentDataByContainer](#Section_3.1.4.1.2) | Returns tracking information for [**components**](#gt_component) by instance container. Opnum: 5 |
+| [GetComponentDataByContainerAndCLSID](#Section_3.1.4.1.3) | Returns tracking information for a component by instance container and CLSID. Opnum: 6 |
 | Opnum7NotUsedOnWire | Reserved for local use. Opnum: 7 |
 
 In the preceding table, the phrase "Reserved for local use" means that the client MUST NOT send the [**opnum**](#gt_opnum) and that the server behavior is undefined<19> because it does not affect interoperability.

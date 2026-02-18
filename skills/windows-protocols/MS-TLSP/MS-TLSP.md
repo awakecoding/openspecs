@@ -360,7 +360,7 @@ Security considerations are specified in each standard.
 
 | Security Parameter | Section |
 | --- | --- |
-| See [Security Considerations for Implementers](#Section_5) | 5.1 |
+| See [Security Considerations for Implementers](#Section_5.1) | 5.1 |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

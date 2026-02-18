@@ -2202,7 +2202,7 @@ packet-beta
 <a id="Section_2.2.3.9"></a>
 #### 2.2.3.9 MilPoint
 
-The MilPoint structure specifies a point by its location in two-dimensional space. The point is specified by its location relative to the origin. For more information on the origin in two-dimensional space, see section [2](#Section_1.3).
+The MilPoint structure specifies a point by its location in two-dimensional space. The point is specified by its location relative to the origin. For more information on the origin in two-dimensional space, see section [2](#Section_2).
 
 ```mermaid
 packet-beta
@@ -2384,9 +2384,9 @@ packet-beta
 
 The MilWindowMargins structure specifies margins used in rasterizing the client area of a window. Margins are used in the following messages:
 
-- The [MILCMD_WINDOWNODE_SETALPHAMARGINS](#Section_3.2.5.4.7) message uses margins to specify a window node's image that MUST be drawn with per-pixel transparency.
+- The [MILCMD_WINDOWNODE_SETALPHAMARGINS](#Section_2.2.7.44) message uses margins to specify a window node's image that MUST be drawn with per-pixel transparency.
 - The [MILCMD_WINDOWNODE_SETMAXIMIZEDCLIPMARGINS](#Section_2.2.7.47) message uses margins to specify a window node's maximized clip.
-- The [MILCMD_GDISPRITEBITMAP_UPDATEMARGINS](#Section_3.3.5.8.2) message uses margins to specify a sprite resource drawn by the composition engine.
+- The [MILCMD_GDISPRITEBITMAP_UPDATEMARGINS](#Section_2.2.7.69) message uses margins to specify a sprite resource drawn by the composition engine.
 ```mermaid
 packet-beta
   0-31: "cxLeftWidth"
@@ -2752,7 +2752,7 @@ packet-beta
 
 **reserved (4 bytes):** Reserved. MUST be set to zero when sent, and MUST be ignored when received.
 
-**payload (variable):** A variable-length byte array. The payload of this packet MUST be a contiguous series of zero or more valid channel messages. Each of these messages MUST be of a size in bytes that is divisible by four. The payload MUST be one of the channel messages as described in section [2.2.7](#Section_2).
+**payload (variable):** A variable-length byte array. The payload of this packet MUST be a contiguous series of zero or more valid channel messages. Each of these messages MUST be of a size in bytes that is divisible by four. The payload MUST be one of the channel messages as described in section [2.2.7](#Section_2.2.7).
 
 <a id="Section_2.2.5.8"></a>
 #### 2.2.5.8 MILCTRLCMD_HANDLESURFACEMANAGEREVENT
@@ -2773,7 +2773,7 @@ packet-beta
 
 **hSourceChannel (4 bytes):** A 32-bit unsigned integer. The source channel identifies the partition required to process present history tokens.
 
-**fSetHandleSFMEvent (4 bytes):** A 32-bit integer Boolean value. If the value of this field is nonzero, the partition identified by the **hSourceChannel** field will be used for the creation of [MILCMD_GDISPRITEBITMAP](#Section_3.3.5.8.1) resources that will require looking up [**logical surface**](#gt_logical-surface) objects constructed by the encapsulating protocol. For details on logical surfaces, see [MS-RDPEDC](../MS-RDPEDC/MS-RDPEDC.md).
+**fSetHandleSFMEvent (4 bytes):** A 32-bit integer Boolean value. If the value of this field is nonzero, the partition identified by the **hSourceChannel** field will be used for the creation of [MILCMD_GDISPRITEBITMAP](#Section_2.2.7.68) resources that will require looking up [**logical surface**](#gt_logical-surface) objects constructed by the encapsulating protocol. For details on logical surfaces, see [MS-RDPEDC](../MS-RDPEDC/MS-RDPEDC.md).
 
 <a id="Section_2.2.6"></a>
 ### 2.2.6 Connection Notifications
@@ -2960,7 +2960,7 @@ packet-beta
 
 - The handle has never been a handle in a MILCMD_CHANNEL_CREATERESOURCE (section 2.2.7.6) message.
 - The handle has been deleted with a [MILCMD_CHANNEL_DELETERESOURCE (section 2.2.7.7)](#Section_2.2.7.7) message.
-**resType (4 bytes):** A 32-bit unsigned integer. The type of the resource to be created, as specified in [Resource Types (section 2.2.1)](#Section_3.1.1.5).
+**resType (4 bytes):** A 32-bit unsigned integer. The type of the resource to be created, as specified in [Resource Types (section 2.2.1)](#Section_2.2.1).
 
 <a id="Section_2.2.7.7"></a>
 #### 2.2.7.7 MILCMD_CHANNEL_DELETERESOURCE
@@ -3326,7 +3326,7 @@ packet-beta
 
 **targetResource (4 bytes):** A 32-bit unsigned integer. The value of this field MUST be set to a valid resource handle referencing a resource of type TYPE_VISUAL or TYPE_WINDOWNODE. This handle identifies the resource that is the target for this message.
 
-**hTransform (4 bytes):** A 32-bit unsigned integer. The value of this field MUST either be set to zero or set to a valid resource handle referencing a resource of type TYPE_TRANSLATETRANSFORM, TYPE_SCALETRANSFORM, TYPE_MATRIXTRANSFORM, or TYPE_TRANSFORMGROUP. This resource represents the transform of the specified visual. If this value is NULL, then the coordinate system of the specified visual is either transformed as specified by a [MILCMD_VISUAL_SETOFFSET](#Section_3.3.5.3.4) message or not transformed. Transformation occurs relative to the coordinate system of the specified visual's parent.
+**hTransform (4 bytes):** A 32-bit unsigned integer. The value of this field MUST either be set to zero or set to a valid resource handle referencing a resource of type TYPE_TRANSLATETRANSFORM, TYPE_SCALETRANSFORM, TYPE_MATRIXTRANSFORM, or TYPE_TRANSFORMGROUP. This resource represents the transform of the specified visual. If this value is NULL, then the coordinate system of the specified visual is either transformed as specified by a [MILCMD_VISUAL_SETOFFSET](#Section_2.2.7.20) message or not transformed. Transformation occurs relative to the coordinate system of the specified visual's parent.
 
 <a id="Section_2.2.7.22"></a>
 #### 2.2.7.22 MILCMD_VISUAL_SETCLIP
@@ -3435,7 +3435,7 @@ packet-beta
 
 The MILCMD_VISUAL_REMOVECHILD packet removes a visual from the child collection of another visual.
 
-The previous contents of the child collection of a visual are determined by the history of all [MILCMD_VISUAL_INSERTCHILDAT](#Section_2.2.7.28), MILCMD_VISUAL_REMOVECHILD and [MILCMD_VISUAL_REMOVEALLCHILDREN](#Section_3.3.5.3.3) packets that targeted the visual since it was created. This will include all such packets where the **targetResource** field had the same value as the **targetResource** field in this packet, that were sent after the last [MILCMD_CHANNEL_CREATERESOURCE](#Section_2.2.7.6) packet in which the **hNewResource** field had the same value as the **targetResource** field in this packet.
+The previous contents of the child collection of a visual are determined by the history of all [MILCMD_VISUAL_INSERTCHILDAT](#Section_2.2.7.28), MILCMD_VISUAL_REMOVECHILD and [MILCMD_VISUAL_REMOVEALLCHILDREN](#Section_2.2.7.26) packets that targeted the visual since it was created. This will include all such packets where the **targetResource** field had the same value as the **targetResource** field in this packet, that were sent after the last [MILCMD_CHANNEL_CREATERESOURCE](#Section_2.2.7.6) packet in which the **hNewResource** field had the same value as the **targetResource** field in this packet.
 
 ```mermaid
 packet-beta
@@ -3458,7 +3458,7 @@ packet-beta
 
 The MILCMD_VISUAL_INSERTCHILDAT packet inserts a new visual into the child collection of another visual at a specified offset.
 
-The previous contents of the child collection of a visual are determined by the history of all MILCMD_VISUAL_INSERTCHILDAT, [MILCMD_VISUAL_REMOVECHILD](#Section_3.2.5.3.2) and [MILCMD_VISUAL_REMOVEALLCHILDREN](#Section_3.3.5.3.3) packets that targeted the visual since it was created. This will include all such packets where the **targetResource** field had the same value as the **targetResource** field in this packet, that were sent after the last [MILCMD_CHANNEL_CREATERESOURCE](#Section_2.2.7.6) packet in which the **hNewResource** field had the same value as the **targetResource** field in this packet.
+The previous contents of the child collection of a visual are determined by the history of all MILCMD_VISUAL_INSERTCHILDAT, [MILCMD_VISUAL_REMOVECHILD](#Section_2.2.7.27) and [MILCMD_VISUAL_REMOVEALLCHILDREN](#Section_2.2.7.26) packets that targeted the visual since it was created. This will include all such packets where the **targetResource** field had the same value as the **targetResource** field in this packet, that were sent after the last [MILCMD_CHANNEL_CREATERESOURCE](#Section_2.2.7.6) packet in which the **hNewResource** field had the same value as the **targetResource** field in this packet.
 
 ```mermaid
 packet-beta
@@ -3567,7 +3567,7 @@ When the **ContextualizedOpacity** field is set to TRUE, the server MUST determi
 
 - If the render target requires cursors--that is, if the meta bitmap render target has **IncludeCursors** set to 0x1 using the [MILCMD_METABITMAPRENDERTARGET_CAPTUREBITS](#Section_2.2.7.57) message:
 - If the visual has been activated in a capture render pass using [MILCMD_VISUAL_SETRENDERFORCAPTURE](#Section_2.2.7.34), the *ContextualizedOpacityMultiplier* rendering parameter for the specified visual will be used to derive the effective opacity of the visual.
-- If the visual has not been activated in a capture render pass, its opacity will be determined by the original opacity of the node (set using the [MILCMD_VISUAL_SETALPHA](#Section_3.2.5.3.7) message) as follows:
+- If the visual has not been activated in a capture render pass, its opacity will be determined by the original opacity of the node (set using the [MILCMD_VISUAL_SETALPHA](#Section_2.2.7.23) message) as follows:
 - If the opacity was originally set to zero, the opacity MUST be set to 1.0. (The visual MUST be made fully opaque.)
 - If the opacity was originally set to a nonzero value, the original opacity value will be preserved.
 - If the render target does not require cursors (this is the default case), the *ContextualizedOpacityMultiplier* rendering parameter of the specified visual MUST be used to derive the effective opacity of the node.
@@ -3576,7 +3576,7 @@ When the **ContextualizedOpacity** field is set to TRUE, the server MUST determi
 
 The MILCMD_VISUAL_SETCOLORTRANSFORMROOT packet instructs the composition engine to treat a specified visual as the root of the composition tree, or to stop treating a specified visual as the root.
 
-The server MUST<5> emit this command packet for the root of a visual tree, with the **fColorTransformRoot** field set to true. If the server changes the shape of the tree via a [MILCMD_TARGET_SETROOT](#Section_3.3.5.2.2) packet such that a visual that was previously a root of a visual tree stops being a root, then the server MUST emit this command packet for that visual with the **fColorTransformRoot** field set to false.
+The server MUST<5> emit this command packet for the root of a visual tree, with the **fColorTransformRoot** field set to true. If the server changes the shape of the tree via a [MILCMD_TARGET_SETROOT](#Section_2.2.7.53) packet such that a visual that was previously a root of a visual tree stops being a root, then the server MUST emit this command packet for that visual with the **fColorTransformRoot** field set to false.
 
 The client MAY ignore this packet if any of the following conditions are true:
 
@@ -4138,7 +4138,7 @@ packet-beta
 <a id="Section_2.2.7.56"></a>
 #### 2.2.7.56 MILCMD_TARGET_CAPTUREBITS
 
-The MILCMD_TARGET_CAPTUREBITS packet enqueues a capture request to a rendering target. The client MUST respond with a MILMSG_CAPTUREBITSREPLY notification containing the pixels representing the rasterization of the specified area with any modifications specified by the [MILCMD_VISUALGROUP](#Section_2.2.7.50), [MILCMD_VISUAL_ADDRENDERPARAMETER](#Section_2.2.7.30) or [MILCMD_WINDOWNODE_PROTECTCONTENT](#Section_3.2.5.4.11) packets.
+The MILCMD_TARGET_CAPTUREBITS packet enqueues a capture request to a rendering target. The client MUST respond with a MILMSG_CAPTUREBITSREPLY notification containing the pixels representing the rasterization of the specified area with any modifications specified by the [MILCMD_VISUALGROUP](#Section_2.2.7.50), [MILCMD_VISUAL_ADDRENDERPARAMETER](#Section_2.2.7.30) or [MILCMD_WINDOWNODE_PROTECTCONTENT](#Section_2.2.7.49) packets.
 
 ```mermaid
 packet-beta
@@ -4174,7 +4174,7 @@ packet-beta
 <a id="Section_2.2.7.57"></a>
 #### 2.2.7.57 MILCMD_METABITMAPRENDERTARGET_CAPTUREBITS
 
-The MILCMD_METABITMAPRENDERTARGET_CAPTUREBITS packet enqueues a rasterization and capture request to an offscreen render target. The client MUST respond with a MILMSG_METARTCAPTUREBITSREPLY notification containing the pixels representing the rasterization of the specified desktop area. The rasterization performed for the capture MUST adhere to the settings received in [MILCMD_WINDOWNODE_PROTECTCONTENT](#Section_3.2.5.4.11) messages, and it MUST black out the visible content area as specified by any received MILCMD_WINDOWNODE_PROTECTCONTENT messages.
+The MILCMD_METABITMAPRENDERTARGET_CAPTUREBITS packet enqueues a rasterization and capture request to an offscreen render target. The client MUST respond with a MILMSG_METARTCAPTUREBITSREPLY notification containing the pixels representing the rasterization of the specified desktop area. The rasterization performed for the capture MUST adhere to the settings received in [MILCMD_WINDOWNODE_PROTECTCONTENT](#Section_2.2.7.49) messages, and it MUST black out the visible content area as specified by any received MILCMD_WINDOWNODE_PROTECTCONTENT messages.
 
 ```mermaid
 packet-beta
@@ -4598,7 +4598,7 @@ packet-beta
 <a id="Section_2.2.7.75"></a>
 #### 2.2.7.75 MILCMD_GLYPHBITMAP
 
-The MILCMD_GLYPHBITMAP message is a payload of the [MILCMD_GLYPHCACHE_ADDBITMAPS (section 2.2.7.63)](#Section_3.2.5.6.1) message. The MILCMD_GLYPHBITMAP is a header that describes a bitmap following the header. This payloaded bitmap contain the glyph pixels. As part of the MILCMD_GLYPHCACHE_ADDBITMAPS message, the glyph bitmaps described by MILCMD_GLYPHBITMAP are stored in the glyph cache targeted by MILCMD_GLYPHCACHE_ADDBITMAPS for later consumption by a TYPE_GLYPHRUN resource.
+The MILCMD_GLYPHBITMAP message is a payload of the [MILCMD_GLYPHCACHE_ADDBITMAPS (section 2.2.7.63)](#Section_2.2.7.63) message. The MILCMD_GLYPHBITMAP is a header that describes a bitmap following the header. This payloaded bitmap contain the glyph pixels. As part of the MILCMD_GLYPHCACHE_ADDBITMAPS message, the glyph bitmaps described by MILCMD_GLYPHBITMAP are stored in the glyph cache targeted by MILCMD_GLYPHCACHE_ADDBITMAPS for later consumption by a TYPE_GLYPHRUN resource.
 
 ```mermaid
 packet-beta
@@ -4878,7 +4878,7 @@ packet-beta
 
 **ChildrenCollectionSize (4 bytes):** A 32-bit unsigned integer. The size in bytes of the ChildrenCollection array.
 
-**ChildrenCollection (variable):** A variable-length array of handles to resources of type TYPE_GEOMETRY2DGROUP or TYPE_MESHGEOMETRY2D (as defined in section [2.2.1](#Section_3.1.1.5)). Describes the 2-D geometry resources that are contained in this geometry 2-D group. The number of elements in this array MUST be equal to the value of the ChildrenCollectionSize field divided by four.
+**ChildrenCollection (variable):** A variable-length array of handles to resources of type TYPE_GEOMETRY2DGROUP or TYPE_MESHGEOMETRY2D (as defined in section [2.2.1](#Section_2.2.1)). Describes the 2-D geometry resources that are contained in this geometry 2-D group. The number of elements in this array MUST be equal to the value of the ChildrenCollectionSize field divided by four.
 
 <a id="Section_2.2.7.84"></a>
 #### 2.2.7.84 MILCMD_MATRIXTRANSFORM3D
@@ -5396,7 +5396,7 @@ packet-beta
 
 **controlCode (4 bytes):** A 32-bit unsigned integer containing the control code for this message. The value of this field MUST be equal to 0x0000006A.
 
-**hMesh (4 bytes):** A 32-bit unsigned integer. The value of this field MUST either be set to zero or set to a valid resource handle referencing a resource of type TYPE_GEOMETRY2DGROUP or TYPE_MESHGEOMETRY2D (as defined in section [2.2.1](#Section_3.1.1.5)). The two-dimensional mesh described by this resource will be drawn in the current drawing context.
+**hMesh (4 bytes):** A 32-bit unsigned integer. The value of this field MUST either be set to zero or set to a valid resource handle referencing a resource of type TYPE_GEOMETRY2DGROUP or TYPE_MESHGEOMETRY2D (as defined in section [2.2.1](#Section_2.2.1)). The two-dimensional mesh described by this resource will be drawn in the current drawing context.
 
 **hImageSource (4 bytes):** A 32-bit unsigned integer. The value of this field MUST either be set to zero or set to a valid resource handle referencing a resource of type TYPE_BITMAPSOURCE, TYPE_CACHEDVISUALIMAGE, or TYPE_GDISPRITEBITMAP. This resource is used to texture the mesh specified by the **hMesh** field.
 
@@ -6019,7 +6019,7 @@ packet-beta
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Object Handles
 
-The protocol constructs and manipulates a set of objects referenced by 32-bit numerical IDs known as [**handles**](#gt_handle). Only two types of objects are referenced by handle: [**channels**](#gt_channel) and [**resources**](#gt_resource). A channel is a partitioning of a connection, used to scope resources. All channel manipulations are done via control messages, whereas resources are manipulated via channel messages. Before channels can be opened and resources created on them, the connection must be initialized. Connection initialization is described in section [3.1.3](#Section_1.3).
+The protocol constructs and manipulates a set of objects referenced by 32-bit numerical IDs known as [**handles**](#gt_handle). Only two types of objects are referenced by handle: [**channels**](#gt_channel) and [**resources**](#gt_resource). A channel is a partitioning of a connection, used to scope resources. All channel manipulations are done via control messages, whereas resources are manipulated via channel messages. Before channels can be opened and resources created on them, the connection must be initialized. Connection initialization is described in section [3.1.3](#Section_3.1.3).
 
 Channels and resources are created via specific creation messages (channels via control messages, and resources via channel messages), which specify the handle that has to be associated with the newly created object. The handle can later be reclaimed with a destroy message.
 
@@ -6173,9 +6173,9 @@ The following are the types of brushes specified by this protocol.
 
 **Solid color brush:** Fills the whole infinite plane with a single color. For a complete list of supported [**resource**](#gt_resource) attributes, see [MILCMD_SOLIDCOLORBRUSH (section 2.2.7.93)](#Section_2.2.7.93) message fields.
 
-**Linear gradient brush:** Fills the infinite plane with a linear gradient similar to the *linearGradient* element, as specified in [[SVG1.1]](https://go.microsoft.com/fwlink/?LinkId=90539). For a complete list of supported resource attributes, see [MILCMD_LINEARGRADIENTBRUSH (section 2.2.7.94)](#Section_3.2.5.10.2) message fields.
+**Linear gradient brush:** Fills the infinite plane with a linear gradient similar to the *linearGradient* element, as specified in [[SVG1.1]](https://go.microsoft.com/fwlink/?LinkId=90539). For a complete list of supported resource attributes, see [MILCMD_LINEARGRADIENTBRUSH (section 2.2.7.94)](#Section_2.2.7.94) message fields.
 
-**Image brush:** Fills the infinite plane with one or more copies of the pixels defined by an image resource. The image brush is defined by graphical objects that have finite extent. These finite extent objects can be stretched to fill the conceptual infinite plane, similar to the behavior of the *pattern* element, as specified in [SVG1.1]. For a complete list of supported resource attributes, see [MILCMD_IMAGEBRUSH (section 2.2.7.95)](#Section_3.2.5.10.3) message fields.
+**Image brush:** Fills the infinite plane with one or more copies of the pixels defined by an image resource. The image brush is defined by graphical objects that have finite extent. These finite extent objects can be stretched to fill the conceptual infinite plane, similar to the behavior of the *pattern* element, as specified in [SVG1.1]. For a complete list of supported resource attributes, see [MILCMD_IMAGEBRUSH (section 2.2.7.95)](#Section_2.2.7.95) message fields.
 
 <a id="Section_3.1.1.5.1.5"></a>
 ###### 3.1.1.5.1.5 Transforms
@@ -6405,7 +6405,7 @@ Once a [**connection**](#gt_connection) has been established, the server MUST op
 
 Figure 8: Channel message flow
 
-Most channel messages only require notifications on error conditions that occur while processing the message by the client. There are some connection and channel messages that require responses from the client. A detailed description of messages that require responses is given in section [3.3.5](#Section_1.3).
+Most channel messages only require notifications on error conditions that occur while processing the message by the client. There are some connection and channel messages that require responses from the client. A detailed description of messages that require responses is given in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -6458,7 +6458,7 @@ Response messages are sent by the client only when the server sends a correspond
 
 MILMSG_SYNCFLUSHREPLY**:** A [**channel**](#gt_channel) message sent in response to MILCMD_TRANSPORT_SYNCFLUSH. This message MUST be sent after all messages preceding the MILCMD_TRANSPORT_SYNCFLUSH message have been executed.
 
-[MILMSG_CAPTUREBITSREPLY](#Section_2.2.9.2)**:** A channel message sent in response to [MILCMD_TARGET_CAPTUREBITS](#Section_3.2.5.2.3). This message MUST be sent after all messages submitted before the request have been completed.
+[MILMSG_CAPTUREBITSREPLY](#Section_2.2.9.2)**:** A channel message sent in response to [MILCMD_TARGET_CAPTUREBITS](#Section_2.2.7.56). This message MUST be sent after all messages submitted before the request have been completed.
 
 [MILMSG_METARTCAPTUREBITSREPLY](#Section_2.2.9.13)**:** A channel message sent in response to [MILCMD_METABITMAPRENDERTARGET_CAPTUREBITS](#Section_2.2.7.57).
 
@@ -6515,7 +6515,7 @@ The MILCTRLCMD_CONNECTIONNOTIFICATION payload is a connection notification that 
 
 **MILMSG_CONNECTIONLOST:** This MUST be sent by the client when it is about to terminate a connection.
 
-The MILCTRLCMD_CHANNELNOTIFICATION payload is a channel notification that MAY be sent as a response to channel messages. The **channelHandle** field of the message contains the originating channel. These messages can be any notification described in section [2.2.9](#Section_2.2.9). Sending rules are described in section [3.3.5](#Section_1.3), where applicable.
+The MILCTRLCMD_CHANNELNOTIFICATION payload is a channel notification that MAY be sent as a response to channel messages. The **channelHandle** field of the message contains the originating channel. These messages can be any notification described in section [2.2.9](#Section_2.2.9). Sending rules are described in section [3.3.5](#Section_3.3.5), where applicable.
 
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Channel Messages
@@ -6622,7 +6622,7 @@ The server MAY exclude a set of TYPE_VISUAL or TYPE_WINDOWNODE [**resources**](#
 
 Visuals are used as nodes in a [**scene graph**](#gt_scene-graph) that is built as a result of decoding this protocol.
 
-To create a visual, the server MUST allocate a new [**handle**](#gt_handle) and send a MILCMD_CHANNEL_CREATERESOURCE with the **resource type** field set to TYPE_VISUAL or TYPE_WINDOWNODE and the **hNewResource** field set to the new [**resource**](#gt_resource) handle. Window node resources inherit all behavior from visual resources, so all messages that apply to visual resources also apply to window node resources. For more information, see section [3.2.5.4](#Section_1.3.3).
+To create a visual, the server MUST allocate a new [**handle**](#gt_handle) and send a MILCMD_CHANNEL_CREATERESOURCE with the **resource type** field set to TYPE_VISUAL or TYPE_WINDOWNODE and the **hNewResource** field set to the new [**resource**](#gt_resource) handle. Window node resources inherit all behavior from visual resources, so all messages that apply to visual resources also apply to window node resources. For more information, see section [3.2.5.4](#Section_3.2.5.4).
 
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 MILCMD_VISUAL_INSERTCHILDAT
@@ -6714,7 +6714,7 @@ To mark a composition tree under a visual as render for capture, the server MUST
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Manipulating Window Node Resources
 
-To create a [**window**](#gt_window) node [**resource**](#gt_resource), the server MUST allocate a new [**handle**](#gt_handle) for the resource. The server MUST send a MILCMD_CHANNEL_CREATERESOURCE with the **resource type** field set to TYPE_WINDOWNODE and the **hNewResource** field set to the new handle. Window node resources inherit all behavior from visual resources, so all messages from section [3.2.5.3](#Section_1.3.3) can be used for window node resources. Window node resources also support the additional messages in this section.
+To create a [**window**](#gt_window) node [**resource**](#gt_resource), the server MUST allocate a new [**handle**](#gt_handle) for the resource. The server MUST send a MILCMD_CHANNEL_CREATERESOURCE with the **resource type** field set to TYPE_WINDOWNODE and the **hNewResource** field set to the new handle. Window node resources inherit all behavior from visual resources, so all messages from section [3.2.5.3](#Section_3.2.5.3) can be used for window node resources. Window node resources also support the additional messages in this section.
 
 <a id="Section_3.2.5.4.1"></a>
 ##### 3.2.5.4.1 MILCMD_WINDOWNODE_SETBOUNDS
@@ -6863,27 +6863,27 @@ A 3-D geometry model resource consists of a 3-D mesh geometry resource, a 3-D tr
 <a id="Section_3.2.5.6.1"></a>
 ##### 3.2.5.6.1 MILCMD_GLYPHCACHE_ADDBITMAPS
 
-The server MAY add [**glyph**](#gt_glyph) bitmaps to the glyph cache by sending this message for the targeted glyph cache. For details on message fields and usage, see sections [2.2.7.63](#Section_3.2.5.6.1) and [3.1.1.6](#Section_3.1.1.5.1.2). The glyph bitmaps included in the command's payload have MILCMD_GLYPHBITMAP headers followed by the glyph pixels (section [2.2.7.75](#Section_2.2.7.75)).
+The server MAY add [**glyph**](#gt_glyph) bitmaps to the glyph cache by sending this message for the targeted glyph cache. For details on message fields and usage, see sections [2.2.7.63](#Section_2.2.7.63) and [3.1.1.6](#Section_3.1.1.6). The glyph bitmaps included in the command's payload have MILCMD_GLYPHBITMAP headers followed by the glyph pixels (section [2.2.7.75](#Section_2.2.7.75)).
 
 <a id="Section_3.2.5.6.2"></a>
 ##### 3.2.5.6.2 MILCMD_GLYPHCACHE_REMOVEBITMAPS
 
-The server MAY remove [**glyph**](#gt_glyph) bitmaps from a glyph cache by sending this message for the targeted glyph cache. For details on message fields and usage, see sections [2.2.7.64](#Section_2.2.7.64) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The server MAY remove [**glyph**](#gt_glyph) bitmaps from a glyph cache by sending this message for the targeted glyph cache. For details on message fields and usage, see sections [2.2.7.64](#Section_2.2.7.64) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.2.5.6.3"></a>
 ##### 3.2.5.6.3 MILCMD_GLYPHRUN_CREATE
 
-The server MAY set [**glyph**](#gt_glyph) bitmaps to a [**glyph run**](#gt_glyph-run), by sending this message to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.65](#Section_2.2.7.65) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The server MAY set [**glyph**](#gt_glyph) bitmaps to a [**glyph run**](#gt_glyph-run), by sending this message to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.65](#Section_2.2.7.65) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.2.5.6.4"></a>
 ##### 3.2.5.6.4 MILCMD_GLYPHRUN_ADDREALIZATION
 
-The server MUST add at least one realization to all [**glyph runs**](#gt_glyph-run). It SHOULD do so by sending this command to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.66](#Section_2.2.7.66) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The server MUST add at least one realization to all [**glyph runs**](#gt_glyph-run). It SHOULD do so by sending this command to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.66](#Section_2.2.7.66) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.2.5.6.5"></a>
 ##### 3.2.5.6.5 MILCMD_GLYPHRUN_REMOVEREALIZATION
 
-The server MAY remove realization from a TYPE_GLYPHRUN by sending this command. For details on message fields and usage, see sections [2.2.7.67](#Section_2.2.7.67) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The server MAY remove realization from a TYPE_GLYPHRUN by sending this command. For details on message fields and usage, see sections [2.2.7.67](#Section_2.2.7.67) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Manipulating and Handling Bitmap Resources
@@ -6950,12 +6950,12 @@ The server SHOULD update a TYPE_SOLIDCOLORBRUSH [**resource**](#gt_resource) by 
 <a id="Section_3.2.5.10.2"></a>
 ##### 3.2.5.10.2 MILCMD_LINEARGRADIENTBRUSH
 
-The server SHOULD update a TYPE_LINEARGRADIENTBRUSH [**resource**](#gt_resource) by sending a MILCMD_LINEARGRADIENTBRUSH message. The server MUST set requested attributes to corresponding message fields (section [2.2.7.94](#Section_3.2.5.10.2)).
+The server SHOULD update a TYPE_LINEARGRADIENTBRUSH [**resource**](#gt_resource) by sending a MILCMD_LINEARGRADIENTBRUSH message. The server MUST set requested attributes to corresponding message fields (section [2.2.7.94](#Section_2.2.7.94)).
 
 <a id="Section_3.2.5.10.3"></a>
 ##### 3.2.5.10.3 MILCMD_IMAGEBRUSH
 
-The server SHOULD update a TYPE_IMAGEBRUSH [**resource**](#gt_resource) by sending a MILCMD_IMAGEBRUSH message. The server MUST set requested attributes to corresponding message fields (section [2.2.7.94](#Section_3.2.5.10.2)).
+The server SHOULD update a TYPE_IMAGEBRUSH [**resource**](#gt_resource) by sending a MILCMD_IMAGEBRUSH message. The server MUST set requested attributes to corresponding message fields (section [2.2.7.94](#Section_2.2.7.94)).
 
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Manipulating Transform Resources
@@ -7116,7 +7116,7 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-In this protocol, the server opens [**connections**](#gt_connection) to the client. The client MUST manage incoming connections by observing the encapsulating protocol. Each connection MAY define its own protocol version. Although this document contains only one version, and it is the first and only version of this protocol, a client MUST perform the version negotiation steps specified in section [3.1.3](#Section_1.3), for future compatibility.
+In this protocol, the server opens [**connections**](#gt_connection) to the client. The client MUST manage incoming connections by observing the encapsulating protocol. Each connection MAY define its own protocol version. Although this document contains only one version, and it is the first and only version of this protocol, a client MUST perform the version negotiation steps specified in section [3.1.3](#Section_3.1.3), for future compatibility.
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
@@ -7153,7 +7153,7 @@ The MILCTRLCMD_CONNECTIONNOTIFICATION payload is a connection notification that 
 
 **MILMSG_CONNECTIONLOST:** The client MUST send this notification when it is about to terminate a connection.
 
-The MILCTRLCMD_CHANNELNOTIFICATION includes a channel notification payload that MAY be sent as a response to channel message. The **channelHandle** field of the message contains the originating channel. The notification can be any notification described in section [2.2.9](#Section_2.2.9). Applicable sending rules are described in section [3.3.5](#Section_1.3).
+The MILCTRLCMD_CHANNELNOTIFICATION includes a channel notification payload that MAY be sent as a response to channel message. The **channelHandle** field of the message contains the originating channel. The notification can be any notification described in section [2.2.9](#Section_2.2.9). Applicable sending rules are described in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Channel Messages
@@ -7491,27 +7491,27 @@ The target [**resource**](#gt_resource) for this message MUST be of type TYPE_GE
 <a id="Section_3.3.5.6.1"></a>
 ##### 3.3.5.6.1 MILCMD_GLYPHCACHE_ADDBITMAPS
 
-The client MUST process this message by adding the message [**glyph**](#gt_glyph) bitmaps to the targeted glyph cache [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.63](#Section_3.2.5.6.1) and [3.1.1.6](#Section_3.1.1.5.1.2). The glyph bitmaps payloaded by the command have MILCMD_GLYPHBITMAP headers followed by the glyph pixels ([2.2.7.75](#Section_2.2.7.75)).
+The client MUST process this message by adding the message [**glyph**](#gt_glyph) bitmaps to the targeted glyph cache [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.63](#Section_2.2.7.63) and [3.1.1.6](#Section_3.1.1.6). The glyph bitmaps payloaded by the command have MILCMD_GLYPHBITMAP headers followed by the glyph pixels ([2.2.7.75](#Section_2.2.7.75)).
 
 <a id="Section_3.3.5.6.2"></a>
 ##### 3.3.5.6.2 MILCMD_GLYPHCACHE_REMOVEBITMAPS
 
-The client MUST process this message by removing the indexed message [**glyph**](#gt_glyph) bitmaps from the targeted glyph cache [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.64](#Section_2.2.7.64) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The client MUST process this message by removing the indexed message [**glyph**](#gt_glyph) bitmaps from the targeted glyph cache [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.64](#Section_2.2.7.64) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.3.5.6.3"></a>
 ##### 3.3.5.6.3 MILCMD_GLYPHRUN_CREATE
 
-The client MUST process this message by setting the payloaded [**glyph**](#gt_glyph) indices to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.65](#Section_2.2.7.65) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The client MUST process this message by setting the payloaded [**glyph**](#gt_glyph) indices to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.65](#Section_2.2.7.65) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.3.5.6.4"></a>
 ##### 3.3.5.6.4 MILCMD_GLYPHRUN_ADDREALIZATION
 
-The client MUST process this message by adding a realization to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.66](#Section_2.2.7.66) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The client MUST process this message by adding a realization to the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.66](#Section_2.2.7.66) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.3.5.6.5"></a>
 ##### 3.3.5.6.5 MILCMD_GLYPHRUN_REMOVEREALIZATION
 
-The client MUST process this message by removing a realization from the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.67](#Section_2.2.7.67) and [3.1.1.6](#Section_3.1.1.5.1.2).
+The client MUST process this message by removing a realization from the targeted TYPE_GLYPHRUN [**resource**](#gt_resource). For details on message fields and usage, see sections [2.2.7.67](#Section_2.2.7.67) and [3.1.1.6](#Section_3.1.1.6).
 
 <a id="Section_3.3.5.7"></a>
 #### 3.3.5.7 Processing Image Resource Messages
@@ -7580,12 +7580,12 @@ The target [**resource**](#gt_resource) for this message MUST be TYPE_SOLIDCOLOR
 <a id="Section_3.3.5.10.2"></a>
 ##### 3.3.5.10.2 MILCMD_LINEARGRADIENTBRUSH
 
-The targeted [**resource**](#gt_resource) MUST be TYPE_LINEARGRADIENTBRUSH. The client MUST update the targeted resource by applying all the fields that are specific to the message resource to the targeted resource attributes (section [2.2.7.94](#Section_3.2.5.10.2)).
+The targeted [**resource**](#gt_resource) MUST be TYPE_LINEARGRADIENTBRUSH. The client MUST update the targeted resource by applying all the fields that are specific to the message resource to the targeted resource attributes (section [2.2.7.94](#Section_2.2.7.94)).
 
 <a id="Section_3.3.5.10.3"></a>
 ##### 3.3.5.10.3 MILCMD_IMAGEBRUSH
 
-The targeted [**resource**](#gt_resource) MUST be TYPE_IMAGEBRUSH. The client MUST update the targeted resource by applying all the fields that are specific to the message resource to the targeted resource attributes (section [2.2.7.95](#Section_3.2.5.10.3)).
+The targeted [**resource**](#gt_resource) MUST be TYPE_IMAGEBRUSH. The client MUST update the targeted resource by applying all the fields that are specific to the message resource to the targeted resource attributes (section [2.2.7.95](#Section_2.2.7.95)).
 
 <a id="Section_3.3.5.11"></a>
 #### 3.3.5.11 Processing Transform Resource Messages
@@ -7723,7 +7723,7 @@ None.
 <a id="Section_3.3.7"></a>
 ### 3.3.7 Other Local Events
 
-The client MAY send a set of informational notification messages to the server when the state of the client machine changes in a way relevant to this protocol. The set of notifications that are considered informational is specified in section [3.2.5](#Section_1.3). Although all information notifications are optional, the client SHOULD monitor sufficient machine state to issue all informational notifications. Each notification is specified in detail in section [2.2.9](#Section_2.2.9).
+The client MAY send a set of informational notification messages to the server when the state of the client machine changes in a way relevant to this protocol. The set of notifications that are considered informational is specified in section [3.2.5](#Section_3.2.5). Although all information notifications are optional, the client SHOULD monitor sufficient machine state to issue all informational notifications. Each notification is specified in detail in section [2.2.9](#Section_2.2.9).
 
 The only special case is [MILMSG_HARDWARETIER](#Section_2.2.9.4), which MAY be sent as either an informational notification or as a response notification. If the server issues a [MILCMD_PARTITION_REGISTERFORNOTIFICATIONS](#Section_2.2.7.4) message, the client MUST send a MILMSG_HARDWARETIER notification whenever the hardware tier changes. If the server issues a [MILCMD_CHANNEL_REQUESTTIER](#Section_2.2.7.5) message, the client MUST send a MILMSG_HARDWARETIER message as a reply.
 

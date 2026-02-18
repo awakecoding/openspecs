@@ -333,11 +333,11 @@ The <Security> element is specified in [[WSS1]](https://go.microsoft.com/fwlink/
 When used to add authentication data to a [**SOAP**](#gt_soap) request message, the <Security> element is composed of a combination of child elements from the following list. The <Security> element MUST only contain child elements from the following:
 
 - Zero or one <Timestamp> element as defined in section [2.2.1.2](#Section_2.2.1.2).
-- Zero or one <BinarySecurityToken> element as defined in section [2.2.1.3](#Section_1.3).
+- Zero or one <BinarySecurityToken> element as defined in section [2.2.1.3](#Section_2.2.1.3).
 - Zero or one <UsernameToken> element as defined in section [2.2.1.4](#Section_2.2.1.4).
 - Zero or one <SecurityContextToken> element as defined in section [2.2.1.5](#Section_2.2.1.5).
-- Zero or one <Assertion> element as defined in section [2.2.1.6](#Section_1.3).
-- Zero, one, or multiple <Signature> elements as defined in section [2.2.1.7](#Section_1.3).
+- Zero or one <Assertion> element as defined in section [2.2.1.6](#Section_2.2.1.6).
+- Zero, one, or multiple <Signature> elements as defined in section [2.2.1.7](#Section_2.2.1.7).
 If at least one <Signature> element is present in the <Security> element, the <Timestamp> element MUST be present as well. Otherwise, the <Timestamp> element is optional.
 
 When used to add authentication data to a SOAP response message, the <Security> element is composed of a combination of child elements from the following list. The <Security> element MUST only contain child elements from the following:
@@ -367,7 +367,7 @@ The [**Kerberos**](#gt_kerberos) <BinarySecurityToken> element is specified in [
 
 - [WSSKTP1.1] section 3.2 specifies multiple @ValueType attribute values. *"http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ"* MUST be used.
 - If a Kerberos token is referenced as specified in [WSSKTP1.1] section 3.3 and [BSP] 14.2, a direct reference conforming to section [2.2.1.1](#Section_2.2.1.1) MUST be used.
-If a Kerberos token is present in a <Security> element, a <Signature> element conforming to section [2.2.1.7](#Section_1.3) MUST be present in the same <Security> element. The <KeyInfo> element of that [**signature**](#gt_signature) MUST reference the Kerberos token.
+If a Kerberos token is present in a <Security> element, a <Signature> element conforming to section [2.2.1.7](#Section_2.2.1.7) MUST be present in the same <Security> element. The <KeyInfo> element of that [**signature**](#gt_signature) MUST reference the Kerberos token.
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 UsernameToken Element
@@ -385,7 +385,7 @@ The <SecurityContextToken> element is specified in [[WSSC]](https://go.microsoft
 
 If a [**security context token (SCT)**](#gt_security-context-token-sct) is referenced as specified in [WSSC] section 9 and [WSSC1.3] section 8, a direct reference conforming to section [2.2.1.1](#Section_2.2.1.1) MUST be used.
 
-If a security context token is present in a <Security> element, a <Signature> element conforming to section [2.2.1.7](#Section_1.3) MUST be present in the same <Security> element. The <KeyInfo> child element of that <Signature> element MUST reference the security context token.
+If a security context token is present in a <Security> element, a <Signature> element conforming to section [2.2.1.7](#Section_2.2.1.7) MUST be present in the same <Security> element. The <KeyInfo> child element of that <Signature> element MUST reference the security context token.
 
 This document overrides the following specification:
 
@@ -401,7 +401,7 @@ The <Assertion> element is specified in [[SAMLCore]](https://go.microsoft.com/fw
 
 If a SAML token is referenced as specified in [SAMLToken1.1] sections 3.4 (ignoring subsections) and 3.4.1, a [**key**](#gt_key) identifier reference conforming to section [2.2.1.1](#Section_2.2.1.1) MUST be used.
 
-If a SAML token is present in a <Security> element, a <Signature> element conforming to section [2.2.1.7](#Section_1.3) MUST be present in the same <Security> element. The <KeyInfo> element of that [**signature**](#gt_signature) MUST reference the SAML token.
+If a SAML token is present in a <Security> element, a <Signature> element conforming to section [2.2.1.7](#Section_2.2.1.7) MUST be present in the same <Security> element. The <KeyInfo> element of that [**signature**](#gt_signature) MUST reference the SAML token.
 
 This document overrides the following specifications:
 
@@ -419,7 +419,7 @@ The <SubjectConfirmation> element is specified in [[SAMLCore]](https://go.micros
 
 At least one SubjectConfirmation sub-element MUST be present in an <Assertion> element.
 
-A <SubjectConfirmation> element MUST contain exactly one <KeyInfo> element, as specified in [[XMLENC]](https://go.microsoft.com/fwlink/?LinkId=193339) section 5.4, which corresponds to the [**key**](#gt_key) used for the [**signature**](#gt_signature) specified in section [2.2.1.7](#Section_1.3) corresponding to the [**SAML**](#gt_security-assertion-markup-language-saml) token.
+A <SubjectConfirmation> element MUST contain exactly one <KeyInfo> element, as specified in [[XMLENC]](https://go.microsoft.com/fwlink/?LinkId=193339) section 5.4, which corresponds to the [**key**](#gt_key) used for the [**signature**](#gt_signature) specified in section [2.2.1.7](#Section_2.2.1.7) corresponding to the [**SAML**](#gt_security-assertion-markup-language-saml) token.
 
 The <SecurityTokenReference> child element of the <KeyInfo> element MUST be a key identifier reference with a ValueType attribute value of "http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#ThumbprintSHA1". This document overrides the following specifications:
 
@@ -432,7 +432,7 @@ The "<element name='OAEPparams' minOccurs='0' type='base64Binary'/>" element spe
 
 The <Signature> element is specified in [[XMLDSig/2008]](https://go.microsoft.com/fwlink/?LinkId=90601) section 4.1, [[WSS1]](https://go.microsoft.com/fwlink/?LinkId=131547) sections 7.1 and 8 (excluding subsection 8.3), [[WSS]](https://go.microsoft.com/fwlink/?LinkId=130727) sections 7.1 and 8 (excluding subsections 8.3 and 8.5), and [[BSP]](https://go.microsoft.com/fwlink/?LinkId=131543) section 8.
 
-[**Signatures**](#gt_signature) are tied to [**security tokens**](#gt_security-token) as specified in sections [2.2.1.3.1](#Section_2.2.1.3.1), [2.2.1.5](#Section_2.2.1.5), and [2.2.1.6](#Section_1.3). All references to security tokens MUST be internal as specified in [BSP] section 7.6.
+[**Signatures**](#gt_signature) are tied to [**security tokens**](#gt_security-token) as specified in sections [2.2.1.3.1](#Section_2.2.1.3.1), [2.2.1.5](#Section_2.2.1.5), and [2.2.1.6](#Section_2.2.1.6). All references to security tokens MUST be internal as specified in [BSP] section 7.6.
 
 Each <Signature> element MUST contain exactly one of each of the following elements as child elements:
 
@@ -566,7 +566,7 @@ The context establishment binding is specified in [[WSSC]](https://go.microsoft.
 The context renewal binding is specified in [[WSSC]](https://go.microsoft.com/fwlink/?LinkId=113070) section 6 and [[WSSC1.3]](https://go.microsoft.com/fwlink/?LinkId=131545) section 5. This document overrides the following specification:
 
 - [WSSC1.3] section 5: *"Proof of possession of the key associated with the security context MUST be proven in order for security context to be renewed. It is RECOMMENDED that this is done by creating the original claims signature over the signature that signs message body and key headers."*
-Proof of possession MUST be established by including a [**security context token**](#gt_security-context-token-sct) conforming to section [2.2.1.5](#Section_2.2.1.5) and a corresponding [**signature**](#gt_signature) conforming to section [2.2.1.7](#Section_1.3) in the security element conforming to section [2.2.1](#Section_2.2.1). The elements that MUST be signed are specified in section 2.2.1.7. Signatures MUST NOT be signed to prove possession.
+Proof of possession MUST be established by including a [**security context token**](#gt_security-context-token-sct) conforming to section [2.2.1.5](#Section_2.2.1.5) and a corresponding [**signature**](#gt_signature) conforming to section [2.2.1.7](#Section_2.2.1.7) in the security element conforming to section [2.2.1](#Section_2.2.1). The elements that MUST be signed are specified in section 2.2.1.7. Signatures MUST NOT be signed to prove possession.
 
 <a id="Section_2.2.2.1.4"></a>
 ##### 2.2.2.1.4 Context Cancellation Binding
@@ -574,7 +574,7 @@ Proof of possession MUST be established by including a [**security context token
 The context cancellation binding is specified in [[WSSC]](https://go.microsoft.com/fwlink/?LinkId=113070) section 7 and [[WSSC1.3]](https://go.microsoft.com/fwlink/?LinkId=131545) section 6. This document overrides the following specification:
 
 - [WSSC1.3] section 6: *"Proof of possession of the key associated with the security context MUST be proven in order for security context to be canceled. It is RECOMMENDED that this is done by creating the original claims signature over the signature that signs message body and key headers."*
-Proof of possession MUST be established by including a [**security context token**](#gt_security-context-token-sct) conforming to section [2.2.1.5](#Section_2.2.1.5) and a corresponding [**signature**](#gt_signature) conforming to section [2.2.1.7](#Section_1.3) in the security element conforming to section [2.2.1](#Section_2.2.1). The elements that MUST be signed are specified in section 2.2.1.7. Signatures MUST NOT be signed to prove possession.
+Proof of possession MUST be established by including a [**security context token**](#gt_security-context-token-sct) conforming to section [2.2.1.5](#Section_2.2.1.5) and a corresponding [**signature**](#gt_signature) conforming to section [2.2.1.7](#Section_2.2.1.7) in the security element conforming to section [2.2.1](#Section_2.2.1). The elements that MUST be signed are specified in section 2.2.1.7. Signatures MUST NOT be signed to prove possession.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -611,12 +611,12 @@ None.
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Error Handling
 
-When a higher-layer application protocol submits a message to be sent, the implementation MAY<3> check whether the message conforms to the syntax specified in section [2.2](#Section_1.3), and if it does not, return an error and abort further processing. Otherwise, the implementation MUST send the message to the server.
+When a higher-layer application protocol submits a message to be sent, the implementation MAY<3> check whether the message conforms to the syntax specified in section [2.2](#Section_2.2), and if it does not, return an error and abort further processing. Otherwise, the implementation MUST send the message to the server.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
 
-When a message is received, the implementation MUST verify that the message conforms to the syntax specified in section [2.2](#Section_1.3).
+When a message is received, the implementation MUST verify that the message conforms to the syntax specified in section [2.2](#Section_2.2).
 
 If the message does not conform to the syntax specified in section 2.2, the following processing steps are performed:
 
@@ -709,12 +709,12 @@ None.
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Error Handling
 
-When a higher-layer application protocol submits a message to be sent, the implementation MAY<9> check whether the message conforms to the syntax specified in section [2.2](#Section_1.3), and if it does not, return an error and abort further processing. Otherwise, the implementation MUST send the message to the server.
+When a higher-layer application protocol submits a message to be sent, the implementation MAY<9> check whether the message conforms to the syntax specified in section [2.2](#Section_2.2), and if it does not, return an error and abort further processing. Otherwise, the implementation MUST send the message to the server.
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Processing Events and Sequencing Rules
 
-When a message is received, the implementation MUST verify that the message conforms to the syntax specified in section [2.2](#Section_1.3).
+When a message is received, the implementation MUST verify that the message conforms to the syntax specified in section [2.2](#Section_2.2).
 
 If the message does not conform to the syntax specified in section 2.2, the following processing steps are performed:
 
@@ -1511,7 +1511,7 @@ This profile document does not describe how to provide message integrity and mes
 
 This profile document uses a range of cryptographic algorithms. Some of these algorithms might be considered weak depending on the security threats involved in specific scenarios. This profile document does not classify various cryptographic algorithms or prescribe them per usage scenarios.
 
-This profile document specifies partial validation of [**SAML**](#gt_security-assertion-markup-language-saml) claims as specified in section [2.2.1.6](#Section_1.3) of the document. Before accepting a claim, full validation according to [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2 and [SAMLToken1.1] section 3 should be performed by higher-layer application protocols.
+This profile document specifies partial validation of [**SAML**](#gt_security-assertion-markup-language-saml) claims as specified in section [2.2.1.6](#Section_2.2.1.6) of the document. Before accepting a claim, full validation according to [[SAMLCore]](https://go.microsoft.com/fwlink/?LinkId=90508) section 2 and [SAMLToken1.1] section 3 should be performed by higher-layer application protocols.
 
 This profile document does not specify support for signing parts of a SOAP message body. The <To> header is also not signed when [**security tokens**](#gt_security-token) with [**symmetric keys**](#gt_symmetric-key) are used. This lack of correlation can lead to attacks that involve splitting and reuse of parts of a SOAP message.
 

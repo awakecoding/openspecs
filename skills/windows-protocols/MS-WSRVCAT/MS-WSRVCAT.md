@@ -170,7 +170,7 @@ This document uses the following terms:
 **NULL GUID**: A [**GUID**](#gt_globally-unique-identifier-guid) of all zeros.
 
 <a id="gt_oletx"></a>
-**OleTx**: A comprehensive distributed transaction manager processing protocol that uses the protocols specified in the following document(s): [MS-CMPO](#Section_2.1), [MS-CMP](../MS-CMP/MS-CMP.md), [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md), [MS-DTCM](../MS-DTCM/MS-DTCM.md), [MS-DTCO], [MC-DTCXA](../MC-DTCXA/MC-DTCXA.md), [MS-TIPP](../MS-TIPP/MS-TIPP.md), and [MS-CMOM](../MS-CMOM/MS-CMOM.md).
+**OleTx**: A comprehensive distributed transaction manager processing protocol that uses the protocols specified in the following document(s): [MS-CMPO](../MS-CMPO/MS-CMPO.md), [MS-CMP](../MS-CMP/MS-CMP.md), [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md), [MS-DTCM](../MS-DTCM/MS-DTCM.md), [MS-DTCO], [MC-DTCXA](../MC-DTCXA/MC-DTCXA.md), [MS-TIPP](../MS-TIPP/MS-TIPP.md), and [MS-CMOM](../MS-CMOM/MS-CMOM.md).
 
 <a id="gt_participant"></a>
 **participant**: Any of the parties that are involved in an atomic transaction and that have a stake in the operations that are performed under the [**transaction**](#gt_transaction) or in the outcome of the [**transaction**](#gt_transaction) ([WSAT10], [WSAT11]).
@@ -205,7 +205,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](#Section_2.1)".
+[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](../MS-CMPO/MS-CMPO.md)".
 
 [MS-CMP] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Multiplexing Protocol](../MS-CMP/MS-CMP.md)".
 
@@ -252,7 +252,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-NMF] Microsoft Corporation, "[.NET Message Framing Protocol](../MC-NMF/MC-NMF.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [RFC2560] Myers, M., Ankney, R., Malpani, A., Glaperin, S., and Adams, C., "X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP", RFC 2560, June 1999, [http://www.ietf.org/rfc/rfc2560.txt](https://go.microsoft.com/fwlink/?LinkId=90369)
 
@@ -377,7 +377,7 @@ This protocol requires the following:
 
 This protocol is applicable to scenarios that require the processing of WS-AtomicTransaction messages, as specified in [[WSAT10]](https://go.microsoft.com/fwlink/?LinkId=113066) and [[WSAT11]](https://go.microsoft.com/fwlink/?LinkId=113067), when one or more of the [**coordinators**](#gt_coordinator) involved are implemented as an [**OleTx**](#gt_oletx) [**transaction manager**](#gt_transaction-manager), as described in [MS-DTCO](../MS-DTCO/MS-DTCO.md).
 
-This protocol requires network topologies where the transports protocol described in [MS-CMPO](#Section_2.1), the multiplexing protocol described in [MS-CMP](../MS-CMP/MS-CMP.md), and the SOAP protocols [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) and [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521) create a viable network transport for establishing many short-lived connection exchanges that accomplish specific tasks.<1>
+This protocol requires network topologies where the transports protocol described in [MS-CMPO](../MS-CMPO/MS-CMPO.md), the multiplexing protocol described in [MS-CMP](../MS-CMP/MS-CMP.md), and the SOAP protocols [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) and [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521) create a viable network transport for establishing many short-lived connection exchanges that accomplish specific tasks.<1>
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -412,7 +412,7 @@ This specification uses the term SOAP to mean either SOAP 1.1 or SOAP 1.2. Where
 The WS-AtomicTransaction (WS-AT) Protocol Extension software entities, Client Application, Server Application, and Transaction Coordinator, defined in section [1.3](#Section_1.3), use the following protocols as well:
 
 - MSDTC Connection Manager: OleTx Multiplexing Protocol as specified in [MS-CMP](../MS-CMP/MS-CMP.md).
-- MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](#Section_2.1).
+- MSDTC Connection Manager: OleTx Transports Protocol as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
 
@@ -1295,7 +1295,7 @@ This example shows how an application, either a [**client application**](#gt_cli
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Obtaining an Array of SExtendedEndpointInfo Structures
 
-An Application Role Implementation, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) (section 3.3), communicates with a [**transaction coordinator**](#gt_transaction-coordinator) using an [**OleTx**](#gt_oletx) multiplexing connection, as specified in [MS-CMP](../MS-CMP/MS-CMP.md), which is in turn layered on top of the OleTx transports infrastructure, as specified in [MS-CMPO](#Section_2.1). In this example, it is assumed that an [MS-CMPO] session has been established between the Application Role Implementation and its transaction coordinator. Messages are sent from the Application Role Implementation to the transaction coordinator and vice versa by submitting a MESSAGE_PACKET ([MS-DTCO] (section 2.2.4.1)) to the underlying OleTx multiplexing layer, as specified in [MS-CMP].
+An Application Role Implementation, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) (section 3.3), communicates with a [**transaction coordinator**](#gt_transaction-coordinator) using an [**OleTx**](#gt_oletx) multiplexing connection, as specified in [MS-CMP](../MS-CMP/MS-CMP.md), which is in turn layered on top of the OleTx transports infrastructure, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md). In this example, it is assumed that an [MS-CMPO] session has been established between the Application Role Implementation and its transaction coordinator. Messages are sent from the Application Role Implementation to the transaction coordinator and vice versa by submitting a MESSAGE_PACKET ([MS-DTCO] (section 2.2.4.1)) to the underlying OleTx multiplexing layer, as specified in [MS-CMP].
 
 This packet sequence is initiated by starting a connection on a transport session between an Application Role Implementation and a transaction coordinator.
 
@@ -1930,7 +1930,7 @@ When the server application's transaction coordinator receives the Prepare SOAP 
 
 When the root transaction coordinator receives the Prepared SOAP message from the server application's transaction coordinator, the root transaction coordinator decides to commit the transaction.
 
-The root transaction coordinator then creates a Completion Protocol Committed SOAP message and sends the message to the client application's [Participant](#Section_1.3.2.2) Completion Protocol Service URI.
+The root transaction coordinator then creates a Completion Protocol Committed SOAP message and sends the message to the client application's [Participant](#Section_1.3.2) Completion Protocol Service URI.
 
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" xmlns:a="http://www.w3.org/2005/08/addressing">
 
@@ -2056,7 +2056,7 @@ This protocol has no security parameters.
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

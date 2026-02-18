@@ -790,11 +790,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [IANAPORT] IANA, "Service Name and Transport Protocol Port Number Registry", [https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml](https://go.microsoft.com/fwlink/?LinkId=89888)
 
-[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](#Section_2.3.2)".
+[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
-[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](#Section_2.3.2)".
+[MS-ADA2] Microsoft Corporation, "[Active Directory Schema Attributes M](../MS-ADA2/MS-ADA2.md)".
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_2.3.2)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
 [MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
@@ -1228,27 +1228,27 @@ DNSSRV_TYPEID_RRL,
 
 **DNSSRV_TYPEID_FORWARDERS_W2K:** A pointer to a structure of type [DNS_RPC_FORWARDERS_W2K (section 2.2.5.2.10.1)](#Section_2.2.5.2.10.1). This structure specifies the set of DNS servers this DNS server will forward unresolved queries to.
 
-**DNSSRV_TYPEID_ZONE_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_W2K (section 2.2.5.2.1.1)](#Section_2.2.5.2.1). This structure is used to specify basic information about a DNS zone.
+**DNSSRV_TYPEID_ZONE_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_W2K (section 2.2.5.2.1.1)](#Section_2.2.5.2.1.1). This structure is used to specify basic information about a DNS zone.
 
-**DNSSRV_TYPEID_ZONE_INFO_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_INFO_W2K (section 2.2.5.2.4.1)](#Section_2.2.5.2.1). This structure is used to specify detailed DNS zone information.
+**DNSSRV_TYPEID_ZONE_INFO_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_INFO_W2K (section 2.2.5.2.4.1)](#Section_2.2.5.2.4.1). This structure is used to specify detailed DNS zone information.
 
-**DNSSRV_TYPEID_ZONE_SECONDARIES_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_SECONDARIES_W2K (section 2.2.5.2.5.1)](#Section_2.2.5.2.1). This structure is used to specify information about the secondary servers for a primary DNS zone.
+**DNSSRV_TYPEID_ZONE_SECONDARIES_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_SECONDARIES_W2K (section 2.2.5.2.5.1)](#Section_2.2.5.2.5.1). This structure is used to specify information about the secondary servers for a primary DNS zone.
 
-**DNSSRV_TYPEID_ZONE_DATABASE_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_DATABASE_W2K (section 2.2.5.2.6.1)](#Section_2.2.5.2.1). This structure specifies how a DNS zone is stored in persistent storage.
+**DNSSRV_TYPEID_ZONE_DATABASE_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_DATABASE_W2K (section 2.2.5.2.6.1)](#Section_2.2.5.2.6.1). This structure specifies how a DNS zone is stored in persistent storage.
 
 **DNSSRV_TYPEID_ZONE_TYPE_RESET_W2K:** This value is not used.
 
-**DNSSRV_TYPEID_ZONE_CREATE_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_CREATE_INFO_W2K (section 2.2.5.2.7.1)](#Section_2.2.5.2.7). This structure is used to specify parameters required when creating a new DNS zone.
+**DNSSRV_TYPEID_ZONE_CREATE_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_CREATE_INFO_W2K (section 2.2.5.2.7.1)](#Section_2.2.5.2.7.1). This structure is used to specify parameters required when creating a new DNS zone.
 
-**DNSSRV_TYPEID_NAME_AND_PARAM:** A pointer to a structure of type [DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5)](#Section_2.2.2.2.1). This is a general purpose structure used to associate a parameter name with a DWORD value.
+**DNSSRV_TYPEID_NAME_AND_PARAM:** A pointer to a structure of type [DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5)](#Section_2.2.1.2.5). This is a general purpose structure used to associate a parameter name with a DWORD value.
 
-**DNSSRV_TYPEID_ZONE_LIST_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_LIST_W2K (section 2.2.5.2.3.1)](#Section_2.2.5.2.1). This structure is used to enumerate zones.
+**DNSSRV_TYPEID_ZONE_LIST_W2K:** A pointer to a structure of type [DNS_RPC_ZONE_LIST_W2K (section 2.2.5.2.3.1)](#Section_2.2.5.2.3.1). This structure is used to enumerate zones.
 
 **DNSSRV_TYPEID_ZONE_RENAME:** This value is not used.
 
-**DNSSRV_TYPEID_ZONE_EXPORT:** A pointer to a structure of type [DNS_RPC_ZONE_EXPORT_INFO (section 2.2.5.2.8)](#Section_2.2.5.2.1). This structure is used to specify how to export a zone to a file.
+**DNSSRV_TYPEID_ZONE_EXPORT:** A pointer to a structure of type [DNS_RPC_ZONE_EXPORT_INFO (section 2.2.5.2.8)](#Section_2.2.5.2.8). This structure is used to specify how to export a zone to a file.
 
-**DNSSRV_TYPEID_SERVER_INFO_DOTNET:** A pointer to a structure of type [DNS_RPC_SERVER_INFO_DOTNET (section 2.2.4.2.2.2)](#Section_2.2.4.2.2). This structure is used to specify general DNS server state and configuration.
+**DNSSRV_TYPEID_SERVER_INFO_DOTNET:** A pointer to a structure of type [DNS_RPC_SERVER_INFO_DOTNET (section 2.2.4.2.2.2)](#Section_2.2.4.2.2.2). This structure is used to specify general DNS server state and configuration.
 
 **DNSSRV_TYPEID_FORWARDERS_DOTNET:** A pointer to a structure of type [DNS_RPC_FORWARDERS_DOTNET (section 2.2.5.2.10.2)](#Section_2.2.5.2.10.2). This structure specifies the set of DNS servers this DNS server will forward unresolved queries to.
 
@@ -1256,15 +1256,15 @@ DNSSRV_TYPEID_RRL,
 
 **DNSSRV_TYPEID_ZONE_INFO_DOTNET:** A pointer to a structure of type [DNS_RPC_ZONE_INFO_DOTNET (section 2.2.5.2.4.2)](#Section_2.2.5.2.4.2). This structure is used to specify detailed information about a DNS zone.
 
-**DNSSRV_TYPEID_ZONE_SECONDARIES_DOTNET:** A pointer to a structure of type [DNS_RPC_ZONE_SECONDARIES_DOTNET (section 2.2.5.2.5.2)](#Section_2.2.5.2.1). This structure is used to specify information about the secondary servers for a primary DNS zone.
+**DNSSRV_TYPEID_ZONE_SECONDARIES_DOTNET:** A pointer to a structure of type [DNS_RPC_ZONE_SECONDARIES_DOTNET (section 2.2.5.2.5.2)](#Section_2.2.5.2.5.2). This structure is used to specify information about the secondary servers for a primary DNS zone.
 
-**DNSSRV_TYPEID_ZONE_DATABASE:** A pointer to a structure of type [DNS_RPC_ZONE_DATABASE (section 2.2.5.2.6)](#Section_2.2.5.2.1). This structure specifies how a DNS zone is stored in persistent storage.
+**DNSSRV_TYPEID_ZONE_DATABASE:** A pointer to a structure of type [DNS_RPC_ZONE_DATABASE (section 2.2.5.2.6)](#Section_2.2.5.2.6). This structure specifies how a DNS zone is stored in persistent storage.
 
 **DNSSRV_TYPEID_ZONE_TYPE_RESET_DOTNET:** This value is not used.
 
 **DNSSRV_TYPEID_ZONE_CREATE_DOTNET:** A pointer to a structure of type [DNS_RPC_ZONE_CREATE_INFO_DOTNET](#Section_2.2.5.2.7.2). This structure is used to specify parameters required when creating a new DNS zone.
 
-**DNSSRV_TYPEID_ZONE_LIST:** A pointer to a structure of type [DNS_RPC_ZONE_LIST (section 2.2.5.2.3)](#Section_2.2.5.2.1). This structure is used to enumerate zones.
+**DNSSRV_TYPEID_ZONE_LIST:** A pointer to a structure of type [DNS_RPC_ZONE_LIST (section 2.2.5.2.3)](#Section_2.2.5.2.3). This structure is used to enumerate zones.
 
 **DNSSRV_TYPEID_DP_ENUM:** A pointer to a structure of type [DNS_RPC_DP_ENUM (section 2.2.7.2.3)](#Section_2.2.7.2.3). This structure is used to specify basic information about an [**application directory partition**](#gt_application-directory-partition).
 
@@ -1274,19 +1274,19 @@ DNSSRV_TYPEID_RRL,
 
 **DNSSRV_TYPEID_ENLIST_DP:** A pointer to a structure of type [DNS_RPC_ENLIST_DP (section 2.2.7.2.5)](#Section_2.2.7.2.5). This structure is used to request enlistment changes for an application directory partition.
 
-**DNSSRV_TYPEID_ZONE_CHANGE_DP:** A pointer to a structure of type [DNS_RPC_ZONE_CHANGE_DP (section 2.2.7.2.6)](#Section_2.2.5.2.1). This structure is used to request that a DNS [**zone**](#gt_zone) be moved from one application directory partition to another.
+**DNSSRV_TYPEID_ZONE_CHANGE_DP:** A pointer to a structure of type [DNS_RPC_ZONE_CHANGE_DP (section 2.2.7.2.6)](#Section_2.2.7.2.6). This structure is used to request that a DNS [**zone**](#gt_zone) be moved from one application directory partition to another.
 
 **DNSSRV_TYPEID_ENUM_ZONES_FILTER:** A pointer to a structure of type [DNS_RPC_ENUM_ZONES_FILTER (section 2.2.5.2.9)](#Section_2.2.5.2.9). This structure is used to filter DNS zones during enumeration.
 
-**DNSSRV_TYPEID_ADDRARRAY:** A pointer to a structure of type [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.2). This structure is used to specify a list of IPv4 or [**IPv6**](#gt_internet-protocol-version-6-ipv6) addresses.
+**DNSSRV_TYPEID_ADDRARRAY:** A pointer to a structure of type [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3). This structure is used to specify a list of IPv4 or [**IPv6**](#gt_internet-protocol-version-6-ipv6) addresses.
 
 **DNSSRV_TYPEID_SERVER_INFO:** A pointer to a structure of type [DNS_RPC_SERVER_INFO (section 2.2.4.2.2)](#Section_2.2.4.2.2). This structure is used to specify general DNS server state and configuration.
 
-**DNSSRV_TYPEID_ZONE_INFO:** A pointer to a structure of type [DNS_RPC_ZONE_INFO (section 2.2.5.2.4)](#Section_2.2.5.2.1). This structure is used to specify detailed information about a DNS zone.
+**DNSSRV_TYPEID_ZONE_INFO:** A pointer to a structure of type [DNS_RPC_ZONE_INFO (section 2.2.5.2.4)](#Section_2.2.5.2.4). This structure is used to specify detailed information about a DNS zone.
 
 **DNSSRV_TYPEID_FORWARDERS:** A pointer to a structure of type [DNS_RPC_FORWARDERS (section 2.2.5.2.10)](#Section_2.2.5.2.10). This structure specifies the set of DNS servers this DNS server will forward unresolved queries to.
 
-**DNSSRV_TYPEID_ZONE_SECONDARIES:** A pointer to a structure of type [DNS_RPC_ZONE_SECONDARIES (section 2.2.5.2.5)](#Section_2.2.5.2.1). This structure is used to specify information about the secondary servers for a primary DNS zone.
+**DNSSRV_TYPEID_ZONE_SECONDARIES:** A pointer to a structure of type [DNS_RPC_ZONE_SECONDARIES (section 2.2.5.2.5)](#Section_2.2.5.2.5). This structure is used to specify information about the secondary servers for a primary DNS zone.
 
 **DNSSRV_TYPEID_ZONE_TYPE_RESET:** This value is not used.
 
@@ -1302,25 +1302,25 @@ DNSSRV_TYPEID_RRL,
 
 **DNSSRV_TYPEID_SKD:** A pointer to a structure of type [DNS_RPC_SKD (section 2.2.6.2.1)](#Section_2.2.6.2.1). This structure is used to specify detailed [**signing key descriptor (SKD)**](#gt_signing-key-descriptor-skd) information.
 
-**DNSSRV_TYPEID_SKD_LIST:** A pointer to a structure of type [DNS_RPC_SKD_LIST (section 2.2.6.2.2)](#Section_2.2.6.2.1). This structure is used to enumerate signing key descriptors.
+**DNSSRV_TYPEID_SKD_LIST:** A pointer to a structure of type [DNS_RPC_SKD_LIST (section 2.2.6.2.2)](#Section_2.2.6.2.2). This structure is used to enumerate signing key descriptors.
 
-**DNSSRV_TYPEID_SKD_STATE:** A pointer to a structure of type [DNS_RPC_SKD_STATE (section 2.2.6.2.3)](#Section_2.2.6.2.1). This structure is used to specify detailed signing key descriptor state information.
+**DNSSRV_TYPEID_SKD_STATE:** A pointer to a structure of type [DNS_RPC_SKD_STATE (section 2.2.6.2.3)](#Section_2.2.6.2.3). This structure is used to specify detailed signing key descriptor state information.
 
 **DNSSRV_TYPEID_SIGNING_VALIDATION_ERROR:** A pointer to a structure of type [DNS_RPC_SIGNING_VALIDATION_ERROR (section 2.2.6.2.8)](#Section_2.2.6.2.8). This structure is used to specify signing key descriptor validation error information.
 
 **DNSSRV_TYPEID_TRUST_POINT_LIST:** A pointer to a structure of type [DNS_RPC_TRUST_POINT_LIST (section 2.2.6.2.5)](#Section_2.2.6.2.5). This structure is used to enumerate [**trust points**](#gt_trust-point).
 
-**DNSSRV_TYPEID_TRUST_ANCHOR_LIST:** A pointer to a structure of type [DNS_RPC_TRUST_ANCHOR_LIST (section 2.2.6.2.7)](#Section_2.2.6.2.6). This structure is used to enumerate [**trust anchors**](#gt_trust-anchor).
+**DNSSRV_TYPEID_TRUST_ANCHOR_LIST:** A pointer to a structure of type [DNS_RPC_TRUST_ANCHOR_LIST (section 2.2.6.2.7)](#Section_2.2.6.2.7). This structure is used to enumerate [**trust anchors**](#gt_trust-anchor).
 
-**DNSSRV_TYPEID_ZONE_SIGNING_SETTINGS:** A pointer to a structure of type [DNS_RPC_ZONE_DNSSEC_SETTINGS (section 2.2.6.2.9)](#Section_2.2.5.2.1). This structure is used to specify the DNSSEC settings for file-backed zones.
+**DNSSRV_TYPEID_ZONE_SIGNING_SETTINGS:** A pointer to a structure of type [DNS_RPC_ZONE_DNSSEC_SETTINGS (section 2.2.6.2.9)](#Section_2.2.6.2.9). This structure is used to specify the DNSSEC settings for file-backed zones.
 
 **DNSSRV_TYPEID_ZONE_SCOPE_ENUM:** A pointer to a structure of type [DNS_RPC_ENUM_ZONE_SCOPE_LIST (section 2.2.13.1.1)](#Section_2.2.13.1.1). This structure is used to enumerate [**zone scopes**](#gt_zone-scope) or [**cache scopes**](#gt_cache-scope).
 
-**DNSSRV_TYPEID_ZONE_STATS:** A pointer to a structure of type [DNS_RPC_ZONE_STATS_V1 (section 2.2.12.2.5)](#Section_2.2.5.2.1). This structure is used to enumerate the zone statistics.
+**DNSSRV_TYPEID_ZONE_STATS:** A pointer to a structure of type [DNS_RPC_ZONE_STATS_V1 (section 2.2.12.2.5)](#Section_2.2.12.2.5). This structure is used to enumerate the zone statistics.
 
-**DNSSRV_TYPEID_ZONE_SCOPE_CREATE:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.5.2.1). This structure is used to create the zone scope or cache scope.
+**DNSSRV_TYPEID_ZONE_SCOPE_CREATE:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.13.1.2.1). This structure is used to create the zone scope or cache scope.
 
-**DNSSRV_TYPEID_ZONE_SCOPE_INFO:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_INFO_V1 (section 2.2.13.1.3.1)](#Section_2.2.5.2.1). This structure is used to get the zone scope or cache scope information.
+**DNSSRV_TYPEID_ZONE_SCOPE_INFO:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_INFO_V1 (section 2.2.13.1.3.1)](#Section_2.2.13.1.3.1). This structure is used to get the zone scope or cache scope information.
 
 **DNSSRV_TYPEID_SCOPE_ENUM:** A pointer to a structure of type DNS_RPC_ENUM_SCOPE_LIST (section [2.2.14.1.1](#Section_2.2.14.1.1)). The structure is used to enumerate the server scopes configured on the DNS server.
 
@@ -1844,21 +1844,21 @@ PDNS_RPC_ENCRYPTION_CONFIG pEncryptionConfig;
 
 **ForwardersW2K:** A pointer to a structure of type DNS_RPC_FORWARDERS_W2K (section [2.2.5.2.10.1](#Section_2.2.5.2.10.1)). This structure specifies the set of DNS servers this DNS server will forward unresolved queries to.
 
-**ZoneW2K:** A pointer to a structure of type DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1)). This structure is used to specify basic information about a DNS zone.
+**ZoneW2K:** A pointer to a structure of type DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1.1)). This structure is used to specify basic information about a DNS zone.
 
-**ZoneInfoW2K:** A pointer to a structure of type DNS_RPC_ZONE_INFO_W2K (section [2.2.5.2.4.1](#Section_2.2.5.2.1)). This structure is used to specify detailed DNS zone information.
+**ZoneInfoW2K:** A pointer to a structure of type DNS_RPC_ZONE_INFO_W2K (section [2.2.5.2.4.1](#Section_2.2.5.2.4.1)). This structure is used to specify detailed DNS zone information.
 
-**SecondariesW2K:** A pointer to a structure of type DNS_RPC_ZONE_SECONDARIES_W2K (section [2.2.5.2.5.1](#Section_2.2.5.2.1)). This structure is used to specify information about the secondary servers for a primary DNS zone.
+**SecondariesW2K:** A pointer to a structure of type DNS_RPC_ZONE_SECONDARIES_W2K (section [2.2.5.2.5.1](#Section_2.2.5.2.5.1)). This structure is used to specify information about the secondary servers for a primary DNS zone.
 
-**DatabaseW2K:** A pointer to a structure of type DNS_RPC_ZONE_DATABASE_W2K (section [2.2.5.2.6.1](#Section_2.2.5.2.1)). This structure specifies how a DNS zone is stored in persistent storage.
+**DatabaseW2K:** A pointer to a structure of type DNS_RPC_ZONE_DATABASE_W2K (section [2.2.5.2.6.1](#Section_2.2.5.2.6.1)). This structure specifies how a DNS zone is stored in persistent storage.
 
-**ZoneCreateW2K:** A pointer to a structure of type DNS_RPC_ZONE_CREATE_INFO_W2K (section [2.2.5.2.7.1](#Section_2.2.5.2.7)). This structure is used to specify the parameters required when creating a new DNS zone.
+**ZoneCreateW2K:** A pointer to a structure of type DNS_RPC_ZONE_CREATE_INFO_W2K (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)). This structure is used to specify the parameters required when creating a new DNS zone.
 
-**NameAndParam:** A pointer to a structure of type DNS_RPC_NAME_AND_PARAM (section [2.2.1.2.5](#Section_2.2.2.2.1)). This is a general purpose structure used to associate a parameter name with a DWORD value.
+**NameAndParam:** A pointer to a structure of type DNS_RPC_NAME_AND_PARAM (section [2.2.1.2.5](#Section_2.2.1.2.5)). This is a general purpose structure used to associate a parameter name with a DWORD value.
 
-**ZoneListW2K:** A pointer to a structure of type DNS_RPC_ZONE_LIST_W2K (section [2.2.5.2.3.1](#Section_2.2.5.2.1)). This structure is used to enumerate zones.
+**ZoneListW2K:** A pointer to a structure of type DNS_RPC_ZONE_LIST_W2K (section [2.2.5.2.3.1](#Section_2.2.5.2.3.1)). This structure is used to enumerate zones.
 
-**ServerInfoDotNet:** A pointer to a structure of type DNS_RPC_SERVER_INFO_DOTNET (section [2.2.4.2.2.2](#Section_2.2.4.2.2)). This structure is used to specify the general DNS server state and configuration.
+**ServerInfoDotNet:** A pointer to a structure of type DNS_RPC_SERVER_INFO_DOTNET (section [2.2.4.2.2.2](#Section_2.2.4.2.2.2)). This structure is used to specify the general DNS server state and configuration.
 
 **ForwardersDotNet:** A pointer to a structure of type DNS_RPC_FORWARDERS_DOTNET (section [2.2.5.2.10.2](#Section_2.2.5.2.10.2)). This structure specifies the set of DNS servers this DNS server will forward unresolved queries to.
 
@@ -1866,15 +1866,15 @@ PDNS_RPC_ENCRYPTION_CONFIG pEncryptionConfig;
 
 **ZoneInfoDotNet:** A pointer to a structure of type DNS_RPC_ZONE_INFO_DOTNET (section [2.2.5.2.4.2](#Section_2.2.5.2.4.2)). This structure is used to specify detailed DNS zone information.
 
-**SecondariesDotNet:** A pointer to a structure of type DNS_RPC_ZONE_SECONDARIES_DOTNET (section [2.2.5.2.5.2](#Section_2.2.5.2.1)). This structure is used to specify information about the secondary servers for a primary DNS zone.
+**SecondariesDotNet:** A pointer to a structure of type DNS_RPC_ZONE_SECONDARIES_DOTNET (section [2.2.5.2.5.2](#Section_2.2.5.2.5.2)). This structure is used to specify information about the secondary servers for a primary DNS zone.
 
-**Database:** A pointer to a structure of type DNS_RPC_ZONE_DATABASE (section [2.2.5.2.6](#Section_2.2.5.2.1)). This structure specifies how a DNS zone is stored in persistent storage.
+**Database:** A pointer to a structure of type DNS_RPC_ZONE_DATABASE (section [2.2.5.2.6](#Section_2.2.5.2.6)). This structure specifies how a DNS zone is stored in persistent storage.
 
 **ZoneCreateDotNet:** A pointer to a structure of type DNS_RPC_ZONE_CREATE_INFO_DOTNET (section [2.2.5.2.7.2](#Section_2.2.5.2.7.2)). This structure is used to specify the parameters required when creating a new DNS zone.
 
-**ZoneList:** A pointer to a structure of type DNS_RPC_ZONE_LIST (section [2.2.5.2.3](#Section_2.2.5.2.1)). This structure is used to enumerate zones.
+**ZoneList:** A pointer to a structure of type DNS_RPC_ZONE_LIST (section [2.2.5.2.3](#Section_2.2.5.2.3)). This structure is used to enumerate zones.
 
-**ZoneExport:** A pointer to a structure of type DNS_RPC_ZONE_EXPORT_INFO (section [2.2.5.2.8](#Section_2.2.5.2.1)). This structure is used to specify how a zone is exported to file.
+**ZoneExport:** A pointer to a structure of type DNS_RPC_ZONE_EXPORT_INFO (section [2.2.5.2.8](#Section_2.2.5.2.8)). This structure is used to specify how a zone is exported to file.
 
 **DirectoryPartition:** A pointer to a structure of type DNS_RPC_DP_INFO (section [2.2.7.2.1](#Section_2.2.7.2.1)). This structure specifies detailed information about a single [**application directory partition**](#gt_application-directory-partition).
 
@@ -1884,11 +1884,11 @@ PDNS_RPC_ENCRYPTION_CONFIG pEncryptionConfig;
 
 **EnlistDirectoryPartition:** A pointer to a structure of type DNS_RPC_ENLIST_DP (section [2.2.7.2.5](#Section_2.2.7.2.5)). This structure is used to request enlistment changes for an application directory partition.
 
-**ZoneChangeDirectoryPartition:** A pointer to a structure of type DNS_RPC_ZONE_CHANGE_DP (section [2.2.7.2.6](#Section_2.2.5.2.1)). This structure is used to request that a DNS zone be moved from one application directory partition to another.
+**ZoneChangeDirectoryPartition:** A pointer to a structure of type DNS_RPC_ZONE_CHANGE_DP (section [2.2.7.2.6](#Section_2.2.7.2.6)). This structure is used to request that a DNS zone be moved from one application directory partition to another.
 
 **EnumZonesFilter:** A pointer to a structure of type DNS_RPC_ENUM_ZONES_FILTER (section [2.2.5.2.9](#Section_2.2.5.2.9)). This structure is used to filter DNS zones during enumeration.
 
-**AddrArray:** A pointer to a structure of type DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.2)). This structure is used to specify a list of IPv4 or IPv6 addresses.
+**AddrArray:** A pointer to a structure of type DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)). This structure is used to specify a list of IPv4 or IPv6 addresses.
 
 **ServerInfo:** A pointer to a structure of type DNS_RPC_SERVER_INFO (section [2.2.4.2.2](#Section_2.2.4.2.2)). This structure is used to specify general DNS server state and configuration.
 
@@ -1896,11 +1896,11 @@ PDNS_RPC_ENCRYPTION_CONFIG pEncryptionConfig;
 
 **Forwarders:** A pointer to a structure of type DNS_RPC_FORWARDERS (section [2.2.5.2.10](#Section_2.2.5.2.10)). This structure specifies the set of DNS servers this DNS server will forward unresolved queries to.
 
-**Secondaries:** A pointer to a structure of type DNS_RPC_ZONE_SECONDARIES (section [2.2.5.2.5](#Section_2.2.5.2.1)). This structure is used to specify information about the secondary servers for a primary DNS zone.
+**Secondaries:** A pointer to a structure of type DNS_RPC_ZONE_SECONDARIES (section [2.2.5.2.5](#Section_2.2.5.2.5)). This structure is used to specify information about the secondary servers for a primary DNS zone.
 
 **IpValidate:** A pointer to a structure of type [DNS_RPC_IP_VALIDATE (section 2.2.3.2.4)](#Section_2.2.3.2.4). This structure is used to request IP validation and to return the results of IP validation.
 
-**ZoneInfo:** A pointer to a structure of type DNS_RPC_ZONE_INFO (section [2.2.5.2.4](#Section_2.2.5.2.1)). This structure is used to specify detailed DNS zone information.
+**ZoneInfo:** A pointer to a structure of type DNS_RPC_ZONE_INFO (section [2.2.5.2.4](#Section_2.2.5.2.4)). This structure is used to specify detailed DNS zone information.
 
 **AutoConfigure:** A pointer to a structure of type DNS_RPC_AUTOCONFIGURE (section [2.2.8.2.1](#Section_2.2.8.2.1)). This structure is used to request DNS server autoconfiguration.
 
@@ -1910,25 +1910,25 @@ PDNS_RPC_ENCRYPTION_CONFIG pEncryptionConfig;
 
 **Skd:** A pointer to a structure of type [DNS_RPC_SKD](#Section_2.2.6.2.1) (section 2.2.6.2.1). This structure is used to specify detailed [**signing key descriptor (SKD)**](#gt_signing-key-descriptor-skd) information.
 
-**SkdList:** A pointer to a structure of type [DNS_RPC_SKD_LIST](#Section_2.2.6.2.1) (section 2.2.6.2.2). This structure is used to enumerate signing key descriptors.
+**SkdList:** A pointer to a structure of type [DNS_RPC_SKD_LIST](#Section_2.2.6.2.2) (section 2.2.6.2.2). This structure is used to enumerate signing key descriptors.
 
-**SkdState:** A pointer to a structure of type [DNS_RPC_SKD_STATE](#Section_2.2.6.2.1) (section 2.2.6.2.3). This structure is used to specify detailed signing key descriptor state information.
+**SkdState:** A pointer to a structure of type [DNS_RPC_SKD_STATE](#Section_2.2.6.2.3) (section 2.2.6.2.3). This structure is used to specify detailed signing key descriptor state information.
 
 **SigningValidationError:** A pointer to a structure of type [DNS_RPC_SIGNING_VALIDATION_ERROR](#Section_2.2.6.2.8) (section 2.2.6.2.8). This structure is used to specify signing key descriptor validation error information.
 
 **TrustPointList:** A pointer to a structure of type [DNS_RPC_TRUST_POINT_LIST](#Section_2.2.6.2.5) (section 2.2.6.2.5). This structure is used to enumerate trust points.
 
-**TrustAnchorList:** A pointer to a structure of type [DNS_RPC_TRUST_ANCHOR_LIST](#Section_2.2.6.2.6) (section 2.2.6.2.7). This structure is used to enumerate trust anchors.
+**TrustAnchorList:** A pointer to a structure of type [DNS_RPC_TRUST_ANCHOR_LIST](#Section_2.2.6.2.7) (section 2.2.6.2.7). This structure is used to enumerate trust anchors.
 
-**ZoneDnsSecSettings:** A pointer to a structure of type [DNS_RPC_ZONE_DNSSEC_SETTINGS (section 2.2.6.2.9)](#Section_2.2.5.2.1). This structure is used to list the DNSSEC settings of a zone.
+**ZoneDnsSecSettings:** A pointer to a structure of type [DNS_RPC_ZONE_DNSSEC_SETTINGS (section 2.2.6.2.9)](#Section_2.2.6.2.9). This structure is used to list the DNSSEC settings of a zone.
 
 **ZoneScopeList:** A pointer to a structure of type [DNS_RPC_ENUM_ZONE_SCOPE_LIST (section 2.2.13.1.1)](#Section_2.2.13.1.1). This structure is used to enumerate [**zone scopes**](#gt_zone-scope) in a specified zone or [**cache scopes**](#gt_cache-scope) in a [**cache**](#gt_cache) zone.
 
-**ZoneStats:** A pointer to a structure of type [DNS_RPC_ZONE_STATS_V1 (section 2.2.12.2.5)](#Section_2.2.5.2.1). This structure is used to enumerate the zone statistics.
+**ZoneStats:** A pointer to a structure of type [DNS_RPC_ZONE_STATS_V1 (section 2.2.12.2.5)](#Section_2.2.12.2.5). This structure is used to enumerate the zone statistics.
 
-**ScopeCreate:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.5.2.1). This structure is used to create a zone scope or cache scope.
+**ScopeCreate:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.13.1.2.1). This structure is used to create a zone scope or cache scope.
 
-**ScopeInfo:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_INFO_V1 (section 2.2.13.1.3.1)](#Section_2.2.5.2.1). This structure is used to specify detailed DNS zone scope or cache scope information.
+**ScopeInfo:** A pointer to a structure of type [DNS_RPC_ZONE_SCOPE_INFO_V1 (section 2.2.13.1.3.1)](#Section_2.2.13.1.3.1). This structure is used to specify detailed DNS zone scope or cache scope information.
 
 **ScopeList:** A pointer to a structure of type [DNS_RPC_ENUM_SCOPE_LIST (section 2.2.14.1.1)](#Section_2.2.14.1.1). This structure is used to retrieve all the [**server scopes**](#gt_server-scope) configured on the DNS server.
 
@@ -2038,7 +2038,7 @@ An implementation SHOULD<10> support all of the preceding flags.
 <a id="Section_2.2.2.2.1"></a>
 ##### 2.2.2.2.1 DNS_RPC_NAME
 
-The **DNS_RPC_NAME** structure is used to specify an [**FQDN**](#gt_fully-qualified-domain-name-fqdn), a DNS label, or another string in an [**RPC**](#gt_remote-procedure-call-rpc) buffer by the DNS server. See section [3.1.6.3](#Section_2.3.2.2) for the handling of this structure in the directory server.
+The **DNS_RPC_NAME** structure is used to specify an [**FQDN**](#gt_fully-qualified-domain-name-fqdn), a DNS label, or another string in an [**RPC**](#gt_remote-procedure-call-rpc) buffer by the DNS server. See section [3.1.6.3](#Section_3.1.6.3) for the handling of this structure in the directory server.
 
 ```mermaid
 packet-beta
@@ -2728,7 +2728,7 @@ DNS_FLAT_RECORD,
 
 **dwReserved:** This value MUST be set to 0x00000000 when sent by the client and ignored on receipt by the server.
 
-**Buffer:** Record data in DNS_RPC_RECORD_DATA (section [2.2.2.2.4](#Section_2.2.2.2.4.6)) format where type is specified by the value **wType**.<26>
+**Buffer:** Record data in DNS_RPC_RECORD_DATA (section [2.2.2.2.4](#Section_2.2.2.2.4)) format where type is specified by the value **wType**.<26>
 
 | Value | Meaning |
 | --- | --- |
@@ -2797,7 +2797,7 @@ The **DNS_IPVAL_CONTEXT** is a DWORD value that specifies possible context value
 <a id="Section_2.2.3.1.2"></a>
 ##### 2.2.3.1.2 DNS_IP_VALIDATE_RETURN_FLAGS
 
-**DNS_IP_VALIDATE_RETURN_FLAGS** is a DWORD value that specifies the results of IP validation performed by the DNS server. This value will be used by the DNS server to populate the Flags field within each **DNS_ADDR** structure (section [2.2.3.2.2](#Section_2.2.3.2.2.2)) present in the **DNS_ADDR_ARRAY** (section [2.2.3.2.3](#Section_2.2.3.2.2)) structure which in turn is present inside the returned **DNS_RPC_IP_VALIDATE** structure (section [2.2.3.2.4](#Section_2.2.3.2.4))<28>.
+**DNS_IP_VALIDATE_RETURN_FLAGS** is a DWORD value that specifies the results of IP validation performed by the DNS server. This value will be used by the DNS server to populate the Flags field within each **DNS_ADDR** structure (section [2.2.3.2.2](#Section_2.2.3.2.2)) present in the **DNS_ADDR_ARRAY** (section [2.2.3.2.3](#Section_2.2.3.2.3)) structure which in turn is present inside the returned **DNS_RPC_IP_VALIDATE** structure (section [2.2.3.2.4](#Section_2.2.3.2.4))<28>.
 
 | Constant/value | Description |
 | --- | --- |
@@ -2857,7 +2857,7 @@ Any field not specified above MUST be set to zero by the sender and ignored by t
 <a id="Section_2.2.3.2.2.1"></a>
 ###### 2.2.3.2.2.1 DNS ADDR
 
-The **DNS ADDR** structure is an IPv4 or IPv6 address used by [DNS_ADDR](#Section_2.2.3.2.2.2) **MaxSa** field (section 2.2.3.2.2).
+The **DNS ADDR** structure is an IPv4 or IPv6 address used by [DNS_ADDR](#Section_2.2.3.2.2) **MaxSa** field (section 2.2.3.2.2).
 
 ```mermaid
 packet-beta
@@ -2881,7 +2881,7 @@ packet-beta
 <a id="Section_2.2.3.2.2.2"></a>
 ###### 2.2.3.2.2.2 DNS ADD USER
 
-The **DNS ADD USER** structure is used by [DNS_ADDR](#Section_2.2.3.2.2.2) **DnsAddrUserDword** field.
+The **DNS ADD USER** structure is used by [DNS_ADDR](#Section_2.2.3.2.2) **DnsAddrUserDword** field.
 
 ```mermaid
 packet-beta
@@ -2918,7 +2918,7 @@ packet-beta
 <a id="Section_2.2.3.2.3"></a>
 ##### 2.2.3.2.3 DNS_ADDR_ARRAY
 
-The **DNS_ADDR_ARRAY** structure is used to represent an array of **DNS_ADDR** (section [2.2.3.2.2](#Section_2.2.3.2.2.2)) structures. The DNS Server Management Protocol uses this structure to exchange lists of mixed IPv4 and IPv6 addresses between client and server.
+The **DNS_ADDR_ARRAY** structure is used to represent an array of **DNS_ADDR** (section [2.2.3.2.2](#Section_2.2.3.2.2)) structures. The DNS Server Management Protocol uses this structure to exchange lists of mixed IPv4 and IPv6 addresses between client and server.
 
 typedef struct _DnsAddrArray {
 
@@ -3009,7 +3009,7 @@ PDNS_ADDR_ARRAY aipValidateAddrs;
 
 **pszContextName:** A pointer to a null-terminated [**ASCII**](#gt_ascii) character string that specifies a [**zone**](#gt_zone) name. The use of this zone name is specified by the dwContext member.
 
-**aipValidateAddrs:** A pointer to a [DNS_ADDR_ARRAY structure (section 2.2.3.2.3)](#Section_2.2.3.2.2) contains a list of IP addresses to be validated by the DNS server.
+**aipValidateAddrs:** A pointer to a [DNS_ADDR_ARRAY structure (section 2.2.3.2.3)](#Section_2.2.3.2.3) contains a list of IP addresses to be validated by the DNS server.
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Server Messages
@@ -3088,8 +3088,8 @@ The **DNS_RPC_SERVER_INFO** structure contains information about the DNS server'
 | Value | Structure |
 | --- | --- |
 | 0x00000000 | DNS_RPC_SERVER_INFO_W2K (section [2.2.4.2.2.1](#Section_2.2.4.2.2.1)) |
-| 0x00060000 | DNS_RPC_SERVER_INFO_DOTNET (section [2.2.4.2.2.2](#Section_2.2.4.2.2)) |
-| 0x00070000 | DNS_RPC_SERVER_INFO_LONGHORN (section [2.2.4.2.2.3](#Section_2.2.4.2.2)) |
+| 0x00060000 | DNS_RPC_SERVER_INFO_DOTNET (section [2.2.4.2.2.2](#Section_2.2.4.2.2.2)) |
+| 0x00070000 | DNS_RPC_SERVER_INFO_LONGHORN (section [2.2.4.2.2.3](#Section_2.2.4.2.2.3)) |
 
 <a id="Section_2.2.4.2.2.1"></a>
 ###### 2.2.4.2.2.1 DNS_RPC_SERVER_INFO_W2K
@@ -3398,7 +3398,7 @@ BOOLEAN fReserveArray[15];
 | Value | Meaning |
 | --- | --- |
 | 0x00000001 | Structure is of type DNS_RPC_SERVER_INFO_DOTNET (section 2.2.4.2.2.2). |
-| 0x00000002 | Structure is of type DNS_RPC_SERVER_INFO_LONGHORN (section [2.2.4.2.2.3](#Section_2.2.4.2.2)). |
+| 0x00000002 | Structure is of type DNS_RPC_SERVER_INFO_LONGHORN (section [2.2.4.2.2.3](#Section_2.2.4.2.2.3)). |
 
 **dwReserved0:** This field is reserved for future use. Senders MUST set this to zero and it MUST be ignored by receiver.
 
@@ -3433,7 +3433,7 @@ BOOLEAN fReserveArray[15];
 <a id="Section_2.2.4.2.2.3"></a>
 ###### 2.2.4.2.2.3 DNS_RPC_SERVER_INFO_LONGHORN
 
-In the **DNS_RPC_SERVER_INFO_LONGHORN** structure all fields have same definition as specified in section **DNS_RPC_SERVER_INFO_DOTNET** (section [2.2.4.2.2.2](#Section_2.2.4.2.2) ), with the following exceptions:<33>
+In the **DNS_RPC_SERVER_INFO_LONGHORN** structure all fields have same definition as specified in section **DNS_RPC_SERVER_INFO_DOTNET** (section [2.2.4.2.2.2](#Section_2.2.4.2.2.2) ), with the following exceptions:<33>
 
 typedef struct _DnsRpcServerInfoLonghorn {
 
@@ -3599,7 +3599,7 @@ The **DNS_ZONE_SECONDARY_SECURITY** enumeration is a 32-bit integer value that e
 | --- | --- |
 | ZONE_SECSECURE_NO_SECURITY 0x00000000 | No security enforcement for secondaries, that is, any request will be honored. |
 | ZONE_SECSECURE_NS_ONLY 0x00000001 | Zone transfer request will be honored from the remote servers, which are in the list of name servers for this zone. |
-| ZONE_SECSECURE_LIST_ONLY 0x00000002 | Zone transfer request will be honored from the remote servers, which are explicitly configured by IP addresses in the **aipSecondaries** field in the DNS_RPC_ZONE_INFO structure (section [2.2.5.2.4](#Section_2.2.5.2.1)). |
+| ZONE_SECSECURE_LIST_ONLY 0x00000002 | Zone transfer request will be honored from the remote servers, which are explicitly configured by IP addresses in the **aipSecondaries** field in the DNS_RPC_ZONE_INFO structure (section [2.2.5.2.4](#Section_2.2.5.2.4)). |
 | ZONE_SECSECURE_NO_XFER 0x00000003 | No zone transfer requests will be honored. |
 
 <a id="Section_2.2.5.1.3"></a>
@@ -3611,7 +3611,7 @@ The **DNS_ZONE_NOTIFY_LEVEL** enumeration is a DWORD value that enumerates the l
 | --- | --- |
 | ZONE_NOTIFY_OFF 0x00000000 | The Master DNS server does not send any zone notifications. |
 | ZONE_NOTIFY_ALL_SECONDARIES 0x00000001 | The Master DNS server sends zone notifications to all secondary servers for this zone, either they are listed as name-servers for this zone or they are present explicitly in the zone notify list for this zone. (DNS notify [[RFC1996]](https://go.microsoft.com/fwlink/?LinkId=106957) is a mechanism in which the [**primary DNS server**](#gt_primary-dns-server) for a zone notifies secondary servers about any changes in the zone.) |
-| ZONE_NOTIFY_LIST_ONLY 0x00000002 | The Master DNS server sends zone notifications only to those remote servers which are explicitly configured by IP addresses in the **aipNotify** field in the DNS_RPC_ZONE_INFO structure (section [2.2.5.2.4](#Section_2.2.5.2.1)). |
+| ZONE_NOTIFY_LIST_ONLY 0x00000002 | The Master DNS server sends zone notifications only to those remote servers which are explicitly configured by IP addresses in the **aipNotify** field in the DNS_RPC_ZONE_INFO structure (section [2.2.5.2.4](#Section_2.2.5.2.4)). |
 
 <a id="Section_2.2.5.1.4"></a>
 ##### 2.2.5.1.4 ZONE_REQUEST_FILTERS
@@ -3667,7 +3667,7 @@ The **DNS_RPC_ZONE** structure contains basic information about a [**zone**](#gt
 
 | Value | Structure |
 | --- | --- |
-| 0x00000000 | DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1)) |
+| 0x00000000 | DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1.1)) |
 | 0x00060000 | DNS_RPC_ZONE_DOTNET (section [2.2.5.2.1.2](#Section_2.2.5.2.1.2)) |
 
 <a id="Section_2.2.5.2.1.1"></a>
@@ -3700,7 +3700,7 @@ UCHAR Version;
 <a id="Section_2.2.5.2.1.2"></a>
 ###### 2.2.5.2.1.2 DNS_RPC_ZONE_DOTNET
 
-In the **DNS_RPC_ZONE_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_W2K** (section [2.2.5.2.1.1](#Section_2.2.5.2.1)), with the following exceptions:
+In the **DNS_RPC_ZONE_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_W2K** (section [2.2.5.2.1.1](#Section_2.2.5.2.1.1)), with the following exceptions:
 
 typedef struct _DnssrvRpcZoneDotNet {
 
@@ -3779,8 +3779,8 @@ The **DNS_RPC_ZONE_LIST** structure contains the information about a list of zon
 
 | Value | Structure |
 | --- | --- |
-| 0x00000000 | DNS_RPC_ZONE_LIST_W2K (section [2.2.5.2.3.1](#Section_2.2.5.2.1)) |
-| 0x00060000 | DNS_RPC_ZONE_LIST_DOTNET (section [2.2.5.2.3.2](#Section_2.2.5.2.3)) |
+| 0x00000000 | DNS_RPC_ZONE_LIST_W2K (section [2.2.5.2.3.1](#Section_2.2.5.2.3.1)) |
+| 0x00060000 | DNS_RPC_ZONE_LIST_DOTNET (section [2.2.5.2.3.2](#Section_2.2.5.2.3.2)) |
 
 <a id="Section_2.2.5.2.3.1"></a>
 ###### 2.2.5.2.3.1 DNS_RPC_ZONE_LIST_W2K
@@ -3799,12 +3799,12 @@ typedef struct _DnssrvRpcZoneListW2K {
 
 **dwZoneCount:** The number of zones present in the array of zones pointed to by ZoneArray.
 
-**ZoneArray:** An array of structures of type DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1)). Each element of the array represents one zone.
+**ZoneArray:** An array of structures of type DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1.1)). Each element of the array represents one zone.
 
 <a id="Section_2.2.5.2.3.2"></a>
 ###### 2.2.5.2.3.2 DNS_RPC_ZONE_LIST_DOTNET
 
-In the **DNS_RPC_ZONE_LIST_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_LIST_W2K** (section [2.2.5.2.3.1](#Section_2.2.5.2.1)), with the following exceptions:
+In the **DNS_RPC_ZONE_LIST_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_LIST_W2K** (section [2.2.5.2.3.1](#Section_2.2.5.2.3.1)), with the following exceptions:
 
 typedef struct _DnssrvRpcZoneListDotNet {
 
@@ -3832,7 +3832,7 @@ If the DNS RPC client sends an older version of DNS_RPC_ZONE_LIST structure, tha
 
 - Copy the same value for the fields that are common to input and the current version of DNS_RPC_ZONE_LIST structures.
 - The dwRpcStructureVersion field MUST be set to "1".
-- The value for the ZoneArray field MUST be obtained from the input structure as DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1)) array elements and each MUST be converted using the steps specified in section DNS_RPC_ZONE_DOTNET (section [2.2.5.2.1.2](#Section_2.2.5.2.1.2)), and then assigned to the ZoneArray field in the DNS_RPC_ZONE_LIST_DOTNET structure.
+- The value for the ZoneArray field MUST be obtained from the input structure as DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1.1)) array elements and each MUST be converted using the steps specified in section DNS_RPC_ZONE_DOTNET (section [2.2.5.2.1.2](#Section_2.2.5.2.1.2)), and then assigned to the ZoneArray field in the DNS_RPC_ZONE_LIST_DOTNET structure.
 - All other fields that are defined only in DNS_RPC_ZONE_LIST_DOTNET and are not defined in DNS_RPC_ZONE_LIST_W2K (section 2.2.5.2.3.1), MUST be set to "0".
 <a id="Section_2.2.5.2.4"></a>
 ##### 2.2.5.2.4 DNS_RPC_ZONE_INFO
@@ -3841,7 +3841,7 @@ The **DNS_RPC_ZONE_INFO** structure contains the detailed information about a zo
 
 | Value | Structure |
 | --- | --- |
-| 0x00000000 | DNS_RPC_ZONE_INFO_W2K (section [2.2.5.2.4.1](#Section_2.2.5.2.1)) |
+| 0x00000000 | DNS_RPC_ZONE_INFO_W2K (section [2.2.5.2.4.1](#Section_2.2.5.2.4.1)) |
 | 0x00060000 | DNS_RPC_ ZONE_INFO_DOTNET (section [2.2.5.2.4.2](#Section_2.2.5.2.4.2)) |
 | 0x00070000 | DNS_RPC_ ZONE_INFO_LONGHORN (section [2.2.5.2.4.3](#Section_2.2.5.2.4.3)) |
 
@@ -3965,7 +3965,7 @@ DWORD pvReserved4;
 <a id="Section_2.2.5.2.4.2"></a>
 ###### 2.2.5.2.4.2 DNS_RPC_ZONE_INFO_DOTNET
 
-In the **DNS_RPC_ZONE_INFO_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_INFO_W2K** (section [2.2.5.2.4.1](#Section_2.2.5.2.1)), with the following exceptions:
+In the **DNS_RPC_ZONE_INFO_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_INFO_W2K** (section [2.2.5.2.4.1](#Section_2.2.5.2.4.1)), with the following exceptions:
 
 typedef struct _DnsRpcZoneInfoDotNet {
 
@@ -4207,9 +4207,9 @@ The **DNS_RPC_ZONE_SECONDARIES** structure contains the information about the [*
 
 | Value | Structure |
 | --- | --- |
-| 0x00000000 | DNS_RPC_ZONE_SECONDARIES_W2K (section [2.2.5.2.5.1](#Section_2.2.5.2.1)) |
-| 0x00060000 | DNS_RPC_ ZONE_SECONDARIES_DOTNET (section [2.2.5.2.5.2](#Section_2.2.5.2.1)) |
-| 0x00070000 | DNS_RPC_ ZONE_SECONDARIES_LONGHORN (section [2.2.5.2.5.3](#Section_2.2.5.2.5)) |
+| 0x00000000 | DNS_RPC_ZONE_SECONDARIES_W2K (section [2.2.5.2.5.1](#Section_2.2.5.2.5.1)) |
+| 0x00060000 | DNS_RPC_ ZONE_SECONDARIES_DOTNET (section [2.2.5.2.5.2](#Section_2.2.5.2.5.2)) |
+| 0x00070000 | DNS_RPC_ ZONE_SECONDARIES_LONGHORN (section [2.2.5.2.5.3](#Section_2.2.5.2.5.3)) |
 
 <a id="Section_2.2.5.2.5.1"></a>
 ###### 2.2.5.2.5.1 DNS_RPC_ZONE_SECONDARIES_W2K
@@ -4241,7 +4241,7 @@ PIP4_ARRAY aipNotify;
 <a id="Section_2.2.5.2.5.2"></a>
 ###### 2.2.5.2.5.2 DNS_RPC_ZONE_SECONDARIES_DOTNET
 
-In the **DNS_RPC_ZONE_SECONDARIES_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_SECONDARIES_W2K** (section [2.2.5.2.5.1](#Section_2.2.5.2.1)), with the following exceptions:
+In the **DNS_RPC_ZONE_SECONDARIES_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_SECONDARIES_W2K** (section [2.2.5.2.5.1](#Section_2.2.5.2.5.1)), with the following exceptions:
 
 typedef struct _DnssrvRpcZoneSecondariesDotNet {
 
@@ -4268,7 +4268,7 @@ PIP4_ARRAY aipNotify;
 <a id="Section_2.2.5.2.5.3"></a>
 ###### 2.2.5.2.5.3 DNS_RPC_ZONE_SECONDARIES_LONGHORN
 
-In the **DNS_RPC_ZONE_SECONDARIES_LONGHORN** structure all fields have same definition as specified in section **DNS_RPC_ZONE_SECONDARIES_DOTNET** (section [2.2.5.2.5.2](#Section_2.2.5.2.1)), with the following exceptions:
+In the **DNS_RPC_ZONE_SECONDARIES_LONGHORN** structure all fields have same definition as specified in section **DNS_RPC_ZONE_SECONDARIES_DOTNET** (section [2.2.5.2.5.2](#Section_2.2.5.2.5.2)), with the following exceptions:
 
 typedef struct _DnssrvRpcZoneSecondariesLonghorn {
 
@@ -4294,19 +4294,19 @@ DNS_RPC_ZONE_SECONDARIES,
 
 **dwRpcStructureVersion:** The DNS server management structure version number. It MUST be set to 0x00000002.
 
-**aipSecondaries:** A pointer to a structure of type DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.2)) that specifies a list of IP addresses of remote DNS servers that are permitted to perform [**zone transfers**](#gt_zone-transfer) for this zone. The DNS server will honor zone transfer requests from these secondary servers, as directed by the value of fSecureSecondaries above.
+**aipSecondaries:** A pointer to a structure of type DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)) that specifies a list of IP addresses of remote DNS servers that are permitted to perform [**zone transfers**](#gt_zone-transfer) for this zone. The DNS server will honor zone transfer requests from these secondary servers, as directed by the value of fSecureSecondaries above.
 
 **aipNotify:** A pointer to a structure of type DNS_ADDR_ARRAY (section 2.2.3.2.3) that specifies a list of IP addresses of the remote DNS servers that be sent notification messages when records in this zone change, as directed by fNotifyLevel above.
 
 <a id="Section_2.2.5.2.6"></a>
 ##### 2.2.5.2.6 DNS_RPC_ZONE_DATABASE
 
-The **DNS_RPC_ZONE_DATABASE** structure contains information about the persistent data store for a zone on the DNS server. There are different versions of the **DNS_RPC_ZONE_DATABASE** structure. The DNS server MUST use the structure corresponding to the value of *dwClientVersion* in DNS Server Management Protocol method calls (section [3.1.4](#Section_3.1.4)) as shown in the following table, or if the method call does not specify the value of *dwClientVersion*, the **DNS_RPC_ZONE_DATABASE_W2K** (section [2.2.5.2.6.1](#Section_2.2.5.2.1)) version of the structure MUST be used.
+The **DNS_RPC_ZONE_DATABASE** structure contains information about the persistent data store for a zone on the DNS server. There are different versions of the **DNS_RPC_ZONE_DATABASE** structure. The DNS server MUST use the structure corresponding to the value of *dwClientVersion* in DNS Server Management Protocol method calls (section [3.1.4](#Section_3.1.4)) as shown in the following table, or if the method call does not specify the value of *dwClientVersion*, the **DNS_RPC_ZONE_DATABASE_W2K** (section [2.2.5.2.6.1](#Section_2.2.5.2.6.1)) version of the structure MUST be used.
 
 | Value | Structure |
 | --- | --- |
 | 0x00000000 | DNS_RPC_ZONE_DATABASE_W2K (section 2.2.5.2.6.1) |
-| 0x00060000 | DNS_RPC_ZONE_DATABASE_DOTNET (section [2.2.5.2.6.2](#Section_2.2.5.2.6)) |
+| 0x00060000 | DNS_RPC_ZONE_DATABASE_DOTNET (section [2.2.5.2.6.2](#Section_2.2.5.2.6.2)) |
 
 <a id="Section_2.2.5.2.6.1"></a>
 ###### 2.2.5.2.6.1 DNS_RPC_ZONE_DATABASE_W2K
@@ -4330,7 +4330,7 @@ DWORD fDsIntegrated;
 <a id="Section_2.2.5.2.6.2"></a>
 ###### 2.2.5.2.6.2 DNS_RPC_ZONE_DATABASE_DOTNET
 
-In the **DNS_RPC_ZONE_DATABASE_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_DATABASE_W2K** (section [2.2.5.2.6.1](#Section_2.2.5.2.1)), with the following exceptions:
+In the **DNS_RPC_ZONE_DATABASE_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_DATABASE_W2K** (section [2.2.5.2.6.1](#Section_2.2.5.2.6.1)), with the following exceptions:
 
 typedef struct _DnssrvRpcZoneDatabaseDotNet {
 
@@ -4361,9 +4361,9 @@ The **DNS_RPC_ZONE_CREATE_INFO** structure contains information required to crea
 
 | Value | Structure |
 | --- | --- |
-| 0x00000000 | DNS_RPC_ZONE_CREATE_INFO_W2K (section [2.2.5.2.7.1](#Section_2.2.5.2.7)) |
+| 0x00000000 | DNS_RPC_ZONE_CREATE_INFO_W2K (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)) |
 | 0x00060000 | DNS_RPC_ZONE_CREATE_INFO_DOTNET (section [2.2.5.2.7.2](#Section_2.2.5.2.7.2)) |
-| 0x00070000 | DNS_RPC_ZONE_CREATE_INFO_LONGHORN (section [2.2.5.2.7.3](#Section_2.2.5.2.7)) |
+| 0x00070000 | DNS_RPC_ZONE_CREATE_INFO_LONGHORN (section [2.2.5.2.7.3](#Section_2.2.5.2.7.3)) |
 
 <a id="Section_2.2.5.2.7.1"></a>
 ###### 2.2.5.2.7.1 DNS_RPC_ZONE_CREATE_INFO_W2K
@@ -4434,7 +4434,7 @@ DWORD dwReserved8;
 
 *PDNS_RPC_ZONE_CREATE_INFO_W2K;
 
-**pszZoneName:** As specified in section [2.2.5.2.4.1](#Section_2.2.5.2.1).
+**pszZoneName:** As specified in section [2.2.5.2.4.1](#Section_2.2.5.2.4.1).
 
 **dwZoneType:** The zone type. This MUST be set to one of the allowed values specified in DNS_ZONE_TYPE (section [2.2.5.1.1](#Section_2.2.5.1.1)), and it MUST NOT be either DNS_ZONE_TYPE_CACHE or DNS_ZONE_TYPE_SECONDARY_CACHE.
 
@@ -4506,7 +4506,7 @@ DWORD dwReserved8;
 <a id="Section_2.2.5.2.7.2"></a>
 ###### 2.2.5.2.7.2 DNS_RPC_ZONE_CREATE_INFO_DOTNET
 
-In the **DNS_RPC_ZONE_CREATE_INFO_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_CREATE_INFO_W2K** (section [2.2.5.2.7.1](#Section_2.2.5.2.7)), with the following exceptions:
+In the **DNS_RPC_ZONE_CREATE_INFO_DOTNET** structure all fields have same definition as specified in section **DNS_RPC_ZONE_CREATE_INFO_W2K** (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)), with the following exceptions:
 
 typedef struct _DnsRpcZoneCreateInfoDotNet {
 
@@ -4634,7 +4634,7 @@ DNS_RPC_ZONE_CREATE_INFO,
 
 **aipSecondaries:** As specified in section 2.2.5.2.4.3.
 
-If the DNS RPC client sends an older version of DNS_RPC_ZONE_CREATE_INFO structure such as DNS_RPC_ZONE_CREATE_INFO_W2K (section [2.2.5.2.7.1](#Section_2.2.5.2.7)) or DNS_RPC_ZONE_CREATE_INFO_DOTNET (section 2.2.5.2.7.2), then the DNS RPC server MUST construct a current version of DNS_RPC_ZONE_CREATE_INFO structure such as DNS_RPC_ZONE_CREATE_INFO_LONGHORN, using steps as specified below:
+If the DNS RPC client sends an older version of DNS_RPC_ZONE_CREATE_INFO structure such as DNS_RPC_ZONE_CREATE_INFO_W2K (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)) or DNS_RPC_ZONE_CREATE_INFO_DOTNET (section 2.2.5.2.7.2), then the DNS RPC server MUST construct a current version of DNS_RPC_ZONE_CREATE_INFO structure such as DNS_RPC_ZONE_CREATE_INFO_LONGHORN, using steps as specified below:
 
 - Copy the same value for fields that are common to input and current version of DNS_RPC_ZONE_CREATE_INFO structures.
 - dwRpcStructureVersion field MUST be set to 2.
@@ -4709,7 +4709,7 @@ The **DNS_RPC_FORWARDERS** structure contains information about [**forwarders**]
 | --- | --- |
 | 0x00000000 | DNS_RPC_FORWARDERS_W2K (section [2.2.5.2.10.1](#Section_2.2.5.2.10.1)) |
 | 0x00060000 | DNS_RPC_FORWARDERS_DOTNET (section [2.2.5.2.10.2](#Section_2.2.5.2.10.2)) |
-| 0x00070000 | DNS_RPC_FORWARDERS_LONGHORN (section [2.2.5.2.10.3](#Section_2.2.5.2.10)) |
+| 0x00070000 | DNS_RPC_FORWARDERS_LONGHORN (section [2.2.5.2.10.3](#Section_2.2.5.2.10.3)) |
 
 <a id="Section_2.2.5.2.10.1"></a>
 ###### 2.2.5.2.10.1 DNS_RPC_FORWARDERS_W2K
@@ -4786,7 +4786,7 @@ DNS_RPC_FORWARDERS,
 
 **dwRpcStructureVersion:** The structure version number. It MUST be set to 0x00000002.
 
-**aipForwarders:** A pointer to a structure of type DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.2)) specifies a list of IP addresses that will be used as [**forwarders**](#gt_forwarders) by the DNS server.
+**aipForwarders:** A pointer to a structure of type DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)) specifies a list of IP addresses that will be used as [**forwarders**](#gt_forwarders) by the DNS server.
 
 <a id="Section_2.2.6"></a>
 ### 2.2.6 Zone Update Messages
@@ -4843,7 +4843,7 @@ SIGN_SCOPE_REVOKED
 <a id="Section_2.2.6.1.3"></a>
 ##### 2.2.6.1.3 ImportOpResult
 
-The **ImportOpResult** enumeration SHOULD<47> define the operations to be executed when the DNS_RPC_ZONE_DNSSEC_SETTINGS structure (section [2.2.6.2.9](#Section_2.2.5.2.1)) is imported on a zone.
+The **ImportOpResult** enumeration SHOULD<47> define the operations to be executed when the DNS_RPC_ZONE_DNSSEC_SETTINGS structure (section [2.2.6.2.9](#Section_2.2.6.2.9)) is imported on a zone.
 
 typedef enum ImportOperationResult
 
@@ -5204,7 +5204,7 @@ DWORD dwReserved;
 
 **dwReserved:** MUST be set to zero when sent and MUST be ignored on receipt.
 
-**RRData:** Binary data in the same format as [DNS_RPC_RECORD_DNSKEY (section 2.2.2.2.4.15)](#Section_2.2.2.2.5) if **wTrustAnchorType** is DNS_TYPE_DNSKEY, or binary data in the same format as [DNS_RPC_RECORD_DS (section 2.2.2.2.4.12)](#Section_2.2.2.2.5) if **wTrustAnchorType** is DNS_TYPE_DS.
+**RRData:** Binary data in the same format as [DNS_RPC_RECORD_DNSKEY (section 2.2.2.2.4.15)](#Section_2.2.2.2.4.15) if **wTrustAnchorType** is DNS_TYPE_DNSKEY, or binary data in the same format as [DNS_RPC_RECORD_DS (section 2.2.2.2.4.12)](#Section_2.2.2.2.4.12) if **wTrustAnchorType** is DNS_TYPE_DS.
 
 <a id="Section_2.2.6.2.7"></a>
 ##### 2.2.6.2.7 DNS_RPC_TRUST_ANCHOR_LIST
@@ -5406,9 +5406,9 @@ PDNS_RPC_SKD_STATE_EX pSkdStateEx;
 
 **pSkd:** The static properties of a zone SKD. This is a [DNS_RPC_SKD structure (section 2.2.6.2.1)](#Section_2.2.6.2.1).
 
-**pSkdState:** The dynamic properties of a zone SKD. This is a [DNS_RPC_SKD_STATE structure (section 2.2.6.2.3)](#Section_2.2.6.2.1).
+**pSkdState:** The dynamic properties of a zone SKD. This is a [DNS_RPC_SKD_STATE structure (section 2.2.6.2.3)](#Section_2.2.6.2.3).
 
-**pSkdStateEx:** The extended dynamic properties of a zone SKD. This is a [DNS_RPC_SKD_STATE_EX structure (section 2.2.6.2.11)](#Section_2.2.6.2.1).
+**pSkdStateEx:** The extended dynamic properties of a zone SKD. This is a [DNS_RPC_SKD_STATE_EX structure (section 2.2.6.2.11)](#Section_2.2.6.2.11).
 
 <a id="Section_2.2.6.2.11"></a>
 ##### 2.2.6.2.11 DNS_RPC_SKD_STATE_EX
@@ -5566,7 +5566,7 @@ DWORD dwReserved[3];
 
 | Value | Meaning | Source |
 | --- | --- | --- |
-| DNS_DP_OKAY 0x00000000 | The application directory partition is running and ready for all operations. | The Application Directory Partition naming context root object's **instanceType** attribute ([MS-ADA1](#Section_2.3.2) section 2.309) has neither DS_INSTANCETYPE_NC_COMING (0x00000010), nor the DS_INSTANCETYPE_NC_GOING ( 0x00000020) bit set. |
+| DNS_DP_OKAY 0x00000000 | The application directory partition is running and ready for all operations. | The Application Directory Partition naming context root object's **instanceType** attribute ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.309) has neither DS_INSTANCETYPE_NC_COMING (0x00000010), nor the DS_INSTANCETYPE_NC_GOING ( 0x00000020) bit set. |
 | DNS_DP_STATE_REPL_INCOMING 0x00000001 | The application directory partition is replicating onto the directory server but has not completed an initial synchronization so will be ignored for the time being. | The Application Directory Partition naming context root object's **instanceType** attribute has the (DS_INSTANCETYPE_NC_COMING ( 0x00000010) bit set. |
 | DNS_DP_STATE_REPL_OUTGOING 0x00000002 | The application directory partition is being deleted from the directory server and so will be ignored. | The Application Directory Partition naming context root object's **instanceType** attribute has the DS_INSTANCETYPE_NC_GOING ( 0x00000020) bit set. |
 | DNS_DP_STATE_UNKNOWN 0x00000003 | The application directory partition state is unavailable for unknown reasons. | The Application Directory Partition naming context root object's **instanceType** attribute is unavailable due to an error condition. |
@@ -5835,7 +5835,7 @@ The DNS server can enable several levels of event-logging. This MUST be set to o
 <a id="Section_2.2.10.1.1"></a>
 ##### 2.2.10.1.1 DNSSRV_STATID_TYPES
 
-The **DNSSRV_STATID_TYPES** enumeration is a 32-bit integer that enumerates the possible types of DNS server statistics. When requesting statistics, these values can be combined to request multiple statistics buffers in the same operation. When statistics are returned, each **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)) contains a value in the **StatId** field with a single bit set to indicate the type of statistics that are contained in the associated buffer.
+The **DNSSRV_STATID_TYPES** enumeration is a 32-bit integer that enumerates the possible types of DNS server statistics. When requesting statistics, these values can be combined to request multiple statistics buffers in the same operation. When statistics are returned, each **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)) contains a value in the **StatId** field with a single bit set to indicate the type of statistics that are contained in the associated buffer.
 
 | Constant/value | Description |
 | --- | --- |
@@ -5853,7 +5853,7 @@ The **DNSSRV_STATID_TYPES** enumeration is a 32-bit integer that enumerates the 
 | DNSSRV_STATID_MEMORY 0x00010000 | If the **StatId** field is set in the request, a DNSSRV_MEMORY_STATS (section [2.2.10.2.16](#Section_2.2.10.2.16)) structure will be included in the output buffer. |
 | DNSSRV_STATID_TIMEOUT 0x00020000 | If the **StatId** field is set in the request, a DNSSRV_TIMEOUT_STATS (section [2.2.10.2.17](#Section_2.2.10.2.17)) structure will be included in the output buffer. |
 | DNSSRV_STATID_DBASE 0x00040000 | If the **StatId** field is set in the request, a DNSSRV_DBASE_STATS (section [2.2.10.2.18](#Section_2.2.10.2.18)) structure will be included in the output buffer. |
-| DNSSRV_STATID_RECORD 0x00080000 | If the **StatId** field is set in the request, a DNSSRV_RECORD_STATS (section [2.2.10.2.19](#Section_2.3.2.2)) structure will be included in the output buffer. |
+| DNSSRV_STATID_RECORD 0x00080000 | If the **StatId** field is set in the request, a DNSSRV_RECORD_STATS (section [2.2.10.2.19](#Section_2.2.10.2.19)) structure will be included in the output buffer. |
 | DNSSRV_STATID_PACKET 0x00100000 | If the **StatId** field is set in the request, a DNSSRV_PACKET_STATS (section [2.2.10.2.20](#Section_2.2.10.2.20)) structure will be included in the output buffer. |
 | DNSSRV_STATID_NBSTAT 0x00200000 | If the **StatId** field is set in the request, a DNSSRV_NBSTAT_STATS (section [2.2.10.2.21](#Section_2.2.10.2.21)) structure will be included in the output buffer. |
 | DNSSRV_STATID_ERRORS 0x00400000 | If the **StatId** field is set in the request, a DNSSRV_ERROR_STATS (section [2.2.10.2.23](#Section_2.2.10.2.23)) structure will be included in the output buffer. |
@@ -5909,7 +5909,7 @@ BYTE Buffer[1];
 
 *PDNSSRV_STATS;
 
-**Header:** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header:** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **Buffer:** A variable length array of bytes that contains information specific to the type of DNS server statistics, as specified by the StatId value in the Header.
 
@@ -5962,7 +5962,7 @@ packet-beta
   288-383: "LastClearTime (16 bytes)"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **ServerStartTimeSeconds (4 bytes):** The number of seconds that has elapsed since the server machine was last restarted, that is, the operating system uptime in seconds, as a 32-bit unsigned integer. If the value is greater than 0xFFFFFFFF, then the value modulo 0x100000000 is stored in the field.
 
@@ -5995,7 +5995,7 @@ packet-beta
   320-351: "TcpResponsesReceived"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **UdpQueries (4 bytes):** The cumulative number of queries received over UDP, as an unsigned 32-bit integer. If the value is greater than 0xFFFFFFFF, then the value modulo 0x100000000 is stored in the field.
 
@@ -6040,7 +6040,7 @@ packet-beta
   512-543: "TypeOther"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **TotalQueries (4 bytes):** The total number of queries received by the server, as an unsigned 32-bit integer. If the value is greater than 0xFFFFFFFF, then the value modulo 0x100000000 is stored in the field.
 
@@ -6143,7 +6143,7 @@ packet-beta
   1984-2015: "CacheLockingDiscards (optional)"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **ReferralPasses (4 bytes):** The number of times the server returned a referral value, as an unsigned 32-bit integer. If the value is greater than 0xFFFFFFFF, then the value modulo 0x100000000 is stored in the field.
 
@@ -6280,7 +6280,7 @@ packet-beta
   128-159: "RecursionFailures"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **SuccessfulValidations (4 bytes):** The number of times a validation attempt on a DNSSEC signature or DS digest hash succeeded.
 
@@ -6325,7 +6325,7 @@ packet-beta
   896-927: "IxfrUdpForceAxfr"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **NotifySent (4 bytes):** The number of update notifications sent to secondaries by the server.
 
@@ -6432,7 +6432,7 @@ packet-beta
   1344-1375: "IxfrTcpInvalid"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **NotifyReceived (4 bytes):** The number of zone notifications received by the server.
 
@@ -6530,7 +6530,7 @@ packet-beta
   160-191: "WinsReverseResponses"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **WinsLookups (4 bytes):** The number of WINS lookup requests received by the server.
 
@@ -6586,7 +6586,7 @@ packet-beta
   1184-1279: "UpdateType (156 bytes)"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **Received (4 bytes):** The number of dynamic update requests received by the server.
 
@@ -6687,7 +6687,7 @@ packet-beta
   576-607: "SecTsigVerifyFailed"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **SecContextCreate (4 bytes):** The number of security contexts created by the server since the server was started.
 
@@ -6783,7 +6783,7 @@ packet-beta
   1568-1663: "DsWriteType (160 bytes)"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **DsTotalNodesRead (4 bytes):** The total number of DNS [**nodes**](#gt_node) read from the directory server.
 
@@ -6928,7 +6928,7 @@ packet-beta
   640-735: "MemTags (624 bytes)"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **Memory (4 bytes):** The total memory currently allocated by the servers, in bytes.
 
@@ -7049,7 +7049,7 @@ packet-beta
   544-575: "DelayedFreesExecutedWithFunction"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **SetTotal (4 bytes):** The total number of times the server marked a node as being eligible for deletion when it is no longer in use by the cache.
 
@@ -7097,7 +7097,7 @@ packet-beta
   160-191: "NodeReturn"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **NodeMemory (4 bytes):** The total size, in bytes, of server memory currently used for nodes.
 
@@ -7126,7 +7126,7 @@ packet-beta
   320-351: "SlowFreeFinished"
 ```
 
-**Header (8 bytes):** A structure of type DNSSRV_STAT_HEADER (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type DNSSRV_STAT_HEADER (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **InUse (4 bytes):** The number of resource records currently allocated by the server.
 
@@ -7176,7 +7176,7 @@ packet-beta
   672-703: "PacketsForNsListInUse (optional)"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **UdpAlloc (4 bytes):** The cumulative number of UDP packets allocated by the server from system memory.
 
@@ -7236,7 +7236,7 @@ packet-beta
   288-319: "NbstatInFreeList"
 ```
 
-**Header (8 bytes):** A structure of type DNSSRV_STAT_HEADER (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type DNSSRV_STAT_HEADER (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **NbstatAlloc (4 bytes):** The cumulative number of NetBIOS packet buffers allocated by the server from system memory.
 
@@ -7302,7 +7302,7 @@ packet-beta
   1248-1279: "ZoneDbaseDelayedDelete"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **RecordFile (4 bytes):** Not used. Senders MUST set this value to zero and receivers MUST ignore it.
 
@@ -7406,7 +7406,7 @@ packet-beta
   544-575: "UnknownError"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **NoError (4 bytes):** The number of occurrences where the server returned success (0x00000000) and query was successfully responded to.
 
@@ -7455,7 +7455,7 @@ packet-beta
   192-223: "PassesRequiringAggressiveFree"
 ```
 
-**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes):** A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **CacheExceededLimitChecks (4 bytes):** Not used. Senders MUST set this value to zero and receivers MUST ignore it.
 
@@ -7481,7 +7481,7 @@ packet-beta
   160-191: "TotalResponsesLeaked"
 ```
 
-**Header (8 bytes)**: A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.11)).
+**Header (8 bytes)**: A structure of type **DNSSRV_STAT_HEADER** (section [2.2.10.2.1](#Section_2.2.10.2.1)).
 
 **TotalResponsesSent (4 bytes)**: The number of times the server responded to a valid query since it last started. This counter is maintained and updated only when RRL is enabled. After reaching 0xFFFFFFFF, the value increments to 0x00000000.
 
@@ -8223,7 +8223,7 @@ The following [**DNS Policy**](#gt_dns-policy) constants are used during a DNS P
 | DNS_RPC_FLAG_POLICY_CRITERIA_TRANSPORT_PROTOCOL 0x00000020 | Specifies that the criteria (section 2.2.15.2.4) for matching a DNS Policy is based on the Transport Layer Protocol (TCP or UDP) used to send a DNS query to the DNS server during a DNS Operation. |
 | DNS_RPC_FLAG_POLICY_CRITERIA_NETWORK_PROTOCOL 0x00000040 | Specifies that the criteria (section 2.2.15.2.4) for matching a DNS Policy is based the Internet Protocol that is used ([**IPv4**](#gt_internet-protocol-version-4-ipv4) or [**IPv6**](#gt_internet-protocol-version-6-ipv6)) to send a DNS Query to the DNS server during a DNS Operation. |
 | DNS_RPC_FLAG_POLICY_CRITERIA_EDNS_CLIENT_SUBNET 0x00000080 | Usage of this flag will fail the request with DNS_ERROR_POLICY_INVALID_SETTINGS (9974) (section [2.2.1.1.5](#Section_2.2.1.1.5)). |
-| DNS_RPC_FLAG_POLICY_CONDITION 0x00010000 | Specifies that the criteria (section 2.2.15.2.4) for matching a DNS Policy is based on the [DNS_RPC_POLICY_CONDITION (section 2.2.15.1.1.2)](#Section_2.2.15.2.5) that connects the various criteria in a DNS operation. |
+| DNS_RPC_FLAG_POLICY_CONDITION 0x00010000 | Specifies that the criteria (section 2.2.15.2.4) for matching a DNS Policy is based on the [DNS_RPC_POLICY_CONDITION (section 2.2.15.1.1.2)](#Section_2.2.15.1.1.2) that connects the various criteria in a DNS operation. |
 | DNS_RPC_FLAG_POLICY_PROCESSING_ORDER 0x00020000 | Specifies the processing order of a DNS policy. A processing order of a DNS Policy determines whether this policy is to be applied to the DNS operation, in case there are other DNS policies ([DNS_RPC_POLICY (section 2.2.15.2.5)](#Section_2.2.15.2.5)) at the same level that also match the DNS operation. |
 | DNS_RPC_FLAG_POLICY_CONTENT 0x00040000 | Specifies the zone scope, [**cache scope**](#gt_cache-scope), or server scope from which a DNS operation is to be performed in case the DNS Policy is a match. For more details about the Policy content, see [DNS_RPC_POLICY_CONTENT (section 2.2.15.2.2)](#Section_2.2.15.2.2). |
 
@@ -8402,14 +8402,14 @@ PDNS_ADDR_ARRAY pIPv6Addr;
 
 **pwszClientSubnetName:** (variable) A NULL-terminated Unicode string containing the name of the client subnet record.
 
-**pIPAddr:** A pointer to a [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.2) structure that contains a list of IP subnets contained in this client subnet record along with the SubnetLength as defined in [DNS ADD USER (section 2.2.3.2.2.2)](#Section_2.2.3.2.2.2).
+**pIPAddr:** A pointer to a [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3) structure that contains a list of IP subnets contained in this client subnet record along with the SubnetLength as defined in [DNS ADD USER (section 2.2.3.2.2.2)](#Section_2.2.3.2.2.2).
 
 **pIPv6Addr:** A pointer to a DNS_ADDR_ARRAY structure that contains a list of IPv6 subnets contained in this client subnet record along with the SubnetLength as defined in DNS ADD USER.
 
 <a id="Section_2.2.15.2.2"></a>
 ##### 2.2.15.2.2 DNS_RPC_POLICY_CONTENT
 
-The **DNS_RPC_POLICY_CONTENT** structure contains the zone scope, cache scope, or server scope details that are used to service the DNS operation if a DNS policy's [DNS_RPC_POLICY_ACTION_TYPE (section 2.2.15.1.1.4)](#Section_2.2.15.2.5) is DnsPolicyAllow.
+The **DNS_RPC_POLICY_CONTENT** structure contains the zone scope, cache scope, or server scope details that are used to service the DNS operation if a DNS policy's [DNS_RPC_POLICY_ACTION_TYPE (section 2.2.15.1.1.4)](#Section_2.2.15.1.1.4) is DnsPolicyAllow.
 
 typedef struct _DnssrvRpcPolicyActionContent {
 
@@ -8498,15 +8498,15 @@ DWORDLONG flags;
 
 *PDNS_RPC_POLICY;
 
-**pwszPolicyName:** A NULL-terminated Unicode string containing the name of the DNS policy. The name is unique across a level as specified in [DNS_RPC_POLICY_LEVEL (section 2.2.15.1.1.3)](#Section_2.2.15.2.5).
+**pwszPolicyName:** A NULL-terminated Unicode string containing the name of the DNS policy. The name is unique across a level as specified in [DNS_RPC_POLICY_LEVEL (section 2.2.15.1.1.3)](#Section_2.2.15.1.1.3).
 
 **level:** This specifies whether the policy is configured for a zone (including a cache zone) or is at server level. The value is of type DNS_RPC_POLICY_LEVEL.
 
-**appliesOn:** This specifies the DNS operation for which the DNS policy is applicable. The value is of type [DNS_RPC_POLICY_TYPE (section 2.2.15.1.1.5)](#Section_2.2.15.2.5).
+**appliesOn:** This specifies the DNS operation for which the DNS policy is applicable. The value is of type [DNS_RPC_POLICY_TYPE (section 2.2.15.1.1.5)](#Section_2.2.15.1.1.5).
 
-**action:** This specifies the action to be applied on a DNS operation when there is a DNS policy match. The value is of type [DNS_RPC_POLICY_ACTION_TYPE (section 2.2.15.1.1.4)](#Section_2.2.15.2.5).
+**action:** This specifies the action to be applied on a DNS operation when there is a DNS policy match. The value is of type [DNS_RPC_POLICY_ACTION_TYPE (section 2.2.15.1.1.4)](#Section_2.2.15.1.1.4).
 
-**condition:** This specifies the logical operation across the [**DNS policy criteria**](#gt_dns-policy-criteria) of a DNS policy, which determines whether the DNS policy match has succeeded or failed. The value is of type [DNS_RPC_POLICY_CONDITION (section 2.2.15.1.1.2)](#Section_2.2.15.2.5).
+**condition:** This specifies the logical operation across the [**DNS policy criteria**](#gt_dns-policy-criteria) of a DNS policy, which determines whether the DNS policy match has succeeded or failed. The value is of type [DNS_RPC_POLICY_CONDITION (section 2.2.15.1.1.2)](#Section_2.2.15.1.1.2).
 
 **isEnabled:** A BOOL variable that specifies whether a DNS policy is enabled. TRUE indicates that the DNS policy MUST be applied to the DNS operation; FALSE indicates that the DNS policy is disabled and MUST NOT be applied to the DNS operation.
 
@@ -8514,9 +8514,9 @@ DWORDLONG flags;
 
 **pszZoneName:** A NULL-terminated string containing the name of the zone for which this DNS policy is configured.
 
-**pContentList:** An object of type [DNS_RPC_POLICY_CONTENT_LIST (section 2.2.15.2.3)](#Section_2.2.15.2.5) that has a list of zone scope, cache scope, or server scope with weight as defined in [DNS_RPC_POLICY_CONTENT (section 2.2.15.2.2)](#Section_2.2.15.2.2). If the DNS policy matches the criteria in **pCriteriaList** and its action is DnsPolicyAllow, then the zone scopes, cache scopes, or server scopes contained in pContentList are used in the DNS operation as per their **dwWeight**.
+**pContentList:** An object of type [DNS_RPC_POLICY_CONTENT_LIST (section 2.2.15.2.3)](#Section_2.2.15.2.3) that has a list of zone scope, cache scope, or server scope with weight as defined in [DNS_RPC_POLICY_CONTENT (section 2.2.15.2.2)](#Section_2.2.15.2.2). If the DNS policy matches the criteria in **pCriteriaList** and its action is DnsPolicyAllow, then the zone scopes, cache scopes, or server scopes contained in pContentList are used in the DNS operation as per their **dwWeight**.
 
-**flags:** This is used during update of a DNS policy. The various bits of flags show which members of the DNS Policy are to be updated. For possible values of the bits of flags. see section [2.2.15.1.1](#Section_2.2.15.1.1.4). For details on how this is used during a policy update, see the operation UpdatePolicy in section [3.1.4.1](#Section_3.1.4.1).
+**flags:** This is used during update of a DNS policy. The various bits of flags show which members of the DNS Policy are to be updated. For possible values of the bits of flags. see section [2.2.15.1.1](#Section_2.2.15.1.1). For details on how this is used during a policy update, see the operation UpdatePolicy in section [3.1.4.1](#Section_3.1.4.1).
 
 **dwCriteriaCount:** An unsigned integer containing the number of DNS policy criteria that are configured for this DNS policy.
 
@@ -8525,7 +8525,7 @@ DWORDLONG flags;
 <a id="Section_2.2.15.2.6"></a>
 ##### 2.2.15.2.6 DNS_RPC_POLICY_NAME
 
-The **DNS_RPC_POLICY_NAME** structure contains the details of the [**DNS policy**](#gt_dns-policy) when the DNS policies are enumerated at a specified level (section [2.2.15.1.1.3](#Section_2.2.15.2.5)).
+The **DNS_RPC_POLICY_NAME** structure contains the details of the [**DNS policy**](#gt_dns-policy) when the DNS policies are enumerated at a specified level (section [2.2.15.1.1.3](#Section_2.2.15.1.1.3)).
 
 typedef struct _DnsRpcPolicyType {
 
@@ -8543,7 +8543,7 @@ DWORD processingOrder;
 
 **pwszPolicyName:** A NULL-terminated Unicode string containing the name of the DNS policy. The name is unique across a level as specified in DNS_RPC_POLICY_LEVEL (section 2.2.15.1.1.3).
 
-**appliesOn:** This specifies the DNS operation to which the DNS policy applies. The value is of type [DNS_RPC_POLICY_TYPE (section 2.2.15.1.1.5)](#Section_2.2.15.2.5).
+**appliesOn:** This specifies the DNS operation to which the DNS policy applies. The value is of type [DNS_RPC_POLICY_TYPE (section 2.2.15.1.1.5)](#Section_2.2.15.1.1.5).
 
 **fEnabled:** A BOOL variable that specifies whether a DNS policy is enabled.
 
@@ -8552,7 +8552,7 @@ DWORD processingOrder;
 <a id="Section_2.2.15.2.7"></a>
 ##### 2.2.15.2.7 DNS_RPC_ENUMERATE_POLICY_LIST
 
-The **DNS_RPC_ENUMERATE_POLICY_LIST** structure contains all the DNS policies at a specified level (section [2.2.15.1.1.3](#Section_2.2.15.2.5)).
+The **DNS_RPC_ENUMERATE_POLICY_LIST** structure contains all the DNS policies at a specified level (section [2.2.15.1.1.3](#Section_2.2.15.1.1.3)).
 
 typedef struct _DnsRpcEnumPolicyList {
 
@@ -8778,14 +8778,14 @@ DNS_RPC_ENUM_VIRTUALIZATION_INSTANCE_LIST, *PDNS_RPC_ENUM_VIRTUALIZATION_INSTANC
 
 **dwRpcStructureVersion**: The DNS management structure version number. This value MUST be set to 0x00000000.
 
-**dwVirtualizationInstanceCount**: An unsigned integer that specifies the total number of [DNS_RPC_VIRTUALIZATION_INSTANCE_INFO (section 2.2.17.1.2)](#Section_2.2.17.1.1) elements.
+**dwVirtualizationInstanceCount**: An unsigned integer that specifies the total number of [DNS_RPC_VIRTUALIZATION_INSTANCE_INFO (section 2.2.17.1.2)](#Section_2.2.17.1.2) elements.
 
 **VirtualizationInstanceArray**: An array of pointers to DNS_RPC_VIRTUALIZATION_INSTANCE_INFO (section 2.2.17.1.2) structures.
 
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-The DNS Server Management Protocol accesses the [**directory service**](#gt_directory-service-ds) schema classes and attributes listed in the following table. Those listed as unused are read and stored, but not processed by the protocol. For the syntactic specifications of the following Class or Class/Attribute pairs, refer to: [MS-ADSC](../MS-ADSC/MS-ADSC.md), [MS-ADA1](#Section_2.3.2), [MS-ADA2](#Section_2.3.2), and [MS-ADA3](#Section_2.3.2). The specifications of the **dnsProperty** and **dnsRecord** attributes are described in this section.<95>
+The DNS Server Management Protocol accesses the [**directory service**](#gt_directory-service-ds) schema classes and attributes listed in the following table. Those listed as unused are read and stored, but not processed by the protocol. For the syntactic specifications of the following Class or Class/Attribute pairs, refer to: [MS-ADSC](../MS-ADSC/MS-ADSC.md), [MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), and [MS-ADA3](../MS-ADA3/MS-ADA3.md). The specifications of the **dnsProperty** and **dnsRecord** attributes are described in this section.<95>
 
 | Class | Attribute |
 | --- | --- |
@@ -8850,7 +8850,7 @@ The **Id** specifies the type of data in a **dnsProperty**'s **Data** field.<100
 
 | Constant/value | Description |
 | --- | --- |
-| DSPROPERTY_ZONE_TYPE 0x00000001 | The zone type. See [dwZoneType (section 2.2.5.2.4.1)](#Section_2.2.5.2.1). Default: DNS_ZONE_TYPE_PRIMARY |
+| DSPROPERTY_ZONE_TYPE 0x00000001 | The zone type. See [dwZoneType (section 2.2.5.2.4.1)](#Section_2.2.5.2.4.1). Default: DNS_ZONE_TYPE_PRIMARY |
 | DSPROPERTY_ZONE_ALLOW_UPDATE 0x00000002 | Whether [**dynamic updates**](#gt_dynamic-update) are allowed. See fAllowUpdate (section 2.2.5.2.4.1). |
 | DSPROPERTY_ZONE_SECURE_TIME 0x00000008 | The time at which the zone became secure. See **Time Zone Secured** (section [3.1.1](#Section_3.1.1)). Default: 0. |
 | DSPROPERTY_ZONE_NOREFRESH_INTERVAL 0x00000010 | The zone no refresh interval. See dwNoRefreshInterval (section 2.2.5.2.4.1). Default: 168 hours/7 days. |
@@ -8862,7 +8862,7 @@ The **Id** specifies the type of data in a **dnsProperty**'s **Data** field.<100
 | DSPROPERTY_ZONE_MASTER_SERVERS 0x00000081 | A list of DNS servers that will perform zone transfers. The list is formatted as an IP4 ARRAY (section 2.2.3.2.1). See aipMasters (section 2.2.5.2.4.1).<103> Default: Empty Array. |
 | DSPROPERTY_ZONE_AUTO_NS_SERVERS 0x00000082 | A list of servers which MAY autocreate a [**delegation**](#gt_delegation). The list is formatted as an IP4 ARRAY (section 2.2.3.2.1).<104> Default: Empty Array. |
 | DSPROPERTY_ZONE_DCPROMO_CONVERT 0x00000083 | The flag value representing the state of conversion of the zone. See [DcPromo Flag (section 2.3.2.1.2)](#Section_2.3.2.1.2). |
-| DSPROPERTY_ZONE_SCAVENGING_SERVERS_DA 0x00000090 | A list of [**DNS**](#gt_domain-name-system-dns) servers that will perform scavenging. The list is formatted as a [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.2). The DNS server MUST read and write the aipScavengeServers (section 2.2.5.2.4.1) setting using property Id DSPROPERTY_ZONE_SCAVENGING_SERVERS and SHOULD also read and write the aipScavengeServers (section 2.2.5.2.4.1) setting using property Id DSPROPERTY_ZONE_SCAVENGING_SERVERS_DA. During read, if the property values are not identical, the DNS server SHOULD use the property value specified by this property Id. Default: Empty Array. |
+| DSPROPERTY_ZONE_SCAVENGING_SERVERS_DA 0x00000090 | A list of [**DNS**](#gt_domain-name-system-dns) servers that will perform scavenging. The list is formatted as a [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3). The DNS server MUST read and write the aipScavengeServers (section 2.2.5.2.4.1) setting using property Id DSPROPERTY_ZONE_SCAVENGING_SERVERS and SHOULD also read and write the aipScavengeServers (section 2.2.5.2.4.1) setting using property Id DSPROPERTY_ZONE_SCAVENGING_SERVERS_DA. During read, if the property values are not identical, the DNS server SHOULD use the property value specified by this property Id. Default: Empty Array. |
 | DSPROPERTY_ZONE_MASTER_SERVERS_DA 0x00000091 | A list of DNS servers that will perform zone transfers. The list is formatted as a DNS_ADDR_ARRAY (section 2.2.3.2.3). The DNS server MUST read and write this list using property Id DSPROPERTY_ZONE_MASTER_SERVERS and SHOULD also read and write this list using property Id DSPROPERTY_ZONE_MASTER_SERVERS_DA. During read, if the property values are not identical, the DNS server SHOULD use the property value specified by this property Id. Default: Empty Array. |
 | DSPROPERTY_ZONE_AUTO_NS_SERVERS_DA 0x00000092 | A list of servers which MAY autocreate a delegation. The list is formatted as a DNS_ADDR_ARRAY (section 2.2.3.2.3) The DNS server MUST read and write this list using property Id DSPROPERTY_ZONE_AUTO_NS_SERVERS and SHOULD also read and write this list using property Id DSPROPERTY_ZONE_AUTO_NS_SERVERS_DA. During read, if the property values are not identical, the DNS server SHOULD use the value specified by property Id. Default: Empty Array. |
 | DSPROPERTY_ZONE_NODE_DBFLAGS 0x00000100 | See [DNS_RPC_NODE_FLAGS (section 2.2.2.1.2)](#Section_2.2.2.1.2). |
@@ -8875,7 +8875,7 @@ The **DcPromo flag** represents the DcPromo target [**application directory part
 | Constant/value | Description |
 | --- | --- |
 | DCPROMO_CONVERT_NONE 0x00000000 | No change to existing zone storage. |
-| DCPROMO_CONVERT_DOMAIN 0x00000001 | Zone is to be moved to the [**DNS domain partition**](#gt_dns-domain-partition). This is the partition in the Application Directory Partition Table (section 3.1.1) that has the DNS_DP_DOMAIN_DEFAULT bit set in dwDpFlags (section [2.2.5.2.7.2](#Section_2.2.5.2.7.2)). See DNS_ZONE_CREATE_FOR_DCPROMO (section [2.2.5.2.7.1](#Section_2.2.5.2.7)).If DownlevelDCsInDomain is nonzero, the zone is to be stored in the directory partition that represents the default naming context. See DNS_DP_LEGACY (section [2.2.7.1.1](#Section_2.2.7.1.1)). |
+| DCPROMO_CONVERT_DOMAIN 0x00000001 | Zone is to be moved to the [**DNS domain partition**](#gt_dns-domain-partition). This is the partition in the Application Directory Partition Table (section 3.1.1) that has the DNS_DP_DOMAIN_DEFAULT bit set in dwDpFlags (section [2.2.5.2.7.2](#Section_2.2.5.2.7.2)). See DNS_ZONE_CREATE_FOR_DCPROMO (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)).If DownlevelDCsInDomain is nonzero, the zone is to be stored in the directory partition that represents the default naming context. See DNS_DP_LEGACY (section [2.2.7.1.1](#Section_2.2.7.1.1)). |
 | DCPROMO_CONVERT_FOREST 0x00000002 | Zone is to be moved to the [**DNS forest partition**](#gt_dns-forest-partition). This is the partition in the Application Directory Partition Table (section 3.1.1) that has the DNS_DP_FOREST_DEFAULT bit set in dwDpFlags (section 2.2.5.2.7.2). See DNS_ZONE_CREATE_FOR_DCPROMO_FOREST (section 2.2.5.2.7.1). |
 
 <a id="Section_2.3.2.2"></a>
@@ -8915,7 +8915,7 @@ packet-beta
 
 **TimeStamp (4 bytes):** See dwTimeStamp (section 2.2.2.2.5).
 
-**Data (variable):** The resource record's data. See [DNS_RPC_RECORD_DATA (section 2.2.2.2.4)](#Section_2.2.2.2.4.6).
+**Data (variable):** The resource record's data. See [DNS_RPC_RECORD_DATA (section 2.2.2.2.4)](#Section_2.2.2.2.4).
 
 <a id="Section_2.3.2.3"></a>
 #### 2.3.2.3 msDNS-IsSigned
@@ -8938,7 +8938,7 @@ packet-beta
   96-159: "ExportedKey (variable)"
 ```
 
-**GUID (16 bytes):** A GUID value that corresponds to an active, standby, or next key from the [DNS_RPC_SKD_STATE (section 2.2.6.2.3)](#Section_2.2.6.2.1) structure for one of the signing key descriptors in the zone's signing key descriptor list.
+**GUID (16 bytes):** A GUID value that corresponds to an active, standby, or next key from the [DNS_RPC_SKD_STATE (section 2.2.6.2.3)](#Section_2.2.6.2.3) structure for one of the signing key descriptors in the zone's signing key descriptor list.
 
 **ExportedKey (variable):** An exported signing key in [Exported Key Pair](#Section_2.2.11.2.6) format. When this attribute value is written, the DNS server MUST follow the procedure in section [3.1.7.1](#Section_3.1.7.1) to export each key. When this attribute value is read, the DNS server MUST follow the procedure in section [3.1.7.2](#Section_3.1.7.2) to import each key.
 
@@ -9073,7 +9073,7 @@ packet-beta
 
 **dwNextRolloverAction (4 bytes):** The value of this field MUST correspond to the value from the DNS_RPC_SKD (section 2.2.6.2.1) structure for this signing key descriptor.
 
-**ftLastRolloverTime (8 bytes):** This value MUST correspond to the value of **ftLastRolloverTime** from the [DNS_RPC_SKD_STATE (section 2.2.6.2.3)](#Section_2.2.6.2.1) structure for this signing descriptor.
+**ftLastRolloverTime (8 bytes):** This value MUST correspond to the value of **ftLastRolloverTime** from the [DNS_RPC_SKD_STATE (section 2.2.6.2.3)](#Section_2.2.6.2.3) structure for this signing descriptor.
 
 **ftNextRolloverTime (8 bytes):** This value MUST correspond to the value of **ftNextRolloverTime** from the DNS_RPC_SKD_STATE (section 2.2.6.2.3) structure for this signing descriptor.
 
@@ -9179,7 +9179,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **DNS Zone Table:** Configuration information for DNS zones, in persistent and in-memory storage. The Zone Table can be stored persistently either in a file or in the local directory server, but not both simultaneously. The Zone Table also resides in-memory, behaving as a [**cache**](#gt_cache) containing the current working copy of both zones loaded from persistent storage, as well as zones retrieved from remote DNS servers. A query to a zone MUST be responded to using only the data in the corresponding in-memory zone. A modification to any elements of a zone, such as a DNS update of records [[RFC2136]](https://go.microsoft.com/fwlink/?LinkId=107017), MUST be reflected immediately in the corresponding in-memory zone and MUST be immediately transactionally committed to DS-integrated storage afterwards (see "WriteDirtyZones" in section [3.1.4.1](#Section_3.1.4.1)). Each update to the in-memory zone MUST be atomic. If an update to the in-memory zone does not succeed, the in-memory zone MUST be restored to its previous state before the update. Queries to a zone during an in-memory zone modification process are responded to using the post-update zone state. For zones stored in the local directory server, this table can include zones that are in the process of being deleted (see "DeleteZoneFromDs" in section 3.1.4.1).
 
-The in-memory DNS Zone Table is used for queries and modifications for all zone operations (see section [3.1.4](#Section_3.1.4)). The in-memory Zone Table is populated during server initialization per-zone from either the local persistent storage or DS-integrated Zone Table. When modifications are made to a zone, such as after a DNS update or [**zone transfer**](#gt_zone-transfer), the changes are reflected first in the in-memory Zone Table, which is then copied per zone, for all zone types except DNS_ZONE_TYPE_CACHE (section [2.2.5.1.1](#Section_2.2.5.1.1)), to either the local persistent storage or immediately to the DS-integrated Zone Table. In-memory data retrieved from remote DNS servers are not copied to local persistent or DS-integrated storage, except for [**secondary zones**](#gt_secondary-zone) with an fDsIntegrated value of FALSE (section [2.2.5.2.6](#Section_2.2.5.2.1)), which MUST eventually be copied to local persistent storage. For DS-integrated zones, the server polls the directory server using the LDAP protocol every DsPollingInterval (section 3.1.1.1) to copy DS-integrated zones to the respective in-memory zones. If an error occurs during polling, the DNS server MUST NOT mark the zone as shutdown (see section [2.2.5.2.2](#Section_2.2.5.2.2)) and MUST attempt to poll the zone again after DsPollingInterval (section 3.1.1.1) seconds have elapsed. Zones of type DNS_ZONE_TYPE_CACHE (section 2.2.5.1.1) are never written to persistent storage. All contents of a zone of type DNS_ZONE_TYPE_CACHE MUST be discarded when the DNS server process is terminated or when the ClearCache operation (section 3.1.4.1) is executed.
+The in-memory DNS Zone Table is used for queries and modifications for all zone operations (see section [3.1.4](#Section_3.1.4)). The in-memory Zone Table is populated during server initialization per-zone from either the local persistent storage or DS-integrated Zone Table. When modifications are made to a zone, such as after a DNS update or [**zone transfer**](#gt_zone-transfer), the changes are reflected first in the in-memory Zone Table, which is then copied per zone, for all zone types except DNS_ZONE_TYPE_CACHE (section [2.2.5.1.1](#Section_2.2.5.1.1)), to either the local persistent storage or immediately to the DS-integrated Zone Table. In-memory data retrieved from remote DNS servers are not copied to local persistent or DS-integrated storage, except for [**secondary zones**](#gt_secondary-zone) with an fDsIntegrated value of FALSE (section [2.2.5.2.6](#Section_2.2.5.2.6)), which MUST eventually be copied to local persistent storage. For DS-integrated zones, the server polls the directory server using the LDAP protocol every DsPollingInterval (section 3.1.1.1) to copy DS-integrated zones to the respective in-memory zones. If an error occurs during polling, the DNS server MUST NOT mark the zone as shutdown (see section [2.2.5.2.2](#Section_2.2.5.2.2)) and MUST attempt to poll the zone again after DsPollingInterval (section 3.1.1.1) seconds have elapsed. Zones of type DNS_ZONE_TYPE_CACHE (section 2.2.5.1.1) are never written to persistent storage. All contents of a zone of type DNS_ZONE_TYPE_CACHE MUST be discarded when the DNS server process is terminated or when the ClearCache operation (section 3.1.4.1) is executed.
 
 The local persistent storage DNS Zone Table is copied to the in-memory DNS Zone Table on server initialization and is copied from the in-memory Zone Table after a modification to the in-memory Zone Table is complete.
 
@@ -9209,7 +9209,7 @@ For each zone, the DNS Zone Table consists of the following:
 
 **Dirty Flag:** A Boolean variable present only in the in-memory copy of a zone. Set to true only if the zone has been modified in memory and there is a copy of the zone in persistent storage to which the in-memory modifications have not been committed.
 
-**Signing Key Descriptor List:** A list of zero or more signing key descriptors associated with the zone, used to inform the [**online signing**](#gt_online-signing) process. Each entry in this list consists of the fields in the [DNS_RPC_SKD](#Section_2.2.6.2.1) (see section 2.2.6.2.1) and [DNS_RPC_SKD_STATE](#Section_2.2.6.2.1) (see section 2.2.6.2.3) structures.<111>
+**Signing Key Descriptor List:** A list of zero or more signing key descriptors associated with the zone, used to inform the [**online signing**](#gt_online-signing) process. Each entry in this list consists of the fields in the [DNS_RPC_SKD](#Section_2.2.6.2.1) (see section 2.2.6.2.1) and [DNS_RPC_SKD_STATE](#Section_2.2.6.2.3) (see section 2.2.6.2.3) structures.<111>
 
 **Rollover Queue:** An ordered list of zero or more signing key descriptors in the zone ready for [**key rollover**](#gt_key-rollover). A signing key descriptor whose **dwRolloverPeriod** is not 0xFFFFFFFF is automatically added to this queue when **dwRolloverPeriod** seconds have elapsed since the signing key descriptor's last successful key rollover, or since the zone was initially online-signed. A signing key descriptor can be added to this queue prior to this time by invoking the PerformZoneKeyRollover operation of the R_DnssrvOperation method (section 3.1.4.1). The DNS server SHOULD<112> perform key rollover on each item in this queue, one at a time, according to the process specified in [[RFC4641]](https://go.microsoft.com/fwlink/?LinkId=225979) and [[RFC5011]](https://go.microsoft.com/fwlink/?LinkId=225980).
 
@@ -9572,7 +9572,7 @@ The DNS server SHOULD<188> also support the following properties.
 <a id="Section_3.1.1.1.2"></a>
 ##### 3.1.1.1.2 DNS Server Address Array Properties
 
-The following properties are IP address arrays (specified by type IDs DNSSRV_TYPEID_ADDRARRAY or DNSSRV_TYPEID_IPARRAY, and formatted as [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.2) or as [IP4_ARRAY (section 2.2.3.2.1)](#Section_2.2.3.2.1), respectively). The DNS server SHOULD support both types.<190>
+The following properties are IP address arrays (specified by type IDs DNSSRV_TYPEID_ADDRARRAY or DNSSRV_TYPEID_IPARRAY, and formatted as [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3) or as [IP4_ARRAY (section 2.2.3.2.1)](#Section_2.2.3.2.1), respectively). The DNS server SHOULD support both types.<190>
 
 **Forwarders:** A list of IP addresses indicating to which remote DNS servers this DNS server will forward unresolved queries. If the list is empty then no forwarding will be performed.
 
@@ -9663,7 +9663,7 @@ The following properties are 32-bit integers. The term Boolean, as used below, m
 
 **LogUpdates:** A Boolean indicating whether updates on this zone are logged to permanent storage.
 
-**MaintainTrustAnchor:** This property controls how the DNS server maintains the list of forest-wide Trust Anchors (section [2.2.6.2.7](#Section_2.2.6.2.6)) as key rollover takes place for signing key descriptors whose fIsKSK flag is set. As the rollover progresses, new keys are generated and added to the forest-wide TrustAnchors zone, and old keys are removed. The value's range MUST be limited to the values in the following table. The default for this value is 0x00000000.
+**MaintainTrustAnchor:** This property controls how the DNS server maintains the list of forest-wide Trust Anchors (section [2.2.6.2.7](#Section_2.2.6.2.7)) as key rollover takes place for signing key descriptors whose fIsKSK flag is set. As the rollover progresses, new keys are generated and added to the forest-wide TrustAnchors zone, and old keys are removed. The value's range MUST be limited to the values in the following table. The default for this value is 0x00000000.
 
 | Value | Meaning |
 | --- | --- |
@@ -9721,7 +9721,7 @@ The following properties are 32-bit integers. The term Boolean, as used below, m
 <a id="Section_3.1.1.2.2"></a>
 ##### 3.1.1.2.2 DNS Zone Address Array Properties
 
-The following properties are IP address arrays (specified by type IDs DNSSRV_TYPEID_ADDRARRAY or DNSSRV_TYPEID_IPARRAY and formatted as DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.2)) or IP4_ARRAY (section [2.2.3.2.1](#Section_2.2.3.2.1)), respectively). The DNS server SHOULD support both types.
+The following properties are IP address arrays (specified by type IDs DNSSRV_TYPEID_ADDRARRAY or DNSSRV_TYPEID_IPARRAY and formatted as DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)) or IP4_ARRAY (section [2.2.3.2.1](#Section_2.2.3.2.1)), respectively). The DNS server SHOULD support both types.
 
 **AllowNSRecordsAutoCreation:** A list of IP addresses used to restrict automatic NS record creation for the zone. If the list is empty then NS record creation is not restricted. This setting is ignored if the zone is not stored in the directory server. The DNS server MUST NOT create an NS record for the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of the local machine if one the machine's IP addresses is not present in this list.
 
@@ -9785,7 +9785,7 @@ These properties are part of a server scope and are applicable when a DNS operat
 <a id="Section_3.1.1.3.2"></a>
 ##### 3.1.1.3.2 DNS Server Server Scope Address Array Properties
 
-The following properties are IP address arrays (specified by type IDs DNSSRV_TYPEID_ADDRARRAY or DNSSRV_TYPEID_IPARRAY and formatted as **DNS_ADDR_ARRAY** (section [2.2.3.2.3](#Section_2.2.3.2.2)) or **IP4_ARRAY** (section [2.2.3.2.1](#Section_2.2.3.2.1)), respectively). The DNS server SHOULD support both types.<211>
+The following properties are IP address arrays (specified by type IDs DNSSRV_TYPEID_ADDRARRAY or DNSSRV_TYPEID_IPARRAY and formatted as **DNS_ADDR_ARRAY** (section [2.2.3.2.3](#Section_2.2.3.2.3)) or **IP4_ARRAY** (section [2.2.3.2.1](#Section_2.2.3.2.1)), respectively). The DNS server SHOULD support both types.<211>
 
 These properties are part of a server scope and are applicable when a DNS operation matches a DNS recursion policy and selects a specific server scope.
 
@@ -9878,7 +9878,7 @@ In all cases:
 - If a zone loaded from the local directory server results in a zone with no nodes, the server MUST then attempt to load the same zone from file-based persistent storage.
 - If the LDAP connection to the directory server is unavailable, the server MUST attempt to load those zones specified in the persistent copy of the DNS Zone Table that are stored in local persistent storage.
 - If the LDAP connection to the directory server is available, the server MUST attempt to load the zones specified in the persistent copy of the DNS Zone Table, but only those zones stored in the Application Directory Partitions in which the server is enlisted. This MUST include at minimum the defaultNamingContext of the directory server's [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse), the default DNS Domain Partition and the default DNS Forest Partition. If the zone is stored in local persistent storage, the server MUST attempt to load the zone. If the zone is directory server-integrated, the server MUST attempt to load the LDAP dnsZone and dnsNode objects (section [2.3](#Section_2.3)) that represent the zone from the directory server. The DNS server MUST ignore any DNS node in the directory server which has the dnsTombstoned attribute set to TRUE. If an attempt to load a zone fails for any reason, the server MUST clear the contents of the in-memory zone (if any) and mark the zone state as shutdown (see section [2.2.5.2.2](#Section_2.2.5.2.2)), but continue initialization.
-- If there are no [**root hints**](#gt_root-hints) in the local directory server, but root hints were loadable from a file-based persistent storage and are non-empty, the server MUST write the root hints back to the local directory server through the WriteDirtyZones operation [3.1.4.1](#Section_3.1.4.1) by using the DNS_ZONE_LOAD_OVERWRITE_DS flag [2.2.5.2.7.1](#Section_2.2.5.2.7).
+- If there are no [**root hints**](#gt_root-hints) in the local directory server, but root hints were loadable from a file-based persistent storage and are non-empty, the server MUST write the root hints back to the local directory server through the WriteDirtyZones operation [3.1.4.1](#Section_3.1.4.1) by using the DNS_ZONE_LOAD_OVERWRITE_DS flag [2.2.5.2.7.1](#Section_2.2.5.2.7.1).
 - The DNS Server Management Protocol server MUST register the RPC interface and begin listening on the [**RPC transports**](#gt_rpc-transport), as specified in section [2.1](#Section_2.1), and limited by the flags specified for the RpcProtocol property (section 3.1.1.1.1).
 - The server SHOULD invoke the **NetlogonControl2Ex** method with function code NETLOGON_CONTROL_FORCE_DNS_REG on the Netlogon protocol implementation on the local Domain Controller.<213> (See [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.9.1.)
 <a id="Section_3.1.4"></a>
@@ -9974,7 +9974,7 @@ If pszZone is set to NULL, pszOperation MUST be either a property name listed in
 
 | Value | Meaning |
 | --- | --- |
-| ResetDwordProperty | Update the value of a (name, value) pair in the DNS server configuration. On input, dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section [2.2.1.2.5](#Section_2.2.2.2.1)) that specifies the name of a property listed in section [3.1.1.1.1](#Section_3.1.1.1.1) and a new value for that property. |
+| ResetDwordProperty | Update the value of a (name, value) pair in the DNS server configuration. On input, dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section [2.2.1.2.5](#Section_2.2.1.2.5)) that specifies the name of a property listed in section [3.1.1.1.1](#Section_3.1.1.1.1) and a new value for that property. |
 | Restart | The server SHOULD restart the DNS server process. dwTypeId and pData MUST be ignored by the server.<216> |
 | ClearDebugLog | Clear the debug log. dwTypeId and pData MUST be ignored by the server. |
 | ClearCache | Delete all cached records from the cache zone or cache scope memory. dwTypeId and pData MUST be ignored by the server. |
@@ -9991,7 +9991,7 @@ If pszZone is set to NULL, pszOperation MUST be either a property name listed in
 | DeleteNode | On input dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5) that contains the FQDN of the node pointed to by pszNodeName in the DNS server's cache to be deleted and a Boolean flag in dwParam to indicate if the node subtree is to be deleted. |
 | DeleteRecordSet | On input dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5). That structure contains the FQDN of the node to be deleted, which is cached on the DNS server, and the type of record set in the dwParam member, which indicates whether the entire set of this type is to be deleted. The type MUST be a DNS_RECORD_TYPE value (section [2.2.2.1.1](#Section_2.2.2.1.1)) or 0x00FF, which specifies all types. |
 | WriteBackFile | Write all information for root hints back to persistent storage. dwTypeId and pData MUST be ignored by the server. |
-| ListenAddresses | On input, dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY and pData MUST point to a structure of type IP4_ARRAY (section [2.2.3.2.1](#Section_2.2.3.2.1)) or DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.2)) respectively, which contains a list of new IP addresses on which the DNS server can listen. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY and DNS_ADDR_ARRAY, and MAY accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.<220> |
+| ListenAddresses | On input, dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY and pData MUST point to a structure of type IP4_ARRAY (section [2.2.3.2.1](#Section_2.2.3.2.1)) or DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)) respectively, which contains a list of new IP addresses on which the DNS server can listen. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY and DNS_ADDR_ARRAY, and MAY accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.<220> |
 | Forwarders | On input dwTypeId SHOULD be set to DNSSRV_TYPEID_FORWARDERS<221>, and pData MUST point to a structure of one of the types specified in DNS_RPC_FORWARDERS (section [2.2.5.2.10](#Section_2.2.5.2.10)), which contains information about new IP addresses to which the DNS server can forward queries. |
 | LogFilePath | On input dwTypeId MUST be set to DNSSRV_TYPEID_LPWSTR, and pData MUST point to a Unicode string that contains an absolute or relative pathname or filename for the debug log file on the DNS server. |
 | LogIPFilterList | On input dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY, and pData MUST point to a structure of type IP4_ARRAY (section 2.2.3.2.1) or DNS_ADDR_ARRAY (section 2.2.3.2.3) respectively, which contains a list of new IP addresses used for debug log filter. The DNS server will write to the debug log only for traffic to/from these IP addresses. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY and DNS_ADDR_ARRAY, and MAY accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.<222> |
@@ -10033,15 +10033,15 @@ If pszZone is not NULL, and pszOperation does not match a property name listed i
 | WriteBackFile | If the zone has uncommitted changes, write back all information for the zone pointed to by pszZone to persistent storage, and notify any [**secondary DNS servers**](#gt_secondary-dns-server). dwTypeId and pData MUST be ignored by the server. |
 | DeleteZoneFromDs | Delete the zone pointed to by pszZone from the directory server. dwTypeId, and pData MUST be ignored by the server. |
 | UpdateZoneFromDs | Refresh data for the zone pointed to by pszZone from the directory server. dwTypeId, and pData MUST be ignored by the server. |
-| ZoneExport | Export zone data to a given file on the DNS server. On input dwTypeId MUST be set to DNSSRV_TYPEID_ZONE_EXPORT, and pData MUST point to a structure of type DNS_RPC_ZONE_EXPORT_INFO (section [2.2.5.2.8](#Section_2.2.5.2.1)) that contains a file name pointed to by pszZoneExportFile. |
-| ZoneChangeDirectoryPartition | Move a zone to a given application directory partition. On input dwTypeId MUST be set to DNSSRV_TYPEID_ZONE_CHANGE_DP, and pData MUST point to structure of type DNS_RPC_ZONE_CHANGE_DP (section [2.2.7.2.6](#Section_2.2.5.2.1)), which contains the new application directory partition name pointed to by pszDestPartition. |
+| ZoneExport | Export zone data to a given file on the DNS server. On input dwTypeId MUST be set to DNSSRV_TYPEID_ZONE_EXPORT, and pData MUST point to a structure of type DNS_RPC_ZONE_EXPORT_INFO (section [2.2.5.2.8](#Section_2.2.5.2.8)) that contains a file name pointed to by pszZoneExportFile. |
+| ZoneChangeDirectoryPartition | Move a zone to a given application directory partition. On input dwTypeId MUST be set to DNSSRV_TYPEID_ZONE_CHANGE_DP, and pData MUST point to structure of type DNS_RPC_ZONE_CHANGE_DP (section [2.2.7.2.6](#Section_2.2.7.2.6)), which contains the new application directory partition name pointed to by pszDestPartition. |
 | DeleteNode | Delete a node. On input dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5), which contains the FQDN of the node pointed to by pszNodeName present in the zone pointed to by pszZone on the DNS server to be deleted and a Boolean flag in dwParam to indicate if the node's subtree is to be deleted. |
 | DeleteRecordSet | Delete all the DNS records of a particular type at a particular node from the DNS server's cache. On input dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5). That structure contains the FQDN of the node to be deleted and the DNS record type in the dwParam member. The type MUST be a DNS_RECORD_TYPE value (section 2.2.2.1.1) or 0x00FF, which specifies all types. |
 | ForceAgingOnNode | On input dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5), which contains a node name in pszNodeName, and a Boolean flag in dwParam to indicate whether [**aging**](#gt_f-aging) is performed on all nodes in the subtree. All DNS records at the specified node in the zone named by pszZone will have their aging time stamp set to the current time. If subtree aging is specified by dwParam than all DNS records at all nodes that are children of this node will also have their aging time stamps set to the current time. |
-| DatabaseFile | On input dwTypeId SHOULD be set to DNSSRV_TYPEID_ZONE_DATABASE<231>, and pData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_DATABASE (section [2.2.5.2.6](#Section_2.2.5.2.1)), which specifies whether the zone is directory server integrated by setting fDsIntegrated to TRUE, and if it is not then pszFileName MUST point to a Unicode string containing the absolute pathname of a file on the DNS server to which the zone database is stored. |
+| DatabaseFile | On input dwTypeId SHOULD be set to DNSSRV_TYPEID_ZONE_DATABASE<231>, and pData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_DATABASE (section [2.2.5.2.6](#Section_2.2.5.2.6)), which specifies whether the zone is directory server integrated by setting fDsIntegrated to TRUE, and if it is not then pszFileName MUST point to a Unicode string containing the absolute pathname of a file on the DNS server to which the zone database is stored. |
 | MasterServers | On input dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY, and pData MUST point to a structure of type IP4_ARRAY (section 2.2.3.2.1) or DNS_ADDR_ARRAY (section 2.2.3.2.3) respectively, which contains a list of IP addresses of new primary DNS servers for the zone pointed to by pszZone. This operation is valid only for secondary zones present on the server. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY and DNS_ADDR_ARRAY, and SHOULD accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY. If the input data of either type is accepted and the DNS server is directory-server integrated, the value of *pData* SHOULD be written to the directory server.<232> |
 | LocalMasterServers | On input dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY, and pData MUST point to a structure of type IP4_ARRAY (section 2.2.3.2.1) or DNS_ADDR_ARRAY (section 2.2.3.2.3) respectively, which contains a list of IP addresses of new local primary DNS servers for the zone pointed to by pszZone. This operation is valid only for stub zones present on the server, and if configured, this value overrides any [**primary DNS server**](#gt_primary-dns-server) configured in the directory server. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY and DNS_ADDR_ARRAY, and SHOULD accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.<233> |
-| SecondaryServers | On input dwTypeId SHOULD<234> be set to DNSSRV_TYPEID_ZONE_SECONDARIES, and pData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_SECONDARIES (section [2.2.5.2.5](#Section_2.2.5.2.1)), which contains information about secondary DNS servers for the zone pointed to by pszZone. |
+| SecondaryServers | On input dwTypeId SHOULD<234> be set to DNSSRV_TYPEID_ZONE_SECONDARIES, and pData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_SECONDARIES (section [2.2.5.2.5](#Section_2.2.5.2.5)), which contains information about secondary DNS servers for the zone pointed to by pszZone. |
 | ScavengeServers | On input dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY, and pData MUST point to a structure of type IP4_ARRAY (section 2.2.3.2.1) or DNS_ADDR_ARRAY (section 2.2.3.2.3) respectively, which contains a list of IP addresses of new servers that can run scavenging on the zone pointed to by pszZone. This operation is valid only for directory server integrated zones. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY, and DNS_ADDR_ARRAY, and SHOULD accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY. If the input data of either type is accepted and the DNS server is [**directory server-integrated**](#gt_directory-server-integrated), the value of *pData* SHOULD be written to the directory server.<235> |
 | AllowNSRecordsAutoCreation | On input dwTypeId MUST be set to DNSSRV_TYPEID_IPARRAY or DNSSRV_TYPEID_ADDRARRAY and pData MUST point to a structure of type IP4_ARRAY (section 2.2.3.2.1) or DNS_ADDR_ARRAY (section 2.2.3.2.3) respectively, which contains a list of IP addresses of new servers that can auto-create NS records for the zone pointed to by pszZone. This operation is valid only for directory server integrated zones. The server SHOULD accept DNSSRV_TYPEID_ADDRARRAY and DNS_ADDR_ARRAY, and SHOULD accept DNSSRV_TYPEID_IPARRAY and IP4_ARRAY. If the input data of either type is accepted and the DNS server is directory server-integrated, the value of *pData* SHOULD be written to the directory server.<236> |
 | BreakOnNameUpdate | On input dwTypeId MUST be set to DNSSRV_TYPEID_LPWSTR, and pData MUST point to a Unicode string that contains the FQDN of the node for which if an update is received the DNS server will execute a breakpoint. |
@@ -10052,7 +10052,7 @@ If pszZone is not NULL, and pszOperation does not match a property name listed i
 | PokeZoneKeyRollover | Instructs the DNS server to stop waiting for DS records [[RFC4034]](https://go.microsoft.com/fwlink/?LinkId=107052) in the parent zone to be updated and to proceed with key rollover as specified by [[RFC4641]](https://go.microsoft.com/fwlink/?LinkId=225979). On input, dwTypeId MUST be set to DNSSRV_TYPEID_LPWSTR, and pData MUST point to a Unicode string representation of the GUID of the signing key descriptor to be queued for rollover. |
 | RetrieveRootTrustAnchors | Retrieves the root trust anchors from the XML file specified by the RootTrustAnchorsURL server property (section 3.1.1.1.3) and adds any valid DS records to the root trust anchors. The dwTypeId and pData parameters MUST be set to zero/NULL by the client and MUST be ignored by the server. The pszZone parameter MUST be set to the string "TrustAnchors" to indicate the name of the zone. |
 | TransferKeymasterRole | Transfers the [**key master**](#gt_key-master) role to the current server. The dwTypeId parameter MUST be set to DNSSRV_TYPEID_DWORD, and pData MUST point to one of the values defined in the following paragraphs. |
-| CreateZoneScope | Creates a zone scope in the specified zone or a cache scope in the specified cache zone. The dwTypeId parameter MUST be set to DNSSRV_TYPEID_ZONE_SCOPE_CREATE. pData MUST point to a structure of the type [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.5.2.1) that contains all the parameters needed to create the zone scope or cache scope. pszZone MUST be the name of the zone in which the zone scope is to be created or be specified as "..cache" for a cache scope.<237> |
+| CreateZoneScope | Creates a zone scope in the specified zone or a cache scope in the specified cache zone. The dwTypeId parameter MUST be set to DNSSRV_TYPEID_ZONE_SCOPE_CREATE. pData MUST point to a structure of the type [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.13.1.2.1) that contains all the parameters needed to create the zone scope or cache scope. pszZone MUST be the name of the zone in which the zone scope is to be created or be specified as "..cache" for a cache scope.<237> |
 | DeleteZoneScope | Deletes a zone scope from the specified zone or a cache scope from a specified cache zone. The dwTypeId MUST be set to DNSSRV_TYPEID_LPWSTR. pData MUST point to the name of the zone scope or cache scope that is to be deleted. pszZone MUST be the name of the zone from which the zone scope is to be deleted or set to "..cache" for a cache scope.<238> |
 | CreatePolicy | Creates a DNS Policy for the specified zone or a cache zone on a DNS server. The dwTypeId parameter MUST be set to DNSSRV_TYPEID_POLICY, and pData MUST point to a structure of type DNS_RPC_POLICY. |
 | DeletePolicy | Deletes a DNS Policy for the specified zone or a cache zone on a DNS server. The dwTypeId parameter MUST be set to DNSSRV_TYPEID_LPWSTR, and pData MUST point to NULL-terminated Unicode string containing the name of the DNS Policy. |
@@ -10226,7 +10226,7 @@ If any operation (including LDAP operations) fails, continue processing but reco
 - If a virtualization instance already exists, then the DNS server MUST update those properties of the virtualization instance as given by dwFlags of input DNS_RPC_VIRTUALIZATION_INSTANCE (section [2.2.17.1.1](#Section_2.2.17.1.1)). Otherwise, an error is returned.
 If pszZone is not NULL and is not a valid multizone operation string, then the server MUST return a failure if it does not contain a zone with the name matching the string pointed to by pszZone. If pszZone is not NULL or if the value of dwContext specifies a multizone operation, the server MUST execute the operation indicated by the value of pszOperation individually for each zone specified by the values of dwContext and pszZone. If a zone operation is performed with a filter in dwContext or a multizone operation string in pszZone, and no zones match the specified filter or satisfy the multizone operation string, the server MUST return ERROR_SUCCESS (0x00000000). If the operation is executed for more than one zone, then for each matching zone, the specified operation MUST be executed with pszZone replaced with the name of the matching zone. If any of these multiple operations return an error, the server MUST return an error; otherwise, the server MUST return success. For any operation, if the specified zone is marked as "AutoCreated", the DNS server MUST return an error.
 
-- If pszOperation is ResetDwordProperty, the server MUST verify that the property name matches a property name listed in section 3.1.1.2.1 for which the server supports the ResetDwordProperty operation and return an error if there is no match. If the property is specified as "read-only" in section 3.1.1.2.1, the server MUST return an error. If the zone specified is a cache zone, the server MUST return an error. It MUST further verify that the value specified is within the property's allowable range (if specified) and if not return an error. When the property specified is Boolean and the value to be set is greater than 0x00000001, the server MUST replace the value with 0x00000001. If the property name is "AllowUpdate", the server MUST return an error when the zone specified is not [**Active Directory**](#gt_active-directory)-integrated and the requested value is ZONE_UPDATE_SECURE, or when the zone specified is not a primary zone. If the property name is "AllowUpdate" and the value is not ZONE_UPDATE_OFF (section [2.2.6.1.1](#Section_2.2.6.1.1)), then the server SHOULD invoke the **NetlogonControl2Ex** method with function code **NETLOGON_CONTROL_FORCE_DNS_REG** on the Netlogon protocol implementation on the local domain controller (DC). (See [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.9.1.)<255> If the property name is "Aging", the property value is TRUE, and the zone's Aging state is FALSE, then the server MUST reset the zone's Aging time by updating the dwAvailForScavengeTime (section [2.2.5.2.4.1](#Section_2.2.5.2.1)) value to the current time value, incremented by dwRefreshInterval (section 2.2.5.2.4.1).<256> If the value is zero and zero is listed as a flag value for the default in section 3.1.1.2.1, the server MUST update the value of the property to be the default for that property, and return success. Otherwise, the server MUST update the value of the property for the zone to be the new value specified, and return success.<257>
+- If pszOperation is ResetDwordProperty, the server MUST verify that the property name matches a property name listed in section 3.1.1.2.1 for which the server supports the ResetDwordProperty operation and return an error if there is no match. If the property is specified as "read-only" in section 3.1.1.2.1, the server MUST return an error. If the zone specified is a cache zone, the server MUST return an error. It MUST further verify that the value specified is within the property's allowable range (if specified) and if not return an error. When the property specified is Boolean and the value to be set is greater than 0x00000001, the server MUST replace the value with 0x00000001. If the property name is "AllowUpdate", the server MUST return an error when the zone specified is not [**Active Directory**](#gt_active-directory)-integrated and the requested value is ZONE_UPDATE_SECURE, or when the zone specified is not a primary zone. If the property name is "AllowUpdate" and the value is not ZONE_UPDATE_OFF (section [2.2.6.1.1](#Section_2.2.6.1.1)), then the server SHOULD invoke the **NetlogonControl2Ex** method with function code **NETLOGON_CONTROL_FORCE_DNS_REG** on the Netlogon protocol implementation on the local domain controller (DC). (See [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.9.1.)<255> If the property name is "Aging", the property value is TRUE, and the zone's Aging state is FALSE, then the server MUST reset the zone's Aging time by updating the dwAvailForScavengeTime (section [2.2.5.2.4.1](#Section_2.2.5.2.4.1)) value to the current time value, incremented by dwRefreshInterval (section 2.2.5.2.4.1).<256> If the value is zero and zero is listed as a flag value for the default in section 3.1.1.2.1, the server MUST update the value of the property to be the default for that property, and return success. Otherwise, the server MUST update the value of the property for the zone to be the new value specified, and return success.<257>
 - If pszOperation matches a property name listed in section 3.1.1.2.2 or section 3.1.1.2.3 for which the server supports this property reset operation, the server MUST update the value of the property for the zone to be the new value specified, and return success.<258> Otherwise, the server MUST return a nonzero error code.
 - If pszOperation is ZoneTypeReset, the server MUST:
 - Check whether the requested zone type, directory server integration, and (if applicable) application directory partition match the zone's present state, and if so, return success.
@@ -10257,7 +10257,7 @@ Otherwise, the server MUST, in accordance with the operation specified:
 The DNS server MUST also delete the associated scopes of that zone. If the zone is file-backed, the database file of the scopes MUST not be deleted.
 
 - If pszOperation is ReloadZone, the server MUST check whether the zone pointed to by pszZone is directory server-integrated and is already in the process of loading, and if so, return a failure. Otherwise, if the zone's **Dirty Flag** (section 3.1.1) is set to TRUE, then the server MUST do the following:
-- If the zone is a cache zone, and the zone is directory server-integrated and there are root hints in the zone, the server SHOULD write root hints to their permanent storage and overwrite existing directory server root hints through the use of the DNS_ZONE_LOAD_OVERWRITE_DS flag (section [2.2.5.2.7.1](#Section_2.2.5.2.7)). If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST search for and delete the root hints on the directory server using LDAP search and delete commands and write the new root hints to the cache zone on the directory server using LDAP add and modify commands. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice.<260>
+- If the zone is a cache zone, and the zone is directory server-integrated and there are root hints in the zone, the server SHOULD write root hints to their permanent storage and overwrite existing directory server root hints through the use of the DNS_ZONE_LOAD_OVERWRITE_DS flag (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)). If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST search for and delete the root hints on the directory server using LDAP search and delete commands and write the new root hints to the cache zone on the directory server using LDAP add and modify commands. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice.<260>
 - Otherwise, if the zone is not a read-only zone, write a copy of the zone to a file and send a DNS notification to peer or secondary DNS servers, if any.
 If this zone has scopes configured, all the data of the scopes MUST be written one by one to the corresponding scope files if the scope's **Dirty Flag** (section 3.1.1) is set to TRUE. If writing to any of the scopes encounters an issue, an error event SHOULD be logged and an error code returned.
 
@@ -10467,7 +10467,7 @@ If pszZone is not NULL, pszOperation MUST be either a property name listed in se
 | Value | Meaning |
 | --- | --- |
 | "Zone" | On output the value pointed to by pdwTypeId SHOULD<268> be set to DNSSRV_TYPEID_ZONE and ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE (section [2.2.5.2.1](#Section_2.2.5.2.1)), which contains abbreviated information about the zone pointed to by pszZone. |
-| "ZoneInfo" | On output the value pointed to by pdwTypeId SHOULD<269> be set to DNSSRV_TYPEID_ZONE_INFOand ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_INFO (section [2.2.5.2.4](#Section_2.2.5.2.1)), which contains full information about the zone pointed to by pszZone. |
+| "ZoneInfo" | On output the value pointed to by pdwTypeId SHOULD<269> be set to DNSSRV_TYPEID_ZONE_INFOand ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_INFO (section [2.2.5.2.4](#Section_2.2.5.2.4)), which contains full information about the zone pointed to by pszZone. |
 
 **pdwTypeId:** A pointer to an integer that on success contains a value of type DNS_RPC_TYPEID (section [2.2.1.1.1](#Section_2.2.1.1.1)) that indicates the type of data pointed to by ppData.
 
@@ -10492,7 +10492,7 @@ When processing this call, the server MUST do the following:
 - If pszOperation is Zone, the server instead returns information about the zone in DNS_RPC_ZONE (section 2.2.5.2.1) format in ppData, and return success.
 - If pszOperation is ZoneInfo, the server instead returns information about the zone in DNS_RPC_ZONE_INFO (section 2.2.5.2.4) format in ppData, and return success.
 - If pszOperation matches a property name listed in section [3.1.1.2.1](#Section_3.1.1.2.1), the server MUST return DNSSRV_TYPEID_DWORD in pdwTypeId, return in ppData the value associated with that property, and return success.
-- If pszOperation matches a property name listed in section [3.1.1.2.2](#Section_3.1.1.2.2) that the server supports, the server SHOULD<274> return DNSSRV_TYPEID_ADDRARRAY in pdwTypeId, return in ppData the value associated with that property as a DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.2)), and return success; or it MAY instead return DNSSRV_TYPEID_IPARRAY in pdwTypeId, return in ppData the value associated with that property as an IP4_ARRAY (section [2.2.3.1.1](#Section_2.2.3.1.1)), and return success. If the property name is not supported, the server MUST return a nonzero error code.
+- If pszOperation matches a property name listed in section [3.1.1.2.2](#Section_3.1.1.2.2) that the server supports, the server SHOULD<274> return DNSSRV_TYPEID_ADDRARRAY in pdwTypeId, return in ppData the value associated with that property as a DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)), and return success; or it MAY instead return DNSSRV_TYPEID_IPARRAY in pdwTypeId, return in ppData the value associated with that property as an IP4_ARRAY (section [2.2.3.1.1](#Section_2.2.3.1.1)), and return success. If the property name is not supported, the server MUST return a nonzero error code.
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 R_DnssrvComplexOperation (Opnum 2)
 
@@ -10528,25 +10528,25 @@ LONG R_DnssrvComplexOperation(
 
 | Value | Meaning |
 | --- | --- |
-| EnumZones | Enumerate zones present on the DNS server qualifying for a specified simple zone filter value. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn MUST point to any combination of [ZONE_REQUEST_FILTERS (section 2.2.5.1.4)](#Section_2.2.5.1.4) values. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_ZONE_LIST and ppDataOut MUST point to a structure of one of the types specified in [DNS_RPC_ZONE_LIST (section 2.2.5.2.3)](#Section_2.2.5.2.1). |
+| EnumZones | Enumerate zones present on the DNS server qualifying for a specified simple zone filter value. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn MUST point to any combination of [ZONE_REQUEST_FILTERS (section 2.2.5.1.4)](#Section_2.2.5.1.4) values. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_ZONE_LIST and ppDataOut MUST point to a structure of one of the types specified in [DNS_RPC_ZONE_LIST (section 2.2.5.2.3)](#Section_2.2.5.2.3). |
 | EnumZones2 | Enumerate zones present on the DNS server qualifying for a specified complex zone filter value. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_ENUM_ZONES_FILTER and pDataIn MUST point to a structure of type [DNS_RPC_ENUM_ZONES_FILTER (section 2.2.5.2.9)](#Section_2.2.5.2.9). Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_ZONE_LIST and MUST ppDataOut point to a structure of one of the types specified in DNS_RPC_ZONE_LIST. |
 | EnumDirectoryPartitions | Enumerate the [**Application Directory Partition**](#gt_application-directory-partition) Table known to the DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn MUST be set to zero if all application directory partitions are enumerated or to 0x000000001 if the DNS domain partition and [**DNS forest partition**](#gt_dns-forest-partition) are excluded from results. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_DP_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_DP_LIST (section 2.2.7.2.4)](#Section_2.2.7.2.4). |
 | DirectoryPartitionInfo | Retrieve detailed information about a specified application directory partition. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPSTR and pDataIn MUST point to a null-terminated UTF-8 string specifying the distinguished name of an application directory partition. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be DNSSRV_TYPEID_DP_INFO and ppDataOut MUST point to a structure of type [DNS_RPC_DP_INFO (section 2.2.7.2.1)](#Section_2.2.7.2.1). |
 | Statistics | Retrieve statistics. On input dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn MUST point to any combination of the [DNSSRV_STATID_TYPES (section 2.2.10.1.1)](#Section_2.2.10.1.1) values. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_BUFFER and ppDataOut MUST point to a [DNS_RPC_BUFFER structure (section 2.2.1.2.2)](#Section_2.2.1.2.2) that contains a list of variable sized [DNSSRV_STATS structures (section 2.2.10.2.2)](#Section_2.2.10.2.2). |
 | QueryDwordProperty | Retrieve the value of a 32-bit integer property. On input, dwTypeIn MUST be set to DNSSRV_TYPEID _LPSTR and pDataIn MUST point to a null-terminated UTF-8 string specifying a zone property name listed in section [3.1.1.2.1](#Section_3.1.1.2.1) (if pszZone is non-NULL) or server property name listed in section [3.1.1.1.1](#Section_3.1.1.1.1) (if pszZone is NULL). Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_DWORD and ppDataOut MUST point to a DWORD value. |
-| IpValidate | Validate a list of IP addresses. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_IP_VALIDATE and pDataIn MUST point to a [DNS_RPC_IP_VALIDATE structure (section 2.2.3.2.4)](#Section_2.2.3.2.4) containing a list of IP addresses to be validated and the context information for validation as specified in section 2.2.3.2.4. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_ADDRARRAY and ppDataOut MUST point to a structure of type [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.2) that contains IP validation results (section [2.2.3.2.1](#Section_2.2.3.2.1)). |
+| IpValidate | Validate a list of IP addresses. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_IP_VALIDATE and pDataIn MUST point to a [DNS_RPC_IP_VALIDATE structure (section 2.2.3.2.4)](#Section_2.2.3.2.4) containing a list of IP addresses to be validated and the context information for validation as specified in section 2.2.3.2.4. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_ADDRARRAY and ppDataOut MUST point to a structure of type [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3) that contains IP validation results (section [2.2.3.2.1](#Section_2.2.3.2.1)). |
 | ModifyZoneSigningKeyDescriptor | Creates, deletes, or modifies a [**signing key descriptor (SKD)**](#gt_signing-key-descriptor-skd) for the specified zone. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_SKD and pDataIn MUST point to a structure of type [DNS_RPC_SKD (section 2.2.6.2.1)](#Section_2.2.6.2.1). If GUID inside DNS_RPC_SKD is set to zero, the server MUST create a new signing key descriptor. If GUID inside DNS_RPC_SKD is set to a nonzero value and if all other fields in the structure are NULL, the server MUST delete the signing key descriptor from the zone. Otherwise, the server MUST modify the signing key descriptor for the specified zone. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SKD and ppDataOut MUST point to a structure of type DNS_RPC_SKD (section 2.2.6.2.1). |
-| EnumZoneSigningKeyDescriptors | Retrieves the signing key descriptor found in the zone's signing key descriptor list for the specified zone. Input parameters (dwTypeIn and pDataIn) are ignored. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SKD_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_SKD_LIST (section 2.2.6.2.2)](#Section_2.2.6.2.1). |
-| GetZoneSigningKeyDescriptorState | Retrieves the SKD state (section [2.2.6.2.3](#Section_2.2.6.2.1)) for the specified zone and the signing key descriptor GUID. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPWSTR and pDataIn MUST point to a string containing the GUID of the signing key descriptor. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SKD_STATE and ppDataOut MUST point to a structure of type DNS_RPC_SKD_STATE (section 2.2.6.2.3). |
+| EnumZoneSigningKeyDescriptors | Retrieves the signing key descriptor found in the zone's signing key descriptor list for the specified zone. Input parameters (dwTypeIn and pDataIn) are ignored. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SKD_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_SKD_LIST (section 2.2.6.2.2)](#Section_2.2.6.2.2). |
+| GetZoneSigningKeyDescriptorState | Retrieves the SKD state (section [2.2.6.2.3](#Section_2.2.6.2.3)) for the specified zone and the signing key descriptor GUID. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPWSTR and pDataIn MUST point to a string containing the GUID of the signing key descriptor. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SKD_STATE and ppDataOut MUST point to a structure of type DNS_RPC_SKD_STATE (section 2.2.6.2.3). |
 | SetZoneSigningKeyDescriptorState | Modifies the SKD state (section 2.2.6.2.3) for the specified zone and the signing key descriptor GUID. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_SKD_STATE and pDataIn MUST point to a structure of type DNS_RPC_SKD_STATE (section 2.2.6.2.3). Note that only one key pointer string inside DNS_RPC_SKD_STATE will be set per a specific operation as described below. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SKD_STATE and ppDataOut MUST point to a structure of type DNS_RPC_SKD_STATE (section 2.2.6.2.3) containing the modified SKD state. |
 | ValidateZoneSigningParameters | Validates the zone signing parameters and returns a structure describing the invalid signing parameters. Input parameters (dwTypeIn and pDataIn) are ignored. Unless success is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_SIGNING_VALIDATION_ERROR and ppDataOut MUST point to a structure of type [DNS_RPC_SIGNING_VALIDATION_ERROR (section 2.2.6.2.8)](#Section_2.2.6.2.8) containing invalid elements of the zone configuration. |
 | EnumerateKeyStorageProviders | Enumerates key storage providers installed on the DNS server. On input, dwTypeIn and pDataIn are ignored. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_UNICODE_STRING_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_UNICODE_STRING_LIST (section 2.2.1.2.4)](#Section_2.2.1.2.4) that contains a list of storage providers installed on the DNS server. |
 | EnumerateTrustPoints | Retrieve a list of [**trust points**](#gt_trust-point), containing either all trust points or only those at or below a given FQDN. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPSTR and pDataIn MUST point either to a null pointer or to a null-terminated [**UTF-8**](#gt_utf-8) string specifying an FQDN. If pDataIn points to a null pointer, the server MUST return all of the trust points. If pDataIn is an FQDN and there is a trust point or parent of a trust point at the FQDN, the server MUST return the trust point at the FQDN (or an empty trust-point structure for the FQDN if the FQDN is not a trust point) followed by empty trust-point structures for each immediate child of the FQDN, if any. An empty trust-point structure is a structure in which eTrustPointState is TRUST_POINT_STATE_INITIALIZED and all elements other than pszTrustPointName and dwRpcStructureVersion are zero. If pDataIn is an FQDN and there is neither a trust point nor the parent of a trust point at the FQDN, the server MUST return a nonzero error. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_TRUST_POINT_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_TRUST_POINT_LIST (section 2.2.6.2.5)](#Section_2.2.6.2.5). |
-| EnumerateTrustAnchors | Retrieve a list of the [**trust anchors**](#gt_trust-anchor) at a given FQDN. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPSTR and pDataIn MUST point to a null-terminated UTF-8 string specifying an FQDN. If the FQDN specified is not a trust point, the server MUST return a nonzero error. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_TRUST_ANCHOR_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_TRUST_ANCHOR_LIST (section 2.2.6.2.7)](#Section_2.2.6.2.6). |
+| EnumerateTrustAnchors | Retrieve a list of the [**trust anchors**](#gt_trust-anchor) at a given FQDN. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPSTR and pDataIn MUST point to a null-terminated UTF-8 string specifying an FQDN. If the FQDN specified is not a trust point, the server MUST return a nonzero error. Unless an error is returned, on output the value pointed to by pdwTypeOut MUST be set to DNSSRV_TYPEID_TRUST_ANCHOR_LIST and ppDataOut MUST point to a structure of type [DNS_RPC_TRUST_ANCHOR_LIST (section 2.2.6.2.7)](#Section_2.2.6.2.7). |
 | ExportZoneSigningSettings | Exports all the Dnssec settings of a file-backed [**primary zone**](#gt_primary-zone) from a server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn SHOULD be 1 to get KSK details in the exported **DNS_RPC_ZONE_DNSSEC_SETTINGS** structure; otherwise, pDataIn SHOULD be zero. Unless an error is returned, on output pdwTypeOut is set to DNSSRV_TYPEID_ZONE_SIGNING_SETTINGS and ppDataOut points to a structure of type **PDNS_RPC_ZONE_DNSSEC_SETTINGS**. |
 | ImportZoneSigningSettings | Imports the Dnssec settings to a primary file-backed zone on a server and takes appropriate action based on the signing metadata imported. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_ZONE_SIGNING_SETTINGS and pDataIn SHOULD be a structure of type PDNS_RPC_ZONE_DNSSEC_SETTINGS. If this operation is invoked on a server that hosts a primary unsigned copy of a file-backed zone and the fIsSigned Property of PDNS_RPC_ZONE_DNSSEC_SETTINGS is 1, then the server becomes a [**nonkey master primary server**](#gt_nonkey-master-primary-server) for that zone. Unless an error is returned, on output pdwTypeOut is set to DNSSRV_TYPEID_DWORD and ppDataOut points to a structure of type ImportOpResult. |
 | EnumZoneScopes | Enumerates all the [**zone scopes**](#gt_zone-scope) in a zone or cache scopes in a cache zone. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. The pszZone MUST be the zone name for which zone scopes are to be enumerated or it MUST be "..cache". Unless an error is returned, on output pdwTypeOut is set to DNSSRV_TYPEID_ZONE_SCOPE_ENUM and ppDataOut points to a structure of type PDNS_RPC_ENUM_ZONE_SCOPE_LIST. |
-| ZoneStatistics | Gets the zone statistics from the server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn SHOULD be either DNS_RPC_ZONE_STATS_GET, which gets the current zone statistics, or DNS_RPC_ZONE_STATS_CLEAR, which clears the zone statistics after getting them. The pszZone MUST point to the zone information for which statistics are required. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_ZONE_STATS and ppDataOut SHOULD point to a structure of type DNS_RPC_ZONE_STATS_V1 (section [2.2.12.2.5](#Section_2.2.5.2.1)). |
+| ZoneStatistics | Gets the zone statistics from the server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn SHOULD be either DNS_RPC_ZONE_STATS_GET, which gets the current zone statistics, or DNS_RPC_ZONE_STATS_CLEAR, which clears the zone statistics after getting them. The pszZone MUST point to the zone information for which statistics are required. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_ZONE_STATS and ppDataOut SHOULD point to a structure of type DNS_RPC_ZONE_STATS_V1 (section [2.2.12.2.5](#Section_2.2.12.2.5)). |
 | EnumServerScopes | Enumerates all the [**server scopes**](#gt_server-scope) in a DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. Unless an error is returned, on output, pdwTypeOut SHOULD be set to DNSSRV_TYPEID_SCOPE_ENUM and ppDataOut points to a structure of type PDNS_RPC_ENUM_SCOPE_LIST.<276> |
 | EnumerateClientSubnetRecord | Enumerates the names all the Client Subnet Records on the DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_UNICODE_STRING_LIST and ppDataOut points to a structure of type PDNS_RPC_UNICODE_STRING_LIST. |
 | GetClientSubnetRecord | Gets the details of the Client Subnet Record on the DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPWSTR and pDataIn SHOULD be name of the Client Subnet Record. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_CLIENT_SUBNET_RECORD and ppDataOut points to a structure of type PDNS_RPC_CLIENT_SUBNET_RECORD. |
@@ -11128,7 +11128,7 @@ If pszZone is not NULL and pwszZoneScopeName is not NULL, pszOperation MUST be s
 
 | Value | Meaning |
 | --- | --- |
-| "DeleteNode" | Deletes a node from the given zone scope of a specified zone or a cache scope in a specified cache zone. On input, dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM (section [2.2.2.1.1](#Section_2.2.2.1.1)), and pData MUST point to a structure of type [DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5)](#Section_2.2.2.2.1). That structure contains the name of the node to be deleted as pointed by pszNodeName, and a Boolean flag in dwParam that indicates if the node's subtree is to be deleted. |
+| "DeleteNode" | Deletes a node from the given zone scope of a specified zone or a cache scope in a specified cache zone. On input, dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM (section [2.2.2.1.1](#Section_2.2.2.1.1)), and pData MUST point to a structure of type [DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5)](#Section_2.2.1.2.5). That structure contains the name of the node to be deleted as pointed by pszNodeName, and a Boolean flag in dwParam that indicates if the node's subtree is to be deleted. |
 | "DeleteRecordSet" | Deletes all the DNS records of a particular type at a particular node that is present in the given zone scope of a specified zone or a cache scope in a specified cache zone. On input, dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM (section 2.2.2.1.1). pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5). That structure contains the name of the node to be deleted and the DNS record type in the dwParam member. The type MUST be of value of either DNS_RECORD_TYPE (section 2.2.2.1.1) or 0x00FF, which specifies all types. |
 
 If pszZone is NULL and pwszZoneScopeName is not NULL, pszOperation MUST be set to one of the following values.
@@ -11173,7 +11173,7 @@ If pszZone is not NULL and pwszZoneScopeName is not NULL, pszOperation MUST be s
 
 | Value | Meaning |
 | --- | --- |
-| ScopeInfo | On output the value pointed to by pdwTypeId SHOULD be set to DNSSRV_TYPEID_ZONE_SCOPE_INFO and ppData MUST point to a structure of one of the types specified in [DNS_RPC_ZONE_SCOPE_INFO_V1 (section 2.2.13.1.3.1)](#Section_2.2.5.2.1), which contains full information about the zone pointed to by pszZone or cache if "..cache" is specified in pszZone. |
+| ScopeInfo | On output the value pointed to by pdwTypeId SHOULD be set to DNSSRV_TYPEID_ZONE_SCOPE_INFO and ppData MUST point to a structure of one of the types specified in [DNS_RPC_ZONE_SCOPE_INFO_V1 (section 2.2.13.1.3.1)](#Section_2.2.13.1.3.1), which contains full information about the zone pointed to by pszZone or cache if "..cache" is specified in pszZone. |
 
 - If pszZone is not NULL and pwszZoneScopeName is not NULL, and pszOperation value is ScopeInfo:
 - On input, pdwTypeId MUST be set to DNSSRV_TYPEID_ZONE_SCOPE_INFO.
@@ -11184,7 +11184,7 @@ If pszZone is NULL and pwszZoneScopeName is not NULL, pszOperation MUST be eithe
 
 | Value | Meaning |
 | --- | --- |
-| "Forwarders" or "DynamicForwarders" | On output, the value pointed to by pdwTypeId SHOULD be set to DNSSRV_TYPEID_ADDRARRAY and ppData MUST point to a structure as specified in [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.2), which contains list of IP address.<291> |
+| "Forwarders" or "DynamicForwarders" | On output, the value pointed to by pdwTypeId SHOULD be set to DNSSRV_TYPEID_ADDRARRAY and ppData MUST point to a structure as specified in [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3), which contains list of IP address.<291> |
 
 - If pszZone is NULL and pwszZoneScopeName is not NULL, and pszOperation value is Forwarders or DynamicForwarders:
 - On input, pdwTypeId MUST be set to DNSSRV_TYPEID_ADDRARRAY.
@@ -11583,7 +11583,7 @@ The following example specifies how to set the value of a DWORD DNS server prope
 
 The client formats a **DNSSRV_RPC_UNION** (section [2.2.1.2.6](#Section_2.2.1.2.6)) structure to represent the request by setting the Dword member of the union one of the ZONE_REQUEST_FILTER values. Use
 
-- The **NameAndParam** member of the **DNSSRV_RPC_UNION** is set to point to a **DNS_RPC_NAME_AND_PARAM** (section [2.2.1.2.5](#Section_2.2.2.2.1)) structure (stored on the stack or elsewhere).
+- The **NameAndParam** member of the **DNSSRV_RPC_UNION** is set to point to a **DNS_RPC_NAME_AND_PARAM** (section [2.2.1.2.5](#Section_2.2.1.2.5)) structure (stored on the stack or elsewhere).
 - The node name member of this **DNS_RPC_NAME_AND_PARAM** structure is set to "LogLevel".
 - The **dwParam** member of this **DNS_RPC_NAME_AND_PARAM** structure is set to the desired combination of logging level bit flags, formatted as a DWORD. For example, to request logging of all incoming queries with full packet detail one would specify 0x0100E101 "(DNS_LOG_LEVEL_QUERY|DNS_LOG_LEVEL_QUESTIONS|DNS_LOG_LEVEL_RECV|DNS_LOG_LEVEL_UDP|DNS_LOG_LEVEL_TCP|DNS_LOG_LEVEL_FULL_PACKETS)".
 The client calls R_DnssrvOperation2 and provides the following parameters:
@@ -11653,7 +11653,7 @@ The following example specifies how to create a DNS record representing the IPv4
 
 The client formats a [**DNS_RPC_RECORD structure (section 2.2.2.2.5)**](#Section_2.2.2.2.5), stored on the stack or elsewhere using a buffer at least large enough to hold the **DNS_RPC_RECORD** structure plus the **DNS_RPC_RECORD_DATA** in the Buffer member, to represent the new record data as follows:
 
-- **wDataLength** is set to the size of the data that will be stored in the Buffer member. In this case, because the record data will be a [**DNS_RPC_RECORD_A (section 2.2.2.2.4.1)**](#Section_2.2.2.2.5) structure, the value of **wDataLength** is set to 4.
+- **wDataLength** is set to the size of the data that will be stored in the Buffer member. In this case, because the record data will be a [**DNS_RPC_RECORD_A (section 2.2.2.2.4.1)**](#Section_2.2.2.2.4.1) structure, the value of **wDataLength** is set to 4.
 - **wType** is set to the desired record type (section [2.2.2.1.1](#Section_2.2.2.1.1)), in this case DNS_TYPE_A.
 - **dwFlags**, **dwSerial**, **dwTimeStamp**, and **dwReserved** are set to zero.
 - **dwTtlSeconds** is set to the desired TTL value in seconds, in this case 3600 for one hour.
@@ -11685,7 +11685,7 @@ The client calls [R_DnssrvOperation2 (section 3.1.4.6)](#Section_3.1.4.6) and 
 - Zero as the context.
 - CreateZonescope as the operation.
 - DNSSRV_TYPEID_ZONE_SCOPE_CREATE as the type ID.
-- Create a [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.5.2.1) structure with dwFlags as zero and pwszScopeName as "example_americas". Pass this structure as RPC data.
+- Create a [DNS_RPC_ZONE_SCOPE_CREATE_INFO_V1 (section 2.2.13.1.2.1)](#Section_2.2.13.1.2.1) structure with dwFlags as zero and pwszScopeName as "example_americas". Pass this structure as RPC data.
 The DNS server returns ERROR_SUCCESS if the operation was successful or a Windows error code if the operation fails.
 
 <a id="Section_4.7"></a>
@@ -11731,9 +11731,9 @@ After the client is finished with the zone scope enumeration result, it calls MI
 
 The following example specifies how to create a DNS record representing the IPv4 address "1.2.3.4" for the host named "host1" in the existing [**zone scope**](#gt_zone-scope) "example_americas" on the [**primary zone**](#gt_primary-zone) named "example.com". The new record will have a TTL of one hour.
 
-The client formats a [DNS_RPC_RECORD structure (section 2.2.2.2.5)](#Section_2.2.2.2.5), stored on the stack or elsewhere using a buffer at least large enough to hold the **DNS_RPC_RECORD** structure plus the [DNS_RPC_RECORD_DATA (section 2.2.2.2.4)](#Section_2.2.2.2.4.6) in the buffer member, to represent the new record data as follows:
+The client formats a [DNS_RPC_RECORD structure (section 2.2.2.2.5)](#Section_2.2.2.2.5), stored on the stack or elsewhere using a buffer at least large enough to hold the **DNS_RPC_RECORD** structure plus the [DNS_RPC_RECORD_DATA (section 2.2.2.2.4)](#Section_2.2.2.2.4) in the buffer member, to represent the new record data as follows:
 
-- **wDataLength** is set to the size of the data that will be stored in the buffer member. In this case, because the record data will be a [DNS_RPC_RECORD_A structure (section 2.2.2.2.4.1)](#Section_2.2.2.2.5), the value of **wDataLength** is set to 4.
+- **wDataLength** is set to the size of the data that will be stored in the buffer member. In this case, because the record data will be a [DNS_RPC_RECORD_A structure (section 2.2.2.2.4.1)](#Section_2.2.2.2.4.1), the value of **wDataLength** is set to 4.
 - **wType** is set to the desired record type (section [2.2.2.1.1](#Section_2.2.2.1.1)), in this case DNS_TYPE_A.
 - **dwFlags**, **dwSerial**, **dwTimeStamp**, and **dwReserved** are set to zero.
 - **dwTtlSeconds** is set to the desired TTL value in seconds, in this case 3600 for one hour.
@@ -11780,7 +11780,7 @@ The client calls [R_DnssrvOperation (section 3.1.4.1)](#Section_3.1.4.1) and p
 - Zero as the context.
 - UpdatePolicy as the operation.
 - DNSSRV_TYPEID_POLICY as the type ID.
-Create a **DNS_RPC_POLICY** structure with *pwszPolicyName* as "DenyAllQueryForContosso.com", *level* as DnsPolicyServerLevel, *appliesOn* as DnsPolicyQueryProcessing, *action* as DnsPolicyDeny. Other properties can be set if they are being updated. Set the **flags** field for each property of **DNS_RPC_POLICY** to be updated, as defined in [Constants (section 2.2.15.1.1)](#Section_2.2.15.1.1.4). Pass this RPC data structure as *pData*.
+Create a **DNS_RPC_POLICY** structure with *pwszPolicyName* as "DenyAllQueryForContosso.com", *level* as DnsPolicyServerLevel, *appliesOn* as DnsPolicyQueryProcessing, *action* as DnsPolicyDeny. Other properties can be set if they are being updated. Set the **flags** field for each property of **DNS_RPC_POLICY** to be updated, as defined in [Constants (section 2.2.15.1.1)](#Section_2.2.15.1.1). Pass this RPC data structure as *pData*.
 
 The DNS server returns ERROR_SUCCESS if the operation was successful or a Windows error code if the operation fails.
 
@@ -11834,7 +11834,7 @@ The DNS server returns ERROR_SUCCESS if the operation is successful or a Windows
 <a id="Section_4.15"></a>
 ## 4.15 Deleting a Client Subnet Record
 
-The following example describes how to delete the [**client subnet record**](#gt_client-subnet-record) "Europe" created in [Creating a Client Subnet Record (section 4.14)](#Section_3.1.8.1).
+The following example describes how to delete the [**client subnet record**](#gt_client-subnet-record) "Europe" created in [Creating a Client Subnet Record (section 4.14)](#Section_4.14).
 
 The client calls [R_DnssrvOperation (section 3.1.4.1)](#Section_3.1.4.1) and provides the following parameters:
 
@@ -11968,7 +11968,7 @@ The following example describes how to create a DNS record representing the [**I
 
 The client formats a DNS_RPC_RECORD structure (section [2.2.2.2.5](#Section_2.2.2.2.5)), stored on the stack or elsewhere, using a buffer that is large enough to hold the DNS_RPC_RECORD structure plus the DNS_RPC_RECORD_DATA in the Buffer member, to represent the new record data as follows:
 
-- **wDataLength** is set to the size of the data that will be stored in the Buffer member. In this case, because the record data is a DNS_RPC_RECORD_A (section [2.2.2.2.4.1](#Section_2.2.2.2.5)) structure, the value of wDataLength is set to 4.
+- **wDataLength** is set to the size of the data that will be stored in the Buffer member. In this case, because the record data is a DNS_RPC_RECORD_A (section [2.2.2.2.4.1](#Section_2.2.2.2.4.1)) structure, the value of wDataLength is set to 4.
 - **wType** is set to the desired record type (section [2.2.2.1.1](#Section_2.2.2.1.1)), in this case DNS_TYPE_A.
 - **dwFlags**, **dwSerial**, **dwTimeStamp**, and **dwReserved** are set to zero.
 - **dwTtlSeconds** is set to the desired TTL value in seconds, in this case 3600 for one hour.

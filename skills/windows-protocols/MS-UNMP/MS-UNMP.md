@@ -494,7 +494,7 @@ The format of a MapSvrUnicodeMapString field is a sequence of colon-delimited fi
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 unix_account
 
-This type is used to specify a [**UNIX**](#gt_unix) account name in [**MBCS**](#gt_multibyte-character-set-mbcs) format, in addition to an ID used to search for the corresponding Windows account information when mapping a UNIX account name to a Windows account name. For more information, see sections [2.2.5.2](#Section_4.1) and [2.2.5.8](#Section_4.7).
+This type is used to specify a [**UNIX**](#gt_unix) account name in [**MBCS**](#gt_multibyte-character-set-mbcs) format, in addition to an ID used to search for the corresponding Windows account information when mapping a UNIX account name to a Windows account name. For more information, see sections [2.2.5.2](#Section_2.2.5.2) and [2.2.5.8](#Section_2.2.5.8).
 
 struct unix_account {
 
@@ -556,7 +556,7 @@ MapSvrUnicodeNameString UnixAccountName;
 <a id="Section_2.2.2.10"></a>
 #### 2.2.2.10 unix_user_auth
 
-This type is used to specify a [**UNIX**](#gt_unix) account name (in [**MBCS**](#gt_multibyte-character-set-mbcs) format) and a password to retrieve the set of UNIX account details that correspond to the account. For more details, see section [2.2.5.4](#Section_4.3).
+This type is used to specify a [**UNIX**](#gt_unix) account name (in [**MBCS**](#gt_multibyte-character-set-mbcs) format) and a password to retrieve the set of UNIX account details that correspond to the account. For more details, see section [2.2.5.4](#Section_2.2.5.4).
 
 struct unix_user_auth {
 
@@ -590,7 +590,7 @@ MapSvrUnicodeNameString UnixUserAccountPassword;
 <a id="Section_2.2.2.12"></a>
 #### 2.2.2.12 windows_creds
 
-This type represents the Windows account name (in [**MBCS**](#gt_multibyte-character-set-mbcs) format) when used as an output parameter from a search for the corresponding [**UNIX**](#gt_unix) account name (in MBCS format) and/or UNIX ID. For more information, see sections [2.2.5.2](#Section_4.1) and [2.2.5.8](#Section_4.7))
+This type represents the Windows account name (in [**MBCS**](#gt_multibyte-character-set-mbcs) format) when used as an output parameter from a search for the corresponding [**UNIX**](#gt_unix) account name (in MBCS format) and/or UNIX ID. For more information, see sections [2.2.5.2](#Section_2.2.5.2) and [2.2.5.8](#Section_2.2.5.8))
 
 struct windows_creds {
 
@@ -632,7 +632,7 @@ MapSvrUnicodeWindowsNameString WindowsAccountName;
 <a id="Section_2.2.2.14"></a>
 #### 2.2.2.14 windows_account
 
-This type is used to specify a Windows account name in [**MBCS**](#gt_multibyte-character-set-mbcs) format used to search for the corresponding [**UNIX**](#gt_unix) account information. For more details, see sections [2.2.5.3](#Section_4.2) and [2.2.5.9](#Section_4.8).
+This type is used to specify a Windows account name in [**MBCS**](#gt_multibyte-character-set-mbcs) format used to search for the corresponding [**UNIX**](#gt_unix) account information. For more details, see sections [2.2.5.3](#Section_2.2.5.3) and [2.2.5.9](#Section_2.2.5.9).
 
 struct windows_account {
 
@@ -658,7 +658,7 @@ MapSvrUnicodeNameString WindowsAccountName;
 <a id="Section_2.2.2.16"></a>
 #### 2.2.2.16 unix_auth
 
-This type is used to specify [**UNIX**](#gt_unix) account details returned as a result of an authentication operation on the server. For more details, see sections [2.2.5.4](#Section_4.3) and [2.2.5.15](#Section_2.2.5.15).
+This type is used to specify [**UNIX**](#gt_unix) account details returned as a result of an authentication operation on the server. For more details, see sections [2.2.5.4](#Section_2.2.5.4) and [2.2.5.15](#Section_2.2.5.15).
 
 struct unix_auth {
 
@@ -679,7 +679,7 @@ long GIDArray<MAXGIDS>;
 <a id="Section_2.2.2.17"></a>
 #### 2.2.2.17 unix_authW
 
-This type is used to specify [**UNIX**](#gt_unix) account details returned as a result of an authentication operation on the server. For more details, see sections [2.2.5.4](#Section_4.3) and [2.2.5.15](#Section_2.2.5.15).
+This type is used to specify [**UNIX**](#gt_unix) account details returned as a result of an authentication operation on the server. For more details, see sections [2.2.5.4](#Section_2.2.5.4) and [2.2.5.15](#Section_2.2.5.15).
 
 struct unix_authW {
 
@@ -700,7 +700,7 @@ long GIDArray<MAXGIDS>;
 <a id="Section_2.2.2.18"></a>
 #### 2.2.2.18 unix_creds
 
-This type is used to specify [**UNIX**](#gt_unix) account details returned as a result of a lookup operation on the server. For more details, see sections [2.2.5.3](#Section_4.2), [2.2.5.9](#Section_4.8), and [2.2.5.10](#Section_2.2.5.10).
+This type is used to specify [**UNIX**](#gt_unix) account details returned as a result of a lookup operation on the server. For more details, see sections [2.2.5.3](#Section_2.2.5.3), [2.2.5.9](#Section_2.2.5.9), and [2.2.5.10](#Section_2.2.5.10).
 
 struct unix_creds {
 
@@ -742,7 +742,7 @@ long GIDArray<MAXGIDS>;
 <a id="Section_2.2.2.20"></a>
 #### 2.2.2.20 dump_map_req
 
-This type is used to specify an input parameter to start or continue a map enumeration request to the server. For more details, see sections [2.2.5.5](#Section_4.4), [2.2.5.7](#Section_4.6), [2.2.5.11](#Section_2.2.5.11), and [2.2.5.12](#Section_2.2.5.12).
+This type is used to specify an input parameter to start or continue a map enumeration request to the server. For more details, see sections [2.2.5.5](#Section_2.2.5.5), [2.2.5.7](#Section_2.2.5.7), [2.2.5.11](#Section_2.2.5.11), and [2.2.5.12](#Section_2.2.5.12).
 
 struct dump_map_req {
 
@@ -759,12 +759,12 @@ long MapRecordIndex;
 | 0x00000000 | Enumerate user account mappings. |
 | 0x00000001 | Enumerate group account mappings. |
 
-**MapRecordIndex**: An XDR-encoded, 32-bit signed integer that is an index into the set of mapping records. This MUST be set to 0 on the first call in an enumeration sequence, and to the sum of all the records returned by all preceding replies on subsequent calls in the enumeration sequence. For more information on enumeration sequences, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.1.5).
+**MapRecordIndex**: An XDR-encoded, 32-bit signed integer that is an index into the set of mapping records. This MUST be set to 0 on the first call in an enumeration sequence, and to the sum of all the records returned by all preceding replies on subsequent calls in the enumeration sequence. For more information on enumeration sequences, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 <a id="Section_2.2.2.21"></a>
 #### 2.2.2.21 sequence_number
 
-This type is used by the server to define a version for a set of account mappings at a given point in time. This number is changed by the server whenever any changes are made to the set of account mappings that it maintains (for more details, see section [2.2.5.6](#Section_4.5)). If either of the member fields changes, the sequence_number as a whole MUST be considered as changed.
+This type is used by the server to define a version for a set of account mappings at a given point in time. This number is changed by the server whenever any changes are made to the set of account mappings that it maintains (for more details, see section [2.2.5.6](#Section_2.2.5.6)). If either of the member fields changes, the sequence_number as a whole MUST be considered as changed.
 
 struct sequence_number {
 
@@ -774,7 +774,7 @@ long CurrentVersionTokenHighPart;
 
 };
 
-**CurrentVersionTokenLowPart**: An [**XDR**](#gt_xdr)-encoded, 32-bit signed integer that MUST be either 0x00000000 or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more information about **CurrentVersionTokenLowPart**, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.1.5).
+**CurrentVersionTokenLowPart**: An [**XDR**](#gt_xdr)-encoded, 32-bit signed integer that MUST be either 0x00000000 or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more information about **CurrentVersionTokenLowPart**, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 **CurrentVersionTokenHighPart**: An XDR-encoded, 32-bit signed integer that MUST be either 0x00000000 or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or **DUMPALLMAPSXXX_PROC**. For more information about **CurrentVersionTokenHighPart**, see sections 3.1.5 and 3.2.5.
 
@@ -797,7 +797,7 @@ long ID;
 
 **UnixAccountName**: A MapSvrMBCSNameString that contains the name of the [**UNIX**](#gt_unix) user or group account in the enumeration. The length of the string MUST NOT exceed 128 bytes.
 
-**ID**: An [**XDR**](#gt_xdr)-encoded, 32-bit signed integer that contains the UNIX [**user ID**](#gt_user-identifier-user-id-or-uid) or group ID for **UnixAccountName** as specified by **PrincipalType** in the request (section [2.2.5.5](#Section_4.4)).
+**ID**: An [**XDR**](#gt_xdr)-encoded, 32-bit signed integer that contains the UNIX [**user ID**](#gt_user-identifier-user-id-or-uid) or group ID for **UnixAccountName** as specified by **PrincipalType** in the request (section [2.2.5.5](#Section_2.2.5.5)).
 
 <a id="Section_2.2.2.23"></a>
 #### 2.2.2.23 sid
@@ -845,7 +845,7 @@ See section [7](#Section_7) for sample code that shows how to encode and decode 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 mapping
 
-This type is used to define a set of account maps when returned as output from the map enumeration procedure. For more details, see section [2.2.5.5](#Section_4.4).
+This type is used to define a set of account maps when returned as output from the map enumeration procedure. For more details, see section [2.2.5.5](#Section_2.2.5.5).
 
 struct mapping {
 
@@ -870,7 +870,7 @@ mapping_record MapArray[MappingRecordCount];
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 maps
 
-This type is used to define a set of account maps in colon-delimited string format when returned as output from the map enumeration procedure. For more details, see section [2.2.5.7](#Section_4.6).
+This type is used to define a set of account maps in colon-delimited string format when returned as output from the map enumeration procedure. For more details, see section [2.2.5.7](#Section_2.2.5.7).
 
 struct maps {
 
@@ -1102,7 +1102,7 @@ sequence_number SequenceNumber
 
 );
 
-*SequenceNumber*: A data structure that contains two 32-bit signed integers. *SequenceNumber* MUST contain either 0x00000000 for each member field or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more details, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.1.5).
+*SequenceNumber*: A data structure that contains two 32-bit signed integers. *SequenceNumber* MUST contain either 0x00000000 for each member field or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more details, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.2.5).
 
 **Return Value:** The User Name Mapping Protocol server MUST return a [**SUNRPC**](#gt_sunrpc) status of MSG_ACCEPTED with an accept status of SUCCESS. It MUST also return a [sequence_number](#Section_2.2.2.21) structure with the current sequence number value for the set of mapping records held by the server.
 
@@ -1179,7 +1179,7 @@ sid SID
 <a id="Section_2.2.5.11"></a>
 #### 2.2.5.11 DUMPALLMAPSW_PROC (PROC 10)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart of [DUMPALLMAPS_PROC](#Section_4.4). The request and response packets are identical to **DUMPALLMAPS_PROC**, except that the return value is a [mappingW](#Section_2.2.3.3) data type instead of a [mapping](#Section_2.2.3.1) data type. For example, the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart of [DUMPALLMAPS_PROC](#Section_2.2.5.5). The request and response packets are identical to **DUMPALLMAPS_PROC**, except that the return value is a [mappingW](#Section_2.2.3.3) data type instead of a [mapping](#Section_2.2.3.1) data type. For example, the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
 
 mappingW
 
@@ -1196,7 +1196,7 @@ dump_map_req EnumCursor
 <a id="Section_2.2.5.12"></a>
 #### 2.2.5.12 DUMPALLMAPSEXW_PROC (PROC 11)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart of [DUMPALLMAPSEX_PROC](#Section_4.6). The request and response packets are identical to **DUMPALLMAPSEX_PROC**, except that the [MapSvrMBCSMapString](#Section_2.2.2.6) data type is replaced with a [MapSvrUnicodeMapString](#Section_2.2.2.7) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart of [DUMPALLMAPSEX_PROC](#Section_2.2.5.7). The request and response packets are identical to **DUMPALLMAPSEX_PROC**, except that the [MapSvrMBCSMapString](#Section_2.2.2.6) data type is replaced with a [MapSvrUnicodeMapString](#Section_2.2.2.7) type in the byte stream.
 
 mapsW
 
@@ -1213,7 +1213,7 @@ dump_map_req EnumCursor
 <a id="Section_2.2.5.13"></a>
 #### 2.2.5.13 GETWINDOWSUSERFROMUNIXUSERNAMEW_PROC (PROC 12)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETWINDOWSCREDSFROMUNIXUSERNAME_PROC](#Section_4.1). The request and response packets are identical to **GETWINDOWSCREDSFROMUNIXUSERNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETWINDOWSCREDSFROMUNIXUSERNAME_PROC](#Section_2.2.5.2). The request and response packets are identical to **GETWINDOWSCREDSFROMUNIXUSERNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
 
 windows_credsW
 
@@ -1230,7 +1230,7 @@ unix_accountW UnixUser
 <a id="Section_2.2.5.14"></a>
 #### 2.2.5.14 GETUNIXCREDSFROMNTUSERNAMEW_PROC (PROC 13)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETUNIXCREDSFROMNTUSERNAME_PROC](#Section_4.2). The request and response packets are identical to **GETUNIXCREDSFROMNTUSERNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETUNIXCREDSFROMNTUSERNAME_PROC](#Section_2.2.5.3). The request and response packets are identical to **GETUNIXCREDSFROMNTUSERNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
 
 unix_credsW
 
@@ -1247,7 +1247,7 @@ windows_accountW WindowsUserAccountName
 <a id="Section_2.2.5.15"></a>
 #### 2.2.5.15 AUTHUSINGUNIXCREDSW_PROC (PROC 14)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [AUTHUSINGUNIXCREDS_PROC](#Section_4.3). The request and response packets are identical to **AUTHUSINGUNIXCREDS_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [AUTHUSINGUNIXCREDS_PROC](#Section_2.2.5.4). The request and response packets are identical to **AUTHUSINGUNIXCREDS_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
 
 unix_authW
 
@@ -1264,7 +1264,7 @@ unix_user_authW UnixUserAuth
 <a id="Section_2.2.5.16"></a>
 #### 2.2.5.16 GETWINDOWSGROUPFROMUNIXGROUPNAMEW_PROC (PROC 15)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETWINDOWSGROUPFROMUNIXGROUPNAME_PROC](#Section_4.7). The request and response packets are identical to **GETWINDOWSGROUPFROMUNIXGROUPNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETWINDOWSGROUPFROMUNIXGROUPNAME_PROC](#Section_2.2.5.8). The request and response packets are identical to **GETWINDOWSGROUPFROMUNIXGROUPNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
 
 windows_credsW
 
@@ -1281,7 +1281,7 @@ unix_accountW UnixGroupAccount
 <a id="Section_2.2.5.17"></a>
 #### 2.2.5.17 GETUNIXCREDSFROMNTGROUPNAMEW_PROC (PROC 16)
 
-This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETUNIXCREDSFROMNTGROUPNAME_PROC](#Section_4.8). The request and response packets are identical to **GETUNIXCREDSFROMNTGROUPNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
+This procedure is the [**wide character**](#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a) counterpart to [GETUNIXCREDSFROMNTGROUPNAME_PROC](#Section_2.2.5.9). The request and response packets are identical to **GETUNIXCREDSFROMNTGROUPNAME_PROC**, except that the [MapSvrMBCSNameString](#Section_2.2.2.2) data type is replaced with a [MapSvrUnicodeNameString](#Section_2.2.2.3) type in the byte stream.
 
 unix_credsW
 
@@ -1331,7 +1331,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Clients of the User Name Mapping Protocol can maintain copies of user mappings (and group mappings) enumerated from the server. Clients can use the [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) procedures to enumerate all individual maps from the server. The server treats account mappings as an unordered array of mapping records of total count equal to **TotalMappingRecordCount**, as explained in sections [2.2.3.1](#Section_2.2.3.1) and [2.2.3.3](#Section_2.2.3.3). The index of records begins at zero, and **MappingRecordCount** indicates the number of [**map**](#gt_map) records returned by the server in the current RPC response packet.
 
-Clients can cache **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** values returned by the **DUMPALLMAPSXXX_PROC** response to implement cache consistency. Cache consistency is implemented on clients by periodically polling the server's [GETCURRENTVERSIONTOKEN_PROC](#Section_4.5) procedure to know when to refresh their locally cached copies of mappings.
+Clients can cache **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** values returned by the **DUMPALLMAPSXXX_PROC** response to implement cache consistency. Cache consistency is implemented on clients by periodically polling the server's [GETCURRENTVERSIONTOKEN_PROC](#Section_2.2.5.6) procedure to know when to refresh their locally cached copies of mappings.
 
 As an alternative to the enumeration request (**DUMPALLMAPSXXX_PROC**), the clients can cache the results of individual account lookup requests and use **GETCURRENTVERSIONTOKEN_PROC** to know when to refresh their locally cached copies of mappings.
 
@@ -1369,7 +1369,7 @@ None.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The User Name Mapping Protocol allows a User Name Mapping Protocol client to retrieve a complete set of account mappings from the server and to maintain a copy of these mappings in a local cache. The client uses a combination of the [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) and [GETCURRENTVERSIONTOKEN_PROC](#Section_4.5) procedure calls to retrieve the account mappings and to check for updates to the account mappings in the server, respectively. The **DUMPALLMAPSXXX_PROC** procedure that is chosen is determined by the type of information that the User Name Mapping Protocol client chooses to cache.
+The User Name Mapping Protocol allows a User Name Mapping Protocol client to retrieve a complete set of account mappings from the server and to maintain a copy of these mappings in a local cache. The client uses a combination of the [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) and [GETCURRENTVERSIONTOKEN_PROC](#Section_2.2.5.6) procedure calls to retrieve the account mappings and to check for updates to the account mappings in the server, respectively. The **DUMPALLMAPSXXX_PROC** procedure that is chosen is determined by the type of information that the User Name Mapping Protocol client chooses to cache.
 
 All procedures other than **DUMPALLMAPSXXX_PROC** are self-contained in that they do not require any other procedures to be sequenced to complete successfully. The User Name Mapping Protocol client does not need to maintain any state to implement sequencing across procedure calls.
 
@@ -1383,7 +1383,7 @@ The sequence begins when a User Name Mapping Protocol client sends a [**DUMPALLM
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Processing the Account Mapping Response from the Server
 
-If the [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) response from the server indicates success and the returned value of **MappingRecordCount** is less than the returned value of **TotalMappingRecordCount**, the client proceeds to section [3.1.5.3](#Section_3.2.5.2.2); the enumeration of account mappings returned from the server is incomplete and there are more records to retrieve.
+If the [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) response from the server indicates success and the returned value of **MappingRecordCount** is less than the returned value of **TotalMappingRecordCount**, the client proceeds to section [3.1.5.3](#Section_3.1.5.3); the enumeration of account mappings returned from the server is incomplete and there are more records to retrieve.
 
 Otherwise, the enumeration returned is complete if the response indicates success. The client MAY send another **DUMPALLMAPSXXX_PROC** request to the server if the response indicates failure.
 
@@ -1397,7 +1397,7 @@ If at any point the values of **CurrentVersionTokenHighPart**, **CurrentVersionT
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Polling for Cache Consistency
 
-The User Name Mapping Protocol client uses [GETCURRENTVERSIONTOKEN_PROC](#Section_4.5) to periodically check the server for cache consistency. Whenever any of the user or group account mappings on the server change, the tokens returned in the response to **GETCURRENTVERSIONTOKEN_PROC** are different, at which point the client MUST discard its cached copy of all the mappings in their entirety and enumerate the new set of mappings from the server.
+The User Name Mapping Protocol client uses [GETCURRENTVERSIONTOKEN_PROC](#Section_2.2.5.6) to periodically check the server for cache consistency. Whenever any of the user or group account mappings on the server change, the tokens returned in the response to **GETCURRENTVERSIONTOKEN_PROC** are different, at which point the client MUST discard its cached copy of all the mappings in their entirety and enumerate the new set of mappings from the server.
 
 If **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** in the **GETCURRENTVERSIONTOKEN_PROC** reply are the same as those from the previous enumeration, there have been no changes to any map records, and any cache of map records being maintained by the User Name Mapping Protocol client is still valid. If either **CurrentVersionTokenHighPart** or **CurrentVersionTokenLowPart** in the **GETCURRENTVERSIONTOKEN_PROC** reply differs from those returned by the previous enumeration, the mapping records have been updated, and the User Name Mapping Protocol client MUST consider the local cached copies of the mapping records as out of date and MUST repeat the enumeration to get the updated set of mapping records.
 
@@ -1458,7 +1458,7 @@ None.
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Processing for All Procedures
 
-The User Name Mapping Protocol server performs a simple lookup or enumeration service on behalf of clients. As defined in section [3.2.1](#Section_3.1.1), the server maintains a set of current mappings that it traverses to answer queries by clients. For each lookup procedure from the client, the User Name Mapping Protocol server queries the persistent data store of account mappings and returns details of the located map, if found.
+The User Name Mapping Protocol server performs a simple lookup or enumeration service on behalf of clients. As defined in section [3.2.1](#Section_3.2.1), the server maintains a set of current mappings that it traverses to answer queries by clients. For each lookup procedure from the client, the User Name Mapping Protocol server queries the persistent data store of account mappings and returns details of the located map, if found.
 
 The [**SUNRPC**](#gt_sunrpc) response packet generated by the User Name Mapping Protocol server adheres to the rules indicated in [[RFC1057]](https://go.microsoft.com/fwlink/?LinkId=90265) section 8. Whenever a well-formed SUNRPC request is received, the body of the response packet MUST have a status of MSG_ACCEPTED to indicate a successful receipt of the packet.<6>
 
@@ -1484,7 +1484,7 @@ The User Name Mapping Protocol server replies to the [**DUMPALLMAPSXXX_PROC**](#
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Processing the Client Account Mapping Cache Refresh
 
-The User Name Mapping Protocol server replies with **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** in the [GETCURRENTVERSIONTOKEN_PROC](#Section_4.5) reply set to an implementation-specific value. If the account mappings have been changed since a client's previous **GETCURRENTVERSIONTOKEN_PROC** or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) enumeration request, the values returned to the client MUST be different from the values returned for the previous request to **GETCURRENTVERSIONTOKEN_PROC** or **DUMPALLMAPSXXX_PROC**. (The method used to track changes in account mappings is implementation specific.) If the account mappings have not changed, the values returned to the client MUST be the values returned for the previous request to **GETCURRENTVERSIONTOKEN_PROC** or **DUMPALLMAPSXXX_PROC**.<12>
+The User Name Mapping Protocol server replies with **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** in the [GETCURRENTVERSIONTOKEN_PROC](#Section_2.2.5.6) reply set to an implementation-specific value. If the account mappings have been changed since a client's previous **GETCURRENTVERSIONTOKEN_PROC** or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc) enumeration request, the values returned to the client MUST be different from the values returned for the previous request to **GETCURRENTVERSIONTOKEN_PROC** or **DUMPALLMAPSXXX_PROC**. (The method used to track changes in account mappings is implementation specific.) If the account mappings have not changed, the values returned to the client MUST be the values returned for the previous request to **GETCURRENTVERSIONTOKEN_PROC** or **DUMPALLMAPSXXX_PROC**.<12>
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -4443,7 +4443,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <11> Section 3.2.5.2.2: In Windows, the User Name Mapping Protocol server ignores the value of *MapRecordIndex* in the DUMPALLMAPSEX_PROC and DUMPALLMAPSEXW_PROC request, and the response always contains the maps enumerated from index 0. In the response, the **TotalMappingRecordCount** value is set to the sum of the total number of map records held by the server and the value of *MapRecordIndex* in the request.
 
-<12> Section 3.2.5.2.3: In Windows, the User Name Mapping Protocol server changes the 64-bit integer sequence number to a random value every time the account mapping database is updated. This value is unique only within the lifetime of the current server process—its uniqueness can only be guaranteed within the span of a single server process. The server returns this sequence number to the client as **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** in the [GETCURRENTVERSIONTOKEN_PROC](#Section_4.5) response and the **DUMPALLMAPSXXX_PROC** response.
+<12> Section 3.2.5.2.3: In Windows, the User Name Mapping Protocol server changes the 64-bit integer sequence number to a random value every time the account mapping database is updated. This value is unique only within the lifetime of the current server process—its uniqueness can only be guaranteed within the span of a single server process. The server returns this sequence number to the client as **CurrentVersionTokenHighPart** and **CurrentVersionTokenLowPart** in the [GETCURRENTVERSIONTOKEN_PROC](#Section_2.2.5.6) response and the **DUMPALLMAPSXXX_PROC** response.
 
 <a id="Section_9"></a>
 # 9 Change Tracking

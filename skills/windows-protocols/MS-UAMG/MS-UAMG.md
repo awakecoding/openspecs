@@ -1912,7 +1912,7 @@ HRESULT Item(
 
 **index:** The zero-indexed position of the item to retrieve.
 
-**retval:** The [ICategory](#Section_3.6.4.7) at the given index.
+**retval:** The [ICategory](#Section_3.6) at the given index.
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure. The severity bit in the structure identifies the following conditions:
 
@@ -3103,7 +3103,7 @@ HRESULT Copy(
 
 );
 
-**retval:** A read-write [IStringCollection (section 3.18.4)](#Section_3.18.4.1) instance containing a copy of the strings in this collection, in the same order.
+**retval:** A read-write [IStringCollection (section 3.18.4)](#Section_3.18.4) instance containing a copy of the strings in this collection, in the same order.
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure. The severity bit in the structure identifies the following conditions:
 
@@ -3430,9 +3430,9 @@ Methods in RPC Opnum Order
 | [UninstallationSteps](#Section_3.20.4.38) | Retrieves a list of localized uninstallation steps for the update. Opnum: 46 |
 | [KBArticleIDs](#Section_3.20.4.39) | Retrieves a list of Knowledge Base article IDs associated with the update. Opnum: 47 |
 | Opnum48NotUsedOnWire | Reserved for local use. Opnum: 48 |
-| [DeploymentAction](#Section_2.2.4) | Retrieves the deployment action for the update. Opnum: 49 |
+| [DeploymentAction](#Section_3.20.4.40) | Retrieves the deployment action for the update. Opnum: 49 |
 | Opnum50NotUsedOnWire | Reserved for local use. Opnum: 50 |
-| [DownloadPriority](#Section_2.2.5) | Retrieves the download priority for the update. Opnum: 51 |
+| [DownloadPriority](#Section_3.20.4.41) | Retrieves the download priority for the update. Opnum: 51 |
 | [DownloadContents](#Section_3.20.4.42) | Retrieves a collection of download content locations for the update. Opnum: 52 |
 
 In the table above, the term "Reserved for local use" means that the client MUST NOT send the opnum, and the server behavior is undefined<23> since it does not affect interoperability.
@@ -4313,7 +4313,7 @@ HRESULT DownloadContents(
 
 );
 
-**retval:** An [IUpdateDownloadContentCollection (section 3.26.4)](#Section_3.26.4.1) containing the URLs of downloadable content associated with the update.
+**retval:** An [IUpdateDownloadContentCollection (section 3.26.4)](#Section_3.26.4) containing the URLs of downloadable content associated with the update.
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure. The severity bit in the structure identifies the following conditions:
 
@@ -4799,7 +4799,7 @@ HRESULT CveIDs(
 
 );
 
-**retval:** An [IStringCollection (section 3.18.4)](#Section_3.18.4.1) instance containing the CVE IDs associated with the update. If no CVE IDs are associated with the update, *retval* MUST be set to an empty **IStringCollection**.
+**retval:** An [IStringCollection (section 3.18.4)](#Section_3.18.4) instance containing the CVE IDs associated with the update. If no CVE IDs are associated with the update, *retval* MUST be set to an empty **IStringCollection**.
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure. The severity bit in the structure identifies the following conditions:
 
@@ -7196,8 +7196,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [IgnoreDownloadPriority](#Section_2.2.5) | Retrieves whether update download priority is ignored. Opnum: 26 |
-| [IgnoreDownloadPriority](#Section_2.2.5) | Sets whether update download priority is ignored. Opnum: 27 |
+| [IgnoreDownloadPriority](#Section_3.38.5.1) | Retrieves whether update download priority is ignored. Opnum: 26 |
+| [IgnoreDownloadPriority](#Section_3.38.5.2) | Sets whether update download priority is ignored. Opnum: 27 |
 
 All methods MUST NOT throw exceptions.
 
@@ -8191,7 +8191,7 @@ HRESULT QueryServiceRegistration(
 
 **serviceID:** A string identifying an update service.
 
-**retval:** An [IUpdateServiceRegistration (section 3.46.4)](#Section_3.46.4.1) instance for the given service.
+**retval:** An [IUpdateServiceRegistration (section 3.46.4)](#Section_3.46.4) instance for the given service.
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure. The severity bit in the structure identifies the following conditions:
 
@@ -8234,7 +8234,7 @@ HRESULT AddService2(
 - If the severity bit is set to 1, the method failed and encountered a fatal error.
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
-This method SHOULD trigger the update agent to add this update service through an implementation-dependent<48> interface. This method SHOULD add the given service to the **Services** ADM element maintained by the [IUpdateServiceManager (section 3.44)](#Section_3.44.4.1) interface and return an IUpdateServiceRegistration instance that represents the service registration.
+This method SHOULD trigger the update agent to add this update service through an implementation-dependent<48> interface. This method SHOULD add the given service to the **Services** ADM element maintained by the [IUpdateServiceManager (section 3.44)](#Section_3.44) interface and return an IUpdateServiceRegistration instance that represents the service registration.
 
 <a id="Section_3.44.6"></a>
 ### 3.44.6 Timer Events

@@ -1171,7 +1171,7 @@ This section describes types that are common to multiple operations.
 <a id="Section_3.1.4.6.1"></a>
 ##### 3.1.4.6.1 Complex Types
 
-The following table summarizes the XML schema complex type definitions that are common to multiple operations, the schemas for which are defined in section [2.2.4](#Section_3.1.4.6.1).
+The following table summarizes the XML schema complex type definitions that are common to multiple operations, the schemas for which are defined in section [2.2.4](#Section_2.2.4).
 
 | Complex type | Description |
 | --- | --- |
@@ -1203,7 +1203,7 @@ This complex type specifies information about a [**SAML redirect binding**](#gt_
 <a id="Section_3.1.4.6.2"></a>
 ##### 3.1.4.6.2 Simple Types
 
-The following table summarizes the XML schema simple definitions that are common to multiple operations, the schemas for which are defined in section [2.2.5](#Section_3.1.4.6.2).
+The following table summarizes the XML schema simple definitions that are common to multiple operations, the schemas for which are defined in section [2.2.5](#Section_2.2.5).
 
 | Simple type | Description |
 | --- | --- |

@@ -680,7 +680,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [ISO/IEC/IEEE9945-7] International Organization for Standardization, "Information technology -- Portable Operating System Interface (POSIX®) Base Specifications", Issue 7", 2009, [http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=50516](https://go.microsoft.com/fwlink/?LinkId=213995)
 
-[MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](#Section_3.2.1.5.1)".
+[MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](../MS-APDS/MS-APDS.md)".
 
 [MS-CIFS] Microsoft Corporation, "[Common Internet File System (CIFS) Protocol](../MS-CIFS/MS-CIFS.md)".
 
@@ -696,7 +696,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](#Section_3.2.1.5.1)".
+[MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
@@ -710,7 +710,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](../MS-SPNG/MS-SPNG.md)".
 
-[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](#Section_5)".
+[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](../MS-TLSP/MS-TLSP.md)".
 
 [NETBEUI] IBM Corporation, "LAN Technical Reference: 802.2 and NetBIOS APIs", 1986, [https://www.ardent-tool.com/docs/boo/bk8p7001.boo](https://go.microsoft.com/fwlink/?LinkId=90224)
 
@@ -1060,7 +1060,7 @@ These extensions are grouped into the following categories:
 - Extensions to improve diagnosis of errors returned from a remote node, specified in section [2.2.2.9](#Section_2.2.2.9) and in [MS-EERR](../MS-EERR/MS-EERR.md).
 - An additional [**RPC transfer syntax**](#gt_rpc-transfer-syntax) ([**NDR64**](#gt_64-bit-network-data-representation-ndr64)) to allow for better performance on 64-bit systems, specified in section [2.2.5](#Section_2.2.5).
 - An additional set of [**Network Data Representation (NDR)**](#gt_network-data-representation-ndr) data consistency checks and [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl)/[**application configuration file (ACF)**](#gt_application-configuration-file-acf) attributes to allow for more secure processing on both the [**RPC client**](#gt_rpc-client) and [**RPC server**](#gt_rpc-server), specified in section [3.1.1.5.2](#Section_3.1.1.5.2).
-- An additional set of message protection conventions to allow for better and more efficient protection of messages transmitted on the network, specified in sections [2.2.2.11](#Section_2.2.2.11), [2.2.2.12](#Section_2.2.2.12), and [2.2.2.13](#Section_2.2.2.13.1).
+- An additional set of message protection conventions to allow for better and more efficient protection of messages transmitted on the network, specified in sections [2.2.2.11](#Section_2.2.2.11), [2.2.2.12](#Section_2.2.2.12), and [2.2.2.13](#Section_2.2.2.13).
 - Additional capability negotiation mechanisms between clients and servers for backward compatibility, specified in sections [2.2.2.14](#Section_2.2.2.14), [2.2.2.15](#Section_2.2.2.15), and [3.3.1.5.3](#Section_3.3.1.5.3).
 - Extensions to facilitate building more efficient client and server implementations, specified in sections [2.2.2.10](#Section_2.2.2.10) and [3.3.1.5.4](#Section_3.3.1.5.4).
 - Miscellaneous extensions and clarifications of the DCE 1.1: RPC specification.
@@ -1069,7 +1069,7 @@ These extensions are grouped into the following categories:
 
 The RPCE extensions specify a set of extensions built on the DCE 1.1: RPC specification, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
-The extensions that require message authentication and security rely on the following protocols: Kerberos ([MS-KILE](../MS-KILE/MS-KILE.md)), Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO): Microsoft Extension ([MS-SPNG](../MS-SPNG/MS-SPNG.md)), NT LAN Manager (NTLM) Authentication Protocol ([MS-NLMP](#Section_3.2.1.5.1)), Authentication Protocol Domain Support ([MS-APDS](#Section_3.2.1.5.1)), Net Logon Remote Protocol ([MS-NRPC](../MS-NRPC/MS-NRPC.md)), and Transport Layer Security (TLS) Profile ([MS-TLSP](#Section_5)). These extensions use the security protocol primitives specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
+The extensions that require message authentication and security rely on the following protocols: Kerberos ([MS-KILE](../MS-KILE/MS-KILE.md)), Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO): Microsoft Extension ([MS-SPNG](../MS-SPNG/MS-SPNG.md)), NT LAN Manager (NTLM) Authentication Protocol ([MS-NLMP](../MS-NLMP/MS-NLMP.md)), Authentication Protocol Domain Support ([MS-APDS](../MS-APDS/MS-APDS.md)), Net Logon Remote Protocol ([MS-NRPC](../MS-NRPC/MS-NRPC.md)), and Transport Layer Security (TLS) Profile ([MS-TLSP](../MS-TLSP/MS-TLSP.md)). These extensions use the security protocol primitives specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
 
 The ExtendedError Remote Data Structure specified in [MS-EERR](../MS-EERR/MS-EERR.md) is built on top of these extensions and provides extended error information to an [**RPC client**](#gt_rpc-client).
 
@@ -1102,9 +1102,9 @@ The extensions specified herein do not change the basic applicability of the DCE
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-- **Supported Transports:** These [**RPC**](#gt_remote-procedure-call-rpc) extensions can be implemented on top of various [**RPC transports**](#gt_rpc-transport), as specified in section [2.1](#Section_2.1). Higher-level protocols on the client either discover the RPC transport supported by the server or know it in advance. Higher-level protocols on the client can also determine whether a server supports a given RPC transport by sending a message on the RPC transport. If the server supports the RPC transport, the communication succeeds. If the server does not support the RPC transport, the RPC transport either returns a transport-dependent error or returns no reply, depending on the transport. For details on client behavior in the case of no reply, see sections [3.2.2](#Section_3.2.2) and [3.3.2](#Section_1.3). If the transport returns an error, an implementation-specific error is returned to the application or the higher-level protocols.
+- **Supported Transports:** These [**RPC**](#gt_remote-procedure-call-rpc) extensions can be implemented on top of various [**RPC transports**](#gt_rpc-transport), as specified in section [2.1](#Section_2.1). Higher-level protocols on the client either discover the RPC transport supported by the server or know it in advance. Higher-level protocols on the client can also determine whether a server supports a given RPC transport by sending a message on the RPC transport. If the server supports the RPC transport, the communication succeeds. If the server does not support the RPC transport, the RPC transport either returns a transport-dependent error or returns no reply, depending on the transport. For details on client behavior in the case of no reply, see sections [3.2.2](#Section_3.2.2) and [3.3.2](#Section_3.3.2). If the transport returns an error, an implementation-specific error is returned to the application or the higher-level protocols.
 - **Protocol Versions:** These RPC extensions do not introduce new [**protocol variants**](#gt_protocol-variant). The preexisting protocol variants are specified throughout this document. RPC extensions constrain the DCE 1.1: RPC specification, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), to only support protocol version 5.0 for [**connection-oriented RPC**](#gt_connection-oriented-rpc), protocol version 4.0 for [**connectionless RPC**](#gt_connectionless-rpc), and protocol version 2.0 for the [**NDR**](#gt_network-data-representation-ndr) transfer syntax [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid). The DCE 1.1: RPC specification uses and extends the transfer syntax negotiation mechanism, as specified in section [3.3.1.5.6](#Section_3.3.1.5.6) and in [C706] chapter 12. Version negotiation is performed separately for each RPC interface, as specified in [C706] chapter 12.
-- **Security and Authentication Methods:** RPC extensions use a model with a pluggable [**security provider**](#gt_security-provider) module for the actual security and authentication work. Higher-level protocols on the client should discover the security provider supported by the server or know them in advance. Higher-level protocols on the client can negotiate the use of RPC security providers by sending a message by using a given RPC security provider. If the server supports the RPC security provider, as specified in sections [3.3.3.1](#Section_3.3.3.1), [3.2.3.5.4](#Section_3.2.3.5.4.3), and [3.3.3.5.3](#Section_3.3.3.5.3), the communication succeeds. If the server does not support the RPC security provider, the server returns an error, as specified in section 3.3.3.5.3 for connection-oriented RPC protocols, or as specified in section 3.2.3.5.4 for connectionless RPC protocols.
+- **Security and Authentication Methods:** RPC extensions use a model with a pluggable [**security provider**](#gt_security-provider) module for the actual security and authentication work. Higher-level protocols on the client should discover the security provider supported by the server or know them in advance. Higher-level protocols on the client can negotiate the use of RPC security providers by sending a message by using a given RPC security provider. If the server supports the RPC security provider, as specified in sections [3.3.3.1](#Section_3.3.3.1), [3.2.3.5.4](#Section_3.2.3.5.4), and [3.3.3.5.3](#Section_3.3.3.5.3), the communication succeeds. If the server does not support the RPC security provider, the server returns an error, as specified in section 3.3.3.5.3 for connection-oriented RPC protocols, or as specified in section 3.2.3.5.4 for connectionless RPC protocols.
 - **Capability Negotiation:** For the capability negotiation specified in sections [2.2.2.3](#Section_2.2.2.3) and [2.2.3.3](#Section_2.2.3.3), this protocol uses unused bits in the RPC [**protocol data unit (PDU)**](#gt_protocol-data-unit-pdu) header, as specified in sections 2.2.2.3 and 2.2.3.3. This protocol also uses the bind time feature negotiation mechanism, as specified in section [3.3.1.5.3](#Section_3.3.1.5.3).
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1133,7 +1133,7 @@ These extensions update the [**protocol identifiers**](#gt_protocol-identifier) 
 - Single octet identifiers that are registered by the Open Software Foundation for commonly used protocols.
 The extensions specified in this document mandate that the third type MUST be used for all communications.
 
-Unless explicitly stated otherwise, the protocol identifier used by each protocol sequence specified in sections [2.1.1](#Section_2) and [2.1.2](#Section_2) is as specified in the table in [C706] Appendix I.
+Unless explicitly stated otherwise, the protocol identifier used by each protocol sequence specified in sections [2.1.1](#Section_2.1.1) and [2.1.2](#Section_2.1.2) is as specified in the table in [C706] Appendix I.
 
 The [**RPC protocol sequence**](#gt_rpc-protocol-sequence) strings for the [**RPC transports**](#gt_rpc-transport) defined by these extensions are specified in the following table.<1>
 
@@ -1165,7 +1165,7 @@ In sections [2.1.1.1](#Section_2.1.1.1) through [2.1.1.8](#Section_2.1.1.8), for
 
 This protocol sequence specifies [**RPC**](#gt_remote-procedure-call-rpc) directly over TCP/IP. There are no intermediate protocols between TCP/IP and RPC.
 
-When extensions that are not specified in sections [2.1.1](#Section_2) through [2.1.2](#Section_2) are enabled over the TCP transport protocol, the network address MUST be an IPv4 or IPv6 address or a server name.<2> The server name MUST be a Unicode string that represents either a NetBIOS host name (see [MS-NBTE](../MS-NBTE/MS-NBTE.md) section 2.2.1) or a fully qualified domain name (see [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 3.1 and [[RFC2181]](https://go.microsoft.com/fwlink/?LinkId=127732) section 11).
+When extensions that are not specified in sections [2.1.1](#Section_2.1.1) through [2.1.2](#Section_2.1.2) are enabled over the TCP transport protocol, the network address MUST be an IPv4 or IPv6 address or a server name.<2> The server name MUST be a Unicode string that represents either a NetBIOS host name (see [MS-NBTE](../MS-NBTE/MS-NBTE.md) section 2.2.1) or a fully qualified domain name (see [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 3.1 and [[RFC2181]](https://go.microsoft.com/fwlink/?LinkId=127732) section 11).
 
 The server name MUST resolve to an IPv4 or IPv6 address ([[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261)). Server names are resolved by using **GetAddrInfo** or equivalent Windows APIs, which return a list of IP addresses. The server MUST attempt to connect to each IP address returned in the list. Connections are attempted in sequential order, a single address at a time. If the connection fails, the server MUST attempt to connect to the next IP address in the list.
 
@@ -1199,7 +1199,7 @@ All [**PDUs**](#gt_protocol-data-unit-pdu) sent over SMB MUST be sent as named p
 
 This protocol sequence specifies [**RPC**](#gt_remote-procedure-call-rpc) directly over SPX. There are no intermediate protocols between RPC and SPX. An implementation MAY<6> support this protocol sequence.
 
-When extensions that are not specified in sections [2.1.1](#Section_2) through [2.1.2](#Section_2) are enabled over the SPX transport protocol, the network address MUST be either a Netware machine name or a network and node number. For more information, see [[IPX]](https://go.microsoft.com/fwlink/?LinkId=89914), IPX Addressing.
+When extensions that are not specified in sections [2.1.1](#Section_2.1.1) through [2.1.2](#Section_2.1.2) are enabled over the SPX transport protocol, the network address MUST be either a Netware machine name or a network and node number. For more information, see [[IPX]](https://go.microsoft.com/fwlink/?LinkId=89914), IPX Addressing.
 
 The [**endpoint**](#gt_endpoint) MUST be a 16-bit unsigned integer port number. The network address of the server and the endpoint are not transmitted over the network by these extensions but are used by lower-layer protocols to set up the connection.
 
@@ -1277,12 +1277,12 @@ The sequence numbers SHOULD start at 0 and increase monotonically, wrapping if i
 
 This protocol sequence specifies [**RPC**](#gt_remote-procedure-call-rpc) directly over AppleTalk. There are no intermediate protocols between RPC and AppleTalk. This protocol sequence MAY<15> be supported.
 
-RPC over AppleTalk MUST use a [**well-known endpoint**](#gt_well-known-endpoint). The [**endpoint**](#gt_endpoint) MUST be an AppleTalk Data Stream Protocol (ADSP) socket number, as specified in [AT] section 12. When extensions that are not specified in sections [2.1.1](#Section_2) through [2.1.2](#Section_2) are enabled over ADSP as specified in [AT], the network address MUST be an AppleTalk name or in the format machinename@zonename. If no zone is provided, the protocol MUST default to the client's zone. The network address and endpoint are not transmitted on the network by these extensions but are used by lower-layer protocols to set up the connection.
+RPC over AppleTalk MUST use a [**well-known endpoint**](#gt_well-known-endpoint). The [**endpoint**](#gt_endpoint) MUST be an AppleTalk Data Stream Protocol (ADSP) socket number, as specified in [AT] section 12. When extensions that are not specified in sections [2.1.1](#Section_2.1.1) through [2.1.2](#Section_2.1.2) are enabled over ADSP as specified in [AT], the network address MUST be an AppleTalk name or in the format machinename@zonename. If no zone is provided, the protocol MUST default to the client's zone. The network address and endpoint are not transmitted on the network by these extensions but are used by lower-layer protocols to set up the connection.
 
 <a id="Section_2.1.1.8"></a>
 #### 2.1.1.8 RPC over HTTP (ncacn_http)
 
-This protocol sequence specifies RPC over HTTP. The Remote Procedure Call over HTTP Protocol is the intermediate protocol between RPC and HTTP. RPC over HTTP v1 deviates from the requirements specified in section [2.1.1](#Section_2) (as specified in [MS-RPCH](../MS-RPCH/MS-RPCH.md) section 1.6).
+This protocol sequence specifies RPC over HTTP. The Remote Procedure Call over HTTP Protocol is the intermediate protocol between RPC and HTTP. RPC over HTTP v1 deviates from the requirements specified in section [2.1.1](#Section_2.1.1) (as specified in [MS-RPCH](../MS-RPCH/MS-RPCH.md) section 1.6).
 
 Transport details are as specified in [MS-RPCH] section 2.1.
 
@@ -1321,7 +1321,7 @@ Unless otherwise specified, all padding octets can be set to any arbitrary value
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Connection-Oriented and Connectionless RPC Messages
 
-This section defines the messages that are common to [**connection-oriented RPC**](#gt_connection-oriented-rpc) and [**connectionless RPC**](#gt_connectionless-rpc) [**protocol variants**](#gt_protocol-variant). The messages that are specific to connection-oriented RPC and connectionless RPC are specified in their respective sections, [2.2.2](#Section_2) and [2.2.3](#Section_2).
+This section defines the messages that are common to [**connection-oriented RPC**](#gt_connection-oriented-rpc) and [**connectionless RPC**](#gt_connectionless-rpc) [**protocol variants**](#gt_protocol-variant). The messages that are specific to connection-oriented RPC and connectionless RPC are specified in their respective sections, [2.2.2](#Section_2.2.2) and [2.2.3](#Section_2.2.3).
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Common Types and Constants
@@ -2002,7 +2002,7 @@ packet-beta
 
 **auth_level (1 byte):** MUST contain one of the [**authentication levels**](#gt_authentication-level) as specified in section [2.2.1.1.8](#Section_2.2.1.1.8). The value serves a dual purpose. The first purpose is to specify what security protection is applied to what segment of the PDU, as specified in section 3.3.1.5.2. The second purpose is to serve as a parameter to the [**security provider**](#gt_security-provider) that it SHOULD use to determine how to provide protection for the respective PDU segment. For information on how security providers use that, see the documentation for the respective security provider. If a request or response is fragmented, all PDUs from that request or response MUST have the same **auth_level**.
 
-**auth_pad_length (1 byte):** The number of padding octets, used to 16-byte align the sec_trailer structure, as specified earlier in this section. In the figure "PDU structure with verification trailer" in section [2.2.2.13](#Section_2.2.2.13.1), these octets are referred to as the Authentication Padding Octets.
+**auth_pad_length (1 byte):** The number of padding octets, used to 16-byte align the sec_trailer structure, as specified earlier in this section. In the figure "PDU structure with verification trailer" in section [2.2.2.13](#Section_2.2.2.13), these octets are referred to as the Authentication Padding Octets.
 
 **auth_reserved (1 byte):** SHOULD be 0 on store, and SHOULD be ignored on read.
 
@@ -2122,7 +2122,7 @@ ULONG bits;
 
 } rpc_sec_vt_bitmask;
 
-**command:** Least significant bits 0 through 13 MUST be SEC_VT_COMMAND_BITMASK_1. Bits 14 and 15 are as specified in section [2.2.2.13](#Section_2.2.2.13.1).
+**command:** Least significant bits 0 through 13 MUST be SEC_VT_COMMAND_BITMASK_1. Bits 14 and 15 are as specified in section [2.2.2.13](#Section_2.2.2.13).
 
 **Note** SEC_VT_COMMAND_BITMASK_1 has a value of 0x0001.
 
@@ -2157,7 +2157,7 @@ unsigned SHORT opnum;
 
 } rpc_sec_vt_header2;
 
-**command:** Least significant bits 0 through 13 MUST be SEC_VT_COMMAND_HEADER2 (0x0003). Bits 14 and 15 are as specified in section [2.2.2.13](#Section_2.2.2.13.1).
+**command:** Least significant bits 0 through 13 MUST be SEC_VT_COMMAND_HEADER2 (0x0003). Bits 14 and 15 are as specified in section [2.2.2.13](#Section_2.2.2.13).
 
 **length:** MUST be 0x0010.
 
@@ -2207,7 +2207,7 @@ RPC_SYNTAX_IDENTIFIER TransferSyntax;
 
 } rpc_sec_vt_pcontext;
 
-**command:** Least significant bits 0 through 13 MUST be 0x0002. Bits 14 and 15 are as specified in section [2.2.2.13](#Section_2.2.2.13.1).
+**command:** Least significant bits 0 through 13 MUST be 0x0002. Bits 14 and 15 are as specified in section [2.2.2.13](#Section_2.2.2.13).
 
 **length:** MUST be set to 0x28.
 
@@ -2311,7 +2311,7 @@ These extensions extend the [**PDU**](#gt_protocol-data-unit-pdu) format by defi
 
 The server SHOULD<45> set the PF2_UNRELATED flag in all conv_who_are_you2 and conv_who_are_you_auth requests to indicate to the client that the server can correctly interpret client requests with the flag set.
 
-The client MUST set the PF2_UNRELATED flag in a [REQUEST](#Section_3.2.2.5.1) packet if the packet SHOULD NOT cancel the [**activity's**](#gt_activity) previous call sequence numbers. For usage information, see section [3](#Section_1.3).
+The client MUST set the PF2_UNRELATED flag in a [REQUEST](#Section_3.2.2.5.1) packet if the packet SHOULD NOT cancel the [**activity's**](#gt_activity) previous call sequence numbers. For usage information, see section [3](#Section_3).
 
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 sec_trailer_cl Structure
@@ -2490,7 +2490,7 @@ These extensions allow a higher-level protocol to specify the memory size in byt
 <a id="Section_2.2.4.14"></a>
 #### 2.2.4.14 range
 
-The range attribute is only applicable in [**strict NDR/NDR64 data consistency checking**](#gt_strict-ndrndr64-data-consistency-check), as specified in section [3.1.1.5.3](#Section_3.1.1.5.3.2).
+The range attribute is only applicable in [**strict NDR/NDR64 data consistency checking**](#gt_strict-ndrndr64-data-consistency-check), as specified in section [3.1.1.5.3](#Section_3.1.1.5.3).
 
 <a id="Section_2.2.4.14.1"></a>
 <a id="Section_3.1.1.5.3.2.2.4"></a>
@@ -2524,18 +2524,18 @@ low-val and high-val are integer constant expressions as specified in [[C706]](h
 <a id="Section_3.1.1.5.3.2.2.2"></a>
 #### 2.2.4.15 strict_context_handle
 
-A strict context handle is activated by a strict_context_handle attribute in an [**interface**](#gt_interface) definition block in an [**ACF**](#gt_application-configuration-file-acf). This attribute is only applicable in the [**strict NDR/NDR64 data consistency checking**](#gt_strict-ndrndr64-data-consistency-check) extension specified in section [3.1.1.5.3](#Section_3.1.1.5.3.2).
+A strict context handle is activated by a strict_context_handle attribute in an [**interface**](#gt_interface) definition block in an [**ACF**](#gt_application-configuration-file-acf). This attribute is only applicable in the [**strict NDR/NDR64 data consistency checking**](#gt_strict-ndrndr64-data-consistency-check) extension specified in section [3.1.1.5.3](#Section_3.1.1.5.3).
 
 <a id="Section_2.2.4.16"></a>
 <a id="Section_3.1.1.5.3.3.1.1"></a>
 #### 2.2.4.16 type_strict_context_handle
 
-Type strict context handle is activated by specifying the type_strict_context_handle attribute in an [**interface**](#gt_interface) definition block in an [**ACF**](#gt_application-configuration-file-acf). This attribute is only applicable in target level 6.0 of strict NDR/NDR64 data consistency checking, as specified in section [3.1.1.5.3](#Section_3.1.1.5.3.2).
+Type strict context handle is activated by specifying the type_strict_context_handle attribute in an [**interface**](#gt_interface) definition block in an [**ACF**](#gt_application-configuration-file-acf). This attribute is only applicable in target level 6.0 of strict NDR/NDR64 data consistency checking, as specified in section [3.1.1.5.3](#Section_3.1.1.5.3).
 
 <a id="Section_2.2.4.17"></a>
 #### 2.2.4.17 disable_consistency_check
 
-The Pointer attribute [disable_consistency_check] disables the check specified in section [3.1.1.5.3.3.1.2](#Section_3.1.1.5.3.3.1.2). This attribute is only applicable in the strict NDR/NDR64 data consistency checking extension specified in section [3.1.1.5.3](#Section_3.1.1.5.3.2).
+The Pointer attribute [disable_consistency_check] disables the check specified in section [3.1.1.5.3.3.1.2](#Section_3.1.1.5.3.3.1.2). This attribute is only applicable in the strict NDR/NDR64 data consistency checking extension specified in section [3.1.1.5.3](#Section_3.1.1.5.3).
 
 <a id="Section_2.2.4.18"></a>
 #### 2.2.4.18 Identifier Length
@@ -2655,7 +2655,7 @@ Figure 10: Conformant varying strings
 
 Figure 11: Structure with trailing gap
 
-For more information, see the example in section [4.8](#Section_2.2.5.3.4.1).
+For more information, see the example in section [4.8](#Section_4.8).
 
 <a id="Section_2.2.5.3.4.2"></a>
 ###### 2.2.5.3.4.2 Structure Containing a Conformant Array
@@ -2857,7 +2857,7 @@ The security context handle can be queried using the implementation-specific equ
 - **Client Credential Identity**, as specified in section 3.2.1.4.1.
 - **Authentication Level**
 - **Impersonation Level**, as specified in section [2.2.1.1.9](#Section_2.2.1.1.9).
-- **Token/Authorization Context**, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2. This token is created by the authentication protocols when the RPC client and server authenticate, as specified in [C706] section 13.1 "The Generic RPC Security Model". When the Kerberos authentication protocol is used the token is constructed as in [MS-KILE](../MS-KILE/MS-KILE.md) section 3.4.5.3 "Processing Authorization Data". When the NTLM authentication protocol is used the token is constructed as in [MS-APDS](#Section_3.2.1.5.1) section 3.1.5 "Processing Events and Sequencing Rules". This token can be used for impersonation or obtaining the user SID or a group SID related to the RPC caller, as specified in [Abstract Interface GetRpcImpersonationAccessToken (section 3.3.3.4.3.1)](#Section_3.3.3.4.3.1).
+- **Token/Authorization Context**, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2. This token is created by the authentication protocols when the RPC client and server authenticate, as specified in [C706] section 13.1 "The Generic RPC Security Model". When the Kerberos authentication protocol is used the token is constructed as in [MS-KILE](../MS-KILE/MS-KILE.md) section 3.4.5.3 "Processing Authorization Data". When the NTLM authentication protocol is used the token is constructed as in [MS-APDS](../MS-APDS/MS-APDS.md) section 3.1.5 "Processing Events and Sequencing Rules". This token can be used for impersonation or obtaining the user SID or a group SID related to the RPC caller, as specified in [Abstract Interface GetRpcImpersonationAccessToken (section 3.3.3.4.3.1)](#Section_3.3.3.4.3.1).
 <a id="Section_3.1.1.1.2"></a>
 ##### 3.1.1.1.2 Client Credential Handle
 
@@ -2912,7 +2912,7 @@ These extensions allow for higher-level protocols to issue method calls that are
 <a id="Section_3.1.1.4.2"></a>
 ##### 3.1.1.4.2 Impersonate Client
 
-These extensions allow higher-layer protocols to use a [**security context**](#gt_security-context) to make runtime authorization decisions on the server. When a higher-layer protocol requests the RPC runtime to impersonate the client on the server, the RPC local server [**interface**](#gt_interface) retrieves the security context (section [3.3.1.5.2.2](#Section_3.3.1.5.2.2)) and makes it available to the higher-layer protocol in an implementation-specific manner for the higher-layer protocol's use in future authorization decisions. If a security context is not available for the connection, the attempt to impersonate the client fails. See section [3.3.3.4.3](#Section_3.3.3.4.3.3) for details on the higher-level trigger event associated with retrieving the client's identity.
+These extensions allow higher-layer protocols to use a [**security context**](#gt_security-context) to make runtime authorization decisions on the server. When a higher-layer protocol requests the RPC runtime to impersonate the client on the server, the RPC local server [**interface**](#gt_interface) retrieves the security context (section [3.3.1.5.2.2](#Section_3.3.1.5.2.2)) and makes it available to the higher-layer protocol in an implementation-specific manner for the higher-layer protocol's use in future authorization decisions. If a security context is not available for the connection, the attempt to impersonate the client fails. See section [3.3.3.4.3](#Section_3.3.3.4.3) for details on the higher-level trigger event associated with retrieving the client's identity.
 
 <a id="Section_3.1.1.5"></a>
 #### 3.1.1.5 Message Processing Events and Sequencing Rules
@@ -2961,7 +2961,7 @@ The correlation validation process MUST validate the consistency between the two
 - Union correlation validation: Succeeds if the union tag is equal to the evaluation result for the correlated argument where the correlated argument is determined via the production rules given earlier in this section.
 In these extensions, an expression is allowed in conformance, varying, or union, as specified in section [2.2.4.7](#Section_2.2.4.7). Correlation validation SHOULD check the correlation between the correlated values after the expression is evaluated, and MUST succeed if the correlated values are equal after evaluating the expression.
 
-For correlation validation usage, see the example in section [4.6](#Section_3.1.1.5.3.1).
+For correlation validation usage, see the example in section [4.6](#Section_4.6).
 
 <a id="Section_3.1.1.5.3.2"></a>
 ###### 3.1.1.5.3.2 Target Level 5.0
@@ -2976,47 +2976,47 @@ These extensions clarify the interpretation as specified in [[C706]](https://go.
 <a id="Section_3.1.1.5.3.2.1.1"></a>
 Maximum Count of a Conformant Array or Conformant Varying Array Is Dictated by Another Parameter or Field of a Structure
 
-This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.4.2) and the parameter or field dictating the conformance. If the conformant correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.2.1) and the parameter or field dictating the conformance. If the conformant correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.2"></a>
 Maximum Count of a Conformant Structure or Conformant Varying Structure Is Dictated by a Field of the Structure
 
-This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.4.2) and the field dictating the conformance. If the conformance correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.2.1) and the field dictating the conformance. If the conformance correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.3"></a>
 Maximum Count of a Conformant Array or Conformant Varying Array Is a Constant Defined in IDL File
 
-This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.4.2) and the constant. If the conformance correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.2.1) and the constant. If the conformance correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.4"></a>
 Maximum Count of a Conformant Structure or Conformant Varying Structure Is a Constant
 
-This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.4.2) and the constant. If the conformance correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the conformance [**correlation**](#gt_correlation) between the maximum count of the [conformant array](#Section_2.2.5.3.2.1) and the constant. If the conformance correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.5"></a>
 first_is of a Varying Array or Conformant Varying Array Is Specified by Another Parameter or Field of a Structure
 
-This target level implementation of these extensions SHOULD validate the offset [**correlation**](#gt_correlation) between the offset of the [varying array](#Section_2.2.5.3.4.3) and the parameter or field dictating the offset. If the offset correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the offset [**correlation**](#gt_correlation) between the offset of the [varying array](#Section_2.2.5.3.2.2) and the parameter or field dictating the offset. If the offset correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.6"></a>
 first_is of a Conformant Varying Structure Is Specified by a Field in the Structure
 
-This target level implementation of these extensions SHOULD validate the offset [**correlation**](#gt_correlation) between the offset of the [varying array](#Section_2.2.5.3.4.3) and the field dictating the offset. If the offset correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the offset [**correlation**](#gt_correlation) between the offset of the [varying array](#Section_2.2.5.3.2.2) and the field dictating the offset. If the offset correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.7"></a>
 first_is of a Varying Array, Conformant Varying Array, or Conformant Varying Structure Is Not Present in IDL
 
-This target-level implementation of these extensions SHOULD validate that the offset of the [varying array](#Section_2.2.5.3.4.3) equals 0 (zero). If the offset value is not 0 (zero), the implementation MUST indicate the octet stream as invalid.
+This target-level implementation of these extensions SHOULD validate that the offset of the [varying array](#Section_2.2.5.3.2.2) equals 0 (zero). If the offset value is not 0 (zero), the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.8"></a>
 Actual Count of a Varying Array or Conformant Varying Array Is Dictated by Another Parameter or Field of a Structure
 
-This target level implementation of these extensions SHOULD validate the varying [**correlation**](#gt_correlation) between the actual count of the [varying array](#Section_2.2.5.3.4.3) and the parameter or field dictating the actual count. If the varying correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the varying [**correlation**](#gt_correlation) between the actual count of the [varying array](#Section_2.2.5.3.2.2) and the parameter or field dictating the actual count. If the varying correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.9"></a>
 Actual Count of a Conformant Varying Structure Is Dictated by a Field in the Structure
 
-This target level implementation of these extensions SHOULD validate the varying [**correlation**](#gt_correlation) between the actual count of the [varying array](#Section_2.2.5.3.4.3) and the field dictating the actual count. If the varying correlation validation fails, the implementation MUST indicate the octet stream as invalid.
+This target level implementation of these extensions SHOULD validate the varying [**correlation**](#gt_correlation) between the actual count of the [varying array](#Section_2.2.5.3.2.2) and the field dictating the actual count. If the varying correlation validation fails, the implementation MUST indicate the octet stream as invalid.
 
 <a id="Section_3.1.1.5.3.2.1.10"></a>
 Maximum Count of a Conformant and Varying String Is Dictated by Another Parameter or Field of a Structure
@@ -3522,7 +3522,7 @@ When the client or server must send a burst of fragments, it attempts to send a 
 
 Response to Packets:
 
-When a packet with **PF_NOFACK** cleared is received, the recipient sends a FACK with a version-zero body. The **max_tdsu** field is set to the maximum [**PDU**](#gt_protocol-data-unit-pdu) length for the transport (for more information, see section [2.1.2](#Section_2)). The **max_frag_size** field is set to the maximum unfragmented packet length for the transport (for more information, see section 2.1.2). The **window_size** field is calculated by dividing a version-specific constant by the number of calls currently using the port.<78> For client ports, the number of calls is typically one, but might be higher if multiple asynchronous calls are in progress. If the resulting window size is less than one, it is set to one. If the resulting window size is greater than 32, it is set to 32. The **serial_num** field is set to the current value of the Send Window (Call) ADM element's **Receive serial number** property. The **selack_num**, **selack**, and **header** fragnum fields are set based on the fragments received, as specified in [C706] section 12. When an [**RPC**](#gt_remote-procedure-call-rpc) receives a fragment with a length signifying a **Maximum PDU Length** larger than the current value in the **Send Window**, the implied length is calculated by rounding the total packet length down to the nearest multiple of 8. The activity's **Maximum PDU Length** is then set to the lower of this rounded value and the local transport limit. Therefore, the new value takes effect with the next call of the activity.
+When a packet with **PF_NOFACK** cleared is received, the recipient sends a FACK with a version-zero body. The **max_tdsu** field is set to the maximum [**PDU**](#gt_protocol-data-unit-pdu) length for the transport (for more information, see section [2.1.2](#Section_2.1.2)). The **max_frag_size** field is set to the maximum unfragmented packet length for the transport (for more information, see section 2.1.2). The **window_size** field is calculated by dividing a version-specific constant by the number of calls currently using the port.<78> For client ports, the number of calls is typically one, but might be higher if multiple asynchronous calls are in progress. If the resulting window size is less than one, it is set to one. If the resulting window size is greater than 32, it is set to 32. The **serial_num** field is set to the current value of the Send Window (Call) ADM element's **Receive serial number** property. The **selack_num**, **selack**, and **header** fragnum fields are set based on the fragments received, as specified in [C706] section 12. When an [**RPC**](#gt_remote-procedure-call-rpc) receives a fragment with a length signifying a **Maximum PDU Length** larger than the current value in the **Send Window**, the implied length is calculated by rounding the total packet length down to the nearest multiple of 8. The activity's **Maximum PDU Length** is then set to the lower of this rounded value and the local transport limit. Therefore, the new value takes effect with the next call of the activity.
 
 <a id="Section_3.2.1.6"></a>
 #### 3.2.1.6 Timer Events
@@ -3545,7 +3545,7 @@ This section specifies a conceptual model of possible data organization that an 
 <a id="Section_3.2.2.1.1"></a>
 ##### 3.2.2.1.1 Supports PF2_Unrelated Flag
 
-**Supports PF2_Unrelated Flag**: The flag is a Boolean value that indicates whether the server supports overlapping calls for a single [**activity**](#gt_activity). See section [4.3](#Section_3.2.2.1.4) for a description of the packet exchange happening between a client and a server.
+**Supports PF2_Unrelated Flag**: The flag is a Boolean value that indicates whether the server supports overlapping calls for a single [**activity**](#gt_activity). See section [4.3](#Section_4.3) for a description of the packet exchange happening between a client and a server.
 
 The flag is initialized to FALSE.
 
@@ -3574,7 +3574,7 @@ It is updated when a **conv_who_are_you2** conversation callback is performed by
 - **Current Call**: A reference to a **Call** element in the List of Active Calls. The **Current Call** is the call for which the client is actively sending fragments and, possibly, waiting for a response from the server. The **Current Call** is initialized for a new **Activity** to NULL but will be updated to a new **Call** element as soon as it is created in the new activity. See section [3.2.2.4.1.5](#Section_3.2.2.4.1.5) for details of the relationship between **Current Call** and the **List of Active Calls**.
 - **Delayed-Ack Timer**: The client MUST store a reference to an instance of a **Delayed-Ack Timer** for the **current call** of this activity.
 - **List of Active Calls**: A list of active **call** elements. The list is ordered such that the most recent call on the activity (the Call with the highest **call_id**) is always last on the list and the active call with the lowest **call_id** is at the front of the list. The client MUST remove calls from the list when they transition to STATE_COMPLETE or STATE_FAULT.
-- [Context-Handle Keep-Alive Timer](#Section_3.2.2.6.2)
+- [Context-Handle Keep-Alive Timer](#Section_3.2.2.2.4)
 - **Context Handle Count**: Each activity maintains a list of active context handles as a 32-bit unsigned integer. Context handles are defined in [C706] section 4.2.16.6. The processing rules for creating and releasing context handles are found in [C706] section 6.1.6. **Context Handle Count** is initialized to zero when a new activity is created. **Context Handle Count** is incremented when a new context handle is created and decremented when one is released.
 - **Maximum_window_size**: An unsigned 32-bit integer representing the maximum number of unacknowledged fragments that can be sent to the server. This value is set to one for the first call of an activity. The maximum supported value is 32. This value is continuously updated by the **window_size** field of a FACK or NOCALL.
 - **Maximum PDU Length**: Each activity tracks the size of the largest packet that can be sent and received by the transport. This value is set to 1,024 bytes for the first call of an activity. At the end of each call, the current value is stored in the activity, and the next call begins with the stored value. When a FACK or NOCALL is received, the value is updated to the lower of the local transport limit and the value in the packet's **max_tsdu** field.
@@ -3597,7 +3597,7 @@ When the **Active Call Reference counter** for an Activity reaches zero, the Act
 
 A **Collection of Inactive Activities** is initially empty and gets a new element added to it when the Active Call Reference counter for an activity goes to zero.
 
-**Activity** elements are removed from the **Collection of Inactive Activities** by the [Inactive Activity Timer](#Section_3.2.2.6.1).
+**Activity** elements are removed from the **Collection of Inactive Activities** by the [Inactive Activity Timer](#Section_3.2.2.2.5).
 
 <a id="Section_3.2.2.1.7"></a>
 ##### 3.2.2.1.7 Client Address Space
@@ -3675,7 +3675,7 @@ Figure 16: State transitions
 <a id="Section_3.2.2.2.1"></a>
 ##### 3.2.2.2.1 Packet Retransmission Timer
 
-The packet retransmission timer is started when the client call transmits a [REQUEST](#Section_3.2.2.5.1), [FACK](#Section_3.2.3.5.6), [PING](#Section_3.2.2.5.2), or [QUIT](#Section_3.2.3.5.7) packet. The timer is canceled when the client receives a response from the server. If the timer expires, the previously transmitted packet SHOULD be considered lost, and the client SHOULD send new packets following the procedure specified in section [3.2.1.5.3](#Section_3.2.1.5.3). If the call's **F_CANCELED** flag is set, a QUIT packet is sent; otherwise, the packet type depends on the **Call State**:
+The packet retransmission timer is started when the client call transmits a [REQUEST](#Section_3.2.2.5.1), [FACK](#Section_3.2.2.5.10), [PING](#Section_3.2.2.5.2), or [QUIT](#Section_3.2.2.5.9) packet. The timer is canceled when the client receives a response from the server. If the timer expires, the previously transmitted packet SHOULD be considered lost, and the client SHOULD send new packets following the procedure specified in section [3.2.1.5.3](#Section_3.2.1.5.3). If the call's **F_CANCELED** flag is set, a QUIT packet is sent; otherwise, the packet type depends on the **Call State**:
 
 - STATE_SEND_FRAGS -> REQUEST
 - STATE_DISPATCHED-> PING
@@ -3810,7 +3810,7 @@ The packet type MUST be one of the connectionless packet types specified in [C70
 
 For a non-[REQUEST](#Section_3.2.2.5.1) packet, the activity ID and the sequence number in the packet MUST match those of the call itself. If the **auth_proto** field is nonzero, the implementation MUST compare the **auth_proto** to the authentication level of the activity's **Security Context Handle** and then the packet MUST be verified by using the activity's **Security Context Handle**, as described in section [3.2.1.4.1.1](#Section_3.2.1.4.1.1). Otherwise, the packet MUST be discarded silently.
 
-A packet that has not been discarded by one of the preceding rules MUST cancel the call packet retransmission timer, as specified in section [3.2.2.2.1](#Section_3.2.2.2.1). If the server uses a [**dynamic endpoint**](#gt_dynamic-endpoint) and the [**CAS**](#gt_client-address-space-cas) points to the [**endpoint mapper**](#gt_endpoint-mapper) endpoint for the protocol, the CAS SHOULD be updated to point to the server endpoint that sent the packet. For more information, see the protocol example in section [4.5](#Section_3.3.1.1.2).
+A packet that has not been discarded by one of the preceding rules MUST cancel the call packet retransmission timer, as specified in section [3.2.2.2.1](#Section_3.2.2.2.1). If the server uses a [**dynamic endpoint**](#gt_dynamic-endpoint) and the [**CAS**](#gt_client-address-space-cas) points to the [**endpoint mapper**](#gt_endpoint-mapper) endpoint for the protocol, the CAS SHOULD be updated to point to the server endpoint that sent the packet. For more information, see the protocol example in section [4.5](#Section_4.5).
 
 The following sections define handling of specific packet types.
 
@@ -3829,7 +3829,7 @@ When processing a PING PDU, an implementation MUST examine the Callback State (s
 <a id="Section_3.2.2.5.3"></a>
 ##### 3.2.2.5.3 RESPONSE
 
-The response fragment number is compared to the **Receive Fragment Base**. If the fragment number is less than the **Receive Fragment Base**, then the fragment MUST be discarded. If the fragment number is greater than or equal to the **Receive Fragment Base**, then the fragment is added to the **Received Fragment List**, and a [FACK](#Section_3.2.3.5.6) MUST be sent unless the packet's Header.Flags.Nofack flag is set. If the **Call State** is STATE_SEND_FRAGS or STATE_DISPATCHED, the **Call State** MUST change to STATE_RECEIVE_FRAGS. If the fragment number indicates that all inbound fragments are received, [**RPC**](#gt_remote-procedure-call-rpc) MUST deliver the data to the client application, and the call MUST set **Call State** to STATE_ACK_PENDING if there is no next queued call in the activity's **List of Active Calls**. If there is a next queued call, the call's **Call State** is set to STATE_COMPLETE.
+The response fragment number is compared to the **Receive Fragment Base**. If the fragment number is less than the **Receive Fragment Base**, then the fragment MUST be discarded. If the fragment number is greater than or equal to the **Receive Fragment Base**, then the fragment is added to the **Received Fragment List**, and a [FACK](#Section_3.2.2.5.10) MUST be sent unless the packet's Header.Flags.Nofack flag is set. If the **Call State** is STATE_SEND_FRAGS or STATE_DISPATCHED, the **Call State** MUST change to STATE_RECEIVE_FRAGS. If the fragment number indicates that all inbound fragments are received, [**RPC**](#gt_remote-procedure-call-rpc) MUST deliver the data to the client application, and the call MUST set **Call State** to STATE_ACK_PENDING if there is no next queued call in the activity's **List of Active Calls**. If there is a next queued call, the call's **Call State** is set to STATE_COMPLETE.
 
 All fragments related to a packet are removed from the **Received Fragment List** when a full packet can be formed.
 
@@ -3979,7 +3979,7 @@ The server deletes a **CAS UUID** and its associated context handles and activit
 
 **Table of Active Calls per Activity**: The server maintains a table of active calls per activity. Each call is indexed by the call sequence number, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 9.5.3. In general, calls are removed from the table when the call transitions to **STATE_COMPLETE**. Calls are also removed from the **Table of Active Calls per Activity** if they have been idle for more than an implementation-specific period of time. See Idle Scavenger Timer for details on idle call removal. A new entry is added to the table when a new call arrives with a sequence number greater than or equal to the Lowest-Unused-Sequence Counter for the activity.
 
-There is no provision for overflow of sequence numbers sent by the client. If the sequence number wraps around, the server will not create a new entry and in such a case will result in discarded packets as described in section [3.2.3.5.4](#Section_3.2.3.5.4.3). A client interacting with a server MUST NOT wrap around the sequence number on a specific activity.
+There is no provision for overflow of sequence numbers sent by the client. If the sequence number wraps around, the server will not create a new entry and in such a case will result in discarded packets as described in section [3.2.3.5.4](#Section_3.2.3.5.4). A client interacting with a server MUST NOT wrap around the sequence number on a specific activity.
 
 <a id="Section_3.2.3.1.8"></a>
 ##### 3.2.3.1.8 Call
@@ -4110,7 +4110,7 @@ If a fragmented request with multiple [**PDUs**](#gt_protocol-data-unit-pdu) inc
 <a id="Section_3.2.3.5.3"></a>
 ##### 3.2.3.5.3 Packet Processing
 
-Received packets MUST have a valid [**RPC**](#gt_remote-procedure-call-rpc) header, and the packet type MUST be one of the following: [REQUEST](#Section_3.2.2.5.1), [PING](#Section_3.2.2.5.2), [FACK](#Section_3.2.3.5.6), [QUIT](#Section_3.2.3.5.7), or [ACK](#Section_3.2.2.5.8). Other packet types MUST be discarded.
+Received packets MUST have a valid [**RPC**](#gt_remote-procedure-call-rpc) header, and the packet type MUST be one of the following: [REQUEST](#Section_3.2.2.5.1), [PING](#Section_3.2.2.5.2), [FACK](#Section_3.2.2.5.10), [QUIT](#Section_3.2.2.5.9), or [ACK](#Section_3.2.2.5.8). Other packet types MUST be discarded.
 
 If the PDU's activity ID matches an existing activity on the server, but the PDU's **dc_rpc_cl_pkt_hdr_t.auth_proto** or **sec_trailer_cl.auth_level** fields do not match those in the activity, the server SHOULD ignore the packet.<91>
 
@@ -4361,9 +4361,9 @@ The process continues on the server as follows:
 
 - If the server receives a bind PDU, it MUST respond with a bind_ack or bind_nak PDU.
 - If a server receives an alter_context PDU, it MUST respond with an alter_context_resp PDU or, in the case of error, with a fault PDU.
-In case of catastrophic errors (such as an out of memory condition or buffer overrun), a server MAY send a fault PDU or just close the connection. For information on client and server state machines, see sections [3.3.2](#Section_1.3) and [3.3.3](#Section_1.3).
+In case of catastrophic errors (such as an out of memory condition or buffer overrun), a server MAY send a fault PDU or just close the connection. For information on client and server state machines, see sections [3.3.2](#Section_3.3.2) and [3.3.3](#Section_3.3.3).
 
-Once a client decides on the type of PDU, it MUST start the sequence by requesting the security provider for an authentication token using an implementation-specific equivalent of the abstract GSS_Init_sec_context call, as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). See [MS-APDS](#Section_3.2.1.5.1) section 3.1.5 for NTLM details and see [[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459) and [MS-KILE](../MS-KILE/MS-KILE.md) section 3.2.5.2 for Kerberos details. This PDU MUST be sent to the server with authentication information added, as specified in section [2.2.2.11](#Section_2.2.2.11).
+Once a client decides on the type of PDU, it MUST start the sequence by requesting the security provider for an authentication token using an implementation-specific equivalent of the abstract GSS_Init_sec_context call, as specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). See [MS-APDS](../MS-APDS/MS-APDS.md) section 3.1.5 for NTLM details and see [[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459) and [MS-KILE](../MS-KILE/MS-KILE.md) section 3.2.5.2 for Kerberos details. This PDU MUST be sent to the server with authentication information added, as specified in section [2.2.2.11](#Section_2.2.2.11).
 
 When authentication information is associated with a connection as specified in section 2.2.2.11 and **auth_length** is nonzero as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 13.2.6, the Security Context contains a token that represents the client identity populated by the security provider. See [MS-APDS] section 3.1.5 "Processing Events and Sequencing Rules" and [MS-KILE] section 3.4.5.3 "Processing Authorization Data" for details of population of the token. See [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2 "Token/Authorization Context" for details of the members of tokens.
 
@@ -4435,7 +4435,7 @@ The PDU header, PDU body, and sec_trailer from the output message of GSS_WrapEx 
 
 If the authentication level is RPC_C_AUTHN_LEVEL_PKT_PRIVACY, the PDU body will be encrypted. The PDU body from the output message of GSS_UnwrapEx represents the plain text version of the PDU body. The PDU header and sec_trailer output from the output message SHOULD be ignored. Similarly the signature output SHOULD be ignored.
 
-For further details on GSS_WrapEx, see [MS-NLMP](#Section_3.2.1.5.1) section 3.4.6 , [MS-KILE](../MS-KILE/MS-KILE.md) section 3.4.5.4 and [MS-TLSP](#Section_5) section 3.1.5.1.
+For further details on GSS_WrapEx, see [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.4.6 , [MS-KILE](../MS-KILE/MS-KILE.md) section 3.4.5.4 and [MS-TLSP](../MS-TLSP/MS-TLSP.md) section 3.1.5.1.
 
 For details on GSS_UnwrapEx, see [MS-NLMP] section 3.4.7 , [MS-KILE] section 3.4.5.5 and [MS-TLSP] section 3.1.5.2.
 
@@ -5275,7 +5275,7 @@ The size of the structure in the octet stream contains a 2-byte trailing gap to 
 <a id="Section_5.1.1"></a>
 ### 5.1.1 Authentication Levels
 
-Implementations can create programming [**interfaces**](#gt_interface) and corresponding documentation for accessing functionality offered by these extensions in a way that encourages higher-level protocols to use [**authentication levels**](#gt_authentication-level) of RPC_C_AUTHN_LEVEL_PKT_INTEGRITY and RPC_C_AUTHN_LEVEL_PKT_PRIVACY. Lower authentication levels provide weak security only. If integrity or confidentiality protection is requested, it SHOULD be provided either by the security provider or by using the verification trailer, as specified in section [2.2.2.13](#Section_2.2.2.13.1).
+Implementations can create programming [**interfaces**](#gt_interface) and corresponding documentation for accessing functionality offered by these extensions in a way that encourages higher-level protocols to use [**authentication levels**](#gt_authentication-level) of RPC_C_AUTHN_LEVEL_PKT_INTEGRITY and RPC_C_AUTHN_LEVEL_PKT_PRIVACY. Lower authentication levels provide weak security only. If integrity or confidentiality protection is requested, it SHOULD be provided either by the security provider or by using the verification trailer, as specified in section [2.2.2.13](#Section_2.2.2.13).
 
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Preferred Security Providers
@@ -5780,8 +5780,8 @@ The following table documents the conformance of [**RPC**](#gt_remote-procedure-
 | Implementations support the naming, syntax, and semantics for [**stubs**](#gt_stub), as specified in chapter 5. | Conforms except where noted in this specification in sections 2.2.4 through 2.2.7, 3.1.1.5, and [3.1.2.5.1](#Section_3.1.2.5.1). |
 | Implementations support the semantics specified in chapter 6. | Conforms, except that Microsoft support for NSI interface and associated extensions to name service are detailed in [MS-RPCL] have been deprecated. |
 | Implementations support the service semantics specified in chapter 7. | Conforms. |
-| Implementations follow the conformance rules specified in chapter 9. | This specification redefines the state machines of [C706] in sections [3.2.1.1.1](#Section_3.2.1.1.1), [3.2.2.1](#Section_3.2.2.1), [3.2.3.1](#Section_3.2.3.1), [3.3.2](#Section_1.3), and [3.3.3](#Section_1.3). |
-| Implementations support the syntax of the [**PDU**](#gt_protocol-data-unit-pdu) encodings in chapter 12. | Conforms except where noted in this specification in sections [2.2.2](#Section_2) and [2.2.3](#Section_2). |
+| Implementations follow the conformance rules specified in chapter 9. | This specification redefines the state machines of [C706] in sections [3.2.1.1.1](#Section_3.2.1.1.1), [3.2.2.1](#Section_3.2.2.1), [3.2.3.1](#Section_3.2.3.1), [3.3.2](#Section_3.3.2), and [3.3.3](#Section_3.3.3). |
+| Implementations support the syntax of the [**PDU**](#gt_protocol-data-unit-pdu) encodings in chapter 12. | Conforms except where noted in this specification in sections [2.2.2](#Section_2.2.2) and [2.2.3](#Section_2.2.3). |
 | Implementations support the Authentication Verifier encodings, as specified in chapter 13. | Conforms except as noted in section [2.2.2.11](#Section_2.2.2.11). |
 | Implementations support the rules and encodings for [**NDR**](#gt_network-data-representation-ndr), as specified in chapter 14. | Conforms except where noted in this specification in sections 2.2.4 through 2.2.7, 3.1.1.5, 3.1.2.5.1, [3.1.2.7.1](#Section_3.1.2.7.1), and [3.1.3.5](#Section_3.1.3.5). |
 | Implementations support the syntax, semantics, and encoding for [**UUIDs**](#gt_universally-unique-identifier-uuid), as specified in appendix A. | Conforms except where noted in this specification in section [2.2.1.1.3](#Section_2.2.1.1.3). |
@@ -5799,7 +5799,7 @@ The following table documents the conformance of [**RPC**](#gt_remote-procedure-
 | Implementations support the syntax and semantics of the dce_error_inq_text routine specified in appendix M. | Conforms. |
 | Implementations adhere to the mappings for transfer syntax UUIDs, as specified in appendix N. | Conforms except where noted in this specification in section [3.3.1.5.3](#Section_3.3.1.5.3) and [2.2.5.1](#Section_2.2.5.1). Remote Procedure Call extensions uses an NDR64 transfer syntax UUID (section 2.2.5.1) which modifies section 2.3 of [C706] "Binding" and adds addition UUID_type_identifiers to the list specified in Appendix I. |
 | Implementations support the endpoint mapper semantics, as specified in appendix O. | Conforms except where noted in this specification in section [2.2.1.2](#Section_2.2.1.2). |
-| Implementations support the conversation manager semantics, as specified in appendix P. | Conforms except where noted in this specification in section [3.2](#Section_1.3). |
+| Implementations support the conversation manager semantics, as specified in appendix P. | Conforms except where noted in this specification in section [3.2](#Section_3.2). |
 | Implementations support the remote management semantics, as specified in appendix Q. | Conforms except where noted in this specification in section [2.2.1.3](#Section_2.2.1.3). |
 | Implementations register all protocol sequences with the Open Software Foundation (OSF), as specified in [C706] appendix B. | The protocol sequence strings listed in section 2.1 that are not already specified in [C706] appendix B have not been registered with OSF. |
 
