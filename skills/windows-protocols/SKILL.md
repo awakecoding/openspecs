@@ -1,6 +1,6 @@
 ---
 name: windows-protocols
-description: Local Microsoft Open Specifications corpus navigator for Windows protocols. Use this skill when the user asks protocol-level questions, needs message/structure details, wants section-by-section summaries, or needs cross-references across related specifications.
+description: "Look up Microsoft Open Specifications for Windows protocols — find packet structures, field definitions, protocol handshakes, and security semantics for SMB, NTLM, Kerberos, RDP, DFS, and more. Use this skill when the user asks about Windows protocol wire formats, needs to trace message flows, wants to extract structure definitions, compare protocol extensions, or cross-reference related specs like MS-SMB2, MS-NLMP, MS-RDPBCGR."
 ---
 
 # Windows Protocols Corpus Navigator
@@ -29,18 +29,7 @@ This skill is optimized for structure-first navigation of Microsoft Open Specifi
 
 ## Protocol Clusters by Domain
 
-When using Overview documents for discovery, expect these cluster themes:
-
-- **Authentication**: Kerberos, NTLM, SPNEGO — core for file access, RDP, Group Policy.
-- **File Access**: SMB/CIFS family, DFS, WebDAV, shared types (FSCC, FSA).
-- **Remote Desktop**: Base + graphics pipeline, gateway, virtual channels (clipboard, devices, transport).
-- **Storage**: Disk/volume management, shadow copies, EFS, backup, removable media.
-- **Group Policy**: Core protocol + extensions; depends on AD and file access.
-- **Network Access Protection**: SoH/SoHR over PEAP; DHCP/VPN/TSGU/IPsec enforcement.
-- **Content Caching**: Peer discovery, retrieval, hosted cache; integrates with SMB/HTTP.
-- **File Services Management**: FSRM, remote VSS, classification.
-- **Rights Management**: Publish/consume protected content.
-- **Virtual Storage**: Remote shared virtual disks over SMB.
+For a full domain-to-protocol mapping, see [REFERENCE.md](REFERENCE.md). Key clusters: Authentication (Kerberos, NTLM, SPNEGO), File Access (SMB/CIFS, DFS), Remote Desktop (MS-RDP*), Storage, Group Policy. Use Overview documents for authoritative cluster membership.
 
 ## Protocol Naming and Scope
 
@@ -64,19 +53,12 @@ Do not use this skill as the primary source for:
 
 If a required protocol is missing from root-level `MS-*` directories, state that explicitly and ask the user for the exact protocol ID or a narrower feature scope.
 
-## Navigation Strategy
-
-- **Domain/topic questions** (file access, authentication, storage, remote desktop, etc.): Start with the corresponding Overview document from README. Use it as a map to identify which specifications to read. Follow its links into those specs.
-- **Protocol-ID questions**: Go directly to the spec if the ID is known.
-- **Principle**: Overview documents are the primary entry point for topical discovery. README provides the index of Overview docs and the full protocol list, but does not contain the semantic mapping (topic → protocols) found in Overviews.
-- **Anti-pattern**: Do not rely on README keyword search alone. A shallow grep of README may return protocol IDs from unrelated domains; overview documents provide the curated topic-to-protocol mapping.
-
 ## Navigation Workflow
 
-1. For topical questions: Identify the domain from the question, match to an Overview document in README, read it to obtain linked member specs, then follow links into those specs.
-2. For known protocol IDs: Validate in `README.md` and directory names (`<PROTOCOL-ID>/`), then open the spec.
+1. **Domain/topic questions** — find the matching Overview document in README first; use it as a map to the relevant specs. Do not rely on README keyword search alone — Overview documents provide the curated topic-to-protocol mapping.
+2. **Known protocol IDs** — validate the ID exists in `README.md` and as a `<PROTOCOL-ID>/` directory, then open the spec directly.
 3. Start from the spec TOC (`<summary>` blocks and numbered entries) before deep reading.
-4. Read sections in this order by intent: orientation/versioning, message or structure syntax, behavior and sequencing, security and product behavior notes.
+4. Read sections by intent: orientation/versioning → message/structure syntax → behavior/sequencing → security and product behavior notes.
 5. Cross-check base vs extension specs when requirements may be split.
 6. Answer with explicit protocol IDs and exact section headings; separate confirmed facts from inference.
 
@@ -87,34 +69,9 @@ If a required protocol is missing from root-level `MS-*` directories, state that
 - When a spec references another spec for types, extensions, or dependencies, follow that link to reach the authoritative source.
 - Continue following links until the relevant information is found; do not stop at the first document that mentions the topic.
 
-## Canonical Spec Structure (Corpus-Guided)
+## Canonical Spec Structure
 
-The corpus is highly consistent. The most common top-level sequence is:
-
-- `1 Introduction`
-- `2 Messages`
-- `3 Protocol Details`
-- `4 Protocol Examples`
-- `5 Security`
-
-Common `1.x` orientation subsections include:
-
-- `1.1 Glossary`, `1.2 References`, `1.3 Overview`
-- `1.4 Relationship to Other Protocols`
-- `1.5 Prerequisites/Preconditions`
-- `1.7 Versioning and Capability Negotiation`
-
-Common `3.x.y` behavioral subsections include:
-
-- `Abstract Data Model`
-- `Timers`
-- `Initialization`
-- `Higher-Layer Triggered Events`
-- `Message Processing Events and Sequencing Rules`
-- `Timer Events`
-- `Other Local Events`
-
-Use these sections as the default reading spine unless the document is an outlier.
+Specs follow a consistent layout: `1 Introduction` → `2 Messages` → `3 Protocol Details` → `4 Protocol Examples` → `5 Security`. Use these as the default reading spine. For detailed subsection maps (1.x orientation, 3.x.y behavioral), see [REFERENCE.md](REFERENCE.md).
 
 ## Section-First Reading Playbook
 
@@ -134,23 +91,13 @@ When structure spans multiple specs, resolve in this order:
 
 ## Outlier Handling
 
-Not all specs use the exact canonical headings. Handle these common variants:
-
-- `2 Structures`, `2 Attributes`, `2 Data Types`, `2 Message Transport` instead of `2 Messages`.
-- `3 Structure Examples`, `3 Details`, or algorithm-specific section names.
-- `4 Security` or `4 Security Considerations` when numbering shifts.
-- Appendix variants such as `Full IDL`, `Full WSDL`, `Full XML Schema`, `Full JSON Schema`.
-- Change tracking may appear as section `7`, `8`, `9`, or higher.
-
-Rule: match by semantic intent first, section number second.
+Not all specs use exact canonical headings (e.g. `2 Structures` instead of `2 Messages`, shifted security numbering). Match by **semantic intent first, section number second**. See [REFERENCE.md](REFERENCE.md) for the full list of known heading variants.
 
 ## Quick Discovery Patterns
 
-- When the protocol ID is unknown: Identify the domain first from question keywords, then open the matching Overview document before picking specs. Use its Protocol Summary or References section to obtain the correct spec list.
-- Do not select specs from README's flat Technical Documents list without consulting an Overview when the domain is ambiguous.
-- When the user provides a specific protocol ID: Go directly to that spec.
-- For extension behavior: Verify whether requirements are in a base protocol or an extension; Overview docs and spec cross-references help clarify dependencies.
-- For ambiguous acronyms: List 2–4 likely protocols (via Overview docs) and ask the user to choose before deep analysis.
+- **Unknown protocol ID** — identify the domain from question keywords, open the matching Overview document, use its Protocol Summary or References section to find the right specs. Do not select from README's flat Technical Documents list without consulting an Overview when the domain is ambiguous.
+- **Ambiguous acronyms** — list 2–4 likely protocols (via Overview docs) and ask the user to choose before deep analysis.
+- **Extension behavior** — verify whether requirements live in the base protocol or an extension; Overview docs and spec cross-references clarify dependencies.
 
 ## Answer Contract (Semi-Structured)
 
