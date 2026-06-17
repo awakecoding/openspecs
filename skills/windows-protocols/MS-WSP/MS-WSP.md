@@ -223,7 +223,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 6/23/2025.
+Last updated: 3/9/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -2178,7 +2178,7 @@ packet-beta
 | 0x000000F2 | [CPMFindIndicesIn](#Section_2.2.3.27), or [CPMFindIndicesOut](#Section_2.2.3.28) |
 | 0x000000F3 | [CPMSetScopePrioritizationIn](#Section_2.2.3.31) or [CPMSetScopePrioritizationOut](#Section_2.2.3.32) |
 | 0x000000F4 | [CPMGetScopeStatisticsIn](#Section_2.2.3.33) or [CPMGetScopeStatisticsOut](#Section_2.2.3.34) |
-| - | [CPMExternalSearchResultIn](#Section_2.2.3.35) |
+| 0x000000F5 | [CPMExternalSearchResultIn](#Section_2.2.3.35) |
 
 **_status (4 bytes):** An [**HRESULT**](#gt_hresult), indicating the status of the requested operation. The client MUST initialize this value to 0x00000000. The server then changes it as the status of the requested operation changes.
 
@@ -4346,7 +4346,7 @@ When the server receives a **CPMExternalSearchResultIn** request message from th
 - Process the parsed results using inverted query layer.
 - File path of each result row-set MUST be converted to work identifier.
 - All results MUST be merged, de-duplicated and ranked along with lexical and semantic result row-set.
-- If the above processing is successful, the server MUST set **_status** field in the message header to zero. Otherwise, any other error code returned SHOULD be treated as informative only.
+- If the above processing is successful, the server MUST send only the **Message Headers** (section [2.2.2](#Section_2.2.2)) to the client by setting **_status** field to zero and **_msg** to CPMExternalSearchResultIn. Otherwise, any other error code returned SHOULD be treated as informative only.
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
@@ -5848,10 +5848,10 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.1.12](#Section_2.2.1.12) CCoercionRestriction | Added Windows Server 2025 applicability | Major |
-| [2.2.1.17](#Section_2.2.1.17) CRestriction | Added Windows Server 2025 applicability | Major |
-| [2.2.1.46](#Section_2.2.1.46) CRankMergeRestriction | Added Windows Server 2025 applicability | Major |
-| [2.2.3.35](#Section_2.2.3.35) CPMExternalSearchResultIn | Added Windows Server 2025 applicability | Major |
+| [2.2.2](#Section_2.2.2) Message Headers | 32098 : Added value of _msg for "CPMExternalSearchResultIn". | Major |
+| 2.2.2 Message Headers | 32098 : Added the value of _msg for "CPMExternalSearchResultIn". | Major |
+| [3.1.5.2.19](#Section_3.1.5.2.19) Receiving a CPMExternalSearchResultIn Request | 32097 : Updated "_status" handling in the CPMExternalSearchResultIn message header. | Major |
+| 3.1.5.2.19 Receiving a CPMExternalSearchResultIn Request | 32097 : Added the response specification for "CPMExternalSearchResultIn". | Major |
 
 <a id="revision-history"></a>
 
@@ -5926,3 +5926,4 @@ The changes made to this document are listed in the following table. For more in
 | 9/16/2024 | 38.0 | None | No changes to the meaning, language, or formatting of the technical content. |
 | 3/10/2025 | 39.0 | Major | Significantly changed the technical content. |
 | 6/23/2025 | 40.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 41.0 | Major | Significantly changed the technical content. |

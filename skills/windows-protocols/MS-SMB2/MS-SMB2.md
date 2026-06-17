@@ -338,7 +338,7 @@ Table of Contents
       - [3.2.5.16 Receiving an SMB2 CHANGE_NOTIFY Response](#Section_3.2.5.16)
       - [3.2.5.17 Receiving an SMB2 QUERY_INFO Response](#Section_3.2.5.17)
       - [3.2.5.18 Receiving an SMB2 SET_INFO Response](#Section_3.2.5.18)
-      - [3.2.5.19 Receiving an SMB2 OPLOCK_BREAK Notification](#Section_3.2.5.19)
+      - [3.2.5.19 Receiving an SMB2 OPLOCK_BREAK Command](#Section_3.2.5.19)
         - [3.2.5.19.1 Receiving an Oplock Break Notification](#Section_3.2.5.19.1)
         - [3.2.5.19.2 Receiving a Lease Break Notification](#Section_3.2.5.19.2)
         - [3.2.5.19.3 Receiving an Oplock Break Response](#Section_3.2.5.19.3)
@@ -550,7 +550,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/14/2026.
+Last updated: 4/13/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -1248,7 +1248,7 @@ In all SMB dialects for a response this field is interpreted as the **Status** f
 
 **SessionId (8 bytes):** Uniquely identifies the established [**session**](#gt_session) for the command. This field MUST be set to 0 for an SMB2 NEGOTIATE Request (section [2.2.3](#Section_2.2.3)) and for an SMB2 NEGOTIATE Response (section [2.2.4](#Section_2.2.4)).
 
-**Signature (16 bytes):** The 16-byte signature of the message, if SMB2_FLAGS_SIGNED is set in the **Flags** field of the SMB2 header and the message is not encrypted. If the message is not signed, this field MUST be 0.
+**Signature (16 bytes):** The 16-byte signature of the message, if SMB2_FLAGS_SIGNED is set in the **Flags** field of the SMB2 header. If the message is not signed, this field MUST be 0.
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 SMB2 Packet Header - SYNC
@@ -1349,7 +1349,7 @@ In all SMB dialects for a response this field is interpreted as the **Status** f
 - [SMB2 CANCEL Request](#Section_2.2.30)
 **SessionId (8 bytes):** Uniquely identifies the established [**session**](#gt_session) for the command. This field MUST be set to 0 for an SMB2 NEGOTIATE Request (section 2.2.3) and for an SMB2 NEGOTIATE Response (section 2.2.4).
 
-**Signature (16 bytes):** The 16-byte signature of the message, if SMB2_FLAGS_SIGNED is set in the **Flags** field of the SMB2 header and the message is not encrypted. If the message is not signed, this field MUST be 0.
+**Signature (16 bytes):** The 16-byte signature of the message, if SMB2_FLAGS_SIGNED is set in the **Flags** field of the SMB2 header. If the message is not signed, this field MUST be 0.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 SMB2 ERROR Response
@@ -5597,7 +5597,7 @@ The client MUST sign the message if one of the following conditions is TRUE:
 - The tree connection identified by the **TreeId** field has **TreeConnect.EncryptData** equal to FALSE.
 If **Session.SigningRequired** is FALSE, the client MAY<111> sign the request as specified in subsequent sections.
 
-If the client implements the SMB 3.x dialect family, and if the request is for session set up, the client MUST use **Session.SigningKey**, and for all other requests the client MUST provide **Channel.SigningKey** by looking up the **Channel** in **Session.ChannelList**, where the connection matches the **Channel.Connection**. Otherwise, the client MUST use **Session.SessionKey** for signing the request. The client provides the key for signing, the length of the request, and the request itself, and calculates the signature as specified in section [3.1.4.1](#Section_3.1.4.1). If the client signs the request, it MUST set the SMB2_FLAGS_SIGNED bit in the **Flags** field of the [SMB2 header](#Section_2.2.1). If the client encrypts the message, as specified in section [3.1.4.3](#Section_3.1.4.3), then the client MUST set the **Signature** field of the SMB2 header to zero.
+If the client implements the SMB 3.x dialect family, and if the request is for session set up, the client MUST use **Session.SigningKey**, and for all other requests the client MUST provide **Channel.SigningKey** by looking up the **Channel** in **Session.ChannelList**, where the connection matches the **Channel.Connection**. Otherwise, the client MUST use **Session.SessionKey** for signing the request. The client provides the key for signing, the length of the request, and the request itself, and calculates the signature as specified in section [3.1.4.1](#Section_3.1.4.1). If the client signs the request, it MUST set the SMB2_FLAGS_SIGNED bit in the **Flags** field of the [SMB2 header](#Section_2.2.1).
 
 <a id="Section_3.2.4.1.2"></a>
 ##### 3.2.4.1.2 Requesting Credits from the Server
@@ -8112,13 +8112,14 @@ If **Connection.Dialect** belongs to the SMB 3.x dialect family and the status c
 The client MUST return the received status code in the **Status** field of the [SMB2 header](#Section_2.2.1) of the response to the application that issued the request to set information on the file, underlying object store, or named pipe. This applies for requests to set file information, underlying object store information, quota information, and security information.
 
 <a id="Section_3.2.5.19"></a>
-#### 3.2.5.19 Receiving an SMB2 OPLOCK_BREAK Notification
+#### 3.2.5.19 Receiving an SMB2 OPLOCK_BREAK Command
 
-If the **MessageId** field of the [SMB2 header](#Section_2.2.1) of the response is 0xFFFFFFFFFFFFFFFF, this MUST be processed as an [**oplock break**](#gt_oplock-break) indication. Otherwise, the client MUST process it as a response to an oplock break acknowledgment.
+If the **MessageId** field of the [SMB2 header](#Section_2.2.1) of the response is 0xFFFFFFFFFFFFFFFF, this MUST be processed as an [**oplock break**](#gt_oplock-break) indication.
 
-If **Connection.Dialect** is not "2.0.2", the client MUST verify:
+- If **Connection.Dialect** is not "2.0.2", the client MUST verify:
+- If **Connection.SupportsFileLeasing** is TRUE or **Connection.SupportsDirectoryLeasing** is TRUE, the client MUST use the **StructureSize** field in the SMB2 OPLOCK_BREAK notification to differentiate between an oplock break notification and a lease break notification as specified in section [2.2.23](#Section_2.2.23).
+Otherwise, the client MUST process it as a response to an oplock break acknowledgment. The client MUST use the **StructureSize** field in the SMB2 OPLOCK_BREAK response to differentiate between an oplock break response and a lease break response as specified in section [2.2.25](#Section_2.2.25).
 
-- If **Connection.SupportsFileLeasing** is TRUE or **Connection.SupportsDirectoryLeasing** is TRUE, the client MUST use the **StructureSize** field in the SMB2 OPLOCK_BREAK notification to differentiate between an oplock break notification and a lease break notification as specified in [2.2.25](#Section_2.2.25).
 <a id="Section_3.2.5.19.1"></a>
 ##### 3.2.5.19.1 Receiving an Oplock Break Notification
 
@@ -8323,7 +8324,7 @@ READ caching on a directory:
 - A new file or directory is added, deleted, or renamed within the directory.
 - Directory metadata such as timestamps, file attributes, and file sizes are updated.
 - WRITE caching permits the SMB2 client to cache writes and byte-range locks on an object. Before processing one of the following operations, the underlying object store MUST request that the server revoke WRITE caching, and the object store MUST wait for acknowledgment from the server before proceeding with the operation:
-- The file is opened by a client with a different **ClientLeaseId**, and requested access includes any flags other than FILE_READ_ATTRIBUTES, FILE_WRITE_ATTRIBUTES, and SYNCHRONIZE.
+- The file is opened by a client with an access/share mode incompatible with opens from a client with a different **ClientLeaseId**, as described in [MS-FSA] section 2.1.4.12.
 - HANDLE caching permits one or more SMB2 clients to delay closing handles it holds open, or to defer sending opens. Before processing one of the following operations, the underlying object store MUST request that the server revoke HANDLE caching, and the object store MUST wait for acknowledgment before proceeding with the operation:
 HANDLE caching on a file:
 
@@ -8802,6 +8803,8 @@ Unless specifically noted in a subsequent section, the following logic MUST be a
 <a id="Section_3.3.4.1.1"></a>
 ##### 3.3.4.1.1 Signing the Message
 
+If the request was not signed by the client, the server MUST set the **Signature** field of the [SMB2 header](#Section_2.2.1) to zero and skip the processing in this section.
+
 The server SHOULD<233> sign the message under the following conditions:
 
 - If the request was signed by the client, the response message being sent contains a nonzero **SessionId** and a zero **TreeId** in the SMB2 header, and the session identified by **SessionId** has **Session.SigningRequired** equal to TRUE.
@@ -8811,7 +8814,7 @@ If **Connection.Dialect** belongs to the SMB 3.x dialect family, and if the resp
 
 Otherwise, the server MUST use **Session.SessionKey** for signing the response.
 
-The server provides the key for signing, the length of the response, and the response itself, and calculates the signature as specified in section [3.1.4.1](#Section_3.1.4.1). If the server signs the message, it MUST set the SMB2_FLAGS_SIGNED bit in the **Flags** field of the SMB2 header. If the server encrypts the message, as specified in section [3.1.4.3](#Section_3.1.4.3), the server MUST set the **Signature** field of the SMB2 header to zero.
+The server provides the key for signing, the length of the response, and the response itself, and calculates the signature as specified in section [3.1.4.1](#Section_3.1.4.1). If the server signs the message, it MUST set the SMB2_FLAGS_SIGNED bit in the **Flags** field of the SMB2 header.
 
 <a id="Section_3.3.4.1.2"></a>
 ##### 3.3.4.1.2 Granting Credits to the Client
@@ -9421,8 +9424,6 @@ If the server determines that the **MessageId** or the range of **MessageIds** f
 
 <a id="Section_3.3.5.2.4"></a>
 ##### 3.3.5.2.4 Verifying the Signature
-
-If **Connection.Dialect** belongs to the SMB 3.x dialect family and if the decryption in section [3.3.5.2.1.1](#Section_3.3.5.2.1.1) succeeds, the server MUST skip the processing in this section.
 
 If the [SMB2 header](#Section_2.2.1) of the SMB2 NEGOTIATE request has the SMB2_FLAGS_SIGNED bit set in the **Flags** field, the server MUST fail the request with STATUS_INVALID_PARAMETER.
 
@@ -10597,7 +10598,7 @@ If no lease is found, one MUST be allocated with the following values set:
 - **Lease.LeaseBreakTimeout** is set to 0.
 - **Lease.LeaseOpens** is set to an empty list.
 - **Lease.Breaking** is set to FALSE.
-- **Lease.Epoch** is set to 0.
+- **Lease.Epoch** is set to **Epoch** in the request.
 - **Lease.FileDeleteOnClose** is set to FALSE.
 - **Lease.Version** is set to 2.
 If the allocation fails, the create request MUST be failed with STATUS_INSUFFICIENT_RESOURCES. Otherwise, if a **LeaseTable** was created it MUST be added to the **GlobalLeaseTableList**, and if a Lease was created it MUST be added to the **LeaseTable.LeaseList**.
@@ -18130,6 +18131,8 @@ In all SMB2 servers, if a create request in a compound chain is processed asynch
 
 <270> Section 3.3.5.2.7.2: If the previous session expired, Windows Vista SP1, Windows Server 2008, Windows 7, and Windows Server 2008 R2 servers fail the next request in the compounded chain with STATUS_NETWORK_SESSION_EXPIRED, and the subsequent requests in the compounded chain will be failed with STATUS_INVALID_PARAMETER.
 
+If the previous operation is QUERY_DIRECTORY, QUERY_INFO, SET_INFO, READ, WRITE, LOCK or CHANGE_NOTIFY and the operation failed and SMB2_FLAGS_RELATED_OPERATIONS is set on all subsequent operations, Windows SMB2 servers fail current and all subsequent operations in the compounded chain with STATUS_INVALID_PARAMETER.
+
 <271> Section 3.3.5.2.9: Windows Vista SP1, Windows Server 2008, Windows 7, and Windows Server 2008 R2 servers do not fail the request if the SMB2 header of the request has SMB2_FLAGS_SIGNED set in the **Flags** field and the request is not an SMB2 LOCK request as specified in section [2.2.26](#Section_2.2.26).
 
 <272> Section 3.3.5.2.9: Windows-based servers fail the request with 0x80090302 when the authentication method is GSS-API.
@@ -18591,7 +18594,7 @@ Windows 10 v1803 operating system and later and Windows Server v1803 operating s
 
 | FSCTL name | FSCTL function number |
 | --- | --- |
-| FSCTL_DUPLICATE_EXTENTS_TO_FILE_EX | 0x983e8‬‏‎‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬ |
+| FSCTL_DUPLICATE_EXTENTS_TO_FILE_EX | 0x983e8‬‏‎‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬‬ |
 
 Windows 10 and later and Windows Server 2016 and later allow the additional **CtlCode** value, as specified in [MS-SQOS](../MS-SQOS/MS-SQOS.md).
 
@@ -18902,17 +18905,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.35](#Section_2.2.35) SMB2 CHANGE_NOTIFY Request | 30507 : Updated Flags field to include value zero. | Major |
-| [3.2.5.16](#Section_3.2.5.16) Receiving an SMB2 CHANGE_NOTIFY Response | 30507 : Added client validation of CHANGE_NOTIFY response. | Major |
-| [3.3](#Section_3.3) Server Details | 30459 : Updated server processing of CREATE replay of a persistent open. | Major |
-| [3.3.4.6](#Section_3.3.4.6) Object Store Indicates an Oplock Break | 30506 : Updated server processing when the Open is durable but not persistent and the Oplock breaks. | Major |
-| [3.3.4.17](#Section_3.3.4.17) Server Application Requests Closing an Open | 30439 : Updated server processing of CHANGE_NOTIFY requests when closing an Open. | Major |
-| [3.3.5](#Section_3.3.5) Processing Events and Sequencing Rules | 30644 : Updated server processing of open replay. | Major |
-| [3.3.5.9](#Section_3.3.5.9) Receiving an SMB2 CREATE Request | 30488 : Updated server processing of CREATE request when there is a conflicting Open. | Major |
-| 3.3.5.9 Receiving an SMB2 CREATE Request | 30488 : Updated server processing of the CREATE request when there is an existing persistent open on the same file. | Major |
-| 3.3.5.9 Receiving an SMB2 CREATE Request | 30511 : Updated server processing to retry create operation on failure. | Major |
-| [3.3.5.9.12](#Section_3.3.5.9.12) Handling the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context | 30530 : Updated server processing of Lease Epoch in resume create operation. | Major |
-| 3.3.5.9.12 Handling the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context | 30586 : Updated server processing when there are multiple persistent opens on the same file with same LeaseKey. | Major |
+| [3.2.5.19](#Section_3.2.5.19) Receiving an SMB2 OPLOCK_BREAK Command | 39322 : Updated section title. Added clarity to specify client behavior when processing an SMB2 OPLOCK_BREAK response | Major |
+| [3.3.5.2.7.2](#Section_3.3.5.2.7.2) Handling Compounded Related Requests | 34930 : Updated server processing for compounded related requests. | Major |
+| [3.3.5.9.11](#Section_3.3.5.9.11) Handling the SMB2_CREATE_REQUEST_LEASE_V2 Create Context | 32798 : Updated server processing of Epoch in SMB2_CREATE_REQUEST_LEASE_V2 create context. | Major |
 
 <a id="revision-history"></a>
 
@@ -19010,3 +19005,5 @@ The changes made to this document are listed in the following table. For more in
 | 7/7/2025 | 82.0 | Major | Significantly changed the technical content. |
 | 7/28/2025 | 83.0 | Major | Significantly changed the technical content. |
 | 1/14/2026 | 84.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 85.0 | Major | Significantly changed the technical content. |
+| 4/13/2026 | 86.0 | Major | Significantly changed the technical content. |

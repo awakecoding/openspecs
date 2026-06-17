@@ -107,7 +107,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/13/2026.
+Last updated: 3/30/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -466,7 +466,7 @@ options [4] BIT STRING OPTIONAL,
 
 **user-id**: Contains the user identifiers. This can be either the user name and realm or the user's certificate.
 
-**checksum**: This is the Kerberos checksum (as defined in [[RFC3961]](https://go.microsoft.com/fwlink/?LinkId=90450)) computed over the DER encoding of the ASN.1 type S4UUserID contained in the user-id field that immediately precedes this field. The [**key**](#gt_key) used is the [**session key**](#gt_session-key) of the [**TGT**](#gt_ticket-granting-ticket-tgt) used in the [**TGS**](#gt_ticket-granting-service-tgs) request (note that the same key is used in the TGS request and reply when this padata is used in both the request and the reply); the checksum operation is the required checksum for the encryption type of that TGT session key per [RFC3961]; and the key usage is 26. Because there is no required checksum type defined for the encryption type RC4_HMAC_NT (23), if the key's encryption type is RC4_HMAC_NT (23) the checksum type is rsa-md4 (2) as defined in section 6.2.6 of [RFC3961]. If the encryption type is "not-newer" (note that the term "not-newer" is described in section 1 of [[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459)), a padata element of type 130 is included in the encrypted-pa-data field of the reply (note that the encrypted-pa-data field is described in appendix A of [[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478)). The padata of type 130 in the encrypted-pa-data field contains the checksum value in the [**S4U**](#gt_service-for-user-s4u) request concatenated with the checksum value in the S4U reply. The checksum value of a Kerberos Checksum type here refers to the OCTET STRING of the Checksum field. The client when receiving this padata type in the encrypted-pa-data field MUST verify the checksum values match with the corresponding checksum values in the request and the reply.
+**checksum**: This is the Kerberos checksum (as defined in [[RFC3961]](https://go.microsoft.com/fwlink/?LinkId=90450)) computed over the DER encoding of the ASN.1 type S4UUserID contained in the user-id field that immediately precedes this field. The [**key**](#gt_key) used is the [**session key**](#gt_session-key) of the [**TGT**](#gt_ticket-granting-ticket-tgt) used in the [**TGS**](#gt_ticket-granting-service-tgs) request (note that the same key is used in the TGS request and reply when this padata is used in both the request and the reply); the checksum operation is the required checksum for the encryption type of that TGT session key per [RFC3961]; and the key usage is 26. Because there is no required checksum type defined for the encryption type RC4_HMAC_NT (23), if the key's encryption type is RC4_HMAC_NT (23) the checksum type is KERB_CHECKSUM_HMAC_MD5 (-138) as defined in section 4 of [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488).<5> If the encryption type is "not-newer" (note that the term "not-newer" is described in section 1 of [[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459)), a padata element of type 130 is included in the encrypted-pa-data field of the reply (note that the encrypted-pa-data field is described in appendix A of [[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478)). The padata of type 130 in the encrypted-pa-data field contains the checksum value in the [**S4U**](#gt_service-for-user-s4u) request concatenated with the checksum value in the S4U reply. The checksum value of a Kerberos Checksum type here refers to the OCTET STRING of the Checksum field. The client when receiving this padata type in the encrypted-pa-data field MUST verify the checksum values match with the corresponding checksum values in the request and the reply.
 
 **nonce**: This contains the identically named field in the [**KDC**](#gt_key-distribution-center-kdc) body of the containing request.
 
@@ -482,9 +482,9 @@ options [4] BIT STRING OPTIONAL,
 | --- | --- |
 | 0x80000000 | KERB_S4U_OPTIONS_reserved. Reserved. |
 | 0x40000000 | KERB_S4U_OPTIONS_check_logonhours This option causes the KDC to check logon hour restrictions for the user. Note that logon hour restrictions are calculated based on the time zone of the DC, not of the client. |
-| 0x20000000 | KERB_S4U_OPTIONS_use_reply_key_usage<5> In a request, asks the KDC to sign the reply with key usage number 27. In a reply, indicates that it was signed with key usage number 27. If this option is set in the request, and if the KDC understands this option, it will sign the reply with key usage number 27 and set the same option in the reply. Otherwise, it will sign the reply with key usage number 26 and not set the option in the reply. |
-| 0x10000000 | KERB_S4U_OPTIONS_nt_auth_policy_not_required This option causes the KDC to omit NTAuth store certificate chain checks and is designed for scenarios where the client performs its own chain checks.<6> If this setting is used incorrectly, it can pose a security risk due to potentially unchecked certificate chains. This bit can be processed by DCs who understand and ignored by those who don't. A DC processing the bit would reply the same if succeed. The value STATUS_NO_SUCH_USER is returned if a DC ignoring the bit has processed the request. |
-| 0x08000000 | KERB_S4U_OPTIONS_unconditional_delegation.<7> Unconditional delegation. The resulting ticket-granting ticket (TGT) will match the TGT the target account would retrieve by authenticating with a password. |
+| 0x20000000 | KERB_S4U_OPTIONS_use_reply_key_usage<6> In a request, asks the KDC to sign the reply with key usage number 27. In a reply, indicates that it was signed with key usage number 27. If this option is set in the request, and if the KDC understands this option, it will sign the reply with key usage number 27 and set the same option in the reply. Otherwise, it will sign the reply with key usage number 26 and not set the option in the reply. |
+| 0x10000000 | KERB_S4U_OPTIONS_nt_auth_policy_not_required This option causes the KDC to omit NTAuth store certificate chain checks and is designed for scenarios where the client performs its own chain checks.<7> If this setting is used incorrectly, it can pose a security risk due to potentially unchecked certificate chains. This bit can be processed by DCs who understand and ignored by those who don't. A DC processing the bit would reply the same if succeed. The value STATUS_NO_SUCH_USER is returned if a DC ignoring the bit has processed the request. |
+| 0x08000000 | KERB_S4U_OPTIONS_unconditional_delegation.<8> Unconditional delegation. The resulting ticket-granting ticket (TGT) will match the TGT the target account would retrieve by authenticating with a password. |
 
 The SFU client needs to be able to locate the KDC of the user's realm. If the S4U call is based on the certificate and no user name is supplied, the client uses a PA_S4U_X509_USER padata type and the corresponding data contains the user's X509 certificate encoded as specified in [RFC3280].
 
@@ -505,7 +505,7 @@ The S4U_DELEGATION_INFO structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.9) li
 <a id="Section_2.2.5"></a>
 ### 2.2.5 PA-PAC-OPTIONS
 
-The **PA-PAC-OPTIONS** structure ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) specifies explicitly requested options in the [**PAC**](#gt_privilege-attribute-certificate-pac). Using resource-based [**constrained delegation**](#gt_constrained-delegation), [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy) SHOULD<8> extend the PA-PAC-OPTIONS structure as follows:
+The **PA-PAC-OPTIONS** structure ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) specifies explicitly requested options in the [**PAC**](#gt_privilege-attribute-certificate-pac). Using resource-based [**constrained delegation**](#gt_constrained-delegation), [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy) SHOULD<9> extend the PA-PAC-OPTIONS structure as follows:
 
 PA-PAC-OPTIONS ::= KerberosFlags
 
@@ -517,12 +517,12 @@ PA-PAC-OPTIONS ::= KerberosFlags
 <a id="Section_3.1"></a>
 ## 3.1 Service Details
 
-This section defines the message processing for an application [**service**](#gt_service) (see Service 1 in the figure specifying entities involved in [**S4U**](#gt_service-for-user-s4u) protocols, section [3.1.5](#Section_3.1.5)) using the Service for User (S4U) extensions<9>.
+This section defines the message processing for an application [**service**](#gt_service) (see Service 1 in the figure specifying entities involved in [**S4U**](#gt_service-for-user-s4u) protocols, section [3.1.5](#Section_3.1.5)) using the Service for User (S4U) extensions<10>.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-**PhaseOutOldStyleS4U**: A Boolean value that requires **S4USelf** to use **PA-S4U-X509-USER** instead of **PA-FOR-USER**. This value SHOULD be set to TRUE.<10>
+**PhaseOutOldStyleS4U**: A Boolean value that requires **S4USelf** to use **PA-S4U-X509-USER** instead of **PA-FOR-USER**. This value SHOULD be set to TRUE.<11>
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -570,9 +570,9 @@ The [**Service for User to Self (S4U2self)**](#gt_service-for-user-to-self-s4u2s
 
 In the [**S4U2self**](#gt_service-for-user-to-self-s4u2self) request, the user is identified by the user realm and the user name or alternatively, by using the user's certificate if the service has it, as specified in sections [3.1.5.1.1.2](#Section_3.1.5.1.1.2) and 3.1.5.1.1.2. The PA-FOR-USER padata type can be used only in the former case, while a PA-S4U-X509-USER padata type can carry the user identity in both cases.
 
-The SFU client SHOULD:<11>
+The SFU client SHOULD:<12>
 
-- When sending the **KRB_TGS_REQ** message, add a PA-PAC-OPTIONS [167] ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) padata type with the **claims** bit set to request claims [**authorization data**](#gt_authorization-data) and with the resource-based [**constrained delegation**](#gt_constrained-delegation) bit SHOULD<12> be set to inform the KDC that it supports resource-based constrained delegation.
+- When sending the **KRB_TGS_REQ** message, add a PA-PAC-OPTIONS [167] ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) padata type with the **claims** bit set to request claims [**authorization data**](#gt_authorization-data) and with the resource-based [**constrained delegation**](#gt_constrained-delegation) bit SHOULD<13> be set to inform the KDC that it supports resource-based constrained delegation.
 - When receiving the **KRB_TGS_REP** message, if the **claims** bit is set in PA-SUPPORTED-ENCTYPES [165] ([MS-KILE] section 2.2.8) and not set in PA-PAC-OPTIONS [167], the Kerberos client SHOULD locate a DS_BEHAVIOR_WIN2012 [**DC**](#gt_domain-controller-dc) ([MS-KILE] section 3.2.5.3) and go back to step 1.
 <a id="Section_3.1.5.1.1.1"></a>
 ###### 3.1.5.1.1.1 When to Use Each padata Type
@@ -635,16 +635,16 @@ then the SFU client SHOULD fail the request.
 
 Service 1 requests a service ticket to Service 2 by sending a **KRB_TGS_REQ** message with the [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy) extensions:
 
-- PA-PAC-OPTIONS [167] ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) padata type with the resource-based [**constrained delegation**](#gt_constrained-delegation) bit set.<13>
+- PA-PAC-OPTIONS [167] ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) padata type with the resource-based [**constrained delegation**](#gt_constrained-delegation) bit set.<14>
 - **kdc-options** field: MUST include the new cname-in-addl-tkt options flag.
 - **additional-tickets** field: The user's service ticket to Service 1.
 - **sname** and **realm** fields: the name and [**realm**](#gt_realm) of Service 2.
-If a nonforwardable S4U2self-generated user's service ticket for a nonsensitive user is used, then the SFU client SHOULD<14> locate a DS_BEHAVIOR_WIN2012 [**DC**](#gt_domain-controller-dc) ([MS-KILE] section 3.2.5.3) to send the request.
+If a nonforwardable S4U2self-generated user's service ticket for a nonsensitive user is used, then the SFU client SHOULD<15> locate a DS_BEHAVIOR_WIN2012 [**DC**](#gt_domain-controller-dc) ([MS-KILE] section 3.2.5.3) to send the request.
 
 <a id="Section_3.1.5.2.2"></a>
 ##### 3.1.5.2.2 Receives Referral
 
-If Service 1 receives a referral ([[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478) section 8) and does not have its own [**service ticket**](#gt_service-ticket) for Service 2, then Service 1 SHOULD<15> obtain a service ticket for Service 2.
+If Service 1 receives a referral ([[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478) section 8) and does not have its own [**service ticket**](#gt_service-ticket) for Service 2, then Service 1 SHOULD<16> obtain a service ticket for Service 2.
 
 The SFU client SHOULD send a **KRB_TGS_REQ** message for the user to each referral [**KDC**](#gt_key-distribution-center-kdc) until it receives a referral [**TGT**](#gt_ticket-granting-ticket-tgt) for Service 2’s [**realm**](#gt_realm). Because the SFU client already has a service ticket for Service 2 (that is, the service ticket obtained by Service 1 for itself), it has the name of Service 2’s realm. The SFU client SHOULD send a KRB_TGS_REQ with the [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy) extensions using the Service 1’s referral **TGT**:
 
@@ -654,7 +654,7 @@ The SFU client SHOULD send a **KRB_TGS_REQ** message for the user to each referr
 <a id="Section_3.1.5.2.3"></a>
 ##### 3.1.5.2.3 Receives KRB-ERR-BADOPTION
 
-If Service 1 receives a KRB-ERR-BADOPTION with STATUS_NOT_SUPPORTED or STATUS_NO_MATCH and a DS_BEHAVIOR_WIN2012 [**DC**](#gt_domain-controller-dc) was not used, then the SFU client SHOULD<16> locate a DS_BEHAVIOR_WIN2012 DC ([MS-KILE](../MS-KILE/MS-KILE.md) section 3.2.5.3) and retry sending the [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy) **KRB_TGS_REQ** message. If a DS_BEHAVIOR_WIN2012 DC cannot be found, then the SFU client fails.
+If Service 1 receives a KRB-ERR-BADOPTION with STATUS_NOT_SUPPORTED or STATUS_NO_MATCH and a DS_BEHAVIOR_WIN2012 [**DC**](#gt_domain-controller-dc) was not used, then the SFU client SHOULD<17> locate a DS_BEHAVIOR_WIN2012 DC ([MS-KILE](../MS-KILE/MS-KILE.md) section 3.2.5.3) and retry sending the [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy) **KRB_TGS_REQ** message. If a DS_BEHAVIOR_WIN2012 DC cannot be found, then the SFU client fails.
 
 <a id="Section_3.1.5.2.4"></a>
 ##### 3.1.5.2.4 Receives S4U2proxy KRB_TGS_REP
@@ -676,7 +676,7 @@ None.
 <a id="Section_3.2"></a>
 ## 3.2 KDC Details
 
-This section defines the message processing for [**KDCs**](#gt_key-distribution-center-kdc) responding to [**S4U**](#gt_service-for-user-s4u) requests<17>.
+This section defines the message processing for [**KDCs**](#gt_key-distribution-center-kdc) responding to [**S4U**](#gt_service-for-user-s4u) requests<18>.
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -687,7 +687,7 @@ To support all functionality of SFU, the account database MUST be extended to su
 
 **DelegationNotAllowed**: A Boolean setting to prevent PROXIABLE or FORWARDABLE [**ticket**](#gt_ticket) flags ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) sections 2.5 and 2.6) in tickets for the principal. KILE implementations that use an [**Active Directory**](#gt_active-directory) for the account database SHOULD use the **userAccountControl** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 2.2.16) ND flag. The default is FALSE.
 
-**ServicesAllowedToReceiveForwardedTicketsFrom**: A SECURITY_DESCRIPTOR ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) which specifies from which [**services**](#gt_service) a service will accept forwarded [**service tickets**](#gt_service-ticket). SFU implementations that use an Active Directory for the configuration database SHOULD<18> use the **msDS-AllowedToActOnBehalfOfOtherIdentity** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.218).
+**ServicesAllowedToReceiveForwardedTicketsFrom**: A SECURITY_DESCRIPTOR ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) which specifies from which [**services**](#gt_service) a service will accept forwarded [**service tickets**](#gt_service-ticket). SFU implementations that use an Active Directory for the configuration database SHOULD<19> use the **msDS-AllowedToActOnBehalfOfOtherIdentity** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.218).
 
 **ServicesAllowedToSendForwardedTicketsTo**: A list of services to which a service will be allowed to forward tickets to support [**constrained delegation**](#gt_constrained-delegation). SFU implementations that use an Active Directory for the configuration database SHOULD use the **msDS-AllowedToDelegateTo** attribute ([MS-ADA2] section 2.219).
 
@@ -752,13 +752,13 @@ If the *TrustedToAuthenticationForDelegation* parameter on the Service 1 [**prin
 
 **TRUE**: the KDC MUST set the FORWARDABLE [**ticket**](#gt_ticket) flag ([RFC4120] section 2.6) in the [**S4U2self**](#gt_service-for-user-to-self-s4u2self) service ticket.
 
-**FALSE** and *ServicesAllowedToSendForwardedTicketsTo* is nonempty: the KDC MUST NOT set the FORWARDABLE ticket flag ([RFC4120] section 2.6) in the S4U2self service ticket.<19>
+**FALSE** and *ServicesAllowedToSendForwardedTicketsTo* is nonempty: the KDC MUST NOT set the FORWARDABLE ticket flag ([RFC4120] section 2.6) in the S4U2self service ticket.<20>
 
-If the *DelegationNotAllowed* parameter on the principal is set, then the KDC SHOULD NOT set the FORWARDABLE ticket flag ([RFC4120], section 2.6) in the S4U2self service ticket.<20>
+If the *DelegationNotAllowed* parameter on the principal is set, then the KDC SHOULD NOT set the FORWARDABLE ticket flag ([RFC4120], section 2.6) in the S4U2self service ticket.<21>
 
 If the **KRB_TGS_REQ** message contains a [PA-S4U-X509-USER](#Section_2.2.2) padata type, the KDC MUST include the PA-S4U-X509-USER padata type in the **KRB_TGS_REP** message.
 
-If the KDC supports the Privilege Attribute Certificate Data Structure [MS-PAC](../MS-PAC/MS-PAC.md), the KDC, when populating the KERB_VALIDATION_INFO Structure ([MS-KILE](../MS-KILE/MS-KILE.md) section 3.3.5.6.4.1), MUST NOT include the AUTHENTICATION_AUTHORITY_ASSERTED_IDENTITY SID in the **ExtraSids** field and SHOULD<21> add the SERVICE_ASSERTED_IDENTITY SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) instead.
+If the KDC supports the Privilege Attribute Certificate Data Structure [MS-PAC](../MS-PAC/MS-PAC.md), the KDC, when populating the KERB_VALIDATION_INFO Structure ([MS-KILE](../MS-KILE/MS-KILE.md) section 3.3.5.6.4.1), MUST NOT include the AUTHENTICATION_AUTHORITY_ASSERTED_IDENTITY SID in the **ExtraSids** field and SHOULD<22> add the SERVICE_ASSERTED_IDENTITY SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) instead.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 KDC Receives S4U2proxy KRB_TGS_REQ
@@ -770,21 +770,21 @@ When a [**KDC**](#gt_key-distribution-center-kdc) processes a **TGS-REQ** ([[RFC
 
 If the [**KDC**](#gt_key-distribution-center-kdc) is for the realm of both Service 1 and Service 2, then the **KDC** checks if the [**security principal name (SPN)**](#gt_security-principal-name-spn) for Service 2, identified in the **sname** and **srealm** fields of the **KRB_TGS_REQ** message, is in the Service 1 account's *ServicesAllowedToSendForwardedTicketsTo* parameter. If it is, then the delegation policy is satisfied. If not, and the PA-PAC-OPTIONS [167] ([MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.10) padata type does not have the resource-based [**constrained delegation**](#gt_constrained-delegation) bit, then the **KDC** MUST return KRB-ERR-BADOPTION. If Service 1’s *ServicesAllowedToSendForwardedTicketsTo* parameter was empty, this is returned with STATUS_NOT_SUPPORTED, else STATUS_NO_MATCH.
 
-If the [**service ticket**](#gt_service-ticket) in the **additional-tickets** field is not set to [**forwardable**](#gt_forwardable)<22> and the PA-PAC-OPTIONS [167] ([MS-KILE] section 2.2.10) padata type does not have the resource-based constrained delegation bit set, then the **KDC** MUST return KRB-ERR-BADOPTION with STATUS_NO_MATCH.
+If the [**service ticket**](#gt_service-ticket) in the **additional-tickets** field is not set to [**forwardable**](#gt_forwardable)<23> and the PA-PAC-OPTIONS [167] ([MS-KILE] section 2.2.10) padata type does not have the resource-based constrained delegation bit set, then the **KDC** MUST return KRB-ERR-BADOPTION with STATUS_NO_MATCH.
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Verification of the PAC
 
-Service 1's **KDC** verifies both server ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.8.4) and **KDC** ([MS-PAC] section 2.8.5) signatures of the **PAC**. Because Service 1’s KDC is ingesting a service ticket rather than a TGT, it SHOULD also ensure the integrity of the service ticket by verifying the ticket signature ([MS-PAC] section 2.8.3).<23> If Service 2 is in another [**domain**](#gt_domain), then its **KDC** verifies only the **KDC** signature of the **PAC**. If verification fails, the **KDC** MUST return KRB-AP-ERR-MODIFIED.
+Service 1's **KDC** verifies both server ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.8.4) and **KDC** ([MS-PAC] section 2.8.5) signatures of the **PAC**. Because Service 1’s KDC is ingesting a service ticket rather than a TGT, it SHOULD also ensure the integrity of the service ticket by verifying the ticket signature ([MS-PAC] section 2.8.3).<24> If Service 2 is in another [**domain**](#gt_domain), then its **KDC** verifies only the **KDC** signature of the **PAC**. If verification fails, the **KDC** MUST return KRB-AP-ERR-MODIFIED.
 
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Using ServicesAllowedToReceiveForwardedTicketsFrom
 
-If the delegation policy was not satisfied via *ServicesAllowedToSendForwardedTicketsTo,* this is the [**KDC**](#gt_key-distribution-center-kdc) for Service 2, and the Service 2 account's *ServicesAllowedToReceiveForwardedTicketsFrom* is nonempty and **cname** in the encrypted part of both [**TGTs**](#gt_ticket-granting-ticket-tgt) match, the **KDC** creates a **Token/Authorization Context** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2) for Service 1 from the [**PAC**](#gt_privilege-attribute-certificate-pac) data in Service 1's **TGT**. Then the **KDC** performs an access check using the *ServicesAllowedToReceiveForwardedTicketsFrom* parameter.<24> If the access check succeeds, then the **KDC** replies with a [**service ticket**](#gt_service-ticket) for Service 2. If the access check fails, the **KDC** MUST return KRB-ERR-BADOPTION with STATUS_NOT_FOUND.
+If the delegation policy was not satisfied via *ServicesAllowedToSendForwardedTicketsTo,* this is the [**KDC**](#gt_key-distribution-center-kdc) for Service 2, and the Service 2 account's *ServicesAllowedToReceiveForwardedTicketsFrom* is nonempty and **cname** in the encrypted part of both [**TGTs**](#gt_ticket-granting-ticket-tgt) match, the **KDC** creates a **Token/Authorization Context** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2) for Service 1 from the [**PAC**](#gt_privilege-attribute-certificate-pac) data in Service 1's **TGT**. Then the **KDC** performs an access check using the *ServicesAllowedToReceiveForwardedTicketsFrom* parameter.<25> If the access check succeeds, then the **KDC** replies with a [**service ticket**](#gt_service-ticket) for Service 2. If the access check fails, the **KDC** MUST return KRB-ERR-BADOPTION with STATUS_NOT_FOUND.
 
-If the service ticket in the **additional-tickets** field is not set to [**forwardable**](#gt_forwardable),<25> then the **KDC** MUST return KRB-ERR-BADOPTION with STATUS_ACCOUNT_RESTRICTION ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).<26>
+If the service ticket in the **additional-tickets** field is not set to [**forwardable**](#gt_forwardable),<26> then the **KDC** MUST return KRB-ERR-BADOPTION with STATUS_ACCOUNT_RESTRICTION ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).<27>
 
-When a **KDC** determines that a referral **TGT** is required ([[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478) section 8), then if Service 2 is not in the **KDC's** realm, the **KDC** SHOULD<27> reply with referral **TGT** (section [3.2.5.1.1](#Section_3.2.5.1.1)).
+When a **KDC** determines that a referral **TGT** is required ([[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478) section 8), then if Service 2 is not in the **KDC's** realm, the **KDC** SHOULD<28> reply with referral **TGT** (section [3.2.5.1.1](#Section_3.2.5.1.1)).
 
 <a id="Section_3.2.5.2.4"></a>
 ##### 3.2.5.2.4 KDC Replies with Service Ticket
@@ -870,7 +870,7 @@ In step 1, Service 1 is attempting to obtain a service ticket to Service 2 on be
 
 The **TGS** makes sure the forwardable flag is set in the **additional-ticket** and uses its local policy to determine if Service 1 is allowed to obtain a service ticket on behalf of a user to Service 2. If these conditions are met, the **TGS** crafts the **KRB_TGS_REP** message to return a service ticket. This response will contain the **cname** field of the user that is taken from the **additional-ticket**, instead of using the **cname** of Service 1. The forwardable flag will be set in the service ticket. The authorization data in the service ticket will be copied from the service ticket passed to the **TGS** in the **additional-tickets** field.
 
-In step 3, Service 1 uses the service ticket from step 2 to contact Service 2. The service ticket will contain the user's name as the **cname** field. Step 4 shows the **KRB_AP_REP** message from Service 2 to Service 1 in response to the **KRB_AP_REQ** message, as described in step 3.<28>
+In step 3, Service 1 uses the service ticket from step 2 to contact Service 2. The service ticket will contain the user's name as the **cname** field. Step 4 shows the **KRB_AP_REP** message from Service 2 to Service 1 in response to the **KRB_AP_REQ** message, as described in step 3.<29>
 
 <a id="Section_5"></a>
 # 5 Security
@@ -935,53 +935,55 @@ Except in Windows Server 2003, Windows [**domain controllers**](#gt_domain-contr
 
 In Windows 2000 Server, Windows Server 2003, and Windows Server 2008 operating system with Service Pack 2 (SP2), KDCs do not add the PA-S4U-X509-USER padata type in the encrypted-pa-data field in TGS-REP.
 
-<5> Section 2.2.2: Except in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, Windows S4U clients always set this option. If the [**KDC**](#gt_key-distribution-center-kdc) is running Windows Server 2008 R2 operating system, it replies with the same option bit in the reply.
+<5> Section 2.2.2: Windows 11, version 23H2 operating system and earlier and Windows Server 2022, 23H2 operating system and earlier use checksum type of rsa-md4 (2) as defined in section 6.1.2 of [[RFC3961]](https://go.microsoft.com/fwlink/?LinkId=90450).
 
-<6> Section 2.2.2: Available in Windows Vista operating system with Service Pack 2 (SP2) and Windows Server 2008 operating system with Service Pack 2 (SP2) after updates. Available by default in Windows 7 operating system and Windows Server 2008 R2 operating system and later.
+<6> Section 2.2.2: Except in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, Windows S4U clients always set this option. If the [**KDC**](#gt_key-distribution-center-kdc) is running Windows Server 2008 R2 operating system, it replies with the same option bit in the reply.
 
-<7> Section 2.2.2: Available in Windows Server 2025 and later.
+<7> Section 2.2.2: Available in Windows Vista operating system with Service Pack 2 (SP2) and Windows Server 2008 operating system with Service Pack 2 (SP2) after updates. Available by default in Windows 7 operating system and Windows Server 2008 R2 operating system and later.
 
-<8> Section 2.2.5: Resource-based [**constrained delegation**](#gt_constrained-delegation) is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<8> Section 2.2.2: Available in Windows Server 2025 and later.
 
-<9> Section 3.1: Windows 2000 and Windows XP do not support S4U.
+<9> Section 2.2.5: Resource-based [**constrained delegation**](#gt_constrained-delegation) is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<10> Section 3.1.1: Windows 10 and later and Windows Server 2008 and later without [[MSFT-CVE-2026-20849]](https://go.microsoft.com/fwlink/?linkid=2346413) set **PhaseOutOldStyleS4U** to FALSE.
+<10> Section 3.1: Windows 2000 and Windows XP do not support S4U.
 
-<11> Section 3.1.5.1.1: Claims is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<11> Section 3.1.1: Windows 10 and later and Windows Server 2008 and later without [[MSFT-CVE-2026-20849]](https://go.microsoft.com/fwlink/?linkid=2346413) set **PhaseOutOldStyleS4U** to FALSE.
 
-<12> Section 3.1.5.1.1: Resource-based constrained delegation is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<12> Section 3.1.5.1.1: Claims is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<13> Section 3.1.5.2.1: Resource-based constrained delegation is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<13> Section 3.1.5.1.1: Resource-based constrained delegation is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
 <14> Section 3.1.5.2.1: Resource-based constrained delegation is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<15> Section 3.1.5.2.2: In Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, the SFU client does not support referrals for [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy).
+<15> Section 3.1.5.2.1: Resource-based constrained delegation is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<16> Section 3.1.5.2.3: In Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, the SFU client does not support KRB-ERR-BADOPTION retries.
+<16> Section 3.1.5.2.2: In Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, the SFU client does not support referrals for [**S4U2proxy**](#gt_service-for-user-to-proxy-s4u2proxy).
 
-<17> Section 3.2: Windows 2000 **KDCs** do not support **S4U**.
+<17> Section 3.1.5.2.3: In Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, the SFU client does not support KRB-ERR-BADOPTION retries.
 
-<18> Section 3.2.1: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 **KDCs** do not support ServicesAllowedToReceiveForwardedTicketsFrom.
+<18> Section 3.2: Windows 2000 **KDCs** do not support **S4U**.
 
-<19> Section 3.2.5.1.2: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 KDCs do not set the FORWARDABLE ticket flag based on the *ServicesAllowedToSendForwardedTicketsTo* parameter.
+<19> Section 3.2.1: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 **KDCs** do not support ServicesAllowedToReceiveForwardedTicketsFrom.
 
 <20> Section 3.2.5.1.2: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 KDCs do not set the FORWARDABLE ticket flag based on the *ServicesAllowedToSendForwardedTicketsTo* parameter.
 
-<21> Section 3.2.5.1.2: In Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2, the **SidCount** field is set to zero and the **ExtraSids** field is NULL.
+<21> Section 3.2.5.1.2: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 KDCs do not set the FORWARDABLE ticket flag based on the *ServicesAllowedToSendForwardedTicketsTo* parameter.
 
-<22> Section 3.2.5.2.1: Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 **KDC** will always return KRB-ERR-BADOPTION when not forwardable.
+<22> Section 3.2.5.1.2: In Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2, the **SidCount** field is set to zero and the **ExtraSids** field is NULL.
 
-<23> Section 3.2.5.2.2: For more information about the ticket signature, see Kerberos Security Feature Bypass Vulnerability update [[MSFT-CVE-2020-17049]](https://go.microsoft.com/fwlink/?linkid=2148744). This update applies to Windows 8 and later and to Windows Server 2012 and later.
+<23> Section 3.2.5.2.1: Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 **KDC** will always return KRB-ERR-BADOPTION when not forwardable.
 
-<24> Section 3.2.5.2.3: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 **KDCs** do not support *ServicesAllowedToReceiveForwardedTicketsFrom*.
+<24> Section 3.2.5.2.2: For more information about the ticket signature, see Kerberos Security Feature Bypass Vulnerability update [[MSFT-CVE-2020-17049]](https://go.microsoft.com/fwlink/?linkid=2148744). This update applies to Windows 8 and later and to Windows Server 2012 and later.
 
-<25> Section 3.2.5.2.3: Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 **KDC** will always return KRB-ERR-BADOPTION when not forwardable.
+<25> Section 3.2.5.2.3: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 **KDCs** do not support *ServicesAllowedToReceiveForwardedTicketsFrom*.
 
-<26> Section 3.2.5.2.3: The Kerberos Security Feature Bypass Vulnerability December 8,2020 [[MSFT-CVE-2020-16996]](https://go.microsoft.com/fwlink/?linkid=2171156) update adds support for the NonForwardableDelegation registry value to (0) enable Enforcement of protection on Active Directory domain controller servers. Active Directory domain controllers will be in **Enforcement** mode unless the enforcement mode registry key is set to (1) disabled. This update applies to Windows Server 2012 operating system and later. For additional information that includes Windows Server 2008 operating system with Service Pack 2 (SP2) and Windows Server 2008 R2 operating system with Service Pack 1 (SP1) see [[MSFT-RBCD-ProtectedUserChanges]](https://go.microsoft.com/fwlink/?linkid=2171071).
+<26> Section 3.2.5.2.3: Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 **KDC** will always return KRB-ERR-BADOPTION when not forwardable.
 
-<27> Section 3.2.5.2.3: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 **KDCs** return KRB-ERR-BADOPTION whenever Service 1 and Service 2 do not belong to the same realm.
+<27> Section 3.2.5.2.3: The Kerberos Security Feature Bypass Vulnerability December 8,2020 [[MSFT-CVE-2020-16996]](https://go.microsoft.com/fwlink/?linkid=2171156) update adds support for the NonForwardableDelegation registry value to (0) enable Enforcement of protection on Active Directory domain controller servers. Active Directory domain controllers will be in **Enforcement** mode unless the enforcement mode registry key is set to (1) disabled. This update applies to Windows Server 2012 operating system and later. For additional information that includes Windows Server 2008 operating system with Service Pack 2 (SP2) and Windows Server 2008 R2 operating system with Service Pack 1 (SP1) see [[MSFT-RBCD-ProtectedUserChanges]](https://go.microsoft.com/fwlink/?linkid=2171071).
 
-<28> Section 4.3: The **TGS** checks the service's account in Active Directory for the Allowed-to-Authenticate-for-Delegation setting. The UserAccountControl flag for this feature is 0x1000000.
+<28> Section 3.2.5.2.3: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 **KDCs** return KRB-ERR-BADOPTION whenever Service 1 and Service 2 do not belong to the same realm.
+
+<29> Section 4.3: The **TGS** checks the service's account in Active Directory for the Allowed-to-Authenticate-for-Delegation setting. The UserAccountControl flag for this feature is 0x1000000.
 
 The following behavior is applicable to Windows 7 and Windows Server 2008 R2 only: The padata type **PA-S4U-X509-USER** (130) is used in the encrypted-pa-data and the KERB_S4U_OPTIONS_use_reply_key_usage option bit is set (KERB_S4U_OPTIONS_use_reply_key_usage is described in section 2.2.2).
 
@@ -1002,9 +1004,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.1](#Section_3.1.1) Abstract Data Model | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
-| [3.1.5.1.1.1](#Section_3.1.5.1.1.1) When to Use Each padata Type | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
-| [3.1.5.1.2](#Section_3.1.5.1.2) Service Receives S4U2self KRB_TGS_REP | 32089 : Updated TGS-REQ processing to send new S4U padata (PA-S4U-X509-USER) by default. | Minor |
+| [2.2.2](#Section_2.2.2) PA_S4U_X509_USER | 32862 : Updated checksum reference and added WBN for Ge and prior clients using rsa-md4 (2) checksum. | Major |
 
 <a id="revision-history"></a>
 
@@ -1074,3 +1074,4 @@ The changes made to this document are listed in the following table. For more in
 | 7/8/2024 | 23.0 | None | No changes to the meaning, language, or formatting of the technical content. |
 | 8/11/2025 | 24.0 | Major | Significantly changed the technical content. |
 | 1/13/2026 | 24.1 | Minor | Clarified the meaning of the technical content. |
+| 3/30/2026 | 25.0 | Major | Significantly changed the technical content. |

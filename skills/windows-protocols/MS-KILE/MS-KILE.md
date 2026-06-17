@@ -59,9 +59,10 @@ Table of Contents
       - [3.1.1.1 Replay Cache](#Section_3.1.1.1)
       - [3.1.1.2 Cryptographic Material](#Section_3.1.1.2)
       - [3.1.1.3 Ticket Cache](#Section_3.1.1.3)
-      - [3.1.1.4 Machine ID](#Section_3.1.1.4)
-      - [3.1.1.5 SupportedEncryptionTypes](#Section_3.1.1.5)
-      - [3.1.1.6 Kerberos OID](#Section_3.1.1.6)
+      - [3.1.1.4 PerBootMachineID](#Section_3.1.1.4)
+      - [3.1.1.5 CrossBootMachineID](#Section_3.1.1.5)
+      - [3.1.1.6 SupportedEncryptionTypes](#Section_3.1.1.6)
+      - [3.1.1.7 Kerberos OID](#Section_3.1.1.7)
     - [3.1.2 Timers](#Section_3.1.2)
     - [3.1.3 Initialization](#Section_3.1.3)
     - [3.1.4 Higher-Layer Triggered Events](#Section_3.1.4)
@@ -197,7 +198,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 8/11/2025.
+Last updated: 4/27/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -487,6 +488,10 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSKB-4490425] Microsoft Corporation, "Updates to TGT delegation across incoming trusts in Windows Server", [https://support.microsoft.com/en-us/help/4490425/updates-to-tgt-delegation-across-incoming-trusts-in-windows-server](https://go.microsoft.com/fwlink/?linkid=2102428)
 
+[MSKB-5064081] Microsoft Corporation, "August 29, 2025—KB5064081", August 2025, [https://support.microsoft.com/en-us/topic/august-29-2025-kb5064081-os-build-26100-5074-preview-3f9eb9e1-72ca-4b42-af97-39aace788d93](https://go.microsoft.com/fwlink/?linkid=2330003)
+
+[MSKB-5065426] Microsoft Corporation, "September 9, 2025—KB5065426", September 2025, [https://support.microsoft.com/en-gb/topic/september-9-2025-kb5065426-os-build-26100-6584-77a41d9b-1b7c-4198-b9a5-3c4b6706dea9](https://go.microsoft.com/fwlink/?linkid=2344345)
+
 [RFC1510] Kohl, J., and Neuman, C., "The Kerberos Network Authentication Service (V5)", RFC 1510, September 1993, [https://www.rfc-editor.org/info/rfc1510](https://go.microsoft.com/fwlink/?LinkId=90279)
 
 [RFC2222] Myers, J., "Simple Authentication and Security Layer (SASL)", RFC 2222, October 1997, [https://www.rfc-editor.org/info/rfc2222](https://go.microsoft.com/fwlink/?LinkId=90322)
@@ -738,7 +743,9 @@ unsigned long Flags;
 
 unsigned long TokenIL;
 
-unsigned char MachineID[32];
+unsigned char PerBootMachineID[32];
+
+unsigned char CrossBootMachineID[32];
 
 } LSAP_TOKEN_INFO_INTEGRITY,
 
@@ -762,12 +769,14 @@ unsigned char MachineID[32];
 | 0x00004000 | System. |
 | 0x00005000 | Protected process. |
 
-**MachineID:** The machine ID (section [3.1.1.4](#Section_3.1.1.4)), which is used to identify the calling machine.
+**PerBootMachineID:** A 32-byte random string (section [3.1.1.4](#Section_3.1.1.4)) generated at every boot.
+
+**CrossBootMachineID:** A 32-byte string (section [3.1.1.5](#Section_3.1.1.5)) that uniquely identifies the calling machine and persists on disk.<8>
 
 <a id="Section_2.2.6"></a>
 ### 2.2.6 KERB-AD-RESTRICTION-ENTRY
 
-The **KERB-AD-RESTRICTION-ENTRY** structure SHOULD<8> specify additional restrictions for the client. Its structure is defined using ASN.1 notation and the syntax is as follows:
+The **KERB-AD-RESTRICTION-ENTRY** structure SHOULD<9> specify additional restrictions for the client. Its structure is defined using ASN.1 notation and the syntax is as follows:
 
 KERB-AD-RESTRICTION-ENTRY ::= SEQUENCE {
 
@@ -812,8 +821,8 @@ packet-beta
   21-21: "0"
   22-22: "0"
   23-23: "0"
-  24-24: "0"
-  25-25: "0"
+  24-24: "L"
+  25-25: "K"
   26-26: "J"
   27-27: "E"
   28-28: "D"
@@ -831,11 +840,13 @@ Where the bits are defined as:
 | C | RC4-HMAC |
 | D | AES128-CTS-HMAC-SHA1-96 |
 | E | AES256-CTS-HMAC-SHA1-96 |
-| F | FAST-supported<9> |
-| G | Compound-identity-supported<10> |
-| H | Claims-supported<11> |
-| I | Resource-SID-compression-disabled<12> |
+| F | FAST-supported<10> |
+| G | Compound-identity-supported<11> |
+| H | Claims-supported<12> |
+| I | Resource-SID-compression-disabled<13> |
 | J | AES256-CTS-HMAC-SHA1-96-SK |
+| K | AES128-CTS-HMAC-SHA256-128<14> |
+| L | AES256-CTS-HMAC-SHA384-192<15> |
 
 **AES256-CTS-HMAC-SHA1-96-SK:** Enforce AES session keys when legacy ciphers are in use. When the bit is set, this indicates to the KDC that all cases where RC4 session keys can be used will be superseded with AES keys.
 
@@ -848,7 +859,7 @@ For more details see section [3.1.5.2](#Section_3.1.5.2) Encryption Types, and s
 <a id="Section_2.2.8"></a>
 ### 2.2.8 PA-SUPPORTED-ENCTYPES
 
-The **PA-SUPPORTED-ENCTYPES** structure SHOULD<13> specify the encryption types supported and contains a bit field of the supported encryption types bit flags (section [2.2.7](#Section_2.2.7)).
+The **PA-SUPPORTED-ENCTYPES** structure SHOULD<16> specify the encryption types supported and contains a bit field of the supported encryption types bit flags (section [2.2.7](#Section_2.2.7)).
 
 PA-SUPPORTED-ENCTYPES ::= Int32 – Supported Encryption Types Bit Field --
 
@@ -860,7 +871,7 @@ An ASN.1 **OCTET STRING**, which is binary data whose length is a multiple of ei
 <a id="Section_2.2.10"></a>
 ### 2.2.10 PA-PAC-OPTIONS
 
-The **PA-PAC-OPTIONS** structure SHOULD<14> specify explicitly requested options in the [**PAC**](#gt_privilege-attribute-certificate-pac). Its structure is defined using ASN.1 notation. The syntax is as follows:
+The **PA-PAC-OPTIONS** structure SHOULD<17> specify explicitly requested options in the [**PAC**](#gt_privilege-attribute-certificate-pac). Its structure is defined using ASN.1 notation. The syntax is as follows:
 
 PA-PAC-OPTIONS ::= SEQUENCE {
 
@@ -881,14 +892,14 @@ Note: KerberosFlags ::= BIT STRING (SIZE (32..MAX))
 <a id="Section_2.2.11"></a>
 ### 2.2.11 KERB-KEY-LIST-REQ
 
-The **KERB-KEY-LIST-REQ** structure<15> is used to request a list of key types the KDC can supply to the client to support single sign-on capabilities in legacy protocols. Its structure is defined using ASN.1 notation. The syntax is as follows:
+The **KERB-KEY-LIST-REQ** structure<18> is used to request a list of key types the KDC can supply to the client to support single sign-on capabilities in legacy protocols. Its structure is defined using ASN.1 notation. The syntax is as follows:
 
 KERB-KEY-LIST-REQ ::= SEQUENCE OF Int32 -- encryption type --
 
 <a id="Section_2.2.12"></a>
 ### 2.2.12 KERB-KEY-LIST-REP
 
-The **KERB-KEY-LIST-REP** structure<16> contains a list of key types the KDC has supplied to the client to support single sign-on capabilities in legacy protocols. Its structure is defined using ASN.1 notation. The syntax is as follows:
+The **KERB-KEY-LIST-REP** structure<19> contains a list of key types the KDC has supplied to the client to support single sign-on capabilities in legacy protocols. Its structure is defined using ASN.1 notation. The syntax is as follows:
 
 KERB-KEY-LIST-REP ::= SEQUENCE OF EncryptionKey
 
@@ -980,7 +991,8 @@ KILE specifies the following extensions to common elements:
 - **Replay Cache**
 - **Cryptographic Material**
 - **Ticket Cache**
-- **Machine ID**
+- **PerBootMachineID**
+- **CrossBootMachineID**
 - **Kerberos** [**OID**](#gt_object-identifier-oid)
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Replay Cache
@@ -1005,20 +1017,25 @@ The subkey in the **EncAPRepPart** of the **KRB_AP_REP** message (defined in [[R
 
 Kerberos V5 specifies that clients can cache [**TGTs**](#gt_ticket-granting-ticket-tgt) ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 3.3.1).
 
-KILE implements a [**ticket**](#gt_ticket) cache that preserves [**service tickets**](#gt_service-ticket) and TGTs.<17>
+KILE implements a [**ticket**](#gt_ticket) cache that preserves [**service tickets**](#gt_service-ticket) and TGTs.<20>
 
 <a id="Section_3.1.1.4"></a>
-#### 3.1.1.4 Machine ID
+#### 3.1.1.4 PerBootMachineID
 
-KILE implements a 32-byte binary random string machine ID.<18>
+KILE implements a 32-byte binary random string machine identifier.<21>
 
 <a id="Section_3.1.1.5"></a>
-#### 3.1.1.5 SupportedEncryptionTypes
+#### 3.1.1.5 CrossBootMachineID
 
-KILE implements a 32-bit unsigned integer that contains a combination of flags that specify what encryption types (section [2.2.7](#Section_2.2.7)) are supported by Kerberos.<19> The default is 0000001C.<20>
+KILE implements a 32-byte string that uniquely identifies the calling machine.<22> This value MUST NOT change at computer startup.
 
 <a id="Section_3.1.1.6"></a>
-#### 3.1.1.6 Kerberos OID
+#### 3.1.1.6 SupportedEncryptionTypes
+
+KILE implements a 32-bit unsigned integer that contains a combination of flags that specify what encryption types (section [2.2.7](#Section_2.2.7)) are supported by Kerberos.<23> The default is 0000001C.<24>
+
+<a id="Section_3.1.1.7"></a>
+#### 3.1.1.7 Kerberos OID
 
 Kerberos V5 specifies the [**Kerberos principal**](#gt_kerberos-principal) name form ([[RFC1964]](https://go.microsoft.com/fwlink/?LinkId=90304) section 2.1.1). KILE also implements a truncated Kerberos [**OID**](#gt_object-identifier-oid) value: (1.2.840.48018.1.2.2)
 
@@ -1032,7 +1049,7 @@ None.
 
 The random number generator for [**keys**](#gt_key) and nonces is initialized by other components but complies with [[FIPS140]](https://go.microsoft.com/fwlink/?LinkId=89866) section 4.7.1.
 
-A machine ID (section [3.1.1.4](#Section_3.1.1.4)) is created at computer startup.
+**PerBootMachineID** (section [3.1.1.4](#Section_3.1.1.4)) is generated at computer startup.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -1073,8 +1090,8 @@ KILE adds the following pre-authentication types:
 
 - PA-SUPPORTED-ENCTYPES [165] (section [2.2.8](#Section_2.2.8))
 - PA-PAC-OPTIONS [167] (section [2.2.10](#Section_2.2.10))
-- KERB-KEY-LIST-REQ [161] (section [2.2.11](#Section_2.2.11))<21>
-- KERB-KEY-LIST-REP [162] (section [2.2.12](#Section_2.2.12))<22>
+- KERB-KEY-LIST-REQ [161] (section [2.2.11](#Section_2.2.11))<25>
+- KERB-KEY-LIST-REP [162] (section [2.2.12](#Section_2.2.12))<26>
 Unknown pre-authentication types MUST be ignored by [**KDCs**](#gt_key-distribution-center-kdc).
 
 When clients perform a password-based initial authentication, they MUST supply the PA-ENC-TIMESTAMP [2] pre-authentication type when they construct the initial [**AS**](#gt_authentication-service-as) request. They can request, via the PA-PAC-REQUEST [128] pre-authentication type, that a [**privilege attribute certificate (PAC)**](#gt_privilege-attribute-certificate-pac) be included in issued [**tickets**](#gt_ticket).
@@ -1084,16 +1101,16 @@ If the KDC does not receive the required pre-authentication message in the [**AS
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Encryption Types
 
-KILE MUST<23> support the Advanced Encryption Standard (AES) encryption types:
+KILE MUST<27> support the Advanced Encryption Standard (AES) encryption types:
 
 - AES256-CTS-HMAC-SHA1-96 [18] ([[RFC3962]](https://go.microsoft.com/fwlink/?LinkId=90451) section 7)
 - AES128-CTS-HMAC-SHA1-96 [17] ([RFC3962] section 7)
-and SHOULD<24> support the following encryption types, which are listed in order of relative strength:
+and SHOULD<28> support the following encryption types, which are listed in order of relative strength:
 
 - RC4-HMAC [23] [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488)
 - DES-CBC-MD5 [3] [[RFC3961]](https://go.microsoft.com/fwlink/?LinkId=90450)
 - DES-CBC-CRC [1] [RFC3961]
-All other Encryption Types SHOULD<25> be rejected. Kerberos V5 encryption type assigned numbers are specified in [RFC3961] section 8, [RFC4757] section 5, and [RFC3962] section 7.<26>
+All other Encryption Types SHOULD<29> be rejected. Kerberos V5 encryption type assigned numbers are specified in [RFC3961] section 8, [RFC4757] section 5, and [RFC3962] section 7.<30>
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Encryption Checksum Types
@@ -1147,7 +1164,7 @@ KILE MUST support the **KRB_ERR_RESPONSE_TOO_BIG** error message ([RFC4120] sect
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 Addressing
 
-KILE SHOULD<27> support IPv6 addresses ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 7.1).
+KILE SHOULD<31> support IPv6 addresses ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 7.1).
 
 KILE MUST NOT support directional addresses ([RFC4120] section 7.1). If the directional addresses are present, they MUST be ignored.
 
@@ -1156,14 +1173,14 @@ KILE MUST NOT support directional addresses ([RFC4120] section 7.1). If the dire
 
 The Kerberos V5 protocol specifies rules for encoding and processing names, both for character set and case ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 6).
 
-Name comparisons, whether for users or [**domains**](#gt_domain), MUST NOT be case sensitive in KILE. KILE MUST use UTF-8 encoding of these names [[RFC2279]](https://go.microsoft.com/fwlink/?LinkId=90331). Normalization MUST NOT be performed and surrogates MUST NOT be supported. Names SHOULD<28> match.
+Name comparisons, whether for users or [**domains**](#gt_domain), MUST NOT be case sensitive in KILE. KILE MUST use UTF-8 encoding of these names [[RFC2279]](https://go.microsoft.com/fwlink/?LinkId=90331). Normalization MUST NOT be performed and surrogates MUST NOT be supported. Names SHOULD<32> match.
 
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 Key Version Numbers
 
 The Kerberos V5 protocol specifies key version numbers ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 5.2.9). Key version numbers are used in the Kerberos V5 protocol to distinguish between different keys in the same [**domain**](#gt_domain). KILE key version numbers are encoded and decoded as signed 32-bit integers.
 
-KILE supports key version numbers for [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc). Each RODC will have a different key version number.<29> This allows the [**Domain Controller (DC)**](#gt_domain-controller-dc) to distinguish between keys that are issued to different RODCs.
+KILE supports key version numbers for [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc). Each RODC will have a different key version number.<33> This allows the [**Domain Controller (DC)**](#gt_domain-controller-dc) to distinguish between keys that are issued to different RODCs.
 
 The key version number consists of 32 bits. The first 16 bits, including the most significant bit, are an unsigned 16-bit number that identifies the RODC. The remaining 16 bits are the version number of the key.
 
@@ -1206,7 +1223,7 @@ Where:
 - The *servicename* segment is a string that is the [**distinguished name (DN)**](#gt_distinguished-name-dn), [**objectGUID**](#gt_objectguid), [**Internet host name**](#gt_internet-host-name), or FQDN for the service.
 **Note**: <alphanum> element is defined in [RFC2396] section 1.6.
 
-An application can supply a name of the form "RestrictedKrbHost/<hostname>" when its callers have provided the hostname but not the correct SPN for the service. Applications MAY<30> use "RestrictedKrbHost/<hostname>" with awareness of the security considerations described in section [5.1.2](#Section_5.1.2). Applications calling [**GSS**](#gt_generic-security-services-gss)-API directly MUST provide a target name that is an SPN for their service applications for Kerberos authentication.
+An application can supply a name of the form "RestrictedKrbHost/<hostname>" when its callers have provided the hostname but not the correct SPN for the service. Applications MAY<34> use "RestrictedKrbHost/<hostname>" with awareness of the security considerations described in section [5.1.2](#Section_5.1.2). Applications calling [**GSS**](#gt_generic-security-services-gss)-API directly MUST provide a target name that is an SPN for their service applications for Kerberos authentication.
 
 <a id="Section_3.1.5.12"></a>
 #### 3.1.5.12 Password Change and Set
@@ -1238,15 +1255,15 @@ This section describes a conceptual model of possible data organization that an 
 
 The KILE client has the following configuration setting for [**claims**](#gt_claim), compound authentication, and [**FAST**](#gt_flexible-authentication-secure-tunneling-fast):
 
-**EnableCBACandArmor:** A Boolean setting that SHOULD<31> indicate that the Kerberos client is claims-, compound authentication-, and FAST-aware. The default is FALSE.
+**EnableCBACandArmor:** A Boolean setting that SHOULD<35> indicate that the Kerberos client is claims-, compound authentication-, and FAST-aware. The default is FALSE.
 
 The KILE client has the following configuration setting for FAST:
 
-**RequireFAST:** A Boolean setting that SHOULD<32> indicate that the Kerberos FAST client MUST enforce FAST. The default is FALSE.
+**RequireFAST:** A Boolean setting that SHOULD<36> indicate that the Kerberos FAST client MUST enforce FAST. The default is FALSE.
 
 The KILE client has the following configuration setting for non-KILE [**realms**](#gt_realm):
 
-**RealmCanonicalize:** SHOULD<33> be initialized in an implementation specific way.
+**RealmCanonicalize:** SHOULD<37> be initialized in an implementation specific way.
 
 After a connection is established through the [**AP exchange**](#gt_authentication-protocol-ap-exchange), Kerberos V5 does not directly influence the application protocol. The client parameters MUST be set when establishing a security context that supports the signing or encryption of messages. The higher-layer application protocol will invoke the per-message functions. The following parameters are logically available for the application to set. These logical parameters can influence various protocol-defined flags.
 
@@ -1410,16 +1427,16 @@ The Kerberos V5 protocol specifies the [**AS exchange**](#gt_authentication-serv
 
 The client will always include a [**PAC**](#gt_privilege-attribute-certificate-pac) request padata type when generating an **KRB_AS-REQ** message. The PAC is specified in [MS-PAC](../MS-PAC/MS-PAC.md).
 
-If **EnableCBACandArmor** is TRUE, the client SHOULD<34> behave as follows:
+If **EnableCBACandArmor** is TRUE, the client SHOULD<38> behave as follows:
 
 - When sending the **AS-REQ**, add a **PA-PAC-OPTIONS** [167] (section [2.2.10](#Section_2.2.10)) padata type with the Claims bit set in the **AS-REQ** to request [**claims**](#gt_claim) [**authorization data**](#gt_authorization-data).
 - When receiving the **KRB_AS_REP** message, if the Claims bit is set in **PA-SUPPORTED-ENCTYPES** [165] structure (section [2.2.8](#Section_2.2.8)), and not set in **PA-PAC-OPTIONS** [167] structure (section 2.2.10), the client locates a DS_BEHAVIOR_WIN2012 DC (section [3.2.5.3](#Section_3.2.5.3)) and returns to step 1.
-If **EnableCBACandArmor** is TRUE, the principal is not the computer account, and the client is running on a domain-joined computer, the Kerberos client SHOULD<35> use [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) [[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316) when the principal’s Realm supports FAST (section [3.2.5.4](#Section_3.2.5.4)).
+If **EnableCBACandArmor** is TRUE, the principal is not the computer account, and the client is running on a domain-joined computer, the Kerberos client SHOULD<39> use [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) [[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316) when the principal’s Realm supports FAST (section [3.2.5.4](#Section_3.2.5.4)).
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Forwardable TGT Request
 
-When the client requests a forwardable [**TGT**](#gt_ticket-granting-ticket-tgt) ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) Section 2.6) for the application server, the client SHOULD:<36>
+When the client requests a forwardable [**TGT**](#gt_ticket-granting-ticket-tgt) ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) Section 2.6) for the application server, the client SHOULD:<40>
 
 - Set the **etype** field of the **TGS-REQ** to the contents of the **keytype** field in the previous TGS-REP to specify the common encryption type.
 - Provide a **PA-SUPPORTED-ENCTYPES** [165] value (section [2.2.7](#Section_2.2.7)) for padata, based on the encryption types (section [3.1.5.2](#Section_3.1.5.2)) mutually supported by the [**KDC**](#gt_key-distribution-center-kdc) and the application server for the [**session key**](#gt_session-key) with the delegated TGT. The client uses the KDC encryption types provided in the **AS-REP** from the KDC and the application server encryption types provided in the previous **TGS-REP** message for the application server.
@@ -1432,9 +1449,9 @@ The Kerberos client adds a PA-PAC-OPTIONS [167] (section [2.2.10](#Section_2.2.1
 
 If **EnableCBACandArmor** is TRUE, the Kerberos client adds a PA-PAC-OPTIONS [167] (section 2.2.10) padata type with the Claims bit (specified in section [2.2.7](#Section_2.2.7)) set in the TGS REQ to notify the [**KDC**](#gt_key-distribution-center-kdc) that the client is [**claims**](#gt_claim) aware.
 
-If **EnableCBACandArmor** is TRUE, the Kerberos client SHOULD<37> use [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) [[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316) when the [**realm**](#gt_realm) supports FAST (section [3.2.5.4](#Section_3.2.5.4)).
+If **EnableCBACandArmor** is TRUE, the Kerberos client SHOULD<41> use [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) [[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316) when the [**realm**](#gt_realm) supports FAST (section [3.2.5.4](#Section_3.2.5.4)).
 
-If **EnableCBACandArmor** is TRUE and the application server's realm TGT's **PA-SUPPORTED-ENCTYPES** [165] structure (section [2.2.8](#Section_2.2.8)) Compound Identity bit is set, the Kerberos client SHOULD<38> send a [**compound identity TGS-REQ**](#gt_compound-identity-tgs-req) by using FAST with explicit armoring, using the computer's TGT.
+If **EnableCBACandArmor** is TRUE and the application server's realm TGT's **PA-SUPPORTED-ENCTYPES** [165] structure (section [2.2.8](#Section_2.2.8)) Compound Identity bit is set, the Kerberos client SHOULD<42> send a [**compound identity TGS-REQ**](#gt_compound-identity-tgs-req) by using FAST with explicit armoring, using the computer's TGT.
 
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 AP Exchange
@@ -1444,7 +1461,7 @@ If **UseSessionKey** is set to TRUE, the client sets the USE-SESSION-KEY flag to
 When the server name is not Krbtgt, the client sends an AP request as an authorization data field ([RFC4120] section 5.2.6), initialized as follows:
 
 - ad-type KERB_AUTH_DATA_LOOPBACK (142) and ad-data containing **KERB_AUTH_DATA_LOOPBACK** structure (section [2.2.4](#Section_2.2.4)).
-- KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141), containing the **KERB-AD-RESTRICTION-ENTRY** structure (section [2.2.6](#Section_2.2.6)) inside the first AD-IF-RELEVANT element.<39>
+- KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141), containing the **KERB-AD-RESTRICTION-ENTRY** structure (section [2.2.6](#Section_2.2.6)) inside the first AD-IF-RELEVANT element.<43>
 - KERB_AUTH_DATA_CLIENT_TARGET (144), containing the server’s name qualified with the realm name inside the first AD-IF-RELEVANT element.
 - If **ChannelBinding** is set to TRUE, the client sends the Authorization Data Type AD-AUTH-DATA-AP-OPTIONS (143) data in the first AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) and the ad-data of KERB_AP_OPTIONS_CBT (0x4000), encoded as a four byte little-endian unsigned integer. The presence of this element indicates that the client expects the applications running on it to include channel binding information ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 1.1.6 and [[RFC2744]](https://go.microsoft.com/fwlink/?LinkId=125716)) in AP requests whenever Kerberos authentication takes place over an "outer channel" such as TLS. Channel binding is provided using the **ChannelBinding** variable specified in section [3.2.1](#Section_3.2.1).
 - If **UnverifiedTargetName** is set to TRUE, the client additionally sets KERB_AP_OPTIONS_UNVERIFIED_TARGET_NAME (0x8000) in the AD_AUTH_DATA_AP_OPTIONS.
@@ -1453,7 +1470,7 @@ When the client receives a KRB_AP_ERR_SKEW error ([RFC4120] section 3.2.3) with 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-The Kerberos V5 protocol requires the client to contact the [**KDC**](#gt_key-distribution-center-kdc) and recognizes that a specific KDC could be offline or unavailable to [**service**](#gt_service) the request. The actual behavior is not specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458); these behavior details are determined by the implementation. Detection of a KDC's failure to reply requires a timer. Clients can use the initial time-out and increase the time-out by some interval to retry multiple times before failing the **AS-REQ** or **TGS-REQ** message.<40>
+The Kerberos V5 protocol requires the client to contact the [**KDC**](#gt_key-distribution-center-kdc) and recognizes that a specific KDC could be offline or unavailable to [**service**](#gt_service) the request. The actual behavior is not specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458); these behavior details are determined by the implementation. Detection of a KDC's failure to reply requires a timer. Clients can use the initial time-out and increase the time-out by some interval to retry multiple times before failing the **AS-REQ** or **TGS-REQ** message.<44>
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
@@ -1480,12 +1497,12 @@ The maximum [**ticket**](#gt_ticket) lifetime is configured separately for [**TG
 KILE also adds the following new [**KDC**](#gt_key-distribution-center-kdc) configuration setting:
 
 - **AuthenticationOptions**: A 32-bit unsigned integer containing the POLICY_KERBEROS_VALIDATE_CLIENT flag ([MS-LSAD] section 2.2.4.19). KILE implementations, which use the LSAD for the configuration database, can directly access the **AuthenticationOptions** field in the Kerberos Policy Information. Only the POLICY_KERBEROS_VALIDATE_CLIENT flag is supported and set by default.
-- **ClaimsCompIdFASTSupport:** A registry key for the KDC configuration setting. This 32-bit unsigned integer SHOULD<41> be used as follows:
+- **ClaimsCompIdFASTSupport:** A registry key for the KDC configuration setting. This 32-bit unsigned integer SHOULD<45> be used as follows:
 - If set to 0, there are no new behaviors.
 - If set to 1, the KDC supports [**claims**](#gt_claim), compound identity, and [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) and other KDCs in the [**domain**](#gt_domain) do not.
 - If set to 2, all KDCs in the domain support claims, compound identity, and FAST.
 - If set to 3, all KDCs in the domain support claims and compound identity and enforce FAST.
-The implementation SHOULD<42> also expose the key and value at the specified registry path.
+The implementation SHOULD<46> also expose the key and value at the specified registry path.
 
 KILE implementations that use [**Active Directory**](#gt_active-directory) for the account database support the following variables:
 
@@ -1498,7 +1515,7 @@ KILE implementations that use [**Active Directory**](#gt_active-directory) for t
 The Kerberos V5 protocol specifies which [**KDCs**](#gt_key-distribution-center-kdc) MUST maintain a database of principals with their [**secret keys**](#gt_secret-key) and corresponding supported encryption types:
 
 - **Secret keys:** KILE implementations that use [**Active Directory**](#gt_active-directory) for the account database use the **supplementalCredentials** attribute ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.287).
-- **KerbSupportedEncryptionTypes:** A 32-bit unsigned integer that contains a combination of flags that specify what encryption types (section [3.1.5.2](#Section_3.1.5.2)) are supported by the application server, and whether compound identity (section [2.2.7](#Section_2.2.7)) is supported.<43> KILE implementations that use Active Directory for the account database use the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481).
+- **KerbSupportedEncryptionTypes:** A 32-bit unsigned integer that contains a combination of flags that specify what encryption types (section [3.1.5.2](#Section_3.1.5.2)) are supported by the application server, and whether compound identity (section [2.2.7](#Section_2.2.7)) is supported.<47> KILE implementations that use Active Directory for the account database use the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481).
 To support all functionality of KILE, the account database MUST be extended to support the following additional information for each principal:
 
 - **AuthorizationDataNotRequired:** A Boolean setting to control when to include a [**PAC**](#gt_privilege-attribute-certificate-pac) in the [**service ticket**](#gt_service-ticket). KILE implementations that use Active Directory for the account database use the userAccountControl attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 2.2.16) NA flag. The default is FALSE.
@@ -1568,7 +1585,7 @@ If the KDC has a [**ticket**](#gt_ticket) replay cache, it MUST be reset when th
 
 If the KDC has a ticket cache, the ticket cache MUST be initialized to an empty state.
 
-If the KDC supports:<44>
+If the KDC supports:<48>
 
 - **FAST:** the KDC sets the FAST-supported bit on the krbtgt account’s **KerbSupportedEncryptionTypes**.
 - **Claims:** the KDC sets the claims-supported bit (specified in section [2.2.7](#Section_2.2.7)) on the krbtgt account’s **KerbSupportedEncryptionTypes**.
@@ -1609,7 +1626,7 @@ If **ClaimsCompIdFASTSupport** is set to:
 - 1, and a KDC_ERR_PREAUTH_REQUIRED is returned in the KRB_ERROR: The KDC SHOULD NOT return PA-FX-FAST [136] in the KRB_ERROR.
 - 1, 2, or 3 and an armored **AS-REQ** is received: The KDC processes per FAST ([[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316)).
 - 1 or 2, and an unarmored **AS-REQ** is received: The KDC continues without FAST.
-- 3, and an **AS-REQ** is received: If the principal is a computer account, then the KDC continues without FAST. Otherwise, the KDC returns KDC_ERR_PREAUTH_REQUIRED and return PA-FX-FAST [136] ([RFC6113] section 5.4.2).<45>
+- 3, and an **AS-REQ** is received: If the principal is a computer account, then the KDC continues without FAST. Otherwise, the KDC returns KDC_ERR_PREAUTH_REQUIRED and return PA-FX-FAST [136] ([RFC6113] section 5.4.2).<49>
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Server Principal Lookup
 
@@ -1662,12 +1679,12 @@ If the canonicalize flag ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 User Account Objects Without UPN
 
-If the user account object does not have the **userPrincipalName** attribute ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.349) set, the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<46> send a **UPN_DNS_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.10) containing a [**user principal name (UPN)**](#gt_user-principal-name-upn), constructed by concatenating the user name, the "@" symbol, and the [**DNS**](#gt_domain-name-system-dns) name of the [**domain**](#gt_domain).
+If the user account object does not have the **userPrincipalName** attribute ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.349) set, the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<50> send a **UPN_DNS_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.10) containing a [**user principal name (UPN)**](#gt_user-principal-name-upn), constructed by concatenating the user name, the "@" symbol, and the [**DNS**](#gt_domain-name-system-dns) name of the [**domain**](#gt_domain).
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 PAC Generation
 
-In either of the following two cases, a [**PAC**](#gt_privilege-attribute-certificate-pac) [MS-PAC](../MS-PAC/MS-PAC.md) MUST be generated and included in the response by the [**KDC**](#gt_key-distribution-center-kdc):<47>
+In either of the following two cases, a [**PAC**](#gt_privilege-attribute-certificate-pac) [MS-PAC](../MS-PAC/MS-PAC.md) MUST be generated and included in the response by the [**KDC**](#gt_key-distribution-center-kdc):<51>
 
 - During an [**Authentication Service (AS)**](#gt_authentication-service-as) request or Ticket Granting Service ([**TGS**](#gt_ticket-granting-service-tgs)) request where the requested ticket is a Ticket-Granting Ticket ([**TGT**](#gt_ticket-granting-ticket-tgt)) (including referrals and tickets to Read-Only Domain Controllers ([**RODCs**](#gt_read-only-domain-controller-rodc))).
 - During a TGS request that results in a service ticket unless the NA bit is set in the **UserAccountControl** field in the **KERB_VALIDATION_INFO** structure ([MS-PAC] section 2.5) or the source ticket PAC contains a **PAC_ATTRIBUTES_INFO** structure ([MS-PAC] section 2.14) showing that the PAC was not requested (implicitly or explicitly).
@@ -1678,7 +1695,7 @@ Otherwise, the response will not contain a PAC.
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Determining Authentication Policy Silo Membership
 
-If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the KDC SHOULD<48> set **BelongsToSilo** to FALSE. See section [3.3.1.1](#Section_3.3.1.1) for the following KDC pseudo variable definitions.
+If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the KDC SHOULD<52> set **BelongsToSilo** to FALSE. See section [3.3.1.1](#Section_3.3.1.1) for the following KDC pseudo variable definitions.
 
 **Note** The **BelongsToSilo** variable is a Boolean variable that is used for illustrative purposes in the processing rules of this section and section [3.3.5.5](#Section_3.3.5.5). The value of **BelongsToSilo** is not persisted across client requests.
 
@@ -1690,7 +1707,7 @@ If **domainControllerFunctionality** returns a value >= 6, the [**KDC**](#gt_key
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 Determining Authentication Policy Settings
 
-If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<49> set **PolicyName** to NULL. See section [3.3.1.1](#Section_3.3.1.1) for the following KDC pseudo variable definitions.
+If **domainControllerFunctionality** returns a value < 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<53> set **PolicyName** to NULL. See section [3.3.1.1](#Section_3.3.1.1) for the following KDC pseudo variable definitions.
 
 If **domainControllerFunctionality** returns a value >= 6, the KDC checks whether the account has an Authentication Policy:
 
@@ -1734,20 +1751,20 @@ Kerberos V5 specifies the [**AS exchange**](#gt_authentication-service-as-exchan
 
 If Pre-AuthenticationNotRequired is set to TRUE on the principal, the [**KDC**](#gt_key-distribution-center-kdc) MUST issue a [**TGT**](#gt_ticket-granting-ticket-tgt) without validating [**pre-authentication**](#gt_pre-authentication) data ([RFC4120] section 7.5.2) provided.
 
-If DES is used for pre-authentication, the KDC MUST:<50>
+If DES is used for pre-authentication, the KDC MUST:<54>
 
 - If UseDESOnly is not set: the KDC MUST return KDC_ERR_ETYPE_NOTSUPP.
 - Otherwise, if the account is:
 - krbtgt: the KDC MUST return KDC_ERR_ETYPE_NOTSUPP.
 - The computer account of a KDC: the KDC MUST return KDC_ERR_ETYPE_NOTSUPP.
-The KDC SHOULD<51> return in the encrypted part of the **AS-REP** message a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165] (section [2.2.8](#Section_2.2.8)), to indicate what encryption types (section [2.2.7](#Section_2.2.7)) are supported by the KDC, and whether Claims or [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) are supported.<52>
+The KDC SHOULD<55> return in the encrypted part of the **AS-REP** message a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165] (section [2.2.8](#Section_2.2.8)), to indicate what encryption types (section [2.2.7](#Section_2.2.7)) are supported by the KDC, and whether Claims or [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) are supported.<56>
 
-If **domainControllerFunctionality** returns a value >= 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the KDC MUST check whether the account is a member of PROTECTED_USERS ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4). If it is a member of PROTECTED_USERS, then:<53>
+If **domainControllerFunctionality** returns a value >= 6 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25), the KDC MUST check whether the account is a member of PROTECTED_USERS ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4). If it is a member of PROTECTED_USERS, then:<57>
 
 - If pre-authentication used DES or RC4, the KDC MUST return KDC_ERR_ETYPE_NOTSUPP.
 - **MaxRenewAge** (section [3.3.1](#Section_3.3.1)) for the TGT is 4 hours unless specified by policy.
 - **MaxTicketAge** (section 3.3.1) for the TGT is 4 hours unless specified by policy.
-If **domainControllerFunctionality** returns a value >= 6, the KDC MUST determine whether an Authentication Policy is applied to the account (section [3.3.5.5](#Section_3.3.5.5)). If **Enforced** is TRUE, then:<54>
+If **domainControllerFunctionality** returns a value >= 6, the KDC MUST determine whether an Authentication Policy is applied to the account (section [3.3.5.5](#Section_3.3.5.5)). If **Enforced** is TRUE, then:<58>
 
 - If **TGTLifetime** is not 0: MaxRenewAge for the TGT is **TGTLifetime**.
 - If **TGTLifetime** is not 0: MaxTicketAge for the TGT is **TGTLifetime**.
@@ -1878,7 +1895,7 @@ The KDC populates the returned **KERB_VALIDATION_INFO** structure fields as foll
 - The **LogonDomainId** is set to **DomainSid**.
 - The **Reserved1** field MUST be set to a two-element array of unsigned 32-bit integers and each element of the array MUST be zero.
 - The **Reserved3** field MUST be set to a seven-element array of unsigned 32-bit integers and each element of the array MUST be zero.
-- The **SidCount** field contains the number of SIDs in the **ExtraSids** field. The **ExtraSids** field SHOULD<55> contain the AUTHENTICATION_AUTHORITY_ASSERTED_IDENTITY SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4), and the D bit SHOULD be set in the **UserFlags** field.
+- The **SidCount** field contains the number of SIDs in the **ExtraSids** field. The **ExtraSids** field SHOULD<59> contain the AUTHENTICATION_AUTHORITY_ASSERTED_IDENTITY SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4), and the D bit SHOULD be set in the **UserFlags** field.
 - The **ResourceGroupDomainSid** field MUST be set to NULL.
 - The **ResourceGroupCount** field contains the number of SIDs in the **ResourceGroupIds** field.
 - The **ResourceGroupIds** field MUST be set to NULL.
@@ -1893,7 +1910,7 @@ The [**KDC**](#gt_key-distribution-center-kdc) populates the returned **PAC_CLIE
 <a id="Section_3.3.5.6.4.3"></a>
 ###### 3.3.5.6.4.3 Server Signature
 
-The [**KDC**](#gt_key-distribution-center-kdc) creates a keyed hash ([[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488)) of the entire [**PAC**](#gt_privilege-attribute-certificate-pac) message with the Signature fields of both **PAC_SIGNATURE_DATA** structures set to zero using the server account [**key**](#gt_key) with the strongest cryptography that the [**domain**](#gt_domain) supports<56> and populates the returned **PAC_SIGNATURE_DATA** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.8) fields as follows:
+The [**KDC**](#gt_key-distribution-center-kdc) creates a keyed hash ([[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488)) of the entire [**PAC**](#gt_privilege-attribute-certificate-pac) message with the Signature fields of both **PAC_SIGNATURE_DATA** structures set to zero using the server account [**key**](#gt_key) with the strongest cryptography that the [**domain**](#gt_domain) supports<60> and populates the returned **PAC_SIGNATURE_DATA** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.8) fields as follows:
 
 - The **SignatureType** is the value corresponding to the cryptographic system used to calculate the checksum.
 - The **Signature** field is the keyed hash of the entire PAC message with the Signature fields of both **PAC_SIGNATURE_DATA** structures set to zero.
@@ -1907,7 +1924,7 @@ The [**KDC**](#gt_key-distribution-center-kdc) creates a keyed hash ([[RFC4757]]
 <a id="Section_3.3.5.6.4.5"></a>
 ###### 3.3.5.6.4.5 UPN_DNS_INFO Structure
 
-The [**KDC**](#gt_key-distribution-center-kdc) SHOULD<57> populate the returned **UPN_DNS_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.10) fields as follows:
+The [**KDC**](#gt_key-distribution-center-kdc) SHOULD<61> populate the returned **UPN_DNS_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.10) fields as follows:
 
 - The **UpnLength** field is the length of the **UPN** field, in bytes.
 - The **UpnOffset** field is the offset of the **UPN** field to the beginning of the buffer, in bytes, from the beginning of the **UPN_DNS_INFO** structure.
@@ -1923,7 +1940,7 @@ If **ClaimsCompIdFASTSupport** is set to:
 
 - 0: The [**KDC**](#gt_key-distribution-center-kdc) does not insert into the returned [**PAC**](#gt_privilege-attribute-certificate-pac) a **PAC_CLIENT_CLAIMS_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.11).
 - 1: If a PA-PAC-OPTIONS [167] (section [2.2.10](#Section_2.2.10)) padata type with the Claims bit set is in the **AS-REQ**, the KDC behaves as noted in the next step, "2 or 3". Otherwise, the KDC does not provide a **PAC_CLIENT_CLAIMS_INFO** structure.
-- 2 or 3: The KDC SHOULD<58>
+- 2 or 3: The KDC SHOULD<62>
 - Add the CLAIMS_VALID [**SID**](#gt_security-identifier-sid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) to **KERB_VALIDATION_INFO.ExtraSids**.
 - Increment **SidCount**.
 - Add a **PAC_CLIENT_CLAIMS_INFO** structure as follows:
@@ -1933,7 +1950,7 @@ For KILE implementations that use [**Active Directory**](#gt_active-directory) f
 <a id="Section_3.3.5.6.4.7"></a>
 ###### 3.3.5.6.4.7 PAC_ATTRIBUTES_INFO Structure
 
-The KDC SHOULD<59> include the **PAC_ATTRIBUTES_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.14) only in TGTs (including referrals and tickets to RODCs).
+The KDC SHOULD<63> include the **PAC_ATTRIBUTES_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.14) only in TGTs (including referrals and tickets to RODCs).
 
 The KDC SHOULD populate the bits in the structure as follows:
 
@@ -1942,7 +1959,7 @@ The KDC SHOULD populate the bits in the structure as follows:
 <a id="Section_3.3.5.6.4.8"></a>
 ###### 3.3.5.6.4.8 PAC_REQUESTOR SID
 
-The KDC SHOULD<60> include the **PAC_REQUESTOR** [**SID**](#gt_security-identifier-sid) ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.15) only in TGTs (including referrals and tickets to RODCs).
+The KDC SHOULD<64> include the **PAC_REQUESTOR** [**SID**](#gt_security-identifier-sid) ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.15) only in TGTs (including referrals and tickets to RODCs).
 
 The KDC SHOULD populate the **PAC_REQUESTOR** SID with the SID of the account that requested the ticket. This will be the same as the account named in the **cname** ([MS-SFU](../MS-SFU/MS-SFU.md) section 2.2.2) except in delegation scenarios as documented in [MS-SFU], where this will be the delegating service.
 
@@ -1957,22 +1974,22 @@ KILE supports the following extensions to the TGS exchange:
 - [**TGT**](#gt_ticket-granting-ticket-tgt) without a [**PAC**](#gt_privilege-attribute-certificate-pac)
 - Domain Local Group Membership
 - Cross-Domain Trust and Referrals
-If the TGT received is encrypted with DES and not a referral TGT from a [**realm**](#gt_realm) that only supports DES, then the [**KDC**](#gt_key-distribution-center-kdc) MUST return KDC_ERR_ETYPE_NOTSUPP.<61>
+If the TGT received is encrypted with DES and not a referral TGT from a [**realm**](#gt_realm) that only supports DES, then the [**KDC**](#gt_key-distribution-center-kdc) MUST return KDC_ERR_ETYPE_NOTSUPP.<65>
 
-If the server or [**service**](#gt_service) has a **KerbSupportedEncryptionTypes** populated with supported encryption types,<62> then the KDC SHOULD<63> return in the encrypted part ([[Referrals-11]](https://go.microsoft.com/fwlink/?LinkId=139781) Appendix A) of **TGS-REP** message, a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165] to indicate what encryption types (section [2.2.7](#Section_2.2.7)) are supported by the server or service. If not, the KDC SHOULD<64> check the server or service account's UseDESOnly flag:
+If the server or [**service**](#gt_service) has a **KerbSupportedEncryptionTypes** populated with supported encryption types,<66> then the KDC SHOULD<67> return in the encrypted part ([[Referrals-11]](https://go.microsoft.com/fwlink/?LinkId=139781) Appendix A) of **TGS-REP** message, a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165] to indicate what encryption types (section [2.2.7](#Section_2.2.7)) are supported by the server or service. If not, the KDC SHOULD<68> check the server or service account's UseDESOnly flag:
 
 - If **UseDESOnly** is set: the KDC SHOULD, in the encrypted pre-auth data part ([Referrals-11], Appendix A) of the TGS-REP message, include a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165], and padata-value set to 0x3 (section 2.2.7).
 - Otherwise:
 - If the account is krbtgt, and **domainControllerFunctionality** returns a value < 3 ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.25): the KDC SHOULD, in the encrypted pre-auth data part of the **TGS-REP** message, include a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165], and padata-value set to 0x7 (section 2.2.7).
-- If the account is krbtgt, and **domainControllerFunctionality** returns greater than or equal to3: the KDC SHOULD, in the encrypted pre-auth data part of the TGS-REP message, include a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165], padata-value set to 0x1F (section 2.2.7), the Claims-supported bit if [**claims**](#gt_claim) is supported, and the FAST-supported bit if [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) is supported.<65>
-- DES MUST NOT be used to protect the [**service ticket**](#gt_service-ticket). If DES is the only configured etype, the KDC MUST return KDC_ERR_ETYPE_NOTSUPP.<66>
+- If the account is krbtgt, and **domainControllerFunctionality** returns greater than or equal to3: the KDC SHOULD, in the encrypted pre-auth data part of the TGS-REP message, include a **PA-DATA** structure with padata-type set to **PA-SUPPORTED-ENCTYPES** [165], padata-value set to 0x1F (section 2.2.7), the Claims-supported bit if [**claims**](#gt_claim) is supported, and the FAST-supported bit if [**FAST**](#gt_flexible-authentication-secure-tunneling-fast) is supported.<69>
+- DES MUST NOT be used to protect the [**service ticket**](#gt_service-ticket). If DES is the only configured etype, the KDC MUST return KDC_ERR_ETYPE_NOTSUPP.<70>
 If the Application Server's service account **AuthorizationDataNotRequired** is set to TRUE, the KDC MUST NOT include a PAC in the service ticket.
 
 If the Application Server's service account does not have a registered SPN, the KDC MUST return KDC_ERR_MUST_USE_USER2USER.
 
 If the OTHER_ORGANIZATION [**SID**](#gt_security-identifier-sid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) is in **KERB_VALIDATION_INFO.ExtraSids**, the PAC MUST be used to perform an access check for the Allowed-To-Authenticate right ([MS-ADTS] section 6.1.1.2.7.41) against the [**Active Directory**](#gt_active-directory) object of the account for which the service ticket request is being made. If the access check succeeds, the service ticket MUST be issued; otherwise, the KDC MUST return KDC_ERR_POLICY.
 
-If **domainControllerFunctionality** returns a value >= 6 ([MS-ADTS] section 3.1.1.3.2.25) and the account is not also the application service account, the KDC MUST determine whether an Authentication Policy is applied to the server or service (section [3.3.5.5](#Section_3.3.5.5)); if Enforced is TRUE then:<67>
+If **domainControllerFunctionality** returns a value >= 6 ([MS-ADTS] section 3.1.1.3.2.25) and the account is not also the application service account, the KDC MUST determine whether an Authentication Policy is applied to the server or service (section [3.3.5.5](#Section_3.3.5.5)); if Enforced is TRUE then:<71>
 
 - If AllowedToAuthenticateTo is not NULL, the PAC of the user and the PAC of the armor TGT MUST be used to perform an access check for the ACTRL_DS_CONTROL_ACCESS right against the AllowedToAuthenticateTo. If the access check fails, the KDC MUST return KDC_ERR_POLICY.
 - If the TGT is issued by a read-only Domain Controller (RODC) (section [3.3.5.7.7](#Section_3.3.5.7.7)), the KDC MUST reject the request and return KDC_ERR_POLICY. Clients SHOULD send an AS-REQ to a full DC with PA-PAC-OPTIONS [167] (section [2.2.10](#Section_2.2.10)) padata type with the Branch Aware bit set to the TGS REQ (section [3.2.5.7](#Section_3.2.5.7)).
@@ -1989,7 +2006,7 @@ The KILE KDC MUST copy the populated fields from the PAC in the TGT to the newly
 
 Kerberos V5 does not enforce revocation of accounts prior to the expiration of issued [**tickets**](#gt_ticket).
 
-If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.3.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the account KDCs. When this property is set on the account KDC for the client's domain, and the [**TGT**](#gt_ticket-granting-ticket-tgt) is older than an implementation-specific time<68>, the account KDC MUST verify that the account is still in good standing. Good standing means the account has not expired, been locked out, been disabled, or otherwise is not allowed to log on. If the KDC receiving the [**session**](#gt_session) ticket request is not in the user account’s [**domain**](#gt_domain), then the check cannot be made.
+If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.3.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the account KDCs. When this property is set on the account KDC for the client's domain, and the [**TGT**](#gt_ticket-granting-ticket-tgt) is older than an implementation-specific time<72>, the account KDC MUST verify that the account is still in good standing. Good standing means the account has not expired, been locked out, been disabled, or otherwise is not allowed to log on. If the KDC receiving the [**session**](#gt_session) ticket request is not in the user account’s [**domain**](#gt_domain), then the check cannot be made.
 
 - If Disabled is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
 - If Expired is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
@@ -2019,7 +2036,7 @@ Note that each SID is calculated as follows:
 - For each group in other domains, the SID contains **ExtraSids.Sid**.
 Then the KDC MUST copy the populated fields from the PAC in the TGT to the newly created PAC and add to the **KERB_VALIDATION_INFO** structure ([MS-PAC] section 2.5) of the new PAC the domain local groups that are returned by the **GetResourceDomainInfo** procedure to the existing fields as follows:
 
-- If the Resource-SID-compression-disabled bit is not set in the Application Server's [**service**](#gt_service) account's KerbSupportedEncryptionTypes and not set in the krbtgt's account's KerbSupportedEncryptionTypes:<69>
+- If the Resource-SID-compression-disabled bit is not set in the Application Server's [**service**](#gt_service) account's KerbSupportedEncryptionTypes and not set in the krbtgt's account's KerbSupportedEncryptionTypes:<73>
 - The **ResourceGroupDomainSid** field contains the SID for the domain.
 - The **ResourceGroupCount** field contains the number of groups in the **ResourceGroupIds** field.
 - The **ResourceGroupIds** field contains the pointer to a list which is the list copied from the PAC in the TGT plus a list constructed from the domain local groups (GROUP_MEMBERSHIP [MS-PAC] section 2.2.2) where:
@@ -2033,7 +2050,7 @@ Then the KDC MUST copy the populated fields from the PAC in the TGT to the newly
 <a id="Section_3.3.5.7.4"></a>
 ##### 3.3.5.7.4 Compound Identity
 
-If a [**compound identity TGS-REQ**](#gt_compound-identity-tgs-req) ([**FAST**](#gt_flexible-authentication-secure-tunneling-fast) **TGS-REQ** explicitly armored with the computer's [**TGT**](#gt_ticket-granting-ticket-tgt) is received and a Compound-Identity-supported bit is set in the application server's [**service**](#gt_service) account’s KerbSupportedEncryptionTypes, the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<70> add to the [**PAC**](#gt_privilege-attribute-certificate-pac) a **PAC_DEVICE_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.12) and **PAC_DEVICE_CLAIMS_INFO** structure ([MS-PAC] section 2.13) with the group membership and [**claims**](#gt_claim) for the computer.
+If a [**compound identity TGS-REQ**](#gt_compound-identity-tgs-req) ([**FAST**](#gt_flexible-authentication-secure-tunneling-fast) **TGS-REQ** explicitly armored with the computer's [**TGT**](#gt_ticket-granting-ticket-tgt) is received and a Compound-Identity-supported bit is set in the application server's [**service**](#gt_service) account’s KerbSupportedEncryptionTypes, the [**KDC**](#gt_key-distribution-center-kdc) SHOULD<74> add to the [**PAC**](#gt_privilege-attribute-certificate-pac) a **PAC_DEVICE_INFO** structure ([MS-PAC](../MS-PAC/MS-PAC.md) section 2.12) and **PAC_DEVICE_CLAIMS_INFO** structure ([MS-PAC] section 2.13) with the group membership and [**claims**](#gt_claim) for the computer.
 
 The armor [**key**](#gt_key) for an explicitly armored TGT is generated as follows:
 
@@ -2077,7 +2094,7 @@ The KDC populates the following **PAC_DEVICE_CLAIMS_INFO** structure ([MS-PAC] s
 
 The [**KDC**](#gt_key-distribution-center-kdc) derives its knowledge of cross-domain trusts from [**trusted domain objects (TDOs)**](#gt_trusted-domain-object-tdo) in [**Active Directory**](#gt_active-directory).
 
-If a cross-domain referral is determined to be necessary ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 1.2 and [[Referrals-11]](https://go.microsoft.com/fwlink/?LinkId=139781)), the appropriate inter-realm [**key**](#gt_key) MUST be retrieved from the TDO and used as specified in [RFC4120]. DES MUST NOT be used unless no other etype is supported.<71>
+If a cross-domain referral is determined to be necessary ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 1.2 and [[Referrals-11]](https://go.microsoft.com/fwlink/?LinkId=139781)), the appropriate inter-realm [**key**](#gt_key) MUST be retrieved from the TDO and used as specified in [RFC4120]. DES MUST NOT be used unless no other etype is supported.<75>
 
 If the TRUST_ATTRIBUTE_CROSS_ORGANIZATION flag is set in the TrustAttributes field ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.6.7.9), the OTHER_ORGANIZATION [**SID**](#gt_security-identifier-sid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) MUST be added to **KERB_VALIDATION_INFO.ExtraSids** and the **SidCount** field MUST be incremented in the user's [**PAC**](#gt_privilege-attribute-certificate-pac). The KDC MUST perform an ACL check while processing the TGS request as follows.
 
@@ -2090,14 +2107,14 @@ The KDC MUST NOT return a ticket with the ok-as-delegate flag set in **TicketFla
 
 DisableConditions = Source ticket does not have ok-as-delegate, OR trust attributes include TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION, OR trust attributes include TRUST_ATTRIBUTE_QUARANTINED_DOMAIN.
 
-EnableConditions = Trust attributes include TRUST_ATTRIBUTE_WITHIN_FOREST, OR TRUST_ATTRIBUTE_CROSS_ORGANIZATION_ENABLE_TGT_DELEGATION.<72>
+EnableConditions = Trust attributes include TRUST_ATTRIBUTE_WITHIN_FOREST, OR TRUST_ATTRIBUTE_CROSS_ORGANIZATION_ENABLE_TGT_DELEGATION.<76>
 
 If EnableConditions and not DisableConditions then set ok-as-delegate flag.
 
 <a id="Section_3.3.5.7.6"></a>
 ##### 3.3.5.7.6 FORWARDED TGT etype
 
-When the [**KDC**](#gt_key-distribution-center-kdc) receives a **TGS-REQ** message, it will create the random [**session key**](#gt_session-key) as specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 3.1.3. If a **TGS-REQ** message requesting a FORWARDED ([RFC4120] section 2.6) [**TGT**](#gt_ticket-granting-ticket-tgt) provides an **etype** value that is not supported by the KDC, and the client provides a **PA-SUPPORTED-ENCTYPES** [165] structure (section [2.2.8](#Section_2.2.8)) with encryption types (section [2.2.7](#Section_2.2.7)) the KDC supports, then the KDC SHOULD<73> select the strongest encryption type that is both included in the **PA-SUPPORTED-ENCTYPES** [165] structure (section 2.2.8) and supported by the KDC to generate the random session key. See section [3.1.5.2](#Section_3.1.5.2) for the relative strengths of KILE-supported encryption types.
+When the [**KDC**](#gt_key-distribution-center-kdc) receives a **TGS-REQ** message, it will create the random [**session key**](#gt_session-key) as specified in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 3.1.3. If a **TGS-REQ** message requesting a FORWARDED ([RFC4120] section 2.6) [**TGT**](#gt_ticket-granting-ticket-tgt) provides an **etype** value that is not supported by the KDC, and the client provides a **PA-SUPPORTED-ENCTYPES** [165] structure (section [2.2.8](#Section_2.2.8)) with encryption types (section [2.2.7](#Section_2.2.7)) the KDC supports, then the KDC SHOULD<77> select the strongest encryption type that is both included in the **PA-SUPPORTED-ENCTYPES** [165] structure (section 2.2.8) and supported by the KDC to generate the random session key. See section [3.1.5.2](#Section_3.1.5.2) for the relative strengths of KILE-supported encryption types.
 
 <a id="Section_3.3.5.7.7"></a>
 ##### 3.3.5.7.7 Read-only Domain Controller (RODC)
@@ -2109,7 +2126,7 @@ When a [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) whic
 <a id="Section_3.3.5.7.8"></a>
 ##### 3.3.5.7.8 Key List Request
 
-When a [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) receives a **TGS-REQ** message for the krbtgt service name (sname) containing a **KERB-KEY-LIST-REQ** [161] (section [3.1.5.1](#Section_3.1.5.1)) padata type the KDC SHOULD include the long-term secrets of the client for the requested encryption types in the **KERB-KEY-LIST-REP** [162] response message and insert it into the encrypted-pa-data of the **EncKDCRepPart** structure, as defined in [[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478).<74>
+When a [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) receives a **TGS-REQ** message for the krbtgt service name (sname) containing a **KERB-KEY-LIST-REQ** [161] (section [3.1.5.1](#Section_3.1.5.1)) padata type the KDC SHOULD include the long-term secrets of the client for the requested encryption types in the **KERB-KEY-LIST-REP** [162] response message and insert it into the encrypted-pa-data of the **EncKDCRepPart** structure, as defined in [[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478).<78>
 
 <a id="Section_3.3.5.7.9"></a>
 ##### 3.3.5.7.9 PAC Requestor and Attributes Info Structures
@@ -2172,7 +2189,7 @@ The abstract data model for the Application Server is identical to that specifie
 
 Additionally, the server maintains the following parameter:
 
-- ApplicationRequiresCBT: A Boolean setting from the application requiring channel binding.<75>
+- ApplicationRequiresCBT: A Boolean setting from the application requiring channel binding.<79>
 For KILE implementations that use a [**security identifier (SID)**](#gt_security-identifier-sid)-based authorization model, the server maintains the following parameter:
 
 - **ImpersonationAccessToken** (Public): A Token/Authorization Context (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2).
@@ -2191,12 +2208,12 @@ The replay cache MUST be initialized with no entries.
 <a id="Section_3.4.3.1"></a>
 #### 3.4.3.1 msDS-SupportedEncryptionTypes attribute
 
-If the [**realm**](#gt_realm) is a KILE implementation that uses [**Active Directory**](#gt_active-directory) for the account database, the server SHOULD ensure that the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481) of its account object is set to the value of SupportedEncryptionTypes (section [3.1.1.5](#Section_3.1.1.5)).
+If the [**realm**](#gt_realm) is a KILE implementation that uses [**Active Directory**](#gt_active-directory) for the account database, the server SHOULD ensure that the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481) of its account object is set to the value of SupportedEncryptionTypes (section [3.1.1.6](#Section_3.1.1.6)).
 
-When an application server is running under the machine account and NRPC is supported on the machine, the server calls NetrLogonGetDomainInfo ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.4.5.2.10) with the *Level* parameter set to 1 and **WkstaBuffer.WorkstationInfo.KerberosSupportedEncryptionTypes** set to zero.<76>If the **WkstaBuffer.WorkstationInfo.KerberosSupportedEncryptionTypes** returned is not equal to SupportedEncryptionTypes (section 3.1.1.5), then LDAP is used to update the setting:
+When an application server is running under the machine account and NRPC is supported on the machine, the server calls NetrLogonGetDomainInfo ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.4.5.2.10) with the *Level* parameter set to 1 and **WkstaBuffer.WorkstationInfo.KerberosSupportedEncryptionTypes** set to zero.<80>If the **WkstaBuffer.WorkstationInfo.KerberosSupportedEncryptionTypes** returned is not equal to SupportedEncryptionTypes (section 3.1.1.6), then LDAP is used to update the setting:
 
 - Establish an LDAP connection with server information set to NULL ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.1).
-- Perform an LDAP modify operation to set the msDS-SupportedEncryptionTypes attribute ([MS-ADA2] section 2.481) of the computer account object to the value of SupportedEncryptionTypes (section 3.1.1.5).
+- Perform an LDAP modify operation to set the msDS-SupportedEncryptionTypes attribute ([MS-ADA2] section 2.481) of the computer account object to the value of SupportedEncryptionTypes (section 3.1.1.6).
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
 
@@ -2227,11 +2244,11 @@ When clock skew errors occur during AP exchanges, the application server attempt
 
 When the checksum field is not present, the application server processes the requests as though none of the flags ([[RFC4121]](https://go.microsoft.com/fwlink/?LinkId=90459) section 4.1.1.1) are set and does not check channel binding information ([RFC4121] section 4.1.1.2) as it is likewise not present.
 
-When the server receives AP exchange requests for SPNs with the serviceclass string equal to [**"RestrictedKrbHost"**](#gt_0827ff28-3f7e-40d8-94ec-cd9dc5995677), it will decrypt the ticket with the computer account's key and either create or use the [**session key**](#gt_session-key) for the "RestrictedKrbHost", regardless of the account the target [**service**](#gt_service) is running as.<77>
+When the server receives AP exchange requests for SPNs with the serviceclass string equal to [**"RestrictedKrbHost"**](#gt_0827ff28-3f7e-40d8-94ec-cd9dc5995677), it will decrypt the ticket with the computer account's key and either create or use the [**session key**](#gt_session-key) for the "RestrictedKrbHost", regardless of the account the target [**service**](#gt_service) is running as.<81>
 
-If the ApplicationRequiresCBT parameter (section [3.4.1](#Section_3.4.1)) is set to TRUE, the server, if so configured, SHOULD<78> return GSS_S_BAD_BINDINGS whenever the AP exchange request message contains an all-zero channel binding value and does not contain the AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+If the ApplicationRequiresCBT parameter (section [3.4.1](#Section_3.4.1)) is set to TRUE, the server, if so configured, SHOULD<82> return GSS_S_BAD_BINDINGS whenever the AP exchange request message contains an all-zero channel binding value and does not contain the AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) KERB_AP_OPTIONS_CBT.
 
-If the [**service ticket**](#gt_service-ticket) received for the computer's principal is encrypted with DES, the KILE server MUST return KRB_AP_ERR_MODIFIED regardless of supporting DES.<79>
+If the [**service ticket**](#gt_service-ticket) received for the computer's principal is encrypted with DES, the KILE server MUST return KRB_AP_ERR_MODIFIED regardless of supporting DES.<83>
 
 <a id="Section_3.4.5.1"></a>
 #### 3.4.5.1 Three-Leg DCE-Style Mutual Authentication
@@ -2260,9 +2277,15 @@ Kerberos V5 specifies rules for processing the authorization data field in [[RFC
 
 KILE MUST unpack the authorization data field and look for an **AD-WIN2K-PAC** structure ([RFC4120] section 7.5.4). If the structure is valid as defined in [MS-PAC](../MS-PAC/MS-PAC.md), the server MUST verify the server signature. To verify the server signature, the **Signature** field values are removed from the [**PAC**](#gt_privilege-attribute-certificate-pac) buffer and replaced with zeros. Then the hash is generated [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488) and the resulting hash is compared with the server signature ([MS-PAC] section 2.8.4) **Signature** field value. If the PAC is valid, it is used as the authorization information.
 
-The server MUST search all AD-IF-RELEVANT containers for the KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) and KERB_AUTH_DATA_LOOPBACK (142) authorization data entries. The server MAY<80> search all AD-IF-RELEVANT containers for all other authorization data entries. The server MUST check if **KERB-AD-RESTRICTION-ENTRY.Restriction.MachineID** (section [2.2.6](#Section_2.2.6)) is equal to machine ID (section [3.1.1.4](#Section_3.1.1.4)):
+The server MUST search all AD-IF-RELEVANT containers for the KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) and KERB_AUTH_DATA_LOOPBACK (142) authorization data entries. The server MAY<84> search all AD-IF-RELEVANT containers for all other authorization data entries. The server MUST perform the following:
 
+- If **CrossBootMachineID** (section [3.1.1.5](#Section_3.1.1.5)) is implemented, the server MUST check if **KERB-AD-RESTRICTION-ENTRY.Restriction.CrossBootMachineID** (section [2.2.6](#Section_2.2.6)) is equal to **CrossBootMachineID** (section 3.1.1.5):
+- If equal, the server MUST check if **KERB-AD-RESTRICTION-ENTRY.Restriction.PerBootMachineID** (section 2.2.6) is equal to **PerBootMachineID** (section [3.1.1.4](#Section_3.1.1.4)):
 - If equal, the server processes the authentication as a local one, because the client and server are on the same machine, and can use the **KERB_AUTH_DATA_LOOPBACK** structure (section [2.2.4](#Section_2.2.4)) AuthorizationData for any local implementation purposes.
+- Otherwise, the server MUST fail authentication as the ticket belongs to a different boot session indicating that the ticket is tampered.
+- Otherwise, the server MUST ignore the KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) Authorization Data Type, the **KERB-AD-RESTRICTION-ENTRY** structure (section 2.2.6), the KERB_AUTH_DATA_LOOPBACK (142), and the containing **KERB_AUTH_DATA_LOOPBACK** structure (section 2.2.4).
+- Otherwise, the server MUST check if **KERB-AD-RESTRICTION-ENTRY.Restriction.PerBootMachineID** (section 2.2.6) is equal to **PerBootMachineID** (section 3.1.1.4):
+- If equal, the server processes the authentication as a local one, because the client and server are on the same machine, and can use the **KERB_AUTH_DATA_LOOPBACK** structure (section 2.2.4) AuthorizationData for any local implementation purposes.
 - Otherwise, the server MUST ignore the KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) Authorization Data Type, the **KERB-AD-RESTRICTION-ENTRY** structure (section 2.2.6), the KERB_AUTH_DATA_LOOPBACK (142), and the containing **KERB_AUTH_DATA_LOOPBACK** structure (section 2.2.4).
 For KILE implementations that use a [**security identifier (SID)**](#gt_security-identifier-sid)-based authorization model, the server populates the User SID and Security Group SIDs in the **ImpersonationAccessToken** parameter (section [3.4.1](#Section_3.4.1)) as follows:
 
@@ -2270,8 +2293,8 @@ For KILE implementations that use a [**security identifier (SID)**](#gt_security
 - Concatenate **LogonDomainId** and **PrimaryGroupId** ([MS-NRPC](../MS-NRPC/MS-NRPC.md) sections 2.2.1.4.11, 2.2.1.4.12, and 2.2.1.4.13), add the result to the **ImpersonationAccessToken.Sids** array, and set the **ImpersonationAccessToken.PrimaryGroup** field to this index.
 - For each **GroupIds** ([MS-PAC] section 2.2.2), concatenate **LogonDomainId** ([MS-PAC] section 2.5) and **GroupIds.RelativeID** and add to the **ImpersonationAccessToken.Sids** array.
 - For each **ExtraSids** ([MS-PAC] section 2.2.2), add the **ExtraSids.Sid** to the **ImpersonationAccessToken.Sids** array.
-- If a **PAC_CLIENT_CLAIMS_INFO** structure ([MS-PAC] section 2.11) and CLAIMS_VALID SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) are in **KERB_VALIDATION_INFO.ExtraSids**, then the server SHOULD<81> set the **ImpersonationAccessToken.UserClaims** field to the value of the **Claims** field.
-- If a **PAC_DEVICE_INFO** structure ([MS-PAC] section 2.12) and COMPOUNDED_AUTHENTICATION SID ([MS-DTYP] section 2.4.2.4) are in **KERB_VALIDATION_INFO.ExtraSids**, then the server SHOULD<82> populate the User SID and Security Group SIDs in the **ImpersonationAccessToken.DeviceSids** array (section 3.4.1) as follows:
+- If a **PAC_CLIENT_CLAIMS_INFO** structure ([MS-PAC] section 2.11) and CLAIMS_VALID SID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4) are in **KERB_VALIDATION_INFO.ExtraSids**, then the server SHOULD<85> set the **ImpersonationAccessToken.UserClaims** field to the value of the **Claims** field.
+- If a **PAC_DEVICE_INFO** structure ([MS-PAC] section 2.12) and COMPOUNDED_AUTHENTICATION SID ([MS-DTYP] section 2.4.2.4) are in **KERB_VALIDATION_INFO.ExtraSids**, then the server SHOULD<86> populate the User SID and Security Group SIDs in the **ImpersonationAccessToken.DeviceSids** array (section 3.4.1) as follows:
 - Concatenate the **AccountDomainId** and **PrimaryGroupId** ([MS-PAC] section 2.12) fields, add the result to the ImpersonationAccessToken.DeviceSids array, and set the **ImpersonationAccessToken.DevicePrimaryGroup** field to the index of the newly added SID.
 - For each **AccountGroupIds** ([MS-PAC] section 2.5), concatenate **AccountDomainId** and **AccountGroupIds.DevieRelativeID** ([MS-PAC] section 2.2.2) and add to the ImpersonationAccessToken.DeviceSids array.
 - For each **ExtraSids** ([MS-PAC] section 2.5), add the **ExtraSids.Sid** to the ImpersonationAccessToken.DeviceSids array.
@@ -2754,7 +2777,6 @@ The terms "earlier" and "later", when used with a product version, refer to eith
 - Windows Server 2012 operating system
 - Windows Server 2012 R2 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows Server 2025 operating system
@@ -2783,104 +2805,112 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <7> Section 2.2.5: The **LSAP_TOKEN_INFO_INTEGRITY** structure is not supported in Windows 2000, Windows XP, Windows Server 2003, or Windows Vista.
 
-<8> Section 2.2.6: The **KERB-AD-RESTRICTION-ENTRY** structure is not supported in Windows 2000, Windows XP, Windows Server 2003, or Windows Vista.
+<8> Section 2.2.5: Windows 11, version 24H2 operating system with [[MSKB-5064081]](https://go.microsoft.com/fwlink/?linkid=2330003) and later, and Windows Server 2025 with [[MSKB-5065426]](https://go.microsoft.com/fwlink/?linkid=2344345) and later add **CrossBootMachineID** field to the **LSAP_TOKEN_INFO_INTEGRITY** structure.
 
-<9> Section 2.2.7: The [**FAST**](#gt_flexible-authentication-secure-tunneling-fast)-supported bit is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<9> Section 2.2.6: The **KERB-AD-RESTRICTION-ENTRY** structure is not supported in Windows 2000, Windows XP, Windows Server 2003, or Windows Vista.
 
-<10> Section 2.2.7: The Compound-identity-supported bit is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<10> Section 2.2.7: The [**FAST**](#gt_flexible-authentication-secure-tunneling-fast)-supported bit is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<11> Section 2.2.7: The Claims-supported bit is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<11> Section 2.2.7: The Compound-identity-supported bit is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<12> Section 2.2.7: The Resource-SID-compression-disabled bit is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 [**KDCs**](#gt_key-distribution-center-kdc).
+<12> Section 2.2.7: The Claims-supported bit is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<13> Section 2.2.8: The **PA-SUPPORTED-ENCTYPES** structure is not supported by Windows 2000, Windows XP, or Windows Server 2003.
+<13> Section 2.2.7: The Resource-SID-compression-disabled bit is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 [**KDCs**](#gt_key-distribution-center-kdc).
 
-<14> Section 2.2.10: The **PA-PAC-OPTIONS** structure is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<14> Section 2.2.7: The encryption type **AES128-CTS-HMAC-SHA256-128** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [[RFC8009]](https://go.microsoft.com/fwlink/?linkid=2358062). This is disabled by default.
 
-<15> Section 2.2.11: The **KERB-KEY-LIST-REQ** structure is not supported in Windows 10 v1909 operating system or Windows Server v1909 operating system or earlier.
+<15> Section 2.2.7: The encryption type **AES256-CTS-HMAC-SHA384-192** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [RFC8009]. This is disabled by default.
 
-<16> Section 2.2.12: The **KERB-KEY-LIST-REP** structure is not supported in Windows 10 v1909 or Windows Server v1909 or earlier.
+<16> Section 2.2.8: The **PA-SUPPORTED-ENCTYPES** structure is not supported by Windows 2000, Windows XP, or Windows Server 2003.
 
-<17> Section 3.1.1.3: Windows has a ticket cache and makes the ticket cache available to client applications at their request. Programmatic methods for querying the contents, purging the contents, or purging individual tickets are also available.
+<17> Section 2.2.10: The **PA-PAC-OPTIONS** structure is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+
+<18> Section 2.2.11: The **KERB-KEY-LIST-REQ** structure is not supported in Windows 10 v1909 operating system or Windows Server v1909 operating system or earlier.
+
+<19> Section 2.2.12: The **KERB-KEY-LIST-REP** structure is not supported in Windows 10 v1909 or Windows Server v1909 or earlier.
+
+<20> Section 3.1.1.3: Windows has a ticket cache and makes the ticket cache available to client applications at their request. Programmatic methods for querying the contents, purging the contents, or purging individual tickets are also available.
 
 In Windows 2000 and Windows XP, [**TGTs**](#gt_ticket-granting-ticket-tgt) are not automatically renewed. Where supported, renewal attempts begin at 15 minutes prior to expiration (except for Windows Server 2003 which is 10 minutes), unless the renew-till time (see [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 2.3) of the TGT is within five minutes.
 
-<18> Section 3.1.1.4: In Windows 2000, Windows XP, Windows Server 2003, and Windows Vista, a 32-byte binary random string machine ID is not sent on the wire. When sent, this machine ID is not used by KILE.
+<21> Section 3.1.1.4: In Windows 2000, Windows XP, Windows Server 2003, and Windows Vista, **PerBootMachineID** is not sent on the wire. When sent, this is not used by KILE.
 
-<19> Section 3.1.1.5: **SupportedEncryptionTypes** are not supported in Windows 2000, Windows XP, and Windows Server 2003.
+<22> Section 3.1.1.5: Windows 11, version 22H2 operating system and earlier and Windows Server 2022, 23H2 operating system and earlier do not support **CrossBootMachineID**.
 
-<20> Section 3.1.1.5: The default for **SupportedEncryptionTypes** in Windows Vista and Windows Server 2008 is 0000001F. The default for Windows Server 2008 R2 DCs is 0000001F.
+<23> Section 3.1.1.6: **SupportedEncryptionTypes** are not supported in Windows 2000, Windows XP, and Windows Server 2003.
 
-<21> Section 3.1.5.1: The KERB-KEY-LIST-REQ [161] pre-authentication type is not available in Windows 10 v1909 or Windows Server v1909 or earlier.
+<24> Section 3.1.1.6: The default for **SupportedEncryptionTypes** in Windows Vista and Windows Server 2008 is 0000001F. The default for Windows Server 2008 R2 DCs is 0000001F.
 
-<22> Section 3.1.5.1: The KERB-KEY-LIST-REP [162] pre-authentication type is not available in Windows 10 v1909 or Windows Server v1909 or earlier.
+<25> Section 3.1.5.1: The KERB-KEY-LIST-REQ [161] pre-authentication type is not available in Windows 10 v1909 or Windows Server v1909 or earlier.
 
-<23> Section 3.1.5.2: Not supported in Windows 2000, Windows XP, or Windows Server 2003.
+<26> Section 3.1.5.1: The KERB-KEY-LIST-REP [162] pre-authentication type is not available in Windows 10 v1909 or Windows Server v1909 or earlier.
 
-<24> Section 3.1.5.2: In Windows 2000 and Windows Server 2003, KDCs select the encryption type based on the preference order in the client request. Otherwise, KDCs select the encryption type used for [**pre-authentication**](#gt_pre-authentication) or, when pre-authentication is not used, the encryption type is based on the preference order in the client request.
+<27> Section 3.1.5.2: Not supported in Windows 2000, Windows XP, or Windows Server 2003.
+
+<28> Section 3.1.5.2: In Windows 2000 and Windows Server 2003, KDCs select the encryption type based on the preference order in the client request. Otherwise, KDCs select the encryption type used for [**pre-authentication**](#gt_pre-authentication) or, when pre-authentication is not used, the encryption type is based on the preference order in the client request.
 
 Only Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, and Windows 7 support DES by default.
 
 RC4-HMAC is supported in Windows. For more information on RC4 and encryption type updates see Windows Kerberos RC4-HMAC Elevation of Privilege Vulnerability security update November 2022 [[MSFT-CVE-2022-37966]](https://go.microsoft.com/fwlink/?linkid=2230628) and Windows Kerberos Elevation of Privilege Vulnerability security update November 2022 [[MSFT-CVE-2022-37967]](https://go.microsoft.com/fwlink/?linkid=2230351). These updates apply to Windows Server 2008 operating system with Service Pack 2 (SP2) and later.
 
-<25> Section 3.1.5.2: For more information see Windows Kerberos Elevation of Privilege Vulnerability security updates September 2022 [[MSFT-CVE-2022-33647]](https://go.microsoft.com/fwlink/?linkid=2230247) and [[MSFT-CVE-2022-33679]](https://go.microsoft.com/fwlink/?linkid=2230352). These updates apply to Windows Server 2008 with SP2 and later.
+<29> Section 3.1.5.2: For more information see Windows Kerberos Elevation of Privilege Vulnerability security updates September 2022 [[MSFT-CVE-2022-33647]](https://go.microsoft.com/fwlink/?linkid=2230247) and [[MSFT-CVE-2022-33679]](https://go.microsoft.com/fwlink/?linkid=2230352). These updates apply to Windows Server 2008 with SP2 and later.
 
-<26> Section 3.1.5.2: In addition to the encryption type values specified in section [3.1.5.2](#Section_3.1.5.2), Windows sends the value –135. Windows 2000 and Windows XP additionally send the values –133, and –128.
+<30> Section 3.1.5.2: In addition to the encryption type values specified in section [3.1.5.2](#Section_3.1.5.2), Windows sends the value –135. Windows 2000 and Windows XP additionally send the values –133, and –128.
 
-<27> Section 3.1.5.6: IPv6 addresses are not supported in Windows 2000, Windows XP and Windows Server 2003.
+<31> Section 3.1.5.6: IPv6 addresses are not supported in Windows 2000, Windows XP and Windows Server 2003.
 
-<28> Section 3.1.5.7: To match names, the **GetWindowsSortKey** algorithm ([MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md) section 3.1.5.2.4) is used with the following flags: NORM_IGNORECASE, NORM_IGNOREKANATYPE, NORM_IGNORENONSPACE, and NORM_IGNOREWIDTH. Then the **CompareSortKey** algorithm ([MS-UCODEREF] section 3.1.5.2.2) is used to compare the names. Note that this applies only to names; passwords (and the transformation of a password to a [**key**](#gt_key)) are governed by the actual key generation specification ([RFC4120], [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488), and [[RFC3962]](https://go.microsoft.com/fwlink/?LinkId=90451)).
+<32> Section 3.1.5.7: To match names, the **GetWindowsSortKey** algorithm ([MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md) section 3.1.5.2.4) is used with the following flags: NORM_IGNORECASE, NORM_IGNOREKANATYPE, NORM_IGNORENONSPACE, and NORM_IGNOREWIDTH. Then the **CompareSortKey** algorithm ([MS-UCODEREF] section 3.1.5.2.2) is used to compare the names. Note that this applies only to names; passwords (and the transformation of a password to a [**key**](#gt_key)) are governed by the actual key generation specification ([RFC4120], [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488), and [[RFC3962]](https://go.microsoft.com/fwlink/?LinkId=90451)).
 
-<29> Section 3.1.5.8: **RODCs** are not supported in Windows 2000 and Windows Server 2003.
+<33> Section 3.1.5.8: **RODCs** are not supported in Windows 2000 and Windows Server 2003.
 
-<30> Section 3.1.5.11: Windows 7, Windows Server 2008 R2, Windows 8, and Windows Server 2012 support "RestrictedKrbHost/<hostname>" to allow developer frameworks to enable Kerberos authentication for code written prior to SPN support.
+<34> Section 3.1.5.11: Windows 7, Windows Server 2008 R2, Windows 8, and Windows Server 2012 support "RestrictedKrbHost/<hostname>" to allow developer frameworks to enable Kerberos authentication for code written prior to SPN support.
 
-<31> Section 3.2.1: The following Windows registry path is used to persistently store and retrieve the **EnableCBACandArmor** variable:
-
-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
-
-<32> Section 3.2.1: The following Windows registry path is used to persistently store and retrieve the **RequireFast** variable:
+<35> Section 3.2.1: The following Windows registry path is used to persistently store and retrieve the **EnableCBACandArmor** variable:
 
 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
 
-<33> Section 3.2.1: The following registry path is used by implementations that use the Windows registry to persistently store and retrieve the **RealmCanonicalize** variable:
+<36> Section 3.2.1: The following Windows registry path is used to persistently store and retrieve the **RequireFast** variable:
+
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
+
+<37> Section 3.2.1: The following registry path is used by implementations that use the Windows registry to persistently store and retrieve the **RealmCanonicalize** variable:
 
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Domains\ registry path
 
 This is the name of the [**realm**](#gt_realm), and RealmFlags key bit 0x8 is set when the non-KILE realm supports canonicalization.
 
-<34> Section 3.2.5.5: Claims are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<38> Section 3.2.5.5: Claims are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<35> Section 3.2.5.5: FAST is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<39> Section 3.2.5.5: FAST is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<36> Section 3.2.5.6: Not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<40> Section 3.2.5.6: Not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<37> Section 3.2.5.7: FAST is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<41> Section 3.2.5.7: FAST is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<38> Section 3.2.5.7: Compound Identity and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2. Windows Server 2012 operating system, Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 do not completely conform to [[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478), in that they will set the Enc-Pa-Rep flag in the Ticket flags, despite not supporting encrypted PA data in **TGS-REP** messages, if they have FAST enabled.
+<42> Section 3.2.5.7: Compound Identity and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2. Windows Server 2012 operating system, Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 do not completely conform to [[RFC6806]](https://go.microsoft.com/fwlink/?linkid=2095478), in that they will set the Enc-Pa-Rep flag in the Ticket flags, despite not supporting encrypted PA data in **TGS-REP** messages, if they have FAST enabled.
 
-<39> Section 3.2.5.8: Windows does not use the KERB_AUTH_DATA_TOKEN_RESTRICTIONS field. However, except for Windows Vista operating system with Service Pack 1 (SP1), Windows 7, Windows Server 2008, and Windows Server 2008 R2, Windows sends this field over the wire.
+<43> Section 3.2.5.8: Windows does not use the KERB_AUTH_DATA_TOKEN_RESTRICTIONS field. However, except for Windows Vista operating system with Service Pack 1 (SP1), Windows 7, Windows Server 2008, and Windows Server 2008 R2, Windows sends this field over the wire.
 
-<40> Section 3.2.6: Windows clients include configured values for the initial time-out of 5 seconds, and an increase factor of 5 seconds and 10 seconds to retry 3 times.
+<44> Section 3.2.6: Windows clients include configured values for the initial time-out of 5 seconds, and an increase factor of 5 seconds and 10 seconds to retry 3 times.
 
-<41> Section 3.3.1: Claims, compound identity, FAST, and mixed mode are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<45> Section 3.3.1: Claims, compound identity, FAST, and mixed mode are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
 Implementations that use the Windows registry to persistently store and retrieve this variable use the following registry path:
 
 - RegistryValueName: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\KDC\Parameters
 - RegistryValueType: 4
 - RegistryValue: CbacAndArmorLevel
-<42> Section 3.3.1: Windows implementations use the Registry Windows Remote Registry Protocol ([MS-RRP](../MS-RRP/MS-RRP.md)) to expose the key and value. For each abstract data model element that is loaded from the registry, there is one instance that is shared between the Windows Remote Registry Protocol and any protocols that use the abstract data model element. Any changes made to the registry keys will be reflected in the abstract data model elements when a PolicyChange event is received ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2) or on KDC start up.
+<46> Section 3.3.1: Windows implementations use the Registry Windows Remote Registry Protocol ([MS-RRP](../MS-RRP/MS-RRP.md)) to expose the key and value. For each abstract data model element that is loaded from the registry, there is one instance that is shared between the Windows Remote Registry Protocol and any protocols that use the abstract data model element. Any changes made to the registry keys will be reflected in the abstract data model elements when a PolicyChange event is received ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2) or on KDC start up.
 
-<43> Section 3.3.1.1: The **KerbSupportedEncryptionTypes** are not supported in Windows 2000, Windows XP, and Windows Server 2003. Compound identity is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
+<47> Section 3.3.1.1: The **KerbSupportedEncryptionTypes** are not supported in Windows 2000, Windows XP, and Windows Server 2003. Compound identity is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
 
-<44> Section 3.3.3: Claims and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
+<48> Section 3.3.3: Claims and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, or Windows Server 2008 R2.
 
-<45> Section 3.3.5.1: For Active Directory with the **msDS-Behavior-Version** attribute on a domain NC root object equal to DS_BEHAVIOR_WIN2000, DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS, DS_BEHAVIOR_WIN2003, DS_BEHAVIOR_WIN2008, or DS_BEHAVIOR_WIN2008R2, KDCs continue without FAST.
+<49> Section 3.3.5.1: For Active Directory with the **msDS-Behavior-Version** attribute on a domain NC root object equal to DS_BEHAVIOR_WIN2000, DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS, DS_BEHAVIOR_WIN2003, DS_BEHAVIOR_WIN2008, or DS_BEHAVIOR_WIN2008R2, KDCs continue without FAST.
 
-<46> Section 3.3.5.2: Windows 2000 and Windows Server 2003 KDCs do not support the provisioning of [**UPNs**](#gt_user-principal-name-upn).
+<50> Section 3.3.5.2: Windows 2000 and Windows Server 2003 KDCs do not support the provisioning of [**UPNs**](#gt_user-principal-name-upn).
 
-<47> Section 3.3.5.3: In Windows 2000 Server, Windows Server 2003, and Windows Server 2008 Service Pack 1 KDCs issue PACs according to this logic:
+<51> Section 3.3.5.3: In Windows 2000 Server, Windows Server 2003, and Windows Server 2008 Service Pack 1 KDCs issue PACs according to this logic:
 
 In either of the following two cases, a [**PAC**](#gt_privilege-attribute-certificate-pac) [MS-PAC](../MS-PAC/MS-PAC.md) MUST be generated and included in the response by the KDC when the client has requested that a PAC be included. The request to include a PAC is expressed with a **KERB-PA-PAC-REQUEST** structure (section [2.2.3](#Section_2.2.3)) padata type that is set to TRUE:
 
@@ -2888,75 +2918,75 @@ In either of the following two cases, a [**PAC**](#gt_privilege-attribute-certif
 - During a [**TGS**](#gt_ticket-granting-service-tgs) request that results in a service ticket unless the NA bit is set in the UserAccountControl field in the **KERB_VALIDATION_INFO** structure ([MS-PAC] section 2.5).
 Otherwise, the response will not contain a PAC.
 
-<48> Section 3.3.5.4: Authentication Policy Silos are not supported by Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 DCs.
+<52> Section 3.3.5.4: Authentication Policy Silos are not supported by Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 DCs.
 
-<49> Section 3.3.5.5: Authentication Policies are not supported by Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 DCs.
+<53> Section 3.3.5.5: Authentication Policies are not supported by Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 DCs.
 
-<50> Section 3.3.5.6: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<54> Section 3.3.5.6: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<51> Section 3.3.5.6: Not supported in Windows 2000 and Windows Server 2003.
+<55> Section 3.3.5.6: Not supported in Windows 2000 and Windows Server 2003.
 
-<52> Section 3.3.5.6: Claims and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<56> Section 3.3.5.6: Claims and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<53> Section 3.3.5.6: PROTECTED_USERS is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<57> Section 3.3.5.6: PROTECTED_USERS is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<54> Section 3.3.5.6: Authentication Policies are not supported by Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<58> Section 3.3.5.6: Authentication Policies are not supported by Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<55> Section 3.3.5.6.4.1: In Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, the **ExtraSids** field is NULL and the **UserFlags** field is zero.
+<59> Section 3.3.5.6.4.1: In Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, the **ExtraSids** field is NULL and the **UserFlags** field is zero.
 
-<56> Section 3.3.5.6.4.3: Active Directory with the **msDS-Behavior-Version** attribute on a domain NC root object equal to DS_BEHAVIOR_WIN2000, DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS, or DS_BEHAVIOR_WIN2003 cannot support AES.
+<60> Section 3.3.5.6.4.3: Active Directory with the **msDS-Behavior-Version** attribute on a domain NC root object equal to DS_BEHAVIOR_WIN2000, DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS, or DS_BEHAVIOR_WIN2003 cannot support AES.
 
-<57> Section 3.3.5.6.4.5: Windows 2000 and Windows Server 2003 do not support UPN and [**DNS**](#gt_domain-name-system-dns) information.
+<61> Section 3.3.5.6.4.5: Windows 2000 and Windows Server 2003 do not support UPN and [**DNS**](#gt_domain-name-system-dns) information.
 
-<58> Section 3.3.5.6.4.6: For Active Directory with the **msDS-Behavior-Version** attribute on a domain NC root object equal to DS_BEHAVIOR_WIN2000, DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS, DS_BEHAVIOR_WIN2003, DS_BEHAVIOR_WIN2008, or DS_BEHAVIOR_WIN2008R2, KDCs will behave as if 1 is set.
+<62> Section 3.3.5.6.4.6: For Active Directory with the **msDS-Behavior-Version** attribute on a domain NC root object equal to DS_BEHAVIOR_WIN2000, DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS, DS_BEHAVIOR_WIN2003, DS_BEHAVIOR_WIN2008, or DS_BEHAVIOR_WIN2008R2, KDCs will behave as if 1 is set.
 
-<59> Section 3.3.5.6.4.7: The **PAC_ATTRIBUTES_INFO** structure is not supported in Windows 7 and earlier or in Windows Server 2008 with Service Pack 1 and earlier.
+<63> Section 3.3.5.6.4.7: The **PAC_ATTRIBUTES_INFO** structure is not supported in Windows 7 and earlier or in Windows Server 2008 with Service Pack 1 and earlier.
 
-<60> Section 3.3.5.6.4.8: The **PAC_REQUESTOR** SID is not supported in Windows 7 and earlier or in Windows Server 2008 with Service Pack 1 and earlier.
+<64> Section 3.3.5.6.4.8: The **PAC_REQUESTOR** SID is not supported in Windows 7 and earlier or in Windows Server 2008 with Service Pack 1 and earlier.
 
-<61> Section 3.3.5.7: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<65> Section 3.3.5.7: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<62> Section 3.3.5.7: When the account is for a computer object and the value of **OperatingSystemVersion** ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.56) is less than 6, **KerbSupportedEncryptionTypes** is treated as if it were not populated to ensure that newer encryption types are not attempted with Windows 2000, Windows XP, and Windows Server 2003, which do not support setting **KerbSupportedEncryptionTypes**.
+<66> Section 3.3.5.7: When the account is for a computer object and the value of **OperatingSystemVersion** ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.56) is less than 6, **KerbSupportedEncryptionTypes** is treated as if it were not populated to ensure that newer encryption types are not attempted with Windows 2000, Windows XP, and Windows Server 2003, which do not support setting **KerbSupportedEncryptionTypes**.
 
-<63> Section 3.3.5.7: Not supported in Windows 2000 and Windows Server 2003.
+<67> Section 3.3.5.7: Not supported in Windows 2000 and Windows Server 2003.
 
-<64> Section 3.3.5.7: Not supported in Windows 2000 and Windows Server 2003.
+<68> Section 3.3.5.7: Not supported in Windows 2000 and Windows Server 2003.
 
-<65> Section 3.3.5.7: Claims and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<69> Section 3.3.5.7: Claims and FAST are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<66> Section 3.3.5.7: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<70> Section 3.3.5.7: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<67> Section 3.3.5.7: Authentication Policies are not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<71> Section 3.3.5.7: Authentication Policies are not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<68> Section 3.3.5.7.1: Windows uses 20 minutes as the time value at which a TGT is verified to be in good standing.
+<72> Section 3.3.5.7.1: Windows uses 20 minutes as the time value at which a TGT is verified to be in good standing.
 
-<69> Section 3.3.5.7.3: Resource SID compression is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 KDCs.
+<73> Section 3.3.5.7.3: Resource SID compression is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 KDCs.
 
-<70> Section 3.3.5.7.4: Compound identity is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 KDCs.
+<74> Section 3.3.5.7.4: Compound identity is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, or Windows Server 2008 R2 KDCs.
 
-<71> Section 3.3.5.7.5: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
+<75> Section 3.3.5.7.5: DES downgrade protection is not supported in Windows 2000, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012 KDCs.
 
-<72> Section 3.3.5.7.5: The TRUST_ATTRIBUTE_CROSS_ORGANIZATION_ENABLE_TGT_DELEGATION flag is supported on Windows Server 2008 and later when [[MSKB-4490425]](https://go.microsoft.com/fwlink/?linkid=2102428) is installed.
+<76> Section 3.3.5.7.5: The TRUST_ATTRIBUTE_CROSS_ORGANIZATION_ENABLE_TGT_DELEGATION flag is supported on Windows Server 2008 and later when [[MSKB-4490425]](https://go.microsoft.com/fwlink/?linkid=2102428) is installed.
 
-<73> Section 3.3.5.7.6: Not supported in Windows 2000 and Windows Server 2003.
+<77> Section 3.3.5.7.6: Not supported in Windows 2000 and Windows Server 2003.
 
-<74> Section 3.3.5.7.8: The **KERB-KEY-LIST-REQ** [161] structure and **KERB-KEY-LIST-REP** [162] structure padata types are not supported in Windows 10 v1909 or Windows Server v1909 or earlier.
+<78> Section 3.3.5.7.8: The **KERB-KEY-LIST-REQ** [161] structure and **KERB-KEY-LIST-REP** [162] structure padata types are not supported in Windows 10 v1909 or Windows Server v1909 or earlier.
 
-<75> Section 3.4.1: Channel binding is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<79> Section 3.4.1: Channel binding is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<76> Section 3.4.3.1: Not supported in Windows 2000, Windows XP and Windows Server 2003.
+<80> Section 3.4.3.1: Not supported in Windows 2000, Windows XP and Windows Server 2003.
 
-<77> Section 3.4.5: **SPNs** with serviceclass string equal to [**"RestrictedKrbHost"**](#gt_0827ff28-3f7e-40d8-94ec-cd9dc5995677) are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, or Windows Server 2008.
+<81> Section 3.4.5: **SPNs** with serviceclass string equal to [**"RestrictedKrbHost"**](#gt_0827ff28-3f7e-40d8-94ec-cd9dc5995677) are not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, or Windows Server 2008.
 
-<78> Section 3.4.5: The *ApplicationRequiresCBT* parameter is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, or Windows Server 2008.
+<82> Section 3.4.5: The *ApplicationRequiresCBT* parameter is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, or Windows Server 2008.
 
-<79> Section 3.4.5: DES downgrade protection is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, Windows Server 2008 R2, Windows 8, or Windows Server 2012.
+<83> Section 3.4.5: DES downgrade protection is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, Windows Server 2008 R2, Windows 8, or Windows Server 2012.
 
-<80> Section 3.4.5.3: Windows only searches the first AD-IF-RELEVANT container.
+<84> Section 3.4.5.3: Windows only searches the first AD-IF-RELEVANT container.
 
-<81> Section 3.4.5.3: Claims is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<85> Section 3.4.5.3: Claims is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<82> Section 3.4.5.3: Compound identity is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<86> Section 3.4.5.3: Compound identity is not supported in Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
 <a id="Section_7"></a>
 # 7 Change Tracking
@@ -2975,14 +3005,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.4](#Section_2.2.4) KERB_AUTH_DATA_LOOPBACK | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK | Major |
-| [2.2.13](#Section_2.2.13) KERB-SUPERSEDED-BY-USER | 30440 : Provided additional details about the structure. | Major |
-| [2.2.14](#Section_2.2.14) KERB-DMSA-KEY-PACKAGE | 30440 : Provided additional details about the structure. | Major |
-| [3.1.5.5](#Section_3.1.5.5) Other Elements and Options | 30430 : Appended "(143)" to AD_AUTH-DATA-AP-OPTIONS to be consistent with treatment of other constants. | Minor |
-| [3.2.5.7](#Section_3.2.5.7) TGS Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK | Major |
-| [3.2.5.8](#Section_3.2.5.8) AP Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
-| [3.3.5.7](#Section_3.3.5.7) TGS Exchange | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
-| [3.4.5.3](#Section_3.4.5.3) Processing Authorization Data | 30440 : Renamed KERB-LOCAL to KERB_AUTH_DATA_LOOPBACK. | Major |
+| [2.2.7](#Section_2.2.7) Supported Encryption Types Bit Flags | Added supported encryption types for local user accounts to use Kerberos. | Major |
 
 <a id="revision-history"></a>
 
@@ -3060,3 +3083,5 @@ The changes made to this document are listed in the following table. For more in
 | 4/23/2024 | 43.0 | Major | Significantly changed the technical content. |
 | 6/10/2024 | 44.0 | Major | Significantly changed the technical content. |
 | 8/11/2025 | 45.0 | Major | Significantly changed the technical content. |
+| 3/30/2026 | 46.0 | Major | Significantly changed the technical content. |
+| 4/27/2026 | 47.0 | Major | Significantly changed the technical content. |

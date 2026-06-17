@@ -75,13 +75,13 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 4/13/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
 # 1 Introduction
 
-The Transport Layer Security (TLS) Profile specifies a restricted subset of TLS and related standards. Support for [**TLS**](#gt_transport-layer-security-tls)/[**SSL**](#gt_secure-sockets-layer-ssl) protocols is specified in [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431), [[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803), [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474), [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324), and [[SSL3]](https://go.microsoft.com/fwlink/?LinkId=90534). Supported TLS extensions are specified in [[RFC8472]](https://go.microsoft.com/fwlink/?linkid=2154371), [[RFC5077]](https://go.microsoft.com/fwlink/?LinkId=285815), [[RFC7301]](https://go.microsoft.com/fwlink/?LinkId=513846), [[RFC4366]](https://go.microsoft.com/fwlink/?LinkId=129810), [[RFC4681]](https://go.microsoft.com/fwlink/?LinkId=129808), [[RFC3546]](https://go.microsoft.com/fwlink/?LinkId=90431), and [[RFC7627]](https://go.microsoft.com/fwlink/?LinkId=730726). Additional supported cryptographic curves are specified in [[RFC7748]](https://go.microsoft.com/fwlink/?linkid=2154766). [**Cipher**](#gt_cipher) suites are specified in [[RFC5487]](https://go.microsoft.com/fwlink/?LinkId=734930), [[RFC5289]](https://go.microsoft.com/fwlink/?LinkId=129797), [[RFC4492]](https://go.microsoft.com/fwlink/?LinkId=129809), and [[RFC3268]](https://go.microsoft.com/fwlink/?LinkId=129796).<1>
+The Transport Layer Security (TLS) Profile specifies a restricted subset of TLS and related standards. Support for [**TLS**](#gt_transport-layer-security-tls)/[**SSL**](#gt_secure-sockets-layer-ssl) protocols is specified in [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431), [[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803), [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474), [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324), and [[SSL3]](https://go.microsoft.com/fwlink/?LinkId=90534). Supported TLS extensions are specified in [[RFC8472]](https://go.microsoft.com/fwlink/?linkid=2154371), [[RFC5077]](https://go.microsoft.com/fwlink/?LinkId=285815), [[RFC7301]](https://go.microsoft.com/fwlink/?LinkId=513846), [[RFC4366]](https://go.microsoft.com/fwlink/?LinkId=129810), [[RFC4681]](https://go.microsoft.com/fwlink/?LinkId=129808), [[RFC3546]](https://go.microsoft.com/fwlink/?LinkId=90431), and [[RFC7627]](https://go.microsoft.com/fwlink/?LinkId=730726). Additional supported cryptographic curves are specified in [[RFC7748]](https://go.microsoft.com/fwlink/?linkid=2154766). Hybrid ECDHE/ML-KEM groups are specified in [[IETFDRAFT-TLS-ECDHE-MLKEM-04]](https://go.microsoft.com/fwlink/?linkid=2358523). [**Cipher**](#gt_cipher) suites are specified in [[RFC5487]](https://go.microsoft.com/fwlink/?LinkId=734930), [[RFC5289]](https://go.microsoft.com/fwlink/?LinkId=129797), [[RFC4492]](https://go.microsoft.com/fwlink/?LinkId=129809), and [[RFC3268]](https://go.microsoft.com/fwlink/?LinkId=129796).<1>
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -116,6 +116,8 @@ Links to a document in the Microsoft Open Specifications library point to the co
 ### 1.2.1 Normative References
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
+
+[IETFDRAFT-TLS-ECDHE-MLKEM-04] Kris Kwiatkowski, Panos Kampanakis, Bas Westerbaan, Douglas Stebila, "Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3", draft-ietf-tls-ecdhe-mlkem-04, February 2026, [https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/](https://go.microsoft.com/fwlink/?linkid=2358523)
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -169,6 +171,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDOCS-TLS/SSL-CipherSuites] Microsoft Corporation, "Cipher Suites in TLS/SSL (Schannel SSP)", [https://learn.microsoft.com/en-us/windows/win32/secauthn/cipher-suites-in-schannel](https://go.microsoft.com/fwlink/?linkid=2154697)
 
 [MSDOCS-TLS/SSLTables] Microsoft Corporation, "Protocols in TLS/SSL (Schannel SSP)", [https://learn.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-](https://go.microsoft.com/fwlink/?linkid=2154481)
+
+[MSKB-5083631] Microsoft Corporation, "April, 2026-KB5083631", April 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5083631](https://go.microsoft.com/fwlink/?linkid=2358432)
 
 [RFC5890] Klensin, J., "Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework", RFC 5890, August 2010, [http://rfc-editor.org/rfc/rfc5890.txt](https://go.microsoft.com/fwlink/?LinkId=324608)
 
@@ -381,7 +385,6 @@ The terms "earlier" and "later", when used with a product version, refer to eith
 - Windows Server 2012 R2 operating system
 - Windows 10 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows 11 operating system
@@ -392,9 +395,10 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 1: Specification support is listed in the following table. For [**TLS**](#gt_transport-layer-security-tls)/[**SSL**](#gt_secure-sockets-layer-ssl) version support tables, see [[MSDOCS-TLS/SSLTables]](https://go.microsoft.com/fwlink/?linkid=2154481). For more information on support, see Elliptical Curve changes [[MSDOCS-TLS-EC-Changes]](https://go.microsoft.com/fwlink/?linkid=2154482), Elliptic Curves [[MSDOCS-TLS-EllipticCurves]](https://go.microsoft.com/fwlink/?linkid=2154368), and Cipher Suites [[MSDOCS-TLS/SSL-CipherSuites]](https://go.microsoft.com/fwlink/?linkid=2154697).
 
-| Features | Protocols | Extensions | Elliptic Curves and Cipher Suites | Supported by |
+| Features | Protocols | Extensions | Groups and Cipher Suites | Supported by |
 | --- | --- | --- | --- | --- |
-| TLS 1.3 | [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431) | - | - | Windows 11 client and later Windows Server 2022 and later 0-RTT resumption mode is not supported (section 2.3) Only psk_dhe_ke key exchange mode is supported (section 4.2.9) |
+| Hybrid ECDHE/ML-KEM Groups for TLS 1.3 | TLS 1.3, [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431) | - | [[IETFDRAFT-TLS-ECDHE-MLKEM-04]](https://go.microsoft.com/fwlink/?linkid=2358523) | Windows 11, version 24H2 operating system and later, Windows Server 2025 and later; see [[MSKB-5083631]](https://go.microsoft.com/fwlink/?linkid=2358432). |
+| TLS 1.3 | [RFC8446] | - | - | Windows 11 client and later Windows Server 2022 and later 0-RTT resumption mode is not supported (section 2.3) Only psk_dhe_ke key exchange mode is supported (section 4.2.9) |
 | Elliptic Curves and Pre-Shared Keys for TLS | - | - | [[RFC7748]](https://go.microsoft.com/fwlink/?linkid=2154766) (Curve25519 only) [[RFC5487]](https://go.microsoft.com/fwlink/?LinkId=734930) | Windows 10 v1607 operating system and later Windows Server 2016 and later |
 | TLS Extension for Token Binding Protocol Negotiation | - | - | [[RFC8472]](https://go.microsoft.com/fwlink/?linkid=2154371) | Windows 10 v1507 operating system and later Windows Server 2016 and later Applies to TLS 1.0, TLS 1.1, and TLS 1.2 |
 | TLS Session Resumption without Server-Side State | - | [[RFC5077]](https://go.microsoft.com/fwlink/?LinkId=285815) | - | Windows 8.1 and later Windows Server 2012 R2 and later Applies to TLS 1.0, TLS 1.1, and TLS 1.2 |
@@ -465,7 +469,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [6](#Section_6) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [1](#Section_1) Introduction | Added TLS 1.3 support for post-quantum hybrid ECDHE-MLKEM key exchange, introducing X25519MLKEM768, SecP256r1MLKEM768, and SecP384r1MLKEM1024 groups. | Major |
+| 7 Change Tracking | Added TLS 1.3 support for post-quantum hybrid ECDHE-MLKEM key exchange, introducing X25519MLKEM768, SecP256r1MLKEM768, and SecP384r1MLKEM1024 groups. | Major |
 
 <a id="revision-history"></a>
 
@@ -519,3 +524,4 @@ The changes made to this document are listed in the following table. For more in
 | 6/25/2021 | 14.0 | Major | Significantly changed the technical content. |
 | 10/6/2021 | 14.0 | None | No changes to the meaning, language, or formatting of the technical content. |
 | 4/23/2024 | 15.0 | Major | Significantly changed the technical content. |
+| 4/13/2026 | 16.0 | Major | Significantly changed the technical content. |

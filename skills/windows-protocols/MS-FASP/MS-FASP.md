@@ -295,7 +295,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 11/21/2025.
+Last updated: 6/8/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -485,6 +485,10 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDN-OSVERSIONINFOEX] Microsoft Corporation, "OSVERSIONINFOEX structure", Structure, [http://msdn.microsoft.com/en-us/library/ms724833.aspx](https://go.microsoft.com/fwlink/?LinkId=90057)
 
 [MSDN-SHLoadIndirectString] Microsoft Corporation, "SHLoadIndirectString function", [http://msdn.microsoft.com/en-us/library/bb759919(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=210820)
+
+[MSKB-5083631] Microsoft Corporation, "April 30, 2026—KB5083631", April 2026, [https://support.microsoft.com/en-us/help/5083631](https://go.microsoft.com/fwlink/?linkid=2358432)
+
+[MSKB-5083806] Microsoft Corporation, "April 30, 2026—KB5083806", April 2026, [https://support.microsoft.com/en-us/help/5083806](https://go.microsoft.com/fwlink/?LinkId=2366611)
 
 [MSKB-935807] Microsoft Corporation, "Microsoft Security Bulletin MS07-038 - Moderate", Windows Vista Security Vulnerability, August 2007, [https://learn.microsoft.com/en-us/security-updates/securitybulletins/2007/ms07-038](https://go.microsoft.com/fwlink/?LinkId=122599)
 
@@ -1141,9 +1145,7 @@ FW_INTERFACE_TYPE_MOBILE_BBAND = 0x0008,
 
 FW_INTERFACE_TYPE_MAX = 0x0010,
 
-FW_INTERFACE_TYPE_MAX_V2_23 = 0x0008,
-
-FW_INTERFACE_TYPE_MAX = 0x0008
+FW_INTERFACE_TYPE_MAX_V2_23 = 0x0008
 
 } FW_INTERFACE_TYPE;
 
@@ -2223,7 +2225,7 @@ FW_ENFORCEMENT_STATE_REMOTE_PORT_RESOLUTION_EMPTY = 9,
 
 FW_ENFORCEMENT_STATE_INTERFACE_RESOLUTION_EMPTY = 10,
 
-FW_ENFORCEMENT_STATE_APPLICATION_RESOLUTION_EMPTY = 12,
+FW_ENFORCEMENT_STATE_APPLICATION_RESOLUTION_EMPTY = 11,
 
 FW_ENFORCEMENT_STATE_REMOTE_MACHINE_EMPTY = 12,
 
@@ -5054,7 +5056,9 @@ FW_PHASE1_KEY_MODULE_IKE = 1,
 
 FW_PHASE1_KEY_MODULE_AUTH_IP = 2,
 
-FW_PHASE1_KEY_MODULE_MAX = 3
+FW_PHASE1_KEY_MODULE_IKEV2 = 3,
+
+FW_PHASE1_KEY_MODULE_MAX = 4
 
 } FW_PHASE1_KEY_MODULE_TYPE;
 
@@ -5064,7 +5068,9 @@ FW_PHASE1_KEY_MODULE_MAX = 3
 
 **FW_PHASE1_KEY_MODULE_AUTH_IP:** The keying protocol was [**AuthIP**](#gt_authenticated-ip-authip). This symbolic constant has a value of 2.
 
-**FW_PHASE1_KEY_MODULE_MAX:** This value and values that exceed this value are not valid and MUST NOT be used. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 3.
+**FW_PHASE1_KEY_MODULE_IKEV2:** The keying protocol was [**Internet Key Exchange (IKEv2)**](#gt_internet-key-exchange-ikev2). This symbolic constant has a value of 3.<22>
+
+**FW_PHASE1_KEY_MODULE_MAX:** This value and values that exceed this value are not valid and MUST NOT be used. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 4.
 
 <a id="Section_2.2.78"></a>
 ### 2.2.78 FW_CERT_INFO
@@ -5216,7 +5222,7 @@ unsigned long dwP1SaFlags;
 
 **SaId:** A 64-bit integer that uniquely identifies the security association.
 
-**KeyModuleType:** The keying protocol used, [**IKE**](#gt_internet-key-exchange-ike) or [**AuthIP**](#gt_authenticated-ip-authip). The field MUST contain only a value from the [FW_PHASE1_KEY_MODULE_TYPE](#Section_2.2.77) enumeration.
+**KeyModuleType:** The keying protocol used, [**IKE**](#gt_internet-key-exchange-ike) or [**AuthIP**](#gt_authenticated-ip-authip) or [**Internet Key Exchange (IKEv2)**](#gt_internet-key-exchange-ikev2). The field MUST contain only a value from the [FW_PHASE1_KEY_MODULE_TYPE](#Section_2.2.77) enumeration.
 
 **Endpoints:** This field contains IP address information of the two [**endpoints**](#gt_endpoint) that established this security association. An address of zero means the security association applies to any endpoint.
 
@@ -5312,7 +5318,7 @@ unsigned long dwP2SaFlags;
 
 **Pfs:** This field specifies the [**perfect forward secrecy**](#gt_perfect-forward-secrecy-pfs) used by this security association.
 
-**TransportFilterId:** This [**GUID**](#gt_globally-unique-identifier-guid) MAY contain additional implementation-specific<22> information about the security association. The client MUST ignore this value.
+**TransportFilterId:** This [**GUID**](#gt_globally-unique-identifier-guid) MAY contain additional implementation-specific<23> information about the security association. The client MUST ignore this value.
 
 **dwP2SaFlags:** Reserved value and not currently used. It MUST be set to 0.
 
@@ -5440,7 +5446,7 @@ FW_OBJECT_METADATA pMetaData;
 
 **wszEmbeddedContext:** A pointer to a Unicode string that specifies a group name for this rule. Other components in the system use this string to enable or disable a group of rules by verifying that all rules have the same group name.
 
-**PlatformValidityList:** A condition in a rule that determines whether or not the rule is enforced by the local computer based on the local computer's platform information. The rule is enforced only if the local computer's operating system platform is an element of the set described by **PlatformValidityList**.<23>
+**PlatformValidityList:** A condition in a rule that determines whether or not the rule is enforced by the local computer based on the local computer's platform information. The rule is enforced only if the local computer's operating system platform is an element of the set described by **PlatformValidityList**.<24>
 
 **Origin:** This field is the rule origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
@@ -5787,7 +5793,7 @@ FW_KEY_MODULE_MAX = 4
 
 } FW_KEY_MODULE;
 
-**FW_KEY_MODULE_DEFAULT:** This value represents the default keying modules. The default keying modules are implementation-specific.<24>
+**FW_KEY_MODULE_DEFAULT:** This value represents the default keying modules. The default keying modules are implementation-specific.<25>
 
 **FW_KEY_MODULE_IKEv1:** This value represents a keying module implementing the [**Internet Key Exchange (IKE)**](#gt_internet-key-exchange-ike) protocol as specified in [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349).
 
@@ -5800,7 +5806,7 @@ FW_KEY_MODULE_MAX = 4
 <a id="Section_2.2.97"></a>
 ### 2.2.97 FW_TRUST_TUPLE_KEYWORD
 
-This enumeration represents flags that are used to identify trust tuples.<25> The traffic corresponding to these keywords changes dynamically and is tracked by the TrustTuples object (section [3.1.1](#Section_3.1.1)). All the flags supported by a given schema version can be combined.
+This enumeration represents flags that are used to identify trust tuples.<26> The traffic corresponding to these keywords changes dynamically and is tracked by the TrustTuples object (section [3.1.1](#Section_3.1.1)). All the flags supported by a given schema version can be combined.
 
 typedef enum _tag_FW_TRUST_TUPLE_KEYWORD
 
@@ -5852,7 +5858,7 @@ FW_TRUST_TUPLE_KEYWORD_MAX_V2_27 = 0x0080,
 
 **FW_TRUST_TUPLE_KEYWORD_WFD_CDP**: Represents all traffic that matches a tuple in the **TrustTuples** collection, where **IsWFDCDPSvc** is true.
 
-**FW_TRUST_TUPLE_KEYWORD_MAX:** This value and values that exceed this value are not valid and MUST NOT be used. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 0x0100.<26> <27>
+**FW_TRUST_TUPLE_KEYWORD_MAX:** This value and values that exceed this value are not valid and MUST NOT be used. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 0x0100.<27> <28>
 
 **FW_TRUST_TUPLE_KEYWORD_MAX_V2_20:** This value and values that exceed this value are not valid and MUST NOT be used by servers and clients with schema version 0x0214 and earlier. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 0x0004.
 
@@ -6188,7 +6194,7 @@ FW_RULE_FLAGS2_MAX = 0x0800
 
 **FW_RULE_FLAGS2_NOT_USED_VALUE_64**: This value is not used.
 
-**FW_RULE_FLAGS2_CALLOUT_AND_AUDIT**: Rules that specify this value will perform the indicated action and will then record an audit event to validate that such an action occurred.<28>
+**FW_RULE_FLAGS2_CALLOUT_AND_AUDIT**: Rules that specify this value will perform the indicated action and will then record an audit event to validate that such an action occurred.<29>
 
 **FW_RULE_FLAGS2_NOT_USED_VALUE_256**: This value is not used.
 
@@ -6829,7 +6835,7 @@ Although this protocol imposes no limitations on how administrators use the prim
 
 - **StoreType**: The type of store being managed, which is defined in this protocol by the data type [FW_STORE_TYPE (section 2.2.1)](#Section_2.2.1). This value MUST be FW_STORE_TYPE_GP_RSOP, FW_STORE_TYPE_LOCAL, FW_STORE_TYPE_DYNAMIC, or FW_STORE_TYPE_DEFAULTS.
 - **BinaryVersion**: An unsigned integer representing the binary version of the RPC interface used by the client. This value MUST be a valid Protocol Version (see section 2.2.42).
-**PortInUse**: This represents an Internet Protocol transport layer port that is currently in use by an [**endpoint**](#gt_endpoint) on the local computer. It contains the following fields:<29>
+**PortInUse**: This represents an Internet Protocol transport layer port that is currently in use by an [**endpoint**](#gt_endpoint) on the local computer. It contains the following fields:<30>
 
 - **AddressFamily**: The address family of the endpoint. This MUST be IPv4 or IPv6.
 - **TransportProtocol**: The transport protocol used by the endpoint. This MUST be [**TCP**](#gt_transmission-control-protocol-tcp) or UDP.
@@ -6883,13 +6889,13 @@ No protocol timer events are required on the server side other than the timers r
 
 The server initializes when the server host machine starts. The server MUST restore the state of the **GroupPolicyRSoPStore**, the **LocalStore**, and the **DefaultsStore** from persistent storage. The order in which the stores are loaded does not matter. The **PortsInUse** collection and the **TrustTuples** collection MUST be initialized to an empty set.
 
-The server MUST ensure that **LocalStore** and **GroupPolicyRSoPStore** contain the Phase 1 and Phase 2 primary **AuthenticationSet** objects. If either of the primary sets is missing, the server MUST create a new instance and set the corresponding **IsAuthConfigured** property to false. The values used to initialize the new instances are implementation-specific.<30>
+The server MUST ensure that **LocalStore** and **GroupPolicyRSoPStore** contain the Phase 1 and Phase 2 primary **AuthenticationSet** objects. If either of the primary sets is missing, the server MUST create a new instance and set the corresponding **IsAuthConfigured** property to false. The values used to initialize the new instances are implementation-specific.<31>
 
-The server MUST ensure that **LocalStore** and **GroupPolicyRSoPStore** contain the Phase 1 and Phase 2 primary **CryptoSet** objects. If either of the primary sets is missing, the server MUST create a new instance and set the corresponding **IsCryptoConfigured** property to false. The values used to initialize the new instances are implementation-specific.<31>
+The server MUST ensure that **LocalStore** and **GroupPolicyRSoPStore** contain the Phase 1 and Phase 2 primary **CryptoSet** objects. If either of the primary sets is missing, the server MUST create a new instance and set the corresponding **IsCryptoConfigured** property to false. The values used to initialize the new instances are implementation-specific.<32>
 
 The server MUST merge **GroupPolicyRSoPStore** and **LocalStore** and use the result to initialize **DynamicStore**. The merge logic is as follows:
 
-- For the **GlobalConfiguration** and **ProfileConfiguration** options, if an option is configured in only one store, that value MUST be used. If an option is configured in neither store, the option MUST be initialized to an implementation-specific<32> default value. If an option is configured in both stores, the values MUST be merged according to the merge law for that option. The merge laws for **GlobalConfiguration** and **ProfileConfiguration** options are specified in sections [2.2.42](#Section_2.2.42) and [2.2.38](#Section_2.2.38) respectively.
+- For the **GlobalConfiguration** and **ProfileConfiguration** options, if an option is configured in only one store, that value MUST be used. If an option is configured in neither store, the option MUST be initialized to an implementation-specific<33> default value. If an option is configured in both stores, the values MUST be merged according to the merge law for that option. The merge laws for **GlobalConfiguration** and **ProfileConfiguration** options are specified in sections [2.2.42](#Section_2.2.42) and [2.2.38](#Section_2.2.38) respectively.
 - For **FirewallRules**, **ConnectionSecurityRules**, and **MainModeRules**, all the rules from both stores MUST be combined and added to **DynamicStore**.
 - For **AuthenticationSets**, if a primary set in **GroupPolicyRSoPStore** has **IsAuthConfigured** set to true, that set MUST be added to **DynamicStore** and the corresponding set in **LocalStore** MUST be ignored. Otherwise, the primary set from **LocalStore** MUST be used. For all other sets (that is, the sets where **IsAuthPrimary** is false), the sets from both stores MUST be combined and added to **DynamicStore**.
 - For **CryptoSets**, if a primary set in **GroupPolicyRSoPStore** has **IsCryptoConfigured** set to true, that set MUST be added to **DynamicStore** and the corresponding set in **LocalStore** MUST be ignored. Otherwise, the primary set from **LocalStore** MUST be used. For all other sets (that is, the sets where **IsCryptoPrimary** is false), the sets from both stores MUST be combined and added to **DynamicStore**.
@@ -6902,7 +6908,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime, via the strict_context_handle attribute, that it is to reject the use of context handles that are created by using a different method of RPC interface than this one, as specified in [MS-RPCE] section 3.
 
-Because the server makes access control decisions as part of message processing, the client MUST authenticate to the server as specified in section [2.1](#Section_2.1). The server MUST verify that the client is authorized to perform the requested operation. The server MUST retrieve the client's identity token by invoking the abstract interface GetRpcImpersonationAccessToken() as specified in [MS-RPCE] section 3.3.3.4.3.1. The server implementation maintains a list of authorized clients. The protocol has no methods for reading or setting that list. If the client invoking the method is not on the authorized list, the server MUST fail the call and return an error code of ERROR_ACCESS_DENIED (5).<33>
+Because the server makes access control decisions as part of message processing, the client MUST authenticate to the server as specified in section [2.1](#Section_2.1). The server MUST verify that the client is authorized to perform the requested operation. The server MUST retrieve the client's identity token by invoking the abstract interface GetRpcImpersonationAccessToken() as specified in [MS-RPCE] section 3.3.3.4.3.1. The server implementation maintains a list of authorized clients. The protocol has no methods for reading or setting that list. If the client invoking the method is not on the authorized list, the server MUST fail the call and return an error code of ERROR_ACCESS_DENIED (5).<34>
 
 **Methods in RPC Opnum Order**
 
@@ -7227,7 +7233,7 @@ ULONG RRPC_FWAddFirewallRule(
 | 0x000000B7 ERROR_ALREADY_EXISTS | The specified rule has a rule ID that already exists in the specified store. |
 | 0x00000032 ERROR_NOT_SUPPORTED | The specified store does not support this method; the store might be read-only. |
 | 0x00000005 ERROR_ACCESS_DENIED | The *hPolicyStore* handle was not opened with read/write access rights. The error is also returned if the client does not have the required credentials to call the method. |
-| 0x00000057 ERROR_INVALID_PARAMETER | A parameter of this method is incorrect, or is required and not specified. This error can be returned because: The *pRule* object did not pass the firewall rule validations that are specified in the definition of the [FW_RULE](#Section_2.2.37) data type. One of the required values is not specified. A policy store does not support rules with profile conditions other than ALL profiles. The **wszLocalApplication** field of the rule contains a string that was determined to be an invalid path.<34> |
+| 0x00000057 ERROR_INVALID_PARAMETER | A parameter of this method is incorrect, or is required and not specified. This error can be returned because: The *pRule* object did not pass the firewall rule validations that are specified in the definition of the [FW_RULE](#Section_2.2.37) data type. One of the required values is not specified. A policy store does not support rules with profile conditions other than ALL profiles. The **wszLocalApplication** field of the rule contains a string that was determined to be an invalid path.<35> |
 
 **Exceptions Thrown**: No exceptions are thrown except those that are thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
@@ -8895,7 +8901,7 @@ unsigned long RRPC_FWAddFirewallRule2_10(
 | 0x000000B7 ERROR_ALREADY_EXISTS | The specified rule has a rule ID that already exists in the specified store. |
 | 0x00000032 ERROR_NOT_SUPPORTED | The specified store does not support this method; the store might be read-only. |
 | 0x00000005 ERROR_ACCESS_DENIED | The *hPolicyStore* handle was not opened with read/write access rights. The error is also returned if the client does not have the required credentials to call the method. |
-| 0x00000057 ERROR_INVALID_PARAMETER | One of the parameters of this method either is incorrect, or is required and not specified. This error can be returned because: The *pRule* object did not pass the firewall rule validations specified in the definition of the [FW_RULE](#Section_2.2.37) data type. One of the required values is not specified. A policy store does not support rules with profile conditions other than ALL profiles. The *wszLocalApplication* parameter contains a string that at enforcement time does not represent a valid file path.<35> |
+| 0x00000057 ERROR_INVALID_PARAMETER | One of the parameters of this method either is incorrect, or is required and not specified. This error can be returned because: The *pRule* object did not pass the firewall rule validations specified in the definition of the [FW_RULE](#Section_2.2.37) data type. One of the required values is not specified. A policy store does not support rules with profile conditions other than ALL profiles. The *wszLocalApplication* parameter contains a string that at enforcement time does not represent a valid file path.<36> |
 
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). If any lower-layer errors are reported by RPC exception, this exception is converted to an error code and reported to higher-layer protocols via the return value.
 
@@ -11014,7 +11020,7 @@ void SetGroupPolicyRSoPStore(
 <a id="Section_3.1.6.5"></a>
 #### 3.1.6.5 IsComputerInCommonCriteriaMode
 
-IsComputerInCommonCriteriaMode is an abstract interface exposed by the host operating system and invoked by the MS-FASP server to determine whether the local computer is conforming to all the security functional requirements specified in [[CC-2]](https://go.microsoft.com/fwlink/?linkid=2009647). The algorithm for computing the return value is implementation-specific.<36> The interface is defined as follows:
+IsComputerInCommonCriteriaMode is an abstract interface exposed by the host operating system and invoked by the MS-FASP server to determine whether the local computer is conforming to all the security functional requirements specified in [[CC-2]](https://go.microsoft.com/fwlink/?linkid=2009647). The algorithm for computing the return value is implementation-specific.<37> The interface is defined as follows:
 
 bool IsComputerInCommonCriteriaMode();
 
@@ -11025,7 +11031,7 @@ bool IsComputerInCommonCriteriaMode();
 <a id="Section_3.1.6.6"></a>
 #### 3.1.6.6 SetEffectiveFirewallPolicy
 
-SetEffectiveFirewallPolicy is an abstract interface exposed by the host operating system and invoked by the MS-FASP server whenever the effective firewall policy changes. The algorithm for processing the new policy settings is implementation-specific.<37> The interface is defined as follows:
+SetEffectiveFirewallPolicy is an abstract interface exposed by the host operating system and invoked by the MS-FASP server whenever the effective firewall policy changes. The algorithm for processing the new policy settings is implementation-specific.<38> The interface is defined as follows:
 
 void SetEffectiveFirewallPolicy(
 
@@ -16447,6 +16453,8 @@ FW_PHASE1_KEY_MODULE_IKE,
 
 FW_PHASE1_KEY_MODULE_AUTH_IP,
 
+FW_PHASE1_KEY_MODULE_IKEV2,
+
 FW_PHASE1_KEY_MODULE_MAX
 
 }FW_PHASE1_KEY_MODULE_TYPE;
@@ -18952,7 +18960,6 @@ The following tables show the relationships between Microsoft product versions o
 | Windows Server 2012 operating system | Yes | Yes |
 | Windows Server 2012 R2 operating system | Yes | Yes |
 | Windows Server 2016 operating system | Yes | Yes |
-| Windows Server operating system | Yes | Yes |
 | Windows Server 2019 operating system | Yes | Yes |
 | Windows Server 2022 operating system | Yes | Yes |
 | Windows Server 2025 operating system | Yes | Yes |
@@ -19389,28 +19396,30 @@ present only in Windows Vista SP1 and Windows Server 2008.
 
 <21> Section 2.2.65: On Windows Vista and Windows Server 2008, the only duplicate check performed is for the anonymous method.
 
-<22> Section 2.2.83: Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 set **TransportFilterId** to the filter key of the Windows Filtering Platform filter used to enforce the [**security association**](#gt_security-association-sa) (for more information, see [[MSWFPSDK]](https://go.microsoft.com/fwlink/?LinkId=90220)).
+<22> Section 2.2.77: FW_PHASE1_KEY_MODULE_IKEV2 is supported in Windows 11, version 24H2 and Windows 11, version 25H2 operating system with [[MSKB-5083631]](https://go.microsoft.com/fwlink/?linkid=2358432), Windows 11, version 26H1 operating system with [[MSKB-5083806]](https://go.microsoft.com/fwlink/?LinkId=2366611), and later.
 
-<23> Section 2.2.85: Windows uses the three fields of the FW_OS_PLATFORM data type to identify Windows platform types. The fields in this data type correspond to the fields of the Windows OSVERSIONINFOEX data type (for more information, see [MSDN-OSVERSIONINFOEX]). The **bPlatform** field in this specification corresponds to the **dwPlatformId** field in MSDN. The **bMajorVersion** field in this specification corresponds to the **dwMajorVersion** field in MSDN. The **bMinorVersion** field in this specification corresponds to the **dwMinorVersion** field in MSDN. The Windows firewall and advanced security components extract the OSVERSIONINFOEX values and use them to enforce PlatformValidityList conditions in FW_RULE (section 2.2.37) and FW_CS_RULE (section 2.2.55) rules.
+<23> Section 2.2.83: Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 set **TransportFilterId** to the filter key of the Windows Filtering Platform filter used to enforce the [**security association**](#gt_security-association-sa) (for more information, see [[MSWFPSDK]](https://go.microsoft.com/fwlink/?LinkId=90220)).
 
-<24> Section 2.2.96: By default, Windows uses the IKEv1 and [**AuthIP**](#gt_authenticated-ip-authip) keying modules.
+<24> Section 2.2.85: Windows uses the three fields of the FW_OS_PLATFORM data type to identify Windows platform types. The fields in this data type correspond to the fields of the Windows OSVERSIONINFOEX data type (for more information, see [MSDN-OSVERSIONINFOEX]). The **bPlatform** field in this specification corresponds to the **dwPlatformId** field in MSDN. The **bMajorVersion** field in this specification corresponds to the **dwMajorVersion** field in MSDN. The **bMinorVersion** field in this specification corresponds to the **dwMinorVersion** field in MSDN. The Windows firewall and advanced security components extract the OSVERSIONINFOEX values and use them to enforce PlatformValidityList conditions in FW_RULE (section 2.2.37) and FW_CS_RULE (section 2.2.55) rules.
 
-<25> Section 2.2.97: The following table shows the tuple keyword flags added to the enum _tag_FW_TRUST_TUPLE_KEYWORD_NONE type definition in Windows 10 v1803 and Windows Server v1803 and later.
+<25> Section 2.2.96: By default, Windows uses the IKEv1 and [**AuthIP**](#gt_authenticated-ip-authip) keying modules.
+
+<26> Section 2.2.97: The following table shows the tuple keyword flags added to the enum _tag_FW_TRUST_TUPLE_KEYWORD_NONE type definition in Windows 10 v1803 and Windows Server v1803 and later.
 
 | **Enum Tuple Keyword Flag Name** | **Enum Value** |
 | --- | --- |
 | FW_TRUST_TUPLE_KEYWORD_WFD_CDP | 0x0080 |
 | FW_TRUST_TUPLE_KEYWORD_MAX_V2_27 | 0x0080 |
 
-<26> Section 2.2.97: In schema version 0x0214, the value for the FW_TRUST_TUPLE_KEYWORD_MAX flag is 0x0004.
+<27> Section 2.2.97: In schema version 0x0214, the value for the FW_TRUST_TUPLE_KEYWORD_MAX flag is 0x0004.
 
-<27> Section 2.2.97: In Windows 10 v1803 and Windows Server v1803 and later, the enum value for the FW_TRUST_TUPLE_KEYWORD_MAX tuple keyword flag is updated from '0x0080' to '0x0100'.
+<28> Section 2.2.97: In Windows 10 v1803 and Windows Server v1803 and later, the enum value for the FW_TRUST_TUPLE_KEYWORD_MAX tuple keyword flag is updated from '0x0080' to '0x0100'.
 
-<28> Section 2.2.103: In Windows, audit events that are generated by rules that specify the FW_RULE_FLAGS2_CALLOUT_AND_AUDIT flag are sent to the audit event log.
+<29> Section 2.2.103: In Windows, audit events that are generated by rules that specify the FW_RULE_FLAGS2_CALLOUT_AND_AUDIT flag are sent to the audit event log.
 
-<29> Section 3.1.1: The new boolean fields 'IsMDNS', 'IsCortanaOut', and 'IsProximalTCPCDP' are added to the **PortInUse** ADM element in Windows 10 v1809 and Windows Server v1809 and later, and in Windows Server 2019 and later.
+<30> Section 3.1.1: The new boolean fields 'IsMDNS', 'IsCortanaOut', and 'IsProximalTCPCDP' are added to the **PortInUse** ADM element in Windows 10 v1809 and Windows Server v1809 and later, and in Windows Server 2019 and later.
 
-<30> Section 3.1.3: During server initialization, Windows uses default values to initialize the Phase 1 and Phase 2 primary **AuthenticationSet** objects if these objects are not already present in **LocalStore** or **GroupPolicyRSoPStore**. The same defaults are used for both **LocalStore** and **GroupPolicyRSoPStore**. These defaults are as follows:
+<31> Section 3.1.3: During server initialization, Windows uses default values to initialize the Phase 1 and Phase 2 primary **AuthenticationSet** objects if these objects are not already present in **LocalStore** or **GroupPolicyRSoPStore**. The same defaults are used for both **LocalStore** and **GroupPolicyRSoPStore**. These defaults are as follows:
 
 #define FW_DEFAULT_P1_PRIMARY_AUTH_SET_NAME_STR
 
@@ -19494,7 +19503,7 @@ FW_RULE_STATUS_OK,
 
 };
 
-<31> Section 3.1.3: During server initialization, Windows uses default values to initialize the Phase 1 and Phase 2 primary **CryptoSet** objects if these objects are not already present in **LocalStore** or **GroupPolicyRSoPStore**. The same defaults are used for both **LocalStore** and **GroupPolicyRSoPStore**. These defaults are as follows:
+<32> Section 3.1.3: During server initialization, Windows uses default values to initialize the Phase 1 and Phase 2 primary **CryptoSet** objects if these objects are not already present in **LocalStore** or **GroupPolicyRSoPStore**. The same defaults are used for both **LocalStore** and **GroupPolicyRSoPStore**. These defaults are as follows:
 
 #define FW_DEFAULT_P1_PRIMARY_CRYPTO_SET_NAME_STR
 
@@ -19692,7 +19701,7 @@ g_DefaultPrimaryCryptoSuitesPhase2;
 
 }
 
-<32> Section 3.1.3: Windows selects a default value for the **ProfileConfiguration** option and the **GlobalConfiguration** option. These configuration default values are secure, and it is recommended to use these values as default values. **ProfileConfiguration** option default values:
+<33> Section 3.1.3: Windows selects a default value for the **ProfileConfiguration** option and the **GlobalConfiguration** option. These configuration default values are secure, and it is recommended to use these values as default values. **ProfileConfiguration** option default values:
 
 FW_PROFILE_CONFIG_ENABLE_FW .- TRUE.
 
@@ -19768,15 +19777,15 @@ FW_GLOBAL_CONFIG_BINARY_VERSION_SUPPORTED .- 0x201. This value is
 
 present only in Windows Vista SP1 and Windows Server 2008.
 
-<33> Section 3.1.4: In Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, security principals are identified by [**SIDs**](#gt_security-identifier-sid) (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2). The authorized clients are represented by the S-1-5-32-544 and the S-1-5-32-556 SIDs. If the client's identity token (see [MS-DTYP] section 2.5.2) does not contain at least one of these SIDs, the server fails the call.
+<34> Section 3.1.4: In Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2, security principals are identified by [**SIDs**](#gt_security-identifier-sid) (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2). The authorized clients are represented by the S-1-5-32-544 and the S-1-5-32-556 SIDs. If the client's identity token (see [MS-DTYP] section 2.5.2) does not contain at least one of these SIDs, the server fails the call.
 
-<34> Section 3.1.4.6: Path validations were not performed in Windows Vista and Windows Server 2008 at edit time.
+<35> Section 3.1.4.6: Path validations were not performed in Windows Vista and Windows Server 2008 at edit time.
 
-<35> Section 3.1.4.46: Path validations were not performed in Windows Vista and Windows Server 2008 at edit time.
+<36> Section 3.1.4.46: Path validations were not performed in Windows Vista and Windows Server 2008 at edit time.
 
-<36> Section 3.1.6.5: Windows determines whether it is operating in [**common criteria mode**](#gt_common-criteria-mode) by calling the BCryptGetFipsAlgorithmMode API. For more information, see [[MSDN-BCryptGetFipsAlgorithmMode]](https://go.microsoft.com/fwlink/?LinkId=211797).
+<37> Section 3.1.6.5: Windows determines whether it is operating in [**common criteria mode**](#gt_common-criteria-mode) by calling the BCryptGetFipsAlgorithmMode API. For more information, see [[MSDN-BCryptGetFipsAlgorithmMode]](https://go.microsoft.com/fwlink/?LinkId=211797).
 
-<37> Section 3.1.6.6: Windows enforces the effective firewall policy by converting the settings to Windows Filtering Platform filters. For more information, see [MSWFPSDK].
+<38> Section 3.1.6.6: Windows enforces the effective firewall policy by converting the settings to Windows Filtering Platform filters. For more information, see [MSWFPSDK].
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -19795,7 +19804,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.51](#Section_2.2.51) FW_CS_RULE_FLAGS | 30986 : Added FW_CS_RULE_FLAGS_TUNNEL_TYPE_POINT_TO_SITE as an enum value and changed the value of FW_CS_RULE_FLAGS_MAX to the new maximum. | Major |
+| [2.2.77](#Section_2.2.77) FW_PHASE1_KEY_MODULE_TYPE | Added IKEv2 keying protocol | Major |
+| [2.2.81](#Section_2.2.81) FW_PHASE1_SA_DETAILS | Added IKEv2 keying protocol | Major |
+| [6](#Section_6) Appendix A: Full IDL | Added IKEv2 in _tag_FW_PHASE1_KEY_MODULE_TYPE | Major |
 
 <a id="revision-history"></a>
 
@@ -19867,3 +19878,5 @@ The changes made to this document are listed in the following table. For more in
 | 9/16/2024 | 33.0 | None | No changes to the meaning, language, or formatting of the technical content. |
 | 11/19/2024 | 34.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 35.0 | Major | Significantly changed the technical content. |
+| 5/11/2026 | 35.1 | Minor | Clarified the meaning of the technical content. |
+| 6/8/2026 | 36.0 | Major | Significantly changed the technical content. |

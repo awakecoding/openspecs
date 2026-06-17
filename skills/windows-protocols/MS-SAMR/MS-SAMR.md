@@ -407,7 +407,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 11/21/2025.
+Last updated: 4/27/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -5110,6 +5110,7 @@ The following constraints MUST be satisfied; on error, the server MUST return a 
 - Conditions:
 - The **userAccountControl** attribute contains UF_NORMAL_ACCOUNT.
 - At least one of the **dBCSPwd** or **unicodePwd** attribute values is present and not equal to a hash value of a zero-length string.
+- The requesting protocol message is a password change (as compared to a password set), or the message is a LDAP-originated password set with the LDAP_SERVER_POLICY_HINTS_OID ([MS-ADTS] section 3.1.1.3.4.1.27) control set with the value 0x1.
 - Constraint:
 - The **pwdLastSet** attribute MUST be less than the current time plus the value of the Effective-MinimumPasswordAge attribute (see section 3.1.1.5).
 - Password History Length Constraint: If all of the following conditions are true, the following constraints MUST be satisfied:
@@ -5118,7 +5119,7 @@ The following constraints MUST be satisfied; on error, the server MUST return a 
 - objectSid does not have the DOMAIN_USER_RID_KRBTGT value as the RID.
 - userAccountControl does NOT contain UF_PASSWD_NOTREQD.
 - pwdHistoryLength on the [**account domain object**](#gt_account-domain-object-account-domain) is greater than 0.
-- The requesting protocol message is a password change (as compared to a password set).
+- The requesting protocol message is a password change (as compared to a password set), or the message is a LDAP-originated password set with the LDAP_SERVER_POLICY_HINTS_OID ([MS-ADTS] section 3.1.1.3.4.1.27) control set with the value 0x1.
 - Constraints:
 - If the **unicodePwd** attribute is being updated, the value of the unicodePwd MUST NOT be present in the first N hashes stored in the ntPwdHistory attribute value, where N is the value of the Effective-PasswordHistoryLength attribute (see section 3.1.1.5). For details on how ntPwdHistory is maintained, see section [3.1.1.9.1](#Section_3.1.1.9.1).
 - If the **dBCSPwd** attribute is being updated, the value of the **dBCSPwd** MUST NOT be present in the first N hashes stored in the lmPwdHistory attribute value, where N is the value of the Effective-PasswordHistoryLength attribute (see section 3.1.1.5). For details on how lmPwdHistory is maintained, see section 3.1.1.9.1.
@@ -7962,7 +7963,7 @@ The server MUST process the message subject to the following constraints:
 - All updates MUST be done in the same transaction.
 - The server MUST satisfy the constraints listed in section [3.1.5.6.4.2](#Section_3.1.5.6.4.2).
 - If the section [2.2.1.8](#Section_2.2.1.8) **USER_ALL_NTPASSWORDPRESENT** or **USER_ALL_LMPASSWORDPRESENT** flag is present in the **WhichFields** field, the server MUST update the **clearTextPassword** attribute with the (decrypted) value of **SAMPR_USER_INTERNAL8_INFORMATION.UserPassword** presented by the client in the format of SAMPR_ENCRYPTED_PASSWORD_AES (section [2.2.6.32](#Section_2.2.6.32)), while using as the decryption key the 16-byte SMB session key obtained as specified in section [3.1.2.4](#Section_3.1.2.4) and the AES Cipher as specified in section [3.2.2.4](#Section_3.2.2.4).
-- The value of **UserPassword.PBKDFIterations**, as specified in SAMPR_ENCRYPTED_PASSWORD_AES (section 2.2.6.32), is ignored by the server.
+- The value of **UserPassword.PBKDF2Iterations**, as specified in SAMPR_ENCRYPTED_PASSWORD_AES (section 2.2.6.32), is ignored by the server.
 <a id="Section_3.1.5.6.5"></a>
 ##### 3.1.5.6.5 SamrSetInformationUser (Opnum 37)
 
@@ -8633,7 +8634,7 @@ SamrUnicodeChangePasswordUser4(
 
 **EncryptedPassword**: A cleartext password encrypted to the specification of SAMPR_ENCRYPTED_PASSWORD_AES (section [3.2.2.4](#Section_3.2.2.4)), where the key is derived using the PBKDF2 algorithm and the NT-hash of the users existing password, the EncryptedPassword.Salt, and EncryptedPassword.PBKDF2 Iteration count.
 
-EncryptedPassword.PBKDFIterations MUST be present and MUST be between 5000 and 1,000,000 inclusive.
+EncryptedPassword.PBKDF2Iterations MUST be present and MUST be between 5000 and 1,000,000 inclusive.
 
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
@@ -8650,7 +8651,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - Let Presented-Clear-Text be the cleartext value sent by the client, obtained by decrypting EncryptedPassword according to the specifications of SAMPR_ENCRYPTED_PASSWORD_AES and AES Cipher Usage, using a 16-byte CEK derived from the Stored-NT-Hash using PBKDF2, EncryptedPassword.PBKDF2Iterations, and EncryptedPassword.Salt.
 - The following conditions MUST be true; otherwise, the server MUST satisfy the constraints in section [3.1.5.14.6](#Section_3.1.5.14.6) and return STATUS_WRONG_PASSWORD:
 - Stored-NT-Hash is non-NULL.
-- EncryptedPassword.PBKDFIterations MUST be between 5000 and 1,000,000 inclusive.
+- EncryptedPassword.PBKDF2Iterations MUST be between 5000 and 1,000,000 inclusive.
 - MAC computed by the Server according to the AES Cipher Usage specifications (section 3.2.2.4), with CEK matching the AuthData presented by the client.
 - Decrypting the EncryptedPasswork.Ciphertext succeeds.
 - The server MUST update the clearTextPassword attribute with Presented-Clear-Text.
@@ -13062,9 +13063,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.1.7.1](#Section_3.1.1.7.1) General Password Policy | 30571 : Changed minPwdHistory to pwdHistoryLength in one set of conditions. | Major |
-| 3.1.1.7.1 General Password Policy | 30570 : Added an additional clause to the conditions for an LDAP-originated password set. | Major |
-| [3.1.1.7.2](#Section_3.1.1.7.2) Cleartext Password Policy | 30548 : Adjusted the numbers representing the value ranges of uppercase and lowercase English letters. | Major |
+| [3.1.5.6.4.6](#Section_3.1.5.6.4.6) UserInternal8Information | 39225 : Updated encrypted password from PBKDFIterations to PBKDF2Iterations | Minor |
+| [3.1.5.10.4](#Section_3.1.5.10.4) SamrUnicodeChangePasswordUser4 (Opnum 73) | 39225 : Updated encrypted password from PBKDFIterations to PBKDF2Iterations | Minor |
 
 <a id="revision-history"></a>
 
@@ -13138,3 +13138,5 @@ The changes made to this document are listed in the following table. For more in
 | 4/23/2024 | 48.0 | Major | Significantly changed the technical content. |
 | 2/10/2025 | 49.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 50.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 51.0 | Major | Significantly changed the technical content. |
+| 4/27/2026 | 51.1 | Minor | Clarified the meaning of the technical content. |

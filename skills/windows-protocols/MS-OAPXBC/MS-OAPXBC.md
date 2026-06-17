@@ -138,7 +138,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 4/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -154,10 +154,10 @@ Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other 
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-directory-domain-services-ad-ds"></a>
-**Active Directory Domain Services (AD DS)**: A directory service (DS) implemented by a [**domain controller (DC)**](#gt_domain-controller-dc). The DS provides a data store for objects that is distributed across multiple [**DCs**](#gt_domain-controller-dc). The [**DCs**](#gt_domain-controller-dc) interoperate as peers to ensure that a local change to an object replicates correctly across [**DCs**](#gt_domain-controller-dc). AD DS is a deployment of [**Active Directory**](#gt_active-directory) [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**Active Directory Domain Services (AD DS)**: A directory service (DS) implemented by a [**domain controller (DC)**](#gt_domain-controller-dc). The DS provides a data store for objects that is distributed across multiple [**DCs**](#gt_domain-controller-dc). The DCs interoperate as peers to ensure that a local change to an object replicates correctly across DCs. AD DS is a deployment of [**Active Directory**](#gt_active-directory) [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_active-directory-federation-services-ad-fs"></a>
 **Active Directory Federation Services (AD FS)**: A Microsoft implementation of a federation services provider, which provides a security token service (STS) that can issue security tokens to a caller using various protocols such as WS-Trust, WS-Federation, and Security Assertion Markup Language (SAML) version 2.0.
@@ -262,6 +262,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSFT-CVE-2021-33781] Microsoft Corporation, "Azure AD Security Feature Bypass Vulnerability", CVE-2021-33781, July 13, 2021, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33781](https://go.microsoft.com/fwlink/?linkid=2167931)
 
 [MSFT-CVE-2023-35348] Microsoft Corporation, "CVE-2023-35348 Security Vulnerability", CVE-2023-35348, [https://msrc.microsoft.com/update-guide/vulnerability/](https://go.microsoft.com/fwlink/?linkid=2241213)
+
+[MSFT-CVE-2026-27928] Microsoft Corporation, "Windows Hello Security Feature Bypass Vulnerability", CVE-2026-27928, April 14, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-27928](https://go.microsoft.com/fwlink/?linkid=2358505)
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -940,6 +942,8 @@ The response to the request is a [**JSON**](#gt_javascript-object-notation-json)
 
 **id_token** (REQUIRED): An ID token for the user that is authenticated in the request, as described in [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840). The audience for the ID token, that is, the **aud** field, is the same value given in section [3.2.5.1.2.1](#Section_3.2.5.1.2.1) for the **client_id** field. The token does not need to be signed.
 
+Note that **id_token** may include **upn** and **email** claims. Although these are marked as optional (see [MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.1), a client broker that follows this specification requires one or the other, but not both.
+
 <a id="Section_3.2.5.1.2.3"></a>
 ###### 3.2.5.1.2.3 Processing Details
 
@@ -1048,6 +1052,8 @@ After decryption, the JWT response MUST contain the following elements:
 
 **id_token** (OPTIONAL): An ID token for the user that was authenticated in the request, as defined in [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840). The audience for the ID token, that is, the **aud** field, is the same value given in section [3.2.5.1.3.1](#Section_3.2.5.1.3.1) for the **client_id** field. The token does not need to be signed.
 
+Note that **id_token** may include **upn** and **email** claims. Although these are marked as optional (see [MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.1), a client broker that follows this specification requires one or the other, but not both.
+
 <a id="Section_3.2.5.1.3.3"></a>
 ###### 3.2.5.1.3.3 Processing Details
 
@@ -1153,6 +1159,8 @@ After decryption, the JWT response MUST contain the following elements:
 
 **id_token** (REQUIRED): An ID token for the user that was authenticated in the request, as defined in [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840). The audience for the ID token, that is, the **aud** field, is the same value given in section [3.2.5.1.4.1](#Section_3.2.5.1.4.1) for the **client_id** field. The token does not need to be signed.
 
+Note that **id_token** may include **upn** and **email** claims. Although these are marked as optional (see [MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.1), a client broker that follows this specification requires one or the other, but not both.
+
 <a id="Section_3.2.5.1.4.3"></a>
 ###### 3.2.5.1.4.3 Processing Details
 
@@ -1160,8 +1168,10 @@ The server verifies that the request was signed by the client with a key derived
 
 If the request includes the *krctx* parameter, the server uses the following rules to verify the [**JWT**](#gt_json-web-token-jwt) contained in the parameter, and then uses the claims in the JWT to authorize the request:
 
-- The JWT MUST contain the ngc_key claim whose value matches the PKCS #10 [**public key**](#gt_public-key) value from the **csr** field.
-- The JWT MUST contain the onprem_sid claim whose value matches the sid claim value from the primary refresh token that the client previously received from the [**AD FS server**](#gt_ad-fs-server) (section [3.2.5.1.2](#Section_3.2.5.1.2)).
+- The JWT MUST contain the **deviceid** claim, whose value matches the device identifier of the authenticated device.<7>
+- The JWT MUST contain the **tid** claim, whose value matches the tenant identifier configured on the [**AD FS server**](#gt_ad-fs-server).<8>
+- The JWT MUST contain the **ngc_key** claim, whose value matches the PKCS #10 [**public key**](#gt_public-key) value from the **csr** field.
+- The JWT MUST contain the **onprem_sid** claim, whose value matches the sid claim value from the primary refresh token that the client previously received from the AD FS server (section [3.2.5.1.2](#Section_3.2.5.1.2)).
 - The JWT MUST be signed with a certificate that is trusted by the server.
 If the *resource* parameter is invalid, the AD FS server responds to the OAuth 2.0 client according to the requirements of [RFC6749] section 4.1.2.1 (Error Response). The REQUIRED error parameter of the response MUST be set to the invalid_resource error code, which is defined in [MS-OAPX](../MS-OAPX/MS-OAPX.md) section 2.2.4.1.
 
@@ -1227,9 +1237,9 @@ The JWT fields MUST be given the following values:
 
 **ua_redirect_uri** (OPTIONAL): A redirect_uri of the user-agent using this header
 
-**x_client_platform** (OPTIONAL): The value is used to inform the AAD/server the platform on which this header is created.<7>
+**x_client_platform** (OPTIONAL): The value is used to inform the AAD/server the platform on which this header is created.<9>
 
-**win_ver** (OPTIONAL): This claim has the operating system version information.<8>
+**win_ver** (OPTIONAL): This claim has the operating system version information.<10>
 
 **windows_api_version** (OPTIONAL): The version value is "2.0.1". This information is used to indicate to the server that the client has the ability to handle nonce challenges.
 
@@ -1246,7 +1256,7 @@ x-ms-DeviceCredential HTTP header format
 
 The **x-ms-DeviceCredential** HTTP header is a signed [**JWT**](#gt_json-web-token-jwt), as defined in section [2.2.1.2](#Section_2.2.1.2),.
 
-The JWT fields MUST be given the following values:<9>
+The JWT fields MUST be given the following values:<11>
 
 **grant_type** (OPTIONAL): Set to "device_auth" if present.
 
@@ -1258,9 +1268,9 @@ The JWT fields MUST be given the following values:<9>
 
 **ua_redirect_uri** (OPTIONAL): A redirect_uri of the user-agent using this header.
 
-**x_client_platform** (OPTIONAL): The value is used to inform AAD/server the platform on which this header is created.<10>
+**x_client_platform** (OPTIONAL): The value is used to inform AAD/server the platform on which this header is created.<12>
 
-**win_ver** (OPTIONAL): This claim has the operating system version information.<11>
+**win_ver** (OPTIONAL): This claim has the operating system version information.<13>
 
 **windows_api_version** (OPTIONAL): The version value is "2.0.1". This information is used to indicate to the server that the client has the ability to handle nonce challenges.
 
@@ -1285,11 +1295,11 @@ The processing details are the same as those specified in [MS-OAPX](../MS-OAPX/M
 The [**AD FS server**](#gt_ad-fs-server) processes the [x-ms-RefreshTokenCredential HTTP header](#Section_3.2.5.2.1.1.1) as follows.
 
 - The AD FS server checks the security policy of the resource owner to verify that user credentials received from a previously issued token can be used to authenticate and authorize users.
-- The server verifies the signature of the header and also verifies that the **request_nonce** is a nonce value previously issued by the server as defined in section [3.2.5.1.1](#Section_3.2.5.1.1). The server SHOULD<12> also verify that the nonce was issued recently. If the signature or **request_nonce** are invalid, the server ignores the x-ms-RefreshTokenCredential HTTP header; if the [x-ms-DeviceCredential HTTP header](../MS-OAPX/MS-OAPX.md) is present, the client processes it as follows, otherwise it continues processing the request as in [MS-OAPX] section 3.2.5.1.1.3.
+- The server verifies the signature of the header and also verifies that the **request_nonce** is a nonce value previously issued by the server as defined in section [3.2.5.1.1](#Section_3.2.5.1.1). The server SHOULD<14> also verify that the nonce was issued recently. If the signature or **request_nonce** are invalid, the server ignores the x-ms-RefreshTokenCredential HTTP header; if the [x-ms-DeviceCredential HTTP header](../MS-OAPX/MS-OAPX.md) is present, the client processes it as follows, otherwise it continues processing the request as in [MS-OAPX] section 3.2.5.1.1.3.
 - The AD FS server extracts the primary refresh token from the **refresh_token** field of the x-ms-RefreshTokenCredential HTTP header. If the refresh token provided is a valid primary refresh token that was previously issued by the server, then the AD FS server authenticates the user and device to which the primary refresh token was issued and continues processing the request as in [MS-OAPX] section 3.2.5.1.1.3.
 If the AD FS server did not receive a valid x-ms-RefreshTokenCredential HTTP header, then it processes a received x-ms-DeviceCredential HTTP header as follows:
 
-- The server verifies the signature of the header and also verifies that the **request_nonce** is a nonce value previously issued by the server as defined in section 3.2.5.1.1. The server SHOULD<13> also verify that the nonce was issued recently. If the signature or **request_nonce** are invalid, the server ignores the x-ms-DeviceCredential HTTP header and continues processing the request. If the signature is valid, then the AD FS server authenticates the device and continues processing the request as in [MS-OAPX] section 3.2.5.1.1.3.
+- The server verifies the signature of the header and also verifies that the **request_nonce** is a nonce value previously issued by the server as defined in section 3.2.5.1.1. The server SHOULD<15> also verify that the nonce was issued recently. If the signature or **request_nonce** are invalid, the server ignores the x-ms-DeviceCredential HTTP header and continues processing the request. If the signature is valid, then the AD FS server authenticates the device and continues processing the request as in [MS-OAPX] section 3.2.5.1.1.3.
 If the client provided a referred token-binding ID using the *tbidv2* POST body parameter ([MS-OAPX] section 2.2.3), the AD FS Server secures the response Access Token with the referred token-binding ID that was provided.
 
 <a id="Section_3.2.6"></a>
@@ -1671,7 +1681,6 @@ The following tables show the relationships between Microsoft product versions o
 | Windows Server release | OAuthBrokerExtension Client role | OAuthBrokerExtension Server role |
 | --- | --- | --- |
 | Windows Server 2016 operating system | Yes | Yes |
-| Windows Server operating system | No | Yes |
 | Windows Server 2019 operating system | Yes | Yes |
 | Windows Server 2022 operating system | No | Yes |
 | Windows Server 2025 operating system | No | Yes |
@@ -1692,19 +1701,23 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <6> Section 3.2.5.1.4: The POST (Exchange Primary Refresh Token for User Authentication Certificate) method is not supported in Windows Server 2016 without [MSKB-4022723] installed.
 
-<7> Section 3.2.5.2.1.1.1: The default value is "windows" for the Windows platform.
+<7> Section 3.2.5.1.4.3: This verification rule is not enforced on Windows Server 2016 through Windows Server 2025 AD FS server without [[MSFT-CVE-2026-27928]](https://go.microsoft.com/fwlink/?linkid=2358505) installed.
 
-<8> Section 3.2.5.2.1.1.1: The **win_ver** value is the Windows version information.
+<8> Section 3.2.5.1.4.3: This verification rule is not enforced on Windows Server 2016 through Windows Server 2025 AD FS server without [MSFT-CVE-2026-27928] installed.
 
-<9> Section 3.2.5.2.1.1.2: The Windows implementation of the client role supplies the values specified for grant_type and iss, but the Windows implementation of the server role ignores them.
+<9> Section 3.2.5.2.1.1.1: The default value is "windows" for the Windows platform.
 
-<10> Section 3.2.5.2.1.1.2: The default value is "windows" for the Windows platform.
+<10> Section 3.2.5.2.1.1.1: The **win_ver** value is the Windows version information.
 
-<11> Section 3.2.5.2.1.1.2: The **win_ver** value is the Windows version information.
+<11> Section 3.2.5.2.1.1.2: The Windows implementation of the client role supplies the values specified for grant_type and iss, but the Windows implementation of the server role ignores them.
 
-<12> Section 3.2.5.2.1.3: The Windows implementation of the AD FS server verifies that the nonce was issued within the last 10 minutes.
+<12> Section 3.2.5.2.1.1.2: The default value is "windows" for the Windows platform.
 
-<13> Section 3.2.5.2.1.3: The Windows implementation of the AD FS server verifies that the nonce was issued within the last 10 minutes.
+<13> Section 3.2.5.2.1.1.2: The **win_ver** value is the Windows version information.
+
+<14> Section 3.2.5.2.1.3: The Windows implementation of the AD FS server verifies that the nonce was issued within the last 10 minutes.
+
+<15> Section 3.2.5.2.1.3: The Windows implementation of the AD FS server verifies that the nonce was issued within the last 10 minutes.
 
 <a id="Section_7"></a>
 # 7 Change Tracking
@@ -1723,7 +1736,10 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [6](#Section_6) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [3.2.5.1.2.2](#Section_3.2.5.1.2.2) Response Body | 11895 : Added information about conditions for including upn and email claims in id_token. | Major |
+| [3.2.5.1.3.2](#Section_3.2.5.1.3.2) Response Body | 11895 : Added information about conditions for including upn and email claims in id_token. | Major |
+| [3.2.5.1.4.2](#Section_3.2.5.1.4.2) Response Body | 11895 : Added information about conditions for including upn and email claims in id_token. | Major |
+| [3.2.5.1.4.3](#Section_3.2.5.1.4.3) Processing Details | Updated krctx validation rules for issuing User Authentication Certificate for PRT. | Major |
 
 <a id="revision-history"></a>
 
@@ -1747,3 +1763,4 @@ The changes made to this document are listed in the following table. For more in
 | 11/15/2023 | 11.0 | Major | Significantly changed the technical content. |
 | 2/14/2024 | 12.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 13.0 | Major | Significantly changed the technical content. |
+| 4/14/2026 | 14.0 | Major | Significantly changed the technical content. |
