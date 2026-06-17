@@ -658,7 +658,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/7/2025.
+Last updated: 3/9/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -758,7 +758,7 @@ This document uses the following terms:
 **Quality of Experience (QoE)**: A subjective measure of a user's experiences with a media service.
 
 <a id="gt_rc4"></a>
-**RC4**: Means Rivest Cipher 4 invented by Ron Rivest in 1987 for RSA Security. It is a variable key-length symmetric encryption algorithm stream cipher that operates on a stream of data byte by byte. It's simple to apply, does not consume more memory, and works quickly on very large pieces of data such as WEP/WPA for wireless network encryption and SSL/ [**TLS**](#gt_transport-layer-security-tls) for internet security. RC4 stream ciphers cannot be implemented on small streams of data. RC4 weaknesses make it vulnerable to various cryptographic attacks. For more information, see [[SCHNEIER]](https://go.microsoft.com/fwlink/?LinkId=817338) section 17.1.
+**RC4**: Means Rivest Cipher 4 invented by Ron Rivest in 1987 for RSA Security. It is a variable key-length symmetric encryption algorithm stream cipher that operates on a stream of data byte by byte. It's simple to apply, does not consume more memory, and works quickly on very large pieces of data such as WEP/WPA for wireless network encryption and SSL/ [**TLS**](#gt_transport-layer-security-tls) for internet security. RC4 stream ciphers cannot be implemented on small streams of data. RC4 weaknesses make it vulnerable to various cryptographic attacks. For more information, see [SCHNEIER] section 17.1.
 
 <a id="gt_remote-desktop"></a>
 **Remote Desktop**: See [**Remote Desktop Protocol (RDP)**](#gt_remote-desktop-protocol-rdp).
@@ -860,7 +860,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [RFC8446] Rescorla, E., "The Transport Layer Security (TLS) Protocol Version 1.3", RFC 8446, August 2018, [https://www.rfc-editor.org/info/rfc8446](https://go.microsoft.com/fwlink/?linkid=2147431)
 
-[SCHNEIER] Schneier, B., "Applied Cryptography, Second Edition", John Wiley and Sons, 1996, ISBN: 0471117099, [http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471117099.html](https://go.microsoft.com/fwlink/?LinkId=817338)
+[SCHNEIER] Schneier, B., "Applied Cryptography, Second Edition", John Wiley and Sons, 1996, ISBN: 0471117099.
 
 [SSL3] Netscape, "SSL 3.0 Specification", November 1996, [https://tools.ietf.org/html/draft-ietf-tls-ssl-version3-00](https://go.microsoft.com/fwlink/?LinkId=90534)
 
@@ -942,6 +942,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDN-SCHANNEL] Microsoft Corporation, "Creating a Secure Connection Using Schannel", [http://msdn.microsoft.com/en-us/library/aa374782.aspx](https://go.microsoft.com/fwlink/?LinkId=90121)
 
 [MSFT-DIL] Microsoft Corporation, "Default Input Locales", [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-vista/cc766503(v=ws.10)](https://go.microsoft.com/fwlink/?LinkId=202824)
+
+[MSFT-ENTRA] Microsoft Corporation, "What is Microsoft Entra?", [https://learn.microsoft.com/en-us/entra/fundamentals/what-is-entra](https://go.microsoft.com/fwlink/?linkid=2353754)
 
 [MSFT-SDLBTS] Microsoft Corporation, "Session Directory and Load Balancing Using Terminal Server", September 2002, [http://download.microsoft.com/download/8/6/2/8624174c-8587-4a37-8722-00139613a5bc/TS_Session_Directory.doc](https://go.microsoft.com/fwlink/?LinkId=90204)
 
@@ -1486,6 +1488,7 @@ packet-beta
 | INCONSISTENT_FLAGS 0x00000004 | The list of requested security protocols is not consistent with the current security protocol in effect. This error is only possible when the [Direct Approach](#Section_5.4.2.2) (sections 5.4.2.2 and [1.3.1.2](#Section_1.3.1.2)) is used and an External Security Protocol (section 5.4.5) is already being used. |
 | HYBRID_REQUIRED_BY_SERVER 0x00000005 | The server requires that the client support Enhanced RDP Security (section 5.4) with CredSSP (section 5.4.5.2). |
 | SSL_WITH_USER_AUTH_REQUIRED_BY_SERVER 0x00000006 | The server requires that the client support Enhanced RDP Security (section 5.4) with TLS 1.0, 1.1 or 1.2 (section 5.4.5.1) and certificate-based client authentication.<4> |
+| ENTRA_AUTH_REQUIRED_BY_SERVER 0x00000007 | The server requires that the client support Enhanced RDP Security (section 5.4) and authenticate through Entra ID, described in [[MSFT-ENTRA]](https://go.microsoft.com/fwlink/?linkid=2353754), using RDS AAD Auth Security (section [5.4.5.4](#Section_5.4.5.4)). |
 
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Client MCS Connect Initial PDU with GCC Conference Create Request
@@ -21376,7 +21379,7 @@ InitialClientDecryptKey56 = 0xD1 + Last56Bits(First64Bits(InitialClientDecryptKe
 
 After any necessary salting has been applied, the generated encryption and decryption keys are used to initialize RC4 substitution tables which can then be used to encrypt and decrypt data.
 
-At the end of this process the client and server will each possess three symmetric keys to use with the RC4 stream cipher: a MAC key, an encryption key, and a decryption key. The MAC key is used to initialize the RC4 substitution table that is used to generate Message Authentication Codes, the encryption key is used to initialize the RC4 substitution table that is used to perform encryption, and the decryption key is used to initialize the RC4 substitution table that is used to perform decryption (for more information on RC4 substitution table initialization, see [[[SCHNEIER]](https://go.microsoft.com/fwlink/?LinkId=817338)] section 17.1).
+At the end of this process the client and server will each possess three symmetric keys to use with the RC4 stream cipher: a MAC key, an encryption key, and a decryption key. The MAC key is used to initialize the RC4 substitution table that is used to generate Message Authentication Codes, the encryption key is used to initialize the RC4 substitution table that is used to perform encryption, and the decryption key is used to initialize the RC4 substitution table that is used to perform decryption (for more information on RC4 substitution table initialization, see [[SCHNEIER]] section 17.1).
 
 <a id="Section_5.3.5.2"></a>
 #### 5.3.5.2 FIPS
@@ -21559,7 +21562,7 @@ SHAComponent = SHA(InitialEncryptKey + Pad1 + CurrentEncryptKey)
 
 TempKey128 = MD5(InitialEncryptKey + Pad2 + SHAComponent)
 
-If the key strength is 128 bits, then the temporary key (TempKey128) is used to reinitialize the associated RC4 substitution table. (For more information on RC4 substitution table initialization, see [[[SCHNEIER]](https://go.microsoft.com/fwlink/?LinkId=817338)] section 17.1.)
+If the key strength is 128 bits, then the temporary key (TempKey128) is used to reinitialize the associated RC4 substitution table. (For more information on RC4 substitution table initialization, see [[SCHNEIER]] section 17.1.)
 
 S-TableEncrypt = InitRC4(TempKey128)
 
@@ -21980,8 +21983,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.1.11.1.1.1.1](#Section_2.2.1.11.1.1.1.1) Time Zone Information (TS_TIME_ZONE_INFORMATION) | 30364 : Updated the datatype for Bias, DaylightBias, and StandardBias fields. | Major |
-| [2.2.9.1.2.1.10.1](#Section_2.2.9.1.2.1.10.1) Surface Command (TS_SURFCMD) | 30368 : Added a Product Behavior Note for CMDTYPE_STREAM_SURFACE_BITS. | Major |
+| [2.2.1.2.2](#Section_2.2.1.2.2) RDP Negotiation Failure (RDP_NEG_FAILURE) | Added failureCode "ENTRA_AUTH_REQUIRED_BY_SERVER 0x00000007" in the RDP Negotiation Failure (RDP_NEG_FAILURE) section. | Major |
 
 <a id="revision-history"></a>
 
@@ -22060,3 +22062,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/23/2024 | 59.0 | Major | Significantly changed the technical content. |
 | 11/19/2024 | 60.0 | Major | Significantly changed the technical content. |
 | 4/7/2025 | 61.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 62.0 | Major | Significantly changed the technical content. |

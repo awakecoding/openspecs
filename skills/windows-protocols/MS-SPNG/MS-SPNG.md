@@ -45,13 +45,15 @@ Table of Contents
     - [3.1.5 Message Processing Events and Sequencing Rules](#Section_3.1.5)
       - [3.1.5.1 mechListMIC Processing](#Section_3.1.5.1)
       - [3.1.5.2 mechTypes Identification of Kerberos](#Section_3.1.5.2)
-      - [3.1.5.3 reqFlags Processing](#Section_3.1.5.3)
-      - [3.1.5.4 InitFragmentToken()](#Section_3.1.5.4)
-      - [3.1.5.5 FragmentToken()](#Section_3.1.5.5)
-      - [3.1.5.6 Send Fragmented Messages](#Section_3.1.5.6)
-      - [3.1.5.7 InitAssembleToken()](#Section_3.1.5.7)
-      - [3.1.5.8 AssembleToken()](#Section_3.1.5.8)
-      - [3.1.5.9 Receive Fragmented Messages](#Section_3.1.5.9)
+      - [3.1.5.3 mechTypes Identification of IAKerb](#Section_3.1.5.3)
+      - [3.1.5.4 mechTypes Identification of Negotiate Late Fallback](#Section_3.1.5.4)
+      - [3.1.5.5 reqFlags Processing](#Section_3.1.5.5)
+      - [3.1.5.6 InitFragmentToken()](#Section_3.1.5.6)
+      - [3.1.5.7 FragmentToken()](#Section_3.1.5.7)
+      - [3.1.5.8 Send Fragmented Messages](#Section_3.1.5.8)
+      - [3.1.5.9 InitAssembleToken()](#Section_3.1.5.9)
+      - [3.1.5.10 AssembleToken()](#Section_3.1.5.10)
+      - [3.1.5.11 Receive Fragmented Messages](#Section_3.1.5.11)
     - [3.1.6 Timer Events](#Section_3.1.6)
     - [3.1.7 Other Local Events](#Section_3.1.7)
   - [3.2 Server (Acceptor) Role Details](#Section_3.2)
@@ -103,7 +105,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 7/29/2024.
+Last updated: 4/27/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -165,6 +167,8 @@ Links to a document in the Microsoft Open Specifications library point to the co
 ### 1.2.1 Normative References
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
+
+[IETFDRAFT-KITTEN-IAKERB-03] B. Kaduk, Ed., J. Schaad, Ed., L. Zhu, J. Altman, "Initial and Pass Through Authentication Using Kerberos V5 and the GSS-API (IAKERB)", March 2017, [https://datatracker.ietf.org/doc/html/draft-ietf-kitten-iakerb-03](https://go.microsoft.com/fwlink/?linkid=2361532)
 
 [ISO/IEC-8859-1] International Organization for Standardization, "Information Technology -- 8-Bit Single-Byte Coded Graphic Character Sets -- Part 1: Latin Alphabet No. 1", ISO/IEC 8859-1, 1998, [http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=28245](https://go.microsoft.com/fwlink/?LinkId=90689)
 
@@ -230,11 +234,13 @@ Historically, the first GSS security mechanism defined was the [**Kerberos**](#g
 
 SPNEGO is a [**security protocol**](#gt_security-protocol) that uses a [**GSS**](#gt_generic-security-services-gss)-API authentication mechanism. GSS–API is a literal set of functions that include both an API and a methodology for approaching authentication. As specified in [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378), GSS-API and the individual security protocols that correspond to the GSS–API (also shortened to GSS) were developed because of the need to insulate application protocols from the specifics of security protocols as much as possible.
 
+SPNEGO has introduced a Late Fallback mechanism to allow for retrying of authentication in case of non-fatal failures, as described in [[IETFDRAFT-KITTEN-IAKERB-03]](https://go.microsoft.com/fwlink/?linkid=2361532). The Late Fallback mechanism helps only when both parties have the SPNEGO version that supports it.
+
 This approach led to a simplified form of interaction between an [**application protocol**](#gt_application-protocol) and an [**authentication**](#gt_authentication) protocol. In this model, an application protocol is responsible for ferrying discrete, opaque packets that the authentication protocol produces. These packets, which are referred to as [**security tokens**](#gt_security-token) by the GSS specifications, implement the authentication process. The application protocol has no visibility into the contents of the security tokens; its responsibility is merely to carry them.
 
 The application protocol in this model (see SPN exchange figures in section [1.3.3](#Section_1.3.3)) first invokes the authentication protocol on the client. The client portion of the authentication protocol creates a security token and returns it to the calling application. The application protocol then transmits that security token to the server side of its connection, embedded within the application protocol. On the server side, the server's application protocol extracts the security token and supplies it to the authentication protocol on the server side. The server authentication protocol can process the security token and possibly generate a response, or it can decide that authentication is complete. If another security token is generated, the application protocol must carry it back to the client, where the process continues.
 
-This exchange of security tokens continues until one side determines that authentication has failed or both sides decide that authentication is complete. If authentication fails, the application protocol drops the connection and indicates the error. If authentication succeeds, the application protocol can be assured of the identity of the participants as far as the supporting authentication protocol can accomplish. The onus of determining success or failure is on the abstracted security protocol, not the application protocol, which greatly simplifies the application protocol author's task.
+This exchange of security tokens continues until one side determines that authentication has failed or both sides decide that authentication is complete. If authentication fails with critical error, the application protocol drops the connection and indicates the error. If the authentication fails with a non-fatal error, the Late Fallback mechanism allows retrying the authentication with the next available protocol. If authentication succeeds, the application protocol can be assured of the identity of the participants as far as the supporting authentication protocol can accomplish. The onus of determining success or failure is on the abstracted security protocol, not the application protocol, which greatly simplifies the application protocol author's task.
 
 After the authentication is complete, session-specific security services might be available. The application protocol can then invoke the authentication protocol to sign or encrypt the messages that are sent as part of the application protocol. The session-specific security services operations are done in much the same way, where the application protocol can indicate which portions of the message are to be encrypted, and the application protocol must include a per-message security token. By signing or encrypting the messages, the application can obtain message privacy and integrity, and detect message loss, out of order delivery and duplication.
 
@@ -444,20 +450,32 @@ The following fields are processed differently than as specified in [[RFC4178]](
 
 [[RFC2478]](https://go.microsoft.com/fwlink/?LinkId=90360) inadequately specifies the processing of the mechanism list message integrity code (**MIC**), or **mechListMIC** field. [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) clarifies the processing of the **mechListMIC** field.<8>
 
+When Negotiate Late Fallback is supported by both parties, **mechListMIC** consumes a list of all exchanged **mechTypes** and **supportedMechs** per the order of over-the-wire transmission with delimiters.<9>
+
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 mechTypes Identification of Kerberos
 
-An implementation SHOULD<9> use the standard [**Kerberos**](#gt_kerberos) [**OID**](#gt_object-identifier-oid) (1.2.840.113554.1.2.2), as described in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458), for identification of the Kerberos **mechType** and the **OID** described in [[UUKA-GSSAPI]](https://go.microsoft.com/fwlink/?LinkId=107082) section 4 for identification of the Kerberos user-to-user mechType.
+An implementation SHOULD<10> use the standard [**Kerberos**](#gt_kerberos) [**OID**](#gt_object-identifier-oid) (1.2.840.113554.1.2.2), as described in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458), for identification of the Kerberos **mechType** and the **OID** described in [[UUKA-GSSAPI]](https://go.microsoft.com/fwlink/?LinkId=107082) section 4 for identification of the Kerberos user-to-user mechType.
 
 <a id="Section_3.1.5.3"></a>
-#### 3.1.5.3 reqFlags Processing
+#### 3.1.5.3 mechTypes Identification of IAKerb
+
+An implementation MUST use the standard **IAKerb OID** (1.3.6.1.5.2.5), as described in [[IETFDRAFT-KITTEN-IAKERB-03]](https://go.microsoft.com/fwlink/?linkid=2361532), for identification of the IAKerb **mechType**.
+
+<a id="Section_3.1.5.4"></a>
+#### 3.1.5.4 mechTypes Identification of Negotiate Late Fallback
+
+An implementation MUST use the **Negotiate Late Fallback OID** (1.3.6.1.4.1.311.2.2.40) for identification of the Negotiate Late Fallback **mechType**.
+
+<a id="Section_3.1.5.5"></a>
+#### 3.1.5.5 reqFlags Processing
 
 [[RFC2478]](https://go.microsoft.com/fwlink/?LinkId=90360), the predecessor to [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), includes the **reqFlags** field in the protocol. This field is intended for the client to indicate the requested behavior according to the [**GSS**](#gt_generic-security-services-gss) abstract variables, such as confidentiality and integrity. However, the **reqFlags** field is not covered by the signature of the message; therefore, it can be tampered with while in transit.
 
 As specified in [RFC4178], use of this field is explicitly discouraged due to the lack of integrity protection, and the acceptor (server) MUST ignore the **reqFlags**, if present.
 
-<a id="Section_3.1.5.4"></a>
-#### 3.1.5.4 InitFragmentToken()
+<a id="Section_3.1.5.6"></a>
+#### 3.1.5.6 InitFragmentToken()
 
 InitFragmentToken (Token, MaxOutputTokenSize, OutputToken)
 
@@ -487,8 +505,8 @@ Set OutputToken to first MaxOutputTokenSize bytes of RemainingOutputToken
 
 Delete first MaxOutputTokenSize bytes of RemainingOutputToken
 
-<a id="Section_3.1.5.5"></a>
-#### 3.1.5.5 FragmentToken()
+<a id="Section_3.1.5.7"></a>
+#### 3.1.5.7 FragmentToken()
 
 FragmentToken(OutputToken)
 
@@ -522,8 +540,8 @@ Set FragmentOutputToken to FALSE
 
 EndIf
 
-<a id="Section_3.1.5.6"></a>
-#### 3.1.5.6 Send Fragmented Messages
+<a id="Section_3.1.5.8"></a>
+#### 3.1.5.8 Send Fragmented Messages
 
 The first fragment includes the [**ASN.1 header**](#gt_asn1-header) for the message, so that the recipient can reconstruct the length of the completed message. This requires that **MaxOutputTokenSize** be at least 5 bytes.
 
@@ -537,8 +555,8 @@ When **FragmentOutputToken** is set to TRUE, the SPNEGO Extension calls **Fragme
 
 If the server does not support fragmentation, the application service receives an error from its **GSS_Accept_sec_context** call, and the negotiation fails. Whether the client application receives the error depends on the application service behavior.
 
-<a id="Section_3.1.5.7"></a>
-#### 3.1.5.7 InitAssembleToken()
+<a id="Section_3.1.5.9"></a>
+#### 3.1.5.9 InitAssembleToken()
 
 InitAssembleToken (Input_Token)
 
@@ -560,8 +578,8 @@ Initialize ReceivedInputToken to InputToken.
 
 Set FragmentInputToken to TRUE.
 
-<a id="Section_3.1.5.8"></a>
-#### 3.1.5.8 AssembleToken()
+<a id="Section_3.1.5.10"></a>
+#### 3.1.5.10 AssembleToken()
 
 AssembleToken(Input_Token, OutputToken)
 
@@ -597,8 +615,8 @@ Set FragmentInputToken to FALSE.
 
 EndIf
 
-<a id="Section_3.1.5.9"></a>
-#### 3.1.5.9 Receive Fragmented Messages
+<a id="Section_3.1.5.11"></a>
+#### 3.1.5.11 Receive Fragmented Messages
 
 The length of the first packet specified in the [**ASN.1 header**](#gt_asn1-header) is used to determine the number of bytes necessary to assemble the complete message. the SPNEGO Extension calls **InitAssembleToken** (section [3.1.5.7](#Section_3.1.5.7)), where **Input_Token** contains the **Input_Token** received from the caller. To receive the next fragment, SPNG MUST return GSS_S_CONTINUE_NEEDED status with an empty **OutputToken** (section [3.1.5.8](#Section_3.1.5.8)).
 
@@ -718,7 +736,7 @@ The server MUST invoke **Receive Fragmented Messages** (section [3.1.5.9](#Secti
 
 - The packet contains a valid [**ASN.1 header**](#gt_asn1-header) but an incomplete body, or
 - **FragmentOutputToken** is set to TRUE.
-To support non-compliant implementations of [RFC4178] that send a **supportedMech** field in a subsequent **NegTokenResp** message, the SPNEGO Extension client SHOULD<10> accept the message without returning an error, but MUST ignore the new **supportedMech** field.
+To support non-compliant implementations of [RFC4178] that send a **supportedMech** field in a subsequent **NegTokenResp** message, the SPNEGO Extension client SHOULD<11> accept the message without returning an error, but MUST ignore the new **supportedMech** field.
 
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 NTLM RC4 Key State for MechListMIC and First Signed Message
@@ -894,7 +912,6 @@ The terms "earlier" and "later", when used with a product version, refer to eith
 - Windows Server 2012 operating system
 - Windows Server 2012 R2 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows Server 2025 operating system
@@ -926,13 +943,15 @@ On all other product versions shown in the applicability list the following proc
 
 - If AES Kerberos ciphers are negotiated by Kerberos, the signature in the SPNEGO **mechListMIC** field has to be processed by the recipient.
 - If NTLM authentication is most preferred by the client and the server, and the client includes a MIC in AUTHENTICATE_MESSAGE ([MS-NLMP] section 2.2.1.3), then the **mechListMIC** field becomes mandatory in order for the authentication to succeed. Windows clients in this case send an NTLM token instead of an SPNEGO token.
-<9> Section 3.1.5.2: Except in Windows 2000, Windows offers and accepts both standard and truncated OIDs as identifiers for the Kerberos authentication mechanism.
+<9> Section 3.1.5.1: Windows 11, version 24H2 operating system and later and Windows Server 2025 and later support Late Fallback. This capability is disabled by default.
+
+<10> Section 3.1.5.2: Except in Windows 2000, Windows offers and accepts both standard and truncated OIDs as identifiers for the Kerberos authentication mechanism.
 
 Windows 2000 incorrectly encoded the **OID** for the Kerberos protocol in the **supportedMech** field. Rather than the **OID** { iso(1) member-body(2) United States(840) mit(113554) infosys(1) gssapi(2) krb5(2) }, an implementation error truncated the values at 16 bits. Therefore, the **OID** became { iso(1) member-body(2) United States(840) ???(48018) infosys(1) gssapi(2) krb5 (2) }.
 
 Windows clients will fail if the accepter accepts the preferred mechanism token (1.2.840.48018.1.2.2) and produces a response token with the **supportedMech** being the standard Kerberos **OID** (1.2.840.113554.1.2.2).
 
-<10> Section 3.3.5: Windows 2000, Windows Server 2003, and Windows Vista do not support non-compliant implementations of [RFC4178] that send a **supportedMech** field in a subsequent **NegTokenResp** message.
+<11> Section 3.3.5: Windows 2000, Windows Server 2003, and Windows Vista do not support non-compliant implementations of [RFC4178] that send a **supportedMech** field in a subsequent **NegTokenResp** message.
 
 <a id="Section_7"></a>
 # 7 Change Tracking
@@ -951,7 +970,10 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.1](#Section_2.2.1) NegTokenInit2 | 11738 : Added behavior note to specify Kerberos as Windows default optimistic mechanism. | Major |
+| [1.3.2](#Section_1.3.2) SPNEGO Synopsis | Added support for SPNEGO Late Fallback mechanism for handling the negotiation of authentication protocols using Kerberos V5 and GSS-API (IAKERB). | Major |
+| [3.1.5.1](#Section_3.1.5.1) mechListMIC Processing | Updated mechListMIC processing for the Late Fallback mechanism. | Major |
+| [3.1.5.3](#Section_3.1.5.3) mechTypes Identification of IAKerb | Added a new section "mechTypes Identification of IAKerb". | Major |
+| [3.1.5.4](#Section_3.1.5.4) mechTypes Identification of Negotiate Late Fallback | Added a new section "mechTypes Identification of Negotiate Late Fallback". | Major |
 
 <a id="revision-history"></a>
 
@@ -1023,3 +1045,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/29/2022 | 18.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 19.0 | Major | Significantly changed the technical content. |
 | 7/29/2024 | 20.0 | Major | Significantly changed the technical content. |
+| 4/27/2026 | 21.0 | Major | Significantly changed the technical content. |

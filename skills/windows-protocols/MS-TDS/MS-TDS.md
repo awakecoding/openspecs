@@ -247,7 +247,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 10/31/2025.
+Last updated: 6/17/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -2286,28 +2286,31 @@ The Layout Format MUST be the value 0xA9. It identifies the format of the byte l
 
 The Layout Version MUST be 0x01. Future versions of the byte layout assign new Version values. There is no explicit relationship between the byte Layout Version and the Feature Extension version. Either MAY be assigned new values independently. Clients and servers MUST NOT assume that a Feature Extension version implies a Layout Version, and vice versa.
 
-When writing vector data, the writer MUST always choose the lowest Layout Version that supports the Dimension Type. For example, the single-precision float Dimension Type is defined for Layout Version 0x01. If a writer supports Layout Version 0x02 and is writing a vector of single-precision floats, the Layout Version of that vector MUST be set to 0x01. This ensures backwards compatibility with readers that only support Layout Version 0x01.
+When writing vector data, the writer MUST always choose the lowest Layout Version that supports the Dimension Type. For example, the single-precision and half-precision float Dimension Type is defined for Layout Version 0x01. If a writer supports Layout Version 0x02 and is writing a vector of single-precision or half-precision floats, the Layout Version of that vector MUST be set to 0x01. This ensures backwards compatibility with readers that only support Layout Version 0x01.
 
 <a id="Section_2.2.5.5.7.3"></a>
 ###### 2.2.5.5.7.3 Number of Dimensions
 
-The Number of Dimensions specifies how many elements the vector comprises. For example, with Layout Version 0x01, a vector(6) is a single-precision float vector with 6 elements. This multi-byte integer is represented as little-endian, with the least significant byte appearing at the earlier offset within the header.
+The Number of Dimensions specifies how many elements the vector comprises. For example, with Layout Version 0x01, a vector(6, float32) or vector(6) (that is, float32 is default) is a single-precision float vector with 6 elements or vector(6, float16) is a half-precision float vector with 6 elements. This multi-byte integer is represented as little-endian, with the least significant byte appearing at the earlier offset within the header.
 
 <a id="Section_2.2.5.5.7.3.1"></a>
 Implementation Note
 
-The server implementation restricts vectors to a total of 8000 bytes. Subtracting the 8-byte header leaves 7992 bytes for data. Assuming that the only data type currently defined is a 32-bit single precision float, the server supports a maximum vector Number of Dimensions of 1998:
+The server implementation restricts vectors to a total of 8000 bytes. Subtracting the 8-byte header leaves 7992 bytes for data. Since the data types currently supported are 32-bit single-precision float and 16-bit half-precision float, the maximum supported dimensions are 1998 and 3996 respectively:
 
-(1998 * 4) + 8 == 8000
+(1998 * 4) + 8 == 8000 ; 32-bit single precision float
+
+(3996 * 2) + 8 == 8000 ; 16-bit half precision float
 
 <a id="Section_2.2.5.5.7.4"></a>
 ###### 2.2.5.5.7.4 Dimension Type
 
-The supported Dimension Types are:
+The supported Dimension Types are as follows:
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Float values follows the 32-bit [[IEEE754]](https://go.microsoft.com/fwlink/?LinkId=89903) binary specification when *n* <= 24. | 0x00 | Single-precision float 4 bytes |
+| Float values follow the 32-bit [[IEEE754]](https://go.microsoft.com/fwlink/?LinkId=89903) binary specification when *n* <= 24. | 0x00 | Single-precision float 4 bytes |
+| Float16 values follow the 16-bit [IEEE754] binary specification when n ≤ 11. | 0x01 | Half-precision float 2 bytes |
 
 <a id="Section_2.2.5.5.7.5"></a>
 ###### 2.2.5.5.7.5 Reserved
@@ -2928,8 +2931,9 @@ The following table defines the options that are available in FeatureExt.
 | %0x0A (UTF8_SUPPORT) (introduced in TDS 7.4) | The presence of the UTF8_SUPPORT FeatureExt indicates whether the client’s ability to send and receive UTF-8 encoded data SHOULD<30> be supported. The feature data is described as follows: FeatureData = BYTE BYTE: The Bit 0 flag specifies whether the client supports UTF-8 data. The values of this BYTE are as follows: 0 = The client does not support UTF-8 encoded data. 1 = The client supports UTF-8 encoded data. Failure of the client to receive an acknowledgement of UTF-8 feature extension support from the server indicates that the server cannot send or receive UTF-8 encoded data. |
 | %0x0B (AZURESQLDNSCACHING)<31> (introduced in TDS 7.4) | The presence of the AZURESQLDNSCACHING FeatureExt indicates whether the client has the ability to store the mapping between the TDS server endpoint’s application domain, identified by its fully qualified domain name (FQDN), and the equivalent IP address in the client’s application cache. The feature data is described as follows: FeatureData = NO DATA NO DATA: No feature data is sent with the AZURESQLDNSCACHING FeatureExt. The presence of this FeatureExt token indicates to the server that the client can support the feature. |
 | %0x0D (JSONSUPPORT) (introduced in TDS 7.4) | The presence of JSONSUPPORT FeatureExt indicates whether the capability of the client to send and receive JSON datatype SHOULD<32> be supported. The feature data is described as follows: JSONSUPPORT_VERSION = BYTE FeatureData = JSONSUPPORT_VERSION JSONSUPPORT_VERSION: This field specifies the version number of the json datatype that is to be used for this connection. This value is 1. |
-| %0x0E (VECTORSUPPORT) (introduced in TDS 7.4) | The presence of the VECTORSUPPORT FeatureExt indicates whether the capability of the client to send and receive the VECTOR datatype SHOULD<33> be supported. The feature data is described as follows: VECTORSUPPORT_VERSION = BYTE FeatureData = VECTORSUPPORT_VERSION VECTORSUPPORT_VERSION: This field specifies the version number of the vector datatype that is to be used for this connection. This value is 1. |
+| %0x0E (VECTORSUPPORT) (introduced in TDS 7.4) | The presence of the VECTORSUPPORT FeatureExt indicates whether the capability of the client to send and receive the VECTOR datatype SHOULD<33> be supported. The feature data is described as follows: VECTORSUPPORT_VERSION = BYTE FeatureData = VECTORSUPPORT_VERSION VECTORSUPPORT_VERSION: This field specifies the version number of the vector datatype that is to be used for this connection. This value is as follows: Value 1 is for float32 VECTORSUPPORT. Value 2 is for float16 VECTORSUPPORT and all lower versions included like float32. |
 | %0x0F (ENHANCEDROUTINGSUPPORT)<34> (introduced in TDS 7.4) | The presence of ENHANCEDROUTINGSUPPORT indicates whether the client has the capability to receive and act on the Enhanced Routing ENVCHANGE token. The feature data is described as follows: FeatureData = NO DATA NO DATA: No feature data is sent with the ENHANCEDROUTINGSUPPORT FeatureExt. The presence of this FeatureExt token indicates to the server that the client can support the feature. |
+| %0x10 (USERAGENT)<35> (introduced in TDS 7.4) | The presence of the USERAGENT feature extension conveys details of the client’s operating environment, similar to a User Agent string supplied by web browsers. The feature data is described as follows: USER_AGENT_PAYLOAD = US_VARCHAR FeatureData = USER_AGENT_PAYLOAD The maximum length of the USER_AGENT_PAYLOAD is 256 UCS-2 characters (512 bytes). The actual length of the USER_AGENT_PAYLOAD is specified by the FeatureDataLen. The format and content of the USER_AGENT_PAYLOAD is determined by the client. The server validates the value to check for the following allowed characters: ASCII letters (‘A’ to ‘Z’, and ‘a’ to ‘z’) ASCII digits (‘0’ to ‘9’) Space (‘ ‘) Period (‘.’) Plus (‘+’) Underscore (‘_’) Hyphen (‘-’) Pipe (‘\|’) If the value contains any characters other than the characters listed earlier, the feature extension is ignored by the server. When present, this feature extension MAY<36> appear as the first feature extension in the LOGIN7 message. |
 | %xFF (TERMINATOR) | This option signals the end of the FeatureExt feature and MUST be the feature’s last option. |
 
 **Login Data Validation Rules**
@@ -3075,7 +3079,7 @@ PL_OPTION_TOKEN is described in the following table.
 | THREADID | 0x03 | PL_OPTION_DATA = UL_THREADID This value SHOULD be empty when being sent from the server to the client. |
 | MARS | 0x04 | PL_OPTION_DATA = B_MARS 0x00 = Off 0x01 = On |
 | TRACEID | 0x05 | PL_OPTION_DATA = GUID_CONNID ACTIVITYID Introduced in TDS 7.4. |
-| FEDAUTHREQUIRED<35> | 0x06 | PL_OPTION_DATA = B_FEDAUTHREQUIRED Introduced in TDS 7.4. |
+| FEDAUTHREQUIRED<37> | 0x06 | PL_OPTION_DATA = B_FEDAUTHREQUIRED Introduced in TDS 7.4. |
 | NONCEOPT | 0x07 | PL_OPTION_DATA = NONCE The client MUST send this option if it expects to be able to use federated authentication with Live ID Compact Token to authenticate to the server on this connection. If the server understands the NONCEOPT option and the client sends the option, the server MUST respond with its own NONCEOPT. |
 | TERMINATOR | 0xFF | Termination token. |
 
@@ -3099,8 +3103,8 @@ During the Pre-Login handshake, the client and the server negotiate the wire enc
 | ENCRYPT_ON | 0x01 | Encryption is available and on. |
 | ENCRYPT_NOT_SUP | 0x02 | Encryption is not available. |
 | ENCRYPT_REQ | 0x03 | Encryption is required. |
-| ENCRYPT_EXT | 0x20 | This bit is reserved.<36> |
-| ENCRYPT_CLIENT_CERT | 0X80 (ENCRYPT_OFF) or 0X81 (ENCRYPT_ON) or 0x83 (ENCRYPT_REQ) | Certificate-based authentication is requested by the client. The client certificate SHOULD<37> be used to authenticate the user in place of username and password only in specific extensibility scenarios where a loopback connection from an external script is requested. |
+| ENCRYPT_EXT | 0x20 | This bit is reserved.<38> |
+| ENCRYPT_CLIENT_CERT | 0X80 (ENCRYPT_OFF) or 0X81 (ENCRYPT_ON) or 0x83 (ENCRYPT_REQ) | Certificate-based authentication is requested by the client. The client certificate SHOULD<39> be used to authenticate the user in place of username and password only in specific extensibility scenarios where a loopback connection from an external script is requested. |
 
 The client sends the server the value ENCRYPT_OFF, ENCRYPT_NOT_SUP, or ENCRYPT_ON. The client can also request certificate-based authentication by sending the value ENCRYPT_CLIENT_CERT with ENCRYPT_OFF, ENCRYPT_ON, or ENCRYPT_REQ. The connection is terminated if the client sends ENCRYPT_CLIENT_CERT with ENCRYPT_NOT_SUP.
 
@@ -3134,7 +3138,7 @@ This applies to SSL traffic. The client sends the SSL handshake payloads as data
 
 **Instance Name**
 
-If available, the client SHOULD send the server the name of the instance to which it is connecting as a NULL-terminated multi-byte character set (MBCS) string in the INSTOPT option. If the string is empty or is case-insensitively equal, by using the server's locale for comparison to either the server's instance name or "MSSQLServer", the server SHOULD<38> return an INSTOPT containing a byte with the value 0 to indicate that the client's INSTOPT matches the server's instance. Otherwise, the server SHOULD return an INSTOPT containing a byte with the value of 1. The client SHOULD use the INSTOPT value from the server's PRELOGIN response for verification purposes and SHOULD terminate the connection if the INSTOPT option has the value 1.
+If available, the client SHOULD send the server the name of the instance to which it is connecting as a NULL-terminated multi-byte character set (MBCS) string in the INSTOPT option. If the string is empty or is case-insensitively equal, by using the server's locale for comparison to either the server's instance name or "MSSQLServer", the server SHOULD<40> return an INSTOPT containing a byte with the value 0 to indicate that the client's INSTOPT matches the server's instance. Otherwise, the server SHOULD return an INSTOPT containing a byte with the value of 1. The client SHOULD use the INSTOPT value from the server's PRELOGIN response for verification purposes and SHOULD terminate the connection if the INSTOPT option has the value 1.
 
 **Authentication Requirement**
 
@@ -3288,7 +3292,7 @@ Note that RPCReqBatch is repeated once for each RPC in the batch.
 | ProcIDSwitch | ProcIDSwitch can occur as part of NameLenProcID (see below). |
 | ProcName | The procedure name length (within US_VARCHAR), which MUST be no more than 1046 bytes. |
 | NameLenProcID | If the first USHORT contains 0xFFFF the following USHORT contains the PROCID. Otherwise, NameLenProcID contains the parameter name length and parameter name. |
-| OptionFlags | Bit flags in [least significant bit order](#Section_2.2.5.1.1): fWithRecomp: 1 if RPC is sent with the "with recompile" option. fNoMetaData: The server sends NoMetaData only if fNoMetaData is set to 1 in the request (see COLMETADATA, section [2.2.7.4](#Section_2.2.7.4)).<39> fReuseMetaData: 1 if the metadata has not changed from the previous call and the server SHOULD reuse its cached metadata (the metadata MUST still be sent). |
+| OptionFlags | Bit flags in [least significant bit order](#Section_2.2.5.1.1): fWithRecomp: 1 if RPC is sent with the "with recompile" option. fNoMetaData: The server sends NoMetaData only if fNoMetaData is set to 1 in the request (see COLMETADATA, section [2.2.7.4](#Section_2.2.7.4)).<41> fReuseMetaData: 1 if the metadata has not changed from the previous call and the server SHOULD reuse its cached metadata (the metadata MUST still be sent). |
 | StatusFlags | Bit flags in least significant bit order: fByRefValue: 1 if the parameter is passed by reference (OUTPUT parameter) or 0 if parameter is passed by value. fDefaultValue: 1 if the parameter being passed is to be the default value. fEncrypted: 1 if the parameter that is being passed is encrypted. This flag is valid only when the column encryption feature is negotiated by client and server and is turned on. |
 | ParameterData | The parameter name length and parameter name (within B_VARCHAR), the TYPE_INFO of the RPC data, and the type-dependent data for the RPC (within TYPE_VARBYTE). |
 | EncryptionAlgo | This byte describes the encryption algorithm that is used. For a custom encryption algorithm, the EncryptionAlgo value MUST be set to 0 and the actual encryption algorithm MUST be inferred from the AlgoName. For all other values, AlgoName MUST NOT be sent. If the value is set to 1, the encryption algorithm that is used is AEAD_AES_256_CBC_HMAC_SHA512, as described in [[IETF-AuthEncr]](https://go.microsoft.com/fwlink/?LinkId=524322) section 5.4. |
@@ -3300,7 +3304,7 @@ Note that RPCReqBatch is repeated once for each RPC in the batch.
 | CekVersion | The key version of the column encryption key. |
 | CekMDVersion | The metadata version for the column encryption key. |
 | ParamCipherInfo | The description of the parameter encryption information when the parameter is transparently encrypted. It defines the original TYPE_INFO of the data that is encrypted, the encryption algorithm that is used, the normalization version, the id of the database containing the column encryption key used for encryption, the id of the column encryption key, the version of the column encryption key, and the version of the column encryption key metadata. These fields MUST be sent only when fEncrypted is set to 1. |
-| EnclavePackage | An encrypted byte package that SHOULD<40> be generated by the client. This package contains information that is required by the server-side [**enclave**](#gt_enclave) to perform computations on encrypted columns. The package has an internal structure that is irrelevant to the TDS protocol between client and server. The server forwards the byte array to the enclave without interpreting it, and the enclave decodes the byte array. Introduced in TDS 7.4. |
+| EnclavePackage | An encrypted byte package that SHOULD<42> be generated by the client. This package contains information that is required by the server-side [**enclave**](#gt_enclave) to perform computations on encrypted columns. The package has an internal structure that is irrelevant to the TDS protocol between client and server. The server forwards the byte array to the enclave without interpreting it, and the enclave decodes the byte array. Introduced in TDS 7.4. |
 | BatchFlag | Distinguishes the start of the next RPC from another parameter within the current RPC. If the version of TDS in use supports these flags, either the **BatchFlag** element or the **NoExecFlag** element MUST be present when another RPC request is in the current batch. BatchFlag SHOULD NOT be sent after the last RPCReqBatch. If BatchFlag is received after the last RPCReqBatch is received, the server MUST ignore it. |
 | NoExecFlag | Indicates that the preceding RPC is not executed. If this separator is found, the previous RPC is not executed. Instead, an error message is returned, followed by the DONEPROC marking that the RPC in the batch has finished, and then execution proceeds to the next RPC in the batch. The tabular data set returned is very similar to what happens if the RPC does not exist—never execute the RPC, just return an error message, followed by DONEPROC, and then execute the next RPC. |
 
@@ -3544,7 +3548,7 @@ ByCols
 
 | Parameter | Description |
 | --- | --- |
-| TokenType | ALTMETADATA_TOKEN<41> |
+| TokenType | ALTMETADATA_TOKEN<43> |
 | Count | The count of columns (number of aggregate operators) in the token stream. |
 | Id | The Id of the SQL statement to which the total column formats apply. Each ALTMETADATA token MUST have its own unique Id in the same result set. This Id lets the client correctly interpret later ALTROW data streams. |
 | ByCols | The number of grouping columns in the SQL statement that generates totals. For example, the SQL clause *compute count(sales) by year, month, division, department* has four grouping columns. |
@@ -3596,7 +3600,7 @@ The **ComputeData** element is repeated Count times, where Count is specified in
 
 | Parameter | Description |
 | --- | --- |
-| TokenType | ALTROW_TOKEN<42> |
+| TokenType | ALTROW_TOKEN<44> |
 | Id | The Id of the SQL statement that generates totals to which the total column formats apply. This Id lets the client correctly interpret later ALTROW [**data streams**](#gt_data-stream). |
 | Data | The actual data for the column. The TYPE_INFO information describing the data type of this data is given in the preceding COLMETADATA_TOKEN, ALTMETADATA_TOKEN, or OFFSET_TOKEN. |
 
@@ -3813,7 +3817,7 @@ NoMetaData / (1*ColumnData)
 | TokenType | COLMETADATA_TOKEN |
 | Count | The count of columns (number of aggregate operators) in the token stream. In the event that the client requested no metadata to be returned (see section [2.2.6.6](#Section_2.2.6.6) for information about the OptionFlags parameter in the RPCRequest token), the value of Count is 0xFFFF. This has the same effect on Count as a zero value (for example, no ColumnData is sent). |
 | UserType | The user type ID of the data type of the column. Depending on the TDS version that is used, valid values are 0x0000 or 0x00000000, with the exceptions of data type timestamp (0x0050 or 0x00000050) and alias types (greater than 0x00FF or 0x000000FF). |
-| Flags | The size of the Flags parameter is always fixed at 16 bits regardless of the TDS version. Each of the 16 bits of the Flags parameter is interpreted based on the TDS version negotiated during login. Bit flags, in [least significant bit order](#Section_2.2.5.1.1): fNullable is a bit flag. Its value is 1 if the column is nullable. fCaseSen is a bit flag. Set to 1 for string columns with binary collation and always for the XML data type. Set to 0 otherwise. usUpdateable is a 2-bit field. Its value is 0 if column is read-only, 1 if column is read/write and 2 if updateable is unknown. fIdentity is a bit flag. Its value is 1 if the column is an identity column. fComputed is a bit flag. Its value is 1 if the column is a COMPUTED column. usReservedODBC is a 2-bit field that is used by ODS gateways supporting the ODBC ODS gateway driver. fFixedLenCLRType is a bit flag. Its value is 1 if the column is a fixed-length [**common language runtime user-defined type (CLR UDT)**](#gt_common-language-runtime-user-defined-type-clr-udt). fSparseColumnSet, introduced in TDS version 7.3.B, is a bit flag. Its value is 1 if the column is the special XML column for the sparse column set. For information about using column sets, see [[MSDN-ColSets]](https://go.microsoft.com/fwlink/?LinkId=128616). fEncrypted is a bit flag. Its value is 1 if the column is encrypted transparently and has to be decrypted to view the plaintext value. This flag is valid when the column encryption feature is negotiated between client and server and is turned on. fHidden is a bit flag. Its value is 1 if the column is part of a hidden primary key created to support a T-SQL SELECT statement containing FOR BROWSE.<43> fKey is a bit flag. Its value is 1 if the column is part of a primary key for the row and the T-SQL SELECT statement contains FOR BROWSE. fNullableUnknown is a bit flag. Its value is 1 if it is unknown whether the column might be nullable. |
+| Flags | The size of the Flags parameter is always fixed at 16 bits regardless of the TDS version. Each of the 16 bits of the Flags parameter is interpreted based on the TDS version negotiated during login. Bit flags, in [least significant bit order](#Section_2.2.5.1.1): fNullable is a bit flag. Its value is 1 if the column is nullable. fCaseSen is a bit flag. Set to 1 for string columns with binary collation and always for the XML data type. Set to 0 otherwise. usUpdateable is a 2-bit field. Its value is 0 if column is read-only, 1 if column is read/write and 2 if updateable is unknown. fIdentity is a bit flag. Its value is 1 if the column is an identity column. fComputed is a bit flag. Its value is 1 if the column is a COMPUTED column. usReservedODBC is a 2-bit field that is used by ODS gateways supporting the ODBC ODS gateway driver. fFixedLenCLRType is a bit flag. Its value is 1 if the column is a fixed-length [**common language runtime user-defined type (CLR UDT)**](#gt_common-language-runtime-user-defined-type-clr-udt). fSparseColumnSet, introduced in TDS version 7.3.B, is a bit flag. Its value is 1 if the column is the special XML column for the sparse column set. For information about using column sets, see [[MSDN-ColSets]](https://go.microsoft.com/fwlink/?LinkId=128616). fEncrypted is a bit flag. Its value is 1 if the column is encrypted transparently and has to be decrypted to view the plaintext value. This flag is valid when the column encryption feature is negotiated between client and server and is turned on. fHidden is a bit flag. Its value is 1 if the column is part of a hidden primary key created to support a T-SQL SELECT statement containing FOR BROWSE.<45> fKey is a bit flag. Its value is 1 if the column is part of a primary key for the row and the T-SQL SELECT statement contains FOR BROWSE. fNullableUnknown is a bit flag. Its value is 1 if it is unknown whether the column might be nullable. |
 | TableName | The fully qualified base table name for this column. It contains the table name length and table name. This exists only for text, ntext, and image columns. It specifies the number of parts that are returned and then repeats PartName once for each NumParts. |
 | ColName | The column name. It contains the column name length and column name. |
 | BaseTypeInfo | The TYPEINFO for the plaintext data. |
@@ -3825,7 +3829,7 @@ NoMetaData / (1*ColumnData)
 | NormVersion | The normalization version to which plaintext data MUST be normalized. Version numbering starts at 0x01. |
 | Ordinal | Where the encryption key information is located in CekTable. Ordinal starts at 0. |
 | CryptoMetaData | This describes the encryption metadata for a column. It contains the ordinal, the UserType, the TYPE_INFO (BaseTypeInfo) for the plaintext value, the encryption algorithm that is used, the algorithm name literal, the encryption algorithm type, and the normalization version. |
-| NoMetaData | This notifies client that no metadata follows the COLMETADATA token. When fNoMetaData is set to 1, client notifies server that it has already cached the metadata from a previous RPC Request (section 2.2.6.6), and server sends no metadata.<44> |
+| NoMetaData | This notifies client that no metadata follows the COLMETADATA token. When fNoMetaData is set to 1, client notifies server that it has already cached the metadata from a previous RPC Request (section 2.2.6.6), and server sends no metadata.<46> |
 
 <a id="Section_2.2.7.5"></a>
 #### 2.2.7.5 DATACLASSIFICATION
@@ -3836,7 +3840,7 @@ DATACLASSIFICATION
 
 **Token Stream Function:**
 
-Introduced in TDS 7.4, the DATACLASSIFICATION token SHOULD<45> describe the [**data classification**](#gt_data-classification) of the query [**result set**](#gt_result-set).
+Introduced in TDS 7.4, the DATACLASSIFICATION token SHOULD<47> describe the [**data classification**](#gt_data-classification) of the query [**result set**](#gt_result-set).
 
 **Token Stream Comments:**
 
@@ -3971,9 +3975,9 @@ DoneRowCount
 | Parameter | Description |
 | --- | --- |
 | TokenType | DONE_TOKEN |
-| Status | The Status field MUST be a bitwise 'OR' of the following: 0x00: DONE_FINAL. This DONE is the final DONE in the request. 0x1: DONE_MORE. This DONE message is not the final DONE message in the response. Subsequent data streams to follow. 0x2: DONE_ERROR. An error occurred on the current SQL statement. A preceding ERROR token SHOULD be sent when this bit is set. 0x4: DONE_INXACT. A transaction is in progress.<46> 0x10: DONE_COUNT. The DoneRowCount value is valid. This is used to distinguish between a valid value of 0 for DoneRowCount or just an initialized variable. 0x20: DONE_ATTN. The DONE message is a server acknowledgement of a client ATTENTION message. 0x100: DONE_SRVERROR. Used in place of DONE_ERROR when an error occurred on the current SQL statement, which is severe enough to require the [**result set**](#gt_result-set), if any, to be discarded. |
+| Status | The Status field MUST be a bitwise 'OR' of the following: 0x00: DONE_FINAL. This DONE is the final DONE in the request. 0x1: DONE_MORE. This DONE message is not the final DONE message in the response. Subsequent data streams to follow. 0x2: DONE_ERROR. An error occurred on the current SQL statement. A preceding ERROR token SHOULD be sent when this bit is set. 0x4: DONE_INXACT. A transaction is in progress.<48> 0x10: DONE_COUNT. The DoneRowCount value is valid. This is used to distinguish between a valid value of 0 for DoneRowCount or just an initialized variable. 0x20: DONE_ATTN. The DONE message is a server acknowledgement of a client ATTENTION message. 0x100: DONE_SRVERROR. Used in place of DONE_ERROR when an error occurred on the current SQL statement, which is severe enough to require the [**result set**](#gt_result-set), if any, to be discarded. |
 | CurCmd | The token of the current SQL statement. The token value is provided and controlled by the application layer, which utilizes TDS. The TDS layer does not evaluate the value. |
-| DoneRowCount | The count of rows that were affected by the SQL statement. The value of DoneRowCount is valid if the value of Status includes DONE_COUNT.<47> |
+| DoneRowCount | The count of rows that were affected by the SQL statement. The value of DoneRowCount is valid if the value of Status includes DONE_COUNT.<49> |
 
 <a id="Section_2.2.7.7"></a>
 #### 2.2.7.7 DONEINPROC
@@ -4018,7 +4022,7 @@ DoneRowCount
 | Parameter | Description |
 | --- | --- |
 | TokenType | DONEINPROC_TOKEN |
-| Status | The Status field MUST be a bitwise 'OR' of the following: 0x1: DONE_MORE. This DONEINPROC message is not the final DONE/DONEPROC/DONEINPROC message in the response; more data streams are to follow. 0x2: DONE_ERROR. An error occurred on the current SQL statement or execution of a stored procedure was interrupted. A preceding ERROR token SHOULD be sent when this bit is set. 0x4: DONE_INXACT. A transaction is in progress.<48> 0x10: DONE_COUNT. The DoneRowCount value is valid. This is used to distinguish between a valid value of 0 for DoneRowCount or just an initialized variable. 0x100: DONE_SRVERROR. Used in place of DONE_ERROR when an error occurred on the current SQL statement that is severe enough to require the [**result set**](#gt_result-set), if any, to be discarded. |
+| Status | The Status field MUST be a bitwise 'OR' of the following: 0x1: DONE_MORE. This DONEINPROC message is not the final DONE/DONEPROC/DONEINPROC message in the response; more data streams are to follow. 0x2: DONE_ERROR. An error occurred on the current SQL statement or execution of a stored procedure was interrupted. A preceding ERROR token SHOULD be sent when this bit is set. 0x4: DONE_INXACT. A transaction is in progress.<50> 0x10: DONE_COUNT. The DoneRowCount value is valid. This is used to distinguish between a valid value of 0 for DoneRowCount or just an initialized variable. 0x100: DONE_SRVERROR. Used in place of DONE_ERROR when an error occurred on the current SQL statement that is severe enough to require the [**result set**](#gt_result-set), if any, to be discarded. |
 | CurCmd | The token of the current SQL statement. The token value is provided and controlled by the application layer, which utilizes TDS. The TDS layer does not evaluate the value. |
 | DoneRowCount | The count of rows that were affected by the SQL statement. The value of DoneRowCount is valid if the value of Status includes DONE_COUNT. |
 
@@ -4066,7 +4070,7 @@ DoneRowCount
 | Parameter | Description |
 | --- | --- |
 | TokenType | DONEPROC_TOKEN |
-| Status | The Status field MUST be a bitwise 'OR' of the following: 0x00: DONE_FINAL. This DONEPROC is the final DONEPROC in the request. 0x1: DONE_MORE. This DONEPROC message is not the final DONEPROC message in the response; more data streams are to follow. 0x2: DONE_ERROR. An error occurred on the current stored procedure. A preceding ERROR token SHOULD be sent when this bit is set. 0x4: DONE_INXACT. A transaction is in progress.<49> 0x10: DONE_COUNT. The DoneRowCount value is valid. This is used to distinguish between a valid value of 0 for DoneRowCount or just an initialized variable. 0x80: DONE_RPCINBATCH. This DONEPROC message is associated with an RPC within a set of batched RPCs. This flag is not set on the last RPC in the RPC batch. 0x100: DONE_SRVERROR. Used in place of DONE_ERROR when an error occurred on the current stored procedure, which is severe enough to require the [**result set**](#gt_result-set), if any, to be discarded. |
+| Status | The Status field MUST be a bitwise 'OR' of the following: 0x00: DONE_FINAL. This DONEPROC is the final DONEPROC in the request. 0x1: DONE_MORE. This DONEPROC message is not the final DONEPROC message in the response; more data streams are to follow. 0x2: DONE_ERROR. An error occurred on the current stored procedure. A preceding ERROR token SHOULD be sent when this bit is set. 0x4: DONE_INXACT. A transaction is in progress.<51> 0x10: DONE_COUNT. The DoneRowCount value is valid. This is used to distinguish between a valid value of 0 for DoneRowCount or just an initialized variable. 0x80: DONE_RPCINBATCH. This DONEPROC message is associated with an RPC within a set of batched RPCs. This flag is not set on the last RPC in the RPC batch. 0x100: DONE_SRVERROR. Used in place of DONE_ERROR when an error occurred on the current stored procedure, which is severe enough to require the [**result set**](#gt_result-set), if any, to be discarded. |
 | CurCmd | The token of the SQL statement for executing stored procedures. The token value is provided and controlled by the application layer, which utilizes TDS. The TDS layer does not evaluate the value. |
 | DoneRowCount | The count of rows that were affected by the command. The value of DoneRowCount is valid if the value of Status includes DONE_COUNT. |
 
@@ -4091,7 +4095,7 @@ A notification of an environment change (for example, database, language, and so
 - Type 16 (Transaction Manager Address) is sent in response to transaction manager requests with requests of type 0 (TM_GET_DTC_ADDRESS).
 - Type 20 (Routing) is sent in response to a LOGIN7 message when the server wants to route the client to an alternate server. The ENVCHANGE stream returns routing information for the alternate server. If the server decides to send the Routing ENVCHANGE token, the Routing ENVCHANGE token MUST be sent after the LOGINACK token in the login response.
 - Type 21 (Enhanced Routing) is sent in response to a LOGIN7 message when the server wants to route the client to a specific database at an alternate server. The ENVCHANGE stream returns routing information for the alternate server and the alternate database. If the server decides to send the Enhanced Routing ENVCHANGE token, the Enhanced Routing ENVCHANGE token MUST be sent after the LOGINACK token in the login response.
-- The server may only send one of Type 20 (Routing) or Type 21 (Enhanced Routing) in a login response.
+- The server MUST NOT send both Type 20 (Routing) and Type 21 (Enhanced Routing) in a login response.
 **Token Stream-Specific Rules:**
 
 TokenType = BYTE
@@ -4120,7 +4124,7 @@ EnvValueData
 | --- | --- |
 | TokenType | ENVCHANGE_TOKEN |
 | Length | The total length of the ENVCHANGE data stream (EnvValueData). |
-| Type | The type of environment change: **Note** Types 8 to 19 were introduced in TDS 7.2. Type 20 was introduced in TDS 7.4. 1: Database 2: Language 3: Character set 4: Packet size 5: [**Unicode**](#gt_unicode) data sorting local id 6: Unicode data sorting comparison flags 7: SQL Collation 8: Begin Transaction (described in [[MSDN-BEGIN]](https://go.microsoft.com/fwlink/?LinkId=144544)) 9: Commit Transaction (described in [[MSDN-COMMIT]](https://go.microsoft.com/fwlink/?LinkId=144542)) 10: Rollback Transaction 11: Enlist DTC Transaction 12: Defect Transaction 13: Real Time Log Shipping 15: Promote Transaction 16: Transaction Manager Address<50> 17: Transaction ended 18: RESETCONNECTION/RESETCONNECTIONSKIPTRAN Completion Acknowledgement 19: Sends back name of user instance started per login request 20: Sends routing information to client 21: Sends routing information and database name to client |
+| Type | The type of environment change: **Note** Types 8 to 19 were introduced in TDS 7.2. Type 20 was introduced in TDS 7.4. 1: Database 2: Language 3: Character set 4: Packet size 5: [**Unicode**](#gt_unicode) data sorting local id 6: Unicode data sorting comparison flags 7: SQL Collation 8: Begin Transaction (described in [[MSDN-BEGIN]](https://go.microsoft.com/fwlink/?LinkId=144544)) 9: Commit Transaction (described in [[MSDN-COMMIT]](https://go.microsoft.com/fwlink/?LinkId=144542)) 10: Rollback Transaction 11: Enlist DTC Transaction 12: Defect Transaction 13: Real Time Log Shipping 15: Promote Transaction 16: Transaction Manager Address<52> 17: Transaction ended 18: RESETCONNECTION/RESETCONNECTIONSKIPTRAN Completion Acknowledgement 19: Sends back name of user instance started per login request 20: Sends routing information to client 21: Sends routing information and database name to client |
 
 | Type | Old Value | New Value |
 | --- | --- | --- |
@@ -4143,7 +4147,7 @@ EnvValueData
 | 18: Reset Completion Acknowledgement | OLDVALUE = %x00 | NEWVALUE = %x00 |
 | 19: Sends back info of user instance for logins (login7) requesting so. | OLDVALUE = %x00 | NEWVALUE = B_VARCHAR |
 | 20: Routing | OLDVALUE = %x00 %x00 | Protocol = BYTE ProtocolProperty = USHORT AlternateServer = US_VARCHAR Protocol MUST be 0, specifying TCP-IP protocol. ProtocolProperty represents the TCP-IP port when Protocol is 0. A ProtocolProperty value of zero is not allowed when Protocol is TCP-IP. RoutingDataValue = Protocol ProtocolProperty AlternateServer RoutingDataValueLength = USHORT RoutingDataValueLength is the total length, in bytes, of the following fields: Protocol, ProtocolProperty, and AlternateServer. RoutingData = RoutingDataValueLength [RoutingDataValue] NEWVALUE = RoutingData |
-| 21: Enhanced Routing | OLDVALUE = %x00 %x00 | Protocol = BYTE ProtocolProperty = USHORT AlternateServer = US_VARCHAR AlternateDatabase = US_VARCHAR Protocol MUST be 0, specifying TCP-IP protocol. ProtocolProperty represents the TCP-IP port when Protocol is 0. A ProtocolProperty value of zero is not allowed when Protocol is TCP-IP. AlternateDatabase must not exceed 128 characters. RoutingDataValue = Protocol ProtocolProperty AlternateServer AlternateDatabase RoutingDataValueLength = USHORT RoutingDataValueLength is the total length, in bytes, of the following fields: Protocol, ProtocolProperty, AlternateServer, and AlternateDatabase. RoutingData = RoutingDataValueLength [RoutingDataValue] NEWVALUE = RoutingData |
+| 21: Enhanced Routing | OLDVALUE = %x00 %x00 | Protocol = BYTE ProtocolProperty = USHORT AlternateServer = US_VARCHAR AlternateDatabase = US_VARCHAR Protocol MUST be 0, specifying TCP-IP protocol. ProtocolProperty represents the TCP-IP port when Protocol is 0. A ProtocolProperty value of zero is not allowed when Protocol is TCP-IP. AlternateDatabase MUST NOT exceed 128 characters. RoutingDataValue = Protocol ProtocolProperty AlternateServer AlternateDatabase RoutingDataValueLength = USHORT RoutingDataValueLength is the total length, in bytes, of the following fields: Protocol, ProtocolProperty, AlternateServer, and AlternateDatabase. RoutingData = RoutingDataValueLength [RoutingDataValue] NEWVALUE = RoutingData |
 
 **Notes**
 
@@ -4160,7 +4164,7 @@ EnvValueData
 - ENVCHANGE type 18 always produces empty (0x00) old and new values. It simply acknowledges completion of execution of a RESETCONNECTION/RESETCONNECTIONSKIPTRAN request.
 - ENVCHANGE type 19 is sent after LOGIN and after /RESETCONNECTION/RESETCONNECTIONSKIPTRAN when a client has requested use of user instances. It is sent prior to the LOGINACK token.
 - ENVCHANGE type 20 can be sent back to a client running TDS 7.4 or later regardless of whether the fReadOnlyIntent bit is set in the preceding LOGIN7 record. If a client is running TDS 7.1 to 7.3, type 20 can be sent only if the fReadOnlyIntent bit is set in the preceding LOGIN7 record.
-- ENVCHANGE 21 is introduced in TDS 7.4. It may only be sent back to a client if the client sends the ENHANCEDROUTINGSUPPORT FeatureExt. It can be sent back to a client regardless of whether the fReadOnlyIntent bit is set in the preceding LOGIN7 record.
+- ENVCHANGE 21 is introduced in TDS 7.4. It MUST NOT be sent back to a client that has not requested the ENHANCEDROUTINGSUPPORT FeatureExt. It MAY be sent back to a client regardless of whether the fReadOnlyIntent bit is set in the preceding LOGIN7 record.
 <a id="Section_2.2.7.10"></a>
 #### 2.2.7.10 ERROR
 
@@ -4223,7 +4227,7 @@ LineNumber
 | --- | --- |
 | TokenType | ERROR_TOKEN |
 | Length | The total length of the ERROR data stream, in bytes. |
-| Number | The error number.<51> |
+| Number | The error number.<53> |
 | State | The error state, used as a modifier to the error number. |
 | Class | The class (severity) of the error. A class of less than 10 indicates an informational message. |
 | MsgText | The message text length and message text using US_VARCHAR format. |
@@ -4233,8 +4237,8 @@ LineNumber
 
 | Class level | Description |
 | --- | --- |
-| 0-9 | Informational messages that return status information or report errors that are not severe.<52> |
-| 10 | Informational messages that return status information or report errors that are not severe.<53> |
+| 0-9 | Informational messages that return status information or report errors that are not severe.<54> |
+| 10 | Informational messages that return status information or report errors that are not severe.<55> |
 | 11-16 | Errors that can be corrected by the user. |
 | 11 | The given object or entity does not exist. |
 | 12 | A special severity for [**SQL statements**](#gt_sql-statement) that do not use locking because of special options. In some cases, read operations performed by these SQL statements could result in inconsistent data, because locks are not taken to guarantee consistency. |
@@ -4312,16 +4316,17 @@ The following table describes the FeatureExtAck feature option and description.
 | --- | --- |
 | %0x00 | Reserved. |
 | %0x01 (SESSIONRECOVERY) (introduced in TDS 7.4) | Session Recovery feature. Content is defined as follows: InitSessionStateData = SessionStateDataSet FeatureAckData = InitSessionStateData SessionStateDataSet is described in section [2.2.7.21](#Section_2.2.7.21). The length of SessionStateDataSet is specified by the corresponding FeatureAckDataLen. On a recovery connection, the client sends a login request with SessionRecoveryDataToBe. The server MUST set the session state as requested by the client. If the server cannot do so, the server MUST fail the login request and terminate the connection. |
-| %0x02 (FEDAUTH)<54> | Whenever a login response stream is sent for a TDS connection whose login request includes a FEDAUTH FeatureExt, the server login response message stream MUST include a FEATUREEXTACK token, and the FEATUREEXTACK token stream MUST include the FEDAUTH FeatureId. The format is described below based on the bFedAuthLibrary that is used in FEDAUTH FeatureExt. When the bFedAuthLibrary is Live ID Compact Token, the format is as follows: Nonce = 32BYTE Signature = 32BYTE FeatureAckData = Nonce Signature Nonce: The client-specified nonce in PRELOGIN. Signature: The HMAC-SHA-256 [[RFC6234]](https://go.microsoft.com/fwlink/?LinkId=328921) of the client-specified nonce, using the session key retrieved from the [**federated authentication**](#gt_federated-authentication) context as the shared secret. When the bFedAuthLibrary is Security Token, the format is as follows: Nonce = 32BYTE FeatureAckData = [Nonce] Nonce: The client-specified nonce in PRELOGIN. This field MUST be present if the client’s PRELOGIN message included a NONCE field. Otherwise, this field MUST NOT be present. |
-| %0x04 (COLUMNENCRYPTION) (introduced in TDS 7.4) | The presence of the COLUMNENCRYPTION FeatureExt SHOULD<55> indicate that the client is capable of performing cryptographic operations on data. The feature data is described as follows: Length = BYTE COLUMNENCRYPTION_VERSION = BYTE FeatureData = COLUMNENCRYPTION_VERSION [Length EnclaveType] COLUMNENCRYPTION_VERSION: This field defines the cryptographic protocol version that the client understands. The values of this field are as follows: 1 = The client supports column encryption without [**enclave computations**](#gt_enclave-computations). 2 = The client SHOULD<56> support column encryption when encrypted data require enclave computations. 3 = The client SHOULD<57> support column encryption when encrypted data require enclave computations with the additional ability to cache column encryption keys that are to be sent to the enclave and the ability to retry queries when the keys sent by the client do not match what is needed for the query to run. EnclaveType: This field is a string that SHOULD<58> be populated by the server and used by the client to identify the type of [**enclave**](#gt_enclave) that the server is configured to use. During login for the initial connection, the client can request COLUMNENCRYPTION with **Length** as 1 and COLUMNENCRYPTION_VERSION as either 1 or 2. When the client requests COLUMNENCRYPTION_VERSION as 2, the server MUST return COLUMNENCRYPTION_VERSION as 2 together with the value of **EnclaveType**, if the server contains an enclave that is configured for use. If **EnclaveType** is not returned and the column encryption version is returned as 2, the client driver MUST raise an error. |
-| %0x05 (GLOBALTRANSACTIONS)<59> | Whenever a login response stream is sent for a TDS connection whose login request includes a GLOBALTRANSACTIONS FeatureExt token, the server login response message stream can optionally include a FEATUREEXTACK token by including the GLOBALTRANSACTIONS FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include a flag that indicates whether the server supports [**Global Transactions**](#gt_global-transactions). The FeatureAckData format is as follows: IsEnabled = BYTE FeatureAckData = IsEnabled IsEnabled: Specifies whether the server supports Global Transactions. The values of this field are as follows: 0 = The server does not support Global Transactions. 1 = The server supports Global Transactions. |
-| %0x08 (AZURESQLSUPPORT) (introduced in TDS 7.4) | The presence of the AZURESQLSUPPORT FeatureExt indicates whether failover partner login with read-only intent to Azure SQL Database MAY<60> be supported. For information about failover partner, see [[MSDOCS-DBMirror]](https://go.microsoft.com/fwlink/?linkid=874052). Whenever a login response stream is sent for a TDS connection whose login request includes an AZURESQLSUPPORT FeatureExt token, the server login response message stream can optionally include a FEATUREEXTACK token by setting the corresponding feature switch in Azure SQL Database. If it is included, the FEATUREEXTACK token stream MUST include the AZURESQLSUPPORT FeatureId. FeatureAckData = BYTE BYTE: The Bit 0 flag specifies whether failover partner login with read-only intent is supported. The values of this BYTE are as follows: 0 = The server does not support the AZURESQLSUPPORT feature extension. 1 = The server supports the AZURESQLSUPPORT feature extension. |
-| %0x09 (DATACLASSIFICATION) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a DATACLASSIFICATION FeatureExt token, the server login response message stream SHOULD<61> be capable of optionally containing a FEATUREEXTACK token by including the DATACLASSIFICATION FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include the following information that indicates whether the server supports [**data classification**](#gt_data-classification) and to what extent. The FeatureAckData format is as follows: DATACLASSIFICATION_VERSION = BYTE IsEnabled = BYTE VersionSpecificData = *2147483647BYTE ; The actual length ; of data is ; FeatureAckDataLen - 2 FeatureAckData = DATACLASSIFICATION_VERSION IsEnabled VersionSpecificData DATACLASSIFICATION_VERSION: This field specifies the version number of the data classification information that is to be used for this connection. This value MUST be 1 or 2, as specified for DATACLASSIFICATION_VERSION in section [2.2.6.4](#Section_2.2.6.4). IsEnabled: This field specifies whether the server supports data classification. The values of this field are as follows: 0 = The server does not support data classification. 1 = The server supports data classification. VersionSpecificData: This field specifies which version of data classification information is returned. The values of this field are as follows: When the value of the DATACLASSIFICATION_VERSION field is 1 or 2, the response in the feature extension acknowledgement contains no version-specific data. |
-| %0x0A (UTF8_SUPPORT) (introduced in TDS 7.4) | The presence of the UTF8_SUPPORT FeatureExtAck token in the response message stream indicates whether the server’s ability to receive and send UTF-8 encoded data SHOULD<62> be supported. Whenever a login response stream is sent for a TDS connection whose login request includes a UTF8_SUPPORT FeatureExt token, the server login response message stream can optionally include a FEATUREEXTACK token. If that token is included, the FEATUREEXTACK token MUST include the UTF8_SUPPORT FeatureId and the appropriate feature acknowledgement data. The FeatureAckData format is as follows: FeatureAckData = BYTE BYTE: The Bit 0 value specifies whether the server can receive and send UTF-8 encoded data. The values of this BYTE are as follows: 0 = The server does not support the UFT8_SUPPORT feature extension. 1 = The server supports the UTF8_SUPPORT feature extension. |
-| %0x0B (AZURESQLDNSCACHING) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection that has a login request that includes an AZURESQLDNSCACHING FeatureExt token, the server login response message can optionally include this FeatureExtAck token. The contents of the token are as follows: IsSupported = BYTE FeatureAckData = IsSupported IsSupported: The Bit 0 specifies whether the server supports client DNS caching. The values of this BIT are as follows: 0 = The server does not support client DNS caching. 1 = The server supports client DNS caching. A server response with IsSupported set to 1 indicates to the client that it is safe to cache the entry. When the server responds with IsSupported set to 0, the client SHOULD NOT<63> cache the entry. |
-| %0x0D (JSONSUPPORT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a JSONSUPPORT FeatureExt token, the server login response message stream SHOULD<64> be capable of optionally containing a FEATUREEXTACK token by including the JSON_SUPPORT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include the following information that indicates whether the server supports the json datatype. The FeatureAckData format is as follows: JSONSUPPORT_VERSION = BYTE FeatureAckData = JSONSUPPORT_VERSION JSONSUPPORT_VERSION: This field specifies the version number of the json datatype that is to be used for this connection. This value is 1. |
-| %0x0E (VECTORSUPPORT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a VECTORSUPPORT FeatureExt token, the server login response message stream SHOULD<65> be capable of optionally containing a FEATUREEXTACK token by including the VECTOR_SUPPORT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include the following information that indicates whether the server supports the vector datatype. The FeatureAckData format is as follows: VECTORSUPPORT_VERSION = BYTE FeatureAckData = VECTORSUPPORT_VERSION VECTORSUPPORT_VERSION: This field specifies the version number of the vector datatype that is to be used for this connection. This value is 1. |
-| %0x0F (ENHANCEDROUTINGSUPPORT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes an ENHANCEDROUTINGSUPPORT FeatureExt token, the server login response message stream can optionally<66> include a FEATUREEXTACK token by including the ENHANCEDROUTINGSUPPORT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include a flag that indicates whether the server supports Enhanced Routing. The FeatureAckData format is as follows: IsEnabled=BYTE FeatureAckData=IsEnabled IsEnabled: Specifies whether the server supports Enhanced Routing. The values of this field are as follows: 0 = The server does not support Enhanced Routing. 1 = The server supports Enhanced Routing. When the value of IsEnabled is 0, the client should not accept Enhanced Routing ENVCHANGE tokens. |
+| %0x02 (FEDAUTH)<56> | Whenever a login response stream is sent for a TDS connection whose login request includes a FEDAUTH FeatureExt, the server login response message stream MUST include a FEATUREEXTACK token, and the FEATUREEXTACK token stream MUST include the FEDAUTH FeatureId. The format is described below based on the bFedAuthLibrary that is used in FEDAUTH FeatureExt. When the bFedAuthLibrary is Live ID Compact Token, the format is as follows: Nonce = 32BYTE Signature = 32BYTE FeatureAckData = Nonce Signature Nonce: The client-specified nonce in PRELOGIN. Signature: The HMAC-SHA-256 [[RFC6234]](https://go.microsoft.com/fwlink/?LinkId=328921) of the client-specified nonce, using the session key retrieved from the [**federated authentication**](#gt_federated-authentication) context as the shared secret. When the bFedAuthLibrary is Security Token, the format is as follows: Nonce = 32BYTE FeatureAckData = [Nonce] Nonce: The client-specified nonce in PRELOGIN. This field MUST be present if the client’s PRELOGIN message included a NONCE field. Otherwise, this field MUST NOT be present. |
+| %0x04 (COLUMNENCRYPTION) (introduced in TDS 7.4) | The presence of the COLUMNENCRYPTION FeatureExt SHOULD<57> indicate that the client is capable of performing cryptographic operations on data. The feature data is described as follows: Length = BYTE COLUMNENCRYPTION_VERSION = BYTE FeatureData = COLUMNENCRYPTION_VERSION [Length EnclaveType] COLUMNENCRYPTION_VERSION: This field defines the cryptographic protocol version that the client understands. The values of this field are as follows: 1 = The client supports column encryption without [**enclave computations**](#gt_enclave-computations). 2 = The client SHOULD<58> support column encryption when encrypted data require enclave computations. 3 = The client SHOULD<59> support column encryption when encrypted data require enclave computations with the additional ability to cache column encryption keys that are to be sent to the enclave and the ability to retry queries when the keys sent by the client do not match what is needed for the query to run. EnclaveType: This field is a string that SHOULD<60> be populated by the server and used by the client to identify the type of [**enclave**](#gt_enclave) that the server is configured to use. During login for the initial connection, the client can request COLUMNENCRYPTION with **Length** as 1 and COLUMNENCRYPTION_VERSION as either 1 or 2. When the client requests COLUMNENCRYPTION_VERSION as 2, the server MUST return COLUMNENCRYPTION_VERSION as 2 together with the value of **EnclaveType**, if the server contains an enclave that is configured for use. If **EnclaveType** is not returned and the column encryption version is returned as 2, the client driver MUST raise an error. |
+| %0x05 (GLOBALTRANSACTIONS)<61> | Whenever a login response stream is sent for a TDS connection whose login request includes a GLOBALTRANSACTIONS FeatureExt token, the server login response message stream can optionally include a FEATUREEXTACK token by including the GLOBALTRANSACTIONS FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include a flag that indicates whether the server supports [**Global Transactions**](#gt_global-transactions). The FeatureAckData format is as follows: IsEnabled = BYTE FeatureAckData = IsEnabled IsEnabled: Specifies whether the server supports Global Transactions. The values of this field are as follows: 0 = The server does not support Global Transactions. 1 = The server supports Global Transactions. |
+| %0x08 (AZURESQLSUPPORT) (introduced in TDS 7.4) | The presence of the AZURESQLSUPPORT FeatureExt indicates whether failover partner login with read-only intent to Azure SQL Database MAY<62> be supported. For information about failover partner, see [[MSDOCS-DBMirror]](https://go.microsoft.com/fwlink/?linkid=874052). Whenever a login response stream is sent for a TDS connection whose login request includes an AZURESQLSUPPORT FeatureExt token, the server login response message stream can optionally include a FEATUREEXTACK token by setting the corresponding feature switch in Azure SQL Database. If it is included, the FEATUREEXTACK token stream MUST include the AZURESQLSUPPORT FeatureId. FeatureAckData = BYTE BYTE: The Bit 0 flag specifies whether failover partner login with read-only intent is supported. The values of this BYTE are as follows: 0 = The server does not support the AZURESQLSUPPORT feature extension. 1 = The server supports the AZURESQLSUPPORT feature extension. |
+| %0x09 (DATACLASSIFICATION) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a DATACLASSIFICATION FeatureExt token, the server login response message stream SHOULD<63> be capable of optionally containing a FEATUREEXTACK token by including the DATACLASSIFICATION FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include the following information that indicates whether the server supports [**data classification**](#gt_data-classification) and to what extent. The FeatureAckData format is as follows: DATACLASSIFICATION_VERSION = BYTE IsEnabled = BYTE VersionSpecificData = *2147483647BYTE ; The actual length ; of data is ; FeatureAckDataLen - 2 FeatureAckData = DATACLASSIFICATION_VERSION IsEnabled VersionSpecificData DATACLASSIFICATION_VERSION: This field specifies the version number of the data classification information that is to be used for this connection. This value MUST be 1 or 2, as specified for DATACLASSIFICATION_VERSION in section [2.2.6.4](#Section_2.2.6.4). IsEnabled: This field specifies whether the server supports data classification. The values of this field are as follows: 0 = The server does not support data classification. 1 = The server supports data classification. VersionSpecificData: This field specifies which version of data classification information is returned. The values of this field are as follows: When the value of the DATACLASSIFICATION_VERSION field is 1 or 2, the response in the feature extension acknowledgement contains no version-specific data. |
+| %0x0A (UTF8_SUPPORT) (introduced in TDS 7.4) | The presence of the UTF8_SUPPORT FeatureExtAck token in the response message stream indicates whether the server’s ability to receive and send UTF-8 encoded data SHOULD<64> be supported. Whenever a login response stream is sent for a TDS connection whose login request includes a UTF8_SUPPORT FeatureExt token, the server login response message stream can optionally include a FEATUREEXTACK token. If that token is included, the FEATUREEXTACK token MUST include the UTF8_SUPPORT FeatureId and the appropriate feature acknowledgement data. The FeatureAckData format is as follows: FeatureAckData = BYTE BYTE: The Bit 0 value specifies whether the server can receive and send UTF-8 encoded data. The values of this BYTE are as follows: 0 = The server does not support the UFT8_SUPPORT feature extension. 1 = The server supports the UTF8_SUPPORT feature extension. |
+| %0x0B (AZURESQLDNSCACHING) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection that has a login request that includes an AZURESQLDNSCACHING FeatureExt token, the server login response message can optionally include this FeatureExtAck token. The contents of the token are as follows: IsSupported = BYTE FeatureAckData = IsSupported IsSupported: The Bit 0 specifies whether the server supports client DNS caching. The values of this BIT are as follows: 0 = The server does not support client DNS caching. 1 = The server supports client DNS caching. A server response with IsSupported set to 1 indicates to the client that it is safe to cache the entry. When the server responds with IsSupported set to 0, the client SHOULD NOT<65> cache the entry. |
+| %0x0D (JSONSUPPORT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a JSONSUPPORT FeatureExt token, the server login response message stream SHOULD<66> be capable of optionally containing a FEATUREEXTACK token by including the JSON_SUPPORT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include the following information that indicates whether the server supports the json datatype. The FeatureAckData format is as follows: JSONSUPPORT_VERSION = BYTE FeatureAckData = JSONSUPPORT_VERSION JSONSUPPORT_VERSION: This field specifies the version number of the json datatype that is to be used for this connection. This value is 1. |
+| %0x0E (VECTORSUPPORT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a VECTORSUPPORT FeatureExt token, the server login response message stream SHOULD<67> be capable of optionally containing a FEATUREEXTACK token by including the VECTOR_SUPPORT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include the following information that indicates the vector datatype version supported by the server. The FeatureAckData format is as follows: VECTORSUPPORT_VERSION = BYTE FeatureAckData = VECTORSUPPORT_VERSION VECTORSUPPORT_VERSION: This field specifies the version number of the vector datatype that is to be used for this connection. Value 1 indicates float32 support, value 2 indicates float16 support as well as everything that is supported in the lower versions (in this case, float16 and float32). |
+| %0x0F (ENHANCEDROUTINGSUPPORT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes an ENHANCEDROUTINGSUPPORT FeatureExt token, the server login response message stream MAY optionally<68> include a FEATUREEXTACK token by including the ENHANCEDROUTINGSUPPORT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include a flag that indicates whether the server supports Enhanced Routing. The FeatureAckData format is as follows: IsEnabled = BYTE FeatureAckData = IsEnabled IsEnabled: Specifies whether the server supports Enhanced Routing. The values of this field are as follows: 0 = The server does not support Enhanced Routing. 1 = The server supports Enhanced Routing. When the value of IsEnabled is 0, the client MUST ignore Enhanced Routing ENVCHANGE tokens. |
+| %0x10 (USERAGENT) (introduced in TDS 7.4) | Whenever a login response stream is sent for a TDS connection whose login request includes a USERAGENT FeatureExt token, the server login response message stream MAY<69> include a FEATUREEXTACK token by including the USERAGENT FeatureId in the FEATUREEXTACK token stream. The corresponding FeatureAckData MUST then include a flag whose value is always 1. The FeatureAckData format is as follows: Flag = BYTE FeatureAckData = Flag Flag must always be 1. |
 | %xFF (TERMINATOR) | This option signals the end of the FeatureExtAck feature and MUST be the feature's last option. |
 
 <a id="Section_2.2.7.12"></a>
@@ -4333,7 +4338,7 @@ FEDAUTHINFO
 
 **Token Stream Function:**
 
-Introduced in TDS 7.4, [**federated authentication**](#gt_federated-authentication) information is returned to the client to be used for generating a Federated Authentication Token during the login process. This token MUST be the only token in a Federated Authentication Information message and MUST NOT be included in any other message type.<67>
+Introduced in TDS 7.4, [**federated authentication**](#gt_federated-authentication) information is returned to the client to be used for generating a Federated Authentication Token during the login process. This token MUST be the only token in a Federated Authentication Information message and MUST NOT be included in any other message type.<70>
 
 **Token Stream Comments:**
 
@@ -4454,7 +4459,7 @@ LineNumber
 | --- | --- |
 | TokenType | INFO_TOKEN |
 | Length | The total length of the INFO [**data stream**](#gt_data-stream), in bytes. |
-| Number | The info number.<68> |
+| Number | The info number.<71> |
 | State | The error state, used as a modifier to the info Number. |
 | Class | The class (severity) of the error. A class of less than 10 indicates an informational message. |
 | MsgText | The message text length and message text using US_VARCHAR format. |
@@ -4526,7 +4531,7 @@ ProgVersion
 | TokenType | LOGINACK_TOKEN |
 | Length | The total length, in bytes, of the following fields: Interface, TDSVersion, ProgName, and ProgVersion. |
 | Interface | The type of [**interface**](#gt_interface) with which the server accepts client requests: 0: SQL_DFLT (server confirms that whatever is sent by the client is acceptable. If the client requested SQL_DFLT, SQL_TSQL is used). 1: SQL_TSQL (TSQL is accepted). |
-| TDSVersion | The TDS version being used by the server.<69> |
+| TDSVersion | The TDS version being used by the server.<72> |
 | ProgName | The name of the server. |
 | MajorVer | The major version number (0-255). |
 | MinorVer | The minor version number (0-255). |
@@ -5204,8 +5209,8 @@ A TDS client SHOULD maintain the following states:
 A TDS client SHOULD implement the following three timers:
 
 - Connection Timer. Controls the maximum time spent during the establishment of a TDS connection. The default value SHOULD be 15 seconds. The implementation SHOULD allow the upper layer to specify a nondefault value, including an infinite value (for example, no timeout).
-- Client Request Timer. Controls the maximum time spent waiting for a query response from the server for a client request sent after the connection has been established. The default value is implementation-dependent. The implementation SHOULD allow the upper layer to specify a non-default value, including an infinite value (for example, no timeout).<70>
-- Cancel Timer. Controls the maximum time spent waiting for a query cancellation acknowledgement after an Attention request is sent to the server. The default value is implementation-dependent. The implementation SHOULD allow the upper layer to specify a nondefault value, including an infinite value (for example, no timeout).<71>
+- Client Request Timer. Controls the maximum time spent waiting for a query response from the server for a client request sent after the connection has been established. The default value is implementation-dependent. The implementation SHOULD allow the upper layer to specify a non-default value, including an infinite value (for example, no timeout).<73>
+- Cancel Timer. Controls the maximum time spent waiting for a query cancellation acknowledgement after an Attention request is sent to the server. The default value is implementation-dependent. The implementation SHOULD allow the upper layer to specify a nondefault value, including an infinite value (for example, no timeout).<74>
 For all three timers, a client can implement a minimum timeout value that is as short as required. If a TDS client implementation implements any of the timers, it MUST implement their behavior according to this specification.
 
 A TDS client SHOULD request the transport to detect and indicate a broken connection if the transport provides such mechanism. If the transport used is TCP, it SHOULD use the TCP Keep-Alives [[RFC1122]](https://go.microsoft.com/fwlink/?LinkId=112180) in order to detect a nonresponding server in case infinite connection timeout or infinite client request timeout is used. The default values of the TCP Keep-Alive values set by a TDS client are 30 seconds of no activity until the first keep-alive packet is sent and 1 second between when successive keep-alive packets are sent if no acknowledgement is received. The implementation SHOULD allow the upper layer to specify other TCP keep-alive values.
@@ -5377,7 +5382,7 @@ The TDS client MUST:
 - Read the rest of the login response from the server, processing the remaining tokens until the final DONE token is read, as it does with a normal login response.
 - Discard all information read from the original login response except for the routing information supplied in the Routing or Enhanced Routing ENVCHANGE token.
 - Any information in the original login response (for example, the language, collation, packet size, or database mirroring partner) does not apply to the subsequent connection established to the alternate server specified in the Routing or Enhanced Routing ENVCHANGE token.
-- The alternate database specified in an Enhanced Routing ENVCHANGE token overrides any previous database and must be used when connecting to the alternate server specified in the token.
+- The alternate database specified in an Enhanced Routing ENVCHANGE token overrides any previous database and MUST be used when connecting to the alternate server specified in the token.
 - Close the original connection and enter the "Final State" state. The original connection cannot be used for any other purpose after the Routing or Enhanced Routing ENVCHANGE token is read and the response is drained.
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Final State
@@ -13949,31 +13954,35 @@ However, for SQL collations with non-[**Unicode**](#gt_unicode) data, the SortId
 
 <34> Section 2.2.6.4: The ENHANCEDROUTINGSUPPORT feature extension is not supported by SQL Server.
 
-<35> Section 2.2.6.5: The FEDAUTHREQUIRED payload option token is not supported by SQL Server.
+<35> Section 2.2.6.4: The USERAGENT feature extension is not supported by SQL Server.
 
-<36> Section 2.2.6.5: The ENCRYPT_EXT bit is not supported by SQL Server and is ignored. When the client driver uses this bit to log in to Azure SQL Database, the session could be disconnected.
+<36> Section 2.2.6.4: The USERAGENT feature extension is not supported by SQL Server.
 
-<37> Section 2.2.6.5: The ENCRYPT_CLIENT_CERT setting is used only when SQL Server is running on a Linux operating system and is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
+<37> Section 2.2.6.5: The FEDAUTHREQUIRED payload option token is not supported by SQL Server.
 
-<38> Section 2.2.6.5: Of the SQL Server products that are applicable to this specification, with the exception of SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2, the server always sends the value 0 for the INSTOPT option when the string specified in the client's INSTOPT option is "MSSQLServer". The reason for this is that "MSSQLServer" is the name of a default instance, and "MSSQLServer" can be provided by the client even in the absence of an explicit instance name. SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2, which support the INSTOPT field, always validate the client-specified string against the server's instance name.
+<38> Section 2.2.6.5: The ENCRYPT_EXT bit is not supported by SQL Server and is ignored. When the client driver uses this bit to log in to Azure SQL Database, the session could be disconnected.
 
-<39> Section 2.2.6.6: The fNoMetaData flag is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014.
+<39> Section 2.2.6.5: The ENCRYPT_CLIENT_CERT setting is used only when SQL Server is running on a Linux operating system and is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
 
-<40> Section 2.2.6.6: The EnclavePackage parameter is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017. This parameter was introduced in the .NET Framework 4.7.2 and is not supported by .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
+<40> Section 2.2.6.5: Of the SQL Server products that are applicable to this specification, with the exception of SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2, the server always sends the value 0 for the INSTOPT option when the string specified in the client's INSTOPT option is "MSSQLServer". The reason for this is that "MSSQLServer" is the name of a default instance, and "MSSQLServer" can be provided by the client even in the absence of an explicit instance name. SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2, which support the INSTOPT field, always validate the client-specified string against the server's instance name.
 
-<41> Section 2.2.7.1: ALTMETADATA_TOKEN is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2.
+<41> Section 2.2.6.6: The fNoMetaData flag is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014.
 
-<42> Section 2.2.7.2: ALTROW_TOKEN is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2.
+<42> Section 2.2.6.6: The EnclavePackage parameter is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017. This parameter was introduced in the .NET Framework 4.7.2 and is not supported by .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
 
-<43> Section 2.2.7.4: Of the SQL Server products that are applicable to this specification, with the exception of SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014, SQL Server supports the fHidden flag only through a many-to-many result and by connecting via ODBC.
+<43> Section 2.2.7.1: ALTMETADATA_TOKEN is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2.
 
-<44> Section 2.2.7.4: The NoMetaData parameter is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014.
+<44> Section 2.2.7.2: ALTROW_TOKEN is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, and SQL Server 2008 R2.
 
-<45> Section 2.2.7.5: The DATACLASSIFICATION token is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
+<45> Section 2.2.7.4: Of the SQL Server products that are applicable to this specification, with the exception of SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014, SQL Server supports the fHidden flag only through a many-to-many result and by connecting via ODBC.
 
-<46> Section 2.2.7.6: The 0x4: DONE_INXACT bit is not set by SQL Server and is reserved for future use.
+<46> Section 2.2.7.4: The NoMetaData parameter is supported only by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014.
 
-<47> Section 2.2.7.6: The DONE token is usually sent after login has succeeded. In this case, the negotiated TDS version is known, and the client can determine whether DoneRowCount is LONG or ULONGLONG.
+<47> Section 2.2.7.5: The DATACLASSIFICATION token is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
+
+<48> Section 2.2.7.6: The 0x4: DONE_INXACT bit is not set by SQL Server and is reserved for future use.
+
+<49> Section 2.2.7.6: The DONE token is usually sent after login has succeeded. In this case, the negotiated TDS version is known, and the client can determine whether DoneRowCount is LONG or ULONGLONG.
 
 When login fails for any reason, SQL Server might also send an error message followed by a [DONE](#Section_2.2.7.6) token. In this case, the server has already completed TDS version negotiation and has to send DoneRowCount as LONG or ULONGLONG based on the negotiated TDS version.
 
@@ -13983,49 +13992,51 @@ However, sometimes the client cannot determine the server TDS version and cannot
 
 A third-party implementation has its own logic to detect whether DoneRowCount is LONG or ULONGLONG or to make the client able to handle both LONG and ULONGLONG. In any implementation, before the client performs this task, the server performs TDS version negotiation and determines whether to send LONG or ULONGLONG.
 
-<48> Section 2.2.7.7: The 0x4: DONE_INXACT bit is not set by SQL Server and is reserved for future use.
+<50> Section 2.2.7.7: The 0x4: DONE_INXACT bit is not set by SQL Server and is reserved for future use.
 
-<49> Section 2.2.7.8: The 0x4: DONE_INXACT bit is not set by SQL Server and is reserved for future use.
+<51> Section 2.2.7.8: The 0x4: DONE_INXACT bit is not set by SQL Server and is reserved for future use.
 
-<50> Section 2.2.7.9: Type 16: Transaction Manager Address is not used by SQL Server.
+<52> Section 2.2.7.9: Type 16: Transaction Manager Address is not used by SQL Server.
 
-<51> Section 2.2.7.10: Numbers less than 20001 are reserved by SQL Server.
+<53> Section 2.2.7.10: Numbers less than 20001 are reserved by SQL Server.
 
-<52> Section 2.2.7.10: SQL Server does not raise system errors with severities of 0 through 9.
+<54> Section 2.2.7.10: SQL Server does not raise system errors with severities of 0 through 9.
 
-<53> Section 2.2.7.10: For compatibility reasons, SQL Server converts severity 10 to severity 0 before returning the error information to the calling application.
+<55> Section 2.2.7.10: For compatibility reasons, SQL Server converts severity 10 to severity 0 before returning the error information to the calling application.
 
-<54> Section 2.2.7.11: The FEDAUTH feature extension is not supported by SQL Server.
+<56> Section 2.2.7.11: The FEDAUTH feature extension is not supported by SQL Server.
 
-<55> Section 2.2.7.11: The COLUMNENCRYPTION feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014.
+<57> Section 2.2.7.11: The COLUMNENCRYPTION feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, and SQL Server 2014.
 
-<56> Section 2.2.7.11: Enclave computations are not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017. Support for this feature was introduced in the .NET Framework 4.7.2 and is not supported by the .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
+<58> Section 2.2.7.11: Enclave computations are not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017. Support for this feature was introduced in the .NET Framework 4.7.2 and is not supported by the .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
 
-<57> Section 2.2.7.11: Enclave computations with cached column encryption keys are not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, SQL Server 2017, and SQL Server 2019.
+<59> Section 2.2.7.11: Enclave computations with cached column encryption keys are not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, SQL Server 2017, and SQL Server 2019.
 
-<58> Section 2.2.7.11: The **EnclaveType** field is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017. This field was introduced in the .NET Framework 4.7.2 and is not supported by the .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
+<60> Section 2.2.7.11: The **EnclaveType** field is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017. This field was introduced in the .NET Framework 4.7.2 and is not supported by the .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
 
-<59> Section 2.2.7.11: The GLOBALTRANSACTIONS feature extension is not supported by SQL Server.
+<61> Section 2.2.7.11: The GLOBALTRANSACTIONS feature extension is not supported by SQL Server.
 
-<60> Section 2.2.7.11: The AZURESQLSUPPORT feature extension is not supported by SQL Server. This feature extension was introduced in .NET Framework 4.7.2 and is not supported by the .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
+<62> Section 2.2.7.11: The AZURESQLSUPPORT feature extension is not supported by SQL Server. This feature extension was introduced in .NET Framework 4.7.2 and is not supported by the .NET Framework 1.1, .NET Framework 2.0, .NET Framework 4.0, .NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7, and .NET Framework 4.7.1.
 
-<61> Section 2.2.7.11: The DATACLASSIFICATION feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
+<63> Section 2.2.7.11: The DATACLASSIFICATION feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
 
-<62> Section 2.2.7.11: The UTF8_SUPPORT feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
+<64> Section 2.2.7.11: The UTF8_SUPPORT feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, and SQL Server 2017.
 
-<63> Section 2.2.7.11: The AZURESQLDNSCACHING feature extension is not supported by SQL Server. The FeatureData value is always 0.
+<65> Section 2.2.7.11: The AZURESQLDNSCACHING feature extension is not supported by SQL Server. The FeatureData value is always 0.
 
-<64> Section 2.2.7.11: The JSONSUPPORT feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, SQL Server 2017, SQL Server 2019, and SQL Server 2022.
+<66> Section 2.2.7.11: The JSONSUPPORT feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, SQL Server 2017, SQL Server 2019, and SQL Server 2022.
 
-<65> Section 2.2.7.11: The VECTORSUPPORT feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, SQL Server 2017, SQL Server 2019, and SQL Server 2022.
+<67> Section 2.2.7.11: The VECTORSUPPORT feature extension is not supported by SQL Server 7.0, SQL Server 2000, SQL Server 2005, SQL Server 2008, SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, SQL Server 2016, SQL Server 2017, SQL Server 2019, and SQL Server 2022.
 
-<66> Section 2.2.7.11: The ENHANCEDROUTINGSUPPORT feature extension is not supported by SQL Server.
+<68> Section 2.2.7.11: The ENHANCEDROUTINGSUPPORT feature extension is not supported by SQL Server.
 
-<67> Section 2.2.7.12: The FEDAUTHINFO token is not supported by SQL Server.
+<69> Section 2.2.7.11: The USERAGENT feature extension is not supported by SQL Server.
 
-<68> Section 2.2.7.13: Numbers less than 20001 are reserved by SQL Server.
+<70> Section 2.2.7.12: The FEDAUTHINFO token is not supported by SQL Server.
 
-<69> Section 2.2.7.14: The following table shows the values in network transfer format.
+<71> Section 2.2.7.13: Numbers less than 20001 are reserved by SQL Server.
+
+<72> Section 2.2.7.14: The following table shows the values in network transfer format.
 
 | SQL Server | Client to server | Server to client |
 | --- | --- | --- |
@@ -14041,9 +14052,9 @@ A third-party implementation has its own logic to detect whether DoneRowCount is
 
 **In TDS 7.x flow.
 
-<70> Section 3.2.2: In Microsoft implementations, the default value for the [**Microsoft/Windows Data Access Components (MDAC/WDAC)**](#gt_microsoftwindows-data-access-components-mdacwdac) and SNAC Client Request Timers is zero, which is interpreted as no timeout. For a SqlClient Client Request, the default value is 30 seconds. For a description of the data access drivers, see [[MSDN-MDAC]](https://go.microsoft.com/fwlink/?LinkId=213737).
+<73> Section 3.2.2: In Microsoft implementations, the default value for the [**Microsoft/Windows Data Access Components (MDAC/WDAC)**](#gt_microsoftwindows-data-access-components-mdacwdac) and SNAC Client Request Timers is zero, which is interpreted as no timeout. For a SqlClient Client Request, the default value is 30 seconds. For a description of the data access drivers, see [[MSDN-MDAC]](https://go.microsoft.com/fwlink/?LinkId=213737).
 
-<71> Section 3.2.2: In Microsoft implementations, the default setting for MDAC/WDAC and SNAC Cancel Timer values is 120 seconds. For a SqlClient Cancel Timer, the default value is 5 seconds. For a description of the data access drivers, see [MSDN-MDAC].
+<74> Section 3.2.2: In Microsoft implementations, the default setting for MDAC/WDAC and SNAC Cancel Timer values is 120 seconds. For a SqlClient Cancel Timer, the default value is 5 seconds. For a description of the data access drivers, see [MSDN-MDAC].
 
 <a id="Section_7"></a>
 # 7 Change Tracking
@@ -14062,7 +14073,12 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [6](#Section_6) Appendix A: Product Behavior | Changed "SQL Server 2025 CTP 2.1" to "SQL Server 2025" in the product applicability list. | Major |
+| [2.2.5.5.7.2](#Section_2.2.5.5.7.2) Layout Version | Clarified that writers of vector data must use the lowest Layout Version that supports the Dimension Type to preserve backward compatibility. | Major |
+| [2.2.5.5.7.3](#Section_2.2.5.5.7.3) Number of Dimensions | Clarified the Number of Dimensions definition by specifying vector element counts, the default float32 type, and support for float16 vectors in Layout Version 0x01. | Major |
+| [2.2.5.5.7.3.1](#Section_2.2.5.5.7.3.1) Implementation Note | Clarified the implementation note to state that the server limits vectors to 8000 bytes and supports maximum dimensions of 1,998 for 32‑bit single‑precision floats and 3,996 for 16‑bit half‑precision floats. | Major |
+| [2.2.5.5.7.4](#Section_2.2.5.5.7.4) Dimension Type | Added support for a new Dimension Type (0x01) that specifies half‑precision floating‑point values following the 16‑bit IEEE 754 binary specification. | Major |
+| [2.2.6.4](#Section_2.2.6.4) LOGIN7 | In the FeatureExt table, clarified the VECTORSUPPORT feature by enumerating supported VECTORSUPPORT_VERSION values. | Major |
+| [2.2.7.11](#Section_2.2.7.11) FEATUREEXTACK | Clarified the VECTORSUPPORT FEATUREEXTACK by defining a VECTORSUPPORT_VERSION field in the FeatureAckData and removing the requirement to explicitly indicate whether the server supports the vector datatype. | Major |
 
 <a id="revision-history"></a>
 
@@ -14134,3 +14150,6 @@ The changes made to this document are listed in the following table. For more in
 | 11/19/2024 | 37.0 | Major | Significantly changed the technical content. |
 | 8/29/2025 | 38.0 | Major | Significantly changed the technical content. |
 | 10/31/2025 | 39.0 | Major | Significantly changed the technical content. |
+| 2/23/2026 | 40.0 | Major | Significantly changed the technical content. |
+| 3/30/2026 | 41.0 | Major | Significantly changed the technical content. |
+| 6/17/2026 | 42.0 | Major | Significantly changed the technical content. |

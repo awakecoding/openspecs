@@ -308,7 +308,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 8/11/2025.
+Last updated: 5/11/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -385,6 +385,10 @@ We conduct frequent surveys of the normative references to assure their continue
 
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
+
+[MSKB-5089570] Microsoft Corporation, "May 26, 2026—KB5089570", May 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5089570](https://go.microsoft.com/fwlink/?linkid=2363007)
+
+[MSKB-5089573] Microsoft Corporation, "May 26, 2026—KB5089573", May 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5089573](https://go.microsoft.com/fwlink/?linkid=2362413)
 
 [SAYOOD] Sayood, K., "Lossless Compression Handbook, First Edition", Academic Press, August 2002, ISBN: 0126208611.
 
@@ -503,7 +507,7 @@ The Remote Desktop Protocol: Graphics Pipeline Extension is applicable in scenar
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-Capability exchange using the **RDPGFX_CAPS_ADVERTISE_PDU** (section [2.2.2.18](#Section_2.2.2.18)) and **RDPGFX_CAPS_CONFIRM_PDU** (section [2.2.2.19](#Section_2.2.2.19)) messages takes place before any graphics messages flow on the wire. The client advertises supported capability sets from section [2.2.3](#Section_2.2.3) in an **RDPGFX_CAPS_ADVERTISE_PDU** message. In response, the server selects one of these sets and then sends an **RDPGFX_CAPS_CONFIRM_PDU** message to the client containing the selected set.
+Capability exchange using the **RDPGFX_CAPS_ADVERTISE_PDU** (section [2.2.2.18](#Section_2.2.2.18)) and **RDPGFX_CAPS_CONFIRM_PDU** (section [2.2.2.19](#Section_2.2.2.19)) messages takes place before any graphics messages flow on the wire. The client advertises supported capability sets from section [2.2.3](#Section_2.2.3) in an **RDPGFX_CAPS_ADVERTISE_PDU** message. In response, the server selects one of the supported sets and then sends an **RDPGFX_CAPS_CONFIRM_PDU** message to the client containing the selected set.
 
 Implementers of the Remote Desktop Protocol: Graphics Pipeline Extension have to support the ClearCodec codec as described in sections [2.2.4.1](#Section_2.2.4.1) and [3.3.8.1](#Section_3.3.8.1). Usage of the RemoteFX Codec ([MS-RDPRFX](../MS-RDPRFX/MS-RDPRFX.md) sections 2.2.2 and 3.1.8) and the RemoteFX Progressive Codec (sections [2.2.4.2](#Section_2.2.4.2), [3.1.8.1](#Section_3.1.8.1), [3.2.8.1](#Section_3.2.8.1), and 3.3.8.1) is based on the flags exchanged in the **RDPGFX_CAPSET_VERSION8**, **RDPGFX_CAPSET_VERSION81**, **RDPGFX_CAPSET_VERSION10**, **RDPGFX_CAPSET_VERSION102**, **RDPGFX_CAPSET_VERSION103**, **RDPGFX_CAPSET_VERSION104**, **RDPGFX_CAPSET_VERSION105, RDPGFX_CAPSET_VERSION106,** or **RDPGFX_CAPSET_VERSION107** structure (sections [2.2.3.1](#Section_2.2.3.1), [2.2.3.2](#Section_2.2.3.2), [2.2.3.3](#Section_2.2.3.3), [2.2.3.5](#Section_2.2.3.5), [2.2.3.6](#Section_2.2.3.6), [2.2.3.7](#Section_2.2.3.7), [2.2.3.8](#Section_2.2.3.8), [2.2.3.9](#Section_2.2.3.9), and [2.2.3.10](#Section_2.2.3.10) respectively). Usage of the MPEG-4 AVC/H.264 Codec in YUV420p, YUV444, or YUV444v2 mode (sections [2.2.4.3](#Section_2.2.4.3), [2.2.4.4](#Section_2.2.4.4), [2.2.4.5](#Section_2.2.4.5), [2.2.4.6](#Section_2.2.4.6), and [3.3.8.3](#Section_3.3.8.3)) is based on the flags exchanged in the **RDPGFX_CAPSET_VERSION81**, **RDPGFX_CAPSET_VERSION10**, **RDPGFX_CAPSET_VERSION102**, **RDPGFX_CAPSET_VERSION103**, **RDPGFX_CAPSET_VERSION104**, **RDPGFX_CAPSET_VERSION105**, **RDPGFX_CAPSET_VERSION106**, or **RDPGFX_CAPSET_VERSION107** structure (sections 2.2.3.2, 2.2.3.3, 2.2.3.5, 2.2.3.6, 2.2.3.7, 2.2.3.8, 2.2.3.9, and 2.2.3.10 respectively). Usage of the MPEG-4 AVC/H.264 Codec in YUV444v2 mode is implied by the **RDPGFX_CAPSET_VERSION101** structure (section [2.2.3.4](#Section_2.2.3.4)). Only the flags of the selected capability set that are sent in the **RDPGFX_CAPS_CONFIRM_PDU** (section 2.2.2.19) message apply to the connection. All of the capability set structures are encapsulated in the **RDPGFX_CAPS_ADVERTISE_PDU** (section 2.2.2.18) and **RDPGFX_CAPS_CONFIRM_PDU** (section 2.2.2.19) messages. Furthermore, any data exchanged in the Bitmap Codecs Capability Set ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.2.10) does not influence the choice of codecs used by the Remote Desktop Protocol: Graphics Pipeline Extension.
 
@@ -3045,7 +3049,11 @@ If the **RDPGFX_CAPS_ADVERTISE_PDU** is received again during the session after 
 <a id="Section_3.2.5.19"></a>
 #### 3.2.5.19 Sending an RDPGFX_CAPS_CONFIRM_PDU message
 
-The structure and fields of the **RDPGFX_CAPS_CONFIRM_PDU** message are specified in section [2.2.2.19](#Section_2.2.2.19). The command fields MUST be populated in accordance with this description. The server MUST populate the **capsSet** field with a single instance of a correctly initialized capability set structure (section [2.2.3](#Section_2.2.3)).
+The structure and fields of the **RDPGFX_CAPS_CONFIRM_PDU** message are specified in section [2.2.2.19](#Section_2.2.2.19). The command fields MUST be populated in accordance with this description.
+
+If none of the capability sets received in the **capsSets** field of the **RDPGFX_CAPS_ADVERTISE_PDU** message are supported by the server or none of the capability sets received are specified in section [2.2.3](#Section_2.2.3), the server SHOULD<5> close the dynamic virtual channel.
+
+Otherwise, the server MUST populate the **capsSet** field with the highest supported capability set from the **RDPGFX_CAPS_ADVERTISE_PDU** message.
 
 <a id="Section_3.2.5.20"></a>
 #### 3.2.5.20 Sending an RDPGFX_MAP_SURFACE_TO_WINDOW_PDU message
@@ -3465,7 +3473,9 @@ The structure and fields of the **RDPGFX_CAPS_ADVERTISE_PDU** message are specif
 <a id="Section_3.3.5.19"></a>
 #### 3.3.5.19 Processing an RDPGFX_CAPS_CONFIRM_PDU message
 
-The structure and fields of the **RDPGFX_CAPS_CONFIRM_PDU** message are specified in section [2.2.2.19](#Section_2.2.2.19). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The graphics capabilities specified by the server SHOULD be stored in the **Confirmed Graphics Capabilities** (section [3.3.1.14](#Section_3.3.1.14)) ADM element and MUST be adhered to by the client.
+The structure and fields of the **RDPGFX_CAPS_CONFIRM_PDU** message are specified in section [2.2.2.19](#Section_2.2.2.19). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1).
+
+If the capability set received in **capsSet** field of the **RDPGFX_CAPS_CONFIRM_PDU** message is not specified in section [2.2.3](#Section_2.2.3), the client MUST ignore the capability set. Otherwise, the graphics capabilities specified by the server SHOULD be stored in the **Confirmed Graphics Capabilities** (section [3.3.1.14](#Section_3.3.1.14)) ADM element and MUST be adhered to by the client.
 
 If the capability set received in the **RDPGFX_CAPS_CONFIRM_PDU** message is **RDPGFX_CAPSET_VERSION103**, **RDPGFX_CAPSET_VERSION104**, **RDPGFX_CAPSET_VERSION105**, **RDPGFX_CAPSET_VERSION106**, or **RDPGFX_CAPSET_VERSION107** then the client can resend the **RDPGFX_CAPS_ADVERTISE_PDU** message during the connection to reset the protocol. The client MUST reset the channel state after sending the **RDPGFX_CAPS_ADVERTISE_PDU** message and MUST ignore any messages sent by the server until **RDPGFX_CAPS_CONFIRM_PDU** message is received.
 
@@ -5449,7 +5459,6 @@ The information in this specification is applicable to the following Microsoft p
 - Windows Server 2012 R2 operating system
 - Windows 10 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows 11 operating system
@@ -5465,6 +5474,10 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 <3> Section 2.2.4.2.1.5.4: In some scenarios Microsoft RDP 8.0 servers set the value of the **tailLen** field to 0x0008.
 
 <4> Section 2.2.4.2.1.5.4: In some scenarios Microsoft RDP 8.0 servers initialize the **tailData** field with the following sequence of eight bytes: 0x4C 0x41 0x01 0x00 0xFF 0xFF 0x00 0x10. This data has no effect on the final image rendered by the client-side decoder. However, if any other non-zero sequence of bytes is encountered by the Microsoft RDP 8.0 decoder, it will fail to decode the **RFX_PROGRESSIVE_TILE_FIRST** structure.
+
+<5> Section 3.2.5.19: If the version of the received capability set is 0x000B0101 or 0x000B0200, Windows 11, version 24H2 operating system and Windows 11, version 25H2 operating system without [[MSKB-5089573]](https://go.microsoft.com/fwlink/?linkid=2362413) and Windows Server 2025 reflect the received capability set data in the **RDPGFX_CAPS_CONFIRM_PDU** message, but the session behavior will be the same as for **RDPGFX_CAPSET_VERSION107**.
+
+If the version of the received capability set is 0x000B0101, 0x000B0200, or 0x000B0300, Windows 11, version 26H1 operating system without [[MSKB-5089570]](https://go.microsoft.com/fwlink/?linkid=2363007) reflects the received capability set data in the **RDPGFX_CAPS_CONFIRM_PDU** message, but the session behavior will be the same as for **RDPGFX_CAPSET_VERSION107**.
 
 <a id="Section_7"></a>
 # 7 Change Tracking
@@ -5483,7 +5496,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.2.8.1.4](#Section_3.2.8.1.4) Sub-Band Diffing | 30422 : Updated processing of Sub-Band Diffing. | Minor |
+| [1.7](#Section_1.7) Versioning and Capability Negotiation | Corrected phrasing to “the supported sets” for clarity and accuracy | Minor |
+| [3.2.5.19](#Section_3.2.5.19) Sending an RDPGFX_CAPS_CONFIRM_PDU message | Added footnote with informative references (MSKB-5089573, MSKB-5089570) and included section links | Major |
+| [3.3.5.19](#Section_3.3.5.19) Processing an RDPGFX_CAPS_CONFIRM_PDU message | Updated normative behavior for handling capability sets in the RDPEGFX_CAPS_CONFIRM_PDU message | Major |
 
 <a id="revision-history"></a>
 
@@ -5517,3 +5532,4 @@ The changes made to this document are listed in the following table. For more in
 | 9/20/2023 | 17.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 18.0 | Major | Significantly changed the technical content. |
 | 8/11/2025 | 18.1 | Minor | Clarified the meaning of the technical content. |
+| 5/11/2026 | 19.0 | Major | Significantly changed the technical content. |

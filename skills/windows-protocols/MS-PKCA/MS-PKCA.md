@@ -85,7 +85,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/26/2026.
+Last updated: 3/9/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -830,6 +830,8 @@ Windows 10 through Windows 11, version 25H2 operating system and Windows Server 
 
 <20> Section 3.1.5.2: Windows 2000 and Windows Server 2003 KDCs respond with PA-PK-AS-REP_OLD.
 
+Windows Server 2025 does not support Public Key Encryption ([RFC4556] section 3.2.3.2) and returns KRB_ERROR_GENERIC.
+
 <21> Section 3.1.5.2.1: SAN **DNSName** field is not supported by Windows 2000, Windows Server 2003, Windows Server 2008 and Windows Server 2008 R2.
 
 <22> Section 3.1.5.2.1.3: Available in Windows Server 2022 and Windows Server 2025 after installation of [[MSKB-5060525]](https://go.microsoft.com/fwlink/?linkid=2321948) or [[MSKB-5060841]](https://go.microsoft.com/fwlink/?linkid=2321747).
@@ -865,7 +867,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.5.1](#Section_3.1.5.1) Client | 30552 : Added Windows client behavior when Credential Guard is enabled and the nonce field is not set. | Major |
+| [3.1.5.2](#Section_3.1.5.2) KDC | 32101 : Updated Windows Behavior Note with Windows Server 2025 processing for KDC that receives PA-PK-AS-REQ. | Major |
 
 <a id="revision-history"></a>
 
@@ -938,3 +940,4 @@ The changes made to this document are listed in the following table. For more in
 | 6/3/2025 | 22.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 22.1 | Minor | Clarified the meaning of the technical content. |
 | 1/26/2026 | 23.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 24.0 | Major | Significantly changed the technical content. |

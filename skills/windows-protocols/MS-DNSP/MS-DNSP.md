@@ -407,7 +407,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/26/2026.
+Last updated: 3/9/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -501,7 +501,7 @@ This document uses the following terms:
 **DNS Operations**: DNS Query Processing, DNS Zone Transfer, DNS Recursive Query, and DNS Update are collectively called [**DNS Operations**](#gt_dns-operations).
 
 <a id="gt_dns-over-https-doh"></a>
-**DNS over HTTPS (DoH)**: A protocol for performing (DNS) resolution via the HTTPS protocol, as specified in [RFC 8484]. DoH encrypts DNS queries and responses to enhance privacy and security by preventing eavesdropping and manipulation of DNS data by intermediaries.
+**DNS over HTTPS (DoH)**: A protocol for performing (DNS) resolution via the Hypertext Transfer Protocol Secure (HTTPS) protocol, as specified in [[RFC8484]](https://go.microsoft.com/fwlink/?linkid=2347506). DoH encrypts [**Domain Name System (DNS)**](#gt_domain-name-system-dns) queries and responses to enhance privacy and security by preventing eavesdropping and manipulation of [**Domain Name System (DNS)**](#gt_domain-name-system-dns) data by intermediaries.
 
 <a id="gt_dns-policy"></a>
 **DNS policy**: A group of processing rules, based on which a [**DNS Operation**](#gt_dns-operations) is controlled and allowed or denied access. A [**DNS Policy**](#gt_dns-policy) can be at a server level or at a specific [**zone**](#gt_zone). A DNS Policy is specific to a [**DNS Operation**](#gt_dns-operations).
@@ -726,7 +726,7 @@ This document uses the following terms:
 **universally unique identifier (UUID)**: A 128-bit value. UUIDs can be used for multiple purposes, from tagging objects with an extremely short lifetime, to reliably identifying very persistent objects in cross-process communication such as client and server interfaces, manager entry-point vectors, and [**RPC**](#gt_remote-procedure-call-rpc) objects. UUIDs are highly likely to be unique. UUIDs are also known as [**globally unique identifiers (GUIDs)**](#gt_globally-unique-identifier-guid) and these terms are used interchangeably in the Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the UUID. Specifically, the use of this term does not imply or require that the algorithms described in [RFC4122] or [C706] has to be used for generating the UUID.
 
 <a id="gt_uri-templates"></a>
-**URI Template(s)**: A compact syntax for expressing Uniform Resource Identifiers (URIs) through variable substitution, as defined in [RFC 6570]. URI Templates allow flexible construction of URIs by replacing template variables with values.
+**URI Template(s)**: A compact syntax for expressing Uniform Resource Identifiers (URIs) through variable substitution, as defined in [[RFC6570]](https://go.microsoft.com/fwlink/?linkid=2347603). URI Templates allow flexible construction of URIs by replacing template variables with values.
 
 <a id="gt_user-datagram-protocol-udp"></a>
 **User Datagram Protocol (UDP)**: The connectionless protocol within TCP/IP that corresponds to the transport layer in the ISO/OSI reference model.
@@ -3567,9 +3567,10 @@ The **DNS_RPC_ENCRYPTION_CONFIG** structure specifies the configuration for [**D
 
 **pwszUriTemplate**: If dwDnsEncryptionType is set to DnsEncryptionDoH, this field MUST contain a null-terminated Unicode string containing one or more [**URI Template(s)**](#gt_uri-templates). Maximum length of this field MUST be 1190 characters. This field MUST support up to three URI templates separated by the "|" character. Each URI template MUST conform to [[RFC8484]](https://go.microsoft.com/fwlink/?linkid=2347506) and [[RFC6570]](https://go.microsoft.com/fwlink/?linkid=2347603) and MUST use the HTTPS scheme. For example:
 
-[https://dns.contoso.com:443/dns-query|https://backup.contoso.com:443/dns-query](https://dns.contoso.com/dns-query%7Chttps://backup.contoso.com:443/dns-query)
+https://dns.contoso.com:443/dns-query|https://backup.contoso.com:443/dns-query
 
-- Otherwise, this field SHOULD be set to NULL.[https://dns.contoso.com/dns-query%7Chttps:/backup.contoso.com:443/dns-query](https://dns.contoso.com/dns-query%7Chttps:/backup.contoso.com:443/dns-query)
+Otherwise, this field SHOULD be set to NULL.[https://dns.contoso.com/dns-query%7Chttps:/backup.contoso.com:443/dns-query](https://dns.contoso.com/dns-query%7Chttps:/backup.contoso.com:443/dns-query)
+
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Zone Messages
 
@@ -10832,21 +10833,23 @@ If pszOperation is set to "SetEncryptionConfig", the server MUST do the followin
 - If **dwTypeId** is **DNSSRV_TYPEID_ENCRYPTION_CONFIG,** dwDnsEncryptionType is set to DnsEncryptionDoH and *pwszUriTemplate* parameter in **DNS_RPC_ENCRYPTION_CONFIG** does not conform with any of the following, the server MUST fail the request with ERROR_INVALID_PARAMETER.
 - pwszUriTemplate is NULL or empty string or if any individual URI template does not conform to [[RFC8484]](https://go.microsoft.com/fwlink/?linkid=2347506).
 - pwszUriTemplate exceeds the maximum length specified in section [2.2.4.2.3](#Section_2.2.4.2.3).
+- pwszUriTemplate MUST contain between one and three non-empty URI template entries separated by the ‘|’ character.
 - For each template the server MUST further verify,
-- The template does not contain URI Template variable expansion syntax as defined in [[RFC6570]](https://go.microsoft.com/fwlink/?linkid=2347603).
-- The string MUST contain between one and three non-empty URI template entries separated by the ‘|’ character.
+- The URI template does not contain URI Template variable expansion syntax as defined in [[RFC6570]](https://go.microsoft.com/fwlink/?linkid=2347603).
 - The host name component of each URI template MUST NOT exceed 255 characters.
 - IPv4 addresses and bracketed IPv6 literal addresses MUST be accepted as the host component of the URI template.
 - Each URI template MUST use the **“**https**”** scheme.
-- If a port value is present, it MUST be valid.
+- If a port value is specified in the URI template, the port value MUST be a decimal integer in the range 1 through 65535.
 - Each URI template MUST NOT contain either a query or fragment component.
 - Duplicate URI template entries MUST be treated as a single entry. The presence of duplicate entries MUST NOT cause the operation to fail.
-- If **dwTypeId** is **DNSSRV_TYPEID_ENCRYPTION_CONFIG,** dwDnsEncryptionType is set to DnsEncryptionNone, the server MUST ignore pwszUriTemplate field.
 - If **dwTypeId** is **DNSSRV_TYPEID_ENCRYPTION_CONFIG**, the server MUST ignore *pszZone* parameter.
 - If **dwTypeId** is **DNSSRV_TYPEID_ENCRYPTION_CONFIG**, the server MUST perform the following:
 - **EnableEncryptedDNSFeatures** MUST be set to dwDnsEncryptionType.
 - If dwDnsEncryptionType is set to DnsEncryptionDoH (0x00000001), DNS over HTTPS MUST be enabled on the server using the URI templates derived from pwszUriTemplate. **DoHUrlTemplates** MUST be set to *pwszUriTemplate*.
-- If dwDnsEncryptionType is set to DnsEncryptionNone (0x00000000), DNS over HTTPS MUST be disabled and **DOHUrlTemplates** MUST be set to empty.
+- If pwszUriTemplate is NULL or an empty string, the server will use its own host name on port 443 with /dns-query as the default URI template. For example,
+https://<DNSServerName>:443/dns-query
+
+- If dwDnsEncryptionType is set to DnsEncryptionNone (0x00000000), the server MUST ignore pwszUriTemplate parameter. DNS over HTTPS MUST be disabled and **DOHUrlTemplates** MUST be set to empty.
 - Changes to the DNS encryption configuration are persisted immediately but do not take effect until the DNS Server is restarted.
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 R_DnssrvQuery2 (Opnum 6)
@@ -16873,19 +16876,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [1.1](#Section_1.1) Glossary | Added new glossary entries defining DNS over HTTPS (DoH) and URI templates. | Major |
-| [1.2.2](#Section_1.2.2) Informative References | Added new Normative Reference [RFC8484] and Informative Reference [RFC6570]. | Major |
-| [2.2.1.1.1](#Section_2.2.1.1.1) DNS_RPC_TYPEID | Added definition of DNSSRV_TYPEID_ENCRYPTION_CONFIG enumeration. | Major |
-| 2.2.1.1.1 DNS_RPC_TYPEID | Added the Product Behaviour Note for DNSSRV_TYPEID_ENCRYPTION_CONFIG. | Major |
-| [2.2.1.2.6](#Section_2.2.1.2.6) DNSSRV_RPC_UNION | Added definition of pEncryptionConfig pointer. | Major |
-| [2.2.4.1.3](#Section_2.2.4.1.3) DNS_ENCRYPTION_TYPE | Added a new section for DNS_ENCRYPTION_TYPE. | Major |
-| [2.2.4.2.3](#Section_2.2.4.2.3) DNS_RPC_ENCRYPTION_CONFIG | Added a new section for DNS_RPC_ENCRYPTION_CONFIG. | Major |
-| [3.1.1.1.1](#Section_3.1.1.1.1) DNS Server Integer Properties | Added definition for EnableEncryptedDNSFeatures. | Major |
-| [3.1.1.1.3](#Section_3.1.1.1.3) DNS Server String Properties | Added definition for DoHUrlTemplates. | Major |
-| [3.1.4](#Section_3.1.4) Message Processing Events and Sequencing Rules | Described pszOperation for different Dnssrv queries.. | Major |
-| [4.24](#Section_4.24) Setting DOH Encryption Configuration Settings | Added a new section for Setting DOH Encryption Configuration Settings. | Major |
-| [4.25](#Section_4.25) Querying DOH Encryption Configuration Settings | Added a new section for Querying DOH Encryption Configuration Settings. | Major |
-| [6](#Section_6) Appendix A: Full IDL | Added the DNSSRV_TYPEID_ENCRYPTION_CONFIG definition to the IDL | Major |
+| [3.1.4.6](#Section_3.1.4.6) R_DnssrvOperation2 (Opnum 5) | 32146 : Described pszOperation for R_DnssrvOperation method. | Major |
+| [3.1.4.7](#Section_3.1.4.7) R_DnssrvQuery2 (Opnum 6) | 32146 : Described pszOperation for R_DnssrvQuery method. | Major |
 
 <a id="revision-history"></a>
 
@@ -16945,3 +16937,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2021 | 37.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 38.0 | Major | Significantly changed the technical content. |
 | 1/26/2026 | 39.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 40.0 | Major | Significantly changed the technical content. |

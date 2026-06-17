@@ -858,6 +858,7 @@ Table of Contents
           - [6.1.1.5.4.1 Operations Container](#Section_6.1.1.5.4.1)
           - [6.1.1.5.4.2 Windows2003Update Container](#Section_6.1.1.5.4.2)
           - [6.1.1.5.4.3 ActiveDirectoryUpdate Container](#Section_6.1.1.5.4.3)
+          - [6.1.1.5.4.4 SOA-Policies Container](#Section_6.1.1.5.4.4)
       - [6.1.1.6 Well-Known Domain-Relative Security Principals](#Section_6.1.1.6)
         - [6.1.1.6.1 Administrator](#Section_6.1.1.6.1)
         - [6.1.1.6.2 Guest](#Section_6.1.1.6.2)
@@ -1067,7 +1068,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 11/12/2025.
+Last updated: 5/25/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -2139,6 +2140,8 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSFT-CVE-2025-27469] Microsoft Corporation, "Windows Lightweight Directory Access Protocol (LDAP) Denial of Service Vulnerability", [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-27469](https://go.microsoft.com/fwlink/?linkid=2313302)
 
+[MSFT-ENTRA] Microsoft Corporation, "What is Microsoft Entra?", [https://learn.microsoft.com/en-us/entra/fundamentals/what-is-entra](https://go.microsoft.com/fwlink/?linkid=2353754)
+
 [MSKB-3070083] Microsoft Corporation, "Domain join against a Windows Server 2012 R2-based domain controller fails if SPN is not unique in the forest", [https://support.microsoft.com/en-us/kb/3070083](https://go.microsoft.com/fwlink/?LinkId=619010)
 
 [MSKB-5011543] Microsoft Corporation, "March 22, 2022—KB5011543 (OS Builds 19042.1620, 19043.1620, and 19044.1620) Preview", March 2022, [https://support.microsoft.com/en-us/topic/march-22-2022-kb5011543-os-builds-19042-1620-19043-1620-and-19044-1620-preview-4fe2d1c0-720f-47fe-9523-75339bc107a1](https://go.microsoft.com/fwlink/?linkid=2188923)
@@ -2168,6 +2171,18 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSKB-5026362] Microsoft Corporation, "May 2023 - KB5026362", May 2023, [https://support.microsoft.com/en-us/topic/may-9-2023-kb5026362-os-build-17763-4377-b0133287-05dd-4bc5-b1c3-5edaca650afd](https://go.microsoft.com/fwlink/?linkid=2233745)
 
 [MSKB-5026370] Microsoft Corporation, "May 2023 - KB5026370", May 2023, [https://support.microsoft.com/en-us/topic/may-9-2023-kb5026370-os-build-20348-1726-8c5dc605-d613-46ea-9232-1425cfc91d62](https://go.microsoft.com/fwlink/?linkid=2233744)
+
+[MSKB-5068966] Microsoft Corporation, "November 11, 2025—Hotpatch KB5068966", November 2025, [https://support.microsoft.com/en-us/topic/november-11-2025-hotpatch-kb5068966-os-build-26100-7092-e923cc54-3b4c-4df1-be42-92ae06d12984](https://go.microsoft.com/fwlink/?linkid=2352638)
+
+[MSKB-5078734] Microsoft Corporation, "March 10, 2026—KB5078734", March 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5078734](https://go.microsoft.com/fwlink/?linkid=2352631)
+
+[MSKB-5078752] Microsoft Corporation, "March 10, 2026—KB5078752", March 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5078752](https://go.microsoft.com/fwlink/?linkid=2352626)
+
+[MSKB-5078766] Microsoft Corporation, "March 10, 2026—KB5078766", March 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5078766](https://go.microsoft.com/fwlink/?linkid=2352721)
+
+[MSKB-5094125] Microsoft Corporation, "June 9, 2026—KB5094125", June 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5094125](https://go.microsoft.com/fwlink/?linkid=2364580)
+
+[MSKB-5094128] Microsoft Corporation, "June 9, 2026—KB5094128", June 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5094128](https://go.microsoft.com/fwlink/?linkid=2364762)
 
 [RFC1122] Braden, R., Ed., "Requirements for Internet Hosts -- Communication Layers", STD 3, RFC 1122, October 1989, [https://www.rfc-editor.org/rfc/rfc1122](https://go.microsoft.com/fwlink/?LinkId=112180)
 
@@ -8130,9 +8145,9 @@ dn:
 
 changetype: modify
 
-add: dumpDatabaseEx
+add: dumpDatabaseExtended
 
-dumpDatabase: 01:01:*:description sn
+dumpDatabaseExtended: 01:01:*:description sn
 
 -
 
@@ -8225,7 +8240,7 @@ If the LastLogonTimeStamp attribute is specified it is set to the current time o
 <a id="Section_3.1.1.3.3.45"></a>
 ###### 3.1.1.3.3.45 CheckAndFixDNReference
 
-An LDAP modify of the CheckAndFixDNReference attribute causes the DC to check or fix a DN reference pointing to a nonexistent object. Available on Windows Server 2019 and later.
+An LDAP modify of the CheckAndFixDNReference attribute causes the DC to check or fix a DN reference pointing to a nonexistent object.
 
 The type of modification can be add or replace. The value specified in the LDAP modify operation is the DN of an existing object, followed by a ':' character, followed by the DN attribute name to check or fix, followed by a ':' character, followed by number 0 or 1 to indicate the operation to perform.
 
@@ -8250,6 +8265,8 @@ CheckAndFixDNReference:CN=user1,DC=contoso,DC=com:lastKnownParent:0
 -
 
 If a DN reference pointing to a nonexistent object is found in the given attname values on the given DN object, an event will be logged to report that database corruption has been found. If the operation parameter is 0, no further operation will be performed. If the operation parameter is 1, the value of the bad DN reference will be removed from the object. The removal applies only to this DC. The removal is not replicated to any other DC.
+
+CheckAndFixDNReference attribute is supported in Windows Server 2019 with [[MSKB-5078752]](https://go.microsoft.com/fwlink/?linkid=2352626), Windows Server 2022 with [[MSKB-5078766]](https://go.microsoft.com/fwlink/?linkid=2352721), Windows Server 2022, 23H2 with [[MSKB-5078734]](https://go.microsoft.com/fwlink/?linkid=2352631), Windows Server 2025 with [[MSKB-5068966]](https://go.microsoft.com/fwlink/?linkid=2352638) and later.
 
 <a id="Section_3.1.1.3.4"></a>
 ##### 3.1.1.3.4 LDAP Extensions
@@ -9497,7 +9514,7 @@ Flags INTEGER
 
 }
 
-where **Flags** tells the server whether to apply the password history length constraint on password-set operations. If it is 0x1, then that constraint will be enforced. Otherwise, the constraint is not enforced.
+where **Flags** tells the server whether to apply the password history length and password age constraints on password-set operations. If it is 0x1, then both constraints will be enforced. Otherwise, both constraints are not enforced.
 
 <a id="Section_3.1.1.3.4.1.28"></a>
 LDAP_SERVER_POLICY_HINTS_DEPRECATED_OID
@@ -11918,11 +11935,17 @@ If the modify operation represents an Undelete operation, then additional securi
 
 If the msDS-AllowedToDelegateTo attribute is modified, then the requester MUST possess SE_ENABLE_DELEGATION_PRIVILEGE.
 
+If a user, group, contact, or person class object contains the msDS-ObjectSoa ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.408) attribute set, and its value matches a Source of Authority policy common name in the SOA-policies container, the SOA modify rules MUST be applied.
+
+- If the policy keyword is set to “Enforced”, only the SIDs listed in the keywords attribute of the SOA policy MAY perform an originating update on the object. The requester SID MUST be granted access in accordance with the access checks defined above.
+- If the policy keyword is set to “audit” or to an undefined value, the action MUST be logged, and originating updates MUST proceed subject to the other access check rules defined above.
 In [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), if a password value is being modified as a password change operation, then the requester needs to have the User-Change-Password control access right on the object being modified. A password change operation is defined as removing the old password value and adding the new password value, where the old password value matches the current password on the object.
 
 In AD LDS, if a password value is being modified as a password reset operation, then the requester needs to have the User-Force-Change-Password control access right on the object being modified. A password reset operation is defined as a replace operation on the password attribute.
 
 In AD LDS, if a password unexpire operation is being performed, then the requester needs to have the Unexpire-Password control access right on the object being modified. A password unexpire operation is defined as setting the pwdLastSet attribute to the value -1.
+
+**Note** SOA modify rules are disabled by default in Windows Server 2022 with [[MSKB-5094128]](https://go.microsoft.com/fwlink/?linkid=2364762) and Windows Server 2025 with [[MSKB-5094125]](https://go.microsoft.com/fwlink/?linkid=2364580).
 
 <a id="Section_3.1.1.5.3.1.1"></a>
 Validated Writes
@@ -19968,14 +19991,14 @@ The following table describes the characters of the dSHeuristics string.
 | 11 | fSpecifyGUIDOnAdd | If this character is "0", then the fSpecifyGUIDOnAdd heuristic is FALSE; otherwise, the fSpecifyGUIDOnAdd heuristic is TRUE. The fSpecifyGUIDOnAdd heuristic applies only to AD DS. AD LDS always treats this heuristic as if the character is "0"; that is, as if the fSpecifyGUIDOnAdd heuristic is FALSE. Section [3.1.1.5.2.2](#Section_3.1.1.5.2.2) specifies the effects of this heuristic. |
 | 12 | fDontStandardizeSDs | If this character is "0", then the fDontStandardizeSDs heuristic is FALSE; otherwise, the fDontStandardizeSDs heuristic is TRUE. Section [6.1.3](#Section_6.1.3) specifies the effects of this heuristic. |
 | 13 | fAllowPasswordOperationsOverNonSecureConnection | If this character is "0", then the fAllowPasswordOperationsOverNonSecureConnection heuristic is FALSE; otherwise, the fAllowPasswordOperationsOverNonSecureConnection heuristic is TRUE. The fAllowPasswordOperationsOverNonSecureConnection heuristic applies only to AD LDS. Sections [3.1.1.3.1.5.1](#Section_3.1.1.3.1.5.1), 3.1.1.5.2.2, and 3.1.1.5.3.2 specify the effects of this heuristic. |
-| 14 | fDontPropagateOnNoChangeUpdate | If this character is "0", then the fDontPropagateOnNoChangeUpdate heuristic is FALSE; otherwise, the fDontPropagateOnNoChangeUpdate heuristic is TRUE. If the fDontPropagateOnNoChangeUpdate heuristic is TRUE, when the nTSecurityDescriptor attribute of an object is set to a value that is bitwise identical to the current value, no work item is enqueued for the task that updates the [**security descriptors**](#gt_security-descriptor) on the children of a modified object in order to propagate inherited [**ACEs**](#gt_access-control-entry-ace) (section 6.1.3). If the fDontPropagateOnNoChangeUpdate heuristic is FALSE, a work item is always enqueued when the nTSecurityDescriptor attribute is modified. The fDontPropagateOnNoChangeUpdate heuristic applies to Windows Server 2008 and later. Windows 2000 Server operating system through Windows Server 2003 R2 operating system versions of Active Directory behave as if the fDontPropagateOnNoChangeUpdate heuristic is FALSE. |
+| 14 | fDontPropagateOnNoChangeUpdate | If this character is "0", then the fDontPropagateOnNoChangeUpdate heuristic is FALSE; otherwise, the fDontPropagateOnNoChangeUpdate heuristic is TRUE. If the fDontPropagateOnNoChangeUpdate heuristic is TRUE, when the nTSecurityDescriptor attribute of an object is set to a value that is bitwise identical to the current value, no work item is enqueued for the task that updates the [**security descriptors**](#gt_security-descriptor) on the children of a modified object in order to propagate inherited [**ACEs**](#gt_access-control-entry-ace) (section 6.1.3). If the fDontPropagateOnNoChangeUpdate heuristic is FALSE, a work item is always enqueued when the nTSecurityDescriptor attribute is modified. The fDontPropagateOnNoChangeUpdate heuristic applies to Windows Server 2003 operating system and later. The Windows 2000 Server operating system operating system version of Active Directory behave as if the fDontPropagateOnNoChangeUpdate heuristic is FALSE. |
 | 15 | fComputeANRStats | If this character is "0", then the fComputeANRStats heuristic is FALSE; otherwise, the fComputeANRStats heuristic is TRUE. The effects of the fComputeANRStats heuristic are outside the state model. If the fComputeANRStats heuristic is TRUE, ANR searches (section 3.1.1.3.1.3.4) are optimized using cardinality estimates like all other searches. |
 | 16 | dwAdminSDExMask | The valid values for this character are from the set "0"–"9" and "a"–"f". The dwAdminSDExMask heuristic equals the character interpreted as a hex digit and converted into a 4-bit value (that is, "1"=0x1, "f"=0xF). Section [3.1.1.6.1](#Section_3.1.1.6.1) specifies the effects of this heuristic. |
 | 17 | fKVNOEmuW2K | If this character is "0", then the fKVNOEmuW2K heuristic is FALSE; otherwise, the fKVNOEmuW2K heuristic is TRUE. Section [3.1.1.4.5.16](#Section_3.1.1.4.5.16) specifies the effects of this heuristic. |
-| 18 | fLDAPBypassUpperBoundsOnLimits | If this character is "0", then the fLDAPBypassUpperBoundsOnLimits heuristic is FALSE; otherwise, the fLDAPBypassUpperBoundsOnLimits heuristic is TRUE. If the fLDAPBypassUpperBoundsOnLimits heuristic is FALSE, [**DCs**](#gt_domain-controller-dc) impose implementation-dependent limits when interpreting values of the LDAP policies specified in section [3.1.1.3.4.6](#Section_3.1.1.3.4.6). If the configured policy value exceeds the limit, the DC ignores the policy value and instead uses the implementation-dependent limit. This heuristic applies to Windows Server 2008 and later. Windows 2000 Server through Windows Server 2003 R2 versions of Active Directory do not impose any such limits. |
+| 18 | fLDAPBypassUpperBoundsOnLimits | If this character is "0", then the fLDAPBypassUpperBoundsOnLimits heuristic is FALSE; otherwise, the fLDAPBypassUpperBoundsOnLimits heuristic is TRUE. If the fLDAPBypassUpperBoundsOnLimits heuristic is FALSE, [**DCs**](#gt_domain-controller-dc) impose implementation-dependent limits when interpreting values of the LDAP policies specified in section [3.1.1.3.4.6](#Section_3.1.1.3.4.6). If the configured policy value exceeds the limit, the DC ignores the policy value and instead uses the implementation-dependent limit. This heuristic applies to Windows Server 2008 and later. Windows 2000 Server through Windows Server 2003 R2 operating system versions of Active Directory do not impose any such limits. |
 | 19 | fDisableAutoIndexingOnSchemaUpdate | If this character is "0", then the fDisableAutoIndexingOnSchemaUpdate heuristic is FALSE; otherwise, the DisableAutoIndexingOnSchemaUpdate heuristic is TRUE. The effects of the fDisableAutoIndexingOnSchemaUpdate heuristic are outside the state model. If the fDisableAutoIndexingOnSchemaUpdate heuristic is FALSE, DCs can initiate index creation upon detection of index-related changes to the searchFlags attribute (see section [2.2.10](#Section_2.2.10)). If the fDisableAutoIndexingOnSchemaUpdate heuristic is TRUE, it is a hint to DCs that index creation can be delayed upon detection of index-related changes to the searchFlags attribute until either an administrator issues the schemaUpdateNow [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) modify operation, the DC is rebooted, or an implementation-dependent time period has elapsed. This heuristic applies to Windows Server 2012 operating system and later. Windows 2000 Server through Windows Server 2008 R2 do not implement support for this heuristic. |
 | 20 | twentiethChar | When setting dSHeuristics to a value that is 20 or more Unicode characters long, if the value of twentiethChar is not character "2", the server rejects the update. See section 3.1.1.5.3.2. |
-| 21 | DoNotVerifyUPNAndOrSPNUniqueness | In AD LDS, if this character is anything other than "0", AD LDS will not check values of userPrincipalName for uniqueness (section 3.1.1.5.2.2). In AD LDS, this heuristic applies to Windows Server 2003 operating system and later. The following applies to AD DS only: This heuristic value is converted to an unsigned integer and the result is interpreted as a bitwise OR. In AD DS, this heuristic applies to Windows Server 2012 R2 operating system with [[MSKB-3070083]](https://go.microsoft.com/fwlink/?LinkId=619010) installed. **Note**: In AD DS, the DoNotVerifyUPNAndOrSPNUniqueness heuristic also applies to the operating systems specified in [[MSFT-CVE-2021-42282]](https://go.microsoft.com/fwlink/?linkid=2179823), each with its related MSKB article download installed Bit 2 is supported with values between "0" and “7”. Otherwise, only Bit 0 and 1 are supported, meaning supported values are between “0” and “3”. The heuristic value is interpreted as follows, with Bit 0 as the lower bit: Bit 0: AD DS will not check values of userPrincipalName ([**UPN**](#gt_user-principal-name-upn)) for uniqueness if this bit is set (section [3.1.1.5.1.3](#Section_3.1.1.5.1.3)). Bit 1: AD DS will not check values of servicePrincipalName (SPN) for uniqueness if this bit is set (section 3.1.1.5.1.3). Bit 2: AD DS will not check values of [**SPN (1)**](#gt_service-principal-name-spn) for alias uniqueness if this bit is set (section 3.1.1.5.1.3). |
+| 21 | DoNotVerifyUPNAndOrSPNUniqueness | In AD LDS, if this character is anything other than "0", AD LDS will not check values of userPrincipalName for uniqueness (section 3.1.1.5.2.2). In AD LDS, this heuristic applies to Windows Server 2003 and later. The following applies to AD DS only: This heuristic value is converted to an unsigned integer and the result is interpreted as a bitwise OR. In AD DS, this heuristic applies to Windows Server 2012 R2 operating system with [[MSKB-3070083]](https://go.microsoft.com/fwlink/?LinkId=619010) installed. **Note**: In AD DS, the DoNotVerifyUPNAndOrSPNUniqueness heuristic also applies to the operating systems specified in [[MSFT-CVE-2021-42282]](https://go.microsoft.com/fwlink/?linkid=2179823), each with its related MSKB article download installed Bit 2 is supported with values between "0" and “7”. Otherwise, only Bit 0 and 1 are supported, meaning supported values are between “0” and “3”. The heuristic value is interpreted as follows, with Bit 0 as the lower bit: Bit 0: AD DS will not check values of userPrincipalName ([**UPN**](#gt_user-principal-name-upn)) for uniqueness if this bit is set (section [3.1.1.5.1.3](#Section_3.1.1.5.1.3)). Bit 1: AD DS will not check values of servicePrincipalName (SPN) for uniqueness if this bit is set (section 3.1.1.5.1.3). Bit 2: AD DS will not check values of [**SPN (1)**](#gt_service-principal-name-spn) for alias uniqueness if this bit is set (section 3.1.1.5.1.3). |
 | 22-23 | MinimumGetChangesRequestVersion | A hexadecimal value, ranging from "00" to "FF". This value controls the minimum version of the DRS_MSG_GETCHGREQ* structures the DC will send or accept. If the value is not set, the value "00" is used. When the value is "00", no restriction is enforced. See [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.5.1. |
 | 24-25 | MinimumGetChangesReplyVersion | A hex value, ranging from "00" to "FF". This value controls the minimum version of the DRS_MSG_GETCHGREPLY* structures the DC will send or accept. If the value is not set, the value "00" is used. When the value is "00", no restriction is enforced. See [MS-DRSR] section 4.1.10.5.20. |
 | 26 | fLoadV1AddressBooksOnlySetting | If this character is "0", then the fLoadV1AddressBooksOnlySetting heuristic is FALSE; otherwise, the fLoadV1AddressBooksOnlySetting heuristic is TRUE. If fLoadV1AddressBooksOnly is TRUE, then the hierarchy table used to support the MAPI address book is calculated using V1 attributes only, which means ignoring the V2 attributes "addressBookRoots2" and "templateRoots2". If fLoadV1AddressBooksOnly is FALSE, then those V2 attributes are used. This heuristic applies to Windows 10 v1903 operating system and later and Windows Server v1903 operating system and later. |
@@ -22184,6 +22207,19 @@ name: ActiveDirectoryUpdate
 objectClass: container
 
 revision: The major version of the domain revision.
+
+<a id="Section_6.1.1.5.4.4"></a>
+###### 6.1.1.5.4.4 SOA-Policies Container
+
+This container is used to store service connection point class objects that define source of authority policies for protecting accounts provisioned by other systems (for example, [[MSFT-ENTRA]](https://go.microsoft.com/fwlink/?linkid=2353754)) from being modified locally through originating updates to Active Directory (section [3.1.1.5.3.1](#Section_3.1.1.5.3.1)). This container is not necessary for Active Directory functioning.
+
+parent: System container
+
+name: SOA-Policies
+
+objectClass: container
+
+isCriticalSystemObject: True
 
 <a id="Section_6.1.1.6"></a>
 #### 6.1.1.6 Well-Known Domain-Relative Security Principals
@@ -28888,15 +28924,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3](#Section_3) Details | 30594 : Added Windows Server 2025 to table. | Major |
-| [3.1.1.3.2](#Section_3.1.1.3.2) rootDSE Attributes | 30594 : Added Windows Server 2025 to table. | Major |
-| [3.1.1.3.3](#Section_3.1.1.3.3) rootDSE Modify Operations | 30594 : Added Windows Server 2025 to table. | Major |
-| [3.1.1.9](#Section_3.1.1.9) Optional Features | 30594 : Completed table entries for Windows Server 2025. | Major |
-| [5.1.3.3.1](#Section_5.1.3.3.1) Null vs. Empty DACLs | 30569 : Added additional BlockOwnerImplicitRights value used by Windows 11, version 26H1. | Major |
-| [6.1.1.2.1.1.4](#Section_6.1.1.2.1.1.4) Domain crossRef Object | 30564 : Clarified that trustParent is only filled in when there is a parent-child trust. Added a description of rootTrust. | Major |
-| [6.1.1.2.4.1.2](#Section_6.1.1.2.4.1.2) dSHeuristics | 30569 : Added values used by Windows 11, version 26H1. | Major |
-| [6.1.3.4](#Section_6.1.3.4) Blocking Implicit Owner Rights | 30569 : Added values and rules used by Windows 11, version 26H1. | Major |
-| [6.1.6.7.9](#Section_6.1.6.7.9) trustAttributes | 30565 : Removed 0x00000100 and 0x00000800 from the list of reserved values. They are no longer reserved. Added TRUST_ATTRIBUTE_TRUST_USES_AES_KEYS to the list of trust attributes. | Major |
+| [3.1.1.5.3.1](#Section_3.1.1.5.3.1) Security Considerations | Added SOA modify rules and disabled-by-default behavior for applicable Windows Server versions. | Major |
+| [6.1.1.5.4.4](#Section_6.1.1.5.4.4) SOA-Policies Container | Added a new section to define the “SOA-Policies Container”. | Major |
 
 <a id="revision-history"></a>
 
@@ -28976,3 +29005,7 @@ The changes made to this document are listed in the following table. For more in
 | 5/19/2025 | 62.0 | Major | Significantly changed the technical content. |
 | 9/9/2025 | 63.0 | Major | Significantly changed the technical content. |
 | 11/12/2025 | 64.0 | Major | Significantly changed the technical content. |
+| 2/23/2026 | 65.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 66.0 | Major | Significantly changed the technical content. |
+| 4/13/2026 | 67.0 | Major | Significantly changed the technical content. |
+| 5/25/2026 | 68.0 | Major | Significantly changed the technical content. |

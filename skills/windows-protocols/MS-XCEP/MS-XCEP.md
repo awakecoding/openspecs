@@ -124,7 +124,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 3/9/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -510,7 +510,7 @@ The <GetPolicies> element contains the client request.
 
 **xcep:client:** The <xcep:client> element is an instance of the [Client](#Section_3.1.4.1.3.9) object as defined in section 3.1.4.1.3.9. The <xcep:client> element contains information about the caller including the caller's preferred language, and the date and time of last policy retrieval. If the <xcep:client> element is absent, is specified as nil, or has no value, the server MUST respond with a [**SOAP fault**](#gt_soap-fault).
 
-**xcep:requestFilter:** The <xcep:requestFilter> element is an instance of the [RequestFilter](#Section_3.1.4.1.3.22) object as defined in section 3.1.4.1.3.22. The <xcep:requestFilter> element specified in the request is used to constrain the policy request to specific policies. If the <xcep:requestFilter> element is empty or specified as nil, the server MUST NOT apply any filters to the response.
+**xcep:requestFilter:** The <xcep:requestFilter> element is an instance of the [RequestFilter](#Section_3.1.4.1.3.22) object as defined in section 3.1.4.1.3.22. The <xcep:requestFilter> element specified in the request is used to constrain the policy request to specific policies.
 
 <a id="Section_3.1.4.1.2.2"></a>
 ###### 3.1.4.1.2.2 GetPoliciesResponse
@@ -1278,12 +1278,24 @@ minOccurs="0" maxOccurs="unbounded" />
 
 </xs:complexType>
 
-**policyOIDs:** An instance of a [FilterOIDCollection](#Section_3.1.4.1.3.14) object as defined in section 3.1.4.1.3.14. If the <policyOIDs> element is nil, the server MUST NOT apply an [**OID**](#gt_object-identifier-oid) filter to the policies returned in the GetPoliciesResponse message.
+**policyOIDs:** An instance of a [FilterOIDCollection](#Section_3.1.4.1.3.14) object as defined in section 3.1.4.1.3.14. If the <policyOIDs> element is missing or specified as nil or empty, the server MUST NOT apply an [**OID**](#gt_object-identifier-oid) filter to the policies returned in the GetPoliciesResponse message.
 
 **clientVersion:** The server SHOULD only return **CertificateEnrollmentPolicy** objects whose bitwise AND of the <privateKeyFlags> element of the <attributes> element with 0x0F000000 is smaller than or equal to 0x0Z000000, where Z denotes the value of the **clientVersion**.<2>
 
-**serverVersion:** The server SHOULD only return the **CertificateEnrollmentPolicy** objects whose bitwise AND of the <privateKeyFlags> element of the <attributes> element with 0x000F0000 is smaller than or equal to 0x000Y0000, where Y denotes the value of the **serverVersion**.<3>
+The value of Z MUST be reset based on the following rules:
 
+- If the **RequestFilter** is not specified, Z is set to 3.
+- If the element is missing or specified as nil, Z is set to 3.
+- If the element is specified with a value of 0, Z is set to the server's maximum supported client version.<3>
+- If the element is specified with a value greater than the server's maximum supported client version, Z is capped to the server's maximum supported client version.
+**serverVersion:** The server SHOULD only return the **CertificateEnrollmentPolicy** objects whose bitwise AND of the <privateKeyFlags> element of the <attributes> element with 0x000F0000 is smaller than or equal to 0x000Y0000, where Y denotes the value of the **serverVersion**.<4>
+
+The value of Y MUST be reset based on the following rules:
+
+- If the **RequestFilter** is not specified, Y is set to the server's maximum supported CA version.<5>
+- If the element is missing or specified as nil, Y is set to 3.
+- If the element is specified with a value of 0, Y is set to the server's maximum supported CA version.
+- If the element is specified with a value greater than the server's maximum supported CA version, Y is capped to the server's maximum supported CA version.
 **##any:** This element provides a vendor-extensible point. Additional elements MAY be included as part of a RequestFilter object instance. Additional elements MAY be ignored by a server.
 
 <a id="Section_3.1.4.1.3.23"></a>
@@ -1325,7 +1337,7 @@ minOccurs="0" maxOccurs="unbounded" />
 
 **policyFriendlyName:** A human readable friendly name for the certificate enrollment policy.
 
-**nextUpdateHours:** An integer representing the number of hours that the server recommends the client wait before submitting another [GetPolicies](#Section_3.1.4.1.2.1) message. If the <nextUpdateHours> element is present and not nil, the <nextUpdateHours> element value MUST be a positive nonzero integer.<4>
+**nextUpdateHours:** An integer representing the number of hours that the server recommends the client wait before submitting another [GetPolicies](#Section_3.1.4.1.2.1) message. If the <nextUpdateHours> element is present and not nil, the <nextUpdateHours> element value MUST be a positive nonzero integer.<6>
 
 **policiesNotChanged:** Used to indicate to the requestor whether the policies have changed since the requestor specified <lastUpdateTime> in the GetPolicies request message as described in section [3.1.4.1.3.9](#Section_3.1.4.1.3.9). If the value of the <policiesNotChanged> element is true, the policy has not changed since the <lastUpdateTime> value in the GetPolicies message. If the <policiesNotChanged> element is false or nil, the policy has changed since the requestor specified <lastUpdateTime>.
 
@@ -2527,9 +2539,13 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 - If the <msPKI-RA-Application-Policies> has the msPKI-Symmetric-Key-Length type, then the value of the <symmetricAlgorithmKeyLength> element is copied from <msPKI-RA-Application-Policies>.
 <2> Section 3.1.4.1.3.22: This attribute is not supported by Windows Server 2008 R2.
 
-<3> Section 3.1.4.1.3.22: This attribute is not supported by Windows Server 2008 R2.
+<3> Section 3.1.4.1.3.22: On Windows Server 2012 operating system, the maximum supported client version is 4. On Windows Server 2012 R2 operating system and later, the maximum supported client version is 5.
 
-<4> Section 3.1.4.1.3.23: Applicable Windows Server releases provide a <nextUpdateHours> value of 8 by default. The value can be configured by an administrator.
+<4> Section 3.1.4.1.3.22: This attribute is not supported by Windows Server 2008 R2.
+
+<5> Section 3.1.4.1.3.22: On Windows Server 2012, this rule is not applied, and Y is not reset when the **RequestFilter** is not specified. On Windows Server 2012, the maximum supported CA version is 4. On Windows Server 2012 R2 and later, the maximum supported CA version is 5.
+
+<6> Section 3.1.4.1.3.23: Applicable Windows Server releases provide a <nextUpdateHours> value of 8 by default. The value can be configured by an administrator.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -2548,7 +2564,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [7](#Section_7) Appendix B: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [3.1.4.1.3.22](#Section_3.1.4.1.3.22) RequestFilter | 32188 : Updated behavior to explicitly handle <policyOIDs> when missing, nil, or empty. | Major |
+| 3.1.4.1.3.22 RequestFilter | 32188 : Added client version–specific reset rules for Z and added Product Behaviour Note for the maximum supported client versions. | Major |
+| 3.1.4.1.3.22 RequestFilter | 32188 : Added server version–specific reset rules for the value of Y and added a Product Behaviour Note for maximum supported CA versions. | Major |
 
 <a id="revision-history"></a>
 
@@ -2599,3 +2617,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2021 | 15.0 | Major | Significantly changed the technical content. |
 | 6/25/2021 | 16.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 17.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 18.0 | Major | Significantly changed the technical content. |

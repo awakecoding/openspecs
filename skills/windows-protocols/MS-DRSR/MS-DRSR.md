@@ -1023,7 +1023,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 11/21/2025.
+Last updated: 3/9/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -15043,11 +15043,11 @@ If the length is more than 24, the next byte is also used in the length calculat
 - b'111' (in the three bits in the original two bytes of metadata), plus
 - b'1111' (in the nibble of the "shared" byte of extended length), plus
 - b'00000000' (in the next byte).
-This scheme is good for lengths of up to 278 (a length of 10 in the three bits in the original two bytes of metadata, plus a length of 15 in the nibble of the "shared" byte of extended length, plus a length of up to 254 in the extra byte).
+This scheme is good for lengths of up to 279 (a length of 10 in the three bits in the original two bytes of metadata, plus a length of 15 in the nibble of the "shared" byte of extended length, plus a length of up to 254 in the extra byte).
 
 A "full" (all b'1') bit pattern (b'111', b'1111', and b'11111111') means that there is more length in the following two bytes.
 
-The final two bytes of length differ from the length information that comes earlier in the metadata. For lengths that are equal to 280 or greater, the length is calculated only from these last two bytes, and is not added to the previous length bits. The value in the last two bytes, a 16-bit integer, is three less than the metadata length. These last two bytes allow for a match length of up to 32,768 bytes + 3 bytes (the minimum match length).
+The final two bytes of length differ from the length information that comes earlier in the metadata. For lengths that are equal to 280 or greater, the length is calculated only from these last two bytes, and is not added to the previous length bits. The value in the last two bytes, a 16-bit integer, is three less than the metadata length. These last two bytes allow for a match length of up to 65,535 bytes + 3 bytes (the minimum match length).
 
 The following table summarizes the length representation in metadata.
 
@@ -15066,7 +15066,7 @@ The following table summarizes the length representation in metadata.
 
 A "full" bit pattern in that last half word does not mean that more metadata is coming after the last bytes.
 
-The LZ77 compression algorithm produces a well-compressed encoding for small valued lengths, but as the length increases, the encoding becomes less well compressed. A match length of greater than 278 bytes requires a relatively large number of bits: 3+4+8+16. This includes three bits in the original two bytes of metadata, four bits in the nibble in the "shared" byte, eight bits in the next byte, and 16 bits in the final two bytes of metadata.
+The LZ77 compression algorithm produces a well-compressed encoding for small valued lengths, but as the length increases, the encoding becomes less well compressed. A match length of greater than 279 bytes requires a relatively large number of bits: 3+4+8+16. This includes three bits in the original two bytes of metadata, four bits in the nibble in the "shared" byte, eight bits in the next byte, and 16 bits in the final two bytes of metadata.
 
 <a id="Section_4.1.10.5.22"></a>
 ##### 4.1.10.5.22 GetOptionalFeatureBit
@@ -40755,7 +40755,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [4.1.15.3](#Section_4.1.15.3) Server Behavior of the IDL_DRSInterDomainMove Method | 30475 : Added ADS_UF_PARTIAL_SECRETS_ACCOUNT to the process of validating the input ENTINF. | Major |
+| [4.1.10.5.21.2](#Section_4.1.10.5.21.2) DIRECT2 Encoding Algorithm | 32163 : Updated metadata length and match length in DIRECT2 Encoding Algorithm. | Major |
 
 <a id="revision-history"></a>
 
@@ -40823,3 +40823,4 @@ The changes made to this document are listed in the following table. For more in
 | 10/10/2023 | 43.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 44.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 45.0 | Major | Significantly changed the technical content. |
+| 3/9/2026 | 46.0 | Major | Significantly changed the technical content. |
