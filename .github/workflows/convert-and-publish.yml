@@ -60,7 +60,11 @@ jobs:
       - name: Build publish tree and windows-protocols.zip
         shell: pwsh
         working-directory: ${{ github.workspace }}
-        run: .\scripts\Build-Publish.ps1 -ThrottleLimit 4 -AllowPartial
+        run: |
+          if (Test-Path -LiteralPath .\publish) {
+            Remove-Item -LiteralPath .\publish -Recurse -Force
+          }
+          .\scripts\Build-Publish.ps1 -PublishPath publish -ThrottleLimit 4 -AllowPartial
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v7
@@ -71,7 +75,7 @@ jobs:
       - name: Stage downloadable bundle in publish tree
         shell: pwsh
         working-directory: ${{ github.workspace }}
-        run: Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\skills\windows-protocols\windows-protocols.zip -Force
+        run: Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\publish\windows-protocols.zip -Force
 
       - name: Push to orphaned publish branch
         shell: pwsh
@@ -84,7 +88,7 @@ jobs:
             Remove-Item -LiteralPath $PublishWorktree -Recurse -Force
           }
           New-Item -Path $PublishWorktree -ItemType Directory -Force | Out-Null
-          Get-ChildItem -LiteralPath .\skills\windows-protocols -Force |
+          Get-ChildItem -LiteralPath .\publish -Force |
             Copy-Item -Destination $PublishWorktree -Recurse -Force
 
           $RemoteRepo = "https://${Env:GITHUB_ACTOR}:${Env:GITHUB_TOKEN}@github.com/${Env:GITHUB_REPOSITORY}.git"
@@ -100,6 +104,11 @@ jobs:
           finally {
             Pop-Location
           }
+
+      - name: Replace skill corpus from publish bundle
+        shell: pwsh
+        working-directory: ${{ github.workspace }}
+        run: .\scripts\Replace-WindowsProtocolsCorpus.ps1 -ZipPath .\windows-protocols.zip -SkillPath .\skills\windows-protocols
 
       - name: Create corpus update pull request
         id: cpr
