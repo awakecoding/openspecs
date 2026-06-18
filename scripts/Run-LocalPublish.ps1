@@ -2,8 +2,8 @@
 .SYNOPSIS
     Runs the same steps as convert-and-publish.yml locally.
 .DESCRIPTION
-    Downloads specs, converts to markdown, builds the publish tree in skills/windows-protocols,
-    creates windows-protocols.zip, and copies it into the skill folder.
+    Downloads specs, converts to markdown, builds the publish tree, creates
+    windows-protocols.zip, and replaces the extracted corpus in the skill folder.
 #>
 param(
     [int]$ThrottleLimit = 4
@@ -33,11 +33,18 @@ try {
     # 2. OpenXML - Build-Publish handles this
     # 3. Build publish tree
     Write-Host ''
-    .\scripts\Build-Publish.ps1 -ThrottleLimit $ThrottleLimit -AllowPartial
+    if (Test-Path -LiteralPath .\publish) {
+        Remove-Item -LiteralPath .\publish -Recurse -Force
+    }
+    .\scripts\Build-Publish.ps1 -PublishPath publish -ThrottleLimit $ThrottleLimit -AllowPartial
 
-    # 4. Stage zip in skills/windows-protocols
-    Write-Host 'Staging windows-protocols.zip in skills/windows-protocols...'
-    Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\skills\windows-protocols\windows-protocols.zip -Force
+    # 4. Stage zip in publish tree for the orphan publish branch equivalent.
+    Write-Host 'Staging windows-protocols.zip in publish...'
+    Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\publish\windows-protocols.zip -Force
+
+    # 5. Replace extracted skill corpus from the bundle. The zip remains ignored.
+    Write-Host 'Replacing extracted corpus in skills/windows-protocols...'
+    .\scripts\Replace-WindowsProtocolsCorpus.ps1 -ZipPath .\windows-protocols.zip -SkillPath .\skills\windows-protocols
 
     Write-Host 'Done. Corpus at: skills/windows-protocols'
 }
