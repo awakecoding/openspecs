@@ -25,7 +25,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install oxipng
         shell: pwsh
@@ -63,7 +63,7 @@ jobs:
         run: .\scripts\Build-Publish.ps1 -ThrottleLimit 4 -AllowPartial
 
       - name: Upload publish artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: publish
           path: windows-protocols.zip
@@ -103,7 +103,7 @@ jobs:
 
       - name: Create corpus update pull request
         id: cpr
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.AUTO_MERGE_TOKEN }}
           add-paths: |
