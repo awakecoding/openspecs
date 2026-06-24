@@ -249,6 +249,7 @@
 | [MS-NSPI](MS-NSPI/MS-NSPI.md) | Name Service Provider Interface (NSPI) Protocol |
 | [MS-NTHT](MS-NTHT/MS-NTHT.md) | NTLM Over HTTP Protocol |
 | [MS-NVGREE](MS-NVGREE/MS-NVGREE.md) | Network Virtualization using Generic Routing Encapsulation (NVGRE) Extensions |
+| [MS-OAPX](MS-OAPX/MS-OAPX.md) | OAuth 2.0 Protocol Extensions |
 | [MS-OAPXBC](MS-OAPXBC/MS-OAPXBC.md) | OAuth 2.0 Protocol Extensions for Broker Clients |
 | [MS-OAUT](MS-OAUT/MS-OAUT.md) | OLE Automation Protocol |
 | [MS-OCSP](MS-OCSP/MS-OCSP.md) | Online Certificate Status Protocol (OCSP) Extensions |
@@ -448,6 +449,7 @@
 | [MS-WSTC](MS-WSTC/MS-WSTC.md) | WS-Discovery: Termination Criteria Protocol Extensions |
 | [MS-WSTEP](MS-WSTEP/MS-WSTEP.md) | WS-Trust X.509v3 Token Enrollment Extensions |
 | [MS-WSTIM](MS-WSTIM/MS-WSTIM.md) | WS-Transfer: Identity Management Operations for Directory Access Extensions |
+| [MS-WSUSAR](MS-WSUSAR/MS-WSUSAR.md) | Windows Server Update Services: Administrative API Remoting Protocol (WSUSAR) |
 | [MS-WSUSSS](MS-WSUSSS/MS-WSUSSS.md) | Windows Update Services: Server-Server Protocol |
 | [MS-WUSP](MS-WUSP/MS-WUSP.md) | Windows Update Services: Client-Server Protocol |
 | [MS-XCA](MS-XCA/MS-XCA.md) | Xpress Compression Algorithm |
