@@ -119,7 +119,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 11/19/2024.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -1128,7 +1128,7 @@ If **WitnessClientVersion** is 0x00020000, and if **IsShareNameNotificationRequi
 - A name to be used to identify the client<13> for **ClientComputerName**
 - If **IsIPNotificationRequired** is TRUE, 0x00000001 for **Flags**; otherwise 0x00000000 for **Flags**.
 - An implementation-specific time out value for the **KeepAliveTimeout** parameter.<14>
-If the server returns an error, the client MUST retry the registration and use other entries returned by the server for the **WitnessrGetInterfaceList** response. If all the entries are exhausted, the client MUST again call the **WitnessrGetInterfaceList** method as specified earlier. The client SHOULD<15> retry this registration sequence until it gets STATUS_SUCCESS from the server. If the server returns STATUS_SUCCESS, the client MUST update **WitnessRegistration** entry with the following values:
+If the server returns an error, the client SHOULD<15> retry the registration and use other entries returned by the server for the **WitnessrGetInterfaceList** response. If all the entries are exhausted, the client MUST again call the **WitnessrGetInterfaceList** method as specified earlier. The client SHOULD<16> retry this registration sequence until it gets STATUS_SUCCESS from the server. If the server returns STATUS_SUCCESS, the client MUST update **WitnessRegistration** entry with the following values:
 
 - **WitnessServerName**: This value MUST be set to the *NetName* parameter.
 - **ShareName**: This value MUST be set to *ShareName* parameter.
@@ -1138,7 +1138,7 @@ If the server returns an error, the client MUST retry the registration and use o
 - **NetNameNotificationRequired**: This value MUST be set to TRUE.
 - **ShareNameNotificationRequired**: This value MUST be set to TRUE if **IsShareNameNotificationRequired** is TRUE; otherwise set to FALSE.
 - **IPNotificationRequired**: This value MUST be set to TRUE if **IsIPNotificationRequired** is TRUE; otherwise set to FALSE.
-Otherwise, the client MUST call the RPC **WitnessrRegister** method on the resulting RPC handle, provid 0x00010001 for **Version**, **NetName**, **IpAddress**, and a name to be used to identify the client<16>, as input parameters. If the server returns an error, the client MUST retry the registration and use other entries returned by the server for the **WitnessrGetInterfaceList** response. If all the entries are exhausted, the client MUST again call the **WitnessrGetInterfaceList** method as specified earlier. The client SHOULD<17> retry this registration sequence until it gets STATUS_SUCCESS from the server. If the server returns STATUS_SUCCESS, the client MUST create a new **WitnessRegistration** entry with the following values, insert the entry in **WitnessRegistrationList**, and return success to the caller:
+Otherwise, the client MUST call the RPC **WitnessrRegister** method on the resulting RPC handle, provid 0x00010001 for **Version**, **NetName**, **IpAddress**, and a name to be used to identify the client<17>, as input parameters. If the server returns an error, the client MUST retry the registration and use other entries returned by the server for the **WitnessrGetInterfaceList** response. If all the entries are exhausted, the client MUST again call the **WitnessrGetInterfaceList** method as specified earlier. The client SHOULD<18> retry this registration sequence until it gets STATUS_SUCCESS from the server. If the server returns STATUS_SUCCESS, the client MUST create a new **WitnessRegistration** entry with the following values, insert the entry in **WitnessRegistrationList**, and return success to the caller:
 
 - **WitnessServerName:** This value MUST be set to the *NetName* parameter.
 - **IPAddress:** This value MUST be set to the *IpAddress* parameter.
@@ -1192,7 +1192,7 @@ If **WitnessClientVersion** is 0x00010001, the client MUST locate a **WitnessReg
 
 If no matching entry is found, or if the **WitnessRegistration.WitnessNotifyRequest** is TRUE, the client MUST stop processing and return an implementation-defined local error to the caller.
 
-If **WitnessClientVersion** is 0x00020000, the client SHOULD<18> call the WitnessrUnRegisterEx method, on the **WitnessRegistration.RPCHandle**, and pass the **WitnessRegistration.RegistrationKey** as the context.
+If **WitnessClientVersion** is 0x00020000, the client SHOULD<19> call the WitnessrUnRegisterEx method, on the **WitnessRegistration.RPCHandle**, and pass the **WitnessRegistration.RegistrationKey** as the context.
 
 If **WitnessClientVersion** is 0x00010001, the client MUST call the WitnessrUnRegister method, on the **WitnessRegistration.RPCHandle**, and pass the **WitnessRegistration.RegistrationKey** as the context.
 
@@ -1616,18 +1616,34 @@ Windows 10 v1607 operating system and later and Windows Server 2016 and later co
 
 <14> Section 3.2.4.1: Windows 8.1 operating system and later and Windows Server 2012 R2 operating system and later use a default **KeepAliveTime** value of 120 seconds.
 
-<15> Section 3.2.4.1: Windows clients retry the registration every 60 seconds.
+<15> Section 3.2.4.1: Windows 11, version 24H2 operating system and later and Windows Server 2025 and later operating system clients call the WitnessrRegisterEx method. If the method fails with RPC_S_PROCNUM_OUT_OF_RANGE, the client will call WitnessrRegister method.
 
-<16> Section 3.2.4.1: Windows uses the fully qualified domain name (FQDN) of the local computer to identify the client.
+<16> Section 3.2.4.1: Windows clients retry the registration every 60 seconds.
 
-<17> Section 3.2.4.1: Windows clients return the registration every 60 seconds.
+<17> Section 3.2.4.1: Windows uses the fully qualified domain name (FQDN) of the local computer to identify the client.
 
-<18> Section 3.2.4.3: Windows Server 2025 and Windows 11, version 24H2 operating system clients call WitnessrUnRegisterEx method. If the method fails with RPC_S_PROCNUM_OUT_OF_RANGE, the client will call WitnessrUnRegister method.
+<18> Section 3.2.4.1: Windows clients return the registration every 60 seconds.
+
+<19> Section 3.2.4.3: Windows 11, version 24H2 and later and Windows Server 2025 and later operating system clients call the WitnessrUnRegisterEx method. If the method fails with RPC_S_PROCNUM_OUT_OF_RANGE, the client will call WitnessrUnRegister method.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
 
-No table of changes is available. The document is either new or has had no changes since its last release.
+This section identifies changes that were made to this document since the last release. Changes are classified as Major, Minor, or None.
+
+The revision class **Major** means that the technical content in the document was significantly revised. Major changes affect protocol interoperability or implementation. Examples of major changes are:
+
+- A document revision that incorporates changes to interoperability requirements.
+- A document revision that captures changes to protocol functionality.
+The revision class **Minor** means that the meaning of the technical content was clarified. Minor changes do not affect protocol interoperability or implementation. Examples of minor changes are updates to clarify ambiguity at the sentence, paragraph, or table level.
+
+The revision class **None** means that no new technical changes were introduced. Minor editorial and formatting changes may have been made, but the relevant technical content is identical to the last released version.
+
+The changes made to this document are listed in the following table. For more information, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com).
+
+| Section | Description | Revision class |
+| --- | --- | --- |
+| [3.2.4.1](#Section_3.2.4.1) Application Requests Witness Register | 40364 : Added a Windows Behavior Note (WBN) describing the WitnessrRegisterEx fallback behavior. | Major |
 
 <a id="revision-history"></a>
 
@@ -1655,3 +1671,4 @@ No table of changes is available. The document is either new or has had no chang
 | 6/25/2021 | 13.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 14.0 | Major | Significantly changed the technical content. |
 | 11/19/2024 | 14.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 7/14/2026 | 15.0 | Major | Significantly changed the technical content. |

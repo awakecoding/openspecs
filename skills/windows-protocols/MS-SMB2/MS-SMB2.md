@@ -550,7 +550,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/13/2026.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -817,8 +817,6 @@ We conduct frequent surveys of the normative references to assure their continue
 ### 1.2.2 Informative References
 
 [FSBO] Microsoft Corporation, "File System Behavior in the Microsoft Windows Environment", June 2008, [http://download.microsoft.com/download/4/3/8/43889780-8d45-4b2e-9d3a-c696a890309f/File%20System%20Behavior%20Overview.pdf](https://go.microsoft.com/fwlink/?LinkId=140636)
-
-[KB2770917] Microsoft Corporation, "Windows 8 and Windows Server 2012 update rollup: November 2012", Version 6.0, [http://support.microsoft.com/kb/2770917/en-us](https://go.microsoft.com/fwlink/?LinkId=321737)
 
 [MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
@@ -10637,12 +10635,10 @@ There is no processing done for "Path Name Validation" as listed in section [3.3
 The processing changes involved for this create context are:
 
 - The server MUST look up an existing **Open** in the **GlobalOpenTable** by doing a lookup with the **FileId.Persistent** portion of the create context.
-- If the lookup fails:
-- If the request includes the SMB2_DHANDLE_FLAG_PERSISTENT bit in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 create context, **TreeConnect.Share.IsCA** is TRUE, and **Connection.ServerCapabilities** includes SMB2_GLOBAL_CAP_PERSISTENT_HANDLES, the server MUST look up an existing Open in the **GlobalOpenTable** by doing a lookup with the **CreateGuid** of the create context. If the lookup fails, the server SHOULD<347> fail the request with STATUS_OBJECT_NAME_NOT_FOUND and proceed as specified in "Failed Open Handling" in section 3.3.5.9.
-- Otherwise, the server SHOULD<348> fail the request with STATUS_OBJECT_NAME_NOT_FOUND and proceed as specified in "Failed Open Handling" in section 3.3.5.9.
+- If the **FileId.Persistent** lookup in Step 1 succeeds, the server MUST validate the durable handle reconnection as follows:
 - If any of the following conditions is TRUE, the server MUST fail the request with STATUS_OBJECT_NAME_NOT_FOUND:
 - **Open.Lease** is not NULL and **Open.ClientGuid** is not equal to the **ClientGuid** of the connection that received this request.
-- If **Open.IsPersistent** is TRUE and the SMB2_DHANDLE_FLAG_PERSISTENT bit is not set in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context, the server SHOULD<349> fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
+- If **Open.IsPersistent** is TRUE and the SMB2_DHANDLE_FLAG_PERSISTENT bit is not set in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context, the server SHOULD<347> fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
 - **Open.CreateGuid** is not equal to the **CreateGuid** in the request.
 - **Open.IsDurable** is FALSE and **Open.IsResilient** is FALSE or unimplemented.
 - **Open.Session** is not NULL.
@@ -10651,13 +10647,26 @@ The processing changes involved for this create context are:
 - **Open.Lease** is NOT NULL and the SMB2_CREATE_REQUEST_LEASE or SMB2_CREATE_REQUEST_LEASE_V2 create context is not present.
 - The SMB2_CREATE_REQUEST_LEASE_V2 create context is also present in the request, the server supports directory leasing, and **Open.Lease.LeaseKey** does not match the **LeaseKey** provided in the SMB2_CREATE_REQUEST_LEASE_V2 create context.
 - The SMB2_CREATE_REQUEST_LEASE create context is also present in the request, the server supports leasing, and **Open.Lease.LeaseKey** does not match the **LeaseKey** provided in the SMB2_CREATE_REQUEST_LEASE create context.
-- If **Open.IsDurable** is TRUE and **Open.Lease.LeaseState** does not contain SMB2_LEASE_HANDLE_CACHING, the server SHOULD<350> fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
-- If **Open.Lease** is not NULL, the server supports leasing, **Lease.Version** is 1, and the request does not contain the SMB2_CREATE_REQUEST_LEASE create context, or if **Lease.Version** is 2 and the request does not contain the SMB2_CREATE_REQUEST_LEASE_V2 create context, the server SHOULD<351> fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
-- If any of the following conditions is TRUE, the server MUST fail the request with STATUS_INVALID_PARAMETER:
+- If **Open.IsDurable** is TRUE and **Open.Lease.LeaseState** does not contain SMB2_LEASE_HANDLE_CACHING, the server SHOULD<348> fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
+- If **Open.Lease** is not NULL, the server supports leasing, **Lease.Version** is 1, and the request does not contain the SMB2_CREATE_REQUEST_LEASE create context, or if **Lease.Version** is 2 and the request does not contain the SMB2_CREATE_REQUEST_LEASE_V2 create context, the server SHOULD<349> fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
 - The CREATE request also contains the SMB2_CREATE_DURABLE_HANDLE_REQUEST context, the SMB2_CREATE_DURABLE_HANDLE_RECONNECT context, or the SMB2_CREATE_DURABLE_HANDLE_REQUEST_V2 context.
 - **Open.Lease** is not NULL, **Open.Lease.FileDeleteOnClose** is FALSE, and **Open.Lease.FileName** does not match the file name specified in the **Buffer** field of the SMB2 CREATE request.
-- If **Open.IsPersistent** is FALSE and the SMB2_DHANDLE_FLAG_PERSISTENT bit is set in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context, the server SHOULD<352> fail the request with STATUS_INVALID_PARAMETER.
+- If **Open.IsPersistent** is FALSE and the SMB2_DHANDLE_FLAG_PERSISTENT bit is set in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context, the server SHOULD<350> fail the request with STATUS_INVALID_PARAMETER.
 - If the user represented by **Session.SecurityContext** is not the same user denoted by **Open.DurableOwner**, the server MUST fail the request with STATUS_ACCESS_DENIED and proceed as specified in "Failed Open Handling" in section 3.3.5.9.
+- If all validations succeed, proceed to Step 4 - Successful Reconnection Processing.
+- If the **FileId.Persistent** lookup in Step 1 fails, the server MUST attempt persistent handle reconnection:
+- If the request includes the SMB2_DHANDLE_FLAG_PERSISTENT bit in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 create context, **TreeConnect.Share.IsCA** is TRUE, and **Connection.ServerCapabilities** includes SMB2_GLOBAL_CAP_PERSISTENT_HANDLES, the server MUST look up an existing Open in the **GlobalOpenTable** by doing a lookup with the **CreateGuid** of the create context.
+- If the **CreateGuid** lookup succeeds, the server MUST resume the persistent handle. The following validation rules apply:
+- **Open.CreateGuid** is not equal to the **CreateGuid** in the request, fail with STATUS_OBJECT_NAME_NOT_FOUND.
+- **Open.IsDurable** is FALSE and **Open.IsResilient** is FALSE or unimplemented, fail with STATUS_OBJECT_NAME_NOT_FOUND.
+- **Open.Session** is not NULL, fail with STATUS_OBJECT_NAME_NOT_FOUND. **Note**: For persistent handles reconstituted via **CreateGuid** lookup, the lease validation rules from steps 2.6, 2.7, and 2.8 regarding null/non-null lease presence **DO NOT APPLY**. The lease state is recreated as part of the resume operation through the Resume Key File (RKF) mechanism rather than being validated against a pre-existing in-memory lease object.
+- The SMB2_CREATE_REQUEST_LEASE_V2 create context is present in the request, the server supports directory leasing, and the **LeaseKey** provided in the SMB2_CREATE_REQUEST_LEASE_V2 create context does not match the lease key being recreated during resume, fail with STATUS_OBJECT_NAME_NOT_FOUND.
+- The SMB2_CREATE_REQUEST_LEASE create context is present in the request, the server supports leasing, and the **LeaseKey** provided in the SMB2_CREATE_REQUEST_LEASE create context does not match the lease key being recreated during resume, fail with STATUS_OBJECT_NAME_NOT_FOUND.
+- If the user represented by **Session.SecurityContext** is not the same user denoted by **Open.DurableOwner**, the server MUST fail the request with STATUS_ACCESS_DENIED and proceed as specified in "Failed Open Handling" in section 3.3.5.9.
+- If the **CreateGuid** lookup fails, the server SHOULD<351> fail the request with STATUS_OBJECT_NAME_NOT_FOUND and proceed as specified in "Failed Open Handling" in section 3.3.5.9.
+- If the request does not include the SMB2_DHANDLE_FLAG_PERSISTENT bit, the server SHOULD<352> fail the request with STATUS_OBJECT_NAME_NOT_FOUND and proceed as specified in "Failed Open Handling" in section 3.3.5.9.
+- If all validations in Step 3.2 succeed, proceed to Step 4 - Successful Reconnection Processing.
+- Step 4 - Successful Reconnection Processing:
 - The server MUST set the **Open.Connection** to refer to the connection that received this request.
 - The server MUST set the **Open.Session** to refer to the session that received this request.
 - The server MUST set the **Open.TreeConnect** to refer to the tree connect that received this request, and **Open.TreeConnect.OpenCount** MUST be increased by 1.
@@ -18393,17 +18402,17 @@ To acquire or promote the lease as dictated by the SMB2_CREATE_REQUEST_LEASE_V2 
 
 The Status code returned indicates whether the requested lease was granted.
 
-<347> Section 3.3.5.9.12: Windows 8 with [[KB2770917]](https://go.microsoft.com/fwlink/?LinkId=321737) and Windows Server 2012 with [KB2770917] fail the CREATE request with STATUS_INVALID_PARAMETER.
+<347> Section 3.3.5.9.12: If **Open.OplockLevel** is equal to SMB2_OPLOCK_LEVEL_BATCH or **Open.Lease.LeaseState** includes SMB2_LEASE_HANDLE_CACHING, Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2 continue to process the request.
 
-<348> Section 3.3.5.9.12: If the **Session** was established by specifying **PreviousSessionId** in the SMB2 SESSION_SETUP request, therefore invalidating the previous session, Windows 8.1 and Windows Server 2012 R2 close the durable opens established on the previous session.
+<348> Section 3.3.5.9.12: If **Open.IsPersistent** is TRUE, **Open.Lease.LeaseState** does not contain SMB2_LEASE_HANDLE_CACHING, **Open.OplockLevel** is not equal to SMB2_OPLOCK_LEVEL_BATCH, SMB2_DHANDLE_FLAG_PERSISTENT bit is set in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context and there is another existing **Open** in the **GlobalOpenTable** on the same file with same **LeaseKey** and **Open.IsPersistent** is TRUE, Windows 8 and later and Windows Server 2012 and later fail the request with STATUS_FILE_NOT_AVAILABLE.
 
-<349> Section 3.3.5.9.12: If **Open.OplockLevel** is equal to SMB2_OPLOCK_LEVEL_BATCH or **Open.Lease.LeaseState** includes SMB2_LEASE_HANDLE_CACHING, Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2 continue to process the request.
+<349> Section 3.3.5.9.12: Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2 do not perform Lease version verification.
 
-<350> Section 3.3.5.9.12: If **Open.IsPersistent** is TRUE, **Open.Lease.LeaseState** does not contain SMB2_LEASE_HANDLE_CACHING, **Open.OplockLevel** is not equal to SMB2_OPLOCK_LEVEL_BATCH, SMB2_DHANDLE_FLAG_PERSISTENT bit is set in the **Flags** field of the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context and there is another existing **Open** in the **GlobalOpenTable** on the same file with same **LeaseKey** and **Open.IsPersistent** is TRUE, Windows 8 and later and Windows Server 2012 and later fail the request with STATUS_FILE_NOT_AVAILABLE.
+<350> Section 3.3.5.9.12: Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2 do not perform this verification and continue to process the request.
 
-<351> Section 3.3.5.9.12: Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2 do not perform Lease version verification.
+<351> Section 3.3.5.9.12: If the **Session** was established by specifying **PreviousSessionId** in the SMB2 SESSION_SETUP request, therefore invalidating the previous session, Windows 8.1 and Windows Server 2012 R2 close the durable opens established on the previous session.
 
-<352> Section 3.3.5.9.12: Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2 do not perform this verification and continue to process the request.
+<352> Section 3.3.5.9.12: If the **Session** was established by specifying **PreviousSessionId** in the SMB2 SESSION_SETUP request, therefore invalidating the previous session, Windows 8.1 and Windows Server 2012 R2 close the durable opens established on the previous session.
 
 <353> Section 3.3.5.9.12: When an open, with **Open.IsPersistent** set to TRUE, is being reconnected due to server failover, Windows 8 through Windows 11, version 23H2 and Windows Server 2012 through Windows Server 2022, 23H2 perform the following:
 
@@ -18905,9 +18914,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.2.5.19](#Section_3.2.5.19) Receiving an SMB2 OPLOCK_BREAK Command | 39322 : Updated section title. Added clarity to specify client behavior when processing an SMB2 OPLOCK_BREAK response | Major |
-| [3.3.5.2.7.2](#Section_3.3.5.2.7.2) Handling Compounded Related Requests | 34930 : Updated server processing for compounded related requests. | Major |
-| [3.3.5.9.11](#Section_3.3.5.9.11) Handling the SMB2_CREATE_REQUEST_LEASE_V2 Create Context | 32798 : Updated server processing of Epoch in SMB2_CREATE_REQUEST_LEASE_V2 create context. | Major |
+| [3.3.5.9.12](#Section_3.3.5.9.12) Handling the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context | 40312 : Updated server processing for handling SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context when lookup is done via CreateGuid. | Major |
 
 <a id="revision-history"></a>
 
@@ -19007,3 +19014,4 @@ The changes made to this document are listed in the following table. For more in
 | 1/14/2026 | 84.0 | Major | Significantly changed the technical content. |
 | 3/9/2026 | 85.0 | Major | Significantly changed the technical content. |
 | 4/13/2026 | 86.0 | Major | Significantly changed the technical content. |
+| 7/14/2026 | 87.0 | Major | Significantly changed the technical content. |

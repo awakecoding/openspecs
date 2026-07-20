@@ -198,7 +198,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/27/2026.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -460,6 +460,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [RFC6113] Hartman, S., and Zhu, L., "A Generalized Framework for Kerberos Pre-Authentication", RFC 6113, April 2011, [https://www.rfc-editor.org/info/rfc6113](https://go.microsoft.com/fwlink/?LinkId=226316)
 
 [RFC6806] Hartman, S. Ed., Raeburn, K., and Zhu, L., "Kerberos Principal Name Canonicalization and Cross-Realm Referrals", RFC 6806, November 2012, [https://www.rfc-editor.org/info/rfc6806](https://go.microsoft.com/fwlink/?linkid=2095478)
+
+[RFC8009] M. Jenkins, M. Peck, K. Burgin, "AES Encryption with HMAC-SHA2 for Kerberos 5", RFC8009, October 2016, [https://www.rfc-editor.org/info/rfc8009](https://go.microsoft.com/fwlink/?linkid=2358062)
 
 [X680] ITU-T, "Abstract Syntax Notation One (ASN.1): Specification of Basic Notation", Recommendation X.680, July 2002, [http://www.itu.int/rec/T-REC-X.680/en](https://go.microsoft.com/fwlink/?LinkId=90594)
 
@@ -1105,6 +1107,8 @@ KILE MUST<27> support the Advanced Encryption Standard (AES) encryption types:
 
 - AES256-CTS-HMAC-SHA1-96 [18] ([[RFC3962]](https://go.microsoft.com/fwlink/?LinkId=90451) section 7)
 - AES128-CTS-HMAC-SHA1-96 [17] ([RFC3962] section 7)
+- AES128-CTS-HMAC-SHA256-128 [19] ([[RFC8009]](https://go.microsoft.com/fwlink/?linkid=2358062) section 7)
+- AES256-CTS-HMAC-SHA384-192 [20] ([RFC8009] section 7)
 and SHOULD<28> support the following encryption types, which are listed in order of relative strength:
 
 - RC4-HMAC [23] [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488)
@@ -1128,6 +1132,8 @@ KILE supports the following checksum types. Each checksum type is described, and
 - sha1 (unkeyed) [-131] [RFC3961]
 - hmac-sha1-96-aes128 [15] [[RFC3962]](https://go.microsoft.com/fwlink/?LinkId=90451)
 - hmac-sha1-96-aes256 [16] [RFC3962]
+- hmac-sha256-128-aes128 [19] [[RFC8009]](https://go.microsoft.com/fwlink/?linkid=2358062)
+- hmac-sha384-192-aes256 [20] [RFC8009]
 - hmac-md5-string [-138] [[RFC4757]](https://go.microsoft.com/fwlink/?LinkId=90488)
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Ticket Flag Details
@@ -2819,7 +2825,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <14> Section 2.2.7: The encryption type **AES128-CTS-HMAC-SHA256-128** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [[RFC8009]](https://go.microsoft.com/fwlink/?linkid=2358062). This is disabled by default.
 
-<15> Section 2.2.7: The encryption type **AES256-CTS-HMAC-SHA384-192** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [RFC8009]. This is disabled by default.
+<15> Section 2.2.7: The encryption type **AES256-CTS-HMAC-SHA384-192** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [RFC8009]. This is disabled by default.
 
 <16> Section 2.2.8: The **PA-SUPPORTED-ENCTYPES** structure is not supported by Windows 2000, Windows XP, or Windows Server 2003.
 
@@ -3005,7 +3011,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.7](#Section_2.2.7) Supported Encryption Types Bit Flags | Added supported encryption types for local user accounts to use Kerberos. | Major |
+| [3.1.5.2](#Section_3.1.5.2) Encryption Types | 40449 : Added encryption types "AES128-CTS-HMAC-SHA256-128 [19]" and "AES256-CTS-HMAC-SHA384-192 [20]". | Major |
+| [3.1.5.3](#Section_3.1.5.3) Encryption Checksum Types | 40449 : Added encryption checksum types "hmac-sha256-128-aes128 [19]" and "hmac-sha384-192-aes256 [20]". | Major |
 
 <a id="revision-history"></a>
 
@@ -3085,3 +3092,4 @@ The changes made to this document are listed in the following table. For more in
 | 8/11/2025 | 45.0 | Major | Significantly changed the technical content. |
 | 3/30/2026 | 46.0 | Major | Significantly changed the technical content. |
 | 4/27/2026 | 47.0 | Major | Significantly changed the technical content. |
+| 7/14/2026 | 48.0 | Major | Significantly changed the technical content. |
