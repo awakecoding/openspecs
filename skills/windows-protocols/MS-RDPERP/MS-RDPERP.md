@@ -314,7 +314,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 8/11/2025.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -3080,7 +3080,7 @@ The windowing support level determines whether the client is capable of supporti
 <a id="Section_3.3.1.3"></a>
 #### 3.3.1.3 Marker Window
 
-The [**marker window**](#gt_marker-window) is a server-side window that is not remoted to the client and is used to manage the activation of [**RAIL windows**](#gt_rail-window). This window is destroyed if the client does not advertise support for Z-order sync in the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2).
+The [**marker window**](#gt_marker-window) is a server-side window that SHOULD NOT<35> be remoted to the client and is used to manage the activation of [**RAIL windows**](#gt_rail-window). This window is destroyed if the client does not advertise support for Z-order sync in the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
@@ -3138,7 +3138,7 @@ The Confirm Active PDU is processed by the server, as specified in [MS-RDPBCGR](
 
 If the client has requested support for [**remote applications integrated locally (RAIL)**](#gt_remote-applications-integrated-locally-rail) in the Client Info PDU (see section [3.2.5.1.3](#Section_3.2.5.1.3)), and the server has indicated support for RAIL in the Demand Active PDU (see section [3.3.5.1.4](#Section_3.3.5.1.4)), the server MUST verify that this PDU contains two RAIL-specific capabilities in the **capabilitySets** field of the TS_CONFIRM_ACTIVE_PDU ([MS-RDPBCGR] section 2.2.1.13.2.1) structure: the [Remote Programs Capability Set (section 2.2.1.1.1)](#Section_2.2.1.1.1) and the [Window List Capability Set (section 2.2.1.1.2)](#Section_2.2.1.1.2). If it does not contain these capability sets, or the RailSupportLevel of the Remote Programs Capability Set is not set to at least TS_RAIL_LEVEL_SUPPORTED, or the WndSupportLevel of the Window List Capability Set is TS_WINDOW_LEVEL_NOT_SUPPORTED (0), the server MUST drop the connection.
 
-The server MUST verify that the NumIconCaches and NumIconCacheEntries of the Window List Capability Set do not exceed the corresponding entries set by the server in the Demand Active PDU. <35> The server MUST also update its icon cache limits to those reported in NumIconCaches and NumIconCacheEntries.
+The server MUST verify that the NumIconCaches and NumIconCacheEntries of the Window List Capability Set do not exceed the corresponding entries set by the server in the Demand Active PDU. <36> The server MUST also update its icon cache limits to those reported in NumIconCaches and NumIconCacheEntries.
 
 <a id="Section_3.3.5.1.6"></a>
 ##### 3.3.5.1.6 Constructing Window Information Orders
@@ -3317,7 +3317,7 @@ In all other respects, this PDU is equivalent to the **Window Move PDU** (sectio
 <a id="Section_3.3.5.2.7.1"></a>
 ###### 3.3.5.2.7.1 Processing the Get Application ID PDU
 
-Upon receipt of the Get Application ID PDU, the server MAY<36> retrieve the Application ID of the window whose window ID is specified in the PDU.
+Upon receipt of the Get Application ID PDU, the server MAY<37> retrieve the Application ID of the window whose window ID is specified in the PDU.
 
 If no such window exists, the server SHOULD ignore the PDU.
 
@@ -4146,9 +4146,11 @@ Microsoft implementations set TS_RAIL_LEVEL_SUPPORTED to 0 on other versions whe
 
 <34> Section 3.2.5.2.8.3: Only Windows Vista and Windows Server 2008 do not use the Application ID string to identify and group windows.
 
-<35> Section 3.3.5.1.5: In Windows implementations the **NumIconCaches** and **NumCacheEntries** fields for each cache are set to 0 if the values in the Windows List Capability Sets exceed the corresponding entries set in the server cache.
+<35> Section 3.3.1.3: The marker window is remoted to the client in Windows Server 2016, Windows Server 2019, Windows Server 2022, and Windows Server 2025.
 
-<36> Section 3.3.5.2.7.1: Only Windows Vista and Windows Server 2008 do not use the Application ID string to identify and group windows.
+<36> Section 3.3.5.1.5: In Windows implementations the **NumIconCaches** and **NumCacheEntries** fields for each cache are set to 0 if the values in the Windows List Capability Sets exceed the corresponding entries set in the server cache.
+
+<37> Section 3.3.5.2.7.1: Only Windows Vista and Windows Server 2008 do not use the Application ID string to identify and group windows.
 
 <a id="Section_7"></a>
 # 7 Change Tracking
@@ -4167,8 +4169,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.2.2.3](#Section_2.2.2.2.3) HandshakeEx PDU (TS_RAIL_ORDER_HANDSHAKE_EX) | 30435 : Added a Windows Behavior Note for TS_RAIL_ORDER_HANDSHAKE_EX_FLAGS_EXTENDED_SPI_3_SUPPORTED flag applicable to specific windows versions. | Major |
-| [2.2.2.4.1](#Section_2.2.2.4.1) Client System Parameters Update PDU (TS_RAIL_ORDER_SYSPARAM) | 30435 : Added a Windows Behaviour Note for the RAIL_SPI_ACCENT_COLOR, RAIL_SPI_SYSTEM_USES_LIGHT_THEME, RAIL_SPI_APPS_USE_LIGHT_THEME flags applicable to specific windows versions. | Major |
+| [3.3.1.3](#Section_3.3.1.3) Marker Window | 40318 : Added a WBN for marker window remoting behavior. | Major |
 
 <a id="revision-history"></a>
 
@@ -4238,3 +4239,4 @@ The changes made to this document are listed in the following table. For more in
 | 6/25/2021 | 31.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 32.0 | Major | Significantly changed the technical content. |
 | 8/11/2025 | 33.0 | Major | Significantly changed the technical content. |
+| 7/14/2026 | 34.0 | Major | Significantly changed the technical content. |

@@ -105,7 +105,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/27/2026.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -410,7 +410,7 @@ SPNEGO exports a set of abstract parameters that describe the security services 
 - *Confidentiality*: A Boolean setting that indicates that the caller wants to encrypt messages so that they cannot be read while in transit.
 - *Delegate*: A Boolean setting that indicates that the caller wants to make its own identity available to the server for further identification to other services.
 - *Mutual Authentication*: A Boolean setting that indicates that the client and server MUST authenticate each other; unidirectional authentication is not permissible.
-These flags correspond to the **reqFlags:ContextFlags** field in the **NegTokenInit** structure. As specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), the **reqFlags:ContextFlags** field is now only for legacy purposes and SHOULD NOT be filled in. For more information about the **reqFlags:ContextFlags** field, see section [3.1.5.3](#Section_3.1.5.3).
+These flags correspond to the **reqFlags:ContextFlags** field in the **NegTokenInit** structure. As specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461), the **reqFlags:ContextFlags** field is now only for legacy purposes and SHOULD NOT be filled in. For more information about the **reqFlags:ContextFlags** field, see section [3.1.5.5](#Section_3.1.5.5).
 
 - *Extended Error*: A Boolean setting that indicates that the caller wants the underlying protocol to perform the extended error handling, potentially including retries within the [**GSS**](#gt_generic-security-services-gss) exchange.
 - *FragmentToFit*: A Boolean setting that indicates that the caller directs the underlying protocol to fragment messages.<7>
@@ -545,13 +545,13 @@ EndIf
 
 The first fragment includes the [**ASN.1 header**](#gt_asn1-header) for the message, so that the recipient can reconstruct the length of the completed message. This requires that **MaxOutputTokenSize** be at least 5 bytes.
 
-The SPNEGO Extension calls **InitFragmentToken** (section [3.1.5.4](#Section_3.1.5.4)), where:
+The SPNEGO Extension calls **InitFragmentToken** (section [3.1.5.6](#Section_3.1.5.6)), where:
 
 - **Token** contains the message.
 - **MaxOutputTokenSize** contains the **MaxOutputTokenSize** provided by the application.
-The SPNEGO Extension MUST return GSS_S_CONTINUE_NEEDED status ([[RFC2478]](https://go.microsoft.com/fwlink/?LinkId=90360)) and an initial packet containing **OutputToken**, as specified in section 3.1.5.4.
+The SPNEGO Extension MUST return GSS_S_CONTINUE_NEEDED status ([[RFC2478]](https://go.microsoft.com/fwlink/?LinkId=90360)) and an initial packet containing **OutputToken**, as specified in section 3.1.5.6.
 
-When **FragmentOutputToken** is set to TRUE, the SPNEGO Extension calls **FragmentToken** (section [3.1.5.5](#Section_3.1.5.5)) to get the next fragment, and MUST return GSS_S_CONTINUE_NEEDED status and **OutputToken**. If **FragmentOutputToken** is not set to TRUE, the SPNEGO Extension MUST return GSS_S_COMPLETE status, as specified in [RFC2478].
+When **FragmentOutputToken** is set to TRUE, the SPNEGO Extension calls **FragmentToken** (section [3.1.5.7](#Section_3.1.5.7)) to get the next fragment, and MUST return GSS_S_CONTINUE_NEEDED status and **OutputToken**. If **FragmentOutputToken** is not set to TRUE, the SPNEGO Extension MUST return GSS_S_COMPLETE status, as specified in [RFC2478].
 
 If the server does not support fragmentation, the application service receives an error from its **GSS_Accept_sec_context** call, and the negotiation fails. Whether the client application receives the error depends on the application service behavior.
 
@@ -618,9 +618,9 @@ EndIf
 <a id="Section_3.1.5.11"></a>
 #### 3.1.5.11 Receive Fragmented Messages
 
-The length of the first packet specified in the [**ASN.1 header**](#gt_asn1-header) is used to determine the number of bytes necessary to assemble the complete message. the SPNEGO Extension calls **InitAssembleToken** (section [3.1.5.7](#Section_3.1.5.7)), where **Input_Token** contains the **Input_Token** received from the caller. To receive the next fragment, SPNG MUST return GSS_S_CONTINUE_NEEDED status with an empty **OutputToken** (section [3.1.5.8](#Section_3.1.5.8)).
+The length of the first packet specified in the [**ASN.1 header**](#gt_asn1-header) is used to determine the number of bytes necessary to assemble the complete message. the SPNEGO Extension calls **InitAssembleToken** (section [3.1.5.9](#Section_3.1.5.9)), where **Input_Token** contains the **Input_Token** received from the caller. To receive the next fragment, SPNG MUST return GSS_S_CONTINUE_NEEDED status with an empty **OutputToken** (section [3.1.5.10](#Section_3.1.5.10)).
 
-When **FragmentInputToken** is set to TRUE, the SPNEGO Extension calls **AssembleToken** (section 3.1.5.8), where **Input_Token** contains the **Input_Token** received. If the **OutputToken** is not empty, the message is complete and processing can continue as normal. Otherwise, to receive the next fragment, the SPNEGO Extension MUST return GSS_S_CONTINUE_NEEDED status with an empty **OutputToken**.
+When **FragmentInputToken** is set to TRUE, the SPNEGO Extension calls **AssembleToken** (section 3.1.5.10), where **Input_Token** contains the **Input_Token** received. If the **OutputToken** is not empty, the message is complete and processing can continue as normal. Otherwise, to receive the next fragment, the SPNEGO Extension MUST return GSS_S_CONTINUE_NEEDED status with an empty **OutputToken**.
 
 If the context is terminated before reassembly of the message is complete (for example, because the network connection to the other entity is interrupted), the entire message MUST be discarded.
 
@@ -664,11 +664,11 @@ The server SHOULD ignore the **negHints** field in the **negTokenInit2** message
 
 The server MUST use the erroneous Kerberos value (1.2.840.48018.1.2.2) as the **supportedMech** field in the response negotiation token if the optimistic Kerberos token (1.2.840.48018.1.2.2) is accepted, as specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) section 4.2.2 and Appendix C.
 
-The SPNG server SHOULD invoke **Send Fragmented Messages** (section [3.1.5.6](#Section_3.1.5.6)) when a **GSS_Accept_sec_context()** ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.2) with the *FragmentToFit* parameter set to TRUE (section [3.1.1](#Section_3.1.1)) is received, and either:
+The SPNG server SHOULD invoke **Send Fragmented Messages** (section [3.1.5.8](#Section_3.1.5.8)) when a **GSS_Accept_sec_context()** ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.2) with the *FragmentToFit* parameter set to TRUE (section [3.1.1](#Section_3.1.1)) is received, and either:
 
 - The **Negotiate** Token ([RFC4178] section 4.2) to be sent exceeds **MaxOutputTokenSize**, or
 - **FragmentOutputToken** is set to TRUE.
-The server MUST invoke **Receive Fragmented Messages** (section [3.1.5.9](#Section_3.1.5.9)) when a packet is received and either:
+The server MUST invoke **Receive Fragmented Messages** (section [3.1.5.11](#Section_3.1.5.11)) when a packet is received and either:
 
 - The packet contains a valid [**ASN.1 header**](#gt_asn1-header) but an incomplete body, or
 - **FragmentOutputToken** is set to TRUE.
@@ -728,11 +728,11 @@ None.
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
 
-The SPNEGO Extension client SHOULD invoke **Send Fragmented Messages** (section [3.1.5.6](#Section_3.1.5.6)) when a **GSS_Accept_sec_context()** ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.2) with the *FragmentToFit* parameter set to TRUE (section [3.1.1](#Section_3.1.1)) is received, and either:
+The SPNEGO Extension client SHOULD invoke **Send Fragmented Messages** (section [3.1.5.8](#Section_3.1.5.8)) when a **GSS_Accept_sec_context()** ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.2) with the *FragmentToFit* parameter set to TRUE (section [3.1.1](#Section_3.1.1)) is received, and either:
 
 - The **Negotiate** Token ([[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) section 4.2) to be sent exceeds **MaxOutputTokenSize**, or
 - **FragmentOutputToken** is set to TRUE.
-The server MUST invoke **Receive Fragmented Messages** (section [3.1.5.9](#Section_3.1.5.9)) when a packet is received and either:
+The server MUST invoke **Receive Fragmented Messages** (section [3.1.5.11](#Section_3.1.5.11)) when a packet is received and either:
 
 - The packet contains a valid [**ASN.1 header**](#gt_asn1-header) but an incomplete body, or
 - **FragmentOutputToken** is set to TRUE.
@@ -925,7 +925,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 - User-to-User Kerberos Authentication [[UUKA-GSSAPI]](https://go.microsoft.com/fwlink/?LinkId=107082).
 - Extended [**GSS**](#gt_generic-security-services-gss)-API Negotiation Mechanism (NEGOEX) protocol [[IETFDRAFT-NEGOEX-02]](https://go.microsoft.com/fwlink/?LinkId=132205). The OID assigned for NEGOEX is iso.org.dod.internet.private.enterprise.Microsoft.security.mechanisms.NegoEx (1.3.6.1.4.1.311.2.2.30).
 - NT LAN Manager (NTLM) Authentication Protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md).
-<2> Section 1.4: Windows 2000 operating system, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 do not support PKU2U [[PKU2U-DRAFT]](https://go.microsoft.com/fwlink/?LinkId=208275). Windows implementations of NEGOEX negotiate the following authentication protocols by the corresponding OIDs and AuthScheme [**GUIDs**](#gt_globally-unique-identifier-guid): so.org.dod.internet.security.kerberosv5.PKU2U. The OID and GUID assigned for PKU2U [PKU2U-DRAFT] is (1.3.6.1.5.2.7) 235F69AD-73FB-4dbc-8203-0629E739339B.
+<2> Section 1.4: Windows 2000 operating system, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 do not support PKU2U [[PKU2U-DRAFT]](https://go.microsoft.com/fwlink/?LinkId=208275). Windows implementations of NEGOEX negotiate the following authentication protocols by the corresponding OIDs and AuthScheme [**GUIDs**](#gt_globally-unique-identifier-guid): so.org.dod.internet.security.kerberosv5.PKU2U. The OID and GUID assigned for PKU2U [PKU2U-DRAFT] is (1.3.6.1.5.2.7) 0D53335C-F9EA-4d0d-B2EC-4AE3786EC308.
 
 <3> Section 1.5: By default, the Kerberos protocol and NTLM are available in Windows. The interface for authentication protocols in Windows is open and extensible; other protocols might be installed by third parties.
 
@@ -970,10 +970,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [1.3.2](#Section_1.3.2) SPNEGO Synopsis | Added support for SPNEGO Late Fallback mechanism for handling the negotiation of authentication protocols using Kerberos V5 and GSS-API (IAKERB). | Major |
-| [3.1.5.1](#Section_3.1.5.1) mechListMIC Processing | Updated mechListMIC processing for the Late Fallback mechanism. | Major |
-| [3.1.5.3](#Section_3.1.5.3) mechTypes Identification of IAKerb | Added a new section "mechTypes Identification of IAKerb". | Major |
-| [3.1.5.4](#Section_3.1.5.4) mechTypes Identification of Negotiate Late Fallback | Added a new section "mechTypes Identification of Negotiate Late Fallback". | Major |
+| [1.4](#Section_1.4) Relationship to Other Protocols | 40452 : Corrected GUID for PKU2U | Major |
 
 <a id="revision-history"></a>
 
@@ -1046,3 +1043,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/23/2024 | 19.0 | Major | Significantly changed the technical content. |
 | 7/29/2024 | 20.0 | Major | Significantly changed the technical content. |
 | 4/27/2026 | 21.0 | Major | Significantly changed the technical content. |
+| 7/14/2026 | 22.0 | Major | Significantly changed the technical content. |

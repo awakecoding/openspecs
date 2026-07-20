@@ -293,7 +293,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -348,7 +348,7 @@ This document uses the following terms:
 **fully qualified domain name (FQDN)**: An unambiguous domain name that gives an absolute location in the [**Domain Name System's (DNS)**](#gt_604dcfcd-72f5-46e5-85c1-f3ce69956700) hierarchy tree, as defined in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 3.1 and [[RFC2181]](https://go.microsoft.com/fwlink/?LinkId=127732) section 11.
 
 <a id="gt_globally-unique-identifier-guid"></a>
-**globally unique identifier (GUID)**: A term used interchangeably with universally unique identifier (UUID) in Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the value. Specifically, the use of this term does not imply or require that the algorithms described in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) or [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) must be used for generating the [**GUID**](#gt_globally-unique-identifier-guid). See also universally unique identifier (UUID).
+**globally unique identifier (GUID)**: A term used interchangeably with universally unique identifier (UUID) in Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the value. Specifically, the use of this term does not imply or require that the algorithms described in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) or [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) have to be used for generating the GUID. See also universally unique identifier (UUID).
 
 <a id="gt_metadata"></a>
 **metadata**: XML-formatted data that defines the characteristics of an [**update**](#gt_update), including its title, description, rules for determining whether the [**update**](#gt_update) is applicable to a [**client computer**](#gt_client-computer), and instructions for installing the [**update**](#gt_update) content.
@@ -1216,9 +1216,13 @@ The following properties are extracted from the metadata by using the XPATH quer
 | EulaID | /Update/Properties/@EulaID |
 | FileDigest | /Update/Files/File[]/@Digest |
 | PatchingType | /Update/Files/File[]/@PatchingType |
+| PatchingTypePreferred<24> | /Update/Files/File[]/@PatchingTypePreferred |
 | FileName | /Update/Files/File[]/@FileName |
-| FragmentType<24> | /Update/Properties/SecuredFragment |
-| IsEncrypted<25> | /Update/Files/File[]/@IsEncrypted |
+| FragmentType<25> | /Update/Properties/SecuredFragment |
+| IsEncrypted<26> | /Update/Files/File[]/@IsEncrypted |
+| CompatibleProtocolVersion | /Update/Properties/@CompatibleProtocolVersion |
+
+Note that CompatibleProtocolVersion is the protocol version needed for the [**DSS**](#gt_downstream-server-dss) and the [**USS**](#gt_upstream-server-uss) to communicate effectively. If the DSS does not have a compatible protocol version with the USS this can cause issues during synchronization.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -1408,7 +1412,7 @@ name="AllowedEventIds" type="s1:ArrayOfInt" />
 
 **AuthInfo**: Contains the Authorization PlugIn information on the USS. On successful execution of this operation, this array MUST contain exactly one element. Its format (ArrayOfAuthPlugInInfo) is shown in the following code.
 
-**AllowedEventIds**: Unused. It SHOULD NOT be present and MUST be ignored on receipt if present.<26>
+**AllowedEventIds**: Unused. It SHOULD NOT be present and MUST be ignored on receipt if present.<27>
 
 <a id="Section_3.1.4.1.3.2"></a>
 ###### 3.1.4.1.3.2 ArrayOfAuthPlugInInfo
@@ -1456,7 +1460,7 @@ type="s:string" />
 
 **ServiceUrl**: This MUST be set to "DssAuthWebService/DssAuthWebService.asmx". It is a partial URL that can be appended to http://<server>:<server port>/ to form the full URL to be used for DSS Authorization Web Service.
 
-**Parameter**: Unused. It SHOULD NOT be present, and MUST be ignored upon receipt.<27>
+**Parameter**: Unused. It SHOULD NOT be present, and MUST be ignored upon receipt.<28>
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 GetAuthorizationCookie
@@ -1479,7 +1483,7 @@ ion/Server/DssAuthWebService/GetAuthorizationCookie" style="document" />
 
 Request validation:
 
-The USS validates inputs as specified in the following table. If any of the inputs are not valid, the USS MUST return a [SOAP fault](#Section_2.2.9) message to the DSS with the <ErrorCode> set, as shown in the table.<28>
+The USS validates inputs as specified in the following table. If any of the inputs are not valid, the USS MUST return a [SOAP fault](#Section_2.2.9) message to the DSS with the <ErrorCode> set, as shown in the table.<29>
 
 | Parameter | Validation conditions | ErrorCode |
 | --- | --- | --- |
@@ -1639,7 +1643,7 @@ The USS MUST process this message as follows:
 
 - Parse the *CookieData* in the AuthorizationCookie and extract the ExpirationTime, target groups list, and DSS account GUID.
 - If the cookie has a syntax, formatting, or other error preventing the necessary information from being read out of the **EncryptedData** field, return [**SOAP fault**](#gt_soap-fault) with <ErrorCode> set to InvalidAuthorizationCookie.
-- Create a [Cookie](#Section_2.2.4.8) with the *Expiration* set to an implementation-specific cookie expiration interval sometime in the future.<29>
+- Create a [Cookie](#Section_2.2.4.8) with the *Expiration* set to an implementation-specific cookie expiration interval sometime in the future.<30>
 - Initialize the **EncryptedData** field of the Cookie to a sequence of bytes, as defined in section 2.2.4.8.
 Response:
 
@@ -1792,7 +1796,7 @@ The USS MUST compose a GetConfigDataResponse message in response, as follows:
 - **MaxNumberOfDriverSetsPerRequest**
 - **MaxNumberOfComputerIdsInRequest**
 - **MaxNumberOfPnpHardwareIdsInRequest**
-- **MaxUpdatesPerRequestInGetUpdateDecryptionData**<30>
+- **MaxUpdatesPerRequestInGetUpdateDecryptionData**<31>
 - Copy the following Server State Table entries into the ServerSyncConfigData structure of the response:
 - **ConfigAnchor**
 - Add an entry to the **LanguageUpdateList** element of the ServerSyncConfigData structure of the response:
@@ -1995,13 +1999,13 @@ type="s:int" />
 
 **MaxNumberOfPnpHardwareIdsInRequest**: Specifies the maximum number of device hardware Ids that can be requested in the GetDriverIdList operation.
 
-**NewConfigAnchor**: This field MUST be present. It identifies the point in time that this operation was completed successfully. It is an opaque string that is not interpreted by the DSS. The format of the string is implementation specific.<31>
+**NewConfigAnchor**: This field MUST be present. It identifies the point in time that this operation was completed successfully. It is an opaque string that is not interpreted by the DSS. The format of the string is implementation specific.<32>
 
-**ProtocolVersion**: This field SHOULD<32> be present and SHOULD be set to the protocol version supported by the USS. The possible values are as specified in section [1.7](#Section_1.7).
+**ProtocolVersion**: This field SHOULD<33> be present and SHOULD be set to the protocol version supported by the USS. The possible values are as specified in section [1.7](#Section_1.7).
 
 **LanguageUpdateList**: This field MUST be present. It identifies the list of languages that are supported by the USS. The array contains only the list of languages whose settings have changed since the time identified by the **configAnchor**. Its format is specified in section [3.1.4.4.3.2](#Section_3.1.4.4.3.2).
 
-**MaxUpdatesPerRequestInGetUpdateDecryptionData**: Specifies the maximum number of revisions that can be requested in the [GetUpdateDecryptionData (section 3.1.4.18)](#Section_3.1.4.18) operation.<33>
+**MaxUpdatesPerRequestInGetUpdateDecryptionData**: Specifies the maximum number of revisions that can be requested in the [GetUpdateDecryptionData (section 3.1.4.18)](#Section_3.1.4.18) operation.<34>
 
 <a id="Section_3.1.4.4.3.2"></a>
 ###### 3.1.4.4.3.2 ArrayOfServerSyncLanguageData
@@ -2086,7 +2090,7 @@ The USS validates inputs as specified in the following table. If any of the inpu
 | **cookie** | The EncryptedData MUST be the correct format such that the USS can read values out of it, as specified in section [2.2.4.8](#Section_2.2.4.8). | InvalidCookie |
 | **protocolVersion** in the cookie **EncryptedData** | MUST be of the format x.y where x is the Major Version and y is the Minor Version number. | InvalidParameters |
 | **protocolVersion** in the cookie **EncryptedData** | Major Version MUST be 1. | IncompatibleProtocolVersion |
-| filter:Anchor | MUST be valid format or NULL or empty string. The format of the [**anchor**](#gt_anchor) is implementation specific and not defined by the protocol.<34> | InvalidParameters |
+| filter:Anchor | MUST be valid format or NULL or empty string. The format of the [**anchor**](#gt_anchor) is implementation specific and not defined by the protocol.<35> | InvalidParameters |
 
 Note that if a [**downstream server (DSS)**](#gt_downstream-server-dss) does not meet the required protocol version specified by the **CompatibleProtocolVersion** attribute for updates within a bundle, some or all those updates may be filtered out. This behavior occurs because each update has its own **CompatibleProtocolVersion**, which can potentially be higher than the version of the DSS. To ensure successful update distribution, upgrading the DSS to a compatible protocol version is recommended.
 
@@ -2261,7 +2265,7 @@ type="s1:ArrayOfLanguageAndDelta" />
 
 **DssProtocolVersion:** This field is reserved for future use. It MUST NOT be sent by the DSS.
 
-**Anchor:** This field MUST not be present for the first call to this operation. It SHOULD be set to the anchor returned in the last successful response from this operation. It identifies the point in time that the last GetRevisionIdList operation was completed successfully. This field is an opaque string that is not interpreted by the DSS.<35>
+**Anchor:** This field MUST not be present for the first call to this operation. It SHOULD be set to the anchor returned in the last successful response from this operation. It identifies the point in time that the last GetRevisionIdList operation was completed successfully. This field is an opaque string that is not interpreted by the DSS.<36>
 
 **GetConfig:** This field MUST be present. Set to TRUE if the DSS is requesting categories, update classifications, and detectoids that have changed since the time denoted by the anchor. MUST be set to FALSE if the DSS is requesting software updates.
 
@@ -2424,7 +2428,7 @@ The USS MUST process this message as follows:
 - For each entry found in step 1, create an entry in the ArrayOfServerSyncUpdateData element of the response. Initialize the entry as follows:
 - For categories, update classifications, and detectoids, set the UpdateIdentity element to the CategoryIdentity, ClassificationIdentity, and DetectoidIdentity, respectively, and the XML metadata from the table.
 - For update Revisions found in the Revision Table, set the UpdateIdentity to the UpdateIdentity from the table.
-- For each ServerSyncUpdateData entry, initialize the **XmlUpdateBlob** or the **XmlUpdateBlobCompressed** element with the XML metadata stored in the table.<36>
+- For each ServerSyncUpdateData entry, initialize the **XmlUpdateBlob** or the **XmlUpdateBlobCompressed** element with the XML metadata stored in the table.<37>
 - For each update Revision, initialize the **FileDigestList** element of the ServerSyncUpdateData with the **FileDigest** of the content files associated with the Revision Table entry.
 - For each content file of an update Revision found in the Revision Table in step 2, create an entry in the ArrayOfServerSyncUrlData element of the response. Initialize the **FileDigest** and **MUUrl** fields of this entry from the information in the Revision Table.
 Response:
@@ -2506,7 +2510,7 @@ type="s1:ArrayOfUpdateIdentity" />
 
 **updateIds**: This field MUST be present. The array MUST contain at least one element. The array MUST contain a maximum number of elements as specified by the **MaxNumberOfUpdatesPerRequest** field returned by the [GetConfigData](#Section_3.1.4.4) (section 3.1.4.4) operation. It contains a list of update identities, each identifying a specific update revision for which update metadata is requested, as specified in section [2.2.4.6](#Section_2.2.4.6).
 
-The size of the response is implementation dependent.<37>
+The size of the response is implementation dependent.<38>
 
 <a id="Section_3.1.4.6.2.2"></a>
 ###### 3.1.4.6.2.2 GetUpdateDataResponse
@@ -2667,14 +2671,14 @@ type="s:string" />
 
 **FileDigest**: An SHA-1 hash of the content file.
 
-**MUUrl**: An HTTP URL specifying the location on the Internet from which client computers can download this file. This field MUST NOT be present if no such location is available.<38>
+**MUUrl**: An HTTP URL specifying the location on the Internet from which client computers can download this file. This field MUST NOT be present if no such location is available.<39>
 
-**UssUrl**: Unused. This field SHOULD NOT be present, and MUST be ignored on receipt.<39>
+**UssUrl**: Unused. This field SHOULD NOT be present, and MUST be ignored on receipt.<40>
 
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 GetDriverIdList
 
-The GetDriverIdList method SHOULD<40> get driver revisions and driver sets for new driver updates. This method is invoked only when an [**upstream server (USS)**](#gt_upstream-server-uss) syncs with [**Microsoft Update**](#gt_microsoft-update).
+The GetDriverIdList method SHOULD<41> get driver revisions and driver sets for new driver updates. This method is invoked only when an [**upstream server (USS)**](#gt_upstream-server-uss) syncs with [**Microsoft Update**](#gt_microsoft-update).
 
 <wsdl:operation name="GetRevisionIdList">
 
@@ -2702,7 +2706,7 @@ The USS validates inputs as specified in the following table. If any of the inpu
 | **Cookie** | The EncryptedData MUST be the correct format such that the USS can read values out of it, as specified in section [2.2.4.4](#Section_2.2.4.4). | InvalidCookie |
 | **protocolVersion** in the cookie **EncryptedData** | MUST be of the format x.y where x is the Major Version and y is the Minor Version number. | InvalidParameters |
 | **protocolVersion** in the cookie **EncryptedData** | Major Version MUST be 1. | IncompatibleProtocolVersion |
-| filter:**Anchor** | MUST be a valid format, NULL or empty string. The format of the anchor is implementation specific and not defined by the protocol.<41> | InvalidParameters |
+| filter:**Anchor** | MUST be a valid format, NULL or empty string. The format of the anchor is implementation specific and not defined by the protocol.<42> | InvalidParameters |
 | **ComputerIds** in the ServerSyncDriverFilter parameter | Must be less than or equal to the value defined in the **MaxNumberOfComputerIdsInRequest** config value. | InvalidParameters |
 | **PnpHardwareIds** in the ServerSyncDriverFilter parameter | Must be less than or equal to the value defined in the **MaxNumberOfPnpHardwareIdsInRequest** config value. | InvalidParameters |
 
@@ -2913,7 +2917,7 @@ This complex type contains driver synchronization filter data.
 
 **DssProtocolVersion:** This field MUST be sent but is ignored by the server.
 
-**Anchor:** This field SHOULD<42> be set to the anchor returned in the first successful response from this operation. It identifies the point in time that the last GetDriverIdList operation was completed successfully. This field is an opaque string that is not interpreted by [**Microsoft Update**](#gt_microsoft-update). If Microsoft Update has never called the USS before, this field MUST NOT be present for the first call to this operation.
+**Anchor:** This field SHOULD<43> be set to the anchor returned in the first successful response from this operation. It identifies the point in time that the last GetDriverIdList operation was completed successfully. This field is an opaque string that is not interpreted by [**Microsoft Update**](#gt_microsoft-update). If Microsoft Update has never called the USS before, this field MUST NOT be present for the first call to this operation.
 
 **Categories:** This field MUST be present. The format of the field is specified in section [3.1.4.5.3.2](#Section_3.1.4.5.3.2). If the array is not empty, it specifies a list of category IDs and whether or not delta-synchronization is to be applied for each update. If empty, then USS will return all matching driver sets/drivers irrespective of OS/category prerequisites. When specified, USS filters only driver sets/drivers that have the correct OS/category prerequisite.
 
@@ -2926,7 +2930,7 @@ For a category in the array, if the Delta field is set to TRUE, the update serve
 <a id="Section_3.1.4.8"></a>
 #### 3.1.4.8 GetDriverSetData
 
-The **GetDriverSetData** method SHOULD<43> get a list of driver set identities and their corresponding driver targeting XMLs. This method is only invoked when an [**upstream server (USS)**](#gt_upstream-server-uss) syncs with [**Microsoft Update**](#gt_microsoft-update), which provides a list of driver set identities as input.
+The **GetDriverSetData** method SHOULD<44> get a list of driver set identities and their corresponding driver targeting XMLs. This method is only invoked when an [**upstream server (USS)**](#gt_upstream-server-uss) syncs with [**Microsoft Update**](#gt_microsoft-update), which provides a list of driver set identities as input.
 
 - <wsdl:operation name="GetDriverSetData">
 - <wsdl:input message="tns:GetDriverSetDataSoapIn" />
@@ -3136,8 +3140,8 @@ The USS validates inputs as given in the following table. If any of the inputs a
 | **cookie** | The EncryptedData MUST be the correct format such that the USS can read values out of it, as specified in section [2.2.4.8](#Section_2.2.4.8). | InvalidCookie |
 | **protocolVersion** in the cookie **EncryptedData** | MUST be of the format x.y where x is the Major Version and y is the Minor Version number. | InvalidParameters |
 | **protocolVersion** in the cookie **EncryptedData** | Major Version MUST be 1. | IncompatibleProtocolVersion |
-| **deploymentAnchor** | MUST be a string with the correct format, an empty string, or not present. The format of the anchor is implementation-specific and not defined by the protocol.<44> | InvalidParameters |
-| **syncAnchor** | MUST be a valid format and not NULL and not an empty string. The format of the anchor is implementation-specific and not defined by the protocol.<45> | InvalidParameters |
+| **deploymentAnchor** | MUST be a string with the correct format, an empty string, or not present. The format of the anchor is implementation-specific and not defined by the protocol.<45> | InvalidParameters |
+| **syncAnchor** | MUST be a valid format and not NULL and not an empty string. The format of the anchor is implementation-specific and not defined by the protocol.<46> | InvalidParameters |
 
 Data processing:
 
@@ -3640,10 +3644,10 @@ The USS MUST compose a GetRollupConfigurationResponse message in response, as fo
 - **DoDetailedRollup**: Set to the **DoDetailedRollup** value stored in the Server Configuration Table.
 - **RollupResetGuid**: Set to the RollupResetGuid value stored in the Server Configuration Table.
 - **ServerId**: Set to the **ServerID** value stored in the Server Configuration Table.
-- **RollupDownstreamServersMaxBatchSize**: Set to the maximum number of DownstreamServerRollupClientSummary structures the USS will accept in a single [RollupDownstreamServers](#Section_3.1.4.14) request, summed across all DownstreamServerRollupInfo structures in the request. The value is implementation-specific.<46>
-- **RollupComputersMaxBatchSize**: Set to the maximum number of ComputerRollupInfo structures the USS will accept in a single [RollupComputers](#Section_3.1.4.15) request. The value is implementation-specific.<47>
-- **GetOutOfSyncComputersMaxBatchSize**: Set to the maximum number of ComputerLastRollupNumber structures the USS will accept in a single [GetOutOfSyncComputers](#Section_3.1.4.16) request. The value is implementation-specific.<48>
-- **RollupComputerStatusMaxBatchSize**: Set to the maximum number of ComputerStatusRollupInfo structures the USS will accept in a single [RollupComputerStatus](#Section_3.1.4.17) request. The value is implementation-specific.<49>
+- **RollupDownstreamServersMaxBatchSize**: Set to the maximum number of DownstreamServerRollupClientSummary structures the USS will accept in a single [RollupDownstreamServers](#Section_3.1.4.14) request, summed across all DownstreamServerRollupInfo structures in the request. The value is implementation-specific.<47>
+- **RollupComputersMaxBatchSize**: Set to the maximum number of ComputerRollupInfo structures the USS will accept in a single [RollupComputers](#Section_3.1.4.15) request. The value is implementation-specific.<48>
+- **GetOutOfSyncComputersMaxBatchSize**: Set to the maximum number of ComputerLastRollupNumber structures the USS will accept in a single [GetOutOfSyncComputers](#Section_3.1.4.16) request. The value is implementation-specific.<49>
+- **RollupComputerStatusMaxBatchSize**: Set to the maximum number of ComputerStatusRollupInfo structures the USS will accept in a single [RollupComputerStatus](#Section_3.1.4.17) request. The value is implementation-specific.<50>
 Response:
 
 If no errors occur during processing, the USS MUST return the response to the DSS. If an error occurs during processing, the USS MUST return a [**SOAP fault**](#gt_soap-fault) indicating that an error occurred. This protocol does not define a mechanism for returning information on the cause of the failure. The DSS MUST stop the protocol when a SOAP fault is received.
@@ -3821,7 +3825,7 @@ Data processing:
 
 The USS MUST process this message as follows:
 
-- The USS MAY use the clientTime value passed by the DSS to determine the difference between the USS system clock and DSS system clock, and adjust the other input time stamps to compensate for the difference.<50>
+- The USS MAY use the clientTime value passed by the DSS to determine the difference between the USS system clock and DSS system clock, and adjust the other input time stamps to compensate for the difference.<51>
 - For each DownstreamServerRollupInfo structure in the request:
 - Get the **ParentServerId** value and search the DSS Table for an entry with a **ServerID** matching this value. If no such entry is found, return a [**SOAP fault**](#gt_soap-fault) message and stop processing this request.
 - Get the **ServerId** value and search the DSS Table for an entry with a **ServerID** matching this value.
@@ -4015,7 +4019,7 @@ Time (Hours:Minutes:Seconds)= 00:00:00
 
 **ParentServerId**: This field MUST be present. It MUST be a GUID that identifies the update server's parent USS. If the update server's parent USS is the update server receiving the [RollupDownstreamServers](#Section_3.1.4.14) request, this field MUST be set to "00000000-0000-0000-0000-000000000000".
 
-**Version**: This field MUST be present. It MUST be a string that identifies the version number of the update server. The string MUST contain no more than 32 characters and MUST consist of one to four integers that are separated by periods (".").<51>
+**Version**: This field MUST be present. It MUST be a string that identifies the version number of the update server. The string MUST contain no more than 32 characters and MUST consist of one to four integers that are separated by periods (".").<52>
 
 **IsReplica**: This field MUST be present. It MUST be TRUE if the update server is a Replica DSS; otherwise, it MUST be FALSE.
 
@@ -4142,7 +4146,7 @@ A structure that contains summary information on the update server, the updates 
 
 **UpdatesUpToDateCount**: This field MUST be present. It indicates the number of updates that are known to be installed on all client computers to which it is applicable. The value MUST be 0 or greater.
 
-**CustomComputerTargetGroupCount**: This field MUST be present. It indicates the number of target groups that have been created on this update server or that have been received from the USS. This count MUST NOT include target groups that were created during the initial setup of the update server. The value MUST be 0 or greater.<52>
+**CustomComputerTargetGroupCount**: This field MUST be present. It indicates the number of target groups that have been created on this update server or that have been received from the USS. This count MUST NOT include target groups that were created during the initial setup of the update server. The value MUST be 0 or greater.<53>
 
 **ComputerTargetCount**: This field MUST be present. It indicates the number of client computers that get updates from this update server. The value MUST be 0 or greater.
 
@@ -4252,7 +4256,7 @@ pe="tns:ArrayOfDownstreamServerRollupClientActivitySummary" />
 
 **SystemMetrics**: This field MUST be present. It MAY contain additional data to be used to identify the operating system used by the client computers.
 
-**ProcessorArchitecture**: This field MUST be present. It indicates the CPU architecture for which the operating system on the client computers is built.<53>
+**ProcessorArchitecture**: This field MUST be present. It indicates the CPU architecture for which the operating system on the client computers is built.<54>
 
 **Count**: This field MUST be present. It indicates the number of client computers in this group.
 
@@ -4345,7 +4349,7 @@ The USS MUST process this message as follows:
 
 - If the **DoDetailedRollup** value in the Server Configuration Table is FALSE, return a [**SOAP fault**](#gt_soap-fault) message to the DSS and stop processing the request.
 - For each ComputerRollupInfo structure in the request, get the **ParentServerId** value and search the DSS Table for an entry with a matching **ServerID**. If no entry is found, return a SOAP fault message to the DSS with an <ErrorCode> of InternalServerError and stop processing the request.
-- The USS MAY use the clientTime value passed by the DSS to determine the difference between the USS system clock and DSS system clock, and adjust the other input time stamps to compensate for the difference.<54>
+- The USS MAY use the clientTime value passed by the DSS to determine the difference between the USS system clock and DSS system clock, and adjust the other input time stamps to compensate for the difference.<55>
 - For each ComputerRollupInfo structure in the request, get the **ComputerId** value and search the client computers table for an entry with a matching **ComputerId**.
 - If no entry is found, create a new entry, initializing all values using values from the ComputerRollupInfo structure.
 - If an existing entry is found, and the **LastSyncTime** value from this entry in the table is less than or equal to the **LastSyncTime** value from the ComputerRollupInfo structure, replace the values in the entry using the values from the ComputerRollupInfo structure.
@@ -4364,7 +4368,7 @@ This notifies the caller that it MUST populate the Details field the next time i
 - For each ComputerRollupInfo structure in the request, the USS MAY add an entry to the **RollupComputersResult** array with the following:
 - **ComputerId**: Set to the **ComputerId** value from the ComputerRollupInfo structure.
 - **Change**: Set to Deleted.
-This notifies the caller that the USS is no longer interested in receiving information about this client computer.<55>
+This notifies the caller that the USS is no longer interested in receiving information about this client computer.<56>
 
 The same **ComputerId** MUST NOT appear more than once in the **RollupComputersResult** array. If the **ComputerId** already exists in the array as a result of step 5.2, the same **ComputerId** MUST NOT be added in step 5.3.
 
@@ -4541,7 +4545,7 @@ d" />
 
 </s:complexType>
 
-**Details**: This field MUST be present if this DSS is reporting information on this client computer for the first time. This field MAY be present in subsequent calls. It contains detailed information on the client computer. Its format is specified in section [3.1.4.15.3.3](#Section_3.1.4.15.3.3).<56>
+**Details**: This field MUST be present if this DSS is reporting information on this client computer for the first time. This field MAY be present in subsequent calls. It contains detailed information on the client computer. Its format is specified in section [3.1.4.15.3.3](#Section_3.1.4.15.3.3).<57>
 
 **ComputerId**: This field MUST be present. It indicates the globally unique string that is used to identify the client computer.
 
@@ -4660,9 +4664,9 @@ ed" />
 
 **OSLocale**: This field MUST be present. It indicates the operating system locale of the client computer. Details are specified in [MS-LCID](../MS-LCID/MS-LCID.md).
 
-**OSFamily**: This field SHOULD be present and it SHOULD be set to the operating system dependent family name of the client computer.<57>
+**OSFamily**: This field SHOULD be present and it SHOULD be set to the operating system dependent family name of the client computer.<58>
 
-**OSDescription**: This field SHOULD be present and it SHOULD be set to the operating system dependent description.<58>
+**OSDescription**: This field SHOULD be present and it SHOULD be set to the operating system dependent description.<59>
 
 **ComputerMake**: This field MUST be present. It indicates the name of the client computer's manufacturer. The string MUST contain no more than 64 characters.
 
@@ -4684,7 +4688,7 @@ ed" />
 
 **SystemMetrics**: This field MUST be present. It contains additional integer data to be used to identify the operating system used by the client computer.
 
-**ClientVersion**: This field MUST be present. It indicates the version number of the client software on the client computer that is communicating with the update server. The string MUST contain no more than 20 characters.<59>
+**ClientVersion**: This field MUST be present. It indicates the version number of the client software on the client computer that is communicating with the update server. The string MUST contain no more than 20 characters.<60>
 
 <a id="Section_3.1.4.15.3.4"></a>
 ###### 3.1.4.15.3.4 ArrayOfChangedComputer
@@ -4961,8 +4965,8 @@ Data processing:
 The USS MUST process this message as follows:
 
 - If the **DoDetailedRollup** value in the Server Configuration Table is FALSE, return a [**SOAP fault**](#gt_soap-fault) message to the DSS and stop processing the request.
-- If the USS is under heavy load, the USS MAY return RollupComputerStatusResponse message with **RollupComputerStatusResult** set to FALSE, and stop processing the request. This notifies the DSS that it SHOULD wait and resend the request at a later time.<60>
-- The USS MAY use the clientTime value passed by the DSS to determine the difference between the USS system clock and DSS system clock, and adjust the other input time stamps to compensate for the difference.<61>
+- If the USS is under heavy load, the USS MAY return RollupComputerStatusResponse message with **RollupComputerStatusResult** set to FALSE, and stop processing the request. This notifies the DSS that it SHOULD wait and resend the request at a later time.<61>
+- The USS MAY use the clientTime value passed by the DSS to determine the difference between the USS system clock and DSS system clock, and adjust the other input time stamps to compensate for the difference.<62>
 - For each ComputerStatusRollupInfo structure in the request, get the **ComputerId** value and search the Client Computers Table for an entry with a matching **ComputerId** value.
 - If an entry is found, do the following:
 - Set the **LastReceivedRollupNumber** value in the table entry to the **RollupNumber** value from the ComputerStatusRollupInfo structure.
@@ -5218,7 +5222,7 @@ ype="s:int" />
 <a id="Section_3.1.4.18"></a>
 #### 3.1.4.18 GetUpdateDecryptionData
 
-A DSS SHOULD<62> call the GetUpdateDecryptionData method to get the decryption data for the list of update IDs requested.
+A DSS SHOULD<63> call the GetUpdateDecryptionData method to get the decryption data for the list of update IDs requested.
 
 <wsdl:operation name="GetUpdateDecryptionData">
 
@@ -5482,12 +5486,12 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-A DSS MUST have some implementation-specific way of learning the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) or IP address and the TCP/IP port of the USS that it is configured to synchronize from (for example, manual configuration or specified as part of the Start Synchronization trigger). No other actions are taken until an event is triggered by a higher layer, as described below.<63>
+A DSS MUST have some implementation-specific way of learning the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) or IP address and the TCP/IP port of the USS that it is configured to synchronize from (for example, manual configuration or specified as part of the Start Synchronization trigger). No other actions are taken until an event is triggered by a higher layer, as described below.<64>
 
-- Start Synchronization trigger: The DSS MUST provide at least one way to trigger the start of the synchronization process that uses this protocol. The DSS implementation MAY use timer events to trigger the protocol initiation.<64>
+- Start Synchronization trigger: The DSS MUST provide at least one way to trigger the start of the synchronization process that uses this protocol. The DSS implementation MAY use timer events to trigger the protocol initiation.<65>
 - On receipt of the Start Synchronization trigger, the DSS MUST start the Authorization step given in section [3.2.4.1](#Section_3.2.4.1).
-- Cancel Synchronization trigger: The DSS implementation MAY provide a higher layer with the capability to cancel a synchronization that is in progress. This protocol does not define when such a Cancel request is honored by the DSS and how to effect the cancellation. If the steps and message sequencing given in section [3.2.4](#Section_3.2.4) are followed, the protocol is designed to ensure that the DSS data store integrity is maintained after every step in the synchronization until processing is completed at the DSS.<65>
-- Start Reporting Data Synchronization trigger: The DSS MAY provide an additional way to trigger the start of the reporting process that uses this protocol but skips the [Deployments Synchronization](#Section_3.2.4.3) and [Content Synchronization](#Section_3.2.4.4) steps.<66>
+- Cancel Synchronization trigger: The DSS implementation MAY provide a higher layer with the capability to cancel a synchronization that is in progress. This protocol does not define when such a Cancel request is honored by the DSS and how to effect the cancellation. If the steps and message sequencing given in section [3.2.4](#Section_3.2.4) are followed, the protocol is designed to ensure that the DSS data store integrity is maintained after every step in the synchronization until processing is completed at the DSS.<66>
+- Start Reporting Data Synchronization trigger: The DSS MAY provide an additional way to trigger the start of the reporting process that uses this protocol but skips the [Deployments Synchronization](#Section_3.2.4.3) and [Content Synchronization](#Section_3.2.4.4) steps.<67>
 A DSS MUST have an implementation-specific way of learning its FQDN. It MUST also have an implementation-specific way of creating a [**GUID**](#gt_globally-unique-identifier-guid) to identify itself.
 
 <a id="Section_3.2.4"></a>
@@ -5597,6 +5601,7 @@ If the number of revisions in the GetRevisionIdList response in the previous ste
 - FileName
 - FileDigest
 - PatchingType
+- PatchingTypePreferred
 - From each metadata for an update revision, extract the **EulaID** (as specified in section 3.1.1.1) and store it in the EULAs Table.
 - From each metadata for an update revision, extract the **FragmentType**, and **IsEncrypted** (as specified in section 3.1.1.1). If **FragmentType** matches "FileURL", then set the **IsSecure** field (section 3.1.1) to 1 in the Revision Table. If **IsEncrypted** is true, set the value of the **IsEncrypted** field to 1 in the Revision Table.
 - From each metadata for an update revision, extract the **FragmentType** (as specified in section 3.1.1.1). If **FragmentType** is "FileDecryption", then the update contains additional decryption information. For all such updates, compose a[GetUpdateDecryptionData (section 3.1.4.18)](#Section_3.1.4.18) request.
@@ -5643,7 +5648,7 @@ OR
 
 A [DownloadFiles](#Section_3.1.4.11) request is received by this Update Server for this file.
 
-- If the file's PatchingType is "Express and" the ServerHostsPsfFiles flag in the Server Configuration for this DSS is set to TRUE.<67>
+- If the file's PatchingTypePreferred (or PatchingType, if PatchingTypePreferred is not present) is "Express" and the ServerHostsPsfFiles flag in the Server Configuration for this DSS is set to TRUE.<68>
 The DSS MUST synchronize content for each file that it needs to download as follows:
 
 - If the **CatalogOnlySync** flag of the Parent USS State is set to FALSE, construct the URL as follows and download the file using the USS Content Download service:
@@ -5651,14 +5656,14 @@ The DSS MUST synchronize content for each file that it needs to download as foll
 - Set the <folder name> of the URL to the last two characters of the **FileDigest** that is represented in Base64.
 - Set the <content file name> to the name of the file as given in the Revision Table.
 - If the **CatalogOnlySync** flag of the Parent USS State is set to TRUE, download the file using the **MUUrl** for the file.
-- When downloading from the USS, if a "File Not Found" HTTP error is received, request the USS to download the file by sending the **FileDigest** of the file in the DownloadFiles (section 3.1.4.11) request. An implementation MAY choose to batch multiple such failed requests within a single method call for DownloadFiles.<68>
-- For any other error during the HTTP download of the file, the recovery action is implementation-specific and not defined by the protocol.<69>
+- When downloading from the USS, if a "File Not Found" HTTP error is received, request the USS to download the file by sending the **FileDigest** of the file in the DownloadFiles (section 3.1.4.11) request. An implementation MAY choose to batch multiple such failed requests within a single method call for DownloadFiles.<69>
+- For any other error during the HTTP download of the file, the recovery action is implementation-specific and not defined by the protocol.<70>
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Reporting Data Synchronization
 
 The DSS reports information on its descendant DSSs and their client computers to the USS during this step. This step is performed only if both the USS and the DSS support version 1.3 or higher of the protocol.
 
-This step MAY<70> run before or in parallel with the [Content Synchronization](#Section_3.2.4.4) step. Also, this step MAY be triggered and run on its own without running the previous steps in the protocol.
+This step MAY<71> run before or in parallel with the [Content Synchronization](#Section_3.2.4.4) step. Also, this step MAY be triggered and run on its own without running the previous steps in the protocol.
 
 The DSS MUST send information on its descendant DSSs and their client computers to the USS as follows:
 
@@ -5688,11 +5693,11 @@ The response is stored for use in the steps that follow.
 - **CriticalOrSecurityUpdatesNotApprovedForInstallCount**: The number of unique UpdateIdentity GUID values in the Revision Table, for which:
 - At least one entry with that UpdateIdentity GUID has the Hidden element set to FALSE.
 - There is no entry in the Deployment Table with a matching UpdateIdentity GUID and an Action value of 0.
-- The update that this entry represents is intended to repair a security issue on the client computers, or is otherwise considered to be critical to the operation of the client computers. How this determination is made is implementation-dependent.<71>
+- The update that this entry represents is intended to repair a security issue on the client computers, or is otherwise considered to be critical to the operation of the client computers. How this determination is made is implementation-dependent.<72>
 - **WsusInfrastructureUpdatesNotApprovedForInstallCount**: The number of unique UpdateIdentity GUID values in the Revision Table, for which:
 - At least one entry with that UpdateIdentity GUID has the Hidden element set to FALSE.
 - There is no entry in the Deployment Table with a matching UpdateIdentity GUID and an Action value of 0.
-- The update that this entry represents is required for the client computers to continue to get updates from this DSS. How this determination is made is implementation dependent.<72>
+- The update that this entry represents is required for the client computers to continue to get updates from this DSS. How this determination is made is implementation dependent.<73>
 - **CustomComputerTargetGroupCount**: The number of entries in the TargetGroup Table for which the **IsBuiltin** value is FALSE.
 - **UpdatesWithClientErrorsCount**: The number of updates available on the DSS that at least one client computer has attempted and failed to install.
 - **UpdatesWithServerErrorsCount**: The number of updates available on the DSS for which the DSS has failed to download [**content**](#gt_content).
@@ -5728,7 +5733,7 @@ An implementation can send the DownstreamServerInfo structures one at a time, or
 
 Example: If structure A appears before structure B in the list, the request containing structure B MUST NOT be sent before the request containing structure A is sent. They MAY be sent in the same request; however, in this example, structure A MUST appear before structure B in the **downstreamServers** array.
 
-Furthermore, the number of DownstreamServerRollupClientSummary structures in one request, summed across all DownstreamServerInfo structures in the request, MUST NOT exceed the **RollupDownstreamServersMaxBatchSize** value.<73>
+Furthermore, the number of DownstreamServerRollupClientSummary structures in one request, summed across all DownstreamServerInfo structures in the request, MUST NOT exceed the **RollupDownstreamServersMaxBatchSize** value.<74>
 
 For each RollupDownstreamServers request sent, the USS responds with a RollupDownstreamServers message. Upon receiving this response, the DSS removes from the Client Activity Summary Table all rows corresponding to the **ServerID** values that were sent as part of the request.
 
@@ -5745,7 +5750,7 @@ For each RollupDownstreamServers request sent, the USS responds with a RollupDow
 - **EncryptedData** = zero length array
 - **clientTime**: Set to the current time.
 - **computers**: Populate the array using one or more of the ComputerRollupInfo structures.
-An implementation MAY send the ComputerRollupInfo structures one at a time, or it MAY send them in batches. If the implementation chooses to send them in batches, the number of ComputerRollupInfo structures sent in a single request MUST NOT exceed the **RollupComputersMaxBatchSize** value obtained from the GetRollupConfigurationResponse.<74> For each RollupComputers message sent, the USS responds with a RollupComputersResponse message, with the **RollupComputersResult** field set to an array of zero or more ChangedComputer structures. The DSS MUST process each ChangedComputer structure in each response as follows:
+An implementation MAY send the ComputerRollupInfo structures one at a time, or it MAY send them in batches. If the implementation chooses to send them in batches, the number of ComputerRollupInfo structures sent in a single request MUST NOT exceed the **RollupComputersMaxBatchSize** value obtained from the GetRollupConfigurationResponse.<75> For each RollupComputers message sent, the USS responds with a RollupComputersResponse message, with the **RollupComputersResult** field set to an array of zero or more ChangedComputer structures. The DSS MUST process each ChangedComputer structure in each response as follows:
 
 - If the value of the Change field is deleted, get the **ComputerId** value from the ChangedComputer structure, find the entry in the Client Computers Table with the matching **ComputerId** value, and remove it from the table. If the entry is not found in the table, do nothing.
 - If the value of the Change field is NewParent, get the **ComputerId** value from the ChangedComputer structure, find the entry in the Client Computers Table with the matching ComputerId value, and set the **HasDetailsChanged** value to TRUE. If the entry is not found in the table, do nothing.
@@ -5762,7 +5767,7 @@ Each request is composed as follows:
 - **EncryptedData** = zero length array
 - **parentServerId**: Set to the **ServerID** value from the Server Configuration Table.
 - **lastRollupNumbers**: Populate the array using one or more of the ComputerLastRollupNumber structures.
-An implementation MAY send the ComputerLastRollupNumber structures one at a time, or it MAY send them in batches. If the implementation chooses to send them in batches, the number of ComputerLastRollupNumber structures sent in a single request MUST NOT exceed the **GetOutOfSyncComputersMaxBatchSize** value obtained from the GetRollupConfigurationResponse.<75>
+An implementation MAY send the ComputerLastRollupNumber structures one at a time, or it MAY send them in batches. If the implementation chooses to send them in batches, the number of ComputerLastRollupNumber structures sent in a single request MUST NOT exceed the **GetOutOfSyncComputersMaxBatchSize** value obtained from the GetRollupConfigurationResponse.<76>
 
 For each GetOutOfSyncComputers message sent, the USS responds with a GetOutOfSyncComputersResponse message with the **GetOutOfSyncComputersResult** field set to an array of zero or more strings, each identifying a client computer.
 
@@ -5787,11 +5792,11 @@ For each entry, construct a ComputerStatusRollupUpdateStatus structure as follow
 - **clientTime**: Set to the current time.
 - **parentServerId**: Set to the **ServerID** value from the Server Configuration Table.
 - **computers**: Populate the array using one or more of the ComputerStatusRollupInfo structures.
-An implementation MAY send the ComputerStatusRollupInfo structures one at a time, or it MAY<76> send them in batches. If the implementation chooses to send them in batches, the number of ComputerStatusRollupInfo structures sent in a single request MUST NOT exceed the **RollupComputerStatusMaxBatchSize** value obtained from the GetRollupConfigurationResponse.
+An implementation MAY send the ComputerStatusRollupInfo structures one at a time, or it MAY<77> send them in batches. If the implementation chooses to send them in batches, the number of ComputerStatusRollupInfo structures sent in a single request MUST NOT exceed the **RollupComputerStatusMaxBatchSize** value obtained from the GetRollupConfigurationResponse.
 
 For each RollupComputerStatus message sent, the USS responds with a RollupComputerStatusResponse message, each containing a Boolean **RollupComputerStatusResult** value.
 
-If the **RollupComputerStatusResult** value is FALSE, this indicates that the USS was too busy to accept the request, and the DSS MUST wait at least 1 minute before sending another request. The DSS MAY resend the same request (with the **clientTime** value updated to reflect the current time) after waiting.<77>
+If the **RollupComputerStatusResult** value is FALSE, this indicates that the USS was too busy to accept the request, and the DSS MUST wait at least 1 minute before sending another request. The DSS MAY resend the same request (with the **clientTime** value updated to reflect the current time) after waiting.<78>
 
 If the **RollupComputerStatusResult** value is TRUE, this indicates that the USS successfully received the message. For each ComputerStatusRollupInfo structure that was sent as part of the request, the DSS MUST find the corresponding entry in the Client Computers Table and update the entry as follows:
 
@@ -7099,7 +7104,7 @@ Method>
 The USS provides the DSS with all updates that ultimately are intended for client computers. It is important to prevent man-in-the-middle or other forms of spoofing attacks from providing the DSS with invalid or malformed metadata and rogue content. To ensure secure download of all data from the USS, the DSS performs these checks:
 
 - It accepts only updates that are signed by Microsoft certificates.
-- Depending on the operating system, it accepts only content files whose SHA hash matches the SHA hash specified by the USS in the update metadata.<78>
+- Depending on the operating system, it accepts only content files whose SHA hash matches the SHA hash specified by the USS in the update metadata.<79>
 As a result, it is strongly recommended that the USS be configured so that all metadata communication is done over HTTPS instead of HTTP. Using Secure Sockets Layer (SSL) server certificate verification ensures that the client is talking to the real server and closes any possible man-in-the-middle attacks.
 
 There are two strategies one can use to reduce the impact of Denial Of Service (DOS) attacks against the USS:
@@ -10926,7 +10931,6 @@ The terms "earlier" and "later", when used with a product version, refer to eith
 - Windows Server 2012 operating system
 - Windows Server 2012 R2 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows Server 2025 operating system
@@ -10994,129 +10998,131 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <23> Section 3.1.1: In Windows 8 operating system and Windows Server 2012 and later, WUA clients authenticate the downloaded files against SHA-256 hashes prior to using their contents, in addition to the SHA-1 hashes. All other versions of WUA only authenticate the SHA-1 hashes contained in the existing Digest attribute and ignore the **AdditionalDigest** elements if they are present.
 
-<24> Section 3.1.1.1: The **FragmentType** property is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
+<24> Section 3.1.1.1: The **PatchingTypePreferred** property is available in Windows Server 2019 and later.
 
-<25> Section 3.1.1.1: The **IsEncrypted** property is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
+<25> Section 3.1.1.1: The **FragmentType** property is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
-<26> Section 3.1.4.1.3.1: In applicable Windows Server releases, this field is not present.
+<26> Section 3.1.1.1: The **IsEncrypted** property is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
-<27> Section 3.1.4.1.3.3: In applicable Windows Server releases, this field is not present.
+<27> Section 3.1.4.1.3.1: In applicable Windows Server releases, this field is not present.
 
-<28> Section 3.1.4.2: Windows implementations return an incorrect parameter name of *machineName* instead of *accountName* when the *accountName* parameter is invalid.
+<28> Section 3.1.4.1.3.3: In applicable Windows Server releases, this field is not present.
 
-<29> Section 3.1.4.3: Windows implementations set the cookie expiration time to be 240 minutes from the time the cookie is created or the expiration time of the [AuthorizationCookie](#Section_2.2.4.7), whichever is lower.
+<29> Section 3.1.4.2: Windows implementations return an incorrect parameter name of *machineName* instead of *accountName* when the *accountName* parameter is invalid.
 
-<30> Section 3.1.4.4: The **MaxUpdatesPerRequestInGetUpdateDecryptionData** configuration element is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
+<30> Section 3.1.4.3: Windows implementations set the cookie expiration time to be 240 minutes from the time the cookie is created or the expiration time of the [AuthorizationCookie](#Section_2.2.4.7), whichever is lower.
 
-<31> Section 3.1.4.4.3.1: In applicable Windows Server releases, this field is of the form nnnn ',' yyyy '-' MM '-' dd ' ' hh ':' mm ':' ss '.' sss where
+<31> Section 3.1.4.4: The **MaxUpdatesPerRequestInGetUpdateDecryptionData** configuration element is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
+
+<32> Section 3.1.4.4.3.1: In applicable Windows Server releases, this field is of the form nnnn ',' yyyy '-' MM '-' dd ' ' hh ':' mm ':' ss '.' sss where
 
 nnnn is a positive decimal integer value between 1 and 2,147,483,647 that is used internally to identify a point in time. The value is 1 initially and is incremented by 1 each time a Deployment is created or deleted.
 
 yyyy, MM, dd,hh, mm, ss, and sss are the current year, month, day, hour, minute, second, and fraction of a second, respectively.
 
-<32> Section 3.1.4.4.3.1: WSUS 2.0 omits this element. WSUS 3.0 and its service pack releases specify this element to correspond to the protocol version specified in section [1.7](#Section_1.7).
+<33> Section 3.1.4.4.3.1: WSUS 2.0 omits this element. WSUS 3.0 and its service pack releases specify this element to correspond to the protocol version specified in section [1.7](#Section_1.7).
 
-<33> Section 3.1.4.4.3.1: The **MaxUpdatesPerRequestInGetUpdateDecryptionData** configuration element is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
+<34> Section 3.1.4.4.3.1: The **MaxUpdatesPerRequestInGetUpdateDecryptionData** configuration element is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
-<34> Section 3.1.4.5: In applicable Windows Server releases, the anchor is required to follow the format described in section [3.1.4.4](#Section_3.1.4.4), under the Windows behavior description for the **NewConfigAnchor** field.
+<35> Section 3.1.4.5: In applicable Windows Server releases, the anchor is required to follow the format described in section [3.1.4.4](#Section_3.1.4.4), under the Windows behavior description for the **NewConfigAnchor** field.
 
-<35> Section 3.1.4.5.3.1: All applicable Windows Server releases set this to the anchor returned in the last successful GetRevisionIdList operation response.
+<36> Section 3.1.4.5.3.1: All applicable Windows Server releases set this to the anchor returned in the last successful GetRevisionIdList operation response.
 
-<36> Section 3.1.4.6: All Windows implementations use **XmlUpdateBlobCompressed** if the size of the uncompressed XML metadata is more than 5,120 bytes.
+<37> Section 3.1.4.6: All Windows implementations use **XmlUpdateBlobCompressed** if the size of the uncompressed XML metadata is more than 5,120 bytes.
 
-<37> Section 3.1.4.6.2.1: On Microsoft Windows, the response is limited to 2000000 bytes.
+<38> Section 3.1.4.6.2.1: On Microsoft Windows, the response is limited to 2000000 bytes.
 
-<38> Section 3.1.4.6.3.5: In applicable Windows Server releases, this field is present only for updates that are available on the Microsoft Update website. For such updates, this URL points to a location on the Microsoft Update website from which the file can be downloaded.
+<39> Section 3.1.4.6.3.5: In applicable Windows Server releases, this field is present only for updates that are available on the Microsoft Update website. For such updates, this URL points to a location on the Microsoft Update website from which the file can be downloaded.
 
-<39> Section 3.1.4.6.3.5: In applicable Windows Server releases, this field is not present.
+<40> Section 3.1.4.6.3.5: In applicable Windows Server releases, this field is not present.
 
-<40> Section 3.1.4.7: The GetDriverIdList method is not available in Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<41> Section 3.1.4.7: The GetDriverIdList method is not available in Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<41> Section 3.1.4.7: In applicable Windows Server releases, the anchor is required to follow the format described in section [3.1.4.4.3.1](#Section_3.1.4.4.3.1), under the Windows behavior description for the **NewConfigAnchor** field.
+<42> Section 3.1.4.7: In applicable Windows Server releases, the anchor is required to follow the format described in section [3.1.4.4.3.1](#Section_3.1.4.4.3.1), under the Windows behavior description for the **NewConfigAnchor** field.
 
-<42> Section 3.1.4.7.3.4: All applicable Windows Server releases set this to the anchor returned in the first successful GetDriverIdList operation response.
+<43> Section 3.1.4.7.3.4: All applicable Windows Server releases set this to the anchor returned in the first successful GetDriverIdList operation response.
 
-<43> Section 3.1.4.8: The **GetDriverSetData** method is not available in Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<44> Section 3.1.4.8: The **GetDriverSetData** method is not available in Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<44> Section 3.1.4.10: In Windows Server 2003 and Windows Server 2008 implementations, the anchor is required to follow the format defined in section 3.1.4.4 under the Windows behavior description for the **NewConfigAnchor** field.
+<45> Section 3.1.4.10: In Windows Server 2003 and Windows Server 2008 implementations, the anchor is required to follow the format defined in section 3.1.4.4 under the Windows behavior description for the **NewConfigAnchor** field.
 
-<45> Section 3.1.4.10: In applicable Windows Server releases, the anchor is required to follow the format defined in section 3.1.4.4 under the Windows behavior description for the **NewConfigAnchor** field.
+<46> Section 3.1.4.10: In applicable Windows Server releases, the anchor is required to follow the format defined in section 3.1.4.4 under the Windows behavior description for the **NewConfigAnchor** field.
 
-<46> Section 3.1.4.13: In Windows implementations, this value is always set to 5,000.
+<47> Section 3.1.4.13: In Windows implementations, this value is always set to 5,000.
 
-<47> Section 3.1.4.13: In Windows implementations, this value is always set to 1,500.
+<48> Section 3.1.4.13: In Windows implementations, this value is always set to 1,500.
 
-<48> Section 3.1.4.13: In Windows implementations, this value is always set to 20,000.
+<49> Section 3.1.4.13: In Windows implementations, this value is always set to 20,000.
 
-<49> Section 3.1.4.13: In Windows implementations, this value is always set to 500.
+<50> Section 3.1.4.13: In Windows implementations, this value is always set to 500.
 
-<50> Section 3.1.4.14: In Windows implementations, the USS calculates the difference between the current time (according to its system clock) and the **clientTime** value. If the absolute value of the difference is greater than 1 minute, the USS adds the difference to all other time stamps contained in the request.
+<51> Section 3.1.4.14: In Windows implementations, the USS calculates the difference between the current time (according to its system clock) and the **clientTime** value. If the absolute value of the difference is greater than 1 minute, the USS adds the difference to all other time stamps contained in the request.
 
-<51> Section 3.1.4.14.3.2: Applicable Windows Server releases use the version number of the WSUS component. If the update server is using WSUS 3.0, the value is "3.0.6000.374". If the update server is using an earlier version, the value is "2.0.0.0".
+<52> Section 3.1.4.14.3.2: Applicable Windows Server releases use the version number of the WSUS component. If the update server is using WSUS 3.0, the value is "3.0.6000.374". If the update server is using an earlier version, the value is "2.0.0.0".
 
-<52> Section 3.1.4.14.3.3: In applicable Windows Server releases, two target groups are created during initial setup of the WSUS component: the "All Computers" and the "Unassigned Computers" groups. Because these groups are created during the initial setup of the update server, they are not counted by this field. If any additional target groups are created (by the administrator or by an application that interacts with the update server), those groups will be counted.
+<53> Section 3.1.4.14.3.3: In applicable Windows Server releases, two target groups are created during initial setup of the WSUS component: the "All Computers" and the "Unassigned Computers" groups. Because these groups are created during the initial setup of the update server, they are not counted by this field. If any additional target groups are created (by the administrator or by an application that interacts with the update server), those groups will be counted.
 
-<53> Section 3.1.4.14.3.5: In applicable Windows Server releases, the **OSMajorVersion**, **OSMinorVersion**, **OSBuildNumber**, **OSServicePackMajorNumber**, **OSServicePackMinorNumber**, **OSLocale**, **SuiteMask**, **OldProductType**, **NewProductType**, **SystemMetrics**, and **ProcessorArchitecture** fields are populated using the corresponding values passed by the client computer to the RegisterComputer method on the update server as part of the WUSP (as specified in [MS-WUSP]).
+<54> Section 3.1.4.14.3.5: In applicable Windows Server releases, the **OSMajorVersion**, **OSMinorVersion**, **OSBuildNumber**, **OSServicePackMajorNumber**, **OSServicePackMinorNumber**, **OSLocale**, **SuiteMask**, **OldProductType**, **NewProductType**, **SystemMetrics**, and **ProcessorArchitecture** fields are populated using the corresponding values passed by the client computer to the RegisterComputer method on the update server as part of the WUSP (as specified in [MS-WUSP]).
 
-<54> Section 3.1.4.15: In Windows implementations, the USS calculates the difference between the current time (according to its system clock) and the clientTime value. If the absolute value of the difference is greater than 1 minute, the USS adds the difference to all other time stamps contained in the request.
+<55> Section 3.1.4.15: In Windows implementations, the USS calculates the difference between the current time (according to its system clock) and the clientTime value. If the absolute value of the difference is greater than 1 minute, the USS adds the difference to all other time stamps contained in the request.
 
-<55> Section 3.1.4.15: In Windows implementations, the USS maintains a list containing the **ComputerId** fields of client computers whose records have recently been deleted from the persisted store.
+<56> Section 3.1.4.15: In Windows implementations, the USS maintains a list containing the **ComputerId** fields of client computers whose records have recently been deleted from the persisted store.
 
 When the USS receives a call to [RollupComputers](#Section_3.1.4.15), it checks the **ComputerId** from each ComputerRollupInfo structure against this list. If the **ComputerId** is found on the list, an entry of this form is added to the **RollupComputersResult** with this **ComputerId**.
 
-<56> Section 3.1.4.15.3.2: In applicable Windows Server releases, the DSS will omit this field for a given client computer if none of the values have changed.
+<57> Section 3.1.4.15.3.2: In applicable Windows Server releases, the DSS will omit this field for a given client computer if none of the values have changed.
 
-<57> Section 3.1.4.15.3.3: WSUS 3.0 SP1 sets this field to "Windows".
+<58> Section 3.1.4.15.3.3: WSUS 3.0 SP1 sets this field to "Windows".
 
-<58> Section 3.1.4.15.3.3: WSUS 3.0 SP1 sets this field to an empty string.
+<59> Section 3.1.4.15.3.3: WSUS 3.0 SP1 sets this field to an empty string.
 
-<59> Section 3.1.4.15.3.3: In applicable Windows Server releases, the **OSMajorVersion**, **OSMinorVersion**, **OSBuildNumber**, **OSServicePackMajorNumber**, **OSServicePackMinorNumber**, **OSLocale**, **ComputerModel**, **BiosVersion**, **BiosName**, **BiosReleaseDate**, **SuiteMask**, **OldProductType**, **NewProductType**, and **SystemMetrics** fields are populated using the corresponding values passed by the client computer to the **RegisterComputer** method on the update server as part of the Windows Server Update Services: Client-Server Protocol specified in [MS-WUSP].
+<60> Section 3.1.4.15.3.3: In applicable Windows Server releases, the **OSMajorVersion**, **OSMinorVersion**, **OSBuildNumber**, **OSServicePackMajorNumber**, **OSServicePackMinorNumber**, **OSLocale**, **ComputerModel**, **BiosVersion**, **BiosName**, **BiosReleaseDate**, **SuiteMask**, **OldProductType**, **NewProductType**, and **SystemMetrics** fields are populated using the corresponding values passed by the client computer to the **RegisterComputer** method on the update server as part of the Windows Server Update Services: Client-Server Protocol specified in [MS-WUSP].
 
 The **ComputerMake** field is populated using the ComputerManufacturer value passed by the client computer to the **RegisterComputer** method.
 
 The **ClientVersion** field is populated by combining the ClientVersionMajorNumber, ClientVersionMinorNumber, ClientVersionBuildNumber, and ClientVersionQfeNumber values passed by the client computer to the **RegisterComputer** method with "." inserted between each of the four values.
 
-<60> Section 3.1.4.17: In Windows implementations, the USS will do this if it is under extremely heavy load.
+<61> Section 3.1.4.17: In Windows implementations, the USS will do this if it is under extremely heavy load.
 
-<61> Section 3.1.4.17: In Windows implementations, the USS calculates the difference between the current time (according to its system clock) and the clientTime value. If the absolute value of the difference is greater than 1 minute, the USS adds the difference to all other time stamps contained in the request.
+<62> Section 3.1.4.17: In Windows implementations, the USS calculates the difference between the current time (according to its system clock) and the clientTime value. If the absolute value of the difference is greater than 1 minute, the USS adds the difference to all other time stamps contained in the request.
 
-<62> Section 3.1.4.18: The **GetUpdateDecryptionData** method is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
+<63> Section 3.1.4.18: The **GetUpdateDecryptionData** method is not available in Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
-<63> Section 3.2.3: In applicable Windows Server releases, the FQDN of the USS is configured by the administrator using the WSUS administration UI.
+<64> Section 3.2.3: In applicable Windows Server releases, the FQDN of the USS is configured by the administrator using the WSUS administration UI.
 
-<64> Section 3.2.3: In all Windows implementations, a DSS initiates this protocol either by a configuration-defined timer event (for example, every night at 1:00 A.M.) or by a manual request from the administrator UI. It also provides an API through which other applications can trigger the synchronization.
+<65> Section 3.2.3: In all Windows implementations, a DSS initiates this protocol either by a configuration-defined timer event (for example, every night at 1:00 A.M.) or by a manual request from the administrator UI. It also provides an API through which other applications can trigger the synchronization.
 
-<65> Section 3.2.3: All Windows implementations provide an option in the WSUS administrator UI that allows the administrator to cancel a synchronization that is in progress.
+<66> Section 3.2.3: All Windows implementations provide an option in the WSUS administrator UI that allows the administrator to cancel a synchronization that is in progress.
 
 If a cancel request is made while a SOAP call is in progress (a request has been sent but the response has not yet been received), the update server waits until the response is received before stopping the protocol. If no call is in progress, the update server stops the protocol immediately.
 
-<66> Section 3.2.3: All Windows implementations provide an API through which other applications can trigger reporting data synchronization.
+<67> Section 3.2.3: All Windows implementations provide an API through which other applications can trigger reporting data synchronization.
 
-<67> Section 3.2.4.4: In applicable Windows Server releases, whenever a new entry is added to the Revision Table or to the Deployment Table, the update server will determine if any of the files associated with the update meet the preceding criteria. If so, the update server will start to download all such files.
+<68> Section 3.2.4.4: In applicable Windows Server releases, whenever a new entry is added to the Revision Table or to the Deployment Table, the update server will determine if any of the files associated with the update meet the preceding criteria. If so, the update server will start to download all such files.
 
 In addition, if either the CatalogSyncOnly flag or the LazySync flag in the Server Configuration is changed, the update server will reexamine all files to see if any of them need to be downloaded. It will then start the download for all files that need to be downloaded.
 
-<68> Section 3.2.4.4: The Windows implementation does not batch multiple **FileDigest** values into a single call.
+<69> Section 3.2.4.4: The Windows implementation does not batch multiple **FileDigest** values into a single call.
 
-<69> Section 3.2.4.4: In applicable Windows Server releases, the Background Intelligent Transfer Service (for more information, see [[MSDN-BITS]](https://go.microsoft.com/fwlink/?LinkId=89959)) is used to perform the download.
+<70> Section 3.2.4.4: In applicable Windows Server releases, the Background Intelligent Transfer Service (for more information, see [[MSDN-BITS]](https://go.microsoft.com/fwlink/?LinkId=89959)) is used to perform the download.
 
-<70> Section 3.2.4.5: In Windows implementations, this step is run immediately following the completion of the [Deployments Synchronization](#Section_3.2.4.3) step if the DSS is configured as a replica server, or following the [Metadata Synchronization](#Section_3.2.4.2) step if the DSS is configured as an Autonomous Server. All Windows implementations also provide an API through which other applications can trigger [Reporting Data Synchronization](#Section_3.2.4.5) without running the preceding steps in this protocol.
+<71> Section 3.2.4.5: In Windows implementations, this step is run immediately following the completion of the [Deployments Synchronization](#Section_3.2.4.3) step if the DSS is configured as a replica server, or following the [Metadata Synchronization](#Section_3.2.4.2) step if the DSS is configured as an Autonomous Server. All Windows implementations also provide an API through which other applications can trigger [Reporting Data Synchronization](#Section_3.2.4.5) without running the preceding steps in this protocol.
 
-<71> Section 3.2.4.5: An update is considered to be critical if it is a member of the "Critical Updates" or the "Security Updates" Update Classification.
+<72> Section 3.2.4.5: An update is considered to be critical if it is a member of the "Critical Updates" or the "Security Updates" Update Classification.
 
-<72> Section 3.2.4.5: In Windows implementations, such updates are identified by an attribute matching the XPATH query "/Update/Property/@IsMandatory" and having a value of TRUE.
+<73> Section 3.2.4.5: In Windows implementations, such updates are identified by an attribute matching the XPATH query "/Update/Property/@IsMandatory" and having a value of TRUE.
 
-<73> Section 3.2.4.5: Windows implementations send the DownstreamServerInfo structures in batches, minimizing the number of requests required to send all the information.
+<74> Section 3.2.4.5: Windows implementations send the DownstreamServerInfo structures in batches, minimizing the number of requests required to send all the information.
 
-<74> Section 3.2.4.5: Windows implementations send the ComputerRollupInfo structures in batches, minimizing the number of requests required to send all the information.
+<75> Section 3.2.4.5: Windows implementations send the ComputerRollupInfo structures in batches, minimizing the number of requests required to send all the information.
 
-<75> Section 3.2.4.5: Windows implementations send the ComputerLastRollupNumber structures in batches, minimizing the number of requests required to send all the information.
+<76> Section 3.2.4.5: Windows implementations send the ComputerLastRollupNumber structures in batches, minimizing the number of requests required to send all the information.
 
-<76> Section 3.2.4.5: Windows implementations send the ComputerStatusRollupInfo structures in batches, minimizing the number of requests required to send all the information.
+<77> Section 3.2.4.5: Windows implementations send the ComputerStatusRollupInfo structures in batches, minimizing the number of requests required to send all the information.
 
-<77> Section 3.2.4.5: Windows implementations wait between 1 and 5 minutes (chosen randomly) and then resend the failed message. If the request is still unsuccessful after three retries (four total attempts), the protocol is stopped with a failure.
+<78> Section 3.2.4.5: Windows implementations wait between 1 and 5 minutes (chosen randomly) and then resend the failed message. If the request is still unsuccessful after three retries (four total attempts), the protocol is stopped with a failure.
 
-<78> Section 5.1: On Windows 2000 Server operating system and Windows Server 2003, the DSS accepts only content files whose SHA-1 hash matches the SHA-1 hash specified by the USS in the update metadata. On Windows 8, Windows Server 2012 and later, it accepts only content files whose SHA-1 and SHA-256 hashes match the SHA-1 and SHA-256 hashes specified by the USS in the update metadata. On Windows 8, Windows Server 2012 and later, both the SHA-1 and SHA-256 hashes are required.
+<79> Section 5.1: On Windows 2000 Server operating system and Windows Server 2003, the DSS accepts only content files whose SHA-1 hash matches the SHA-1 hash specified by the USS in the update metadata. On Windows 8, Windows Server 2012 and later, it accepts only content files whose SHA-1 and SHA-256 hashes match the SHA-1 and SHA-256 hashes specified by the USS in the update metadata. On Windows 8, Windows Server 2012 and later, both the SHA-1 and SHA-256 hashes are required.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -11135,8 +11141,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.4.5](#Section_3.1.4.5) GetRevisionIdList | 11708 : Added information about filtering of updates due to incompatible protocol versions. | Major |
-| [7](#Section_7) Appendix B: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [3.1.1.1](#Section_3.1.1.1) Populating the Data Model | 11708 : Added the CompatibleProtocolVersion property to the section. | Major |
+| 3.1.1.1 Populating the Data Model | 40344 : Added the missing PatchingTypePreferre field in patching configuration parameters | Major |
+| [3.2.4.2](#Section_3.2.4.2) Metadata Synchronization | 40344 : Updated Metadata Synchronization section to include the missing PatchingTypePreferred field | Major |
 
 <a id="revision-history"></a>
 
@@ -11200,3 +11207,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2021 | 14.0 | Major | Significantly changed the technical content. |
 | 2/14/2024 | 15.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 16.0 | Major | Significantly changed the technical content. |
+| 7/14/2026 | 17.0 | Major | Significantly changed the technical content. |

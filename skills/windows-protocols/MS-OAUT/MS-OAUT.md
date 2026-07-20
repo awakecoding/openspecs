@@ -358,7 +358,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 7/14/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -374,7 +374,7 @@ Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other 
 This document uses the following terms:
 
 <a id="gt_aggregatable-server"></a>
-**aggregatable server**: A [**COM server**](#gt_com-server) that can be contained by another [**COM server**](#gt_com-server) and can allow its [**interfaces**](#gt_interface) to be used as if they were defined by the containing [**server**](#gt_server).
+**aggregatable server**: A [**COM server**](#gt_com-server) that can be contained by another COM server and can allow its [**interfaces**](#gt_interface) to be used as if they were defined by the containing [**server**](#gt_server).
 
 <a id="gt_automation-client"></a>
 **automation client**: An application that can manipulate objects exposed by other applications, which are also called [**automation servers**](#gt_automation-server).
@@ -452,7 +452,7 @@ This document uses the following terms:
 **endpoint**: A network-specific address of a remote procedure call (RPC) server process for remote procedure calls. The actual name and type of the endpoint depends on the [**RPC**](#gt_remote-procedure-call-rpc) protocol sequence that is being used. For example, for RPC over TCP (RPC Protocol Sequence ncacn_ip_tcp), an endpoint might be TCP port 1025. For RPC over Server Message Block (RPC Protocol Sequence ncacn_np), an endpoint might be the name of a named pipe. For more information, see [C706].
 
 <a id="gt_globally-unique-identifier-guid"></a>
-**globally unique identifier (GUID)**: A term used interchangeably with [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid) in Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the value. Specifically, the use of this term does not imply or require that the algorithms described in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) or [C706] must be used for generating the [**GUID**](#gt_globally-unique-identifier-guid). See also [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid).
+**globally unique identifier (GUID)**: A term used interchangeably with [**universally unique identifier (UUID)**](#gt_universally-unique-identifier-uuid) in Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the value. Specifically, the use of this term does not imply or require that the algorithms described in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) or [C706] have to be used for generating the GUID. See also universally unique identifier (UUID).
 
 <a id="gt_hresult"></a>
 **HRESULT**: An integer value that indicates the result or status of an operation. A particular HRESULT can have different meanings depending on the protocol using it. See [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1 and specific protocol documents for further details.
@@ -479,7 +479,7 @@ This document uses the following terms:
 **Network Data Representation (NDR)**: A specification that defines a mapping from [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) data types onto octet streams. [**NDR**](#gt_network-data-representation-ndr) also refers to the runtime environment that implements the mapping facilities (for example, data provided to [**NDR**](#gt_network-data-representation-ndr)). For more information, see [MS-RPCE] and [C706] section 14.
 
 <a id="gt_object"></a>
-**object**: In COM, a software entity that implements the IUnknown interface and zero or more additional interfaces that may be obtained from each other using the IUnknown interface. A COM [**object**](#gt_object) can be exposed to remote clients via the DCOM protocol, in which case it is also a [**DCOM**](#gt_distributed-component-object-model-dcom) object.
+**object**: In COM, a software entity that implements the IUnknown interface and zero or more additional interfaces that can be obtained from each other using the IUnknown interface. A COM [**object**](#gt_object) can be exposed to remote clients via the DCOM protocol, in which case it is also a [**DCOM**](#gt_distributed-component-object-model-dcom) object.
 
 <a id="gt_objref"></a>
 **OBJREF**: The marshaled form of an object reference.
@@ -512,7 +512,7 @@ This document uses the following terms:
 **source interface**: An [**interface**](#gt_interface) that is defined by a [**connectable server**](#gt_connectable-server), and implemented by a [**client**](#gt_client) to enable the [**server**](#gt_server) to initiate communication with the [**client**](#gt_client).
 
 <a id="gt_universally-unique-identifier-uuid"></a>
-**universally unique identifier (UUID)**: A 128-bit value. UUIDs can be used for multiple purposes, from tagging objects with an extremely short lifetime, to reliably identifying very persistent objects in cross-process communication such as client and server interfaces, manager entry-point vectors, and [**RPC**](#gt_remote-procedure-call-rpc) objects. UUIDs are highly likely to be unique. UUIDs are also known as [**globally unique identifiers (GUIDs)**](#gt_globally-unique-identifier-guid) and these terms are used interchangeably in the Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the UUID. Specifically, the use of this term does not imply or require that the algorithms described in [RFC4122] or [C706] must be used for generating the UUID.
+**universally unique identifier (UUID)**: A 128-bit value. UUIDs can be used for multiple purposes, from tagging objects with an extremely short lifetime, to reliably identifying very persistent objects in cross-process communication such as client and server interfaces, manager entry-point vectors, and [**RPC**](#gt_remote-procedure-call-rpc) objects. UUIDs are highly likely to be unique. UUIDs are also known as [**globally unique identifiers (GUIDs)**](#gt_globally-unique-identifier-guid) and these terms are used interchangeably in the Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the UUID. Specifically, the use of this term does not imply or require that the algorithms described in [RFC4122] or [C706] has to be used for generating the UUID.
 
 <a id="gt_user-defined-type-udt"></a>
 **user-defined type (UDT)**: A group of related data items that is declared as one type of information in an [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file.
@@ -563,6 +563,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDN-WinHelp] Microsoft Corporation, "WinHelp function", [http://msdn.microsoft.com/en-us/library/ms647953.aspx](https://go.microsoft.com/fwlink/?LinkId=90163)
 
 [MSDN] Microsoft Corporation, "MSDN Home Page", [http://msdn.microsoft.com/en-us/default.aspx](https://go.microsoft.com/fwlink/?LinkId=124362)
+
+[MSFT-CVE-2026-50344] Microsoft Corporation, "July 14, 2026 - CVE-2026-50344", CVE-2026-50344, July 14, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50344](https://go.microsoft.com/fwlink/?LinkId=2370548)
 
 [SCODE] Microsoft Corporation, "SCODE", [http://msdn.microsoft.com/en-us/library/ms527117.aspx](https://go.microsoft.com/fwlink/?LinkId=90511)
 
@@ -6463,7 +6465,7 @@ HRESULT GetRefTypeInfo(
 <a id="Section_3.7.4.11"></a>
 #### 3.7.4.11 ITypeInfo::CreateInstance (Opnum 16)
 
-The CreateInstance method creates a new instance of a type that describes a [**COM server**](#gt_com-server) ([**coclass**](#gt_coclass)).
+The CreateInstance method creates a new instance of a type that describes a [**COM server**](#gt_com-server) ([**coclass**](#gt_coclass)).<60>
 
 HRESULT CreateInstance(
 
@@ -6917,7 +6919,7 @@ If *memid* is MEMBERID_NIL, the values of *pBstrHelpString*, *pdwHelpStringConte
 | TYPEINFO_HelpStringContextArg 0x00000002 | MUST specify that the client is interested in the actual *pdwHelpStringContext* [out] argument. |
 | TYPEINFO_HelpStringDllArg 0x00000004 | MUST specify that the client is interested in the actual *pBstrHelpStringDll* [out] argument. |
 
-**pbstrHelpString:** If the TYPEINFO_HelpStringContextArg and TYPEINFO_HelpStringDllArg bit flags are set in *refPtrFlags*, *pbstrHelpString* MUST be set to an implementation-specific BSTR<60> . Otherwise, MUST be set to a NULL BSTR.
+**pbstrHelpString:** If the TYPEINFO_HelpStringContextArg and TYPEINFO_HelpStringDllArg bit flags are set in *refPtrFlags*, *pbstrHelpString* MUST be set to an implementation-specific BSTR<61> . Otherwise, MUST be set to a NULL BSTR.
 
 **pdwHelpStringContext:** MUST be set to the value that was associated with the specified type or type member using the [helpstringcontext] attribute (see [IDL Automation Scope](#Section_2.2.49.2)) if the TYPEINFO_HelpStringContextArg bit flag is set in *refPtrFlags*. MUST be set to 0 otherwise.
 
@@ -7345,7 +7347,7 @@ HRESULT GetDocumentation(
 
 **pBstrName:** MUST be set to a BSTR that contains the name of the specified type or Type library if the TYPELIB_NameArg bit flag is set in *refPtrFlags*. MUST be set to a NULL BSTR otherwise.
 
-**pBstrDocString:** MUST be set to the documentation string that was associated with the specified type or Type library using the [helpstring] attribute (see section 2.2.49.2), if the TYPELIB_DocStringArg bit flag is set in *refPtrFlags*. MAY be set to an implementation-specific string<61> if no [helpstring] attribute is specified. MUST be set to a NULL BSTR otherwise.
+**pBstrDocString:** MUST be set to the documentation string that was associated with the specified type or Type library using the [helpstring] attribute (see section 2.2.49.2), if the TYPELIB_DocStringArg bit flag is set in *refPtrFlags*. MAY be set to an implementation-specific string<62> if no [helpstring] attribute is specified. MUST be set to a NULL BSTR otherwise.
 
 **pdwHelpContext:** MUST be set to the value that was associated with the specified type or Type library using the [helpcontext] attribute (see section 2.2.49.2), if the TYPELIB_HelpContextArg bit flag is set in *refPtrFlags*. MUST be set to 0 otherwise.
 
@@ -7420,7 +7422,7 @@ MEMBERID* rgMemId,
 
 **ppTInfo:** MUST be set to an array of references to ITypeInfo server instances (see section [3.7.4](#Section_3.7.4)). Each entry of *ppTInfo* MUST correspond to a type whose name matches the value of *szNameBuf* according to the string matching criteria (as specified in section [2.2.50](#Section_2.2.50)) or that contains a member whose name matches the value of *szNameBuf*.
 
-The array MUST be empty if there are no types or method or data members of types defined in the [**automation scope**](#gt_automation-scope) whose names match the value of *szNameBuf*. Otherwise, the array MUST contain one entry for each named nonparameter element defined in the automation scope whose name matches *szNameBuf*. The array MAY contain entries for matching types or type members that are referenced, but not defined in the automation scope. <62>
+The array MUST be empty if there are no types or method or data members of types defined in the [**automation scope**](#gt_automation-scope) whose names match the value of *szNameBuf*. Otherwise, the array MUST contain one entry for each named nonparameter element defined in the automation scope whose name matches *szNameBuf*. The array MAY contain entries for matching types or type members that are referenced, but not defined in the automation scope. <63>
 
 If *szNameBuf* matches the name of a [**dual interface**](#gt_dual-interface) or one of its members, the corresponding entry in *ppTInfo* MUST refer to the [**partner dispinterface**](#gt_partner-dispinterface) and MUST NOT refer to the [**partner interface**](#gt_partner-interface).
 
@@ -7605,7 +7607,7 @@ HRESULT GetDocumentation2(
 | TYPELIB_HelpContextArg 0x00000002 | MUST specify that the client is interested in the actual *pdwHelpStringContext* [out] argument. |
 | TYPELIB_HelpFileArg 0x00000004 | MUST specify that the client is interested in the actual *pBstrHelpStringDll* [out] argument. |
 
-**pbstrHelpString:** MUST be set to an implementation-specific [BSTR](#Section_2.2.23) type<63> if the TYPELIB_HelpStringArg bit flag is set in *refPtrFlags*. MUST be set to a NULL BSTR otherwise.
+**pbstrHelpString:** MUST be set to an implementation-specific [BSTR](#Section_2.2.23) type<64> if the TYPELIB_HelpStringArg bit flag is set in *refPtrFlags*. MUST be set to a NULL BSTR otherwise.
 
 **pdwHelpStringContext:** MUST be set to the value that was associated with the specified type or type library using the [helpstringcontext] attribute (see section [2.2.49.2](#Section_2.2.49.2)) if the TYPELIB_HelpContextArg bit flag is set in *refPtrFlags*. MUST be set to 0 otherwise.
 
@@ -9996,7 +9998,6 @@ The information in this specification is applicable to the following Microsoft p
 - Windows Server 2012 R2 operating system
 - Windows 10 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows 11 operating system
@@ -10130,13 +10131,15 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <59> Section 3.7.4.8: If the library, type, or type member was declared without the [helpstring] attribute and the Type information server implements ITypeInfo2, the [GetDocumentation](#Section_3.11.4.7) method attempts to return the localized value specified by the *pBstrHelpString* parameter of [ITypeInfo2::GetDocumentation2](#Section_3.9.4.10), using an LCID of 0.
 
-<60> Section 3.9.4.10: *pbstrHelpString* is set to the value of the string resource that is contained in the DLL specified by *pBstrHelpStringDll* and that is associated with the resource handle specified by *pdwHelpStringContext* and LocaleID specified by *lcid*, or is set to NULL if no such resource exists.
+<60> Section 3.7.4.11: Windows OAUT servers with [[MSFT-CVE-2026-50344]](https://go.microsoft.com/fwlink/?LinkId=2370548) always fail the **CreateInstance** method and return E_ACCESSDENIED(0x80070005) error code.
 
-<61> Section 3.11.4.7: If the library or type was declared without the [helpstring] attribute and the Type library server implements ITypeLib2, the [GetDocumentation](#Section_3.11.4.7) method attempts to return the localized value specified by the *pBstrHelpString* parameter of [ITypeLib2::GetDocumentation2](#Section_3.13.4.3), using an LCID of 0.
+<61> Section 3.9.4.10: *pbstrHelpString* is set to the value of the string resource that is contained in the DLL specified by *pBstrHelpStringDll* and that is associated with the resource handle specified by *pdwHelpStringContext* and LocaleID specified by *lcid*, or is set to NULL if no such resource exists.
 
-<62> Section 3.11.4.9: Matching members of the binding member table of a [**reference dispinterface**](#gt_reference-dispinterface) that are defined outside the [**automation scope**](#gt_automation-scope) are included in the *ppTInfo* and *rgMemId* arrays if the automation scope includes at least two named non-parameter elements whose names match *szNameBuf*.
+<62> Section 3.11.4.7: If the library or type was declared without the [helpstring] attribute and the Type library server implements ITypeLib2, the [GetDocumentation](#Section_3.11.4.7) method attempts to return the localized value specified by the *pBstrHelpString* parameter of [ITypeLib2::GetDocumentation2](#Section_3.13.4.3), using an LCID of 0.
 
-<63> Section 3.13.4.3: *pBstrHelpString* is set to the value of the string resource contained in the DLL specified by *pBstrHelpStringDll* and associated with the resource handle specified by *pdwHelpStringContext* and LocaleID specified by *lcid*, or NULL if no such resource exists.
+<63> Section 3.11.4.9: Matching members of the binding member table of a [**reference dispinterface**](#gt_reference-dispinterface) that are defined outside the [**automation scope**](#gt_automation-scope) are included in the *ppTInfo* and *rgMemId* arrays if the automation scope includes at least two named non-parameter elements whose names match *szNameBuf*.
+
+<64> Section 3.13.4.3: *pBstrHelpString* is set to the value of the string resource contained in the DLL specified by *pBstrHelpStringDll* and associated with the resource handle specified by *pdwHelpStringContext* and LocaleID specified by *lcid*, or NULL if no such resource exists.
 
 <a id="Section_8"></a>
 # 8 Appendix C: Full ABNF
@@ -10778,7 +10781,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [7](#Section_7) Appendix B: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [3.7.4.11](#Section_3.7.4.11) ITypeInfo::CreateInstance (Opnum 16) | Updated Windows Server processing for ITypeInfo::CreateInstance. | Major |
 
 <a id="revision-history"></a>
 
@@ -10845,3 +10848,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2021 | 19.0 | Major | Significantly changed the technical content. |
 | 6/25/2021 | 20.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 21.0 | Major | Significantly changed the technical content. |
+| 7/14/2026 | 22.0 | Major | Significantly changed the technical content. |
