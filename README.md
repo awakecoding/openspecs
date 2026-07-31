@@ -4,6 +4,19 @@ Agent skill for navigating the Microsoft Open Specifications corpus locally. Use
 
 ## Installation
 
+### GitHub CLI
+
+Install or update GitHub CLI to version 2.90.0 or later using the [official installation instructions](https://github.com/cli/cli#installation). Then use the [`gh skill` command](https://cli.github.com/manual/gh_skill) to install or update this skill:
+
+```bash
+gh skill install awakecoding/openspecs windows-protocols
+gh skill update windows-protocols
+```
+
+`gh skill` installs the skill in the appropriate location for GitHub Copilot. Use `--agent` and `--scope` to target another supported agent or installation scope.
+
+### skills.sh
+
 **[skills.sh](https://skills.sh)** — Add the skill globally:
 
 ```bash
