@@ -69,6 +69,7 @@ Table of Contents
         - [2.7.1.1.1 Tables](#Section_2.7.1.1.1)
       - [2.7.1.2 microsoft_video_formats](#Section_2.7.1.2)
         - [2.7.1.2.1 Tables](#Section_2.7.1.2.1)
+      - [2.7.1.3 microsoft_custom_video_formats](#Section_2.7.1.3)
     - [2.7.2 Attributes](#Section_2.7.2)
     - [2.7.3 Complex Types](#Section_2.7.3)
     - [2.7.4 Simple Types](#Section_2.7.4)
@@ -131,7 +132,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 8/10/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -246,7 +247,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-None.
+[MSKB-5120996] Microsoft Corporation, "August 25, 2026 - KB5120996", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5120996](https://go.microsoft.com/fwlink/?LinkId=2373419)
+
+[MSKB-5120998] Microsoft Corporation, "August 25, 2026 - KB5120998", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5120998](https://go.microsoft.com/fwlink/?LinkId=2372745)
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -648,7 +651,7 @@ Not applicable.
 
 Additional video formats, including 4K resolution formats and formats that use 3:2 picture aspect ratio, are supported via the Wi-Fi Display video formats protocol extension. This protocol extension allows a Wi-Fi Display Source to send additional video formats to a Wi-Fi Display Sink.<9>
 
-The extension consists of two data structures to negotiate additional video formats. The data structures extend [[WF-DTS2.1]](https://go.microsoft.com/fwlink/?linkid=869602) section 6.1.3.
+The extension consists of three data structures to negotiate additional video formats. The data structures extend [[WF-DTS2.1]](https://go.microsoft.com/fwlink/?linkid=869602) section 6.1.3.
 
 <a id="Section_2.7.1"></a>
 ### 2.7.1 Elements
@@ -841,6 +844,35 @@ The following table specifies the resolutions and refresh rates that are specifi
 
 The Wi-Fi Display Sink SHOULD use the timings of the corresponding display device. For example, if a monitor is using CEA timings, then CEA-861-F timings apply as specified in [[CEA-861-F]](https://go.microsoft.com/fwlink/?LinkId=691158) section 4. If a monitor is using VESA timings, then, VESA CVT timings apply as specified in [[VESA-CVT]](https://go.microsoft.com/fwlink/?LinkId=691159) section 4.
 
+<a id="Section_2.7.1.3"></a>
+#### 2.7.1.3 microsoft_custom_video_formats
+
+The **microsoft-custom-video-formats** parameter specifies additional supported video resolutions that augment the video resolutions specified in [[WF-DTS2.1]](https://go.microsoft.com/fwlink/?linkid=869602) sections 5.1.5.1–5.1.5.3 and the **microsoft-video-formats** parameter (section [2.7.1.2](#Section_2.7.1.2)), if present.<12>
+
+The **microsoft-custom-video-formats** parameter carries the video width, video height, and refresh rate directly as literal values. Each resolution specified by the **microsoft-custom-video-formats** parameter applies to each codec parameter specified in either the **wfd-video-formats** parameter ([WF-DTS2.1] section 6.1.3.) or the **wfdx-video-formats** parameter (section [2.7.1.1](#Section_2.7.1.1)), as long as the resolution fits within the constraints of the profile and level specified in the codec parameter.
+
+The ABNF syntax is as follows:
+
+microsoft-custom-video-formats = "microsoft_custom_video_formats:" SP
+
+custom-resolution-list CRLF
+
+custom-resolution-list = "none" / (custom-resolution *("," SP custom-resolution))
+
+custom-resolution = width SP height SP refresh-rate
+
+width = 4*4HEXDIG
+
+height = 4*4HEXDIG
+
+refresh-rate = 4*4HEXDIG
+
+The custom-resolution-list can contain more than one custom-resolution. Multiple custom-resolution values are separated by a comma (",") followed by a single space (SP). A value of "none" indicates that no custom video formats are supported. Custom formats are progressive (non-interlaced).
+
+Each custom-resolution consists of exactly three space-separated hexadecimal fields, in the order width, height, refresh-rate. A custom-resolution that omits any of these three fields, or that contains a field which is not a valid hexadecimal value, is invalid and MUST NOT be added to the set of video formats negotiated by the Wi-Fi Display Source. Any additional data that appears after the refresh-rate field within a custom-resolution MUST be ignored.
+
+If a video resolution is specified in the **microsoft-custom-video-formats** parameter that is also present in other parameters such as **microsoft-video-formats** parameter (section 2.7.1.2), the duplicate MAY be treated as a single supported resolution by the Wi-Fi Display Source; the manner in which the resolution is subsequently negotiated by the Wi-Fi Display Source is implementation-specific and the Wi-Fi Display Sink MUST handle the negotiation path used by the Wi-Fi Display Source.
+
 <a id="Section_2.7.2"></a>
 ### 2.7.2 Attributes
 
@@ -859,7 +891,7 @@ Not applicable.
 <a id="Section_2.8"></a>
 ## 2.8 RTCP
 
-The RTCP extension enables the Wi-Fi Display Source and Wi-Fi Display Sink to communicate information regarding the quality of the network connection between the two devices.<12> A Wi-Fi Display Source can use this information to adjust the encoding [**bit rate**](#gt_bit-rate) in accordance with network conditions.
+The RTCP extension enables the Wi-Fi Display Source and Wi-Fi Display Sink to communicate information regarding the quality of the network connection between the two devices.<13> A Wi-Fi Display Source can use this information to adjust the encoding [**bit rate**](#gt_bit-rate) in accordance with network conditions.
 
 <a id="Section_2.8.1"></a>
 ### 2.8.1 Elements
@@ -875,7 +907,7 @@ rtcp-caps = "supported" / "none"
 
 This parameter is included by the Wi-Fi Display Source in the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) M3 request message to specify support for RTCP and by the Wi-Fi Display Sink in the RTSP M3 response message to specify support for RTCP.
 
-If the Wi-Fi Display Sink specifies "supported" as the value of the **rtcp-caps** field in **microsoft_rtcp_capability** in the RTSP M3 response message, then the Wi-Fi Display Source MUST include the second port number on the **server_port** field on the Transport header of the RTSP SETUP response message, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 12.39. The Wi-Fi Display Sink SHOULD<13> transmit RTCP packets ([RFC3550] section 6) to the [**UDP**](#gt_user-datagram-protocol-udp) port that is specified as the second port number on the **server_port** field on the Transport header of the RTSP SETUP response message.
+If the Wi-Fi Display Sink specifies "supported" as the value of the **rtcp-caps** field in **microsoft_rtcp_capability** in the RTSP M3 response message, then the Wi-Fi Display Source MUST include the second port number on the **server_port** field on the Transport header of the RTSP SETUP response message, as specified in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335) section 12.39. The Wi-Fi Display Sink SHOULD<14> transmit RTCP packets ([RFC3550] section 6) to the [**UDP**](#gt_user-datagram-protocol-udp) port that is specified as the second port number on the **server_port** field on the Transport header of the RTSP SETUP response message.
 
 If the Wi-Fi Display Sink specifies "none" as the value of the **rtcp-caps** field in **microsoft_rtcp_capability,** or does not include **microsoft_rtcp_capability** in the RTSP M3 response message, then the Wi-Fi Display Source MUST specify exactly one port number in the **server_port** field on the Transport header of the RTSP SETUP response message.
 
@@ -897,7 +929,7 @@ Not applicable.
 <a id="Section_2.9"></a>
 ## 2.9 High-Fidelity Color Space Conversion
 
-The high-fidelity color space conversion extension enables the Wi-Fi Display Source to encode additional color information in repeat frames.<14> In general, the Wi-Fi Display Source has to downsample (lower the sampling rate) the color information when converting from a [**4:4:4 color space**](#gt_444-color-space) to a [**4:2:0 color space**](#gt_420-color-space) for H.264 encoding. The extension uses repeat frames (a [**video frame**](#gt_video-frame) that is identical to the previous frame) to include the color information that was lost during the conversion, enabling the Wi-Fi Display Sink to connect color information from four frames and generate one complete frame with full color fidelity.
+The high-fidelity color space conversion extension enables the Wi-Fi Display Source to encode additional color information in repeat frames.<15> In general, the Wi-Fi Display Source has to downsample (lower the sampling rate) the color information when converting from a [**4:4:4 color space**](#gt_444-color-space) to a [**4:2:0 color space**](#gt_420-color-space) for H.264 encoding. The extension uses repeat frames (a [**video frame**](#gt_video-frame) that is identical to the previous frame) to include the color information that was lost during the conversion, enabling the Wi-Fi Display Sink to connect color information from four frames and generate one complete frame with full color fidelity.
 
 <a id="Section_2.9.1"></a>
 ### 2.9.1 Elements
@@ -905,7 +937,7 @@ The high-fidelity color space conversion extension enables the Wi-Fi Display Sou
 <a id="Section_2.9.1.1"></a>
 #### 2.9.1.1 microsoft_color_space_conversion
 
-The **microsoft_color_space_conversion** parameter specifies whether a Wi-Fi Display Sink supports the [high-fidelity color space conversion (section 2.9)](#Section_2.9)scheme.<15>
+The **microsoft_color_space_conversion** parameter specifies whether a Wi-Fi Display Sink supports the [high-fidelity color space conversion (section 2.9)](#Section_2.9)scheme.<16>
 
 The [**ABNF**](#gt_augmented-backus-naur-form-abnf) syntax is as follows:
 
@@ -963,7 +995,7 @@ Not applicable.
 <a id="Section_2.10"></a>
 ## 2.10 Maximum Supported Bitrate
 
-The maximum supported bitrate conversion extension enables Wi-Fi Display Sinks to specify the maximum supported bitrate, which is the dataflow transmitted over the network in bits per second.<16> Video encoders are configured to encode at a particular bitrate, with higher bitrates supporting greater data quality but requiring a larger network bandwidth.
+The maximum supported bitrate conversion extension enables Wi-Fi Display Sinks to specify the maximum supported bitrate, which is the dataflow transmitted over the network in bits per second.<17> Video encoders are configured to encode at a particular bitrate, with higher bitrates supporting greater data quality but requiring a larger network bandwidth.
 
 <a id="Section_2.10.1"></a>
 ### 2.10.1 Elements
@@ -971,7 +1003,7 @@ The maximum supported bitrate conversion extension enables Wi-Fi Display Sinks t
 <a id="Section_2.10.1.1"></a>
 #### 2.10.1.1 microsoft_max_bitrate
 
-The **microsoft_max_bitrate** parameter specifies the maximum video bitrate, which is the bits per second transmitted over the network, supported by a Wi-Fi Display Sink.<17>
+The **microsoft_max_bitrate** parameter specifies the maximum video bitrate, which is the bits per second transmitted over the network, supported by a Wi-Fi Display Sink.<18>
 
 The [**ABNF**](#gt_augmented-backus-naur-form-abnf) syntax is as follows:
 
@@ -1001,7 +1033,7 @@ Not applicable.
 <a id="Section_2.11"></a>
 ## 2.11 Multi-screen Management
 
-The multi-screen management extension enables Wi-Fi Display Sinks to manage multiple connections from Wi-Fi Display Sources.<18>
+The multi-screen management extension enables Wi-Fi Display Sinks to manage multiple connections from Wi-Fi Display Sources.<19>
 
 The Wi-Fi Display Sink can relegate the video stream from one Wi-Fi Display Source to a small portion of the screen. A Wi-Fi Display Source can be set as the primary screen and take up all or almost all the Wi-Fi Display Sink screen, or it can be set as the secondary screen, where the video stream from the Wi-Fi Display Source is relegated to a subsection of the Wi-Fi Display Sink screen.
 
@@ -1041,7 +1073,7 @@ Possible values for the **microsoft-multiscreen-settings** parameter are as foll
 | Value | Meaning |
 | --- | --- |
 | primary | Specifies that the Wi-Fi Display Source is the primary video stream and it streams at full resolution. |
-| secondary | Specifies that the Wi-Fi Display Source is a secondary video stream. To save resources and bandwidth by encoding, the Wi-Fi Display Source SHOULD<19> encode at the following settings: Encoding resolution **hres** x **vres**, where **hres** is the number of horizontal pixels and **vres** is the number of vertical pixels. Encoding **bitrate**, in bits per second. |
+| secondary | Specifies that the Wi-Fi Display Source is a secondary video stream. To save resources and bandwidth by encoding, the Wi-Fi Display Source SHOULD<20> encode at the following settings: Encoding resolution **hres** x **vres**, where **hres** is the number of horizontal pixels and **vres** is the number of vertical pixels. Encoding **bitrate**, in bits per second. |
 
 By default, a Wi-Fi Display Source that supports multi-screen projection operates as the primary display.
 
@@ -1063,7 +1095,7 @@ Not applicable.
 <a id="Section_2.12"></a>
 ## 2.12 Source Audio Mute
 
-The source audio mute extension enables a Wi-Fi Display Sink to indicate whether the audio stream is muted or unmuted.<20>
+The source audio mute extension enables a Wi-Fi Display Sink to indicate whether the audio stream is muted or unmuted.<21>
 
 If the Wi-Fi Display Source mutes the audio stream, it is disabled, and the audio stream is not transmitted to the Wi-Fi Display Sink. Disabling the audio stream saves network bandwidth.
 
@@ -1245,6 +1277,42 @@ wfd_client_rtp_ports: RTP/AVP/UDP;unicast 19000 0 mode=play
 
 microsoft_video_formats: 0000001fffff
 
+The following is an example of an **M3** request for extended video formats using the **microsoft-custom-video-formats** parameter (section [2.7.1.3](#Section_2.7.1.3)).
+
+GET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0
+
+CSeq: 2
+
+Content-Type: text/parameters
+
+Content-Length: 88
+
+wfd_video_formats
+
+wfd_audio_codecs
+
+wfd_client_rtp_ports
+
+microsoft_custom_video_formats
+
+The following is an example of an **M3** response for extended video formats using the **microsoft-custom-video-formats** parameter (section 2.7.1.3).
+
+RTSP/1.0 200 OK
+
+CSeq: 2
+
+Content-Type: text/parameters
+
+Content-Length: 259
+
+wfd_video_formats: 00 00 01 01 00000001 00000000 00000000 00 0000 0000 00 none none
+
+wfd_audio_codecs: LPCM 00000003 00, AAC 00000001 00, AC3 00000000 00
+
+wfd_client_rtp_ports: RTP/AVP/UDP;unicast 19000 0 mode=play
+
+microsoft_custom_video_formats: 0A00 0438 001E, 0870 0740 001E
+
 The following is an example of an **M3** request for RTCP support (section [2.8](#Section_2.8)).
 
 GET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0 CSeq: 2 Content-Type: text/parameters Content-Length: 60 wfd_video_formats wfd_audio_codecs microsoft_rtcp_capability
@@ -1379,23 +1447,25 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <11> Section 2.7.1.2: The **microsoft-video-formats** parameter is not supported in Windows 10 v1507 and Windows 10 v1511.
 
-<12> Section 2.8: The RTCP protocol extension is not supported in Windows 10 v1507 and Windows 10 v1511.
+<12> Section 2.7.1.3: The **microsoft-custom-video-formats** parameter is supported in Windows 11, version 24H2 operating system and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745), and Windows 11, version 26H1 operating system with [[MSKB-5120996]](https://go.microsoft.com/fwlink/?LinkId=2373419), and later.
 
-<13> Section 2.8.1.1: The RTCP protocol extension is not supported in Windows 10 v1507 and Windows 10 v1511.
+<13> Section 2.8: The RTCP protocol extension is not supported in Windows 10 v1507 and Windows 10 v1511.
 
-<14> Section 2.9: The high-fidelity color space conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
+<14> Section 2.8.1.1: The RTCP protocol extension is not supported in Windows 10 v1507 and Windows 10 v1511.
 
-<15> Section 2.9.1.1: The high-fidelity color space conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
+<15> Section 2.9: The high-fidelity color space conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
 
-<16> Section 2.10: The maximum supported bitrate conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
+<16> Section 2.9.1.1: The high-fidelity color space conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
 
-<17> Section 2.10.1.1: The maximum supported bitrate conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
+<17> Section 2.10: The maximum supported bitrate conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
 
-<18> Section 2.11: The multi-screen management extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, Windows 10 v1703, Windows 10 v1709, and Windows Server 2016.
+<18> Section 2.10.1.1: The maximum supported bitrate conversion extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, and Windows Server 2016.
 
-<19> Section 2.11.1.1: The **microsoft-multiscreen-settings** parameter is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, Windows 10 v1703, Windows 10 v1709, and Windows Server 2016.
+<19> Section 2.11: The multi-screen management extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, Windows 10 v1703, Windows 10 v1709, and Windows Server 2016.
 
-<20> Section 2.12: The source audio mute extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, Windows 10 v1703, Windows 10 v1709, and Windows Server 2016.
+<20> Section 2.11.1.1: The **microsoft-multiscreen-settings** parameter is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, Windows 10 v1703, Windows 10 v1709, and Windows Server 2016.
+
+<21> Section 2.12: The source audio mute extension is not supported in Windows 10 v1507, Windows 10 v1511, Windows 10 v1607, Windows 10 v1703, Windows 10 v1709, and Windows Server 2016.
 
 <a id="Section_6"></a>
 # 6 Change Tracking
@@ -1414,7 +1484,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [5](#Section_5) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [2.7.1.3](#Section_2.7.1.3) microsoft_custom_video_formats | Added support for new video format "microsoft_custom_video_formats". | Major |
 
 <a id="revision-history"></a>
 
@@ -1433,3 +1503,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2021 | 7.0 | Major | Significantly changed the technical content. |
 | 6/25/2021 | 8.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 9.0 | Major | Significantly changed the technical content. |
+| 8/10/2026 | 10.0 | Major | Significantly changed the technical content. |
