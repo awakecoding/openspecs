@@ -172,7 +172,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/26/2026.
+Last updated: 8/11/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -406,6 +406,8 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSDOCS-NCryptCreateClaim] Microsoft Corporation, "NCryptCreateClaim function (ncrypt.h)", [https://learn.microsoft.com/en-us/windows/win32/api/ncrypt/nf-ncrypt-ncryptcreateclaim](https://go.microsoft.com/fwlink/?linkid=2192142)
 
+[MSFT-CVE-2026-62806] Microsoft Corporation, "CVE-2026-62806", August 11, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62806](https://go.microsoft.com/fwlink/?LinkId=2374204)
+
 [MSKB-5032288] Microsoft Corporation, "December 4, 2023—KB5032288", December 2023, [https://support.microsoft.com/en-us/topic/december-4-2023-kb5032288-os-builds-22621-2792-and-22631-2792-preview-538fbe4a-e9de-4312-85cd-d870444341d0](https://go.microsoft.com/fwlink/?linkid=2344397)
 
 [MSKB-5033369] Microsoft Corporation, "December 12, 2023—KB5033369", December 2023, [https://support.microsoft.com/en-us/topic/december-12-2023-kb5033369-os-build-22000-2652-b69fad53-d61b-4ed6-898e-1ae6a17dfd13](https://go.microsoft.com/fwlink/?linkid=2345101)
@@ -417,6 +419,14 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSKB-5053656] Microsoft Corporation, "March 27, 2025— KB5053656 (OS Build 26100.3624) Preview", March 2025, [https://support.microsoft.com/en-us/topic/march-27-2025-kb5053656-os-build-26100-3624-preview-4c35f1c4-1ae6-41ef-a317-3d8ee2e73975](https://go.microsoft.com/fwlink/?linkid=2306437)
 
 [MSKB-5053657] Microsoft Corporation, "March 25, 2025—KB5053657 (OS Builds 22621.5126 and 22631.5126) Preview", March 2025, [https://support.microsoft.com/en-us/topic/march-25-2025-kb5053657-os-builds-22621-5126-and-22631-5126-preview-87a95447-6e12-4cd6-a7cf-ef525b8a489f](https://go.microsoft.com/fwlink/?linkid=2306438)
+
+[MSKB-5101650] Microsoft Corporation, "July 14, 2026—KB5101650", July 2026, [https://support.microsoft.com/en-us/help/5101650](https://go.microsoft.com/fwlink/?LinkId=2372735)
+
+[MSKB-5120996] Microsoft Corporation, "August 25, 2026 - KB5120996", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5120996](https://go.microsoft.com/fwlink/?LinkId=2373419)
+
+[MSKB-5120998] Microsoft Corporation, "August 25, 2026 - KB5120998", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5120998](https://go.microsoft.com/fwlink/?LinkId=2372745)
+
+[MSKB-5121000] Microsoft Corporation, "August 11, 2026 - KB5121000", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5121000](https://go.microsoft.com/fwlink/?LinkId=2373410)
 
 [RFC2985] Nystrom, M. and Kaliski, B., "PKCS #9: Selected Object Classes and Attribute Types Version 2.0", RFC 2985, November 2000, [https://www.rfc-editor.org/info/rfc2985](https://go.microsoft.com/fwlink/?LinkId=90400)
 
@@ -2278,7 +2288,7 @@ The <DiscoveryRequest> complex type describes the information to send to the ser
 
 **DeviceType:** This element specifies the device type and MAY be set to WindowsPhone or CIMClient_Windows.
 
-**RequestVersion:** The value MUST be set to 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, or 7.0.<20>
+**RequestVersion:** The value MUST be set to 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, or 9.0.<20>
 
 **ApplicationVersion:** This element specifies the application version and MUST be in the format int.int.int.int.
 
@@ -2315,6 +2325,10 @@ The <DiscoveryResponse> complex type describes the information to send to the cl
 
 <xsd:element minOccurs="0" maxOccurs="1" name="EnrollmentVersion" nillable="true" type="xsd:decimal"/>
 
+<xsd:element minOccurs="0" maxOccurs="1" name="DeviceAssociationMaaUrl" nillable="true" type="xsd:anyURI"/>
+
+<xsd:element minOccurs="0" maxOccurs="1" name="GatewayService" nillable="true" type="xsd:anyURI"/>
+
 </xsd:all>
 
 </xsd:complexType>
@@ -2335,7 +2349,11 @@ The <DiscoveryResponse> complex type describes the information to send to the cl
 
 **EnrollmentServiceUrl:** The value of <EnrollmentServiceUrl> is the address of the **DS** against which the WS-Trust X.509v3 Token Enrollment Extensions [MS-WSTEP](../MS-WSTEP/MS-WSTEP.md) operations are performed.
 
-**EnrollmentVersion:** The value can be 3.0, 4.0, 5.0, 6.0, or 7.0.<21>
+**DeviceAssociationMaaUrl:** The value of <DeviceAssociationMaaUrl> is the URL of the Azure Attestation endpoint used by the client to retrieve MAA token for TPM-attested device identity for Device Association.
+
+**GatewayService:** The value of <GatewayService> is the URL of the Device Provisioning Gateway service used by the client to request Device Tag for Device Association.
+
+**EnrollmentVersion:** The value can be 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, or 9.0.<21>
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Timer Events
@@ -2733,11 +2751,13 @@ The [**enrollment client**](#gt_enrollment-client) evaluates the following child
 
 **xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/operationTimeout**: This functions identically to the xcepGetPoliciesResponse/response/policies/policy/attributes/privatekeyattributes/operationTimeout node, except this one takes precedence if both are set. This node is available on EnrollmentVersion value 6.0 or higher.
 
-**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/azureAttestation/nonce**: This optional node should contain the nonce used for the AzureAttestation flow. This node is available on EnrollmentVersion value 6.0 or higher.
+**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/azureAttestation/nonce**: If used, this optional node MUST contain the nonce used for the AzureAttestation flow. This node is available on EnrollmentVersion value 6.0 or higher.
 
-**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/azureAttestation/relyingPartyId**: This optional node should contain the Relying Party ID used for the AzureAttestation flow to uniquely identify the relying party. This node is available on EnrollmentVersion value 6.0 or higher.
+**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/azureAttestation/relyingPartyId**: If used, this optional node MUST contain the Relying Party ID used for the AzureAttestation flow to uniquely identify the relying party. This node is available on EnrollmentVersion value 6.0 or higher.
 
-**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/azureAttestation/endpointUri**: This optional node should contain the URI used for Azure Attestation. The client code will call this Azure Attestation endpoint to perform the AzureAttestation flow. This node is available on EnrollmentVersion value 6.0 or higher.
+**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/azureAttestation/endpointUri**: If used, this optional node MUST contain the URI used for Azure Attestation. The client code will call this Azure Attestation endpoint to perform the AzureAttestation flow. This node is available on EnrollmentVersion value 6.0 or higher.
+
+**xcep:GetPoliciesResponse/response/policies/policy/attributes/attestation/allowedAIKAlgorithms**: This node MUST contain a list of [cryptographic algorithm identifier](https://learn.microsoft.com/en-us/windows/win32/seccng/cng-algorithm-identifiers), key length or [elliptic curve name](https://learn.microsoft.com/en-us/windows/win32/seccng/cng-named-elliptic-curves) pairs to be used for attestation, in order of priority. The first supported algorithm in the list MUST be used. If all algorithms do not have an existing AIK or fail to attest, attestation MUST fail. If this node is missing or empty, attestation MUST fail. This node is available on **EnrollmentVersion** value 9.0 or higher.
 
 **xcep:GetPoliciesResponse/cAs** (see [MS-XCEP] section 3.1.4.1.2.2).
 
@@ -3023,6 +3043,10 @@ The following elements are supported in an implementation-specific manner where 
 
 **ac:Value**: If included, this element MUST be a child of <ac:AdditionalContext> and MUST be a string value. This value contains the Correlation Vectors of any failed calls to the Azure Attestation service. This node will only be present if the **EnrollmentVersion** value is 7.0 or higher and if the Azure Attestation fields were supplied in the earlier message.
 
+**ac:ContextItem/attributes/Name**: The <ac:ContextItem> Name attribute MUST be the literal string "AIKAlgorithm".<28>
+
+**ac:Value**: If included, this element MUST be a child of <ac:AdditionalContext> and MUST be a string value. This value contains the [cryptographic algorithm identifier](https://learn.microsoft.com/en-us/windows/win32/seccng/cng-algorithm-identifiers) and key length or [elliptic curve name](https://learn.microsoft.com/en-us/windows/win32/seccng/cng-named-elliptic-curves) used for attestation. This node will only be present if the **EnrollmentVersion** value is 9.0 or higher.
+
 **Namespace:** http://schemas.xmlsoap.org/ws/2006/12/authorization
 
 <a id="Section_3.4.4.1.1.1.2"></a>
@@ -3146,7 +3170,7 @@ The following elements and their values are specified in the SOAP body of the re
 
 **ac:Value:** The <ac:Value> element MUST be a child of <ac:AdditionalContext> and the value is true or false that indicates whether the user is logged in.
 
-The following elements are supported in an implementation-specific manner.<28>
+The following elements are supported in an implementation-specific manner.<29>
 
 **ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "Locale".
 
@@ -3176,11 +3200,11 @@ The following elements are supported in an implementation-specific manner.<28>
 
 **ac:Value:** If included, this <ac:Value> element MUST be a child of <ac:AdditionalContext> and the value is a UTF-8 string specifying the fully qualified domain name, if the device is domain-joined.
 
-**ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "NotInOobe".<29>
+**ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "NotInOobe".<30>
 
 **ac:Value:** If included, this <ac:Value> element MUST be a child of <ac:AdditionalContext> and MUST be a boolean value. When true, indicates to the MDM server that the device is not in the out-of-box-experience (OOBE) mode.
 
-The following elements are supported in an implementation-specific manner when the **EnrollmentVersion** value is 5.0 or higher.<30>
+The following elements are supported in an implementation-specific manner when the **EnrollmentVersion** value is 5.0 or higher.<31>
 
 **ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "AIKAttestationClaim".
 
@@ -3295,7 +3319,7 @@ The following elements and their values are specified in the SOAP body of the re
 
 **ac:Value:** The <ac:Value> element MUST be a child of <ac:AdditionalContext> and the value is true or false that indicates whether the user is logged in.
 
-The following elements are supported in an implementation-specific manner.<31>
+The following elements are supported in an implementation-specific manner.<32>
 
 **ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "Locale".
 
@@ -3325,11 +3349,11 @@ The following elements are supported in an implementation-specific manner.<31>
 
 **ac:Value:** If included, this <ac:Value> element MUST be a child of <ac:AdditionalContext> and the value is a UTF-8 string specifying the fully qualified domain name, if the device is domain-joined.
 
-**ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "NotInOobe".<32>
+**ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "NotInOobe".<33>
 
 **ac:Value:** If included, this <ac:Value> element MUST be a child of <ac:AdditionalContext> and MUST be a boolean value. When true, indicates to the MDM server that the device is not in the out-of-box-experience (OOBE) mode.
 
-The following elements are supported in an implementation-specific manner when the **EnrollmentVersion** value is 5.0 or higher.<33>
+The following elements are supported in an implementation-specific manner when the **EnrollmentVersion** value is 5.0 or higher.<34>
 
 **ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "AIKAttestationClaim".
 
@@ -3508,7 +3532,7 @@ The following elements and attributes are specified in the SOAP body of the requ
 
 **ac:Value:** The <ac:Value> element MUST be a child of <ac:AdditionalContext> and the value specifies the unique device identifier.
 
-The following elements are supported in an implementation-specific manner.<34>
+The following elements are supported in an implementation-specific manner.[<35>](#Appendix_A_35)
 
 **ac:ContextItem/attributes/Name:** The <ac:ContextItem> Name attribute MUST be the literal string "Locale".
 
@@ -4465,6 +4489,24 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
 
 <extensions xsi:nil="true" />
 
+<attestation>
+
+<attestationFailureBehavior p10:nil="true" xmlns:p10="http://www.w3.org/2001/XMLSchema-instance">IgnoreOnError</attestationFailureBehavior>
+
+<operationTimeout p10:nil="true" xmlns:p10="http://www.w3.org/2001/XMLSchema-instance">100</operationTimeout>
+
+<allowedAIKAlgorithms>
+
+<algorithm>ECDSA,nistP384</algorithm>
+
+<algorithm>ECDSA,nistP256</algorithm>
+
+<algorithm>RSA,2048</algorithm>
+
+</allowedAIKAlgorithms>
+
+</attestation>
+
 </attributes>
 
 </policy>
@@ -4573,6 +4615,11 @@ The following snippet demonstrates the call to the **GetPoliciesResponse** messa
 - <relyingPartyId>PartyId</relyingPartyId>
 - <endpointUri>attest.azure.net/attest</endpointUri>
 - </azureAttestation>
+- <allowedAIKAlgorithms>
+- <algorithm>ECDSA,nistP384</algorithm>
+- <algorithm>ECDSA,nistP256</algorithm>
+- <algorithm>RSA,2048</algorithm>
+- </allowedAIKAlgorithms>
 - </attestation>
 - </attributes>
 - </policy>
@@ -4870,6 +4917,12 @@ DER format PKCS#10 certificate request in Base64 encoding Insterted Here
 <ac:ContextItem Name="AADPub">
 
 <ac:Value>FFFFFFFFFFFF</ac:Value>
+
+</ac:ContextItem>
+
+<ac:ContextItem Name="AIKAlgorithm">
+
+<ac:Value>ECDSA,nistP256</ac:Value>
 
 </ac:ContextItem>
 
@@ -5639,6 +5692,10 @@ elementFormDefault="qualified">
 
 <xsd:element minOccurs="0" maxOccurs="1" name="EnrollmentVersion" nillable="true" type="xsd:decimal"/>
 
+<xsd:element minOccurs="0" maxOccurs="1" name="DeviceAssociationMaaUrl" nillable="true" type="xsd:anyURI"/>
+
+<xsd:element minOccurs="0" maxOccurs="1" name="GatewayService" nillable="true" type="xsd:anyURI"/>
+
 </xsd:all>
 
 </xsd:complexType>
@@ -5806,7 +5863,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <20> Section 3.1.4.1.3.1: **RequestVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 operating system (v20H1) 2023 1C patch and later.
 
-<21> Section 3.1.4.1.3.2: **EnrollmentVersion** value 3.0 is supported in Windows 10 and later. **EnrollmentVersion** value 4.0 is supported only in the Windows 10 v1703 operating system and later. **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. **EnrollmentVersion** value 6.0 is supported in Windows 11 with [[MSKB-5033369]](https://go.microsoft.com/fwlink/?linkid=2345101), Windows 11, version 22H2 operating system with [[MSKB-5032288]](https://go.microsoft.com/fwlink/?linkid=2344397) and later. **EnrollmentVersion** value 7.0 is supported in Windows 11, version 23H2 operating system with [[MSKB-5053657]](https://go.microsoft.com/fwlink/?linkid=2306438) and Windows 11, version 24H2 operating system with [[MSKB-5053656]](https://go.microsoft.com/fwlink/?linkid=2306437) and later.
+<21> Section 3.1.4.1.3.2: **EnrollmentVersion** value 3.0 is supported in Windows 10 and later. **EnrollmentVersion** value 4.0 is supported only in the Windows 10 v1703 operating system and later. **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. **EnrollmentVersion** value 6.0 is supported in Windows 11 with [[MSKB-5033369]](https://go.microsoft.com/fwlink/?linkid=2345101), Windows 11, version 22H2 operating system with [[MSKB-5032288]](https://go.microsoft.com/fwlink/?linkid=2344397) and later. **EnrollmentVersion** value 7.0 is supported in Windows 11, version 23H2 operating system with [[MSKB-5053657]](https://go.microsoft.com/fwlink/?linkid=2306438) and Windows 11, version 24H2 operating system with [[MSKB-5053656]](https://go.microsoft.com/fwlink/?linkid=2306437) and later. **EnrollmentVersion** value 8.0 is supported in Windows 11, version 24H2 and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745) and Windows 11, version 26H1 operating system with [[MSKB-5120996]](https://go.microsoft.com/fwlink/?LinkId=2373419) and later. **EnrollmentVersion** value 9.0 is supported in Windows 11 v22H2 and Windows 11, version 23H2 with [[MSFT-CVE-2026-62806]](https://go.microsoft.com/fwlink/?LinkId=2374204) and Windows 11, version 24H2 and Windows 11, version 25H2 with [[MSKB-5101650]](https://go.microsoft.com/fwlink/?LinkId=2372735) and Windows 11, version 26H1 with [[MSKB-5121000]](https://go.microsoft.com/fwlink/?LinkId=2373410) and later.
 
 <22> Section 3.3.4.1.1.2: **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later.
 
@@ -5820,19 +5877,21 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <27> Section 3.4.4.1.1.1.1: This and the following five elements are available in Windows 11, version 23H2 with [MSKB-5053657] and Windows 11, version 24H2 with [MSKB-5053656] and later.
 
-<28> Section 3.4.4.1.1.1.2: The eight elements are not supported in Windows 10 v1607 and earlier. In addition, the values UxInitiated, ExternalMgmtAgentHint, and DomainName are not supported in Windows 10 v1703 and earlier, and the value OfflineAutoPilotEnrollmentCorrelator is not supported in releases earlier than Windows 10 v1803 and earlier.
+<28> Section 3.4.4.1.1.1.1: The **Name** attribute "AIKAlgorithm" is available in Windows 11, version 23H2 with [MSFT-CVE-2026-62806] and Windows 11, version 24H2 and Windows 11, version 25H2 with [MSKB-5101650] and later.
 
-<29> Section 3.4.4.1.1.1.2: The **Name** attribute "NotInOobe" is supported only in Windows 10 v1903 and later.
+<29> Section 3.4.4.1.1.1.2: The eight elements are not supported in Windows 10 v1607 and earlier. In addition, the values UxInitiated, ExternalMgmtAgentHint, and DomainName are not supported in Windows 10 v1703 and earlier, and the value OfflineAutoPilotEnrollmentCorrelator is not supported in releases earlier than Windows 10 v1803 and earlier.
 
-<30> Section 3.4.4.1.1.1.2: **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. See section 3.1.4.1.3.2.
+<30> Section 3.4.4.1.1.1.2: The **Name** attribute "NotInOobe" is supported only in Windows 10 v1903 and later.
 
-<31> Section 3.4.4.1.1.1.3: The eight elements are not supported in Windows 10 v1607 and earlier. In addition, the values UxInitiated, ExternalMgmtAgentHint, and DomainName are not supported in Windows 10 v1703 and earlier, and the value OfflineAutoPilotEnrollmentCorrelator is not supported in Windows 10 v1803 and earlier.
+<31> Section 3.4.4.1.1.1.2: **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. See section 3.1.4.1.3.2.
 
-<32> Section 3.4.4.1.1.1.3: The **Name** attribute "NotInOobe" is supported only in Windows 10 v1903 and later.
+<32> Section 3.4.4.1.1.1.3: The eight elements are not supported in Windows 10 v1607 and earlier. In addition, the values UxInitiated, ExternalMgmtAgentHint, and DomainName are not supported in Windows 10 v1703 and earlier, and the value OfflineAutoPilotEnrollmentCorrelator is not supported in Windows 10 v1803 and earlier.
 
-<33> Section 3.4.4.1.1.1.3: The **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. See section 3.1.4.1.3.2.
+<33> Section 3.4.4.1.1.1.3: The **Name** attribute "NotInOobe" is supported only in Windows 10 v1903 and later.
 
-<34> Section 3.5.4.1.1.1: The five elements are not supported in Windows 10 v1607 and earlier.
+<34> Section 3.4.4.1.1.1.3: The **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. See section 3.1.4.1.3.2.
+
+<35> Section 3.5.4.1.1.1: The five elements are not supported in Windows 10 v1607 and earlier.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -5851,7 +5910,18 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.4.1.3.2](#Section_3.1.4.1.3.2) DiscoveryResponse | 30641 : Added Windows versions support for EnrollmentVersion values 3.0, 6.0, and 7.0. | Major |
+| [3.1.4.1.3.1](#Section_3.1.4.1.3.1) DiscoveryRequest | Added 8.0 and 9.0 as a supported EnrollmentVersion. | Major |
+| [3.1.4.1.3.2](#Section_3.1.4.1.3.2) DiscoveryResponse | Updated the response example to include EnrollmentVersion 8.0, DeviceAssociationMaaUrl, and GatewayService. | Major |
+| 3.1.4.1.3.2 DiscoveryResponse | Added description for DeviceAssociationMaaUrl and GatewayService. | Major |
+| 3.1.4.1.3.2 DiscoveryResponse | Added 8.0 and 9.0 as a supported EnrollmentVersion. | Major |
+| 3.1.4.1.3.2 DiscoveryResponse | Updated Windows Behavior Note for EnrollmentVersion 8.0 and 9.0. | Major |
+| [3.3.4.1.1.2](#Section_3.3.4.1.1.2) GetPoliciesResponse | Added allowedAIKAlgorithms to the GetPolicies response for on-premises authentication. | Major |
+| [3.4.4.1.1.1.1](#Section_3.4.4.1.1.1.1) RequestSecurityToken using Federated Authentication | Added the AIKAlgorithm context item to RequestSecurityToken for federated authentication. | Major |
+| 3.4.4.1.1.1.1 RequestSecurityToken using Federated Authentication | Added Windows Behavior Note documenting AIKAlgorithm Name attribute support. | Major |
+| [4.2.2](#Section_4.2.2) GetPolicies Example: Response | Added allowedAIKAlgorithms to the GetPolicies response example. | Major |
+| [4.2.3](#Section_4.2.3) GetPolicies With Azure Attestation Example: Response | Added allowedAIKAlgorithms to the GetPolicies with Azure Attestation response example. | Major |
+| [4.3.1.1](#Section_4.3.1.1) RequestSecurityToken Example: Request using Federated Authentication | Added an AIKAlgorithm context item example to the RequestSecurityToken request using federated authentication. | Major |
+| [6](#Section_6) Appendix A: XSD Schema | Added the DeviceAssociationMaaUrl and GatewayService elements to the XSD schema. | Major |
 
 <a id="revision-history"></a>
 
@@ -5878,3 +5948,4 @@ The changes made to this document are listed in the following table. For more in
 | 3/10/2025 | 16.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 17.0 | Major | Significantly changed the technical content. |
 | 1/26/2026 | 18.0 | Major | Significantly changed the technical content. |
+| 8/11/2026 | 19.0 | Major | Significantly changed the technical content. |
