@@ -82,6 +82,11 @@ Table of Contents
         - [2.2.2.7.15 szOID_ENROLL_AIK_INFO](#Section_2.2.2.7.15)
         - [2.2.2.7.16 szOID_ENROLL_SCEP_KEY_ATTESTATION_CHALLENGE_ANSWER](#Section_2.2.2.7.16)
         - [2.2.2.7.17 szOID_ENROLL_SCEP_CLIENT_REQUEST](#Section_2.2.2.7.17)
+        - [2.2.2.7.18 szOID_ENROLL_V2_CONTAINER_NAME](#Section_2.2.2.7.18)
+        - [2.2.2.7.19 szOID_ENROLL_V2_EK_ALGORITHM](#Section_2.2.2.7.19)
+        - [2.2.2.7.20 szOID_ENROLL_V2_EK_PARAMETER](#Section_2.2.2.7.20)
+        - [2.2.2.7.21 szOID_ENROLL_V2_AIK_INFO](#Section_2.2.2.7.21)
+        - [2.2.2.7.22 szOID_ENROLL_V2_ATTESTATION_STATEMENT](#Section_2.2.2.7.22)
       - [2.2.2.8 Response Format](#Section_2.2.2.8)
         - [2.2.2.8.1 CA Response Attributes](#Section_2.2.2.8.1)
           - [2.2.2.8.1.1 szOID_ENROLL_ATTESTATION_CHALLENGE](#Section_2.2.2.8.1.1)
@@ -373,7 +378,8 @@ Table of Contents
                 - [3.2.2.6.2.1.2.5.1 Processing Rules for Key Attestation Based on Certificates](#Section_3.2.2.6.2.1.2.5.1)
                 - [3.2.2.6.2.1.2.5.2 Processing Rules for Key Attestation Based on a Key](#Section_3.2.2.6.2.1.2.5.2)
               - [3.2.2.6.2.1.2.6 Processing Rules for Providing a Challenge Response to an Initial Key Attestation Request](#Section_3.2.2.6.2.1.2.6)
-              - [3.2.2.6.2.1.2.7 Processing Rules for a Challenge Response Request](#Section_3.2.2.6.2.1.2.7)
+              - [3.2.2.6.2.1.2.7 Processing Rules for Providing a Challenge Response to an Initial Key Attestation Request in V2 flow](#Section_3.2.2.6.2.1.2.7)
+              - [3.2.2.6.2.1.2.8 Processing Rules for a Challenge Response Request](#Section_3.2.2.6.2.1.2.8)
             - [3.2.2.6.2.1.3 Storing Request Parameters in the Request Table](#Section_3.2.2.6.2.1.3)
             - [3.2.2.6.2.1.4 CA Policy Algorithm](#Section_3.2.2.6.2.1.4)
               - [3.2.2.6.2.1.4.1 Verify Configured Certificate Template](#Section_3.2.2.6.2.1.4.1)
@@ -450,7 +456,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 7/14/2026.
+Last updated: 8/24/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -962,6 +968,8 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSFT-CVE-2026-54121] Microsoft Corporation, "Active Directory Certificate Services Elevation of Privilege Vulnerability", CVE-2026-54121, July 14, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-54121](https://go.microsoft.com/fwlink/?LinkId=2370560)
 
+[MSFT-CVE-2026-6726] Microsoft Corporation, "MITRE: CVE-2026-6726 TPM 2.0 Improper Object Slot Reuse", August 11, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-6726](https://go.microsoft.com/fwlink/?LinkId=2374650)
+
 [MSFT-EXITMAIL] Microsoft Corporation, "Send e-mail when a certification event occurs", Jan 2005, [http://technet.microsoft.com/en-us/library/cc738001(WS.10).aspx](https://go.microsoft.com/fwlink/?LinkId=104191)
 
 [MSFT-EXIT] Microsoft Corporation, "Configuring the policy and exit modules", Jan 2005, [http://technet2.microsoft.com/windowsserver/en/library/79496bb6-6c2c-4d2d-bffd-aa6421999b341033.mspx?mfr=true](https://go.microsoft.com/fwlink/?LinkId=100630)
@@ -975,12 +983,6 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSKB-5017379] Microsoft Corporation, "September 2022 - KB5017379", [https://support.microsoft.com/en-us/topic/september-20-2022-kb5017379-os-build-17763-3469-preview-50a9b9e2-745d-49df-aaae-19190e10d307](https://go.microsoft.com/fwlink/?linkid=2206555)
 
 [MSKB-5017381] Microsoft Corporation, "September 2022 - KB5017381", September 2022, [https://support.microsoft.com/en-au/topic/september-20-2022-kb5017381-os-build-20348-1070-preview-dc843fea-bccd-4550-9891-a021ae5088f0](https://go.microsoft.com/fwlink/?linkid=2205487)
-
-[MSKB-5095093] Microsoft Corporation, "June 23, 2026—KB5095093", June 2026, [https://support.microsoft.com/en-us/help/5095093](https://go.microsoft.com/fwlink/?LinkId=2371500)
-
-[MSKB-5099536] Microsoft Corporation, "July 14, 2026 - KB5099536", July 2026, [https://support.microsoft.com/en-us/help/5099536](https://go.microsoft.com/fwlink/?LinkId=2371108)
-
-[MSKB-5099540] Microsoft Corporation, "July 14, 2026 - KB5099540", July 2026, [https://support.microsoft.com/en-us/help/5099540](https://go.microsoft.com/fwlink/?LinkId=2371098)
 
 [MSLEARN-CryptAttributes] Microsoft Corporation, "CRYPT_ATTRIBUTES structure", [https://learn.microsoft.com/en-us/windows/win32/api/wincrypt/ns-wincrypt-crypt_attributes](https://go.microsoft.com/fwlink/?LinkId=2371082)
 
@@ -2189,6 +2191,61 @@ Description: This attribute is used to send PKCS#10 certificate signing request.
 
 Format: The value of the attribute MUST be the [**DER**](#gt_distinguished-encoding-rules-der), encoded PKCS#10 certificate.
 
+<a id="Section_2.2.2.7.18"></a>
+##### 2.2.2.7.18 szOID_ENROLL_V2_CONTAINER_NAME
+
+OID = 1.3.6.1.4.1.311.21.44
+
+Internal Name: szOID_ENROLL_V2_CONTAINER_NAME
+
+Description: The value of this attribute contains the container name of the persistent V2 Attestation Identity Key (AIK) created by the client for the HMAC-based attestation protocol.
+
+Format: The value MUST be a Unicode string encoded using X509_UNICODE_ANY_STRING.
+
+<a id="Section_2.2.2.7.19"></a>
+##### 2.2.2.7.19 szOID_ENROLL_V2_EK_ALGORITHM
+
+OID = 1.3.6.1.4.1.311.21.45
+
+Internal Name: szOID_ENROLL_V2_EK_ALGORITHM
+
+Description: The value of this attribute contains the algorithm name of the Endorsement Key (EK) used in the V2 attestation challenge.
+
+Format: The value MUST be a Unicode string encoded using X509_UNICODE_ANY_STRING. The value MUST be a CNG algorithm identifier (for example, "RSA").
+
+<a id="Section_2.2.2.7.20"></a>
+##### 2.2.2.7.20 szOID_ENROLL_V2_EK_PARAMETER
+
+OID = 1.3.6.1.4.1.311.21.46
+
+Internal Name: szOID_ENROLL_V2_EK_PARAMETER
+
+Description: The value of this attribute contains the key length parameter of the Endorsement Key (EK) used in the V2 attestation challenge.
+
+Format: The value MUST be a Unicode string encoded using X509_UNICODE_ANY_STRING containing the decimal representation of the EK key size in bits (for example, "2048").
+
+<a id="Section_2.2.2.7.21"></a>
+##### 2.2.2.7.21 szOID_ENROLL_V2_AIK_INFO
+
+OID = 1.3.6.1.4.1.311.21.47
+
+Internal Name: szOID_ENROLL_V2_AIK_INFO
+
+Description: The value of this attribute contains the AIK public key information for the V2 HMAC-based attestation protocol, protected by the CA exchange certificate.
+
+Format: The value of the attribute is an EnvelopedData CMS structure as specified in [[RFC3852]](https://go.microsoft.com/fwlink/?LinkId=90445) section 6.1 with one RecipientInfo as specified in [RFC3852] section 6.2. RecipientInfo is for the CA exchange certificate. The **EncryptedContent** field MUST contain the encrypted, DER-encoded form of the **SubjectPublicKeyInfo** for the V2 AIK public key, as specified in [[RFC2986]](https://go.microsoft.com/fwlink/?LinkId=90401) section 4.
+
+<a id="Section_2.2.2.7.22"></a>
+##### 2.2.2.7.22 szOID_ENROLL_V2_ATTESTATION_STATEMENT
+
+OID = 1.3.6.1.4.1.311.21.48
+
+Internal Name: szOID_ENROLL_V2_ATTESTATION_STATEMENT
+
+Description: This attribute contains the V2 attestation claim produced by the TPM for subject-only attestation of the generated key by the V2 AIK.
+
+Format: The value MUST include the output of a subject-only attestation claim that certifies the subject key using the V2 AIK, encoded as an octet string. The claim certifies the subject key using the V2 AIK identified in the szOID_ENROLL_V2_AIK_INFO attribute.
+
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 Response Format
 
@@ -2231,6 +2288,13 @@ Description: The value of this [**attribute**](#gt_attribute) contains a randoml
 
 Format: This value is encoded as an octet string.
 
+When the CA processes a request containing the szOID_ENROLL_V2_AIK_INFO, szOID_ENROLL_V2_ATTESTATION_STATEMENT, and szOID_ENROLL_V2_CONTAINER_NAME attributes<19>, the challenge MUST be a DER-encoded **CRYPT_ATTRIBUTES** structure containing the following CRYPT_ATTRIBUTE values:
+
+- szOID_ENROLL_ATTESTATION_CHALLENGE (1.3.6.1.4.1.311.21.28): The HMAC key wrapped (encrypted) to the EK public key, encoded as an octet string.
+- szOIDVerisign_SenderNonce (2.16.840.1.113733.1.9.5): A 32-byte random nonce encoded as an octet string.
+- szOID_ENROLL_V2_CONTAINER_NAME (1.3.6.1.4.1.311.21.44): The V2 AIK container name encoded as a Unicode string.
+- szOID_ENROLL_V2_EK_ALGORITHM (1.3.6.1.4.1.311.21.45): The EK algorithm name encoded as a Unicode string.
+- szOID_ENROLL_V2_EK_PARAMETER (1.3.6.1.4.1.311.21.46): The EK key size encoded as a Unicode string.
 <a id="Section_2.2.2.8.1.2"></a>
 ###### 2.2.2.8.1.2 szOID_ENROLL_CAXCHGCERT_HASH
 
@@ -2664,7 +2728,7 @@ A [**key recovery certificate**](#gt_key-recovery-certificate) MUST contain the 
 - Authority Information Access
 - Key Usage (Key Encipherment = 0x20)
 - CDP (CRL Distribution Point)
-- Extended Key Usage (Key Recovery OID = szOID_KP_KEY_RECOVERY_AGENT (1.3.6.1.4.1.311.21.6)).<19>
+- Extended Key Usage (Key Recovery OID = szOID_KP_KEY_RECOVERY_AGENT (1.3.6.1.4.1.311.21.6)).<20>
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Common Error Codes
 
@@ -2701,14 +2765,14 @@ The Windows Client Certificate Enrollment Protocol is a simple request-response 
 <a id="Section_3.1"></a>
 ## 3.1 Client Role
 
-The following sections specify implementation modes of the client role:<20>
+The following sections specify implementation modes of the client role:<21>
 
 - Basic Enrollment: Specifies a client that sends an [**enrollment**](#gt_certificate-enrollment) request that is not based on [**certificate templates**](#gt_certificate-template).
 - Enrollment based on certificate templates: Specifies a client that sends an enrollment request, based on enterprise policies published in [**Active Directory**](#gt_active-directory), by using certificate templates.
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Client Mode: Basic Enrollment
 
-The Windows Client Certificate Enrollment Protocol constructs a [**certificate**](#gt_certificate) request as specified in section [2.2.2.6](#Section_2.2.2.6), sends the request to the [**CA**](#gt_certification-authority-ca), and retrieves the issued certificate. After the client has obtained the certificate, the client SHOULD store the certificate and its associated [**private key**](#gt_private-key) for later use by applications running on the client machine.<21>
+The Windows Client Certificate Enrollment Protocol constructs a [**certificate**](#gt_certificate) request as specified in section [2.2.2.6](#Section_2.2.2.6), sends the request to the [**CA**](#gt_certification-authority-ca), and retrieves the issued certificate. After the client has obtained the certificate, the client SHOULD store the certificate and its associated [**private key**](#gt_private-key) for later use by applications running on the client machine.<22>
 
 This section specifies the behavior of a client to this protocol that does not use the [**certificate templates**](#gt_certificate-template).
 
@@ -2741,7 +2805,7 @@ The Windows Client Certificate Enrollment Protocol depends on [**DCOM**](#gt_dis
 <a id="Section_3.1.1.4"></a>
 #### 3.1.1.4 Message Processing Events and Sequencing Rules
 
-The Windows Client Certificate Enrollment Protocol is based on [**DCOM**](#gt_distributed-component-object-model-dcom) [MS-DCOM](../MS-DCOM/MS-DCOM.md). DCOM provides the capability to obtain the version of an interface. Clients SHOULD use the IRemIUnknown.RemQueryInterface method to determine if the server supports the [ICertRequestD2](#Section_3.2.1.4.3) interface version. If the server supports the ICertRequestD2 interface, clients SHOULD use that interface. <22>If the server does not support ICertRequestD2 interface, clients MUST use the ICertRequestD interface.
+The Windows Client Certificate Enrollment Protocol is based on [**DCOM**](#gt_distributed-component-object-model-dcom) [MS-DCOM](../MS-DCOM/MS-DCOM.md). DCOM provides the capability to obtain the version of an interface. Clients SHOULD use the IRemIUnknown.RemQueryInterface method to determine if the server supports the [ICertRequestD2](#Section_3.2.1.4.3) interface version. If the server supports the ICertRequestD2 interface, clients SHOULD use that interface. <23>If the server does not support ICertRequestD2 interface, clients MUST use the ICertRequestD interface.
 
 The following sections define the processing rules for each of the methods in [ICertRequestD (section 3.2.1.4.2)](#Section_3.2.1.4.2) and ICertRequestD2 (section 3.2.1.4.3). For all methods of this protocol, a returned value of 0 indicates a successful invocation. Unless specified otherwise, any returned non-zero value indicates an error and the client SHOULD NOT rely on any specific value for its processing rules.
 
@@ -2881,7 +2945,7 @@ The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der)-enc
 - [**Attributes**](#gt_attribute): This field SHOULD be used to send additional parameters to the [**CA**](#gt_certification-authority-ca).
 Section [2.2.2.7](#Section_2.2.2.7) specifies the required format for each of these attributes. The following [**OIDs**](#gt_object-identifier-oid) identify the attributes that are supported by the protocol:
 
-- szOID_OS_VERSION (1.3.6.1.4.1.311.13.2.3): The client SHOULD use this attribute to specify the version information of the client's operating system in the form of a string. <23> The client SHOULD encode the value of this attribute as a IA5String. The format for this attribute is as specified in section 2.2.2.7.
+- szOID_OS_VERSION (1.3.6.1.4.1.311.13.2.3): The client SHOULD use this attribute to specify the version information of the client's operating system in the form of a string. <24> The client SHOULD encode the value of this attribute as a IA5String. The format for this attribute is as specified in section 2.2.2.7.
 - szOID_ENROLLMENT_CSP_PROVIDER (1.3.6.1.4.1.311.13.2.2): The client SHOULD use this attribute to specify the [**CSP**](#gt_cryptographic-service-provider-csp) that was used to generate a [**private key**](#gt_private-key). CSP specifications are in section [1.1](#Section_1.1).
 - szOID_REQUEST_CLIENT_INFO (1.3.6.1.4.1.311.21.20): Clients SHOULD use this value to pass additional client information such as machine name, user name, and application name. For details see section [2.2.2.7.4](#Section_2.2.2.7.4).
 - szOID_CERT_EXTENSIONS (1.3.6.1.4.1.311.2.1.14): The client SHOULD use this value to pass additional [**certificate**](#gt_certificate) extensions that are to be added to the issued certificate.
@@ -2927,7 +2991,7 @@ The request MUST be compliant with "Netscape Extensions for User Key Generation 
 Processing rules for the *pwszAttributes* parameter:
 
 - CertType: Client MUST add the CertType [**attribute**](#gt_attribute) to the *pwszAttributes* parameter. The value for this attribute MUST be the string "server".
-- rdn value: Client MUST request the subject name information through the rdn attributes. Supported values and their formats MUST be as specified in section [2.2.2.6.4.2](#Section_2.2.2.6.4.2).<24>
+- rdn value: Client MUST request the subject name information through the rdn attributes. Supported values and their formats MUST be as specified in section [2.2.2.6.4.2](#Section_2.2.2.6.4.2).<25>
 <a id="Section_3.1.1.4.3.2"></a>
 ###### 3.1.1.4.3.2 Renew Certificate Requests
 
@@ -2940,7 +3004,7 @@ Renew Certificate Request Using CMS and PKCS #10 Request Formats
 
 The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der) encoded [**CMS**](#gt_cryptographic-message-syntax-cms) request as specified in [[RFC3852]](https://go.microsoft.com/fwlink/?LinkId=90445). The CMS ASN.1 structure includes the following fields:
 
-- The client SHOULD construct a request for a new [**certificate**](#gt_certificate) by using the PKCS #10 certificate format as specified in section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1) or section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).<25>
+- The client SHOULD construct a request for a new [**certificate**](#gt_certificate) by using the PKCS #10 certificate format as specified in section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1) or section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).<26>
 - The client MUST add an [**attribute**](#gt_attribute) to the **Attributes** field in the PKCS #10. The attribute is szOID_RENEWAL_CERTIFICATE (1.3.6.1.4.1.311.13.1) as specified in section [2.2.2.7.3](#Section_2.2.2.7.3). The value for this attribute MUST be an ASN.1 DER encoded certificate to be renewed.
 - The client MUST construct a CMS with the following requirements:
 - ContentType: This field MUST be the [**OID**](#gt_object-identifier-oid) szOID_RSA_signedData (1.2.840.113549.1.7.2, id-signedData).
@@ -2955,7 +3019,7 @@ Renew Certificate Request Using CMS and CMC Request Formats
 
 The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der) encoded [**CMS**](#gt_cryptographic-message-syntax-cms) request (as specified in [[RFC3852]](https://go.microsoft.com/fwlink/?LinkId=90445)) that includes a CMC request (as specified in [[RFC2797]](https://go.microsoft.com/fwlink/?LinkId=90382)). The ASN.1 structure includes the following fields:
 
-- The client SHOULD construct a request for a new [**certificate**](#gt_certificate) by using the PKCS #10 certificate format as specified in section [2.2.2.6.5](#Section_2.2.2.6.5), [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1), or [3.1.1.4.3.4](#Section_3.1.1.4.3.4).<26>
+- The client SHOULD construct a request for a new [**certificate**](#gt_certificate) by using the PKCS #10 certificate format as specified in section [2.2.2.6.5](#Section_2.2.2.6.5), [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1), or [3.1.1.4.3.4](#Section_3.1.1.4.3.4).<27>
 - The client MUST add an [**attribute**](#gt_attribute) to the **Attributes** field in the PKCS #10. The attribute is szOID_RENEWAL_CERTIFICATE (1.3.6.1.4.1.311.13.1) as specified in section [2.2.2.7.3](#Section_2.2.2.7.3). The value for this attribute MUST be the ASN.1 DER encoded certificate to be renewed.
 - The client MUST construct a CMC request with the following requirements:
 - TaggedRequest: This field MUST contain exactly one certificate request. The certificate request MUST be the PKCS #10 constructed in the first of the preceding steps.
@@ -2983,7 +3047,7 @@ This section describes a conceptual model of data organization that a possible i
 In addition to the data described in section [3.1.1.1](#Section_3.1.1.1), the client that implements [**ROBO**](#gt_request-on-behalf-of-robo)-requests processing maintains the following data:
 
 - OtherEndEntityRequest
-PKCS#10 request constructed as specified in section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1) or section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1), or [**CMS**](#gt_cryptographic-message-syntax-cms) request constructed as specified in section [3.1.1.4.3.1.3](#Section_3.1.1.4.3.1.3). It is left up to the implementation of the protocol to provide a way for end entities to exchange the requests and store it in this data.<27>
+PKCS#10 request constructed as specified in section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1) or section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1), or [**CMS**](#gt_cryptographic-message-syntax-cms) request constructed as specified in section [3.1.1.4.3.1.3](#Section_3.1.1.4.3.1.3). It is left up to the implementation of the protocol to provide a way for end entities to exchange the requests and store it in this data.<28>
 
 <a id="Section_3.1.1.4.3.3.2"></a>
 Enroll on Behalf of Request Using CMS and PKCS #10 Request Formats
@@ -3020,7 +3084,7 @@ The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der) enc
 <a id="Section_3.1.1.4.3.4"></a>
 ###### 3.1.1.4.3.4 Certificate Request with Key Attestation
 
-**Note** For information on product behavior, see the following product behavior note.<28>
+**Note** For information on product behavior, see the following product behavior note.<29>
 
 Before the client can submit the request to the CA for [**key attestation**](#gt_key-attestation) purposes, it MUST initialize a secure channel to the CA. To create a secure channel to the CA, the client MUST retrieve the current CA [**key**](#gt_key) [**exchange certificate**](#gt_exchange-certificate), either through a call to **ICertRequestD::GetCACert** (providing the GETCERT_CAXCHGCERT 0x00000001 property identifier (ID) in the fchain parameter) or **ICertRequestD2::GetCAProperty** (providing the CR_PROP_CAXCHGCERT 0x0000000F flag in the PropID parameter). Both methods can be used to retrieve the CA exchange certificate with no preference. Once retrieved, the CA exchange certificate MUST be verified as being [**trusted**](#gt_trust) for the szOID_KP_CA_EXCHANGE [**EKU**](#gt_enhanced-key-usage-eku) or the szOID_KP_PRIVACY_CA EKU before being used further.
 
@@ -3033,7 +3097,13 @@ The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der)-enc
 - The szOID_ENROLL_EK_INFO or szOID_ENROLL_AIK_INFO attribute set to the **EnvelopedData** CMS structure that was constructed in the previous step. The szOID_ENROLL_EK_INFO attribute MUST be used if the encrypted **Client_HardwareKeyInfo** contains the client endorsement key (EK) and certificates; that is, when EK attestation (authority and subject) (section 3.1.1.4.3.4.1) is being performed. The szOID_ENROLL_AIK_INFO attribute MUST be used if the encrypted **Client_HardwareKeyInfo** contains the client Attestation Identity Key (AIK) and certificates; that is, when AIK attestation (subject only) (section 3.1.1.4.3.4.2) is being performed.
 - The szOID_ENROLL_ATTESTATION_STATEMENT attribute set to the Client_KeyAttestationStatement ADM element.
 - The szOID_ENROLL_KSP_NAME attribute set to the [**CSP**](#gt_cryptographic-service-provider-csp) name used to create the private/public [**key pair**](#gt_public-private-key-pair).
-**Note** All request formats detailed in the following sections MUST be marshaled by using DER-encoding rules, as specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593), for transmission.
+- When client performs EK attestation (authority and subject) as specified in section 3.1.1.4.3.4.1, it SHOULD<30> perform the following additional procedures:
+- The client MUST create a persistent V2 Attestation Identity Key (AIK) in the same KSP as the subject key. The V2 AIK container name MUST use a randomly generated GUID prefixed with "V2AIK-" to avoid collisions between concurrent enrollments. The V2 AIK MUST be created with identity key usage policy.
+- The PKCS#10 request MUST additionally include the following attributes:
+- szOID_ENROLL_V2_AIK_INFO (1.3.6.1.4.1.311.21.47): The V2 AIK public key encrypted to the CA exchange certificate.
+- szOID_ENROLL_V2_ATTESTATION_STATEMENT (1.3.6.1.4.1.311.21.48): The subject-only attestation claims from the V2 AIK certifying the subject key.
+- szOID_ENROLL_V2_CONTAINER_NAME (1.3.6.1.4.1.311.21.44): The V2 AIK container name.
+**Note** All request formats detailed in the following sections MUST be marshaled by using DER-encoding rules, as specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593), for transmission.
 
 <a id="Section_3.1.1.4.3.4.1"></a>
 EK Attestation (Authority and Subject)
@@ -3048,15 +3118,20 @@ The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der)-enc
 <a id="Section_3.1.1.4.3.4.1.2"></a>
 Responding to a CA Challenge Message
 
-When the CA receives a [**certificate**](#gt_certificate) request with a [**key attestation**](#gt_key-attestation) statement containing szOID_ENROLL_EK_INFO, as specified in section [3.1.1.4.3.4.1](#Section_3.1.1.4.3.4.1), it SHOULD return a challenge to the client to prove that the client owns the corresponding [**EK private key (EKPriv)**](#gt_ek-private-key-ekpriv), as specified in section [3.2.2.6.2.1.2.6](#Section_3.2.2.6.2.1.2.6).<29> Windows Client Certificate Enrollment protocol SHOULD verify and process the challenge as described below.<30>
+When the CA receives a [**certificate**](#gt_certificate) request with a [**key attestation**](#gt_key-attestation) statement containing szOID_ENROLL_EK_INFO, as specified in section [3.1.1.4.3.4.1](#Section_3.1.1.4.3.4.1), it SHOULD return a challenge to the client to prove that the client owns the corresponding [**EK private key (EKPriv)**](#gt_ek-private-key-ekpriv), as specified in section [3.2.2.6.2.1.2.6](#Section_3.2.2.6.2.1.2.6).<31> Windows Client Certificate Enrollment protocol SHOULD verify and process the challenge as described below.<32>
 
 - The *pctbCertChain* parameter returned by the **ICertRequestD::Request** method MUST be a CMC full [**PKI**](#gt_public-key-infrastructure-pki) response. This parameter contains the **CAChallenge** as described in section 3.2.2.6.2.1.2.6. Message syntax MUST be as specified in section 3.2.2.6.2.1.2.6.
 - The client MUST verify the signature on the **CAChallenge** and MUST validate the CA [**signing certificate**](#gt_signing-certificates) and its chain. The validation MUST be based on chain validation as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414).
 - The client MUST validate the CA [**exchange certificate**](#gt_exchange-certificate) included in the **CAChallenge** and verify that it is a valid exchange certificate (for more information, see [[MSFT-ARCHIVE]](https://go.microsoft.com/fwlink/?LinkId=90177)).
+- The client SHOULD<33> attempt to decode the challenge in the CAChallenge as a DER-encoded **CRYPT_ATTRIBUTES** structure, as specified in [[MSLEARN-CryptAttributes]](https://go.microsoft.com/fwlink/?LinkId=2371082).
+- If decoding succeeds, the client MUST extract the following attributes from the CRYPT_ATTRIBUTES structure: szOID_ENROLL_ATTESTATION_CHALLENGE, szOIDVerisign_SenderNonce, szOID_ENROLL_V2_CONTAINER_NAME, szOID_ENROLL_V2_EK_ALGORITHM, and szOID_ENROLL_V2_EK_PARAMETER. The client MUST resolve the CA exchange certificate from the CMC response and determine the encryption algorithm and key strength from the szOID_ENROLL_ENCRYPTION_ALGORITHM attribute as specified in section [2.2.2.8.1.4](#Section_2.2.2.8.1.4).
+- The client MUST unwrap the HMAC key contained in szOID_ENROLL_ATTESTATION_CHALLENGE using the V2 AIK and the EK, and then produce an attestation claim using the unwrapped HMAC key, the V2 AIK, and the nonce from szOIDVerisign_SenderNonce. This process is CSP-specific. The client MUST encrypt the resulting attestation claim using the CA exchange certificate and use it as the secret in the challenge response.
+- The client MUST delete the persistent V2 AIK key from the KSP after the challenge response has been submitted.
+- If decoding the challenge as CRYPT_ATTRIBUTES fails, or if the attestation claim generation fails, the client MUST process the challenge using the following rules.
 - The client MUST decrypt the secret included in the **CAChallenge** using its [**TPM**](#gt_trusted-platform-module-tpm) and use the result as the secret in the next step. This process is [**CSP**](#gt_cryptographic-service-provider-csp)-specific.
-- The client generates enveloped data as described in section [3.1.1.4.3.4.1.3](#Section_3.1.1.4.3.4.1.3) by setting the encrypted content to the secret obtained in the previous step. The client MUST use the [**encryption**](#gt_encryption) algorithm provided in the szOID_ENROLL_ENCRYPTION_ALGORITHM [**attribute**](#gt_attribute) (section [2.2.2.8.1.4](#Section_2.2.2.8.1.4)). The client sets the *pctbRequest* parameter in the **ICertRequestD::Request** method to this enveloped data.
-- The client adds the RequestId attribute (section [2.2.2.7.10](#Section_2.2.2.7.10)), constructed from the Returned_Request_ID ADM element, to the *pwszAttributes* parameter of the **ICertRequestD::Request** method.
-- The client MUST set the 0x00000500 bit in the *dwFlags* parameter of **ICertRequestD2::Request2**, as described in section [3.2.1.4.3.1.1](#Section_3.2.1.4.3.1.1), to designate the request as containing the response to the **CAChallenge**.
+- The client generates enveloped data as specified in section [3.1.1.4.3.4.1.3](#Section_3.1.1.4.3.4.1.3) by setting the encrypted content to the secret obtained in the previous step. The client MUST use the [**encryption**](#gt_encryption) algorithm provided in the szOID_ENROLL_ENCRYPTION_ALGORITHM [**attribute**](#gt_attribute) as specified in section 2.2.2.8.1.4. The client sets the *pctbRequest* parameter in the **ICertRequestD::Request** method to this enveloped data.
+- The client adds the RequestId attribute as specified in section [2.2.2.7.10](#Section_2.2.2.7.10), constructed from the Returned_Request_ID ADM element, to the *pwszAttributes* parameter of the **ICertRequestD::Request** method.
+- The client MUST set the 0x00000500 bit in the *dwFlags* parameter of **ICertRequestD2::Request2**, as specified in section [3.2.1.4.3.1.1](#Section_3.2.1.4.3.1.1), to designate the request as containing the response to the **CAChallenge**.
 <a id="Section_3.1.1.4.3.4.1.3"></a>
 Certificate Request with Challenge Response
 
@@ -3064,10 +3139,11 @@ The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der)-enc
 
 - RecipientInfos: This field MUST reference the CA [**exchange certificate**](#gt_exchange-certificate) that contains the [**public key**](#gt_public-key) that is used to encrypt the client's [**private key**](#gt_private-key). The exact format of RecipientInfos is specified in [RFC3852] section 6.1.
 - EncryptedContent: This field MUST include the secret that the CA has sent (in encrypted format) as described in section [3.2.2.6.2.1.2.6](#Section_3.2.2.6.2.1.2.6).
+- If the CA challenge was decoded as a **CRYPT_ATTRIBUTES** structure, the EncryptedContent field MUST instead contain the attestation claim obtained in section [3.1.1.4.3.4.1.2](#Section_3.1.1.4.3.4.1.2). The client SHOULD<34> encrypt the attestation claim using the CA exchange certificate and the encryption algorithm specified in the szOID_ENROLL_ENCRYPTION_ALGORITHM attribute as specified in section [2.2.2.8.1.4](#Section_2.2.2.8.1.4).
 <a id="Section_3.1.1.4.3.4.2"></a>
 AIK Attestation (Subject Only)
 
-The client MUST generate a [**symmetric key**](#gt_symmetric-key) locally and MUST use it to encrypt the **Client_HardwareKeyInfo** ADM element in the request. The client MUST then encrypt the symmetric key by using the [**public key**](#gt_public-key) from the retrieved CA [**exchange certificate**](#gt_exchange-certificate). The encrypted symmetric key MUST then be included in a [**certificate**](#gt_certificate) request, as specified in section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).<31>
+The client MUST generate a [**symmetric key**](#gt_symmetric-key) locally and MUST use it to encrypt the **Client_HardwareKeyInfo** ADM element in the request. The client MUST then encrypt the symmetric key by using the [**public key**](#gt_public-key) from the retrieved CA [**exchange certificate**](#gt_exchange-certificate). The encrypted symmetric key MUST then be included in a [**certificate**](#gt_certificate) request, as specified in section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).<35>
 
 <a id="Section_3.1.1.4.3.4.2.1"></a>
 New Certificate Request with Key Attestation Statement
@@ -3156,7 +3232,7 @@ If the value is 0x00000003 (CR_DISP_ISSUED), the CA has issued the certificate.
 <a id="Section_3.1.1.4.3.8.1"></a>
 New Certificate Request for Pre-sign Processing
 
-A **certificate** request can be designated for Pre-sign certificate processing<32> at the server by setting the B flag (0x08000000) in the *dwFlags* parameter of **ICertRequestD::Request** or **ICertRequestD2::Request2**, as described in section [3.2.1.4.3.1.1](#Section_3.2.1.4.3.1.1).
+A **certificate** request can be designated for Pre-sign certificate processing<36> at the server by setting the B flag (0x08000000) in the *dwFlags* parameter of **ICertRequestD::Request** or **ICertRequestD2::Request2**, as described in section [3.2.1.4.3.1.1](#Section_3.2.1.4.3.1.1).
 
 <a id="Section_3.1.1.4.3.8.2"></a>
 New Certificate Request After Pre-sign Processing
@@ -3168,7 +3244,7 @@ Processing at the client after receiving a response for the request with a Pre-s
 <a id="Section_3.1.1.4.3.9"></a>
 ###### 3.1.1.4.3.9 EK-Based Attestation Using Restricted HMAC Key
 
-The client MUST retrieve the CA certificates as specified by the certificate enrollment protocol. The response contains the RA encryption certificate, RA signing certificate, and CA public certificate. The client MUST use the RA encryption certificate to protect subsequent PKCS#7 messages sent to the service.<33>
+The client MUST retrieve the CA certificates as specified by the certificate enrollment protocol. The response contains the RA encryption certificate, RA signing certificate, and CA public certificate. The client MUST use the RA encryption certificate to protect subsequent PKCS#7 messages sent to the service.<37>
 
 <a id="Section_3.1.1.4.3.9.1"></a>
 New Certificate Request with EK Information
@@ -3245,7 +3321,7 @@ None.
 <a id="Section_3.1.1.6"></a>
 #### 3.1.1.6 Other Local Events
 
-This client can be triggered when an end user starts an application that requires enrollment for an X.509 [**certificate**](#gt_certificate).<34> The following sections describe local events that capture the processing rules when the WCCE client is triggered. Simultaneous invocations of the WCCE client by the higher level code are not supported and the result of such invocations is undefined.
+This client can be triggered when an end user starts an application that requires enrollment for an X.509 [**certificate**](#gt_certificate).<38> The following sections describe local events that capture the processing rules when the WCCE client is triggered. Simultaneous invocations of the WCCE client by the higher level code are not supported and the result of such invocations is undefined.
 
 <a id="Section_3.1.1.6.1"></a>
 ##### 3.1.1.6.1 Retrieving the Pending Certificate Request
@@ -3336,7 +3412,7 @@ This local event allows higher level code to submit a [**certificate**](#gt_cert
 - *pctbRequest*: set to the value of the **Request** input parameter.
 - If the return value of the ICertRequestD2::Request2 method is zero and:
 - If ICertRequestD2::Request2 returns *pdwDisposition* with value of CR_DISP_ISSUED, set the **Disposition** output parameter to "Issued".
-- If ICertRequestD2::Request2 returns *pdwDisposition* with value of CR_DISP_UNDER_SUBMISSION, and if the CA response is not a challenge message (as described in section [3.2.2.6.2.1.2.6](#Section_3.2.2.6.2.1.2.6)), then set the **Disposition** output parameter to "Pending"; otherwise, the client SHOULD invoke the processing rules in section [3.1.1.4.3.4.1.2](#Section_3.1.1.4.3.4.1.2) using the CA response. Perform step 1 again with the Request parameter set to the enveloped data created in section 3.1.1.4.3.4.1.2.<35>
+- If ICertRequestD2::Request2 returns *pdwDisposition* with value of CR_DISP_UNDER_SUBMISSION, and if the CA response is not a challenge message (as described in section [3.2.2.6.2.1.2.6](#Section_3.2.2.6.2.1.2.6)), then set the **Disposition** output parameter to "Pending"; otherwise, the client SHOULD invoke the processing rules in section [3.1.1.4.3.4.1.2](#Section_3.1.1.4.3.4.1.2) using the CA response. Perform step 1 again with the Request parameter set to the enveloped data created in section 3.1.1.4.3.4.1.2.<39>
 - Else, set the **Disposition** output parameter to "Error".
 - If the return value of ICertRequestD::Request method is nonzero, set the **Disposition** output parameter to "Error".
 - If **Disposition** equals "Issued", set the **IssuedCertificate** output parameter to the value of the *pctbEncodedCert* and set the **Response** output parameter to the value of the *pctbCertChain* returned by ICertRequestD2::Request2.
@@ -3363,9 +3439,9 @@ This client extends the specification in section [3.1.1](#Section_3.1.1) and per
 
 This client defines the following abstract elements in addition to those specified in section [3.1.1.1](#Section_3.1.1.1).
 
-**Client_Intermediate_CA_Certificates:** A collection of **CACERTBLOB** constructs (section [2.2.2.1](#Section_2.2.2.1)) that contain intermediate CA [**certificates**](#gt_certificate) that are used by clients and servers to build certificate chains. A client and server must validate and verify certificate path information, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 6. Details about the requirements for certificate path validation are specified in [RFC3280] section 9.<36>
+**Client_Intermediate_CA_Certificates:** A collection of **CACERTBLOB** constructs (section [2.2.2.1](#Section_2.2.2.1)) that contain intermediate CA [**certificates**](#gt_certificate) that are used by clients and servers to build certificate chains. A client and server must validate and verify certificate path information, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 6. Details about the requirements for certificate path validation are specified in [RFC3280] section 9.<40>
 
-**Client_Root_CA_Certificates:** A collection of **CACERTBLOB** constructs that contain [**root CA**](#gt_root-ca) certificates that are used by clients and servers to validate certificate chains. A client and server must validate and verify certificate path information, as specified in [RFC3280] section 6. Details about the requirements for certificate path validation are specified in [RFC3280] section 9.<37>
+**Client_Root_CA_Certificates:** A collection of **CACERTBLOB** constructs that contain [**root CA**](#gt_root-ca) certificates that are used by clients and servers to validate certificate chains. A client and server must validate and verify certificate path information, as specified in [RFC3280] section 6. Details about the requirements for certificate path validation are specified in [RFC3280] section 9.<41>
 
 **Client_Current_Version:** An unsigned integer with values between 0 and 15. This ADM element is used to determine whether the current template is supported by the client. If **CT_FLAG_REQUIRE_SAME_KEY_RENEWAL** is implemented (see section [3.1.2.4.2.2.2.8](#Section_3.1.2.4.2.2.2.8) for more details), then this ADM element MUST be set equal to 4. Otherwise, it MUST be set to 15.
 
@@ -3457,17 +3533,17 @@ This section describes what type of [**certificate**](#gt_certificate) request i
 
 - If the **IsRenewalRequest** datum is set to false:
 - If the **Certificate.Template.msPKI-Template-Schema-Version** datum equals to 1, the client SHOULD create a new certificate request as specified in section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1).
-- If the **Certificate.Template.msPKI-Template-Schema-Version** datum is equal to 2, 3, or 4, the client SHOULD<38> create a certificate request as follows:
-- If the CT_FLAG_ATTEST_REQUIRED or CT_FLAG_ATTEST_PREFERRED flag under the Certificate.Template.msPKI-Private-Key-Flag datum is set, the client SHOULD create a new certificate request as specified in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1) <39>; otherwise, if the CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL flag under the Certificate.Template.msPKI-Private-Key-Flag datum is set, clients MUST create the [**key archival certificate**](#gt_key-archival-certificate) request as specified in section [3.1.1.4.3.5.1](#Section_3.1.1.4.3.5.1). Otherwise, create a new certificate request as specified in section [3.1.1.4.3.1.3](#Section_3.1.1.4.3.1.3).
+- If the **Certificate.Template.msPKI-Template-Schema-Version** datum is equal to 2, 3, or 4, the client SHOULD<42> create a certificate request as follows:
+- If the CT_FLAG_ATTEST_REQUIRED or CT_FLAG_ATTEST_PREFERRED flag under the Certificate.Template.msPKI-Private-Key-Flag datum is set, the client SHOULD create a new certificate request as specified in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1) <43>; otherwise, if the CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL flag under the Certificate.Template.msPKI-Private-Key-Flag datum is set, clients MUST create the [**key archival certificate**](#gt_key-archival-certificate) request as specified in section [3.1.1.4.3.5.1](#Section_3.1.1.4.3.5.1). Otherwise, create a new certificate request as specified in section [3.1.1.4.3.1.3](#Section_3.1.1.4.3.1.3).
 - If the RACertificates list is not empty, sign the request created in the previous step with each [**key**](#gt_key) from the RACertificates list and include each certificate associated with those keys in the **certificates** field of the [**CMS**](#gt_cryptographic-message-syntax-cms) message.
-- If the **Certificate.Template.msPKI-Template-Schema-Version** datum equals to some other value or has not been set at all, the client SHOULD NOT<40> submit a certificate request.
+- If the **Certificate.Template.msPKI-Template-Schema-Version** datum equals to some other value or has not been set at all, the client SHOULD NOT<44> submit a certificate request.
 - If the **IsRenewalRequest** datum is set to true:
 - If the **Certificate.Template.msPKI-Template-Schema-Version** datum equals to 1, the client SHOULD create a new certificate request as specified in section [3.1.1.4.3.2.1](#Section_3.1.1.4.3.2.1).
-- If the **Certificate.Template.msPKI-Template-Schema-Version** datum is equal to 2, 3, or 4, the client SHOULD<41> create a certificate request as follows:
+- If the **Certificate.Template.msPKI-Template-Schema-Version** datum is equal to 2, 3, or 4, the client SHOULD<45> create a certificate request as follows:
 - The client MUST create a renewal certificate request as specified in section [3.1.1.4.3.2.2](#Section_3.1.1.4.3.2.2).
 - The client MUST sign the certificate request with a key from the **CertificateToBeRenewed** datum and include the associated certificate in the **certificates** field of the CMS message.
 - If the **RACertificates** list is not empty, the request cannot be processed as a renewal request. Instead, the client MUST create a new certificate request as if the **IsRenewalRequest** datum were set to false.
-- If the **Certificate.Template.msPKI-Template-Schema-Version** datum equals to some other value or has not been set at all, the client SHOULD NOT<42> submit a certificate request.
+- If the **Certificate.Template.msPKI-Template-Schema-Version** datum equals to some other value or has not been set at all, the client SHOULD NOT<46> submit a certificate request.
 <a id="Section_3.1.2.4.2.2"></a>
 ###### 3.1.2.4.2.2 Certificate Template Processing Rules
 
@@ -3475,7 +3551,7 @@ The client MUST follow the rules identified in this section to create a request 
 
 - Clients MUST adhere to the following rules based on the existence or value of the **Certificate.Template.msPKI-Template-Schema-Version** datum:
 - If the **Certificate.Template.msPKI-Template-Schema-Version** datum was not set by the caller, or if the datum has a value of 1, the client MUST adhere to the processing rules as specified in section [3.1.2.4.2.2.1.1](#Section_3.1.2.4.2.2.1.1).
-- If the value of the **Certificate.Template.msPKI-Template-Schema-Version** datum is 2, 3, or 4, the client SHOULD adhere to the processing rules as specified in sections 3.1.2.4.2.2.1.1 and [3.1.2.4.2.2.1.2](#Section_3.1.2.4.2.2.1.2).<43>
+- If the value of the **Certificate.Template.msPKI-Template-Schema-Version** datum is 2, 3, or 4, the client SHOULD adhere to the processing rules as specified in sections 3.1.2.4.2.2.1.1 and [3.1.2.4.2.2.1.2](#Section_3.1.2.4.2.2.1.2).<47>
 - The client MUST ignore [**attributes**](#gt_attribute) and flags of a certificate template that are not specified in the following sections.
 <a id="Section_3.1.2.4.2.2.1"></a>
 Processing Rules for Certificate Template Version 1
@@ -3523,7 +3599,7 @@ The conditions under which the Basic Constraints extension is added to the reque
 <a id="Section_3.1.2.4.2.2.1.5"></a>
 Certificate.Template.pKIDefaultKeySpec
 
-The **Certificate.Template.pKIDefaultKeySpec** datum SHOULD be used to determine the cryptographic [**key**](#gt_key) information for generating the cryptographic keys used with the [**certificate**](#gt_certificate).<44>
+The **Certificate.Template.pKIDefaultKeySpec** datum SHOULD be used to determine the cryptographic [**key**](#gt_key) information for generating the cryptographic keys used with the [**certificate**](#gt_certificate).<48>
 
 Possible values are specified in section [2.2.2.10](#Section_2.2.2.10).
 
@@ -3558,12 +3634,12 @@ The client MUST mark the extensions listed in the **Certificate.Template.pKICrit
 <a id="Section_3.1.2.4.2.2.1.8"></a>
 Certificate.Template.cn
 
-The client MAY use the value of the **Certificate.Template.cn** datum to encode [**certificate template**](#gt_certificate-template) name as specified in section [2.2.2.7.7.1](#Section_2.2.2.7.7.1).<45>
+The client MAY use the value of the **Certificate.Template.cn** datum to encode [**certificate template**](#gt_certificate-template) name as specified in section [2.2.2.7.7.1](#Section_2.2.2.7.7.1).<49>
 
 <a id="Section_3.1.2.4.2.2.1.9"></a>
 Certificate.Template.revision
 
-The value of the **Certificate.Template.revision** datum SHOULD <46> be encoded as a **templateMajorVersion** field of the Certificate Template [**OID**](#gt_object-identifier-oid) extension specified in section [2.2.2.7.7.2](#Section_2.2.2.7.7.2).
+The value of the **Certificate.Template.revision** datum SHOULD <50> be encoded as a **templateMajorVersion** field of the Certificate Template [**OID**](#gt_object-identifier-oid) extension specified in section [2.2.2.7.7.2](#Section_2.2.2.7.7.2).
 
 <a id="Section_3.1.2.4.2.2.2"></a>
 Processing Rules for Certificate Template Versions 2, 3, and 4
@@ -3592,7 +3668,7 @@ The client SHOULD use the **Certificate.Template.pKIDefaultCSPs** datum to deter
 - If the **certificate.Template.msPKI-Template-Schema-Version** datum equals 0x4 and if CT_FLAG_USE_LEGACY_PROVIDER is not set:
 - Determine the algorithm for the private key by processing the msPKI-Asymmetric-Algorithm property type, as specified in section 3.1.2.4.2.2.2.5.
 - Determine the key size, as specified in section 3.1.2.4.2.2.2.1.
-- If the CT_FLAG_ATTEST_REQUIRED or CT_FLAG_ATTEST_PREFERRED flag under the Certificate.Template.msPKI-Private-Key-Flag datum is set, the client SHOULD initialize the Client_HardwareKeyInfo and Client_KeyAttestationStatement ADM elements using [**CSP**](#gt_cryptographic-service-provider-csp)-specific methods, and the szOID_ENROLL_KSP_NAME [**attribute**](#gt_attribute) containing the CSP name.<47> If initialization failed and CT_FLAG_ATTEST_REQUIRED is set, the client SHOULD NOT submit a [**certificate**](#gt_certificate) request based on this template.<48>
+- If the CT_FLAG_ATTEST_REQUIRED or CT_FLAG_ATTEST_PREFERRED flag under the Certificate.Template.msPKI-Private-Key-Flag datum is set, the client SHOULD initialize the Client_HardwareKeyInfo and Client_KeyAttestationStatement ADM elements using [**CSP**](#gt_cryptographic-service-provider-csp)-specific methods, and the szOID_ENROLL_KSP_NAME [**attribute**](#gt_attribute) containing the CSP name.<51> If initialization failed and CT_FLAG_ATTEST_REQUIRED is set, the client SHOULD NOT submit a [**certificate**](#gt_certificate) request based on this template.<52>
 <a id="Section_3.1.2.4.2.2.2.3"></a>
 Certificate.Template.msPKI-Template-Cert-Template-OID
 
@@ -3621,19 +3697,19 @@ Clients MUST inspect the value of the **Certificate.Template.msPKI-RA-Applicatio
 | ECDH_P521 | Elliptic curve Diffie–Hellman on p-521 curve [SP800-56A] |
 | RSA | The [**RSA**](#gt_rivest-shamir-adleman-rsa) [**public key algorithm**](#gt_public-key-algorithm) [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) |
 
-If the property type is not present, clients MAY choose defaults based on local policy.<49>
+If the property type is not present, clients MAY choose defaults based on local policy.<53>
 
-- msPKI-SecurityDescriptor: If this property type is present, the client MUST use the security descriptor (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)) to set the access permissions on the [**private key**](#gt_private-key) corresponding to the [**public key**](#gt_public-key) in the request. If this property type is not present, clients MAY choose defaults based on local policy.<50>
-- msPKI-Symmetric-Algorithm: If this property type is present, the client MUST use the algorithm specified in this property to encrypt the private key corresponding to the public key in the request while generating the [**key archival**](#gt_key-archival) [**enrollment**](#gt_certificate-enrollment) request, as specified in section [1.3.2.1](#Section_1.3.2.1). In addition, the client SHOULD use this algorithm to encrypt the Client_HardwareKeyInfo ADM element as described in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1).<51> If this property type is not present, clients MAY choose defaults based on local policy.<52>
-- msPKI-Symmetric-Key-Length: If this property type is present, the client MUST use the value specified in this property as the length of the [**symmetric key**](#gt_symmetric-key) used to encrypt the private key while generating the key archival enrollment request, as specified in section 1.3.2.1. If this property type is not present, clients MAY choose defaults based on local policy.<53>
-- msPKI-Hash-Algorithm: If this property type is present, the client MUST use the value specified in this property as the hash algorithm while creating the signature of the [**certificate**](#gt_certificate) request. If this property type is not present, clients MAY choose defaults based on local policy.<54>
-- msPKI-Key-Usage: This property type MUST<55> be used to determine the cryptographic [**key**](#gt_key) information for generating the cryptographic keys that are used with the certificate. If this property type is not present, clients MAY choose defaults based on local policy.<56>
+- msPKI-SecurityDescriptor: If this property type is present, the client MUST use the security descriptor (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)) to set the access permissions on the [**private key**](#gt_private-key) corresponding to the [**public key**](#gt_public-key) in the request. If this property type is not present, clients MAY choose defaults based on local policy.<54>
+- msPKI-Symmetric-Algorithm: If this property type is present, the client MUST use the algorithm specified in this property to encrypt the private key corresponding to the public key in the request while generating the [**key archival**](#gt_key-archival) [**enrollment**](#gt_certificate-enrollment) request, as specified in section [1.3.2.1](#Section_1.3.2.1). In addition, the client SHOULD use this algorithm to encrypt the Client_HardwareKeyInfo ADM element as described in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1).<55> If this property type is not present, clients MAY choose defaults based on local policy.<56>
+- msPKI-Symmetric-Key-Length: If this property type is present, the client MUST use the value specified in this property as the length of the [**symmetric key**](#gt_symmetric-key) used to encrypt the private key while generating the key archival enrollment request, as specified in section 1.3.2.1. If this property type is not present, clients MAY choose defaults based on local policy.<57>
+- msPKI-Hash-Algorithm: If this property type is present, the client MUST use the value specified in this property as the hash algorithm while creating the signature of the [**certificate**](#gt_certificate) request. If this property type is not present, clients MAY choose defaults based on local policy.<58>
+- msPKI-Key-Usage: This property type MUST<59> be used to determine the cryptographic [**key**](#gt_key) information for generating the cryptographic keys that are used with the certificate. If this property type is not present, clients MAY choose defaults based on local policy.<60>
 <a id="Section_3.1.2.4.2.2.2.6"></a>
 Certificate.Template.msPKI-Certificate-Application-Policy
 
 The client MUST create the Certificate Application Policy extension as specified in section [2.2.2.7.7.3](#Section_2.2.2.7.7.3), and using the [**OIDs**](#gt_object-identifier-oid) in this abstract datum.
 
-This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request. Specifications are in section [2.2.2.7.7](#Section_2.2.2.7.7).<57>
+This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request. Specifications are in section [2.2.2.7.7](#Section_2.2.2.7.7).<61>
 
 <a id="Section_3.1.2.4.2.2.2.7"></a>
 Certificate.Template.msPKI-Enrollment-Flag
@@ -3643,7 +3719,7 @@ The following processing rules are applied to flags in the **Certificate.Templat
 | Flag | Client processing |
 | --- | --- |
 | 0x00000001 | CT_FLAG_INCLUDE_SYMMETRIC_ALGORITHMS The client MUST include a Secure/Multipurpose Internet Mail Extensions (S/MIME), as specified in [[RFC4262]](https://go.microsoft.com/fwlink/?LinkId=90463), in the request. Note that although the flag contains the words "SYMMETRIC ALGORITHMS" as part of its name, it specifies only S/MIME extensions. |
-| 0x00008000 | CT_FLAG_INCLUDE_BASIC_CONSTRAINTS_FOR_EE_CERTS If this flag is set, the client SHOULD add a Basic Constraints extension (as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414), section 4.2.1.10) to the [**certificate**](#gt_certificate) request and set the **cA** field to FALSE. The client SHOULD NOT include the **pathLenConstraint** field in the Basic Constraints extension. <58> |
+| 0x00008000 | CT_FLAG_INCLUDE_BASIC_CONSTRAINTS_FOR_EE_CERTS If this flag is set, the client SHOULD add a Basic Constraints extension (as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414), section 4.2.1.10) to the [**certificate**](#gt_certificate) request and set the **cA** field to FALSE. The client SHOULD NOT include the **pathLenConstraint** field in the Basic Constraints extension. <62> |
 
 <a id="Section_3.1.2.4.2.2.2.8"></a>
 Certificate.Template.msPKI-Private-Key-Flag
@@ -3652,19 +3728,19 @@ The following processing rules are applied to flags in the **Certificate.Templat
 
 | Flag | Client processing |
 | --- | --- |
-| 0x00000001 CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL | If all of the following conditions are met: The CT_FLAG_REQUIRE_SAME_KEY_RENEWAL flag (0x00000080) is also set, The **IsRenewalRequest** datum is set to true, The CT_FLAG_EXPORTABLE_KEY (0x00000010) is not set, then the client SHOULD ignore this flag<59>; otherwise, clients MUST create the [**key archival certificate**](#gt_key-archival-certificate) request as specified in section [3.1.1.4.3.5.1](#Section_3.1.1.4.3.5.1). |
+| 0x00000001 CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL | If all of the following conditions are met: The CT_FLAG_REQUIRE_SAME_KEY_RENEWAL flag (0x00000080) is also set, The **IsRenewalRequest** datum is set to true, The CT_FLAG_EXPORTABLE_KEY (0x00000010) is not set, then the client SHOULD ignore this flag<63>; otherwise, clients MUST create the [**key archival certificate**](#gt_key-archival-certificate) request as specified in section [3.1.1.4.3.5.1](#Section_3.1.1.4.3.5.1). |
 | 0x00000010 CT_FLAG_EXPORTABLE_KEY | If this flag is set, clients MUST allow other applications to copy the [**private key**](#gt_private-key) to a PFX (as specified in [[RFC7292]](https://go.microsoft.com/fwlink/?linkid=2164228)) file at a later time. |
-| 0x00000020 CT_FLAG_STRONG_KEY_PROTECTION_REQUIRED | If this flag is set, clients MUST use a stronger [**encryption**](#gt_encryption) protocol for the private key.<60> |
-| 0x00000040 CT_FLAG_REQUIRE_ALTERNATE_SIGNATURE_ALGORITHM | If this flag is set, the client SHOULD sign PKCS#10 request as follows.<61> For [**RSA**](#gt_rivest-shamir-adleman-rsa) [**keys**](#gt_key), use signature algorithm and ASN structures as specified in section 3 of [[RFC4055]](https://go.microsoft.com/fwlink/?LinkID=148402). For ECC keys, follow algorithm and structures specified in [[X9.62]](https://go.microsoft.com/fwlink/?LinkId=90596). For other algorithms, the client MUST ignore this flag. |
-| 0x00000080 CT_FLAG_REQUIRE_SAME_KEY_RENEWAL | If the IsRenewalRequest datum is set, the client SHOULD use the key of the CertificateToBeRenewed ADM datum to generate a [**certificate**](#gt_certificate) request.<62> |
-| 0x00000100 CT_FLAG_USE_LEGACY_PROVIDER | This flag instructs the client to generate a public/private key pair as explained in section [3.1.2.4.2.2.1.6](#Section_3.1.2.4.2.2.1.6).<63> If this flag is not set, the public/private key MUST be generated as explained in section [3.1.2.4.2.2.2.5](#Section_3.1.2.4.2.2.2.5). |
+| 0x00000020 CT_FLAG_STRONG_KEY_PROTECTION_REQUIRED | If this flag is set, clients MUST use a stronger [**encryption**](#gt_encryption) protocol for the private key.<64> |
+| 0x00000040 CT_FLAG_REQUIRE_ALTERNATE_SIGNATURE_ALGORITHM | If this flag is set, the client SHOULD sign PKCS#10 request as follows.<65> For [**RSA**](#gt_rivest-shamir-adleman-rsa) [**keys**](#gt_key), use signature algorithm and ASN structures as specified in section 3 of [[RFC4055]](https://go.microsoft.com/fwlink/?LinkID=148402). For ECC keys, follow algorithm and structures specified in [[X9.62]](https://go.microsoft.com/fwlink/?LinkId=90596). For other algorithms, the client MUST ignore this flag. |
+| 0x00000080 CT_FLAG_REQUIRE_SAME_KEY_RENEWAL | If the IsRenewalRequest datum is set, the client SHOULD use the key of the CertificateToBeRenewed ADM datum to generate a [**certificate**](#gt_certificate) request.<66> |
+| 0x00000100 CT_FLAG_USE_LEGACY_PROVIDER | This flag instructs the client to generate a public/private key pair as explained in section [3.1.2.4.2.2.1.6](#Section_3.1.2.4.2.2.1.6).<67> If this flag is not set, the public/private key MUST be generated as explained in section [3.1.2.4.2.2.2.5](#Section_3.1.2.4.2.2.2.5). |
 | 0x000002000 CT_FLAG_ATTEST_REQUIRED * | This flag instructs the client to generate a certificate request as explained in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1). |
 | 0x000001000 CT_FLAG_ATTEST_PREFERRED * | This flag instructs the client to generate a certificate request as explained in section 3.1.1.4.3.4.1.1 if the Client_HardwareKeyInfo and Client_KeyAttestationStatement ADM elements are not empty (as described in section [3.1.2.4.2.2.2.2](#Section_3.1.2.4.2.2.2.2)). |
 | 0x00200000 CT_FLAG_HELLO_LOGON_KEY * | This flag instructs the client to generate a certificate request for the Windows Hello Logon key. For more information about Windows Hello for Business, see [[MSDOCS-WHfB]](https://go.microsoft.com/fwlink/?linkid=2112879). |
 
-* Support for these flags is specified in the following behavior note.<64>
+* Support for these flags is specified in the following behavior note.<68>
 
-- If the value of a bitwise AND of **Certificate.Template.msPKI-Private-Key-Flag** and 0x0F000000 is larger than 0x0Y000000, where Y denotes the value of the **Client_Current_Version** ADM element, the client SHOULD NOT [**enroll**](#gt_enroll) for this template.<65>
+- If the value of a bitwise AND of **Certificate.Template.msPKI-Private-Key-Flag** and 0x0F000000 is larger than 0x0Y000000, where Y denotes the value of the **Client_Current_Version** ADM element, the client SHOULD NOT [**enroll**](#gt_enroll) for this template.<69>
 <a id="Section_3.1.2.4.2.2.2.9"></a>
 Certificate.Template.msPKI-Certificate-Policy
 
@@ -3680,7 +3756,7 @@ Certificate.Template.msPKI-Certificate-Name-Flag
 The following processing rules are applied to flags in the **Certificate.Template.msPKI-Certificate-Name-Flag** datum.
 
 - If the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT flag or the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT_ALT_NAME flag is set, then:
-- If the CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME flag is set and the enrollment client is creating a renewal request, the client SHOULD <66>:
+- If the CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME flag is set and the enrollment client is creating a renewal request, the client SHOULD <70>:
 - Use the value of the **Subject** field to populate the **Name** filed of the PKCS #10 request (see section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1)).
 - Add a subject alternative name extension to the [**certificate**](#gt_certificate) extensions [**attribute**](#gt_attribute) [szOID_CERT_EXTENSIONS (section 2.2.2.7.7)](#Section_2.2.2.7.7) of the PKCS #10 request (see section 3.1.1.4.3.1.1).
 - Otherwise, the client MUST supply subject information in the certificate request in the **Name** field or the subject alternative name extension in the certificate extensions attribute szOID_CERT_EXTENSIONS of the PKCS #10 request (see section 3.1.1.4.3.1.1).
@@ -3799,10 +3875,10 @@ The server implements the interfaces as specified in sections [3.2.1](#Section_3
 
 - The server MUST implement a [**CA policy algorithm**](#gt_ca-policy-algorithm) as described in section [3.2.1.4.2.1.4.5](#Section_3.2.1.4.2.1.4.5) or section [3.2.2.6.2.1.4](#Section_3.2.2.6.2.1.4).
 - The server MUST implement the [**standalone CA**](#gt_standalone-ca) mode functionality specified in section 3.2.1 (except for section [3.2.1.4.3](#Section_3.2.1.4.3)).
-- The server SHOULD implement the ICertRequestD2 interface as specified in section 3.2.1.4.3.<67> See section [1.7](#Section_1.7) on how clients determine what interface is supported by the server.
-- The server SHOULD implement [**enterprise certificate authority (enterprise CA)**](#gt_enterprise-certificate-authority-enterprise-ca) mode functionality. If the server implements multiple [**CA**](#gt_certification-authority-ca) modes, then it MUST implement customer selection of a mode.<68>
+- The server SHOULD implement the ICertRequestD2 interface as specified in section 3.2.1.4.3.<71> See section [1.7](#Section_1.7) on how clients determine what interface is supported by the server.
+- The server SHOULD implement [**enterprise certificate authority (enterprise CA)**](#gt_enterprise-certificate-authority-enterprise-ca) mode functionality. If the server implements multiple [**CA**](#gt_certification-authority-ca) modes, then it MUST implement customer selection of a mode.<72>
 - The server MAY implement one or more [**CA exit algorithms**](#gt_ca-exit-algorithm) as described in section [3.2.1.4.2.1.4.9](#Section_3.2.1.4.2.1.4.9).
-- The server MAY implement [**key archival**](#gt_key-archival), making it an [**advanced CA**](#gt_456bc2c5-d6e8-4ff7-a723-1a08e6d3cf09).<69>
+- The server MAY implement [**key archival**](#gt_key-archival), making it an [**advanced CA**](#gt_456bc2c5-d6e8-4ff7-a723-1a08e6d3cf09).<73>
 - The server SHOULD return properties on its implementation by implementing [ICertRequestD::GetCACert](#Section_3.2.1.4.2.2) and [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2) methods as specified in sections 3.2.1.4.2.2 and 3.2.1.4.3.2, respectively.
 The following sections describe the server modes:
 
@@ -3892,8 +3968,8 @@ Values for the following elements of the [Request table](#Section_3.2.1.1.1) SHO
 - Request_Endorsement_Key_Hash
 - Request_Endorsement_Certificate_Hash
 - Issuer_Name_Id
-- Request_CRL_Partition_Index<70>
-- Request_Binary_Linter_Certificate<71>
+- Request_CRL_Partition_Index<74>
+- Request_Binary_Linter_Certificate<75>
 <a id="Section_3.2.1.1.2"></a>
 ##### 3.2.1.1.2 Signing_Cert Table
 
@@ -3921,7 +3997,7 @@ The [**CRL**](#gt_certificate-revocation-list-crl) table is identical to the one
 - Base_Or_Delta
 - CRL_Publish_Status_Code
 - Publish_Date
-- CRL_Partition_Index<72>
+- CRL_Partition_Index<76>
 <a id="Section_3.2.1.1.4"></a>
 ##### 3.2.1.1.4 Configuration List
 
@@ -3931,7 +4007,7 @@ The following list contains configuration data for the [**CA**](#gt_certificatio
 | --- | --- |
 | Config_CA_KRA_Cert_List (Public) | An indexed list of [**KRA**](#gt_key-recovery-agent-kra) [**certificates**](#gt_certificate). |
 | Config_CA_KRA_Cert_Count (Public) | The minimum amount of valid KRA certificates required to archive a [**key**](#gt_key). |
-| Config_SKU | Data that specifies the operating system SKU. Possible values are Advanced_SKU and Standard_SKU.<73> |
+| Config_SKU | Data that specifies the operating system SKU. Possible values are Advanced_SKU and Standard_SKU.<77> |
 | Config_Configuration_Directory (Public) | A [**UNC**](#gt_universal-naming-convention-unc) path that can be used to publish server data. |
 | Config_Max_Property_ID | An integer that defines the greatest number that a client can pass in the PropID parameter of the **GetCAProperty** method. |
 | Config_FQDN | The [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of the machine hosting the CA service. |
@@ -3946,8 +4022,8 @@ The following list contains configuration data for the [**CA**](#gt_certificatio
 | Config_CA_CDP_Include_In_CRL_Publish_Locations_Extension (Public) | A list of one or more CRL Publishing Locations that will be included in the Published CRL Locations custom extension of CRLs created by the CA. This data is used in [MS-CSRA]. |
 | Config_CA_CDP_Include_In_CRL_Freshest_CRL_Extension (Public) | A list of one or more delta CRL Publishing Locations that will be included in the freshest CRL extension of base CRLs created by the CA. This data is used in [MS-CSRA]. |
 | Config_CA_CDP_Include_In_CRL_IDP_Extension (Public) | A list of one or more CRL Publishing Locations that will be included in the Issuing Distribution Point (IDP) CRL extension of CRLs created by the CA. This data is used in [MS-CSRA]. |
-| Config_CA_Set_OnlyContainsUserCerts_In_CRL_IDP_Extension (Public) | A Boolean value that indicates whether the OnlyContainsUserCerts bit MUST be set in the IDP extension of the CRLs created by the CA, as defined in section 5.2.5 of [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034).<74> |
-| Config_CA_Set_OnlyContainsCACerts_In_CRL_IDP_Extension (Public) | A Boolean value that indicates whether the OnlyContainsCACerts bit MUST be set in the IDP extension of the CRLs created by the CA, as defined in section 5.2.5 of [RFC5280].<75> |
+| Config_CA_Set_OnlyContainsUserCerts_In_CRL_IDP_Extension (Public) | A Boolean value that indicates whether the OnlyContainsUserCerts bit MUST be set in the IDP extension of the CRLs created by the CA, as defined in section 5.2.5 of [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034).<78> |
+| Config_CA_Set_OnlyContainsCACerts_In_CRL_IDP_Extension (Public) | A Boolean value that indicates whether the OnlyContainsCACerts bit MUST be set in the IDP extension of the CRLs created by the CA, as defined in section 5.2.5 of [RFC5280].<79> |
 | Config_CA_AIA_Include_In_Cert (Public) | The list of strings to be added as UNC paths into the AIA extension of all certificates issued, with the key associated with the certificate in the CASigningCert column. AIA is specified in [RFC3280] section 4.2.2.1. |
 | Config_CA_OCSP_Include_In_Cert (Public) | The list of strings to be added as OCSP paths into the (Authority Information Access) AIA extension of all certificates issued, with the key associated with the certificate in the CASigningCert column. The Online Certificate Status Protocol (OCSP) UNC path is specified in [[RFC2560]](https://go.microsoft.com/fwlink/?LinkId=90369) section 4.2.2.1. |
 | Config_File_Version | Stores information on the CA service file. |
@@ -3989,11 +4065,11 @@ The following list contains configuration data for the [**CA**](#gt_certificatio
 | Config_CertificateTransparency_Info_Extension_Oid | A string value that the CA sets for the **SignedCertificateTimestampList** extension in the issued certificate. The default value is OID szOID_CT_CERT_SCTLIST (1.3.6.1.4.1.11129.2.4.2) [[RFC6962]](https://go.microsoft.com/fwlink/?linkid=867272). |
 | Config_PreSignCert_Enabled | A flag that indicates whether Certificate Pre-sign processing is enabled at the server. The default value is FALSE (not enabled). |
 | Signing_Dummy_Private_Key | Contains the dummy private key generated with the same [**public key algorithm**](#gt_public-key-algorithm) and key size as the private key of the current CA signing certificate, as specified in section [3.2.1.1.2](#Section_3.2.1.1.2). |
-| Config_CRLPartition_Enabled<76> | A flag that indicates whether CRL partitioning is enabled at the server. Defaults to FALSE. |
-| Config_CRLPartition_PartitionZero_Exclusive<77> | A flag that indicates whether the partition zero CRL must be treated as exclusive, meaning it contains only the serial numbers of certificates assigned to partition zero. If the flag is set to FALSE, the partition zero CRL includes the serial numbers of all certificates revoked at the CA, regardless of their assigned partition. Defaults to FALSE. |
-| Config_CA_CRL_Max_Partitions<78> | A 4-byte integer that indicates the maximum number of CRL partitions configured at the server. Defaults to zero. |
-| Config_CA_CRL_Suspended_Partitions<79> | A 4-byte integer that indicates the CRL partition number up to and including which all partitions starting from zero are suspended. Defaults to zero. This value MUST be less than or equal to Config_CA_CRL_Max_Partitions. |
-| Config_CA_CRL_Current_Partition<80> | A 4-byte integer that specifies the starting CRL partition for round-robin partition selection (section [3.2.1.4.2.1.4.4](#Section_3.2.1.4.2.1.4.4)) when configured. By default, this setting is not configured. |
+| Config_CRLPartition_Enabled<80> | A flag that indicates whether CRL partitioning is enabled at the server. Defaults to FALSE. |
+| Config_CRLPartition_PartitionZero_Exclusive<81> | A flag that indicates whether the partition zero CRL must be treated as exclusive, meaning it contains only the serial numbers of certificates assigned to partition zero. If the flag is set to FALSE, the partition zero CRL includes the serial numbers of all certificates revoked at the CA, regardless of their assigned partition. Defaults to FALSE. |
+| Config_CA_CRL_Max_Partitions<82> | A 4-byte integer that indicates the maximum number of CRL partitions configured at the server. Defaults to zero. |
+| Config_CA_CRL_Suspended_Partitions<83> | A 4-byte integer that indicates the CRL partition number up to and including which all partitions starting from zero are suspended. Defaults to zero. This value MUST be less than or equal to Config_CA_CRL_Max_Partitions. |
+| Config_CA_CRL_Current_Partition<84> | A 4-byte integer that specifies the starting CRL partition for round-robin partition selection (section [3.2.1.4.2.1.4.4](#Section_3.2.1.4.2.1.4.4)) when configured. By default, this setting is not configured. |
 
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 Timers
@@ -4292,9 +4368,9 @@ The following is an overview of the CA processing rules for these methods:
 
 The CA MUST obtain the [**end entity**](#gt_end-entity) account name and SID by performing the processing rules in section [3.2.1.4.1.2](#Section_3.2.1.4.1.2) and storing the returned **Output_Account_Name** in the **Per_Request.Caller_Account_Name** ADM element and the returned **Output_SID** in **Per_Request.Caller_SID**.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<81>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<85>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<82>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<86>
 
 - The CA MUST verify the CA name passed in the *pwszAuthority* attribute by invoking the processing rules in section [3.2.1.4.2.1.1](#Section_3.2.1.4.2.1.1) with the *CANameString* input parameter set to the CA name passed in the *pwszAuthority* parameter and the *EmptyNameAllowed* input parameter set to false. If false is returned, the CA MUST return the E_INVALIDARG (0x80070057) error code to the client.
 - The CA MUST parse attributes passed in *pwszAttributes* parameter as specified in section [3.2.1.4.2.1.2](#Section_3.2.1.4.2.1.2).
@@ -4308,7 +4384,7 @@ If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST an
 - pdwDisposition: If a certificate was issued, then the CA MUST return 0x00000003; if a certificate issuance requires manager approval, then the CA MUST return 0x00000005. If an error was encountered, the CA MUST set the value of this parameter to a non-zero value.
 - pctbCertChain: If a certificate was issued, then the CA MUST return the issued certificate and its full chain as constructed in section [3.2.1.4.2.1.4.8](#Section_3.2.1.4.2.1.4.8) in this parameter.
 - pctbEncodedCert: If a certificate was issued, then the CA MUST return the issued certificate in this parameter.
-- pctbDispositionMessage: In this parameter, the CA SHOULD send additional information in the form of a Unicode string that can be used to troubleshoot the server response.<83>
+- pctbDispositionMessage: In this parameter, the CA SHOULD send additional information in the form of a Unicode string that can be used to troubleshoot the server response.<87>
 <a id="Section_3.2.1.4.2.1.1"></a>
 Verifying the CA Name
 
@@ -4355,11 +4431,11 @@ A list of actions follows, which the CA MUST perform for each of the supported a
 - CertificateUsage:OID,OID
 - Processing: If the Config_CA_Accept_Request_Attributes_Extensions data is set to true, the CA MUST use the OIDs that are passed with this value to construct the ExtendedKeyUsage extension in the issued certificate. The ExtendedKeyUsage extension is specified in [RFC3280] section 4.2.1.13. If the Config_CA_Accept_Request_Attributes_Extensions data is set to false, the CA MUST ignore this attribute.
 - ValidityPeriod:Weeks\nValidityPeriodUnits:3
-- Processing: If the Config_CA_Accept_Request_Attributes_ValidityTime data is set to true and the ExpirationDate attribute is not present, the CA MUST set the **notAfter** field of the issued certificate equal to the value of the **notBefore** field plus the value of the **ValidityPeriod**.<84> In this sample, the client requests a validity period of three weeks. If the Config_CA_Accept_Request_Attributes_ValidityTime datum is set to false, the CA MUST ignore this attribute.
+- Processing: If the Config_CA_Accept_Request_Attributes_ValidityTime data is set to true and the ExpirationDate attribute is not present, the CA MUST set the **notAfter** field of the issued certificate equal to the value of the **notBefore** field plus the value of the **ValidityPeriod**.<88> In this sample, the client requests a validity period of three weeks. If the Config_CA_Accept_Request_Attributes_ValidityTime datum is set to false, the CA MUST ignore this attribute.
 - ExpirationDate:Tue, 21 Nov 2000 01:06:53 GMT
-- Processing: If the Config_CA_Accept_Request_Attributes_ValidityTime data is set to true, the CA MUST set the **notAfter** field of the issued certificate to this value and MUST ignore the **ValidityPeriod**.<85> If the Config_CA_Accept_Request_Attributes_ValidityTime data is set to false, the CA MUST ignore this attribute.
+- Processing: If the Config_CA_Accept_Request_Attributes_ValidityTime data is set to true, the CA MUST set the **notAfter** field of the issued certificate to this value and MUST ignore the **ValidityPeriod**.<89> If the Config_CA_Accept_Request_Attributes_ValidityTime data is set to false, the CA MUST ignore this attribute.
 - certfile:c:\mycert.cer
-- Processing: If the Config_CA_Accept_Request_Attributes_CertPath data is set to true, the CA MAY<86> publish the issued certificate to the path that is specified in this attribute. If the Config_CA_Accept_Request_Attributes_CertPath datum is set to false, the CA MUST ignore this attribute.
+- Processing: If the Config_CA_Accept_Request_Attributes_CertPath data is set to true, the CA MAY<90> publish the issued certificate to the path that is specified in this attribute. If the Config_CA_Accept_Request_Attributes_CertPath datum is set to false, the CA MUST ignore this attribute.
 - CertType:server
 - Processing: If this attribute is present and the value is "server", the CA MUST add an extension 2.16.840.1.113730.1.1 with a bit string value of 0x01100000 (SSL server). If this attribute is present and the value is not "server", the CA MUST add an extension 2.16.840.1.113730.1.1 by using a bit string value of 0x01000000 (SSL client). If the request is a [**KEYGEN**](#gt_keygen) request and this attribute is not present, the CA MUST add an extension 2.16.840.1.113730.1.1 by using a bit string value of 0x01000000 (SSL client). The Netscape KEYGEN Tag Format is specified in section [2.2.2.6.4](#Section_2.2.2.6.4).
 - CRLPartitionIndex:number
@@ -4386,7 +4462,7 @@ The rules for processing the status inspection are as follows:
 | request failed | Non-zero value indicating an error that is not one of the values already defined in this table |
 
 - If the value of the Request_Disposition column is "certificate issued", the CA MUST return the previously issued certificate through the *pctbEncodedCert* parameter as specified in section [3.2.1.4.2.1.4.8](#Section_3.2.1.4.2.1.4.8).
-- If the value of the Request_Disposition column is "request denied", the CA SHOULD set the return value to the 0x80094014 (CERTSRV_E_ADMIN_DENIED_REQUEST).<87>
+- If the value of the Request_Disposition column is "request denied", the CA SHOULD set the return value to the 0x80094014 (CERTSRV_E_ADMIN_DENIED_REQUEST).<91>
 <a id="Section_3.2.1.4.2.1.4"></a>
 Processing a Request
 
@@ -4442,7 +4518,7 @@ In general, the request MUST be compliant with the information in [[RFC2986]](ht
 - CA Semantics: CA MUST ignore the value of this attribute. The CA MUST NOT assume any specific values or value ranges that it receives in this attribute.
 - OID = szOID_CERT_EXTENSIONS (1.3.6.1.4.1.311.2.1.14)
 - Description: This [**OID**](#gt_object-identifier-oid) MUST be used to encode an array of extensions into an attribute so that extensions can be included in a PKCS10. CA Semantics are as follows:
-- The CA SHOULD add the requested extensions as specified in this value to the issued certificate.<88>
+- The CA SHOULD add the requested extensions as specified in this value to the issued certificate.<92>
 - OID = szOID_ENROLLMENT_NAME_VALUE_PAIR (1.3.6.1.4.1.311.13.2.1)
 - Description: Additional attributes that MAY be used for the certificate request. The attributes are identical to the attributes that are defined for the pwszAttributes parameter.
 - CA Semantics: The CA behavior for this attribute is identical to the behavior for attributes in the *pwszAttributes* parameter as specified in section [3.2.1.4.2.1.2](#Section_3.2.1.4.2.1.2).
@@ -4571,7 +4647,7 @@ The [**CA**](#gt_certification-authority-ca) MUST create a new row in the Reques
 - Request_Request_ID: Assign a unique value in this column.
 - Request_Disposition: Assign the value "request pending".
 - Request_Raw_Request: Assign the value of the **pb** field of the **CERTTRANSBLOB** structure contained in the *pctbRequest* parameter.
-In addition, the CA MAY store request parameters in the Request table. If the CA decides to store the additional parameters, it MUST follow the processing rules specified in the following table. If the CA fails to store the request parameters in the Request table, the CA MUST return a nonzero error to the client. <89>
+In addition, the CA MAY store request parameters in the Request table. If the CA decides to store the additional parameters, it MUST follow the processing rules specified in the following table. If the CA fails to store the request parameters in the Request table, the CA MUST return a nonzero error to the client. <93>
 
 | Column name | Processing rules |
 | --- | --- |
@@ -4609,7 +4685,7 @@ In addition, the CA MAY store request parameters in the Request table. If the CA
 | Request_Endorsement_Key_Hash | The CA MUST store the SHA2 hash of the [**trust**](#gt_trust) module [**key**](#gt_key) from the certificate request as a hexadecimal string with no spaces. |
 | Request_Endorsement_Certificate_Hash | The CA MUST store the SHA2 hash of the trust module certificate used for [**attestation**](#gt_attestation) from the certificate request as a hexadecimal string with no spaces. |
 | Issuer_Name_Id | The CA MUST store the **version information** (section [3.2.1.4.3.2.39](#Section_3.2.1.4.3.2.39)) of the current CA **signing certificate** as stored in the Signing_Cert_Certificate datum. |
-| Request_CRL_Partition_Index<90> | If Config_CRLPartition_Enabled is set to FALSE, CA MUST store a value of zero for this column. Otherwise: If Config_CA_CRL_Current_Partition is configured: Increment Config_CA_CRL_Current_Partition by 1. If the new value is greater than Config_CA_CRL_Max_Partitions, set Config_CA_CRL_Current_Partition to (Config_CA_CRL_Suspended_Partitions + 1) Store the updated Config_CA_CRL_Current_Partition value as the column value. If Config_CA_CRL_Current_Partition is not configured: Generate a random number between (Config_CA_CRL_Suspended_Partitions + 1) and Config_CA_CRL_Max_Partitions, both inclusive, and store that value as the column value. |
+| Request_CRL_Partition_Index<94> | If Config_CRLPartition_Enabled is set to FALSE, CA MUST store a value of zero for this column. Otherwise: If Config_CA_CRL_Current_Partition is configured: Increment Config_CA_CRL_Current_Partition by 1. If the new value is greater than Config_CA_CRL_Max_Partitions, set Config_CA_CRL_Current_Partition to (Config_CA_CRL_Suspended_Partitions + 1) Store the updated Config_CA_CRL_Current_Partition value as the column value. If Config_CA_CRL_Current_Partition is not configured: Generate a random number between (Config_CA_CRL_Suspended_Partitions + 1) and Config_CA_CRL_Max_Partitions, both inclusive, and store that value as the column value. |
 
 <a id="Section_3.2.1.4.2.1.4.5"></a>
 CA Policy Algorithm
@@ -4623,7 +4699,7 @@ The [**CA**](#gt_certification-authority-ca) SHOULD use Config_CA_Policy_Algorit
 In the Request table row for the current certificate request, the CA MUST set the following values to the values that are returned from the policy algorithm:
 
 - Request_Disposition: If the policy algorithm resulted in the certificate being issued, the CA MUST set the value to "certificate issued". If the policy algorithm resulted in the certificate being pended, the CA MUST set the value to "request pending". If the policy algorithm encountered an error, the CA MUST set the value to "request failed".
-- Request_Disposition_Message: The CA SHOULD populate this element with additional information that the licensee considers informative to a human.<91>
+- Request_Disposition_Message: The CA SHOULD populate this element with additional information that the licensee considers informative to a human.<95>
 Certificates constructed by the policy algorithm MUST satisfy all the processing rules specified in section [3.2.1.4.2.1](#Section_3.2.1.4.2.1).
 
 The CA SHOULD store some description of the policy algorithm in the Config_CA_Policy_Description data of the Abstract Data Model that can be requested by clients as described in section [3.2.1.4.3.2.5](#Section_3.2.1.4.3.2.5).
@@ -4639,10 +4715,10 @@ The following numbers are used in processing rules in this section:
 
 **R:** An 8-byte arbitrary integer generated with any pseudo random number generator.
 
-- If Config_High_Serial_String is not empty, the CA SHOULD<92>:
+- If Config_High_Serial_String is not empty, the CA SHOULD<96>:
 - Generate a serial number as specified in section [3.2.1.4.2.1.4.6.3](#Section_3.2.1.4.2.1.4.6.3).
 - Continue with step 5.
-- If Config_High_Serial_Number equals 0xFFFFFFFF, the CA SHOULD<93>:
+- If Config_High_Serial_Number equals 0xFFFFFFFF, the CA SHOULD<97>:
 - Generate a serial number as specified in section [3.2.1.4.2.1.4.6.4](#Section_3.2.1.4.2.1.4.6.4).
 - Generate a serial number as specified in section 3.2.1.4.2.1.4.6.3.
 - Continue with step 5.
@@ -4725,7 +4801,7 @@ If the client did not set the Y flag in the *dwFlags* parameter of [ICertRequest
 - version: See section [RFC3852], section 5.1.
 - digestAlgorithms: Not used.
 - encapContentInfo: EncapsulatedContentInfo structure (as specified in [RFC3852], section 5.2) with the **eContentType** set to the [**OID**](#gt_object-identifier-oid) szOID_PKCS_7_DATA (1.2.840.113549.1.7.1, id-data) and the **eContent** field not used.
-- certificates: Contains the end entity certificate that has been issued or retrieved, as well as all CA certificates in its chain. If the request is pending with an issued precertificate, the precertificate is returned instead of the end entity certificate. If the request is pending with a pre-signed certificate, the pre-signed certificate from the **Request_Binary_Linter_Certificate** column is returned instead of the end entity certificate.<94>
+- certificates: Contains the end entity certificate that has been issued or retrieved, as well as all CA certificates in its chain. If the request is pending with an issued precertificate, the precertificate is returned instead of the end entity certificate. If the request is pending with a pre-signed certificate, the pre-signed certificate from the **Request_Binary_Linter_Certificate** column is returned instead of the end entity certificate.<98>
 - crls: If the client passed the X flag in the *dwFlag* parameter, this field MUST contain all current CRLs and delta CRLs for the CAs whose certificates were added to the certificates field. For each certificate in the **certificates** field, the CA SHOULD retrieve the CRL using the processing rules in section [3.2.1.4.1.3](#Section_3.2.1.4.1.3) by setting the *ParameterCertificate* parameter equal to the current certificate and by adding the returned *ParameterCRL* output parameter to the **crls** field.
 - signerInfos: Not used.
 <a id="Section_3.2.1.4.2.1.4.8.2"></a>
@@ -4816,7 +4892,7 @@ New Certificate Request with Pre-sign flag
 A request can be designated for Pre-sign certificate processing by the client, as specified in section [3.1.1.4.3.8.1](#Section_3.1.1.4.3.8.1). In addition to the processing rules defined in section [3.2.1.4.2.1.4](#Section_3.2.1.4.2.1.4), the [**CA**](#gt_certification-authority-ca) MUST perform the following processing on the certificate request:
 
 - If the Config_PreSignCert_Enabled flag (section [3.2.1.1.4](#Section_3.2.1.1.4)) is not set, reject the request with a nonzero error.
-- Otherwise, process the request as defined in section [3.2.1.4.2.1.4.1](#Section_3.1.1.4.3.1) and construct a certificate to be returned to the client as specified in section [3.2.1.4.2.1.4.7](#Section_3.2.1.4.2.1.4.7), however the CA MUST sign the certificate (section [3.2.1.4.2.1.4.8](#Section_3.2.1.4.2.1.4.8)) with its dummy signing key stored in the Signing_Dummy_Private_Key (section 3.2.1.1.4) rather than the real signing key stored in Signing_Private_Key data. The pre-signed certificate MUST be stored in the **Request_Binary_Linter_Certificate** column of the corresponding row in the Request table.<95>
+- Otherwise, process the request as defined in section [3.2.1.4.2.1.4.1](#Section_3.1.1.4.3.1) and construct a certificate to be returned to the client as specified in section [3.2.1.4.2.1.4.7](#Section_3.2.1.4.2.1.4.7), however the CA MUST sign the certificate (section [3.2.1.4.2.1.4.8](#Section_3.2.1.4.2.1.4.8)) with its dummy signing key stored in the Signing_Dummy_Private_Key (section 3.2.1.1.4) rather than the real signing key stored in Signing_Private_Key data. The pre-signed certificate MUST be stored in the **Request_Binary_Linter_Certificate** column of the corresponding row in the Request table.<99>
 <a id="Section_3.2.1.4.2.1.4.10.2"></a>
 New Certificate Request without Pre-sign flag
 
@@ -4857,9 +4933,9 @@ The processing rules for this method are as follows.
 
 If the server implements the advanced CA functionality, it MUST implement the GETCERT_CAXCHGCERT property specified as follows.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<96>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<100>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<97>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<101>
 
 - The *fchain* parameter MUST be one of the values in the first table that follows, or the two most significant bytes of fchain MUST be one of the values in the second table that follows.
 | Value | Meaning |
@@ -4952,7 +5028,7 @@ Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2
 <a id="Section_3.2.1.4.2.2.2"></a>
 GETCERT_CAXCHGCERT - 0x00000001
 
-The CA SHOULD process this client request identically to one specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CAXCHGCERT property ID identified in the *PropID* parameter.<98>
+The CA SHOULD process this client request identically to one specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CAXCHGCERT property ID identified in the *PropID* parameter.<102>
 
 <a id="Section_3.2.1.4.2.2.3"></a>
 GETCERT_CURRENTCRL - 0x6363726C
@@ -5056,9 +5132,9 @@ HRESULT Ping(
 
 The processing rules for this method are as follows.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<99>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<103>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<100>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<104>
 
 Upon receiving this invocation, the CA MUST verify the CA name that is passed in the *pwszAuthority* parameter by invoking the processing rules in section [3.2.1.4.2.1.1](#Section_3.2.1.4.2.1.1) with the *CANameString* input parameter set to the CA name passed in the *pwszAuthority* parameter and the *EmptyNameAllowed* input parameter set to true. If false is returned, the CA MUST return the E_INVALIDARG (0x80070057) error code to the client.
 
@@ -5212,7 +5288,7 @@ The caller of the [ICertRequestD2::Request2](#Section_3.2.1.4.3) can request a s
 | request failed | A nonzero value indicating an error that is not one of the values already defined in this table. |
 
 - If the value of the Request_Disposition column is "certificate issued", the CA MUST return the previously issued certificate through the *pctbEncodedCert* parameter as specified in section [3.2.1.4.2.1.4.8](#Section_3.2.1.4.2.1.4.8).
-- If the value of the Request_Disposition column is "request denied", the CA SHOULD set the return value to the 0x80094014 (CERTSRV_E_ADMIN_DENIED_REQUEST).<101>
+- If the value of the Request_Disposition column is "request denied", the CA SHOULD set the return value to the 0x80094014 (CERTSRV_E_ADMIN_DENIED_REQUEST).<105>
 <a id="Section_3.2.1.4.3.2"></a>
 ###### 3.2.1.4.3.2 ICertRequestD2::GetCAProperty (Opnum 7)
 
@@ -5307,9 +5383,9 @@ The data type of the value returned depends on the value specified in the *PropT
 
 The processing rules for this method are as follows:
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<102>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client.<106>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a non-zero error.<103>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a non-zero error.<107>
 
 If the server implements [**advanced CA**](#gt_456bc2c5-d6e8-4ff7-a723-1a08e6d3cf09) functionality, it MUST implement the CR_PROP_CAXCHGCERT property that is specified in section [3.2.1.4.3.2.15](#Section_3.2.1.4.3.2.15).
 
@@ -5387,21 +5463,21 @@ The following sections specify the CA behavior of the method for each requested 
 <a id="Section_3.2.1.4.3.2.1"></a>
 PropID = 0x00000001 (CR_PROP_FILEVERSION) "CA File Version"
 
-The client has requested the [**CA**](#gt_certification-authority-ca) file version property. If the CA implements the Config_File_Version datum, the CA constructs a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string of the form "w.x.y.z" or "w.x:y.z",<104> where w, x, y, and z MUST be numeric values indicating the version of the CA. If the CA does not implement the Config_File_Version datum, it MUST return a NULL string. The [UNICODE] string MUST be returned through the [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<105>
+The client has requested the [**CA**](#gt_certification-authority-ca) file version property. If the CA implements the Config_File_Version datum, the CA constructs a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string of the form "w.x.y.z" or "w.x:y.z",<108> where w, x, y, and z MUST be numeric values indicating the version of the CA. If the CA does not implement the Config_File_Version datum, it MUST return a NULL string. The [UNICODE] string MUST be returned through the [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<109>
 
 Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
 
 <a id="Section_3.2.1.4.3.2.2"></a>
 PropID = 0x00000002 (CR_PROP_PRODUCTVERSION) "CA Product Version"
 
-The client has requested the [**CA**](#gt_certification-authority-ca) product version property. If the CA implements the Config_Product_Version datum, the CA constructs a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string of the form "w.x.y.z" or "w.x:y.z",<106> where w, x, y, and z MUST be numeric values indicating the version of the server hosting the CA, which might or might not match the version of the CA returned for the previous property. If the CA does not implement the Config_Product_Version datum, it MUST return a NULL string. The [UNICODE] string MUST be returned through the [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<107>
+The client has requested the [**CA**](#gt_certification-authority-ca) product version property. If the CA implements the Config_Product_Version datum, the CA constructs a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string of the form "w.x.y.z" or "w.x:y.z",<110> where w, x, y, and z MUST be numeric values indicating the version of the server hosting the CA, which might or might not match the version of the CA returned for the previous property. If the CA does not implement the Config_Product_Version datum, it MUST return a NULL string. The [UNICODE] string MUST be returned through the [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<111>
 
 Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
 
 <a id="Section_3.2.1.4.3.2.3"></a>
 PropID = 0x00000003 (CR_PROP_EXITCOUNT) "Exit Count"
 
-The client has requested the count of exit algorithms installed on the [**CA**](#gt_certification-authority-ca). The CA MUST return the number stored in the Config_CA_Exit_Count datum. The returned value is returned through the **cExitAlgorithms** field of a [CAINFO](#Section_2.2.2.4) structure in the returned [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<108>
+The client has requested the count of exit algorithms installed on the [**CA**](#gt_certification-authority-ca). The CA MUST return the number stored in the Config_CA_Exit_Count datum. The returned value is returned through the **cExitAlgorithms** field of a [CAINFO](#Section_2.2.2.4) structure in the returned [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<112>
 
 If the CA does not implement the Config_CA_Exit_Count datum or does not implement any exit algorithms, the CA MUST return 0.
 
@@ -5416,7 +5492,7 @@ The [**CA**](#gt_certification-authority-ca) MUST return a value that is stored 
 
 If the CA does not implement the Config_CA_Exit_Description_List, the CA MUST return a null-terminated [UNICODE] string through a CERTTRANSBLOB structure.
 
-Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.<109>
+Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.<113>
 
 <a id="Section_3.2.1.4.3.2.5"></a>
 PropID = 0x00000005 (CR_PROP_POLICYDESCRIPTION) "Policy Description"
@@ -5427,7 +5503,7 @@ The [**CA**](#gt_certification-authority-ca) MUST return the value of the Config
 
 If the CA does not implement the Config_CA_Policy_Description datum, it MUST return a NULL [UNICODE] string through a CERTTRANSBLOB structure.
 
-Marshaling rules for CERTTRANSBLOB are specified in section [2.2.2.2.1](#Section_2.2.2.2.1).<110>
+Marshaling rules for CERTTRANSBLOB are specified in section [2.2.2.2.1](#Section_2.2.2.2.1).<114>
 
 <a id="Section_3.2.1.4.3.2.6"></a>
 PropID = 0x00000006 (CR_PROP_CANAME) "Certification Authority Name"
@@ -5450,7 +5526,7 @@ Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
 <a id="Section_3.2.1.4.3.2.8"></a>
 PropID = 0x00000008 (CR_PROP_SHAREDFOLDER) "Shared Folder Path"
 
-The client has requested the [**UNC**](#gt_universal-naming-convention-unc) path that is used as a shared folder for the [**CA**](#gt_certification-authority-ca). If the CA implements the Config_Configuration_Directory data, the CA MUST return its value as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string, through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure. If the CA does not implement the Config_Configuration_Directory data, the CA MUST return a nonzero error. The error SHOULD be 0x80070002. For more information about Windows implementation and usage for shared folders, see [[MSFT-SHAREDFOLDER]](https://go.microsoft.com/fwlink/?LinkId=90207).<111>
+The client has requested the [**UNC**](#gt_universal-naming-convention-unc) path that is used as a shared folder for the [**CA**](#gt_certification-authority-ca). If the CA implements the Config_Configuration_Directory data, the CA MUST return its value as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string, through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure. If the CA does not implement the Config_Configuration_Directory data, the CA MUST return a nonzero error. The error SHOULD be 0x80070002. For more information about Windows implementation and usage for shared folders, see [[MSFT-SHAREDFOLDER]](https://go.microsoft.com/fwlink/?LinkId=90207).<115>
 
 Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
 
@@ -5686,7 +5762,7 @@ The client has requested the [**CA**](#gt_certification-authority-ca) [**exchang
 - If *PropIndex* parameter is not equal to 0x0 or 0xFFFFFFFF, return the E_INVALIDARG (0x80070057) error to the client.
 - Validate that the Current_CA_Exchange_Cert datum contains a current, valid CA exchange certificate by executing steps 2 and 3 in section [3.2.1.4.3.2.15](#Section_3.2.1.4.3.2.15).
 - Retrieve the **Issuer_Name_Id** from the request database by finding the row with the Certificate_Hash equal to the Current_CA_Exchange_Cert hash value.
-- Find the CA signing certificate corresponding to the Current_CA_Exchange_Cert by looking for an entry in the Signing_Cert table with the **certificate index** (section [3.2.1.4.3.2.39](#Section_3.2.1.4.3.2.39)) matching the lower 16 bits of the **Issuer_Name_Id** value retrieved in step 3 of this procedure.<112>
+- Find the CA signing certificate corresponding to the Current_CA_Exchange_Cert by looking for an entry in the Signing_Cert table with the **certificate index** (section [3.2.1.4.3.2.39](#Section_3.2.1.4.3.2.39)) matching the lower 16 bits of the **Issuer_Name_Id** value retrieved in step 3 of this procedure.<116>
 - Construct a signed [**CMS**](#gt_cryptographic-message-syntax-cms) message with the following fields:
 - ContentType: szOID_RSA_signedData (1.2.840.113549.1.7.2, id-signedData).
 - Content: SignedData (as specified in [[RFC3852]](https://go.microsoft.com/fwlink/?LinkId=90445), section 5.1) with the following requirements:
@@ -5775,7 +5851,7 @@ PropID = 0x00000015 (CR_PROP_CAPROPIDMAX) "Maximum Property ID"
 
 The client has requested to know the maximum value for the *PropID* parameter. If the CA implements the Config_Max_Property_ID data, the [**CA**](#gt_certification-authority-ca) MUST return the value of this data. Otherwise, the CA MUST return the value 0.
 
-The CA MUST return the number through the **lPropIDMax** field of a [CAINFO (section 2.2.2.4)](#Section_2.2.2.4) structure. The CA MUST return the CAINFO (section 2.2.2.4) through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<113>
+The CA MUST return the number through the **lPropIDMax** field of a [CAINFO (section 2.2.2.4)](#Section_2.2.2.4) structure. The CA MUST return the CAINFO (section 2.2.2.4) through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<117>
 
 <a id="Section_3.2.1.4.3.2.22"></a>
 PropID = 0x00000016 (CR_PROP_DNSNAME) "CA Fully Qualified DNS"
@@ -5796,7 +5872,7 @@ If the CA implements the Config_CA_Role_Separation data, the CA must return a va
 | Role_Separation_Enabled | 1 |
 | Role_Separation_Disabled | 0 |
 
-If the CA does not implement this data, the CA MUST return a nonzero error code. The error code SHOULD be E_INVALIDARG (0x80070057).<114>
+If the CA does not implement this data, the CA MUST return a nonzero error code. The error code SHOULD be E_INVALIDARG (0x80070057).<118>
 
 The CA MUST return the value through the **lRoleSeparationEnabled** field of a [CAINFO (section 2.2.2.4)](#Section_2.2.2.4) structure. The CA MUST return the CAINFO (section 2.2.2.4) through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.
 
@@ -5809,7 +5885,7 @@ The client has requested to know how many [**KRAs**](#gt_key-recovery-agent-kra)
 
 If the CA implements the Config_CA_KRA_Cert_Count data, then the CA MUST return the value of this data; otherwise, the CA MUST return 0.
 
-The CA MUST return the count through the **cKRACertUsedCount** field of a [CAINFO (section 2.2.2.4)](#Section_2.2.2.4) structure. The CA MUST return the CAINFO (section 2.2.2.4) through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<115>
+The CA MUST return the count through the **cKRACertUsedCount** field of a [CAINFO (section 2.2.2.4)](#Section_2.2.2.4) structure. The CA MUST return the CAINFO (section 2.2.2.4) through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<119>
 
 Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
 
@@ -5909,7 +5985,7 @@ The client has requested the [**CA**](#gt_certification-authority-ca) [**exchang
 - If the *PropIndex* parameter is not equal to 0x0 or 0xFFFFFFFF, return the E_INVALIDARG (0x80070057) error to the client.
 - Validate that the Current_CA_Exchange_Cert datum contains a current, valid CA exchange certificate by executing steps 2 and 3 in section [3.2.1.4.3.2.15](#Section_3.2.1.4.3.2.15).
 - Retrieve the **Issuer_Name_Id** from the request database by finding the row with the Certificate_Hash equal to the Current_CA_Exchange_Cert hash value.
-- Find the CA signing certificate corresponding to the Current_CA_Exchange_Cert by looking for an entry in the Signing_Cert table with the **certificate index** (section [3.2.1.4.3.2.39](#Section_3.2.1.4.3.2.39)) matching the lower 16 bits of the **Issuer_Name_Id** value retrieved in step 3 of this procedure.<116>
+- Find the CA signing certificate corresponding to the Current_CA_Exchange_Cert by looking for an entry in the Signing_Cert table with the **certificate index** (section [3.2.1.4.3.2.39](#Section_3.2.1.4.3.2.39)) matching the lower 16 bits of the **Issuer_Name_Id** value retrieved in step 3 of this procedure.<120>
 - Construct a signed [**CMS**](#gt_cryptographic-message-syntax-cms) message with the following fields:
 - ContentType: szOID_RSA_signedData (1.2.840.113549.1.7.2, id-signedData).
 - Content: SignedData (as specified in [[RFC3852]](https://go.microsoft.com/fwlink/?LinkId=90445) section 5.1) with the following requirements:
@@ -6072,7 +6148,7 @@ PropID = 0x00000029 (CR_PROP_CERTCDPURLS) "CRL Distribution Points"
 
 The client has requested the list of [**CRL**](#gt_certificate-revocation-list-crl) distribution points (CDPs), as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.14, for a particular [**CA**](#gt_certification-authority-ca) [**certificate**](#gt_certificate). The client MUST specify the required CA certificate through the *PropIndex* parameter.
 
-If the CA does not implement the Config_CA_CDP_Include_In_Cert column, the CA SHOULD return an empty string. If the CA implements the Config_CA_CDP_Include_In_Cert column, the CA MUST construct a string that has a format of "String1\nString2\n" by using the strings that are stored in the CDP data.<117>
+If the CA does not implement the Config_CA_CDP_Include_In_Cert column, the CA SHOULD return an empty string. If the CA implements the Config_CA_CDP_Include_In_Cert column, the CA MUST construct a string that has a format of "String1\nString2\n" by using the strings that are stored in the CDP data.<121>
 
 The CA MUST return the string as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.
 
@@ -6081,7 +6157,7 @@ PropID = 0x0000002A (CR_PROP_CERTAIAURLS) "Authority Information Access"
 
 The client has requested the authority information access (AIA) list for a particular [**CA**](#gt_certification-authority-ca) [**certificate**](#gt_certificate). (AIA is specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.2.1.) The client MUST specify the required CA certificate through the *PropIndex* parameter.
 
-If the CA does not implement the Config_CA_AIA_Include_In_Cert column, the CA MUST return an empty string. If the CA implements the AIA column, the CA SHOULD construct a string that has a format of "String1\nString2\n" by using the strings stored in the AIA data.<118>
+If the CA does not implement the Config_CA_AIA_Include_In_Cert column, the CA MUST return an empty string. If the CA implements the AIA column, the CA SHOULD construct a string that has a format of "String1\nString2\n" by using the strings stored in the AIA data.<122>
 
 <a id="Section_3.2.1.4.3.2.43"></a>
 PropID = 0x0000002B (CR_PROP_CERTAIAOCSPRLS) "OCSP URLs"
@@ -6090,19 +6166,19 @@ The client has requested the list of Online Certificate Status Protocol (OCSP) U
 
 If the CA does not implement the Config_CA_OCSP_Include_In_Cert column, the CA MUST return an empty string. If the CA implements the OCSP column, the CA MUST construct a string that has a format of "String1\nString2\n" by using the strings that are stored in OCSP data.
 
-The CA MUST return the list as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<119>
+The CA MUST return the list as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string through a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure.<123>
 
 <a id="Section_3.2.1.4.3.2.44"></a>
 PropID = 0x0000002C (CR_PROP_LOCALENAME) "CA Locale Name"
 
-The client has request the locale of the CA. The CA SHOULD return its locale in the "Language-Region" format as specified in the [[RFC4646]](https://go.microsoft.com/fwlink/?LinkId=123591). The CA MUST return it as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string, through a CERTTRANSBLOB (section [2.2.2.2](#Section_2.2.2.2)) structure.<120>
+The client has request the locale of the CA. The CA SHOULD return its locale in the "Language-Region" format as specified in the [[RFC4646]](https://go.microsoft.com/fwlink/?LinkId=123591). The CA MUST return it as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string, through a CERTTRANSBLOB (section [2.2.2.2](#Section_2.2.2.2)) structure.<124>
 
 <a id="Section_3.2.1.4.3.2.45"></a>
 PropID = 0x0000002D (CR_PROP_SUBJECTTEMPLATE_OIDS) "Subject Template"
 
 The client has requested the **CR_PROP_SUBJECTTEMPLATE_OIDS** property from the [**CA**](#gt_certification-authority-ca) to order the RelativeDistinguishedName ([[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414)) in the subject. If the CA does not implement Config_CA_DN_Order_String, then CA MUST return an empty string. If the CA implements **Config_CA_DN_Order_String**, the CA MUST construct a string that has a format of "String1\nString2\n" by converting the strings that are stored in **Config_CA_DN_Order_String** into their respective [**OIDs**](#gt_object-identifier-oid) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.4) in string representation.
 
-The CA MUST return the string as a Unicode string through a **CERTTRANSBLOB** (section [2.2.2.2](#Section_2.2.2.2)) structure.<121>
+The CA MUST return the string as a Unicode string through a **CERTTRANSBLOB** (section [2.2.2.2](#Section_2.2.2.2)) structure.<125>
 
 <a id="Section_3.2.1.4.3.2.46"></a>
 PropID = 0x0000002E (CR_PROP_CRLPARTITIONCOUNT) "CRL Partitions Count"
@@ -6204,9 +6280,9 @@ HRESULT GetCAPropertyInfo(
 
 The processing rules for this method are as follows.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client. <122>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTREQUEST, the server SHOULD return 0x80094011 (CERTSRV_E_ENROLL_DENIED) to the client. <126>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<123>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTREQUEST and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning a nonzero error.<127>
 
 When the CA receives this invocation, it MUST verify the CA name that is passed in *pwszAuthority* by invoking the processing rules in section [3.2.1.4.2.1.1](#Section_3.2.1.4.2.1.1) with the *CANameString* input parameter set to the CA name passed in the *pwszAuthority* parameter and the *EmptyNameAllowed* input parameter set to false. If false is returned, the CA MUST return the E_INVALIDARG (0x80070057) error code to the client.
 
@@ -6465,7 +6541,7 @@ Store the generated **ADConnection** handle in the **ActiveDirectory_Connection*
 - objectSid
 - userPrincipalName
 - sizeLimit: 10000
-- timeLimit: 120 <124>
+- timeLimit: 120 <128>
 - derefAliases: neverDerefAliases
 - typesOnly: FALSE
 - *TaskOutputResultMessage*: Upon successful return from the task, this parameter will contain the results of the LDAP search. Set the output parameter **EndEntityAttributes** equal to *TaskOutputResultMessage*.
@@ -6539,7 +6615,7 @@ In the following sections, the following local variable is used:
 <a id="Section_3.2.2.1.3.1"></a>
 ###### 3.2.2.1.3.1 Search Requests
 
-The [**CA**](#gt_certification-authority-ca) SHOULD perform search requests demonstrated in the following figure.<125>
+The [**CA**](#gt_certification-authority-ca) SHOULD perform search requests demonstrated in the following figure.<129>
 
 ![Retrieving an ADConnection handle for reading user or computer object with provided DC name.](media/image5.png)
 
@@ -6547,7 +6623,7 @@ Figure 5: Retrieving an ADConnection handle for reading user or computer object 
 
 The following steps describe the flow of the preceding figure:
 
-- The CA SHOULD<126> validate the provided [**DC**](#gt_domain-controller-dc) name by performing the following processing rules:
+- The CA SHOULD<130> validate the provided [**DC**](#gt_domain-controller-dc) name by performing the following processing rules:
 - Strip all leading backslash ('\') characters from DCName. If the resulting string is empty, the CA MUST return a nonzero error to the client and exit.
 - The CA MUST verify that DCName is a valid FQDN:
 - DCName MUST NOT exceed 253 characters (per RFC 1035).
@@ -6596,7 +6672,7 @@ The rest of the parameters and processing rules are the same as in section 3.2.2
 - **InputResultMessage**: *TaskOutputResultMessages*
 Return the **OutputHRESULT** output parameter to the client and exit.
 
-- The CA SHOULD<127> cross-validate the objectSid attribute from the EndEntityAttributes against an authoritative SID lookup by performing the following:
+- The CA SHOULD<131> cross-validate the objectSid attribute from the EndEntityAttributes against an authoritative SID lookup by performing the following:
 - The CA MUST extract the objectSid binary value from the EndEntityAttributes returned in step 4.
 The CA MUST validate that the binary SID buffer length is at least 8 bytes and that the buffer is large enough to hold all sub-authorities indicated by the SubAuthorityCount field. If the size of the buffer is less than the size of all sub-authorities, the CA MUST return a nonzero error to the client and exit.
 
@@ -6953,7 +7029,7 @@ In addition to the tables specified in section [3.2.1](#Section_3.2.1) and maint
 
 **Server_Current_Version:** An unsigned integer with values between 0 and 15. This ADM element is used to determine whether the current template is supported by the server. If CT_FLAG_REQUIRE_SAME_KEY_RENEWAL is implemented (see section [3.2.2.6.2.1.4.5.7](#Section_3.2.2.6.2.1.4.5.7) for more details), then this ADM element MUST be set to 4; otherwise, it MUST be set to 15.
 
-**Collection_Of_End_Entity_Object_Query_AD_Connections:** A collection of **ADConnection** handles whose maximum size SHOULD be set to Config_Max_Number_Of_AD_Connections.<128> Each element of this collection can be used each time the [**CA**](#gt_certification-authority-ca) establishes an [**Active Directory**](#gt_active-directory) connection. This collection is initialized with no element. In order to support multiple simultaneous requests, the CA SHOULD enforce mutual exclusion on read and write operations on the elements of this ADM.
+**Collection_Of_End_Entity_Object_Query_AD_Connections:** A collection of **ADConnection** handles whose maximum size SHOULD be set to Config_Max_Number_Of_AD_Connections.<132> Each element of this collection can be used each time the [**CA**](#gt_certification-authority-ca) establishes an [**Active Directory**](#gt_active-directory) connection. This collection is initialized with no element. In order to support multiple simultaneous requests, the CA SHOULD enforce mutual exclusion on read and write operations on the elements of this ADM.
 
 **CertificateTemplatesAndEnrollmentServices_AD_Connection:** An **ADConnection** handle initialized to NULL. In order to support multiple simultaneous requests, the CA SHOULD serialize the access to this ADM element. All Windows Client Certificate Enrollment server implementations serialize access to the ADconnection handle. Other implementations are not required to do this.
 
@@ -6982,7 +7058,7 @@ There are no timers for this protocol.
 In addition to the initialization steps documented in section [3.2.1.3](#Section_3.2.1.3), the server MUST perform the following initialization steps:
 
 - Reads the list of objects under the [**certificate templates**](#gt_certificate-template) [**container**](#gt_container) in the working [**directory**](#gt_directory), by performing the processing rules specified in section [3.2.2.1.1](#Section_3.2.2.1.1) with input parameter **InputContainer** set to Certificate Templates Container.
-- For each certificate template in **CertificateTemplatesandEnrollmentServicesObjects** returned in step 1 that does not have a msPKI-Template-Schema-Version [**attribute**](#gt_attribute) or has msPKI-Template-Schema-Version value of 0x1, 0x2, 0x3, or 0x4, the [**CA**](#gt_certification-authority-ca) SHOULD create a new row in the Certificate Templates Replica table, store each certificate template object in a Certificate_Template_Data column, and set the value of the Certificate_Template_IsConfigured to False.<129>
+- For each certificate template in **CertificateTemplatesandEnrollmentServicesObjects** returned in step 1 that does not have a msPKI-Template-Schema-Version [**attribute**](#gt_attribute) or has msPKI-Template-Schema-Version value of 0x1, 0x2, 0x3, or 0x4, the [**CA**](#gt_certification-authority-ca) SHOULD create a new row in the Certificate Templates Replica table, store each certificate template object in a Certificate_Template_Data column, and set the value of the Certificate_Template_IsConfigured to False.<133>
 - Reads the list of objects under the enrollment services container in the working directory by performing the processing rules specified in section 3.2.2.1.1 with input parameter **InputContainer** set to Enrollment Services Container.
 For each object in **CertificateTemplatesandEnrollmentServicesObjects** returned from section 3.2.2.1.1, the CA MUST look for the object that has the following characteristics:
 
@@ -7058,7 +7134,7 @@ A [**ROBO**](#gt_request-on-behalf-of-robo) [**certificate**](#gt_certificate) r
 - CMS with embedded CMC.
 The following are the specific [**CA**](#gt_certification-authority-ca) processing rules for the certificate request for each one of the preceding formats.
 
-If the CA implements Config_Permissions_Enrollment_Agent_Rights data,<130> the CA MUST verify that the [**EA**](#gt_enrollment-agent-ea) that has permissions to request a certificate for the specific end-entity (subject of the certificate being requested) based on the specific template. If the EA does not have the permissions to make a request, the CA MUST return a nonzero error. The error SHOULD be 0x80094009 (CERTSRV_E_RESTRICTEDOFFICER).
+If the CA implements Config_Permissions_Enrollment_Agent_Rights data,<134> the CA MUST verify that the [**EA**](#gt_enrollment-agent-ea) that has permissions to request a certificate for the specific end-entity (subject of the certificate being requested) based on the specific template. If the EA does not have the permissions to make a request, the CA MUST return a nonzero error. The error SHOULD be 0x80094009 (CERTSRV_E_RESTRICTEDOFFICER).
 
 <a id="Section_3.2.2.6.2.1.2.1.1"></a>
 Request on Behalf of Using CMS and PKCS #10 Request Formats
@@ -7100,7 +7176,7 @@ The request MUST be compliant with the information that is specified in [[RFC385
 - eContentType: This field MUST be set to the OID szOID_CT_PKI_DATA (1.3.6.1.5.5.7.12.2, Id-cct-PKIData). If it is not, the CA MUST return a non-zero error.
 - eContent: This field MUST be a **PKIData** structure, as specified in [[RFC2797]](https://go.microsoft.com/fwlink/?LinkId=90382) section 3.1. The **PKIData** structure MUST adhere to the following requirements:
 - TaggedRequest: This field MUST contain exactly one certificate request. The certificate request MUST be PKCS #10 conforming to rules specified in sections [2.2.2.6.5](#Section_2.2.2.6.5) and [3.2.1.4.2.1.4.1.1](#Section_3.2.1.4.2.1.4.1.1). If it does not, the CA MUST return a non-zero error.
-- TaggedAttribute: This field MUST include the [**key**](#gt_key) hash [**attribute**](#gt_attribute). The OID for this attribute is the OID szOID_ENCRYPTED_KEY_HASH (1.3.6.1.4.1.311.21.21), as specified in section [2.2.2.7.9](#Section_2.2.2.7.9). The value for this attribute MUST be the hash of the value of the OID szOID_ARCHIVED_KEY_ATTR (1.3.6.1.4.1.311.21.13) attribute, specified in the subsequent steps. The hash algorithm could be either algorithm used to sign certificate request or SHA1. <131> The hash value MUST be encoded as an octet string. The CA MUST calculate its own hash of the enveloped private key using the same hash algorithm and confirm it matches to the value in this field. If it doesn't, the CA MUST fail the request with a non-zero error.
+- TaggedAttribute: This field MUST include the [**key**](#gt_key) hash [**attribute**](#gt_attribute). The OID for this attribute is the OID szOID_ENCRYPTED_KEY_HASH (1.3.6.1.4.1.311.21.21), as specified in section [2.2.2.7.9](#Section_2.2.2.7.9). The value for this attribute MUST be the hash of the value of the OID szOID_ARCHIVED_KEY_ATTR (1.3.6.1.4.1.311.21.13) attribute, specified in the subsequent steps. The hash algorithm could be either algorithm used to sign certificate request or SHA1. <135> The hash value MUST be encoded as an octet string. The CA MUST calculate its own hash of the enveloped private key using the same hash algorithm and confirm it matches to the value in this field. If it doesn't, the CA MUST fail the request with a non-zero error.
 This field MAY also contain additional enrollment attributes. If the field contains the RegInfo attribute (as specified in [RFC2797] section 5.12), processing rules for its value are identical to the ones for the *pwszAttributes* parameter (as specified in section [3.2.1.4.2.1.2](#Section_3.2.1.4.2.1.2)).
 
 - signerInfos: The **SignerInfo** structure MUST adhere to the following requirements:
@@ -7117,7 +7193,7 @@ In addition to the processing rules defined in section [3.2.1.4.2.1.4.2](#Sectio
 <a id="Section_3.2.2.6.2.1.2.4"></a>
 Processing Renewal Request on Behalf of a Different Subject
 
-The [**CA**](#gt_certification-authority-ca) SHOULD accept renewal requests submitted on behalf of other end entities.<132> The client indicates this type of request by setting 0x00200000 bit of the dwFlags parameter of the Request method.
+The [**CA**](#gt_certification-authority-ca) SHOULD accept renewal requests submitted on behalf of other end entities.<136> The client indicates this type of request by setting 0x00200000 bit of the dwFlags parameter of the Request method.
 
 The following are the rules for processing these types of requests:
 
@@ -7128,7 +7204,7 @@ The following are the rules for processing these types of requests:
 <a id="Section_3.2.2.6.2.1.2.5"></a>
 Processing Rules for an Initial Key Attestation Request
 
-**Note** For information on product behavior, see the following product behavior note.<133>
+**Note** For information on product behavior, see the following product behavior note.<137>
 
 In addition to the processing rules defined in section [3.2.1.4.2.1.4](#Section_3.2.1.4.2.1.4), the CA MUST perform the following processing on the [**certificate**](#gt_certificate) request, which is formatted as explained in section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).
 
@@ -7138,8 +7214,9 @@ In addition to the processing rules defined in section [3.2.1.4.2.1.4](#Section_
 - The CA SHOULD set the CR_FLG_TRUSTONUSE flag in the Request_Request_Flags column of the Request table ([MS-CSRA] section 3.1.1.1.2).
 - The CA SHOULD verify all trust module certificates obtained from the decrypted **Client_HardwareKeyInfo** according to the processing rules in section [3.2.2.6.2.1.2.5.1](#Section_3.2.2.6.2.1.2.5.1).
 - The CA SHOULD check that the trust module public key exists in one of the locations listed under the Config_Hardware_Key_List_Directories ADM element according to the processing rules in section [3.2.2.6.2.1.2.5.2](../MS-CSRA/MS-CSRA.md); if it exists, the CA MUST set the CR_FLG_TRUSTEKKEY in the Request_Request_Flags column of the Request table ([MS-CSRA] section 3.1.1.1.2).
+- If the request contains szOID_ENROLL_EK_INFO, and all of the following V2 attributes: szOID_ENROLL_V2_AIK_INFO, szOID_ENROLL_V2_ATTESTATION_STATEMENT, szOID_ENROLL_KSP_NAME, and szOID_ENROLL_V2_CONTAINER_NAME, the CA SHOULD<138> process the request as specified in section [3.2.2.6.2.1.2.7](#Section_3.2.2.6.2.1.2.7). Otherwise, follow the rules described below.
 - The CA MUST verify the KeyAttestationStatement data stored under the szOID_ENROLL_ATTESTATION_STATEMENT attribute in a [**CSP**](#gt_cryptographic-service-provider-csp)-specific manner; otherwise, fail with an HRESULT indicating that the CA failed to validate the KeyAttestationStatement data.
-- The CA MUST verify that the value of the szOID_ENROLL_KSP_NAME attribute is a Unicode string that contains the name of a valid [**TPM**](#gt_trusted-platform-module-tpm) provider.<134>
+- The CA MUST verify that the value of the szOID_ENROLL_KSP_NAME attribute is a Unicode string that contains the name of a valid [**TPM**](#gt_trusted-platform-module-tpm) provider.<139>
 - If the request contains an szOID_ENROLL_EK_INFO attribute (section [3.1.1.4.3.4.1](#Section_3.1.1.4.3.4.1)), then the CA creates a Challenge message, sends it to the client, and sets the CR_FLG_CHALLENGEPENDING bit in the Request_Request_Flags column, as described in section [3.2.2.6.2.1.2.6](#Section_3.2.2.6.2.1.2.6). If the request contains an szOID_ENROLL_AIK_INFO attribute (section [3.1.1.4.3.4.2](#Section_3.1.1.4.3.4.2)), then the CA sets the CR_FLG_CHALLENGESATISFIED bit in the Request_Request_Flags column.
 <a id="Section_3.2.2.6.2.1.2.5.1"></a>
 Processing Rules for Key Attestation Based on Certificates
@@ -7177,6 +7254,20 @@ If processing for initial [**key attestation**](#gt_key-attestation) request, as
 - The CA MUST send a CMC full [**PKI**](#gt_public-key-infrastructure-pki) response including a CA exchange certificate and its full chain.
 - The CA MUST also include additional attributes as specified in section [2.2.2.8.1](#Section_2.2.2.8.1) where pdwDisposition is set to request pending (5).
 <a id="Section_3.2.2.6.2.1.2.7"></a>
+Processing Rules for Providing a Challenge Response to an Initial Key Attestation Request in V2 flow
+
+This section is only applicable to servers that implement V2 Key Attestation<140>.
+
+- The CA MUST decrypt the szOID_ENROLL_V2_AIK_INFO attribute using the current CA exchange certificate private key to obtain the V2 AIK public key (SubjectPublicKeyInfo).
+- The CA MUST validate the szOID_ENROLL_V2_ATTESTATION_STATEMENT attribute (the subject-only attestation claim) against the decrypted V2 AIK public key. If validation fails, the CA MUST return a nonzero error.
+- The CA MUST generate a random HMAC key of 32 bytes.
+- The CA MUST generate a random nonce of 32 bytes.
+- The CA MUST wrap (encrypt) the HMAC key to the EK public key.
+- The CA MUST encrypt a server state structure containing the HMAC key, the nonce, and the AIK SubjectPublicKeyInfo using the current CA exchange certificate and store it in the AttestationChallenge column of the Request table as specified in [MS-CSRA](../MS-CSRA/MS-CSRA.md) section 3.1.1.1.2.
+- The CA MUST construct the challenge as a DER-encoded CRYPT_ATTRIBUTES structure containing the following CRYPT_ATTRIBUTE values: szOID_ENROLL_ATTESTATION_CHALLENGE (the wrapped HMAC key as an octet string), szOIDVerisign_SenderNonce (the nonce as an octet string), szOID_ENROLL_V2_CONTAINER_NAME (the container name as a Unicode string), szOID_ENROLL_V2_EK_ALGORITHM (the EK algorithm name as a Unicode string), and szOID_ENROLL_V2_EK_PARAMETER (the EK key size as a Unicode string).
+- The CA MUST set CR_FLG_CHALLENGEPENDING and CR_FLG_V2CHALLENGE in the Request_Request_Flags column.
+- The CA MUST send a CMC full PKI response including the challenge, the CA exchange certificate, and its full chain.
+<a id="Section_3.2.2.6.2.1.2.8"></a>
 Processing Rules for a Challenge Response Request
 
 If a request of type Challenge Response is received the CA MUST adhere to the following processing rules:
@@ -7186,6 +7277,14 @@ If a request of type Challenge Response is received the CA MUST adhere to the fo
 - The CA MUST verify that the original requester or caller of the request is the caller for this request.
 - The CA MUST verify that the Request_Request_Flags column in the Request Table is set to CR_FLG_CHALLENGEPENDING and CR_FLG_CHALLENGESATISFIED is not set as specified in [MS-CSRA] section 3.1.1.1.2.
 - The CA MUST verify that the KeyAttestationChallenge column still has a challenge and is not set to a single zero byte. If this is true, then after these processing rules are complete (regardless of eventual success or failure), the contents of the KeyAttestationChallenge column MUST be set to a single zero byte to indicate a challenge response has been attempted.
+- If the CR_FLG_V2CHALLENGE flag is set in the Request_Request_Flags column, the CA SHOULD<141> process the challenge response using the following rules:
+- The CA MUST decrypt the server state stored in the AttestationChallenge column using the CA exchange certificate private key to recover the original HMAC key, nonce, and AIK SubjectPublicKeyInfo.
+- The CA MUST decrypt the client's challenge response using the CA exchange certificate private key.
+- The CA MUST validate the AIK attestation claim using the recovered HMAC key and nonce.
+- The CA MUST verify that the AIK public key from the attestation claim matches the AIK SubjectPublicKeyInfo recovered from the stored server state.
+- If validation succeeds, the CA MUST set CR_FLG_CHALLENGESATISFIED in the Request_Request_Flags column.
+- The CA MUST add the szOID_CERTSRV_V2_ATTESTATION_VERIFIED extension (1.3.6.1.4.1.311.21.49) as a non-critical extension with ASN.1 NULL value to the issued certificate.
+- If the CR_FLG_V2CHALLENGE flag is not set in the Request_Request_Flags column, the CA MUST process the challenge response using the following rules:
 - The CA MUST decrypt the challenge in the response with the current CA exchange [**private key**](#gt_private-key).
 - The CA MUST decrypt the challenge in the KeyAttestationChallenge column of the Request table.
 - The CA MUST verify that the decrypted challenge from the response matches the decrypted challenge in the database.
@@ -7292,7 +7391,7 @@ The following processing rules are applied to flags in this [**attribute**](#gt_
 | 0x00000040 CT_FLAG_MACHINE_TYPE | If this flag is set and CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT is not set in [msPKI-Certificate-Name-Flag (section 3.2.2.6.2.1.4.5.9)](#Section_3.2.2.6.2.1.4.5.9), and either CT_FLAG_SUBJECT_REQUIRE_COMMON_NAME, CT_FLAG_SUBJECT_REQUIRE_DNS_AS_CN, or CT_FLAG_SUBJECT _ALT_REQUIRE_DNS is set in msPKI-Certificate-Name-Flag, the [**CA**](#gt_certification-authority-ca) MUST require a nonempty value for the **dNSHostName** attribute of the requestor's computer object in the working [**directory**](#gt_directory). For this, the CA MUST invoke the processing rules in section [3.2.2.1.2](#Section_3.2.2.1.2) with input parameter **EndEntityDistinguishedName** set equal to the requester's computer object [**distinguished name**](#gt_distinguished-name-dn) and retrieve the **dNSHostName** attribute from the returned **EndEntityAttributes** output parameter. Also, the CA MUST use the value to construct the Subject field of the issued [**certificate**](#gt_certificate). If the value is empty or if the computer object is not found, the CA MUST reject the request. The returned code SHOULD be 0x8009480F (CERTSRV_E_SUBJECT_DNS_REQUIRED). |
 | 0x00000080 CT_FLAG_IS_CA | If this flag is set, a CA MUST set the basic constraint extension and [**key**](#gt_key) usage extension in the certificate to be issued for the request. Specifications are in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) sections 4.2.1.3 and 4.2.1.10. The CA MUST set the **cA** field of the Basic Constraints extension to TRUE, and set the **pathLenConstraint** field as specified in section [3.2.2.6.2.1.4.4.5](#Section_3.2.2.6.2.1.4.4.5). |
 | 0x00000800 CT_FLAG_IS_CROSS_CA | If this flag is set, a CA MUST set the basic constraint extension and key usage extension in the certificate to be issued for the request. Specifications are in [RFC3280] sections 4.2.1.3 and 4.2.1.10. The CA MUST set the **cA** field of the Basic Constraints extension to TRUE, and the **pathLenConstraint** field MUST be set as specified in section 3.2.2.6.2.1.4.4.5. |
-| 0x00001000 CT_FLAG_DONOTPERSISTINDB | If this flag is set and if the certificate has been issued, the CA SHOULD NOT persist the information about the request in the Request table that is specified in section [3.2.1.1.1](#Section_3.2.1.1.1).<135> |
+| 0x00001000 CT_FLAG_DONOTPERSISTINDB | If this flag is set and if the certificate has been issued, the CA SHOULD NOT persist the information about the request in the Request table that is specified in section [3.2.1.1.1](#Section_3.2.1.1.1).<142> |
 
 <a id="Section_3.2.2.6.2.1.4.4.2"></a>
 pKIExpirationPeriod
@@ -7375,11 +7474,11 @@ The following processing rules are applied to flags in this [**attribute**](#gt_
 | 0x00000004 CT_FLAG_PUBLISH_TO_KRA_CONTAINER | If this flag is included in the template, the CA MUST publish the certificate to the userCertificate attribute of an object of the class msPKI-Private-Key-Recovery-Agent stored in the "CN=KRA, CN=Public Key Services,CN=Services, CN=Configuration" [**container**](#gt_container) in the working [**directory**](#gt_directory) by invoking the processing rules in section [3.2.2.1.4](#Section_3.2.2.1.4) with input parameter **IssuedCertificate** set equal to the issued certificate. The [**CN**](#gt_common-name-cn) of that object MUST be equal to the [**sanitized**](#gt_sanitized-name) short name of the CA. The algorithm for sanitizing names is described in section [3.1.1.4.1.1](#Section_3.1.1.4.1.1). |
 | 0x00000008 CT_FLAG_PUBLISH_TO_DS | If this flag is included in the template, the CA MUST append the issued certificate to the userCertificate attribute, as specified in [[RFC4523]](https://go.microsoft.com/fwlink/?LinkId=90479), of the user object in the working directory by invoking the processing rules in section [3.2.2.1.5](#Section_3.2.2.1.5) with input parameter **IssuedCertificate** set equal to the issued certificate and input parameter **EndEntityDistinguishedName** set equal to the requester's user object [**distinguished name**](#gt_distinguished-name-dn). |
 | 0x00000040 CT_FLAG_PREVIOUS_APPROVAL_VALIDATE_REENROLLMENT | The CA MUST enforce this flag only for [**certificate renewal requests**](#gt_certificate-renewal-request) and only when the conditions specified in section [3.2.2.6.2.1.4.8](#Section_3.2.2.6.2.1.4.8) are met. If this flag is set in the template: The CA MUST NOT enforce the signature processing rules specified for the following attributes: msPKI-RA-Signature, msPKI-RA-Policies, and msPKI-Application-Policy. The CA MUST ignore the CT_FLAG_PEND_ALL_REQUESTS flag. If the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT is set and the old certificate, based on which reenrollment is occurring, contains the subject alternative name (SAN) extension, then the same SAN extension MUST be added to the new certificate being issued. |
-| 0x00001000 CT_FLAG_ADD_OCSP_NOCHECK | If this flag is set and the following are all true: The CA implements Config_CA_No_OCSP_Revocation_Check datum and it is set to true or the CA doesn't implement this datum. Certificate template's msPKI-Certificate-Application-Policy attribute contains the [**OID**](#gt_object-identifier-oid) szOID_PKIX_KP_OCSP_SIGNING (1.3.6.1.5.5.7.3.9, id-kp-OCSPSigning). The CA SHOULD NOT include the OIDs szOID_AUTHORITY_INFO_ACCESS (1.3.6.1.5.5.7.1.1, id-pe-authorityInfoAccess) and szOID_CRL_DIST_POINTS (2.5.29.31, id-ce-cRLDistributionPoints) extensions and SHOULD add a NULL value extension with the OID szOID_PKIX_OCSP_NOCHECK (1.3.6.1.5.5.7.48.1.5, id-pkix-ocsp-nocheck) to the issued certificate.<136> |
-| 0x00004000 CT_FLAG_NOREVOCATIONINFOINISSUEDCERTS | If this flag is set the CA SHOULD NOT include entries from the Config_CA_OCSP_Include_In_Cert list in the OID szOID_AUTHORITY_INFO_ACCESS (1.3.6.1.5.5.7.1.1, id-pe-authorityInfoAccess) extension of the issued certificate and SHOULD NOT include the OID szOID_CRL_DIST_POINTS (2.5.29.31, id-ce-cRLDistributionPoints) extension in the issued certificate.<137> |
-| 0x00008000 CT_FLAG_INCLUDE_BASIC_CONSTRAINTS_FOR_EE_CERTS | If this flag is set, the CA SHOULD add a Basic Constraints extension (as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.10) to the certificate and set the **cA** field to FALSE. The CA SHOULD NOT include the **pathLenConstraint** field in the Basic Constraints extension.<138> |
-| 0x00010000 CT_FLAG_ALLOW_PREVIOUS_APPROVAL_KEYBASEDRENEWAL_VALIDATE_REENROLLMENT | The CA MUST enforce this flag only for certificate renewal requests when the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT and CT_FLAG_PREVIOUS_APPROVAL_VALIDATE_REENROLLMENT flags are also set. If this flag is set on the template, the CA SHOULD NOT enforce the processing rules specified in section [3.2.2.6.2.1.4.3](#Section_3.2.2.6.2.1.4.3).<139> |
-| 0x00020000 CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST | If this flag is set the CA SHOULD apply special processing rules to the **msPKI-Certificate-Policy** attribute as specified in section [3.2.2.6.2.1.4.5.8](#Section_3.2.2.6.2.1.4.5.8).<140> |
+| 0x00001000 CT_FLAG_ADD_OCSP_NOCHECK | If this flag is set and the following are all true: The CA implements Config_CA_No_OCSP_Revocation_Check datum and it is set to true or the CA doesn't implement this datum. Certificate template's msPKI-Certificate-Application-Policy attribute contains the [**OID**](#gt_object-identifier-oid) szOID_PKIX_KP_OCSP_SIGNING (1.3.6.1.5.5.7.3.9, id-kp-OCSPSigning). The CA SHOULD NOT include the OIDs szOID_AUTHORITY_INFO_ACCESS (1.3.6.1.5.5.7.1.1, id-pe-authorityInfoAccess) and szOID_CRL_DIST_POINTS (2.5.29.31, id-ce-cRLDistributionPoints) extensions and SHOULD add a NULL value extension with the OID szOID_PKIX_OCSP_NOCHECK (1.3.6.1.5.5.7.48.1.5, id-pkix-ocsp-nocheck) to the issued certificate.<143> |
+| 0x00004000 CT_FLAG_NOREVOCATIONINFOINISSUEDCERTS | If this flag is set the CA SHOULD NOT include entries from the Config_CA_OCSP_Include_In_Cert list in the OID szOID_AUTHORITY_INFO_ACCESS (1.3.6.1.5.5.7.1.1, id-pe-authorityInfoAccess) extension of the issued certificate and SHOULD NOT include the OID szOID_CRL_DIST_POINTS (2.5.29.31, id-ce-cRLDistributionPoints) extension in the issued certificate.<144> |
+| 0x00008000 CT_FLAG_INCLUDE_BASIC_CONSTRAINTS_FOR_EE_CERTS | If this flag is set, the CA SHOULD add a Basic Constraints extension (as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.10) to the certificate and set the **cA** field to FALSE. The CA SHOULD NOT include the **pathLenConstraint** field in the Basic Constraints extension.<145> |
+| 0x00010000 CT_FLAG_ALLOW_PREVIOUS_APPROVAL_KEYBASEDRENEWAL_VALIDATE_REENROLLMENT | The CA MUST enforce this flag only for certificate renewal requests when the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT and CT_FLAG_PREVIOUS_APPROVAL_VALIDATE_REENROLLMENT flags are also set. If this flag is set on the template, the CA SHOULD NOT enforce the processing rules specified in section [3.2.2.6.2.1.4.3](#Section_3.2.2.6.2.1.4.3).<146> |
+| 0x00020000 CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST | If this flag is set the CA SHOULD apply special processing rules to the **msPKI-Certificate-Policy** attribute as specified in section [3.2.2.6.2.1.4.5.8](#Section_3.2.2.6.2.1.4.5.8).<147> |
 
 <a id="Section_3.2.2.6.2.1.4.5.7"></a>
 msPKI-Private-Key-Flag
@@ -7388,19 +7487,20 @@ The following processing rules are applied to flags in this [**attribute**](#gt_
 
 | Flag | Client processing |
 | --- | --- |
-| 0x00000001 CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL | If this flag is set, the [**CA**](#gt_certification-authority-ca) MUST verify that the [**certificate**](#gt_certificate) request is a [**key archival**](#gt_key-archival) request as specified in section [3.2.2.6.2.1.2.2](#Section_3.2.2.6.2.1.2.2). If this is a renewal request and CT_FLAG_REQUIRE_SAME_KEY_RENEWAL is set, the CA SHOULD ignore this flag.<141> If the request does not comply with the specifications of the key archival request, the CA SHOULD return the following error code: 0x80094804 CERTSRV_E_ARCHIVED_KEY_REQUIRED. |
-| 0x00000080 CT_FLAG_REQUIRE_SAME_KEY_RENEWAL | If this flag is set and the request is a renewal request, the CA MUST verify that the [**key**](#gt_key) used in the request matches one of the certificates being renewed. If it does not match, the CA SHOULD return error CERTSRV_E_RENEWAL_BAD_PUBLIC_KEY (0x80094816) to the client.<142> |
+| 0x00000001 CT_FLAG_REQUIRE_PRIVATE_KEY_ARCHIVAL | If this flag is set, the [**CA**](#gt_certification-authority-ca) MUST verify that the [**certificate**](#gt_certificate) request is a [**key archival**](#gt_key-archival) request as specified in section [3.2.2.6.2.1.2.2](#Section_3.2.2.6.2.1.2.2). If this is a renewal request and CT_FLAG_REQUIRE_SAME_KEY_RENEWAL is set, the CA SHOULD ignore this flag.<148> If the request does not comply with the specifications of the key archival request, the CA SHOULD return the following error code: 0x80094804 CERTSRV_E_ARCHIVED_KEY_REQUIRED. |
+| 0x00000080 CT_FLAG_REQUIRE_SAME_KEY_RENEWAL | If this flag is set and the request is a renewal request, the CA MUST verify that the [**key**](#gt_key) used in the request matches one of the certificates being renewed. If it does not match, the CA SHOULD return error CERTSRV_E_RENEWAL_BAD_PUBLIC_KEY (0x80094816) to the client.<149> |
 | 0x00002000 CT_FLAG_ATTEST_REQUIRED * | If this flag is set and the request contains the [**attestation**](#gt_attestation) data, the CA MUST invoke the key Attestation processing rules specified in section [3.2.2.6.2.1.2.5](#Section_3.2.2.6.2.1.2.5) and its subsections. The CA SHOULD return error CERTSRV_E_KEY_ATTESTATION_(0x8009481AL) to the client if none of the [**key attestation**](#gt_key-attestation) is performed. If flag CT_FLAG_ATTESTATION_WITHOUT_POLICY is not set, the CA MUST add at least one of the [**OIDs**](#gt_object-identifier-oid) in the msPKI-Certificate-Policy attribute indicating key attestation. The CA MUST add OIDs as specified below to the msPKI-CertificatePolicy attribute if key attestation processing rules are performed according to the corresponding processing sections. Processing rules section: 3.2.2.6.2.1.2.5 Add OID: szOID_ENROLL_EKVERIFYCREDS (1.3.6.1.4.1.311.21.32) Processing rules section: [3.2.2.6.2.1.2.5.1](#Section_3.2.2.6.2.1.2.5.1) Add OID: szOID_ENROLL_EKVERIFYCERT (1.3.6.1.4.1.311.21.31) Processing rules section: [3.2.2.6.2.1.2.5.2](#Section_3.2.2.6.2.1.2.5.2) Add OID: szOID_ENROLL_EKVERIFYKEY (1.3.6.1.4.1.311.21.30) |
 | 0x00001000 CT_FLAG_ATTEST_PREFERRED * | If this flag is set and the request contains the attestation data, the CA MUST invoke the key attestation processing rules specified in section 3.2.2.6.2.1.2.5 and its subsections. The CA SHOULD not return an error to the client, if none of the key attestation is performed. If flag CT_FLAG_ATTESTATION_WITHOUT_POLICY is not set, the CA MUST add OIDs in the msPKI-Certificate-Policy attribute indicating key attestation. The CA MUST add OIDs as specified below to the msPKI-CertificatePolicy attribute if key attestation processing rules are performed according to the corresponding processing sections. Processing rules section: 3.2.2.6.2.1.2.5 Add OID: szOID_ENROLL_EKVERIFYCREDS (1.3.6.1.4.1.311.21.32) Processing rules section: 3.2.2.6.2.1.2.5.1 Add OID: szOID_ENROLL_EKVERIFYCERT (1.3.6.1.4.1.311.21.31) Processing rules section: 3.2.2.6.2.1.2.5.2 Add OID: szOID_ENROLL_EKVERIFYKEY (1.3.6.1.4.1.311.21.30) |
 | 0x00000000 CT_FLAG_ATTEST_NONE * | If this flag is set, the CA MUST NOT add certificate policy OIDs to the msPKI-Certificate-Policy attribute to indicate attestation occurred, and the CA MUST NOT return an error if key attestation failed, even if the request contained key attestation data as specified in section 3.2.2.6.2.1.2.5 and the CA invoked key attestation processing rules. |
 | 0x00004000 CT_FLAG_ATTESTATION_WITHOUT_POLICY * | If this flag is set, the CA MUST NOT add the certificate policy OIDs as specified in the CT_FLAG_ATTEST_REQUIRED or CT_FLAG_ATTEST_PREFERRED flags to the msPKI-Certificate-Policy attribute, but the CA SHOULD follow the processing rules specified in section 3.2.2.6.2.1.2.5. |
 | 0x00000200 CT_FLAG_EK_TRUST_ON_USE * | If this flag is set, the CA MUST invoke the key attestation processing rules in section 3.2.2.6.2.1.2.5 and the CA MUST base the attestation on valid user credentials. If the CT_FLAG_ATTESTATION_WITHOUT_POLICY flag is not set, the CA MUST add OID szOID_ENROLL_EKVERIFYCREDS "1.3.6.1.4.1.311.21.32" to the certificate policy extension indicating that key attestation has occurred based on valid user credentials. |
 | 0x00000400 CT_FLAG_EK_VALIDATE_CERT * | If this flag is set, the CA MUST invoke the key attestation processing rules in section 3.2.2.6.2.1.2.5 and the CA MUST validate the [**trust**](#gt_trust) module certificate according to section 3.2.2.6.2.1.2.5.1. The CA SHOULD return CERTSRV_E_INVALID_EK (0x80094817L) if an error occurs. If the CT_FLAG_ATTESTATION_WITHOUT_POLICY flag is not set, the CA MUST add OID szOID_ENROLL_EKVERIFYCERT "1.3.6.1.4.1.311.21.31" to the certificate policy extension indicating that key attestation has occurred based on a valid trust module certificate. |
+| 0x00008000 CT_FLAG _REQUIRE_V2_ATTESTATION<150> | This flag is applicable only when CT_FLAG_ATTEST_REQUIRED flag is set. If this flag is set, the CA MUST invoke the key Attestation processing rules as specified in section 3.2.2.6.2.1.2.5 and its subsections. The CA MUST return error CERTSRV_E_KEY_ATTESTATION_(0x8009481AL) to the client if the CR_FLG_V2CHALLENGE flag is not set in the Request_Request_Flags column after attestation processing completes. |
 | 0x00000800 CT_FLAG_EK_VALIDATE_KEY * | If this flag is set, the CA MUST invoke the key attestation processing rules in section 3.2.2.6.2.1.2.5 and the CA MUST check the trust module [**public key**](#gt_public-key) in the request against the trust module public key list located using Config_Hardware_Key_List_Directories. The entire processing is described in section 3.2.2.6.2.1.2.5.2. If the CT_FLAG_ATTESTATION_WITHOUT_POLICY flag is not set, the CA MUST add OID szOID_ENROLL_EKVERIFYKEY "1.3.6.1.4.1.311.21.30" to the certificate policy extension indicating that key attestation has occurred based on a valid trust module key. |
 
-* Support for these flags is specified in the following behavior note.<143>
+* Support for these flags is specified in the following behavior note.<151>
 
-- If the value of a bitwise AND of **Certificate.Template.msPKI-Private-Key-Flag** and 0x000F0000 is larger than 0x000Z0000, where Z denotes the value of the **Server_Current_Version** ADM element, the server SHOULD NOT [**enroll**](#gt_enroll) for this template.<144>
+- If the value of a bitwise AND of **Certificate.Template.msPKI-Private-Key-Flag** and 0x000F0000 is larger than 0x000Z0000, where Z denotes the value of the **Server_Current_Version** ADM element, the server SHOULD NOT [**enroll**](#gt_enroll) for this template.<152>
 <a id="Section_3.2.2.6.2.1.4.5.8"></a>
 msPKI-Certificate-Policy
 
@@ -7410,9 +7510,9 @@ The [**CA**](#gt_certification-authority-ca) MUST construct a [**certificate**](
 - Let **KeyAttestationPolicies** be a list of OIDs identifying each certificate policy verified by the CA according to section [3.2.2.6.2.1.4.5.7](#Section_3.2.2.6.2.1.4.5.7).
 **Processing for CurrentCertificateRequestPolicies**
 
-- If CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag of the **msPKI-Enrollment-Flag** attribute is set AND the msPKI-Certificate-Policy attribute is empty AND the **CurrentCertificateRequestCertPolicies** list is not empty, the CA SHOULD return the CERTSRV_E_TEMPLATE_CONFLICT error (0x80094802) to the client.<145>
+- If CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag of the **msPKI-Enrollment-Flag** attribute is set AND the msPKI-Certificate-Policy attribute is empty AND the **CurrentCertificateRequestCertPolicies** list is not empty, the CA SHOULD return the CERTSRV_E_TEMPLATE_CONFLICT error (0x80094802) to the client.<153>
 - For each OID in the msPKI-Certificate-Policy attribute:
-- If the CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag of the **msPKI-Enrollment-Flag** attribute is set and the **CurrentCertificateRequestCertPolicies** list does not contain the current OID, the CA SHOULD continue with the next OID.<146>
+- If the CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag of the **msPKI-Enrollment-Flag** attribute is set and the **CurrentCertificateRequestCertPolicies** list does not contain the current OID, the CA SHOULD continue with the next OID.<154>
 - Add a certificate policy identified by the current OID to the certificate policy extension of the certificate to be issued.
 **Processing When KeyAttestationPolicies Is Not Empty**
 
@@ -7437,7 +7537,7 @@ The following processing rules are applied to flags in this [**attribute**](#gt_
 - If the CT_FLAG_SUBJECT_ALT_REQUIRE_UPN or CT_FLAG_SUBJECT_ALT_REQUIRE_SPN flag is set, the CA MUST add the value of the **userPrincipalName** attribute from the requestor's user object in the working directory to the subject alternative name extension of the issued certificate. For this, the CA MUST invoke the processing rules in section 3.2.2.1.2 with input parameter **EndEntityDistinguishedName** set equal to the requester's user object distinguished name and retrieve the **userPrincipalName** attribute from the returned **EndEntityAttributes** output parameter.
 - If the CT_FLAG_SUBJECT_ALT_REQUIRE_EMAIL flag is set, the CA MUST add the value of the **mail** attribute from the requestor's user object in the working directory to the subject alternative name extension of the issued certificate. For this, the CA MUST invoke the processing rules in section 3.2.2.1.2 with input parameter **EndEntityDistinguishedName** set equal to the requester's user object distinguished name and retrieve the **mail** attribute from the returned **EndEntityAttributes** output parameter.
 - If the CT_FLAG_SUBJECT_ALT_REQUIRE_DIRECTORY_GUID flag is set, the CA MUST add the value of the **objectGuid** attribute from the requestor's user object in the working directory to the subject alternative name extension of the issued certificate. For this, the CA MUST invoke the processing rules in section 3.2.2.1.2 with input parameter **EndEntityDistinguishedName** set equal to the requester's user object distinguished name and retrieve the **objectGuid** attribute from the returned **EndEntityAttributes** output parameter.
-- If the CT_FLAG_SUBJECT_ALT_REQUIRE_DOMAIN_DNS flag is set, the CA SHOULD<147>:
+- If the CT_FLAG_SUBJECT_ALT_REQUIRE_DOMAIN_DNS flag is set, the CA SHOULD<155>:
 - The CA SHOULD retrieve a handle for the information policy using the **LsarOpenPolicy** method ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.2 ), with the *SystemName* parameter set as the **dNSHostName** attribute from the requestor's computer object, all fields of the *ObjectAttributes* set to NULL, and the *DesiredAccess* parameter set to POLICY_VIEW_LOCAL_INFORMATION.
 - The CA SHOULD obtain the requester's computer [**DNS**](#gt_domain-name-system-dns) Domain Information by using the **LsarQueryInformationPolicy** method ([MS-LSAD] section 3.1.4.4.4), with the *PolicyHandle* parameter set to the value obtained in the previous step, and the *InformationClass* parameter set to *PolicyDnsDomainInformation*.
 - The CA MUST add the value of the **Name** and **DNSDomainName** field in the returned DNS Domain Information from the previous step, to the subject alternative name extension of the issued certificate.
@@ -7491,7 +7591,7 @@ The returned string MUST have the following format:
 "TemplateName1\nTemplateOID1\nTemplateName2\nTemplateOID2...\nTemplateNameN\nTemplateOIDN\n\0" where
 
 - TemplateName1 is one of the values of the cn [**attribute**](#gt_attribute) of the certificate template object that is stored in the Certificate_Template_Data column.
-- TemplateOID1 is the value of the msPKI-Cert-Template-OID attribute ([MS-CRTD](../MS-CRTD/MS-CRTD.md) section 2.20) of the certificate template stored in the Certificate_Template_Data column.<148>
+- TemplateOID1 is the value of the msPKI-Cert-Template-OID attribute ([MS-CRTD](../MS-CRTD/MS-CRTD.md) section 2.20) of the certificate template stored in the Certificate_Template_Data column.<156>
 **Note** If the certificate template does not have the msPKI-Cert-Template-OID attribute, then the value of TemplateOID1 is empty. The CA MUST return the configured certificate template as a [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string through a CERTTRANSBLOB (section [2.2.2.2](#Section_2.2.2.2)) structure.
 
 Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
@@ -7909,71 +8009,79 @@ Windows Server 2003 and later ignore the value of this attribute and instead cop
 
 <18> Section 2.2.2.7.15: Support for szOID_ENROLL_AIK_INFO is included in Windows 10, Windows Server 2016, Windows Server operating system, and in Windows Server 2019 and later.
 
-<19> Section 2.2.3.1: Applicable Windows Server releases use [**key recovery certificates**](#gt_key-recovery-certificate) that contain the following X.509v3 extensions that are specific to such releases:
+<19> Section 2.2.2.8.1.1: Windows 10 v1809 operating system through Windows 11, version 26H1 operating system with [[MSFT-CVE-2026-6726]](https://go.microsoft.com/fwlink/?LinkId=2374650) and Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support V2 certificate request attributes szOID_ENROLL_V2_AIK_INFO, szOID_ENROLL_V2_ATTESTATION_STATEMENT, szOID_ENROLL_V2_CONTAINER_NAME, szOID_ENROLL_V2_EK_ALGORITHM and szOID_ENROLL_V2_EK_PARAMETER.
+
+<20> Section 2.2.3.1: Applicable Windows Server releases use [**key recovery certificates**](#gt_key-recovery-certificate) that contain the following X.509v3 extensions that are specific to such releases:
 
 - Application Policies (Policy Identifier = Key Recovery Agent)
 - Certificate Template Name
 - Certificate Template Information
 [Key recovery certificates](#Section_2.2.3.1), when issued by a Windows [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca), are automatically written to the configuration [**container**](#gt_container) of [**Active Directory**](#gt_active-directory). The actual certificates are published to the userCertificate attribute (as specified in [[RFC4523]](https://go.microsoft.com/fwlink/?LinkId=90479)) of the [**KRA**](#gt_key-recovery-agent-kra) object when issued to a member of the [**domain**](#gt_domain) administrators group in Active Directory.
 
-<20> Section 3.1: Microsoft implements multiple clients of this protocol, including:
+<21> Section 3.1: Microsoft implements multiple clients of this protocol, including:
 
 - Certificates snap-in for the Microsoft Management Console (MMC)
 - Certreq.exe tool (see [[MSDOCS-certreq]](https://go.microsoft.com/fwlink/?linkid=2164277) for more information)
 - Certificate Autoenrollment (see [[MSFT-AUTOENROLLMENT]](https://go.microsoft.com/fwlink/?LinkId=90178) for more information).
-<21> Section 3.1.1: Windows clients implement an abstraction layer on top of the interfaces specified in this document. Windows 2000, Windows XP, and Windows Server 2003 support the interfaces documented in [[MSDN-XEnroll]](https://go.microsoft.com/fwlink/?LinkId=100157). Windows 2000, Windows XP, and Windows Server 2003 do not support the interfaces documented in [[MSDN-CertEnroll]](https://go.microsoft.com/fwlink/?LinkId=100156).
+<22> Section 3.1.1: Windows clients implement an abstraction layer on top of the interfaces specified in this document. Windows 2000, Windows XP, and Windows Server 2003 support the interfaces documented in [[MSDN-XEnroll]](https://go.microsoft.com/fwlink/?LinkId=100157). Windows 2000, Windows XP, and Windows Server 2003 do not support the interfaces documented in [[MSDN-CertEnroll]](https://go.microsoft.com/fwlink/?LinkId=100156).
 
-<22> Section 3.1.1.4: Windows 2000 clients do not obtain a supported interface version from the server and always use the [ICertRequestD](#Section_3.2.1.4.2) interface.
+<23> Section 3.1.1.4: Windows 2000 clients do not obtain a supported interface version from the server and always use the [ICertRequestD](#Section_3.2.1.4.2) interface.
 
-<23> Section 3.1.1.4.3.1.1: Windows clients use the OS version structure defined in [[MSDN-OSVERSIONINFO]](https://go.microsoft.com/fwlink/?LinkId=106010) to create a string in the format "A.B.C.D", where the A is the value of the **dwMajorVersion** field, B is the value of the **dwMinorVersion** field, C is the value of the **dwBuildNumber** field, and D is the value of the **dwPlatformId**. All numbers are represented in the decimal format. For example, the string "6.1.7600.2" represents Windows Server 2008 R2.
+<24> Section 3.1.1.4.3.1.1: Windows clients use the OS version structure defined in [[MSDN-OSVERSIONINFO]](https://go.microsoft.com/fwlink/?LinkId=106010) to create a string in the format "A.B.C.D", where the A is the value of the **dwMajorVersion** field, B is the value of the **dwMinorVersion** field, C is the value of the **dwBuildNumber** field, and D is the value of the **dwPlatformId**. All numbers are represented in the decimal format. For example, the string "6.1.7600.2" represents Windows Server 2008 R2.
 
-<24> Section 3.1.1.4.3.1.4: This format was designed by Netscape, and there are no Microsoft tools to create a request in this format. To construct a certificate request using this format, the SPKAC tool can be used (for more information, see [[OPENSSL]](https://go.microsoft.com/fwlink/?LinkId=90242)).
+<25> Section 3.1.1.4.3.1.4: This format was designed by Netscape, and there are no Microsoft tools to create a request in this format. To construct a certificate request using this format, the SPKAC tool can be used (for more information, see [[OPENSSL]](https://go.microsoft.com/fwlink/?LinkId=90242)).
 
-<25> Section 3.1.1.4.3.2.1: Windows 8.1 and later and Windows Server 2012 R2 and later support the processing rules in section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).
+<26> Section 3.1.1.4.3.2.1: Windows 8.1 and later and Windows Server 2012 R2 and later support the processing rules in section [3.1.1.4.3.4](#Section_3.1.1.4.3.4).
 
-<26> Section 3.1.1.4.3.2.2: Windows 8.1 and later and Windows Server 2012 R2 and later support the processing rules in section 3.1.1.4.3.4.
+<27> Section 3.1.1.4.3.2.2: Windows 8.1 and later and Windows Server 2012 R2 and later support the processing rules in section 3.1.1.4.3.4.
 
-<27> Section 3.1.1.4.3.3.1: The Microsoft client allows importing a request file during the enrollment implemented in the certificates snap-in for the MMC in Windows Vista and later and in Windows Server 2008 and later; and during web enrollment in Windows 2000, Windows XP, and Windows Server 2003.
+<28> Section 3.1.1.4.3.3.1: The Microsoft client allows importing a request file during the enrollment implemented in the certificates snap-in for the MMC in Windows Vista and later and in Windows Server 2008 and later; and during web enrollment in Windows 2000, Windows XP, and Windows Server 2003.
 
-<28> Section 3.1.1.4.3.4: Windows 8.1 and later and Windows Server 2012 R2 and later support key attestation.
+<29> Section 3.1.1.4.3.4: Windows 8.1 and later and Windows Server 2012 R2 and later support key attestation.
 
-<29> Section 3.1.1.4.3.4.1.2: Only Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 and later support this behavior.
+<30> Section 3.1.1.4.3.4: Windows 10 v1809 through Windows 11, version 26H1 with [MSFT-CVE-2026-6726] and Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support V2 certificate request attributes szOID_ENROLL_V2_AIK_INFO, szOID_ENROLL_V2_ATTESTATION_STATEMENT, szOID_ENROLL_V2_CONTAINER_NAME, szOID_ENROLL_V2_EK_ALGORITHM, and szOID_ENROLL_V2_EK_PARAMETER.
 
-<30> Section 3.1.1.4.3.4.1.2: Windows 8.1 and later and Windows Server 2012 R2 and later support these processing rules.
+<31> Section 3.1.1.4.3.4.1.2: Only Windows Server 2012 R2, Windows Server 2016, Windows Server operating system, and Windows Server 2019 and later support this behavior.
 
-<31> Section 3.1.1.4.3.4.2: Support for [**AIK**](#gt_attestation-identity-key-aik) Attestation (subject only) is included in Windows 10, Windows Server 2016, Windows Server operating system, and in Windows Server 2019 and later.
+<32> Section 3.1.1.4.3.4.1.2: Windows 8.1 and later and Windows Server 2012 R2 and later support these processing rules.
 
-<32> Section 3.1.1.4.3.8.1: Pre-sign certificate processing is supported by the operating systems specified in [[MSKB-5017379]](https://go.microsoft.com/fwlink/?linkid=2206555) and [[MSKB-5017381]](https://go.microsoft.com/fwlink/?linkid=2205487), each with its related KB article download installed.
+<33> Section 3.1.1.4.3.4.1.2: Windows 10 v1809 through Windows 11, version 26H1 with [MSFT-CVE-2026-6726] and Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support decoding the challenge as DER- encoded **CRYPT_ATTRIBUTES**.
 
-<33> Section 3.1.1.4.3.9: Windows 11, version 24H2 operating system and Windows 11, version 25H2 operating system with [[MSKB-5095093]](https://go.microsoft.com/fwlink/?LinkId=2371500), Windows Server 2022 with [[MSKB-5099540]](https://go.microsoft.com/fwlink/?LinkId=2371098), Windows Server 2025 with [[MSKB-5099536]](https://go.microsoft.com/fwlink/?LinkId=2371108), and later support EK-based attestation using restricted HMAC key.
+<34> Section 3.1.1.4.3.4.1.3: Windows 10 v1809 through Windows 11, version 26H1 with [MSFT-CVE-2026-6726] and Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support encrypting the attestation claim in EncryptedContent using the CA [**exchange certificate**](#gt_exchange-certificate) for **CRYPT_ATTRIBUTES**.
 
-<34> Section 3.1.1.6: Windows Certificate MMC snap-in has a command to trigger this client.
+<35> Section 3.1.1.4.3.4.2: Support for [**AIK**](#gt_attestation-identity-key-aik) Attestation (subject only) is included in Windows 10, Windows Server 2016, Windows Server operating system, and in Windows Server 2019 and later.
 
-<35> Section 3.1.1.6.2: Windows 8.1 and later and Windows Server 2012 R2 and later support this behavior.
+<36> Section 3.1.1.4.3.8.1: Pre-sign certificate processing is supported by the operating systems specified in [[MSKB-5017379]](https://go.microsoft.com/fwlink/?linkid=2206555) and [[MSKB-5017381]](https://go.microsoft.com/fwlink/?linkid=2205487), each with its related KB article download installed.
 
-<36> Section 3.1.2.1: In the Windows implementation, the **Client_Intermediate_CA_Certificates** collection is stored in the [**Windows registry**](#gt_windows-registry) using the following registry path:
+<37> Section 3.1.1.4.3.9: Windows 10 v1809 through Windows 11, version 26H1 with [MSFT-CVE-2026-6726] and Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support EK-based attestation using restricted HMAC key.
+
+<38> Section 3.1.1.6: Windows Certificate MMC snap-in has a command to trigger this client.
+
+<39> Section 3.1.1.6.2: Windows 8.1 and later and Windows Server 2012 R2 and later support this behavior.
+
+<40> Section 3.1.2.1: In the Windows implementation, the **Client_Intermediate_CA_Certificates** collection is stored in the [**Windows registry**](#gt_windows-registry) using the following registry path:
 
 HKEY_LOCAL_MACHINE\Software\Microsoft\SystemCertificates\CA\Certificates\
 
 A unique registry key for each intermediate CA certificate is added using the thumbprint of the certificate as the key name. Each element in **Client_Intermediate_CA_Certificates** is the [**BLOB**](#gt_binary-large-object-blob) value under the corresponding [**key**](#gt_key) (stored as a binary type).
 
-<37> Section 3.1.2.1: In the Windows implementation, the **Client_Root_CA_Certificates** collection is stored in the Windows registry using the following registry path:
+<41> Section 3.1.2.1: In the Windows implementation, the **Client_Root_CA_Certificates** collection is stored in the Windows registry using the following registry path:
 
 HKEY_LOCAL_MACHINE\Software\Microsoft\SystemCertificates\Root\Certificates\
 
 A unique registry key for each [**root CA**](#gt_root-ca) certificate is added using the thumbprint of the certificate as the key name. Each element in **Client_Root_CA_Certificates** is the BLOB value under the corresponding key (stored as a binary type).
 
-<38> Section 3.1.2.4.2.1: Windows 2000 does not support certificate templates with these versions. Windows XP and Windows Server 2003 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 3. Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 4.
+<42> Section 3.1.2.4.2.1: Windows 2000 does not support certificate templates with these versions. Windows XP and Windows Server 2003 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 3. Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 4.
 
-<39> Section 3.1.2.4.2.1: Windows 8.1 and later and Windows Server 2012 R2 and later support this flag.
+<43> Section 3.1.2.4.2.1: Windows 8.1 and later and Windows Server 2012 R2 and later support this flag.
 
-<40> Section 3.1.2.4.2.1: Windows 2000 does not process the **Certificate.Template.msPKI-Template-Schema-Version** datum and treats all templates with a **Certificate.Template.msPKI-Template-Schema-Version** datum less than 100 as templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1. Windows XP treats templates with the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 0 the same as templates with **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1.
+<44> Section 3.1.2.4.2.1: Windows 2000 does not process the **Certificate.Template.msPKI-Template-Schema-Version** datum and treats all templates with a **Certificate.Template.msPKI-Template-Schema-Version** datum less than 100 as templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1. Windows XP treats templates with the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 0 the same as templates with **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1.
 
-<41> Section 3.1.2.4.2.1: Windows 2000 does not support certificate templates with these versions. Windows XP and Windows Server 2003 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 3. Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 4.
+<45> Section 3.1.2.4.2.1: Windows 2000 does not support certificate templates with these versions. Windows XP and Windows Server 2003 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 3. Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support certificate templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum equal to 4.
 
-<42> Section 3.1.2.4.2.1: Windows 2000 does not process the **Certificate.Template.msPKI-Template-Schema-Version** datum and treats all templates with a **Certificate.Template.revision** datum less than 100 as templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1. Windows XP treats templates with the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 0 the same as templates with **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1.
+<46> Section 3.1.2.4.2.1: Windows 2000 does not process the **Certificate.Template.msPKI-Template-Schema-Version** datum and treats all templates with a **Certificate.Template.revision** datum less than 100 as templates that have the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1. Windows XP treats templates with the **Certificate.Template.msPKI-Template-Schema-Version** datum set to 0 the same as templates with **Certificate.Template.msPKI-Template-Schema-Version** datum set to 1.
 
-<43> Section 3.1.2.4.2.2: The Microsoft Certificate Services client uses the following values for the **Certificate.Template.msPKI-Template-Schema-Version** datum:
+<47> Section 3.1.2.4.2.2: The Microsoft Certificate Services client uses the following values for the **Certificate.Template.msPKI-Template-Schema-Version** datum:
 
 - When the datum does not exist: Windows can use this certificate template.
 - When the value = 1: Windows can use this certificate template.
@@ -7981,87 +8089,87 @@ A unique registry key for each [**root CA**](#gt_root-ca) certificate is added u
 - When the value = 3: Windows 2000, Windows XP, and Windows Server 2003 cannot use this certificate template.
 - When the value = 4: Windows 8 and later and Windows Server 2012 and later can use this certificate template.
 - For other values, existing Windows clients ignore the certificate template.
-<44> Section 3.1.2.4.2.2.1.5: The Microsoft Certificate Services client uses this flag with the [**cryptographic service provider (CSP)**](#gt_cryptographic-service-provider-csp) when creating the cryptographic keys.
+<48> Section 3.1.2.4.2.2.1.5: The Microsoft Certificate Services client uses this flag with the [**cryptographic service provider (CSP)**](#gt_cryptographic-service-provider-csp) when creating the cryptographic keys.
 
-<45> Section 3.1.2.4.2.2.1.8: Windows XP and later and Windows Server 2003 and later create this extension only if the **Certificate.Template.msPKI-Template-Schema-Version** datum equals 1 or is not initialized with any value.
+<49> Section 3.1.2.4.2.2.1.8: Windows XP and later and Windows Server 2003 and later create this extension only if the **Certificate.Template.msPKI-Template-Schema-Version** datum equals 1 or is not initialized with any value.
 
-<46> Section 3.1.2.4.2.2.1.9: Windows 2000 does not add certificate template OID extension as an attribute of the request.
+<50> Section 3.1.2.4.2.2.1.9: Windows 2000 does not add certificate template OID extension as an attribute of the request.
 
-<47> Section 3.1.2.4.2.2.2.2: Windows 8.1 and later and Windows Server 2012 R2 and later support these flags.
+<51> Section 3.1.2.4.2.2.2.2: Windows 8.1 and later and Windows Server 2012 R2 and later support these flags.
 
-<48> Section 3.1.2.4.2.2.2.2: Windows 8.1 and later and Windows Server 2012 R2 and later support this behavior.
+<52> Section 3.1.2.4.2.2.2.2: Windows 8.1 and later and Windows Server 2012 R2 and later support this behavior.
 
-<49> Section 3.1.2.4.2.2.2.5: Windows clients default to [**RSA**](#gt_rivest-shamir-adleman-rsa).
+<53> Section 3.1.2.4.2.2.2.5: Windows clients default to [**RSA**](#gt_rivest-shamir-adleman-rsa).
 
-<50> Section 3.1.2.4.2.2.2.5: Windows clients default to set Read permissions on the key associated with the [**certificate**](#gt_certificate) request for the entity sending the certificate request.
+<54> Section 3.1.2.4.2.2.2.5: Windows clients default to set Read permissions on the key associated with the [**certificate**](#gt_certificate) request for the entity sending the certificate request.
 
-<51> Section 3.1.2.4.2.2.2.5: Windows 8.1 and later and Windows Server 2012 R2 and later support this behavior.
+<55> Section 3.1.2.4.2.2.2.5: Windows 8.1 and later and Windows Server 2012 R2 and later support this behavior.
 
-<52> Section 3.1.2.4.2.2.2.5: Windows clients default to [**Triple Data Encryption Standard**](#gt_triple-data-encryption-standard).
+<56> Section 3.1.2.4.2.2.2.5: Windows clients default to [**Triple Data Encryption Standard**](#gt_triple-data-encryption-standard).
 
-<53> Section 3.1.2.4.2.2.2.5: Windows clients default to 168.
+<57> Section 3.1.2.4.2.2.2.5: Windows clients default to 168.
 
-<54> Section 3.1.2.4.2.2.2.5: Windows clients defaults to SHA1.
+<58> Section 3.1.2.4.2.2.2.5: Windows clients defaults to SHA1.
 
-<55> Section 3.1.2.4.2.2.2.5: The Microsoft client uses the msPKI-Key-Usage value with the cryptographic service provider (CSP) when creating the cryptographic keys.
+<59> Section 3.1.2.4.2.2.2.5: The Microsoft client uses the msPKI-Key-Usage value with the cryptographic service provider (CSP) when creating the cryptographic keys.
 
-<56> Section 3.1.2.4.2.2.2.5: Windows clients default to all key usages.
+<60> Section 3.1.2.4.2.2.2.5: Windows clients default to all key usages.
 
-<57> Section 3.1.2.4.2.2.2.6: CryptoAPI, a Windows cryptographic application programming interface, creates a union of the values in the Extended Key Usage and Application Policy extensions. The combined union will be used as the extended key usages for the certificate as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.5.
+<61> Section 3.1.2.4.2.2.2.6: CryptoAPI, a Windows cryptographic application programming interface, creates a union of the values in the Extended Key Usage and Application Policy extensions. The combined union will be used as the extended key usages for the certificate as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.5.
 
-<58> Section 3.1.2.4.2.2.2.7: Windows 7 and later and Windows Server 2008 R2 and later support this flag.
+<62> Section 3.1.2.4.2.2.2.7: Windows 7 and later and Windows Server 2008 R2 and later support this flag.
 
-<59> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later ignore this flag.
+<63> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later ignore this flag.
 
-<60> Section 3.1.2.4.2.2.2.8: Windows uses the Data Protection API (DPAPI) to protect [**private keys**](#gt_private-key). For more information, see [[MSDN-DPAPI]](https://go.microsoft.com/fwlink/?LinkId=89993).
+<64> Section 3.1.2.4.2.2.2.8: Windows uses the Data Protection API (DPAPI) to protect [**private keys**](#gt_private-key). For more information, see [[MSDN-DPAPI]](https://go.microsoft.com/fwlink/?LinkId=89993).
 
-<61> Section 3.1.2.4.2.2.2.8: Windows 2000, Windows XP, and Windows Server 2003 do not support this flag.
+<65> Section 3.1.2.4.2.2.2.8: Windows 2000, Windows XP, and Windows Server 2003 do not support this flag.
 
-<62> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later support this flag.
+<66> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later support this flag.
 
-<63> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later support this flag.
+<67> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later support this flag.
 
-<64> Section 3.1.2.4.2.2.2.8: Windows 8.1 and later and Windows Server 2012 R2 and later support this flag.
+<68> Section 3.1.2.4.2.2.2.8: Windows 8.1 and later and Windows Server 2012 R2 and later support this flag.
 
-<65> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later implement the **Client_Current_Version** ADM element.
+<69> Section 3.1.2.4.2.2.2.8: Windows 8 and later and Windows Server 2012 and later implement the **Client_Current_Version** ADM element.
 
-<66> Section 3.1.2.4.2.2.2.10: Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 ignore the CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME flag.
+<70> Section 3.1.2.4.2.2.2.10: Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 ignore the CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME flag.
 
-<67> Section 3.2: Windows 2000 Server doesn't implement ICertRequestD2 interface.
+<71> Section 3.2: Windows 2000 Server doesn't implement ICertRequestD2 interface.
 
-<68> Section 3.2: All Microsoft CAs implement selection among the CA modes during setup.
+<72> Section 3.2: All Microsoft CAs implement selection among the CA modes during setup.
 
-<69> Section 3.2: CAs that run on Windows Server 2003 Datacenter Edition operating system, Windows Server 2003 Enterprise Edition operating system, Windows Server 2008 Datacenter operating system, and Windows Server 2008 Enterprise operating system implement [**key archival**](#gt_key-archival). CAs that run on Windows Server 2003 Standard Edition operating system and on Windows Server 2008 and later do not implement key archival.
+<73> Section 3.2: CAs that run on Windows Server 2003 Datacenter Edition operating system, Windows Server 2003 Enterprise Edition operating system, Windows Server 2008 Datacenter operating system, and Windows Server 2008 Enterprise operating system implement [**key archival**](#gt_key-archival). CAs that run on Windows Server 2003 Standard Edition operating system and on Windows Server 2008 and later do not implement key archival.
 
-<70> Section 3.2.1.1.1.2: This element and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<74> Section 3.2.1.1.1.2: This element and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<71> Section 3.2.1.1.1.2: This functionality is available in Windows Server 2022 and later OS versions after installing August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
+<75> Section 3.2.1.1.1.2: This functionality is available in Windows Server 2022 and later OS versions after installing August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
 
-<72> Section 3.2.1.1.3: This column and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<76> Section 3.2.1.1.3: This column and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<73> Section 3.2.1.1.4: Windows clients use this CA property for diagnostics information only on the operating system that hosts the CA. The Windows Client Certificate Enrollment Protocol does not depend on the value of this property.
+<77> Section 3.2.1.1.4: Windows clients use this CA property for diagnostics information only on the operating system that hosts the CA. The Windows Client Certificate Enrollment Protocol does not depend on the value of this property.
 
 CAs running on Windows Server 2003 Enterprise Edition, Windows Server 2003 Datacenter Edition, Windows Server 2008 Enterprise operating system, and Windows Server 2008 Datacenter operating system support key archival and are considered "advanced server". Windows Server 2003 Standard Edition and Windows Server 2008 and later CAs are considered "standard server".
 
-<74> Section 3.2.1.1.4: This functionality is available in Windows Server 2022 after installing the August (8B) update. However, the fix is currently disabled and will be enabled starting with the January 2026 (2026.01B) or later Windows updates.
+<78> Section 3.2.1.1.4: This functionality is available in Windows Server 2022 after installing the August (8B) update. However, the fix is currently disabled and will be enabled starting with the January 2026 (2026.01B) or later Windows updates.
 
-<75> Section 3.2.1.1.4: This functionality is available in Windows Server 2022 after installing the August (8B) update. However, the fix is currently disabled and will be enabled starting with the January 2026 (2026.01B) or later Windows updates.
-
-<76> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
-
-<77> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
-
-<78> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
-
-<79> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<79> Section 3.2.1.1.4: This functionality is available in Windows Server 2022 after installing the August (8B) update. However, the fix is currently disabled and will be enabled starting with the January 2026 (2026.01B) or later Windows updates.
 
 <80> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<81> Section 3.2.1.4.2.1: Windows 2000 does not return an error.
+<81> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<82> Section 3.2.1.4.2.1: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section [3.2.1.1.4](#Section_3.2.1.1.4)) setting.
+<82> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<83> Section 3.2.1.4.2.1: If pdwDisposition was request failed (1, or an error code from [MS-ERREF](../MS-ERREF/MS-ERREF.md)), the disposition messages include the following:
+<83> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+
+<84> Section 3.2.1.1.4: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+
+<85> Section 3.2.1.4.2.1: Windows 2000 does not return an error.
+
+<86> Section 3.2.1.4.2.1: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section [3.2.1.1.4](#Section_3.2.1.1.4)) setting.
+
+<87> Section 3.2.1.4.2.1: If pdwDisposition was request failed (1, or an error code from [MS-ERREF](../MS-ERREF/MS-ERREF.md)), the disposition messages include the following:
 
 - Error archiving private key.
 - Error parsing request.
@@ -8084,15 +8192,15 @@ If pdwDisposition was request pending (5), the disposition messages include the 
 - Taken under submission.
 - Taken under submission, combined with an informational message from the policy algorithm.
 - The disposition message contains text in the system language of the server.
-<84> Section 3.2.1.4.2.1.2: The **ExpirationDate** value of the OID szENROLLMENT_NAME_VALUE_PAIR (1.3.6.1.4.1.311.13.2.1) is supported in Windows Vista and later and in Windows Server 2008 and later.
+<88> Section 3.2.1.4.2.1.2: The **ExpirationDate** value of the OID szENROLLMENT_NAME_VALUE_PAIR (1.3.6.1.4.1.311.13.2.1) is supported in Windows Vista and later and in Windows Server 2008 and later.
 
-<85> Section 3.2.1.4.2.1.2: The **ExpirationDate** value of *the OID szENROLLMENT_NAME_VALUE_PAIR* (1.3.6.1.4.1.311.13.2.1) is supported in Windows Vista and later and in Windows Server 2008 and later.
+<89> Section 3.2.1.4.2.1.2: The **ExpirationDate** value of *the OID szENROLLMENT_NAME_VALUE_PAIR* (1.3.6.1.4.1.311.13.2.1) is supported in Windows Vista and later and in Windows Server 2008 and later.
 
-<86> Section 3.2.1.4.2.1.2: Only a Windows 2000 CA publishes the certificate to the location that is provided by the requestor through this attribute.
+<90> Section 3.2.1.4.2.1.2: Only a Windows 2000 CA publishes the certificate to the location that is provided by the requestor through this attribute.
 
-<87> Section 3.2.1.4.2.1.3: Windows 2000, Windows Server 2003, and Windows Server 2008 CAs will set this value to 0 in this case.
+<91> Section 3.2.1.4.2.1.3: Windows 2000, Windows Server 2003, and Windows Server 2008 CAs will set this value to 0 in this case.
 
-<88> Section 3.2.1.4.2.1.4.1.1: Microsoft [**standalone CAs**](#gt_standalone-ca) will not add a requested extension to the certificate unless it is configured as allowed locally by the administrator. By default when the CA is installed, the following extensions are allowed:
+<92> Section 3.2.1.4.2.1.4.1.1: Microsoft [**standalone CAs**](#gt_standalone-ca) will not add a requested extension to the certificate unless it is configured as allowed locally by the administrator. By default when the CA is installed, the following extensions are allowed:
 
 - 1.2.840.113549.1.9.15 - SMIME Capabilities
 - 1.3.6.1.4.1.311.21.1 - CA Version
@@ -8110,11 +8218,11 @@ If pdwDisposition was request pending (5), the disposition messages include the 
 - 2.5.29.33 - Policy Mappings
 - 2.5.29.36 - Policy Constraints
 - 2.5.29.37 - Enhanced Key Usage
-<89> Section 3.2.1.4.2.1.4.4: A Windows CA stores these additional values in the Request table.
+<93> Section 3.2.1.4.2.1.4.4: A Windows CA stores these additional values in the Request table.
 
-<90> Section 3.2.1.4.2.1.4.4: This column and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<94> Section 3.2.1.4.2.1.4.4: This column and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<91> Section 3.2.1.4.2.1.4.5: If the disposition was Error (30), the disposition messages include the following:
+<95> Section 3.2.1.4.2.1.4.5: If the disposition was Error (30), the disposition messages include the following:
 
 - Error archiving private key.
 - Error parsing request.
@@ -8137,45 +8245,45 @@ If the disposition was Pending (9), the disposition messages include the followi
 - Taken under submission.
 - Taken under submission, combined with an informational message from the policy algorithm.
 - The disposition message will contain text in the system language of the server.
-<92> Section 3.2.1.4.2.1.4.6: All applicable Windows Server releases support this behavior, with exception of Windows 2000.
+<96> Section 3.2.1.4.2.1.4.6: All applicable Windows Server releases support this behavior, with exception of Windows 2000.
 
-<93> Section 3.2.1.4.2.1.4.6: All applicable Windows Server releases support this behavior, with exception of Windows 2000.
+<97> Section 3.2.1.4.2.1.4.6: All applicable Windows Server releases support this behavior, with exception of Windows 2000.
 
-<94> Section 3.2.1.4.2.1.4.8.1: This functionality is available in Windows Server 2022 and later OS versions after installing August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
+<98> Section 3.2.1.4.2.1.4.8.1: This functionality is available in Windows Server 2022 and later OS versions after installing August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
 
-<95> Section 3.2.1.4.2.1.4.10.1: This functionality is available in Windows Server 2022 and later OS versions after installing August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
+<99> Section 3.2.1.4.2.1.4.10.1: This functionality is available in Windows Server 2022 and later OS versions after installing August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
 
-<96> Section 3.2.1.4.2.2: Windows 2000 does not return an error.
+<100> Section 3.2.1.4.2.2: Windows 2000 does not return an error.
 
-<97> Section 3.2.1.4.2.2: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
+<101> Section 3.2.1.4.2.2: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
 
-<98> Section 3.2.1.4.2.2.2: Applicable Windows Server releases implement this property, with exception of Windows 2000.
+<102> Section 3.2.1.4.2.2.2: Applicable Windows Server releases implement this property, with exception of Windows 2000.
 
-<99> Section 3.2.1.4.2.3: Windows 2000 does not return an error.
+<103> Section 3.2.1.4.2.3: Windows 2000 does not return an error.
 
-<100> Section 3.2.1.4.2.3: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
+<104> Section 3.2.1.4.2.3: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
 
-<101> Section 3.2.1.4.3.1.2: Windows 2000, Windows Server 2003, and Windows Server 2008 CAs will set this value to 0 in this case.
+<105> Section 3.2.1.4.3.1.2: Windows 2000, Windows Server 2003, and Windows Server 2008 CAs will set this value to 0 in this case.
 
-<102> Section 3.2.1.4.3.2: Windows 2000 does not return an error.
+<106> Section 3.2.1.4.3.2: Windows 2000 does not return an error.
 
-<103> Section 3.2.1.4.3.2: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
+<107> Section 3.2.1.4.3.2: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
 
-<104> Section 3.2.1.4.3.2.1: The format of the string is "w.x:y.z" in all applicable Windows Server releases, with the exception of Windows Server 2016, Windows Server operating system, and Windows Server 2019 and later.
+<108> Section 3.2.1.4.3.2.1: The format of the string is "w.x:y.z" in all applicable Windows Server releases, with the exception of Windows Server 2016, Windows Server operating system, and Windows Server 2019 and later.
 
-<105> Section 3.2.1.4.3.2.1: This string is based on the file version attribute of the certsrv.exe file. For example, in Windows Server 2003, the string is "5.2:3790.0" and in Windows Server 2003 operating system with Service Pack 1 (SP1), the string is "5.2:3790.1830". The string might change to represent servicing changes to the CA binaries.
+<109> Section 3.2.1.4.3.2.1: This string is based on the file version attribute of the certsrv.exe file. For example, in Windows Server 2003, the string is "5.2:3790.0" and in Windows Server 2003 operating system with Service Pack 1 (SP1), the string is "5.2:3790.1830". The string might change to represent servicing changes to the CA binaries.
 
-<106> Section 3.2.1.4.3.2.2: The format of the string is "w.x:y.z" in all applicable Windows Server releases, with the exception of Windows Server 2016, Windows Server operating system, and Windows Server 2019 and later.
+<110> Section 3.2.1.4.3.2.2: The format of the string is "w.x:y.z" in all applicable Windows Server releases, with the exception of Windows Server 2016, Windows Server operating system, and Windows Server 2019 and later.
 
-<107> Section 3.2.1.4.3.2.2: This string is based on the product version attribute of the certsrv.exe file. For example, in Windows Server 2003, the string is "5.2:3790.0" and in Windows Server 2003 with SP1, the string is "5.2:3790.1830". The string might change to represent servicing changes to the server product.
+<111> Section 3.2.1.4.3.2.2: This string is based on the product version attribute of the certsrv.exe file. For example, in Windows Server 2003, the string is "5.2:3790.0" and in Windows Server 2003 with SP1, the string is "5.2:3790.1830". The string might change to represent servicing changes to the server product.
 
-<108> Section 3.2.1.4.3.2.3: By default, the Microsoft CA returns the value 1 for this CA property.
+<112> Section 3.2.1.4.3.2.3: By default, the Microsoft CA returns the value 1 for this CA property.
 
-<109> Section 3.2.1.4.3.2.4: By default, if the requested index is 0, a Microsoft CA returns the value "Windows default".
+<113> Section 3.2.1.4.3.2.4: By default, if the requested index is 0, a Microsoft CA returns the value "Windows default".
 
-<110> Section 3.2.1.4.3.2.5: By default, a Windows CA returns the value "Windows default".
+<114> Section 3.2.1.4.3.2.5: By default, a Windows CA returns the value "Windows default".
 
-<111> Section 3.2.1.4.3.2.8: In Windows 2000 Server and Windows Server 2003 CAs, the Shared Folder feature is disabled and can be enabled through the CA setup wizard. If the feature is enabled, the folder contains a file named "certsrv.txt".
+<115> Section 3.2.1.4.3.2.8: In Windows 2000 Server and Windows Server 2003 CAs, the Shared Folder feature is disabled and can be enabled through the CA setup wizard. If the feature is enabled, the folder contains a file named "certsrv.txt".
 
 In Windows Server 2008 and later, the Shared Folder feature is also disabled, but it cannot be enabled through the CA setup wizard. If Windows Server 2003 CA has the shared folder enabled and is upgraded to the Windows Server 2008 CA, the folder remains shared.
 
@@ -8216,7 +8324,7 @@ Each field in the preceding string is described in the following table. Optional
 | Variable | CASanitizedS | Optional. The sanitized S from the CA certificate subject. |
 | Variable | CASanitizedC | Optional. The sanitized C from the CA certificate subject. |
 | A configuration string that contains the CA [**Domain Name System (DNS)**](#gt_domain-name-system-dns) name and the sanitized common name. | CAFullDNSMachineName\ CASanitizedCommonName | - |
-| Optional. The file name of the CA [**exchange certificate**](#gt_exchange-certificate). This field is never used and the value is empty. | ExchangeCertName | - |
+| Variable | ExchangeCertName | Optional. The file name of the CA exchange certificate. This field is never used and the value is empty. |
 | Optional. The file name of the CA signing certificate. For the first CA signing certificate only, this is stored in the %windir%\System32\CertSrv\CertEnroll [**directory**](#gt_directory). | SignatureCertName | - |
 | Variable | Description | Optional. This is the CA description. If specified, this is the sanitized CN from the CA certificate subject. |
 
@@ -8228,79 +8336,87 @@ The shared folder can also contain the additional files specified as follows:
 - Certificate request files: [**Subordinate CAs**](#gt_subordinate-ca) copy the certificate request file to this folder. This file contains data on the certificate that the subordinate CA requests from its parent CA. The file is encoded by using DER, and the naming convention is "CAComputerDNSName_CASanitizedName(CertIndex).req". Because the CertIndex value is based on CA certificate renewal, no index value is present for the first certificate.
 **Note** No Windows-based clients depend on these certificates being stored in the shared folder.
 
-<112> Section 3.2.1.4.3.2.16: In some cases, the CA signing certificate with "certificate index" zero could be returned instead of the actual signing certificate that issued Current_CA_Exchange_Cert.This behavior can be automatically fixed by restarting the certificate service whenever a new exchange certificate is created.
+<116> Section 3.2.1.4.3.2.16: In some cases, the CA signing certificate with "certificate index" zero could be returned instead of the actual signing certificate that issued Current_CA_Exchange_Cert.This behavior can be automatically fixed by restarting the certificate service whenever a new exchange certificate is created.
 
-<113> Section 3.2.1.4.3.2.21: Windows Server 2003 returns the value 40. Windows Server 2008 returns the value 43, Windows Server 2008 R2 returns the value 44, and Windows Server 2012 and later return the value 45.
+<117> Section 3.2.1.4.3.2.21: Windows Server 2003 returns the value 40. Windows Server 2008 returns the value 43, Windows Server 2008 R2 returns the value 44, and Windows Server 2012 and later return the value 45.
 
-<114> Section 3.2.1.4.3.2.23: Microsoft Windows 2000, Windows Server 2003, and Windows Server 2008 CAs do not implement **CR_PROP_ROLESEPARATIONENABLED** property and always return E_INVALIDARG (0x80070057).
+<118> Section 3.2.1.4.3.2.23: Microsoft Windows 2000, Windows Server 2003, and Windows Server 2008 CAs do not implement **CR_PROP_ROLESEPARATIONENABLED** property and always return E_INVALIDARG (0x80070057).
 
-<115> Section 3.2.1.4.3.2.24: For more information on the Windows implementation for KRAs and key archival, see [[MSFT-ARCHIVE]](https://go.microsoft.com/fwlink/?LinkId=90177).
+<119> Section 3.2.1.4.3.2.24: For more information on the Windows implementation for KRAs and key archival, see [[MSFT-ARCHIVE]](https://go.microsoft.com/fwlink/?LinkId=90177).
 
-<116> Section 3.2.1.4.3.2.33: In some cases, the CA signing certificate with "certificate index" zero could be returned instead of the actual signing certificate that issued Current_CA_Exchange_Cert. This behavior can be automatically fixed by restarting the certificate service whenever a new exchange certificate is created.
+<120> Section 3.2.1.4.3.2.33: In some cases, the CA signing certificate with "certificate index" zero could be returned instead of the actual signing certificate that issued Current_CA_Exchange_Cert. This behavior can be automatically fixed by restarting the certificate service whenever a new exchange certificate is created.
 
-<117> Section 3.2.1.4.3.2.41: Windows 2000 and Windows Server 2003 CAs do not implement this property and always return 0x80070057 (E_INVALIDARG).
+<121> Section 3.2.1.4.3.2.41: Windows 2000 and Windows Server 2003 CAs do not implement this property and always return 0x80070057 (E_INVALIDARG).
 
-<118> Section 3.2.1.4.3.2.42: Windows 2000 and Windows Server 2003 CAs do not implement this property and always return 0x80070057 (E_INVALIDARG).
+<122> Section 3.2.1.4.3.2.42: Windows 2000 and Windows Server 2003 CAs do not implement this property and always return 0x80070057 (E_INVALIDARG).
 
-<119> Section 3.2.1.4.3.2.43: Windows 2000 and Windows Server 2003 CAs do not implement this property and always return 0x80070057 (E_INVALIDARG).
+<123> Section 3.2.1.4.3.2.43: Windows 2000 and Windows Server 2003 CAs do not implement this property and always return 0x80070057 (E_INVALIDARG).
 
-<120> Section 3.2.1.4.3.2.44: This property is supported by Windows Server 2008 R2 and later.
+<124> Section 3.2.1.4.3.2.44: This property is supported by Windows Server 2008 R2 and later.
 
-<121> Section 3.2.1.4.3.2.45: The CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag is supported by Windows 8 and later clients.
+<125> Section 3.2.1.4.3.2.45: The CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag is supported by Windows 8 and later clients.
 
-<122> Section 3.2.1.4.3.3: In Windows Server 2003 and later the error is E_ACCESSDENIED (0x80000009). Windows 2000 does not return an error.
+<126> Section 3.2.1.4.3.3: In Windows Server 2003 and later the error is E_ACCESSDENIED (0x80000009). Windows 2000 does not return an error.
 
-<123> Section 3.2.1.4.3.3: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
+<127> Section 3.2.1.4.3.3: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, require that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTREQUEST (section 3.2.1.1.4) setting.
 
-<124> Section 3.2.2.1.2.1: Windows 2000 operating system Service Pack 1 (SP1) and Windows 2000 operating system Service Pack 2 (SP2) set the timeLimit to 300.
+<128> Section 3.2.2.1.2.1: Windows 2000 operating system Service Pack 1 (SP1) and Windows 2000 operating system Service Pack 2 (SP2) set the timeLimit to 300.
 
-<125> Section 3.2.2.1.3.1: Windows 2000 does not support this feature.
+<129> Section 3.2.2.1.3.1: Windows 2000 does not support this feature.
 
-<126> Section 3.2.2.1.3.1: The certification authority performs validation of the provided **DCName** on Windows Server 2012 through Windows Server 2025 with [[MSFT-CVE-2026-54121]](https://go.microsoft.com/fwlink/?LinkId=2370560) installed.
+<130> Section 3.2.2.1.3.1: The certification authority performs validation of the provided **DCName** on Windows Server 2012 through Windows Server 2025 with [[MSFT-CVE-2026-54121]](https://go.microsoft.com/fwlink/?LinkId=2370560) installed.
 
-<127> Section 3.2.2.1.3.1: The certification authority cross-validates the **objectSid** attribute on Windows Server 2012 through Windows Server 2025 with [MSFT-CVE-2026-54121] installed.
+<131> Section 3.2.2.1.3.1: The certification authority cross-validates the **objectSid** attribute on Windows Server 2012 through Windows Server 2025 with [MSFT-CVE-2026-54121] installed.
 
-<128> Section 3.2.2.3: In Windows 2000, the maximum size of Collection_Of_End_Entity_Object_Query_AD_Connections is always one.
+<132> Section 3.2.2.3: In Windows 2000, the maximum size of Collection_Of_End_Entity_Object_Query_AD_Connections is always one.
 
-<129> Section 3.2.2.5: Windows 2000 Server only supports templates that do not have msPKI-Template-Schema-Version, or that have msPKI-Template-Schema-Version set to 0x1. Windows Server 2003 only supports templates that do not have msPKI-Template-Schema-Version, or that have msPKI-Template-Schema-Version set to 0x1 or 0x2. Windows Server 2008 and Windows Server 2008 R2 CAs only support templates that do not have msPKI-Template-Schema-Version or that have msPKI-Template-Schema-Version set to 0x1, 0x2, or 0x3.
+<133> Section 3.2.2.5: Windows 2000 Server only supports templates that do not have msPKI-Template-Schema-Version, or that have msPKI-Template-Schema-Version set to 0x1. Windows Server 2003 only supports templates that do not have msPKI-Template-Schema-Version, or that have msPKI-Template-Schema-Version set to 0x1 or 0x2. Windows Server 2008 and Windows Server 2008 R2 CAs only support templates that do not have msPKI-Template-Schema-Version or that have msPKI-Template-Schema-Version set to 0x1, 0x2, or 0x3.
 
-<130> Section 3.2.2.6.2.1.2.1: Windows Server 2008 and later CAs implement this data.
+<134> Section 3.2.2.6.2.1.2.1: Windows Server 2008 and later CAs implement this data.
 
-<131> Section 3.2.2.6.2.1.2.2: Windows 2000 and Windows Server 2003 CAs only attempt to calculate the SHA1 hash.
+<135> Section 3.2.2.6.2.1.2.2: Windows 2000 and Windows Server 2003 CAs only attempt to calculate the SHA1 hash.
 
-<132> Section 3.2.2.6.2.1.2.4: These types of requests are supported by Windows Server 2008 R2 and later.
+<136> Section 3.2.2.6.2.1.2.4: These types of requests are supported by Windows Server 2008 R2 and later.
 
-<133> Section 3.2.2.6.2.1.2.5: Windows 8.1 and later and Windows Server 2012 R2 and later support key attestation.
+<137> Section 3.2.2.6.2.1.2.5: Windows 8.1 and later and Windows Server 2012 R2 and later support key attestation.
 
-<134> Section 3.2.2.6.2.1.2.5: In the Windows implementation, the value of this string is "Microsoft Platform Crypto Provider".
+<138> Section 3.2.2.6.2.1.2.5: Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support szOID_ENROLL_V2_AIK_INFO, szOID_ENROLL_V2_ATTESTATION_STATEMENT, szOID_ENROLL_KSP_NAME, and szOID_ENROLL_V2_CONTAINER_NAME attributes.
 
-<135> Section 3.2.2.6.2.1.4.4.1: Windows Server 2008 R2 and later support this flag.
+<139> Section 3.2.2.6.2.1.2.5: In the Windows implementation, the value of this string is "Microsoft Platform Crypto Provider".
 
-<136> Section 3.2.2.6.2.1.4.5.6: Windows Server 2008 and later support this flag.
+<140> Section 3.2.2.6.2.1.2.7: Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support V2 AIK attestation processing, including AIK validation and attestation challenge generation.
 
-<137> Section 3.2.2.6.2.1.4.5.6: Windows Server 2008 R2 and later support this flag.
+<141> Section 3.2.2.6.2.1.2.8: Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support CR_FLG_V2CHALLENGE flag validation.
 
-<138> Section 3.2.2.6.2.1.4.5.6: Windows Server 2008 R2 and later support this flag.
+<142> Section 3.2.2.6.2.1.4.4.1: Windows Server 2008 R2 and later support this flag.
 
-<139> Section 3.2.2.6.2.1.4.5.6: Windows Server 2012 and later support this flag.
+<143> Section 3.2.2.6.2.1.4.5.6: Windows Server 2008 and later support this flag.
 
-<140> Section 3.2.2.6.2.1.4.5.6: Windows Server 2012 and later support this flag.
+<144> Section 3.2.2.6.2.1.4.5.6: Windows Server 2008 R2 and later support this flag.
 
-<141> Section 3.2.2.6.2.1.4.5.7: Flag CT_FLAG_REQUIRE_SAME_KEY_RENEWAL is supported by Windows Server 2012 and later.
+<145> Section 3.2.2.6.2.1.4.5.6: Windows Server 2008 R2 and later support this flag.
 
-<142> Section 3.2.2.6.2.1.4.5.7: This flag is supported by Windows Server 2012 and later.
+<146> Section 3.2.2.6.2.1.4.5.6: Windows Server 2012 and later support this flag.
 
-<143> Section 3.2.2.6.2.1.4.5.7: These flags are supported only in Windows Server 2012 R2 and later.
+<147> Section 3.2.2.6.2.1.4.5.6: Windows Server 2012 and later support this flag.
 
-<144> Section 3.2.2.6.2.1.4.5.7: Windows Server 2012 and later implement the **Server_Current_Version** ADM element.
+<148> Section 3.2.2.6.2.1.4.5.7: Flag CT_FLAG_REQUIRE_SAME_KEY_RENEWAL is supported by Windows Server 2012 and later.
 
-<145> Section 3.2.2.6.2.1.4.5.8: The CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag is supported by Windows Server 2012 and later.
+<149> Section 3.2.2.6.2.1.4.5.7: This flag is supported by Windows Server 2012 and later.
 
-<146> Section 3.2.2.6.2.1.4.5.8: The CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag is supported by Windows Server 2012 and later.
+<150> Section 3.2.2.6.2.1.4.5.7: Windows Server 2019 through Windows Server 2025 with [MSFT-CVE-2026-6726], and later support CT_FLAG_REQUIRE_V2_ATTESTATION flag.
 
-<147> Section 3.2.2.6.2.1.4.5.9: Windows Server 2008 and later support the CT_FLAG_SUBJECT_ALT_REQUIRE_DOMAIN_DNS flag.
+<151> Section 3.2.2.6.2.1.4.5.7: These flags are supported only in Windows Server 2012 R2 and later.
 
-<148> Section 3.2.2.6.3.1.1: The format of the returned value depends on the Active Directory schema.
+<152> Section 3.2.2.6.2.1.4.5.7: Windows Server 2012 and later implement the **Server_Current_Version** ADM element.
+
+<153> Section 3.2.2.6.2.1.4.5.8: The CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag is supported by Windows Server 2012 and later.
+
+<154> Section 3.2.2.6.2.1.4.5.8: The CT_FLAG_ISSUANCE_POLICIES_FROM_REQUEST flag is supported by Windows Server 2012 and later.
+
+<155> Section 3.2.2.6.2.1.4.5.9: Windows Server 2008 and later support the CT_FLAG_SUBJECT_ALT_REQUIRE_DOMAIN_DNS flag.
+
+<156> Section 3.2.2.6.3.1.1: The format of the returned value depends on the Active Directory schema.
 
 For a [**DC**](#gt_domain-controller-dc) running with a Windows Server 2003 Active Directory schema, a Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, or Windows Server 2012 R2 Active Directory Domain Services (AD DS) schema, or Windows Server 2016 Active Directory Domain Services (AD DS) schema, or Windows Server operating system Active Directory Domain Services (AD DS) schema, or a Windows Server 2019 and later Active Directory Domain Services (AD DS) schema:
 
@@ -8333,17 +8449,20 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.2.7.16](#Section_2.2.2.7.16) szOID_ENROLL_SCEP_KEY_ATTESTATION_CHALLENGE_ANSWER | Added new section for "szOID_ENROLL_SCEP_KEY_ATTESTATION_CHALLENGE_ANSWER" attribute. | Major |
-| [2.2.2.7.17](#Section_2.2.2.7.17) szOID_ENROLL_SCEP_CLIENT_REQUEST | Added new section for "szOID_ENROLL_SCEP_CLIENT_REQUEST" attribute. | Major |
-| [3.1.1.4.3.9](#Section_3.1.1.4.3.9) EK-Based Attestation Using Restricted HMAC Key | Added new section and WBN for "EK-Based Attestation Using Restricted HMAC Key" client request. | Major |
-| [3.1.1.4.3.9.1](#Section_3.1.1.4.3.9.1) New Certificate Request with EK Information | Added new section "New Certificate Request with EK Information" client request. | Major |
-| [3.1.1.4.3.9.2](#Section_3.1.1.4.3.9.2) Certificate Request with AIK Attestation Claim | Added new section "Certificate Request with AIK Attestation Claim" client request. | Major |
-| [3.2.1.4.2.1.4.1.5](#Section_3.2.1.4.2.1.4.1.5) Responding to a New Certificate Request with EK Information | Added new section "Certificate Request with AIK Attestation Claim" server response. | Major |
-| [3.2.1.4.2.1.4.1.6](#Section_3.2.1.4.2.1.4.1.6) Responding to the Second PKI Operation Request | Added new section "Responding to the Second PKI Operation Request" server response. | Major |
-| [3.2.2.1.3.1](#Section_3.2.2.1.3.1) Search Requests | 41026 : Added processing rules for DCName validation. | Major |
-| 3.2.2.1.3.1 Search Requests | 41026 : Added search retry behavior using EndEntityDistinguishedName for cross-forest referrals. | Major |
-| 3.2.2.1.3.1 Search Requests | 41026 : Added objectSid cross-validation requirements and a WBN for the supported Windows Server versions. | Major |
-| 3.2.2.1.3.1 Search Requests | 41026 : Added a WBN documenting DCName validation on applicable server versions. | Major |
+| [2.2.2.7.18](#Section_2.2.2.7.18) szOID_ENROLL_V2_CONTAINER_NAME | Added new section for "szOID_ENROLL_V2_CONTAINER_NAME" attribute. | Major |
+| [2.2.2.7.19](#Section_2.2.2.7.19) szOID_ENROLL_V2_EK_ALGORITHM | Added new section for "szOID_ENROLL_V2_EK_ALGORITHM" attribute. | Major |
+| [2.2.2.7.20](#Section_2.2.2.7.20) szOID_ENROLL_V2_EK_PARAMETER | Added new section for "szOID_ENROLL_V2_EK_PARAMETER" attribute. | Major |
+| [2.2.2.7.21](#Section_2.2.2.7.21) szOID_ENROLL_V2_AIK_INFO | Added new section for "szOID_ENROLL_V2_AIK_INFO" attribute. | Major |
+| [2.2.2.7.22](#Section_2.2.2.7.22) szOID_ENROLL_V2_ATTESTATION_STATEMENT | Added new section for "szOID_ENROLL_V2_ATTESTATION_STATEMENT" attribute. | Major |
+| [2.2.2.8.1.1](#Section_2.2.2.8.1.1) szOID_ENROLL_ATTESTATION_CHALLENGE | Added support for DER-encoded CRYPT_ATTRIBUTES challenges containing the specified CRYPT_ATTRIBUTE values for V2 AIK enrollment. | Major |
+| [3.1.1.4.3.4](#Section_3.1.1.4.3.4) Certificate Request with Key Attestation | Added support for V2 AIK attestation, including persistent V2 AIK creation and the `szOID_ENROLL_V2_AIK_INFO`, `szOID_ENROLL_V2_ATTESTATION_STATEMENT`, and `szOID_ENROLL_V2_CONTAINER_NAME` request attributes. | Major |
+| [3.1.1.4.3.4.1.2](#Section_3.1.1.4.3.4.1.2) Responding to a CA Challenge Message | Added support for V2 challenge processing using the V2 AIK and EK, including attestation claim generation and V2 AIK cleanup. | Major |
+| [3.1.1.4.3.4.1.3](#Section_3.1.1.4.3.4.1.3) Certificate Request with Challenge Response | Added support for encrypting the attestation claim with the CA exchange certificate for `CRYPT_ATTRIBUTES` challenges. | Major |
+| [3.2.2.6.2.1.2.5](#Section_3.2.2.6.2.1.2.5) Processing Rules for an Initial Key Attestation Request | Added support for processing requests containing `szOID_ENROLL_EK_INFO` and the specified V2 enrollment attributes. | Major |
+| [3.2.2.6.2.1.2.7](#Section_3.2.2.6.2.1.2.7) Processing Rules for Providing a Challenge Response to an Initial Key Attestation Request in V2 flow | Added a new section describing challenge response processing for initial key attestation requests in the V2 flow. | Major |
+| [3.2.2.6.2.1.2.8](#Section_3.2.2.6.2.1.2.8) Processing Rules for a Challenge Response Request | Added V2 challenge response processing rules for CR_FLG_V2CHALLENGE. | Major |
+| 3.2.2.6.2.1.2.8 Processing Rules for a Challenge Response Request | Added support for processing challenge responses when CR_FLG_V2CHALLENGE is not set. | Major |
+| [3.2.2.6.2.1.4.5.7](#Section_3.2.2.6.2.1.4.5.7) msPKI-Private-Key-Flag | Added the CT_FLAG_REQUIRE_V2_ATTESTATION flag for V2 key attestation processing. | Major |
 
 <a id="revision-history"></a>
 
@@ -8419,3 +8538,4 @@ The changes made to this document are listed in the following table. For more in
 | 8/25/2025 | 52.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 53.0 | Major | Significantly changed the technical content. |
 | 7/14/2026 | 54.0 | Major | Significantly changed the technical content. |
+| 8/24/2026 | 55.0 | Major | Significantly changed the technical content. |

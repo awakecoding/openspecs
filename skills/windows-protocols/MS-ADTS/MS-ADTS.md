@@ -1068,7 +1068,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 5/25/2026.
+Last updated: 8/24/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -2174,15 +2174,19 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSKB-5068966] Microsoft Corporation, "November 11, 2025—Hotpatch KB5068966", November 2025, [https://support.microsoft.com/en-us/topic/november-11-2025-hotpatch-kb5068966-os-build-26100-7092-e923cc54-3b4c-4df1-be42-92ae06d12984](https://go.microsoft.com/fwlink/?linkid=2352638)
 
-[MSKB-5078734] Microsoft Corporation, "March 10, 2026—KB5078734", March 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5078734](https://go.microsoft.com/fwlink/?linkid=2352631)
+[MSKB-5078734] Microsoft Corporation, "March 10, 2026—KB5078734", March 2026, [https://support.microsoft.com/en-us/help/5078734](https://go.microsoft.com/fwlink/?linkid=2352631)
 
-[MSKB-5078752] Microsoft Corporation, "March 10, 2026—KB5078752", March 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5078752](https://go.microsoft.com/fwlink/?linkid=2352626)
+[MSKB-5078752] Microsoft Corporation, "March 10, 2026—KB5078752", March 2026, [https://support.microsoft.com/en-us/help/5078752](https://go.microsoft.com/fwlink/?linkid=2352626)
 
-[MSKB-5078766] Microsoft Corporation, "March 10, 2026—KB5078766", March 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5078766](https://go.microsoft.com/fwlink/?linkid=2352721)
+[MSKB-5078766] Microsoft Corporation, "March 10, 2026—KB5078766", March 2026, [https://support.microsoft.com/en-us/help/5078766](https://go.microsoft.com/fwlink/?linkid=2352721)
 
-[MSKB-5094125] Microsoft Corporation, "June 9, 2026—KB5094125", June 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5094125](https://go.microsoft.com/fwlink/?linkid=2364580)
+[MSKB-5094125] Microsoft Corporation, "June 9, 2026—KB5094125", June 2026, [https://support.microsoft.com/en-us/help/5094125](https://go.microsoft.com/fwlink/?linkid=2364580)
 
-[MSKB-5094128] Microsoft Corporation, "June 9, 2026—KB5094128", June 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5094128](https://go.microsoft.com/fwlink/?linkid=2364762)
+[MSKB-5094128] Microsoft Corporation, "June 9, 2026—KB5094128", June 2026, [https://support.microsoft.com/en-us/help/5094128](https://go.microsoft.com/fwlink/?linkid=2364762)
+
+[MSKB-5122871] Microsoft Corporation, "September 2026 - KB5122871", September 8, 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5122871](https://go.microsoft.com/fwlink/?LinkId=2375902)
+
+[MSKB-5122882] Microsoft Corporation, "September 2026 - KB5122882", September 8, 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5122882](https://go.microsoft.com/fwlink/?LinkId=2376004)
 
 [RFC1122] Braden, R., Ed., "Requirements for Internet Hosts -- Communication Layers", STD 3, RFC 1122, October 1989, [https://www.rfc-editor.org/rfc/rfc1122](https://go.microsoft.com/fwlink/?LinkId=112180)
 
@@ -12348,6 +12352,12 @@ In [**AD DS**](#gt_active-directory-domain-services-ad-ds), if *O* is within the
 
 No [**access check**](#gt_access-check) is performed for [**replicated updates**](#gt_replicated-update).
 
+If a user, group, contact, or person class object contains the msDS-ObjectSoa ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.408) attribute set, and its value matches a Source of Authority policy common name in the SOA-Policies Container (section [6.1.1.5.4.4](#Section_6.1.1.5.4.4)), the SOA modify rules MUST be applied.
+
+- If the policy keyword is set to “Enforced”, only the SIDs listed in the keywords attribute of the SOA policy MAY perform an originating update on the object. The requester SID MUST be granted access in accordance with the access checks defined above.
+- If the policy keyword is set to “audit” or to an undefined value, the action MUST be logged, and originating updates MUST proceed subject to the other access check rules defined above.
+**Note**: SOA modify rules are disabled by default in Windows Server 2022 with [[MSKB-5122882]](https://go.microsoft.com/fwlink/?LinkId=2376004) and Windows Server 2025 with [[MSKB-5122871]](https://go.microsoft.com/fwlink/?LinkId=2375902).
+
 Constraints
 
 For [**originating updates**](#gt_originating-update), the following constraints MUST be satisfied for the Modify DN operation. These constraints are not enforced for [**replicated updates**](#gt_replicated-update).
@@ -12391,6 +12401,12 @@ The requester MUST have all the following permissions to perform a cross-domain 
 For a move operation, the requester MUST be granted right RIGHT_DELETE on *O* or MUST be granted right RIGHT_DS_DELETE_CHILD on *P*.
 
 The requester MUST have performed a Kerberos [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) bind with delegation enabled (see [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 2.8). Delegation MUST be enabled because the server impersonates the requester when it contacts the target [**DC**](#gt_domain-controller-dc) to perform cross-domain move. If Kerberos delegation is not enabled on the [**LDAP connection**](#gt_ldap-connection), the server returns the error *inappropriateAuthentication* / *ERROR_DS_INAPPROPRIATE_AUTH*.
+
+If a user, group, contact, or person class object contains the msDS-ObjectSoa ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.408) attribute set, and its value matches a Source of Authority policy common name in the SOA-Policies Container (section [6.1.1.5.4.4](#Section_6.1.1.5.4.4)), the SOA modify rules MUST be applied.
+
+- If the policy keyword is set to “Enforced”, only the SIDs listed in the keywords attribute of the SOA policy MAY perform an originating update on the object. The requester SID MUST be granted access in accordance with the access checks defined above.
+- If the policy keyword is set to “audit” or to an undefined value, the action MUST be logged, and originating updates MUST proceed subject to the other access check rules defined above.
+**Note**: SOA modify rules are disabled by default in Windows Server 2022 with [[MSKB-5122882]](https://go.microsoft.com/fwlink/?LinkId=2376004) and Windows Server 2025 with [[MSKB-5122871]](https://go.microsoft.com/fwlink/?LinkId=2375902).
 
 Constraints
 
@@ -12682,6 +12698,12 @@ To delete a regular [**object**](#gt_object), at least one of the following perm
 - RIGHT_DELETE on the object being deleted, or
 - RIGHT_DS_DELETE_CHILD on the parent of the object being deleted, when the object is not an [**NC**](#gt_naming-context-nc) root.
 For originating updates of transformations of [**deleted-objects**](#gt_deleted-object) to [**recycled-objects**](#gt_recycled-object), all the same security requirements as those listed for a normal deletion MUST be met. In addition, the requester MUST have the permission RIGHT_DS_REANIMATE_TOMBSTONES on the NC root of the NC where the operation is being performed.
+
+If a user, group, contact, or person class object contains the msDS-ObjectSoa ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.408) attribute set, and its value matches a Source of Authority policy common name in the SOA-Policies Container (section [6.1.1.5.4.4](#Section_6.1.1.5.4.4)), the SOA modify rules MUST be applied.
+
+- If the policy keyword is set to “Enforced”, only the SIDs listed in the keywords attribute of the SOA policy MAY perform an originating update on the object. The requester SID MUST be granted access in accordance with the access checks defined above.
+- If the policy keyword is set to “audit” or to an undefined value, the action MUST be logged, and originating updates MUST proceed subject to the other access check rules defined above.
+**Note**: SOA modify rules are disabled by default in Windows Server 2022 with [[MSKB-5122882]](https://go.microsoft.com/fwlink/?LinkId=2376004) and Windows Server 2025 with [[MSKB-5122871]](https://go.microsoft.com/fwlink/?LinkId=2375902).
 
 <a id="Section_3.1.1.5.5.5"></a>
 ###### 3.1.1.5.5.5 Constraints
@@ -28924,8 +28946,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.1.5.3.1](#Section_3.1.1.5.3.1) Security Considerations | Added SOA modify rules and disabled-by-default behavior for applicable Windows Server versions. | Major |
-| [6.1.1.5.4.4](#Section_6.1.1.5.4.4) SOA-Policies Container | Added a new section to define the “SOA-Policies Container”. | Major |
+| [3.1.1.5.4.1.1](#Section_3.1.1.5.4.1.1) Security Considerations | Added support for SOA modify rules based on `msDS-ObjectSoa` attribute and SOA policy. | Major |
+| [3.1.1.5.4.2.1](#Section_3.1.1.5.4.2.1) Security Considerations | Added support for SOA modify rules based on `msDS-ObjectSoa` attribute and SOA policy. | Major |
+| [3.1.1.5.5.4](#Section_3.1.1.5.5.4) Security Considerations | Added support for SOA modify rules based on `msDS-ObjectSoa` attribute and SOA policy. | Major |
 
 <a id="revision-history"></a>
 
@@ -29009,3 +29032,4 @@ The changes made to this document are listed in the following table. For more in
 | 3/9/2026 | 66.0 | Major | Significantly changed the technical content. |
 | 4/13/2026 | 67.0 | Major | Significantly changed the technical content. |
 | 5/25/2026 | 68.0 | Major | Significantly changed the technical content. |
+| 8/24/2026 | 69.0 | Major | Significantly changed the technical content. |
