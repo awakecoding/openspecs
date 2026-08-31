@@ -241,7 +241,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/13/2026.
+Last updated: 8/24/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -591,6 +591,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSFT-CRL] Microsoft Corporation, "Windows XP: Certificate Status and Revocation Checking", June 2017, [https://social.technet.microsoft.com/wiki/contents/articles/4954.windows-xp-certificate-status-and-revocation-checking.aspx](https://go.microsoft.com/fwlink/?LinkId=90181)
 
 [MSFT-CVE-2022-37976] Microsoft Corporation, "Active Directory Certificate Services Elevation of Privilege Vulnerability", CVE-2022-37976, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-37976](https://go.microsoft.com/fwlink/?linkid=2219940)
+
+[MSFT-CVE-2026-6726] Microsoft Corporation, "MITRE: CVE-2026-6726 TPM 2.0 Improper Object Slot Reuse", August 11, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-6726](https://go.microsoft.com/fwlink/?LinkId=2374650)
 
 [MSFT-TEMPLATES] Microsoft Corporation, "Implementing and Administering Certificate Templates in Windows Server 2003", July 2004, [http://technet.microsoft.com/en-us/library/c25f57b0-5459-4c17-bb3f-2f657bd23f78](https://go.microsoft.com/fwlink/?LinkId=90209)
 
@@ -1619,9 +1621,10 @@ The following are examples of request flag values. These flag values can be used
 | CR_FLG_TRUSTONUSE * | 0x00001000 | Verification of the requester's credentials for key attestation has succeeded ([MS-WCCE] section 3.2.2.6.2.1.2.5). |
 | CR_FLG_TRUSTEKCERT * | 0x00002000 | Verification of the client's [**TPM**](#gt_trusted-platform-module-tpm) [**hardware certificate**](#gt_hardware-certificate) for key attestation has succeeded ([MS-WCCE] section 3.2.2.6.2.1.2.5). |
 | CR_FLG_TRUSTEKKEY * | 0x00004000 | Verification of the [**public key**](#gt_public-key) of the client's TPM's [**hardware key**](#gt_hardware-key) pair for key attestation has succeeded ([MS-WCCE] section 3.2.2.6.2.1.2.5). |
+| CR_FLG_V2CHALLENGE<6> | 0x00008000 | An attestation challenge ([MS-WCCE] section 3.2.2.6.2.1.2.7) for the corresponding certificate request has been sent to the client using V2 flow, and the server is waiting for a response. |
 | CR_FLG_PUBLISHERROR | 0x80000000 | The CA had difficulty publishing the certificate to the directory that is specified in the **userCertificate** attribute of the entity. |
 
-* Support for these flags is specified in the following product behavior note.<6>
+* Support for these flags is specified in the following product behavior note.<7>
 
 **Request_Status_Code:** Column name "Request.StatusCode". Indicates whether the request was successful.
 
@@ -1681,7 +1684,7 @@ The value is 0 if the request processed successfully. Otherwise, this field cont
 
 **Request_Device_Serial_Number:** Column name "Request.DeviceSerialNumber". The device serial number attribute of the DN from the Subject of the certificate request.
 
-**Request_RequesterName_From_Old_Certificate:** Column name "Request.RequesterNameFromOldCertificate". For a renewal request that is signed by the previously issued certificate, the subject name of the old certificate.<7>
+**Request_RequesterName_From_Old_Certificate:** Column name "Request.RequesterNameFromOldCertificate". For a renewal request that is signed by the previously issued certificate, the subject name of the old certificate.<8>
 
 **Request_Attestation_Challenge:** Column name "Request.AttestationChallenge". The secret passed to the client in the attestation challenge message, encrypted with the CA exchange certificate.
 
@@ -1689,11 +1692,11 @@ The value is 0 if the request processed successfully. Otherwise, this field cont
 
 **Request_Endorsement_Certificate_Hash:** Column name "Request.EndorsementCertificateHash". The SHA2 hash of the hardware certificate used to TPM-attest the request.
 
-**Request_Raw_Precertificate:** Column name "Request.RawPrecertificate". The precertificate returned to the client as specified in [MS-WCCE] section 3.2.1.4.2.1.4.3.1.<8>
+**Request_Raw_Precertificate:** Column name "Request.RawPrecertificate". The precertificate returned to the client as specified in [MS-WCCE] section 3.2.1.4.2.1.4.3.1.<9>
 
-**Request_CRL_Partition_Index:** Column name "Request.CRLPartitionIndex". The CRL partition index to which the request has been assigned as specified in section [3.1.4.1.6](#Section_3.1.4.1.6) and [MS-WCCE] sections 3.2.1.4.2.1.2, 3.2.1.4.2.1.4.4, 3.2.1.4.2.1.4.7.<9>
+**Request_CRL_Partition_Index:** Column name "Request.CRLPartitionIndex". The CRL partition index to which the request has been assigned as specified in section [3.1.4.1.6](#Section_3.1.4.1.6) and [MS-WCCE] sections 3.2.1.4.2.1.2, 3.2.1.4.2.1.4.4, 3.2.1.4.2.1.4.7.<10>
 
-**Request_Binary_Linter_Certificate:** Column name "Request.LinterCertificate". The pre-signed certificate that was returned to the client. See section [3.1.4.1.3](#Section_3.1.4.1.3) and [MS-WCCE] section 3.2.1.4.2.1.4.8.1.<10>
+**Request_Binary_Linter_Certificate:** Column name "Request.LinterCertificate". The pre-signed certificate that was returned to the client. See section [3.1.4.1.3](#Section_3.1.4.1.3) and [MS-WCCE] section 3.2.1.4.2.1.4.8.1.<11>
 
 **Request_ID:** Column name "RequestID". The RequestID that corresponds to an issued certificate.
 
@@ -1800,7 +1803,7 @@ The value of the extension is in ASN.1 DER format (as specified in [[X660]](http
 
 **CRL_Local:** A multi-valued element that contains one or more [**CRLs**](#gt_certificate-revocation-list-crl).
 
-The [**CA**](#gt_certification-authority-ca) MUST also maintain a data element called **CRL_Local** that can contain one or more CRLs. This element is read and populated by the processing rules detailed in section [3.1.4.1.6](#Section_3.1.4.1.6). The **CRL_Local** data element is stored in the default local registry location specified in section [3.1.1.8](#Section_3.1.1.8) for the elements **Config_CA_CDP_Publish_To_Base** and **Config_CA_CDP_Publish_To_Delta**.<11>
+The [**CA**](#gt_certification-authority-ca) MUST also maintain a data element called **CRL_Local** that can contain one or more CRLs. This element is read and populated by the processing rules detailed in section [3.1.4.1.6](#Section_3.1.4.1.6). The **CRL_Local** data element is stored in the default local registry location specified in section [3.1.1.8](#Section_3.1.1.8) for the elements **Config_CA_CDP_Publish_To_Base** and **Config_CA_CDP_Publish_To_Delta**.<12>
 
 Each entry in the [**table**](#gt_table) represents a CRL and has associated properties, which are described in the following sections.
 
@@ -1873,7 +1876,7 @@ If the [**CA**](#gt_certification-authority-ca) maintains a [CRL table](#Section
 
 **CRL_Publish_Error:** Column name "CRLPublishError". CRL_Publish_Error contains the user name(s) in whose context the CRLs was published and any CRLs publishing location(s) to which the CRLs could not successfully be published.
 
-**CRL_Partition_Index:** Column name "CRLPartitionIndex". The CRL partition index for which the CRL entry was created as specified in section [3.1.4.1.6](#Section_3.1.4.1.6).<12>
+**CRL_Partition_Index:** Column name "CRLPartitionIndex". The CRL partition index for which the CRL entry was created as specified in section [3.1.4.1.6](#Section_3.1.4.1.6).<13>
 
 <a id="Section_3.1.1.5"></a>
 #### 3.1.1.5 Schema Table
@@ -1947,7 +1950,7 @@ The [**CA**](#gt_certification-authority-ca) SHOULD store the following sets of 
 
 The permissions are used to enforce that the caller has particular permissions for any method specified in section [3.1.4](#Section_3.1.4).
 
-On Windows, the CA defines six permissions: Enroll, Read, Officer, Administrator, Operator, and Auditor.<13>
+On Windows, the CA defines six permissions: Enroll, Read, Officer, Administrator, Operator, and Auditor.<14>
 
 For CA security (GetCASecurity, SetCASecurity, and GetMyRoles), the Microsoft CA assigns permissions to [**principals**](#gt_principal) (identified by the [**access control entry (ACE)**](#gt_access-control-entry-ace)) in the following manner.
 
@@ -2075,7 +2078,7 @@ For an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) location, a pa
 - The Config_CA_CDP_Include_In_CRL_Publish_Locations_Extension MUST start with "ldap:".
 - The Config_CA_CDP_Include_In_CRL_Freshest_CRL_Extension CRL publishing location MUST be a valid UNC network path or start with "http:", "ftp:", "ldap:", or "file:".
 - The Config_CA_CDP_Include_In_CRL_IDP_Extension CRL publishing location MUST start with "http:", "ftp:", or "ldap:".
-Each CRL publishing location that references a directory path or other hierarchical location MUST specify a file name or [**attribute**](#gt_attribute) name in addition to a directory path or [**schema**](#gt_schema) location.<14>
+Each CRL publishing location that references a directory path or other hierarchical location MUST specify a file name or [**attribute**](#gt_attribute) name in addition to a directory path or [**schema**](#gt_schema) location.<15>
 
 - **CRL_Publish_AD_Connection**: An ADConnection handle as defined in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.3. This element is used each time the [**CA**](#gt_certification-authority-ca) establishes an [**Active Directory**](#gt_active-directory) connection to publish a CRL to an ldap: location.
 <a id="Section_3.1.1.9"></a>
@@ -2100,7 +2103,7 @@ Certificate Services Remote Administration Protocol server implementations that 
 <a id="Section_3.1.1.10"></a>
 #### 3.1.1.10 Configuration Data
 
-The [**CA**](#gt_certification-authority-ca) MUST maintain the following ADM elements.<15> Certificate Services Remote Administration Protocol server implementations that also implement the Windows Client Certificate Enrollment Protocol or the ICertPassage Remote Protocol use the same configuration data elements, defined here, for those implementations. If either Windows Client Certificate Enrollment Protocol or ICertPassage Remote Protocol or both are also implemented, access to the configuration data elements from either or both of these protocols SHOULD be serialized.
+The [**CA**](#gt_certification-authority-ca) MUST maintain the following ADM elements.<16> Certificate Services Remote Administration Protocol server implementations that also implement the Windows Client Certificate Enrollment Protocol or the ICertPassage Remote Protocol use the same configuration data elements, defined here, for those implementations. If either Windows Client Certificate Enrollment Protocol or ICertPassage Remote Protocol or both are also implemented, access to the configuration data elements from either or both of these protocols SHOULD be serialized.
 
 **Config_CA_KRA_Cert_List:** An indexed list of KRA [**certificates**](#gt_certificate) shared from the Config_CA_KRA_Cert_List list as defined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.2.1.1.4.
 
@@ -2146,7 +2149,7 @@ The [**CA**](#gt_certification-authority-ca) MUST maintain the following ADM ele
 
 **Config_CA_Accept_Request_Attributes_CertPath:** A Boolean value shared from the Config_CA_Accept_Request_Attributes_CertPath element defined in [MS-WCCE] section 3.2.1.1.4.
 
-**Config_CA_Allow_RenewOnBehalfOf_Requests:** A Boolean value shared from the Config_CA_Allow_RenewOnBehalfOf_Requests element defined in [MS-WCCE] section 3.2.1.1.4,<16>
+**Config_CA_Allow_RenewOnBehalfOf_Requests:** A Boolean value shared from the Config_CA_Allow_RenewOnBehalfOf_Requests element defined in [MS-WCCE] section 3.2.1.1.4,<17>
 
 **Config_CA_Requests_Disposition:** A 4-byte integer value shared from the Config_CA_Requests_Disposition element defined in [MS-WCCE] section 3.2.1.1.4.
 
@@ -2190,15 +2193,15 @@ If the value is 0 or is greater than or equal to 10, no retries will happen. If 
 
 How many previous unsuccessful attempts to publish CRLs have occurred since the last regularly scheduled CRL publishing attempt (including the last regularly scheduled publishing attempt, if that attempt was unsuccessful).
 
-**Config_CRLPartition_Enabled:** A flag that indicates whether CRL partitioning is enabled at the server. Defaults to FALSE.<17>
+**Config_CRLPartition_Enabled:** A flag that indicates whether CRL partitioning is enabled at the server. Defaults to FALSE.<18>
 
-**Config_CRLPartition_PartitionZero_Exclusive:** A flag that indicates whether the partition zero CRL must be treated as exclusive, meaning it contains only the serial numbers of certificates assigned to partition zero. If the flag is set to FALSE, the partition zero CRL includes the serial numbers of all certificates revoked at the CA, regardless of their assigned partition. Defaults to False.<18>
+**Config_CRLPartition_PartitionZero_Exclusive:** A flag that indicates whether the partition zero CRL must be treated as exclusive, meaning it contains only the serial numbers of certificates assigned to partition zero. If the flag is set to FALSE, the partition zero CRL includes the serial numbers of all certificates revoked at the CA, regardless of their assigned partition. Defaults to False.<19>
 
-**Config_CA_CRL_Max_Partitions**: A 4-byte integer that indicates the maximum number of CRL partitions configured at the server. Defaults to zero.<19>
+**Config_CA_CRL_Max_Partitions**: A 4-byte integer that indicates the maximum number of CRL partitions configured at the server. Defaults to zero.<20>
 
-**Config_CA_CRL_Suspended_Partitions:** A 4-byte integer that indicates the CRL partition number up to and including which all partitions starting from zero are suspended. Defaults to zero. This value MUST be less than or equal to Config_CA_CRL_Max_Partitions.<20>
+**Config_CA_CRL_Suspended_Partitions:** A 4-byte integer that indicates the CRL partition number up to and including which all partitions starting from zero are suspended. Defaults to zero. This value MUST be less than or equal to Config_CA_CRL_Max_Partitions.<21>
 
-**Config_CA_CRL_Current_Partition:** A 4-byte integer that specifies the starting CRL partition for round-robin partition selection, as specified in [MS-WCCE] section 3.2.1.4.2.1.4.4, when configured. This setting is not configured by default.<21>
+**Config_CA_CRL_Current_Partition:** A 4-byte integer that specifies the starting CRL partition for round-robin partition selection, as specified in [MS-WCCE] section 3.2.1.4.2.1.4.4, when configured. This setting is not configured by default.<22>
 
 **Config_CA_LDAP_Flags:** This data element has two possible values:
 
@@ -2216,7 +2219,7 @@ How many previous unsuccessful attempts to publish CRLs have occurred since the 
 
 **Config_Hardware_Key_List_Directories:** A list of strings, each one a UNC or local file path to a folder that contains empty files. Each file name is the SHA2 hash, as a hexadecimal string with no spaces, of a [**hardware key**](#gt_hardware-key) trusted by the CA for [**key**](#gt_key) [**attestation**](#gt_attestation) by [**public key**](#gt_public-key). The CA has read access to this location.
 
-**Config_CertificateTransparency_Enabled:** A flag that indicates whether Certificate Transparency processing is enabled at the server. Defaults to **False**.<22>
+**Config_CertificateTransparency_Enabled:** A flag that indicates whether Certificate Transparency processing is enabled at the server. Defaults to **False**.<23>
 
 **Config_CertificateTransparency_Disable_SCTList_Validation:** A flag that indicates whether syntactical validation of the SignedCertificateTimestampList is performed at the server. Defaults to **False**.
 
@@ -2353,7 +2356,7 @@ The logic that is executed when the timer reaches its next timeout value is spec
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Interface Initialization: On startup, the [**CA**](#gt_certification-authority-ca) MUST ensure that remote clients have permissions to activate and call [**DCOM**](#gt_distributed-component-object-model-dcom) [**objects**](#gt_object) on the CA. Subsequently, DCOM object and interface initialization is performed by the DCOM object exporter in response to an activation request from the DCOM client. The Certificate Services Remote Administration Protocol client calls the DCOM client to initiate the activation request to the server. As a result, the DCOM server returns an object reference to the DCOM client, and the Certificate Services Remote Administration Protocol client can use this client object reference to make calls to the Certificate Services Remote Administration Protocol server methods specified in this document. The details of DCOM object initialization on the server, in response to client activation requests and [**ORPC**](#gt_object-remote-procedure-call-orpc) calls, are specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) sections 3.1.1.3, 3.1.1.5.1, and 3.1.1.5.4.<23>
+Interface Initialization: On startup, the [**CA**](#gt_certification-authority-ca) MUST ensure that remote clients have permissions to activate and call [**DCOM**](#gt_distributed-component-object-model-dcom) [**objects**](#gt_object) on the CA. Subsequently, DCOM object and interface initialization is performed by the DCOM object exporter in response to an activation request from the DCOM client. The Certificate Services Remote Administration Protocol client calls the DCOM client to initiate the activation request to the server. As a result, the DCOM server returns an object reference to the DCOM client, and the Certificate Services Remote Administration Protocol client can use this client object reference to make calls to the Certificate Services Remote Administration Protocol server methods specified in this document. The details of DCOM object initialization on the server, in response to client activation requests and [**ORPC**](#gt_object-remote-procedure-call-orpc) calls, are specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) sections 3.1.1.3, 3.1.1.5.1, and 3.1.1.5.4.<24>
 
 Cryptographic Initialization: The CA MUST validate each of the CA [signing certificate(s)](#Section_1.5.3) represented by the **Signing_Cert_Certificate** column in the [Signing_Cert Table (section 3.1.1.11)](#Section_3.1.1.11). The [**certificates**](#gt_certificate) are validated in the order in which they occur in the Signing_Cert Table from first to last, with the latest Signing_Cert entry evaluated last.
 
@@ -2376,7 +2379,7 @@ If none of the CA signing certificates in the Signing_Cert [**table**](#gt_table
 - If there are six certificates and none of them passes, the CA MUST NOT start processing messages.
 Database Initialization: The CA MUST ensure that the database is available for use and that the tables and fields that are defined in section [3.1.1](#Section_3.1.1) exist. If the database is not available, the CA MUST NOT start processing messages.
 
-Configuration Initialization: The CA MUST initialize the configuration data elements defined in section [3.1.1.10](#Section_3.1.1.10). Each element defined in section 3.1.1.10 as "OnNextRestart_{Config_Element_Name}" will be used to initialize the corresponding data element "{Config_Element_Name}" upon CA startup. <24>
+Configuration Initialization: The CA MUST initialize the configuration data elements defined in section [3.1.1.10](#Section_3.1.1.10). Each element defined in section 3.1.1.10 as "OnNextRestart_{Config_Element_Name}" will be used to initialize the corresponding data element "{Config_Element_Name}" upon CA startup. <25>
 
 If the CA fails to complete any of the initialization steps, the CA MUST NOT start.
 
@@ -2393,7 +2396,7 @@ The Certificate Services Remote Administration Protocol defines the following in
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Processing Rules for ICertAdminD
 
-The ICertAdminD interface provides an application programming interface for a client<25> to manage a [**certificate**](#gt_certificate) authority.
+The ICertAdminD interface provides an application programming interface for a client<26> to manage a [**certificate**](#gt_certificate) authority.
 
 The ICertAdminD interface inherits the IUnknown interface.
 
@@ -2436,11 +2439,11 @@ All methods MUST NOT throw exceptions.
 
 The CA MUST execute the following processing rules for each invocation of each of the methods listed below in this section. Then the CA MUST proceed to execute the processing rules listed for each individual method below.
 
-The CA MUST obtain the SID in the RPC_SID form of the caller from the value of the element **uToken.Sids[uToken.UserIndex]**. The ADM element **uToken** is initialized by retrieving the identity token for the current [**execution context**](#gt_execution-context) by calling the abstract interface **GetRpcImpersonationAccessToken()** as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3.1. The value of the **uToken.Sids** array element indexed at **uToken.UserIndex** is the SID of the caller. If the caller cannot be identified (**uToken.Sids[uToken.UserIndex]** is NULL), the CA MUST refuse to establish a connection, returning an error.<26>
+The CA MUST obtain the SID in the RPC_SID form of the caller from the value of the element **uToken.Sids[uToken.UserIndex]**. The ADM element **uToken** is initialized by retrieving the identity token for the current [**execution context**](#gt_execution-context) by calling the abstract interface **GetRpcImpersonationAccessToken()** as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3.1. The value of the **uToken.Sids** array element indexed at **uToken.UserIndex** is the SID of the caller. If the caller cannot be identified (**uToken.Sids[uToken.UserIndex]** is NULL), the CA MUST refuse to establish a connection, returning an error.<27>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTADMIN (section [3.1.4.2.14](#Section_3.1.4.2.14)) and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE] section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning an error.<27><28>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTADMIN (section [3.1.4.2.14](#Section_3.1.4.2.14)) and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE] section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning an error.<28><29>
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMIN, the CA SHOULD return an error for any of the methods listed in this section.<29>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMIN, the CA SHOULD return an error for any of the methods listed in this section.<30>
 
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 ICertAdminD::SetExtension (Opnum 3)
@@ -2564,14 +2567,14 @@ The following processing rules apply:
 
 - The CA MUST validate that the Unicode string referenced by *pwszAuthority* matches (case-insensitive) the full [**CN**](#gt_common-name-cn) or the sanitized name of the CA. [**Sanitized name**](#gt_sanitized-name) is defined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) sections 1.3.2.5 and 3.1.1.4.1.1. If the value does not match, the server MUST fail the request. The error code SHOULD be 0x80070057.
 - The CA MUST look up the request based on the provided *dwRequestId* parameter in the request [**table**](#gt_table):
-- If the request is not found, the CA MUST place 0x80094004 in the *pdwDisposition* parameter and return successfully.<30>
+- If the request is not found, the CA MUST place 0x80094004 in the *pdwDisposition* parameter and return successfully.<31>
 - If the request is found in the CA database, the row is referred to as the identified row in the following processing rules.
 - The CA MUST verify that the value of the Request_Disposition column in the identified row is "request pending" or "request denied".
 - If the value of the Request_Disposition column in the identified row is not "request pending" or "request denied", the CA MUST place 0x80094003 in the *pdwDisposition* parameter and return successfully.
 - If the value of the Request_Disposition column in the identified row is "request denied" and the invoker of the method is not the CA administrator, the CA MUST place 0x80094003 in the *pdwDisposition* parameter and return successfully.
 - The CA MUST try to process the request as if it is a new request, as specified in [MS-WCCE] section 3.2.1.4.2.1.4, ignoring step one in [MS-WCCE] section 3.2.1.4.2.1.4.5.
 - If the request processing results in the CA issuing the certificate, then:
-- If the Config_PreSignCert_Enabled ([MS-WCCE] section 3.2.1.1.4) is set to FALSE or the corresponding row in the Attribute table has no attribute with the name "LintCertificate", the CA MUST place a 3 in the *pdwDisposition* parameter and return successfully.<31>
+- If the Config_PreSignCert_Enabled ([MS-WCCE] section 3.2.1.1.4) is set to FALSE or the corresponding row in the Attribute table has no attribute with the name "LintCertificate", the CA MUST place a 3 in the *pdwDisposition* parameter and return successfully.<32>
 - If the corresponding row in Attribute table has the attribute "LintCertificate" with its value set to TRUE:
 - The CA MUST use Signing_Dummy_Private_Key ([MS-WCCE] section 3.2.1.1.4) to sign the prepared certificate and store it in the **Request_Binary_Linter_Certificate** column of the identified row in the Request table. The CA MUST update the **Request_Disposition** column of the identified row to "Request pending", MUST place a 5 in the *pdwDisposition* parameter, and return successfully.
 - If the corresponding row in the Attribute table has the attribute LintCertificate with value set to FALSE:
@@ -2632,7 +2635,7 @@ The following processing rules apply:
 - The [**CA**](#gt_certification-authority-ca) MUST look up the request based on the provided *dwRequestId* parameter in the Request [**table**](#gt_table). If the request is not found, the CA MUST fail the request. If the request is found, the selected row is referred to as the identified row in the following processing rules.
 - If the value of the Request_Disposition column in the identified row is not "request pending", the CA MUST fail the request.
 - If the value of the Request_Disposition column in the identified row is "request pending":
-- The CA MUST set the value of the Request_Disposition column in the identified row to "request denied", and set the Request_Status_Code to 0x80094014 (CERTSRV_E_ADMIN_DENIED_REQUEST).<32>
+- The CA MUST set the value of the Request_Disposition column in the identified row to "request denied", and set the Request_Status_Code to 0x80094014 (CERTSRV_E_ADMIN_DENIED_REQUEST).<33>
 - The CA SHOULD set the value of the Request_Disposition_Message column in the identified row to any value that the implementer considers human-readable. The Microsoft CA sets Request_Disposition_Message in this case to "Denied by {username}" where "{username}" is replaced with the user name of the caller.
 <a id="Section_3.1.4.1.5"></a>
 ##### 3.1.4.1.5 ICertAdminD::IsValidCertificate (Opnum 7)
@@ -2708,7 +2711,7 @@ The following processing rules apply:
 
 **Note** When Config_CRLPartition_Enabled is set to TRUE, there will be one base and/or one delta CRL generated for each partition and for each CA Signing_Private_Key in the Signing_Cert Table, wherever the processing rule specifies creating a new base and/or delta CRL.
 
-- When this method is invoked, the CA SHOULD create a new base and/or delta CRL for each CA Signing_Private_Key in the [Signing_Cert Table](#Section_3.1.1.11) and for each partition when **Config_CRLPartition_Enabled** is set to TRUE, as specified in the following steps. The type of CRL to create (base, delta, or both) for each CA [**key**](#gt_key) and partition is determined as follows:<33>
+- When this method is invoked, the CA SHOULD create a new base and/or delta CRL for each CA Signing_Private_Key in the [Signing_Cert Table](#Section_3.1.1.11) and for each partition when **Config_CRLPartition_Enabled** is set to TRUE, as specified in the following steps. The type of CRL to create (base, delta, or both) for each CA [**key**](#gt_key) and partition is determined as follows:<34>
 The CA SHOULD create a new base CRL for each CA key and partition.
 
 If the CA has enabled delta CRLs, as indicated by a nonzero Config_Delta_CRL_Validity_Period value, the CA MUST create a new delta CRL in addition to a new base CRL for each CA key and partition.
@@ -2726,7 +2729,7 @@ An implication of this rule is that, if a previously revoked certificate is both
 - If the Publish_Expired_Cert_in_CRL column is not set to 1:
 - If the certificate's **NotAfter** time is before the CRL_This_Publish of the last CRL, do not include the certificate's Serial_Number in the CRL.
 - If the certificate's **NotAfter** time is after or equal to the CRL_This_Publish of the last CRL, include the certificate's Serial_Number in the CRL.
-- At CRL creation time, the CA SHOULD create a new [CRL table](#Section_3.1.1.4.1) entry for each type of CRL (base, and if enabled, delta) for each CA key and for each partition. For each CRL table entry it creates, the CA MUST use the following rules to populate the individual data elements:<34>
+- At CRL creation time, the CA SHOULD create a new [CRL table](#Section_3.1.1.4.1) entry for each type of CRL (base, and if enabled, delta) for each CA key and for each partition. For each CRL table entry it creates, the CA MUST use the following rules to populate the individual data elements:<35>
 - **CRL_Number:** The CA MUST set this value to the CRL_Number of the last CRL created plus one. The same CRL_Number MUST be set on the CRLs generated for each CA key and type (base or delta). Similarly, the same CRL_Number MUST be set on the CRLs generated for each CA key, partition and type (base or delta).
 - **CRL_Name_Id:** The CA MUST set this value to the number that uniquely identifies the CA key for which the CRL is being created.
 - **CRL_Min_Base:** (only for a delta CRL). If all of the following conditions are true:
@@ -2740,12 +2743,12 @@ If the three conditions listed above are not all true, the CA MUST set this valu
 - **CRL_Effective:** (only for a delta CRL): If this element is present, the CA MUST set its value to the CRL_This_Update value of the CRL table row corresponding to the base CRL whose CRL_Number is equal to the current delta CRL's CRL_Min_Base value.
 - **CRL_Count:** The CA MUST set this value to the number of serial numbers that will be included on the CRL.
 - **CRL_This_Publish:** The CA MUST set this value to the current time.
-- **CRL_This_Update:** The CA MUST set this value to the current time minus Config_CA_Clock_Skew_Minutes.<35> The value of CRL_This_Update MUST NOT be less than the NotBefore date of the current CA [**signing certificate**](#gt_signing-certificates). If the calculated value of CRL_This_Update is less than the NotBefore date of the current CA signing certificate, the CA MUST replace the CRL_This_Update value with the NotBefore date of the current CA signing certificate.
+- **CRL_This_Update:** The CA MUST set this value to the current time minus Config_CA_Clock_Skew_Minutes.<36> The value of CRL_This_Update MUST NOT be less than the NotBefore date of the current CA [**signing certificate**](#gt_signing-certificates). If the calculated value of CRL_This_Update is less than the NotBefore date of the current CA signing certificate, the CA MUST replace the CRL_This_Update value with the NotBefore date of the current CA signing certificate.
 - **CRL_Next_Publish:** The CA MUST set this data element to the current time plus Config_Base_CRL_Validity_Period for a base CRL or plus Config_Delta_CRL_Validity_Period for a delta CRL.
 - **CRL_Propagation_Complete:** The CA MUST set this data element to the current time plus the overlap period.
 The Microsoft CA computes the overlap period based on Config_Base_CRL_Overlap_Period for a base CRL and Config_Delta_CRL_Overlap_Period for a delta CRL as follows:
 
-- If the registry value for Config_Base_CRL_Overlap_Period is configured and valid (valid means the units are correct and the value is present), this value is used as is. Similarly, if a valid Config_Delta_CRL_Overlap_Period exists, it is used as is.<36>
+- If the registry value for Config_Base_CRL_Overlap_Period is configured and valid (valid means the units are correct and the value is present), this value is used as is. Similarly, if a valid Config_Delta_CRL_Overlap_Period exists, it is used as is.<37>
 - If either of these values is not present or not valid, the CA uses the following algorithms to determine a value:
 For a base CRL:
 
@@ -2763,7 +2766,7 @@ For a delta CRL:
 - If the *FileTime* value is less than the current time, the CA MUST fail with an error code ERROR_INVALID_PARAMETER.
 - Otherwise, the CA MUST use the value that is provided in the *FileTime* parameter, add overlap period plus the clock skew to it, and set it as the CRL_Next_Update.
 - If a file time is not provided, the CA MUST set CRL_Next_Update to the current time plus Config_Base_CRL_Validity_Period for a base CRL or Config_Delta_CRL_Validity_Period for a delta CRL plus overlap period.
-The CA SHOULD add a clock skew.<37>
+The CA SHOULD add a clock skew.<38>
 
 - **CRL_Publish_Flags**: The CA MUST update this data element with a bitwise OR of all values from the list below that apply, based on their descriptions in section [3.1.1.4.1](#Section_3.1.1.4.1).
 - CPF_BASE: Set this value for a base CRL.
@@ -2787,8 +2790,8 @@ The CA SHOULD add a clock skew.<37>
 - If Request_Revoked_Reason is not 0, it MUST be used for the reasonCode CRL entry extension.
 - The fields and CRL entry extensions within revokedCertificates have the ASN syntax as defined in [RFC3280] section 5.1.
 - The subject key identifier field of the CA certificate for which the CRL is being generated MUST be used for the AuthorityKeyIdentifier (AKI) CRL extension. The syntax is as defined in [RFC3280] section 5.2.1 (which in turn points to section 4.2.1.1 of the same RFC).
-- The CRL_Number SHOULD be used for the CRL number extension, which has the syntax that is defined in [RFC3280] section 5.2.3.<38>
-- For a delta CRL only, CRL_Min_Base MUST be used for the delta CRL indicator extension, which has the syntax that is defined in [RFC3280] section 5.2.3.<39>
+- The CRL_Number SHOULD be used for the CRL number extension, which has the syntax that is defined in [RFC3280] section 5.2.3.<39>
+- For a delta CRL only, CRL_Min_Base MUST be used for the delta CRL indicator extension, which has the syntax that is defined in [RFC3280] section 5.2.3.<40>
 - The issuing distribution point is a CRL extension that MUST be populated with all entries in the Config_CA_CDP_Include_In_CRL_IDP_Extension element that is defined in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.2.1.1.4. If Config_CRLPartition_Enabled is set to TRUE, the first occurrence of the substring "<CRLPartitionIndex>" in each entry of the Config_CA_CDP_Include_In_CRL_IDP_Extension data MUST be replaced with "_PartitionXXXXX" where "XXXXX" is the zero padded, 5-digit decimal representation of the CRL partition for which the CRL is being generated. If the value of CRL partition is zero, the substring <CRLPartitionIndex> MUST be removed completely. For example, if the CRL partition is 11, then "<CRLPartitionIndex>" will be replaced with "_Partition00011". This CRL extension has the syntax that is defined in [RFC3280] section 5.2.5.
 - The freshest CRL extension (also known as the delta CRL distribution point) MUST be populated with all entries in the Config_CA_CDP_Include_In_CRL_Freshest_CRL_Extension element, as defined in [MS-WCCE] section 3.2.1.1.4. If Config_CRLPartition_Enabled is set to TRUE, the first occurrence of the substring "<CRLPartitionIndex>" in each entry of the Config_CA_CDP_Include_In_CRL_Freshest_CRL_Extension data MUST be replaced with "_PartitionXXXXX" where "XXXXX" is the zero padded, 5-digit decimal representation of the CRL partition for which the CRL is being generated. If the value of CRL partition is zero, the substring <CRLPartitionIndex> MUST be removed completely. This CRL extension has the syntax that is defined in [RFC3280] section 5.2.6.
 - In addition to the preceding extensions, the following custom extensions MUST be added to the CRL.
@@ -2865,12 +2868,12 @@ cbData: The length, in bytes, of the data referenced by lpdata.
 - After all required keys and values have been created and written, the client closes the open handles by using the BaseRegCloseKey method [MS-RRP] section 3.1.5.6.
 If a nonzero return value is returned from any of the above methods, the CA continues to attempt to publish CRLs as follows, and the CPF_CASTORE_ERROR flag is set in step 9 below.
 
-For each combination of new CRL table entry (created in preceding rule 3) and CDP location, there will be a publishing attempt, in which the CA attempts to write the CRL file to the location specified. Specifically, the publishing attempts are done as follows: <40>
+For each combination of new CRL table entry (created in preceding rule 3) and CDP location, there will be a publishing attempt, in which the CA attempts to write the CRL file to the location specified. Specifically, the publishing attempts are done as follows: <41>
 
 - If, for a delta CRL and a location that begins with "file://", the CPF_FILE_ERROR flag value was set for the corresponding base CRL, do not attempt to publish the delta CRL to the file:// location. The CA MUST generate a nonzero error code instead. The CA SHOULD use the error code E_ABORT (0x80004004). The server will mark the CPF_POSTPONED_BASE_FILE_ERROR flag when it updates the corresponding CRL table entry below. The CA MUST then preserve this error code and skip to step 9.
 - If, for a delta CRL and a location that begins with "ldap:///", the CPF_LDAP_ERROR flag value was set for the corresponding base CRL, do not attempt to publish the delta CRL to the ldap:/// location. The CA MUST generate a nonzero error code instead. The CA SHOULD use the error code E_ABORT (0x80004004). The server will mark the CPF_POSTPONED_BASE_LDAP_ERROR flag when it updates the corresponding CRL table entry below. The CA MUST then preserve this error code and skip to step 9.
 - If any CRL Publishing Locations that have the invalid prefix "ftp:", "http:", or any locations with a prefix other than "file:" that consists of 2, 3, or 4 characters followed by a colon (":"), are encountered, the CA MUST generate a nonzero error code. The CA SHOULD use the error code ERROR_BAD_PATHNAME (0x800700a1). The CA MUST then preserve this error code and skip to step 9.
-- When writing to a local file path, [**UNC**](#gt_universal-naming-convention-unc) path, or file:// location, a file system is invoked to write the CRL as a DER-encoded binary file to the path and file name specified. When the CRL publishing location starts with the prefix "file://", but the remaining portion of the location is not a path starting with "\\", the entire location is passed to the file system. When the location starts with the prefix "file://", and the remaining portion is a path starting with "\\", only the remaining portion is passed to the file system. When the location starts with "{DriveLetter}:" or with "\\", it is passed as is to the file system. A status or Win32 error code, when one was returned from the file system, is returned to the invoker (the CA). When a Win32 error code is returned from the file system, the server SHOULD convert this error code to a 4-byte HRESULT value using the pattern 0x8007XXXX, where XXXX is the first two bytes of the Win32 hex value 0x0000XXXX. Then, the server SHOULD preserve this HRESULT value, and go to step 9 (where the CA will set the CPF_FILE_ERROR publishing flag). For more information on writing remote files, see [MS-FASOD](../MS-FASOD/MS-FASOD.md).<41>
+- When writing to a local file path, [**UNC**](#gt_universal-naming-convention-unc) path, or file:// location, a file system is invoked to write the CRL as a DER-encoded binary file to the path and file name specified. When the CRL publishing location starts with the prefix "file://", but the remaining portion of the location is not a path starting with "\\", the entire location is passed to the file system. When the location starts with the prefix "file://", and the remaining portion is a path starting with "\\", only the remaining portion is passed to the file system. When the location starts with "{DriveLetter}:" or with "\\", it is passed as is to the file system. A status or Win32 error code, when one was returned from the file system, is returned to the invoker (the CA). When a Win32 error code is returned from the file system, the server SHOULD convert this error code to a 4-byte HRESULT value using the pattern 0x8007XXXX, where XXXX is the first two bytes of the Win32 hex value 0x0000XXXX. Then, the server SHOULD preserve this HRESULT value, and go to step 9 (where the CA will set the CPF_FILE_ERROR publishing flag). For more information on writing remote files, see [MS-FASOD](../MS-FASOD/MS-FASOD.md).<42>
 - For any ldap:/// locations identified, within the [**object**](#gt_object) and [**attribute**](#gt_attribute) specified, the CRL is DER encoded. The steps the CA uses are as follows:
 - If the value of the **CRL_Publish_AD_Connection** is not NULL, then a previous Active Directory connection exists. Go to step 4 and use that Active Directory connection for publishing the CRLs.
 Otherwise, invoke the task "Initialize an ADConnection", as defined in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1, with the following parameters:
@@ -2898,14 +2901,14 @@ The parameters of the ModifyRequest are set as follows:
 - The **object** field contains the Config_CA_CDP_Publish_To_Base or Config_CA_CDP_Publish_To_Delta entry that specifies an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) location (without the "ldap:///" prefix)
 - The modification sequence has one list entry whose **operation** field has the value "replace" and whose **modification** field contains the following:
 - The **type** field contains either "certificateRevocationList", for a base CRL, or "deltaRevocationList" for a delta CRL.
-- The **vals** field contains the CRL. <42>
+- The **vals** field contains the CRL. <43>
 **TaskOutputResultMessages**: A task output parameter that is a list of **LDAPMessage**, as specified in [MS-ADTS] section 7.6.1.6, that contains the response from the directory server. The result of a modify request is a modify response, which, as specified in [RFC2251], is an **LDAPResult**, which contains a **resultCode** and an **errorMessage**.
 
 If the **TaskReturnStatus** returned is not 0, perform to the error processing logic in step 5 below. Otherwise, skip step 5 and continue with step 9 below.
 
 - When invoking an LDAP higher layer triggered event, a status or error code, when one was returned from the lower layer system, is returned to the invoker (the CA).
 - If a nonzero **TaskReturnStatus** is returned from step 3 above (while attempting to bind to the ADConnection), the CA SHOULD close the Active Directory connection by invoking the "Performing an LDAP Unbind on an ADConnection" task defined in [MS-ADTS] section 7.6.1.5, convert the **TaskReturnStatus** (an LDAP **resultCode**) that was returned from step 3 to a 4-byte HRESULT value as specified in the Conversion of LDAP results at the end of this step. Then, preserve this HRESULT value, clear the **CRL_Publish_AD_Connection** element, and go to step 9 below.
-- If a nonzero **TaskOutputResultMessages.resultCode** value is returned from step 4 above (the LDAP modify operation), that indicates that the Active Directory server is down, unavailable, or that there is a timeout, the CA MUST close the Active Directory connection by invoking the "Performing an LDAP Unbind on an ADConnection" task defined in [MS-ADTS] section 7.6.1.5, clear the **CRL_Publish_AD_Connection** element, and re-attempt one time to execute steps 1-4 above. If a nonzero **TaskReturnStatus** is returned from step 3 or 4 upon this single retry, the CA MUST close the Active Directory connection by invoking the "Performing an LDAP Unbind on an ADConnection" task defined in [MS-ADTS] section 7.6.1.5, convert the returned **TaskReturnStatus** from step 3 (in the case of a failure upon bind) or **TaskOutputResultMessages.errorMessage** from step 4 (in the case of a failure upon modify) to a 4-byte HRESULT value as specified in the Conversion of LDAP results at the end of this step, preserve this HRESULT value, clear the CRL_Publish_AD_Connection element, and go to step 9.<43>
+- If a nonzero **TaskOutputResultMessages.resultCode** value is returned from step 4 above (the LDAP modify operation), that indicates that the Active Directory server is down, unavailable, or that there is a timeout, the CA MUST close the Active Directory connection by invoking the "Performing an LDAP Unbind on an ADConnection" task defined in [MS-ADTS] section 7.6.1.5, clear the **CRL_Publish_AD_Connection** element, and re-attempt one time to execute steps 1-4 above. If a nonzero **TaskReturnStatus** is returned from step 3 or 4 upon this single retry, the CA MUST close the Active Directory connection by invoking the "Performing an LDAP Unbind on an ADConnection" task defined in [MS-ADTS] section 7.6.1.5, convert the returned **TaskReturnStatus** from step 3 (in the case of a failure upon bind) or **TaskOutputResultMessages.errorMessage** from step 4 (in the case of a failure upon modify) to a 4-byte HRESULT value as specified in the Conversion of LDAP results at the end of this step, preserve this HRESULT value, clear the CRL_Publish_AD_Connection element, and go to step 9.<44>
 - If any other nonzero **TaskOutputResultMessages.resultCode** value is returned from step 4 above (the LDAP modify operation), the server MUST convert the returned **TaskOutputResultMessages.errorMessage** to a 4-byte HRESULT value, as specified in the Conversion of LDAP results at the end of this step, preserve this HRESULT value, and go to step 9.
 Conversion of LDAP results (**TaskReturnStatus** or **TaskOutputResultMessages**) to HRESULT is as follows:
 
@@ -2915,7 +2918,7 @@ Conversion of LDAP results (**TaskReturnStatus** or **TaskOutputResultMessages**
 - Otherwise, use **TaskOutputResultMessages.resultCode**. Convert it to a Win32 error using the conversion specified in [MS-ERREF] section 2.4, "LDAP Error to Win32 Error Mapping", and use this value as the Win32 error, which will be the input to the following HRESULT conversion.
 - If there is no **TaskOutputResultMessages** (as in the case of the Bind task), use **TaskReturnStatus** (which is an LDAP resultCode). Convert this value to a Win32 error using the conversion specified in [MS-ERREF] section 2.4, "LDAP Error to Win32 Error Mapping", and use this value as input to the following HRESULT conversion.
 - Convert the Win32 obtained above to an HRESULT using the pattern 0x8007XXXX, where XXXX is the first two bytes of the Win32 hex value 0x0000XXXX.
-- After each attempt to publish a CRL (that is, each combination of CRL and publishing location), the CA SHOULD update the corresponding CRL table row. For each row updated, the CA MUST use the following rules to update the individual data elements:<44>
+- After each attempt to publish a CRL (that is, each combination of CRL and publishing location), the CA SHOULD update the corresponding CRL table row. For each row updated, the CA MUST use the following rules to update the individual data elements:<45>
 - **CRL_Publish_Error:** If this element is present, populate CRL_Publish_Error with the user name associated with the caller identity, in the form "Published by {domain\UserName}", where:
 - Domain is replaced with the domain name of the domain in which the user account exists.
 - UserName is the user name associated with the caller identity.
@@ -2975,7 +2978,7 @@ HRESULT GetCRL(
 
 **pctbCRL:** If the function succeeds, this method MUST return a [CERTTRANSBLOB](#Section_2.2.1.4) structure that contains the ASN.1 DER (as specified in [[X660]](https://go.microsoft.com/fwlink/?LinkId=90592) and [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593)) encoded CRL (CRLRawCRL) for the CA server's current [**signing certificate**](#gt_signing-certificates).
 
-The GetCRL method instructs the CA to return the recent base CRL, which is signed with the current CA key to the caller. If a CRL cannot be found, the CA MUST return ERROR_FILE_NOT_FOUND, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).<45>
+The GetCRL method instructs the CA to return the recent base CRL, which is signed with the current CA key to the caller. If a CRL cannot be found, the CA MUST return ERROR_FILE_NOT_FOUND, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).<46>
 
 If both **Config_CRLPartition_Enabled** and **Config_CRLPartition_PartitionZero_Exclusive** are set to TRUE, the CA MUST return E_INVALIDARG, as specified in [MS-ERREF].
 
@@ -2998,7 +3001,7 @@ HRESULT RevokeCertificate(
 
 **pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.1).
 
-**pwszSerialNumber:** A null-terminated Unicode string that specifies a serial number that identifies the certificate to be revoked. The string MUST specify the serial number as plain hexadecimal digits (no leading 0x) as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.1.2.2.<46>
+**pwszSerialNumber:** A null-terminated Unicode string that specifies a serial number that identifies the certificate to be revoked. The string MUST specify the serial number as plain hexadecimal digits (no leading 0x) as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.1.2.2.<47>
 
 **Reason:** An unsigned integer value that specifies the [**revocation**](#gt_revocation) reason code. The revocation reason code MUST be either one of the values listed in the following [**table**](#gt_table) (and specified in [RFC3280] section 5.3.1), or one of the following values: 0xfffffffd, 0xfffffffe, or 0xffffffff.
 
@@ -3023,8 +3026,8 @@ The following processing rules apply:
 - The CA MUST find a row in the request table that contains the certificate that needs to be revoked in this method invocation. The CA finds the row by comparing the value of the *pwszSerialNumber* parameter to the values of the Serial_Number column in the request table. This is a case-sensitive string comparison. If none of the rows in the Request table have a Serial_Number value that is identical to the value that is passed in the *pwszSerialNumber* parameter, the CA MUST fail the request. The error returned SHOULD be 0x80070057. When a row that has an identical serial number, as previously specified, is found, the CA SHOULD continue with the following processing rules.
 **Note** These processing rules refer to this row as the identified row.
 
-- If the *Reason* parameter is 0xfffffffd, the CA MUST set the Publish_Expired_Cert_In_CRL column of the identified row to 0 and return successfully.<47>
-- If the *Reason* parameter is 0xfffffffe, the CA MUST set the Publish_Expired_Cert_In_CRL column of the identified row to 1 and return successfully.<48>
+- If the *Reason* parameter is 0xfffffffd, the CA MUST set the Publish_Expired_Cert_In_CRL column of the identified row to 0 and return successfully.<48>
+- If the *Reason* parameter is 0xfffffffe, the CA MUST set the Publish_Expired_Cert_In_CRL column of the identified row to 1 and return successfully.<49>
 - If the value for the *Reason* parameter is 0xffffffff and the value of the Request_Revoked_Reason column in the identified row is not "certificateHold", the CA MUST fail the request, and the error code SHOULD be ERROR_INVALID_DATA.
 - If the *Reason* parameter is not 0, 1, 2, 3, 4, 5, 6, 8, 0xfffffffd, 0xfffffffe, or 0xffffffff, the CA MUST fail the request. The error code SHOULD be E_INVALIDARG (0x80070057), as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1. Otherwise, the CA MUST continue with the following processing rules. The Windows mnemonic for reason code 6 is CRL_REASON_CERTIFICATE_HOLD.
 - If the Request_Disposition column of the identified row equals "certificate issued", the CA MUST set the Request_Disposition column of the identified row to "certificate revoked", and the CA SHOULD set the value of the Request_Disposition_Message column in the identified row to any value that the implementer considers informative for presentation to a human. In this case, the Microsoft CA sets Request_Disposition_Message to "Revoked by *{username}*" where "*{username}*" is replaced with the user name of the caller.
@@ -3112,13 +3115,13 @@ The [**CA**](#gt_certification-authority-ca) server MUST return the array of ass
 
 | Value of the iColumnSetDefault parameter | Processing rule |
 | --- | --- |
-| 0xFFFFFFFF | The CA MUST return a subset of column identifiers for a pending request view from the [Request table](#Section_3.1.1.1).<49> |
-| 0xFFFFFFFE | The CA MUST return a subset of column identifiers for issued and revoked certificate views and failed request view from the Request table.<50> |
-| 0xFFFFFFFD | The CA MUST return a subset of column identifiers for a failed request view from the Request table.<51> |
-| 0xFFFFFFFC | The CA MUST return a subset of column identifiers for an extension view from the [Extension table](#Section_3.1.1.3).<52> |
-| 0xFFFFFFFB | The CA MUST return a subset of column identifiers for an attribute view from the [Attribute table](#Section_3.1.1.2).<53> |
-| 0xFFFFFFFA | The CA MUST return a subset of column identifiers for a CRL view from the [CRL table](#Section_3.1.1.4.1).<54> |
-| 0xFFFFFFF9 | The CA MUST return a subset of column identifiers for a revoked certificate view from the Request table.<55> |
+| 0xFFFFFFFF | The CA MUST return a subset of column identifiers for a pending request view from the [Request table](#Section_3.1.1.1).<50> |
+| 0xFFFFFFFE | The CA MUST return a subset of column identifiers for issued and revoked certificate views and failed request view from the Request table.<51> |
+| 0xFFFFFFFD | The CA MUST return a subset of column identifiers for a failed request view from the Request table.<52> |
+| 0xFFFFFFFC | The CA MUST return a subset of column identifiers for an extension view from the [Extension table](#Section_3.1.1.3).<53> |
+| 0xFFFFFFFB | The CA MUST return a subset of column identifiers for an attribute view from the [Attribute table](#Section_3.1.1.2).<54> |
+| 0xFFFFFFFA | The CA MUST return a subset of column identifiers for a CRL view from the [CRL table](#Section_3.1.1.4.1).<55> |
+| 0xFFFFFFF9 | The CA MUST return a subset of column identifiers for a revoked certificate view from the Request table.<56> |
 
 <a id="Section_3.1.4.1.11"></a>
 ##### 3.1.4.1.11 ICertAdminD::EnumAttributesOrExtensions (Opnum 13)
@@ -3402,9 +3405,9 @@ HRESULT BackupPrepare(
 
 **dwClientIdentifier:** An unsigned long value. Not used. MUST be 0. MUST be ignored on receipt.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<56>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<57>
 
-The CA server MUST enforce the following sequencing rules:<57>
+The CA server MUST enforce the following sequencing rules:<58>
 
 - Before a CA backup can occur, BackupPrepare MUST be called by the client to notify the CA that a backup of the CA is about to happen:
 - If BackupGetAttachmentInformation is called without a previous call to BackupPrepare with the *grbitJet* parameter set to 0 (for a full backup), the CA MUST fail. The error code SHOULD be 0xc8000209.
@@ -3429,9 +3432,9 @@ HRESULT BackupEnd();
 
 This method has no parameters.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<58>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<59>
 
-The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for BackupEnd as specified in section 3.1.4.1.18.<59>
+The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for BackupEnd as specified in section 3.1.4.1.18.<60>
 
 <a id="Section_3.1.4.1.20"></a>
 ##### 3.1.4.1.20 ICertAdminD::BackupGetAttachmentInformation (Opnum 22)
@@ -3450,11 +3453,11 @@ HRESULT BackupGetAttachmentInformation(
 
 **pcwcDBFiles:** A pointer to an integer value that contains the total length, in characters, of all strings (including a NULL-terminator character) returned in *ppwszzDBFiles*.
 
-The CA server MUST enforce the sequencing rules for BackupGetAttachmentInformation as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<60>
+The CA server MUST enforce the sequencing rules for BackupGetAttachmentInformation as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<61>
 
 The CA server MUST apply the following processing rules:
 
-- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error. <61>
+- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error. <62>
 - The CA server MUST return a list of file names associated with the CA database data files required for backup. The files corresponding to the names that are returned MUST be accessible to the CA. Each file name MUST be in [**UNC**](#gt_universal-naming-convention-unc) format and MUST be prefixed with the "D" character. If there are no database files, the CA MUST set the value of the *pcwcDBFiles* parameter to 0 and return successfully.
 <a id="Section_3.1.4.1.21"></a>
 ##### 3.1.4.1.21 ICertAdminD::BackupGetBackupLogs (Opnum 23)
@@ -3475,11 +3478,11 @@ WCHAR** ppwszzLogFiles,
 
 **pcwcLogFiles:** A pointer to an integer value that contains the total length, in characters, of all strings (including the NULL terminator character) returned in *ppwszzLogFiles*.
 
-The CA server MUST enforce the sequencing rules for BackupGetBackupLogs, as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<62>
+The CA server MUST enforce the sequencing rules for BackupGetBackupLogs, as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<63>
 
 The CA server MUST apply the following processing rules:
 
-- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error. <63>
+- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error. <64>
 - The CA server MUST return a list of file names associated with the databases log files required for backup. The list of files MUST be accessible to the CA. Each file name MUST be in [**UNC**](#gt_universal-naming-convention-unc) format and MUST be prefixed with an exclamation point "!". If there are no database log files, the CA MUST set 0 as the value of the **pcwcLogFiles* parameter and return successfully.
 <a id="Section_3.1.4.1.22"></a>
 ##### 3.1.4.1.22 ICertAdminD::BackupOpenFile (Opnum 24)
@@ -3498,11 +3501,11 @@ HRESULT BackupOpenFile(
 
 **pliLength:** A pointer to a signed 64-bit integer that receives the size, in bytes, of the targeted file.
 
-The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for BackupOpenFile as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<64>
+The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for BackupOpenFile as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<65>
 
 The CA server MUST apply the following processing rules:
 
-- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<65>
+- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<66>
 - The CA server MUST enforce that FileName is one of the file names (without the prefix) that could be returned via a call to [BackupGetAttachmentInformation](#Section_3.1.4.1.20) or [BackupGetBackupLogs](#Section_3.1.4.1.21).
 - The CA server MUST enforce that the file corresponding to FileName is accessible to the CA.
 - Upon successful return, the CA MUST return the size, in bytes, of the file content in the **pliLength* parameter.
@@ -3527,11 +3530,11 @@ HRESULT BackupReadFile(
 
 **pcbRead:** A pointer to an integer that receives the actual number of bytes read.
 
-The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for the BackupReadFile, as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<66>
+The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for the BackupReadFile, as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).<67>
 
 The CA server MUST apply the following processing rules:
 
-- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error. <67>
+- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error. <68>
 - If the BackupReadFile is called for the first time after the BackupOpenFile, the CA MUST read the content, in bytes, from the start of the file up to, at maximum, the value of the *cbBuffer* parameter.
 - Upon a subsequent call to the BackupReadFile, the CA MUST read the content, starting from a 1-byte offset of the last byte read in the previous call to the BackupReadFile.
 - If the CA has already reached end-of-file, the call MUST succeed with 0 as the value of **pcbRead*; otherwise, **pcbRead* MUST contain the actual number of bytes read from the file.
@@ -3544,7 +3547,7 @@ HRESULT BackupCloseFile();
 
 This method has no parameters.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<68>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<69>
 
 The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for the BackupCloseFile, as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).
 
@@ -3557,11 +3560,11 @@ HRESULT BackupTruncateLogs();
 
 This method has no parameters.
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<69>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<70>
 
 The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing rules for BackupTruncateLogs as specified in section [3.1.4.1.18](#Section_3.1.4.1.18).
 
-The CA server MUST remove the redundant records in the log files (records that are present in the database also are defined as redundant), thereby decreasing the disk space used to store the log files.<70>
+The CA server MUST remove the redundant records in the log files (records that are present in the database also are defined as redundant), thereby decreasing the disk space used to store the log files.<71>
 
 <a id="Section_3.1.4.1.26"></a>
 ##### 3.1.4.1.26 ICertAdminD::ImportCertificate (Opnum 28)
@@ -3609,8 +3612,8 @@ The CA MUST locate an entry in the Request table whose Request_Disposition is "r
 - If the entry is found in the Request Table, the CA MUST update the fields from the information in the certificate. For processing rules for each data element in the Request table, see the ImportCertificate processing rules in the following table. The CA MUST return the Request_Request_ID of the updated Request table row as the *pdwRequestId* parameter.
 - If the entry is not found in the Request table, the CA MUST fail with the error 0x80092009 (CRYPT_E_NO_MATCH).
 - If the signature validation fails (at step 2) and FLAG_ALLOW_IMPORT_FOREIGN is not passed as a value of *dwFlags*, the CA MUST fail with the error 0x800b0107, according to the ImportCertificate data element processing rules in the following table.
-- If the signature validation fails (at step 2) and FLAG_ALLOW_IMPORT_FOREIGN is passed as value of *dwFlags* and the certificate is already present in the Request table, the CA SHOULD return the resulting Request_Request_ID to the client. For processing rules for each data element in the Request table, see the ImportCertificate processing rules in the following table.<71>
-- If the signature validation fails (at step 2), if FLAG_ALLOW_IMPORT_FOREIGN is passed as the value of *dwFlags*, and if the certificate is not already present in the Request table, the certificate SHOULD be added to the Request table as a new row and the CA SHOULD return the resulting Request_Request_ID to the client. For processing rules for each data element in the Request table, see the ImportCertificate data element in the following table.<72>
+- If the signature validation fails (at step 2) and FLAG_ALLOW_IMPORT_FOREIGN is passed as value of *dwFlags* and the certificate is already present in the Request table, the CA SHOULD return the resulting Request_Request_ID to the client. For processing rules for each data element in the Request table, see the ImportCertificate processing rules in the following table.<72>
+- If the signature validation fails (at step 2), if FLAG_ALLOW_IMPORT_FOREIGN is passed as the value of *dwFlags*, and if the certificate is not already present in the Request table, the certificate SHOULD be added to the Request table as a new row and the CA SHOULD return the resulting Request_Request_ID to the client. For processing rules for each data element in the Request table, see the ImportCertificate data element in the following table.<73>
 The certificate fields and extensions SHOULD be processed and stored in individual Request table fields according to the rules in the following table.
 
 | Bit Range | Field | Description |
@@ -3683,7 +3686,7 @@ HRESULT BackupGetDynamicFiles(
 
 The CA server MUST apply the following processing rules:
 
-- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<73>
+- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<74>
 - The CA server MUST return a list of file names that are not part of the database but which the CA deems necessary to be part of backup. An example of a CA dynamic file is the CRL. The files MUST be accessible to the CA. Each file name MUST be in [**UNC**](#gt_universal-naming-convention-unc) format. If no files are deemed necessary, the CA MUST set 0 as the value of the **pcwcFiles* parameter and return successfully.
 <a id="Section_3.1.4.1.28"></a>
 ##### 3.1.4.1.28 ICertAdminD::RestoreGetDatabaseLocations (Opnum 30)
@@ -3704,12 +3707,12 @@ HRESULT RestoreGetDatabaseLocations(
 
 The CA server MUST apply the following processing rules:
 
-- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<74>
+- If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<75>
 - The CA server MUST return a list that includes the CA database file name and the locations to which the CA log and system files will be restored. The locations MUST be accessible to the CA. The database file name MUST be in [**UNC**](#gt_universal-naming-convention-unc) format and MUST be prefixed with "D". The log file location MUST be in UNC format and prefixed with a character whose value is 130. The system file location MUST be in UNC format and prefixed with a character whose value is 131.
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Processing Rules for ICertAdminD2
 
-The ICertAdminD2 interface extends the [ICertAdminD](#Section_3.1.4.1.7) interface described in the preceding section.<75>
+The ICertAdminD2 interface extends the [ICertAdminD](#Section_3.1.4.1.7) interface described in the preceding section.<76>
 
 The version number for this interface is "1.0". The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is: "7fe0d935-dda6-443f-85d0-1cfb58fe41dd".
 
@@ -3742,11 +3745,11 @@ All methods MUST NOT throw exceptions.
 
 The CA MUST execute the following processing rules for each invocation of the methods listed below in this section. Then the CA MUST proceed to execute the processing rules listed for each method.
 
-The CA MUST determine the identity of the caller by checking the value of the element **uToken.Sids[uToken.UserIndex]**. The ADM element **uToken** is initialized by retrieving the identity token for the current [**execution context**](#gt_execution-context) by calling the abstract interface **GetRpcImpersonationAccessToken()** as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3.1. The SID of the caller is the value of the **uToken.Sids** array element indexed at **uToken.UserIndex**. If the caller cannot be identified, the CA MUST refuse to establish a connection, returning an error.<76>
+The CA MUST determine the identity of the caller by checking the value of the element **uToken.Sids[uToken.UserIndex]**. The ADM element **uToken** is initialized by retrieving the identity token for the current [**execution context**](#gt_execution-context) by calling the abstract interface **GetRpcImpersonationAccessToken()** as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3.1. The SID of the caller is the value of the **uToken.Sids** array element indexed at **uToken.UserIndex**. If the caller cannot be identified, the CA MUST refuse to establish a connection, returning an error.<77>
 
-If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTADMIN (section 3.1.4.2.14) and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE] section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning an error. In Windows the error is E_ACCESSDENIED (0x80070005).<77>
+If Config_CA_Interface_Flags contains the value IF_ENFORCEENCRYPTICERTADMIN (section 3.1.4.2.14) and the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level, as defined in [MS-RPCE] section 2.2.1.1.8, is not specified on the RPC connection from the client, the CA MUST refuse to establish a connection with the client by returning an error. In Windows the error is E_ACCESSDENIED (0x80070005).<78>
 
-If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMIN, the CA SHOULD return an error for any of the methods listed in this section.<78>
+If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMIN, the CA SHOULD return an error for any of the methods listed in this section.<79>
 
 <a id="Section_3.1.4.2.1"></a>
 ##### 3.1.4.2.1 ICertAdminD2::PublishCRLs (Opnum 31)
@@ -3814,8 +3817,8 @@ packet-beta
 The CA server MUST apply the following processing rules:
 
 - If the F bit is set in *Flags*, the *FileTime* parameter is ignored and the following MUST occur:
-- If the B bit is set in *Flags*, the CA MUST republish the most recent base CRL (the CRL identified by the CRL [**table**](#gt_table) row with CRL_Min_Base of 0 and the highest CRL_Number) for each valid CA [**key**](#gt_key) (CRL_Name_ID) and for each partition to the locations that are identified in Config_CA_CDP_Publish_To_Base using the logic in section [3.1.5.2](#Section_3.1.5.2), rules 2 and 3 only.<79>
-- If the D bit is set in *Flags*, the CA MUST publish the most recent delta CRL (the CRL identified by the CRL table row with CRL_Min_Base not equal to 0 and the highest CRL_Number) for each valid CA key (CRL_Name_ID) and for each partition to the locations that are identified in Config_CA_CDP_Publish_To_Delta using the logic in section 3.1.5.2, rules 2 and 3 only.<80>
+- If the B bit is set in *Flags*, the CA MUST republish the most recent base CRL (the CRL identified by the CRL [**table**](#gt_table) row with CRL_Min_Base of 0 and the highest CRL_Number) for each valid CA [**key**](#gt_key) (CRL_Name_ID) and for each partition to the locations that are identified in Config_CA_CDP_Publish_To_Base using the logic in section [3.1.5.2](#Section_3.1.5.2), rules 2 and 3 only.<80>
+- If the D bit is set in *Flags*, the CA MUST publish the most recent delta CRL (the CRL identified by the CRL table row with CRL_Min_Base not equal to 0 and the highest CRL_Number) for each valid CA key (CRL_Name_ID) and for each partition to the locations that are identified in Config_CA_CDP_Publish_To_Delta using the logic in section 3.1.5.2, rules 2 and 3 only.<81>
 - If neither the B bit nor the D bit is set in *Flags*, the CA MUST return an error. The error SHOULD be ERROR_INVALID_PARAMETER.
 - If the F bit is NOT set in *Flags*, the following SHOULD occur:
 The CA MUST create a CRL for each valid CA key and for each partition using the logic in section [3.1.4.1.6](#Section_3.1.4.1.6), rules 2 through 7. The CRL type is determined as follows:
@@ -3881,11 +3884,11 @@ The data type of the value returned depends on the value specified in the *PropT
 - CR_PROP_CACERTSTATE
 - CR_PROP_CRLSTATE
 - CR_PROP_KRACERTSTATE
-- CR_PROP_CRLPARTITIONCOUNT<81>
+- CR_PROP_CRLPARTITIONCOUNT<82>
 - CR_PROP_BASECRLPUBLISHSTATUS
-- CR_PROP_PARTITIONED_BASECRLPUBLISHSTATUS<82>
+- CR_PROP_PARTITIONED_BASECRLPUBLISHSTATUS<83>
 - CR_PROP_DELTACRLPUBLISHSTATUS
-- CR_PROP_PARTITIONED_DELTACRLPUBLISHSTATUS<83>
+- CR_PROP_PARTITIONED_DELTACRLPUBLISHSTATUS<84>
 - CR_PROP_CACERTSTATUSCODE
 - CR_PROP_CAFORWARDCROSSCERTSTATE
 - CR_PROP_CABACKWARDCROSSCERTSTATE
@@ -4060,7 +4063,7 @@ The EnumViewColumnTable method returns information to the client about columns t
 
 - The CA server MUST enforce that the *iTable* parameter has a value as specified in the previous table; otherwise, it MUST fail with the error ERROR_INVALID_PARAMETER.
 - The CA server MUST enforce that *iColumn* is less than the number of columns associated with the table; otherwise, it MUST fail with the error ERROR_ARITHMETIC_OVERFLOW.
-- The CA server MUST enforce that *cColumn* is greater than 0; otherwise, it MUST fail with the error ERROR_INVALID_PARAMETER.<84>
+- The CA server MUST enforce that *cColumn* is greater than 0; otherwise, it MUST fail with the error ERROR_INVALID_PARAMETER.<85>
 - The CA server MUST use the value of **iColumn** to identify the column identifier that is associated with the table (identified by the value of the *iTable* parameter).
 - The number of column information returned MUST be a minimum of the **cColumn** value and the remaining number of columns in the table (starting from **iColumn**). The value of *pcColumn MUST be set to the number of the column information returned.
 <a id="Section_3.1.4.2.6"></a>
@@ -4327,9 +4330,9 @@ HRESULT GetConfigEntry(
 
 **pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.1).
 
-**pwszNodePath:** A string value that represents the node path for the configuration information. This parameter can be an empty string and MUST NOT be NULL.<85>
+**pwszNodePath:** A string value that represents the node path for the configuration information. This parameter can be an empty string and MUST NOT be NULL.<86>
 
-**pwszEntry:** A string value that represents the name of the leaf entry whose information is being retrieved. This value can be an EMPTY string and MUST NOT be NULL.<86>
+**pwszEntry:** A string value that represents the name of the leaf entry whose information is being retrieved. This value can be an EMPTY string and MUST NOT be NULL.<87>
 
 **pVariant:** A pointer to a [VARIANT](#Section_2.2.1.2) that receives the requested information.
 
@@ -4362,7 +4365,7 @@ The following processing rules apply:
 | pwszNodePath is EMPTY and pwszEntry is "UseDS" | The CA MUST return the value of the OnNextRestart_Config_CA_Use_DS ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_I4 and the lVal member MUST be set to one of the following values: 0 – The CA is not using [**Active Directory**](#gt_active-directory) for CRL publication Any nonzero value: The CA is using AD for CRL publication |
 | pwszNodePath is EMPTY and pwszEntry is "CAType" | The CA MUST return the value of the OnNextRestart_Config_CA_Type ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_I4 and the lVal member MUST be set to one of the CAType values specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 2.2.2.4. |
 | pwszNodePath is EMPTY and pwszEntry is "KRAFlags" | The CA MUST return the value of the OnNextRestart_Config_CA_KRA_Flags ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_I4 and the lVal member MUST be one the following values: 0 0x00000001 – allow foreign [**certificate**](#gt_certificate) [**key archival**](#gt_key-archival) |
-| pwszAuthority is EMPTY and pwszNodePath is EMPTY and pwszEntry is "Version" | The CA MUST return the value of the OnNextRestart_Config_Product_Version ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_I4 and the lVal member MUST be set to the one of the following values: 0x00010001 – Server is Windows 2000 Server operating system 0x00020002 – Server is Windows Server 2003 operating system 0x00030001 – Server is Windows Server 2008 operating system 0x00040001 – Server is Windows Server 2008 R2 operating system 0x00050001 – Server is Windows Server 2012 operating system 0x00060001 – Server is Windows Server 2012 R2 operating system <87> 0x00070001 – Server is Windows Server 2016 operating system or Windows Server 2019 operating system |
+| pwszAuthority is EMPTY and pwszNodePath is EMPTY and pwszEntry is "Version" | The CA MUST return the value of the OnNextRestart_Config_Product_Version ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_I4 and the lVal member MUST be set to the one of the following values: 0x00010001 – Server is Windows 2000 Server operating system 0x00020002 – Server is Windows Server 2003 operating system 0x00030001 – Server is Windows Server 2008 operating system 0x00040001 – Server is Windows Server 2008 R2 operating system 0x00050001 – Server is Windows Server 2012 operating system 0x00060001 – Server is Windows Server 2012 R2 operating system <88> 0x00070001 – Server is Windows Server 2016 operating system or Windows Server 2019 operating system |
 | pwszNodePath is EMPTY and pwszEntry is "CommonName" | The CA MUST return the value of the **OnNextRestart_Config_CA_Common_Name** ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_BSTR and the bstrVal member MUST be BSTR for the Unicode string value of the [**common name**](#gt_common-name-cn) of the CA. |
 | pwszNodePath is EMPTY and pwszEntry is "InterfaceFlags" | The CA MUST return the value of the **OnNextRestart_Config_CA_Interface_Flags** ADM element as a VARIANT. The vt member of the VARIANT MUST be set to VT_I4 and the lVal member MUST be either 0 or a bitwise-OR of the following values: IF_LOCKICERTREQUEST = 0x1 This value has no effect. IF_NOREMOTEICERTREQUEST = 0x2 The CA will not issue any certificates or hold pending any requests for remote users. IF_NOLOCALICERTREQUEST = 0x4 The CA will not issue any certificates or hold pending any requests for local users. IF_NORPCICERTREQUEST = 0x8 The CA will not issue any certificates or hold pending any requests for callers using the ICertPassage interface. IF_NOREMOTEICERTADMIN = 0x10 (16) No access to Certificate Services Remote Administration Protocol methods for remote callers. IF_NOLOCALICERTADMIN = 0x20 (32) No access to Certificate Services Remote Administration Protocol methods for local callers. IF_NOREMOTEICERTADMINBACKUP = 0x40 (64) The CA restricts access to the backup-related methods of this protocol for remote callers. IF_NOLOCALICERTADMINBACKUP = 0x80 (128) The CA restricts access to the backup-related methods of this protocol for local callers. IF_NOSNAPSHOTBACKUP = 0x100 (256) The database files cannot be backed up using a mechanism other than the methods of this interface. IF_ENFORCEENCRYPTICERTREQUEST = 0x200 (512) RPC_C_AUTHN_LEVEL_PKT_PRIVACY, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8, must be defined for all RPC connections to the server for certificate-request operations. IF_ENFORCEENCRYPTICERTADMIN = 0x400 (1024) RPC_C_AUTHN_LEVEL_PKT_PRIVACY, as defined in [MS-RPCE] section 2.2.1.1.8, must be defined for all RPC connections to the server for certificate administrative operations (the methods defined in this interface). IF_ENABLEEXITKEYRETRIEVAL = 0x800 (2048) Enables an exit algorithm to retrieve the Encrypted private-Key Blob. IF_ENABLEADMINASAUDITOR = 0x1000 (4096) Only CA administrators can update the CA audit filter settings. |
 | pwszNodePath is EMPTY and pwszEntry is "HighSerial" | If the value of the OnNextRestart_Config_High_Serial_String is not empty, the CA MUST return the value of the OnNextRestart_Config_High_Serial_String. Otherwise, the CA MUST return the value of the OnNextRestart_Config_High_Serial_Number. |
@@ -6099,23 +6102,25 @@ The following table details the CRL table for Windows Server 2003 and later. (Wi
 | CR_DISP_UNDER_SUBMISSION 0x00000005 | Request pending |
 | CR_DISP_REVOKED 0x00000006 | Certificate revoked |
 
-<6> Section 3.1.1.1.2: These flags are supported in Windows Server 2012 R2 and later.
+<6> Section 3.1.1.1.2: Windows Server 2019 through Windows Server 2025 with [[MSFT-CVE-2026-6726]](https://go.microsoft.com/fwlink/?LinkId=2374650), and later support CR_FLG_V2CHALLENGE flag.
 
-<7> Section 3.1.1.1.2: Request_RequesterName_From_Old_Certificate is supported in Windows Server 2008 R2 and later.
+<7> Section 3.1.1.1.2: These flags are supported in Windows Server 2012 R2 and later.
 
-<8> Section 3.1.1.1.2: This column and the associated functionality are available starting with Windows Server 2016 and later versions of the Windows OS.
+<8> Section 3.1.1.1.2: Request_RequesterName_From_Old_Certificate is supported in Windows Server 2008 R2 and later.
 
-<9> Section 3.1.1.1.2: This column and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<9> Section 3.1.1.1.2: This column and the associated functionality are available starting with Windows Server 2016 and later versions of the Windows OS.
 
-<10> Section 3.1.1.1.2: This functionality is available in Windows Server 2022 and later OS versions after installing the August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
+<10> Section 3.1.1.1.2: This column and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<11> Section 3.1.1.4: Windows 2000 Server and later [**CAs**](#gt_certification-authority-ca) store this CRL in the registry location **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SystemCertificates\CA\CRLs.**
+<11> Section 3.1.1.1.2: This functionality is available in Windows Server 2022 and later OS versions after installing the August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
 
-<12> Section 3.1.1.4.2: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<12> Section 3.1.1.4: Windows 2000 Server and later [**CAs**](#gt_certification-authority-ca) store this CRL in the registry location **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SystemCertificates\CA\CRLs.**
 
-<13> Section 3.1.1.7: The permissions of Officer, Operator, and Auditor are supported on Windows Server 2003 Enterprise Edition operating system, Windows Server 2003 Datacenter Edition operating system, Windows Server 2008 Enterprise operating system, Windows Server 2008 Datacenter operating system, Windows Server 2008 R2 Enterprise Edition, Windows Server 2008 R2 Datacenter Edition, and Windows Server 2012 and later.
+<13> Section 3.1.1.4.2: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<14> Section 3.1.1.8: The Microsoft CA keeps all [**CRL**](#gt_certificate-revocation-list-crl) publishing locations in a registry multistring value.
+<14> Section 3.1.1.7: The permissions of Officer, Operator, and Auditor are supported on Windows Server 2003 Enterprise Edition operating system, Windows Server 2003 Datacenter Edition operating system, Windows Server 2008 Enterprise operating system, Windows Server 2008 Datacenter operating system, Windows Server 2008 R2 Enterprise Edition, Windows Server 2008 R2 Datacenter Edition, and Windows Server 2012 and later.
+
+<15> Section 3.1.1.8: The Microsoft CA keeps all [**CRL**](#gt_certificate-revocation-list-crl) publishing locations in a registry multistring value.
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\
 
@@ -6173,7 +6178,7 @@ The deltaRevocationList attribute is not used by the Windows 2000 operating syst
 
 Within the certificateRevocationList or deltaRevocationList attribute, the CRL is encoded by using Distinguished Encoding Rules (DER).
 
-<15> Section 3.1.1.10: Microsoft CAs persist only a subset of the configuration data. They store the configuration data in the registry in the following locations:
+<16> Section 3.1.1.10: Microsoft CAs persist only a subset of the configuration data. They store the configuration data in the registry in the following locations:
 
 Values under
 
@@ -6850,9 +6855,7 @@ where <CA_CN> is replaced with the CN of the CA. The values are as follows:
 
 **No Value Semantics:** Unsupported; a Windows CA always has at least one policy module.
 
-<16> Section 3.1.1.10: **Config_CA_Allow_RenewOnBehalfOf_Requests** is supported by applicable Windows Server releases except Windows 2000 Server, Windows Server 2003, and Windows Server 2008.
-
-<17> Section 3.1.1.10: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
+<17> Section 3.1.1.10: **Config_CA_Allow_RenewOnBehalfOf_Requests** is supported by applicable Windows Server releases except Windows 2000 Server, Windows Server 2003, and Windows Server 2008.
 
 <18> Section 3.1.1.10: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
@@ -6862,9 +6865,11 @@ where <CA_CN> is replaced with the CN of the CA. The values are as follows:
 
 <21> Section 3.1.1.10: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<22> Section 3.1.1.10: Added the four new ADM elements that support Certificate Transparency to the Configuration table for Windows Server 2019 and later: Config_CertificateTransparency_Enabled, Config_CertificateTransparency_Disable_SCTList_Validation, Config_CertificateTransparency_Max_SCTList_Size, and Config_CertificateTransparency_Info_Extension_Oid.
+<22> Section 3.1.1.10: This configuration and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<23> Section 3.1.3: The [**DCOM**](#gt_distributed-component-object-model-dcom) security descriptor is accessed from the registry location HKLM\SOFTWARE\Microsoft\Ole\:
+<23> Section 3.1.1.10: Added the four new ADM elements that support Certificate Transparency to the Configuration table for Windows Server 2019 and later: Config_CertificateTransparency_Enabled, Config_CertificateTransparency_Disable_SCTList_Validation, Config_CertificateTransparency_Max_SCTList_Size, and Config_CertificateTransparency_Info_Extension_Oid.
+
+<24> Section 3.1.3: The [**DCOM**](#gt_distributed-component-object-model-dcom) security descriptor is accessed from the registry location HKLM\SOFTWARE\Microsoft\Ole\:
 
 - Value: MachineAccessRestriction
 - Values added
@@ -6879,35 +6884,35 @@ where <CA_CN> is replaced with the CN of the CA. The values are as follows:
 - COM_RIGHTS_EXECUTE_REMOTE maps to the value of 4
 - COM_RIGHTS_ACTIVATE_LOCAL maps to the value of 8
 - COM_RIGHTS_ACTIVATE_REMOTE maps to the value of 16
-<24> Section 3.1.3: Upon service startup, the Windows CA reads the configuration values from the registry location "HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\".
+<25> Section 3.1.3: Upon service startup, the Windows CA reads the configuration values from the registry location "HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\".
 
-<25> Section 3.1.4.1: The supported clients are Windows 2000 Professional, Windows XP, Windows Vista with Admin Pack, and Windows 7 and later. The supported servers are Windows 2000 Server and later.
+<26> Section 3.1.4.1: The supported clients are Windows 2000 Professional, Windows XP, Windows Vista with Admin Pack, and Windows 7 and later. The supported servers are Windows 2000 Server and later.
 
-<26> Section 3.1.4.1: In Windows 2000 Server and later, the error is E_ACCESSDENIED (0x80070005).
+<27> Section 3.1.4.1: In Windows 2000 Server and later, the error is E_ACCESSDENIED (0x80070005).
 
-<27> Section 3.1.4.1: In applicable Windows Server releases, except Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 Server does not return an error.
+<28> Section 3.1.4.1: In applicable Windows Server releases, except Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 Server does not return an error.
 
-<28> Section 3.1.4.1: The operating systems specified in [[MSFT-CVE-2022-37976]](https://go.microsoft.com/fwlink/?linkid=2219940), each with their related KB article download installed, and the Active Directory Certificate Services elevation of privilege vulnerability mitigation described therein, requires that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTADMIN (section 3.1.4.2.14) setting.
+<29> Section 3.1.4.1: The operating systems specified in [[MSFT-CVE-2022-37976]](https://go.microsoft.com/fwlink/?linkid=2219940), each with their related KB article download installed, and the Active Directory Certificate Services elevation of privilege vulnerability mitigation described therein, requires that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTADMIN (section 3.1.4.2.14) setting.
 
-<29> Section 3.1.4.1: In applicable Windows Server releases, except Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 Server does not return an error.
+<30> Section 3.1.4.1: In applicable Windows Server releases, except Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 Server does not return an error.
 
-<30> Section 3.1.4.1.3: In Windows Server 2003, the CA places 0x80094004 in the *pdwDisposition* parameter and returns successfully. In Windows Server 2008 and later, the CAs place 0 in the *pdwDisposition* parameter and return 0x80094004 as the error code.
+<31> Section 3.1.4.1.3: In Windows Server 2003, the CA places 0x80094004 in the *pdwDisposition* parameter and returns successfully. In Windows Server 2008 and later, the CAs place 0 in the *pdwDisposition* parameter and return 0x80094004 as the error code.
 
-<31> Section 3.1.4.1.3: This functionality is available in Windows Server 2022 and later OS versions after installing the August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
+<32> Section 3.1.4.1.3: This functionality is available in Windows Server 2022 and later OS versions after installing the August (8B) Windows update. However, the fix is currently disabled and will be enabled starting with the November (11B) or later Windows updates.
 
-<32> Section 3.1.4.1.4: Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 set the Request_Status_Code to 0x0 (S_OK).
+<33> Section 3.1.4.1.4: Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 set the Request_Status_Code to 0x0 (S_OK).
 
-<33> Section 3.1.4.1.6: In a Windows 2000 CA, CRL creation can be disabled by setting the Config_Base_CRL_Validity_Period to 0. In a Windows 2000 CA, if the Microsoft default exit module "CertificateAuthority_MicrosoftDefault.Exit" is not active (that is, not included in the ADM element **Config_CA_Exit_Algorithm_Implementation_List**), then no CRLs are published. The setting Config_CA_Exit_Algorithm_Implementation_List has no effect on PublishCRL behavior in Windows Server 2003 and later. If CRLs are disabled, certificates issued by the CA cannot be used for applications that require CRL–based [**revocation**](#gt_revocation) checking.
+<34> Section 3.1.4.1.6: In a Windows 2000 CA, CRL creation can be disabled by setting the Config_Base_CRL_Validity_Period to 0. In a Windows 2000 CA, if the Microsoft default exit module "CertificateAuthority_MicrosoftDefault.Exit" is not active (that is, not included in the ADM element **Config_CA_Exit_Algorithm_Implementation_List**), then no CRLs are published. The setting Config_CA_Exit_Algorithm_Implementation_List has no effect on PublishCRL behavior in Windows Server 2003 and later. If CRLs are disabled, certificates issued by the CA cannot be used for applications that require CRL–based [**revocation**](#gt_revocation) checking.
 
-<34> Section 3.1.4.1.6: The Windows 2000 CA does not have a CRL table; therefore, it does not create or update a CRL table entry.
+<35> Section 3.1.4.1.6: The Windows 2000 CA does not have a CRL table; therefore, it does not create or update a CRL table entry.
 
-<35> Section 3.1.4.1.6: The Windows CA uses a default clock skew (Config_CA_Clock_Skew_Minutes) of 10 minutes. The Windows CA defines this value in the registry as follows:
+<36> Section 3.1.4.1.6: The Windows CA uses a default clock skew (Config_CA_Clock_Skew_Minutes) of 10 minutes. The Windows CA defines this value in the registry as follows:
 
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services
 
 \CertSvc\Configuration{CA Name}\ClockSkewMinutes (REG_DWORD)
 
-<36> Section 3.1.4.1.6: By default, the Config_Base_CRL_Overlap_Period and Config_Delta_CRL_Overlap_Period values are not defined. The Windows CA keeps these overlap periods in the following registry values:
+<37> Section 3.1.4.1.6: By default, the Config_Base_CRL_Overlap_Period and Config_Delta_CRL_Overlap_Period values are not defined. The Windows CA keeps these overlap periods in the following registry values:
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\
 
@@ -6919,15 +6924,15 @@ REG_SZ CRLDeltaOverlapPeriod
 
 REG_DWORD CRLDeltaOverlapPeriodUnits
 
-<37> Section 3.1.4.1.6: The Windows CA for uses a default clock skew (Config_CA_Clock_Skew_Minutes) of 10 minutes. The Windows CA defines this value in the registry as follows:
+<38> Section 3.1.4.1.6: The Windows CA for uses a default clock skew (Config_CA_Clock_Skew_Minutes) of 10 minutes. The Windows CA defines this value in the registry as follows:
 
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\CertSvc\Configuration{CA Name}\ClockSkewMinutes (REG_DWORD)
 
-<38> Section 3.1.4.1.6: Differing from [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 5, a Windows 2000 CA does not populate the CRL number extension.
+<39> Section 3.1.4.1.6: Differing from [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 5, a Windows 2000 CA does not populate the CRL number extension.
 
-<39> Section 3.1.4.1.6: A Windows 2000 CA does not create delta CRLs.
+<40> Section 3.1.4.1.6: A Windows 2000 CA does not create delta CRLs.
 
-<40> Section 3.1.4.1.6: The Windows CA keeps this list of CDP locations in a registry multistring value.
+<41> Section 3.1.4.1.6: The Windows CA keeps this list of CDP locations in a registry multistring value.
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\
 
@@ -6954,9 +6959,9 @@ where:
 - **{CRLNameSuffix}** is replaced with NULL if the CRL is signed by the first CA key (CA key with key index 0) and by "(n)" if the CRL is signed by any subsequent CA key, with {n} being an integer equal to the identifier (Signing_Private_Key_Version_ID, as defined in [MS-WCCE] section 3.2.1.1.3) of the CA certificate [**private key**](#gt_private-key).
 - **CAServerName** is replaced with the name of the host on which the CA is running.
 - **DC={contoso},DC=com** is replaced with the name space of the Active Directory domain in which the Windows CA is installed.
-<41> Section 3.1.4.1.6: For the Windows CA, the error code will be in the form of a 2-byte WIN32 error code (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2), such as 0x2098, which means "Insufficient access rights to perform the operation". This will then be converted to an HRESULT (4 byte) error code (as specified in [MS-ERREF] section 2.1), such as 0x80072098. Note that the first 2 bytes, the "0x8007" portion of the HRESULT value, have nothing to do with the error condition and are determined by the Severity and Facility bits, as defined in [MS-ERREF] section 2.1.
+<42> Section 3.1.4.1.6: For the Windows CA, the error code will be in the form of a 2-byte WIN32 error code (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2), such as 0x2098, which means "Insufficient access rights to perform the operation". This will then be converted to an HRESULT (4 byte) error code (as specified in [MS-ERREF] section 2.1), such as 0x80072098. Note that the first 2 bytes, the "0x8007" portion of the HRESULT value, have nothing to do with the error condition and are determined by the Severity and Facility bits, as defined in [MS-ERREF] section 2.1.
 
-<42> Section 3.1.4.1.6: The Windows CA publishes CRLs to LDAP paths in Active Directory as follows:
+<43> Section 3.1.4.1.6: The Windows CA publishes CRLs to LDAP paths in Active Directory as follows:
 
 The path the server expects is
 
@@ -6992,19 +6997,19 @@ Within the certificateRevocationList or deltaRevocationList attribute, the CRL i
 
 For any ldap:/// write operation, if the LDAP write operation returns an error that indicates the LDAP server is down or otherwise unavailable, CAs on all applicable Windows Server releases, except in the case of Windows 2000 Server, will attempt to rebind (create a new LDAP handle) and retry another LDAP write. The Windows CA in Windows 2000 does not perform LDAP handle caching and a single retry with a new LDAP handle.
 
-<43> Section 3.1.4.1.6: CAs on applicable Windows Server releases, with the exception of a Windows 2000 CA, will perform this one-time retry logic for LDAP if the LDAP call returns one of the following ldap error codes: LDAP_SERVER_DOWN (0x51), or LDAP_UNAVAILABLE (0x34), or LDAP_TIMEOUT (0x55). The Windows 2000 CA does not perform this one-time LDAP retry logic.
+<44> Section 3.1.4.1.6: CAs on applicable Windows Server releases, with the exception of a Windows 2000 CA, will perform this one-time retry logic for LDAP if the LDAP call returns one of the following ldap error codes: LDAP_SERVER_DOWN (0x51), or LDAP_UNAVAILABLE (0x34), or LDAP_TIMEOUT (0x55). The Windows 2000 CA does not perform this one-time LDAP retry logic.
 
-<44> Section 3.1.4.1.6: The Windows 2000 CA does not have a CRL table. Therefore, it does not create or update data elements for a CRL table.
+<45> Section 3.1.4.1.6: The Windows 2000 CA does not have a CRL table. Therefore, it does not create or update data elements for a CRL table.
 
-<45> Section 3.1.4.1.7: The Windows 2000 CA retrieves the most recent base CRL from the registry location HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SystemCertificates\CA\CRLs\. The Windows Server 2003 and later versions of the CA retrieve the most recent base CRL (CRLRawCRL) from the CRL table.
+<46> Section 3.1.4.1.7: The Windows 2000 CA retrieves the most recent base CRL from the registry location HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SystemCertificates\CA\CRLs\. The Windows Server 2003 and later versions of the CA retrieve the most recent base CRL (CRLRawCRL) from the CRL table.
 
-<46> Section 3.1.4.1.8: Windows allows serial numbers longer than 20 octets.
+<47> Section 3.1.4.1.8: Windows allows serial numbers longer than 20 octets.
 
-<47> Section 3.1.4.1.8: The parameter value 0xfffffffd is valid for CAs on applicable Windows Server releases, with the exception of Windows 2000 Server and Windows Server 2003. If this value is used on a Windows Server 2003 CA, the CA fails with return code ERROR_INVALID_PARAMETER (0x80070057).
+<48> Section 3.1.4.1.8: The parameter value 0xfffffffd is valid for CAs on applicable Windows Server releases, with the exception of Windows 2000 Server and Windows Server 2003. If this value is used on a Windows Server 2003 CA, the CA fails with return code ERROR_INVALID_PARAMETER (0x80070057).
 
-<48> Section 3.1.4.1.8: The parameter value 0xfffffffe is valid for CAs on applicable Windows Server releases, with the exception of Windows 2000 Server and Windows Server 2003. If this value is used on a Windows Server 2003 CA, the CA fails with return code ERROR_INVALID_PARAMETER (0x80070057).
+<49> Section 3.1.4.1.8: The parameter value 0xfffffffe is valid for CAs on applicable Windows Server releases, with the exception of Windows 2000 Server and Windows Server 2003. If this value is used on a Windows Server 2003 CA, the CA fails with return code ERROR_INVALID_PARAMETER (0x80070057).
 
-<49> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<50> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00001000, 0x00001010, 0x0000100b, 0x00001008, 0x0000100a,
 
@@ -7028,7 +7033,7 @@ These identifiers correspond to the following columns in the Request table:
 
 "Request.RequestID", "Request.RequesterName", "SerialNumber", "NotBefore", "NotAfter", "CommonName", "EMail", "OrgUnit", "Organization", "Locality", "State", "Country", "RawCertificate"
 
-<50> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<51> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00001000, 0x00001010, 0x00002006, 0x00002008, 0x00002009,
 
@@ -7052,7 +7057,7 @@ These identifiers correspond to the following columns in the Request table:
 
 "Request.RequestID", "Request.RequesterName", "SerialNumber", "NotBefore", "NotAfter", "CommonName", "EMail", "OrgUnit","Organization", "Locality", "State", "Country", "RawCertificate"
 
-<51> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<52> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00001000, 0x00001010, 0x0000100b, 0x00001008, 0x0000100a,
 
@@ -7076,7 +7081,7 @@ These identifiers correspond to the following columns in the Request table:
 
 "Request.RequestID", "Request.RequesterName", "Request.SubmittedWhen", "Request.DispositionMessage", "Request.CommonName", "Request.EMail", "Request.OrgUnit", "Request.Organization", "Request.Locality", "Request.State", "Request.Country", "Request.RawRequest"
 
-<52> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<53> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00004000, 0x00004001, 0x00004002, 0x00004003}
 
@@ -7086,7 +7091,7 @@ These identifiers correspond to the following columns in the Extension table:
 
 Windows 2000 Server returns E_INVALIDARG for this value of the *iColumnSetDefault* parameter.
 
-<53> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<54> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00003000, 0x00003001, 0x00003002}
 
@@ -7096,7 +7101,7 @@ These identifiers correspond to the following columns in the Attribute table:
 
 Windows 2000 Server returns E_INVALIDARG for this value of the *iColumnSetDefault* parameter.
 
-<54> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<55> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00005000, 0x00005001, 0x00005002, 0x00005003, 0x00005004,
 
@@ -7112,7 +7117,7 @@ These identifiers correspond to the following columns in the CRL table:
 
 Windows 2000 Server returns E_INVALIDARG for this value of the *iColumnSetDefault* parameter.
 
-<55> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
+<56> Section 3.1.4.1.10: All applicable Windows Server releases, with the exception of Windows 2000 Server, send the column identifiers as the following DWORD array.
 
 {0x00001000, 0x00001010, 0x00002006, 0x00002008, 0x00002009,
 
@@ -7128,9 +7133,9 @@ These identifiers correspond to the following columns in the Request table:
 
 Windows 2000 Server returns E_INVALIDARG for this value of the *iColumnSetDefault* parameter.
 
-<56> Section 3.1.4.1.18: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<57> Section 3.1.4.1.18: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<57> Section 3.1.4.1.18: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
+<58> Section 3.1.4.1.18: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
 The Windows CA enforces this restriction based on the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
 
@@ -7139,18 +7144,9 @@ The Windows CA enforces this restriction based on the value of the following reg
 | 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
 | 0x00000040 | The CA restricts access to the methods listed for the following servers. |
 
-<58> Section 3.1.4.1.19: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<59> Section 3.1.4.1.19: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<59> Section 3.1.4.1.19: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
-
-On Windows, the CA enforces this restriction based on the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
-
-| Value | Meaning |
-| --- | --- |
-| 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
-| 0x00000040 | The CA restricts access to the methods listed for the following servers. |
-
-<60> Section 3.1.4.1.20: In applicable Windows Server releases, the Windows CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
+<60> Section 3.1.4.1.19: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
 On Windows, the CA enforces this restriction based on the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
 
@@ -7159,9 +7155,18 @@ On Windows, the CA enforces this restriction based on the value of the following
 | 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
 | 0x00000040 | The CA restricts access to the methods listed for the following servers. |
 
-<61> Section 3.1.4.1.20: In Windows Server 2003 the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<61> Section 3.1.4.1.20: In applicable Windows Server releases, the Windows CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
-<62> Section 3.1.4.1.21: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
+On Windows, the CA enforces this restriction based on the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
+
+| Value | Meaning |
+| --- | --- |
+| 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
+| 0x00000040 | The CA restricts access to the methods listed for the following servers. |
+
+<62> Section 3.1.4.1.20: In Windows Server 2003 the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+
+<63> Section 3.1.4.1.21: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
 On Windows, the CA enforces this restriction based on the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
 
@@ -7170,9 +7175,9 @@ On Windows, the CA enforces this restriction based on the value of the following
 | 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
 | 0x00000040 | The CA does restrict access to the methods listed for the following servers. |
 
-<63> Section 3.1.4.1.21: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<64> Section 3.1.4.1.21: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<64> Section 3.1.4.1.22: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
+<65> Section 3.1.4.1.22: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
 On Windows, the CA enforces this restriction based upon the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
 
@@ -7181,9 +7186,9 @@ On Windows, the CA enforces this restriction based upon the value of the followi
 | 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
 | 0x00000040 | The CA restricts access to the methods listed for the following servers. |
 
-<65> Section 3.1.4.1.22: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<66> Section 3.1.4.1.22: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<66> Section 3.1.4.1.23: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
+<67> Section 3.1.4.1.23: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
 On Windows, the CA enforces this restriction based on the value of the following registry key: **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
 
@@ -7192,13 +7197,13 @@ On Windows, the CA enforces this restriction based on the value of the following
 | 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
 | 0x00000040 | The CA restricts access to the methods listed for the following servers. |
 
-<67> Section 3.1.4.1.23: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<68> Section 3.1.4.1.23: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<68> Section 3.1.4.1.24: In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows Server 2003 and Windows 2000 do not return an error.
+<69> Section 3.1.4.1.24: In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows Server 2003 and Windows 2000 do not return an error.
 
-<69> Section 3.1.4.1.25: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<70> Section 3.1.4.1.25: In Windows Server 2003, the error is ERROR_UNEXPECTED_ERROR (0x8000FFFF). In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<70> Section 3.1.4.1.25: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
+<71> Section 3.1.4.1.25: In all applicable Windows Server releases, with the exception of Windows 2000 Server, the CA defines local configuration to restrict programmatic access to some backup-related methods from a remote computer.
 
 On Windows, the CA enforces this restriction based upon the value of the following registry key:**HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}\InterfaceFlags**
 
@@ -7207,31 +7212,31 @@ On Windows, the CA enforces this restriction based upon the value of the followi
 | 0x00000000 | The CA does not restrict access to the methods listed for the following servers. |
 | 0x00000040 | The CA restricts access to the methods listed for the following servers. |
 
-<71> Section 3.1.4.1.26: On Windows, the CA maintains local configuration to allow or prevent the importing of foreign certificates, regardless of the value of *dwFlags*. The configuration is stored in the registry at the location that is specified in the following code example. If the registry value is set to 1, the ImportCertificate method works as documented. If it is set to 0, the FLAG_ALLOW_IMPORT_FOREIGN flag that is passed as a parameter has no effect, and 0x800b0107 is returned.
+<72> Section 3.1.4.1.26: On Windows, the CA maintains local configuration to allow or prevent the importing of foreign certificates, regardless of the value of *dwFlags*. The configuration is stored in the registry at the location that is specified in the following code example. If the registry value is set to 1, the ImportCertificate method works as documented. If it is set to 0, the FLAG_ALLOW_IMPORT_FOREIGN flag that is passed as a parameter has no effect, and 0x800b0107 is returned.
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}
 
 \KRAFlags (REG_DWORD)
 
-<72> Section 3.1.4.1.26: On Windows, the CA maintains local configuration to allow or prevent the importing of foreign certificates regardless of the value of *dwFlags*. The configuration is stored in the registry at the location specified in the following code example. If the registry value is set to 1, the ImportCertificate method works as documented. If it is set to 0, the FLAG_ALLOW_IMPORT_FOREIGN flag that is passed as a parameter does not have an effect, and 0x800b0107 is returned.
+<73> Section 3.1.4.1.26: On Windows, the CA maintains local configuration to allow or prevent the importing of foreign certificates regardless of the value of *dwFlags*. The configuration is stored in the registry at the location specified in the following code example. If the registry value is set to 1, the ImportCertificate method works as documented. If it is set to 0, the FLAG_ALLOW_IMPORT_FOREIGN flag that is passed as a parameter does not have an effect, and 0x800b0107 is returned.
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\{CA Name}
 
 \KRAFlags (REG_DWORD)
 
-<73> Section 3.1.4.1.27: In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows Server 2003 and Windows 2000 do not return an error.
+<74> Section 3.1.4.1.27: In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows Server 2003 and Windows 2000 do not return an error.
 
-<74> Section 3.1.4.1.28: In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows Server 2003 and Windows 2000 do not return an error.
+<75> Section 3.1.4.1.28: In Windows Server 2008 and later, the error is E_ACCESSDENIED (0x80070005). Windows Server 2003 and Windows 2000 do not return an error.
 
-<75> Section 3.1.4.2: All Windows client releases are supported with the exception of Windows 2000 Professional. All applicable Windows Server releases are supported, with the exception of Windows 2000 Server.
+<76> Section 3.1.4.2: All Windows client releases are supported with the exception of Windows 2000 Professional. All applicable Windows Server releases are supported, with the exception of Windows 2000 Server.
 
-<76> Section 3.1.4.2: In Windows 2000 and later, the error is E_ACCESSDENIED (0x80070005).
+<77> Section 3.1.4.2: In Windows 2000 and later, the error is E_ACCESSDENIED (0x80070005).
 
-<77> Section 3.1.4.2: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, and the Active Directory Certificate Services elevation of privilege vulnerability mitigation described therein, requires that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTADMIN (section 3.1.4.2.14) setting.
+<78> Section 3.1.4.2: The operating systems specified in [MSFT-CVE-2022-37976], each with their related KB article download installed, and the Active Directory Certificate Services elevation of privilege vulnerability mitigation described therein, requires that clients MUST connect with the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication level or the connection to the CA server will be denied, regardless of the IF_ENFORCEENCRYPTICERTADMIN (section 3.1.4.2.14) setting.
 
-<78> Section 3.1.4.2: In Windows Server 2003 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
+<79> Section 3.1.4.2: In Windows Server 2003 and later, the error is E_ACCESSDENIED (0x80070005). Windows 2000 does not return an error.
 
-<79> Section 3.1.4.2.1: On Windows, the CA keeps this list in a registry multistring value.
+<80> Section 3.1.4.2.1: On Windows, the CA keeps this list in a registry multistring value.
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\
 
@@ -7260,21 +7265,21 @@ where:
 - **{CRLNameSuffix}** is replaced with NULL if the CRL is signed by the first CA key (the CA key that has a key index 0) and by "(n)" if the CRL is signed by any subsequent CA key, with {n} being an integer equal to the identifier (Signing_Private_Key_Version_ID, as defined in [MS-WCCE] section 3.2.1.1.3) of the CA certificate private key.
 - **CAServerName** is replaced with the name of the host on which the CA is running.
 - **DC={contoso},DC=com** is replaced with the namespace of the Active Directory domain in which the Microsoft CA is installed.
-<80> Section 3.1.4.2.1: On Windows, the CA keeps this list in the following registry multistring value. Note that the value is the same as that specified in the preceding product behavior note.
+<81> Section 3.1.4.2.1: On Windows, the CA keeps this list in the following registry multistring value. Note that the value is the same as that specified in the preceding product behavior note.
 
 HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\
 
 {CA Name}\CRLPublicationURLs
 
-<81> Section 3.1.4.2.2: This property and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
-
 <82> Section 3.1.4.2.2: This property and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
 <83> Section 3.1.4.2.2: This property and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<84> Section 3.1.4.2.5: This rule applies to a Windows Server 2008 or later CA. In Windows 2000 and Windows Server 2003, a CA will not enforce that *cColumn* is greater than 0. Rather, when *cColumn* is equal to zero, it will set *pcColumn* equal to zero, *pctbColumnInfo->cb* equal to 0, *pctbColumnInfo->pb* will point to a zero-length item, and the function will return successfully.
+<84> Section 3.1.4.2.2: This property and the associated functionality are available in Windows Server 2019 and later versions of the Windows OS after installing the September (9B) Windows update.
 
-<85> Section 3.1.4.2.14: On Windows, the CA uses subkeys that use the following key as a node path:
+<85> Section 3.1.4.2.5: This rule applies to a Windows Server 2008 or later CA. In Windows 2000 and Windows Server 2003, a CA will not enforce that *cColumn* is greater than 0. Rather, when *cColumn* is equal to zero, it will set *pcColumn* equal to zero, *pctbColumnInfo->cb* equal to 0, *pctbColumnInfo->pb* will point to a zero-length item, and the function will return successfully.
+
+<86> Section 3.1.4.2.14: On Windows, the CA uses subkeys that use the following key as a node path:
 
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\<CA_
 
@@ -7282,7 +7287,7 @@ CN>
 
 where <CA_CN> is replaced with the CN of the CA.
 
-<86> Section 3.1.4.2.14: On Windows, the CA uses a registry value name under the registry key that is composed by adding the value of the pwszNodePath parameter to the registry key:
+<87> Section 3.1.4.2.14: On Windows, the CA uses a registry value name under the registry key that is composed by adding the value of the pwszNodePath parameter to the registry key:
 
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\<CA_
 
@@ -7290,7 +7295,7 @@ CN>
 
 where <CA_CN> is replaced with the CA's common name (CN).
 
-<87> Section 3.1.4.2.14: Windows Server 2012 R2 without [MSKB-3013769] sends 0x00050001, whereas Windows Server 2012 R2 with [MSKB-3013769] sends 0x00060001.
+<88> Section 3.1.4.2.14: Windows Server 2012 R2 without [MSKB-3013769] sends 0x00050001, whereas Windows Server 2012 R2 with [MSKB-3013769] sends 0x00060001.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -7309,7 +7314,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.4.1.2](#Section_3.1.4.1.2) ICertAdminD::SetAttributes (Opnum 4) | Updated hyperlink to MS-WCCE. | Minor |
+| [3.1.1.1.2](#Section_3.1.1.1.2) Request Table Optional Data Elements | Added the `CR_FLG_V2CHALLENGE` flag to indicate a pending V2 attestation challenge response. | Major |
 
 <a id="revision-history"></a>
 
@@ -7386,3 +7391,4 @@ The changes made to this document are listed in the following table. For more in
 | 8/11/2025 | 45.0 | Major | Significantly changed the technical content. |
 | 8/25/2025 | 46.0 | Major | Significantly changed the technical content. |
 | 1/13/2026 | 46.1 | Minor | Clarified the meaning of the technical content. |
+| 8/24/2026 | 47.0 | Major | Significantly changed the technical content. |

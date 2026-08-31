@@ -84,7 +84,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/7/2025.
+Last updated: 8/24/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -272,6 +272,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDN-KEY] Microsoft Corporation, "CERT_KEY_CONTEXT structure", [http://msdn.microsoft.com/en-us/library/aa377205.aspx](https://go.microsoft.com/fwlink/?LinkId=90032)
 
 [MSFT-CVE-2022-26931] Microsoft Corporation, "Windows Kerberos Elevation of Privilege Vulnerability", CVE-2022-26931 May 10, 2022, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26931](https://go.microsoft.com/fwlink/?linkid=2194567)
+
+[MSFT-CVE-2026-6726] Microsoft Corporation, "MITRE: CVE-2026-6726 TPM 2.0 Improper Object Slot Reuse", August 11, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-6726](https://go.microsoft.com/fwlink/?LinkId=2374650)
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -706,10 +708,11 @@ The msPKI-Private-Key-Flag attribute specifies the [**private key**](#gt_private
 | 0x00004000 * CT_FLAG_ATTESTATION_WITHOUT_POLICY | This flag instructs the server to not add any certificate policy OIDs to the issued certificate even though attestation SHOULD be performed. For more details, see [MS-WCCE] section 3.2.2.6.2.1.4.5.7. |
 | 0x00000200 * CT_FLAG_EK_TRUST_ON_USE | This flag indicates that attestation based on the user's credentials is to be performed. For more details, see [MS-WCCE] section 3.2.2.6.2.1.4.5.7. |
 | 0x00000400 * CT_FLAG_EK_VALIDATE_CERT | This flag indicates that attestation based on the hardware certificate of the Trusted Platform Module (TPM) is to be performed. For more details, see [MS-WCCE] section 3.2.2.6.2.1.4.5.7. |
+| 0x00008000 CT_FLAG_REQUIRE_V2_ATTESTATION<38> | This flag is applicable only when CT_FLAG_ATTEST_REQUIRED flag is set. This flag instructs the server that attestation MUST be completed using V2 flow before any certificates can be issued. For more details, see [MS-WCCE] section 3.2.2.6.2.1.4.5.7. |
 | 0x00000800 * CT_FLAG_EK_VALIDATE_KEY | This flag indicates that attestation based on the hardware key of the TPM is to be performed. For more details, see [MS-WCCE] section 3.2.2.6.2.1.4.5.7. |
 | 0x00200000 * CT_FLAG_HELLO_LOGON_KEY | This flag indicates that the key is used for Windows Hello logon. For more details, see [MS-WCCE] section 3.2.2.6.2.1.4.5.7. |
 
-* Support for these flags is specified in the following behavior note.<38>
+* Support for these flags is specified in the following behavior note.<39>
 
 - The bitwise AND of the value of the msPKI-Private-Key-Flag attribute and 0x000F0000 determines whether the current [**CA**](#gt_certification-authority-ca) can issue a certificate based on this template, as explained in [MS-WCCE] section 3.2.2.6.2.1.4.5.7.
 - The bitwise AND of the value of the msPKI-Private-Key-Flag attribute and 0x0F000000 determines whether the current template is supported by the client, as explained in [MS-WCCE] section 3.1.2.4.2.2.2.8.
@@ -718,7 +721,7 @@ For schema details of this attribute, see [MS-ADA2](../MS-ADA2/MS-ADA2.md) secti
 <a id="Section_2.28"></a>
 ## 2.28 msPKI-Certificate-Name-Flag Attribute
 
-The msPKI-Certificate-Name-Flag attribute specifies the subject name flags. Its value can be 0, or it can consist of a bitwise OR of flags from the following table.<39> The processing rules for these flags are specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) sections 3.1.2.4.2.2.2.10 and 3.2.2.6.2.1.4.5.9.
+The msPKI-Certificate-Name-Flag attribute specifies the subject name flags. Its value can be 0, or it can consist of a bitwise OR of flags from the following table.<40> The processing rules for these flags are specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) sections 3.1.2.4.2.2.2.10 and 3.2.2.6.2.1.4.5.9.
 
 | Flag | Client processing |
 | --- | --- |
@@ -734,7 +737,7 @@ The msPKI-Certificate-Name-Flag attribute specifies the subject name flags. Its 
 | 0x20000000 CT_FLAG_SUBJECT_REQUIRE_EMAIL | This flag instructs the CA to add the value of the email attribute from the requestor's user object in Active Directory as the subject of the issued certificate. |
 | 0x40000000 CT_FLAG_SUBJECT_REQUIRE_COMMON_NAME | This flag instructs the CA to set the subject name to the requestor's CN from Active Directory, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.1.7. |
 | 0x80000000 CT_FLAG_SUBJECT_REQUIRE_DIRECTORY_PATH | This flag instructs the CA to set the subject name to the requestor's [**distinguished name (DN)**](#gt_distinguished-name-dn) from Active Directory, as specified in [MS-ADTS] section 3.1.1.1.4. |
-| 0x00000008 CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME | This flag instructs the client to reuse values of subject name and alternative subject name extensions from an existing valid certificate when creating a [**certificate renewal request**](#gt_certificate-renewal-request).<40> |
+| 0x00000008 CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME | This flag instructs the client to reuse values of subject name and alternative subject name extensions from an existing valid certificate when creating a [**certificate renewal request**](#gt_certificate-renewal-request).<41> |
 
 For schema details of this attribute, see [MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.608.
 
@@ -909,7 +912,7 @@ CT_FLAG_SUBJECT_REQUIRE_DIRECTORY_PATH
 
 *Not used by the Windows Client Certificate Enrollment Protocol.
 
-**The flags in parentheses are optional values for the attributes that are not present in the current template. Some of the possible flags for the attribute have been removed because they are not used by the Windows Client Certificate Enrollment Protocol.<41><42>
+**The flags in parentheses are optional values for the attributes that are not present in the current template. Some of the possible flags for the attribute have been removed because they are not used by the Windows Client Certificate Enrollment Protocol.<42><43>
 
 <a id="Section_4"></a>
 # 4 Security Considerations
@@ -1038,13 +1041,15 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <37> Section 2.27: This flag is supported in Windows Server 2012 and later.
 
-<38> Section 2.27: These flags are supported only in Windows Server 2012 R2 and later.
+<38> Section 2.27: Windows Server 2019 through Windows Server 2025 with [[MSFT-CVE-2026-6726]](https://go.microsoft.com/fwlink/?LinkId=2374650), and later support CT_FLAG_REQUIRE_V2_ATTESTATION flag.
 
-<39> Section 2.28: The [msPKI-Certificate-Name-Flag attribute](#Section_2.28) is implemented in Windows Server 2003 and later.
+<39> Section 2.27: These flags are supported only in Windows Server 2012 R2 and later.
 
-<40> Section 2.28: This flag is supported in Windows Server 2008 R2 and later.
+<40> Section 2.28: The [msPKI-Certificate-Name-Flag attribute](#Section_2.28) is implemented in Windows Server 2003 and later.
 
-<41> Section 3: The following is the list of the default [**certificate templates**](#gt_certificate-template) and their [**attribute**](#gt_attribute) values that are installed to [**Active Directory**](#gt_active-directory) by Windows Server 2003 and Windows XP.
+<41> Section 2.28: This flag is supported in Windows Server 2008 R2 and later.
+
+<42> Section 3: The following is the list of the default [**certificate templates**](#gt_certificate-template) and their [**attribute**](#gt_attribute) values that are installed to [**Active Directory**](#gt_active-directory) by Windows Server 2003 and Windows XP.
 
 cn: Administrator;
 
@@ -2348,7 +2353,7 @@ pKIOverlapPeriod: 0x00 0x80 0xA6 0x0A 0xFF 0xDE 0xFF 0xFF
 
 revision: 104;
 
-<42> Section 3: The following is the list of the default certificate templates and their attribute values that are installed to Active Directory by Windows Vista and later clients and by Windows Server 2008 and later servers.
+<43> Section 3: The following is the list of the default certificate templates and their attribute values that are installed to Active Directory by Windows Vista and later clients and by Windows Server 2008 and later servers.
 
 cn: Administrator;
 
@@ -3765,8 +3770,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.5.1](#Section_2.5.1) Determining Enrollment Permission of an End Entity for a Template | 30381 : Corrected ACCESS_ALLOWED_OBJECT_ACE mask set bit from 12 to bit 8. | Major |
-| [2.5.2](#Section_2.5.2) Determining Autoenrollment Permission of an End Entity for a Template | 30381 : Corrected ACCESS_ALLOWED_OBJECT_ACE mask set bit from 12 to bit 8. | Major |
+| [2.27](#Section_2.27) msPKI-Private-Key-Flag Attribute | Added the `CT_FLAG_REQUIRE_V2_ATTESTATION` flag to require V2 attestation. Added the CT_FLAG_REQUIRE_V2_ATTESTATION flag to require V2 attestation. | Major |
 
 <a id="revision-history"></a>
 
@@ -3836,3 +3840,4 @@ The changes made to this document are listed in the following table. For more in
 | 9/20/2023 | 27.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 28.0 | Major | Significantly changed the technical content. |
 | 4/7/2025 | 29.0 | Major | Significantly changed the technical content. |
+| 8/24/2026 | 30.0 | Major | Significantly changed the technical content. |
