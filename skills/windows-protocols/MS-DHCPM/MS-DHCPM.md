@@ -484,7 +484,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 9/16/2024.
+Last updated: 9/8/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -818,6 +818,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDN-GetVersionEx] Microsoft Corporation, "GetVersionEx function", [http://msdn.microsoft.com/en-us/library/ms724451(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=209942)
 
 [MSDN-RPCF] Microsoft Corporation, "RPC Functions", [http://msdn.microsoft.com/en-us/library/aa378623(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=124365)
+
+[MSFT-CVE-2026-69297] Microsoft Corporation, "CVE-2026-69297", September 08, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69297](https://go.microsoft.com/fwlink/?LinkId=2378639)
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -14391,6 +14393,7 @@ When processing this call, the DHCP server MUST do the following:
 - *pRelationshipName* parameter is NULL.
 - Validate whether this method is authorized for read access as specified in section [3.5.4](#Section_3.5.4). If not, return ERROR_ACCESS_DENIED.
 - Iterate through the server ADM element **DHCPv4FailoverRelationshipList**, and retrieve the **DHCPv4FailoverRelationship** ADM element corresponding to *pRelationshipName* parameter. If the corresponding ADM element **DHCPv4FailoverRelationship** is not found, return ERROR_DHCP_FO_RELATIONSHIP_DOES_NOT_EXIST, otherwise, allocate memory for the *pRelationship* parameter, and copy the failover relationship information from the retrieved **DHCPv4FailoverRelationship** ADM entry in the allocated memory.
+- If the caller does not have administrative privileges, the DHCP server SHOULD<73> set *pSharedSecret* member of the **DHCP_FAILOVER_RELATIONSHIP** structure (pointed to the *pRelationship* parameter) to NULL in response.
 - Return ERROR_SUCCESS.
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -14446,6 +14449,7 @@ When processing this call, the DHCP server MUST do the following:
 - If the *ResumeHandle* parameter points to 0x00000000, the enumeration MUST start from the first entry of **DHCPv4FailoverRelationshipList** ADM element. Otherwise, if the *ResumeHandle* parameter points to a nonzero value, the server MUST continue enumeration based on the value of *ResumeHandle* parameter. If *ResumeHandle* parameter is greater than or equal to the number of entries in the **DHCPv4FailoverRelationshipList** ADM element or if the **DHCPv4FailoverRelationshipList** ADM element is empty, return ERROR_NO_MORE_ITEMS.
 - The *PreferredMaximum* parameter specifies the maximum number of bytes that the server can allocate and return to the caller containing the data related to the **DHCPv4FailoverRelationship** ADM element objects retrieved. If the *PreferredMaximum* parameter is unable to hold all the entries being retrieved, then the server must allocate the *PreferredMaximum* parameter number of bytes for the *pRelationship* parameter and store as many **DHCPv4FailoverRelationship** ADM element entries as will fit into the *pRelationship* parameter; else, allocate the memory for the **DHCP_FAILOVER_RELATIONSHIP_ARRAY** structure (section 2.2.1.2.99) for the total number of **DHCPv4FailoverRelationship** ADM element entries available in the retrieved list, starting from the index specified by the *ResumeHandle* parameter and continuing to the end of the failover relationship list.
 - Copy the information in the retrieved **DHCPv4FailoverRelationship** ADM element entries in the *pRelationship* parameter, copy the number of read **DHCPv4FailoverRelationship** ADM element entries in the *relationshipRead* parameter, and copy the number of the **DHCPv4FailoverRelationship** ADM element entries not yet enumerated in the *relationshipTotal* parameter. Update the *ResumeHandle* parameter to the value obtained by adding 1 to the index of the **DHCPv4FailoverRelationship** ADM element entry read.
+- If the caller does not have administrative privileges, the DHCP server SHOULD<74> set *pSharedSecret* member in each element of the **DHCP_FAILOVER_RELATIONSHIP_ARRAY** structure (pointed to the *pRelationship* parameter) to NULL in response.
 - If the *PreferredMaximum* parameter was able to hold all the entries being retrieved, return ERROR_SUCCESS; otherwise return ERROR_MORE_DATA.
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -14579,6 +14583,7 @@ When processing this call, the DHCP server MUST do the following:
 - *scopeId* parameter is 0.
 - Validate whether this method is authorized for read access as specified in section [3.5.4](#Section_3.5.4). If not, return ERROR_ACCESS_DENIED.
 - Iterate through the server ADM element **DHCPv4FailoverRelationshipList**, and retrieve the **DHCPv4FailoverRelationship** ADM element which has the *scopeId* parameter configured as part of the **pScopes** member of the **DHCP_FAILOVER_RELATIONSHIP** structure (section 2.2.1.2.98). If the corresponding ADM element **DHCPv4FailoverRelationship** is not found, return ERROR_DHCP_FO_SCOPE_NOT_IN_RELATIONSHIP, else allocate the memory for the *pRelationship* parameter, and copy the failover relationship information from the retrieved **DHCPv4FailoverRelationship** ADM element entry in the allocated memory.
+- If the caller does not have administrative privileges, the DHCP server SHOULD<75> set *pSharedSecret* member of the **DHCP_FAILOVER_RELATIONSHIP** structure (pointed to the *pRelationship* parameter) to NULL in response.
 - Return ERROR_SUCCESS.
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -14793,7 +14798,7 @@ When processing this call, the DHCP server MUST do the following:
 - The *Flags* parameter MUST pass one of the validations given in the *Flags* parameter description. Otherwise, the method returns ERROR_INVALID_PARAMETER.
 - If the **ScopeType** member in the *ScopeInfo* parameter is DhcpReservedOptions enumeration value or DhcpMScopeOptions enumeration value and the *PolicyName* parameter is not NULL, the method returns ERROR_INVALID_PARAMETER.
 - Validate whether this method is authorized for read/write access as specified in section [3.5.5](#Section_3.5.5). If not, return ERROR_ACCESS_DENIED.
-- Validate whether the policy specified in the *PolicyName* parameter contains a condition of Type DhcpAttrFqdn or DhcpAttrFqdnSingleLabel, as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration. If it does, and if the value of the *OptionId* parameter does not specify DNS settings (81) or lease time (51), return ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED.<73>
+- Validate whether the policy specified in the *PolicyName* parameter contains a condition of Type DhcpAttrFqdn or DhcpAttrFqdnSingleLabel, as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration. If it does, and if the value of the *OptionId* parameter does not specify DNS settings (81) or lease time (51), return ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED.<76>
 - Validate the data pointed to by the input parameter *OptionValue*. If the **Elements** member of the **DHCP_OPTION_DATA** structure is NULL or the **NumElements** member is 0, return ERROR_INVALID_PARAMETER.
 - If the *VendorName* parameter is not NULL, retrieve the **DHCPv4ClassDef** ADM element entry corresponding to the *VendorName* parameter from the server ADM element **DHCPv4ClassDefList**. If the **DHCPv4ClassDef** ADM element entry is not found, return ERROR_DHCP_CLASS_NOT_FOUND. If *VendorName* parameter is NULL, it refers to the default vendor class (see section [3.1.1.11](#Section_3.1.1.11)).
 - If the **ScopeType** member in the *ScopeInfo* parameter is DhcpDefaultOptions:
@@ -14874,7 +14879,7 @@ When processing this call, the DHCP server MUST do the following:
 - If the **ScopeType** member in the *ScopeInfo* parameter is DhcpReservedOptions enumeration value or DhcpMScopeOptions enumeration value and the *PolicyName* parameter is not NULL, the method returns ERROR_INVALID_PARAMETER.
 - If the **Values** member of the *OptionValues* parameter is NULL, return ERROR_INVALID_PARAMETER.
 - Validate whether this method is authorized for read/write access as specified in section [3.5.5](#Section_3.5.5). If not, return ERROR_ACCESS_DENIED.
-- Validate whether the policy specified in the PolicyName parameter contains a condition of Type DhcpAttrFqdn or DhcpAttrFqdnSingleLabel, as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration. If it does, and if any of the values for the *OptionId* parameters specified in the *OptionValues* parameter specify values other than DNS settings (81) or lease time (51), return ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED.<74>
+- Validate whether the policy specified in the PolicyName parameter contains a condition of Type DhcpAttrFqdn or DhcpAttrFqdnSingleLabel, as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration. If it does, and if any of the values for the *OptionId* parameters specified in the *OptionValues* parameter specify values other than DNS settings (81) or lease time (51), return ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED.<77>
 - For each **Values** member in the **DHCP_OPTION_VALUE** structure element in the *OptionValues* parameter of the **DHCP_OPTION_VALUE_ARRAY** structure, validate the data pointed to by the **Value** member. If the **Elements** member of the **DHCP_OPTION_DATA** structure is NULL or the **NumElements** member is 0, return ERROR_INVALID_PARAMETER.
 - If the *VendorName* parameter is not NULL, retrieve the **DHCPv4ClassDef** ADM element entry corresponding to the *VendorName* parameter from the server ADM element **DHCPv4ClassDefList**. If the **DHCPv4ClassDef** ADM element entry is not found, return ERROR_DHCP_CLASS_NOT_FOUND. If the *VendorName* parameter is NULL, it refers to the default vendor class (see section [3.1.1.11](#Section_3.1.1.11)).
 - If the *ScopeType* member in the *ScopeInfo* parameter is set to DhcpDefaultOptions:
@@ -15241,19 +15246,19 @@ When processing this call, the DHCP server MUST do the following:
 - Check whether the **Elements** member of the **Conditions** member or the **Expressions** member inside the *pPolicy* parameter is NULL. If any of these is NULL, return ERROR_INVALID_PARAMETER.
 - Validate whether this method is authorized for read/write access as specified in section [3.5.5](#Section_3.5.5). If not, return ERROR_ACCESS_DENIED.
 - Validate the **Conditions** member and the **Expressions** member in the *pPolicy* parameter data structure by returning ERROR_DHCP_INVALID_POLICY_EXPRESSION if any of the following are true:
-- For each condition element in the **Conditions** member in the *pPolicy* parameter<75>:
+- For each condition element in the **Conditions** member in the *pPolicy* parameter<78>:
 - If the *ParentExpr* member in the **Conditions** member is greater than the **NumElements** member in the **Expressions** member
 - If the **Type** member is not set to one of the values defined for the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration
 - If the **Type** member is not set to the DhcpAttrOption or DhcpAttrSubOption value of the **DHCP_POL_ATTR_TYPE** enumeration and the values for both the **OptionID** and **SubOptionID** members are not 0
 - If the **Type** member is set to the DhcpAttrOption value of the **DHCP_POL_ATTR_TYPE** enumeration, and the **OptionID** member is not equal to the vendor class identifier option (60), the user class identifier option (77), the client identifier option (61), or the [**relay agent information option**](#gt_relay-agent-information-option) (82), or the **SubOptionID** member is not equal to 0
 - If the Type member is set to the DhcpAttrSubOption value of the **DHCP_POL_ATTR_TYPE** enumeration and the **OptionID** member is not equal to the relay agent information option (82), or the **SubOptionID** member is not equal to the agent circuit ID suboption (12), agent remote ID suboption (2), or subscriber ID suboption (6)
 - If the Type member is set to the DhcpAttrHWAddr value of the **DHCP_POL_ATTR_TYPE** enumeration and the **Operator** member is set to the DhcpCompEqual or DhcpCompNotEqual value of the [DHCP_POL_COMPARATOR (section 2.2.1.1.22)](#Section_2.2.1.1.22) enumeration, and the ValueLength member is not equal to 6
-- If the Type member is set to the DhcpAttrHWAddr value of the **DHCP_POL_ATTR_TYPE** enumeration and the **Operator** member is set to the DhcpCompBeginsWith, DhcpCompNotBeginWith, DhcpCompEndsWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration and the ValueLength member is equal to or greater than 6<76>
+- If the Type member is set to the DhcpAttrHWAddr value of the **DHCP_POL_ATTR_TYPE** enumeration and the **Operator** member is set to the DhcpCompBeginsWith, DhcpCompNotBeginWith, DhcpCompEndsWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration and the ValueLength member is equal to or greater than 6<79>
 - If there are other conditions with the **ParentExpr** member that are the same as this condition and if:
 - The **OptionID** member is the relay agent information option (82)
 - The **OptionID** member or the **SubOptionID** member or the **Type** member or the **VendorName** member is different for the conditions
-- If the Operator member for the condition is set to the DhcpCompEqual value of the **DHCP_POL_COMPARATOR** enumeration, the operator of all other conditions (with the same ParentExpr member) is not set to the DhcpCompEqual, DhcpCompBeginsWith, or DhcpCompEndsWith value of the **DHCP_POL_COMPARATOR** enumeration<77>
-- If the Operator member for the condition element is not set to the DhcpCompNotEqual value of the **DHCP_POL_COMPARATOR** enumeration, the operator of all other conditions (with the same **ParentExpr** member) is not set to the DhcpCompNotEqual, DhcpCompNotBeginWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration.<78>
+- If the Operator member for the condition is set to the DhcpCompEqual value of the **DHCP_POL_COMPARATOR** enumeration, the operator of all other conditions (with the same ParentExpr member) is not set to the DhcpCompEqual, DhcpCompBeginsWith, or DhcpCompEndsWith value of the **DHCP_POL_COMPARATOR** enumeration<80>
+- If the Operator member for the condition element is not set to the DhcpCompNotEqual value of the **DHCP_POL_COMPARATOR** enumeration, the operator of all other conditions (with the same **ParentExpr** member) is not set to the DhcpCompNotEqual, DhcpCompNotBeginWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration.<81>
 - For each expression in the **Expressions** member:
 - If the **NumElements** member is 0, there are no other **Expressions** members or **Conditions** members that have the index of this expression element in their **ParentExpr** member.
 - If the **Operator** member of the expression element is not the DhcpLogicalAnd enumeration value or DhcpLogicalOr enumeration value
@@ -15266,7 +15271,7 @@ When processing this call, the DHCP server MUST do the following:
 - If the **IsGlobalPolicy** member of the *pPolicy* parameter is FALSE and the **Subnet** member of the *pPolicy* parameter is not 0, perform the following checks:
 - If the **StartAddress** member of any of the **Ranges** member elements specified is greater than the **EndAddress** member, return ERROR_DHCP_POLICY_RANGE_BAD.
 - If any of the **Ranges** member elements in the *pPolicy* parameter is overlapping another **Ranges** member element in the *pPolicy* parameter, return ERROR_DHCP_POLICY_RANGE_BAD.
-- If the **Conditions** member contains a condition element where the **Type** is set to the value DhcpAttrFqdn or DhcpAttrFqdnSingleLabel as defined in the DHCP_POL_ATTR_TYPE (section 2.2.1.1.23) enumeration, and the **NumElements** member of the Ranges member is not 0, return ERROR_DHCP_POLICY_FQDN_RANGE_UNSUPPORTED.<79>
+- If the **Conditions** member contains a condition element where the **Type** is set to the value DhcpAttrFqdn or DhcpAttrFqdnSingleLabel as defined in the DHCP_POL_ATTR_TYPE (section 2.2.1.1.23) enumeration, and the **NumElements** member of the Ranges member is not 0, return ERROR_DHCP_POLICY_FQDN_RANGE_UNSUPPORTED.<82>
 - Validate the **PolicyName** member of the *pPolicy* parameter according to the following:
 - If the **IsGlobalPolicy** member of the *pPolicy* parameter is set to TRUE, retrieve the server ADM element **DHCPv4ServerPolicyList** and check whether any of the policies have the same name as the name specified in the **PolicyName** member of the *pPolicy* parameter. Return ERROR_DHCP_POLICY_EXISTS if there is a server policy by the same name.
 - If the **IsGlobalPolicy** member of the *pPolicy* parameter is set to FALSE and a **Subnet** member of the *pPolicy* parameter is specified, retrieve the server ADM element **DHCPv4ScopesList**. Retrieve the **DHCPv4Scope** ADM element from the **DHCPv4ScopesList** ADM element where the **SubnetAddress** ADM element member in the **ScopeInfo** ADM element of the **DHCPv4Scope** ADM element is the same as the **Subnet** member in the *pPolicy* parameter. If there is no **DHCPv4Scope** ADM element that matches the **Subnet** member address of the *pPolicy* parameter, return ERROR_DHCP_SUBNET_NOT_PRESENT. Retrieve the **DHCPv4Scope.DHCpv4ScopePolicyList** ADM element for the matched **DHCPv4Scope** ADM element. Check whether the **DHCPv4Policy.Policy.PolicyName** ADM element of any of the policies in the **DHCPv4Scope.DHCPv4ScopePolicyList** ADM element is the same as the **PolicyName** member in the *pPolicy* parameter. Return ERROR_DHCP_POLICY_EXISTS if there is a policy by the same name.
@@ -15399,25 +15404,25 @@ When processing this call, the DHCP server MUST do the following:
 - If the *ServerPolicy* parameter is TRUE and the **NumElements** member in the **Ranges** member of the *Policy* parameter is not 0, return ERROR_DHCP_RANGE_INVALID_IN_SERVER_POLICY.
 - If the **StartAddress** member of any of the **Ranges** members in the *pPolicy* parameter is greater than the **EndAddress** member, return ERROR_DHCP_POLICY_RANGE_BAD.
 - If any of the **Ranges** member array element addresses in the *pPolicy* parameter overlaps any other **Ranges** member array element addresses in the *pPolicy* parameter, return ERROR_DHCP_POLICY_RANGE_BAD.
-- If the updated policy contains a **Conditions** member that includes a condition where the **Type** is set to the value DhcpAttrFqdn or DhcpAttrFqdnSingleLabel as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration, and the **NumElements** member of the **Ranges** member is not 0, return ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED.<80>
+- If the updated policy contains a **Conditions** member that includes a condition where the **Type** is set to the value DhcpAttrFqdn or DhcpAttrFqdnSingleLabel as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration, and the **NumElements** member of the **Ranges** member is not 0, return ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED.<83>
 - Retrieve the **DHCPv4Scope.DHCPv4IPRangesList** ADM element. Check whether the **Ranges** member specified is within at least one of the **DHCPv4IPRange** ADM elements in the **DHCPv4Scope.DHCPv4IPRangesList** ADM element. Return ERROR_DHCP_POLICY_RANGE_BAD if this check fails.
 - Retrieve the **DHCPv4Policy.Policy.Ranges** ADM element. Check whether the **Range** elements in the **Ranges** member specified in the *Policy* parameter overlap any of the **Range** ADM elements in the **DHCPv4Policy.Policy.Ranges** ADM element. Return ERROR_DHCP_POLICY_RANGE_EXISTS if the check succeeds.
 - If the DhcpUpdatePolicyExpr enumeration value bit in the *FieldsModified* parameter is set:
 - If the **Expressions** member or **Conditions** member of the *Policy* parameter is NULL or the **NumElements** member in the **Expressions** member or in the **Conditions** member are 0, return ERROR_DHCP_INVALID_POLICY_EXPRESSION.
-- If the Conditions member includes a condition where the **Type** is set to the value DhcpAttrFqdn or DhcpAttrFqdnSingleLabel as defined in the **DHCP_POL_ATTR_TYPE** enumeration, the updated policy MUST be validated to ensure that it does not contain any ranges or any options apart from the options that specify DNS settings (81) and lease time (51). If the validation fails, return ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED.<81>
-- For each [**condition**](#gt_condition) element in the **Conditions** member in the *Policy* parameter:<82>
+- If the Conditions member includes a condition where the **Type** is set to the value DhcpAttrFqdn or DhcpAttrFqdnSingleLabel as defined in the **DHCP_POL_ATTR_TYPE** enumeration, the updated policy MUST be validated to ensure that it does not contain any ranges or any options apart from the options that specify DNS settings (81) and lease time (51). If the validation fails, return ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED.<84>
+- For each [**condition**](#gt_condition) element in the **Conditions** member in the *Policy* parameter:<85>
 - If the **ParentExpr** member in the **Conditions** member is greater than the **NumElements** member in the **Expressions** member
 - If the **Type** member is not one of the values defined for the **DHCP_POL_ATTR_TYPE** enumeration
 - If the **Type** member is not set to the DhcpAttrOption or DhcpAttrSubOption value of the **DHCP_POL_ATTR_TYPE** enumeration, and the values for both the **OptionID** and **SubOptionID** members are not 0
 - If the **Type** member is not set to the DhcpAttrOption value of the **DHCP_POL_ATTR_TYPE** enumeration; the OptionID member is not equal to the vendor class identifier option (60), user class identifier option (77), client identifier option (61), or [**relay agent information option**](#gt_relay-agent-information-option) (82); or the SubOptionID member is not equal to 0
 - If the **Type** member is not set to the DhcpAttrSubOption value of the **DHCP_POL_ATTR_TYPE** enumeration, the **OptionID** member is not equal to the relay agent information option (82), or the **SubOptionID** member is not equal to the agent circuit ID suboption (2), agent remote ID suboption (2), or subscriber ID suboption
 - If the **Type** member is set to the DhcpAttrHWAddr value of the **DHCP_POL_ATTR_TYPE** enumeration, and the **Operator** member is set to the DhcpCompEqual or DhcpCompNotEqual value of the [DHCP_POL_COMPARATOR (section 2.2.1.1.22)](#Section_2.2.1.1.22) enumeration, and the **ValueLength** member is not equal to 6
-- If the Type member is set to the DhcpAttrHWAddr value of the **DHCP_POL_ATTR_TYPE** enumeration, and the Operator member is set to the DhcpCompBeginsWith, DhcpCompNotBeginWith, DhcpCompEndsWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration, and the **ValueLength** member is equal to or greater than 6<83>
+- If the Type member is set to the DhcpAttrHWAddr value of the **DHCP_POL_ATTR_TYPE** enumeration, and the Operator member is set to the DhcpCompBeginsWith, DhcpCompNotBeginWith, DhcpCompEndsWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration, and the **ValueLength** member is equal to or greater than 6<86>
 - If there are other **Conditions** member array elements with the **ParentExpr** member having the same condition, and if
 - The **OptionID** member is the relay agent information option (82)
 - The **OptionID** member or **SubOptionID** member or **Type** member or **VendorName** member is different for the conditions
-- If the Operator member for the condition is set to the DhcpCompEqual value of the **DHCP_POL_COMPARATOR** enumeration, the **Operator** member of all other conditions (with the same ParentExpr member) is not set to the DhcpCompEqual, DhcpCompBeginsWith, or DhpcCompEndsWith value of the **DHCP_POL_COMPARATOR** enumeration<84>
-- If the **Operator** member for the condition is set to the DhcpCompNotEqual value of the **DHCP_POL_COMPARATOR** enumeration, the **Operator** member of all other conditions (with the same **ParentExpr** member) is not set to the DhcpCompNotEqual, DhcpCompNotBeginWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration<85>
+- If the Operator member for the condition is set to the DhcpCompEqual value of the **DHCP_POL_COMPARATOR** enumeration, the **Operator** member of all other conditions (with the same ParentExpr member) is not set to the DhcpCompEqual, DhcpCompBeginsWith, or DhpcCompEndsWith value of the **DHCP_POL_COMPARATOR** enumeration<87>
+- If the **Operator** member for the condition is set to the DhcpCompNotEqual value of the **DHCP_POL_COMPARATOR** enumeration, the **Operator** member of all other conditions (with the same **ParentExpr** member) is not set to the DhcpCompNotEqual, DhcpCompNotBeginWith, or DhcpCompNotEndWith value of the **DHCP_POL_COMPARATOR** enumeration<88>
 For each expression element in the **Expressions** member:
 
 - If there are no other expression elements or condition elements that have the index of this expression element in their **ParentExpr** member
@@ -15561,7 +15566,7 @@ When processing this call, the DHCP server MUST do the following:
 - The **Operator** member is greater than the value of DhcpCompNotBeginWith as defined in the [DHCP_POL_COMPARATOR (section 2.2.1.1.22)](#Section_2.2.1.1.22) enumeration.
 - The **Type** member is greater than the value of DhcpAttrSubOption as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration.
 - The **OptionId** member is the [**relay agent information option**](#gt_relay-agent-information-option) (82) and the **Operator** member is greater than the value of DhcpCompNotEqual as defined in the DHCP_POL_COMPARATOR (section 2.2.1.1.22) enumeration.
-This processing is performed to maintain backward compatibility with systems that do not support policies containing new information.<86>
+This processing is performed to maintain backward compatibility with systems that do not support policies containing new information.<89>
 
 - Read the policy information from the retrieved list of policies starting from the *ResumeHandle* parameter, copy it into the allocated memory until the number of policies copied is equal to *PreferredMaximum* parameter and return it to the caller.
 - Fill the number of read **DHCPv4Policy** ADM element objects in *ElementsRead* parameter. Fill the number of **DHCPv4Policy** ADM element objects in the retrieved list of policies that have not yet been enumerated in the *ElementsTotal* parameter. Update the *ResumeHandle* parameter to the index of the **DHCPv4Policy** ADM element objects read plus one (+1). If there are more policies in the retrieved list of policies which are yet to be enumerated, return ERROR_MORE_DATA, else return ERROR_NO_MORE_ITEMS.
@@ -15610,7 +15615,7 @@ When processing this call, the DHCP server MUST do the following:
 - If the *PolicyName* parameter or the *Range* parameter is NULL, return ERROR_INVALID_PARAMETER.
 - If the **StartAddress** member of the *Range* parameter is greater than the **EndAddress** member of the *Range* parameter, return ERROR_DHCP_POLICY_RANGE_BAD.
 - Validate whether this method is authorized for write/read access as specified in section [3.5.5](#Section_3.5.5). If not, return ERROR_ACCESS_DENIED.
-- Validate that the **Conditions** member does not include a condition where the Type is set to the value DhcpAttrFqdn or DdnhcpAttrFqdnSingleLabel as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration. If it does, return ERROR_DHCP_POLICY_FQDN_RANGE_UNSUPPORTED<87>
+- Validate that the **Conditions** member does not include a condition where the Type is set to the value DhcpAttrFqdn or DdnhcpAttrFqdnSingleLabel as defined in the [DHCP_POL_ATTR_TYPE (section 2.2.1.1.23)](#Section_2.2.1.1.23) enumeration. If it does, return ERROR_DHCP_POLICY_FQDN_RANGE_UNSUPPORTED<90>
 - Retrieve the **DHCPv4Scope** ADM element entry corresponding to the *SubnetAddress* parameter from the server ADM element **DHCPv4ScopesList**. If the **DHCPv4Scope** ADM element entry is not present, return ERROR_DHCP_SUBNET_NOT_PRESENT.
 - Retrieve the **DHCPv4Scope.DHCPv4ScopePolicyList** ADM element from the **DHCPv4Scope** ADM element entry. Retrieve the **DHCPv4Policy** ADM element entry from the **DHCPv4ScopePolicyList** ADM element corresponding to the specified *PolicyName* parameter. If there is no **DHCPv4Policy** ADM element that has the specified *PolicyName* parameter, return ERROR_DHCP_POLICY_NOT_FOUND.
 - Retrieve the **DHCPv4Scope.DHCPv4ScopeIPRangesList** ADM element. Check whether the *Range* parameter specified is within at least one of the **DHCPv4IPRange** ADM elements in the **DHCPv4Scope.DHCPv4ScopeIPRangesList** ADM element. Return ERROR_DHCP_POLICY_RANGE_BAD if this check fails.
@@ -16103,7 +16108,7 @@ When processing this call, the DHCP server MUST do the following:
 - If the **AddressState** field of *ClientInfo* has the value ADDRESS_STATE_OFFERED, return ERROR_INVALID_PARAMETER.
 - Iterate through the server ADM element **DHCPv4ScopesList**, and retrieve the **DHCPv4Scope** ADM element entry such that the **ClientIpAddress** member of the *ClientInfo* parameter falls within the scope. If no **DHCPV4Scope** exists, return ERROR_DHCP_SUBNET_NOT_PRESENT.
 - Create the DHCPv4 client unique-identifier as specified in section [2.2.1.2.5.2](#Section_2.2.1.2.5.2) for the DHCPv4 client from the **ScopeInfo.SubnetAddress** ADM element of the specified **DHCPv4Scope** and the DHCPv4 client-identifier that is the **ClientHardwareAddress** member, as specified in the *ClientInfo* parameter.
-- If there is a **DHCPv4Client** ADM element entry corresponding to this DHCPv4 client unique ID or to the client IP address already in the **DHCPv4ClientsList** ADM element, or to both, return ERROR_DHCP_CLIENT_EXISTS. Otherwise, create a **DHCPv4Client** object and set the **ClientIpAddress**, **ClientName**, **ClientComment**, **bClientType**, **AddressState**, **Status**, **ProbationEnds**, **QuarantineCapable**, **PolicyName**, and **ClientLeaseExpires** members as specified in the *ClientInfo* input parameter.<88> Set the other fields of **DHCPv4Client** as follows:
+- If there is a **DHCPv4Client** ADM element entry corresponding to this DHCPv4 client unique ID or to the client IP address already in the **DHCPv4ClientsList** ADM element, or to both, return ERROR_DHCP_CLIENT_EXISTS. Otherwise, create a **DHCPv4Client** object and set the **ClientIpAddress**, **ClientName**, **ClientComment**, **bClientType**, **AddressState**, **Status**, **ProbationEnds**, **QuarantineCapable**, **PolicyName**, and **ClientLeaseExpires** members as specified in the *ClientInfo* input parameter.<91> Set the other fields of **DHCPv4Client** as follows:
 - The **DHCPv4Client.SubnetMask** ADM element is set to the **ScopeInfo.SubnetAddress** ADM element of the retrieved **DHCPv4Scope**.
 - The **DHCPv4Client.ClientHardwareAddress** ADM element is set to the DHCPv4 client unique-identifier created in the preceding step.
 - Set the **DHCPv4Client.OwnerHost.NetBiosName** ADM element to the NetBIOS name of the DHCPv4 server.
@@ -16484,7 +16489,7 @@ DWORD R_DhcpV4CreateClientInfoEx(
 
 **ServerIpAddress:** As specified in **R_DhcpV4CreateClientInfo** (Opnum 122).
 
-**ClientInfo:** A pointer to a **DHCP_CLIENT_INFO_EX** structure that contains the DHCPv4 client lease record information to be set on the DHCPv4 server. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** members when adding a DHCPv4 client lease record to the DHCPv4 server. The **ClientHardwareAddress** member represents a DHCPv4 client-identifier as specified in section [2.2.1.2.5.1](#Section_2.2.1.2.5.1). The **ClientName**, **ClientComment**, **ClientLeaseExpires**, **bClientType**, **AddressState**, **Status**, **ProbationEnds**, **QuarantineCapable**, **PolicyName**, and **OwnerHost** members are modified on the DHCPv4 client lease record identified by the **ClientIpAddress** member. <89>
+**ClientInfo:** A pointer to a **DHCP_CLIENT_INFO_EX** structure that contains the DHCPv4 client lease record information to be set on the DHCPv4 server. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** members when adding a DHCPv4 client lease record to the DHCPv4 server. The **ClientHardwareAddress** member represents a DHCPv4 client-identifier as specified in section [2.2.1.2.5.1](#Section_2.2.1.2.5.1). The **ClientName**, **ClientComment**, **ClientLeaseExpires**, **bClientType**, **AddressState**, **Status**, **ProbationEnds**, **QuarantineCapable**, **PolicyName**, and **OwnerHost** members are modified on the DHCPv4 client lease record identified by the **ClientIpAddress** member. <92>
 
 The **DHCP_PROPERTY** elements that are supported are as follows:
 
@@ -16559,12 +16564,12 @@ The option value is a bitmask defined as follows:
 | Variable | 0x02 | This flag enables Dynamic DNS Updates by a client that does not request updates to be posted by the DHCPv4 server. |
 | Variable | 0x04 | This flag enables the DHCPv4 Server to dynamically discard A and PTR records when the lease is deleted. |
 | Variable | 0x10 | This flag enables the DHCPv4 server to dynamically update both A and PTR records. |
-| Variable | 0x20 | This flag enables Name Protection by the DHCPv4 Server.<90> |
+| Variable | 0x20 | This flag enables Name Protection by the DHCPv4 Server.<93> |
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 DHCPv6 Server
 
-Dynamic [**DNS**](#gt_domain-name-system-dns) updates are governed by the following DNS settings on the DHCPv6 server.<91> The [DHCP_OPTION_DATA_TYPE (section 2.2.1.1.10)](#Section_2.2.1.1.10) for this option is DhcpDWordOption, that is the option value is of type DWORD.
+Dynamic [**DNS**](#gt_domain-name-system-dns) updates are governed by the following DNS settings on the DHCPv6 server.<94> The [DHCP_OPTION_DATA_TYPE (section 2.2.1.1.10)](#Section_2.2.1.1.10) for this option is DhcpDWordOption, that is the option value is of type DWORD.
 
 | Option Identifier | Protocol |
 | --- | --- |
@@ -16577,7 +16582,7 @@ The option value is a bitmask defined as follows:
 | Variable | 0x01 | This flag enables Dynamic DNS updates by the DHCPv6 server. |
 | Variable | 0x04 | This flag enables the DHCPv6 Server to dynamically discard AAAA and PTR records when the lease is deleted. |
 | Variable | 0x10 | This flag enables the DHCPv6 server to dynamically update both AAAA and PTR records. |
-| Variable | 0x20 | This flag enables Name Protection by the DHCPv6 Server.<92> |
+| Variable | 0x20 | This flag enables Name Protection by the DHCPv6 Server.<95> |
 
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Name Protection
@@ -16587,7 +16592,7 @@ Name Protection [[RFC4701]](https://go.microsoft.com/fwlink/?LinkId=125431) and 
 - The DHCP Server will register A/AAAA and PTR records on behalf of a DHCP client, However, if there is a different client already registered with this name, the DHCP update will fail.
 - Name Protection can be enabled for both DHCPv4 and DHCPv6 servers.
 - Secure Dynamic DNS updates must be enabled for Name Protection to work.
-- Enforcing Name Protection will result in behavioral changes.<93>
+- Enforcing Name Protection will result in behavioral changes.<96>
 <a id="Section_3.4"></a>
 ## 3.4 DHCP Superscopes
 
@@ -16661,7 +16666,7 @@ If the [**DHCP Administrators**](#gt_dhcp-administrators) [**SID**](#gt_security
 
 The method **R_DhcpGetVersion** (section [3.1.4.29](#Section_3.1.4.29)) has an exception to read/write authorization requirements. When calling this method, the [**DHCP client**](#gt_dhcp-client) is not required to be a member of the [**DHCP Users**](#gt_dhcp-users) security group or the [**DHCP Administrators**](#gt_dhcp-administrators) security group.
 
-The DHCP server MUST limit access to only those clients that negotiate an [**authentication level**](#gt_authentication-level) equal to or higher than RPC_C_AUTHN_LEVEL_PKT_PRIVACY.<94>
+The DHCP server MUST limit access to only those clients that negotiate an [**authentication level**](#gt_authentication-level) equal to or higher than RPC_C_AUTHN_LEVEL_PKT_PRIVACY.<97>
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -22002,7 +22007,6 @@ The terms "earlier" and "later", when used with a product version, refer to eith
 - Windows Server 2012 operating system
 - Windows Server 2012 R2 operating system
 - Windows Server 2016 operating system
-- Windows Server operating system
 - Windows Server 2019 operating system
 - Windows Server 2022 operating system
 - Windows Server 2025 operating system
@@ -22211,63 +22215,85 @@ Details of the **run-decoding** algorithm follow:
 
 <72> Section 3.2.4.89: In Windows, this value is set to the correct value during the final [R_DhcpEnumSubnetClientsFilterStatusInfo (section 3.2.4.89)](#Section_3.2.4.89) enumeration call or when the API call returns all the parameters. In calls where the API does not return all parameters and returns error code ERROR_MORE_DATA, the API sets this value as "0x7FFFFFFF".
 
-<73> Section 3.2.4.102: In Windows Server 2012 this validation is not performed, and the ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED error is never returned.
+<73> Section 3.2.4.93: Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server 2019, Windows Server 2022, and Windows Server 2025 without [[MSFT-CVE-2026-69297]](https://go.microsoft.com/fwlink/?LinkId=2378639) do not set *pSharedSecret* member to NULL in response if the caller does not have administrative privileges.
 
-<74> Section 3.2.4.103: In Windows Server 2012 this validation is not performed, and the ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED error is never returned.
+<74> Section 3.2.4.94: Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server 2019, Windows Server 2022, and Windows Server 2025 without [MSFT-CVE-2026-69297] do not set *pSharedSecret* member to NULL in response if the caller does not have administrative privileges.
 
-<75> Section 3.2.4.109: In Windows Server 2012 additional validation is performed for each condition element in the **Conditions** member in the **pPolicy** structure. The value of the **Operator** member is validated for equality with either the DhcpCompBeginsWith or DhcpCompNotBeginsWith enumeration value, and the value of the **OptionID** member is validated for equality with the [**relay agent information option**](#gt_relay-agent-information-option) (82).
+<75> Section 3.2.4.97: Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server 2019, Windows Server 2022, and Windows Server 2025 without [MSFT-CVE-2026-69297] do not set *pSharedSecret* member to NULL in response if the caller does not have administrative privileges.
 
-<76> Section 3.2.4.109: In Windows Server 2012 the value of the **Type** member is validated for equality with the DhcpAttrHWAddr enumeration value, and the value of the **Operator** member is validated for equality with the DhcpCompBeginsWith or DhcpCompNotBeginWith enumeration values, and the value of the **ValueLength** member is validated to be equal to or greater than 6.
+<76> Section 3.2.4.102: In Windows Server 2012 this validation is not performed, and the ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED error is never returned.
 
-<77> Section 3.2.4.109: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompEqual enumeration value, and the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompEqual or DhcpCompBeginsWith enumeration value.
+<77> Section 3.2.4.103: In Windows Server 2012 this validation is not performed, and the ERROR_DHCP_POLICY_FQDN_OPTION_UNSUPPORTED error is never returned.
 
-<78> Section 3.2.4.109: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompNotEqual enumeration value, and the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompNotEqual or DhcpCompNotBeginWith enumeration value.
+<78> Section 3.2.4.109: In Windows Server 2012 additional validation is performed for each condition element in the **Conditions** member in the **pPolicy** structure. The value of the **Operator** member is validated for equality with either the DhcpCompBeginsWith or DhcpCompNotBeginsWith enumeration value, and the value of the **OptionID** member is validated for equality with the [**relay agent information option**](#gt_relay-agent-information-option) (82).
 
-<79> Section 3.2.4.109: In Windows Server 2012 this validation is not performed and ERROR_DHCP_POLICY_FQDN_RANGE_UNSUPPORTED is never returned.
+<79> Section 3.2.4.109: In Windows Server 2012 the value of the **Type** member is validated for equality with the DhcpAttrHWAddr enumeration value, and the value of the **Operator** member is validated for equality with the DhcpCompBeginsWith or DhcpCompNotBeginWith enumeration values, and the value of the **ValueLength** member is validated to be equal to or greater than 6.
 
-<80> Section 3.2.4.111: In Windows Server 2012 this validation is not performed, and ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED is never returned.
+<80> Section 3.2.4.109: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompEqual enumeration value, and the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompEqual or DhcpCompBeginsWith enumeration value.
 
-<81> Section 3.2.4.111: In Windows Server 2012 this validation is not performed, and ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED is never returned.
+<81> Section 3.2.4.109: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompNotEqual enumeration value, and the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompNotEqual or DhcpCompNotBeginWith enumeration value.
 
-<82> Section 3.2.4.111: In Windows Server 2012 additional validation is performed for each condition element in the **Conditions** member in the **pPolicy** structure. The value of the **Operator** member is validated for equality with either the DhcpCompBeginsWith or DhcpCompNotBeginsWith enumeration value, and the value of the **OptionID** member is validated for equality with the relay agent information option (82).
+<82> Section 3.2.4.109: In Windows Server 2012 this validation is not performed and ERROR_DHCP_POLICY_FQDN_RANGE_UNSUPPORTED is never returned.
 
-<83> Section 3.2.4.111: In Windows Server 2012 the value of the **Type** member is validated for equality with the DhcpAttrHWAddr enumeration value, and the value of the **Operator** member is validated for equality with either the DhcpCompBeginsWith or DhcpCompNotBeginWith enumeration value, and the value of the **ValueLength** member is validated to be equal to or greater than 6.
+<83> Section 3.2.4.111: In Windows Server 2012 this validation is not performed, and ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED is never returned.
 
-<84> Section 3.2.4.111: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompEqual enumeration value, the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompEqual or DhcpCompBeginsWith enumeration value.
+<84> Section 3.2.4.111: In Windows Server 2012 this validation is not performed, and ERROR_DHCP_POLICY_EDIT_FQDN_UNSUPPORTED is never returned.
 
-<85> Section 3.2.4.111: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompNotEqual enumeration value, the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompNotEqual or DhcpCompNotBeginWith enumeration value.
+<85> Section 3.2.4.111: In Windows Server 2012 additional validation is performed for each condition element in the **Conditions** member in the **pPolicy** structure. The value of the **Operator** member is validated for equality with either the DhcpCompBeginsWith or DhcpCompNotBeginsWith enumeration value, and the value of the **OptionID** member is validated for equality with the relay agent information option (82).
 
-<86> Section 3.2.4.113: In Windows Server 2012 this filtering is not present, and all of the policies present are returned.
+<86> Section 3.2.4.111: In Windows Server 2012 the value of the **Type** member is validated for equality with the DhcpAttrHWAddr enumeration value, and the value of the **Operator** member is validated for equality with either the DhcpCompBeginsWith or DhcpCompNotBeginWith enumeration value, and the value of the **ValueLength** member is validated to be equal to or greater than 6.
 
-<87> Section 3.2.4.114: In Windows Server 2012 this validation is not performed.
+<87> Section 3.2.4.111: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompEqual enumeration value, the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompEqual or DhcpCompBeginsWith enumeration value.
 
-<88> Section 3.2.4.123: In Windows Server 2016 and later DHCPM will ignore the **QuarantineStatus**, **QuarantineCapable**, and **ProbationEnds** members specified in the *ClientInfo* input parameter and initialize those fields in the newly created **DHCPv4Client** ADM element object as follows:
+<88> Section 3.2.4.111: In Windows Server 2012 the value of the **Operator** member for the condition is validated for equality with the DhcpCompNotEqual enumeration value, the operator of all other conditions (with the same **ParentExpr** member) is validated to not be equal with either the DhcpCompNotEqual or DhcpCompNotBeginWith enumeration value.
+
+<89> Section 3.2.4.113: In Windows Server 2012 this filtering is not present, and all of the policies present are returned.
+
+<90> Section 3.2.4.114: In Windows Server 2012 this validation is not performed.
+
+<91> Section 3.2.4.123: In Windows Server 2016 and later DHCPM will ignore the **QuarantineStatus**, **QuarantineCapable**, and **ProbationEnds** members specified in the *ClientInfo* input parameter and initialize those fields in the newly created **DHCPv4Client** ADM element object as follows:
 
 - **DHCPv4Client.Status** ADM element is set to NOQUARANTINE.
 - **DHCPv4Client.QuarantineCapable** ADM element is set to FALSE.
 - **HCPv4Client.ProbationEnds** ADM element is set to 0.
-<89> Section 3.2.4.132: In Windows Server 2016 and Windows Server operating system DHCPM will ignore the **QuarantineStatus**, **QuarantineCapable**, and **ProbationEnds** members specified in the *ClientInfo* input parameter and initialize those fields in the newly created **DHCPv4Client** ADM element object as follows:
+<92> Section 3.2.4.132: In Windows Server 2016 and Windows Server operating system DHCPM will ignore the **QuarantineStatus**, **QuarantineCapable**, and **ProbationEnds** members specified in the *ClientInfo* input parameter and initialize those fields in the newly created **DHCPv4Client** ADM element object as follows:
 
 - **DHCPv4Client.Status** ADM element is set to NOQUARANTINE.
 - **DHCPv4Client.QuarantineCapable** ADM element is set to FALSE.
 - **HCPv4Client.ProbationEnds** ADM element is set to 0.
-<90> Section 3.3.1: The name protection feature is only available in Windows Server 2008 R2.
+<93> Section 3.3.1: The name protection feature is only available in Windows Server 2008 R2.
 
-<91> Section 3.3.2: The Dynamic DNS update settings for DHCPv6 server configuration are only supported in Windows Server 2008.
+<94> Section 3.3.2: The Dynamic DNS update settings for DHCPv6 server configuration are only supported in Windows Server 2008.
 
-<92> Section 3.3.2: The name protection feature is only available in Windows Server 2008 R2.
+<95> Section 3.3.2: The name protection feature is only available in Windows Server 2008 R2.
 
-<93> Section 3.3.3: Enforcing Name Protection will result in following behavioral changes:
+<96> Section 3.3.3: Enforcing Name Protection will result in following behavioral changes:
 
 - DHCP server honors request for A/AAAA and PTR records registration for Windows DHCP clients.
 - DHCP server dynamically updates A/AAAA and PTR records for non-Windows DHCP clients.
 - DHCP server discards A/AAAA and PTR records when lease is deleted.
-<94> Section 3.5.6: In Windows NT 3.51, Windows NT 4.0, Windows 2000 Server, and Windows Server 2003 DHCPM does not mandate DHCP clients request a specific authentication level. In Windows Server 2008 and Windows Server 2008 R2 DHCPM mandates the DHCP clients request an authentication level greater than or equal to RPC_C_AUTHN_LEVEL_PKT_PRIVACY.
+<97> Section 3.5.6: In Windows NT 3.51, Windows NT 4.0, Windows 2000 Server, and Windows Server 2003 DHCPM does not mandate DHCP clients request a specific authentication level. In Windows Server 2008 and Windows Server 2008 R2 DHCPM mandates the DHCP clients request an authentication level greater than or equal to RPC_C_AUTHN_LEVEL_PKT_PRIVACY.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
 
-No table of changes is available. The document is either new or has had no changes since its last release.
+This section identifies changes that were made to this document since the last release. Changes are classified as Major, Minor, or None.
+
+The revision class **Major** means that the technical content in the document was significantly revised. Major changes affect protocol interoperability or implementation. Examples of major changes are:
+
+- A document revision that incorporates changes to interoperability requirements.
+- A document revision that captures changes to protocol functionality.
+The revision class **Minor** means that the meaning of the technical content was clarified. Minor changes do not affect protocol interoperability or implementation. Examples of minor changes are updates to clarify ambiguity at the sentence, paragraph, or table level.
+
+The revision class **None** means that no new technical changes were introduced. Minor editorial and formatting changes may have been made, but the relevant technical content is identical to the last released version.
+
+The changes made to this document are listed in the following table. For more information, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com).
+
+| Section | Description | Revision class |
+| --- | --- | --- |
+| [3.2.4.93](#Section_3.2.4.93) R_DhcpV4FailoverGetRelationship (Opnum 92) | Updated server processing for R_DhcpV4FailoverGetRelationship method. | Major |
+| [3.2.4.94](#Section_3.2.4.94) R_DhcpV4FailoverEnumRelationship (Opnum 93) | Updated server processing for R_DhcpV4FailoverEnumRelationship method. | Major |
+| [3.2.4.97](#Section_3.2.4.97) R_DhcpV4FailoverGetScopeRelationship (Opnum 96) | Updated server processing for R_DhcpV4FailoverGetScopeRelationship method. | Major |
 
 <a id="revision-history"></a>
 
@@ -22326,3 +22352,4 @@ No table of changes is available. The document is either new or has had no chang
 | 6/25/2021 | 35.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 36.0 | Major | Significantly changed the technical content. |
 | 9/16/2024 | 36.0 | None | No changes to the meaning, language, or formatting of the technical content. |
+| 9/8/2026 | 37.0 | Major | Significantly changed the technical content. |
