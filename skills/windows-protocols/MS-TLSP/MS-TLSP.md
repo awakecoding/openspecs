@@ -75,7 +75,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/13/2026.
+Last updated: 9/8/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -116,6 +116,10 @@ Links to a document in the Microsoft Open Specifications library point to the co
 ### 1.2.1 Normative References
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
+
+[DRAFT-IETF-TLS-MLDSA-05] Tim Hollebeek, Sophie Schmieg, Bas Westerbaan, "Use of ML-DSA in TLS 1.3", [https://datatracker.ietf.org/doc/draft-ietf-tls-mldsa/](https://go.microsoft.com/fwlink/?LinkId=2378740)
+
+[DRAFT-IETF-TLS-MLKEM-09] Deirdre Connolly, "ML-KEM Post-Quantum Key Agreement for TLS 1.3", [https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/](https://go.microsoft.com/fwlink/?LinkId=2378739)
 
 [IETFDRAFT-TLS-ECDHE-MLKEM-04] Kris Kwiatkowski, Panos Kampanakis, Bas Westerbaan, Douglas Stebila, "Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3", draft-ietf-tls-ecdhe-mlkem-04, February 2026, [https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/](https://go.microsoft.com/fwlink/?linkid=2358523)
 
@@ -158,7 +162,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[KB4019276] Microsoft Corporation, "Update for Windows Server 2008", [https://www.catalog.update.microsoft.com/Search.aspx?q=%20KB4019276](https://go.microsoft.com/fwlink/?linkid=856299)
+[KB4019276] Microsoft Corporation, "Update for Windows Server 2008", [https://support.microsoft.com/en-us/help/4019276](https://go.microsoft.com/fwlink/?linkid=856299)
 
 [MSDOCS-EnableTLS1.1/2] Microsoft Corporation, "Update to add support for TLS 1.1 and TLS 1.2 in Windows Server 2008 SP2, Windows Embedded POSReady 2009, and Windows Embedded Standard 2009", [https://support.microsoft.com/en-us/topic/update-to-add-support-for-tls-1-1-and-tls-1-2-in-windows-server-2008-sp2-windows-embedded-posready-2009-and-windows-embedded-standard-2009-b6ab553a-fa8f-3f5e-287c-e752eb3ce5f4](https://go.microsoft.com/fwlink/?linkid=2154698)
 
@@ -172,7 +176,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSDOCS-TLS/SSLTables] Microsoft Corporation, "Protocols in TLS/SSL (Schannel SSP)", [https://learn.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-](https://go.microsoft.com/fwlink/?linkid=2154481)
 
-[MSKB-5083631] Microsoft Corporation, "April, 2026-KB5083631", April 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=KB5083631](https://go.microsoft.com/fwlink/?linkid=2358432)
+[MSKB-5083631] Microsoft Corporation, "April 30, 2026—KB5083631", April 2026, [https://support.microsoft.com/en-us/help/5083631](https://go.microsoft.com/fwlink/?linkid=2358432)
+
+[MSKB-5101684] Microsoft Corporation, "July 28, 2026—KB5101684", July 2026, [https://support.microsoft.com/help/5101684](https://go.microsoft.com/fwlink/?LinkId=2378277)
+
+[MSKB-5120998] Microsoft Corporation, "August 27, 2026—KB5120998", August 2026, [https://support.microsoft.com/help/5120998](https://go.microsoft.com/fwlink/?LinkId=2372745)
 
 [RFC5890] Klensin, J., "Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework", RFC 5890, August 2010, [http://rfc-editor.org/rfc/rfc5890.txt](https://go.microsoft.com/fwlink/?LinkId=324608)
 
@@ -397,7 +405,9 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 | Features | Protocols | Extensions | Groups and Cipher Suites | Supported by |
 | --- | --- | --- | --- | --- |
-| Hybrid ECDHE/ML-KEM Groups for TLS 1.3 | TLS 1.3, [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431) | - | [[IETFDRAFT-TLS-ECDHE-MLKEM-04]](https://go.microsoft.com/fwlink/?linkid=2358523) | Windows 11, version 24H2 operating system and later, Windows Server 2025 and later; see [[MSKB-5083631]](https://go.microsoft.com/fwlink/?linkid=2358432). |
+| Pure ML-KEM key exchange groups for TLS 1.3 | TLS 1.3, [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431) | - | MLKEM512, MLKEM768, MLKEM1024 [[DRAFT-IETF-TLS-MLKEM-09]](https://go.microsoft.com/fwlink/?LinkId=2378739) | Windows 11, version 24H2 operating system and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745) and later |
+| ML-DSA authentication with TLS 1.3 | TLS 1.3, [RFC8446] | - | [[DRAFT-IETF-TLS-MLDSA-05]](https://go.microsoft.com/fwlink/?LinkId=2378740) | Windows 11, version 24H2 and Windows 11, version 25H2 with [[MSKB-5101684]](https://go.microsoft.com/fwlink/?LinkId=2378277) and later |
+| Hybrid ECDHE/ML-KEM Groups for TLS 1.3 | TLS 1.3, [RFC8446] | - | [[IETFDRAFT-TLS-ECDHE-MLKEM-04]](https://go.microsoft.com/fwlink/?linkid=2358523) | Windows 11, version 24H2 and later, Windows Server 2025 and later; see [[MSKB-5083631]](https://go.microsoft.com/fwlink/?linkid=2358432). |
 | TLS 1.3 | [RFC8446] | - | - | Windows 11 client and later Windows Server 2022 and later 0-RTT resumption mode is not supported (section 2.3) Only psk_dhe_ke key exchange mode is supported (section 4.2.9) |
 | Elliptic Curves and Pre-Shared Keys for TLS | - | - | [[RFC7748]](https://go.microsoft.com/fwlink/?linkid=2154766) (Curve25519 only) [[RFC5487]](https://go.microsoft.com/fwlink/?LinkId=734930) | Windows 10 v1607 operating system and later Windows Server 2016 and later |
 | TLS Extension for Token Binding Protocol Negotiation | - | - | [[RFC8472]](https://go.microsoft.com/fwlink/?linkid=2154371) | Windows 10 v1507 operating system and later Windows Server 2016 and later Applies to TLS 1.0, TLS 1.1, and TLS 1.2 |
@@ -469,8 +479,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [1](#Section_1) Introduction | Added TLS 1.3 support for post-quantum hybrid ECDHE-MLKEM key exchange, introducing X25519MLKEM768, SecP256r1MLKEM768, and SecP384r1MLKEM1024 groups. | Major |
-| 7 Change Tracking | Added TLS 1.3 support for post-quantum hybrid ECDHE-MLKEM key exchange, introducing X25519MLKEM768, SecP256r1MLKEM768, and SecP384r1MLKEM1024 groups. | Major |
+| [1](#Section_1) Introduction | Added TLS 1.3 support for ML-KEM and ML-DSA post-quantum cryptography. | Major |
 
 <a id="revision-history"></a>
 
@@ -525,3 +534,4 @@ The changes made to this document are listed in the following table. For more in
 | 10/6/2021 | 14.0 | None | No changes to the meaning, language, or formatting of the technical content. |
 | 4/23/2024 | 15.0 | Major | Significantly changed the technical content. |
 | 4/13/2026 | 16.0 | Major | Significantly changed the technical content. |
+| 9/8/2026 | 17.0 | Major | Significantly changed the technical content. |

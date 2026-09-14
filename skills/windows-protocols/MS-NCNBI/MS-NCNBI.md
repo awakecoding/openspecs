@@ -1172,7 +1172,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 1/26/2026.
+Last updated: 9/8/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -1351,7 +1351,11 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MSKB-5055627] Microsoft Corporation, "April 2025 - 5055627", April 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5055627](https://go.microsoft.com/fwlink/?linkid=2313107)
+[MSKB-5055627] Microsoft Corporation, "April 2025 - 5055627", April 2025, [https://support.microsoft.com/en-us/help/5055627](https://go.microsoft.com/fwlink/?linkid=2313107)
+
+[MSKB-5094125] Microsoft Corporation, "June 9, 2026—KB5094125", June 2026, [https://support.microsoft.com/en-us/help/5094125](https://go.microsoft.com/fwlink/?linkid=2364580)
+
+[MSKB-5094128] Microsoft Corporation, "June 9, 2026—KB5094128", June 2026, [https://support.microsoft.com/en-us/help/5094128](https://go.microsoft.com/fwlink/?linkid=2364762)
 
 [RFC1034] Mockapetris, P., "Domain Names - Concepts and Facilities", STD 13, RFC 1034, November 1987, [https://www.rfc-edit.org/info/rfc1034](https://go.microsoft.com/fwlink/?LinkId=90263)
 
@@ -27653,6 +27657,7 @@ The response message for this method can result in the following status codes.
 | --- |
 | 200 (OK) |
 | 201 (Created) |
+| 400 (Bad Request) |
 | 412 (Precondition Failed) |
 | 500 (Internal Server Error) |
 
@@ -27691,7 +27696,9 @@ The format is the same as the format for the **bgpPeers GET** response body (sec
 <a id="Section_3.1.5.17.2.2.1.1.3"></a>
 Processing Details
 
-Create a new **bgpPeers** resource or update an existing **bgpPeers** resource.
+If the length of bgpPeers resourceId exceeds 75 characters, the server SHOULD<19> return 400 (Bad Request) and set the error code to “ResourceNameTooLong”.
+
+Otherwise, create a new **bgpPeers** resource or update an existing **bgpPeers** resource.
 
 GET
 
@@ -28285,6 +28292,7 @@ The response message for this method can result in the following status codes.
 | --- |
 | 200 (OK) |
 | 201 (Created) |
+| 400 (Bad Request) |
 | 412 (Precondition Failed) |
 | 500 (Internal Server Error) |
 
@@ -28365,7 +28373,9 @@ The format is the same as the format for the **GET policyMaps** response body (s
 <a id="Section_3.1.5.17.3.1.1.3"></a>
 Processing Details
 
-Create a new **policyMaps** resource or update an existing **policyMaps** resource.
+If the length of policyMaps resourceId exceeds 75 characters, the server SHOULD<20> return 400 (Bad Request) and set the error code to “ResourceNameTooLong”.
+
+Otherwise, create a new **policyMaps** resource or update an existing **policyMaps** resource.
 
 GET
 
@@ -29531,7 +29541,7 @@ The following property elements are valid.
 | **addressSpace** | Required | Indicates the address space of the virtual network. |
 | **addressSpace.addressPrefixes** | Required | Indicates an array of the valid list of address prefixes that can make up this virtual network. The value is an array of address prefixes in the IPv4 or IPv6 format. The space cannot be shrunk if addresses are in use in a subnet belonging to the virtual network. |
 | **dhcpOptions** | Optional | Indicates the DHCP options used by servers in the virtual network. |
-| **dhcpOptions.dnsServers** | Optional | Indicates an array of DNS servers that are being used by the virtual network.<19> IPv6 addresses are supported. |
+| **dhcpOptions.dnsServers** | Optional | Indicates an array of DNS servers that are being used by the virtual network.<21> IPv6 addresses are supported. |
 | **configurationState** | Optional Read-only | See **configurationState** in section [2.2.4](#Section_2.2.4). More details are given in the section for the GET operation section 3.1.5.18.1.2. |
 | **configurationState.id** | - | This is the instance ID of the virtual network resource. |
 | **configurationState.hostErrors** | - | An array of **configurationState** objects as specified in section 2.2.4. The values for the various fields are the same as for the network interface configuration state specified in section [3.1.5.11](#Section_3.1.5.11). |
@@ -30976,7 +30986,7 @@ Deletes a **subnets** resource.
 <a id="Section_3.1.5.18.3"></a>
 ##### 3.1.5.18.3 virtualNetworkPeerings
 
-The **virtualNetworkPeerings** resource SHOULD<20> be used to create peered networks. Peered networks can share network traffic without the need to use a gateway. The address spaces in any peered networks MUST not overlap.
+The **virtualNetworkPeerings** resource SHOULD<22> be used to create peered networks. Peered networks can share network traffic without the need to use a gateway. The address spaces in any peered networks MUST not overlap.
 
 A **virtualNetworkPeerings** resource is used through the following v3 URI.
 
@@ -31401,7 +31411,7 @@ Retrieves the **virtualNetworkManager** configuration.
 <a id="Section_3.1.5.20"></a>
 #### 3.1.5.20 auditingSettings
 
-The **auditingSettings** resource SHOULD<21> be used as a singleton resource that configures the directory where servers log firewall auditing information. Servers are the machines managed by the product, and they correspond to the **servers** resource.
+The **auditingSettings** resource SHOULD<23> be used as a singleton resource that configures the directory where servers log firewall auditing information. Servers are the machines managed by the product, and they correspond to the **servers** resource.
 
 It is invoked through the following v3 URI.
 
@@ -33647,8 +33657,8 @@ The following property elements are valid.
 | **etag** | Read-only | Specified in Common JSON Elements, section [2.2.2](#Section_2.2.2). |
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
 | **QosSettings** | Optional | See QosSettings table following. |
-| **PortDefaultState** | Optional | Sets the default state for a port. Possible values are: Default**:** Ports created on a virtual switch have a default state. The default state is dependent on the platform (server implementation). This setting tells the server to keep the port state the same as it was when the port was created. BlockTraffic**:** VFP is enabled, and all traffic is blocked. AllowTraffic**:** VFP is disabled, and all traffic is allowed. This property is supported on URI v3.1 and later.<22> |
-| **numInterfacesHavingQos** | Optional Read-only | The number of resources of type **networkInterfaces** for which any of the following are greater than 0. portSettings.qosSettings.outboundReservedValue portSettings.qosSettings.outboundMaximumMbp portSettings.qosSettings.inboundMaximumMbps This property is supported on URI v1 and later.<23> |
+| **PortDefaultState** | Optional | Sets the default state for a port. Possible values are: Default**:** Ports created on a virtual switch have a default state. The default state is dependent on the platform (server implementation). This setting tells the server to keep the port state the same as it was when the port was created. BlockTraffic**:** VFP is enabled, and all traffic is blocked. AllowTraffic**:** VFP is disabled, and all traffic is allowed. This property is supported on URI v3.1 and later.<24> |
+| **numInterfacesHavingQos** | Optional Read-only | The number of resources of type **networkInterfaces** for which any of the following are greater than 0. portSettings.qosSettings.outboundReservedValue portSettings.qosSettings.outboundMaximumMbp portSettings.qosSettings.inboundMaximumMbps This property is supported on URI v1 and later.<25> |
 
 **QosSettings**
 
@@ -33795,7 +33805,7 @@ Retrieves the **virtualSwitchManager** configuration.
 <a id="Section_3.1.5.27"></a>
 #### 3.1.5.27 networkControllerBackup
 
-The **networkControllerBackup** resource SHOULD<24> be used to persist to disk all the applicable configuration data for a network controller. The backed-up data can be used to restore the configuration of the network controller. For more details, see **networkControllerRestore** section [3.1.5.28](#Section_3.1.5.28). The format of the backed-up data is implementation-specific and is treated as opaque data.
+The **networkControllerBackup** resource SHOULD<26> be used to persist to disk all the applicable configuration data for a network controller. The backed-up data can be used to restore the configuration of the network controller. For more details, see **networkControllerRestore** section [3.1.5.28](#Section_3.1.5.28). The format of the backed-up data is implementation-specific and is treated as opaque data.
 
 It is invoked through the following URI.
 
@@ -33824,9 +33834,9 @@ The following property elements are valid.
 | **backupPath** | Required | A path to a location where the backup operation persists files. |
 | **credential** | Optional | A reference (**resourceRef** in section 2.2.2) to a **credentials** resource. The credential MUST be of type usernamePassword. The credential is used to access the **backupPath**. |
 | **errorMessage** | Read-only | A string that describes an error, such as, **backupPath** is not accessible. An empty string can be returned. |
-| **failedResourcesList** | Read-only | An array of strings that are references (**resourceRef** in section 2.2.2) to resources that could not be backed up. An empty array can be returned.<25> |
-| **successfulResourcesList** | Read-only | An array of strings that are references (**resourceRef** in section 2.2.2) to resources that were successfully backed up. An empty array can be returned.<26> |
-| **inProgressResourcesList** | Read-only | An array of strings that are references (**resourceRef** in section 2.2.2) to resources that are in progress of being backed up. An empty array can be returned.<27> |
+| **failedResourcesList** | Read-only | An array of strings that are references (**resourceRef** in section 2.2.2) to resources that could not be backed up. An empty array can be returned.<27> |
+| **successfulResourcesList** | Read-only | An array of strings that are references (**resourceRef** in section 2.2.2) to resources that were successfully backed up. An empty array can be returned.<28> |
+| **inProgressResourcesList** | Read-only | An array of strings that are references (**resourceRef** in section 2.2.2) to resources that are in progress of being backed up. An empty array can be returned.<29> |
 
 <a id="Section_3.1.5.27.1"></a>
 ##### 3.1.5.27.1 HTTP Methods
@@ -33993,7 +34003,7 @@ Retrieves the status of the backup operation that was launched when the first **
 <a id="Section_3.1.5.28"></a>
 #### 3.1.5.28 networkControllerRestore
 
-The **networkControllerRestore** resource SHOULD<28> be used to restore from disk all the applicable configuration data for a network controller. The configuration of the network controller MUST first be backed up via a PUT operation on a **networkControllerBackup** resource. For more details, see **networkControllerBackup** section [3.1.5.27](#Section_3.1.5.27).
+The **networkControllerRestore** resource SHOULD<30> be used to restore from disk all the applicable configuration data for a network controller. The configuration of the network controller MUST first be backed up via a PUT operation on a **networkControllerBackup** resource. For more details, see **networkControllerBackup** section [3.1.5.27](#Section_3.1.5.27).
 
 It is invoked through the following URI.
 
@@ -34209,7 +34219,7 @@ Retrieves the status of the restore operation that was launched when the first *
 <a id="Section_3.1.5.29"></a>
 #### 3.1.5.29 SubnetEgressReset
 
-The **SubnetEgressReset** resource SHOULD<29> be used to create an action to reset the **UnbilledEgressBytes** and **BilledEgressBytes** properties of virtual network subnets to zero (0).
+The **SubnetEgressReset** resource SHOULD<31> be used to create an action to reset the **UnbilledEgressBytes** and **BilledEgressBytes** properties of virtual network subnets to zero (0).
 
 It is invoked through the following URI.
 
@@ -34338,7 +34348,7 @@ Retrieves the status of the last action created via the **PUT** operation.
 <a id="Section_3.1.5.30"></a>
 #### 3.1.5.30 discovery
 
-The **discovery** resource SHOULD<30> provide versioning information about the server. It returns all supported URI versions.
+The **discovery** resource SHOULD<32> provide versioning information about the server. It returns all supported URI versions.
 
 The URI for the **discovery** resource is as follows.
 
@@ -34359,7 +34369,7 @@ The following property elements are valid.
 | --- | --- | --- |
 | **Etag** | Read-only | Specified in Common JSON Elements, section [2.2.2](#Section_2.2.2). |
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
-| **networkControllerVersion** | Required | A string that indicates the versions of the server. It follows the format of X.Y.Z (Major.Minor.Revision).<31> |
+| **networkControllerVersion** | Required | A string that indicates the versions of the server. It follows the format of X.Y.Z (Major.Minor.Revision).<33> |
 | **supportedRestVersions** | Required | Array of string elements. Returns all supported versions. The supported values are "V1", "V2", "V3", "V3.1", "V3.2", V4", and "V5". |
 | **currentRestVersion** | Required | The preferred version for accessing resources on the server. |
 
@@ -34410,7 +34420,7 @@ None.
 <a id="Section_3.1.5.30.1.1.2"></a>
 Response Body
 
-The format for the response body for the **discovery GET** method is as follows.<32>
+The format for the response body for the **discovery GET** method is as follows.<34>
 
 - {
 - "resourceRef": "/discovery/discovery",
@@ -35755,7 +35765,7 @@ The following table contains all possible error codes returned by servers, along
 | InUseSubnetCannotBeUpdated | The subnet is in use and cannot be updated. |
 | VnetInUse | The properties on the virtual network resource cannot be changed because it is in use. |
 | AnotherOperationInProgress | Another operation on this or dependent resource is in progress. |
-| DnsServerCountLimitReached | The limit has been reached for the number of DNS servers allowed for a virtual network.<33> |
+| DnsServerCountLimitReached | The limit has been reached for the number of DNS servers allowed for a virtual network.<35> |
 | NicInUse | The **networkInterfaces** resource is in use. |
 | OperationNotSupported | The specified operation on the specified resource is not supported. |
 | OutboundNatRulesAreNotSupported | Outbound [**NAT**](#gt_network-address-translation-nat) rules are not supported. |
@@ -85660,35 +85670,39 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <18> Section 3.1.5.10: The server limits the number of routes per table to 100.
 
-<19> Section 3.1.5.18: In applicable Windows Server releases, the server limits the number of DNS servers per virtual network to 9.
+<19> Section 3.1.5.17.2.2.1.1.3: Windows Server 2016, Windows Server 2019, Windows Server 2022 without [[MSKB-5094128]](https://go.microsoft.com/fwlink/?linkid=2364762), and Windows Server 2025 without [[MSKB-5094125]](https://go.microsoft.com/fwlink/?linkid=2364580) do not validate the length of bgpPeers resourceId
 
-<20> Section 3.1.5.18.3: Support for the **virtualNetworkPeerings** resource in version v3 is not available in Windows Server v1709.
+<20> Section 3.1.5.17.3.1.1.3: Windows Server 2016, Windows Server 2019, Windows Server 2022 without [MSKB-5094128], and Windows Server 2025 without [MSKB-5094125] do not validate the length of policyMaps resourceId.
 
-<21> Section 3.1.5.20: Support for **auditingSettings** resource in version v3 is not available in Windows Server v1709.
+<21> Section 3.1.5.18: In applicable Windows Server releases, the server limits the number of DNS servers per virtual network to 9.
 
-<22> Section 3.1.5.26: Support for the **PortDefaultState** property was backported to Windows Server v1809 and Windows Server 2019 and later.
+<22> Section 3.1.5.18.3: Support for the **virtualNetworkPeerings** resource in version v3 is not available in Windows Server v1709.
 
-<23> Section 3.1.5.26: Support for the **numInterfacesHavingQos** property was backported to Windows Server 2016 and later.
+<23> Section 3.1.5.20: Support for **auditingSettings** resource in version v3 is not available in Windows Server v1709.
 
-<24> Section 3.1.5.27: The **networkControllerBackup** resource is not available prior to Windows Server 2016 with the [MSKB-3216755] update.
+<24> Section 3.1.5.26: Support for the **PortDefaultState** property was backported to Windows Server v1809 and Windows Server 2019 and later.
 
-<25> Section 3.1.5.27: The **failedResourcesList** property is removed from Windows Server 2022 and later.
+<25> Section 3.1.5.26: Support for the **numInterfacesHavingQos** property was backported to Windows Server 2016 and later.
 
-<26> Section 3.1.5.27: The **successfulResourcesList** property is removed from Windows Server 2022 and later.
+<26> Section 3.1.5.27: The **networkControllerBackup** resource is not available prior to Windows Server 2016 with the [MSKB-3216755] update.
 
-<27> Section 3.1.5.27: The **inProgressResourcesList** property is removed from Windows Server 2022 and later.
+<27> Section 3.1.5.27: The **failedResourcesList** property is removed from Windows Server 2022 and later.
 
-<28> Section 3.1.5.28: The **networkControllerRestore** resource is not available prior to Windows Server 2016 with the [MSKB-3216755] update.
+<28> Section 3.1.5.27: The **successfulResourcesList** property is removed from Windows Server 2022 and later.
 
-<29> Section 3.1.5.29: Support for **SubnetEgressReset** resource in version v2 is not available in Windows Server 2016.
+<29> Section 3.1.5.27: The **inProgressResourcesList** property is removed from Windows Server 2022 and later.
 
-<30> Section 3.1.5.30: Support for the **discovery** resource in version v3 is not available in Windows Server v1709.
+<30> Section 3.1.5.28: The **networkControllerRestore** resource is not available prior to Windows Server 2016 with the [MSKB-3216755] update.
 
-<31> Section 3.1.5.30: In Windows Server the x.y.z value changes. Each monthly servicing release has a different minor version. From a protocol perspective the number helps in ordering.
+<31> Section 3.1.5.29: Support for **SubnetEgressReset** resource in version v2 is not available in Windows Server 2016.
 
-<32> Section 3.1.5.30.1.1.2: Version "V4" is supported in Windows Server 2022 and later.
+<32> Section 3.1.5.30: Support for the **discovery** resource in version v3 is not available in Windows Server v1709.
 
-<33> Section 3.1.5.35: In applicable Windows Server releases, the server limits the number of DNS servers per virtual network to 9.
+<33> Section 3.1.5.30: In Windows Server the x.y.z value changes. Each monthly servicing release has a different minor version. From a protocol perspective the number helps in ordering.
+
+<34> Section 3.1.5.30.1.1.2: Version "V4" is supported in Windows Server 2022 and later.
+
+<35> Section 3.1.5.35: In applicable Windows Server releases, the server limits the number of DNS servers per virtual network to 9.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -85707,9 +85721,10 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.5.7](#Section_3.1.5.7) loadBalancerMuxes | 30535 : Updated the descriptions for four elements: localASN, localASN4, peerASN, and peerASN4 . | Major |
-| [6.6.2](#Section_6.6.2) GET schema | 30537 : Removed the "vipIpPools" element from the required collection in the GET schema. | Major |
-| [6.7.1](#Section_6.7.1) PUT schema | 30538 : Updated the schema by revising the required element list. | Major |
+| [3.1.5.17.2.2.1.1](#Section_3.1.5.17.2.2.1.1) PUT | 51078 : Added a status code | Minor |
+| [3.1.5.17.2.2.1.1.3](#Section_3.1.5.17.2.2.1.1.3) Processing Details | 51078 : Updated server validation for bgpPeers resource | Minor |
+| [3.1.5.17.3.1.1](#Section_3.1.5.17.3.1.1) PUT | 51078 : Added a status code | Minor |
+| [3.1.5.17.3.1.1.3](#Section_3.1.5.17.3.1.1.3) Processing Details | 51078 : Updated server validation for policyMaps resource | Minor |
 
 <a id="revision-history"></a>
 
@@ -85732,3 +85747,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2025 | 12.0 | Major | Significantly changed the technical content. |
 | 6/9/2025 | 13.0 | Major | Significantly changed the technical content. |
 | 1/26/2026 | 14.0 | Major | Significantly changed the technical content. |
+| 9/8/2026 | 14.1 | Minor | Clarified the meaning of the technical content. |

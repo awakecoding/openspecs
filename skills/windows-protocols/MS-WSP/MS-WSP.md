@@ -223,7 +223,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 3/9/2026.
+Last updated: 9/8/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -373,7 +373,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSDOCS-NLST] Microsoft Corporation, "National Language Support Terminology", [https://learn.microsoft.com/en-us/windows/win32/intl/nls-terminology](https://go.microsoft.com/fwlink/?linkid=2101593)
 
-[MSKB-5062553] Microsoft Corporation, "July 2025 - 5062553", July 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5062553](https://go.microsoft.com/fwlink/?linkid=2325315)
+[MSKB-5062553] Microsoft Corporation, "July 2025 - 5062553", July 2025, [https://support.microsoft.com/en-us/help/5062553](https://go.microsoft.com/fwlink/?linkid=2325315)
 
 [PIPE] Microsoft Corporation, "Named Pipes", [http://msdn.microsoft.com/en-us/library/aa365590.aspx](https://go.microsoft.com/fwlink/?LinkId=90247)
 
@@ -1648,7 +1648,7 @@ packet-beta
   224-287: "vString (variable)"
 ```
 
-**eKind (4 bytes):** MUST be set to one of the following values that indicates the contents of [**GUID**](#gt_globally-unique-identifier-guid) and **vValue**.
+**eKind (4 bytes):** MUST be set to one of the following values that indicates the contents of **vString** and **ulId**.
 
 | Value | Meaning |
 | --- | --- |
@@ -1657,7 +1657,7 @@ packet-beta
 
 **paddingGuidAlign (variable):** The length of this field MUST be such that the following field begins at the first offset that is a multiple of 8 bytes from the beginning of the message that contains this structure. If this field is present (that is, length nonzero), the value it contains is arbitrary. The content of this field MUST be ignored by the receiver.
 
-**GUID (16 bytes):** The property GUID.
+**GUID (16 bytes):** The property [**GUID**](#gt_globally-unique-identifier-guid).
 
 **ulId (4 bytes):** If **eKind** is DBKIND_GUID_PROPID, this field contains an unsigned integer specifying the property ID. If **eKind** is DBKIND_GUID_NAME, this field contains an unsigned integer specifying the number of Unicode characters contained in the **vString** field.
 
@@ -5848,10 +5848,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.2](#Section_2.2.2) Message Headers | 32098 : Added value of _msg for "CPMExternalSearchResultIn". | Major |
-| 2.2.2 Message Headers | 32098 : Added the value of _msg for "CPMExternalSearchResultIn". | Major |
-| [3.1.5.2.19](#Section_3.1.5.2.19) Receiving a CPMExternalSearchResultIn Request | 32097 : Updated "_status" handling in the CPMExternalSearchResultIn message header. | Major |
-| 3.1.5.2.19 Receiving a CPMExternalSearchResultIn Request | 32097 : Added the response specification for "CPMExternalSearchResultIn". | Major |
+| [2.2.1.29](#Section_2.2.1.29) CDbColId | 51070 : Updated eKind field description | Minor |
 
 <a id="revision-history"></a>
 
@@ -5927,3 +5924,4 @@ The changes made to this document are listed in the following table. For more in
 | 3/10/2025 | 39.0 | Major | Significantly changed the technical content. |
 | 6/23/2025 | 40.0 | Major | Significantly changed the technical content. |
 | 3/9/2026 | 41.0 | Major | Significantly changed the technical content. |
+| 9/8/2026 | 41.1 | Minor | Clarified the meaning of the technical content. |

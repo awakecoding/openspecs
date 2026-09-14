@@ -234,10 +234,10 @@ Table of Contents
       - [3.1.4.88 RRPC_FWSetFirewallRule2_31 (Opnum 87)](#Section_3.1.4.88)
       - [3.1.4.89 RRPC_FWEnumFirewallRules2_31 (Opnum 88)](#Section_3.1.4.89)
       - [3.1.4.90 RRPC_FWQueryFirewallRules2_31 (Opnum 89)](#Section_3.1.4.90)
-      - [3.1.4.91 RRPC_FWAddFirewallRule2_33 (Opnum 91)](#Section_3.1.4.91)
-      - [3.1.4.92 RRPC_FWSetFirewallRule2_33 (Opnum 92)](#Section_3.1.4.92)
-      - [3.1.4.93 RRPC_FWEnumFirewallRules2_33 (Opnum 93)](#Section_3.1.4.93)
-      - [3.1.4.94 RRPC_FWQueryFirewallRules2_33 (Opnum 94)](#Section_3.1.4.94)
+      - [3.1.4.91 RRPC_FWAddFirewallRule2_33 (Opnum 90)](#Section_3.1.4.91)
+      - [3.1.4.92 RRPC_FWSetFirewallRule2_33 (Opnum 91)](#Section_3.1.4.92)
+      - [3.1.4.93 RRPC_FWEnumFirewallRules2_33 (Opnum 92)](#Section_3.1.4.93)
+      - [3.1.4.94 RRPC_FWQueryFirewallRules2_33 (Opnum 93)](#Section_3.1.4.94)
     - [3.1.5 Timer Events](#Section_3.1.5)
     - [3.1.6 Other Local Events](#Section_3.1.6)
       - [3.1.6.1 AddPortInUse](#Section_3.1.6.1)
@@ -295,7 +295,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 6/8/2026.
+Last updated: 9/8/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -1194,7 +1194,7 @@ FW_ADDRESS_KEYWORD_REMOTE_INTRANET = 0x0100,
 
 FW_ADDRESS_KEYWORD_CAPTIVE_PORTAL = 0x0200,
 
-FW_ADDRESS_KEYWORD_MAXINTERNAL_LOCAL_ADDRESS = 0x0400,
+FW_ADDRESS_KEYWORD_INTERNAL_LOCAL_ADDRESSES = 0x0400,
 
 FW_ADDRESS_KEYWORD_MAX_V2_10 = 0x0020,
 
@@ -4315,7 +4315,7 @@ FW_IPSEC_PHASE IpSecPhase;
 
 [range(0,1000)] unsigned long dwNumSuites;
 
-[size_is(dwNumSuites)] PFW_AUTH_SUITE pSuites;
+[size_is(dwNumSuites)] PFW_AUTH_SUITE2_10 pSuites;
 
 [range(FW_RULE_ORIGIN_INVALID,FW_RULE_ORIGIN_MAX-1)]
 
@@ -4347,7 +4347,7 @@ unsigned long dwAuthSetFlags;
 
 **dwNumSuites:** Specifies the number of authentication suites that the structure contains.
 
-**pSuites:** A pointer to an array of [FW_AUTH_SUITE](#Section_2.2.63) elements. The number of elements is given by **dwNumSuites**.
+**pSuites:** A pointer to an array of FW_AUTH_SUITE2_10 elements. The number of elements is given by **dwNumSuites**.
 
 **Origin:** This field is the set origin, as specified in the [FW_RULE_ORIGIN_TYPE](#Section_2.2.32) enumeration. It MUST be filled on enumerated rules and ignored on input.
 
@@ -5877,7 +5877,7 @@ struct _tag_FW_RULE2_10* pNext;
 
 unsigned short wSchemaVersion;
 
-[string, range(1, 10001), ref] wchar_t* wszRuleId;
+[string, range(1, 512), ref] wchar_t* wszRuleId;
 
 [string, range(1, 10001)] wchar_t* wszName;
 
@@ -5978,7 +5978,7 @@ FW_AUTH_SET_FLAGS_MAX = 0x01,
 
 **FW_AUTH_SET_FLAGS_NONE:** This value means that none of the following flags are set. It is defined for simplicity in writing [**IDL**](#gt_interface-definition-language-idl) definitions and code.
 
-**FW_AUTH_SET_FLAGS_MAX:** This value and values that exceed this value are not valid and MUST NOT be used. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 2.
+**FW_AUTH_SET_FLAGS_MAX:** This value and values that exceed this value are not valid and MUST NOT be used. It is defined for simplicity in writing IDL definitions and code. This symbolic constant has a value of 1.
 
 <a id="Section_2.2.100"></a>
 ### 2.2.100 FW_CRYPTO_SET_FLAGS
@@ -6338,7 +6338,7 @@ struct _tag_FW_RULE* pNext;
 
 unsigned short wSchemaVersion;
 
-[string, range(1, 10001), ref] wchar_t* wszRuleId;
+[string, range(1, 512), ref] wchar_t* wszRuleId;
 
 [string, range(1, 10001)] wchar_t* wszName;
 
@@ -6447,7 +6447,7 @@ struct _tag_FW_RULE* pNext;
 
 unsigned short wSchemaVersion;
 
-[string, range(1, 10001), ref] wchar_t* wszRuleId;
+[string, range(1, 512), ref] wchar_t* wszRuleId;
 
 [string, range(1, 10001)] wchar_t* wszName;
 
@@ -7005,6 +7005,10 @@ Because the server makes access control decisions as part of message processing,
 | [RRPC_FWSetFirewallRule2_31](#Section_3.1.4.88) | The RRPC_FWSetFirewallRule2_31 method requests the server to modify the specified connection security rule in the policy contained in the policy store that is referenced by the handle specified in the hPolicyStore parameter. Opnum: 87 |
 | [RRPC_FWEnumFirewallRules2_31](#Section_3.1.4.89) | The RRPC_FWEnumFirewallRules2_31 method requests the server to return the firewall rules matching the input flags contained in the store that is referenced by the hPolicyStore handle. The method returns a linked list of the corresponding firewall rule objects. Opnum: 88 |
 | [RRPC_FWQueryFirewallRules2_31](#Section_3.1.4.90) | The RRPC_FWQueryFirewallRules2_31 method requests the server to return all the firewall rules that match the specified query object, as are contained in the store that is referenced by the hPolicyStore handle. The method returns a linked list of all the firewall rules that match the specified query object. Opnum: 89 |
+| [RRPC_FWAddFirewallRule2_33](#Section_3.1.4.91) | The RRPC_FWAddFirewallRule2_33 method requests the server to add the specified firewall rule to the policy contained in the policy store that is referenced by the handle specified in the *hPolicyStore* parameter. Opnum: 90 |
+| [RRPC_FWSetFirewallRule2_33](#Section_3.1.4.92) | The RRPC_FWSetFirewallRule2_33 method requests the server to modify the specified connection security rule in the policy contained in the policy store that is referenced by the handle specified in the *hPolicyStore* parameter. Opnum: 91 |
+| [RRPC_FWEnumFirewallRules2_33](#Section_3.1.4.93) | The RRPC_FWEnumFirewallRules2_33 method requests the server to return the firewall rules matching the input flags contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of the corresponding firewall rule objects. Opnum: 92 |
+| [RRPC_FWQueryFirewallRules2_33](#Section_3.1.4.94) | The RRPC_FWQueryFirewallRules2_33 method requests the server to return all the firewall rules that match the specified query object, as are contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of all the firewall rules that match the specified query object. Opnum: 93 |
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 RRPC_FWOpenPolicyStore (Opnum 0)
@@ -10788,11 +10792,11 @@ DWORD RRPC_FWQueryFirewallRules2_31(
 The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.91"></a>
-#### 3.1.4.91 RRPC_FWAddFirewallRule2_33 (Opnum 91)
+#### 3.1.4.91 RRPC_FWAddFirewallRule2_33 (Opnum 90)
 
 The **RRPC_FWAddFirewallRule2_33** method requests the server to add the specified firewall rule to the policy contained in the policy store that is referenced by the handle specified in the *hPolicyStore* parameter. The method is only supported for policy version 0x0221 (section [2.2.42](#Section_2.2.42)).
 
-DWORD RRPC_FWAddFirewallRule2_31(
+DWORD RRPC_FWAddFirewallRule2_33(
 
 [in] FW_CONN_HANDLE rpcConnHandle,
 
@@ -10828,11 +10832,11 @@ This method adds a firewall rule in the firewall linked list of the memory repre
 The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.92"></a>
-#### 3.1.4.92 RRPC_FWSetFirewallRule2_33 (Opnum 92)
+#### 3.1.4.92 RRPC_FWSetFirewallRule2_33 (Opnum 91)
 
 The **RRPC_FWSetFirewallRule2_33** method requests the server to modify the specified connection security rule in the policy contained in the policy store that is referenced by the handle specified in the *hPolicyStore* parameter. The method is only supported for policy version 0x0221 (section [2.2.42](#Section_2.2.42)).
 
-DWORD RRPC_FWSetFirewallRule2_31(
+DWORD RRPC_FWSetFirewallRule2_33(
 
 [in] FW_CONN_HANDLE rpcConnHandle,
 
@@ -10866,11 +10870,11 @@ DWORD RRPC_FWSetFirewallRule2_31(
 The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.93"></a>
-#### 3.1.4.93 RRPC_FWEnumFirewallRules2_33 (Opnum 93)
+#### 3.1.4.93 RRPC_FWEnumFirewallRules2_33 (Opnum 92)
 
-The **RRPC_FWEnumFirewallRules2_31** method requests the server to return the firewall rules matching the input flags contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of the corresponding firewall rule objects. The method is only supported for policy version 0x0221 (section [2.2.42](#Section_2.2.42)).
+The **RRPC_FWEnumFirewallRules2_33** method requests the server to return the firewall rules matching the input flags contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of the corresponding firewall rule objects. The method is only supported for policy version 0x0221 (section [2.2.42](#Section_2.2.42)).
 
-DWORD RRPC_FWEnumFirewallRules2_31(
+DWORD RRPC_FWEnumFirewallRules2_33(
 
 [in] FW_CONN_HANDLE rpcConnHandle,
 
@@ -10914,11 +10918,11 @@ DWORD RRPC_FWEnumFirewallRules2_31(
 The server MUST validate that the client is authorized to perform the requested operation (as defined in section [3.1.4](#Section_3.1.4)) before executing this method.
 
 <a id="Section_3.1.4.94"></a>
-#### 3.1.4.94 RRPC_FWQueryFirewallRules2_33 (Opnum 94)
+#### 3.1.4.94 RRPC_FWQueryFirewallRules2_33 (Opnum 93)
 
 The **RRPC_FWQueryFirewallRules2_33** method requests the server to return all the firewall rules that match the specified query object, as are contained in the store that is referenced by the *hPolicyStore* handle. The method returns a linked list of all the firewall rules that match the specified query object. The method is only supported for policy version 0x0221 (section [2.2.42](#Section_2.2.42)).
 
-DWORD RRPC_FWQueryFirewallRules2_31(
+DWORD RRPC_FWQueryFirewallRules2_33(
 
 [in] FW_CONN_HANDLE rpcConnHandle,
 
@@ -11292,7 +11296,7 @@ The procedure that follows enables the MSFT_NetFirewallDynamicKeywordAddress obj
 
 ![Process to create a MSFT_NetFirewallDynamicKeywordAddress object and firewall rule](media/image6.png)
 
-Figure 6: Process to create a MSFT_NetFirewallDynamicKeywordAddress object and firewall rule
+Figure 6 Process to create a MSFT_NetFirewallDynamicKeywordAddress object and firewall rule
 
 To create a new MSFT_NetFirewallDynamicKeywordAddress object and firewall rule, the steps that follow are performed:
 
@@ -19804,9 +19808,16 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.77](#Section_2.2.77) FW_PHASE1_KEY_MODULE_TYPE | Added IKEv2 keying protocol | Major |
-| [2.2.81](#Section_2.2.81) FW_PHASE1_SA_DETAILS | Added IKEv2 keying protocol | Major |
-| [6](#Section_6) Appendix A: Full IDL | Added IKEv2 in _tag_FW_PHASE1_KEY_MODULE_TYPE | Major |
+| [2.2.21](#Section_2.2.21) FW_ADDRESS_KEYWORD | 49114 : Fixed the FW_ADDRESS_KEYWORD_MAXINTERNAL_LOCAL_ADDRESS address type naming between schema code and description. | Minor |
+| [2.2.64](#Section_2.2.64) FW_AUTH_SET2_10 | 50773 : Fixed the pSuites field reference type to FW_AUTH_SUITE2_10. | Minor |
+| [2.2.98](#Section_2.2.98) FW_RULE2_10 | 49304 : Updated string range for wszRuleId. | Minor |
+| [2.2.99](#Section_2.2.99) FW_AUTH_SET_FLAGS | 49303 : Updated value of the FW_AUTH_SET_FLAGS_MAX data type between schema code and description. | Minor |
+| [3.1.4](#Section_3.1.4) Message Processing Events and Sequencing Rules | 49850 : Added Opnums to the Methods in RPC Opnum Order table. | Minor |
+| [3.1.4.91](#Section_3.1.4.91) RRPC_FWAddFirewallRule2_33 (Opnum 90) | 49850 : Fixed Opnum label in section title and method name in schema code. | Minor |
+| [3.1.4.92](#Section_3.1.4.92) RRPC_FWSetFirewallRule2_33 (Opnum 91) | 49850 : Fixed Opnum label in section title and method name in schema code. | Minor |
+| [3.1.4.93](#Section_3.1.4.93) RRPC_FWEnumFirewallRules2_33 (Opnum 92) | 50774 : Fixed naming of the RRPC_FWEnumFirewallRules2_31 method to RRPC_FWEnumFirewallRules2_33. | Minor |
+| 3.1.4.93 RRPC_FWEnumFirewallRules2_33 (Opnum 92) | 49850 : Fixed Opnum label in section title and method name in schema code. | Minor |
+| [3.1.4.94](#Section_3.1.4.94) RRPC_FWQueryFirewallRules2_33 (Opnum 93) | 49850 : Fixed Opnum label in section title and method name in schema code. | Minor |
 
 <a id="revision-history"></a>
 
@@ -19880,3 +19891,4 @@ The changes made to this document are listed in the following table. For more in
 | 11/21/2025 | 35.0 | Major | Significantly changed the technical content. |
 | 5/11/2026 | 35.1 | Minor | Clarified the meaning of the technical content. |
 | 6/8/2026 | 36.0 | Major | Significantly changed the technical content. |
+| 9/8/2026 | 36.1 | Minor | Clarified the meaning of the technical content. |
