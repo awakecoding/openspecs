@@ -75,7 +75,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 9/8/2026.
+Last updated: 9/28/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -181,6 +181,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSKB-5101684] Microsoft Corporation, "July 28, 2026—KB5101684", July 2026, [https://support.microsoft.com/help/5101684](https://go.microsoft.com/fwlink/?LinkId=2378277)
 
 [MSKB-5120998] Microsoft Corporation, "August 27, 2026—KB5120998", August 2026, [https://support.microsoft.com/help/5120998](https://go.microsoft.com/fwlink/?LinkId=2372745)
+
+[MSKB-5126646] Microsoft Corporation, "October 13, 2026—KB5126646", October 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5126646](https://go.microsoft.com/fwlink/?LinkId=2380542)
 
 [RFC5890] Klensin, J., "Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework", RFC 5890, August 2010, [http://rfc-editor.org/rfc/rfc5890.txt](https://go.microsoft.com/fwlink/?LinkId=324608)
 
@@ -405,8 +407,8 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 | Features | Protocols | Extensions | Groups and Cipher Suites | Supported by |
 | --- | --- | --- | --- | --- |
-| Pure ML-KEM key exchange groups for TLS 1.3 | TLS 1.3, [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431) | - | MLKEM512, MLKEM768, MLKEM1024 [[DRAFT-IETF-TLS-MLKEM-09]](https://go.microsoft.com/fwlink/?LinkId=2378739) | Windows 11, version 24H2 operating system and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745) and later |
-| ML-DSA authentication with TLS 1.3 | TLS 1.3, [RFC8446] | - | [[DRAFT-IETF-TLS-MLDSA-05]](https://go.microsoft.com/fwlink/?LinkId=2378740) | Windows 11, version 24H2 and Windows 11, version 25H2 with [[MSKB-5101684]](https://go.microsoft.com/fwlink/?LinkId=2378277) and later |
+| Pure ML-KEM key exchange groups for TLS 1.3 | TLS 1.3, [[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431) | - | MLKEM512, MLKEM768, MLKEM1024 [[DRAFT-IETF-TLS-MLKEM-09]](https://go.microsoft.com/fwlink/?LinkId=2378739) | Windows 11, version 24H2 operating system and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745) and later Windows Server 2025 with [[MSKB-5126646]](https://go.microsoft.com/fwlink/?LinkId=2380542) and later. |
+| ML-DSA authentication with TLS 1.3 | TLS 1.3, [RFC8446] | - | [[DRAFT-IETF-TLS-MLDSA-05]](https://go.microsoft.com/fwlink/?LinkId=2378740) | Windows 11, version 24H2 and Windows 11, version 25H2 with [[MSKB-5101684]](https://go.microsoft.com/fwlink/?LinkId=2378277) and later Windows Server 2025 with [MSKB-5126646] and later. |
 | Hybrid ECDHE/ML-KEM Groups for TLS 1.3 | TLS 1.3, [RFC8446] | - | [[IETFDRAFT-TLS-ECDHE-MLKEM-04]](https://go.microsoft.com/fwlink/?linkid=2358523) | Windows 11, version 24H2 and later, Windows Server 2025 and later; see [[MSKB-5083631]](https://go.microsoft.com/fwlink/?linkid=2358432). |
 | TLS 1.3 | [RFC8446] | - | - | Windows 11 client and later Windows Server 2022 and later 0-RTT resumption mode is not supported (section 2.3) Only psk_dhe_ke key exchange mode is supported (section 4.2.9) |
 | Elliptic Curves and Pre-Shared Keys for TLS | - | - | [[RFC7748]](https://go.microsoft.com/fwlink/?linkid=2154766) (Curve25519 only) [[RFC5487]](https://go.microsoft.com/fwlink/?LinkId=734930) | Windows 10 v1607 operating system and later Windows Server 2016 and later |
@@ -479,7 +481,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [1](#Section_1) Introduction | Added TLS 1.3 support for ML-KEM and ML-DSA post-quantum cryptography. | Major |
+| [1](#Section_1) Introduction | Updated the Product Behavior Note with applicable server details. | Major |
 
 <a id="revision-history"></a>
 
@@ -535,3 +537,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/23/2024 | 15.0 | Major | Significantly changed the technical content. |
 | 4/13/2026 | 16.0 | Major | Significantly changed the technical content. |
 | 9/8/2026 | 17.0 | Major | Significantly changed the technical content. |
+| 9/28/2026 | 18.0 | Major | Significantly changed the technical content. |
