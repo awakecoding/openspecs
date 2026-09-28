@@ -407,7 +407,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 3/9/2026.
+Last updated: 9/28/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -3664,12 +3664,13 @@ The **ZONE_SKD_ROLLOVER_ACTION** enumeration is a 32-bit integer value that spec
 <a id="Section_2.2.5.2.1"></a>
 ##### 2.2.5.2.1 DNS_RPC_ZONE
 
-The **DNS_RPC_ZONE** structure contains basic information about a [**zone**](#gt_zone) present on the DNS server. There are different versions of the DNS_RPC_ZONE structure. The DNS server MAY<38> decide to use one of these structures depending upon the value of the **dwClientVersion** field in DNS Server Management Protocol method calls (section [3.1.4](#Section_3.1.4)) as follows in the table provided. If the method call does not specify the value of **dwClientVersion**, the DNS_RPC_ZONE_W2K version of the structure MUST be used.
+The **DNS_RPC_ZONE** structure contains basic information about a [**zone**](#gt_zone) present on the DNS server. There are different versions of the DNS_RPC_ZONE structure. The DNS server SHOULD<38> select one of these structures depending upon the value of the **dwClientVersion** field in DNS Server Management Protocol method calls (section [3.1.4](#Section_3.1.4)) as follows in the table provided. If the method call does not specify the value of **dwClientVersion**, the DNS_RPC_ZONE_W2K version of the structure MUST be used.
 
 | Value | Structure |
 | --- | --- |
 | 0x00000000 | DNS_RPC_ZONE_W2K (section [2.2.5.2.1.1](#Section_2.2.5.2.1.1)) |
 | 0x00060000 | DNS_RPC_ZONE_DOTNET (section [2.2.5.2.1.2](#Section_2.2.5.2.1.2)) |
+| 0x00070000 | DNS_RPC_ZONE_DOTNET (section 2.2.5.2.1.2) |
 
 <a id="Section_2.2.5.2.1.1"></a>
 ###### 2.2.5.2.1.1 DNS_RPC_ZONE_W2K
@@ -5372,9 +5373,9 @@ PDNS_RPC_ZONE_SKD pZoneSkdArray[1];
 
 **CurrentRollingSKDGuid:** Unique identifier of a rolling SKD of a zone, if any.
 
-**pdwBufferLength:** A pointer to an integer that on success contains the length of the buffer pointed to by **ppBuffer**.
+**dwBufferLength:** An integer that on success specifies the length of the buffer pointed to by **pBuffer**.
 
-**ppBuffer:** A pointer to a pointer that points to a buffer containing the enumerated records. The buffer is a series of structures beginning with a [DNS_RPC_NODE structure (section 2.2.2.2.3)](#Section_2.2.2.2.3). The records for the node will be represented by a series of [DNS_RPC_RECORD structures (section 2.2.2.2.5)](#Section_2.2.2.2.5). The number of DNS_RPC_RECORD structures following a **DNS_RPC_NODE** structure is given by the wRecordCount member of **DNS_RPC_NODE**.
+**pBuffer:** A pointer that points to a buffer containing the enumerated records. The buffer is a series of structures beginning with a [DNS_RPC_NODE structure (section 2.2.2.2.3)](#Section_2.2.2.2.3). The records for the node will be represented by a series of [DNS_RPC_RECORD structures (section 2.2.2.2.5)](#Section_2.2.2.2.5). The number of DNS_RPC_RECORD structures following a **DNS_RPC_NODE** structure is given by the wRecordCount member of **DNS_RPC_NODE**.
 
 **dwCount:** The number of signing key descriptors present in the array of signing key descriptors pointed to by **SkdArray**.
 
@@ -16876,8 +16877,11 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.4.6](#Section_3.1.4.6) R_DnssrvOperation2 (Opnum 5) | 32146 : Described pszOperation for R_DnssrvOperation method. | Major |
-| [3.1.4.7](#Section_3.1.4.7) R_DnssrvQuery2 (Opnum 6) | 32146 : Described pszOperation for R_DnssrvQuery method. | Major |
+| [2.2.5.2.1](#Section_2.2.5.2.1) DNS_RPC_ZONE | 51071 : Added new value to the table | Major |
+| 2.2.5.2.1 DNS_RPC_ZONE | 51071 : Added the `DNS_RPC_ZONE`structure specification for dwClientVersion 0x0007. | Major |
+| [2.2.6.2.9](#Section_2.2.6.2.9) DNS_RPC_ZONE_DNSSEC_SETTINGS | 51069 : Corrected field names and definitions | Major |
+| 2.2.6.2.9 DNS_RPC_ZONE_DNSSEC_SETTINGS | 51068 : Updated the description for code dwBufferLength. | Minor |
+| 2.2.6.2.9 DNS_RPC_ZONE_DNSSEC_SETTINGS | 51069 : Updated the description for code pBuffer. | Minor |
 
 <a id="revision-history"></a>
 
@@ -16938,3 +16942,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/23/2024 | 38.0 | Major | Significantly changed the technical content. |
 | 1/26/2026 | 39.0 | Major | Significantly changed the technical content. |
 | 3/9/2026 | 40.0 | Major | Significantly changed the technical content. |
+| 9/28/2026 | 41.0 | Major | Significantly changed the technical content. |

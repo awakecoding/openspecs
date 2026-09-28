@@ -47,6 +47,7 @@ Table of Contents
     - [2.2.12 KERB-KEY-LIST-REP](#Section_2.2.12)
     - [2.2.13 KERB-SUPERSEDED-BY-USER](#Section_2.2.13)
     - [2.2.14 KERB-DMSA-KEY-PACKAGE](#Section_2.2.14)
+    - [2.2.15 IAKERB-HEADER](#Section_2.2.15)
   - [2.3 Directory Service Schema Elements](#Section_2.3)
 </details>
 
@@ -198,7 +199,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 7/14/2026.
+Last updated: 9/28/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -386,6 +387,8 @@ We conduct frequent surveys of the normative references to assure their continue
 **Note** Registration is required to download the document.
 
 [FIPS140] FIPS PUBS, "Security Requirements for Cryptographic Modules", FIPS PUB 140-2, May 2001, [https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf](https://go.microsoft.com/fwlink/?LinkId=89866)
+
+[IETFDRAFT-KITTEN-IAKERB-03] B. Kaduk, Ed., J. Schaad, Ed., L. Zhu, J. Altman, "Initial and Pass Through Authentication Using Kerberos V5 and the GSS-API (IAKERB)", March 2017, [https://datatracker.ietf.org/doc/html/draft-ietf-kitten-iakerb-03](https://go.microsoft.com/fwlink/?linkid=2361532)
 
 [MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
@@ -956,6 +959,38 @@ fetch-interval [4] KerberosTime,
 **fetch-interval**: A GeneralizedTime ([RFC4120] section 5.2.3) that contains an interval after which the KDC may have new keys.
 
 **KERB-DMSA-KEY-PACKAGE** includes both the current and previous keys. (from the dMSA acount and the legacy user account used to run service). It is pre-authentication data when the client sends it in PA-DATA structure within PA-FX-FAST. It is authorization data (not pre-auth data) when embedded in authorization-data field within the [**TGT**](#gt_ticket-granting-ticket-tgt) issued by KDC.
+
+<a id="Section_2.2.15"></a>
+### 2.2.15 IAKERB-HEADER
+
+The **IAKERB-HEADER** structure is defined in [[IETFDRAFT-KITTEN-IAKERB-03]](https://go.microsoft.com/fwlink/?linkid=2361532) section 4. The Kerberos Network Authentication Service (V5) Extensions extend **IAKERB-HEADER** with an additional **header-flags** field.
+
+Below is the **IAKERB-HEADER** structure:
+
+- IAKERB-HEADER ::= SEQUENCE {
+- target-realm [1] UTF8String,
+- -- The name of the target realm.
+cookie [2] OCTET STRING OPTIONAL,
+
+-- Opaque data, if sent by the acceptor,
+
+-- MUST be copied by the initiator verbatim into
+
+-- the next IAKERB_PROXY message.
+
+header-flags [3] BIT STRING OPTIONAL,
+
+-- DC Locator flags.
+
+...
+
+}
+
+**target-realm**: As specified in [IETFDRAFT-KITTEN-IAKERB-03] section 4.
+
+**cookie**: As specified in [IETFDRAFT-KITTEN-IAKERB-03] section 4.
+
+**header-flags**: Optional **Flags** ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.3.1) which contains additional data to be used to find a domain controller for the Kerberos message.
 
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
@@ -2825,7 +2860,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <14> Section 2.2.7: The encryption type **AES128-CTS-HMAC-SHA256-128** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [[RFC8009]](https://go.microsoft.com/fwlink/?linkid=2358062). This is disabled by default.
 
-<15> Section 2.2.7: The encryption type **AES256-CTS-HMAC-SHA384-192** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [RFC8009]. This is disabled by default.
+<15> Section 2.2.7: The encryption type **AES256-CTS-HMAC-SHA384-192** is supported in Windows 11, version 24H2 and later and Windows Server 2025 and later. See [RFC8009]. This is disabled by default.
 
 <16> Section 2.2.8: The **PA-SUPPORTED-ENCTYPES** structure is not supported by Windows 2000, Windows XP, or Windows Server 2003.
 
@@ -3011,8 +3046,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.5.2](#Section_3.1.5.2) Encryption Types | 40449 : Added encryption types "AES128-CTS-HMAC-SHA256-128 [19]" and "AES256-CTS-HMAC-SHA384-192 [20]". | Major |
-| [3.1.5.3](#Section_3.1.5.3) Encryption Checksum Types | 40449 : Added encryption checksum types "hmac-sha256-128-aes128 [19]" and "hmac-sha384-192-aes256 [20]". | Major |
+| [2.2.15](#Section_2.2.15) IAKERB-HEADER | 51073 : Added the new section 'IAKERB-HEADER'. | Major |
 
 <a id="revision-history"></a>
 
@@ -3093,3 +3127,4 @@ The changes made to this document are listed in the following table. For more in
 | 3/30/2026 | 46.0 | Major | Significantly changed the technical content. |
 | 4/27/2026 | 47.0 | Major | Significantly changed the technical content. |
 | 7/14/2026 | 48.0 | Major | Significantly changed the technical content. |
+| 9/28/2026 | 49.0 | Major | Significantly changed the technical content. |

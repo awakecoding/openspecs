@@ -172,7 +172,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 8/11/2026.
+Last updated: 9/28/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -406,7 +406,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSDOCS-NCryptCreateClaim] Microsoft Corporation, "NCryptCreateClaim function (ncrypt.h)", [https://learn.microsoft.com/en-us/windows/win32/api/ncrypt/nf-ncrypt-ncryptcreateclaim](https://go.microsoft.com/fwlink/?linkid=2192142)
 
-[MSFT-CVE-2026-62806] Microsoft Corporation, "CVE-2026-62806", August 11, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62806](https://go.microsoft.com/fwlink/?LinkId=2374204)
+[MSFT-CVE-2026-6726] Microsoft Corporation, "MITRE: CVE-2026-6726 TPM 2.0 Improper Object Slot Reuse", August 11, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-6726](https://go.microsoft.com/fwlink/?LinkId=2374650)
 
 [MSKB-5032288] Microsoft Corporation, "December 4, 2023—KB5032288", December 2023, [https://support.microsoft.com/en-us/topic/december-4-2023-kb5032288-os-builds-22621-2792-and-22631-2792-preview-538fbe4a-e9de-4312-85cd-d870444341d0](https://go.microsoft.com/fwlink/?linkid=2344397)
 
@@ -424,7 +424,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSKB-5120996] Microsoft Corporation, "August 25, 2026 - KB5120996", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5120996](https://go.microsoft.com/fwlink/?LinkId=2373419)
 
-[MSKB-5120998] Microsoft Corporation, "August 25, 2026 - KB5120998", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5120998](https://go.microsoft.com/fwlink/?LinkId=2372745)
+[MSKB-5120998] Microsoft Corporation, "August 27, 2026—KB5120998", August 2026, [https://support.microsoft.com/help/5120998](https://go.microsoft.com/fwlink/?LinkId=2372745)
 
 [MSKB-5121000] Microsoft Corporation, "August 11, 2026 - KB5121000", August 2026, [https://www.catalog.update.microsoft.com/Search.aspx?q=5121000](https://go.microsoft.com/fwlink/?LinkId=2373410)
 
@@ -5863,7 +5863,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <20> Section 3.1.4.1.3.1: **RequestVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 operating system (v20H1) 2023 1C patch and later.
 
-<21> Section 3.1.4.1.3.2: **EnrollmentVersion** value 3.0 is supported in Windows 10 and later. **EnrollmentVersion** value 4.0 is supported only in the Windows 10 v1703 operating system and later. **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. **EnrollmentVersion** value 6.0 is supported in Windows 11 with [[MSKB-5033369]](https://go.microsoft.com/fwlink/?linkid=2345101), Windows 11, version 22H2 operating system with [[MSKB-5032288]](https://go.microsoft.com/fwlink/?linkid=2344397) and later. **EnrollmentVersion** value 7.0 is supported in Windows 11, version 23H2 operating system with [[MSKB-5053657]](https://go.microsoft.com/fwlink/?linkid=2306438) and Windows 11, version 24H2 operating system with [[MSKB-5053656]](https://go.microsoft.com/fwlink/?linkid=2306437) and later. **EnrollmentVersion** value 8.0 is supported in Windows 11, version 24H2 and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745) and Windows 11, version 26H1 operating system with [[MSKB-5120996]](https://go.microsoft.com/fwlink/?LinkId=2373419) and later. **EnrollmentVersion** value 9.0 is supported in Windows 11 v22H2 and Windows 11, version 23H2 with [[MSFT-CVE-2026-62806]](https://go.microsoft.com/fwlink/?LinkId=2374204) and Windows 11, version 24H2 and Windows 11, version 25H2 with [[MSKB-5101650]](https://go.microsoft.com/fwlink/?LinkId=2372735) and Windows 11, version 26H1 with [[MSKB-5121000]](https://go.microsoft.com/fwlink/?LinkId=2373410) and later.
+<21> Section 3.1.4.1.3.2: **EnrollmentVersion** value 3.0 is supported in Windows 10 and later. **EnrollmentVersion** value 4.0 is supported only in the Windows 10 v1703 operating system and later. **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later. **EnrollmentVersion** value 6.0 is supported in Windows 11 with [[MSKB-5033369]](https://go.microsoft.com/fwlink/?linkid=2345101), Windows 11, version 22H2 operating system with [[MSKB-5032288]](https://go.microsoft.com/fwlink/?linkid=2344397) and later. **EnrollmentVersion** value 7.0 is supported in Windows 11, version 23H2 operating system with [[MSKB-5053657]](https://go.microsoft.com/fwlink/?linkid=2306438) and Windows 11, version 24H2 operating system with [[MSKB-5053656]](https://go.microsoft.com/fwlink/?linkid=2306437) and later. **EnrollmentVersion** value 8.0 is supported in Windows 11, version 24H2 and Windows 11, version 25H2 operating system with [[MSKB-5120998]](https://go.microsoft.com/fwlink/?LinkId=2372745) and Windows 11, version 26H1 operating system with [[MSKB-5120996]](https://go.microsoft.com/fwlink/?LinkId=2373419) and later. **EnrollmentVersion** value 9.0 is supported in Windows 11 v22H2 and Windows 11, version 23H2 with [[MSFT-CVE-2026-6726]](https://go.microsoft.com/fwlink/?LinkId=2374650) and Windows 11, version 24H2 and Windows 11, version 25H2 with [[MSKB-5101650]](https://go.microsoft.com/fwlink/?LinkId=2372735) and Windows 11, version 26H1 with [[MSKB-5121000]](https://go.microsoft.com/fwlink/?LinkId=2373410) and later.
 
 <22> Section 3.3.4.1.1.2: **EnrollmentVersion** value 5.0 is supported in Windows 11 (version 1) 2022 10C patch and later and supported in Windows 10 v2004 (v20H1) 2023 1C patch and later.
 
@@ -5877,7 +5877,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <27> Section 3.4.4.1.1.1.1: This and the following five elements are available in Windows 11, version 23H2 with [MSKB-5053657] and Windows 11, version 24H2 with [MSKB-5053656] and later.
 
-<28> Section 3.4.4.1.1.1.1: The **Name** attribute "AIKAlgorithm" is available in Windows 11, version 23H2 with [MSFT-CVE-2026-62806] and Windows 11, version 24H2 and Windows 11, version 25H2 with [MSKB-5101650] and later.
+<28> Section 3.4.4.1.1.1.1: The **Name** attribute "AIKAlgorithm" is available in Windows 11, version 23H2 with [MSFT-CVE-2026-6726] and Windows 11, version 24H2 and Windows 11, version 25H2 with [MSKB-5101650] and later.
 
 <29> Section 3.4.4.1.1.1.2: The eight elements are not supported in Windows 10 v1607 and earlier. In addition, the values UxInitiated, ExternalMgmtAgentHint, and DomainName are not supported in Windows 10 v1703 and earlier, and the value OfflineAutoPilotEnrollmentCorrelator is not supported in releases earlier than Windows 10 v1803 and earlier.
 
@@ -5896,32 +5896,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 <a id="Section_8"></a>
 # 8 Change Tracking
 
-This section identifies changes that were made to this document since the last release. Changes are classified as Major, Minor, or None.
-
-The revision class **Major** means that the technical content in the document was significantly revised. Major changes affect protocol interoperability or implementation. Examples of major changes are:
-
-- A document revision that incorporates changes to interoperability requirements.
-- A document revision that captures changes to protocol functionality.
-The revision class **Minor** means that the meaning of the technical content was clarified. Minor changes do not affect protocol interoperability or implementation. Examples of minor changes are updates to clarify ambiguity at the sentence, paragraph, or table level.
-
-The revision class **None** means that no new technical changes were introduced. Minor editorial and formatting changes may have been made, but the relevant technical content is identical to the last released version.
-
-The changes made to this document are listed in the following table. For more information, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com).
-
-| Section | Description | Revision class |
-| --- | --- | --- |
-| [3.1.4.1.3.1](#Section_3.1.4.1.3.1) DiscoveryRequest | Added 8.0 and 9.0 as a supported EnrollmentVersion. | Major |
-| [3.1.4.1.3.2](#Section_3.1.4.1.3.2) DiscoveryResponse | Updated the response example to include EnrollmentVersion 8.0, DeviceAssociationMaaUrl, and GatewayService. | Major |
-| 3.1.4.1.3.2 DiscoveryResponse | Added description for DeviceAssociationMaaUrl and GatewayService. | Major |
-| 3.1.4.1.3.2 DiscoveryResponse | Added 8.0 and 9.0 as a supported EnrollmentVersion. | Major |
-| 3.1.4.1.3.2 DiscoveryResponse | Updated Windows Behavior Note for EnrollmentVersion 8.0 and 9.0. | Major |
-| [3.3.4.1.1.2](#Section_3.3.4.1.1.2) GetPoliciesResponse | Added allowedAIKAlgorithms to the GetPolicies response for on-premises authentication. | Major |
-| [3.4.4.1.1.1.1](#Section_3.4.4.1.1.1.1) RequestSecurityToken using Federated Authentication | Added the AIKAlgorithm context item to RequestSecurityToken for federated authentication. | Major |
-| 3.4.4.1.1.1.1 RequestSecurityToken using Federated Authentication | Added Windows Behavior Note documenting AIKAlgorithm Name attribute support. | Major |
-| [4.2.2](#Section_4.2.2) GetPolicies Example: Response | Added allowedAIKAlgorithms to the GetPolicies response example. | Major |
-| [4.2.3](#Section_4.2.3) GetPolicies With Azure Attestation Example: Response | Added allowedAIKAlgorithms to the GetPolicies with Azure Attestation response example. | Major |
-| [4.3.1.1](#Section_4.3.1.1) RequestSecurityToken Example: Request using Federated Authentication | Added an AIKAlgorithm context item example to the RequestSecurityToken request using federated authentication. | Major |
-| [6](#Section_6) Appendix A: XSD Schema | Added the DeviceAssociationMaaUrl and GatewayService elements to the XSD schema. | Major |
+No table of changes is available. The document is either new or has had no changes since its last release.
 
 <a id="revision-history"></a>
 
@@ -5949,3 +5924,4 @@ The changes made to this document are listed in the following table. For more in
 | 11/21/2025 | 17.0 | Major | Significantly changed the technical content. |
 | 1/26/2026 | 18.0 | Major | Significantly changed the technical content. |
 | 8/11/2026 | 19.0 | Major | Significantly changed the technical content. |
+| 9/28/2026 | 19.0 | None | No changes to the meaning, language, or formatting of the technical content. |
