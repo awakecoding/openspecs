@@ -32,7 +32,6 @@
 
 | Protocol | Title |
 |---|---|
-| [MC-BUP](MC-BUP/MC-BUP.md) | Background Intelligent Transfer Service (BITS) Upload Protocol |
 | [MC-CCFG](MC-CCFG/MC-CCFG.md) | Server Cluster: Configuration (ClusCfg) Protocol |
 | [MC-COMQC](MC-COMQC/MC-COMQC.md) | Component Object Model Plus (COM+) Queued Components Protocol |
 | [MC-CSDL](MC-CSDL/MC-CSDL.md) | Conceptual Schema Definition File Format |
