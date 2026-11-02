@@ -1068,7 +1068,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 8/24/2026.
+Last updated: 10/26/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -8174,7 +8174,7 @@ setPriorityBoost: DC=Contoso,DC=Com:41b48d52-e079-41ee-9f59-b7009bf99332:5
 
 -
 
-Writing this attribute causes the instance to boost the replication sync priority of the specified naming context of the specified DSA partner by priorityBoost times a constant factor.
+Writing this attribute causes the instance to boost the replication sync priority of the specified naming context of the specified DSA partner by priorityBoost times a constant factor. The priorityBoost is an Integer (INT) with a value range from 0 to max integer size. A value of 0 removes any custom replication priorityBoost, while value from 1 to max integer size acts as the priority multiplier. The default value of priorityBoost is 0. The constant factor is an integer, and its value is 10. The calculation takes the existing priority and adds the priorityBoost value multiplied by “10” but will not exceed the upper bound of an asynchronous replication operation “330”.
 
 <a id="Section_3.1.1.3.3.43"></a>
 ###### 3.1.1.3.3.43 migrateADServiceAccount
@@ -22766,12 +22766,14 @@ The following values are defined.
 | Identifier | Applicable domain controller operating system | Value |
 | --- | --- | --- |
 | DS_BEHAVIOR_WIN2000 * | Windows 2000 Server | 0 |
+| DS_BEHAVIOR_WIN2003_WITH_MIXED_DOMAINS | Windows Server 2003, Windows Server 2003 R2 | 1 |
 | DS_BEHAVIOR_WIN2003 | Windows Server 2003, Windows Server 2003 R2 | 2 |
 | DS_BEHAVIOR_WIN2008 | Windows Server 2008 | 3 |
 | DS_BEHAVIOR_WIN2008R2 | Windows Server 2008 R2 | 4 |
 | DS_BEHAVIOR_WIN2012 | Windows Server 2012 | 5 |
 | DS_BEHAVIOR_WIN2012R2 | Windows Server 2012 R2 operating system | 6 |
-| DS_BEHAVIOR_WIN2016 | Windows Server 2016 operating system Windows Server v1709 operating system Windows Server v1803 operating system Windows Server v1809 operating system Windows Server 2019 operating system | 7 |
+| DS_BEHAVIOR_WIN2016 | Windows Server 2016 operating system Windows Server v1709 operating system Windows Server v1803 operating system Windows Server v1809 operating system Windows Server 2019 operating system Windows Server 2022 operating system | 7 |
+| DS_BEHAVIOR_WIN2025 | Windows Server 2025 | 10 |
 
 * Not available in [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds).
 
@@ -22798,6 +22800,7 @@ The following values are defined.
 | DS_BEHAVIOR_WIN2012 | Windows Server 2012 and later | 5 |
 | DS_BEHAVIOR_WIN2012R2 | Windows Server 2012 R2 and later | 6 |
 | DS_BEHAVIOR_WIN2016 | Windows Server 2016 and later | 7 |
+| DS_BEHAVIOR_WIN2025 | Windows Server 2025 | 10 |
 
 <a id="Section_6.1.4.4"></a>
 #### 6.1.4.4 msDS-Behavior-Version: Forest Functional Level
@@ -22822,6 +22825,7 @@ The following values are defined.
 | DS_BEHAVIOR_WIN2012 | Windows Server 2012 and later | 5 |
 | DS_BEHAVIOR_WIN2012R2 | Windows Server 2012 R2 and later | 6 |
 | DS_BEHAVIOR_WIN2016 | Windows Server 2016 and later | 7 |
+| DS_BEHAVIOR_WIN2025 | Windows Server 2025 | 10 |
 
 * Not available in [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds).
 
@@ -26564,9 +26568,9 @@ packet-beta
   10-10: "X"
   11-11: "X"
   12-12: "X"
-  13-13: "X"
+  13-13: "FW13"
   14-14: "X"
-  15-15: "X"
+  15-15: "FW10"
   16-16: "FW9"
   17-17: "FW8"
   18-18: "FWS"
@@ -26616,6 +26620,10 @@ packet-beta
 **FW8 (DS_DS_8_FLAG, 0x00004000):** The server is not running Windows 2000 through Windows Server 2008 R2.
 
 **FW9 (DS_DS_9_FLAG, 0x00008000):** The server is not running Windows 2000 through Windows Server 2012.
+
+**FW10 (DS_DS_10_FLAG, 0x00010000):** The server is not running Windows 2000 through Windows Server 2012 R2 operating system.
+
+**FW13 (DS_DS_13_FLAG, 0x00040000):** The server is not running Windows 2000 through Windows Server 2022.
 
 **FDNS (DS_DNS_CONTROLLER_FLAG, 0x20000000):** The server has a [**DNS name**](#gt_dns-name).
 
@@ -28946,9 +28954,11 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.1.5.4.1.1](#Section_3.1.1.5.4.1.1) Security Considerations | Added support for SOA modify rules based on `msDS-ObjectSoa` attribute and SOA policy. | Major |
-| [3.1.1.5.4.2.1](#Section_3.1.1.5.4.2.1) Security Considerations | Added support for SOA modify rules based on `msDS-ObjectSoa` attribute and SOA policy. | Major |
-| [3.1.1.5.5.4](#Section_3.1.1.5.5.4) Security Considerations | Added support for SOA modify rules based on `msDS-ObjectSoa` attribute and SOA policy. | Major |
+| [3.1.1.3.3.42](#Section_3.1.1.3.3.42) setPriorityBoost | 51053 : Added information for PriorityBoost. | Major |
+| [6.1.4.2](#Section_6.1.4.2) msDS-Behavior-Version: DC Functional Level | 51189 : Added DS_BEHAVIOR versions and applicable domain controller operating systems. | Major |
+| [6.1.4.3](#Section_6.1.4.3) msDS-Behavior-Version: Domain NC Functional Level | 51189 : Added DS_BEHAVIOR versions and applicable domain controller operating systems. | Major |
+| [6.1.4.4](#Section_6.1.4.4) msDS-Behavior-Version: Forest Functional Level | 51189 : Added DS_BEHAVIOR versions and applicable domain controller operating systems. | Major |
+| [6.3.1.2](#Section_6.3.1.2) DS_FLAG Options Bits | 51188 : Added DS_FLAG Options Bits (FW10 and FW13) to the bit table. | Major |
 
 <a id="revision-history"></a>
 
@@ -29033,3 +29043,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/13/2026 | 67.0 | Major | Significantly changed the technical content. |
 | 5/25/2026 | 68.0 | Major | Significantly changed the technical content. |
 | 8/24/2026 | 69.0 | Major | Significantly changed the technical content. |
+| 10/26/2026 | 70.0 | Major | Significantly changed the technical content. |

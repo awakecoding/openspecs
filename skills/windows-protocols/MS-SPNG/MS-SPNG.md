@@ -31,6 +31,7 @@ Table of Contents
   - [2.1 Transport](#Section_2.1)
   - [2.2 Message Syntax](#Section_2.2)
     - [2.2.1 NegTokenInit2](#Section_2.2.1)
+    - [2.2.2 negTokenResp Extension for Negotiate Late Fallback](#Section_2.2.2)
 </details>
 
 <details>
@@ -105,7 +106,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 7/14/2026.
+Last updated: 10/26/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -319,6 +320,9 @@ None.
 SPNEGO has been assigned the following [**object identifier (OID)**](#gt_object-identifier-oid):
 
 - iso.org.dod.internet.security.mechanism.snego (1.3.6.1.5.5.2)
+- Negotiate Late Fallback capability (**mechTypes**) (1.3.6.1.4.1.311.2.2.40)
+- Initiator (client) delimiter for **mechListMIC** (0.0.99.99.99.99.99.99.99.99)
+- Acceptor (server) delimiter for **mechListMIC** (0.0.115.115.115.115.115.115.115.115)
 See section [1.4](#Section_1.4) and section [3.1.5.2](#Section_3.1.5.2) for other OID usages.
 
 <a id="Section_2"></a>
@@ -382,6 +386,37 @@ mechListMIC [4] OCTET STRING OPTIONAL,
 **mechListMIC**: The message integrity code (**MIC**) token ([RFC4178] section 4.2.1).
 
 **Note** In the preceding [**ASN.1**](#gt_asn1) description, the **NegTokenInit2** message occupies the same context-specific ([X690] section 8.1.2.2) message ID as does **NegTokenInit** in SPNEGO.
+
+<a id="Section_2.2.2"></a>
+### 2.2.2 negTokenResp Extension for Negotiate Late Fallback
+
+When Negotiate Late Fallback (section [3.1.5.4](#Section_3.1.5.4)) is supported, the **negTokenResp** message is extended with an additional **mechTypes** field.
+
+Below is the structure of the extended **negTokenResp** message:
+
+negTokenResp ::= SEQUENCE {
+
+negState [0] ENUMERATED {
+
+accept-completed (0),
+
+accept-incomplete (1),
+
+reject (2),
+
+request-mic (3)} OPTIONAL,
+
+supportedMech [1] mechType OPTIONAL,
+
+responseToken [2] OCTET STRING OPTIONAL,
+
+mechListMIC [3] OCTET STRING OPTIONAL,
+
+mechTypes [4] mechTypeList OPTIONAL
+
+}
+
+**mechTypes**: The **mechTypes** field MUST be present only in the first **negTokenResp** message from acceptor (server) when both parties support the Negotiate Late Fallback. This field contains the acceptor’s (server's) supported mechanism list including the **Negotiate Late Fallback OID** (1.3.6.1.4.1.311.2.2.40). When **mechTypes** field is present, the **supportedMech** field MUST also be present and MUST be equal to the first entry in the **mechTypes** field.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -450,8 +485,20 @@ The following fields are processed differently than as specified in [[RFC4178]](
 
 [[RFC2478]](https://go.microsoft.com/fwlink/?LinkId=90360) inadequately specifies the processing of the mechanism list message integrity code (**MIC**), or **mechListMIC** field. [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) clarifies the processing of the **mechListMIC** field.<8>
 
-When Negotiate Late Fallback is supported by both parties, **mechListMIC** consumes a list of all exchanged **mechTypes** and **supportedMechs** per the order of over-the-wire transmission with delimiters.<9>
+When Negotiate Late Fallback is supported by both parties, **mechListMIC** MUST be computed over an extended **mechTypeList** that records the full negotiation history.<9> This list is built incrementally by both parties and is DER-encoded before being used as the input for generating or verifying the **mechListMIC** token, as specified in [RFC4178] section 5.
 
+Two synthetic delimiter OIDs are used to separate sections of the list by source:
+
+| Delimiter | OID | DER-Encoding |
+| --- | --- | --- |
+| Initiator (Client) Delimiter | 0.0.99.99.99.99.99.99.99.99 | 06 09 00 63 63 63 63 63 63 63 63 |
+| Acceptor (Server) Delimiter | 0.0.115.115.115.115.115.115.115.115 | 06 09 00 73 73 73 73 73 73 73 73 |
+
+Below are the construction steps of an extended **mechTypeList**:
+
+- **Initiator generates the negTokenInit message:** The list MUST be initialized to: [Initiator Delimiter], [Initiator mechTypes]
+- **Acceptor generates the first negTokenResp message (with mechTypes):** Append: [Acceptor Delimiter], [Acceptor mechTypes], [supportedMech] The **supportedMech** field value MUST be appended directly after the acceptor's **mechTypes** field without an additional preceding delimiter. If Acceptor (Server) generates message integrity code (**MIC**) in the first **negTokenResp** message, the **mechListMIC** field SHOULD NOT be included since Late Fallback Negotiation mechanism is not allowed after **MIC** generation.
+- **Late Fallback Renegotiation:** Each time either party transitions to a new mechanism, append: [Source Delimiter], [New supportedMech] where Source Delimiter is the Initiator Delimiter if the Initiator triggered the Negotiate Late Fallback, or the Acceptor Delimiter if the Acceptor triggered it. This step (step 3) SHOULD be repeated if multiple Negotiate Late Fallback attempts occur. The resulting **mechTypeList** is DER-encoded as a SEQUENCE OF OBJECT IDENTIFIER (the same encoding used for the **mechTypes** field in the **negTokenInit** message) and MUST be used as the input for generating the **mechListMIC** token, as specified in [RFC4178] section 5.
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 mechTypes Identification of Kerberos
 
@@ -970,7 +1017,9 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [1.4](#Section_1.4) Relationship to Other Protocols | 40452 : Corrected GUID for PKU2U | Major |
+| [1.9.1](#Section_1.9.1) Use of Constants Assigned Elsewhere | 51077 : Added OIDs for Negotiate Late Fallback capability (mechTypes), Initiator (client) delimiter, and Acceptor (server) delimiter. | Major |
+| [2.2.2](#Section_2.2.2) negTokenResp Extension for Negotiate Late Fallback | 51077 : Added a new section 'negTokenResp Extension for Negotiate Late Fallback'. | Major |
+| [3.1.5.1](#Section_3.1.5.1) mechListMIC Processing | 51077 : Updated mechListMIC processing. | Major |
 
 <a id="revision-history"></a>
 
@@ -1044,3 +1093,4 @@ The changes made to this document are listed in the following table. For more in
 | 7/29/2024 | 20.0 | Major | Significantly changed the technical content. |
 | 4/27/2026 | 21.0 | Major | Significantly changed the technical content. |
 | 7/14/2026 | 22.0 | Major | Significantly changed the technical content. |
+| 10/26/2026 | 23.0 | Major | Significantly changed the technical content. |

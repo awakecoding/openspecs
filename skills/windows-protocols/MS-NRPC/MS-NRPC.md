@@ -396,7 +396,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 2/9/2026.
+Last updated: 10/26/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -849,19 +849,19 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MSFT-CVE-2025-49716] Microsoft Corporation, "Windows Netlogon Denial of Service Vulnerability", CVE-2025-49716 July 8, 2025, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49716](https://go.microsoft.com/fwlink/?linkid=2325593)
 
-[MSKB-5063709] Microsoft Corporation, "August 2025 - 5063709", August 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5063709](https://go.microsoft.com/fwlink/?linkid=2330553)
+[MSKB-5063709] Microsoft Corporation, "August 2025 - 5063709", August 2025, [https://support.microsoft.com/en-us/help/5063709](https://go.microsoft.com/fwlink/?linkid=2330553)
 
-[MSKB-5063871] Microsoft Corporation, "August 2025 - 5063871", August 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5063871](https://go.microsoft.com/fwlink/?linkid=2330656)
+[MSKB-5063871] Microsoft Corporation, "August 2025 - 5063871", August 2025, [https://support.microsoft.com/en-us/help/5063871](https://go.microsoft.com/fwlink/?linkid=2330656)
 
-[MSKB-5063875] Microsoft Corporation, "August 2025 - 5063875", August 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5063875](https://go.microsoft.com/fwlink/?linkid=2330455)
+[MSKB-5063875] Microsoft Corporation, "August 2025 - 5063875", August 2025, [https://support.microsoft.com/en-us/help/5063875](https://go.microsoft.com/fwlink/?linkid=2330455)
 
-[MSKB-5063877] Microsoft Corporation, "August 2025 - 5063877", August 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5063877](https://go.microsoft.com/fwlink/?linkid=2330554)
+[MSKB-5063877] Microsoft Corporation, "August 2025 - 5063877", August 2025, [https://support.microsoft.com/en-us/help/5063877](https://go.microsoft.com/fwlink/?linkid=2330554)
 
-[MSKB-5063878] Microsoft Corporation, "August 2025 - 5063878", August 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5063878](https://go.microsoft.com/fwlink/?linkid=2330536)
+[MSKB-5063878] Microsoft Corporation, "August 2025 - 5063878", August 2025, [https://support.microsoft.com/en-us/help/5063878](https://go.microsoft.com/fwlink/?linkid=2330536)
 
 [MSKB-5063880] Microsoft Corporation, "August 12, 2025—KB5063880", August 2025, [https://support.microsoft.com/en-us/topic/august-12-2025-kb5063880-os-build-20348-4052-471ee125-e622-486c-ab3e-5847c8ca4e57](https://go.microsoft.com/fwlink/?linkid=2327426)
 
-[MSKB-5063889] Microsoft Corporation, "August 2025 - 5063889", August 2025, [https://www.catalog.update.microsoft.com/Search.aspx?q=5063889](https://go.microsoft.com/fwlink/?linkid=2330456)
+[MSKB-5063889] Microsoft Corporation, "August 2025 - 5063889", August 2025, [https://support.microsoft.com/en-us/help/5063889](https://go.microsoft.com/fwlink/?linkid=2330456)
 
 [MSKB-5063899] Microsoft Corporation, "August 12, 2025—KB5063899", August 2025, [https://support.microsoft.com/en-us/topic/august-12-2025-kb5063899-os-build-25398-1791-d7b4950f-7906-4521-a640-a3eb3fc11292](https://go.microsoft.com/fwlink/?linkid=2327818)
 
@@ -1319,8 +1319,8 @@ packet-beta
   9-9: "0"
   10-10: "0"
   11-11: "0"
-  12-12: "0"
-  13-13: "0"
+  12-12: "V"
+  13-13: "U"
   14-14: "T"
   15-15: "S"
   16-16: "R"
@@ -1363,12 +1363,14 @@ Where the bits are defined as:
 | P | The DC has an Active Directory Web Service available.<14> |
 | Q | The DC has a functional level of DS_BEHAVIOR_WIN2012 or later. |
 | R | The DC has a functional level of DS_BEHAVIOR_WIN2012R2 or later. |
-| S | The DC has a functional level of DS_BEHAVIOR_WIN2016 or later. |
+| S | The DC is running on an implementation-specific server.<15> |
 | T | The DC supports [**key list requests**](#gt_key-list-request), as specified in [MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.11. If this bit is set, bit S and bit E MUST also be set. |
+| U | The DC is running on an implementation-specific server.<16> |
+| V | The DC is running on an implementation-specific server.<17> |
 
 All other bits MUST be set to zero and MUST be ignored on receipt.
 
-**DcSiteName:** A pointer to a null-terminated Unicode string that SHOULD<15> contain the site name that is associated with the DC. When there is no associated site, this field MUST be NULL.
+**DcSiteName:** A pointer to a null-terminated Unicode string that SHOULD<18> contain the site name that is associated with the DC. When there is no associated site, this field MUST be NULL.
 
 **ClientSiteName:** A pointer to a null-terminated Unicode string that contains the client's site name. When there is no client site name, this field MUST be NULL.
 
@@ -1538,7 +1540,7 @@ ULONG Status;
 
 **Register:** Zero indicates to deregister the DNS name; other values indicate to register the DNS name.
 
-**Status:** The update status of the DNS name. Status SHOULD<16> be set to 0x00000000 on success; otherwise, it contains a nonzero error code.
+**Status:** The update status of the DNS name. Status SHOULD<19> be set to 0x00000000 on success; otherwise, it contains a nonzero error code.
 
 <a id="Section_2.2.1.2.6"></a>
 ##### 2.2.1.2.6 NL_DNS_NAME_INFO_ARRAY
@@ -1557,7 +1559,7 @@ typedef struct _NL_DNS_NAME_INFO_ARRAY {
 
 **EntryCount:** The number of entries in the **DnsNamesInfo** field.
 
-**DnsNamesInfo:** A pointer to an array of the **NL_DNS_NAME_INFO** (section [2.2.1.2.5)](#Section_2.2.1.2.5) structure, which SHOULD<17> contain DNS name information.
+**DnsNamesInfo:** A pointer to an array of the **NL_DNS_NAME_INFO** (section [2.2.1.2.5)](#Section_2.2.1.2.5) structure, which SHOULD<20> contain DNS name information.
 
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Secure Channel Establishment and Maintenance Structures
@@ -1677,7 +1679,7 @@ packet-beta
 <a id="Section_2.2.1.3.3"></a>
 ##### 2.2.1.3.3 NL_AUTH_SHA2_SIGNATURE
 
-The **NL_AUTH_SHA2_SIGNATURE** structure is a security token that defines the SHA2 authentication signature that SHOULD<18> be used by Netlogon to execute Netlogon methods over a [**secure channel**](#gt_secure-channel). It follows the security trailer that a [**security provider**](#gt_security-provider) MUST associate with a signed or encrypted message. A security trailer or sec_trailer structure ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.2.11) has syntax equivalent to the auth_verifier_co_t structure, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 13.2.6.1. When Netlogon is functioning as its own SSP for the [**RPC**](#gt_remote-procedure-call-rpc) connection, this structure contains the signature, a sequence number, and (if encryption is requested) a confounder. See section [3.3.4.2](#Section_3.3.4.2).
+The **NL_AUTH_SHA2_SIGNATURE** structure is a security token that defines the SHA2 authentication signature that SHOULD<21> be used by Netlogon to execute Netlogon methods over a [**secure channel**](#gt_secure-channel). It follows the security trailer that a [**security provider**](#gt_security-provider) MUST associate with a signed or encrypted message. A security trailer or sec_trailer structure ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.2.11) has syntax equivalent to the auth_verifier_co_t structure, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 13.2.6.1. When Netlogon is functioning as its own SSP for the [**RPC**](#gt_remote-procedure-call-rpc) connection, this structure contains the signature, a sequence number, and (if encryption is requested) a confounder. See section [3.3.4.2](#Section_3.3.4.2).
 
 ```mermaid
 packet-beta
@@ -1714,7 +1716,7 @@ packet-beta
 
 **Confounder (8 bytes):** A buffer that is employed when the structure is used for encryption, in addition to signing. The bytes are filled with random data that is used by the encryption algorithm. If the structure is used only for signing, the **Confounder** is not included. For details about the **Confounder** and encrypting the data, see section 3.3.4.2.1.
 
-**Reserved (24 bytes):** The sender SHOULD<19> set these bytes to zero, and the receiver MUST ignore them.
+**Reserved (24 bytes):** The sender SHOULD<22> set these bytes to zero, and the receiver MUST ignore them.
 
 <a id="Section_2.2.1.3.4"></a>
 ##### 2.2.1.3.4 NETLOGON_CREDENTIAL
@@ -1732,7 +1734,7 @@ CHAR data[8];
 **data:** The meaning of the 8 bytes of data contained in this structure is determined by the following:
 
 - When session-key negotiation is performed, the data field carries an 8-byte challenge. Also see section [3.1.4.1](#Section_3.1.4.1).
-- When the **NETLOGON_CREDENTIAL** is used as part of a **NETLOGON_AUTHENTICATOR** structure (section [2.2.1.1.5](#Section_2.2.1.1.5)), the data field carries 8 bytes of encrypted data, as specified in the **Netlogon Credential Computation** (section [3.1.4.4](#Section_3.1.4.4)) and **Netlogon Authenticator Computation and Verification** (section [3.1.4.5](#Section_3.1.4.5)) sections.
+- When the **NETLOGON_CREDENTIAL** is used as part of a **NETLOGON_AUTHENTICATOR** structure (section [2.2.1.1.6](#Section_2.2.1.1.6)), the data field carries 8 bytes of encrypted data, as specified in the **Netlogon Credential Computation** (section [3.1.4.4](#Section_3.1.4.4)) and **Netlogon Authenticator Computation and Verification** (section [3.1.4.5](#Section_3.1.4.5)) sections.
 <a id="Section_2.2.1.3.5"></a>
 ##### 2.2.1.3.5 NETLOGON_LSA_POLICY_INFO
 
@@ -1755,7 +1757,7 @@ ULONG LsaPolicySize;
 <a id="Section_2.2.1.3.6"></a>
 ##### 2.2.1.3.6 NETLOGON_WORKSTATION_INFO
 
-The **NETLOGON_WORKSTATION_INFO** structure defines information passed into the **NetrLogonGetDomainInfo** method, as specified in [3.5.4.4.10](#Section_3.5.4.4.10). It SHOULD<20> be used to convey information about a member workstation from the client side to the server side.
+The **NETLOGON_WORKSTATION_INFO** structure defines information passed into the **NetrLogonGetDomainInfo** method, as specified in [3.5.4.4.10](#Section_3.5.4.4.10). It SHOULD<23> be used to convey information about a member workstation from the client side to the server side.
 
 typedef struct _NETLOGON_WORKSTATION_INFO{
 
@@ -1809,7 +1811,7 @@ ULONG DummyLong4;
 
 **OsVersion:** A UNICODE_STRING structure in which the **Length** and **MaximumLength** fields are set to the size of an OSVERSIONINFOEX structure and the **Buffer** field points to an OSVERSIONINFOEX ([MS-RPRN](../MS-RPRN/MS-RPRN.md) section 2.2.3.10.2) structure. *OsVersion* contains the version number of the operating system installed on the client machine.
 
-**OsName:** A null-terminated Unicode string that SHOULD<21> contain the name of the operating system installed on the client machine. The [**DC**](#gt_domain-controller-dc) that receives this data structure updates the **operatingSystem** attribute of the client's machine account object in [**Active Directory**](#gt_active-directory), as specified in [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.53.
+**OsName:** A null-terminated Unicode string that SHOULD<24> contain the name of the operating system installed on the client machine. The [**DC**](#gt_domain-controller-dc) that receives this data structure updates the **operatingSystem** attribute of the client's machine account object in [**Active Directory**](#gt_active-directory), as specified in [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.53.
 
 **DummyString3:** A STRING structure, defined in section [2.2.1.1.1](#Section_2.2.1.1.1), that MUST contain 0 for the **Length** field, 0 for the **MaximumLength** field, and NULL for the **Buffer** field. It is ignored upon receipt. The Netlogon usage of dummy fields is defined in section 1.3.8.1.2.
 
@@ -1862,7 +1864,7 @@ Where the bits are defined as:
 
 All other bits MUST be set to zero and MUST be ignored on receipt.
 
-**KerberosSupportedEncryptionTypes:** The **msDS-SupportedEncryptionTypes** attribute of the client's machine account object in Active Directory, as specified in [MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481.<22>
+**KerberosSupportedEncryptionTypes:** The **msDS-SupportedEncryptionTypes** attribute of the client's machine account object in Active Directory, as specified in [MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481.<25>
 
 **DummyLong3:** MUST be set to zero and MUST be ignored on receipt. The Netlogon usage of dummy fields is defined in section 1.3.8.1.2.
 
@@ -1871,7 +1873,7 @@ All other bits MUST be set to zero and MUST be ignored on receipt.
 <a id="Section_2.2.1.3.7"></a>
 ##### 2.2.1.3.7 NL_TRUST_PASSWORD
 
-The **NL_TRUST_PASSWORD** structure defines a buffer for carrying a computer account password, or a [**trust**](#gt_trust) password, to be transmitted over the wire. It SHOULD<23> be transported as an input parameter to the **NetrServerPasswordSet2** method, as specified in section [3.5.4.4.6](#Section_3.5.4.4.6). [**Domain members**](#gt_domain-member-member-machine) use NetrServerPasswordSet2 to change their computer account password. The [**primary domain controller**](#gt_primary-domain-controller-pdc) uses NetrServerPasswordSet2 to change trust passwords for all directly trusted [**domains**](#gt_domain). The **NL_TRUST_PASSWORD** structure is encrypted using the negotiated encryption algorithm before it is sent over the wire.<24>
+The **NL_TRUST_PASSWORD** structure defines a buffer for carrying a computer account password, or a [**trust**](#gt_trust) password, to be transmitted over the wire. It SHOULD<26> be transported as an input parameter to the **NetrServerPasswordSet2** method, as specified in section [3.5.4.4.6](#Section_3.5.4.4.6). [**Domain members**](#gt_domain-member-member-machine) use NetrServerPasswordSet2 to change their computer account password. The [**primary domain controller**](#gt_primary-domain-controller-pdc) uses NetrServerPasswordSet2 to change trust passwords for all directly trusted [**domains**](#gt_domain). The **NL_TRUST_PASSWORD** structure is encrypted using the negotiated encryption algorithm before it is sent over the wire.<27>
 
 typedef struct _NL_TRUST_PASSWORD {
 
@@ -1911,7 +1913,7 @@ Where **ReservedField**, **PasswordVersionNumber**, and **PasswordVersionPresent
 <a id="Section_2.2.1.3.8"></a>
 ##### 2.2.1.3.8 NL_PASSWORD_VERSION
 
-The **NL_PASSWORD_VERSION** structure defines a password version number that is used to distinguish between different versions of information passed in the **Buffer** field of the **NL_TRUST_PASSWORD** structure (section [2.2.1.3.7](#Section_2.2.1.3.7)). The **NL_PASSWORD_VERSION** structure SHOULD<25> be prepended to the password in the buffer of **NL_TRUST_PASSWORD** and is only used for interdomain [**trust**](#gt_trust) accounts.
+The **NL_PASSWORD_VERSION** structure defines a password version number that is used to distinguish between different versions of information passed in the **Buffer** field of the **NL_TRUST_PASSWORD** structure (section [2.2.1.3.7](#Section_2.2.1.3.7)). The **NL_PASSWORD_VERSION** structure SHOULD<28> be prepended to the password in the buffer of **NL_TRUST_PASSWORD** and is only used for interdomain [**trust**](#gt_trust) accounts.
 
 typedef struct _NL_PASSWORD_VERSION {
 
@@ -1934,7 +1936,7 @@ ULONG PasswordVersionPresent;
 <a id="Section_2.2.1.3.9"></a>
 ##### 2.2.1.3.9 NETLOGON_WORKSTATION_INFORMATION
 
-The **NETLOGON_WORKSTATION_INFORMATION** union SHOULD<26> select between two parameters of type **NETLOGON_WORKSTATION_INFO** structure, as specified in section [2.2.1.3.6](#Section_2.2.1.3.6), based on the value of the *Level* parameter of the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10).
+The **NETLOGON_WORKSTATION_INFORMATION** union SHOULD<29> select between two parameters of type **NETLOGON_WORKSTATION_INFO** structure, as specified in section [2.2.1.3.6](#Section_2.2.1.3.6), based on the value of the *Level* parameter of the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10).
 
 typedef
 
@@ -1961,7 +1963,7 @@ PNETLOGON_WORKSTATION_INFO LsaPolicyInfo;
 <a id="Section_2.2.1.3.10"></a>
 ##### 2.2.1.3.10 NETLOGON_ONE_DOMAIN_INFO
 
-The **NETLOGON_ONE_DOMAIN_INFO** structure SHOULD<27> define information about a single [**domain**](#gt_domain). It is in turn contained in the **NETLOGON_DOMAIN_INFO** structure, as specified in section [2.2.1.3.11](#Section_2.2.1.3.11). The **NETLOGON_DOMAIN_INFO** structure describes domain relationships and is generated as output from the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10).
+The **NETLOGON_ONE_DOMAIN_INFO** structure SHOULD<30> define information about a single [**domain**](#gt_domain). It is in turn contained in the **NETLOGON_DOMAIN_INFO** structure, as specified in section [2.2.1.3.11](#Section_2.2.1.3.11). The **NETLOGON_DOMAIN_INFO** structure describes domain relationships and is generated as output from the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10).
 
 typedef struct _NETLOGON_ONE_DOMAIN_INFO {
 
@@ -2034,7 +2036,7 @@ This structure is supplementary domain [**trust**](#gt_trust) information that c
 <a id="Section_2.2.1.3.11"></a>
 ##### 2.2.1.3.11 NETLOGON_DOMAIN_INFO
 
-The **NETLOGON_DOMAIN_INFO** structure SHOULD<28> define information returned as output from the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10). It contains information about a [**domain**](#gt_domain), including naming information and a list of [**trusted**](#gt_trust) domains.
+The **NETLOGON_DOMAIN_INFO** structure SHOULD<31> define information returned as output from the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10). It contains information about a [**domain**](#gt_domain), including naming information and a list of [**trusted**](#gt_trust) domains.
 
 typedef struct _NETLOGON_DOMAIN_INFO {
 
@@ -2129,7 +2131,7 @@ Where the bits are defined as:
 
 All other bits MUST be set to zero and MUST be ignored on receipt.
 
-**SupportedEncTypes:** A set of bit flags that SHOULD<29> specify the encryption types supported, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.7.18. See [MS-LSAD] for a specification of these bit values and their allowed combinations.
+**SupportedEncTypes:** A set of bit flags that SHOULD<32> specify the encryption types supported, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.7.18. See [MS-LSAD] for a specification of these bit values and their allowed combinations.
 
 **DummyLong3:** MUST be set to zero and MUST be ignored on receipt. The Netlogon usage of dummy fields is defined in section 1.3.8.1.2.
 
@@ -2138,7 +2140,7 @@ All other bits MUST be set to zero and MUST be ignored on receipt.
 <a id="Section_2.2.1.3.12"></a>
 ##### 2.2.1.3.12 NETLOGON_DOMAIN_INFORMATION
 
-The **NETLOGON_DOMAIN_INFORMATION** union SHOULD<30> select either a **NETLOGON_DOMAIN_INFO**, as specified in section [2.2.1.3.11](#Section_2.2.1.3.11), or a **NETLOGON_LSA_POLICY_INFO**, as specified in section [2.2.1.3.5](#Section_2.2.1.3.5), data type based on the value of the *Level* parameter to the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10).
+The **NETLOGON_DOMAIN_INFORMATION** union SHOULD<33> select either a **NETLOGON_DOMAIN_INFO**, as specified in section [2.2.1.3.11](#Section_2.2.1.3.11), or a **NETLOGON_LSA_POLICY_INFO**, as specified in section [2.2.1.3.5](#Section_2.2.1.3.5), data type based on the value of the *Level* parameter to the **NetrLogonGetDomainInfo** method, as specified in section [3.5.4.4.10](#Section_3.5.4.4.10).
 
 typedef
 
@@ -2197,18 +2199,18 @@ CdcServerSecureChannel = 7
 
 **TrustedDnsDomainSecureChannel:** A secure channel between two DCs, connected through a [**trust**](#gt_trust) relationship created between two [**Active Directory**](#gt_active-directory) [**domains**](#gt_domain). A [**trusted domain object (TDO)**](#gt_trusted-domain-object-tdo) is used in this type of channel.
 
-**TrustedDomainSecureChannel:** A secure channel between two DCs, connected through a trust relationship created between two domains.<31>
+**TrustedDomainSecureChannel:** A secure channel between two DCs, connected through a trust relationship created between two domains.<34>
 
 **UasServerSecureChannel:** Secure channel from a LAN Manager server to a DC. This value is no longer supported, and it MUST NOT be used in the Netlogon RPC calls between a client and a remote server. The error code STATUS_INVALID_PARAMETER is returned.
 
 **ServerSecureChannel:** A secure channel from a [**backup domain controller**](#gt_backup-domain-controller-bdc) to a [**primary domain controller**](#gt_primary-domain-controller-pdc).
 
-**CdcServerSecureChannel: A** secure channel from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a domain controller.<32>
+**CdcServerSecureChannel: A** secure channel from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a domain controller.<35>
 
 <a id="Section_2.2.1.3.14"></a>
 ##### 2.2.1.3.14 NETLOGON_CAPABILITIES
 
-The **NETLOGON_CAPABILITIES** union SHOULD<33> carry the supported Netlogon capabilities.
+The **NETLOGON_CAPABILITIES** union SHOULD<36> carry the supported Netlogon capabilities.
 
 typedef
 
@@ -2230,12 +2232,12 @@ ULONG RequestedFlags;
 
 **ServerCapabilities:** A 32-bit set of bit flags that identify the server's capabilities (section [3.5.4.4.11](#Section_3.5.4.4.11)).
 
-**RequestedFlags:** A 32-bit set of bit flags that identify the client capabilities that server received during negotiation (section 3.5.4.4.11).<34>
+**RequestedFlags:** A 32-bit set of bit flags that identify the client capabilities that server received during negotiation (section 3.5.4.4.11).<37>
 
 <a id="Section_2.2.1.3.15"></a>
 ##### 2.2.1.3.15 NL_OSVERSIONINFO_V1
 
-The **NL_OSVERSIONINFO_V1** structure specifies the values used to update the **operatingSystemVersion** and **operatingSystem** attributes on the client's computer account object in [**Active Directory**](#gt_active-directory) on a normal (writable) [**DC**](#gt_domain-controller-dc).<35>
+The **NL_OSVERSIONINFO_V1** structure specifies the values used to update the **operatingSystemVersion** and **operatingSystem** attributes on the client's computer account object in [**Active Directory**](#gt_active-directory) on a normal (writable) [**DC**](#gt_domain-controller-dc).<38>
 
 typedef struct _NL_OSVERSIONINFO_V1 {
 
@@ -2265,13 +2267,13 @@ UCHAR wReserved;
 
 **dwOSVersionInfoSize:** The size, in bytes, of this data structure. Set this member to sizeof(NL_OSVERSIONINFO_V1).
 
-**dwMajorVersion:** The implementation-specific major version number of the operating system.<36>
+**dwMajorVersion:** The implementation-specific major version number of the operating system.<39>
 
-**dwMinorVersion:** The implementation-specific minor version number of the operating system.<37>
+**dwMinorVersion:** The implementation-specific minor version number of the operating system.<40>
 
 **dwBuildNumber:** The build number of the operating system.
 
-**dwPlatformId:** The operating system platform.<38>
+**dwPlatformId:** The operating system platform.<41>
 
 **szCSDVersion:** A null-terminated string, such as "Service Pack 3", that indicates the latest service pack installed on the system. If no service pack has been installed, the string is empty.
 
@@ -2285,14 +2287,14 @@ UCHAR wReserved;
 | --- | --- |
 | VER_NT_DOMAIN_CONTROLLER 0x00000002 | The system is a DC. |
 | VER_NT_SERVER 0x00000003 | The system is a server. Note that a server that is also a DC is reported as VER_NT_DOMAIN_CONTROLLER, not VER_NT_SERVER. |
-| VER_NT_WORKSTATION 0x00000001 | Identifies the operating system.<39> |
+| VER_NT_WORKSTATION 0x00000001 | Identifies the operating system.<42> |
 
-**wReserved:** Reserved for future use.<40>
+**wReserved:** Reserved for future use.<43>
 
 <a id="Section_2.2.1.3.16"></a>
 ##### 2.2.1.3.16 NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1
 
-The **NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1** structure specifies the values to update on the client's computer account object in [**Active Directory**](#gt_active-directory) on a normal (writable) [**domain controller**](#gt_domain-controller-dc).<41>
+The **NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1** structure specifies the values to update on the client's computer account object in [**Active Directory**](#gt_active-directory) on a normal (writable) [**domain controller**](#gt_domain-controller-dc).<44>
 
 typedef struct _NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1 {
 
@@ -2326,7 +2328,7 @@ MinorVersion = "OsVersionInfo_V1.dwMinorVersion"
 
 BuildNumber = "OsVersionInfo_V1.dwBuildNumber"
 
-**OsName:** A NULL or a null-terminated Unicode string that SHOULD<42> be used to update the attribute **operatingSystem** on the client's computer account object in Active Directory.
+**OsName:** A NULL or a null-terminated Unicode string that SHOULD<45> be used to update the attribute **operatingSystem** on the client's computer account object in Active Directory.
 
 <a id="Section_2.2.1.3.17"></a>
 ##### 2.2.1.3.17 NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES
@@ -2345,12 +2347,12 @@ NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1 V1;
 
 } NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES;
 
-**V1:** An **NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1** (section [2.2.1.3.16)](#Section_2.2.1.3.16) structure.<43>
+**V1:** An **NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES_V1** (section [2.2.1.3.16)](#Section_2.2.1.3.16) structure.<46>
 
 <a id="Section_2.2.1.3.18"></a>
 ##### 2.2.1.3.18 NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1
 
-The **NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1** structure SHOULD<44> specify the values returned from the normal (writable) [**DC**](#gt_domain-controller-dc).
+The **NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1** structure SHOULD<47> specify the values returned from the normal (writable) [**DC**](#gt_domain-controller-dc).
 
 typedef struct _NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1 {
 
@@ -2362,11 +2364,11 @@ typedef struct _NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1 {
 
 } NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1;
 
-**HubName:** The [**NetBIOS name**](#gt_netbios-name) of the [**writable domain controller**](#gt_writable-domain-controller) receiving [NetrChainSetClientAttributes (section 3.5.4.4.12)](#Section_3.5.4.4.12). The [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) that invoked the method NetrChainSetClientAttributes SHOULD<45> attempt to replicate the computer account object from **HubName** to itself, ignoring errors.
+**HubName:** The [**NetBIOS name**](#gt_netbios-name) of the [**writable domain controller**](#gt_writable-domain-controller) receiving [NetrChainSetClientAttributes (section 3.5.4.4.12)](#Section_3.5.4.4.12). The [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) that invoked the method NetrChainSetClientAttributes SHOULD<48> attempt to replicate the computer account object from **HubName** to itself, ignoring errors.
 
 **OldDnsHostName:** The client's [**DNS**](#gt_domain-name-system-dns) host name, if any, from the **dNSHostName** attribute ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.185) on the client's computer account object in [**Active Directory**](#gt_active-directory) on the writable domain controller. If there was an update to the **dNSHostName** attribute by the writable domain controller as a result of receiving NetrChainSetClientAttributes, this value will hold the previous value of that attribute.
 
-**SupportedEncTypes:** The supported encryption algorithms received from the [NetrLogonGetDomainInfo](#Section_3.5.4.4.10) request, in the **SupportedEncTypes** field in the [NETLOGON_DOMAIN_INFO (section 2.2.1.3.11)](#Section_2.2.1.3.11) structure.<46>
+**SupportedEncTypes:** The supported encryption algorithms received from the [NetrLogonGetDomainInfo](#Section_3.5.4.4.10) request, in the **SupportedEncTypes** field in the [NETLOGON_DOMAIN_INFO (section 2.2.1.3.11)](#Section_2.2.1.3.11) structure.<49>
 
 <a id="Section_2.2.1.3.19"></a>
 ##### 2.2.1.3.19 NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES
@@ -2385,7 +2387,7 @@ NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1 V1;
 
 } NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES;
 
-**V1:** An [NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1 (section 2.2.1.3.18)](#Section_2.2.1.3.18) structure.<47>
+**V1:** An [NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1 (section 2.2.1.3.18)](#Section_2.2.1.3.18) structure.<50>
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 Pass-Through Authentication Structures
@@ -2453,9 +2455,9 @@ NT_OWF_PASSWORD NtOwfPassword;
 
 **Identity:** A **NETLOGON_LOGON_IDENTITY_INFO** structure, as specified in section [2.2.1.4.15](#Section_2.2.1.4.15), that contains information about the logon identity.
 
-**LmOwfPassword:** An **LM_OWF_PASSWORD** structure, as specified in section [2.2.1.1.3](#Section_2.2.1.1.3), that contains the LMOWFv1 of a password. LMOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1.
+**LmOwfPassword:** An **LM_OWF_PASSWORD** structure, as specified in section [2.2.1.1.4](#Section_2.2.1.1.4), that contains the LMOWFv1 of a password. LMOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1.
 
-**NtOwfPassword:** An **NT_OWF_PASSWORD** structure, as specified in section [2.2.1.1.4](#Section_2.2.1.1.4), that contains the NTOWFv1 of a password. NTOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP] section 3.3.1.
+**NtOwfPassword:** An **NT_OWF_PASSWORD** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the NTOWFv1 of a password. NTOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP] section 3.3.1.
 
 <a id="Section_2.2.1.4.4"></a>
 ##### 2.2.1.4.4 NETLOGON_SERVICE_INFO
@@ -2476,9 +2478,9 @@ NT_OWF_PASSWORD NtOwfPassword;
 
 **Identity: NETLOGON_LOGON_IDENTITY_INFO** structure, as specified in section [2.2.1.4.15](#Section_2.2.1.4.15), that contains information about the logon identity.
 
-**LmOwfPassword: LM_OWF_PASSWORD** structure, as specified in section [2.2.1.1.3](#Section_2.2.1.1.3), that contains the LMOWFv1 of a password. LMOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1.
+**LmOwfPassword: LM_OWF_PASSWORD** structure, as specified in section [2.2.1.1.4](#Section_2.2.1.1.4), that contains the LMOWFv1 of a password. LMOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1.
 
-**NtOwfPassword: NT_OWF_PASSWORD** structure, as specified in section [2.2.1.1.4](#Section_2.2.1.1.4), that contains the NTOWFv1 of a password. NTOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP] section 3.3.1.
+**NtOwfPassword: NT_OWF_PASSWORD** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the NTOWFv1 of a password. NTOWFv1 is specified in NTLM v1 Authentication in [MS-NLMP] section 3.3.1.
 
 <a id="Section_2.2.1.4.5"></a>
 ##### 2.2.1.4.5 NETLOGON_NETWORK_INFO
@@ -3145,7 +3147,7 @@ Where the bits are defined as:
 <a id="Section_2.2.1.4.16"></a>
 ##### 2.2.1.4.16 NETLOGON_LOGON_INFO_CLASS
 
-The **NETLOGON_LOGON_INFO_CLASS** enumeration SHOULD<48> identify a particular type of logon information block.
+The **NETLOGON_LOGON_INFO_CLASS** enumeration SHOULD<51> identify a particular type of logon information block.
 
 typedef enum _NETLOGON_LOGON_INFO_CLASS
 
@@ -3188,7 +3190,7 @@ NetlogonTicketLogonInformation = 8
 <a id="Section_2.2.1.4.17"></a>
 ##### 2.2.1.4.17 NETLOGON_VALIDATION_INFO_CLASS
 
-The **NETLOGON_VALIDATION_INFO_CLASS** enumeration SHOULD<49> select the type of logon information block being used.
+The **NETLOGON_VALIDATION_INFO_CLASS** enumeration SHOULD<52> select the type of logon information block being used.
 
 typedef enum _NETLOGON_VALIDATION_INFO_CLASS
 
@@ -3519,7 +3521,7 @@ packet-beta
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 Account Database Replication Structures
 
-Structures and enumerated types in this group are used for account [**database**](#gt_database) replication.<50> These structures are relevant only for server-to-server communication, and are obsolete.
+Structures and enumerated types in this group are used for account [**database**](#gt_database) replication.<53> These structures are relevant only for server-to-server communication, and are obsolete.
 
 <a id="Section_2.2.1.5.1"></a>
 ##### 2.2.1.5.1 NETLOGON_DB_CHANGE (Announcement) Message
@@ -4779,9 +4781,9 @@ ULONG DummyLong4;
 
 **DomainName:** A **UNICODE_STRING** structure that contains the [**NetBIOS name**](#gt_netbios-name) of the trusted domain.
 
-**NumControllerEntries:** Number of [**domain controller (DC)**](#gt_domain-controller-dc) names listed in the **ControllerNames** field.<51>
+**NumControllerEntries:** Number of [**domain controller (DC)**](#gt_domain-controller-dc) names listed in the **ControllerNames** field.<54>
 
-**ControllerNames:** Pointer to an array of **UNICODE_STRING** types that contain the NetBIOS names of the DCs in the trusted domain. The only restriction is the maximum value of the 32-bit unsigned integer enforced by [**RPC**](#gt_remote-procedure-call-rpc).<52>
+**ControllerNames:** Pointer to an array of **UNICODE_STRING** types that contain the NetBIOS names of the DCs in the trusted domain. The only restriction is the maximum value of the 32-bit unsigned integer enforced by [**RPC**](#gt_remote-procedure-call-rpc).<55>
 
 **SecurityInformation:** A **SECURITY_INFORMATION** structure, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.7, that specifies portions of a security descriptor about the trusted domain.
 
@@ -5179,7 +5181,7 @@ SerialNumberSkip = 22
 
 **DeleteLsaSecret:** Deletes an LSA encrypted data block.
 
-The following three types MAY<53> have an additional requirement.
+The following three types MAY<56> have an additional requirement.
 
 **DeleteGroupByName:** Deletes a group account based on a string name.
 
@@ -5271,7 +5273,7 @@ where <null> is the UTF-16 null character, 0x0000.
 <a id="Section_2.2.1.6.2"></a>
 ##### 2.2.1.6.2 DS_DOMAIN_TRUSTSW
 
-The **DS_DOMAIN_TRUSTSW** structure defines information about a [**domain**](#gt_domain) [**trust**](#gt_trust). It is part of the **NETLOGON_TRUSTED_DOMAIN_ARRAY** structure, as specified in section [2.2.1.6.3](#Section_2.2.1.6.3), returned by the **DsrEnumerateDomainTrusts** method, as specified in section [3.5.4.7.1](#Section_3.5.4.7.1). This structure SHOULD<54> contain naming information and trust-related information for a specific [**trusted domain**](#gt_trusted-domain).
+The **DS_DOMAIN_TRUSTSW** structure defines information about a [**domain**](#gt_domain) [**trust**](#gt_trust). It is part of the **NETLOGON_TRUSTED_DOMAIN_ARRAY** structure, as specified in section [2.2.1.6.3](#Section_2.2.1.6.3), returned by the **DsrEnumerateDomainTrusts** method, as specified in section [3.5.4.7.1](#Section_3.5.4.7.1). This structure SHOULD<57> contain naming information and trust-related information for a specific [**trusted domain**](#gt_trusted-domain).
 
 typedef struct _DS_DOMAIN_TRUSTSW {
 
@@ -5360,8 +5362,8 @@ Otherwise, it MUST be set to zero and MUST be ignored.
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000001 | Trust is with a domain.<55> |
-| 0x00000002 | Trust is with an [**Active Directory**](#gt_active-directory) domain.<56> |
+| 0x00000001 | Trust is with a domain.<58> |
+| 0x00000002 | Trust is with an [**Active Directory**](#gt_active-directory) domain.<59> |
 | 0x00000003 | Trust is with an MIT Kerberos realm. |
 | 0x00000004 | Trust is with a Distributed Computing Environment (DCE) realm. |
 
@@ -5410,7 +5412,7 @@ Where the bits are defined as:
 | Value | Description |
 | --- | --- |
 | A | Trust link MUST NOT allow transitivity. |
-| B | Trust link MAY<57> be valid. |
+| B | Trust link MAY<60> be valid. |
 | C | Trust link MUST be set for [**SID**](#gt_security-identifier-sid) filtering of the client domain. For details about SID filtering, see [MS-PAC](../MS-PAC/MS-PAC.md). |
 | D | Trust link can contain [**forest trust information**](#gt_forest-trust-information). |
 | E | Trust link is to either a domain or a forest that is not part of the [**enterprise network**](#gt_enterprise-network). |
@@ -5428,7 +5430,7 @@ All other bits MUST be set to zero and MUST be ignored on receipt.
 <a id="Section_2.2.1.6.3"></a>
 ##### 2.2.1.6.3 NETLOGON_TRUSTED_DOMAIN_ARRAY
 
-The **NETLOGON_TRUSTED_DOMAIN_ARRAY** structure SHOULD<58> define information returned by the **NetrEnumerateTrustedDomainsEx** method, as specified in section [3.5.4.7.2](#Section_3.5.4.7.2).
+The **NETLOGON_TRUSTED_DOMAIN_ARRAY** structure SHOULD<61> define information returned by the **NetrEnumerateTrustedDomainsEx** method, as specified in section [3.5.4.7.2](#Section_3.5.4.7.2).
 
 typedef struct _NETLOGON_TRUSTED_DOMAIN_ARRAY {
 
@@ -5447,7 +5449,7 @@ DWORD DomainCount;
 <a id="Section_2.2.1.6.4"></a>
 ##### 2.2.1.6.4 NL_GENERIC_RPC_DATA
 
-The **NL_GENERIC_RPC_DATA** structure SHOULD<59> define a format for marshaling arrays of unsigned long values and [**Unicode strings**](#gt_unicode-string), by value, over [**RPC**](#gt_remote-procedure-call-rpc). This structure can be used to transmit generic data over RPC from the server to a client.
+The **NL_GENERIC_RPC_DATA** structure SHOULD<62> define a format for marshaling arrays of unsigned long values and [**Unicode strings**](#gt_unicode-string), by value, over [**RPC**](#gt_remote-procedure-call-rpc). This structure can be used to transmit generic data over RPC from the server to a client.
 
 typedef struct _NL_GENERIC_RPC_DATA {
 
@@ -5516,7 +5518,7 @@ DWORD DebugFlag;
 <a id="Section_2.2.1.7.2"></a>
 ##### 2.2.1.7.2 NETLOGON_INFO_1
 
-The **NETLOGON_INFO_1** structure defines information returned as part of an administrative query, as detailed in the description of the **NetrLogonControl2Ex** method in section [3.5.4.9.1](#Section_3.5.4.9.1). This structure is used to convey information about the state and properties of the [**secure channel**](#gt_secure-channel) to a [**DC**](#gt_domain-controller-dc) in the [**primary domain**](#gt_primary-domain) of the queried server. Additionally, this structure MAY<60> contain information about the state of the [**database**](#gt_database) synchronization.
+The **NETLOGON_INFO_1** structure defines information returned as part of an administrative query, as detailed in the description of the **NetrLogonControl2Ex** method in section [3.5.4.9.1](#Section_3.5.4.9.1). This structure is used to convey information about the state and properties of the [**secure channel**](#gt_secure-channel) to a [**DC**](#gt_domain-controller-dc) in the [**primary domain**](#gt_primary-domain) of the queried server. Additionally, this structure MAY<63> contain information about the state of the [**database**](#gt_database) synchronization.
 
 typedef struct _NETLOGON_INFO_1 {
 
@@ -5528,7 +5530,7 @@ NET_API_STATUS netlog1_pdc_connection_status;
 
 *PNETLOGON_INFO_1;
 
-**netlog1_flags:** A set of bit flags that are defined in the following table. A flag SHOULD<61> be TRUE (or set) if its value is equal to 1. The value is constructed from zero or more bit flags from the following table.
+**netlog1_flags:** A set of bit flags that are defined in the following table. A flag SHOULD<64> be TRUE (or set) if its value is equal to 1. The value is constructed from zero or more bit flags from the following table.
 
 ```mermaid
 packet-beta
@@ -5639,7 +5641,7 @@ packet-beta
   31-31: "0"
 ```
 
-Where the flags SHOULD<62> be defined as shown in the following table.
+Where the flags SHOULD<65> be defined as shown in the following table.
 
 | Value | Description |
 | --- | --- |
@@ -5757,7 +5759,7 @@ PNETLOGON_INFO_4 NetlogonInfo4;
 <a id="Section_2.2.1.8"></a>
 #### 2.2.1.8 Obsolete Structures
 
-The structures in this section SHOULD<63> be unsupported, but they are types associated with parameters in methods defined in **Obsolete Methods** (section [3.4.5.8](#Section_3.4.5.8)) that are also obsolete.
+The structures in this section SHOULD<66> be unsupported, but they are types associated with parameters in methods defined in **Obsolete Methods** (section [3.4.5.8](#Section_3.4.5.8)) that are also obsolete.
 
 <a id="Section_2.2.1.8.1"></a>
 ##### 2.2.1.8.1 NETLOGON_VALIDATION_UAS_INFO
@@ -5837,7 +5839,7 @@ ULONG SerialNumber;
 <a id="Section_2.2.1.8.4"></a>
 ##### 2.2.1.8.4 NETLOGON_DUMMY1
 
-The **NETLOGON_DUMMY1** union MAY<64> serve as a placeholder.
+The **NETLOGON_DUMMY1** union MAY<67> serve as a placeholder.
 
 typedef
 
@@ -5871,7 +5873,7 @@ For the syntactic specifications of the following <Class> or <Class><Attribute> 
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The Netlogon Remote Protocol [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) interface is used primarily to maintain the relationship between a machine and its [**domain**](#gt_domain), and relationships among [**domain controllers (DCs)**](#gt_domain-controller-dc) and domains. As such, there are several distinct responsibilities that the RPC interface fulfills while acting in this maintenance capacity. These responsibilities are as follows:<65>
+The Netlogon Remote Protocol [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) interface is used primarily to maintain the relationship between a machine and its [**domain**](#gt_domain), and relationships among [**domain controllers (DCs)**](#gt_domain-controller-dc) and domains. As such, there are several distinct responsibilities that the RPC interface fulfills while acting in this maintenance capacity. These responsibilities are as follows:<68>
 
 - To establish and maintain the [**secure channel**](#gt_secure-channel) that is used by members of a domain to communicate with the domain controller (DC).
 - To transport authentication requests from domain members to the DC, and among DCs. This functionality is most commonly implemented by authentications using the NTLM Authentication Protocol ([MS-NLMP](../MS-NLMP/MS-NLMP.md)), but it is also used by other protocols such as Kerberos and Digest ([MS-APDS](../MS-APDS/MS-APDS.md) section 1.4).
@@ -5893,7 +5895,7 @@ Several Netlogon Remote Protocol methods apply the processing rules listed in th
 | Common Error Processing Rule | Description |
 | --- | --- |
 | **A** | If a server does not support a specific Netlogon RPC method, it MUST return ERROR_NOT_SUPPORTED or STATUS_NOT_SUPPORTED, based on the return type. This includes the case when the server is not a domain controller. |
-| **B** | If the input parameter to a Netlogon RPC request is a [**computer name**](#gt_computer-name) or server name, the server SHOULD<66> look up this name in the domain the server hosts. If the name is not found, the server MUST return ERROR_INVALID_COMPUTERNAME or STATUS_INVALID_COMPUTER_NAME. |
+| **B** | If the input parameter to a Netlogon RPC request is a [**computer name**](#gt_computer-name) or server name, the server SHOULD<69> look up this name in the domain the server hosts. If the name is not found, the server MUST return ERROR_INVALID_COMPUTERNAME or STATUS_INVALID_COMPUTER_NAME. |
 | **C** | If a server needs to locate a domain controller (DC) to service a Netlogon RPC request, it follows the method specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6. If the DC cannot be located by following this method, the server MUST return ERROR_NO_LOGON_SERVERS or STATUS_NO_LOGON_SERVERS, depending on the return type. |
 | **D** | If the [**Directory Service**](#gt_directory-service-ds) is paused and the Netlogon RPC method cannot be processed further, the server returns STATUS_DS_BUSY. |
 | **E** | The server MUST return ERROR_NO_SUCH_DOMAIN if the DC could not be located for the specified domain, or if the specified domain is not primary or directly [**trusted**](#gt_trust). |
@@ -5936,9 +5938,9 @@ Abstract variables of the session key operations are as follows:
 
 **ServerChallenge:** A pointer to a **NETLOGON_CREDENTIAL** structure that contains the [**server challenge (SC)**](#gt_server-challenge-sc) response.
 
-**SharedSecret:** An even-numbered sequence of bytes, with no embedded zero values, that is a plain-text secret (password) shared between the client and the server. Implementers can choose to store the **unicodePwd** ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.332) instead of a clear text version of the shared secret.<67><68> For more information, refer to the ADM element **Password** in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.6; initialization of this shared ADM element is covered in the domain join and unjoin sections of [MS-WKST] (sections 3.2.4.13 and 3.2.4.14).
+**SharedSecret:** An even-numbered sequence of bytes, with no embedded zero values, that is a plain-text secret (password) shared between the client and the server. Implementers can choose to store the **unicodePwd** ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.332) instead of a clear text version of the shared secret.<70><71> For more information, refer to the ADM element **Password** in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.6; initialization of this shared ADM element is covered in the domain join and unjoin sections of [MS-WKST] (sections 3.2.4.13 and 3.2.4.14).
 
-**TrustPasswordVersion:** An unsigned 32-bit integer that SHOULD<69> indicate the number of times that a trust password has changed.
+**TrustPasswordVersion:** An unsigned 32-bit integer that SHOULD<72> indicate the number of times that a trust password has changed.
 
 **StrongKeySupport:** A Boolean setting that indicates whether a strong method of creating the session key will be used. A strong method, in the context of Netlogon, is one that uses the MD5 message-digest algorithm [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275). The behavior of this setting is specified in section 3.1.4.3.
 
@@ -5948,7 +5950,7 @@ The Netlogon client and server variables are as follows:
 
 **SealSecureChannel:** A Boolean setting that indicates whether the RPC message has to be encrypted or just integrity-protected ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 13.2.5). This setting MUST be TRUE.
 
-**VulnerableChannelAllowList:** A setting expressed in [**Security Descriptor Definition Language (SDDL)**](#gt_security-descriptor-definition-language-sddl) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.1) of Netlogon client allowed to not use secure bindings, see section [3.1.4.6](#Section_3.1.4.6).<70>
+**VulnerableChannelAllowList:** A setting expressed in [**Security Descriptor Definition Language (SDDL)**](#gt_security-descriptor-definition-language-sddl) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.1) of Netlogon client allowed to not use secure bindings, see section [3.1.4.6](#Section_3.1.4.6).<73>
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -5984,16 +5986,16 @@ Session-key negotiation works as follows.
 - The client computes its client Netlogon [**credential**](#gt_credential) by using client challenge as input to the credential computation algorithm, as specified in section [3.1.4.4](#Section_3.1.4.4).
 - The client exchanges its client Netlogon credential with the server by passing it in the [**NetrServerAuthenticate**](#Section_3.5.4.4.5), [**NetrServerAuthenticate2**](#Section_3.5.4.4.4), or [**NetrServerAuthenticate3**](#Section_3.5.4.4.2) call as the ClientCredential input argument. The selection of the specific method called by the client is specified in section [3.4.5.2.2](#Section_3.4.5.2.2).
 - The server receives the **NetrServerAuthenticate**, **NetrServerAuthenticate2**, or **NetrServerAuthenticate3** call and verifies the client Netlogon credential. It does this by computing a session key, as specified in section 3.1.4.3, duplicating the client Netlogon credential computation, using its stored copy of client challenge, and comparing the result of this recomputation with the client Netlogon credential that was just received from the client. If the comparison fails, the server MUST fail session-key negotiation without further processing of the following steps.
-- If none of the first 5 bytes of the client challenge is unique, the server MUST fail session-key negotiation without further processing of the following steps.<71>
+- If none of the first 5 bytes of the client challenge is unique, the server MUST fail session-key negotiation without further processing of the following steps.<74>
 - The server computes its server Netlogon credential by using the server challenge as input to the credential computation algorithm, as specified in section 3.1.4.4. The server returns the server Netlogon credential as the *ServerCredential* output parameter of the **NetrServerAuthenticate**, **NetrServerAuthenticate2**, or **NetrServerAuthenticate3** call.
 - The client verifies the server Netlogon credential. It does this by recomputing the server Netlogon credential, using its stored copy of server challenge, and comparing the result of this recomputation with the server Netlogon credential passed back from the server. If the comparison fails, the client MUST fail session-key negotiation.
 - Upon mutual verification, the client and server agree to use the computed session key for encrypting and/or signing further communications.
 - The client calls the NetrLogonGetCapabilities method to get Negotiaged flags by setting QueryLevel to 1 (section [3.4.5.2.11](#Section_3.4.5.2.11)).
-- The server SHOULD<72> return the negotiated flags for the current exchange.
-- The client SHOULD<73> compare the received ServerCapabilities (section [3.5.4.4.11](#Section_3.5.4.4.11)) with the negotiated NegotiateFlags (section 3.5.4.4.2), and if there is a difference, the session key negotiation is aborted.
+- The server SHOULD<75> return the negotiated flags for the current exchange.
+- The client SHOULD<76> compare the received ServerCapabilities (section [3.5.4.4.11](#Section_3.5.4.4.11)) with the negotiated NegotiateFlags (section 3.5.4.4.2), and if there is a difference, the session key negotiation is aborted.
 - The client calls the NetrLogonGetCapabilities method to get Requested flags by setting QueryLevel to 2 (section 3.4.5.2.11).
-- The server SHOULD<74> return the client capabilities received during a negotiation request from client.
-- The client SHOULD<75> compare the received Requested flags (section 3.5.4.4.11) with the flags it has actually sent during negotiation (section 3.5.4.4.2), and if there is a difference, the session key negotiation is aborted.
+- The server SHOULD<77> return the client capabilities received during a negotiation request from client.
+- The client SHOULD<78> compare the received Requested flags (section 3.5.4.4.11) with the flags it has actually sent during negotiation (section 3.5.4.4.2), and if there is a difference, the session key negotiation is aborted.
 - The client sets the ServerSessionInfo.LastAuthenticationTry (indexed by server name) to the current time. This prevents authentication retries from occurring for 45 seconds unless a new transport notification is received.
 In the first phase of session-key negotiation (**NetrServerReqChallenge**), the client and server exchange nonces. This allows both the client and the server to compute a session key by using the algorithm defined in section 3.1.4.3. To provide mutual authentication, both the client and the server calculate a Netlogon credential based on their own nonce, using the computed session key, and exchange them in the second phase of session-key negotiation (**NetrServerAuthenticate** or **NetrServerAuthenticate2** or **NetrServerAuthenticate3**). Because nonces are exchanged in the first phase, this allows each side to calculate the other party's Netlogon credential locally, and then compare it with the received one. If the locally computed credential matches the one supplied by the other party, this proves to the client and to the server that the respective party has access to the [**shared secret**](#gt_shared-secret).
 
@@ -6044,7 +6046,7 @@ packet-beta
   31-31: "A"
 ```
 
-Where the negotiable options SHOULD<76> be defined as the following:
+Where the negotiable options SHOULD<79> be defined as the following:
 
 | Option | Meaning |
 | --- | --- |
@@ -6239,7 +6241,7 @@ DES_ECB is the DES encryption algorithm in ECB mode ([[FIPS81]](https://go.micro
 
 All methods that require a [**secure channel**](#gt_secure-channel), except [NetrLogonSamLogonEx](#Section_3.4.5.3.2), will use Netlogon [**authenticators**](#gt_authenticator). If the Netlogon [**RPC**](#gt_remote-procedure-call-rpc) call is using Netlogon authenticators, the following steps are used to calculate the authenticator:
 
-- Each time a client sends a new request, it records the current time stamp (expressed as the number of seconds since 00:00:00 on January 1, 1970 (UTC)) in the **Timestamp** field of the ReturnAuthenticator that is a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5). The client also adds the value of this time stamp to the stored Netlogon client [**credential**](#gt_credential) and encrypts the result with the [**session key**](#gt_session-key), using the Netlogon credential computation algorithm defined in section [3.1.4.4](#Section_3.1.4.4). The result of this computation is stored in the **Credential** field of the **NETLOGON_AUTHENTICATOR** structure and is then sent to the server.
+- Each time a client sends a new request, it records the current time stamp (expressed as the number of seconds since 00:00:00 on January 1, 1970 (UTC)) in the **Timestamp** field of the ReturnAuthenticator that is a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6). The client also adds the value of this time stamp to the stored Netlogon client [**credential**](#gt_credential) and encrypts the result with the [**session key**](#gt_session-key), using the Netlogon credential computation algorithm defined in section [3.1.4.4](#Section_3.1.4.4). The result of this computation is stored in the **Credential** field of the **NETLOGON_AUTHENTICATOR** structure and is then sent to the server.
 SET TimeNow = current time;
 
 SET ClientAuthenticator.Timestamp = TimeNow;
@@ -6309,24 +6311,24 @@ To call the methods in the following set, the client and the server MUST have pe
 - NetrAccountDeltas
 - NetrAccountSync
 - NetrLogonDummyRoutine1
-The client and server follow this sequence of steps.<77>
+The client and server follow this sequence of steps.<80>
 
-- The client SHOULD<78> bind to the [**RPC**](#gt_remote-procedure-call-rpc) server using TCP/IP.
+- The client SHOULD<81> bind to the [**RPC**](#gt_remote-procedure-call-rpc) server using TCP/IP.
 The client and server MUST utilize a secure bind. If a secure bind is used, the client instructs the RPC runtime to use the Netlogon SSP ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) for privacy/integrity of the RPC messages. Clients MUST request the Privacy [**authentication level**](#gt_authentication-level).
 
 - If the call to be made uses Netlogon [**authenticators**](#gt_authenticator), the client MUST compute the Netlogon authenticator to be passed as a parameter to the RPC method, as specified in section [3.1.4.5](#Section_3.1.4.5).
 - The client calls the method on the server. If the RPC server denies access, the client attempts to re-establish the session key with the target server if the difference between the current time and value of ServerSessionInfo.LastAuthenticationTry (indexed by the name of the target server) is greater than 45 seconds.
-- If secure bind is not used or the client is using RPC Integrity instead of RPC Privacy, the server MUST deny the request unless client is in the VulnerableChannelAllowList setting.<79>
+- If secure bind is not used or the client is using RPC Integrity instead of RPC Privacy, the server MUST deny the request unless client is in the VulnerableChannelAllowList setting.<82>
 - The server MUST verify the authenticator, if used, and compute the return authenticator, as specified in section 3.1.4.5.
-- If none of the first 5 bytes of the ClientStoredCredential computation result (step 1, section 3.1.4.5) is unique, the server MUST fail session-key negotiation without further processing of the following steps.<80>
+- If none of the first 5 bytes of the ClientStoredCredential computation result (step 1, section 3.1.4.5) is unique, the server MUST fail session-key negotiation without further processing of the following steps.<83>
 - The client MUST validate the returned authenticator, if used.
-- The client MAY unbind from the server, but it SHOULD<81> reuse the binding for multiple RPC calls.
+- The client MAY unbind from the server, but it SHOULD<84> reuse the binding for multiple RPC calls.
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 Calling Methods Not Requiring Session-Key Establishment
 
 The client follows this sequence of steps:
 
-- The client SHOULD bind to the [**RPC**](#gt_remote-procedure-call-rpc) server over TCP/IP but MAY<82> use the named pipe "\PIPE\NETLOGON".
+- The client SHOULD bind to the [**RPC**](#gt_remote-procedure-call-rpc) server over TCP/IP but MAY<85> use the named pipe "\PIPE\NETLOGON".
 **Note** The TCP/IP channel cannot support impersonation for access control and is therefore unusable. The server will ignore any calls made via this channel.
 
 - The client calls the method on the server.
@@ -6363,7 +6365,7 @@ No protocol timer events are required on the client beyond the timers required i
 
 No additional local events are used on the client beyond the events maintained in the underlying [**RPC transport**](#gt_rpc-transport) and Group Policy notification.
 
-The Netlogon client and server register a local change notification callback with the Group Policy: Security Protocol Extension Client [MS-GPSB](../MS-GPSB/MS-GPSB.md). The client SHOULD<83> send Netlogon a PolicyChange event when the policy is changed.
+The Netlogon client and server register a local change notification callback with the Group Policy: Security Protocol Extension Client [MS-GPSB](../MS-GPSB/MS-GPSB.md). The client SHOULD<86> send Netlogon a PolicyChange event when the policy is changed.
 
 <a id="Section_3.2"></a>
 ## 3.2 Pass-Through Authentication Details
@@ -6482,7 +6484,7 @@ No additional local events are used on the client beyond the events maintained i
 <a id="Section_3.3"></a>
 ## 3.3 Netlogon as a Security Support Provider
 
-In addition to other functionality, Netlogon also serves as a limited private SSP<84> for use by Netlogon and [**RPC**](#gt_remote-procedure-call-rpc) ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) when encrypting and signing data during communication.<85> Central to this capability is the use of the [**session key**](#gt_session-key), as specified in section [3.1](#Section_3.1). This section specifies the behavior of the [**security provider**](#gt_security-provider) role for both client and server.
+In addition to other functionality, Netlogon also serves as a limited private SSP<87> for use by Netlogon and [**RPC**](#gt_remote-procedure-call-rpc) ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) when encrypting and signing data during communication.<88> Central to this capability is the use of the [**session key**](#gt_session-key), as specified in section [3.1](#Section_3.1). This section specifies the behavior of the [**security provider**](#gt_security-provider) role for both client and server.
 
 Netlogon implements a service that allows the RPC runtime to perform a [**security context**](#gt_security-context) negotiation between the client and the server and to use per-message calls to protect the data being passed over the network. For Netlogon to be able to perform this functionality, a session key MUST have been established between the client and the server as specified in section 3.1. Netlogon registers with the RPC runtime as a security provider with the auth_type value (as specified in [MS-RPCE] section 2.2.2.11) of 0x44.
 
@@ -6729,7 +6731,7 @@ If the Confidentiality option is not requested, then the **SealAlgorithm** MUST 
 If either of these two is incorrect, an SEC_E_MESSAGE_ALTERED (0x8009030F) MUST be returned.
 
 - The **Pad** MUST be verified to contain all 0xff bytes and SEC_E_MESSAGE_ALTERED (0x8009030F) MUST be returned otherwise.
-- The **Flags** data SHOULD<86> be disregarded.
+- The **Flags** data SHOULD<89> be disregarded.
 - The **SequenceNumber** MUST be decrypted. If AES is negotiated, then the AES-128 algorithm MUST be used with Session Key and an initialization vector constructed by concatenating the checksum with itself (thus getting 16 bytes of data). Otherwise, the RC4 algorithm MUST be used. The RC4 key MUST be derived as follows:
 SET zeroes to 4 bytes of 0
 
@@ -6760,7 +6762,7 @@ SET CopySeqNumber[7] to byte(0, ServerSequenceNumber.HighPart)
 
 Set CopySeqNumber[4] to CopySeqNumber[4] OR 0x80
 
-- The **SequenceNumber** MUST be compared to **CopySeqNumber**. If these two do not match, SEC_E_OUT_OF_SEQUENCE ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) MUST be returned.<87>
+- The **SequenceNumber** MUST be compared to **CopySeqNumber**. If these two do not match, SEC_E_OUT_OF_SEQUENCE ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) MUST be returned.<90>
 - **ServerSequenceNumber** MUST be incremented.
 If the Confidentiality option is requested, the **Confounder** and the data MUST be decrypted using RC4.
 
@@ -6908,7 +6910,7 @@ None.
 <a id="Section_3.4"></a>
 ## 3.4 Netlogon Client Details
 
-The following sections specify data and state maintained by the Netlogon [**RPC**](#gt_remote-procedure-call-rpc) client. They include details of calling Netlogon RPC methods on the client side of the client/server communication. A client in this context can be a [**domain member (member machine)**](#gt_domain-member-member-machine), a member server, or a DC. The provided data is to facilitate the explanation of how the protocol behaves. This section does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.<88>
+The following sections specify data and state maintained by the Netlogon [**RPC**](#gt_remote-procedure-call-rpc) client. They include details of calling Netlogon RPC methods on the client side of the client/server communication. A client in this context can be a [**domain member (member machine)**](#gt_domain-member-member-machine), a member server, or a DC. The provided data is to facilitate the explanation of how the protocol behaves. This section does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.<91>
 
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Abstract Data Model
@@ -6923,11 +6925,11 @@ The Netlogon Protocol client maintains the following variables in addition to th
 
 The Netlogon client variables that are registry keys are as follows:
 
-**RejectMD5Servers:** A Boolean variable that indicates whether the client SHOULD<89> reject servers that are using MD5 encryption.
+**RejectMD5Servers:** A Boolean variable that indicates whether the client SHOULD<92> reject servers that are using MD5 encryption.
 
-**RequireSignOrSeal:** Indicates whether the client SHOULD<90> continue session-key negotiation when the server did not specify support for Secure [**RPC**](#gt_remote-procedure-call-rpc) as defined in the negotiable option Y of section 3.1.4.2. This setting MUST be TRUE.
+**RequireSignOrSeal:** Indicates whether the client SHOULD<93> continue session-key negotiation when the server did not specify support for Secure [**RPC**](#gt_remote-procedure-call-rpc) as defined in the negotiable option Y of section 3.1.4.2. This setting MUST be TRUE.
 
-**RequireStrongKey:** A Boolean variable that indicates whether the client SHOULD<91><92> negotiate the use of a strong key during [**secure channel**](#gt_secure-channel) creation as defined by the negotiable option O of section 3.1.4.2.
+**RequireStrongKey:** A Boolean variable that indicates whether the client SHOULD<94><95> negotiate the use of a strong key during [**secure channel**](#gt_secure-channel) creation as defined by the negotiable option O of section 3.1.4.2.
 
 **RequestedFlags:** See section [3.1.1](#Section_3.1.1) for *RequestedFlags* details.
 
@@ -6962,7 +6964,7 @@ If the client is running on a DC, the client MUST initialize the **LocatedDCsCac
 
 - The client MUST get a trusted domain list by performing the external behavior consistent with locally invoking the LsarEnumerateTrustedDomains method ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.7.8).
 - The *EnumerationContext* parameter MUST be set to 0.
-- The *PreferredMaximumLength* parameter SHOULD<93> be set to 4096.
+- The *PreferredMaximumLength* parameter SHOULD<96> be set to 4096.
 - A policy handle is not needed locally.
 - The client MUST attempt to locate a DC (section 3.1.4.10) for each of the domain entries of the returned trusted domain list.
 - If the client fails when attempting to locate a DC for a domain entry in the trusted domain list, the client MUST ignore errors and continue to attempt to locate DCs for the remaining domain entries in the trusted domain list.
@@ -6970,13 +6972,13 @@ If the client is running on a DC, the client MUST initialize the **LocatedDCsCac
 - For each located DC, the client MUST attempt to establish a [**session key**](#gt_session-key) with the located DC (section 3.1.4.10)
 **ServerSessionInfo** MUST be empty.
 
-**ClientCapabilities** are initialized in an implementation-specific way to reflect the capabilities that are offered by that client implementation. The client sets the value according to the bit field, defined as shown in Netlogon Negotiable Options (section [3.1.4.2](#Section_3.1.4.2)). Bits C, G, I, J, K, L, O, P, R, S, T, V, W, and Y SHOULD<94> be set to 1 when a corresponding capability is supported by a given implementation. Bit U is set if the client is determined to be running on a domain controller (section [3.1.4.8](#Section_3.1.4.8)). Other bits are not used and can be set to zero, but are ignored upon receipt.
+**ClientCapabilities** are initialized in an implementation-specific way to reflect the capabilities that are offered by that client implementation. The client sets the value according to the bit field, defined as shown in Netlogon Negotiable Options (section [3.1.4.2](#Section_3.1.4.2)). Bits C, G, I, J, K, L, O, P, R, S, T, V, W, and Y SHOULD<97> be set to 1 when a corresponding capability is supported by a given implementation. Bit U is set if the client is determined to be running on a domain controller (section [3.1.4.8](#Section_3.1.4.8)). Other bits are not used and can be set to zero, but are ignored upon receipt.
 
 **RejectMD5Servers** MUST be initialized to FALSE.
 
-**RequireSignOrSeal** MUST<95> be initialized to TRUE.
+**RequireSignOrSeal** MUST<98> be initialized to TRUE.
 
-**RequireStrongKey** SHOULD<96> be initialized to FALSE.
+**RequireStrongKey** SHOULD<99> be initialized to FALSE.
 
 **domain-name** is a shared Abstract Data Model element with **DomainName.NetBIOS** in ([MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.6).
 
@@ -7014,7 +7016,7 @@ No client-specific events or rules are required.
 <a id="Section_3.4.5.1.3"></a>
 ##### 3.4.5.1.3 Calling DsrGetDcName
 
-No client-specific events or rules are required.<97>
+No client-specific events or rules are required.<100>
 
 <a id="Section_3.4.5.1.4"></a>
 ##### 3.4.5.1.4 Calling NetrGetDCName
@@ -7056,7 +7058,7 @@ The client SHOULD be prepared to handle ERROR_ACCESS_DENIED if the server determ
 
 The [**RODC**](#gt_read-only-domain-controller-rodc) client MUST do the following to call DsrUpdateReadOnlyServerDnsRecords.
 
-- Use the [**secure channel**](#gt_secure-channel) established with a [**DC**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *ServerName* parameter.<98>
+- Use the [**secure channel**](#gt_secure-channel) established with a [**DC**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *ServerName* parameter.<101>
 - Pass the client name as the *ComputerName* parameter.
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
@@ -7113,7 +7115,7 @@ The *AccountRid* parameter is not present in [NetrServerAuthenticate2](#Section_
 <a id="Section_3.4.5.2.5"></a>
 ##### 3.4.5.2.5 Calling NetrServerAuthenticate
 
-Message processing is identical to [NetrServerAuthenticate3](#Section_3.5.4.4.2),<99> as specified in section [3.4.5.2.2](#Section_3.4.5.2.2), except for the following:
+Message processing is identical to [NetrServerAuthenticate3](#Section_3.5.4.4.2),<102> as specified in section [3.4.5.2.2](#Section_3.4.5.2.2), except for the following:
 
 - The *NegotiateFlags* parameter is not present in [NetrServerAuthenticate](#Section_3.5.4.4.5).
 - The *AccountRid* parameter is not present in NetrServerAuthenticate.
@@ -7123,7 +7125,7 @@ Message processing is identical to [NetrServerAuthenticate3](#Section_3.5.4.4.2)
 The client MUST do the following:
 
 - Have a [**secure channel**](#gt_secure-channel) that is established with a [**domain controller**](#gt_domain-controller-dc) in the domain that is identified by domain-name and pass its name as the *PrimaryName* parameter.
-- Encrypt<100> the *ClearNewPassword* parameter using the negotiated encryption algorithm (determined by bits C, O, or W, respectively, in the **NegotiateFlags** member of the **ServerSessionInfo** table entry for *PrimaryName*) and the [**session key**](#gt_session-key) established as the [**encryption key**](#gt_encryption-key).
+- Encrypt<103> the *ClearNewPassword* parameter using the negotiated encryption algorithm (determined by bits C, O, or W, respectively, in the **NegotiateFlags** member of the **ServerSessionInfo** table entry for *PrimaryName*) and the [**session key**](#gt_session-key) established as the [**encryption key**](#gt_encryption-key).
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
 The *ClearNewPassword* parameter is constructed as follows, assuming a WCHAR-represented password of length X bytes.
 
@@ -7133,14 +7135,14 @@ If the password is for an interdomain account:
 - An **NL_PASSWORD_VERSION** structure as specified in section [2.2.1.3.8](#Section_2.2.1.3.8), is prepared. The **PasswordVersionNumber** field of the structure is set to the value of the [TrustPasswordVersion](#Section_3.1.1) variable corresponding to the password being set. The first trust password generated has **TrustPasswordVersion** equal to one. Each time a new trust password is generated, its **TrustPasswordVersion** is computed by adding one to the value of **TrustPasswordVersion** of the previous password. The **NL_PASSWORD_VERSION** structure is copied into ClearNewPassword.Buffer starting at byte offset (512 - X - size of (**NL_PASSWORD_VERSION**)).
 - The first (512 - X) - size of (**NL_PASSWORD_VERSION**) bytes of ClearNewPassword.Buffer are filled with randomly generated data.
 - ClearNewPassword.Length is set to X.
-For any other type of account:<101>
+For any other type of account:<104>
 
 - The password is copied into the **Buffer** field of *ClearNewPassword*, which is treated as an array of bytes, starting at byte offset (512 - X).
 - The first (512 - X) bytes are filled with randomly generated data.
 - ClearNewPassword.Length is set to X.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<102> re-establish the secure channel with the domain controller.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<105> re-establish the secure channel with the domain controller.
 
 <a id="Section_3.4.5.2.7"></a>
 ##### 3.4.5.2.7 Calling NetrServerPasswordSet
@@ -7155,7 +7157,7 @@ The client MUST do the following:
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<103> re-establish the secure channel with the domain controller.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<106> re-establish the secure channel with the domain controller.
 
 <a id="Section_3.4.5.2.8"></a>
 ##### 3.4.5.2.8 Calling NetrServerPasswordGet
@@ -7168,7 +7170,7 @@ The client MUST decrypt the *EncryptedNtOwfPassword* return parameter that was e
 
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<104> reestablish the secure channel with the domain controller.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<107> reestablish the secure channel with the domain controller.
 
 <a id="Section_3.4.5.2.9"></a>
 ##### 3.4.5.2.9 Calling NetrServerTrustPasswordsGet
@@ -7187,22 +7189,22 @@ The client MUST do the following:
 - Pass the *Level* parameter set to 1 or 2.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<105> re-establish the secure channel with the domain controller.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<108> re-establish the secure channel with the domain controller.
 
 <a id="Section_3.4.5.2.11"></a>
 ##### 3.4.5.2.11 Calling NetrLogonGetCapabilities
 
-The client SHOULD<106> do the following:
+The client SHOULD<109> do the following:
 
 - Have a [**secure channel**](#gt_secure-channel) established with a [**domain controller**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *ServerName* parameter.
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
-After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5) and compares the received **Capabilities** with the negotiated flags of the current secure channel. If the negotiated flags and the requested flags do not match, then the client SHOULD<107> re-establish the secure channel with the DC.
+After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5) and compares the received **Capabilities** with the negotiated flags of the current secure channel. If the negotiated flags and the requested flags do not match, then the client SHOULD<110> re-establish the secure channel with the DC.
 
-On successful comparison of received Capabilities with negotiated flags, client also compares the capabilities sent in the negotiate request with the flags received by the server. If the negotiated flags and requested flags do not match, then the client SHOULD<108> re-establish the secure channel with the DC.
+On successful comparison of received Capabilities with negotiated flags, client also compares the capabilities sent in the negotiate request with the flags received by the server. If the negotiated flags and requested flags do not match, then the client SHOULD<111> re-establish the secure channel with the DC.
 
-Upon receiving STATUS_NOT_IMPLEMENTED, the client MUST treat this as successful confirmation that the DC does not support [**AES**](#gt_advanced-encryption-standard-aes) [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870).<109>
+Upon receiving STATUS_NOT_IMPLEMENTED, the client MUST treat this as successful confirmation that the DC does not support [**AES**](#gt_advanced-encryption-standard-aes) [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870).<112>
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<110> re-establish the secure channel with the DC.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<113> re-establish the secure channel with the DC.
 
 <a id="Section_3.4.5.2.12"></a>
 ##### 3.4.5.2.12 Calling NetrChainSetClientAttributes
@@ -7217,7 +7219,7 @@ The [**read-only domain controller**](#gt_read-only-domain-controller-rodc) MUST
 - Pass the address of a valid NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES_V1 structure as the *pmsgOut* parameter.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<111> reestablish the secure channel with the normal (writable) DC.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<114> reestablish the secure channel with the normal (writable) DC.
 
 <a id="Section_3.4.5.3"></a>
 #### 3.4.5.3 Pass-Through Authentication Methods
@@ -7245,9 +7247,9 @@ The client MUST do the following:
 
 - Have a [**secure channel**](#gt_secure-channel) established with a [**domain controller**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *LogonServer* parameter.
 - Pass the client name as the *ComputerName* parameter.
-- If the *LogonLevel* is [NetlogonInteractiveInformation](#Section_2.2.1.4.16) or NetlogonInteractiveTransitiveInformation, the client SHOULD<112> encrypt the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_INTERACTIVE_INFO](#Section_2.2.1.4.3) structure.
-- If the *LogonLevel* is NetlogonServiceInformation or NetlogonServiceTransitiveInformation, encrypt<113> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_SERVICE_INFO](#Section_2.2.1.4.4) structure.
-- If the *LogonLevel* is NetlogonGenericInformation, then encrypt<114> the **LogonData** member in the [NETLOGON_GENERIC_INFO](#Section_2.2.1.4.2) structure.
+- If the *LogonLevel* is [NetlogonInteractiveInformation](#Section_2.2.1.4.16) or NetlogonInteractiveTransitiveInformation, the client SHOULD<115> encrypt the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_INTERACTIVE_INFO](#Section_2.2.1.4.3) structure.
+- If the *LogonLevel* is NetlogonServiceInformation or NetlogonServiceTransitiveInformation, encrypt<116> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_SERVICE_INFO](#Section_2.2.1.4.4) structure.
+- If the *LogonLevel* is NetlogonGenericInformation, then encrypt<117> the **LogonData** member in the [NETLOGON_GENERIC_INFO](#Section_2.2.1.4.2) structure.
 - Call the method using Secure [**RPC**](#gt_remote-procedure-call-rpc), as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.1.5.2.1.
 If the *NegotiateFlags* bit V is not set, then the [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) does not set *ExtraFlags* C or D.
 
@@ -7266,7 +7268,7 @@ After the method returns, the client MUST:
 
 - If the *LogonLevel* is **NetlogonNetworkInformation** or **NetlogonNetworkTransitiveInformation**, the client MUST decrypt the *UserSessionKey* and the first two elements of the **ExpansionRoom** array in the NETLOGON_VALIDATION_SAM_INFO (section 2.2.1.4.11) or in the [NETLOGON_VALIDATION_SAM_INFO2 (section 2.2.1.4.12)](#Section_2.2.1.4.12) structure.
 - Verify that it received an [**authoritative response**](#gt_authoritative-response) by checking the *Authoritative* parameter. If the *Authoritative* parameter is TRUE, the client MUST treat the result as final. If the *Authoritative* parameter is FALSE, the client retries the call at a later time or at a different domain controller.
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<115> re-establish the secure channel with the DC.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<118> re-establish the secure channel with the DC.
 
 <a id="Section_3.4.5.3.3"></a>
 ##### 3.4.5.3.3 Calling NetrLogonSamLogonWithFlags
@@ -7283,7 +7285,7 @@ The client MUST do the following:
 
 - Have a [**secure channel**](#gt_secure-channel) established with a [**domain controller**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *LogonServer* parameter.
 - Pass the client name as the *ComputerName* parameter.
-- If the *LogonLevel* is [NetlogonInteractiveInformation](#Section_2.2.1.4.16) or NetlogonInteractiveTransitiveInformation, then encrypt<116> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_INTERACTIVE_INFO](#Section_2.2.1.4.3) structure.
+- If the *LogonLevel* is [NetlogonInteractiveInformation](#Section_2.2.1.4.16) or NetlogonInteractiveTransitiveInformation, then encrypt<119> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_INTERACTIVE_INFO](#Section_2.2.1.4.3) structure.
 - If the *LogonLevel* is NetlogonServiceInformation or NetlogonServiceTransitiveInformation, then encrypt the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_SERVICE_INFO](#Section_2.2.1.4.4) structure.
 - If the *LogonLevel* is NetlogonGenericInformation, then encrypt the **LogonData** member in the [NETLOGON_GENERIC_INFO](#Section_2.2.1.4.2) structure.
 - If the *LogonLevel* is **NetlogonNetworkInformation** or **NetlogonNetworkTransitiveInformation**, then encrypt the *UserSessionKey* and the first two elements of the **ExpansionRoom** array in the [NETLOGON_VALIDATION_SAM_INFO (section 2.2.1.4.11)](#Section_2.2.1.4.11) or in the [NETLOGON_VALIDATION_SAM_INFO2 (section 2.2.1.4.12)](#Section_2.2.1.4.12) structure.
@@ -7303,7 +7305,7 @@ After the method returns, the client MUST:
 
 - Verify the *ReturnAuthenticator*, as specified in section [3.1.4.5](#Section_3.1.4.5).
 - Verify that it received an [**authoritative response**](#gt_authoritative-response) by checking the *Authoritative* parameter. If the *Authoritative* parameter is TRUE, the client MUST treat the result as final. If the *Authoritative* parameter is FALSE, the client retries the call at a later time or at a different domain controller.
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<117> reestablish the secure channel with the DC.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<120> reestablish the secure channel with the DC.
 
 <a id="Section_3.4.5.3.5"></a>
 ##### 3.4.5.3.5 Calling NetrLogonSamLogoff
@@ -7315,7 +7317,7 @@ The client MUST do the following:
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
 After the method returns, the client MUST verify the *ReturnAuthenticator* as specified in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<118> reestablish the secure channel with the DC.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<121> reestablish the secure channel with the DC.
 
 <a id="Section_3.4.5.4"></a>
 #### 3.4.5.4 Account Database Replication Methods
@@ -7336,12 +7338,12 @@ The client calling this method MUST be a [**backup domain controller (BDC)**](#g
 - Pass the preferred maximum length of data to be returned in the DeltaArray parameter as the *PreferredMaximumLength* parameter.
 On receiving the STATUS_MORE_ENTRIES status code, the client continues calling this routine in a loop updating DomainModifiedCount until all missing database entries are received. On receiving the STATUS_SUCCESS status code, the client terminates the loop. The client MAY terminate the loop early without receiving all entries. For example, if the client chooses to do so on a system shutdown notification.
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<119> reestablish the [**secure channel**](#gt_secure-channel) with the [**domain controller**](#gt_domain-controller-dc).
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<122> reestablish the [**secure channel**](#gt_secure-channel) with the [**domain controller**](#gt_domain-controller-dc).
 
 <a id="Section_3.4.5.4.2"></a>
 ##### 3.4.5.4.2 Calling NetrDatabaseSync2
 
-The client calling this method MUST be a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc). The client SHOULD<120> call this method in a loop (referred to in this section as the synchronization loop) until all [**database**](#gt_database) records are received as indicated by the return code STATUS_SUCCESS.
+The client calling this method MUST be a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc). The client SHOULD<123> call this method in a loop (referred to in this section as the synchronization loop) until all [**database**](#gt_database) records are received as indicated by the return code STATUS_SUCCESS.
 
 The client MUST do the following:
 
@@ -7360,9 +7362,9 @@ The client MUST do the following:
 - AliasMemberState if the last delta type of the previous synchronization loop was ChangeAliasMembership.
 - If this is a first call in a synchronization loop, pass *SyncContext* as 0x00000000. Otherwise, pass *SyncContext* as the *SyncContext* value returned by the previous call in a synchronization loop, either continued as normal or terminated.
 - Pass the preferred maximum length of data to be referenced in the *DeltaArray* parameter as the *PreferredMaximumLength* parameter.
-On receiving the STATUS_MORE_ENTRIES status code, the client SHOULD<121> continue calling this routine in a loop until all missing database entries are received. On receiving the STATUS_SUCCESS status code, the client MUST terminate the loop. The client MAY terminate the loop early on without receiving all entries. For example, if the client chooses to do so on a system shutdown notification. In that case, if the client intends to restart the synchronization loop at a later point, the client MUST maintain the state for setting the *RestartState* parameter to restart the loop as previously described.
+On receiving the STATUS_MORE_ENTRIES status code, the client SHOULD<124> continue calling this routine in a loop until all missing database entries are received. On receiving the STATUS_SUCCESS status code, the client MUST terminate the loop. The client MAY terminate the loop early on without receiving all entries. For example, if the client chooses to do so on a system shutdown notification. In that case, if the client intends to restart the synchronization loop at a later point, the client MUST maintain the state for setting the *RestartState* parameter to restart the loop as previously described.
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<122> re-establish the secure channel with the [**domain controller**](#gt_domain-controller-dc).
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<125> re-establish the secure channel with the [**domain controller**](#gt_domain-controller-dc).
 
 <a id="Section_3.4.5.4.3"></a>
 ##### 3.4.5.4.3 Calling NetrDatabaseSync
@@ -7379,7 +7381,7 @@ The client calling this method MUST be a [**backup domain controller (BDC)**](#g
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
 - Pass a valid single account object information request message as defined in the CHANGELOG_ENTRY structure in section [3.5.4.6.4](#Section_3.5.4.6.4).
 - Pass the size of the single account object information request message as the *ChangeLogEntrySize* parameter.
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<123> reestablish the [**secure channel**](#gt_secure-channel) with the [**domain controller**](#gt_domain-controller-dc).
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<126> reestablish the [**secure channel**](#gt_secure-channel) with the [**domain controller**](#gt_domain-controller-dc).
 
 <a id="Section_3.4.5.5"></a>
 #### 3.4.5.5 Domain Trusts Methods
@@ -7410,7 +7412,7 @@ The client MUST do the following:
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<124> reestablish the secure channel with the domain controller.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<127> reestablish the secure channel with the domain controller.
 
 <a id="Section_3.4.5.5.5"></a>
 ##### 3.4.5.5.5 Calling DsrGetForestTrustInformation
@@ -7425,7 +7427,7 @@ The client MUST do the following:
 - Have a [**secure channel**](#gt_secure-channel) established with a [**domain controller**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *TrustedDcName* parameter.
 After the method returns, the client MUST verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
-On receiving STATUS_ACCESS_DENIED, the client SHOULD<125> reestablish the secure channel with the domain controller.
+On receiving STATUS_ACCESS_DENIED, the client SHOULD<128> reestablish the secure channel with the domain controller.
 
 <a id="Section_3.4.5.6"></a>
 #### 3.4.5.6 Message Protection Methods
@@ -7453,7 +7455,7 @@ The client calling this method MUST be a [**backup domain controller (BDC)**](#g
 - Have a [**secure channel**](#gt_secure-channel) established with a [**domain controller**](#gt_domain-controller-dc) in the domain identified by domain-name and pass its name as the *PrimaryName* parameter.
 - Encrypt the *OpaqueBuffer* parameter using the negotiated encryption algorithm (determined by bits C, O, or W, respectively, in the **NegotiateFlags** member of the **ServerSessionInfo** table entry for *PrimaryName*) and the [**session key**](#gt_session-key) established as the [**encryption key**](#gt_encryption-key).
 - Pass a valid client Netlogon [**authenticator**](#gt_authenticator) as the *Authenticator* parameter.
-After the method returns, the client SHOULD<126> verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
+After the method returns, the client SHOULD<129> verify the ReturnAuthenticator, as defined in section [3.1.4.5](#Section_3.1.4.5).
 
 For details about how the *OpaqueBuffer* parameter is used, see [MS-SAMS](../MS-SAMS/MS-SAMS.md).
 
@@ -7530,7 +7532,7 @@ This event occurs whenever the domainControllerCacheTimer expires.
 If the client is a [**domain controller (DC)**](#gt_domain-controller-dc), the client MUST get a [**trusted**](#gt_trust) [**domain**](#gt_domain) list by performing the external behavior consistent with locally invoking LsarEnumerateTrustedDomains ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.7.8).
 
 - The *EnumerationContext* parameter MUST be set to 0.
-- The *PreferredMaximumLength* SHOULD<127> be set to 4096.
+- The *PreferredMaximumLength* SHOULD<130> be set to 4096.
 - A policy handle is not needed locally.
 The client MUST attempt to locate a DC (section [3.1.4.10](#Section_3.1.4.10)) for each of the domain entries of the returned trusted domain list.
 
@@ -7541,7 +7543,7 @@ The client MUST attempt to locate a DC (section [3.1.4.10](#Section_3.1.4.10)) f
 
 No additional local events are used on the client beyond the events maintained in the underlying [**RPC transport**](#gt_rpc-transport) and GP notification.
 
-When Netlogon receives a PolicyChange event ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2), NRPC implementations that persistently store and retrieve the **RequireStrongKey** and **RequireSignOrSeal** variables as defined in section [3.4.1](#Section_3.4.1) SHOULD<128> load the new value.
+When Netlogon receives a PolicyChange event ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2), NRPC implementations that persistently store and retrieve the **RequireStrongKey** and **RequireSignOrSeal** variables as defined in section [3.4.1](#Section_3.4.1) SHOULD<131> load the new value.
 
 <a id="Section_3.5"></a>
 ## 3.5 Netlogon Server Details
@@ -7575,7 +7577,7 @@ A Netlogon Remote Protocol server maintains the following abstract variables in 
 
 **DynamicSiteName:** Dynamically determined site name of the computer.
 
-**DynamicSiteNameTimeout:** An implementation-specific time span that determines whether it SHOULD<129> be time to rediscover the site name.
+**DynamicSiteNameTimeout:** An implementation-specific time span that determines whether it SHOULD<132> be time to rediscover the site name.
 
 **DynamicSiteNameSetTime:** An implementation-specific timestamp indicating the time at which DynamicSiteName was determined.
 
@@ -7595,7 +7597,7 @@ A Netlogon Remote Protocol server maintains the following abstract variables in 
 
 The Netlogon server variables which are registry keys are as follows:
 
-**RejectMD5Clients:** A Boolean variable that indicates whether the server SHOULD<130> reject incoming clients that are using MD5 encryption.
+**RejectMD5Clients:** A Boolean variable that indicates whether the server SHOULD<133> reject incoming clients that are using MD5 encryption.
 
 **SignSecureChannel:** A Boolean variable that determines whether a [**domain member**](#gt_domain-member-member-machine) attempts to negotiate signing for all secure channel traffic that it initiates. This setting is deprecated, as SealSecureChannel MUST be TRUE.
 
@@ -7609,11 +7611,11 @@ When the server is a DC, it also maintains the following abstract variables:
 
 **LogonAttempts:** A 32-bit unsigned integer shared from LogonAttempts ([MS-APDS](../MS-APDS/MS-APDS.md) section 3.1.1).
 
-**NT4Emulator:** A Boolean variable that indicates whether the server offers only server capabilities of a the client specifically requests otherwise.<131>
+**NT4Emulator:** A Boolean variable that indicates whether the server offers only server capabilities of a the client specifically requests otherwise.<134>
 
 **RefusePasswordChange:** Indicates whether the server refuses client password changes. This domain-wide setting indicates to client machines to avoid password changes. When TRUE, the *NegotiateFlags* bit I is sent.
 
-**DCRPCPort:** The domain controller Netlogon port that SHOULD<132> be registered with the [**RPC**](#gt_remote-procedure-call-rpc) [**endpoint**](#gt_endpoint) mapper instead of the standard dynamic port. It is read only once, at initialization.
+**DCRPCPort:** The domain controller Netlogon port that SHOULD<135> be registered with the [**RPC**](#gt_remote-procedure-call-rpc) [**endpoint**](#gt_endpoint) mapper instead of the standard dynamic port. It is read only once, at initialization.
 
 **SiteCoverage:** The names of all the sites that a domain controller covers.
 
@@ -7691,7 +7693,7 @@ None.
 <a id="Section_3.5.3"></a>
 ### 3.5.3 Initialization
 
-The server side registers an [**endpoint**](#gt_endpoint) with [**RPC**](#gt_remote-procedure-call-rpc) over named pipes transport, using the NETLOGON named pipe<133> and an endpoint with RPC over TCP/IP. When DCRPCPort is present and is not NULL, and the [**server**](#gt_server) is a [**domain controller**](#gt_domain-controller-dc), then the DC MUST also register the port listed in DCRPCPort ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.3.1.4). The server side MUST register the Netlogon [**security support provider (SSP)**](#gt_security-support-provider-ssp) authentication_type constant [0x44] as the [**security provider**](#gt_security-provider) ([MS-RPCE] section 3.3.3.3.1.3) used by the RPC interface.
+The server side registers an [**endpoint**](#gt_endpoint) with [**RPC**](#gt_remote-procedure-call-rpc) over named pipes transport, using the NETLOGON named pipe<136> and an endpoint with RPC over TCP/IP. When DCRPCPort is present and is not NULL, and the [**server**](#gt_server) is a [**domain controller**](#gt_domain-controller-dc), then the DC MUST also register the port listed in DCRPCPort ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.3.1.4). The server side MUST register the Netlogon [**security support provider (SSP)**](#gt_security-support-provider-ssp) authentication_type constant [0x44] as the [**security provider**](#gt_security-provider) ([MS-RPCE] section 3.3.3.3.1.3) used by the RPC interface.
 
 **NetlogonSecurityDescriptor**: Initialized to the following value, expressed in Security Descriptor Description Language (SDDL) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.1): D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU) S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)
 
@@ -7703,13 +7705,13 @@ The server side registers an [**endpoint**](#gt_endpoint) with [**RPC**](#gt_rem
 
 The **ServerCapabilities** field is initialized to reflect the capabilities offered by that server implementation.
 
-**RejectMD5Clients** SHOULD<134> be initialized in an implementation-specific way and set to TRUE.
+**RejectMD5Clients** SHOULD<137> be initialized in an implementation-specific way and set to TRUE.
 
 **SealSecureChannel** MUST be TRUE.
 
-**SignSecureChannel** SHOULD<135> be initialized in an implementation-specific way and set to TRUE. Any changes made to the **SignSecureChannel** registry keys are reflected in the ADM elements when a PolicyChange event is received (section [3.1.6](#Section_3.1.6)). This setting is deprecated, as **SealSecureChannel** MUST be true.
+**SignSecureChannel** SHOULD<138> be initialized in an implementation-specific way and set to TRUE. Any changes made to the **SignSecureChannel** registry keys are reflected in the ADM elements when a PolicyChange event is received (section [3.1.6](#Section_3.1.6)). This setting is deprecated, as **SealSecureChannel** MUST be true.
 
-**StrongKeySupport** SHOULD<136> be TRUE.
+**StrongKeySupport** SHOULD<139> be TRUE.
 
 **NetbiosDomainName** is a shared ADM element with **DomainName.NetBIOS** ([MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.6).
 
@@ -7717,31 +7719,31 @@ The **ServerCapabilities** field is initialized to reflect the capabilities offe
 
 **DomainSid**: Prior to the initialization of the Netlogon Remote Protocol, **DomainSid** has already been initialized, as specified in [MS-WKST] section 3.2.1.6, since Netlogon Remote Protocol is running on a system already joined to a domain.
 
-**AllowSingleLabelDNSDomain** SHOULD<137> be set to a locally configured value.
+**AllowSingleLabelDNSDomain** SHOULD<140> be set to a locally configured value.
 
-**AllowDnsSuffixSearch** SHOULD<138> be set to TRUE.
+**AllowDnsSuffixSearch** SHOULD<141> be set to TRUE.
 
-**SiteName** SHOULD<139> be initialized from msDS-SiteName ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.4.5.29) of the [**computer object**](#gt_computer-object) if the server is a DC. If the server is not a DC, this ADM element is set to a locally configured value.
+**SiteName** SHOULD<142> be initialized from msDS-SiteName ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.4.5.29) of the [**computer object**](#gt_computer-object) if the server is a DC. If the server is not a DC, this ADM element is set to a locally configured value.
 
 **NextClosestSiteName** Initialized as follows: If the server is a DC, the server invokes IDL_DRSQuerySitesByCost ([MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.16), setting **NextClosestSiteName** to the [**site**](#gt_site) that is closest to **SiteName** but not equal to **SiteName**. If the server is not a DC, this ADM element is initialized to NULL.
 
 **DynamicSiteNameSetTime** MUST be set to a value such that **DynamicSiteNameSetTime** plus **DynamicSiteNameTimeout** is less than the current time.
 
-**FailedDiscoveryCachePeriod** SHOULD<140> be set to a locally configured value.
+**FailedDiscoveryCachePeriod** SHOULD<143> be set to a locally configured value.
 
-**CacheEntryValidityPeriod** SHOULD<141> be set to a locally configured value.
+**CacheEntryValidityPeriod** SHOULD<144> be set to a locally configured value.
 
-**CacheEntryPingValidityPeriod** SHOULD<142> be set to a locally configured value.
+**CacheEntryPingValidityPeriod** SHOULD<145> be set to a locally configured value.
 
 If the NRPC server is a DC, then the following abstract data model variables are initialized:
 
-- **DCRPCPort** SHOULD<143> be initialized in an implementation-specific way and MUST default to NULL.
+- **DCRPCPort** SHOULD<146> be initialized in an implementation-specific way and MUST default to NULL.
 - **DnsForestName** is initialized from the [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of **rootDomainNamingContext** ([MS-ADTS] section 3.1.1.3.2.16).
 - The objects in **TrustedDomainObjectsCollection** are initialized as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.5.
 - The **NT4Emulator** field is set to FALSE.
-- **RejectDES** SHOULD<144> be initialized in an implementation-specific way and SHOULD<145> default to TRUE.
+- **RejectDES** SHOULD<147> be initialized in an implementation-specific way and SHOULD<148> default to TRUE.
 - **ServerServiceBits** is initialized to zero.
-- **SiteCoverage** is initialized in an implementation-specific way and MUST default to NULL. Implementations SHOULD<146> persistently store and retrieve the **SiteCoverage** variable.
+- **SiteCoverage** is initialized in an implementation-specific way and MUST default to NULL. Implementations SHOULD<149> persistently store and retrieve the **SiteCoverage** variable.
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Message Processing Events and Sequencing Rules
 
@@ -7807,7 +7809,7 @@ Methods in RPC Opnum Order
 | [NetrChainSetClientAttributes](#Section_3.5.4.4.12) | When a read-only DC receives either the NetrServerAuthenticate3 method or the NetrLogonGetDomainInfo method, with updates requested, it invokes this method on a normal (writable) DC to update to a client's computer account object in [**Active Directory**](#gt_active-directory). Opnum: 49 |
 | [NetrServerAuthenticateKerberos](#Section_3.4.5.2.3) | This method extends NetrServerAuthenticate3 to use Kerberos as the security support provider to establish the secure channel. Opnum: 59 |
 
-**Note** that gaps in the [**opnum**](#gt_opnum) numbering sequence represent opnums that SHOULD NOT<147> be used over the wire.
+**Note** that gaps in the [**opnum**](#gt_opnum) numbering sequence represent opnums that SHOULD NOT<150> be used over the wire.
 
 All methods MUST NOT throw an exception.
 
@@ -7867,7 +7869,7 @@ Methods in this [**group**](#gt_group) are used to locate a [**domain controller
 <a id="Section_3.5.4.3.1"></a>
 ##### 3.5.4.3.1 DsrGetDcNameEx2 (Opnum 34)
 
-The **DsrGetDcNameEx2** method SHOULD<148> return information about a [**domain controller (DC)**](#gt_domain-controller-dc) in the specified domain and site. If the *AccountName* parameter is not NULL, and a DC matching the requested capabilities (as defined in the *Flags* parameter) responds during this method call, then that DC will have verified that the DC account database contains an account for the *AccountName* specified. The server that receives this call is not required to be a DC.
+The **DsrGetDcNameEx2** method SHOULD<151> return information about a [**domain controller (DC)**](#gt_domain-controller-dc) in the specified domain and site. If the *AccountName* parameter is not NULL, and a DC matching the requested capabilities (as defined in the *Flags* parameter) responds during this method call, then that DC will have verified that the DC account database contains an account for the *AccountName* specified. The server that receives this call is not required to be a DC.
 
 NET_API_STATUS DsrGetDcNameEx2(
 
@@ -7940,7 +7942,7 @@ Where the bits are defined as:
 | C | Interdomain [**trust**](#gt_trust) account. |
 | D | Computer account for a [**domain member**](#gt_domain-member-member-machine). |
 | E | Computer account for a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc). |
-| F | Computer account for a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc).<149> |
+| F | Computer account for a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc).<152> |
 
 All other bits MUST be set to zero and MUST be ignored on receipt.
 
@@ -7959,9 +7961,9 @@ packet-beta
   2-2: "0"
   3-3: "0"
   4-4: "0"
-  5-5: "0"
-  6-6: "0"
-  7-7: "0"
+  5-5: "Z"
+  6-6: "Y"
+  7-7: "X"
   8-8: "W"
   9-9: "V"
   10-10: "U"
@@ -8007,7 +8009,7 @@ Where the bits are defined as:
 | M | The server returns an LDAP server. The server MAY return a DC. |
 | N | Specifies that the *DomainName* parameter is a [**NetBIOS name**](#gt_netbios-name). |
 | O | Specifies that the *DomainName* parameter is a [**DNS**](#gt_domain-name-system-dns) name. |
-| P | The server attempts to find a DC in the next closest site if a DC in the closest site is not available. If a DC in the next closest site is also not available, the server returns any available DC.<150> |
+| P | The server attempts to find a DC in the next closest site if a DC in the closest site is not available. If a DC in the next closest site is also not available, the server returns any available DC.<153> |
 | Q | The server returns a DC that has a DC functional level of DS_BEHAVIOR_WIN2008 or greater, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.4.2. |
 | R | Specifies that the names returned in the **DomainControllerName** and **DomainName** fields of *DomainControllerInfo* are DNS names. |
 | S | Specifies that the names returned in the **DomainControllerName** and **DomainName** fields of *DomainControllerInfo* are NetBIOS names. |
@@ -8015,6 +8017,9 @@ Where the bits are defined as:
 | U | The server returns a DC that has a DC functional level of DS_BEHAVIOR_WIN2012 or greater, as specified in [MS-ADTS] section 6.1.4.2. |
 | V | The server returns a DC that has a DC functional level of DS_BEHAVIOR_WIN2012R2 or greater, as specified in [MS-ADTS] section 6.1.4.2. |
 | W | The server returns a DC that has a DC functional level of DS_BEHAVIOR_WIN2016 or greater, as specified in [MS-ADTS] section 6.1.4.2. |
+| X | The server returns a DC (DS_KEY_LIST_SUPPORT_REQUIRED (0x01000000)) that supports key list requests, as specified in [MS-KILE](../MS-KILE/MS-KILE.md) section 2.2.11.<154> If the X bit in Flags is set, the H bit MUST also be set, otherwise the server MUST return ERROR_INVALID_FLAGS. If the X bit in Flags is set, the server MUST return a DC that supports key list requests. To determine if a domain controller meets this requirement, the server MUST check the value of the key-list-support bit in the Flags field of the message, as defined in [MS-ADTS] section 6.3.1.2. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN. |
+| Y | The server returns a DC (DS_DIRECTORY_SERVICE_13_REQUIRED (0x02000000)) that has a DC functional level of DS_BEHAVIOR_WIN2025 or greater, as specified in [MS-ADTS] section 6.1.4.2.<155> If the Y bit in Flags is set, the server MUST return a DC that has a functional level of DS_BEHAVIOR_WIN2025 or greater. To determine the functional level of a DC, the server MUST locate the nTDSDSA object in the directory and verify the msDS-Behavior-Version attribute, as specified in [MS-ADTS] section 6.1.4.2. |
+| Z | The server returns a DC (DS_DIRECTORY_SERVICE_12_REQUIRED (0x04000000)) that has a DC functional level specified in [MS-ADTS] section 6.1.4.2.<156> |
 
 All other bits MUST be set to zero. The server MUST return ERROR_INVALID_FLAGS if any of the unspecified bits are not zero.
 
@@ -8022,14 +8027,14 @@ All other bits MUST be set to zero. The server MUST return ERROR_INVALID_FLAGS i
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<151> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<157> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
 On receiving this call, the server MUST perform the following *Flags* parameter validations:
 
 - Flags D, E, and H MUST NOT be combined with each other.
 - Flag N MUST NOT be combined with the O flag.
 - Flag R MUST NOT be combined with the S flag.
-- Flags B, Q, U, V, and W MUST NOT be combined with each other.
+- Flags B, Q, U, V, W, Y, and Z MUST NOT be combined with each other.
 - Flag K MUST NOT be combined with any of the flags: B, C, D, E, or H.
 - Flag P MUST NOT be set when the SiteName parameter is provided.
 The server MUST return ERROR_INVALID_FLAGS for any of the previously mentioned conflicting combinations.
@@ -8046,7 +8051,7 @@ If the A bit in *Flags* is not set, then the server attempts to use the **Locate
 - If there is an entry for the requested domain in **LocatedDCsCache**, but its capabilities do not include the requested capabilities, then invalidate the cached entry and attempt to locate a DC as follows.
 - If the delta between the current time and the creation time for the entry in **LocatedDCsCache** is greater than the **CacheEntryValidityPeriod** and the F bit in the *Flags* is not set, then invalidate the cached entry and attempt to locate a DC as follows.
 - If the difference between the current time and the refresh time for the entry in **LocatedDCsCache** is greater than **CacheEntryPingValidityPeriod**, then the server MUST send a ping message to the DC prior to returning the value. The ping mechanism to be used, whether LDAP Ping ([MS-ADTS] section 6.3.3) or Mailslot Ping ([MS-ADTS] section 6.3.5), is determined based on the N and O bit settings in the *Flags*, as follows. If a ping of the DC fails, then it MUST invalidate the cache entry and attempt to locate a DC as follows. Otherwise update the refresh time and return the cached result.
-The server MUST attempt to locate a domain controller for the domain specified by the client. The server SHOULD<152> implement alternate means of locating a DC: for example, a static list in a file, or the two methods detailed in [MS-ADTS] section 6.3.6.
+The server MUST attempt to locate a domain controller for the domain specified by the client. The server SHOULD<158> implement alternate means of locating a DC: for example, a static list in a file, or the two methods detailed in [MS-ADTS] section 6.3.6.
 
 If the *ComputerName* parameter is not NULL, it is compared against the server's [**computer name**](#gt_computer-name). If the server is not a DC (section [3.1.4.8](#Section_3.1.4.8)) and the *ComputerName* parameter does not match the server's computer name, the server MUST return STATUS_INVALID_COMPUTER_NAME. If the *ComputerName* parameter matches the server's computer name, the *ComputerName* parameter is NULL, or the server is a DC, then processing proceeds.
 
@@ -8106,9 +8111,9 @@ If the *AccountName* parameter is specified, the server MUST perform the followi
 - The **AllowableAccountControlBits** field of the message is mapped from the *AllowableAccountControlBits* parameter, according to the table in [MS-SAMR] section 3.1.5.14.2, where the "ProtocolUserAccountControl" column defines the **AAC** field while the "DatabaseUserAccountControl" column defines the *AllowableAccountControlBits*.
 LDAP/Mailslot ping responses from the candidate DCs are processed (in the order in which they are received) along with the flags to determine if the server queried meets all of the requirements, until a server that meets the requirements is found or an implementation-specific timeout is reached.
 
-If the B bit in the *Flags* is set, the server SHOULD<153> return a DC that supports directory service functions. To determine if a domain controller meets this requirement, the server MUST check the value of the **NETLOGON_SAM_LOGON_RESPONSE.NtVersion** field in the message and ensure that NETLOGON_NT_VERSION_5 or greater is specified. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
+If the B bit in the *Flags* is set, the server SHOULD<159> return a DC that supports directory service functions. To determine if a domain controller meets this requirement, the server MUST check the value of the **NETLOGON_SAM_LOGON_RESPONSE.NtVersion** field in the message and ensure that NETLOGON_NT_VERSION_5 or greater is specified. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
 
-If the C bit in the *Flags* is set, the service MUST first attempt to find a DC that supports directory service functions.<154> To determine if a domain controller meets this requirement, the server MUST check the value of the **NETLOGON_SAM_LOGON_RESPONSE.NtVersion** field in the message and ensure that NETLOGON_NT_VERSION_5 or greater is specified. If a DC that supports the directory service functions is not available, the server MUST return the name of a non–directory service DC.
+If the C bit in the *Flags* is set, the service MUST first attempt to find a DC that supports directory service functions.<160> To determine if a domain controller meets this requirement, the server MUST check the value of the **NETLOGON_SAM_LOGON_RESPONSE.NtVersion** field in the message and ensure that NETLOGON_NT_VERSION_5 or greater is specified. If a DC that supports the directory service functions is not available, the server MUST return the name of a non–directory service DC.
 
 If the D bit in the Flags is set, the server MUST return a DC that is a global catalog server for the forest of domains. To determine if a domain controller is a global catalog server, the server MUST check the value of the FG bit in the *Flags* field of the message as defined in [MS-ADTS] section 6.3.1.2.
 
@@ -8120,17 +8125,17 @@ If the H bit in the *Flags* is set, the server MUST return a DC that is currentl
 
 If the I bit in the *Flags* is set, then the server MUST return a DC that is currently running W32Time. To determine if a domain controller is currently running an [MS-SNTP](../MS-SNTP/MS-SNTP.md) implementation, the server MUST check the value of the FT bit in the *Flags* field of the message as defined in [MS-ADTS] section 6.3.1.2. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
 
-If the J bit in the *Flags* is set, the server MUST return a DC that is writable.<155> To determine if a domain controller is writable, the server MUST check the value of the FW bit in the *Flags* field of the message as defined in [MS-ADTS] section 6.3.1.2. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
+If the J bit in the *Flags* is set, the server MUST return a DC that is writable.<161> To determine if a domain controller is writable, the server MUST check the value of the FW bit in the *Flags* field of the message as defined in [MS-ADTS] section 6.3.1.2. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
 
 If the K bit in the *Flags* is set, the server returns a DC that is a reliable time server. If a reliable time server is unavailable, the server returns a DC that is a time server. To determine whether a domain controller is a reliable time server, the server MUST check the value of the FGT bit in the **Flags** field of the message as defined in [MS-ADTS] section 6.3.1.2. To determine whether a domain controller is a time server, the server MUST check the value of the FT bit in the **Flags** field of the message as defined in [MS-ADTS] section 6.3.1.2. If a domain controller that meets either of these requirements cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
 
 If the L bit in the **Flags** is set, the server MUST return a DC in the domain other than the server if one exists. This flag is ignored if the recipient if not running as a DC.
 
-If the M bit in the *Flags* is set, the server MUST return an LDAP server. To determine if a domain controller is an LDAP server, the server MUST check the value of the FL bit in the **Flags** field of the message as defined in [MS-ADTS] section 6.3.1.2. The server MAY return a DC. No other services are required to be present on the server returned. The server MAY return a server that has a writable config container or a writable schema container. If the D bit in the **Flags** is set, the server returned MUST be an LDAP server and a global catalog server and might be a DC. No other services are implied to be present at the server. If this flag is specified, the B, C, E, H, I, J, and T bits in the **Flags** are ignored along with their respective processing requirements.
+If the M bit in the *Flags* is set, the server MUST return an LDAP server. To determine if a domain controller is an LDAP server, the server MUST check the value of the FL bit in the **Flags** field of the message as defined in [MS-ADTS] section 6.3.1.2. The server MAY return a DC. No other services are required to be present on the server returned. The server MAY return a server that has a writable config container or a writable schema container. If the D bit in the **Flags** is set, the server returned MUST be an LDAP server and a global catalog server and might be a DC. No other services are implied to be present at the server. If this flag is specified, the B, C, E, H, I, J, T, and X bits in the **Flags** are ignored along with their respective processing requirements.
 
 If the Q bit in **Flags** is set, the server MUST return a DC that has a functional level of DS_BEHAVIOR_WIN2008 or greater. To determine the functional level of a DC, the server MUST locate the DC's nTDSDSA object in the directory and verify the **msDS-Behavior-Version** attribute as specified in [MS-ADTS] section 6.1.4.2.
 
-If the T bit in the *Flags* is set, the server SHOULD<156> return a DC that is currently running the Active Directory Web Service. To determine if a domain controller is currently running the Active Directory Web Service, the server MUST check the value of the FWS bit in the *Flags* field of the message as defined in [MS-ADTS] section 6.3.1.2. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
+If the T bit in the *Flags* is set, the server SHOULD<162> return a DC that is currently running the Active Directory Web Service. To determine if a domain controller is currently running the Active Directory Web Service, the server MUST check the value of the FWS bit in the *Flags* field of the message as defined in [MS-ADTS] section 6.3.1.2. If a server that meets this requirement cannot be located, the server MUST return ERROR_NO_SUCH_DOMAIN.
 
 If the U bit in **Flags** is set, the server MUST return a DC that has a functional level of DS_BEHAVIOR_WIN2012 or greater. To determine the functional level of a DC, the server MUST locate the DC's nTDSDSA object in the directory and verify the **msDS-Behavior-Version** attribute as specified in [MS-ADTS] section 6.1.4.2.
 
@@ -8147,9 +8152,9 @@ NETLOGON_SAM_LOGON_RESPONSE_EX ([MS-ADTS] section 6.3.1.9) and NETLOGON_SAM_LOGO
 - If the S flag is set in the *Flags* parameter:
 - The **DomainControllerInfo.DomainControllerName** field MUST be set to the value of the **NetbiosComputerName** message field.
 - The **DomainControllerInfo.DomainName** field MUST be set to the value of the **NetbiosDomainName** message field.
-- If neither the R nor S flags are set in the *Flags* parameter:<157>
-- The **DomainControllerInfo.DomainControllerName** field MUST be set to either the value of the **DnsHostName** message field, or to the value of the **NetbiosComputerName** message field.<158>
-- The **DomainControllerInfo.DomainName** field MUST be set to either the value of the **DnsDomainName** message field, or to the value of the **NetbiosDomainName** message field.<159>
+- If neither the R nor S flags are set in the *Flags* parameter:<163>
+- The **DomainControllerInfo.DomainControllerName** field MUST be set to either the value of the **DnsHostName** message field, or to the value of the **NetbiosComputerName** message field.<164>
+- The **DomainControllerInfo.DomainName** field MUST be set to either the value of the **DnsDomainName** message field, or to the value of the **NetbiosDomainName** message field.<165>
 - If the IP address of the DC to which the message was sent is known from the underlying transport protocol, the **DomainControllerInfo.DomainControllerAddress** field MUST be set to that address. Otherwise, the field is set from the value of the **NETLOGON_SAM_LOGON_RESPONSE_EX.DcSockAddr** message field if the **NETLOGON_SAM_LOGON_RESPONSE_EX.DcSockAddrSize** message field is not zero.
 - If the IP address of the DC is not available because the aforementioned conditions are not met, the **DomainControllerInfo.DomainControllerAddress** field MUST be set to the **NETLOGON_SAM_LOGON_RESPONSE_EX.NetbiosComputerName** field.
 - The **DomainControllerInfo.DomainControllerAddressType** field MUST be set to 0x00000001 if the **DomainControllerAddress** field is set to the IP address of the DC. Otherwise, the **DomainControllerInfo.DomainControllerAddressType** field MUST be set to 0x00000002 for a NETBIOS name.
@@ -8180,7 +8185,7 @@ If the server successfully locates a DC for the requested capabilities, it saves
 <a id="Section_3.5.4.3.2"></a>
 ##### 3.5.4.3.2 DsrGetDcNameEx (Opnum 27)
 
-The **DsrGetDcNameEx** method is a predecessor to the [DsrGetDcNameEx2 (section 3.5.4.3.1)](#Section_3.5.4.3.1) method. The method SHOULD<160> return information about a [**domain controller**](#gt_domain-controller-dc) in the specified domain and [**site**](#gt_site). All parameters of this method have the same meanings as the identically named parameters of the **DsrGetDcNameEx2** method.
+The **DsrGetDcNameEx** method is a predecessor to the [DsrGetDcNameEx2 (section 3.5.4.3.1)](#Section_3.5.4.3.1) method. The method SHOULD<166> return information about a [**domain controller**](#gt_domain-controller-dc) in the specified domain and [**site**](#gt_site). All parameters of this method have the same meanings as the identically named parameters of the **DsrGetDcNameEx2** method.
 
 NET_API_STATUS DsrGetDcNameEx(
 
@@ -8203,7 +8208,7 @@ On receiving this call, the server MUST perform all of the processing done on re
 <a id="Section_3.5.4.3.3"></a>
 ##### 3.5.4.3.3 DsrGetDcName (Opnum 20)
 
-The **DsrGetDcName** method is a predecessor to the [DsrGetDcNameEx2](#Section_3.5.4.3.1) method (section 3.5.4.3.1). The method SHOULD<161> return information about a [**domain controller**](#gt_domain-controller-dc) in the specified domain. All parameters of this method have the same meanings as the identically named parameters of the **DsrGetDcNameEx2** method, except for the *SiteGuid* parameter, detailed as follows.
+The **DsrGetDcName** method is a predecessor to the [DsrGetDcNameEx2](#Section_3.5.4.3.1) method (section 3.5.4.3.1). The method SHOULD<167> return information about a [**domain controller**](#gt_domain-controller-dc) in the specified domain. All parameters of this method have the same meanings as the identically named parameters of the **DsrGetDcNameEx2** method, except for the *SiteGuid* parameter, detailed as follows.
 
 NET_API_STATUS DsrGetDcName(
 
@@ -8228,7 +8233,7 @@ The **DsrGetDcName** call accepts the *SiteGuid* parameter instead of the *SiteN
 <a id="Section_3.5.4.3.4"></a>
 ##### 3.5.4.3.4 NetrGetDCName (Opnum 11)
 
-The **NetrGetDCName** method MAY<162> be used to retrieve the [**NetBIOS name**](#gt_netbios-name) of the [**PDC**](#gt_primary-domain-controller-pdc) for the specified domain.
+The **NetrGetDCName** method MAY<168> be used to retrieve the [**NetBIOS name**](#gt_netbios-name) of the [**PDC**](#gt_primary-domain-controller-pdc) for the specified domain.
 
 NET_API_STATUS NetrGetDCName(
 
@@ -8252,18 +8257,18 @@ NET_API_STATUS NetrGetDCName(
 | --- | --- |
 | 0x00000035 ERROR_ BAD_ NETPATH | The network path was not found. |
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<163> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<169> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
 If the *DomainName* parameter is not NULL and is not a valid NetBIOS name format, the server MUST return NERR_DCNotFound ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2).
 
-The server MUST attempt to locate a PDC for the domain specified by the client. The server MUST return NERR_DCNotFound if the PDC could not be located for the specified domain. The server SHOULD<164> implement alternate means of locating DCs: for example, a static list in a file, or two methods detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6.
+The server MUST attempt to locate a PDC for the domain specified by the client. The server MUST return NERR_DCNotFound if the PDC could not be located for the specified domain. The server SHOULD<170> implement alternate means of locating DCs: for example, a static list in a file, or two methods detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6.
 
 NetrGetDcName returns the name of the discovered PDC.
 
 <a id="Section_3.5.4.3.5"></a>
 ##### 3.5.4.3.5 NetrGetAnyDCName (Opnum 13)
 
-The **NetrGetAnyDCName** method MAY<165> be used to retrieve the name of a [**domain controller**](#gt_domain-controller-dc) in the specified primary or directly [**trusted**](#gt_trust) domain. Only DCs can return the name of a DC in a specified directly trusted domain.
+The **NetrGetAnyDCName** method MAY<171> be used to retrieve the name of a [**domain controller**](#gt_domain-controller-dc) in the specified primary or directly [**trusted**](#gt_trust) domain. Only DCs can return the name of a DC in a specified directly trusted domain.
 
 NET_API_STATUS NetrGetAnyDCName(
 
@@ -8287,9 +8292,9 @@ NET_API_STATUS NetrGetAnyDCName(
 | --- | --- |
 | 0x00000712 ERROR_DOMAIN_TRUST_INCONSISTENT | The name or security ID ([**SID**](#gt_security-identifier-sid)) of the domain specified is inconsistent with the trust information for that domain. |
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<166> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<172> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
-The server MUST attempt to locate a DC for the domain specified by the client. The server SHOULD<167> implement alternate means to locate domain controllers: for example, a static list in a file, or the two methods detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6. If the server that receives this call is the PDC for the domain specified in DomainName, the server MUST return ERROR_NO_SUCH_DOMAIN.
+The server MUST attempt to locate a DC for the domain specified by the client. The server SHOULD<173> implement alternate means to locate domain controllers: for example, a static list in a file, or the two methods detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6. If the server that receives this call is the PDC for the domain specified in DomainName, the server MUST return ERROR_NO_SUCH_DOMAIN.
 
 If the *ServerName* parameter is not a valid binding handle (as defined in section 3.5.4.1), the server MUST return ERROR_INVALID_COMPUTERNAME.
 
@@ -8300,7 +8305,7 @@ NetrGetAnyDcName returns the name of the discovered DC.
 <a id="Section_3.5.4.3.6"></a>
 ##### 3.5.4.3.6 DsrGetSiteName (Opnum 28)
 
-The **DsrGetSiteName** method SHOULD<168> return the [**site**](#gt_site) name for the specified computer that receives this call.
+The **DsrGetSiteName** method SHOULD<174> return the [**site**](#gt_site) name for the specified computer that receives this call.
 
 NET_API_STATUS DsrGetSiteName(
 
@@ -8320,13 +8325,13 @@ NET_API_STATUS DsrGetSiteName(
 | --- | --- |
 | 0x0000077F ERROR_NO_SITENAME | No site name is available for this machine. |
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<169> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<175> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
 If the computer has been configured with a SiteName, it MUST return the SiteName immediately.
 
 If the DynamicSiteNameSetTime plus the DynamicSiteNameTimeout is less than the current time (meaning that the DynamicSiteNameSetTime is older than allowed by DynamicSiteNameTimeout), then:
 
-- The server MUST locate a [**domain controller**](#gt_domain-controller-dc) in the domain. The server SHOULD<170> implement alternate means to locate DCs: for example, a static list in a file, or the two methods detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6. If the server cannot locate a DC for the domain, then the server MUST return ERROR_NO_SUCH_DOMAIN.
+- The server MUST locate a [**domain controller**](#gt_domain-controller-dc) in the domain. The server SHOULD<176> implement alternate means to locate DCs: for example, a static list in a file, or the two methods detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6. If the server cannot locate a DC for the domain, then the server MUST return ERROR_NO_SUCH_DOMAIN.
 - The server then populates the *SiteName* parameter with the NETLOGON_SAM_LOGON_RESPONSE_EX message ([MS-ADTS] section 6.3.1.9) by setting the *SiteName* parameter to NETLOGON_SAM_LOGON_RESPONSE_EX.ClientSiteName. The server stores the discovered site name in **DynamicSiteName**.
 - The server sets the DynamicSiteNameSetTime to the current time.
 Otherwise, **DynamicSiteName** MUST be returned immediately as the *SiteName* parameter.
@@ -8338,7 +8343,7 @@ This method also returns errors based on Common Error Processing Rules B and C, 
 <a id="Section_3.5.4.3.7"></a>
 ##### 3.5.4.3.7 DsrGetDcSiteCoverageW (Opnum 38)
 
-The **DsrGetDcSiteCoverageW** method SHOULD<171> return a list of [**sites**](#gt_site) covered by a [**domain controller**](#gt_domain-controller-dc). Site coverage is detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.
+The **DsrGetDcSiteCoverageW** method SHOULD<177> return a list of [**sites**](#gt_site) covered by a [**domain controller**](#gt_domain-controller-dc). Site coverage is detailed in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.
 
 NET_API_STATUS DsrGetDcSiteCoverageW(
 
@@ -8356,14 +8361,14 @@ NET_API_STATUS DsrGetDcSiteCoverageW(
 
 This method returns errors based on Common Error Processing Rules A and B, specified in section [3](#Section_3).
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<172> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<178> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
 The server MUST return all the sites for which the DC publishes site-specific [**DNS**](#gt_domain-name-system-dns) SRV records ([MS-ADTS] section 6.3.2.3).
 
 <a id="Section_3.5.4.3.8"></a>
 ##### 3.5.4.3.8 DsrAddressToSiteNamesW (Opnum 33)
 
-The **DsrAddressToSiteNamesW** method SHOULD<173> translate a list of socket addresses into their corresponding [**site**](#gt_site) names. For details about the mapping from socket address to subnet/site name, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 6.1.1.2.2.1 and 6.1.1.2.2.2.
+The **DsrAddressToSiteNamesW** method SHOULD<179> translate a list of socket addresses into their corresponding [**site**](#gt_site) names. For details about the mapping from socket address to subnet/site name, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 6.1.1.2.2.1 and 6.1.1.2.2.2.
 
 NET_API_STATUS DsrAddressToSiteNamesW(
 
@@ -8394,14 +8399,14 @@ NET_API_STATUS DsrAddressToSiteNamesW(
 
 This method returns errors based on Common Error Processing Rule A, specified in section [3](#Section_3).
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<174> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<180> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
 The server MUST return the site names that correspond to the *SocketAddresses* parameter by using the method specified for IP address and site/subnet mapping ([MS-ADTS] section 6.1.1.2.2.2.1).
 
 <a id="Section_3.5.4.3.9"></a>
 ##### 3.5.4.3.9 DsrAddressToSiteNamesExW (Opnum 37)
 
-The **DsrAddressToSiteNamesExW** method SHOULD<175> translate a list of socket addresses into their corresponding [**site**](#gt_site) names and subnet names. For details about the mapping from socket address to subnet/site name, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 6.1.1.2.2.1 and 6.1.1.2.2.2.
+The **DsrAddressToSiteNamesExW** method SHOULD<181> translate a list of socket addresses into their corresponding [**site**](#gt_site) names and subnet names. For details about the mapping from socket address to subnet/site name, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 6.1.1.2.2.1 and 6.1.1.2.2.2.
 
 NET_API_STATUS DsrAddressToSiteNamesExW(
 
@@ -8432,14 +8437,14 @@ NET_API_STATUS DsrAddressToSiteNamesExW(
 
 This method returns errors based on Common Error Processing Rule A, specified in section [3](#Section_3).
 
-Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<176> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
+Verify that the client has sufficient privileges. The server determines if the client has sufficient privileges (as specified in section [3.5.4.2](#Section_3.5.4.2)). If the server is not a domain controller the Access Request mask is set to NETLOGON_WKSTA_RPC_ACCESS. If the server is a domain controller the Access Request mask is set to NETLOGON_DCLOC_RPC_ACCESS.<182> If the client does not have sufficient privileges the server MUST return ERROR_ACCESS_DENIED.
 
 The server MUST return the site and subnet names that correspond to the *SocketAddresses* by using the method specified for IP address and site/subnet mapping ([MS-ADTS] section 6.1.1.2.2.2.1).
 
 <a id="Section_3.5.4.3.10"></a>
 ##### 3.5.4.3.10 DsrDeregisterDnsHostRecords (Opnum 41)
 
-The **DsrDeregisterDnsHostRecords** method SHOULD<177> delete all of the [**DNS**](#gt_domain-name-system-dns) SRV records registered by a specified [**domain controller**](#gt_domain-controller-dc). For the list of SRV records that a domain registers, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.2.3, "SRV Records Registered by DC".
+The **DsrDeregisterDnsHostRecords** method SHOULD<183> delete all of the [**DNS**](#gt_domain-name-system-dns) SRV records registered by a specified [**domain controller**](#gt_domain-controller-dc). For the list of SRV records that a domain registers, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.2.3, "SRV Records Registered by DC".
 
 NET_API_STATUS DsrDeregisterDnsHostRecords(
 
@@ -8490,7 +8495,7 @@ It is possible that this method call will create a time-consuming run that gener
 <a id="Section_3.5.4.3.11"></a>
 ##### 3.5.4.3.11 DsrUpdateReadOnlyServerDnsRecords (Opnum 48)
 
-The **DsrUpdateReadOnlyServerDnsRecords** method SHOULD<178> allow an [**RODC**](#gt_read-only-domain-controller-rodc) to send a control command to a normal (writable) DC for site-specific and CName types of [**DNS**](#gt_domain-name-system-dns) records update. For registration, site-specific records are for the [**site**](#gt_site) in which RODC resides. For the types of DNS records, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.2.
+The **DsrUpdateReadOnlyServerDnsRecords** method SHOULD<184> allow an [**RODC**](#gt_read-only-domain-controller-rodc) to send a control command to a normal (writable) DC for site-specific and CName types of [**DNS**](#gt_domain-name-system-dns) records update. For registration, site-specific records are for the [**site**](#gt_site) in which RODC resides. For the types of DNS records, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.2.
 
 NTSTATUS DsrUpdateReadOnlyServerDnsRecords (
 
@@ -8514,9 +8519,9 @@ NTSTATUS DsrUpdateReadOnlyServerDnsRecords (
 
 **ComputerName:** A null-terminated [**Unicode**](#gt_unicode) string that contains the client computer [**NetBIOS name**](#gt_netbios-name).
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure (as specified in section [2.2.1.1.5](#Section_2.2.1.1.5)) that contains the client [**authenticator**](#gt_authenticator) that will be used to authenticate the client.
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure (as specified in section [2.2.1.1.6](#Section_2.2.1.1.6)) that contains the client [**authenticator**](#gt_authenticator) that will be used to authenticate the client.
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure (as specified in section 2.2.1.1.5) that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure (as specified in section 2.2.1.1.6) that contains the server return authenticator.
 
 **SiteName:** A pointer to a null-terminated Unicode string that contains the site name where the RODC resides.
 
@@ -8528,7 +8533,7 @@ NTSTATUS DsrUpdateReadOnlyServerDnsRecords (
 
 On receiving this call, the server performs the following steps:
 
-- Verifies that the server is a normal (writable) DC; otherwise, the server MUST return STATUS_NOT_SUPPORTED.<179>
+- Verifies that the server is a normal (writable) DC; otherwise, the server MUST return STATUS_NOT_SUPPORTED.<185>
 - Verifies that the caller (ComputerName) is an RODC; otherwise, the server MUST return STATUS_NOT_SUPPORTED.
 - Verifies that the *Authenticator* passed, and compute the *ReturnAuthenticator*, as specified in section [3.1.4.5](#Section_3.1.4.5). If the *Authenticator* verification fails, the server MUST return STATUS_ACCESS_DENIED.
 - Validates the requested DNS name type. Only site-specific and CName types are supported. For an unsupported DNS name type, sets the DNS name status to STATUS_NOT_SUPPORTED.
@@ -8544,7 +8549,7 @@ Methods in this [**group**](#gt_group) are used to establish the [**secure chann
 <a id="Section_3.5.4.4.1"></a>
 ##### 3.5.4.4.1 NetrServerReqChallenge (Opnum 4)
 
-The **NetrServerReqChallenge** method SHOULD<180> receive a [**client challenge**](#gt_client-challenge) and return a [**server challenge (SC)**](#gt_server-challenge-sc).
+The **NetrServerReqChallenge** method SHOULD<186> receive a [**client challenge**](#gt_client-challenge) and return a [**server challenge (SC)**](#gt_server-challenge-sc).
 
 NTSTATUS NetrServerReqChallenge(
 
@@ -8577,7 +8582,7 @@ The server MUST generate 64 bits of random data as the server challenge to be re
 <a id="Section_3.5.4.4.2"></a>
 ##### 3.5.4.4.2 NetrServerAuthenticate3 (Opnum 26)
 
-The **NetrServerAuthenticate3** method SHOULD<181> mutually authenticate the client and the server and establish the [**session key**](#gt_session-key) to be used for the [**secure channel**](#gt_secure-channel) message protection between the client and the server. It is called after the [NetrServerReqChallenge](#Section_3.4.5.2.1) method, as specified in section 3.5.4.4.1.
+The **NetrServerAuthenticate3** method SHOULD<187> mutually authenticate the client and the server and establish the [**session key**](#gt_session-key) to be used for the [**secure channel**](#gt_secure-channel) message protection between the client and the server. It is called after the [NetrServerReqChallenge](#Section_3.4.5.2.1) method, as specified in section 3.5.4.4.1.
 
 NTSTATUS NetrServerAuthenticate3 (
 
@@ -8601,7 +8606,7 @@ NTSTATUS NetrServerAuthenticate3 (
 
 **PrimaryName:** The custom [**binding handle**](#gt_binding-handle), as defined in section [3.5.4.1](#Section_3.5.4.1).
 
-**AccountName:** A null-terminated [**Unicode**](#gt_unicode) string that identifies the name of the account that contains the [**secret key**](#gt_secret-key) (password) that is shared between the client and the server.<182>
+**AccountName:** A null-terminated [**Unicode**](#gt_unicode) string that identifies the name of the account that contains the [**secret key**](#gt_secret-key) (password) that is shared between the client and the server.<188>
 
 **SecureChannelType:** A [NETLOGON_SECURE_CHANNEL_TYPE](#Section_2.2.1.3.13) enumerated value, as specified in section 2.2.1.3.13, that indicates the type of the secure channel being established by this call.
 
@@ -8623,7 +8628,7 @@ On receiving this call, the server MUST perform the following validation steps:
 - Apply Common Error Processing Rule B, specified in section 3, to the *PrimaryName* parameter.
 If the *AccountName* parameter is the name of a domain trust object, and there is a period at the end of the parameter name, the period is ignored during processing.
 
-The server SHOULD<183> check the *SecureChannelType* parameter.
+The server SHOULD<189> check the *SecureChannelType* parameter.
 
 The server MUST compute the mask of supported Netlogon Options.
 
@@ -8664,7 +8669,7 @@ If the call returns any error code other than STATUS_SUCCESS, the server MUST re
 <a id="Section_3.5.4.4.3"></a>
 ##### 3.5.4.4.3 NetrServerAuthenticateKerberos (Opnum 59)
 
-The **NetrServerAuthenticateKerberos** method SHOULD<184> mutually authenticate the client and the server using Kerberos as the security support provider instead of netlogon as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 4.1.
+The **NetrServerAuthenticateKerberos** method SHOULD<190> mutually authenticate the client and the server using Kerberos as the security support provider instead of netlogon as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 4.1.
 
 NTSTATUS NetrServerAuthenticateKerberos(
 
@@ -8730,12 +8735,12 @@ The server MUST store the NegotiateFlags sent by the client to detect a downgrad
 
 When Kerberos is used as the security support provider, the server MUST always require an authentication level of RPC_C_AUTHN_LEVEL_PKT_PRIVACY or higher as specified in [MS-RPCE] section 2.2.1.1.8.
 
-The server MUST register a targetname for use by the client with RPC_C_AUTHN_GSS_KERBEROS as specified in [MS-RPCE] .<185>
+The server MUST register a targetname for use by the client with RPC_C_AUTHN_GSS_KERBEROS as specified in [MS-RPCE] .<191>
 
 <a id="Section_3.5.4.4.4"></a>
 ##### 3.5.4.4.4 NetrServerAuthenticate2 (Opnum 15)
 
-The **NetrServerAuthenticate2** method<186> is a predecessor to the [NetrServerAuthenticate3](#Section_3.5.4.4.2) method, as specified in section 3.5.4.4.2. All parameters of this method have the same meanings as the identically named parameters of the NetrServerAuthenticate3 method.
+The **NetrServerAuthenticate2** method<192> is a predecessor to the [NetrServerAuthenticate3](#Section_3.5.4.4.2) method, as specified in section 3.5.4.4.2. All parameters of this method have the same meanings as the identically named parameters of the NetrServerAuthenticate3 method.
 
 NTSTATUS NetrServerAuthenticate2(
 
@@ -8762,7 +8767,7 @@ The *AccountRid* parameter is not present in NetrServerAuthenticate2.
 <a id="Section_3.5.4.4.5"></a>
 ##### 3.5.4.4.5 NetrServerAuthenticate (Opnum 5)
 
-The **NetrServerAuthenticate** method<187> is a predecessor to the [NetrServerAuthenticate3](#Section_3.5.4.4.2) method (section 3.5.4.4.2). All parameters of this method have the same meanings as the identically named parameters of the NetrServerAuthenticate3 method.
+The **NetrServerAuthenticate** method<193> is a predecessor to the [NetrServerAuthenticate3](#Section_3.5.4.4.2) method (section 3.5.4.4.2). All parameters of this method have the same meanings as the identically named parameters of the NetrServerAuthenticate3 method.
 
 NTSTATUS NetrServerAuthenticate(
 
@@ -8787,7 +8792,7 @@ Message processing is identical to NetrServerAuthenticate3, as specified in sect
 <a id="Section_3.5.4.4.6"></a>
 ##### 3.5.4.4.6 NetrServerPasswordSet2 (Opnum 30)
 
-The **NetrServerPasswordSet2** method SHOULD<188> allow the client to set a new clear text password for an account used by the [**domain controller**](#gt_domain-controller-dc) for setting up the [**secure channel**](#gt_secure-channel) from the client. A [**domain member**](#gt_domain-member-member-machine) SHOULD<189> use this function to periodically change its machine account password. A [**PDC**](#gt_primary-domain-controller-pdc) uses this function to periodically change the trust password for all directly [**trusted**](#gt_trust) domains.
+The **NetrServerPasswordSet2** method SHOULD<194> allow the client to set a new clear text password for an account used by the [**domain controller**](#gt_domain-controller-dc) for setting up the [**secure channel**](#gt_secure-channel) from the client. A [**domain member**](#gt_domain-member-member-machine) SHOULD<195> use this function to periodically change its machine account password. A [**PDC**](#gt_primary-domain-controller-pdc) uses this function to periodically change the trust password for all directly [**trusted**](#gt_trust) domains.
 
 NTSTATUS NetrServerPasswordSet2(
 
@@ -8809,17 +8814,17 @@ NTSTATUS NetrServerPasswordSet2(
 
 **PrimaryName:** The custom [**binding handle**](#gt_binding-handle), as defined in section [3.5.4.1](#Section_3.5.4.1).
 
-**AccountName:** The null-terminated [**Unicode**](#gt_unicode) string that contains the name of the account whose password is being changed.<190>
+**AccountName:** The null-terminated [**Unicode**](#gt_unicode) string that contains the name of the account whose password is being changed.<196>
 
 **SecureChannelType:** An enumerated value that defines the secure channel to be used for authentication, as specified in section [2.2.1.3.13](#Section_2.2.1.3.13).
 
 **ComputerName:** The null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the computer making the request.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the encrypted logon [**credential**](#gt_credential) and a time stamp.
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the encrypted logon [**credential**](#gt_credential) and a time stamp.
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return [**authenticator**](#gt_authenticator).
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return [**authenticator**](#gt_authenticator).
 
-**ClearNewPassword:** A pointer to an [NL_TRUST_PASSWORD](#Section_2.2.1.3.7) structure, as specified in section 2.2.1.3.7, that contains the new password encrypted<191> as specified in [Calling NetrServerPasswordSet2 (section 3.4.5.2.6)](#Section_3.4.5.2.6).
+**ClearNewPassword:** A pointer to an [NL_TRUST_PASSWORD](#Section_2.2.1.3.7) structure, as specified in section 2.2.1.3.7, that contains the new password encrypted<197> as specified in [Calling NetrServerPasswordSet2 (section 3.4.5.2.6)](#Section_3.4.5.2.6).
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
@@ -8843,7 +8848,7 @@ This method also returns errors based on Common Error Processing Rule D, specifi
 <a id="Section_3.5.4.4.7"></a>
 ##### 3.5.4.4.7 NetrServerPasswordSet (Opnum 6)
 
-The **NetrServerPasswordSet** method SHOULD<192> set a new [**one-way function (OWF)**](#gt_one-way-function-owf) of a password for an account used by the [**domain controller**](#gt_domain-controller-dc) for setting up the [**secure channel**](#gt_secure-channel) from the client.
+The **NetrServerPasswordSet** method SHOULD<198> set a new [**one-way function (OWF)**](#gt_one-way-function-owf) of a password for an account used by the [**domain controller**](#gt_domain-controller-dc) for setting up the [**secure channel**](#gt_secure-channel) from the client.
 
 NTSTATUS NetrServerPasswordSet(
 
@@ -8865,15 +8870,15 @@ NTSTATUS NetrServerPasswordSet(
 
 **PrimaryName:** The custom binding handle, as defined in section [3.5.4.1](#Section_3.5.4.1).
 
-**AccountName:** The null-terminated Unicode string that contains the name of the account whose password is being changed.<193>
+**AccountName:** The null-terminated Unicode string that contains the name of the account whose password is being changed.<199>
 
 **SecureChannelType:** An enumerated value (specified in section [2.2.1.3.13](#Section_2.2.1.3.13)) that indicates the type of secure channel used by the client.
 
 **ComputerName:** A null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the client computer calling this method.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **UasNewPassword:** A pointer to an ENCRYPTED_NT_OWF_PASSWORD structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3 and encrypted by the algorithm specified in section [3.4.5.2.7](#Section_3.4.5.2.7).
 
@@ -8898,7 +8903,7 @@ This method also returns errors based on Common Error Processing Rule D, specifi
 <a id="Section_3.5.4.4.8"></a>
 ##### 3.5.4.4.8 NetrServerPasswordGet (Opnum 31)
 
-The **NetrServerPasswordGet** method SHOULD<194> allow a BDC to get a machine account password from the DC with the [**PDC**](#gt_primary-domain-controller-pdc) role in the domain.
+The **NetrServerPasswordGet** method SHOULD<200> allow a BDC to get a machine account password from the DC with the [**PDC**](#gt_primary-domain-controller-pdc) role in the domain.
 
 NTSTATUS NetrServerPasswordGet(
 
@@ -8920,17 +8925,17 @@ NTSTATUS NetrServerPasswordGet(
 
 **PrimaryName:** The custom binding handle, as defined in section [3.5.4.1](#Section_3.5.4.1).
 
-**AccountName:** A null-terminated [**Unicode**](#gt_unicode) string that contains the name of the account to retrieve the password for.<195>
+**AccountName:** A null-terminated [**Unicode**](#gt_unicode) string that contains the name of the account to retrieve the password for.<201>
 
 **AccountType:** A [NETLOGON_SECURE_CHANNEL_TYPE](#Section_2.2.1.3.13) enumerated value, as specified in section 2.2.1.3.13, that defines the [**secure channel**](#gt_secure-channel) to be used for authentication.
 
 **ComputerName:** A null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the DC making the call.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the encrypted logon [**credential**](#gt_credential) and a time stamp.
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the encrypted logon [**credential**](#gt_credential) and a time stamp.
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return [**authenticator**](#gt_authenticator).
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return [**authenticator**](#gt_authenticator).
 
-**EncryptedNtOwfPassword:** A pointer to an [ENCRYPTED_NT_OWF_PASSWORD](#Section_2.2.1.1.4) structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3, that contains the [**OWF**](#gt_one-way-function-owf) password of the account.
+**EncryptedNtOwfPassword:** A pointer to an [ENCRYPTED_NT_OWF_PASSWORD](#Section_2.2.1.1.5) structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3, that contains the [**OWF**](#gt_one-way-function-owf) password of the account.
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
@@ -8951,7 +8956,7 @@ This method SHOULD only be called by a machine that has established a secure cha
 <a id="Section_3.5.4.4.9"></a>
 ##### 3.5.4.4.9 NetrServerTrustPasswordsGet (Opnum 42)
 
-The **NetrServerTrustPasswordsGet** method SHOULD<196> return the encrypted current and previous passwords for an account in the domain. This method is called by a client to retrieve the current and previous account passwords from a [**domain controller**](#gt_domain-controller-dc). The account name requested MUST be the name used when the [**secure channel**](#gt_secure-channel) was created, unless the method is called on a [**PDC**](#gt_primary-domain-controller-pdc) by a DC, in which case it can be any valid account name.
+The **NetrServerTrustPasswordsGet** method SHOULD<202> return the encrypted current and previous passwords for an account in the domain. This method is called by a client to retrieve the current and previous account passwords from a [**domain controller**](#gt_domain-controller-dc). The account name requested MUST be the name used when the [**secure channel**](#gt_secure-channel) was created, unless the method is called on a [**PDC**](#gt_primary-domain-controller-pdc) by a DC, in which case it can be any valid account name.
 
 NTSTATUS NetrServerTrustPasswordsGet(
 
@@ -8975,17 +8980,17 @@ NTSTATUS NetrServerTrustPasswordsGet(
 
 **TrustedDcName:** The custom binding handle, as defined in section [3.5.4.1](#Section_3.5.4.1).
 
-**AccountName:** The null-terminated Unicode string that contains the name of the client account in the domain for which the trust password MUST be returned.<197>
+**AccountName:** The null-terminated Unicode string that contains the name of the client account in the domain for which the trust password MUST be returned.<203>
 
 **SecureChannelType:** A [NETLOGON_SECURE_CHANNEL_TYPE](#Section_2.2.1.3.13) enumerated value, as specified in section 2.2.1.3.13, that indicates the type of the secure channel being established by this call.
 
 **ComputerName:** The null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the client computer.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
-**EncryptedNewOwfPassword:** A pointer to an [ENCRYPTED_NT_OWF_PASSWORD](#Section_2.2.1.1.4) structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3, that contains the NTOWFv1 (as specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1) of the current password, encrypted as specified in [MS-SAMR] section 2.2.11.1.1, Encrypting an NT Hash or LM Hash Value with a specified key. The [**session key**](#gt_session-key) is the specified 16-byte key that is used to derive the password's keys. The specified 16-byte key uses the 16-byte value process, as specified in [MS-SAMR] section 2.2.11.1.4.
+**EncryptedNewOwfPassword:** A pointer to an [ENCRYPTED_NT_OWF_PASSWORD](#Section_2.2.1.1.5) structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3, that contains the NTOWFv1 (as specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1) of the current password, encrypted as specified in [MS-SAMR] section 2.2.11.1.1, Encrypting an NT Hash or LM Hash Value with a specified key. The [**session key**](#gt_session-key) is the specified 16-byte key that is used to derive the password's keys. The specified 16-byte key uses the 16-byte value process, as specified in [MS-SAMR] section 2.2.11.1.4.
 
 **EncryptedOldOwfPassword:** A pointer to an ENCRYPTED_NT_OWF_PASSWORD structure, as specified in [MS-SAMR] section 2.2.7.3, that contains the NTOWFv1 (as specified in NTLM v1 Authentication in [MS-NLMP] section 3.3.1) of the previous password, encrypted as specified in [MS-SAMR] section 2.2.11.1.1, Encrypting an NT Hash or LM Hash Value with a specified key. The session key is the specified 16-byte key that is used to derive the password's keys. The specified 16-byte key uses the 16-byte value process, as specified in [MS-SAMR] section 2.2.11.1.4.
 
@@ -8997,7 +9002,7 @@ Message processing is identical to [NetrServerGetTrustInfo](#Section_3.5.4.7.6),
 <a id="Section_3.5.4.4.10"></a>
 ##### 3.5.4.4.10 NetrLogonGetDomainInfo (Opnum 29)
 
-The **NetrLogonGetDomainInfo** method SHOULD<198> return information that describes the current domain to which the specified client belongs.
+The **NetrLogonGetDomainInfo** method SHOULD<204> return information that describes the current domain to which the specified client belongs.
 
 NTSTATUS NetrLogonGetDomainInfo(
 
@@ -9021,9 +9026,9 @@ NTSTATUS NetrLogonGetDomainInfo(
 
 **ComputerName:** The null-terminated Unicode string that contains the name of the client computer issuing the request.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **Level:** The information level requested by the client. The *DomBuffer* parameter contains one of the following structures, based on the value of this field.
 
@@ -9041,7 +9046,7 @@ NTSTATUS NetrLogonGetDomainInfo(
 On receiving this call, the server MUST perform the following validation steps:
 
 - Apply Common Error Processing Rule A, specified in section [3](#Section_3).
-- Verify that the *WkstaBuffer* parameter is not NULL. If it is, the server SHOULD<199> return STATUS_INVALID_PARAMETER.
+- Verify that the *WkstaBuffer* parameter is not NULL. If it is, the server SHOULD<205> return STATUS_INVALID_PARAMETER.
 - Verify that the *Level* parameter is set to 1 or 2. All other values are invalid, and STATUS_INVALID_LEVEL MUST be returned.
 - Using the *ComputerName* for the [**secure channel**](#gt_secure-channel) to find the corresponding record in the ClientSessionInfo table, verify the *Authenticator* parameter (section [3.1.4.5](#Section_3.1.4.5)). If the *Authenticator* parameter is valid, compute the *ReturnAuthenticator* parameter returned (section 3.1.4.5). Otherwise, the server MUST return STATUS_ACCESS_DENIED.
 If the *Level* parameter is set to 1, the return structure pointed to by *DomBuffer* MUST be generated as follows:
@@ -9052,13 +9057,13 @@ If the *Level* parameter is set to 1, the return structure pointed to by *DomBuf
 - NETLOGON_DOMAIN_INFO.PrimaryDomain.DomainGuid MUST be set to **DomainGuid**.
 - NETLOGON_DOMAIN_INFO.PrimaryDomain.DomainSid MUST be set to **DomainSid**.
 - NETLOGON_DOMAIN_INFO.WorkstationFlags MUST be set with the bitwise AND of NETLOGON_WORKSTATION_INFORMATION.WorkstationInfo.WorkstationFlags and 0x3.
-- NETLOGON_DOMAIN_INFO.TrustedDomainCount MUST be set to the number of elements of the [**trusted**](#gt_trust) domain list returned by performing the external behavior consistent with locally invoking LsarEnumerateTrustedDomainsEx ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.7.7). The *EnumerationContext* parameter MUST be set to 0 and *PreferredMaximumLength* SHOULD<200> be set to 4096. A policy handle is not needed locally.
+- NETLOGON_DOMAIN_INFO.TrustedDomainCount MUST be set to the number of elements of the [**trusted**](#gt_trust) domain list returned by performing the external behavior consistent with locally invoking LsarEnumerateTrustedDomainsEx ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.7.7). The *EnumerationContext* parameter MUST be set to 0 and *PreferredMaximumLength* SHOULD<206> be set to 4096. A policy handle is not needed locally.
 - NETLOGON_DOMAIN_INFO.TrustedDomains MUST be set to a TrustedDomainCount-sized array of NETLOGON_ONE_DOMAIN_INFO structures. Each structure MUST be generated as follows:
 - NETLOGON_ONE_DOMAIN_INFO.DomainName MUST be set to the NetBIOS [**domain name**](#gt_domain-name) of the trusted domain.
 - NETLOGON_ONE_DOMAIN_INFO.DnsDomainName MUST be set to the [**DNS**](#gt_domain-name-system-dns) domain name of the trusted domain.
 - NETLOGON_ONE_DOMAIN_INFO.DnsForestName MUST be set to NULL string.
 - NETLOGON_ONE_DOMAIN_INFO.DomainGuid MUST be set to the domain [**GUID**](#gt_globally-unique-identifier-guid) of the trusted domain.
-- NETLOGON_ONE_DOMAIN_INFO.DomainSid SHOULD<201> be set to the domain [**SID**](#gt_security-identifier-sid) of the trusted domain.
+- NETLOGON_ONE_DOMAIN_INFO.DomainSid SHOULD<207> be set to the domain [**SID**](#gt_security-identifier-sid) of the trusted domain.
 - NETLOGON_DOMAIN_INFO.SupportedEncTypes MUST be set to the value of the msDS-SupportedEncryptionTypes attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.481) of the *ComputerName* account. If the msDS-SupportedEncryptionTypes attribute does not exist, then set NETLOGON_DOMAIN_INFO.SupportedEncTypes to 0xFFFFFFFF.
 | Structure | Reference |
 | --- | --- |
@@ -9077,7 +9082,7 @@ If WkstaBuffer.*WorkstationInfo*.*WorkstationFlags* has the 0x2 bit set, NETLOGO
 
 - HOST/<Netbios name>
 - HOST/<FQDN name>
-WkstaBuffer.*WorkstationInfo*.*OsName* and WkstaBuffer.*WorkstationInfo*.*OsVersion* are processed as specified in section 2.2.1.3.6. If WkstaBuffer.*WorkstationInfo*.*OsName* and WkstaBuffer.*WorkstationInfo*.*OsVersion* are not specified, then use a generic string, for example, "Windows unknown version" to update the operatingSystem attribute. If WkstaBuffer.*WorkstationInfo*.*OsVersion* is specified but WkstaBuffer.*WorkstationInfo*.*OsName* is not, then a different generic string SHOULD<202> be used to update the **operatingSystem** attribute, depending on the value of WkstaBuffer.*WorkstationInfo*.*OsVersion*.*wProductType*.<203>
+WkstaBuffer.*WorkstationInfo*.*OsName* and WkstaBuffer.*WorkstationInfo*.*OsVersion* are processed as specified in section 2.2.1.3.6. If WkstaBuffer.*WorkstationInfo*.*OsName* and WkstaBuffer.*WorkstationInfo*.*OsVersion* are not specified, then use a generic string, for example, "Windows unknown version" to update the operatingSystem attribute. If WkstaBuffer.*WorkstationInfo*.*OsVersion* is specified but WkstaBuffer.*WorkstationInfo*.*OsName* is not, then a different generic string SHOULD<208> be used to update the **operatingSystem** attribute, depending on the value of WkstaBuffer.*WorkstationInfo*.*OsVersion*.*wProductType*.<209>
 
 If WkstaBuffer*.WorkstationInfo.KerberosSupportedEncryptionTypes* is set, NETLOGON_DOMAIN_INFO.SupportedEncTypes is set to the **msDS-SupportedEncryptionTypes** attribute ([MS-ADA2] section 2.481) of the client account.
 
@@ -9086,7 +9091,7 @@ This method SHOULD only be called by a machine that has established a secure cha
 <a id="Section_3.5.4.4.11"></a>
 ##### 3.5.4.4.11 NetrLogonGetCapabilities (Opnum 21)
 
-The **NetrLogonGetCapabilities** method is used by clients to confirm the server capabilities after a [**secure channel**](#gt_secure-channel) has been established.<204>
+The **NetrLogonGetCapabilities** method is used by clients to confirm the server capabilities after a [**secure channel**](#gt_secure-channel) has been established.<210>
 
 NTSTATUS NetrLogonGetCapabilities(
 
@@ -9108,22 +9113,22 @@ NTSTATUS NetrLogonGetCapabilities(
 
 **ComputerName:** A string that contains the name of the computer.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **QueryLevel:** Specifies the level of information to return from the [**domain controller**](#gt_domain-controller-dc) being queried. A value of 0x00000001 causes return of a [NETLOGON_CAPABILITIES](#Section_2.2.1.3.14) structure that contains server capabilities.
 
 A value of 0x00000002 causes the return of a **NETLOGON_CAPABILITIES** structure that contains client capabilities received by server when a negotiation request is made from the client.
 
-**Capabilities:** A pointer to a 32-bit set of bit flags that identify the server's capabilities or client’s capabilities received by server during negotiation.<205>
+**Capabilities:** A pointer to a 32-bit set of bit flags that identify the server's capabilities or client’s capabilities received by server during negotiation.<211>
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
-Upon receiving this call, the server MUST perform the following validation steps:<206>
+Upon receiving this call, the server MUST perform the following validation steps:<212>
 
 - Apply Common Error Processing Rule A, specified in section [3](#Section_3).
-- Verify that the *QueryLevel* parameter is set to 1 or 2. All other values are invalid, and STATUS_INVALID_LEVEL MUST be returned.<207>
+- Verify that the *QueryLevel* parameter is set to 1 or 2. All other values are invalid, and STATUS_INVALID_LEVEL MUST be returned.<213>
 - Using the ComputerName for the secure channel to find the corresponding record in the ClientSessionInfo table, verify the *Authenticator* parameter (section [3.1.4.5](#Section_3.1.4.5)). If the *Authenticator* parameter is valid, compute the *ReturnAuthenticator* parameter returned (section 3.1.4.5). Otherwise, the server MUST return STATUS_ACCESS_DENIED.
 If *ServerCapabilities* bit 1 is true, then *Capabilities* MUST be set to the ServerSessionInfo.NegotiateFlags being used by the secure channel of the calling client.
 
@@ -9134,7 +9139,7 @@ Otherwise, the server MUST return STATUS_NOT_IMPLEMENTED.
 <a id="Section_3.5.4.4.12"></a>
 ##### 3.5.4.4.12 NetrChainSetClientAttributes (Opnum 49)
 
-The **NetrChainSetClientAttributes** method SHOULD<208> be invoked by an [**RODC**](#gt_read-only-domain-controller-rodc) on a normal (writable) DC to update to a client's computer account object in [**Active Directory**](#gt_active-directory) when it receives either the [**NetrServerAuthenticate3**](#Section_3.5.4.4.2) method or the [**NetrLogonGetDomainInfo**](#Section_3.5.4.4.10) method with updates requested.
+The **NetrChainSetClientAttributes** method SHOULD<214> be invoked by an [**RODC**](#gt_read-only-domain-controller-rodc) on a normal (writable) DC to update to a client's computer account object in [**Active Directory**](#gt_active-directory) when it receives either the [**NetrServerAuthenticate3**](#Section_3.5.4.4.2) method or the [**NetrLogonGetDomainInfo**](#Section_3.5.4.4.10) method with updates requested.
 
 NTSTATUS NetrChainSetClientAttributes(
 
@@ -9168,9 +9173,9 @@ NL_OUT_CHAIN_SET_CLIENT_ATTRIBUTES* pmsgOut
 
 **ChainedForClientName:** The null-terminated Unicode string that contains the name of the client computer that called NetrServerAuthenticate3 or NetrLogonGetDomainInfo on the RODC.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **dwInVersion:** One of the [NL_IN_CHAIN_SET_CLIENT_ATTRIBUTES](#Section_2.2.1.3.17) union types selected based on the value of the *pmsgIn* field. The value MUST be 1.
 
@@ -9203,7 +9208,7 @@ Methods in this [**group**](#gt_group) are used for generic pass-though, user lo
 <a id="Section_3.5.4.5.1"></a>
 ##### 3.5.4.5.1 NetrLogonSamLogonEx (Opnum 39)
 
-The **NetrLogonSamLogonEx** method SHOULD<209> provide an extension to [NetrLogonSamLogon](#Section_3.4.5.3.4) that accepts an extra flags parameter and uses Secure [**RPC**](#gt_remote-procedure-call-rpc) ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.1.5.2) instead of Netlogon [**authenticators**](#gt_authenticator). This method handles logon requests for the [**SAM**](#gt_security-account-manager-sam) accounts and allows for generic pass-through authentication, as specified in section [3.2.4.1](#Section_3.2.4.1).
+The **NetrLogonSamLogonEx** method SHOULD<215> provide an extension to [NetrLogonSamLogon](#Section_3.4.5.3.4) that accepts an extra flags parameter and uses Secure [**RPC**](#gt_remote-procedure-call-rpc) ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.1.5.2) instead of Netlogon [**authenticators**](#gt_authenticator). This method handles logon requests for the [**SAM**](#gt_security-account-manager-sam) accounts and allows for generic pass-through authentication, as specified in section [3.2.4.1](#Section_3.2.4.1).
 
 NTSTATUS NetrLogonSamLogonEx(
 
@@ -9243,7 +9248,7 @@ PNETLOGON_VALIDATION ValidationInformation,
 
 **ValidationInformation:** A pointer to a [NETLOGON_VALIDATION](#Section_2.2.1.4.14) structure, as specified in section 2.2.1.4.14, that describes the user validation information returned to the client. The type of the **NETLOGON_VALIDATION** used is determined by the value of the *ValidationLevel* parameter.
 
-**Authoritative:** A pointer to a char value that represents a Boolean condition. FALSE is indicated by the value 0x00, and TRUE SHOULD<210> be indicated by the value 0x01 and MAY also be indicated by any nonzero value.
+**Authoritative:** A pointer to a char value that represents a Boolean condition. FALSE is indicated by the value 0x00, and TRUE SHOULD<216> be indicated by the value 0x01 and MAY also be indicated by any nonzero value.
 
 This Boolean value indicates whether the validation information is final. This field is necessary because the request might be forwarded through multiple servers. The value TRUE indicates that the validation information is an [**authoritative response**](#gt_authoritative-response) and MUST remain unchanged. The value FALSE indicates that the validation information is not an authoritative response and that the client can resend the request to another server.
 
@@ -9285,7 +9290,7 @@ packet-beta
   31-31: "A"
 ```
 
-Where the bits SHOULD<211> be defined as:
+Where the bits SHOULD<217> be defined as:
 
 | Value | Description |
 | --- | --- |
@@ -9298,7 +9303,7 @@ All other bits MUST be set to zero and ignored on receipt. Flags A, B, C, and D 
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
-On receiving this call, the server MUST perform the following validation steps:<212>
+On receiving this call, the server MUST perform the following validation steps:<218>
 
 - Apply Common Error Processing Rule A, specified in section [3](#Section_3).
 - The pointer contained in the *LogonInformation* parameter MUST NOT be NULL; otherwise, the server MUST return STATUS_INVALID_PARAMETER.
@@ -9312,12 +9317,12 @@ The server uses the server name passed in the *LogonServer* parameter to look up
 
 The server MUST decrypt data protected in transport:
 
-- If the *LogonLevel* is **NetlogonInteractiveInformation** or **NetlogonInteractiveTransitiveInformation**, decrypt<213> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_INTERACTIVE_INFO (section 2.2.1.4.3)](#Section_2.2.1.4.3) structure.
-- If the *LogonLevel* is **NetlogonServiceInformation** or **NetlogonServiceTransitiveInformation**, decrypt<214> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_SERVICE_INFO (section 2.2.1.4.4)](#Section_2.2.1.4.4) structure.
-- If the *LogonLevel* is **NetlogonGenericInformation**, decrypt<215> the **LogonData** member in the [NETLOGON_GENERIC_INFO (section 2.2.1.4.2)](#Section_2.2.1.4.2) structure.
-When the *LogonLevel* parameter is set to 4 (**NetlogonGenericInformation**), the call is for generic pass-through to authentication packages, and the *ValidationLevel* parameter MUST be 5 (**NetlogonValidationGenericInfo2**) or 4 (**NetlogonValidationGenericInfo**). If this is not true, the server MUST return STATUS_INVALID_INFO_CLASS.<216>
+- If the *LogonLevel* is **NetlogonInteractiveInformation** or **NetlogonInteractiveTransitiveInformation**, decrypt<219> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_INTERACTIVE_INFO (section 2.2.1.4.3)](#Section_2.2.1.4.3) structure.
+- If the *LogonLevel* is **NetlogonServiceInformation** or **NetlogonServiceTransitiveInformation**, decrypt<220> the **LmOwfPassword** and **NtOwfPassword** members in the [NETLOGON_SERVICE_INFO (section 2.2.1.4.4)](#Section_2.2.1.4.4) structure.
+- If the *LogonLevel* is **NetlogonGenericInformation**, decrypt<221> the **LogonData** member in the [NETLOGON_GENERIC_INFO (section 2.2.1.4.2)](#Section_2.2.1.4.2) structure.
+When the *LogonLevel* parameter is set to 4 (**NetlogonGenericInformation**), the call is for generic pass-through to authentication packages, and the *ValidationLevel* parameter MUST be 5 (**NetlogonValidationGenericInfo2**) or 4 (**NetlogonValidationGenericInfo**). If this is not true, the server MUST return STATUS_INVALID_INFO_CLASS.<222>
 
-If *LogonLevel* is not set to 4 (**NetlogonGenericInformation**), the ValidationLevel parameter MUST be 6 (**NetlogonValidationSamInfo4**) or 3 (**NetlogonValidationSamInfo2**) or 2 (**NetlogonValidationSamInfo**). If this is not true, the server MUST return STATUS_INVALID_INFO_CLASS.<217> The data is opaque to Netlogon, and the parameters MUST be passed to NTLM ([MS-APDS](../MS-APDS/MS-APDS.md) section 3.1).
+If *LogonLevel* is not set to 4 (**NetlogonGenericInformation**), the ValidationLevel parameter MUST be 6 (**NetlogonValidationSamInfo4**) or 3 (**NetlogonValidationSamInfo2**) or 2 (**NetlogonValidationSamInfo**). If this is not true, the server MUST return STATUS_INVALID_INFO_CLASS.<223> The data is opaque to Netlogon, and the parameters MUST be passed to NTLM ([MS-APDS](../MS-APDS/MS-APDS.md) section 3.1).
 
 If the request is not for the domain of which the server is a member and the server is a DC, then the server MUST perform external behavior consistent with locally invoking **LsarQueryTrustedDomainInfoByName** ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.7.5), using the following parameters (policy handle is not needed locally):
 
@@ -9330,9 +9335,9 @@ The server MUST also verify that:
 - The **trustAttributes** field ([MS-ADTS] section 6.1.6.7.9) does not contain TRUST_ATTRIBUTE_UPLEVEL_ONLY
 If **LsarQueryTrustedDomainInfoByName** succeeds and returns the domain information in *TrustedDomainInformation*, the server MUST check if it has established a [**secure channel**](#gt_secure-channel) with the domain. If there is not an established secure channel, then the server MUST return the error code STATUS_NO_SUCH_USER. If there is an established secure channel then the server MUST call NetrLogonSamLogonEx using **LogonLevel**, **LogonInformation**, **ValidationLevel**, **ValidationInformation**, and **ExtraFlags** (**ExtraFlags** can be updated by the server before passing it to NetrLogonSamLogonEx on the DC) to the DC with which it has an established secure channel.
 
-If the server is a DC, the request uses NTLMv2, and *LogonLevel* is set to either NetlogonNetworkInformation or NetlogonNetworkTransitiveInformation, the server MUST perform target domain name validation as specified in section [3.5.4.5.1.1](#Section_3.5.4.5.1.1).<218>
+If the server is a DC, the request uses NTLMv2, and *LogonLevel* is set to either NetlogonNetworkInformation or NetlogonNetworkTransitiveInformation, the server MUST perform target domain name validation as specified in section [3.5.4.5.1.1](#Section_3.5.4.5.1.1).<224>
 
-If the server is a DC, the request uses NTLMv2, and the client is an RODC in the server’s domain, the server MUST perform RODC cachability validation as specified in section [3.5.4.5.1.2](#Section_3.5.4.5.1.2).<219>
+If the server is a DC, the request uses NTLMv2, and the client is an RODC in the server’s domain, the server MUST perform RODC cachability validation as specified in section [3.5.4.5.1.2](#Section_3.5.4.5.1.2).<225>
 
 If an error is returned from an authentication package (in the case of generic pass-through) or from NTLM (in the case of logon), the error code MUST be propagated to the caller of this method.
 
@@ -9383,7 +9388,7 @@ Otherwise, validation proceeds as follows:
 <a id="Section_3.5.4.5.2"></a>
 ##### 3.5.4.5.2 NetrLogonSamLogonWithFlags (Opnum 45)
 
-The **NetrLogonSamLogonWithFlags** method SHOULD<220> handle logon requests for the [**SAM**](#gt_security-account-manager-sam) accounts.
+The **NetrLogonSamLogonWithFlags** method SHOULD<226> handle logon requests for the [**SAM**](#gt_security-account-manager-sam) accounts.
 
 NTSTATUS NetrLogonSamLogonWithFlags(
 
@@ -9415,9 +9420,9 @@ PNETLOGON_VALIDATION ValidationInformation,
 
 **ComputerName:** The Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the client computer calling this method.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **LogonLevel:** A [NETLOGON_LOGON_INFO_CLASS](#Section_2.2.1.4.16) structure, as specified in section 2.2.1.4.16, that specifies the type of logon information passed in the *LogonInformation* parameter.
 
@@ -9427,7 +9432,7 @@ PNETLOGON_VALIDATION ValidationInformation,
 
 **ValidationInformation:** A pointer to a [NETLOGON_VALIDATION](#Section_2.2.1.4.14) structure, as specified in section 2.2.1.4.14, that describes the user validation information returned to the client. The type of the **NETLOGON_VALIDATION** used is determined by the value of the *ValidationLevel* parameter.
 
-**Authoritative:** A pointer to a char value representing a Boolean condition. FALSE is indicated by the value 0x00; TRUE SHOULD<221> be indicated by the value 0x01 and MAY also be indicated by any nonzero value.
+**Authoritative:** A pointer to a char value representing a Boolean condition. FALSE is indicated by the value 0x00; TRUE SHOULD<227> be indicated by the value 0x01 and MAY also be indicated by any nonzero value.
 
 This Boolean value indicates whether the validation information is an [**authoritative response**](#gt_authoritative-response). This field is necessary because the request might be forwarded through multiple servers. A value of TRUE indicates that the validation information is final and MUST remain unchanged. The value FALSE indicates that the validation information is not an authoritative response and that the client SHOULD resend the request to another server.
 
@@ -9469,7 +9474,7 @@ packet-beta
   31-31: "A"
 ```
 
-Where the bits SHOULD<222> defined as:
+Where the bits SHOULD<228> defined as:
 
 | Value | Description |
 | --- | --- |
@@ -9488,7 +9493,7 @@ Message processing is identical to [NetrLogonSamLogon](#Section_3.4.5.3.4), as s
 <a id="Section_3.5.4.5.3"></a>
 ##### 3.5.4.5.3 NetrLogonSamLogon (Opnum 2)
 
-The **NetrLogonSamLogon** method<223> is a predecessor to the [NetrLogonSamLogonWithFlags](#Section_3.4.5.3.3) method (section 3.5.4.5.2). All parameters of this method have the same meanings as the identically named parameters of the NetrLogonSamLogonWithFlags method.
+The **NetrLogonSamLogon** method<229> is a predecessor to the [NetrLogonSamLogonWithFlags](#Section_3.4.5.3.3) method (section 3.5.4.5.2). All parameters of this method have the same meanings as the identically named parameters of the NetrLogonSamLogonWithFlags method.
 
 NTSTATUS NetrLogonSamLogon(
 
@@ -9514,7 +9519,7 @@ PNETLOGON_VALIDATION ValidationInformation,
 
 );
 
-Message processing<224> is identical to [NetrLogonSamLogonEx](#Section_3.4.5.3.2), as specified in section 3.5.4.5.1, except for the following:
+Message processing<230> is identical to [NetrLogonSamLogonEx](#Section_3.4.5.3.2), as specified in section 3.5.4.5.1, except for the following:
 
 - The method uses Netlogon [**authenticators**](#gt_authenticator), so instead of checking for Secure RPC, the server MUST confirm the validity of the *Authenticator* (section [3.1.4.5](#Section_3.1.4.5)) that it received using the ComputerName for the [**secure channel**](#gt_secure-channel) to find the corresponding record in the ClientSessionInfo table. If the *Authenticator* parameter is valid, the server MUST compute the *ReturnAuthenticator* parameter returned (section 3.1.4.5). Otherwise, the server MUST return STATUS_ACCESS_DENIED.
 - The ExtraFlags parameter is not processed.
@@ -9526,7 +9531,7 @@ On receiving this call, the server MUST perform the following validation step:
 <a id="Section_3.5.4.5.4"></a>
 ##### 3.5.4.5.4 NetrLogonSamLogoff (Opnum 3)
 
-The **NetrLogonSamLogoff** method SHOULD<225> update the user **lastLogoff** attribute for the [**SAM**](#gt_security-account-manager-sam) accounts.
+The **NetrLogonSamLogoff** method SHOULD<231> update the user **lastLogoff** attribute for the [**SAM**](#gt_security-account-manager-sam) accounts.
 
 NTSTATUS NetrLogonSamLogoff(
 
@@ -9548,9 +9553,9 @@ NTSTATUS NetrLogonSamLogoff(
 
 **ComputerName:** The Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the client computer calling this method.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **LogonLevel:** A NETLOGON_LOGON_INFO_CLASS structure, as specified in section [2.2.1.4.16](#Section_2.2.1.4.16), that identifies the type of logon information in the *LogonInformation* union.
 
@@ -9584,7 +9589,7 @@ Additionally, the server MUST also verify that:
 - The **trustAttributes** field ([MS-ADTS] section 6.1.6.7.9) does not contain TRUST_ATTRIBUTE_UPLEVEL_ONLY.
 If **LsarQueryTrustedDomainInfoByName** succeeds and returns the domain information in *TrustedDomainInformation*, the server MUST check if it has established a secure channel with the domain. If there is not an established secure channel, then the server MUST return the error code STATUS_NO_SUCH_DOMAIN. If there is an established secure channel, then the server MUST call NetrLogonSamLogoff using **LogonLevel** and **LogonInformation** to the DC with which it has established a secure channel.
 
-Otherwise, if the server's account database is for the domain specified by **LogonInformation.LogonInteractive.Identity.LogonDomainName**, then it MAY update the **lastLogoff** attribute ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.350) on the account object specified by the **LogonInformation.LogonInteractive.Identity.UserName** field.<226>
+Otherwise, if the server's account database is for the domain specified by **LogonInformation.LogonInteractive.Identity.LogonDomainName**, then it MAY update the **lastLogoff** attribute ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.350) on the account object specified by the **LogonInformation.LogonInteractive.Identity.UserName** field.<232>
 
 This method SHOULD only be called by a machine that has established a secure channel with the server.
 
@@ -9596,7 +9601,7 @@ Methods in this [**group**](#gt_group) are used for [**database**](#gt_database)
 <a id="Section_3.5.4.6.1"></a>
 ##### 3.5.4.6.1 NetrDatabaseDeltas (Opnum 7)
 
-The **NetrDatabaseDeltas** method SHOULD<227> return a set of changes (or [**deltas**](#gt_delta)) performed to the [**SAM database**](#gt_security-account-manager-sam-built-in-database), SAM built-in database, or [**LSA databases**](#gt_48a53a9a-6c9a-4df8-9882-1eccdf32340b) after a particular value of the [**database serial number**](#gt_database-serial-number). It is used by [**BDCs**](#gt_backup-domain-controller-bdc) to request [**database**](#gt_database) changes from the [**PDC**](#gt_primary-domain-controller-pdc) that are missing on the BDC.
+The **NetrDatabaseDeltas** method SHOULD<233> return a set of changes (or [**deltas**](#gt_delta)) performed to the [**SAM database**](#gt_security-account-manager-sam-built-in-database), SAM built-in database, or [**LSA databases**](#gt_48a53a9a-6c9a-4df8-9882-1eccdf32340b) after a particular value of the [**database serial number**](#gt_database-serial-number). It is used by [**BDCs**](#gt_backup-domain-controller-bdc) to request [**database**](#gt_database) changes from the [**PDC**](#gt_primary-domain-controller-pdc) that are missing on the BDC.
 
 NTSTATUS NetrDatabaseDeltas(
 
@@ -9622,9 +9627,9 @@ NTSTATUS NetrDatabaseDeltas(
 
 **ComputerName:** The null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the BDC calling this method.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **DatabaseID:** The identifier for a specific account database set as follows:
 
@@ -9638,7 +9643,7 @@ NTSTATUS NetrDatabaseDeltas(
 
 **DeltaArray:** A pointer to a [NETLOGON_DELTA_ENUM_ARRAY](#Section_2.2.1.5.12) structure that contains an array of enumerated changes (deltas) to the specified database with database serial numbers larger than the database serial number value specified in the input value of the *DomainModifiedCount* parameter.
 
-**PreferredMaximumLength:** The value that specifies the preferred maximum size, in bytes, of data to return in the *DeltaArray* parameter. This is not a hard upper limit but serves as a guide to the server. The server SHOULD<228> stop including elements in the returned *DeltaArray* after the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. It is up to the client implementation to choose the value for this parameter.
+**PreferredMaximumLength:** The value that specifies the preferred maximum size, in bytes, of data to return in the *DeltaArray* parameter. This is not a hard upper limit but serves as a guide to the server. The server SHOULD<234> stop including elements in the returned *DeltaArray* after the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. It is up to the client implementation to choose the value for this parameter.
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
@@ -9649,7 +9654,7 @@ The server that receives this call MUST do the following:
 - Verify that the client is a BDC.
 - Verify the client authenticator. The server MUST return status code STATUS_ACCESS_DENIED if the verification fails.
 - Validate that *DatabaseID* is one of the allowed values, 0x00000000 through 0x00000002. If the *DatabaseID* is not one of these values, the server MUST return the status code STATUS_INVALID_LEVEL.
-- Given the BDC database serial number, obtain all database records that are missing on the BDC and return the array of deltas, NETLOGON_DELTA_ENUM_ARRAY, for the missing records. The number of elements returned is affected by the value of the *PreferredMaximumLength* parameter. The server SHOULD<229> stop including elements in the returned array after the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. The server SHOULD also limit the number of elements per local configuration to avoid large array allocations.
+- Given the BDC database serial number, obtain all database records that are missing on the BDC and return the array of deltas, NETLOGON_DELTA_ENUM_ARRAY, for the missing records. The number of elements returned is affected by the value of the *PreferredMaximumLength* parameter. The server SHOULD<235> stop including elements in the returned array after the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. The server SHOULD also limit the number of elements per local configuration to avoid large array allocations.
 - Compute and return the server authenticator.
 - The server MUST set the value of the *DomainModifiedCount* parameter to the database serial number of the last delta returned in the array.
 - If not all missing records are returned, the server MUST return the status code STATUS_MORE_ENTRIES.
@@ -9657,7 +9662,7 @@ The server that receives this call MUST do the following:
 <a id="Section_3.5.4.6.2"></a>
 ##### 3.5.4.6.2 NetrDatabaseSync2 (Opnum 16)
 
-The **NetrDatabaseSync2** method SHOULD<230> return a set of all changes applied to the specified [**database**](#gt_database) since its creation. It provides an interface for a BDC to fully synchronize its databases to those of the [**PDC**](#gt_primary-domain-controller-pdc). Because returning all changes in one call might be prohibitively expensive due to a large amount of data being returned, this method supports retrieving portions of the database changes in a series of calls using a continuation context until all changes are received. It is possible for the series of calls to be terminated prematurely due to external events, such as system restarts. For that reason, the method also supports restarting the series of calls at a particular point specified by the caller. The caller MUST keep track of synchronization progress during the series of calls as detailed in this section.
+The **NetrDatabaseSync2** method SHOULD<236> return a set of all changes applied to the specified [**database**](#gt_database) since its creation. It provides an interface for a BDC to fully synchronize its databases to those of the [**PDC**](#gt_primary-domain-controller-pdc). Because returning all changes in one call might be prohibitively expensive due to a large amount of data being returned, this method supports retrieving portions of the database changes in a series of calls using a continuation context until all changes are received. It is possible for the series of calls to be terminated prematurely due to external events, such as system restarts. For that reason, the method also supports restarting the series of calls at a particular point specified by the caller. The caller MUST keep track of synchronization progress during the series of calls as detailed in this section.
 
 NTSTATUS NetrDatabaseSync2(
 
@@ -9685,9 +9690,9 @@ NTSTATUS NetrDatabaseSync2(
 
 **ComputerName:** The null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the BDC calling this method.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **DatabaseID:** The identifier for a specific database for which the changes are requested. It MUST be one of the following values.
 
@@ -9714,7 +9719,7 @@ If this call is the restart of the series, the values of the *RestartState* and 
 
 **DeltaArray:** A pointer to a [NETLOGON_DELTA_ENUM_ARRAY](#Section_2.2.1.5.12) structure, as specified in section 2.2.1.5.12, that contains an array of enumerated changes ([**deltas**](#gt_delta)) to the specified database.
 
-**PreferredMaximumLength:** The value that specifies the preferred maximum size, in bytes, of data referenced in the *DeltaArray* parameter. This is not a hard upper limit but serves as a guide to the server. The server SHOULD<231> stop including elements in the returned *DeltaArray* once the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. It is up to the client implementation to choose the value for this parameter.
+**PreferredMaximumLength:** The value that specifies the preferred maximum size, in bytes, of data referenced in the *DeltaArray* parameter. This is not a hard upper limit but serves as a guide to the server. The server SHOULD<237> stop including elements in the returned *DeltaArray* once the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. It is up to the client implementation to choose the value for this parameter.
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
@@ -9724,7 +9729,7 @@ The server that receives this call MUST do the following:
 - Apply Common Error Processing Rule B, specified in section [3](#Section_3).
 - Using the *ComputerName* for the [**secure channel**](#gt_secure-channel) to find the corresponding record in the ClientSessionInfo table, verify the *Authenticator* parameter (section [3.1.4.5](#Section_3.1.4.5)). If the *Authenticator* parameter is valid, compute the *ReturnAuthenticator* parameter returned (section 3.1.4.5). Otherwise, the server MUST return STATUS_ACCESS_DENIED.
 - Validate that *DatabaseID* is one of the allowed values, 0x00000000 through 0x00000002. If the *DatabaseID* is not one of these values, the server MUST return the status code STATUS_INVALID_LEVEL.
-- Given the *RestartState* parameter and the *SyncContext* parameter, obtain database records that are missing on the BDC and return the array of deltas, NETLOGON_DELTA_ENUM_ARRAY, for the missing records. The number of elements returned is affected by the value of the *PreferredMaximumLength* parameter. The server SHOULD<232> stop including elements in the returned array once the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. The server SHOULD also limit the number of elements per local configuration to avoid large array allocations.
+- Given the *RestartState* parameter and the *SyncContext* parameter, obtain database records that are missing on the BDC and return the array of deltas, NETLOGON_DELTA_ENUM_ARRAY, for the missing records. The number of elements returned is affected by the value of the *PreferredMaximumLength* parameter. The server SHOULD<238> stop including elements in the returned array once the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter. The server SHOULD also limit the number of elements per local configuration to avoid large array allocations.
 - The server MUST update and return the *SyncContext* parameter (section [2.2.1.5.29](#Section_2.2.1.5.29)) to continue the synchronization loop on the next client request.
 - Compute and return the server authenticator.
 - Initialize **SynchronizationComplete** by setting it to FALSE, and when all the missing records are sent set **SynchronizationComplete** to TRUE.
@@ -9732,7 +9737,7 @@ The server that receives this call MUST do the following:
 <a id="Section_3.5.4.6.3"></a>
 ##### 3.5.4.6.3 NetrDatabaseSync (Opnum 8)
 
-The **NetrDatabaseSync** method<233> is a predecessor to the [NetrDatabaseSync2](#Section_3.5.4.6.2) method (section 3.5.4.6.2). All parameters of this method have the same meanings as the identically named parameters of the NetrDatabaseSync2 method.
+The **NetrDatabaseSync** method<239> is a predecessor to the [NetrDatabaseSync2](#Section_3.5.4.6.2) method (section 3.5.4.6.2). All parameters of this method have the same meanings as the identically named parameters of the NetrDatabaseSync2 method.
 
 NTSTATUS NetrDatabaseSync(
 
@@ -9759,7 +9764,7 @@ Receiving this method is identical to receiving NetrDatabaseSync2, as specified 
 <a id="Section_3.5.4.6.4"></a>
 ##### 3.5.4.6.4 NetrDatabaseRedo (Opnum 17)
 
-The **NetrDatabaseRedo** method SHOULD<234> be used by a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc) to request information about a single account from the [**PDC**](#gt_primary-domain-controller-pdc).
+The **NetrDatabaseRedo** method SHOULD<240> be used by a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc) to request information about a single account from the [**PDC**](#gt_primary-domain-controller-pdc).
 
 NTSTATUS NetrDatabaseRedo(
 
@@ -9785,9 +9790,9 @@ UCHAR * ChangeLogEntry,
 
 **ComputerName:** The null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the BDC calling this method.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **ChangeLogEntry:** A pointer to a buffer that contains a CHANGELOG_ENTRY structure, specified as follows, for the account being queried.
 
@@ -9880,7 +9885,7 @@ Methods in this [**group**](#gt_group) are used to retrieve [**trust**](#gt_trus
 <a id="Section_3.5.4.7.1"></a>
 ##### 3.5.4.7.1 DsrEnumerateDomainTrusts (Opnum 40)
 
-The **DsrEnumerateDomainTrusts** method SHOULD<235> return an enumerated list of domain [**trusts**](#gt_trust), filtered by a set of flags, from the specified server.
+The **DsrEnumerateDomainTrusts** method SHOULD<241> return an enumerated list of domain [**trusts**](#gt_trust), filtered by a set of flags, from the specified server.
 
 NET_API_STATUS DsrEnumerateDomainTrusts(
 
@@ -9991,7 +9996,7 @@ If the call returns STATUS_SUCCESS, the server MUST use the returned [**domains*
 <a id="Section_3.5.4.7.2"></a>
 ##### 3.5.4.7.2 NetrEnumerateTrustedDomainsEx (Opnum 36)
 
-The **NetrEnumerateTrustedDomainsEx** method SHOULD<236> return a list of [**trusted**](#gt_trust) [**domains**](#gt_domain) from a specified server. This method extends NetrEnumerateTrustedDomains by returning an array of domains in a more flexible [DS_DOMAIN_TRUSTSW](#Section_2.2.1.6.2) structure, as specified in section 2.2.1.6.2, rather than the array of strings in [DOMAIN_NAME_BUFFER](#Section_2.2.1.6.1) structure, as specified in section 2.2.1.6.1. The array is returned as part of the [NETLOGON_TRUSTED_DOMAIN_ARRAY](#Section_2.2.1.6.3) structure, as specified in section 2.2.1.6.3.
+The **NetrEnumerateTrustedDomainsEx** method SHOULD<242> return a list of [**trusted**](#gt_trust) [**domains**](#gt_domain) from a specified server. This method extends NetrEnumerateTrustedDomains by returning an array of domains in a more flexible [DS_DOMAIN_TRUSTSW](#Section_2.2.1.6.2) structure, as specified in section 2.2.1.6.2, rather than the array of strings in [DOMAIN_NAME_BUFFER](#Section_2.2.1.6.1) structure, as specified in section 2.2.1.6.1. The array is returned as part of the [NETLOGON_TRUSTED_DOMAIN_ARRAY](#Section_2.2.1.6.3) structure, as specified in section 2.2.1.6.3.
 
 NET_API_STATUS NetrEnumerateTrustedDomainsEx(
 
@@ -10018,7 +10023,7 @@ This method is a wrapper for [DsrEnumerateDomainTrusts](#Section_3.5.4.7.1), whi
 <a id="Section_3.5.4.7.3"></a>
 ##### 3.5.4.7.3 NetrEnumerateTrustedDomains (Opnum 19)
 
-The **NetrEnumerateTrustedDomains** method SHOULD<237> return a set of [**NetBIOS names**](#gt_netbios-name) of [**trusted**](#gt_trust) [**domains**](#gt_domain).
+The **NetrEnumerateTrustedDomains** method SHOULD<243> return a set of [**NetBIOS names**](#gt_netbios-name) of [**trusted**](#gt_trust) [**domains**](#gt_domain).
 
 NTSTATUS NetrEnumerateTrustedDomains(
 
@@ -10047,7 +10052,7 @@ For details, see section 3.5.4.7.2, Receiving NetrEnumerateTrustedDomainsEx.
 <a id="Section_3.5.4.7.4"></a>
 ##### 3.5.4.7.4 NetrGetForestTrustInformation (Opnum 44)
 
-The **NetrGetForestTrustInformation** method SHOULD<238> retrieve the [**trust**](#gt_trust) information for the [**forest**](#gt_forest) of which the member's domain is itself a member.
+The **NetrGetForestTrustInformation** method SHOULD<244> retrieve the [**trust**](#gt_trust) information for the [**forest**](#gt_forest) of which the member's domain is itself a member.
 
 NTSTATUS NetrGetForestTrustInformation(
 
@@ -10069,9 +10074,9 @@ NTSTATUS NetrGetForestTrustInformation(
 
 **ComputerName:** The null-terminated Unicode string that contains the client computer [**NetBIOS name**](#gt_netbios-name).
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **Flags:** MUST be set to zero and MUST be ignored on receipt.
 
@@ -10092,7 +10097,7 @@ This method SHOULD only be called by a machine that has established a secure cha
 <a id="Section_3.5.4.7.5"></a>
 ##### 3.5.4.7.5 DsrGetForestTrustInformation (Opnum 43)
 
-The **DsrGetForestTrustInformation** method SHOULD<239> retrieve the [**trust**](#gt_trust) information for the [**forest**](#gt_forest) of the specified [**domain controller (DC)**](#gt_domain-controller-dc), or for a forest trusted by the forest of the specified DC.
+The **DsrGetForestTrustInformation** method SHOULD<245> retrieve the [**trust**](#gt_trust) information for the [**forest**](#gt_forest) of the specified [**domain controller (DC)**](#gt_domain-controller-dc), or for a forest trusted by the forest of the specified DC.
 
 NET_API_STATUS DsrGetForestTrustInformation(
 
@@ -10242,7 +10247,7 @@ If the *TrustedDomainName* is NULL:
 <a id="Section_3.5.4.7.6"></a>
 ##### 3.5.4.7.6 NetrServerGetTrustInfo (Opnum 46)
 
-The **NetrServerGetTrustInfo** method SHOULD<240> return an information block from a specified server. The information includes encrypted current and previous passwords for a particular account and additional trust data. The account name requested MUST be the name used when the [**secure channel**](#gt_secure-channel) was created, unless the method is called on a [**PDC**](#gt_primary-domain-controller-pdc) by a [**domain controller**](#gt_domain-controller-dc), in which case it can be any valid account name.
+The **NetrServerGetTrustInfo** method SHOULD<246> return an information block from a specified server. The information includes encrypted current and previous passwords for a particular account and additional trust data. The account name requested MUST be the name used when the [**secure channel**](#gt_secure-channel) was created, unless the method is called on a [**PDC**](#gt_primary-domain-controller-pdc) by a [**domain controller**](#gt_domain-controller-dc), in which case it can be any valid account name.
 
 NTSTATUS NetrServerGetTrustInfo(
 
@@ -10274,11 +10279,11 @@ NTSTATUS NetrServerGetTrustInfo(
 
 **ComputerName:** The null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the client computer, for which the trust information MUST be returned.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
-**EncryptedNewOwfPassword:** A pointer to an [ENCRYPTED_NT_OWF_PASSWORD](#Section_2.2.1.1.4) structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3, that contains the NTOWFv1 (as specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1) of the current password, encrypted as specified in [MS-SAMR] section 2.2.11.1.1, Encrypting an NT Hash or LM Hash Value with a specified key. The [**session key**](#gt_session-key) is the specified 16-byte key that is used to derive its keys via the 16-byte value process, as specified in [MS-SAMR] section 2.2.11.1.4.
+**EncryptedNewOwfPassword:** A pointer to an [ENCRYPTED_NT_OWF_PASSWORD](#Section_2.2.1.1.5) structure, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.7.3, that contains the NTOWFv1 (as specified in NTLM v1 Authentication in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.3.1) of the current password, encrypted as specified in [MS-SAMR] section 2.2.11.1.1, Encrypting an NT Hash or LM Hash Value with a specified key. The [**session key**](#gt_session-key) is the specified 16-byte key that is used to derive its keys via the 16-byte value process, as specified in [MS-SAMR] section 2.2.11.1.4.
 
 **EncryptedOldOwfPassword:** A pointer to an ENCRYPTED_NT_OWF_PASSWORD structure, as specified in [MS-SAMR] section 2.2.7.3, that contains the NTOWFv1 (as specified in NTLM v1 Authentication in [MS-NLMP] section 3.3.1) of the old password, encrypted as specified in [MS-SAMR] section 2.2.11.1.1, Encrypting an NT Hash or LM Hash Value with a specified key. The session key is the specified 16-byte key that is used to derive its keys via the 16-byte value process, as specified in [MS-SAMR] section 2.2.11.1.4.
 
@@ -10308,7 +10313,7 @@ Methods in this [**group**](#gt_group) are used by components outside Netlogon t
 <a id="Section_3.5.4.8.1"></a>
 ##### 3.5.4.8.1 NetrLogonGetTrustRid (Opnum 23)
 
-The **NetrLogonGetTrustRid** method SHOULD<241> be used to obtain the [**RID**](#gt_relative-identifier-rid) of the account whose password is used by [**domain controllers**](#gt_domain-controller-dc) in the specified domain for establishing the [**secure channel**](#gt_secure-channel) from the server receiving this call.
+The **NetrLogonGetTrustRid** method SHOULD<247> be used to obtain the [**RID**](#gt_relative-identifier-rid) of the account whose password is used by [**domain controllers**](#gt_domain-controller-dc) in the specified domain for establishing the [**secure channel**](#gt_secure-channel) from the server receiving this call.
 
 NET_API_STATUS NetrLogonGetTrustRid(
 
@@ -10328,7 +10333,7 @@ NET_API_STATUS NetrLogonGetTrustRid(
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
-The server SHOULD<242> return ERROR_ACCESS_DENIED if the caller is not local.
+The server SHOULD<248> return ERROR_ACCESS_DENIED if the caller is not local.
 
 If *ServerName* equals NULL and *DomainName* equals NULL, the server determines if the client has sufficient [**privilege**](#gt_privilege) (as specified in section [3.5.4.2](#Section_3.5.4.2)) with the Access Request mask set to NETLOGON_FTINFO_ACCESS.
 
@@ -10347,7 +10352,7 @@ If the RID cannot be determined, the server SHOULD return ERROR_TRUSTED_RELATION
 <a id="Section_3.5.4.8.2"></a>
 ##### 3.5.4.8.2 NetrLogonComputeServerDigest (Opnum 24)
 
-The **NetrLogonComputeServerDigest** method computes a cryptographic digest of a message by using the MD5 message-digest algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275). This method SHOULD<243> be called by a client computer against a server and is used to compute a message digest, as specified in this section. The client then calls the [NetrLogonComputeClientDigest](#Section_3.4.5.6.3) method (as specified in section [3.4.5.6.3](#Section_3.4.5.6.3)) and compare the digests to ensure that the server that it communicates with knows the [**shared secret**](#gt_shared-secret) between the client machine and the domain.
+The **NetrLogonComputeServerDigest** method computes a cryptographic digest of a message by using the MD5 message-digest algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275). This method SHOULD<249> be called by a client computer against a server and is used to compute a message digest, as specified in this section. The client then calls the [NetrLogonComputeClientDigest](#Section_3.4.5.6.3) method (as specified in section [3.4.5.6.3](#Section_3.4.5.6.3)) and compare the digests to ensure that the server that it communicates with knows the [**shared secret**](#gt_shared-secret) between the client machine and the domain.
 
 NET_API_STATUS NetrLogonComputeServerDigest(
 
@@ -10395,14 +10400,14 @@ The digest of the *Message* parameter MUST be calculated with the following algo
 - CALL MD5Update(md5context, Message, MessageSize)
 - CALL MD5Final(md5context)
 - SET digest to md5context.digest
-The *NewMessageDigest* parameter MUST be computed by using the current password. The *OldMessageDigest* parameter MUST be computed by using the previous password, if it exists. If the previous password is not present, the new password MAY<244> be used to compute the *OldMessageDigest*.
+The *NewMessageDigest* parameter MUST be computed by using the current password. The *OldMessageDigest* parameter MUST be computed by using the previous password, if it exists. If the previous password is not present, the new password MAY<250> be used to compute the *OldMessageDigest*.
 
 Creating a message digest for the previous password allows the possibility of password replication latency to be accounted for. If the machine account password was recently changed, but the change has not propagated to the server processing this method, the server keeps the old password.
 
 <a id="Section_3.5.4.8.3"></a>
 ##### 3.5.4.8.3 NetrLogonComputeClientDigest (Opnum 25)
 
-The **NetrLogonComputeClientDigest** method is used by a client to compute a cryptographic digest of a message by using the MD5 message-digest algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275). This method is called by a client to compute a message digest, as specified in this section. The client SHOULD<245> use this digest to compare against one that is returned by a call to [NetrLogonComputeServerDigest](#Section_3.4.5.6.2). This comparison allows the client to ensure that the server that it communicates with knows the [**shared secret**](#gt_shared-secret) between the client machine and the domain.
+The **NetrLogonComputeClientDigest** method is used by a client to compute a cryptographic digest of a message by using the MD5 message-digest algorithm, as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275). This method is called by a client to compute a message digest, as specified in this section. The client SHOULD<251> use this digest to compare against one that is returned by a call to [NetrLogonComputeServerDigest](#Section_3.4.5.6.2). This comparison allows the client to ensure that the server that it communicates with knows the [**shared secret**](#gt_shared-secret) between the client machine and the domain.
 
 NET_API_STATUS NetrLogonComputeClientDigest(
 
@@ -10453,7 +10458,7 @@ Creating a message digest for the previous password allows the possibility of pa
 <a id="Section_3.5.4.8.4"></a>
 ##### 3.5.4.8.4 NetrLogonSendToSam (Opnum 32)
 
-The **NetrLogonSendToSam** method allows a BDC or [**RODC**](#gt_read-only-domain-controller-rodc) to forward user account password changes to the [**PDC**](#gt_primary-domain-controller-pdc). It SHOULD<246> be used by the client to deliver an opaque buffer to the [**SAM database**](#gt_security-account-manager-sam-built-in-database) ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1) on the server side.
+The **NetrLogonSendToSam** method allows a BDC or [**RODC**](#gt_read-only-domain-controller-rodc) to forward user account password changes to the [**PDC**](#gt_primary-domain-controller-pdc). It SHOULD<252> be used by the client to deliver an opaque buffer to the [**SAM database**](#gt_security-account-manager-sam-built-in-database) ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1) on the server side.
 
 NTSTATUS NetrLogonSendToSam(
 
@@ -10477,9 +10482,9 @@ UCHAR * OpaqueBuffer,
 
 **ComputerName:** A null-terminated Unicode string that contains the [**NetBIOS name**](#gt_netbios-name) of the client computer making the call.
 
-**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.5](#Section_2.2.1.1.5), that contains the client [**authenticator**](#gt_authenticator).
+**Authenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section [2.2.1.1.6](#Section_2.2.1.1.6), that contains the client [**authenticator**](#gt_authenticator).
 
-**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.5, that contains the server return authenticator.
+**ReturnAuthenticator:** A pointer to a **NETLOGON_AUTHENTICATOR** structure, as specified in section 2.2.1.1.6, that contains the server return authenticator.
 
 **OpaqueBuffer:** A buffer to be passed to the [**Security Account Manager (SAM)**](#gt_security-account-manager-sam) service on the PDC. The buffer is encrypted on the wire.
 
@@ -10502,7 +10507,7 @@ This method SHOULD be called only by a machine that has established a secure cha
 <a id="Section_3.5.4.8.5"></a>
 ##### 3.5.4.8.5 NetrLogonSetServiceBits (Opnum 22)
 
-The **NetrLogonSetServiceBits** method SHOULD<247> be used to notify Netlogon whether a [**domain controller**](#gt_domain-controller-dc) is running specified services, as detailed in the following section.
+The **NetrLogonSetServiceBits** method SHOULD<253> be used to notify Netlogon whether a [**domain controller**](#gt_domain-controller-dc) is running specified services, as detailed in the following section.
 
 NTSTATUS NetrLogonSetServiceBits(
 
@@ -10554,7 +10559,7 @@ packet-beta
   31-31: "0"
 ```
 
-The flags SHOULD<248> be defined as follows.
+The flags SHOULD<254> be defined as follows.
 
 | Value | Description |
 | --- | --- |
@@ -10602,7 +10607,7 @@ packet-beta
   31-31: "0"
 ```
 
-The flags SHOULD<249> be defined as follows.
+The flags SHOULD<255> be defined as follows.
 
 | Value | Description |
 | --- | --- |
@@ -10616,7 +10621,7 @@ If a flag is set to 1 and the same flag is set to 0 in the *ServiceBitsOfInteres
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
-The server SHOULD<250> return ERROR_ACCESS_DENIED if the caller is not local.
+The server SHOULD<256> return ERROR_ACCESS_DENIED if the caller is not local.
 
 If the client does not have sufficient privilege, the server MUST return ERROR_ACCESS_DENIED.
 
@@ -10627,7 +10632,7 @@ For every service state being set by this call, as indicated by *ServiceBitsOfIn
 <a id="Section_3.5.4.8.6"></a>
 ##### 3.5.4.8.6 NetrLogonGetTimeServiceParentDomain (Opnum 35)
 
-The **NetrLogonGetTimeServiceParentDomain** method SHOULD<251> return the name of the parent domain of the current domain. The domain name returned by this method is suitable for passing into the [NetrLogonGetTrustRid](#Section_3.4.5.6.1) method and [NetrLogonComputeClientDigest](#Section_3.4.5.6.3) method.
+The **NetrLogonGetTimeServiceParentDomain** method SHOULD<257> return the name of the parent domain of the current domain. The domain name returned by this method is suitable for passing into the [NetrLogonGetTrustRid](#Section_3.4.5.6.1) method and [NetrLogonComputeClientDigest](#Section_3.4.5.6.3) method.
 
 NET_API_STATUS NetrLogonGetTimeServiceParentDomain(
 
@@ -10652,7 +10657,7 @@ NET_API_STATUS NetrLogonGetTimeServiceParentDomain(
 
 **Return Values:** The method returns 0x00000000 on success; otherwise, it returns a nonzero error code.
 
-The server SHOULD<252> return ERROR_ACCESS_DENIED if the caller is not local.
+The server SHOULD<258> return ERROR_ACCESS_DENIED if the caller is not local.
 
 If the client does not have sufficient [**privilege**](#gt_privilege), the server MUST return ERROR_ACCESS_DENIED.
 
@@ -10677,7 +10682,7 @@ Methods in this [**group**](#gt_group) are used for querying and controlling Net
 <a id="Section_3.5.4.9.1"></a>
 ##### 3.5.4.9.1 NetrLogonControl2Ex (Opnum 18)
 
-The **NetrLogonControl2Ex** method SHOULD<253> execute administrative actions that pertain to the Netlogon server operation. It is used to query the status and control the actions of the Netlogon server.
+The **NetrLogonControl2Ex** method SHOULD<259> execute administrative actions that pertain to the Netlogon server operation. It is used to query the status and control the actions of the Netlogon server.
 
 NET_API_STATUS NetrLogonControl2Ex(
 
@@ -10695,13 +10700,13 @@ NET_API_STATUS NetrLogonControl2Ex(
 
 **ServerName:** The custom [**binding handle**](#gt_binding-handle), as defined in section [3.5.4.1](#Section_3.5.4.1).
 
-**FunctionCode:** The control operation to be performed; it SHOULD<254> be one of the following values:
+**FunctionCode:** The control operation to be performed; it SHOULD<260> be one of the following values:
 
 | Value | Meaning |
 | --- | --- |
 | NETLOGON_CONTROL_QUERY 0x00000001 | No operation, only the requested information is returned. |
-| NETLOGON_CONTROL_REPLICATE 0x00000002 | Forces a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc) to perform an immediate partial synchronization of all databases, as detailed in section [3.6.5.2.2](#Section_3.6.5.2.2).<255> |
-| NETLOGON_CONTROL_SYNCHRONIZE 0x00000003 | Forces a BDC to perform an immediate full synchronization of all databases.<256> |
+| NETLOGON_CONTROL_REPLICATE 0x00000002 | Forces a [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc) to perform an immediate partial synchronization of all databases, as detailed in section [3.6.5.2.2](#Section_3.6.5.2.2).<261> |
+| NETLOGON_CONTROL_SYNCHRONIZE 0x00000003 | Forces a BDC to perform an immediate full synchronization of all databases.<262> |
 | NETLOGON_CONTROL_PDC_REPLICATE 0x00000004 | Forces a [**PDC**](#gt_primary-domain-controller-pdc) to immediately send announcement messages to ask each BDC to replicate the database for details (see section [3.6](#Section_3.6)). |
 | NETLOGON_CONTROL_REDISCOVER 0x00000005 | Forces the server to rediscover a [**domain controller**](#gt_domain-controller-dc) in the specified domain and to set up a [**secure channel**](#gt_secure-channel) to the discovered DC. |
 | NETLOGON_CONTROL_TC_QUERY 0x00000006 | Queries the status of the last usage of the secure channel to the DC. |
@@ -10710,11 +10715,11 @@ NET_API_STATUS NetrLogonControl2Ex(
 | NETLOGON_CONTROL_CHANGE_PASSWORD 0x00000009 | Causes the server to generate a new [**shared secret**](#gt_shared-secret) and to set it on the account used by the DC for setting up the secure channel from the server. |
 | NETLOGON_CONTROL_TC_VERIFY 0x0000000A | Verifies the current status of the server's secure channel to a DC in the specified domain. |
 | NETLOGON_CONTROL_FORCE_DNS_REG 0x0000000B | Triggers the non-timer event, Force Register DNS Records, defined in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.2.2.1. |
-| NETLOGON_CONTROL_QUERY_DNS_REG 0x0000000C | SHOULD<257> query the status of [**DNS**](#gt_domain-name-system-dns) updates performed by the Netlogon server, as specified in [MS-ADTS] section 6.3.2. |
-| NETLOGON_CONTROL_BACKUP_CHANGE_LOG 0x0000FFFC | Used for debugging purposes and does not affect the Netlogon protocol behavior.<258> |
-| NETLOGON_CONTROL_TRUNCATE_LOG 0x0000FFFD | Used for debugging purposes and does not affect the Netlogon protocol behavior.<259> |
-| NETLOGON_CONTROL_SET_DBFLAG 0x0000FFFE | Used for debugging purposes and does not affect the Netlogon protocol behavior.<260> |
-| NETLOGON_CONTROL_BREAKPOINT 0x0000FFFF | Used for debugging purposes and SHOULD<261> be used only with [**checked builds**](#gt_checked-build). Calling NetrLogonControl2Ex with this function code does not affect the Netlogon protocol behavior.<262> |
+| NETLOGON_CONTROL_QUERY_DNS_REG 0x0000000C | SHOULD<263> query the status of [**DNS**](#gt_domain-name-system-dns) updates performed by the Netlogon server, as specified in [MS-ADTS] section 6.3.2. |
+| NETLOGON_CONTROL_BACKUP_CHANGE_LOG 0x0000FFFC | Used for debugging purposes and does not affect the Netlogon protocol behavior.<264> |
+| NETLOGON_CONTROL_TRUNCATE_LOG 0x0000FFFD | Used for debugging purposes and does not affect the Netlogon protocol behavior.<265> |
+| NETLOGON_CONTROL_SET_DBFLAG 0x0000FFFE | Used for debugging purposes and does not affect the Netlogon protocol behavior.<266> |
+| NETLOGON_CONTROL_BREAKPOINT 0x0000FFFF | Used for debugging purposes and SHOULD<267> be used only with [**checked builds**](#gt_checked-build). Calling NetrLogonControl2Ex with this function code does not affect the Netlogon protocol behavior.<268> |
 
 **QueryLevel:** Information query level requested by the client. The buffer returned in the *Buffer* parameter contains one of the following structures, based on the value of this field.
 
@@ -10723,7 +10728,7 @@ NET_API_STATUS NetrLogonControl2Ex(
 | 0x00000001 | A [NETLOGON_INFO_1](#Section_2.2.1.7.2) structure is returned. |
 | 0x00000002 | A [NETLOGON_INFO_2](#Section_2.2.1.7.3) structure is returned. |
 | 0x00000003 | A [NETLOGON_INFO_3](#Section_2.2.1.7.4) structure is returned. |
-| 0x00000004 | A [NETLOGON_INFO_4](#Section_2.2.1.7.5) structure is returned.<263> |
+| 0x00000004 | A [NETLOGON_INFO_4](#Section_2.2.1.7.5) structure is returned.<269> |
 
 **Data:** A [NETLOGON_CONTROL_DATA_INFORMATION](#Section_2.2.1.7.1) structure, as specified in section 2.2.1.7.1, that contains specific data required by the query.
 
@@ -10751,17 +10756,17 @@ For other function codes, the *Data* parameter is ignored.
 Based on the *FunctionCode* parameter provided by the client, the server MUST complete the following before populating the return structure:
 
 - NETLOGON_CONTROL_QUERY: Nothing.
-- NETLOGON_CONTROL_REPLICATE: Return ERROR_NOT_SUPPORTED.<264>
-- NETLOGON_CONTROL_SYNCHRONIZE: Return ERROR_NOT_SUPPORTED.<265>
-- NETLOGON_CONTROL_PDC_REPLICATE: Return ERROR_NOT_SUPPORTED.<266>
+- NETLOGON_CONTROL_REPLICATE: Return ERROR_NOT_SUPPORTED.<270>
+- NETLOGON_CONTROL_SYNCHRONIZE: Return ERROR_NOT_SUPPORTED.<271>
+- NETLOGON_CONTROL_PDC_REPLICATE: Return ERROR_NOT_SUPPORTED.<272>
 - NETLOGON_CONTROL_REDISCOVER: Force the server to rediscover DCs in the domain name provided in the **TrustedDomainName** field of the *Data* parameter and to set up a secure channel (section [3.1](#Section_3.1)) to the discovered DC. DC rediscovery is the same as initial DC discovery (section [3.1.4.10](#Section_3.1.4.10)). If a DC discovery and establishment of a secure channel to the DC fails, the error ERROR_NO_LOGON_SERVERS is returned.
 - NETLOGON_CONTROL_TC_QUERY: Provide return data based on the DC in the domain name provided in the **TrustedDomainName** field of the *Data* parameter.
 - NETLOGON_CONTROL_TRANSPORT_NOTIFY: To allow the server to immediately retry establishing a secure session over the new network connection that became available, the server sets the **LastAuthenticationTry** member of every entry in the ServerSessionInfo table maintained by the Netlogon client on the server's machine to zero, enumerating across every entry in the table. Also, if the server has a DC cache, the server flushes the **LocatedDCsCache** and **FailedDiscoveryCache**.
 - NETLOGON_CONTROL_FIND_USER: Query the name of a trusted domain that contains an account for a user with the username provided in the **UserName** field of the *Data* parameter. The server MUST be a DC; otherwise, return ERROR_NOT_SUPPORTED.
 - NETLOGON_CONTROL_CHANGE_PASSWORD: Generate a new shared secret for the domain name provided in the **TrustedDomainName** field of the *Data* parameter. The server MUST update the **SharedSecret** (section [3.1.1](#Section_3.1.1)). If the **TrustedDomainName** field of the *Data* parameter is a trust name and the server is not a PDC ([MS-ADTS] section 6.1.5.3), the server MUST return ERROR_INVALID_DOMAIN_ROLE.
 - NETLOGON_CONTROL_TC_VERIFY: Call any Netlogon method that requires a secure channel (section [3.1.4.6](#Section_3.1.4.6)) to the DC in the domain name provided in the **TrustedDomainName** field of the *Data* parameter.
-- NETLOGON_CONTROL_FORCE_DNS_REG: The DC SHOULD<267> re-register all of its DNS records ([MS-ADTS] section 6.3.2).
-- NETLOGON_CONTROL_QUERY_DNS_REG: Query the status of DNS updates performed by the Netlogon server.<268>
+- NETLOGON_CONTROL_FORCE_DNS_REG: The DC SHOULD<273> re-register all of its DNS records ([MS-ADTS] section 6.3.2).
+- NETLOGON_CONTROL_QUERY_DNS_REG: Query the status of DNS updates performed by the Netlogon server.<274>
 - NETLOGON_CONTROL_BACKUP_CHANGE_LOG: Nothing.
 - NETLOGON_CONTROL_TRUNCATE_LOG: Nothing.
 - NETLOGON_CONTROL_SET_DBFLAG: Nothing.
@@ -10804,7 +10809,7 @@ In addition, the returned *Buffer* structure contains undefined data of varied s
 <a id="Section_3.5.4.9.2"></a>
 ##### 3.5.4.9.2 NetrLogonControl2 (Opnum 14)
 
-The **NetrLogonControl2** method<269> is a predecessor to the [NetrLogonControl2Ex](#Section_3.5.4.9.1) method (section 3.5.4.9.1) and is updated to have the same functionality as NetrLogonControl2Ex. All parameters of this method have the same meanings as the identically named parameters of the NetrLogonControl2Ex method.
+The **NetrLogonControl2** method<275> is a predecessor to the [NetrLogonControl2Ex](#Section_3.5.4.9.1) method (section 3.5.4.9.1) and is updated to have the same functionality as NetrLogonControl2Ex. All parameters of this method have the same meanings as the identically named parameters of the NetrLogonControl2Ex method.
 
 NET_API_STATUS NetrLogonControl2(
 
@@ -10828,7 +10833,7 @@ Message processing is identical to NetrLogonControl2Ex (section 3.5.4.9.1).
 <a id="Section_3.5.4.9.3"></a>
 ##### 3.5.4.9.3 NetrLogonControl (Opnum 12)
 
-The **NetrLogonControl** method is a predecessor to the [NetrLogonControl2Ex](#Section_3.5.4.9.2) method (section [3.5.4.9.1](#Section_3.5.4.9.1)). All parameters of this method SHOULD<270> have the same meanings as the identically named parameters of the **NetrLogonControl2Ex** method.
+The **NetrLogonControl** method is a predecessor to the [NetrLogonControl2Ex](#Section_3.5.4.9.2) method (section [3.5.4.9.1](#Section_3.5.4.9.1)). All parameters of this method SHOULD<276> have the same meanings as the identically named parameters of the **NetrLogonControl2Ex** method.
 
 NET_API_STATUS NetrLogonControl(
 
@@ -10842,7 +10847,7 @@ NET_API_STATUS NetrLogonControl(
 
 );
 
-All restrictions on parameter values in the **NetrLogonControl2Ex** method (section 3.5.4.9.1) apply. Extra restrictions are applied to the values of the *FunctionCode*<271> and *QueryLevel* parameters as follows:
+All restrictions on parameter values in the **NetrLogonControl2Ex** method (section 3.5.4.9.1) apply. Extra restrictions are applied to the values of the *FunctionCode*<277> and *QueryLevel* parameters as follows:
 
 - The value of *QueryLevel* parameter is restricted to 0x00000001. If 0x00000002 is used, the error ERROR_NOT_SUPPORTED is returned; if any value larger than 0x00000002 is used, the error ERROR_INVALID_LEVEL is returned.
 Message processing is identical to **NetrLogonControl2Ex** (section 3.5.4.9.1), except for the following:
@@ -10851,7 +10856,7 @@ Message processing is identical to **NetrLogonControl2Ex** (section 3.5.4.9.1), 
 <a id="Section_3.5.4.10"></a>
 #### 3.5.4.10 Obsolete Methods
 
-Methods in this group support LAN Manager products and are now obsolete. They SHOULD<272> be rejected with an error code.
+Methods in this group support LAN Manager products and are now obsolete. They SHOULD<278> be rejected with an error code.
 
 <a id="Section_3.5.4.10.1"></a>
 ##### 3.5.4.10.1 NetrLogonUasLogon (Opnum 0)
@@ -10945,12 +10950,12 @@ None.
 <a id="Section_3.5.6"></a>
 ### 3.5.6 Other Local Events
 
-When Netlogon receives a PolicyChange event ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2), NRPC implementations SHOULD<273> load the new value.
+When Netlogon receives a PolicyChange event ([MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.8.2), NRPC implementations SHOULD<279> load the new value.
 
 <a id="Section_3.6"></a>
 ## 3.6 Netlogon NT Replication Details
 
-Netlogon replication is a single master replication in which the [**PDC**](#gt_primary-domain-controller-pdc) serves as the replication master. <274> The PDC maintains a state for each [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc) that includes the [**database serial number**](#gt_database-serial-number) of the BDC database. The PDC periodically sends announcement messages to BDCs with out-of-sync database serial numbers to notify them about database changes accumulated during the period. In response, BDCs receiving the message update their database by making synchronization calls to the PDC using [**RPC**](#gt_remote-procedure-call-rpc). The PDC updates the database serial number in the local state information for the BDC after processing the synchronization call from that BDC.
+Netlogon replication is a single master replication in which the [**PDC**](#gt_primary-domain-controller-pdc) serves as the replication master. <280> The PDC maintains a state for each [**backup domain controller (BDC)**](#gt_backup-domain-controller-bdc) that includes the [**database serial number**](#gt_database-serial-number) of the BDC database. The PDC periodically sends announcement messages to BDCs with out-of-sync database serial numbers to notify them about database changes accumulated during the period. In response, BDCs receiving the message update their database by making synchronization calls to the PDC using [**RPC**](#gt_remote-procedure-call-rpc). The PDC updates the database serial number in the local state information for the BDC after processing the synchronization call from that BDC.
 
 Figure 8: PDC States
 
@@ -11052,7 +11057,7 @@ Set **DateAndTime** of the 3rd **DBChangeInfo** field to the value of AbstractLs
 - Set **DomainSid** to the value of AbstractDomainSid.
 The PDC MUST send the message to all BDCs configured in the domain. In response to this message, the PDC MUST expect BDCs to synchronize their database by calling [NetrDatabaseSync](#Section_3.4.5.4.3), [NetrDatabaseSync2](#Section_3.5.4.6.2), or [NetrDatabaseDeltas](#Section_3.4.5.4.1), as defined in the following. For details about calling this method, see Calling NetrDatabaseSync2 in section [3.4.5.4.2](#Section_3.4.5.4.2).
 
-In processing the NetrDatabaseDeltas call, the PDC SHOULD<275> indicate to the caller that it's unable to fulfill the partial synchronization request due to local conditions. The BDC MUST handle the error by performing full synchronization as defined in the following.
+In processing the NetrDatabaseDeltas call, the PDC SHOULD<281> indicate to the caller that it's unable to fulfill the partial synchronization request due to local conditions. The BDC MUST handle the error by performing full synchronization as defined in the following.
 
 When processing NetrDatabaseSync, NetrDatabaseSync2, or NetrDatabaseDeltas calls, the PDC MUST update the AbstractBdcDatabaseSerialNumbers element corresponding to the database of the BDC making the call to be equal to the value of the [**database serial number**](#gt_database-serial-number) for the last database record returned by the call.
 
@@ -11140,7 +11145,7 @@ Figure 10: Secure channel execution of NetrLogonSamLogon
 NetrLogonSamLogon involves the following steps:
 
 - If the Netlogon [**RPC**](#gt_remote-procedure-call-rpc) call is using [**authenticators**](#gt_authenticator), the following steps are also performed.
-- The client creates an authenticator. An authenticator is represented by a **NETLOGON_AUTHENTICATOR** structure (section [2.2.1.1.5](#Section_2.2.1.1.5)).
+- The client creates an authenticator. An authenticator is represented by a **NETLOGON_AUTHENTICATOR** structure (section [2.2.1.1.6](#Section_2.2.1.1.6)).
 - The client fills in the **Timestamp** field of the structure with the number of seconds since 00:00:00 on January 1, 1970 (UTC). The client then adds this value to the current authentication seed to produce a new seed value.
 - The client computes the [**credential**](#gt_credential) based on the new authentication seed, the [**session key**](#gt_session-key), and the [**client challenge**](#gt_client-challenge), per the calculation specified in the previous Netlogon Credentials section.
 - If the *LogonLevel* parameter of the NetrLogonSamLogon method contained one of a set of specific values, the client encrypts the logon data using the session key with the negotiated encryption algorithm. The following table defines the *LogonLevel* parameter value and the data that is encrypted.
@@ -14592,49 +14597,55 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <14> Section 2.2.1.2.1: Active Directory Web Service is not available in Windows NT and Windows 2000. It is available in Windows Server 2003 and Windows Server 2008 when Active Directory Management Gateway Service is installed.
 
-<15> Section 2.2.1.2.1: Windows NT-based domain controllers do not have an associated [**site**](#gt_site).
+<15> Section 2.2.1.2.1: The Domain Controller is running on Windows Server 2016 or later.
 
-<16> Section 2.2.1.2.5: The **Status** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<16> Section 2.2.1.2.1: The Domain Controller is running on Windows Server 2025 or later.
 
-<17> Section 2.2.1.2.6: **DnsNamesInfo** is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<17> Section 2.2.1.2.1: The Domain Controller is running on Windows Server 2022 or later.
 
-<18> Section 2.2.1.3.3: The **NL_AUTH_SHA2_SIGNATURE** structure is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, or Windows Vista.
+<18> Section 2.2.1.2.1: Windows NT-based domain controllers do not have an associated [**site**](#gt_site).
 
-<19> Section 2.2.1.3.3: Windows sets these bytes to an indeterminate value.
+<19> Section 2.2.1.2.5: The **Status** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<20> Section 2.2.1.3.6: The **NETLOGON_WORKSTATION_INFO** structure is not supported in Windows NT.
+<20> Section 2.2.1.2.6: **DnsNamesInfo** is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<21> Section 2.2.1.3.6: For example, for Windows 7 Ultimate operating system, the string "Windows 7 Ultimate" is used.
+<21> Section 2.2.1.3.3: The **NL_AUTH_SHA2_SIGNATURE** structure is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, or Windows Vista.
 
-<22> Section 2.2.1.3.6: The **KerberosSupportedEncryptionTypes** field is not supported in Windows NT, Windows 2000, and Windows Server 2003.
+<22> Section 2.2.1.3.3: Windows sets these bytes to an indeterminate value.
 
-<23> Section 2.2.1.3.7: The **NL_TRUST_PASSWORD** structure is not supported in Windows NT.
+<23> Section 2.2.1.3.6: The **NETLOGON_WORKSTATION_INFO** structure is not supported in Windows NT.
 
-<24> Section 2.2.1.3.7: Windows domain controller expects little-endian byte ordering for the encryption input. If your processor is in big endian, then both the wide-character buffer and length fields in the **NL_TRUST_PASSWORD** structure MUST be converted to little endian before encryption. After encryption, byte swapping to reverse the order will be needed.
+<24> Section 2.2.1.3.6: For example, for Windows 7 Ultimate operating system, the string "Windows 7 Ultimate" is used.
 
-<25> Section 2.2.1.3.8: The **NL_PASSWORD_VERSION** structure is not supported in Windows NT.
+<25> Section 2.2.1.3.6: The **KerberosSupportedEncryptionTypes** field is not supported in Windows NT, Windows 2000, and Windows Server 2003.
 
-<26> Section 2.2.1.3.9: The **NETLOGON_WORKSTATION_INFORMATION** union is not supported in Windows NT.
+<26> Section 2.2.1.3.7: The **NL_TRUST_PASSWORD** structure is not supported in Windows NT.
 
-<27> Section 2.2.1.3.10: The **NETLOGON_ONE_DOMAIN_INFO** structure is not supported in Windows NT.
+<27> Section 2.2.1.3.7: Windows domain controller expects little-endian byte ordering for the encryption input. If your processor is in big endian, then both the wide-character buffer and length fields in the **NL_TRUST_PASSWORD** structure MUST be converted to little endian before encryption. After encryption, byte swapping to reverse the order will be needed.
 
-<28> Section 2.2.1.3.11: The **NETLOGON_DOMAIN_INFO** structure is not supported in Windows NT.
+<28> Section 2.2.1.3.8: The **NL_PASSWORD_VERSION** structure is not supported in Windows NT.
 
-<29> Section 2.2.1.3.11: The **SupportedEncTypes** field is ignored in Windows NT, Windows 2000, and Windows XP.
+<29> Section 2.2.1.3.9: The **NETLOGON_WORKSTATION_INFORMATION** union is not supported in Windows NT.
 
-<30> Section 2.2.1.3.12: The **NETLOGON_DOMAIN_INFORMATION** structure is not implemented in Windows NT.
+<30> Section 2.2.1.3.10: The **NETLOGON_ONE_DOMAIN_INFO** structure is not supported in Windows NT.
 
-<31> Section 2.2.1.3.13: One or both domains in a secure channel is required to be a Windows NT 4.0 domain.
+<31> Section 2.2.1.3.11: The **NETLOGON_DOMAIN_INFO** structure is not supported in Windows NT.
 
-<32> Section 2.2.1.3.13: The **CdcServerSecureChannel** type is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<32> Section 2.2.1.3.11: The **SupportedEncTypes** field is ignored in Windows NT, Windows 2000, and Windows XP.
 
-<33> Section 2.2.1.3.14: The **NETLOGON_CAPABILITIES** union is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<33> Section 2.2.1.3.12: The **NETLOGON_DOMAIN_INFORMATION** structure is not implemented in Windows NT.
 
-<34> Section 2.2.1.3.14: The **RequestedFlags** addition applies to Windows 7 operating system with Service Pack 1 (SP1) and later and Windows Server 2008 operating system with Service Pack 2 (SP2) and later.
+<34> Section 2.2.1.3.13: One or both domains in a secure channel is required to be a Windows NT 4.0 domain.
 
-<35> Section 2.2.1.3.15: The normal (writable) DC cannot be a Windows Server 2003 or a Windows 2000 Server DC.
+<35> Section 2.2.1.3.13: The **CdcServerSecureChannel** type is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<36> Section 2.2.1.3.15: The following table defines the **dwMajorVersion** values.
+<36> Section 2.2.1.3.14: The **NETLOGON_CAPABILITIES** union is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+
+<37> Section 2.2.1.3.14: The **RequestedFlags** addition applies to Windows 7 operating system with Service Pack 1 (SP1) and later and Windows Server 2008 operating system with Service Pack 2 (SP2) and later.
+
+<38> Section 2.2.1.3.15: The normal (writable) DC cannot be a Windows Server 2003 or a Windows 2000 Server DC.
+
+<39> Section 2.2.1.3.15: The following table defines the **dwMajorVersion** values.
 
 | Value | Meaning |
 | --- | --- |
@@ -14643,7 +14654,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | 6 | The operating system is Windows Vista, Windows Server 2008, Windows 7, Windows Server 2008 R2, Windows 8, Windows Server 2012, Windows 8.1, or Windows Server 2012 R2. |
 | 10 | The operating system is Windows 10 and later. |
 
-<37> Section 2.2.1.3.15: The following table defines the **dwMinorVersion** values.
+<40> Section 2.2.1.3.15: The following table defines the **dwMinorVersion** values.
 
 | Value | Meaning |
 | --- | --- |
@@ -14652,87 +14663,87 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | 2 | The operating system is Windows XP Professional x64 Edition operating system, Windows Server 2003, Windows Server 2003 R2, Windows 8, or Windows Server 2012. |
 | 3 | The operating system is Windows 8.1 or Windows Server 2012 R2. |
 
-<38> Section 2.2.1.3.15: For Windows NT, the value is 0x00000002.
+<41> Section 2.2.1.3.15: For Windows NT, the value is 0x00000002.
 
-<39> Section 2.2.1.3.15: The VER_NT_WORKSTATION value identifies the operating system as one of the following: Windows NT Workstation 4.0 operating system, Windows 2000 Professional, Windows XP Home Edition operating system, Windows XP Professional operating system, Windows Vista, Windows 7, Windows 8, Windows 8.1, or Windows 10.
+<42> Section 2.2.1.3.15: The VER_NT_WORKSTATION value identifies the operating system as one of the following: Windows NT Workstation 4.0 operating system, Windows 2000 Professional, Windows XP Home Edition operating system, Windows XP Professional operating system, Windows Vista, Windows 7, Windows 8, Windows 8.1, or Windows 10.
 
-<40> Section 2.2.1.3.15: The **wReserved** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista. The Netlogon server ignores this value.
+<43> Section 2.2.1.3.15: The **wReserved** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista. The Netlogon server ignores this value.
 
-<41> Section 2.2.1.3.16: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 domain controller.
+<44> Section 2.2.1.3.16: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 domain controller.
 
-<42> Section 2.2.1.3.16: The **OsName** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<45> Section 2.2.1.3.16: The **OsName** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<43> Section 2.2.1.3.17: The **V1** field is not supported by Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<46> Section 2.2.1.3.17: The **V1** field is not supported by Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<44> Section 2.2.1.3.18: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
+<47> Section 2.2.1.3.18: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
 
-<45> Section 2.2.1.3.18: RODCs are not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<48> Section 2.2.1.3.18: RODCs are not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<46> Section 2.2.1.3.18: The **SupportedEncTypes** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<49> Section 2.2.1.3.18: The **SupportedEncTypes** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<47> Section 2.2.1.3.19: The **V1** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<50> Section 2.2.1.3.19: The **V1** field is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<48> Section 2.2.1.4.16: The **NETLOGON_LOGON_INFO_CLASS** enumeration types are not supported in Windows Vista.
+<51> Section 2.2.1.4.16: The **NETLOGON_LOGON_INFO_CLASS** enumeration types are not supported in Windows Vista.
 
-<49> Section 2.2.1.4.17: The **NETLOGON_VALIDATION_INFO_CLASS** enumeration types are not supported in Windows Vista.
+<52> Section 2.2.1.4.17: The **NETLOGON_VALIDATION_INFO_CLASS** enumeration types are not supported in Windows Vista.
 
-<50> Section 2.2.1.5: Sharing the user account [**database**](#gt_database) is achieved in Windows via replication of the account database among DCs so that each DC in the domain has a matching copy of the database.
+<53> Section 2.2.1.5: Sharing the user account [**database**](#gt_database) is achieved in Windows via replication of the account database among DCs so that each DC in the domain has a matching copy of the database.
 
-<51> Section 2.2.1.5.22: Except for Windows NT, **NumControllerEntries** is set to zero in the **NETLOGON_DELTA_TRUSTED_DOMAINS** structure.
+<54> Section 2.2.1.5.22: Except for Windows NT, **NumControllerEntries** is set to zero in the **NETLOGON_DELTA_TRUSTED_DOMAINS** structure.
 
-<52> Section 2.2.1.5.22: Except for Windows NT, **ControllerNames** is set to NULL in the **NETLOGON_DELTA_TRUSTED_DOMAINS** structure.
+<55> Section 2.2.1.5.22: Except for Windows NT, **ControllerNames** is set to NULL in the **NETLOGON_DELTA_TRUSTED_DOMAINS** structure.
 
-<53> Section 2.2.1.5.28: In Windows NT 4.0 replication, the **DeleteGroupByName**, **DeleteUserByName**, and **SerialNumberSkip** types require NegotiateFlags=0x00000010. For more information, see the Capability Negotiation bullet in section [1.7](#Section_1.7) and the *NegotiateFlags* parameter description in sections [3.5.4.4.4](#Section_3.5.4.4.4) (**NetrServerAuthenticate2**) and [3.5.4.4.2](#Section_3.5.4.4.2) (**NetrServerAuthenticate3**).
+<56> Section 2.2.1.5.28: In Windows NT 4.0 replication, the **DeleteGroupByName**, **DeleteUserByName**, and **SerialNumberSkip** types require NegotiateFlags=0x00000010. For more information, see the Capability Negotiation bullet in section [1.7](#Section_1.7) and the *NegotiateFlags* parameter description in sections [3.5.4.4.4](#Section_3.5.4.4.4) (**NetrServerAuthenticate2**) and [3.5.4.4.2](#Section_3.5.4.4.2) (**NetrServerAuthenticate3**).
 
-<54> Section 2.2.1.6.2: The **DS_DOMAIN_TRUSTSW** structure is not supported in Windows NT.
+<57> Section 2.2.1.6.2: The **DS_DOMAIN_TRUSTSW** structure is not supported in Windows NT.
 
-<55> Section 2.2.1.6.2: 0x00000001 is supported only in Windows NT.
+<58> Section 2.2.1.6.2: 0x00000001 is supported only in Windows NT.
 
-<56> Section 2.2.1.6.2: Trust with an Active Directory domain is not supported in Windows NT.
+<59> Section 2.2.1.6.2: Trust with an Active Directory domain is not supported in Windows NT.
 
-<57> Section 2.2.1.6.2: A trust link is valid only for Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 domains.
+<60> Section 2.2.1.6.2: A trust link is valid only for Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 domains.
 
-<58> Section 2.2.1.6.3: The **NETLOGON_TRUSTED_DOMAIN_ARRAY** structure is not supported in Windows NT.
+<61> Section 2.2.1.6.3: The **NETLOGON_TRUSTED_DOMAIN_ARRAY** structure is not supported in Windows NT.
 
-<59> Section 2.2.1.6.4: The **NL_GENERIC_RPC_DATA** structure is not supported in Windows NT or Windows 2000.
+<62> Section 2.2.1.6.4: The **NL_GENERIC_RPC_DATA** structure is not supported in Windows NT or Windows 2000.
 
-<60> Section 2.2.1.7.2: The **NETLOGON_INFO_1** structure contains information about the state of the database synchronization for Windows NT 4.0 backup domain controllers only.
+<63> Section 2.2.1.7.2: The **NETLOGON_INFO_1** structure contains information about the state of the database synchronization for Windows NT 4.0 backup domain controllers only.
 
-<61> Section 2.2.1.7.2: Flags A, B, C, and D are set only in the query response from a Windows NT 4.0-based backup domain controller. Flags E, F, and G are not available in Windows NT and cannot be set in the query response from a domain controller running Windows NT.
+<64> Section 2.2.1.7.2: Flags A, B, C, and D are set only in the query response from a Windows NT 4.0-based backup domain controller. Flags E, F, and G are not available in Windows NT and cannot be set in the query response from a domain controller running Windows NT.
 
-<62> Section 2.2.1.7.3: Flags A, B, and C cannot be set in the query response from a server running Windows NT. Flag C is also not supported in Windows 2000 or Windows XP.
+<65> Section 2.2.1.7.3: Flags A, B, and C cannot be set in the query response from a server running Windows NT. Flag C is also not supported in Windows 2000 or Windows XP.
 
-<63> Section 2.2.1.8: The unsupported structures are used in Windows releases that are not applicable to this specification.
+<66> Section 2.2.1.8: The unsupported structures are used in Windows releases that are not applicable to this specification.
 
-<64> Section 2.2.1.8.4: Windows never uses the **NETLOGON_DUMMY1** union.
+<67> Section 2.2.1.8.4: Windows never uses the **NETLOGON_DUMMY1** union.
 
-<65> Section 3: In Windows NT 4.0, the **Netlogon Remote Protocol** [**RPC**](#gt_remote-procedure-call-rpc) interface is used to replicate account information from the primary domain controllers (PDCs) to the backup domain controllers (BDCs). PDCs also use [**mailslots**](#gt_mailslot) to broadcast messages to the BDCs; these messages (as specified in section [2.2.1.5.1](#Section_2.2.1.5.1)) are not transmitted via RPC.
+<68> Section 3: In Windows NT 4.0, the **Netlogon Remote Protocol** [**RPC**](#gt_remote-procedure-call-rpc) interface is used to replicate account information from the primary domain controllers (PDCs) to the backup domain controllers (BDCs). PDCs also use [**mailslots**](#gt_mailslot) to broadcast messages to the BDCs; these messages (as specified in section [2.2.1.5.1](#Section_2.2.1.5.1)) are not transmitted via RPC.
 
-<66> Section 3: Except in Windows NT, the server defaults to the primary domain if the name is not found.
+<69> Section 3: Except in Windows NT, the server defaults to the primary domain if the name is not found.
 
-<67> Section 3.1.1: In all applicable Windows Server releases except Windows NT, for computer accounts in a domain, the [**OWF**](#gt_one-way-function-owf) of the [**shared secret**](#gt_shared-secret) is stored in the **unicodePwd** attribute of the computer account object in Active Directory ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4.2).
+<70> Section 3.1.1: In all applicable Windows Server releases except Windows NT, for computer accounts in a domain, the [**OWF**](#gt_one-way-function-owf) of the [**shared secret**](#gt_shared-secret) is stored in the **unicodePwd** attribute of the computer account object in Active Directory ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4.2).
 
 For [**trusts**](#gt_trust) with applicable Windows Server releases domains (except Windows NT), the shared secret is stored in the **trustAuthIncoming** attribute ([MS-ADTS] section 6.1.6.7.10) and the **trustAuthOutgoing** attribute ([MS-ADTS] section 6.1.6.7.11) of the [**trusted domain object (TDO)**](#gt_trusted-domain-object-tdo) that contains trust information in Active Directory ([MS-ADTS] section 6.1.6.9.1). Depending on the **AuthType** either the shared secret (TRUST_AUTH_TYPE_CLEAR) or NTOWFv1 (TRUST_AUTH_TYPE_NT4OWF) is stored.
 
 For trusts with Windows NT 4.0 domains, the OWF of the shared secret is stored in the **trustAuth** attribute of the corresponding TDO for the Windows NT 4.0 domain.
 
-<68> Section 3.1.1: In Windows NT 4.0, the OWF of the shared secret is stored as an attribute of the computer account object (for [**domain members**](#gt_domain-member-member-machine)) or the interdomain trust account object (for domain trusts) ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.3).
+<71> Section 3.1.1: In Windows NT 4.0, the OWF of the shared secret is stored as an attribute of the computer account object (for [**domain members**](#gt_domain-member-member-machine)) or the interdomain trust account object (for domain trusts) ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.3).
 
-<69> Section 3.1.1: In all applicable Windows Server releases (except Windows NT), the trust password version is stored in the TRUST_AUTH_TYPE_VERSION of the **trustAuthIncoming** attribute ([MS-ADTS] section 6.1.6.7.10) and the **trustAuthOutgoing** attribute ([MS-ADTS] section 6.1.6.7.11) of the TDO that contains trust information in Active Directory ([MS-ADTS] section 6.1.6.9.1). The trust password version is not maintained for Windows NT 4.0 domains.
+<72> Section 3.1.1: In all applicable Windows Server releases (except Windows NT), the trust password version is stored in the TRUST_AUTH_TYPE_VERSION of the **trustAuthIncoming** attribute ([MS-ADTS] section 6.1.6.7.10) and the **trustAuthOutgoing** attribute ([MS-ADTS] section 6.1.6.7.11) of the TDO that contains trust information in Active Directory ([MS-ADTS] section 6.1.6.9.1). The trust password version is not maintained for Windows NT 4.0 domains.
 
-<70> Section 3.1.1: **VulnerableChannelAllowList** is not supported in Windows NT, Windows 2000, Windows Server 2003.
+<73> Section 3.1.1: **VulnerableChannelAllowList** is not supported in Windows NT, Windows 2000, Windows Server 2003.
 
-<71> Section 3.1.4.1: Windows NT, Windows 2000, Windows Server 2003, and Windows Server 2008 allow the call to succeed.
+<74> Section 3.1.4.1: Windows NT, Windows 2000, Windows Server 2003, and Windows Server 2008 allow the call to succeed.
 
-<72> Section 3.1.4.1: Returning the negotiated flags or received client flags for the current exchange is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<75> Section 3.1.4.1: Returning the negotiated flags or received client flags for the current exchange is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<73> Section 3.1.4.1: Comparing the received **Capabilities** with the negotiated **NegotiateFlags** or **RequestedFlags** is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<76> Section 3.1.4.1: Comparing the received **Capabilities** with the negotiated **NegotiateFlags** or **RequestedFlags** is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<74> Section 3.1.4.1: Returning the negotiated flags or received client flags for the current exchange is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003.
+<77> Section 3.1.4.1: Returning the negotiated flags or received client flags for the current exchange is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003.
 
-<75> Section 3.1.4.1: Comparing the received **Capabilities** with the negotiated **NegotiateFlags** or **RequestedFlags** is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<78> Section 3.1.4.1: Comparing the received **Capabilities** with the negotiated **NegotiateFlags** or **RequestedFlags** is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<76> Section 3.1.4.2: The negotiable options that are available vary by Windows releases:
+<79> Section 3.1.4.2: The negotiable options that are available vary by Windows releases:
 
 - B is used in Windows NT 3.5 operating system only.
 - J through S are not supported in Windows NT.
@@ -14740,89 +14751,89 @@ For trusts with Windows NT 4.0 domains, the OWF of the shared secret is stored i
 - V is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 - W is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 - Y is not supported in Windows NT prior to Windows NT 4.0 operating system Service Pack 2 (SP2). Windows NT 4.0 operating system Service Pack 4 (SP4) does not support Secure RPC and does not perform a secure bind.
-<77> Section 3.1.4.6: Windows XP and later clients will request secure RPC. Windows Server 2008 and later will enforce that clients are using RPC Confidentiality to secure the connection. For more information, see [[MSFT-CVE-2020-1472]](https://go.microsoft.com/fwlink/?linkid=2143344) and [[MSFT-CVE-2022-38023]](https://go.microsoft.com/fwlink/?linkid=2214533).
+<80> Section 3.1.4.6: Windows XP and later clients will request secure RPC. Windows Server 2008 and later will enforce that clients are using RPC Confidentiality to secure the connection. For more information, see [[MSFT-CVE-2020-1472]](https://go.microsoft.com/fwlink/?linkid=2143344) and [[MSFT-CVE-2022-38023]](https://go.microsoft.com/fwlink/?linkid=2214533).
 
-<78> Section 3.1.4.6: For Windows, the client binds to the RPC server using TCP (except for Windows NT, in which the client binds to the RPC server using the named pipe "\PIPE\NETLOGON"). If RPC returns an error indicating that the protocol sequence is not supported, the client binds to the RPC server using named pipes.
+<81> Section 3.1.4.6: For Windows, the client binds to the RPC server using TCP (except for Windows NT, in which the client binds to the RPC server using the named pipe "\PIPE\NETLOGON"). If RPC returns an error indicating that the protocol sequence is not supported, the client binds to the RPC server using named pipes.
 
-<79> Section 3.1.4.6: Windows NT, Windows 2000, and Windows Server 2003 MS-NRPC servers do not support enforcing that clients are using RPC Integrity and Confidentiality to secure the connection.
+<82> Section 3.1.4.6: Windows NT, Windows 2000, and Windows Server 2003 MS-NRPC servers do not support enforcing that clients are using RPC Integrity and Confidentiality to secure the connection.
 
-<80> Section 3.1.4.6: Windows NT, Windows 2000, Windows Server 2003, and Windows Server 2008 allow the call to succeed.
+<83> Section 3.1.4.6: Windows NT, Windows 2000, Windows Server 2003, and Windows Server 2008 allow the call to succeed.
 
-<81> Section 3.1.4.6: Windows caches and reuses the binding for subsequent RPC calls to the server.
+<84> Section 3.1.4.6: Windows caches and reuses the binding for subsequent RPC calls to the server.
 
-<82> Section 3.1.4.7: Only Windows NT uses named pipes, see product note in step 1 in section [3.1.4.6](#Section_3.1.4.6).
+<85> Section 3.1.4.7: Only Windows NT uses named pipes, see product note in step 1 in section [3.1.4.6](#Section_3.1.4.6).
 
-<83> Section 3.1.6: When Netlogon receives a PolicyChange event, NRPC implementations that use the Windows registry to persistently store and retrieve the **SealSecureChannel** variable need to load the new value from the HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters registry path and **SealSecureChannel** key.
+<86> Section 3.1.6: When Netlogon receives a PolicyChange event, NRPC implementations that use the Windows registry to persistently store and retrieve the **SealSecureChannel** variable need to load the new value from the HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters registry path and **SealSecureChannel** key.
 
-<84> Section 3.3: The Windows Netlogon SSP is not provided for use by other applications. It has neither the full functionally of public [**SSPs**](#gt_security-support-provider-ssp) nor access from non-[**LSA**](#gt_local-security-authority-lsa) applications.
+<87> Section 3.3: The Windows Netlogon SSP is not provided for use by other applications. It has neither the full functionally of public [**SSPs**](#gt_security-support-provider-ssp) nor access from non-[**LSA**](#gt_local-security-authority-lsa) applications.
 
-<85> Section 3.3: The Netlogon capability of encrypting and signing data during communication is not supported in Windows NT prior to Windows NT 4.0 operating system Service Pack 6 (SP6).
+<88> Section 3.3: The Netlogon capability of encrypting and signing data during communication is not supported in Windows NT prior to Windows NT 4.0 operating system Service Pack 6 (SP6).
 
-<86> Section 3.3.4.2.2: Windows disregards the **Flags** data.
+<89> Section 3.3.4.2.2: Windows disregards the **Flags** data.
 
-<87> Section 3.3.4.2.2: In Windows when SEC_E_OUT_OF_SEQUENCE is returned, the exact error shown depends on the RPC layer. The RPC_S_SEC_PKG_ERROR ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) might be the ultimate error shown.
+<90> Section 3.3.4.2.2: In Windows when SEC_E_OUT_OF_SEQUENCE is returned, the exact error shown depends on the RPC layer. The RPC_S_SEC_PKG_ERROR ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) might be the ultimate error shown.
 
-<88> Section 3.4: Netlogon runs only on machines joined to a domain. Upon startup, it locates a domain controller and establishes a [**secure channel**](#gt_secure-channel) to it. It is used for secure communication between the client and the domain controller and for passing sensitive data between the two entities. Except in Windows NT, Netlogon also registers the [**SPNs**](#gt_service-principal-name-spn) for the computer that it runs on. It registers the SPNs of the form "HOST/NetBIOSName" and "HOST/Full.Dns.Name", which updates the **servicePrincipalName** attribute of the computer account object in Active Directory.
+<91> Section 3.4: Netlogon runs only on machines joined to a domain. Upon startup, it locates a domain controller and establishes a [**secure channel**](#gt_secure-channel) to it. It is used for secure communication between the client and the domain controller and for passing sensitive data between the two entities. Except in Windows NT, Netlogon also registers the [**SPNs**](#gt_service-principal-name-spn) for the computer that it runs on. It registers the SPNs of the form "HOST/NetBIOSName" and "HOST/Full.Dns.Name", which updates the **servicePrincipalName** attribute of the computer account object in Active Directory.
 
-<89> Section 3.4.1: The **RejectMD5Servers** variable is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<92> Section 3.4.1: The **RejectMD5Servers** variable is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
 The Windows registry settings used to persistently store and retrieve the **RejectMD5Servers** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **RejectMD5Servers** key.
 
-<90> Section 3.4.1: The following Windows registry settings are used to persistently store and retrieve the **RequireSignOrSeal** variable:
+<93> Section 3.4.1: The following Windows registry settings are used to persistently store and retrieve the **RequireSignOrSeal** variable:
 
 - RegistryValueName: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters
 - RegistryValueType: 4
 - RegistryValue: RequireSignOrSeal
 See [MS-GPSB](../MS-GPSB/MS-GPSB.md) section 2.2.5 for information on setting registry entries.
 
-<91> Section 3.4.1: The **RequireStrongKey** variable is not supported in Windows NT.
+<94> Section 3.4.1: The **RequireStrongKey** variable is not supported in Windows NT.
 
-<92> Section 3.4.1: The Windows registry settings used to persistently store and retrieve the **RequireStrongKey** variable are as follows:
+<95> Section 3.4.1: The Windows registry settings used to persistently store and retrieve the **RequireStrongKey** variable are as follows:
 
 - RegistryValueName: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters
 - RegistryValueType: 4
 - RegistryValue: RequireStrongKey
-<93> Section 3.4.3: Windows uses 4096. Other implementations can use any value.
+<96> Section 3.4.3: Windows uses 4096. Other implementations can use any value.
 
-<94> Section 3.4.3: Implementations that use the Windows registry to persistently store and retrieve the settings for **ClientCapabilities** bit O use the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and the **SignSecureChannel** and **SealSecureChannel** values to indicate whether bit O is to be set. If either of these registry values are set to 0x1, then bit O is set.
+<97> Section 3.4.3: Implementations that use the Windows registry to persistently store and retrieve the settings for **ClientCapabilities** bit O use the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and the **SignSecureChannel** and **SealSecureChannel** values to indicate whether bit O is to be set. If either of these registry values are set to 0x1, then bit O is set.
 
 Implementations that use the Windows registry to persistently store settings for **ClientCapabilities** bit U use the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and NeutralizeNt4Emulator key to indicate whether bit U is set. If this registry value is set to 0x1, then bit U is set.
 
-<95> Section 3.4.3: Windows NT 4.0 SP4, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 initialize **RequireSignOrSeal** to FALSE.
+<98> Section 3.4.3: Windows NT 4.0 SP4, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008 initialize **RequireSignOrSeal** to FALSE.
 
-<96> Section 3.4.3: The **RequireStrongKey** is initialized to FALSE in Windows.
+<99> Section 3.4.3: The **RequireStrongKey** is initialized to FALSE in Windows.
 
-<97> Section 3.4.5.1.3: The *SiteGuid* parameter is set to NULL by all applications available as part of Windows.
+<100> Section 3.4.5.1.3: The *SiteGuid* parameter is set to NULL by all applications available as part of Windows.
 
-<98> Section 3.4.5.1.11: The *ServerName* parameter is a normal (writable) DC but is not a Windows Server 2003 or a Windows 2000 Server DC.
+<101> Section 3.4.5.1.11: The *ServerName* parameter is a normal (writable) DC but is not a Windows Server 2003 or a Windows 2000 Server DC.
 
-<99> Section 3.4.5.2.5: The **NetrServerAuthenticate** method is used only in Windows NT Server 3.1 operating system.
+<102> Section 3.4.5.2.5: The **NetrServerAuthenticate** method is used only in Windows NT Server 3.1 operating system.
 
-<100> Section 3.4.5.2.6: Windows domain controller expects little-endian byte ordering for the encryption input. If your processor is in big endian, then both the wide-character buffer and length fields in the **NL_TRUST_PASSWORD** structure MUST be converted to little endian before encryption. After encryption, byte swapping to reverse the order will be needed.
+<103> Section 3.4.5.2.6: Windows domain controller expects little-endian byte ordering for the encryption input. If your processor is in big endian, then both the wide-character buffer and length fields in the **NL_TRUST_PASSWORD** structure MUST be converted to little endian before encryption. After encryption, byte swapping to reverse the order will be needed.
 
-<101> Section 3.4.5.2.6: Windows clients do not call NetrServerPasswordSet2 for group managed Microsoft Service Accounts (gMSA) accounts. Calling this API for gMSA accounts could cause undefined behavior.
+<104> Section 3.4.5.2.6: Windows clients do not call NetrServerPasswordSet2 for group managed Microsoft Service Accounts (gMSA) accounts. Calling this API for gMSA accounts could cause undefined behavior.
 
-<102> Section 3.4.5.2.6: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<105> Section 3.4.5.2.6: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<103> Section 3.4.5.2.7: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<106> Section 3.4.5.2.7: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<104> Section 3.4.5.2.8: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<107> Section 3.4.5.2.8: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<105> Section 3.4.5.2.10: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<108> Section 3.4.5.2.10: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<106> Section 3.4.5.2.11: **NetrLogonGetCapabilities** is not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<109> Section 3.4.5.2.11: **NetrLogonGetCapabilities** is not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<107> Section 3.4.5.2.11: Re-establishing the secure channel with the DC is not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003, Windows Vista, and Windows Server 2008.
+<110> Section 3.4.5.2.11: Re-establishing the secure channel with the DC is not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<108> Section 3.4.5.2.11: Re-establishing the secure channel with the DC is not supported by Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<111> Section 3.4.5.2.11: Re-establishing the secure channel with the DC is not supported by Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<109> Section 3.4.5.2.11: For Windows DCs, the STATUS_NOT_IMPLEMENTED error means the DC is a Windows NT, Windows Server 2003, or Windows Server 2008 machine.
+<112> Section 3.4.5.2.11: For Windows DCs, the STATUS_NOT_IMPLEMENTED error means the DC is a Windows NT, Windows Server 2003, or Windows Server 2008 machine.
 
-<110> Section 3.4.5.2.11: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<113> Section 3.4.5.2.11: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<111> Section 3.4.5.2.12: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
+<114> Section 3.4.5.2.12: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
 
-<112> Section 3.4.5.3.2: Except in Windows NT 3.1 operating system, Windows encrypts by using the negotiated encryption algorithm and the [**session key**](#gt_session-key).
+<115> Section 3.4.5.3.2: Except in Windows NT 3.1 operating system, Windows encrypts by using the negotiated encryption algorithm and the [**session key**](#gt_session-key).
 
 For Windows NT 3.1, encrypt as follows.
 
@@ -14874,116 +14885,122 @@ CALL DES_ECB(i2, k4, &output2)
 
 SET Output to concat(output1, output2)
 
-<113> Section 3.4.5.3.2: Except in Windows NT 3.1, Windows encrypts using the negotiated encryption algorithm and the session key. Windows NT 3.1 encryption is described in the preceding product behavior note.
+<116> Section 3.4.5.3.2: Except in Windows NT 3.1, Windows encrypts using the negotiated encryption algorithm and the session key. Windows NT 3.1 encryption is described in the preceding product behavior note.
 
-<114> Section 3.4.5.3.2: Except in Windows NT 3.1, Windows encrypts using the negotiated encryption algorithm and the session key. Windows NT 3.1 encryption is described in a preceding product behavior note in this section.
+<117> Section 3.4.5.3.2: Except in Windows NT 3.1, Windows encrypts using the negotiated encryption algorithm and the session key. Windows NT 3.1 encryption is described in a preceding product behavior note in this section.
 
-<115> Section 3.4.5.3.2: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<118> Section 3.4.5.3.2: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<116> Section 3.4.5.3.4: Except in Windows NT 3.1, Windows encrypts by using the negotiated encryption algorithm and the session key. For Windows NT 3.1, encrypt as described in the product behavior note in section [3.4.5.3.2](#Section_3.4.5.3.2).
+<119> Section 3.4.5.3.4: Except in Windows NT 3.1, Windows encrypts by using the negotiated encryption algorithm and the session key. For Windows NT 3.1, encrypt as described in the product behavior note in section [3.4.5.3.2](#Section_3.4.5.3.2).
 
-<117> Section 3.4.5.3.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<120> Section 3.4.5.3.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<118> Section 3.4.5.3.5: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<121> Section 3.4.5.3.5: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<119> Section 3.4.5.4.1: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<122> Section 3.4.5.4.1: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<120> Section 3.4.5.4.2: Windows clients call the **NetrDatabaseSync2** method in a loop until all database records are received.
+<123> Section 3.4.5.4.2: Windows clients call the **NetrDatabaseSync2** method in a loop until all database records are received.
 
-<121> Section 3.4.5.4.2: On receiving the STATUS_MORE_ENTRIES status code, Windows clients continue calling the **NetrDatabaseSync2** routine in a loop until all missing database entries are received. The client terminates the loop on a computer shutdown notification.
+<124> Section 3.4.5.4.2: On receiving the STATUS_MORE_ENTRIES status code, Windows clients continue calling the **NetrDatabaseSync2** routine in a loop until all missing database entries are received. The client terminates the loop on a computer shutdown notification.
 
-<122> Section 3.4.5.4.2: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<125> Section 3.4.5.4.2: Windows clients re-establish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<123> Section 3.4.5.4.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<126> Section 3.4.5.4.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<124> Section 3.4.5.5.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<127> Section 3.4.5.5.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<125> Section 3.4.5.5.6: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<128> Section 3.4.5.5.6: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<126> Section 3.4.5.6.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
+<129> Section 3.4.5.6.4: Windows clients reestablish the secure channel with the domain controller upon receiving STATUS_ACCESS_DENIED.
 
-<127> Section 3.4.6.1: Windows uses 4096. Other implementations can use any value.
+<130> Section 3.4.6.1: Windows uses 4096. Other implementations can use any value.
 
-<128> Section 3.4.7: The new Windows registry settings for the **RequireStrongKey** and **RequireSignOrSeal** variables are loaded from the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and the **RequireStrongKey** and **RequireSignOrSeal** keys.
+<131> Section 3.4.7: The new Windows registry settings for the **RequireStrongKey** and **RequireSignOrSeal** variables are loaded from the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and the **RequireStrongKey** and **RequireSignOrSeal** keys.
 
-<129> Section 3.5.1: In Windows, the default **DynamicSiteNameTimeout** value is 5 minutes, and the allowed range is 0 minutes to 49 days.
+<132> Section 3.5.1: In Windows, the default **DynamicSiteNameTimeout** value is 5 minutes, and the allowed range is 0 minutes to 49 days.
 
-<130> Section 3.5.1: **RejectMD5Clients** is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<133> Section 3.5.1: **RejectMD5Clients** is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<131> Section 3.5.1: The **NT4Emulator** ADM element is not implemented in Windows NT prior to Windows NT 4.0.
+<134> Section 3.5.1: The **NT4Emulator** ADM element is not implemented in Windows NT prior to Windows NT 4.0.
 
-<132> Section 3.5.1: **DCRPCPort** is not supported in Windows NT Server and Windows 2000 Server.
+<135> Section 3.5.1: **DCRPCPort** is not supported in Windows NT Server and Windows 2000 Server.
 
-<133> Section 3.5.3: The named pipe LSASS is also known by the alias NETLOGON. The client can use this alias to establish an RPC over a named pipe connection.
+<136> Section 3.5.3: The named pipe LSASS is also known by the alias NETLOGON. The client can use this alias to establish an RPC over a named pipe connection.
 
-<134> Section 3.5.3: Implementations that use the Windows registry to persistently store and retrieve the **RejectMD5Clients** variable use the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and RejectMD5Clients key.
+<137> Section 3.5.3: Implementations that use the Windows registry to persistently store and retrieve the **RejectMD5Clients** variable use the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and RejectMD5Clients key.
 
-<135> Section 3.5.3: Implementations that use the Windows registry to persistently store and retrieve the **SignSecureChannel** variable set the following values:
+<138> Section 3.5.3: Implementations that use the Windows registry to persistently store and retrieve the **SignSecureChannel** variable set the following values:
 
 - RegistryValueName: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters
 - RegistryValueType: 4
 - RegistryValue: SignSecureChannel
 Windows registry keys and values ([MS-GPSB] section 2.2.5) are exposed at a specified registry path via the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md). For each abstract data model (ADM) element that is loaded from the registry, there is one instance that is shared between the Windows Remote Registry Protocol and the protocol(s) that use(s) the ADM element. Any changes made to the **RejectMD5Clients** registry key will not be reflected in the ADM elements until the [**Netlogon**](#gt_netlogon) [**server**](#gt_server) is stopped and restarted.
 
-<136> Section 3.5.3: The **StrongKeySupport** value is initialized to FALSE in Windows NT 4.0.
+<139> Section 3.5.3: The **StrongKeySupport** value is initialized to FALSE in Windows NT 4.0.
 
-<137> Section 3.5.3: In Windows, **AllowSingleLabelDNSDomain** is configured using the following Windows registry path:
+<140> Section 3.5.3: In Windows, **AllowSingleLabelDNSDomain** is configured using the following Windows registry path:
 
 - Registry path: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters
 - RegistryValueName: AllowSingleLabelDNSDomain
 - RegistryType: DWORD
 - Acceptable values: 0 = Disabled, 1 = Enabled
 - Default value if not explicitly configured: 0.
-<138> Section 3.5.3: Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 consider **AllowDnsSuffixSearch** to be FALSE.
+<141> Section 3.5.3: Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 consider **AllowDnsSuffixSearch** to be FALSE.
 
-<139> Section 3.5.3: Windows uses the HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters registry path and **SiteName** value.
+<142> Section 3.5.3: Windows uses the HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters registry path and **SiteName** value.
 
-<140> Section 3.5.3: In Windows, **FailedDiscoveryCachePeriod** can be configured using the following Windows registry path:
+<143> Section 3.5.3: In Windows, **FailedDiscoveryCachePeriod** can be configured using the following Windows registry path:
 
 - Registry path: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters
 - RegistryValueName: NegativeCachePeriod
 - RegistryType: DWORD
 - AllowedRange: 0 - 604800 (7 days)
 - Default value if not explicitly configured: 45 seconds
-<141> Section 3.5.3: In Windows, the **CacheEntryValidityPeriod** variable value is 12 hours, unless changed by an administrator.
+<144> Section 3.5.3: In Windows, the **CacheEntryValidityPeriod** variable value is 12 hours, unless changed by an administrator.
 
-<142> Section 3.5.3: In Windows, the **CacheEntryPingValidityPeriod** variable value is 30 minutes, unless changed by an administrator.
+<145> Section 3.5.3: In Windows, the **CacheEntryPingValidityPeriod** variable value is 30 minutes, unless changed by an administrator.
 
-<143> Section 3.5.3: The Windows registry settings to persistently store and retrieve the **DCRPCPort** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **DCRPCPort** key.
+<146> Section 3.5.3: The Windows registry settings to persistently store and retrieve the **DCRPCPort** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **DCRPCPort** key.
 
-<144> Section 3.5.3: The Windows registry settings to persistently store and retrieve the **RejectDES** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **AllowNT4Crypto** key set to negation of the **RejectDES** variable.
+<147> Section 3.5.3: The Windows registry settings to persistently store and retrieve the **RejectDES** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **AllowNT4Crypto** key set to negation of the **RejectDES** variable.
 
-<145> Section 3.5.3: The **RejectDES** is FALSE in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<148> Section 3.5.3: The **RejectDES** is FALSE in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<146> Section 3.5.3: The Windows registry settings to persistently store and retrieve the **SiteCoverage** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **SiteCoverage** key.
+<149> Section 3.5.3: The Windows registry settings to persistently store and retrieve the **SiteCoverage** variable are the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and **SiteCoverage** key.
 
-<147> Section 3.5.4: Gaps in the [**opnum**](#gt_opnum) numbering sequence apply to Windows as follows.
+<150> Section 3.5.4: Gaps in the [**opnum**](#gt_opnum) numbering sequence apply to Windows as follows.
 
 | Opnum | Description |
 | --- | --- |
 | 47 | Windows uses this method only locally, never remotely. |
 
-<148> Section 3.5.4.3.1: The **DsrGetDcNameEx2** method is not supported in Windows NT.
+<151> Section 3.5.4.3.1: The **DsrGetDcNameEx2** method is not supported in Windows NT.
 
-<149> Section 3.5.4.3.1: The F bit is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<152> Section 3.5.4.3.1: The F bit is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<150> Section 3.5.4.3.1: The P bit is not implemented in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<153> Section 3.5.4.3.1: The P bit is not implemented in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<151> Section 3.5.4.3.1: Only domain controllers with security update [[MSFT-CVE-2025-49716]](https://go.microsoft.com/fwlink/?linkid=2325593) with its related updates installed enforce NETLOGON_DCLOC_RPC_ACCESS.
+<154> Section 3.5.4.3.1: This bit is supported in Windows 10 and later, and Windows Server v2004 operating system and later.
 
-<152> Section 3.5.4.3.1: Windows implements both the **LDAP Ping** and the **Mailslot Ping** methods ([MS-ADTS] section 6.3.3 and section 6.3.5 respectively) and uses them to locate a DC.
+<155> Section 3.5.4.3.1: This bit is supported in Windows Server 2025 and later.
 
-<153> Section 3.5.4.3.1: Windows NT does not support [**directory service**](#gt_directory-service-ds) functions.
+<156> Section 3.5.4.3.1: This bit is supported in Windows Server 2022 and later.
 
-<154> Section 3.5.4.3.1: In all applicable Windows Server releases except Windows NT, DCs support directory service functions.
+<157> Section 3.5.4.3.1: Only domain controllers with security update [[MSFT-CVE-2025-49716]](https://go.microsoft.com/fwlink/?linkid=2325593) with its related updates installed enforce NETLOGON_DCLOC_RPC_ACCESS.
 
-<155> Section 3.5.4.3.1: In all applicable Windows Server releases except Windows NT, a DC is writable when it hosts a writable copy of the directory service. These DCs are writable unless they are RODCs. A Windows NT DC is writable only if it is a PDC.
+<158> Section 3.5.4.3.1: Windows implements both the **LDAP Ping** and the **Mailslot Ping** methods ([MS-ADTS] section 6.3.3 and section 6.3.5 respectively) and uses them to locate a DC.
 
-<156> Section 3.5.4.3.1: The T bit is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<159> Section 3.5.4.3.1: Windows NT does not support [**directory service**](#gt_directory-service-ds) functions.
 
-<157> Section 3.5.4.3.1: If neither the R nor S flag is specified, Windows returns the type of name that matches the type of the *DomainName* parameter.
+<160> Section 3.5.4.3.1: In all applicable Windows Server releases except Windows NT, DCs support directory service functions.
 
-<158> Section 3.5.4.3.1: In Windows, if neither the R nor S flags are set in the *Flags* parameter, the behavior is as follows:
+<161> Section 3.5.4.3.1: In all applicable Windows Server releases except Windows NT, a DC is writable when it hosts a writable copy of the directory service. These DCs are writable unless they are RODCs. A Windows NT DC is writable only if it is a PDC.
+
+<162> Section 3.5.4.3.1: The T bit is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+
+<163> Section 3.5.4.3.1: If neither the R nor S flag is specified, Windows returns the type of name that matches the type of the *DomainName* parameter.
+
+<164> Section 3.5.4.3.1: In Windows, if neither the R nor S flags are set in the *Flags* parameter, the behavior is as follows:
 
 - If only one of the **DnsHostName** or **NetbiosComputerName** fields is set in the message, the **DomainControllerName** field is set to that value.
 - Otherwise, if both the **DnsHostName** and **NetbiosComputerName** fields are set in the message:
@@ -14992,7 +15009,7 @@ Windows registry keys and values ([MS-GPSB] section 2.2.5) are exposed at a spec
 - If the *DomainName* parameter is NULL:
 - If the DC responded to the LDAP message, the **DomainControllerName** field is set to the value of the **DnsHostName** message field.
 - If the DC responded to the mailslot message, the **DomainControllerName** field is set to the value of the **NetbiosComputerName** message field.
-<159> Section 3.5.4.3.1: In Windows, if neither the R nor S flags are set in the *Flags* parameter, the behavior is as follows:
+<165> Section 3.5.4.3.1: In Windows, if neither the R nor S flags are set in the *Flags* parameter, the behavior is as follows:
 
 - If only one of the **DnsDomainName** or **NetbiosDomainName** fields is set in the message, the **DomainName** field is set to that value.
 - Otherwise, if both the **DnsDomainName** and **NetbiosDomainName** fields are set in the message:
@@ -15001,13 +15018,13 @@ Windows registry keys and values ([MS-GPSB] section 2.2.5) are exposed at a spec
 - If the *DomainName* parameter of the **DsrGetDcNameEx2** call is NULL:
 - If the DC responded to the LDAP message, the **DomainName** field is set to the value of the **DnsDomainName** message field.
 - If the DC responded to the mailslot message, the **DomainName** field is set to the value of the **NetbiosDomainName** message field.
-<160> Section 3.5.4.3.2: The **DsrGetDcNameEx** method is not supported in Windows NT.
+<166> Section 3.5.4.3.2: The **DsrGetDcNameEx** method is not supported in Windows NT.
 
-<161> Section 3.5.4.3.3: The **DsrGetDcName** method is not supported in Windows NT.
+<167> Section 3.5.4.3.3: The **DsrGetDcName** method is not supported in Windows NT.
 
-<162> Section 3.5.4.3.4: The **NetrGetDCName** method is supported in Windows NT Server 3.1. It is superseded by the **DsrGetDcNameEx2** method (section [3.5.4.3.1](#Section_3.5.4.3.1)) in Windows 2000.
+<168> Section 3.5.4.3.4: The **NetrGetDCName** method is supported in Windows NT Server 3.1. It is superseded by the **DsrGetDcNameEx2** method (section [3.5.4.3.1](#Section_3.5.4.3.1)) in Windows 2000.
 
-<163> Section 3.5.4.3.4: Only domain controllers with the appropriate updates enforce NETLOGON_DCLOC_RPC_ACCESS. The following table lists the updates and Microsoft Windows versions:
+<169> Section 3.5.4.3.4: Only domain controllers with the appropriate updates enforce NETLOGON_DCLOC_RPC_ACCESS. The following table lists the updates and Microsoft Windows versions:
 
 | Windows Version | Update |
 | --- | --- |
@@ -15015,7 +15032,7 @@ Windows registry keys and values ([MS-GPSB] section 2.2.5) are exposed at a spec
 | Windows Server 2022, 23H2 operating system | [[MSKB-5063899]](https://go.microsoft.com/fwlink/?linkid=2327818) |
 | Windows 11, version 22H2 operating system, Windows 11, version 23H2 operating system | [[MSKB-5063875]](https://go.microsoft.com/fwlink/?linkid=2330455) |
 | Windows Server 2022 | [[MSKB-5063880]](https://go.microsoft.com/fwlink/?linkid=2327426) |
-| Windows 10 v2004 operating system, Windows Server v2004 operating system | [[MSKB-5063709]](https://go.microsoft.com/fwlink/?linkid=2330553) |
+| Windows 10 v2004 operating system, Windows Server v2004 | [[MSKB-5063709]](https://go.microsoft.com/fwlink/?linkid=2330553) |
 | Windows 10 v1809 operating system, Windows Server 2019 | [[MSKB-5063877]](https://go.microsoft.com/fwlink/?linkid=2330554) |
 | Windows 10 v1607 operating system, Windows Server 2016 | [[MSKB-5063871]](https://go.microsoft.com/fwlink/?linkid=2330656) |
 | Windows 10 v1507 operating system | [[MSKB-5063889]](https://go.microsoft.com/fwlink/?linkid=2330456) |
@@ -15024,11 +15041,11 @@ Windows registry keys and values ([MS-GPSB] section 2.2.5) are exposed at a spec
 | Windows 7 operating system | [[MSKB-5063927]](https://go.microsoft.com/fwlink/?linkid=2345816) |
 | Windows Vista operating system | [[MSKB-5063948]](https://go.microsoft.com/fwlink/?linkid=2345914) |
 
-<164> Section 3.5.4.3.4: Windows implements both the **LDAP Ping** method ([MS-ADTS] section 6.3.3) and the **Mailslot Ping** method ([MS-ADTS] section 6.3.5), and uses those two methods to locate a DC.
+<170> Section 3.5.4.3.4: Windows implements both the **LDAP Ping** method ([MS-ADTS] section 6.3.3) and the **Mailslot Ping** method ([MS-ADTS] section 6.3.5), and uses those two methods to locate a DC.
 
-<165> Section 3.5.4.3.5: The **NetrGetAnyDCName** method is supported in Windows NT Server 3.1 through Windows NT 4.0. It is superseded by the **DsrGetDcNameEx2** method (section 3.5.4.3.1) in Windows 2000.
+<171> Section 3.5.4.3.5: The **NetrGetAnyDCName** method is supported in Windows NT Server 3.1 through Windows NT 4.0. It is superseded by the **DsrGetDcNameEx2** method (section 3.5.4.3.1) in Windows 2000.
 
-<166> Section 3.5.4.3.5: Only domain controllers with the appropriate updates enforce NETLOGON_DCLOC_RPC_ACCESS. The following table lists the updates and Windows versions:
+<172> Section 3.5.4.3.5: Only domain controllers with the appropriate updates enforce NETLOGON_DCLOC_RPC_ACCESS. The following table lists the updates and Windows versions:
 
 | Windows Version | Update |
 | --- | --- |
@@ -15045,81 +15062,81 @@ Windows registry keys and values ([MS-GPSB] section 2.2.5) are exposed at a spec
 | Windows 7 | [MSKB-5063927] |
 | Windows Vista | [MSKB-5063948] |
 
-<167> Section 3.5.4.3.5: Windows implements both the **LDAP Ping** method ([MS-ADTS] section 6.3.3) and the **Mailslot Ping** method ([MS-ADTS] section 6.3.5), and uses those two methods to locate a DC ([MS-ADTS] section 6.3.6).
+<173> Section 3.5.4.3.5: Windows implements both the **LDAP Ping** method ([MS-ADTS] section 6.3.3) and the **Mailslot Ping** method ([MS-ADTS] section 6.3.5), and uses those two methods to locate a DC ([MS-ADTS] section 6.3.6).
 
-<168> Section 3.5.4.3.6: The **DsrGetSiteName** method is not supported in Windows NT.
+<174> Section 3.5.4.3.6: The **DsrGetSiteName** method is not supported in Windows NT.
 
-<169> Section 3.5.4.3.6: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
+<175> Section 3.5.4.3.6: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
 
-<170> Section 3.5.4.3.6: Windows implements both the **LDAP Ping** method ([MS-ADTS] section 6.3.3) and the **Mailslot Ping** method ([MS-ADTS] section 6.3.5), and uses those two methods to locate a DC ([MS-ADTS] section 6.3.6).
+<176> Section 3.5.4.3.6: Windows implements both the **LDAP Ping** method ([MS-ADTS] section 6.3.3) and the **Mailslot Ping** method ([MS-ADTS] section 6.3.5), and uses those two methods to locate a DC ([MS-ADTS] section 6.3.6).
 
-<171> Section 3.5.4.3.7: The **DsrGetDcSiteCoverageW** method is not supported in Windows NT.
+<177> Section 3.5.4.3.7: The **DsrGetDcSiteCoverageW** method is not supported in Windows NT.
 
-<172> Section 3.5.4.3.7: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
+<178> Section 3.5.4.3.7: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
 
-<173> Section 3.5.4.3.8: The **DsrAddressToSiteNamesW** method is not supported in Windows NT.
+<179> Section 3.5.4.3.8: The **DsrAddressToSiteNamesW** method is not supported in Windows NT.
 
-<174> Section 3.5.4.3.8: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
+<180> Section 3.5.4.3.8: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
 
-<175> Section 3.5.4.3.9: The **DsrAddressToSiteNamesExW** method is not supported in Windows NT.
+<181> Section 3.5.4.3.9: The **DsrAddressToSiteNamesExW** method is not supported in Windows NT.
 
-<176> Section 3.5.4.3.9: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
+<182> Section 3.5.4.3.9: Only domain controllers with security update [MSFT-CVE-2025-49716] with its related KB article installed enforce NETLOGON_DCLOC_RPC_ACCESS.
 
-<177> Section 3.5.4.3.10: The **DsrDeregisterDnsHostRecords** method is not supported in Windows NT.
+<183> Section 3.5.4.3.10: The **DsrDeregisterDnsHostRecords** method is not supported in Windows NT.
 
-<178> Section 3.5.4.3.11: The **DsrUpdateReadOnlyServerDnsRecords** method is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+<184> Section 3.5.4.3.11: The **DsrUpdateReadOnlyServerDnsRecords** method is not implemented in Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
 
-<179> Section 3.5.4.3.11: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
+<185> Section 3.5.4.3.11: The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
 
-<180> Section 3.5.4.4.1: The **NetrServerReqChallenge** method is not implemented in Windows NT 3.1.
+<186> Section 3.5.4.4.1: The **NetrServerReqChallenge** method is not implemented in Windows NT 3.1.
 
-<181> Section 3.5.4.4.2: The **NetrServerAuthenticate3** method is not supported in Windows NT.
+<187> Section 3.5.4.4.2: The **NetrServerAuthenticate3** method is not supported in Windows NT.
 
-<182> Section 3.5.4.4.2: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
+<188> Section 3.5.4.4.2: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
 
-<183> Section 3.5.4.4.2: Except in Windows NT 4.0, if the value is 5 (UasServerSecureChannel), the server always returns an access-denied error because this functionality is no longer supported. Windows NT 4.0 has configuration parameter options allowing UAS compatibility mode, and if this mode is enabled, the error is not returned, and further processing occurs. Otherwise, it returns an access-denied error.
+<189> Section 3.5.4.4.2: Except in Windows NT 4.0, if the value is 5 (UasServerSecureChannel), the server always returns an access-denied error because this functionality is no longer supported. Windows NT 4.0 has configuration parameter options allowing UAS compatibility mode, and if this mode is enabled, the error is not returned, and further processing occurs. Otherwise, it returns an access-denied error.
 
-<184> Section 3.5.4.4.3: Supported on Windows 11, version 24H2 and Windows Server 2025.
+<190> Section 3.5.4.4.3: Supported on Windows 11, version 24H2 and Windows Server 2025.
 
-<185> Section 3.5.4.4.3: Windows uses netlogon/<hostname> as the targetname for the workstation secure channels.
+<191> Section 3.5.4.4.3: Windows uses netlogon/<hostname> as the targetname for the workstation secure channels.
 
-<186> Section 3.5.4.4.4: The **NetrServerAuthenticate2** method is used in Windows NT 3.5 and Windows NT 4.0. It is superseded by the NetrServerAuthenticate3 method (section 3.5.4.4.2).
+<192> Section 3.5.4.4.4: The **NetrServerAuthenticate2** method is used in Windows NT 3.5 and Windows NT 4.0. It is superseded by the NetrServerAuthenticate3 method (section 3.5.4.4.2).
 
-<187> Section 3.5.4.4.5: The **NetrServerAuthenticate** method is used only in Windows NT Server 3.1. In Windows NT Server 3.5 operating system, it is superseded by the NetrServerAuthenticate2 method (section 3.5.4.4.4).
+<193> Section 3.5.4.4.5: The **NetrServerAuthenticate** method is used only in Windows NT Server 3.1. In Windows NT Server 3.5 operating system, it is superseded by the NetrServerAuthenticate2 method (section 3.5.4.4.4).
 
-<188> Section 3.5.4.4.6: The **NetrServerPasswordSet2** method is not supported in Windows NT.
+<194> Section 3.5.4.4.6: The **NetrServerPasswordSet2** method is not supported in Windows NT.
 
-<189> Section 3.5.4.4.6: By default, the machine account password is changed every 30 days in Windows. The value is configurable with a minimum of one day and maximum of 1,000,000 days.
+<195> Section 3.5.4.4.6: By default, the machine account password is changed every 30 days in Windows. The value is configurable with a minimum of one day and maximum of 1,000,000 days.
 
-<190> Section 3.5.4.4.6: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
+<196> Section 3.5.4.4.6: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
 
-<191> Section 3.5.4.4.6: Windows domain controller expects little-endian byte ordering for the encryption input. If your processor is in big endian, then both the wide-character buffer and length fields in the **NL_TRUST_PASSWORD** structure MUST be converted to little endian before encryption. After encryption, byte swapping to reverse the order will be needed.
+<197> Section 3.5.4.4.6: Windows domain controller expects little-endian byte ordering for the encryption input. If your processor is in big endian, then both the wide-character buffer and length fields in the **NL_TRUST_PASSWORD** structure MUST be converted to little endian before encryption. After encryption, byte swapping to reverse the order will be needed.
 
-<192> Section 3.5.4.4.7: The **NetrServerPasswordSet** method is not implemented in Windows NT 3.1.
+<198> Section 3.5.4.4.7: The **NetrServerPasswordSet** method is not implemented in Windows NT 3.1.
 
-<193> Section 3.5.4.4.7: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
+<199> Section 3.5.4.4.7: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
 
-<194> Section 3.5.4.4.8: The **NetrServerPasswordGet** method is not supported in Windows NT.
+<200> Section 3.5.4.4.8: The **NetrServerPasswordGet** method is not supported in Windows NT.
 
-<195> Section 3.5.4.4.8: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
+<201> Section 3.5.4.4.8: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
 
-<196> Section 3.5.4.4.9: The **NetrServerTrustPasswordsGet** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server operating system Service Pack 4 (SP4).
+<202> Section 3.5.4.4.9: The **NetrServerTrustPasswordsGet** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server operating system Service Pack 4 (SP4).
 
-<197> Section 3.5.4.4.9: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
+<203> Section 3.5.4.4.9: In Windows, all machine account names are the name of the machine with a "$" (dollar sign) appended.
 
-<198> Section 3.5.4.4.10: The **NetrLogonGetDomainInfo** method is not supported in Windows NT.
+<204> Section 3.5.4.4.10: The **NetrLogonGetDomainInfo** method is not supported in Windows NT.
 
-<199> Section 3.5.4.4.10: Verifying that the *WkstaBuffer* parameter is not NULL is not supported in Windows NT, Windows 2000, Windows Server 2003, and Windows Server 2008.
+<205> Section 3.5.4.4.10: Verifying that the *WkstaBuffer* parameter is not NULL is not supported in Windows NT, Windows 2000, Windows Server 2003, and Windows Server 2008.
 
-<200> Section 3.5.4.4.10: Windows uses 4096. Other implementations can use any value.
+<206> Section 3.5.4.4.10: Windows uses 4096. Other implementations can use any value.
 
-<201> Section 3.5.4.4.10: In Windows, **NETLOGON_ONE_DOMAIN_INFO.TrustExtension MaximumLength** and **Length** are set to the size 0x10, and **Buffer** points to a buffer containing the following fields of a **DS_DOMAIN_TRUSTSW** structure: **Flags**, **ParentIndex**, **TrustType**, **TrustAttributes**.
+<207> Section 3.5.4.4.10: In Windows, **NETLOGON_ONE_DOMAIN_INFO.TrustExtension MaximumLength** and **Length** are set to the size 0x10, and **Buffer** points to a buffer containing the following fields of a **DS_DOMAIN_TRUSTSW** structure: **Flags**, **ParentIndex**, **TrustType**, **TrustAttributes**.
 
-<202> Section 3.5.4.4.10: If the *wProductType* is VER_NT_WORKSTATION, then the string is "Windows Workstation", otherwise the string is "Windows Server".
+<208> Section 3.5.4.4.10: If the *wProductType* is VER_NT_WORKSTATION, then the string is "Windows Workstation", otherwise the string is "Windows Server".
 
-<203> Section 3.5.4.4.10: If both WkstaBuffer.*WorkstationInfo*.*OsVersion* and WkstaBuffer.*WorkstationInfo*.*OsName* are unspecified, Windows 2000, Windows XP, and Windows Server 2003 use the generic string "Windows 2000" to update the **operatingSystem** attribute. If only WkstaBuffer.*WorkstationInfo*.*OsName* is unspecified, Windows 2000, Windows XP, and Windows Server 2003 use the generic string "Windows 2000 Professional" when WkstaBuffer.*WorkstationInfo*.*OsVersion*.*wProductType* is VER_NT_WORKSTATION, and otherwise use the string "Windows 2000 Server" to update the **operatingSystem** attribute.
+<209> Section 3.5.4.4.10: If both WkstaBuffer.*WorkstationInfo*.*OsVersion* and WkstaBuffer.*WorkstationInfo*.*OsName* are unspecified, Windows 2000, Windows XP, and Windows Server 2003 use the generic string "Windows 2000" to update the **operatingSystem** attribute. If only WkstaBuffer.*WorkstationInfo*.*OsName* is unspecified, Windows 2000, Windows XP, and Windows Server 2003 use the generic string "Windows 2000 Professional" when WkstaBuffer.*WorkstationInfo*.*OsVersion*.*wProductType* is VER_NT_WORKSTATION, and otherwise use the string "Windows 2000 Server" to update the **operatingSystem** attribute.
 
-<204> Section 3.5.4.4.11: The **NetrLogonGetCapabilities** method is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<210> Section 3.5.4.4.11: The **NetrLogonGetCapabilities** method is not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
 In Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, RPC Opnum 21 is associated with the following RPC method, which does not perform any protocol-relevant function:
 
@@ -15141,30 +15158,30 @@ NTSTATUS NetrLogonDummyRoutine1(
 
 The return type and parameters for NetrLogonDummyRoutine1 take on the same data representation as those for **NetrLogonGetCapabilities**.
 
-<205> Section 3.5.4.4.11: The *Capabilities* parameter is not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003. These operating systems supported a dummy buffer type:
+<211> Section 3.5.4.4.11: The *Capabilities* parameter is not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003. These operating systems supported a dummy buffer type:
 
 [out, switch_is(QueryLevel)] PNETLOGON_DUMMY1 Buffer
 
 **Buffer**: A pointer to a byte buffer.
 
-<206> Section 3.5.4.4.11: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 do no processing for this call, and always return 0xC0000002 (STATUS_NOT_IMPLEMENTED).
+<212> Section 3.5.4.4.11: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 do no processing for this call, and always return 0xC0000002 (STATUS_NOT_IMPLEMENTED).
 
-<207> Section 3.5.4.4.11: Windows RPC layer may return its own error code instead of STATUS_INVALID_LEVEL. The error code that a client gets depends on where the calling application is getting the error from:
+<213> Section 3.5.4.4.11: Windows RPC layer may return its own error code instead of STATUS_INVALID_LEVEL. The error code that a client gets depends on where the calling application is getting the error from:
 
 - If the client is running on Windows and calling Windows RPC APIs, they may get the Win32 error code RPC_S_INVALID_TAG ([MS-ERREF] section 2.2).
 - If the client is running on third-party operating systems or getting the error code from the wire, they may get nca_s_fault_invalid_tag (0x1C000006). ([[C706-RSCP]](https://go.microsoft.com/fwlink/?linkid=2243583)).
 - The conversion between the on-the-wire nca_s_fault_invalid_tag and Win32 error code RPC_S_INVALID_TAG is specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.1.1.5.5.
-<208> Section 3.5.4.4.12: The **NetrChainSetClientAttributes** method is not supported by Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista. The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
+<214> Section 3.5.4.4.12: The **NetrChainSetClientAttributes** method is not supported by Windows NT, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista. The normal (writable) DC cannot be a Windows 2000 Server or a Windows Server 2003 DC.
 
-<209> Section 3.5.4.5.1: The **NetrLogonSamLogonEx** method is not supported in Windows NT.
+<215> Section 3.5.4.5.1: The **NetrLogonSamLogonEx** method is not supported in Windows NT.
 
-<210> Section 3.5.4.5.1: Windows uses the value 0x01 as the representation of TRUE and 0x00 for FALSE.
+<216> Section 3.5.4.5.1: Windows uses the value 0x01 as the representation of TRUE and 0x00 for FALSE.
 
-<211> Section 3.5.4.5.1: Bits C and D are not implemented in Windows NT, Windows 2000, and Windows Server 2003.
+<217> Section 3.5.4.5.1: Bits C and D are not implemented in Windows NT, Windows 2000, and Windows Server 2003.
 
-<212> Section 3.5.4.5.1: Windows will fragment a response that exceeds the maximum fragment size even if minor version is 0. If the RPC message is fragmented, operations are done on each message fragment.
+<218> Section 3.5.4.5.1: Windows will fragment a response that exceeds the maximum fragment size even if minor version is 0. If the RPC message is fragmented, operations are done on each message fragment.
 
-<213> Section 3.5.4.5.1: Except in Windows NT 3.1, Windows decrypts by using the negotiated [**decryption**](#gt_decryption) algorithm and the session key. For Windows NT 3.1, decrypt as follows.
+<219> Section 3.5.4.5.1: Except in Windows NT 3.1, Windows decrypts by using the negotiated [**decryption**](#gt_decryption) algorithm and the session key. For Windows NT 3.1, decrypt as follows.
 
 InitLMKey(KeyIn, KeyOut)
 
@@ -15214,87 +15231,87 @@ CALL DES_ECB(i2, k4, &output2)
 
 SET Output to concat(output1, output2)
 
-<214> Section 3.5.4.5.1: Except in Windows NT 3.1, Windows decrypts by using the negotiated decryption algorithm and the session key. For Windows NT 3.1, decrypt as described in the product behavior note earlier in the section.
+<220> Section 3.5.4.5.1: Except in Windows NT 3.1, Windows decrypts by using the negotiated decryption algorithm and the session key. For Windows NT 3.1, decrypt as described in the product behavior note earlier in the section.
 
-<215> Section 3.5.4.5.1: Except in Windows NT 3.1, Windows decrypts by using the negotiated decryption algorithm and the session key. For Windows NT 3.1, decrypt as described in the product behavior note earlier in the section.
+<221> Section 3.5.4.5.1: Except in Windows NT 3.1, Windows decrypts by using the negotiated decryption algorithm and the session key. For Windows NT 3.1, decrypt as described in the product behavior note earlier in the section.
 
-<216> Section 3.5.4.5.1: Except in Windows NT and Windows 2000, Windows supports verifying whether a correct combination of *LogonLevel* and *ValidationLevel* is supplied. The data is opaque to Netlogon and is passed unexamined to the package specified by the **PackageName** field of the **NETLOGON_GENERIC_INFO** structure. For more information, see section [3.2.4.1](#Section_3.2.4.1).
+<222> Section 3.5.4.5.1: Except in Windows NT and Windows 2000, Windows supports verifying whether a correct combination of *LogonLevel* and *ValidationLevel* is supplied. The data is opaque to Netlogon and is passed unexamined to the package specified by the **PackageName** field of the **NETLOGON_GENERIC_INFO** structure. For more information, see section [3.2.4.1](#Section_3.2.4.1).
 
-<217> Section 3.5.4.5.1: Windows NT and Windows 2000 do not verify whether a correct combination of *LogonLevel* and *ValidationLevel* is supplied.
+<223> Section 3.5.4.5.1: Windows NT and Windows 2000 do not verify whether a correct combination of *LogonLevel* and *ValidationLevel* is supplied.
 
-<218> Section 3.5.4.5.1: This functionality is only performed by the operating systems specified by security update [[MSFT-CVE-2022-21857]](https://go.microsoft.com/fwlink/?linkid=2184901) with its related KB article installed. It excludes Windows Vista and earlier and Windows Server 2003 R2 and earlier.
+<224> Section 3.5.4.5.1: This functionality is only performed by the operating systems specified by security update [[MSFT-CVE-2022-21857]](https://go.microsoft.com/fwlink/?linkid=2184901) with its related KB article installed. It excludes Windows Vista and earlier and Windows Server 2003 R2 and earlier.
 
-<219> Section 3.5.4.5.1: This functionality is only performed by the operating systems specified by security update [MSFT-CVE-2022-21857] with its related KB article installed. It excludes Windows Vista and earlier and Windows Server 2003 R2 and earlier.
+<225> Section 3.5.4.5.1: This functionality is only performed by the operating systems specified by security update [MSFT-CVE-2022-21857] with its related KB article installed. It excludes Windows Vista and earlier and Windows Server 2003 R2 and earlier.
 
-<220> Section 3.5.4.5.2: The **NetrLogonSamLogonWithFlags** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server SP4.
+<226> Section 3.5.4.5.2: The **NetrLogonSamLogonWithFlags** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server SP4.
 
-<221> Section 3.5.4.5.2: Windows uses the value of 0x01 as the representation of TRUE and 0x00 for FALSE.
+<227> Section 3.5.4.5.2: Windows uses the value of 0x01 as the representation of TRUE and 0x00 for FALSE.
 
-<222> Section 3.5.4.5.2: Bits C and D are not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<228> Section 3.5.4.5.2: Bits C and D are not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<223> Section 3.5.4.5.3: The **NetrLogonSamLogon** method is only used in Windows NT 4.0. It is superseded by the [NetrLogonSamLogonWithFlags](#Section_3.4.5.3.3) method (section 3.5.4.5.2).
+<229> Section 3.5.4.5.3: The **NetrLogonSamLogon** method is only used in Windows NT 4.0. It is superseded by the [NetrLogonSamLogonWithFlags](#Section_3.4.5.3.3) method (section 3.5.4.5.2).
 
-<224> Section 3.5.4.5.3: Windows will fragment a response that exceeds the maximum fragment size even if minor version is 0. If the RPC message is fragmented, operations are done on each message fragment.
+<230> Section 3.5.4.5.3: Windows will fragment a response that exceeds the maximum fragment size even if minor version is 0. If the RPC message is fragmented, operations are done on each message fragment.
 
-<225> Section 3.5.4.5.4: The **NetrLogonSamLogoff** method is not available in Windows NT 3.1.
+<231> Section 3.5.4.5.4: The **NetrLogonSamLogoff** method is not available in Windows NT 3.1.
 
-<226> Section 3.5.4.5.4: Windows NT servers support logoff updates.
+<232> Section 3.5.4.5.4: Windows NT servers support logoff updates.
 
-<227> Section 3.5.4.6.1: The **NetrDatabaseDeltas** method is not available in Windows NT 3.1.
+<233> Section 3.5.4.6.1: The **NetrDatabaseDeltas** method is not available in Windows NT 3.1.
 
-<228> Section 3.5.4.6.1: All applicable Windows Server releases stop including elements in the returned *DeltaArray* after the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter.
+<234> Section 3.5.4.6.1: All applicable Windows Server releases stop including elements in the returned *DeltaArray* after the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter.
 
-<229> Section 3.5.4.6.1: Windows limits the number of records to approximately 1,000 records per call.
+<235> Section 3.5.4.6.1: Windows limits the number of records to approximately 1,000 records per call.
 
-<230> Section 3.5.4.6.2: The **NetrDatabaseSync2** method is not available in Windows NT 3.1, Windows NT Server 3.1, Windows NT 3.5, Windows 7, or Windows Server 2008 R2.
+<236> Section 3.5.4.6.2: The **NetrDatabaseSync2** method is not available in Windows NT 3.1, Windows NT Server 3.1, Windows NT 3.5, Windows 7, or Windows Server 2008 R2.
 
-<231> Section 3.5.4.6.2: Windows stops including elements in the returned *DeltaArray* once the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter.
+<237> Section 3.5.4.6.2: Windows stops including elements in the returned *DeltaArray* once the size of the returned data equals or exceeds the value of the *PreferredMaximumLength* parameter.
 
-<232> Section 3.5.4.6.2: Windows limits the number of records to approximately 1,000 records per call.
+<238> Section 3.5.4.6.2: Windows limits the number of records to approximately 1,000 records per call.
 
-<233> Section 3.5.4.6.3: The **NetrDatabaseSync** method was used in Windows NT prior to Windows NT 4.0. It is superseded by the [NetrDatabaseSync2](#Section_3.5.4.6.2) method.
+<239> Section 3.5.4.6.3: The **NetrDatabaseSync** method was used in Windows NT prior to Windows NT 4.0. It is superseded by the [NetrDatabaseSync2](#Section_3.5.4.6.2) method.
 
-<234> Section 3.5.4.6.4: The **NetrDatabaseRedo** method is not available in Windows NT 3.1, Windows NT Server 3.1, Windows NT 3.5, Windows 7, or Windows Server 2008 R2.
+<240> Section 3.5.4.6.4: The **NetrDatabaseRedo** method is not available in Windows NT 3.1, Windows NT Server 3.1, Windows NT 3.5, Windows 7, or Windows Server 2008 R2.
 
-<235> Section 3.5.4.7.1: The **DsrEnumerateDomainTrusts** method is not supported in Windows NT.
+<241> Section 3.5.4.7.1: The **DsrEnumerateDomainTrusts** method is not supported in Windows NT.
 
-<236> Section 3.5.4.7.2: The **NetrEnumerateTrustedDomainsEx** method is not supported in Windows NT.
+<242> Section 3.5.4.7.2: The **NetrEnumerateTrustedDomainsEx** method is not supported in Windows NT.
 
-<237> Section 3.5.4.7.3: The **NetrEnumerateTrustedDomains** method is not available in Windows NT prior to Windows NT 4.0.
+<243> Section 3.5.4.7.3: The **NetrEnumerateTrustedDomains** method is not available in Windows NT prior to Windows NT 4.0.
 
-<238> Section 3.5.4.7.4: The **NetrGetForestTrustInformation** method is not supported in Windows NT and Windows 2000 Server prior to Windows 2000 Server SP4.
+<244> Section 3.5.4.7.4: The **NetrGetForestTrustInformation** method is not supported in Windows NT and Windows 2000 Server prior to Windows 2000 Server SP4.
 
-<239> Section 3.5.4.7.5: The **DsrGetForestTrustInformation** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server SP4.
+<245> Section 3.5.4.7.5: The **DsrGetForestTrustInformation** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server SP4.
 
-<240> Section 3.5.4.7.6: The **NetrServerGetTrustInfo** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server SP4.
+<246> Section 3.5.4.7.6: The **NetrServerGetTrustInfo** method is not supported in Windows NT and Windows 2000 prior to Windows 2000 Server SP4.
 
-<241> Section 3.5.4.8.1: The **NetrLogonGetTrustRid** method is not supported in Windows NT.
+<247> Section 3.5.4.8.1: The **NetrLogonGetTrustRid** method is not supported in Windows NT.
 
-<242> Section 3.5.4.8.1: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 allow the call to succeed. Other Windows releases return ERROR_ACCESS_DENIED if not local.
+<248> Section 3.5.4.8.1: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 allow the call to succeed. Other Windows releases return ERROR_ACCESS_DENIED if not local.
 
-<243> Section 3.5.4.8.2: The **NetrLogonComputeServerDigest** method is not implemented in Windows NT.
+<249> Section 3.5.4.8.2: The **NetrLogonComputeServerDigest** method is not implemented in Windows NT.
 
-<244> Section 3.5.4.8.2: When the previous password is not present, Windows Server 2012 and later use an uninitialized value to compute the *OldMessageDigest* parameter.
+<250> Section 3.5.4.8.2: When the previous password is not present, Windows Server 2012 and later use an uninitialized value to compute the *OldMessageDigest* parameter.
 
-<245> Section 3.5.4.8.3: The **NetrLogonComputeClientDigest** method is not implemented in Windows NT.
+<251> Section 3.5.4.8.3: The **NetrLogonComputeClientDigest** method is not implemented in Windows NT.
 
-<246> Section 3.5.4.8.4: The **NetrLogonSendToSam** method is not supported in Windows NT.
+<252> Section 3.5.4.8.4: The **NetrLogonSendToSam** method is not supported in Windows NT.
 
-<247> Section 3.5.4.8.5: The **NetrLogonSetServiceBits** method is not supported in Windows NT.
+<253> Section 3.5.4.8.5: The **NetrLogonSetServiceBits** method is not supported in Windows NT.
 
-<248> Section 3.5.4.8.5: The C flag is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<254> Section 3.5.4.8.5: The C flag is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<249> Section 3.5.4.8.5: The C flag is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<255> Section 3.5.4.8.5: The C flag is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<250> Section 3.5.4.8.5: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 allow the call to succeed. Other Windows releases return ERROR_ACCESS_DENIED if not local.
+<256> Section 3.5.4.8.5: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 allow the call to succeed. Other Windows releases return ERROR_ACCESS_DENIED if not local.
 
-<251> Section 3.5.4.8.6: The **NetrLogonGetTimeServiceParentDomain** method is not supported in Windows NT.
+<257> Section 3.5.4.8.6: The **NetrLogonGetTimeServiceParentDomain** method is not supported in Windows NT.
 
-<252> Section 3.5.4.8.6: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 allow the call to succeed.
+<258> Section 3.5.4.8.6: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 allow the call to succeed.
 
-<253> Section 3.5.4.9.1: The **NetrLogonControl2Ex** method executes Windows-specific administrative actions and is not available in Windows NT prior to Windows NT 4.0.
+<259> Section 3.5.4.9.1: The **NetrLogonControl2Ex** method executes Windows-specific administrative actions and is not available in Windows NT prior to Windows NT 4.0.
 
-<254> Section 3.5.4.9.1: The following restrictions apply to the values of the *FunctionCode* parameter. The error ERROR_NOT_SUPPORTED is returned if one of these values is used.
+<260> Section 3.5.4.9.1: The following restrictions apply to the values of the *FunctionCode* parameter. The error ERROR_NOT_SUPPORTED is returned if one of these values is used.
 
 The following values are not supported on Windows NT 4.0:
 
@@ -15319,39 +15336,39 @@ The following values are not supported on Windows 7 and Windows Server 2008 R2:
 - NETLOGON_CONTROL_BACKUP_CHANGE_LOG (0x0000FFFC)
 No restrictions apply in Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<255> Section 3.5.4.9.1: NETLOGON_CONTROL_REPLICATE is supported on servers that are Windows NT 4.0 BDCs; otherwise, the ERROR_NOT_SUPPORTED error is returned from a server that is not a Windows NT 4.0 BDC.
+<261> Section 3.5.4.9.1: NETLOGON_CONTROL_REPLICATE is supported on servers that are Windows NT 4.0 BDCs; otherwise, the ERROR_NOT_SUPPORTED error is returned from a server that is not a Windows NT 4.0 BDC.
 
-<256> Section 3.5.4.9.1: NETLOGON_CONTROL_SYNCHRONIZE is supported on Windows NT 4.0 BDCs; otherwise, the ERROR_NOT_SUPPORTED error is returned from a server that is not a Windows NT 4.0 BDC.
+<262> Section 3.5.4.9.1: NETLOGON_CONTROL_SYNCHRONIZE is supported on Windows NT 4.0 BDCs; otherwise, the ERROR_NOT_SUPPORTED error is returned from a server that is not a Windows NT 4.0 BDC.
 
-<257> Section 3.5.4.9.1: On a Windows NT, Windows 2000, or Windows XP DC, ERROR_NOT_SUPPORTED is returned. The server implementation decides how the DNS update status is recorded.
+<263> Section 3.5.4.9.1: On a Windows NT, Windows 2000, or Windows XP DC, ERROR_NOT_SUPPORTED is returned. The server implementation decides how the DNS update status is recorded.
 
-<258> Section 3.5.4.9.1: In Windows, the server copies to a backup file the contents of a file that contains a cache of database changes.
+<264> Section 3.5.4.9.1: In Windows, the server copies to a backup file the contents of a file that contains a cache of database changes.
 
-<259> Section 3.5.4.9.1: In Windows, the server truncates the contents of a debug file that contains debugging information about the Netlogon service operations.
+<265> Section 3.5.4.9.1: In Windows, the server truncates the contents of a debug file that contains debugging information about the Netlogon service operations.
 
-<260> Section 3.5.4.9.1: In Windows, the server sets the level of verbosity of output into the debug file that contains debugging information about the Netlogon service operations. The level of verbosity to set is specified in the **DebugFlag** field of the *Data* parameter.
+<266> Section 3.5.4.9.1: In Windows, the server sets the level of verbosity of output into the debug file that contains debugging information about the Netlogon service operations. The level of verbosity to set is specified in the **DebugFlag** field of the *Data* parameter.
 
-<261> Section 3.5.4.9.1: In Windows, if the [NetrLogonControl2Ex](#Section_3.5.4.9.1) method is called with the function code NETLOGON_CONTROL_BREAKPOINT and the operating system is not a checked build, the method returns ERROR_NOT_SUPPORTED.
+<267> Section 3.5.4.9.1: In Windows, if the [NetrLogonControl2Ex](#Section_3.5.4.9.1) method is called with the function code NETLOGON_CONTROL_BREAKPOINT and the operating system is not a checked build, the method returns ERROR_NOT_SUPPORTED.
 
-<262> Section 3.5.4.9.1: In Windows, the server breaks into the debugger if it is attached to the computer that supports debugging.
+<268> Section 3.5.4.9.1: In Windows, the server breaks into the debugger if it is attached to the computer that supports debugging.
 
-<263> Section 3.5.4.9.1: The **NETLOGON_INFO_4** structure is not supported in Windows NT.
+<269> Section 3.5.4.9.1: The **NETLOGON_INFO_4** structure is not supported in Windows NT.
 
-<264> Section 3.5.4.9.1: Windows NT 4.0 BDCs force an immediate partial synchronization of all databases.
+<270> Section 3.5.4.9.1: Windows NT 4.0 BDCs force an immediate partial synchronization of all databases.
 
-<265> Section 3.5.4.9.1: Windows NT 4.0 BDCs force an immediate full synchronization of all databases.
+<271> Section 3.5.4.9.1: Windows NT 4.0 BDCs force an immediate full synchronization of all databases.
 
-<266> Section 3.5.4.9.1: Windows NT 4.0 PDCs immediately send announcement messages to request each BDC to replicate the database.
+<272> Section 3.5.4.9.1: Windows NT 4.0 PDCs immediately send announcement messages to request each BDC to replicate the database.
 
-<267> Section 3.5.4.9.1: Windows NT and Windows 2000 DCs return ERROR_NOT_SUPPORTED.
+<273> Section 3.5.4.9.1: Windows NT and Windows 2000 DCs return ERROR_NOT_SUPPORTED.
 
-<268> Section 3.5.4.9.1: Windows NT and Windows 2000 DCs return ERROR_NOT_SUPPORTED.
+<274> Section 3.5.4.9.1: Windows NT and Windows 2000 DCs return ERROR_NOT_SUPPORTED.
 
-<269> Section 3.5.4.9.2: The **NetrLogonControl2** method is not supported in Windows NT 3.1.
+<275> Section 3.5.4.9.2: The **NetrLogonControl2** method is not supported in Windows NT 3.1.
 
-<270> Section 3.5.4.9.3: NetrLogonControl is not available in Windows NT 3.1.
+<276> Section 3.5.4.9.3: NetrLogonControl is not available in Windows NT 3.1.
 
-<271> Section 3.5.4.9.3: The *FunctionCode* parameter is restricted to the following values. If any other value is used, the error code ERROR_NOT_SUPPORTED is returned.
+<277> Section 3.5.4.9.3: The *FunctionCode* parameter is restricted to the following values. If any other value is used, the error code ERROR_NOT_SUPPORTED is returned.
 
 Windows NT 4.0:
 
@@ -15373,13 +15390,13 @@ For all windows releases except Windows NT 4.0, Windows 2000, Windows XP, Window
 - NETLOGON_CONTROL_QUERY (0x00000001)
 - NETLOGON_CONTROL_TRUNCATE_LOG (0x0000FFFD)
 - NETLOGON_CONTROL_BREAKPOINT (0x0000FFFF)
-<272> Section 3.5.4.10: The Netlogon client implementations in Windows ignore these methods. The Netlogon server returns STATUS_NOT_IMPLEMENTED.
+<278> Section 3.5.4.10: The Netlogon client implementations in Windows ignore these methods. The Netlogon server returns STATUS_NOT_IMPLEMENTED.
 
-<273> Section 3.5.6: The new **SignSecureChannel** value is loaded into the Windows registry from the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and SignSecureChannel key.
+<279> Section 3.5.6: The new **SignSecureChannel** value is loaded into the Windows registry from the HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters registry path and SignSecureChannel key.
 
-<274> Section 3.6: On Windows DCs, replication is performed by the Active Directory replication service ([MS-DRSR]), except on Windows NT 4.0 DCs, where replication is performed by the Netlogon replication. Netlogon replication requires the PDC to run Windows NT Server 4.0 operating system, Windows 2000 Server, or Windows Server 2003, while BDCs run Windows NT Server 4.0. Windows Server 2008 does not support replication to Windows NT 4.0 BDCs.
+<280> Section 3.6: On Windows DCs, replication is performed by the Active Directory replication service ([MS-DRSR]), except on Windows NT 4.0 DCs, where replication is performed by the Netlogon replication. Netlogon replication requires the PDC to run Windows NT Server 4.0 operating system, Windows 2000 Server, or Windows Server 2003, while BDCs run Windows NT Server 4.0. Windows Server 2008 does not support replication to Windows NT 4.0 BDCs.
 
-<275> Section 3.6.4.1: To indicate such a local condition, the PDC returns a value of 0xC0000134 as the return value of the NetrDatabaseDeltas call. For example, the PDC maintains a partial database state cached in memory that the PDC can use for processing partial synchronization requests. If the cached information is not available (for example, if the cache gets flushed), the PDC returns the error code 0xC0000134.
+<281> Section 3.6.4.1: To indicate such a local condition, the PDC returns a value of 0xC0000134 as the return value of the NetrDatabaseDeltas call. For example, the PDC maintains a partial database state cached in memory that the PDC can use for processing partial synchronization requests. If the cached information is not available (for example, if the cache gets flushed), the PDC returns the error code 0xC0000134.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -15398,17 +15415,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.1.1.3](#Section_2.2.1.1.3) UNICODE_STRING | 32050 : Added a new section "UNICODE_STRING". | Major |
-| [2.2.1.4.19](#Section_2.2.1.4.19) NETLOGON_TICKET_LOGON_INFO | 32056 : Added Glossary terms for A2A and A2ATo. | Major |
-| [2.2.1.5](#Section_2.2.1.5) Account Database Replication Structures | 32051 : Updated definition for DummyString1. | Major |
-| [2.2.1.5.21](#Section_2.2.1.5.21) NETLOGON_DELTA_SECRET | 32052 : Updated datatype for DummyString1, DummyString2, DummyString3, and DummyString4. | Major |
-| [3.5.4.3.4](#Section_3.5.4.3.4) NetrGetDCName (Opnum 11) | 32045 : Corrected KB Articles for Windows Versions. | Major |
-| 3.5.4.3.4 NetrGetDCName (Opnum 11) | 32046 : Corrected KB Articles for Windows Versions. | Major |
-| 3.5.4.3.4 NetrGetDCName (Opnum 11) | 32047 : Corrected KB Articles for Windows Versions. | Major |
-| 3.5.4.3.4 NetrGetDCName (Opnum 11) | 32048 : Corrected KB Articles for Windows Versions. | Major |
-| [3.5.4.4.2](#Section_3.5.4.4.2) NetrServerAuthenticate3 (Opnum 26) | 32054 : Fixed unique restriction for NetrServerAuthenticate3, DsrUpdateReadOnlyServerDnsRecords, and IDL. | Major |
-| [3.5.4.10](#Section_3.5.4.10) Obsolete Methods | 32053 : Added range restriction for NetrLogonUasLogon and NetrLogonUasLogoff. | Major |
-| [6](#Section_6) Appendix A: Full IDL | 30605 : Updated the definition for the public IDL. | Major |
+| [2.2.1.2.1](#Section_2.2.1.2.1) DOMAIN_CONTROLLER_INFOW | 51187 : Added U and V bits to the bit Flags table. | Major |
+| [3.5.4.3.1](#Section_3.5.4.3.1) DsrGetDcNameEx2 (Opnum 34) | 51171 : Added X, Y, and Z bits to the bit Flags table. | Major |
 
 <a id="revision-history"></a>
 
@@ -15490,3 +15498,4 @@ The changes made to this document are listed in the following table. For more in
 | 9/9/2025 | 47.0 | Major | Significantly changed the technical content. |
 | 11/21/2025 | 48.0 | Major | Significantly changed the technical content. |
 | 2/9/2026 | 49.0 | Major | Significantly changed the technical content. |
+| 10/26/2026 | 50.0 | Major | Significantly changed the technical content. |
