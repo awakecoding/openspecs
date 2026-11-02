@@ -73,7 +73,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 4/23/2024.
+Last updated: 10/26/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -136,7 +136,7 @@ This document uses the following terms:
 **double-indirect file allocation table (DIFAT)**: A structure that is used to locate [**FAT**](#gt_file-allocation-table-fat) [**sectors**](#gt_sector) in a [**compound file**](#gt_compound-file).
 
 <a id="gt_file"></a>
-**file**: An entity of data in the [**file system**](#gt_file-system) that a user can access and manage. A [**file**](#gt_file) must have a unique name in its directory. It consists of one or more streams of bytes that hold a set of related data, plus a set of attributes (also called properties) that describe the [**file**](#gt_file) or the data within the [**file**](#gt_file). The creation time of a [**file**](#gt_file) is an example of a file attribute.
+**file**: An entity of data in the [**file system**](#gt_file-system) that a user can access and manage. A file has to have a unique name in its directory. It consists of one or more streams of bytes that hold a set of related data, plus a set of attributes also called properties that describe the file or the data within the file. The creation time of a file is an example of a file attribute.
 
 <a id="gt_file-allocation-table-fat"></a>
 **file allocation table (FAT)**: A data structure that the operating system creates when a volume is formatted by using [**FAT**](#gt_file-allocation-table-fat) or FAT32 [**file systems**](#gt_file-system). The operating system stores information about each [**file**](#gt_file) in the [**FAT**](#gt_file-allocation-table-fat) so that it can retrieve the [**file**](#gt_file) later.
@@ -145,7 +145,7 @@ This document uses the following terms:
 **file system**: A system that enables applications to store and retrieve [**files**](#gt_file) on storage devices. Files are placed in a hierarchical structure. The file system specifies naming conventions for files and the format for specifying the path to a file in the tree structure. Each file system consists of one or more drivers and DLLs that define the data formats and features of the file system. File systems can exist on the following storage devices: diskettes, hard disks, jukeboxes, removable optical disks, and tape backup units.
 
 <a id="gt_globally-unique-identifier-guid"></a>
-**globally unique identifier (GUID)**: A term used interchangeably with universally unique identifier (UUID) in Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the value. Specifically, the use of this term does not imply or require that the algorithms described in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) or [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) must be used for generating the [**GUID**](#gt_globally-unique-identifier-guid). See also universally unique identifier (UUID).
+**globally unique identifier (GUID)**: A term used interchangeably with universally unique identifier (UUID) in Microsoft protocol technical documents (TDs). Interchanging the usage of these terms does not imply or require a specific algorithm or mechanism to generate the value. Specifically, the use of this term does not imply or require that the algorithms described in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) or [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) have to be used for generating the GUID. See also universally unique identifier (UUID).
 
 <a id="gt_header"></a>
 **header**: The structure at the beginning of a [**compound file**](#gt_compound-file).
@@ -169,10 +169,10 @@ This document uses the following terms:
 **object class**: In COM, a category of objects identified by a [**CLSID**](#gt_class-identifier-clsid), members of which can be obtained through activation of the [**CLSID**](#gt_class-identifier-clsid).
 
 <a id="gt_parent-object"></a>
-**parent object**: An object is either the root of a tree of objects or has a parent. If two objects have the same parent, they must have different values in their relative distinguished names (RDNs). See also, [**object**](#gt_object) in section 1 of [MS-ADTS] and section 1 of [MS-DRSR].
+**parent object**: An object is either the root of a tree of objects or has a parent. If two objects have the same parent, they have to have different values in their relative distinguished names (RDNs). See also, [**object**](#gt_object) in section 1 of [MS-ADTS] and section 1 of [MS-DRSR].
 
 <a id="gt_root-storage-object"></a>
-**root storage object**: A storage object in a compound file that must be accessed before any other storage objects and stream objects are referenced. It is the uppermost [**parent object**](#gt_parent-object) in the storage object and stream object hierarchy.
+**root storage object**: A storage object in a compound file that has to be accessed before any other storage objects and stream objects are referenced. It is the uppermost [**parent object**](#gt_parent-object) in the storage object and stream object hierarchy.
 
 <a id="gt_sector"></a>
 **sector**: The smallest addressable unit of a disk.
@@ -190,13 +190,13 @@ This document uses the following terms:
 **storage**: A storage object, as defined in [MS-CFB](#Section_53989ce47b054f8d829bd08d6148375b).
 
 <a id="gt_storage-object"></a>
-**storage object**: An [**object**](#gt_object) in a [**compound file**](#gt_compound-file) that is analogous to a [**file system**](#gt_file-system) [**directory**](#gt_directory). The [**parent object**](#gt_parent-object) of a [**storage object**](#gt_storage-object) must be another [**storage object**](#gt_storage-object) or the [**root storage object**](#gt_root-storage-object).
+**storage object**: An [**object**](#gt_object) in a [**compound file**](#gt_compound-file) that is analogous to a [**file system**](#gt_file-system) [**directory**](#gt_directory). The [**parent object**](#gt_parent-object) of a storage object has to be another storage object or the [**root storage object**](#gt_root-storage-object).
 
 <a id="gt_stream"></a>
 **stream**: An element of a compound file, as described in [MS-CFB]. A stream contains a sequence of bytes that can be read from or written to by an application, and they can exist only in storages.
 
 <a id="gt_stream-object"></a>
-**stream object**: An [**object**](#gt_object) in a [**compound file**](#gt_compound-file) that is analogous to a [**file system**](#gt_file-system) [**file**](#gt_file). The [**parent object**](#gt_parent-object) of a [**stream object**](#gt_stream-object) must be a [**storage object**](#gt_storage-object) or the [**root storage object**](#gt_root-storage-object).
+**stream object**: An [**object**](#gt_object) in a [**compound file**](#gt_compound-file) that is analogous to a [**file system**](#gt_file-system) [**file**](#gt_file). The [**parent object**](#gt_parent-object) of a stream object has to be a [**storage object**](#gt_storage-object) or the [**root storage object**](#gt_root-storage-object).
 
 <a id="gt_stream-object"></a>
 **Stream object**: A Server object that is used to read and write large string and binary properties.
@@ -850,7 +850,7 @@ Figure 16: Example of a compound file
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 0x0000 | Header Signature 0xE11AB1A1E011CFD0 |
-| Variable | 0x0008 | Header CLSID 0x00000000000000000000000000000000 (null) |
+| 0x00000000000000000000000000000000 (null) ({00000000-0000-0000-0000-000000000000}) | 0x0008 | Header CLSID |
 | Variable | 0x0018 | Minor Version 0x003E |
 | Variable | 0x001A | Major Version 0x0003 |
 | Byte Order | 0x001C | 0xFFFE |
@@ -1050,7 +1050,7 @@ Stream ID 3: Unused
 | Variable | 0x0444 | Left Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x0448 | Right Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x044C | Child ID 0x00000001 (Stream ID 1: "Storage 1" (section [2.6.3](#Section_2.6.3))) |
-| Variable | 0x0450 | CLSID 0x11CEC15456616700 0xAA005385 0x5BF9A100 |
+| 0x11CEC15456616700 0xAA005385 0x5BF9A100 ({56616700-C154-11CE-8553-00AA00A1F95B}) | 0x0450 | CLSID |
 | Variable | 0x0460 | State Bits 0x00000000 |
 | Variable | 0x0464 | Creation Time 0x0000000000000000 |
 | 0x01BAB44B13921E80 (11/16/1995 5:43:45 PM) | 0x046C | Modified Time |
@@ -1085,7 +1085,7 @@ Stream ID 3: Unused
 | Variable | 0x04C4 | Left Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x04C8 | Right Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x04CC | Child ID 0x00000002 (Stream ID 2: "Stream 1" ) |
-| Variable | 0x04D0 | CLSID 0x5BF9A100AA00538511CEC15456616100 |
+| 0x5BF9A100AA00538511CEC15456616100 ({56616100-C154-11CE-8553-00AA00A1F95B}) | 0x04D0 | CLSID |
 | Variable | 0x04E0 | State Bits 0x00000000 |
 | 0x01BAB44B12F98800 (11/16/1995 5:43:44 PM) | 0x04E4 | Creation Time |
 | 0x01BAB44B13921E80 (11/16/1995 5:43:45 PM) | 0x04EC | Modified Time |
@@ -1120,7 +1120,7 @@ Stream ID 3: Unused
 | Variable | 0x0544 | Left Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x0548 | Right Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x054C | Child ID 0xFFFFFFFF (none) |
-| Variable | 0x0550 | CLSID 0x00000000000000000000000000000000 (null) |
+| 0x00000000000000000000000000000000 (null) ({00000000-0000-0000-0000-000000000000}) | 0x0550 | CLSID |
 | Variable | 0x0560 | State Bits 0x00000000 |
 | Variable | 0x0564 | Creation Time 0x0000000000000000 |
 | Variable | 0x056C | Modified Time 0x0000000000000000 |
@@ -1155,7 +1155,7 @@ Stream ID 3: Unused
 | Variable | 0x05C4 | Left Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x05C8 | Right Sibling ID 0xFFFFFFFF (none) |
 | Variable | 0x05CC | Child ID 0xFFFFFFFF (none) |
-| Variable | 0x05D0 | CLSID 0x00000000000000000000000000000000 (null) |
+| 0x00000000000000000000000000000000 (null) ({00000000-0000-0000-0000-000000000000}) | 0x05D0 | CLSID |
 | Variable | 0x05E0 | State Bits 0x00000000 |
 | Variable | 0x05E4 | Creation Time 0x0000000000000000 |
 | Variable | 0x05EC | Modified Time 0x0000000000000000 |
@@ -1501,7 +1501,11 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [5](#Section_5) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [3.1](#Section_3.1) The Header | 51857 : Added memory representation for CLSID | Major |
+| [3.3.1](#Section_3.3.1) Stream ID 0: Root Directory Entry | 51857 : Added memory representation for CLSID | Major |
+| [3.3.2](#Section_3.3.2) Stream ID 1: Storage 1 | 51857 : Added memory representation for CLSID | Major |
+| [3.3.3](#Section_3.3.3) Stream ID 2: Stream 1 | 51857 : Added memory representation for CLSID | Major |
+| [3.3.4](#Section_3.3.4) Stream ID 3: Unused, Free | 51857 : Added memory representation for CLSID | Major |
 
 <a id="revision-history"></a>
 
@@ -1539,3 +1543,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/7/2021 | 10.0 | Major | Significantly changed the technical content. |
 | 6/25/2021 | 11.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 12.0 | Major | Significantly changed the technical content. |
+| 10/26/2026 | 13.0 | Major | Significantly changed the technical content. |
