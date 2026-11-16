@@ -175,7 +175,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 3/30/2026.
+Last updated: 11/10/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -393,6 +393,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDN-DecryptMsg] Microsoft Corporation, "DecryptMessage (General) function", [http://msdn.microsoft.com/en-us/library/aa375211.aspx](https://go.microsoft.com/fwlink/?LinkId=101488)
 
 [MSDN-EncryptMsg] Microsoft Corporation, "EncryptMessage (General)", [http://msdn.microsoft.com/en-us/library/aa375378.aspx](https://go.microsoft.com/fwlink/?LinkId=94577)
+
+[MSFT-CVE-2026-118737] Microsoft Corporation, "CVE-2026-118737", November 10, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118737](https://go.microsoft.com/fwlink/?LinkId=2387722)
 
 [MSKB-5064081] Microsoft Corporation, "August 29, 2025—KB5064081", August 2025, [https://support.microsoft.com/en-us/topic/august-29-2025-kb5064081-os-build-26100-5074-preview-3f9eb9e1-72ca-4b42-af97-39aace788d93](https://go.microsoft.com/fwlink/?linkid=2330003)
 
@@ -1383,6 +1385,10 @@ The client sets the following configuration flags in the **NegotiateFlags** fiel
 - NTLMSSP_NEGOTIATE_NTLM
 - NTLMSSP_NEGOTIATE_ALWAYS_SIGN
 - NTLMSSP_NEGOTIATE_UNICODE
+For non-anonymous connections, the client SHOULD<48> additionally set the following configuration flags in the **NegotiateFlags** field of the NEGOTIATE_MESSAGE:
+
+- NTLMSSP_NEGOTIATE_SIGN
+- NTLMSSP_NEGOTIATE_KEY_EXCH
 If LM authentication is not being used, then the client sets the following configuration flag in the **NegotiateFlags** field of the NEGOTIATE_MESSAGE:
 
 - NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY
@@ -1484,7 +1490,7 @@ Fields MUST be set as follows:
 - **MessageType** to NtLmAuthenticate.
 If the NTLMSSP_NEGOTIATE_VERSION flag is set by the client application, the **Version** field MUST be set to th11302e current version (section [2.2.2.10](#Section_2.2.2.10)), and the **Workstation** field MUST be set to NbMachineName. Otherwise, if the NTLMSSP_NEGOTIATE_VERSION flag is not set by the client application, the Version field MUST be set to all-zero.
 
-If NTLM v2 authentication is used, the client SHOULD send the timestamp in the CHALLENGE_MESSAGE.<48>
+If NTLM v2 authentication is used, the client SHOULD send the timestamp in the CHALLENGE_MESSAGE.<49>
 
 If there exists a CHALLENGE_MESSAGE.TargetInfo.AvId ==
 
@@ -1500,7 +1506,7 @@ Endif
 
 If NTLM v2 authentication is used and the CHALLENGE_MESSAGE does not contain both MsvAvNbComputerName and MsvAvNbDomainName AVPairs and either Integrity is TRUE or Confidentiality is TRUE, then return STATUS_LOGON_FAILURE ([MS-ERREF] section 2.3.1).
 
-If NTLM v2 authentication is used and the CHALLENGE_MESSAGE **TargetInfo** field (section 2.2.1.2) has an MsvAvTimestamp present, the client SHOULD NOT send the LmChallengeResponse and SHOULD send Z(24) instead.<49>
+If NTLM v2 authentication is used and the CHALLENGE_MESSAGE **TargetInfo** field (section 2.2.1.2) has an MsvAvTimestamp present, the client SHOULD NOT send the LmChallengeResponse and SHOULD send Z(24) instead.<50>
 
 Response keys are computed using the ComputeResponse() function, as specified in section [3.3](#Section_3.3).
 
@@ -1560,20 +1566,20 @@ NEGOTIATE_MESSAGE, CHALLENGE_MESSAGE, AUTHENTICATE_MESSAGE))
 
 Set AUTHENTICATE_MESSAGE.MIC to MIC
 
-If the CHALLENGE_MESSAGE **TargetInfo** field has an MsvAvTimestamp present, the client SHOULD provide a MIC:<50>
+If the CHALLENGE_MESSAGE **TargetInfo** field has an MsvAvTimestamp present, the client SHOULD provide a MIC:<51>
 
 - If there is an **AV_PAIR** structure (section [2.2.2.1](#Section_2.2.2.1)) with the **AvId** field set to MsvAvFlags,
 - then in the **Value** field, set bit 0x2 to 1.
 - else add an **AV_PAIR** structure and set the **AvId** field to MsvAvFlags and the **Value** field bit 0x2 to 1.
 - Populate the **MIC** field with the MIC.
-The client SHOULD send the channel binding **AV_PAIR** <51>:
+The client SHOULD send the channel binding **AV_PAIR** <52>:
 
 - If the CHALLENGE_MESSAGE contains a **TargetInfo** field
 - If the ClientChannelBindingsUnhashed (section [3.1.1.2](#Section_3.1.1.2)) is not NULL
 - Add an **AV_PAIR** structure and set the **AvId** field to MsvAvChannelBindings and the **Value** field to MD5_HASH(ClientChannelBindingsUnhashed).
 - Else add an **AV_PAIR** structure and set the **AvId** field to MsvAvChannelBindings and the **Value** field to Z(16).
 - If ClientSuppliedTargetName (section 3.1.1.2) is not NULL
-- Add an **AV_PAIR** structure and set the **AvId** field to MsvAvTargetName and the **Value** field to ClientSuppliedTargetName without terminating NULL. If UnverifiedTargetName (section 3.1.1.2) is TRUE, then in **AvId** field = MsvAvFlags set 0x00000004 bit.<52>
+- Add an **AV_PAIR** structure and set the **AvId** field to MsvAvTargetName and the **Value** field to ClientSuppliedTargetName without terminating NULL. If UnverifiedTargetName (section 3.1.1.2) is TRUE, then in **AvId** field = MsvAvFlags set 0x00000004 bit.<53>
 - Else add an **AV_PAIR** structure and set the **AvId** field to MsvAvTargetName and the **Value** field to an empty string without terminating NULL.
 When this process is complete, the client MUST send the AUTHENTICATE_MESSAGE to the server, embedded in an application protocol message, and encoded as specified by that application protocol.
 
@@ -1582,18 +1588,18 @@ When this process is complete, the client MUST send the AUTHENTICATE_MESSAGE to 
 
 The client action for connectionless NTLM authentication is similar to that of connection-oriented authentication (section [3.1.5.1](#Section_3.1.5.1)). However, the first message sent in connectionless authentication is the CHALLENGE_MESSAGE (section [2.2.1.2](#Section_2.2.1.2)) from the server to the client; there is no client-initiated NEGOTIATE_MESSAGE (section [2.2.1.1](#Section_2.2.1.1)) as in the connection-oriented authentication.
 
-The message processing for connectionless NTLM authentication<53> is as specified in the following sections.
+The message processing for connectionless NTLM authentication<54> is as specified in the following sections.
 
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Client Receives a CHALLENGE_MESSAGE
 
 When the client receives a CHALLENGE_MESSAGE (section [2.2.1.2](#Section_2.2.1.2)), it MUST produce a [**challenge**](#gt_challenge) response and an encrypted [**session key**](#gt_session-key). The client MUST send the negotiated features (flags), the user name, the user's [**domain**](#gt_domain), the client part of the challenge, the challenge response, and the encrypted session key to the server. This message is sent to the server as an AUTHENTICATE_MESSAGE (section [2.2.1.3](#Section_2.2.1.3)).
 
-If the ClientBlocked == TRUE and targ_name ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.1) does not equal any of the **ClientBlockExceptions** server names, then the NTLM client MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1) to the client application.<54>
+If the ClientBlocked == TRUE and targ_name ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.1) does not equal any of the **ClientBlockExceptions** server names, then the NTLM client MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1) to the client application.<55>
 
-If NTLM v2 authentication is used and the CHALLENGE_MESSAGE contains a **TargetInfo** field, the client SHOULD NOT send the **LmChallengeResponse** field and SHOULD set the **LmChallengeResponseLen** and **LmChallengeResponseMaxLen** fields in the AUTHENTICATE_MESSAGE to zero.<55>
+If NTLM v2 authentication is used and the CHALLENGE_MESSAGE contains a **TargetInfo** field, the client SHOULD NOT send the **LmChallengeResponse** field and SHOULD set the **LmChallengeResponseLen** and **LmChallengeResponseMaxLen** fields in the AUTHENTICATE_MESSAGE to zero.<56>
 
-If NTLM v2 authentication is used, the client SHOULD send the timestamp in the AUTHENTICATE_MESSAGE.<56>
+If NTLM v2 authentication is used, the client SHOULD send the timestamp in the AUTHENTICATE_MESSAGE.<57>
 
 If there exists a CHALLENGE_MESSAGE.TargetInfo.AvId ==
 
@@ -1607,7 +1613,7 @@ Set Time to Currenttime
 
 Endif
 
-If the CHALLENGE_MESSAGE **TargetInfo** field (section 2.2.1.2) has an MsvAvTimestamp present, the client SHOULD provide a MIC<57>:
+If the CHALLENGE_MESSAGE **TargetInfo** field (section 2.2.1.2) has an MsvAvTimestamp present, the client SHOULD provide a MIC<58>:
 
 - If there is an **AV_PAIR** structure (section [2.2.2.1](#Section_2.2.2.1)) with the **AvId** field set to MsvAvFlags,
 - then in the **Value** field, set bit 0x2 to 1.
@@ -1617,14 +1623,14 @@ Set MIC to HMAC_MD5(ExportedSessionKey, ConcatenationOf(
 
 CHALLENGE_MESSAGE, AUTHENTICATE_MESSAGE))
 
-The client SHOULD send the channel binding **AV_PAIR**:<58>
+The client SHOULD send the channel binding **AV_PAIR**:<59>
 
 - If the CHALLENGE_MESSAGE contains a **TargetInfo** field
 - If the ClientChannelBindingsUnhashed (section [3.1.1.2](#Section_3.1.1.2)) is not NULL
 - Add an **AV_PAIR** structure and set the **AvId** field to MsvAvChannelBindings and the **Value** field to MD5_HASH(ClientChannelBindingsUnhashed).
 - Else add an **AV_PAIR** structure and set the **AvId** field to MsvAvChannelBindings and the **Value** field to Z(16).
 - If ClientSuppliedTargetName (section 3.1.1.2) is not NULL
-- Add an **AV_PAIR** structure and set the **AvId** field to MsvAvTargetName and the **Value** field to ClientSuppliedTargetName without terminating NULL. If UnverifiedTargetName (section 3.1.1.2) is TRUE, then in **AvId** field = MsvAvFlags set 0x00000004 bit.<59>
+- Add an **AV_PAIR** structure and set the **AvId** field to MsvAvTargetName and the **Value** field to ClientSuppliedTargetName without terminating NULL. If UnverifiedTargetName (section 3.1.1.2) is TRUE, then in **AvId** field = MsvAvFlags set 0x00000004 bit.<60>
 - Else add an **AV_PAIR** structure and set the **AvId** field to MsvAvTargetName and the **Value** field to an empty string without terminating NULL.
 When this process is complete, the client MUST send the AUTHENTICATE_MESSAGE to the server, embedded in an application protocol message, and encoded as specified by that application protocol.
 
@@ -1669,9 +1675,9 @@ Additionally, the server maintains the following:
 
 The following [**NTLM server**](#gt_ntlm-server) configuration variables are internal to the client and impact all authenticated sessions:
 
-**ServerBlock:** A Boolean setting that disables the server from generating challenges and responding to NEGOTIATE_MESSAGE messages.<60>
+**ServerBlock:** A Boolean setting that disables the server from generating challenges and responding to NEGOTIATE_MESSAGE messages.<61>
 
-**ServerRequire128bitEncryption:** A Boolean setting that requires the server to use 128-bit encryption.<61>
+**ServerRequire128bitEncryption:** A Boolean setting that requires the server to use 128-bit encryption.<62>
 
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 Variables Exposed to the Application
@@ -1683,9 +1689,9 @@ The following parameters are provided by the application to the NTLM server:
 **Datagram:** A Boolean setting which indicates that the connectionless mode of NTLM is to be used. If the Datagram option is selected by the server, connectionless mode is used, and NTLM performs a bitwise OR operation with the following NTLM Negotiate bit flags into the CfgFlg internal variable:
 
 - NTLMSSP_NEGOTIATE_DATAGRAM.
-**ServerChannelBindingsUnhashed**: An octet string provided by the application used for channel binding. This value is optional. <62>
+**ServerChannelBindingsUnhashed**: An octet string provided by the application used for channel binding. This value is optional. <63>
 
-**ApplicationRequiresCBT**: A Boolean setting which indicates the application requires channel binding. <63>
+**ApplicationRequiresCBT**: A Boolean setting which indicates the application requires channel binding. <64>
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -1738,7 +1744,7 @@ These two cases are specified in the following sections.
 
 Upon receipt of the embedded [NEGOTIATE_MESSAGE](#Section_2.2.1.1), the server MUST extract and decode the NEGOTIATE_MESSAGE.
 
-If **ServerBlock** == TRUE, then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).<64>
+If **ServerBlock** == TRUE, then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).<65>
 
 If the security features selected by the client are not strong enough for the server security policy, the server MUST return an error to the calling application. Otherwise, the server MUST respond with a [CHALLENGE_MESSAGE](#Section_2.2.1.2) message. This includes the negotiated features and a 64-bit (8-byte) [**nonce**](#gt_nonce) value for the ServerChallenge value. The nonce is a pseudo-random number generated by the server and intended for one-time use. The flags returned as part of the CHALLENGE_MESSAGE in this step indicate which variant the server wants to use and whether the server's [**domain name**](#gt_domain-name) or machine name are present in the **TargetName** field.
 
@@ -1768,7 +1774,7 @@ section 2.2.1.2.
 
 -- AddAVPair(), NIL, NONCE - Defined in section 6.
 
-The server SHOULD return only the capabilities it supports. For example, if a newer client requests capability X and the server only supports capabilities A-U, inclusive, then the server does not return capability X. The CHALLENGE_MESSAGE **NegotiateFlags** field SHOULD<65> be set to the following:
+The server SHOULD return only the capabilities it supports. For example, if a newer client requests capability X and the server only supports capabilities A-U, inclusive, then the server does not return capability X. The CHALLENGE_MESSAGE **NegotiateFlags** field SHOULD<66> be set to the following:
 
 - All the flags set in CfgFlg (section [3.2.1.1](#Section_3.2.1.1))
 - The supported flags requested in the NEGOTIATE_MESSAGE.NegotiateFlags field
@@ -1870,7 +1876,7 @@ When this process is complete, the server MUST send the CHALLENGE_MESSAGE to the
 
 Upon receipt of the embedded AUTHENTICATE_MESSAGE (section [2.2.1.3](#Section_2.2.1.3)), the server MUST extract and decode the AUTHENTICATE_MESSAGE.
 
-If **ServerBlock** is set to TRUE then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).<66>
+If **ServerBlock** is set to TRUE then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).<67>
 
 If the user name and response are empty, the server authenticates the client as the ANONYMOUS user ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.4). Regardless of whether or not the client is an ANONYMOUS user, if the security features selected by the client are not strong enough for the server security policy, the server MUST return an error to the calling application. Otherwise, the server obtains the [**response key**](#gt_response-key) by looking up the user name in a database. With the NT and LM responses [**keys**](#gt_key) and the client [**challenge**](#gt_challenge), the server computes the expected response. If the expected response matches the actual response, then the server MUST generate [**session**](#gt_session), signing, and sealing keys; otherwise, it MUST deny the client access.
 
@@ -2129,7 +2135,7 @@ If GuestSession is TRUE, a SessionBaseKey with all-zeroes, Z(16), is used.
 
 If NTLMSSP_NEGOTIATE_KEY_EXCH is set, the server MUST check if client supplied a valid **EncryptedRandomSessionKey** in the AUTHENTICATE_MESSAGE (section 2.2.1.3); otherwise, the server MUST return SEC_E_INVALID_TOKEN.
 
-If NTLM v2 authentication is used and channel binding is provided by the application, then the server MUST verify the channel binding:<67>
+If NTLM v2 authentication is used and channel binding is provided by the application, then the server MUST verify the channel binding:<68>
 
 - If ServerChannelBindingsUnhashed (section [3.2.1.2](#Section_3.2.1.2)) is not NULL
 - If the AUTHENTICATE_MESSAGE contains a nonzero MsvAvChannelBindings **AV_PAIR**
@@ -2140,14 +2146,14 @@ If NTLM v2 authentication is used and channel binding is provided by the applica
 - If the AUTHENTICATE_MESSAGE does not contain a nonzero MsvAvChannelBindings **AV_PAIR**
 - The server MUST return GSS_S_BAD_BINDINGS
 - If the AUTHENTICATE_MESSAGE contains an MsvAvTargetName
-- If MsvAvFlags bit 0x00000004 is set, the server MUST set ClientSuppliedTargetName (section [3.1.1.2](#Section_3.1.1.2)) to NULL.<68>
+- If MsvAvFlags bit 0x00000004 is set, the server MUST set ClientSuppliedTargetName (section [3.1.1.2](#Section_3.1.1.2)) to NULL.<69>
 - AvID == MsvAvTargetName
 - Value == ClientSuppliedTargetName
-If the AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field,<69> then the MIC value computed earlier MUST be compared to MessageMIC, and if the two MIC values are not equal, then an authentication failure MUST be returned. An AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field if the **TargetInfo** field has an **AV_PAIR** structure whose two fields:
+If the AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field,<70> then the MIC value computed earlier MUST be compared to MessageMIC, and if the two MIC values are not equal, then an authentication failure MUST be returned. An AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field if the **TargetInfo** field has an **AV_PAIR** structure whose two fields:
 
 - AvId == MsvAvFlags
 - Value bit 0x2 == 1
-If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.1.1.1)) difference from the server time, then the server SHOULD return a failure.<70>
+If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.1.1.1)) difference from the server time, then the server SHOULD return a failure.<71>
 
 Both the client and the server now have the session, signing, and sealing keys. When the client runs an integrity check on the next message from the server, it detects that the server has determined (either directly or indirectly) the user password.
 
@@ -2158,7 +2164,7 @@ Both the client and the server now have the session, signing, and sealing keys. 
 
 The server action for connectionless NTLM authentication is similar to that of connection-oriented authentication (section [3.1.5.1](#Section_3.1.5.1)). However, the first message sent in connectionless authentication is the CHALLENGE_MESSAGE from the server to the client; there is no client-initiated NEGOTIATE_MESSAGE as in the connection-oriented authentication.
 
-The message processing for connectionless NTLM authentication<71> is as specified in the following sections.
+The message processing for connectionless NTLM authentication<72> is as specified in the following sections.
 
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 Server Sends the Client an Initial CHALLENGE_MESSAGE
@@ -2168,9 +2174,9 @@ The server MUST send a set of supported features and a random [**key**](#gt_key)
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Server Response Checking
 
-If **ServerBlock** == TRUE, then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1). <72>
+If **ServerBlock** == TRUE, then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1). <73>
 
-If ServerRequire128bitEncryption == TRUE, then if 128-bit encryption is not negotiated then the server MUST return SEC_E_UNSUPPORTED_FUNCTION ([MS-ERREF] section 2.1.1) to the application. <73>
+If ServerRequire128bitEncryption == TRUE, then if 128-bit encryption is not negotiated then the server MUST return SEC_E_UNSUPPORTED_FUNCTION ([MS-ERREF] section 2.1.1) to the application. <74>
 
 The client MUST compute the expected [**session key**](#gt_session-key) for signing and encryption, which it sends to the server in the AUTHENTICATE_MESSAGE (section [3.1.5.2.1](#Section_3.1.5.2.1)). Using this [**key**](#gt_key) from the AUTHENTICATE_MESSAGE, the server MUST check the signature and/or decrypt the protocol response, and compute a response. The response MUST be signed and/or encrypted and sent to the client.
 
@@ -2178,7 +2184,7 @@ Set MIC to HMAC_MD5(ResponseKeyNT, ConcatenationOf(
 
 CHALLENGE_MESSAGE, AUTHENTICATE_MESSAGE))
 
-If the [AUTHENTICATE_MESSAGE](#Section_2.2.1.3) indicates the presence of a **MIC** field,<74> then the MIC value computed earlier MUST be compared to the MIC field in the message, and if the two MIC values are not equal, then an authentication failure MUST be returned. An AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field if the **TargetInfo** field has an **AV_PAIR** structure whose two fields:
+If the [AUTHENTICATE_MESSAGE](#Section_2.2.1.3) indicates the presence of a **MIC** field,<75> then the MIC value computed earlier MUST be compared to the MIC field in the message, and if the two MIC values are not equal, then an authentication failure MUST be returned. An AUTHENTICATE_MESSAGE indicates the presence of a **MIC** field if the **TargetInfo** field has an **AV_PAIR** structure whose two fields:
 
 - AvId == MsvAvFlags
 - Value bit 0x2 == 1
@@ -2206,9 +2212,9 @@ AUTHENTICATE_MESSAGE))
 
 Endif
 
-If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.1.1.1)) difference from the server time, then the server SHOULD return a failure.<75>
+If NTLM v2 authentication is used and the **AUTHENTICATE_MESSAGE.NtChallengeResponse.TimeStamp** (section [2.2.2.7](#Section_2.2.2.7)) is more than **MaxLifetime** (section [3.1.1.1](#Section_3.1.1.1)) difference from the server time, then the server SHOULD return a failure.<76>
 
-If NTLM v2 authentication is used and channel binding is provided by the application, then the server MUST verify the channel binding<76>:
+If NTLM v2 authentication is used and channel binding is provided by the application, then the server MUST verify the channel binding<77>:
 
 - If ServerChannelBindingsUnhashed (section [3.2.1.2](#Section_3.2.1.2)) is not NULL
 - If the AUTHENTICATE_MESSAGE contains a nonzero MsvAvChannelBindings **AV_PAIR**
@@ -2219,7 +2225,7 @@ If NTLM v2 authentication is used and channel binding is provided by the applica
 - If the AUTHENTICATE_MESSAGE does not contain a nonzero MsvAvChannelBindings **AV_PAIR**
 - The server MUST return GSS_S_BAD_BINDINGS
 - If the AUTHENTICATE_MESSAGE contains a MsvAvTargetName
-- If MsvAvFlags bit 0x00000004 is set, the server MUST set ClientSuppliedTargetName (section [3.1.1.2](#Section_3.1.1.2)) to NULL.<77>
+- If MsvAvFlags bit 0x00000004 is set, the server MUST set ClientSuppliedTargetName (section [3.1.1.2](#Section_3.1.1.2)) to NULL.<78>
 - **AvID** == MsvAvTargetName
 - **Value** == ClientSuppliedTargetName
 <a id="Section_3.2.6"></a>
@@ -2346,7 +2352,7 @@ On the server, if the user account to be authenticated is hosted in [**Active Di
 
 The DC calculates the expected value of the response using the NTOWF v1 and/or LMOWF v1 and matches it against the response provided. If the response values match, it MUST send back the SessionBaseKey. Otherwise, it MUST return an error to the calling application. The server MUST return an error to the calling application if the DC returns an error. If the DC returns STATUS_NTLM_BLOCKED, then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).
 
-If the user account to be authenticated is hosted locally on the server, the server calculates the expected value of the response using the NTOWF v1 and/or LMOWF v1 stored locally, and matches it against the response provided. If the response values match, it MUST calculate KeyExchangeKey; otherwise, it MUST return an error to the calling application.<78>
+If the user account to be authenticated is hosted locally on the server, the server calculates the expected value of the response using the NTOWF v1 and/or LMOWF v1 stored locally, and matches it against the response provided. If the response values match, it MUST calculate KeyExchangeKey; otherwise, it MUST return an error to the calling application.<79>
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 NTLM v2 Authentication
@@ -2455,7 +2461,7 @@ On the server, if the user account to be authenticated is hosted in [**Active Di
 
 The DC calculates the expected value of the response using the NTOWF v2 and/or LMOWF v2 and matches it against the response provided. If the response values match, it MUST send back the SessionBaseKey; otherwise, it MUST return an error to the calling application. The server MUST return an error to the calling application if the DC returns an error. If the DC returns STATUS_NTLM_BLOCKED then the server MUST return STATUS_NOT_SUPPORTED ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.1).
 
-If the user account to be authenticated is hosted locally on the server, the server calculates the expected NTOWF v2 and/or LMOWF v2 value of the response using the NTOWF and/or LMOWF stored locally, and matches it against the response provided. If the response values match, it MUST calculate KeyExchangeKey; otherwise, it MUST return an error to the calling application.<79>
+If the user account to be authenticated is hosted locally on the server, the server calculates the expected NTOWF v2 and/or LMOWF v2 value of the response using the NTOWF and/or LMOWF stored locally, and matches it against the response provided. If the response values match, it MUST calculate KeyExchangeKey; otherwise, it MUST return an error to the calling application.<80>
 
 <a id="Section_3.4"></a>
 ## 3.4 Session Security Details
@@ -2983,7 +2989,7 @@ EndDefine
 <a id="Section_3.4.6"></a>
 ### 3.4.6 GSS_WrapEx() Call
 
-This call is an extension to **GSS_Wrap** [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) that passes multiple buffers.<80>
+This call is an extension to **GSS_Wrap** [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) that passes multiple buffers.<81>
 
 Inputs:
 
@@ -3020,7 +3026,7 @@ The [**checksum**](#gt_checksum) is computed over the concatenated input buffers
 <a id="Section_3.4.7"></a>
 ### 3.4.7 GSS_UnwrapEx() Call
 
-This call is an extension to **GSS_Unwrap** [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) that passes multiple buffers.<81>
+This call is an extension to **GSS_Unwrap** [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) that passes multiple buffers.<82>
 
 Inputs:
 
@@ -3700,7 +3706,7 @@ Signature:
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-NTLM does not support any recent cryptographic methods, such as AES or SHA-256. It uses [**cyclic redundancy check (CRC)**](#gt_cyclic-redundancy-check-crc) or message digest algorithms ([[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275)) for integrity, and it uses RC4 for encryption. Deriving a [**key**](#gt_key) from a password is as specified in [[RFC1320]](https://go.microsoft.com/fwlink/?LinkId=90274) and [[FIPS46-2]](https://go.microsoft.com/fwlink/?LinkId=89871). Therefore, applications are generally advised not to use NTLM.<82>
+NTLM does not support any recent cryptographic methods, such as AES or SHA-256. It uses [**cyclic redundancy check (CRC)**](#gt_cyclic-redundancy-check-crc) or message digest algorithms ([[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275)) for integrity, and it uses RC4 for encryption. Deriving a [**key**](#gt_key) from a password is as specified in [[RFC1320]](https://go.microsoft.com/fwlink/?LinkId=90274) and [[FIPS46-2]](https://go.microsoft.com/fwlink/?LinkId=89871). Therefore, applications are generally advised not to use NTLM.<83>
 
 The NTLM server does not require the NTLM client to send the MIC, but sending the MIC when the timestamp is present greatly increases security. Although implementations of NLMP will work without support for MIC, they will be vulnerable to message tampering.
 
@@ -3905,75 +3911,77 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <47> Section 3.1.5.1.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<48> Section 3.1.5.1.2: Not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<48> Section 3.1.5.1.1: Windows 8 through Windows 11, version 26H2 operating system operating system without [[MSFT-CVE-2026-118737]](https://go.microsoft.com/fwlink/?LinkId=2387722) and Windows Server 2012 through Windows Server 2025 without [MSFT-CVE-2026-118737] do not set the NTLMSSP_NEGOTIATE_SIGN and NTLMSSP_NEGOTIATE_KEY_EXCH flags in the **NegotiateFlags** field of the NEGOTIATE_MESSAGE for non-anonymous connections unless explicitly requested by the calling application.
 
-<49> Section 3.1.5.1.2: This functionality is not supported in Windows NT and Windows 2000.
+<49> Section 3.1.5.1.2: Not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<50> Section 3.1.5.1.2: Not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<50> Section 3.1.5.1.2: This functionality is not supported in Windows NT and Windows 2000.
 
-<51> Section 3.1.5.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<51> Section 3.1.5.1.2: Not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<52> Section 3.1.5.1.2: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<52> Section 3.1.5.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<53> Section 3.1.5.2: Connectionless NTLM is supported only in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<53> Section 3.1.5.1.2: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<54> Section 3.1.5.2.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<54> Section 3.1.5.2: Connectionless NTLM is supported only in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
 <55> Section 3.1.5.2.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<56> Section 3.1.5.2.1: Not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<56> Section 3.1.5.2.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<57> Section 3.1.5.2.1: Not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<57> Section 3.1.5.2.1: Not supported by Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<58> Section 3.1.5.2.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<58> Section 3.1.5.2.1: Not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<59> Section 3.1.5.2.1: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<59> Section 3.1.5.2.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<60> Section 3.2.1.1: The default value of this state variable is FALSE. **ServerBlock** is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista or Windows Server 2008.
+<60> Section 3.1.5.2.1: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<61> Section 3.2.1.1: Except in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, which set this variable to FALSE, Windows sets this value to TRUE.
+<61> Section 3.2.1.1: The default value of this state variable is FALSE. **ServerBlock** is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista or Windows Server 2008.
 
-<62> Section 3.2.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<62> Section 3.2.1.1: Except in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, which set this variable to FALSE, Windows sets this value to TRUE.
 
 <63> Section 3.2.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<64> Section 3.2.5.1.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<64> Section 3.2.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<65> Section 3.2.5.1.1: Windows NT will set NTLMSSP_NEGOTIATE_TARGET_INFO only if NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY is set. Windows 2000, Windows XP, and Windows Server 2003 will set NTLMSSP_NEGOTIATE_TARGET_INFO only if NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY or NTLMSSP_REQUEST_TARGET is set.
+<65> Section 3.2.5.1.1: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<66> Section 3.2.5.1.2: **ServerBlock** is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<66> Section 3.2.5.1.1: Windows NT will set NTLMSSP_NEGOTIATE_TARGET_INFO only if NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY is set. Windows 2000, Windows XP, and Windows Server 2003 will set NTLMSSP_NEGOTIATE_TARGET_INFO only if NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY or NTLMSSP_REQUEST_TARGET is set.
 
-<67> Section 3.2.5.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<67> Section 3.2.5.1.2: **ServerBlock** is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<68> Section 3.2.5.1.2: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<68> Section 3.2.5.1.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<69> Section 3.2.5.1.2: MIC fields are not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<69> Section 3.2.5.1.2: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<70> Section 3.2.5.1.2: Supported by Windows NT 4.0, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
+<70> Section 3.2.5.1.2: MIC fields are not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<71> Section 3.2.5.2: Connectionless NTLM is supported only in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<71> Section 3.2.5.1.2: Supported by Windows NT 4.0, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
 
-<72> Section 3.2.5.2.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<72> Section 3.2.5.2: Connectionless NTLM is supported only in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
 <73> Section 3.2.5.2.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<74> Section 3.2.5.2.2: Not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<74> Section 3.2.5.2.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<75> Section 3.2.5.2.2: Supported by Windows NT 4.0, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
+<75> Section 3.2.5.2.2: Not supported in Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
-<76> Section 3.2.5.2.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
+<76> Section 3.2.5.2.2: Supported by Windows NT 4.0, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2.
 
-<77> Section 3.2.5.2.2: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
+<77> Section 3.2.5.2.2: This functionality is not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008.
 
-<78> Section 3.3.1: If the Windows client sends a domain that is unknown to the server, the server tries to perform the authentication against the local database.
+<78> Section 3.2.5.2.2: Not supported in Windows NT, Windows 2000, Windows XP, Windows Server 2003, Windows Vista, Windows Server 2008, Windows 7 or Windows Server 2008 R2.
 
-<79> Section 3.3.2: If the Windows client sends a domain that is unknown to the server, the server tries to perform the authentication against the local database.
+<79> Section 3.3.1: If the Windows client sends a domain that is unknown to the server, the server tries to perform the authentication against the local database.
 
-<80> Section 3.4.6: The Windows implementation of **GSS_WrapEx()** is called **EncryptMessage()**. For more information, see [[MSDN-EncryptMsg]](https://go.microsoft.com/fwlink/?LinkId=94577).
+<80> Section 3.3.2: If the Windows client sends a domain that is unknown to the server, the server tries to perform the authentication against the local database.
 
-<81> Section 3.4.7: The Windows implementation of **GSS_WrapEx()** is called **DecryptMessage()**. For more information, see [[MSDN-DecryptMsg]](https://go.microsoft.com/fwlink/?LinkId=101488).
+<81> Section 3.4.6: The Windows implementation of **GSS_WrapEx()** is called **EncryptMessage()**. For more information, see [[MSDN-EncryptMsg]](https://go.microsoft.com/fwlink/?LinkId=94577).
 
-<82> Section 5.1: NTLM domain considerations are as follows:
+<82> Section 3.4.7: The Windows implementation of **GSS_WrapEx()** is called **DecryptMessage()**. For more information, see [[MSDN-DecryptMsg]](https://go.microsoft.com/fwlink/?LinkId=101488).
+
+<83> Section 5.1: NTLM domain considerations are as follows:
 
 Microsoft DCs determine the minimum security requirements for NTLM authentication between a Windows client and the local Windows domain. Based on the minimum security settings in place, the DC can either allow or refuse the use of LM, NTLM, or NTLM v2 authentication, and servers can force the use of extended session security on all messages between the client and server. In a Windows domain, the DC controls domain-level security settings through the use of Group Policy ([MS-GPOL](../MS-GPOL/MS-GPOL.md)), which replicates security policies to clients and servers throughout the local domain.
 
@@ -4022,7 +4030,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.2.2](#Section_2.2.2.2) Single_Host_Data | 37167 : Added Reserved field to Single_Host_Data structure. | Major |
+| [3.1.5.1.1](#Section_3.1.5.1.1) Client Initiates the NEGOTIATE_MESSAGE | Updated default configuration flags in the NegotiateFlags field of the NEGOTIATE_MESSAGE. | Major |
 
 <a id="revision-history"></a>
 
@@ -4092,3 +4100,4 @@ The changes made to this document are listed in the following table. For more in
 | 4/29/2022 | 35.0 | Major | Significantly changed the technical content. |
 | 4/23/2024 | 36.0 | Major | Significantly changed the technical content. |
 | 3/30/2026 | 37.0 | Major | Significantly changed the technical content. |
+| 11/10/2026 | 38.0 | Major | Significantly changed the technical content. |
