@@ -407,7 +407,7 @@ Table of Contents
 </details>
 
 For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).
-Last updated: 9/28/2026.
+Last updated: 11/10/2026.
 See [Revision History](#revision-history) for full version history.
 
 <a id="Section_1"></a>
@@ -910,6 +910,8 @@ We conduct frequent surveys of the normative references to assure their continue
 [MSDOCS-ADSecGrps] Microsoft Corporation, "Active Directory Security Groups", [https://learn.microsoft.com/en-us/windows/security/identity-protection/access-control/active-directory-security-groups](https://go.microsoft.com/fwlink/?linkid=2153214)
 
 [MSDOCS-DnsUpdateProxyGp] Microsoft Corporation, "DNS Record Ownership and the DnsUpdateProxy Group", [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd334715(v=ws.10)](https://go.microsoft.com/fwlink/?linkid=2152981)
+
+[MSFT-CVE-2026-105520] Microsoft Corporation, "CVE-2026-105520", November 10, 2026, [https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-105520](https://go.microsoft.com/fwlink/?LinkId=2387629)
 
 [RFC1002] Network Working Group, "Protocol Standard for a NetBIOS Service on a TCP/UDP Transport: Detailed Specifications", STD 19, RFC 1002, March 1987, [https://www.rfc-editor.org/info/rfc1002](https://go.microsoft.com/fwlink/?LinkId=90261)
 
@@ -9599,7 +9601,7 @@ The DNS server SHOULD<193> support the following string properties:
 
 **ForestDirectoryPartitionBaseName:** The first name component to use as the name of the [**DNS forest partition**](#gt_dns-forest-partition) in UTF-8 format. If empty, the DNS server uses the string constant "ForestDnsZones" (see product note in **Application Directory Partition Access Control List**, section 3.1.1). On input, the type ID for this property is DNSSRV_TYPEID_LPWSTR, listed in section 2.2.1.1.1. On output, the type ID for this property is DNSSRV_TYPEID_LPSTR, listed in section 2.2.1.1.1.
 
-**LogFilePath:** An absolute or relative pathname of the log file to which the DNS server SHOULD<194> output logging information. This protocol only treats the pathname as a string, it does not constrain the syntax in any way. This property is encoded as a null-terminated [**Unicode string**](#gt_unicode-string), and the type ID for this property is DNSSRV_TYPEID_LPWSTR, listed in section 2.2.1.1.1.
+**LogFilePath:** An absolute or relative pathname of the log file to which the DNS server SHOULD<194> output logging information. This protocol only treats the pathname as a string, it does not constrain the syntax in any way. This property is encoded as a null-terminated [**Unicode string**](#gt_unicode-string), and the type ID for this property is DNSSRV_TYPEID_LPWSTR, listed in section 2.2.1.1.1. Setting this property requires administrator privileges on the target DNS server, as specified in section [3.1.4.1](#Section_3.1.4.1).
 
 **ServerLevelPluginDll:** An absolute pathname of a dynamic link library that the DNS server can use to resolve unknown names, or an empty string to remove or disable the previously selected DLL. This protocol only treats the pathname as a string, it does not constrain the syntax in any way. This property is encoded as a null-terminated Unicode string, and the type ID for this property is DNSSRV_TYPEID_LPWSTR, listed in section 2.2.1.1.1.
 
@@ -9609,7 +9611,7 @@ The DNS server SHOULD<195> also support the following properties:
 
 **DoNotRoundRobinTypes:** An array of record types for which the [**DNS**](#gt_domain-name-system-dns) server will disable round robin. The value MUST be an [**ASCII**](#gt_ascii) string containing integers separated by spaces, in either hexadecimal format (prefixed with the ASCII characters '0x' or '0x'), octal format (prefixed with an ASCII '0' and no subsequent 'x' or 'x'), or decimal format (otherwise). Each integer MUST correspond to a DNS record type number, and SHOULD be a value in the range from 0x00000000 to 0x000000FF, though the element values MAY be any value in the range 0x00000000 to 0xFFFFFFFF. This value MUST NOT be changeable via the DNSP protocol.<196>
 
-**RootTrustAnchorsURL:** A URL in UTF-8 format from which the DNS root [**trust anchors**](#gt_trust-anchor) SHOULD<197> be downloaded when the RetrieveRootTrustAnchors operation (section [3.1.4.1](#Section_3.1.4.1)) is invoked. The default value MUST be
+**RootTrustAnchorsURL:** A URL in UTF-8 format from which the DNS root [**trust anchors**](#gt_trust-anchor) SHOULD<197> be downloaded when the RetrieveRootTrustAnchors operation (section 3.1.4.1) is invoked. The default value MUST be
 
 https://data.iana.org/root-anchors/root-anchors.xml
 
@@ -10155,7 +10157,9 @@ If any operation (including LDAP operations) fails, continue processing but reco
 - If pszOperation is DeleteNode, the server MUST check whether the specified node is empty or does not currently exist and return ERROR_SUCCESS if so. Otherwise it MUST delete all DNS records at the node pointed to by pszNodeName from the DNS server's cache. It MUST also delete all DNS records in the node's subtree if specified by the Boolean flag pointed to by dwParam field in pData, and return success. If the dwParam field in pData is set to FALSE and the node contains subtrees, both the node and its subtrees MUST NOT be deleted and a success status is returned. If the zone is directory server-integrated, the DNS server MUST set the node's DNS Node Tombstone State (section 3.1.1) to TRUE by setting the value of the dnsTombstoned attribute to TRUE, and writing a DNS_RPC_RECORD_TS (section [2.2.2.2.4.23](#Section_2.2.2.2.4.23)) in the **dnsRecord** attribute.
 - If pszOperation is DeleteRecordSet, the server MUST check whether the specified node is empty or does not currently exist and return ERROR_SUCCESS if so. Otherwise it MUST delete all DNS records of the type specified by the dwParam field in pData from the node pointed to by pszNodeName in the DNS server's cache and return success. If this operation deletes the last record from the node and the zone is directory server-integrated, the DNS server MUST set the node's DNS Node Tombstone State (section 3.1.1) to TRUE by setting the value of the dnsTombstoned attribute to TRUE and writing a DNS_RPC_RECORD_TS (section 2.2.2.2.4.23) in the **dnsRecord** attribute.
 - If pszOperation is WriteBackFile, the server SHOULD write the root hints to their permanent storage. If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST use LDAP add, delete, and search operations to replace the root hints on the directory server and return success, regardless of the success or failure of these operations. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice, and still return success, even if the retries fail.<253>
-- If pszOperation is LogFilePath, the server MUST store the value passed in pData to be returned, unchanged, in future server information queries. Further, if pData is a NULL pointer or it points to an empty string, the server MUST replace pData's present value with the path to the default implementation specific log file. Finally, the server MUST attempt to create and/or open for write the file specified by the string. If the string is a filename or relative path, the server MUST attempt to create the file relative to the default implementation specific log file path.<254> If the file is opened successfully, then the server MUST commence logging to file and return success. Otherwise, it MUST disable logging to file and return a failure.
+- If pszOperation is LogFilePath:
+- The server MUST verify that the caller has administrator privileges on the target DNS server. If the caller does not have these privileges, the server SHOULD<254> return ERROR_ACCESS_DENIED error without changing the LogFilePath property or creating or opening the requested log file. Membership in the DnsAdmins group alone is not sufficient to authorize this operation.
+- The server MUST store the value passed in pData to be returned, unchanged, in future server information queries. Further, if pData is a NULL pointer or it points to an empty string, the server MUST replace pData's present value with the path to the default implementation specific log file. Finally, the server MUST attempt to create and/or open for write the file specified by the string. If the string is a filename or relative path, the server MUST attempt to create the file relative to the default implementation specific log file path.<255> If the file is opened successfully, then the server MUST commence logging to file and return success. Otherwise, it MUST disable logging to file and return a failure.
 - If pszOperation is ListenAddresses, the server MUST search the incoming array for loopback, multicast, or broadcast addresses, and if any are found, return a failure. Otherwise, the server MUST remove any addresses from the input that are not IPv4 addresses and create a backup copy of the current listen addresses. Then the server MUST attempt to listen on the network interfaces specified by the new listen addresses from the incoming array, and if this attempt fails, the server MUST restore the previous listen addresses and return a failure. Otherwise, the server MUST attempt to update the [**SOA**](#gt_start-of-authority-soa) records for its [**authoritative**](#gt_authoritative) zones with the new listen addresses and MUST return success even if the attempt fails. If a zone is directory services-integrated, the server MUST use the LDAP search, add, and delete operations to update the SOA records and return success even if there were unsuccessful LDAP calls. If there is a failure in modifying the records on the directory server, then the server MUST retry the write operation twice, and still return success even if the retries fail.
 - If pszOperation is ServerLevelPluginDll, the server MUST store the value passed in pData and return SUCCESS, indicating only that the value was successfully received. The server MUST NOT validate the value passed, nor attempt to load the DLL, until the server is restarted. When the server restarts, if the value stored for ServerLevelPluginDll is not an empty string, the server MUST attempt to load the DLL specified. If the DLL fails to load for any reason, the server MUST fail to start. If the DLL has been loaded, then whenever the server is required to invoke the DLL query function, the server MUST invoke the query function of the DLL with a query name and type and add any resulting records to the server's [**cache**](#gt_cache). Whenever the server processes a query, if the DLL has been loaded, the server MUST invoke the query function of the DLL in the following conditions:
 - If a query cannot be answered with the information already present in the server's zone database and cache, then prior to recursing (if applicable), invoke the DLL query function and try again to answer the query from local data.
@@ -10228,8 +10232,8 @@ If any operation (including LDAP operations) fails, continue processing but reco
 - If a virtualization instance already exists, then the DNS server MUST update those properties of the virtualization instance as given by dwFlags of input DNS_RPC_VIRTUALIZATION_INSTANCE (section [2.2.17.1.1](#Section_2.2.17.1.1)). Otherwise, an error is returned.
 If pszZone is not NULL and is not a valid multizone operation string, then the server MUST return a failure if it does not contain a zone with the name matching the string pointed to by pszZone. If pszZone is not NULL or if the value of dwContext specifies a multizone operation, the server MUST execute the operation indicated by the value of pszOperation individually for each zone specified by the values of dwContext and pszZone. If a zone operation is performed with a filter in dwContext or a multizone operation string in pszZone, and no zones match the specified filter or satisfy the multizone operation string, the server MUST return ERROR_SUCCESS (0x00000000). If the operation is executed for more than one zone, then for each matching zone, the specified operation MUST be executed with pszZone replaced with the name of the matching zone. If any of these multiple operations return an error, the server MUST return an error; otherwise, the server MUST return success. For any operation, if the specified zone is marked as "AutoCreated", the DNS server MUST return an error.
 
-- If pszOperation is ResetDwordProperty, the server MUST verify that the property name matches a property name listed in section 3.1.1.2.1 for which the server supports the ResetDwordProperty operation and return an error if there is no match. If the property is specified as "read-only" in section 3.1.1.2.1, the server MUST return an error. If the zone specified is a cache zone, the server MUST return an error. It MUST further verify that the value specified is within the property's allowable range (if specified) and if not return an error. When the property specified is Boolean and the value to be set is greater than 0x00000001, the server MUST replace the value with 0x00000001. If the property name is "AllowUpdate", the server MUST return an error when the zone specified is not [**Active Directory**](#gt_active-directory)-integrated and the requested value is ZONE_UPDATE_SECURE, or when the zone specified is not a primary zone. If the property name is "AllowUpdate" and the value is not ZONE_UPDATE_OFF (section [2.2.6.1.1](#Section_2.2.6.1.1)), then the server SHOULD invoke the **NetlogonControl2Ex** method with function code **NETLOGON_CONTROL_FORCE_DNS_REG** on the Netlogon protocol implementation on the local domain controller (DC). (See [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.9.1.)<255> If the property name is "Aging", the property value is TRUE, and the zone's Aging state is FALSE, then the server MUST reset the zone's Aging time by updating the dwAvailForScavengeTime (section [2.2.5.2.4.1](#Section_2.2.5.2.4.1)) value to the current time value, incremented by dwRefreshInterval (section 2.2.5.2.4.1).<256> If the value is zero and zero is listed as a flag value for the default in section 3.1.1.2.1, the server MUST update the value of the property to be the default for that property, and return success. Otherwise, the server MUST update the value of the property for the zone to be the new value specified, and return success.<257>
-- If pszOperation matches a property name listed in section 3.1.1.2.2 or section 3.1.1.2.3 for which the server supports this property reset operation, the server MUST update the value of the property for the zone to be the new value specified, and return success.<258> Otherwise, the server MUST return a nonzero error code.
+- If pszOperation is ResetDwordProperty, the server MUST verify that the property name matches a property name listed in section 3.1.1.2.1 for which the server supports the ResetDwordProperty operation and return an error if there is no match. If the property is specified as "read-only" in section 3.1.1.2.1, the server MUST return an error. If the zone specified is a cache zone, the server MUST return an error. It MUST further verify that the value specified is within the property's allowable range (if specified) and if not return an error. When the property specified is Boolean and the value to be set is greater than 0x00000001, the server MUST replace the value with 0x00000001. If the property name is "AllowUpdate", the server MUST return an error when the zone specified is not [**Active Directory**](#gt_active-directory)-integrated and the requested value is ZONE_UPDATE_SECURE, or when the zone specified is not a primary zone. If the property name is "AllowUpdate" and the value is not ZONE_UPDATE_OFF (section [2.2.6.1.1](#Section_2.2.6.1.1)), then the server SHOULD invoke the **NetlogonControl2Ex** method with function code **NETLOGON_CONTROL_FORCE_DNS_REG** on the Netlogon protocol implementation on the local domain controller (DC). (See [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.9.1.)<256> If the property name is "Aging", the property value is TRUE, and the zone's Aging state is FALSE, then the server MUST reset the zone's Aging time by updating the dwAvailForScavengeTime (section [2.2.5.2.4.1](#Section_2.2.5.2.4.1)) value to the current time value, incremented by dwRefreshInterval (section 2.2.5.2.4.1).<257> If the value is zero and zero is listed as a flag value for the default in section 3.1.1.2.1, the server MUST update the value of the property to be the default for that property, and return success. Otherwise, the server MUST update the value of the property for the zone to be the new value specified, and return success.<258>
+- If pszOperation matches a property name listed in section 3.1.1.2.2 or section 3.1.1.2.3 for which the server supports this property reset operation, the server MUST update the value of the property for the zone to be the new value specified, and return success.<259> Otherwise, the server MUST return a nonzero error code.
 - If pszOperation is ZoneTypeReset, the server MUST:
 - Check whether the requested zone type, directory server integration, and (if applicable) application directory partition match the zone's present state, and if so, return success.
 - Check whether the zone is directory server integrated and currently in the process of loading, and if so, return a failure.
@@ -10246,7 +10250,7 @@ If pszZone is not NULL and is not a valid multizone operation string, then the s
 - Check whether the requested zone type is secondary, and if so, reset the fDSIntegrated flag of the present zone to false.
 Otherwise, the server MUST, in accordance with the operation specified:
 
-- If the zone is directory server integrated,<259> use LDAP search operations to find the zone's dnsZone, dnsZoneScope, and dnsNode objects (section 2.3) and copy the appropriate zone properties and data to a file. Set the zone and each of its scopes' Zone GUID properties to NULL.
+- If the zone is directory server integrated,<260> use LDAP search operations to find the zone's dnsZone, dnsZoneScope, and dnsNode objects (section 2.3) and copy the appropriate zone properties and data to a file. Set the zone and each of its scopes' Zone GUID properties to NULL.
 - If the zone is not directory server integrated, copy the zone and its scopes' properties and data to the directory server using LDAP add operations (adding appropriate dnsZone, dnsZoneScope, and dnsNode objects to the directory server). If there is a failure in writing the zone records to the directory server, then the server MUST retry the write operation twice.
 - Reset the type information to the requested type.
 - Delete the original zone (using LDAP delete operations to remove the zone's dnsZone, dnsZoneScope, and dnsNode objects if necessary), and return success, or if any of the LDAP operations has failed, even after retries were specified, then return a failure. If deleting the zone from the directory server, the server MUST first attempt up to 4 times to rename the zone being deleted to a temporary name. Regardless of whether the rename is successful, the server MUST then attempt to delete the zone using LDAP delete operations with one of the following conditions for any LDAP error returned ([MS-ERREF] section 2.4):
@@ -10259,7 +10263,7 @@ Otherwise, the server MUST, in accordance with the operation specified:
 The DNS server MUST also delete the associated scopes of that zone. If the zone is file-backed, the database file of the scopes MUST not be deleted.
 
 - If pszOperation is ReloadZone, the server MUST check whether the zone pointed to by pszZone is directory server-integrated and is already in the process of loading, and if so, return a failure. Otherwise, if the zone's **Dirty Flag** (section 3.1.1) is set to TRUE, then the server MUST do the following:
-- If the zone is a cache zone, and the zone is directory server-integrated and there are root hints in the zone, the server SHOULD write root hints to their permanent storage and overwrite existing directory server root hints through the use of the DNS_ZONE_LOAD_OVERWRITE_DS flag (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)). If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST search for and delete the root hints on the directory server using LDAP search and delete commands and write the new root hints to the cache zone on the directory server using LDAP add and modify commands. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice.<260>
+- If the zone is a cache zone, and the zone is directory server-integrated and there are root hints in the zone, the server SHOULD write root hints to their permanent storage and overwrite existing directory server root hints through the use of the DNS_ZONE_LOAD_OVERWRITE_DS flag (section [2.2.5.2.7.1](#Section_2.2.5.2.7.1)). If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST search for and delete the root hints on the directory server using LDAP search and delete commands and write the new root hints to the cache zone on the directory server using LDAP add and modify commands. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice.<261>
 - Otherwise, if the zone is not a read-only zone, write a copy of the zone to a file and send a DNS notification to peer or secondary DNS servers, if any.
 If this zone has scopes configured, all the data of the scopes MUST be written one by one to the corresponding scope files if the scope's **Dirty Flag** (section 3.1.1) is set to TRUE. If writing to any of the scopes encounters an issue, an error event SHOULD be logged and an error code returned.
 
@@ -10271,8 +10275,8 @@ Then the server MUST do the following:
 - If any of the above LDAP operations fails, even after retries, where specified, then return a failure.
 - If pszOperation is RefreshZone, and the zone specified is a secondary zone, is not currently transferring from the [**primary server**](#gt_primary-server), and at least 15 seconds has elapsed since the **Time of Last SOA check** (section 3.1.1) of the primary zone, then the server MUST force a refresh of the secondary zone pointed to by pszZone, from the primary DNS server, and return success. Otherwise, the server MUST return an error.
 - If pszOperation is ExpireZone, the server MUST force refresh of the secondary zone pointed to by pszZone by contacting the primary DNS server to refresh, and return success.
-- If pszOperation is IncrementVersion,, the server MUST return a failure if the zone is not a primary or cache zone, and it MUST return success if the zone's **Dirty Flag** (section 3.1.1) is set to FALSE or the zone is not stored in a file. Otherwise, the server MUST write the uncommitted information to the file, send DNS notify [RFC1996] messages to all other servers hosting the zones, if they exist, and return success. If the zone specified is the cache zone, the server SHOULD write the root hints to their permanent storage. If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST use LDAP add, delete, and search operations to replace the root hints on the directory server, and return success, regardless of the success or failure of these operations. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice, and still return success even if the retries fail.<261>
-- If pszOperation is WriteBackFile, the server MUST return a failure if the zone is not a primary or cache zone, and it MUST return success if the zone's **Dirty Flag** (section 3.1.1) is set to FALSE and it does not have any scopes configured or the zone is not stored in a file. Otherwise, the server MUST write the uncommitted information to the file, send DNS notify ([RFC1996]) messages to all other servers hosting the zones, if they exist, and return success, regardless of the success or failure of these operations. If the zone has scopes, the data of the scopes MUST be written to their corresponding scope files if the scope's **Dirty Flag** (section 3.1.1) is set to TRUE. If the server fails to write the data for any of the scopes it SHOULD log an error event and return the error code. If the operation results in updates only in the scope files and not the zone file, then DNS notify ([RFC1996]) messages SHOULD NOT be sent. If the zone specified is the cache zone, the server SHOULD write the root hints to their permanent storage. If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST use LDAP add, delete, and search operations to replace the root hints on the directory server, and return success, regardless of the success or failure of these operations. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice, and still return success even if the retries fail.<262>
+- If pszOperation is IncrementVersion,, the server MUST return a failure if the zone is not a primary or cache zone, and it MUST return success if the zone's **Dirty Flag** (section 3.1.1) is set to FALSE or the zone is not stored in a file. Otherwise, the server MUST write the uncommitted information to the file, send DNS notify [RFC1996] messages to all other servers hosting the zones, if they exist, and return success. If the zone specified is the cache zone, the server SHOULD write the root hints to their permanent storage. If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST use LDAP add, delete, and search operations to replace the root hints on the directory server, and return success, regardless of the success or failure of these operations. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice, and still return success even if the retries fail.<262>
+- If pszOperation is WriteBackFile, the server MUST return a failure if the zone is not a primary or cache zone, and it MUST return success if the zone's **Dirty Flag** (section 3.1.1) is set to FALSE and it does not have any scopes configured or the zone is not stored in a file. Otherwise, the server MUST write the uncommitted information to the file, send DNS notify ([RFC1996]) messages to all other servers hosting the zones, if they exist, and return success, regardless of the success or failure of these operations. If the zone has scopes, the data of the scopes MUST be written to their corresponding scope files if the scope's **Dirty Flag** (section 3.1.1) is set to TRUE. If the server fails to write the data for any of the scopes it SHOULD log an error event and return the error code. If the operation results in updates only in the scope files and not the zone file, then DNS notify ([RFC1996]) messages SHOULD NOT be sent. If the zone specified is the cache zone, the server SHOULD write the root hints to their permanent storage. If the root hints are stored on the directory server and DownlevelDCsInDomain is nonzero, the server MUST check whether the root hints are empty. If the root hints are empty, the root hints MUST NOT be written to their permanent storage. Otherwise, if the root hints are stored on the directory server, the server MUST use LDAP add, delete, and search operations to replace the root hints on the directory server, and return success, regardless of the success or failure of these operations. If there is a failure in writing the root hints records to the directory server, then the server MUST retry the write operation twice, and still return success even if the retries fail.<263>
 - If pszOperation is DeleteZoneFromDs, the server MUST leave the zone, represented by a dnsZone object (section 2.3), intact and return a failure if the specified zone is not directory service-integrated. Otherwise, the server MUST locate the zone and its records, represented by dnsNode objects (section 2.3) using LDAP search operations. The server MUST rename the dnsZone object by prepending "..Deleted-" (or "..Deleted.<random number>-" if "..Deleted-" already exists) to the zone's name. The server MUST then attempt to delete the zone and its records using LDAP delete operations with one of the following conditions for any LDAP error returned ([MS-ERREF] section 2.4):
 - Retry up to 300 times if LDAP_ADMIN_LIMIT_EXCEEDED (0x0B) is returned.
 - Never retry if LDAP_INSUFFICIENT_RIGHTS (0x32) is returned.
@@ -10284,11 +10288,11 @@ If the deletion from the directory server was successful, then the server MUST d
 - Refresh data for the zone from the directory server, and return success or failure depending on the result of this operation.
 - If pszOperation is ZoneExport, the server SHOULD:
 - Verify that the zone is not currently loading if it is a directory server integrated zone; otherwise, return a failure.
-- Export zone data for the zone to a file on the DNS server specified by pszZoneExportFile in pData, and return success or failure depending on the result of this operation, but MAY<263> simply return a failure.
+- Export zone data for the zone to a file on the DNS server specified by pszZoneExportFile in pData, and return success or failure depending on the result of this operation, but MAY<264> simply return a failure.
 - If pszOperation is ZoneChangeDirectoryPartition, the server MUST:
 - Verify that the specified zone is not currently loading; otherwise, return a failure.
 - Verify that the application directory partition specified by pszDestPartition (section 2.2.7.2.6) in pData is already known to the server; otherwise, return a failure.
-- Verify that the specified zone is not already in the destination application directory partition; otherwise, return success.<264>
+- Verify that the specified zone is not already in the destination application directory partition; otherwise, return success.<265>
 - Create a backup copy of the zone properties (the dnsZone object) in local storage using LDAP search operations, and then create a temporary dnsZone object in the new application directory partition with the zone properties from the backup copy, using LDAP add operations. If a failure occurs, the server MUST delete the temporary zone using the LDAP search and delete operations and return a failure.
 - Copy the records (dnsNode objects) of the old zone to the temporary zone by enumerating the old zone's records using an LDAP search operation and by writing the new records to the temporary zone using LDAP add operations. If there is a failure in writing the records to the directory server, then the server MUST retry the write operation twice. If the search fails or the new records cannot be written, then the server MUST attempt to delete the temporary zone using the LDAP search and delete operations with the following conditions for any LDAP error returned [MS-ERREF] section 2.4):
 - Retry up to 300 times if LDAP_ADMIN_LIMIT_EXCEEDED (0x0B) is returned.
@@ -10457,19 +10461,19 @@ LONG R_DnssrvQuery(
 
 **pszOperation:** A pointer to a null-terminated character string that contains the name of the operation to be performed on the server. These are two sets of allowed values for pszOperation:
 
-If pszZone is set to NULL, pszOperation MUST be either a property name listed in section [3.1.1.1](#Section_3.1.1.1), or it SHOULD<265> be the following.
+If pszZone is set to NULL, pszOperation MUST be either a property name listed in section [3.1.1.1](#Section_3.1.1.1), or it SHOULD<266> be the following.
 
 | Value | Meaning |
 | --- | --- |
-| "ServerInfo" | On output pdwTypeId SHOULD be set according to the value of the dwClientVersion field (section 2.2.1.2.1). If dwClientVersion is 0x00000000, then pdwTypeId SHOULD be set to DNSSRV_TYPEID_SERVER_INFO_W2K. If dwClientVersion is 0x00060000, then pdwTypeId SHOULD be set to DNSSRV_TYPEID_SERVER_INFO_DOTNET. If dwClientVersion is 0x00070000, then pdwTypeId SHOULD be set to DNSSRV_TYPEID_SERVER_INFO<266> ppData MUST point to a structure of one of the types specified in DNS_RPC_SERVER_INFO (section [2.2.4.2.2](#Section_2.2.4.2.2)), which SHOULD contain the configuration information for the DNS server, but MAY have some fields set to zero even when the related configuration value is nonzero.<267> |
+| "ServerInfo" | On output pdwTypeId SHOULD be set according to the value of the dwClientVersion field (section 2.2.1.2.1). If dwClientVersion is 0x00000000, then pdwTypeId SHOULD be set to DNSSRV_TYPEID_SERVER_INFO_W2K. If dwClientVersion is 0x00060000, then pdwTypeId SHOULD be set to DNSSRV_TYPEID_SERVER_INFO_DOTNET. If dwClientVersion is 0x00070000, then pdwTypeId SHOULD be set to DNSSRV_TYPEID_SERVER_INFO<267> ppData MUST point to a structure of one of the types specified in DNS_RPC_SERVER_INFO (section [2.2.4.2.2](#Section_2.2.4.2.2)), which SHOULD contain the configuration information for the DNS server, but MAY have some fields set to zero even when the related configuration value is nonzero.<268> |
 | VirtualizationInstance | Gets the details of a [**virtualization instance**](#gt_virtualization-instance) in the DNS server. On success, the DNS server MUST set the *dwTypeId* parameter to DNSSRV_TYPEID_VIRTUALIZATION_INSTANCE (section [2.2.1.2.6](#Section_2.2.1.2.6)), and MUST set the *ppData* point to a structure of type DNS_RPC_VIRTUALIZATION_INSTANCE (section [2.2.17.1.1](#Section_2.2.17.1.1)). |
 
 If pszZone is not NULL, pszOperation MUST be either a property name listed in section [3.1.1.2](#Section_3.1.1.2), or one of the following.
 
 | Value | Meaning |
 | --- | --- |
-| "Zone" | On output the value pointed to by pdwTypeId SHOULD<268> be set to DNSSRV_TYPEID_ZONE and ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE (section [2.2.5.2.1](#Section_2.2.5.2.1)), which contains abbreviated information about the zone pointed to by pszZone. |
-| "ZoneInfo" | On output the value pointed to by pdwTypeId SHOULD<269> be set to DNSSRV_TYPEID_ZONE_INFOand ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_INFO (section [2.2.5.2.4](#Section_2.2.5.2.4)), which contains full information about the zone pointed to by pszZone. |
+| "Zone" | On output the value pointed to by pdwTypeId SHOULD<269> be set to DNSSRV_TYPEID_ZONE and ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE (section [2.2.5.2.1](#Section_2.2.5.2.1)), which contains abbreviated information about the zone pointed to by pszZone. |
+| "ZoneInfo" | On output the value pointed to by pdwTypeId SHOULD<270> be set to DNSSRV_TYPEID_ZONE_INFOand ppData MUST point to a structure of one of the types specified in DNS_RPC_ZONE_INFO (section [2.2.5.2.4](#Section_2.2.5.2.4)), which contains full information about the zone pointed to by pszZone. |
 
 **pdwTypeId:** A pointer to an integer that on success contains a value of type DNS_RPC_TYPEID (section [2.2.1.1.1](#Section_2.2.1.1.1)) that indicates the type of data pointed to by ppData.
 
@@ -10485,16 +10489,16 @@ When processing this call, the server MUST do the following:
 - Validate, as specified in section [3.1.6.1](#Section_3.1.6.1), that the client has permissions to perform the attempted operation. If pszZone is NULL then the DNS server MUST perform the Phase 2 authorization test using the DNS Server Configuration Access Control List. If pszZone is not NULL then the DNS server MUST perform the Phase 2 authorization test using the Zone Access Control List for the zone specified by pszZone. Read privilege MUST be tested for all operations. If the client does not have permission to perform the operation, the server MUST return a failure.
 - If pszZone is NULL, execute the operation indicated by the value of pszOperation specified as follows:
 - If pszOperation is ServerInfo, the server MUST return in ppData configuration information for the DNS server, and return success.
-- If pszOperation matches a property name listed in section [3.1.1.1.1](#Section_3.1.1.1.1), the server SHOULD<270> return DNSSRV_TYPEID_DWORD in pdwTypeId and return in ppData the value associated with that property, and return success. The server MAY return a nonzero error code.
-- If pszOperation matches a property name listed in section [3.1.1.1.2](#Section_3.1.1.1.2), the server SHOULD<271> return DNSSRV_TYPEID_ADDRARRAY in pdwTypeId, return in ppData the value associated with that property as a DNS_ADDR_ARRAY (section [2.2.3.2.1](#Section_2.2.3.2.1)), and return success; it MAY instead return DNSSRV_TYPEID_ADDRARRAY in the pdwTypeId, return in ppData the value associated with that property as an IP4_ARRAY (section 2.2.3.2.1), and return success; or it MAY instead return a nonzero error code.<272>
-- If pszOperation matches a property name listed in section [3.1.1.1.3](#Section_3.1.1.1.3) that the server supports, the server MUST return DNSSRV_TYPEID_LPSTR for UTF-8 string properties or DNSSRV_TYPEID_LPWSTR for Unicode string properties in pdwTypeId, and return in ppData a pointer to the UTF-8 or Unicode string associated with that property, and return success.<273> If the property name is not supported, the server MUST return a nonzero error code.
+- If pszOperation matches a property name listed in section [3.1.1.1.1](#Section_3.1.1.1.1), the server SHOULD<271> return DNSSRV_TYPEID_DWORD in pdwTypeId and return in ppData the value associated with that property, and return success. The server MAY return a nonzero error code.
+- If pszOperation matches a property name listed in section [3.1.1.1.2](#Section_3.1.1.1.2), the server SHOULD<272> return DNSSRV_TYPEID_ADDRARRAY in pdwTypeId, return in ppData the value associated with that property as a DNS_ADDR_ARRAY (section [2.2.3.2.1](#Section_2.2.3.2.1)), and return success; it MAY instead return DNSSRV_TYPEID_ADDRARRAY in the pdwTypeId, return in ppData the value associated with that property as an IP4_ARRAY (section 2.2.3.2.1), and return success; or it MAY instead return a nonzero error code.<273>
+- If pszOperation matches a property name listed in section [3.1.1.1.3](#Section_3.1.1.1.3) that the server supports, the server MUST return DNSSRV_TYPEID_LPSTR for UTF-8 string properties or DNSSRV_TYPEID_LPWSTR for Unicode string properties in pdwTypeId, and return in ppData a pointer to the UTF-8 or Unicode string associated with that property, and return success.<274> If the property name is not supported, the server MUST return a nonzero error code.
 - If pszOperation matches a property name listed in section [3.1.1.1.4](#Section_3.1.1.1.4) that the server supports, the server MUST return DNSSRV_TYPEID_UTF8_STRING_LIST, and return in ppData the DNS_RPC_UTF8_STRING_LIST (section [2.2.1.2.3](#Section_2.2.1.2.3)) associated with that property, and return success.
 - If pszOperation is VirtualizationInstance, the server MUST return in ppData details of the virtualization instance in a PDNS_RPC_VIRTUALIZATION_INSTANCE structure and return success. If a virtualization instance does not exist then return error DNS_ERROR_VIRTUALIZATION_INSTANCE_DOES_NOT_EXIST (9922).
 - If pszZone is not NULL, execute the operation indicated by the value of pszOperation, specified as follows:
 - If pszOperation is Zone, the server instead returns information about the zone in DNS_RPC_ZONE (section 2.2.5.2.1) format in ppData, and return success.
 - If pszOperation is ZoneInfo, the server instead returns information about the zone in DNS_RPC_ZONE_INFO (section 2.2.5.2.4) format in ppData, and return success.
 - If pszOperation matches a property name listed in section [3.1.1.2.1](#Section_3.1.1.2.1), the server MUST return DNSSRV_TYPEID_DWORD in pdwTypeId, return in ppData the value associated with that property, and return success.
-- If pszOperation matches a property name listed in section [3.1.1.2.2](#Section_3.1.1.2.2) that the server supports, the server SHOULD<274> return DNSSRV_TYPEID_ADDRARRAY in pdwTypeId, return in ppData the value associated with that property as a DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)), and return success; or it MAY instead return DNSSRV_TYPEID_IPARRAY in pdwTypeId, return in ppData the value associated with that property as an IP4_ARRAY (section [2.2.3.1.1](#Section_2.2.3.1.1)), and return success. If the property name is not supported, the server MUST return a nonzero error code.
+- If pszOperation matches a property name listed in section [3.1.1.2.2](#Section_3.1.1.2.2) that the server supports, the server SHOULD<275> return DNSSRV_TYPEID_ADDRARRAY in pdwTypeId, return in ppData the value associated with that property as a DNS_ADDR_ARRAY (section [2.2.3.2.3](#Section_2.2.3.2.3)), and return success; or it MAY instead return DNSSRV_TYPEID_IPARRAY in pdwTypeId, return in ppData the value associated with that property as an IP4_ARRAY (section [2.2.3.1.1](#Section_2.2.3.1.1)), and return success. If the property name is not supported, the server MUST return a nonzero error code.
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 R_DnssrvComplexOperation (Opnum 2)
 
@@ -10526,7 +10530,7 @@ LONG R_DnssrvComplexOperation(
 
 **pszZone:** The name of the zone that is being operated on. This MUST be set to NULL unless pszOperation is set to QueryDwordProperty, in which case this value MUST be set either to NULL (to indicate that DNS server Configuration information is being requested) or to the name of the zone to be queried in UTF-8 format (to indicate that a DNS Zone integer property is being requested). This value will be used by certain operations as specified in the table below.
 
-**pszOperation:** The operation to perform. The value of pszOperation SHOULD<275> be one of the following:
+**pszOperation:** The operation to perform. The value of pszOperation SHOULD<276> be one of the following:
 
 | Value | Meaning |
 | --- | --- |
@@ -10549,7 +10553,7 @@ LONG R_DnssrvComplexOperation(
 | ImportZoneSigningSettings | Imports the Dnssec settings to a primary file-backed zone on a server and takes appropriate action based on the signing metadata imported. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_ZONE_SIGNING_SETTINGS and pDataIn SHOULD be a structure of type PDNS_RPC_ZONE_DNSSEC_SETTINGS. If this operation is invoked on a server that hosts a primary unsigned copy of a file-backed zone and the fIsSigned Property of PDNS_RPC_ZONE_DNSSEC_SETTINGS is 1, then the server becomes a [**nonkey master primary server**](#gt_nonkey-master-primary-server) for that zone. Unless an error is returned, on output pdwTypeOut is set to DNSSRV_TYPEID_DWORD and ppDataOut points to a structure of type ImportOpResult. |
 | EnumZoneScopes | Enumerates all the [**zone scopes**](#gt_zone-scope) in a zone or cache scopes in a cache zone. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. The pszZone MUST be the zone name for which zone scopes are to be enumerated or it MUST be "..cache". Unless an error is returned, on output pdwTypeOut is set to DNSSRV_TYPEID_ZONE_SCOPE_ENUM and ppDataOut points to a structure of type PDNS_RPC_ENUM_ZONE_SCOPE_LIST. |
 | ZoneStatistics | Gets the zone statistics from the server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_DWORD and pDataIn SHOULD be either DNS_RPC_ZONE_STATS_GET, which gets the current zone statistics, or DNS_RPC_ZONE_STATS_CLEAR, which clears the zone statistics after getting them. The pszZone MUST point to the zone information for which statistics are required. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_ZONE_STATS and ppDataOut SHOULD point to a structure of type DNS_RPC_ZONE_STATS_V1 (section [2.2.12.2.5](#Section_2.2.12.2.5)). |
-| EnumServerScopes | Enumerates all the [**server scopes**](#gt_server-scope) in a DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. Unless an error is returned, on output, pdwTypeOut SHOULD be set to DNSSRV_TYPEID_SCOPE_ENUM and ppDataOut points to a structure of type PDNS_RPC_ENUM_SCOPE_LIST.<276> |
+| EnumServerScopes | Enumerates all the [**server scopes**](#gt_server-scope) in a DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. Unless an error is returned, on output, pdwTypeOut SHOULD be set to DNSSRV_TYPEID_SCOPE_ENUM and ppDataOut points to a structure of type PDNS_RPC_ENUM_SCOPE_LIST.<277> |
 | EnumerateClientSubnetRecord | Enumerates the names all the Client Subnet Records on the DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_UNICODE_STRING_LIST and ppDataOut points to a structure of type PDNS_RPC_UNICODE_STRING_LIST. |
 | GetClientSubnetRecord | Gets the details of the Client Subnet Record on the DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_LPWSTR and pDataIn SHOULD be name of the Client Subnet Record. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_CLIENT_SUBNET_RECORD and ppDataOut points to a structure of type PDNS_RPC_CLIENT_SUBNET_RECORD. |
 | EnumeratePolicy | Enumerates the policies configured on the server level or zone level for a specified zone on a DNS server. On input, dwTypeIn MUST be set to DNSSRV_TYPEID_NULL and pDataIn SHOULD be NULL. Unless an error is returned, on output pdwTypeOut SHOULD be set to DNSSRV_TYPEID_POLICY_ENUM and ppDataOut points to a structure of type PDNS_RPC_ENUMERATE_POLICY_LIST. |
@@ -10721,7 +10725,7 @@ When processing this call, the server MUST do the following:
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 R_DnssrvUpdateRecord (Opnum 4)
 
-The R_DnssrvUpdateRecord method is used to add a new DNS record or modify/delete an existing DNS record at the server. This operation SHOULD<277> be supported.
+The R_DnssrvUpdateRecord method is used to add a new DNS record or modify/delete an existing DNS record at the server. This operation SHOULD<278> be supported.
 
 LONG R_DnssrvUpdateRecord(
 
@@ -10773,14 +10777,14 @@ When processing this call, the server MUST do the following:
 
 - If the Global Server State (section [3.1](#Section_3.1)) is not "Running", return a failure.
 - Check that the input parameters conform to the syntax requirements above, and if not return a failure.
-- The server SHOULD support **pAddRecord** and/or **pDeleteRecord** for the explicitly defined types in section [2.2.2.1.1](#Section_2.2.2.1.1).<278> If any of the passed record types are not supported by the server, return a failure.
+- The server SHOULD support **pAddRecord** and/or **pDeleteRecord** for the explicitly defined types in section [2.2.2.1.1](#Section_2.2.2.1.1).<279> If any of the passed record types are not supported by the server, return a failure.
 - If the **pAddRecord** is for an explicitly defined resource record type DNS_TYPE_CNAME (section 2.2.2.1.1), then delete any existing DNS_TYPE_CNAME record for the node specified in **pszNodeName**, before adding the record.
-- If the **pAddRecord** is for adding a new record to a dnsNode that has or had a static resource record (with TimeStamp at 0), then the new record is added as a static record.<279>
+- If the **pAddRecord** is for adding a new record to a dnsNode that has or had a static resource record (with TimeStamp at 0), then the new record is added as a static record.<280>
 - If **pszZone** is not NULL, search the DNS Zone Table for a zone with a name matching the value of **pszZone**. If a matching zone cannot be found return a failure.
 - Validate, as specified in section [3.1.6.1](#Section_3.1.6.1), that the client has permissions to perform the attempted operation. The DNS server MUST perform the Phase 2 authorization test using the Zone Access Control List for the zone specified by **pszZone**. Read privilege MUST be tested for this operation. If the client does not have permission to perform the operation, the server MUST return a failure.
 - Locate the node indicated by **pszNodeName** in the zone indicated by **pszZoneName**. If no such node is found then return ERROR_SUCCESS.
 - If both **pAddRecord** and **pDeleteRecord** are NULL, then the server MUST add an empty node to the database if the node does not already exist. If the node already exists, the server MUST return ERROR_SUCCESS.
-- If **pszZoneName** is NULL or points to "..Cache" then the operation SHOULD be performed on the DNS server's cache and MAY be performed on the DNS server's set of root hint records.<280> If **pszZoneName** points to "..RootHints" then the operation MUST be performed on the DNS server's set of root hint records.
+- If **pszZoneName** is NULL or points to "..Cache" then the operation SHOULD be performed on the DNS server's cache and MAY be performed on the DNS server's set of root hint records.<281> If **pszZoneName** points to "..RootHints" then the operation MUST be performed on the DNS server's set of root hint records.
 - If **pszZoneName** points to a primary zone, attempt to perform addition/deletion/update of the record. If the operation is successful, increment the zone serial number using serial number arithmetic [[RFC1982]](https://go.microsoft.com/fwlink/?LinkId=184551). If the zone is directory server-integrated and the update causes new or modified records to be committed to the directory, the new zone serial number MUST also be written to the **Serial** field of the **dnsRecord** attribute (section [2.3.2.2](#Section_2.3.2.2)). If the last record at the node is being deleted and the zone is stored in the directory server or is directory server-integrated, the DNS server MUST set the node's **dnsTombstoned** attribute to TRUE and the node's **dnsRecord** attribute to contain a DNS_RPC_RECORD_TS record (section [2.2.2.2.4.23](#Section_2.2.2.2.4.23)) with an **EntombedTime** value equal to the current time expressed as the number of 100-nanosecond intervals since 12:00 A.M. January 1, 1601 [**Coordinated Universal Time (UTC)**](#gt_coordinated-universal-time-utc).
 - If a node indicated by **pszNodeName** already exists and has at least one record for which [**aging**](#gt_f-aging) is disabled, then subsequent records added on the node will also have aging disabled.
 - If both **pAddRecord** and **pDeleteRecord** are not NULL and a resource record is being replaced, if the **dwFlags** field is not set to DNS_RPC_FLAG_RECORD_CREATE_PTR, the PTR record for the A/AAAA record being replaced is deleted. If the **dwFlags** field is set to DNS_RPC_FLAG_SUPPRESS_RECORD_UPDATE_PTR, the PTR record of the A/AAAA record being replaced is not deleted.
@@ -10822,7 +10826,7 @@ LONG R_DnssrvOperation2(
 
 | Value | Meaning |
 | --- | --- |
-| SetEncryptionConfig | Specifies encryption configuration for [**DNS over HTTPS (DoH)**](#gt_dns-over-https-doh). The *dwTypeId* parameter MUST be set to DNSSRV_TYPEID_ENCRYPTION_CONFIG, and *pData* MUST point to a structure of type DNS_RPC_ENCRYPTION_CONFIG.<281> |
+| SetEncryptionConfig | Specifies encryption configuration for [**DNS over HTTPS (DoH)**](#gt_dns-over-https-doh). The *dwTypeId* parameter MUST be set to DNSSRV_TYPEID_ENCRYPTION_CONFIG, and *pData* MUST point to a structure of type DNS_RPC_ENCRYPTION_CONFIG.<282> |
 
 **Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success or a nonzero Win32 error code value if an error occurred. See [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2 or section [2.2.1.1.5](#Section_2.2.1.1.5). All error values MUST be treated the same.
 
@@ -10855,7 +10859,7 @@ https://<DNSServerName>:443/dns-query
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 R_DnssrvQuery2 (Opnum 6)
 
-The R_DnssrvQuery2 method queries the DNS server for information. The type of information queried for is specified by the client using the pszZone and pszOperation parameters. The DNS server SHOULD implement R_ DnssrvQuery2 <282>.
+The R_DnssrvQuery2 method queries the DNS server for information. The type of information queried for is specified by the client using the pszZone and pszOperation parameters. The DNS server SHOULD implement R_ DnssrvQuery2 <283>.
 
 All parameters are as specified by the R_DnssrvQuery method (section [3.1.4.2](#Section_3.1.4.2)) with the following exceptions:
 
@@ -10887,7 +10891,7 @@ LONG R_DnssrvQuery2(
 
 | Value | Meaning |
 | --- | --- |
-| GetEncryptionConfig | On success, the server MUST set *pdwTypeId* to DNSSRV_TYPEID_ENCRYPTION_CONFIG and *ppData* to DNS_RPC_ENCRYPTION_CONFIG.<283> |
+| GetEncryptionConfig | On success, the server MUST set *pdwTypeId* to DNSSRV_TYPEID_ENCRYPTION_CONFIG and *ppData* to DNS_RPC_ENCRYPTION_CONFIG.<284> |
 
 **Return Values:** Return values behaviors and interpretations are same as they are for R_DnssrvQuery method (section 3.1.4.2).
 
@@ -10942,7 +10946,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 R_DnssrvEnumRecords2 (Opnum 8)
 
-The R_DnssrvEnumRecords2 method enumerates DNS records on the server. The DNS server SHOULD implement R_DnssrvEnumRecords2 <284>.
+The R_DnssrvEnumRecords2 method enumerates DNS records on the server. The DNS server SHOULD implement R_DnssrvEnumRecords2 <285>.
 
 All parameters are as specified by the [R_DnssrvEnumRecords method (section 3.1.4.4)](#Section_3.1.4.4) with the following exceptions:
 
@@ -10987,7 +10991,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 R_DnssrvUpdateRecord2 (Opnum 9)
 
-The R_DnssrvUpdateRecord2 method is used to add a new DNS record or modify/delete an existing DNS record at the server. The DNS server SHOULD implement R_ DnssrvEnumRecords2.<285>
+The R_DnssrvUpdateRecord2 method is used to add a new DNS record or modify/delete an existing DNS record at the server. The DNS server SHOULD implement R_ DnssrvEnumRecords2.<286>
 
 All parameters are as specified by the [R_DnssrvUpdateRecord method (section 3.1.4.5)](#Section_3.1.4.5) with the following exceptions:
 
@@ -11022,7 +11026,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 R_DnssrvUpdateRecord3 (Opnum 10)
 
-The R_DnssrvUpdateRecord3 method is used to add a new DNS record or modify or delete an existing DNS record in a [**zone**](#gt_zone) or in a [**zone scope**](#gt_zone-scope), or in a cache zone or cache scope, if specified. The DNS server SHOULD<286> implement R_DnssrvUpdateRecord3.
+The R_DnssrvUpdateRecord3 method is used to add a new DNS record or modify or delete an existing DNS record in a [**zone**](#gt_zone) or in a [**zone scope**](#gt_zone-scope), or in a cache zone or cache scope, if specified. The DNS server SHOULD<287> implement R_DnssrvUpdateRecord3.
 
 All parameters are as specified by the methods [R_DnssrvUpdateRecord (section 3.1.4.5)](#Section_3.1.4.5) and [R_DnssrvUpdateRecord2 (section 3.1.4.10)](#Section_3.1.4.10) with the following exceptions:
 
@@ -11055,7 +11059,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.12"></a>
 #### 3.1.4.12 R_DnssrvEnumRecords3 (Opnum 11)
 
-The R_DnssrvEnumRecords3 method enumerates DNS records on a zone or a [**zone scope**](#gt_zone-scope), or cache zone or a cache scope, if specified. The DNS server SHOULD<287> implement R_DnssrvEnumRecords3.
+The R_DnssrvEnumRecords3 method enumerates DNS records on a zone or a [**zone scope**](#gt_zone-scope), or cache zone or a cache scope, if specified. The DNS server SHOULD<288> implement R_DnssrvEnumRecords3.
 
 All parameters are as specified by the [R_DnssrvEnumRecords method (section 3.1.4.4)](#Section_3.1.4.4) and implement the [R_DnssrvEnumRecords2 method (section 3.1.4.9)](#Section_3.1.4.9) with the following exceptions:
 
@@ -11098,7 +11102,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.13"></a>
 #### 3.1.4.13 R_DnssrvOperation3 (Opnum 12)
 
-The R_DnssrvOperation3 method is used to invoke a set of server functions specified by the caller on the zone scope or cache scope if specified. The DNS server SHOULD<288> implement R_DnssrvOperation3.
+The R_DnssrvOperation3 method is used to invoke a set of server functions specified by the caller on the zone scope or cache scope if specified. The DNS server SHOULD<289> implement R_DnssrvOperation3.
 
 All parameters are as specified by the methods [R_DnssrvOperation (section 3.1.4.1)](#Section_3.1.4.1) and [R_DnssrvOperation2 (section 3.1.4.6)](#Section_3.1.4.6) with the following exceptions.
 
@@ -11139,7 +11143,7 @@ If pszZone is NULL and pwszZoneScopeName is not NULL, pszOperation MUST be set t
 
 | Value | Meaning |
 | --- | --- |
-| "Forwarders" | On input, dwTypeId SHOULD<289> be set to DNSSRV_TYPEID_FORWARDERS, and pData MUST point to a structure of one of the types specified in [DNS_RPC_FORWARDERS (section 2.2.5.2.10)](#Section_2.2.5.2.10), which contains information about new IP addresses to which the DNS server SHOULD forward queries. These IP addresses are part of the server scope as specified in the pwszZoneScopeName. |
+| "Forwarders" | On input, dwTypeId SHOULD<290> be set to DNSSRV_TYPEID_FORWARDERS, and pData MUST point to a structure of one of the types specified in [DNS_RPC_FORWARDERS (section 2.2.5.2.10)](#Section_2.2.5.2.10), which contains information about new IP addresses to which the DNS server SHOULD forward queries. These IP addresses are part of the server scope as specified in the pwszZoneScopeName. |
 | "ResetDwordProperty" | Update the value of a (name, value) pair in the DNS Server Configuration. On input, dwTypeId MUST be set to DNSSRV_TYPEID_NAME_AND_PARAM, and pData MUST point to a structure of type DNS_RPC_NAME_AND_PARAM (section 2.2.1.2.5) that specifies the name of a property listed in section [3.1.1.3.1](#Section_3.1.1.3.1) and a new value for that property. |
 
 When processing this call, the server MUST perform the same actions as for the R_DnssrvOperation2 method. Operations specific to this method are as described in the preceding table. These operations are processed as specified in R_DnssrvOperation, in the given zone scope or cache scope specified in pwszZoneScopeName of a zone or cache zone specified in pszZone or in the server scope specified in pwszZoneScopeName with pszZone being NULL.
@@ -11147,7 +11151,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.14"></a>
 #### 3.1.4.14 R_DnssrvQuery3 (Opnum 13)
 
-The R_DnssrvQuery3 method queries the DNS server for information. The type of information queried for is specified by the client using the pszZone, pwszZoneScopeName, and pszOperation parameters. The DNS server SHOULD<290> implement R_DnssrvQuery3.
+The R_DnssrvQuery3 method queries the DNS server for information. The type of information queried for is specified by the client using the pszZone, pwszZoneScopeName, and pszOperation parameters. The DNS server SHOULD<291> implement R_DnssrvQuery3.
 
 All the parameters are as specified by the [R_DnssrvQuery2](#Section_3.1.4.7) method with the following exceptions:
 
@@ -11188,7 +11192,7 @@ If pszZone is NULL and pwszZoneScopeName is not NULL, pszOperation MUST be eithe
 
 | Value | Meaning |
 | --- | --- |
-| "Forwarders" or "DynamicForwarders" | On output, the value pointed to by pdwTypeId SHOULD be set to DNSSRV_TYPEID_ADDRARRAY and ppData MUST point to a structure as specified in [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3), which contains list of IP address.<291> |
+| "Forwarders" or "DynamicForwarders" | On output, the value pointed to by pdwTypeId SHOULD be set to DNSSRV_TYPEID_ADDRARRAY and ppData MUST point to a structure as specified in [DNS_ADDR_ARRAY (section 2.2.3.2.3)](#Section_2.2.3.2.3), which contains list of IP address.<292> |
 
 - If pszZone is NULL and pwszZoneScopeName is not NULL, and pszOperation value is Forwarders or DynamicForwarders:
 - On input, pdwTypeId MUST be set to DNSSRV_TYPEID_ADDRARRAY.
@@ -11198,7 +11202,7 @@ If pszZone is NULL and pwszZoneScopeName is not NULL, pszOperation MUST be eithe
 <a id="Section_3.1.4.15"></a>
 #### 3.1.4.15 R_DnssrvComplexOperation3 (Opnum 14)
 
-The **R_DnssrvComplexOperation3** method is used to invoke a set of server functions specified by the caller. These functions generally return more complex structures than simple 32-bit integer values, unlike the operations accessible through [R_DnssrvOperation (section 3.1.4.1)](#Section_3.1.4.1). The DNS server SHOULD<292> implement [R_DnssrvComplexOperation2 (section 3.1.4.8)](#Section_3.1.4.8).
+The **R_DnssrvComplexOperation3** method is used to invoke a set of server functions specified by the caller. These functions generally return more complex structures than simple 32-bit integer values, unlike the operations accessible through [R_DnssrvOperation (section 3.1.4.1)](#Section_3.1.4.1). The DNS server SHOULD<293> implement [R_DnssrvComplexOperation2 (section 3.1.4.8)](#Section_3.1.4.8).
 
 All parameters are as specified by the [R_DnssrvComplexOperation method (section 3.1.4.3)](#Section_3.1.4.3) with the following exceptions:
 
@@ -11237,7 +11241,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.16"></a>
 #### 3.1.4.16 R_DnssrvOperation4 (Opnum: 15)
 
-The **R_DnssrvOperation4** method is used to invoke a set of server functions specified by the caller on the [**virtualization instance**](#gt_virtualization-instance), if specified. The DNS server SHOULD<293> implement **R_DnssrvOperation4**.
+The **R_DnssrvOperation4** method is used to invoke a set of server functions specified by the caller on the [**virtualization instance**](#gt_virtualization-instance), if specified. The DNS server SHOULD<294> implement **R_DnssrvOperation4**.
 
 All parameters are as specified by the [R_DnssrvOperation3 (section 3.1.4.13)](#Section_3.1.4.13) method with the following exceptions.
 
@@ -11276,7 +11280,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.17"></a>
 #### 3.1.4.17 R_DnssrvQuery4 (Opnum 16)
 
-The **R_DnssrvQuery4** method queries the DNS server for information. The type of information queried for is specified by the client using the *pwszVirtualizationInstanceID*, and *pszOperation* parameters. The DNS server SHOULD<294> implement **R_DnssrvQuery4**.
+The **R_DnssrvQuery4** method queries the DNS server for information. The type of information queried for is specified by the client using the *pwszVirtualizationInstanceID*, and *pszOperation* parameters. The DNS server SHOULD<295> implement **R_DnssrvQuery4**.
 
 All the parameters are as specified by the [R_DnssrvQuery2 method (section 3.1.4.7)](#Section_3.1.4.7) method with the following exceptions:
 
@@ -11311,7 +11315,7 @@ When processing this call, the server MUST perform the same actions as for the R
 <a id="Section_3.1.4.18"></a>
 #### 3.1.4.18 R_DnssrvUpdateRecord4 (Opnum 17)
 
-The **R_DnssrvUpdateRecord4** method is used to add a new DNS record or to modify or delete an existing DNS record in a [**zone**](#gt_zone) or in a [**zone scope**](#gt_zone-scope) under a [**virtualization instance**](#gt_virtualization-instance), if specified. The DNS server SHOULD<295> implement **R_DnssrvUpdateRecord4**.
+The **R_DnssrvUpdateRecord4** method is used to add a new DNS record or to modify or delete an existing DNS record in a [**zone**](#gt_zone) or in a [**zone scope**](#gt_zone-scope) under a [**virtualization instance**](#gt_virtualization-instance), if specified. The DNS server SHOULD<296> implement **R_DnssrvUpdateRecord4**.
 
 All parameters are as specified by the [R_DnssrvUpdateRecord3 (section 3.1.4.11)](#Section_3.1.4.11) method with the following exceptions:
 
@@ -11346,7 +11350,7 @@ When processing this call, the server MUST perform the same actions as for the *
 <a id="Section_3.1.4.19"></a>
 #### 3.1.4.19 R_DnssrvEnumRecords4 (Opnum 18)
 
-The **R_DnssrvEnumRecords4** method enumerates DNS records on a [**zone**](#gt_zone) or a [**zone scope**](#gt_zone-scope) in a [**virtualization instance**](#gt_virtualization-instance), if specified. The DNS server SHOULD<296> implement R_DnssrvEnumRecords4.
+The **R_DnssrvEnumRecords4** method enumerates DNS records on a [**zone**](#gt_zone) or a [**zone scope**](#gt_zone-scope) in a [**virtualization instance**](#gt_virtualization-instance), if specified. The DNS server SHOULD<297> implement R_DnssrvEnumRecords4.
 
 All parameters are as specified by the [R_DnssrvEnumRecords3 method (section 3.1.4.12)](#Section_3.1.4.12) with the following exceptions:
 
@@ -11418,7 +11422,7 @@ When a three-phase authorization test is performed, the following phases MUST be
 
 If the server is [**directory server**](#gt_directory-server) integrated, [**directory server security descriptors**](#gt_directory-server-security-descriptors) MUST be read from the directory server using LDAP every DsPollingInterval (section [3.1.1](#Section_3.1.1)) after DNS server boot. After each read, the server MUST cache the security descriptors.
 
-Additionally, a Zone Access Control List (section 3.1.1) security descriptor MUST be read from the directory server when the corresponding [**zone**](#gt_zone) (or [**zone scope**](#gt_zone-scope)<297>) is loaded during server boot time. This security descriptor MUST also be read when the corresponding zone or zone scope is created through the ZoneCreate or CreateZoneScope operation (section [3.1.4.1](#Section_3.1.4.1)) and when the corresponding zone's directory partition encounters the EnlistDirectoryPartition operation (section 3.1.4.1).
+Additionally, a Zone Access Control List (section 3.1.1) security descriptor MUST be read from the directory server when the corresponding [**zone**](#gt_zone) (or [**zone scope**](#gt_zone-scope)<298>) is loaded during server boot time. This security descriptor MUST also be read when the corresponding zone or zone scope is created through the ZoneCreate or CreateZoneScope operation (section [3.1.4.1](#Section_3.1.4.1)) and when the corresponding zone's directory partition encounters the EnlistDirectoryPartition operation (section 3.1.4.1).
 
 Additionally, an Application Directory Partition Access Control List (section 3.1.1) security descriptor MUST be read from the directory server when the corresponding application directory partition is loaded during server boot time. This security descriptor MUST also be read when the corresponding application directory partition encounters the EnlistDirectoryPartition or ZoneChangeDirectoryPartition operation (section 3.1.4.1).
 
@@ -16698,13 +16702,15 @@ Windows 2000 Server and Windows Server 2003 accept DNSSRV_TYPEID_IPARRAY and IP4
 
 <253> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows Server 2003 and later, root hints MUST be written to the DNS domain partition. Otherwise, root hints MUST be written to the default application directory partition.
 
-<254> Section 3.1.4.1: Windows stores the log file relative to the "%SystemRoot%\System32" directory, if the path or filename given is not absolute.
+<254> Section 3.1.4.1: Windows Server 2012 operating system through Windows Server 2025 without [[MSFT-CVE-2026-105520]](https://go.microsoft.com/fwlink/?LinkId=2387629) do not fail this operation with ERROR_ACCESS_DENIED error if the caller does not have administrator privileges.
 
-<255> Section 3.1.4.1: Windows NT 4.0 does not support invocation of the Netlogon protocol implementation.
+<255> Section 3.1.4.1: Windows stores the log file relative to the "%SystemRoot%\System32" directory, if the path or filename given is not absolute.
 
-<256> Section 3.1.4.1: Aging is not supported on Windows NT Server 4.0.
+<256> Section 3.1.4.1: Windows NT 4.0 does not support invocation of the Netlogon protocol implementation.
 
-<257> Section 3.1.4.1: The following table lists the property names that are supported as input for the ResetDwordProperty operation when pszZone is not NULL, for different versions of Windows.
+<257> Section 3.1.4.1: Aging is not supported on Windows NT Server 4.0.
+
+<258> Section 3.1.4.1: The following table lists the property names that are supported as input for the ResetDwordProperty operation when pszZone is not NULL, for different versions of Windows.
 
 | Property name | Windows NT 4.0 | Windows 2000 Server | Windows Server 2003 | Windows Server 2008 | Windows Server 2008 R2 | Windows Server 2012 | Windows Server 2012 R2 | Windows Server 2016 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -16737,7 +16743,7 @@ Windows 2000 Server and Windows Server 2003 accept DNSSRV_TYPEID_IPARRAY and IP4
 | PluginEnabled | - | - | - | - | - | - | X | X |
 | FreezeSOASerialNumber | - | - | - | - | - | - | - | X |
 
-<258> Section 3.1.4.1: The following table lists property names that are supported as an input to the pszOperation parameter for different applicable Windows Server releases.
+<259> Section 3.1.4.1: The following table lists property names that are supported as an input to the pszOperation parameter for different applicable Windows Server releases.
 
 | Property name | Windows NT 4.0 | Windows 2000 Server | Windows Server 2003 | Windows Server 2008 | Windows Server 2008 R2 | Windows Server 2012 | Windows Server 2012 R2 | Windows Server 2016 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -16755,21 +16761,21 @@ Windows 2000 Server and Windows Server 2003 accept DNSSRV_TYPEID_IPARRAY and IP4
 | NSEC3UserSalt | - | - | - | - | - | X | X | X |
 | NSEC3CurrentSalt | - | - | - | - | - | X | X | X |
 
-<259> Section 3.1.4.1: Support for scopes in Active Directory backed zones is not available on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
-
-<260> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows Server 2003 and later, root hints MUST be written to the DNS domain partition. Otherwise, root hints MUST be written to the default application directory partition.
+<260> Section 3.1.4.1: Support for scopes in Active Directory backed zones is not available on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
 <261> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows Server 2003 and later, root hints MUST be written to the DNS domain partition. Otherwise, root hints MUST be written to the default application directory partition.
 
-<262> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows NT or Windows 2000 Server, the server MUST also verify that either the specified zone is not a stub or forwarder zone, or the destination application directory partition is not the default application directory partition. Otherwise, the server MUST return a failure.
+<262> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows Server 2003 and later, root hints MUST be written to the DNS domain partition. Otherwise, root hints MUST be written to the default application directory partition.
 
-<263> Section 3.1.4.1: Windows 2000 Server does not implement this operation and returns a failure.
+<263> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows NT or Windows 2000 Server, the server MUST also verify that either the specified zone is not a stub or forwarder zone, or the destination application directory partition is not the default application directory partition. Otherwise, the server MUST return a failure.
 
-<264> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows, root hints MUST be written to the DNS domain partition. Otherwise, root hints MUST be written to the default application directory partition.
+<264> Section 3.1.4.1: Windows 2000 Server does not implement this operation and returns a failure.
 
-<265> Section 3.1.4.2: The following value is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2: VirtualizationInstance.
+<265> Section 3.1.4.1: If ForceDomainBehaviorVersion (section 3.1.1.1.1) indicates a domain behavior version of Windows, root hints MUST be written to the DNS domain partition. Otherwise, root hints MUST be written to the default application directory partition.
 
-<266> Section 3.1.4.2: The following table lists various DNSSRV_TYPEID_SERVER_INFO values returned by **R_DnsSrvQuery()**, **R_DnsSrvQuery2()** methods, for different applicable Windows Server releases.
+<266> Section 3.1.4.2: The following value is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2: VirtualizationInstance.
+
+<267> Section 3.1.4.2: The following table lists various DNSSRV_TYPEID_SERVER_INFO values returned by **R_DnsSrvQuery()**, **R_DnsSrvQuery2()** methods, for different applicable Windows Server releases.
 
 | dwClientVersion | Windows 2000 Server | Windows Server 2003 | Windows Server 2008 | Windows Server 2012 | Windows Server 2012 R2 | Windows Server 2016 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -16777,23 +16783,23 @@ Windows 2000 Server and Windows Server 2003 accept DNSSRV_TYPEID_IPARRAY and IP4
 | 0x00060000 | DNSSRV_TYPEID_SERVER_INFO_W2K | DNSSRV_TYPEID_SERVER_INFO_DOTNET | DNSSRV_TYPEID_SERVER_INFO_DOTNET | DNSSRV_TYPEID_SERVER_INFO_DOTNET | DNSSRV_TYPEID_SERVER_INFO_DOTNET | DNSSRV_TYPEID_SERVER_INFO_DOTNET |
 | 0x00070000 | DNSSRV_TYPEID_SERVER_INFO_W2K | DNSSRV_TYPEID_SERVER_INFO_DOTNET | DNSSRV_TYPEID_SERVER_INFO | DNSSRV_TYPEID_SERVER_INFO | DNSSRV_TYPEID_SERVER_INFO | DNSSRV_TYPEID_SERVER_INFO |
 
-<267> Section 3.1.4.2: Windows Server 2003 and later set the dwLocalNetPriorityNetMask field of DNS_RPC_SERVER_INFO to zero, regardless of the effective value of dwLocalNetPriorityNetMask.
+<268> Section 3.1.4.2: Windows Server 2003 and later set the dwLocalNetPriorityNetMask field of DNS_RPC_SERVER_INFO to zero, regardless of the effective value of dwLocalNetPriorityNetMask.
 
-<268> Section 3.1.4.2: Windows 2000 Server uses DNSSRV_TYPEID_ZONE_W2K.
+<269> Section 3.1.4.2: Windows 2000 Server uses DNSSRV_TYPEID_ZONE_W2K.
 
-<269> Section 3.1.4.2: Windows 2000 Server uses DNSSRV_TYPEID_ZONE_INFO_W2K. Windows Server 2003 uses DNSSRV_TYPEID_ZONE_INFO_DOTNET.
+<270> Section 3.1.4.2: Windows 2000 Server uses DNSSRV_TYPEID_ZONE_INFO_W2K. Windows Server 2003 uses DNSSRV_TYPEID_ZONE_INFO_DOTNET.
 
-<270> Section 3.1.4.2: Windows Server 2003 does not support the Version property with this operation.
+<271> Section 3.1.4.2: Windows Server 2003 does not support the Version property with this operation.
 
-<271> Section 3.1.4.2: Windows 2000 Server and Windows Server 2003 use DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.
+<272> Section 3.1.4.2: Windows 2000 Server and Windows Server 2003 use DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.
 
-<272> Section 3.1.4.2: All applicable Windows Server releases incorrectly set pdwTypeId to DNSSRV_TYPEID_DWORD, and truncate ppData to DWORD size when R_DnssrvQuery is called with pszOperation set to ListenAddresses or Forwarders. Windows Server 2003 does not support the Forwarders and ListenAddresses properties here.
+<273> Section 3.1.4.2: All applicable Windows Server releases incorrectly set pdwTypeId to DNSSRV_TYPEID_DWORD, and truncate ppData to DWORD size when R_DnssrvQuery is called with pszOperation set to ListenAddresses or Forwarders. Windows Server 2003 does not support the Forwarders and ListenAddresses properties here.
 
-<273> Section 3.1.4.2: All applicable Windows Server releases that have the DsBackgroundPauseName property incorrectly set pdwTypeId to DNSSRV_TYPEID_DWORD, and truncate ppData to DWORD size when R_DnssrvQuery is called with pszOperation set to "DsBackgroundPauseName".
+<274> Section 3.1.4.2: All applicable Windows Server releases that have the DsBackgroundPauseName property incorrectly set pdwTypeId to DNSSRV_TYPEID_DWORD, and truncate ppData to DWORD size when R_DnssrvQuery is called with pszOperation set to "DsBackgroundPauseName".
 
-<274> Section 3.1.4.2: Windows 2000 Server and Windows Server 2003 use DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.
+<275> Section 3.1.4.2: Windows 2000 Server and Windows Server 2003 use DNSSRV_TYPEID_IPARRAY and IP4_ARRAY.
 
-<275> Section 3.1.4.3: The following pszOperations values are not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<276> Section 3.1.4.3: The following pszOperations values are not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
 - EnumerateClientSubnetRecord
 - GetClientSubnetRecord
@@ -16816,49 +16822,49 @@ The following pszOperations values are not implemented on Windows NT, Windows 20
 - EnumerateKeyStorageProviders
 - EnumerateTrustPoints
 - EnumerateTrustAnchors
-<276> Section 3.1.4.3: This operation is supported in Windows Server 2012 R2 with [MSKB-2919355] and later and is reserved for future use.
+<277> Section 3.1.4.3: This operation is supported in Windows Server 2012 R2 with [MSKB-2919355] and later and is reserved for future use.
 
-<277> Section 3.1.4.5: Windows 2000 Server does not support this operation. No applicable Windows Server releases support the DNS_TYPE_LOC for this operation.
+<278> Section 3.1.4.5: Windows 2000 Server does not support this operation. No applicable Windows Server releases support the DNS_TYPE_LOC for this operation.
 
-<278> Section 3.1.4.5: Updates or deletions of the DNS_TYPE_ZERO, DNS_TYPE_LOC, and DNS_TYPE_ALL types are supported in Windows NT only.
+<279> Section 3.1.4.5: Updates or deletions of the DNS_TYPE_ZERO, DNS_TYPE_LOC, and DNS_TYPE_ALL types are supported in Windows NT only.
 
-<279> Section 3.1.4.5: New records added as static in dnsNodes that contain or contained a static record are supported in Windows Server 2008 and later.
+<280> Section 3.1.4.5: New records added as static in dnsNodes that contain or contained a static record are supported in Windows Server 2008 and later.
 
-<280> Section 3.1.4.5: Windows 2000 Server does not allow additions with pszZoneName "..Cache" and treats pszZoneName NULL as "..RootHints". Windows Server 2003 and later treat pszZoneName NULL and pszZoneName "..Cache" as pszZoneName "..RootHints".
+<281> Section 3.1.4.5: Windows 2000 Server does not allow additions with pszZoneName "..Cache" and treats pszZoneName NULL as "..RootHints". Windows Server 2003 and later treat pszZoneName NULL and pszZoneName "..Cache" as pszZoneName "..RootHints".
 
-<281> Section 3.1.4.6: SetEncryptionConfig operation is supported in Windows Server 2025 and later.
+<282> Section 3.1.4.6: SetEncryptionConfig operation is supported in Windows Server 2025 and later.
 
-<282> Section 3.1.4.7: Windows 2000 Server does not support this operation.
+<283> Section 3.1.4.7: Windows 2000 Server does not support this operation.
 
-<283> Section 3.1.4.7: GetEncryptionConfig operation is supported in Windows Server 2025 and later.
+<284> Section 3.1.4.7: GetEncryptionConfig operation is supported in Windows Server 2025 and later.
 
-<284> Section 3.1.4.9: Windows 2000 Server does not support this operation.
+<285> Section 3.1.4.9: Windows 2000 Server does not support this operation.
 
-<285> Section 3.1.4.10: Windows 2000 Server does not support this operation. No applicable Windows Server releases support the DNS_TYPE_LOC for this operation.
+<286> Section 3.1.4.10: Windows 2000 Server does not support this operation. No applicable Windows Server releases support the DNS_TYPE_LOC for this operation.
 
-<286> Section 3.1.4.11: The RPC method R_DnssrvUpdateRecord3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
+<287> Section 3.1.4.11: The RPC method R_DnssrvUpdateRecord3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
 
-<287> Section 3.1.4.12: The RPC method R_DnssrvEnumRecords3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
+<288> Section 3.1.4.12: The RPC method R_DnssrvEnumRecords3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
 
-<288> Section 3.1.4.13: The RPC method R_DnssrvOperation3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
+<289> Section 3.1.4.13: The RPC method R_DnssrvOperation3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
 
-<289> Section 3.1.4.13: This operation is supported in Windows Server 2012 R2 with [MSKB-2919355] and later. It is reserved for future use.
+<290> Section 3.1.4.13: This operation is supported in Windows Server 2012 R2 with [MSKB-2919355] and later. It is reserved for future use.
 
-<290> Section 3.1.4.14: The RPC method R_DnssrvQuery3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
+<291> Section 3.1.4.14: The RPC method R_DnssrvQuery3 is not implemented in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, or Windows Server 2012.
 
-<291> Section 3.1.4.14: This operation is supported in Windows Server 2012 R2, Windows Server 2016 with [MSKB-2919355] and later, and is reserved for future use.
+<292> Section 3.1.4.14: This operation is supported in Windows Server 2012 R2, Windows Server 2016 with [MSKB-2919355] and later, and is reserved for future use.
 
-<292> Section 3.1.4.15: The R_DnssrvComplexOperation3 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<293> Section 3.1.4.15: The R_DnssrvComplexOperation3 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<293> Section 3.1.4.16: The R_DnssrvOperation4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<294> Section 3.1.4.16: The R_DnssrvOperation4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<294> Section 3.1.4.17: The R_DnssrvQuery4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<295> Section 3.1.4.17: The R_DnssrvQuery4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<295> Section 3.1.4.18: The R_DnssrvUpdateRecord4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<296> Section 3.1.4.18: The R_DnssrvUpdateRecord4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<296> Section 3.1.4.19: The R_DnssrvEnumRecords4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<297> Section 3.1.4.19: The R_DnssrvEnumRecords4 method is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
-<297> Section 3.1.6.2: Support for scopes in Active Directory backed zones is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
+<298> Section 3.1.6.2: Support for scopes in Active Directory backed zones is not implemented on Windows NT, Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, and Windows Server 2012 R2.
 
 <a id="Section_8"></a>
 # 8 Change Tracking
@@ -16877,11 +16883,8 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.5.2.1](#Section_2.2.5.2.1) DNS_RPC_ZONE | 51071 : Added new value to the table | Major |
-| 2.2.5.2.1 DNS_RPC_ZONE | 51071 : Added the `DNS_RPC_ZONE`structure specification for dwClientVersion 0x0007. | Major |
-| [2.2.6.2.9](#Section_2.2.6.2.9) DNS_RPC_ZONE_DNSSEC_SETTINGS | 51069 : Corrected field names and definitions | Major |
-| 2.2.6.2.9 DNS_RPC_ZONE_DNSSEC_SETTINGS | 51068 : Updated the description for code dwBufferLength. | Minor |
-| 2.2.6.2.9 DNS_RPC_ZONE_DNSSEC_SETTINGS | 51069 : Updated the description for code pBuffer. | Minor |
+| [3.1.1.1.3](#Section_3.1.1.1.3) DNS Server String Properties | Updated information for the LogFilePath string property. | Major |
+| [3.1.4.1](#Section_3.1.4.1) R_DnssrvOperation (Opnum 0) | Updated server processing for the LogFilePath string property when the caller does not have administrator privileges. | Major |
 
 <a id="revision-history"></a>
 
@@ -16943,3 +16946,4 @@ The changes made to this document are listed in the following table. For more in
 | 1/26/2026 | 39.0 | Major | Significantly changed the technical content. |
 | 3/9/2026 | 40.0 | Major | Significantly changed the technical content. |
 | 9/28/2026 | 41.0 | Major | Significantly changed the technical content. |
+| 11/10/2026 | 42.0 | Major | Significantly changed the technical content. |
